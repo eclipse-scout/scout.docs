@@ -1,0 +1,50 @@
+:scout_contrib: http://wiki.eclipse.org/Scout/Contribution
+:eclipse_cla: http://www.eclipse.org/legal/CLA.php
+:eclipse_account: https://dev.eclipse.org/site_login/createaccount.php
+:eclipse_sso: https://projects.eclipse.org/user/login/sso
+:bugzilla: http://bugs.eclipse.org/bugs/
+:bugzilla_query: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:bugzilla_new: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:github_pr: https://help.github.com/categories/collaborating/
+:license_cc: http://creativecommons.org/licenses/by/3.0/
+:license_edl: https://www.eclipse.org/org/documents/edl-v10.php
+
+= Contributing to "Eclipse Scout - Docs"
+
+This is what you need to know to contribute to this repository
+
+We welcome any kind of contributions (Bug report, contribution, pull request...).
+Please read the link:{scout_contrib}[Eclipse Scout Contribution page] to know more about it.
+
+== Submitting an Issue
+
+As a subproject of Eclipse, Eclipse Scout uses link:{bugzilla}[Bugzilla] to track ongoing development and issues (GitHub Issues are *not* used).
+
+In Bugzilla you can:
+
+* link:{bugzilla_query}[Search for existing bug reports].
+* link:{bugzilla_new}[Create a new bug report] with an account registered at link:{eclipse_account}[dev.eclipse.org].
+
+
+== Submitting a Pull Request
+
+The "Eclipse Scout - Docs" project accepts normal link:{github_pr}[GitHub pull requests].
+Before your contribution can be accepted by the project, you need to create and electronically sign the link:{eclipse_cla}[Eclipse Foundation Contributor License Agreement (CLA)].
+
+1. Log in at link:{eclipse_account}[dev.eclipse.org] and enter your GitHub user name in the account settings.
+2. Submit the CLA at link:{eclipse_sso}[projects.eclipse.org].
+3. Sign off all commits of your contribution (`git commit -s`).
+
+All pull requests are subject to automated checks: *ip-validation* verifies the CLA and sign-off status.
+
+
+== License
+
+* The example source code is licensed under link:{license_edl}[Eclipse Distribution License (EDL)]
+* The documentation text is licensed under link:{license_cc}[Creative Commons Attribution 3.0 (Unported) License]
+
+
+== See also
+
+* link:README.adoc[README]
+
