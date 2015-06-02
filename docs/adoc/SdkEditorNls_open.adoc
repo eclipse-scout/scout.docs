@@ -1,0 +1,19 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - NLS (open)"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+To open the NLS editor, select the green [node]_shared_ node in the {scoutExplorerView} and expand its [folder]_Text Provider Services_ folder.
+Then, select the contained element [element]_<Project Alias>TextProviderService_.
+As shown in <<img-nls_editor>>, the NLS editor can be opened using the [link]_Open NLS Editor ..._ link in the {scoutPropView}.

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.scout.helloworld.shared
+Bundle-SymbolicName: org.eclipse.scout.helloworld.shared;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.helloworld.shared.Activator
+Export-Package: org.eclipse.scout.helloworld.shared,
+ org.eclipse.scout.helloworld.shared.services,
+ org.eclipse.scout.helloworld.shared.services.common.text
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

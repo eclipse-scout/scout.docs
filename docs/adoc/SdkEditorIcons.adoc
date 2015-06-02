@@ -1,0 +1,34 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - Icons"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+The Icons Editor allows to visualize the Icons defined in the [java]+Icons+ class. 
+
+===== Open the Icons Editor
+
+Expand the [node]_shared_ node node of the Eclipse Scout project in the {scoutExplorerView} and select the [folder]_Icons_ folder folder. Click the link `Open Icons Editor` in the {scoutPropView}. 
+
+===== Description of the Icons Editor
+
+[[img-sdk_editor_icons, Figure 000]]
+.Screenshot of the Icons Editor
+image::{imgsdir}/sdk_editor_icons.png[]
+
+The editor shown on in <<img-sdk_editor_icons>> contains a table displaying the constants defined in the Icons class. For each constant (corresponding to an image), the icon, the key and the name are displayed.
+
+Images defined in the parent class are displayed in gray (they represents the images inherited from a parent class). Images defined in this class are displayed in black.
+
+

@@ -1,0 +1,43 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Useful Utilities"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[appendix]
+== Scout Utilities
+
+text needed.
+
+1. <ctrl-shift-t>fileutility
+2. click into package org.eclipse.scout.commons;
+3. <alt-shift-w> (or context menu) show-in package explorer
+
+=== StringUtility
+text needed
+
+also mention apache StringUtils http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/StringUtils.html
+
+=== DateUtility
+text needed
+
+
+=== FileUtility
+text needed
+
+Existing Documentation
+
+ * bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=394784
+
+

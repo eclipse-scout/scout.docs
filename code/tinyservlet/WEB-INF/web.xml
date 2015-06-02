@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <display-name>tiny servlet app</display-name>
+  
+  <!-- declaration of servlet for this app -->
+  <servlet>
+    <!-- unique servlet symbolic name -->
+    <servlet-name>Tiny</servlet-name>
+	<!-- full path to class (relative from WEB-INF/classes) -->
+    <servlet-class>TinyServlet</servlet-class>
+  </servlet>
+  
+  <!-- mapping of url to servlet defined above -->
+  <servlet-mapping>
+    <servlet-name>Tiny</servlet-name>
+    <url-pattern>/servlets/Tiny</url-pattern>
+  </servlet-mapping>
+</web-app>

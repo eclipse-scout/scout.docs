@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension id="app" name="Application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipsescout.contacts.ui.swing.SwingApplication"/>
+    </application>
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipsescout.contacts.ui.swing.app"
+          name="contacts">
+       <property
+             name="appName"
+             value="contacts">
+       </property>
+    </product>
+  </extension>
+</plugin>

@@ -1,0 +1,46 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Preface" used in the books
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+:numbered!:
+== Preface
+
+Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. 
+While many successful frameworks support the development of persistence layers and business services, implementing front-ends in a simple and clean way remains a challenge. 
+This is exactly where Eclipse Scout fits in. 
+The primary goal of Scout is to make your life as a developer easier and to help organisations to save money and time. 
+For this, the Scout framework covers most of the recurring front-end aspects such as user authentication, client-server communication and the user interface. 
+This comprehensive scope reduces the amount of necessary boiler plate code, and let developers concentrate on understanding and implementing business functionality. 
+
+The purpose of this book is to get the reader familiar with the Scout framework.
+In this book Scout's core features are introduced and explained using many practical examples. 
+And as both the Scout framework and Scout applications are written in Java, we make the assumption that you are familiar with the language too. 
+Ideally, you have worked with Java for some time now and feel comfortable with the basic language features. 
+
+In the first part of the book a general introduction into the runtime part of the framework and the tooling - the Scout SDK - is provided. 
+After the mandatory ''Hello World!'' application, the book walks you though a complete client server application including database access. 
+The focus of the book's second part is on the front-end side of Scout applications. 
+First, an overview of the Scout client model is introduced before Scout's most important UI components are described based on the Scout widget demo application. 
+To cover the the server-side of Scout applications, an additional part of the book is planned to be released jointly with version 5.0 of the Scout framework. 
+And finally, we intend to amend the book regarding building, testing and continuous integration for Scout applications. 
+
+Last but not least, we thank you for your interest in Scout, for being part of our community and for your friendly support of new community members.
+To allow for contributions to this book, the technical setup and the book's licence have been selected to minimize restrictions. 
+According to the terms of the Creative Commons (CC-BY) license, you are allowed to freely use, share and adapt this book. 
+All source files of the book including the Scout projects described in the book are available on github.
+For the first edition of this book, we did already receive a number of bug reports and comments that were pointing out mistakes, inconsistencies and suggestions for changes. 
+This feedback is very valuable to us as it helps to improve both the book's content and the quality for all future readers. 
+We hope that this book helps you to get started quickly and would love to get your feedback.

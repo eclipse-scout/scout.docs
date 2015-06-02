@@ -1,0 +1,28 @@
+= Eclipse Scout: an Introduction
+:doctype: book
+:author: Matthias Zimmermann
+:email: matthias.zimmermann@bsi-software.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+include::{mdledir}/BookPreface.adoc[]
+
+:numbered:
+include::_IntroductionFrontend.adoc[]
+include::_ScoutClient.adoc[]
+
+
+//Appendix:
+
+include::{mdledir}/BookCopyright.adoc[]
+include::{mdledir}/BookScoutInstallation.adoc[]
+include::_UsefulUtilities.adoc[]
+include::_JavaBasics.adoc[]
+include::_EclipseBasics.adoc[]
+

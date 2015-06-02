@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.eclipsescout.docs</groupId>
+    <artifactId>aggregator</artifactId>
+    <version>4.0.200-SNAPSHOT</version>
+    <name>scout docs aggregator</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>book_scout_frontend</module>
+        <module>book_scout_intro</module>
+        <module>eclipse_help</module>
+        <module>scout_helloworld</module>
+        <module>scout_install</module>
+    </modules>
+
+    <build>
+        <defaultGoal>process-resources</defaultGoal>
+    </build>
+</project>

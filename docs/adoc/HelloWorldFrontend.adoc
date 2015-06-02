@@ -1,0 +1,75 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Create the hello world frontend"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+The project creation step has created a Scout client that displays an empty desktop form.
+We will now add widgets to the client's desktop form that will later display the "`Hello World!`" message.
+
+To add any widgets to the desktop form, navigate to the [element]_DesktopForm_ in the Scout Explorer.
+For this, click on the orange client node in the Scout Explorer view.
+Then, expand the [element]_Forms_ folder by clicking on the small triangle icon, and further expand the [element]_DesktopForm_. 
+As a result, the [element]_MainBox_ element becomes visible below the desktop form as shown in <<img-new_field_context_menu>>. 
+With a click of the right mouse button over the [element]_MainBox_, the available context menus are displayed.
+To start the form field wizard select the menu:New Form Field ...[] menu.
+
+[[img-new_field_context_menu, Figure New Form Field Menu]]
+.Using the menu:New Form Field ...[] menu to start the form field wizard provided by the Scout SDK.
+image::{imgsdir}/sdk_new_field_wizard_menu.png[]
+
+In the first step of the form field wizard shown on in <<img-helloworld_groupboxfield>> choose [java]+GroupBox+ as the form field type and click on the btn:[Next] button.
+In the second wizard step, enter '`Desktop`' into the [field]_Class Name_ field before you close the wizard with the btn:[Finish] button.
+The Scout SDK will then add the necessary Java code for the [java]+DesktopBox+ in the background.
+
+[[img-helloworld_groupboxfield, Figure Add the DesktopBox field]]
+image::{imgsdir}/sdk_new_field_groupbox_1.png[]
+.Adding the _DesktopBox_ field with the Scout SDK form field wizard.
+image::{imgsdir}/sdk_new_field_groupbox_2.png[]
+
+We can now add the text field widget to the group box just created.
+To do this, expand the [element]_MainBox_ in the Scout Explorer view to access the newly created [element]_DesktopBox_ element. 
+On the [element]_DesktopBox_ use the menu:New Form Field ...[] menu again.
+In the first wizard step, select [element]_StringField_ as the form field type according to <<img-helloworld_stringfield>>. 
+To select the [element]_StringField_ type you can either scroll down the list of available types or enter "`st`" into the field above the field type list. 
+In the second wizard step, enter '`Message`' into the [field]_Label_ field.
+As we do not yet have the text '`Message`' available in our "`Hello World`" application the wizard prompts the user with the proposal `New Translated Text ...`.
+
+[[img-helloworld_stringfield, Figure Add a StringField]]
+image::{imgsdir}/sdk_new_field_stringfield_1.png[]
+.Adding a _StringField_ and providing a new translation entry.
+image::{imgsdir}/sdk_new_field_stringfield_2.png[]
+
+With a double click on this option a new text entry can be added to the application as shown in <<img-helloworld_text_entry>>.
+Once an initial translation for the message label is provided, close the translation dialog with the btn:[Ok] button.
+Finally, close the form field wizard using the btn:[Finish] button.
+
+[[img-helloworld_text_entry, Figure Add a new translation entry]]
+.Adding a new translation entry.
+image::{imgsdir}/sdk_new_text_entry.png[]
+
+By expanding the [element]_DesktopBox_ element in the Scout Explorer, the new message field becomes visible. 
+Now, double click on the message field element to load the corresponding Java code into an editor and displays the message field's properties in the Scout Object Properties as shown in <<img-helloworld_messagefield>>.
+This is a good moment to compare your status with this screenshot.
+Make sure that both the Java code and the project structure in the Scout Explorer look as shown in <<img-helloworld_messagefield>>. 
+
+[[img-helloworld_messagefield, Figure showing MessageField]]
+.Scout SDK showing the _MessageField_
+image::{imgsdir}/sdk_helloworld_messagefield.png[]
+
+Having verified your status of the "`Hello World`" application start the start the server and a client of the application as described in the previous section.
+The client applications will then display your message widget.
+However, the text widget is still empty, as we did not yet load any initial content into this field.
+This is the topic of the next section.
+
