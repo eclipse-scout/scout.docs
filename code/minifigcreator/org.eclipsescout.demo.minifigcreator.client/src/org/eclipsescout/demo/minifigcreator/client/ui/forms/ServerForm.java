@@ -12,7 +12,6 @@ package org.eclipsescout.demo.minifigcreator.client.ui.forms;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
@@ -90,7 +89,6 @@ public class ServerForm extends AbstractForm {
   }
 
   @Order(10.0)
-  @ClassId("SERVFORM_MAIN_GRPBOX")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -99,7 +97,6 @@ public class ServerForm extends AbstractForm {
     }
 
     @Order(30.0)
-    @ClassId("SERVFORM_CONTAINER_GRPBOX")
     public class ContainerBox extends AbstractGroupBox {
 
       @Override
@@ -109,7 +106,6 @@ public class ServerForm extends AbstractForm {
 
       @Order(10.0)
       @FormData(sdkCommand = SdkCommand.IGNORE)
-      @ClassId("SERVFORM_INFO_LBLFLD")
       public class InfoField extends AbstractLabelField {
 
         @Override
@@ -124,7 +120,6 @@ public class ServerForm extends AbstractForm {
       }
 
       @Order(20.0)
-      @ClassId("SERVFORM_TABLE_TBLFLD")
       public class TableField extends AbstractTableField<TableField.Table> {
 
         @Override
@@ -232,17 +227,14 @@ public class ServerForm extends AbstractForm {
     }
 
     @Order(40.0)
-    @ClassId("SERVFORM_OK_BUTFLD")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(50.0)
-    @ClassId("SERVFORM_CANCEL_BUTFLD")
     public class CancelButton extends AbstractCancelButton {
     }
 
     @Order(60.0)
-    @ClassId("SERVFORM_RANDOM_BUTFLD")
     public class RandomButton extends AbstractButton {
 
       @Override

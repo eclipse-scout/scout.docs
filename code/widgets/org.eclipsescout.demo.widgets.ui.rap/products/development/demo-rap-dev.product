@@ -14,7 +14,7 @@
       <vmArgs>-Xms32m
 -Xmx512m
 -XX:MaxPermSize=256m
-      </vmArgs>
+</vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -115,9 +115,7 @@
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.widgets.client"/>
       <plugin id="org.eclipsescout.demo.widgets.client.mobile"/>
-      <plugin id="org.eclipsescout.demo.widgets.client.old"/>
       <plugin id="org.eclipsescout.demo.widgets.shared"/>
-      <plugin id="org.eclipsescout.demo.widgets.shared.old"/>
       <plugin id="org.eclipsescout.demo.widgets.ui.rap"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>

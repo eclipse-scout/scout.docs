@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: minifigcreator.client
 Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.client.testapp;singleton:=true
-Bundle-Version: 4.0.200.qualifier
+Bundle-Version: 4.1.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.minifigcreator.client.testapp.Activator
 Export-Package: org.eclipsescout.demo.minifigcreator.client.testapp
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.scout.rt.client;bundle-version="[3.9.0,4.1.0)";visibility:=reexport,
+ org.eclipse.scout.rt.client;bundle-version="[4.1.0,4.2.0)";visibility:=reexport,
  org.eclipsescout.demo.minifigcreator.shared,
- org.eclipse.scout.rt.testing.shared;bundle-version="[3.9.0,4.1.0)"
+ org.eclipse.scout.rt.testing.shared;bundle-version="[4.1.0,4.2.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

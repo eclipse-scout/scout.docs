@@ -15,7 +15,7 @@ import org.osgi.framework.BundleContext;
 
 public class Activator implements BundleActivator {
 
-  public static String PLUGIN_ID = "org.eclipsescout.demo.widgets.shared";
+  public static String PLUGIN_ID = "org.eclipse.scout.rt.test.shared";
 
   private static Activator plugin;
 

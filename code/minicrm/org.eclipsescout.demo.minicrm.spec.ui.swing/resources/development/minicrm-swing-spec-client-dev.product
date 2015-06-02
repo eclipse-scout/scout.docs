@@ -12,12 +12,15 @@
    <launcherArgs>
       <programArgs>-consolelog
 -console
--bundleNameIncludeFilter=*.spec*</programArgs>
+-bundleNameIncludeFilter=*.spec*
+      </programArgs>
       <programArgsMac>--launcher.secondThread
--nosplash</programArgsMac>
+-nosplash
+      </programArgsMac>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m</vmArgs>
+-XX:MaxPermSize=256m
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -51,7 +54,6 @@
       <plugin id="org.apache.felix.gogo.command"/>
       <plugin id="org.apache.felix.gogo.runtime"/>
       <plugin id="org.apache.felix.gogo.shell"/>
-      <plugin id="org.easymock"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>

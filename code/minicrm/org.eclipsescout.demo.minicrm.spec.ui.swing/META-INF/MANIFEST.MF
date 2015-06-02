@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MiniCrm SPEC
 Bundle-SymbolicName: org.eclipsescout.demo.minicrm.spec.ui.swing;singleton:=true
-Bundle-Version: 4.0.200.qualifier
+Bundle-Version: 4.1.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.minicrm.spec.ui.swing.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

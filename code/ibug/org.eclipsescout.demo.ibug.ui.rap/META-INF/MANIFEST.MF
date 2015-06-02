@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RAP Bundle
 Bundle-SymbolicName: org.eclipsescout.demo.ibug.ui.rap;singleton:=true
-Bundle-Version: 4.0.200.qualifier
+Bundle-Version: 4.1.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.ibug.ui.rap.Activator
 Bundle-Vendor: Eclipse Scout Project
 Export-Package: org.eclipsescout.demo.ibug.ui.rap

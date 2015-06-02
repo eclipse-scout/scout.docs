@@ -4,41 +4,45 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- *
+ * 
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import java.util.Date;
+import java.util.TimeZone;
+
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
+import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
+import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.TimezonesLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.ExamplesBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox.Placeholder1Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox.VisibleDocumentsField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox.CommentsField;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.AddFileButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.FileTableField;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox.MonthDetailsBox;
-import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
-import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.AddMenu;
-import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonthsBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab1Box;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab2Box;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab2Box.MultilineStringField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.EnabledButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.InnerTabBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.InnerTabBox.InnerTab1Box;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.InnerTabBox.InnerTab1Box.StringField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.InnerTabBox.InnerTab2Box;
+import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Tab3Box.InnerTabBox.InnerTab2Box.FirstTabButton;
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
 
@@ -61,155 +65,194 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the AddFileButton
-   */
-  public AddFileButton getAddFileButton() {
-    return getFieldByClass(AddFileButton.class);
-  }
-
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the CommentsBox
-   */
-  public CommentsBox getCommentsBox() {
-    return getFieldByClass(CommentsBox.class);
+  public EnabledButton getEnabledButton() {
+    return getFieldByClass(EnabledButton.class);
   }
 
-  /**
-   * @return the CommentsField
-   */
-  public CommentsField getCommentsField() {
-    return getFieldByClass(CommentsField.class);
+  public FirstTabButton getFirstTabButton() {
+    return getFieldByClass(FirstTabButton.class);
   }
 
-  /**
-   * @return the DocumentsBox
-   */
-  public DocumentsBox getDocumentsBox() {
-    return getFieldByClass(DocumentsBox.class);
+  public InnerTab1Box getInnerTab1Box() {
+    return getFieldByClass(InnerTab1Box.class);
   }
 
-  public ExamplesBox getExamplesBox() {
-    return getFieldByClass(ExamplesBox.class);
+  public InnerTab2Box getInnerTab2Box() {
+    return getFieldByClass(InnerTab2Box.class);
   }
 
-  /**
-   * @return the FieldVisibilityBox
-   */
-  public FieldVisibilityBox getFieldVisibilityBox() {
-    return getFieldByClass(FieldVisibilityBox.class);
-  }
-
-  /**
-   * @return the FileTableField
-   */
-  public FileTableField getFileTableField() {
-    return getFieldByClass(FileTableField.class);
+  public InnerTabBox getInnerTabBox() {
+    return getFieldByClass(InnerTabBox.class);
   }
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the MonthDetailsBox
-   */
-  public MonthDetailsBox getMonthDetailsBox() {
-    return getFieldByClass(MonthDetailsBox.class);
+  public StringField getStringField() {
+    return getFieldByClass(StringField.class);
   }
 
-  /**
-   * @return the MonthsBox
-   */
-  public MonthsBox getMonthsBox() {
-    return getFieldByClass(MonthsBox.class);
+  public Tab1Box getTab1Box() {
+    return getFieldByClass(Tab1Box.class);
   }
 
-  /**
-   * @return the Placeholder1Field
-   */
-  public Placeholder1Field getPlaceholder1Field() {
-    return getFieldByClass(Placeholder1Field.class);
+  public Tab2Box getTab2Box() {
+    return getFieldByClass(Tab2Box.class);
   }
 
-  /**
-   * @return the TabBox
-   */
+  public Tab3Box getTab3Box() {
+    return getFieldByClass(Tab3Box.class);
+  }
+
   public TabBox getTabBox() {
     return getFieldByClass(TabBox.class);
   }
 
-  /**
-   * @return the VisibleDocumentsField
-   */
-  public VisibleDocumentsField getVisibleDocumentsField() {
-    return getFieldByClass(VisibleDocumentsField.class);
+  public MultilineStringField getMultiRowStringField() {
+    return getFieldByClass(MultilineStringField.class);
   }
 
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
     @Order(10.0)
-    public class ExamplesBox extends AbstractGroupBox {
-
-      @Override
-      protected int getConfiguredGridColumnCount() {
-        return 1;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Examples");
-      }
-
-      @Override
-      protected void execInitField() throws ProcessingException {
-        if (UserAgentUtility.isSwtUi()) {
-          setBorderVisible(false);
-        }
-      }
-    }
-
-    @Order(20.0)
     public class TabBox extends AbstractTabBox {
 
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
       @Order(10.0)
-      public class MonthsBox extends AbstractGroupBox {
+      public class Tab1Box extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Months");
+          return TEXTS.get("Tab1");
         }
 
         @Order(10.0)
-        public class MonthDetailsBox extends AbstractMonthsBox {
+        public class TimezoneField extends AbstractSmartField<TimeZone> {
 
           @Override
-          protected int getConfiguredGridH() {
-            return 5;
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Timezone");
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<TimeZone>> getConfiguredLookupCall() {
+            return TimezonesLookupCall.class;
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            if (getValue() != null) {
+              int offset = getValue().getRawOffset();
+              offset = offset - TimeZone.getDefault().getRawOffset();
+              for (IFormField f : getAllFields()) {
+                if (f instanceof AbstractDateField) {
+                  ((AbstractDateField) f).setValue(new Date(System.currentTimeMillis() + offset));
+                }
+              }
+            }
+            else {
+              for (IFormField f : getAllFields()) {
+                if (f instanceof AbstractDateField) {
+                  ((AbstractDateField) f).setValue(new Date());
+                }
+              }
+            }
+          }
+        }
+
+        @Order(20.0)
+        public class DateField extends AbstractDateField {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DateField");
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(new Date());
+          }
+        }
+
+        @Order(30.0)
+        public class DateTimeField extends AbstractDateTimeField {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DateTimeField");
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(new Date());
+          }
+        }
+
+        @Order(40.0)
+        public class TimeField extends AbstractTimeField {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("TimeField");
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(new Date());
           }
         }
       }
 
       @Order(20.0)
-      public class CommentsBox extends AbstractGroupBox {
+      public class Tab2Box extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Comments");
+          return TEXTS.get("Tab2");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
         }
 
         @Order(10.0)
-        public class CommentsField extends AbstractStringField {
+        public class MultilineStringField extends AbstractStringField {
 
           @Override
           protected int getConfiguredGridH() {
-            return 5;
+            return 4;
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
           }
 
           @Override
@@ -221,148 +264,104 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredMultilineText() {
             return true;
           }
+
+          @Override
+          protected boolean getConfiguredWrapText() {
+            return true;
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(TEXTS.get("Lorem"));
+          }
         }
       }
 
       @Order(30.0)
-      public class DocumentsBox extends AbstractGroupBox {
+      public class Tab3Box extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Documents");
+          return TEXTS.get("Tab3");
         }
 
         @Order(10.0)
-        public class FileTableField extends AbstractFileTableField {
-
-          @Override
-          protected int getConfiguredGridH() {
-            return 5;
-          }
+        public class InnerTabBox extends AbstractTabBox {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
           }
+
+          @Order(10.0)
+          public class InnerTab1Box extends AbstractGroupBox {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Tab1");
+            }
+
+            @Order(10.0)
+            public class StringField extends AbstractStringField {
+
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("StringField");
+              }
+            }
+          }
+
+          @Order(20.0)
+          public class InnerTab2Box extends AbstractGroupBox {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Tab2");
+            }
+
+            @Order(10.0)
+            public class FirstTabButton extends AbstractLinkButton {
+
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("FirstTab");
+              }
+
+              @Override
+              protected void execClickAction() throws ProcessingException {
+                getInnerTabBox().setSelectedTab(getInnerTab1Box());
+              }
+            }
+          }
         }
 
         @Order(20.0)
-        public class AddFileButton extends AbstractButton {
+        public class EnabledButton extends AbstractButton {
 
           @Override
           protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
+            return DISPLAY_STYLE_TOGGLE;
           }
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("AddFile");
+            return TEXTS.get("Enabled");
           }
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getFileTableField().getTable().getMenu(AddMenu.class).doAction();
+            getInnerTabBox().setEnabled(isSelected());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setSelected(true);
           }
         }
       }
     }
 
-    @Order(30.0)
-    public class FieldVisibilityBox extends AbstractGroupBox {
-
-      @Override
-      protected int getConfiguredGridColumnCount() {
-        return 1;
-      }
-
-      @Override
-      protected double getConfiguredGridWeightY() {
-        return 0.0;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("TabVisibility");
-      }
-
-      @Order(10.0)
-      public class VisibleMonthsField extends AbstractCheckBox {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("VisibleMonths");
-        }
-
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getMonthsBox().setVisible(getValue());
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(getMonthsBox().isVisible());
-        }
-      }
-
-      @Order(20.0)
-      public class VisibleCommentsField extends AbstractCheckBox {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("VisibleComments0");
-        }
-
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getCommentsBox().setVisible(getValue());
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(getCommentsBox().isVisible());
-        }
-      }
-
-      @Order(30.0)
-      public class VisibleDocumentsField extends AbstractCheckBox {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("VisibleDocuments0");
-        }
-
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getDocumentsBox().setVisible(getValue());
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(getDocumentsBox().isVisible());
-        }
-      }
-
-      @Order(40.0)
-      public class Placeholder1Field extends AbstractPlaceholderField {
-      }
-    }
-
-    @Order(40.0)
+    @Order(20.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

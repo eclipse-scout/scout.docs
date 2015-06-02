@@ -4,20 +4,17 @@
 <product name="minifigcreator TestApp Client" id="org.eclipsescout.demo.minifigcreator.client.testapp.product" application="org.eclipse.scout.rt.testing.shared.app" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
-      <linux>/org.eclipsescout.demo.minifigcreator.client.testapp/products/development/config.ini</linux>
-      <macosx>/org.eclipsescout.demo.minifigcreator.client.testapp/products/development/config.ini</macosx>
-      <win32>/org.eclipsescout.demo.minifigcreator.client.testapp/products/development/config.ini</win32>
+      <linux>/org.eclipsescout.demo.minifigcreator.ui.swing/products/development/config.ini</linux>
+      <macosx>/org.eclipsescout.demo.minifigcreator.ui.swing/products/development/config.ini</macosx>
+      <win32>/org.eclipsescout.demo.minifigcreator.ui.swing/products/development/config.ini</win32>
    </configIni>
 
    <launcherArgs>
-      <programArgs>-junitReportsDir=&quot;${project_loc}/target/testReports&quot;
-      </programArgs>
-      <programArgsMac>--launcher.secondThread
-      </programArgsMac>
+      <programArgs>-junitReportsDir=&quot;${project_loc}/target/testReports&quot;</programArgs>
+      <programArgsMac>--launcher.secondThread</programArgsMac>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m
-      </vmArgs>
+-XX:MaxPermSize=256m</vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -56,6 +53,7 @@
       <plugin id="org.eclipse.scout.rt.testing.common.ant.optional.junit.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.testing.commons"/>
       <plugin id="org.eclipse.scout.rt.testing.shared"/>
+      <plugin id="org.eclipse.scout.rt.ui.swing"/>
       <plugin id="org.eclipse.scout.service"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
@@ -67,7 +65,6 @@
       <plugin id="org.eclipsescout.demo.minifigcreator.shared.test" fragment="true"/>
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
-      <plugin id="org.mockito.mockito-all"/>
    </plugins>
 
 

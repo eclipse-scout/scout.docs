@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- *
+ * 
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -20,21 +20,18 @@ import org.eclipsescout.demo.minifigcreator.server.data.PartQuantity;
 import org.eclipsescout.demo.minifigcreator.shared.minifig.part.Part;
 import org.eclipsescout.demo.minifigcreator.shared.services.process.IServerProcessService;
 import org.eclipsescout.demo.minifigcreator.shared.services.process.ServerFormData;
-import org.eclipsescout.demo.minifigcreator.shared.services.process.ServerFormData.Table;
 
 public class ServerProcessService extends AbstractService implements IServerProcessService {
 
   @Override
   public ServerFormData load(ServerFormData formData) throws ProcessingException {
-    Table table = formData.getTable();
     List<PartQuantity> parts = SERVICES.getService(IMinifigDataStoreService.class).getAllParts();
-    table.clearRows();
     for (PartQuantity pq : parts) {
-      int i = table.addRow();
-      table.setPart(i, pq.getPart());
-      table.setType(i, pq.getPart().getType().name());
-      table.setName(i, pq.getPart().getName());
-      table.setQuantity(i, pq.getQuantity());
+      int i = formData.getTable().addRow();
+      formData.getTable().setPart(i, pq.getPart());
+      formData.getTable().setType(i, pq.getPart().getType().name());
+      formData.getTable().setName(i, pq.getPart().getName());
+      formData.getTable().setQuantity(i, pq.getQuantity());
     }
     return formData;
   }

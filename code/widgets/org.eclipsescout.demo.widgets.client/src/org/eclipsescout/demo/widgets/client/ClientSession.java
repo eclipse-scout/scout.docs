@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -54,6 +54,13 @@ public class ClientSession extends AbstractClientSession {
       SERVICES.getService(IBookmarkService.class).loadBookmarks();
       getServiceTunnel().setClientNotificationPollInterval(2000L);
       SERVICES.getService(IPingService.class).ping("ping");
+    }
+  }
+
+  @Override
+  protected void execStoreSession() throws ProcessingException {
+    if (!isFootless()) {
+      getServiceTunnel().setClientNotificationPollInterval(-1L); // stop ClientNotificationPollingJob
     }
   }
 

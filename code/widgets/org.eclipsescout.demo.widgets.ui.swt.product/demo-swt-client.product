@@ -12,10 +12,8 @@
    <launcherArgs>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m
-      </vmArgs>
-      <vmArgsMac>-Dorg.eclipse.swt.internal.carbon.smallFonts
-      </vmArgsMac>
+-XX:MaxPermSize=256m</vmArgs>
+      <vmArgsMac>-Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
@@ -109,7 +107,6 @@
       <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.docx4j"/>
       <plugin id="org.eclipse.scout.net"/>
-      <plugin id="org.eclipse.scout.org.w3c.dom.svg.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.docx4j.client"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
@@ -130,14 +127,13 @@
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.widgets.client"/>
-      <plugin id="org.eclipsescout.demo.widgets.client.old"/>
       <plugin id="org.eclipsescout.demo.widgets.shared"/>
-      <plugin id="org.eclipsescout.demo.widgets.shared.old"/>
       <plugin id="org.eclipsescout.demo.widgets.ui.swt"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.eclipse.scout.org.w3c.dom.svg.fragment" fragment="true"/>
    </plugins>
 
 

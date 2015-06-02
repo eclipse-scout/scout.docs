@@ -1,0 +1,153 @@
+Received: by mail_scout.demo.local
+	id <01C95F67.E5A89552@mail_scout.demo.local>; Tue, 16 Dec 2008 11:20:19 +0100
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----_=_NextPart_001_01C95F67.E5A89552"
+Content-class: urn:content-classes:message
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Subject: HTML test mail
+Date: Tue, 16 Dec 2008 11:20:18 +0100
+Message-ID: <736080F8235E0546A18883590CAC84F5FD2F70@mail_scout.demo.local>
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Thread-Topic: HTML mail
+Thread-Index: AclfZ+VHgx3+MknaSluD9oJ8AVEV8Q==
+From: "Demo App" <demo@scout.org>
+To: "Scout Demo" <scout@demo.org>
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C95F67.E5A89552
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+This is a mail with Html.
+
+Bold
+
+Cursive
+
+Underlined
+
+=20
+
+=20
+
+=20
+
+______________________________________________________=20
+
+Scout Widget Demo Application
+
+Eclipse Scout
+
+www.eclipse.org/scout
+
+______________________________________________________=20
+
+=20
+
+=20
+
+=20
+
+
+------_=_NextPart_001_01C95F67.E5A89552
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=Generator content="Microsoft Word 11 (filtered medium)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+span.E-MailFormatvorlage17
+	{mso-style-type:personal-compose;
+	font-family:Arial;
+	color:windowtext;}
+p.section1, li.section1, div.section1
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1" />
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=DE-CH link=blue vlink=purple>
+
+
+<div class=Section1>
+
+<p class=MsoPlainText><font size=2 face="Courier New"><span style='font-size:10.0pt'>This is a mail with Html.<o:p></o:p></span></font></p>
+
+<p class=MsoPlainText><b><font size=2 face="Courier New"><span style='font-size:10.0pt;font-weight:bold'>Bold<o:p></o:p></span></font></b></p>
+
+<p class=MsoPlainText><i><font size=2 face="Courier New"><span style='font-size:10.0pt;font-style:italic'>Cursive<o:p></o:p></span></font></i></p>
+
+<p class=MsoPlainText><u><font size=2 face="Courier New"><span style='font-size:10.0pt'>Underlined<o:p></o:p></span></font></u></p>
+
+<st1:personname w:st="on"></st1:personname>
+
+<p class=section1 style='margin:0cm;margin-bottom:.0001pt'><b><font size=2
+color="#31849b" face=Calibri><span style='font-size:11.0pt;font-family:Calibri;
+color:#31849B;font-weight:bold'>Scout</span></font></b><b><font size=2
+face=Calibri><span style='font-size:11.0pt;font-family:Calibri;font-weight:
+bold'> <font color="#ffc000"><span style='color:#FFC000'>Demo Application
+<o:p></o:p></span></font></span></font></b></p>
+
+<p class=section1 style='margin:0cm;margin-bottom:.0001pt'><font size=2
+color="#31849b" face=Calibri><span style='font-size:11.0pt;font-family:Calibri;
+color:#31849B'>Eclipse Scout<o:p></o:p></span></font></p>
+
+<p class=section1 style='margin:0cm;margin-bottom:.0001pt'><font size=2
+face=Calibri><span style='font-size:11.0pt;font-family:Calibri'><a
+href="http://www.eclipse.org/scout/" title="http://www.eclipse.org/scout/"><font color="#31849b"><span
+lang=EN-GB style='color:#31849B'>www.eclipse.org/scout</span></font></a></span></font><font
+size=2 face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:Calibri'><o:p></o:p></span></font></p>
+
+</div>
+
+<p class=MsoNormal><span lang=EN-GB><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+
+------_=_NextPart_001_01C95F67.E5A89552--
