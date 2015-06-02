@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: My Application
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.ui.swt;singleton:=true
-Bundle-Version: 3.10.1.qualifier
+Bundle-Version: 4.0.200.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.bahbah.ui.swt.Activator
 Export-Package: org.eclipsescout.demo.bahbah.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",

@@ -4,12 +4,15 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.minifigcreator.client.ui.forms;
 
+import java.util.List;
+
+import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
@@ -87,6 +90,7 @@ public class ServerForm extends AbstractForm {
   }
 
   @Order(10.0)
+  @ClassId("SERVFORM_MAIN_GRPBOX")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -95,6 +99,7 @@ public class ServerForm extends AbstractForm {
     }
 
     @Order(30.0)
+    @ClassId("SERVFORM_CONTAINER_GRPBOX")
     public class ContainerBox extends AbstractGroupBox {
 
       @Override
@@ -104,6 +109,7 @@ public class ServerForm extends AbstractForm {
 
       @Order(10.0)
       @FormData(sdkCommand = SdkCommand.IGNORE)
+      @ClassId("SERVFORM_INFO_LBLFLD")
       public class InfoField extends AbstractLabelField {
 
         @Override
@@ -118,6 +124,7 @@ public class ServerForm extends AbstractForm {
       }
 
       @Order(20.0)
+      @ClassId("SERVFORM_TABLE_TBLFLD")
       public class TableField extends AbstractTableField<TableField.Table> {
 
         @Override
@@ -225,14 +232,17 @@ public class ServerForm extends AbstractForm {
     }
 
     @Order(40.0)
+    @ClassId("SERVFORM_OK_BUTFLD")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(50.0)
+    @ClassId("SERVFORM_CANCEL_BUTFLD")
     public class CancelButton extends AbstractCancelButton {
     }
 
     @Order(60.0)
+    @ClassId("SERVFORM_RANDOM_BUTFLD")
     public class RandomButton extends AbstractButton {
 
       @Override
@@ -243,7 +253,7 @@ public class ServerForm extends AbstractForm {
       @Override
       protected void execClickAction() throws ProcessingException {
         Table table = getTableField().getTable();
-        ITableRow[] rows = table.getRows();
+        List<ITableRow> rows = table.getRows();
         for (ITableRow r : rows) {
           int q = (int) (Math.random() * 10) + 1;
           table.getQuantityColumn().setValue(r, Integer.valueOf(q));
@@ -255,7 +265,7 @@ public class ServerForm extends AbstractForm {
   public class ModifyHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       IServerProcessService service = SERVICES.getService(IServerProcessService.class);
       ServerFormData formData = new ServerFormData();
       exportFormData(formData);
@@ -264,7 +274,7 @@ public class ServerForm extends AbstractForm {
     }
 
     @Override
-    public void execStore() throws ProcessingException {
+    protected void execStore() throws ProcessingException {
       IServerProcessService service = SERVICES.getService(IServerProcessService.class);
       ServerFormData formData = new ServerFormData();
       exportFormData(formData);

@@ -90,15 +90,15 @@
   <extension point="org.eclipse.equinox.http.registry.resources">
     <resource alias="/res" base-name="/web-resources"/>
   </extension>
-  <extension point="org.eclipse.scout.http.servletfilter.filters">
+  <extension point="org.eclipse.scout.rt.server.commons.filters">
     <filter
       aliases="/"
-      class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
+      class="org.eclipse.scout.rt.server.commons.servletfilter.security.AnonymousSecurityFilter"
       ranking="10">
     </filter>
     <filter
       aliases="/web"
-      class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
+      class="org.eclipse.scout.rt.server.commons.servletfilter.security.BasicSecurityFilter"
       ranking="20">
     </filter>
   </extension>

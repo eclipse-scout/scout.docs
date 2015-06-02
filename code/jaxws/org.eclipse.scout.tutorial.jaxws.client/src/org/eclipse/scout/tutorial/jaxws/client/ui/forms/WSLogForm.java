@@ -260,7 +260,7 @@ public class WSLogForm extends AbstractForm {
   public class ModifyHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       IWSLogProcessService service = SERVICES.getService(IWSLogProcessService.class);
       WSLogFormData formData = new WSLogFormData();
       exportFormData(formData);

@@ -12,12 +12,14 @@ package org.eclipsescout.demo.bahbah.server.services.process;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.IntegerHolder;
 import org.eclipse.scout.commons.holders.NVPair;
+import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
@@ -26,6 +28,8 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipse.scout.service.AbstractService;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
+import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotification;
+import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotification;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.DeleteUserPermission;
@@ -55,8 +59,8 @@ public class UserProcessService extends AbstractService implements IUserProcessS
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    m_users.add(ServerSession.get().getUserId());
-    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddies();
+    registerUserInternal(ServerSession.get().getUserId());
+    SERVICES.getService(IClusterSynchronizationService.class).publishNotification(new RegisterUserNotification(ServerSession.get().getUserId()));
   }
 
   @Override
@@ -67,6 +71,8 @@ public class UserProcessService extends AbstractService implements IUserProcessS
 
     m_users.remove(ServerSession.get().getUserId());
     SERVICES.getService(INotificationProcessService.class).sendRefreshBuddies();
+    SERVICES.getService(IClusterSynchronizationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
+
   }
 
   @Override
@@ -79,7 +85,7 @@ public class UserProcessService extends AbstractService implements IUserProcessS
   }
 
   @Override
-  public void deleteUsers(Long[] u_id) throws ProcessingException {
+  public void deleteUsers(List<Long> u_id) throws ProcessingException {
     if (!ACCESS.check(new DeleteUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -130,12 +136,23 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     return Collections.unmodifiableSet(m_users);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public ICode<Integer> getUserPermission() throws ProcessingException {
     IntegerHolder ih = new IntegerHolder(0);
     SQL.selectInto("SELECT permission_id FROM TABUSERS WHERE username = :username INTO :permission", new NVPair("username", ServerSession.get().getUserId()), new NVPair("permission", ih));
 
     return CODES.getCodeType(UserRoleCodeType.class).getCode(ih.getValue());
+  }
+
+  @Override
+  public void registerUserInternal(String userId) throws ProcessingException {
+    m_users.add(userId);
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
+  }
+
+  @Override
+  public void unregisterUserInternal(String userName) throws ProcessingException {
+    m_users.remove(ServerSession.get().getUserId());
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
   }
 }

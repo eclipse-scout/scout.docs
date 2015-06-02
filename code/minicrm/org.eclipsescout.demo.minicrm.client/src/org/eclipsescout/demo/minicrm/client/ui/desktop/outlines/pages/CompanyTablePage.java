@@ -10,9 +10,14 @@
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.client.ui.desktop.outlines.pages;
 
+import java.util.Set;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
@@ -142,7 +147,7 @@ public class CompanyTablePage extends AbstractPageWithTable<Table> {
     public class CompanyTypeColumn extends AbstractSmartColumn<Long> {
 
       @Override
-      protected Class<? extends ICodeType> getConfiguredCodeType() {
+      protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
         return CompanyTypeCodeType.class;
 
       }
@@ -162,13 +167,8 @@ public class CompanyTablePage extends AbstractPageWithTable<Table> {
     public class NewCompanyMenu extends AbstractExtensibleMenu {
 
       @Override
-      protected boolean getConfiguredEmptySpaceAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredSingleSelectionAction() {
-        return false;
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.EmptySpace);
       }
 
       @Override
@@ -191,6 +191,11 @@ public class CompanyTablePage extends AbstractPageWithTable<Table> {
     public class EditCompanyMenu extends AbstractExtensibleMenu {
 
       @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.SingleSelection);
+      }
+
+      @Override
       protected String getConfiguredText() {
         return TEXTS.get("EditCompany");
       }
@@ -209,6 +214,11 @@ public class CompanyTablePage extends AbstractPageWithTable<Table> {
 
     @Order(30.0)
     public class DeleteCompanyMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.SingleSelection);
+      }
 
       @Override
       protected String getConfiguredText() {

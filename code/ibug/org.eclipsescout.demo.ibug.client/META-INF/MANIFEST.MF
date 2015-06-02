@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.ibug.client
 Bundle-SymbolicName: org.eclipsescout.demo.ibug.client;singleton:=true
-Bundle-Version: 3.10.1.qualifier
+Bundle-Version: 4.0.200.qualifier
 Bundle-Activator: org.eclipsescout.demo.ibug.client.Activator
 Export-Package: org.eclipsescout.demo.ibug.client,
  org.eclipsescout.demo.ibug.client.ui.desktop,
@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.client;visibility:=reexport,
  org.eclipse.scout.rt.extension.client;visibility:=reexport,
  org.eclipsescout.demo.ibug.shared,
- org.eclipse.scout.svg.client,
  com.bsiag.org.docx4j,
  org.eclipse.scout.docx4j,
  org.eclipse.scout.rt.docx4j.client

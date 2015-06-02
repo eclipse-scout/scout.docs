@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -26,6 +26,7 @@ import org.eclipse.scout.jaxws.annotation.ScoutTransaction;
 import org.eclipse.scout.jaxws.handler.LogHandler;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 
+@SuppressWarnings("deprecation")
 @ScoutTransaction
 public class DatabaseLogHandler extends LogHandler {
 

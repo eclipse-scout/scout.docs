@@ -16,7 +16,7 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.master</artifactId>
-  <version>3.10.1-SNAPSHOT</version>
+  <version>4.0.200-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo - Master</name>
@@ -113,8 +113,8 @@
             <artifact>
               <groupId>org.eclipsescout.demo</groupId>
               <artifactId>org.eclipsescout.demo.target</artifactId>
-              <version>3.10.1-SNAPSHOT</version>
-              <classifier>s310_e44</classifier>
+              <version>4.0.200-SNAPSHOT</version>
+              <classifier>s40_e44</classifier>
             </artifact>
           </target>
           <ignoreTychoRepositories>true</ignoreTychoRepositories>

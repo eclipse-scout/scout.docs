@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.ui.swt.editor;
 
-import org.eclipsescout.demo.bahbah.ui.swt.Activator;
 import org.eclipse.scout.rt.ui.swt.ISwtEnvironment;
 import org.eclipse.scout.rt.ui.swt.window.desktop.editor.AbstractScoutEditorPart;
+import org.eclipsescout.demo.bahbah.ui.swt.Activator;
 
 public class ScoutEditorPart extends AbstractScoutEditorPart {
 

@@ -168,7 +168,7 @@ public class UserForm extends AbstractForm {
       public class UserRoleField extends AbstractSmartField<Integer> {
 
         @Override
-        protected Class<? extends ICodeType<Integer>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Integer>> getConfiguredCodeType() {
           return UserRoleCodeType.class;
         }
 

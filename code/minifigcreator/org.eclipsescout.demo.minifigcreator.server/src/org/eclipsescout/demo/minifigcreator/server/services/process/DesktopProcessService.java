@@ -4,18 +4,20 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.minifigcreator.server.services.process;
 
+import java.util.List;
+
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
-import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.service.AbstractService;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minifigcreator.server.data.IMinifigDataStoreService;
@@ -43,13 +45,13 @@ public class DesktopProcessService extends AbstractService implements IDesktopPr
     return formData;
   }
 
-  private boolean computePartState(LookupCall lookupCall, AbstractValueFieldData<Part> fieldData) throws ProcessingException {
-    LookupRow[] rows = lookupCall.getDataByAll();
-    if (rows == null || rows.length == 0) {
+  private boolean computePartState(ILookupCall<Part> lookupCall, AbstractValueFieldData<Part> fieldData) throws ProcessingException {
+    List<? extends ILookupRow<Part>> rows = lookupCall.getDataByAll();
+    if (rows == null || rows.isEmpty()) {
       return false;
     }
-    else if (rows.length == 1) {
-      fieldData.setValue((Part) rows[0].getKey());
+    else if (rows.size() == 1) {
+      fieldData.setValue((Part) rows.get(0).getKey());
       return false;
     }
     else {

@@ -30,7 +30,7 @@ import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcess
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 public class NotificationProcessService extends AbstractService implements INotificationProcessService {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(NotificationProcessService.class);
+  private static IScoutLogger LOG = ScoutLogManager.getLogger(NotificationProcessService.class);
 
   private final static long TIMEOUT = 1000 * 60 * 10; // 10min
 
@@ -40,7 +40,7 @@ public class NotificationProcessService extends AbstractService implements INoti
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    logger.info("queue 'update buddies' notification on server");
+    LOG.info("queue 'update buddies' notification on server");
     IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
     service.putNotification(new RefreshBuddiesNotification(), new AllUserFilter(TIMEOUT));
   }
@@ -63,5 +63,11 @@ public class NotificationProcessService extends AbstractService implements INoti
     // process message
     IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
     service.putNotification(new MessageNotification(ServerSession.get().getUserId(), message), new SingleUserFilter(buddyName, TIMEOUT));
+  }
+
+  @Override
+  public void sendRefreshBuddiesInternal() throws ProcessingException {
+    IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
+    service.putNonClusterDistributedNotification(new RefreshBuddiesNotification(), new AllUserFilter(TIMEOUT));
   }
 }

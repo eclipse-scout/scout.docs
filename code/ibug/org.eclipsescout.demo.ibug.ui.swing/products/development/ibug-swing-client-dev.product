@@ -10,18 +10,21 @@
    </configIni>
 
    <launcherArgs>
-      <programArgsMac>--launcher.secondThread</programArgsMac>
+      <programArgsMac>--launcher.secondThread
+      </programArgsMac>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m</vmArgs>
+-XX:MaxPermSize=256m
+      </vmArgs>
    </launcherArgs>
 
-   <windowImages/>
+   <windowImages i16="/org.eclipsescout.demo.ibug.ui.swing/resources/icons/application_icon16.png" i32="/org.eclipsescout.demo.ibug.ui.swing/resources/icons/application_icon32.png" i48="/org.eclipsescout.demo.ibug.ui.swing/resources/icons/application_icon48.png"/>
 
    <launcher name="ibug">
       <solaris/>
       <win useIco="false">
-         <bmp/>
+         <bmp
+            winSmallLow="/org.eclipsescout.demo.ibug.ui.swing/resources/icons/application_icon16_8b.bmp"/>
       </win>
    </launcher>
 
@@ -64,6 +67,7 @@
       <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.docx4j"/>
       <plugin id="org.eclipse.scout.net"/>
+      <plugin id="org.eclipse.scout.org.w3c.dom.svg.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.docx4j.client"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
@@ -71,8 +75,6 @@
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.rt.ui.swing"/>
       <plugin id="org.eclipse.scout.service"/>
-      <plugin id="org.eclipse.scout.svg.client"/>
-      <plugin id="org.eclipse.scout.svg.ui.swing"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.update.configurator"/>
@@ -83,7 +85,6 @@
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
-      <plugin id="org.w3c.dom.svg.fragment" fragment="true"/>
    </plugins>
 
 

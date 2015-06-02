@@ -130,7 +130,7 @@ public class CompanySearchForm extends AbstractSearchForm {
   public class SearchHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() {
+    protected void execLoad() {
       //TODO [jbr] Auto-generated method stub.
     }
   }

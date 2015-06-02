@@ -4,22 +4,16 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
-import org.eclipsescout.demo.bahbah.client.ClientSession;
-import org.eclipsescout.demo.bahbah.client.services.BuddyIconProviderService;
-import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
-import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm;
-import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
-import org.eclipsescout.demo.bahbah.shared.services.outline.IStandardOutlineService;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -32,6 +26,12 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.service.SERVICES;
+import org.eclipsescout.demo.bahbah.client.ClientSession;
+import org.eclipsescout.demo.bahbah.client.services.BuddyIconProviderService;
+import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
+import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm;
+import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
+import org.eclipsescout.demo.bahbah.shared.services.outline.IStandardOutlineService;
 
 public class UserNodePage extends AbstractPageWithNodes {
 
@@ -56,7 +56,7 @@ public class UserNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execCreateChildPages(Collection<IPage> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage> pageList) throws ProcessingException {
     String[] buddies = SERVICES.getService(IStandardOutlineService.class).getOnlineUsers();
     for (String buddy : buddies) {
       BuddyNodePage buddyPage = new BuddyNodePage();
@@ -131,7 +131,7 @@ public class UserNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execPrepareAction() throws ProcessingException {
+    protected void execInitAction() throws ProcessingException {
       setVisible(UserAgentUtility.isDesktopDevice() && ACCESS.check(new UpdateIconPermission()));
     }
   }

@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipsescout.demo</groupId>
     <artifactId>org.eclipsescout.demo.master</artifactId>
-    <version>3.10.1-SNAPSHOT</version>
+    <version>4.0.200-SNAPSHOT</version>
     <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
   </parent>
   
@@ -29,6 +29,7 @@
   <modules>
     <module>../org.eclipsescout.demo.bahbah.client</module>
     <module>../org.eclipsescout.demo.bahbah.security</module>
+    <module>../org.eclipsescout.demo.bahbah.mysql</module>
     <module>../org.eclipsescout.demo.bahbah.server</module>
     <module>../org.eclipsescout.demo.bahbah.server.product</module>
     <module>../org.eclipsescout.demo.bahbah.shared</module>

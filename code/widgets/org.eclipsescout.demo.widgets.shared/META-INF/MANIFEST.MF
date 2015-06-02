@@ -2,9 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scout Widgets Demo App Shared
 Bundle-SymbolicName: org.eclipsescout.demo.widgets.shared;singleton:=true
-Bundle-Version: 3.10.1.qualifier
+Bundle-Version: 4.0.200.qualifier
 Bundle-Activator: org.eclipsescout.demo.widgets.shared.Activator
 Export-Package: org.eclipsescout.demo.widgets.shared,
+ org.eclipsescout.demo.widgets.shared.services,
  org.eclipsescout.demo.widgets.shared.services.code,
  org.eclipsescout.demo.widgets.shared.services.common.text
 Require-Bundle: org.eclipse.core.runtime,

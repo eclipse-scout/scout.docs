@@ -38,6 +38,7 @@
             factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
             class="org.eclipse.scout.rt.shared.services.common.pwd.IPasswordManagementService">
       </proxy>
+      <service class="org.eclipsescout.demo.bahbah.client.services.NodeIconService"></service>
    </extension>
    <extension
          name=""

@@ -11,8 +11,8 @@
 package org.eclipsescout.demo.bahbah.ui.swt.application;
 
 import org.eclipse.jface.action.Action;
-import org.eclipsescout.demo.bahbah.ui.swt.Activator;
 import org.eclipse.scout.rt.client.ui.action.view.IViewButton;
+import org.eclipsescout.demo.bahbah.ui.swt.Activator;
 
 /**
  * 

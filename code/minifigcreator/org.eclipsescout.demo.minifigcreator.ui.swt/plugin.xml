@@ -144,15 +144,11 @@
          name=""
          point="org.eclipse.core.runtime.products">
       <product
-            name=""
+            name="minifigcreator"
             application="org.eclipsescout.demo.minifigcreator.ui.swt.application">
          <property
                name="appName"
                value="minifigcreator">
-         </property>
-         <property
-               name="windowImages"
-               value="resources/icons/eclipseScout16x16.gif,resources/icons/eclipseScout32x32.gif">
          </property>
          <property
                name="applicationXMI"

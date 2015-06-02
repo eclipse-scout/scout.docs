@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -124,7 +124,7 @@ public class CompanyForm extends AbstractForm {
     public class CompanyTypeGroup extends AbstractRadioButtonGroup<Long> {
 
       @Override
-      protected Class<? extends ICodeType> getConfiguredCodeType() {
+      protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
         return CompanyTypeCodeType.class;
       }
 
@@ -138,7 +138,7 @@ public class CompanyForm extends AbstractForm {
     public class CompanyRatingField extends AbstractSmartField<Long> {
 
       @Override
-      protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+      protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
         return CompanyRatingCodeType.class;
       }
 
@@ -189,7 +189,7 @@ public class CompanyForm extends AbstractForm {
   public class ModifyHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       ICompanyService service = SERVICES.getService(ICompanyService.class);
       CompanyFormData formData = new CompanyFormData();
       exportFormData(formData);
@@ -199,7 +199,7 @@ public class CompanyForm extends AbstractForm {
     }
 
     @Override
-    public void execStore() throws ProcessingException {
+    protected void execStore() throws ProcessingException {
       ICompanyService service = SERVICES.getService(ICompanyService.class);
       CompanyFormData formData = new CompanyFormData();
       exportFormData(formData);
@@ -210,7 +210,7 @@ public class CompanyForm extends AbstractForm {
   public class NewHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       ICompanyService service = SERVICES.getService(ICompanyService.class);
       CompanyFormData formData = new CompanyFormData();
       exportFormData(formData);
@@ -219,7 +219,7 @@ public class CompanyForm extends AbstractForm {
     }
 
     @Override
-    public void execStore() throws ProcessingException {
+    protected void execStore() throws ProcessingException {
       ICompanyService service = SERVICES.getService(ICompanyService.class);
       CompanyFormData formData = new CompanyFormData();
       exportFormData(formData);

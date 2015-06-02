@@ -54,10 +54,10 @@
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.scout.commons"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.jaxws216"/>
-      <plugin id="org.eclipse.scout.rt.jdbc.derby"/>
+      <plugin id="org.eclipse.scout.rt.jdbc.derby10"/>
       <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.service"/>
       <plugin id="org.eclipse.scout.tutorial.jaxws.server"/>

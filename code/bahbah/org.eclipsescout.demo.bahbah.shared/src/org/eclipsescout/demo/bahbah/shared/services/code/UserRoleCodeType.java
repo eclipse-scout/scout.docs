@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -16,10 +16,10 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-public class UserRoleCodeType extends AbstractCodeType<Integer> {
+public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
 
   private static final long serialVersionUID = 1L;
-  public static final Integer ID = 1000;
+  public static final Long ID = Long.valueOf(1000);
 
   public UserRoleCodeType() throws ProcessingException {
     super();
@@ -31,7 +31,7 @@ public class UserRoleCodeType extends AbstractCodeType<Integer> {
   }
 
   @Override
-  public Integer getId() {
+  public Long getId() {
     return ID;
   }
 

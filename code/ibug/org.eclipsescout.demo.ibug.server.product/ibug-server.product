@@ -30,7 +30,6 @@
 
    <plugins>
       <plugin id="com.bsiag.org.docx4j"/>
-      <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.io"/>
@@ -55,10 +54,10 @@
       <plugin id="org.eclipse.scout.commons"/>
       <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.docx4j"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.jaxws216"/>
-      <plugin id="org.eclipse.scout.rt.jdbc.derby"/>
+      <plugin id="org.eclipse.scout.rt.jdbc.derby10"/>
       <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.service"/>
       <plugin id="org.eclipse.update.configurator"/>

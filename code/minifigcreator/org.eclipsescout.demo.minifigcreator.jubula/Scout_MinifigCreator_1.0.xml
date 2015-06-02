@@ -167,9 +167,9 @@
 				<uniqueId>b87dbe0b5a20475c8ca6ffffa77a15e0</uniqueId>
 			</parameterDescription>
 		</namedTestData>
-		<aut id="ID_A_4598">
+		<aut id="ID_A_51806">
 			<name>MinifigCreator</name>
-			<config id="ID_C_4624">
+			<config id="ID_C_51831">
 				<name>MinifigCreator_Version1@localhost</name>
 				<classname />
 				<classpath />
@@ -215,7 +215,7 @@
 					<value>C:\Users\jbr\Desktop\minifig-version-1</value>
 				</confAttrMapEntry>
 			</config>
-			<config id="ID_C_4623">
+			<config id="ID_C_51832">
 				<name>MinifigCreator_Version2@localhost</name>
 				<classname />
 				<classpath />
@@ -275,7 +275,7 @@
 					<association>
 						<technicalName>
 							<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
-							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx</componentClassName>
+							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.decoration.JTextFieldWithDecorationIcons</componentClassName>
 							<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
 							<hierarchyName>frame1</hierarchyName>
 							<hierarchyName>Synth.Frame</hierarchyName>
@@ -288,21 +288,21 @@
 							<hierarchyName>null.layeredPane</hierarchyName>
 							<hierarchyName>null.contentPane</hierarchyName>
 							<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+							<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
 							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>DESKTOP_CONTAINER_GRPBOX</hierarchyName>
 							<hierarchyName>Synth.GroupBoxBody</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx_1</hierarchyName>
-							<alternativeDisplayName>Text Component</alternativeDisplayName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_3</hierarchyName>
+							<hierarchyName>DESKTOP_SUMMARY_TXTFLD</hierarchyName>
+							<alternativeDisplayName xsi:nil="true" />
 						</technicalName>
 						<type xsi:nil="true" />
-						<logicalName>a2f601dc322a4144a326063d09dcaa78</logicalName>
+						<logicalName>581d791b6733450cb833e942e331571f</logicalName>
 					</association>
 					<association>
 						<technicalName>
 							<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
-							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx</componentClassName>
+							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.decoration.JTextFieldWithDecorationIcons</componentClassName>
 							<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
 							<hierarchyName>frame1</hierarchyName>
 							<hierarchyName>Synth.Frame</hierarchyName>
@@ -315,16 +315,18 @@
 							<hierarchyName>null.layeredPane</hierarchyName>
 							<hierarchyName>null.contentPane</hierarchyName>
 							<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+							<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
 							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>DESKTOP_CONTAINER_GRPBOX</hierarchyName>
 							<hierarchyName>Synth.GroupBoxBody</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_4</hierarchyName>
-							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx_1</hierarchyName>
-							<alternativeDisplayName>Text Component</alternativeDisplayName>
+							<hierarchyName>DESKTOP_PARTS_GRPBOX</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+							<hierarchyName>DESKTOP_TORSO_SMRFLD</hierarchyName>
+							<alternativeDisplayName xsi:nil="true" />
 						</technicalName>
 						<type xsi:nil="true" />
-						<logicalName>581d791b6733450cb833e942e331571f</logicalName>
+						<logicalName>6f1018f03b004de7a89719eaa918429c</logicalName>
 					</association>
 					<category>
 						<name>Head</name>
@@ -352,7 +354,7 @@
 						<association>
 							<technicalName>
 								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
-								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.decoration.JTextFieldWithDecorationIcons</componentClassName>
 								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
 								<hierarchyName>frame1</hierarchyName>
 								<hierarchyName>Synth.Frame</hierarchyName>
@@ -365,15 +367,15 @@
 								<hierarchyName>null.layeredPane</hierarchyName>
 								<hierarchyName>null.contentPane</hierarchyName>
 								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>DESKTOP_CONTAINER_GRPBOX</hierarchyName>
 								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>DESKTOP_PARTS_GRPBOX</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
-								<alternativeDisplayName>Text Component</alternativeDisplayName>
+								<hierarchyName>DESKTOP_HEAD_SMRFLD</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
 							</technicalName>
 							<type xsi:nil="true" />
 							<logicalName>56882ad3bcd54465bfc893372f527c7d</logicalName>
@@ -405,7 +407,7 @@
 						<association>
 							<technicalName>
 								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
-								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.decoration.JTextFieldWithDecorationIcons</componentClassName>
 								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
 								<hierarchyName>frame1</hierarchyName>
 								<hierarchyName>Synth.Frame</hierarchyName>
@@ -418,18 +420,16 @@
 								<hierarchyName>null.layeredPane</hierarchyName>
 								<hierarchyName>null.contentPane</hierarchyName>
 								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>DESKTOP_CONTAINER_GRPBOX</hierarchyName>
 								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
-								<alternativeDisplayName>Text Component</alternativeDisplayName>
+								<hierarchyName>DESKTOP_NAME_TXTFLD</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
 							</technicalName>
 							<type xsi:nil="true" />
-							<logicalName>6f1018f03b004de7a89719eaa918429c</logicalName>
+							<logicalName>a2f601dc322a4144a326063d09dcaa78</logicalName>
 						</association>
 					</category>
 					<category>
@@ -458,7 +458,7 @@
 						<association>
 							<technicalName>
 								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
-								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.decoration.JTextFieldWithDecorationIcons</componentClassName>
 								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
 								<hierarchyName>frame1</hierarchyName>
 								<hierarchyName>Synth.Frame</hierarchyName>
@@ -471,15 +471,15 @@
 								<hierarchyName>null.layeredPane</hierarchyName>
 								<hierarchyName>null.contentPane</hierarchyName>
 								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>DESKTOP_CONTAINER_GRPBOX</hierarchyName>
 								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>DESKTOP_PARTS_GRPBOX</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
 								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_3</hierarchyName>
-								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
-								<alternativeDisplayName>Text Component</alternativeDisplayName>
+								<hierarchyName>DESKTOP_LEGS_SMRFLD</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
 							</technicalName>
 							<type xsi:nil="true" />
 							<logicalName>8c9e7a1d1da8402d9b6debfa8a34503a</logicalName>
@@ -491,6 +491,30 @@
 				</unmappedComponent>
 				<unmappedTechnical>
 					<name>#1!mappedtechnicalGDCat#1!</name>
+					<association>
+						<technicalName>
+							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JButtonEx</componentClassName>
+							<supportedClassName>javax.swing.AbstractButton</supportedClassName>
+							<hierarchyName>frame1</hierarchyName>
+							<hierarchyName>Synth.Frame</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>RootFrame.Spacer</hierarchyName>
+							<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+							<hierarchyName>Synth.View</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+							<hierarchyName>org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm</hierarchyName>
+							<hierarchyName>Synth.GroupBoxButtonBar</hierarchyName>
+							<hierarchyName>systemProcessButtons</hierarchyName>
+							<hierarchyName>ExportButton.container</hierarchyName>
+							<hierarchyName>DESKTOP_EXPORT_BUTFLD</hierarchyName>
+							<alternativeDisplayName>DESKTOP_EXPORT_BUTFLD ("Export")</alternativeDisplayName>
+						</technicalName>
+						<type xsi:nil="true" />
+					</association>
 				</unmappedTechnical>
 			</objectMapping>
 			<autToolkit>com.bredexsw.guidancer.SwingToolkitPlugin</autToolkit>
@@ -716,140 +740,6 @@
 					<interfaceLocked>false</interfaceLocked>
 				</testcase>
 			</category>
-			<testcase>
-				<name>Synch replace text</name>
-				<comment xsi:nil="true" />
-				<GUID>2c8de2cc064b4d768d6a780599c1a804</GUID>
-				<generated>false</generated>
-				<active>true</active>
-				<parameterDescription>
-					<name>TEXT</name>
-					<type>java.lang.String</type>
-					<uniqueId>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueId>
-				</parameterDescription>
-				<testdata>
-					<uniqueIds>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueIds>
-				</testdata>
-				<datafile xsi:nil="true" />
-				<teststep>
-					<usedTestcase>
-						<name>Wait for component to be there</name>
-						<comment xsi:nil="true" />
-						<GUID>3e82570ca3ce41ae9ec41772c2c1f55a</GUID>
-						<generated>false</generated>
-						<active>true</active>
-						<testdata>
-							<row rowCount="1">
-								<data columnCount="1">
-									<data>
-										<language>en_US</language>
-										<value>2000</value>
-									</data>
-								</data>
-								<data columnCount="2">
-									<data>
-										<language>en_US</language>
-										<value>0</value>
-									</data>
-								</data>
-							</row>
-							<uniqueIds>8ab6b083181dc1bc01181dc3c5fb0003</uniqueIds>
-							<uniqueIds>8ab6b083181dc1bc01181dc3dbc50004</uniqueIds>
-						</testdata>
-						<datafile xsi:nil="true" />
-						<testcaseGuid>8ab6b083150339b501150364aff708ea</testcaseGuid>
-						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
-						<hasOwnTestdata>true</hasOwnTestdata>
-						<overriddenNames>
-							<propagated>true</propagated>
-							<originalName>8ab6b08d1a4d08f3011a4d09a4930022</originalName>
-							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
-							<type>guidancer.abstract.Widget</type>
-						</overriddenNames>
-					</usedTestcase>
-				</teststep>
-				<teststep>
-					<usedTestcase>
-						<name>Replace text</name>
-						<comment xsi:nil="true" />
-						<GUID>4f58442724d94f69969932ce2c6f7e9d</GUID>
-						<generated>false</generated>
-						<active>true</active>
-						<testdata>
-							<row rowCount="1">
-								<data columnCount="1">
-									<data>
-										<language>en_US</language>
-										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
-									</data>
-								</data>
-							</row>
-							<uniqueIds>8ab6b083154b8c1601154b91d20000cb</uniqueIds>
-						</testdata>
-						<datafile xsi:nil="true" />
-						<testcaseGuid>8ab6b083150339b501150364aff708a9</testcaseGuid>
-						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
-						<hasOwnTestdata>true</hasOwnTestdata>
-						<overriddenNames>
-							<propagated>true</propagated>
-							<originalName>8ab6b08d1a4d08f3011a4d09a4940023</originalName>
-							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
-							<type>guidancer.abstract.TextInputSupport</type>
-						</overriddenNames>
-					</usedTestcase>
-				</teststep>
-				<teststep>
-					<usedTestcase>
-						<name>Check text</name>
-						<comment xsi:nil="true" />
-						<GUID>08cfe8142194492fa480a31804c1db2d</GUID>
-						<generated>false</generated>
-						<active>true</active>
-						<testdata>
-							<row rowCount="1">
-								<data columnCount="1">
-									<data>
-										<language>en_US</language>
-										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
-									</data>
-								</data>
-								<data columnCount="2">
-									<data>
-										<language>en_US</language>
-										<value>equals</value>
-									</data>
-								</data>
-							</row>
-							<uniqueIds>8ab6b083181d393b01181da60e9900ab</uniqueIds>
-							<uniqueIds>8ab6b083181d393b01181da61c4500ac</uniqueIds>
-						</testdata>
-						<datafile xsi:nil="true" />
-						<testcaseGuid>8ab6b083181d393b01181da5bf8e00a9</testcaseGuid>
-						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
-						<hasOwnTestdata>true</hasOwnTestdata>
-						<overriddenNames>
-							<propagated>true</propagated>
-							<originalName>8ab6b08d1a4d08f3011a4d09a4960028</originalName>
-							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
-							<type>guidancer.abstract.TextVerifiable</type>
-						</overriddenNames>
-					</usedTestcase>
-				</teststep>
-				<teststep>
-					<usedTestcase>
-						<name>Leave field</name>
-						<comment xsi:nil="true" />
-						<GUID>62b6139b4cc2448bb7e3736aac8d6471</GUID>
-						<generated>false</generated>
-						<active>true</active>
-						<datafile xsi:nil="true" />
-						<testcaseGuid>8ab6b083150339b501150364afe807c8</testcaseGuid>
-						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
-						<hasOwnTestdata>false</hasOwnTestdata>
-					</usedTestcase>
-				</teststep>
-				<interfaceLocked>false</interfaceLocked>
-			</testcase>
 			<category>
 				<name>Smart fields</name>
 				<comment xsi:nil="true" />
@@ -944,7 +834,6 @@
 						<active>true</active>
 						<datafile xsi:nil="true" />
 						<testcaseGuid>8b5278afd0604ab69ec4a787ce16c8af</testcaseGuid>
-						<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 						<hasOwnTestdata>false</hasOwnTestdata>
 						<eventType>TestErrorEvent.VerifyFailed</eventType>
 						<reentryProperty>retry</reentryProperty>
@@ -1036,7 +925,6 @@
 							<testdata />
 							<datafile xsi:nil="true" />
 							<testcaseGuid>386a499c1de44fe3b45b2026b48f6094</testcaseGuid>
-							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 							<hasOwnTestdata>true</hasOwnTestdata>
 							<overriddenNames>
 								<propagated>true</propagated>
@@ -1072,7 +960,6 @@
 							</testdata>
 							<datafile xsi:nil="true" />
 							<testcaseGuid>72fed6b0c9974a7984a5dff9544387d1</testcaseGuid>
-							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 							<hasOwnTestdata>true</hasOwnTestdata>
 							<overriddenNames>
 								<propagated>true</propagated>
@@ -1232,7 +1119,7 @@
 									<data columnCount="3">
 										<data>
 											<language>en_US</language>
-											<value>97</value>
+											<value>95</value>
 										</data>
 									</data>
 									<data columnCount="4">
@@ -1342,7 +1229,6 @@
 							<active>true</active>
 							<datafile xsi:nil="true" />
 							<testcaseGuid>386a499c1de44fe3b45b2026b48f6094</testcaseGuid>
-							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 							<hasOwnTestdata>false</hasOwnTestdata>
 							<overriddenNames>
 								<propagated>true</propagated>
@@ -1361,6 +1247,140 @@
 					<interfaceLocked>false</interfaceLocked>
 				</testcase>
 			</category>
+			<testcase>
+				<name>Synch replace text</name>
+				<comment xsi:nil="true" />
+				<GUID>2c8de2cc064b4d768d6a780599c1a804</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<parameterDescription>
+					<name>TEXT</name>
+					<type>java.lang.String</type>
+					<uniqueId>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueId>
+				</parameterDescription>
+				<testdata>
+					<uniqueIds>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueIds>
+				</testdata>
+				<datafile xsi:nil="true" />
+				<teststep>
+					<usedTestcase>
+						<name>Wait for component to be there</name>
+						<comment xsi:nil="true" />
+						<GUID>3e82570ca3ce41ae9ec41772c2c1f55a</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>2000</value>
+									</data>
+								</data>
+								<data columnCount="2">
+									<data>
+										<language>en_US</language>
+										<value>0</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083181dc1bc01181dc3c5fb0003</uniqueIds>
+							<uniqueIds>8ab6b083181dc1bc01181dc3dbc50004</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364aff708ea</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4930022</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.Widget</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Replace text</name>
+						<comment xsi:nil="true" />
+						<GUID>4f58442724d94f69969932ce2c6f7e9d</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083154b8c1601154b91d20000cb</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364aff708a9</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4940023</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.TextInputSupport</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Check text</name>
+						<comment xsi:nil="true" />
+						<GUID>08cfe8142194492fa480a31804c1db2d</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
+									</data>
+								</data>
+								<data columnCount="2">
+									<data>
+										<language>en_US</language>
+										<value>equals</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083181d393b01181da60e9900ab</uniqueIds>
+							<uniqueIds>8ab6b083181d393b01181da61c4500ac</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083181d393b01181da5bf8e00a9</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4960028</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.TextVerifiable</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Leave field</name>
+						<comment xsi:nil="true" />
+						<GUID>62b6139b4cc2448bb7e3736aac8d6471</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364afe807c8</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>false</hasOwnTestdata>
+					</usedTestcase>
+				</teststep>
+				<interfaceLocked>false</interfaceLocked>
+			</testcase>
 			<testcase>
 				<name>Check summary</name>
 				<comment xsi:nil="true" />
@@ -1498,7 +1518,6 @@
 					</testdata>
 					<datafile xsi:nil="true" />
 					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
-					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 					<hasOwnTestdata>true</hasOwnTestdata>
 				</usedTestcase>
 			</teststep>
@@ -1557,7 +1576,6 @@
 					</testdata>
 					<datafile xsi:nil="true" />
 					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
-					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 					<hasOwnTestdata>true</hasOwnTestdata>
 				</usedTestcase>
 			</teststep>
@@ -1616,7 +1634,6 @@
 					</testdata>
 					<datafile xsi:nil="true" />
 					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
-					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 					<hasOwnTestdata>true</hasOwnTestdata>
 				</usedTestcase>
 			</teststep>
@@ -1675,7 +1692,6 @@
 					</testdata>
 					<datafile xsi:nil="true" />
 					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
-					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
 					<hasOwnTestdata>true</hasOwnTestdata>
 				</usedTestcase>
 			</teststep>
@@ -1688,7 +1704,7 @@
 				<GUID>e7fc5cd498e8450c81eb8e249bd4da81</GUID>
 				<generated>false</generated>
 				<active>true</active>
-				<selectedAut>ID_A_4598</selectedAut>
+				<selectedAut>ID_A_51806</selectedAut>
 				<stepDelay>0</stepDelay>
 				<commandLineParameter xsi:nil="true" />
 				<usedTestcase>

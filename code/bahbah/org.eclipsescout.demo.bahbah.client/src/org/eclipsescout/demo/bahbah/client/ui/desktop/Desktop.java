@@ -11,12 +11,9 @@
 package org.eclipsescout.demo.bahbah.client.ui.desktop;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipsescout.demo.bahbah.client.ClientSession;
-import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.AdministrationOutline;
-import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.ChatOutline;
-import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
-import org.eclipsescout.demo.bahbah.shared.Icons;
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ClientSyncJob;
@@ -31,19 +28,23 @@ import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
 import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDesktop;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipsescout.demo.bahbah.client.ClientSession;
+import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.AdministrationOutline;
+import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.ChatOutline;
+import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
+import org.eclipsescout.demo.bahbah.shared.Icons;
 
 public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
   public Desktop() {
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    ArrayList<Class> outlines = new ArrayList<Class>();
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
     outlines.add(ChatOutline.class);
     outlines.add(AdministrationOutline.class);
-    return outlines.toArray(new Class[outlines.size()]);
+    return outlines;
   }
 
   @Override
@@ -63,8 +64,9 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     tableForm.setIconId(Icons.EclipseScout);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+    if (firstOutline != null) {
+      setOutline(firstOutline);
     }
 
   }
@@ -102,7 +104,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
 
     @Override
-    public void execAction() throws ProcessingException {
+    protected void execAction() throws ProcessingException {
       ScoutInfoForm form = new ScoutInfoForm();
       form.startModify();
     }
@@ -122,7 +124,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
 
     @Override
-    protected void execPrepareAction() throws ProcessingException {
+    protected void execInitAction() throws ProcessingException {
       setVisible(UserAgentUtility.isDesktopDevice());
     }
   }
@@ -133,11 +135,6 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     public ChatOutlineViewButton() {
       super(Desktop.this, ChatOutline.class);
     }
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Chat");
-    }
   }
 
   @Order(20.0)
@@ -145,11 +142,6 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
     public AdministrationOutlineViewButton() {
       super(Desktop.this, AdministrationOutline.class);
-    }
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Administration");
     }
   }
 }

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: My Application
 Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.ui.swing;singleton:=true
-Bundle-Version: 3.10.1.qualifier
+Bundle-Version: 4.0.200.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.minifigcreator.ui.swing.Activator
 Export-Package: org.eclipsescout.demo.minifigcreator.ui.swing;uses:="org.eclipse.scout.rt.ui.swing,org.eclipse.scout.rt.client.session,org.osgi.framework"
-Require-Bundle: org.eclipse.scout.rt.ui.swing;bundle-version="[3.9.0,4.0.0)",
+Require-Bundle: org.eclipse.scout.rt.ui.swing,
  org.eclipsescout.demo.minifigcreator.client;visibility:=reexport,
  org.eclipsescout.demo.minifigcreator.shared,
  org.eclipse.scout.net,

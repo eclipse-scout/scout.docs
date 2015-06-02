@@ -10,10 +10,16 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages;
 
+import java.util.Set;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
@@ -147,7 +153,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected Class<? extends ICodeType> getConfiguredCodeType() {
+      protected Class<? extends ICodeType<?, Integer>> getConfiguredCodeType() {
         return UserRoleCodeType.class;
 
       }
@@ -185,7 +191,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execPrepareAction() throws ProcessingException {
+      protected void execInitAction() throws ProcessingException {
         setVisiblePermission(new UpdateUserPermission());
       }
     }
@@ -194,18 +200,8 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
     public class NewUserMenu extends AbstractMenu {
 
       @Override
-      protected boolean getConfiguredEmptySpaceAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredMultiSelectionAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredSingleSelectionAction() {
-        return false;
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.EmptySpace, TableMenuType.MultiSelection);
       }
 
       @Override
@@ -224,7 +220,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execPrepareAction() throws ProcessingException {
+      protected void execInitAction() throws ProcessingException {
         setVisiblePermission(new CreateUserPermission());
       }
     }
@@ -246,31 +242,22 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execPrepareAction() throws ProcessingException {
+      protected void execInitAction() throws ProcessingException {
         setVisiblePermission(new ResetPasswordPermission());
       }
     }
 
     @Order(40.0)
-    public class SeparatorMenu extends AbstractMenu {
+    public class SeparatorMenu extends AbstractMenuSeparator {
 
-      @Override
-      protected boolean getConfiguredSeparator() {
-        return true;
-      }
-
-      @Override
-      protected void execPrepareAction() throws ProcessingException {
-        setVisiblePermission(new DeleteUserPermission());
-      }
     }
 
     @Order(50.0)
     public class DeleteUserMenu extends AbstractMenu {
 
       @Override
-      protected boolean getConfiguredMultiSelectionAction() {
-        return true;
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.SingleSelection, TableMenuType.MultiSelection);
       }
 
       @Override
@@ -287,7 +274,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execPrepareAction() throws ProcessingException {
+      protected void execInitAction() throws ProcessingException {
         setVisiblePermission(new DeleteUserPermission());
       }
     }

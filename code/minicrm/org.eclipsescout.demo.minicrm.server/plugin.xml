@@ -82,15 +82,15 @@
    </extension>
    <extension
          name=""
-         point="org.eclipse.scout.http.servletfilter.filters">
+         point="org.eclipse.scout.rt.server.commons.filters">
       <filter
             aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
+            class="org.eclipse.scout.rt.server.commons.servletfilter.security.BasicSecurityFilter"
             ranking="20">
       </filter>
       <filter
             aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
+            class="org.eclipse.scout.rt.server.commons.servletfilter.security.AnonymousSecurityFilter"
             ranking="30">
       </filter>
    </extension>

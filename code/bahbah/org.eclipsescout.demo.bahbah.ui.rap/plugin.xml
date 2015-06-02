@@ -100,7 +100,7 @@
   <extension point="org.eclipse.equinox.http.registry.resources">
     <resource alias="/res" base-name="/web-resources"/>
   </extension>
-  <extension point="org.eclipse.scout.http.servletfilter.filters">
+  <extension point="org.eclipse.scout.rt.server.commons.filters">
     <filter
       aliases="/"
       class="org.eclipsescout.demo.bahbah.server.security.BasicForwardSecurityFilter"

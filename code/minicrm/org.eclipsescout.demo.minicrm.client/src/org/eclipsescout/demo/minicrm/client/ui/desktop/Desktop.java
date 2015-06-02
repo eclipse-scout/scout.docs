@@ -4,12 +4,16 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.client.ui.desktop;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -40,9 +44,10 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    return new Class[]{StandardOutline.class};
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
+    outlines.add(StandardOutline.class);
+    return outlines;
   }
 
   @Override
@@ -67,8 +72,9 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     tableForm.setIconId(Icons.VCard);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+    if (firstOutline != null) {
+      setOutline(firstOutline);
     }
 
   }
@@ -90,7 +96,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       }
 
       @Override
-      public void execAction() throws ProcessingException {
+      protected void execAction() throws ProcessingException {
         ClientSyncJob.getCurrentSession(ClientSession.class).stopSession();
       }
     }
@@ -130,7 +136,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       }
 
       @Override
-      public void execAction() throws ProcessingException {
+      protected void execAction() throws ProcessingException {
         ScoutInfoForm form = new ScoutInfoForm();
         form.startModify();
       }
@@ -142,11 +148,6 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
     public StandardOutlineViewButton() {
       super(Desktop.this, StandardOutline.class);
-    }
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("StandardOutline");
     }
   }
 

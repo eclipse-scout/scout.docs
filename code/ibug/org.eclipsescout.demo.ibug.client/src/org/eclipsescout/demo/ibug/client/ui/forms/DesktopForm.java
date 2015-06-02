@@ -4,12 +4,13 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.ibug.client.ui.forms;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
@@ -410,7 +411,7 @@ public class DesktopForm extends AbstractForm {
             @Override
             protected void execAction() throws ProcessingException {
               IShellService shell = SERVICES.getService(IShellService.class);
-              shell.shellOpen("https://bugs.eclipse.org/bugs/show_bug.cgi?id=" + getTable().getSelectedRow().getKeyValues()[0]);
+              shell.shellOpen("https://bugs.eclipse.org/bugs/show_bug.cgi?id=" + CollectionUtility.firstElement(getTable().getSelectedRow().getKeyValues()));
             }
           }
         }

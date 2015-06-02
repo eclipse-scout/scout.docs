@@ -26,11 +26,6 @@
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipsescout.demo.bahbah.server.services.common.sql.DerbySqlService"
-            session="org.eclipsescout.demo.bahbah.server.ServerSession">
-      </service>
-      <service
-            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
             class="org.eclipsescout.demo.bahbah.server.services.outline.StandardOutlineService"
             session="org.eclipsescout.demo.bahbah.server.ServerSession">
       </service>
@@ -47,6 +42,21 @@
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
             class="org.eclipsescout.demo.bahbah.server.services.process.PasswordProcessService"
+            session="org.eclipsescout.demo.bahbah.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipse.scout.rt.server.services.common.clustersync.ClusterSynchronizationService"
+            session="org.eclipsescout.demo.bahbah.server.ServerSession">
+      </service>
+      <service
+            class="org.eclipsescout.demo.bahbah.server.services.db.DerbyDbSetupService"
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            session="org.eclipsescout.demo.bahbah.server.ServerSession">
+      </service>
+      <service
+            class="org.eclipsescout.demo.bahbah.server.services.common.sql.DerbySqlService"
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
             session="org.eclipsescout.demo.bahbah.server.ServerSession">
       </service>
    </extension>
@@ -96,7 +106,7 @@
    </extension>
    <extension
          name=""
-         point="org.eclipse.scout.http.servletfilter.filters">
+         point="org.eclipse.scout.rt.server.commons.filters">
       <filter
             aliases="/process /remotefiles /updatesite"
             class="org.eclipsescout.demo.bahbah.server.security.BasicForwardSecurityFilter"
@@ -131,12 +141,13 @@
          name=""
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.eclipsescout.demo.bahbah.server.app"
-            name="bahbah Server">
+            name="bahbah Server"
+            application="org.eclipsescout.demo.bahbah.server.app">
          <property
                name="appName"
                value="bahbah Server">
          </property>
       </product>
    </extension>
+
 </plugin>

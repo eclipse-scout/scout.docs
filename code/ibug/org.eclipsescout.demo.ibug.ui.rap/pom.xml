@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipsescout.demo.ibug</groupId>
     <artifactId>org.eclipsescout.demo.ibug.parent</artifactId>
-    <version>3.10.1-SNAPSHOT</version>
+    <version>4.0.200-SNAPSHOT</version>
     <relativePath>../org.eclipsescout.demo.ibug.parent/</relativePath>
   </parent>
   

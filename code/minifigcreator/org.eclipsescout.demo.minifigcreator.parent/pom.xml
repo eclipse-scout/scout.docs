@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipsescout.demo</groupId>
     <artifactId>org.eclipsescout.demo.master</artifactId>
-    <version>3.10.1-SNAPSHOT</version>
+    <version>4.0.200-SNAPSHOT</version>
     <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
   </parent>
   
@@ -47,6 +47,7 @@
         <module>../org.eclipsescout.demo.minifigcreator.client.test</module>
         <module>../org.eclipsescout.demo.minifigcreator.server.test</module>
         <module>../org.eclipsescout.demo.minifigcreator.shared.test</module>
+        <module>../org.eclipsescout.demo.minifigcreator.client.testapp</module>
       </modules>
     </profile>
   </profiles>

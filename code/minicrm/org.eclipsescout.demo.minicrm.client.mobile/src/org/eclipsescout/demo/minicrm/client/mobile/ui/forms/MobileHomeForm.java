@@ -4,12 +4,15 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.client.mobile.ui.forms;
 
+import java.util.List;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ClientJob;
@@ -148,14 +151,13 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         }
 
         @Override
-        protected void execRowsSelected(ITableRow[] rows) throws ProcessingException {
-          if (rows == null || rows.length == 0) {
-            return;
+        protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
+          if (CollectionUtility.hasElements(rows)) {
+            IOutline outline = getOutlineColumn().getValue(CollectionUtility.firstElement(rows));
+            MobileDesktopUtility.activateOutline(outline);
+            getDesktop().removeForm(MobileHomeForm.this);
+            clearSelectionDelayed();
           }
-          IOutline outline = getOutlineColumn().getValue(rows[0]);
-          MobileDesktopUtility.activateOutline(outline);
-          getDesktop().removeForm(MobileHomeForm.this);
-          clearSelectionDelayed();
         }
 
         public LabelColumn getLabelColumn() {
@@ -207,8 +209,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
     @Override
     protected void execLoad() throws ProcessingException {
       Table table = getOutlinesTableField().getTable();
-      IOutline[] outlines = getDesktop().getAvailableOutlines();
-      for (IOutline outline : outlines) {
+      for (IOutline outline : getDesktop().getAvailableOutlines()) {
         if (outline.isVisible() && outline.getRootNode() != null) {
           ITableRow row = table.createRow(new Object[]{outline, outline.getTitle()});
           row.setEnabled(outline.isEnabled());

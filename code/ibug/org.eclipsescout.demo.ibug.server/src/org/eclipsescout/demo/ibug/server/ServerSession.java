@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -17,7 +17,8 @@ import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.ServerJob;
 
 public class ServerSession extends AbstractServerSession {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(ServerSession.class);
+  private static final long serialVersionUID = 6843033806086424068L;
+  private static IScoutLogger LOG = ScoutLogManager.getLogger(ServerSession.class);
 
   public ServerSession() {
     super(true);
@@ -32,6 +33,6 @@ public class ServerSession extends AbstractServerSession {
 
   @Override
   protected void execLoadSession() throws ProcessingException {
-    logger.info("created a new session for " + getUserId());
+    LOG.info("created a new session for " + getUserId());
   }
 }

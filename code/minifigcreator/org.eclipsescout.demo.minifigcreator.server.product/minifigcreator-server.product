@@ -10,12 +10,16 @@
    </configIni>
 
    <launcherArgs>
-      <programArgsLin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}</programArgsLin>
-      <programArgsMac>-os ${target.os}  -arch ${target.arch} -nl ${target.nl}</programArgsMac>
-      <programArgsWin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}</programArgsWin>
+      <programArgsLin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}
+      </programArgsLin>
+      <programArgsMac>-os ${target.os}  -arch ${target.arch} -nl ${target.nl}
+      </programArgsMac>
+      <programArgsWin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}
+      </programArgsWin>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m</vmArgs>
+-XX:MaxPermSize=256m
+      </vmArgs>
    </launcherArgs>
 
    <launcher>
@@ -47,9 +51,9 @@
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.scout.commons"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.jaxws216"/>
       <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.service"/>
       <plugin id="org.eclipse.update.configurator"/>

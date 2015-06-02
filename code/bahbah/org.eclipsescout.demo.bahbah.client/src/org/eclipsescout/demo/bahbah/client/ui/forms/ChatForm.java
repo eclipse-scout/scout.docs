@@ -34,6 +34,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.bahbah.client.services.BuddyIconProviderService;
+import org.eclipsescout.demo.bahbah.client.services.INodeIconService;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.HistoryField;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.MessageField;
 import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcessService;
@@ -114,11 +115,6 @@ public class ChatForm extends AbstractForm {
       protected boolean getConfiguredLabelVisible() {
         return false;
       }
-
-      @Override
-      protected int getConfiguredMaxLength() {
-        return INotificationProcessService.MESSAGE_MAX_LENGTH;
-      }
     }
 
     @Order(20.0)
@@ -132,8 +128,8 @@ public class ChatForm extends AbstractForm {
         return false;
       }
 
-      public void addMessage(boolean local, String sender, String receiver, Date date, String message) throws ProcessingException {
-        getTable().addRowByArray(new Object[]{(local ? MESSAGE_TYPE_LOCAL : MESSAGE_TYPE_REMOTE), sender, receiver, message, date});
+      public void addMessage(boolean local, String sender, String receiver, Date date, String message, String recievingNode, String providingNode) throws ProcessingException {
+        getTable().addRowByArray(new Object[]{(local ? MESSAGE_TYPE_LOCAL : MESSAGE_TYPE_REMOTE), sender, receiver, message, date, recievingNode, providingNode});
       }
 
       @Order(10.0)
@@ -164,8 +160,16 @@ public class ChatForm extends AbstractForm {
           return getColumnSet().getColumnByClass(MessageColumn.class);
         }
 
+        public ProvidingNodeColumn getProvidingNodeColumn() {
+          return getColumnSet().getColumnByClass(ProvidingNodeColumn.class);
+        }
+
         public ReceiverColumn getReceiverColumn() {
           return getColumnSet().getColumnByClass(ReceiverColumn.class);
+        }
+
+        public ReceivingNodeColumn getReceivingNodeColumn() {
+          return getColumnSet().getColumnByClass(ReceivingNodeColumn.class);
         }
 
         public SenderColumn getSenderColumn() {
@@ -245,11 +249,6 @@ public class ChatForm extends AbstractForm {
         public class TimeColumn extends AbstractTimeColumn {
 
           @Override
-          protected boolean getConfiguredAlwaysIncludeSortAtBegin() {
-            return true;
-          }
-
-          @Override
           protected String getConfiguredFormat() {
             return "HH:mm:ss";
           }
@@ -267,6 +266,52 @@ public class ChatForm extends AbstractForm {
           @Override
           protected int getConfiguredSortIndex() {
             return 0;
+          }
+        }
+
+        @Order(60.0)
+        public class ReceivingNodeColumn extends AbstractStringColumn {
+
+          @Override
+          protected String getConfiguredHeaderText() {
+            return TEXTS.get("ReceivingNode");
+          }
+
+          @Override
+          protected boolean getConfiguredVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+            if (cell.getValue() instanceof String && StringUtility.hasText((String) cell.getValue())) {
+              String value = (String) cell.getValue();
+              String icon = SERVICES.getService(INodeIconService.class).getIcon(value);
+              cell.setIconId(icon);
+            }
+          }
+        }
+
+        @Order(70.0)
+        public class ProvidingNodeColumn extends AbstractStringColumn {
+
+          @Override
+          protected String getConfiguredHeaderText() {
+            return TEXTS.get("ProvidingNode");
+          }
+
+          @Override
+          protected boolean getConfiguredVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+            if (cell.getValue() instanceof String && StringUtility.hasText((String) cell.getValue())) {
+              String value = (String) cell.getValue();
+              String icon = SERVICES.getService(INodeIconService.class).getIcon(value);
+              cell.setIconId(icon);
+            }
           }
         }
       }
@@ -288,7 +333,8 @@ public class ChatForm extends AbstractForm {
           // send message to server
           SERVICES.getService(INotificationProcessService.class).sendMessage(getBuddyName(), message);
           // update local chat history
-          getHistoryField().addMessage(true, getUserName(), getBuddyName(), new Date(), message);
+
+          getHistoryField().addMessage(true, getUserName(), getBuddyName(), new Date(), message, "", "");
         }
         getMessageField().setValue(null);
       }

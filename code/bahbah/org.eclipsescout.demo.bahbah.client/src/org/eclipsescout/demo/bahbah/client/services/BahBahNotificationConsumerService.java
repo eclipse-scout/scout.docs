@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -38,7 +38,7 @@ public class BahBahNotificationConsumerService extends AbstractService implement
       try {
         ChatForm form = userPage.getChatForm(buddy);
         if (form != null) {
-          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
+          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage(), notification.getOriginalServerNode(), notification.getProvidingServerNode());
         }
       }
       catch (Throwable t) {

@@ -18,8 +18,12 @@ import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.ServerJob;
+import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.server.services.common.session.IServerSessionRegistryService;
 import org.eclipse.scout.service.SERVICES;
+import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
+import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotificationListener;
+import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotificationListener;
 
 public class ServerApplication implements IApplication {
   private static IScoutLogger logger = ScoutLogManager.getLogger(ServerApplication.class);
@@ -32,26 +36,30 @@ public class ServerApplication implements IApplication {
     scheduler.addJob(new LoadJobs());
     scheduler.start();
     Activator.getDefault().setScheduler(scheduler);
-    */
+     */
 
     // create session using server principal
     ServerSession serverSession = SERVICES.getService(IServerSessionRegistryService.class).newServerSession(ServerSession.class, Activator.getDefault().getBackendSubject());
 
-    // start a job that installs the database and creates all tables (if they do not exist already).
-    ServerJob dbInstallJob = new ServerJob("Install Db schema if necessary", serverSession) {
+    // start a job that installs the database and notification listener.
+    ServerJob initJob = new ServerJob("Install Db schema if necessary", serverSession) {
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) {
         try {
-          DbSetup.installDb();
+          SERVICES.getService(IDbSetupService.class).installDb();
         }
         catch (Throwable t) {
           return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error while installing the bahbah server Db schema", t);
         }
+
+        SERVICES.getService(IClusterSynchronizationService.class).addListener(new RegisterUserNotificationListener());
+        SERVICES.getService(IClusterSynchronizationService.class).addListener(new UnregisterUserNotificationListener());
+
         return Status.OK_STATUS;
       }
     };
-    dbInstallJob.schedule();
-    dbInstallJob.join(20000);
+    initJob.schedule();
+    initJob.join(20000);
 
     logger.info("bahbah server initialized");
 

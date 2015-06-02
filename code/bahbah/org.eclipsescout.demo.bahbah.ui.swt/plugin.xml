@@ -93,7 +93,7 @@
              value="bahbah"/>
        <property
              name="windowImages"
-             value="resources/icons/eclipseScout16x16.gif,resources/icons/eclipseScout32x32.gif,resources/icons/eclipse_scout.gif,resources/icons/eclipse_scout.gif,resources/icons/eclipse_scout.gif">
+             value="resources/icons/eclipseScout16x16.gif,resources/icons/eclipseScout32x32.gif">
        </property>
     </product>
   </extension>

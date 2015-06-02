@@ -23,4 +23,6 @@ public interface INotificationProcessService extends IService {
   void sendRefreshBuddies() throws ProcessingException;
 
   void sendMessage(String buddyName, String message) throws ProcessingException;
+
+  void sendRefreshBuddiesInternal() throws ProcessingException;
 }

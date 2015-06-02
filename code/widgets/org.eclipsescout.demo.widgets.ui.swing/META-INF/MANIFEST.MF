@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scout Widgets Demo App Swing
 Bundle-SymbolicName: org.eclipsescout.demo.widgets.ui.swing;singleton:=true
-Bundle-Version: 3.10.1.qualifier
+Bundle-Version: 4.0.200.qualifier
 Bundle-Activator: org.eclipsescout.demo.widgets.ui.swing.Activator
 Bundle-ActivationPolicy: lazy
 Scout-Project: org.eclipsescout.demo.widgets

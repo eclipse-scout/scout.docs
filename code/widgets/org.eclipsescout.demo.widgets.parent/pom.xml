@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipsescout.demo</groupId>
     <artifactId>org.eclipsescout.demo.master</artifactId>
-    <version>3.10.1-SNAPSHOT</version>
+    <version>4.0.200-SNAPSHOT</version>
     <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
   </parent>
   
@@ -29,8 +29,10 @@
   <modules>
     <module>../org.eclipsescout.demo.widgets-feature</module>
     <module>../org.eclipsescout.demo.widgets.client</module>
+    <module>../org.eclipsescout.demo.widgets.client.old</module>
     <module>../org.eclipsescout.demo.widgets.client.mobile</module>
     <module>../org.eclipsescout.demo.widgets.shared</module>
+    <module>../org.eclipsescout.demo.widgets.shared.old</module>
     <module>../org.eclipsescout.demo.widgets.ui.rap</module>
     <module>../org.eclipsescout.demo.widgets.ui.rap.product</module>
     <module>../org.eclipsescout.demo.widgets.ui.swing</module>

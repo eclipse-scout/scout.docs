@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -99,7 +99,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
       @Override
       protected void execAction() throws ProcessingException {
-        BugsField bugs = getViewStack()[0].getFieldByClass(BugsField.class);
+        BugsField bugs = getViewStack().get(0).getFieldByClass(BugsField.class);
         if (bugs != null) {
           ScoutXlsxSpreadsheetAdapter s = new ScoutXlsxSpreadsheetAdapter();
           File xlsx = s.exportTable(null, "Bugs", bugs.getTable());

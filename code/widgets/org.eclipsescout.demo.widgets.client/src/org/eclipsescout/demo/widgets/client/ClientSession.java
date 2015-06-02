@@ -36,7 +36,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  public void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() throws ProcessingException {
     m_footless = !Boolean.valueOf(getBundle().getBundleContext().getProperty("server.available"));
     if (isFootless()) {
       logger.warn("starting client without a server!");

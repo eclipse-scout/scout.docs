@@ -20,13 +20,14 @@ import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.ServerJob;
+import org.eclipse.scout.rt.server.services.common.clustersync.ClusterSynchronizationService;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 
 public class ServerSession extends AbstractServerSession {
-
-  private static final IScoutLogger logger = ScoutLogManager.getLogger(ServerSession.class);
+  private static final long serialVersionUID = -6930164140912861947L;
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(ServerSession.class);
 
   public ServerSession() {
     super(true);
@@ -52,12 +53,21 @@ public class ServerSession extends AbstractServerSession {
 
   @Override
   protected void execLoadSession() throws ProcessingException {
-    if (getUserId() != null && Subject.getSubject(AccessController.getContext()) != Activator.getDefault().getBackendSubject()) {
-      logger.info("created a new session for " + getUserId());
+    if (getUserId() != null && !isBackendSession() ) {
+      LOG.info("created a new session for " + getUserId());
 
       setPermission(SERVICES.getService(IUserProcessService.class).getUserPermission());
 
       SERVICES.getService(IUserProcessService.class).registerUser();
     }
+  }
+  
+  private boolean isBackendSession() {
+	    ClusterSynchronizationService service = SERVICES.getService(ClusterSynchronizationService.class);
+	    Subject subject = null;
+	    if(service != null) {
+	      subject = service.getBackendSubject();
+	    }
+	    return Subject.getSubject(AccessController.getContext()).equals(subject);
   }
 }
