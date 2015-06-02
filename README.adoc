@@ -36,9 +36,16 @@ It substantially boosts developer productivity and is simple to learn.
 
 == Organisation of this Repository
 
-This repository follows the same link:{scout_branch}[git branching policy] as the other eclipse scout repositories.
+* `code` folder: contains demo application (code snippets in the documentation items are extracted from this code base during the build)
 
-Switch to the *develop* branch to get the latest version.
+This repository follows the same link:{scout_branch}[git branching policy] as the other eclipse scout repositories.
+The *develop* branch contains the latest version.
+
+
+== Build
+
+The demo applications are built with maven: check the link:code/README.adoc[README of the code folder].
+
 
 == Issue tracker
 

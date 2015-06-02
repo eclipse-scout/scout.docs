@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.demo.minicrm.ui.swing;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.minicrm.ui.swing.Activator
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.scout.rt.ui.swing,
+ org.eclipsescout.demo.minicrm.client;visibility:=reexport,
+ org.eclipsescout.demo.minicrm.shared,
+ org.eclipse.scout.net
+Export-Package: org.eclipsescout.demo.minicrm.ui.swing;uses:="org.eclipse.scout.rt.ui.swing,org.eclipse.scout.rt.client.session,org.osgi.framework"
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

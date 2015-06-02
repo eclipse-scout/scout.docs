@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.shared.test
+Bundle-Version: 3.10.1.qualifier
+Fragment-Host: org.eclipsescout.demo.minifigcreator.shared;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.scout.rt.testing.shared;bundle-version="3.8.2"
+Import-Package: org.junit;version="[4.9.0,5.0.0)",
+ org.junit.runner;version="[4.9.0,5.0.0)"

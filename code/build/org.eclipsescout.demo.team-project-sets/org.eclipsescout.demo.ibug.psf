@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/build/org.eclipsescout.demo.settings"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/build/org.eclipsescout.demo.master"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/build/org.eclipsescout.demo.target"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.client"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.client.mobile"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.parent"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.server"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.server.product"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.shared"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.rap"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.rap.product"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.swing"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.swing.product"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.swt"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/3.10.x,code/ibug/org.eclipsescout.demo.ibug.ui.swt.product"/>
+</provider>
+</psf>

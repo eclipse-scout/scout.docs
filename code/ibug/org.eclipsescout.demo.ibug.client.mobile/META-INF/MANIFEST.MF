@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Client Mobile
+Bundle-SymbolicName: org.eclipsescout.demo.ibug.client.mobile;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.ibug.client.mobile.Activator
+Bundle-Vendor: Eclipse Scout Project
+Export-Package: org.eclipsescout.demo.ibug.client.mobile
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipsescout.demo.ibug.client,
+ org.eclipsescout.demo.ibug.shared,
+ org.eclipse.scout.rt.client.mobile,
+ org.eclipse.scout.rt.extension.client,
+ org.eclipse.scout.rt.client.mobile,
+ org.eclipse.scout.svg.client,
+ com.bsiag.org.docx4j,
+ org.eclipse.scout.docx4j,
+ org.eclipse.scout.rt.docx4j.client
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.w3c.dom.svg;version="[1.1.0,2.0.0)"
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,1838 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<content xmlns="http://www.eclipse.org/jubula/client/archive/schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<project>
+		<name>Scout_MinifigCreator</name>
+		<comment xsi:nil="true" />
+		<GUID>325db7fbb4974a68aefd719bc09878f6</GUID>
+		<generated>false</generated>
+		<active>true</active>
+		<defaultLanguage>en_US</defaultLanguage>
+		<projectLanguage>en_US</projectLanguage>
+		<namedTestData name="Figures">
+			<testData>
+				<row rowCount="1">
+					<data columnCount="1">
+						<data>
+							<language>en_US</language>
+							<value>Alex</value>
+						</data>
+					</data>
+					<data columnCount="2">
+						<data>
+							<language>en_US</language>
+							<value>Pirate</value>
+						</data>
+					</data>
+					<data columnCount="3">
+						<data>
+							<language>en_US</language>
+							<value>Police</value>
+						</data>
+					</data>
+					<data columnCount="4">
+						<data>
+							<language>en_US</language>
+							<value>Blue</value>
+						</data>
+					</data>
+				</row>
+				<row rowCount="2">
+					<data columnCount="1">
+						<data>
+							<language>en_US</language>
+							<value>Zeb</value>
+						</data>
+					</data>
+					<data columnCount="2">
+						<data>
+							<language>en_US</language>
+							<value>Talky &amp; Walky</value>
+						</data>
+					</data>
+					<data columnCount="3">
+						<data>
+							<language>en_US</language>
+							<value>Suit</value>
+						</data>
+					</data>
+					<data columnCount="4">
+						<data>
+							<language>en_US</language>
+							<value>Gray</value>
+						</data>
+					</data>
+				</row>
+				<row rowCount="3">
+					<data columnCount="1">
+						<data>
+							<language>en_US</language>
+							<value>Markus</value>
+						</data>
+					</data>
+					<data columnCount="2">
+						<data>
+							<language>en_US</language>
+							<value>Bart</value>
+						</data>
+					</data>
+					<data columnCount="3">
+						<data>
+							<language>en_US</language>
+							<value>Yellow</value>
+						</data>
+					</data>
+					<data columnCount="4">
+						<data>
+							<language>en_US</language>
+							<value>Yellow</value>
+						</data>
+					</data>
+				</row>
+				<row rowCount="4">
+					<data columnCount="1">
+						<data>
+							<language>en_US</language>
+							<value>Achim</value>
+						</data>
+					</data>
+					<data columnCount="2">
+						<data>
+							<language>en_US</language>
+							<value>Normal</value>
+						</data>
+					</data>
+					<data columnCount="3">
+						<data>
+							<language>en_US</language>
+							<value>Suit</value>
+						</data>
+					</data>
+					<data columnCount="4">
+						<data>
+							<language>en_US</language>
+							<value>Jeans</value>
+						</data>
+					</data>
+				</row>
+				<row rowCount="5">
+					<data columnCount="1">
+						<data>
+							<language>en_US</language>
+							<value>Marvin</value>
+						</data>
+					</data>
+					<data columnCount="2">
+						<data>
+							<language>en_US</language>
+							<value>Pirate</value>
+						</data>
+					</data>
+					<data columnCount="3">
+						<data>
+							<language>en_US</language>
+							<value>Suit</value>
+						</data>
+					</data>
+					<data columnCount="4">
+						<data>
+							<language>en_US</language>
+							<value>Overall</value>
+						</data>
+					</data>
+				</row>
+				<uniqueIds>8188e4596a754e8e90c12ecc4f014ce5</uniqueIds>
+				<uniqueIds>470c2937a0124b85961e06d0f513a640</uniqueIds>
+				<uniqueIds>385a84f96bbd4fcb9c3abda965191b35</uniqueIds>
+				<uniqueIds>b87dbe0b5a20475c8ca6ffffa77a15e0</uniqueIds>
+			</testData>
+			<parameterDescription>
+				<name>NAME</name>
+				<type>java.lang.String</type>
+				<uniqueId>8188e4596a754e8e90c12ecc4f014ce5</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>HEAD</name>
+				<type>java.lang.String</type>
+				<uniqueId>470c2937a0124b85961e06d0f513a640</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>TORSO</name>
+				<type>java.lang.String</type>
+				<uniqueId>385a84f96bbd4fcb9c3abda965191b35</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>LEGS</name>
+				<type>java.lang.String</type>
+				<uniqueId>b87dbe0b5a20475c8ca6ffffa77a15e0</uniqueId>
+			</parameterDescription>
+		</namedTestData>
+		<aut id="ID_A_4598">
+			<name>MinifigCreator</name>
+			<config id="ID_C_4624">
+				<name>MinifigCreator_Version1@localhost</name>
+				<classname />
+				<classpath />
+				<jarfile />
+				<parameter />
+				<workingDir />
+				<jreDir />
+				<jreParameter />
+				<server />
+				<environment />
+				<activateApp>false</activateApp>
+				<activationMethod>none</activationMethod>
+				<confAttrMapEntry>
+					<key>ACTIVATE_APPLICATION</key>
+					<value>false</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>ACTIVATION_METHOD</key>
+					<value>NONE</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>AUT_ID</key>
+					<value>minifig_v1</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>CONFIG_NAME</key>
+					<value>MinifigCreator_Version1@localhost</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>EXECUTABLE</key>
+					<value>minifigcreator.exe</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>JRE_BINARY</key>
+					<value>../jre/bin/java.exe</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>SERVER</key>
+					<value>localhost</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>WORKING_DIR</key>
+					<value>C:\Users\jbr\Desktop\minifig-version-1</value>
+				</confAttrMapEntry>
+			</config>
+			<config id="ID_C_4623">
+				<name>MinifigCreator_Version2@localhost</name>
+				<classname />
+				<classpath />
+				<jarfile />
+				<parameter />
+				<workingDir />
+				<jreDir />
+				<jreParameter />
+				<server />
+				<environment />
+				<activateApp>false</activateApp>
+				<activationMethod>none</activationMethod>
+				<confAttrMapEntry>
+					<key>ACTIVATE_APPLICATION</key>
+					<value>false</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>ACTIVATION_METHOD</key>
+					<value>NONE</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>AUT_ID</key>
+					<value>minifig_v2</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>CONFIG_NAME</key>
+					<value>MinifigCreator_Version2@localhost</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>EXECUTABLE</key>
+					<value>minifigcreator.exe</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>JRE_BINARY</key>
+					<value>../jre/bin/java.exe</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>SERVER</key>
+					<value>localhost</value>
+				</confAttrMapEntry>
+				<confAttrMapEntry>
+					<key>WORKING_DIR</key>
+					<value>C:\Users\jbr\Desktop\minifig-version-2</value>
+				</confAttrMapEntry>
+			</config>
+			<language>en_US</language>
+			<objectMapping>
+				<profile>
+					<name xsi:nil="true" />
+					<contextFactor>0.1</contextFactor>
+					<nameFactor>0.6</nameFactor>
+					<pathFactor>0.3</pathFactor>
+					<threshold>0.85</threshold>
+				</profile>
+				<mapped>
+					<name>#1!mappedGDCat#1!</name>
+					<association>
+						<technicalName>
+							<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
+							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx</componentClassName>
+							<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
+							<hierarchyName>frame1</hierarchyName>
+							<hierarchyName>Synth.Frame</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>RootFrame.Spacer</hierarchyName>
+							<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+							<hierarchyName>Synth.View</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>Synth.GroupBoxBody</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx_1</hierarchyName>
+							<alternativeDisplayName>Text Component</alternativeDisplayName>
+						</technicalName>
+						<type xsi:nil="true" />
+						<logicalName>a2f601dc322a4144a326063d09dcaa78</logicalName>
+					</association>
+					<association>
+						<technicalName>
+							<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
+							<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx</componentClassName>
+							<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
+							<hierarchyName>frame1</hierarchyName>
+							<hierarchyName>Synth.Frame</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>RootFrame.Spacer</hierarchyName>
+							<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+							<hierarchyName>Synth.View</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+							<hierarchyName>null.layeredPane</hierarchyName>
+							<hierarchyName>null.contentPane</hierarchyName>
+							<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+							<hierarchyName>Synth.GroupBoxBody</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_4</hierarchyName>
+							<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldEx_1</hierarchyName>
+							<alternativeDisplayName>Text Component</alternativeDisplayName>
+						</technicalName>
+						<type xsi:nil="true" />
+						<logicalName>581d791b6733450cb833e942e331571f</logicalName>
+					</association>
+					<category>
+						<name>Head</name>
+						<association>
+							<technicalName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.basic.table.SwingScoutTable$P_SwingTable</componentClassName>
+								<supportedClassName>javax.swing.JTable</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>win12</hierarchyName>
+								<hierarchyName>Synth.Popup</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>SmartTableForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.client.ui.form.fields.smartfield.SmartTableForm$MainBox$ResultTableField.container</hierarchyName>
+								<hierarchyName>Synth.SmartfieldScrollPane</hierarchyName>
+								<hierarchyName>javax.swing.JViewport_1</hierarchyName>
+								<hierarchyName>Synth.SmartfieldTable</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>acc368748e3c45bf94234c4601aa2f94</logicalName>
+						</association>
+						<association>
+							<technicalName>
+								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>Synth.Frame</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>RootFrame.Spacer</hierarchyName>
+								<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+								<hierarchyName>Synth.View</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
+								<alternativeDisplayName>Text Component</alternativeDisplayName>
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>56882ad3bcd54465bfc893372f527c7d</logicalName>
+						</association>
+					</category>
+					<category>
+						<name>Torso</name>
+						<association>
+							<technicalName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.basic.table.SwingScoutTable$P_SwingTable</componentClassName>
+								<supportedClassName>javax.swing.JTable</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>win14</hierarchyName>
+								<hierarchyName>Synth.Popup</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>SmartTableForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.client.ui.form.fields.smartfield.SmartTableForm$MainBox$ResultTableField.container</hierarchyName>
+								<hierarchyName>Synth.SmartfieldScrollPane</hierarchyName>
+								<hierarchyName>javax.swing.JViewport_1</hierarchyName>
+								<hierarchyName>Synth.SmartfieldTable</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>3d93d65153234ea0892812fc22888da2</logicalName>
+						</association>
+						<association>
+							<technicalName>
+								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>Synth.Frame</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>RootFrame.Spacer</hierarchyName>
+								<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+								<hierarchyName>Synth.View</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
+								<alternativeDisplayName>Text Component</alternativeDisplayName>
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>6f1018f03b004de7a89719eaa918429c</logicalName>
+						</association>
+					</category>
+					<category>
+						<name>Legs</name>
+						<association>
+							<technicalName>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.basic.table.SwingScoutTable$P_SwingTable</componentClassName>
+								<supportedClassName>javax.swing.JTable</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>win21</hierarchyName>
+								<hierarchyName>Synth.Popup</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>SmartTableForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.client.ui.form.fields.smartfield.SmartTableForm$MainBox$ResultTableField.container</hierarchyName>
+								<hierarchyName>Synth.SmartfieldScrollPane</hierarchyName>
+								<hierarchyName>javax.swing.JViewport_1</hierarchyName>
+								<hierarchyName>Synth.SmartfieldTable</hierarchyName>
+								<alternativeDisplayName xsi:nil="true" />
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>49ea518c69de449eacf598737e06de59</logicalName>
+						</association>
+						<association>
+							<technicalName>
+								<neighbour>com.bsiag.scout.rt.ui.swing.rayo.ext.RayoStatusLabelEx_1</neighbour>
+								<componentClassName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton</componentClassName>
+								<supportedClassName>javax.swing.text.JTextComponent</supportedClassName>
+								<hierarchyName>frame1</hierarchyName>
+								<hierarchyName>Synth.Frame</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>RootFrame.Spacer</hierarchyName>
+								<hierarchyName>javax.swing.JDesktopPane_1</hierarchyName>
+								<hierarchyName>Synth.View</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.window.internalframe.SwingScoutInternalFrame$1$1_1</hierarchyName>
+								<hierarchyName>null.layeredPane</hierarchyName>
+								<hierarchyName>null.contentPane</hierarchyName>
+								<hierarchyName>DesktopForm.optimalSizePanel</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>Synth.GroupBoxBody</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_2</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_1</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JPanelEx_3</hierarchyName>
+								<hierarchyName>org.eclipse.scout.rt.ui.swing.ext.JTextFieldWithDropDownButton_1</hierarchyName>
+								<alternativeDisplayName>Text Component</alternativeDisplayName>
+							</technicalName>
+							<type xsi:nil="true" />
+							<logicalName>8c9e7a1d1da8402d9b6debfa8a34503a</logicalName>
+						</association>
+					</category>
+				</mapped>
+				<unmappedComponent>
+					<name>#1!unmappedlogicalGDCat#1!</name>
+				</unmappedComponent>
+				<unmappedTechnical>
+					<name>#1!mappedtechnicalGDCat#1!</name>
+				</unmappedTechnical>
+			</objectMapping>
+			<autToolkit>com.bredexsw.guidancer.SwingToolkitPlugin</autToolkit>
+			<generateNames>false</generateNames>
+		</aut>
+		<category>
+			<name>Generic modules</name>
+			<comment xsi:nil="true" />
+			<GUID>9bf26f4666554c938595185220d453f9</GUID>
+			<generated>false</generated>
+			<active>true</active>
+			<category>
+				<name>Startup</name>
+				<comment xsi:nil="true" />
+				<GUID>74b96255123e47a1955c124d09d8d409</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<testcase>
+					<name>Bring correct AUT to front</name>
+					<comment xsi:nil="true" />
+					<GUID>cb2d1a5d8559437d9c155451c3162361</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Try to click in AUT</name>
+							<comment xsi:nil="true" />
+							<GUID>7eece7ca765b4cb7a262d5bcd3b7f764</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="3">
+										<data>
+											<language>en_US</language>
+											<value>50</value>
+										</data>
+									</data>
+									<data columnCount="4">
+										<data>
+											<language>en_US</language>
+											<value>percent</value>
+										</data>
+									</data>
+									<data columnCount="5">
+										<data>
+											<language>en_US</language>
+											<value>50</value>
+										</data>
+									</data>
+									<data columnCount="6">
+										<data>
+											<language>en_US</language>
+											<value>percent</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181d393b01181d8ae9cb0054</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8af95b0055</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8b07070056</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8b14940057</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8b26850058</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8b36830059</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364afe807aa</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<eventTestcase>
+						<name />
+						<comment xsi:nil="true" />
+						<GUID>04b1e9902270449dbae232898df36d89</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>4d317d27729a421babb9b4a062a327df</testcaseGuid>
+						<hasOwnTestdata>false</hasOwnTestdata>
+						<eventType>TestErrorEvent.Action</eventType>
+						<reentryProperty>retry</reentryProperty>
+						<maxRetries>7</maxRetries>
+					</eventTestcase>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Startup</name>
+					<comment xsi:nil="true" />
+					<GUID>443814b3b4a64a028704595634b1f0f1</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Wait for Scout Window</name>
+							<comment xsi:nil="true" />
+							<GUID>c18df4e487204ad7906f9ab6718f6a45</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>.*Minifig.*</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>4000</value>
+										</data>
+									</data>
+									<data columnCount="3">
+										<data>
+											<language>en_US</language>
+											<value>0</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181d393b01181d9bb65c0089</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d9bdbc6008a</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d9bf9dd008b</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364afe807bb</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>f9557e4e398b431391328f41332bf290</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>cb2d1a5d8559437d9c155451c3162361</testcaseGuid>
+							<hasOwnTestdata>false</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Switch AUTs and wait</name>
+					<comment xsi:nil="true" />
+					<GUID>4d317d27729a421babb9b4a062a327df</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Press alt shift tab</name>
+							<comment xsi:nil="true" />
+							<GUID>592320290c604d8fb635a0ce2c245f4d</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>alt shift</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>TAB</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181d393b01181d8d8ab2005f</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181d8d9d020060</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083181d393b01181d8cd405005d</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name>Wait</name>
+							<comment xsi:nil="true" />
+							<GUID>624748dd3f4b41b6b56760e345084228</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>500</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083154b8c1601154b91d1e00052</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364afe807bf</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+			</category>
+			<testcase>
+				<name>Synch replace text</name>
+				<comment xsi:nil="true" />
+				<GUID>2c8de2cc064b4d768d6a780599c1a804</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<parameterDescription>
+					<name>TEXT</name>
+					<type>java.lang.String</type>
+					<uniqueId>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueId>
+				</parameterDescription>
+				<testdata>
+					<uniqueIds>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueIds>
+				</testdata>
+				<datafile xsi:nil="true" />
+				<teststep>
+					<usedTestcase>
+						<name>Wait for component to be there</name>
+						<comment xsi:nil="true" />
+						<GUID>3e82570ca3ce41ae9ec41772c2c1f55a</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>2000</value>
+									</data>
+								</data>
+								<data columnCount="2">
+									<data>
+										<language>en_US</language>
+										<value>0</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083181dc1bc01181dc3c5fb0003</uniqueIds>
+							<uniqueIds>8ab6b083181dc1bc01181dc3dbc50004</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364aff708ea</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4930022</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.Widget</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Replace text</name>
+						<comment xsi:nil="true" />
+						<GUID>4f58442724d94f69969932ce2c6f7e9d</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083154b8c1601154b91d20000cb</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364aff708a9</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4940023</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.TextInputSupport</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Check text</name>
+						<comment xsi:nil="true" />
+						<GUID>08cfe8142194492fa480a31804c1db2d</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>=39faa99b2f5e4eb0b287ce45c45fa96e</value>
+									</data>
+								</data>
+								<data columnCount="2">
+									<data>
+										<language>en_US</language>
+										<value>equals</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083181d393b01181da60e9900ab</uniqueIds>
+							<uniqueIds>8ab6b083181d393b01181da61c4500ac</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083181d393b01181da5bf8e00a9</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>true</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4960028</originalName>
+							<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+							<type>guidancer.abstract.TextVerifiable</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<teststep>
+					<usedTestcase>
+						<name>Leave field</name>
+						<comment xsi:nil="true" />
+						<GUID>62b6139b4cc2448bb7e3736aac8d6471</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083150339b501150364afe807c8</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>false</hasOwnTestdata>
+					</usedTestcase>
+				</teststep>
+				<interfaceLocked>false</interfaceLocked>
+			</testcase>
+			<category>
+				<name>Smart fields</name>
+				<comment xsi:nil="true" />
+				<GUID>21912017423b4c7b9c6ccab21f281e77</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<testcase>
+					<name>Ensure that table is filled</name>
+					<comment xsi:nil="true" />
+					<GUID>72fed6b0c9974a7984a5dff9544387d1</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<parameterDescription>
+						<name>VALUE</name>
+						<type>java.lang.String</type>
+						<uniqueId>0ada5cd92a624a8e9a2fbacb5980c93b</uniqueId>
+					</parameterDescription>
+					<testdata>
+						<uniqueIds>0ada5cd92a624a8e9a2fbacb5980c93b</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Check for value in column</name>
+							<comment xsi:nil="true" />
+							<GUID>91c62c6c353942d896ffff042b92f102</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>equals</value>
+										</data>
+									</data>
+									<data columnCount="3">
+										<data>
+											<language>en_US</language>
+											<value>=0ada5cd92a624a8e9a2fbacb5980c93b</value>
+										</data>
+									</data>
+									<data columnCount="4">
+										<data>
+											<language>en_US</language>
+											<value>equals</value>
+										</data>
+									</data>
+									<data columnCount="5">
+										<data>
+											<language>en_US</language>
+											<value>absolute</value>
+										</data>
+									</data>
+									<data columnCount="6">
+										<data>
+											<language>en_US</language>
+											<value>true</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b08d294519bd012945ebd0300829</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012945ec16d9082a</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012945ec22b1082b</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012945ec4c7e082c</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012945ec5ff4082d</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012945ec7b15082e</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b08d294519bd012945ead2dd07aa</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.concrete.Table</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<eventTestcase>
+						<name />
+						<comment xsi:nil="true" />
+						<GUID>57c411686eb34001a06835769fb19b01</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8b5278afd0604ab69ec4a787ce16c8af</testcaseGuid>
+						<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+						<hasOwnTestdata>false</hasOwnTestdata>
+						<eventType>TestErrorEvent.VerifyFailed</eventType>
+						<reentryProperty>retry</reentryProperty>
+						<maxRetries>1</maxRetries>
+					</eventTestcase>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Replace text on smart field</name>
+					<comment xsi:nil="true" />
+					<GUID>2ce81f1664624ccaa7ebbb577a86da39</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<parameterDescription>
+						<name>TEXT</name>
+						<type>java.lang.String</type>
+						<uniqueId>07cac040403a479aba71dbc385f97e5b</uniqueId>
+					</parameterDescription>
+					<testdata>
+						<uniqueIds>07cac040403a479aba71dbc385f97e5b</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>0def0230e38e482aaba08d7ef6c22924</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>=07cac040403a479aba71dbc385f97e5b</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>2c8de2cc064b4d768d6a780599c1a804</testcaseGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+								<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>521948d3594c42df8ff96bc1de64be54</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364afe807c8</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>false</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Select from smart field</name>
+					<comment xsi:nil="true" />
+					<GUID>8c711cf655494797b9f077735096f1f1</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<parameterDescription>
+						<name>VALUE</name>
+						<type>java.lang.String</type>
+						<uniqueId>2e27081852074076b0ff8e1980f8d3cb</uniqueId>
+					</parameterDescription>
+					<testdata>
+						<uniqueIds>2e27081852074076b0ff8e1980f8d3cb</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>24dadfe000fd4d7790a797ea3b783053</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata />
+							<datafile xsi:nil="true" />
+							<testcaseGuid>386a499c1de44fe3b45b2026b48f6094</testcaseGuid>
+							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+								<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>8c292f4007ab4817af751e720044218e</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>=2e27081852074076b0ff8e1980f8d3cb</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>0ada5cd92a624a8e9a2fbacb5980c93b</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>72fed6b0c9974a7984a5dff9544387d1</testcaseGuid>
+							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.concrete.Table</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name>Select from table</name>
+							<comment xsi:nil="true" />
+							<GUID>d53f7241c2da4d618058c796cf8f63b1</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>equals</value>
+										</data>
+									</data>
+									<data columnCount="3">
+										<data>
+											<language>en_US</language>
+											<value>=2e27081852074076b0ff8e1980f8d3cb</value>
+										</data>
+									</data>
+									<data columnCount="4">
+										<data>
+											<language>en_US</language>
+											<value>matches</value>
+										</data>
+									</data>
+									<data columnCount="5">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="6">
+										<data>
+											<language>en_US</language>
+											<value>no</value>
+										</data>
+									</data>
+									<data columnCount="7">
+										<data>
+											<language>en_US</language>
+											<value>absolute</value>
+										</data>
+									</data>
+									<data columnCount="8">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b08d294519bd0129460257f80bd5</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd0129460287fd0bd6</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd01294602ef090bd7</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd0129460303480bd8</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd0129460318e80bd9</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd0129460336ec0bda</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd012946034d100bdb</uniqueIds>
+								<uniqueIds>8ab6b08d294519bd0129460369620bdc</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b08d294519bd0129460168df0b56</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.concrete.Table</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>2bd9bedfd2df496f9b1688ebc399c255</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>=2e27081852074076b0ff8e1980f8d3cb</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>matches</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181d393b01181da60e9900ab</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181da61c4500ac</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083181d393b01181da5bf8e00a9</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4960028</originalName>
+								<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+								<type>guidancer.abstract.TextVerifiable</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Open table from smart field</name>
+					<comment xsi:nil="true" />
+					<GUID>386a499c1de44fe3b45b2026b48f6094</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Click search icon</name>
+							<comment xsi:nil="true" />
+							<GUID>c76f622f26a74481a72c5c582da8bd81</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>1</value>
+										</data>
+									</data>
+									<data columnCount="3">
+										<data>
+											<language>en_US</language>
+											<value>97</value>
+										</data>
+									</data>
+									<data columnCount="4">
+										<data>
+											<language>en_US</language>
+											<value>percent</value>
+										</data>
+									</data>
+									<data columnCount="5">
+										<data>
+											<language>en_US</language>
+											<value>50</value>
+										</data>
+									</data>
+									<data columnCount="6">
+										<data>
+											<language>en_US</language>
+											<value>percent</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181d393b01181dbe75b500c5</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181dbe8c2b00c6</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181dbe9cd500c7</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181dbeb82d00c8</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181dbec8a700c9</uniqueIds>
+								<uniqueIds>8ab6b083181d393b01181dbedeb000ca</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083181d393b01181dbe268c00c3</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4930022</originalName>
+								<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name>Wait for table</name>
+							<comment xsi:nil="true" />
+							<GUID>3d4385944e394476b506d3153e5c64c6</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<testdata>
+								<row rowCount="1">
+									<data columnCount="1">
+										<data>
+											<language>en_US</language>
+											<value>2000</value>
+										</data>
+									</data>
+									<data columnCount="2">
+										<data>
+											<language>en_US</language>
+											<value>100</value>
+										</data>
+									</data>
+								</row>
+								<uniqueIds>8ab6b083181dc1bc01181dc3c5fb0003</uniqueIds>
+								<uniqueIds>8ab6b083181dc1bc01181dc3dbc50004</uniqueIds>
+							</testdata>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364aff708ea</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>true</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4930022</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+				<testcase>
+					<name>Reopen table</name>
+					<comment xsi:nil="true" />
+					<GUID>8b5278afd0604ab69ec4a787ce16c8af</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<teststep>
+						<usedTestcase>
+							<name>Close table</name>
+							<comment xsi:nil="true" />
+							<GUID>632c0f5ca72545cf81b860e5d46e4053</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>8ab6b083150339b501150364afe807d0</testcaseGuid>
+							<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+							<hasOwnTestdata>false</hasOwnTestdata>
+						</usedTestcase>
+					</teststep>
+					<teststep>
+						<usedTestcase>
+							<name />
+							<comment xsi:nil="true" />
+							<GUID>9ebecb27643a4daf91722ed19a5f5b96</GUID>
+							<generated>false</generated>
+							<active>true</active>
+							<datafile xsi:nil="true" />
+							<testcaseGuid>386a499c1de44fe3b45b2026b48f6094</testcaseGuid>
+							<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+							<hasOwnTestdata>false</hasOwnTestdata>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+								<newName>8ab6b08d1a4d08f3011a4d09a4940024</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+							<overriddenNames>
+								<propagated>true</propagated>
+								<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+								<newName>675b4dcd7e994fda852086d249eb8a2f</newName>
+								<type>guidancer.abstract.Widget</type>
+							</overriddenNames>
+						</usedTestcase>
+					</teststep>
+					<interfaceLocked>false</interfaceLocked>
+				</testcase>
+			</category>
+			<testcase>
+				<name>Check summary</name>
+				<comment xsi:nil="true" />
+				<GUID>9971292aedf84afba70ba2d72ed63665</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<parameterDescription>
+					<name>TEXT</name>
+					<type>java.lang.String</type>
+					<uniqueId>ac4d2cb625f249dd81ad0b774938d489</uniqueId>
+				</parameterDescription>
+				<testdata>
+					<uniqueIds>ac4d2cb625f249dd81ad0b774938d489</uniqueIds>
+				</testdata>
+				<datafile xsi:nil="true" />
+				<teststep>
+					<usedTestcase>
+						<name>Check summary</name>
+						<comment xsi:nil="true" />
+						<GUID>9437eaa574d042e0bdd3459d0e3ecec3</GUID>
+						<generated>false</generated>
+						<active>true</active>
+						<testdata>
+							<row rowCount="1">
+								<data columnCount="1">
+									<data>
+										<language>en_US</language>
+										<value>=ac4d2cb625f249dd81ad0b774938d489</value>
+									</data>
+								</data>
+								<data columnCount="2">
+									<data>
+										<language>en_US</language>
+										<value>matches</value>
+									</data>
+								</data>
+							</row>
+							<uniqueIds>8ab6b083181d393b01181da60e9900ab</uniqueIds>
+							<uniqueIds>8ab6b083181d393b01181da61c4500ac</uniqueIds>
+						</testdata>
+						<datafile xsi:nil="true" />
+						<testcaseGuid>8ab6b083181d393b01181da5bf8e00a9</testcaseGuid>
+						<projectGuid>8ab6b083150339b501150364afb90435</projectGuid>
+						<hasOwnTestdata>true</hasOwnTestdata>
+						<overriddenNames>
+							<propagated>false</propagated>
+							<originalName>8ab6b08d1a4d08f3011a4d09a4960028</originalName>
+							<newName>581d791b6733450cb833e942e331571f</newName>
+							<type>guidancer.abstract.TextVerifiable</type>
+						</overriddenNames>
+					</usedTestcase>
+				</teststep>
+				<interfaceLocked>false</interfaceLocked>
+			</testcase>
+		</category>
+		<testcase>
+			<name>Create minifigure</name>
+			<comment xsi:nil="true" />
+			<GUID>0435b8c1f2e348b5a61ec36f6fc0da82</GUID>
+			<generated>false</generated>
+			<active>true</active>
+			<parameterDescription>
+				<name>NAME</name>
+				<type>java.lang.String</type>
+				<uniqueId>5ac5a8f640ac42b6b2dd96a08ebfb0c7</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>HEAD</name>
+				<type>java.lang.String</type>
+				<uniqueId>2a067359923246b4a263c3dc60e19ea6</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>TORSO</name>
+				<type>java.lang.String</type>
+				<uniqueId>885d084bc6cf4cbe934caf00af2c8844</uniqueId>
+			</parameterDescription>
+			<parameterDescription>
+				<name>LEGS</name>
+				<type>java.lang.String</type>
+				<uniqueId>004a0e9e6499470e8b17bf3d8fe56048</uniqueId>
+			</parameterDescription>
+			<testdata>
+				<uniqueIds>5ac5a8f640ac42b6b2dd96a08ebfb0c7</uniqueIds>
+				<uniqueIds>2a067359923246b4a263c3dc60e19ea6</uniqueIds>
+				<uniqueIds>885d084bc6cf4cbe934caf00af2c8844</uniqueIds>
+				<uniqueIds>004a0e9e6499470e8b17bf3d8fe56048</uniqueIds>
+			</testdata>
+			<datafile xsi:nil="true" />
+			<teststep>
+				<usedTestcase>
+					<name>Enter name</name>
+					<comment xsi:nil="true" />
+					<GUID>9927450dfa3c47789ac3ea2a521d9431</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>=5ac5a8f640ac42b6b2dd96a08ebfb0c7</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>39faa99b2f5e4eb0b287ce45c45fa96e</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>2c8de2cc064b4d768d6a780599c1a804</testcaseGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+						<newName>a2f601dc322a4144a326063d09dcaa78</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>e91f244009b542adafb73b0d420416e7</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>.*=5ac5a8f640ac42b6b2dd96a08ebfb0c7.*</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>ac4d2cb625f249dd81ad0b774938d489</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
+					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name>Select head</name>
+					<comment xsi:nil="true" />
+					<GUID>e73940aa27b4413294d1683bba426149</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>=2a067359923246b4a263c3dc60e19ea6</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>2e27081852074076b0ff8e1980f8d3cb</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>8c711cf655494797b9f077735096f1f1</testcaseGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+						<newName>acc368748e3c45bf94234c4601aa2f94</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+						<newName>56882ad3bcd54465bfc893372f527c7d</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>b61234483b954e81aee2db265159dc35</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>.*=5ac5a8f640ac42b6b2dd96a08ebfb0c7.*=2a067359923246b4a263c3dc60e19ea6.*</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>ac4d2cb625f249dd81ad0b774938d489</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
+					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name>Select torso</name>
+					<comment xsi:nil="true" />
+					<GUID>e20fc0f716ff42fa952815ec1f916bab</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>=885d084bc6cf4cbe934caf00af2c8844</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>2e27081852074076b0ff8e1980f8d3cb</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>8c711cf655494797b9f077735096f1f1</testcaseGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+						<newName>3d93d65153234ea0892812fc22888da2</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+						<newName>6f1018f03b004de7a89719eaa918429c</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>c05e707ecfec46a29d3386fa8e904ffe</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>.*=5ac5a8f640ac42b6b2dd96a08ebfb0c7.*=2a067359923246b4a263c3dc60e19ea6.*=885d084bc6cf4cbe934caf00af2c8844.*</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>ac4d2cb625f249dd81ad0b774938d489</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
+					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name>Select legs</name>
+					<comment xsi:nil="true" />
+					<GUID>d6ecd843fc0b4698b7b6bbe2416af583</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>=004a0e9e6499470e8b17bf3d8fe56048</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>2e27081852074076b0ff8e1980f8d3cb</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>8c711cf655494797b9f077735096f1f1</testcaseGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>8ab6b08d1a4d08f3011a4d09a4940024</originalName>
+						<newName>49ea518c69de449eacf598737e06de59</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+					<overriddenNames>
+						<propagated>false</propagated>
+						<originalName>675b4dcd7e994fda852086d249eb8a2f</originalName>
+						<newName>8c9e7a1d1da8402d9b6debfa8a34503a</newName>
+						<type>guidancer.abstract.Widget</type>
+					</overriddenNames>
+				</usedTestcase>
+			</teststep>
+			<teststep>
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>b5903ee20cf94289898ae08e7b4657de</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata>
+						<row rowCount="1">
+							<data columnCount="1">
+								<data>
+									<language>en_US</language>
+									<value>.*=5ac5a8f640ac42b6b2dd96a08ebfb0c7.*=2a067359923246b4a263c3dc60e19ea6.*=885d084bc6cf4cbe934caf00af2c8844.*=004a0e9e6499470e8b17bf3d8fe56048.*</value>
+								</data>
+							</data>
+						</row>
+						<uniqueIds>ac4d2cb625f249dd81ad0b774938d489</uniqueIds>
+					</testdata>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>9971292aedf84afba70ba2d72ed63665</testcaseGuid>
+					<projectGuid>325db7fbb4974a68aefd719bc09878f6</projectGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+				</usedTestcase>
+			</teststep>
+			<interfaceLocked>false</interfaceLocked>
+		</testcase>
+		<execCategories>
+			<testsuite>
+				<name>MINIFIG</name>
+				<comment xsi:nil="true" />
+				<GUID>e7fc5cd498e8450c81eb8e249bd4da81</GUID>
+				<generated>false</generated>
+				<active>true</active>
+				<selectedAut>ID_A_4598</selectedAut>
+				<stepDelay>0</stepDelay>
+				<commandLineParameter xsi:nil="true" />
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>4644bb72e02b439695422c41f0a35a69</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<datafile xsi:nil="true" />
+					<testcaseGuid>443814b3b4a64a028704595634b1f0f1</testcaseGuid>
+					<hasOwnTestdata>false</hasOwnTestdata>
+				</usedTestcase>
+				<usedTestcase>
+					<name />
+					<comment xsi:nil="true" />
+					<GUID>58edbb8b45c04231827205a25e07899d</GUID>
+					<generated>false</generated>
+					<active>true</active>
+					<testdata />
+					<datafile xsi:nil="true" />
+					<referencedTestData>Figures</referencedTestData>
+					<testcaseGuid>0435b8c1f2e348b5a61ec36f6fc0da82</testcaseGuid>
+					<hasOwnTestdata>true</hasOwnTestdata>
+				</usedTestcase>
+				<eventHandler>
+					<event>TestErrorEvent.Config</event>
+					<reentryProperty>continue</reentryProperty>
+				</eventHandler>
+				<eventHandler>
+					<event>TestErrorEvent.CompNotFound</event>
+					<reentryProperty>exit</reentryProperty>
+				</eventHandler>
+				<eventHandler>
+					<event>TestErrorEvent.Action</event>
+					<reentryProperty>exit</reentryProperty>
+				</eventHandler>
+				<eventHandler>
+					<event>TestErrorEvent.VerifyFailed</event>
+					<reentryProperty>continue</reentryProperty>
+				</eventHandler>
+			</testsuite>
+		</execCategories>
+		<metaDataVersion>6</metaDataVersion>
+		<autToolKit>com.bredexsw.guidancer.ConcreteToolkitPlugin</autToolKit>
+		<majorProjectVersion>1</majorProjectVersion>
+		<minorProjectVersion>0</minorProjectVersion>
+		<testResultDetailsCleanupInterval>5</testResultDetailsCleanupInterval>
+		<isReusable>false</isReusable>
+		<isProtected>false</isProtected>
+		<reusedProjects>
+			<projectName>unbound_modules_concrete</projectName>
+			<projectGUID>8ab6b083150339b501150364afb90435</projectGUID>
+			<majorProjectVersion>7</majorProjectVersion>
+			<minorProjectVersion>0</minorProjectVersion>
+		</reusedProjects>
+		<componentNames>
+			<compType>guidancer.concrete.Table</compType>
+			<GUID>3d93d65153234ea0892812fc22888da2</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>torso_tbl</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.Table</compType>
+			<GUID>49ea518c69de449eacf598737e06de59</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>legs_tbl</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.TextComponent</compType>
+			<GUID>56882ad3bcd54465bfc893372f527c7d</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>head_txf</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.TextComponent</compType>
+			<GUID>581d791b6733450cb833e942e331571f</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>summary_txf</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.abstract.Widget</compType>
+			<GUID>5d030dc80bc94dad8e1f02f1d442e86e</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>.*Pirate.*</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.abstract.TextInputSupport</compType>
+			<GUID>675b4dcd7e994fda852086d249eb8a2f</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>textcomp</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.TextComponent</compType>
+			<GUID>6f1018f03b004de7a89719eaa918429c</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>torso_txf</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.TextComponent</compType>
+			<GUID>8c9e7a1d1da8402d9b6debfa8a34503a</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>legs_txf</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.TextComponent</compType>
+			<GUID>a2f601dc322a4144a326063d09dcaa78</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>name_txf</compName>
+		</componentNames>
+		<componentNames>
+			<compType>guidancer.concrete.Table</compType>
+			<GUID>acc368748e3c45bf94234c4601aa2f94</GUID>
+			<creationContext>OVERRIDDEN_NAME</creationContext>
+			<refGuid xsi:nil="true" />
+			<compName>head_tbl</compName>
+		</componentNames>
+		<testresultSummaries />
+		<checkConfiguration>
+			<checkId>org.eclipse.jubula.client.teststyle.impl.standard.checks.testSuiteHasAUT</checkId>
+			<activated>true</activated>
+			<severity>ERROR</severity>
+			<activeContext>
+				<class>TestSuiteContext</class>
+				<active>true</active>
+			</activeContext>
+		</checkConfiguration>
+		<checkConfiguration>
+			<checkId>org.eclipse.jubula.client.teststyle.impl.standard.checks.testSuiteNotEmpty</checkId>
+			<activated>true</activated>
+			<severity>ERROR</severity>
+			<activeContext>
+				<class>TestSuiteContext</class>
+				<active>true</active>
+			</activeContext>
+		</checkConfiguration>
+		<teststyleEnabled>true</teststyleEnabled>
+	</project>
+</content>

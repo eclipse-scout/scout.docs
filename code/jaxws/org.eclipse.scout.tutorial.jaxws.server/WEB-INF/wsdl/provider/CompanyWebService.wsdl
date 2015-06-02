@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CompanyWebService" targetNamespace="http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    	<xsd:element name="getCompanies">
+    		<xsd:complexType></xsd:complexType>
+    	</xsd:element>
+    	<xsd:element name="getCompaniesResponse"><xsd:complexType><xsd:sequence><xsd:element name="out" type="tns:Company" maxOccurs="unbounded" minOccurs="0"/></xsd:sequence></xsd:complexType></xsd:element>
+            <xsd:complexType name="Company">
+            	<xsd:sequence>
+            		<xsd:element name="name" type="xsd:string"></xsd:element>
+            		<xsd:element name="symbol" type="xsd:string"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getCompaniesRequest">
+    <wsdl:part name="parameters" element="tns:getCompanies"/>
+  </wsdl:message>
+  <wsdl:message name="getCompaniesResponse">
+    <wsdl:part name="parameters" element="tns:getCompaniesResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CompanyWebServicePortType">
+    <wsdl:operation name="getCompanies">
+      <wsdl:input message="tns:getCompaniesRequest"/>
+      <wsdl:output message="tns:getCompaniesResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CompanyWebServicePortSoapBinding"
+  	type="tns:CompanyWebServicePortType">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="getCompanies">
+
+  		<soap:operation
+  			soapAction="http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/getCompanies" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompanyWebService">
+    <wsdl:port name="CompanyWebServicePort" binding="tns:CompanyWebServicePortSoapBinding">
+      <soap:address location="http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

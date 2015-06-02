@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.demo.bahbah.ui.swt;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.demo.bahbah.ui.swt.Activator
+Export-Package: org.eclipsescout.demo.bahbah.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
+ org.eclipsescout.demo.bahbah.ui.swt.application,
+ org.eclipsescout.demo.bahbah.ui.swt.application.menu,
+ org.eclipsescout.demo.bahbah.ui.swt.editor,
+ org.eclipsescout.demo.bahbah.ui.swt.perspective,
+ org.eclipsescout.demo.bahbah.ui.swt.views
+Require-Bundle: org.eclipsescout.demo.bahbah.client;visibility:=reexport,
+ org.eclipsescout.demo.bahbah.shared,
+ org.eclipse.scout.rt.ui.swt,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.app,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

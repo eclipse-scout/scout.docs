@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scout Widgets Demo RAP
+Bundle-SymbolicName: org.eclipsescout.demo.widgets.ui.rap;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.widgets.ui.rap.Activator
+Bundle-Vendor: Eclipse Scout Project
+Export-Package: org.eclipsescout.demo.widgets.ui.rap
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipsescout.demo.widgets.client,
+ org.eclipsescout.demo.widgets.shared,
+ org.eclipse.scout.rt.ui.rap,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.http.registry,
+ org.eclipse.scout.http.servletfilter,
+ org.eclipse.scout.rt.ui.rap.mobile,
+ org.eclipse.scout.rt.ui.rap.theme.rayo,
+ org.eclipse.scout.rt.client.mobile
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Scout-Project: org.eclipse.scout.rt
+Bundle-ActivationPolicy: lazy

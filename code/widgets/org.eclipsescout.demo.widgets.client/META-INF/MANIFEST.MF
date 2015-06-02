@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scout Widgets Demo App Client
+Bundle-SymbolicName: org.eclipsescout.demo.widgets.client;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.widgets.client.Activator
+Export-Package: org.eclipsescout.demo.widgets.client,
+ org.eclipsescout.demo.widgets.client.services,
+ org.eclipsescout.demo.widgets.client.services.lookup,
+ org.eclipsescout.demo.widgets.client.ui.desktop,
+ org.eclipsescout.demo.widgets.client.ui.desktop.outlines,
+ org.eclipsescout.demo.widgets.client.ui.desktop.outlines.pages,
+ org.eclipsescout.demo.widgets.client.ui.forms,
+ org.eclipsescout.demo.widgets.client.ui.searchforms,
+ org.eclipsescout.demo.widgets.client.ui.template.menu
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.client;visibility:=reexport,
+ org.eclipse.scout.rt.extension.client;visibility:=reexport,
+ org.eclipsescout.demo.widgets.shared,
+ org.eclipse.scout.svg.client,
+ org.eclipse.scout.rt.docx4j.client
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.w3c.dom.svg;version="[1.1.0,2.0.0)"
+Bundle-ActivationPolicy: lazy

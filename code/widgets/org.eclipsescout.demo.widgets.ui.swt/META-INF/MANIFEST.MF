@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scout Widgets Demo App SWT
+Bundle-SymbolicName: org.eclipsescout.demo.widgets.ui.swt;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.demo.widgets.ui.swt.Activator
+Export-Package: org.eclipsescout.demo.widgets.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
+ org.eclipsescout.demo.widgets.ui.swt.application,
+ org.eclipsescout.demo.widgets.ui.swt.application.button,
+ org.eclipsescout.demo.widgets.ui.swt.application.menu,
+ org.eclipsescout.demo.widgets.ui.swt.editor,
+ org.eclipsescout.demo.widgets.ui.swt.perspective,
+ org.eclipsescout.demo.widgets.ui.swt.views
+Require-Bundle: org.eclipsescout.demo.widgets.client;visibility:=reexport,
+ org.eclipsescout.demo.widgets.shared,
+ org.eclipse.scout.rt.ui.swt,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.app,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

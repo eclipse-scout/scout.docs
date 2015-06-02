@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+      application="org.eclipsescout.demo.ibug.ui.rap.app"
+      name="ibug">
+      <property
+        name="appName"
+        value="ibug">
+      </property>
+    </product>
+  </extension>
+  <extension id="app" name="ibug" point="org.eclipse.core.runtime.applications">
+   <application>
+     <run class="org.eclipse.scout.rt.ui.rap.RwtApplication"/>
+   </application>
+  </extension>
+  <extension point="org.eclipse.scout.rt.ui.rap.lookAndFeel">
+    <decorations
+      scope="global">
+      <mandatory>
+        <starMarker
+          placement="afterLabel">
+        </starMarker>
+      </mandatory>
+    </decorations>
+    <properties
+      scope="global">
+      <property
+        name="formMainBoxBorder.visible"
+        value="false">
+      </property>
+    </properties>
+  </extension>
+  <extension point="org.eclipse.rap.ui.entrypoint">
+    <entrypoint
+      class="org.eclipsescout.demo.ibug.ui.rap.StandaloneRwtEnvironment"
+      id="org.eclipsescout.demo.ibug.ui.rap.entrypoint.web"
+      brandingId="org.eclipsescout.demo.ibug.ui.rap.branding.web"
+      path="/web"/>
+    <entrypoint
+      class="org.eclipsescout.demo.ibug.ui.rap.MobileStandaloneRwtEnvironment"
+      id="org.eclipsescout.demo.ibug.ui.rap.entrypoint.mobile"
+      brandingId="org.eclipsescout.demo.ibug.ui.rap.branding.mobile"
+      path="/mobile"/>
+    <entrypoint
+      class="org.eclipsescout.demo.ibug.ui.rap.TabletStandaloneRwtEnvironment"
+      id="org.eclipsescout.demo.ibug.ui.rap.entrypoint.tablet"
+      brandingId="org.eclipsescout.demo.ibug.ui.rap.branding.tablet"
+      path="/tablet"/>
+  </extension>
+  <extension point="org.eclipse.rap.ui.branding">
+    <branding
+      body="web-resources/startup-body.html"
+      favicon="web-resources/eclipseScout.gif"
+      id="org.eclipsescout.demo.ibug.ui.rap.branding.web"
+      themeId="org.eclipse.scout.rt.ui.rap.theme"
+      title="ibug">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"/>
+      </additionalHeaders>
+    </branding>
+    <branding
+      body="web-resources/startup-body.html"
+      favicon="web-resources/eclipseScout.gif"
+      id="org.eclipsescout.demo.ibug.ui.rap.branding.mobile"
+      themeId="org.eclipse.scout.rt.ui.rap.mobile.theme"
+      title="ibug">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"/>
+        <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+      </additionalHeaders>
+    </branding>
+    <branding
+      body="web-resources/startup-body.html"
+      favicon="web-resources/eclipseScout.gif"
+      id="org.eclipsescout.demo.ibug.ui.rap.branding.tablet"
+      themeId="org.eclipse.scout.rt.ui.rap.mobile.theme"
+      title="ibug">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"/>
+        <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+      </additionalHeaders>
+    </branding>
+  </extension>
+  <extension point="org.eclipse.rap.ui.themes">
+    <themeContribution file="theme/application.css" themeId="org.eclipse.scout.rt.ui.rap.theme"/>
+  </extension>
+  <extension point="org.eclipse.equinox.http.registry.resources">
+    <resource alias="/res" base-name="/web-resources"/>
+  </extension>
+  <extension point="org.eclipse.scout.http.servletfilter.filters">
+    <filter
+      aliases="/"
+      class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
+      ranking="10">
+    </filter>
+    <filter
+      aliases="/web"
+      class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
+      ranking="20">
+    </filter>
+  </extension>
+  <extension point="org.eclipse.equinox.http.registry.servlets">
+    <servlet
+      alias="/"
+      class="org.eclipse.scout.rt.ui.rap.mobile.servlets.DeviceDispatcherServlet">
+    </servlet>
+  </extension>
+</plugin>

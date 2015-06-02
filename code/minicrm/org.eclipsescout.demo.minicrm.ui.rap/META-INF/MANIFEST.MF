@@ -1,0 +1,20 @@
+Bundle-ManifestVersion: 2
+Bundle-Name: RAP Bundle
+Bundle-SymbolicName: org.eclipsescout.demo.minicrm.ui.rap;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.minicrm.ui.rap.Activator
+Bundle-Vendor: Eclipse Scout Project
+Export-Package: org.eclipsescout.demo.minicrm.ui.rap
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipsescout.demo.minicrm.client,
+ org.eclipsescout.demo.minicrm.shared,
+ org.eclipse.scout.rt.ui.rap,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.http.registry,
+ org.eclipse.scout.http.servletfilter,
+ org.eclipse.scout.rt.ui.rap.mobile,
+ org.eclipse.scout.rt.ui.rap.theme.rayo,
+ org.eclipse.scout.rt.client.mobile
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Manifest-Version: 1.0

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension id="app" name="Application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipsescout.demo.ibug.ui.swing.SwingApplication"/>
+    </application>
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipsescout.demo.ibug.ui.swing.app"
+          name="ibug">
+       <property
+             name="appName"
+             value="ibug">
+       </property>
+    </product>
+  </extension>
+</plugin>

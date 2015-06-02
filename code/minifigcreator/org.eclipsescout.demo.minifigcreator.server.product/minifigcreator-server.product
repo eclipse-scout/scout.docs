@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="minifigcreator Server" uid="org.eclipsescout.demo.minifigcreator.server.product" id="org.eclipsescout.demo.minifigcreator.server.product" application="org.eclipsescout.demo.minifigcreator.server.app" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+      <linux>/org.eclipsescout.demo.minifigcreator.server.product/config.ini</linux>
+      <macosx>/org.eclipsescout.demo.minifigcreator.server.product/config.ini</macosx>
+      <win32>/org.eclipsescout.demo.minifigcreator.server.product/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <programArgsLin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}</programArgsLin>
+      <programArgsMac>-os ${target.os}  -arch ${target.arch} -nl ${target.nl}</programArgsMac>
+      <programArgsWin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}</programArgsWin>
+      <vmArgs>-Xms64m
+-Xmx512m
+-XX:MaxPermSize=256m</vmArgs>
+   </launcherArgs>
+
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="javax.servlet"/>
+      <plugin id="javax.xml"/>
+      <plugin id="org.apache.commons.codec"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.http.registry"/>
+      <plugin id="org.eclipse.equinox.http.servlet"/>
+      <plugin id="org.eclipse.equinox.http.servletbridge"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.servletbridge"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.scout.commons"/>
+      <plugin id="org.eclipse.scout.http.servletfilter"/>
+      <plugin id="org.eclipse.scout.jaxws216"/>
+      <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.shared"/>
+      <plugin id="org.eclipse.scout.service"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipsescout.demo.minifigcreator.server"/>
+      <plugin id="org.eclipsescout.demo.minifigcreator.shared"/>
+   </plugins>
+
+
+</product>

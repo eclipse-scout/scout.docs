@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2015 BSI Business Systems Integration AG.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.html
+  
+  Contributors:
+      BSI Business Systems Integration AG - initial API and implementation
+-->
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipsescout.demo.minifigcreator</groupId>
+    <artifactId>org.eclipsescout.demo.minifigcreator.parent</artifactId>
+    <version>3.10.1-SNAPSHOT</version>
+    <relativePath>../org.eclipsescout.demo.minifigcreator.parent/</relativePath>
+  </parent>
+  
+  <artifactId>org.eclipsescout.demo.minifigcreator.server.product</artifactId>
+  <packaging>eclipse-repository</packaging>
+  <name>minifigcreator - server.product</name>
+
+  <properties>
+    <product.finalName>minifigcreator_server</product.finalName>
+    <product.id>org.eclipsescout.demo.minifigcreator.server.product</product.id>
+    <product.outputDirectory>${project.build.directory}/products/${product.id}/win32/win32/x86</product.outputDirectory>
+    <product.web-inf.templateDirectory>${basedir}/../../build/org.eclipsescout.demo.webapp/WebContent/WEB-INF</product.web-inf.templateDirectory>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-director-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>materialize-products</id>
+            <phase>package</phase>
+            <goals>
+              <goal>materialize-products</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <products>
+            <product>
+              <id>${product.id}</id>
+            </product>
+          </products>
+        </configuration>
+      </plugin>
+      
+      <!-- Workaround: Use an existing config.ini file (caused by the problem that tycho will always generate a default one) -->
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/../</directory>
+                  <filtering>false</filtering>
+                  <includes>
+                    <include>config.ini</include>
+                  </includes>
+                </resource>
+              </resources>
+              <outputDirectory>${product.outputDirectory}/configuration</outputDirectory>
+              <overwrite>true</overwrite>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      
+      <!-- Configure the assembly plugin to build the final file (war or zip) -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>assembly.xml</descriptor>
+          </descriptors>
+          <finalName>${product.finalName}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

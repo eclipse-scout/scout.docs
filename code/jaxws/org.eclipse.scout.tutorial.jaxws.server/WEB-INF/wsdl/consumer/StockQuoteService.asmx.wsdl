@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.nexus6studio.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://services.nexus6studio.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides access to stock quotes with a 20 minute delay.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.nexus6studio.com/">
+      <s:element name="GetStockQuote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StockTickerSymbol" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStockQuoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetStockQuoteResult" type="tns:StockQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StockQuote">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LastTrade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Open" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Volume" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangePercentage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayLow" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayHigh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StockTickerSymbol" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStockQuotes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StockTickerSymbols" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStockQuotesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStockQuotesResult" type="tns:ArrayOfStockQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStockQuote">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StockQuote" type="tns:StockQuote" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetStockQuoteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStockQuote" />
+  </wsdl:message>
+  <wsdl:message name="GetStockQuoteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStockQuoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStockQuotesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStockQuotes" />
+  </wsdl:message>
+  <wsdl:message name="GetStockQuotesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStockQuotesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StockQuoteServiceSoap">
+    <wsdl:operation name="GetStockQuote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides access to an individual stock quote.</wsdl:documentation>
+      <wsdl:input message="tns:GetStockQuoteSoapIn" />
+      <wsdl:output message="tns:GetStockQuoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockQuotes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides access to a group of stock quotes.</wsdl:documentation>
+      <wsdl:input message="tns:GetStockQuotesSoapIn" />
+      <wsdl:output message="tns:GetStockQuotesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StockQuoteServiceSoap" type="tns:StockQuoteServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStockQuote">
+      <soap:operation soapAction="http://services.nexus6studio.com/GetStockQuote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockQuotes">
+      <soap:operation soapAction="http://services.nexus6studio.com/GetStockQuotes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="StockQuoteServiceSoap12" type="tns:StockQuoteServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStockQuote">
+      <soap12:operation soapAction="http://services.nexus6studio.com/GetStockQuote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockQuotes">
+      <soap12:operation soapAction="http://services.nexus6studio.com/GetStockQuotes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StockQuoteService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provides access to stock quotes with a 20 minute delay.</wsdl:documentation>
+    <wsdl:port name="StockQuoteServiceSoap" binding="tns:StockQuoteServiceSoap">
+      <soap:address location="http://services.nexus6studio.com/StockQuoteService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="StockQuoteServiceSoap12" binding="tns:StockQuoteServiceSoap12">
+      <soap12:address location="http://services.nexus6studio.com/StockQuoteService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

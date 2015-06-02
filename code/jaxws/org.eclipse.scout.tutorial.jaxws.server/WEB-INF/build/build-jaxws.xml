@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webservices>
+  <consumer name="StockQuoteServiceSoapWebServiceClient" wsdl="WEB-INF/wsdl/consumer/StockQuoteService.asmx.wsdl">
+    <property name="b" value="WEB-INF/build/StockQuoteServiceSoapWebServiceClient-bindings.xml"/>
+    <property name="verbose"/>
+    <property name="target" value="2.0"/>
+    <property name="Xdebug"/>
+    <property name="keep"/>
+  </consumer>
+  <servlet-bundle name="org.eclipse.scout.tutorial.jaxws.server"/>
+  <provider name="CompanyWebService">
+    <property name="b" value="WEB-INF/build/CompanyWebService-bindings.xml"/>
+    <property name="verbose"/>
+    <property name="target" value="2.0"/>
+    <property name="Xdebug"/>
+    <property name="keep"/>
+  </provider>
+</webservices>

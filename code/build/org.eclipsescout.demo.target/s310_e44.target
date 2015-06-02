@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?pde version="3.6"?>
+<target name="Demo Widget App Scout 3.10 (Release Builds) Eclipse 4.4 Target" sequenceNumber="16">
+  <locations>
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.sdk.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.server.jetty.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.platform.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.ecore.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.common.feature.group" version="0.0.0"/>
+
+      <repository id="eclipse_luna" location="http://download.eclipse.org/releases/luna"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.scout.rt.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.rt.rap.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.rt.rap.testing.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.rt.testing.source.feature.group" version="0.0.0"/>
+
+      <unit id="org.eclipse.scout.rt.ui.rap.incubator.filechooser.source.feature.group" version="0.0.0"/>
+
+      <repository location="http://download.eclipse.org/scout/releases/3.10"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.rap.feature.feature.group" version="0.0.0"/>
+
+      <repository  id="rap_2.3" location="http://archive.eclipse.org/rt/rap/2.3/RC4-20140610-0925/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/rayo/3.10/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.scout.docx4j.core.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.rt.docx4j.client.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.docx4j.libs.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/docx4j/3.10/"/>
+    </location>
+
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/logging_bridge/3.10/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.rap.fileupload.feature.feature.group" version="0.0.0"/>
+
+      <repository id="rap_incubator_file_2.0" location="http://download.eclipse.org/rt/rap/incubator/2.0/fileupload/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.apache.commons.logging" version="1.1.1.v201101211721"/>
+      <unit id="org.apache.commons.logging.source" version="1.1.1.v201101211721"/>
+
+      <unit id="org.apache.httpcomponents.httpclient" version="4.2.6.v201311072007"/>
+      <unit id="org.apache.httpcomponents.httpclient.source" version="4.2.6.v201311072007"/>
+      <unit id="org.apache.httpcomponents.httpcore" version="4.2.5.v201311072007"/>
+      <unit id="org.apache.httpcomponents.httpcore.source" version="4.2.5.v201311072007"/>
+
+      <unit id="org.apache.commons.codec" version="1.6.0.v201305230611"/>
+      <unit id="org.apache.commons.codec.source" version="1.6.0.v201305230611"/>
+
+      <unit id="org.junit" version="4.11.0.v201303080030"/>
+      <unit id="org.junit.source" version="4.11.0.v201303080030"/>
+      <unit id="org.hamcrest.core" version="1.3.0.v201303031735"/>
+      <unit id="org.hamcrest.core.source" version="1.3.0.v201303031735"/>
+      <unit id="org.jsoup" version="1.7.2.v201411291515"/>
+      <unit id="com.thoughtworks.selenium" version="2.25.0.v201212071504"/>
+      <unit id="com.thoughtworks.selenium.source" version="2.25.0.v201212071504"/>
+      <unit id="com.google.guava" version="15.0.0.v201403281430"/>
+      <unit id="com.google.guava.source" version="15.0.0.v201403281430"/>
+
+      <repository id="orbit_R20150519210750" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20150519210750/repository"/>
+    </location>
+  </locations>
+</target>

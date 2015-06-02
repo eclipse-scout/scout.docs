@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: minifigcreator.shared
+Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.shared;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.minifigcreator.shared.Activator
+Export-Package: org.eclipsescout.demo.minifigcreator.shared,
+ org.eclipsescout.demo.minifigcreator.shared.minifig.part,
+ org.eclipsescout.demo.minifigcreator.shared.services.common.text,
+ org.eclipsescout.demo.minifigcreator.shared.services.lookup,
+ org.eclipsescout.demo.minifigcreator.shared.services.process
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;bundle-version="[3.9.0,4.0.0)";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.ui.swt;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.demo.minifigcreator.ui.swt.Activator
+Export-Package: org.eclipsescout.demo.minifigcreator.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
+ org.eclipsescout.demo.minifigcreator.ui.swt.application,
+ org.eclipsescout.demo.minifigcreator.ui.swt.application.menu,
+ org.eclipsescout.demo.minifigcreator.ui.swt.editor,
+ org.eclipsescout.demo.minifigcreator.ui.swt.perspective,
+ org.eclipsescout.demo.minifigcreator.ui.swt.views
+Require-Bundle: org.eclipsescout.demo.minifigcreator.client;visibility:=reexport,
+ org.eclipsescout.demo.minifigcreator.shared,
+ org.eclipse.scout.rt.ui.swt;bundle-version="[3.9.0,4.0.0)",
+ org.eclipse.scout.net;bundle-version="[3.9.0,4.0.0)",
+ org.eclipse.equinox.app,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

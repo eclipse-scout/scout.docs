@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipse.scout.tutorial.jaxws.ui.swing;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.tutorial.jaxws.ui.swing.Activator
+Bundle-ActivationPolicy: lazy
+Scout-Project: org.eclipse.scout.tutorial.jaxws
+Scout-Project-Alias: tutorial
+Require-Bundle: org.eclipse.scout.rt.ui.swing,
+ org.eclipse.scout.tutorial.jaxws.client;visibility:=reexport,
+ org.eclipse.scout.tutorial.jaxws.shared,
+ org.eclipse.scout.net
+Export-Package: org.eclipse.scout.tutorial.jaxws.ui.swing;uses:="org.eclipse.scout.rt.ui.swing,org.eclipse.scout.rt.client.session,org.osgi.framework"
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

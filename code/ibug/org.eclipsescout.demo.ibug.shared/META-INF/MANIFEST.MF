@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipsescout.demo.ibug.shared
+Bundle-SymbolicName: org.eclipsescout.demo.ibug.shared;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-Activator: org.eclipsescout.demo.ibug.shared.Activator
+Export-Package: org.eclipsescout.demo.ibug,
+ org.eclipsescout.demo.ibug.shared,
+ org.eclipsescout.demo.ibug.shared.services,
+ org.eclipsescout.demo.ibug.shared.services.common.text
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport,
+ com.bsiag.org.docx4j,
+ org.eclipse.scout.docx4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension id="app" name="Application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipsescout.demo.minicrm.ui.swing.SwingApplication"/>
+    </application>
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipsescout.demo.minicrm.ui.swing.app"
+          name="minicrm">
+       <property
+             name="appName"
+             value="minicrm">
+       </property>
+    </product>
+  </extension>
+</plugin>

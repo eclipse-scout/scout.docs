@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2015 BSI Business Systems Integration AG.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.html
+  
+  Contributors:
+      BSI Business Systems Integration AG - initial API and implementation
+-->
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipsescout.demo</groupId>
+    <artifactId>org.eclipsescout.demo.master</artifactId>
+    <version>3.10.1-SNAPSHOT</version>
+    <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
+  </parent>
+  
+  <groupId>org.eclipsescout.demo.ibug</groupId>
+  <artifactId>org.eclipsescout.demo.ibug.parent</artifactId>
+  <packaging>pom</packaging>
+  <name>ibug - parent</name>
+
+  <modules>
+    <module>../org.eclipsescout.demo.ibug.client</module>
+    <module>../org.eclipsescout.demo.ibug.client.mobile</module>
+    <module>../org.eclipsescout.demo.ibug.server</module>
+    <module>../org.eclipsescout.demo.ibug.server.product</module>
+    <module>../org.eclipsescout.demo.ibug.shared</module>
+    <module>../org.eclipsescout.demo.ibug.ui.rap</module>
+    <module>../org.eclipsescout.demo.ibug.ui.rap.product</module>
+    <module>../org.eclipsescout.demo.ibug.ui.swing</module>
+    <module>../org.eclipsescout.demo.ibug.ui.swing.product</module>
+    <module>../org.eclipsescout.demo.ibug.ui.swt</module>
+    <module>../org.eclipsescout.demo.ibug.ui.swt.product</module>
+  </modules>
+</project>

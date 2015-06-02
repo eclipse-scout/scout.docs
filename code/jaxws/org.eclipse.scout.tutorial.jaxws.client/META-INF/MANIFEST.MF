@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.scout.tutorial.jaxws.client
+Bundle-SymbolicName: org.eclipse.scout.tutorial.jaxws.client;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.tutorial.jaxws.client.Activator
+Export-Package: org.eclipse.scout.tutorial.jaxws.client,
+ org.eclipse.scout.tutorial.jaxws.client.ui.desktop,
+ org.eclipse.scout.tutorial.jaxws.client.ui.desktop.outlines,
+ org.eclipse.scout.tutorial.jaxws.client.ui.desktop.outlines.pages,
+ org.eclipse.scout.tutorial.jaxws.client.ui.forms
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.client;visibility:=reexport,
+ org.eclipse.scout.tutorial.jaxws.shared,
+ org.eclipse.scout.svg.client
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

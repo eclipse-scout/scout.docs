@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipse.scout.tutorial.jaxws.ui.swt;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.scout.tutorial.jaxws.ui.swt.Activator
+Export-Package: org.eclipse.scout.tutorial.jaxws.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
+ org.eclipse.scout.tutorial.jaxws.ui.swt.application,
+ org.eclipse.scout.tutorial.jaxws.ui.swt.application.menu,
+ org.eclipse.scout.tutorial.jaxws.ui.swt.editor,
+ org.eclipse.scout.tutorial.jaxws.ui.swt.perspective,
+ org.eclipse.scout.tutorial.jaxws.ui.swt.views
+Require-Bundle: org.eclipse.scout.tutorial.jaxws.client;visibility:=reexport,
+ org.eclipse.scout.tutorial.jaxws.shared,
+ org.eclipse.scout.rt.ui.swt,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.app,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

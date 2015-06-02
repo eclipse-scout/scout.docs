@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.scout.tutorial.jaxws.shared
+Bundle-SymbolicName: org.eclipse.scout.tutorial.jaxws.shared;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.tutorial.jaxws.shared.Activator
+Export-Package: org.eclipse.scout.tutorial.jaxws.shared,
+ org.eclipse.scout.tutorial.jaxws.shared.services.common.text,
+ org.eclipse.scout.tutorial.jaxws.shared.services.outline,
+ org.eclipse.scout.tutorial.jaxws.shared.services.process
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

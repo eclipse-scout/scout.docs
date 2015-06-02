@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.demo.ibug.ui.swing;singleton:=true
+Bundle-Version: 3.10.1.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.demo.ibug.ui.swing.Activator
+Export-Package: org.eclipsescout.demo.ibug.ui.swing;uses:="org.eclipse.scout.rt.ui.swing,org.eclipse.scout.rt.client.session,org.osgi.framework"
+Require-Bundle: org.eclipse.scout.rt.ui.swing,
+ org.eclipsescout.demo.ibug.client;visibility:=reexport,
+ org.eclipsescout.demo.ibug.shared,
+ org.eclipse.scout.net,
+ com.bsiag.scout.rt.ui.swing.rayo
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Scout-Project: org.eclipsescout.demo.ibug
+Scout-Project-Alias: ibug

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2015 BSI Business Systems Integration AG.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.html
+  
+  Contributors:
+      BSI Business Systems Integration AG - initial API and implementation
+-->
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipsescout.demo</groupId>
+    <artifactId>org.eclipsescout.demo.master</artifactId>
+    <version>3.10.1-SNAPSHOT</version>
+    <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
+  </parent>
+  
+  <groupId>org.eclipsescout.demo.widgets</groupId>
+  <artifactId>org.eclipsescout.demo.widgets.parent</artifactId>
+  <packaging>pom</packaging>
+  <name>widgets - parent</name>
+
+  <modules>
+    <module>../org.eclipsescout.demo.widgets-feature</module>
+    <module>../org.eclipsescout.demo.widgets.client</module>
+    <module>../org.eclipsescout.demo.widgets.client.mobile</module>
+    <module>../org.eclipsescout.demo.widgets.shared</module>
+    <module>../org.eclipsescout.demo.widgets.ui.rap</module>
+    <module>../org.eclipsescout.demo.widgets.ui.rap.product</module>
+    <module>../org.eclipsescout.demo.widgets.ui.swing</module>
+    <module>../org.eclipsescout.demo.widgets.ui.swing.rayo</module>    
+    <module>../org.eclipsescout.demo.widgets.ui.swing.product</module>
+    <module>../org.eclipsescout.demo.widgets.ui.swing.rayo.product</module>
+    <module>../org.eclipsescout.demo.widgets.ui.swt</module>
+    <module>../org.eclipsescout.demo.widgets.ui.swt.product</module>
+  </modules>
+</project>

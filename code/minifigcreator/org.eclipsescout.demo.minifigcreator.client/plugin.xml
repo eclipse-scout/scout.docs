@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minifigcreator.shared.services.process.IDesktopProcessService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minifigcreator.shared.services.lookup.IHeadLookupService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minifigcreator.shared.services.lookup.ITorsoLookupService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minifigcreator.shared.services.lookup.ILegsLookupService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minifigcreator.shared.services.process.IServerProcessService">
+      </proxy>
+   </extension>
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+   </extension>
+
+</plugin>
