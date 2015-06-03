@@ -1,0 +1,124 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Java Basics"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[appendix]
+[[apx-java_basics]]
+== Java Basics
+
+
+[[apx-javase_basics]]
+=== Java SE Basics
+
+TIP: The goal of this section is to provide the reader with a solid overview of the non-trivial
+    Java concepts relevant for scout applications and central aspects of the framework itself.
+    The focus of this section is on the Java Standard Edition (Java SE).
+    Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
+
+==== Learning Java
+
+To progam Scout applications you need to have a solid understanding of the Java language.
+Scout will only work for you if you have achieved a certain proficiency level in Java. 
+
+Luckily, free online tutorials to learn Java are offered in many places.
+A good starting point is the official Java documentation 
+site.footnote:[Official online Java tutorial: http://docs.oracle.com/javase/tutorial/].
+If you prefer to work with video tutorials we recommend "`Eclipse and Java for Total 
+Beginners`".footnote:[Eclipse and Java for Total Beginners: http://eclipsetutorial.sourceforge.net/totalbeginner.html], 
+although the installation used is somewhat out of date.
+As for printed books, we suggest to start with either "`Head First Java`"\cite{batessierra05} or "`Thinking in Java`"\cite{eckel06}.
+Highly recommended but slightly more advanced is "`Effective Java`"\cite{bloch08}.
+
+To solve really tricky Java problems there is often no way around the Java 
+specification.footnote:[The Java Language Specification http://docs.oracle.com/javase/specs/] itself.
+Just make sure to pick the right Java version for your context.
+
+==== Advanced Java SE Concepts
+
+  * say which non-trivial things are vital to good understanding
+  * threading
+  * generics
+  * annotations
+  
+==== JAR Files
+
+  * purpose
+  * directory structure
+  * example
+
+
+[[apx-javaee_basics]]
+=== Java EE Basics
+
+TIP: The goal of this section is to provide the reader with a solid overview of the non-trivial
+    Java enterprise concepts relevant for scout applications and central aspects of the framework itself. 
+    The focus of this section is on the Java Enterprise Edition (Java EE)
+    Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
+
+needs text
+
+  * maybe the same as for java foundation, maybe not
+  * jaas
+  * http comm
+  * servlet
+  * servlet filters
+
+==== Servlets
+
+A very comprehensive and detailed step to step description has been written by Chua Hock-Chuan.footnote:[
+Get Start with Java Servlet Programming: http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html.
+].
+
+may be found online do servlet stuff with annotations (JEE6) not JEE5?
+
+[[lst-tinyservlet.index_html, Listing Index.html]]
+[source,html]  
+.The [java]+index.html+ start page for the tiny servlet application.
+---- 
+include::{codedir}/tinyservlet/index.html[]
+----
+
+
+[[lst-tinyservlet.web_xml, Listing web.xml]]
+[source,xml]  
+.The [java]+web.xml+ file of the tiny servlet application.
+---- 
+include::{codedir}/tinyservlet/WEB-INF/web.xml[]
+----
+
+
+[[lst-tinyservlet.TinyServlet, Listing TinyServlet]]
+[source,java]  
+.The complete [java]+TinyServlet+ source code.
+---- 
+include::{codedir}/tinyservlet/WEB-INF/sources/TinyServlet.java[]
+----
+
+DONT include servlet jar inside of war file (tomcat doesn't like it)
+
+==== Servlet Filters
+
+hello world example (JEE6)
+
+==== WAR Files
+
+war file organisation: http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Create the hello world backend"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+The responsibility of the Scout server in our "`Hello World`" application is to provide an initial text content for the message field in the client's user interface.
+We implement this behaviour in the [java]+load+ method of the server's [java]+DesktopService+.
+An empty stub for the [java]+load+ method of the [java]+DesktopService+ service has already been created during the initial project creation step. 
+
+To navigate to the implementation of the desktop service in the Scout SDK, we first expand the blue top-level [node]_server_ node in the Scout Explorer.
+Below the server node, we then expand the [folder]_Services_ folder which shows the [element]_DesktopService_ element.
+Expanding this [element]_DesktopService_ node, the [java]+load+ method becomes visible as shown in <<img-helloworld_load_servicemethod>>.
+
+[[img-helloworld_load_servicemethod, Figure showing Server node]]
+.The Scout Explorer showing the blue server node expanded with the [folder]_Services_ folder. In this folder the [element]_load_ method of [element]_DesktopService_ is selected and its initial implementation is shown in the editor on the right side.
+image::{imgsdir}/sdk_server_desktopservice_load.png[]
+
+The [java]+DesktopService+ represents the server service corresponding to the [java]+DesktopForm+ on the client side.
+This initial setup represents Scout's default where client forms and server services typically come in pairs.
+Whenever the client's user interface displays a form to the user, the client connects to the server and calls the [java]+load+ method of the corresponding server service.
+We just need to add our business logic to the [java]+load+ method of the server's [java]+DesktopService+.
+
+According to the signature of the [java]+load+ method, a [java]+formData+ object is passed into this method that is then handed back in the return statement.
+To complete the implementation of the [java]+load+ method it is sufficient to assign the text 'hello world!' to the message field part of the form data.
+The complete implementation of the [java]+load+ method is provided in <<lst-helloworld.desktopservice.load>>.
+
+[[lst-helloworld.desktopservice.load, Listing load() implementation]]
+[source,java]
+.load() implementation in the DesktopService.
+----
+include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[tags=load]
+----
+<1> assign a value to the value holder part of the FormData corresponding to the message field
+
+With this last element we have completed the Scout "`Hello World`" application.

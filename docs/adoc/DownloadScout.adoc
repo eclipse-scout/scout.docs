@@ -1,0 +1,48 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "download and install scout"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+Before you download Scout make sure that you have a working Java Development Kit (JDK) of version 7 or 8.
+To download Eclipse Scout visit the official Eclipse download page.
+
+https://www.eclipse.org/downloads/
+
+The download page then looks as shown in <<img-scout_download>>.
+If the download page shows the wrong platform, manually select the correct platform in the dropdown list.
+
+[[img-scout_download, Figure 000]]
+.The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+image::{imgsdir}/scout_download.png[]
+
+The Eclipse Scout package is available in the form of a 32 bit and a 64 bit package as shown in<<img-scout_download>>. 
+To download the correct package, make sure to matche your JDK installation. 
+You can check your installation on the command line as follows.
+
+----
+console-prompt>java -version
+java version "1.7.0_55"
+Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
+----
+
+If the output explicitly mentions the 64 bit installation as shown in the example above, you have a 64 bit installation and you need to download the 64 bit Eclipse Scout package. 
+Otherwise, you have a 32 bit JDK installed and you need to pick the 32 bit package of Eclipse Scout.
+After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
+
+[[img-scout_download_mirror, Figure 000]]
+.Downloading the Scout package from a mirror.
+image::{imgsdir}/scout_download_mirror.png[]
+

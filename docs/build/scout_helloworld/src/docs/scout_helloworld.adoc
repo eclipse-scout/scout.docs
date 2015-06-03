@@ -1,0 +1,56 @@
+= The Scout "Hello World!"
+:doctype: article
+:author: Scout Team
+:email: scout@bsi-software.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+After installing the Eclipse Scout package you are now ready to implement your first Scout application. 
+
+== Create a Scout Project
+
+include::{mdledir}/CreateNewProject.adoc[]
+
+== Run the Application
+
+include::{mdledir}/RunTheApplication.adoc[]
+
+== Add the User Interface Widgets
+
+include::{mdledir}/HelloWorldFrontend.adoc[]
+
+== Implement the Server Service
+
+include::{mdledir}/HelloWorldBackend.adoc[]
+
+== Run the Final Application
+
+include::{mdledir}/HelloWorldRunTheFinalApplication.adoc[]
+
+== What's Next?
+
+Now that you have successfully created your first Scout application, you might want to learn more about Scout. 
+To gain experience with Scout, you can follow more tutorials and start to read in the Scout books.
+If you prefer ''Learning by doing'' browse the available Wiki tutorials and go for the subset that matches your interests.
+
+http://wiki.eclipse.org/Scout/Tutorial
+
+If you are interested in Scout's concepts, architecture and features you probably want to start reading. 
+For this, we are writing the Scout books. 
+
+http://wiki.eclipse.org/Scout/Book
+
+In case you should get stuck somewhere and need help, try to get answers by searching the web. 
+And if despite reasonable efforts this approach does not help, contact us on the forum. 
+Should you have solved issues on your own, please consider sharing your findings in the Scout forum as this can help other folks too. 
+
+http://www.eclipse.org/forums/eclipse.scout
+
+We wish you all the best on your journey with Scout and hope to hear from you in the Scout forum.
+

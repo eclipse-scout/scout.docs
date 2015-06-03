@@ -1,0 +1,45 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Create a new project"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+Start your Eclipse IDE and select an empty directory for your workspace. 
+This workspace directory will then hold all the project code for the "`Hello World`" application. 
+Once the Eclipse IDE is running it will show the Scout perspective with the {scoutExplorerView} and an empty {scoutPropView}.
+To create a new Scout project select the menu:New Scout Project...[] context menu as shown in <<img-sdk_create_new_scout_project>>.
+
+[[img-sdk_create_new_scout_project, Figure New Scout Project Menu]]
+.Create a new Scout project using the Scout SDK perspective.
+image::{imgsdir}/sdk_create_new_scout_project.png[]
+
+In the [wizard]_New Scout Project_ wizard enter a name for your Scout project. 
+As we are creating a "`Hello World`" application, use [java]+org.eclipsescout.helloworld+ for the [field]_Project Name_ field according to <<img-sdk_new_project_wizard>>.
+Then, click the btn:[Finish] button to let the Scout SDK create the initial project code for you.
+
+[[img-sdk_new_project_wizard, Figure New Scout Project Wizard]]
+.The new Scout project wizard.
+image::{imgsdir}/sdk_new_project_2.png[]
+
+Once the initial project code is built, the Scout SDK displays the application model in the _Scout Explorer_ as shown in <<img-sdk_initial_helloworld_project>>.
+This model is visually presented as a tree structure covering both the client and the server part of the application.
+The Scout Explorer view on the left hand side displays the top level elements of the complete Scout application.
+Under the orange node the Scout client components are listed. 
+Components that are needed in both the Scout client and the Scout server are collected under the green node.
+And the Scout server components are listed below the blue node in the Scout Explorer view.
+
+[[img-sdk_initial_helloworld_project, Figure Representation of the Hello World Application]]
+.The Scout SDK showing the tree representation of our "`Hello World`" application in the Scout Explorer. The Scout Object Properties contain the product launchers for the server and the available clients.
+image::{imgsdir}/sdk_initial_helloworld_project.png[]
+

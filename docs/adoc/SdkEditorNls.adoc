@@ -1,0 +1,39 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - NLS"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+===== Open the NLS Editor
+
+include::{mdledir}/SdkEditorNls_open.adoc[]
+
+===== Description of the NLS Editor
+
+include::{mdledir}/SdkEditorNls_figure.adoc[]
+
+In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
+This opens an editor where the text can be changed to the desired value.
+
+* Refresh: 
+* Show NLS entry usage:
+* New entry...: this will open the 
+* New language...
+* Import...
+* Export...
+
+
+To add a new translated text, the corresponding dialog can be opened by clicking on the button with the '`T`' icon next to the 'New language' button (shown in <<img-nls_editor>>).
+
+

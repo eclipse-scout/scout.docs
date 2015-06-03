@@ -1,0 +1,70 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "download and install scout"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation of version 7 or 8.
+To download the Eclipse Scout package visit the official Eclipse download page as shown in <<img-scout_download>>.
+
+[[img-scout_download, Figure 000]]
+.The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+image::{imgsdir}/scout_download.png[]
+
+If the download page shows the wrong platform, manually select the correct platform in the dropdown list.
+As shown in <<img-scout_download>>, the Scout package is available as a 32 bit and a 46 bit package. 
+Make sure to pick the package that matches your JDK installation. 
+You can check your installation on the command line as follows.
+
+----
+console-prompt>java -version
+java version "1.7.0_55"
+Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
+----
+
+If the output explicitly mentions the 64 bit installation as shown above, you have a 64 bit installation. 
+Otherwise, you have a 32 bit JDK installed.
+Now you can select the correct Scout package from the Eclipse download site. 
+After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
+
+[[img-scout_download_mirror, Figure 000]]
+.Downloading the Scout package from a mirror.
+image::{imgsdir}/scout_download_mirror.png[]
+
+As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice.
+Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the `eclipse.exe` file on a Windows plattform. 
+Starting the Eclipse executable brings up the workspace launcher as shown in <<img-scout_start>>.
+
+[[img-scout_start, Figure 000]]
+.Starting the Eclipse Scout package and selecting an empty workspace.
+image::{imgsdir}/scout_startup_select_workspace.png[]
+
+Into the [field]_Workspace_ field you enter an empty target directory for your first Scout project. 
+After clicking the btn:[Ok] button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. 
+When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <<img-scout_welcome>>. 
+
+[[img-scout_welcome, Figure 000]]
+.Eclipse Scout welcome screen.
+image::{imgsdir}/scout_startup_welcome.png[]
+
+To close the welcome page and open the Scout perspective in the Eclipse IDE click on the [icon]_Workbench_ icon. 
+As a result the empty Scout perspective is displayed according to <<img-scout_perspective>>. 
+
+[[img-scout_perspective, Figure 000]]
+.Eclipse Scout started in the Scout SDK perspective. 
+image::{imgsdir}/scout_startup_scout_explorer.png[]
+
+Congratulations, you just have successfully completed the Eclipse Scout installation!
+

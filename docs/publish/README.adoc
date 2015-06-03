@@ -1,0 +1,125 @@
+:taskdir: org.eclipse.scout.docs.publish/src/org/eclipse/scout/docs/publish/task
+
+= Scout Docs - Publish
+
+== Description
+
+To work around some of the Asciidoctor limitations, the `org.eclipse.scout.docs.publish` contains some tasks for publishing the documents.
+
+=== Noticeable features:
+
+* Delivering resources (like images and css) in a subfolder near the final HTML page (and modify the path to this resource in the HTML file).
+* Building a `toc.xml` file for the Eclipse Help output
+* Prepare a Zip of the HTML output.
+
+=== Quick overview
+
+The tasks are written in Java.
+They are packaged as an `eclipse-test-plugin` and built with maven and tycho.
+To each desired output platform corresponds a JUnit Class.
+
+== Run the tasks
+
+Executing the task is simple: run maven in the folder of the test plugin.
+
+ cd org.eclipse.scout.docs.publish
+ mvn
+
+The prerequisite is to have built the file with asciidoctor.
+See link:../build[build folder]
+
+== Output platforms
+=== Eclipse Help
+This task prepares the "Eclipse Scout User Guide" delivered as part of the Scout SDK.
+
+Corresponding Java class: link:{taskdir}/PublishToEclipseHelpTest.java[PublishToEclipseHelpTest.java]
+
+Output:
+
+    target
+    \---published-docs
+        \---scout-sdk-help
+            |   toc.xml
+            |   
+            \---html
+                |   <html files>
+                |   
+                \---images
+                        {image files}
+
+This output needs to be synced with the `org.eclipse.scout.sdk.help` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository]
+
+=== Eclipse.org/scout website
+This task prepares pages published on the link:http://www.eclipse.org/scout[Scout Homepage]:
+
+* link:http://www.eclipse.org/scout/scout_install.html[]
+* link:http://www.eclipse.org/scout/scout_helloworld.html[]
+
+Corresponding Java class: link:{taskdir}/PublishToWwwScoutTest.java[PublishToWwwScoutTest.java]
+
+Output:
+
+    target
+    \---published-docs
+        \---eclipse.org-scout
+            |   scout_helloworld.html
+            |   scout_install.html
+            |   
+            \---images
+                    {image files}
+
+This output needs to be synced with the root of the in the link:http://git.eclipse.org/c/www.eclipse.org/scout.git[www.eclipse.org/scout repository]
+
+=== Documentation for download
+This task prepares documentation artifacts ready for downloads.
+
+Corresponding Java class link:{taskdir}/PublishDownloadsTest.java[PublishDownloadsTest.java]
+
+Output:
+
+    target
+    \---published-docs
+        \---downloads
+            +---article_helloworld
+            |   |   scout_helloworld.pdf
+            |   |   scout_helloworld.zip
+            |   |   
+            |   \---scout_helloworld
+            |       |   scout_helloworld.html
+            |       |   
+            |       \---images
+            |               {image files}
+            |               
+            +---article_install
+            |   |   scout_install.pdf
+            |   |   scout_install.zip
+            |   |   
+            |   \---scout_install
+            |       |   scout_install.html
+            |       |   
+            |       \---images
+            |               {image files}
+            |               
+            +---book_scout_frontend
+            |   |   scout_frontend.pdf
+            |   |   scout_frontend.zip
+            |   |   
+            |   \---scout_frontend
+            |       |   scout_frontend.html
+            |       |   
+            |       \---images
+            |               {image files}
+            |               
+            \---book_scout_intro
+                |   scout_intro.pdf
+                |   scout_intro.zip
+                |   
+                \---scout_intro
+                    |   scout_intro.html
+                    |   
+                    \---images
+                            {image files}
+
+This output is at the moment continuously published on a server hosted by BSI:
+
+http://tools.bsi-software.com/scoutbook/

@@ -1,0 +1,15 @@
+=== Scout Views
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+The Scout SDK provides following Views:
+
+* <<sdk_view_explorer.adoc#, Scout Explorer View>>
+* <<sdk_view_object_properties.adoc#, Scout Object Properties View>>

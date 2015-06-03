@@ -1,0 +1,8 @@
+scout_user_guide.html
+tutorial.html
+tutorial_helloworld.html
+sdk.html
+sdk_perspective.html
+sdk_view.html
+sdk_view_explorer.html
+sdk_view_object_properties.html
