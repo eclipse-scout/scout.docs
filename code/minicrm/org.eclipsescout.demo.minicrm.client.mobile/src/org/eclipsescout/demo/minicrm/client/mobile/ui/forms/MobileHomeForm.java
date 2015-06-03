@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 import org.eclipse.scout.rt.extension.client.ui.form.fields.button.AbstractExtensibleButton;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -59,13 +59,13 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
   }
 
   @Override
-  protected boolean getConfiguredFooterVisible() {
-    return true;
+  protected String getConfiguredTitle() {
+    return TEXTS.get("MobileOutlineChooserTitle");
   }
 
   @Override
-  protected String getConfiguredTitle() {
-    return TEXTS.get("MobileOutlineChooserTitle");
+  protected boolean getConfiguredFooterVisible() {
+    return true;
   }
 
   public void startView() throws ProcessingException {
@@ -102,7 +102,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
     }
 
     @Order(10.0)
-    public class OutlinesTableField extends AbstractTableField<Table> {
+    public class OutlinesTableField extends AbstractArrayTableField<Table> {
 
       @Override
       protected int getConfiguredGridH() {
@@ -146,11 +146,6 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         }
 
         @Override
-        protected boolean execIsAutoCreateTableRowForm() {
-          return false;
-        }
-
-        @Override
         protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
           if (CollectionUtility.hasElements(rows)) {
             IOutline outline = getOutlineColumn().getValue(CollectionUtility.firstElement(rows));
@@ -158,6 +153,11 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
             getDesktop().removeForm(MobileHomeForm.this);
             clearSelectionDelayed();
           }
+        }
+
+        @Override
+        protected boolean execIsAutoCreateTableRowForm() {
+          return false;
         }
 
         public LabelColumn getLabelColumn() {

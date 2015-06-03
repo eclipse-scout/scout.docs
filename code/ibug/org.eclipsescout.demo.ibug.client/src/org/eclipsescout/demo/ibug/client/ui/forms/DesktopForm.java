@@ -24,7 +24,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.basic.table.AbstractExtensibleTable;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -167,7 +167,7 @@ public class DesktopForm extends AbstractForm {
       }
 
       @Order(30.0)
-      public class BugsField extends AbstractTableField<BugsField.Table> {
+      public class BugsField extends AbstractArrayTableField<BugsField.Table> {
 
         @Override
         protected int getConfiguredGridH() {

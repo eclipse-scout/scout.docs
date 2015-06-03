@@ -21,7 +21,6 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.StatusForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm;
 
 public class FormLookupCall extends LocalLookupCall<IPageForm> {
@@ -31,10 +30,9 @@ public class FormLookupCall extends LocalLookupCall<IPageForm> {
   @Override
   protected List<ILookupRow<IPageForm>> execCreateLookupRows() throws ProcessingException {
     List<ILookupRow<IPageForm>> rows = new ArrayList<ILookupRow<IPageForm>>();
-    rows.add(new LookupRow<IPageForm>(new SmartFieldForm(), TEXTS.get("SmartField")));
-    rows.add(new LookupRow<IPageForm>(new StatusForm(), TEXTS.get("Status")));
-    rows.add(new LookupRow<IPageForm>(new ImageFieldForm(), TEXTS.get("ImageField")));
     rows.add(new LookupRow<IPageForm>(new StringFieldForm(), TEXTS.get("StringField")));
+    rows.add(new LookupRow<IPageForm>(new SmartFieldForm(), TEXTS.get("SmartField")));
+    rows.add(new LookupRow<IPageForm>(new ImageFieldForm(), TEXTS.get("ImageField")));
     return rows;
   }
 }

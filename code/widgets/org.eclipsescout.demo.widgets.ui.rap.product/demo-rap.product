@@ -13,7 +13,7 @@
       <vmArgs>-Xms32m
 -Xmx512m
 -XX:MaxPermSize=256m
-</vmArgs>
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -73,8 +73,8 @@
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.rap.addons.filedialog"/>
-      <plugin id="org.eclipse.rap.addons.fileupload"/>
+      <plugin id="org.eclipse.rap.filedialog"/>
+      <plugin id="org.eclipse.rap.fileupload"/>
       <plugin id="org.eclipse.rap.jface"/>
       <plugin id="org.eclipse.rap.jface.databinding"/>
       <plugin id="org.eclipse.rap.rwt"/>
@@ -92,7 +92,6 @@
       <plugin id="org.eclipse.scout.rt.servicetunnel"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.rt.ui.rap"/>
-      <plugin id="org.eclipse.scout.rt.ui.rap.incubator.filechooser"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.mobile"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo.mobile" fragment="true"/>
@@ -103,7 +102,9 @@
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.widgets.client"/>
       <plugin id="org.eclipsescout.demo.widgets.client.mobile"/>
+      <plugin id="org.eclipsescout.demo.widgets.client.old"/>
       <plugin id="org.eclipsescout.demo.widgets.shared"/>
+      <plugin id="org.eclipsescout.demo.widgets.shared.old"/>
       <plugin id="org.eclipsescout.demo.widgets.ui.rap"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>

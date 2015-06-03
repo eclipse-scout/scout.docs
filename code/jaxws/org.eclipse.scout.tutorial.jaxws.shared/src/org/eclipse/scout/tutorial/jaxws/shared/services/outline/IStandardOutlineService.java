@@ -19,11 +19,11 @@ public interface IStandardOutlineService extends IService {
    * @return
    * @throws ProcessingException
    */
-  Object[][] getCompanyTableData() throws ProcessingException;
+  CompanyTablePageData getCompanyTablePageData() throws ProcessingException;
 
   /**
    * @return
    * @throws ProcessingException
    */
-  Object[][] getWsLogTableData() throws ProcessingException;
+  WSLogTablePageData getWsLogTablePageData() throws ProcessingException;
 }

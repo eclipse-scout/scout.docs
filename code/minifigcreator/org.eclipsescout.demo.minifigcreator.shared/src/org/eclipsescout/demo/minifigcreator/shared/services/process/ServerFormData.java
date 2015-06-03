@@ -12,6 +12,7 @@ package org.eclipsescout.demo.minifigcreator.shared.services.process;
 
 import javax.annotation.Generated;
 
+import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.tablefield.AbstractTableFieldData;
 import org.eclipsescout.demo.minifigcreator.shared.minifig.part.Part;
@@ -34,6 +35,7 @@ public class ServerFormData extends AbstractFormData {
     return getFieldByClass(Table.class);
   }
 
+  @ClassId("SERVFORM_TABLE_TBLFLD-formdata")
   public static class Table extends AbstractTableFieldData {
 
     private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -39,6 +39,7 @@ import org.eclipse.scout.tutorial.jaxws.client.ui.forms.CompanyForm.MainBox.Volu
 import org.eclipse.scout.tutorial.jaxws.shared.services.process.CompanyFormData;
 import org.eclipse.scout.tutorial.jaxws.shared.services.process.ICompanyProcessService;
 
+@SuppressWarnings("deprecation")
 @FormData(value = CompanyFormData.class, sdkCommand = SdkCommand.CREATE)
 public class CompanyForm extends AbstractForm {
 

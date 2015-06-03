@@ -10,10 +10,12 @@
    </configIni>
 
    <launcherArgs>
-      <programArgsMac>--launcher.secondThread</programArgsMac>
+      <programArgsMac>--launcher.secondThread
+      </programArgsMac>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m</vmArgs>
+-XX:MaxPermSize=256m
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -48,7 +50,6 @@
       <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.io"/>
       <plugin id="org.apache.commons.logging"/>
-      <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.xmlgraphics"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.jobs"/>
@@ -60,6 +61,7 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
       <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.scout.commons"/>
@@ -79,9 +81,12 @@
       <plugin id="org.eclipse.scout.svg.ui.swing"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.widgets.client"/>
+      <plugin id="org.eclipsescout.demo.widgets.client.old"/>
       <plugin id="org.eclipsescout.demo.widgets.shared"/>
+      <plugin id="org.eclipsescout.demo.widgets.shared.old"/>
       <plugin id="org.eclipsescout.demo.widgets.ui.swing"/>
       <plugin id="org.eclipsescout.demo.widgets.ui.swing.rayo" fragment="true"/>
       <plugin id="org.w3c.css.sac"/>

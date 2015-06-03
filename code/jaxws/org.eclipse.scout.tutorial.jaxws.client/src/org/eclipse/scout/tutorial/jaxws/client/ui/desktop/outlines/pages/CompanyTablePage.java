@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -26,8 +27,10 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipse.scout.tutorial.jaxws.client.ui.forms.CompanyForm;
+import org.eclipse.scout.tutorial.jaxws.shared.services.outline.CompanyTablePageData;
 import org.eclipse.scout.tutorial.jaxws.shared.services.outline.IStandardOutlineService;
 
+@PageData(CompanyTablePageData.class)
 public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Table> {
 
   @Override
@@ -36,9 +39,8 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
   }
 
   @Override
-  protected Object[][] execLoadTableData(SearchFilter filter) throws ProcessingException {
-    return SERVICES.getService(IStandardOutlineService.class).getCompanyTableData();
-
+  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+    importPageData(SERVICES.getService(IStandardOutlineService.class).getCompanyTablePageData());
   }
 
   @Order(10.0)

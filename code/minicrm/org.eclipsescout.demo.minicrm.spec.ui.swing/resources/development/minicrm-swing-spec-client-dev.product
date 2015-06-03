@@ -37,7 +37,7 @@
 
    <plugins>
       <plugin id="javax.xml"/>
-      <plugin id="jre16.fragment" fragment="true"/>
+      <plugin id="jre17.fragment" fragment="true"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>

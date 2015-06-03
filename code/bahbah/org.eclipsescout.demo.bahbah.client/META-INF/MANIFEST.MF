@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.bahbah.client
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.client;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.bahbah.client.Activator
 Export-Package: org.eclipsescout.demo.bahbah.client,
  org.eclipsescout.demo.bahbah.client.services,
@@ -14,5 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.client;visibility:=reexport,
  org.eclipsescout.demo.bahbah.shared,
  org.eclipse.scout.rt.extension.client
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

@@ -39,8 +39,6 @@ public class AdministrationOutline extends AbstractOutline {
 
   @Override
   protected void execInitTree() throws ProcessingException {
-    setVisible(UserAgentUtility.isDesktopDevice() &&
-        (ACCESS.check(new CreateUserPermission()) || ACCESS.check(new DeleteUserPermission()) ||
-            ACCESS.check(new ResetPasswordPermission()) || ACCESS.check(new UpdateUserPermission())));
+    setVisible(UserAgentUtility.isDesktopDevice() && (ACCESS.check(new CreateUserPermission()) || ACCESS.check(new DeleteUserPermission()) || ACCESS.check(new ResetPasswordPermission()) || ACCESS.check(new UpdateUserPermission())));
   }
 }

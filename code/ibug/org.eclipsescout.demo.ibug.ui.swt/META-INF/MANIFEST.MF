@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: My Application
 Bundle-SymbolicName: org.eclipsescout.demo.ibug.ui.swt;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.ibug.ui.swt.Activator
 Export-Package: org.eclipsescout.demo.ibug.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
@@ -19,5 +19,5 @@ Require-Bundle: org.eclipsescout.demo.ibug.client;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.views
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

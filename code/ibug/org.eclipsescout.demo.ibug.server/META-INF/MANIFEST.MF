@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.ibug.server
 Bundle-SymbolicName: org.eclipsescout.demo.ibug.server;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.ibug.server.Activator
 Export-Package: org.eclipsescout.demo.ibug.server,
@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.jdbc.derby10,
  org.eclipse.scout.jaxws216,
  org.jsoup;bundle-version="1.6.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.servlet;version="2.4.0",
  javax.servlet.http;version="2.4.0"
 Bundle-ActivationPolicy: lazy

@@ -2,19 +2,19 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test Application Swing
 Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.client.testapp.swing;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.minifigcreator.client.testapp.swing.Activator
 Export-Package: org.eclipsescout.demo.minifigcreator.client.testapp.swing
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.scout.rt.client;bundle-version="[4.2.0,4.3.0)";visibility:=reexport,
- org.eclipse.scout.rt.testing.shared;bundle-version="[4.2.0,4.3.0)",
- org.eclipse.scout.rt.testing.ui.swing;bundle-version="[4.2.0,4.3.0)",
- org.eclipse.scout.rt.ui.swing;bundle-version="[4.2.0,4.3.0)",
- org.eclipse.scout.rt.testing.client;bundle-version="[4.2.0,4.3.0)",
+ org.eclipse.scout.rt.client;bundle-version="[5.0.0,5.1.0)";visibility:=reexport,
+ org.eclipse.scout.rt.testing.shared;bundle-version="[5.0.0,5.1.0)",
+ org.eclipse.scout.rt.testing.ui.swing;bundle-version="[5.0.0,5.1.0)",
+ org.eclipse.scout.rt.ui.swing;bundle-version="[5.0.0,5.1.0)",
+ org.eclipse.scout.rt.testing.client;bundle-version="[5.0.0,5.1.0)",
  org.eclipsescout.demo.minifigcreator.shared,
  org.eclipsescout.demo.minifigcreator.client,
  com.bsiag.scout.rt.ui.swing.rayo
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: org.junit;version="[4.9.0,5.0.0)",
  org.junit.runner;version="[4.9.0,5.0.0)",

@@ -143,20 +143,11 @@ public class DesktopForm extends AbstractForm {
   }
 
   protected void updateImage() {
-    getPreviewField().setImageId(PartUtility.calculateImageId(
-        getHeadField().getValue(),
-        getTorsoField().getValue(),
-        getLegsField().getValue()
-        ));
+    getPreviewField().setImageId(PartUtility.calculateImageId(getHeadField().getValue(), getTorsoField().getValue(), getLegsField().getValue()));
   }
 
   protected void updateSummary() {
-    getSummaryField().setValue(PartUtility.calculateSummary(
-        getNameField().getValue(),
-        getHeadField().getValue(),
-        getTorsoField().getValue(),
-        getLegsField().getValue()
-        ));
+    getSummaryField().setValue(PartUtility.calculateSummary(getNameField().getValue(), getHeadField().getValue(), getTorsoField().getValue(), getLegsField().getValue()));
   }
 
   public void reloadForm() throws ProcessingException {

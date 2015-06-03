@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.ibug.client
 Bundle-SymbolicName: org.eclipsescout.demo.ibug.client;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.ibug.client.Activator
 Export-Package: org.eclipsescout.demo.ibug.client,
  org.eclipsescout.demo.ibug.client.ui.desktop,
@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bsiag.org.docx4j,
  org.eclipse.scout.docx4j,
  org.eclipse.scout.rt.docx4j.client
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.w3c.dom.svg;version="[1.1.0,2.0.0)"
 Bundle-ActivationPolicy: lazy

@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Client UiTest
 Bundle-SymbolicName: org.eclipsescout.demo.minifigcreator.client.uitest
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Fragment-Host: org.eclipsescout.demo.minifigcreator.client
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.scout.rt.testing.client,
  org.eclipse.scout.rt.testing.shared
 Import-Package: org.junit;version="[4.9.0,5.0.0)",

@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 import org.eclipse.scout.rt.extension.client.ui.form.fields.button.AbstractExtensibleButton;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -67,6 +67,10 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
     return true;
   }
 
+  public void startView() throws ProcessingException {
+    startInternal(new ViewHandler());
+  }
+
   public LogoutButton getLogoutButton() {
     return getFieldByClass(LogoutButton.class);
   }
@@ -97,15 +101,20 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
     }
 
     @Order(10.0)
-    public class OutlinesTableField extends AbstractTableField<OutlinesTableField.Table> {
+    public class OutlinesTableField extends AbstractArrayTableField<OutlinesTableField.Table> {
+
+      @Override
+      protected int getConfiguredGridH() {
+        return 2;
+      }
+
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
 
       @Order(10.0)
       public class Table extends AbstractMobileTable {
-
-        @Override
-        protected boolean execIsAutoCreateTableRowForm() {
-          return false;
-        }
 
         @Override
         protected boolean getConfiguredAutoDiscardOnDelete() {
@@ -113,13 +122,13 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         }
 
         @Override
-        protected String getConfiguredDefaultIconId() {
-          return AbstractIcons.TreeNode;
+        protected boolean getConfiguredAutoResizeColumns() {
+          return true;
         }
 
         @Override
-        protected boolean getConfiguredAutoResizeColumns() {
-          return true;
+        protected String getConfiguredDefaultIconId() {
+          return AbstractIcons.TreeNode;
         }
 
         @Override
@@ -145,6 +154,11 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
           }
         }
 
+        @Override
+        protected boolean execIsAutoCreateTableRowForm() {
+          return false;
+        }
+
         public LabelColumn getLabelColumn() {
           return getColumnSet().getColumnByClass(LabelColumn.class);
         }
@@ -166,16 +180,6 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         public class LabelColumn extends AbstractStringColumn {
         }
       }
-
-      @Override
-      protected boolean getConfiguredLabelVisible() {
-        return false;
-      }
-
-      @Override
-      protected int getConfiguredGridH() {
-        return 2;
-      }
     }
 
     @Order(20.0)
@@ -191,10 +195,15 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         ClientJob.getCurrentSession().stopSession();
       }
     }
-
   }
 
   public class ViewHandler extends AbstractFormHandler {
+
+    @Override
+    protected void execFinally() throws ProcessingException {
+      OutlinesTableField.Table table = getOutlinesTableField().getTable();
+      table.discardAllRows();
+    }
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -207,15 +216,5 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         }
       }
     }
-
-    @Override
-    protected void execFinally() throws ProcessingException {
-      OutlinesTableField.Table table = getOutlinesTableField().getTable();
-      table.discardAllRows();
-    }
-  }
-
-  public void startView() throws ProcessingException {
-    startInternal(new ViewHandler());
   }
 }

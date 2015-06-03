@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.service.SERVICES;
@@ -118,7 +118,7 @@ public class ChatForm extends AbstractForm {
     }
 
     @Order(20.0)
-    public class HistoryField extends AbstractTableField<HistoryField.Table> {
+    public class HistoryField extends AbstractArrayTableField<HistoryField.Table> {
 
       private final Integer MESSAGE_TYPE_LOCAL = 1;
       private final Integer MESSAGE_TYPE_REMOTE = 2;

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
+import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.ValidationRule;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
@@ -83,6 +84,7 @@ public class DesktopFormData extends AbstractFormData {
     return getFieldByClass(Torso.class);
   }
 
+  @ClassId("DSKTFORM_HEAD_SMRFLD-formdata")
   public static class Head extends AbstractValueFieldData<Part> {
 
     private static final long serialVersionUID = 1L;
@@ -102,6 +104,7 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
+  @ClassId("DSKTFORM_LEGS_SMRFLD-formdata")
   public static class Legs extends AbstractValueFieldData<Part> {
 
     private static final long serialVersionUID = 1L;
@@ -121,6 +124,7 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
+  @ClassId("DSKTFORM_NAME_TXTFLD-formdata")
   public static class Name extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
@@ -163,6 +167,7 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
+  @ClassId("DSKTFORM_SUMMARY_TXTFLD-formdata")
   public static class Summary extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
@@ -180,6 +185,7 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
+  @ClassId("DSKTFORM_TORSO_SMRFLD-formdata")
   public static class Torso extends AbstractValueFieldData<Part> {
 
     private static final long serialVersionUID = 1L;

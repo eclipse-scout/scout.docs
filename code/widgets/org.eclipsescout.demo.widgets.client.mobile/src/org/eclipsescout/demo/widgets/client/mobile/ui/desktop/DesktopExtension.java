@@ -17,19 +17,12 @@ import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.mobile.ui.forms.MobileHomeForm;
 
 public class DesktopExtension extends AbstractDesktopExtension {
+
   private MobileHomeForm m_homeForm;
   private boolean m_active;
 
   public DesktopExtension() {
     setActive(!UserAgentUtility.isDesktopDevice());
-  }
-
-  public boolean isActive() {
-    return m_active;
-  }
-
-  public void setActive(boolean active) {
-    m_active = active;
   }
 
   @Override
@@ -55,5 +48,13 @@ public class DesktopExtension extends AbstractDesktopExtension {
       m_homeForm.doClose();
     }
     return ContributionCommand.Continue;
+  }
+
+  public boolean isActive() {
+    return m_active;
+  }
+
+  public void setActive(boolean active) {
+    m_active = active;
   }
 }

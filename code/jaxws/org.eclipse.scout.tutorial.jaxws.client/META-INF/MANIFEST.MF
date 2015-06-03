@@ -13,5 +13,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.client;visibility:=reexport,
  org.eclipse.scout.tutorial.jaxws.shared,
  org.eclipse.scout.svg.client
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

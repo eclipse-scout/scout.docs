@@ -10,5 +10,5 @@ Export-Package: org.eclipse.scout.tutorial.jaxws.shared,
  org.eclipse.scout.tutorial.jaxws.shared.services.process
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.shared;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

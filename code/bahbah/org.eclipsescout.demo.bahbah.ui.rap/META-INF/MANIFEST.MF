@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RAP Bundle
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.ui.rap;singleton:=true
-Bundle-Version: 4.2.0.qualifier
+Bundle-Version: 5.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.bahbah.ui.rap.Activator
 Bundle-Vendor: Eclipse Scout Project
 Export-Package: org.eclipsescout.demo.bahbah.ui.rap
@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.ui.rap.mobile,
  org.eclipse.scout.rt.extension.client,
  org.eclipse.scout.rt.client.mobile
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.servlet;version="2.4.0",
  javax.servlet.http;version="2.4.0"

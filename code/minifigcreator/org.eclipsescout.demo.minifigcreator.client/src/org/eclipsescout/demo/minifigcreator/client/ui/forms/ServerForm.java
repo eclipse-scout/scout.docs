@@ -30,7 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minifigcreator.client.ui.forms.ServerForm.MainBox.CancelButton;
@@ -125,7 +125,7 @@ public class ServerForm extends AbstractForm {
 
       @Order(20.0)
       @ClassId("SERVFORM_TABLE_TBLFLD")
-      public class TableField extends AbstractTableField<TableField.Table> {
+      public class TableField extends AbstractArrayTableField<TableField.Table> {
 
         @Override
         protected int getConfiguredGridH() {

@@ -10,35 +10,34 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
-import java.util.Set;
-import java.util.regex.Pattern;
+import java.util.List;
 
-import org.eclipse.scout.commons.CollectionUtility;
-import org.eclipse.scout.commons.LocaleThreadLocal;
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
-import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTree;
 import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTreeNode;
+import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
-import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNodeFilter;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
+import org.eclipse.scout.rt.extension.client.ui.basic.tree.AbstractExtensibleTree;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.GroupBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.GroupBox.SecondTreeField;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.GroupBox.SecondTreeSearchField;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.GroupBox.TreeField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.MenuContentField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.TreeEntriesField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.TreeField;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractUserTreeField;
+import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
 public class TreeFieldForm extends AbstractForm implements IPageForm {
 
@@ -66,20 +65,34 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  public GroupBox getGroupBox() {
-    return getFieldByClass(GroupBox.class);
+  public ConfigurationBox getConfigurationBox() {
+    return getFieldByClass(ConfigurationBox.class);
+  }
+
+  public DefaultField getDefaultField() {
+    return getFieldByClass(DefaultField.class);
+  }
+
+  public ExamplesBox getExamplesBox() {
+    return getFieldByClass(ExamplesBox.class);
   }
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
-  public SecondTreeField getSecondTreeField() {
-    return getFieldByClass(SecondTreeField.class);
+  /**
+   * @return the MenuContentField
+   */
+  public MenuContentField getMenuContentField() {
+    return getFieldByClass(MenuContentField.class);
   }
 
-  public SecondTreeSearchField getSecondTreeSearchField() {
-    return getFieldByClass(SecondTreeSearchField.class);
+  /**
+   * @return the TreeEntriesField
+   */
+  public TreeEntriesField getTreeEntriesField() {
+    return getFieldByClass(TreeEntriesField.class);
   }
 
   public TreeField getTreeField() {
@@ -89,70 +102,155 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
+    /**
+     * recursive function to convert codes (enumerations) into an abstract tree.
+     */
+    private void addCodesToTree(List<? extends ICode<Long>> list, ITreeNode parent, AbstractExtensibleTree tree) {
+      // create a tree node for each code
+      for (final ICode<Long> code : list) {
+        AbstractTreeNode node = new AbstractTreeNode() {
+          @Override
+          protected void execDecorateCell(Cell cell) {
+            cell.setIconId(code.getIconId());
+            cell.setText(code.getText());
+            cell.setTooltipText(code.getTooltipText());
+          }
+        };
+
+        // add the tree node to the tree
+        tree.addChildNode(parent, node);
+
+        // recursively add child nodes (if any)
+        List<? extends ICode<Long>> children = code.getChildCodes();
+        if (children.size() > 0) {
+          addCodesToTree(children, node, tree);
+        }
+      }
+    }
+
+    /**
+     * recursive function to mark tree nodes without children as leaf nodes
+     */
+    private void updateLeafNodes(ITreeNode node) {
+      List<ITreeNode> children = node.getChildNodes();
+      node.setLeaf(children.size() == 0);
+
+      for (ITreeNode child : children) {
+        updateLeafNodes(child);
+      }
+    }
+
     @Order(10.0)
-    public class GroupBox extends AbstractGroupBox {
+    public class ExamplesBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Examples");
+      }
 
       @Order(10.0)
-      public class SecondTreeSearchField extends AbstractStringField implements ITreeNodeFilter {
-
-        private Pattern m_lowercaseFilterPattern;
+      public class DefaultField extends AbstractTreeField {
 
         @Override
-        protected int getConfiguredGridX() {
-          return 1;
-        }
-
-        @Override
-        protected int getConfiguredGridY() {
-          return 0;
+        protected int getConfiguredGridH() {
+          return 4;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return "Search";//TODO
+          return TEXTS.get("Default");
         }
 
         @Override
-        public int getConfiguredLabelPosition() {
-          return IFormField.LABEL_POSITION_ON_FIELD;
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("TreeContextMenuTooltip");
         }
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
+        protected void execInitField() throws ProcessingException {
+          IndustryICBCodeType icb = new IndustryICBCodeType();
+          Tree tree = new Tree();
+          tree.setTitle(icb.getText());
+          addCodesToTree(icb.getCodes(), tree.getRootNode(), tree);
+          updateLeafNodes(tree.getRootNode());
+          setTree(tree, false);
         }
 
-        @Override
-        protected boolean getConfiguredValidateOnAnyKey() {
-          return true;
-        }
+        @Order(10.0)
+        public class Tree extends AbstractExtensibleTree {
 
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          String s = StringUtility.emptyIfNull(getValue()).trim();
-          if (s.length() > 0) {
-            if (!s.endsWith("*")) {
-              s = s + "*";
-            }
-            if (!s.startsWith("*")) {
-              s = "*" + s;
-            }
-            m_lowercaseFilterPattern = Pattern.compile(StringUtility.toRegExPattern(s.toLowerCase(LocaleThreadLocal.get())));
-            getSecondTreeField().getTree().addNodeFilter(this);
+          private void showInfo(ITreeNode node) {
+            String title = node.getTree().getTitle();
+            String id = node.getCell().getText();
+            String children = Integer.toString(node.getChildNodeCount());
+            String leaf = Boolean.toString(node.isLeaf());
+
+            MessageBox.showOkMessage(title, TEXTS.get("NodeName", id), TEXTS.get("NodeInfo", leaf, children));
           }
-          else {
-            getSecondTreeField().getTree().removeNodeFilter(this);
+
+          @Order(10.0)
+          public class ExpandNodeMenu extends AbstractExtensibleMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ExpandNode");
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              getSelectedNode().setExpanded(true);
+            }
+
+            @Override
+            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              setVisible(getSelectedNode().getChildNodeCount() > 0);
+              setEnabled(!getSelectedNode().isExpanded());
+            }
+          }
+
+          @Order(20.0)
+          public class CollapseNodeMenu extends AbstractExtensibleMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("CollapseNode");
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              getSelectedNode().setExpanded(false);
+            }
+
+            @Override
+            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              setVisible(getSelectedNode().getChildNodeCount() > 0);
+              setEnabled(getSelectedNode().isExpanded());
+            }
+          }
+
+          @Order(30.0)
+          public class Info_Menu extends AbstractExtensibleMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("Info_");
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              showInfo(getSelectedNode());
+            }
           }
         }
+      }
+    }
 
-        /**
-         * Implementation of ITreeNodeFilter
-         */
-        @Override
-        public boolean accept(ITreeNode node, int level) {
-          String text = node.getCell().getText();
-          return text == null || m_lowercaseFilterPattern == null || m_lowercaseFilterPattern.matcher(text.toLowerCase(LocaleThreadLocal.get())).matches();
-        }
+    @Order(20.0)
+    public class ConfigurationBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Configure");
       }
 
       @Order(10.0)
@@ -164,213 +262,81 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredGridX() {
-          return 0;
-        }
-
-        @Override
-        protected int getConfiguredGridY() {
-          return 0;
-        }
-
-        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("TreeField");
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
-          Tree exampleTree = new Tree();
-          AbstractTreeNode node1 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 1");
-            }
-          };
-          AbstractTreeNode node2 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 2");
-            }
-          };
-          AbstractTreeNode node11 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 1.1");
-            }
-          };
-          AbstractTreeNode node12 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 1.2");
-            }
-          };
-          AbstractTreeNode node13 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 1.3");
-            }
-          };
-          AbstractTreeNode node21 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 2.1");
-            }
-          };
-          AbstractTreeNode node211 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 2.1.1");
-            }
-          };
-          AbstractTreeNode node2111 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Node 2.1.1.1");
-            }
-          };
-          exampleTree.addChildNode(exampleTree.getRootNode(), node1);
-          exampleTree.addChildNode(exampleTree.getRootNode(), node2);
-          exampleTree.addChildNode(node1, node11);
-          exampleTree.addChildNode(node1, node12);
-          exampleTree.addChildNode(node1, node13);
-          exampleTree.addChildNode(node2, node21);
-          exampleTree.addChildNode(node21, node211);
-          exampleTree.addChildNode(node211, node2111);
-          setTree(exampleTree, false);
+          setTree(new Tree(), false);
         }
 
         @Order(10.0)
-        public class Tree extends AbstractTree {
+        public class Tree extends AbstractExtensibleTree {
+        }
+      }
 
-          @Order(10.0)
-          public class EditMenu extends AbstractMenu {
+      @Order(20.0)
+      public class TreeEntriesField extends AbstractUserTreeField {
 
-            @Override
-            protected String getConfiguredText() {
-              return "edit";
-            }
-          }
+        @Override
+        protected int getConfiguredGridH() {
+          return 3;
+        }
 
-          @Order(20.0)
-          public class EmptySpaceMenu extends AbstractMenu {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("TreeContent");
+        }
 
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TableMenuType.EmptySpace);
-            }
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          ITree tree = getTreeField().getTree();
+          List<Node> nodes = parseFieldValue(true);
 
-            @Override
-            protected String getConfiguredText() {
-              return getClass().getSimpleName();
-            }
-          }
+          tree.removeAllChildNodes(tree.getRootNode());
+          addNodesToTree(nodes, tree, tree.getRootNode());
         }
       }
 
       @Order(30.0)
-      public class SecondTreeField extends AbstractTreeField {
+      public class MenuContentField extends AbstractUserTreeField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
-        }
-
-        @Override
-        protected int getConfiguredGridX() {
-          return 1;
-        }
-
-        @Override
-        protected int getConfiguredGridY() {
-          return 1;
+          return 2;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("TreeField");
+          return TEXTS.get("MenuContent");
         }
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          Tree exampleTree = new Tree();
-          AbstractTreeNode node1 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("USA");
-            }
-          };
-          AbstractTreeNode node2 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Germany");
-            }
-          };
-          AbstractTreeNode node11 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Anchorage");
-            }
-          };
-          AbstractTreeNode node12 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("New York");
-            }
-          };
-          AbstractTreeNode node13 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Los Angeles");
-            }
-          };
-          AbstractTreeNode node21 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Berlin");
-            }
-          };
-          AbstractTreeNode node22 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Frankfurt");
-            }
-          };
-          AbstractTreeNode node23 = new AbstractTreeNode() {
-            @Override
-            protected void execDecorateCell(Cell cell) {
-              cell.setText("Hamburg");
-            }
-          };
-          exampleTree.addChildNode(exampleTree.getRootNode(), node1);
-          exampleTree.addChildNode(exampleTree.getRootNode(), node2);
-          exampleTree.addChildNode(node1, node11);
-          exampleTree.addChildNode(node1, node12);
-          exampleTree.addChildNode(node1, node13);
-          exampleTree.addChildNode(node2, node21);
-          exampleTree.addChildNode(node2, node22);
-          exampleTree.addChildNode(node2, node23);
-          setTree(exampleTree, false);
-          getTree().expandAll(getTree().getRootNode());
-        }
-
-        @Order(10.0)
-        public class Tree extends AbstractTree {
-
-          @Override
-          protected boolean getConfiguredMultiSelect() {
-            return true;
-          }
+        protected void execChangedValue() throws ProcessingException {
+          List<Node> nodes = parseFieldValue(true);
+          getTreeField().getTree().getContextMenu().addChildActions(nodesToMenus(nodes));
         }
       }
     }
 
-    @Order(20.0)
+    @Order(30.0)
+    public class SampleContentButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("SampleContent");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        TreeEntriesField treeEntries = getTreeEntriesField();
+        treeEntries.setValue(TEXTS.get("TreeUserContent"));
+        getMenuContentField().setValue(TEXTS.get("MenuUserContent"));
+      }
+    }
+
+    @Order(40.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }
