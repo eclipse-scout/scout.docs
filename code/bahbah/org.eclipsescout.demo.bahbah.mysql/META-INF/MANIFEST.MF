@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.mysql;singleton:=true
 Bundle-Name: org.eclipsescout.demo.bahbah.mysql
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  com.bsiag.scout.rt.server.jdbc.mysql5117;bundle-version="5.1.17",
  org.eclipse.scout.rt.server;bundle-version="4.0.0",

@@ -47,6 +47,7 @@
       <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.io"/>
       <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.xmlgraphics"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.jobs"/>

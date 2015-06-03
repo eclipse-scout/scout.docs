@@ -15,36 +15,29 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.server.IServerJobFactory;
+import org.eclipse.scout.rt.server.IServerJobService;
+import org.eclipse.scout.rt.server.ITransactionRunnable;
 import org.eclipse.scout.rt.server.ServerJob;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
-import org.eclipse.scout.rt.server.services.common.session.IServerSessionRegistryService;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
 import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotificationListener;
 import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotificationListener;
 
 public class ServerApplication implements IApplication {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(ServerApplication.class);
+  private static IScoutLogger LOG = ScoutLogManager.getLogger(ServerApplication.class);
 
   @Override
   public Object start(IApplicationContext context) throws Exception {
-    //start the scheduler
-    /*
-    Scheduler scheduler=new Scheduler(Activator.getDefault().getBackendSubject(),ServerSession.class);
-    scheduler.addJob(new LoadJobs());
-    scheduler.start();
-    Activator.getDefault().setScheduler(scheduler);
-     */
+    final IServerJobFactory factory = SERVICES.getService(IServerJobService.class).createJobFactory();
+    ServerJob initJob = factory.create("Install Db schema if necessary", new ITransactionRunnable() {
 
-    // create session using server principal
-    ServerSession serverSession = SERVICES.getService(IServerSessionRegistryService.class).newServerSession(ServerSession.class, Activator.getDefault().getBackendSubject());
-
-    // start a job that installs the database and notification listener.
-    ServerJob initJob = new ServerJob("Install Db schema if necessary", serverSession) {
       @Override
-      protected IStatus runTransaction(IProgressMonitor monitor) {
+      public IStatus run(IProgressMonitor monitor) throws ProcessingException {
         try {
           SERVICES.getService(IDbSetupService.class).installDb();
         }
@@ -57,17 +50,14 @@ public class ServerApplication implements IApplication {
 
         return Status.OK_STATUS;
       }
-    };
+    });
     initJob.schedule();
     initJob.join(20000);
-
-    logger.info("bahbah server initialized");
-
+    LOG.info("bahbah server initialized");
     return EXIT_OK;
   }
 
   @Override
   public void stop() {
-
   }
 }

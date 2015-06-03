@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <?pde version="3.6"?>
-<target name="Demo Widget App Scout 4.1 (Nightly Builds) Eclipse 4.4 Target" sequenceNumber="16">
+<target name="Demo Widget App Scout 4.2 (Nightly Builds) Eclipse 4.4 Target" sequenceNumber="17">
   <locations>
     <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
@@ -11,6 +11,7 @@
       <unit id="org.eclipse.emf.ecore.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.emf.common.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.mylyn.wikitext_feature.feature.group" version="0.0.0" />
+      <unit id="org.apache.log4j" version="0.0.0"/>
 
       <repository id="eclipse_luna" location="http://download.eclipse.org/releases/luna"/>
     </location>
@@ -24,34 +25,13 @@
 
       <unit id="org.eclipse.scout.rt.ui.rap.incubator.filechooser.source.feature.group" version="0.0.0"/>
 
-      <repository id="scout_nightly_4.1" location="http://download.eclipse.org/scout/nightly/4.1"/>
+      <repository id="scout_nightly_4.2" location="http://download.eclipse.org/scout/nightly/4.2/"/>
     </location>
 
     <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.rap.feature.feature.group" version="0.0.0"/>
 
-      <repository  id="rap_2.3" location="http://archive.eclipse.org/rt/rap/2.3/RC4-20140610-0925/"/>
-    </location>
-
-    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="0.0.0"/>
-
-      <repository location="http://tools.bsiag.com/marketplace/rayo/4.1/"/>
-    </location>
-
-    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.scout.docx4j.core.source.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.scout.rt.docx4j.client.source.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.scout.docx4j.libs.feature.group" version="0.0.0"/>
-
-      <repository location="http://tools.bsiag.com/marketplace/docx4j/4.1/"/>
-    </location>
-
-
-    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="0.0.0"/>
-
-      <repository location="http://tools.bsiag.com/marketplace/logging_bridge/4.1/"/>
+      <repository  id="rap_2.3" location="http://download.eclipse.org/rt/rap/2.3"/>
     </location>
 
     <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -82,19 +62,28 @@
       <unit id="com.google.guava" version="15.0.0.v201403281430"/>
       <unit id="com.google.guava.source" version="15.0.0.v201403281430"/>
 
-      <repository id="orbit_R" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository"/>
+      <repository id="orbit_R" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20150519210750/repository"/>
     </location>
+
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.mockito.mockito-all" version="0.0.0"/>
+
+      <repository location="http://download.eclipse.org/scout/releases/4.0/testing"/>
+
+    </location>
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="com.bsiag.scout.rt.server.jdbc.mysql5117.source.feature.group" version="0.0.0"/>
+      <unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.docx4j.core.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.rt.docx4j.client.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.docx4j.libs.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.rabbitmq.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.activemq.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.redis.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.memcached.source.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="0.0.0"/>
 
-      <repository location="http://tools.bsiag.com/marketplace/cloud/4.1"/>
+      <repository location="https://scout.bsiag.com/repository/marketplace-scout-4.2"/>
     </location>
-    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-	  <unit id="com.bsiag.scout.rt.server.jdbc.mysql5117.source.feature.group" version="0.0.0"/>
-	  <repository location="http://tools.bsiag.com/marketplace/jdbc/4.1"/>
-	</location>
   </locations>
 </target>

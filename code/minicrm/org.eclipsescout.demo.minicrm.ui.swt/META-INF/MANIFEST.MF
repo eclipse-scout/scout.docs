@@ -1,7 +1,7 @@
 Bundle-ManifestVersion: 2
 Bundle-Name: My Application
 Bundle-SymbolicName: org.eclipsescout.demo.minicrm.ui.swt;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.minicrm.ui.swt.Activator
 Export-Package: org.eclipsescout.demo.minicrm.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",

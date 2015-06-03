@@ -1,7 +1,7 @@
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.minicrm.client
 Bundle-SymbolicName: org.eclipsescout.demo.minicrm.client;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.minicrm.client.Activator
 Export-Package: org.eclipsescout.demo.minicrm.client,
  org.eclipsescout.demo.minicrm.client.ui.desktop,

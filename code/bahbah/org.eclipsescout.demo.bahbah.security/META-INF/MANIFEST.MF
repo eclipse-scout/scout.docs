@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: BahBah Security Filter
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.security;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.scout.rt.server.commons,
  org.eclipse.scout.commons,

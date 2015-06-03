@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.testing.shared.TestingUtility;
-import org.eclipse.scout.service.AbstractService;
 import org.eclipse.scout.testing.client.ScoutClientAssert;
 import org.eclipse.scout.testing.client.runner.ScoutClientTestRunner;
 import org.eclipsescout.demo.minifigcreator.client.Activator;
@@ -22,20 +21,22 @@ import org.eclipsescout.demo.minifigcreator.shared.services.process.DesktopFormD
 import org.eclipsescout.demo.minifigcreator.shared.services.process.FormState;
 import org.eclipsescout.demo.minifigcreator.shared.services.process.IDesktopProcessService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 import org.osgi.framework.ServiceRegistration;
 
 /**
  * Tests for {@link org.eclipsescout.demo.minifigcreator.client.ui.forms.DesktopForm}
- * 
+ *
  * @author jbr
  */
 @RunWith(ScoutClientTestRunner.class)
 public class DesktopFormTest {
-
-  private P_DesktopProcessService m_mockService = new P_DesktopProcessService();
+  private IDesktopProcessService m_mockService = Mockito.mock(IDesktopProcessService.class);
   private List<ServiceRegistration> m_registeredServices;
 
   @Before
@@ -44,7 +45,7 @@ public class DesktopFormTest {
   }
 
   @After
-  public void teardown() {
+  public void tearDown() {
     TestingUtility.unregisterServices(m_registeredServices);
   }
 
@@ -53,7 +54,8 @@ public class DesktopFormTest {
    */
   @Test
   public void testAllEnabled() throws Exception {
-    DesktopForm form = createFormWithState(true, true, true);
+    DesktopForm form = createFormWithState(true, true, true, false);
+    form.startView();
 
     ScoutClientAssert.assertEnabled(form.getHeadField());
     ScoutClientAssert.assertEnabled(form.getTorsoField());
@@ -65,7 +67,8 @@ public class DesktopFormTest {
    */
   @Test
   public void testAllDisabled() throws Exception {
-    DesktopForm form = createFormWithState(false, false, false);
+    DesktopForm form = createFormWithState(false, false, false, false);
+    form.startView();
 
     ScoutClientAssert.assertDisabled(form.getHeadField());
     ScoutClientAssert.assertDisabled(form.getTorsoField());
@@ -77,7 +80,8 @@ public class DesktopFormTest {
    */
   @Test
   public void testHeadDisabled() throws Exception {
-    DesktopForm form = createFormWithState(false, true, true);
+    DesktopForm form = createFormWithState(false, true, true, false);
+    form.startView();
 
     ScoutClientAssert.assertDisabled(form.getHeadField());
     ScoutClientAssert.assertEnabled(form.getTorsoField());
@@ -89,7 +93,8 @@ public class DesktopFormTest {
    */
   @Test
   public void testTorsoDisabled() throws Exception {
-    DesktopForm form = createFormWithState(true, false, true);
+    DesktopForm form = createFormWithState(true, false, true, false);
+    form.startView();
 
     ScoutClientAssert.assertEnabled(form.getHeadField());
     ScoutClientAssert.assertDisabled(form.getTorsoField());
@@ -101,14 +106,48 @@ public class DesktopFormTest {
    */
   @Test
   public void testLegsDisabled() throws Exception {
-    DesktopForm form = createFormWithState(true, true, false);
+    DesktopForm form = createFormWithState(true, true, false, false);
+    form.startView();
 
     ScoutClientAssert.assertEnabled(form.getHeadField());
     ScoutClientAssert.assertEnabled(form.getTorsoField());
     ScoutClientAssert.assertDisabled(form.getLegsField());
   }
 
-  private DesktopForm createFormWithState(boolean headEnabled, boolean torsoEnabled, boolean legsEnabled) throws ProcessingException {
+  /**
+   * Ensure that all methods are called
+   */
+  @Test
+  public void testAllMethodsAreCalled() throws Exception {
+    DesktopForm form = createFormWithState(true, true, true, true);
+    form.startView();
+
+    InOrder orderCheck = Mockito.inOrder(form);
+
+    Mockito.verify(form, Mockito.times(1)).updateImage();
+    Mockito.verify(form, Mockito.times(1)).updateSummary();
+
+    orderCheck.verify(form).updateImage();
+    orderCheck.verify(form).updateSummary();
+  }
+
+  /**
+   * Ensure the behavior is correct when the name is set in the {@link DesktopForm#getNameField()}
+   */
+  @Test
+  public void testSetName() throws Exception {
+    DesktopForm form = createFormWithState(true, true, true, true);
+    form.startView();
+
+    form.getNameField().setValue("Bob");
+
+    Assert.assertEquals("Bob - value: 0", form.getSummaryField().getValue());
+
+    Mockito.verify(form, Mockito.times(1)).updateImage();
+    Mockito.verify(form, Mockito.times(2)).updateSummary();
+  }
+
+  private DesktopForm createFormWithState(final boolean headEnabled, final boolean torsoEnabled, final boolean legsEnabled, final boolean asSpy) throws ProcessingException {
     DesktopFormData loadFormData = new DesktopFormData();
     FormState state = new FormState();
     state.setHeadEnabled(headEnabled);
@@ -116,30 +155,27 @@ public class DesktopFormTest {
     state.setLegsEnabled(legsEnabled);
 
     loadFormData.setState(state);
-    m_mockService.setLoadFormData(loadFormData);
+    Mockito.when(m_mockService.load(Mockito.any(DesktopFormData.class))).thenReturn(loadFormData);
 
-    DesktopForm form = new DesktopForm();
-    form.startView();
-    return form;
-  }
-
-  public static class P_DesktopProcessService extends AbstractService implements IDesktopProcessService {
-
-    private DesktopFormData m_loadFormData;
-
-    @Override
-    public DesktopFormData load(DesktopFormData formData) throws ProcessingException {
-      return m_loadFormData;
+    if (asSpy) {
+      P_DesktopForm form = Mockito.spy(new P_DesktopForm());
+      form.doCallInitializer();
+      return form;
     }
-
-    public void setLoadFormData(DesktopFormData loadFormData) {
-      m_loadFormData = loadFormData;
-    }
-
-    @Override
-    public DesktopFormData store(DesktopFormData formData) throws ProcessingException {
-      return formData;
+    else {
+      DesktopForm form;
+      form = new DesktopForm();
+      return form;
     }
   }
 
+  public static class P_DesktopForm extends DesktopForm {
+    public P_DesktopForm() throws ProcessingException {
+      super(false);
+    }
+
+    public void doCallInitializer() throws ProcessingException {
+      super.callInitializer();
+    }
+  }
 }

@@ -297,7 +297,7 @@ public class ButtonsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class RadioButton1 extends AbstractRadioButton<Object> {
+      public class RadioButton1 extends AbstractRadioButton {
 
         @Override
         protected boolean getConfiguredProcessButton() {
@@ -306,7 +306,7 @@ public class ButtonsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class RadioButton2 extends AbstractRadioButton<Object> {
+      public class RadioButton2 extends AbstractRadioButton {
 
         @Override
         protected boolean getConfiguredProcessButton() {
@@ -315,7 +315,7 @@ public class ButtonsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
-      public class RadioButton3 extends AbstractRadioButton<Object> {
+      public class RadioButton3 extends AbstractRadioButton {
 
         @Override
         protected boolean getConfiguredProcessButton() {
@@ -324,7 +324,7 @@ public class ButtonsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class RadioButton4 extends AbstractRadioButton<Object> {
+      public class RadioButton4 extends AbstractRadioButton {
 
         @Override
         protected boolean getConfiguredProcessButton() {

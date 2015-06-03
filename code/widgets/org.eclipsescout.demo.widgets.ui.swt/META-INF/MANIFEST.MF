@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scout Widgets Demo App SWT
 Bundle-SymbolicName: org.eclipsescout.demo.widgets.ui.swt;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.widgets.ui.swt.Activator
 Export-Package: org.eclipsescout.demo.widgets.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",

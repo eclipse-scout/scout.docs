@@ -12,6 +12,10 @@ package org.eclipsescout.demo.bahbah.server.services.custom.security;
 
 import java.security.Permissions;
 
+import org.eclipse.scout.rt.server.services.common.security.AbstractAccessControlService;
+import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
+import org.eclipse.scout.rt.shared.security.UpdateServiceConfigurationPermission;
+import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.security.CreateNotificationPermission;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
@@ -24,9 +28,6 @@ import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
-import org.eclipse.scout.rt.server.services.common.security.AbstractAccessControlService;
-import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
-import org.eclipse.scout.rt.shared.services.common.code.ICode;
 
 public class AccessControlService extends AbstractAccessControlService {
 
@@ -53,6 +54,7 @@ public class AccessControlService extends AbstractAccessControlService {
         permissions.add(new DeleteUserPermission());
         permissions.add(new ResetPasswordPermission());
         permissions.add(new UpdateUserPermission());
+        permissions.add(new UpdateServiceConfigurationPermission());
       }
     }
     return permissions;

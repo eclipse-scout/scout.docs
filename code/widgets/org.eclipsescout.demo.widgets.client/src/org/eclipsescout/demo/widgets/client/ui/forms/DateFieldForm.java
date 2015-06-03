@@ -173,10 +173,9 @@ public class DateFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("TimeField");
-        }//        @Override
-         //        protected void execInitField() throws ProcessingException {
-        //          setValue(new Date());
-        //        }
+        }//        @Override//        protected void execInitField() throws ProcessingException {
+         //          setValue(new Date());
+         //        }
       }
     }
 

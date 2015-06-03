@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scout Widgets Demo App Client
 Bundle-SymbolicName: org.eclipsescout.demo.widgets.client;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.widgets.client.Activator
 Export-Package: org.eclipsescout.demo.widgets.client,
  org.eclipsescout.demo.widgets.client.services,

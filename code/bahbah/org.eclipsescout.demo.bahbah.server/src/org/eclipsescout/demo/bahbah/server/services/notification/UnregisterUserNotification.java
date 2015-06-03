@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.services.notification;
 
+import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterNotification;
 
 public class UnregisterUserNotification implements IClusterNotification {
@@ -23,5 +24,14 @@ public class UnregisterUserNotification implements IClusterNotification {
 
   public String getUserName() {
     return m_userName;
+  }
+
+  @Override
+  public boolean coalesce(IClusterNotification existingNotification0) {
+    if (existingNotification0 instanceof UnregisterUserNotification) {
+      UnregisterUserNotification existingNotification = (UnregisterUserNotification) existingNotification0;
+      return CompareUtility.equals(getUserName(), existingNotification.getUserName());
+    }
+    return false;
   }
 }
