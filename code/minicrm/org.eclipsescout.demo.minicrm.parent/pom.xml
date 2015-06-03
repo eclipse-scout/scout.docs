@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipsescout.demo</groupId>
     <artifactId>org.eclipsescout.demo.master</artifactId>
-    <version>5.0.0-SNAPSHOT</version>
+    <version>5.1.0-SNAPSHOT</version>
     <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
   </parent>
 
@@ -30,14 +30,7 @@
     <module>../org.eclipsescout.demo.minicrm.client</module>
     <module>../org.eclipsescout.demo.minicrm.client.mobile</module>
     <module>../org.eclipsescout.demo.minicrm.server</module>
-    <module>../org.eclipsescout.demo.minicrm.server.product</module>
     <module>../org.eclipsescout.demo.minicrm.shared</module>
-    <module>../org.eclipsescout.demo.minicrm.spec.ui.swing</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.rap</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.rap.product</module>
     <module>../org.eclipsescout.demo.minicrm.ui.swing</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.swing.product</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.swt</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.swt.product</module>
   </modules>
 </project>

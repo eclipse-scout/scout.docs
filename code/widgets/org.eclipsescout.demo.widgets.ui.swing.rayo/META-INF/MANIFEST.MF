@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Rayo
-Bundle-SymbolicName: org.eclipsescout.demo.widgets.ui.swing.rayo;singleton:=true
-Bundle-Version: 5.0.0.qualifier
-Fragment-Host: org.eclipsescout.demo.widgets.ui.swing
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: com.bsiag.scout.rt.ui.swing.rayo

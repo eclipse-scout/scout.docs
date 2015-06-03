@@ -5,7 +5,7 @@
   are made available under the terms of the Eclipse Distribution License v1.0
   which accompanies this distribution, and is available at
   http://www.eclipse.org/org/documents/edl-v10.html
-  
+
   Contributors:
       BSI Business Systems Integration AG - initial API and implementation
 -->
@@ -16,14 +16,12 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.master</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo - Master</name>
 
   <properties>
-    <tycho.version>0.19.0</tycho.version>
-    <tycho-extras.version>0.19.0</tycho-extras.version>
     <jacoco.version>0.6.1.201212231917</jacoco.version>
     <compileSource>1.7</compileSource>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,113 +29,43 @@
   </properties>
 
   <build>
-
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-maven-plugin</artifactId>
-          <version>${tycho.version}</version>
-          <extensions>true</extensions>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.9.1</version>
         </plugin>
-
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>target-platform-configuration</artifactId>
-          <version>${tycho.version}</version>
-          <configuration>
-            <environments>
-              <environment>
-                <os>win32</os>
-                <ws>win32</ws>
-                <arch>x86</arch>
-              </environment>
-            </environments>
-            <filters>
-              <!-- work around Equinox bug 348045 -->
-              <filter>
-                <type>p2-installable-unit</type>
-                <id>org.eclipse.equinox.servletbridge.extensionbundle</id>
-                <removeAll />
-              </filter>
-            </filters>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.5</version>
-          <configuration>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-surefire-plugin</artifactId>
-          <version>${tycho.version}</version>
-          <configuration>
-            <!-- <debugPort>18081</debugPort> -->
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-p2-director-plugin</artifactId>
-          <version>${tycho.version}</version>
-        </plugin>
-
-<!--         <plugin> -->
-<!--           <groupId>org.jacoco</groupId> -->
-<!--           <artifactId>jacoco-maven-plugin</artifactId> -->
-<!--           <version>${jacoco.version}</version> -->
-<!--           <configuration> -->
-<!--             <destFile>${basedir}/../org.eclipsescout.demo.parent/jacoco-all.exec</destFile> -->
-<!--           </configuration> -->
-<!--         </plugin> -->
       </plugins>
     </pluginManagement>
-
     <plugins>
       <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.2</version>
         <configuration>
-          <target>
-            <artifact>
-              <groupId>org.eclipsescout.demo</groupId>
-              <artifactId>org.eclipsescout.demo.target</artifactId>
-              <version>5.0.0-SNAPSHOT</version>
-              <classifier>s40_e44</classifier>
-            </artifact>
-          </target>
-          <ignoreTychoRepositories>true</ignoreTychoRepositories>
+          <compilerId>eclipse</compilerId>
+          <source>1.7</source>
+          <target>1.7</target>
+          <compilerArgs>
+            <arg>-verbose</arg>
+          </compilerArgs>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-compiler-eclipse</artifactId>
+            <version>2.5</version>
+          </dependency>
+        </dependencies>
       </plugin>
-      
       <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-source-plugin</artifactId>
-        <version>${tycho.version}</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
         <configuration>
-          <archive>
-            <addMavenDescriptor>false</addMavenDescriptor>
-          </archive>
+          <testFailureIgnore>true</testFailureIgnore>
         </configuration>
-        <executions>
-          <execution>
-            <id>plugin-source</id>
-            <goals>
-              <goal>plugin-source</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

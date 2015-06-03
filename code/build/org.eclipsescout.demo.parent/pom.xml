@@ -5,7 +5,7 @@
   are made available under the terms of the Eclipse Distribution License v1.0
   which accompanies this distribution, and is available at
   http://www.eclipse.org/org/documents/edl-v10.html
-  
+
   Contributors:
       BSI Business Systems Integration AG - initial API and implementation
 -->
@@ -16,28 +16,15 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo</name>
 
-  <scm>
-    <url>https://github.com/BSI-Business-Systems-Integration-AG/org.eclipsescout.demo</url>
-    <connection>${tycho.scmUrl}</connection>
-  </scm>
-
-  <properties>
-    <tycho.scmUrl>scm:git:git://github.com/BSI-Business-Systems-Integration-AG/org.eclipsescout.demo.git</tycho.scmUrl>
-  </properties>
-
   <modules>
     <module>../org.eclipsescout.demo.master</module>
-    <module>../org.eclipsescout.demo.target</module>
-    <module>../org.eclipsescout.demo.repository</module>
     <module>../../bahbah/org.eclipsescout.demo.bahbah.parent</module>
-    <module>../../ibug/org.eclipsescout.demo.ibug.parent</module>
     <module>../../minicrm/org.eclipsescout.demo.minicrm.parent</module>
-    <module>../../minifigcreator/org.eclipsescout.demo.minifigcreator.parent</module>
     <module>../../widgets/org.eclipsescout.demo.widgets.parent</module>
   </modules>
 </project>

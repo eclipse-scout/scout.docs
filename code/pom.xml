@@ -16,12 +16,86 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.root</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo - Root</name>
 
+  <profiles>
+    <profile>
+      <!-- Only create the jandex.idx when a scout.xml is found -->
+      <id>jandex-idx</id>
+      <activation>
+        <file>
+          <exists>${basedir}/target/classes/META-INF/scout.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <!-- Create META-INF/jandex.idx -->
+          <plugin>
+            <groupId>org.jboss.jandex</groupId>
+            <artifactId>jandex-maven-plugin</artifactId>
+            <version>1.0.1</version>
+            <executions>
+              <execution>
+                <id>make-index</id>
+                <goals>
+                  <goal>jandex</goal>
+                </goals>
+                <!-- phase is 'process-classes by default' -->
+                <configuration>
+                  <!-- Nothing needed here for simple cases -->
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings
+          only. It has no influence on the Maven build itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.jboss.jandex
+                    </groupId>
+                    <artifactId>
+                      jandex-maven-plugin
+                    </artifactId>
+                    <versionRange>
+                      [1.0.1,)
+                    </versionRange>
+                    <goals>
+                      <goal>jandex</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
   <modules>
     <module>build/org.eclipsescout.demo.parent</module>
   </modules>
+
 </project>
