@@ -22,11 +22,37 @@
   <name>Eclipse Scout Demo - Master</name>
 
   <properties>
+  	<scout.version>5.1.0-SNAPSHOT</scout.version>
     <jacoco.version>0.6.1.201212231917</jacoco.version>
     <compileSource>1.7</compileSource>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+
+  <dependencyManagement>
+  	<dependencies>
+	  <dependency>
+	    <groupId>org.eclipse.scout.rt</groupId>
+	    <artifactId>org.eclipse.scout.rt.server</artifactId>
+	    <version>${scout.version}</version>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.eclipse.scout.rt</groupId>
+	    <artifactId>org.eclipse.scout.rt.client</artifactId>
+	    <version>${scout.version}</version>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.eclipse.scout.rt</groupId>
+	    <artifactId>org.eclipse.scout.rt.shared</artifactId>
+	    <version>${scout.version}</version>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.eclipse.scout.rt</groupId>
+	    <artifactId>org.eclipse.scout.rt.platform</artifactId>
+	    <version>${scout.version}</version>
+	  </dependency>
+  	</dependencies>
+  </dependencyManagement>
 
   <build>
     <pluginManagement>
