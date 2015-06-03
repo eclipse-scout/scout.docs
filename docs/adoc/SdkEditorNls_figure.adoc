@@ -1,0 +1,21 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - NLS (figure)"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[[img-nls_editor, Figure 000]]
+.The NLS editor provided by the Scout SDK. This editor is opened via the [link]_Open NLS Editor ..._ link in the Scout Object Properties of the [node]_DefaultTextProviderService_ node.
+image::{imgsdir}/sdk_editor_nls.png[]
+

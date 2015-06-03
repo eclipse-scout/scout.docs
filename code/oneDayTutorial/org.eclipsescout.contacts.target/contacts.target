@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="contacts" sequenceNumber="17">
+<locations>
+<location path="${eclipse_home}\" type="Directory"/>
+<location path="${scout_rap_target}" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="4.0.100.20140903-1234"/>
+<repository location="http://tools.bsiag.com/marketplace/rayo/4.0"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="1.2.0.20140903-1239"/>
+<repository location="http://tools.bsiag.com/marketplace/logging_bridge/4.0"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.apache.xmlgraphics" version="1.4.0.v201301251218"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.scout.docx4j.libs.source.feature.group" version="1.3.0.20140903-1237"/>
+<unit id="org.eclipse.scout.docx4j.core.source.feature.group" version="1.3.0.20140903-1237"/>
+<unit id="org.eclipse.scout.rt.docx4j.client.source.feature.group" version="1.3.0.20140903-1237"/>
+<repository location="http://tools.bsiag.com/marketplace/docx4j/4.0"/>
+</location>
+</locations>
+<launcherArgs>
+<vmArgs>-Xms256m -Xmx512m -XX:MaxPermSize=256m</vmArgs>
+</launcherArgs>
+</target>

@@ -1,0 +1,593 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Scout Tooling"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+
+[[cha-tooling]]
+== Scout Tooling
+
+In addition to the Scout runtime framework presented in the previous chapter Eclipse Scout also includes a comprehensive tooling, the Scout SDK. 
+include::{mdledir}/SdkScoutTooling.adoc[]
+
+=== The Scout SDK
+(((Scout SDK)))
+
+The Scout SDK is added to the Eclipse IDE in the form of the Scout perspective.footnote:[
+See Appendix <<apx-eclipse_perspective>> for additional information regarding Eclipse IDE perspectives. 
+].
+With the Scout Explorer and Scout Objects Properties, two view parts are contained in the Scout perspective. 
+Additionally, the Scout SDK contains a comprehensive set of wizards that support the developer in creating Scout application components. 
+
+The Scout Explorer view allows the developer to navigate the Scout application model. 
+Once an element in the Scout Explorer is selected, the Scout Object properties view allows to validate and change properties of the selected element. 
+Depending on the selection in the Scout Explorer, the Scout SDK offers appropriate context menus to start the related wizards.
+
+[[img-scout_sdk_perspective, Figure 000]]
+.The Scout SDK perspective. On the left hand side the Scout Explorer and the Scout Object Properties views are visible.
+image::{imgsdir}/scout_sdk_perspective.png[]
+
+<<img-scout_sdk_perspective>> provides a screenshot of the Scout SDK perspective. 
+In the Scout Explorer shown in the upper left part of the screenshot, the message field in the DesktopForm of the "`Hello World`" application is selected. 
+In the Scout Object Properties located below, the message field's appearance, layout and behavior properties are displayed. 
+On the right hand side, the corresponding source code is loaded in a Java editor. 
+
+When the developer changes a property of the selected element, the Java code is updated accordingly and vice versa. 
+For example clicking the [property]_Mandatory_ property in the Scout Object Properties of the message field will insert the method [java]+getConfiguredMandatory+ to the message field's class. 
+This demonstrates how the Scout SDK directly works on the Java source code. 
+In fact, the Java source code is almost the only artifact relevant for the Scout SDK to '`understand`' the Scout application model. 
+Taking advantage of this setup, the Scout SDK implements a full round-trip-engineering from creating the Java code for Scout application components, parsing code changes in the background, and displaying the current implementation of the Scout application in the Scout Explorer and the Scout Object Properties.
+
+Thanks to the round-trip-engineering provided by the Scout SDK, the information presented in the Scout Explorer and the Scout Object Properties always stay in sync with the Java code of the Scout application.
+To illustrate this, we will re-use the "`Hello World`" Scout project from Chapter <<cha-helloworld>>. 
+Start the Eclipse IDE with the workspace containing the "`Hello World`" application.
+Then, navigate to method [java]+getConfiguredLabel+ as shown in <<img-scout_sdk_perspective>>, and add the java snippet shown below to the class [java]+MessageField+. 
+
+----
+    @Override
+    protected boolean getConfiguredMandatory() {
+        return true;
+    }
+----
+
+After having saved the code change, you can observe that the [property]_Mandatory_ property in the section Behavior of the message field's Scout Object properties has changed its state. 
+The font of its label is now presented in bold face and underlined, the checkbox is ticked and a red minus icon is shown on the right side of the property. 
+Obviously, the Scout SDK is directly operating on the project's source code and does not rely or need any external meta data. 
+This provides the flexibility to develop Scout applications with or without the support of the Scout SDK. 
+And this choice offered to the Scout developer is one of the most important features provided by the Scout SDK. 
+The Scout developer may take advantage of the development support provided by the Scout SDK without being restricted by the Scout tooling in any way.
+
+Technically, the Scout SDK is a set of Eclipse plugins that operate on top of the Eclipse JDT and the Eclipse PDE projects.
+The Java Development Tools (JDT).footnote:[
+See the Eclipse JDT project page for details: http://www.eclipse.org/jdt/.
+] 
+contain a Java IDE supporting the development of any Java applications, 
+and the Plugin Development Environment (PDE).footnote:[
+See the Eclipse PDE project page for details: http://www.eclipse.org/pde/.
+]
+provides tools to create, develop, test, debug, build and deploy Eclipse plugins, and additional artifacts relevant for Eclipse based applications. 
+As in the case of the Scout Runtime, the plugins representing the Scout SDK, the JDT and the PDE are all located in the [filename]+plugins+ directory of your Eclipse installation and named [filename]+org.eclipse.scout.sdk.*+, [filename]+org.eclipse.jdt.*+ and [filename]+org.eclipse.pde.*+ . 
+
+=== The Scout Explorer
+(((Scout Explorer)))
+
+The Scout Explorer view is responsible for the navigation support within the Scout application model. 
+This navigation support is presented in the form of a tree view and includes the client with its UI components, the server and the shared part of a Scout application. 
+It also includes all Scout application modules of modular Scout applications.footnote:[
+See Section <<sec-multi_module_apps>> for more information regarding multi module Scout applications.
+].
+For the actual navigation in the tree representing the Scout application both the mouse or the keyboard can be used. 
+
+To expand or collapse a selected node in the Scout Explorer, you may click on the tiny [icon]_plus_ icon or the [icon]_minus_ icon presented to the left of the node.
+Alternatively, you can also use the kbd:[Right] or the kbd:[Left] cursor keys.
+
+Once a node in the tree is selected, the Scout Object Properties view presents the associated configuration of the selected element. 
+If the selected element represents a specific application model component, the corresponding Java source code can be accessed through a double click on the node, or hitting the kbd:[Enter] key. 
+
+The navigation tree provided in the Scout Explorer view also allows the developer to add elements to the application.
+Depending on the selected node in the tree, wizards can be launched using the context menus. 
+The wizards support the creation of application components, such as forms on the client side or services on the server side by generating the necessary Java code.
+
+[[img-explorer_client, Figure 000]]
+.The Scout Explorer view. The grey nodes below the expanded client node represent the supported UI technologies.
+image::{imgsdir}/explorer_client.png[]
+
+In <<img-explorer_client>> the top level organization of the client application model is shown as it is represented in the Scout Explorer.
+All client specific elements are located under the selected orange client node [element]_org.eclipsescout.helloworld.client_. 
+Right below, the three grey UI plugins which represent the support for the corresponding UI technologies for Swing, SWT and Eclipse RAP. 
+The orange [node]_org.eclipsescout.helloworld.client.mobile_ node contains all elements that are specific to mobile devices such as the [java]+MobileHomeForm+.
+
+Specific nodes for the client session and the desktop of the Scout client allow access to the corresponding Scout application model components. 
+While the client session is the main entry point for client-server communication, the desktop represents the root component of the visible part of a Scout client application. 
+Below a set of folders group additional client model components according to their type. 
+The forms folder for example holds all available forms, such as the desktop form that we have used in the "`Hello World!`" tutorial.footnote:[
+See Section <<sec-initial_helloworld>> for a description of many of these elements.
+]. 
+
+[[img-explorer_shared, Figure 000]]
+.The Scout Explorer view with the expanded shared node.
+image::{imgsdir}/explorer_shared.png[]
+
+A screenshot of the expanded green shared node [element]_org.eclipsescout.helloworld.shared_ is provided in <<img-explorer_shared>>. 
+As the name "`shared`" suggests, the corresponding plugin holds all application components that are required for both the Scout client and the Scout server application. 
+This includes texts, icons, codes types, permissions and lookup calls. 
+As shown in <<img-explorer_shared>>, a separate folder for each resource type is provided under the shared node.
+ 
+[[img-explorer_server, Figure 000]]
+image::{imgsdir}/explorer_server.png[]
+.The Scout Explorer view with the expanded server node (left). On the individual nodes, access to the relevant Scout SDK wizards is provided using context menus (right).
+image::{imgsdir}/explorer_server_servicewizard.png[]
+
+In <<img-explorer_server>>, the blue server node is expanded in the Scout Explorer view. 
+As the primary responsibility of the Scout server application is to answer client requests, its components are mostly related to different types of services. 
+The [folder]_Services_ folder holds services related to the processing logic of the application such as retrieving and updating data. 
+The remaining folders group more specific types of server services. 
+Under the [folder]_Webservices_ folder the Scout SDK support to provide and consume web services is located. 
+
+The right side of <<img-explorer_server>> illustrates the access to the Scout SDK wizards using the corresponding context menus. 
+The menu:New Service...[] menu shown in the screenshot will start the wizard to add a new Scout server service. 
+ 
+The different colored tree nodes discussed above are all represented by their individual Eclipse plugins. 
+This includes the orange client node, the grey UI nodes, the orange mobile client node, the green shared node and the blue server node. 
+A Scout Swing client for example contains the plugins [element]_org.eclipsescout.helloworld.client_, [element]_org.eclipsescout.helloworld.shared_ and [element]_org.eclipsescout.helloworld.client.ui.swing_ but not the other UI technology plugins. 
+The Scout server contains the [element]_org.eclipsescout.helloworld.server_ plugin and the [element]_org.eclipsescout.helloworld.shared_ plugin. 
+
+[[sec-scout_sdk_object_properties]]
+=== The Scout Object Properties
+(((Scout Object Properties)))
+
+The Scout Object Properties view provides direct access to configurable properties and operations for the element selected in the Scout Explorer.
+Before we discuss the typical layout of an object property view we describe the special case of the property view for a complete Scout application. 
+This property view is displayed when the application's top level node is selected in the Scout Explorer as shown in <<img-sdk_initial_helloworld_project>>. 
+
+[[img-properties_technologies, Figure 000]]
+.The Scout Object Properties showing the expanded Technologies section.
+image::{imgsdir}/properties_technologies.png[]
+
+The main elements of the top-level application properties are the sections [element]_Product Launchers_ and the [element]_Technologies_. 
+As the product launcher section with its launcher boxes has already been covered in Section <<sec-run_initial>> and Section <<sec-run_initial_background>> we focus on the technologies here.
+The technologies section allows to add features to the application or remove such elements. 
+
+When the selection of a technology checkbox is changed, a message box is shown to the user. 
+This box lists all project resources that are changed when the user confirms the action. 
+Once the dialog is confirmed, the selected resources are modified by the Scout SDK to add or remove the feature. 
+
+This is required for features containing licences not compatible to the Eclipse Public Licence (EPL) or features in incubation status, because such features cannot be provided as part of the Eclipse Scout installation package. 
+Instead, the associated artifacts need to be downloaded from a remote updated site first. 
+Before any non-EPL content is downloaded from the internet, the user needs to review and confirm the associated licence. 
+For this, a license confirmation dialog is shown upfront. 
+After confirmation, the required files are downloaded and automatically added to the application. 
+Currently, the procedure described above is used for the following technologies. 
+
+ * MySQL JDBC Driver for Eclipse Scout
+ * Oracle 11g2 JDBC Driver for Eclipse Scout
+ * PostgresSQL 9 JDBC Driver for Eclipse Scout
+ * Docx4j Support
+ * F2 Support
+ * Rayo Swing Look and Feel for Eclipse Scout
+ * RAP FileChooser Support (Incubation)
+
+
+[[img-properties_view_examples, Figure 000]]
+image::{imgsdir}/properties_form.png[]
+.The Scout Object Properties for a complete form (left) and a string form field (right).
+image::{imgsdir}/properties_stringfield.png[]
+
+For the description of the Scout Object Properties of typical Scout components we use the example views provided in <<img-properties_view_examples>>. 
+Both Scout Object Properties example views for the desktop form and the message field are taken from the "`Hello World!`" application described in Chapter <<cha-helloworld>>. 
+As in the case of the top-level node representing the complete Scout application, the typical layout of the Scout Object Properties view is organized into several expandable sections. 
+The content and ordering of the property sections usually follows the following scheme:
+
+ * Filter
+ * Links
+ * Properties
+ * Operations
+ * Advanced Properties
+ * Advanced Operations
+
+
+If a folder node (such as the [folder]_Forms_ folder under the orange client node) is selected in the Scout Explorer, the Scout Object Properties only shows a filter section with a filter field. 
+The content in this filter field then restricts the elements below the folder icon accordingly. 
+This feature is especially useful for the development of larger applications containing hundreds of forms or services. 
+
+The [element]_Links_ section provides a set of hyperlinks as shown on the left hand side of <<img-properties_view_examples>>. 
+The provided links all refer to Java classes and interfaces that related to the Scout component represented by the property view. 
+
+The available properties of a Scout component are listed in sections [element]_Properties_ and [element]_Advanced Properties_. 
+Basically, all available Java [java]+getConfigured+ methods of a Scout component are listed in one of the two sections depending on the frequency of their usage. 
+Section [element]_Properties_ shows the often used properties, while the less frequently used properties are provided in section [element]_Advanced Properties_. 
+The examples in <<img-properties_view_examples>> show the thematic organization of the sections into [element]_Appearance_, [element]_Layout_, [element]_Behavior_ and other groups.
+
+Access to object operations implemented with Java [java]+exec+ methods is provided in sections [element]_Operations_ and [element]_Advanced Operations_. 
+Again, the more and less frequently used operations are assigned to individual sections. 
+
+For all listed properties and operations the corresponding Javadoc is displayed in the form of a tooltip window. 
+To display the available Javadoc, move the mouse pointer over the method of interest in the Scout Object Properties.footnote:[
+This features is work in progress, as for some methods shown in the Scout Object Properties the Javadoc content is not yet available. 
+]. 
+
+
+So far, we did only describe the content and organization of the Scout Object Properties. 
+In the reminder of this section we will describe the procedure how to change or update the properties and operations of Scout components. 
+To indicate non-default property values or non-default behavior, the font of the property or operation is switched to underlined bold face. 
+As an example, consider the property [element]_Ask If Need Save_ of the desktop form shown on the left side of <<img-properties_view_examples>>. 
+The bold font visualizes that this does not correspond to the default behavior of forms. 
+And underlining of this property further indicates, that the label has become a clickable link. 
+Clicking on this label will load the corresponding method into the Java editor in the Scout SDK. 
+
+To change a property for a specific Scout component just enter a value in the corresponding field or tick/untick the provided checkbox. 
+In some cases the value may also be chosen from a dropdown list. 
+For the label field shown on the right hand side of <<img-properties_view_examples>>, the "`Message`" value refers to the translation of the text key to be used in method [java]+getConfiguredLabel+. 
+To enter a new label text, start typing the desired translated label and pick the option "`New translated text...`". 
+
+To reset a property or operation to its default value/behavior, you may click on the red [icon]_Minus_ icon provided on the right side of the property field. 
+This will remove the overridden method from the object's Java code. 
+
+=== Scout SDK Wizards
+(((SDK Wizard)))
+
+The Scout SDK wizards allow the developer to create Scout application model components with just a few clicks. 
+Creation wizards are provided for all major model components such as forms on the client side or services on the server side. 
+The usage of wizards not only makes developing Scout applications efficient but also helps to create robust code and reduces the number of errors. 
+
+Scout SDK wizards can do many things. 
+They add and update Java classes, register services in the [filename]+plugin.xml+ files, manage plugin dependencies in the [filename]+MANIFEST.MF+ files and update Eclipse product files when necessary. 
+All these capabilities hide a lot of the complexity of writing Eclipse based applications. 
+This simplifies the development of Scout application considerably.
+
+In the subsections below, the most commonly used Scout SDK wizards are explained. 
+First, the wizards to create and export complete Scout applications are described. 
+Then, the wizards to create Scout application model components are introduced. 
+
+[[sec-wizard_new_project]]
+==== Creating a new Scout Project
+(((SDK Wizard!New Scout Project)))
+
+The [wizard]_New Scout Project_ wizard creates a new Scout client server application. 
+In the Scout Explorer, the menu:New Scout Project...[] context menu is provided on the top-level [folder]_Scout Projects_ folder. 
+The creation of a form based Scout application has already been introduced in Section <<sec-create_project_simple>> for the "`Hello World`" tutorial.
+And Section <<sec-create_project_simple_background>> provides background information related to the artifacts created by this wizard. 
+In the text below, we will describe the different steps of the creation wizard individually.
+
+[[img-wizard_new_project, Figure 000]]
+image::{imgsdir}/wizard_new_project_1.png[]
+.The Scout SDK wizard to create a new Scout application. The first wizard dialog (left) is used to specify the needed application plugins.  In the next wizard step (right) the application template is selected.
+image::{imgsdir}/wizard_new_project_2.png[]
+
+In the first wizard step shown on the left hand side of <<img-wizard_new_project>>, the project name and the application plugins must be chosen.
+The [field]_Project Name_ field is used as base name of the application's plugins and as the Java package base names inside of the plugins. 
+If the project name is written as parts separated by periods, the last part is copied into the [field]_Project Alias_ field.
+
+When building multi module applications, the optional [field]_Project Postfix_ field can be specified to apply a common naming schemes for the different modules.
+The resulting application plugins (UI, client, shared, server) are then named following the scheme [java]+<Project Name>.<plugin>.<Project Postfix>+. 
+
+In the box below the postfix field the list of possible application plugins is provided. 
+Initially, all possible plugins are checked which is useful to quickly demonstrate a "`Hello World`" application.
+However, for a typical setup only one or two UI plugins will be needed. 
+To develop a mobile/web application only the RAP UI plugin is necessary. 
+For a desktop only client, either the Swing or the SWT UI plugin will be needed.
+And in cases where the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be chosen. 
+A Scout application must not necessarily be a client-server application. 
+It is also possible to create a client only or a server only application. 
+But make sure to include the shared plugin in all possible use cases. 
+
+In the [field]_Eclipse Platform_ field the Eclipse target platform version can be selected. If you choose another platform version than the running Eclipse instance, the platform must be downloaded from the Eclipse update site. This requires Internet access.
+
+The content of the [field]_Alias_ field is used for the client's executable file, the name of the servlet representing the Scout server application and to build the product launcher names. 
+And if the [field]_Use default Scout JDT preferences_ field is checked, the Scout default Java development settings are used. 
+Otherwise, you start with no settings and can apply your own template. 
+
+As we have seen in the "`Hello World`" tutorial, it is sufficient to provide a project name in the first wizard step and click on the btn:[Finish] button to create a form based client server application. 
+But we can also click on the btn:[Next] button to choose an application template.
+
+The second wizard step shown on the right side of <<img-wizard_new_project>> allows to choose a Scout application template for the new project. 
+When choosing the template _Empty Application_ only a minimal code base is created. 
+The other two application templates represent different application types. 
+The template _Application with a single Form_ is the default choice used for the "`Hello World`" tutorial.
+Finally, the template _Outline Tree and Table Form_ can be used to build explorer like applications. 
+The outline tree is typically used to navigate between related business entities. 
+And the tables are used to list a number of business entities with their attributes. 
+We will use this template for the creation of a larger Scout application in Chapter <<cha-large_example>>. 
+As in the case of the first wizard step, you may click btn:[Finish] button to start the creation of an initial Scout application. 
+Or, click on btn:[Next] button and manually step through the third and last wizard step. 
+
+[[img-wizard_new_project_rap_target, Figure 000]]
+.The last wizard step is used to specify the RAP target for the new Scout application.
+image::{imgsdir}/wizard_new_project_3.png[]
+
+The third wizard step shown in <<img-wizard_new_project_rap_target>> is only available if the RAP UI plugin has been checked in Step 1.
+Because the RAP runtime must not be installed into the running Eclipse instance,  a separate RAP target platform is created and used by the Scout SDK. 
+This target platform then contains all necessary plugins to run the Scout RAP UI. 
+The different options provided by this wizard step are the following:
+
+When choosing the option _Create new RAP Target_, a new RAP target platform will be created at the location specified. This target platform can then be used by several projects.
+
+Option _Download RAP Target_ will downloaded the target platform into the running workspace. This download will then only be available to the active workspace.
+    
+With the option _Existing RAP Target_ an existing RAP target location can be specified. Usually this is a location that has already been created using option 1.
+
+To manually define a RAP target platform choose option _I'll do it later_. 
+With this option, the Scout SDK does not create a RAP target platform for you. 
+But note that the created project will not compile before a complete target platform has been created for the Scout application.  
+
+==== Exporting a Scout Project
+(((SDK Wizard!Export Scout Project)))
+
+The [wizard]_Export a Scout Project_ wizard allows to export a complete Scout client server application as WAR or EAR files. 
+In the Scout Explorer, the menu:Export Scout Project...[] context menu is provided on the main application node just below the top-level [folder]_Scout Projects_ folder. 
+
+[[img-wizard_export, Figure 000]]
+image::{imgsdir}/wizard_export_1.png[]
+.The Scout SDK wizard to a new Scout application into WAR files. The first wizard step (left) is used to select the artifact to be exported.  In the next wizard step (right) is used to define the server WAR file name and to select the server product file to be used for the export.
+image::{imgsdir}/wizard_export_2.png[]
+
+As a simple use case, the usage of the export wizard is described in Section <<sec-helloworld_export>> of the "`Hello World`" tutorial. 
+And the corresponding background Section <<sec-helloworld_export_background>> provides information regarding the content and the organization of the WAR files produced by this wizard. 
+
+In the first export wizard step shown on the left hand side of <<img-wizard_export>> the target directory and the type of content to be exported is defined. 
+The [field]_Target Directory_ field is used to define the directory where the generated WAR files will be exported to. 
+Checking the [field]_Export as Enterprise Archive (EAR)_ field the WAR file(s) will be packed into a EAR file using the file name provided in the [field]_EAR File Name_ field. 
+
+In the artifact selector box the content to be included in the export can be specified:
+ * The blue [node]_Server Web Application_ node represents the Scout server application. If ticked, the corresponding WAR file will also include a zipped desktop client that will then be provided for download to users (only if a desktop client exists in the current Scout project).
+ * Selecting the orange [node]_Client Application (ZIP)_ node node will put a zipped client into the target directory.
+ * When working with web/mobile applications the necessary RAP server is represented by the grey [node]_RAP Web Application_ node.
+
+
+The default scenario assumes that you work with a Scout client server application including a SWT desktop client and corresponding web/mobile clients. 
+For this setup you just need to provide a target directory before you can click the btn:[Finish] button to start the export. 
+To verify/update what the export wizard will create you may click the btn:[Next] button to move to the second wizard step.
+
+The second wizard step is shown on the right side of <<img-wizard_export>>. 
+The server WAR file name proposed in the [field]_WAR File_ field uses the naming scheme [filename]+<Project Alias>_server.war+. 
+In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+In the [field]_Product File_ field the server product file to be used for the creation of the WAR file can be specified. 
+Clicking the btn:[Next] button will move to the next wizard step to select the client product to be exported.
+
+[[img-wizard_export_client, Figure 000]]
+.The third export wizard step is used to specify the desktop client product file to be used for the export and the download location for the resulting zipped client.
+image::{imgsdir}/wizard_export_client_application.png[]
+
+In the third wizard step shown in <<img-wizard_export_client>> the client product file can be selected. 
+If the current Scout project defines both a Swing and a SWT client, the default will use the SWT client. 
+Clicking on the dropdown button next to the [field]_Client Product to include_ field will open a [element]_Select Product_ dialog to choose the right product from all available client products. 
+In the [field]_Client Download Location_ field the path to the zipped client inside the server WAR file is defined. 
+In order for this WAR file to work out-of-the-box it is recommended to use the proposed value. 
+With the btn:[Next] button the last export wizard step is shown.
+
+[[img-wizard_export_rap_server, Figure 000]]
+.The last export wizard step is used to specify the define the name of the server WAR for the RAP web/mobile application and the corresponding product file to be used for the export.
+image::{imgsdir}/wizard_export_rap_server.png[]
+
+The last export wizard step is shown in <<img-wizard_export_rap_server>>. 
+A RAP server WAR file name is proposed in the [field]_WAR File_ field based on the naming scheme [filename]+<Project Alias>.war+. 
+In order for this WAR file to work out-of-the-box it is recommended to use the proposed value. 
+In the [field]_Product File_ field the RAP server product file to be used for the creation of the WAR file can be specified. 
+The btn:[Finish] button will then start the export. 
+
+After the wizard has completed the export, all resulting artifacts will be located in the target directory specified in the first wizard step. 
+
+==== Creating new Forms
+
+The [wizard]_New Form_ wizard allows to create a new form including the necessary form data, permissions and server services. 
+In the Scout Explorer, the menu:New Form...[] context menu is provided on the [folder]_Forms_ folder under the orange client node. 
+
+[[img-wizard_service, Figure 000]]
+image::{imgsdir}/wizard_form_1.png[]
+.The Scout SDK wizard to create a new form.
+image::{imgsdir}/wizard_form_2.png[]
+
+
+==== Creating new Form Fields
+(((SDK Wizard!New Form Field)))
+
+The [wizard]_New Form Field_ wizard allows to create a new form field. 
+In the Scout Explorer, the menu:New Form Field...[] context menu is provided on Scout Explorer nodes representing composite form fields, such as the [node]_MainBox_ node below a form node. 
+
+[[img-wizard_field_start, Figure 000]]
+image::{imgsdir}/wizard_field_contextmenu.png[]
+.Starting the new form field wizard with the context menu on a composite field (left). The first wizard step (right) is used to select the field type.
+image::{imgsdir}/wizard_field_1.png[]
+
+<<img-wizard_field_start>> provides screenshots for starting the form field wizard with the context menu and the first wizard page. 
+In the first wizard step, the list of all available Scout form field types is presented. 
+To quickly find the desired form field type, a part of the type name can be entered in the search field above the field type list. 
+In the screenshot on the right hand side of <<img-wizard_field_start>> this search field contains the value '`s`' which filters the field type list accordingly. 
+Once the type of the new form field is selected, the next wizard step can be loaded by clicking on the btn:[Next] button.
+
+[[img-wizard_field_name, Figure 000]]
+.The second form field wizard step is also used to assign a field label.  By typing a word or a parts of it into the [field]_Name_ field a list of existing and matching text entries is provided.
+image::{imgsdir}/wizard_field_2.png[]
+
+In the second wizard step shown in <<img-wizard_field_name>> the remaining creation parameters for the new form field can be specified. 
+The [field]_Name_ field is used to define the content of the field label. 
+For this, a translated text entry has to be defined. 
+By typing a string into the name field, all potentially matching existing translation entries are shown in a dropdown list. 
+As shown in <<img-wizard_field_name>> not only the text key is used to find matching entries but also translated text entries. 
+When assigning the label for a preferences string field, the substring "`Pref`" lists a set of text keys that have a matching entries. 
+
+[[img-wizard_field_translation, Figure 000]]
+image::{imgsdir}/wizard_field_translation.png[]
+.Adding a text translation for a field label (left) and specifying the ordering of the fields (right).
+image::{imgsdir}/wizard_field_3.png[]
+
+One of the presented options in the list of text entries is the [element]_New translated text..._ entry. 
+A double click on this entry starts the wizard to create a new text entry as shown on the left hand side of <<img-wizard_field_translation>>. 
+The [field]_Key Name_ field holds the text key that is used to access translated text.footnote:[
+The access to the translated texts using [java]+TEXTS.get+ is described in the "`Hello World`" UI background chapter in Section <<sec-helloworld.userinterface.background>>. 
+].
+In the tabs below the key name field, the text translations for the registered languages can be provided. 
+Make sure to at least provide a text in the [element]_default_ tab. 
+This text will be used in the Scout application if no translation is available that better matches the logged in user's locale. 
+
+Once the name field is filled in, the entered text key is also used to create a proposal for the [field]_Class Name_ field using the pattern [java]+<Field Name>Field+. 
+In contrast to the label field, the class name field is mandatory. 
+If the field does not need a label the name field can remain empty. 
+In that case, a class name still needs to be provided as described in Section <<sec-helloworld_ui>> for the [java]+DesktopBox+ class in the "`Hello World`" application. 
+
+The [field]_Sibling_ field is used to define the ordering of the form fields in the parent container. 
+As shown on the right hand side of <<img-wizard_field_translation>>, the new [java]+PreferencesField+ is to be placed before the message field. 
+
+==== Creating new Outlines
+(((SDK Wizard!New Outline)))
+
+The [wizard]_New Outline_ wizard allows to create the container to display data of pages.  
+In the Scout Explorer, the menu:New Outline...[] context menu is available on the [folder]_Outlines_ folder below the [node]_Desktop_ node under the applications client node.
+The [wizard]_New Outline_ wizard is shown in <<img-wizard_outline>>.
+
+[[img-wizard_outline, Figure 000]]
+.The Scout SDK wizard to create a new outline.
+image::{imgsdir}/wizard_outline.png[]
+
+==== Creating new Pages
+(((SDK Wizard!New Page)))
+
+The [wizard]_New Page_ wizard allows to create pages which are shown in the corresponding outlines.
+In the Scout Explorer, the menu:New Page...[] context menu is available below outlines, below other pages or in the [folder]_All Pages_ folder.
+The [wizard]_New Page_ wizard is shown in <<img-wizard_page>>.
+
+[[img-wizard_page, Figure 000]]
+image::{imgsdir}/wizard_page_1.png[]
+image::{imgsdir}/wizard_page_2.png[]
+.The Scout SDK wizard to create a new page with table.
+image::{imgsdir}/wizard_page_3.png[]
+
+==== Creating new Table Columns
+(((SDK Wizard!New Table Column)))
+
+The [wizard]_New Column_ wizard allows to create columns in a table.
+In the Scout Explorer, the menu:New Column...[] context menu is available below tables, on the [folder]_Columns_ folder.
+The [wizard]_New Column_ wizard is shown in <<img-wizard_column>>.
+
+[[img-wizard_column, Figure 000]]
+image::{imgsdir}/wizard_column_1.png[]
+.The Scout SDK wizard to create a new table column.
+image::{imgsdir}/wizard_column_2.png[]
+
+[[img-wizard_column_explorer_properties, Figure 000]]
+.Column Properties.
+image::{imgsdir}/wizard_column_explorer_properties.png[]
+
+==== Creating new Search Forms
+(((SDK Wizard!New Form Field)))
+
+The [wizard]_New Search Form_ wizard allows to create a new Scout form to search for elements displayed in pages.  
+In the Scout Explorer, the menu:Create Search Form...[] context menu is provided on the [folder]_Search Forms_ folder under the orange client node. 
+If you have already a page and the corresponding column created, you can directly create a search form based on that table as shown in <<img-wizard_search_form_contextmenu>>.
+
+[[img-wizard_search_form_contextmenu, Figure 000]]
+.Start the Scout SDK search form wizard for an existing table page.
+image::{imgsdir}/wizard_search_form_contextmenu.png[]
+
+
+==== Creating new Services and Operations
+
+The [wizard]_New Service_ wizard allows to create new services to execute tasks and provide data to a client. 
+In the Scout Explorer, the menu:New Service...[] context menu is provided on the [folder]_Services_ folder under the orange client node and the blue server node. 
+This reflects the fact that services may be defined on both the client and the server side. 
+
+[[img-wizard_service_contextmenu, Figure 000]]
+.Starting the service creation wizard to add a new server service.
+image::{imgsdir}/wizard_service_contextmenu.png[]
+
+[[img-wizard_service, Figure 000]]
+image::{imgsdir}/wizard_service_1.png[]
+.The Scout SDK wizard to create a new service.
+image::{imgsdir}/wizard_service_2.png[]
+
+
+[[sec-wizard_code_type]]
+==== Creating new Code Types and Codes
+
+The [wizard]_New Code Type_ wizard allows to create new code types. 
+As access to code types and codes is required from both client and server applications they are located in the application's shared plugin. 
+Consequently, the menu:New Code Type...[] context menu is provided on the [folder]_Code Types_ folder under the green shared node in the Scout Explorer. 
+
+[[img-wizard_code_type, Figure 000]]
+image::{imgsdir}/wizard_code_type.png[]
+.The Scout SDK wizards to create a new code type (left) and a new code (right).
+image::{imgsdir}/wizard_code.png[]
+
+A screenshot of the wizard to create a new code type is shown on the left side of <<img-wizard_code_type>>. 
+The [field]_Code Id_ field contains the ID that will be assigned to the new code type. 
+Take care to ensure that the content of this field matches with the type provided in the [field]_Datatype of CodeType Id_ field. 
+The [field]_Name_ contains an optional name for the code type, and the [field]_Class Name_ field the name of the Java class to be created. 
+If the name field is filled in, the class name field is automatically derived from the provided name. 
+
+The [wizard]_New Code_ wizard shown on the right side of <<img-wizard_code_type>> allows to create individual codes. 
+In the Scout Explorer it can be accessed through the menu:New Code ...[] context menu on existing code type nodes. 
+For hierarchical code types, this wizard is also made available on existing codes to create inner codes. 
+
+
+
+==== Creating new Library Bundles
+
+The [wizard]_New Library Bundle_ wizard allows to add functionality provided in standard JAR files to a Scout application. 
+In the Scout Explorer, the menu:New Library Bundle...[] context menu is provided on the top-level [folder]_Libraries_ folder and individually under the orange client node, the green shared node and the blue server node. 
+
+[[img-wizard_library_bundle, Figure 000]]
+image::{imgsdir}/wizard_library_bundle_1.png[]
+.The Scout SDK wizard to add external JAR files in the form of a library bundle to a Scout project.
+image::{imgsdir}/wizard_library_bundle_2.png[]
+
+
+==== Creating new Application Modules
+(((SDK Wizard!Create new Scout Bundles)))
+
+In some projects it may be desired to split the application into several modules.
+This allows to split the application into smaller parts and allows to deliver multiple versions with different features (e.g. a "Professional Edition" that contains more functionality).
+For this an additional set of client, shared and server plugins can be created to group e.g. all the "Professional Edition" features.
+To create a new module the [wizard]_Create new Scout Bundles_ wizard can be started by using the menu:Add Scout Bundles...[] context menu on the project node (like org.eclipsescout.helloworld).
+
+[[img-wizard_module, Figure 000]]
+image::{imgsdir}/wizard_new_bundles_1.png[]
+.The Scout SDK wizard to create a new application module.
+image::{imgsdir}/wizard_new_bundles_2.png[]
+
+
+[[sec-nls_editor]]
+==== The NLS Editor
+(((Managing translated application texts)))
+(((Adding application languages)))
+
+include::{mdledir}/SdkEditorNls_figure.adoc[]
+
+
+Access to translated texts in Scout applications is provided through text provider services located in the application's shared plugin. 
+This setup makes translated texts available in the client and the server part of the application. 
+Consequently, the Scout SDK provides access to the NLS Editor to manage translated texts and application languages under the green shared node in the Scout Explorer view as shown in <<img-nls_editor>>.
+
+include::{mdledir}/SdkEditorNls_open.adoc[]
+In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
+This opens the editor to change the text to the desired value.
+To add a new translated text, the corresponding dialog can be opened by clicking on the button with the '`T`' icon next to the 'New language' button (shown in <<img-nls_editor>>).
+
+In Scout applications, translated texts are obtained with the method [java]+TEXTS.get("key")+ where "key" represents the language independent text key.
+In a default Scout project setup, calling [java]+TEXTS.get+ uses the [java]+<Project Alias>TextProviderService+ in the background.
+And this text provider service defines the access path for the text property files that are located in the applications shared plugin.
+Typically, these property files are collected in the plugin's [filename]+<youraplication>.shared/resources/texts+ directory according to the right hand side of <<img-adding_a_language>>. 
+To resolve the provided text key at runtime, the user's locale settings is used to access the correct text property file.
+
+[[img-adding_a_language, Figure 000]]
+image::{imgsdir}/sdk_add_language_dialog.png[]
+.In the dialog [element]_Add a Language_ shown on the left side the desired language and localization can be specified. On the right side, the location of property file [java]+Texts_es_ES.properties+ in the shared plugin of the "`Hello World`" application is shown.
+image::{imgsdir}/sdk_shared_plugin_language_file.png[]
+
+Adding support for a new language to a Scout project is also directly supported by the Scout SDK. 
+To add support for a new translated language, click on the corresponding icon of the NLS editor as shown in <<img-nls_editor>>.
+In the opened language dialog, add the desired language and country localization and the target directory as shown in <<img-adding_a_language>>.
+A new language properties file is then added to the shared plugin project as shown in <<img-adding_a_language>>.
+The new language is now available as an additional column in the NLS editor and as a separate tab in the dialog to add new translated texts.
+

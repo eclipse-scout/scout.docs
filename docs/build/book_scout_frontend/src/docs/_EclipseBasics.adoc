@@ -1,0 +1,95 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Eclipse Basics"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[appendix]
+[[apx-eclipse_basics]]
+== Eclipse Basics
+
+
+[[apx-eclipse_ide]]
+=== Eclipse as an IDE
+
+Excellent Eclipse IDE tutorial by L. Vogel http://www.vogella.com/articles/Eclipse/article.html.
+
+==== Project Workspace
+
+[[apx-eclipse_perspective]]
+==== Perspectives
+
+A perspective contains the visual elements and the arrangement of those elements to support a specific development task within the Eclipse IDE. 
+Perspectives relevant to the development of Scout applications are the Scout perspective, the Java perspective, the Debug perspective, and many others. 
+To open a perspective available in the Eclipse IDE, the btn:[Open Perspective] button or the menu:Window[Open Perspective,Other...] menu can be used. 
+
+[[img-eclipse_ide_parts, Figure 000]]
+.The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple). 
+image::{imgsdir}/eclipse_ide_parts.png[]
+
+<<img-eclipse_ide_parts>> provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved. 
+Using drag and drop, views and editors can be freely moved around in the Eclipse IDE to suit the developer's needs.
+Perspectives can be further individualized using the menu:Window[Customize Perspective...] menu. 
+Here, the visibility of the toolbar items and menu entries can be defined. 
+Once a suitable layout of all desired elements has been defined, this organisation may be saved as a personal perspective using the Eclipse IDE menu:Window[Save Perspective As...] menu.
+
+In case a customizing step does not turn out as intended, with the menu:Window[Reset Perspective...] menu is always possible to go back to the last saved state of the current perspective.
+
+
+[[apx-osgi_basics]]
+=== OSGi and Equinox
+
+TIP: The goal of this section is to provide the reader with a solid overview of OSGi concepts and its Equinox implementation. 
+    Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
+
+What is OSGi: http://www.osgi.org/Technology/WhatIsOSGi
+What is Equinox: http://www.eclipse.org/equinox/
+
+Server-side Equinox: http://www.eclipse.org/equinox/server/http_in_container.php
+
+The web.xml, the lib/servletbridge.jar and eclipse/plugins/servlet, equinox and bla stuff
+
+bundle example
+
+
+needs text
+
+  * bundles
+  * services
+  * classloading
+  
+
+[[apx-platform_basics]]
+=== Eclipse
+
+TIP: The goal of section is to provide the reader with a solid overview of standard Eclipse concepts relevant for scout projects and central parts of the Scout framework and Scout SDK tooling. 
+    where appropriate, provide links to high quality online material that is likely to exist for at least the next year or two
+
+needs text
+
+
+[[apx-plugin_basics]]
+=== Eclipse Plugins
+
+release engineering artefacts vs runtime artefacts. start with runtime artefacts
+
+  * plugins
+  * fragments
+  * features
+  * products
+  * targets
+  * servlet bridge
+  * client exe files
+
+

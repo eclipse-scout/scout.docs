@@ -1,0 +1,47 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Run the hello world application"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+After the initial project creation step we can start the Scout application for the first time.
+For this, we switch to the Scout Explorer view and select the root node [java]+org.eclipse.scout.helloworld+.
+This then loads the corresponding controls and the _Product Launchers section_ into the _Scout Object Properties_ view as shown in <<img-sdk_initial_helloworld_project>>.
+
+[[img-start_client, Figure Starting the Hello World application]]
+.Starting the Hello World application in the Scout SDK using the provided product launcher. Make sure to start the server before starting any client product.
+image::{imgsdir}/sdk_start_client_product.png[]
+
+In the product launcher section of the Scout Object Properties view four launcher boxes are available. 
+One launcher box for the Scout server product, and three launchers for the different client products.
+Each launcher box provides a link to the corresponding configuration and product definition files, as well as the launcher icons to start and stop the corresponding product.
+The green [icon]_Circle_ icon starts the product in normal mode.
+The [icon]_Bug_ icon just below, starts a product in debug mode.
+To terminate a running product, the red [icon]_Square_ icon is provided. 
+
+Before any of the client products is started, we need to start the server product using the green circle or the bug launcher icon.
+During startup of the Scout server you should see console output similar to the one shown on the right hand side of <<img-start_client>>.
+
+Once the server is running, you may start the RAP client as shown in <<img-start_client>>.
+To start the Swing client, or the SWT client use the corresponding green [icon]_Circle_ icon or [icon]_Bug_ icon.
+And with a running RAP client, the Scout client can be opened in a web browser by clicking on the provided [link]_Automatic Device Dispatch_ link.
+
+[[img-helloworld_empty, Figure Running the three client applications]]
+image::{imgsdir}/hellworld_empty_rap.png[]
+image::{imgsdir}/hellworld_empty_swing.png[]
+.Running the three client applications.  Each client displays an empty desktop form.  The RAP client, the Swing client, and the SWT client
+image::{imgsdir}/hellworld_empty_swt.png[]
+
+Having started the Scout server and all client products, the running client applications should look as shown in <<img-helloworld_empty>>.
+

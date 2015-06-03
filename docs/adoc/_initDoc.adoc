@@ -1,0 +1,13 @@
+
+// this is initDoc document used by all modules when displayed as standalone document.
+
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+
+:scoutExplorerView: Scout Explorer view
+:scoutPropView: Scout Object Properties view
+
+:sectanchors:
+
+include::_initCommon.adoc[]
