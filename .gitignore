@@ -3,6 +3,7 @@
 
 # Java Class Files #
 *.class
+*.classpath
 
 # Package Files #
 *.jar
