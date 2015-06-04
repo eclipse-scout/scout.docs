@@ -18,9 +18,9 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.DateUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.NumberUtility;
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -97,9 +97,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the AutoResizeColumnsField
-   */
   public AutoResizeColumnsField getAutoResizeColumnsField() {
     return getFieldByClass(AutoResizeColumnsField.class);
   }
@@ -109,9 +106,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DefaultField
-   */
   public DefaultField getDefaultField() {
     return getFieldByClass(DefaultField.class);
   }
@@ -124,23 +118,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the TableHeaderVisibleField
-   */
   public TableHeaderVisibleField getTableHeaderVisibleField() {
     return getFieldByClass(TableHeaderVisibleField.class);
   }
 
-  /**
-   * @return the InsertedRowsField
-   */
   public InsertedRowsField getInsertedRowsField() {
     return getFieldByClass(InsertedRowsField.class);
   }
 
-  /**
-   * @return the IsEditableField
-   */
   public IsEditableField getIsEditableField() {
     return getFieldByClass(IsEditableField.class);
   }
@@ -157,9 +142,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the MultiSelectField
-   */
   public MultiSelectField getMultiSelectField() {
     return getFieldByClass(MultiSelectField.class);
   }
@@ -168,23 +150,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(PropertiesGroupBox.class);
   }
 
-  /**
-   * @return the SelectedRowsField
-   */
   public SelectedRowsField getSelectedRowsField() {
     return getFieldByClass(SelectedRowsField.class);
   }
 
-  /**
-   * @return the TableField
-   */
   public TableField getTableField() {
     return getFieldByClass(TableField.class);
   }
 
-  /**
-   * @return the TableStatusVisibleField
-   */
   public TableStatusVisibleField getTableStatusVisibleField() {
     return getFieldByClass(TableStatusVisibleField.class);
   }
@@ -193,9 +166,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(UpdatedRowsField.class);
   }
 
-  /**
-   * @return the DefaultIconIdField
-   */
   public DefaultIconIdField getDefaultIconIdField() {
     return getFieldByClass(DefaultIconIdField.class);
   }
@@ -424,24 +394,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               return 120;
             }
 
-            @Override
-            protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
-              super.execDecorateCell(cell, row);
-            }
-
-            @Override
-            protected String execValidateValue(ITableRow row, String rawValue) throws ProcessingException {
-              Cell cell = row.getCellForUpdate(getNameColumn());
-
-              if (StringUtility.isNullOrEmpty(rawValue)) {
-                cell.setErrorStatus(TEXTS.get("NoEmptyName"));
-              }
-              else {
-                cell.clearErrorStatus();
-              }
-
-              return rawValue;
-            }
           }
 
           @Order(30.0)
@@ -532,17 +484,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               return 100;
             }
 
+            /**
+             * Accepts only positive values
+             */
             @Override
             protected Long execValidateValue(ITableRow row, Long rawValue) throws ProcessingException {
-              Cell cell = row.getCellForUpdate(this);
-
-              if (NumberUtility.nvl(rawValue, 1) >= 0) {
-                cell.clearErrorStatus();
+              if (NumberUtility.nvl(rawValue, 1) < 0) {
+                throw new VetoException(TEXTS.get("NoNegNumber"));
               }
-              else {
-                cell.setErrorStatus(TEXTS.get("NoNegNumber"));
-              }
-
               return rawValue;
             }
           }
