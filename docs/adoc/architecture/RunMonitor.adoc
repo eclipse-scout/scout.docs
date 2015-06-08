@@ -1,0 +1,25 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+// This file describes the architecture of RunContext
+//-----------------------------------------------------------------------------
+
+= RunMonitor
+A `RunMonitor` provides cancellation support and allows registration of `ICancellable` objects to be notified once the monitor gets cancelled. A `RunMonitor` itself is also of the type `ICancellable`, meaning that it can be registered within another monitor as well. That way, a monitor hierarchy can be created to support nested cancellation. That is exactly what is done when creating a copy of the current calling context, namely that the new monitor is registered as `ICancellable` within the monitor of the current calling context. +
+The cancellation mechanism works as following: if a monitor gets cancelled, all registered `ICancellable`, which also includes child monitors, are cancelled as well. However, that only works top-down, and not bottom-up, meaning that a parent monitor is not cancelled once a child monitor is cancelled.
+Because almost every code is run on behalf of a `RunContext`, running code can always query its cancellation status by `RunMonitor.CURRENT.get().isCancelled()`. That also applies for code running on behalf of a job, and also for jobs which are not run on behalf of a `RunContext`. That is because Scout Job API ensures to associate every job with a respective `RunMonitor`, which either is the provided one or a new one. Furthermore, the job's Future is linked with the job's `RunMonitor`, meaning that cancellation requests targeted to the `Future` are also propagated to the `RunMonitor`, and vice versa.
+
+The following <<img-runmonitor_associations>> illustrates the `RunMonitor` and its associations.
+
+[[img-runmonitor_associations, figure]]
+.RunMonitor and its associations
+image::{imgsdir}/runmonitor_associations.png[]
