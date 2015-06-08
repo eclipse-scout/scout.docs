@@ -14,4 +14,5 @@ ifndef::mdledir[:mdledir: .]
 //
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
-TODO: the Scout Object Properties View
+
+The Scout Object Properties view provides direct access to configurable properties and operations for the element selected in the {scoutExplorerView}.

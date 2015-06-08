@@ -17,5 +17,5 @@ The Scout Tooling provides:
 
 * <<sdk_perspective.adoc#, Scout Perspective>>
 * <<sdk_view.adoc#, Scout Views>>
-* <<sdk_wizard.adoc#, Scout Wizards>>
-* <<sdk_editors.adoc#, Scout Editors>>
+//* <<sdk_wizard.adoc#, Scout Wizards>>
+//* <<sdk_editors.adoc#, Scout Editors>>

@@ -214,6 +214,13 @@ public class PersonForm extends AbstractForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("LastName");
         }
+
+        // tag::mandatory[]
+        @Override
+        protected boolean getConfiguredMandatory() {
+          return true;
+        }
+        // end::mandatory[]
       }
 
       @Order(30.0)

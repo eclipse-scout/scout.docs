@@ -28,57 +28,10 @@ include::{mdledir}/SdkScoutTooling.adoc[]
 The Scout SDK is added to the Eclipse IDE in the form of the Scout perspective.footnote:[
 See Appendix <<apx-eclipse_perspective>> for additional information regarding Eclipse IDE perspectives. 
 ].
-With the Scout Explorer and Scout Objects Properties, two view parts are contained in the Scout perspective. 
-Additionally, the Scout SDK contains a comprehensive set of wizards that support the developer in creating Scout application components. 
+To illustrate how the perspective works, we will re-use the "`Hello World`" Scout project from Chapter <<cha-helloworld>>.
 
-The Scout Explorer view allows the developer to navigate the Scout application model. 
-Once an element in the Scout Explorer is selected, the Scout Object properties view allows to validate and change properties of the selected element. 
-Depending on the selection in the Scout Explorer, the Scout SDK offers appropriate context menus to start the related wizards.
+include::{mdledir}/SdkPerspective.adoc[]
 
-[[img-scout_sdk_perspective, Figure 000]]
-.The Scout SDK perspective. On the left hand side the Scout Explorer and the Scout Object Properties views are visible.
-image::{imgsdir}/scout_sdk_perspective.png[]
-
-<<img-scout_sdk_perspective>> provides a screenshot of the Scout SDK perspective. 
-In the Scout Explorer shown in the upper left part of the screenshot, the message field in the DesktopForm of the "`Hello World`" application is selected. 
-In the Scout Object Properties located below, the message field's appearance, layout and behavior properties are displayed. 
-On the right hand side, the corresponding source code is loaded in a Java editor. 
-
-When the developer changes a property of the selected element, the Java code is updated accordingly and vice versa. 
-For example clicking the [property]_Mandatory_ property in the Scout Object Properties of the message field will insert the method [java]+getConfiguredMandatory+ to the message field's class. 
-This demonstrates how the Scout SDK directly works on the Java source code. 
-In fact, the Java source code is almost the only artifact relevant for the Scout SDK to '`understand`' the Scout application model. 
-Taking advantage of this setup, the Scout SDK implements a full round-trip-engineering from creating the Java code for Scout application components, parsing code changes in the background, and displaying the current implementation of the Scout application in the Scout Explorer and the Scout Object Properties.
-
-Thanks to the round-trip-engineering provided by the Scout SDK, the information presented in the Scout Explorer and the Scout Object Properties always stay in sync with the Java code of the Scout application.
-To illustrate this, we will re-use the "`Hello World`" Scout project from Chapter <<cha-helloworld>>. 
-Start the Eclipse IDE with the workspace containing the "`Hello World`" application.
-Then, navigate to method [java]+getConfiguredLabel+ as shown in <<img-scout_sdk_perspective>>, and add the java snippet shown below to the class [java]+MessageField+. 
-
-----
-    @Override
-    protected boolean getConfiguredMandatory() {
-        return true;
-    }
-----
-
-After having saved the code change, you can observe that the [property]_Mandatory_ property in the section Behavior of the message field's Scout Object properties has changed its state. 
-The font of its label is now presented in bold face and underlined, the checkbox is ticked and a red minus icon is shown on the right side of the property. 
-Obviously, the Scout SDK is directly operating on the project's source code and does not rely or need any external meta data. 
-This provides the flexibility to develop Scout applications with or without the support of the Scout SDK. 
-And this choice offered to the Scout developer is one of the most important features provided by the Scout SDK. 
-The Scout developer may take advantage of the development support provided by the Scout SDK without being restricted by the Scout tooling in any way.
-
-Technically, the Scout SDK is a set of Eclipse plugins that operate on top of the Eclipse JDT and the Eclipse PDE projects.
-The Java Development Tools (JDT).footnote:[
-See the Eclipse JDT project page for details: http://www.eclipse.org/jdt/.
-] 
-contain a Java IDE supporting the development of any Java applications, 
-and the Plugin Development Environment (PDE).footnote:[
-See the Eclipse PDE project page for details: http://www.eclipse.org/pde/.
-]
-provides tools to create, develop, test, debug, build and deploy Eclipse plugins, and additional artifacts relevant for Eclipse based applications. 
-As in the case of the Scout Runtime, the plugins representing the Scout SDK, the JDT and the PDE are all located in the [filename]+plugins+ directory of your Eclipse installation and named [filename]+org.eclipse.scout.sdk.*+, [filename]+org.eclipse.jdt.*+ and [filename]+org.eclipse.pde.*+ . 
 
 === The Scout Explorer
 (((Scout Explorer)))
