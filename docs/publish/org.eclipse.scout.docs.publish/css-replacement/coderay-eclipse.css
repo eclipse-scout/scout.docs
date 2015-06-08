@@ -1,0 +1,18 @@
+ /* Stylesheet for CodeRay to match the JDT default theme */
+
+.CodeRay .annotation{
+  color:#646464
+}
+.CodeRay .class {
+  color:#000
+}
+.CodeRay .string, .CodeRay .string .string .string, .CodeRay .string .content, .CodeRay .string .char, .CodeRay .string .delimiter {
+  color:#2A00FF
+}
+.CodeRay .directive, .CodeRay .keyword, .CodeRay .type, .CodeRay .constant,.CodeRay .predefined-constant {
+  color:#7F0055; font-weight:bold
+}
+.CodeRay .comment {
+  color:#3F7F5F;
+  font-style:italic
+}

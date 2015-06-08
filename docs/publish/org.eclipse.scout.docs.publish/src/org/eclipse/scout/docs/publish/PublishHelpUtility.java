@@ -162,7 +162,6 @@ public class PublishHelpUtility {
     String tocContent = eclipseToc.createToc(root);
     File outTocFile = new File(rootOutFolder, "toc.xml");
     Files.write(tocContent, outTocFile, Charsets.ISO_8859_1);
-    System.out.println("Written file: " + outTocFile.getAbsolutePath());
   }
 
   private static void insertBeforeId(Element container, String id, Element element) {
