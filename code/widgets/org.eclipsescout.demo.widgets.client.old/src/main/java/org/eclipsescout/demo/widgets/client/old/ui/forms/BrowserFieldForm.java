@@ -133,11 +133,6 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
       public class BrowserField extends AbstractBrowserField {
 
         @Override
-        protected boolean getConfiguredAutoDisplayText() {
-          return false;
-        }
-
-        @Override
         protected int getConfiguredGridH() {
           return 20;
         }
