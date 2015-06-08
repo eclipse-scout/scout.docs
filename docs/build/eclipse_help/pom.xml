@@ -50,6 +50,7 @@
                                 <!-- set the idprefix to blank -->
                                 <idprefix/>
                                 <idseparator>-</idseparator>
+                                <linkcss/>
                                 <docinfo1>true</docinfo1>
                             </attributes>
                         </configuration>

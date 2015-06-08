@@ -28,6 +28,8 @@ import com.google.common.io.Files;
  *
  */
 public class PublishUtility {
+  private static final File CSS_REPLACEMENT = new File("css-replacement");
+
   /**
    * Take a single HTML file and publish it to the outFolder.
    * Images and CSS resources are moved.
@@ -159,6 +161,7 @@ public class PublishUtility {
         String href = element.attr("href");
         if (href != null && !href.startsWith("http")) {
           File inFile = new File(inFolder, href);
+          inFile = replaceCssFile(inFile);
           String newHref = cssSubPath + inFile.getName();
           element.attr("href", newHref);
           File outFile = new File(outFolder, newHref);
@@ -175,6 +178,20 @@ public class PublishUtility {
         }
       }
     }
+  }
+
+  /**
+   * @param inFile
+   * @return
+   */
+  private static File replaceCssFile(File inFile) {
+    if ("coderay-asciidoctor.css".equals(inFile.getName())) {
+      return new File(CSS_REPLACEMENT, "coderay-eclipse.css");
+    }
+    else if ("asciidoctor.css".equals(inFile.getName())) {
+      return new File(CSS_REPLACEMENT, "eclipse.css");
+    }
+    return inFile;
   }
 
   static private Pattern listingPattern = Pattern.compile("(Listing [0-9]+)\\.");
