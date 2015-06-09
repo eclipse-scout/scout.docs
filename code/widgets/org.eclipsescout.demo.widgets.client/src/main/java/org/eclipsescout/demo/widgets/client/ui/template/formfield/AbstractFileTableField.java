@@ -42,7 +42,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractObjectColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
-import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -61,7 +60,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     try {
       byte[] content = IOUtility.getContent(new BufferedInputStream(url.openStream()));
-      File file = IOUtility.createTempFile("bird.jpg", (byte[]) content);
+      BinaryResource file = new BinaryResource("bird.jpg", content);
       getTable().addRowByArray(fileToArray(file));
     }
     catch (Exception e) {
@@ -79,23 +78,17 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
   protected void execFileRowClick(File file) throws ProcessingException {
   }
 
-  private Object[] fileToArray(File file) {
-    String type = IOUtility.getFileExtension(file.getName());
-    Long size = file.length();
+  private Object[] fileToArray(BinaryResource file) {
+    String type = IOUtility.getFileExtension(file.getFilename());
+    int size = file.getContentLength();
 
-    if (file.isDirectory()) {
-      type = FileCodeType.DirectoryCode.ID;
-      size = null;
-    }
-    else {
-      if (CODES.getCodeType(FileCodeType.class).getCode(type) == null) {
-        type = FileCodeType.UknownCode.ID;
-      }
-
-      size /= FILE_SIZE_FACTOR;
+    if (CODES.getCodeType(FileCodeType.class).getCode(type) == null) {
+      type = FileCodeType.UknownCode.ID;
     }
 
-    return new Object[]{file, file.getName(), size, type, new Date(file.lastModified()), !file.canWrite()};
+    size /= FILE_SIZE_FACTOR;
+
+    return new Object[]{file, file.getFilename(), size, type, new Date(file.getLastModified()), false};
   }
 
   @Order(10.0)
@@ -115,7 +108,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
   @Order(10.0)
   public class Table extends AbstractTable {
 
-    private Set<File> m_keys = new HashSet<File>();
+    private Set<BinaryResource> m_keys = new HashSet<>();
 
     public SizeColumn getSizeColumn() {
       return getColumnSet().getColumnByClass(SizeColumn.class);
@@ -173,7 +166,8 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       try {
         if (t.isFileList()) {
           for (File file : ((FileListTransferObject) t).getFiles()) {
-            addFile(file);
+            // FIXME sme [File] Change this method from File to BinaryResource (D&D)
+//            addFile(file);
           }
         }
       }
@@ -183,17 +177,11 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    protected void addFile(File file) throws ProcessingException {
+    protected void addFile(BinaryResource file) throws ProcessingException {
       if (m_keys.contains(file)) {
         return;
       }
-
-      ITableRow addedRow = addRowByArray(fileToArray(file));
-
-      if (file.isDirectory()) {
-        addedRow.setIconId(AbstractIcons.TreeNode);
-      }
-
+      addRowByArray(fileToArray(file));
       m_keys.add(file);
     }
 
@@ -289,6 +277,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
+    // FIXME sme [File] Remove this column (BinaryResources don't have this information)
     @Order(60.0)
     public class ReadOnlyColumn extends AbstractBooleanColumn {
 
@@ -330,13 +319,9 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
       @Override
       protected void execAction() throws ProcessingException {
-        FileChooser fc = new FileChooser();
-
-        fc.setTypeLoad(true);
-        fc.setMultiSelect(true);
-        List<File> files = fc.startChooser();
-
-        for (File file : files) {
+        FileChooser fc = new FileChooser(true);
+        List<BinaryResource> files = fc.startChooser();
+        for (BinaryResource file : files) {
           addFile(file);
         }
       }

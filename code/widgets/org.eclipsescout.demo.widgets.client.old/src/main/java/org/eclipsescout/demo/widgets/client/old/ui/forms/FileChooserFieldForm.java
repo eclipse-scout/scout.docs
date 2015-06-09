@@ -19,6 +19,7 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -174,13 +175,9 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected boolean getConfiguredTypeLoad() {
-              return true;
-            }
-
-            @Override
             protected void execChangedValue() throws ProcessingException {
-              getServerLogField().addLine("received " + getValueAsFile().getName());
+              File f = getValueAsFile();
+              getServerLogField().addLine("received " + (f == null ? null : f.getName()));
             }
           }
         }
@@ -203,12 +200,10 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execClickAction() throws ProcessingException {
-              FileChooser fc = new FileChooser();
-              fc.setTypeLoad(true);
-              fc.setMultiSelect(false);
-              List<File> files = fc.startChooser();
-              for (File file : files) {
-                getServerLogField().addLine("received " + file.getName());
+              FileChooser fc = new FileChooser(false);
+              List<BinaryResource> files = fc.startChooser();
+              for (BinaryResource file : files) {
+                getServerLogField().addLine("received " + file.getFilename());
               }
             }
           }
@@ -223,12 +218,10 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execClickAction() throws ProcessingException {
-              FileChooser fc = new FileChooser();
-              fc.setTypeLoad(true);
-              fc.setMultiSelect(true);
-              List<File> files = fc.startChooser();
-              for (File file : files) {
-                getServerLogField().addLine("received " + file.getName());
+              FileChooser fc = new FileChooser(true);
+              List<BinaryResource> files = fc.startChooser();
+              for (BinaryResource file : files) {
+                getServerLogField().addLine("received " + file.getFilename());
               }
             }
           }
@@ -342,11 +335,6 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
         public class SelectAFolderField extends AbstractFileChooserField {
 
           @Override
-          protected boolean getConfiguredFolderMode() {
-            return true;
-          }
-
-          @Override
           protected int getConfiguredGridW() {
             return 2;
           }
@@ -354,11 +342,6 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("SelectAFolder");
-          }
-
-          @Override
-          protected boolean getConfiguredTypeLoad() {
-            return true;
           }
 
           @Override

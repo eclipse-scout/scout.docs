@@ -670,11 +670,6 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         return "File chooser";
       }
 
-      @Override
-      protected boolean getConfiguredTypeLoad() {
-        return true;
-      }
-
       @Order(10)
       public class ContextMenuItem extends AbstractMenu {
         @Override

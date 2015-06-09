@@ -220,11 +220,6 @@ public class StatusForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("FileChooserField");
         }
-
-        @Override
-        protected boolean getConfiguredTypeLoad() {
-          return true;
-        }
       }
     }
 

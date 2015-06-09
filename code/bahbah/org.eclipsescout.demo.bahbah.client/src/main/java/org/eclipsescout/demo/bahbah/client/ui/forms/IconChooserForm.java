@@ -69,15 +69,9 @@ public class IconChooserForm extends AbstractForm {
       }
 
       @Override
-      protected boolean getConfiguredTypeLoad() {
-        return true;
-      }
-
-      @Override
       protected boolean getConfiguredMandatory() {
         return true;
       }
-
     }
 
     @Order(20.0)
