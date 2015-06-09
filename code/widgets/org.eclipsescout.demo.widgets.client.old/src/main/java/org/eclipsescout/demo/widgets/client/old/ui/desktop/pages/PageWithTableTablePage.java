@@ -11,9 +11,15 @@
 package org.eclipsescout.demo.widgets.client.old.ui.desktop.pages;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
@@ -22,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -198,10 +205,57 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         return CompanyTypeLookupCall.class;
       }
     }
+
+    @Order(20.0)
+    public class ToggleMandatoryMenu extends AbstractMenu {
+
+      @Override
+      protected void execInitAction() throws ProcessingException {
+        super.execInitAction();
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.SingleSelection,
+            TableMenuType.MultiSelection,
+            TableMenuType.EmptySpace
+            );
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("Mandatory");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        List<IColumn<?>> columns = getTable().getColumns();
+        for (IColumn<?> c : columns) {
+          c.setMandatory(!c.isMandatory());
+        }
+      }
+
+    }
+
   }
 
   @Order(10.0)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
+
+    @Override
+    protected void execInitAction() throws ProcessingException {
+      super.execInitAction();
+    }
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(
+          TableMenuType.SingleSelection,
+          TableMenuType.MultiSelection,
+          TableMenuType.EmptySpace
+          );
+    }
 
     @Override
     protected Class<?> provideSourceClass() {
