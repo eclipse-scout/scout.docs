@@ -93,7 +93,6 @@ public class CompanyFormData extends AbstractFormData {
       ruleMap.put(ValidationRule.CODE_TYPE, CompanyRatingCodeType.class);
       ruleMap.put(ValidationRule.MASTER_VALUE_FIELD, CompanyTypeGroup.class);
       ruleMap.put(ValidationRule.MASTER_VALUE_REQUIRED, true);
-      ruleMap.put(ValidationRule.ZERO_NULL_EQUALITY, true);
     }
   }
 

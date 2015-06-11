@@ -93,7 +93,6 @@ public class PersonSearchFormData extends AbstractFormData {
       super.initValidationRules(ruleMap);
       ruleMap.put(ValidationRule.LOOKUP_CALL, CompanyLookupCall.class);
       ruleMap.put(ValidationRule.MASTER_VALUE_FIELD, EmployerType.class);
-      ruleMap.put(ValidationRule.ZERO_NULL_EQUALITY, true);
     }
   }
 
@@ -111,7 +110,6 @@ public class PersonSearchFormData extends AbstractFormData {
     protected void initValidationRules(Map<String, Object> ruleMap) {
       super.initValidationRules(ruleMap);
       ruleMap.put(ValidationRule.CODE_TYPE, CompanyTypeCodeType.class);
-      ruleMap.put(ValidationRule.ZERO_NULL_EQUALITY, true);
     }
   }
 
