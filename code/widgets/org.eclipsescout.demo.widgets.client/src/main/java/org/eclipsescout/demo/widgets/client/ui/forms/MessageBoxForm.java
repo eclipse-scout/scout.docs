@@ -471,10 +471,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
 
-        @Override
-        protected boolean getConfiguredTreat0AsNull() {
-          return false;
-        }
       }
 
       @Order(30.0)
@@ -616,10 +612,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
 
-        @Override
-        protected boolean getConfiguredTreat0AsNull() {
-          return false;
-        }
       }
 
       @Order(130.0)
