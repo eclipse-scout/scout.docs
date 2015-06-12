@@ -19,12 +19,14 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -147,8 +149,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedValue() throws ProcessingException {
-            BinaryResource f = getValue();
-            getServerLogField().addLine("received " + (f == null ? null : f.getFilename()));
+            getServerLogField().addLine(getValue());
           }
         }
       }
@@ -174,7 +175,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             FileChooser fc = new FileChooser(false);
             List<BinaryResource> files = fc.startChooser();
             for (BinaryResource file : files) {
-              getServerLogField().addLine("received " + file.getFilename());
+              getServerLogField().addLine(file);
             }
           }
         }
@@ -192,7 +193,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             FileChooser fc = new FileChooser(true);
             List<BinaryResource> files = fc.startChooser();
             for (BinaryResource file : files) {
-              getServerLogField().addLine("received " + file.getFilename());
+              getServerLogField().addLine(file);
             }
           }
         }
@@ -214,10 +215,11 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             return 3;
           }
 
-          public void addLine(String text) throws ProcessingException {
+          public void addLine(BinaryResource file) throws ProcessingException {
             ITableRow row = getTable().addRow(getTable().createRow());
+            getTable().getFileColumn().setValue(row, file);
             getTable().getTimeColumn().setValue(row, new Date());
-            getTable().getActionColumn().setValue(row, text);
+            getTable().getActionColumn().setValue(row, "received " + (file == null ? "no file" : "file: " + file.getFilename()));
             getTable().selectLastRow();
             getTable().scrollToSelection();
           }
@@ -230,6 +232,20 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           @Order(70.0)
           public class Table extends AbstractTable {
 
+            @Override
+            protected boolean getConfiguredAutoResizeColumns() {
+              return true;
+            }
+
+            @Override
+            protected Class<? extends IMenu> getConfiguredDefaultMenu() {
+              return OpenFileMenu.class;
+            }
+
+            public FileColumn getFileColumn() {
+              return getColumnSet().getColumnByClass(FileColumn.class);
+            }
+
             public TimeColumn getTimeColumn() {
               return getColumnSet().getColumnByClass(TimeColumn.class);
             }
@@ -238,7 +254,16 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               return getColumnSet().getColumnByClass(ActionColumn.class);
             }
 
-            @Order(0.0)
+            @Order(10.0)
+            public class FileColumn extends AbstractColumn<BinaryResource> {
+
+              @Override
+              protected boolean getConfiguredDisplayable() {
+                return false;
+              }
+            }
+
+            @Order(20.0)
             public class TimeColumn extends AbstractTimeColumn {
 
               @Override
@@ -249,6 +274,11 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               @Override
               protected int getConfiguredWidth() {
                 return 120;
+              }
+
+              @Override
+              protected boolean getConfiguredFixedWidth() {
+                return true;
               }
             }
 
@@ -282,6 +312,30 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
                 return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection, ValueFieldMenuType.NotNull, TableMenuType.MultiSelection, TableMenuType.EmptySpace);
+              }
+            }
+
+            @Order(100.0)
+            public class OpenFileMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Download file";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
+              }
+
+              @Override
+              protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+                setVisible(getFileColumn().getSelectedValue() != null);
+              }
+
+              @Override
+              protected void execAction() throws ProcessingException {
+                getDesktop().downloadResource(getFileColumn().getSelectedValue());
               }
             }
           }
