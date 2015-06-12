@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <?pde version="3.6"?>
-<target name="Demo Widget App Scout 5.0 (Nightly Builds) Eclipse 4.4 Target" sequenceNumber="20">
+<target name="Demo Widget App Scout 5.0 (Nightly Builds) Eclipse 4.4 Target" sequenceNumber="21">
   <locations>
     <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
@@ -63,21 +63,41 @@
       <repository location="http://download.eclipse.org/scout/releases/4.0/testing"/>
 
     </location>
+
     <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="com.bsiag.scout.rt.server.jdbc.mysql5117.source.feature.group" version="0.0.0"/>
       <unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/rayo/5.0/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.scout.docx4j.core.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.docx4j.client.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.docx4j.libs.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/docx4j/5.0/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="0.0.0"/>
+
+      <repository location="http://tools.bsiag.com/marketplace/logging_bridge/5.0/"/>
+    </location>
+
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.scout.rt.server.rabbitmq.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.activemq.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.redis.source.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.scout.rt.server.memcached.source.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.scout.logging.bridges.source.feature.group" version="0.0.0"/>
 
-
-
-      <repository location="https://scout.bsiag.com/repository/marketplace-scout-4.3"/>
+      <repository location="http://tools.bsiag.com/marketplace/cloud/5.0"/>
     </location>
+
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="com.bsiag.scout.rt.server.jdbc.mysql5117.source.feature.group" version="0.0.0"/>
+
+	  <repository location="http://tools.bsiag.com/marketplace/jdbc/5.0"/>
+    </location>
+
   </locations>
 </target>
