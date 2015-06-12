@@ -351,7 +351,7 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.showOkMessage(TEXTS.get("LinkClicked", getLabel()), null, TEXTS.get("LinkButtonExecClickAction"));
+          MessageBox.createOk().header(TEXTS.get("LinkClicked", getLabel())).body(TEXTS.get("LinkButtonExecClickAction")).start();
         }
       }
 

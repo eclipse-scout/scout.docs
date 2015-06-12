@@ -32,19 +32,18 @@ import org.eclipsescout.demo.widgets.client.services.lookup.AnswerOptionsLookupC
 import org.eclipsescout.demo.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.ActionTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.AutoCloseMillisField;
+import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.BodyField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.CancelButtonTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.DefaultReturnValueField;
+import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.HeaderField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.HiddenTextContentField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.IconIdField;
-import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.IntroTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.MessageBoxConfiguredButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.NoButtonTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.Place0Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.Place1Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.ReturnValueField;
-import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.TitleField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.YesButtonTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.MessageBoxOkButton;
@@ -72,10 +71,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the ActionTextField
+   * @return the BodyField
    */
-  public ActionTextField getActionTextField() {
-    return getFieldByClass(ActionTextField.class);
+  public BodyField getBodyField() {
+    return getFieldByClass(BodyField.class);
   }
 
   /**
@@ -123,10 +122,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the IntroTextField
+   * @return the HeaderField
    */
-  public IntroTextField getIntroTextField() {
-    return getFieldByClass(IntroTextField.class);
+  public HeaderField getHeaderField() {
+    return getFieldByClass(HeaderField.class);
   }
 
   public MainBox getMainBox() {
@@ -187,13 +186,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the TitleField
-   */
-  public TitleField getTitleField() {
-    return getFieldByClass(TitleField.class);
-  }
-
-  /**
    * @return the YesButtonTextField
    */
   public YesButtonTextField getYesButtonTextField() {
@@ -243,7 +235,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.showOkMessage(TEXTS.get(LABEL), null, TEXTS.get("Lorem"));
+          MessageBox.createOk().header(TEXTS.get(LABEL)).body(TEXTS.get("Lorem")).start();
         }
       }
 
@@ -269,7 +261,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.showYesNoMessage(TEXTS.get(LABEL), TEXTS.get("Lorem"), "Press \"Yes\" or \"No\"");
+          MessageBox.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").start();
         }
       }
 
@@ -295,7 +287,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.showYesNoCancelMessage(TEXTS.get(LABEL), TEXTS.get("Lorem"), "Press \"Yes\", \"No\" or \"Cancel\"");
+          MessageBox.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").start(); 
         }
       }
 
@@ -321,8 +313,12 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox msgbox = new MessageBox(TEXTS.get(LABEL), TEXTS.get("Lorem"), TEXTS.get("HiddenTextInstruction"), null, null, TEXTS.get("CloseButton"), TEXTS.get("HiddenText"), null);
-          msgbox.startMessageBox();
+          MessageBox.create().
+              header(TEXTS.get("Lorem")).
+              body(TEXTS.get("HiddenTextInstruction")).
+              cancelButtonText(TEXTS.get("CloseButton")).
+              hiddenText(TEXTS.get("HiddenText")).
+              start();
         }
       }
 
@@ -433,9 +429,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          String title = getTitleField().getValue();
-          String introText = getIntroTextField().getValue();
-          String actionText = getActionTextField().getValue();
+          String header = getHeaderField().getValue();
+          String body = getBodyField().getValue();
           String yesButtonText = getYesButtonTextField().getValue();
           String noButtonText = getNoButtonTextField().getValue();
           String cancelButtonText = getCancelButtonTextField().getValue();
@@ -445,10 +440,17 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           long autoCloseMillis = NumberUtility.nvl(getAutoCloseMillisField().getValue(), -1);
           int defaultReturnValue = NumberUtility.nvl(getDefaultReturnValueField().getValue(), IMessageBox.CANCEL_OPTION);
 
-          MessageBox msgbox = new MessageBox(title, introText, actionText, yesButtonText, noButtonText, cancelButtonText, hiddenText, iconId);
-          msgbox.setAutoCloseMillis(autoCloseMillis);
+          int result = MessageBox.create().
+              header(header).
+              body(body).
+              yesButtonText(yesButtonText).
+              noButtonText(noButtonText).
+              cancelButtonText(cancelButtonText).
+              hiddenText(hiddenText).
+              iconId(iconId).
+              autoCloseMillis(autoCloseMillis).
+              start(defaultReturnValue);
 
-          int result = msgbox.startMessageBox(defaultReturnValue);
           getReturnValueField().setValue(result);
         }
       }
@@ -473,26 +475,12 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(30.0)
-      public class TitleField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Title");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-      }
-
       @Order(40.0)
-      public class IntroTextField extends AbstractStringField {
+      public class HeaderField extends AbstractStringField {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IntroText");
+          return TEXTS.get("Header");
         }
 
         @Override
@@ -502,11 +490,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50.0)
-      public class ActionTextField extends AbstractStringField {
+      public class BodyField extends AbstractStringField {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ActionText");
+          return TEXTS.get("Body");
         }
 
         @Override
@@ -652,9 +640,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        getTitleField().setValue(TEXTS.get("LoremTitle"));
-        getIntroTextField().setValue(TEXTS.get("LoremQuestion"));
-        getActionTextField().setValue(TEXTS.get("LoremAction"));
+        getHeaderField().setValue(TEXTS.get("LoremQuestion"));
+        getBodyField().setValue(TEXTS.get("LoremAction"));
         getYesButtonTextField().setValue(TEXTS.get("YesButton"));
         getNoButtonTextField().setValue(TEXTS.get("NoButton"));
         getHiddenTextContentField().setValue(TEXTS.get("Lorem"));

@@ -200,8 +200,8 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       AbstractMenu menu = new AbstractMenu() {
 
         @Override
-        public void execAction() throws ProcessingException {
-          MessageBox.showOkMessage(TEXTS.get("TableMenu"), TEXTS.get("TableMenuHeader"), getText());
+        public void execAction() throws ProcessingException {        	
+          MessageBox.createOk().header(TEXTS.get("TableMenuHeader")).body(getText()).start();
         }
 
       };

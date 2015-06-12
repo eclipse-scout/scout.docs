@@ -450,7 +450,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execAction() throws ProcessingException {
-          MessageBox.showOkMessage("Menu action", "Menu: '" + getLabel() + "'", "");
+          MessageBox.createOk().header("Menu action").body("Menu: '" + getLabel() + "'").start();
         }
 
         @Order(10.0)

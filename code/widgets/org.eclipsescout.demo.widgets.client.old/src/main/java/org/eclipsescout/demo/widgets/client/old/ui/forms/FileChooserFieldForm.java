@@ -359,7 +359,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
             }
             catch (NullPointerException e) {
-              MessageBox.showOkMessage("Folder not found", null, "Can't find folder " + getValue());
+              MessageBox.createOk().header("Folder not found").body("Can't find folder " + getValue()).start();
             }
           }
         }

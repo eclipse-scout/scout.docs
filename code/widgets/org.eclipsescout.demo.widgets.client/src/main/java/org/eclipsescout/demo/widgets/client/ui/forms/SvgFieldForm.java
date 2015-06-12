@@ -253,7 +253,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
             setSvgDocument(liveUpdateCircle(doc, "circle2"));
           }
           else {
-            MessageBox.showOkMessage(TEXTS.get("SVGLink"), TEXTS.get("SVGLinkMessage"), ref);
+            MessageBox.createOk().header(TEXTS.get("SVGLink")).body(TEXTS.get("SVGLinkMessage")).body(ref).start();
           }
         }
       }

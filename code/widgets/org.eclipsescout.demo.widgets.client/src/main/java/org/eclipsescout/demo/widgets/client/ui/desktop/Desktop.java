@@ -152,7 +152,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
       }
     }
 
@@ -173,7 +173,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
       }
     }
 
@@ -193,7 +193,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execSelectionChanged(boolean selection) throws ProcessingException {
         if (selection == true) {
-          MessageBox.showOkMessage("Checked the Menu", "You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"", null);
+          MessageBox.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").start();
         }
       }
     }
@@ -209,7 +209,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
       }
 
       @Order(10.0)
@@ -223,7 +223,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
         }
       }
 
@@ -238,7 +238,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
         }
       }
 
@@ -253,7 +253,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
         }
       }
     }
@@ -274,7 +274,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
       }
     }
   }
