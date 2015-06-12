@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client.ui.forms;
 
-import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -87,9 +86,7 @@ public class IconChooserForm extends AbstractForm {
 
     @Override
     protected void execStore() throws ProcessingException {
-      String filename = getIconField().getValue();
-      byte[] content = IOUtility.getContent(filename);
-      BEANS.get(IIconProcessService.class).saveIcon(content);
+      BEANS.get(IIconProcessService.class).saveIcon(getIconField().getValue().getContent());
     }
   }
 }
