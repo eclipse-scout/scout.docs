@@ -1,0 +1,33 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+// Secure output handling: Encoding/Escaping Output
+//-----------------------------------------------------------------------------
+
+= Secure Output
+This chapter describes how Html Output can be handled in a secure way.
+
+Scout applications often display potentially dangerous data, e.g. user input or data from other systems.
+Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.
+
+== Encoding by Default
+
+By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in messagebox.
+The reason behind this default choice is that developers do not have to think about output encoding in the standard case
+and are therefore less likely to forget output encoding and introduce a security vulnerability.
+
+Example: In the following string field, the HTML <b> tag is encoded:
+
+image::{imgsdir}/encodedField.png[]
+
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/StringFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
+
+== Html Enabled
