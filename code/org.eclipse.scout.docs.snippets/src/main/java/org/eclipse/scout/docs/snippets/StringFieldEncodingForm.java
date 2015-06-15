@@ -12,7 +12,6 @@ package org.eclipse.scout.docs.snippets;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.docs.snippets.StringFieldEncodingForm.MainBox.StringField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -23,10 +22,6 @@ public class StringFieldEncodingForm extends AbstractForm {
 
   public StringFieldEncodingForm() throws ProcessingException {
     super();
-  }
-
-  public StringField getStringField() {
-    return getFieldByClass(StringField.class);
   }
 
   @Order(10.0)
@@ -40,6 +35,20 @@ public class StringFieldEncodingForm extends AbstractForm {
         setValue("...<b>Bold text</b>...");
       }
     }// end::SecureOutput.encodingByDefault[]
+
+    @Order(2000.0)
+    // tag::SecureOutput.noEncodingField[]
+    public class NoEncodingStringField extends AbstractStringField {
+      @Override
+      protected boolean getConfiguredHtmlEnabled() {
+        return false;
+      }
+
+      @Override
+      protected void execInitField() throws ProcessingException {
+        setValue("...<b>Bold text</b>...");
+      }
+    }// end::SecureOutput.noEncodingField[]
 
     @Order(40.0)
     public class CloseButton extends AbstractCloseButton {
