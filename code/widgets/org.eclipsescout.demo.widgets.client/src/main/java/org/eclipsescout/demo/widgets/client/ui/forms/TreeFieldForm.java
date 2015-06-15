@@ -34,7 +34,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.CloseButton;
@@ -315,7 +315,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             String children = Integer.toString(node.getChildNodeCount());
             String leaf = Boolean.toString(node.isLeaf());
 
-            MessageBox.createOk().header(title + " " + TEXTS.get("NodeName", id)).body(TEXTS.get("NodeInfo", leaf, children)).start();
+            MessageBoxes.createOk().header(title + " " + TEXTS.get("NodeName", id)).body(TEXTS.get("NodeInfo", leaf, children)).show();
           }
         }
       }

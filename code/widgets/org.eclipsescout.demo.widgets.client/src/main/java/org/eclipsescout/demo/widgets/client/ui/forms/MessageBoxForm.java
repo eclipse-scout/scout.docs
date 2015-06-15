@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.AnswerOptionsLookupCall;
@@ -235,7 +236,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.createOk().header(TEXTS.get(LABEL)).body(TEXTS.get("Lorem")).start();
+          MessageBoxes.createOk().header(TEXTS.get(LABEL)).body(TEXTS.get("Lorem")).show();
         }
       }
 
@@ -261,7 +262,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").start();
+          MessageBoxes.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").show();
         }
       }
 
@@ -287,7 +288,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").start(); 
+          MessageBoxes.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").show(); 
         }
       }
 
@@ -313,12 +314,12 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.create().
+          MessageBoxes.create().
               header(TEXTS.get("Lorem")).
               body(TEXTS.get("HiddenTextInstruction")).
               cancelButtonText(TEXTS.get("CloseButton")).
               hiddenText(TEXTS.get("HiddenText")).
-              start();
+              show();
         }
       }
 
@@ -440,7 +441,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           long autoCloseMillis = NumberUtility.nvl(getAutoCloseMillisField().getValue(), -1);
           int defaultReturnValue = NumberUtility.nvl(getDefaultReturnValueField().getValue(), IMessageBox.CANCEL_OPTION);
 
-          int result = MessageBox.create().
+          int result = MessageBoxes.create().
               header(header).
               body(body).
               yesButtonText(yesButtonText).
@@ -449,7 +450,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
               hiddenText(hiddenText).
               iconId(iconId).
               autoCloseMillis(autoCloseMillis).
-              start(defaultReturnValue);
+              show(defaultReturnValue);
 
           getReturnValueField().setValue(result);
         }

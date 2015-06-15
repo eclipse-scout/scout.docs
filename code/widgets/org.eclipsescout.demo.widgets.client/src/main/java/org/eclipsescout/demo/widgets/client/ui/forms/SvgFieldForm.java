@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.svg.client.SVGUtility;
 import org.eclipse.scout.rt.svg.client.svgfield.AbstractSvgField;
@@ -253,7 +253,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
             setSvgDocument(liveUpdateCircle(doc, "circle2"));
           }
           else {
-            MessageBox.createOk().header(TEXTS.get("SVGLink")).body(TEXTS.get("SVGLinkMessage")).body(ref).start();
+            MessageBoxes.createOk().header(TEXTS.get("SVGLink")).body(TEXTS.get("SVGLinkMessage")).body(ref).show();
           }
         }
       }

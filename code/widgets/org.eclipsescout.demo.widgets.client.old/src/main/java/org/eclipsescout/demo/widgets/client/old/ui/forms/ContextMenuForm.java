@@ -40,7 +40,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -450,7 +450,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execAction() throws ProcessingException {
-          MessageBox.createOk().header("Menu action").body("Menu: '" + getLabel() + "'").start();
+          MessageBoxes.createOk().header("Menu action").body("Menu: '" + getLabel() + "'").show();
         }
 
         @Order(10.0)

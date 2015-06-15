@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.file.RemoteFile;
 import org.eclipsescout.demo.widgets.client.old.ResourceBase;
@@ -164,7 +164,7 @@ public class HTMLFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execAppLinkAction(String ref) throws ProcessingException {
-        MessageBox.createOk().header(TEXTS.get("LocalUrlClicked")).body(TEXTS.get("Parameters") + ":\n" + ref).start();
+        MessageBoxes.createOk().header(TEXTS.get("LocalUrlClicked")).body(TEXTS.get("Parameters") + ":\n" + ref).show();
       }
     }
 

@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -325,7 +325,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            MessageBox.createOk().header(TEXTS.get("RadioButtonSelected", getLabel())).body(TEXTS.get("RadioButtonExecClickAction")).start();
+            MessageBoxes.createOk().header(TEXTS.get("RadioButtonSelected", getLabel())).body(TEXTS.get("RadioButtonExecClickAction")).show();
           }
         }
       }

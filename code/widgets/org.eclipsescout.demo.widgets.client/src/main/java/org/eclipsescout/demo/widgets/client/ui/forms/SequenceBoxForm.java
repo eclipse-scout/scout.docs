@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.ISequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -547,10 +548,10 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
               String name = StringUtility.concatenateTokens(getFirstNameField().getValue(), " ", getLastNameField().getValue());
 
               if (name.length() > 0) {
-                MessageBox.create().
+                MessageBoxes.create().
                     header(TEXTS.get("SearchPerson", name)).
                     autoCloseMillis(2500).
-                    start(MessageBox.YES_OPTION);
+                    show(MessageBox.YES_OPTION);
               }
             }
           }

@@ -25,7 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -151,7 +151,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        MessageBox.createOk().header("You clicked me!").start();
+        MessageBoxes.createOk().header("You clicked me!").show();
       }
     }
 
@@ -170,7 +170,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        MessageBox.createOk().header("You clicked me!").start();
+        MessageBoxes.createOk().header("You clicked me!").show();
       }
     }
 
@@ -189,7 +189,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execAction() throws ProcessingException {
-        MessageBox.createOk().header("You clicked me!").start();
+        MessageBoxes.createOk().header("You clicked me!").show();
       }
     }
 
@@ -213,7 +213,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execAction() throws ProcessingException {
-        MessageBox.createOk().header("You clicked me!").start();
+        MessageBoxes.createOk().header("You clicked me!").show();
       }
     }
   }
@@ -253,7 +253,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -273,7 +273,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body( "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body( "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -288,7 +288,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected void execSelectionChanged(boolean selection) throws ProcessingException {
         if (selection == true) {
-          MessageBox.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").start();
+          MessageBoxes.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
         }
       }
     }
@@ -312,7 +312,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
 
@@ -327,7 +327,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
 
@@ -342,7 +342,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
     }
@@ -363,7 +363,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 

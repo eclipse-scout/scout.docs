@@ -32,7 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UiLayer;
@@ -152,7 +152,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -173,7 +173,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -193,7 +193,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execSelectionChanged(boolean selection) throws ProcessingException {
         if (selection == true) {
-          MessageBox.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").start();
+          MessageBoxes.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
         }
       }
     }
@@ -209,7 +209,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
 
       @Order(10.0)
@@ -223,7 +223,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
 
@@ -238,7 +238,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
 
@@ -253,7 +253,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         @Override
         protected void execAction() throws ProcessingException {
           String menuname = this.getClass().getSimpleName();
-          MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+          MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
       }
     }
@@ -274,7 +274,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
   }

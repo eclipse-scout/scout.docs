@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.colorfield.AbstractColorField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm.MainBox.GroupBox;
@@ -106,7 +106,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execAction() throws ProcessingException {
-            MessageBox.createOk().header("Menu").body(getClass().getSimpleName()).start();
+            MessageBoxes.createOk().header("Menu").body(getClass().getSimpleName()).show();
           }
         }
       }

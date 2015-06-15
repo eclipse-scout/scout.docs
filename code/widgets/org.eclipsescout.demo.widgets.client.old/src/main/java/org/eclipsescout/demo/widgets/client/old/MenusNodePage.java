@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.MenusForm;
 import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
@@ -71,7 +71,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     @Override
     protected void execAction() throws ProcessingException {
       String menuname = this.getClass().getSimpleName();
-      MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+      MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }
   }
 
@@ -91,7 +91,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     @Override
     protected void execAction() throws ProcessingException {
       String menuname = this.getClass().getSimpleName();
-      MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+      MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }
   }
 
@@ -106,7 +106,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     @Override
     protected void execSelectionChanged(boolean selection) throws ProcessingException {
       if (selection == true) {
-        MessageBox.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").start();
+        MessageBoxes.createOk().header("Checked the Menu").body("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
       }
     }
   }
@@ -135,7 +135,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -155,7 +155,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
@@ -175,7 +175,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
   }
@@ -196,7 +196,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     @Override
     protected void execAction() throws ProcessingException {
       String menuname = this.getClass().getSimpleName();
-      MessageBox.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").start();
+      MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }
   }
 
