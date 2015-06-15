@@ -245,9 +245,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
                 super.execInitField();
 
                 for (IColumn c : getTable().getColumns()) {
-                  if (c instanceof AbstractFileTableField.Table.ReadOnlyColumn ||
-                      c instanceof AbstractFileTableField.Table.DateModifiedColumn)
-                  {
+                  if (c instanceof AbstractFileTableField.Table.DateModifiedColumn) {
                     c.setVisible(false);
                   }
                 }

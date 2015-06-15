@@ -35,7 +35,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractObjectColumn;
@@ -88,7 +87,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     size /= FILE_SIZE_FACTOR;
 
-    return new Object[]{file, file.getFilename(), size, type, new Date(file.getLastModified()), false};
+    return new Object[]{file, file.getFilename(), size, type, new Date(file.getLastModified())};
   }
 
   @Order(10.0)
@@ -116,10 +115,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     public TypeColumn getTypeColumn() {
       return getColumnSet().getColumnByClass(TypeColumn.class);
-    }
-
-    public ReadOnlyColumn getReadOnlyColumn() {
-      return getColumnSet().getColumnByClass(ReadOnlyColumn.class);
     }
 
     @Override
@@ -274,16 +269,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("DateModified");
-      }
-    }
-
-    // FIXME sme [File] Remove this column (BinaryResources don't have this information)
-    @Order(60.0)
-    public class ReadOnlyColumn extends AbstractBooleanColumn {
-
-      @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("ReadOnly");
       }
     }
 
