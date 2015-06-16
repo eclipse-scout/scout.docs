@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import java.io.InputStreamReader;
 
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -106,7 +105,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
     try {
       RemoteFile remoteFile = new RemoteFile("simpleName", 0);
       remoteFile.readData(new InputStreamReader(ResourceBase.class.getResource("html/" + simpleName).openStream()));
-      getBrowserField().setValue(remoteFile);
+      getBrowserField().setBinaryResource(remoteFile.toBinaryResource());
     }
     catch (Exception e) {
       throw new ProcessingException("Html-Field can't load file ", e);
@@ -155,11 +154,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
           String url = (String) newMasterValue;
-
-          setValue(null);
-          if (!StringUtility.isNullOrEmpty(url)) {
-            setLocation(url);
-          }
+          setLocation(url);
         }
 
         @Override
@@ -233,7 +228,6 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getBrowserField().setValue(null);
             getBrowserField().setLocation(getURLField().getValue());
           }
         }
