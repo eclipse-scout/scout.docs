@@ -155,30 +155,65 @@ There exist a factory for each kind of job:
 |===
 
 [source,java,indent=0]
-.Schedule a job simplified
+.Schedule a job by use of job factory
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=scheduleByFactory]
 ----
 <1> Schedules a job associated with the current `RunContext`
 <2> Schedules a job associated with the current `RunContext` and with a specific job name
 
-
-
 == Scheduling periodic actions
+The job manager supports work to be executed periodically. There are two modes for a period action to be scheduled:
 
-== Scheduling with delay
+* _at fixed rate:_ +
+Use this mode to run a job at a fixed rate, e.g. every two seconds. If a run takes longer than the delay, the next run is started immediately once the previous run completes. At any time, there is only one 'run' running.
+* _with fixed delay:_ +
+Use this mode to run a job with a fixed delay in between of the completion of the previous run and the start of the next run.
 
-== Jobs
+[source,java,indent=0]
+.Schedule a job at a fixed rate
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=Jobs.scheduleAtFixedRate]
+----
 
-== ServerJobs
+* A periodic action is either stopped by canceling its `IFuture`, or by throwing an exception during execution.
+* When scheduling a periodic action, a `JobInput` must be provided explicitly. That is because typically being a background job which is run as a particular user and with a dedicated `ISession`.
 
-== ClientJobs
+== Scheduling of delayed jobs
+A job must not start execution immediately once being given to the job manager. Instead, a _delay_ can be provided to execute a job only after the given delay elapsed.
 
-== Model Jobs
+[source,java,indent=0]
+.Schedule a job to be executed after a delay
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=Jobs.scheduleDelayed]
+----
 
-== JobManager API
+== Blocking condition
+A blocking condition allows a thread to wait for a condition to become `true`. That is similar to the Java Object's 'wait/notify' mechanism, but with some additional functionality regarding mutual exclusive jobs. In case of such a job enters a blocking condition, it releases ownership of the mutex, which allows another job of the same mutex to begin execution. Hence, the job must compete for the mutex anew once the blocking condition falls. However, the condition can be used by any thread, and that thread must not be managed by the job manager.
+
+A blocking condition is often used by model jobs to wait for something to happen, but to allow other model jobs to run while waiting. A typical use case is to wait for a `MessageBox` to be closed.
+
+
+[source,java,indent=0]
+.Example usage of a blocking condition
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=BlockingCondition]
+----
+<1> Create the blocking condition to wait for the long running operation to complete.
+<2> Schedule the long running operation.
+<3> Register a 'done callback' to be notified once the job completes. If the job already completed, the callback is invoked immediately.
+<4> Cause the current thread to wait for maximal one minute for the condition to become 'unblocked'. That is once the long running operation completes. If already completed, the condition does not block the current thread.
+<5> Callback invoked upon completion of the job. Change the blocking state of the condition to release the waiting thread.
+<6> This code is executed once the long running operation completed.
 
 == Lifecycle events
+The job managers allows registration of listeners to be notified upon job lifecycle changes. Thereto, a filter must be provided to indicate in what events you are interested in. The filter must implement `IFilter` interface, and has a single method to accept such lifecyle events. If accepted by the filter, the event is propagated to the listener. +
+Scout provides you with some 'ready-to-go' filters and some convenience to concatenate filters with a logical 'AND' operator. For example, you can create a filter to only accept events of server jobs of your current session, and jobs with a name that match a regular expression.
+
+
+Such filters are created from a factory and profit from method chaining
+
+
 
 == Wait for jobs to complete
 

@@ -1,15 +1,29 @@
 package org.eclipse.scout.docs.snippets;
 
+import java.util.Locale;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+
+import javax.security.auth.Subject;
 
 import org.eclipse.scout.commons.IRunnable;
+import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.context.RunContexts;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
+import org.eclipse.scout.rt.platform.job.DoneEvent;
+import org.eclipse.scout.rt.platform.job.IBlockingCondition;
+import org.eclipse.scout.rt.platform.job.IDoneCallback;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.IJobManager;
 import org.eclipse.scout.rt.platform.job.JobInput;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.job.listener.IJobListener;
+import org.eclipse.scout.rt.platform.job.listener.JobEvent;
+import org.eclipse.scout.rt.platform.job.listener.JobEventType;
+import org.eclipse.scout.rt.server.job.ServerJobEventFilters.Filter;
+import org.eclipse.scout.rt.server.job.ServerJobs;
 
 @SuppressWarnings("unused")
 public final class JobManagerSnippet {
@@ -100,5 +114,94 @@ public final class JobManagerSnippet {
     currentFuture.isCancelled();
 
     // end::RunContexts.empty[]
+  }
+
+  void snippet_runPeriodicAction() throws Exception {
+    // tag::Jobs.scheduleAtFixedRate[]
+    // Create the Subject to run the job on behalf.
+    Subject subject = new Subject(); // <1>
+    subject.getPrincipals().add(new SimplePrincipal("john"));
+    subject.setReadOnly();
+
+    // Create the RunContext to run the job on behalf.
+    RunContext runContext = RunContexts.empty().subject(subject).locale(Locale.US);
+
+    // Schedule the periodic action to run every 60 seconds.
+    Jobs.scheduleAtFixedRate(new IRunnable() {
+
+      @Override
+      public void run() throws Exception {
+        System.out.println("running every minute");
+      }
+    }, 0, 60, TimeUnit.SECONDS, Jobs.newInput(runContext));
+    // end::Jobs.scheduleAtFixedRate[]
+  }
+
+  void snippet_delayedExecution() throws Exception {
+    // tag::Jobs.scheduleDelayed[]
+    Jobs.schedule(new IRunnable() {
+
+      @Override
+      public void run() throws Exception {
+        System.out.println("this job runs with a delay of 5 seconds");
+      }
+    }, 5, TimeUnit.SECONDS);
+    // end::Jobs.scheduleDelayed[]
+  }
+
+  void snippet_blockingCondition() throws Exception {
+    // tag::BlockingCondition[]
+
+    // Create the blocking condition <1>
+    final IBlockingCondition condition = Jobs.getJobManager().createBlockingCondition("Operation", true);
+
+    // Schedule the job <2>
+    IFuture<Boolean> future = Jobs.schedule(new LongRunningOperation());
+
+    // Register 'done callback' to be invoked once the job completes <3>
+    future.whenDone(new IDoneCallback<Boolean>() {
+
+      @Override
+      public void onDone(DoneEvent<Boolean> event) {
+        condition.setBlocking(false); // <5>
+      }
+    });
+
+    // Wait for the job to complete <4>
+    condition.waitFor(1, TimeUnit.MINUTES);
+
+    System.out.println("Operation completed"); // <6>
+    // end::BlockingCondition[]
+  }
+
+  void snippet_filter() throws Exception {
+    // tag::BlockingCondition[]
+
+    Filter filter = ServerJobs.newEventFilter().andMatchEventTypes(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+
+    Jobs.getJobManager().addListener(filter, new IJobListener() {
+
+      @Override
+      public void changed(JobEvent event) {
+        System.out.println(event.getFuture());
+      }
+    });
+
+    // end::BlockingCondition[]
+  }
+
+  void snippet_lifecycleEvents() throws Exception {
+    // tag::BlockingCondition[]
+
+    ServerJobs.newEventFilter().andMatchEventTypes(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+    // end::BlockingCondition[]
+  }
+
+  public class LongRunningOperation implements Callable<Boolean> {
+
+    @Override
+    public Boolean call() throws Exception {
+      return null;
+    }
   }
 }
