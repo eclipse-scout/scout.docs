@@ -10,16 +10,16 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.dnd.FileListTransferObject;
+import org.eclipse.scout.commons.dnd.ResourceListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -196,8 +196,8 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
           Object content = getImage();
 
           if (content instanceof byte[]) {
-            File f = IOUtility.createTempFile(getImageId(), (byte[]) content);
-            return new FileListTransferObject(f);
+            BinaryResource resource = new BinaryResource(getImageId(), (byte[]) content);
+            return new ResourceListTransferObject(resource);
           }
 
           return null;
@@ -207,22 +207,16 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         protected void execDropRequest(TransferObject transferObject) throws ProcessingException {
           clearErrorStatus();
 
-          if (transferObject.isFileList()) {
-            List<String> fileName = ((FileListTransferObject) transferObject).getFilenames();
+          if (transferObject instanceof ResourceListTransferObject) {
+            List<BinaryResource> resources = ((ResourceListTransferObject) transferObject).getResources();
 
-            if (fileName.size() > 0) {
-              try {
-                // if you want to work with buffered images
-                // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
-                // setImage(bi);
-
-                setImage(IOUtility.getContent(new FileInputStream(fileName.get(0))));
-                setImageId(IOUtility.getFileName(fileName.get(0)));
-              }
-              catch (Exception e) {
-                e.printStackTrace();
-                addErrorStatus(e.getMessage());
-              }
+            if (resources.size() > 0) {
+              BinaryResource resource = CollectionUtility.firstElement(resources);
+              // if you want to work with buffered images
+              // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
+              // setImage(bi);
+              setImage(resource.getContent());
+              setImageId(resource.getFilename());
             }
           }
         }

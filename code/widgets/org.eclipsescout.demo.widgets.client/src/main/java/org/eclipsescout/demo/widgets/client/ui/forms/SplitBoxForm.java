@@ -10,15 +10,13 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Date;
 
 import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -42,7 +40,6 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.Exampl
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.ModifiedField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.NameField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.ReadOnlyField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.SizeField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox.FileTableField;
@@ -151,13 +148,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the ReadOnlyField
-   */
-  public ReadOnlyField getReadOnlyField() {
-    return getFieldByClass(ReadOnlyField.class);
-  }
-
-  /**
    * @return the SizeField
    */
   public SizeField getSizeField() {
@@ -252,49 +242,38 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execFileRowClick(File file) throws ProcessingException {
-                reloadPreview(file);
-                reloadDetails(file);
+              protected void execResourceRowClick(BinaryResource resource) throws ProcessingException {
+                reloadPreview(resource);
+                reloadDetails(resource);
               }
 
-              private void reloadPreview(File file) throws ProcessingException {
-                if (isImage(file)) {
-                  getPreviewField().setImage(getFileContent(file));
+              private void reloadPreview(BinaryResource resource) throws ProcessingException {
+                if (isImage(resource)) {
+                  getPreviewField().setImage(resource.getContent());
                 }
                 else {
                   getPreviewField().setImage(null);
                 }
               }
 
-              private byte[] getFileContent(File file) throws ProcessingException {
-                try {
-                  return IOUtility.getContent(new FileInputStream(file));
-                }
-                catch (FileNotFoundException e) {
-                  throw new ProcessingException("File not found:", e);
-                }
-              }
-
-              private boolean isImage(File file) {
-                if (file == null) {
+              private boolean isImage(BinaryResource resource) {
+                if (resource == null) {
                   return false;
                 }
-                String ext = IOUtility.getFileExtension(file.getName()).toLowerCase();
+                String ext = IOUtility.getFileExtension(resource.getFilename()).toLowerCase();
                 return CompareUtility.isOneOf(ext, "jpg", "jpeg", "png");
               }
 
-              private void reloadDetails(File file) {
-                if (file == null) {
+              private void reloadDetails(BinaryResource resource) {
+                if (resource == null) {
                   getNameField().resetValue();
                   getSizeField().resetValue();
                   getModifiedField().resetValue();
-                  getReadOnlyField().resetValue();
                 }
                 else {
-                  getNameField().setValue(file.getName());
-                  getSizeField().setValue(file.length());
-                  getModifiedField().setValue(new Date(file.lastModified()));
-                  getReadOnlyField().setValue(!file.canWrite());
+                  getNameField().setValue(resource.getFilename());
+                  getSizeField().setValue(resource.getContent() == null ? 0L : resource.getContent().length);
+                  getModifiedField().setValue(new Date(resource.getLastModified()));
                 }
               }
             }
@@ -318,7 +297,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               getNameField().setEnabled(false);
               getSizeField().setEnabled(false);
               getModifiedField().setEnabled(false);
-              getReadOnlyField().setEnabled(false);
             }
 
             @Order(10.0)
@@ -345,15 +323,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               @Override
               protected String getConfiguredLabel() {
                 return TEXTS.get("Modified");
-              }
-            }
-
-            @Order(50.0)
-            public class ReadOnlyField extends AbstractCheckBox {
-
-              @Override
-              protected String getConfiguredLabel() {
-                return TEXTS.get("ReadOnly");
               }
             }
           }

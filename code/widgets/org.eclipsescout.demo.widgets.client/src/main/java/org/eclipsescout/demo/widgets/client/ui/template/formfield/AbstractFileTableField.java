@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.template.formfield;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.dnd.FileListTransferObject;
+import org.eclipse.scout.commons.dnd.ResourceListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.resource.BinaryResource;
@@ -35,9 +34,9 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractObjectColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
@@ -45,7 +44,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
-import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
 import org.eclipsescout.demo.widgets.shared.FileCodeType;
 
@@ -70,11 +68,11 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
   /**
    * Allows user of this template field to react to row selection events
    *
-   * @param file
-   *          the file that is represented by the clicked row
+   * @param Resource
+   *          the resource that is represented by the clicked row
    * @throws ProcessingException
    */
-  protected void execFileRowClick(File file) throws ProcessingException {
+  protected void execResourceRowClick(BinaryResource resource) throws ProcessingException {
   }
 
   private Object[] fileToArray(BinaryResource file) {
@@ -145,13 +143,13 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     @Override
     protected TransferObject execDrag(List<ITableRow> rows) throws ProcessingException {
-      List<File> files = new ArrayList<File>();
+      List<BinaryResource> resources = new ArrayList<BinaryResource>();
 
       for (ITableRow row : rows) {
-        files.add((File) row.getKeyValues().get(0));
+        resources.add(getTable().getResourceColumn().getValue(row));
       }
 
-      return new FileListTransferObject(files);
+      return new ResourceListTransferObject(resources);
     }
 
     @Override
@@ -159,10 +157,9 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       clearErrorStatus();
 
       try {
-        if (t.isFileList()) {
-          for (File file : ((FileListTransferObject) t).getFiles()) {
-            // FIXME sme [File] Change this method from File to BinaryResource (D&D)
-//            addFile(file);
+        if (t instanceof ResourceListTransferObject) {
+          for (BinaryResource resource : ((ResourceListTransferObject) t).getResources()) {
+            addFile(resource);
           }
         }
       }
@@ -187,15 +184,16 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     @Override
     protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
-      execFileRowClick((File) getFileColumn().getSelectedValue());
+      BinaryResource resource = CollectionUtility.firstElement(getResourceColumn().getValues(rows));
+      execResourceRowClick(resource);
     }
 
     public DateModifiedColumn getDateModifiedColumn() {
       return getColumnSet().getColumnByClass(DateModifiedColumn.class);
     }
 
-    public FileColumn getFileColumn() {
-      return getColumnSet().getColumnByClass(TableFieldForm.MainBox.ExamplesBox.DefaultField.Table.FileColumn.class);
+    public ResourceColumn getResourceColumn() {
+      return getColumnSet().getColumnByClass(ResourceColumn.class);
     }
 
     public NameColumn getNameColumn() {
@@ -203,7 +201,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Order(10.0)
-    public class FileColumn extends AbstractObjectColumn {
+    public class ResourceColumn extends AbstractColumn<BinaryResource> {
 
       @Override
       protected boolean getConfiguredDisplayable() {
@@ -282,9 +280,9 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
       @Override
       protected void execAction() throws ProcessingException {
-        for (ITableRow row : getSelectedRows()) {
-          File file = (File) row.getKeyValues().get(0);
-          ClientSessionProvider.currentSession().getDesktop().downloadResource(new BinaryResource(file));
+        List<BinaryResource> resources = getResourceColumn().getSelectedValues();
+        for (BinaryResource resource : resources) {
+          ClientSessionProvider.currentSession().getDesktop().downloadResource(resource);
         }
       }
     }
