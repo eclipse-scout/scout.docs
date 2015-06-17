@@ -10,10 +10,15 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.commons.logger.IScoutLogger;
+import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -48,9 +53,11 @@ import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.Conf
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.YesButtonTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.MessageBoxOkButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.ResultField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.SampleContentButton;
 
 public class MessageBoxForm extends AbstractForm implements IPageForm {
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(MessageBoxForm.class);
 
   public MessageBoxForm() throws ProcessingException {
     super();
@@ -71,23 +78,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the BodyField
-   */
   public BodyField getBodyField() {
     return getFieldByClass(BodyField.class);
   }
 
-  /**
-   * @return the AutoCloseMillisField
-   */
   public AutoCloseMillisField getAutoCloseMillisField() {
     return getFieldByClass(AutoCloseMillisField.class);
   }
 
-  /**
-   * @return the CancelButtonTextField
-   */
   public CancelButtonTextField getCancelButtonTextField() {
     return getFieldByClass(CancelButtonTextField.class);
   }
@@ -97,9 +95,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DefaultReturnValueField
-   */
   public DefaultReturnValueField getDefaultReturnValueField() {
     return getFieldByClass(DefaultReturnValueField.class);
   }
@@ -108,23 +103,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the HiddenTextContentField
-   */
   public HiddenTextContentField getHiddenTextContentField() {
     return getFieldByClass(HiddenTextContentField.class);
   }
 
-  /**
-   * @return the IconIdField
-   */
   public IconIdField getIconIdField() {
     return getFieldByClass(IconIdField.class);
   }
 
-  /**
-   * @return the HeaderField
-   */
   public HeaderField getHeaderField() {
     return getFieldByClass(HeaderField.class);
   }
@@ -133,16 +119,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the MessageBoxConfiguredButton
-   */
   public MessageBoxConfiguredButton getMessageBoxConfiguredButton() {
     return getFieldByClass(MessageBoxConfiguredButton.class);
   }
 
-  /**
-   * @return the MessageBoxOkButton
-   */
   public MessageBoxOkButton getMessageBoxOkButton() {
     return getFieldByClass(MessageBoxOkButton.class);
   }
@@ -151,63 +131,39 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the NoButtonTextField
-   */
   public NoButtonTextField getNoButtonTextField() {
     return getFieldByClass(NoButtonTextField.class);
   }
 
-  /**
-   * @return the Place0Field
-   */
   public Place0Field getPlace0Field() {
     return getFieldByClass(Place0Field.class);
   }
 
-  /**
-   * @return the Place1Field
-   */
   public Place1Field getPlace1Field() {
     return getFieldByClass(Place1Field.class);
   }
 
-  /**
-   * @return the ReturnValueField
-   */
   public ReturnValueField getReturnValueField() {
     return getFieldByClass(ReturnValueField.class);
   }
 
-  /**
-   * @return the SampleContentButton
-   */
   public SampleContentButton getSampleContentButton() {
     return getFieldByClass(SampleContentButton.class);
   }
 
-  /**
-   * @return the YesButtonTextField
-   */
   public YesButtonTextField getYesButtonTextField() {
     return getFieldByClass(YesButtonTextField.class);
+  }
+
+  public ResultField getResultField() {
+    return getFieldByClass(ResultField.class);
   }
 
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Override
-    protected int getConfiguredGridColumnCount() {
-      return 1;
-    }
-
     @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
-
-      @Override
-      protected int getConfiguredGridColumnCount() {
-        return 2;
-      }
 
       @Override
       protected String getConfiguredLabel() {
@@ -217,8 +173,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       @Order(10.0)
       public class MessageBoxOkButton extends AbstractLinkButton {
 
-        private static final String LABEL = "MessageBoxWithOkButton";
-
         @Override
         protected int getConfiguredGridW() {
           return 1;
@@ -226,7 +180,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get(LABEL);
+          return TEXTS.get("MessageBoxWithOkButton");
         }
 
         @Override
@@ -236,15 +190,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBoxes.createOk().header(TEXTS.get(LABEL)).body(TEXTS.get("Lorem")).show();
+          int result = MessageBoxes.createOk().header(TEXTS.get("MessageBoxWithOkButton")).body(TEXTS.get("Lorem")).show();
+          getResultField().setMessageBoxResult(result);
         }
       }
 
       @Order(20.0)
       public class MessageBoxYesNoButton extends AbstractLinkButton {
 
-        private static final String LABEL = "MessageBoxWithYesNoButton";
-
         @Override
         protected int getConfiguredGridW() {
           return 1;
@@ -252,7 +205,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get(LABEL);
+          return TEXTS.get("MessageBoxWithYesNoButton");
         }
 
         @Override
@@ -262,15 +215,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBoxes.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").show();
+          int result = MessageBoxes.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").show();
+          getResultField().setMessageBoxResult(result);
         }
       }
 
       @Order(30.0)
       public class MessageBoxYesNoCancelButton extends AbstractLinkButton {
 
-        private static final String LABEL = "MessageBoxWithYesNoCancelButton";
-
         @Override
         protected int getConfiguredGridW() {
           return 1;
@@ -278,7 +230,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get(LABEL);
+          return TEXTS.get("MessageBoxWithYesNoCancelButton");
         }
 
         @Override
@@ -288,15 +240,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBoxes.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").show(); 
+          int result = MessageBoxes.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").show();
+          getResultField().setMessageBoxResult(result);
         }
       }
 
       @Order(40.0)
       public class MessageBoxHiddenText extends AbstractLinkButton {
 
-        private static final String LABEL = "MessageBoxWithHiddenText";
-
         @Override
         protected int getConfiguredGridW() {
           return 1;
@@ -304,7 +255,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get(LABEL);
+          return TEXTS.get("MessageBoxWithHiddenText");
         }
 
         @Override
@@ -314,12 +265,13 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBoxes.create().
+          int result = MessageBoxes.create().
               header(TEXTS.get("Lorem")).
               body(TEXTS.get("HiddenTextInstruction")).
               cancelButtonText(TEXTS.get("CloseButton")).
               hiddenText(TEXTS.get("HiddenText")).
               show();
+          getResultField().setMessageBoxResult(result);
         }
       }
 
@@ -343,7 +295,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          MessageBox.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
+          boolean result = MessageBox.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
+          getResultField().setValue(result + "");
         }
       }
 
@@ -367,6 +320,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
+          getResultField().setValue("(VetoException)");
           throw new VetoException("This is a VetoException");
         }
       }
@@ -391,23 +345,67 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
+          getResultField().setValue("(ProcessingException)");
           throw new ProcessingException("This is a ProcessingException");
         }
       }
 
+      @Order(80.0)
+      public class ResultField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Result");
+        }
+
+        public void setMessageBoxResult(int result) {
+          String optionName = "" + result;
+          try {
+            Field[] f = IMessageBox.class.getDeclaredFields();
+            for (int i = 0; i < f.length; i++) {
+              if (Modifier.isPublic(f[i].getModifiers()) && Modifier.isStatic(f[i].getModifiers()) && f[i].getName().endsWith("_OPTION")) {
+                if (((Number) f[i].get(null)).intValue() == result) {
+                  optionName = IMessageBox.class.getSimpleName() + "." + f[i].getName();
+                  break;
+                }
+              }
+            }
+          }
+          catch (Exception t) {
+            LOG.warn("Error while reading fields from class", t);
+          }
+          setValue(optionName);
+        }
+      }
     }
 
     @Order(20.0)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
-      protected int getConfiguredGridColumnCount() {
-        return 2;
-      }
-
-      @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Configure");
+      }
+
+      protected void updateMessageBoxConfiguredButton() {
+        String yesButtonText = getYesButtonTextField().getValue();
+        String noButtonText = getNoButtonTextField().getValue();
+        String cancelButtonText = getCancelButtonTextField().getValue();
+        long autoCloseMillis = NumberUtility.nvl(getAutoCloseMillisField().getValue(), -1);
+
+        // Prevent opening message boxes that cannot be closed again
+        boolean messageBoxClosable = (yesButtonText != null || noButtonText != null || cancelButtonText != null || autoCloseMillis != -1);
+        getMessageBoxConfiguredButton().setEnabled(messageBoxClosable);
       }
 
       @Order(10.0)
@@ -425,6 +423,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected boolean getConfiguredEnabled() {
           return false;
         }
 
@@ -473,7 +476,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
           return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
-
       }
 
       @Order(40.0)
@@ -516,6 +518,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabelFont() {
           return "ITALIC";
         }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateMessageBoxConfiguredButton();
+        }
       }
 
       @Order(70.0)
@@ -530,6 +537,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabelFont() {
           return "ITALIC";
         }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateMessageBoxConfiguredButton();
+        }
       }
 
       @Order(80.0)
@@ -543,6 +555,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabelFont() {
           return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateMessageBoxConfiguredButton();
         }
       }
 
@@ -600,7 +617,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
           return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
-
       }
 
       @Order(130.0)
@@ -619,6 +635,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected Long getConfiguredMinValue() {
           return -1L;
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateMessageBoxConfiguredButton();
         }
       }
 
