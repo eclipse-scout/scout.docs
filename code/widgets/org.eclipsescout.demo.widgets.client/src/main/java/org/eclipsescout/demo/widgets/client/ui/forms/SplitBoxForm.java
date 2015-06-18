@@ -26,7 +26,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeFiel
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -43,8 +42,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.Exampl
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.SizeField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox.FileTableField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.FieldVisibilityBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.FieldVisibilityBox.Placeholder1Field;
+import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.FieldVisibilityBox;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
@@ -124,13 +122,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
    */
   public NameField getNameField() {
     return getFieldByClass(NameField.class);
-  }
-
-  /**
-   * @return the Placeholder1Field
-   */
-  public Placeholder1Field getPlaceholder1Field() {
-    return getFieldByClass(Placeholder1Field.class);
   }
 
   /**
@@ -374,73 +365,130 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40.0)
-    public class FieldVisibilityBox extends AbstractGroupBox {
-
-      @Override
-      protected int getConfiguredGridColumnCount() {
-        return 1;
-      }
-
-      @Override
-      protected double getConfiguredGridWeightY() {
-        return 0.0;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("SplitterVisibility");
-      }
+    public class SplitVisibleEnabledField extends AbstractSplitBox {
 
       @Order(10.0)
-      public class VisiblePreviewField extends AbstractCheckBox {
+      public class FieldVisibilityBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Override
+        protected double getConfiguredGridWeightY() {
+          return 0.0;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("VisiblePreview");
+          return TEXTS.get("SplitterVisibility");
         }
 
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getPreviewBox().setVisible(getValue());
+        @Order(10.0)
+        public class VisiblePreviewField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisiblePreview");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getPreviewBox().setVisible(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getPreviewBox().isVisible());
+          }
         }
 
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(getPreviewBox().isVisible());
+        @Order(20.0)
+        public class VisibleDetailsField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisibleDetails");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getDetailsBox().setVisible(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getDetailsBox().isVisible());
+          }
         }
       }
 
       @Order(20.0)
-      public class VisibleDetailsField extends AbstractCheckBox {
+      public class FieldEnabledBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Override
+        protected double getConfiguredGridWeightY() {
+          return 0.0;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("VisibleDetails");
+          return TEXTS.get("SplitterEnabled");
         }
 
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getDetailsBox().setVisible(getValue());
+        @Order(10.0)
+        public class VisiblePreviewField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("EnabledHorizontal");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getSplitHorizontalField().setSplitterEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getSplitHorizontalField().isSplitterEnabled());
+          }
         }
 
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(getDetailsBox().isVisible());
-        }
-      }
+        @Order(20.0)
+        public class VisibleDetailsField extends AbstractCheckBox {
 
-      @Order(40.0)
-      public class Placeholder1Field extends AbstractPlaceholderField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("EnabledVertical");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getSplitVerticalField().setSplitterEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getSplitVerticalField().isSplitterEnabled());
+          }
+        }
       }
 
     }
