@@ -17,6 +17,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
@@ -52,6 +53,9 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
 
     FormPage tableFieldPage = new FormPage(TableFieldForm.class);
     pageList.add(tableFieldPage);
+
+    FormPage htmlFieldPage = new FormPage(HtmlFieldForm.class);
+    pageList.add(htmlFieldPage);
 
     FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
     pageList.add(imageFieldPage);

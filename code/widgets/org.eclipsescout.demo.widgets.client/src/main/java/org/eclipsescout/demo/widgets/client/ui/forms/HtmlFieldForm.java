@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.client.old.ui.forms;
+package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
@@ -24,24 +24,26 @@ import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
 import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
+import org.eclipse.scout.rt.client.ui.form.fields.textfield.AbstractTextField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.file.RemoteFile;
-import org.eclipsescout.demo.widgets.client.old.ResourceBase;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.HTMLFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.HTMLFieldForm.MainBox.GroupBox;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.HTMLFieldForm.MainBox.GroupBox.BlankButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.HTMLFieldForm.MainBox.GroupBox.ScoutHtmlButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.HTMLFieldForm.MainBox.HTMLField;
-import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.eclipsescout.demo.widgets.client.ResourceBase;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.BlankButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.ScoutHtmlButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.HTMLField;
 
-public class HTMLFieldForm extends AbstractForm implements IPageForm {
+public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
-  public HTMLFieldForm() throws ProcessingException {
+  public HtmlFieldForm() throws ProcessingException {
     super();
   }
 
@@ -94,6 +96,7 @@ public class HTMLFieldForm extends AbstractForm implements IPageForm {
     try {
       String s = IOUtility.getContent(new InputStreamReader(ResourceBase.class.getResource("html/" + simpleName).openStream()));
       getHTMLField().setValue(null);
+      getHTMLField().setScrollToAnchor(null);
       getHTMLField().setAttachments(attachments);
       getHTMLField().setValue(s);
     }
@@ -138,6 +141,74 @@ public class HTMLFieldForm extends AbstractForm implements IPageForm {
 
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
+
+    @Order(5.0)
+    public class ActionGroupBox extends AbstractGroupBox {
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 4;
+      }
+
+      @Order(10)
+      public class EnabledCheckBox extends AbstractCheckBox {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Enabled";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(true);
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getHTMLField().setEnabled(getValue());
+        }
+      }
+
+      @Order(20)
+      public class ScrollToAnchorField extends AbstractTextField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("JumpToAnchor");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getHTMLField().setScrollToAnchor(getValue());
+        }
+      }
+
+      @Order(30)
+      public class ScrollToEndButton extends AbstractButton {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ScrollToEnd");
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          getHTMLField().scrollToEnd();
+        }
+      }
+    }
 
     @Order(10.0)
     public class HTMLField extends AbstractHtmlField {
@@ -212,6 +283,20 @@ public class HTMLFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execClickAction() throws ProcessingException {
           loadFile("ScoutHtml.html", Collections.<RemoteFile> emptySet());
+        }
+      }
+
+      @Order(70.0)
+      public class ALotOfContentHtmlButton extends AbstractLinkButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ALotOfContentHtmlWithAnchor");
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          loadFile("ALotOfContent.html", Collections.<RemoteFile> emptySet());
         }
       }
     }
