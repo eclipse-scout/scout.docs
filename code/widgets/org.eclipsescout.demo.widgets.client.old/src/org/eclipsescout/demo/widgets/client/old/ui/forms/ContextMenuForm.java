@@ -31,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.colorpickerfield.AbstractColorField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
@@ -774,12 +775,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
     }
 
     @Order(120)
-    public class RadioButton extends AbstractButton {
-
-      @Override
-      protected int getConfiguredDisplayStyle() {
-        return DISPLAY_STYLE_RADIO;
-      }
+    public class RadioButton extends AbstractRadioButton<Object> {
 
       @Override
       protected String getConfiguredLabel() {
