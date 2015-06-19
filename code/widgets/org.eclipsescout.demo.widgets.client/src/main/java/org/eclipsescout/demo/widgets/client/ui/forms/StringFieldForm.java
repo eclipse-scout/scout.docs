@@ -297,6 +297,30 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(25.0)
+      public class InsertText1Button extends AbstractButton {
+        @Override
+        protected void execInitField() throws ProcessingException {
+          super.execInitField();
+          setLabel(TEXTS.get("CallInsertTextSourceXTargetY", getDefaultField().getLabel(), getMandatoryField().getLabel()));
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          getMandatoryField().insertText(getDefaultField().getValue());
+        }
+      }
+
       @Order(30.0)
       public class DisabledField extends AbstractStringField {
 
@@ -440,6 +464,29 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           return true;
         }
 
+      }
+
+      @Order(65.0)
+      public class InsertText2Button extends AbstractButton {
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setLabel(TEXTS.get("CallInsertTextSourceXTargetY", getDefaultField().getLabel(), getTextInputField().getLabel()));
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          getTextInputField().insertText(getDefaultField().getValue());
+        }
       }
 
       private void updateFontAndColors() {
