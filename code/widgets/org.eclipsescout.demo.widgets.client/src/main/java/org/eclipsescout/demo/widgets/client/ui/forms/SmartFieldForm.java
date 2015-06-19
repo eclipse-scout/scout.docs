@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -30,11 +29,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentListLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.CloseButton;
@@ -256,7 +256,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
+          return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
         }
       }
 

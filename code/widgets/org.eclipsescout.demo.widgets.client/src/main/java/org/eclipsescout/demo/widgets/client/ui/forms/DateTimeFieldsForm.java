@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,11 +32,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.ClientSession;
-import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigLocaleField;
@@ -517,6 +521,30 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected String execFormatValue(Date value) {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            NlsLocale.set(getConfigLocaleField().getValue());
+            return super.execFormatValue(value);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
+        }
+
+        @Override
+        protected Date execParseValue(String text) throws ProcessingException {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            NlsLocale.set(getConfigLocaleField().getValue());
+            return super.execParseValue(text);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
+        }
+
+        @Override
         protected void execChangedDisplayText() {
           getDisplayTextField().setValue(getDisplayText());
           if ("May 23, 1981".equals(getDisplayText())) {
@@ -617,7 +645,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
+          return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
         }
 
         @Override
@@ -627,16 +655,9 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          Locale oldLocale = NlsLocale.get(false);
-          try {
-            NlsLocale.set(getValue());
-            getInputField().setFormat(getDateFieldFormatField().getValue());
-            getTimeInputField().setFormat(getTimeFieldFormatField().getValue());
-            getDateTimeInputField().setFormat(getDateTimeFieldFormatField().getValue());
-          }
-          finally {
-            NlsLocale.set(oldLocale);
-          }
+          getInputField().setFormat(getDateFieldFormatField().getValue());
+          getTimeInputField().setFormat(getTimeFieldFormatField().getValue());
+          getDateTimeInputField().setFormat(getDateTimeFieldFormatField().getValue());
         }
 
         @Override
@@ -655,6 +676,29 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("TimeFieldInput");
+        }
+
+        @Override
+        protected String execFormatValue(Date value) {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            return super.execFormatValue(value);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
+        }
+
+        @Override
+        protected Date execParseValue(String text) throws ProcessingException {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            NlsLocale.set(getConfigLocaleField().getValue());
+            return super.execParseValue(text);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
         }
 
         @Override
@@ -752,6 +796,29 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DateTimeFieldInput");
+        }
+
+        @Override
+        protected String execFormatValue(Date value) {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            return super.execFormatValue(value);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
+        }
+
+        @Override
+        protected Date execParseValue(String text) throws ProcessingException {
+          Locale oldLocale = NlsLocale.get(false);
+          try {
+            NlsLocale.set(getConfigLocaleField().getValue());
+            return super.execParseValue(text);
+          }
+          finally {
+            NlsLocale.set(oldLocale);
+          }
         }
 
         @Override
@@ -895,7 +962,58 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
+    @Order(60.0)
+    public class ShortFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ShortFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.SHORT, getConfigLocaleField().getValue());
+        if (df instanceof SimpleDateFormat) {
+          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+        }
+      }
+    }
+
     @Order(70.0)
+    public class MediumFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("MediumFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.MEDIUM, getConfigLocaleField().getValue());
+        if (df instanceof SimpleDateFormat) {
+          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+        }
+      }
+    }
+
+    @Order(70.0)
+    public class MonthYearFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("MonthYearFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(101, getConfigLocaleField().getValue());
+        if (df instanceof SimpleDateFormat) {
+          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+        }
+      }
+    }
+
+    @Order(170.0)
     public class CloseButton extends AbstractCloseButton {
 
       @Override

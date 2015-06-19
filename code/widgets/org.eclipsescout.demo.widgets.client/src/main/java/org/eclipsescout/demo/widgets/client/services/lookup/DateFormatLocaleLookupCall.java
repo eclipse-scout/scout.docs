@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.services.lookup;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -18,13 +17,15 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 /**
  * @author mzi
  */
-public class LocaleLookupCall extends LocalLookupCall<Locale> {
+public class DateFormatLocaleLookupCall extends LocalLookupCall<Locale> {
 
   private static final long serialVersionUID = 1L;
 
@@ -44,7 +45,7 @@ public class LocaleLookupCall extends LocalLookupCall<Locale> {
   @Override
   protected List<LookupRow<Locale>> execCreateLookupRows() throws ProcessingException {
     ArrayList<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
-    Locale[] locales = SimpleDateFormat.getAvailableLocales();
+    Locale[] locales = BEANS.get(DateFormatProvider.class).getAvailableLocales();
 
     for (Locale locale : sort(locales)) {
       rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
