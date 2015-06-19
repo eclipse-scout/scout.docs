@@ -49,7 +49,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("LabelField");
+    return TEXTS.get("CheckboxField");
   }
 
   @Override

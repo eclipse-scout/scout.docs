@@ -78,7 +78,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("NumberFields");
+    return TEXTS.get("DateTimeFields");
   }
 
   @Override

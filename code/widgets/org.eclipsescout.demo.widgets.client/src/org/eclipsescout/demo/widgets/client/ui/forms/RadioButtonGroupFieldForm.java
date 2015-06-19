@@ -58,7 +58,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("RadioButtonGroup");
+    return TEXTS.get("RadioButtonGroupField");
   }
 
   @Override
