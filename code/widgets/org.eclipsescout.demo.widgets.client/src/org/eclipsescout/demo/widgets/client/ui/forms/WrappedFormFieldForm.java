@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.client.old.ui.forms;
+package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -20,14 +20,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFormField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.InnerFormsField;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 import org.eclipsescout.demo.widgets.client.services.lookup.FormLookupCall;
-import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.InnerFormsField;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 

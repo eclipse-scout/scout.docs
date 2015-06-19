@@ -17,6 +17,8 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensibleOutline;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
@@ -24,6 +26,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm;
 
 /**
  * @author mzi
@@ -58,5 +61,14 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage svgFieldPage = new FormPage(SvgFieldForm.class);
     pageList.add(svgFieldPage);
+
+    FormPage htmlFieldPage = new FormPage(HtmlFieldForm.class);
+    pageList.add(htmlFieldPage);
+
+    FormPage browserFieldPage = new FormPage(BrowserFieldForm.class);
+    pageList.add(browserFieldPage);
+
+    FormPage wrappedFormFieldPage = new FormPage(WrappedFormFieldForm.class);
+    pageList.add(wrappedFormFieldPage);
   }
 }

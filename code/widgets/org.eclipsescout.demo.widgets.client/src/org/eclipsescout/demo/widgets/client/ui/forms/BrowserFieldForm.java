@@ -8,9 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.client.old.ui.forms;
-
-import java.io.InputStreamReader;
+package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -28,17 +26,15 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.file.RemoteFile;
-import org.eclipsescout.demo.widgets.client.old.Activator;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiagButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
-import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiagButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
 
 public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
@@ -101,17 +97,6 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
   public URLField getURLField() {
     return getFieldByClass(URLField.class);
-  }
-
-  private void loadFile(String simpleName) throws ProcessingException {
-    try {
-      RemoteFile remoteFile = new RemoteFile("simpleName", 0);
-      remoteFile.readData(new InputStreamReader(Activator.getDefault().getBundle().getResource("resources/html/" + simpleName).openStream()));
-      getBrowserField().setValue(remoteFile);
-    }
-    catch (Exception e) {
-      throw new ProcessingException("Html-Field can't load file ", e);
-    }
   }
 
   @Order(10.0)
@@ -194,6 +179,11 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           protected void execClickAction() throws ProcessingException {
             getURLField().setValue(TEXTS.get("Www.eclipse.orgscout"));
           }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setVisible(UserAgentUtility.isRichClient());
+          }
         }
 
         @Order(20.0)
@@ -201,7 +191,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("Www.bsiag.com");
+            return TEXTS.get("Www.bsi-software.com");
           }
 
           @Override
@@ -211,7 +201,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getURLField().setValue(TEXTS.get("Www.bsiag.com"));
+            getURLField().setValue(TEXTS.get("Www.bsi-software.com"));
           }
         }
 
@@ -226,6 +216,11 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected int getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getRefreshButton().doClick();
           }
         }
 

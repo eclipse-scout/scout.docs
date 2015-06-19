@@ -47,18 +47,20 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
 import org.eclipse.scout.service.SERVICES;
-import org.eclipsescout.demo.widgets.client.Activator;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
+import org.eclipsescout.demo.widgets.client.util.ResourceUtility;
 import org.eclipsescout.demo.widgets.shared.FileCodeType;
 
 public abstract class AbstractFileTableField extends AbstractTableField<AbstractFileTableField.Table> {
   protected static final String FILE_SIZE_FORMAT = "#,### KB";
   protected static final long FILE_SIZE_FACTOR = 1024;
 
+  private static final String BIRD = "bird.jpg";
+
   @Override
   protected void execInitField() throws ProcessingException {
-    URL url = Activator.getDefault().getBundle().getResource("/resources/images/bird_1008.jpg");
+    URL url = ResourceUtility.getImageResource(BIRD);
 
     try {
       byte[] content = IOUtility.getContent(new BufferedInputStream(url.openStream()));
@@ -109,7 +111,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     @Override
     protected void execAction() throws ProcessingException {
-      getTable().getMenu(DeleteMenu.class).execAction();
+      getTable().getMenu(DeleteMenu.class).doAction();
     }
   }
 
@@ -200,7 +202,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     @Override
     protected void execRowAction(ITableRow row) throws ProcessingException {
-      getMenu(OpenMenu.class).execAction();
+      getMenu(OpenMenu.class).doAction();
     }
 
     @Override

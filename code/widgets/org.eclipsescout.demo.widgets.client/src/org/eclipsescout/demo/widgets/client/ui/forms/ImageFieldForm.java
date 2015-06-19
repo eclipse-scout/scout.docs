@@ -30,7 +30,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipsescout.demo.widgets.client.Activator;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageField;
@@ -42,6 +41,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.Exam
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.IconContentField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
+import org.eclipsescout.demo.widgets.client.util.ResourceUtility;
 
 public class ImageFieldForm extends AbstractForm implements IPageForm {
 
@@ -140,10 +140,9 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    public static final String SCOUT_LOGO = "/resources/images/eclipse_scout_logo.png";
-    public static final String SCOUT_LOGO_FILENAME = "eclipse_scout_logo.png";
+    public static final String SCOUT_LOGO = "eclipse_scout_logo.png";
     public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
-    public static final String BIRD_OFFLINE = "/resources/images/bird_1008.jpg";
+    public static final String BIRD_OFFLINE = "bird.jpg";
 
     @Override
     protected int getConfiguredGridColumnCount() {
@@ -232,9 +231,9 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
           clearErrorStatus();
 
           try {
-            URL url = Activator.getDefault().getBundle().getResource(SCOUT_LOGO);
+            URL url = ResourceUtility.getImageResource(SCOUT_LOGO);
             setImage(IOUtility.getContent(url.openStream()));
-            setImageId(SCOUT_LOGO_FILENAME);
+            setImageId(SCOUT_LOGO);
           }
           catch (Exception e) {
             e.printStackTrace();
@@ -316,7 +315,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
       private URL getUrl(String urlString) throws Exception {
         if (urlString.equals(BIRD)) {
-          return Activator.getDefault().getBundle().getResource(BIRD_OFFLINE);
+          return ResourceUtility.getImageResource(BIRD_OFFLINE);
         }
 
         return new URL((String) urlString);

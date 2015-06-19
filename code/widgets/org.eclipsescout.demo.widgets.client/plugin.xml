@@ -4,10 +4,7 @@
    <extension
          name=""
          point="org.eclipse.scout.service.services">
-      <proxy
-            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
-            class="org.eclipsescout.demo.widgets.shared.services.IStandardOutlineService">
-      </proxy>
+
       <service
             factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
             class="org.eclipse.scout.rt.shared.services.common.code.SharedCodeService"
@@ -18,6 +15,18 @@
             class="org.eclipsescout.demo.widgets.client.services.ClientAccessControlService"
             session="org.eclipsescout.demo.widgets.client.ClientSession">
       </service>
+      <service
+            class="org.eclipsescout.demo.widgets.client.services.FontIconProviderService"
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            ranking="2000"
+            session="org.eclipsescout.demo.widgets.client.ClientSession">
+      </service>
+      <service
+            class="org.eclipse.scout.rt.client.services.common.icon.IconProviderService"
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            ranking="1000"
+            session="org.eclipsescout.demo.widgets.client.ClientSession">
+      </service>      
    </extension>
 
 </plugin>

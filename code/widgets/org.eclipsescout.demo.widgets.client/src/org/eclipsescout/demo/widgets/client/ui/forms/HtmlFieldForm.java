@@ -10,12 +10,14 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import org.eclipse.scout.commons.StringUtility;
+import org.eclipse.scout.commons.IOUtility;
+import org.eclipse.scout.commons.UriBuilder;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -24,32 +26,35 @@ import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.svg.client.SVGUtility;
-import org.eclipse.scout.svg.client.svgfield.AbstractSvgField;
-import org.eclipse.scout.svg.client.svgfield.SvgFieldEvent;
+import org.eclipse.scout.rt.shared.services.common.file.RemoteFile;
+import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
+import org.eclipse.scout.service.SERVICES;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationBox.HtmlSourceField;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationBox.UserHtmlField;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.ExamplesBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.SampleContentButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.ConfigurationBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.ConfigurationBox.SvgSourceField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.ConfigurationBox.UserSvgField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.ExamplesBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.SampleContentButton;
 import org.eclipsescout.demo.widgets.client.util.ResourceUtility;
-import org.w3c.dom.svg.SVGCircleElement;
-import org.w3c.dom.svg.SVGDocument;
-import org.w3c.dom.svg.SVGLength;
 
-public class SvgFieldForm extends AbstractForm implements IPageForm {
+public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
-  private static final String LOGO = "SvgLogo.svg";
-  private static final String WORLD = "World_map.svg";
+  public static final String HTML_DEFAULT = "HtmlFieldCustomHtml.html";
+  public static final String HTML_DISABLED = "HelloWorld.html";
+  public static final String HTML_USER = "ScoutHtml.html";
 
-  public SvgFieldForm() throws ProcessingException {
+  public static final String IMAGE_LOGO = "eclipse_scout_logo.png";
+  public static final String IMAGE_TEXT = "eclipse_scout_text.png";
+  public static final String IMAGE_BIRD = "bird.jpg";
+
+  public HtmlFieldForm() throws ProcessingException {
     super();
   }
 
@@ -60,7 +65,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("SvgField");
+    return TEXTS.get("HtmlField");
   }
 
   @Override
@@ -99,12 +104,12 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(SampleContentButton.class);
   }
 
-  public SvgSourceField getSvgSourceField() {
-    return getFieldByClass(SvgSourceField.class);
+  public HtmlSourceField getHtmlSourceField() {
+    return getFieldByClass(HtmlSourceField.class);
   }
 
-  public UserSvgField getUserSvgField() {
-    return getFieldByClass(UserSvgField.class);
+  public UserHtmlField getUserHtmlField() {
+    return getFieldByClass(UserHtmlField.class);
   }
 
   /**
@@ -129,24 +134,6 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       return 1;
     }
 
-    private SVGDocument getDocument(String content) throws IOException, ProcessingException {
-      if (StringUtility.isNullOrEmpty(content)) {
-        return null;
-      }
-
-      InputStream is = new ByteArrayInputStream(content.getBytes("UTF-8"));
-
-      return SVGUtility.readSVGDocument(is);
-    }
-
-    private SVGDocument getDocument(URL url) throws IOException, ProcessingException {
-      if (url == null) {
-        return null;
-      }
-
-      return SVGUtility.readSVGDocument(url.openStream());
-    }
-
     @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
 
@@ -161,7 +148,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10.0)
-      public class DefaultField extends AbstractSvgField {
+      public class DefaultField extends AbstractHtmlField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -175,18 +162,22 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          try {
-            setSvgDocument(getDocument(ResourceUtility.getSVGResource(LOGO)));
-          }
-          catch (IOException e) {
-            e.printStackTrace();
-            throw new ProcessingException("Exception occured while reading svg file", e);
-          }
+          loadUserContent(this, htmlResourceToString(HTML_DEFAULT));
+        }
+
+        @Override
+        protected void execHyperlinkAction(URL url, String path, boolean local) throws ProcessingException {
+          processUserHyperlinkAction(url, path, local);
         }
       }
 
       @Order(20.0)
-      public class DisabledField extends AbstractSvgField {
+      public class DisabledField extends AbstractHtmlField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
 
         @Override
         protected int getConfiguredGridH() {
@@ -200,13 +191,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          try {
-            setSvgDocument(getDocument(ResourceUtility.getSVGResource(WORLD)));
-          }
-          catch (IOException e) {
-            e.printStackTrace();
-            throw new ProcessingException("Exception occured while reading svg file", e);
-          }
+          setValue(htmlResourceToString(HTML_DISABLED));
         }
       }
     }
@@ -225,7 +210,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10.0)
-      public class UserSvgField extends AbstractSvgField {
+      public class UserHtmlField extends AbstractHtmlField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -234,54 +219,32 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("UserSVG");
+          return TEXTS.get("UserHTML");
         }
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SvgFieldForm.MainBox.ConfigurationBox.SvgSourceField.class;
+          return HtmlFieldForm.MainBox.ConfigurationBox.HtmlSourceField.class;
+        }
+
+        @Override
+        protected boolean getConfiguredScrollBarEnabled() {
+          return true;
         }
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-
-          getSvgSourceField().clearErrorStatus();
-
-          try {
-            getUserSvgField().setSvgDocument(getDocument((String) newMasterValue));
-          }
-          catch (Exception e) {
-            e.printStackTrace();
-            getSvgSourceField().setErrorStatus(e.getMessage());
-          }
+          loadUserContent(this, (String) newMasterValue);
         }
 
         @Override
-        protected void execHyperlink(SvgFieldEvent e) throws ProcessingException {
-          if (e.getURL() == null) return;
-
-          // create a copy...
-          String url = e.getURL().toExternalForm();
-
-          if ("http://local/circle2".equals(url)) {
-            SVGDocument doc = (SVGDocument) getSvgDocument().cloneNode(true);
-            setSvgDocument(liveUpdateCircle(doc, "circle2"));
-          }
-          else {
-            MessageBox.showOkMessage(TEXTS.get("SVGLink"), TEXTS.get("SVGLinkMessage"), e.getURL().toString());
-          }
-        }
-
-        private SVGDocument liveUpdateCircle(SVGDocument doc, String id) {
-          SVGCircleElement circle = (SVGCircleElement) doc.getElementById(id);
-          SVGLength x = (SVGLength) circle.getCx().getBaseVal();
-          x.setValue((x.getValue() + 40) % 400);
-          return doc;
+        protected void execHyperlinkAction(URL url, String path, boolean local) throws ProcessingException {
+          processUserHyperlinkAction(url, path, local);
         }
       }
 
       @Order(20.0)
-      public class SvgSourceField extends AbstractStringField {
+      public class HtmlSourceField extends AbstractStringField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -290,7 +253,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("SVGSource");
+          return TEXTS.get("HTMLSource");
         }
 
         @Override
@@ -320,12 +283,51 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        getSvgSourceField().setValue(TEXTS.get("SvgUserContend"));
+        getHtmlSourceField().setValue(htmlResourceToString(HTML_USER));
       }
     }
 
     @Order(40.0)
     public class CloseButton extends AbstractCloseButton {
+    }
+  }
+
+  private String htmlResourceToString(String fileName) throws ProcessingException {
+    try {
+      URL url = ResourceUtility.getHtmlResource(fileName);
+      InputStreamReader isr = new InputStreamReader(url.openStream());
+      String html = IOUtility.getContent(isr);
+      return html;
+    }
+    catch (Exception e) {
+      throw new ProcessingException("Can't load file '" + fileName + "'", e);
+    }
+  }
+
+  private void loadUserContent(AbstractHtmlField field, String html) throws ProcessingException {
+    List<RemoteFile> attachments = new ArrayList<RemoteFile>();
+    attachments.add(new RemoteFile(ResourceUtility.getImageResource(IMAGE_LOGO), true));
+    attachments.add(new RemoteFile(ResourceUtility.getImageResource(IMAGE_TEXT), true));
+    attachments.add(new RemoteFile(ResourceUtility.getImageResource(IMAGE_BIRD), true));
+
+    field.setValue(null);
+    field.setAttachments(attachments);
+    field.setValue(html);
+  }
+
+  private void processUserHyperlinkAction(URL url, String path, boolean local) throws ProcessingException {
+    if (local) {
+      Map<String, String> parameters = new UriBuilder(url).getParameters();
+      String paramStr = "";
+
+      if (parameters != null) {
+        paramStr = parameters.toString();
+      }
+
+      MessageBox.showOkMessage(null, TEXTS.get("LocalUrlClicked"), TEXTS.get("Parameters") + ":\n" + paramStr);
+    }
+    else {
+      SERVICES.getService(IShellService.class).shellOpen(url.toExternalForm());
     }
   }
 

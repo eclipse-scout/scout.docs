@@ -21,6 +21,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.ButtonLinkFieldsForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.CheckboxFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.DecimalFieldsForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.IconsForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.LabelFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm;
@@ -63,6 +64,9 @@ public class SimpleWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage buttonLinkFieldsPage = new FormPage(ButtonLinkFieldsForm.class);
     pageList.add(buttonLinkFieldsPage);
+
+    FormPage iconFieldsPage = new FormPage(IconsForm.class);
+    pageList.add(iconFieldsPage);
 
     FormPage messageBoxPage = new FormPage(MessageBoxForm.class);
     pageList.add(messageBoxPage);
