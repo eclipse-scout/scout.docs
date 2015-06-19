@@ -22,16 +22,15 @@ import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
-import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
+import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
-import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotification;
-import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotification;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
+import org.eclipsescout.demo.bahbah.shared.notification.RefreshBuddiesNotification;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.DeleteUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.ReadUsersPermission;
@@ -40,7 +39,6 @@ import org.eclipsescout.demo.bahbah.shared.security.UnregisterUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.services.UserAdministrationTablePageData;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
-import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.UserFormData;
 
@@ -61,7 +59,8 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     }
 
     registerUserInternal(ServerSession.get().getUserId());
-    BEANS.get(IClusterSynchronizationService.class).publishNotification(new RegisterUserNotification(ServerSession.get().getUserId()));
+    // TODO jgu cluster notification
+//    BEANS.get(IClusterSynchronizationService.class).publishNotification(new RegisterUserNotification(ServerSession.get().getUserId()));
   }
 
   @Override
@@ -71,8 +70,10 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     }
 
     m_users.remove(ServerSession.get().getUserId());
-    BEANS.get(INotificationProcessService.class).sendRefreshBuddies();
-    BEANS.get(IClusterSynchronizationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
+
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
+    // TODO jgu cluster notification
+//    BEANS.get(IClusterSynchronizationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
 
   }
 
@@ -148,12 +149,12 @@ public class UserProcessService extends AbstractService implements IUserProcessS
   @Override
   public void registerUserInternal(String userId) throws ProcessingException {
     m_users.add(userId);
-    BEANS.get(INotificationProcessService.class).sendRefreshBuddiesInternal();
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }
 
   @Override
   public void unregisterUserInternal(String userName) throws ProcessingException {
     m_users.remove(ServerSession.get().getUserId());
-    BEANS.get(INotificationProcessService.class).sendRefreshBuddiesInternal();
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }
 }

@@ -10,10 +10,9 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.services.notification;
 
-import org.eclipse.scout.commons.CompareUtility;
-import org.eclipse.scout.rt.server.services.common.clustersync.IClusterNotification;
+import java.io.Serializable;
 
-public class UnregisterUserNotification implements IClusterNotification {
+public class UnregisterUserNotification implements Serializable {
 
   private static final long serialVersionUID = 5245312868353225657L;
   private String m_userName;
@@ -26,12 +25,4 @@ public class UnregisterUserNotification implements IClusterNotification {
     return m_userName;
   }
 
-  @Override
-  public boolean coalesce(IClusterNotification existingNotification0) {
-    if (existingNotification0 instanceof UnregisterUserNotification) {
-      UnregisterUserNotification existingNotification = (UnregisterUserNotification) existingNotification0;
-      return CompareUtility.equals(getUserName(), existingNotification.getUserName());
-    }
-    return false;
-  }
 }

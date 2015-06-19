@@ -22,9 +22,5 @@ public interface INotificationProcessService extends IService {
 
   int MESSAGE_MAX_LENGTH = 5000;
 
-  void sendRefreshBuddies() throws ProcessingException;
-
   void sendMessage(String buddyName, String message) throws ProcessingException;
-
-  void sendRefreshBuddiesInternal() throws ProcessingException;
 }

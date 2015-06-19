@@ -10,18 +10,12 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.notification;
 
-import org.eclipse.scout.rt.shared.services.common.clientnotification.AbstractClientNotification;
-import org.eclipse.scout.rt.shared.services.common.clientnotification.IClientNotification;
+import java.io.Serializable;
 
 /**
  *
  */
-public class RefreshBuddiesNotification extends AbstractClientNotification {
+public class RefreshBuddiesNotification implements Serializable {
   private static final long serialVersionUID = 1L;
-
-  @Override
-  public boolean coalesce(IClientNotification existingNotification) {
-    return false;
-  }
 
 }
