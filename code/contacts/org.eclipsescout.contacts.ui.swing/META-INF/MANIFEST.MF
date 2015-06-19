@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.contacts.ui.swing;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.contacts.ui.swing.Activator
+Export-Package: org.eclipsescout.contacts.ui.swing;uses:="org.eclipse.scout.rt.ui.swing,org.eclipse.scout.rt.client.session,org.osgi.framework"
+Require-Bundle: org.eclipse.scout.rt.ui.swing,
+ org.eclipsescout.contacts.client;visibility:=reexport,
+ org.eclipsescout.contacts.shared,
+ org.eclipse.scout.net,
+ com.bsiag.scout.rt.ui.swing.rayo
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

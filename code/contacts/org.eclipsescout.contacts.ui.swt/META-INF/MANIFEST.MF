@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: My Application
+Bundle-SymbolicName: org.eclipsescout.contacts.ui.swt;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipsescout.contacts.ui.swt.Activator
+Export-Package: org.eclipsescout.contacts.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
+ org.eclipsescout.contacts.ui.swt.application,
+ org.eclipsescout.contacts.ui.swt.application.menu,
+ org.eclipsescout.contacts.ui.swt.editor,
+ org.eclipsescout.contacts.ui.swt.perspective,
+ org.eclipsescout.contacts.ui.swt.views
+Require-Bundle: org.eclipsescout.contacts.client;visibility:=reexport,
+ org.eclipsescout.contacts.shared,
+ org.eclipse.scout.rt.ui.swt,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.app,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

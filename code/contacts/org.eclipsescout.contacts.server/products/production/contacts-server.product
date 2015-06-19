@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="contacts Server" id="org.eclipsescout.contacts.server.product" application="org.eclipsescout.contacts.server.app" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+      <linux>/org.eclipsescout.contacts.server/products/production/config.ini</linux>
+      <macosx>/org.eclipsescout.contacts.server/products/production/config.ini</macosx>
+      <win32>/org.eclipsescout.contacts.server/products/production/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <programArgsLin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}
+      </programArgsLin>
+      <programArgsMac>-os ${target.os}  -arch ${target.arch} -nl ${target.nl}
+      </programArgsMac>
+      <programArgsWin>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}
+      </programArgsWin>
+      <vmArgs>-Xms64m
+-Xmx512m
+      </vmArgs>
+   </launcherArgs>
+
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="com.bsiag.org.docx4j"/>
+      <plugin id="javax.xml"/>
+      <plugin id="org.apache.commons.io"/>
+      <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.derby.jdbc_1091.fragment" fragment="true"/>
+      <plugin id="org.apache.xmlgraphics"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.http.registry"/>
+      <plugin id="org.eclipse.equinox.http.servlet"/>
+      <plugin id="org.eclipse.equinox.http.servletbridge"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.servletbridge"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.scout.commons"/>
+      <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment"/>
+      <plugin id="org.eclipse.scout.docx4j"/>
+      <plugin id="org.eclipse.scout.jaxws216"/>
+      <plugin id="org.eclipse.scout.jaxws216.jre18.fragment" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.jdbc.derby10"/>
+      <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
+      <plugin id="org.eclipse.scout.rt.shared"/>
+      <plugin id="org.eclipse.scout.service"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipsescout.contacts.server"/>
+      <plugin id="org.eclipsescout.contacts.server.premium"/>
+      <plugin id="org.eclipsescout.contacts.shared"/>
+      <plugin id="org.eclipsescout.contacts.shared.premium"/>
+   </plugins>
+
+
+</product>

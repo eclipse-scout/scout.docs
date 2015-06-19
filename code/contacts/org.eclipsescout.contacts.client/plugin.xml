@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.services.IStandardOutlineService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.services.IContactService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.services.lookup.ICompanyLookupService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.services.ICompanyService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.services.lookup.IContactLookupService">
+      </proxy>
+   </extension>
+
+</plugin>

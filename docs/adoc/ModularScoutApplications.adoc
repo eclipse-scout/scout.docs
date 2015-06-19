@@ -1,0 +1,182 @@
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "ModularScoutApplications" used in the books
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[[cha-modular_apps]]
+== Modular Scout Applications
+
+Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. 
+While many successful frameworks support the development of persistence layers and business services, implementing front-ends in a simple and clean way remains a challenge. 
+This is exactly where Eclipse Scout fits in. 
+
+* https://wiki.eclipse.org/Scout/Concepts/Extensibility
+
+[[sec-layers_slices]]
+=== Layers and Slices
+
+Lorem Ipsum
+
+[[sec-adding_slice]]
+=== Adding a Slice
+
+Lorem Ipsum
+
+[[sec-slice_add_elements]]
+=== Adding Scout Elements to a Slice
+
+* UI Elements: Outlines, Pages, Forms, ...
+* Texts, Icons, Codes, Permissions, ..
+* Services and Lookup Calls
+
+Lorem Ipsum
+
+=== Contributing Pages
+
+Lorem Ipsum
+
+== Extension Support
+
+Sometimes, just adding more functionality and UI components in a slice is not enough. 
+For example we would like to extend an existing form in the core application by a new field, add a column to an existing page or change the behaviour of an existing class. 
+To implement such requirements, the simplest approach is to directly change the code in the core application. 
+However, in a setup with a large amount of slices this approach leads to an ever growing core application that becomes less maintainable over time. 
+
+The extension support of Scout provides a mechanism that allows to implement extensions and changes to target components without the need of modifying the source code of the dependency itself. 
+To support this mechanism, the Scout extension registry and Scout extension classes are available in the Scout framework. 
+
+For extending UI components and DTOs no Scout SDK support is available so far. 
+This means that in the text below we will discuss the concepts in the Java source code directly. 
+
+=== Extending Menus
+
+A simple example to start with
+
+[[lst-contacts.client.menuextension, Listing of a [java]+NewMenu+ extension]]
+[source,java]  
+.A [java]+EventMenu+ extending the core applications [java]+NewMenu+
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/ui/desktop/NewMenuExtension.java[tags=ModularScoutApps.MenuExtension]
+----
+
+<1> The parameter [java]+NewMenu+ defines the parent for the menu components of the menu extension.
+<2> The contained menus are implemented as ordinary Scout menus. The provided ordering needs to match the desired location among the other elements.
+
+=== Extending Forms and Form Fields
+
+Lorem Ipsum
+
+[[lst-contacts.client.formExtension, Listing of a form extension]]
+[source,java]  
+.Adding a tab box to the details box of the [java]+ContactForm+.  
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/ui/forms/ContactFormTabExtension.java[lines=24..41;159..162]
+----
+
+<1> Adding the [java]+@Data+ annotation to the form extension lets the Scout SDK create the necessary DTO extension.
+<2> The container to be extended is defined as the parameter to the [java]+AbstractTabBoxExtension+.
+<3> The contained UI components are implemented as normal Scout components.
+<4> Content omitted.
+
+=== Loading additional Form Data on the Server
+
+[[lst-contacts.server.loadFormDataExtension, Listing of loading data into the DTO extension]]
+[source,java]  
+.Loading the additional data for the events tab of the contact form in [java]+ContactServiceExtension+
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/src/org/eclipsescout/contacts/server/premium/services/ContactServiceExtension.java[lines=17..-1]
+----
+
+<1> In this simple case we directly subclass the [java]+ContactService+ of the core server module.
+<2> First, load all data from the base service.
+<3> Get a reference to the DTO extension defined in the premium slice.
+<4> Select the additional data into the DTO extension.
+
+Registering of ContactServiceExtension  with a higher priority than ContactService.
+
+Warning: This simple implementation is working fine if we do not have several slices each extending the contact form. 
+Question: What to do, if several independent slices need to extend the contact form
+
+=== Extending Table Pages and Tables
+
+Lorem Ipsum
+
+[[sec-slice_extension_registration]]
+=== Registration of Extensions
+
+To be able to use extensions contributed by any slice, the core application needs to be aware of the extensions. 
+For this purpose, Scout provides an extension registry that is made available through a service implementing the [java]+IExtensionRegistry+ interface.
+
+Obviously, UI extensions need to be registered in the Scout client application and DTO extensions need to be registered on both the client and the server application. 
+The best time for registration of extensions is at startup time of the application. 
+The recommended way to implement such a behaviour in Scout is to create a startup service in each of the slices that need such an initialization. 
+The core client and server application can then go through all available services and call their init method. 
+As we have to register both UI and DTO extension on the client side but only DTO on the server side it makes sense to define individual interfaces for the client and the server modules. 
+
+For the contacts application we choose to name these interfaces [java]+IClientStartupService+ and [java]+IServerStartupService+. 
+Both interfaces only require the implementation of an [java]+init+ method.
+
+In the following sections the implementations of the init methods and the mechanism to call this method is described separately for the client and the server application.
+
+==== Client Startup
+
+For the premium client module the implementation of the [java]+IClientStartupService+ service is provided in <<lst-contacts.client.startupservice>>. 
+From this snipped we can see how the menu extension, the form and the page extensions are registered in the [java]+init+ method. 
+As the menu extension is not related to any DTO we only need to register the form and page DTO extensions.
+
+[[lst-contacts.client.startupservice, Listing of the PremiumClientStartupService ]]
+[source,java]  
+.Startup service implementation of the premium client for registering all UI contributions and DTO extensions.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/services/PremiumClientStartupService.java[tags=ModularScoutApps.PremiumClientStartupService]
+----
+
+To make sure, that the UI is aware of all available extensions before the UI is rendered on the screen we need to register the extensions early enough. 
+In the startup process of the client application we can add the registration in method [java]+execLoadSession+ in the [java]+ClientSession+ class as shown in <<lst-contacts.client.callingStartupservice>>.
+
+[[lst-contacts.client.callingStartupservice, Listing initalizing of the ClientStartupService ]]
+[source,java]  
+.Calling of the init method of all client startup services during session loading of the core client application.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ClientSession.java[tags=ModularScoutApps.execLoadSession]
+----
+
+<1> The creation of the UI happens during in [java]+new Desktop()+. 
+It is therefore important that the [java]+init+ method of the startup services are called before this line.
+
+==== Server Startup
+
+The [java]+init+ method of the [java]+PremiumServerStartupService+ is provided in <<lst-contacts.server.startupservice>>. 
+As in the case of the premium client startup service the exact same DTO extensions are registered. 
+In addition the database tables for the premium slice are created if they do not yet exist.
+
+[[lst-contacts.server.startupservice, Listing initializing of the ServerStartupService ]]
+[source,java]  
+.Registration of the DTO extension in the [java]+init+ method of the [java]+PremiumServerStartupService+.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/src/org/eclipsescout/contacts/server/premium/services/PremiumServerStartupService.java[tags=ModularScoutApps.PremiumServerStartupService]
+----
+
+A good opportunity to call the startup services in the server application is in an install job.
+This job can be created and executed in the [java]+start+ method of the [java]+ServerApplication+ as shown in <<lst-contacts.server.callingStartupservice>>.
+
+[[lst-contacts.server.callingStartupservice, Listing initalizing of the ServerStartupService ]]
+[source,java]  
+.Calling of the init method of all startup services during the startup of the server application.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[tags=ModularScoutApps.startServerApplication]
+----
+
+The described method to register extension in both client and server applications not only works for a single slice but also for a setup involving many slices and more complex dependencies. 
+By setting explicit service rankings, it is even possible to control the ordering of the calling of the various [java]+init+ methods. 

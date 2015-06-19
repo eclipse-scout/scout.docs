@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.premium.services.IEventManagementOutlineService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.premium.IEventService">
+      </proxy>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.contacts.client.premium.services.PremiumClientStartupService">
+      </service>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.contacts.shared.premium.services.IStandardOutlineExService">
+      </proxy>
+      <service 
+      		factory="org.eclipse.scout.rt.client.services.ClientServiceFactory" 
+      		class="org.eclipse.scout.rt.client.services.common.icon.IconProviderService">
+      </service>
+   </extension>
+   <extension
+         name=""
+         point="org.eclipse.scout.rt.extension.client.desktopExtensions">
+      <desktopExtension
+            class="org.eclipsescout.contacts.client.premium.ui.desktop.DesktopExtension"
+            active="true">
+      </desktopExtension>
+   </extension>
+   <extension
+         name=""
+         point="org.eclipse.scout.rt.extension.client.pages">
+      <pageContribution
+            order="30"
+            class="org.eclipsescout.contacts.client.premium.ui.desktop.outlines.EventsTablePage"
+            active="true">
+         <outline
+               class="org.eclipsescout.contacts.client.ui.desktop.outlines.StandardOutline">
+         </outline>
+      </pageContribution>
+      <pageContribution
+            order="20"
+            class="org.eclipsescout.contacts.client.premium.ui.desktop.outlines.EventsTablePage"
+            active="true">
+         <parentPage
+               class="org.eclipsescout.contacts.client.ui.desktop.outlines.CompanyDetailsNodePage">
+         </parentPage>
+      </pageContribution>
+   </extension>
+
+</plugin>

@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RAP Bundle
+Bundle-SymbolicName: org.eclipsescout.contacts.ui.rap;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipsescout.contacts.ui.rap.Activator
+Bundle-Vendor: Eclipse Scout Project
+Export-Package: org.eclipsescout.contacts.ui.rap
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipsescout.contacts.client,
+ org.eclipsescout.contacts.shared,
+ org.eclipse.scout.rt.ui.rap,
+ org.eclipse.scout.net,
+ org.eclipse.equinox.http.registry,
+ org.eclipse.scout.rt.server.commons,
+ org.eclipse.scout.rt.ui.rap.mobile,
+ org.eclipse.scout.rt.ui.rap.theme.rayo,
+ org.eclipse.scout.rt.client.mobile
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

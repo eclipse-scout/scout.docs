@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Client Mobile
+Bundle-SymbolicName: org.eclipsescout.contacts.client.mobile;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipsescout.contacts.client.mobile.Activator
+Bundle-Vendor: Eclipse Scout Project
+Export-Package: org.eclipsescout.contacts.client.mobile
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipsescout.contacts.client,
+ org.eclipsescout.contacts.shared,
+ org.eclipse.scout.rt.client.mobile,
+ org.eclipse.scout.rt.extension.client,
+ org.eclipse.scout.rt.client.mobile,
+ com.bsiag.org.docx4j,
+ org.eclipse.scout.docx4j,
+ org.eclipse.scout.rt.docx4j.client
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
