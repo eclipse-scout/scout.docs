@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.eclipsescout.docs</groupId>
@@ -13,12 +13,12 @@
   <properties>
     <tycho-version>0.22.0</tycho-version>
   </properties>
-  
+
   <repositories>
     <repository>
-       <id>eclipse_luna</id>
-       <url>http://download.eclipse.org/releases/luna</url>
-       <layout>p2</layout>
+      <id>eclipse_luna</id>
+      <url>http://download.eclipse.org/releases/luna</url>
+      <layout>p2</layout>
     </repository>
   </repositories>
 
