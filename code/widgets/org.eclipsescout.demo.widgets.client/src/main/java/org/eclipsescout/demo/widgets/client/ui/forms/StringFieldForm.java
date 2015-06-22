@@ -739,6 +739,20 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(155.0)
+      public class DecorationLinkField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredDecorationLink() {
+          return true;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("DecorationLink");
+        }
+      }
+
       @Order(160.0)
       public class MaxLengthField extends AbstractIntegerField {
 
