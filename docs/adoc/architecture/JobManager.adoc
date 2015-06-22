@@ -85,10 +85,14 @@ The following list describes the core functionality of the `IFuture`:
 |isBlocked()
 |To query if the associated job is waiting for a blocking condition to fall.
 
+|* awaitDone() +
+ * awaitDone(timeout, unit)
+|Waits if necessary for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the timeout elapses, or the computation failed.
+
 |* awaitDoneAndGet() +
  * awaitDoneAndGet(timeout, unit)
-|Blocks the calling thread until the job completes normally, or due to an exception, or due to cancellation. However, this method returns immediately if the job is not running anymore or was cancelled. +
-Provide a timeout to wait a maximal time for the job to complete.
+|Waits if necessary for the computation to complete, and then retrieves its result. In case of a computation exception, that exception is thrown in the form of a `ProcessingException`.
+However, if the job was cancelled, or the waiting thread interrupted, or the optional timeout elapsed, this method throws a `ProcessingException` with the corresponding flag set.
 
 |whenDone(callback)
 |Registers the given callback to be notified once the Future enters 'done' state. That is once the associated job completes successfully or with an exception, or was cancelled. Thereby, the callback is invoked in any thread with no `RunContext` applied. If the job is already in 'done' state when the callback is registered, the callback is invoked immediately.
@@ -151,7 +155,7 @@ There exist a factory for each kind of job:
 |Use this factory to schedule jobs that require to run on a `ClientRunContext`.
 
 |ModelJobs
-|Use this factory to schedule jobs that write to the client Scout model and therefore are required to run on a `ClientRunContext` and in sequence. A model job guarantees that at no time two model jobs are running in parallel. Technically, such jobs are instrumented with a mutex, which corresponds to the caller's client session.
+|Use this factory to schedule jobs that write to the Scout client model and therefore are required to run on a `ClientRunContext` and in sequence. A model job guarantees that at no time two model jobs are running in parallel. Technically, such jobs are instrumented with a mutex, which corresponds to the caller's client session.
 |===
 
 [source,java,indent=0]
