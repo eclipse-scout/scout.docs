@@ -34,6 +34,24 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBo
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
+/**
+ * The following code-snippet shows what the content of an IFRAME must do to call the execPostMessage() callback.
+ * This will only work, when the IFRAME is not restricted by the sandbox attribute.
+ *
+ * <pre>
+ * &lt;script&gt;
+ * function postMessage() {
+ *   window.parent.postMessage('hello Scout application!', 'http://localhost:8082');
+ * }
+ * &lt;/script&gt;
+ * &lt;button onclick="postMessage()"&gt;Post message&lt;/button&gt;
+ * 
+ * The second parameter (targetOrigin) of the postMessage function is important, it points to the domain where the
+ * Scout application runs. When the IFRAME content is called from another domain than localhost:8082, the browser
+ * will NOT execute the function. You could also use '*' as targetOrigin, when you don't care which domain exactly
+ * should be allowed to receive post messages from the IFRAME content.
+ * </pre>
+ */
 public class BrowserFieldForm extends AbstractForm implements IPageForm {
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(BrowserFieldForm.class);
 
@@ -136,14 +154,19 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredSandboxEnabled() {
+          return false;
+        }
+
+        @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
           String url = (String) newMasterValue;
           setLocation(url);
         }
 
         @Override
-        protected void execLocationChanged(String location, String path, boolean local) throws ProcessingException {
-          LOG.info("Location changed to " + location);
+        protected void execPostMessage(String data, String origin) throws ProcessingException {
+          LOG.info("Received post-message: data=" + data + " origin=" + origin);
         }
       }
 
@@ -184,7 +207,8 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getURLField().setValue("http://www.bsi-software.com");
+            // getURLField().setValue("http://www.bsi-software.com");
+            getURLField().setValue("http://192.168.1.245:8080/iframe-content.html");
           }
         }
 
