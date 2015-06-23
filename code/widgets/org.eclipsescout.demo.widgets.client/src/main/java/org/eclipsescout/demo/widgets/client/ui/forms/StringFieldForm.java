@@ -36,6 +36,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Con
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox.CountWhileTypingField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox.NumCharsField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.DecorationLinkField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.DisplayTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontNameField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontSizeField;
@@ -48,6 +49,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Con
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringInputField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.TextInputField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ToggleDecorationLinkButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.UpdateDisplayTextOnModifyField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.UpperCaseField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ValueField;
@@ -253,6 +255,14 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
   public UpperCaseField getUpperCaseField() {
     return getFieldByClass(UpperCaseField.class);
+  }
+
+  public DecorationLinkField getDecorationLinkField() {
+    return getFieldByClass(DecorationLinkField.class);
+  }
+
+  public ToggleDecorationLinkButton getToggleDecorationLinkButton() {
+    return getFieldByClass(ToggleDecorationLinkButton.class);
   }
 
   @Order(10.0)
@@ -739,7 +749,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(155.0)
+      @Order(154.0)
       public class DecorationLinkField extends AbstractStringField {
 
         @Override
@@ -750,6 +760,25 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DecorationLink");
+        }
+      }
+
+      @Order(154.0)
+      public class ToggleDecorationLinkButton extends AbstractButton {
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ToggleDecorationLinkProperty");
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          getDecorationLinkField().setDecorationLink(!getDecorationLinkField().isDecorationLink());
         }
       }
 
