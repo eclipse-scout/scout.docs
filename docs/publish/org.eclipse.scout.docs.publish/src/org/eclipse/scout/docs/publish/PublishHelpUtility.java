@@ -65,7 +65,9 @@ public class PublishHelpUtility {
       }
     }
 
-    OutlineItemEx root = new OutlineItemEx(null, 0, "id", 0, 0, "Eclipse Scout User Guide");
+    String label = readAndFindFirstHeader(inFiles.get(0));
+
+    OutlineItemEx root = new OutlineItemEx(null, 0, "id", 0, 0, label);
     root.setFilePath(HTML_SUB_PATH + inFiles.get(0).getName());
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -17,8 +17,8 @@ import org.eclipse.scout.docs.publish.PublishHelpUtility;
 import org.junit.Test;
 
 /**
- * Task as JUnit Test to prepare publication to the org.eclipse.scout.sdk.help plugin.
- * Output folder: target/published-docs/scout.sdk.help
+ * Task as JUnit Test to prepare publication to the org.eclipse.scout.sdk.doc plugin.
+ * Output folder: target/published-docs/scout-sdk-help
  * Corresponding Git Repository: http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/
  */
 public class PublishToEclipseHelpTest {
