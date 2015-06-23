@@ -21,10 +21,13 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -49,6 +52,14 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Con
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.MaxLengthField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.Placeholder1Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.RefreshButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.SelectButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.SelectionEndField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.SelectionStartField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.TargetFieldRadioButtonGroup;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.TargetFieldRadioButtonGroup.StringFieldButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.SelectionBox.TargetFieldRadioButtonGroup.TextInputFieldButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringInputField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.TextInputField;
@@ -266,6 +277,38 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
   public ToggleDecorationLinkButton getToggleDecorationLinkButton() {
     return getFieldByClass(ToggleDecorationLinkButton.class);
+  }
+
+  public SelectionBox getSelectionBox() {
+    return getFieldByClass(SelectionBox.class);
+  }
+
+  public TargetFieldRadioButtonGroup getTargetFieldRadioButtonGroup() {
+    return getFieldByClass(TargetFieldRadioButtonGroup.class);
+  }
+
+  public TextInputFieldButton getTextInputFieldButton() {
+    return getFieldByClass(TextInputFieldButton.class);
+  }
+
+  public StringFieldButton getStringFieldButton() {
+    return getFieldByClass(StringFieldButton.class);
+  }
+
+  public SelectionStartField getSelectionStartField() {
+    return getFieldByClass(SelectionStartField.class);
+  }
+
+  public SelectionEndField getSelectionEndField() {
+    return getFieldByClass(SelectionEndField.class);
+  }
+
+  public RefreshButton getRefreshButton() {
+    return getFieldByClass(RefreshButton.class);
+  }
+
+  public SelectButton getSelectButton() {
+    return getFieldByClass(SelectButton.class);
   }
 
   @Order(10.0)
@@ -715,12 +758,41 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(125.0)
+      public class SpellCheckEnabledField extends AbstractCheckBox {
+
+        // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("SpellCheckEnabled");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getTextInputField().setSpellCheckEnabled(getValue());
+        }
+      }
+
       @Order(130.0)
       public class StringInputField extends AbstractStringField {
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("StringField");
+        }
+      }
+
+      @Order(135.0)
+      public class PlaceholderField extends AbstractPlaceholderField {
+        @Override
+        protected int getConfiguredGridH() {
+          return 3;
         }
       }
 
@@ -819,8 +891,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(170.0)
-      public class PlaceholderField extends AbstractPlaceholderField {
-
+      public class Placeholder1Field extends AbstractPlaceholderField {
         @Override
         protected int getConfiguredGridH() {
           return 1;
@@ -881,8 +952,148 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(6000.0)
-      public class Placeholder1Field extends AbstractPlaceholderField {
+      @Order(5500.0)
+      public class SelectionBox extends AbstractGroupBox {
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 4;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Selection");
+        }
+
+        @Override
+        protected int getConfiguredGridColumnCount() {
+          return 2;
+        }
+
+        public AbstractStringField getTargetField() {
+          if (Boolean.TRUE.equals(getTargetFieldRadioButtonGroup().getValue())) {
+            return getTextInputField();
+          }
+          else {
+            return getStringField();
+          }
+        }
+
+        @Order(10.0f)
+        public class TargetFieldRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Order(10.0f)
+          public class TextInputFieldButton extends AbstractRadioButton<Boolean> {
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execInitField() throws ProcessingException {
+              super.execInitField();
+              setLabel(getTextInputField().getLabel());
+            }
+
+            @Override
+            protected Boolean getConfiguredRadioValue() {
+              return Boolean.TRUE; // multi line: true
+            }
+          }
+
+          @Order(20.0f)
+          public class StringFieldButton extends AbstractRadioButton<Boolean> {
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execInitField() throws ProcessingException {
+              super.execInitField();
+              setLabel(getStringField().getLabel());
+              getTargetFieldRadioButtonGroup().setValue(Boolean.FALSE);
+            }
+
+            @Override
+            protected Boolean getConfiguredRadioValue() {
+              return Boolean.FALSE; // multi line: false
+            }
+          }
+        }
+
+        @Order(20.0f)
+        public class SelectionStartField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("SelectionStart");
+          }
+        }
+
+        @Order(30.0f)
+        public class SelectionEndField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("SelectionEnd");
+          }
+        }
+
+        @Order(40.0f)
+        public class RefreshButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Refresh");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() throws ProcessingException {
+            getSelectionStartField().setValue(getTargetField().getSelectionStart());
+            getSelectionEndField().setValue(getTargetField().getSelectionEnd());
+          }
+        }
+
+        @Order(50.0f)
+        public class SelectButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Select");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() throws ProcessingException {
+            getTargetField().select(getSelectionStartField().getValue(), getSelectionEndField().getValue());
+          }
+        }
+      }
+
+      @Order(6000.0f)
+      public class Placeholder2Field extends AbstractPlaceholderField {
         @Override
         protected int getConfiguredGridH() {
           return 3;
