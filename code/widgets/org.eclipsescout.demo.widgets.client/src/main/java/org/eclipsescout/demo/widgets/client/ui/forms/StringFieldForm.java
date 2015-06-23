@@ -772,6 +772,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("ToggleDecorationLinkProperty");
         }
