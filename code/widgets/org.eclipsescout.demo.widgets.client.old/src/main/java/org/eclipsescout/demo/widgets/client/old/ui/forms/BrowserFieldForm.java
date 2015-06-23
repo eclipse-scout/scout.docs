@@ -207,8 +207,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            // getURLField().setValue("http://www.bsi-software.com");
-            getURLField().setValue("http://192.168.1.245:8080/iframe-content.html");
+            getURLField().setValue("http://www.bsi-software.com");
           }
         }
 
