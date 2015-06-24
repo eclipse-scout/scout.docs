@@ -193,7 +193,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        ClientSessionProvider.currentSession().stopSession();
+        ClientSessionProvider.currentSession().stop();
       }
     }
   }

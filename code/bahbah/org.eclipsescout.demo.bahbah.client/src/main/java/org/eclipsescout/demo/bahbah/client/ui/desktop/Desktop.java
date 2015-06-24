@@ -125,7 +125,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
     @Override
     protected void execAction() throws ProcessingException {
-      ClientSession.get().stopSession();
+      ClientSession.get().stop();
     }
   }
 

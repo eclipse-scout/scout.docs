@@ -123,7 +123,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
       @Override
       protected void execAction() throws ProcessingException {
-        ClientSessionProvider.currentSession(ClientSession.class).stopSession();
+        ClientSessionProvider.currentSession(ClientSession.class).stop();
       }
     }
   }
