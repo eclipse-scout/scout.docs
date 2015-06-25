@@ -10,16 +10,18 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
 import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -59,7 +61,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
   @Override
   protected void execInitForm() throws ProcessingException {
-    loadFile("ScoutHtml.html", Collections.<RemoteFile> emptySet());
+    loadFile("ScoutHtml.html", Collections.<BinaryResource> emptySet());
   }
 
   @Override
@@ -92,7 +94,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ScoutHtmlButton.class);
   }
 
-  private void loadFile(String simpleName, Collection<? extends RemoteFile> attachments) throws ProcessingException {
+  private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) throws ProcessingException {
     try {
       String s = IOUtility.getContent(new InputStreamReader(ResourceBase.class.getResource("html/" + simpleName).openStream()));
       getHTMLField().setValue(null);
@@ -266,9 +268,16 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          List<RemoteFile> attachments = new ArrayList<RemoteFile>();
-          attachments.add(new RemoteFile(ResourceBase.class.getResource("icons/eclipse_scout_logo.png"), true));
-          loadFile("HtmlFieldCustomHtml.html", attachments);
+          URL url = ResourceBase.class.getResource("icons/eclipse_scout_logo.png");
+          byte[] content;
+          try {
+            content = IOUtility.getContent(new BufferedInputStream(url.openStream()));
+            BinaryResource file = new BinaryResource("eclipse_scout_logo.png", content);
+            loadFile("HtmlFieldCustomHtml.html", Collections.<BinaryResource> singleton(file));
+          }
+          catch (IOException e) {
+            throw new ProcessingException("", e);
+          }
         }
       }
 
@@ -282,7 +291,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          loadFile("ScoutHtml.html", Collections.<RemoteFile> emptySet());
+          loadFile("ScoutHtml.html", Collections.<BinaryResource> emptySet());
         }
       }
 
@@ -296,7 +305,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          loadFile("ALotOfContent.html", Collections.<RemoteFile> emptySet());
+          loadFile("ALotOfContent.html", Collections.<BinaryResource> emptySet());
         }
       }
     }
