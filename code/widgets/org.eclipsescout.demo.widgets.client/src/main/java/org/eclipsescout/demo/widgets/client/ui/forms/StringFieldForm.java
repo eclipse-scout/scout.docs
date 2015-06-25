@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
-import java.net.URL;
-
 import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -42,12 +40,12 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Con
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox.CountWhileTypingField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.CharCountBox.NumCharsField;
-import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.DecorationLinkField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.DisplayTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontNameField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontSizeField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontStyleField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ForegroundColorField;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.HasActionField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.InputMaskedField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.MaxLengthField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.Placeholder1Field;
@@ -63,7 +61,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Con
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.StringInputField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.TextInputField;
-import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ToggleDecorationLinkButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ToggleHasActionButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.UpdateDisplayTextOnModifyField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.UpperCaseField;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ValueField;
@@ -271,12 +269,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(UpperCaseField.class);
   }
 
-  public DecorationLinkField getDecorationLinkField() {
-    return getFieldByClass(DecorationLinkField.class);
+  public HasActionField getHasActionField() {
+    return getFieldByClass(HasActionField.class);
   }
 
-  public ToggleDecorationLinkButton getToggleDecorationLinkButton() {
-    return getFieldByClass(ToggleDecorationLinkButton.class);
+  public ToggleHasActionButton getToggleHasActionButton() {
+    return getFieldByClass(ToggleHasActionButton.class);
   }
 
   public SelectionBox getSelectionBox() {
@@ -825,27 +823,27 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(154.0)
-      public class DecorationLinkField extends AbstractStringField {
+      public class HasActionField extends AbstractStringField {
 
         @Override
-        protected boolean getConfiguredDecorationLink() {
+        protected boolean getConfiguredHasAction() {
           return true;
         }
 
         @Override
-        protected void execLinkAction(URL url) throws ProcessingException {
-          super.execLinkAction(url);
-          MessageBoxes.createOk().header(String.valueOf(url)).show();
+        protected void execAction() throws ProcessingException {
+          super.execAction();
+          MessageBoxes.createOk().header(getValue()).show();
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("DecorationLink");
+          return TEXTS.get("HasAction");
         }
       }
 
       @Order(154.0)
-      public class ToggleDecorationLinkButton extends AbstractButton {
+      public class ToggleHasActionButton extends AbstractButton {
 
         @Override
         protected boolean getConfiguredProcessButton() {
@@ -859,12 +857,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ToggleDecorationLinkProperty");
+          return TEXTS.get("ToggleHasActionProperty");
         }
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          getDecorationLinkField().setDecorationLink(!getDecorationLinkField().isDecorationLink());
+          getHasActionField().setHasAction(!getHasActionField().isHasAction());
         }
       }
 
