@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
@@ -32,6 +33,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.MenusForm.MainBox.MenusButton;
 import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class MenusForm extends AbstractForm implements IPageForm {
 
@@ -71,6 +73,30 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Menus") + " (Button)";
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        requestPopup();
+      }
+
+      @Override
+      protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+        new P_ConfiguredMenus().injectMenus(menus);
+      }
+    }
+
+    @Order(15.0)
+    public class MenusButtonAndIcon extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Menus") + " (Button)";
+      }
+
+      @Override
+      protected String getConfiguredIconId() {
+        return "font:\uE032"; // icons-star
       }
 
       @Override
@@ -127,6 +153,25 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected String getConfiguredTooltipText() {
+        return TEXTS.get("Menus") + " (Menu)";
+      }
+
+      @Override
+      protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
+        new P_ConfiguredMenus().injectMenus(actionNodes);
+      }
+    }
+
+    @Order(50.0)
+    public class MenusIconAndTextMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredIconId() {
+        return "font:\uE032"; // icons-star
+      }
+
+      @Override
+      protected String getConfiguredText() {
         return TEXTS.get("Menus") + " (Menu)";
       }
 
@@ -216,6 +261,293 @@ public class MenusForm extends AbstractForm implements IPageForm {
         MessageBoxes.createOk().header("You clicked me!").show();
       }
     }
+
+    @Order(10.0)
+    public class GroupBox extends AbstractGroupBox {
+
+      @Order(10.0)
+      public class StringField extends AbstractStringField {
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue("this string field has a menu");
+        }
+
+        @Order(10.0)
+        public class StringFieldMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Click me (Menu)";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
+        }
+      }
+
+      @Order(10.0)
+      public class MenusButton extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Menus") + " (Button)";
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          requestPopup();
+        }
+
+        @Override
+        protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+          new P_ConfiguredMenus().injectMenus(menus);
+        }
+      }
+
+      @Order(15.0)
+      public class MenusButtonAndIcon extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Menus") + " (Button)";
+        }
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "font:\uE032"; // icons-star
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          requestPopup();
+        }
+
+        @Override
+        protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+          new P_ConfiguredMenus().injectMenus(menus);
+        }
+      }
+
+      @Order(20.0)
+      public class MenusLinkButton extends AbstractLinkButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Menus") + " (Link)";
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          requestPopup();
+        }
+
+        @Override
+        protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+          new P_ConfiguredMenus().injectMenus(menus);
+        }
+      }
+
+      @Order(30.0)
+      public class MenusMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Menus") + " (Menu)";
+        }
+
+        @Override
+        protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
+          new P_ConfiguredMenus().injectMenus(actionNodes);
+        }
+      }
+
+      @Order(40.0)
+      public class MenusIconMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "font:\uF0C9"; // icons-menu
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("Menus") + " (Menu)";
+        }
+
+        @Override
+        protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
+          new P_ConfiguredMenus().injectMenus(actionNodes);
+        }
+      }
+
+      @Order(50.0)
+      public class MenusIconAndTextMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "font:\uE032"; // icons-star
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Menus") + " (Menu)";
+        }
+
+        @Override
+        protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
+          new P_ConfiguredMenus().injectMenus(actionNodes);
+        }
+      }
+
+      @Order(110.0)
+      public class NoMenusButton extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Click me (Button)";
+        }
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+
+      @Order(120.0)
+      public class NoMenusLinkButton extends AbstractLinkButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Click me (Link)";
+        }
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+
+      @Order(130.0)
+      public class NoMenusMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Click me (Menu)";
+        }
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+
+      @Order(140.0)
+      public class NoMenusIconMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "font:\uF0C9"; // icons-menu
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Click me (Menu)";
+        }
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+    }
+
+    @Order(20)
+    public class GroupBox2 extends AbstractGroupBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Another groupbox with more menus";
+      }
+
+      @Order(10.0)
+      public class PngIconMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "PNG Icon Menu";
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+
+      @Order(20.0)
+      public class PngIconWithTextMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "PNG Icon Menu";
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          MessageBoxes.createOk().header("You clicked me!").show();
+        }
+      }
+
+      @Order(30.0)
+      public class MenusPngIconMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Menus") + " PNG Icon Menu";
+        }
+
+        @Override
+        protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
+          new P_ConfiguredMenus().injectMenus(actionNodes);
+        }
+      }
+    }
   }
 
   public class PageFormHandler extends AbstractFormHandler {
@@ -273,7 +605,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
-        MessageBoxes.createOk().header("Clicked on Menu").body( "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
+        MessageBoxes.createOk().header("Clicked on Menu").body("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
     }
 
