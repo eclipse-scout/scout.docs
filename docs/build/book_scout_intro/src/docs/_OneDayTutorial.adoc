@@ -1,0 +1,1264 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "One Day Tutorial"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+
+[[cha-large_example]]
+== A Larger Example
+
+In this chapter we will create the "`My Contacts`" Scout application.
+This small.footnote:[
+Small in comparison with real world application. But significantly larger and complexer than the "`Hello World`" application of Chapter <<cha-helloworld>>.
+] application covers additional aspects of the Eclipse Scout framework. 
+The presented demo application borrows heavily from a Scout tutorial published 2012 in the German _Java Magazin_.footnote:[
+Java Magazin 7.12: https://jaxenter.de/magazines/JavaMagazin72012.
+] 
+for the Scout release 3.8 (Juno).
+Compared to the 2012 tutorial, the version presented in this chapter has been slightly polished and updated to the Scout release 4.0 (Luna).
+
+According to this step-by-step tutorial, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
+In addition, the application also shows how to work with forms to enter and/or update data, menus and context menus. 
+On the server side, we show how to work with databases, how to use logging in Scout applications and how to include standard Java libraries in the form of JAR files. 
+
+The chapter is organized as follows.
+In the first section, the finished demo application is explained from the user perspective. 
+The remaining sections focus on the individual steps to implement the "`My Contacts`" application. 
+To be able to easily follow the text, we assume that the reader is familiar with the "`Hello World`" tutorial and the Scout SDK as described in Chapter <<cha-tooling>>. 
+
+
+[[sec-my_contacts_guide]]
+=== The "`My Contacts`" Application
+
+The "`My Contacts`" application is a client server application to manage personal contacts. 
+Persistence of entered data is achieved through a database backend. 
+
+As social networking services.footnote:[
+Social networking services in Wikipedia: http://en.wikipedia.org/wiki/Social_network_service
+] 
+such as Facebook, LinkedIn or Xing are widely used, the application also provides an example integration with the LinkedIn.footnote:[
+http://www.linkedin.com/
+] 
+platform. 
+The implemented integration allows to download the personal contacts into the local database. 
+In the local database it is possible to mix persons entered manually with contact data downloaded from LinkedIn. 
+
+[[img-my_contacts_swt, Figure 000]]
+.The SWT client of the "`My Contacts`" application. 
+image::{imgsdir}/my_contacts_swt.png[]
+
+After starting the Scout server application a client application may be started that then connects to the server. 
+In <<img-my_contacts_swt>> the SWT desktop client is shown. 
+In the background, the main application window is visible showing a navigation tree on the left hand side. 
+On the right side, a table holds the elements corresponding to the selected tree node. 
+Using an edit context menu on the selected table row, a form to edit the relevant data may be opened as shown in the example screen shot for '`Alice`'. 
+Clicking on the link 'Show Map ...' in the person form opens the person's location information in a map form using the data provided by Google Maps Image API.footnote:[
+The Google Maps Image APIs: https://developers.google.com/maps/documentation/imageapis/.
+].
+
+[[img-my_contacts_rayo_refresh, Figure 000]]
+.To refresh/generate an access token for reading LinkedIn contacts data select the menu shown in the screen shot. 
+image::{imgsdir}/my_contacts_rayo_refresh.png[]
+
+[[img-my_contacts_rayo_openauthurl, Figure 000]]
+image::{imgsdir}/my_contacts_rayo_openauthurl.png[]
+.To refresh/create the access token click on the provided 'Open Auth URL' link first (left). Then, the security code field is enabled and the user can fill in the security code provided on the LinkedIn web page. 
+image::{imgsdir}/my_contacts_rayo_entercode.png[]
+
+Before any LinkedIn data can be accessed from the "`My Contacts`" application an access token needs to be retrieved from LinkedIn. 
+To obtain such a token use the menu:Refresh LinkedIn Token ...[] menu as shown in <<img-my_contacts_rayo_refresh>>. 
+This opens the refresh token form shown on the left side of <<img-my_contacts_rayo_openauthurl>>. 
+
+[[img-oauth_security_code, Figure 000]]
+image::{imgsdir}/oauth_grant_access.png[]
+.The LinkedIn granting dialog steps shown in a web browser. In the first step (right) confirm the access request, then the security code to create an access token is provided in the second step (left).
+image::{imgsdir}/oauth_security_code.png[]
+
+Clicking on the 'Open Auth URL' link then opens the granting page provided by LinkedIn shown on the left hand side of <<img-oauth_security_code>>. 
+After logging into your LinkedIn account.footnote:[
+Yes, for this use case you need a LinkedIn account. But at least it's free and you will not need to provide very sensitive information such as a mobile phone number, a credit card number or a social security number. 
+]
+you can specify the desired access duration and confirm the "`OAuth test for Scribe`" access.footnote:[
+This is the name of the example code provided with the Scribe library that is used with the "`My Contacts`" application. 
+] 
+to your LinkedIn data.
+If the authorization is successful, a security code as shown on the right side of <<img-oauth_security_code>> is presented by LinkedIn. 
+This code needs then to be entered into the [field]_Security Code_ field as shown on the right side of <<img-my_contacts_rayo_openauthurl>>. 
+Then, click the btn:[OK] button to refresh the access token. 
+
+[[img-my_contacts_rayo_updatecontacts, Figure 000]]
+.Executing the 'Update LinkedIn Contacts for the first time imports the users LinkedIn contacts into the "`My Contacts`" application.
+image::{imgsdir}/my_contacts_rayo_updatecontacts.png[]
+
+To import/update your LinkedIn contacts into your "`My Contacts`" application select the menu:Update LinkedIn Contacts[] menu as shown in <<img-my_contacts_rayo_updatecontacts>>.
+Once you have downloaded or entered a number of persons in your "`My Contacts`" application, try to get yourself familiar with the application's person table. 
+This is one of the very powerful Scout widgets. 
+Columns may be filtered, moved, hidden or sorted (including multi level sort) using the table header context menus menu:Organize Columns...[] menu  and menu:Column Filter...[] menu.
+
+Editing and viewing of person data is available by the menu:Edit Person...[] context menu on a selected row.
+To manually add a person use the menu:New Person...[] context menu available on the table header or in the white area outside the displayed columns. 
+
+[[img-my_contacts_rayo_filteredcontacts, Figure 000]]
+.After importing the contacts from LinkedIn the data is shown in the person page. The filter applied on the headline column is indicated by the filter icon. In the front, the filter form shows the filter criteria '`Eclipse`'.
+image::{imgsdir}/my_contacts_rayo_filteredcontacts.png[]
+
+[[img-my_contacts_rapweb_excelexport, Figure 000]]
+.The "`My Contacts`" application running in the browser as web application. The Excel sheet shown in the front is exported from the person page using the 'Tools/Export to Excel' menu. 
+image::{imgsdir}/my_contacts_rapweb_excelexport.png[]
+
+[[img-my_contacts_rapmobile, Figure 000]]
+image::{imgsdir}/my_contacts_rapmobile_1.png[]
+.The "`My Contacts`" application running on an iPhone device. On the left hand side, the person page is shown. The person form is shown on the right. 
+image::{imgsdir}/my_contacts_rapmobile_2.png[]
+
+In <<img-my_contacts_rapweb_excelexport>> the "`My Contacts`" application is running in a web browser. 
+In this example, the menu:Tools[Export to Excel] menu is used to export the selected row into an Excel sheet. 
+Finally, the "`My Contacts`" application is also running on iPhone and Android mobile devices out of the box. 
+Two example screens are provided in <<img-my_contacts_rapmobile>>.
+
+Once you no longer feel confident about having the "`My Contacts`" application accessing you data you can revoke this access permission in the LinkedIn menu "`Privacy and Settings`". 
+In the lower part of the settings page switch to the tab "`Groups, Companies and Applications`" and click on the link "`View your applications`". 
+There, you will find again the partner name "`OAuth test for Scribe`". 
+To revoke the access, select the associated checkbox and click the "`Remove`" button. 
+The next time you try to refresh your LinkedIn data from the "`My Contacts`" application will result in an Error message. 
+Before you can again access data from your LinkedIn account you just need to refresh the access token as described above.
+
+To run the "`My Contacts`" Scout application without implementing it first, you may take advantage of the fact that the application is hosted in the same Github repository as this book.
+If you are familiar with Github.footnote:[
+Github: https://en.wikipedia.org/wiki/GitHub.
+], 
+fork the Scout Book repository.footnote:[
+Scout Book repository: https://github.com/BSI-Business-Systems-Integration-AG/scoutbook.
+] 
+and start from there.
+Alternatively, you can follow the description provided in the Scout wiki.footnote:[
+Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/3.9#Download_and_Run_the_Scout_Sample_Applications.
+]
+to download, install and run the "`My Contacts`" application.
+
+
+=== Setting up the new Scout project
+
+[[img-new_project_contacts, Figure 000]]
+image::{imgsdir}/new_project_contacts_1.png[]
+.Start with creating a new Scout project. 
+image::{imgsdir}/new_project_contacts_2.png[]
+
+The initial code for the "`My Contacts`" application is generated using the [wizard]_New Scout Project_ wizard as described in Section <<sec-wizard_new_project>>. 
+For the [field]_Project Name_ field use the name [java]+org.eclipsescout.contacts+ as shown on the left side of <<img-new_project_contacts>> and click on the btn:[Next] button. 
+In the second wizard step select the application template [element]_Outline Tree and Table Form_ as shown on the right side of <<img-new_project_contacts>>.
+
+[[img-project_contacts_properties, Figure 000]]
+image::{imgsdir}/project_contacts_explorer.png[]
+.The setting of the _Technology_ section in the Scout Object Properties of the "`My Contacts`" application.
+image::{imgsdir}/project_contacts_properties.png[]
+
+After the Scout SDK has created the initial application code select the top-level [node]_org.eclipsescout.contacts_ node in the Scout Explorer. 
+In the technology section of the corresponding Scout Object Properties select the Derby database driver, the Docx4j support and the Rayo look and feel as shown on the right side of <<img-project_contacts_properties>>.
+In case you have not yet used the Scout Docx4j support or the Rayo look and feel components, the Scout SDK will need to download these packages from the Eclipse Marketplace.footnote:[
+See Section <<sec-scout_sdk_object_properties>> for additional information regarding the download of marketplace packages
+]
+first. 
+
+(((ScoutXlsxSpreadsheetAdapter,IShellService,shellOpen)))
+[[lst-mycontacts.desktop.menu.exportoexcel, Listing ExportToExcelMenu]]
+[source,java]  
+.The [java]+ExportToExcelMenu+ class added by the Docx4j support to the application's tools menu.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..170]
+----
+
+
+Remark: Adding the Docx4j support will add the menu:Export to Excel[] menu under tools menu on the application's desktop. 
+This presence of this feature will then allow to export contacts shown in the application to an Excel sheet. 
+As shown in <<lst-mycontacts.desktop.menu.exportoexcel>>, the [java]+ScoutXlsxSpreadsheetAdapter+ first creates an excel file based on the currently active page in the [java]+execAction+ method. 
+Then the file is opened on the client using the [java]+shellOpen+ method.
+
+[[img-desktop_properties, Figure 000]]
+image::{imgsdir}/desktop_explorer.png[]
+.Configure the application name "`My Contacts`" in the title field of the Desktop's properties. 
+image::{imgsdir}/desktop_properties.png[]
+
+After this initial project setup step we first define the application's name shown on the main dialog. 
+For this, select the [node]_Desktop_ node under the orange client node in the Scout Explorer.
+This opens it's Scout Object Properties as shown in <<img-desktop_properties>>.
+In the [field]_Title_ field enter the string "`My Contacts`" and create a new translated text entry.  
+
+
+(((execOpened,Desktop,UserAgentUtility)))
+[[lst-mycontacts.desktop.execopened, Listing execOpened]]
+[source,java]  
+.The [java]+execOpened+ method of desktop class of the "My Contacts" application. The application's organisation into a tree and a table form is defined here.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=56..79]
+----
+
+
+As shown in <<lst-mycontacts.desktop.execopened>> the application's organisation into a tree and a table form is explicitly defined in method [java]+execOpened+. 
+Click on the [link]_Exec Opened_ link in the desktop's Scout Object Properties to access the Java code of this method.
+First, using the [java]+UserAgentUtility+ class, the method checks if the client is working with a desktop, a web or a mobile client. 
+If the user is not working with a desktop client, [java]+execOpened+ returns immediately and the tree and table setup is not used. 
+Instead, the [java]+MobileHomeForm+ defined in plugin [element]_org.eclipsescout.contacts.client.mobile_ is used. 
+In case the user is working with a web client or a desktop client, the default tree and table forms are created and started. 
+Finally, the currently active outline is set to the [java]+StandardOutline+, as this is the only outline defined in this application.
+
+
+[[img-new_page_person_contextmenu, Figure 000]]
+=== Adding the Person Page
+
+.Create a new page as a child page of the standard outline. 
+image::{imgsdir}/new_page_person_contextmenu.png[]
+
+[[img-new_page_person, Figure 000]]
+image::{imgsdir}/new_page_person_1.png[]
+.Create a new page with the corresponding SDK wizard. To present the list of persons in a table, choose the template [java]+AbstractPageWithTable+ as shown on the left.
+image::{imgsdir}/new_page_person_2.png[]
+
+The first UI component we add to the application is the person page. 
+For the desktop clients, this page is represented as a table that will list all available persons in the database of the "`My Contacts`" application. 
+To start the [wizard]_New Page_ wizard use the menu:New Page...[] context menu on the [folder]_Child Pages_ folder as shown in <<img-new_page_person>>.
+On the first wizard step select the template [element]_AbstractPageWithTable_ and click the btn:[Next] button. 
+On the second wizard step, provide the page name "`Person`" to create a new translated text entry at the same time. 
+Make sure the other fields are filled in as shown in <<img-new_page_person>> and click the btn:[Finish] button to close the wizard.
+
+(((execCreateChildPages, StandardOutline)))
+[[lst-mycontacts.desktop.outline.personpage, Listing execCreateChildPages]]
+[source,java]
+.The [java]+execCreateChildPages+ method of the standard outline. At the current implementation step the company table page is not (yet) added.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java[lines=25..31]
+----
+
+
+<<lst-mycontacts.desktop.outline.personpage>> shows the created method [java]+execCreateChildPages+ that links the newly created person page to the standard outline. 
+Note that your code will only look the same once you have added the company page in a later step of the implementation of this application.
+
+[[img-new_column_personid, Figure 000]]
+image::{imgsdir}/new_column_personid_contextmenu.png[]
+image::{imgsdir}/new_column_personid_1.png[]
+.Add columns to the person page.
+image::{imgsdir}/new_column_personid_2.png[]
+
+Now, drill down to the [folder]_Columns_ folder under the [node]_PersonTablePage_ node as shown in <<img-new_column_personid>>. 
+Here we can add the desired table columns to the person page. 
+Start with the column that will hold the person id. 
+For this, start the column wizard as shown on the left side of <<img-new_column_personid>> and select the string column template. 
+In the second wizard step, enter "`PersonId`" into the [field]_Class Name_ field, select the radio button [element]_Create one more column_ and click on the btn:[Finish] button. 
+This will restart the column wizard to enter the next columns. 
+Create the remaining string columns with the following names.
+
+ * {First Name}
+ * {Last Name}
+ * {Headline}
+
+
+[[img-new_column_personid, Figure 000]]
+image::{imgsdir}/person_id_column.png[]
+.Configure the [element]_PersonId_ column. Check property [element]_Primary Key_ under the section [element]_Advanced Properties_ (right).
+image::{imgsdir}/person_id_property.png[]
+
+(((A primary key table column and a default string column)))
+[[lst-mycontacts.desktop.outline.personpage.columns.personid, Listing PersonIdColumn and FirstNameColumn]]
+[source,java]  
+.The person id and the first name columns of the [java]+PersonTablePage+ class.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=82..104]
+----
+
+
+Once you have created all these columns we will mark the person id column as the primary key column for the person page. 
+In the Scout Explorer select the [node]_PersonIdColumn_ node to open the corresponding Scout Object Properties. 
+In this form, deselect the [property]_Displayable_ property to always hide this technical column from the end user. 
+In the properties [element]_Advanced Properties_ section check the [property]_Primary Key_ property. 
+The resulting Java code for the primary key column and the first name column is provided in <<lst-mycontacts.desktop.outline.personpage.columns.personid>>. 
+
+[[img-new_bean_companyid, Figure 000]]
+image::{imgsdir}/new_bean_companyid_contextmenu.png[]
+.Add the [element]_CompanyId_ variable to the person page.
+image::{imgsdir}/new_bean_companyid.png[]
+
+(((A table page property bean.)))
+[[lst-mycontacts.desktop.outline.personpage.columns, Listing PersonTablePage]]
+[source,java]  
+.The company id variable of the [java]+PersonTablePage+ class.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=31..35;172..183]
+----
+
+
+As we will later add and link the person page with a company page, we add a company id variable to the person page as shown in <<img-new_bean_companyid>>. 
+For the Java representation of such variables the standard bean pattern is used as shown in <<lst-mycontacts.desktop.outline.personpage.columns>>.
+
+
+=== Adding the Company Page
+
+[[img-add_existing_page, Figure 000]]
+image::{imgsdir}/add_existing_page_contextmenu.png[]
+.Add the person page below the the company page.
+image::{imgsdir}/add_existing_page.png[]
+
+(((Linking pages hierarchically.)))
+[[lst-mycontacts.desktop.outline.companypage.linking, Listing execCreateChildPage]]
+[source,java]  
+.Linking the [java]+PersonTablePage+ with the parent [java]+CompanyTablePage+.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/CompanyTablePage.java[lines=38..44]
+----
+
+
+After adding the person page, we also add a company page under the [node]_Child Pages_ node to the standard outline. 
+To add the company page we use the same wizards as described in the previous section for the person page. 
+For the [field]_Name_ field we enter the new translated text "`Company`" and the columns to add are the following.
+
+ * `{Company Id}`
+ * `{Name}`
+ * `{Location}`
+
+
+As in the case of the person table page, the company id column is used as a primary key column. 
+The [property]_Displayable_ property needs to be set to false and the [property]_Primary Key_ property to true. 
+Now we can link the person page to the company page using the menu:Add Existing Page...[] context menu as shown on the left side of <<img-add_existing_page>>. 
+In the [wizard]_Link Page_ wizard, the person page can then be selected according to the right side of <<img-add_existing_page>>. 
+In the Java code generated by the Scout SDK the setting of the company id attribute is automatically inserted in method [java]+execCreateChildPages+. 
+Please note that this convenience added by the Scout SDK wizard only works if the child page defines variables with a naming that matches the defined primary key columns of the parent table. 
+
+
+=== Installing the Database
+
+[[img-new_service_derby, Figure 000]]
+image::{imgsdir}/new_service_derby_contextmenu.png[]
+.Add the service to access the Derby database under folder [element]_SQL Services_. 
+image::{imgsdir}/new_service_derby.png[]
+
+To access a database we first need to install a database service. 
+For the "`My Contacts`" application, this is done using the [wizard]_New SQL Service_ wizard on the Scout server under the [folder]_SQL Services_ folder as shown in <<img-new_service_derby>>.
+In the first wizard step shown on the right side of the figure, use "`DerbySqlService`" for the [field]_Class Name_ field.
+From the drop-down list in the [field]_Super Class_ field choose the [java]+AbstractDerbySqlService+ and click on the btn:[Finish] button.
+
+(((database setup, config.ini)))
+[[lst-mycontacts.server.configini.derby, Listing DataSource in config.ini]]
+[source,ini]  
+.Setting up the database parameters in the Scout server's `config.ini` file.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini[lines=42..48]
+----
+
+
+To setup the database connection the necessary parameters need to be added to the server's [filename]+config.ini+ file as shown in <<lst-mycontacts.server.configini.derby>>.
+Comparing the parameter names in this config file with the package name of the created [java]+DerbySqlService+ service class reveals an interesting framework feature. 
+All Scout services can be parameterized using the [filename]+config.ini+ file with the pattern `<package>.<class name>#<parameter>=<value>`. 
+The Scout runtime then sets the service parameters using matching setter methods such as [java]+setPassword+ for the password parameter.  
+
+According to the parameter `jdbcMappingName=jdbc:derby:${workspace_loc/...}` a new Derby database will be created in the same parent directory as the "`My Contacts`" workspace directory if no database named `DB_CONTACT` is found there.
+This setup is handy for development purposes but you may want to set the database parameter to [java]+create=false+ in the [filename]+config.ini+ of the production product file. 
+
+[[img-new_service_dbinstall, Figure 000]]
+image::{imgsdir}/new_service_dbinstall_1.png[]
+.Add a database installation service. 
+image::{imgsdir}/new_service_dbinstall_2.png[]
+
+[[img-new_operation_installstorage, Figure 000]]
+image::{imgsdir}/new_operation_installstorage_contextmenu.png[]
+.Add the service operation to create the DB schema. 
+image::{imgsdir}/new_operation_installstorage.png[]
+
+
+(((A service operation to install a database schema.)))
+[[lst-mycontacts.server.services.installdb, Listing DBInstallService]]
+[source,java]  
+.New tables are created if they are not found by [java]+getExistingTables+ in the existing schema.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=20..50;107..108]
+----
+
+
+==== Setting up the Database Schema
+
+Having a working database service and a new (empty) Derby database now allows to create the necessary database schema and populate it with some initial data.
+For this we add a new [java]+DBInstallService+ service as shown in <<img-new_service_dbinstall>> below the [node]_Services_ node of the Scout server.
+To this install service we then add the [java]+installStorage+ operation according to <<img-new_operation_installstorage>>.
+The implementation of this method is provided in <<lst-mycontacts.server.services.installdb>>.
+The method first checks if a setup is required. 
+For this, the member variable [java]+m_doSetup+ is used that might also be set by the [java]+setDoSetup+ setter method via the server's [filename]+config.ini+ file.
+
+[[lst-mycontacts.server.services.installdb.company, Listing COMPANY table setup]]
+[source,java]  
+.Setting up the [java]+COMPANY+ table of the "`My Contacts`" application.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=51..70]
+----
+
+
+[[lst-mycontacts.server.services.installdb.person, Listing PERSON table setup]]
+[source,java]  
+.Setting up the [java]+PERSON+ table of the "`My Contacts`" application.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=71..93]
+----
+
+[[lst-mycontacts.server.services.installdb.users_param, Listing USER_PARAM table setup]]
+[source,java]  
+.Setting up the [java]+USERS_PARAM+ table of the "`My Contacts`" application.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=94..106]
+----
+
+
+Setting up the schema to contain the individual tables for the "`My Contacts`" application is implemented in a separate method per table. 
+The table definition for the company table is provided in <<lst-mycontacts.server.services.installdb.company>>. 
+In this method two Scout aspects are of interest. 
+
+The first Scout feature used is the absence of a [java]+COMMIT+ statement after the two [java]+INSERT INTO+ statements. 
+This is possible, as all Scout service calls run in a transaction context that is transparent to the Scout developer. 
+If a service method exits without errors, the enclosing transaction is committed. 
+And if any runtime exception occurs in a service call the Scout runtime framework performs a rollback.
+
+The second feature is the parameter binding used in the [java]+INSERT INTO+ statements. 
+When SQL statements are executed using any of the static [java]+SQL+ methods, an internal statement processor replaces all bind variables found in the provided statement string. 
+In Scout, SQL bind variables need to use the pattern [java]+:<variable name>+. 
+The values for the bind variables can then be provided in the form of additional arguments. 
+In the concrete example of <<lst-mycontacts.server.services.installdb.company>>, the content for the bind variable [java]+:company_id+ is provided as a [java]+NVPair+ object. 
+[element]_NVPair_s are the simplest possible form to represent bind variables. 
+The first constructor argument is the variable name of the bind variable, in this case [java]+company_id+. 
+The actual content of the bind variable is provided in the form of an object. 
+Here, the Java runtime class [java]+UUID.randomUUID().toString()+ is used to create a new company key. 
+
+Setting up the person table and the user parameter table is defined according to <<lst-mycontacts.server.services.installdb.person>> and <<lst-mycontacts.server.services.installdb.users_param>>. 
+To create a data object for the persons day of birth, the Scout utility class [java]+DateUtility+ is used.
+
+(((ServerApplication, ServerSession)))
+[[lst-mycontacts.server.serverapplication, Listing database installation]]
+[source,java]  
+.Scheduling the database installation in the [java]+start+ method of the [java]+ServerApplication+ class during the server application startup.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=30..57;62..63]
+----
+
+
+The only piece missing to setup the database is calling the [java]+installStorage+ operation during the startup of the "`My Contacts`" server application.
+The proper way to implement such a scenario is to schedule an installation job in the [java]+ServerApplication+ class of the Scout server. 
+In the "`My Contacts`" application this is implemented according to <<lst-mycontacts.server.serverapplication>>. 
+To create a server job, a new server session object needs to be obtained first. 
+However, during the startup time of the server we do not have any logged in users yet. 
+That is why the session is created for the backend subject representing the server application. 
+Using this [java]+serverSession+ object, the [java]+installJob+ can be created. 
+In it's [java]+runTransaction+ method we can then call the [java]+installStorage+ operation to setup the "`My Contacts`" database.
+
+
+==== Scout Logging
+
+(((config.ini, logging setup)))
+[[lst-mycontacts.server.configini.logging, Listing logging configuration]]
+[source,ini]  
+.The logging configuration in the Scout server's `config.ini` file.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini[lines=14..17]
+----
+
+
+An additional Scout topic that is touched in this [java]+ServerApplication+ class is the Scout logging. 
+As shown in <<lst-mycontacts.server.serverapplication>>, a static [java]+logger+ object is created using Scout's [java]+ScoutLogManager+ class. 
+Events can then be logged with the [java]+logger.info+ method where [java]+info+ refers to the log level attached to this message. 
+Similar to the database setup described above, the logging setup is defined in the [filename]+config.ini+ file. 
+The default setup defined for the development product is provided in <<lst-mycontacts.server.configini.logging>>.
+Further information regarding logging in Eclipse Scout is available in the Scout wiki.footnote:[
+Logging in Eclipse Scout: http://wiki.eclipse.org/Scout/Concepts/Logging.
+].
+
+
+=== Fetching Data from the Database
+
+[[img-new_service_persontabledata, Figure 000]]
+image::{imgsdir}/new_service_persontabledata_contextmenu.png[]
+.Add the service operation to fetch the data for the person table. 
+image::{imgsdir}/new_service_persontabledata.png[]
+
+In the section before we have implemented and configured the SQL service to access the Derby database from the Scout server. 
+And during the first server startup, the application's database schema is created and populated with some initial data. 
+
+Now, this SQL service is ready to be used to fetch the data for the client application's person page and the company page. 
+The best place to implement these data provider methods is in the server's [java]+StandardOutlineService+ class. 
+This class has been created by the Scout SDK during the initial project creation step.
+It is meant to hold the operations that fetch the data for populating the elements visible in the outline tree and outline pages. 
+
+For the "`My Contacts`" application, we first create the [java]+getPersonTableData+ operation as shown in <<img-new_service_persontabledata>>. 
+In the wizard dialog enter "`getPersonTableData`" into the [field]_Operation Name_ field. 
+For the return type we simply use a two dimensional object array. 
+As the person page is also displayed under the company page, we need to have a way to only return the persons working for a specific company. 
+To allow for this use case, we add the parameter "`companyId`" as the first argument to the [java]+getPersonTableData+ operation before we close the wizard with btn:[Finish] button. 
+
+The next operation we need is the [java]+getCompanyTableData+ method. 
+You may use the same creation steps as described above for the person table page data. 
+But for fetching company table data we do not need an additional argument.
+The company page in the "`My Contacts`" application will always show all available companies. 
+
+(((SQL, StringUtility, bind variables)))
+(((NVPair, StandardOutlineService)))
+[[lst-mycontacts.server.services.standardoutline, Listing StandardOutlineService]]
+[source,java]  
+.Fetching the table data for the person and the company page of the "`My Contacts`" application. The list of persons is restricted to employees of a specific company if a company id parameter is provided.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/StandardOutlineService.java[lines=10..29]
+----
+
+
+For the actual implementation of the two data fetching operations the code provided in <<lst-mycontacts.server.services.standardoutline>> is used. 
+The implementation is straight forward and almost trivial. 
+However, we can use the [java]+getPersonTableData+ example to introduce one of the many Scout utility classes. 
+
+[[img-scout_utility_classes, Figure 000]]
+.Accessing the Scout utility classes with the pattern [java]+org.eclipse.scout.*Utility+.
+image::{imgsdir}/scout_utility_classes.png[]
+
+The class [java]+StringUtility+ is one of the many utility classes provided by the Scout framework. 
+Here, it is used for the typical null or empty check. 
+To get a quick overview, hit the kbd:[Ctrl]kbd:[Shift]kbd:[T] key combination. 
+In the type dialog that appears enter [java]+org.eclipse.scout.*Utility+ into the pattern field. 
+This will display the complete list of the Scout utility classes as shown in <<img-scout_utility_classes>>.
+
+[[img-implement_execloadtabledata, Figure 000]]
+image::{imgsdir}/implement_execloadtabledata_explorer.png[]
+.Adding method [java]+execLoadTableData+ to the person table page.
+image::{imgsdir}/implement_execloadtabledata_properties.png[]
+
+(((execLoadTableData)))
+[[lst-mycontacts.client.pages.loadpersontabledata, Listing execLoadTableData]]
+[source,java]  
+.Loading the person data into the person table page.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=168..172]
+----
+
+
+As we have implemented the server service methods to load person and company data from the database, we can now use these services to load the data into the client. 
+For this, we first navigate to the [java]+PersonTablePage+ under the orange client node in the Scout SDK.
+In the corresponding Scout Object Properties we add method [java]+execLoadTableData+ by clicking on the green plus icon as shown in <<img-implement_execloadtabledata>>. 
+Fetching the actual data is now implemented in a single line of code according to <<lst-mycontacts.client.pages.loadpersontabledata>>. 
+
+For the company table page, the process described above can be repeated. 
+The only difference is the implementation of the method [java]+execLoadTableData+. 
+Here, we can use the server service method [java]+getCompanyTableData()+ to fetch the company data from the server.
+
+
+
+
+=== Creating the Person Form
+
+[[img-new_form_person, Figure 000]]
+image::{imgsdir}/new_form_person_contextmenu.png[]
+.Add the person form.
+image::{imgsdir}/new_form_person.png[]
+
+In this section we will create the person form that is used to display and edit the persons stored in the "`My Contacts`" application. 
+To add the person form use the Scout SDK [wizard]_New Form_ wizard as shown in <<img-new_form_person>>. 
+In the first wizard step you just need to enter "`Person`" as a new translated text into the [field]_Name_ field and add "`ui.forms`" as the sub-package name in the corresponding wizard field. 
+Then click the btn:[Finish] button.
+
+The wizard will create the necessary artefacts in the application's client, the shared and the server plugin projects. 
+On the client side the [java]+PersonForm+ class with the necessary form handlers is created, in the shared part, the [java]+PersonFormData+ transfer object is added. 
+On the server side, a [java]+PersonProcessService+ with all necessary service operations referenced by the form handlers is implemented. 
+
+[[img-new_bean_personid, Figure 000]]
+image::{imgsdir}/new_bean_personid_contextmenu.png[]
+.Add the [element]_PersonId_ variable to the person form.
+image::{imgsdir}/new_bean_personid.png[]
+
+To hold the persons primary key in the person form we also need to add a corresponding variable. 
+For this, use the [wizard]_New Property Bean_ wizard as shown in <<img-new_bean_personid>>. 
+In the wizard dialog, enter "`PersonId`" into the [field]_Name_ field and pick [java]+String+ from the dropdown list provided in the [field]_Bean type_ field. 
+Then, click the btn:[Finish] button to close the wizard. 
+
+
+==== Creating the Form Layout with From Fields
+
+[[img-new_field_personbox, Figure 000]]
+image::{imgsdir}/new_field_personbox.png[]
+.Add the first group box field to the person form.
+image::{imgsdir}/new_field_personbox_name.png[]
+
+As a next step we create the main layout structure of the person form. 
+According to the screenshot of the person form shown in <<img-my_contacts_swt>> the form is organized into an upper box including the first name, the last name and a picture field. 
+In the "`Details`" box in the lower half of the form some additional fields are found, such as the date of birth field. 
+And the bottom of the form holds a "`Show Map ...`" link.
+We start with the general layout by adding the [java]+PersonBox+ according to <<img-new_field_personbox>>. 
+In the first step (omitted in <<img-new_field_personbox>>) of the new form field wizard the field type [java]+GroupBox+ has to be selected. 
+Below the person box we add the detail group box. 
+As before, we select the  [java]+GroupBox+ field type and click on the btn:[Next] button. 
+In the second wizard step we then enter the text "`Detail`" into the [field]_Name_ field. 
+
+We now add the form fields listed below using the the [wizard]_New Form Field_ wizard multiple times. 
+Most fields are of type [java]+StringField+ and different field types are separately indicated. 
+
+ * `PersonBox`
+ ** "`First Name`"
+ ** "`Last Name`"
+ ** "`Picture URL`"
+ ** PictureField (`ImageField`)
+ * "`Detail`" DetailBox
+ ** "`Headline`"
+ ** "`Location`"
+ ** "`Date of Birth`" (`DateField`)
+
+
+[[img-new_field_picture, Figure 000]]
+image::{imgsdir}/new_field_picture_contextmenu.png[]
+.Add the picture field to the first group box of the person form.
+image::{imgsdir}/new_field_picture.png[]
+
+As an example for adding the form fields, the process is illustrated in <<img-new_field_picture>> for the creation of the picture field. 
+In the field list we need to set non default properties for the [field]_PictureUrlField_ field and the [field]_PictureField_ field. 
+The picture URL field will hold an URL pointing to the picture of the person to be displayed. 
+As in the person form only the picture is to be displayed but not the picture URL, we need to make this field invisible. 
+For this, select the [node]_PictureUrlField_ node in the Scout Explorer and then untick the [field]_Visible_ field in the Scout Object Properties. 
+Note that to access the visibility property you need to open the section [element]_Advanced Properties_ first. 
+
+[[img-picture_field_properties, Figure 000]]
+image::{imgsdir}/picture_field_properties_1.png[]
+.Set the properties for the picture field of the person form.
+image::{imgsdir}/picture_field_properties_2.png[]
+
+As the configuration of the picture field is more complex than the other fields, the changed properties are shown in the screenshots provided in <<img-picture_field_properties>>. 
+First, no label is shown for the picture field as shown in the unticked [field]_Label Visible_ field of the Scout Object Properties. 
+Then, property [element]_Grid H_ is set to 5. 
+This results in the picture to cover the vertical space of 5 form fields. 
+
+(((getConfiguredMasterField, execChangedMasterValue, IOUtility)))
+[[lst-mycontacts.client.forms.person.picturefield, Listing execChangedMasterValue PictureField]]
+[source,java]  
+.The behaviour of the person form's [java]+PictureField+ is triggered by changes in field [java]+PictureUrlField+.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=233..235;251..267;286..287]
+----
+
+
+Finally, we want the picture to be refreshed whenever the content of the picture URL is changed. 
+For this, the property [element]_Master Field_ is set to the [java]+PictureUrlField+. 
+The implementation of the corresponding method [java]+execChangedMasterValue+ is provided in <<lst-mycontacts.client.forms.person.picturefield>>. 
+As we can see, the Scout helper class [java]+IOUtility+ is used to read the image content from the provided URL. 
+This content is then used to assign the image content with the image field's method [java]+setImage+. 
+Method [java]+setAutoFit+ is called to adapt the picture to the dimensions available to the image field. 
+
+
+==== A simple Form to edit the Picture URL
+
+[[img-new_form_url, Figure 000]]
+image::{imgsdir}/new_form_url_1.png[]
+.Add the URL editor form. This form does not need any connections to the server. Therefore, the related components such as services and the form data can be removed in the second wizard step shown on the right side.
+image::{imgsdir}/new_form_url_2.png[]
+
+To edit a person's picture link, we create a simple URL editor form as shown in <<img-new_form_url>>. 
+As we only need this form to update the URL information of a person's picture field, we do not need any connectivity to the backend of the "`My Contacts`" application. 
+That is why almost all form and service artefacts are deselected in the second wizard step shown on the right side of <<img-new_form_url>>. 
+
+[[lst-mycontacts.client.forms.pictureurl, Listing PictureURLField]]
+[source,java]
+.The UI structure of the [java]+PictureURLForm+ used to update the URL of the picture field in the person form.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=24..25;99..113;122..122;126..127]
+----
+
+
+As this form only holds a single URL field, we omit the description of the creation of the URL editor form's content and provide the resulting Java code instead. 
+In <<lst-mycontacts.client.forms.pictureurl>> just the form's [java]+MainBox+ code is shown. 
+
+[[img-new_menu_editurl, Figure 000]]
+image::{imgsdir}/new_menu_editurl_contextmenu.png[]
+.Add the URL edit menu to the picture field.
+image::{imgsdir}/new_menu_editurl.png[]
+
+This form is then started via an "`Edit URL ...`" contextmenu on the image field.
+The creation of this contextmenu is shown in <<img-new_menu_editurl>>. 
+See <<lst-mycontacts.client.forms.person.picturefield.editmenu>> for the actual implementation of the [java]+execAction+ for this contextmenu.
+
+(((execAction)))
+[[lst-mycontacts.client.forms.person.picturefield.editmenu, Listing EditURLMenu]]
+[source,java]  
+.The edit menu implemented in class [java]+EditURLMenu+ of the picture field. If the URL was changed the picture URL field of the person form is set accordingly in method [java]+execAction+
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=268..285]
+----
+
+
+Once the edit URL form is started with [java]+form.startModify()+ the client waits in method [java]+form.waitFor+ until the form is closed by the user. 
+If the user has changed any field content (the picture URL in our case) and closed the form with the btn:[OK] button, the method [java]+form.isFormStored+ returns true, and we can copy the new URL from the editor form field into the picture URL field of the person form. 
+Such a change will then trigger method [java]+execChangedMasterValue+ of the [java]+PictureField+ which in turn updates the image shown in the person form. 
+
+
+==== Linking the Person Form to the Person Page
+
+[[img-new_menu_editperson, Figure 000]]
+image::{imgsdir}/new_menu_editperson_contextmenu.png[]
+.Add the Person edit menu to the person page.
+image::{imgsdir}/new_menu_editperson.png[]
+
+(((isFormStored, reloadPage)))
+[[lst-mycontacts.client.forms.person.picturefield.editmenu, Listing EditPersonMenu]]
+[source,java]  
+.The [java]+EditPersonMenu+ to edit the person selected in the person table. The person id taken from the corresponding (invisible) column is transferred to the person form before the form is started.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=123..142]
+----
+
+
+The user of the "`My Contacts`" application wants to use the person form to show/edit attributes of a specific person.
+To support this use case, we need to link this form with the "`My Contacts`" application. 
+As we already have person pages that show some of the person's attribute, we can now add context menus to this list to open/edit existing persons in the person form and to create new persons as well. 
+This is achieved by using the [wizard]_New Menu_ wizard on the [node]_Menus_ node of the table of the person page according to <<img-new_menu_editperson>>. 
+In the [field]_Name_ field enter the new translated text "`Edit Person ...`". 
+The form to start is the [java]+PersonForm+ and the [java]+ModifyHandler+ is the form handler to be used to start the form. 
+As we have defined a meaningful primary key column on the person page and a matching variable is available for the person form, the Scout SDK wizard is generating the necessary code automatically. 
+The implementation of the [java]+execAction+ method provided in <<lst-mycontacts.desktop.outline.personpage.editmenu>> works out of the box and should not need any manual tuning.
+Now, you may also add the "`New Person ...`" menu in the same way. 
+Except that you pick the [java]+NewHander+ in the [wizard]_New Menu_ wizard instead of the modify handler. 
+
+[[img-person_table_properties, Figure 000]]
+image::{imgsdir}/person_table_explorer.png[]
+.Set the behaviour for the row level action on the person table.
+image::{imgsdir}/person_table_properties.png[]
+
+(((execRowAction)))
+[[lst-mycontacts.desktop.outline.personpage.execrowaction, Listing execRowAction]]
+[source,java]  
+.The [java]+execRowAction+ method on table pages is used to trigger an action when a row is selected with a double click or `<Enter>`.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=63..67]
+----
+
+
+To open the person form with a double click on a person row or by hitting the kbd:[Enter] key, you may add a corresponding [java]+execRowAction+ on the person page. 
+This method can be added to the person table by clicking on the green plus icon next to the operation [element]_Exec Row Action_ as shown in <<img-person_table_properties>>. 
+For the implementation of this method you may reuse the functionality implemented for the context menu according to <<lst-mycontacts.desktop.outline.personpage.execrowaction>>. 
+
+
+[[sec-adding_the_smartfield]]
+==== Adding the Company Smartfield
+
+At the current stage of the "`My Contacts`" application, we have no option to manage the relationship between people and companies. 
+To manage this relation, we now add a company smart field to the person form. 
+This smart field will then hold the current assignment of the person represented in the person form. 
+
+A Scout smart field can be viewed as user friendly dropdown field on steroids that also implements [element]_search-as-you-type_ to pick a specific entry. 
+In the simplest case the smart field provides access to a small and locally provided list of key value pairs. 
+But for the intended use in the "`My Contacts`" application, we will need to access a list of elements provided by the server that will be compiled dynamically at runtime. 
+
+[[img-new_lookupcall_company_contextmenu, Figure 000]]
+.Add a lookup call to the applications shared node.
+image::{imgsdir}/new_lookupcall_company_contextmenu.png[]
+
+[[img-new_lookupcall_company, Figure 000]]
+image::{imgsdir}/new_lookupcall_company_1.png[]
+.The two wizard steps to enter the details of the company lookup call.
+image::{imgsdir}/new_lookupcall_company_2.png[]
+
+To create the access to this list, we start with the creation of the company lookup call. 
+As shown in <<img-new_lookupcall_company_contextmenu>> the lookup call is added on the [folder]_Lookup Calls_ folder under the green shared node of the "`My Contacts`" application.
+This opens the [wizard]_New Lookup Call_ wizard as shown in <<img-new_lookupcall_company>>. 
+In the first wizard step, enter "`Company`" into the [field]_Class Name_ field, "`services.lookup`" into the [field]_Sub Package_ field and "`String`" into the [field]_Key Type_ field. 
+Now verify that the wizard step looks the same as the screenshot shown on the left hand side of <<img-new_lookupcall_company>>.
+Before the wizard is closed, click on the btn:[Next] button to move to the second wizard step. 
+As shown on the right hand side of <<img-new_lookupcall_company>>, the wizard will also create a corresponding [java]+CompanyLookupService+ on the application's server. 
+We can now close this wizard with the btn:[Finish] button and add the business logic to this company lookup service. 
+
+(((LookupCall, getConfiguredService, CompanyLookupCall)))
+[[lst-mycontacts.shared.lookup.companylookupcall, Listing CompanyLookupCall]]
+[source,java]  
+.The company lookup call with its [java]+getConfiguredService+ method in the application's shared plugin.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java[lines=12..21]
+----
+
+
+(((AbstractSqlLookupService, getConfiguredSqlSelect)))
+[[lst-mycontacts.server.lookup.companylookupservice, Listing CompanyLookupService]]
+[source,java]  
+.The company lookup service in the application's server plugin. The [java]+key+ and the [java]+text+ criteria are used to search for values by key or by the provided name substring.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/lookup/CompanyLookupService.java[lines=6..20]
+----
+
+
+The [java]+CompanyLookupCall+ just created by the Scout SDK wizard is provided in <<lst-mycontacts.shared.lookup.companylookupcall>>. 
+As we can see, the only method implemented is [java]+getConfiguredService+ that points to the specific server service to be used. 
+In the Scout Explorer, the new company lookup service can be found in the [folder]_Lookup Services_ folder under the blue server node of the application. 
+In this service, we need to implement method [java]+getConfiguredSqlSelect+ as shown in <<lst-mycontacts.server.lookup.companylookupservice>>. 
+For Scout lookup services, specific [element]_key_, [element]_text_ and [element]_all_ criteria blocks need to be provided. 
+This criteria are included in the [java]+SELECT+ statement using the [java]+<key>+, [java]+<text>+ and [java]+<all>+ tags as shown in the listing. 
+The Scout runtime uses the [java]+<key>+-block in cases where a specific key is already assigned to the smart field. 
+The [java]+<text>+-block is used as a query criteria to create the dynamic [element]_search-as-you-type_ hit list based on the (sub)string entered by the user so far.
+Finally, the [java]+<all>+-block is used to define the hit list to be shown when the user does not enter any text into the smart field but clicks on the field's search icon instead. 
+The bind variable [java]+:key+ and [java]+:text+ are provided by Scout and hold the value of the assigned key or the text entered into the smart field. 
+
+[[img-new_smartfield_company_contextmenu, Figure 000]]
+.Add a smart field to the person form.
+image::{imgsdir}/new_smartfield_company_contextmenu.png[]
+
+[[img-new_smartfield_company, Figure 000]]
+image::{imgsdir}/new_smartfield_company_1.png[]
+.Create the company smart field for the person form. In the second wizard step shown on the right side, first remove the content in the [field]_Generic Type_ field and then select the company lookup call into the corresponding field.
+image::{imgsdir}/new_smartfield_company_2.png[]
+
+We are now ready to add the company smart field to the person form. 
+To start the [wizard]_New Form Field_ wizard we use the context menu on the [java]+DetailBox+ of the person form as shown in <<img-new_smartfield_company>>.
+In the first wizard step, we chose the [element]_SmartField_ entry as the field type and click the btn:[Next] button. 
+Then, we enter "`Company`" into the [field]_Name_ field as shown on the right hand side of <<img-new_smartfield_company>>. 
+Make sure that you select the [element]_String_ entry in the [field]_Generic Type_ field as we are using string values to identify companies in the "`My Contacts`" application. 
+And in the [field]_LookupCall_ field, we can now select the [element]_CompanyLookupCall_ that we have just created before. 
+Finally, the position of the new company smart field can be set in the [field]_Sibling_ field before the location field before the wizard is closed with the btn:[Finish] button. 
+
+(((AbstractSmartField, getConfiguredLookupCall)))
+[[lst-mycontacts.client.forms.person.companyfield, Listing CompanyField]]
+[source,java]  
+.The smart field [java]+CompanyField+ of the person form and its wiring with the company lookup call.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=324..337]
+----
+
+
+The implementation of the company smart field created by the Scout SDK wizard is provided in <<lst-mycontacts.client.forms.person.companyfield>>. 
+A look at the implementation of the [java]+CompanyField+ class shows the wiring with the company lookup service.
+
+
+==== Adding the Map Form
+
+We now want to add the "`Map`" form shown in the front of <<img-my_contacts_swt>>.
+The purpose of this form is to show a map corresponding to the address entered into the [field]_location_ field of the person form using the Google Maps Image API.footnote:[
+The Google Maps Image API can be used to fetch static map images: https://developers.google.com/maps/documentation/imageapis/.
+].
+This implies that map images will only be shown in the map form if the entered address can be parsed by the Google Maps Image API. 
+
+To create the maps form we start the [wizard]_New Form_ wizard and enter the new translated text "`Map`" into the [field]_Name_ field and "`ui.forms`" into the [field]_Sub Package_ field of the first wizard step. 
+Then, we click the btn:[Next] button to configure the artefacts to be created by the wizard. 
+For the map form we can use the configuration as shown on the right hand side of <<img-new_form_url>> with the difference that we do not need the cancel button.
+Having deselected all artefacts except for the ok button and the modify handler, the wizard can be closed with the btn:[Finish] button.
+
+After the form creation wizard has been closed, we can add an "`Address`" variable to the form by starting the [wizard]_New Property Bean_ wizard on the [node]_Variables_ node of the newly created map form.
+In the property bean wizard, enter "`Address`" into the [field]_Name_ field and set the [field]_Bean type_ field to [element]_String_. 
+
+As the next step, the map image field is added to the from. 
+For this, start the [wizard]_New Form Field_ wizard directly on the form's [node]_MainBox_ node. 
+In the first form field wizard step, select [element]_ImageField_ as the field type and click on the btn:[Next] button. 
+Now enter "`Map`" into the [field]_Class Name_ field and close the second wizard step with the btn:[Finish] button.
+To set the properties of the new map field, select the [node]_MapField_ node below the main box node of the map form. 
+In the [java]+MapField+'s Scout Object Properties untick the [property]_Label Visible_ property and add an [java]+execInitField+ method by clicking on the green plus icon next to this operation. 
+The configuration of the map field can then be completed in section [element]_Advanced Properties_. 
+Here, we set the [property]_Grid H_ property to 6 and update the [property]_Width in Pixel_ property and the [property]_Height in Pixel_ property to a value of 400 each.
+
+(((execInitField, AbstractImageField)))
+[[lst-mycontacts.client.forms.map, Listing execInitField]]
+[source,java]  
+.In the [java]+execInitField+ method of the map form the image content is fetched from the Google Maps API.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java[lines=115..133]
+----
+
+
+To add the Java code to display the map in the image field, click on the [link]_execInitField_ link in the Scout Object Properties of the map field. 
+According to the implementation provided in <<lst-mycontacts.client.forms.map>>, an URL for the Maps Image API is first constructed. 
+This url also contains the content of the map form's address variable and the configured dimension of the map field. 
+The map picture returned by the Google API is then read using [java]+IOUtility.getContent+ and directly fed into the image fields `setImage` method. 
+
+The last step involving the implementation of the map form feature is its integration into the person form. 
+As visible on the lower left part of the person form shown in <<img-my_contacts_swt>>, a [link]_Show Map ..._ link is available. 
+We now add such a link to the person form including the necessary wiring for opening the newly created map form. 
+For this, navigate to the person form in the Scout SDK and click on its [node]_MainBox_ node below. 
+Then, open the context menu on the [node]_MainBox_ node and start the [wizard]_New Form Field_ wizard. 
+In the first wizard step, select the [element]_LinkButton_ from the available field types and click the btn:[Next] button to load the second wizard step. 
+Here, just enter the new translated text "`Show Map ...`" into the [field]_Name_ field and close the wizard with the btn:[Finish] button. 
+
+(((execClickAction)))
+[[lst-mycontacts.client.forms.person.clickmaplink, Listing ShowMapButton]]
+[source,java]  
+.The implementation of the "`Show Map ...`" link button. %In method `execClickAction` a new map form is first created, the the address variable is set with the content of the person's location and the form is opened with `startModify`.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=347..362]
+----
+
+
+To add the necessary wiring code to the link button double click the [node]_ShowMapButton_ node in the Scout Explorer and implement its [java]+execClickAction+ method.
+As shown in <<lst-mycontacts.client.forms.person.clickmaplink>>, we only need to create a new map form in the click action, set its address variable and open the form with [java]+form.startModify+.
+
+
+=== Managing Person Data on the Server Side
+
+(((ModifyHandler,AbstractFormHandler)))
+[[lst-mycontacts.client.personform.modifyhandler, Listing ModifyHandler]]
+[source,java]  
+.The [java]+execLoad+ and the  [java]+execStore+ methods of the person form's modify handler.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=364..384]
+----
+
+
+In the "`My Contacts`" client application the person form is opened via the context menues "`Edit Person ...`" and "`New Person ...`" on the person page. 
+And for each context menu, the person form is started with the corresponding form handler. 
+The new handler is used to start the form in the mode to create new persons while the modify handler is implemented to start the form for updating existing persons. 
+When we look at the implementation of the modify handler provided in <<lst-mycontacts.client.personform.modifyhandler>>, we see that it only contains the two methods [java]+execLoad+ and [java]+execStore+. 
+As described in Section <<sec-helloworld.formhandler>> of the "`Hello World`" tutorial, [java]+execLoad+ is called by the Scout framework when the form is started. 
+And method [java]+execStore+ is called by the Scout framework after the user has clicked the btn:[OK] button of a form. 
+
+(((PersonService)))
+[[lst-mycontacts.server.services.personservice.load, Listing PersonService load and store]]
+[source,java]  
+.The [java]+load+ and the [java]+store+ methods of the server's [java]+PersonService+.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;55..104]
+----
+
+
+In both the [java]+execLoad+ and the [java]+execStore+ methods, the person service is used. 
+In [java]+execLoad+ by calling [java]+service.load+ to fetch the person's data from the Scout server, and in [java]+execStore+ by calling [java]+service.store+ to transfer the updated data to the Scout server. 
+The implementation of the Scout server's [java]+load+ and [java]+store+ methods for the [java]+PersonService+ is provided in <<lst-mycontacts.server.services.personservice.load>>. 
+To load the correct person data, the [java]+load+ method expects the person's id as an input parameter [java]+personId+ in the [java]+formData+. 
+
+For the data binding between the [java]+formData+ and the attributes in the database tables Scout provides support in the methods of the [java]+SQL+ class.
+This support is first searching for the pattern "`:<variable>`" in the provided SQL statement. 
+For all such patterns found, the binding to the corresponding [java]+getVariable+ and [java]+setVariable+ methods of the form data object is performed by the Scout framework at runtime. 
+
+The implementation of the person form's new handler is implemented similar to it's modify handler. 
+Instead of calling the service operations [java]+load+ and [java]+store+, the methods  [java]+prepareCreate+ and [java]+create+ are used. 
+In principle, method [java]+prepareCreate+ is not needed for the "`My Contacts`" application. 
+As its implementation has been created by the Scout SDK wizard, it does not do any harm and the method can be left unchanged. 
+
+(((PersonService)))
+[[lst-mycontacts.server.services.personservice.create, Listing PersonService create]]
+[source,java]  
+.The [java]+create+ method of the server's [java]+PersonService+.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;35..54;103..104]
+----
+
+
+In <<lst-mycontacts.server.services.personservice.create>> the implementation of the [java]+PersonService+'s [java]+create+ method is provided. 
+First, the implementation checks if the provided form data contains a person id. 
+If the person has been entered manually, a person id is initially missing and a new one needs to be created and assigned. 
+For this, method [java]+randomUUID()+ of the Java class [java]+java.util.UUID+ is used. 
+The only responsibility of the [java]+INSERT+ statement following the person id check is to make sure we will have a row in the [java]+PERSON+ table for the person to be created. 
+To save all the other form data parameters, we can reuse the previously implemented [java]+store+ method. 
+
+
+
+=== Creating the Company Form
+
+Creating the company form and the necessary backend services is not described here.
+Instead, this task is left as an exercise to the reader and in the text below some minimal guidelines are provided.
+
+To create the company form, start with the [wizard]_New Form_ wizard as in the case of the person form. 
+This will then create all necessary artefacts including the forms, the server service, and the form data for the communication between the client and the server. 
+And don't forget to add a [java]+companyId+ variable to the company form. 
+To decide on the fields that need to be on the company form you may check the setup of the database schema provided in <<lst-mycontacts.server.services.installdb.company>>. 
+If in doubt about what to do, please refer to the procedure used to create the person form. 
+
+In case you get lost completely, you may download the "`My Contacts`" application from this books Github repository as described in the Scout wiki.footnote:[
+Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/4.0#Download_and_Run_the_Scout_Sample_Applications.
+].
+
+
+=== Adding the Scribe Library to the Application
+
+To access data from sites such as LinkedIn, Xing, Google+ or Facebook, most social networks provide an API that requires user authentication. 
+The current defacto standard for such authentication is the Open Authentication Protocol (OAuth).footnote:[
+For more information regarding the OAuth standard, see: http://oauth.net/.
+] 
+
+The big advantage of the OAuth standard is the authentication based on access tokens.  
+If an application such as the "`My Contacts`" example is in possession of an access token, it can fetch data from the hosting site or even act on the users behalf. 
+The access token itself just contains two values, the token and the secret.
+And both values are completely separate from the user's username and password credentials. 
+This means that an access token may be safely stored in other applications. 
+Should such an application or its data get compromised, the username and password are still save and the user just has to remove/invalidate the compromised access token.  
+
+For the "`My Contacts`" application we use the Scribe Java library.footnote:[
+The Scribe OAuth Java library: https://github.com/fernandezpablo85/scribe-java.
+]
+This library makes accessing social services very simple.
+At the same time the Scribe library is used here to demonstrate the integration of external Java libraries in Scout applications. 
+
+[[img-new_library_scribe_contextmenu, Figure 000]]
+.Add a new bundle to hold the Scribe JARs.
+image::{imgsdir}/new_library_scribe_contextmenu.png[]
+
+[[img-new_library_scribe, Figure 000]]
+image::{imgsdir}/new_library_scribe_1.png[]
+.Specify the JARs to be contained in the library bundle and the library name.
+image::{imgsdir}/new_library_scribe_2.png[]
+
+As we will use the Scribe library only on the Scout server side start the Scout SDK [wizard]_New Library Bundle_ wizard below the blue server node as shown in <<img-new_library_scribe_contextmenu>>. 
+In the first wizard step shown on the left side of <<img-new_library_scribe>> add the files [filename]+scribe-1.3.5.jar+ and [filename]+commons-codec-1.9.jar+.footnote:[
+See the getting started page for more information regarding the two necessary JAR file: https://github.com/fernandezpablo85/scribe-java/wiki/getting-started.
+] 
+using the btn:[Add] button. 
+Once the two JAR files are listed in the library list of the wizard click the btn:[Next] button.
+On the second wizard step, enter "`org.scribe`" into the [field]_Bundle Name_ field as shown on the right side of <<img-new_library_scribe>>. 
+Then, close the wizard with the btn:[Finish] button.
+
+The Scout SDK wizard then creates the corresponding library plugin and updates the server product files and the plugin dependencies of the applications server plugin accordingly. 
+Once the wizard has completed the classes defined in the two JAR files can directly be accessed from the "`My Contact`" application's server plugin.
+
+
+=== Integrating LinkedIn Access with Scribe
+
+(((IService,initializeService)))
+[[lst-mycontacts.server.linkedin.initialize, Listing LinkedInService initialize]]
+[source,java]  
+.The [java]+LinkedInService+ service with it's [java]+initializeService+ method defined in the [java]+IService+ interface.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=38..57;195..196]
+----
+
+
+To access the LinkedIn data with Scribe we first create a new service [java]+LinkedInService+ with the [wizard]_New Service_ wizard in the [folder]_Services_ folder under the blue server node. 
+In the wizard, enter "`LinkedIn`" into the [field]_Class Name_ field and "`services`" into the [field]_Sub Package_ field. 
+Before we add any service operations to the LinkedIn service, the service initialization method is implemented according to <<lst-mycontacts.server.linkedin.initialize>>. 
+This initialization is not discussed further here.
+Instead, the interested reader is referred to the corresponding [java]+LinkedInExample+ on the Scribe web pages.footnote:[
+For the Scribe [filename]+LinkedInExample.java+ example class see: https://github.com/fernandezpablo85/scribe-java/blob/master/src/test/java/org/scribe/examples/LinkedInExample.java.
+].
+
+[[img-new_operation_authurl, Figure 000]]
+image::{imgsdir}/new_operation_authurl_contextmenu.png[]
+.Add the operation to retrieve an authentication URL.
+image::{imgsdir}/new_operation_authurl.png[]
+
+(((AbstractSmartField,getConfiguredLookupCall)))
+[[lst-mycontacts.server.linkedin.authurl, Listing LinkedInService getAuthUrl]]
+[source,java]  
+.The [java]+getAuthUrl+ method of the LinkedIn service.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=58..65]
+----
+
+
+The first service operation [java]+getAuthUrl+ is added according to <<img-new_operation_authurl>>. 
+This operation will return the necessary information to create a request token and provides a link to open in a web browser to start the authentication against the LinkedIn account. 
+For its implementation see <<lst-mycontacts.server.linkedin.authurl>>.
+
+[[img-new_operation_refresh_update, Figure 000]]
+image::{imgsdir}/new_operation_refreshtoken.png[]
+.Add the operations to refresh the access token and to update the LinkedIn contacts.
+image::{imgsdir}/new_operation_updatecontacts.png[]
+
+The next operations we add are used to refresh the users access token stored in the "`My Contacts`" application and to refresh or download the users contacts stored in the user's LinkedIn account. 
+See <<img-new_operation_refresh_update>> for the necessary details for the creation of the two methods. 
+The [wizard]_New Service Operation_ wizard only allows to provide two parameters. 
+As we need three parameters for the method [java]+refreshToken+, we have to amend the security code parameter manually. 
+For this, first update the interface [java]+ILinkedInService+ and amend the parameter list with the additional String parameter [java]+securityCode+. 
+Then, open class [java]+LinkedInService+ and add the String parameter [java]+securityCode+ according to interface just updated before.
+
+[[lst-mycontacts.server.linkedin.refreshtoken, Listing LinkedInService refreshToken]]
+[source,java]  
+.The [java]+refreshToken+ method is used to create a new access token to fetch data from the LinkedIn API.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=66..98]
+----
+
+
+Method [java]+refreshToken+ can now be implemented according to <<lst-mycontacts.server.linkedin.refreshtoken>>. 
+Using the provided token parameters and the security code, the access token is created using the [java]+m_service.getAccessToken+ method. 
+Then, the user id of the currently logged in user is obtained with [java]+ServerSession.get().getUserId()+. 
+Once we have both the access token and the user id available in method {refreshToken}, we can store the token and the secret values for the current user in table [java]+USERS_PARAM+ according to <<lst-mycontacts.server.linkedin.refreshtoken>>.
+
+[[lst-mycontacts.server.linkedin.readcontacts, Listing LinkedInService readContacts]]
+[source,java]  
+.The [java]+readContacts+ method to fetch the users connection using the LinkedIn API. The necessary access token is created in method [java]+getToken+ based on the information stored in the database for the logged in user.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=136..166]
+----
+
+
+[[lst-mycontacts.server.linkedin.gettoken, Listing LinkedInService getToken]]
+[source,java]  
+.The necessary access token is created in method [java]+getToken+ based on the information stored in the database for the logged in user.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=168..195]
+----
+
+
+The next step is to add a method [java]+readContacts+ to fetch the list of contacts from a LinkedIn account. 
+According to <<lst-mycontacts.server.linkedin.readcontacts>>, this private [java]+LinkedInService+ method reads the data from LinkedIn into a DOM tree.footnote:[
+DOM stands for Document Object Model. See http://www.w3.org/DOM/ for more information.
+]. 
+For this, a signed OAuth request is first created using the access token provided by method [java]+getToken+ according to <<lst-mycontacts.server.linkedin.gettoken>>. 
+The request specified by constant [java]+LINKEDIN_CONNECTIONS+ is defined as [java]+http://api.linkedin.com/v1/people/textasciitilde/connections+. 
+According to the API specification.footnote:[
+See the LinkedIn API documented for more specific information: https://developer.linkedin.com/documents/linkedin-api-resource-map.
+], 
+this returns all connections of the user in the response. 
+The response in the form of an XML document can then be parsed and returned in the form of a node list. 
+
+To sign the request to fetch the data from LinkedIn, the access token is retrieved from the database of the "`My Contact`" application using method [java]+getToken+. 
+According to the implementation provided in <<lst-mycontacts.server.linkedin.readcontacts>> the user id is first obtained from the user's server session. 
+The necessary parameters to create the access token are then retrieved from the [java]+USERS_PARAM+ table. 
+
+[[lst-linkedin.samplexmlcontact, Listing XML sample]]
+.Sample XML from LinkedIn XML content.
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-16"?>
+<person>
+    <id>f7R6wGcblj</id>
+    <first-name>Mike</first-name>
+    <last-name>Milinkovich</last-name>
+    <headline>Executive Director at Eclipse Foundation</headline>
+    <picture-url>http://m3.licdn.com/mpr/mprx/0_IUM7Se9vBU...SbRbQZ4</picture-url>
+    <site-standard-profile-request>
+      <url>http://www.linkedin.com/profile/view?id=14949387...05720*s114280*</url>
+    </site-standard-profile-request>
+    <location>
+      <name>Ottawa, Canada Area</name>
+      <country>
+        <code>ca</code>
+      </country>
+    </location>
+    <industry>Computer Software</industry>
+  </person>
+----
+
+Before we proceed, we take a look at the actual form of the data that will be provided by the LinkedIn API. 
+From the sample XML extract provided in <<lst-linkedin.samplexmlcontact>>, we can identify the person id [java]+f7R6wGcblj+, the first name [java]+Mike+ and some other attribute names with associated attribute values. 
+A closer look reveals the identity of the person to be Mike Milinkovich, a well known character in the Eclipse community. 
+For the purpose of the "`My Contacts`" application it is sufficient to be able to extract the top-level elements that hold the name, headline, and location information. 
+As the location string is contained in a [java]+name+ element inside the [java]+location+ element of the person, we need to be able to extract the content of either top level elements or the level directly below. 
+To simplify access to this data provided by the LinkedIn API we implement a small helper class named [java]+DomUtility+. 
+
+[[img-new_class_domutil, Figure 000]]
+image::{imgsdir}/new_class_domutil_1.png[]
+.Adding the [java]+DomUtility+ class to the server package.
+image::{imgsdir}/new_class_domutil_2.png[]
+
+[[lst-mycontacts.server.linkedin.domutil, Listing DomUtility]]
+[source,java]  
+.The [java]+DomUtility+ class provides functions to parse the XML data structure provided by the LinkedIn API.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java[lines=16..48]
+----
+
+
+For adding the class [java]+DomUtility+, the Eclipse [wizard]_New Java Class_ wizard can be used according to <<img-new_class_domutil>>. 
+This wizard can by started by pressing the kbd:[CTRL,n] keys. 
+In the first wizard step select the class element under the Java folder and click the btn:[Next] button.
+And in the second wizard step ensure that the new class will be created in the [java]+org.eclipsescout.contacts.server.services+ package.
+Then enter "`DomUtility`" into the [field]_Name_ field and close the wizard with the btn:[Finish] button. 
+The implementation of the class is provided in <<lst-mycontacts.server.linkedin.domutil>>. 
+Before the class can be saved, the necessary imports need to be fixed by pressing kbd:[CTRL,SHIFT,o] and selecting the components provided in the [java]+org.w3c.dom+ packages.
+
+[[lst-mycontacts.server.linkedin.updatecontacts, Listing updateContacts]]
+[source,java]  
+.The [java]+updateContacts+ method is used to enter/update existing contacts based on new data fetched from LinkedIn.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=99..135]
+----
+
+
+We now have finished all necessary parts to implement the method [java]+updateContacts+ of the server service [java]+LinkedInService+ according to <<lst-mycontacts.server.linkedin.updatecontacts>>. 
+In this method a service reference to the person process service is obtained first. 
+Then, the LinkedIn contacts provided by method [java]+readContacts+ are stored in a [java]+persons+ list object. 
+Finally, each person can be updated with the data available from LinkedIn.
+To update a  single person the following steps are performed in the person loop. 
+First, a form data is created and its id parameter is set to [java]+DomUtility.getValue(person, "id")+. 
+Using the [java]+load+ method of the person process service the person's attributes are loaded from the server's database. 
+The LinkedIn attributes are then used to update the corresponding form data. 
+With [java]+service.create(formData)+ the updated form data is then stored in the "`My Contacts`" database. 
+
+
+=== Fetching Contacts from LinkedIn
+
+[[img-new_form_token, Figure 000]]
+image::{imgsdir}/new_form_token_1.png[]
+.Add the form to refresh the LinkedIn access token.
+image::{imgsdir}/new_form_token_2.png[]
+
+The last piece that is missing to complete the "`My Contacts`" application is the user interface for the LinkedIn integration. 
+To allow the user to create/refresh an access token, we need to implement the refresh token form shown in <<img-my_contacts_rayo_refresh>> at the beginning of this chapter. 
+To create the form code, we use the [wizard]_New Form_ wizard of the Scout SDK as shown in <<img-new_form_token>>. 
+For the [field]_Name_ field enter a new translated text "`Refresh LinkedIn Token`" and fill [java]+ui.forms+ into the [field]_Sub Package_ field field. 
+Then, click the btn:[Next] button to switch to the second wizard step. 
+Here, deselect the elements that will not be needed for the implementation of the refresh form according to the right hand side of <<img-new_form_token>>. 
+Once the form has been created by the wizard, add the a [java]+Token+ and a [java]+Secret+ form variable of type string under the form's [folder]_Variables_ folder. 
+
+[[img-tokenform_securitycode, Figure 000]]
+image::{imgsdir}/tokenform_securitycode_explorer.png[]
+.The token form in the explorer and the properties of the security code field.
+image::{imgsdir}/tokenform_securitycode_properties.png[]
+
+The next step is to add the desired layout and the necessary form fields. 
+First, use the [wizard]_New Form Field_ wizard to add a new group box [java]+TokenBox+ to the [node]_MainBox_ node. 
+And into the [java]+TokenBox+ add a "`Security Code`" string field as shown on the left hand side of <<img-tokenform_securitycode>>. 
+To provide a clickable link that opens a web browser with the LinkedIn authentication link, add a "`Open Auth URL ...`" link of type [java]+LinkButton+ to the main box. 
+To make the user to first click the authentication link button before he tries to fill any content into the security code field we initially disable this field. 
+For this, first click on the security code field in the Scout Explorer and then open the [element]_Advanced Properties_ section of the fields Scout Object Properties. 
+As shown on the right side of <<img-tokenform_securitycode>>, deselect the [property]_Enabled_ property.
+
+(((AbstractLinkButton,execClickAction)))
+[[lst-mycontacts.client.forms.refreshtoken, Listing RefreshLinkedInTokenForm]]
+[source,java]  
+.The structure of the refresh token form. The security code field gets enabled in method [java]+execClickAction+ after the authentication link button is pressed.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=29..30;113..133;142..158;195..196]
+----
+
+
+The implementation of the forms' structure is provided in <<lst-mycontacts.client.forms.refreshtoken>>.
+In the [java]+execClickAction+ method of the [java]+OpenAuthURLButton+ link button the necessary information for the auth link is obtained from the server. 
+For this, we are using the [java]+getAuthUrl+ operation implemented in the previous section. 
+The parameters to create the request token are saved in the form's token and secret variables. 
+Then, the auth link is opened in a web browser with the [java]+shellOpen+  method of the client's shell service. 
+Finally, after opening the web browser we can enable the security field with [java]+getSecurityCodeField().setEnabled(true)+.
+
+[[img-new_menu_refreshtoken, Figure 000]]
+image::{imgsdir}/new_menu_refreshtoken_contextmenu.png[]
+.Add the menu to open the LinkedIn token form.
+image::{imgsdir}/new_menu_refreshtoken.png[]
+
+We can now integrate the form to refresh the LinkedIn access token under the applications "`File`" menu. 
+This is done using the [wizard]_New Menu_ wizard as shown in <<img-new_menu_refreshtoken>>. 
+Enter the translated text "`Refresh LinkedIn Token ...`" into the wizard's [field]_Name_ field and pick the element [element]_Exit Menu [before]_ from the dropdown box of the [field]_Sibling_ field. 
+In the [field]_Form to start_ field select the newly created refresh token form and use the [element]_NewHandler_ entry in the [field]_Form Handler_ field. 
+To close the wizard, click the btn:[Finish] button.
+
+[[lst-mycontacts.client.desktop.refreshtokenmenu, Listing RefreshLinkedInTokenForm]]
+[source,java]  
+.The menu to refresh the LinkedIn token starts the token form and then sends token parameters with the new security code to the LinkedIn backend service.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=88..114]
+----
+
+
+The implementation of the refresh menu is shown in <<lst-mycontacts.client.desktop.refreshtokenmenu>>. 
+In method [java]+execAction()+, we need to amend the part after starting the refresh token form. 
+If the method [java]+form.isFormStored()+ returns [java]+true+, the user has modified the secure code field and it is fair to assume that the user wants to create/refresh his LinkedIn access token. 
+For this, we first retrieve the necessary parameters to call the backend service operation [java]+refreshToken+ implemented in the previous chapter. 
+
+[[img-new_menu_updatecontacts, Figure 000]]
+image::{imgsdir}/new_menu_updatecontacts_contextmenu.png[]
+.Add the menu to update the LinkedIn contacts.
+image::{imgsdir}/new_menu_updatecontacts.png[]
+
+[[lst-mycontacts.client.desktop.updatecontacts, Listing RefreshLinkedInToken_Menu]]
+[source,java]  
+.The menu to update the stored persons with current LinkedIn data.
+---- 
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..171]
+----
+
+
+As the last missing component of the "`My Contacts`" application, we add the menu to fetch the LinkedIn contacts and update the database accordingly. 
+The menu entry is created as a sub menu of the "`Tools`" menu.
+For this, use the new menu wizard on the [node]_ToolsMenu_ node as shown in <<img-new_menu_updatecontacts>>. 
+The implementation of the menu's [java]+execAction+ method shown in <<lst-mycontacts.client.desktop.updatecontacts>> is trivial. 
+We only need to call the operation of the [java]+LinkedInService+ implemented in the server part of the "`My Contacts`" application. 
+
+
+
+

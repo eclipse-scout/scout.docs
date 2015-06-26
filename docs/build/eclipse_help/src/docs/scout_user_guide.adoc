@@ -1,0 +1,15 @@
+= Eclipse Scout User Guide
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+Eclipse Scout User Guide 
+
+* <<tutorial.adoc#, Getting Started>>
+* <<sdk.adoc#, Scout Tooling>>

@@ -1,0 +1,31 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Run the Final Application"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+
+We are now ready to run the completed "`Hello World!`" application by first starting the server and then the clients. 
+This results in running clients as shown in <<img-helloworld_finished>>. 
+The mobile version of the client can be started from the Scout SDK by clicking on the [link]_Smartphone Devices_ link in the product launchers section. 
+Alternatively, manually change the applications URL from [java]+http://localhost:8082/web+ to [java]+http://localhost:8082/mobile+. 
+
+[[img-helloworld_finished, Figure Running the complete Hello World application]]
+image::{imgsdir}/helloworld_swt.png[]
+image::{imgsdir}/helloworld_web.png[]
+.Running the complete "`Hello World!`" application with an SWT client, as a web application and a mobile application.
+image::{imgsdir}/helloworld_mobile.png[]
+
+Congratulations, you just have implemented your first Scout client server application!
+

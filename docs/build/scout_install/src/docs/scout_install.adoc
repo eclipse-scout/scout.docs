@@ -1,0 +1,28 @@
+= Download and Install Eclipse Scout
+:doctype: article
+:author: Scout Team
+:email: scout@bsi-software.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+This describes how to install an Eclipse IDE ready to create scout Applications.
+
+== Get the Package
+
+include::{mdledir}/DownloadScout.adoc[]
+
+== Install Scout
+
+include::{mdledir}/InstallAndVerifyScout.adoc[]
+
+== What's Next?
+
+With your working Scout installation you are now ready to create your first Scout application. 
+Go ahead and follow the '`Hello World!`' tutorial.
+

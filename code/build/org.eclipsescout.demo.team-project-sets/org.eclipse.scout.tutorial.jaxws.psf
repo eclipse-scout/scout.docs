@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/build/org.eclipsescout.demo.settings"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/build/org.eclipsescout.demo.master"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/build/org.eclipsescout.demo.target"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.client"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.database"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.server"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.shared"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.ui.swing"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.0.x,code/jaxws/org.eclipse.scout.tutorial.jaxws.ui.swt"/>
+</provider>
+</psf>

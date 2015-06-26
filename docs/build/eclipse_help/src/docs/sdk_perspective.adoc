@@ -1,0 +1,15 @@
+=== Scout Perspective
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+The Scout SDK is added to the Eclipse IDE in the form of the Scout perspective
+
+include::{mdledir}/SdkPerspective.adoc[]
+

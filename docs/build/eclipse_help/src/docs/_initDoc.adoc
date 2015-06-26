@@ -1,0 +1,11 @@
+
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+
+include::{mdledir}/_initCommon.adoc[]
+
+:finaldoc: true
+
+:scoutExplorerView: <<sdk_view_explorer.adoc#, Scout Explorer View>>
+:scoutPropView: <<sdk_view_object_properties.adoc#, Scout Object Properties View>>

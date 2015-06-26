@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.4"?><plugin>
+
+
+
+  <extension point="org.eclipse.rap.ui.entrypoint">
+    <entrypoint class="org.eclipsescout.demo.minicrm.ui.rap.StandaloneRwtEnvironment" id="org.eclipsescout.demo.minicrm.ui.rap.entrypoint.web" brandingId="org.eclipsescout.demo.minicrm.ui.rap.branding.web" path="/web"></entrypoint>
+    <entrypoint class="org.eclipsescout.demo.minicrm.ui.rap.MobileStandaloneRwtEnvironment" id="org.eclipsescout.demo.minicrm.ui.rap.entrypoint.mobile" brandingId="org.eclipsescout.demo.minicrm.ui.rap.branding.mobile" path="/mobile"></entrypoint>
+    <entrypoint class="org.eclipsescout.demo.minicrm.ui.rap.TabletStandaloneRwtEnvironment" id="org.eclipsescout.demo.minicrm.ui.rap.entrypoint.tablet" brandingId="org.eclipsescout.demo.minicrm.ui.rap.branding.tablet" path="/tablet"></entrypoint>
+  </extension>
+
+  <extension point="org.eclipse.rap.ui.themes">
+    <themeContribution file="theme/application.css" themeId="org.eclipse.scout.rt.ui.rap.theme"></themeContribution>
+  </extension>
+  <extension point="org.eclipse.equinox.http.registry.resources">
+    <resource alias="/res" base-name="/web-resources"></resource>
+  </extension>
+
+
+<extension point="org.eclipse.scout.rt.server.commons.filters">
+    <filter aliases="/" class="org.eclipse.scout.rt.server.commons.servletfilter.security.AnonymousSecurityFilter" ranking="10">
+    </filter>
+    <filter aliases="/" class="org.eclipse.scout.rt.server.commons.servletfilter.security.BasicSecurityFilter" ranking="20">
+    </filter>
+
+  <filter aliases="/" class="org.eclipse.scout.rt.ui.rap.servletfilter.LogoutFilter" ranking="-1000000">
+      <init-param name="active" value="true">
+      </init-param>
+    </filter></extension><extension point="org.eclipse.equinox.http.registry.servlets">
+    <servlet alias="/" class="org.eclipse.scout.rt.ui.rap.mobile.servlets.DeviceDispatcherServlet">
+    </servlet>
+  </extension><extension point="org.eclipse.scout.rt.ui.rap.lookAndFeel">
+
+
+  <properties scope="global">
+      <property name="formMainBoxBorder.visible" value="false">
+      </property>
+    </properties><decorations scope="global">
+
+    <mandatory>
+        <starMarker placement="afterLabel">
+        </starMarker>
+      </mandatory></decorations></extension><extension point="org.eclipse.rap.ui.branding">
+
+
+
+  <branding body="web-resources/startup-body.html" favicon="web-resources/eclipseScout.gif" id="org.eclipsescout.demo.minicrm.ui.rap.branding.web" themeId="org.eclipse.scout.rt.ui.rap.theme" title="minicrm">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"></link>
+      </additionalHeaders>
+    </branding><branding body="web-resources/startup-body.html" favicon="web-resources/eclipseScout.gif" id="org.eclipsescout.demo.minicrm.ui.rap.branding.mobile" themeId="org.eclipse.scout.rt.ui.rap.mobile.theme" title="minicrm">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"></link>
+        <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+      </additionalHeaders>
+    </branding><branding body="web-resources/startup-body.html" favicon="web-resources/eclipseScout.gif" id="org.eclipsescout.demo.minicrm.ui.rap.branding.tablet" themeId="org.eclipse.scout.rt.ui.rap.mobile.theme" title="minicrm">
+      <additionalHeaders>
+        <link href="res/html-styles.css" rel="stylesheet"></link>
+        <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+      </additionalHeaders>
+    </branding></extension><extension id="product" point="org.eclipse.core.runtime.products">
+
+  <product application="org.eclipsescout.demo.minicrm.ui.rap.app" name="minicrm">
+      <property name="appName" value="minicrm">
+      </property>
+    </product></extension><extension id="app" name="minicrm" point="org.eclipse.core.runtime.applications">
+   <application>
+     <run class="org.eclipse.scout.rt.ui.rap.RwtApplication"></run>
+   </application>
+  </extension></plugin>

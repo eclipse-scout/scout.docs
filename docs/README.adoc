@@ -1,0 +1,22 @@
+:scout_home: http://eclipse.org/scout/
+:scout_demo: http://wiki.eclipse.org/Scout/Demo
+
+= Scout Docs - Docs
+
+== Description
+
+This folder contains the source for producing the different documentation items (Eclipse Help, Scout Books, HTML pages...) of the link:{scout_home}[Eclipse Scout framework]
+
+== Content:
+
+* `adoc` folder: contains text modules (Asciidoc files) that are included in the documentation items
+* `build` folder: contains the documentation items and the script to build them (based on maven, using Asciidoctor), link:build/[read more],
+* `imgs` folder: contains all the images used in the documentation items.
+* `publish` folder: contains some tasks written in Java used as post-processing engine for the documentation items contained in the `build` folder, link:publish/[read more].
+
+
+== Building & publishing the documents
+
+Building the documents using Asciidoctor: check the link:build/README.adoc[README of the build folder].
+
+Post processing the Asciidoctor output: check the link:publish/README.adoc[README of the publish folder].

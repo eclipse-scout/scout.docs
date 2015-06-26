@@ -1,0 +1,23 @@
+:scout_home: http://eclipse.org/scout/
+:scout_demo: http://wiki.eclipse.org/Scout/Demo
+
+= Scout Docs - Code
+
+== Description
+
+This folder contains the demo applications based on the link:{scout_home}[Eclipse Scout framework]
+
+More information on the eclipse wiki: link:{scout_demo}[Eclipse Scout > Demo Applications]
+
+== Build
+
+You can build all application using maven at the root of the `code` folder:
+
+ mvn
+
+You can build one application by switching to one of subfolder and using maven:
+
+ cd widgets/
+ mvn
+ 
+The results are generated in the `target` subfolder.

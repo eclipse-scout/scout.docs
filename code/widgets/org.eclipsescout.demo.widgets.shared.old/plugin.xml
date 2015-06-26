@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <service
+            factory="org.eclipse.scout.service.DefaultServiceFactory"
+            class="org.eclipsescout.demo.widgets.shared.old.services.common.text.OldTextProviderService">
+      </service>
+      <service
+            factory="org.eclipse.scout.service.DefaultServiceFactory"
+            class="org.eclipsescout.demo.widgets.shared.old.services.common.text.OldDocumentationTextProviderService">
+      </service>
+   </extension>
+
+</plugin>

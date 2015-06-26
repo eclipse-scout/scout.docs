@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension id="app" name="Application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipse.scout.tutorial.jaxws.ui.swing.SwingApplication"/>
+    </application>
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipse.scout.tutorial.jaxws.ui.swing.app"
+          name="tutorial">
+       <property
+             name="appName"
+             value="tutorial">
+       </property>
+    </product>
+  </extension>
+</plugin>

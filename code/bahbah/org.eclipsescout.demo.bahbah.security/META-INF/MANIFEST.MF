@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BahBah Security Filter
+Bundle-SymbolicName: org.eclipsescout.demo.bahbah.security;singleton:=true
+Bundle-Version: 5.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.scout.rt.server.commons,
+ org.eclipse.scout.commons,
+ org.eclipse.scout.service
+Import-Package: javax.servlet;version="2.4.0",
+ javax.servlet.http;version="2.4.0"
+Export-Package: org.eclipsescout.demo.bahbah.server.security

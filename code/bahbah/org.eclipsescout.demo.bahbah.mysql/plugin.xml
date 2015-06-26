@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <service
+            class="org.eclipsescout.demo.bahbah.mysql.MysqlSqlService"
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            ranking="100"
+            session="org.eclipsescout.demo.bahbah.server.ServerSession">
+      </service>
+      <service
+            class="org.eclipsescout.demo.bahbah.mysql.MySqlDbSetupService"
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            ranking="100"
+            session="org.eclipsescout.demo.bahbah.server.ServerSession">
+      </service>
+   </extension>
+ 
+</plugin>

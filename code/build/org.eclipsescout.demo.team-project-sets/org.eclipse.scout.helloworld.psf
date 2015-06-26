@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/build/org.eclipsescout.demo.settings"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/build/org.eclipsescout.demo.master"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/build/org.eclipsescout.demo.target"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.client"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.client.mobile"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.server"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.shared"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.target"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.ui.rap"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.ui.swing"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/4.0.x,code/helloworld/org.eclipse.scout.helloworld.ui.swt"/>
+</provider>
+</psf>

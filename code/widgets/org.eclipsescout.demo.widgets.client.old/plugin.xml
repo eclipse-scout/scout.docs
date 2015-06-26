@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+   </extension>
+   <extension
+         point="org.eclipse.scout.rt.extension.client.desktopExtensions">
+      <desktopExtension
+            class="org.eclipsescout.demo.widgets.client.old.ui.desktop.DesktopExtension"
+            active="true">
+      </desktopExtension>
+   </extension>
+
+</plugin>

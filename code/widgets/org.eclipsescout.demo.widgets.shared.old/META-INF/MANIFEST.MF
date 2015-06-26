@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scout Widgets Demo App Shared Extension (old)
+Bundle-SymbolicName: org.eclipsescout.demo.widgets.shared.old;singleton:=true
+Bundle-Version: 5.0.0.qualifier
+Bundle-Activator: org.eclipsescout.demo.widgets.shared.old.Activator
+Export-Package: org.eclipsescout.demo.widgets.shared.old,
+ org.eclipsescout.demo.widgets.shared.old.services.common.text
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport,
+ org.eclipsescout.demo.widgets.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

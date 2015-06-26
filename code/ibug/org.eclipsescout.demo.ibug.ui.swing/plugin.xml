@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension id="app" name="Application" point="org.eclipse.core.runtime.applications">
+    <application>
+      <run class="org.eclipsescout.demo.ibug.ui.swing.SwingApplication"/>
+    </application>
+  </extension>
+  <extension id="product" point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipsescout.demo.ibug.ui.swing.app"
+          name="ibug Client">
+       <property
+             name="appName"
+             value="ibug Client">
+       </property>
+       <property
+             name="windowImages"
+             value="resources/icons/application_icon16.png,resources/icons/application_icon32.png,resources/icons/application_icon48.png">
+       </property>
+    </product>
+  </extension>
+  <extension
+        point="org.eclipse.scout.rt.ui.swing.scouticons">
+     <logo
+           icon="resources/icons/application_title.png">
+     </logo>
+     <window16
+           icon="resources/icons/application_icon16.png">
+     </window16>
+     <window32
+           icon="resources/icons/application_icon32.png">
+     </window32>
+     <window48
+           icon="resources/icons/application_icon48.png">
+     </window48>
+  </extension>
+</plugin>

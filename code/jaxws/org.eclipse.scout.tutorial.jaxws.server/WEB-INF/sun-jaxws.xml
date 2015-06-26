@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jws:endpoints version="2.0" xmlns:jws="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <jws:endpoint name="CompanyWebService" implementation="org.eclipse.scout.tutorial.jaxws.server.services.ws.provider.CompanyWebService" service="{http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/}CompanyWebService" port="{http://ws.services.jaxws.tutorial.scout.eclipse.org/CompanyWebService/}CompanyWebServicePort" url-pattern="/jaxws/CompanyWebService" wsdl="WEB-INF/wsdl/provider/CompanyWebService.wsdl">
+    <jws:handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
+      <jws:handler-chain>
+        <jws:handler>
+          <jws:handler-class>org.eclipse.scout.tutorial.jaxws.server.services.ws.handler.DatabaseLogHandler</jws:handler-class>
+        </jws:handler>
+      </jws:handler-chain>
+    </jws:handler-chains>
+  </jws:endpoint>
+</jws:endpoints>

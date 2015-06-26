@@ -1,0 +1,3 @@
+default.target.package.client.form=ui.desktop.form
+default.target.package.client.searchform=ui.desktop.outlines.pages.searchform
+eclipse.preferences.version=1

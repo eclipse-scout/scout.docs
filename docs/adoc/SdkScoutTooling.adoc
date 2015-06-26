@@ -1,0 +1,28 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Scout Tooling"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+Thanks to this tooling, developing Scout applications is made simpler, more productive and also more robust. 
+Initially, a solid understanding of the Java language is sufficient to start developing Scout applications and only a rough understanding of the underlying Eclipse/OSGi/JEE technologies is required. 
+
+The Scout SDK consists of navigation support for the application model defined by the Scout runtime and provides many intuitive component wizards. 
+This creates an ideal environment for beginners to build complete, high-quality Scout applications. 
+Typically Java developers only need a few days of Scout training to start creating their own advanced client server business applications. 
+
+The Scout SDK also helps developers to become more productive.
+Many repetitive and error prone tasks run automatically in the background or are taken care of by the component wizards of the Scout SDK. 
+This starts with the initial creation of a Scout client server application, continues with the wizards to create complete dialogs and pages and includes the automatic management of the data transfer objects needed for the client server communication.
+
+Finally, the application code created by the Scout SDK wizards helps to ensure that the resulting Scout application has a consistent and robust code base and is well aligned with the application model defined by the Scout runtime framework.

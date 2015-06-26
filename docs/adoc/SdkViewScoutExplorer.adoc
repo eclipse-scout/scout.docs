@@ -1,0 +1,20 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - View - Scout Explorer"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+The Scout Explorer view is responsible for the navigation support within the Scout application model. 
+This navigation support is presented in the form of a tree view and includes the client with its UI components, the server and the shared part of a Scout application. 
+For the actual navigation in the tree representing the Scout application both the mouse or the keyboard can be used. 

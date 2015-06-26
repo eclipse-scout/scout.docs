@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipsescout.demo.widgets.source_0.0.0.qualifier.jar" id="org.eclipsescout.demo.widgets.source" version="0.0.0">
+      <category name="org.eclipsescout.demo"/>
+   </feature>
+   <category-def name="org.eclipsescout.demo" label="Demo Apps">
+      <description>
+         Demo Applications for Eclipse Scout
+      </description>
+   </category-def>
+</site>
