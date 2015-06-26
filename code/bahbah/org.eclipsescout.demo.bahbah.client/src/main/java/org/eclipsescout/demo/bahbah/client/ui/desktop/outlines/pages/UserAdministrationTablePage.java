@@ -27,7 +27,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.useradmin.DefaultPasswordForm;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -273,7 +273,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
 
       @Override
       protected void execAction() throws ProcessingException {
-        if (MessageBox.showDeleteConfirmationMessage(TEXTS.get("Users"), getUsernameColumn().getValues(getSelectedRows()))) {
+        if (MessageBoxes.showDeleteConfirmationMessage(TEXTS.get("Users"), getUsernameColumn().getValues(getSelectedRows()))) {
           BEANS.get(IUserProcessService.class).deleteUsers(getUserIdColumn().getValues(getSelectedRows()));
           reloadPage();
         }

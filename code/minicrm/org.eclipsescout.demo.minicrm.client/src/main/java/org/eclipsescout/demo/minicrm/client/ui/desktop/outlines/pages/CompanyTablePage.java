@@ -27,7 +27,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -217,7 +217,7 @@ public class CompanyTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected void execAction() throws ProcessingException {
-        if (MessageBox.showDeleteConfirmationMessage(getNameColumn().getSelectedValue())) {
+        if (MessageBoxes.showDeleteConfirmationMessage(getNameColumn().getSelectedValue())) {
           BEANS.get(ICompanyService.class).delete(getCompanyNrColumn().getSelectedValue());
           reloadPage();
         }

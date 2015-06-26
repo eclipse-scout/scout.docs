@@ -17,6 +17,8 @@ import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.commons.html.HTML;
+import org.eclipse.scout.commons.html.IHtmlContent;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -26,11 +28,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -44,11 +44,10 @@ import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.Conf
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.DefaultReturnValueField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.HeaderField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.HiddenTextContentField;
+import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.HtmlField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.IconIdField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.MessageBoxConfiguredButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.NoButtonTextField;
-import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.Place0Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.Place1Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.ReturnValueField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.YesButtonTextField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox;
@@ -80,6 +79,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
   public BodyField getBodyField() {
     return getFieldByClass(BodyField.class);
+  }
+
+  public HtmlField getHtmlField() {
+    return getFieldByClass(HtmlField.class);
   }
 
   public AutoCloseMillisField getAutoCloseMillisField() {
@@ -133,14 +136,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
   public NoButtonTextField getNoButtonTextField() {
     return getFieldByClass(NoButtonTextField.class);
-  }
-
-  public Place0Field getPlace0Field() {
-    return getFieldByClass(Place0Field.class);
-  }
-
-  public Place1Field getPlace1Field() {
-    return getFieldByClass(Place1Field.class);
   }
 
   public ReturnValueField getReturnValueField() {
@@ -295,7 +290,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          boolean result = MessageBox.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
+          boolean result = MessageBoxes.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
           getResultField().setValue(result + "");
         }
       }
@@ -435,6 +430,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected void execClickAction() throws ProcessingException {
           String header = getHeaderField().getValue();
           String body = getBodyField().getValue();
+          IHtmlContent html = HTML.plain(getHtmlField().getValue());
           String yesButtonText = getYesButtonTextField().getValue();
           String noButtonText = getNoButtonTextField().getValue();
           String cancelButtonText = getCancelButtonTextField().getValue();
@@ -447,6 +443,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           int result = MessageBoxes.create().
               header(header).
               body(body).
+              html(html).
               yesButtonText(yesButtonText).
               noButtonText(noButtonText).
               cancelButtonText(cancelButtonText).
@@ -507,6 +504,35 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60.0)
+      public class HtmlField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Html");
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 4;
+        }
+
+        @Override
+        protected boolean getConfiguredMultilineText() {
+          return true;
+        }
+
+        @Override
+        protected boolean getConfiguredWrapText() {
+          return true;
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+      }
+
+      @Order(70.0)
       public class YesButtonTextField extends AbstractStringField {
 
         @Override
@@ -525,7 +551,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(80.0)
       public class NoButtonTextField extends AbstractStringField {
 
         @Override
@@ -544,7 +570,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(90.0)
       public class CancelButtonTextField extends AbstractStringField {
 
         @Override
@@ -563,11 +589,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
-      public class Place1Field extends AbstractPlaceholderField {
-      }
-
-      @Order(100.0)
+      @Order(110.0)
       public class HiddenTextContentField extends AbstractStringField {
 
         @Override
@@ -581,7 +603,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(120.0)
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -600,7 +622,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(130.0)
       public class DefaultReturnValueField extends AbstractSmartField<Integer> {
 
         @Override
@@ -619,7 +641,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(130.0)
+      @Order(140.0)
       public class AutoCloseMillisField extends AbstractLongField {
 
         @Override
@@ -642,10 +664,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           updateMessageBoxConfiguredButton();
         }
       }
-
-      @Order(140.0)
-      public class Place0Field extends AbstractPlaceholderField {
-      }
     }
 
     @Order(30.0)
@@ -664,6 +682,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       protected void execClickAction() throws ProcessingException {
         getHeaderField().setValue(TEXTS.get("LoremQuestion"));
         getBodyField().setValue(TEXTS.get("LoremAction"));
+        getHtmlField().setValue(TEXTS.get("LoremHtml"));
         getYesButtonTextField().setValue(TEXTS.get("YesButton"));
         getNoButtonTextField().setValue(TEXTS.get("NoButton"));
         getHiddenTextContentField().setValue(TEXTS.get("Lorem"));
