@@ -20,6 +20,6 @@ public class IconProviderService extends AbstractIconProviderService {
 
   @Override
   protected URL findResource(String relativePath) {
-    return org.eclipsescout.demo.widgets.client.ResourceBase.class.getResource("icons/internal/" + relativePath);
+    return org.eclipsescout.demo.widgets.client.ResourceBase.class.getResource("icons/" + relativePath);
   }
 }

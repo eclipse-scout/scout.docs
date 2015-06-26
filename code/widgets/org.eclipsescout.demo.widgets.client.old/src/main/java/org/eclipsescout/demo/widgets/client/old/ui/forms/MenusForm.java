@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -265,12 +266,121 @@ public class MenusForm extends AbstractForm implements IPageForm {
     @Order(10.0)
     public class GroupBox extends AbstractGroupBox {
 
+      @Override
+      protected double getConfiguredGridWeightY() {
+        return 1;
+      }
+
       @Order(10.0)
       public class StringField extends AbstractStringField {
 
         @Override
         protected void execInitField() throws ProcessingException {
           setValue("this string field has a menu");
+        }
+
+        @Order(10.0)
+        public class StringFieldMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Click me (Menu)";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
+        }
+      }
+
+      @Order(20.0)
+      public class StringWithTooltipField extends AbstractStringField {
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue("this string field has a menu and a tooltip");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "I am a tooltip";
+        }
+
+        @Order(10.0)
+        public class StringFieldMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Click me (Menu)";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
+        }
+      }
+
+      @Order(30.0)
+      public class StringRightField extends AbstractStringField {
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue("is the menu correctly displayed?");
+        }
+
+        @Order(10.0)
+        public class StringFieldMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Click me (Menu)";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
+        }
+      }
+
+      @Order(40.0)
+      public class StringRightWithTooltipField extends AbstractStringField {
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue("is the tooltip correctly displayed?");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "I am a tooltip";
+        }
+
+      }
+
+      @Order(50.0)
+      public class ImageField extends AbstractImageField {
+
+        @Override
+        protected boolean getConfiguredAutoFit() {
+          return true;
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setImageId("eclipse_scout_logo");
         }
 
         @Order(10.0)
@@ -491,6 +601,11 @@ public class MenusForm extends AbstractForm implements IPageForm {
         return "Another groupbox with more menus";
       }
 
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 1;
+      }
+
       @Order(10.0)
       public class PngIconMenu extends AbstractMenu {
 
@@ -545,6 +660,43 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected void injectActionNodesInternal(OrderedCollection<IMenu> actionNodes) {
           new P_ConfiguredMenus().injectMenus(actionNodes);
+        }
+      }
+
+      @Order(30.0)
+      public class StringBottomField extends AbstractStringField {
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue("this string field is on the bottom, is the menu correctly displayed?");
+        }
+
+        @Order(10.0)
+        public class StringFieldMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Click me (Menu)";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
+        }
+
+        @Order(20.0)
+        public class StringField2Menu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Another string field menu";
+          }
+
+          @Override
+          protected void execAction() throws ProcessingException {
+            MessageBoxes.createOk().header("You clicked me!").show();
+          }
         }
       }
     }
