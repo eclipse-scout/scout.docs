@@ -656,6 +656,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               protected void execAction() throws ProcessingException {
                 scrollToSelection();
               }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+              }
             }
           }
 
