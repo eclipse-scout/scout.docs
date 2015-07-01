@@ -22,9 +22,13 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.eclipse.scout.rt.platform.IgnoreBean;
 import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 
+@IgnoreBean
 public class CustomDateFormatProvider extends DateFormatProvider {
+
+  public final static int CUSTOM_MEDIUM = 101;
 
   private final Set<Locale> m_locales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
@@ -82,6 +86,10 @@ public class CustomDateFormatProvider extends DateFormatProvider {
 
   @Override
   public DateFormat getDateInstance(final int style, Locale locale) {
+    if (CUSTOM_MEDIUM == style) {
+      return createCustomMediumFormat(locale);
+    }
+
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
     if (defaultLocaleForCountry == null) {
       return null;
@@ -95,6 +103,17 @@ public class CustomDateFormatProvider extends DateFormatProvider {
         return patternBean.getDatePattern(style);
       }
     });
+  }
+
+  /**
+   * @param locale
+   * @return
+   */
+  protected DateFormat createCustomMediumFormat(Locale locale) {
+    if (Locale.ENGLISH.getLanguage().equals(locale.getLanguage())) {
+      return new SimpleDateFormat("MM/dd/yyyy", locale);
+    }
+    return new SimpleDateFormat("dd.MM.yyyy", locale);
   }
 
   @Override
