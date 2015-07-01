@@ -514,6 +514,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredSelectionTrackingEnabled() {
+          return true;
+        }
+
+        @Override
         protected boolean getConfiguredMultilineText() {
           return true;
         }
@@ -902,6 +907,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("StringField");
+        }
+
+        @Override
+        protected boolean getConfiguredSelectionTrackingEnabled() {
+          return true;
         }
 
         @Override
