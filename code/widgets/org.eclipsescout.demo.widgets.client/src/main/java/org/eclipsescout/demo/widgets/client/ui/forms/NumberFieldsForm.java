@@ -12,6 +12,7 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -26,12 +27,20 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
+import org.eclipse.scout.rt.client.ui.form.fields.numberfield.AbstractNumberField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipsescout.demo.widgets.client.ClientSession;
+import org.eclipsescout.demo.widgets.client.services.lookup.NumberFormatLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.BigIntegerInputField;
+import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigLocaleField;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.FormatField;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GetValue0Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GroupingField;
@@ -180,6 +189,10 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MinimumValueField.class);
   }
 
+  public ConfigLocaleField getConfigLocaleField() {
+    return getFieldByClass(ConfigLocaleField.class);
+  }
+
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
   }
@@ -214,6 +227,19 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   public StyledField getStyledField() {
     return getFieldByClass(StyledField.class);
+  }
+
+  public void changeLocale(AbstractNumberField field, final Locale locale) throws ProcessingException {
+    DecimalFormat oldFormat = field.getFormat();
+    DecimalFormat newFormat = BEANS.get(NumberFormatProvider.class).getNumberInstance(locale);
+
+    newFormat.setParseBigDecimal(oldFormat.isParseBigDecimal());
+    newFormat.setMinimumFractionDigits(oldFormat.getMinimumFractionDigits());
+    newFormat.setMaximumFractionDigits(oldFormat.getMaximumFractionDigits());
+    newFormat.setMaximumIntegerDigits(oldFormat.getMaximumIntegerDigits());
+    newFormat.setRoundingMode(oldFormat.getRoundingMode());
+    newFormat.setGroupingUsed(oldFormat.isGroupingUsed());
+    field.setFormat(newFormat);
   }
 
   @Order(10.0)
@@ -514,6 +540,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("IntegerFieldInput");
         }
+
       }
 
       @Order(20.0)
@@ -668,6 +695,42 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(65.0)
+      public class ConfigLocaleField extends AbstractSmartField<Locale> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Locale");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Locale>>) NumberFormatLocaleLookupCall.class;
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("SelectLocale");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          changeLocale(getInputField(), getValue());
+          changeLocale(getLongInputField(), getValue());
+          changeLocale(getBigIntegerInputField(), getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(ClientSession.get().getLocale());
+        }
+      }
+
       @Order(70.0)
       public class LongInputField extends AbstractLongField {
 
@@ -719,7 +782,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 2;
+          return 3;
         }
       }
 

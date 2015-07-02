@@ -40,7 +40,6 @@ import org.eclipse.scout.rt.platform.exception.RuntimeExceptionTranslator;
 import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.CloseButton;
@@ -663,10 +662,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(ClientSession.get().getLocale());
-
-          if (!UserAgentUtility.isRichClient()) {
-            setEnabled(false);
-          }
         }
       }
 
@@ -991,12 +986,12 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(70.0)
-    public class MonthYearFormatButton extends AbstractButton {
+    @Order(80.0)
+    public class CustomMediumFormatButton extends AbstractButton {
 
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("MonthYearFormat");
+        return TEXTS.get("CustomMediumFormat");
       }
 
       @Override

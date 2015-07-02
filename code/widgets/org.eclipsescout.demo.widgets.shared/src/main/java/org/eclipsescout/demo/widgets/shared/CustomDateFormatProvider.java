@@ -14,6 +14,7 @@ package org.eclipsescout.demo.widgets.shared;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -22,20 +23,21 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.scout.rt.platform.IgnoreBean;
+import org.eclipse.scout.commons.annotations.Replace;
 import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 
-@IgnoreBean
+@Replace
 public class CustomDateFormatProvider extends DateFormatProvider {
 
   public final static int CUSTOM_MEDIUM = 101;
 
-  private final Set<Locale> m_locales;
+  private final Set<Locale> m_customLocales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
   private final Map<Locale, PatternBean> m_localePatternMap;
+  private Locale[] m_availableLocales;
 
   public CustomDateFormatProvider() {
-    m_locales = new HashSet<Locale>();
+    m_customLocales = new HashSet<Locale>();
     m_countryDefaultLocaleMap = new HashMap<String, Locale>();
     m_localePatternMap = new HashMap<Locale, CustomDateFormatProvider.PatternBean>();
 
@@ -60,18 +62,24 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     init(new Locale("fr", "CH"), "de");
     init(new Locale("it", "CH"), "de");
 
+    // available locales
+    HashSet<Locale> availableLocales = new HashSet<Locale>();
+    availableLocales.addAll(m_customLocales);
+    availableLocales.addAll(Arrays.asList(super.getAvailableLocales()));
+    m_availableLocales = availableLocales.toArray(new Locale[availableLocales.size()]);
+
   }
 
   @Override
   public Locale[] getAvailableLocales() {
-    return m_locales.toArray(new Locale[m_locales.size()]);
+    return m_availableLocales;
   }
 
   @Override
   public DateFormat getTimeInstance(final int style, Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
     if (defaultLocaleForCountry == null) {
-      return null;
+      return super.getTimeInstance(style, locale);
     }
 
     DateFormat df = DateFormat.getTimeInstance(style, defaultLocaleForCountry);
@@ -92,7 +100,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
 
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
     if (defaultLocaleForCountry == null) {
-      return null;
+      return super.getDateInstance(style, locale);
     }
 
     DateFormat df = DateFormat.getDateInstance(style, defaultLocaleForCountry);
@@ -120,7 +128,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
   public DateFormat getDateTimeInstance(final int dateStyle, final int timeStyle, final Locale locale) {
     Locale defaultLocaleForCountry = getDefaultLocaleForCountry(locale);
     if (defaultLocaleForCountry == null) {
-      return null;
+      return super.getDateTimeInstance(dateStyle, timeStyle, locale);
     }
 
     DateFormat df = DateFormat.getDateTimeInstance(dateStyle, timeStyle, defaultLocaleForCountry);
@@ -156,7 +164,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
   }
 
   private void init(Locale locale, String primaryCountryLanguage, PatternBean patternBean) {
-    m_locales.add(locale);
+    m_customLocales.add(locale);
     Locale primaryCountryLocale = new Locale(primaryCountryLanguage, locale.getCountry());
     m_countryDefaultLocaleMap.put(primaryCountryLocale.getCountry(), primaryCountryLocale);
     if (patternBean != null) {
@@ -165,7 +173,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
   }
 
   private Locale getDefaultLocaleForCountry(Locale locale) {
-    if (!m_locales.contains(locale)) {
+    if (!m_customLocales.contains(locale)) {
       return null;
     }
 

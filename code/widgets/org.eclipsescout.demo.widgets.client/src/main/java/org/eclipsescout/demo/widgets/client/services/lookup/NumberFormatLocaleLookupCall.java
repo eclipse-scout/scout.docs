@@ -13,14 +13,14 @@ package org.eclipsescout.demo.widgets.client.services.lookup;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.util.DateFormatProvider;
+import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 
-public class DateFormatLocaleLookupCall extends AbstractLocaleLookupCall {
+public class NumberFormatLocaleLookupCall extends AbstractLocaleLookupCall {
 
   private static final long serialVersionUID = -2057181577149853634L;
 
   @Override
   protected Locale[] availableLocales() {
-    return BEANS.get(DateFormatProvider.class).getAvailableLocales();
+    return BEANS.get(NumberFormatProvider.class).getAvailableLocales();
   }
 }
