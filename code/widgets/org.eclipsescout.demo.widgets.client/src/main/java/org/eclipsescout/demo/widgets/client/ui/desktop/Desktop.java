@@ -30,8 +30,6 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
-import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
-import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -41,7 +39,6 @@ import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
-import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
   private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
@@ -70,21 +67,10 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execOpened() throws ProcessingException {
-    // outline tree
-    DefaultOutlineTreeForm treeForm = new DefaultOutlineTreeForm();
-    treeForm.setIconId(Icons.EclipseScout);
-    treeForm.startView();
-
-    //outline table
-    DefaultOutlineTableForm tableForm = new DefaultOutlineTableForm();
-    tableForm.setIconId(Icons.EclipseScout);
-    tableForm.startView();
-
     IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
     if (firstOutline != null) {
       setOutline(firstOutline);
     }
-
   }
 
   @Override

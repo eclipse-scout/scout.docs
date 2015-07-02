@@ -28,13 +28,10 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
-import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
-import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.minicrm.client.ClientSession;
 import org.eclipsescout.demo.minicrm.client.ui.desktop.outlines.StandardOutline;
-import org.eclipsescout.demo.minicrm.shared.Icons;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
   private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
@@ -60,22 +57,10 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     if (!UserAgentUtility.isDesktopDevice()) {
       return;
     }
-
-    // outline tree
-    DefaultOutlineTreeForm treeForm = new DefaultOutlineTreeForm();
-    treeForm.setIconId(Icons.VCard);
-    treeForm.startView();
-
-    //outline table
-    DefaultOutlineTableForm tableForm = new DefaultOutlineTableForm();
-    tableForm.setIconId(Icons.VCard);
-    tableForm.startView();
-
     IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
     if (firstOutline != null) {
       setOutline(firstOutline);
     }
-
   }
 
   @Order(10.0)
