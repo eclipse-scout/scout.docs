@@ -118,7 +118,12 @@ public class PublishUtility {
     for (Element element : elements) {
       String src = element.attr("src");
       if (src != null) {
+        //consider that the src attribute is relative to the inFolder:
         File inFile = new File(inFolder, src);
+        //if no file exists at this location, consider that the src attribute contains an absolute path to the image:
+        if (!inFile.exists() || !inFile.isFile()) {
+          inFile = new File(src);
+        }
         String newSrc = imgSubPath + inFile.getName();
         element.attr("src", newSrc);
         File outFile = new File(outFolder, newSrc);
