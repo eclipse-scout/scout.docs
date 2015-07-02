@@ -92,10 +92,10 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     super.execPageDetailFormChanged(oldForm, newForm);
     if (UiLayer.SWING.equals(UserAgentUtility.getCurrentUiLayer())) {
       if (oldForm != null) {
-        removeForm(oldForm);
+        hideForm(oldForm);
       }
       if (newForm != null) {
-        addForm(newForm);
+        showForm(newForm);
       }
     }
   }

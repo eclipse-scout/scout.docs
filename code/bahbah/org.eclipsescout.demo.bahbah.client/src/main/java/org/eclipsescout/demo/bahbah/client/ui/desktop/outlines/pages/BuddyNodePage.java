@@ -63,7 +63,7 @@ public class BuddyNodePage extends AbstractPageWithNodes {
   public ChatForm getChatForm() throws ProcessingException {
     if (m_form == null) {
       m_form = new ChatForm();
-      m_form.setAutoAddRemoveOnDesktop(false);
+      m_form.setShowOnStart(false);
       m_form.setUserName(ClientSession.get().getUserId());
       m_form.setBuddyName(getName());
       m_form.startNew();

@@ -140,7 +140,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
           if (CollectionUtility.hasElements(rows)) {
             IOutline outline = getOutlineColumn().getValue(CollectionUtility.firstElement(rows));
             MobileDesktopUtility.activateOutline(outline);
-            getDesktop().removeForm(MobileHomeForm.this);
+            getDesktop().hideForm(MobileHomeForm.this);
             clearSelectionDelayed();
           }
         }

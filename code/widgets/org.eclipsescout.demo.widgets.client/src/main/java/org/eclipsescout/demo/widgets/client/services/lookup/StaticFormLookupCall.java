@@ -37,7 +37,7 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
   protected IPageForm createAndStartForm(Class<? extends IPageForm> formType) throws ProcessingException {
     try {
       IPageForm form = formType.newInstance();
-      form.setAutoAddRemoveOnDesktop(false);
+      form.setShowOnStart(false);
       form.setModal(false);
       form.start();
       return form;
