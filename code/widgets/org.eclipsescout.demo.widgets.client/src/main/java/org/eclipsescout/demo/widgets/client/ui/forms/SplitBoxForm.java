@@ -10,6 +10,9 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.scout.commons.CompareUtility;
@@ -20,13 +23,16 @@ import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
+import org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox.FromField;
@@ -197,7 +203,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected double getConfiguredSplitterPosition() {
-            return 0.7;
+            return 0.6;
           }
 
           @Order(10.0)
@@ -489,8 +495,59 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             setValue(getSplitVerticalField().isSplitterEnabled());
           }
         }
-      }
 
+        @Order(30.0)
+        public class SplitterPositionBox extends AbstractSequenceBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Splitter position";
+          }
+
+          @Override
+          protected boolean getConfiguredAutoCheckFromTo() {
+            return false;
+          }
+
+          @Order(10.0)
+          public class SplitterPositionVField extends P_AbstractSplitterPositionField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "V";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Splitter position of vertical splitter";
+            }
+
+            @Override
+            protected ISplitBox getSplitBox() {
+              return getSplitVerticalField();
+            }
+          }
+
+          @Order(20.0)
+          public class SplitterPositionHField extends P_AbstractSplitterPositionField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "H";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Splitter position of horizontal splitter";
+            }
+
+            @Override
+            protected ISplitBox getSplitBox() {
+              return getSplitHorizontalField();
+            }
+          }
+        }
+      }
     }
 
     @Order(50.0)
@@ -499,5 +556,50 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
   }
 
   public class PageFormHandler extends AbstractFormHandler {
+  }
+
+  protected abstract class P_AbstractSplitterPositionField extends AbstractBigDecimalField {
+
+    protected abstract ISplitBox getSplitBox();
+
+    @Override
+    protected BigDecimal getConfiguredMinValue() {
+      return BigDecimal.ZERO;
+    }
+
+    @Override
+    protected BigDecimal getConfiguredMaxValue() {
+      return BigDecimal.ONE;
+    }
+
+    @Override
+    protected void execChangedValue() throws ProcessingException {
+      if (getValue() != null) {
+        getSplitBox().setSplitterPosition(getValue().doubleValue());
+      }
+    }
+
+    @Override
+    protected void execInitField() throws ProcessingException {
+      // set initial value
+      setValueWithoutValueChangeTriggers(getSplitBox().getSplitterPosition());
+      // add listener
+      getSplitBox().addPropertyChangeListener(ISplitBox.PROP_SPLITTER_POSITION, new PropertyChangeListener() {
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+          setValueWithoutValueChangeTriggers((double) evt.getNewValue());
+        }
+      });
+    }
+
+    protected void setValueWithoutValueChangeTriggers(double value) {
+      setValueChangeTriggerEnabled(false);
+      try {
+        setValue(BigDecimal.valueOf(value));
+      }
+      finally {
+        setValueChangeTriggerEnabled(true);
+      }
+    }
   }
 }
