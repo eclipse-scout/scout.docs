@@ -17,6 +17,8 @@ import java.util.List;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
@@ -598,6 +600,14 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           protected String getConfiguredLabel() {
             return TEXTS.get("Company");
           }
+
+          @Override
+          protected String execValidateValue(String rawValue) throws ProcessingException {
+            if (rawValue != null && rawValue.equals("error")) {
+              throw new VetoException("Value is not allowed");
+            }
+            return rawValue;
+          }
         }
 
         @Order(20.0)
@@ -606,6 +616,20 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Employees");
+          }
+
+          @Order(10.0)
+          public class MenuField extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("NotNullMenu");
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              MessageBoxes.createOk().header("click!").show();
+            }
           }
         }
 
@@ -630,6 +654,11 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           protected String getConfiguredLabel() {
             return TEXTS.get("Retrieve");
           }
+
+          @Override
+          protected boolean getConfiguredVisible() {
+            return false;
+          }
         }
       }
     }
@@ -639,7 +668,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
       @Override
       protected int getConfiguredGridColumnCount() {
-        return 1;
+        return 2;
       }
 
       @Override
@@ -716,6 +745,58 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(getIndustryField().isVisible());
+        }
+      }
+
+      @Order(70.0)
+      public class TooltipEmployeeField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("TooltipEmployee");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          String tooltip = null;
+          if (getValue()) {
+            tooltip = "This is a tooltip";
+          }
+          getEmployeesField().setTooltipText(tooltip);
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getEmployeesField().getTooltipText() != null);
+        }
+      }
+
+      @Order(80.0)
+      public class StatusVisibleIndustryField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("StatusVisibleIndustry");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getIndustryField().setStatusVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getIndustryField().isStatusVisible());
         }
       }
     }
