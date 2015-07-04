@@ -47,7 +47,7 @@ Output:
                 \---images
                         {image files}
 
-This output needs to be synced with the `org.eclipse.scout.sdk.help` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository]
+This output needs to be synced with the `org.eclipse.scout.sdk.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository]
 
 === Eclipse.org/scout website
 This task prepares pages published on the link:http://www.eclipse.org/scout[Scout Homepage]:

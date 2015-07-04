@@ -15,33 +15,12 @@
 
   <name>Eclipse Scout User Guide</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asciidoctor.maven.plugin.version>1.5.2</asciidoctor.maven.plugin.version>
-    <jruby.version>1.7.17</jruby.version>
-  </properties>
-
   <build>
     <defaultGoal>process-resources</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
-        <version>${asciidoctor.maven.plugin.version}</version>
-        <configuration>
-          <!-- Attributes common to all output formats -->
-          <sourceDirectory>src/docs</sourceDirectory>
-          <attributes>
-            <sourcedir>${project.build.sourceDirectory}</sourcedir>
-            <project-version>${project.version}</project-version>
-            <imagesdir></imagesdir>
-            <mdledir>${project.build.directory}/../../../adoc</mdledir>
-            <codedir>${project.build.directory}/../../../../code</codedir>
-            <attribute-missing>warn</attribute-missing>
-            <attribute-undefined>warn</attribute-undefined>
-            <baseDir>${project.basedir}</baseDir>
-          </attributes>
-        </configuration>
         <executions>
           <execution>
             <id>eclipse_help-to-html</id>
@@ -66,34 +45,5 @@
         </executions>
       </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.asciidoctor</groupId>
-                    <artifactId>asciidoctor-maven-plugin</artifactId>
-                    <versionRange>[1.5.2,)</versionRange>
-                    <goals>
-                      <goal>process-asciidoc</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 </project>

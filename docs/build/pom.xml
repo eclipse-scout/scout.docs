@@ -11,6 +11,12 @@
   <name>scout docs aggregator</name>
   <packaging>pom</packaging>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <asciidoctor.maven.plugin.version>1.5.2.1</asciidoctor.maven.plugin.version>
+    <jruby.version>1.7.20.1</jruby.version>
+  </properties>
+
   <modules>
     <module>book_scout_frontend</module>
     <module>book_scout_intro</module>
@@ -21,9 +27,32 @@
 
   <build>
     <defaultGoal>process-resources</defaultGoal>
-
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.asciidoctor</groupId>
+          <artifactId>asciidoctor-maven-plugin</artifactId>
+          <version>${asciidoctor.maven.plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctorj-pdf</artifactId>
+              <version>1.5.0-alpha.8</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <!-- Attributes common to all output formats -->
+            <sourceDirectory>src/docs</sourceDirectory>
+            <attributes>
+              <sourcedir>${project.build.sourceDirectory}</sourcedir>
+              <project-version>${project.version}</project-version>
+              <imagesdir></imagesdir>
+              <imgsdir>${project.build.directory}/../../../imgs</imgsdir>
+              <mdledir>${project.build.directory}/../../../adoc</mdledir>
+              <codedir>${project.build.directory}/../../../../code</codedir>
+            </attributes>
+          </configuration>
+        </plugin>
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
