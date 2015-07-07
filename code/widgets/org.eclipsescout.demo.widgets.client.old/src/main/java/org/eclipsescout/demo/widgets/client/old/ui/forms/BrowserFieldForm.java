@@ -22,11 +22,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
@@ -117,6 +118,11 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
+    @Override
+    protected void execInitField() throws ProcessingException {
+      setStatusVisible(false);
+    }
+
     @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
 
@@ -171,7 +177,12 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
-      public class LinksBox extends AbstractGroupBox {
+      public class LinksBox extends AbstractSequenceBox {
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
 
         @Order(10.0)
         public class EclipseScoutButton extends AbstractLinkButton {
@@ -239,12 +250,11 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
         }
       }
-
-      @Order(40.0)
-      public class CloseButton extends AbstractCloseButton {
-      }
     }
 
+    @Order(40.0)
+    public class CloseButton extends AbstractCloseButton {
+    }
   }
 
   public class PageFormHandler extends AbstractFormHandler {
