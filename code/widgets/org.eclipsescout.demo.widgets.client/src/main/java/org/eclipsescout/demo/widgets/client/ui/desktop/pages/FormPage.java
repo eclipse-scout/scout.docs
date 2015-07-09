@@ -45,7 +45,7 @@ public class FormPage extends AbstractPageWithNodes {
 
   @Override
   protected String getConfiguredIconId() {
-    return Icons.House;
+    return Icons.Forms;
   }
 
   @Override

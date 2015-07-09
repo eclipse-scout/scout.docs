@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -32,9 +33,9 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageField;
+import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image1Field;
+import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image2Field;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
-import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ScrollbarEnabledField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
@@ -64,16 +65,10 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the AlignedCenterField
-   */
   public AlignedCenterField getAlignedCenterField() {
     return getFieldByClass(AlignedCenterField.class);
   }
 
-  /**
-   * @return the AlignedRightField
-   */
   public AlignedRightField getAlignedRightField() {
     return getFieldByClass(AlignedRightField.class);
   }
@@ -83,9 +78,6 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DefaultField
-   */
   public DefaultField getDefaultField() {
     return getFieldByClass(DefaultField.class);
   }
@@ -98,23 +90,18 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the IconContentField
-   */
   public IconContentField getIconContentField() {
     return getFieldByClass(IconContentField.class);
   }
 
-  /**
-   * @return the ImageField
-   */
-  public ImageField getImageField() {
-    return getFieldByClass(ImageField.class);
+  public Image1Field getImage1Field() {
+    return getFieldByClass(Image1Field.class);
   }
 
-  /**
-   * @return the ImageURLField
-   */
+  public Image2Field getImage2Field() {
+    return getFieldByClass(Image2Field.class);
+  }
+
   public ImageURLField getImageURLField() {
     return getFieldByClass(ImageURLField.class);
   }
@@ -123,18 +110,8 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the SampleContentButton
-   */
   public SampleContentButton getSampleContentButton() {
     return getFieldByClass(SampleContentButton.class);
-  }
-
-  /**
-   * @return the ScrollbarEnabledField
-   */
-  public ScrollbarEnabledField getScrollbarEnabledField() {
-    return getFieldByClass(ScrollbarEnabledField.class);
   }
 
   @Order(10.0)
@@ -246,7 +223,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredImageId() {
-          return Icons.House;
+          return Icons.EclipseScout;
         }
 
         @Override
@@ -265,7 +242,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredImageId() {
-          return Icons.House;
+          return Icons.EclipseScout;
         }
 
         @Override
@@ -284,7 +261,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredImageId() {
-          return Icons.House;
+          return Icons.EclipseScout;
         }
 
         @Override
@@ -307,8 +284,15 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
+      private URL getUrl(String urlString) throws Exception {
+        if (urlString.equals(BIRD)) {
+          return ResourceBase.class.getResource(BIRD_OFFLINE);
+        }
+        return new URL((String) urlString);
+      }
+
       @Order(10.0)
-      public class ImageField extends AbstractImageField {
+      public class Image1Field extends AbstractImageField {
 
         @Override
         protected boolean getConfiguredAutoFit() {
@@ -322,7 +306,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("AutoFit");
+          return "View 1";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Image alignment: horizontally and vertically centered.";
         }
 
         @Override
@@ -332,9 +321,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-
           getImageURLField().clearErrorStatus();
-
           try {
             URL url = getUrl((String) newMasterValue);
             setImage(IOUtility.getContent(url.openStream()));
@@ -346,8 +333,58 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(15.0)
+      public class Image1ScrollbarsEnabledCheckbox extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ScrollbarEnabled");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getImage1Field().setScrollBarEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValueChangeTriggerEnabled(false);
+          try {
+            setValue(getImage1Field().isScrollBarEnabled());
+          }
+          finally {
+            setValueChangeTriggerEnabled(true);
+          }
+        }
+      }
+
+      @Order(16.0)
+      public class Image1AutoFitCheckbox extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoFit");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getImage1Field().setAutoFit(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValueChangeTriggerEnabled(false);
+          try {
+            setValue(getImage1Field().isAutoFit());
+          }
+          finally {
+            setValueChangeTriggerEnabled(true);
+          }
+        }
+      }
+
       @Order(20.0)
-      public class ScrollbarEnabledField extends AbstractImageField {
+      public class Image2Field extends AbstractImageField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -356,7 +393,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ScrollbarEnabled");
+          return "View 2";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Image alignment: bottom right";
         }
 
         @Override
@@ -370,23 +412,77 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected int getConfiguredVerticalAlignment() {
+          return 1;
+        }
+
+        @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+          getImageURLField().clearErrorStatus();
           try {
             URL url = getUrl((String) newMasterValue);
             setImage(IOUtility.getContent(url.openStream()));
           }
           catch (Exception e) {
             e.printStackTrace();
+            getImageURLField().addErrorStatus(e.getMessage());
           }
         }
       }
 
-      private URL getUrl(String urlString) throws Exception {
-        if (urlString.equals(BIRD)) {
-          return ResourceBase.class.getResource(BIRD_OFFLINE);
+      @Order(25.0)
+      public class Image2ScrollbarEnabledFieldCheckbox extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ScrollbarEnabled");
         }
 
-        return new URL((String) urlString);
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getImage2Field().setScrollBarEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValueChangeTriggerEnabled(false);
+          try {
+            setValue(getImage2Field().isScrollBarEnabled());
+          }
+          finally {
+            setValueChangeTriggerEnabled(true);
+          }
+        }
+      }
+
+      @Order(26.0)
+      public class Image2AutoFitCheckbox extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoFit");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getImage2Field().setAutoFit(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValueChangeTriggerEnabled(false);
+          try {
+            setValue(getImage2Field().isAutoFit());
+          }
+          finally {
+            setValueChangeTriggerEnabled(true);
+          }
+        }
       }
 
       @Order(30.0)
