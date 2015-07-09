@@ -16,14 +16,12 @@ import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ContextMenuForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.FileChooserFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.FormWithToolbuttonsForm;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.KeyStrokeForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.PageFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.StatusForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.TreeDNDForm;
@@ -63,11 +61,6 @@ public class FormFieldsNodePage extends AbstractPageWithNodes {
     FormPage formPage6 = new FormPage(FileChooserFieldForm.class);
     pageList.add(formPage6);
 
-    if (UserAgentUtility.isRichClient()) {
-      FormPage formPage10 = new FormPage(KeyStrokeForm.class);
-      pageList.add(formPage10);
-    }
-
     FormPage formPage16 = new FormPage(PageFieldForm.class);
     pageList.add(formPage16);
 
@@ -80,9 +73,7 @@ public class FormFieldsNodePage extends AbstractPageWithNodes {
     FormPage formPage30 = new FormPage(WrappedFormFieldForm.class);
     pageList.add(formPage30);
 
-    if (UserAgentUtility.isWebClient()) {
-      FormPage formPage31 = new FormPage(FormWithToolbuttonsForm.class);
-      pageList.add(formPage31);
-    }
+    FormPage formPage31 = new FormPage(FormWithToolbuttonsForm.class);
+    pageList.add(formPage31);
   }
 }

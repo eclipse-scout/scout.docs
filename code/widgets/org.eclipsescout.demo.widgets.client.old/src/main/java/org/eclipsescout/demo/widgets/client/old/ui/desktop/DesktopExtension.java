@@ -14,13 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines.PagesSearchFormsOutline;
 import org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines.WidgetsOutline;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ToolButton1Form;
@@ -70,11 +68,6 @@ public class DesktopExtension extends AbstractDesktopExtension {
     protected Class<ToolButton1Form> getConfiguredForm() {
       return ToolButton1Form.class;
     }
-
-    @Override
-    protected void execInitAction() throws ProcessingException {
-      setVisibleGranted(!UserAgentUtility.isWebClient());
-    }
   }
 
   @Order(20.0)
@@ -93,11 +86,6 @@ public class DesktopExtension extends AbstractDesktopExtension {
     @Override
     protected Class<ToolButton2Form> getConfiguredForm() {
       return ToolButton2Form.class;
-    }
-
-    @Override
-    protected void execInitAction() throws ProcessingException {
-      setVisibleGranted(!UserAgentUtility.isWebClient());
     }
   }
 }

@@ -94,11 +94,6 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       return TEXTS.get("FileMenu");
     }
 
-    @Override
-    protected void execInitAction() throws ProcessingException {
-      setVisibleGranted(!UserAgentUtility.isWebClient());
-    }
-
     @Order(100.0)
     public class ExitMenu extends AbstractMenu {
 
@@ -120,11 +115,6 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("ToolsMenu");
-    }
-
-    @Override
-    protected void execInitAction() throws ProcessingException {
-      setVisibleGranted(!UserAgentUtility.isWebClient());
     }
 
     @Order(10.0)
@@ -271,11 +261,6 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("HelpMenu");
-    }
-
-    @Override
-    protected void execInitAction() throws ProcessingException {
-      setVisibleGranted(!UserAgentUtility.isWebClient());
     }
 
     @Order(10.0)
