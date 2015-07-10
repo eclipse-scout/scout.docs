@@ -44,6 +44,7 @@ public class ClientSession extends AbstractClientSession {
   @Override
   protected void execLoadSession() throws ProcessingException {
     Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
+    createTunnelToServerBeans = false;
     if (!createTunnelToServerBeans) {
       logger.info("starting client without a server!");
     }
