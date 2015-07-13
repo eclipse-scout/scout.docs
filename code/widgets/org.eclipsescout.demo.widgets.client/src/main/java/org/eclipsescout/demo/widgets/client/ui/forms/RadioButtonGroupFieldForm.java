@@ -325,7 +325,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            MessageBoxes.createOk().header(TEXTS.get("RadioButtonSelected", getLabel())).body(TEXTS.get("RadioButtonExecClickAction")).show();
+            MessageBoxes.createOk().withHeader(TEXTS.get("RadioButtonSelected", getLabel())).withBody(TEXTS.get("RadioButtonExecClickAction")).show();
           }
         }
       }

@@ -838,7 +838,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execAction() throws ProcessingException {
           super.execAction();
-          MessageBoxes.createOk().header(getValue()).show();
+          MessageBoxes.createOk().withHeader(getValue()).show();
         }
 
         @Override

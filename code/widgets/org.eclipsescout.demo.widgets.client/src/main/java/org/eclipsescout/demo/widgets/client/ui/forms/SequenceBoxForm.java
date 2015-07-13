@@ -546,8 +546,8 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
               if (name.length() > 0) {
                 MessageBoxes.create().
-                header(TEXTS.get("SearchPerson", name)).
-                autoCloseMillis(2500).
+                withHeader(TEXTS.get("SearchPerson", name)).
+                withAutoCloseMillis(2500).
                 show(MessageBox.YES_OPTION);
               }
             }
@@ -623,7 +623,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() throws ProcessingException {
-              MessageBoxes.createOk().header("click!").show();
+              MessageBoxes.createOk().withHeader("click!").show();
             }
           }
         }

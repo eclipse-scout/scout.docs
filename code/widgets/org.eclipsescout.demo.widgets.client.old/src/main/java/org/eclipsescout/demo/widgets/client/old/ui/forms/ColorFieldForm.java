@@ -106,7 +106,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execAction() throws ProcessingException {
-            MessageBoxes.createOk().header("Menu").body(getClass().getSimpleName()).show();
+            MessageBoxes.createOk().withHeader("Menu").withBody(getClass().getSimpleName()).show();
           }
         }
       }

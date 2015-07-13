@@ -315,7 +315,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             String children = Integer.toString(node.getChildNodeCount());
             String leaf = Boolean.toString(node.isLeaf());
 
-            MessageBoxes.createOk().header(title + " " + TEXTS.get("NodeName", id)).body(TEXTS.get("NodeInfo", leaf, children)).show();
+            MessageBoxes.createOk().withHeader(title + " " + TEXTS.get("NodeName", id)).withBody(TEXTS.get("NodeInfo", leaf, children)).show();
           }
         }
       }

@@ -185,7 +185,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          int result = MessageBoxes.createOk().header(TEXTS.get("MessageBoxWithOkButton")).body(TEXTS.get("Lorem")).show();
+          int result = MessageBoxes.createOk().withHeader(TEXTS.get("MessageBoxWithOkButton")).withBody(TEXTS.get("Lorem")).show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -210,7 +210,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          int result = MessageBoxes.createYesNo().header(TEXTS.get("Lorem")).body("Press \"Yes\" or \"No\"").show();
+          int result = MessageBoxes.createYesNo().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\" or \"No\"").show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -235,7 +235,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          int result = MessageBoxes.createYesNoCancel().header(TEXTS.get("Lorem")).body("Press \"Yes\", \"No\" or \"Cancel\"").show();
+          int result = MessageBoxes.createYesNoCancel().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\", \"No\" or \"Cancel\"").show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -261,10 +261,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execClickAction() throws ProcessingException {
           int result = MessageBoxes.create().
-              header(TEXTS.get("Lorem")).
-              body(TEXTS.get("HiddenTextInstruction")).
-              cancelButtonText(TEXTS.get("CloseButton")).
-              hiddenText(TEXTS.get("HiddenText")).
+              withHeader(TEXTS.get("Lorem")).
+              withBody(TEXTS.get("HiddenTextInstruction")).
+              withCancelButtonText(TEXTS.get("CloseButton")).
+              withHiddenText(TEXTS.get("HiddenText")).
               show();
           getResultField().setMessageBoxResult(result);
         }
@@ -441,15 +441,15 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           int defaultReturnValue = NumberUtility.nvl(getDefaultReturnValueField().getValue(), IMessageBox.CANCEL_OPTION);
 
           int result = MessageBoxes.create().
-              header(header).
-              body(body).
-              html(html).
-              yesButtonText(yesButtonText).
-              noButtonText(noButtonText).
-              cancelButtonText(cancelButtonText).
-              hiddenText(hiddenText).
-              iconId(iconId).
-              autoCloseMillis(autoCloseMillis).
+              withHeader(header).
+              withBody(body).
+              withHtml(html).
+              withYesButtonText(yesButtonText).
+              withNoButtonText(noButtonText).
+              withCancelButtonText(cancelButtonText).
+              withHiddenText(hiddenText).
+              withIconId(iconId).
+              withAutoCloseMillis(autoCloseMillis).
               show(defaultReturnValue);
 
           getReturnValueField().setValue(result);

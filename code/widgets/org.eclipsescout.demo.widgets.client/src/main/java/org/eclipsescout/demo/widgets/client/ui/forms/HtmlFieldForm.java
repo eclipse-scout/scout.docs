@@ -237,7 +237,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execAppLinkAction(String ref) throws ProcessingException {
-        MessageBoxes.createOk().header(TEXTS.get("LocalUrlClicked")).body(TEXTS.get("Parameters") + ":\n" + ref).show();
+        MessageBoxes.createOk().withHeader(TEXTS.get("LocalUrlClicked")).withBody(TEXTS.get("Parameters") + ":\n" + ref).show();
       }
     }
 

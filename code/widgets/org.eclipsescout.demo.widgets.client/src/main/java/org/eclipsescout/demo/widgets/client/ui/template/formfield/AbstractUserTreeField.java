@@ -201,7 +201,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
 
         @Override
         public void execAction() throws ProcessingException {        	
-          MessageBoxes.createOk().header(TEXTS.get("TableMenuHeader")).body(getText()).show();
+          MessageBoxes.createOk().withHeader(TEXTS.get("TableMenuHeader")).withBody(getText()).show();
         }
 
       };
