@@ -53,6 +53,6 @@ public class SwingRayoApplication extends AbstractSwingApplication {
   }
 
   private IClientSession createClientSession() throws ProcessingException {
-    return BEANS.get(ClientSessionProvider.class).provide(ClientRunContexts.copyCurrent().userAgent(initUserAgent()));
+    return BEANS.get(ClientSessionProvider.class).provide(ClientRunContexts.copyCurrent().withUserAgent(initUserAgent()));
   }
 }

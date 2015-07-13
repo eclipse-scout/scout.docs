@@ -526,7 +526,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String execFormatValue(final Date value) {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<String>() {
             @Override
             public String call() throws Exception {
@@ -537,7 +537,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<Date>() {
             @Override
             public Date call() throws Exception {
@@ -675,7 +675,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String execFormatValue(final Date value) {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<String>() {
             @Override
             public String call() throws Exception {
@@ -686,7 +686,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<Date>() {
             @Override
             public Date call() throws Exception {
@@ -791,7 +791,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String execFormatValue(final Date value) {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<String>() {
             @Override
             public String call() throws Exception {
@@ -802,7 +802,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().locale(getConfigLocaleField().getValue());
+          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
           return runContext.call(new Callable<Date>() {
             @Override
             public Date call() throws Exception {

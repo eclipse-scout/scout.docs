@@ -18,7 +18,7 @@ public final class RunContextSnippet {
     subject.getPrincipals().add(new SimplePrincipal("john"));
     subject.setReadOnly();
 
-    RunContexts.empty().subject(subject).locale(Locale.US).run(new IRunnable() { // <2>
+    RunContexts.empty().withSubject(subject).withLocale(Locale.US).run(new IRunnable() { // <2>
 
       @Override
       public void run() throws Exception {
@@ -32,7 +32,7 @@ public final class RunContextSnippet {
 
   void snippet_copyCurrentRunContext() throws Exception {
     // tag::RunContexts.copyCurrent[]
-    RunContexts.copyCurrent().locale(Locale.US).run(new IRunnable() {
+    RunContexts.copyCurrent().withLocale(Locale.US).run(new IRunnable() {
 
       @Override
       public void run() throws Exception {

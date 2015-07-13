@@ -124,7 +124,7 @@ public final class JobManagerSnippet {
     subject.setReadOnly();
 
     // Create the RunContext to run the job on behalf.
-    RunContext runContext = RunContexts.empty().subject(subject).locale(Locale.US);
+    RunContext runContext = RunContexts.empty().withSubject(subject).withLocale(Locale.US);
 
     // Schedule the periodic action to run every 60 seconds.
     Jobs.scheduleAtFixedRate(new IRunnable() {
