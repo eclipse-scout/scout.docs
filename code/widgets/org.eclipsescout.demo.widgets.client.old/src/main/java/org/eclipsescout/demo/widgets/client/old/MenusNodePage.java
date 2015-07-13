@@ -56,8 +56,8 @@ public class MenusNodePage extends AbstractPageWithNodes {
   @Override
   protected void execInitPage() throws ProcessingException {
     MenusForm form = new MenusForm();
-    form.startPageForm();
     setDetailForm(form);
+    form.startPageForm();
   }
 
   @Order(10.0)
