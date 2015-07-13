@@ -73,7 +73,7 @@ public final class JobManagerSnippet {
     IJobManager jobManager = BEANS.get(IJobManager.class); // <1>
 
     JobInput jobInput = BEANS.get(JobInput.class); // <2>
-    jobInput.name("job-name").runContext(RunContexts.copyCurrent()); // <3>
+    jobInput.withName("job-name").withRunContext(RunContexts.copyCurrent()); // <3>
 
     jobManager.schedule(new Callable<String>() { // <4>
 
@@ -101,7 +101,7 @@ public final class JobManagerSnippet {
       public void run() throws Exception {
         // do some work
       }
-    }, Jobs.newInput(RunContexts.copyCurrent()).name("job-name")); // <3>
+    }, Jobs.newInput(RunContexts.copyCurrent()).withName("job-name")); // <3>
     // end::scheduleByFactory[]
   }
 
