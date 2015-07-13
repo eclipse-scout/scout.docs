@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
+import org.eclipse.scout.commons.TriState;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -578,8 +579,8 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected boolean getConfiguredScrollable() {
-            return true;
+          protected TriState getConfiguredScrollable() {
+            return TriState.TRUE;
           }
         }
       }

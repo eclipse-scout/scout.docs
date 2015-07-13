@@ -310,11 +310,6 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Override
-    protected boolean getConfiguredScrollable() {
-      return true;
-    }
-
     @Order(20.0)
     public class ExamplesBox extends AbstractGroupBox {
 
@@ -551,9 +546,9 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
               if (name.length() > 0) {
                 MessageBoxes.create().
-                    header(TEXTS.get("SearchPerson", name)).
-                    autoCloseMillis(2500).
-                    show(MessageBox.YES_OPTION);
+                header(TEXTS.get("SearchPerson", name)).
+                autoCloseMillis(2500).
+                show(MessageBox.YES_OPTION);
               }
             }
           }
