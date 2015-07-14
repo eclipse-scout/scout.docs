@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -59,6 +60,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.Exam
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipsescout.demo.widgets.shared.services.code.ColorsCodeType;
+import org.eclipsescout.demo.widgets.shared.services.code.EventTypeCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
@@ -221,6 +223,11 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
     @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 3;
+      }
 
       @Override
       protected String getConfiguredLabel() {
@@ -390,6 +397,82 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
           setValue(ICB9537.ID);
         }
       }
+
+      @Order(90.0)
+      public class ProposalFieldWithListContentField extends AbstractLabelField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EmptyString");
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("ProposalFieldWithListContent"));
+        }
+      }
+
+      @Order(100.0)
+      public class DefaultProposalField extends AbstractProposalField<Long> {
+
+        @Override
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+          return EventTypeCodeType.class;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Default");
+        }
+      }
+
+      @Order(110.0)
+      public class MandatoryProposalField extends AbstractProposalField<Long> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Mandatory");
+        }
+
+        @Override
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+          return EventTypeCodeType.class;
+        }
+
+        @Override
+        protected boolean getConfiguredMandatory() {
+          return true;
+        }
+      }
+
+      @Order(120)
+      public class DisabledProposalField extends AbstractProposalField<Long> {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Disabled");
+        }
+
+        @Override
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+          return EventTypeCodeType.class;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("Public"));
+        }
+      }
     }
 
     @Order(20.0)
@@ -398,6 +481,11 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Configure");
+      }
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 3;
       }
 
       @Order(10.0)
@@ -623,6 +711,16 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         protected void execInitField() throws ProcessingException {
           setValue(getTreeSmartField().isBrowseAutoExpandAll());
         }
+      }
+
+      @Order(120.0)
+      public class PlaceholderField extends AbstractPlaceholderField {
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 6;
+        }
+
       }
     }
 
