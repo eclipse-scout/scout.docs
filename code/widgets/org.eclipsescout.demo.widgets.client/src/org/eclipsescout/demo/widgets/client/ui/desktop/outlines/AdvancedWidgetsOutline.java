@@ -18,9 +18,11 @@ import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensib
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.CalendarFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
@@ -56,6 +58,9 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
     FormPage tableFieldPage = new FormPage(TableFieldForm.class);
     pageList.add(tableFieldPage);
 
+    FormPage calendarFieldPage = new FormPage(CalendarFieldForm.class);
+    pageList.add(calendarFieldPage);
+
     FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
     pageList.add(imageFieldPage);
 
@@ -67,6 +72,9 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage browserFieldPage = new FormPage(BrowserFieldForm.class);
     pageList.add(browserFieldPage);
+
+    FormPage pageFieldPage = new FormPage(PageFieldForm.class);
+    pageList.add(pageFieldPage);
 
     FormPage wrappedFormFieldPage = new FormPage(WrappedFormFieldForm.class);
     pageList.add(wrappedFormFieldPage);

@@ -19,20 +19,22 @@ import org.eclipsescout.contacts.shared.ui.desktop.outlines.ContactsTablePageDat
 /**
  * @author mzi
  */
-public class StandardOutlineServiceExtension extends StandardOutlineService {
+public class StandardOutlineServiceExtension extends StandardOutlineService { // <1>
 
   @Override
   public ContactsTablePageData getContactsTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException {
     ContactsTablePageData pageData = super.getContactsTableData(filter, pageCompanyId);
+
+    // load data for additional column
     addEventCounts(pageData);
 
     return pageData;
   }
 
-  private void addEventCounts(ContactsTablePageData pageData) throws ProcessingException {
+  private void addEventCounts(ContactsTablePageData pageData) throws ProcessingException { // <2>
     // get event counts
     // background info: https://www.eclipse.org/forums/index.php/t/310526/
-    BeanArrayHolder<EventCounterBean> arrayHolder = new BeanArrayHolder<>(EventCounterBean.class);
+    BeanArrayHolder<EventCounterBean> arrayHolder = new BeanArrayHolder<>(EventCounterBean.class); // <3>
     SQL.selectInto(TEXTS.get("SqlContactPageEventCounts"), new NVPair("h", arrayHolder));
 
     // create map for event counts

@@ -501,7 +501,7 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(70.0)
+    @Order(30.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

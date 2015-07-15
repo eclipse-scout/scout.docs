@@ -15,17 +15,14 @@ import org.eclipsescout.contacts.shared.premium.ui.desktop.outlines.ContactsTabl
 /**
  * @author mzi
  */
-@Data(ContactsTableDataExtension.class)
-public class ContactsTableExtension extends AbstractTableExtension<ContactsTablePage.Table> {
+@Data(ContactsTableDataExtension.class) // <1>
+public class ContactsTableExtension extends AbstractTableExtension<ContactsTablePage.Table> { // <2>
 
-  /**
-   * @param owner
-   */
   public ContactsTableExtension(Table owner) {
     super(owner);
   }
 
-  @Order(10000.0)
+  @Order(10000.0) // <3>
   public class EventsColumn extends AbstractLongColumn {
 
     @Override

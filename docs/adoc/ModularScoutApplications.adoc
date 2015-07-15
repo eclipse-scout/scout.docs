@@ -17,53 +17,191 @@ ifndef::mdledir[:mdledir: .]
 [[cha-modular_apps]]
 == Modular Scout Applications
 
-Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. 
-While many successful frameworks support the development of persistence layers and business services, implementing front-ends in a simple and clean way remains a challenge. 
-This is exactly where Eclipse Scout fits in. 
+A clean application architecture can help to keep an evolving enterprise applications healthy over many years. 
+For an architecture to be sustainable, we need good criteria to define module boundaries and have clear dependencies between these modules. 
+As criteria we can take inspiration from both the technical and the business perspective. 
 
-* https://wiki.eclipse.org/Scout/Concepts/Extensibility
+Let us first consider the technical perspective. 
+A standard approach for a technical modularization is to use a layered architecture. 
+And with individual plugins for the server, the client, the shared part and the rendering component even the Scout "Helloworld" application features such an architecture.
+As we have already covered the individual layers of the "Contacts" applications, the reminder of this section will focus slices, an additional way to modularize applications that is orthogonal to layers. 
 
 [[sec-layers_slices]]
-=== Layers and Slices
+=== Business Slices
 
-Lorem Ipsum
+Large enterprise applications such as ERP systems are often used by different groups of users across many individual departments of an organization. 
+Certain aspects of the application are common for all users but often, individual user groups work with their individual parts of the application. 
+In that case module boundaries can also be derived from the usage and the various user groups of an application. 
+
+For illustration purposes let us consider a sales department and a customer support department. 
+The sales people are concerned about timely offers and closing a deal while the employees in the customer support need to know about the state of open issues and previous experience of the customer with the product. 
+As we can see, both user groups care about client data, but the sales people deal with an offering process and those from the customer care teams will most likely work with a ticketing process.
+
+From these observations we can derive module boundaries from a business perspective. 
+We can imagine a common core application that provides ways to deal with customer data. 
+For the sales department a separate module would make sense that deals with offers and has a dependency to the core application. 
+And an additional module possibly makes sense to deal with the ticketing for the customer care. 
+This module would have a dependency to the core application too, but the sales module and the customer care module would not depend on each other. 
+
+Such business modules or slices and are defined independently of a technical layering.
+Certain aspects need to be implemented on the client and other aspects on the server side.
+This is why slices represent a modularization that is orthogonal to the layering of an application.
+
+In addition to having a layered architecture Scout applications can additionally be modularized into a core application and several slices.
+The following section explains how to add slices to an existing Scout application and how fill those additional modules with content. 
 
 [[sec-adding_slice]]
-=== Adding a Slice
+=== Adding a Slice to a Scout Application
 
-Lorem Ipsum
+Application slices always need an existing "host" application they depend on and cannot exist on their own. 
+A slice can then extend the functionality of the host application and consists of a client, a server and a shared plugin. 
+
+In the text below we will add a slice to the Scout "Contacts" application using the tooling provided by the Scout SDK.
+As an example use case we assume that we need a "Premium" version of the contacts application that can be used to manage and schedule events and to track the  participants of the events. 
+
+include::SdkWizardNewBundles.adoc[]
 
 [[sec-slice_add_elements]]
-=== Adding Scout Elements to a Slice
+=== Adding Scout Components to a Slice
 
-* UI Elements: Outlines, Pages, Forms, ...
-* Texts, Icons, Codes, Permissions, ..
-* Services and Lookup Calls
+Adding Scout components to an application slice works exactly the same way as adding components to the core application. 
+This implies that a slice can hold all necessary elements to define the desired functionality. 
+In addition, all elements of the depending application part (usually the core application) are available in the slice as well. 
 
-Lorem Ipsum
+In our "Premium" use case of the "Contacts" application we have added an "Event Management" outline that holds a single page for the events to be managed. 
+This "Events" page can then be used to add and change events with an "Event" form as shown in <<img-extensibility_outline_page_form>>.
 
-=== Contributing Pages
+[[img-extensibility_outline_page_form, Figure 000]]
+.The premium slice of the "Contacts" application includes an "Event Management" outline with an "Events" page and an "Event" form. 
+image::{imgsdir}/extensibility_outline_page_form.png[]
 
-Lorem Ipsum
+Outlines and top level menus that are defined in a slice need to be registered in a desktop extension that extends the [java]_AbstractDesktopExtension_.
+The desktop extension is added automatically when creating a slice with the Scout SDK. 
+For the premium slice, the implementation of this desktop extension is provided in <<lst-contacts.client.desktopextension>>.
+
+[[lst-contacts.client.desktopextension, Listing: DesktopExtension]]
+[source,java]  
+.The [java]+DesktopExtension+ class of the "Premium" slice only registers the [java]+EventManagementOutline+ with its view button.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/ui/desktop/DesktopExtension.java[tags=ModularScoutApps.DesktopExtension]
+----
+
+<1> The registration of the [java]_EventManagementOutline_.
+<2> The provided ordering of the view button for the event management outline lets the outline appear after the standard outline.
+
+The registration of the desktop extension itself is made in the [file]+plugin.xml+ file of the client plugin of the premium slice. 
+For this, the extension point [java]_org.eclipse.scout.rt.extension.client.desktopExtensions_ is used as shown in <<lst-contacts.client.premium.plugin>>.
+
+[[lst-contacts.client.premium.plugin, Listing: plugin.xml]]
+[source,xml]  
+.Extract of the premium client's [file]+plugin.xml+ file.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/plugin.xml[lines=1..3;29..-1]
+----
+
+The purpose of the extension point [java]_org.eclipse.scout.rt.extension.client.pages_ also shown in <<lst-contacts.client.premium.plugin>> is explained in the following section.
+
+=== Contributing Pages to Core Outlines
+
+Pages that are defined in a slice can not only be used in an outline defined in the slice itself but also contributed to an outline tree of the core application.
+This mechanism allows to change the appearance of the core application without having to modify the core itself.
+
+In <<lst-contacts.client.premium.plugin>> two page contributions for the event page are made.  
+The first contribution is made directly to the [java]_StandardOutline_ below the company page.  
+The second contribution of the event page is made below the [java]_CompanyDetailsNodePage_.  
+In both cases, the position to insert the contributed page into the tree is specified with the [java]_order_ attribute. 
+The result of this page contribution to the standard outline is shown in <<img-extensibility_page_contribution>>.
+
+[[img-extensibility_page_contribution, Figure 000]]
+.The events page defined in the premium slice is injected twice in the standard outline. 
+image::{imgsdir}/extensibility_page_contribution.png[]
 
 == Extension Support
 
-Sometimes, just adding more functionality and UI components in a slice is not enough. 
-For example we would like to extend an existing form in the core application by a new field, add a column to an existing page or change the behaviour of an existing class. 
-To implement such requirements, the simplest approach is to directly change the code in the core application. 
-However, in a setup with a large amount of slices this approach leads to an ever growing core application that becomes less maintainable over time. 
+The Scout extension support is very useful when building products that need to be tailored to many different clients. 
+Instead of changing the products core code for each client, we adapt the product using the extension support of the Scout framework in a customer specific slice.
+This allows us to add new form fields to existing forms, extend table pages with additional columns, add menu entries to sub menus of the application and also change the behaviour of the product where necessary. 
 
-The extension support of Scout provides a mechanism that allows to implement extensions and changes to target components without the need of modifying the source code of the dependency itself. 
-To support this mechanism, the Scout extension registry and Scout extension classes are available in the Scout framework. 
+To support this mechanism, two elements are provided by the Scout framework:
 
-For extending UI components and DTOs no Scout SDK support is available so far. 
-This means that in the text below we will discuss the concepts in the Java source code directly. 
+* Abstract UI extension classes to modify existing UI components and their associated DTO
+* An extension registry service to register all modifications defined for an application
+
+In the following sections we first explain specific use cases involving the UI extension classes and show how to extend menus, form fields and table pages using the extension classes. 
+To illustrate the concepts we use the corresponding features of the "Premium" Slice of the Scout "Contacts" application. 
+
+Then, the extension registry is introduced. 
+In this part we also provide a mechanism that ensures that the registration happens early in the startup sequence and includes the extensions of all available slices. 
+
+=== Extension Mechanism
+
+Extensions contain modifications to an extensible target class that implements the [java]_org.eclipse.scout.rt.shared.extension.IExtensibleObject_ interface. 
+For each extensible class a matching extension class is provided by the Scout framework.  
+Examples are pairs of classes such as [java]_AbstractStringField_ and [java]_AbstractStringFieldExtension_ as well as [java]_AbstractCodeType_ and [java]_AbstractCodeTypeExtension_.
+Target classes can be all that are [java]_instanceof_ those extensible elements.
+This means an AbstractStringFieldExtension can be applied to AbstractStringField and all child classes.
+
+The possible modifications cover modification of the behaviour of the Scout classes and adding additional Scout components to composite UI elements. 
+Changing the behaviour of the target class is possible for the [java]_exec_ methods that are defined in the extension classes. 
+Those [java]_exec_ methods have the same signature except that they have one more input parameter. This allows the interception of the given Scout operation and execute your own code. 
+It is then your decision if you call the original code or completely replace it. 
+To achieve this the chain pattern is used: All extensions for a target class are called as part of a chain. 
+
+To illustrate the changing of the behaviour of an existing UI component we discuss a first simple example involving the first name field of the contact form. 
+When creating a new contact, let us set the default value of the first name field to "Alice". 
+For this we need to change the behaviour of the [java]_execInit_ method of the first name field.
+As the [java]_FirstNameField_ of the contact form is an [java]_AbstractStringField_ we first need define a new class that makes use of the [java]_AbstractStringFieldExtension_ as shown in <<lst-contacts.client.fieldextension>>.
+
+[[lst-contacts.client.fieldextension, Listing: FirstNameFieldExtension]]
+[source,java]  
+.The [java]+FirstNameFieldExtension+ changes the behaviour of the [java]_execInit_ method of the owner class.
+---- 
+public class FirstNameFieldExtension 
+  extends AbstractStringFieldExtension<FirstNameField> // <1>
+{
+ 
+  public FirstNameFieldExtension(FirstNameField owner) {
+    super(owner);
+  }
+ 
+  @Override
+  public void execInitField(ExecInitChain chain) {
+    chain.execInitField(); // <2>
+    getOwner().setValue("Alice"); <3>
+  }
+}
+----
+
+<1> Use the appropriate extension class using the desired target component
+<2> Call the original exec init first
+<3> Overwrite the field value
+
+The necessary registration of the extension classes is omitted here and will be discussed in section <<sec-slice_extension_registration>>.
+
+Extensions not only cover the changing of the behaviour of application components but also allow add new elements to existing container elements. 
+Using this feature, code types defined in the core application can be amended using this extension mechanism. 
+
+In the following sections we will provide specific examples for extending the UI of the core application. 
+Specifically, we consider adding menu entries to parent menus, adding form fields to composite fields and adding columns to existing tables. 
 
 === Extending Menus
 
-A simple example to start with
+Let us first look at the extension of the menu tree of an application. 
+The "Contacts" application already has a "File" menu with a "New" sub-menu to create new contacts and companies.
+This sub-menu should also offer the possibility to create new events and have a "Event ..." entry as shown in <<img-extensibility-menu>>.
 
-[[lst-contacts.client.menuextension, Listing of a [java]+NewMenu+ extension]]
+[[img-extensibility-menu, Figure: Extending the menu tree]]
+.The applications menu tree is extended with the new "Event" menu.
+image::{imgsdir}/extensibility_menu_new_event.png[]
+
+The simples option is to add an "Event ..." menu entry in the core application itself. 
+Using the Scout extension Support we also have the option to add such a menu from within the "Premium" slice without the need to change the Contacts core application itself.
+
+For this we make use of the AbstractMenuExtension class as shown in <<lst-contacts.client.menuextension>>. 
+Selecting [java]+NewMenu+ as the parent class of the menu extsion allows to add additional sub-menus. 
+In our case we only add the menu "Event ..." that is defined by the inner class [java]+EventMenu+.
+
+[[lst-contacts.client.menuextension, Listing: AbstractMenuExtension example]]
 [source,java]  
 .A [java]+EventMenu+ extending the core applications [java]+NewMenu+
 ---- 
@@ -71,27 +209,60 @@ include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/ecl
 ----
 
 <1> The parameter [java]+NewMenu+ defines the parent for the menu components of the menu extension.
-<2> The contained menus are implemented as ordinary Scout menus. The provided ordering needs to match the desired location among the other elements.
+<2> The provided ordering needs to match the desired location among the other elements.
 
-=== Extending Forms and Form Fields
+Inside of a menu extension, adding additional menus works exactly the same way as when these menus are defined in the menu tree of the core application. 
+To make the menu appear at the right location just make sure that its ordering value is synchronized with the values defined in the core application. 
+Using value 3000 makes the "Event ..." menu appear after the menu "Company ..." that is defined in the core application and has an ordering value of 2000.
 
-Lorem Ipsum
+=== Extending Form Fields
 
-[[lst-contacts.client.formExtension, Listing of a form extension]]
+As an example, we add an "Events" tab box to contact form as shown in <<img-extensibility-formfield>>.
+This tab box shows all the events the person is attending or plans to attend. 
+
+[[img-extensibility-formfield, Figure: Extending a form with a tab box]]
+.The applications contact form is extended with the "Events" tab box.
+image::{imgsdir}/extensibility_formfield_events.png[]
+
+The mechanism to add form fields to an existing form works the same way as extending menus.
+Instead of extending an existing menu entry, a composite field of the existing form is extended. 
+This works on every level of the form as all form fields are contained in a parent composite field. 
+On the top level of a form the group box [java]+MainBox+ represents this composite field.
+
+To extend the [java]+DetailsBox+ of the contact application we can extend the [java]+AbstractTabBoxExtension+ as shown in <<lst-contacts.client.formExtension>>.
+In this case we select the [java]+DetailsBox+ as the parent field and add an additional tab box by adding [java]+EventBox+ as an inner class. 
+
+[[lst-contacts.client.formExtension, Listing: AbstractTabBoxExtension example]]
 [source,java]  
 .Adding a tab box to the details box of the [java]+ContactForm+.  
 ---- 
 include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/ui/forms/ContactFormTabExtension.java[lines=24..41;159..162]
 ----
 
-<1> Adding the [java]+@Data+ annotation to the form extension lets the Scout SDK create the necessary DTO extension.
+<1> The [java]+@Data+ annotation lets the Scout SDK create the necessary DTO extension.
 <2> The container to be extended is defined as the parameter to the [java]+AbstractTabBoxExtension+.
 <3> The contained UI components are implemented as normal Scout components.
 <4> Content omitted.
 
+As in the case of the menu extension we need to specify a suitable value for the ordering annotation to make the additional tab appear in the desired place. 
+The actual event table with its columns is omitted in listing <<lst-contacts.client.formExtension>> as it is implemented as a normal Scout component.
+
+However, extending an existing form by adding new form fields and having a corresponding DTO is only half the battle. 
+In order to make use of the additional fields the backend service that creates, loads and saves the corresponding data needs to be extended as well. 
+This is the topic of the next section. 	
+
 === Loading additional Form Data on the Server
 
-[[lst-contacts.server.loadFormDataExtension, Listing of loading data into the DTO extension]]
+This section explains one possible way to process the data of an extended form. 
+The goal of the presented approach is to only implement the logic for the extended DTO and to reuse the existing form service for the data of the original form.
+This approach has the advantage that our code remains valid in many cases, even when the core application gets updated.   
+
+To achieve this behaviour we use the fact that the form handler typically accesses the desired service via a service interface. 
+The actual service implementation is then determined on the Scout server at runtime by just picking the service with the highest ranking that implements the desired service interface. 
+
+In the case of the "Premium" slice of the "Contacts" application we can extend the existing [java]+ContactService+ as shown in <<lst-contacts.server.loadFormDataExtension>>. 
+
+[[lst-contacts.server.loadFormDataExtension, Listing: Loading data into the DTO extension]]
 [source,java]  
 .Loading the additional data for the events tab of the contact form in [java]+ContactServiceExtension+
 ---- 
@@ -103,27 +274,79 @@ include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/src/org/ecl
 <3> Get a reference to the DTO extension defined in the premium slice.
 <4> Select the additional data into the DTO extension.
 
-Registering of ContactServiceExtension  with a higher priority than ContactService.
+Registering of ContactServiceExtension needs to be done with a higher priority than ContactService as shown in <<lst-contacts.server.plugin-xml>>.
 
-Warning: This simple implementation is working fine if we do not have several slices each extending the contact form. 
-Question: What to do, if several independent slices need to extend the contact form
+[[lst-contacts.server.plugin-xml, Listing: Service registration in the plugin.xml]]
+[source,xml]  
+.Registration of the [java]+ContactServiceExtension+ with a higher ranking in the premium server plugin.
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/plugin.xml[lines=1..6;28..36]
+----
+
+Warning: This simple implementation is working fine if only a single slice is extending the contact form. 
+In case several slices want to extend the contact form a more sophisticated approach is necessary.
+
+A possible approach could work with a [java]+IContactServiceExtension+ service interface defined in the core application. 
+At the end of each service methods all available services implementing the [java]+IContactServiceExtension+ would then be asked to do additional processing. Individual slices that extend the contact form could then provide their own implementations for this service interface and process the data of their individual extensions. 
 
 === Extending Table Pages and Tables
 
-Lorem Ipsum
+As an example for the extension of a table the contact table page of of the "Contacts" is extended with an "Events" column as shown in <<img-extensibility-table>>. 
+
+[[img-extensibility-table, Figure: Extending a table page]]
+.The contact table page is extended with the new "Events" column.
+image::{imgsdir}/extensibility_tablepage.png[]
+
+Extending table pages and tables works as in the cases discussed above. 
+To extend a table the [java]+AbstractTableExtension+ class can be extended by specifying the owner table as shown in <<lst-contacts.client.pageExtension>>.
+
+[[lst-contacts.client.pageExtension, Listing: ContactsTableExtension example]]
+[source,java]  
+.Adding a column to count events to the [java]+ContactsTablePage+.  
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/eclipsescout/contacts/client/premium/ui/desktop/outlines/ContactsTableExtension.java[lines=18..-1]
+----
+
+<1> The @Data annotation lets the Scout SDK create the necessary DTO extension.
+<2> The table to be extended is defined as the table defined in the contacts table page.
+<3> Add a simple long column with an ordering that puts the column at the end of the table.
+
+In the example above we have just added a column to the table of the table page. 
+The same class [java]+ContactsTableExtension+ could also be used to add context menu entries for this table page. 
+
+As in the case of the form field extension, just adding columns to the user interface is not enough. 
+The cells of the additional columns need to be populated with values on the server side.
+
+=== Loading additional Page Data on the Server
+
+To load the additional data defined by extended table pages into the page data objects we can reuse the mechanism chosen for the form data extensions. 
+By extending the service of the core application we first load the core data using [java]+super.getContactsTableData+.
+Then, the data for the additional "Events" column is added to the page data in method [java]+addEventCounts+ as shown in <<lst-contacts.server.loadPageDataExtension>>.
+
+[[lst-contacts.server.loadPageDataExtension, Listing: Loading data into the page data extension]]
+[source,java]  
+.Loading the additional page data in the [java]+StandardOutlineServiceExtension+
+---- 
+include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/src/org/eclipsescout/contacts/server/premium/services/StandardOutlineServiceExtension.java[lines=22..-1]
+----
+
+<1> Extending the corresponding service of the core application
+<2> The only assumption made here is the that the [java]+ContactId+ is the primary key of the contacts page.
+<3> The [java]+EventCounterBean+ is a simplest POJO having only the two attributes ContactId and Events.
+
+To ensure that loading table page data is actually using [java]+StandardOutlineServiceExtension+ we have to register this service in the plugin.xml file of the premium server plugin with a ranking that is higher than the ranking of the [java]+StandardOutlineService+. 
 
 [[sec-slice_extension_registration]]
 === Registration of Extensions
 
-To be able to use extensions contributed by any slice, the core application needs to be aware of the extensions. 
-For this purpose, Scout provides an extension registry that is made available through a service implementing the [java]+IExtensionRegistry+ interface.
-
+To register UI and DTO extensions Scout provides an extension registry that is made available through a service that implementings the [java]+IExtensionRegistry+ interface. 
+This service registry is running in the core application and can therefore be used by all application slices to register their extensions. 
 Obviously, UI extensions need to be registered in the Scout client application and DTO extensions need to be registered on both the client and the server application. 
-The best time for registration of extensions is at startup time of the application. 
+
+The best time for the registration of extensions is at startup time of the application. 
 The recommended way to implement such a behaviour in Scout is to create a startup service in each of the slices that need such an initialization. 
 The core client and server application can then go through all available services and call their init method. 
 As we have to register both UI and DTO extension on the client side but only DTO on the server side it makes sense to define individual interfaces for the client and the server modules. 
-
 For the contacts application we choose to name these interfaces [java]+IClientStartupService+ and [java]+IServerStartupService+. 
 Both interfaces only require the implementation of an [java]+init+ method.
 
@@ -145,7 +368,7 @@ include::{codedir}/contacts/org.eclipsescout.contacts.client.premium/src/org/ecl
 To make sure, that the UI is aware of all available extensions before the UI is rendered on the screen we need to register the extensions early enough. 
 In the startup process of the client application we can add the registration in method [java]+execLoadSession+ in the [java]+ClientSession+ class as shown in <<lst-contacts.client.callingStartupservice>>.
 
-[[lst-contacts.client.callingStartupservice, Listing initalizing of the ClientStartupService ]]
+[[lst-contacts.client.callingStartupservice, Listing: ClientStartupService initialization]]
 [source,java]  
 .Calling of the init method of all client startup services during session loading of the core client application.
 ---- 
@@ -161,7 +384,7 @@ The [java]+init+ method of the [java]+PremiumServerStartupService+ is provided i
 As in the case of the premium client startup service the exact same DTO extensions are registered. 
 In addition the database tables for the premium slice are created if they do not yet exist.
 
-[[lst-contacts.server.startupservice, Listing initializing of the ServerStartupService ]]
+[[lst-contacts.server.startupservice, Listing: ServerStartupService initialization]]
 [source,java]  
 .Registration of the DTO extension in the [java]+init+ method of the [java]+PremiumServerStartupService+.
 ---- 
@@ -171,9 +394,9 @@ include::{codedir}/contacts/org.eclipsescout.contacts.server.premium/src/org/ecl
 A good opportunity to call the startup services in the server application is in an install job.
 This job can be created and executed in the [java]+start+ method of the [java]+ServerApplication+ as shown in <<lst-contacts.server.callingStartupservice>>.
 
-[[lst-contacts.server.callingStartupservice, Listing initalizing of the ServerStartupService ]]
+[[lst-contacts.server.callingStartupservice, Listing: ServerApplication start method]]
 [source,java]  
-.Calling of the init method of all startup services during the startup of the server application.
+.The [java]+start+ method of the [java]+ServerApplication+.
 ---- 
 include::{codedir}/contacts/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[tags=ModularScoutApps.startServerApplication]
 ----

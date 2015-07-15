@@ -36,8 +36,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.D
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.FileTableField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox.MonthDetailsBox;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTable.AddMenu;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
-import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.AddMenu;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonthsBox;
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
@@ -243,6 +243,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            getTable().addSampleRow();
           }
         }
 

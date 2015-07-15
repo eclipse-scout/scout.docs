@@ -161,7 +161,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(20.0)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -259,7 +259,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(30.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

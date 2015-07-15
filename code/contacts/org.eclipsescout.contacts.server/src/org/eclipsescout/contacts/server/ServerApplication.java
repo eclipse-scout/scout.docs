@@ -42,6 +42,7 @@ public class ServerApplication implements IApplication {
       @Override
       public IStatus run(IProgressMonitor monitor) {
         try {
+          // Call all startup services to collect all available extensions
           for (IServerStartupService service : SERVICES.getServices(IServerStartupService.class)) {
             service.init();
           }

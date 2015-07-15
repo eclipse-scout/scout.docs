@@ -18,18 +18,14 @@ import java.util.Date;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
-import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
-import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox.FromField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.CloseButton;
@@ -39,14 +35,15 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.Exampl
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.PreviewBox.PreviewField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.ModifiedField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.NameField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.ReadOnlyField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.SizeField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox.FileTableField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.FieldVisibilityBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.FieldVisibilityBox.Placeholder1Field;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileDetailsBox;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileDetailsBox.ModifiedField;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileDetailsBox.NameField;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileDetailsBox.ReadOnlyField;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileDetailsBox.SizeField;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
@@ -116,16 +113,20 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
   /**
    * @return the ModifiedField
+   * @deprecated Use {@link #getDetailsBox()#getModifiedField()}
    */
+  @Deprecated
   public ModifiedField getModifiedField() {
-    return getFieldByClass(ModifiedField.class);
+    return getDetailsBox().getModifiedField();
   }
 
   /**
    * @return the NameField
+   * @deprecated Use {@link #getDetailsBox()#getNameField()}
    */
+  @Deprecated
   public NameField getNameField() {
-    return getFieldByClass(NameField.class);
+    return getDetailsBox().getNameField();
   }
 
   /**
@@ -151,16 +152,20 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
   /**
    * @return the ReadOnlyField
+   * @deprecated Use {@link #getDetailsBox()#getReadOnlyField()}
    */
+  @Deprecated
   public ReadOnlyField getReadOnlyField() {
-    return getFieldByClass(ReadOnlyField.class);
+    return getDetailsBox().getReadOnlyField();
   }
 
   /**
    * @return the SizeField
+   * @deprecated Use {@link #getDetailsBox()#getSizeField()}
    */
+  @Deprecated
   public SizeField getSizeField() {
-    return getFieldByClass(SizeField.class);
+    return getDetailsBox().getSizeField();
   }
 
   /**
@@ -241,43 +246,25 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execInitField() throws ProcessingException {
-                super.execInitField();
-
-                for (IColumn c : getTable().getColumns()) {
-                  if (c instanceof AbstractFileTableField.Table.ReadOnlyColumn || c instanceof AbstractFileTableField.Table.DateModifiedColumn) {
-                    c.setVisible(false);
-                  }
-                }
+                getTable().addSampleRow();
+                getTable().getDateModifiedColumn().setVisible(false);
+                getTable().getReadOnlyColumn().setVisible(false);
               }
 
               @Override
-              protected void execFileRowClick(File file) throws ProcessingException {
+              protected void execFileRowClick(File file) {
                 reloadPreview(file);
                 reloadDetails(file);
               }
 
-              private byte[] getFileContent(File file) throws ProcessingException {
-                try {
-                  return IOUtility.getContent(new FileInputStream(file));
-                }
-                catch (FileNotFoundException e) {
-                  throw new ProcessingException("File not found:", e);
-                }
-              }
-
-              private boolean isImage(File file) {
-                String ext = IOUtility.getFileExtension(file.getName()).toLowerCase();
-
-                if (ext.equals("jpg")) return true;
-                if (ext.equals("jpeg")) return true;
-                if (ext.equals("png")) return true;
-
-                return false;
-              }
-
-              private void reloadPreview(File file) throws ProcessingException {
+              private void reloadPreview(File file) {
                 if (isImage(file)) {
-                  getPreviewField().setImage(getFileContent(file));
+                  try {
+                    getPreviewField().setImage(getFileContent(file));
+                  }
+                  catch (ProcessingException e) {
+                    e.printStackTrace();
+                  }
                 }
                 else {
                   getPreviewField().setImage(null);
@@ -285,70 +272,37 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
 
               private void reloadDetails(File file) {
-                getNameField().setValue(file.getName());
-                getSizeField().setValue(file.length());
-                getModifiedField().setValue(new Date(file.lastModified()));
-                getReadOnlyField().setValue(!file.canWrite());
+                DetailsBox d = getDetailsBox();
+                d.getNameField().setValue(file.getName());
+                d.getSizeField().setValue(file.length());
+                d.getModifiedField().setValue(new Date(file.lastModified()));
+                d.getReadOnlyField().setValue(!file.canWrite());
               }
             }
           }
 
+          private boolean isImage(File file) {
+            String ext = IOUtility.getFileExtension(file.getName()).toLowerCase();
+
+            if (ext.equals("jpg")) return true;
+            if (ext.equals("jpeg")) return true;
+            if (ext.equals("png")) return true;
+
+            return false;
+          }
+
+          private byte[] getFileContent(File file) throws ProcessingException {
+            try {
+              return IOUtility.getContent(new FileInputStream(file));
+            }
+            catch (FileNotFoundException e) {
+              throw new ProcessingException("File not found:", e);
+            }
+          }
+
           @Order(20.0)
-          public class DetailsBox extends AbstractGroupBox {
+          public class DetailsBox extends AbstractFileDetailsBox {
 
-            @Override
-            protected int getConfiguredGridColumnCount() {
-              return 1;
-            }
-
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("Details");
-            }
-
-            @Override
-            protected void execInitField() throws ProcessingException {
-              getNameField().setEnabled(false);
-              getSizeField().setEnabled(false);
-              getModifiedField().setEnabled(false);
-              getReadOnlyField().setEnabled(false);
-            }
-
-            @Order(10.0)
-            public class NameField extends AbstractStringField {
-
-              @Override
-              protected String getConfiguredLabel() {
-                return TEXTS.get("Name");
-              }
-            }
-
-            @Order(20.0)
-            public class SizeField extends AbstractLongField {
-
-              @Override
-              protected String getConfiguredLabel() {
-                return TEXTS.get("SizeInBytes");
-              }
-            }
-
-            @Order(40.0)
-            public class ModifiedField extends AbstractDateTimeField {
-
-              @Override
-              protected String getConfiguredLabel() {
-                return TEXTS.get("Modified");
-              }
-            }
-
-            @Order(50.0)
-            public class ReadOnlyField extends AbstractCheckBox {
-
-              @Override
-              protected String getConfiguredLabel() {
-                return TEXTS.get("ReadOnly");
-              }
-            }
           }
         }
 

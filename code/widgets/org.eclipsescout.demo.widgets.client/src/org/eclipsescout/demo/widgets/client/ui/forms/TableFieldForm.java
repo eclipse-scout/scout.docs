@@ -223,6 +223,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         protected String getConfiguredTooltipText() {
           return TEXTS.get("TableContextMenus");
         }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          getTable().addSampleRow();
+        }
       }
     }
 

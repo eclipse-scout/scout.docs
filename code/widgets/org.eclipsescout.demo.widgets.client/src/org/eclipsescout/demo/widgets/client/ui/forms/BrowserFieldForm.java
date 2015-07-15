@@ -27,9 +27,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
-import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiagButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
@@ -239,10 +239,10 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
         }
       }
+    }
 
-      @Order(40.0)
-      public class CloseButton extends AbstractCloseButton {
-      }
+    @Order(30.0)
+    public class CloseButton extends AbstractCloseButton {
     }
   }
 

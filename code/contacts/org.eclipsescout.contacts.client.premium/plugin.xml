@@ -25,6 +25,7 @@
       		class="org.eclipse.scout.rt.client.services.common.icon.IconProviderService">
       </service>
    </extension>
+
    <extension
          name=""
          point="org.eclipse.scout.rt.extension.client.desktopExtensions">
@@ -33,6 +34,7 @@
             active="true">
       </desktopExtension>
    </extension>
+   
    <extension
          name=""
          point="org.eclipse.scout.rt.extension.client.pages">
@@ -44,6 +46,7 @@
                class="org.eclipsescout.contacts.client.ui.desktop.outlines.StandardOutline">
          </outline>
       </pageContribution>
+      
       <pageContribution
             order="20"
             class="org.eclipsescout.contacts.client.premium.ui.desktop.outlines.EventsTablePage"

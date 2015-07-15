@@ -1,0 +1,46 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Wizard - New Bundles"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+//==== Creating a new Scout Bundles
+//(((SDK Wizard!New Scout Bundles)))
+
+To add an application slice to an existing Scout application the Scout SDK provides the [wizard]_Create new Scout Bundles_ wizard.
+This wizard can be started using the [menu]_Add Scout Bundles..._ context menu on the main node of the application in the Scout Explorer as shown in <<img-wizard_new_bundles_menu>>.
+
+[[img-wizard_new_bundles_menu, Figure 000]]
+.A new slice can be added to the application using the [menu]_Add Scout Bundles..._ context menu.
+image::{imgsdir}/new_bundles_wizard_1.png[]
+
+In the first wizard step the project name is already set and the [field]_Project Postfix_ field can be used to enter the name of the application slice. 
+This name is then used to create the slice plugins (client, shared, server) following the naming scheme [java]+<Project Name>.<plugin>.<Project Postfix>+ as shown in <<img-wizard_new_bundles_wizard>>. 
+To create the slice plugins and close the wizard the [button]_Finish_ button can be clicked. 
+
+[[img-wizard_new_bundles_wizard, Figure 000]]
+.A new slice can be added to the application using the [menu]_Add Scout Bundles..._ context menu.
+image::{imgsdir}/new_bundles_wizard_2.png[]
+
+The newly created slice is then displayed in the Scout Explorer as shown in <<img-wizard_new_bundles>>.
+Below the node [node]_org.eclipsescout.contacts (premium)_ we the three slice plugins for the client, the shared and the server module are shown. 
+Indicated by the expanded client node, the full set of Scout featuers is also available in slices.
+
+[[img-wizard_new_bundles, Figure 000]]
+.A new slice can be added to the application using the [menu]_Add Scout Bundles..._ context menu.
+image::{imgsdir}/new_bundles_wizard_3.png[]
+
+In contrast to the core applications desktop node, the client node of the premium slice has a [node]_Desktop-Extension_ node. 
+This node extends is represented by class [java]+DesktopExtension+ that extends the Scout class [java]_AbstractDesktopExtension_. 
+The [java]+DesktopExtension+ can then be used to add top level menus and outlines to the newly created slices. 

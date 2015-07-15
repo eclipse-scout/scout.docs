@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.client.old.ui.forms;
+package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -19,10 +19,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.pagefield.AbstractPageField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipsescout.demo.widgets.client.old.ui.desktop.pages.PageWithADetailformTablePage;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.PageFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.PageFieldForm.MainBox.PageBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.eclipsescout.demo.widgets.client.ui.desktop.pages.PageWithDetailForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.ExamplesBox.PageBox;
 
 public class PageFieldForm extends AbstractForm implements IPageForm {
 
@@ -57,20 +56,29 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
   public class MainBox extends AbstractGroupBox {
 
     @Order(10.0)
-    public class PageBox extends AbstractPageField<IPage> {
+    public class ExamplesBox extends AbstractGroupBox {
 
       @Override
-      protected boolean getConfiguredLabelVisible() {
-        return false;
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Examples");
       }
 
-      @Override
-      protected void execInitField() throws ProcessingException {
-        setPage(new PageWithADetailformTablePage());
+      @Order(10.0)
+      public class PageBox extends AbstractPageField<IPage> {
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setPage(new PageWithDetailForm());
+        }
       }
     }
 
-    @Order(20.0)
+    @Order(30.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

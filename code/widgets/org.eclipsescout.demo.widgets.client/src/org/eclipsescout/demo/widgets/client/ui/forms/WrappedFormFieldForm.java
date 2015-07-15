@@ -22,8 +22,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.FormLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.InnerFormsField;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.SelectorBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.SelectorBox.InnerFormsField;
 import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 
@@ -53,8 +53,8 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  public GroupBox getGroupBox() {
-    return getFieldByClass(GroupBox.class);
+  public SelectorBox getGroupBox() {
+    return getFieldByClass(SelectorBox.class);
   }
 
   public InnerFormsField getInnerFormsField() {
@@ -77,7 +77,12 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
   public class MainBox extends AbstractGroupBox {
 
     @Order(10.0)
-    public class GroupBox extends AbstractGroupBox {
+    public class SelectorBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("FormSelector");
+      }
 
       @Order(10.0)
       public class InnerFormsField extends AbstractSmartField<IPageForm> {
@@ -89,7 +94,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("InnerForms");
+          return TEXTS.get("InnerForm");
         }
 
         @Override
@@ -98,8 +103,15 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected void execInitField() throws ProcessingException {
+          setDisplayText("StringField");
+          getWrappedFormField().setInnerForm((AbstractForm) new StringFieldForm());
+        }
+
+        @Override
         protected void execChangedValue() throws ProcessingException {
           if (getValue() instanceof AbstractForm) {
+            getValue().initForm();
             getWrappedFormField().setInnerForm((AbstractForm) getValue());
           }
         }
@@ -120,11 +132,6 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected int getConfiguredGridW() {
           return 3;
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setInnerForm(new ImageFieldForm());
         }
       }
     }

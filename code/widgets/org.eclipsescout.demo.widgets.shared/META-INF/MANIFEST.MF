@@ -6,7 +6,8 @@ Bundle-Version: 5.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.widgets.shared.Activator
 Export-Package: org.eclipsescout.demo.widgets.shared,
  org.eclipsescout.demo.widgets.shared.services.code,
- org.eclipsescout.demo.widgets.shared.services.common.text
+ org.eclipsescout.demo.widgets.shared.services.common.text,
+ org.eclipsescout.demo.widgets.shared.ui.template.formfield
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.shared;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

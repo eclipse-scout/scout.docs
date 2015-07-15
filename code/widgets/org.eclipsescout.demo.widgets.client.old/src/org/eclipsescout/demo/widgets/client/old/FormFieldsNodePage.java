@@ -17,13 +17,11 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.desktop.outline.pages.AbstractExtensiblePageWithNodes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ContextMenuForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.FileChooserFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.FormWithToolbuttonsForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.KeyStrokeForm;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.PageFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.StatusForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.TreeDNDForm;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
@@ -46,9 +44,6 @@ public class FormFieldsNodePage extends AbstractExtensiblePageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage> pageList) throws ProcessingException {
-    FormPage formPage2 = new FormPage(CalendarFieldForm.class);
-    pageList.add(formPage2);
-
     FormPage formPage4 = new FormPage(ColorFieldForm.class);
     pageList.add(formPage4);
 
@@ -62,9 +57,6 @@ public class FormFieldsNodePage extends AbstractExtensiblePageWithNodes {
       FormPage formPage10 = new FormPage(KeyStrokeForm.class);
       pageList.add(formPage10);
     }
-
-    FormPage formPage16 = new FormPage(PageFieldForm.class);
-    pageList.add(formPage16);
 
     FormPage formPage22 = new FormPage(StatusForm.class);
     pageList.add(formPage22);
