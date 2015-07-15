@@ -80,7 +80,7 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
 
     @Override
     protected boolean getConfiguredActive() {
-      return false;
+      return true;
     }
 
     @Override
