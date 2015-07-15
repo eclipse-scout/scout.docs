@@ -129,7 +129,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
 
         @Override
         protected void execDecorateRow(ITableRow row) throws ProcessingException {
-          String outlineIcon = getOutlineColumn().getValue(row).getIconId();
+          String outlineIcon = getOutlineColumn().getValue(row).getDefaultIconId();
           if (outlineIcon != null) {
             row.setIconId(outlineIcon);
           }
