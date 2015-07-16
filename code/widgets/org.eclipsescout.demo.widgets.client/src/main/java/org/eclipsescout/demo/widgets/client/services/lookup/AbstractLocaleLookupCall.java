@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -47,7 +48,10 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
     Locale[] locales = availableLocales();
 
     for (Locale locale : sort(locales)) {
-      rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
+      String displayName = locale.getDisplayName();
+      if (StringUtility.hasText(displayName)) {
+        rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
+      }
     }
 
     return rows;
