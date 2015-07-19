@@ -346,7 +346,7 @@ public class SearchForm extends AbstractSearchForm {
   }
 
   @Override
-  public void startSearch() throws ProcessingException {
+  public void start() throws ProcessingException {
     startInternal(new SearchHandler());
   }
 

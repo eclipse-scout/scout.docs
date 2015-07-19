@@ -135,7 +135,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
             catch (Exception e) {
               throw new ProcessingException("Error while creating instance of " + value.getName());
             }
-            getWrappedFormField().setInnerForm(form, true);
+            getWrappedFormField().setInnerForm(form);
           }
         }
       }

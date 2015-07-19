@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -52,7 +52,7 @@ public class CompanySearchForm extends AbstractSearchForm {
   }
 
   @Override
-  public void startSearch() throws ProcessingException {
+  public void start() throws ProcessingException {
     startInternal(new SearchHandler());
   }
 
