@@ -31,7 +31,6 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
-import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.minicrm.client.mobile.ui.forms.MobileHomeForm.MainBox.LogoutButton;
 import org.eclipsescout.demo.minicrm.client.mobile.ui.forms.MobileHomeForm.MainBox.OutlinesTableField;
@@ -125,11 +124,6 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         @Override
         protected boolean getConfiguredAutoResizeColumns() {
           return true;
-        }
-
-        @Override
-        protected String getConfiguredDefaultIconId() {
-          return AbstractIcons.TreeNode;
         }
 
         @Override

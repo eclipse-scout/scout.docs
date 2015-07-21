@@ -57,11 +57,6 @@ import org.eclipsescout.demo.widgets.client.services.lookup.CompanyTypeLookupCal
 
 public class SearchForm extends AbstractSearchForm {
 
-  @Override
-  protected String getConfiguredIconId() {
-    return org.eclipse.scout.rt.shared.AbstractIcons.SmartFieldBrowse;
-  }
-
   public SearchForm() throws ProcessingException {
     super();
   }

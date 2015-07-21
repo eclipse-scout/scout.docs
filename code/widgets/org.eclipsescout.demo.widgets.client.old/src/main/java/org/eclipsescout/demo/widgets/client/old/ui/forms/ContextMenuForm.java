@@ -825,11 +825,6 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         return "Color field (no icon)";
       }
 
-      @Override
-      protected String getConfiguredIconId() {
-        return null;
-      }
-
       @Order(10)
       public class ContextMenuItem extends AbstractMenu {
         @Override

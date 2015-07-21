@@ -24,7 +24,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm.MainBox.GroupBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
-import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class ColorFieldForm extends AbstractForm implements IPageForm {
 
@@ -76,11 +75,6 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() throws ProcessingException {
           setValue("#FF0000");
-        }
-
-        @Override
-        protected String getConfiguredIconId() {
-          return Icons.StarYellow;
         }
 
         @Override

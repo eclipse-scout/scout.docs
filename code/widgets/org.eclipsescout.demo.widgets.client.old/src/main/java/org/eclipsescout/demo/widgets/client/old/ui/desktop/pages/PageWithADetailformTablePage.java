@@ -38,11 +38,6 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
   }
 
   @Override
-  protected String getConfiguredIconId() {
-    return org.eclipse.scout.rt.shared.AbstractIcons.TreeNodeOpen;
-  }
-
-  @Override
   protected boolean getConfiguredLeaf() {
     return true;
   }

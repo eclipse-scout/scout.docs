@@ -34,11 +34,6 @@ public class MenusNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected String getConfiguredIconId() {
-    return org.eclipse.scout.rt.shared.AbstractIcons.NavigationCurrent;
-  }
-
-  @Override
   protected boolean getConfiguredLeaf() {
     return true;
   }
@@ -80,7 +75,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
 
     @Override
     protected String getConfiguredIconId() {
-      return org.eclipse.scout.rt.shared.AbstractIcons.Gears;
+      return org.eclipse.scout.rt.shared.AbstractIcons.Gear;
     }
 
     @Override

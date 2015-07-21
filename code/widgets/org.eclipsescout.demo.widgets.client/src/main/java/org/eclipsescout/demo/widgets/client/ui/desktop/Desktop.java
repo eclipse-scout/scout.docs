@@ -138,7 +138,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
       @Override
       protected String getConfiguredIconId() {
-        return AbstractIcons.Gears;
+        return AbstractIcons.Gear;
       }
 
       @Override

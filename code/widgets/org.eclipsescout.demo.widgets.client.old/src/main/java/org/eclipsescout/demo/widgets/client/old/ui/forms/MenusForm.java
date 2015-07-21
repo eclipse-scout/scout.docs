@@ -746,7 +746,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected String getConfiguredIconId() {
-        return org.eclipse.scout.rt.shared.AbstractIcons.Gears;
+        return org.eclipse.scout.rt.shared.AbstractIcons.Gear;
       }
 
       @Override

@@ -27,11 +27,6 @@ import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOn
 public class SearchFormsNodePage extends AbstractPageWithNodes {
 
   @Override
-  protected String getConfiguredIconId() {
-    return org.eclipse.scout.rt.shared.AbstractIcons.TreeNode;
-  }
-
-  @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("SearchForms");
   }

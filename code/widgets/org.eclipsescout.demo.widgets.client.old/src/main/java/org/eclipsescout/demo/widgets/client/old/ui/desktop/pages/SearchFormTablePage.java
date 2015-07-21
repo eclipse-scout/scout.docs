@@ -39,11 +39,6 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
   }
 
   @Override
-  protected String getConfiguredIconId() {
-    return org.eclipse.scout.rt.shared.AbstractIcons.SmartFieldBrowse;
-  }
-
-  @Override
   protected boolean getConfiguredLeaf() {
     return true;
   }
