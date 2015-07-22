@@ -324,6 +324,11 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           }
 
           @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("ThisIsATooltip");
+          }
+
+          @Override
           protected void execClickAction() throws ProcessingException {
             MessageBoxes.createOk().withHeader(TEXTS.get("RadioButtonSelected", getLabel())).withBody(TEXTS.get("RadioButtonExecClickAction")).show();
           }

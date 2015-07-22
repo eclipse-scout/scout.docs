@@ -11,6 +11,7 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -53,6 +54,7 @@ import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
@@ -254,6 +256,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
           table.getTrendColumn().setValue(r, "font:\uF176");
+          table.getLanguageColumn().setValue(r, new Locale("en", "US"));
 
           //Second Row:
           r = table.addRow(getTable().createRow());
@@ -266,6 +269,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
           table.getAttendedColumn().setValue(r, true);
           table.getTrendColumn().setValue(r, "font:\uF175");
+          table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
 
         @Override
@@ -327,6 +331,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           public TrendColumn getTrendColumn() {
             return getColumnSet().getColumnByClass(TrendColumn.class);
+          }
+
+          public LanguageColumn getLanguageColumn() {
+            return getColumnSet().getColumnByClass(LanguageColumn.class);
           }
 
           public DateColumn getDateColumn() {
@@ -462,6 +470,31 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             @Override
             protected int getConfiguredWidth() {
               return 80;
+            }
+
+          }
+
+          @Order(60.0)
+          public class LanguageColumn extends AbstractSmartColumn<Locale> {
+
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return TEXTS.get("Language");
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 80;
+            }
+
+            @Override
+            protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+              return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
             }
 
           }
