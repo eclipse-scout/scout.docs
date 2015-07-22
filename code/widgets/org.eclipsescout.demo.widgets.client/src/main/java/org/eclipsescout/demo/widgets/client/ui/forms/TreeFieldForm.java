@@ -265,14 +265,21 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             @Override
             protected void execAction() throws ProcessingException {
               getSelectedNode().setExpanded(true);
+
+              // trigger menu visible/enabled change
+              calculateVisibility();
+              getMenuByClass(CollapseNodeMenu.class).calculateVisibility();
             }
 
             @Override
             protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              calculateVisibility();
+            }
+
+            protected void calculateVisibility() {
               setVisible(getSelectedNode().getChildNodeCount() > 0);
               setEnabled(!getSelectedNode().isExpanded());
             }
-
           }
 
           @Order(20.0)
@@ -286,10 +293,18 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             @Override
             protected void execAction() throws ProcessingException {
               getSelectedNode().setExpanded(false);
+
+              // trigger menu visible/enabled change
+              calculateVisibility();
+              getMenuByClass(ExpandNodeMenu.class).calculateVisibility();
             }
 
             @Override
             protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              calculateVisibility();
+            }
+
+            protected void calculateVisibility() {
               setVisible(getSelectedNode().getChildNodeCount() > 0);
               setEnabled(getSelectedNode().isExpanded());
             }
