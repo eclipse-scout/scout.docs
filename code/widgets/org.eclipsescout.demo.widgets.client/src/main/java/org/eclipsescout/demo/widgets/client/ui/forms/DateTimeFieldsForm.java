@@ -536,17 +536,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-          return runContext.call(new Callable<Date>() {
-            @Override
-            public Date call() throws Exception {
-              return InputField.super.execParseValue(text);
-            }
-          });
-        }
-
-        @Override
         protected void execChangedDisplayText() {
           getDisplayTextField().setValue(getDisplayText());
         }
@@ -685,17 +674,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-          return runContext.call(new Callable<Date>() {
-            @Override
-            public Date call() throws Exception {
-              return TimeInputField.super.execParseValue(text);
-            }
-          });
-        }
-
-        @Override
         protected void execChangedDisplayText() {
           getTimeDisplayTextField().setValue(getDisplayText());
         }
@@ -798,17 +776,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
               return DateTimeInputField.super.execFormatValue(value);
             }
           }, BEANS.get(RuntimeExceptionTranslator.class));
-        }
-
-        @Override
-        protected Date execParseValue(final String text) throws ProcessingException {
-          final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-          return runContext.call(new Callable<Date>() {
-            @Override
-            public Date call() throws Exception {
-              return DateTimeInputField.super.execParseValue(text);
-            }
-          });
         }
 
         @Override
