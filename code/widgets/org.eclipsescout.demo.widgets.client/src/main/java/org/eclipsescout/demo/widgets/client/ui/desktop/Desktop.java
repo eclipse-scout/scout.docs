@@ -303,6 +303,11 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     public SimpleWidgetsOutlineViewButton() {
       super(Desktop.this, SimpleWidgetsOutline.class);
     }
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F4;
+    }
   }
 
   @Order(20.0)
