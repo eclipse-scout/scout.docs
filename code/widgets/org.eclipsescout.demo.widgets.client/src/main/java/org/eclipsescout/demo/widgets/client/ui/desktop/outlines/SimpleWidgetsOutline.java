@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
-import org.eclipsescout.demo.widgets.client.ui.forms.ButtonLinkFieldsForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.ButtonForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.CheckboxFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.DecimalFieldsForm;
@@ -62,7 +62,7 @@ public class SimpleWidgetsOutline extends AbstractOutline {
     FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupFieldForm.class);
     pageList.add(radioButtonFieldPage);
 
-    FormPage buttonLinkFieldsPage = new FormPage(ButtonLinkFieldsForm.class);
+    FormPage buttonLinkFieldsPage = new FormPage(ButtonForm.class);
     pageList.add(buttonLinkFieldsPage);
 
     FormPage messageBoxPage = new FormPage(MessageBoxForm.class);
