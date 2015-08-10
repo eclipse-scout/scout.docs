@@ -33,10 +33,12 @@ import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIconColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -251,6 +253,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getNameColumn().setValue(r, "Eclipsecon USA");
           table.getLocationColumn().setValue(r, "San Francisco, USA");
           table.getDateColumn().setValue(r, DateUtility.parse("18.03.2014", "dd.MM.yyyy"));
+          table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
+          table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
           table.getIndustryColumn().setValue(r, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
           table.getParticipantsColumn().setValue(r, 680L);
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
@@ -264,6 +268,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getNameColumn().setValue(r, "Javaland");
           table.getLocationColumn().setValue(r, "Bruehl, Germany");
           table.getDateColumn().setValue(r, DateUtility.parse("25.03.2014", "dd.MM.yyyy"));
+          table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
+          table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
           table.getIndustryColumn().setValue(r, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
           table.getParticipantsColumn().setValue(r, 810L);
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
@@ -331,6 +337,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           public TrendColumn getTrendColumn() {
             return getColumnSet().getColumnByClass(TrendColumn.class);
+          }
+
+          public StartTimeColumn getStartColumn() {
+            return getColumnSet().getColumnByClass(StartTimeColumn.class);
+          }
+
+          public EndDateTimeColumn getEndDateTimeColumn() {
+            return getColumnSet().getColumnByClass(EndDateTimeColumn.class);
           }
 
           public LanguageColumn getLanguageColumn() {
@@ -441,7 +455,44 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             protected int getConfiguredWidth() {
               return 110;
             }
+          }
 
+          @Order(45.0)
+          public class StartTimeColumn extends AbstractTimeColumn {
+
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return TEXTS.get("StartTime");
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 110;
+            }
+          }
+
+          @Order(48.0)
+          public class EndDateTimeColumn extends AbstractDateTimeColumn {
+
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return TEXTS.get("EndDate");
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 140;
+            }
           }
 
           @Order(50.0)
