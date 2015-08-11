@@ -182,13 +182,14 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
   }
 
   private LookupRow<String> nodeToLookupRow(Node node) {
-    LookupRow<String> row = new LookupRow<String>(node.getKey(), node.getText(), node.getIconId());
+    LookupRow<String> row = new LookupRow<String>(node.getKey(), node.getText());
 
-    row.setParentKey(node.getParentKey());
-    row.setTooltipText(node.getToolTip());
-    row.setFont(node.getFont());
-    row.setEnabled(node.isEnabled());
-    row.setActive(node.isActive());
+    row.withIconId(node.getIconId());
+    row.withParentKey(node.getParentKey());
+    row.withTooltipText(node.getToolTip());
+    row.withFont(node.getFont());
+    row.withEnabled(node.isEnabled());
+    row.withActive(node.isActive());
 
     return row;
   }
@@ -200,7 +201,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       AbstractMenu menu = new AbstractMenu() {
 
         @Override
-        public void execAction() throws ProcessingException {        	
+        public void execAction() throws ProcessingException {
           MessageBoxes.createOk().withHeader(TEXTS.get("TableMenuHeader")).withBody(getText()).show();
         }
 

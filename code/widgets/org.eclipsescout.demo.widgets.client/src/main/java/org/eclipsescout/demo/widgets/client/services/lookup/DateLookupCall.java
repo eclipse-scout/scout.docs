@@ -25,15 +25,37 @@ public class DateLookupCall extends LocalLookupCall<Long> {
 
   @Override
   protected List<ILookupRow<Long>> execCreateLookupRows() throws ProcessingException {
-    ArrayList<ILookupRow<Long>> rows = new ArrayList<ILookupRow<Long>>();
+    List<ILookupRow<Long>> rows = new ArrayList<ILookupRow<Long>>();
     for (long l = 0L; l <= 5L; l++) {
-      ILookupRow<Long> year = new LookupRow<Long>(l * 5, "201" + l);
-      year.setEnabled(true);
+      ILookupRow<Long> year = new LookupRow<Long>(l * 5, "201" + l).withEnabled(false);
       rows.add(year);
-      rows.add(new LookupRow<Long>(l * 5 + 1, "Jan", null, null, "FFFFFF", "000000", new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12), true, l * 5));
-      rows.add(new LookupRow<Long>(l * 5 + 2, "Mar", null, null, "FFFFFF", "000000", new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12), true, l * 5));
-      rows.add(new LookupRow<Long>(l * 5 + 3, "Sep", null, null, "FFFFFF", "000000", new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12), true, l * 5));
-      rows.add(new LookupRow<Long>(l * 5 + 4, "Nov", null, null, "FFFFFF", "000000", new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12), true, l * 5));
+
+      FontSpec font = new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12);
+      long parentKey = l * 5;
+      rows.add(new LookupRow<Long>(parentKey + 1, "Jan")
+          .withBackgroundColor("FFFFFF")
+          .withForegroundColor("000000")
+          .withFont(font)
+          .withEnabled(true)
+          .withParentKey(parentKey));
+      rows.add(new LookupRow<Long>(parentKey + 2, "Mar")
+          .withBackgroundColor("FFFFFF")
+          .withForegroundColor("000000")
+          .withFont(font)
+          .withEnabled(false)
+          .withParentKey(parentKey));
+      rows.add(new LookupRow<Long>(parentKey + 3, "Sep")
+          .withBackgroundColor("FFFFFF")
+          .withForegroundColor("000000")
+          .withFont(font)
+          .withEnabled(true)
+          .withParentKey(parentKey));
+      rows.add(new LookupRow<Long>(parentKey + 4, "Nov")
+          .withBackgroundColor("FFFFFF")
+          .withForegroundColor("000000")
+          .withFont(font)
+          .withEnabled(true)
+          .withParentKey(parentKey));
     }
     return rows;
   }
