@@ -49,15 +49,23 @@ public class ClientSession extends AbstractClientSession {
       logger.info("starting client without a server!");
     }
 
+    execInitLocale();
     CODES.getAllCodeTypes("org.eclipsescout.demo.widgets.shared");
-
-    setLocale(Locale.ENGLISH);
-
     setDesktop(new Desktop());
+
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
       BEANS.get(IPingService.class).ping("ping");
     }
+  }
+
+  /**
+   * Sets the session locale <i>before</i> the desktop is created. The default implementation sets the locale
+   * to {@link Locale#ENGLISH} to get a consistent state across the entire widget application (for most languages,
+   * not all tests are localized, except for English). Subclasses may override this method.
+   */
+  protected void execInitLocale() {
+    setLocale(Locale.ENGLISH);
   }
 
   @Override
