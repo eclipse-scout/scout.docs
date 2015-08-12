@@ -370,7 +370,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(ClientSession.get().getLocale().getDisplayName());
+          setValue(NlsLocale.get().getDisplayName(NlsLocale.get()));
         }
       }
 

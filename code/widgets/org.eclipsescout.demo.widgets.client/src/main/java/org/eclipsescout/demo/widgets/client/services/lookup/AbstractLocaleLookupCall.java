@@ -16,47 +16,45 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.nls.NlsLocale;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
-
   private static final long serialVersionUID = 1L;
 
   public AbstractLocaleLookupCall() {
     super();
   }
 
-  private Locale[] sort(Locale[] locales) {
+  protected Locale[] sort(Locale[] locales) {
     Comparator<Locale> localeComparator = new Comparator<Locale>() {
       @Override
       public int compare(Locale locale1, Locale locale2) {
-        return locale1.getDisplayName().compareTo(locale2.getDisplayName());
+        String name1 = locale1.getDisplayName(NlsLocale.get());
+        String name2 = locale2.getDisplayName(NlsLocale.get());
+        return CompareUtility.compareTo(name1, name2);
       }
     };
-
     Arrays.sort(locales, localeComparator);
-
     return locales;
   }
 
   @Override
   protected List<LookupRow<Locale>> execCreateLookupRows() throws ProcessingException {
-    ArrayList<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
+    List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
     Locale[] locales = availableLocales();
-
     for (Locale locale : sort(locales)) {
-      String displayName = locale.getDisplayName();
+      String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
-        rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
+        rows.add(new LookupRow<Locale>(locale, displayName));
       }
     }
-
     return rows;
   }
 
-  abstract protected Locale[] availableLocales();
-
+  protected abstract Locale[] availableLocales();
 }
