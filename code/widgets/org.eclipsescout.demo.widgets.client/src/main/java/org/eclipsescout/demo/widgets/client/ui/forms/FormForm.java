@@ -382,8 +382,8 @@ public class FormForm extends AbstractForm implements IPageForm {
       public class FormField1GroupbBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredBorderDecoration() {
-          return BORDER_DECORATION_EMPTY;
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
         @Order(10.0)
@@ -436,8 +436,8 @@ public class FormForm extends AbstractForm implements IPageForm {
       public class FormField2GroupbBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredBorderDecoration() {
-          return BORDER_DECORATION_EMPTY;
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
         @Order(10.0)
@@ -490,8 +490,8 @@ public class FormForm extends AbstractForm implements IPageForm {
       public class FormField3GroupbBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredBorderDecoration() {
-          return BORDER_DECORATION_EMPTY;
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
         @Order(10.0)
@@ -544,8 +544,8 @@ public class FormForm extends AbstractForm implements IPageForm {
       public class FormField4GroupbBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredBorderDecoration() {
-          return BORDER_DECORATION_EMPTY;
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
         @Order(10.0)
