@@ -48,7 +48,7 @@ public class ServerApplication implements IPlatformListener {
       try {
         ServerRunContext runContext = ServerRunContexts.empty();
         runContext.withSubject(s_subject);
-        runContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(runContext.copy()), true);
+        runContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(runContext.copy()));
         runContext.run(new IRunnable() {
           @Override
           public void run() throws Exception {
