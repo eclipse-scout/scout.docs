@@ -23,6 +23,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.PlannerFieldDayForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.PlannerFieldIntradayForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
@@ -78,5 +80,8 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage wrappedFormFieldPage = new FormPage(WrappedFormFieldForm.class);
     pageList.add(wrappedFormFieldPage);
+
+    pageList.add(new FormPage(PlannerFieldDayForm.class));
+    pageList.add(new FormPage(PlannerFieldIntradayForm.class));
   }
 }
