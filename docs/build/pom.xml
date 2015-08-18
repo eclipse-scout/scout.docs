@@ -20,6 +20,7 @@
   <modules>
     <module>book_scout_frontend</module>
     <module>book_scout_intro</module>
+    <module>book_scout_architecture</module>
     <module>eclipse_help</module>
     <module>scout_helloworld</module>
     <module>scout_install</module>

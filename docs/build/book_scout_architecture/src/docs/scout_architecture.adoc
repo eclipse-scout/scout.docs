@@ -1,0 +1,22 @@
+= Eclipse Scout: an Introduction
+:doctype: book
+:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:toc: left
+
+//:numbered:
+include::_Architecture.adoc[]
+
+//Appendix:
+
+include::{mdledir}/BookCopyright.adoc[]
+

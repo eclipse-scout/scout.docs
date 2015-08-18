@@ -30,6 +30,7 @@ public class PublishDownloadsTest {
   private File outInstall = new File(outRootFolder, "article_install");
   private File outBookIntro = new File(outRootFolder, "book_scout_intro");
   private File outBookFrontend = new File(outRootFolder, "book_scout_frontend");
+  private File outBookArchitecture = new File(outRootFolder, "book_scout_architecture");
 
   @Test
   public void publishHelloWorldAsHtmlAndZip() throws IOException {
@@ -85,6 +86,20 @@ public class PublishDownloadsTest {
     String inFileName = "scout_frontend.pdf";
 
     PublishUtility.publishPdfFile(inFolder, inFileName, outBookFrontend);
+  }
+
+  @Test
+  public void publishBookArchitectureAsHtmlAndZip() throws IOException {
+    File inFolder = new File("../../build/book_scout_architecture/target/generated-docs");
+    publishAsHtmlAndZip(inFolder, outBookArchitecture, "scout_architecture");
+  }
+
+  @Test
+  public void publishBookArchitectureAsPdf() throws IOException {
+    File inFolder = new File("../../build/book_scout_architecture/target/generated-docs");
+    String inFileName = "scout_architecture.pdf";
+
+    PublishUtility.publishPdfFile(inFolder, inFileName, outBookArchitecture);
   }
 
   private void publishAsHtmlAndZip(File inFolder, File outFolder, String name) throws IOException {

@@ -69,7 +69,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 The following list describes the core functionality of the `IFuture`:
 
-[cols="0a,100a"]
+[cols="10,90"]
 |===
 |method |description
 
@@ -102,7 +102,7 @@ However, if the job was cancelled, or the waiting thread interrupted, or the opt
 == JobInput
 When scheduling a job, a `JobInput` must be provided in order to describe the job, and to instruct the job manager of how to run the job. The following properties are supported:
 
-[cols="0a,100a"]
+[cols="30%,70%"]
 |===
 |name
 |The name of the job, which is used for logging purpose and to name the executing thread.
@@ -141,7 +141,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 That looks a little bit clumsy, with lot of code to simply run some code asynchronously. And things are getting worse if scheduling model jobs which require to be executed in sequence. That is why Scout provides you with some convenience in the form of static factory methods. They are based on the convention, that if providing no input, a new input initialized with a copy of the current calling context is used.
 
 There exist a factory for each kind of job:
-[cols="0a,100a"]
+[cols="10%,90%"]
 |===
 |Factory |Description
 

@@ -11,9 +11,10 @@
   </parent>
 
   <groupId>org.eclipsescout.docs</groupId>
-  <artifactId>scout_install</artifactId>
+  <artifactId>scout_architecture</artifactId>
 
-  <name>scout install article</name>
+  <name>scout architecture</name>
+
 
   <build>
     <defaultGoal>process-resources</defaultGoal>
@@ -23,7 +24,7 @@
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <executions>
           <execution>
-            <id>scout_install-to-pdf</id>
+            <id>book_scout_architecture-to-pdf</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>process-asciidoc</goal>
@@ -31,6 +32,7 @@
             <configuration>
               <backend>pdf</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
+              <doctype>book</doctype>
               <attributes>
                 <pagenums />
                 <toc />
@@ -40,7 +42,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>scout_install-to-html</id>
+            <id>book_scout_architecture-to-html</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>process-asciidoc</goal>
@@ -49,6 +51,7 @@
               <backend>html5</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>
+              	<toc>left</toc>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>
                 <idprefix />

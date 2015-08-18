@@ -1,0 +1,29 @@
+//-----------------------------------------------------------------------------
+// Some Scout Archite
+//-----------------------------------------------------------------------------
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Introduction"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+!!! WORK IN PROGRESS !!!
+
+Scout Architecture Descriptions and Concepts are described here.
+
+:numbered:
+include::{mdledir}/architecture/JobManager.adoc[]
+include::{mdledir}/architecture/RunContext.adoc[]
+include::{mdledir}/architecture/RunMonitor.adoc[]
+include::{mdledir}/architecture/SecureOutput.adoc[]

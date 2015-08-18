@@ -66,7 +66,9 @@ public final class JobManagerSnippet {
     // end::queryCancellationStatus[]
 
     // tag::obtainAssociatedFuture[]
+
     IFuture<?> currentFuture = IFuture.CURRENT.get();
+
     // end::obtainAssociatedFuture[]
 
     // tag::scheduleByJobManager[]
