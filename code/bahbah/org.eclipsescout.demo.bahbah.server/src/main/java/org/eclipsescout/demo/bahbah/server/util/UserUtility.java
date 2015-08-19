@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import org.eclipse.scout.commons.Base64Utility;
+import org.eclipse.scout.commons.Encoding;
 import org.eclipse.scout.commons.SecurityUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
@@ -27,8 +28,6 @@ import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 public class UserUtility extends SharedUserUtility {
 
-  private static final String ENCODING = "UTF-8";
-
   public static boolean createNewUser(String username, String password) throws ProcessingException {
     return createNewUser(username, password, UserRoleCodeType.UserCode.ID);
   }
@@ -40,7 +39,7 @@ public class UserUtility extends SharedUserUtility {
       checkPermissionId(permission);
 
       byte[] bSalt = SecurityUtility.createRandomBytes();
-      byte[] bHash = SecurityUtility.hash(password.getBytes(ENCODING), bSalt);
+      byte[] bHash = SecurityUtility.hash(password.getBytes(Encoding.UTF_8), bSalt);
 
       String salt = Base64Utility.encode(bSalt);
       String digest = Base64Utility.encode(bHash);
@@ -57,7 +56,7 @@ public class UserUtility extends SharedUserUtility {
       throw new ProcessingException("hash algorithm not found", e);
     }
     catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + ENCODING, e);
+      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
     }
   }
 
@@ -73,7 +72,7 @@ public class UserUtility extends SharedUserUtility {
       }
 
       byte[] bSalt = SecurityUtility.createRandomBytes();
-      byte[] bHash = SecurityUtility.hash(newPassword.getBytes(ENCODING), bSalt);
+      byte[] bHash = SecurityUtility.hash(newPassword.getBytes(Encoding.UTF_8), bSalt);
 
       String salt = Base64Utility.encode(bSalt);
       String digest = Base64Utility.encode(bHash);
@@ -81,7 +80,7 @@ public class UserUtility extends SharedUserUtility {
       SQL.update("UPDATE TABUSERS SET pass = :newPass, salt = :newSalt WHERE u_id = :uid", new NVPair("newPass", digest), new NVPair("newSalt", salt), new NVPair("uid", u_Id));
     }
     catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + ENCODING, e);
+      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
     }
   }
 
@@ -106,7 +105,7 @@ public class UserUtility extends SharedUserUtility {
       return areEqual(pass, password, salt);
     }
     catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + ENCODING, e);
+      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
     }
   }
 
@@ -127,7 +126,7 @@ public class UserUtility extends SharedUserUtility {
   private static boolean areEqual(String pass1, String pass2, String salt) throws UnsupportedEncodingException, ProcessingException {
     byte[] bPass = Base64Utility.decode(pass1);
     byte[] bSalt = Base64Utility.decode(salt);
-    byte[] bInput = SecurityUtility.hash(pass2.getBytes(ENCODING), bSalt);
+    byte[] bInput = SecurityUtility.hash(pass2.getBytes(Encoding.UTF_8), bSalt);
 
     return Arrays.equals(bInput, bPass);
   }
