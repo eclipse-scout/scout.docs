@@ -28,13 +28,10 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
-import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UiLayer;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
@@ -70,19 +67,6 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
     if (firstOutline != null) {
       setOutline(firstOutline);
-    }
-  }
-
-  @Override
-  protected void execPageDetailFormChanged(IForm oldForm, IForm newForm) throws ProcessingException {
-    super.execPageDetailFormChanged(oldForm, newForm);
-    if (UiLayer.SWING.equals(UserAgentUtility.getCurrentUiLayer())) {
-      if (oldForm != null) {
-        hideForm(oldForm);
-      }
-      if (newForm != null) {
-        showForm(newForm);
-      }
     }
   }
 
