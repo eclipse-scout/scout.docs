@@ -20,8 +20,6 @@
 		<module>../org.eclipsescout.demo.widgets.client.mobile</module>
 		<module>../org.eclipsescout.demo.widgets.shared</module>
 		<module>../org.eclipsescout.demo.widgets.shared.old</module>
-		<module>../org.eclipsescout.demo.widgets.ui.swing</module>
-		<module>../org.eclipsescout.demo.widgets.ui.swing.rayo</module>
 	</modules>
 	<parent>
 		<groupId>org.eclipsescout.demo</groupId>

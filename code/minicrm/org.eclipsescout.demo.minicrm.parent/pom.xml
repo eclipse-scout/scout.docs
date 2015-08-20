@@ -31,6 +31,5 @@
     <module>../org.eclipsescout.demo.minicrm.client.mobile</module>
     <module>../org.eclipsescout.demo.minicrm.server</module>
     <module>../org.eclipsescout.demo.minicrm.shared</module>
-    <module>../org.eclipsescout.demo.minicrm.ui.swing</module>
   </modules>
 </project>

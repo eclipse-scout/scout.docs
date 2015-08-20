@@ -32,6 +32,5 @@
     <module>../org.eclipsescout.demo.bahbah.mysql</module>
     <module>../org.eclipsescout.demo.bahbah.server</module>
     <module>../org.eclipsescout.demo.bahbah.shared</module>
-    <module>../org.eclipsescout.demo.bahbah.ui.swing</module>
   </modules>
 </project>
