@@ -30,6 +30,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
+import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
@@ -278,21 +280,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
 
-        @Override
-        protected void execUpdateTableStatus() {
-          super.execUpdateTableStatus();
-
-          ITable table = getTable();
-
-          // TODO why is updatetablestatus called during construction of the table?
-          if (getRootGroupBox() != null) {
-            getSelectedRowsField().setValue(rowsToKeyString(table.getSelectedRows()));
-            getInsertedRowsField().setValue(rowsToKeyString(table.getInsertedRows()));
-            getUpdatedRowsField().setValue(rowsToKeyString(table.getUpdatedRows()));
-            getDeletedRowsField().setValue(rowsToKeyString(table.getDeletedRows()));
-          }
-        }
-
         private String rowsToKeyString(List<ITableRow> list) {
           if (list == null || list.size() == 0) {
             return "";
@@ -372,6 +359,22 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             else {
               row.setIconId(null);
             }
+          }
+
+          @Override
+          protected void execInitTable() throws ProcessingException {
+            addTableListener(new TableAdapter() {
+
+              @Override
+              public void tableChanged(TableEvent e) {
+                if (getRootGroupBox() != null) {
+                  getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
+                  getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));
+                  getUpdatedRowsField().setValue(rowsToKeyString(Table.this.getUpdatedRows()));
+                  getDeletedRowsField().setValue(rowsToKeyString(Table.this.getDeletedRows()));
+                }
+              }
+            });
           }
 
           @Order(10.0)
