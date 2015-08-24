@@ -10,32 +10,36 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client;
 
+import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
 import org.eclipsescout.demo.bahbah.shared.notification.RefreshBuddiesNotification;
 
-/**
- *
- */
-public class RefreshBoddiesNotificationHandler implements INotificationHandler<RefreshBuddiesNotification> {
-  private static IScoutLogger LOG = ScoutLogManager.getLogger(RefreshBoddiesNotificationHandler.class);
+public class RefreshBuddiesNotificationHandler implements INotificationHandler<RefreshBuddiesNotification> {
+  private static IScoutLogger LOG = ScoutLogManager.getLogger(RefreshBuddiesNotificationHandler.class);
 
   @Override
   public void handleNotification(RefreshBuddiesNotification notification) {
-    UserNodePage userPage = getUserNodePage();
+    ModelJobs.schedule(new IRunnable() {
+      @Override
+      public void run() throws Exception {
+        UserNodePage userPage = getUserNodePage();
 
-    if (userPage != null) {
-      try {
-        LOG.info("refreshing buddies on client");
-        userPage.updateBuddyPages();
+        if (userPage != null) {
+          try {
+            LOG.info("refreshing buddies on client");
+            userPage.updateBuddyPages();
+          }
+          catch (Throwable t) {
+            LOG.error("handling of remote message failed.", t);
+          }
+        }
       }
-      catch (Throwable t) {
-        LOG.error("handling of remote message failed.", t);
-      }
-    }
+    });
   }
 
   private UserNodePage getUserNodePage() {

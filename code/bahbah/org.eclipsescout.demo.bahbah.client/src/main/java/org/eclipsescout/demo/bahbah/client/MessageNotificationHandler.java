@@ -12,8 +12,10 @@ package org.eclipsescout.demo.bahbah.client;
 
 import java.util.Date;
 
+import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
@@ -27,21 +29,26 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
   private static IScoutLogger LOG = ScoutLogManager.getLogger(MessageNotificationHandler.class);
 
   @Override
-  public void handleNotification(MessageNotification notification) {
-    UserNodePage userPage = getUserNodePage();
-    String buddy = notification.getSenderName();
+  public void handleNotification(final MessageNotification notification) {
+    ModelJobs.schedule(new IRunnable() {
+      @Override
+      public void run() throws Exception {
+        UserNodePage userPage = getUserNodePage();
+        String buddy = notification.getSenderName();
 
-    if (userPage != null) {
-      try {
-        ChatForm form = userPage.getChatForm(buddy);
-        if (form != null) {
-          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
+        if (userPage != null) {
+          try {
+            ChatForm form = userPage.getChatForm(buddy);
+            if (form != null) {
+              form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
+            }
+          }
+          catch (Throwable t) {
+            LOG.error("handling of remote message failed.", t);
+          }
         }
       }
-      catch (Throwable t) {
-        LOG.error("handling of remote message failed.", t);
-      }
-    }
+    });
   }
 
   private UserNodePage getUserNodePage() {
@@ -52,5 +59,4 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
       return Desktop.get().getUserNodePage();
     }
   }
-
 }
