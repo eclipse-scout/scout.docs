@@ -36,8 +36,8 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBo
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 /**
- * The following code-snippet shows what the content of an IFRAME must do to call the execPostMessage() callback.
- * This will only work, when the IFRAME is not restricted by the sandbox attribute.
+ * The following code-snippet shows what the content of an IFRAME must do to call the execPostMessage() callback. This
+ * will only work, when the IFRAME is not restricted by the sandbox attribute.
  *
  * <pre>
  * &lt;script&gt;

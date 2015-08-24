@@ -633,8 +633,8 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     public class PiButton extends AbstractButton {
 
       /**
-       * Gauss-Legendre Algorithm
-       * implementation copied from http://java.lykkenborg.no/2005/03/computing-pi-using-bigdecimal.html
+       * Gauss-Legendre Algorithm implementation copied from
+       * http://java.lykkenborg.no/2005/03/computing-pi-using-bigdecimal.html
        */
       private BigDecimal pi() {
         BigDecimal two = new BigDecimal(2);

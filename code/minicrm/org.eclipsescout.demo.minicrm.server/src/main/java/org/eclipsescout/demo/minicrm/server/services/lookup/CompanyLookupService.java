@@ -18,18 +18,18 @@ import org.eclipsescout.demo.minicrm.shared.Icons;
 import org.eclipsescout.demo.minicrm.shared.services.lookup.ICompanyLookupService;
 
 @Server
-public class CompanyLookupService extends AbstractSqlLookupService<BigDecimal> implements ICompanyLookupService {
+public class CompanyLookupService extends AbstractSqlLookupService<BigDecimal>implements ICompanyLookupService {
 
   @Override
   protected String getConfiguredSqlSelect() {
-    return "SELECT  C.COMPANY_NR, " +
-        "        C.NAME, " +
-        "        '" + Icons.Building + "' " +
-        "FROM    COMPANY C " +
-        "WHERE   1=1 " +
-        "  AND (C.TYPE_UID = :master OR :master IS NULL) " +
-        "<key>   AND     C.COMPANY_NR = :key </key> " +
-        "<text>  AND     UPPER(C.NAME) LIKE UPPER(:text||'%') </text> " +
-        "<all> </all> ";
+    return "SELECT  C.COMPANY_NR, "
+        + "        C.NAME, "
+        + "        '" + Icons.Building + "' "
+        + "FROM    COMPANY C "
+        + "WHERE   1=1 "
+        + "  AND (C.TYPE_UID = :master OR :master IS NULL) "
+        + "<key>   AND     C.COMPANY_NR = :key </key> "
+        + "<text>  AND     UPPER(C.NAME) LIKE UPPER(:text||'%') </text> "
+        + "<all> </all> ";
   }
 }

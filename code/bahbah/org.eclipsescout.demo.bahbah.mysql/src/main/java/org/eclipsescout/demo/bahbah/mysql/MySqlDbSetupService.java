@@ -33,14 +33,14 @@ public class MySqlDbSetupService extends AbstractService implements IDbSetupServ
     Set<String> existingTables = getExistingTables();
 
     if (!existingTables.contains("tabusers")) {
-      SQL.insert(" CREATE TABLE TABUSERS (" +
-          " u_id BIGINT NOT NULL AUTO_INCREMENT, " +
-          " username VARCHAR(32) NOT NULL, " +
-          " pass VARCHAR(1024) NOT NULL, " +
-          " salt VARCHAR(64) NOT NULL, " +
-          " permission_id INT NOT NULL, " +
-          " icon BLOB, " +
-          " PRIMARY KEY (u_id)"
+      SQL.insert(" CREATE TABLE TABUSERS ("
+          + " u_id BIGINT NOT NULL AUTO_INCREMENT, "
+          + " username VARCHAR(32) NOT NULL, "
+          + " pass VARCHAR(1024) NOT NULL, "
+          + " salt VARCHAR(64) NOT NULL, "
+          + " permission_id INT NOT NULL, "
+          + " icon BLOB, "
+          + " PRIMARY KEY (u_id)"
           + ")");
       SQL.commit();
 

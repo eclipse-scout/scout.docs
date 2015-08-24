@@ -60,9 +60,9 @@ public class ClientSession extends AbstractClientSession {
   }
 
   /**
-   * Sets the session locale <i>before</i> the desktop is created. The default implementation sets the locale
-   * to {@link Locale#ENGLISH} to get a consistent state across the entire widget application (for most languages,
-   * not all tests are localized, except for English). Subclasses may override this method.
+   * Sets the session locale <i>before</i> the desktop is created. The default implementation sets the locale to
+   * {@link Locale#ENGLISH} to get a consistent state across the entire widget application (for most languages, not all
+   * tests are localized, except for English). Subclasses may override this method.
    */
   protected void execInitLocale() {
     setLocale(Locale.ENGLISH);

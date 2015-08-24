@@ -29,12 +29,12 @@ public class StandardOutlineService extends AbstractService implements IStandard
   public CompanyTablePageData getCompanyTableData(CompanySearchFormData formData) throws ProcessingException {
     StringBuilder statement = new StringBuilder();
     statement.append(
-        "SELECT COMPANY_NR, " +
-            "       SHORT_NAME, " +
-            "       NAME, " +
-            "       TYPE_UID " +
-            " FROM COMPANY " +
-        " WHERE 1 = 1 ");
+        "SELECT COMPANY_NR, "
+            + "       SHORT_NAME, "
+            + "       NAME, "
+            + "       TYPE_UID "
+            + " FROM COMPANY "
+            + " WHERE 1 = 1 ");
     if (!StringUtility.isNullOrEmpty(formData.getShortName().getValue())) {
       statement.append("AND UPPER(SHORT_NAME) LIKE UPPER(:shortName || '%') ");
     }

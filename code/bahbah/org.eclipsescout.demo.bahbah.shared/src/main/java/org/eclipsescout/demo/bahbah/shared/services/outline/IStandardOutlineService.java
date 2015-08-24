@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 
 @TunnelToServer
-public interface IStandardOutlineService extends IService{
+public interface IStandardOutlineService extends IService {
 
-  public String [] getOnlineUsers() throws ProcessingException;
+  public String[] getOnlineUsers() throws ProcessingException;
 }

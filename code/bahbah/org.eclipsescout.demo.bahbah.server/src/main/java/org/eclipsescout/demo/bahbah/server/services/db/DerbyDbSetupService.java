@@ -31,14 +31,14 @@ public class DerbyDbSetupService extends AbstractService implements IDbSetupServ
     Set<String> existingTables = getExistingTables();
 
     if (!existingTables.contains("TABUSERS")) {
-      SQL.insert(" CREATE TABLE TABUSERS (" +
-          " u_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY CONSTRAINT USERS_PK PRIMARY KEY, " +
-          " username VARCHAR(32) NOT NULL, " +
-          " pass VARCHAR(256) NOT NULL, " +
-          " salt VARCHAR(64) NOT NULL, " +
-          " permission_id INT NOT NULL, " +
-          " icon BLOB " +
-          ")");
+      SQL.insert(" CREATE TABLE TABUSERS ("
+          + " u_id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY CONSTRAINT USERS_PK PRIMARY KEY, "
+          + " username VARCHAR(32) NOT NULL, "
+          + " pass VARCHAR(256) NOT NULL, "
+          + " salt VARCHAR(64) NOT NULL, "
+          + " permission_id INT NOT NULL, "
+          + " icon BLOB "
+          + ")");
       SQL.commit();
 
       SQL.insert(" CREATE UNIQUE INDEX IX_USERNAME ON TABUSERS (username) ");

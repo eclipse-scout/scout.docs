@@ -42,16 +42,14 @@ public class CompanyService extends AbstractService implements ICompanyService {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    SQL.selectInto("" +
-        "SELECT MAX(COMPANY_NR)+1 " +
-        "FROM   COMPANY " +
-        "INTO   :companyNr"
-        , formData);
+    SQL.selectInto(""
+        + "SELECT MAX(COMPANY_NR)+1 "
+        + "FROM   COMPANY "
+        + "INTO   :companyNr", formData);
 
-    SQL.insert("" +
-        "INSERT INTO COMPANY (COMPANY_NR, SHORT_NAME, NAME, TYPE_UID, RATING_UID) " +
-        "VALUES (:companyNr, :shortName, :name, :companyTypeGroup, :companyRating)"
-        , formData);
+    SQL.insert(""
+        + "INSERT INTO COMPANY (COMPANY_NR, SHORT_NAME, NAME, TYPE_UID, RATING_UID) "
+        + "VALUES (:companyNr, :shortName, :name, :companyTypeGroup, :companyRating)", formData);
 
     return formData;
   }
@@ -62,18 +60,17 @@ public class CompanyService extends AbstractService implements ICompanyService {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    SQL.selectInto("" +
-        "SELECT SHORT_NAME, " +
-        "       NAME," +
-        "       TYPE_UID, " +
-        "       RATING_UID " +
-        "FROM   COMPANY " +
-        "WHERE  COMPANY_NR = :companyNr " +
-        "INTO   :shortName," +
-        "       :name, " +
-        "       :companyTypeGroup, " +
-        "       :companyRating "
-        , formData);
+    SQL.selectInto(""
+        + "SELECT SHORT_NAME, "
+        + "       NAME,"
+        + "       TYPE_UID, "
+        + "       RATING_UID "
+        + "FROM   COMPANY "
+        + "WHERE  COMPANY_NR = :companyNr "
+        + "INTO   :shortName,"
+        + "       :name, "
+        + "       :companyTypeGroup, "
+        + "       :companyRating ", formData);
 
     return formData;
   }
@@ -84,14 +81,13 @@ public class CompanyService extends AbstractService implements ICompanyService {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    SQL.update("" +
-        "UPDATE COMPANY " +
-        " SET SHORT_NAME = :shortName, " +
-        "     NAME = :name, " +
-        "     TYPE_UID = :companyTypeGroup, " +
-        "     RATING_UID = :companyRating " +
-        "WHERE  COMPANY_NR = :companyNr "
-        , formData);
+    SQL.update(""
+        + "UPDATE COMPANY "
+        + " SET SHORT_NAME = :shortName, "
+        + "     NAME = :name, "
+        + "     TYPE_UID = :companyTypeGroup, "
+        + "     RATING_UID = :companyRating "
+        + "WHERE  COMPANY_NR = :companyNr ", formData);
 
     return formData;
   }
@@ -102,8 +98,8 @@ public class CompanyService extends AbstractService implements ICompanyService {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    SQL.delete("DELETE FROM COMPANY " +
-        "WHERE  COMPANY_NR = :companyNr",
+    SQL.delete("DELETE FROM COMPANY "
+        + "WHERE  COMPANY_NR = :companyNr",
         new NVPair("companyNr", companyNr));
   }
 }

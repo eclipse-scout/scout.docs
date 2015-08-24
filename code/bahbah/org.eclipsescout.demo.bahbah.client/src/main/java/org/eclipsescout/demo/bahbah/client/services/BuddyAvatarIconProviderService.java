@@ -26,8 +26,8 @@ public class BuddyAvatarIconProviderService implements IIconProviderService {
   private static final IScoutLogger logger = ScoutLogManager.getLogger(BuddyAvatarIconProviderService.class);
 
   /**
-   * the default buddy icon used when the user has not uploaded an icon yet. icon must be located in client plugin
-   * under resources/icons
+   * the default buddy icon used when the user has not uploaded an icon yet. icon must be located in client plugin under
+   * resources/icons
    */
   public static final String BUDDY_DEFAULT_ICON = "default_buddy_icon";
   public static final String BUDDY_ICON_PREFIX = "@@BUDDY_ICON@@_";

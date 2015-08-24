@@ -545,10 +545,10 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
               String name = StringUtility.concatenateTokens(getFirstNameField().getValue(), " ", getLastNameField().getValue());
 
               if (name.length() > 0) {
-                MessageBoxes.create().
-                withHeader(TEXTS.get("SearchPerson", name)).
-                withAutoCloseMillis(2500).
-                show(MessageBox.YES_OPTION);
+                MessageBoxes.create()
+                    .withHeader(TEXTS.get("SearchPerson", name))
+                    .withAutoCloseMillis(2500)
+                    .show(MessageBox.YES_OPTION);
               }
             }
           }

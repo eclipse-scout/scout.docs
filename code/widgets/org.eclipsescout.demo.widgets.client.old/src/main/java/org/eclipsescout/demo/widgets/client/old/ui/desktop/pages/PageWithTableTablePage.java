@@ -59,7 +59,8 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
   @Override
   protected void execLoadData(SearchFilter filter) throws ProcessingException {
-    importTableData(new Object[][]{{"String 1", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2}, {"String 2", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 86400000), true, 1}, {"String 3", 3, 20, 8031.7, new Date(System.currentTimeMillis() - 216000000), true, 3}});
+    importTableData(new Object[][]{{"String 1", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2}, {"String 2", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
+        {"String 3", 3, 20, 8031.7, new Date(System.currentTimeMillis() - 216000000), true, 3}});
   }
 
   @Order(10.0)
@@ -214,8 +215,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         return CollectionUtility.<IMenuType> hashSet(
             TableMenuType.SingleSelection,
             TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace
-            );
+            TableMenuType.EmptySpace);
       }
 
       @Override
@@ -248,8 +248,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       return CollectionUtility.<IMenuType> hashSet(
           TableMenuType.SingleSelection,
           TableMenuType.MultiSelection,
-          TableMenuType.EmptySpace
-          );
+          TableMenuType.EmptySpace);
     }
 
     @Override

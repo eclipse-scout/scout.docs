@@ -260,12 +260,12 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          int result = MessageBoxes.create().
-              withHeader(TEXTS.get("Lorem")).
-              withBody(TEXTS.get("HiddenTextInstruction")).
-              withCancelButtonText(TEXTS.get("CloseButton")).
-              withHiddenText(TEXTS.get("HiddenText")).
-              show();
+          int result = MessageBoxes.create()
+              .withHeader(TEXTS.get("Lorem"))
+              .withBody(TEXTS.get("HiddenTextInstruction"))
+              .withCancelButtonText(TEXTS.get("CloseButton"))
+              .withHiddenText(TEXTS.get("HiddenText"))
+              .show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -440,17 +440,17 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           long autoCloseMillis = NumberUtility.nvl(getAutoCloseMillisField().getValue(), -1);
           int defaultReturnValue = NumberUtility.nvl(getDefaultReturnValueField().getValue(), IMessageBox.CANCEL_OPTION);
 
-          int result = MessageBoxes.create().
-              withHeader(header).
-              withBody(body).
-              withHtml(html).
-              withYesButtonText(yesButtonText).
-              withNoButtonText(noButtonText).
-              withCancelButtonText(cancelButtonText).
-              withHiddenText(hiddenText).
-              withIconId(iconId).
-              withAutoCloseMillis(autoCloseMillis).
-              show(defaultReturnValue);
+          int result = MessageBoxes.create()
+              .withHeader(header)
+              .withBody(body)
+              .withHtml(html)
+              .withYesButtonText(yesButtonText)
+              .withNoButtonText(noButtonText)
+              .withCancelButtonText(cancelButtonText)
+              .withHiddenText(hiddenText)
+              .withIconId(iconId)
+              .withAutoCloseMillis(autoCloseMillis)
+              .show(defaultReturnValue);
 
           getReturnValueField().setValue(result);
         }

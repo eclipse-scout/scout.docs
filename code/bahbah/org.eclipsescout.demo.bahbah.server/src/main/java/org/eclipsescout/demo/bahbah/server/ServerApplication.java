@@ -36,6 +36,7 @@ public class ServerApplication implements IPlatformListener {
   private static IScoutLogger LOG = ScoutLogManager.getLogger(ServerApplication.class);
 
   public static Subject s_subject;
+
   static {
     s_subject = new Subject();
     s_subject.getPrincipals().add(new SimplePrincipal("bahbah"));
