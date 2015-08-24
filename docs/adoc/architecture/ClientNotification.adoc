@@ -24,6 +24,8 @@ With client notifications it is possible to do so.
 .Client Notifications
 image::{imgsdir}/clientNotifications.png[]
 
+== Examples
+
 Example scenarios for client notifications are:
 
 * some data shared by client and server has changed (e.g. a cache on the client is no longer up-to-date, or a shared variable has changed)
@@ -32,11 +34,22 @@ Example scenarios for client notifications are:
 
 Scout itself uses client notifications to synchronize code type and permission caches and session shared variables.
 
+== Push Technology
+
 Client notifications are implemented using `long polling` as described below, because long polling works reliably in most corporate networks with proxy servers between server and client
  as well as with security policies that do not allow server push.
 
 With long polling, the client requests notifications from the server repeatedly. If no new notifications are available on the server, instead of sending an empty response,
 the server holds the request open and waits until new notifications are available or a timeout is reached.
+
+In addition to the long polling mechanism, pending client notifications are also transferred to the client along with the response of regular client requests.
+
+== Compontents
+
+A client notification message can be any serializable Object.
+It is published on the server and can be addressed either to all client nodes or only to a specific session or user.
+On the client side, handlers can be used to react upon incoming notifications.
+If there are multiple server nodes, the client notifications are synchronized using cluster notifications to ensure that all clients receive the notifications.
 
 ////
 [[img-client_notification_queues, figure]]
