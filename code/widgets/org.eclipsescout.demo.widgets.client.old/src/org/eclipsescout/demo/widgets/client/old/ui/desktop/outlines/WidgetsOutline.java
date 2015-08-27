@@ -12,6 +12,7 @@ package org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines;
 
 import java.util.List;
 
+import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensibleOutline;
@@ -22,6 +23,7 @@ import org.eclipsescout.demo.widgets.client.old.MenusNodePage;
 /**
  * @author mzi
  */
+@Order(4000.0)
 public class WidgetsOutline extends AbstractExtensibleOutline {
 
   @Override
