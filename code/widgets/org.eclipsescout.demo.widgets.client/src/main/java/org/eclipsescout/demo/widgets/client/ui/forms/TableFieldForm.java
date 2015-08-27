@@ -1215,11 +1215,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         public class TableStatusVisibleField extends AbstractBooleanField {
 
           @Override
-          protected boolean getConfiguredEnabled() {
-            return false;
-          }
-
-          @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("TableStatusVisible");
           }
@@ -1235,14 +1230,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredTooltipText() {
-            return TEXTS.get("ThisPropertyCannotBeChangedAtRuntime");
+          protected void execInitField() throws ProcessingException {
+            setValue(getTableField().isTableStatusVisible());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(true);
-            getTableField().setTableStatusVisible(true);
+          protected void execChangedValue() throws ProcessingException {
+            getTableField().setTableStatusVisible(getValue());
           }
         }
 
