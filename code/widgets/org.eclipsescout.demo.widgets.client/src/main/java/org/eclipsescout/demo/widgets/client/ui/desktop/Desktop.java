@@ -16,8 +16,6 @@ import java.util.List;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -25,9 +23,11 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
+import org.eclipse.scout.rt.client.ui.desktop.IDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.AbstractIcons;
@@ -36,11 +36,24 @@ import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
+import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
 
-  public Desktop() {
+  private final DesktopStyle m_desktopStyle;
+
+  public Desktop(DesktopStyle desktopStyle) {
+    super(false);
+    if (desktopStyle == null) {
+      throw new IllegalArgumentException("desktopStyle cannot be null");
+    }
+    m_desktopStyle = desktopStyle;
+    callInitializer();
+  }
+
+  @Override
+  protected DesktopStyle getConfiguredDesktopStyle() {
+    return m_desktopStyle;
   }
 
   @Override
@@ -64,9 +77,26 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execOpened() throws ProcessingException {
-    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
-    if (firstOutline != null) {
-      setOutline(firstOutline);
+    if (DesktopStyle.DEFAULT == m_desktopStyle) {
+      // default desktop
+      IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+      if (firstOutline != null) {
+        setOutline(firstOutline);
+      }
+    }
+    else {
+      // "bench-only" desktop
+      IForm benchForm = null;
+      for (IDesktopExtension ext : getDesktopExtensions()) {
+        if (ext instanceof IFormProvider) {
+          benchForm = ((IFormProvider) ext).provideForm();
+        }
+      }
+      if (benchForm == null) {
+        benchForm = new StringFieldForm();
+      }
+      benchForm.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
+      benchForm.start();
     }
   }
 

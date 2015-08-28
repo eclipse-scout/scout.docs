@@ -18,8 +18,11 @@ import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
+import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
+import org.eclipse.scout.rt.client.ui.desktop.IDesktop.DesktopStyle;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.context.RunContexts;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
@@ -51,12 +54,24 @@ public class ClientSession extends AbstractClientSession {
 
     execInitLocale();
     CODES.getAllCodeTypes("org.eclipsescout.demo.widgets.shared");
-    setDesktop(new Desktop());
+    setDesktop(createDesktop());
 
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
       BEANS.get(IPingService.class).ping("ping");
     }
+  }
+
+  /**
+   * Start web-application with URL http://[host:port]/?desktopStyle=BENCH to activate bench-only mode.
+   */
+  protected IDesktop createDesktop() {
+    DesktopStyle desktopStyle = DesktopStyle.DEFAULT;
+    Object desktopStyleProperty = RunContexts.copyCurrent().getProperty("desktopStyle");
+    if (desktopStyleProperty instanceof String) {
+      desktopStyle = DesktopStyle.valueOf((String) desktopStyleProperty);
+    }
+    return new Desktop(desktopStyle);
   }
 
   /**
