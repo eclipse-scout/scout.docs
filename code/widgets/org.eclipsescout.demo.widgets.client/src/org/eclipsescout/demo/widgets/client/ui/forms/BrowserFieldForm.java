@@ -26,7 +26,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
@@ -180,10 +179,10 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
             getURLField().setValue(TEXTS.get("Www.eclipse.orgscout"));
           }
 
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setVisible(UserAgentUtility.isRichClient());
-          }
+//          @Override
+//          protected void execInitField() throws ProcessingException {
+//            setVisible(UserAgentUtility.isRichClient());
+//          }
         }
 
         @Order(20.0)
