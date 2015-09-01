@@ -12,16 +12,23 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.pagefield.AbstractPageField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipsescout.demo.widgets.client.services.lookup.PageLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.PageWithDetailForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.CloseButton;
-import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.ExamplesBox.PageBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.PageFieldBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.PageFieldForm.MainBox.PageFieldBox.PageField;
 
 public class PageFieldForm extends AbstractForm implements IPageForm {
 
@@ -48,33 +55,78 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  public PageBox getPageBox() {
-    return getFieldByClass(PageBox.class);
+  public PageFieldBox getPageFieldBox() {
+    return getFieldByClass(PageFieldBox.class);
+  }
+
+  public PageField getPageField() {
+    return getFieldByClass(PageField.class);
   }
 
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
     @Order(10.0)
-    public class ExamplesBox extends AbstractGroupBox {
+    public class SelectorBox extends AbstractGroupBox {
 
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("Examples");
+        return TEXTS.get("PageSelector");
       }
 
       @Order(10.0)
-      public class PageBox extends AbstractPageField<IPage> {
+      public class InnerPagesField extends AbstractSmartField<IPageWithTable> {
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
+        protected int getConfiguredGridW() {
+          return 4;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("InnerPage");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<IPageWithTable>> getConfiguredLookupCall() {
+          return PageLookupCall.class;
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setPage(new PageWithDetailForm());
+          setDisplayText("PageWithDetailForm");
+          getPageFieldBox().setInnerPage(new PageWithDetailForm());
+
+          if (UserAgentUtility.isWebClient()) {
+            setEnabled(false);
+          }
         }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          if (getValue() instanceof AbstractPage) {
+            getPageFieldBox().setInnerPage((AbstractPage) getValue());
+          }
+        }
+      }
+    }
+
+    @Order(20.0)
+    public class PageFieldBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("PageWithADetailForm");
+      }
+
+      public void setInnerPage(IPage page) {
+        setTitle(page.getClass().getName());
+        getPageField().setPage(page);
+      }
+
+      @Order(10.0)
+      public class PageField extends AbstractPageField<IPage> {
+
       }
     }
 

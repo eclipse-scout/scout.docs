@@ -15,7 +15,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
 import org.eclipse.scout.service.SERVICES;
-import org.eclipsescout.demo.widgets.client.ClientSession;
 
 public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
 
@@ -29,18 +28,17 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
     String canonicalName = provideSourceClass().getCanonicalName();
 
     StringBuilder sb = new StringBuilder();
-    sb.append("https://github.com/BSI-Business-Systems-Integration-AG/org.eclipsescout.demo/tree/");
-    sb.append(ClientSession.get().getBundle().getBundleContext().getProperty("git.branch"));
-    sb.append("/widgets/");
+    sb.append(String.format("%s/%s/%s/", TEXTS.get("git.repo"), TEXTS.get("git.branch"), TEXTS.get("git.path")));
+
     if (canonicalName.contains("widgets.client.old")) {
       sb.append("org.eclipsescout.demo.widgets.client.old");
     }
     else {
       sb.append("org.eclipsescout.demo.widgets.client");
     }
-    sb.append("/src/");
-    sb.append(canonicalName.replace(".", "/"));
-    sb.append(".java");
+
+    sb.append(String.format("/src/%s.java", canonicalName.replace(".", "/")));
+
     SERVICES.getService(IShellService.class).shellOpen(sb.toString());
   }
 

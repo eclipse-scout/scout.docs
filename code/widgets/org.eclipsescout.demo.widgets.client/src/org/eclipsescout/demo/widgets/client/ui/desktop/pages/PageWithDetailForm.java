@@ -29,9 +29,6 @@ public class PageWithDetailForm extends AbstractPageWithTable<FileTable> {
 
   public PageWithDetailForm() throws ProcessingException {
     super(true, FileDetailForm.class.getName());
-    m_detailForm = new FileDetailForm();
-    setDetailForm(m_detailForm);
-    m_detailForm.startNew();
   }
 
   @Override
@@ -47,6 +44,13 @@ public class PageWithDetailForm extends AbstractPageWithTable<FileTable> {
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("PageWithADetailForm");
+  }
+
+  @Override
+  protected void execInitPage() throws ProcessingException {
+    m_detailForm = new FileDetailForm();
+    setDetailForm(m_detailForm);
+    m_detailForm.startNew();
   }
 
   @Override
