@@ -41,7 +41,7 @@ import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.ClientSession;
-import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigLocaleField;
@@ -633,7 +633,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
+          return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
         }
 
         @Override

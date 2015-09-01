@@ -17,6 +17,8 @@ import java.util.Locale;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.logger.IScoutLogger;
+import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -36,7 +38,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentListLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.CloseButton;
@@ -66,6 +69,8 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 public class SmartFieldForm extends AbstractForm implements IPageForm {
+
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(SmartFieldForm.class);
 
   public SmartFieldForm() throws ProcessingException {
     super();
@@ -264,7 +269,44 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(10.0)
+      @Order(15.0)
+      public class SwitchLookupCall extends AbstractButton {
+
+        private boolean m_localLookupCall = true;
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("SwitchToRemote");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("SwitchToRemoteTooltip");
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          m_localLookupCall = !m_localLookupCall;
+          if (m_localLookupCall) {
+            getDefaultField().setLookupCall(new LocaleLookupCall());
+            setLabel(TEXTS.get("SwitchToRemote"));
+            setTooltipText(TEXTS.get("SwitchToRemoteTooltip"));
+          }
+          else {
+            getDefaultField().setLookupCall(new RemoteLocaleLookupCall());
+            setLabel(TEXTS.get("SwitchToLocal"));
+            setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
+          }
+          LOG.debug("Switched lookup-call of DefaultField to " + (m_localLookupCall ? "local" : "remote") + " instance");
+        }
+      }
+
+      @Order(20.0)
       public class SmartFieldWithListContentField extends AbstractLabelField {
 
         @Override
@@ -283,7 +325,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(30.0)
       public class DefaultField extends AbstractSmartField<Locale> {
 
         @Override
@@ -293,11 +335,11 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
+          return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
         }
       }
 
-      @Order(30.0)
+      @Order(40.0)
       public class MandatoryField extends AbstractSmartField<Color> {
 
         @Override
@@ -328,7 +370,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(50.0)
       public class DisabledField extends AbstractSmartField<Color> {
 
         @Override
@@ -352,7 +394,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(60.0)
       public class SmartFieldWithTreeContentField extends AbstractLabelField {
 
         @Override
@@ -371,7 +413,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(70.0)
       public class DefaultSmartField extends AbstractSmartField<Long> {
 
         @Override
@@ -385,7 +427,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(80.0)
       public class MandatorySmartfieldField extends AbstractSmartField<Long> {
 
         @Override
@@ -404,7 +446,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(90.0)
       public class DisabledSmartFieldField extends AbstractSmartField<Long> {
 
         @Override
@@ -428,7 +470,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(100.0)
       public class ProposalFieldWithListContentField extends AbstractLabelField {
 
         @Override
@@ -447,7 +489,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(110.0)
       public class DefaultProposalField extends AbstractProposalField<Long> {
 
         @Override
@@ -461,7 +503,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(120.0)
       public class MandatoryProposalField extends AbstractProposalField<Long> {
 
         @Override
@@ -480,7 +522,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120)
+      @Order(130)
       public class DisabledProposalField extends AbstractProposalField<Long> {
 
         @Override

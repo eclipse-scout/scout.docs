@@ -15,7 +15,7 @@ import java.util.Locale;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.util.DateFormatProvider;
 
-public class DateFormatLocaleLookupCall extends AbstractLocaleLookupCall {
+public class LocaleLookupCall extends AbstractLocaleLookupCall {
 
   private static final long serialVersionUID = -2057181577149853634L;
 

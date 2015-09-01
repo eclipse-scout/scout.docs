@@ -58,7 +58,7 @@ import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipsescout.demo.widgets.client.services.lookup.DateFormatLocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
@@ -548,7 +548,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-              return (Class<? extends ILookupCall<Locale>>) DateFormatLocaleLookupCall.class;
+              return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
             }
 
           }
