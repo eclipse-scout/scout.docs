@@ -54,10 +54,12 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.Conf
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultProposalField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultSmartField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledSmartFieldField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryField;
+import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryProposalField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatorySmartfieldField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
@@ -162,6 +164,14 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
    */
   public DefaultSmartField getDefaultSmartField() {
     return getFieldByClass(DefaultSmartField.class);
+  }
+
+  public DefaultProposalField getDefaultProposalField() {
+    return getFieldByClass(DefaultProposalField.class);
+  }
+
+  public MandatoryProposalField getMandatoryProposalField() {
+    return getFieldByClass(MandatoryProposalField.class);
   }
 
   /**
@@ -812,6 +822,51 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
       }
+    }
+
+    @Order(35.0)
+    public class ChangeWildcardButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ChangeWildcard");
+      }
+
+      @Override
+      protected void execInitField() throws ProcessingException {
+        updateLabel(getDefaultField().getWildcard());
+      }
+
+      private void updateLabel(String wildcard) {
+        setLabel(TEXTS.get("ChangeWildcard") + ": " + wildcard);
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        String newWildcard;
+        if (getDefaultField().getWildcard() == "*") {
+          newWildcard = "°";
+        }
+        else if (getDefaultField().getWildcard() == "°") {
+          newWildcard = ".*";
+        }
+        else if (getDefaultField().getWildcard() == ".*") {
+          newWildcard = "\\";
+        }
+        else {
+          newWildcard = "*";
+        }
+        getDefaultField().setWildcard(newWildcard);
+        getMandatoryField().setWildcard(newWildcard);
+        getDefaultSmartField().setWildcard(newWildcard);
+        getMandatorySmartfieldField().setWildcard(newWildcard);
+        getDefaultProposalField().setWildcard(newWildcard);
+        getMandatoryProposalField().setWildcard(newWildcard);
+        getListSmartField().setWildcard(newWildcard);
+        getTreeSmartField().setWildcard(newWildcard);
+        updateLabel(newWildcard);
+      }
+
     }
 
     @Order(40.0)
