@@ -644,6 +644,49 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
+    @Order(35.0)
+    public class ChangeWildcardButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ChangeWildcard");
+      }
+
+      @Override
+      protected void execInitField() throws ProcessingException {
+        updateLabel(getDefaultField().getWildcard());
+      }
+
+      private void updateLabel(String wildcard) {
+        setLabel(TEXTS.get("ChangeWildcard") + ": " + wildcard);
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        String newWildcard;
+        if (getDefaultField().getWildcard() == "*") {
+          newWildcard = "°";
+        }
+        else if (getDefaultField().getWildcard() == "°") {
+          newWildcard = ".*";
+        }
+        else if (getDefaultField().getWildcard() == ".*") {
+          newWildcard = "\\";
+        }
+        else {
+          newWildcard = "*";
+        }
+        getDefaultField().setWildcard(newWildcard);
+        getMandatoryField().setWildcard(newWildcard);
+        getDefaultSmartField().setWildcard(newWildcard);
+        getMandatorySmartfieldField().setWildcard(newWildcard);
+        getListSmartField().setWildcard(newWildcard);
+        getTreeSmartField().setWildcard(newWildcard);
+        updateLabel(newWildcard);
+      }
+
+    }
+
     @Order(40.0)
     public class CloseButton extends AbstractCloseButton {
     }
