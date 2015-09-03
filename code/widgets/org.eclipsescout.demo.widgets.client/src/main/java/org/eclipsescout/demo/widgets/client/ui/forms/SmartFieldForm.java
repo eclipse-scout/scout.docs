@@ -19,6 +19,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -313,6 +314,43 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
             setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
           }
           LOG.debug("Switched lookup-call of DefaultField to " + (m_localLookupCall ? "local" : "remote") + " instance");
+        }
+      }
+
+      @Order(17.0)
+      public class AutoPrefixWildcard extends AbstractButton {
+
+        private boolean m_active = false;
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EnableAutoPrefixWildcard");
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          m_active = !m_active;
+          ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
+          updateLabel();
+        }
+
+        private void updateLabel() {
+          if (m_active) {
+            setLabel(TEXTS.get("DisableAutoPrefixWildcard"));
+          }
+          else {
+            setLabel(TEXTS.get("EnableAutoPrefixWildcard"));
+          }
         }
       }
 
