@@ -27,6 +27,8 @@ import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -49,6 +51,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.DisplayParentLooku
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.BlockModelThreadField;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CloseOnChildCloseField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayParentField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityField;
@@ -122,6 +125,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public BlockModelThreadField getBlockModelThreadField() {
     return getFieldByClass(BlockModelThreadField.class);
+  }
+
+  public CloseOnChildCloseField getCloseOnChildCloseField() {
+    return getFieldByClass(CloseOnChildCloseField.class);
   }
 
   public OpenFormButton getOpenFormButton() {
@@ -278,6 +285,15 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(55.0)
+      public class CloseOnChildCloseField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "close this when child closed";
+        }
+      }
+
       @Order(60.0)
       public class OpenFormButton extends AbstractButton {
 
@@ -312,6 +328,18 @@ public class FormForm extends AbstractForm implements IPageForm {
                   }
                   form.setModal(getModalityField().isChecked());
                   form.start();
+                  if (getCloseOnChildCloseField().getValue()) {
+                    form.addFormListener(new FormListener() {
+
+                      @Override
+                      public void formChanged(FormEvent e) throws ProcessingException {
+                        if (e.getType() == FormEvent.TYPE_CLOSED) {
+                          FormForm.this.doClose();
+                        }
+                      }
+                    });
+                  }
+
                   break;
                 }
                 case MessageBox: {
