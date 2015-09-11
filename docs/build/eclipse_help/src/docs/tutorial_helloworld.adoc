@@ -19,14 +19,3 @@ include::{mdledir}/CreateNewProject.adoc[]
 
 include::{mdledir}/RunTheApplication.adoc[]
 
-==== Add the User Interface Widgets
-
-include::{mdledir}/HelloWorldFrontend.adoc[]
-
-==== Implement the Server Service
-
-include::{mdledir}/HelloWorldBackend.adoc[]
-
-==== Run the Final Application
-
-include::{mdledir}/HelloWorldRunTheFinalApplication.adoc[]

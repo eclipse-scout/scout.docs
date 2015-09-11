@@ -11,7 +11,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-After installing the Eclipse Scout package you are now ready to implement your first Scout application. 
+After installing the Eclipse Scout package you are now ready to create your first Scout application. 
 
 == Create a Scout Project
 
@@ -20,18 +20,6 @@ include::{mdledir}/CreateNewProject.adoc[]
 == Run the Application
 
 include::{mdledir}/RunTheApplication.adoc[]
-
-== Add the User Interface Widgets
-
-include::{mdledir}/HelloWorldFrontend.adoc[]
-
-== Implement the Server Service
-
-include::{mdledir}/HelloWorldBackend.adoc[]
-
-== Run the Final Application
-
-include::{mdledir}/HelloWorldRunTheFinalApplication.adoc[]
 
 == What's Next?
 
