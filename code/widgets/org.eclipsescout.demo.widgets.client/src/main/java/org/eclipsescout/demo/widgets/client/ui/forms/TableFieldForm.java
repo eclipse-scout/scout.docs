@@ -58,8 +58,8 @@ import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.IconIdLookupCall;
+import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.DefaultIconIdField;
@@ -1266,6 +1266,35 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() throws ProcessingException {
             setValue(getTableField().getTable().isHeaderVisible());
+          }
+        }
+
+        @Order(145.0)
+        public class TableSortEnabledField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("IsSortingEnabled");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getTableField().getTable().setSortEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getTableField().getTable().isSortEnabled());
           }
         }
 
