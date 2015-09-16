@@ -19,6 +19,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -54,10 +55,12 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.Conf
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultProposalField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultSmartField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledSmartFieldField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryField;
+import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryProposalField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatorySmartfieldField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
@@ -162,6 +165,14 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
    */
   public DefaultSmartField getDefaultSmartField() {
     return getFieldByClass(DefaultSmartField.class);
+  }
+
+  public DefaultProposalField getDefaultProposalField() {
+    return getFieldByClass(DefaultProposalField.class);
+  }
+
+  public MandatoryProposalField getMandatoryProposalField() {
+    return getFieldByClass(MandatoryProposalField.class);
   }
 
   /**
@@ -303,6 +314,43 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
             setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
           }
           LOG.debug("Switched lookup-call of DefaultField to " + (m_localLookupCall ? "local" : "remote") + " instance");
+        }
+      }
+
+      @Order(17.0)
+      public class AutoPrefixWildcard extends AbstractButton {
+
+        private boolean m_active = false;
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EnableAutoPrefixWildcard");
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
+        }
+
+        @Override
+        protected void execClickAction() throws ProcessingException {
+          m_active = !m_active;
+          ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
+          updateLabel();
+        }
+
+        private void updateLabel() {
+          if (m_active) {
+            setLabel(TEXTS.get("DisableAutoPrefixWildcard"));
+          }
+          else {
+            setLabel(TEXTS.get("EnableAutoPrefixWildcard"));
+          }
         }
       }
 
@@ -812,6 +860,51 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
       }
+    }
+
+    @Order(35.0)
+    public class ChangeWildcardButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ChangeWildcard");
+      }
+
+      @Override
+      protected void execInitField() throws ProcessingException {
+        updateLabel(getDefaultField().getWildcard());
+      }
+
+      private void updateLabel(String wildcard) {
+        setLabel(TEXTS.get("ChangeWildcard") + ": " + wildcard);
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        String newWildcard;
+        if (getDefaultField().getWildcard() == "*") {
+          newWildcard = "°";
+        }
+        else if (getDefaultField().getWildcard() == "°") {
+          newWildcard = ".*";
+        }
+        else if (getDefaultField().getWildcard() == ".*") {
+          newWildcard = "\\";
+        }
+        else {
+          newWildcard = "*";
+        }
+        getDefaultField().setWildcard(newWildcard);
+        getMandatoryField().setWildcard(newWildcard);
+        getDefaultSmartField().setWildcard(newWildcard);
+        getMandatorySmartfieldField().setWildcard(newWildcard);
+        getDefaultProposalField().setWildcard(newWildcard);
+        getMandatoryProposalField().setWildcard(newWildcard);
+        getListSmartField().setWildcard(newWildcard);
+        getTreeSmartField().setWildcard(newWildcard);
+        updateLabel(newWildcard);
+      }
+
     }
 
     @Order(40.0)
