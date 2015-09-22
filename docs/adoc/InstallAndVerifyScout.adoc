@@ -28,14 +28,14 @@ After clicking the btn:[Ok] button, the Eclipse IDE creates any directories that
 When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <<img-scout_welcome>>. 
 
 [[img-scout_welcome, Figure 000]]
-.Eclipse Scout welcome screen.
+.Eclipse welcome screen.
 image::{imgsdir}/scout_startup_welcome.png[]
 
-To close the welcome page and open the Scout perspective in the Eclipse IDE click on the [icon]_Workbench_ icon. 
-As a result the empty Scout perspective is displayed according to <<img-scout_perspective>>. 
+To close the welcome page click on the [icon]_Workbench_ icon in the top right corner. 
+As a result the empty Java perspective is displayed according to <<img-scout_perspective>>. 
 
 [[img-scout_perspective, Figure 000]]
-.Eclipse Scout started in the Scout SDK perspective. 
+.Eclipse started in the Java perspective. 
 image::{imgsdir}/scout_startup_scout_explorer.png[]
 
 Congratulations, you just have successfully completed the Eclipse Scout installation!
