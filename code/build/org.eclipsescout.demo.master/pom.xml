@@ -16,13 +16,13 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.master</artifactId>
-  <version>5.1.0-SNAPSHOT</version>
+  <version>5.1.0.R007</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo - Master</name>
 
   <properties>
-  	<scout.version>5.1.0-SNAPSHOT</scout.version>
+  	<scout.version>5.1.0.R007</scout.version>
     <jacoco.version>0.6.1.201212231917</jacoco.version>
     <compileSource>1.7</compileSource>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

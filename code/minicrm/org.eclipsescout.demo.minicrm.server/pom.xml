@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.eclipsescout.demo.minicrm</groupId>
 		<artifactId>org.eclipsescout.demo.minicrm.parent</artifactId>
-		<version>5.1.0-SNAPSHOT</version>
+		<version>5.1.0.R007</version>
 		<relativePath>../org.eclipsescout.demo.minicrm.parent/</relativePath>
 	</parent>
 
@@ -29,7 +29,7 @@
 		<dependency>
 			<artifactId>org.eclipsescout.demo.minicrm.shared</artifactId>
 			<groupId>org.eclipsescout.demo.minicrm</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R007</version>
 		</dependency>
 	</dependencies>
 </project>

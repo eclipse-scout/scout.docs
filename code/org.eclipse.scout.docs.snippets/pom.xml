@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.eclipsescout.demo</groupId>
 		<artifactId>org.eclipsescout.demo.master</artifactId>
-		<version>5.1.0-SNAPSHOT</version>
+		<version>5.1.0.R007</version>
 		<relativePath>../build/org.eclipsescout.demo.master/</relativePath>
 	</parent>
 
