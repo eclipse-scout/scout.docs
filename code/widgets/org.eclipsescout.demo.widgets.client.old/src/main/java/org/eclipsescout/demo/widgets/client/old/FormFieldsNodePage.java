@@ -21,7 +21,6 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ColorFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ContextMenuForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.FileChooserFieldForm;
-import org.eclipsescout.demo.widgets.client.old.ui.forms.FormWithToolbuttonsForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.PageFieldForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.StatusForm;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.TreeDNDForm;
@@ -73,7 +72,5 @@ public class FormFieldsNodePage extends AbstractPageWithNodes {
     FormPage formPage30 = new FormPage(WrappedFormFieldForm.class);
     pageList.add(formPage30);
 
-    FormPage formPage31 = new FormPage(FormWithToolbuttonsForm.class);
-    pageList.add(formPage31);
   }
 }
