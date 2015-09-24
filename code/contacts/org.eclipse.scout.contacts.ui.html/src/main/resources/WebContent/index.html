@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contacts Application</title>
+    <scout:include template="favicon.html" />
+    <link rel="stylesheet" type="text/css" href="res/all-1.0.0-fingerprint.min.css">
+    <script src="res/jquery-all-2.1.0-fingerprint.min.js"></script>
+    <script src="res/all-1.0.0-fingerprint.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        scout.init({
+          bootstrap: {
+            fonts: ['scoutIcons']
+          },
+          session: {
+            uiUseTaskbarLogo: true
+          }
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <scout:include template="no-script.html" />
+    <div class="scout" data-partid="1"></div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contacts Application</title>
+    <scout:include template="favicon.html" />
+    <link rel="stylesheet" type="text/css" href="res/scout-login-5.1.0-fingerprint.min.css">
+    <style type="text/css">
+       .box-with-logo {
+         background-image: url('res/login-logo.png');
+       }
+    </style>
+    <script src="res/jquery-all-2.1.0-fingerprint.min.js"></script>
+    <script src="res/scout-login-5.1.0-fingerprint.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        scout.login.init({texts: <scout:message key="ui.login ui.loginFailed ui.user ui.password" style="javascript" /> });
+      });
+    </script>
+  </head>
+  <body>
+    <scout:include template="no-script.html" />
+  </body>
+</html>
