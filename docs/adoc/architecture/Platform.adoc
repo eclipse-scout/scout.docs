@@ -1,0 +1,78 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+
+//-----------------------------------------------------------------------------
+// This file describes the architecture of the Scout Platform
+//-----------------------------------------------------------------------------
+
+= Scout Platform
+
+Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:
+
+* Application Lifecycle Management
+* Object Instance Management (Bean Management)
+* Configuration Management
+* Application Inventory
+
+== Application Lifecycle
+
+The lifecycle of a Scout application is controlled by implementations of `org.eclipse.scout.rt.platform.IPlatform`.
+This interface contains methods to start and stop the application and to retrieve the bean manager associated with this application.
+See <<Bean Manager>> to learn more about bean management in Scout.
+The class `org.eclipse.scout.rt.platform.Platform` provides access to the current platform instance. On first access the platform is automatically created and started.
+
+The startup is separated into several milestones (states). Depending on the current state some components of the platform may already have been initialized and are ready to use while others are not available yet.
+See enum `org.eclipse.scout.rt.platform.IPlatform.State` for a description of each state and what may be used in a certain state.
+
+=== Platform Listener
+
+To participate in the application startup or shutdown a platform listener can be created.
+For this a class implementing `org.eclipse.scout.rt.platform.IPlatformListener` must be created. The listener is automatically a bean and must therefore not be registered anywhere.
+See <<Bean Manager>> to learn more about bean management in Scout and how the listener becomes a bean.
+As soon as the state of the platform changes the listener will be notified.
+
+[source,java,indent=0]
+.A listener that will do some work as soon as the platform has been started.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=PlatformListener]
+----
+
+TIP: As platform listeners may run as part of the startup or shutdown not the full Scout platform may be available. Depending on the state some tasks cannot be performed or some platform models are not available yet!
+
+== Bean Manager
+
+TODO
+
+=== Bean Scopes
+
+TODO @Bean @ApplicationScoped
+
+=== Bean Creation
+
+TODO @CreateImmediately @PostConstruct
+
+=== Bean Retrieval
+
+TODO BEANS @Replace @Order @IgnoreBean
+
+=== Bean Decoration
+
+TODO IBeanDecorationFactory IBeanInterceptor @TunnelToServer
+
+== Configuration Management
+
+TODO IConfigProperty CONFIG config.ini
+
+== Class Inventory
+
+TODO
+

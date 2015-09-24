@@ -20,9 +20,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 !!! WORK IN PROGRESS !!!
 
-Scout Architecture Descriptions and Concepts are described here.
+Scout Architecture and Concepts are described here.
 
 :numbered:
+include::{mdledir}/architecture/Platform.adoc[]
 include::{mdledir}/architecture/JobManager.adoc[]
 include::{mdledir}/architecture/RunContext.adoc[]
 include::{mdledir}/architecture/RunMonitor.adoc[]
