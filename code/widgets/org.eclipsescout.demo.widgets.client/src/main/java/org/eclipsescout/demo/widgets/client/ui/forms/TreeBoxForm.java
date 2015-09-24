@@ -16,9 +16,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -343,6 +347,34 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return UserContentTreeLookupCall.class;
+        }
+
+        @Order(10)
+        public class TreeBoxTree extends DefaultTreeBoxTree {
+
+          @Order(30.0)
+          public class ToggleNodeEnabledMenu extends AbstractMenu {
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ToggleNodeEnabledState");
+            }
+
+            @Override
+            protected boolean getConfiguredInheritAccessibility() {
+              return false;
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              getSelectedNode().setEnabled(!getSelectedNode().isEnabled());
+            }
+          }
         }
       }
 
