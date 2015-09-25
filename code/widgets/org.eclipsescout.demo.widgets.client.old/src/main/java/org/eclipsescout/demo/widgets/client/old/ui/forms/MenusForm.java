@@ -663,6 +663,55 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(40.0)
+      public class ToggleTextIconPngMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "Hide icon";
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          if (getIconId() == null) {
+            setIconId(Icons.Bookmark);
+            setText(null);
+          }
+          else if (getText() == null) {
+            setText("Hide icon");
+          }
+          else {
+            setIconId(null);
+            setText("Hide text, show icon");
+          }
+        }
+      }
+
+      @Order(50.0)
+      public class OpenOtherMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "Toggle other menu";
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          MenusPngIconMenu otherMenu = getMenuByClass(MenusPngIconMenu.class);
+          otherMenu.setSelected(!otherMenu.isSelected());
+        }
+      }
+
       @Order(30.0)
       public class StringBottomField extends AbstractStringField {
 
