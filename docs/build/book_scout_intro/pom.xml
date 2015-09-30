@@ -10,10 +10,9 @@
     <version>5.1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.eclipsescout.docs</groupId>
   <artifactId>book_scout_intro</artifactId>
-
   <name>Eclipse Scout Intro Book</name>
+  <packaging>pom</packaging>
 
   <build>
     <defaultGoal>process-resources</defaultGoal>

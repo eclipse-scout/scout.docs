@@ -15,8 +15,7 @@ This folder contains the source for producing the different documentation items 
 * `publish` folder: contains some tasks written in Java used as post-processing engine for the documentation items contained in the `build` folder, link:publish/[read more].
 
 
-== Building & publishing the documents
+== Building the documents
 
 Building the documents using Asciidoctor: check the link:build/README.adoc[README of the build folder].
 
-Post processing the Asciidoctor output: check the link:publish/README.adoc[README of the publish folder].
