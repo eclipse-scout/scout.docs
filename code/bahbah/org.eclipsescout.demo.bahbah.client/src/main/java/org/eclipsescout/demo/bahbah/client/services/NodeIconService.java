@@ -5,20 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.scout.rt.platform.service.AbstractService;
+import javax.annotation.PostConstruct;
+
 import org.eclipsescout.demo.bahbah.shared.Icons;
 
 /**
  * Service providing icons for a given node
  */
-public class NodeIconService extends AbstractService implements INodeIconService {
+public class NodeIconService implements INodeIconService {
 
   private final List<String> m_icons = new ArrayList<String>();
   private final Map<String, String> m_nodeIcons = new HashMap<String, String>();
   private final Object m_lockObject = new Object();
 
-  @Override
-  public void initializeService() {
+  @PostConstruct
+  public void initializeIcons() {
     synchronized (m_lockObject) {
       m_icons.add(Icons.DotBlue);
       m_icons.add(Icons.DotOrgange);

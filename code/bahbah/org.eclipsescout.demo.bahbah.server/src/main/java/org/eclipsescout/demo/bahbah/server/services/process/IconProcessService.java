@@ -22,7 +22,6 @@ import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.ByteArrayHolder;
 import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -32,7 +31,7 @@ import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
 
 @Server
-public class IconProcessService extends AbstractService implements IIconProcessService {
+public class IconProcessService implements IIconProcessService {
   public final static int MAX_SIZE = 16;
 
   private byte[] resize(byte[] content) {

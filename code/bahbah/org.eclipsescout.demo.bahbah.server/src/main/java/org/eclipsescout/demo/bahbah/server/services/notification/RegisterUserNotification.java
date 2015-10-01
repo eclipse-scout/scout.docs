@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class RegisterUserNotification implements Serializable {
 
   private static final long serialVersionUID = -8987801608205820581L;
-  private String m_userName;
+  private final String m_userName;
 
   public RegisterUserNotification(String username) {
     m_userName = username;

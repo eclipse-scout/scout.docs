@@ -13,7 +13,6 @@ package org.eclipsescout.demo.minicrm.server.services;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipsescout.demo.minicrm.shared.services.IStandardOutlineService;
@@ -23,7 +22,7 @@ import org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages.searchform
 import org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages.searchform.PersonSearchFormData;
 
 @Server
-public class StandardOutlineService extends AbstractService implements IStandardOutlineService {
+public class StandardOutlineService implements IStandardOutlineService {
 
   @Override
   public CompanyTablePageData getCompanyTableData(CompanySearchFormData formData) throws ProcessingException {

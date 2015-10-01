@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class UnregisterUserNotification implements Serializable {
 
   private static final long serialVersionUID = 5245312868353225657L;
-  private String m_userName;
+  private final String m_userName;
 
   public UnregisterUserNotification(String username) {
     m_userName = username;

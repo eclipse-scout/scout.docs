@@ -20,7 +20,6 @@ import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.IntegerHolder;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
@@ -43,14 +42,8 @@ import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.UserFormData;
 
 @Server
-public class UserProcessService extends AbstractService implements IUserProcessService {
-  private Set<String> m_users;
-
-  @Override
-  public void initializeService() {
-    super.initializeService();
-    m_users = Collections.synchronizedSet(new HashSet<String>());
-  }
+public class UserProcessService implements IUserProcessService {
+  private final Set<String> m_users = Collections.synchronizedSet(new HashSet<String>());
 
   @Override
   public void registerUser() throws ProcessingException {

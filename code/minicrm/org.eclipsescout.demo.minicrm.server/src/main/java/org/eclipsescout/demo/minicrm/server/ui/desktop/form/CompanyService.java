@@ -13,7 +13,6 @@ package org.eclipsescout.demo.minicrm.server.ui.desktop.form;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -25,7 +24,7 @@ import org.eclipsescout.demo.minicrm.shared.ui.desktop.form.ReadCompanyPermissio
 import org.eclipsescout.demo.minicrm.shared.ui.desktop.form.UpdateCompanyPermission;
 
 @Server
-public class CompanyService extends AbstractService implements ICompanyService {
+public class CompanyService implements ICompanyService {
 
   @Override
   public CompanyFormData prepareCreate(CompanyFormData formData) throws ProcessingException {

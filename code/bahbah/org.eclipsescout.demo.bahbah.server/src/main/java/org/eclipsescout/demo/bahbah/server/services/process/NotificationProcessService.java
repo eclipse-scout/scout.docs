@@ -16,7 +16,6 @@ import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
@@ -29,7 +28,7 @@ import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcess
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 @Server
-public class NotificationProcessService extends AbstractService implements INotificationProcessService {
+public class NotificationProcessService implements INotificationProcessService {
   private static IScoutLogger LOG = ScoutLogManager.getLogger(NotificationProcessService.class);
 
   private final static long TIMEOUT = 1000 * 60 * 10; // 10min
