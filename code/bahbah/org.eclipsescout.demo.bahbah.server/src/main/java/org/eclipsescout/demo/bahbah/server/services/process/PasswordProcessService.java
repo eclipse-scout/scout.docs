@@ -13,6 +13,8 @@ package org.eclipsescout.demo.bahbah.server.services.process;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
@@ -31,8 +33,8 @@ import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 @Server
 public class PasswordProcessService extends AbstractPasswordManagementService implements IPasswordProcessService {
 
-  @Override
-  public void initializeService() {
+  @PostConstruct
+  public void initializePasswordPolicy() {
     setPasswordPolicy(new IPasswordPolicy() {
 
       @Override
