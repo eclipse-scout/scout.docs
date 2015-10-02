@@ -36,6 +36,7 @@ import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
+import org.eclipsescout.demo.widgets.client.ui.forms.OptionsForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
@@ -265,6 +266,21 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
+      }
+    }
+
+    @Order(60.0)
+    public class OptionsMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("Options");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        OptionsForm form = new OptionsForm();
+        form.startNew();
       }
     }
   }
