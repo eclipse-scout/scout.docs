@@ -15,9 +15,8 @@ import java.util.List;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.contact.ContactsOutline;
+import org.eclipse.scout.contacts.client.outlines.ContactsOutline;
 import org.eclipse.scout.contacts.client.outlines.SearchOutline;
-import org.eclipse.scout.contacts.client.outlines.SettingsOutline;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -40,18 +39,18 @@ public class Desktop extends AbstractDesktop {
 
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    return CollectionUtility.<Class<? extends IOutline>> arrayList(ContactsOutline.class, SearchOutline.class, SettingsOutline.class);
+    return CollectionUtility.<Class<? extends IOutline>> arrayList(ContactsOutline.class, SearchOutline.class);
   }
 
   @Override
   protected void execGuiAttached() throws ProcessingException {
     super.execGuiAttached();
-    selectFirstVisibleOutline();
+    setVisibleOutline();
   }
 
-  protected void selectFirstVisibleOutline() {
+  protected void setVisibleOutline() {
     for (IOutline outline : getAvailableOutlines()) {
-      if (outline.isEnabled() && outline.isVisible()) {
+      if (outline instanceof ContactsOutline) {
         setOutline(outline);
         break;
       }
@@ -149,7 +148,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected String getConfiguredIconId() {
-      return AbstractIcons.Pencil;
+      return AbstractIcons.Person;
     }
   }
 
@@ -177,33 +176,6 @@ public class Desktop extends AbstractDesktop {
     @Override
     protected String getConfiguredKeyStroke() {
       return IKeyStroke.F3;
-    }
-  }
-
-  @Order(3000.0)
-  public class SettingsOutlineViewButton extends AbstractOutlineViewButton {
-
-    public SettingsOutlineViewButton() {
-      this(SettingsOutline.class);
-    }
-
-    protected SettingsOutlineViewButton(Class<? extends SettingsOutline> outlineClass) {
-      super(Desktop.this, outlineClass);
-    }
-
-    @Override
-    protected DisplayStyle getConfiguredDisplayStyle() {
-      return DisplayStyle.TAB;
-    }
-
-    @Override
-    protected String getConfiguredIconId() {
-      return AbstractIcons.Gear;
-    }
-
-    @Override
-    protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F10;
     }
   }
 }

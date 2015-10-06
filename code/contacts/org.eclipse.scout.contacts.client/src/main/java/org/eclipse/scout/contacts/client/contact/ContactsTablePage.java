@@ -31,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -290,7 +291,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
 
   @Override
   protected String getConfiguredIconId() {
-    return Icons.Contact;
+    return AbstractIcons.Person;
   }
 
   @Override

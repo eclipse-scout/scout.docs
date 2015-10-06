@@ -108,7 +108,7 @@ public class ContactsSearchForm extends AbstractSearchForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("searchCriteria");
+          return TEXTS.get("SearchCriteria");
         }
 
         @Order(1000.0)
