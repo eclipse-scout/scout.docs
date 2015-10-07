@@ -124,7 +124,7 @@ public class MapForm extends AbstractForm {
 
       @Override
       protected void execInitField() throws ProcessingException {
-        String size = "" + getConfiguredHeightInPixel() + "x" + getConfiguredWidthInPixel();
+        String size = "" + (getConfiguredHeightInPixel() - 20) + "x" + (getConfiguredWidthInPixel() - 20);
         String address = (new Locale("", getCountry())).getDisplayCountry();
         String zoom = "7";
         String url = null;
@@ -158,6 +158,10 @@ public class MapForm extends AbstractForm {
 
     @Order(2000.0)
     public class OkButton extends AbstractOkButton {
+      @Override
+      protected boolean getConfiguredFocusable() {
+        return false;
+      }
     }
   }
 

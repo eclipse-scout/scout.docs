@@ -1,0 +1,74 @@
+.form {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: @background-color;
+}
+
+.dialog {
+  position: absolute !important; /* ignore positioning of 'ui-resizable' */
+  background-color: @background-color;
+  border: solid 2px;
+  border-top-left-radius: @border-radius;
+  border-top-right-radius: @border-radius;
+  border-color: #67a8ce;
+  /* #scout.drop-shadow-large(); */
+  margin: 10px; /* minimum padding to desktop */
+  margin-bottom: 15px;
+  top: 0px; /* must be specified otherwise dialogs will be positioned at end of document and increase document size */
+
+  &.shown {
+    #scout.animation(fadeIn ease-in 1);
+    #scout.animation-duration(0.15s);
+  }
+
+  &.modality-highlight {
+    #scout.animation-shake();
+  }
+
+  & > .title-box {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 30px; /* Leave space for 'x' closable */
+    background-color: #67a8ce;
+
+    & > .title {
+      #scout.overflow-ellipsis-nowrap();
+      /* #scout.font-text-large(); */
+      font-weight: bold;
+      color: #ffffff;
+
+      & > .icon {
+        margin-right: 5px;
+
+        &.font-icon {
+          font-size: 14px;
+        }
+      }
+    }
+
+    & > .sub-title {
+      #scout.overflow-ellipsis-nowrap();
+      #scout.font-text-normal();
+      color: @active-color;
+    }
+  }
+
+  & > .closable {
+    position: absolute;
+    right: 5px;
+    margin: 3px;
+    #scout.font-icon();
+    font-size: 17px;
+    cursor: pointer;
+    color: @palette-white;
+
+    &::before {
+      content: @icon-remove;
+    }
+
+    &:hover {
+      color: @palette-white;
+    }
+  }
+}

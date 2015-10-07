@@ -1,0 +1,14 @@
+.splitter {
+  background-color: @palette-blue-0;
+
+  position: absolute;
+  z-index: 1;
+
+  /* | */
+  &.x-axis {
+    top: 0px;
+    height: 100%;
+    width: 2px;
+    cursor: col-resize;
+  }
+}

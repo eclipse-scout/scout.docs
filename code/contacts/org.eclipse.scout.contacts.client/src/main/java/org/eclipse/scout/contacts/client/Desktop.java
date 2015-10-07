@@ -48,6 +48,11 @@ public class Desktop extends AbstractDesktop {
     setVisibleOutline();
   }
 
+  @Override
+  protected void setDesktopStyle(DesktopStyle desktopStyle) {
+    super.setDesktopStyle(desktopStyle);
+  }
+
   protected void setVisibleOutline() {
     for (IOutline outline : getAvailableOutlines()) {
       if (outline instanceof ContactsOutline) {
@@ -93,6 +98,21 @@ public class Desktop extends AbstractDesktop {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("Help");
+    }
+
+    @Order(500.0)
+    public class OptionsMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("Options");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        OptionsForm form = new OptionsForm();
+        form.startNew();
+      }
     }
 
     @Order(1000)
