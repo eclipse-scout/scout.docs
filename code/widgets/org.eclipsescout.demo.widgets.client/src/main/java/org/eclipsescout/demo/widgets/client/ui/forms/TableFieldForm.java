@@ -359,9 +359,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             if (participants != null && participants > 800) {
               row.setIconId("font:\uE001");
             }
-            else {
-              row.setIconId(null);
-            }
           }
 
           @Override
@@ -1265,11 +1262,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected void execChangedValue() throws ProcessingException {
             getTableField().getTable().setRowIconVisible(getValue());
+            getDefaultIconIdField().setVisible(getValue());
           }
 
           @Override
           protected void execInitField() throws ProcessingException {
             setValue(getTableField().getTable().isRowIconVisible());
+            getDefaultIconIdField().setVisible(getValue());
           }
 
         }
