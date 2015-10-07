@@ -86,7 +86,9 @@ public class FormPage extends AbstractPageWithNodes {
 
   @Override
   protected void execInitDetailForm() throws ProcessingException {
-    getDetailForm().getCloseButton().setVisibleGranted(false);
+    if (getDetailForm() != null) {
+      getDetailForm().getCloseButton().setVisibleGranted(false);
+    }
   }
 
   @Override

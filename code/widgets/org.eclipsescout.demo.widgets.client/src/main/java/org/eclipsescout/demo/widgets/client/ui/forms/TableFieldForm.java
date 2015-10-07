@@ -954,7 +954,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 5;
+          return 6;
         }
 
         @Override
