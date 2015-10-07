@@ -20,6 +20,8 @@ import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.commons.status.IStatus;
+import org.eclipse.scout.commons.status.Status;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -76,6 +78,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.Conf
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.SelectedRowsField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.LocationColumn;
+import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.TableStatusVisibleMenu;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.UpdatedRowsField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox.DefaultField;
@@ -690,6 +693,96 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
+          @Order(15)
+          public class TableStatusVisibleMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return "Status";
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+            }
+
+            @Order(10.0)
+            public class RemoveStatusMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "(No status)";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() throws ProcessingException {
+                getTable().setTableStatus(null);
+              }
+            }
+
+            @Order(20.0)
+            public class SetSeverityInfoMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Severity INFO";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() throws ProcessingException {
+                getTable().setTableStatus(new Status("This in an information about this table.", IStatus.INFO));
+              }
+            }
+
+            @Order(30.0)
+            public class SetSeverityWarningMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Severity WARNING";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() throws ProcessingException {
+                getTable().setTableStatus(new Status("This in a warning about this table.", IStatus.WARNING));
+              }
+            }
+
+            @Order(40.0)
+            public class SetSeverityErrorMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Severity ERROR";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() throws ProcessingException {
+                getTable().setTableStatus(new Status("An error has occurred on the table.", IStatus.ERROR));
+              }
+            }
+          }
+
           @Order(15.0)
           public class MoreMenu extends AbstractMenu {
             @Override
@@ -1232,11 +1325,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() throws ProcessingException {
             setValue(getTableField().isTableStatusVisible());
+            getTableField().getTable().getMenuByClass(TableStatusVisibleMenu.class).setVisible(getValue());
           }
 
           @Override
           protected void execChangedValue() throws ProcessingException {
             getTableField().setTableStatusVisible(getValue());
+            getTableField().getTable().getMenuByClass(TableStatusVisibleMenu.class).setVisible(getValue());
           }
         }
 
