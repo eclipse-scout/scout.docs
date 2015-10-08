@@ -95,7 +95,8 @@
 
   & > .menu-item {
     border-top: solid 1px @border-color;
-    line-height: @menu-item-height - 1px; /* subtract border-top */
+    line-height: 34px - 1px; /* subtract border-top */
+    height: 34px;
     display: block;
     width: 100%;
     padding-left: 15px;
