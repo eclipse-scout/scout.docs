@@ -7,11 +7,9 @@
   http://www.eclipse.org/org/documents/edl-v10.html
 
   Contributors:
-      BSI Business Systems Integration AG - initial API and implementation
+  BSI Business Systems Integration AG - initial API and implementation
 -->
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.eclipsescout.demo</groupId>
@@ -22,7 +20,7 @@
   <name>Eclipse Scout Demo - Master</name>
 
   <properties>
-  	<scout.version>5.1.0-SNAPSHOT</scout.version>
+    <scout.version>5.1.0-SNAPSHOT</scout.version>
     <jacoco.version>0.6.1.201212231917</jacoco.version>
     <compileSource>1.7</compileSource>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,28 +28,28 @@
   </properties>
 
   <dependencyManagement>
-  	<dependencies>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.server</artifactId>
-	    <version>${scout.version}</version>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.client</artifactId>
-	    <version>${scout.version}</version>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.shared</artifactId>
-	    <version>${scout.version}</version>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.platform</artifactId>
-	    <version>${scout.version}</version>
-	  </dependency>
-  	</dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.server</artifactId>
+        <version>${scout.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.client</artifactId>
+        <version>${scout.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.shared</artifactId>
+        <version>${scout.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.platform</artifactId>
+        <version>${scout.version}</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 
   <build>
