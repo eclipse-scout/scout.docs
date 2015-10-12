@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.eclipsescout.demo.minicrm</groupId>
 		<artifactId>org.eclipsescout.demo.minicrm.parent</artifactId>
-		<version>5.1.0-SNAPSHOT</version>
+		<version>5.1.0.R009</version>
 		<relativePath>../org.eclipsescout.demo.minicrm.parent/</relativePath>
 	</parent>
 
@@ -29,12 +29,12 @@
 		<dependency>
 			<artifactId>org.eclipsescout.demo.minicrm.shared</artifactId>
 			<groupId>org.eclipsescout.demo.minicrm</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R009</version>
 		</dependency>
 		<dependency>
 			<artifactId>org.eclipse.scout.rt.svg.client</artifactId>
 			<groupId>org.eclipse.scout.rt</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R009</version>
 		</dependency>
 	</dependencies>
 </project>
