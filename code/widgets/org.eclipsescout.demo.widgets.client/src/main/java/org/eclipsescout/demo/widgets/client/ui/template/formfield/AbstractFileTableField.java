@@ -40,8 +40,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
@@ -79,7 +79,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     String type = IOUtility.getFileExtension(file.getFilename());
     int size = file.getContentLength();
 
-    if (CODES.getCodeType(FileCodeType.class).getCode(type) == null) {
+    if (BEANS.get(FileCodeType.class).getCode(type) == null) {
       type = FileCodeType.UknownCode.ID;
     }
 

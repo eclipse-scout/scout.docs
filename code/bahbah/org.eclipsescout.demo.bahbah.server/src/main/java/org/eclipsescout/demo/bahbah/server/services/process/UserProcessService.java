@@ -24,7 +24,6 @@ import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
@@ -136,7 +135,7 @@ public class UserProcessService implements IUserProcessService {
     IntegerHolder ih = new IntegerHolder(0);
     SQL.selectInto("SELECT permission_id FROM TABUSERS WHERE username = :username INTO :permission", new NVPair("username", ServerSession.get().getUserId()), new NVPair("permission", ih));
 
-    return CODES.getCodeType(UserRoleCodeType.class).getCode(ih.getValue());
+    return BEANS.get(UserRoleCodeType.class).getCode(ih.getValue());
   }
 
   @Override
