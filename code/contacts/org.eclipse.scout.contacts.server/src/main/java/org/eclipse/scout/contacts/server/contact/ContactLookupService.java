@@ -14,7 +14,7 @@ import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.contact.IContactLookupService;
 import org.eclipse.scout.rt.server.services.lookup.AbstractSqlLookupService;
 
-public class ContactLookupService extends AbstractSqlLookupService<String>implements IContactLookupService {
+public class ContactLookupService extends AbstractSqlLookupService<String> implements IContactLookupService {
 
   @Override
   protected String getConfiguredSqlSelect() {

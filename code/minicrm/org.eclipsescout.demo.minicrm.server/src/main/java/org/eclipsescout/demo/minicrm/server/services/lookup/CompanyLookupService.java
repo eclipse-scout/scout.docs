@@ -18,7 +18,7 @@ import org.eclipsescout.demo.minicrm.shared.Icons;
 import org.eclipsescout.demo.minicrm.shared.services.lookup.ICompanyLookupService;
 
 @Server
-public class CompanyLookupService extends AbstractSqlLookupService<BigDecimal>implements ICompanyLookupService {
+public class CompanyLookupService extends AbstractSqlLookupService<BigDecimal> implements ICompanyLookupService {
 
   @Override
   protected String getConfiguredSqlSelect() {
