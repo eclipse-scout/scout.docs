@@ -16,14 +16,12 @@
     border-bottom: solid 3px transparent;
     cursor: pointer;
 
+    color: @palette-gray-5;
+    border-bottom-color: @palette-gray-5;
+
     &.selected {
       color: @palette-gray-3;
       border-bottom-color: @palette-gray-3;
-    }
-
-    &.marked:not(.selected) {
-      color: @palette-gray-5;
-      border-bottom-color: @palette-gray-5;
     }
 
     &:hover {

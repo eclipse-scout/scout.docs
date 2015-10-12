@@ -7,9 +7,10 @@
 
 .dialog {
   position: absolute !important; /* ignore positioning of 'ui-resizable' */
-  background-color: @palette-gray-10;
+  /* background-color: @palette-gray-10; */
+  background-image: linear-gradient(0deg, #444444, #222222);
   border: solid 1px @border-color;
-  border-top: 5px solid @palette-gray-4;
+  /* border-top: 5px solid @palette-gray-4; */
   border-top-left-radius: @border-radius;
   border-top-right-radius: @border-radius;
   #scout.drop-shadow-large();

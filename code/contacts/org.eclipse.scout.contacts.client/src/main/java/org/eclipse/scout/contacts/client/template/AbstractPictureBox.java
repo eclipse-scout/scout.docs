@@ -22,6 +22,7 @@ import org.eclipse.scout.contacts.shared.Icons;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -138,4 +139,41 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       return false;
     }
   }
+
+  // FIXME: workaround as image context menu does not yet work
+  @Order(3000.0)
+  public class EditUrlButton extends AbstractLinkButton {
+
+    @Override
+    protected int getConfiguredHorizontalAlignment() {
+      return 1;
+    }
+
+    @Override
+    protected String getConfiguredLabel() {
+      return TEXTS.get("EditURL");
+    }
+
+    @Override
+    protected boolean getConfiguredProcessButton() {
+      return false;
+    }
+
+    @Override
+    protected void execClickAction() throws ProcessingException {
+      PictureUrlForm form = new PictureUrlForm();
+      String url = getPictureUrlField().getValue();
+
+      if (StringUtility.hasText(url)) {
+        form.getPictureUrlField().setValue(url);
+      }
+
+      form.startModify();
+      form.waitFor();
+      if (form.isFormStored()) {
+        getPictureUrlField().setValue(form.getPictureUrlField().getValue());
+      }
+    }
+  }
+
 }

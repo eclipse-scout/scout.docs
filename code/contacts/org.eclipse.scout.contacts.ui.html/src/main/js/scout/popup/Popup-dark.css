@@ -25,7 +25,7 @@
   line-height: @menu-item-height;
   padding: 0 13px;
   white-space: nowrap;
-  background-color: @palette-white;
+  background-color: @palette-gray-7;
   border: 1px solid @border-color;
   border-top-width: 0;
   border-bottom-width: 0;
@@ -78,6 +78,10 @@
       &.selected {
         border-color: @item-selection-border-color;
       }
+    }
+
+    .form {
+      background-image: linear-gradient(0deg, #444444, #222222);
     }
   }
 
