@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
- package org.eclipse.scout.docs.publish;
+package org.eclipse.scout.docs.publish;
 
 import java.io.File;
 import java.io.FileInputStream;

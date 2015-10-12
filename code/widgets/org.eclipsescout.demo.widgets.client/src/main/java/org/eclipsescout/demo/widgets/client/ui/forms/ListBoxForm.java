@@ -31,8 +31,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -228,7 +228,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
           colors.add(ColorsCodeType.GreenCode.ID);
           colors.add(ColorsCodeType.BlueCode.ID);
           // get a dynamically added code
-          ICode<Color> red = CODES.getCodeType(ColorsCodeType.class).getCode(Color.RED);
+          ICode<Color> red = BEANS.get(ColorsCodeType.class).getCode(Color.RED);
           colors.add(red.getId());
 
           setValue(colors);
