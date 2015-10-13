@@ -50,29 +50,188 @@ TIP: As platform listeners may run as part of the startup or shutdown not the fu
 
 == Bean Manager
 
-TODO
+The Scout bean manager is dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the bean.
+
+The bean manager can be changed at any time. This means beans can be registered or unregistered while the application is running. For this the bean manager contains methods to register and unregister beans. Furthermore methods to retrieve beans are provided.
+
+The next sections describe how beans are registered, the different meta data of beans, how instances are created, how they can be retrieved and finally how the bean decoration works.
+
+=== Bean registration
+
+Usually beans are registered during application startup. The application startup can be intercepted using platform listeners as described in section <<Platform Listener>>.
+
+[[lst-RegisterBeansListener, register beans]]
+[source,java,indent=0]
+.A listener that registers a bean (direct class or with meta data).
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=RegisterBeansListener]
+----
+
+There is also a predefined bean registration built into the Scout runtime. This automatically registers all classes having an `org.eclipse.scout.rt.platform.@Bean` annotation. Therefore it is usually sufficient to only annotate a class with `@Bean` to have it available in the bean manager as shown in listing <<lst-NormalBeanClass>>.
+
+[[lst-NormalBeanClass, bean class]]
+[source,java,indent=0]
+.An normal bean
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanClass]
+----
+
+TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotation, this automatically registers all child classes too. This means that also interfaces may be `@Bean` annotated making all implementations automatically available in the bean manager! Furthermore other annotations may be `@Bean` annotated making all classes holding these annotations automatically to beans as well.
+
+TIP: If you inherit a `@Bean` annotation from one of you super types but don't want to be automatically registered into the bean manger you can use the `org.eclipse.scout.rt.platform.@IgnoreBean` annotation. Those classes will then be skipped.
 
 === Bean Scopes
 
-TODO @Bean @ApplicationScoped
+The most important meta data of a bean is the scope. It describes how many instances of a bean can exist in a single application. There are two different possibilities:
+
+* Unlimited instances: Each bean retrieval results in a new instance of the bean. This is the default.
+* Only one instance: There can only be one instance by Scout platform. From an application point of view this can be seen as singleton. The instance is created on first use and each subsequent retrieval of the bean results in this same cached instance.
+
+As like all bean meta data this characteristic can be provided in two different ways:
+
+. With a Java annotation on the bean class as shown in the listing <<lst-BeanClass>>.
+. With bean meta data as shown in listing <<lst-RegisterBeansListener>>.
+
+[[lst-BeanClass, application scoped bean class]]
+[source,java,indent=0]
+.An application scoped bean using annotations
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanSingletonClass]
+----
+
+So the Java annotation `org.eclipse.scout.rt.platform.@ApplicationScoped` describes a bean having singleton characteristics.
+
+TIP: Also `@ApplicationScoped` is an `@Inherited` annotation. Therefore all child classes automatically inherit this characteristic like with the `@Bean` annotation.
 
 === Bean Creation
 
-TODO @CreateImmediately @PostConstruct
+It is not only possible to influence the number of instances to be created as learned before. It is also possible to create beans eagerly, execute methods after creation (like constructors) or to delegate the bean creation completely. These topics are described in the next sections.
+
+==== Eager Beans
+
+By default beans are created on each request. An exception are the beans marked to be application scoped (as shown in section <<Bean Scopes>>). Those beans are only created on first request (lazy). This means if a bean is never requested while the application is running, there will never be an instance of this class.
+
+But sometimes it is necessary to create beans already at the application startup (eager). This can be done by marking the bean as `org.eclipse.scout.rt.platform.@CreateImmediately`. All classes holding this annotation must also be marked as `@ApplicationScoped`! These beans will then be created as part of the application startup.
+
+==== Constructors
+
+Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after the instance have been created.
+
+==== Bean Producers
+
+By default all scout beans use a predefined mechanism to create instances as learned in the sections before. This mechanism can be modified for each bean to implement custom bean instance creation logic. For this the bean must be annotated with a producer as shown in listing <<lst-BeanProducer>>.
+
+[[lst-BeanProducer, bean producer]]
+[source,java,indent=0]
+.A bean with custom instanciation logic
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanProducer]
+----
 
 === Bean Retrieval
 
-TODO BEANS @Replace @Order @IgnoreBean
+To retrieve a bean the class `org.eclipse.scout.rt.platform.BEANS` should be used. This class provides (amongst others) the following methods:
+
+[[lst-BeanRetrieval, bean retrieval]]
+[source,java,indent=0]
+.How to get beans.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanRetrieval]
+----
+
+* The `get()` method throws an exception if there is not a single bean result. So if no bean can be found or if multiple equivalent bean candidates are available this method fails!
+* The `opt()` method requires a single or no bean result. It fails if multiple equivalent bean candidates are available and returns `null` if no one can be found.
+* The `all()` method returns all beans in the correct order. The list may also contain no beans at all.
+
+There are now two more annotations that have an effect on which beans are returned if multiple beans match a certain class. Consider the following example bean hierarchy:
+
+[[img-beanHierarchy, bean hierarchy]]
+.A sample bean hierarchy.
+image::{imgsdir}/beanHierarchy.png[]
+
+In this situation 4 bean candidates are available: MyServiceImpl, MyServiceMod, MySpecialVersion and AnotherVersion.
+But which one is returned by `BEANS.get(IMyService.class)`? Or by `BEANS.get(MySpecialVersion.class)`?
+This can be influenced with the `org.eclipse.scout.commons.annotations.@Order` and `org.eclipse.scout.commons.annotations.@Replace` annotations.
+The next sections describe the idea behind these annotations and gives some examples.
+
+==== @Order
+
+This annotation works exactly the same as in the Scout user interface where it brings classes into an order. It allows to assign a `double` value to a class. All beans of a certain type are sorted according to this value in ascending order. This means a low order value is equivalent with a low position in a list (come first).
+
+Please note that the `@Order` annotation is not inherited so that each bean must declare its own value where it fits in. If a bean does not declare an order value, the default of `5000` is used.
+
+TIP: The `@Order` annotation value may be inherited in case it replaces. See the next section for details.
+
+==== @Replace
+
+The `@Replace` annotation can be set to beans having another bean as super class. This means that the original bean (the super class) is no longer available in the Scout bean manager and only the new child class is returned.
+
+If the replacing bean (the child class) has no own `@Order` annotation defined but the replaced bean (the super class) has an `@Order` value, this order is inherited to the child. This is the only special case in which the `@Order` annotation value is inherited!
+
+==== Examples
+
+The next examples use the bean situation as shown in figure <<img-beanHierarchy>>.
+In this situation the bean manager actually contains 3 beans:
+
+. `AnotherVersion` with `@Order` of 4000. This bean has no own order and would therefore get the default order of 5000. But because it is replacing another bean it inherits its order.
+. `MyServiceMod` with `@Order` of 4500. This bean declares its own order.
+. `MyServiceImpl` with `@Order` of 5000. This bean gets the default order of 5000 because it does not declare an order.
+
+The bean `MySpecialVersion` is not part of the bean manager because it has been replaced by `AnotherVersion`.
+
+* `BEANS.get(IMyService.class)`: Returns `AnotherVersion` instance. The result cannot be an exact match because the requested type is an interface. Therefore of all candidates there is one single candidate with lowest order (comes first).
+* `BEANS.get(MyServiceImpl.class)`: Returns `MyServiceImpl` because there is an exact match available.
+* `BEANS.get(MySpecialVersion.class)`: Returns `AnotherVersion`. The result cannot be an exact match because there is no exact bean with this class in the bean manager (`MySpecialVersion` has been replaced). Therefore only `AnotherVersion` remains as candidate in the hierarchy below `MySpecialVersion`.
+* `BEANS.get(MyServiceMod.class)`: Returns `MyServiceMod` because there is no other candidate.
+* `BEANS.all(IMyService.class)`: Returns a list with all beans sorted by `@Order`. This results in: `AnotherVersion`, `MyServiceMod`, `MyServiceImpl`.
+
+TIP: If `MyServiceMod` would have no `@Order` annotation, there would be two bean candidates available with the same default order of 5000: `MyServiceImpl` and `MyServiceMod`. In this case a call to `BEANS.get(IMyService.class)` would fail because there are several equivalent candidates. Equivalent candidates means they have the same `@Order` value and the system cannot decide which one is the right one.
 
 === Bean Decoration
 
-TODO IBeanDecorationFactory IBeanInterceptor @TunnelToServer
+TODO: describe IBeanDecorationFactory, IBeanInterceptor, @TunnelToServer, 
 
 == Configuration Management
 
-TODO IConfigProperty CONFIG config.ini
+Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files footnote:[
+https://en.wikipedia.org/wiki/.properties
+].
+
+For each property a class cares about default values and value validation. These classes share the `org.eclipse.scout.rt.platform.config.IConfigProperty` interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <<lst-ConfigProperties>>.
+
+[[lst-ConfigProperties, config properties]]
+[source,java,indent=0]
+.A configuration property of type string.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ConfigProperties]
+----
+
+The given property key is searched in the following environments:
+
+. In the system properties (`java.lang.System.getProperty(String)`).
+. In the properties file. The properties file can be
+.. a file on the local filesystem where the system property with key `config.properties` holds the absolute path to the file or
+.. a file on the classpath with path `/config.properties` (recommended).
+. In the environment variables of the system (`java.lang.System.getenv(String)`).
 
 == Class Inventory
 
-TODO
+Scout applications automatically contain an inventory with the classes available and some meta data about them. This allows to find classes available on the classpath by certain criteria:
 
+* All subclasses of a certain base class (also known as type hierarchy)
+* All classes having a specific annotation.
+
+This class inventory can be accessed using the code in listing <<lst-ClassInventory>>.
+
+[[lst-ClassInventory, class inventory]]
+[source,java,indent=0]
+.Access the Scout class inventory.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
+----
+
+The class inventory is created for all Scout jars. It can also be created for custom projects by adding an empty xml file named `scout.xml` into the META-INF folder of the custom project (which is recommended). 
+
+Scout uses Jandex footnote:[
+https://github.com/wildfly/jandex
+] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
