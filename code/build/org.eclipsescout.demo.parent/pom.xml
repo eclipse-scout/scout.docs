@@ -24,7 +24,7 @@
   <modules>
     <module>../org.eclipsescout.demo.master</module>
     <module>../../bahbah/org.eclipsescout.demo.bahbah.parent</module>
-    <module>../../minicrm/org.eclipsescout.demo.minicrm.parent</module>
+    <module>../../contacts/org.eclipse.scout.contacts.parent</module>
     <module>../../widgets/org.eclipsescout.demo.widgets.parent</module>
   </modules>
 </project>
