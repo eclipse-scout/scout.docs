@@ -123,6 +123,15 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <inputSource>
+                  <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
+                  <outputSubFolder>downloads/book_scout_architecture</outputSubFolder>
+                  <htmlOutput>
+                    <outputSubFolder>scout_architecture</outputSubFolder>
+                    <outputZipFileName>scout_architecture.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
                 <!-- publish for eclipse help -->
                 <inputSource>
                   <inputFolder>../eclipse_help/target/generated-docs</inputFolder>

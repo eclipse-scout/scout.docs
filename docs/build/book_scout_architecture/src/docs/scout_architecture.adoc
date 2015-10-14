@@ -1,4 +1,4 @@
-= Eclipse Scout: an Introduction
+= Eclipse Scout: Architecture
 :doctype: book
 :author: Matthias Zimmermann, Daniel Wiehl, Judith Gull
 :email: scout-dev@eclipse.org
