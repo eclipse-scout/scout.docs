@@ -26,11 +26,13 @@ Scout contains a platform which provides basic functionality required by many so
 == Application Lifecycle
 
 The lifecycle of a Scout application is controlled by implementations of `org.eclipse.scout.rt.platform.IPlatform`.
-This interface contains methods to start and stop the application and to retrieve the bean manager associated with this application.
-See <<Bean Manager>> to learn more about bean management in Scout.
+This interface contains methods to start and stop the application and to retrieve the <<Bean Manager>> associated with this application.
 The class `org.eclipse.scout.rt.platform.Platform` provides access to the current platform instance. On first access the platform is automatically created and started.
 
-The startup is separated into several milestones (states). Depending on the current state some components of the platform may already have been initialized and are ready to use while others are not available yet.
+image::{imgsdir}/platformStates.png[]
+
+During its startup, the platform transitions through several states. Depending on the state of the platform some components may already be initialized and ready to use while others are not available yet.
+
 See enum `org.eclipse.scout.rt.platform.IPlatform.State` for a description of each state and what may be used in a certain state.
 
 === Platform Listener
@@ -189,7 +191,7 @@ TIP: If `MyServiceMod` would have no `@Order` annotation, there would be two bea
 
 === Bean Decoration
 
-TODO: describe IBeanDecorationFactory, IBeanInterceptor, @TunnelToServer, 
+TODO: describe IBeanDecorationFactory, IBeanInterceptor, @TunnelToServer,
 
 == Configuration Management
 
@@ -230,7 +232,7 @@ This class inventory can be accessed using the code in listing <<lst-ClassInvent
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
 ----
 
-The class inventory is created for all Scout jars. It can also be created for custom projects by adding an empty xml file named `scout.xml` into the META-INF folder of the custom project (which is recommended). 
+The class inventory is created for all Scout jars. It can also be created for custom projects by adding an empty xml file named `scout.xml` into the META-INF folder of the custom project (which is recommended).
 
 Scout uses Jandex footnote:[
 https://github.com/wildfly/jandex
