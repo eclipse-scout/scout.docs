@@ -13,6 +13,10 @@ package org.eclipse.scout.docs.snippets;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.commons.TuningUtility;
+import org.eclipse.scout.commons.annotations.Replace;
+import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ClientBeanDecorationFactory;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
@@ -26,6 +30,8 @@ import org.eclipse.scout.rt.platform.Platform;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.interceptor.IBeanInterceptor;
+import org.eclipse.scout.rt.platform.interceptor.IBeanInvocationContext;
 import org.eclipse.scout.rt.platform.inventory.ClassInventory;
 import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.platform.inventory.IClassInventory;
@@ -58,6 +64,46 @@ public final class PlatformSnippet {
     }
   }
   //end::RegisterBeansListener[]
+
+  //tag::BeanDecorationFactory[]
+  @Replace
+  public class ProfilerDecorationFactory extends ClientBeanDecorationFactory {
+    @Override
+    public <T> IBeanInterceptor<T> decorate(IBean<T> bean, Class<? extends T> queryType) {
+      return new BackendCallProfilerInterceptor<>(super.decorate(bean, queryType));
+    }
+  }
+
+  public class BackendCallProfilerInterceptor<T> implements IBeanInterceptor<T> {
+
+    private final IBeanInterceptor<T> m_inner;
+
+    public BackendCallProfilerInterceptor(IBeanInterceptor<T> inner) {
+      m_inner = inner;
+    }
+
+    @Override
+    public Object invoke(IBeanInvocationContext<T> context) throws ProcessingException {
+      final String className;
+      if (context.getTargetObject() == null) {
+        className = context.getTargetMethod().getDeclaringClass().getSimpleName();
+      }
+      else {
+        className = context.getTargetObject().getClass().getSimpleName();
+      }
+
+      String timerName = className + '.' + context.getTargetMethod().getName();
+      TuningUtility.startTimer();
+      try {
+        return m_inner == null ? context.proceed() : m_inner.invoke(context);
+      }
+      finally {
+        TuningUtility.stopTimer(timerName);
+      }
+    }
+  }
+
+  //end::BeanDecorationFactory[]
 
   //tag::BeanSingletonClass[]
   @ApplicationScoped

@@ -191,7 +191,26 @@ TIP: If `MyServiceMod` would have no `@Order` annotation, there would be two bea
 
 === Bean Decoration
 
-TODO: describe IBeanDecorationFactory, IBeanInterceptor, @TunnelToServer,
+Bean decorations allow to wrap interface beans with a proxy to intercept each method call to that bean and apply some custom logic.
+For this a `IBeanDecorationFactory` has to be implemented. This is one single factory instance for the entire application. It decides which beans are decorated with which interceptors.
+As bean decoration factories are beans itself it is sufficient to create an implementation of `org.eclipse.scout.rt.platform.IBeanDecorationFactory` and to ensure this implementation is used (see <<Bean Retrieval>>).
+This factory receives the bean and the original query class to decide which interceptors that are created.
+
+The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler interceptor that measures how long a server call takes.
+
+[[lst-BeanDecorationFactory, bean decoration]]
+[source,java,indent=0]
+.Bean decoration example.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
+----
+
+==== @TunnelToServer
+
+There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
+To achieve this a bean decoration factory on client side checks for availability of this annotation and creates an interceptor that forwards the operation to the server.
+
+It is best practice to mark all annotation that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
 
 == Configuration Management
 
@@ -237,3 +256,7 @@ The class inventory is created for all Scout jars. It can also be created for cu
 Scout uses Jandex footnote:[
 https://github.com/wildfly/jandex
 ] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
+
+== Testing
+
+TODO
