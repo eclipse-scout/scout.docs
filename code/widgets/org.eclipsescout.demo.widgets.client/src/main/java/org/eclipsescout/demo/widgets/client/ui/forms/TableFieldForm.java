@@ -737,7 +737,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() throws ProcessingException {
-                getTable().setTableStatus(new Status("This in an information about this table.", IStatus.INFO));
+                getTable().setTableStatus(new Status("This is an information about this table.", IStatus.INFO));
               }
             }
 
@@ -756,7 +756,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() throws ProcessingException {
-                getTable().setTableStatus(new Status("This in a warning about this table.", IStatus.WARNING));
+                getTable().setTableStatus(new Status("This is a warning about this table.", IStatus.WARNING));
               }
             }
 
