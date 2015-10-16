@@ -7,22 +7,21 @@
   http://www.eclipse.org/org/documents/edl-v10.html
 
   Contributors:
-      BSI Business Systems Integration AG - initial API and implementation
+  BSI Business Systems Integration AG - initial API and implementation
 -->
-
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.eclipsescout.demo</groupId>
-    <artifactId>org.eclipsescout.demo.master</artifactId>
-    <version>5.2.0-SNAPSHOT</version>
-    <relativePath>../../build/org.eclipsescout.demo.master/</relativePath>
+    <groupId>org.eclipse.scout</groupId>
+    <artifactId>maven_rt_plugin_config-master</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <relativePath></relativePath>
   </parent>
 
   <groupId>org.eclipsescout.demo.bahbah</groupId>
   <artifactId>org.eclipsescout.demo.bahbah.parent</artifactId>
+  <version>5.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>bahbah - parent</name>
 
@@ -33,4 +32,77 @@
     <module>../org.eclipsescout.demo.bahbah.server</module>
     <module>../org.eclipsescout.demo.bahbah.shared</module>
   </modules>
+
+  <properties>
+    <scout.version>5.2.0-SNAPSHOT</scout.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt</artifactId>
+        <version>${scout.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.ui.html.parent</artifactId>
+        <version>${scout.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipsescout.demo.bahbah</groupId>
+        <artifactId>org.eclipsescout.demo.bahbah.shared</artifactId>
+        <version>5.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipsescout.demo.bahbah</groupId>
+        <artifactId>org.eclipsescout.demo.bahbah.server</artifactId>
+        <version>5.2.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.17</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>eclipse.release</id>
+      <name>eclipse-release-repo</name>
+      <url>https://repo.eclipse.org/content/groups/releases/</url>
+    </repository>
+    <repository>
+      <snapshots></snapshots>
+      <id>eclipse.snapshot</id>
+      <name>eclipse-snapshot-repo</name>
+      <url>https://repo.eclipse.org/content/groups/snapshots/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>eclipse.release</id>
+      <name>eclipse-release-repo</name>
+      <url>https://repo.eclipse.org/content/groups/releases/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots></snapshots>
+      <id>eclipse.snapshot</id>
+      <name>eclipse-snapshot-repo</name>
+      <url>https://repo.eclipse.org/content/groups/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
