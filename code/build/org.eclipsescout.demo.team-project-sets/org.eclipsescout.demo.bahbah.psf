@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/build/org.eclipsescout.demo.settings"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/build/org.eclipsescout.demo.master"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.client"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.mysql"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.parent"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.security"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.server"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.shared"/>
-<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,develop,code/bahbah/org.eclipsescout.demo.bahbah.ui.swing"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/build/org.eclipsescout.demo.settings"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.client"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.mysql"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.parent"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.security"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.server"/>
+<project reference="1.0,https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs.git,releases/5.2.x,code/bahbah/org.eclipsescout.demo.bahbah.shared"/>
 </provider>
 </psf>

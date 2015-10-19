@@ -10,9 +10,32 @@
  ******************************************************************************/
 package org.eclipse.scout.docs.snippets;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.scout.commons.TuningUtility;
+import org.eclipse.scout.commons.annotations.Replace;
+import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ClientBeanDecorationFactory;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.Bean;
+import org.eclipse.scout.rt.platform.BeanMetaData;
+import org.eclipse.scout.rt.platform.BeanProducer;
+import org.eclipse.scout.rt.platform.IBean;
+import org.eclipse.scout.rt.platform.IBeanInstanceProducer;
 import org.eclipse.scout.rt.platform.IPlatform;
 import org.eclipse.scout.rt.platform.IPlatformListener;
+import org.eclipse.scout.rt.platform.Platform;
 import org.eclipse.scout.rt.platform.PlatformEvent;
+import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
+import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.interceptor.IBeanInterceptor;
+import org.eclipse.scout.rt.platform.interceptor.IBeanInvocationContext;
+import org.eclipse.scout.rt.platform.inventory.ClassInventory;
+import org.eclipse.scout.rt.platform.inventory.IClassInfo;
+import org.eclipse.scout.rt.platform.inventory.IClassInventory;
+import org.eclipse.scout.rt.platform.service.IService;
 
 public final class PlatformSnippet {
   //tag::PlatformListener[]
@@ -25,4 +48,130 @@ public final class PlatformSnippet {
     }
   }
   //end::PlatformListener[]
+
+  //tag::RegisterBeansListener[]
+  public class RegisterBeansListener implements IPlatformListener {
+    @Override
+    public void stateChanged(PlatformEvent event) {
+      if (event.getState() == IPlatform.State.BeanManagerPrepared) {
+        // register the class directly
+        Platform.get().getBeanManager().registerClass(BeanSingletonClass.class);
+
+        // Or register with meta information
+        BeanMetaData beanData = new BeanMetaData(BeanClass.class).withApplicationScoped(true);
+        Platform.get().getBeanManager().registerBean(beanData);
+      }
+    }
+  }
+  //end::RegisterBeansListener[]
+
+  //tag::BeanDecorationFactory[]
+  @Replace
+  public class ProfilerDecorationFactory extends ClientBeanDecorationFactory {
+    @Override
+    public <T> IBeanInterceptor<T> decorate(IBean<T> bean, Class<? extends T> queryType) {
+      return new BackendCallProfilerInterceptor<>(super.decorate(bean, queryType));
+    }
+  }
+
+  public class BackendCallProfilerInterceptor<T> implements IBeanInterceptor<T> {
+
+    private final IBeanInterceptor<T> m_inner;
+
+    public BackendCallProfilerInterceptor(IBeanInterceptor<T> inner) {
+      m_inner = inner;
+    }
+
+    @Override
+    public Object invoke(IBeanInvocationContext<T> context) throws ProcessingException {
+      final String className;
+      if (context.getTargetObject() == null) {
+        className = context.getTargetMethod().getDeclaringClass().getSimpleName();
+      }
+      else {
+        className = context.getTargetObject().getClass().getSimpleName();
+      }
+
+      String timerName = className + '.' + context.getTargetMethod().getName();
+      TuningUtility.startTimer();
+      try {
+        return m_inner == null ? context.proceed() : m_inner.invoke(context);
+      }
+      finally {
+        TuningUtility.stopTimer(timerName);
+      }
+    }
+  }
+
+  //end::BeanDecorationFactory[]
+
+  //tag::BeanSingletonClass[]
+  @ApplicationScoped
+  public class BeanSingletonClass {
+  }
+  //end::BeanSingletonClass[]
+
+  //tag::BeanClass[]
+  @Bean
+  public class BeanClass {
+  }
+  //end::BeanClass[]
+
+  //tag::BeanProducer[]
+  @Bean
+  @BeanProducer(MyCustomProducer.class)
+  public class BeanWithCustomProducer {
+  }
+
+  public class MyCustomProducer<T> implements IBeanInstanceProducer<T> {
+    @Override
+    public T produce(IBean<T> bean) {
+      // create instance of bean
+      return null;
+    }
+  }
+  //end::BeanProducer[]
+
+  //tag::ConfigProperties[]
+  /**
+   * Defines a new property of data type {@link String} with key 'my.application.key' and default value 'defaultValue'.
+   */
+  public class MyCustomStringProperty extends AbstractStringConfigProperty {
+
+    @Override
+    public String getKey() {
+      return "my.application.key";
+    }
+
+    @Override
+    protected String getDefaultValue() {
+      return "defaultValue";
+    }
+  }
+
+  /**
+   * @return The current value of the property 'my.application.key'.
+   */
+  private String getMyCustomPropertyValue() {
+    return CONFIG.getPropertyValue(MyCustomStringProperty.class);
+  }
+  //end::ConfigProperties[]
+
+  @SuppressWarnings("unused")
+  private void snippets() {
+    //tag::ClassInventory[]
+    IClassInventory classInventory = ClassInventory.get();
+
+    // get all classes below IService
+    Set<IClassInfo> services = classInventory.getAllKnownSubClasses(IService.class);
+
+    // get all classes having a Bean annotation (directly on them self).
+    Set<IClassInfo> classesHavingBeanAnnot = classInventory.getKnownAnnotatedTypes(Bean.class);
+    //end::ConfigProperties[]
+    //tag::BeanRetrieval[]
+    BeanSingletonClass bean = BEANS.get(BeanSingletonClass.class);
+    BeanClass beanOrNull = BEANS.opt(BeanClass.class);
+    List<BeanWithCustomProducer> all = BEANS.all(BeanWithCustomProducer.class);
+    //end::BeanRetrieval[]
+  }
 }

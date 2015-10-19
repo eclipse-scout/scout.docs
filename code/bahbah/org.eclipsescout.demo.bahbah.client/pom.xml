@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2015 BSI Business Systems Integration AG. All rights reserved.
-	This program and the accompanying materials are made available under the
-	terms of the Eclipse Distribution License v1.0 which accompanies this distribution,
-	and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors:
-	BSI Business Systems Integration AG - initial API and implementation -->
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Distribution License v1.0 which accompanies this distribution,
+  and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors:
+  BSI Business Systems Integration AG - initial API and implementation -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.eclipsescout.demo.bahbah</groupId>
+    <artifactId>org.eclipsescout.demo.bahbah.parent</artifactId>
+    <version>5.2.0-SNAPSHOT</version>
+    <relativePath>../org.eclipsescout.demo.bahbah.parent/</relativePath>
+  </parent>
 
-	<parent>
-		<groupId>org.eclipsescout.demo.bahbah</groupId>
-		<artifactId>org.eclipsescout.demo.bahbah.parent</artifactId>
-		<version>5.2.0-SNAPSHOT</version>
-		<relativePath>../org.eclipsescout.demo.bahbah.parent/</relativePath>
-	</parent>
+  <artifactId>org.eclipsescout.demo.bahbah.client</artifactId>
+  <packaging>jar</packaging>
+  <name>bahbah - client</name>
 
-	<artifactId>org.eclipsescout.demo.bahbah.client</artifactId>
-	<packaging>jar</packaging>
-	<name>bahbah - client</name>
-
-	<dependencies>
-		<dependency>
-			<artifactId>org.eclipse.scout.rt.client</artifactId>
-			<groupId>org.eclipse.scout.rt</groupId>
-			<version>5.2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<artifactId>org.eclipsescout.demo.bahbah.shared</artifactId>
-			<groupId>org.eclipsescout.demo.bahbah</groupId>
-			<version>5.2.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.demo.bahbah</groupId>
+      <artifactId>org.eclipsescout.demo.bahbah.shared</artifactId>
+    </dependency>
+  </dependencies>
 </project>

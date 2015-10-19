@@ -7,11 +7,9 @@
   http://www.eclipse.org/org/documents/edl-v10.html
 
   Contributors:
-      BSI Business Systems Integration AG - initial API and implementation
+  BSI Business Systems Integration AG - initial API and implementation
 -->
-
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -27,8 +25,8 @@
 
   <dependencies>
     <dependency>
-      <artifactId>org.eclipse.scout.rt.shared</artifactId>
       <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.shared</artifactId>
     </dependency>
   </dependencies>
 </project>

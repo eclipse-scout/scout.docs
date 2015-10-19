@@ -1,45 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2015 BSI Business Systems Integration AG. All rights reserved.
-	This program and the accompanying materials are made available under the
-	terms of the Eclipse Distribution License v1.0 which accompanies this distribution,
-	and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors:
-	BSI Business Systems Integration AG - initial API and implementation -->
+<!--
+  Copyright (c) 2015 BSI Business Systems Integration AG.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.html
 
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+  Contributors:
+  BSI Business Systems Integration AG - initial API and implementation
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.eclipsescout.demo</groupId>
-		<artifactId>org.eclipsescout.demo.master</artifactId>
-		<version>5.2.0-SNAPSHOT</version>
-		<relativePath>../build/org.eclipsescout.demo.master/</relativePath>
-	</parent>
+  <parent>
+    <groupId>org.eclipse.scout</groupId>
+    <artifactId>maven_rt_plugin_config-master</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <relativePath></relativePath>
+  </parent>
 
-	<artifactId>org.eclipse.scout.docs.snippets</artifactId>
+  <groupId>org.eclipsescout.demo</groupId>
+  <artifactId>org.eclipse.scout.docs.snippets</artifactId>
+  <version>5.2.0-SNAPSHOT</version>
+  <name>Snippets used in technical documentation of Eclipse Scout framework</name>
 
-	<name>Snippets used in technical documentation of Eclipse Scout framework</name>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+  <properties>
+    <scout.version>5.2.0-SNAPSHOT</scout.version>
+  </properties>
 
-	<dependencies>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.server</artifactId>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.client</artifactId>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.shared</artifactId>
-	  </dependency>
-	  <dependency>
-	    <groupId>org.eclipse.scout.rt</groupId>
-	    <artifactId>org.eclipse.scout.rt.platform</artifactId>
-	  </dependency>
-	</dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt</artifactId>
+        <version>${scout.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt.ui.html.parent</artifactId>
+        <version>${scout.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.shared</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.platform</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+    </dependency>
+  </dependencies>
 </project>
