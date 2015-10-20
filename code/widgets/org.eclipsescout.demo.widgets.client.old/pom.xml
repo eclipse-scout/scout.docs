@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.eclipsescout.demo.widgets</groupId>
 		<artifactId>org.eclipsescout.demo.widgets.parent</artifactId>
-		<version>5.1.0-SNAPSHOT</version>
+		<version>5.1.0.R010</version>
 		<relativePath>../org.eclipsescout.demo.widgets.parent/</relativePath>
 	</parent>
 
@@ -24,12 +24,12 @@
 		<dependency>
 			<artifactId>org.eclipsescout.demo.widgets.client</artifactId>
 			<groupId>org.eclipsescout.demo.widgets</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R010</version>
 		</dependency>
 		<dependency>
 			<artifactId>org.eclipsescout.demo.widgets.shared.old</artifactId>
 			<groupId>org.eclipsescout.demo.widgets</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R010</version>
 		</dependency>
 	</dependencies>
 </project>

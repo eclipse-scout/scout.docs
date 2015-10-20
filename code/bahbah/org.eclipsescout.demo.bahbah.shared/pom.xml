@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.eclipsescout.demo.bahbah</groupId>
 		<artifactId>org.eclipsescout.demo.bahbah.parent</artifactId>
-		<version>5.1.0-SNAPSHOT</version>
+		<version>5.1.0.R010</version>
 		<relativePath>../org.eclipsescout.demo.bahbah.parent/</relativePath>
 	</parent>
 
@@ -25,7 +25,7 @@
 		<dependency>
 			<artifactId>org.eclipse.scout.rt.shared</artifactId>
 			<groupId>org.eclipse.scout.rt</groupId>
-			<version>5.1.0-SNAPSHOT</version>
+			<version>5.1.0.R010</version>
 		</dependency>
 	</dependencies>
 </project>
