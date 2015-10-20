@@ -39,7 +39,7 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
     sb.append("/src/");
     sb.append(canonicalName.replace(".", "/"));
     sb.append(".java");
-    ClientSession.get().getDesktop().openUri(sb.toString());
+    ClientSession.get().getDesktop().openUri(sb.toString(), null);
   }
 
   abstract protected Class<?> provideSourceClass();
