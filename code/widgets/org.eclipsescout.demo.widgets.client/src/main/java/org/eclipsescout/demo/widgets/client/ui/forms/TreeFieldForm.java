@@ -20,6 +20,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
+import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
@@ -331,6 +332,25 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             String leaf = Boolean.toString(node.isLeaf());
 
             MessageBoxes.createOk().withHeader(title + " " + TEXTS.get("NodeName", id)).withBody(TEXTS.get("NodeInfo", leaf, children)).show();
+          }
+
+          @Order(60.0)
+          public class KeyStroke extends AbstractKeyStroke {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected String getConfiguredKeyStroke() {
+              return "Ctrl-Shift-Alt-h";
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
+            }
           }
         }
       }
