@@ -10,9 +10,9 @@
 
   <parent>
     <groupId>org.eclipse.scout.contacts</groupId>
-    <artifactId>org.eclipse.scout.contacts.parent</artifactId>
+    <artifactId>org.eclipse.scout.contacts</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../org.eclipse.scout.contacts.parent/</relativePath>
+    <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
   <artifactId>org.eclipse.scout.contacts.ui.html.app.war</artifactId>
@@ -23,6 +23,11 @@
     <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
+    </dependency>
+    <!-- Event module -->
+    <dependency>
+      <groupId>org.eclipse.scout.contacts.event</groupId>
+      <artifactId>org.eclipse.scout.contacts.event.client</artifactId>
     </dependency>
 
     <!-- Logging -->

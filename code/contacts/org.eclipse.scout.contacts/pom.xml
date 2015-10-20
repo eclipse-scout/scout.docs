@@ -16,27 +16,34 @@
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
     <version>1.4-SNAPSHOT</version>
-    <relativePath></relativePath>
   </parent>
-
-  <groupId>org.eclipse.scout.contacts</groupId>
-  <artifactId>org.eclipse.scout.contacts.parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>../org.eclipse.scout.contacts.shared</module>
-    <module>../org.eclipse.scout.contacts.server</module>
-    <module>../org.eclipse.scout.contacts.client</module>
-    <module>../org.eclipse.scout.contacts.server.app.war</module>
-    <module>../org.eclipse.scout.contacts.ui.html</module>
-    <module>../org.eclipse.scout.contacts.ui.html.app.war</module>
-  </modules>
 
   <properties>
     <jdk.source.version>1.8</jdk.source.version>
     <scout.version>5.2.0-SNAPSHOT</scout.version>
+    <apache.derby.version>10.11.1.1</apache.derby.version>
   </properties>
+
+  <groupId>org.eclipse.scout.contacts</groupId>
+  <artifactId>org.eclipse.scout.contacts</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Contacts Application</name>
+
+  <modules>
+    <!-- Contacts application -->
+    <module>../org.eclipse.scout.contacts.client</module>
+    <module>../org.eclipse.scout.contacts.shared</module>
+    <module>../org.eclipse.scout.contacts.server</module>
+    <module>../org.eclipse.scout.contacts.server.app.war</module>
+    <module>../org.eclipse.scout.contacts.ui.html</module>
+    <module>../org.eclipse.scout.contacts.ui.html.app.war</module>
+
+    <!-- Event module -->
+    <module>../org.eclipse.scout.contacts.event.client</module>
+    <module>../org.eclipse.scout.contacts.event.shared</module>
+    <module>../org.eclipse.scout.contacts.event.server</module>
+  </modules>
 
   <dependencyManagement>
     <dependencies>
@@ -55,35 +62,53 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Build Dependencies -->
+      <!-- Contacts application -->
       <dependency>
         <groupId>org.eclipse.scout.contacts</groupId>
         <artifactId>org.eclipse.scout.contacts.client</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.eclipse.scout.contacts</groupId>
         <artifactId>org.eclipse.scout.contacts.shared</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.eclipse.scout.contacts</groupId>
         <artifactId>org.eclipse.scout.contacts.server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.eclipse.scout.contacts</groupId>
         <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
 
+      <!-- Event module -->
+      <dependency>
+        <groupId>org.eclipse.scout.contacts.event</groupId>
+        <artifactId>org.eclipse.scout.contacts.event.client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts.event</groupId>
+        <artifactId>org.eclipse.scout.contacts.event.shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.contacts.event</groupId>
+        <artifactId>org.eclipse.scout.contacts.event.server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- Other dependencies -->
       <dependency>
         <groupId>org.apache.derby</groupId>
         <artifactId>derby</artifactId>
-        <version>10.11.1.1</version>
+        <version>${apache.derby.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -19,12 +19,17 @@
     <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
-  <artifactId>org.eclipse.scout.contacts.shared</artifactId>
+  <groupId>org.eclipse.scout.contacts.event</groupId>
+  <artifactId>org.eclipse.scout.contacts.event.client</artifactId>
 
   <dependencies>
     <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.shared</artifactId>
+      <groupId>org.eclipse.scout.contacts</groupId>
+      <artifactId>org.eclipse.scout.contacts.client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.contacts.event</groupId>
+      <artifactId>org.eclipse.scout.contacts.event.shared</artifactId>
     </dependency>
   </dependencies>
 </project>

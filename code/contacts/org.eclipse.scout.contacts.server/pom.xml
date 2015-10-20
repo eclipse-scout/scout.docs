@@ -14,9 +14,9 @@
 
   <parent>
     <groupId>org.eclipse.scout.contacts</groupId>
-    <artifactId>org.eclipse.scout.contacts.parent</artifactId>
+    <artifactId>org.eclipse.scout.contacts</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../org.eclipse.scout.contacts.parent/</relativePath>
+    <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
   <artifactId>org.eclipse.scout.contacts.server</artifactId>
