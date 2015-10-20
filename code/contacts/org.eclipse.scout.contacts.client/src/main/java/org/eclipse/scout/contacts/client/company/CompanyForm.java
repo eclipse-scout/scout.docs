@@ -35,6 +35,7 @@ import org.eclipse.scout.contacts.shared.Icons;
 import org.eclipse.scout.contacts.shared.company.CompanyFormData;
 import org.eclipse.scout.contacts.shared.company.ICompanyService;
 import org.eclipse.scout.contacts.shared.company.UpdateCompanyPermission;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriHint;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -202,7 +203,7 @@ public class CompanyForm extends AbstractForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          getDesktop().openUri(getHomepageField().getValue());
+          getDesktop().openUri(getHomepageField().getValue(), OpenUriHint.NEW_WINDOW);
         }
       }
     }
