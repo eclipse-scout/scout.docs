@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration>
 
-  <contextListener class="org.eclipse.scout.commons.logger.AutoRegisteringJulLevelChangePropagator"/>
+  <!-- This context listener is used to redirect log entries logged with JUL to SLF (e.g. JAX-WS Metro) -->
+  <contextListener class="org.eclipse.scout.commons.logger.AutoRegisteringJulLevelChangePropagator" />
 
   <variable scope="context" name="mdcPattern" value="httpSessionId: '%X{http.session.id}', majorPrincipal: '%X{subject.principal.name}'" />
   <variable scope="context" name="mdcPatternWithoutEmptyValues" value="%replace(${mdcPattern}){'[a-zA-Z0-9]+: \\'\\'(, )?', ''}" />
