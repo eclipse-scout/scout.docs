@@ -27,16 +27,12 @@
       <artifactId>org.eclipse.scout.rt.client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.svg.client</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.shared</artifactId>
     </dependency>
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.client.test</artifactId>
+      <artifactId>org.eclipse.scout.rt.svg.client</artifactId>
     </dependency>
   </dependencies>
 </project>
