@@ -17,9 +17,9 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.shared.Icons;
+import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.company.CompanyLookupCall;
-import org.eclipse.scout.contacts.shared.contact.ContactsTablePageData;
+import org.eclipse.scout.contacts.shared.contact.ContactTablePageData;
 import org.eclipse.scout.contacts.shared.contact.IContactService;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -36,8 +36,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@PageData(ContactsTablePageData.class)
-public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.Table> {
+@PageData(ContactTablePageData.class)
+public class ContactTablePage extends AbstractPageWithTable<ContactTablePage.Table> {
 
   private String m_companyId;
 
@@ -48,10 +48,10 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
 
   @Override
   protected void execLoadData(SearchFilter filter) throws ProcessingException {
-    importPageData(BEANS.get(IContactService.class).getContactsTableData(filter, getCompanyId()));
+    importPageData(BEANS.get(IContactService.class).getContactTableData(filter, getCompanyId()));
   }
 
-  @Order(1000.0)
+  @Order(1_000.0)
   public class Table extends AbstractTable {
 
     public LastNameColumn getLastNameColumn() {
@@ -73,7 +73,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
     }
 
     public EmailColumn getEmailColumn() {
-      return getColumnSet().getColumnByClass(ContactsTablePage.Table.EmailColumn.class);
+      return getColumnSet().getColumnByClass(ContactTablePage.Table.EmailColumn.class);
     }
 
     public CompanyColumn getCompanyColumn() {
@@ -92,7 +92,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       return getColumnSet().getColumnByClass(ContactIdColumn.class);
     }
 
-    @Order(1000.0)
+    @Order(1_000.0)
     public class ContactIdColumn extends AbstractStringColumn {
 
       @Override
@@ -106,7 +106,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(2000.0)
+    @Order(2_000.0)
     public class FirstNameColumn extends AbstractStringColumn {
 
       @Override
@@ -120,7 +120,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(3000.0)
+    @Order(3_000.0)
     public class LastNameColumn extends AbstractStringColumn {
 
       @Override
@@ -134,7 +134,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(4000.0)
+    @Order(4_000.0)
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -148,7 +148,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(5000.0)
+    @Order(5_000.0)
     public class CountryColumn extends AbstractStringColumn {
 
       @Override
@@ -157,7 +157,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(6000.0)
+    @Order(6_000.0)
     public class PhoneColumn extends AbstractStringColumn {
 
       @Override
@@ -176,7 +176,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(7000.0)
+    @Order(7_000.0)
     public class MobileColumn extends AbstractStringColumn {
 
       @Override
@@ -195,7 +195,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(8000.0)
+    @Order(8_000.0)
     public class EmailColumn extends AbstractStringColumn {
 
       @Override
@@ -214,7 +214,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(9000.0)
+    @Order(9_000.0)
     public class CompanyColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -233,7 +233,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(1000.0)
+    @Order(1_000.0)
     public class EditMenu extends AbstractMenu {
 
       @Override
@@ -258,7 +258,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
       }
     }
 
-    @Order(2000.0)
+    @Order(2_000.0)
     public class NewMenu extends AbstractMenu {
 
       @Override
@@ -296,7 +296,7 @@ public class ContactsTablePage extends AbstractPageWithTable<ContactsTablePage.T
 
   @Override
   protected Class<? extends ISearchForm> getConfiguredSearchForm() {
-    return ContactsSearchForm.class;
+    return ContactSearchForm.class;
   }
 
   @FormData

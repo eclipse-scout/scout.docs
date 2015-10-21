@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.server;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.server.ServerConfigProperties.SuperUserSubjectProperty;
+import org.eclipse.scout.contacts.server.ConfigProperties.SuperUserSubjectProperty;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;

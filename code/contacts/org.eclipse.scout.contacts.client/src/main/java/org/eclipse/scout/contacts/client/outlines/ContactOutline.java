@@ -14,12 +14,12 @@ import java.util.List;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.company.CompanyTablePage;
-import org.eclipse.scout.contacts.client.contact.ContactsTablePage;
+import org.eclipse.scout.contacts.client.contact.ContactTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-public class ContactsOutline extends AbstractOutline {
+public class ContactOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
@@ -28,7 +28,7 @@ public class ContactsOutline extends AbstractOutline {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
-    pageList.add(new ContactsTablePage());
+    pageList.add(new ContactTablePage());
     pageList.add(new CompanyTablePage());
   }
 }

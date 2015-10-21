@@ -14,16 +14,16 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.company.CompanySearchForm.MainBox.ResetButton;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.SearchButton;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox.FieldBox;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox.FieldBox.CompanyField;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox.FieldBox.FirstNameField;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox.FieldBox.LastNameField;
-import org.eclipse.scout.contacts.client.contact.ContactsSearchForm.MainBox.TabBox.FieldBox.Location;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.SearchButton;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox.FieldBox;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox.FieldBox.CompanyField;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox.FieldBox.FirstNameField;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox.FieldBox.LastNameField;
+import org.eclipse.scout.contacts.client.contact.ContactSearchForm.MainBox.TabBox.FieldBox.Location;
 import org.eclipse.scout.contacts.client.template.AbstractLocationBox;
 import org.eclipse.scout.contacts.shared.company.CompanyLookupCall;
-import org.eclipse.scout.contacts.shared.contact.ContactsSearchFormData;
+import org.eclipse.scout.contacts.shared.contact.ContactSearchFormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractResetButton;
@@ -36,10 +36,10 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@FormData(value = ContactsSearchFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
-public class ContactsSearchForm extends AbstractSearchForm {
+@FormData(value = ContactSearchFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+public class ContactSearchForm extends AbstractSearchForm {
 
-  public ContactsSearchForm() throws ProcessingException {
+  public ContactSearchForm() throws ProcessingException {
     super();
   }
 
@@ -51,7 +51,7 @@ public class ContactsSearchForm extends AbstractSearchForm {
   @Override
   protected void execResetSearchFilter(SearchFilter searchFilter) throws ProcessingException {
     super.execResetSearchFilter(searchFilter);
-    ContactsSearchFormData formData = new ContactsSearchFormData();
+    ContactSearchFormData formData = new ContactSearchFormData();
     exportFormData(formData);
     searchFilter.setFormData(formData);
   }

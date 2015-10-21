@@ -14,7 +14,7 @@ import java.net.URL;
 
 import org.eclipse.scout.rt.client.services.common.icon.AbstractIconProviderService;
 
-public class DefaultIconProviderService extends AbstractIconProviderService {
+public class IconProviderService extends AbstractIconProviderService {
 
   @Override
   protected URL findResource(String relativePath) {

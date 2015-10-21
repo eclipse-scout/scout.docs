@@ -8,15 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.shared;
+package org.eclipse.scout.contacts.event.shared.event;
 
-import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
+import java.security.BasicPermission;
 
-@Order(-1000)
-public class DefaultTextProviderService extends AbstractDynamicNlsTextProviderService {
-  @Override
-  protected String getDynamicNlsBaseName() {
-    return "org.eclipse.scout.contacts.shared.texts.Texts";
+public class CreateEventPermission extends BasicPermission {
+
+  private static final long serialVersionUID = 1L;
+
+  public CreateEventPermission() {
+    super("CreateEvent");
   }
 }

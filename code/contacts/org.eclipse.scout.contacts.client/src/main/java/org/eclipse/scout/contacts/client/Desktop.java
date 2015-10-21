@@ -11,22 +11,28 @@
 package org.eclipse.scout.contacts.client;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.outlines.ContactsOutline;
+import org.eclipse.scout.contacts.client.company.CompanyForm;
+import org.eclipse.scout.contacts.client.contact.ContactForm;
+import org.eclipse.scout.contacts.client.outlines.ContactOutline;
 import org.eclipse.scout.contacts.client.outlines.SearchOutline;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.bookmark.menu.AbstractBookmarkMenu;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
+import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.ApplicationNameProperty;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 
@@ -34,12 +40,12 @@ public class Desktop extends AbstractDesktop {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("ApplicationTitle");
+    return CONFIG.getPropertyValue(ApplicationNameProperty.class);
   }
 
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    return CollectionUtility.<Class<? extends IOutline>> arrayList(ContactsOutline.class, SearchOutline.class);
+    return CollectionUtility.<Class<? extends IOutline>> arrayList(ContactOutline.class, SearchOutline.class);
   }
 
   @Override
@@ -55,14 +61,14 @@ public class Desktop extends AbstractDesktop {
 
   protected void setVisibleOutline() {
     for (IOutline outline : getAvailableOutlines()) {
-      if (outline instanceof ContactsOutline) {
+      if (outline instanceof ContactOutline) {
         setOutline(outline);
         break;
       }
     }
   }
 
-  @Order(1000)
+  @Order(1_000)
   public class FileMenu extends AbstractMenu {
 
     @Override
@@ -71,6 +77,53 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Order(1000.0)
+    public class NewMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("New");
+      }
+
+      @Order(1000.0)
+      public class ContactMenu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet();
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Contact");
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          new ContactForm().startNew();
+        }
+      }
+
+      @Order(2000.0)
+      public class CompanyMenu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet();
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Company");
+        }
+
+        @Override
+        protected void execAction() throws ProcessingException {
+          new CompanyForm().startNew();
+        }
+      }
+    }
+
+    @Order(2000.0)
     public class ExitMenu extends AbstractMenu {
 
       @Override
@@ -85,14 +138,14 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(2000)
+  @Order(2_000)
   public class BookmarkMenu extends AbstractBookmarkMenu {
     public BookmarkMenu() {
       super(Desktop.this);
     }
   }
 
-  @Order(3000)
+  @Order(3_000)
   public class HelpMenu extends AbstractMenu {
 
     @Override
@@ -131,7 +184,6 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(10.0)
   public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
 
     @Override
@@ -150,14 +202,14 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(1000.0)
-  public class ContactsOutlineViewButton extends AbstractOutlineViewButton {
+  @Order(1_000.0)
+  public class ContactOutlineViewButton extends AbstractOutlineViewButton {
 
-    public ContactsOutlineViewButton() {
-      this(ContactsOutline.class);
+    public ContactOutlineViewButton() {
+      this(ContactOutline.class);
     }
 
-    protected ContactsOutlineViewButton(Class<? extends ContactsOutline> outlineClass) {
+    protected ContactOutlineViewButton(Class<? extends ContactOutline> outlineClass) {
       super(Desktop.this, outlineClass);
     }
 
@@ -170,9 +222,14 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredIconId() {
       return AbstractIcons.Person;
     }
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return "ctrl-shift-c";
+    }
   }
 
-  @Order(2000.0)
+  @Order(2_000.0)
   public class SearchOutlineViewButton extends AbstractOutlineViewButton {
 
     public SearchOutlineViewButton() {

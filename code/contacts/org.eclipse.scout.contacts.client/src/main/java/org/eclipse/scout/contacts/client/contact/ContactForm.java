@@ -46,6 +46,7 @@ import org.eclipse.scout.contacts.shared.contact.IContactService;
 import org.eclipse.scout.contacts.shared.contact.UpdateContactPermission;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
@@ -71,6 +72,11 @@ public class ContactForm extends AbstractForm {
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Contact");
+  }
+
+  @Override
+  protected int getConfiguredDisplayHint() {
+    return IForm.DISPLAY_HINT_VIEW;
   }
 
   public void startModify() throws ProcessingException {
@@ -169,17 +175,17 @@ public class ContactForm extends AbstractForm {
     return getFieldByClass(WorkBox.class);
   }
 
-  @Order(1000.0)
+  @Order(1_000.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1000.0)
+    @Order(1_000.0)
     public class GeneralBox extends AbstractGroupBox {
 
-      @Order(1000.0)
+      @Order(1_000.0)
       public class PictureBox extends AbstractPictureBox {
       }
 
-      @Order(2000.0)
+      @Order(2_000.0)
       public class FirstNameField extends AbstractStringField {
 
         @Override
@@ -188,7 +194,7 @@ public class ContactForm extends AbstractForm {
         }
       }
 
-      @Order(3000.0)
+      @Order(3_000.0)
       public class LastNameField extends AbstractStringField {
 
         @Override
@@ -197,7 +203,7 @@ public class ContactForm extends AbstractForm {
         }
       }
 
-      @Order(4000.0)
+      @Order(4_000.0)
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
@@ -206,7 +212,7 @@ public class ContactForm extends AbstractForm {
         }
       }
 
-      @Order(5000.0)
+      @Order(5_000.0)
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
 
         @Override
@@ -221,10 +227,10 @@ public class ContactForm extends AbstractForm {
       }
     }
 
-    @Order(2000.0)
+    @Order(2_000.0)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1000.0)
+      @Order(1_000.0)
       public class ContactDetailsBox extends AbstractGroupBox {
 
         @Override
@@ -232,11 +238,11 @@ public class ContactForm extends AbstractForm {
           return TEXTS.get("Details");
         }
 
-        @Order(1000.0)
+        @Order(1_000.0)
         public class AddressBox extends AbstractAddressBox {
         }
 
-        @Order(2000.0)
+        @Order(2_000.0)
         public class PhoneField extends AbstractPhoneField {
 
           @Override
@@ -251,7 +257,7 @@ public class ContactForm extends AbstractForm {
           }
         }
 
-        @Order(3000.0)
+        @Order(3_000.0)
         public class MobileField extends AbstractPhoneField {
 
           @Override
@@ -271,12 +277,12 @@ public class ContactForm extends AbstractForm {
           }
         }
 
-        @Order(4000.0)
+        @Order(4_000.0)
         public class EmailField extends AbstractEmailField {
         }
       }
 
-      @Order(2000.0)
+      @Order(2_000.0)
       public class WorkBox extends AbstractGroupBox {
 
         @Override
@@ -284,7 +290,7 @@ public class ContactForm extends AbstractForm {
           return TEXTS.get("Work");
         }
 
-        @Order(1000.0)
+        @Order(1_000.0)
         public class PositionField extends AbstractStringField {
 
           @Override
@@ -293,7 +299,7 @@ public class ContactForm extends AbstractForm {
           }
         }
 
-        @Order(2000.0)
+        @Order(2_000.0)
         public class CompanyField extends AbstractSmartField<String> {
 
           @Override
@@ -307,7 +313,7 @@ public class ContactForm extends AbstractForm {
           }
         }
 
-        @Order(3000.0)
+        @Order(3_000.0)
         public class PhoneWorkField extends AbstractStringField {
 
           @Override
@@ -316,7 +322,7 @@ public class ContactForm extends AbstractForm {
           }
         }
 
-        @Order(4000.0)
+        @Order(4_000.0)
         public class EmailWorkField extends AbstractStringField {
 
           @Override
@@ -326,7 +332,7 @@ public class ContactForm extends AbstractForm {
         }
       }
 
-      @Order(3000.0)
+      @Order(3_000.0)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -334,7 +340,7 @@ public class ContactForm extends AbstractForm {
           return TEXTS.get("Comments");
         }
 
-        @Order(1000.0)
+        @Order(1_000.0)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -355,11 +361,11 @@ public class ContactForm extends AbstractForm {
       }
     }
 
-    @Order(4000.0)
+    @Order(100_000.0)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(5000.0)
+    @Order(101_000.0)
     public class CancelButton extends AbstractCancelButton {
     }
   }

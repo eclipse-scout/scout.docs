@@ -15,9 +15,9 @@ import javax.security.auth.Subject;
 import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractSubjectConfigProperty;
 
-public final class ServerConfigProperties {
+public final class ConfigProperties {
 
-  private ServerConfigProperties() {
+  private ConfigProperties() {
   }
 
   public static class DatabaseAutoCreateProperty extends AbstractBooleanConfigProperty {

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.shared.contact;
+package org.eclipse.scout.contacts.event.shared.event;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
@@ -17,13 +17,15 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
 @ApplicationScoped
 @TunnelToServer
-public interface IContactService {
+public interface IEventService {
 
-  ContactTablePageData getContactTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException;
+  EventTablePageData getEventsTableData(SearchFilter filter, String companyId) throws ProcessingException;
 
-  ContactFormData create(ContactFormData formData) throws ProcessingException;
+  EventFormData create(EventFormData formData) throws ProcessingException;
 
-  ContactFormData load(ContactFormData formData) throws ProcessingException;
+  EventFormData load(EventFormData formData) throws ProcessingException;
 
-  ContactFormData store(ContactFormData formData) throws ProcessingException;
+  EventFormData prepareCreate(EventFormData formData) throws ProcessingException;
+
+  EventFormData store(EventFormData formData) throws ProcessingException;
 }

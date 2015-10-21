@@ -8,41 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.client.company;
+package org.eclipse.scout.contacts.event.client.event;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.contact.ContactTablePage;
-import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
+import org.eclipse.scout.contacts.event.client.contact.EventTablePage;
+import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-public class CompanyDetailsNodePage extends AbstractPageWithNodes {
-
-  private String m_companyId;
+public class EventOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("CompanyDetails");
+    return TEXTS.get("Events");
   }
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
-    ContactTablePage contactsTablePage = new ContactTablePage();
-    contactsTablePage.setCompanyId(getCompanyId());
-    pageList.add(contactsTablePage);
-
-  }
-
-  @FormData
-  public String getCompanyId() {
-    return m_companyId;
-  }
-
-  @FormData
-  public void setCompanyId(String companyId) {
-    m_companyId = companyId;
+    EventTablePage eventsTablePage = new EventTablePage();
+    pageList.add(eventsTablePage);
   }
 }

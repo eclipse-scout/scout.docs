@@ -13,6 +13,7 @@ package org.eclipse.scout.contacts.client.company;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.company.CompanyForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.company.CompanyForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.client.company.CompanyForm.MainBox.DetailsBox.CommentsBox;
@@ -31,13 +32,13 @@ import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.template.AbstractEmailField;
 import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
-import org.eclipse.scout.contacts.shared.Icons;
 import org.eclipse.scout.contacts.shared.company.CompanyFormData;
 import org.eclipse.scout.contacts.shared.company.ICompanyService;
 import org.eclipse.scout.contacts.shared.company.UpdateCompanyPermission;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriHint;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -60,6 +61,11 @@ public class CompanyForm extends AbstractForm {
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Company");
+  }
+
+  @Override
+  protected int getConfiguredDisplayHint() {
+    return IForm.DISPLAY_HINT_VIEW;
   }
 
   public void startModify() throws ProcessingException {

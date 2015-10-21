@@ -31,8 +31,8 @@ import org.eclipse.scout.rt.platform.util.DateUtility;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 
-public class ServerPlatformListener implements IPlatformListener {
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(ServerPlatformListener.class);
+public class PlatformListener implements IPlatformListener {
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(PlatformListener.class);
 
   @Override
   public void stateChanged(PlatformEvent event) {
@@ -42,7 +42,7 @@ public class ServerPlatformListener implements IPlatformListener {
   }
 
   public void autoCreateDatabase() {
-    if (CONFIG.getPropertyValue(ServerConfigProperties.DatabaseAutoCreateProperty.class)) {
+    if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
 
       try {
         ServerRunContext superUserRunContext = BEANS.get(SuperUserRunContextProvider.class).provide();
@@ -60,7 +60,6 @@ public class ServerPlatformListener implements IPlatformListener {
         BEANS.get(ExceptionHandler.class).handle(e);
       }
     }
-
   }
 
   protected Set<String> getExistingTables() throws ProcessingException {
@@ -74,7 +73,7 @@ public class ServerPlatformListener implements IPlatformListener {
       SQL.insert(SQLs.COMPANY_CREATE_TABLE);
       LOG.info("Database table 'COMPANY' created");
 
-      if (CONFIG.getPropertyValue(ServerConfigProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_1, new NVPair("company_id", UUID.randomUUID().toString()));
         SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_2, new NVPair("company_id", UUID.randomUUID().toString()));
 
@@ -88,7 +87,7 @@ public class ServerPlatformListener implements IPlatformListener {
       SQL.insert(SQLs.CONTACT_CREATE_TABLE);
       LOG.info("Database table 'CONTACT' created");
 
-      if (CONFIG.getPropertyValue(ServerConfigProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.CONTACT_INSERT_SAMPLE_DATA_1, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1865", "dd.MM.yyyy")));
         SQL.insert(SQLs.CONTACT_INSERT_SAMPLE_DATA_2, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1861", "dd.MM.yyyy")));
         LOG.info("Database table 'CONTACT' populated with sample data");

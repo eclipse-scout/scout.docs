@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.Service
 /**
  * This is the main server side servlet filter.
  */
-public class ServerServletFilter implements Filter {
+public class ServletFilter implements Filter {
 
   private ServiceTunnelAccessTokenAuthenticator m_tunnelAuthenticator;
   private DevelopmentAuthenticator m_devAuthenticator;
