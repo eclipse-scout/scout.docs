@@ -1,62 +1,14 @@
-/* Font face definition for custom icon font:
+@font-default-family: 'Segoe UI', 'Lucida Grande','Ubuntu', sans-serif;
+@font-weight-normal: normal;
+@font-weight-bold: bold;
 
-See GIT history for font-face definitions. Some how it wasn't possible
-to produce a consistent look on all browsers with the font-face definition.
-Simply using font-family works better and is more reliable. However, we still
-could use 'Open Sans' in the font-family (when it's installed on the client
-system) and fall back to Arial otherwise, without downloading a WOFF file.
-
-Try these to switch between fonts:
-
-@defaultFont: 'Open Sans', OpenSans, Arial, sans-serif;
-@defaultFont: Arial, sans-serif;
- */
-@defaultFont: 'Segoe UI', 'Lucida Grande','Ubuntu', sans-serif;
-@normal:normal;
-@bold:bold;
+@font-size-small: 11px;
+@font-size-normal: 13px;
+@font-size-plus: 14px;
+@font-size-large: 16px;
 
 @font-face {
   font-family: scoutIcons;
   font-weight: normal;
   src: url('scoutIcons.woff') format('woff');
-}
-
-/* Font Mixins */
-#scout {
-
-  .font-text-small() {
-    font-family: @defaultFont;
-    font-weight: normal;
-    font-size: 11px;
-  }
-
-  .font-text-normal(@fontWeight:@normal) {
-    font-family: @defaultFont;
-    font-weight: @fontWeight;
-    font-size: 13px;
-  }
-
-  .font-text-plus(@fontWeight:@normal) {
-    font-family: @defaultFont;
-    font-weight: @fontWeight;
-    font-size: 14px;
-  }
-
-  .font-text-large() {
-    font-family: @defaultFont;
-    font-weight: normal;
-    font-size: 16px;
-  }
-
-  .font-icon {
-    font-family: scoutIcons, @defaultFont;
-    speak: none;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .make-bold {
-    font-weight: bold;
-  }
 }
