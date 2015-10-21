@@ -24,10 +24,10 @@
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
     </dependency>
-    <!-- Event module -->
+    <!-- Events module -->
     <dependency>
-      <groupId>org.eclipse.scout.contacts.event</groupId>
-      <artifactId>org.eclipse.scout.contacts.event.client</artifactId>
+      <groupId>org.eclipse.scout.contacts</groupId>
+      <artifactId>org.eclipse.scout.contacts.client.module.events</artifactId>
     </dependency>
 
     <!-- Logging -->

@@ -39,10 +39,10 @@
     <module>../org.eclipse.scout.contacts.ui.html</module>
     <module>../org.eclipse.scout.contacts.ui.html.app.war</module>
 
-    <!-- Event module -->
-    <module>../org.eclipse.scout.contacts.event.client</module>
-    <module>../org.eclipse.scout.contacts.event.shared</module>
-    <module>../org.eclipse.scout.contacts.event.server</module>
+    <!-- Events module -->
+  <module>../org.eclipse.scout.contacts.client.module.events</module>
+  <module>../org.eclipse.scout.contacts.shared.module.events</module>
+  <module>../org.eclipse.scout.contacts.server.module.events</module>
   </modules>
 
   <dependencyManagement>
@@ -87,20 +87,20 @@
         <version>${project.version}</version>
       </dependency>
 
-      <!-- Event module -->
+      <!-- Events module -->
       <dependency>
-        <groupId>org.eclipse.scout.contacts.event</groupId>
-        <artifactId>org.eclipse.scout.contacts.event.client</artifactId>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.client.module.events</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.eclipse.scout.contacts.event</groupId>
-        <artifactId>org.eclipse.scout.contacts.event.shared</artifactId>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.shared.module.events</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.eclipse.scout.contacts.event</groupId>
-        <artifactId>org.eclipse.scout.contacts.event.server</artifactId>
+        <groupId>org.eclipse.scout.contacts</groupId>
+        <artifactId>org.eclipse.scout.contacts.server.module.events</artifactId>
         <version>${project.version}</version>
       </dependency>
 
