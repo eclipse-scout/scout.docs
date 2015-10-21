@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.client.template;
+package org.eclipse.scout.contacts.client.common;
 
 import java.net.URL;
 import java.net.URLEncoder;
@@ -21,7 +21,7 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.ProcessingStatus;
-import org.eclipse.scout.contacts.client.template.MapForm.MainBox.MapField;
+import org.eclipse.scout.contacts.client.common.MapForm.MainBox.MapField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;

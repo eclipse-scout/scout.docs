@@ -18,6 +18,7 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.client.contact.ContactForm;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;

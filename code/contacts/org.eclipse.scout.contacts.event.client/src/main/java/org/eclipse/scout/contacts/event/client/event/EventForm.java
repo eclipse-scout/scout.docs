@@ -441,17 +441,6 @@ public class EventForm extends AbstractForm {
                   String contactId = contactChooserForm.getContactField().getValue();
                   Table participantTable = getTable();
 
-                  // TODO [mzi] what is this code good for?
-                  for (ITableRow deletedParticipantRow : participantTable.getDeletedRows()) {
-                    if (participantTable.getContactIdColumn().getValue(deletedParticipantRow) == contactId) {
-                      participantTable.discardRow(deletedParticipantRow);
-                    }
-                    participantTable.setRowState(deletedParticipantRow, ITableRow.STATUS_NON_CHANGED);
-                    participantTable.addRow(deletedParticipantRow);
-
-                    return;
-                  }
-
                   ITableRow row = participantTable.addRow(participantTable.createRow(), true);
 
                   ContactFormData contactFormData = new ContactFormData();

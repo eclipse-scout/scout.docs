@@ -12,7 +12,7 @@ package org.eclipse.scout.contacts.client.template;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.contacts.client.country.CountryLookupCall;
+import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.template.AbstractLocationBoxData;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;

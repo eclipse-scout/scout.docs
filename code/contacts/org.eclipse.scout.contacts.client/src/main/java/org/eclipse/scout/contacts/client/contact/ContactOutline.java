@@ -8,28 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.client.country;
+package org.eclipse.scout.contacts.client.contact;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
-import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.contacts.client.company.CompanyTablePage;
+import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.shared.TEXTS;
 
-public class CountryLookupCall extends LocalLookupCall<String> {
-
-  private static final long serialVersionUID = 1L;
+public class ContactOutline extends AbstractOutline {
 
   @Override
-  protected List<LookupRow<String>> execCreateLookupRows() throws ProcessingException {
-    List<LookupRow<String>> rows = new ArrayList<>();
+  protected String getConfiguredTitle() {
+    return TEXTS.get("Contacts");
+  }
 
-    for (String country : Locale.getISOCountries()) {
-      rows.add(new LookupRow<>(country, country));
-    }
-
-    return rows;
+  @Override
+  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+    pageList.add(new ContactTablePage());
+    pageList.add(new CompanyTablePage());
   }
 }

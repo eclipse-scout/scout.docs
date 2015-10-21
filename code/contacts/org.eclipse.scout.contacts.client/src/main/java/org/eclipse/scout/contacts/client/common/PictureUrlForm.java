@@ -8,14 +8,14 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.client.template;
+package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.template.PictureUrlForm.MainBox.CancelButton;
-import org.eclipse.scout.contacts.client.template.PictureUrlForm.MainBox.OkButton;
-import org.eclipse.scout.contacts.client.template.PictureUrlForm.MainBox.UrlBox;
-import org.eclipse.scout.contacts.client.template.PictureUrlForm.MainBox.UrlBox.PictureUrlField;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.CancelButton;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.OkButton;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.PictureUrlField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;

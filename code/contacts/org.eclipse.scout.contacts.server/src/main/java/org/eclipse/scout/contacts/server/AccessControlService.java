@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.server.services.common.security;
+package org.eclipse.scout.contacts.server;
 
 import java.security.AllPermission;
 import java.security.Permissions;
@@ -25,7 +25,6 @@ public class AccessControlService extends AbstractAccessControlService {
     Permissions permissions = new Permissions();
     permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"));
 
-    //TODO [dwi]: Fill access control service
     permissions.add(new AllPermission());
     return permissions;
   }
