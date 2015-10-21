@@ -35,7 +35,7 @@ import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
 import org.eclipse.scout.contacts.shared.company.CompanyFormData;
 import org.eclipse.scout.contacts.shared.company.ICompanyService;
 import org.eclipse.scout.contacts.shared.company.UpdateCompanyPermission;
-import org.eclipse.scout.rt.client.ui.desktop.OpenUriHint;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -209,7 +209,7 @@ public class CompanyForm extends AbstractForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          getDesktop().openUri(getHomepageField().getValue(), OpenUriHint.NEW_WINDOW);
+          getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
         }
       }
     }

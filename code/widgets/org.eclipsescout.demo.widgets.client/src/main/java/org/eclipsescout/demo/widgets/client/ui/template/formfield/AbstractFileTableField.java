@@ -39,7 +39,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
-import org.eclipse.scout.rt.client.ui.desktop.OpenUriHint;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -283,7 +283,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       protected void execAction() throws ProcessingException {
         List<BinaryResource> resources = getResourceColumn().getSelectedValues();
         for (BinaryResource resource : resources) {
-          ClientSessionProvider.currentSession().getDesktop().openUri(resource, OpenUriHint.DOWNLOAD);
+          ClientSessionProvider.currentSession().getDesktop().openUri(resource, OpenUriAction.DOWNLOAD);
         }
       }
     }
