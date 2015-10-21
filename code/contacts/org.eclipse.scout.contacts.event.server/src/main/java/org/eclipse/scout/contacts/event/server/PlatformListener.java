@@ -22,8 +22,8 @@ import org.eclipse.scout.commons.holders.StringArrayHolder;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.contacts.event.server.sql.SQLs;
-import org.eclipse.scout.contacts.event.shared.contact.ContactFormTabExtensionData;
-import org.eclipse.scout.contacts.event.shared.contact.ContactTableDataExtension;
+import org.eclipse.scout.contacts.event.shared.person.PersonFormTabExtensionData;
+import org.eclipse.scout.contacts.event.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.contacts.server.SuperUserRunContextProvider;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -73,8 +73,8 @@ public class PlatformListener implements IPlatformListener {
     IExtensionRegistry extensionRegistry = BEANS.get(IExtensionRegistry.class);
 
     // Register DTO core extensions
-    extensionRegistry.register(ContactTableDataExtension.class);
-    extensionRegistry.register(ContactFormTabExtensionData.class);
+    extensionRegistry.register(PersonTablePageDataExtension.class);
+    extensionRegistry.register(PersonFormTabExtensionData.class);
   }
 
   protected Set<String> getExistingTables() throws ProcessingException {
@@ -89,11 +89,11 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'EVENT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_1, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm")),
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_1, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm")),
             new NVPair("ends", DateUtility.parse("12.03.2015 16:45", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_2, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm")),
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_2, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm")),
             new NVPair("ends", DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_3, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("23.06.2015 17:30", "dd.MM.yyyy HH:mm")),
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_3, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("23.06.2015 17:30", "dd.MM.yyyy HH:mm")),
             new NVPair("ends", DateUtility.parse("23.06.2015 23:00", "dd.MM.yyyy HH:mm")));
 
         LOG.info("Database table 'EVENT' populated with sample data");

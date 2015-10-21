@@ -10,10 +10,10 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.event.client;
 
-import org.eclipse.scout.contacts.event.client.contact.ContactFormTabExtension;
-import org.eclipse.scout.contacts.event.client.contact.ContactTableExtension;
-import org.eclipse.scout.contacts.event.shared.contact.ContactFormTabExtensionData;
-import org.eclipse.scout.contacts.event.shared.contact.ContactTableDataExtension;
+import org.eclipse.scout.contacts.event.client.person.PersonFormTabExtension;
+import org.eclipse.scout.contacts.event.client.person.PersonTablePageExtension;
+import org.eclipse.scout.contacts.event.shared.person.PersonFormTabExtensionData;
+import org.eclipse.scout.contacts.event.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
@@ -34,11 +34,11 @@ public class PlatformListener implements IPlatformListener {
 
     // Register UI extensions
     extensionRegistry.register(DesktopNewMenuExtension.class);
-    extensionRegistry.register(ContactFormTabExtension.class);
-    extensionRegistry.register(ContactTableExtension.class);
+    extensionRegistry.register(PersonFormTabExtension.class);
+    extensionRegistry.register(PersonTablePageExtension.class);
 
     // Register DTO extensions
-    extensionRegistry.register(ContactFormTabExtensionData.class);
-    extensionRegistry.register(ContactTableDataExtension.class);
+    extensionRegistry.register(PersonFormTabExtensionData.class);
+    extensionRegistry.register(PersonTablePageDataExtension.class);
   }
 }

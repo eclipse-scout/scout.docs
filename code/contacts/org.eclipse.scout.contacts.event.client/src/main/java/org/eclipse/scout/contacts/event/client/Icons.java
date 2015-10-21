@@ -16,5 +16,5 @@ public class Icons extends AbstractIcons {
 
   private static final long serialVersionUID = 1L;
 
-  public static final String Event = "event";
+  public static final String Event = AbstractIcons.Target;
 }

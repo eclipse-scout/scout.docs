@@ -13,7 +13,9 @@ package org.eclipse.scout.contacts.client.contact;
 import java.util.List;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.company.CompanyTablePage;
+import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
+import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -27,7 +29,12 @@ public class ContactOutline extends AbstractOutline {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
-    pageList.add(new ContactTablePage());
-    pageList.add(new CompanyTablePage());
+    pageList.add(new PersonTablePage());
+    pageList.add(new OrganizationTablePage());
+  }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Contacts;
   }
 }

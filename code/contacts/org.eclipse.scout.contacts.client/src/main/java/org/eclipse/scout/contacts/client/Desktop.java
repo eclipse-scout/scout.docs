@@ -17,9 +17,9 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.common.SearchOutline;
-import org.eclipse.scout.contacts.client.company.CompanyForm;
-import org.eclipse.scout.contacts.client.contact.ContactForm;
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm;
+import org.eclipse.scout.contacts.client.person.PersonForm;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -51,21 +51,12 @@ public class Desktop extends AbstractDesktop {
   @Override
   protected void execGuiAttached() throws ProcessingException {
     super.execGuiAttached();
-    setVisibleOutline();
+    setOutline(ContactOutline.class);
   }
 
   @Override
   protected void setDesktopStyle(DesktopStyle desktopStyle) {
     super.setDesktopStyle(desktopStyle);
-  }
-
-  protected void setVisibleOutline() {
-    for (IOutline outline : getAvailableOutlines()) {
-      if (outline instanceof ContactOutline) {
-        setOutline(outline);
-        break;
-      }
-    }
   }
 
   @Order(1_000)
@@ -85,7 +76,7 @@ public class Desktop extends AbstractDesktop {
       }
 
       @Order(1000.0)
-      public class ContactMenu extends AbstractMenu {
+      public class PersonMenu extends AbstractMenu {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -94,17 +85,17 @@ public class Desktop extends AbstractDesktop {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("Contact");
+          return TEXTS.get("Person");
         }
 
         @Override
         protected void execAction() throws ProcessingException {
-          new ContactForm().startNew();
+          new PersonForm().startNew();
         }
       }
 
       @Order(2000.0)
-      public class CompanyMenu extends AbstractMenu {
+      public class OrganizationMenu extends AbstractMenu {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -113,12 +104,12 @@ public class Desktop extends AbstractDesktop {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("Company");
+          return TEXTS.get("Organization");
         }
 
         @Override
         protected void execAction() throws ProcessingException {
-          new CompanyForm().startNew();
+          new OrganizationForm().startNew();
         }
       }
     }
@@ -216,11 +207,6 @@ public class Desktop extends AbstractDesktop {
     @Override
     protected DisplayStyle getConfiguredDisplayStyle() {
       return DisplayStyle.MENU;
-    }
-
-    @Override
-    protected String getConfiguredIconId() {
-      return AbstractIcons.Person;
     }
 
     @Override

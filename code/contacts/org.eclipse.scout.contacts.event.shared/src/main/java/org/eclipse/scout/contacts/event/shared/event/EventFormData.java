@@ -181,24 +181,24 @@ public class EventFormData extends AbstractFormData {
     public static class ParticipantsRowData extends AbstractTableRowData {
 
       private static final long serialVersionUID = 1L;
-      public static final String contactId = "contactId";
+      public static final String personId = "personId";
       public static final String firstName = "firstName";
       public static final String lastName = "lastName";
-      public static final String company = "company";
-      private String m_contactId;
+      public static final String organization = "organization";
+      private String m_personId;
       private String m_firstName;
       private String m_lastName;
-      private String m_company;
+      private String m_organization;
 
       public ParticipantsRowData() {
       }
 
-      public String getContactId() {
-        return m_contactId;
+      public String getPersonId() {
+        return m_personId;
       }
 
-      public void setContactId(String contactId) {
-        m_contactId = contactId;
+      public void setPersonId(String personId) {
+        m_personId = personId;
       }
 
       public String getFirstName() {
@@ -217,12 +217,12 @@ public class EventFormData extends AbstractFormData {
         m_lastName = lastName;
       }
 
-      public String getCompany() {
-        return m_company;
+      public String getOrganization() {
+        return m_organization;
       }
 
-      public void setCompany(String company) {
-        m_company = company;
+      public void setOrganization(String organization) {
+        m_organization = organization;
       }
     }
   }

@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.shared.template;
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractFormFieldData;
-import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
+import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 
 /**
  * <b>NOTE:</b><br>
@@ -27,15 +27,29 @@ public abstract class AbstractPictureBoxData extends AbstractFormFieldData {
   public AbstractPictureBoxData() {
   }
 
-  public PictureUrl getPictureUrl() {
-    return getFieldByClass(PictureUrl.class);
+  /**
+   * access method for property PictureUrl.
+   */
+  public String getPictureUrl() {
+    return getPictureUrlProperty().getValue();
   }
 
-  public static class PictureUrl extends AbstractValueFieldData<String> {
+  /**
+   * access method for property PictureUrl.
+   */
+  public void setPictureUrl(String pictureUrl) {
+    getPictureUrlProperty().setValue(pictureUrl);
+  }
+
+  public PictureUrlProperty getPictureUrlProperty() {
+    return getPropertyByClass(PictureUrlProperty.class);
+  }
+
+  public static class PictureUrlProperty extends AbstractPropertyData<String> {
 
     private static final long serialVersionUID = 1L;
 
-    public PictureUrl() {
+    public PictureUrlProperty() {
     }
   }
 }

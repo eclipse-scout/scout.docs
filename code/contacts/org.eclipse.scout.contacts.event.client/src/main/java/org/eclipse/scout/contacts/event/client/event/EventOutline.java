@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.event.client.event;
 import java.util.List;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.event.client.contact.EventTablePage;
+import org.eclipse.scout.contacts.event.client.Icons;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -29,5 +29,10 @@ public class EventOutline extends AbstractOutline {
   protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
     EventTablePage eventsTablePage = new EventTablePage();
     pageList.add(eventsTablePage);
+  }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Event;
   }
 }

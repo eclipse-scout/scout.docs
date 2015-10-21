@@ -17,7 +17,7 @@ import org.eclipse.scout.contacts.shared.template.AbstractPhoneFieldData;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-// TODO [dwi] FIX THIS CLASS
+// TODO [mzi] fix this class
 @FormData(value = AbstractPhoneFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractPhoneField extends AbstractStringField {
 

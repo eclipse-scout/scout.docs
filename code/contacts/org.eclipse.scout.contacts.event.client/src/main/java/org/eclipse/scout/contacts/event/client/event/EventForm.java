@@ -18,11 +18,10 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
-import org.eclipse.scout.contacts.client.contact.ContactForm;
+import org.eclipse.scout.contacts.client.person.PersonForm;
 import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.template.AbstractEmailField;
 import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
-import org.eclipse.scout.contacts.event.client.contact.ContactChooserForm;
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.DetailsBox.CommentsBox;
@@ -43,12 +42,13 @@ import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.GeneralBo
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.GeneralBox.StartsField;
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.GeneralBox.TitleField;
 import org.eclipse.scout.contacts.event.client.event.EventForm.MainBox.OkButton;
+import org.eclipse.scout.contacts.event.client.person.PersonChooserForm;
 import org.eclipse.scout.contacts.event.shared.event.EventFormData;
 import org.eclipse.scout.contacts.event.shared.event.IEventService;
 import org.eclipse.scout.contacts.event.shared.event.UpdateEventPermission;
-import org.eclipse.scout.contacts.shared.company.CompanyLookupCall;
-import org.eclipse.scout.contacts.shared.contact.ContactFormData;
-import org.eclipse.scout.contacts.shared.contact.IContactService;
+import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
+import org.eclipse.scout.contacts.shared.person.IPersonService;
+import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.ActivityMapMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -60,7 +60,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
-import org.eclipse.scout.rt.client.ui.desktop.OpenUriHint;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -234,7 +234,7 @@ public class EventForm extends AbstractForm {
 
         @Override
         protected void execClickAction() throws ProcessingException {
-          getDesktop().openUri(getHomepageField().getValue(), OpenUriHint.NEW_WINDOW);
+          getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
         }
       }
 
@@ -326,7 +326,7 @@ public class EventForm extends AbstractForm {
 
             @Override
             protected String getConfiguredDefaultIconId() {
-              return Icons.Contact;
+              return Icons.Person;
             }
 
             @Override
@@ -339,20 +339,20 @@ public class EventForm extends AbstractForm {
               getRemoveButton().setEnabled(rows.size() > 0);
             }
 
-            public CompanyColumn getCompanyColumn() {
-              return getColumnSet().getColumnByClass(CompanyColumn.class);
+            public OrganizationColumn getOrganizationColumn() {
+              return getColumnSet().getColumnByClass(OrganizationColumn.class);
             }
 
             public FirstNameColumn getFirstNameColumn() {
               return getColumnSet().getColumnByClass(FirstNameColumn.class);
             }
 
-            public ContactIdColumn getContactIdColumn() {
-              return getColumnSet().getColumnByClass(ContactIdColumn.class);
+            public PersonIdColumn getPersonIdColumn() {
+              return getColumnSet().getColumnByClass(PersonIdColumn.class);
             }
 
             @Order(1_000.0)
-            public class ContactIdColumn extends AbstractStringColumn {
+            public class PersonIdColumn extends AbstractStringColumn {
 
               @Override
               protected boolean getConfiguredDisplayable() {
@@ -399,16 +399,16 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(4_000.0)
-            public class CompanyColumn extends AbstractSmartColumn<String> {
+            public class OrganizationColumn extends AbstractSmartColumn<String> {
 
               @Override
               protected String getConfiguredHeaderText() {
-                return TEXTS.get("Company");
+                return TEXTS.get("Organization");
               }
 
               @Override
               protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-                return CompanyLookupCall.class;
+                return OrganizationLookupCall.class;
               }
 
               @Override
@@ -432,25 +432,25 @@ public class EventForm extends AbstractForm {
 
               @Override
               protected void execAction() throws ProcessingException {
-                ContactChooserForm contactChooserForm = new ContactChooserForm();
-                contactChooserForm.setFilteredContacts(getContactIdColumn().getValues(false));
-                contactChooserForm.startNew();
-                contactChooserForm.waitFor();
+                PersonChooserForm personChooserForm = new PersonChooserForm();
+                personChooserForm.setFilteredPersons(getPersonIdColumn().getValues(false));
+                personChooserForm.startNew();
+                personChooserForm.waitFor();
 
-                if (contactChooserForm.isFormStored()) {
-                  String contactId = contactChooserForm.getContactField().getValue();
+                if (personChooserForm.isFormStored()) {
+                  String personId = personChooserForm.getPersonField().getValue();
                   Table participantTable = getTable();
 
                   ITableRow row = participantTable.addRow(participantTable.createRow(), true);
 
-                  ContactFormData contactFormData = new ContactFormData();
-                  contactFormData.setContactId(contactId);
-                  contactFormData = BEANS.get(IContactService.class).load(contactFormData);
+                  PersonFormData personFormData = new PersonFormData();
+                  personFormData.setPersonId(personId);
+                  personFormData = BEANS.get(IPersonService.class).load(personFormData);
 
-                  participantTable.getContactIdColumn().setValue(row, contactFormData.getContactId());
-                  participantTable.getFirstNameColumn().setValue(row, contactFormData.getFirstName().getValue());
-                  participantTable.getLastNameColumn().setValue(row, contactFormData.getLastName().getValue());
-                  participantTable.getCompanyColumn().setValue(row, contactFormData.getCompany().getValue());
+                  participantTable.getPersonIdColumn().setValue(row, personFormData.getPersonId());
+                  participantTable.getFirstNameColumn().setValue(row, personFormData.getFirstName().getValue());
+                  participantTable.getLastNameColumn().setValue(row, personFormData.getLastName().getValue());
+                  participantTable.getOrganizationColumn().setValue(row, personFormData.getOrganization().getValue());
                 }
               }
             }
@@ -465,8 +465,8 @@ public class EventForm extends AbstractForm {
 
               @Override
               protected void execAction() throws ProcessingException {
-                ContactForm form = new ContactForm();
-                form.setContactId(getContactIdColumn().getSelectedValue());
+                PersonForm form = new PersonForm();
+                form.setPersonId(getPersonIdColumn().getSelectedValue());
                 form.startModify();
               }
             }

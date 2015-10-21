@@ -51,8 +51,8 @@ public class PlatformListener implements IPlatformListener {
           @Override
           public void run() throws Exception {
             Set<String> tables = getExistingTables();
-            createCompanyTable(tables);
-            createContactTable(tables);
+            createOrganizationTable(tables);
+            createPersonTable(tables);
           }
         });
       }
@@ -68,29 +68,29 @@ public class PlatformListener implements IPlatformListener {
     return CollectionUtility.hashSet(tables.getValue());
   }
 
-  private void createCompanyTable(Set<String> tables) throws ProcessingException {
-    if (!tables.contains("COMPANY")) {
-      SQL.insert(SQLs.COMPANY_CREATE_TABLE);
-      LOG.info("Database table 'COMPANY' created");
+  private void createOrganizationTable(Set<String> tables) throws ProcessingException {
+    if (!tables.contains("ORGANIZATION")) {
+      SQL.insert(SQLs.ORGANIZATION_CREATE_TABLE);
+      LOG.info("Database table 'ORGANIZATION' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_1, new NVPair("company_id", UUID.randomUUID().toString()));
-        SQL.insert(SQLs.COMPANY_INSERT_SAMPLE_DATA_2, new NVPair("company_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_1, new NVPair("organization_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_2, new NVPair("organization_id", UUID.randomUUID().toString()));
 
-        LOG.info("Database table 'COMPANY' populated with sample data");
+        LOG.info("Database table 'ORGANIZATION' populated with sample data");
       }
     }
   }
 
-  private void createContactTable(Set<String> tables) throws ProcessingException {
-    if (!tables.contains("CONTACT")) {
-      SQL.insert(SQLs.CONTACT_CREATE_TABLE);
-      LOG.info("Database table 'CONTACT' created");
+  private void createPersonTable(Set<String> tables) throws ProcessingException {
+    if (!tables.contains("PERSON")) {
+      SQL.insert(SQLs.PERSON_CREATE_TABLE);
+      LOG.info("Database table 'PERSON' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.CONTACT_INSERT_SAMPLE_DATA_1, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1865", "dd.MM.yyyy")));
-        SQL.insert(SQLs.CONTACT_INSERT_SAMPLE_DATA_2, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1861", "dd.MM.yyyy")));
-        LOG.info("Database table 'CONTACT' populated with sample data");
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_1, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1865", "dd.MM.yyyy")));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_2, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1861", "dd.MM.yyyy")));
+        LOG.info("Database table 'PERSON' populated with sample data");
       }
     }
   }

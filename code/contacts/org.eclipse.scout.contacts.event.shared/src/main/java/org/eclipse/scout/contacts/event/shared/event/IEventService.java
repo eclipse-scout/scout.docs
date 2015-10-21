@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IEventService {
 
-  EventTablePageData getEventsTableData(SearchFilter filter, String companyId) throws ProcessingException;
+  EventTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException;
 
   EventFormData create(EventFormData formData) throws ProcessingException;
 

@@ -32,10 +32,15 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Order(2000.0)
-  public class EventManagementOutlineViewButton extends AbstractOutlineViewButton {
+  public class EventOutlineViewButton extends AbstractOutlineViewButton {
 
-    public EventManagementOutlineViewButton() {
+    public EventOutlineViewButton() {
       super(getCoreDesktop(), EventOutline.class);
+    }
+
+    @Override
+    protected DisplayStyle getConfiguredDisplayStyle() {
+      return DisplayStyle.MENU;
     }
 
     @Override

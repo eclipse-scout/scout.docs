@@ -33,13 +33,13 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class EventService implements IEventService {
 
   @Override
-  public EventTablePageData getEventsTableData(SearchFilter filter, String companyId) throws ProcessingException {
+  public EventTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException {
     EventTablePageData pageData = new EventTablePageData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.EVENT_PAGE_DATA_SELECT);
     StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");
 
-    if (StringUtility.hasText(companyId)) {
+    if (StringUtility.hasText(organizationId)) {
       sqlWhere.append(SQLs.EVENT_PAGE_DATA_WHERE_CLAUSE);
     }
 
