@@ -1,7 +1,8 @@
-activeContentFilterList=*.makefile,makefile,*.Makefile,Makefile,Makefile.*,*.mk,MANIFEST.MF
+activeContentFilterList=*.makefile,makefile,*.Makefile,Makefile,Makefile.*,*.mk,MANIFEST.MF,.project,.classpath
 addNewLine=true
 convertActionOnSaave=AnyEdit.CnvrtTabToSpaces
 eclipse.preferences.version=1
+fixLineDelimiters=false
 ignoreBlankLinesWhenTrimming=false
 inActiveContentFilterList=
 javaTabWidthForJava=true
@@ -12,5 +13,6 @@ replaceAllSpaces=false
 replaceAllTabs=true
 saveAndAddLine=true
 saveAndConvert=true
+saveAndFixLineDelimiters=false
 saveAndTrim=true
 useModulo4Tabs=false
