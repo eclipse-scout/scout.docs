@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <relativePath></relativePath>
   </parent>
 
@@ -69,4 +69,38 @@
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
   </dependencies>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>eclipse.release</id>
+      <name>eclipse-release-repo</name>
+      <url>https://repo.eclipse.org/content/groups/releases/</url>
+    </repository>
+    <repository>
+      <snapshots></snapshots>
+      <id>eclipse.snapshot</id>
+      <name>eclipse-snapshot-repo</name>
+      <url>https://repo.eclipse.org/content/groups/snapshots/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>eclipse.release</id>
+      <name>eclipse-release-repo</name>
+      <url>https://repo.eclipse.org/content/groups/releases/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots></snapshots>
+      <id>eclipse.snapshot</id>
+      <name>eclipse-snapshot-repo</name>
+      <url>https://repo.eclipse.org/content/groups/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
