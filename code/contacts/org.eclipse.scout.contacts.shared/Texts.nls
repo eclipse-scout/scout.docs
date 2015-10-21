@@ -3,4 +3,4 @@
 # To ensure a properly working NLS support    #
 # keep this file untouched.                   #
 ###############################################
-Nls-Class=org.eclipse.scout.contacts.shared.services.common.text.DefaultTextProviderService
+Nls-Class=org.eclipse.scout.contacts.shared.TextProviderService

@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IContactService {
 
-  ContactsTablePageData getContactsTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException;
+  ContactTablePageData getContactTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException;
 
   ContactFormData create(ContactFormData formData) throws ProcessingException;
 

@@ -762,6 +762,20 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             setValue(TEXTS.get("Locale"));
           }
         }
+
+        @Order(70.0)
+        public class TitleAutoDateField extends AbstractLabelField {
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue("Auto date");
+          }
+        }
       }
 
       @Order(20.0)
@@ -946,6 +960,28 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() throws ProcessingException {
             setValue(ClientSession.get().getLocale());
+          }
+        }
+
+        @Order(50.0)
+        public class AutoDateDateField extends AbstractDateTimeField {
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Auto date";
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            Date autoDate = getValue();
+            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class).setAutoDate(autoDate);
+            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class).setAutoDate(autoDate);
+            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn3Box.DateTimeInputField.class).setAutoDate(autoDate);
           }
         }
       }

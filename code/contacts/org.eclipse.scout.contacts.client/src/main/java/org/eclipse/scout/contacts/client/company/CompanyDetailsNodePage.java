@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.client.contact.ContactsTablePage;
+import org.eclipse.scout.contacts.client.contact.ContactTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -30,7 +30,7 @@ public class CompanyDetailsNodePage extends AbstractPageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
-    ContactsTablePage contactsTablePage = new ContactsTablePage();
+    ContactTablePage contactsTablePage = new ContactTablePage();
     contactsTablePage.setCompanyId(getCompanyId());
     pageList.add(contactsTablePage);
 

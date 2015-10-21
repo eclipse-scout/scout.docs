@@ -24,6 +24,7 @@ import org.eclipse.scout.commons.status.IStatus;
 import org.eclipse.scout.commons.status.Status;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
+import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -55,6 +56,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.util.DateUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -943,6 +945,26 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                   row.setCssClass(null);
                 }
               }
+            }
+
+          }
+
+          @Order(60.0)
+          public class KeyStroke extends AbstractKeyStroke {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected String getConfiguredKeyStroke() {
+              return "Ctrl-Shift-Alt-h";
+            }
+
+            @Override
+            protected void execAction() throws ProcessingException {
+              MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
             }
           }
         }

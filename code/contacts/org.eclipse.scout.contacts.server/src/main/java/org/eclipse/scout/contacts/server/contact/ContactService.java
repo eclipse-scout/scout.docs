@@ -18,8 +18,8 @@ import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.contact.ContactFormData;
-import org.eclipse.scout.contacts.shared.contact.ContactsSearchFormData;
-import org.eclipse.scout.contacts.shared.contact.ContactsTablePageData;
+import org.eclipse.scout.contacts.shared.contact.ContactSearchFormData;
+import org.eclipse.scout.contacts.shared.contact.ContactTablePageData;
 import org.eclipse.scout.contacts.shared.contact.CreateContactPermission;
 import org.eclipse.scout.contacts.shared.contact.IContactService;
 import org.eclipse.scout.contacts.shared.contact.ReadContactPermission;
@@ -32,9 +32,9 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class ContactService implements IContactService {
 
   @Override
-  public ContactsTablePageData getContactsTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException {
-    ContactsTablePageData pageData = new ContactsTablePageData();
-    ContactsSearchFormData searchData = (ContactsSearchFormData) filter.getFormData();
+  public ContactTablePageData getContactTableData(SearchFilter filter, String pageCompanyId) throws ProcessingException {
+    ContactTablePageData pageData = new ContactTablePageData();
+    ContactSearchFormData searchData = (ContactSearchFormData) filter.getFormData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.CONTACT_PAGE_SELECT);
     StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");

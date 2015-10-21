@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -335,7 +336,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() throws ProcessingException {
-                getDesktop().downloadResource(getFileColumn().getSelectedValue());
+                getDesktop().openUri(getFileColumn().getSelectedValue(), OpenUriAction.DOWNLOAD);
               }
             }
           }

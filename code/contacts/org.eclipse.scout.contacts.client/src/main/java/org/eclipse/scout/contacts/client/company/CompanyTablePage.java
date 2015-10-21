@@ -16,7 +16,7 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.contacts.shared.Icons;
+import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.company.CompanyTablePageData;
 import org.eclipse.scout.contacts.shared.company.ICompanyService;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
