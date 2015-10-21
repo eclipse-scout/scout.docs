@@ -38,7 +38,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Organization");
+    return TEXTS.get("Organizations");
   }
 
   @Override
