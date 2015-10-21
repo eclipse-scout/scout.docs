@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.template;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.scout.commons.IOUtility;
@@ -17,19 +19,22 @@ import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.contacts.client.Icons;
-import org.eclipse.scout.contacts.client.contact.ContactForm;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @FormData(value = AbstractPictureBoxData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractPictureBox extends AbstractGroupBox {
+
+  private String m_pictureUrl;
 
   @Override
   protected boolean getConfiguredBorderVisible() {
@@ -55,11 +60,42 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     return getFieldByClass(PictureField.class);
   }
 
-  public PictureUrlField getPictureUrlField() {
-    return getFieldByClass(PictureUrlField.class);
+  protected String getConfiguredImageId() {
+    return Icons.File;
   }
 
-  @Order(1000.0)
+  @FormData
+  public String getPictureUrl() {
+    return m_pictureUrl;
+  }
+
+  @FormData
+  public void setPictureUrl(String pictureUrl) {
+    m_pictureUrl = pictureUrl;
+
+    if (m_pictureUrl == null) {
+      getPictureField().setImage(null);
+      getForm().touch();
+    }
+    else {
+      try {
+        getPictureField().setImage(IOUtility.getContent(new URL((String) m_pictureUrl).openStream()));
+        getPictureField().setAutoFit(true);
+        getForm().touch();
+      }
+      catch (MalformedURLException e) {
+        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("InvalidImageUrl"), e));
+      }
+      catch (IOException e) {
+        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
+      }
+      catch (ProcessingException e) {
+        BEANS.get(ExceptionHandler.class).handle(e);
+      }
+    }
+  }
+
+  @Order(1_000.0)
   public class PictureField extends AbstractImageField {
 
     @Override
@@ -74,7 +110,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
 
     @Override
     protected String getConfiguredImageId() {
-      return Icons.User;
+      return AbstractPictureBox.this.getConfiguredImageId();
     }
 
     @Override
@@ -82,25 +118,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       return false;
     }
 
-    @Override
-    protected Class<? extends IValueField> getConfiguredMasterField() {
-      // TODO [dwi] not so nice to reference ContactForm --> so this PictureBox cannot be reused
-      return ContactForm.MainBox.GeneralBox.PictureBox.PictureUrlField.class;
-    }
-
-    @Override
-    protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-      try {
-        URL url = new URL((String) newMasterValue);
-        setImage(IOUtility.getContent(url.openStream()));
-        setAutoFit(true);
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-
-    @Order(1000.0)
+    @Order(1_000.0)
     public class EditURLMenu extends AbstractMenu {
 
       @Override
@@ -110,38 +128,12 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
 
       @Override
       protected void execAction() throws ProcessingException {
-        PictureUrlForm form = new PictureUrlForm();
-        String url = getPictureUrlField().getValue();
-
-        if (StringUtility.hasText(url)) {
-          form.getPictureUrlField().setValue(url);
-        }
-
-        form.startModify();
-        form.waitFor();
-        if (form.isFormStored()) {
-          getPictureUrlField().setValue(form.getPictureUrlField().getValue());
-        }
+        execChangePicture();
       }
     }
   }
 
-  @Order(2000.0)
-  public class PictureUrlField extends AbstractStringField {
-
-    @Override
-    protected String getConfiguredLabel() {
-      return TEXTS.get("PictureURL");
-    }
-
-    @Override
-    protected boolean getConfiguredVisible() {
-      return false;
-    }
-  }
-
-  // FIXME: workaround as image context menu does not yet work
-  @Order(3000.0)
+  @Order(2_000.0)
   public class EditUrlButton extends AbstractLinkButton {
 
     @Override
@@ -161,19 +153,22 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
 
     @Override
     protected void execClickAction() throws ProcessingException {
-      PictureUrlForm form = new PictureUrlForm();
-      String url = getPictureUrlField().getValue();
-
-      if (StringUtility.hasText(url)) {
-        form.getPictureUrlField().setValue(url);
-      }
-
-      form.startModify();
-      form.waitFor();
-      if (form.isFormStored()) {
-        getPictureUrlField().setValue(form.getPictureUrlField().getValue());
-      }
+      execChangePicture();
     }
   }
 
+  protected void execChangePicture() throws ProcessingException {
+    String oldUrl = getPictureUrl();
+
+    PictureUrlForm form = new PictureUrlForm();
+    if (StringUtility.hasText(oldUrl)) {
+      form.getPictureUrlField().setValue(oldUrl);
+    }
+
+    form.startModify();
+    form.waitFor();
+    if (form.isFormStored()) {
+      setPictureUrl(form.getPictureUrlField().getValue());
+    }
+  }
 }

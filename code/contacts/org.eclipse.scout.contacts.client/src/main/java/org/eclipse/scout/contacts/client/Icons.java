@@ -18,9 +18,9 @@ public class Icons extends AbstractIcons {
 
   public static final String EclipseScout = "eclipse_scout";
 
-  public static final String Contact = "contact";
-  public static final String User = "user";
+  public static final String Organization = "house";
 
-  public static final String Company = "company";
-  public static final String House = "house";
+  public static final String Person = AbstractIcons.Person;
+
+  public static final String Contacts = AbstractIcons.Category;
 }

@@ -18,6 +18,6 @@ public class DerbySqlService extends AbstractDerbySqlService {
 
   @Override
   protected String getConfiguredJdbcMappingName() {
-    return "jdbc:derby:memory:Contacts;create=true";
+    return "jdbc:derby:memory:contacts-database;create=true";
   }
 }

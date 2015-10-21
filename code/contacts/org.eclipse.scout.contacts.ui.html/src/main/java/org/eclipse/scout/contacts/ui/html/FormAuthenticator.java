@@ -80,7 +80,7 @@ public class FormAuthenticator {
   }
 
   protected boolean isValidUser(String username, String passwordClearText) throws ServletException {
-    // TODO [dwi]: Implement Credential validation strategy (LDAP, DataSource, etc)
+    // Implement Credential validation strategy (LDAP, DataSource, etc)
     // When using DataSource strategies, ensure to store only safe hashes (probably use org.eclipse.scout.commons.SecurityUtility).
 
     final class CredEntry {
