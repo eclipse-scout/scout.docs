@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.template;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -19,7 +18,8 @@ import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.commons.status.IStatus;
+import org.eclipse.scout.commons.status.Status;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
@@ -27,8 +27,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @FormData(value = AbstractPictureBoxData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
@@ -79,18 +77,25 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     }
     else {
       try {
+        getPictureField().clearErrorStatus();
         getPictureField().setImage(IOUtility.getContent(new URL((String) m_pictureUrl).openStream()));
         getPictureField().setAutoFit(true);
         getForm().touch();
       }
       catch (MalformedURLException e) {
-        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("InvalidImageUrl"), e));
+        getPictureField().addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
+//        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("InvalidImageUrl"), e));
       }
-      catch (IOException e) {
-        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
-      }
-      catch (ProcessingException e) {
-        BEANS.get(ExceptionHandler.class).handle(e);
+      catch (Exception e) {
+        getPictureField().addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
+////        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
+//      }
+//      catch (IOException e) {
+//        getPictureField().addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
+////        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
+//      }
+//      catch (ProcessingException e) {
+//        BEANS.get(ExceptionHandler.class).handle(e);
       }
     }
   }
