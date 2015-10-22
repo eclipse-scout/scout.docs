@@ -167,7 +167,7 @@ public final class PlatformSnippet {
 
     // get all classes having a Bean annotation (directly on them self).
     Set<IClassInfo> classesHavingBeanAnnot = classInventory.getKnownAnnotatedTypes(Bean.class);
-    //end::ConfigProperties[]
+    //end::ClassInventory[]
     //tag::BeanRetrieval[]
     BeanSingletonClass bean = BEANS.get(BeanSingletonClass.class);
     BeanClass beanOrNull = BEANS.opt(BeanClass.class);
