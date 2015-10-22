@@ -84,18 +84,9 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       }
       catch (MalformedURLException e) {
         getPictureField().addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
-//        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("InvalidImageUrl"), e));
       }
       catch (Exception e) {
         getPictureField().addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
-////        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
-//      }
-//      catch (IOException e) {
-//        getPictureField().addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
-////        BEANS.get(ExceptionHandler.class).handle(new VetoException(TEXTS.get("FailedToAccessImageFromUrl"), e));
-//      }
-//      catch (ProcessingException e) {
-//        BEANS.get(ExceptionHandler.class).handle(e);
       }
     }
   }
