@@ -15,6 +15,7 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.CommentsBox;
@@ -46,7 +47,6 @@ import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
-import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
@@ -81,7 +81,7 @@ public class PersonForm extends AbstractForm {
   }
 
   public void startModify() throws ProcessingException {
-    startInternal(new ModifyHandler());
+    startInternalExclusive(new ModifyHandler());
   }
 
   public void startNew() throws ProcessingException {
@@ -174,6 +174,11 @@ public class PersonForm extends AbstractForm {
 
   public WorkBox getWorkBox() {
     return getFieldByClass(WorkBox.class);
+  }
+
+  @Override
+  public Object computeExclusiveKey() throws ProcessingException {
+    return getPersonId();
   }
 
   @Order(1_000.0)
@@ -371,7 +376,7 @@ public class PersonForm extends AbstractForm {
     }
   }
 
-  public class ModifyHandler extends AbstractFormHandler {
+  public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -380,6 +385,8 @@ public class PersonForm extends AbstractForm {
       formData = BEANS.get(IPersonService.class).load(formData);
       importFormData(formData);
       setEnabledPermission(new PersonUpdatePermission());
+
+      getForm().setSubTitle(calculateSubTitle());
     }
 
     @Override
@@ -388,15 +395,30 @@ public class PersonForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IPersonService.class).store(formData);
     }
+
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(calculateSubTitle());
+    }
+
+    @Override
+    protected boolean getConfiguredOpenExclusive() {
+      return true;
+    }
   }
 
-  public class NewHandler extends AbstractFormHandler {
+  public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execStore() throws ProcessingException {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = BEANS.get(IPersonService.class).create(formData);
+    }
+
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(calculateSubTitle());
     }
   }
 
@@ -422,5 +444,9 @@ public class PersonForm extends AbstractForm {
   @FormData
   public void setPersonId(String personId) {
     m_personId = personId;
+  }
+
+  private String calculateSubTitle() {
+    return StringUtility.join(" ", getFirstNameField().getValue(), getLastNameField().getValue());
   }
 }

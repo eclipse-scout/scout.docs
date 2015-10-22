@@ -30,6 +30,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -233,11 +235,16 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       protected void execAction() throws ProcessingException {
         EventForm form = new EventForm();
         form.setEventId(getEventIdColumn().getSelectedValue());
+        form.addFormListener(new FormListener() {
+
+          @Override
+          public void formChanged(FormEvent e) throws ProcessingException {
+            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+              reloadPage();
+            }
+          }
+        });
         form.startModify();
-        form.waitFor();
-        if (form.isFormStored()) {
-          reloadPage();
-        }
       }
     }
 
@@ -257,11 +264,16 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       @Override
       protected void execAction() throws ProcessingException {
         EventForm form = new EventForm();
+        form.addFormListener(new FormListener() {
+
+          @Override
+          public void formChanged(FormEvent e) throws ProcessingException {
+            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+              reloadPage();
+            }
+          }
+        });
         form.startNew();
-        form.waitFor();
-        if (form.isFormStored()) {
-          reloadPage();
-        }
       }
     }
   }
