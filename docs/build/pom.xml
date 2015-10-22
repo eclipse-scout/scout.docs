@@ -24,7 +24,9 @@
     <module>eclipse_help</module>
     <module>scout_helloworld</module>
     <module>scout_install</module>
+    <module>scout_migration</module>
     <module>publish</module>
+
   </modules>
 
   <build>

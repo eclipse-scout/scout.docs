@@ -9,6 +9,7 @@ This folder contains the documents that are build.
 * `book_scout_intro`: produces a book called "Eclipse Scout: an Introduction".
 * `book_scout_frontend`: produces a book called "Eclipse Scout: Frontend Development".
 * `book_scout_architecture`: produces a book called "Eclipse Scout: Architecture".
+* `scout_migration`: produces an article called "Eclipse Scout: Migration Guide".
 * `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.help` plugin). The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt].
 * `publish`: this last step prepares all the documents in order to publish them (post processing of the Asciidoctor documents). You should run the other tasks, before running this task.
 
@@ -22,12 +23,12 @@ You can generate one document by switching to one of subfolder and using maven:
 
  cd scout_helloworld/
  mvn
- 
+
 The results are generated in the `target` subfolder. For example for `scout_helloworld`:
 
  scout_helloworld/target/generated-docs/scout_helloworld.html
  scout_helloworld/target/generated-docs/scout_helloworld.pdf
- 
+
 == Output
 The output of the `publish` task prepares the documents in order to publish them.
 
@@ -41,10 +42,10 @@ Output:
         \---published-docs
             \---scout-sdk-help
                 |   toc.xml
-                |   
+                |
                 \---html
                     |   <html files>
-                    |   
+                    |
                     \---images
                             {image files}
 
@@ -64,7 +65,7 @@ Output:
             \---eclipse.org-scout
                 |   scout_helloworld.html
                 |   scout_install.html
-                |   
+                |
                 \---images
                         {image files}
 
@@ -82,40 +83,40 @@ Output:
                 +---article_helloworld
                 |   |   scout_helloworld.pdf
                 |   |   scout_helloworld.zip
-                |   |   
+                |   |
                 |   \---scout_helloworld
                 |       |   scout_helloworld.html
-                |       |   
+                |       |
                 |       \---images
                 |               {image files}
-                |               
+                |
                 +---article_install
                 |   |   scout_install.pdf
                 |   |   scout_install.zip
-                |   |   
+                |   |
                 |   \---scout_install
                 |       |   scout_install.html
-                |       |   
+                |       |
                 |       \---images
                 |               {image files}
-                |               
+                |
                 +---book_scout_frontend
                 |   |   scout_frontend.pdf
                 |   |   scout_frontend.zip
-                |   |   
+                |   |
                 |   \---scout_frontend
                 |       |   scout_frontend.html
-                |       |   
+                |       |
                 |       \---images
                 |               {image files}
-                |               
+                |
                 \---book_scout_intro
                     |   scout_intro.pdf
                     |   scout_intro.zip
-                    |   
+                    |
                     \---scout_intro
                         |   scout_intro.html
-                        |   
+                        |
                         \---images
                                 {image files}
 
