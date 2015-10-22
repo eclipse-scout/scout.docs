@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.module.events.event;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
@@ -18,26 +17,23 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.CommentsBox;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.CommentsBox.CommentsField;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox.EmailField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox.LocationBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox.PhoneField;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.AddButton;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.RemoveButton;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField.Table.AddMenu;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField.Table.RemoveMenu;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.EndsField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.HomepageField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.StartsField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.TitleField;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.module.events.person.PersonChooserForm;
 import org.eclipse.scout.contacts.client.person.PersonForm;
 import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
@@ -62,7 +58,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
-import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -97,19 +92,11 @@ public class EventForm extends AbstractForm {
   }
 
   public void startModify() throws ProcessingException {
-    startInternal(new ModifyHandler());
+    startInternalExclusive(new ModifyHandler());
   }
 
   public void startNew() throws ProcessingException {
     startInternal(new NewHandler());
-  }
-
-  public AddButton getAddButton() {
-    return getFieldByClass(AddButton.class);
-  }
-
-  public RemoveButton getRemoveButton() {
-    return getFieldByClass(RemoveButton.class);
   }
 
   public CancelButton getCancelButton() {
@@ -178,6 +165,11 @@ public class EventForm extends AbstractForm {
 
   public TitleField getTitleField() {
     return getFieldByClass(TitleField.class);
+  }
+
+  @Override
+  public Object computeExclusiveKey() throws ProcessingException {
+    return getEventId();
   }
 
   @Order(1_000.0)
@@ -332,11 +324,6 @@ public class EventForm extends AbstractForm {
             @Override
             protected Class<? extends IMenu> getConfiguredDefaultMenu() {
               return EditMenu.class;
-            }
-
-            @Override
-            protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
-              getRemoveButton().setEnabled(rows.size() > 0);
             }
 
             public OrganizationColumn getOrganizationColumn() {
@@ -501,39 +488,6 @@ public class EventForm extends AbstractForm {
             }
           }
         }
-
-        @Order(2_000.0)
-        public class AddButton extends AbstractLinkButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Add");
-          }
-
-          @Override
-          protected void execClickAction() throws ProcessingException {
-            getParticipantTableField().getTable().getMenuByClass(AddMenu.class).doAction();
-          }
-        }
-
-        @Order(3_000.0)
-        public class RemoveButton extends AbstractLinkButton {
-
-          @Override
-          protected boolean getConfiguredEnabled() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Remove");
-          }
-
-          @Override
-          protected void execClickAction() throws ProcessingException {
-            getParticipantTableField().getTable().getMenuByClass(RemoveMenu.class).doAction();
-          }
-        }
       }
 
       @Order(3_000.0)
@@ -574,7 +528,7 @@ public class EventForm extends AbstractForm {
     }
   }
 
-  public class ModifyHandler extends AbstractFormHandler {
+  public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -583,6 +537,8 @@ public class EventForm extends AbstractForm {
       formData = BEANS.get(IEventService.class).load(formData);
       importFormData(formData);
       setEnabledPermission(new UpdateEventPermission());
+
+      getForm().setSubTitle(getTitleField().getValue());
     }
 
     @Override
@@ -591,9 +547,19 @@ public class EventForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).store(formData);
     }
+
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(getTitleField().getValue());
+    }
+
+    @Override
+    protected boolean getConfiguredOpenExclusive() {
+      return true;
+    }
   }
 
-  public class NewHandler extends AbstractFormHandler {
+  public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -610,6 +576,10 @@ public class EventForm extends AbstractForm {
       formData = BEANS.get(IEventService.class).create(formData);
     }
 
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(getTitleField().getValue());
+    }
   }
 
   @FormData

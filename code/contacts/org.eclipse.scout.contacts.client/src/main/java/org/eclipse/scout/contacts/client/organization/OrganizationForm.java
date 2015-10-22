@@ -14,6 +14,7 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.CommentsBox;
@@ -37,7 +38,6 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
-import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -69,7 +69,7 @@ public class OrganizationForm extends AbstractForm {
   }
 
   public void startModify() throws ProcessingException {
-    startInternal(new ModifyHandler());
+    startInternalExclusive(new ModifyHandler());
   }
 
   public void startNew() throws ProcessingException {
@@ -134,6 +134,11 @@ public class OrganizationForm extends AbstractForm {
 
   public PhoneField getPhoneField() {
     return getFieldByClass(PhoneField.class);
+  }
+
+  @Override
+  public Object computeExclusiveKey() throws ProcessingException {
+    return getOrganizationId();
   }
 
   @Order(1000.0)
@@ -286,7 +291,7 @@ public class OrganizationForm extends AbstractForm {
     }
   }
 
-  public class ModifyHandler extends AbstractFormHandler {
+  public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -295,6 +300,8 @@ public class OrganizationForm extends AbstractForm {
       formData = BEANS.get(IOrganizationService.class).load(formData);
       importFormData(formData);
       setEnabledPermission(new OrganizationUpdatePermission());
+
+      getForm().setSubTitle(calculateSubTitle());
     }
 
     @Override
@@ -303,9 +310,19 @@ public class OrganizationForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).store(formData);
     }
+
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(calculateSubTitle());
+    }
+
+    @Override
+    protected boolean getConfiguredOpenExclusive() {
+      return true;
+    }
   }
 
-  public class NewHandler extends AbstractFormHandler {
+  public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execLoad() throws ProcessingException {
@@ -321,6 +338,11 @@ public class OrganizationForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).create(formData);
     }
+
+    @Override
+    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+      getForm().setSubTitle(calculateSubTitle());
+    }
   }
 
   @FormData
@@ -331,5 +353,9 @@ public class OrganizationForm extends AbstractForm {
   @FormData
   public void setOrganizationId(String organizationId) {
     m_organizationId = organizationId;
+  }
+
+  private String calculateSubTitle() {
+    return getNameField().getValue();
   }
 }

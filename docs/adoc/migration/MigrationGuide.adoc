@@ -1,0 +1,78 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+// This file describes the scout migration from the previous version
+//-----------------------------------------------------------------------------
+
+//!!! not finished yet
+This document describes the migration from Scout 5.0 to Scout 6.0
+
+== Project Structure
+
+With the upgrade to pure maven without OSGi the project structure should be changed to the maven default footnote:[
+https://maven.apache.org/guides/getting-started/
+]:
+
+
+[source,text,indent=0]
+.Eclipse Plugin Structure (Scout 5.0, old)
+----
+org.eclipsescout.helloworld.client
+    pom.xml
+    plugin.xml
+    src
+        org
+            eclipsescout
+                helloworld
+                    ClientSession.java
+                    Activator.java
+
+org.eclipsescout.helloworld.test
+    pom.xml
+    plugin.xml
+    src
+        org
+            eclipsescout
+                helloworld
+                    HelloworldTest.java
+----
+
+[source,text,indent=0]
+.Maven Project Structure (Scout 6.0, new)
+----
+org.eclipsescout.helloworld.client
+    pom.xml
+    src
+        main
+            java
+                org
+                    eclipsescout
+                        helloworld
+                            ClientSession.java
+                            Activator.java
+        test
+            java
+                org
+                    eclipsescout
+                        helloworld
+                        HelloworldTest.java
+----
+
+== Manifest.MF
+
+Manifest.MF is no longer used. Migrate dependencies to `pom.xml`!
+
+
+
+
+
+

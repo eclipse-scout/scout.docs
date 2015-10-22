@@ -30,6 +30,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -250,41 +252,51 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       protected void execAction() throws ProcessingException {
         PersonForm form = new PersonForm();
         form.setPersonId(getPersonIdColumn().getSelectedValue());
+        form.addFormListener(new FormListener() {
+
+          @Override
+          public void formChanged(FormEvent e) throws ProcessingException {
+            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+              reloadPage();
+            }
+          }
+        });
         form.startModify();
-        form.waitFor();
-        if (form.isFormStored()) {
-          reloadPage();
-        }
       }
     }
 
     @Order(2_000.0)
     public class NewMenu extends AbstractMenu {
-
+    
       @Override
       protected String getConfiguredKeyStroke() {
         return "alt-n";
       }
-
+    
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
       }
-
+    
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("New");
       }
-
+    
       @Override
       protected void execAction() throws ProcessingException {
         PersonForm form = new PersonForm();
         form.getOrganizationField().setValue(getOrganizationId());
+        form.addFormListener(new FormListener() {
+    
+          @Override
+          public void formChanged(FormEvent e) throws ProcessingException {
+            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+              reloadPage();
+            }
+          }
+        });
         form.startNew();
-        form.waitFor();
-        if (form.isFormStored()) {
-          reloadPage();
-        }
       }
     }
   }

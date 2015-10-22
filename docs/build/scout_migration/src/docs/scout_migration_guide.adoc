@@ -1,0 +1,22 @@
+= Eclipse Scout: Migration Guide
+:doctype: article
+:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:toc: left
+
+//:numbered:
+
+!!! WORK IN PROGRESS !!!
+
+include::{mdledir}/migration/MigrationGuide.adoc[]
+
+
