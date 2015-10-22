@@ -50,6 +50,38 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 TIP: As platform listeners may run as part of the startup or shutdown not the full Scout platform may be available. Depending on the state some tasks cannot be performed or some platform models are not available yet!
 
+== Class Inventory
+
+Scout applications use an inventory containing the classes available together with some meta data about them.
+This allows finding classes available on the classpath by certain criteria:
+
+* All subclasses of a certain base class (also known as type hierarchy)
+* All classes having a specific annotation.
+
+This class inventory can be accessed as described in listing <<lst-ClassInventory>>.
+
+[[lst-ClassInventory, class inventory]]
+[source,java,indent=0]
+.Access the Scout class inventory.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
+----
+
+=== scout.xml
+
+In its static initializer, the `ClassInventory` collects classes in projects containing a resource called META-INF/scout.xml.
+
+Scanning all classes would be unnecessarily slow and consume too much memory.
+The file `scout.xml` is just an empty xml file. Scout itself also includes `scout.xml` files in all its projects.
+
+The format XML was chosen to allow adding exclusions in large projects, but this feature is not implemented right now.
+
+TIP: It is recommended to add an emtpy `scout.xml` file into the META-INF folder of your projects, such that the classes are available in the 'ClassInventory'.
+
+Scout uses Jandex footnote:[
+https://github.com/wildfly/jandex
+] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
+
 == Bean Manager
 
 The Scout bean manager is dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the bean.
@@ -237,28 +269,6 @@ The given property key is searched in the following environments:
 .. a file on the local filesystem where the system property with key `config.properties` holds the absolute path to the file or
 .. a file on the classpath with path `/config.properties` (recommended).
 . In the environment variables of the system (`java.lang.System.getenv(String)`).
-
-== Class Inventory
-
-Scout applications automatically contain an inventory with the classes available and some meta data about them. This allows to find classes available on the classpath by certain criteria:
-
-* All subclasses of a certain base class (also known as type hierarchy)
-* All classes having a specific annotation.
-
-This class inventory can be accessed using the code in listing <<lst-ClassInventory>>.
-
-[[lst-ClassInventory, class inventory]]
-[source,java,indent=0]
-.Access the Scout class inventory.
-----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
-----
-
-The class inventory is created for all Scout jars. It can also be created for custom projects by adding an empty xml file named `scout.xml` into the META-INF folder of the custom project (which is recommended).
-
-Scout uses Jandex footnote:[
-https://github.com/wildfly/jandex
-] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
 
 == Testing
 
