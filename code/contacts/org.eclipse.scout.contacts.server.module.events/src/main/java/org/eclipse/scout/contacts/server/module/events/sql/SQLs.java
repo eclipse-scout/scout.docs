@@ -203,10 +203,10 @@ public interface SQLs {
       + "LEFT JOIN    PERSON c "
       + "ON           c.person_id = p.person_id "
       + "WHERE        p.event_id = :eventId "
-      + "INTO         :{participants.personId}, "
-      + "             :{participants.firstName}, "
-      + "             :{participants.lastName}, "
-      + "             :{participants.organization}";
+      + "INTO         :{participantTableField.personId}, "
+      + "             :{participantTableField.firstName}, "
+      + "             :{participantTableField.lastName}, "
+      + "             :{participantTableField.organization}";
 
   String EVENT_PARTICIPANTS_DELETE = ""
       + "DELETE       FROM PARTICIPANT "

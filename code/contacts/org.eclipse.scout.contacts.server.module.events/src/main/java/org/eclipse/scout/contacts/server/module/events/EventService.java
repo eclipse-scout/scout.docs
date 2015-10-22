@@ -94,8 +94,8 @@ public class EventService implements IEventService {
 
     SQL.update(SQLs.EVENT_UPDATE, formData);
 
-    TableBeanHolderFilter deletedParticipants = new TableBeanHolderFilter(formData.getParticipants(), ITableHolder.STATUS_DELETED);
-    TableBeanHolderFilter insertedParticipants = new TableBeanHolderFilter(formData.getParticipants(), ITableHolder.STATUS_INSERTED);
+    TableBeanHolderFilter deletedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableHolder.STATUS_DELETED);
+    TableBeanHolderFilter insertedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableHolder.STATUS_INSERTED);
     NVPair eventId = new NVPair("eventId", formData.getEventId());
 
     SQL.delete(SQLs.EVENT_PARTICIPANTS_DELETE, deletedParticipants, eventId);

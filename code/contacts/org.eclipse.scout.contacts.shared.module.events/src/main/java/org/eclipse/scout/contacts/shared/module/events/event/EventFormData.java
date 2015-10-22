@@ -73,8 +73,8 @@ public class EventFormData extends AbstractFormData {
     return getFieldByClass(LocationBox.class);
   }
 
-  public Participants getParticipants() {
-    return getFieldByClass(Participants.class);
+  public ParticipantTableField getParticipantTableField() {
+    return getFieldByClass(ParticipantTableField.class);
   }
 
   public Phone getPhone() {
@@ -137,48 +137,48 @@ public class EventFormData extends AbstractFormData {
     }
   }
 
-  public static class Participants extends AbstractTableFieldBeanData {
+  public static class ParticipantTableField extends AbstractTableFieldBeanData {
 
     private static final long serialVersionUID = 1L;
 
-    public Participants() {
+    public ParticipantTableField() {
     }
 
     @Override
-    public ParticipantsRowData addRow() {
-      return (ParticipantsRowData) super.addRow();
+    public ParticipantTableFieldRowData addRow() {
+      return (ParticipantTableFieldRowData) super.addRow();
     }
 
     @Override
-    public ParticipantsRowData addRow(int rowState) {
-      return (ParticipantsRowData) super.addRow(rowState);
+    public ParticipantTableFieldRowData addRow(int rowState) {
+      return (ParticipantTableFieldRowData) super.addRow(rowState);
     }
 
     @Override
-    public ParticipantsRowData createRow() {
-      return new ParticipantsRowData();
+    public ParticipantTableFieldRowData createRow() {
+      return new ParticipantTableFieldRowData();
     }
 
     @Override
     public Class<? extends AbstractTableRowData> getRowType() {
-      return ParticipantsRowData.class;
+      return ParticipantTableFieldRowData.class;
     }
 
     @Override
-    public ParticipantsRowData[] getRows() {
-      return (ParticipantsRowData[]) super.getRows();
+    public ParticipantTableFieldRowData[] getRows() {
+      return (ParticipantTableFieldRowData[]) super.getRows();
     }
 
     @Override
-    public ParticipantsRowData rowAt(int index) {
-      return (ParticipantsRowData) super.rowAt(index);
+    public ParticipantTableFieldRowData rowAt(int index) {
+      return (ParticipantTableFieldRowData) super.rowAt(index);
     }
 
-    public void setRows(ParticipantsRowData[] rows) {
+    public void setRows(ParticipantTableFieldRowData[] rows) {
       super.setRows(rows);
     }
 
-    public static class ParticipantsRowData extends AbstractTableRowData {
+    public static class ParticipantTableFieldRowData extends AbstractTableRowData {
 
       private static final long serialVersionUID = 1L;
       public static final String personId = "personId";
@@ -190,7 +190,7 @@ public class EventFormData extends AbstractFormData {
       private String m_lastName;
       private String m_organization;
 
-      public ParticipantsRowData() {
+      public ParticipantTableFieldRowData() {
       }
 
       public String getPersonId() {

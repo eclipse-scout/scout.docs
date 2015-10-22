@@ -30,10 +30,10 @@ import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.D
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox.LocationBox;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.EventDetailsBox.PhoneField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.AddButton;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantsField;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.RemoveButton;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantsField.Table.AddMenu;
-import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantsField.Table.RemoveMenu;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField.Table.AddMenu;
+import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField.Table.RemoveMenu;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.EndsField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.HomepageField;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.GeneralBox.StartsField;
@@ -164,8 +164,8 @@ public class EventForm extends AbstractForm {
     return getFieldByClass(ParticipantsBox.class);
   }
 
-  public ParticipantsField getParticipantsField() {
-    return getFieldByClass(ParticipantsField.class);
+  public ParticipantTableFieldField getParticipantTableField() {
+    return getFieldByClass(ParticipantTableFieldField.class);
   }
 
   public PhoneField getPhoneField() {
@@ -305,7 +305,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(1_000.0)
-        public class ParticipantsField extends AbstractTableField<ParticipantsField.Table> {
+        public class ParticipantTableFieldField extends AbstractTableField<ParticipantTableFieldField.Table> {
 
           @Override
           protected int getConfiguredGridH() {
@@ -512,7 +512,7 @@ public class EventForm extends AbstractForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getParticipantsField().getTable().getMenuByClass(AddMenu.class).doAction();
+            getParticipantTableField().getTable().getMenuByClass(AddMenu.class).doAction();
           }
         }
 
@@ -531,7 +531,7 @@ public class EventForm extends AbstractForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getParticipantsField().getTable().getMenuByClass(RemoveMenu.class).doAction();
+            getParticipantTableField().getTable().getMenuByClass(RemoveMenu.class).doAction();
           }
         }
       }
