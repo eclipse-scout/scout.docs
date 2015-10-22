@@ -237,11 +237,13 @@ public interface SQLs {
       + "INSERT   INTO ORGANIZATION "
       + "         (organization_id, "
       + "          name, "
+      + "          logo_url, "
       + "          city, "
       + "          country, "
       + "          url) "
       + "VALUES   (:organization_id, "
       + "          'BSI Business Systems Integration AG', "
+      + "          'https://www.eclipsecon.org/europe2015/sites/default/files/styles/medium/public/v2%20BSI%20logo.png?itok=Xf3NGTpD', "
       + "          'Daettwil, Baden', "
       + "          'CH', "
       + "          'https://www.bsi-software.com')";

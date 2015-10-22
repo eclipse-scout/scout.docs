@@ -7,8 +7,7 @@ scout.HtmlEnvironment = {
       // Some of the following constants are also defined in sizes.css. If you change
       // them, be sure to apply them at both places. (Remember to consider margins)
      // -------------------------------
-    //    formRowHeight: 30, // @logical-grid-height
-        formRowHeight: 25, // @logical-grid-height
+      formRowHeight: 30, // @logical-grid-height
       formRowGap: 10,
 //      formColumnWidth: 420,
       formColumnWidth: 350,
