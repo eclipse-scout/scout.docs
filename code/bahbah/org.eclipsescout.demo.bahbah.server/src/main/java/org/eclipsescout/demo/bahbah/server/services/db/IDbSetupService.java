@@ -12,9 +12,6 @@ package org.eclipsescout.demo.bahbah.server.services.db;
 
 import org.eclipse.scout.rt.platform.service.IService;
 
-/**
- *
- */
 public interface IDbSetupService extends IService {
   public void installDb();
 }

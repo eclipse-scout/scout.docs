@@ -22,9 +22,6 @@ import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePag
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
 import org.eclipsescout.demo.bahbah.shared.notification.MessageNotification;
 
-/**
- *
- */
 public class MessageNotificationHandler implements INotificationHandler<MessageNotification> {
   private static IScoutLogger LOG = ScoutLogManager.getLogger(MessageNotificationHandler.class);
 

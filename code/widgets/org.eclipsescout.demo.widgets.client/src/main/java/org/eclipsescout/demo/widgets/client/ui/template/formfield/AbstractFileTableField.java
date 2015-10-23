@@ -71,7 +71,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
    *
    * @param Resource
    *          the resource that is represented by the clicked row
-   * @throws ProcessingException
    */
   protected void execResourceRowClick(BinaryResource resource) {
   }

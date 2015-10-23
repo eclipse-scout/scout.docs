@@ -20,9 +20,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
 
-/**
- *
- */
 public abstract class AbstractTableFieldWithDisabledRows extends AbstractArrayTableField<AbstractTableFieldWithDisabledRows.Table> {
 
   @Override

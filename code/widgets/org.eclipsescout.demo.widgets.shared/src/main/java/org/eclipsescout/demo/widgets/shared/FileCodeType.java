@@ -21,9 +21,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 public class FileCodeType extends AbstractCodeType<String, String> {
 
   private static final long serialVersionUID = 1L;
-  /**
-   *
-   */
+
   public static final String ID = "File Types";
 
   /**

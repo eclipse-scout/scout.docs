@@ -12,9 +12,6 @@ package org.eclipsescout.demo.bahbah.client.services;
 
 import org.eclipse.scout.rt.platform.service.IService;
 
-/**
- *
- */
 public interface INodeIconService extends IService {
 
   String getIcon(String nodeId);

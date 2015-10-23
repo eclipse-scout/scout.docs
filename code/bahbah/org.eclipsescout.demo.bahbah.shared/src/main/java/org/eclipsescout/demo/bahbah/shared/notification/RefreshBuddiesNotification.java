@@ -12,9 +12,6 @@ package org.eclipsescout.demo.bahbah.shared.notification;
 
 import java.io.Serializable;
 
-/**
- *
- */
 public class RefreshBuddiesNotification implements Serializable {
   private static final long serialVersionUID = 1L;
 

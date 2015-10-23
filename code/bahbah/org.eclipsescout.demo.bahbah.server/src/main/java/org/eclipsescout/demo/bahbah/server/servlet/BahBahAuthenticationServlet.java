@@ -21,9 +21,6 @@ import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
 
-/**
- *
- */
 public class BahBahAuthenticationServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static IScoutLogger logger = ScoutLogManager.getLogger(BahBahAuthenticationServlet.class);

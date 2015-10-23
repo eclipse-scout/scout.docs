@@ -14,9 +14,6 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.mysql.AbstractMySqlSqlService;
 
-/**
- *
- */
 @Server
 @Order(-2100)
 public class MysqlSqlService extends AbstractMySqlSqlService {

@@ -106,7 +106,6 @@ public class UserUtility extends SharedUserUtility {
    *          The salt (Base64 encoded) to use for hashing.
    * @return True if the hash of pass2 is equal with pass1 using the given salt.
    * @throws NoSuchAlgorithmException
-   * @throws ProcessingException
    */
   private static boolean areEqual(String pass1, String pass2, String salt) {
     byte[] bPass = Base64Utility.decode(pass1);

@@ -16,7 +16,6 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -54,14 +53,8 @@ import org.eclipsescout.demo.widgets.shared.services.code.CountryCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.CountryCodeType.FranceCode;
 import org.eclipsescout.demo.widgets.shared.services.code.CountryCodeType.USACode;
 
-/**
- *
- */
 public class ContextMenuForm extends AbstractForm implements IPageForm {
 
-  /**
-   * @throws ProcessingException
-   */
   public ContextMenuForm() {
     super();
   }
