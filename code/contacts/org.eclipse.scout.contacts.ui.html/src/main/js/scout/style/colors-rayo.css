@@ -140,7 +140,7 @@
 @table-header-cmd-active-background-color: @active-inverted-background-color;
 @table-header-cmd-active-border-color: @active-inverted-background-color;
 @table-aggregate-cell-selection-color: @palette-blue-4;
-@table-aggregate-row-background-color: @palette-gray-1;
+@table-aggregate-row-background-color: @palette-blue-4;
 @table-info-color: @palette-gray-5;
 @table-info-hover-color: @palette-gray-6;
 @table-info-warning-color: @palette-blue-4;
@@ -170,3 +170,7 @@
 /* --------------------- */
 
 @button-hover-background-color: @palette-blue-4;
+
+.taskbar-logo {
+  visibility: hidden;
+}

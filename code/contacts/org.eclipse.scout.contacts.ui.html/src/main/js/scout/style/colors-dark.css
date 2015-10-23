@@ -165,3 +165,7 @@
 @view-button-tab-color: @active-inverted-color;
 @view-button-tab-active-background-color: @navigation-background-color;
 @view-button-tab-active-color: @active-inverted-color;
+
+.taskbar-logo {
+  visibility: hidden;
+}

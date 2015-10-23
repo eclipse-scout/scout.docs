@@ -2,12 +2,12 @@
   height: 100%;
   width: 100%;
   position: relative;
-  background-image: linear-gradient(0deg, @palette-gray-8, @background-color);
+  background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
 }
 
 .dialog {
   position: absolute !important; /* ignore positioning of 'ui-resizable' */
-  background-image: linear-gradient(0deg, @palette-gray-8, @background-color);
+  background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
   border: solid 1px @border-color;
   border-top-left-radius: @border-radius;
   border-top-right-radius: @border-radius;

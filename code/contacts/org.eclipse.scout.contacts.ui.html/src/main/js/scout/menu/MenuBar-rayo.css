@@ -44,8 +44,8 @@
 .main-menubar {
   margin-left: @bench-margin-x;
   margin-right: @bench-margin-x;
-  height: 55px;
-  padding-top: 11px;
+  padding-top: 15px;
+  visibility: hidden;
 
   & > .menu-item {
     &.small > .font-icon {

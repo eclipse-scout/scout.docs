@@ -214,7 +214,7 @@
 
   &.selected {
     cursor: default;
-    background-color: @background-color;
+    background-color: @palette-gray-10;
     color: @active-color;
     /* full size of taskbar to draw over the border-bottom */
     height: @desktop-taskbar-height;
