@@ -17,7 +17,6 @@ import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.status.IStatus;
 import org.eclipse.scout.commons.status.Status;
 import org.eclipse.scout.contacts.client.Icons;
@@ -122,13 +121,13 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         execChangePicture();
       }
     }
   }
 
-  protected void execChangePicture() throws ProcessingException {
+  protected void execChangePicture() {
     String oldUrl = getPictureUrl();
 
     PictureUrlForm form = new PictureUrlForm();

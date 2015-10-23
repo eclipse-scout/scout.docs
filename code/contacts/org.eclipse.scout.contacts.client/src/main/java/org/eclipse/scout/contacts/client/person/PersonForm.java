@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.client.person;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.CancelButton;
@@ -66,7 +65,7 @@ public class PersonForm extends AbstractForm {
 
   private String m_personId;
 
-  public PersonForm() throws ProcessingException {
+  public PersonForm() {
     super();
   }
 
@@ -80,11 +79,11 @@ public class PersonForm extends AbstractForm {
     return IForm.DISPLAY_HINT_VIEW;
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternalExclusive(new ModifyHandler());
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -177,7 +176,7 @@ public class PersonForm extends AbstractForm {
   }
 
   @Override
-  public Object computeExclusiveKey() throws ProcessingException {
+  public Object computeExclusiveKey() {
     return getPersonId();
   }
 
@@ -252,7 +251,7 @@ public class PersonForm extends AbstractForm {
         public class PhoneField extends AbstractPhoneField {
 
           @Override
-          protected String execValidateValue(String rawValue) throws ProcessingException {
+          protected String execValidateValue(String rawValue) {
             String addressCountry = getAddressBox().getCountryField().getValue();
 
             if (StringUtility.isNullOrEmpty(getCountry()) && StringUtility.hasText(addressCountry)) {
@@ -272,7 +271,7 @@ public class PersonForm extends AbstractForm {
           }
 
           @Override
-          protected String execValidateValue(String rawValue) throws ProcessingException {
+          protected String execValidateValue(String rawValue) {
             String addressCountry = getAddressBox().getCountryField().getValue();
 
             if (StringUtility.isNullOrEmpty(getCountry()) && StringUtility.hasText(addressCountry)) {
@@ -379,7 +378,7 @@ public class PersonForm extends AbstractForm {
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = BEANS.get(IPersonService.class).load(formData);
@@ -390,14 +389,14 @@ public class PersonForm extends AbstractForm {
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = BEANS.get(IPersonService.class).store(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
 
@@ -410,20 +409,20 @@ public class PersonForm extends AbstractForm {
   public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = BEANS.get(IPersonService.class).create(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
   }
 
   @Override
-  protected boolean execValidate() throws ProcessingException {
+  protected boolean execValidate() {
     boolean noFirstName = StringUtility.isNullOrEmpty(getFirstNameField().getValue());
     boolean noLastName = StringUtility.isNullOrEmpty(getLastNameField().getValue());
 

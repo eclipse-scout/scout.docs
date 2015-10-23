@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -30,7 +29,7 @@ public class WidgetsOutline extends AbstractOutline {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     FormFieldsNodePage formFieldsNodePage = new FormFieldsNodePage();
     pageList.add(formFieldsNodePage);
     MenusNodePage menusNodePage = new MenusNodePage();

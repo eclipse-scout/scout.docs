@@ -45,7 +45,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.HTMLF
 
 public class HtmlFieldForm extends AbstractForm implements IPageForm {
 
-  public HtmlFieldForm() throws ProcessingException {
+  public HtmlFieldForm() {
     super();
   }
 
@@ -60,12 +60,12 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  protected void execInitForm() throws ProcessingException {
+  protected void execInitForm() {
     loadFile("ScoutHtml.html", Collections.<BinaryResource> emptySet());
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -94,7 +94,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ScoutHtmlButton.class);
   }
 
-  private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) throws ProcessingException {
+  private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) {
     try {
       String s = IOUtility.getContent(new InputStreamReader(ResourceBase.class.getResource("html/" + simpleName).openStream()));
       getHTMLField().setValue(null);
@@ -107,7 +107,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
     }
   }
 
-  private RemoteFile loadIcon(String iconName) throws ProcessingException {
+  private RemoteFile loadIcon(String iconName) {
     try {
       // determine file format
       int index = iconName.lastIndexOf(".");
@@ -165,12 +165,12 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(true);
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getHTMLField().setEnabled(getValue());
         }
       }
@@ -183,7 +183,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getHTMLField().setScrollToAnchor(getValue());
         }
       }
@@ -206,7 +206,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getHTMLField().scrollToEnd();
         }
       }
@@ -236,7 +236,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAppLinkAction(String ref) throws ProcessingException {
+      protected void execAppLinkAction(String ref) {
         MessageBoxes.createOk().withHeader(TEXTS.get("LocalUrlClicked")).withBody(TEXTS.get("Parameters") + ":\n" + ref).show();
       }
     }
@@ -252,7 +252,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getHTMLField().setAttachments(null);
           getHTMLField().setValue(null);
         }
@@ -267,7 +267,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           URL url = ResourceBase.class.getResource("icons/eclipse_scout_logo.png");
           byte[] content;
           try {
@@ -290,7 +290,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           loadFile("ScoutHtml.html", Collections.<BinaryResource> emptySet());
         }
       }
@@ -304,7 +304,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           loadFile("ALotOfContent.html", Collections.<BinaryResource> emptySet());
         }
       }

@@ -16,7 +16,6 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
@@ -49,7 +48,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IPersonService.class).getTableData(filter, getOrganizationId()));
   }
 
@@ -249,13 +248,13 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         PersonForm form = new PersonForm();
         form.setPersonId(getPersonIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }
@@ -284,13 +283,13 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         PersonForm form = new PersonForm();
         form.getOrganizationField().setValue(getOrganizationId());
         form.addFormListener(new FormListener() {
     
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }

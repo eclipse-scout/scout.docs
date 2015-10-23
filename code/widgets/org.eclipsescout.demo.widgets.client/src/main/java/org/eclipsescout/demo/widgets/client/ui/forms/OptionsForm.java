@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -26,11 +25,11 @@ import org.eclipsescout.demo.widgets.shared.services.code.UiThemeCodeType;
 
 public class OptionsForm extends AbstractForm {
 
-  public OptionsForm() throws ProcessingException {
+  public OptionsForm() {
     super();
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -62,7 +61,7 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(UiThemeCodeType.DefaultCode.ID);
         }
       }
@@ -80,14 +79,14 @@ public class OptionsForm extends AbstractForm {
   }
 
   @Override
-  protected void execInitForm() throws ProcessingException {
+  protected void execInitForm() {
     String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
     getThemeRadioButtonGroup().setValue(theme);
   }
 
   public class NewHandler extends AbstractFormHandler {
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       getDesktop().setTheme(getThemeRadioButtonGroup().getValue());
     }
   }

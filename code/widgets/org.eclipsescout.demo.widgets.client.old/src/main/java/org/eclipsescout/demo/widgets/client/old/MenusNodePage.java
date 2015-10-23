@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
@@ -49,7 +48,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execInitPage() throws ProcessingException {
+  protected void execInitPage() {
     MenusForm form = new MenusForm();
     setDetailForm(form);
     form.startPageForm();
@@ -64,7 +63,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       String menuname = this.getClass().getSimpleName();
       MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }
@@ -84,7 +83,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       String menuname = this.getClass().getSimpleName();
       MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }
@@ -99,7 +98,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execSelectionChanged(boolean selection) throws ProcessingException {
+    protected void execSelectionChanged(boolean selection) {
       if (selection == true) {
         MessageBoxes.createOk().withHeader("Checked the Menu").withBody("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
       }
@@ -128,7 +127,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
@@ -148,7 +147,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
@@ -168,7 +167,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
@@ -189,7 +188,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       String menuname = this.getClass().getSimpleName();
       MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
     }

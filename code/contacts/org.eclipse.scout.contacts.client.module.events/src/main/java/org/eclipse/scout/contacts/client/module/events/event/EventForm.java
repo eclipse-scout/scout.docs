@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm.MainBox.CancelButton;
@@ -77,7 +76,7 @@ public class EventForm extends AbstractForm {
 
   private String m_eventId;
 
-  public EventForm() throws ProcessingException {
+  public EventForm() {
     super();
   }
 
@@ -91,11 +90,11 @@ public class EventForm extends AbstractForm {
     return IForm.DISPLAY_HINT_VIEW;
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternalExclusive(new ModifyHandler());
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -168,7 +167,7 @@ public class EventForm extends AbstractForm {
   }
 
   @Override
-  public Object computeExclusiveKey() throws ProcessingException {
+  public Object computeExclusiveKey() {
     return getEventId();
   }
 
@@ -225,7 +224,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
         }
       }
@@ -264,7 +263,7 @@ public class EventForm extends AbstractForm {
         public class LocationBox extends AbstractAddressBox {
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             getStreetField().setVisible(false);
           }
         }
@@ -418,7 +417,7 @@ public class EventForm extends AbstractForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 PersonChooserForm personChooserForm = new PersonChooserForm();
                 personChooserForm.setFilteredPersons(getPersonIdColumn().getValues(false));
                 personChooserForm.startNew();
@@ -451,7 +450,7 @@ public class EventForm extends AbstractForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 PersonForm form = new PersonForm();
                 form.setPersonId(getPersonIdColumn().getSelectedValue());
                 form.startModify();
@@ -482,7 +481,7 @@ public class EventForm extends AbstractForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().deleteRows(getTable().getSelectedRows());
               }
             }
@@ -531,7 +530,7 @@ public class EventForm extends AbstractForm {
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).load(formData);
@@ -542,14 +541,14 @@ public class EventForm extends AbstractForm {
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).store(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(getTitleField().getValue());
     }
 
@@ -562,7 +561,7 @@ public class EventForm extends AbstractForm {
   public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).prepareCreate(formData);
@@ -570,14 +569,14 @@ public class EventForm extends AbstractForm {
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).create(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(getTitleField().getValue());
     }
   }

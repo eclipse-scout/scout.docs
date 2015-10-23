@@ -23,7 +23,7 @@ public class SharedUserUtility {
   public static final int MAX_PASSWORD_LENGTH = 64;
   public static final int MIN_PASSWORD_LENGTH = 3;
 
-  public static void checkUsername(String username) throws VetoException {
+  public static void checkUsername(String username) {
     if (StringUtility.length(username) < MIN_USERNAME_LENGTH) {
       throw new VetoException(TEXTS.get("UsernameMinLength", "" + MIN_USERNAME_LENGTH));
     }
@@ -35,13 +35,13 @@ public class SharedUserUtility {
     }
   }
 
-  public static void checkPermissionId(Integer id) throws VetoException {
+  public static void checkPermissionId(Integer id) {
     if (!UserRoleCodeType.UserCode.ID.equals(id) && !UserRoleCodeType.AdministratorCode.ID.equals(id)) {
       throw new VetoException();
     }
   }
 
-  public static void checkPassword(String password) throws VetoException {
+  public static void checkPassword(String password) {
     if (StringUtility.length(password) < MIN_PASSWORD_LENGTH) {
       throw new VetoException(TEXTS.get("PasswordMinLength", "" + MIN_PASSWORD_LENGTH));
     }

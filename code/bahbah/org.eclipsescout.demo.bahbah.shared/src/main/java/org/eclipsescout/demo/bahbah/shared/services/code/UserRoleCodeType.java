@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.bahbah.shared.services.code;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -21,7 +20,7 @@ public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = Long.valueOf(1000);
 
-  public UserRoleCodeType() throws ProcessingException {
+  public UserRoleCodeType() {
     super();
   }
 

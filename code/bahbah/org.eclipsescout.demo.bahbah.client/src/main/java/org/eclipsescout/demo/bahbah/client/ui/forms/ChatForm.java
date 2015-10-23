@@ -16,7 +16,6 @@ import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
@@ -44,7 +43,7 @@ public class ChatForm extends AbstractForm {
   private String m_buddyName;
   private String m_userName;
 
-  public ChatForm() throws ProcessingException {
+  public ChatForm() {
     super();
   }
 
@@ -78,7 +77,7 @@ public class ChatForm extends AbstractForm {
     m_userName = userName;
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -122,7 +121,7 @@ public class ChatForm extends AbstractForm {
       private final Integer MESSAGE_TYPE_LOCAL = 1;
       private final Integer MESSAGE_TYPE_REMOTE = 2;
 
-      public void addMessage(boolean local, String sender, String receiver, Date date, String message) throws ProcessingException {
+      public void addMessage(boolean local, String sender, String receiver, Date date, String message) {
         getTable().addRowByArray(new Object[]{(local ? MESSAGE_TYPE_LOCAL : MESSAGE_TYPE_REMOTE), sender, receiver, message, date});
       }
 
@@ -140,7 +139,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Override
-        protected void execDecorateCell(Cell view, ITableRow row, IColumn<?> col) throws ProcessingException {
+        protected void execDecorateCell(Cell view, ITableRow row, IColumn<?> col) {
           // text color
           row.setForegroundColor("000000");
 
@@ -271,7 +270,7 @@ public class ChatForm extends AbstractForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String message = getMessageField().getValue();
 
         if (!StringUtility.isNullOrEmpty(message)) {

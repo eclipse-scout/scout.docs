@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
@@ -50,7 +49,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   }
 
   @Override
-  protected void execOpened() throws ProcessingException {
+  protected void execOpened() {
     IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
     if (firstOutline != null) {
       setOutline(firstOutline);
@@ -90,7 +89,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       ScoutInfoForm form = new ScoutInfoForm();
       form.startModify();
     }
@@ -105,12 +104,12 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
 
     @Override
-    protected void execInitAction() throws ProcessingException {
+    protected void execInitAction() {
       setVisible(UserAgentUtility.isDesktopDevice());
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       ClientSession.get().stop();
     }
   }

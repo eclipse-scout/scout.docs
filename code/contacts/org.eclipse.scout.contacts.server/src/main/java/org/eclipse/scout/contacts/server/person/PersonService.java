@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.server.person;
 import java.util.UUID;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.contacts.server.sql.SQLs;
@@ -32,7 +31,7 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class PersonService implements IPersonService {
 
   @Override
-  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException {
+  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) {
     PersonTablePageData pageData = new PersonTablePageData();
     PersonSearchFormData searchData = (PersonSearchFormData) filter.getFormData();
 
@@ -56,7 +55,7 @@ public class PersonService implements IPersonService {
   }
 
   @Override
-  public PersonFormData create(PersonFormData formData) throws ProcessingException {
+  public PersonFormData create(PersonFormData formData) {
     if (!ACCESS.check(new PersonCreatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -71,7 +70,7 @@ public class PersonService implements IPersonService {
   }
 
   @Override
-  public PersonFormData load(PersonFormData formData) throws ProcessingException {
+  public PersonFormData load(PersonFormData formData) {
     if (!ACCESS.check(new PersonReadPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -82,7 +81,7 @@ public class PersonService implements IPersonService {
   }
 
   @Override
-  public PersonFormData store(PersonFormData formData) throws ProcessingException {
+  public PersonFormData store(PersonFormData formData) {
     if (!ACCESS.check(new PersonUpdatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }

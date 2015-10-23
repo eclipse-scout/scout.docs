@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
@@ -50,7 +49,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
 public class TreeFieldForm extends AbstractForm implements IPageForm {
 
-  public TreeFieldForm() throws ProcessingException {
+  public TreeFieldForm() {
     super();
   }
 
@@ -65,7 +64,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -138,7 +137,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           IndustryICBCodeType icb = new IndustryICBCodeType();
           Tree tree = new Tree();
           tree.setTitle(icb.getText());
@@ -175,7 +174,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               newNode();
             }
           }
@@ -206,7 +205,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 ClientJobs.schedule(new IRunnable() {
                   @Override
                   public void run() throws Exception {
@@ -230,7 +229,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 scrollToSelection();
               }
             }
@@ -249,7 +248,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 deselectNodes(getSelectedNodes());
               }
             }
@@ -264,7 +263,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               getSelectedNode().setExpanded(true);
 
               // trigger menu visible/enabled change
@@ -273,7 +272,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+            protected void execOwnerValueChanged(Object newOwnerValue) {
               calculateVisibility();
             }
 
@@ -292,7 +291,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               getSelectedNode().setExpanded(false);
 
               // trigger menu visible/enabled change
@@ -301,7 +300,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+            protected void execOwnerValueChanged(Object newOwnerValue) {
               calculateVisibility();
             }
 
@@ -320,7 +319,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               showInfo(getSelectedNode());
             }
           }
@@ -348,7 +347,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
             }
           }
@@ -378,7 +377,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setTree(new Tree(), false);
         }
 
@@ -401,7 +400,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           ITree tree = getTreeField().getTree();
           List<Node> nodes = parseFieldValue(true);
 
@@ -425,7 +424,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
           getTreeField().getTree().getContextMenu().addChildActions(nodesToMenus(nodes));
         }
@@ -441,7 +440,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
         getMenuContentField().setValue(TEXTS.get("MenuUserContent"));

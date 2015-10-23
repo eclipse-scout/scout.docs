@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.AbstractServerSession;
@@ -33,7 +32,7 @@ public class ServerSession extends AbstractServerSession {
   }
 
   @Override
-  protected void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() {
     LOG.info("initialized server session for user {}", getUserId());
   }
 }

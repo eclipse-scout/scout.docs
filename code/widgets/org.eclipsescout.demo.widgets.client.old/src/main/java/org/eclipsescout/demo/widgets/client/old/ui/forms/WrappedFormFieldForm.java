@@ -33,7 +33,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
 
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 
-  public WrappedFormFieldForm() throws ProcessingException {
+  public WrappedFormFieldForm() {
     super();
   }
 
@@ -48,7 +48,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -106,13 +106,13 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(ImageFieldForm.class);
           fireValueChanged(); // because events are not fired by default in execInitField()
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           // Clear other field
           getStaticInnerFormsField().setValueChangeTriggerEnabled(false);
           try {
@@ -156,13 +156,13 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           m_lookupCall = new StaticFormLookupCall();
           setLookupCall(m_lookupCall);
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           // Clear other field
           getInnerFormsField().setValueChangeTriggerEnabled(false);
           try {

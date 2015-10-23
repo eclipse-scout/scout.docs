@@ -11,7 +11,6 @@
 package org.eclipse.scout.contacts.shared.person;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -21,7 +20,7 @@ public class GenderCodeType extends AbstractCodeType<String, String> {
   private static final long serialVersionUID = 1L;
   public static final String ID = "Gender";
 
-  public GenderCodeType() throws ProcessingException {
+  public GenderCodeType() {
     super();
   }
 

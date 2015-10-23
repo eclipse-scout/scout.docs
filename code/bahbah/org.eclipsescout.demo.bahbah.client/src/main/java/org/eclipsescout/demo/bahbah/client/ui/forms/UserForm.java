@@ -13,7 +13,6 @@ package org.eclipsescout.demo.bahbah.client.ui.forms;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -42,7 +41,7 @@ public class UserForm extends AbstractForm {
 
   private Long m_userId;
 
-  public UserForm() throws ProcessingException {
+  public UserForm() {
     super();
   }
 
@@ -60,11 +59,11 @@ public class UserForm extends AbstractForm {
     return getFieldByClass(CancelButton.class);
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternal(new ModifyHandler());
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -128,7 +127,7 @@ public class UserForm extends AbstractForm {
         }
 
         @Override
-        protected String execValidateValue(String rawValue) throws ProcessingException {
+        protected String execValidateValue(String rawValue) {
           SharedUserUtility.checkUsername(rawValue);
           return rawValue;
         }
@@ -158,7 +157,7 @@ public class UserForm extends AbstractForm {
         }
 
         @Override
-        protected String execValidateValue(String rawValue) throws ProcessingException {
+        protected String execValidateValue(String rawValue) {
           SharedUserUtility.checkPassword(rawValue);
           return rawValue;
         }
@@ -183,7 +182,7 @@ public class UserForm extends AbstractForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(UserCode.ID);
         }
       }
@@ -200,14 +199,14 @@ public class UserForm extends AbstractForm {
 
   public class ModifyHandler extends AbstractFormHandler {
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       setEnabledPermission(new UpdateUserPermission());
       getPasswordField().setVisibleGranted(false);
       getPasswordField().setMandatory(false);
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       UserFormData formData = new UserFormData();
       exportFormData(formData);
       BEANS.get(IUserProcessService.class).updateUser(formData);
@@ -217,12 +216,12 @@ public class UserForm extends AbstractForm {
   public class NewHandler extends AbstractFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       setEnabledPermission(new CreateUserPermission());
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       UserFormData formData = new UserFormData();
       exportFormData(formData);
       BEANS.get(IUserProcessService.class).createUser(formData);

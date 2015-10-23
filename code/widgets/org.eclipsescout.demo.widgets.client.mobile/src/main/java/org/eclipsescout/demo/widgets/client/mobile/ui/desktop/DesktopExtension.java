@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.mobile.ui.desktop;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.ContributionCommand;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -31,7 +30,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Override
-  protected ContributionCommand execGuiAttached() throws ProcessingException {
+  protected ContributionCommand execGuiAttached() {
     if (!isActive()) {
       return super.execGuiAttached();
     }
@@ -39,7 +38,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Override
-  protected ContributionCommand execGuiDetached() throws ProcessingException {
+  protected ContributionCommand execGuiDetached() {
     if (!isActive()) {
       return super.execGuiDetached();
     }

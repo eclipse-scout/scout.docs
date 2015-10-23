@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.status.IStatus;
 import org.eclipse.scout.commons.status.Status;
@@ -89,7 +88,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
 public class TableFieldForm extends AbstractForm implements IPageForm {
 
-  public TableFieldForm() throws ProcessingException {
+  public TableFieldForm() {
     super();
   }
 
@@ -104,7 +103,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -250,7 +249,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           return ++m_maxId;
         }
 
-        public void addExampleRows() throws ProcessingException {
+        public void addExampleRows() {
           Table table = getTable();
           ITableRow r;
 
@@ -356,7 +355,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execDecorateRow(ITableRow row) throws ProcessingException {
+          protected void execDecorateRow(ITableRow row) {
             Long participants = getParticipantsColumn().getValue(row);
             if (participants != null && participants > 800) {
               row.setIconId("font:\uE001");
@@ -364,7 +363,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitTable() throws ProcessingException {
+          protected void execInitTable() {
             addTableListener(new TableAdapter() {
 
               @Override
@@ -577,7 +576,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
              * Accepts only positive values
              */
             @Override
-            protected Long execValidateValue(ITableRow row, Long rawValue) throws ProcessingException {
+            protected Long execValidateValue(ITableRow row, Long rawValue) {
               if (NumberUtility.nvl(rawValue, 1) < 0) {
                 throw new VetoException(TEXTS.get("NoNegNumber"));
               }
@@ -648,7 +647,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+            protected void execDecorateCell(Cell cell, ITableRow row) {
               cell.setIconId("font:\uE011");//Icons.Phone
             }
           }
@@ -663,7 +662,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          private void newRow() throws ProcessingException {
+          private void newRow() {
             ColumnSet cols = getColumnSet();
             ITableRow row = new TableRow(cols);
 
@@ -687,7 +686,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               newRow();
             }
           }
@@ -719,7 +718,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().setTableStatus(null);
               }
             }
@@ -738,7 +737,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().setTableStatus(new Status("This is an information about this table.", IStatus.INFO));
               }
             }
@@ -757,7 +756,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().setTableStatus(new Status("This is a warning about this table.", IStatus.WARNING));
               }
             }
@@ -776,7 +775,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().setTableStatus(new Status("An error has occurred on the table.", IStatus.ERROR));
               }
             }
@@ -808,7 +807,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 ClientJobs.schedule(new IRunnable() {
                   @Override
                   public void run() throws Exception {
@@ -832,7 +831,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 scrollToSelection();
               }
 
@@ -857,7 +856,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               List<ITableRow> rows = getSelectedRows();
               deleteRows(rows);
             }
@@ -877,7 +876,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               ClientJobs.schedule(new IRunnable() {
                 @Override
                 public void run() throws Exception {
@@ -912,7 +911,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               getSelectedRow().setEnabled(!getSelectedRow().isEnabled());
             }
           }
@@ -936,7 +935,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               for (ITableRow row : getSelectedRows()) {
                 if (row.getCssClass() == null) {
                   row.setCssClass("highlight");
@@ -963,7 +962,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
             }
           }
@@ -1045,7 +1044,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTableField().getTable().setDefaultIconId(getValue());
 
           // setting the default icon id for existing rows doesn't work.
@@ -1098,12 +1097,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setAutoResizeColumns(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isAutoResizeColumns());
           }
 
@@ -1123,12 +1122,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getLocationColumn().setVisible(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getLocationColumn().isVisible());
           }
 
@@ -1162,12 +1161,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().setEnabled(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().isEnabled());
           }
         }
@@ -1191,14 +1190,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             for (IColumn<?> column : getTableField().getTable().getColumns()) {
               column.setEditable(getValue());
             }
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(true);
           }
         }
@@ -1222,12 +1221,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setMultiSelect(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isMultiSelect());
             setValue(getTableField().getTable().isHeaderVisible());
           }
@@ -1252,12 +1251,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setCheckable(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isCheckable());
           }
 
@@ -1282,13 +1281,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setRowIconVisible(getValue());
             getDefaultIconIdField().setVisible(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isRowIconVisible());
             getDefaultIconIdField().setVisible(getValue());
           }
@@ -1314,12 +1313,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().getNameColumn().setTextWrap(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().getNameColumn().isTextWrap());
           }
 
@@ -1344,13 +1343,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().isTableStatusVisible());
             getTableField().getTable().getMenuByClass(TableStatusVisibleMenu.class).setVisible(getValue());
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().setTableStatusVisible(getValue());
             getTableField().getTable().getMenuByClass(TableStatusVisibleMenu.class).setVisible(getValue());
           }
@@ -1375,12 +1374,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setHeaderVisible(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isHeaderVisible());
           }
         }
@@ -1404,12 +1403,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTableField().getTable().setSortEnabled(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTableField().getTable().isSortEnabled());
           }
         }
@@ -1433,7 +1432,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             for (IColumn column : getTableField().getTable().getColumns()) {
               int newAlignment = column.getHorizontalAlignment() + 1;
               if (newAlignment > 1) {
@@ -1456,7 +1455,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getTableField().addExampleRows();
       }
     }

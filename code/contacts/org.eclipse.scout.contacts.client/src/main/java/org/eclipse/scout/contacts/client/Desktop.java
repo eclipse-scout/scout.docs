@@ -15,7 +15,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.common.SearchOutline;
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm;
@@ -49,7 +48,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Override
-  protected void execGuiAttached() throws ProcessingException {
+  protected void execGuiAttached() {
     super.execGuiAttached();
     setOutline(ContactOutline.class);
   }
@@ -89,7 +88,7 @@ public class Desktop extends AbstractDesktop {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           new PersonForm().startNew();
         }
       }
@@ -108,7 +107,7 @@ public class Desktop extends AbstractDesktop {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           new OrganizationForm().startNew();
         }
       }
@@ -123,7 +122,7 @@ public class Desktop extends AbstractDesktop {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         ClientSessionProvider.currentSession(ClientSession.class).stop();
       }
     }
@@ -153,7 +152,7 @@ public class Desktop extends AbstractDesktop {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         OptionsForm form = new OptionsForm();
         form.startNew();
       }
@@ -168,7 +167,7 @@ public class Desktop extends AbstractDesktop {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         ScoutInfoForm form = new ScoutInfoForm();
         form.startModify();
       }
@@ -183,7 +182,7 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       if (getOutline() != null) {
         IPage<?> page = getOutline().getActivePage();
         if (page != null) {

@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -41,7 +40,7 @@ import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonths
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
 
-  public TabBoxForm() throws ProcessingException {
+  public TabBoxForm() {
     super();
   }
 
@@ -56,7 +55,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -253,7 +252,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getFileTableField().getTable().getMenuByClass(AddMenu.class).doAction();
           }
         }
@@ -292,12 +291,12 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getMonthsBox().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getMonthsBox().isVisible());
         }
       }
@@ -316,12 +315,12 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getCommentsBox().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getCommentsBox().isVisible());
         }
 
@@ -341,12 +340,12 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getDocumentsBox().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getDocumentsBox().isVisible());
         }
       }

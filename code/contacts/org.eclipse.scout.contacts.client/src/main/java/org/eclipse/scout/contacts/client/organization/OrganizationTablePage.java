@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
@@ -44,14 +43,14 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
   }
 
   @Override
-  protected IPage<?> execCreateChildPage(ITableRow row) throws ProcessingException {
+  protected IPage<?> execCreateChildPage(ITableRow row) {
     OrganizationDetailsNodePage childPage = new OrganizationDetailsNodePage();
     childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row));
     return childPage;
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IOrganizationService.class).getTableData(filter));
   }
 
@@ -162,13 +161,13 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         OrganizationForm form = new OrganizationForm();
         form.setOrganizationId(getOrganizationIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }
@@ -197,12 +196,12 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         OrganizationForm form = new OrganizationForm();
         form.addFormListener(new FormListener() {
 
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }

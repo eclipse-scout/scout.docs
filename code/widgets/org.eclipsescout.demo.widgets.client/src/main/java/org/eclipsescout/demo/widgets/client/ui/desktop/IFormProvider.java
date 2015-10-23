@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.desktop;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 
 /**
@@ -19,6 +18,6 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 // FIXME AWE Rename this interface, and probably also the method. "Form provider" could be anything that provides a form (for any purpose), however this interface seems to be tightly linked to desktop "BENCH" mode.
 public interface IFormProvider {
 
-  IForm provideForm() throws ProcessingException;
+  IForm provideForm();
 
 }

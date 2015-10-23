@@ -59,7 +59,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
 public class TreeBoxForm extends AbstractForm implements IPageForm {
 
-  public TreeBoxForm() throws ProcessingException {
+  public TreeBoxForm() {
     super();
   }
 
@@ -74,7 +74,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -184,7 +184,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("TreeBoxWithCodeTypeContent"));
         }
       }
@@ -232,7 +232,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           Set<Long> codes = new HashSet<Long>();
           codes.add(IndustryICBCodeType.ICB8000.ID);
           codes.add(IndustryICBCodeType.ICB8000.ICB8500.ID);
@@ -256,7 +256,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("TreeBoxWithLookupCallContent"));
         }
       }
@@ -309,7 +309,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           int year = Calendar.getInstance().get(Calendar.YEAR);
           int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
           int key = 100 * year + month;
@@ -371,7 +371,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               getSelectedNode().setEnabled(!getSelectedNode().isEnabled());
             }
           }
@@ -390,7 +390,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getTreeBoxField().checkAllKeys();
           }
         }
@@ -404,7 +404,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getTreeBoxField().uncheckAllKeys();
           }
         }
@@ -429,7 +429,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           Set<String> keys = getTreeBoxField().getCheckedKeys();
           setValue(StringUtility.join(";", keys.toArray(new String[0])));
         }
@@ -449,7 +449,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
           List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
 
@@ -479,7 +479,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTreeBoxField().setFilterCheckedNodesValue(getValue());
         }
       }
@@ -498,7 +498,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTreeBoxField().setAutoCheckChildNodes(getValue());
         }
       }
@@ -517,12 +517,12 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTreeBoxField().setEnabled(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getTreeBoxField().isEnabled());
         }
       }
@@ -537,7 +537,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
       }

@@ -19,7 +19,6 @@ import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.ProcessingStatus;
 import org.eclipse.scout.contacts.client.common.MapForm.MainBox.MapField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -35,7 +34,7 @@ public class MapForm extends AbstractForm {
   private String m_city;
   private String m_country;
 
-  public MapForm() throws ProcessingException {
+  public MapForm() {
     super();
   }
 
@@ -49,7 +48,7 @@ public class MapForm extends AbstractForm {
     return TEXTS.get("Map");
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternal(new ModifyHandler());
   }
 
@@ -123,7 +122,7 @@ public class MapForm extends AbstractForm {
       }
 
       @Override
-      protected void execInitField() throws ProcessingException {
+      protected void execInitField() {
         String size = "" + (getConfiguredHeightInPixel() - 20) + "x" + (getConfiguredWidthInPixel() - 20);
         String address = (new Locale("", getCountry())).getDisplayCountry();
         String zoom = "7";

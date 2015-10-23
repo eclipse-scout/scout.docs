@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.searchforms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
@@ -57,7 +56,7 @@ import org.eclipsescout.demo.widgets.client.services.lookup.CompanyTypeLookupCal
 
 public class SearchForm extends AbstractSearchForm {
 
-  public SearchForm() throws ProcessingException {
+  public SearchForm() {
     super();
   }
 
@@ -320,7 +319,7 @@ public class SearchForm extends AbstractSearchForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         @SuppressWarnings("unchecked")
         IPageWithTable<ITable> page = (IPageWithTable<ITable>) ClientSession.get().getDesktop().getOutline().getActivePage();
         page.setSearchActive(false);
@@ -341,7 +340,7 @@ public class SearchForm extends AbstractSearchForm {
   }
 
   @Override
-  public void start() throws ProcessingException {
+  public void start() {
     startInternal(new SearchHandler());
   }
 

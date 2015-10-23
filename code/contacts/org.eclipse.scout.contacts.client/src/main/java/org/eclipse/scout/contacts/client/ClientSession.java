@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
@@ -30,7 +29,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() {
 
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipse.scout.contacts.shared");
@@ -39,6 +38,6 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execStoreSession() throws ProcessingException {
+  protected void execStoreSession() {
   }
 }

@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.services.process;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.validate.IValidationStrategy;
@@ -22,5 +21,5 @@ public interface INotificationProcessService extends IService {
 
   int MESSAGE_MAX_LENGTH = 5000;
 
-  void sendMessage(String buddyName, String message) throws ProcessingException;
+  void sendMessage(String buddyName, String message);
 }

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
@@ -30,7 +29,7 @@ public class RemoteLocaleLookupService implements ILookupService<Locale> {
   AbstractLocaleLookupCall m_localLookupCall = new LocaleLookupCall();
 
   @Override
-  public List<? extends ILookupRow<Locale>> getDataByKey(ILookupCall<Locale> call) throws ProcessingException {
+  public List<? extends ILookupRow<Locale>> getDataByKey(ILookupCall<Locale> call) {
     List<? extends ILookupRow<Locale>> results = Collections.emptyList();
     for (ILookupRow<Locale> row : m_localLookupCall.execCreateLookupRows()) {
       if (row.getKey().equals(call.getKey())) {
@@ -43,7 +42,7 @@ public class RemoteLocaleLookupService implements ILookupService<Locale> {
   }
 
   @Override
-  public List<? extends ILookupRow<Locale>> getDataByText(ILookupCall<Locale> call) throws ProcessingException {
+  public List<? extends ILookupRow<Locale>> getDataByText(ILookupCall<Locale> call) {
     List<ILookupRow<Locale>> results = new ArrayList<>();
     String callText = StringUtility.emptyIfNull(call.getText()).toLowerCase();
     for (ILookupRow<Locale> row : m_localLookupCall.execCreateLookupRows()) {
@@ -57,13 +56,13 @@ public class RemoteLocaleLookupService implements ILookupService<Locale> {
   }
 
   @Override
-  public List<? extends ILookupRow<Locale>> getDataByAll(ILookupCall<Locale> call) throws ProcessingException {
+  public List<? extends ILookupRow<Locale>> getDataByAll(ILookupCall<Locale> call) {
     sleepSafe(1500);
     return m_localLookupCall.execCreateLookupRows();
   }
 
   @Override
-  public List<? extends ILookupRow<Locale>> getDataByRec(ILookupCall<Locale> call) throws ProcessingException {
+  public List<? extends ILookupRow<Locale>> getDataByRec(ILookupCall<Locale> call) {
     sleepSafe(1500);
     return m_localLookupCall.execCreateLookupRows();
   }

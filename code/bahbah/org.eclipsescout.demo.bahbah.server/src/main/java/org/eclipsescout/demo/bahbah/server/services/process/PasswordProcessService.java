@@ -15,7 +15,6 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringHolder;
@@ -43,7 +42,7 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
       }
 
       @Override
-      public void check(String userId, String newPassword, String userName, int historyIndex) throws ProcessingException {
+      public void check(String userId, String newPassword, String userName, int historyIndex) {
         SharedUserUtility.checkPassword(newPassword);
         SharedUserUtility.checkUsername(userName);
       }
@@ -59,26 +58,26 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
   }
 
   @Override
-  protected void checkAccess(String userId, String password) throws ProcessingException {
+  protected void checkAccess(String userId, String password) {
     if (!ACCESS.check(new ResetPasswordPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
   }
 
   @Override
-  protected String getUsernameFor(String userId) throws ProcessingException {
+  protected String getUsernameFor(String userId) {
     StringHolder holder = new StringHolder();
     SQL.selectInto("SELECT username FROM TABUSERS WHERE u_id = :uid INTO :uname", new NVPair("uid", userId), new NVPair("uname", holder));
     return holder.getValue();
   }
 
   @Override
-  protected int getHistoryIndexFor(String userId, String password) throws ProcessingException {
+  protected int getHistoryIndexFor(String userId, String password) {
     return 0;
   }
 
   @Override
-  protected void resetPasswordInternal(String userId, String newPassword) throws ProcessingException {
+  protected void resetPasswordInternal(String userId, String newPassword) {
     Long u_id = Long.parseLong(userId);
     UserUtility.resetPassword(u_id, newPassword);
   }

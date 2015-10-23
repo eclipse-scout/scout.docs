@@ -13,7 +13,6 @@ package org.eclipsescout.demo.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
@@ -27,7 +26,7 @@ public class FormLookupCall extends LocalLookupCall<Class<? extends IPageForm>> 
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<ILookupRow<Class<? extends IPageForm>>> execCreateLookupRows() throws ProcessingException {
+  protected List<ILookupRow<Class<? extends IPageForm>>> execCreateLookupRows() {
     List<ILookupRow<Class<? extends IPageForm>>> rows = new ArrayList<ILookupRow<Class<? extends IPageForm>>>();
     rows.add(new LookupRow<Class<? extends IPageForm>>(StringFieldForm.class, TEXTS.get("StringField")));
     rows.add(new LookupRow<Class<? extends IPageForm>>(SmartFieldForm.class, TEXTS.get("SmartField")));

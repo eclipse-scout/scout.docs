@@ -10,12 +10,11 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.services.outline;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 
 @TunnelToServer
 public interface IStandardOutlineService extends IService {
 
-  public String[] getOnlineUsers() throws ProcessingException;
+  public String[] getOnlineUsers();
 }

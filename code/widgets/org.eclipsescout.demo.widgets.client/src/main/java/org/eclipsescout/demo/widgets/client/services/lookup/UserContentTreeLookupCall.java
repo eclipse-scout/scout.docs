@@ -13,7 +13,6 @@ package org.eclipsescout.demo.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -30,7 +29,7 @@ public class UserContentTreeLookupCall extends LocalLookupCall<String> {
   }
 
   @Override
-  protected List<LookupRow<String>> execCreateLookupRows() throws ProcessingException {
+  protected List<LookupRow<String>> execCreateLookupRows() {
     return m_rows;
   }
 }

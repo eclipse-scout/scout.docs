@@ -77,13 +77,13 @@ public class PlatformListener implements IPlatformListener {
     extensionRegistry.register(PersonFormTabExtensionData.class);
   }
 
-  protected Set<String> getExistingTables() throws ProcessingException {
+  protected Set<String> getExistingTables() {
     StringArrayHolder tables = new StringArrayHolder();
     SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables));
     return CollectionUtility.hashSet(tables.getValue());
   }
 
-  private void createEventTable(Set<String> tables) throws ProcessingException {
+  private void createEventTable(Set<String> tables) {
     if (!tables.contains("EVENT")) {
       SQL.insert(SQLs.EVENT_CREATE_TABLE);
       LOG.info("Database table 'EVENT' created");
@@ -101,7 +101,7 @@ public class PlatformListener implements IPlatformListener {
     }
   }
 
-  private void createParticipantTable(Set<String> tables) throws ProcessingException {
+  private void createParticipantTable(Set<String> tables) {
     if (!tables.contains("PARTICIPANT")) {
       SQL.insert(SQLs.PARTICIPANT_CREATE_TABLE);
       LOG.info("Database table 'PARTICIPANT' created");

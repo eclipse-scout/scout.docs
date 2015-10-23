@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -51,7 +50,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 public class FileChooserFieldForm extends AbstractForm implements IPageForm {
 
-  public FileChooserFieldForm() throws ProcessingException {
+  public FileChooserFieldForm() {
     super();
   }
 
@@ -66,7 +65,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -149,7 +148,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getServerLogField().addLine(getValue());
           }
         }
@@ -172,7 +171,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             FileChooser fc = new FileChooser(false);
             List<BinaryResource> files = fc.startChooser();
             for (BinaryResource file : files) {
@@ -190,7 +189,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             FileChooser fc = new FileChooser(true);
             List<BinaryResource> files = fc.startChooser();
             for (BinaryResource file : files) {
@@ -216,7 +215,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             return 3;
           }
 
-          public void addLine(BinaryResource file) throws ProcessingException {
+          public void addLine(BinaryResource file) {
             ITableRow row = getTable().addRow(getTable().createRow());
             getTable().getFileColumn().setValue(row, file);
             getTable().getTimeColumn().setValue(row, new Date());
@@ -306,7 +305,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getTable().deleteAllRows();
               }
 
@@ -330,12 +329,12 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              protected void execOwnerValueChanged(Object newOwnerValue) {
                 setVisible(getFileColumn().getSelectedValue() != null);
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 getDesktop().openUri(getFileColumn().getSelectedValue(), OpenUriAction.DOWNLOAD);
               }
             }

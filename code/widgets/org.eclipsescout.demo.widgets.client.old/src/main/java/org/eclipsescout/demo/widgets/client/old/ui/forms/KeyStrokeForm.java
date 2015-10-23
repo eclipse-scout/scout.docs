@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -29,7 +28,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 public class KeyStrokeForm extends AbstractForm implements IPageForm {
 
-  public KeyStrokeForm() throws ProcessingException {
+  public KeyStrokeForm() {
     super();
   }
 
@@ -44,7 +43,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -120,7 +119,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         getChangeValueWithCtrlshiftcField().setValue(!getChangeValueWithCtrlshiftcField().getValue());
       }
     }
@@ -134,7 +133,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         getCtrlshiftdForFocusField().requestFocus();
       }
     }
@@ -148,7 +147,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         getCtrlshiftsForFocusField().requestFocus();
       }
     }
@@ -157,7 +156,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
   public class PageFormHandler extends AbstractFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
     }
   }
 }

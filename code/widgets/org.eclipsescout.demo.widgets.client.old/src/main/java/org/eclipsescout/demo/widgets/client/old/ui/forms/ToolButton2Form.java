@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -23,7 +22,7 @@ import org.eclipsescout.demo.widgets.client.services.lookup.DateLookupCall;
 
 public class ToolButton2Form extends AbstractForm {
 
-  public ToolButton2Form() throws ProcessingException {
+  public ToolButton2Form() {
     super();
   }
 
@@ -33,7 +32,7 @@ public class ToolButton2Form extends AbstractForm {
   }
 
   @Override
-  public void start() throws ProcessingException {
+  public void start() {
     startInternal(new ToolHandler());
   }
 

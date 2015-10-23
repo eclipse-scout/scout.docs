@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.server;
 
 import javax.security.auth.Subject;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.server.ConfigProperties.SuperUserSubjectProperty;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -27,7 +26,7 @@ public class SuperUserRunContextProvider {
 
   private final Subject m_subject = CONFIG.getPropertyValue(SuperUserSubjectProperty.class);
 
-  public ServerRunContext provide() throws ProcessingException {
+  public ServerRunContext provide() {
     ServerRunContext serverRunContext = ServerRunContexts.empty().withUserAgent(UserAgent.createDefault()).withSubject(m_subject);
     return serverRunContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(serverRunContext.copy()));
   }

@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.organization;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.ResetButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.SearchButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.TabBox;
@@ -35,7 +34,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @FormData(value = OrganizationSearchFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class OrganizationSearchForm extends AbstractSearchForm {
 
-  public OrganizationSearchForm() throws ProcessingException {
+  public OrganizationSearchForm() {
     super();
   }
 
@@ -45,7 +44,7 @@ public class OrganizationSearchForm extends AbstractSearchForm {
   }
 
   @Override
-  protected void execResetSearchFilter(SearchFilter searchFilter) throws ProcessingException {
+  protected void execResetSearchFilter(SearchFilter searchFilter) {
     super.execResetSearchFilter(searchFilter);
     OrganizationSearchFormData formData = new OrganizationSearchFormData();
     exportFormData(formData);
@@ -53,7 +52,7 @@ public class OrganizationSearchForm extends AbstractSearchForm {
   }
 
   @Override
-  public void start() throws ProcessingException {
+  public void start() {
     startInternal(new SearchHandler());
   }
 

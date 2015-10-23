@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -47,7 +46,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.EventTypeCodeType;
 
 public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm {
 
-  public RadioButtonGroupFieldForm() throws ProcessingException {
+  public RadioButtonGroupFieldForm() {
     super();
   }
 
@@ -62,7 +61,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -193,7 +192,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(EventTypeCodeType.ExternalCode.ID);
         }
       }
@@ -217,7 +216,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           getButtonFor(EventTypeCodeType.PublicCode.ID).setSelected(true);
 
           // TODO: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
@@ -293,7 +292,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           getNo1Button().setSelected(true);
         }
 
@@ -329,7 +328,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             MessageBoxes.createOk().withHeader(TEXTS.get("RadioButtonSelected", getLabel())).withBody(TEXTS.get("RadioButtonExecClickAction")).show();
           }
         }
@@ -354,7 +353,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           Long value = getRadioButtonGroup().getValue();
 
           if (value != null) {
@@ -380,7 +379,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getNo1Button().setRadioValue(getValue());
         }
       }
@@ -399,7 +398,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getNo2Button().setRadioValue(getValue());
         }
       }
@@ -418,7 +417,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getNo3Button().setRadioValue(getValue());
         }
       }
@@ -443,7 +442,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getValueButton1Field().setValue(1L);
         getValueButton2Field().setValue(-1L);
         getValueButton3Field().setValue(42L);

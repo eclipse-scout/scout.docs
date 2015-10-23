@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
@@ -30,7 +29,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
 
   private DetailForm m_detailForm;
 
-  public PageWithADetailformTablePage() throws ProcessingException {
+  public PageWithADetailformTablePage() {
     super(true, DetailForm.class.getName());
     m_detailForm = new DetailForm();
     setDetailForm(m_detailForm);
@@ -48,7 +47,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
         {1, "Exxon Mobil Corporation", "XOM"},
         {2, "IBM", "IBM"},

@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.IntegerHolder;
 import org.eclipse.scout.commons.holders.NVPair;
@@ -45,7 +44,7 @@ public class UserProcessService implements IUserProcessService {
   private final Set<String> m_users = Collections.synchronizedSet(new HashSet<String>());
 
   @Override
-  public void registerUser() throws ProcessingException {
+  public void registerUser() {
     if (!ACCESS.check(new RegisterUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -56,7 +55,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public void unregisterUser() throws ProcessingException {
+  public void unregisterUser() {
     if (!ACCESS.check(new UnregisterUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -70,7 +69,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public void createUser(UserFormData formData) throws ProcessingException {
+  public void createUser(UserFormData formData) {
     if (!ACCESS.check(new CreateUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -79,7 +78,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public void deleteUsers(List<Long> u_id) throws ProcessingException {
+  public void deleteUsers(List<Long> u_id) {
     if (!ACCESS.check(new DeleteUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -100,7 +99,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public void updateUser(UserFormData formData) throws ProcessingException {
+  public void updateUser(UserFormData formData) {
     if (!ACCESS.check(new UpdateUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -112,7 +111,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public UserAdministrationTablePageData getUserAdministrationTableData(UserFormData formData) throws ProcessingException {
+  public UserAdministrationTablePageData getUserAdministrationTableData(UserFormData formData) {
     if (!ACCESS.check(new ReadUsersPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -122,7 +121,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public Set<String> getUsersOnline() throws ProcessingException {
+  public Set<String> getUsersOnline() {
     if (!ACCESS.check(new ReadUsersPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -131,7 +130,7 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public ICode<Integer> getUserPermission() throws ProcessingException {
+  public ICode<Integer> getUserPermission() {
     IntegerHolder ih = new IntegerHolder(0);
     SQL.selectInto("SELECT permission_id FROM TABUSERS WHERE username = :username INTO :permission", new NVPair("username", ServerSession.get().getUserId()), new NVPair("permission", ih));
 
@@ -139,13 +138,13 @@ public class UserProcessService implements IUserProcessService {
   }
 
   @Override
-  public void registerUserInternal(String userId) throws ProcessingException {
+  public void registerUserInternal(String userId) {
     m_users.add(userId);
     BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }
 
   @Override
-  public void unregisterUserInternal(String userName) throws ProcessingException {
+  public void unregisterUserInternal(String userName) {
     m_users.remove(ServerSession.get().getUserId());
     BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }

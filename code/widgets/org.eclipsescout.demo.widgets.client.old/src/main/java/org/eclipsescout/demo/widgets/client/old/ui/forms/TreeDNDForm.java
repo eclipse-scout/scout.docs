@@ -13,7 +13,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.forms;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.dnd.TextTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
@@ -42,7 +41,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 public class TreeDNDForm extends AbstractForm implements IPageForm {
 
-  public TreeDNDForm() throws ProcessingException {
+  public TreeDNDForm() {
     super();
   }
 
@@ -57,7 +56,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -129,7 +128,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("TreeDNDDescription"));
         }
       }
@@ -153,7 +152,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           Tree exampleTree = new Tree();
           AbstractTreeNode node1 = new AbstractTreeNode() {
             @Override
@@ -233,13 +232,13 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected TransferObject execDrag(ITreeNode node) throws ProcessingException {
+          protected TransferObject execDrag(ITreeNode node) {
             getDNDStatusField().addLine("Drag was started on " + node.getCell().getText());
             return new TextTransferObject(node.getCell().getText());
           }
 
           @Override
-          protected void execDrop(ITreeNode node, TransferObject t) throws ProcessingException {
+          protected void execDrop(ITreeNode node, TransferObject t) {
             super.execDrop(node, t);
             if (t instanceof TextTransferObject) {
               getDNDStatusField().addLine(((TextTransferObject) t).getPlainText() + " was dropped on " + node.getCell().getText());
@@ -247,7 +246,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execDropTargetChanged(ITreeNode node) throws ProcessingException {
+          protected void execDropTargetChanged(ITreeNode node) {
             getDNDStatusField().addLine("Dragged node is currently over " + node.getCell().getText());
           }
         }
@@ -272,7 +271,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           Tree exampleTree = new Tree();
           AbstractTreeNode node1 = new AbstractTreeNode() {
             @Override
@@ -351,13 +350,13 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected TransferObject execDrag(ITreeNode node) throws ProcessingException {
+          protected TransferObject execDrag(ITreeNode node) {
             getDNDStatusField().addLine("Drag was started on " + node.getCell().getText());
             return new TextTransferObject(node.getCell().getText());
           }
 
           @Override
-          protected void execDrop(ITreeNode node, TransferObject t) throws ProcessingException {
+          protected void execDrop(ITreeNode node, TransferObject t) {
             super.execDrop(node, t);
             if (t instanceof TextTransferObject) {
               getDNDStatusField().addLine(((TextTransferObject) t).getPlainText() + " was dropped on " + node.getCell().getText());
@@ -365,7 +364,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execDropTargetChanged(ITreeNode node) throws ProcessingException {
+          protected void execDropTargetChanged(ITreeNode node) {
             getDNDStatusField().addLine("Dragged node is currently over " + node.getCell().getText());
           }
         }
@@ -374,7 +373,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       @Order(40.0)
       public class DNDStatusField extends AbstractArrayTableField<DNDStatusField.Table> {
 
-        public void addLine(String text) throws ProcessingException {
+        public void addLine(String text) {
           ITableRow row = getTable().addRow(getTable().createRow());
           getTable().getIdColumn().setValue(row, getTable().getRowCount());
           getTable().getActionColumn().setValue(row, text);
@@ -443,7 +442,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getDNDStatusField().getTable().deleteAllRows();
       }
     }

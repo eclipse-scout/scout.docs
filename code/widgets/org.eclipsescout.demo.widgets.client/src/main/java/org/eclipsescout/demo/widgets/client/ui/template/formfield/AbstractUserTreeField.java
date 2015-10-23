@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
@@ -201,7 +200,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       AbstractMenu menu = new AbstractMenu() {
 
         @Override
-        public void execAction() throws ProcessingException {
+        public void execAction() {
           MessageBoxes.createOk().withHeader(TEXTS.get("TableMenuHeader")).withBody(getText()).show();
         }
 

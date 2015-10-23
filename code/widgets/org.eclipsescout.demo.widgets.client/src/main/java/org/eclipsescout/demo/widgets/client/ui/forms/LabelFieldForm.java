@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -22,7 +21,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.LabelFieldForm.MainBox.Clos
 
 public class LabelFieldForm extends AbstractForm implements IPageForm {
 
-  public LabelFieldForm() throws ProcessingException {
+  public LabelFieldForm() {
     super();
   }
 
@@ -37,7 +36,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -131,7 +130,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("SetValueText"));
         }
       }
@@ -180,7 +179,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           String value = TEXTS.get("Lorem");
           this.setValue("[html]" + value + "[/html]");
         }

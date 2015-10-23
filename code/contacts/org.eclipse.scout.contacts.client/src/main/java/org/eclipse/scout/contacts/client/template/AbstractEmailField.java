@@ -30,7 +30,7 @@ public abstract class AbstractEmailField extends AbstractStringField {
   }
 
   @Override
-  protected String execValidateValue(String rawValue) throws ProcessingException {
+  protected String execValidateValue(String rawValue) {
     if (StringUtility.isNullOrEmpty(rawValue)) {
       return null;
     }

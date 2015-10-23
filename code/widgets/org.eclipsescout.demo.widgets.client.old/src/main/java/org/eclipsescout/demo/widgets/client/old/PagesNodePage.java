@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -31,7 +30,7 @@ public class PagesNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     PageWithTableTablePage pageWithTableTablePage = new PageWithTableTablePage();
     pageList.add(pageWithTableTablePage);
 

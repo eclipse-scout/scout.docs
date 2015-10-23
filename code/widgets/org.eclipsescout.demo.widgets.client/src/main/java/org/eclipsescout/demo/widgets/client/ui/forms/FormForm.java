@@ -79,7 +79,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(FormForm.class);
 
-  public FormForm() throws ProcessingException {
+  public FormForm() {
     super();
   }
 
@@ -94,12 +94,12 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  protected void execInitForm() throws ProcessingException {
+  protected void execInitForm() {
     getOpeningDelayField().requestFocus();
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -229,7 +229,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(DisplayHint.Dialog);
         }
       }
@@ -257,7 +257,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(DisplayParent.Desktop);
         }
       }
@@ -271,7 +271,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(0);
         }
       }
@@ -308,7 +308,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int openingDelay = (getOpeningDelayField().getValue() != null ? getOpeningDelayField().getValue() : 0);
 
           final IRunnable openFormRunnable = new IRunnable() {
@@ -332,7 +332,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                     form.addFormListener(new FormListener() {
 
                       @Override
-                      public void formChanged(FormEvent e) throws ProcessingException {
+                      public void formChanged(FormEvent e) {
                         if (e.getType() == FormEvent.TYPE_CLOSED) {
                           FormForm.this.doClose();
                         }
@@ -442,7 +442,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             ClientJobs.schedule(new IRunnable() {
 
               @Override
@@ -496,7 +496,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             ClientJobs.schedule(new IRunnable() {
 
               @Override
@@ -550,7 +550,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             ClientJobs.schedule(new IRunnable() {
 
               @Override
@@ -604,7 +604,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             ClientJobs.schedule(new IRunnable() {
 
               @Override
@@ -645,7 +645,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(2);
         }
       }
@@ -664,7 +664,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int cancellationDuration = (getCancellationDurationField().getValue() != null ? getCancellationDurationField().getValue() : 0);
 
           try {
@@ -698,7 +698,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public AbstractCloseButton getCloseButton() throws ProcessingException {
+  public AbstractCloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
   }
 
@@ -708,7 +708,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected List<? extends ILookupRow<DisplayHint>> execCreateLookupRows() throws ProcessingException {
+    protected List<? extends ILookupRow<DisplayHint>> execCreateLookupRows() {
       List<LookupRow<DisplayHint>> rows = new ArrayList<>();
       for (DisplayHint displayHint : DisplayHint.values()) {
         rows.add(new LookupRow<>(displayHint, displayHint.name()));
@@ -738,7 +738,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected List<? extends ILookupRow<DisplayParent>> execCreateLookupRows() throws ProcessingException {
+    protected List<? extends ILookupRow<DisplayParent>> execCreateLookupRows() {
       List<LookupRow<DisplayParent>> rows = new ArrayList<>();
       for (DisplayParent displayParent : DisplayParent.values()) {
         rows.add(new LookupRow<>(displayParent, displayParent.name()));

@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.shared.organization;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
@@ -20,13 +19,13 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IOrganizationService extends IService {
 
-  OrganizationTablePageData getTableData(SearchFilter filter) throws ProcessingException;
+  OrganizationTablePageData getTableData(SearchFilter filter);
 
-  OrganizationFormData create(OrganizationFormData formData) throws ProcessingException;
+  OrganizationFormData create(OrganizationFormData formData);
 
-  OrganizationFormData load(OrganizationFormData formData) throws ProcessingException;
+  OrganizationFormData load(OrganizationFormData formData);
 
-  OrganizationFormData prepareCreate(OrganizationFormData formData) throws ProcessingException;
+  OrganizationFormData prepareCreate(OrganizationFormData formData);
 
-  OrganizationFormData store(OrganizationFormData formData) throws ProcessingException;
+  OrganizationFormData store(OrganizationFormData formData);
 }

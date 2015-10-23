@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.bahbah.server.services.process;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
@@ -34,7 +33,7 @@ public class NotificationProcessService implements INotificationProcessService {
   private final static long TIMEOUT = 1000 * 60 * 10; // 10min
 
   @Override
-  public void sendMessage(String buddyName, String message) throws ProcessingException {
+  public void sendMessage(String buddyName, String message) {
     // permission validation
     if (!ACCESS.check(new CreateNotificationPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));

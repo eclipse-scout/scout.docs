@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -62,7 +61,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
   private static final BigDecimal FOUR = new BigDecimal(4);
 
-  public DecimalFieldsForm() throws ProcessingException {
+  public DecimalFieldsForm() {
     super();
   }
 
@@ -72,7 +71,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -229,7 +228,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("BigDecimalField"));
         }
       }
@@ -271,7 +270,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(BigDecimal.valueOf(Math.E));
         }
       }
@@ -285,7 +284,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue().signum() < 0) {
             setForegroundColor("FF0000");
           }
@@ -295,7 +294,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(BigDecimal.valueOf(-3.5));
           setForegroundColor("FF0000");
         }
@@ -338,7 +337,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(((Double) newMasterValue).toString());
           }
@@ -362,7 +361,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() != null) {
             getInputField().setMinValue(getValue());
           }
@@ -388,7 +387,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() != null) {
             getInputField().setMaxValue(getValue());
           }
@@ -414,12 +413,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getInputField().isGroupingUsed());
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setGroupingUsed(getValue());
         }
       }
@@ -438,12 +437,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getInputField().getMinFractionDigits());
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setMinFractionDigits(NumberUtility.nvl(getValue(), 0));
         }
       }
@@ -462,12 +461,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getInputField().getMaxFractionDigits());
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setMaxFractionDigits(NumberUtility.nvl(getValue(), 2));
         }
       }
@@ -486,12 +485,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getInputField().getFractionDigits());
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setFractionDigits(NumberUtility.nvl(getValue(), 2));
         }
       }
@@ -510,12 +509,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getInputField().getMultiplier());
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setMultiplier(NumberUtility.nvl(getValue(), 1));
         }
       }
@@ -534,7 +533,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setPercent(getValue());
         }
       }
@@ -553,7 +552,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           DecimalFormat format = new DecimalFormat();
 
           if (getValue() != null) {
@@ -610,7 +609,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getInputField().setDisplayText("can get as large as you want");
       }
     }
@@ -624,7 +623,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getInputField().setDisplayText("can get as small as you want");
       }
     }
@@ -680,7 +679,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getInputField().setValue(pi());
       }
     }
@@ -698,7 +697,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getFormatField().setValue("#,###.0 �C;#,###.0 �C BELOW ZERO");
       }
     }

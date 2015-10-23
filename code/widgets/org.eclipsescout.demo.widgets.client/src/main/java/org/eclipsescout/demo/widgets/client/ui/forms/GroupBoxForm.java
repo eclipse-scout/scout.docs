@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.TriState;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -50,7 +49,7 @@ import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonths
 
 public class GroupBoxForm extends AbstractForm implements IPageForm {
 
-  public GroupBoxForm() throws ProcessingException {
+  public GroupBoxForm() {
     super();
   }
 
@@ -65,7 +64,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -613,12 +612,12 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getFirstNameField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getFirstNameField().isVisible());
         }
       }
@@ -637,12 +636,12 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getLastNameField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getLastNameField().isVisible());
         }
       }
@@ -661,12 +660,12 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getCompanyField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getCompanyField().isVisible());
         }
       }
@@ -689,12 +688,12 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getScrollableBox().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getScrollableBox().isVisible());
         }
       }

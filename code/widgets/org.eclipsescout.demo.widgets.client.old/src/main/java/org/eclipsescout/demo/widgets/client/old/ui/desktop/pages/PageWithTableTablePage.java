@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -58,7 +57,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{{"String 1", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2}, {"String 2", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
         {"String 3", 3, 20, 8031.7, new Date(System.currentTimeMillis() - 216000000), true, 3}});
   }
@@ -206,7 +205,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class ToggleMandatoryMenu extends AbstractMenu {
 
       @Override
-      protected void execInitAction() throws ProcessingException {
+      protected void execInitAction() {
         super.execInitAction();
       }
 
@@ -224,7 +223,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         List<IColumn<?>> columns = getTable().getColumns();
         for (IColumn<?> c : columns) {
           c.setMandatory(!c.isMandatory());
@@ -239,7 +238,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override
-    protected void execInitAction() throws ProcessingException {
+    protected void execInitAction() {
       super.execInitAction();
     }
 

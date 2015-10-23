@@ -15,7 +15,6 @@ import java.security.AccessController;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -53,7 +52,7 @@ public class ServerSession extends AbstractServerSession {
   }
 
   @Override
-  protected void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() {
     if (getUserId() != null) {
       if (Subject.getSubject(AccessController.getContext()) == ServerApplication.getSubject()) {
         setPermission(CODES.getCode(UserRoleCodeType.UserCode.class));

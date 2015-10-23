@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
@@ -28,7 +27,7 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 @Order(-2100)
 public class MySqlDbSetupService implements IDbSetupService {
   @Override
-  public void installDb() throws ProcessingException {
+  public void installDb() {
     Set<String> existingTables = getExistingTables();
 
     if (!existingTables.contains("tabusers")) {
@@ -53,7 +52,7 @@ public class MySqlDbSetupService implements IDbSetupService {
 
   }
 
-  private Set<String> getExistingTables() throws ProcessingException {
+  private Set<String> getExistingTables() {
     Object[][] existingTables = SQL.select("SHOW TABLES");
     HashSet<String> result = new HashSet<String>(existingTables.length);
     for (Object[] row : existingTables) {

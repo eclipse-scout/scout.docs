@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -47,7 +46,7 @@ import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class ButtonForm extends AbstractForm implements IPageForm {
 
-  public ButtonForm() throws ProcessingException {
+  public ButtonForm() {
     super();
   }
 
@@ -57,7 +56,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -212,7 +211,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               System.out.println("'Menu item 1' clicked");
             }
           }
@@ -226,7 +225,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               System.out.println("'Menu item 2' clicked");
             }
           }
@@ -318,7 +317,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execSelectionChanged(boolean selected) throws ProcessingException {
+          protected void execSelectionChanged(boolean selected) {
             if (selected) {
               setLabel(TEXTS.get("Selected"));
             }
@@ -335,7 +334,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               System.out.println("A");
             }
           }
@@ -347,7 +346,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               System.out.println("B");
             }
           }
@@ -367,7 +366,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setSelected(true);
           }
 
@@ -439,7 +438,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             MessageBoxes.createOk().withHeader(TEXTS.get("LinkClicked", getLabel())).withBody(TEXTS.get("LinkButtonExecClickAction")).show();
           }
         }
@@ -502,7 +501,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execSelectionChanged(boolean selected) throws ProcessingException {
+        protected void execSelectionChanged(boolean selected) {
           getGetValueField().setValue(Boolean.toString(selected));
         }
       }
@@ -536,7 +535,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getButtonFieldButton().setLabel(getValue());
         }
       }
@@ -560,7 +559,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getButtonFieldButton().setIconId(getValue());
         }
       }

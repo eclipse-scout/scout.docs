@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.server.organization;
 import java.util.UUID;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.contacts.server.sql.SQLs;
@@ -32,7 +31,7 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class OrganizationService implements IOrganizationService {
 
   @Override
-  public OrganizationTablePageData getTableData(SearchFilter filter) throws ProcessingException {
+  public OrganizationTablePageData getTableData(SearchFilter filter) {
     OrganizationTablePageData pageData = new OrganizationTablePageData();
     OrganizationSearchFormData searchData = (OrganizationSearchFormData) filter.getFormData();
 
@@ -54,7 +53,7 @@ public class OrganizationService implements IOrganizationService {
   }
 
   @Override
-  public OrganizationFormData create(OrganizationFormData formData) throws ProcessingException {
+  public OrganizationFormData create(OrganizationFormData formData) {
     if (!ACCESS.check(new OrganizationCreatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -69,7 +68,7 @@ public class OrganizationService implements IOrganizationService {
   }
 
   @Override
-  public OrganizationFormData load(OrganizationFormData formData) throws ProcessingException {
+  public OrganizationFormData load(OrganizationFormData formData) {
     if (!ACCESS.check(new OrganizationReadPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -80,7 +79,7 @@ public class OrganizationService implements IOrganizationService {
   }
 
   @Override
-  public OrganizationFormData prepareCreate(OrganizationFormData formData) throws ProcessingException {
+  public OrganizationFormData prepareCreate(OrganizationFormData formData) {
     if (!ACCESS.check(new OrganizationCreatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -89,7 +88,7 @@ public class OrganizationService implements IOrganizationService {
   }
 
   @Override
-  public OrganizationFormData store(OrganizationFormData formData) throws ProcessingException {
+  public OrganizationFormData store(OrganizationFormData formData) {
     if (!ACCESS.check(new OrganizationUpdatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }

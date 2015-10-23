@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.bahbah.client;
 
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
@@ -43,7 +42,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() {
 
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipsescout.demo.bahbah.shared");
@@ -55,7 +54,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execStoreSession() throws ProcessingException {
+  protected void execStoreSession() {
     // disable notification polling with -1
 //    ClientSession.get().getServiceTunnel().setClientNotificationPollInterval(-1);
     BEANS.get(IUserProcessService.class).unregisterUser();

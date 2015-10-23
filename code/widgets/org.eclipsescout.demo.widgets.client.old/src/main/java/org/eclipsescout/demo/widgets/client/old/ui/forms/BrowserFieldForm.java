@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -56,7 +55,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 public class BrowserFieldForm extends AbstractForm implements IPageForm {
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(BrowserFieldForm.class);
 
-  public BrowserFieldForm() throws ProcessingException {
+  public BrowserFieldForm() {
     super();
   }
 
@@ -71,7 +70,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -119,7 +118,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
   public class MainBox extends AbstractGroupBox {
 
     @Override
-    protected void execInitField() throws ProcessingException {
+    protected void execInitField() {
       setStatusVisible(false);
     }
 
@@ -165,13 +164,13 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           String url = (String) newMasterValue;
           setLocation(url);
         }
 
         @Override
-        protected void execPostMessage(String data, String origin) throws ProcessingException {
+        protected void execPostMessage(String data, String origin) {
           LOG.info("Received post-message: data=" + data + " origin=" + origin);
         }
       }
@@ -198,7 +197,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getURLField().setValue("http://www.bing.com/search?q=Eclipse%20Scout");
           }
         }
@@ -217,7 +216,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getURLField().setValue("http://www.bsi-software.com");
           }
         }
@@ -245,7 +244,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getBrowserField().setLocation(getURLField().getValue());
           }
         }

@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -79,7 +78,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
 public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
-  public SequenceBoxForm() throws ProcessingException {
+  public SequenceBoxForm() {
     super();
   }
 
@@ -94,7 +93,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -404,7 +403,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             Date now = new Date();
             Date nineteen70 = new Date();
             nineteen70.setTime(0);
@@ -541,7 +540,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execClickAction() throws ProcessingException {
+            protected void execClickAction() {
               String name = StringUtility.concatenateTokens(getFirstNameField().getValue(), " ", getLastNameField().getValue());
 
               if (name.length() > 0) {
@@ -562,7 +561,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execClickAction() throws ProcessingException {
+            protected void execClickAction() {
               getFirstNameField().setValue(null);
               getLastNameField().setValue(null);
             }
@@ -597,7 +596,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String execValidateValue(String rawValue) throws ProcessingException {
+          protected String execValidateValue(String rawValue) {
             if (rawValue != null && rawValue.equals("error")) {
               throw new VetoException("Value is not allowed");
             }
@@ -622,7 +621,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execAction() throws ProcessingException {
+            protected void execAction() {
               MessageBoxes.createOk().withHeader("click!").show();
             }
           }
@@ -685,12 +684,12 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getCompanyField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getCompanyField().isVisible());
         }
       }
@@ -709,12 +708,12 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getEmployeesField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getEmployeesField().isVisible());
         }
       }
@@ -733,12 +732,12 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getIndustryField().setVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getIndustryField().isVisible());
         }
       }
@@ -757,7 +756,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           String tooltip = null;
           if (getValue()) {
             tooltip = "This is a tooltip";
@@ -766,7 +765,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getEmployeesField().getTooltipText() != null);
         }
       }
@@ -785,12 +784,12 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getIndustryField().setStatusVisible(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getIndustryField().isStatusVisible());
         }
       }
@@ -866,7 +865,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(true);
           }
         }
@@ -885,7 +884,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -904,7 +903,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -918,7 +917,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             boolean visible = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
             boolean mandatory = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
             boolean errorStatus = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
@@ -1071,7 +1070,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(true);
           }
         }
@@ -1090,7 +1089,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -1109,7 +1108,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -1123,7 +1122,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             boolean visible = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
             boolean mandatory = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
             boolean errorStatus = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
@@ -1291,7 +1290,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(true);
           }
         }
@@ -1310,7 +1309,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -1329,7 +1328,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(false);
           }
         }
@@ -1343,7 +1342,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             boolean visible = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
             boolean mandatory = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
             boolean errorStatus = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
@@ -1444,7 +1443,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected List<? extends ILookupRow<Boolean>> execCreateLookupRows() throws ProcessingException {
+    protected List<? extends ILookupRow<Boolean>> execCreateLookupRows() {
       List<ILookupRow<Boolean>> rows = new ArrayList<ILookupRow<Boolean>>();
       rows.add(new LookupRow<Boolean>(Boolean.TRUE, "Yes"));
       rows.add(new LookupRow<Boolean>(Boolean.FALSE, "No"));
@@ -1462,7 +1461,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Override
-    protected List<? extends ILookupRow<IFormField>> execCreateLookupRows() throws ProcessingException {
+    protected List<? extends ILookupRow<IFormField>> execCreateLookupRows() {
       List<ILookupRow<IFormField>> rows = new ArrayList<ILookupRow<IFormField>>();
 
       ISequenceBox sequenceBox = getFieldByClass(m_sequenceBox);

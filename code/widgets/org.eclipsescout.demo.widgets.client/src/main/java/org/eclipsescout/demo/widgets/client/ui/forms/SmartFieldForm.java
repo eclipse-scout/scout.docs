@@ -75,7 +75,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(SmartFieldForm.class);
 
-  public SmartFieldForm() throws ProcessingException {
+  public SmartFieldForm() {
     super();
   }
 
@@ -90,7 +90,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -275,7 +275,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           MessageBoxes.createOk().withBody(getDefaultField().getValue() + "").show();
         }
       }
@@ -301,7 +301,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           m_localLookupCall = !m_localLookupCall;
           if (m_localLookupCall) {
             getDefaultField().setLookupCall(new LocaleLookupCall());
@@ -333,12 +333,12 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           m_active = !m_active;
           ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
           updateLabel();
@@ -368,7 +368,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("SmartFieldWithListContent"));
         }
       }
@@ -406,7 +406,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           Color color = getValue();
           if (color == null) {
             setBackgroundColor(null);
@@ -437,7 +437,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(new Color(255, 255, 255));
         }
       }
@@ -456,7 +456,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("SmartFieldWithTreeContent"));
         }
       }
@@ -513,7 +513,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(ICB9537.ID);
         }
       }
@@ -532,7 +532,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("ProposalFieldWithListContent"));
         }
       }
@@ -589,7 +589,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("Public"));
         }
       }
@@ -641,7 +641,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(newMasterValue.toString());
           }
@@ -665,7 +665,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(false);
           ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
           addNodesToLookupRows(nodes, rows);
@@ -699,7 +699,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getListSmartField().setBrowseMaxRowCount(NumberUtility.nvl(getValue(), 100));
           getTreeSmartField().setBrowseMaxRowCount(NumberUtility.nvl(getValue(), 100));
         }
@@ -752,7 +752,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(newMasterValue.toString());
           }
@@ -776,7 +776,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
           List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
 
@@ -799,12 +799,12 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTreeSmartField().setBrowseHierarchy(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getTreeSmartField().isBrowseHierarchy());
         }
       }
@@ -823,12 +823,12 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTreeSmartField().setBrowseAutoExpandAll(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getTreeSmartField().isBrowseAutoExpandAll());
         }
       }
@@ -853,7 +853,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         ListEntriesField listEntries = getListEntriesField();
         listEntries.setValue(TEXTS.get("ListBoxUserContent"));
 
@@ -871,7 +871,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execInitField() throws ProcessingException {
+      protected void execInitField() {
         updateLabel(getDefaultField().getWildcard());
       }
 
@@ -880,7 +880,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         String newWildcard;
         if (getDefaultField().getWildcard() == "*") {
           newWildcard = "°";

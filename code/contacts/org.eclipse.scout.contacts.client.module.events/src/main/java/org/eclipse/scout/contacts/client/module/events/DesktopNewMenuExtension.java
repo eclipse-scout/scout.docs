@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Desktop;
 import org.eclipse.scout.contacts.client.Desktop.FileMenu.NewMenu;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm;
@@ -43,7 +42,7 @@ public class DesktopNewMenuExtension extends AbstractMenuExtension<Desktop.FileM
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       new EventForm().startNew();
     }
   }

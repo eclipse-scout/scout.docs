@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -26,7 +25,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 public class PageFieldForm extends AbstractForm implements IPageForm {
 
-  public PageFieldForm() throws ProcessingException {
+  public PageFieldForm() {
     super();
   }
 
@@ -36,7 +35,7 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -65,7 +64,7 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execInitField() throws ProcessingException {
+      protected void execInitField() {
         setPage(new PageWithADetailformTablePage());
       }
     }

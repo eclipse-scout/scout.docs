@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -80,7 +79,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm.MainBox.Sam
 
 public class StringFieldForm extends AbstractForm implements IPageForm {
 
-  public StringFieldForm() throws ProcessingException {
+  public StringFieldForm() {
     super();
   }
 
@@ -95,7 +94,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -343,7 +342,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String execValidateValue(String rawValue) throws ProcessingException {
+        protected String execValidateValue(String rawValue) {
           if (StringUtility.isNullOrEmpty(rawValue)) {
             throw new VetoException("Field content must not be empty");
           }
@@ -354,7 +353,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       @Order(25.0)
       public class InsertText1Button extends AbstractButton {
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           super.execInitField();
           setLabel(TEXTS.get("CallInsertTextSourceXTargetY", getDefaultField().getLabel(), getMandatoryField().getLabel()));
         }
@@ -370,7 +369,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getMandatoryField().insertText(getDefaultField().getValue());
         }
       }
@@ -389,7 +388,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("Text in disabled Field");
         }
       }
@@ -528,7 +527,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       @Order(65.0)
       public class InsertText2Button extends AbstractButton {
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setLabel(TEXTS.get("CallInsertTextSourceXTargetY", getDefaultField().getLabel(), getTextInputField().getLabel()));
         }
 
@@ -543,7 +542,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getTextInputField().insertText(getDefaultField().getValue());
         }
       }
@@ -589,12 +588,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getTextInputField().isUpdateDisplayTextOnModify());
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getTextInputField().setUpdateDisplayTextOnModify(isChecked());
           }
         }
@@ -614,7 +613,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
       }
@@ -638,7 +637,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
       }
@@ -667,7 +666,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
       }
@@ -686,12 +685,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
 
         @Override
-        protected String execValidateValue(String rawValue) throws ProcessingException {
+        protected String execValidateValue(String rawValue) {
           clearErrorStatus();
 
           if (StringUtility.isNullOrEmpty(rawValue)) {
@@ -720,12 +719,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
 
         @Override
-        protected String execValidateValue(String rawValue) throws ProcessingException {
+        protected String execValidateValue(String rawValue) {
           clearErrorStatus();
 
           if (StringUtility.isNullOrEmpty(rawValue)) {
@@ -756,7 +755,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTextInputField().setWrapText(getValue());
         }
       }
@@ -777,7 +776,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getTextInputField().setSpellCheckEnabled(getValue());
         }
       }
@@ -836,7 +835,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           super.execAction();
           MessageBoxes.createOk().withHeader(getValue()).show();
         }
@@ -866,7 +865,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getHasActionField().setHasAction(!getHasActionField().isHasAction());
         }
       }
@@ -885,7 +884,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           int maxlen = NumberUtility.nvl(getValue(), 4000);
           getStringInputField().setMaxLength(maxlen);
           getUpperCaseField().setMaxLength(maxlen);
@@ -915,7 +914,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getValueField().setValue(getValue());
         }
 
@@ -955,7 +954,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getStringField().setUpdateDisplayTextOnModify(getValue());
         }
       }
@@ -1009,7 +1008,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execInitField() throws ProcessingException {
+            protected void execInitField() {
               super.execInitField();
               setLabel(getTextInputField().getLabel());
             }
@@ -1029,7 +1028,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execInitField() throws ProcessingException {
+            protected void execInitField() {
               super.execInitField();
               setLabel(getStringField().getLabel());
               getTargetFieldRadioButtonGroup().setValue(Boolean.FALSE);
@@ -1074,7 +1073,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getSelectionStartField().setValue(getTargetField().getSelectionStart());
             getSelectionEndField().setValue(getTargetField().getSelectionEnd());
           }
@@ -1094,7 +1093,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getTargetField().select(getSelectionStartField().getValue(), getSelectionEndField().getValue());
           }
         }
@@ -1118,7 +1117,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getTextInputField().setValue(TEXTS.get("LoremIpsum") + "\n" + TEXTS.get("Lorem"));
         getStringInputField().setValue(TEXTS.get("HelloWorld"));
         getUpperCaseField().setValue(TEXTS.get("HelloWorld"));
@@ -1139,7 +1138,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getFontNameField().setValue("Courier");
         getFontSizeField().setValue(14);
         getForegroundColorField().setValue("000088");

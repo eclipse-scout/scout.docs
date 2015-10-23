@@ -62,13 +62,13 @@ public class PlatformListener implements IPlatformListener {
     }
   }
 
-  protected Set<String> getExistingTables() throws ProcessingException {
+  protected Set<String> getExistingTables() {
     StringArrayHolder tables = new StringArrayHolder();
     SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables));
     return CollectionUtility.hashSet(tables.getValue());
   }
 
-  private void createOrganizationTable(Set<String> tables) throws ProcessingException {
+  private void createOrganizationTable(Set<String> tables) {
     if (!tables.contains("ORGANIZATION")) {
       SQL.insert(SQLs.ORGANIZATION_CREATE_TABLE);
       LOG.info("Database table 'ORGANIZATION' created");
@@ -82,7 +82,7 @@ public class PlatformListener implements IPlatformListener {
     }
   }
 
-  private void createPersonTable(Set<String> tables) throws ProcessingException {
+  private void createPersonTable(Set<String> tables) {
     if (!tables.contains("PERSON")) {
       SQL.insert(SQLs.PERSON_CREATE_TABLE);
       LOG.info("Database table 'PERSON' created");

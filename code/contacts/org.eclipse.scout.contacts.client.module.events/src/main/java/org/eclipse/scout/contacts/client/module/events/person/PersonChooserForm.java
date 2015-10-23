@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.module.events.person.PersonChooserForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.module.events.person.PersonChooserForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.module.events.person.PersonChooserForm.MainBox.PersonBox;
@@ -35,7 +34,7 @@ public class PersonChooserForm extends AbstractForm {
 
   private List<String> m_filteredPersons = new ArrayList<>();
 
-  public PersonChooserForm() throws ProcessingException {
+  public PersonChooserForm() {
     super();
   }
 
@@ -44,7 +43,7 @@ public class PersonChooserForm extends AbstractForm {
     return TEXTS.get("ChoosePerson");
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -93,7 +92,7 @@ public class PersonChooserForm extends AbstractForm {
         }
 
         @Override
-        protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) throws ProcessingException {
+        protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
           Iterator<ILookupRow<String>> iterator = result.iterator();
           while (iterator.hasNext()) {
             ILookupRow<String> row = iterator.next();

@@ -28,11 +28,11 @@ import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 public class UserUtility extends SharedUserUtility {
 
-  public static boolean createNewUser(String username, String password) throws ProcessingException {
+  public static boolean createNewUser(String username, String password) {
     return createNewUser(username, password, UserRoleCodeType.UserCode.ID);
   }
 
-  public static boolean createNewUser(String username, String password, Integer permission) throws ProcessingException {
+  public static boolean createNewUser(String username, String password, Integer permission) {
     try {
       checkUsername(username);
       checkPassword(password);
@@ -60,7 +60,7 @@ public class UserUtility extends SharedUserUtility {
     }
   }
 
-  public static void resetPassword(Long u_Id, String newPassword) throws ProcessingException {
+  public static void resetPassword(Long u_Id, String newPassword) {
     try {
       checkPassword(newPassword);
       if (!UserRoleCodeType.AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
@@ -84,7 +84,7 @@ public class UserUtility extends SharedUserUtility {
     }
   }
 
-  public static boolean isValidUser(String username, String password) throws ProcessingException {
+  public static boolean isValidUser(String username, String password) {
     try {
       StringHolder passHolder = new StringHolder();
       StringHolder saltHolder = new StringHolder();
@@ -123,7 +123,7 @@ public class UserUtility extends SharedUserUtility {
    * @throws NoSuchAlgorithmException
    * @throws ProcessingException
    */
-  private static boolean areEqual(String pass1, String pass2, String salt) throws UnsupportedEncodingException, ProcessingException {
+  private static boolean areEqual(String pass1, String pass2, String salt) throws UnsupportedEncodingException {
     byte[] bPass = Base64Utility.decode(pass1);
     byte[] bSalt = Base64Utility.decode(salt);
     byte[] bInput = SecurityUtility.hash(pass2.getBytes(Encoding.UTF_8), bSalt);

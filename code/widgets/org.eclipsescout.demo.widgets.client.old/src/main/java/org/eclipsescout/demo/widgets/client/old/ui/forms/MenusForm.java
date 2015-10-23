@@ -38,7 +38,7 @@ import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class MenusForm extends AbstractForm implements IPageForm {
 
-  public MenusForm() throws ProcessingException {
+  public MenusForm() {
     super();
   }
 
@@ -48,7 +48,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -61,7 +61,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public AbstractCloseButton getCloseButton() throws ProcessingException {
+  public AbstractCloseButton getCloseButton() {
     return null;
   }
 
@@ -77,7 +77,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         requestPopup();
       }
 
@@ -101,7 +101,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         requestPopup();
       }
 
@@ -120,7 +120,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         requestPopup();
       }
 
@@ -196,7 +196,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         MessageBoxes.createOk().withHeader("You clicked me!").show();
       }
     }
@@ -215,7 +215,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         MessageBoxes.createOk().withHeader("You clicked me!").show();
       }
     }
@@ -234,7 +234,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         MessageBoxes.createOk().withHeader("You clicked me!").show();
       }
     }
@@ -258,7 +258,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         MessageBoxes.createOk().withHeader("You clicked me!").show();
       }
     }
@@ -275,7 +275,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       public class StringField extends AbstractStringField {
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("this string field has a menu");
         }
 
@@ -288,7 +288,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -298,7 +298,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       public class StringWithTooltipField extends AbstractStringField {
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("this string field has a menu and a tooltip");
         }
 
@@ -316,7 +316,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -326,7 +326,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       public class StringRightField extends AbstractStringField {
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("is the menu correctly displayed?");
         }
 
@@ -339,7 +339,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -349,7 +349,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       public class StringRightWithTooltipField extends AbstractStringField {
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("is the tooltip correctly displayed?");
         }
 
@@ -379,7 +379,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setImageId("eclipse_scout_logo");
         }
 
@@ -392,7 +392,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -407,7 +407,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           requestPopup();
         }
 
@@ -431,7 +431,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           requestPopup();
         }
 
@@ -450,7 +450,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           requestPopup();
         }
 
@@ -526,7 +526,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -545,7 +545,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -564,7 +564,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -588,7 +588,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -620,7 +620,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -639,7 +639,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MessageBoxes.createOk().withHeader("You clicked me!").show();
         }
       }
@@ -677,7 +677,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           if (getIconId() == null) {
             setIconId(Icons.Bookmark);
             setText(null);
@@ -706,7 +706,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MenusPngIconMenu otherMenu = getMenuByClass(MenusPngIconMenu.class);
           otherMenu.setSelected(!otherMenu.isSelected());
         }
@@ -716,7 +716,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       public class StringBottomField extends AbstractStringField {
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("this string field is on the bottom, is the menu correctly displayed?");
         }
 
@@ -729,7 +729,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -743,7 +743,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
         }
@@ -784,7 +784,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
@@ -804,7 +804,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
@@ -819,7 +819,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execSelectionChanged(boolean selection) throws ProcessingException {
+      protected void execSelectionChanged(boolean selection) {
         if (selection == true) {
           MessageBoxes.createOk().withHeader("Checked the Menu").withBody("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
         }
@@ -843,7 +843,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           String menuname = this.getClass().getSimpleName();
           MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
@@ -858,7 +858,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           String menuname = this.getClass().getSimpleName();
           MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
@@ -873,7 +873,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           String menuname = this.getClass().getSimpleName();
           MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
         }
@@ -894,7 +894,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         String menuname = this.getClass().getSimpleName();
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }

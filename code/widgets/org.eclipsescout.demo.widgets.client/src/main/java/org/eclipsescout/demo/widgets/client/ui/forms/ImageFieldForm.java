@@ -18,7 +18,6 @@ import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.dnd.ResourceListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -46,7 +45,7 @@ import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class ImageFieldForm extends AbstractForm implements IPageForm {
 
-  public ImageFieldForm() throws ProcessingException {
+  public ImageFieldForm() {
     super();
   }
 
@@ -61,7 +60,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -169,7 +168,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected TransferObject execDragRequest() throws ProcessingException {
+        protected TransferObject execDragRequest() {
           Object content = getImage();
 
           if (content instanceof byte[]) {
@@ -181,7 +180,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execDropRequest(TransferObject transferObject) throws ProcessingException {
+        protected void execDropRequest(TransferObject transferObject) {
           clearErrorStatus();
 
           if (transferObject instanceof ResourceListTransferObject) {
@@ -199,7 +198,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           clearErrorStatus();
 
           try {
@@ -320,7 +319,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
           try {
             URL url = getUrl((String) newMasterValue);
@@ -342,12 +341,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getImage1Field().setScrollBarEnabled(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValueChangeTriggerEnabled(false);
           try {
             setValue(getImage1Field().isScrollBarEnabled());
@@ -367,12 +366,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getImage1Field().setAutoFit(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValueChangeTriggerEnabled(false);
           try {
             setValue(getImage1Field().isAutoFit());
@@ -422,7 +421,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
           try {
             URL url = getUrl((String) newMasterValue);
@@ -444,12 +443,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getImage2Field().setScrollBarEnabled(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValueChangeTriggerEnabled(false);
           try {
             setValue(getImage2Field().isScrollBarEnabled());
@@ -469,12 +468,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getImage2Field().setAutoFit(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValueChangeTriggerEnabled(false);
           try {
             setValue(getImage2Field().isAutoFit());
@@ -514,7 +513,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getImageURLField().setValue(BIRD);
       }
     }

@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.ui.desktop.pages;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -54,7 +53,7 @@ public class FormPage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execInitPage() throws ProcessingException {
+  protected void execInitPage() {
     if (getCellForUpdate().getText() == null) {
       String s = m_formType.getSimpleName();
       s = s.replaceAll("Form$", "");
@@ -68,7 +67,7 @@ public class FormPage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void ensureDetailFormCreated() throws ProcessingException {
+  protected void ensureDetailFormCreated() {
     if (m_enabled) {
       super.ensureDetailFormCreated();
     }
@@ -85,14 +84,14 @@ public class FormPage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execInitDetailForm() throws ProcessingException {
+  protected void execInitDetailForm() {
     if (getDetailForm() != null) {
       getDetailForm().getCloseButton().setVisibleGranted(false);
     }
   }
 
   @Override
-  protected void startDetailForm() throws ProcessingException {
+  protected void startDetailForm() {
     getDetailForm().startPageForm();
   }
 
@@ -105,7 +104,7 @@ public class FormPage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       IPageForm form = (IPageForm) createDetailForm();
       form.setDisplayHint(IForm.DISPLAY_HINT_DIALOG);
       form.setAskIfNeedSave(false);

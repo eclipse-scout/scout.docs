@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.template;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.shared.template.AbstractPhoneFieldData;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -31,7 +30,7 @@ public abstract class AbstractPhoneField extends AbstractStringField {
   }
 
   @Override
-  protected String execValidateValue(String rawValue) throws ProcessingException {
+  protected String execValidateValue(String rawValue) {
     clearErrorStatus();
 
     if (StringUtility.isNullOrEmpty(rawValue)) {

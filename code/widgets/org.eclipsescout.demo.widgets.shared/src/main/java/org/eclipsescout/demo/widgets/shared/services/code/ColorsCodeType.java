@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -30,7 +29,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 20000L;
 
-  public ColorsCodeType() throws ProcessingException {
+  public ColorsCodeType() {
     super();
   }
 
@@ -45,7 +44,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   }
 
   @Override
-  protected List<? extends ICodeRow<Color>> execLoadCodes(Class<? extends ICodeRow<Color>> codeRowType) throws ProcessingException {
+  protected List<? extends ICodeRow<Color>> execLoadCodes(Class<? extends ICodeRow<Color>> codeRowType) {
     List<ICodeRow<Color>> codes = new ArrayList<ICodeRow<Color>>();
 
     codes.add(new CodeRow<Color>(Color.PINK, TEXTS.get("Pink")));

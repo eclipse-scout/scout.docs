@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.person;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.ResetButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.SearchButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox;
@@ -39,7 +38,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 @FormData(value = PersonSearchFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class PersonSearchForm extends AbstractSearchForm {
 
-  public PersonSearchForm() throws ProcessingException {
+  public PersonSearchForm() {
     super();
   }
 
@@ -49,7 +48,7 @@ public class PersonSearchForm extends AbstractSearchForm {
   }
 
   @Override
-  protected void execResetSearchFilter(SearchFilter searchFilter) throws ProcessingException {
+  protected void execResetSearchFilter(SearchFilter searchFilter) {
     super.execResetSearchFilter(searchFilter);
     PersonSearchFormData formData = new PersonSearchFormData();
     exportFormData(formData);
@@ -57,7 +56,7 @@ public class PersonSearchForm extends AbstractSearchForm {
   }
 
   @Override
-  public void start() throws ProcessingException {
+  public void start() {
     startInternal(new SearchHandler());
   }
 

@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.desktop.pages;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.tool.IToolButton;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
@@ -49,19 +48,19 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
   }
 
   @Override
-  protected void execInitSearchForm() throws ProcessingException {
+  protected void execInitSearchForm() {
     if (m_displayViewId != null) {
       getSearchFormInternal().setDisplayViewId(m_displayViewId);
     }
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{{0L, "Administrator", "RWX"}, {1L, "Manager", "RX"}, {2L, "Employer", "R"}, {3L, "External", ""}});
   }
 
   @Override
-  protected void execPageActivated() throws ProcessingException {
+  protected void execPageActivated() {
     setSearchActive(true);
     IToolButton firstToolButton = CollectionUtility.firstElement(ClientSession.get().getDesktop().getToolButtons());
     if (firstToolButton != null) {

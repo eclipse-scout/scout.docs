@@ -15,7 +15,6 @@ import java.text.DecimalFormat;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -74,7 +73,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.Sm
 
 public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
-  public NumberFieldsForm() throws ProcessingException {
+  public NumberFieldsForm() {
     super();
   }
 
@@ -84,7 +83,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -229,7 +228,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(StyledField.class);
   }
 
-  public void changeLocale(AbstractNumberField field, final Locale locale) throws ProcessingException {
+  public void changeLocale(AbstractNumberField field, final Locale locale) {
     DecimalFormat oldFormat = field.getFormat();
     DecimalFormat newFormat = BEANS.get(NumberFormatProvider.class).getNumberInstance(locale);
 
@@ -277,7 +276,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("IntegerField"));
         }
       }
@@ -319,7 +318,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(5);
         }
       }
@@ -333,7 +332,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() < 0) {
             setForegroundColor("FF0000");
           }
@@ -343,7 +342,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(-3);
           interceptChangedValue();
         }
@@ -362,7 +361,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("LongField"));
         }
       }
@@ -404,7 +403,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(5L);
         }
       }
@@ -418,7 +417,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() < 0) {
             setForegroundColor("FF0000");
           }
@@ -428,7 +427,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(-3L);
           interceptChangedValue();
         }
@@ -447,7 +446,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("BigIntegerField"));
         }
       }
@@ -489,7 +488,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(BigInteger.valueOf(5));
         }
       }
@@ -503,7 +502,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue().signum() < 0) {
             setForegroundColor("FF0000");
           }
@@ -513,7 +512,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(BigInteger.valueOf(-3));
           interceptChangedValue();
         }
@@ -562,7 +561,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(((Integer) newMasterValue).toString());
           }
@@ -587,7 +586,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() != null) {
             getInputField().setMinValue(getValue().intValue());
             getLongInputField().setMinValue(getValue());
@@ -619,7 +618,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           if (getValue() != null) {
             getInputField().setMaxValue(getValue().intValue());
             getLongInputField().setMaxValue(getValue());
@@ -656,14 +655,14 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getInputField().setGroupingUsed(getValue());
           getLongInputField().setGroupingUsed(getValue());
           getBigIntegerInputField().setGroupingUsed(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(true);
         }
       }
@@ -682,7 +681,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           DecimalFormat format = new DecimalFormat();
 
           if (getValue() != null) {
@@ -719,14 +718,14 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           changeLocale(getInputField(), getValue());
           changeLocale(getLongInputField(), getValue());
           changeLocale(getBigIntegerInputField(), getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(ClientSession.get().getLocale());
         }
       }
@@ -759,7 +758,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(((Long) newMasterValue).toString());
           }
@@ -814,7 +813,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           if (newMasterValue != null) {
             setValue(((BigInteger) newMasterValue).toString());
           }
@@ -846,7 +845,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getInputField().setValue(Integer.MAX_VALUE);
         getLongInputField().setValue(Long.MAX_VALUE);
         getBigIntegerInputField().setDisplayText("can get as large as you want");
@@ -862,7 +861,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getInputField().setValue(Integer.MIN_VALUE);
         getLongInputField().setValue(Long.MIN_VALUE);
         getBigIntegerInputField().setDisplayText("can get as small as you want");
@@ -878,7 +877,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getFormatField().setValue("'Prod-No.' 000,0000");
       }
     }

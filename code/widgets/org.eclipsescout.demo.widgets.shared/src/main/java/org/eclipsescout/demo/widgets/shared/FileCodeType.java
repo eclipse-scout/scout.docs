@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.shared;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -30,7 +29,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   /**
    * @throws org.eclipse.scout.commons.exception.ProcessingException
    */
-  public FileCodeType() throws ProcessingException {
+  public FileCodeType() {
     super();
   }
 

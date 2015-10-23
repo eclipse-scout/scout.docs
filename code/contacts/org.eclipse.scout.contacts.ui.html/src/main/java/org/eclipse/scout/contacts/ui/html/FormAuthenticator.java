@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
 
 import org.eclipse.scout.commons.SecurityUtility;
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
@@ -88,7 +87,7 @@ public class FormAuthenticator {
       final byte[] m_password; // Base64 Hash
       final byte[] salt;
 
-      public CredEntry(String usr, String clearTextPwd) throws ProcessingException {
+      public CredEntry(String usr, String clearTextPwd) {
         this.salt = SecurityUtility.createRandomBytes();
         m_username = usr;
         m_password = SecurityUtility.hash(clearTextPwd.getBytes(StandardCharsets.UTF_8), salt);

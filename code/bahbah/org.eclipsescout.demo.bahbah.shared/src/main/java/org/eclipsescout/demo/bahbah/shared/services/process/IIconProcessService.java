@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.services.process;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.validate.IValidationStrategy;
@@ -20,7 +19,7 @@ import org.eclipse.scout.rt.shared.validate.InputValidation;
 @TunnelToServer
 public interface IIconProcessService extends IService {
 
-  public byte[] loadIcon(String name) throws ProcessingException;
+  public byte[] loadIcon(String name);
 
-  public void saveIcon(byte[] icon) throws ProcessingException;
+  public void saveIcon(byte[] icon);
 }

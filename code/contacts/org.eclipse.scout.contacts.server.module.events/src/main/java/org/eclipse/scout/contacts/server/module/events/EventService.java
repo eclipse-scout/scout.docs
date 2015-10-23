@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.server.module.events;
 import java.util.UUID;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.ITableHolder;
 import org.eclipse.scout.commons.holders.NVPair;
@@ -33,7 +32,7 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class EventService implements IEventService {
 
   @Override
-  public EventTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException {
+  public EventTablePageData getTableData(SearchFilter filter, String organizationId) {
     EventTablePageData pageData = new EventTablePageData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.EVENT_PAGE_DATA_SELECT);
@@ -51,7 +50,7 @@ public class EventService implements IEventService {
   }
 
   @Override
-  public EventFormData create(EventFormData formData) throws ProcessingException {
+  public EventFormData create(EventFormData formData) {
     if (!ACCESS.check(new CreateEventPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -66,7 +65,7 @@ public class EventService implements IEventService {
   }
 
   @Override
-  public EventFormData load(EventFormData formData) throws ProcessingException {
+  public EventFormData load(EventFormData formData) {
     if (!ACCESS.check(new ReadEventPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -78,7 +77,7 @@ public class EventService implements IEventService {
   }
 
   @Override
-  public EventFormData prepareCreate(EventFormData formData) throws ProcessingException {
+  public EventFormData prepareCreate(EventFormData formData) {
     if (!ACCESS.check(new CreateEventPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
@@ -87,7 +86,7 @@ public class EventService implements IEventService {
   }
 
   @Override
-  public EventFormData store(EventFormData formData) throws ProcessingException {
+  public EventFormData store(EventFormData formData) {
     if (!ACCESS.check(new UpdateEventPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }

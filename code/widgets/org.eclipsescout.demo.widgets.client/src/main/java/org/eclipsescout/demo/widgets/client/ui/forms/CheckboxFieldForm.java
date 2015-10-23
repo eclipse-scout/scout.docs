@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -38,7 +37,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.CheckboxFieldForm.MainBox.E
 
 public class CheckboxFieldForm extends AbstractForm implements IPageForm {
 
-  public CheckboxFieldForm() throws ProcessingException {
+  public CheckboxFieldForm() {
     super();
   }
 
@@ -53,7 +52,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -155,7 +154,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setChecked(true);
         }
       }
@@ -202,7 +201,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           setValue(Boolean.toString(getCheckboxField().isChecked()));
         }
       }
@@ -221,7 +220,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
       }
@@ -245,7 +244,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateFontAndColors();
         }
       }

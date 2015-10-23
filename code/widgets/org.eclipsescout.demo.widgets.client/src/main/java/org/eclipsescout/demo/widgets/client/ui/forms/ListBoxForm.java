@@ -56,7 +56,7 @@ import org.eclipsescout.demo.widgets.shared.services.code.ColorsCodeType;
 
 public class ListBoxForm extends AbstractForm implements IPageForm {
 
-  public ListBoxForm() throws ProcessingException {
+  public ListBoxForm() {
     super();
   }
 
@@ -71,7 +71,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -174,7 +174,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("ListBoxWithCodeTypeContent"));
         }
       }
@@ -222,7 +222,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           Set<Color> colors = new HashSet<Color>();
 
           colors.add(ColorsCodeType.GreenCode.ID);
@@ -250,7 +250,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(TEXTS.get("ListBoxWithLookupCallContent"));
         }
       }
@@ -298,7 +298,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           Set<Integer> set = new HashSet<Integer>();
           set.add(2);
           set.add(3);
@@ -347,7 +347,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getListBoxField().checkAllKeys();
           }
         }
@@ -361,7 +361,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execClickAction() throws ProcessingException {
+          protected void execClickAction() {
             getListBoxField().uncheckAllKeys();
           }
         }
@@ -386,7 +386,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
           Set<String> keys = getListBoxField().getCheckedKeys();
           setValue(StringUtility.join(";", keys.toArray(new String[0])));
         }
@@ -406,7 +406,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(false);
           List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
 
@@ -436,7 +436,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getListBoxField().setFilterCheckedRowsValue(getValue());
         }
       }
@@ -455,12 +455,12 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           getListBoxField().setEnabled(getValue());
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(getListBoxField().isEnabled());
         }
       }
@@ -475,7 +475,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         ListEntriesField listEntries = getListEntriesField();
         listEntries.setValue(TEXTS.get("ListBoxUserContent"));
       }

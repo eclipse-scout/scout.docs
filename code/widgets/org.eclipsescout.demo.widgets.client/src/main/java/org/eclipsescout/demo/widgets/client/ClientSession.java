@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client;
 
 import java.util.Locale;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
@@ -45,7 +44,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execLoadSession() throws ProcessingException {
+  protected void execLoadSession() {
     Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
     createTunnelToServerBeans = false;
     if (!createTunnelToServerBeans) {
@@ -84,7 +83,7 @@ public class ClientSession extends AbstractClientSession {
   }
 
   @Override
-  protected void execStoreSession() throws ProcessingException {
+  protected void execStoreSession() {
 //    if (!isFootless()) {
 //      getServiceTunnel().setClientNotificationPollInterval(-1L); // stop ClientNotificationPollingJob
 //    }

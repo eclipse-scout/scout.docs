@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.module.events.event;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.module.events.Icons;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -26,7 +25,7 @@ public class EventOutline extends AbstractOutline {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     EventTablePage eventsTablePage = new EventTablePage();
     pageList.add(eventsTablePage);
   }

@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 
 import javax.imageio.ImageIO;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.ByteArrayHolder;
 import org.eclipse.scout.commons.holders.NVPair;
@@ -68,14 +67,14 @@ public class IconProcessService implements IIconProcessService {
   }
 
   @Override
-  public byte[] loadIcon(String name) throws ProcessingException {
+  public byte[] loadIcon(String name) {
     ByteArrayHolder iconHolder = new ByteArrayHolder();
     SQL.selectInto("SELECT icon INTO :icon FROM TABUSERS WHERE username = :name", new NVPair("icon", iconHolder), new NVPair("name", name));
     return iconHolder.getValue();
   }
 
   @Override
-  public void saveIcon(byte[] icon) throws ProcessingException {
+  public void saveIcon(byte[] icon) {
     // permission validation
     if (!ACCESS.check(new UpdateIconPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));

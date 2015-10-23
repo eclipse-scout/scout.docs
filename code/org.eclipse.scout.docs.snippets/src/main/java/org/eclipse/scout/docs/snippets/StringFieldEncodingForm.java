@@ -11,7 +11,6 @@
 package org.eclipse.scout.docs.snippets;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -20,7 +19,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 
 public class StringFieldEncodingForm extends AbstractForm {
 
-  public StringFieldEncodingForm() throws ProcessingException {
+  public StringFieldEncodingForm() {
     super();
   }
 
@@ -31,7 +30,7 @@ public class StringFieldEncodingForm extends AbstractForm {
     // tag::SecureOutput.encodingByDefault[]
     public class StringField extends AbstractStringField {
       @Override
-      protected void execInitField() throws ProcessingException {
+      protected void execInitField() {
         setValue("...<b>Bold text</b>...");
       }
     }// end::SecureOutput.encodingByDefault[]
@@ -45,7 +44,7 @@ public class StringFieldEncodingForm extends AbstractForm {
       }
 
       @Override
-      protected void execInitField() throws ProcessingException {
+      protected void execInitField() {
         setValue("...<b>Bold text</b>...");
       }
     }// end::SecureOutput.noEncodingField[]

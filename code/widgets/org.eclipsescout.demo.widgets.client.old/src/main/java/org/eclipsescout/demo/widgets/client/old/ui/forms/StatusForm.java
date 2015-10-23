@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
@@ -46,7 +45,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
 
   private Long statusNr;
 
-  public StatusForm() throws ProcessingException {
+  public StatusForm() {
     super();
   }
 
@@ -71,7 +70,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -241,7 +240,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         if (isSelected()) {
           getWARNINGStatusButton().setSelected(false);
           getINFOStatusButton().setSelected(false);
@@ -273,7 +272,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         if (isSelected()) {
           getERRORStatusButton().setSelected(false);
           getINFOStatusButton().setSelected(false);
@@ -305,7 +304,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         if (isSelected()) {
           getERRORStatusButton().setSelected(false);
           getWARNINGStatusButton().setSelected(false);

@@ -46,7 +46,7 @@ import org.w3c.dom.svg.SVGLength;
 
 public class SvgFieldForm extends AbstractForm implements IPageForm {
 
-  public SvgFieldForm() throws ProcessingException {
+  public SvgFieldForm() {
     super();
   }
 
@@ -61,7 +61,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -157,7 +157,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           try {
             setSvgDocument(loadDocument("svg/SvgLogo.svg"));
           }
@@ -182,7 +182,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           try {
             setSvgDocument(loadDocument("svg/World_map.svg"));
           }
@@ -227,7 +227,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+        protected void execChangedMasterValue(Object newMasterValue) {
 
           getSvgSourceField().clearErrorStatus();
 
@@ -248,7 +248,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAppLinkAction(String ref) throws ProcessingException {
+        protected void execAppLinkAction(String ref) {
           if ("circle2".equals(ref)) {
             SVGDocument doc = (SVGDocument) getSvgDocument().cloneNode(true);
             setSvgDocument(liveUpdateCircle(doc, "circle2"));
@@ -298,7 +298,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getSvgSourceField().setValue(TEXTS.get("SvgUserContent"));
       }
     }
@@ -307,14 +307,14 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
     public class CloseButton extends AbstractCloseButton {
     }
 
-    private SVGDocument loadDocument(String resourceName) throws IOException, ProcessingException {
+    private SVGDocument loadDocument(String resourceName) throws IOException {
       if (StringUtility.isNullOrEmpty(resourceName)) {
         return null;
       }
       return SVGUtility.readSVGDocument(ResourceBase.class.getResourceAsStream(resourceName));
     }
 
-    private SVGDocument parseDocument(String svgData) throws IOException, ProcessingException {
+    private SVGDocument parseDocument(String svgData) throws IOException {
       if (StringUtility.isNullOrEmpty(svgData)) {
         return null;
       }

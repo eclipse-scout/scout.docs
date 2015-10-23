@@ -18,7 +18,6 @@ import java.util.Locale;
 
 import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.nls.NlsLocale;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -44,7 +43,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
   }
 
   @Override
-  protected List<LookupRow<Locale>> execCreateLookupRows() throws ProcessingException {
+  protected List<LookupRow<Locale>> execCreateLookupRows() {
     List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
     Locale[] locales = availableLocales();
     for (Locale locale : sort(locales)) {

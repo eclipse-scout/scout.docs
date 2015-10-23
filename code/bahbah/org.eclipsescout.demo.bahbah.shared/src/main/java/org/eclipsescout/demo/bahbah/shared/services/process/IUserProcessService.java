@@ -13,7 +13,6 @@ package org.eclipsescout.demo.bahbah.shared.services.process;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
@@ -27,23 +26,23 @@ public interface IUserProcessService extends IService {
 
   String PERMISSION_KEY = "permission_id";
 
-  void registerUser() throws ProcessingException;
+  void registerUser();
 
-  void unregisterUser() throws ProcessingException;
+  void unregisterUser();
 
-  Set<String> getUsersOnline() throws ProcessingException;
+  Set<String> getUsersOnline();
 
-  ICode<Integer> getUserPermission() throws ProcessingException;
+  ICode<Integer> getUserPermission();
 
-  void deleteUsers(List<Long> u_id) throws ProcessingException;
+  void deleteUsers(List<Long> u_id);
 
-  void createUser(UserFormData formData) throws ProcessingException;
+  void createUser(UserFormData formData);
 
-  void updateUser(UserFormData formData) throws ProcessingException;
+  void updateUser(UserFormData formData);
 
-  UserAdministrationTablePageData getUserAdministrationTableData(UserFormData formData) throws ProcessingException;
+  UserAdministrationTablePageData getUserAdministrationTableData(UserFormData formData);
 
-  void registerUserInternal(String userId) throws ProcessingException;
+  void registerUserInternal(String userId);
 
-  void unregisterUserInternal(String userName) throws ProcessingException;
+  void unregisterUserInternal(String userName);
 }

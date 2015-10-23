@@ -13,7 +13,6 @@ package org.eclipsescout.demo.widgets.client.old;
 import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
@@ -32,7 +31,7 @@ public class SearchFormsNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     SearchFormTablePage searchFormTablePage = new SearchFormTablePage();
     pageList.add(searchFormTablePage);
     SearchFormTablePage searchFormTablePage0 = new SearchFormTablePage(ISearchForm.VIEW_ID_OUTLINE, "Outline");

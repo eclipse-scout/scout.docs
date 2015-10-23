@@ -62,7 +62,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
   /**
    * @throws ProcessingException
    */
-  public ContextMenuForm() throws ProcessingException {
+  public ContextMenuForm() {
     super();
   }
 
@@ -77,7 +77,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -122,7 +122,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             super.execInitField();
             getTable().addRowByArray(new Object[]{"Baluu", "Boralimon"});
             getTable().addRowByArray(new Object[]{"Baluu1", "Boralimon"});
@@ -244,7 +244,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
                 }
 
                 @Override
-                protected void execInitAction() throws ProcessingException {
+                protected void execInitAction() {
                   super.execInitAction();
                   setVisibleGranted(false);
                 }
@@ -285,7 +285,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
                 }
 
                 @Override
-                protected void execInitAction() throws ProcessingException {
+                protected void execInitAction() {
                   super.execInitAction();
                   setVisibleGranted(false);
                 }
@@ -311,7 +311,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 System.out.println("Menu: '" + getClass().getSimpleName() + "'");
               }
             }
@@ -329,7 +329,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 System.out.println("Menu: '" + getClass().getSimpleName() + "'");
               }
             }
@@ -347,7 +347,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execAction() throws ProcessingException {
+              protected void execAction() {
                 System.out.println("Menu: '" + getClass().getSimpleName() + "'");
               }
             }
@@ -360,7 +360,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+              protected void execOwnerValueChanged(Object newOwnerValue) {
                 setVisible(!CompareUtility.equals(getNameColumn().getValue(getSelectedRow()), "Baluu"));
               }
 
@@ -412,7 +412,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getFieldByClass(TableField.class).setEnabled(!isSelected());
       }
     }
@@ -449,7 +449,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execAction() throws ProcessingException {
+        protected void execAction() {
           MessageBoxes.createOk().withHeader("Menu action").withBody("Menu: '" + getLabel() + "'").show();
         }
 
@@ -467,7 +467,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+          protected void execOwnerValueChanged(Object newOwnerValue) {
             setVisible(!CompareUtility.equals(newOwnerValue, FranceCode.ID));
           }
         }
@@ -481,7 +481,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+          protected void execOwnerValueChanged(Object newOwnerValue) {
             super.execOwnerValueChanged(newOwnerValue);
           }
 
@@ -505,7 +505,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+          protected void execOwnerValueChanged(Object newOwnerValue) {
             setVisible(CompareUtility.equals(newOwnerValue, USACode.ID));
           }
         }
@@ -547,7 +547,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execInitAction() throws ProcessingException {
+        protected void execInitAction() {
 //          setVisibleGranted(false);
         }
 
@@ -562,7 +562,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+        protected void execOwnerValueChanged(Object newOwnerValue) {
           setVisible(newOwnerValue == null);
         }
       }
@@ -603,7 +603,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
+        protected void execOwnerValueChanged(Object newOwnerValue) {
           setVisible(newOwnerValue == null);
         }
       }
@@ -692,7 +692,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         System.out.println("button selected");
       }
 
@@ -778,7 +778,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getMainBox().visitFields(new IFormFieldVisitor() {
 
           @Override

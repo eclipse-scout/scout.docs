@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -27,7 +26,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 public class ColorFieldForm extends AbstractForm implements IPageForm {
 
-  public ColorFieldForm() throws ProcessingException {
+  public ColorFieldForm() {
     super();
   }
 
@@ -42,7 +41,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -73,7 +72,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
       @Order(10.0)
       public class ColorField01 extends AbstractColorField {
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue("#FF0000");
         }
 
@@ -99,7 +98,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execAction() throws ProcessingException {
+          protected void execAction() {
             MessageBoxes.createOk().withHeader("Menu").withBody(getClass().getSimpleName()).show();
           }
         }

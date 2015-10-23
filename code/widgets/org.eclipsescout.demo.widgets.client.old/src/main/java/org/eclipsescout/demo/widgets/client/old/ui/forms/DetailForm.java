@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
@@ -25,11 +24,11 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.DetailForm.MainBox.Grou
 
 public class DetailForm extends AbstractForm {
 
-  public DetailForm() throws ProcessingException {
+  public DetailForm() {
     super();
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 

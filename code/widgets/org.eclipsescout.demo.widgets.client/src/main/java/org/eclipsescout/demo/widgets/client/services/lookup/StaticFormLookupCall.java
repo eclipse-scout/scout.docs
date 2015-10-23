@@ -28,13 +28,13 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
 
   private final List<ILookupRow<IPageForm>> m_lookupRows = new ArrayList<>();
 
-  public StaticFormLookupCall() throws ProcessingException {
+  public StaticFormLookupCall() {
     m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(StringFieldForm.class), TEXTS.get("StringField")));
     m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(SmartFieldForm.class), TEXTS.get("SmartField")));
     m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(ImageFieldForm.class), TEXTS.get("ImageField")));
   }
 
-  protected IPageForm createAndStartForm(Class<? extends IPageForm> formType) throws ProcessingException {
+  protected IPageForm createAndStartForm(Class<? extends IPageForm> formType) {
     try {
       IPageForm form = formType.newInstance();
       form.setShowOnStart(false);
@@ -56,7 +56,7 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
   }
 
   @Override
-  protected List<ILookupRow<IPageForm>> execCreateLookupRows() throws ProcessingException {
+  protected List<ILookupRow<IPageForm>> execCreateLookupRows() {
     return m_lookupRows;
   }
 }

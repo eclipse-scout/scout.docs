@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -28,7 +27,7 @@ public class YearsMonthsLookupCall extends LocalLookupCall<String> {
   private static final long serialVersionUID = 1l;
 
   @Override
-  protected List<? extends ILookupRow<String>> execCreateLookupRows() throws ProcessingException {
+  protected List<? extends ILookupRow<String>> execCreateLookupRows() {
     List<ILookupRow<String>> rows = new ArrayList<>();
 
     int year = Calendar.getInstance().get(Calendar.YEAR);

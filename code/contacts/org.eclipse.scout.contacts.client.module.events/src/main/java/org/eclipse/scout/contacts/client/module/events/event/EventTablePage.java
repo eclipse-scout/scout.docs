@@ -16,7 +16,6 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.module.events.Icons;
 import org.eclipse.scout.contacts.client.organization.OrganizationDetailsNodePage;
 import org.eclipse.scout.contacts.shared.module.events.event.EventTablePageData;
@@ -52,7 +51,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
   }
 
   @Override
-  protected void execInitPage() throws ProcessingException {
+  protected void execInitPage() {
     // TODO [dwi] verify
     OrganizationDetailsNodePage organizationParentPage = getParentNode(OrganizationDetailsNodePage.class);
 
@@ -62,7 +61,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IEventService.class).getTableData(filter, getOrganizationId()));
   }
 
@@ -232,13 +231,13 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         EventForm form = new EventForm();
         form.setEventId(getEventIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }
@@ -262,12 +261,12 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         EventForm form = new EventForm();
         form.addFormListener(new FormListener() {
 
           @Override
-          public void formChanged(FormEvent e) throws ProcessingException {
+          public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
               reloadPage();
             }

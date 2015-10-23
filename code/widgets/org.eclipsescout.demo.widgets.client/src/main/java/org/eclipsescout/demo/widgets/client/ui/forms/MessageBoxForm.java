@@ -58,7 +58,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.Samp
 public class MessageBoxForm extends AbstractForm implements IPageForm {
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(MessageBoxForm.class);
 
-  public MessageBoxForm() throws ProcessingException {
+  public MessageBoxForm() {
     super();
   }
 
@@ -73,7 +73,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -184,7 +184,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int result = MessageBoxes.createOk().withHeader(TEXTS.get("MessageBoxWithOkButton")).withBody(TEXTS.get("Lorem")).show();
           getResultField().setMessageBoxResult(result);
         }
@@ -209,7 +209,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int result = MessageBoxes.createYesNo().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\" or \"No\"").show();
           getResultField().setMessageBoxResult(result);
         }
@@ -234,7 +234,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int result = MessageBoxes.createYesNoCancel().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\", \"No\" or \"Cancel\"").show();
           getResultField().setMessageBoxResult(result);
         }
@@ -259,7 +259,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           int result = MessageBoxes.create()
               .withHeader(TEXTS.get("Lorem"))
               .withBody(TEXTS.get("HiddenTextInstruction"))
@@ -289,7 +289,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           boolean result = MessageBoxes.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
           getResultField().setValue(result + "");
         }
@@ -314,7 +314,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getResultField().setValue("(VetoException)");
           throw new VetoException("This is a VetoException");
         }
@@ -339,7 +339,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getResultField().setValue("(ProcessingException)");
           throw new ProcessingException("This is a ProcessingException");
         }
@@ -427,7 +427,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           String header = getHeaderField().getValue();
           String body = getBodyField().getValue();
           IHtmlContent html = HTML.plain(getHtmlField().getValue());
@@ -546,7 +546,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateMessageBoxConfiguredButton();
         }
       }
@@ -565,7 +565,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateMessageBoxConfiguredButton();
         }
       }
@@ -584,7 +584,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateMessageBoxConfiguredButton();
         }
       }
@@ -660,7 +660,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
+        protected void execChangedValue() {
           updateMessageBoxConfiguredButton();
         }
       }
@@ -679,7 +679,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected void execClickAction() throws ProcessingException {
+      protected void execClickAction() {
         getHeaderField().setValue(TEXTS.get("LoremQuestion"));
         getBodyField().setValue(TEXTS.get("LoremAction"));
         getHtmlField().setValue(TEXTS.get("LoremHtml"));

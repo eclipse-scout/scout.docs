@@ -18,7 +18,6 @@ import java.util.Date;
 import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.resource.BinaryResource;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -53,7 +52,7 @@ import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTa
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
 
-  public SplitBoxForm() throws ProcessingException {
+  public SplitBoxForm() {
     super();
   }
 
@@ -68,7 +67,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -228,7 +227,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execInitField() throws ProcessingException {
+              protected void execInitField() {
                 super.execInitField();
 
                 for (IColumn c : getTable().getColumns()) {
@@ -239,12 +238,12 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
 
               @Override
-              protected void execResourceRowClick(BinaryResource resource) throws ProcessingException {
+              protected void execResourceRowClick(BinaryResource resource) {
                 reloadPreview(resource);
                 reloadDetails(resource);
               }
 
-              private void reloadPreview(BinaryResource resource) throws ProcessingException {
+              private void reloadPreview(BinaryResource resource) {
                 if (isImage(resource)) {
                   getPreviewField().setImage(resource.getContent());
                 }
@@ -290,7 +289,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execInitField() throws ProcessingException {
+            protected void execInitField() {
               getNameField().setEnabled(false);
               getSizeField().setEnabled(false);
               getModifiedField().setEnabled(false);
@@ -405,12 +404,12 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getPreviewBox().setVisible(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getPreviewBox().isVisible());
           }
         }
@@ -429,12 +428,12 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getDetailsBox().setVisible(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getDetailsBox().isVisible());
           }
         }
@@ -467,12 +466,12 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getSplitHorizontalField().setSplitterEnabled(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getSplitHorizontalField().isSplitterEnabled());
           }
         }
@@ -486,12 +485,12 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedValue() throws ProcessingException {
+          protected void execChangedValue() {
             getSplitVerticalField().setSplitterEnabled(getValue());
           }
 
           @Override
-          protected void execInitField() throws ProcessingException {
+          protected void execInitField() {
             setValue(getSplitVerticalField().isSplitterEnabled());
           }
         }
@@ -573,14 +572,14 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Override
-    protected void execChangedValue() throws ProcessingException {
+    protected void execChangedValue() {
       if (getValue() != null) {
         getSplitBox().setSplitterPosition(getValue().doubleValue());
       }
     }
 
     @Override
-    protected void execInitField() throws ProcessingException {
+    protected void execInitField() {
       // set initial value
       setValueWithoutValueChangeTriggers(getSplitBox().getSplitterPosition());
       // add listener

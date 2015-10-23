@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
@@ -60,7 +59,7 @@ public class BuddyNodePage extends AbstractPageWithNodes {
     }, 200, TimeUnit.MILLISECONDS);
   }
 
-  public ChatForm getChatForm() throws ProcessingException {
+  public ChatForm getChatForm() {
     if (m_form == null) {
       m_form = new ChatForm();
       m_form.setShowOnStart(false);
@@ -72,7 +71,7 @@ public class BuddyNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execPageActivated() throws ProcessingException {
+  protected void execPageActivated() {
     super.execPageActivated();
 
     // after buddy page activation the buddy's chat history is displayed on the right side

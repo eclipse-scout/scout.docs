@@ -17,7 +17,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.IClientSession;
@@ -48,7 +47,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(CalendarFieldForm.class);
 
-  public CalendarFieldForm() throws ProcessingException {
+  public CalendarFieldForm() {
     super();
   }
 
@@ -63,7 +62,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Override
-  public void startPageForm() throws ProcessingException {
+  public void startPageForm() {
     startInternal(new PageFormHandler());
   }
 
@@ -121,7 +120,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
           private List<IMenu> m_calendarMenus = new ArrayList<>();
 
           @Override
-          protected void execInitCalendar() throws ProcessingException {
+          protected void execInitCalendar() {
             m_cml = new ContextMenuListener() {
               @Override
               public void contextMenuChanged(ContextMenuEvent event) {
@@ -140,7 +139,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execDisposeCalendar() throws ProcessingException {
+          protected void execDisposeCalendar() {
             getCalendar().getContextMenu().removeContextMenuListener(m_cml);
           }
 
@@ -148,7 +147,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
           public class ItemProvdider01 extends AbstractCalendarItemProvider {
 
             @Override
-            protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) throws ProcessingException {
+            protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
               LOG.info("ItemProvdider01#execLoadItemsInBackground");
               System.out.println("START long running item fetch operation... ");
               try {
@@ -223,7 +222,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
           public class ItemProvdider02 extends AbstractCalendarItemProvider {
 
             @Override
-            protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) throws ProcessingException {
+            protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
               LOG.info("ItemProvdider02#execLoadItems");
 
               String cssClass = "calendar-task";

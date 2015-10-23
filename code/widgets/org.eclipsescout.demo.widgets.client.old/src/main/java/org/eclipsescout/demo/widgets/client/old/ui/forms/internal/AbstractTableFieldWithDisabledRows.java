@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client.old.ui.forms.internal;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
@@ -37,12 +36,12 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractArrayTa
   }
 
   @Override
-  protected void execInitField() throws ProcessingException {
+  protected void execInitField() {
     reloadTableData();
   }
 
   @Override
-  public void reloadTableData() throws ProcessingException {
+  public void reloadTableData() {
 
     Object[][] data = new Object[][]{{1l, "Anna"}, {2l, "Cleo"}};
     getTable().replaceRowsByMatrix(data);
@@ -66,7 +65,7 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractArrayTa
     }
 
     @Override
-    protected void execDecorateRow(ITableRow row) throws ProcessingException {
+    protected void execDecorateRow(ITableRow row) {
       row.setEnabled(row.getRowIndex() % 2 == 0);
       super.execDecorateRow(row);
     }
@@ -125,7 +124,7 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractArrayTa
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       ITableRow cleoRow = getTable().findRowByKey(CollectionUtility.arrayList(2L));
       boolean newEnableState = !cleoRow.isEnabled();
       cleoRow.setEnabled(newEnableState);

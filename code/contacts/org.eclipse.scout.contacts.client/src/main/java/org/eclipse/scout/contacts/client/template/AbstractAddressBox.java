@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.client.template;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.client.common.MapForm;
 import org.eclipse.scout.contacts.client.template.AbstractAddressBox.LocationBox.CityField;
@@ -80,7 +79,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
 
     @Override
-    protected void execChangedValue() throws ProcessingException {
+    protected void execChangedValue() {
       verifyAllFields();
     }
   }
@@ -112,7 +111,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       }
 
       @Override
-      protected void execChangedValue() throws ProcessingException {
+      protected void execChangedValue() {
         verifyAllFields();
       }
     }
@@ -126,7 +125,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       }
 
       @Override
-      protected void execChangedValue() throws ProcessingException {
+      protected void execChangedValue() {
         verifyAllFields();
       }
 
@@ -172,7 +171,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
 
     @Override
-    protected void execClickAction() throws ProcessingException {
+    protected void execClickAction() {
       MapForm mapForm = new MapForm();
       mapForm.setStreet(getStreetField().getValue());
       mapForm.setCity(getCityField().getValue());

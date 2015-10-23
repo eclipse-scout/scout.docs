@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.contact;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
@@ -28,7 +27,7 @@ public class ContactOutline extends AbstractOutline {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new PersonTablePage());
     pageList.add(new OrganizationTablePage());
   }

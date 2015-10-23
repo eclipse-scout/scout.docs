@@ -53,7 +53,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
   protected static final long FILE_SIZE_FACTOR = 1024;
 
   @Override
-  protected void execInitField() throws ProcessingException {
+  protected void execInitField() {
     URL url = ResourceBase.class.getResource("images/bird_1008.jpg");
 
     try {
@@ -73,7 +73,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
    *          the resource that is represented by the clicked row
    * @throws ProcessingException
    */
-  protected void execResourceRowClick(BinaryResource resource) throws ProcessingException {
+  protected void execResourceRowClick(BinaryResource resource) {
   }
 
   private Object[] fileToArray(BinaryResource file) {
@@ -98,7 +98,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       getTable().getMenuByClass(DeleteMenu.class).doAction();
     }
   }
@@ -137,13 +137,13 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Override
-    protected TransferObject execCopy(List<? extends ITableRow> rows) throws ProcessingException {
+    protected TransferObject execCopy(List<? extends ITableRow> rows) {
       //TODO [BUG] method call leads to runtime exceptions: tunnel is null ??
       return super.execCopy(rows);
     }
 
     @Override
-    protected TransferObject execDrag(List<ITableRow> rows) throws ProcessingException {
+    protected TransferObject execDrag(List<ITableRow> rows) {
       List<BinaryResource> resources = new ArrayList<BinaryResource>();
 
       for (ITableRow row : rows) {
@@ -154,7 +154,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Override
-    protected void execDrop(ITableRow row, TransferObject t) throws ProcessingException {
+    protected void execDrop(ITableRow row, TransferObject t) {
       clearErrorStatus();
 
       try {
@@ -170,7 +170,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    protected void addFile(BinaryResource file) throws ProcessingException {
+    protected void addFile(BinaryResource file) {
       if (m_keys.contains(file)) {
         return;
       }
@@ -179,12 +179,12 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Override
-    protected void execRowAction(ITableRow row) throws ProcessingException {
+    protected void execRowAction(ITableRow row) {
       getMenuByClass(OpenMenu.class).doAction();
     }
 
     @Override
-    protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
+    protected void execRowsSelected(List<? extends ITableRow> rows) {
       BinaryResource resource = CollectionUtility.firstElement(getResourceColumn().getValues(rows));
       execResourceRowClick(resource);
     }
@@ -243,7 +243,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
 
       @Override
-      protected void execInitColumn() throws ProcessingException {
+      protected void execInitColumn() {
         setFormat(new DecimalFormat(FILE_SIZE_FORMAT));
       }
     }
@@ -280,7 +280,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         List<BinaryResource> resources = getResourceColumn().getSelectedValues();
         for (BinaryResource resource : resources) {
           ClientSessionProvider.currentSession().getDesktop().openUri(resource, OpenUriAction.DOWNLOAD);
@@ -302,7 +302,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         FileChooser fc = new FileChooser(true);
         List<BinaryResource> files = fc.startChooser();
         for (BinaryResource file : files) {
@@ -326,7 +326,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         for (ITableRow row : getSelectedRows()) {
           m_keys.remove(row.getKeyValues().get(0));
           row.delete();

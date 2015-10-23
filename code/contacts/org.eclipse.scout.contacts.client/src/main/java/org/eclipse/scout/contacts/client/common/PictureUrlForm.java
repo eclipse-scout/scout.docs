@@ -11,7 +11,6 @@
 package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox;
@@ -26,7 +25,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 public class PictureUrlForm extends AbstractForm {
 
-  public PictureUrlForm() throws ProcessingException {
+  public PictureUrlForm() {
     super();
   }
 
@@ -35,7 +34,7 @@ public class PictureUrlForm extends AbstractForm {
     return TEXTS.get("PictureURL");
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternal(new ModifyHandler());
   }
 

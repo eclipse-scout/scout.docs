@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.bahbah.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -27,7 +26,7 @@ import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
 
 public class IconChooserForm extends AbstractForm {
 
-  public IconChooserForm() throws ProcessingException {
+  public IconChooserForm() {
     super();
   }
 
@@ -40,7 +39,7 @@ public class IconChooserForm extends AbstractForm {
     return getFieldByClass(CancelButton.class);
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -85,7 +84,7 @@ public class IconChooserForm extends AbstractForm {
   public class NewHandler extends AbstractFormHandler {
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       BEANS.get(IIconProcessService.class).saveIcon(getIconField().getValue().getContent());
     }
   }

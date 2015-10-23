@@ -13,7 +13,6 @@ package org.eclipsescout.demo.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -25,7 +24,7 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow<String>> execCreateLookupRows() throws ProcessingException {
+  protected List<LookupRow<String>> execCreateLookupRows() {
     ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
 
     // TODO: there might be a better way via reflection over AbstractIcon

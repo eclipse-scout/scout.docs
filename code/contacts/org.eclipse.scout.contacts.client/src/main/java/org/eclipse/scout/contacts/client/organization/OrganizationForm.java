@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.organization;
 
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.CancelButton;
@@ -54,7 +53,7 @@ public class OrganizationForm extends AbstractForm {
 
   private String m_organizationId;
 
-  public OrganizationForm() throws ProcessingException {
+  public OrganizationForm() {
     super();
   }
 
@@ -68,11 +67,11 @@ public class OrganizationForm extends AbstractForm {
     return IForm.DISPLAY_HINT_VIEW;
   }
 
-  public void startModify() throws ProcessingException {
+  public void startModify() {
     startInternalExclusive(new ModifyHandler());
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -137,7 +136,7 @@ public class OrganizationForm extends AbstractForm {
   }
 
   @Override
-  public Object computeExclusiveKey() throws ProcessingException {
+  public Object computeExclusiveKey() {
     return getOrganizationId();
   }
 
@@ -213,7 +212,7 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Override
-        protected void execClickAction() throws ProcessingException {
+        protected void execClickAction() {
           getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
         }
       }
@@ -294,7 +293,7 @@ public class OrganizationForm extends AbstractForm {
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).load(formData);
@@ -305,14 +304,14 @@ public class OrganizationForm extends AbstractForm {
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).store(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
 
@@ -325,7 +324,7 @@ public class OrganizationForm extends AbstractForm {
   public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() throws ProcessingException {
+    protected void execLoad() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).prepareCreate(formData);
@@ -333,14 +332,14 @@ public class OrganizationForm extends AbstractForm {
     }
 
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).create(formData);
     }
 
     @Override
-    protected void execDirtyStatusChanged(boolean dirty) throws ProcessingException {
+    protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
   }

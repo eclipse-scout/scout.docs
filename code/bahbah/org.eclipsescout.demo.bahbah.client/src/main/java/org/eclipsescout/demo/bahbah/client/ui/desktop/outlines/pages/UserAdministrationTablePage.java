@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.PageData;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -56,7 +55,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
   }
 
   @Override
-  protected void execLoadData(SearchFilter filter) throws ProcessingException {
+  protected void execLoadData(SearchFilter filter) {
     UserFormData formData = (UserFormData) filter.getFormData();
     if (formData == null) {
       formData = new UserFormData();
@@ -84,7 +83,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
     }
 
     @Override
-    protected void execRowAction(ITableRow row) throws ProcessingException {
+    protected void execRowAction(ITableRow row) {
       getMenuByClass(ModifyUserMenu.class).execAction();
     }
 
@@ -178,12 +177,12 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execInitAction() throws ProcessingException {
+      protected void execInitAction() {
         setVisiblePermission(new UpdateUserPermission());
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         UserForm form = new UserForm();
         form.getUsernameField().setValue(getUsernameColumn().getSelectedValue());
         form.getUserRoleField().setValue(getRoleColumn().getSelectedValue());
@@ -210,12 +209,12 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execInitAction() throws ProcessingException {
+      protected void execInitAction() {
         setVisiblePermission(new CreateUserPermission());
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         UserForm frm = new UserForm();
         frm.startNew();
         frm.waitFor();
@@ -234,12 +233,12 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execInitAction() throws ProcessingException {
+      protected void execInitAction() {
         setVisiblePermission(new ResetPasswordPermission());
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         DefaultPasswordForm frm = new DefaultPasswordForm();
         frm.setUserId(getUserIdColumn().getSelectedValue().toString());
         frm.startReset();
@@ -267,12 +266,12 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected void execInitAction() throws ProcessingException {
+      protected void execInitAction() {
         setVisiblePermission(new DeleteUserPermission());
       }
 
       @Override
-      protected void execAction() throws ProcessingException {
+      protected void execAction() {
         if (MessageBoxes.showDeleteConfirmationMessage(TEXTS.get("Users"), getUsernameColumn().getValues(getSelectedRows()))) {
           BEANS.get(IUserProcessService.class).deleteUsers(getUserIdColumn().getValues(getSelectedRows()));
           reloadPage();

@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.shared.module.events.event;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -19,13 +18,13 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IEventService {
 
-  EventTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException;
+  EventTablePageData getTableData(SearchFilter filter, String organizationId);
 
-  EventFormData create(EventFormData formData) throws ProcessingException;
+  EventFormData create(EventFormData formData);
 
-  EventFormData load(EventFormData formData) throws ProcessingException;
+  EventFormData load(EventFormData formData);
 
-  EventFormData prepareCreate(EventFormData formData) throws ProcessingException;
+  EventFormData prepareCreate(EventFormData formData);
 
-  EventFormData store(EventFormData formData) throws ProcessingException;
+  EventFormData store(EventFormData formData);
 }

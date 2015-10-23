@@ -15,7 +15,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.TuningUtility;
 import org.eclipse.scout.commons.annotations.Replace;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ClientBeanDecorationFactory;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -83,7 +82,7 @@ public final class PlatformSnippet {
     }
 
     @Override
-    public Object invoke(IBeanInvocationContext<T> context) throws ProcessingException {
+    public Object invoke(IBeanInvocationContext<T> context) {
       final String className;
       if (context.getTargetObject() == null) {
         className = context.getTargetMethod().getDeclaringClass().getSimpleName();

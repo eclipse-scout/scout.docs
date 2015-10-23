@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
@@ -60,7 +59,7 @@ public class UserNodePage extends AbstractPageWithNodes {
     cell.setIconId(getConfiguredIconId());
   }
 
-  public ChatForm getChatForm(String buddy) throws ProcessingException {
+  public ChatForm getChatForm(String buddy) {
     if (StringUtility.isNullOrEmpty(buddy)) {
       return null;
     }
@@ -75,7 +74,7 @@ public class UserNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     String[] buddies = BEANS.get(IStandardOutlineService.class).getOnlineUsers();
     for (String buddy : buddies) {
       BuddyNodePage buddyPage = new BuddyNodePage();
@@ -84,7 +83,7 @@ public class UserNodePage extends AbstractPageWithNodes {
     }
   }
 
-  public void updateBuddyPages() throws ProcessingException {
+  public void updateBuddyPages() {
     HashSet<String> newBuddy = new HashSet<String>();
     ArrayList<String> updatedList = new ArrayList<String>();
     String[] buddies = BEANS.get(IStandardOutlineService.class).getOnlineUsers();
@@ -125,12 +124,12 @@ public class UserNodePage extends AbstractPageWithNodes {
     }
 
     @Override
-    protected void execInitAction() throws ProcessingException {
+    protected void execInitAction() {
       setVisible(UserAgentUtility.isDesktopDevice() && ACCESS.check(new UpdateIconPermission()));
     }
 
     @Override
-    protected void execAction() throws ProcessingException {
+    protected void execAction() {
       IconChooserForm form = new IconChooserForm();
       form.startNew();
     }

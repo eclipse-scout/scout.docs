@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.ThemeRadioButtonGroup;
 import org.eclipse.scout.contacts.shared.UiThemeCodeType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -26,7 +25,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 
 public class OptionsForm extends AbstractForm {
 
-  public OptionsForm() throws ProcessingException {
+  public OptionsForm() {
     super();
   }
 
@@ -35,7 +34,7 @@ public class OptionsForm extends AbstractForm {
     return TEXTS.get("Options");
   }
 
-  public void startNew() throws ProcessingException {
+  public void startNew() {
     startInternal(new NewHandler());
   }
 
@@ -67,7 +66,7 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Override
-        protected void execInitField() throws ProcessingException {
+        protected void execInitField() {
           setValue(UiThemeCodeType.DefaultCode.ID);
         }
       }
@@ -85,14 +84,14 @@ public class OptionsForm extends AbstractForm {
   }
 
   @Override
-  protected void execInitForm() throws ProcessingException {
+  protected void execInitForm() {
     String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
     getThemeRadioButtonGroup().setValue(theme);
   }
 
   public class NewHandler extends AbstractFormHandler {
     @Override
-    protected void execStore() throws ProcessingException {
+    protected void execStore() {
       getDesktop().setTheme(getThemeRadioButtonGroup().getValue());
     }
   }

@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.scout.commons.annotations.Replace;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.holders.BeanArrayHolder;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.contacts.server.module.events.EventCountBean;
@@ -33,7 +32,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 public class PersonServiceExtension extends PersonService {
 
   @Override
-  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) throws ProcessingException {
+  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) {
     PersonTablePageData pageData = super.getTableData(filter, organizationId);
 
     // Add number of events to persons
@@ -56,7 +55,7 @@ public class PersonServiceExtension extends PersonService {
   }
 
   @Override
-  public PersonFormData load(PersonFormData formData) throws ProcessingException {
+  public PersonFormData load(PersonFormData formData) {
     formData = super.load(formData);
 
     PersonFormTabExtensionData extensionData = formData.getContribution(PersonFormTabExtensionData.class);

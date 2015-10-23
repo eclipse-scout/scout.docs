@@ -10,12 +10,11 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.services.db;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.service.IService;
 
 /**
  *
  */
 public interface IDbSetupService extends IService {
-  public void installDb() throws ProcessingException;
+  public void installDb();
 }

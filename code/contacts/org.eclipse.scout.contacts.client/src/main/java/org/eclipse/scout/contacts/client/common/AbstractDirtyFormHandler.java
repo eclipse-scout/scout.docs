@@ -15,7 +15,6 @@ import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -29,19 +28,19 @@ public abstract class AbstractDirtyFormHandler extends AbstractFormHandler {
   private static final String PROP_DIRTY_LISTENER = AbstractDirtyFormHandler.class.getName() + ".dirtyListener";
 
   @Override
-  protected void execPostLoad() throws ProcessingException {
+  protected void execPostLoad() {
     installDirtyListener(getForm());
   }
 
   @Override
-  protected void execFinally() throws ProcessingException {
+  protected void execFinally() {
     uninstallDirtyListener(getForm());
   }
 
   /**
    * Method invoked once the dirty status of the {@link IForm} changes.
    */
-  protected void execDirtyStatusChanged(final boolean dirty) throws ProcessingException {
+  protected void execDirtyStatusChanged(final boolean dirty) {
   }
 
   private void installDirtyListener(final IForm form) {
