@@ -10,12 +10,11 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.util;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import org.eclipse.scout.commons.Base64Utility;
-import org.eclipse.scout.commons.Encoding;
 import org.eclipse.scout.commons.SecurityUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
@@ -39,7 +38,7 @@ public class UserUtility extends SharedUserUtility {
       checkPermissionId(permission);
 
       byte[] bSalt = SecurityUtility.createRandomBytes();
-      byte[] bHash = SecurityUtility.hash(password.getBytes(Encoding.UTF_8), bSalt);
+      byte[] bHash = SecurityUtility.hash(password.getBytes(StandardCharsets.UTF_8), bSalt);
 
       String salt = Base64Utility.encode(bSalt);
       String digest = Base64Utility.encode(bHash);
@@ -55,58 +54,45 @@ public class UserUtility extends SharedUserUtility {
     catch (ProcessingException e) {
       throw new ProcessingException("hash algorithm not found", e);
     }
-    catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
-    }
   }
 
   public static void resetPassword(Long u_Id, String newPassword) {
-    try {
-      checkPassword(newPassword);
-      if (!UserRoleCodeType.AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
-        // I am not an administrator -> can only reset my own password
-        Long myUserId = Long.parseLong(ServerSession.get().getUserId());
-        if (!myUserId.equals(u_Id)) {
-          throw new VetoException();
-        }
+    checkPassword(newPassword);
+    if (!UserRoleCodeType.AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
+      // I am not an administrator -> can only reset my own password
+      Long myUserId = Long.parseLong(ServerSession.get().getUserId());
+      if (!myUserId.equals(u_Id)) {
+        throw new VetoException();
       }
-
-      byte[] bSalt = SecurityUtility.createRandomBytes();
-      byte[] bHash = SecurityUtility.hash(newPassword.getBytes(Encoding.UTF_8), bSalt);
-
-      String salt = Base64Utility.encode(bSalt);
-      String digest = Base64Utility.encode(bHash);
-
-      SQL.update("UPDATE TABUSERS SET pass = :newPass, salt = :newSalt WHERE u_id = :uid", new NVPair("newPass", digest), new NVPair("newSalt", salt), new NVPair("uid", u_Id));
     }
-    catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
-    }
+
+    byte[] bSalt = SecurityUtility.createRandomBytes();
+    byte[] bHash = SecurityUtility.hash(newPassword.getBytes(StandardCharsets.UTF_8), bSalt);
+
+    String salt = Base64Utility.encode(bSalt);
+    String digest = Base64Utility.encode(bHash);
+
+    SQL.update("UPDATE TABUSERS SET pass = :newPass, salt = :newSalt WHERE u_id = :uid", new NVPair("newPass", digest), new NVPair("newSalt", salt), new NVPair("uid", u_Id));
   }
 
   public static boolean isValidUser(String username, String password) {
-    try {
-      StringHolder passHolder = new StringHolder();
-      StringHolder saltHolder = new StringHolder();
-      SQL.selectInto("SELECT pass, salt FROM TABUSERS WHERE UPPER(USERNAME) = UPPER(:username) INTO :pass, :salt",
-          new NVPair("username", username),
-          new NVPair("pass", passHolder),
-          new NVPair("salt", saltHolder));
+    StringHolder passHolder = new StringHolder();
+    StringHolder saltHolder = new StringHolder();
+    SQL.selectInto("SELECT pass, salt FROM TABUSERS WHERE UPPER(USERNAME) = UPPER(:username) INTO :pass, :salt",
+        new NVPair("username", username),
+        new NVPair("pass", passHolder),
+        new NVPair("salt", saltHolder));
 
-      String pass = passHolder.getValue();
-      String salt = saltHolder.getValue();
-      if (pass == null || salt == null) {
-        // user was not found: to prevent time attacks even though check the passwords
-        // will always return false
-        pass = "c29tZXRoaW5n";
-        password = "dummy";
-        salt = "c29tZXNhbHQ=";
-      }
-      return areEqual(pass, password, salt);
+    String pass = passHolder.getValue();
+    String salt = saltHolder.getValue();
+    if (pass == null || salt == null) {
+      // user was not found: to prevent time attacks even though check the passwords
+      // will always return false
+      pass = "c29tZXRoaW5n";
+      password = "dummy";
+      salt = "c29tZXNhbHQ=";
     }
-    catch (UnsupportedEncodingException e) {
-      throw new ProcessingException("unknown string encoding: " + Encoding.UTF_8, e);
-    }
+    return areEqual(pass, password, salt);
   }
 
   /**
@@ -119,14 +105,13 @@ public class UserUtility extends SharedUserUtility {
    * @param salt
    *          The salt (Base64 encoded) to use for hashing.
    * @return True if the hash of pass2 is equal with pass1 using the given salt.
-   * @throws UnsupportedEncodingException
    * @throws NoSuchAlgorithmException
    * @throws ProcessingException
    */
-  private static boolean areEqual(String pass1, String pass2, String salt) throws UnsupportedEncodingException {
+  private static boolean areEqual(String pass1, String pass2, String salt) {
     byte[] bPass = Base64Utility.decode(pass1);
     byte[] bSalt = Base64Utility.decode(salt);
-    byte[] bInput = SecurityUtility.hash(pass2.getBytes(Encoding.UTF_8), bSalt);
+    byte[] bInput = SecurityUtility.hash(pass2.getBytes(StandardCharsets.UTF_8), bSalt);
 
     return Arrays.equals(bInput, bPass);
   }
