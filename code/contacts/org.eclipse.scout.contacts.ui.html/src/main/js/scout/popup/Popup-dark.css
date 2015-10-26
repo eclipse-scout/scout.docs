@@ -60,7 +60,7 @@
 .popup-body {
   position: relative;
   border: 1px solid @border-color;
-  background-color: @palette-white;
+  background-color: @palette-gray-7;
 
   & > .menu-item.context-menu-item-first {
     border-top: 1px solid transparent; //@border-color;
