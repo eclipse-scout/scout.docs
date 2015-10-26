@@ -102,7 +102,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       getHTMLField().setAttachments(attachments);
       getHTMLField().setValue(s);
     }
-    catch (Exception e) {
+    catch (IOException e) {
       throw new ProcessingException("Html-Field can't load file ", e);
     }
   }
@@ -135,7 +135,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         return iconFile;
       }
     }
-    catch (Exception e) {
+    catch (IOException e) {
       throw new ProcessingException("failed to load image for " + iconName, e);
     }
     return null;

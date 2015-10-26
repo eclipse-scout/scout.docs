@@ -16,7 +16,6 @@ import java.util.Arrays;
 
 import org.eclipse.scout.commons.Base64Utility;
 import org.eclipse.scout.commons.SecurityUtility;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringHolder;
@@ -32,28 +31,23 @@ public class UserUtility extends SharedUserUtility {
   }
 
   public static boolean createNewUser(String username, String password, Integer permission) {
-    try {
-      checkUsername(username);
-      checkPassword(password);
-      checkPermissionId(permission);
+    checkUsername(username);
+    checkPassword(password);
+    checkPermissionId(permission);
 
-      byte[] bSalt = SecurityUtility.createRandomBytes();
-      byte[] bHash = SecurityUtility.hash(password.getBytes(StandardCharsets.UTF_8), bSalt);
+    byte[] bSalt = SecurityUtility.createRandomBytes();
+    byte[] bHash = SecurityUtility.hash(password.getBytes(StandardCharsets.UTF_8), bSalt);
 
-      String salt = Base64Utility.encode(bSalt);
-      String digest = Base64Utility.encode(bHash);
+    String salt = Base64Utility.encode(bSalt);
+    String digest = Base64Utility.encode(bHash);
 
-      SQL.insert("INSERT INTO TABUSERS (username, pass, salt, permission_id) VALUES (:username, :pass, :salt, :permission)",
-          new NVPair("username", username),
-          new NVPair("pass", digest),
-          new NVPair("salt", salt),
-          new NVPair("permission", permission));
+    SQL.insert("INSERT INTO TABUSERS (username, pass, salt, permission_id) VALUES (:username, :pass, :salt, :permission)",
+        new NVPair("username", username),
+        new NVPair("pass", digest),
+        new NVPair("salt", salt),
+        new NVPair("permission", permission));
 
-      return true;
-    }
-    catch (ProcessingException e) {
-      throw new ProcessingException("hash algorithm not found", e);
-    }
+    return true;
   }
 
   public static void resetPassword(Long u_Id, String newPassword) {

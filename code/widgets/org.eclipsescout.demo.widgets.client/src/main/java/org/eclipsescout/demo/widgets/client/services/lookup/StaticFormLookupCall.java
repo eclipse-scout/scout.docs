@@ -42,7 +42,7 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
       form.start();
       return form;
     }
-    catch (Exception e) {
+    catch (InstantiationException | IllegalAccessException e) {
       throw new ProcessingException("Error while creating instance of " + (formType == null ? "null" : formType.getName()));
     }
   }

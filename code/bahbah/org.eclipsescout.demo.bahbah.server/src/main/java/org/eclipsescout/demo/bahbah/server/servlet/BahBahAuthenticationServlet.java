@@ -50,8 +50,8 @@ public class BahBahAuthenticationServlet extends HttpServlet {
         return;
       }
     }
-    catch (Throwable t) {
-      logger.error(t.toString());
+    catch (RuntimeException e) {
+      logger.error("Unexpected error", e);
       fail(req, res);
       return;
     }

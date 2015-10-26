@@ -18,7 +18,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -413,12 +412,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
           addNodesToLookupRows(nodes, rows);
           ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
 
-          try {
-            getListBoxField().initField();
-          }
-          catch (ProcessingException e) {
-            e.printStackTrace();
-          }
+          getListBoxField().initField();
         }
       }
 

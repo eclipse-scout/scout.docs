@@ -11,7 +11,6 @@
 package org.eclipsescout.demo.bahbah.client.services;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.services.common.icon.IIconProviderService;
@@ -69,7 +68,7 @@ public class BuddyAvatarIconProviderService implements IIconProviderService {
         return new IconSpec(m_iconName, data);
       }
     }
-    catch (ProcessingException e) {
+    catch (RuntimeException e) {
       logger.error("unable to get buddy icon '" + m_iconName + "' from the database", e);
     }
     return null;

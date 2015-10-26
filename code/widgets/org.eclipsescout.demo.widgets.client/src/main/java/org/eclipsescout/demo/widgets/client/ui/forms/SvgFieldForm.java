@@ -162,7 +162,6 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
             setSvgDocument(loadDocument("svg/SvgLogo.svg"));
           }
           catch (IOException e) {
-            e.printStackTrace();
             throw new ProcessingException("Exception occured while reading svg file", e);
           }
         }
@@ -187,7 +186,6 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
             setSvgDocument(loadDocument("svg/World_map.svg"));
           }
           catch (IOException e) {
-            e.printStackTrace();
             throw new ProcessingException("Exception occured while reading svg file", e);
           }
         }

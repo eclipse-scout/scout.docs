@@ -34,14 +34,9 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
         String buddy = notification.getSenderName();
 
         if (userPage != null) {
-          try {
-            ChatForm form = userPage.getChatForm(buddy);
-            if (form != null) {
-              form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
-            }
-          }
-          catch (Throwable t) {
-            LOG.error("handling of remote message failed.", t);
+          ChatForm form = userPage.getChatForm(buddy);
+          if (form != null) {
+            form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
           }
         }
       }

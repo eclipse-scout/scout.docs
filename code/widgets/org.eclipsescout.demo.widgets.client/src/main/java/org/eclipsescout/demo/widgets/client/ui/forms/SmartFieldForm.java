@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
@@ -671,12 +670,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
           addNodesToLookupRows(nodes, rows);
 
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
-          try {
-            getListSmartField().initField();
-          }
-          catch (ProcessingException e) {
-            e.printStackTrace();
-          }
+          getListSmartField().initField();
         }
       }
 

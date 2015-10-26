@@ -11,6 +11,7 @@
 package org.eclipsescout.demo.widgets.client.ui.template.formfield;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       BinaryResource file = new BinaryResource("bird.jpg", content);
       getTable().addRowByArray(fileToArray(file));
     }
-    catch (Exception e) {
+    catch (IOException e) {
       throw new ProcessingException("", e);
     }
   }
@@ -163,7 +164,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
           }
         }
       }
-      catch (Exception e) {
+      catch (RuntimeException e) {
         addErrorStatus(e.getMessage());
         throw new ProcessingException(e.getMessage(), e);
       }

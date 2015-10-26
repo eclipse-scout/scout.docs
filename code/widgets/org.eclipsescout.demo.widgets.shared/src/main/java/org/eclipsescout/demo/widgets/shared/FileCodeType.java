@@ -24,13 +24,6 @@ public class FileCodeType extends AbstractCodeType<String, String> {
 
   public static final String ID = "File Types";
 
-  /**
-   * @throws org.eclipse.scout.commons.exception.ProcessingException
-   */
-  public FileCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("File");

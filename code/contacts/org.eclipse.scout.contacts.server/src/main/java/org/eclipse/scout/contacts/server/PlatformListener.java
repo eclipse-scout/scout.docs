@@ -16,7 +16,6 @@ import java.util.UUID;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringArrayHolder;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -61,7 +60,7 @@ public class PlatformListener implements IPlatformListener {
           }
         });
       }
-      catch (ProcessingException e) {
+      catch (RuntimeException e) {
         BEANS.get(ExceptionHandler.class).handle(e);
       }
     }

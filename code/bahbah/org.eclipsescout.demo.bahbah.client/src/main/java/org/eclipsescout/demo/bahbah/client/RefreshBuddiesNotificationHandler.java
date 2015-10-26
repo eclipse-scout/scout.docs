@@ -30,13 +30,8 @@ public class RefreshBuddiesNotificationHandler implements INotificationHandler<R
         UserNodePage userPage = getUserNodePage();
 
         if (userPage != null) {
-          try {
-            LOG.info("refreshing buddies on client");
-            userPage.updateBuddyPages();
-          }
-          catch (Throwable t) {
-            LOG.error("handling of remote message failed.", t);
-          }
+          LOG.info("refreshing buddies on client");
+          userPage.updateBuddyPages();
         }
       }
     });

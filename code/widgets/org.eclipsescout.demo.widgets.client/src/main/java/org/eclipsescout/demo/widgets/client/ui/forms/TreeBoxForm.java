@@ -19,7 +19,6 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
@@ -456,12 +455,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
           addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeBoxField().getLookupCall()).setLookupRows(rows);
 
-          try {
-            getTreeBoxField().initField();
-          }
-          catch (ProcessingException e) {
-            e.printStackTrace();
-          }
+          getTreeBoxField().initField();
         }
       }
 
