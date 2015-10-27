@@ -21,11 +21,14 @@ import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
+import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
+import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotification;
+import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotification;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
 import org.eclipsescout.demo.bahbah.shared.notification.RefreshBuddiesNotification;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
@@ -50,8 +53,7 @@ public class UserProcessService implements IUserProcessService {
     }
 
     registerUserInternal(ServerSession.get().getUserId());
-    // TODO jgu cluster notification
-//    BEANS.get(IClusterSynchronizationService.class).publishNotification(new RegisterUserNotification(ServerSession.get().getUserId()));
+    BEANS.get(IClusterSynchronizationService.class).publishTransactional(new RegisterUserNotification(ServerSession.get().getUserId()));
   }
 
   @Override
@@ -63,8 +65,7 @@ public class UserProcessService implements IUserProcessService {
     m_users.remove(ServerSession.get().getUserId());
 
     BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
-    // TODO jgu cluster notification
-//    BEANS.get(IClusterSynchronizationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
+    BEANS.get(IClusterSynchronizationService.class).publishTransactional(new UnregisterUserNotification(ServerSession.get().getUserId()));
 
   }
 
