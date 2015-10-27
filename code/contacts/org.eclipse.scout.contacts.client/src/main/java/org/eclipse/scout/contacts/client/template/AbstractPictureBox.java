@@ -24,7 +24,7 @@ import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @FormData(value = AbstractPictureBoxData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
