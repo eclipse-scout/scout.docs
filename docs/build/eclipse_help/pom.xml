@@ -12,9 +12,10 @@
 
   <artifactId>eclipse_help</artifactId>
   <name>Eclipse Scout User Guide</name>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <build>
+    <sourceDirectory>src/docs</sourceDirectory>
     <defaultGoal>process-resources</defaultGoal>
     <plugins>
       <plugin>

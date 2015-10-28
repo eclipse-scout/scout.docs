@@ -12,9 +12,10 @@
 
   <artifactId>scout_architecture</artifactId>
   <name>Eclipse Scout Architecture Book</name>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <build>
+    <sourceDirectory>src/docs</sourceDirectory>
     <defaultGoal>process-resources</defaultGoal>
     <plugins>
       <plugin>
