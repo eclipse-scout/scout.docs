@@ -1384,6 +1384,35 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @Order(142.0)
+        public class TableHeaderEnabledField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Table Header Enabled";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setHeaderEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isHeaderEnabled());
+          }
+        }
+
         @Order(145.0)
         public class TableSortEnabledField extends AbstractCheckBox {
 

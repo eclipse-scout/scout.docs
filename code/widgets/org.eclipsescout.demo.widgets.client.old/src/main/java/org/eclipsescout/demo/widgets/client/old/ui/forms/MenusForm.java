@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.scout.commons.ConfigurationUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.OrderedCollection;
-import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
@@ -28,8 +27,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.MenusForm.MainBox.MenusButton;
 import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
@@ -765,13 +762,8 @@ public class MenusForm extends AbstractForm implements IPageForm {
       // Create instances and add to list
       for (Class<? extends IMenu> menuClazz : declaredMenus) {
         IMenu menu;
-        try {
-          menu = ConfigurationUtility.newInnerInstance(this, menuClazz);
-          menus.addOrdered(menu);
-        }
-        catch (Exception e) {
-          BEANS.get(ExceptionHandler.class).handle(new ProcessingException("error creating instance of class '" + menuClazz.getName() + "'.", e));
-        }
+        menu = ConfigurationUtility.newInnerInstance(this, menuClazz);
+        menus.addOrdered(menu);
       }
     }
 

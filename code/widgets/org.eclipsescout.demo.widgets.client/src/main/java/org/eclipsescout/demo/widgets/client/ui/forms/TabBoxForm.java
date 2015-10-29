@@ -11,15 +11,19 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.ExamplesBox;
@@ -37,6 +41,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.M
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.AddMenu;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonthsBox;
+import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
 
@@ -255,6 +260,44 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           protected void execClickAction() {
             getFileTableField().getTable().getMenuByClass(AddMenu.class).doAction();
           }
+        }
+      }
+
+      @Order(10.0)
+      public class CountMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Count";
+        }
+
+        @Override
+        protected void execAction() {
+          int size = 0;
+          for (IGroupBox gb : getTabBox().getGroupBoxes()) {
+            if (gb.isVisible()) {
+              size++;
+            }
+          }
+          MessageBoxes.createOk().withBody("There " + (size == 1 ? "is" : "are") + " " + size + " tab box" + (size == 1 ? "" : "es") + ".").show();
+        }
+      }
+
+      @Order(15.0)
+      public class SeparatorMenu extends AbstractMenuSeparator {
+      }
+
+      @Order(20.0)
+      public class OptionsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Gear;
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withHeader("Sorry").withBody("There are currently no options available.").show();
         }
       }
     }

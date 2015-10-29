@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.bookmark.menu.AbstractBookmarkMenu;
+import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -143,21 +144,6 @@ public class Desktop extends AbstractDesktop {
       return TEXTS.get("Help");
     }
 
-    @Order(500.0)
-    public class OptionsMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Options");
-      }
-
-      @Override
-      protected void execAction() {
-        OptionsForm form = new OptionsForm();
-        form.startNew();
-      }
-    }
-
     @Order(1000)
     public class AboutMenu extends AbstractMenu {
 
@@ -238,6 +224,30 @@ public class Desktop extends AbstractDesktop {
     @Override
     protected String getConfiguredKeyStroke() {
       return IKeyStroke.F3;
+    }
+  }
+
+  @Order(130.0)
+  public class PhoneToolButton extends AbstractFormToolButton<OptionsForm> {
+
+    @Override
+    protected String getConfiguredIconId() {
+      return AbstractIcons.Gear;
+    }
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F11;
+    }
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("Options");
+    }
+
+    @Override
+    protected Class<OptionsForm> getConfiguredForm() {
+      return OptionsForm.class;
     }
   }
 }
