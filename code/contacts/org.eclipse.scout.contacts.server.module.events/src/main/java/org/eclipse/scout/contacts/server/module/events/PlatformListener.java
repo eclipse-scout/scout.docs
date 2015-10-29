@@ -89,12 +89,16 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'EVENT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_1, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm")),
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_1, new NVPair("eventId", UUID.randomUUID().toString()),
+            new NVPair("starts", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm")),
             new NVPair("ends", DateUtility.parse("12.03.2015 16:45", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_2, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm")),
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_2, new NVPair("eventId", UUID.randomUUID().toString()),
+            new NVPair("starts", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm")),
             new NVPair("ends", DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_3, new NVPair("eventId", UUID.randomUUID().toString()), new NVPair("starts", DateUtility.parse("23.06.2015 17:30", "dd.MM.yyyy HH:mm")),
-            new NVPair("ends", DateUtility.parse("23.06.2015 23:00", "dd.MM.yyyy HH:mm")));
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_3, new NVPair("eventId", UUID.randomUUID().toString()),
+            new NVPair("starts", DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm")),
+            new NVPair("ends", DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm")));
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_4, new NVPair("eventId", UUID.randomUUID().toString()));
 
         LOG.info("Database table 'EVENT' populated with sample data");
       }
@@ -109,6 +113,13 @@ public class PlatformListener implements IPlatformListener {
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_1);
         SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_2);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_3);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_4);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_5);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_6);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_7);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_8);
+
         LOG.info("Database table 'PARTICIPANT' populated with sample data");
       }
     }

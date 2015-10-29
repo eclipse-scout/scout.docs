@@ -76,6 +76,7 @@ public class PlatformListener implements IPlatformListener {
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_1, new NVPair("organization_id", UUID.randomUUID().toString()));
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_2, new NVPair("organization_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA_3, new NVPair("organization_id", UUID.randomUUID().toString()));
 
         LOG.info("Database table 'ORGANIZATION' populated with sample data");
       }
@@ -90,6 +91,13 @@ public class PlatformListener implements IPlatformListener {
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_1, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1865", "dd.MM.yyyy")));
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_2, new NVPair("person_id", UUID.randomUUID().toString()), new NVPair("dob", DateUtility.parse("26.11.1861", "dd.MM.yyyy")));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_3, new NVPair("person_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_4, new NVPair("person_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_5, new NVPair("person_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_6, new NVPair("person_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_7, new NVPair("person_id", UUID.randomUUID().toString()));
+        SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA_8, new NVPair("person_id", UUID.randomUUID().toString()));
+
         LOG.info("Database table 'PERSON' populated with sample data");
       }
     }

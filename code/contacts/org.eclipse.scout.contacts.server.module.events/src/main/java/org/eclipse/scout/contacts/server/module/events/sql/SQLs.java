@@ -29,7 +29,7 @@ public interface SQLs {
       + "             url VARCHAR(64), "
       + "             comment VARCHAR(1024))";
 
-  String ORGANIZATION_INSERT_SAMPLE_DATA_1 = ""
+  String EVENT_INSERT_SAMPLE_DATA_1 = ""
       + "INSERT       "
       + "INTO         EVENT "
       + "            (event_id, "
@@ -47,7 +47,7 @@ public interface SQLs {
       + "             'US', "
       + "             'https://www.eclipsecon.org/na2015/')";
 
-  String ORGANIZATION_INSERT_SAMPLE_DATA_2 = ""
+  String EVENT_INSERT_SAMPLE_DATA_2 = ""
       + "INSERT       "
       + "INTO         EVENT "
       + "            (event_id, "
@@ -65,7 +65,7 @@ public interface SQLs {
       + "             'DE', "
       + "             'http://www.javaland.eu/javaland-2015/')";
 
-  String ORGANIZATION_INSERT_SAMPLE_DATA_3 = ""
+  String EVENT_INSERT_SAMPLE_DATA_3 = ""
       + "INSERT       "
       + "INTO         EVENT "
       + "            (event_id, "
@@ -76,12 +76,24 @@ public interface SQLs {
       + "             country, "
       + "             url) "
       + "VALUES      (:eventId, "
-      + "             'Eclipse DemoCamp Munich 2015', "
+      + "             'EclipseCon Europe 2015', "
       + "             :starts, "
       + "             :ends, "
-      + "             'Munich', "
+      + "             'Ludwigsburg', "
       + "             'DE', "
-      + "             'https://wiki.eclipse.org/Eclipse_DemoCamps_Mars_2015/Munich')";
+      + "             'https://www.eclipsecon.org/europe2015/')";
+
+  String EVENT_INSERT_SAMPLE_DATA_4 = ""
+      + "INSERT       "
+      + "INTO         EVENT "
+      + "            (event_id, "
+      + "             title, "
+      + "             city, "
+      + "             country) "
+      + "VALUES      (:eventId, "
+      + "             'Bilbo''s Party', "
+      + "             'Shire', "
+      + "             'NZ')";
 
   String PARTICIPANT_CREATE_TABLE = ""
       + "CREATE       "
@@ -97,7 +109,7 @@ public interface SQLs {
       + "             person_id) "
       + "VALUES      ((SELECT   event_id "
       + "              FROM     EVENT "
-      + "              WHERE    title = 'Eclipse DemoCamp Munich 2015'), "
+      + "              WHERE    title = 'EclipseCon Europe 2015'), "
       + "             (SELECT   person_id "
       + "              FROM     PERSON "
       + "              WHERE    first_name = 'Rabbit'))";
@@ -109,10 +121,82 @@ public interface SQLs {
       + "             person_id) "
       + "VALUES      ((SELECT   event_id "
       + "              FROM     EVENT "
-      + "              WHERE    title = 'Eclipse DemoCamp Munich 2015'), "
+      + "              WHERE    title = 'EclipseCon Europe 2015'), "
       + "             (SELECT   person_id "
       + "              FROM     PERSON "
       + "              WHERE    first_name = 'Alice'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_3 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'JavaLand 2015'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Alice'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_4 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'Bilbo''s Party'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Alice'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_5 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'Bilbo''s Party'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Bilbo'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_6 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'Bilbo''s Party'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Gandalf'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_7 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'EclipseCon Europe 2015'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Gandalf'))";
+
+  String PARTICIPANT_INSERT_SAMPLE_DATA_8 = ""
+      + "INSERT       "
+      + "INTO         PARTICIPANT "
+      + "            (event_id, "
+      + "             person_id) "
+      + "VALUES      ((SELECT   event_id "
+      + "              FROM     EVENT "
+      + "              WHERE    title = 'Bilbo''s Party'), "
+      + "             (SELECT   person_id "
+      + "              FROM     PERSON "
+      + "              WHERE    first_name = 'Thorin'))";
 
   String PERSON_EVENT_SELECT = ""
       + "SELECT       e.event_id, "
