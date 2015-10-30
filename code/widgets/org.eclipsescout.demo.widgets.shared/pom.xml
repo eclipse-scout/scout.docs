@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.eclipsescout.demo.widgets</groupId>
     <artifactId>org.eclipsescout.demo.widgets.parent</artifactId>
-    <version>5.2.0-SNAPSHOT</version>
+    <version>5.2.0.B001</version>
     <relativePath>../org.eclipsescout.demo.widgets.parent/</relativePath>
   </parent>
 
