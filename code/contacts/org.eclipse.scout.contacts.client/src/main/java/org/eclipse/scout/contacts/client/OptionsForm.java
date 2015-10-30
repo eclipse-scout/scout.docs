@@ -40,8 +40,8 @@ public class OptionsForm extends AbstractForm {
   public class MainBox extends AbstractGroupBox {
 
     @Override
-    protected int getConfiguredWidthInPixel() {
-      return 500;
+    protected int getConfiguredGridColumnCount() {
+      return 1;
     }
 
     @Order(10.0)
