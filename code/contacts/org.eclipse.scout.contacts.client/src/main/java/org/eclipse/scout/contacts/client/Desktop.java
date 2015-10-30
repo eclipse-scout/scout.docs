@@ -19,21 +19,19 @@ import org.eclipse.scout.contacts.client.common.SearchOutline;
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm;
 import org.eclipse.scout.contacts.client.person.PersonForm;
-import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
-import org.eclipse.scout.rt.client.ui.desktop.bookmark.menu.AbstractBookmarkMenu;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
-import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.ApplicationNameProperty;
 import org.eclipse.scout.rt.shared.AbstractIcons;
+import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 public class Desktop extends AbstractDesktop {
@@ -57,107 +55,6 @@ public class Desktop extends AbstractDesktop {
   @Override
   protected void setDesktopStyle(DesktopStyle desktopStyle) {
     super.setDesktopStyle(desktopStyle);
-  }
-
-  @Order(1_000)
-  public class FileMenu extends AbstractMenu {
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("File");
-    }
-
-    @Order(1000.0)
-    public class NewMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("New");
-      }
-
-      @Order(1000.0)
-      public class PersonMenu extends AbstractMenu {
-
-        @Override
-        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet();
-        }
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("Person");
-        }
-
-        @Override
-        protected void execAction() {
-          new PersonForm().startNew();
-        }
-      }
-
-      @Order(2000.0)
-      public class OrganizationMenu extends AbstractMenu {
-
-        @Override
-        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet();
-        }
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("Organization");
-        }
-
-        @Override
-        protected void execAction() {
-          new OrganizationForm().startNew();
-        }
-      }
-    }
-
-    @Order(2000.0)
-    public class ExitMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Exit");
-      }
-
-      @Override
-      protected void execAction() {
-        ClientSessionProvider.currentSession(ClientSession.class).stop();
-      }
-    }
-  }
-
-  @Order(2_000)
-  public class BookmarkMenu extends AbstractBookmarkMenu {
-    public BookmarkMenu() {
-      super(Desktop.this);
-    }
-  }
-
-  @Order(3_000)
-  public class HelpMenu extends AbstractMenu {
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Help");
-    }
-
-    @Order(1000)
-    public class AboutMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("About");
-      }
-
-      @Override
-      protected void execAction() {
-        ScoutInfoForm form = new ScoutInfoForm();
-        form.startModify();
-      }
-    }
   }
 
   public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
@@ -227,8 +124,55 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(130.0)
-  public class PhoneToolButton extends AbstractFormToolButton<OptionsForm> {
+  @Order(1_000)
+  public class QuickAccessMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("QuickAccess");
+    }
+
+    @Order(10.0)
+    public class PersonNewMenu extends AbstractMenu {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet();
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("CreateNewPersonMenu");
+      }
+
+      @Override
+      protected void execAction() {
+        new PersonForm().startNew();
+      }
+    }
+
+    @Order(20.0)
+    public class OrganizationNewMenu extends AbstractMenu {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet();
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("CreateNewOrganizationMenu");
+      }
+
+      @Override
+      protected void execAction() {
+        new OrganizationForm().startNew();
+      }
+    }
+  }
+
+  @Order(2_000.0)
+  public class OptionsToolButton extends AbstractFormToolButton<OptionsForm> {
 
     @Override
     protected String getConfiguredIconId() {
@@ -248,6 +192,35 @@ public class Desktop extends AbstractDesktop {
     @Override
     protected Class<OptionsForm> getConfiguredForm() {
       return OptionsForm.class;
+    }
+  }
+
+  @Order(3_000.0)
+  public class UserMenuToolButton extends AbstractFormToolButton<UserForm> {
+
+    @Override
+    protected String getConfiguredIconId() {
+      return AbstractIcons.Person;
+    }
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F12;
+    }
+
+    @Override
+    protected String getConfiguredText() {
+      return "";
+    }
+
+    @Override
+    protected void execInitAction() {
+      setText(ISession.CURRENT.get().getUserId());
+    }
+
+    @Override
+    protected Class<UserForm> getConfiguredForm() {
+      return UserForm.class;
     }
   }
 }

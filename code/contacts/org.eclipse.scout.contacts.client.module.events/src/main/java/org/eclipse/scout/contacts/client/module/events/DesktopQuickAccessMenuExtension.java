@@ -15,21 +15,20 @@ import java.util.Set;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.contacts.client.Desktop;
-import org.eclipse.scout.contacts.client.Desktop.FileMenu.NewMenu;
 import org.eclipse.scout.contacts.client.module.events.event.EventForm;
 import org.eclipse.scout.rt.client.extension.ui.action.menu.AbstractMenuExtension;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-public class DesktopNewMenuExtension extends AbstractMenuExtension<Desktop.FileMenu.NewMenu> {
+public class DesktopQuickAccessMenuExtension extends AbstractMenuExtension<Desktop.QuickAccessMenu> {
 
-  public DesktopNewMenuExtension(NewMenu owner) {
+  public DesktopQuickAccessMenuExtension(Desktop.QuickAccessMenu owner) {
     super(owner);
   }
 
-  @Order(3000.0)
-  public class EventMenu extends AbstractMenu {
+  @Order(1_000.0)
+  public class EventNewMenu extends AbstractMenu {
 
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -38,7 +37,7 @@ public class DesktopNewMenuExtension extends AbstractMenuExtension<Desktop.FileM
 
     @Override
     protected String getConfiguredText() {
-      return TEXTS.get("Event");
+      return TEXTS.get("CreateNewEvent");
     }
 
     @Override

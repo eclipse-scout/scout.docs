@@ -33,7 +33,7 @@ public class PlatformListener implements IPlatformListener {
     IExtensionRegistry extensionRegistry = BEANS.get(IExtensionRegistry.class);
 
     // Register UI extensions
-    extensionRegistry.register(DesktopNewMenuExtension.class);
+    extensionRegistry.register(DesktopQuickAccessMenuExtension.class);
     extensionRegistry.register(PersonFormTabExtension.class);
     extensionRegistry.register(PersonTablePageExtension.class);
 

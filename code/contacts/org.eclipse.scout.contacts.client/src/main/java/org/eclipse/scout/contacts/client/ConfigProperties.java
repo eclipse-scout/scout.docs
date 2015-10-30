@@ -10,19 +10,18 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client;
 
-import org.eclipse.scout.rt.shared.AbstractIcons;
+import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
-public class Icons extends AbstractIcons {
+public final class ConfigProperties {
 
-  private static final long serialVersionUID = 1L;
+  private ConfigProperties() {
+  }
 
-  public static final String EclipseScout = "eclipse_scout";
+  public static class UserDomainProperty extends AbstractStringConfigProperty {
 
-  public static final String Organization = "house";
-
-  public static final String Person = AbstractIcons.Person;
-
-  public static final String Contacts = AbstractIcons.Category;
-
-  public static final String AnonymousUser = "anonymous_user";
+    @Override
+    public String getKey() {
+      return "contacts.user.domain";
+    }
+  }
 }

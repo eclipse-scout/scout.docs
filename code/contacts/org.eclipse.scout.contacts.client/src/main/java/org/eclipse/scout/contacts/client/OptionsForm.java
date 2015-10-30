@@ -59,6 +59,11 @@ public class OptionsForm extends AbstractForm {
         protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
           return UiThemeCodeType.class;
         }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
+        }
       }
     }
 
