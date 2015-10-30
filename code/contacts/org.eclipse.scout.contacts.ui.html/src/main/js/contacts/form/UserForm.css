@@ -11,7 +11,7 @@
 .contacts-user-form img {
   float: left;
   border-radius: 10px;
-  border: 1px solid #000000;
+  border: 1px solid transparent;
   padding: 0px;
   height: 130px;
   margin-right: 10px;
