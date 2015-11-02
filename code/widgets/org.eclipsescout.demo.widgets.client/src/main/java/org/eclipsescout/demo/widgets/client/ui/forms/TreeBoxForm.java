@@ -526,6 +526,30 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
           setValue(getTreeBoxField().isEnabled());
         }
       }
+
+      @Order(80.0)
+      public class CheckableField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checkable";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeBoxField().getTree().setCheckable(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeBoxField().getTree().isCheckable());
+        }
+      }
     }
 
     @Order(30.0)
