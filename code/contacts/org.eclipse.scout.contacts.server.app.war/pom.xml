@@ -18,6 +18,10 @@
   <artifactId>org.eclipse.scout.contacts.server.app.war</artifactId>
   <packaging>war</packaging>
 
+  <build>
+      <finalName>contacts-server</finalName>
+  </build>
+
   <dependencies>
     <!-- Contacts Application -->
     <dependency>

@@ -5,14 +5,14 @@
     <title>Contacts Application</title>
     <meta name="google" content="notranslate" />
     <scout:include template="favicon.html" />
-    <link rel="stylesheet" type="text/css" href="res/scout-login-5.1.0-fingerprint.min.css">
+    <scout:stylesheet src="res/scout-login-module.css" />
     <style type="text/css">
        .box-with-logo {
          background-image: url('res/login-logo.png');
        }
     </style>
-    <script src="res/jquery-all-2.1.0-fingerprint.min.js"></script>
-    <script src="res/scout-login-5.1.0-fingerprint.min.js"></script>
+    <scout:script src="res/jquery-all-macro.js" />
+    <scout:script src="res/scout-login-module.js" />
     <script>
       $(document).ready(function() {
         scout.login.init({texts: <scout:message key="ui.Login ui.LoginFailed ui.User ui.Password" style="javascript" /> });
