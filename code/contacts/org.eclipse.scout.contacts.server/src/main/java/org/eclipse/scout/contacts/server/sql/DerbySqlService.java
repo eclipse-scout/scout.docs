@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.server.sql;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.server.services.common.jdbc.derby.AbstractDerbySqlService;
 
-@Order(-1)
+@Order(1950)
 public class DerbySqlService extends AbstractDerbySqlService {
 
   @Override

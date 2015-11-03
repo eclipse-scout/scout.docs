@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.client.Client;
 import org.eclipse.scout.rt.client.services.common.icon.AbstractIconProviderService;
 
 @Client
-@Order(-2000)
+@Order(2000)
 public class BuddyIconProviderService extends AbstractIconProviderService {
 
   @Override

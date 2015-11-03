@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.shared.module.events;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
 
-@Order(-2000)
+@Order(1000)
 public class TextProviderService extends AbstractDynamicNlsTextProviderService {
   @Override
   protected String getDynamicNlsBaseName() {

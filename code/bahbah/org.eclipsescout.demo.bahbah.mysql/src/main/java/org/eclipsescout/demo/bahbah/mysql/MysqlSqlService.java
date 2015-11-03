@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.mysql.AbstractMySqlSqlService;
 
 @Server
-@Order(-2100)
+@Order(1900)
 public class MysqlSqlService extends AbstractMySqlSqlService {
 
   @Override

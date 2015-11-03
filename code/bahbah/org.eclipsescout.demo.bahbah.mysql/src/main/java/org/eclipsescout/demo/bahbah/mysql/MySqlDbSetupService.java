@@ -24,7 +24,7 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
  * class that installs the bahbah DB schema
  */
 @Server
-@Order(-2100)
+@Order(2000)
 public class MySqlDbSetupService implements IDbSetupService {
   @Override
   public void installDb() {
