@@ -70,6 +70,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     m_pictureUrl = pictureUrl;
 
     if (m_pictureUrl == null) {
+      getPictureField().clearErrorStatus();
       getPictureField().setImage(null);
       getForm().touch();
     }
