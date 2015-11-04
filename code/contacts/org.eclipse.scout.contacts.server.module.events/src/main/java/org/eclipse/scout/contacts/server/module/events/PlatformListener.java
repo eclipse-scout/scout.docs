@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.module.events;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -89,20 +90,24 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'EVENT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_1, new NVPair("eventId", UUID.randomUUID().toString()),
-            new NVPair("starts", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm")),
-            new NVPair("ends", DateUtility.parse("12.03.2015 16:45", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_2, new NVPair("eventId", UUID.randomUUID().toString()),
-            new NVPair("starts", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm")),
-            new NVPair("ends", DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_3, new NVPair("eventId", UUID.randomUUID().toString()),
-            new NVPair("starts", DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm")),
-            new NVPair("ends", DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm")));
-        SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA_4, new NVPair("eventId", UUID.randomUUID().toString()));
+        createEventEntry("EclipseCon 2015", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("12.03.2015 16:45", "dd.MM.yyyy HH:mm"), "San Francisco", "US", "https://www.eclipsecon.org/na2015/");
+        createEventEntry("JavaLand 2015", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm"), "Bruehl", "DE", "http://www.javaland.eu/javaland-2015/");
+        createEventEntry("EclipseCon Europe 2015", DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm"), "Ludwigsburg", "DE", "https://www.eclipsecon.org/europe2015/");
+        createEventEntry("Bilbo's Party", null, null, "Shire", "NZ", null);
 
         LOG.info("Database table 'EVENT' populated with sample data");
       }
     }
+  }
+
+  private void createEventEntry(String title, Date starts, Date ends, String city, String country, String url) {
+    SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA, new NVPair("eventId", UUID.randomUUID().toString()),
+        new NVPair("title", title),
+        new NVPair("starts", starts),
+        new NVPair("ends", ends),
+        new NVPair("city", city),
+        new NVPair("country", country),
+        new NVPair("url", url));
   }
 
   private void createParticipantTable(Set<String> tables) {
@@ -111,17 +116,23 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'PARTICIPANT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_1);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_2);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_3);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_4);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_5);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_6);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_7);
-        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA_8);
+        createParticipantEntry("EclipseCon Europe 2015", "Rabbit");
+        createParticipantEntry("EclipseCon Europe 2015", "Alice");
+        createParticipantEntry("JavaLand 2015", "Alice");
+        createParticipantEntry("Bilbo's Party", "Alice");
+        createParticipantEntry("Bilbo's Party", "Bilbo");
+        createParticipantEntry("Bilbo's Party", "Gandalf");
+        createParticipantEntry("EclipseCon Europe 2015", "Gandalf");
+        createParticipantEntry("Bilbo's Party", "Thorin");
 
         LOG.info("Database table 'PARTICIPANT' populated with sample data");
       }
     }
+  }
+
+  private void createParticipantEntry(String eventTitle, String personFirstName) {
+    SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA,
+        new NVPair("eventTitle", eventTitle),
+        new NVPair("personFirstName", personFirstName));
   }
 }
