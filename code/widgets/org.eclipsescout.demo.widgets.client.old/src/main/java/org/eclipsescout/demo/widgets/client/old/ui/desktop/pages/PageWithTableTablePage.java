@@ -11,10 +11,12 @@
 package org.eclipsescout.demo.widgets.client.old.ui.desktop.pages;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
+import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -28,6 +30,9 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.AggregationFunction;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.BackgroundEffect;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -58,8 +63,25 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
   @Override
   protected void execLoadData(SearchFilter filter) {
-    importTableData(new Object[][]{{"String 1", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2}, {"String 2", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
-        {"String 3", 3, 20, 8031.7, new Date(System.currentTimeMillis() - 216000000), true, 3}});
+    importTableData(new Object[][]{
+        {"String 10", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 11", 1, 23, 8768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 12", 1, 23, 7768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 13", 1, 23, 5768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 22", 2, 27, 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
+        {"String 23", 2, 27, 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1},
+        {"String 24", 2, 27, 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1},
+        {"String 25", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1},
+        {"String 31", 3, 20, 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 32", 3, 20, 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 33", 3, 20, 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 34", 3, 20, 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 35", 3, 20, 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 36", 3, 20, 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 37", 3, 20, 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 38", 3, 20, 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 39", 3, 20, 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+    });
   }
 
   @Order(10.0)
@@ -227,6 +249,98 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         List<IColumn<?>> columns = getTable().getColumns();
         for (IColumn<?> c : columns) {
           c.setMandatory(!c.isMandatory());
+        }
+      }
+
+    }
+
+    @Order(30.0)
+    public class ChangeAggregationFunctionMenu extends AbstractMenu {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.SingleSelection,
+            TableMenuType.MultiSelection,
+            TableMenuType.EmptySpace);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("ChangeAggregationFunction");
+      }
+
+      @Override
+      protected void execAction() {
+        List<IColumn<?>> columns = getTable().getColumns();
+        List<String> aggrFunctions = new ArrayList<String>();
+        aggrFunctions.add(AggregationFunction.SUM);
+        aggrFunctions.add(AggregationFunction.AVG);
+        aggrFunctions.add(AggregationFunction.MIN);
+        aggrFunctions.add(AggregationFunction.MAX);
+        int i = 0;
+        if (!getSmartColumn().isGroupingActive()) {
+          getColumnSet().setGroupingColumn(getSmartColumn(), true);
+          getTable().sort();
+          return;
+        }
+        for (IColumn<?> c : columns) {
+          if (c instanceof INumberColumn) {
+            INumberColumn column = (INumberColumn) c;
+            String oldAggr = column.getAggregationFunction();
+            for (i = 0; i < aggrFunctions.size(); ++i) {
+              if (StringUtility.nvl(oldAggr, "").equals(StringUtility.nvl(aggrFunctions.get(i), ""))) {
+                column.setAggregationFunction(aggrFunctions.get((i + 1) % (aggrFunctions.size())));
+                break;
+              }
+              column.setAggregationFunction(aggrFunctions.get(0));
+            }
+          }
+        }
+        if (i >= aggrFunctions.size() - 1) {
+          getColumnSet().resetSortingAndGrouping();
+        }
+      }
+
+    }
+
+    @Order(40.0)
+    public class ChangeBackgroundEffectMenu extends AbstractMenu {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.SingleSelection,
+            TableMenuType.MultiSelection,
+            TableMenuType.EmptySpace);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("ChangeBackgroundEffect");
+      }
+
+      @Override
+      protected void execAction() {
+        List<IColumn<?>> columns = getTable().getColumns();
+        List<String> effects = new ArrayList<String>();
+        effects.add(null);
+        effects.add(BackgroundEffect.COLOR_GRADIENT_1);
+        effects.add(BackgroundEffect.COLOR_GRADIENT_2);
+        effects.add(BackgroundEffect.BAR_CHART);
+
+        for (IColumn<?> c : columns) {
+          if (c instanceof INumberColumn) {
+            INumberColumn column = (INumberColumn) c;
+            String oldEffect = column.getBackgroundEffect();
+            for (int i = 0; i < effects.size(); ++i) {
+              if (StringUtility.nvl(oldEffect, "").equals(StringUtility.nvl(effects.get(i), ""))) {
+                column.setBackgroundEffect(effects.get((i + 1) % (effects.size())));
+                break;
+              }
+            }
+
+          }
         }
       }
 
