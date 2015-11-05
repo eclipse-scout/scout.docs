@@ -17,11 +17,10 @@ import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop.DesktopStyle;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.context.RunContexts;
+import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
@@ -48,12 +47,12 @@ public class ClientSession extends AbstractClientSession {
     Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
     createTunnelToServerBeans = false;
     if (!createTunnelToServerBeans) {
-      logger.info("starting client without a server!");
+      logger.info("starting client without a server");
     }
 
     execInitLocale();
     CODES.getAllCodeTypes("org.eclipsescout.demo.widgets.shared");
-    setDesktop(createDesktop());
+    setDesktop(new Desktop(resolveDesktopStyle()));
 
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
@@ -62,15 +61,17 @@ public class ClientSession extends AbstractClientSession {
   }
 
   /**
-   * Start web-application with URL http://[host:port]/?desktopStyle=BENCH to activate bench-only mode.
+   * Returns the 'desktopStyle' provided as part of the URL, or the default style otherwise.<br/>
+   * E.g. http://[host:port]/?desktopStyle=BENCH to start in bench mode.
    */
-  protected IDesktop createDesktop() {
-    DesktopStyle desktopStyle = DesktopStyle.DEFAULT;
-    Object desktopStyleProperty = RunContexts.copyCurrent().getProperty("desktopStyle");
-    if (desktopStyleProperty instanceof String) {
-      desktopStyle = DesktopStyle.valueOf((String) desktopStyleProperty);
+  protected DesktopStyle resolveDesktopStyle() {
+    String desktopStyle = PropertyMap.CURRENT.get().get("desktopStyle");
+    if (desktopStyle != null) {
+      return DesktopStyle.valueOf(desktopStyle);
     }
-    return new Desktop(desktopStyle);
+    else {
+      return DesktopStyle.DEFAULT;
+    }
   }
 
   /**
@@ -80,12 +81,5 @@ public class ClientSession extends AbstractClientSession {
    */
   protected void execInitLocale() {
     setLocale(Locale.ENGLISH);
-  }
-
-  @Override
-  protected void execStoreSession() {
-//    if (!isFootless()) {
-//      getServiceTunnel().setClientNotificationPollInterval(-1L); // stop ClientNotificationPollingJob
-//    }
   }
 }
