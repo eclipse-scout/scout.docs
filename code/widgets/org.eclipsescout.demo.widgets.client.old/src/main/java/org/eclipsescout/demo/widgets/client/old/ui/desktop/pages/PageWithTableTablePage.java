@@ -13,6 +13,7 @@ package org.eclipsescout.demo.widgets.client.old.ui.desktop.pages;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
@@ -42,6 +43,8 @@ import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOn
 
 public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
 
+  private Random m_random = new Random();
+
   public PageWithTableTablePage() {
     super();
   }
@@ -64,23 +67,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   @Override
   protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
-        {"String 10", 1, 23, 9768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 11", 1, 23, 8768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 12", 1, 23, 7768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 13", 1, 23, 5768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 22", 2, 27, 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
-        {"String 23", 2, 27, 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1},
-        {"String 24", 2, 27, 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1},
-        {"String 25", 2, 27, 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1},
-        {"String 31", 3, 20, 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 32", 3, 20, 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 33", 3, 20, 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 34", 3, 20, 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 35", 3, 20, 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 36", 3, 20, 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 37", 3, 20, 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 38", 3, 20, 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 39", 3, 20, 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 10", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 11", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 12", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 13", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2},
+        {"String 22", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
+        {"String 23", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1},
+        {"String 24", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1},
+        {"String 25", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1},
+        {"String 31", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 32", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 33", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 37", m_random.nextLong(), m_random.nextInt(), 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 38", m_random.nextLong(), m_random.nextInt(), 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 39", m_random.nextLong(), m_random.nextInt(), 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
     });
   }
 
