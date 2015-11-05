@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.platform.Bean;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.ServletFilterHelper;
 
 @Bean
-public class FormAuthenticator {
+public class LoginFormAuthenticator {
 
   private ServletFilterHelper m_servletFilterHelper;
 

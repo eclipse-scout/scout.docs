@@ -31,14 +31,14 @@ public class UiHtmlServletFilter implements Filter {
   private ServletFilterHelper m_servletFilterHelper;
   private TrivialAuthenticator m_trivialAuthenticator;
   private DevelopmentAuthenticator m_devAuthenticator;
-  private FormAuthenticator m_formAuthenticator;
+  private LoginFormAuthenticator m_formAuthenticator;
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     m_trivialAuthenticator = BEANS.get(TrivialAuthenticator.class);
     m_servletFilterHelper = BEANS.get(ServletFilterHelper.class);
     m_devAuthenticator = BEANS.get(DevelopmentAuthenticator.class);
-    m_formAuthenticator = BEANS.get(FormAuthenticator.class);
+    m_formAuthenticator = BEANS.get(LoginFormAuthenticator.class);
 
     m_trivialAuthenticator.init(filterConfig);
     m_devAuthenticator.init(filterConfig);
