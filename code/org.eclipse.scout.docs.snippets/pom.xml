@@ -37,13 +37,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.eclipse.scout.rt</groupId>
-        <artifactId>org.eclipse.scout.rt.ui.html.parent</artifactId>
-        <version>${scout.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
