@@ -16,6 +16,8 @@ ifndef::mdledir[:mdledir: .]
 //!!! not finished yet
 Here are the release notes for the Scout Release 6.0
 
-== First Entry
+*TODO: a lot is still missing!*
 
-TODO
+== API Changes
+* renamed `ITable.resetDisplayableColumns()` to `resetColumns()`
+* removed `ITable.resetColumns(boolean, boolean, boolean, boolean)` from interface (is now protected in `AbstractTable`)
