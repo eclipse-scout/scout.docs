@@ -72,7 +72,18 @@ org.eclipsescout.helloworld.client
 Manifest.MF is no longer used. Migrate dependencies to `pom.xml`!
 
 
+== Logging
 
+Scout switched from a custom, typically java.util.logging-based logger implementation to SLF4j. The log format does not support indexed placeholders anymore.
 
+The regular expression pattern `\{\d+\}` finds potential occurrences. Replace those within log formats with `{}`. See http://www.slf4j.org/api/org/slf4j/helpers/MessageFormatter.html[SLF4j MessageFormatter].
 
+[source,java,indent=0]
+.Placeholders in log format
+----
+LOG.info("message {}", obj); // this worked before and still works. No action required
 
+LOG.info("message {0}", obj); // the index is not supported anymore. You have to remove it (see previous statement)
+----
+
+NOTE: Indexed placeholders are actually deprecated since Scout's open-source debut. The values were filled in from left to right, independent of the possibly declared index.
