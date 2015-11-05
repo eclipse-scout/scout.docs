@@ -192,12 +192,15 @@ The next sections describe the idea behind these annotations and gives some exam
 
 This annotation works exactly the same as in the Scout user interface where it brings classes into an order. It allows to assign a `double` value to a class. All beans of a certain type are sorted according to this value in ascending order. This means a low order value is equivalent with a low position in a list (come first).
 
-Please note that the `@Order` annotation is not inherited so that each bean must declare its own value where it fits in. If a bean does not declare an order value, the default of `5000` is used.
-Scout itself uses orders from 4001 to 4999.
-
-image::{imgsdir}/defaultOrders.png[]
+Please note that the `@Order` annotation is not inherited so that each bean must declare its own value where it fits in.
 
 TIP: The `@Order` annotation value may be inherited in case it replaces. See the next section for details.
+
+If a bean does not declare an order value, the default of `5000` is used. Scout itself uses orders from `4001` to `5999`.
+So for user applications the value `4000` and below can be used to declare more important beans.
+For testing bean mocks the value `-10'000` can be used which then usually comes before each normal Scout or application bean.
+
+image::{imgsdir}/defaultOrders.png[]
 
 ==== @Replace
 
