@@ -15,8 +15,6 @@ import java.security.AccessController;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
@@ -24,10 +22,12 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerSession extends AbstractServerSession {
   private static final long serialVersionUID = -6930164140912861947L;
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(ServerSession.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ServerSession.class);
 
   public ServerSession() {
     super(true);

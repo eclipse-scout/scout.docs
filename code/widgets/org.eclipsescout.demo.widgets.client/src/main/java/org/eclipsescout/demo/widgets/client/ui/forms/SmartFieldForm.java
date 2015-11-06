@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -69,10 +67,12 @@ import org.eclipsescout.demo.widgets.shared.services.code.ColorsCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.EventTypeCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SmartFieldForm extends AbstractForm implements IPageForm {
 
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(SmartFieldForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
 
   public SmartFieldForm() {
     super();

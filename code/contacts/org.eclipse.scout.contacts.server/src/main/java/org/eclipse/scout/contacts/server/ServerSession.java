@@ -10,15 +10,15 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server;
 
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerSession extends AbstractServerSession {
 
   private static final long serialVersionUID = 1L;
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(ServerSession.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ServerSession.class);
 
   public ServerSession() {
     super(true);

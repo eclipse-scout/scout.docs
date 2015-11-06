@@ -18,8 +18,6 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringArrayHolder;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
@@ -30,10 +28,12 @@ import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.platform.util.DateUtility;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlatformListener implements IPlatformListener {
 
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(PlatformListener.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
 
   private static final String ORGANISATION1 = "Alice's Adventures in Wonderland";
   private static final String ORGANISATION2 = "The Hobbit";

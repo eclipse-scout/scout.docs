@@ -17,8 +17,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.CalendarMenuType;
@@ -42,10 +40,12 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm.MainB
 import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm.MainBox.GroupBox;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.CalendarFieldForm.MainBox.GroupBox.CalendarField;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CalendarFieldForm extends AbstractForm implements IPageForm {
 
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(CalendarFieldForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CalendarFieldForm.class);
 
   public CalendarFieldForm() {
     super();

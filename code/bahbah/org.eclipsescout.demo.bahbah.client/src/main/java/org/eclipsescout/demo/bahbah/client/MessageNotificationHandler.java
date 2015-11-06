@@ -13,17 +13,17 @@ package org.eclipsescout.demo.bahbah.client;
 import java.util.Date;
 
 import org.eclipse.scout.commons.IRunnable;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
 import org.eclipsescout.demo.bahbah.shared.notification.MessageNotification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageNotificationHandler implements INotificationHandler<MessageNotification> {
-  private static IScoutLogger LOG = ScoutLogManager.getLogger(MessageNotificationHandler.class);
+  private static Logger LOG = LoggerFactory.getLogger(MessageNotificationHandler.class);
 
   @Override
   public void handleNotification(final MessageNotification notification) {

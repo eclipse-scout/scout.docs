@@ -18,8 +18,6 @@ import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.html.HTML;
 import org.eclipse.scout.commons.html.IHtmlContent;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -54,9 +52,11 @@ import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.Exam
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.MessageBoxOkButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.ResultField;
 import org.eclipsescout.demo.widgets.client.ui.forms.MessageBoxForm.MainBox.SampleContentButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageBoxForm extends AbstractForm implements IPageForm {
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(MessageBoxForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(MessageBoxForm.class);
 
   public MessageBoxForm() {
     super();

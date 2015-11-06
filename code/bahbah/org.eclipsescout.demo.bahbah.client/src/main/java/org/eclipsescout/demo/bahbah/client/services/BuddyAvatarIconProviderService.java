@@ -11,18 +11,18 @@
 package org.eclipsescout.demo.bahbah.client.services;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.services.common.icon.IIconProviderService;
 import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
 import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Order(2000)
 public class BuddyAvatarIconProviderService implements IIconProviderService {
-  private static final IScoutLogger logger = ScoutLogManager.getLogger(BuddyAvatarIconProviderService.class);
+  private static final Logger logger = LoggerFactory.getLogger(BuddyAvatarIconProviderService.class);
 
   /**
    * the default buddy icon used when the user has not uploaded an icon yet. icon must be located in client plugin under

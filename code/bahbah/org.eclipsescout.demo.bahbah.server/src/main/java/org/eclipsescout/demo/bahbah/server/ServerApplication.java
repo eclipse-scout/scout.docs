@@ -13,8 +13,6 @@ package org.eclipsescout.demo.bahbah.server;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.commons.IRunnable;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
@@ -30,10 +28,12 @@ import org.eclipse.scout.rt.server.session.ServerSessionProviderWithCache;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
 import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotificationListener;
 import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotificationListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Bean
 public class ServerApplication implements IPlatformListener {
-  private static IScoutLogger LOG = ScoutLogManager.getLogger(ServerApplication.class);
+  private static Logger LOG = LoggerFactory.getLogger(ServerApplication.class);
 
   public static Subject s_subject;
 

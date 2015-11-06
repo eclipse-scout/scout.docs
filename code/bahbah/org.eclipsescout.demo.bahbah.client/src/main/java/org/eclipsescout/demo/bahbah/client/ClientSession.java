@@ -11,8 +11,6 @@
 package org.eclipsescout.demo.bahbah.client;
 
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -20,9 +18,11 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientSession extends AbstractClientSession {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(ClientSession.class);
+  private static Logger logger = LoggerFactory.getLogger(ClientSession.class);
 
   public ClientSession() {
     super(true);

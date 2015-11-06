@@ -22,8 +22,6 @@ import javax.imageio.ImageIO;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.ByteArrayHolder;
 import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -31,11 +29,13 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Server
 public class IconProcessService implements IIconProcessService {
   public final static int MAX_SIZE = 16;
-  private final static IScoutLogger LOG = ScoutLogManager.getLogger(IconProcessService.class);
+  private final static Logger LOG = LoggerFactory.getLogger(IconProcessService.class);
 
   private byte[] resize(byte[] content) {
     try {

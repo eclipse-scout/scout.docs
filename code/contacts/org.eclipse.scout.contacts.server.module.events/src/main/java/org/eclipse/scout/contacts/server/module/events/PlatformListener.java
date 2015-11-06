@@ -19,8 +19,6 @@ import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringArrayHolder;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.contacts.server.SuperUserRunContextProvider;
 import org.eclipse.scout.contacts.server.module.events.sql.SQLs;
@@ -36,10 +34,12 @@ import org.eclipse.scout.rt.platform.util.DateUtility;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Order(1000)
 public class PlatformListener implements IPlatformListener {
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(PlatformListener.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
 
   @Override
   public void stateChanged(PlatformEvent event) {

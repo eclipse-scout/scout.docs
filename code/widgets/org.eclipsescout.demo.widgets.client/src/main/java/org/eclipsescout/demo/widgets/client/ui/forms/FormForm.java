@@ -18,8 +18,6 @@ import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
@@ -73,11 +71,13 @@ import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldB
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.CancellationDurationField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
 
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(FormForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FormForm.class);
 
   public FormForm() {
     super();

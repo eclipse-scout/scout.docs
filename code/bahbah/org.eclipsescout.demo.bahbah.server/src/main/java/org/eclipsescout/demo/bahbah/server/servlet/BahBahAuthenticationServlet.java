@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BahBahAuthenticationServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static IScoutLogger logger = ScoutLogManager.getLogger(BahBahAuthenticationServlet.class);
+  private static Logger logger = LoggerFactory.getLogger(BahBahAuthenticationServlet.class);
 
   private static final String AUTH_HEADER = "Authorization";
   private static final String AUTH_HEADER_PREFIX = "Basic ";

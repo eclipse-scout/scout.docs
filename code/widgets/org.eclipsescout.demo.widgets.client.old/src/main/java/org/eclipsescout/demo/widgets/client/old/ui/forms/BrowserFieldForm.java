@@ -11,8 +11,6 @@
 package org.eclipsescout.demo.widgets.client.old.ui.forms;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -33,6 +31,8 @@ import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBo
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
 import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The following code-snippet shows what the content of an IFRAME must do to call the execPostMessage() callback. This
@@ -53,7 +53,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
  * </pre>
  */
 public class BrowserFieldForm extends AbstractForm implements IPageForm {
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(BrowserFieldForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(BrowserFieldForm.class);
 
   public BrowserFieldForm() {
     super();

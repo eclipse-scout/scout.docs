@@ -10,15 +10,15 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.services.notification;
 
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterNotificationListener;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterNotificationMessage;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegisterUserNotificationListener implements IClusterNotificationListener {
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(RegisterUserNotificationListener.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RegisterUserNotificationListener.class);
 
   @Override
   public void onNotification(IClusterNotificationMessage notification) {

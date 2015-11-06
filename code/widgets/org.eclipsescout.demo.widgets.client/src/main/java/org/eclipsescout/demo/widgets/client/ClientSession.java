@@ -12,8 +12,6 @@ package org.eclipsescout.demo.widgets.client;
 
 import java.util.Locale;
 
-import org.eclipse.scout.commons.logger.IScoutLogger;
-import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
@@ -25,9 +23,11 @@ import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBe
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
 import org.eclipsescout.demo.widgets.client.ui.desktop.Desktop;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientSession extends AbstractClientSession {
-  private static IScoutLogger logger = ScoutLogManager.getLogger(ClientSession.class);
+  private static Logger logger = LoggerFactory.getLogger(ClientSession.class);
 
   private String m_product;
 
