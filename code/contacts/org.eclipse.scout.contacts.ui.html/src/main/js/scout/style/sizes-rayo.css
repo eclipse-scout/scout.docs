@@ -2,7 +2,7 @@
 @size-desktop-navigation-breadcrumb: 200px;
 
 @desktop-taskbar-height: 51px;
-@bench-margin-x: 20px;
+@bench-padding-x: 20px;
 
 @text-field-padding-y: 7px;
 @text-field-padding-x: 10px;

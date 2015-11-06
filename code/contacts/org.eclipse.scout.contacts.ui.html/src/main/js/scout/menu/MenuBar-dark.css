@@ -42,8 +42,8 @@
 }
 
 .main-menubar {
-  margin-left: @bench-margin-x;
-  margin-right: @bench-margin-x;
+  margin-left: @bench-padding-x;
+  margin-right: @bench-padding-x;
   height: 55px;
   padding-top: 11px;
 

@@ -75,8 +75,8 @@
 
     & > .table-header,
     & > .table-data {
-      margin-left: @bench-margin-x;
-      margin-right: @bench-margin-x;
+      margin-left: @bench-padding-x;
+      margin-right: @bench-padding-x;
     }
 
     & > .table-data {

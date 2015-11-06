@@ -19,7 +19,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipsescout.demo.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.ThemeRadioButtonGroup;
 import org.eclipsescout.demo.widgets.shared.services.code.UiThemeCodeType;
 
@@ -53,11 +52,6 @@ public class OptionsForm extends AbstractForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("UiTheme");
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
-          return UiThemeCodeType.class;
         }
 
         @Override

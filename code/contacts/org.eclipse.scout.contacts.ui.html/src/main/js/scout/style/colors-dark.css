@@ -126,10 +126,10 @@
 @table-aggregate-cell-selection-color: @palette-blue-4;
 @table-aggregate-row-background-color: @palette-gray-1;
 @table-header-background-color: @palette-gray-9;
-@table-header-cmd-active-background-color: @active-inverted-background-color;
-@table-header-cmd-active-border-color: @active-inverted-background-color;
-@table-header-cmd-active-color: @active-inverted-color;
-@table-header-cmd-border-color: @palette-gray-7;
+@table-header-menu-cmd-active-background-color: @active-inverted-background-color;
+@table-header-menu-cmd-active-border-color: @active-inverted-background-color;
+@table-header-menu-cmd-active-color: @active-inverted-color;
+@table-header-menu-cmd-border-color: @palette-gray-7;
 @table-header-menu-background-color: @control-background-color;
 @table-info-color: @palette-gray-4;
 @table-info-error-color: @error-color;

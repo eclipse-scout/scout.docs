@@ -61,7 +61,7 @@
   font-size: 17px;
   line-height: 29px;
   color: @icon-color;
-  border: 1px solid @table-header-cmd-border-color;
+  border: 1px solid @table-header-menu-cmd-border-color;
   cursor: pointer;
   text-align: center;
 
@@ -79,13 +79,13 @@
   }
 
   &.selected {
-    background-color: @table-header-cmd-active-background-color;
-    border: 1px solid @table-header-cmd-active-border-color;
+    background-color: @table-header-menu-cmd-active-background-color;
+    border: 1px solid @table-header-menu-cmd-active-border-color;
   }
 
   &.selected::before,
   &.selected::after {
-    color: @table-header-cmd-active-color;
+    color: @table-header-menu-cmd-active-color;
   }
 
   &.move-top::before,
@@ -192,8 +192,8 @@
     content: @icon-nbsp;
   }
   &.color-bar {
-    background-image: linear-gradient(to right, @table-header-cmd-active-border-color  0%, @table-header-cmd-active-border-color  65%, @palette-white 65%, @palette-white 100% );
-    border: 1px solid @table-header-cmd-active-border-color ;
+    background-image: linear-gradient(to right, @table-header-menu-cmd-active-border-color  0%, @table-header-menu-cmd-active-border-color  65%, @palette-white 65%, @palette-white 100% );
+    border: 1px solid @table-header-menu-cmd-active-border-color ;
     width: 43px;
     line-height: 29px;
   }
@@ -203,7 +203,7 @@
   }
   &.color-remove {
     background: @palette-white;
-    border: 1px solid @table-header-cmd-active-border-color;
+    border: 1px solid @table-header-menu-cmd-active-border-color;
     width: 43px;
     line-height: 29px;
   }
@@ -240,10 +240,10 @@
   cursor: pointer;
   padding: 0px 20px 0px 8px;
   #scout.overflow-ellipsis-nowrap();
-  border-top: 1px solid @table-header-cmd-border-color;
+  border-top: 1px solid @table-header-menu-cmd-border-color;
 
   &.last {
-    border-bottom: 1px solid @table-header-cmd-border-color;
+    border-bottom: 1px solid @table-header-menu-cmd-border-color;
   }
 
   &:hover {
@@ -257,9 +257,9 @@
   }
 
   &.selected {
-    background-color: @table-header-cmd-active-background-color;
-    border-top-color: @table-header-cmd-active-border-color;
-    color: @table-header-cmd-active-color;
+    background-color: @table-header-menu-cmd-active-background-color;
+    border-top-color: @table-header-menu-cmd-active-border-color;
+    color: @table-header-menu-cmd-active-color;
   }
 
   &.selected + .header-filter {
@@ -267,6 +267,6 @@
   }
 
   &.selected:last-child {
-    border-bottom-color: @table-header-cmd-active-border-color;
+    border-bottom-color: @table-header-menu-cmd-active-border-color;
   }
 }

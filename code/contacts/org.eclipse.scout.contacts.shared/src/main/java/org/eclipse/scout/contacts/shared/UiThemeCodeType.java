@@ -52,23 +52,6 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   }
 
   @Order(20.0)
-  public static class HighContrastCode extends AbstractCode<String> {
-
-    private static final long serialVersionUID = 1L;
-    public static final String ID = "high-contrast";
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("HighContrast");
-    }
-
-    @Override
-    public String getId() {
-      return ID;
-    }
-  }
-
-  @Order(30.0)
   public static class RayoCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +68,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
     }
   }
 
-  @Order(40.0)
+  @Order(30.0)
   public static class DarkCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
