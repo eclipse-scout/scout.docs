@@ -13,13 +13,13 @@ package org.eclipse.scout.contacts.server.security;
 import java.security.AllPermission;
 import java.security.Permissions;
 
-import org.eclipse.scout.rt.server.services.common.security.AbstractAccessControlService;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
+import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 
-public class AccessControlService extends AbstractAccessControlService {
+public class AccessControlService extends UserIdAccessControlService {
 
   @Override
-  protected Permissions execLoadPermissions() {
+  protected Permissions execLoadPermissions(String userId) {
     Permissions permissions = new Permissions();
     permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"));
     permissions.add(new AllPermission());

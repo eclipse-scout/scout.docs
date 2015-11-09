@@ -13,10 +13,10 @@ package org.eclipsescout.demo.bahbah.server.services.custom.security;
 import java.security.Permissions;
 
 import org.eclipse.scout.rt.server.Server;
-import org.eclipse.scout.rt.server.services.common.security.AbstractAccessControlService;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
 import org.eclipse.scout.rt.shared.security.UpdateServiceConfigurationPermission;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
+import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.security.CreateNotificationPermission;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
@@ -31,10 +31,10 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.Admini
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
 
 @Server
-public class AccessControlService extends AbstractAccessControlService {
+public class AccessControlService extends UserIdAccessControlService {
 
   @Override
-  protected Permissions execLoadPermissions() {
+  protected Permissions execLoadPermissions(String userId) {
     Permissions permissions = new Permissions();
 
     ICode<Integer> permission = ServerSession.get().getPermission();

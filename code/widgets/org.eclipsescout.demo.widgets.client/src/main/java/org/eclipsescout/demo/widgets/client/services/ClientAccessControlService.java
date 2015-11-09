@@ -13,17 +13,19 @@ package org.eclipsescout.demo.widgets.client.services;
 import java.security.AllPermission;
 import java.security.Permissions;
 
+import org.eclipse.scout.commons.annotations.Replace;
 import org.eclipse.scout.rt.client.Client;
-import org.eclipse.scout.rt.shared.services.common.security.AbstractSharedAccessControlService;
+import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 
 /**
  * Client implementation of {@link org.eclipse.scout.rt.shared.services.common.security.IAccessControlService}
  */
 @Client
-public class ClientAccessControlService extends AbstractSharedAccessControlService {
+@Replace
+public class ClientAccessControlService extends UserIdAccessControlService {
 
   @Override
-  protected Permissions execLoadPermissions() {
+  protected Permissions execLoadPermissions(String userId) {
     Permissions permissions = new Permissions();
     permissions.add(new AllPermission());
     return permissions;
