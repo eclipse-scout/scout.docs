@@ -87,3 +87,15 @@ LOG.info("message {0}", obj); // the index is not supported anymore. You have to
 ----
 
 NOTE: Indexed placeholders are actually deprecated since Scout's open-source debut. The values were filled in from left to right, independent of the possibly declared index.
+
+== AccessControlService
+
+The IAccessControlService has been improved to allow for other keys than the userId. AbstractAccessControlService is now generic with key as a type parameter.
+
+If you want to use access control based on the userid as before, extend UserIdAccessControlService and change the API of execLoadPermissions to
+[source,java,indent=0]
+----
+protected abstract PermissionCollection execLoadPermissions(String userId)
+----
+
+
