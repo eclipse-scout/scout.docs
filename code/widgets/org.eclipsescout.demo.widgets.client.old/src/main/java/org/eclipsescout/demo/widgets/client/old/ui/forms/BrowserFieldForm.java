@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * }
  * &lt;/script&gt;
  * &lt;button onclick="postMessage()"&gt;Post message&lt;/button&gt;
- * 
+ *
  * The second parameter (targetOrigin) of the postMessage function is important, it points to the domain where the
  * Scout application runs. When the IFRAME content is called from another domain than localhost:8082, the browser
  * will NOT execute the function. You could also use '*' as targetOrigin, when you don't care which domain exactly
@@ -171,7 +171,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execPostMessage(String data, String origin) {
-          LOG.info("Received post-message: data=" + data + " origin=" + origin);
+          LOG.info("Received post-message: data={}, origin={}", data, origin);
         }
       }
 

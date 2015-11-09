@@ -55,7 +55,7 @@ public class ServerSession extends AbstractServerSession {
         setPermission(CODES.getCode(UserRoleCodeType.UserCode.class));
       }
       else {
-        LOG.info("created a new session for " + getUserId());
+        LOG.info("created a new session for {}", getUserId());
         setPermission(BEANS.get(IUserProcessService.class).getUserPermission());
         BEANS.get(IUserProcessService.class).registerUser();
       }

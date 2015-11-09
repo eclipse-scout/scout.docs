@@ -312,7 +312,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
             setLabel(TEXTS.get("SwitchToLocal"));
             setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
           }
-          LOG.debug("Switched lookup-call of DefaultField to " + (m_localLookupCall ? "local" : "remote") + " instance");
+          LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
         }
       }
 
