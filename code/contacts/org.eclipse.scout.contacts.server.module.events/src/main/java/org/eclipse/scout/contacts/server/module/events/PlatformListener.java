@@ -37,7 +37,7 @@ import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Order(1000)
+@Order(20)
 public class PlatformListener implements IPlatformListener {
   private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
 

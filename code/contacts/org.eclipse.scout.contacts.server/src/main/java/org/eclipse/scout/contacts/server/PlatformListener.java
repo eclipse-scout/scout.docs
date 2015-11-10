@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
+import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringArrayHolder;
 import org.eclipse.scout.contacts.server.sql.SQLs;
@@ -31,6 +32,7 @@ import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Order(10)
 public class PlatformListener implements IPlatformListener {
 
   private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
@@ -79,7 +81,8 @@ public class PlatformListener implements IPlatformListener {
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         createOrganizationEntry(ORGANISATION1, "London", "GB", "http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland", null);
-        createOrganizationEntry("BSI Business Systems Integration AG", "Daettwil, Baden", "CH", "https://www.bsi-software.com", "https://www.eclipsecon.org/europe2015/sites/default/files/styles/medium/public/v2%20BSI%20logo.png?itok=Xf3NGTpD");
+        createOrganizationEntry("BSI Business Systems Integration AG", "Daettwil, Baden", "CH", "https://www.bsi-software.com",
+            "https://www.eclipsecon.org/europe2015/sites/default/files/styles/medium/public/v2%20BSI%20logo.png?itok=Xf3NGTpD");
         createOrganizationEntry(ORGANISATION2, null, "NZ", "https://en.wikipedia.org/wiki/The_Hobbit", null);
 
         LOG.info("Database table 'ORGANIZATION' populated with sample data");
@@ -88,7 +91,8 @@ public class PlatformListener implements IPlatformListener {
   }
 
   private void createOrganizationEntry(String name, String city, String country, String url, String logoUrl) {
-    SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA, new NVPair("organization_id", UUID.randomUUID().toString()), new NVPair("name", name), new NVPair("city", city), new NVPair("country", country), new NVPair("url", url), new NVPair("logoUrl", url));
+    SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA, new NVPair("organization_id", UUID.randomUUID().toString()), new NVPair("name", name), new NVPair("city", city), new NVPair("country", country), new NVPair("url", url),
+        new NVPair("logoUrl", url));
   }
 
   private void createPersonTable(Set<String> tables) {
@@ -123,7 +127,6 @@ public class PlatformListener implements IPlatformListener {
         new NVPair("city", city),
         new NVPair("country", country),
         new NVPair("position", position),
-        new NVPair("organizationId", organizationId)
-        );
+        new NVPair("organizationId", organizationId));
   }
 }
