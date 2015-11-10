@@ -28,6 +28,12 @@ import org.eclipse.scout.rt.server.commons.cache.IHttpSessionCacheService;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.AbstractChainableSecurityFilter;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.PrincipalHolder;
 
+/**
+ * @deprecated will be removed in release 6.0; is to be replaced with a project specific ServletFilter with the
+ *             authenticators chained yourself; see depreciation note of {@link AbstractChainableSecurityFilter}
+ */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter {
 
   private final static String AUTH_SERVLET_URL_PARAM = "authUrl";

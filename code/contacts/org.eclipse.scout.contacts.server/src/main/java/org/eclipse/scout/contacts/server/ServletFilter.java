@@ -24,22 +24,27 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.DevelopmentAuthenticator;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.ServiceTunnelAccessTokenAuthenticator;
+import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator;
+import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator.TrivialAuthConfig;
 
 /**
  * This is the main server side servlet filter.
  */
 public class ServletFilter implements Filter {
 
-  private ServiceTunnelAccessTokenAuthenticator m_tunnelAuthenticator;
+  private TrivialAuthenticator m_trivialAuthenticator;
+  private ServiceTunnelAccessTokenAuthenticator m_tunnelTokenAuthenticator;
   private DevelopmentAuthenticator m_devAuthenticator;
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-    m_tunnelAuthenticator = BEANS.get(ServiceTunnelAccessTokenAuthenticator.class);
-    m_tunnelAuthenticator.init(filterConfig);
-
+    m_trivialAuthenticator = BEANS.get(TrivialAuthenticator.class);
+    m_tunnelTokenAuthenticator = BEANS.get(ServiceTunnelAccessTokenAuthenticator.class);
     m_devAuthenticator = BEANS.get(DevelopmentAuthenticator.class);
-    m_devAuthenticator.init(filterConfig);
+
+    m_trivialAuthenticator.init(new TrivialAuthConfig().withExclusionFilter(filterConfig.getInitParameter("filter-exclude")));
+    m_tunnelTokenAuthenticator.init();
+    m_devAuthenticator.init();
   }
 
   @Override
@@ -47,13 +52,15 @@ public class ServletFilter implements Filter {
     final HttpServletRequest req = (HttpServletRequest) request;
     final HttpServletResponse resp = (HttpServletResponse) response;
 
-    // service tunnel token
-    if (m_tunnelAuthenticator.handle(req, resp, chain)) {
+    if (m_trivialAuthenticator.handle(req, resp, chain)) {
       return;
     }
 
-    // GET call
-    if (isGetCall(req) && m_devAuthenticator.handle(req, resp, chain)) {
+    if (m_tunnelTokenAuthenticator.handle(req, resp, chain)) {
+      return;
+    }
+
+    if (m_devAuthenticator.handle(req, resp, chain)) {
       return;
     }
 
@@ -62,11 +69,8 @@ public class ServletFilter implements Filter {
 
   @Override
   public void destroy() {
-    m_tunnelAuthenticator.destroy();
-    m_tunnelAuthenticator = null;
-  }
-
-  protected boolean isGetCall(HttpServletRequest req) {
-    return "GET".equals(req.getMethod());
+    m_trivialAuthenticator.destroy();
+    m_tunnelTokenAuthenticator.destroy();
+    m_devAuthenticator.destroy();
   }
 }
