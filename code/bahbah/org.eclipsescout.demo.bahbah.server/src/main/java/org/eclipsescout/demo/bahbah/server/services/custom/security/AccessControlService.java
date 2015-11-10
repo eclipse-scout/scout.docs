@@ -12,6 +12,7 @@ package org.eclipsescout.demo.bahbah.server.services.custom.security;
 
 import java.security.Permissions;
 
+import org.eclipse.scout.commons.annotations.Replace;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
 import org.eclipse.scout.rt.shared.security.UpdateServiceConfigurationPermission;
@@ -31,6 +32,7 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.Admini
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
 
 @Server
+@Replace
 public class AccessControlService extends UserIdAccessControlService {
 
   @Override
