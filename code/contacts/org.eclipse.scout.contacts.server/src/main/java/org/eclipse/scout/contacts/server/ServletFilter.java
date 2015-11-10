@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.DevelopmentAuthenticator;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.ServiceTunnelAccessTokenAuthenticator;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator.TrivialAuthConfig;
+import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAuthenticator;
+import org.eclipse.scout.rt.server.commons.authentication.ServiceTunnelAccessTokenAuthenticator;
+import org.eclipse.scout.rt.server.commons.authentication.TrivialAuthenticator;
+import org.eclipse.scout.rt.server.commons.authentication.TrivialAuthenticator.TrivialAuthConfig;
 
 /**
  * This is the main server side servlet filter.

@@ -23,11 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier;
+import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAuthenticator;
 import org.eclipse.scout.rt.server.commons.authentication.FormAuthenticator;
+import org.eclipse.scout.rt.server.commons.authentication.TrivialAuthenticator;
 import org.eclipse.scout.rt.server.commons.authentication.FormAuthenticator.FormAuthConfig;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.DevelopmentAuthenticator;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator;
-import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.TrivialAuthenticator.TrivialAuthConfig;
+import org.eclipse.scout.rt.server.commons.authentication.TrivialAuthenticator.TrivialAuthConfig;
 
 public class UiHtmlServletFilter implements Filter {
 
