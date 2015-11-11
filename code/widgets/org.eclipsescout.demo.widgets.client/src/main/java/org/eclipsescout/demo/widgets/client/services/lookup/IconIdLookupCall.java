@@ -10,33 +10,66 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.services.lookup;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.scout.commons.CompareUtility;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipsescout.demo.widgets.shared.Icons;
 
 /**
  * @author mzi
  */
 public class IconIdLookupCall extends LocalLookupCall<String> {
-
   private static final long serialVersionUID = 1L;
 
   @Override
   protected List<LookupRow<String>> execCreateLookupRows() {
-    ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+    List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
 
-    // TODO: there might be a better way via reflection over AbstractIcon
-    rows.add(new LookupRow<String>("null", "null"));
-    rows.add(new LookupRow<String>("empty", "empty"));
-    rows.add(new LookupRow<String>("cog", "cog"));
-    rows.add(new LookupRow<String>("status_info", "status_info"));
-    rows.add(new LookupRow<String>("status_warning", "status_warning"));
-    rows.add(new LookupRow<String>("status_error", "status_error"));
-    rows.add(new LookupRow<String>("wizard_back", "wizard_back"));
-    rows.add(new LookupRow<String>("wizard_next", "wizard_next"));
-    rows.add(new LookupRow<String>("bookmark", "bookmark"));
+    // Read constant values from Icons class
+    for (Field field : Icons.class.getFields()) {
+      if (Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
+        try {
+          final String iconId = (String) field.get(null);
+          rows.add((LookupRow<String>) new LookupRow<String>(iconId, field.getName()).withIconId(iconId));
+        }
+        catch (RuntimeException | IllegalAccessException e) {
+          // nop
+        }
+      }
+    }
+
+    Collections.sort(rows, new Comparator<LookupRow>() {
+      @Override
+      public int compare(LookupRow o1, LookupRow o2) {
+        if (o1 == null && o2 == null) {
+          return 0;
+        }
+        if (o1 == null) {
+          return -1;
+        }
+        if (o2 == null) {
+          return 1;
+        }
+        // sort font icons first, then other icons
+        String iconId1 = (String) o1.getKey();
+        String iconId2 = (String) o2.getKey();
+        if (iconId1 != null && iconId1.startsWith("font:") && (iconId2 == null || !iconId2.startsWith("font:"))) {
+          return -1;
+        }
+        if (iconId2 != null && iconId2.startsWith("font:") && (iconId1 == null || !iconId1.startsWith("font:"))) {
+          return 1;
+        }
+        // then, sort by name
+        return CompareUtility.compareTo(o1.getText(), o2.getText());
+      }
+    });
 
     return rows;
   }
