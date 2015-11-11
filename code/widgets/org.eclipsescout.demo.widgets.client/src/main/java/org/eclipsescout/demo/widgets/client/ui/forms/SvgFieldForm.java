@@ -12,8 +12,8 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
-import org.eclipse.scout.commons.Encoding;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -316,7 +316,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       if (StringUtility.isNullOrEmpty(svgData)) {
         return null;
       }
-      return SVGUtility.readSVGDocument(new ByteArrayInputStream(svgData.getBytes(Encoding.UTF_8)));
+      return SVGUtility.readSVGDocument(new ByteArrayInputStream(svgData.getBytes(StandardCharsets.UTF_8.name())));
     }
   }
 
