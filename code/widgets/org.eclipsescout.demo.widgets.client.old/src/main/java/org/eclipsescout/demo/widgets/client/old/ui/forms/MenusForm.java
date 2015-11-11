@@ -273,6 +273,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setValue("this string field has a menu");
         }
 
@@ -296,6 +297,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setValue("this string field has a menu and a tooltip");
         }
 
@@ -324,6 +326,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setValue("is the menu correctly displayed?");
         }
 
@@ -347,6 +350,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setValue("is the tooltip correctly displayed?");
         }
 
@@ -354,7 +358,6 @@ public class MenusForm extends AbstractForm implements IPageForm {
         protected String getConfiguredTooltipText() {
           return "I am a tooltip";
         }
-
       }
 
       @Order(50.0)
@@ -377,6 +380,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setImageId("eclipse_scout_logo");
         }
 
@@ -709,11 +713,26 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(60.0)
+      public class SpecialTextMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Special text: {}§°ÂÄÅyjp\u0BF5";
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withHeader("You clicked me!").show();
+        }
+      }
+
       @Order(30.0)
       public class StringBottomField extends AbstractStringField {
 
         @Override
         protected void execInitField() {
+          setLabel(getClass().getSimpleName());
           setValue("this string field is on the bottom, is the menu correctly displayed?");
         }
 
