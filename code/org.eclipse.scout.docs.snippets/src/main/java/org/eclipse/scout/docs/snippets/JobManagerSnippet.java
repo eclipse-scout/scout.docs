@@ -179,7 +179,7 @@ public final class JobManagerSnippet {
   void snippet_filter() throws Exception {
     // tag::BlockingCondition[]
 
-    Filter filter = ServerJobs.newEventFilter().andMatchAnyEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+    Filter filter = ServerJobs.newEventFilter().andMatchEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
 
     Jobs.getJobManager().addListener(filter, new IJobListener() {
 
@@ -195,7 +195,7 @@ public final class JobManagerSnippet {
   void snippet_lifecycleEvents() throws Exception {
     // tag::BlockingCondition[]
 
-    ServerJobs.newEventFilter().andMatchAnyEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+    ServerJobs.newEventFilter().andMatchEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
     // end::BlockingCondition[]
   }
 
