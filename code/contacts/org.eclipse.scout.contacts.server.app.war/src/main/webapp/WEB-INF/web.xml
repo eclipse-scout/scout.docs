@@ -14,7 +14,14 @@
 
   <filter>
     <filter-name>AuthFilter</filter-name>
-    <filter-class>org.eclipse.scout.contacts.server.ServletFilter</filter-class>
+    <filter-class>org.eclipse.scout.contacts.server.ContactsServerServletFilter</filter-class>
+    <init-param>
+      <param-name>filter-exclude</param-name>
+      <!-- values needs to be defined relative to application root path (which isn't always the same as servlet root path) -->
+      <param-value>
+        /jaxws/*
+      </param-value>
+    </init-param>
   </filter>
 
   <filter-mapping>
