@@ -62,7 +62,7 @@ public class OptionsForm extends AbstractForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 2;
+          return 1;
         }
       }
     }

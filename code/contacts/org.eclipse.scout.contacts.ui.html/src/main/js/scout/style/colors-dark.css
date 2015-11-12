@@ -96,7 +96,18 @@
 /* ------------------------- */
 
 @applink-color: @palette-blue-6;
+@boxbutton-active-background-color: @palette-blue-5;
+@boxbutton-background-color: @palette-blue-4;
+@boxbutton-border-color: @palette-blue-4;
+@button-active-color: @palette-blue-4;
 @button-background-color: @palette-gray-9;
+@button-border-color: @button-color;
+@button-color: @palette-blue-6;
+@button-disabled-background-color: @control-disabled-background-color;
+@button-disabled-border-color: @border-color;
+@button-disabled-color: @disabled-color;
+@button-font-icon-color: @button-color;
+@button-font-icon-disabled-color: @button-disabled-border-color;
 @calendar-day-color: @palette-gray-6;
 @calendar-mode-active-text-color: @palette-blue-7;
 @calendar-out-background-color: none;
@@ -109,9 +120,28 @@
 @default-button-background-color: @palette-gray-6;
 @default-button-color: @palette-white;
 @default-button-hover-background-color: @palette-gray-5;
+@desktop-taskbar-background-color: @palette-white;
+@desktop-table-header-background-color: @table-header-background-color;
+@form-background-color: @background-color;
+@form-tool-popup-main-menubar-background-color: transparent;
 @group-box-title-border-color: @border-color;
+@main-menubar-background-color: @menubar-background-color;
+@menubar-background-color: @palette-gray-1;
+@menubar-button-active-color: @button-active-color;
+@menubar-button-background-color: @button-background-color;
+@menubar-button-border-color: @button-border-color;
+@menubar-button-color: @palette-white;
+@menubar-button-disabled-border-color: @palette-gray-5;
+@menubar-button-disabled-background-color: @button-disabled-background-color;
+@menubar-button-disabled-border-color: @button-disabled-border-color;
+@menubar-button-disabled-color: @button-disabled-color;
+@menubar-button-font-icon-color: @menubar-button-color;
+@menubar-button-font-icon-disabled-color: @menubar-button-disabled-border-color;
+@menubar-item-color: @palette-white;
 @navigation-background-color: @palette-gray-10;
 @navigation-color: @palette-gray-1;
+@navigate-up-button-border-color: @menubar-button-border-color;
+@navigate-up-button-color: @menubar-button-color;
 @outline-control-button-background-color: @palette-gray-3;
 @outline-group-background-color: @palette-gray-6;
 @outline-in-background-selection-background-color: @palette-gray-5;
@@ -125,7 +155,16 @@
 @scrollbar-thumb-inverted-color: @palette-gray-4;
 @table-aggregate-cell-selection-color: @palette-blue-4;
 @table-aggregate-row-background-color: @palette-gray-1;
+@table-control-active-color: @table-control-color;
+@table-control-active-background-color: @table-control-container-background-color;
+@table-control-color: @palette-blue-5;
+@table-control-container-background-color: @palette-blue-1;
+@table-control-disabled-color: @palette-blue-5;
+@table-control-form-background-color: @table-control-container-background-color;
+@table-control-hover-color: @table-control-color;
+@table-footer-background-color: @panel-background-color;
 @table-header-background-color: @palette-gray-9;
+
 @table-header-menu-cmd-active-background-color: @active-inverted-background-color;
 @table-header-menu-cmd-active-border-color: @active-inverted-background-color;
 @table-header-menu-cmd-active-color: @active-inverted-color;
@@ -151,8 +190,10 @@
 @tooltip-warning-background-color: @palette-orange-0;
 @tooltip-warning-border-color: @palette-orange-3;
 @tooltip-warning-color: @tooltip-color;
+@view-menu-popup-background-color: @palette-white;
 @view-button-tab-active-background-color: @navigation-background-color;
 @view-button-tab-active-color: @active-inverted-color;
+@view-button-tab-background-color: @panel-background-color;
 @view-button-tab-color: @active-inverted-color;
 
 .taskbar-logo {
