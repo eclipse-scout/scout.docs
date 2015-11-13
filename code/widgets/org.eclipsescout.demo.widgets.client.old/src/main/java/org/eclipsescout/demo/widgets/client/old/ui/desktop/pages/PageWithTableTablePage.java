@@ -34,12 +34,14 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.AggregationFunction;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.BackgroundEffect;
+import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
+import org.eclipsescout.demo.widgets.client.ui.forms.CheckboxFieldForm;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
 
@@ -345,6 +347,29 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
           }
         }
+      }
+
+    }
+
+    @Order(50.0)
+    public class FormToolButton extends AbstractFormToolButton<CheckboxFieldForm> {
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.SingleSelection,
+            TableMenuType.MultiSelection,
+            TableMenuType.EmptySpace);
+      }
+
+      @Override
+      protected Class<CheckboxFieldForm> getConfiguredForm() {
+        return CheckboxFieldForm.class;
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return "Form-ToolButton";
       }
 
     }
