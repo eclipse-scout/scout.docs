@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringHolder;
-import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.server.services.common.pwd.AbstractPasswordManagementService;
 import org.eclipse.scout.rt.server.services.common.pwd.IPasswordPolicy;
@@ -29,7 +28,6 @@ import org.eclipsescout.demo.bahbah.shared.security.ResetPasswordPermission;
 import org.eclipsescout.demo.bahbah.shared.services.process.IPasswordProcessService;
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
-@Server
 public class PasswordProcessService extends AbstractPasswordManagementService implements IPasswordProcessService {
 
   @PostConstruct

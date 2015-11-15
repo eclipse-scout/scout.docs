@@ -14,12 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.server.Server;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.services.outline.IStandardOutlineService;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 
-@Server
 public class StandardOutlineService implements IStandardOutlineService {
 
   @Override

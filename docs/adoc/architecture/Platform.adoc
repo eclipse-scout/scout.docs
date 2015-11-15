@@ -229,12 +229,16 @@ TIP: If `MyServiceMod` would have no `@Order` annotation, there would be two bea
 
 === Bean Decoration
 
-Bean decorations allow to wrap interface beans with a proxy to intercept each method call to that bean and apply some custom logic.
-For this a `IBeanDecorationFactory` has to be implemented. This is one single factory instance for the entire application. It decides which beans are decorated with which interceptors.
-As bean decoration factories are beans itself it is sufficient to create an implementation of `org.eclipse.scout.rt.platform.IBeanDecorationFactory` and to ensure this implementation is used (see <<Bean Retrieval>>).
-This factory receives the bean and the original query class to decide which interceptors that are created.
+Bean decorations allow to wrap interfaces with a proxy to intercept each method call to the interface of a bean and apply some custom logic.
+For this a `IBeanDecorationFactory` has to be implemented. This is one single factory instance for the entire application. It decides which decorators are created for a bean request.
+The factory is asked for decorators on every bean retrieval. This allows to write bean decoration factories depending on dynamic conditions.
 
-The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler interceptor that measures how long a server call takes.
+As bean decoration factories are beans itself it is sufficient to create an implementation of `org.eclipse.scout.rt.platform.IBeanDecorationFactory` and to ensure this implementation is used (see <<Bean Retrieval>>).
+This factory receives the bean that should be decorated and the originally requested bean class to decide which decorators that are created. In case no decoration is required the factory may return `null`. Then the original bean is used without decorations.
+
+TIP: Decorations are only supported if the class obtained by the bean manager (e.g. by using `BEANS.get()`) is an interface!
+
+The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler decorator that measures how long a server call takes.
 
 [[lst-BeanDecorationFactory, bean decoration]]
 [source,java,indent=0]
@@ -246,9 +250,9 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ==== @TunnelToServer
 
 There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
-To achieve this a bean decoration factory on client side checks for availability of this annotation and creates an interceptor that forwards the operation to the server.
+To achieve this a bean decoration factory on client side checks for availability of this annotation and creates a decorator that forwards the operation to the server.
 
-It is best practice to mark all annotation that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
+It is best practice to mark all annotations that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
 
 == Configuration Management
 

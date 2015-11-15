@@ -14,13 +14,11 @@ import java.security.AllPermission;
 import java.security.Permissions;
 
 import org.eclipse.scout.commons.annotations.Replace;
-import org.eclipse.scout.rt.client.Client;
 import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 
 /**
  * Client implementation of {@link org.eclipse.scout.rt.shared.services.common.security.IAccessControlService}
  */
-@Client
 @Replace
 public class ClientAccessControlService extends UserIdAccessControlService {
 

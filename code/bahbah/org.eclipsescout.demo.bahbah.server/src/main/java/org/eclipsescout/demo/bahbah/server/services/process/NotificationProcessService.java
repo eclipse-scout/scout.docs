@@ -13,7 +13,6 @@ package org.eclipsescout.demo.bahbah.server.services.process;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -26,7 +25,6 @@ import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Server
 public class NotificationProcessService implements INotificationProcessService {
   private static Logger LOG = LoggerFactory.getLogger(NotificationProcessService.class);
 

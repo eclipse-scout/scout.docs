@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.platform.Platform;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.interceptor.IBeanInterceptor;
+import org.eclipse.scout.rt.platform.interceptor.IBeanDecorator;
 import org.eclipse.scout.rt.platform.interceptor.IBeanInvocationContext;
 import org.eclipse.scout.rt.platform.inventory.ClassInventory;
 import org.eclipse.scout.rt.platform.inventory.IClassInfo;
@@ -68,16 +68,16 @@ public final class PlatformSnippet {
   @Replace
   public class ProfilerDecorationFactory extends ClientBeanDecorationFactory {
     @Override
-    public <T> IBeanInterceptor<T> decorate(IBean<T> bean, Class<? extends T> queryType) {
-      return new BackendCallProfilerInterceptor<>(super.decorate(bean, queryType));
+    public <T> IBeanDecorator<T> decorate(IBean<T> bean, Class<? extends T> queryType) {
+      return new BackendCallProfilerDecorator<>(super.decorate(bean, queryType));
     }
   }
 
-  public class BackendCallProfilerInterceptor<T> implements IBeanInterceptor<T> {
+  public class BackendCallProfilerDecorator<T> implements IBeanDecorator<T> {
 
-    private final IBeanInterceptor<T> m_inner;
+    private final IBeanDecorator<T> m_inner;
 
-    public BackendCallProfilerInterceptor(IBeanInterceptor<T> inner) {
+    public BackendCallProfilerDecorator(IBeanDecorator<T> inner) {
       m_inner = inner;
     }
 
@@ -94,7 +94,12 @@ public final class PlatformSnippet {
       String timerName = className + '.' + context.getTargetMethod().getName();
       TuningUtility.startTimer();
       try {
-        return m_inner == null ? context.proceed() : m_inner.invoke(context);
+        if (m_inner != null) {
+          // delegate to the next decorator in the chain
+          return m_inner.invoke(context);
+        }
+        // forward to real bean
+        return context.proceed();
       }
       finally {
         TuningUtility.stopTimer(timerName);

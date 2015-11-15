@@ -13,7 +13,6 @@ package org.eclipsescout.demo.bahbah.server.services.db;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
@@ -21,7 +20,6 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 /**
  * class that installs the bahbah DB schema
  */
-@Server
 public class DerbyDbSetupService implements IDbSetupService {
 
   @Override

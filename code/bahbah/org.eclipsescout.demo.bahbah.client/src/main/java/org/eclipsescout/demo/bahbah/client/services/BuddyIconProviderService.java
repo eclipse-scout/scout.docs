@@ -13,10 +13,8 @@ package org.eclipsescout.demo.bahbah.client.services;
 import java.net.URL;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.rt.client.Client;
 import org.eclipse.scout.rt.client.services.common.icon.AbstractIconProviderService;
 
-@Client
 @Order(2000)
 public class BuddyIconProviderService extends AbstractIconProviderService {
 

@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
@@ -23,7 +22,6 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 /**
  * class that installs the bahbah DB schema
  */
-@Server
 @Order(2000)
 public class MySqlDbSetupService implements IDbSetupService {
   @Override

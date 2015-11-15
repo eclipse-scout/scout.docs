@@ -11,10 +11,8 @@
 package org.eclipsescout.demo.bahbah.mysql;
 
 import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.jdbc.mysql.AbstractMySqlSqlService;
 
-@Server
 @Order(1900)
 public class MysqlSqlService extends AbstractMySqlSqlService {
 
