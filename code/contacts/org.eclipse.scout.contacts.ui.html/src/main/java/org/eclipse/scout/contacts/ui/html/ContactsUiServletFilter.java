@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVe
 import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController.FormBasedAuthConfig;
+import org.eclipse.scout.rt.server.commons.authentication.ServletFilterHelper;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController.TrivialAuthConfig;
 
@@ -36,18 +37,19 @@ import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessControlle
  */
 public class ContactsUiServletFilter implements Filter {
 
-  private FormBasedAccessController m_formBasedAccessController;
   private TrivialAccessController m_trivialAccessController;
+  private FormBasedAccessController m_formBasedAccessController;
   private DevelopmentAccessController m_developmentAccessController;
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
+    m_trivialAccessController = BEANS.get(TrivialAccessController.class)
+        .init(new TrivialAuthConfig()
+            .withExclusionFilter(filterConfig.getInitParameter("filter-exclude"))
+            .withLoginPageInstalled(true));
     m_formBasedAccessController = BEANS.get(FormBasedAccessController.class)
         .init(new FormBasedAuthConfig()
             .withCredentialVerifier(BEANS.get(ConfigFileCredentialVerifier.class)));
-    m_trivialAccessController = BEANS.get(TrivialAccessController.class)
-        .init(new TrivialAuthConfig()
-            .withExclusionFilter(filterConfig.getInitParameter("filter-exclude")));
     m_developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
   }
 
@@ -56,28 +58,25 @@ public class ContactsUiServletFilter implements Filter {
     final HttpServletRequest req = (HttpServletRequest) request;
     final HttpServletResponse resp = (HttpServletResponse) response;
 
-    // requests to /login, /logout, /auth
-    if (m_formBasedAccessController.handle(req, resp, chain)) {
-      return;
-    }
-
-    // cached with exclusion for CSS/JS-login and -logout resources
     if (m_trivialAccessController.handle(req, resp, chain)) {
       return;
     }
 
-    // Development
+    if (m_formBasedAccessController.handle(req, resp, chain)) {
+      return;
+    }
+
     if (m_developmentAccessController.handle(req, resp, chain)) {
       return;
     }
 
-    m_formBasedAccessController.forwardToLoginForm(req, resp);
+    BEANS.get(ServletFilterHelper.class).forwardToLoginForm(req, resp);
   }
 
   @Override
   public void destroy() {
     m_developmentAccessController.destroy();
-    m_trivialAccessController.destroy();
     m_formBasedAccessController.destroy();
+    m_trivialAccessController.destroy();
   }
 }
