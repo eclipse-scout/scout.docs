@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.scout.commons.CompareUtility;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipsescout.demo.widgets.shared.Icons;
@@ -29,15 +30,15 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow<String>> execCreateLookupRows() {
-    List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+  protected List<? extends ILookupRow<String>> execCreateLookupRows() {
+    List<ILookupRow<String>> rows = new ArrayList<>();
 
     // Read constant values from Icons class
     for (Field field : Icons.class.getFields()) {
       if (Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
         try {
           final String iconId = (String) field.get(null);
-          rows.add((LookupRow<String>) new LookupRow<String>(iconId, field.getName()).withIconId(iconId));
+          rows.add(new LookupRow<String>(iconId, field.getName()).withIconId(iconId));
         }
         catch (RuntimeException | IllegalAccessException e) {
           // nop
@@ -45,9 +46,9 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
       }
     }
 
-    Collections.sort(rows, new Comparator<LookupRow>() {
+    Collections.sort(rows, new Comparator<ILookupRow>() {
       @Override
-      public int compare(LookupRow o1, LookupRow o2) {
+      public int compare(ILookupRow o1, ILookupRow o2) {
         if (o1 == null && o2 == null) {
           return 0;
         }
