@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
@@ -216,7 +217,8 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
                       }
                     });
                   }
-                }, 2, TimeUnit.SECONDS);
+                }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+                    .withSchedulingDelay(2, TimeUnit.SECONDS));
 
               }
             }

@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.FormData;
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
@@ -56,7 +57,8 @@ public class BuddyNodePage extends AbstractPageWithNodes {
       public void run() throws Exception {
         getChatForm().getMessageField().requestFocus();
       }
-    }, 200, TimeUnit.MILLISECONDS);
+    }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+        .withSchedulingDelay(200, TimeUnit.MILLISECONDS));
   }
 
   public ChatForm getChatForm() {

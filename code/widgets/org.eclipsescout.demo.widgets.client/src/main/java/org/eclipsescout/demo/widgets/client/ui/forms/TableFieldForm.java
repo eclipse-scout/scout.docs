@@ -21,6 +21,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.status.IStatus;
 import org.eclipse.scout.commons.status.Status;
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
@@ -818,7 +819,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                       }
                     });
                   }
-                }, 2, TimeUnit.SECONDS);
+                }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+                    .withSchedulingDelay(2, TimeUnit.SECONDS));
 
               }
             }
@@ -888,7 +890,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                     }
                   });
                 }
-              }, 2, TimeUnit.SECONDS);
+              }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+                  .withSchedulingDelay(2, TimeUnit.SECONDS));
             }
           }
 

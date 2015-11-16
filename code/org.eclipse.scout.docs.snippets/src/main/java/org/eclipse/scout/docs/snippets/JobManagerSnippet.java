@@ -9,7 +9,6 @@ import javax.security.auth.Subject;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.context.RunContexts;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.job.DoneEvent;
@@ -103,7 +102,9 @@ public final class JobManagerSnippet {
       public void run() throws Exception {
         // do some work
       }
-    }, Jobs.newInput(RunContexts.copyCurrent()).withName("job-name")); // <3>
+    }, Jobs.newInput()
+        .withRunContext(RunContexts.copyCurrent())
+        .withName("job-name")); // <3>
     // end::scheduleByFactory[]
   }
 
@@ -126,16 +127,18 @@ public final class JobManagerSnippet {
     subject.setReadOnly();
 
     // Create the RunContext to run the job on behalf.
-    RunContext runContext = RunContexts.empty().withSubject(subject).withLocale(Locale.US);
-
     // Schedule the periodic action to run every 60 seconds.
-    Jobs.scheduleAtFixedRate(new IRunnable() {
+    Jobs.schedule(new IRunnable() {
 
       @Override
       public void run() throws Exception {
         System.out.println("running every minute");
       }
-    }, 0, 60, TimeUnit.SECONDS, Jobs.newInput(runContext));
+    }, Jobs.newInput()
+        .withRunContext(RunContexts.empty()
+            .withSubject(subject)
+            .withLocale(Locale.US))
+        .withPeriodicExecutionAtFixedRate(60, TimeUnit.SECONDS));
     // end::Jobs.scheduleAtFixedRate[]
   }
 
@@ -147,7 +150,9 @@ public final class JobManagerSnippet {
       public void run() throws Exception {
         System.out.println("this job runs with a delay of 5 seconds");
       }
-    }, 5, TimeUnit.SECONDS);
+    }, Jobs.newInput()
+        .withRunContext(RunContexts.copyCurrent())
+        .withSchedulingDelay(5, TimeUnit.SECONDS));
     // end::Jobs.scheduleDelayed[]
   }
 
