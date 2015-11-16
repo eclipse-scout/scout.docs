@@ -18,11 +18,8 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ClientSession extends AbstractClientSession {
-  private static Logger logger = LoggerFactory.getLogger(ClientSession.class);
 
   public ClientSession() {
     super(true);
