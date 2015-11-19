@@ -346,6 +346,32 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80.0)
+      public class MessageBoxFollowedByVetoExceptionButton extends AbstractLinkButton {
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "MessageBox followed by VetoException";
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected void execClickAction() {
+          int result = MessageBoxes.createYesNo().withBody("Do you like message boxes?").show();
+          getResultField().setMessageBoxResult(result);
+          throw new VetoException("You clicked " + (result == IMessageBox.YES_OPTION ? "YES" : "NO") + ".");
+        }
+      }
+
+      @Order(90.0)
       public class ResultField extends AbstractStringField {
 
         @Override
