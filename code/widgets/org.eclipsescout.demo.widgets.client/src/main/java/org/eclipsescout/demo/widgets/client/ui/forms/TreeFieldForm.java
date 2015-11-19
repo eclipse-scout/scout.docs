@@ -18,7 +18,6 @@ import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IRunnable;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
-import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -207,17 +206,12 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                ClientJobs.schedule(new IRunnable() {
+                ModelJobs.schedule(new IRunnable() {
                   @Override
                   public void run() throws Exception {
-                    ModelJobs.schedule(new IRunnable() {
-                      @Override
-                      public void run() throws Exception {
-                        newNode();
-                      }
-                    });
+                    newNode();
                   }
-                }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+                }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withSchedulingDelay(2, TimeUnit.SECONDS));
 
               }

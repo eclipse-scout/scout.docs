@@ -21,8 +21,9 @@ import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.job.listener.IJobListener;
 import org.eclipse.scout.rt.platform.job.listener.JobEvent;
 import org.eclipse.scout.rt.platform.job.listener.JobEventType;
-import org.eclipse.scout.rt.server.job.ServerJobEventFilters.Filter;
-import org.eclipse.scout.rt.server.job.ServerJobs;
+import org.eclipse.scout.rt.server.context.ServerRunContext;
+import org.eclipse.scout.rt.shared.ISession;
+import org.eclipse.scout.rt.shared.job.filter.event.SessionJobEventFilter;
 
 @SuppressWarnings("unused")
 public final class JobManagerSnippet {
@@ -94,7 +95,8 @@ public final class JobManagerSnippet {
       public void run() throws Exception {
         // do some work
       }
-    });
+    }, Jobs.newInput()
+        .withRunContext(RunContexts.copyCurrent()));
 
     Jobs.schedule(new IRunnable() { // <2>
 
@@ -163,7 +165,8 @@ public final class JobManagerSnippet {
     final IBlockingCondition condition = Jobs.getJobManager().createBlockingCondition("Operation", true);
 
     // Schedule the job <2>
-    IFuture<Boolean> future = Jobs.schedule(new LongRunningOperation());
+    IFuture<Boolean> future = Jobs.schedule(new LongRunningOperation(), Jobs.newInput()
+        .withRunContext(RunContexts.copyCurrent()));
 
     // Register 'done callback' to be invoked once the job completes <3>
     future.whenDone(new IDoneCallback<Boolean>() {
@@ -184,15 +187,17 @@ public final class JobManagerSnippet {
   void snippet_filter() throws Exception {
     // tag::BlockingCondition[]
 
-    Filter filter = ServerJobs.newEventFilter().andMatchEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+    Jobs.getJobManager().addListener(Jobs.newEventFilterBuilder()
+        .andMatchRunContext(ServerRunContext.class)
+        .andMatchEventType(JobEventType.ABOUT_TO_RUN)
+        .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
+        .toFilter(), new IJobListener() {
 
-    Jobs.getJobManager().addListener(filter, new IJobListener() {
-
-      @Override
-      public void changed(JobEvent event) {
-        System.out.println(event.getFuture());
-      }
-    });
+          @Override
+          public void changed(JobEvent event) {
+            System.out.println(event.getFuture());
+          }
+        });
 
     // end::BlockingCondition[]
   }
@@ -200,7 +205,11 @@ public final class JobManagerSnippet {
   void snippet_lifecycleEvents() throws Exception {
     // tag::BlockingCondition[]
 
-    ServerJobs.newEventFilter().andMatchEventType(JobEventType.ABOUT_TO_RUN).andMatchCurrentSession();
+    Jobs.newEventFilterBuilder()
+        .andMatchRunContext(ServerRunContext.class)
+        .andMatchEventType(JobEventType.ABOUT_TO_RUN)
+        .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
+        .toFilter();
     // end::BlockingCondition[]
   }
 

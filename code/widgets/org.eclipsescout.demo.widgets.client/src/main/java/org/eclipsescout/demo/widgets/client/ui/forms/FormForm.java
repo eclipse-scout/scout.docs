@@ -19,7 +19,6 @@ import org.eclipse.scout.commons.annotations.ClassId;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
-import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
@@ -40,6 +39,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
@@ -367,26 +367,27 @@ public class FormForm extends AbstractForm implements IPageForm {
           };
 
           if (openingDelay == 0) {
-            ModelJobs.schedule(openFormRunnable);
+            ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
           }
           else {
             if (getBlockModelThreadField().isChecked()) {
               try {
                 Thread.sleep(TimeUnit.SECONDS.toMillis(openingDelay));
-                ModelJobs.schedule(openFormRunnable);
+                ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
               }
               catch (InterruptedException e) {
                 throw new ProcessingException("Interrupted", e);
               }
             }
             else {
-              ClientJobs.schedule(new IRunnable() {
+              Jobs.schedule(new IRunnable() {
 
                 @Override
                 public void run() throws Exception {
-                  ModelJobs.schedule(openFormRunnable);
+                  ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
                 }
-              }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+              }, Jobs.newInput()
+                  .withRunContext(ClientRunContexts.copyCurrent())
                   .withSchedulingDelay(openingDelay, TimeUnit.SECONDS));
             }
           }
@@ -444,19 +445,13 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            ClientJobs.schedule(new IRunnable() {
+            ModelJobs.schedule(new IRunnable() {
 
               @Override
               public void run() throws Exception {
-                ModelJobs.schedule(new IRunnable() {
-
-                  @Override
-                  public void run() throws Exception {
-                    getField1Field().setVisible(false);
-                  }
-                });
+                getField1Field().setVisible(false);
               }
-            }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                 .withSchedulingDelay(3, TimeUnit.SECONDS));
           }
         }
@@ -499,19 +494,13 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            ClientJobs.schedule(new IRunnable() {
+            ModelJobs.schedule(new IRunnable() {
 
               @Override
               public void run() throws Exception {
-                ModelJobs.schedule(new IRunnable() {
-
-                  @Override
-                  public void run() throws Exception {
-                    getField2Field().setVisible(false);
-                  }
-                });
+                getField2Field().setVisible(false);
               }
-            }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                 .withSchedulingDelay(3, TimeUnit.SECONDS));
           }
         }
@@ -554,19 +543,13 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            ClientJobs.schedule(new IRunnable() {
+            ModelJobs.schedule(new IRunnable() {
 
               @Override
               public void run() throws Exception {
-                ModelJobs.schedule(new IRunnable() {
-
-                  @Override
-                  public void run() throws Exception {
-                    getField3Field().setVisible(false);
-                  }
-                });
+                getField3Field().setVisible(false);
               }
-            }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                 .withSchedulingDelay(3, TimeUnit.SECONDS));
           }
         }
@@ -609,19 +592,13 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            ClientJobs.schedule(new IRunnable() {
+            ModelJobs.schedule(new IRunnable() {
 
               @Override
               public void run() throws Exception {
-                ModelJobs.schedule(new IRunnable() {
-
-                  @Override
-                  public void run() throws Exception {
-                    getField4Field().setVisible(false);
-                  }
-                });
+                getField4Field().setVisible(false);
               }
-            }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                 .withSchedulingDelay(3, TimeUnit.SECONDS));
           }
         }

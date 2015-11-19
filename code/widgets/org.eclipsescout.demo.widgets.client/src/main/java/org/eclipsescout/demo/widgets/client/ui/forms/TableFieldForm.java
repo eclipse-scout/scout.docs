@@ -22,7 +22,6 @@ import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.status.IStatus;
 import org.eclipse.scout.commons.status.Status;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
-import org.eclipse.scout.rt.client.job.ClientJobs;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -809,17 +808,12 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                ClientJobs.schedule(new IRunnable() {
+                ModelJobs.schedule(new IRunnable() {
                   @Override
                   public void run() throws Exception {
-                    ModelJobs.schedule(new IRunnable() {
-                      @Override
-                      public void run() throws Exception {
-                        newRow();
-                      }
-                    });
+                    newRow();
                   }
-                }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+                }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withSchedulingDelay(2, TimeUnit.SECONDS));
 
               }
@@ -879,18 +873,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              ClientJobs.schedule(new IRunnable() {
+              ModelJobs.schedule(new IRunnable() {
                 @Override
                 public void run() throws Exception {
-                  ModelJobs.schedule(new IRunnable() {
-                    @Override
-                    public void run() throws Exception {
-                      List<ITableRow> rows = getSelectedRows();
-                      deleteRows(rows);
-                    }
-                  });
+                  List<ITableRow> rows = getSelectedRows();
+                  deleteRows(rows);
                 }
-              }, ClientJobs.newInput(ClientRunContexts.copyCurrent())
+              }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                   .withSchedulingDelay(2, TimeUnit.SECONDS));
             }
           }
