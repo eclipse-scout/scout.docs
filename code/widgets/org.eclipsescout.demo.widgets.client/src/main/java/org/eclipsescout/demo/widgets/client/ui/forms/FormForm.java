@@ -319,7 +319,8 @@ public class FormForm extends AbstractForm implements IPageForm {
 
               switch (displayHint) {
                 case Dialog:
-                case View: {
+                case View:
+                case PopupWindow: {
                   FormForm form = new FormForm();
                   form.setDisplayHint(displayHint.getValue());
                   DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
@@ -700,7 +701,11 @@ public class FormForm extends AbstractForm implements IPageForm {
 
     public static enum DisplayHint {
 
-      View(IForm.DISPLAY_HINT_VIEW), Dialog(IForm.DISPLAY_HINT_DIALOG), MessageBox(100), FileChooser(200);
+      View(IForm.DISPLAY_HINT_VIEW),
+      Dialog(IForm.DISPLAY_HINT_DIALOG),
+      PopupWindow(IForm.DISPLAY_HINT_POPUP_WINDOW),
+      MessageBox(100),
+      FileChooser(200);
 
       int m_value;
 
