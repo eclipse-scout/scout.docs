@@ -22,6 +22,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
@@ -374,6 +375,244 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
+    @Order(20.0)
+    public class TableSingleMenu extends AbstractMenu {
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.SingleSelection);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return "Single";
+      }
+    }
+
+    @Order(60.0)
+    public class HierarchicalMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return "Hierarchical Menu";
+      }
+
+      @Order(10.0)
+      public class SubSingleMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TableMenuType.SingleSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "SubSingle";
+        }
+
+      }
+
+      @Order(20.0)
+      public class SubMultiMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TableMenuType.MultiSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "SubMulti";
+        }
+
+      }
+
+      @Order(30.0)
+      public class SubEmptySpaceMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TableMenuType.EmptySpace);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "SubEmpty";
+        }
+
+      }
+
+      @Order(40.0)
+      public class IntermediateMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Intermediate Menu";
+        }
+
+        @Order(10.0)
+        public class SubSubSingleMenu extends AbstractMenu {
+          @Override
+          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+            return CollectionUtility.<IMenuType> hashSet(
+                TableMenuType.SingleSelection);
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return "SubSubSingle";
+          }
+
+        }
+
+        @Order(20.0)
+        public class SubSubMultiMenu extends AbstractMenu {
+          @Override
+          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+            return CollectionUtility.<IMenuType> hashSet(
+                TableMenuType.MultiSelection);
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return "SubSubMulti";
+          }
+
+        }
+
+        @Order(30.0)
+        public class SubSubEmptySpaceMenu extends AbstractMenu {
+          @Override
+          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+            return CollectionUtility.<IMenuType> hashSet(
+                TableMenuType.EmptySpace);
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return "SubSubEmpty";
+          }
+
+        }
+
+      }
+    }
+
+  }
+
+  @Order(10.0)
+  public class HierarchicalPageMenu extends AbstractMenu {
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(
+          TreeMenuType.SingleSelection);
+    }
+
+    @Override
+    protected String getConfiguredText() {
+      return "HierarchicalPage Menu";
+    }
+
+    @Order(10.0)
+    public class SubSingleMenu extends AbstractMenu {
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TreeMenuType.SingleSelection);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return "TreeSubSingle";
+      }
+
+    }
+
+    @Order(20.0)
+    public class SubMultiMenu extends AbstractMenu {
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TreeMenuType.MultiSelection);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return "TreeSubMulti";
+      }
+
+    }
+
+    @Order(30.0)
+    public class SubEmptySpaceMenu extends AbstractMenu {
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(
+            TreeMenuType.EmptySpace);
+      }
+
+      @Override
+      protected String getConfiguredText() {
+        return "TreeSubEmpty";
+      }
+
+    }
+
+    @Order(40.0)
+    public class IntermediateMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return "Intermediate Menu";
+      }
+
+      @Order(10.0)
+      public class SubSubSingleMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TreeMenuType.SingleSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "TreeSubSubSingle";
+        }
+
+      }
+
+      @Order(20.0)
+      public class SubSubMultiMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TreeMenuType.MultiSelection);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "TreeSubSubMulti";
+        }
+
+      }
+
+      @Order(30.0)
+      public class SubSubEmptySpaceMenu extends AbstractMenu {
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(
+              TreeMenuType.EmptySpace);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return "TreeSubSubEmpty";
+        }
+
+      }
+
+    }
+
   }
 
   @Order(10.0)
@@ -387,6 +626,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
       return CollectionUtility.<IMenuType> hashSet(
+          TreeMenuType.EmptySpace,
           TableMenuType.SingleSelection,
           TableMenuType.MultiSelection,
           TableMenuType.EmptySpace);
