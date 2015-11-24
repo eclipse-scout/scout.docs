@@ -15,8 +15,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 /**
  * Provides a form instance which is displayed when Desktop is in bench-only mode.
  */
-// FIXME AWE Rename this interface, and probably also the method. "Form provider" could be anything that provides a form (for any purpose), however this interface seems to be tightly linked to desktop "BENCH" mode.
-public interface IFormProvider {
+public interface IBenchFormProvider {
 
   IForm provideForm();
 

@@ -88,8 +88,8 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       // "bench-only" desktop
       IForm benchForm = null;
       for (IDesktopExtension ext : getDesktopExtensions()) {
-        if (ext instanceof IFormProvider) {
-          benchForm = ((IFormProvider) ext).provideForm();
+        if (ext instanceof IBenchFormProvider) {
+          benchForm = ((IBenchFormProvider) ext).provideForm();
         }
       }
       if (benchForm == null) {
