@@ -65,7 +65,6 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
     importPageData(BEANS.get(IEventService.class).getTableData(filter, getOrganizationId()));
   }
 
-  @Order(1_000.0)
   public class Table extends AbstractTable {
 
     public EventIdColumn getEventIdColumn() {

@@ -77,7 +77,6 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
     }
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     @Override

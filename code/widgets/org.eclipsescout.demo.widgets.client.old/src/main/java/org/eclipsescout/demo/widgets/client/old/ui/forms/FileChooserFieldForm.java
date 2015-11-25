@@ -229,7 +229,6 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
             return false;
           }
 
-          @Order(70.0)
           public class Table extends AbstractTable {
 
             @Override

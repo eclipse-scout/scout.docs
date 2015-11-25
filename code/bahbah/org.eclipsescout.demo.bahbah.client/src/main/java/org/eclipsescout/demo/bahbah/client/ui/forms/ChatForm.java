@@ -130,7 +130,6 @@ public class ChatForm extends AbstractForm {
         return false;
       }
 
-      @Order(10.0)
       public class Table extends AbstractTable {
 
         @Override

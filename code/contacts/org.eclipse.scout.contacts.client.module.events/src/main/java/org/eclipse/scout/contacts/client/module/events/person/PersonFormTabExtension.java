@@ -52,7 +52,6 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
         return false;
       }
 
-      @Order(1000.0)
       public class Table extends AbstractTable {
 
         @Override

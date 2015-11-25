@@ -65,7 +65,6 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
     importPageData(pageData);
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     public UsernameColumn getUsernameColumn() {

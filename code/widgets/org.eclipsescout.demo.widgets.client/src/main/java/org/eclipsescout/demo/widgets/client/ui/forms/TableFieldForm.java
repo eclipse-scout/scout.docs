@@ -297,7 +297,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           return buf.toString();
         }
 
-        @Order(10.0)
         public class Table extends AbstractTable {
 
           // TODO: [BUG] Table bug: organize columns throws null pointer exception

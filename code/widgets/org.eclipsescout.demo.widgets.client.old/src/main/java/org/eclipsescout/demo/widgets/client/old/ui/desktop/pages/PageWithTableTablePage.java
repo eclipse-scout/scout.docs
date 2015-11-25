@@ -90,7 +90,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     });
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     public SmartColumn getSmartColumn() {

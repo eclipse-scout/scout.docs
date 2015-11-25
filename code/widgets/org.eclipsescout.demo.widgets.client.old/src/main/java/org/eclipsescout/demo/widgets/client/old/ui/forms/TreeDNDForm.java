@@ -396,7 +396,6 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
         public class Table extends AbstractTable {
 
           public IdColumn getIdColumn() {

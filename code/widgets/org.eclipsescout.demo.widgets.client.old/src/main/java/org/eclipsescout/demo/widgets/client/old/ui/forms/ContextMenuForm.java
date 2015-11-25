@@ -123,7 +123,6 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
             getTable().addRowByArray(new Object[]{"Baluu3", "Boralimon"});
           }
 
-          @Order(10)
           public class Table extends AbstractTable {
             @Override
             protected String getConfiguredDefaultIconId() {

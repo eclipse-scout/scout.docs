@@ -308,7 +308,6 @@ public class EventForm extends AbstractForm {
             return false;
           }
 
-          @Order(1_000.0)
           public class Table extends AbstractTable {
 
             public LastNameColumn getLastNameColumn() {

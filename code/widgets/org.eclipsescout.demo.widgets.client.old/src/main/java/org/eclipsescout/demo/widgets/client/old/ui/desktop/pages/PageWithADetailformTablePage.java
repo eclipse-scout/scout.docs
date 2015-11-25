@@ -55,7 +55,6 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
         {4, "Coca-Cola Company", "KO"}});
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     public NameColumn getNameColumn() {

@@ -103,7 +103,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     private Set<BinaryResource> m_keys = new HashSet<>();

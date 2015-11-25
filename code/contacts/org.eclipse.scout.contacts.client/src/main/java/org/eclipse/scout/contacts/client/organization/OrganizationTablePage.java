@@ -54,7 +54,6 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
     importPageData(BEANS.get(IOrganizationService.class).getTableData(filter));
   }
 
-  @Order(1000.0)
   public class Table extends AbstractTable {
 
     public NameColumn getNameColumn() {
