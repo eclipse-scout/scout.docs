@@ -13,7 +13,7 @@ import org.eclipse.scout.rt.platform.context.RunContexts;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.job.DoneEvent;
 import org.eclipse.scout.rt.platform.job.IBlockingCondition;
-import org.eclipse.scout.rt.platform.job.IDoneCallback;
+import org.eclipse.scout.rt.platform.job.IDoneHandler;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.IJobManager;
 import org.eclipse.scout.rt.platform.job.JobInput;
@@ -169,13 +169,13 @@ public final class JobManagerSnippet {
         .withRunContext(RunContexts.copyCurrent()));
 
     // Register 'done callback' to be invoked once the job completes <3>
-    future.whenDone(new IDoneCallback<Boolean>() {
+    future.whenDone(new IDoneHandler<Boolean>() {
 
       @Override
       public void onDone(DoneEvent<Boolean> event) {
         condition.setBlocking(false); // <5>
       }
-    });
+    }, RunContexts.copyCurrent());
 
     // Wait for the job to complete <4>
     condition.waitFor(1, TimeUnit.MINUTES);
