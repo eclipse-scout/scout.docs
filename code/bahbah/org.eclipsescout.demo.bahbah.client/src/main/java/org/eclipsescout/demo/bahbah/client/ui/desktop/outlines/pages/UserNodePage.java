@@ -115,7 +115,7 @@ public class UserNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ChangeIconMenu extends AbstractMenu {
 
     @Override

@@ -48,7 +48,7 @@ public class UserForm extends AbstractForm {
     return getFieldByClass(HtmlField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -56,10 +56,10 @@ public class UserForm extends AbstractForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class HtmlField extends AbstractHtmlField {
 
         @Override

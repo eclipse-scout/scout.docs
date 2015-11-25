@@ -67,7 +67,7 @@ public class PersonChooserForm extends AbstractForm {
     return getFieldByClass(OkButton.class);
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -75,10 +75,10 @@ public class PersonChooserForm extends AbstractForm {
       return 1;
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class PersonBox extends AbstractGroupBox {
 
-      @Order(1_000.0)
+      @Order(1)
       public class PersonField extends AbstractSmartField<String> {
 
         @Override
@@ -104,11 +104,11 @@ public class PersonChooserForm extends AbstractForm {
       }
     }
 
-    @Order(100_000.0)
+    @Order(100)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(101_000.0)
+    @Order(101)
     public class CancelButton extends AbstractCancelButton {
     }
   }

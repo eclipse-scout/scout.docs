@@ -140,13 +140,13 @@ public class OrganizationForm extends AbstractForm {
     return getOrganizationId();
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1000.0)
+    @Order(1000)
     public class GeneralBox extends AbstractGroupBox {
 
-      @Order(1000.0)
+      @Order(1000)
       public class LogoBox extends AbstractPictureBox {
 
         @Override
@@ -160,7 +160,7 @@ public class OrganizationForm extends AbstractForm {
         }
       }
 
-      @Order(2000.0)
+      @Order(2000)
       public class NameField extends AbstractStringField {
 
         @Override
@@ -174,7 +174,7 @@ public class OrganizationForm extends AbstractForm {
         }
       }
 
-      @Order(3000.0)
+      @Order(3000)
       public class HomepageField extends AbstractStringField {
 
         @Override
@@ -183,7 +183,7 @@ public class OrganizationForm extends AbstractForm {
         }
       }
 
-      @Order(4000.0)
+      @Order(4000)
       public class OpenInBrowserButton extends AbstractLinkButton {
 
         @Override
@@ -218,10 +218,10 @@ public class OrganizationForm extends AbstractForm {
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1000.0)
+      @Order(1000)
       public class OrganizationDetailsBox extends AbstractGroupBox {
 
         @Override
@@ -229,11 +229,11 @@ public class OrganizationForm extends AbstractForm {
           return TEXTS.get("Details");
         }
 
-        @Order(1000.0)
+        @Order(1000)
         public class AddressBox extends AbstractAddressBox {
         }
 
-        @Order(2000.0)
+        @Order(2000)
         public class PhoneField extends AbstractPhoneField {
 
           @Override
@@ -242,7 +242,7 @@ public class OrganizationForm extends AbstractForm {
           }
         }
 
-        @Order(3000.0)
+        @Order(3000)
         public class EmailField extends AbstractEmailField {
 
           @Override
@@ -252,7 +252,7 @@ public class OrganizationForm extends AbstractForm {
         }
       }
 
-      @Order(2000.0)
+      @Order(2000)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -260,7 +260,7 @@ public class OrganizationForm extends AbstractForm {
           return TEXTS.get("Comments");
         }
 
-        @Order(1000.0)
+        @Order(1000)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -281,11 +281,11 @@ public class OrganizationForm extends AbstractForm {
       }
     }
 
-    @Order(3000.0)
+    @Order(3000)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(4000.0)
+    @Order(4000)
     public class CancelButton extends AbstractCancelButton {
     }
   }

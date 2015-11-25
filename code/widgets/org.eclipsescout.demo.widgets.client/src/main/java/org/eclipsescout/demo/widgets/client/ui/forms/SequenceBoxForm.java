@@ -306,10 +306,10 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(FromField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(20)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -322,7 +322,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class FromToBox extends AbstractGroupBox {
 
         @Override
@@ -330,7 +330,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("FromToUsage");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class DefaultBox extends AbstractSequenceBox {
 
           @Override
@@ -338,7 +338,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("Default");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class FromField extends AbstractBigDecimalField {
 
             @Override
@@ -347,7 +347,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class ToField extends AbstractBigDecimalField {
 
             @Override
@@ -357,7 +357,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class MandatoryBox extends AbstractSequenceBox {
 
           @Override
@@ -365,7 +365,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("Mandatory");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class MandatoryFrom extends AbstractDateField {
 
             @Override
@@ -379,7 +379,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class MandatoryTo extends AbstractDateField {
 
             @Override
@@ -389,7 +389,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class DisabledBox extends AbstractSequenceBox {
 
           @Override
@@ -412,7 +412,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             getDisabledTo().setValue(now);
           }
 
-          @Order(10.0)
+          @Order(10)
           public class DisabledFrom extends AbstractDateField {
 
             @Override
@@ -431,7 +431,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class DisabledTo extends AbstractDateField {
 
             @Override
@@ -452,7 +452,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class HorizontalFieldGroupBox extends AbstractGroupBox {
 
         @Override
@@ -465,7 +465,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("HorizontalFieldGroupUsage");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SearchBox extends AbstractSequenceBox {
 
           @Override
@@ -484,7 +484,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             return false;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class IconField extends AbstractImageField {
 
             @Override
@@ -503,7 +503,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class FirstNameField extends AbstractStringField {
 
             @Override
@@ -517,7 +517,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(30.0)
+          @Order(30)
           public class LastNameField extends AbstractStringField {
 
             @Override
@@ -531,7 +531,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(40.0)
+          @Order(40)
           public class SearchButton extends AbstractButton {
 
             @Override
@@ -552,7 +552,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(50.0)
+          @Order(50)
           public class FormResetButton extends AbstractButton {
 
             @Override
@@ -570,11 +570,11 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
 
-      @Order(40.0)
+      @Order(40)
       public class CompanySearchBox extends AbstractSequenceBox {
 
         @Override
@@ -587,7 +587,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return 2;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class CompanyField extends AbstractStringField {
 
           @Override
@@ -604,7 +604,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class EmployeesField extends AbstractIntegerField {
 
           @Override
@@ -612,7 +612,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("Employees");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class MenuField extends AbstractMenu {
 
             @Override
@@ -627,7 +627,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class IndustryField extends AbstractSmartField<Long> {
 
           @Override
@@ -641,7 +641,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class CompanySearchButton extends AbstractButton {
 
           @Override
@@ -657,7 +657,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class FieldVisibilityBox extends AbstractGroupBox {
 
       @Override
@@ -670,7 +670,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("FieldVisibility");
       }
 
-      @Order(40.0)
+      @Order(40)
       public class VisibleCompanyField extends AbstractCheckBox {
 
         @Override
@@ -694,7 +694,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class VisibleEmployeeField extends AbstractCheckBox {
 
         @Override
@@ -718,7 +718,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class VisibleIndustryField extends AbstractCheckBox {
 
         @Override
@@ -742,7 +742,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class TooltipEmployeeField extends AbstractCheckBox {
 
         @Override
@@ -770,7 +770,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class StatusVisibleIndustryField extends AbstractCheckBox {
 
         @Override
@@ -795,7 +795,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class Widget1GroupBox extends AbstractGroupBox {
 
       @Override
@@ -808,7 +808,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class WidgetControlSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -831,7 +831,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return "Change a widget";
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
@@ -851,7 +851,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -870,7 +870,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -889,7 +889,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -908,7 +908,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class ApplyButton extends AbstractButton {
 
           @Override
@@ -945,7 +945,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class WidgetSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -953,7 +953,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return FULL_WIDTH;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetStringField1 extends AbstractStringField {
 
           @Override
@@ -962,7 +962,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class WidgetStringField2 extends AbstractStringField {
 
           @Override
@@ -971,7 +971,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class WidgetBooleanField1 extends AbstractCheckBox {
 
           @Override
@@ -980,7 +980,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class WidgetBooleanField2 extends AbstractBooleanField {
 
           @Override
@@ -989,7 +989,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class WidgetStringField3 extends AbstractStringField {
 
           @Override
@@ -1000,7 +1000,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class Widget2GroupBox extends AbstractGroupBox {
 
       @Override
@@ -1013,7 +1013,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class WidgetControlSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -1036,7 +1036,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return "Change a widget";
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
@@ -1056,7 +1056,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1075,7 +1075,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1094,7 +1094,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1113,7 +1113,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class ApplyButton extends AbstractButton {
 
           @Override
@@ -1150,7 +1150,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class WidgetSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -1158,7 +1158,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return FULL_WIDTH;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetStringField1 extends AbstractStringField {
 
           @Override
@@ -1172,7 +1172,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class WidgetStringField2 extends AbstractStringField {
 
           @Override
@@ -1186,7 +1186,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class WidgetBooleanField1 extends AbstractCheckBox {
 
           @Override
@@ -1195,7 +1195,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class WidgetBooleanField2 extends AbstractBooleanField {
 
           @Override
@@ -1204,7 +1204,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class WidgetStringField3 extends AbstractStringField {
 
           @Override
@@ -1220,7 +1220,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class Widget3GroupBox extends AbstractGroupBox {
 
       @Override
@@ -1233,7 +1233,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class WidgetControlSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -1256,7 +1256,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return "Change a widget";
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
@@ -1276,7 +1276,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1295,7 +1295,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1314,7 +1314,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
@@ -1333,7 +1333,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class ApplyButton extends AbstractButton {
 
           @Override
@@ -1370,7 +1370,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class WidgetSequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -1378,7 +1378,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           return FULL_WIDTH;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WidgetStringField1 extends AbstractStringField {
 
           @Override
@@ -1392,7 +1392,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class WidgetStringField2 extends AbstractStringField {
 
           @Override
@@ -1401,7 +1401,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class WidgetBooleanField1 extends AbstractCheckBox {
 
           @Override
@@ -1410,7 +1410,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class WidgetBooleanField2 extends AbstractBooleanField {
 
           @Override
@@ -1419,7 +1419,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class WidgetStringField3 extends AbstractStringField {
 
           @Override
@@ -1430,7 +1430,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
   }

@@ -141,10 +141,10 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
     return null;
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(5.0)
+    @Order(5)
     public class ActionGroupBox extends AbstractGroupBox {
 
       @Override
@@ -212,7 +212,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class HTMLField extends AbstractHtmlField {
 
       @Override
@@ -241,9 +241,9 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class GroupBox extends AbstractGroupBox {
-      @Order(30.0)
+      @Order(30)
       public class BlankButton extends AbstractLinkButton {
 
         @Override
@@ -258,7 +258,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class CustomHTMLButton extends AbstractLinkButton {
 
         @Override
@@ -281,7 +281,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ScoutHtmlButton extends AbstractLinkButton {
 
         @Override
@@ -295,7 +295,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class ALotOfContentHtmlButton extends AbstractLinkButton {
 
         @Override
@@ -310,7 +310,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class CloseButton extends AbstractCloseButton {
     }
   }

@@ -127,13 +127,13 @@ public class StatusForm extends AbstractForm implements IPageForm {
     return getFieldByClass(FileChooserField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class StringField extends AbstractStringField {
 
         @Override
@@ -147,7 +147,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class IntegerField extends AbstractIntegerField {
 
         @Override
@@ -161,7 +161,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class CheckboxField extends AbstractCheckBox {
 
         @Override
@@ -175,7 +175,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class SequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -188,7 +188,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
           return TEXTS.get("SequenceBox");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SequenceFrom extends AbstractBigDecimalField {
 
           @Override
@@ -197,7 +197,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class SequenceTo extends AbstractBigDecimalField {
 
           @Override
@@ -207,7 +207,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class FileChooserField extends AbstractFileChooserField {
 
         @Override
@@ -222,11 +222,11 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ERRORStatusButton extends AbstractButton {
 
       @Override
@@ -258,7 +258,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class WARNINGStatusButton extends AbstractButton {
 
       @Override
@@ -290,7 +290,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class INFOStatusButton extends AbstractButton {
 
       @Override

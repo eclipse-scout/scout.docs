@@ -225,10 +225,10 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(VisibleLastNameField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -241,7 +241,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class Example1Box extends AbstractGroupBox {
 
         @Override
@@ -254,7 +254,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           return 5;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class DefaultBox extends AbstractGroupBox {
 
           @Override
@@ -272,7 +272,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("Default");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class FirstNameField extends AbstractStringField {
 
             @Override
@@ -281,7 +281,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class LastNameField extends AbstractStringField {
 
             @Override
@@ -290,7 +290,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(30.0)
+          @Order(30)
           public class CompanyField extends AbstractStringField {
 
             @Override
@@ -309,7 +309,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(50.0)
+          @Order(50)
           public class CommentField extends AbstractStringField {
 
             @Override
@@ -324,7 +324,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class SingleColumnBox extends AbstractGroupBox {
 
           @Override
@@ -342,7 +342,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("SingleColumnBox");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class CityField extends AbstractStringField {
 
             @Override
@@ -351,7 +351,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class CountryField extends AbstractStringField {
 
             @Override
@@ -362,7 +362,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class Example2Box extends AbstractGroupBox {
 
         @Override
@@ -375,7 +375,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           return 5;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class VerticalMonthsBox extends AbstractMonthsBox {
           @Override
           protected Class<? extends IGroupBoxBodyGrid> getConfiguredBodyGrid() {
@@ -398,7 +398,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class HorizontalMonthsBox extends AbstractMonthsBox {
           @Override
           protected Class<? extends IGroupBoxBodyGrid> getConfiguredBodyGrid() {
@@ -425,7 +425,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
 
       //    }
 
-      @Order(30.0)
+      @Order(30)
       public class Example3Box extends AbstractGroupBox {
 
         @Override
@@ -464,7 +464,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           return getFieldByClass(CompanyField.class);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SectionBox extends AbstractGroupBox {
 
           @Override
@@ -497,7 +497,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             return 2;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class FirstNameField extends AbstractStringField {
 
             @Override
@@ -506,7 +506,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class LastNameField extends AbstractStringField {
 
             @Override
@@ -515,7 +515,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(30.0)
+          @Order(30)
           public class CompanyField extends AbstractStringField {
 
             @Override
@@ -534,7 +534,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(50.0)
+          @Order(50)
           public class CommentField extends AbstractStringField {
 
             @Override
@@ -549,7 +549,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(60.0)
+        @Order(60)
         public class ScrollableBox extends AbstractMonthsBox {
 
           @Override
@@ -585,7 +585,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class VisibilityBox extends AbstractGroupBox {
 
       @Override
@@ -598,7 +598,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("FieldVisibility");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class VisibleFirstNameField extends AbstractCheckBox {
 
         @Override
@@ -622,7 +622,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class VisibleLastNameField extends AbstractCheckBox {
 
         @Override
@@ -646,7 +646,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class VisibleCompanyField extends AbstractCheckBox {
 
         @Override
@@ -670,11 +670,11 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
 
-      @Order(60.0)
+      @Order(60)
       public class VisibleField extends AbstractCheckBox {
 
         @Override
@@ -698,7 +698,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class Placeholder2Field extends AbstractPlaceholderField {
 
         @Override
@@ -708,7 +708,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
   }

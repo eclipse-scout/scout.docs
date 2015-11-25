@@ -88,13 +88,13 @@ public class OrganizationSearchForm extends AbstractSearchForm {
     return getFieldByClass(TabBox.class);
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1000.0)
+    @Order(1000)
     public class TabBox extends AbstractTabBox {
 
-      @Order(1000.0)
+      @Order(1000)
       public class FieldBox extends AbstractGroupBox {
 
         @Override
@@ -102,7 +102,7 @@ public class OrganizationSearchForm extends AbstractSearchForm {
           return TEXTS.get("SearchCriteria");
         }
 
-        @Order(1000.0)
+        @Order(1000)
         public class NameField extends AbstractStringField {
 
           @Override
@@ -111,7 +111,7 @@ public class OrganizationSearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(2000.0)
+        @Order(2000)
         public class HomepageField extends AbstractStringField {
 
           @Override
@@ -120,7 +120,7 @@ public class OrganizationSearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(4000.0)
+        @Order(4000)
         public class Location extends AbstractLocationBox {
 
           @Override
@@ -131,11 +131,11 @@ public class OrganizationSearchForm extends AbstractSearchForm {
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class ResetButton extends AbstractResetButton {
     }
 
-    @Order(3000.0)
+    @Order(3000)
     public class SearchButton extends AbstractSearchButton {
     }
   }

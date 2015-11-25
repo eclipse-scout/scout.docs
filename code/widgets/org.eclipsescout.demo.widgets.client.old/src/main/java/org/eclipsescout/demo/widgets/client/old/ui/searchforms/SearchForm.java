@@ -144,7 +144,7 @@ public class SearchForm extends AbstractSearchForm {
     return getFieldByClass(TabBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -152,10 +152,10 @@ public class SearchForm extends AbstractSearchForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class TabBox extends AbstractTabBox {
 
-      @Order(10.0)
+      @Order(10)
       public class FieldBox extends AbstractGroupBox {
 
         @Override
@@ -163,7 +163,7 @@ public class SearchForm extends AbstractSearchForm {
           return TEXTS.get("searchCriteria");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringField extends AbstractStringField {
 
           @Override
@@ -172,7 +172,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class LongBox extends AbstractSequenceBox {
 
           @Override
@@ -180,7 +180,7 @@ public class SearchForm extends AbstractSearchForm {
             return TEXTS.get("LongColumn");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class LongFrom extends AbstractLongField {
 
             @Override
@@ -189,7 +189,7 @@ public class SearchForm extends AbstractSearchForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class LongTo extends AbstractLongField {
 
             @Override
@@ -199,7 +199,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class IntegerBox extends AbstractSequenceBox {
 
           @Override
@@ -207,7 +207,7 @@ public class SearchForm extends AbstractSearchForm {
             return TEXTS.get("IntegerColumn");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class IntegerFrom extends AbstractIntegerField {
 
             @Override
@@ -216,7 +216,7 @@ public class SearchForm extends AbstractSearchForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class IntegerTo extends AbstractIntegerField {
 
             @Override
@@ -226,7 +226,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class DoubleBox extends AbstractSequenceBox {
 
           @Override
@@ -234,7 +234,7 @@ public class SearchForm extends AbstractSearchForm {
             return TEXTS.get("BigDecimalColumn");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class BigDecimalFrom extends AbstractBigDecimalField {
 
             @Override
@@ -243,7 +243,7 @@ public class SearchForm extends AbstractSearchForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class BigDecimalTo extends AbstractBigDecimalField {
 
             @Override
@@ -253,7 +253,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class DateBox extends AbstractSequenceBox {
 
           @Override
@@ -261,7 +261,7 @@ public class SearchForm extends AbstractSearchForm {
             return TEXTS.get("DateColumn");
           }
 
-          @Order(10.0)
+          @Order(10)
           public class DateFrom extends AbstractDateField {
 
             @Override
@@ -270,7 +270,7 @@ public class SearchForm extends AbstractSearchForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class DateTo extends AbstractDateField {
 
             @Override
@@ -280,7 +280,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(60.0)
+        @Order(60)
         public class BooleanField extends AbstractBooleanField {
 
           @Override
@@ -289,7 +289,7 @@ public class SearchForm extends AbstractSearchForm {
           }
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SmartField extends AbstractListBox<Long> {
 
           @Override
@@ -310,7 +310,7 @@ public class SearchForm extends AbstractSearchForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class CloseButton extends AbstractButton {
 
       @Override
@@ -326,7 +326,7 @@ public class SearchForm extends AbstractSearchForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ResetButton extends AbstractResetButton {
       @Override
       protected String getConfiguredKeyStroke() {
@@ -334,7 +334,7 @@ public class SearchForm extends AbstractSearchForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SearchButton extends AbstractSearchButton {
     }
   }

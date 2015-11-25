@@ -55,10 +55,10 @@ public class IconChooserForm extends AbstractForm {
     return getFieldByClass(OkButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class IconField extends AbstractFileChooserField {
 
       @Override
@@ -72,11 +72,11 @@ public class IconChooserForm extends AbstractForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CancelButton extends AbstractCancelButton {
     }
   }

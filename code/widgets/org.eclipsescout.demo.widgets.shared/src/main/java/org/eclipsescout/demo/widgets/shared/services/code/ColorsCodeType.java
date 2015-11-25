@@ -55,7 +55,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     return codes;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class BlackCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.BLACK;
@@ -71,7 +71,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(80.0)
+  @Order(80)
   public static class BlueCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.BLUE;
@@ -87,7 +87,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(90.0)
+  @Order(90)
   public static class CyanCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.CYAN;
@@ -103,7 +103,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class DarkGrayCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.DARK_GRAY;
@@ -119,7 +119,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public static class GrayCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.GRAY;
@@ -135,7 +135,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(70.0)
+  @Order(70)
   public static class GreenCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.GREEN;
@@ -151,7 +151,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(40.0)
+  @Order(40)
   public static class LightGrayCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.LIGHT_GRAY;
@@ -167,7 +167,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(100.0)
+  @Order(100)
   public static class MagentaCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.MAGENTA;
@@ -183,7 +183,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(110.0)
+  @Order(110)
   public static class OrangeCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.ORANGE;
@@ -199,7 +199,7 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
     }
   }
 
-  @Order(120.0)
+  @Order(120)
   public static class YellowCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.YELLOW;

@@ -125,7 +125,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       return getColumnSet().getColumnByClass(StringColumn.class);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class StringColumn extends AbstractStringColumn {
 
       @Override
@@ -139,7 +139,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class LongColumn extends AbstractLongColumn {
 
       @Override
@@ -153,7 +153,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class IntegerColumn extends AbstractIntegerColumn {
 
       @Override
@@ -167,7 +167,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class BigDecimalColumn extends AbstractBigDecimalColumn {
 
       @Override
@@ -181,7 +181,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class DateColumn extends AbstractDateColumn {
 
       @Override
@@ -195,7 +195,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class BooleanColumn extends AbstractBooleanColumn {
 
       @Override
@@ -209,7 +209,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(70.0)
+    @Order(70)
     public class SmartColumn extends AbstractSmartColumn<Long> {
 
       @Override
@@ -228,7 +228,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ToggleMandatoryMenu extends AbstractMenu {
 
       @Override
@@ -259,7 +259,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ChangeAggregationFunctionMenu extends AbstractMenu {
 
       @Override
@@ -309,7 +309,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(40.0)
+    @Order(40)
     public class ChangeBackgroundEffectMenu extends AbstractMenu {
 
       @Override
@@ -351,7 +351,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(50.0)
+    @Order(50)
     public class FormToolButton extends AbstractFormToolButton<CheckboxFieldForm> {
 
       @Override
@@ -374,7 +374,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(20.0)
+    @Order(20)
     public class TableSingleMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -388,7 +388,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class HierarchicalMenu extends AbstractMenu {
 
       @Override
@@ -396,7 +396,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         return "Hierarchical Menu";
       }
 
-      @Order(10.0)
+      @Order(10)
       public class SubSingleMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -411,7 +411,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SubMultiMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -426,7 +426,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class SubEmptySpaceMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -441,7 +441,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       }
 
-      @Order(40.0)
+      @Order(40)
       public class IntermediateMenu extends AbstractMenu {
 
         @Override
@@ -449,7 +449,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
           return "Intermediate Menu";
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SubSubSingleMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -464,7 +464,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
         }
 
-        @Order(20.0)
+        @Order(20)
         public class SubSubMultiMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -479,7 +479,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
         }
 
-        @Order(30.0)
+        @Order(30)
         public class SubSubEmptySpaceMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -499,7 +499,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
   }
 
-  @Order(10.0)
+  @Order(10)
   public class HierarchicalPageMenu extends AbstractMenu {
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -512,7 +512,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       return "HierarchicalPage Menu";
     }
 
-    @Order(10.0)
+    @Order(10)
     public class SubSingleMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -527,7 +527,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(20.0)
+    @Order(20)
     public class SubMultiMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -542,7 +542,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SubEmptySpaceMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -557,7 +557,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     }
 
-    @Order(40.0)
+    @Order(40)
     public class IntermediateMenu extends AbstractMenu {
 
       @Override
@@ -565,7 +565,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         return "Intermediate Menu";
       }
 
-      @Order(10.0)
+      @Order(10)
       public class SubSubSingleMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -580,7 +580,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SubSubMultiMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -595,7 +595,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class SubSubEmptySpaceMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -614,7 +614,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

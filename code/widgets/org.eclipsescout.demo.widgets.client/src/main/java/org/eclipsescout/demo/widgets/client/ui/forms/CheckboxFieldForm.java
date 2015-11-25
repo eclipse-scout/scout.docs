@@ -115,7 +115,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -123,7 +123,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -131,7 +131,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractCheckBox {
 
         @Override
@@ -140,7 +140,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class DisabledField extends AbstractCheckBox {
 
         @Override
@@ -160,7 +160,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -173,7 +173,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         return true;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class CheckboxField extends AbstractCheckBox {
 
         @Override
@@ -182,7 +182,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class IsCheckedField extends AbstractStringField {
 
         @Override
@@ -206,7 +206,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class FontNameField extends AbstractStringField {
 
         @Override
@@ -225,7 +225,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class FontStyleField extends AbstractSmartField<Integer> {
 
         @Override
@@ -258,7 +258,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class CloseButton extends AbstractCloseButton {
     }
   }

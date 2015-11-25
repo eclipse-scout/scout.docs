@@ -212,10 +212,10 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -228,7 +228,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ExampleColumn0Box extends AbstractGroupBox {
 
         @Override
@@ -256,7 +256,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 0;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class TitleColumnField extends AbstractLabelField {
 
           @Override
@@ -270,7 +270,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class TitleDefaultField extends AbstractLabelField {
 
           @Override
@@ -284,7 +284,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class TitleMandatoryField extends AbstractLabelField {
 
           @Override
@@ -298,7 +298,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class TitleDisabledField extends AbstractLabelField {
 
           @Override
@@ -312,7 +312,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class TitleLocaleField extends AbstractLabelField {
 
           @Override
@@ -327,7 +327,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ExampleColumn1Box extends AbstractGroupBox {
 
         @Override
@@ -345,7 +345,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class DateColumnField extends AbstractLabelField {
 
           @Override
@@ -364,7 +364,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class DefaultField extends AbstractDateField {
 
           @Override
@@ -383,7 +383,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class MandatoryField extends AbstractDateField {
 
           @Override
@@ -402,7 +402,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class DisabledField extends AbstractDateField {
 
           @Override
@@ -426,7 +426,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class LocaleField extends AbstractLabelField {
 
           @Override
@@ -446,7 +446,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ExampleColumn2Box extends AbstractGroupBox {
 
         @Override
@@ -464,7 +464,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(60.0)
+        @Order(60)
         public class TimeColumnField extends AbstractLabelField {
 
           @Override
@@ -483,7 +483,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(70.0)
+        @Order(70)
         public class TimeField extends AbstractTimeField {
 
           @Override
@@ -497,7 +497,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(80.0)
+        @Order(80)
         public class TimeMandatoryField extends AbstractTimeField {
 
           @Override
@@ -516,7 +516,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(90.0)
+        @Order(90)
         public class TimeDisabledField extends AbstractTimeField {
 
           @Override
@@ -541,7 +541,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class ExampleColumn3Box extends AbstractGroupBox {
 
         @Override
@@ -559,7 +559,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(110.0)
+        @Order(110)
         public class DateTimeColumnField extends AbstractLabelField {
 
           @Override
@@ -578,7 +578,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(120.0)
+        @Order(120)
         public class DateTimeField extends AbstractDateTimeField {
 
           @Override
@@ -592,7 +592,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(130.0)
+        @Order(130)
         public class DateTimeMandatoryField extends AbstractDateTimeField {
 
           @Override
@@ -611,7 +611,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(140.0)
+        @Order(140)
         public class DateTimeDisabledField extends AbstractDateTimeField {
 
           @Override
@@ -637,7 +637,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -650,7 +650,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ConfigurationColumn0Box extends AbstractGroupBox {
 
         @Override
@@ -678,7 +678,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 0;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class TitleColumnField extends AbstractLabelField {
 
           @Override
@@ -692,7 +692,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class TitleInputField extends AbstractLabelField {
 
           @Override
@@ -706,7 +706,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class TitleValueField extends AbstractLabelField {
 
           @Override
@@ -720,7 +720,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class TitleFormatField extends AbstractLabelField {
 
           @Override
@@ -734,7 +734,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class TitleDisplayTextField extends AbstractLabelField {
 
           @Override
@@ -748,7 +748,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(60.0)
+        @Order(60)
         public class TitleLocaleField extends AbstractLabelField {
 
           @Override
@@ -762,7 +762,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(70.0)
+        @Order(70)
         public class TitleAutoDateField extends AbstractLabelField {
 
           @Override
@@ -777,7 +777,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ConfigurationColumn1Box extends AbstractGroupBox {
 
         @Override
@@ -795,7 +795,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(5.0)
+        @Order(5)
         public class DateColumnField extends AbstractLabelField {
 
           @Override
@@ -814,7 +814,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(10.0)
+        @Order(10)
         public class InputField extends AbstractDateField {
 
           @Override
@@ -844,7 +844,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class GetValueField extends AbstractStringField {
 
           @Override
@@ -878,7 +878,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class DateFieldFormatField extends AbstractStringField {
 
           @Override
@@ -907,7 +907,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(37.0)
+        @Order(37)
         public class DisplayTextField extends AbstractStringField {
 
           @Override
@@ -921,7 +921,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class ConfigLocaleField extends AbstractSmartField<Locale> {
 
           @Override
@@ -962,7 +962,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class AutoDateDateField extends AbstractDateTimeField {
 
           @Override
@@ -985,7 +985,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class ConfigurationColumn2Box extends AbstractGroupBox {
 
         @Override
@@ -1003,7 +1003,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(5.0)
+        @Order(5)
         public class TimeColumnField extends AbstractLabelField {
 
           @Override
@@ -1022,7 +1022,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class TimeInputField extends AbstractTimeField {
 
           @Override
@@ -1052,7 +1052,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(60.0)
+        @Order(60)
         public class GetTimeValueField extends AbstractStringField {
 
           @Override
@@ -1086,7 +1086,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(70.0)
+        @Order(70)
         public class TimeFieldFormatField extends AbstractStringField {
 
           @Override
@@ -1115,7 +1115,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(77.0)
+        @Order(77)
         public class TimeDisplayTextField extends AbstractStringField {
 
           @Override
@@ -1130,7 +1130,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ConfigurationColumn3Box extends AbstractGroupBox {
 
         @Override
@@ -1148,7 +1148,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(5.0)
+        @Order(5)
         public class DateTimeColumnField extends AbstractLabelField {
 
           @Override
@@ -1167,7 +1167,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(90.0)
+        @Order(90)
         public class DateTimeInputField extends AbstractDateTimeField {
 
           @Override
@@ -1197,7 +1197,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(100.0)
+        @Order(100)
         public class GetDateTimeValueField extends AbstractStringField {
 
           @Override
@@ -1231,7 +1231,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(110.0)
+        @Order(110)
         public class DateTimeFieldFormatField extends AbstractStringField {
 
           @Override
@@ -1260,7 +1260,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(2000.0)
+        @Order(2000)
         public class DateTimeDisplayTextField extends AbstractStringField {
 
           @Override
@@ -1301,7 +1301,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class NowButton extends AbstractButton {
 
       @Override
@@ -1315,7 +1315,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class NineteenSeventyButton extends AbstractButton {
 
       @Override
@@ -1331,7 +1331,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class SampleFormatButton extends AbstractButton {
 
       @Override
@@ -1347,7 +1347,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class ShortFormatButton extends AbstractButton {
 
       @Override
@@ -1364,7 +1364,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(70.0)
+    @Order(70)
     public class MediumFormatButton extends AbstractButton {
 
       @Override
@@ -1381,7 +1381,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(80.0)
+    @Order(80)
     public class CustomMediumFormatButton extends AbstractButton {
 
       @Override
@@ -1398,7 +1398,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(170.0)
+    @Order(170)
     public class CloseButton extends AbstractCloseButton {
 
       @Override

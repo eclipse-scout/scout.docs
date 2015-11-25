@@ -93,10 +93,10 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TreeField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -109,7 +109,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         return 10;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class TreeDNDDescriptionField extends AbstractLabelField {
 
         @Override
@@ -133,7 +133,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class TreeField extends AbstractTreeField {
 
         @Override
@@ -213,7 +213,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           setTree(exampleTree, false);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Tree extends AbstractTree {
 
           @Override
@@ -252,7 +252,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class Tree2Field extends AbstractTreeField {
 
         @Override
@@ -332,7 +332,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
           setTree(exampleTree, false);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Tree extends AbstractTree {
           @Override
           protected boolean getConfiguredDragEnabled() {
@@ -370,7 +370,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class DNDStatusField extends AbstractArrayTableField<DNDStatusField.Table> {
 
         public void addLine(String text) {
@@ -406,7 +406,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
             return getColumnSet().getColumnByClass(ActionColumn.class);
           }
 
-          @Order(20.0)
+          @Order(20)
           public class ActionColumn extends AbstractStringColumn {
 
             @Override
@@ -420,7 +420,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(10.0)
+          @Order(10)
           public class IdColumn extends AbstractIntegerColumn {
 
             @Override
@@ -432,7 +432,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class ClearButton extends AbstractButton {
 
       @Override
@@ -446,7 +446,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
   }

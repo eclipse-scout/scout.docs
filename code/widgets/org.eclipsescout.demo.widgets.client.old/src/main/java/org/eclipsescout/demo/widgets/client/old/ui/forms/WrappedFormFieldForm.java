@@ -81,13 +81,13 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(WrappedFormFieldBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class InnerFormsField extends AbstractSmartField<Class<? extends IPageForm>> {
 
         @Override
@@ -140,7 +140,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class StaticInnerFormsField extends AbstractSmartField<IPageForm> {
 
         private StaticFormLookupCall m_lookupCall = null;
@@ -184,7 +184,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class WrappedFormFieldBox extends AbstractGroupBox {
 
       @Override
@@ -192,7 +192,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         return BORDER_DECORATION_EMPTY;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class WrappedFormField extends AbstractWrappedFormField<IPageForm> {
 
         @Override
@@ -202,7 +202,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
 
       @Override

@@ -184,10 +184,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(DeletedRowsField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -195,7 +195,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractFileTableField {
 
         @Override
@@ -215,7 +215,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -223,7 +223,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class TableField extends AbstractTableField<TableField.Table> {
 
         private static final String EDITABLE_CELL_BACKGROUND_COLOR = "EFEFFF";
@@ -377,7 +377,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             });
           }
 
-          @Order(10.0)
+          @Order(10)
           public class IdColumn extends AbstractLongColumn {
 
             @Override
@@ -396,7 +396,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class NameColumn extends AbstractStringColumn {
 
             @Override
@@ -421,7 +421,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(30.0)
+          @Order(30)
           public class LocationColumn extends AbstractStringColumn {
 
             @Override
@@ -441,7 +441,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(40.0)
+          @Order(40)
           public class DateColumn extends AbstractDateColumn {
 
             @Override
@@ -460,7 +460,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(45.0)
+          @Order(45)
           public class StartTimeColumn extends AbstractTimeColumn {
 
             @Override
@@ -479,7 +479,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(48.0)
+          @Order(48)
           public class EndDateTimeColumn extends AbstractDateTimeColumn {
 
             @Override
@@ -498,7 +498,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(50.0)
+          @Order(50)
           public class IndustryColumn extends AbstractSmartColumn<Long> {
 
             @Override
@@ -528,7 +528,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(60.0)
+          @Order(60)
           public class LanguageColumn extends AbstractSmartColumn<Locale> {
 
             @Override
@@ -553,7 +553,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(70.0)
+          @Order(70)
           public class ParticipantsColumn extends AbstractLongColumn {
 
             @Override
@@ -583,7 +583,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(80.0)
+          @Order(80)
           public class WebPageColumn extends AbstractStringColumn {
 
             @Override
@@ -608,7 +608,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(90.0)
+          @Order(90)
           public class AttendedColumn extends AbstractBooleanColumn {
 
             @Override
@@ -633,7 +633,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(100.0)
+          @Order(100)
           public class PhoneColumn extends AbstractStringColumn {
             @Override
             protected boolean getConfiguredEditable() {
@@ -651,7 +651,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(100.0)
+          @Order(100)
           public class TrendColumn extends AbstractIconColumn {
 
             @Override
@@ -671,7 +671,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             addRow(row, true);
           }
 
-          @Order(10.0)
+          @Order(10)
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -703,7 +703,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               return CollectionUtility.hashSet(TableMenuType.EmptySpace);
             }
 
-            @Order(10.0)
+            @Order(10)
             public class RemoveStatusMenu extends AbstractMenu {
 
               @Override
@@ -722,7 +722,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(20.0)
+            @Order(20)
             public class SetSeverityInfoMenu extends AbstractMenu {
 
               @Override
@@ -741,7 +741,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(30.0)
+            @Order(30)
             public class SetSeverityWarningMenu extends AbstractMenu {
 
               @Override
@@ -760,7 +760,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(40.0)
+            @Order(40)
             public class SetSeverityErrorMenu extends AbstractMenu {
 
               @Override
@@ -780,7 +780,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(15.0)
+          @Order(15)
           public class MoreMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
@@ -792,7 +792,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
             }
 
-            @Order(10.0)
+            @Order(10)
             public class NewDelayedMenu extends AbstractMenu {
 
               @Override
@@ -818,7 +818,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(15.0)
+            @Order(15)
             public class ScrollToSelection extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -837,7 +837,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class DeleteMenu extends AbstractMenu {
 
             @Override
@@ -857,7 +857,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(25.0)
+          @Order(25)
           public class DeleteDelayedMenu extends AbstractMenu {
 
             @Override
@@ -883,7 +883,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(30.0)
+          @Order(30)
           public class ToggleRowEnabledMenu extends AbstractMenu {
 
             @Override
@@ -907,7 +907,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(40.0)
+          @Order(40)
           public class HighlightRow extends AbstractMenu {
 
             @Override
@@ -939,7 +939,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
-          @Order(50.0)
+          @Order(50)
           public class HierarchicalMenu extends AbstractMenu {
 
             @Override
@@ -947,7 +947,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               return "Hierarchical Menu";
             }
 
-            @Order(10.0)
+            @Order(10)
             public class SubSingleMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -962,7 +962,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(20.0)
+            @Order(20)
             public class SubMultiMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -977,7 +977,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(30.0)
+            @Order(30)
             public class SubEmptySpaceMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -992,7 +992,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(40.0)
+            @Order(40)
             public class IntermediateMenu extends AbstractMenu {
 
               @Override
@@ -1000,7 +1000,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 return "Intermediate Menu";
               }
 
-              @Order(10.0)
+              @Order(10)
               public class SubSubSingleMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1015,7 +1015,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
               }
 
-              @Order(20.0)
+              @Order(20)
               public class SubSubMultiMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1030,7 +1030,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
               }
 
-              @Order(30.0)
+              @Order(30)
               public class SubSubEmptySpaceMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1048,7 +1048,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(60.0)
+          @Order(60)
           public class KeyStroke extends AbstractKeyStroke {
 
             @Override
@@ -1069,7 +1069,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SelectedRowsField extends AbstractStringField {
 
         @Override
@@ -1083,7 +1083,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class InsertedRowsField extends AbstractStringField {
 
         @Override
@@ -1097,7 +1097,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class UpdatedRowsField extends AbstractStringField {
 
         @Override
@@ -1111,7 +1111,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class DeletedRowsField extends AbstractStringField {
 
         @Override
@@ -1125,7 +1125,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class DefaultIconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -1155,7 +1155,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class PropertiesGroupBox extends AbstractGroupBox {
 
         @Override
@@ -1178,7 +1178,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(80.0)
+        @Order(80)
         public class AutoResizeColumnsField extends AbstractCheckBox {
 
           @Override
@@ -1208,7 +1208,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         }
 
-        @Order(90.0)
+        @Order(90)
         public class IsVisibleField extends AbstractCheckBox {
 
           @Override
@@ -1242,7 +1242,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(95.0)
+        @Order(95)
         public class IsEnabledField extends AbstractCheckBox {
 
           @Override
@@ -1271,7 +1271,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(100.0)
+        @Order(100)
         public class IsEditableField extends AbstractCheckBox {
 
           @Override
@@ -1302,7 +1302,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(110.0)
+        @Order(110)
         public class MultiSelectField extends AbstractCheckBox {
 
           @Override
@@ -1332,7 +1332,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(120.0)
+        @Order(120)
         public class IsCheckableField extends AbstractCheckBox {
 
           @Override
@@ -1362,7 +1362,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         }
 
-        @Order(122.0)
+        @Order(122)
         public class IsRowIconVisibleField extends AbstractCheckBox {
 
           @Override
@@ -1394,7 +1394,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         }
 
-        @Order(125.0)
+        @Order(125)
         public class WrapTextField extends AbstractCheckBox {
 
           @Override
@@ -1424,7 +1424,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         }
 
-        @Order(130.0)
+        @Order(130)
         public class TableStatusVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1455,7 +1455,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(140.0)
+        @Order(140)
         public class TableHeaderVisibleField extends AbstractCheckBox {
 
           @Override
@@ -1484,7 +1484,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(142.0)
+        @Order(142)
         public class TableHeaderEnabledField extends AbstractCheckBox {
 
           @Override
@@ -1513,7 +1513,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(145.0)
+        @Order(145)
         public class TableSortEnabledField extends AbstractCheckBox {
 
           @Override
@@ -1542,7 +1542,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(150.0)
+        @Order(150)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
@@ -1575,7 +1575,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -1589,7 +1589,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class CloseButton extends AbstractCloseButton {
     }
   }

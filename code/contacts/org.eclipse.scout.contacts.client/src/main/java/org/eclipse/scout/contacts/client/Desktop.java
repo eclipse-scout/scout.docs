@@ -75,7 +75,7 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class ContactOutlineViewButton extends AbstractOutlineViewButton {
 
     public ContactOutlineViewButton() {
@@ -97,7 +97,7 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(2_000.0)
+  @Order(2)
   public class SearchOutlineViewButton extends AbstractOutlineViewButton {
 
     public SearchOutlineViewButton() {
@@ -124,7 +124,7 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(1_000)
+  @Order(1)
   public class QuickAccessMenu extends AbstractMenu {
 
     @Override
@@ -132,7 +132,7 @@ public class Desktop extends AbstractDesktop {
       return TEXTS.get("QuickAccess");
     }
 
-    @Order(10.0)
+    @Order(10)
     public class PersonNewMenu extends AbstractMenu {
 
       @Override
@@ -151,7 +151,7 @@ public class Desktop extends AbstractDesktop {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class OrganizationNewMenu extends AbstractMenu {
 
       @Override
@@ -171,7 +171,7 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(2_000.0)
+  @Order(2)
   public class OptionsToolButton extends AbstractFormToolButton<OptionsForm> {
 
     @Override
@@ -195,7 +195,7 @@ public class Desktop extends AbstractDesktop {
     }
   }
 
-  @Order(3_000.0)
+  @Order(3)
   public class UserMenuToolButton extends AbstractFormToolButton<UserForm> {
 
     @Override

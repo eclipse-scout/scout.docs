@@ -44,10 +44,10 @@ public class ToolButton2Form extends AbstractForm {
     return getFieldByClass(TreeBoxField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class TreeBoxField extends AbstractTreeBox<Long> {
 
       @Override

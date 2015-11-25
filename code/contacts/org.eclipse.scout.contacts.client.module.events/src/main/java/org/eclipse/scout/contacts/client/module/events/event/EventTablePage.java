@@ -109,7 +109,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       return EditMenu.class;
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class EventIdColumn extends AbstractStringColumn {
 
       @Override
@@ -123,7 +123,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class TitleColumn extends AbstractStringColumn {
 
       @Override
@@ -137,7 +137,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(3_000.0)
+    @Order(3)
     public class StartsColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -151,7 +151,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(4_000.0)
+    @Order(4)
     public class EndsColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -165,7 +165,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(5_000.0)
+    @Order(5)
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -179,7 +179,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(6_000.0)
+    @Order(6)
     public class CountryColumn extends AbstractStringColumn {
 
       @Override
@@ -188,7 +188,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(7_000.0)
+    @Order(7)
     public class HomepageColumn extends AbstractStringColumn {
 
       @Override
@@ -207,7 +207,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(8_000.0)
+    @Order(8)
     public class ParticipantsColumn extends AbstractIntegerColumn {
 
       @Override
@@ -221,7 +221,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class EditMenu extends AbstractMenu {
 
       @Override
@@ -246,7 +246,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class NewMenu extends AbstractMenu {
 
       @Override

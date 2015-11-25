@@ -90,7 +90,7 @@ public class MapForm extends AbstractForm {
     m_country = country;
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -98,7 +98,7 @@ public class MapForm extends AbstractForm {
       return 1;
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class MapField extends AbstractImageField {
 
       @Override
@@ -155,7 +155,7 @@ public class MapForm extends AbstractForm {
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class OkButton extends AbstractOkButton {
       @Override
       protected boolean getConfiguredFocusable() {

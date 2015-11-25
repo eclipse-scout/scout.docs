@@ -58,7 +58,7 @@ public class PictureUrlForm extends AbstractForm {
     return getFieldByClass(UrlBox.class);
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -66,10 +66,10 @@ public class PictureUrlForm extends AbstractForm {
       return 1;
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class UrlBox extends AbstractGroupBox {
 
-      @Order(1000.0)
+      @Order(1000)
       public class PictureUrlField extends AbstractStringField {
 
         @Override
@@ -79,11 +79,11 @@ public class PictureUrlForm extends AbstractForm {
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(3000.0)
+    @Order(3000)
     public class CancelButton extends AbstractCancelButton {
     }
   }

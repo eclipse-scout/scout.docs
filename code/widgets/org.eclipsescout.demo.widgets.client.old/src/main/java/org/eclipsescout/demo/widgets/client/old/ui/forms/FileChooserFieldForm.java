@@ -110,10 +110,10 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(UploadSingleFileButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class FileUploadBox extends AbstractGroupBox {
 
       @Override
@@ -126,7 +126,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("FileUpload");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class FileChooserFieldBox extends AbstractGroupBox {
 
         @Override
@@ -134,7 +134,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           return TEXTS.get("FileChooserField");
         }
 
-        @Order(20.0)
+        @Order(20)
         public class ChooseAnImageField extends AbstractFileChooserField {
 
           @Override
@@ -154,7 +154,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class FileDialogBox extends AbstractGroupBox {
 
         @Override
@@ -162,7 +162,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           return TEXTS.get("FileDialogBox");
         }
 
-        @Order(40.0)
+        @Order(40)
         public class UploadSingleFileButton extends AbstractButton {
 
           @Override
@@ -180,7 +180,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class UploadMultipleFilesButton extends AbstractButton {
 
           @Override
@@ -199,7 +199,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class ServerLogBox extends AbstractGroupBox {
 
         @Override
@@ -207,7 +207,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
           return TEXTS.get("ServerLog");
         }
 
-        @Order(1000.0)
+        @Order(1000)
         public class ServerLogField extends AbstractTableField<ServerLogField.Table> {
 
           @Override
@@ -253,7 +253,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               return getColumnSet().getColumnByClass(ActionColumn.class);
             }
 
-            @Order(10.0)
+            @Order(10)
             public class FileColumn extends AbstractColumn<BinaryResource> {
 
               @Override
@@ -262,7 +262,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(20.0)
+            @Order(20)
             public class TimeColumn extends AbstractTimeColumn {
 
               @Override
@@ -281,7 +281,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(80.0)
+            @Order(80)
             public class ActionColumn extends AbstractStringColumn {
 
               @Override
@@ -295,7 +295,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(90.0)
+            @Order(90)
             public class ClearMenu extends AbstractMenu {
 
               @Override
@@ -314,7 +314,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(100.0)
+            @Order(100)
             public class OpenFileMenu extends AbstractMenu {
 
               @Override
@@ -342,7 +342,7 @@ public class FileChooserFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(180.0)
+    @Order(180)
     public class CloseButton extends AbstractCloseButton {
     }
   }

@@ -199,10 +199,10 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(StartLongRunningOperationButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ControllerBox extends AbstractGroupBox {
 
       @Override
@@ -215,7 +215,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DisplayHintField extends AbstractSmartField<DisplayHint> {
 
         @Override
@@ -234,7 +234,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ModalityField extends AbstractBooleanField {
 
         @Override
@@ -243,7 +243,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class DisplayParentField extends AbstractSmartField<DisplayParent> {
 
         @Override
@@ -262,7 +262,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class OpeningDelayField extends AbstractIntegerField {
 
         @Override
@@ -276,7 +276,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class BlockModelThreadField extends AbstractBooleanField {
 
         @Override
@@ -285,7 +285,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(55.0)
+      @Order(55)
       public class CloseOnChildCloseField extends AbstractBooleanField {
 
         @Override
@@ -294,7 +294,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class OpenFormButton extends AbstractButton {
 
         @Override
@@ -401,7 +401,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class FormFieldBox extends AbstractGroupBox {
 
       @Override
@@ -409,7 +409,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         return "Form fields";
       }
 
-      @Order(10.0)
+      @Order(10)
       public class FormField1GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -417,7 +417,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Field1Field extends AbstractStringField {
 
           @Override
@@ -426,7 +426,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class HideField1Button extends AbstractButton {
 
           @Override
@@ -458,7 +458,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class FormField2GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -466,7 +466,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Field2Field extends AbstractIntegerField {
 
           @Override
@@ -475,7 +475,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class HideField2Button extends AbstractButton {
 
           @Override
@@ -507,7 +507,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class FormField3GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -515,7 +515,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Field3Field extends AbstractDateField {
 
           @Override
@@ -524,7 +524,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class HideField3Button extends AbstractButton {
 
           @Override
@@ -556,7 +556,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class FormField4GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -564,7 +564,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Field4Field extends AbstractDateTimeField {
 
           @Override
@@ -573,7 +573,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class HideField4Button extends AbstractButton {
 
           @Override
@@ -606,7 +606,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class LongRunningOperationBox extends AbstractGroupBox {
 
       @Override
@@ -619,7 +619,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         return 3;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class CancellationDurationField extends AbstractIntegerField {
 
         @Override
@@ -633,7 +633,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class StartLongRunningOperationButton extends AbstractButton {
 
         @Override
@@ -672,7 +672,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

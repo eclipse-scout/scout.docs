@@ -234,10 +234,10 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TreeSmartField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -250,7 +250,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ShowDefaultValueButton extends AbstractButton {
 
         @Override
@@ -279,7 +279,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(15.0)
+      @Order(15)
       public class SwitchLookupCall extends AbstractButton {
 
         private boolean m_localLookupCall = true;
@@ -316,7 +316,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(17.0)
+      @Order(17)
       public class AutoPrefixWildcard extends AbstractButton {
 
         private boolean m_active = false;
@@ -353,7 +353,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SmartFieldWithListContentField extends AbstractLabelField {
 
         @Override
@@ -372,7 +372,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class DefaultField extends AbstractSmartField<Locale> {
 
         @Override
@@ -386,7 +386,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class MandatoryField extends AbstractSmartField<Color> {
 
         @Override
@@ -417,7 +417,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class DisabledField extends AbstractSmartField<Color> {
 
         @Override
@@ -441,7 +441,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class SmartFieldWithTreeContentField extends AbstractLabelField {
 
         @Override
@@ -460,7 +460,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class DefaultSmartField extends AbstractSmartField<Long> {
 
         @Override
@@ -474,7 +474,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class MandatorySmartfieldField extends AbstractSmartField<Long> {
 
         @Override
@@ -493,7 +493,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(90)
       public class DisabledSmartFieldField extends AbstractSmartField<Long> {
 
         @Override
@@ -517,7 +517,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(100)
       public class ProposalFieldWithListContentField extends AbstractLabelField {
 
         @Override
@@ -536,7 +536,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(110)
       public class DefaultProposalField extends AbstractProposalField<Long> {
 
         @Override
@@ -550,7 +550,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(120)
       public class MandatoryProposalField extends AbstractProposalField<Long> {
 
         @Override
@@ -594,7 +594,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -607,7 +607,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         return 3;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ListSmartField extends AbstractSmartField<String> {
 
         @Override
@@ -621,7 +621,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class GetValueField extends AbstractStringField {
 
         @Override
@@ -650,7 +650,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class ListEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -674,7 +674,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class BrowseMaxRowCountField extends AbstractIntegerField {
 
         @Override
@@ -699,11 +699,11 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
 
-      @Order(70.0)
+      @Order(70)
       public class TreeSmartField extends AbstractSmartField<String> {
 
         @Override
@@ -727,7 +727,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class GetValueTreeSmartFieldField extends AbstractStringField {
 
         @Override
@@ -756,7 +756,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(90)
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -779,7 +779,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(100)
       public class BrowseHierarchyField extends AbstractCheckBox {
 
         @Override
@@ -803,7 +803,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(110)
       public class BrowseAutoExpandAllField extends AbstractCheckBox {
 
         @Override
@@ -827,7 +827,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(120)
       public class PlaceholderField extends AbstractPlaceholderField {
 
         @Override
@@ -838,7 +838,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -856,7 +856,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(35.0)
+    @Order(35)
     public class ChangeWildcardButton extends AbstractButton {
 
       @Override
@@ -901,7 +901,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

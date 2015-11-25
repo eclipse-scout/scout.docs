@@ -81,7 +81,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       return getColumnSet().getColumnByClass(OrganizationIdColumn.class);
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class OrganizationIdColumn extends AbstractStringColumn {
 
       @Override
@@ -95,7 +95,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -109,7 +109,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(3000.0)
+    @Order(3000)
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -123,7 +123,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(4000.0)
+    @Order(4000)
     public class CountryColumn extends AbstractStringColumn {
 
       @Override
@@ -132,7 +132,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(5000.0)
+    @Order(5000)
     public class HomepageColumn extends AbstractStringColumn {
 
       @Override
@@ -146,7 +146,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class EditMenu extends AbstractMenu {
 
       @Override
@@ -176,7 +176,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class NewMenu extends AbstractMenu {
 
       @Override

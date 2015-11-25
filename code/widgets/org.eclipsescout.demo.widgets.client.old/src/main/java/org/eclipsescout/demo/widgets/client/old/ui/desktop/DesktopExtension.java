@@ -37,21 +37,21 @@ public class DesktopExtension extends AbstractDesktopExtension {
     return outlines;
   }
 
-  @Order(40.0)
+  @Order(40)
   public class WidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public WidgetsOutlineViewButton() {
       super(getCoreDesktop(), WidgetsOutline.class);
     }
   }
 
-  @Order(50.0)
+  @Order(50)
   public class PagesSearchFormsOutlineViewButton extends AbstractOutlineViewButton {
     public PagesSearchFormsOutlineViewButton() {
       super(getCoreDesktop(), PagesSearchFormsOutline.class);
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ToolButton1Tool extends AbstractFormToolButton<ToolButton1Form> {
 
     @Override
@@ -70,7 +70,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class ToolButton2Tool extends AbstractFormToolButton<ToolButton2Form> {
 
     @Override

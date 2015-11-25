@@ -34,7 +34,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     return ID;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class HtmlCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class TextCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -68,7 +68,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public static class JpgCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(40.0)
+  @Order(40)
   public static class PngCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -102,7 +102,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(50.0)
+  @Order(50)
   public static class JavaCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -119,7 +119,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(60.0)
+  @Order(60)
   public static class PdfCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -137,7 +137,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(70.0)
+  @Order(70)
   public static class UknownCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -155,7 +155,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(80.0)
+  @Order(80)
   public static class DirectoryCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;

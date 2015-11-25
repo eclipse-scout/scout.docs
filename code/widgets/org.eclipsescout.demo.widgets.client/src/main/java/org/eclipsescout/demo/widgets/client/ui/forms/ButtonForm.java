@@ -141,10 +141,10 @@ public class ButtonForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -157,7 +157,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -175,7 +175,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class DefaultField extends AbstractButton {
 
           @Override
@@ -189,7 +189,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class ButtonWithMenuField extends AbstractButton {
 
           @Override
@@ -202,7 +202,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             return false;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class MenuItem1 extends AbstractMenu {
 
             @Override
@@ -216,7 +216,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class MenuItem2 extends AbstractMenu {
 
             @Override
@@ -231,7 +231,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class DisabledField extends AbstractButton {
 
           @Override
@@ -250,7 +250,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class StyledField extends AbstractButton {
 
           @Override
@@ -275,7 +275,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ToggleButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -293,7 +293,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class ToggleButtonDefaultField extends AbstractButton {
 
           @Override
@@ -352,7 +352,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class ToggleButtonDisabledField extends AbstractButton {
 
           @Override
@@ -381,7 +381,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class ToggleButtonStyledField extends AbstractButton {
 
           @Override
@@ -406,7 +406,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class LinkButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -424,7 +424,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class DefaultLinkButton extends AbstractLinkButton {
 
           @Override
@@ -443,7 +443,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class DisabledLinkButton extends AbstractLinkButton {
 
           @Override
@@ -464,7 +464,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -477,7 +477,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ButtonFieldButton extends AbstractButton {
 
         @Override
@@ -506,7 +506,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class GetValueField extends AbstractStringField {
 
         @Override
@@ -521,7 +521,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class LabelField extends AbstractStringField {
 
         @Override
@@ -540,7 +540,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -564,32 +564,32 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class Place1Field extends AbstractPlaceholderField {
       }
 
-      @Order(70.0)
+      @Order(70)
       public class Place2Field extends AbstractPlaceholderField {
       }
 
-      @Order(80.0)
+      @Order(80)
       public class Place3Field extends AbstractPlaceholderField {
       }
 
-      @Order(90.0)
+      @Order(90)
       public class Place4Field extends AbstractPlaceholderField {
       }
 
-      @Order(100.0)
+      @Order(100)
       public class Place5Field extends AbstractPlaceholderField {
       }
 
-      @Order(110.0)
+      @Order(110)
       public class Place6Field extends AbstractPlaceholderField {
       }
     }
 
-    @Order(70.0)
+    @Order(70)
     public class CloseButton extends AbstractCloseButton {
     }
   }

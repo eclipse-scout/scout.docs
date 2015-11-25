@@ -87,7 +87,7 @@ public class UserForm extends AbstractForm {
     return getFieldByClass(UsernameField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -95,7 +95,7 @@ public class UserForm extends AbstractForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class UserBox extends AbstractGroupBox {
 
       @Override
@@ -108,7 +108,7 @@ public class UserForm extends AbstractForm {
         return TEXTS.get("User");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class UsernameField extends AbstractStringField {
 
         @Override
@@ -133,7 +133,7 @@ public class UserForm extends AbstractForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class PasswordField extends AbstractStringField {
 
         @Override
@@ -163,7 +163,7 @@ public class UserForm extends AbstractForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class UserRoleField extends AbstractSmartField<Integer> {
 
         @Override
@@ -187,11 +187,11 @@ public class UserForm extends AbstractForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class OkButton extends AbstractOkButton {
       }
 
-      @Order(50.0)
+      @Order(50)
       public class CancelButton extends AbstractCancelButton {
       }
     }

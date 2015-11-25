@@ -90,7 +90,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     }
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class PictureField extends AbstractImageField {
 
     @Override
@@ -113,7 +113,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       return false;
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class EditURLMenu extends AbstractMenu {
 
       @Override

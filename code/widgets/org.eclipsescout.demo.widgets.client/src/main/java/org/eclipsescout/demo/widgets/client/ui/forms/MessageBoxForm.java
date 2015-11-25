@@ -154,10 +154,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ResultField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -165,7 +165,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class MessageBoxOkButton extends AbstractLinkButton {
 
         @Override
@@ -190,7 +190,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class MessageBoxYesNoButton extends AbstractLinkButton {
 
         @Override
@@ -215,7 +215,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class MessageBoxYesNoCancelButton extends AbstractLinkButton {
 
         @Override
@@ -240,7 +240,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class MessageBoxHiddenText extends AbstractLinkButton {
 
         @Override
@@ -270,7 +270,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class DeleteConfirmationMessageButton extends AbstractLinkButton {
 
         @Override
@@ -295,7 +295,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class VetoExceptionButton extends AbstractLinkButton {
 
         @Override
@@ -320,7 +320,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class ProcessingExceptionButton extends AbstractLinkButton {
 
         @Override
@@ -345,7 +345,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class MessageBoxFollowedByVetoExceptionButton extends AbstractLinkButton {
 
         @Override
@@ -371,7 +371,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(90)
       public class ResultField extends AbstractStringField {
 
         @Override
@@ -410,7 +410,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -429,7 +429,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         getMessageBoxConfiguredButton().setEnabled(messageBoxClosable);
       }
 
-      @Order(10.0)
+      @Order(10)
       public class MessageBoxConfiguredButton extends AbstractLinkButton {
 
         @Override
@@ -482,7 +482,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ReturnValueField extends AbstractSmartField<Integer> {
 
         @Override
@@ -501,7 +501,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class HeaderField extends AbstractStringField {
 
         @Override
@@ -515,7 +515,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class BodyField extends AbstractStringField {
 
         @Override
@@ -529,7 +529,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class HtmlField extends AbstractStringField {
 
         @Override
@@ -558,7 +558,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class YesButtonTextField extends AbstractStringField {
 
         @Override
@@ -577,7 +577,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class NoButtonTextField extends AbstractStringField {
 
         @Override
@@ -596,7 +596,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(90)
       public class CancelButtonTextField extends AbstractStringField {
 
         @Override
@@ -615,7 +615,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(110)
       public class HiddenTextContentField extends AbstractStringField {
 
         @Override
@@ -629,7 +629,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(120)
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -648,7 +648,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(130.0)
+      @Order(130)
       public class DefaultReturnValueField extends AbstractSmartField<Integer> {
 
         @Override
@@ -667,7 +667,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(140.0)
+      @Order(140)
       public class AutoCloseMillisField extends AbstractLongField {
 
         @Override
@@ -692,11 +692,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SampleContentButton extends AbstractButton {
 
       @Override

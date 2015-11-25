@@ -80,7 +80,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     return null;
   }
 
-  @Order(10.0)
+  @Order(10)
   public class AboutMenu extends AbstractMenu {
 
     @Override
@@ -95,7 +95,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class LogoutMenu extends AbstractMenu {
 
     @Override
@@ -114,7 +114,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ChatOutlineViewButton extends AbstractOutlineViewButton {
     public ChatOutlineViewButton() {
       super(Desktop.this, ChatOutline.class);
@@ -122,7 +122,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   }
 
-  @Order(20.0)
+  @Order(20)
   public class AdministrationOutlineViewButton extends AbstractOutlineViewButton {
     public AdministrationOutlineViewButton() {
       super(Desktop.this, AdministrationOutline.class);

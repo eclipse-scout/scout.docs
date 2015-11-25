@@ -154,10 +154,10 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TabBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -172,10 +172,10 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
 
     }
 
-    @Order(20.0)
+    @Order(20)
     public class TabBox extends AbstractTabBox {
 
-      @Order(10.0)
+      @Order(10)
       public class MonthsBox extends AbstractGroupBox {
 
         @Override
@@ -183,7 +183,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("Months");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class MonthDetailsBox extends AbstractMonthsBox {
 
           @Override
@@ -193,7 +193,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -201,7 +201,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("Comments");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -221,7 +221,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class DocumentsBox extends AbstractGroupBox {
 
         @Override
@@ -229,7 +229,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("Documents");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class FileTableField extends AbstractFileTableField {
 
           @Override
@@ -243,7 +243,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class AddFileButton extends AbstractButton {
 
           @Override
@@ -263,7 +263,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(10.0)
+      @Order(10)
       public class CountMenu extends AbstractMenu {
 
         @Override
@@ -283,11 +283,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(15.0)
+      @Order(15)
       public class SeparatorMenu extends AbstractMenuSeparator {
       }
 
-      @Order(20.0)
+      @Order(20)
       public class OptionsMenu extends AbstractMenu {
 
         @Override
@@ -302,7 +302,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class FieldVisibilityBox extends AbstractGroupBox {
 
       @Override
@@ -320,7 +320,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("TabVisibility");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class VisibleMonthsField extends AbstractCheckBox {
 
         @Override
@@ -344,7 +344,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class VisibleCommentsField extends AbstractCheckBox {
 
         @Override
@@ -369,7 +369,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class VisibleDocumentsField extends AbstractCheckBox {
 
         @Override
@@ -393,13 +393,13 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
 
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

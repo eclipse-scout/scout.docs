@@ -34,7 +34,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
     return ID;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class DefaultCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class RayoCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -68,7 +68,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public static class DarkCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;

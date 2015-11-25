@@ -34,7 +34,7 @@ public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
     return ID;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class AdministratorCode extends AbstractCode<Integer> {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class UserCode extends AbstractCode<Integer> {
 
     private static final long serialVersionUID = 1L;

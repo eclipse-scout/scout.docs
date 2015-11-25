@@ -83,10 +83,10 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class TableTabBox extends AbstractTabBox {
 
       @Order(10)
@@ -96,7 +96,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           return TEXTS.get("TableField");
         }
 
-        @Order(5.0)
+        @Order(5)
         public class TableField extends AbstractArrayTableField<TableField.Table> {
 
           @Override
@@ -409,7 +409,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class CountrySmartField extends AbstractSmartField<Long> {
 
       @Override
@@ -423,7 +423,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
 
       // context menus
-      @Order(10.0)
+      @Order(10)
       public class EditMenuGroup extends AbstractMenu {
         @Override
         protected String getConfiguredText() {
@@ -445,7 +445,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           MessageBoxes.createOk().withHeader("Menu action").withBody("Menu: '" + getLabel() + "'").show();
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Edit01Menu extends AbstractMenu {
 
           @Override
@@ -464,7 +464,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class Edit02Menu extends AbstractMenu {
 
           @Override
@@ -483,7 +483,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class Edit03Menu extends AbstractMenu {
 
           @Override
@@ -505,7 +505,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
     }
 
-    @Order(50.0)
+    @Order(50)
     public class CompanySmartField extends AbstractSmartField<Long> {
 
       @Override
@@ -649,7 +649,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(90.0)
+    @Order(90)
     public class FileChooserField extends AbstractFileChooserField {
 
       @Override
@@ -826,11 +826,11 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(90.0)
+    @Order(90)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(100.0)
+    @Order(100)
     public class CloseButton extends AbstractCloseButton {
     }
   }

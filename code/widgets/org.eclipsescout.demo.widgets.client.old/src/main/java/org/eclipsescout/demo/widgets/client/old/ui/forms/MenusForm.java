@@ -62,10 +62,10 @@ public class MenusForm extends AbstractForm implements IPageForm {
     return null;
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class MenusButton extends AbstractButton {
 
       @Override
@@ -84,7 +84,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(15.0)
+    @Order(15)
     public class MenusButtonAndIcon extends AbstractButton {
 
       @Override
@@ -108,7 +108,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class MenusLinkButton extends AbstractLinkButton {
 
       @Override
@@ -127,7 +127,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class MenusMenu extends AbstractMenu {
 
       @Override
@@ -141,7 +141,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class MenusIconMenu extends AbstractMenu {
 
       @Override
@@ -160,7 +160,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class MenusIconAndTextMenu extends AbstractMenu {
 
       @Override
@@ -179,7 +179,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(110.0)
+    @Order(110)
     public class NoMenusButton extends AbstractButton {
 
       @Override
@@ -198,7 +198,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(120.0)
+    @Order(120)
     public class NoMenusLinkButton extends AbstractLinkButton {
 
       @Override
@@ -217,7 +217,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(130.0)
+    @Order(130)
     public class NoMenusMenu extends AbstractMenu {
 
       @Override
@@ -236,7 +236,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(140.0)
+    @Order(140)
     public class NoMenusIconMenu extends AbstractMenu {
 
       @Override
@@ -260,7 +260,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -268,7 +268,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class StringField extends AbstractStringField {
 
         @Override
@@ -277,7 +277,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           setValue("this string field has a menu");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringFieldMenu extends AbstractMenu {
 
           @Override
@@ -292,7 +292,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class StringWithTooltipField extends AbstractStringField {
 
         @Override
@@ -306,7 +306,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           return "I am a tooltip";
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringFieldMenu extends AbstractMenu {
 
           @Override
@@ -321,7 +321,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class StringRightField extends AbstractStringField {
 
         @Override
@@ -330,7 +330,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           setValue("is the menu correctly displayed?");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringFieldMenu extends AbstractMenu {
 
           @Override
@@ -345,7 +345,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class StringRightWithTooltipField extends AbstractStringField {
 
         @Override
@@ -360,7 +360,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class ImageField extends AbstractImageField {
 
         @Override
@@ -384,7 +384,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           setImageId("eclipse_scout_logo");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringFieldMenu extends AbstractMenu {
 
           @Override
@@ -399,7 +399,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(10.0)
+      @Order(10)
       public class MenusButton extends AbstractButton {
 
         @Override
@@ -418,7 +418,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(15.0)
+      @Order(15)
       public class MenusButtonAndIcon extends AbstractButton {
 
         @Override
@@ -442,7 +442,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class MenusLinkButton extends AbstractLinkButton {
 
         @Override
@@ -461,7 +461,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class MenusMenu extends AbstractMenu {
 
         @Override
@@ -475,7 +475,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class MenusIconMenu extends AbstractMenu {
 
         @Override
@@ -494,7 +494,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class MenusIconAndTextMenu extends AbstractMenu {
 
         @Override
@@ -513,7 +513,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(110)
       public class NoMenusButton extends AbstractButton {
 
         @Override
@@ -532,7 +532,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(120)
       public class NoMenusLinkButton extends AbstractLinkButton {
 
         @Override
@@ -551,7 +551,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(130.0)
+      @Order(130)
       public class NoMenusMenu extends AbstractMenu {
 
         @Override
@@ -570,7 +570,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(140.0)
+      @Order(140)
       public class NoMenusIconMenu extends AbstractMenu {
 
         @Override
@@ -607,7 +607,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class PngIconMenu extends AbstractMenu {
 
         @Override
@@ -626,7 +626,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class PngIconWithTextMenu extends AbstractMenu {
 
         @Override
@@ -645,7 +645,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class MenusPngIconMenu extends AbstractMenu {
 
         @Override
@@ -664,7 +664,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ToggleTextIconPngMenu extends AbstractMenu {
 
         @Override
@@ -693,7 +693,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class OpenOtherMenu extends AbstractMenu {
 
         @Override
@@ -713,7 +713,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class SpecialTextMenu extends AbstractMenu {
 
         @Override
@@ -727,7 +727,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class StringBottomField extends AbstractStringField {
 
         @Override
@@ -736,7 +736,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           setValue("this string field is on the bottom, is the menu correctly displayed?");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class StringFieldMenu extends AbstractMenu {
 
           @Override
@@ -750,7 +750,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class StringField2Menu extends AbstractMenu {
 
           @Override
@@ -786,7 +786,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class MenuWithTextMenu extends AbstractMenu {
 
       @Override
@@ -801,7 +801,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class MenuWithIconMenu extends AbstractMenu {
 
       @Override
@@ -821,7 +821,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CheckableMenu extends AbstractCheckBoxMenu {
 
       @Override
@@ -837,7 +837,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class MenuWithMenusMenu extends AbstractMenu {
 
       @Override
@@ -845,7 +845,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         return TEXTS.get("MenuWithMenus");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class Menu1Menu extends AbstractMenu {
 
         @Override
@@ -860,7 +860,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class Menu2Menu extends AbstractMenu {
 
         @Override
@@ -875,7 +875,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class Menu3Menu extends AbstractMenu {
 
         @Override
@@ -891,7 +891,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class MenuWithKeyStrokeMenu extends AbstractMenu {
 
       @Override
@@ -911,7 +911,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
       @Override
