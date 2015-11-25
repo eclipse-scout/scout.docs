@@ -940,6 +940,115 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           }
 
+          @Order(50.0)
+          public class HierarchicalMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return "Hierarchical Menu";
+            }
+
+            @Order(10.0)
+            public class SubSingleMenu extends AbstractMenu {
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(
+                    TableMenuType.SingleSelection);
+              }
+
+              @Override
+              protected String getConfiguredText() {
+                return "SubSingle";
+              }
+
+            }
+
+            @Order(20.0)
+            public class SubMultiMenu extends AbstractMenu {
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(
+                    TableMenuType.MultiSelection);
+              }
+
+              @Override
+              protected String getConfiguredText() {
+                return "SubMulti";
+              }
+
+            }
+
+            @Order(30.0)
+            public class SubEmptySpaceMenu extends AbstractMenu {
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(
+                    TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected String getConfiguredText() {
+                return "SubEmpty";
+              }
+
+            }
+
+            @Order(40.0)
+            public class IntermediateMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Intermediate Menu";
+              }
+
+              @Order(10.0)
+              public class SubSubSingleMenu extends AbstractMenu {
+                @Override
+                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                  return CollectionUtility.<IMenuType> hashSet(
+                      TableMenuType.SingleSelection);
+                }
+
+                @Override
+                protected String getConfiguredText() {
+                  return "SubSubSingle";
+                }
+
+              }
+
+              @Order(20.0)
+              public class SubSubMultiMenu extends AbstractMenu {
+                @Override
+                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                  return CollectionUtility.<IMenuType> hashSet(
+                      TableMenuType.MultiSelection);
+                }
+
+                @Override
+                protected String getConfiguredText() {
+                  return "SubSubMulti";
+                }
+
+              }
+
+              @Order(30.0)
+              public class SubSubEmptySpaceMenu extends AbstractMenu {
+                @Override
+                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                  return CollectionUtility.<IMenuType> hashSet(
+                      TableMenuType.EmptySpace);
+                }
+
+                @Override
+                protected String getConfiguredText() {
+                  return "SubSubEmpty";
+                }
+
+              }
+
+            }
+          }
+
           @Order(60.0)
           public class KeyStroke extends AbstractKeyStroke {
 
