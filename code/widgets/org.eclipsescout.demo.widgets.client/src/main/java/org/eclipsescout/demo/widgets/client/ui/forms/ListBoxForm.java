@@ -148,10 +148,10 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(UncheckAllButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -159,7 +159,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ListBoxWithCodeTypeContentField extends AbstractLabelField {
 
         @Override
@@ -178,7 +178,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class DefaultField extends AbstractListBox<Color> {
 
         @Override
@@ -197,7 +197,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class DisabledField extends AbstractListBox<Color> {
 
         @Override
@@ -235,7 +235,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ListBoxWithLookupCallContentField extends AbstractLabelField {
 
         @Override
@@ -254,7 +254,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class DefaultListBox extends AbstractListBox<Integer> {
 
         @Override
@@ -273,7 +273,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class DisabledListBox extends AbstractListBox<Integer> {
 
         @Override
@@ -307,7 +307,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -315,7 +315,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ListBoxField extends AbstractListBox<String> {
 
         @Override
@@ -334,10 +334,10 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class CheckUncheckBox extends AbstractSequenceBox {
 
-        @Order(10.0)
+        @Order(10)
         public class CheckAllButton extends AbstractLinkButton {
 
           @Override
@@ -351,7 +351,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class UncheckAllButton extends AbstractLinkButton {
 
           @Override
@@ -366,7 +366,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class GetCheckedKeysField extends AbstractStringField {
 
         @Override
@@ -391,7 +391,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ListEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -416,7 +416,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class FilterCheckedRowsValueField extends AbstractCheckBox {
 
         @Override
@@ -435,7 +435,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class IsEnabledField extends AbstractCheckBox {
 
         @Override
@@ -460,7 +460,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -475,7 +475,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
 

@@ -31,7 +31,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
     super(owner);
   }
 
-  @Order(2_500.0)
+  @Order(2)
   public class EventBox extends AbstractGroupBox {
 
     @Override
@@ -39,7 +39,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
       return TEXTS.get("Events");
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class EventsField extends AbstractTableField<EventsField.Table> {
 
       @Override
@@ -52,7 +52,6 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
         return false;
       }
 
-      @Order(1000.0)
       public class Table extends AbstractTable {
 
         @Override
@@ -80,7 +79,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
           return getColumnSet().getColumnByClass(CountryColumn.class);
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class IdColumn extends AbstractStringColumn {
 
           @Override
@@ -94,7 +93,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
           }
         }
 
-        @Order(2_000.0)
+        @Order(2)
         public class TitleColumn extends AbstractStringColumn {
 
           @Override
@@ -108,7 +107,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
           }
         }
 
-        @Order(3_000.0)
+        @Order(3)
         public class StartsColumn extends AbstractDateTimeColumn {
 
           @Override
@@ -128,7 +127,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
 
         }
 
-        @Order(4_000.0)
+        @Order(4)
         public class CityColumn extends AbstractStringColumn {
 
           @Override
@@ -142,7 +141,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
           }
         }
 
-        @Order(5_000.0)
+        @Order(5)
         public class CountryColumn extends AbstractStringColumn {
 
           @Override

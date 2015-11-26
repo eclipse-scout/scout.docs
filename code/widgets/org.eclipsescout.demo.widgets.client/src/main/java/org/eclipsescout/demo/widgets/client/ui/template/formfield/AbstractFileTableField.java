@@ -89,7 +89,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     return new Object[]{file, file.getFilename(), size, type, new Date(file.getLastModified())};
   }
 
-  @Order(10.0)
+  @Order(10)
   public class DeleteKeyStroke extends AbstractKeyStroke {
 
     @Override
@@ -103,7 +103,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     private Set<BinaryResource> m_keys = new HashSet<>();
@@ -201,7 +200,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       return getColumnSet().getColumnByClass(NameColumn.class);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ResourceColumn extends AbstractColumn<BinaryResource> {
 
       @Override
@@ -220,7 +219,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -234,7 +233,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SizeColumn extends AbstractLongColumn {
 
       @Override
@@ -248,7 +247,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class TypeColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -262,7 +261,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class DateModifiedColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -271,7 +270,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class OpenMenu extends AbstractMenu {
 
       @Override
@@ -288,7 +287,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class AddMenu extends AbstractMenu {
 
       @Override
@@ -312,7 +311,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     }
 
-    @Order(30.0)
+    @Order(30)
     public class DeleteMenu extends AbstractMenu {
 
       @Override

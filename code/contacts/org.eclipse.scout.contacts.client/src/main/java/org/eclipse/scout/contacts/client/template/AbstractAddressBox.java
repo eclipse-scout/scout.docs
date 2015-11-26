@@ -70,7 +70,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     return getFieldByClass(ShowOnMapButton.class);
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class StreetField extends AbstractStringField {
 
     @Override
@@ -84,7 +84,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
   }
 
-  @Order(2000.0)
+  @Order(2000)
   public class LocationBox extends AbstractSequenceBox {
 
     @Override
@@ -97,7 +97,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       return TEXTS.get("Location");
     }
 
-    @Order(1000.0)
+    @Order(1000)
     public class CityField extends AbstractStringField {
 
       @Override
@@ -116,7 +116,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       }
     }
 
-    @Order(2000.0)
+    @Order(2000)
     public class CountryField extends AbstractSmartField<String> {
 
       @Override
@@ -142,7 +142,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
 
   }
 
-  @Order(3000.0)
+  @Order(3000)
   public class ShowOnMapButton extends AbstractLinkButton {
 
     @Override

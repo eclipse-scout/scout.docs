@@ -107,10 +107,10 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TreeEntriesField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -118,7 +118,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractTreeField {
 
         @Override
@@ -146,7 +146,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
           setTree(tree, false);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Tree extends AbstractTree {
 
           @Override
@@ -165,7 +165,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             addChildNode(parent, node);
           }
 
-          @Order(10.0)
+          @Order(10)
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -184,7 +184,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(15.0)
+          @Order(15)
           public class MoreMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
@@ -196,7 +196,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
             }
 
-            @Order(10.0)
+            @Order(10)
             public class NewDelayedMenu extends AbstractMenu {
 
               @Override
@@ -222,7 +222,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(15.0)
+            @Order(15)
             public class ScrollToSelection extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -235,7 +235,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(30.0)
+            @Order(30)
             public class SelectNoneMenu extends AbstractMenu {
 
               @Override
@@ -255,7 +255,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(10.0)
+          @Order(10)
           public class ExpandNodeMenu extends AbstractMenu {
 
             @Override
@@ -283,7 +283,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class CollapseNodeMenu extends AbstractMenu {
 
             @Override
@@ -311,7 +311,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(40.0)
+          @Order(40)
           public class Info_Menu extends AbstractMenu {
 
             @Override
@@ -325,7 +325,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(50.0)
+          @Order(50)
           public class HierarchicalMenu extends AbstractMenu {
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -338,7 +338,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
               return "HierarchicalMenu";
             }
 
-            @Order(10.0)
+            @Order(10)
             public class SubSingleMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -353,7 +353,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(20.0)
+            @Order(20)
             public class SubMultiMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -368,7 +368,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(30.0)
+            @Order(30)
             public class SubEmptySpaceMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -383,7 +383,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
             }
 
-            @Order(40.0)
+            @Order(40)
             public class IntermediateMenu extends AbstractMenu {
 
               @Override
@@ -391,7 +391,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
                 return "Intermediate Menu";
               }
 
-              @Order(10.0)
+              @Order(10)
               public class SubSubSingleMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -406,7 +406,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
               }
 
-              @Order(20.0)
+              @Order(20)
               public class SubSubMultiMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -421,7 +421,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
               }
 
-              @Order(30.0)
+              @Order(30)
               public class SubSubEmptySpaceMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -449,7 +449,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             MessageBoxes.createOk().withHeader(title + " " + TEXTS.get("NodeName", id)).withBody(TEXTS.get("NodeInfo", leaf, children)).show();
           }
 
-          @Order(60.0)
+          @Order(60)
           public class KeyStroke extends AbstractKeyStroke {
 
             @Override
@@ -471,7 +471,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -479,7 +479,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class TreeField extends AbstractTreeField {
 
         @Override
@@ -497,12 +497,12 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
           setTree(new Tree(), false);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Tree extends AbstractTree {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -526,7 +526,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(30.0)
+      @Order(30)
       public class MenuContentField extends AbstractUserTreeField {
 
         @Override
@@ -547,7 +547,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -563,7 +563,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
 

@@ -113,7 +113,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(SampleContentButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     public static final String SCOUT_LOGO = "images/eclipse_scout_logo.png";
@@ -126,7 +126,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -139,7 +139,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractImageField {
 
         @Override
@@ -212,7 +212,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class IconContentField extends AbstractImageField {
 
         @Override
@@ -231,7 +231,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class AlignedCenterField extends AbstractImageField {
 
         @Override
@@ -250,7 +250,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class AlignedRightField extends AbstractImageField {
 
         @Override
@@ -270,7 +270,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -290,7 +290,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         return new URL((String) urlString);
       }
 
-      @Order(10.0)
+      @Order(10)
       public class Image1Field extends AbstractImageField {
 
         @Override
@@ -332,7 +332,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(15.0)
+      @Order(15)
       public class Image1ScrollbarsEnabledCheckbox extends AbstractCheckBox {
 
         @Override
@@ -357,7 +357,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(16.0)
+      @Order(16)
       public class Image1AutoFitCheckbox extends AbstractCheckBox {
 
         @Override
@@ -382,7 +382,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class Image2Field extends AbstractImageField {
 
         @Override
@@ -434,7 +434,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(25.0)
+      @Order(25)
       public class Image2ScrollbarEnabledFieldCheckbox extends AbstractCheckBox {
 
         @Override
@@ -459,7 +459,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(26.0)
+      @Order(26)
       public class Image2AutoFitCheckbox extends AbstractCheckBox {
 
         @Override
@@ -484,7 +484,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class ImageURLField extends AbstractStringField {
 
         @Override
@@ -504,7 +504,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -518,7 +518,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

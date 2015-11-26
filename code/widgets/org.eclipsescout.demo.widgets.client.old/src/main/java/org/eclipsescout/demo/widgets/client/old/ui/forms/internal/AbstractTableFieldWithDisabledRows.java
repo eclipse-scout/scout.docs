@@ -45,7 +45,6 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractArrayTa
 
   }
 
-  @Order(10)
   public class Table extends AbstractTable {
 
     @Override

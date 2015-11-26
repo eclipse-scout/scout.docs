@@ -56,10 +56,10 @@ public class DetailForm extends AbstractForm {
     return getFieldByClass(ValueOpenField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -72,7 +72,7 @@ public class DetailForm extends AbstractForm {
         return 80;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ValueLastField extends AbstractBigDecimalField {
 
         @Override
@@ -81,7 +81,7 @@ public class DetailForm extends AbstractForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ValueOpenField extends AbstractBigDecimalField {
 
         @Override
@@ -90,7 +90,7 @@ public class DetailForm extends AbstractForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class ValueLowField extends AbstractBigDecimalField {
 
         @Override
@@ -99,7 +99,7 @@ public class DetailForm extends AbstractForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ValueHighField extends AbstractBigDecimalField {
 
         @Override

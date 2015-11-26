@@ -65,7 +65,6 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
     importPageData(pageData);
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     public UsernameColumn getUsernameColumn() {
@@ -95,7 +94,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       return getColumnSet().getColumnByClass(UserIdColumn.class);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class UserIdColumn extends AbstractLongColumn {
 
       @Override
@@ -119,7 +118,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class UsernameColumn extends AbstractStringColumn {
 
       @Override
@@ -143,7 +142,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class RoleColumn extends AbstractSmartColumn<Integer> {
 
       @Override
@@ -168,7 +167,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ModifyUserMenu extends AbstractMenu {
 
       @Override
@@ -195,7 +194,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class NewUserMenu extends AbstractMenu {
 
       @Override
@@ -224,7 +223,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ResetPasswordMenu extends AbstractMenu {
 
       @Override
@@ -247,12 +246,12 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
 
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SeparatorMenu extends AbstractMenuSeparator {
 
     }
 
-    @Order(50.0)
+    @Order(50)
     public class DeleteUserMenu extends AbstractMenu {
 
       @Override

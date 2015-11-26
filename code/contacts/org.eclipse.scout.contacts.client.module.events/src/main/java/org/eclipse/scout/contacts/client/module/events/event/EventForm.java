@@ -171,13 +171,13 @@ public class EventForm extends AbstractForm {
     return getEventId();
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1_000.0)
+    @Order(1)
     public class GeneralBox extends AbstractGroupBox {
 
-      @Order(1_000.0)
+      @Order(1)
       public class TitleField extends AbstractStringField {
 
         @Override
@@ -186,7 +186,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(2_000.0)
+      @Order(2)
       public class HomepageField extends AbstractStringField {
 
         @Override
@@ -195,7 +195,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(3_000.0)
+      @Order(3)
       public class OpenHomepageButton extends AbstractLinkButton {
 
         @Override
@@ -229,7 +229,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(4_000.0)
+      @Order(4)
       public class StartsField extends AbstractDateTimeField {
 
         @Override
@@ -238,7 +238,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(5_000.0)
+      @Order(5)
       public class EndsField extends AbstractDateTimeField {
 
         @Override
@@ -248,10 +248,10 @@ public class EventForm extends AbstractForm {
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1_000.0)
+      @Order(1)
       public class EventDetailsBox extends AbstractGroupBox {
 
         @Override
@@ -259,7 +259,7 @@ public class EventForm extends AbstractForm {
           return TEXTS.get("Details");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class LocationBox extends AbstractAddressBox {
 
           @Override
@@ -268,7 +268,7 @@ public class EventForm extends AbstractForm {
           }
         }
 
-        @Order(2_000.0)
+        @Order(2)
         public class PhoneField extends AbstractPhoneField {
 
           @Override
@@ -277,7 +277,7 @@ public class EventForm extends AbstractForm {
           }
         }
 
-        @Order(3_000.0)
+        @Order(3)
         public class EmailField extends AbstractEmailField {
 
           @Override
@@ -287,7 +287,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(2_000.0)
+      @Order(2)
       public class ParticipantsBox extends AbstractGroupBox {
 
         @Override
@@ -295,7 +295,7 @@ public class EventForm extends AbstractForm {
           return TEXTS.get("Participants");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class ParticipantTableFieldField extends AbstractTableField<ParticipantTableFieldField.Table> {
 
           @Override
@@ -308,7 +308,6 @@ public class EventForm extends AbstractForm {
             return false;
           }
 
-          @Order(1_000.0)
           public class Table extends AbstractTable {
 
             public LastNameColumn getLastNameColumn() {
@@ -337,7 +336,7 @@ public class EventForm extends AbstractForm {
               return getColumnSet().getColumnByClass(PersonIdColumn.class);
             }
 
-            @Order(1_000.0)
+            @Order(1)
             public class PersonIdColumn extends AbstractStringColumn {
 
               @Override
@@ -351,7 +350,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(2_000.0)
+            @Order(2)
             public class FirstNameColumn extends AbstractStringColumn {
 
               @Override
@@ -370,7 +369,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(3_000.0)
+            @Order(3)
             public class LastNameColumn extends AbstractStringColumn {
 
               @Override
@@ -384,7 +383,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(4_000.0)
+            @Order(4)
             public class OrganizationColumn extends AbstractSmartColumn<String> {
 
               @Override
@@ -403,7 +402,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(1_000.0)
+            @Order(1)
             public class AddMenu extends AbstractMenu {
 
               @Override
@@ -441,7 +440,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(1_500.0)
+            @Order(1)
             public class EditMenu extends AbstractMenu {
 
               @Override
@@ -457,7 +456,7 @@ public class EventForm extends AbstractForm {
               }
             }
 
-            @Order(2_000.0)
+            @Order(2)
             public class RemoveMenu extends AbstractMenu {
 
               @Override
@@ -489,7 +488,7 @@ public class EventForm extends AbstractForm {
         }
       }
 
-      @Order(3_000.0)
+      @Order(3)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -497,7 +496,7 @@ public class EventForm extends AbstractForm {
           return TEXTS.get("Comments");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -518,11 +517,11 @@ public class EventForm extends AbstractForm {
       }
     }
 
-    @Order(100_000.0)
+    @Order(100)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(101_000.0)
+    @Order(101)
     public class CancelButton extends AbstractCancelButton {
     }
   }

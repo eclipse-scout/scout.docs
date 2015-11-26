@@ -40,7 +40,7 @@ public abstract class AbstractLocationBox extends AbstractSequenceBox {
     return getFieldByClass(CountryField.class);
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public class CityField extends AbstractStringField {
 
     @Override
@@ -54,7 +54,7 @@ public abstract class AbstractLocationBox extends AbstractSequenceBox {
     }
   }
 
-  @Order(2000.0)
+  @Order(2000)
   public class CountryField extends AbstractSmartField<String> {
 
     @Override

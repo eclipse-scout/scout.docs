@@ -27,7 +27,7 @@ public class DesktopQuickAccessMenuExtension extends AbstractMenuExtension<Deskt
     super(owner);
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class EventNewMenu extends AbstractMenu {
 
     @Override

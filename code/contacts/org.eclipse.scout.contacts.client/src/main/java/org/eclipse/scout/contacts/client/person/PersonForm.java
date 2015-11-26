@@ -180,17 +180,17 @@ public class PersonForm extends AbstractForm {
     return getPersonId();
   }
 
-  @Order(1_000.0)
+  @Order(1)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1_000.0)
+    @Order(1)
     public class GeneralBox extends AbstractGroupBox {
 
-      @Order(1_000.0)
+      @Order(1)
       public class PictureBox extends AbstractPictureBox {
       }
 
-      @Order(2_000.0)
+      @Order(2)
       public class FirstNameField extends AbstractStringField {
 
         @Override
@@ -199,7 +199,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(3_000.0)
+      @Order(3)
       public class LastNameField extends AbstractStringField {
 
         @Override
@@ -208,7 +208,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(4_000.0)
+      @Order(4)
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
@@ -217,7 +217,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(5_000.0)
+      @Order(5)
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
 
         @Override
@@ -232,10 +232,10 @@ public class PersonForm extends AbstractForm {
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1_000.0)
+      @Order(1)
       public class PersonDetailsBox extends AbstractGroupBox {
 
         @Override
@@ -243,11 +243,11 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("Details");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class AddressBox extends AbstractAddressBox {
         }
 
-        @Order(2_000.0)
+        @Order(2)
         public class PhoneField extends AbstractPhoneField {
 
           @Override
@@ -262,7 +262,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(3_000.0)
+        @Order(3)
         public class MobileField extends AbstractPhoneField {
 
           @Override
@@ -282,12 +282,12 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(4_000.0)
+        @Order(4)
         public class EmailField extends AbstractEmailField {
         }
       }
 
-      @Order(2_000.0)
+      @Order(2)
       public class WorkBox extends AbstractGroupBox {
 
         @Override
@@ -295,7 +295,7 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("Work");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class PositionField extends AbstractStringField {
 
           @Override
@@ -304,7 +304,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(2_000.0)
+        @Order(2)
         public class OrganizationField extends AbstractSmartField<String> {
 
           @Override
@@ -318,7 +318,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(3_000.0)
+        @Order(3)
         public class PhoneWorkField extends AbstractStringField {
 
           @Override
@@ -327,7 +327,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(4_000.0)
+        @Order(4)
         public class EmailWorkField extends AbstractStringField {
 
           @Override
@@ -337,7 +337,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(3_000.0)
+      @Order(3)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -345,7 +345,7 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("Comments");
         }
 
-        @Order(1_000.0)
+        @Order(1)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -366,11 +366,11 @@ public class PersonForm extends AbstractForm {
       }
     }
 
-    @Order(100_000.0)
+    @Order(100)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(101_000.0)
+    @Order(101)
     public class CancelButton extends AbstractCancelButton {
     }
   }

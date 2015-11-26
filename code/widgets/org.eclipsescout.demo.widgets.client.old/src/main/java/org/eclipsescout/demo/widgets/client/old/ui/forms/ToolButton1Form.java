@@ -66,7 +66,7 @@ public class ToolButton1Form extends AbstractForm {
     return getFieldByClass(StringField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -74,10 +74,10 @@ public class ToolButton1Form extends AbstractForm {
       return 1;
     }
 
-    @Order(50.0)
+    @Order(50)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class StringField extends AbstractStringField {
 
         @Override
@@ -86,7 +86,7 @@ public class ToolButton1Form extends AbstractForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SequenceBox extends AbstractSequenceBox {
 
         @Override
@@ -94,7 +94,7 @@ public class ToolButton1Form extends AbstractForm {
           return TEXTS.get("SequenceBox");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class SequenceFrom extends AbstractDateField {
 
           @Override
@@ -103,7 +103,7 @@ public class ToolButton1Form extends AbstractForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class SequenceTo extends AbstractDateField {
 
           @Override
@@ -113,7 +113,7 @@ public class ToolButton1Form extends AbstractForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class FileChooserField extends AbstractFileChooserField {
 
         @Override
@@ -122,7 +122,7 @@ public class ToolButton1Form extends AbstractForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class IntegerField extends AbstractIntegerField {
 
         @Override

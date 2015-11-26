@@ -72,13 +72,13 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class CtrlshiftsForFocusField extends AbstractStringField {
 
         @Override
@@ -87,7 +87,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(15.0)
+      @Order(15)
       public class CtrlshiftdForFocusField extends AbstractStringField {
 
         @Override
@@ -96,7 +96,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ChangeValueWithCtrlshiftcField extends AbstractCheckBox {
 
         @Override
@@ -106,11 +106,11 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(10.0)
+    @Order(10)
     public class CtrlshiftcKeyStroke extends AbstractKeyStroke {
 
       @Override
@@ -124,7 +124,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class CtrlshiftdKeyStroke extends AbstractKeyStroke {
 
       @Override
@@ -138,7 +138,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CtrlshiftsKeyStroke extends AbstractKeyStroke {
 
       @Override

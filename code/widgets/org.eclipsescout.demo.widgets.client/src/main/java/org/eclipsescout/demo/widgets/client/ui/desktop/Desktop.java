@@ -100,7 +100,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class FileMenu extends AbstractMenu {
 
     @Override
@@ -108,7 +108,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       return TEXTS.get("FileMenu");
     }
 
-    @Order(100.0)
+    @Order(100)
     public class ExitMenu extends AbstractMenu {
 
       @Override
@@ -123,7 +123,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class ToolsMenu extends AbstractMenu {
 
     @Override
@@ -131,7 +131,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       return TEXTS.get("ToolsMenu");
     }
 
-    @Order(10.0)
+    @Order(10)
     public class MenuWithTextMenu extends AbstractMenu {
 
       @Override
@@ -146,7 +146,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class MenuWithIconMenu extends AbstractMenu {
       private int counter = 0;
 
@@ -167,7 +167,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CheckableMenu extends AbstractCheckBoxMenu {
 
       @Override
@@ -188,7 +188,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class MenuWithMenusMenu extends AbstractMenu {
 
       @Override
@@ -202,7 +202,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
       }
 
-      @Order(10.0)
+      @Order(10)
       public class Menu1Menu extends AbstractMenu {
 
         @Override
@@ -217,7 +217,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class Menu2Menu extends AbstractMenu {
 
         @Override
@@ -232,7 +232,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class Menu3Menu extends AbstractMenu {
 
         @Override
@@ -248,7 +248,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class MenuWithKeyStrokeMenu extends AbstractMenu {
 
       @Override
@@ -268,7 +268,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class OptionsMenu extends AbstractMenu {
 
       @Override
@@ -284,7 +284,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public class HelpMenu extends AbstractMenu {
 
     @Override
@@ -292,7 +292,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       return TEXTS.get("HelpMenu");
     }
 
-    @Order(10.0)
+    @Order(10)
     public class AboutMenu extends AbstractMenu {
 
       @Override
@@ -308,7 +308,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
 
     @Override
@@ -327,7 +327,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(10.0)
+  @Order(10)
   public class SimpleWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public SimpleWidgetsOutlineViewButton() {
       super(Desktop.this, SimpleWidgetsOutline.class);
@@ -339,14 +339,14 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class AdvancedWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public AdvancedWidgetsOutlineViewButton() {
       super(Desktop.this, AdvancedWidgetsOutline.class);
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public LayoutWidgetsOutlineViewButton() {
       super(Desktop.this, LayoutWidgetsOutline.class);

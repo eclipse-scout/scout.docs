@@ -54,7 +54,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     form.startPageForm();
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MenuWithTextMenu extends AbstractMenu {
 
     @Override
@@ -69,7 +69,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class MenuWithIconMenu extends AbstractMenu {
 
     @Override
@@ -89,7 +89,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public class CheckableMenu extends AbstractCheckBoxMenu {
 
     @Override
@@ -105,7 +105,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(40.0)
+  @Order(40)
   public class MenuWithMenusMenu extends AbstractMenu {
 
     @Override
@@ -113,7 +113,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       return TEXTS.get("MenuWithMenus");
     }
 
-    @Order(10.0)
+    @Order(10)
     public class Menu1Menu extends AbstractMenu {
 
       @Override
@@ -133,7 +133,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class Menu2Menu extends AbstractMenu {
 
       @Override
@@ -153,7 +153,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class Menu3Menu extends AbstractMenu {
 
       @Override
@@ -174,7 +174,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(50.0)
+  @Order(50)
   public class MenuWithKeyStrokeMenu extends AbstractMenu {
 
     @Override
@@ -194,7 +194,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(60.0)
+  @Order(60)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

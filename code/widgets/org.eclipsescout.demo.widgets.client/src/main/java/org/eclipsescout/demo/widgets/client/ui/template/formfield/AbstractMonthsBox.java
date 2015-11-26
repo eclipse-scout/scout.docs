@@ -62,7 +62,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     return getFieldByClass(MayField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class JanuaryField extends AbstractStringField {
 
     @Override
@@ -76,7 +76,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class FebruaryField extends AbstractStringField {
 
     @Override
@@ -90,7 +90,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public class MarchField extends AbstractStringField {
 
     @Override
@@ -104,7 +104,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     }
   }
 
-  @Order(40.0)
+  @Order(40)
   public class AprilField extends AbstractStringField {
 
     @Override
@@ -118,7 +118,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     }
   }
 
-  @Order(50.0)
+  @Order(50)
   public class MayField extends AbstractStringField {
 
     @Override
@@ -132,7 +132,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
     }
   }
 
-  @Order(60.0)
+  @Order(60)
   public class JuneField extends AbstractStringField {
 
     @Override

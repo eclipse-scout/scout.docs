@@ -31,7 +31,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
     return outlines;
   }
 
-  @Order(2000.0)
+  @Order(2000)
   public class EventOutlineViewButton extends AbstractOutlineViewButton {
 
     public EventOutlineViewButton() {

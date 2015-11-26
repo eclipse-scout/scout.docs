@@ -77,7 +77,6 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
     }
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     @Override
@@ -97,7 +96,7 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
       return getColumnSet().getColumnByClass(RoleNrColumn.class);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class RoleNrColumn extends AbstractLongColumn {
 
       @Override
@@ -116,7 +115,7 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class RoleColumn extends AbstractStringColumn {
 
       @Override
@@ -125,7 +124,7 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class PermissionColumn extends AbstractStringColumn {
 
       @Override

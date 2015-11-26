@@ -23,10 +23,10 @@ public class StringFieldEncodingForm extends AbstractForm {
     super();
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(2000.0)
+    @Order(2000)
     // tag::SecureOutput.encodingByDefault[]
     public class StringField extends AbstractStringField {
       @Override
@@ -35,7 +35,7 @@ public class StringFieldEncodingForm extends AbstractForm {
       }
     }// end::SecureOutput.encodingByDefault[]
 
-    @Order(2000.0)
+    @Order(2000)
     // tag::SecureOutput.noEncodingField[]
     public class NoEncodingStringField extends AbstractStringField {
       @Override
@@ -49,7 +49,7 @@ public class StringFieldEncodingForm extends AbstractForm {
       }
     }// end::SecureOutput.noEncodingField[]
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
 

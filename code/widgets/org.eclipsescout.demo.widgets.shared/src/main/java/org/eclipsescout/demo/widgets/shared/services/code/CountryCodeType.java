@@ -34,7 +34,7 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
     return ID;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class USACode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class GreatBritainCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -68,7 +68,7 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public static class GermanyCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(40.0)
+  @Order(40)
   public static class FranceCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -102,7 +102,7 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(50.0)
+  @Order(50)
   public static class SwitzerlandCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;

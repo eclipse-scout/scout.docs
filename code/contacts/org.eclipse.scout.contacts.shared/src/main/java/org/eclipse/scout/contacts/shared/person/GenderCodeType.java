@@ -34,7 +34,7 @@ public class GenderCodeType extends AbstractCodeType<String, String> {
     return ID;
   }
 
-  @Order(1000.0)
+  @Order(1000)
   public static class MaleCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class GenderCodeType extends AbstractCodeType<String, String> {
     }
   }
 
-  @Order(2000.0)
+  @Order(2000)
   public static class FemaleCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;

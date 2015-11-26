@@ -37,7 +37,7 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     return ID;
   }
 
-  @Order(10.0)
+  @Order(10)
   public static class PublicCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public static class PrivateCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     }
   }
 
-  @Order(30.0)
+  @Order(30)
   public static class ExternalCode extends AbstractCode<Long> {
 
     private static final long serialVersionUID = 1L;

@@ -52,7 +52,6 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     importPageData(BEANS.get(IPersonService.class).getTableData(filter, getOrganizationId()));
   }
 
-  @Order(1_000.0)
   public class Table extends AbstractTable {
 
     public LastNameColumn getLastNameColumn() {
@@ -93,7 +92,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       return getColumnSet().getColumnByClass(PersonIdColumn.class);
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class PersonIdColumn extends AbstractStringColumn {
 
       @Override
@@ -107,7 +106,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class FirstNameColumn extends AbstractStringColumn {
 
       @Override
@@ -121,7 +120,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(3_000.0)
+    @Order(3)
     public class LastNameColumn extends AbstractStringColumn {
 
       @Override
@@ -135,7 +134,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(4_000.0)
+    @Order(4)
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -149,7 +148,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(5_000.0)
+    @Order(5)
     public class CountryColumn extends AbstractStringColumn {
 
       @Override
@@ -158,7 +157,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(6_000.0)
+    @Order(6)
     public class PhoneColumn extends AbstractStringColumn {
 
       @Override
@@ -177,7 +176,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(7_000.0)
+    @Order(7)
     public class MobileColumn extends AbstractStringColumn {
 
       @Override
@@ -196,7 +195,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(8_000.0)
+    @Order(8)
     public class EmailColumn extends AbstractStringColumn {
 
       @Override
@@ -215,7 +214,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(9_000.0)
+    @Order(9)
     public class OrganizationColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -234,7 +233,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(1_000.0)
+    @Order(1)
     public class EditMenu extends AbstractMenu {
 
       @Override
@@ -264,7 +263,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
     }
 
-    @Order(2_000.0)
+    @Order(2)
     public class NewMenu extends AbstractMenu {
     
       @Override

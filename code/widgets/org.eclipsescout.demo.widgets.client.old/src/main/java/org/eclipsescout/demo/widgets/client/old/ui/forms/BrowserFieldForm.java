@@ -114,7 +114,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(URLField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -122,7 +122,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
       setStatusVisible(false);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -135,7 +135,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class BrowserField extends AbstractBrowserField {
 
         @Override
@@ -175,7 +175,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class LinksBox extends AbstractSequenceBox {
 
         @Override
@@ -183,7 +183,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class EclipseScoutButton extends AbstractLinkButton {
 
           @Override
@@ -202,7 +202,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class BsiSoftwareButton extends AbstractLinkButton {
 
           @Override
@@ -221,7 +221,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class URLField extends AbstractStringField {
 
           @Override
@@ -235,7 +235,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class RefreshButton extends AbstractButton {
 
           @Override
@@ -251,7 +251,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

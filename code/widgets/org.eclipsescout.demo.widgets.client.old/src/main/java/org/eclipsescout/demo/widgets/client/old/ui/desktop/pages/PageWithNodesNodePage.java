@@ -38,7 +38,7 @@ public class PageWithNodesNodePage extends AbstractPageWithNodes {
     pageList.add(pageWithTableTablePage1);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

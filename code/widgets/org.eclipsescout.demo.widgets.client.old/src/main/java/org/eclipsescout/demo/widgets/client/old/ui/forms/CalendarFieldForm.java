@@ -83,13 +83,13 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(20)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class CalendarField extends AbstractCalendarField<CalendarField.Calendar> {
 
         @Override
@@ -112,7 +112,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
           return false;
         }
 
-        @Order(10.0)
+        @Order(10)
         public class Calendar extends AbstractCalendar {
 
           private ContextMenuListener m_cml;
@@ -300,7 +300,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
   }

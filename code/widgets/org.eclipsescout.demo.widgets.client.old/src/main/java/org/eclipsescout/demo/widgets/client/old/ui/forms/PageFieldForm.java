@@ -52,10 +52,10 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(PageBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class PageBox extends AbstractPageField<IPage> {
 
       @Override
@@ -69,7 +69,7 @@ public class PageFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class CloseButton extends AbstractCloseButton {
     }
   }

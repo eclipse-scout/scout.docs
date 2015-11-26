@@ -178,10 +178,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(FromField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(20)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -189,10 +189,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class SplitVerticalField extends AbstractSplitBox {
 
-        @Order(10.0)
+        @Order(10)
         public class SplitHorizontalField extends AbstractSplitBox {
 
           @Override
@@ -205,7 +205,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             return 0.6;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class FilesBox extends AbstractGroupBox {
 
             @Override
@@ -213,7 +213,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               return TEXTS.get("Files");
             }
 
-            @Order(10.0)
+            @Order(10)
             public class FileTableField extends AbstractFileTableField {
 
               @Override
@@ -275,7 +275,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class DetailsBox extends AbstractGroupBox {
 
             @Override
@@ -295,7 +295,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               getModifiedField().setEnabled(false);
             }
 
-            @Order(10.0)
+            @Order(10)
             public class NameField extends AbstractStringField {
 
               @Override
@@ -304,7 +304,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(20.0)
+            @Order(20)
             public class SizeField extends AbstractLongField {
 
               @Override
@@ -313,7 +313,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
               }
             }
 
-            @Order(40.0)
+            @Order(40)
             public class ModifiedField extends AbstractDateTimeField {
 
               @Override
@@ -324,7 +324,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class PreviewBox extends AbstractGroupBox {
 
           @Override
@@ -342,7 +342,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             return 0;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class PreviewField extends AbstractImageField {
 
             @Override
@@ -369,10 +369,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SplitVisibleEnabledField extends AbstractSplitBox {
 
-      @Order(10.0)
+      @Order(10)
       public class FieldVisibilityBox extends AbstractGroupBox {
 
         @Override
@@ -390,7 +390,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("SplitterVisibility");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class VisiblePreviewField extends AbstractCheckBox {
 
           @Override
@@ -414,7 +414,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class VisibleDetailsField extends AbstractCheckBox {
 
           @Override
@@ -439,7 +439,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class FieldEnabledBox extends AbstractGroupBox {
 
         @Override
@@ -457,7 +457,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("SplitterEnabled");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class VisiblePreviewField extends AbstractCheckBox {
 
           @Override
@@ -476,7 +476,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class VisibleDetailsField extends AbstractCheckBox {
 
           @Override
@@ -495,7 +495,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class SplitterPositionBox extends AbstractSequenceBox {
 
           @Override
@@ -508,7 +508,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             return false;
           }
 
-          @Order(10.0)
+          @Order(10)
           public class SplitterPositionVField extends P_AbstractSplitterPositionField {
 
             @Override
@@ -527,7 +527,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0)
+          @Order(20)
           public class SplitterPositionHField extends P_AbstractSplitterPositionField {
 
             @Override
@@ -549,7 +549,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(50.0)
+    @Order(50)
     public class CloseButton extends AbstractCloseButton {
     }
   }

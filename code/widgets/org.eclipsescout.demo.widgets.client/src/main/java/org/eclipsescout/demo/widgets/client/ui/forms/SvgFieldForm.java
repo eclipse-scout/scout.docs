@@ -118,7 +118,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(SampleContentButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
@@ -130,7 +130,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -143,7 +143,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractSvgField {
 
         @Override
@@ -167,7 +167,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class DisabledField extends AbstractSvgField {
 
         @Override
@@ -193,7 +193,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
 
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -206,7 +206,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class UserSvgField extends AbstractSvgField {
 
         @Override
@@ -257,7 +257,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SvgSourceField extends AbstractStringField {
 
         @Override
@@ -287,7 +287,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -301,7 +301,7 @@ public class SvgFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
 

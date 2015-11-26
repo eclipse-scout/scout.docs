@@ -25,7 +25,7 @@ public class PersonTablePageExtension extends AbstractTableExtension<PersonTable
     super(owner);
   }
 
-  @Order(10_000.0)
+  @Order(10)
   public class EventsColumn extends AbstractLongColumn {
 
     @Override

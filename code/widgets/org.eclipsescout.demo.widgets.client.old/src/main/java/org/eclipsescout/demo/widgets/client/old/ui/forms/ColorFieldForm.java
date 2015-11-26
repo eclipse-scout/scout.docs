@@ -58,10 +58,10 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(50.0)
+    @Order(50)
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -69,7 +69,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
         return 1;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class ColorField01 extends AbstractColorField {
         @Override
         protected void execInitField() {
@@ -82,7 +82,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class ColorField02 extends AbstractColorField {
 
         @Override
@@ -113,7 +113,7 @@ public class ColorFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(60.0)
+    @Order(60)
     public class CloseButton extends AbstractCloseButton {
     }
   }

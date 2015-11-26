@@ -162,7 +162,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
     return getFieldByClass(ValueButton3Field.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -170,7 +170,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -178,7 +178,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultGroup extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -197,7 +197,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class DisabledGroup extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -226,7 +226,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class StyledGroupBox extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -239,7 +239,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           return TEXTS.get("Styled");
         }
 
-        @Order(10.0)
+        @Order(10)
         public class WarningButton extends AbstractRadioButton {
 
           // TODO: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436714
@@ -254,7 +254,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class ErrorButton extends AbstractRadioButton {
 
           @Override
@@ -270,7 +270,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -283,7 +283,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         return true;
       }
 
-      @Order(10.0)
+      @Order(10)
       public class RadioButtonGroup extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -296,7 +296,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           getNo1Button().setSelected(true);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class No1Button extends AbstractRadioButton<Long> {
 
           @Override
@@ -305,7 +305,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class No2Button extends AbstractRadioButton<Long> {
 
           @Override
@@ -314,7 +314,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class No3Button extends AbstractRadioButton<Long> {
 
           @Override
@@ -334,7 +334,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class GetValueField extends AbstractStringField {
 
         @Override
@@ -365,7 +365,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class ValueButton1Field extends AbstractLongField {
 
         @Override
@@ -384,7 +384,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class ValueButton2Field extends AbstractLongField {
 
         @Override
@@ -403,7 +403,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class ValueButton3Field extends AbstractLongField {
 
         @Override
@@ -429,11 +429,11 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(40.0)
+    @Order(40)
     public class SampleContentButton extends AbstractButton {
 
       @Override

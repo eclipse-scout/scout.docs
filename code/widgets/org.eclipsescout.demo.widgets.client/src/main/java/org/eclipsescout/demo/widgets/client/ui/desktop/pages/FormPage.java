@@ -95,7 +95,7 @@ public class FormPage extends AbstractPageWithNodes {
     getDetailForm().startPageForm();
   }
 
-  @Order(10.0)
+  @Order(10)
   public class OpenInADialogMenu extends AbstractMenu {
 
     @Override
@@ -113,7 +113,7 @@ public class FormPage extends AbstractPageWithNodes {
     }
   }
 
-  @Order(20.0)
+  @Order(20)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

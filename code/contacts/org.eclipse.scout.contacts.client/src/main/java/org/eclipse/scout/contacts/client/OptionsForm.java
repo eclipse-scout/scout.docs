@@ -36,7 +36,7 @@ public class OptionsForm extends AbstractForm {
     return getFieldByClass(ThemeRadioButtonGroup.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -44,10 +44,10 @@ public class OptionsForm extends AbstractForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Order(10.0)
+      @Order(10)
       public class ThemeRadioButtonGroup extends AbstractRadioButtonGroup<String> {
 
         @Override
@@ -67,7 +67,7 @@ public class OptionsForm extends AbstractForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ApplyButton extends AbstractOkButton {
 
       @Override

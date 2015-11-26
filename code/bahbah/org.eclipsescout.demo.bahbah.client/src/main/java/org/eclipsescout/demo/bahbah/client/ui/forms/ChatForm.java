@@ -93,7 +93,7 @@ public class ChatForm extends AbstractForm {
     return getFieldByClass(MessageField.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -106,7 +106,7 @@ public class ChatForm extends AbstractForm {
       return false;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class MessageField extends AbstractStringField {
 
       @Override
@@ -115,7 +115,7 @@ public class ChatForm extends AbstractForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class HistoryField extends AbstractArrayTableField<HistoryField.Table> {
 
       private final Integer MESSAGE_TYPE_LOCAL = 1;
@@ -130,7 +130,6 @@ public class ChatForm extends AbstractForm {
         return false;
       }
 
-      @Order(10.0)
       public class Table extends AbstractTable {
 
         @Override
@@ -174,7 +173,7 @@ public class ChatForm extends AbstractForm {
           return getColumnSet().getColumnByClass(TypeColumn.class);
         }
 
-        @Order(10.0)
+        @Order(10)
         public class TypeColumn extends AbstractIntegerColumn {
 
           @Override
@@ -193,7 +192,7 @@ public class ChatForm extends AbstractForm {
           }
         }
 
-        @Order(20.0)
+        @Order(20)
         public class SenderColumn extends AbstractStringColumn {
 
           @Override
@@ -207,7 +206,7 @@ public class ChatForm extends AbstractForm {
           }
         }
 
-        @Order(30.0)
+        @Order(30)
         public class ReceiverColumn extends AbstractStringColumn {
 
           @Override
@@ -216,7 +215,7 @@ public class ChatForm extends AbstractForm {
           }
         }
 
-        @Order(40.0)
+        @Order(40)
         public class MessageColumn extends AbstractStringColumn {
 
           @Override
@@ -235,7 +234,7 @@ public class ChatForm extends AbstractForm {
           }
         }
 
-        @Order(50.0)
+        @Order(50)
         public class TimeColumn extends AbstractTimeColumn {
 
           @Override
@@ -261,7 +260,7 @@ public class ChatForm extends AbstractForm {
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class SendMessageKeyStroke extends AbstractKeyStroke {
 
       @Override

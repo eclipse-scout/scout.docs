@@ -45,7 +45,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -53,7 +53,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       return 1;
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -61,7 +61,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class LabelField extends AbstractLabelField {
 
         @Override
@@ -70,7 +70,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class DisabledField extends AbstractLabelField {
 
         @Override
@@ -84,7 +84,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class StyledField extends AbstractLabelField {
 
         @Override
@@ -104,7 +104,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -112,7 +112,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class TooLongLabelTextGetsTruncatedField extends AbstractLabelField {
 
         @Override
@@ -121,7 +121,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class SetValueTextField extends AbstractLabelField {
 
         @Override
@@ -135,7 +135,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class MultilineLabelField extends AbstractLabelField {
 
         @Override
@@ -160,7 +160,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class VeryLongLabelTextField extends AbstractLabelField {
 
         @Override
@@ -186,7 +186,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
   }

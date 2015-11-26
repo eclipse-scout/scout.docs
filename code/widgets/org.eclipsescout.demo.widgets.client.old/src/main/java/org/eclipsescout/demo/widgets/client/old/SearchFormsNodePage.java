@@ -62,7 +62,7 @@ public class SearchFormsNodePage extends AbstractPageWithNodes {
     pageList.add(searchFormTablePage12);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

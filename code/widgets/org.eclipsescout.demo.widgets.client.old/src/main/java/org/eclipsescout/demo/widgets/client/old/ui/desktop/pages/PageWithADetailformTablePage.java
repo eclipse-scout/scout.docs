@@ -55,7 +55,6 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
         {4, "Coca-Cola Company", "KO"}});
   }
 
-  @Order(10.0)
   public class Table extends AbstractTable {
 
     public NameColumn getNameColumn() {
@@ -80,7 +79,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       return getColumnSet().getColumnByClass(CompanyNrColumn.class);
     }
 
-    @Order(10.0)
+    @Order(10)
     public class CompanyNrColumn extends AbstractLongColumn {
 
       @Override
@@ -89,7 +88,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -98,7 +97,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class SymbolColumn extends AbstractStringColumn {
 
       @Override
@@ -107,7 +106,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       }
     }
 
-    @Order(10.0)
+    @Order(10)
     public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
       @Override

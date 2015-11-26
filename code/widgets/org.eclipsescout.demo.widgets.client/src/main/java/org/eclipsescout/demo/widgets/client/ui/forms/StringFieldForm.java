@@ -308,10 +308,10 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(SelectButton.class);
   }
 
-  @Order(10.0)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10.0)
+    @Order(10)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -319,7 +319,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(10.0)
+      @Order(10)
       public class DefaultField extends AbstractStringField {
 
         @Override
@@ -328,7 +328,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
+      @Order(20)
       public class MandatoryField extends AbstractStringField {
 
         @Override
@@ -350,7 +350,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(25.0)
+      @Order(25)
       public class InsertText1Button extends AbstractButton {
         @Override
         protected void execInitField() {
@@ -374,7 +374,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(30)
       public class DisabledField extends AbstractStringField {
 
         @Override
@@ -393,7 +393,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(40)
       public class StyledField extends AbstractStringField {
 
         @Override
@@ -422,7 +422,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(50)
       public class OnFieldLabelField extends AbstractStringField {
 
         @Override
@@ -441,7 +441,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(60)
       public class LabelLeftField extends AbstractStringField {
 
         @Override
@@ -455,7 +455,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class LabelCenterField extends AbstractStringField {
 
         @Override
@@ -469,7 +469,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class LabelRightField extends AbstractStringField {
 
         @Override
@@ -484,7 +484,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(20.0)
+    @Order(20)
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -492,7 +492,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(60.0)
+      @Order(60)
       public class TextInputField extends AbstractStringField {
 
         @Override
@@ -524,7 +524,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
       }
 
-      @Order(65.0)
+      @Order(65)
       public class InsertText2Button extends AbstractButton {
         @Override
         protected void execInitField() {
@@ -562,10 +562,10 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         getTextInputField().setBackgroundColor(background);
       }
 
-      @Order(61.0)
+      @Order(61)
       public class CharCountBox extends AbstractSequenceBox {
 
-        @Order(1000.0)
+        @Order(1000)
         public class NumCharsField extends AbstractIntegerField {
 
           @Override
@@ -579,7 +579,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(2000.0)
+        @Order(2000)
         public class CountWhileTypingField extends AbstractCheckBox {
 
           @Override
@@ -599,7 +599,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(70)
       public class FontNameField extends AbstractStringField {
 
         @Override
@@ -618,7 +618,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(80)
       public class FontStyleField extends AbstractSmartField<Integer> {
 
         @Override
@@ -642,7 +642,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(90)
       public class FontSizeField extends AbstractIntegerField {
 
         @Override
@@ -671,7 +671,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(100)
       public class ForegroundColorField extends AbstractStringField {
 
         @Override
@@ -705,7 +705,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(110)
       public class BackgroundColorField extends AbstractStringField {
 
         @Override
@@ -739,7 +739,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(120)
       public class WrapTextField extends AbstractCheckBox {
 
         // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
@@ -760,7 +760,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(125.0)
+      @Order(125)
       public class SpellCheckEnabledField extends AbstractCheckBox {
 
         // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
@@ -781,7 +781,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(130.0)
+      @Order(130)
       public class StringInputField extends AbstractStringField {
 
         @Override
@@ -790,7 +790,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(135.0)
+      @Order(135)
       public class PlaceholderField extends AbstractPlaceholderField {
         @Override
         protected int getConfiguredGridH() {
@@ -798,7 +798,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(140.0)
+      @Order(140)
       public class UpperCaseField extends AbstractStringField {
 
         @Override
@@ -812,7 +812,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(150.0)
+      @Order(150)
       public class InputMaskedField extends AbstractStringField {
 
         @Override
@@ -826,7 +826,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(154.0)
+      @Order(154)
       public class HasActionField extends AbstractStringField {
 
         @Override
@@ -846,7 +846,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(154.0)
+      @Order(154)
       public class ToggleHasActionButton extends AbstractButton {
 
         @Override
@@ -870,7 +870,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(160.0)
+      @Order(160)
       public class MaxLengthField extends AbstractIntegerField {
 
         @Override
@@ -892,7 +892,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(170.0)
+      @Order(170)
       public class Placeholder1Field extends AbstractPlaceholderField {
         @Override
         protected int getConfiguredGridH() {
@@ -900,7 +900,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(2000.0)
+      @Order(2000)
       public class StringField extends AbstractStringField {
 
         @Override
@@ -927,7 +927,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(3000.0)
+      @Order(3000)
       public class ValueField extends AbstractStringField {
 
         @Override
@@ -936,7 +936,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(4000.0)
+      @Order(4000)
       public class DisplayTextField extends AbstractStringField {
 
         @Override
@@ -945,7 +945,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(5000.0)
+      @Order(5000)
       public class UpdateDisplayTextOnModifyField extends AbstractCheckBox {
 
         @Override
@@ -959,7 +959,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(5500.0)
+      @Order(5500)
       public class SelectionBox extends AbstractGroupBox {
 
         @Override
@@ -991,7 +991,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(10.0f)
+        @Order(10)
         public class TargetFieldRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
 
           @Override
@@ -999,7 +999,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
             return 2;
           }
 
-          @Order(10.0f)
+          @Order(10)
           public class TextInputFieldButton extends AbstractRadioButton<Boolean> {
 
             @Override
@@ -1019,7 +1019,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
             }
           }
 
-          @Order(20.0f)
+          @Order(20)
           public class StringFieldButton extends AbstractRadioButton<Boolean> {
 
             @Override
@@ -1041,7 +1041,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0f)
+        @Order(20)
         public class SelectionStartField extends AbstractIntegerField {
 
           @Override
@@ -1050,7 +1050,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30.0f)
+        @Order(30)
         public class SelectionEndField extends AbstractIntegerField {
 
           @Override
@@ -1059,7 +1059,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0f)
+        @Order(40)
         public class RefreshButton extends AbstractLinkButton {
 
           @Override
@@ -1079,7 +1079,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(50.0f)
+        @Order(50)
         public class SelectButton extends AbstractLinkButton {
 
           @Override
@@ -1099,7 +1099,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(6000.0f)
+      @Order(6000)
       public class Placeholder2Field extends AbstractPlaceholderField {
         @Override
         protected int getConfiguredGridH() {
@@ -1108,7 +1108,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(30.0)
+    @Order(30)
     public class LoremIpsumButton extends AbstractButton {
 
       @Override
@@ -1125,11 +1125,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
     }
 
-    @Order(40.0)
+    @Order(40)
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(50.0)
+    @Order(50)
     public class SampleFormatButton extends AbstractButton {
 
       @Override
