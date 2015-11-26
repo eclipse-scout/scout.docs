@@ -9,3 +9,9 @@ This can be achieved by including `org.eclipse.scout.rt.serverbridge` in your de
 	<groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt.serverbridge</artifactId>
 </dependency>
+
+The contacts example application has a launch configuration showing this setup
+footnote:[
+https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/5.2.x/code/contacts/org.eclipse.scout.contacts.all.app.dev
+].
+
