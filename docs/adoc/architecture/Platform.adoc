@@ -233,8 +233,9 @@ Bean decorations allow to wrap interfaces with a proxy to intercept each method 
 For this a `IBeanDecorationFactory` has to be implemented. This is one single factory instance for the entire application. It decides which decorators are created for a bean request.
 The factory is asked for decorators on every bean retrieval. This allows to write bean decoration factories depending on dynamic conditions.
 
-As bean decoration factories are beans itself it is sufficient to create an implementation of `org.eclipse.scout.rt.platform.IBeanDecorationFactory` and to ensure this implementation is used (see <<Bean Retrieval>>).
-This factory receives the bean that should be decorated and the originally requested bean class to decide which decorators that are created. In case no decoration is required the factory may return `null`. Then the original bean is used without decorations.
+As bean decoration factories are beans themselves, it is sufficient to create an implementation of `org.eclipse.scout.rt.platform.IBeanDecorationFactory` and to ensure this implementation is used (see <<Bean Retrieval>>).
+This factory receives the bean to be decorated and the originally requested bean class to decide which decorators it should create.
+In case no decoration is required the factory may return `null`. Then the original bean is used without decorations.
 
 TIP: Decorations are only supported if the class obtained by the bean manager (e.g. by using `BEANS.get()`) is an interface!
 
