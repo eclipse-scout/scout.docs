@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringHolder;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.server.services.common.pwd.AbstractPasswordManagementService;
 import org.eclipse.scout.rt.server.services.common.pwd.IPasswordPolicy;
 import org.eclipse.scout.rt.shared.TEXTS;

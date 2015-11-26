@@ -19,7 +19,7 @@ import org.eclipse.scout.commons.SecurityUtility;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.commons.holders.StringHolder;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;

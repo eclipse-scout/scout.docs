@@ -25,7 +25,7 @@ import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
 @Replace

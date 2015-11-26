@@ -23,7 +23,7 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationReadPermission
 import org.eclipse.scout.contacts.shared.organization.OrganizationSearchFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;

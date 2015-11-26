@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.ByteArrayHolder;
 import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;

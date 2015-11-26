@@ -24,7 +24,7 @@ import org.eclipse.scout.contacts.shared.module.events.event.EventTablePageData;
 import org.eclipse.scout.contacts.shared.module.events.event.IEventService;
 import org.eclipse.scout.contacts.shared.module.events.event.ReadEventPermission;
 import org.eclipse.scout.contacts.shared.module.events.event.UpdateEventPermission;
-import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
