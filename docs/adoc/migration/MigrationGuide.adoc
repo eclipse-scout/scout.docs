@@ -104,4 +104,16 @@ Offline functionality in the scout client was removed (not needed anymore). Dele
 - IClientSession.getOfflineSubject
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
+== Moves
+The following Classes were moved. Organize imports to fix errors:
+
+- IDNDSupport
+- TransferObject
+- TextTransferObject
+- ResourceListTransferObject
+- JavaTransferObject
+- ImageTransferObject
+
+
+
 
