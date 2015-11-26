@@ -98,4 +98,10 @@ If you want to use access control based on the userid as before, extend UserIdAc
 protected abstract PermissionCollection execLoadPermissions(String userId)
 ----
 
+== Offline
+Offline functionality in the scout client was removed (not needed anymore). Delete
+- OfflineState
+- IClientSession.getOfflineSubject
+- IDesktop.changeVisibilityAfterOfflineSwitch
+
 
