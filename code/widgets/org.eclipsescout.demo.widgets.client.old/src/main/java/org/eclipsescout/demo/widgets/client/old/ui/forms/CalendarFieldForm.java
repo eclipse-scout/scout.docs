@@ -129,7 +129,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
                   rootContextMenu.removeChildActions(m_calendarMenus);
                   m_calendarMenus.clear();
                   for (IMenu menu : event.getSource().getChildActions()) {
-                    m_calendarMenus.add(new OutlineMenuWrapper(menu, menu.getMenuTypes()));
+                    m_calendarMenus.add(new OutlineMenuWrapper(menu));
                   }
                   rootContextMenu.addChildActions(m_calendarMenus);
                 }
