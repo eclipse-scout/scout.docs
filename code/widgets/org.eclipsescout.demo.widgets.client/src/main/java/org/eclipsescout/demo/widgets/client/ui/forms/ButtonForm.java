@@ -187,9 +187,33 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
+
+          @Override
+          protected String getConfiguredKeyStroke() {
+            return "ctrl-d";
+          }
         }
 
         @Order(20)
+        public class DisabledField extends AbstractButton {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+        }
+
+        @Order(30)
         public class ButtonWithMenuField extends AbstractButton {
 
           @Override
@@ -200,6 +224,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredProcessButton() {
             return false;
+          }
+
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.StarYellow;
           }
 
           @Order(10)
@@ -228,25 +257,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             protected void execAction() {
               System.out.println("'Menu item 2' clicked");
             }
-          }
-        }
-
-        @Order(30)
-        public class DisabledField extends AbstractButton {
-
-          @Override
-          protected boolean getConfiguredEnabled() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Disabled");
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
           }
         }
 
@@ -382,6 +392,34 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        public class ToggleButtonWithMenuField extends AbstractButton {
+
+          @Override
+          protected int getConfiguredDisplayStyle() {
+            return DISPLAY_STYLE_TOGGLE;
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Order(10)
+          public class MenuItem extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return "Menu item";
+            }
+
+            @Override
+            protected void execAction() {
+              MessageBoxes.createOk().withBody("Hello").show();
+            }
+          }
+        }
+
+        @Order(40)
         public class ToggleButtonStyledField extends AbstractButton {
 
           @Override
@@ -454,6 +492,72 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+        }
+
+        @Order(30)
+        public class LinkButtonWithMenuField extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "With menu";
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Order(10)
+          public class MenuItem1 extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return "Menu item 1";
+            }
+
+            @Override
+            protected void execAction() {
+              System.out.println("'Menu item 1' clicked");
+            }
+          }
+
+          @Order(20)
+          public class MenuItem2 extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return "Menu item 2";
+            }
+
+            @Override
+            protected void execAction() {
+              System.out.println("'Menu item 2' clicked");
+            }
+          }
+        }
+
+        @Order(40)
+        public class StyledLinkButtonField extends AbstractLinkButton {
+
+          @Override
+          protected boolean getConfiguredFillHorizontal() {
+            return true;
+          }
+
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.StarRed;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Styled");
           }
 
           @Override
