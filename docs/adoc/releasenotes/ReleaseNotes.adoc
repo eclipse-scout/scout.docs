@@ -22,3 +22,6 @@ Here are the release notes for the Scout Release 6.0
 * renamed `ITable.resetDisplayableColumns()` to `resetColumns()`
 * removed `ITable.resetColumns(boolean, boolean, boolean, boolean)` from interface (is now protected in `AbstractTable`)
 * AbstractAccessControlService is now generic with key as a type parameter, execLoadPermissions takes the key as parameter
+* `AbstractTable.execResetTable(...)`: changed signature
+** old: `protected void execResetColumns(boolean visibility, boolean order, boolean sorting, boolean widths)`
+** new: `protected void execResetColumns(Set<String> options)`
