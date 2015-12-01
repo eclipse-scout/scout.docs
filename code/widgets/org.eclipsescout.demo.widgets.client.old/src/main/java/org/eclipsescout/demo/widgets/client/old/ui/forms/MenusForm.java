@@ -15,11 +15,17 @@ import java.util.List;
 import org.eclipse.scout.commons.ConfigurationUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.annotations.OrderedCollection;
+import org.eclipse.scout.rt.client.ui.action.IAction;
+import org.eclipse.scout.rt.client.ui.action.IActionVisitor;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.root.IContextMenuOwner;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.IFormFieldVisitor;
+import org.eclipse.scout.rt.client.ui.form.fields.ICompositeField;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -396,6 +402,46 @@ public class MenusForm extends AbstractForm implements IPageForm {
           protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
           }
+        }
+      }
+
+      @Order(60)
+      public class ToggleEnabledStateButton extends AbstractLinkButton {
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Toggle enabled state for all fields and menus (except this one)";
+        }
+
+        @Override
+        protected void execClickAction() {
+          MenusForm.this.visitFields(new IFormFieldVisitor() {
+
+            @Override
+            public boolean visitField(IFormField field, int level, int fieldIndex) {
+              if (field instanceof IContextMenuOwner) {
+                IContextMenuOwner menuOwner = (IContextMenuOwner) field;
+                if (menuOwner.getContextMenu() != null) {
+                  menuOwner.getContextMenu().acceptVisitor(new IActionVisitor() {
+                    @Override
+                    public int visit(IAction action) {
+                      action.setEnabled(!action.isEnabled());
+                      return IActionVisitor.CONTINUE;
+                    }
+                  });
+                }
+              }
+              if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
+                field.setEnabled(!field.isEnabled());
+              }
+              return true;
+            }
+          });
         }
       }
 
