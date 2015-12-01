@@ -14,11 +14,6 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
-import org.eclipse.scout.commons.CollectionUtility;
-import org.eclipse.scout.commons.IRunnable;
-import org.eclipse.scout.commons.annotations.Order;
-import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.commons.holders.StringArrayHolder;
 import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.contacts.server.SuperUserRunContextProvider;
 import org.eclipse.scout.contacts.server.module.events.sql.SQLs;
@@ -27,10 +22,15 @@ import org.eclipse.scout.contacts.shared.module.events.person.PersonTablePageDat
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
-import org.eclipse.scout.rt.platform.util.DateUtility;
+import org.eclipse.scout.rt.platform.holders.NVPair;
+import org.eclipse.scout.rt.platform.holders.StringArrayHolder;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
+import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;

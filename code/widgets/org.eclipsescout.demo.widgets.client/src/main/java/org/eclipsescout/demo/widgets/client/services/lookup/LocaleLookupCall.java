@@ -13,7 +13,7 @@ package org.eclipsescout.demo.widgets.client.services.lookup;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.util.DateFormatProvider;
+import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
 
 public class LocaleLookupCall extends AbstractLocaleLookupCall {
 

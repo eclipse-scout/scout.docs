@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
-import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox;
@@ -21,6 +20,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 public class PictureUrlForm extends AbstractForm {

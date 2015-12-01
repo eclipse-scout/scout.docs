@@ -14,8 +14,8 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.commons.annotations.Extends;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
+import org.eclipse.scout.rt.platform.extension.Extends;
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractFormFieldData;
 import org.eclipse.scout.rt.shared.data.form.fields.tablefield.AbstractTableFieldBeanData;

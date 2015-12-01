@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client;
 
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.rt.client.AbstractClientSession;
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;

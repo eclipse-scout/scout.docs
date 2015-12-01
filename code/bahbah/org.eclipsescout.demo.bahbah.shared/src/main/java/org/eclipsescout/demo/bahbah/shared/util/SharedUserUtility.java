@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.util;
 
-import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.VetoException;
+import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 

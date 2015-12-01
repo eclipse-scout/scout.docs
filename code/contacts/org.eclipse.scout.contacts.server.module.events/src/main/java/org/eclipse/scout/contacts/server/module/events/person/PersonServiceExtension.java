@@ -13,9 +13,6 @@ package org.eclipse.scout.contacts.server.module.events.person;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.scout.commons.annotations.Replace;
-import org.eclipse.scout.commons.holders.BeanArrayHolder;
-import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.contacts.server.module.events.EventCountBean;
 import org.eclipse.scout.contacts.server.module.events.sql.SQLs;
 import org.eclipse.scout.contacts.server.person.PersonService;
@@ -24,6 +21,9 @@ import org.eclipse.scout.contacts.shared.module.events.person.PersonTablePageDat
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
+import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.platform.holders.BeanArrayHolder;
+import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;

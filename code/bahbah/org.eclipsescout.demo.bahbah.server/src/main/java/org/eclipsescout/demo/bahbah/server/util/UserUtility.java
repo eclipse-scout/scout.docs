@@ -14,11 +14,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-import org.eclipse.scout.commons.Base64Utility;
-import org.eclipse.scout.commons.SecurityUtility;
-import org.eclipse.scout.commons.exception.VetoException;
-import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.commons.holders.StringHolder;
+import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.holders.NVPair;
+import org.eclipse.scout.rt.platform.holders.StringHolder;
+import org.eclipse.scout.rt.platform.security.SecurityUtility;
+import org.eclipse.scout.rt.platform.util.Base64Utility;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;

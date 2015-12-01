@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.module.events.person;
 
-import org.eclipse.scout.commons.annotations.Data;
-import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.contacts.shared.module.events.person.PersonTablePageDataExtension;
+import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.extension.ui.basic.table.AbstractTableExtension;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @Data(PersonTablePageDataExtension.class)

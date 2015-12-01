@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.desktop.menu;
 
-import org.eclipse.scout.commons.ConfigUtility;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.platform.config.ConfigUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ClientSession;
 

@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.scout.commons.annotations.Replace;
+import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 
 @Replace

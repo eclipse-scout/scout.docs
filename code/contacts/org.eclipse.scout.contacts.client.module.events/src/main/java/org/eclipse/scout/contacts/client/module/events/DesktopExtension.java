@@ -13,11 +13,11 @@ package org.eclipse.scout.contacts.client.module.events;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.contacts.client.module.events.event.EventOutline;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
+import org.eclipse.scout.rt.platform.Order;
 
 public class DesktopExtension extends AbstractDesktopExtension {
 

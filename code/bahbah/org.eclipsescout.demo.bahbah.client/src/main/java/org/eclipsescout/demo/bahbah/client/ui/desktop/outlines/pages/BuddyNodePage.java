@@ -12,11 +12,11 @@ package org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages;
 
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.scout.commons.IRunnable;
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
+import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
 import org.eclipsescout.demo.bahbah.client.services.BuddyAvatarIconProviderService;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;

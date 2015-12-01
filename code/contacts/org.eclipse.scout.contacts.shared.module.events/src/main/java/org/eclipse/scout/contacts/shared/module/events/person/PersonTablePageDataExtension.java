@@ -14,8 +14,8 @@ import java.io.Serializable;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.commons.annotations.Extends;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
+import org.eclipse.scout.rt.platform.extension.Extends;
 
 /**
  * <b>NOTE:</b><br>

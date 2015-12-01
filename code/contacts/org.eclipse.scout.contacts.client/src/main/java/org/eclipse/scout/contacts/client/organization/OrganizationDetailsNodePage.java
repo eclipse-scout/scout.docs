@@ -12,8 +12,8 @@ package org.eclipse.scout.contacts.client.organization;
 
 import java.util.List;
 
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;

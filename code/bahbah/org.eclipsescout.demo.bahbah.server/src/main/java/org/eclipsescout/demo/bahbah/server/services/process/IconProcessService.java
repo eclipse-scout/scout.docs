@@ -19,9 +19,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.eclipse.scout.commons.exception.VetoException;
-import org.eclipse.scout.commons.holders.ByteArrayHolder;
-import org.eclipse.scout.commons.holders.NVPair;
+import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.holders.ByteArrayHolder;
+import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;

@@ -14,7 +14,6 @@ import java.security.AccessController;
 
 import javax.security.auth.Subject;
 
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
@@ -41,12 +40,10 @@ public class ServerSession extends AbstractServerSession {
   }
 
   @SuppressWarnings("unchecked")
-  @FormData
   public ICode<Integer> getPermission() {
     return getSharedContextVariable(IUserProcessService.PERMISSION_KEY, ICode.class);
   }
 
-  @FormData
   public void setPermission(ICode<Integer> newValue) {
     setSharedContextVariable(IUserProcessService.PERMISSION_KEY, ICode.class, newValue);
   }

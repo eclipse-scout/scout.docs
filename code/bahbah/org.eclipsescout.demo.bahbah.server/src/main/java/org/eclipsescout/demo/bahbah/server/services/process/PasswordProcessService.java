@@ -15,9 +15,9 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
-import org.eclipse.scout.commons.exception.VetoException;
-import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.commons.holders.StringHolder;
+import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.holders.NVPair;
+import org.eclipse.scout.rt.platform.holders.StringHolder;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.server.services.common.pwd.AbstractPasswordManagementService;
 import org.eclipse.scout.rt.server.services.common.pwd.IPasswordPolicy;

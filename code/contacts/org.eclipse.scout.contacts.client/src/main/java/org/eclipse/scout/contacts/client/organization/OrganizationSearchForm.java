@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.organization;
 
-import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.ResetButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.SearchButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.TabBox;
@@ -21,6 +19,7 @@ import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.Mai
 import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.TabBox.FieldBox.NameField;
 import org.eclipse.scout.contacts.client.template.AbstractLocationBox;
 import org.eclipse.scout.contacts.shared.organization.OrganizationSearchFormData;
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractResetButton;
@@ -28,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractSearchButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 

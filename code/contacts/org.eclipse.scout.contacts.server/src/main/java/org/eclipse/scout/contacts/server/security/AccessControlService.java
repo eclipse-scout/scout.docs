@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.server.security;
 import java.security.AllPermission;
 import java.security.Permissions;
 
-import org.eclipse.scout.commons.annotations.Replace;
+import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
 import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 

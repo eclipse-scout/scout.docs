@@ -12,11 +12,6 @@ package org.eclipse.scout.contacts.server.module.events;
 
 import java.util.UUID;
 
-import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.exception.VetoException;
-import org.eclipse.scout.commons.holders.ITableHolder;
-import org.eclipse.scout.commons.holders.NVPair;
-import org.eclipse.scout.commons.holders.TableBeanHolderFilter;
 import org.eclipse.scout.contacts.server.module.events.sql.SQLs;
 import org.eclipse.scout.contacts.shared.module.events.event.CreateEventPermission;
 import org.eclipse.scout.contacts.shared.module.events.event.EventFormData;
@@ -24,6 +19,11 @@ import org.eclipse.scout.contacts.shared.module.events.event.EventTablePageData;
 import org.eclipse.scout.contacts.shared.module.events.event.IEventService;
 import org.eclipse.scout.contacts.shared.module.events.event.ReadEventPermission;
 import org.eclipse.scout.contacts.shared.module.events.event.UpdateEventPermission;
+import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.holders.ITableHolder;
+import org.eclipse.scout.rt.platform.holders.NVPair;
+import org.eclipse.scout.rt.platform.holders.TableBeanHolderFilter;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;

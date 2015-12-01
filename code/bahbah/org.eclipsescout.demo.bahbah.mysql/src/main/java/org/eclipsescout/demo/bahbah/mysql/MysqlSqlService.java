@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.mysql;
 
-import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.server.jdbc.mysql.AbstractMySqlSqlService;
 
 @Order(1900)

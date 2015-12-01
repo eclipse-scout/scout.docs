@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.sql;
 
-import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 
 @Order(1950)

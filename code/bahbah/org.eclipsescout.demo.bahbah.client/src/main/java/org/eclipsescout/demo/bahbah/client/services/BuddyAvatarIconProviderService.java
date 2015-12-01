@@ -10,11 +10,11 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.client.services;
 
-import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.client.services.common.icon.IIconProviderService;
 import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
 import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
 import org.slf4j.Logger;
