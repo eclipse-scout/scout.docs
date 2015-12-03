@@ -185,7 +185,7 @@ image::{imgsdir}/beanHierarchy.png[]
 
 In this situation 4 bean candidates are available: MyServiceImpl, MyServiceMod, MySpecialVersion and AnotherVersion.
 But which one is returned by `BEANS.get(IMyService.class)`? Or by `BEANS.get(MySpecialVersion.class)`?
-This can be influenced with the `org.eclipse.scout.commons.annotations.@Order` and `org.eclipse.scout.commons.annotations.@Replace` annotations.
+This can be influenced with the `org.eclipse.scout.rt.platform.@Order` and `org.eclipse.scout.rt.platform.@Replace` annotations.
 The next sections describe the idea behind these annotations and gives some examples.
 
 ==== @Order

@@ -61,7 +61,7 @@ Often using HTML in value fields or table cells is not necessary for styling. Ve
 
 === HTML Builder
 
-For creating simple HTML files or fragments with encoded user input, the class `org.eclipse.scout.commons.html.HTML` can be used. It is also easily possible to create application internal and external link with this approach.
+For creating simple HTML files or fragments with encoded user input, the class `org.eclipse.scout.rt.platform.html.HTML` can be used. It is also easily possible to create application internal and external link with this approach.
 
 === Styling in the UI-Layer
 
@@ -70,7 +70,7 @@ Links are possible as well.
 
 === Manual Encoding
 
-It is also possible to encode any String manually using `StringUtility.htmlEncode(String)`. `org.eclipse.scout.commons.html.HTML` uses this method internally for encoding.
+It is also possible to encode any String manually using `StringUtility.htmlEncode(String)`. `org.eclipse.scout.rt.platform.html.HTML` uses this method internally for encoding.
 However, using `HTML` is recommended, where possible, because it is more concise and leads to less errors.
 
 === Using a White-List Filter
