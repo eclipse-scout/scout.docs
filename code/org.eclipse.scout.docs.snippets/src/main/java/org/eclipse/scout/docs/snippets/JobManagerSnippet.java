@@ -162,7 +162,7 @@ public final class JobManagerSnippet {
     // tag::BlockingCondition[]
 
     // Create the blocking condition <1>
-    final IBlockingCondition condition = Jobs.getJobManager().createBlockingCondition("Operation", true);
+    final IBlockingCondition condition = Jobs.newBlockingCondition("Operation", true);
 
     // Schedule the job <2>
     IFuture<Boolean> future = Jobs.schedule(new LongRunningOperation(), Jobs.newInput()
