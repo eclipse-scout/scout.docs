@@ -27,7 +27,6 @@ public class EventTypeLookupCall extends CodeLookupCall<Long> {
 
   @Override
   protected List<? extends ILookupRow<Long>> execCreateLookupRows() {
-    //TODO [mzi] Auto-generated method stub.
     return super.execCreateLookupRows();
   }
 

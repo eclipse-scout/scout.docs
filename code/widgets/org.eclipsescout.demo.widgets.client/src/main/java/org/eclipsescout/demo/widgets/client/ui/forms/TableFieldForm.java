@@ -299,7 +299,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         public class Table extends AbstractTable {
 
-          // TODO: [BUG] Table bug: organize columns throws null pointer exception
+          // FIXME dwi: BUG, Table bug: organize columns throws null pointer exception
 
           public NameColumn getNameColumn() {
             return getColumnSet().getColumnByClass(NameColumn.class);

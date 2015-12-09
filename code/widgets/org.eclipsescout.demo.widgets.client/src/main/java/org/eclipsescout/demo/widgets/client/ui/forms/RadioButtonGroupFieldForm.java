@@ -219,7 +219,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         protected void execInitField() {
           getButtonFor(EventTypeCodeType.PublicCode.ID).setSelected(true);
 
-          // TODO: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
+          // TODO [5.2] jgu: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
           for (IRadioButton<Long> button : getButtons()) {
             button.setEnabled(false);
           }
@@ -242,7 +242,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         @Order(10)
         public class WarningButton extends AbstractRadioButton {
 
-          // TODO: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436714
+          // TODO [5.2] jgu: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436714
           @Override
           protected String getConfiguredIconId() {
             return Icons.StarYellow;

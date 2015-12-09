@@ -742,7 +742,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       @Order(120)
       public class WrapTextField extends AbstractCheckBox {
 
-        // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
+        // FIXME dwi: BUG, does not react on getConfiguredLabelFont, bug???
 
         @Override
         protected String getConfiguredFont() {
@@ -763,7 +763,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       @Order(125)
       public class SpellCheckEnabledField extends AbstractCheckBox {
 
-        // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
+        // FIXME dwi: BUG, does not react on getConfiguredLabelFont, bug???
 
         @Override
         protected String getConfiguredFont() {

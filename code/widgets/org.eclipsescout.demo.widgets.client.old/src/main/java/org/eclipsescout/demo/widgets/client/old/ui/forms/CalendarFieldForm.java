@@ -154,7 +154,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
                 Thread.sleep(5000);
               }
               catch (InterruptedException e) {
-                // TODO Auto-generated catch block
+                // TODO [5.2] abr: Auto-generated catch block
                 e.printStackTrace();
               }
               System.out.println("END item fetch operation");
