@@ -37,8 +37,8 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -372,13 +372,8 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
           else {
             if (getBlockModelThreadField().isChecked()) {
-              try {
-                Thread.sleep(TimeUnit.SECONDS.toMillis(openingDelay));
-                ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
-              }
-              catch (InterruptedException e) {
-                throw new ProcessingException("Interrupted", e);
-              }
+              SleepUtil.sleepElseThrow(openingDelay, TimeUnit.SECONDS);
+              ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
             }
             else {
               Jobs.schedule(new IRunnable() {
@@ -650,19 +645,10 @@ public class FormForm extends AbstractForm implements IPageForm {
         protected void execClickAction() {
           int cancellationDuration = (getCancellationDurationField().getValue() != null ? getCancellationDurationField().getValue() : 0);
 
-          try {
-            Thread.sleep(TimeUnit.SECONDS.toMillis(30));
-          }
-          catch (InterruptedException e) {
-            LOG.error("Interrupted", e);
-          }
-
-          try {
-            Thread.sleep(TimeUnit.SECONDS.toMillis(cancellationDuration));
-          }
-          catch (InterruptedException e) {
-            LOG.error("Interrupted", e);
-          }
+          // Long running operation
+          SleepUtil.sleepSafe(30, TimeUnit.SECONDS);
+          // Long running cancellation
+          SleepUtil.sleepSafe(cancellationDuration, TimeUnit.SECONDS);
         }
 
         @Override

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -33,6 +34,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.calendarfield.AbstractCalendar
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
@@ -150,13 +152,7 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
             protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
               LOG.info("ItemProvdider01#execLoadItemsInBackground");
               System.out.println("START long running item fetch operation... ");
-              try {
-                Thread.sleep(5000);
-              }
-              catch (InterruptedException e) {
-                // TODO [5.2] abr: Auto-generated catch block
-                e.printStackTrace();
-              }
+              SleepUtil.sleepSafe(5, TimeUnit.SECONDS);
               System.out.println("END item fetch operation");
 
               String cssClass = "calendar-appointment";
