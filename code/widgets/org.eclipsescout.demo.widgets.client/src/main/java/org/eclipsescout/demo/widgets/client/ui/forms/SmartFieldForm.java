@@ -19,9 +19,9 @@ import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
@@ -780,7 +780,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(100)
-      public class BrowseHierarchyField extends AbstractCheckBox {
+      public class BrowseHierarchyField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -804,7 +804,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(110)
-      public class BrowseAutoExpandAllField extends AbstractCheckBox {
+      public class BrowseAutoExpandAllField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {

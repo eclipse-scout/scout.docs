@@ -13,8 +13,8 @@ package org.eclipsescout.demo.widgets.client.old.ui.forms;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
@@ -97,7 +97,7 @@ public class KeyStrokeForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class ChangeValueWithCtrlshiftcField extends AbstractCheckBox {
+      public class ChangeValueWithCtrlshiftcField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {

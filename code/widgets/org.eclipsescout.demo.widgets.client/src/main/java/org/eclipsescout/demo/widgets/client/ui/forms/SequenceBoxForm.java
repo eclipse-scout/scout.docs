@@ -23,7 +23,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDec
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
@@ -671,7 +670,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class VisibleCompanyField extends AbstractCheckBox {
+      public class VisibleCompanyField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -695,7 +694,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
-      public class VisibleEmployeeField extends AbstractCheckBox {
+      public class VisibleEmployeeField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -719,7 +718,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
-      public class VisibleIndustryField extends AbstractCheckBox {
+      public class VisibleIndustryField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -743,7 +742,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
-      public class TooltipEmployeeField extends AbstractCheckBox {
+      public class TooltipEmployeeField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -771,7 +770,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80)
-      public class StatusVisibleIndustryField extends AbstractCheckBox {
+      public class StatusVisibleIndustryField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -972,7 +971,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class WidgetBooleanField1 extends AbstractCheckBox {
+        public class WidgetBooleanField1 extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1187,7 +1186,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class WidgetBooleanField1 extends AbstractCheckBox {
+        public class WidgetBooleanField1 extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1402,7 +1401,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class WidgetBooleanField1 extends AbstractCheckBox {
+        public class WidgetBooleanField1 extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {

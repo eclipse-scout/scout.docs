@@ -12,11 +12,11 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
@@ -580,7 +580,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(2000)
-        public class CountWhileTypingField extends AbstractCheckBox {
+        public class CountWhileTypingField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -740,7 +740,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(120)
-      public class WrapTextField extends AbstractCheckBox {
+      public class WrapTextField extends AbstractBooleanField {
 
         // FIXME dwi: BUG, does not react on getConfiguredLabelFont, bug???
 
@@ -761,7 +761,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(125)
-      public class SpellCheckEnabledField extends AbstractCheckBox {
+      public class SpellCheckEnabledField extends AbstractBooleanField {
 
         // FIXME dwi: BUG, does not react on getConfiguredLabelFont, bug???
 
@@ -946,7 +946,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(5000)
-      public class UpdateDisplayTextOnModifyField extends AbstractCheckBox {
+      public class UpdateDisplayTextOnModifyField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {

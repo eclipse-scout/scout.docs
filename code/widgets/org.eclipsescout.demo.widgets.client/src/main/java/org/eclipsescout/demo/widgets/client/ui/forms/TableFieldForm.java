@@ -44,7 +44,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -1179,7 +1178,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(80)
-        public class AutoResizeColumnsField extends AbstractCheckBox {
+        public class AutoResizeColumnsField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1209,7 +1208,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(90)
-        public class IsVisibleField extends AbstractCheckBox {
+        public class IsVisibleField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1243,7 +1242,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(95)
-        public class IsEnabledField extends AbstractCheckBox {
+        public class IsEnabledField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1272,7 +1271,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(100)
-        public class IsEditableField extends AbstractCheckBox {
+        public class IsEditableField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1303,7 +1302,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(110)
-        public class MultiSelectField extends AbstractCheckBox {
+        public class MultiSelectField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1333,7 +1332,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(120)
-        public class IsCheckableField extends AbstractCheckBox {
+        public class IsCheckableField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1363,7 +1362,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(122)
-        public class IsRowIconVisibleField extends AbstractCheckBox {
+        public class IsRowIconVisibleField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1395,7 +1394,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(125)
-        public class WrapTextField extends AbstractCheckBox {
+        public class WrapTextField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1456,7 +1455,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(140)
-        public class TableHeaderVisibleField extends AbstractCheckBox {
+        public class TableHeaderVisibleField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1485,7 +1484,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(142)
-        public class TableHeaderEnabledField extends AbstractCheckBox {
+        public class TableHeaderEnabledField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1514,7 +1513,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(145)
-        public class TableSortEnabledField extends AbstractCheckBox {
+        public class TableSortEnabledField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {

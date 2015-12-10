@@ -18,9 +18,9 @@ import org.eclipse.scout.rt.client.ui.dnd.TransferObject;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -333,7 +333,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(15)
-      public class Image1ScrollbarsEnabledCheckbox extends AbstractCheckBox {
+      public class Image1ScrollbarsEnabledCheckbox extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -358,7 +358,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(16)
-      public class Image1AutoFitCheckbox extends AbstractCheckBox {
+      public class Image1AutoFitCheckbox extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -435,7 +435,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(25)
-      public class Image2ScrollbarEnabledFieldCheckbox extends AbstractCheckBox {
+      public class Image2ScrollbarEnabledFieldCheckbox extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -460,7 +460,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(26)
-      public class Image2AutoFitCheckbox extends AbstractCheckBox {
+      public class Image2AutoFitCheckbox extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {

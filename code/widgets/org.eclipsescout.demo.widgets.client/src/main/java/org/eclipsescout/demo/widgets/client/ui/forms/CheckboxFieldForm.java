@@ -13,8 +13,8 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -132,7 +132,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class DefaultField extends AbstractCheckBox {
+      public class DefaultField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -141,7 +141,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class DisabledField extends AbstractCheckBox {
+      public class DisabledField extends AbstractBooleanField {
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -174,7 +174,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class CheckboxField extends AbstractCheckBox {
+      public class CheckboxField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
