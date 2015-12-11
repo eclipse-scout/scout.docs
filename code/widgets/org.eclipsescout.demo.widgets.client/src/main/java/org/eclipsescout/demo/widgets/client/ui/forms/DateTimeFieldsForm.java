@@ -32,7 +32,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.exception.RuntimeExceptionTranslator;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -835,7 +834,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
               public String call() throws Exception {
                 return InputField.super.execFormatValue(value);
               }
-            }, BEANS.get(RuntimeExceptionTranslator.class));
+            });
           }
 
           @Override
@@ -1043,7 +1042,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
               public String call() throws Exception {
                 return TimeInputField.super.execFormatValue(value);
               }
-            }, BEANS.get(RuntimeExceptionTranslator.class));
+            });
           }
 
           @Override
@@ -1188,7 +1187,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
               public String call() throws Exception {
                 return DateTimeInputField.super.execFormatValue(value);
               }
-            }, BEANS.get(RuntimeExceptionTranslator.class));
+            });
           }
 
           @Override

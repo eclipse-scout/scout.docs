@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.platform.Bean;
 import org.eclipse.scout.rt.platform.IPlatform;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
-import org.eclipse.scout.rt.platform.exception.ExceptionTranslator;
+import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
@@ -57,7 +57,7 @@ public class ServerApplication implements IPlatformListener {
             BEANS.get(IClusterSynchronizationService.class).addListener(new RegisterUserNotificationListener());
             BEANS.get(IClusterSynchronizationService.class).addListener(new UnregisterUserNotificationListener());
           }
-        }, BEANS.get(ExceptionTranslator.class));
+        }, DefaultExceptionTranslator.class);
       }
       catch (Exception e) {
         throw new PlatformException("Unable to start server application.", e);
