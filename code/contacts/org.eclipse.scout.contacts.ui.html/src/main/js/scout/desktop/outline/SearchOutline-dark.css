@@ -8,18 +8,11 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
- 
-.popup {
-  .popup-head {
-    background-color: @palette-gray-10;
-  }
-} 
+@import (less) "scout/desktop/outline/SearchOutline.css";
 
-.popup-deco {
-  background-color: transparent;
+
+.search-outline-field {
+  color: @control-color;
+  background-color: @palette-gray-6;
 }
 
-.popup-body {
-  background-color: @palette-gray-10;
-}

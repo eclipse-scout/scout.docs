@@ -8,74 +8,13 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
+@import (less) "scout/form/Form.css";
+
 .form {
-  height: 100%;
-  width: 100%;
-  position: relative;
   background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
 }
 
 .dialog {
-  position: absolute !important; /* ignore positioning of 'ui-resizable' */
   background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
-  border: solid 1px @border-color;
-  border-top-left-radius: @border-radius;
-  border-top-right-radius: @border-radius;
-  #scout.drop-shadow-large();
-  margin: 10px; /* minimum padding to desktop */
-  margin-bottom: 15px;
-  top: 0px; /* must be specified otherwise dialogs will be positioned at end of document and increase document size */
-
-  &.shown {
-    #scout.animation(fadeIn ease-in 1);
-    #scout.animation-duration(0.15s);
-  }
-
-  &.modality-highlight {
-    #scout.animation-shake();
-  }
-
-  & > .title-box {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 30px; /* Leave space for 'x' closable */
-
-    & > .title {
-      #scout.overflow-ellipsis-nowrap();
-      #scout.font-text-large();
-      color: @palette-gray-2;
-
-      & > .icon {
-        margin-right: 5px;
-
-        &.font-icon {
-          font-size: 14px;
-        }
-      }
-    }
-
-    & > .sub-title {
-      #scout.overflow-ellipsis-nowrap();
-      #scout.font-text-normal();
-      color: @active-color;
-    }
-  }
-
-  & > .closable {
-    position: absolute;
-    right: 5px;
-    margin: 8px;
-    #scout.font-icon();
-    font-size: 17px;
-    cursor: pointer;
-    color: @icon-light-color;
-
-    &::before {
-      content: @icon-remove;
-    }
-
-    &:hover {
-      color: @hover-color;
-    }
-  }
+  border: 1px solid @border-color;
 }

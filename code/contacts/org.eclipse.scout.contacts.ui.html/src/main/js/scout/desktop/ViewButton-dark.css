@@ -8,18 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
- 
-.popup {
-  .popup-head {
-    background-color: @palette-gray-10;
-  }
-} 
+@import (less) "scout/desktop/ViewButton.css";
 
-.popup-deco {
-  background-color: transparent;
+.view-button-tab {
+  &.view-menu-popup-head {
+    background-color: @palette-gray-9;
+    color: @active-color;
+  }
 }
 
-.popup-body {
-  background-color: @palette-gray-10;
+.view-menu-item {
+  background-color: @palette-gray-9;
 }

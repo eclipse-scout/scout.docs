@@ -8,33 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@size-desktop-navigation: 290px;
+@import (less) "scout/style/sizes.css";
+
 @size-desktop-navigation-breadcrumb: 200px;
 @desktop-taskbar-height: 51px;
-@bench-padding-x: 20px;
-
-@text-field-padding-y: 7px;
-@text-field-padding-x: 10px;
-@button-padding: 7px;
-@borderless-field-padding-y: 8px;
-
-@border-radius: 3px;
-
-/* ------------------------------- */
-/* IMPORTANT:
-/* The following constants are also defined in scout.HtmlEnvironment (graphics.js). */
-/* If you change them, be sure to apply them at both places. */
-@logical-grid-height: 30px;
-@mandatory-indicator-width: 8px;
-/* ------------------------------- */
-
-@tree-node-control-size: 15px;
-@outline-node-control-size: 20px;
-@group-box-control-size: 20px;
-
-@tree-node-control-checkbox-size: 20px + @tree-node-control-size;
-@tree-node-checkbox-size: 20px;
-
-@group-margin-top: 14px;
-@group-margin-bottom: 16px;
-@group-title-padding-y: 6px;

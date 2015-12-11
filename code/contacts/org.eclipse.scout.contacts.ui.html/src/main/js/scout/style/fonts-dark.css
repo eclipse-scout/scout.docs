@@ -8,17 +8,6 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
+@import (less) "scout/style/fonts.css";
+
 @font-default-family: 'Segoe UI', 'Lucida Grande','Ubuntu', sans-serif;
-@font-weight-normal: normal;
-@font-weight-bold: bold;
-
-@font-size-small: 11px;
-@font-size-normal: 13px;
-@font-size-plus: 14px;
-@font-size-large: 16px;
-
-@font-face {
-  font-family: scoutIcons;
-  font-weight: normal;
-  src: url('scoutIcons.woff') format('woff');
-}

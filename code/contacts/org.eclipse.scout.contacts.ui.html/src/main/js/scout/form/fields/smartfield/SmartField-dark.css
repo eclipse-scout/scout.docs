@@ -8,18 +8,8 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
- 
-.popup {
-  .popup-head {
-    background-color: @palette-gray-10;
-  }
-} 
+@import (less) "scout/form/fields/smartfield/SmartField.css";
 
-.popup-deco {
-  background-color: transparent;
-}
-
-.popup-body {
-  background-color: @palette-gray-10;
+.smart-field-popup {
+  background-color: @palette-gray-9;
 }

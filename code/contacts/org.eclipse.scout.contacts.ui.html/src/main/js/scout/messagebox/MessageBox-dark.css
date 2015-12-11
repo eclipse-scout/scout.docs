@@ -8,18 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
- 
-.popup {
-  .popup-head {
-    background-color: @palette-gray-10;
-  }
-} 
+@import (less) "scout/messagebox/MessageBox.css";
 
-.popup-deco {
-  background-color: transparent;
+.messagebox {
+  border: 1px solid @border-color;
 }
 
-.popup-body {
-  background-color: @palette-gray-10;
+.messagebox-content {
+  border: 1px solid @border-color;
 }
