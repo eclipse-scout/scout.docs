@@ -17,9 +17,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.ScoutFieldStatus;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
@@ -162,7 +162,7 @@ public class StatusForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
-      public class CheckboxField extends AbstractCheckBox {
+      public class CheckboxField extends AbstractBooleanField {
 
         @Override
         protected int getConfiguredGridW() {

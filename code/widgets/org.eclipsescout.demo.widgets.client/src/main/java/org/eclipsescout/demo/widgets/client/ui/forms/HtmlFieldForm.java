@@ -22,13 +22,13 @@ import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
 import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
-import org.eclipse.scout.rt.client.ui.form.fields.textfield.AbstractTextField;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
@@ -153,7 +153,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class EnabledCheckBox extends AbstractCheckBox {
+      public class EnabledCheckBox extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
           return "Enabled";
@@ -176,7 +176,7 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class ScrollToAnchorField extends AbstractTextField {
+      public class ScrollToAnchorField extends AbstractStringField {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("JumpToAnchor");

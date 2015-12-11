@@ -22,10 +22,10 @@ import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
@@ -459,7 +459,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
-      public class FilterCheckedRowsValueField extends AbstractCheckBox {
+      public class FilterCheckedRowsValueField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -478,7 +478,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
-      public class AutoCheckChildNodesField extends AbstractCheckBox {
+      public class AutoCheckChildNodesField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -497,7 +497,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
-      public class IsEnabledField extends AbstractCheckBox {
+      public class IsEnabledField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -521,7 +521,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80)
-      public class CheckableField extends AbstractCheckBox {
+      public class CheckableField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {

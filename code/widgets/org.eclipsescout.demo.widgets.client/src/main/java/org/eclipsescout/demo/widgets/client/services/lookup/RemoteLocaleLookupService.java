@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -37,7 +39,9 @@ public class RemoteLocaleLookupService implements ILookupService<Locale> {
         break;
       }
     }
-    sleepSafe(250);
+
+    SleepUtil.sleepSafe(250, TimeUnit.MILLISECONDS);
+
     return results;
   }
 
@@ -51,29 +55,20 @@ public class RemoteLocaleLookupService implements ILookupService<Locale> {
         results.add(row);
       }
     }
-    sleepSafe(1500);
+
+    SleepUtil.sleepSafe(1500, TimeUnit.MILLISECONDS);
     return results;
   }
 
   @Override
   public List<? extends ILookupRow<Locale>> getDataByAll(ILookupCall<Locale> call) {
-    sleepSafe(1500);
+    SleepUtil.sleepSafe(1500, TimeUnit.MILLISECONDS);
     return m_localLookupCall.execCreateLookupRows();
   }
 
   @Override
   public List<? extends ILookupRow<Locale>> getDataByRec(ILookupCall<Locale> call) {
-    sleepSafe(1500);
+    SleepUtil.sleepSafe(1500, TimeUnit.MILLISECONDS);
     return m_localLookupCall.execCreateLookupRows();
   }
-
-  private void sleepSafe(long millis) {
-    try {
-      Thread.sleep(millis);
-    }
-    catch (InterruptedException e) {
-      // NOP
-    }
-  }
-
 }

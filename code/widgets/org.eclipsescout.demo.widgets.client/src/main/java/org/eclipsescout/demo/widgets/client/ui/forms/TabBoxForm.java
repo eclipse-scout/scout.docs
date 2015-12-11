@@ -14,9 +14,9 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
@@ -321,7 +321,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class VisibleMonthsField extends AbstractCheckBox {
+      public class VisibleMonthsField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -345,7 +345,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class VisibleCommentsField extends AbstractCheckBox {
+      public class VisibleCommentsField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -370,7 +370,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
-      public class VisibleDocumentsField extends AbstractCheckBox {
+      public class VisibleDocumentsField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {

@@ -19,8 +19,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
@@ -391,7 +391,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class VisiblePreviewField extends AbstractCheckBox {
+        public class VisiblePreviewField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredFont() {
@@ -415,7 +415,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class VisibleDetailsField extends AbstractCheckBox {
+        public class VisibleDetailsField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredFont() {
@@ -458,7 +458,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class VisiblePreviewField extends AbstractCheckBox {
+        public class VisiblePreviewField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -477,7 +477,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class VisibleDetailsField extends AbstractCheckBox {
+        public class VisibleDetailsField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {

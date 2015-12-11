@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.platform.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.util.Base64Utility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.server.commons.cache.IHttpSessionCacheService;
+import org.eclipse.scout.rt.server.commons.servlet.ServletExceptionTranslator;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.AbstractChainableSecurityFilter;
 import org.eclipse.scout.rt.server.commons.servlet.filter.authentication.PrincipalHolder;
 
@@ -55,7 +56,7 @@ public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter 
         m_url = new URL(url);
       }
       catch (MalformedURLException e) {
-        throw new ServletException("unable to parse authentication servlet", e);
+        throw BEANS.get(ServletExceptionTranslator.class).translate(e);
       }
     }
   }

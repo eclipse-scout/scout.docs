@@ -19,10 +19,10 @@ import java.util.Set;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
@@ -417,7 +417,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
-      public class FilterCheckedRowsValueField extends AbstractCheckBox {
+      public class FilterCheckedRowsValueField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -436,7 +436,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
-      public class IsEnabledField extends AbstractCheckBox {
+      public class IsEnabledField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {

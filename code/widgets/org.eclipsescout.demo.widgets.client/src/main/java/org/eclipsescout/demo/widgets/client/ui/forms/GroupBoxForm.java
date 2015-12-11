@@ -12,8 +12,8 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBoxBodyGrid;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.internal.HorizontalGroupBoxBodyGrid;
@@ -599,7 +599,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class VisibleFirstNameField extends AbstractCheckBox {
+      public class VisibleFirstNameField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -623,7 +623,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class VisibleLastNameField extends AbstractCheckBox {
+      public class VisibleLastNameField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -647,7 +647,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
-      public class VisibleCompanyField extends AbstractCheckBox {
+      public class VisibleCompanyField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
@@ -675,7 +675,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
-      public class VisibleField extends AbstractCheckBox {
+      public class VisibleField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredFont() {
