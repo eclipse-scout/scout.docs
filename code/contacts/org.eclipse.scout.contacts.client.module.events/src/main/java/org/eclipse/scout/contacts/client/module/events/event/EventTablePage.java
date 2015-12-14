@@ -231,7 +231,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
       @Override
       protected void execAction() {
-        EventForm form = new EventForm();
+        final EventForm form = new EventForm();
         form.setEventId(getEventIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
@@ -261,7 +261,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
       @Override
       protected void execAction() {
-        EventForm form = new EventForm();
+        final EventForm form = new EventForm();
         form.addFormListener(new FormListener() {
 
           @Override
