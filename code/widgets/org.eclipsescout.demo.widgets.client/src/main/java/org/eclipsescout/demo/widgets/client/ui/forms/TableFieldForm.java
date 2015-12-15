@@ -225,8 +225,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       @Order(10)
       public class TableField extends AbstractTableField<TableField.Table> {
 
-        private static final String EDITABLE_CELL_BACKGROUND_COLOR = "EFEFFF";
-
         private long m_maxId = 0;
 
         @Override

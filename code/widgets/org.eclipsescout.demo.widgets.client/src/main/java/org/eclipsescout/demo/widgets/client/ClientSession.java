@@ -27,9 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ClientSession extends AbstractClientSession {
-  private static Logger logger = LoggerFactory.getLogger(ClientSession.class);
-
-  private String m_product;
+  private static Logger LOG = LoggerFactory.getLogger(ClientSession.class);
 
   public ClientSession() {
     super(true);
@@ -47,7 +45,7 @@ public class ClientSession extends AbstractClientSession {
     Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
     createTunnelToServerBeans = false;
     if (!createTunnelToServerBeans) {
-      logger.info("starting client without a server");
+      LOG.info("starting client without a server");
     }
 
     execInitLocale();

@@ -71,13 +71,9 @@ import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldB
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.CancellationDurationField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
-
-  private static final Logger LOG = LoggerFactory.getLogger(FormForm.class);
 
   public FormForm() {
     super();

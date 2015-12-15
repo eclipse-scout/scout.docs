@@ -33,4 +33,8 @@ public class MessageNotification implements Serializable {
   public String getSenderName() {
     return m_sender;
   }
+
+  public String getOriginalServerNode() {
+    return m_originalServerNode;
+  }
 }

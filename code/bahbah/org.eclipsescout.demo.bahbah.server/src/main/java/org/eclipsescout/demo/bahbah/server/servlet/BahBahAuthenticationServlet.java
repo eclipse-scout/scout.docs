@@ -25,9 +25,6 @@ public class BahBahAuthenticationServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static Logger logger = LoggerFactory.getLogger(BahBahAuthenticationServlet.class);
 
-  private static final String AUTH_HEADER = "Authorization";
-  private static final String AUTH_HEADER_PREFIX = "Basic ";
-
   /**
    * max length of username or password to be accepted.
    */

@@ -59,8 +59,6 @@ import org.eclipsescout.demo.widgets.client.ui.forms.NumberFieldsForm.MainBox.Ex
 
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
-  private static final BigDecimal FOUR = new BigDecimal(4);
-
   public DecimalFieldsForm() {
     super();
   }
