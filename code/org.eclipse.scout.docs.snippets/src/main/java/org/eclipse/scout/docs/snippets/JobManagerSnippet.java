@@ -197,7 +197,7 @@ public final class JobManagerSnippet {
 
           @Override
           public void changed(JobEvent event) {
-            System.out.println(event.getFuture());
+            System.out.println(event.getData().getFuture());
           }
         });
 
