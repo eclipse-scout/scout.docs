@@ -420,12 +420,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           getNo3Button().setRadioValue(getValue());
         }
       }
-
-      private void updateRadioValues() {
-        if (getValueButton1Field().getValue() != null) {
-          getNo1Button().setRadioValue(getValueButton1Field().getValue());
-        }
-      }
     }
 
     @Order(30)

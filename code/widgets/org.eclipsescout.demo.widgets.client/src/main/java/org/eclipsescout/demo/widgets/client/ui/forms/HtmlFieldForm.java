@@ -11,15 +11,12 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.scout.rt.client.services.common.icon.IconLocator;
-import org.eclipse.scout.rt.client.services.common.icon.IconSpec;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -35,7 +32,6 @@ import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.file.RemoteFile;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
@@ -105,40 +101,6 @@ public class HtmlFieldForm extends AbstractForm implements IPageForm {
     catch (IOException e) {
       throw new ProcessingException("Html-Field can't load file ", e);
     }
-  }
-
-  private RemoteFile loadIcon(String iconName) {
-    try {
-      // determine file format
-      int index = iconName.lastIndexOf(".");
-      String format = iconName.substring(iconName.lastIndexOf("."));
-      // determine icon name
-      iconName = iconName.substring(0, iconName.lastIndexOf("."));
-      // determine icon base name
-      String baseIconName = iconName;
-      index = iconName.lastIndexOf("_");
-      if (index > 0) {
-        baseIconName = iconName.substring(0, index);
-      }
-
-      // load icon
-      IconSpec iconSpec = IconLocator.instance().getIconSpec(iconName);
-      if (iconSpec == null && !iconName.equals(baseIconName)) {
-        iconSpec = IconLocator.instance().getIconSpec(baseIconName);
-      }
-
-      if (iconSpec != null) {
-        RemoteFile iconFile = new RemoteFile(iconName + format, 0);
-        ByteArrayInputStream is = new ByteArrayInputStream(iconSpec.getContent());
-        iconFile.readData(is);
-        is.close();
-        return iconFile;
-      }
-    }
-    catch (IOException e) {
-      throw new ProcessingException("failed to load image for " + iconName, e);
-    }
-    return null;
   }
 
   @Order(10)

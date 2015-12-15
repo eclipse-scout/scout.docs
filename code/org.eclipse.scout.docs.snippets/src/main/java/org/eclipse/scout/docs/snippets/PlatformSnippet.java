@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.platform.inventory.IClassInventory;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.platform.util.TuningUtility;
 
+@SuppressWarnings("unused")
 public final class PlatformSnippet {
   //tag::PlatformListener[]
   public class MyListener implements IPlatformListener {
@@ -161,7 +162,6 @@ public final class PlatformSnippet {
   }
   //end::ConfigProperties[]
 
-  @SuppressWarnings("unused")
   private void snippets() {
     //tag::ClassInventory[]
     IClassInventory classInventory = ClassInventory.get();
