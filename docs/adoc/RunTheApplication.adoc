@@ -16,8 +16,12 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 
 After the initial project creation step we can start the Scout application for the first time.
-For this, we use the "`Run`" toolbar button as shown in <<img-start_client>>. Two launch configurations have already been created.
+For this, we use the `Run` toolbar button as shown in <<img-start_client>>. Two launch configurations have already been created.
 One for the backend server and one for the HTML user interface server. Please launch the server first and the HTML UI afterwards.
+
+In case there are no launch configurations available you can also find the .launch files in the projects `helloworld.server.app.dev` and `helloworld.ui.html.app.dev`.
+They can be started using the context menu `Run As`. This will also add them to the `Run` toolbar button for the next time.
+
 During startup of the Scout applications you should see console output providing information about the startup.
 After both have been started successfully the HTML user interface can be accessed by navigating to http://localhost:8082/ in your favorite web browser.
 

@@ -412,8 +412,8 @@ include::{mdledir}/RunTheApplication.adoc[]
 [[sec-helloworld_export]]
 === Exporting the Application
 
-We are now ready to move the "`Hello World`" application from our development environment to a productive setup.
-The simplest option to move our application into the '`wild`' is to build it using Maven.
+We are now ready to move the `Hello World` application from our development environment to a productive setup.
+The simplest option to move our application into the 'wild' is to build it using Maven.
 This produces two WAR files footnote:[
 Web application ARchive (WAR): http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29
 ].
@@ -421,18 +421,20 @@ Web application ARchive (WAR): http://en.wikipedia.org/wiki/WAR_file_format_%28S
 The first WAR file contains the Scout server with all business logic.
 The second WAR file contains the user interface for desktop and mobile devices.
 
-To start the build right click on the project [java]+org.eclipsescout.helloworld.parent+ and select the context menu menu:Run As -> Maven install[] as shown in <<img-sdk_export_war>>.
+To start the build right click on the project `helloworld` and select the context menu menu:Run As -> Maven build...[] as shown in <<img-sdk_export_war>>.
+In the dialog that appears enter `clean verify` into the `Goals` field and press btn:[Run].
 
-[[img-sdk_export_war, Figure 000]]
+[[img-sdk_export_war, Figure Maven build]]
 .Starting the Maven build.
 image::{imgsdir}/sdk_export_war_menu.png[]
 
-Afterwards the compilation starts, executes all test cases and bundles the result into two WAR files. The output of the build is shown in the Console view within Eclipse. In this output you find the location where the created WAR files are stored.
+Afterwards the compilation starts, executes all test cases and bundles the result into two WAR files. The output of the build is shown in the Console view within Eclipse. 
+As soon as the build is reporting success you can find the built war files:
 
-You should see something like "`Installing C:\Projects\Scout\HelloWorld\org.eclipsescout.helloworld.ui.html.app.war\target\org.eclipsescout.helloworld.ui.html.app.war-1.0.0-SNAPSHOT.war to C:\Users\<your_username>\.m2\repository\org\eclipsescout\helloworld\org.eclipsescout.helloworld.ui.html.app.war\1.0.0-SNAPSHOT\org.eclipsescout.helloworld.ui.html.app.war-1.0.0-SNAPSHOT.war`".
+* workspace_root/helloworld.server.app.war/target/org.eclipse.scout.apps.helloworld.server.war
+* workspace_root/helloworld.ui.html.app.war/target/org.eclipse.scout.apps.helloworld.ui.html.war
 
-A similar output can be found some lines above for the server WAR file.
-
+To see the new files within Eclipse you may need to refresh the `target` folder below each project using the F5 keystroke.
 
 [[sec-helloworld_deploy]]
 === Deploying to Tomcat
@@ -443,37 +445,38 @@ If you do not yet have such an installation you may want to read and follow the 
 To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
 You should then see the page shown in <<img-deploy_tomcat_1>>.
 
-[[img-deploy_tomcat_1, Figure 000]]
+[[img-deploy_tomcat_1, Tomcat start page]]
 .The Tomcat shown after a successful installation. After clicking on the "`Manager App`" button (highlighted in red) the login box is shown in front. A successful login shows the "`Tomcat Web Application Manager`".
 image::{imgsdir}/tomcat_managerapp_login.png[]
-
-[[img-deploy_tomcat_2, Figure 000]]
-.The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
-image::{imgsdir}/tomcat_managerapp_selectwar.png[]
 
 Once the web browser displays the successful running of your Tomcat instance, switch to its "`Manager App`" by clicking on the button highlighted in <<img-deploy_tomcat_1>>.
 After entering user name and password the browser will display the "`Tomcat Web Application Manager`" as shown in <<img-deploy_tomcat_2>>.
 If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in Appendix <<apx-tomcat_dirs_and_files>>.
 
+[[img-deploy_tomcat_2, Tomcat Manager]]
+.The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
+image::{imgsdir}/tomcat_managerapp_selectwar.png[]
+
 After logging into Tomcat's manager application, you can select the WAR files to be deployed using button "`Choose File`" according to the right hand side of <<img-deploy_tomcat_2>>.
-After picking your just built [filename]+org.eclipsescout.helloworld.server.app.war-1.0.0-SNAPSHOT.war+ and closing the file chooser, click on button "`Deploy`" (located below button "`Choose File`") to deploy the application to the Tomcat web server.
-Then we repeat this step with the second WAR file [filename]+org.eclipsescout.helloworld.ui.html.app.war-1.0.0-SNAPSHOT.war+.
+After picking your just built [filename]+org.eclipse.scout.apps.helloworld.server.war+ and closing the file chooser, click on button "`Deploy`" (located below button "`Choose File`") to deploy the application to the Tomcat web server.
+Then we repeat this step with the second WAR file [filename]+org.eclipse.scout.apps.helloworld.ui.html.war+.
 
 This will copy the selected WAR files into Tomcats [filename]+webapps+ directory and unpack its contents into subdirectories with the same name.
 You can now connect to the application using the browser of your choice and enter the following address:
 
 ----
-  http://localhost:8080/org.eclipsescout.helloworld.ui.html.app.war-1.0.0-SNAPSHOT/
+  http://localhost:8080/org.eclipse.scout.apps.helloworld.ui.html/
 ----
 
-[[img-helloworld_running_download, Figure 000]]
+[[img-helloworld_running_download, Figure Login Page]]
 .The "`Hello World`" login page.
 image::{imgsdir}/tomcat_helloworld_download.png[]
 
 Then you will see the login page as shown in <<img-helloworld_running_download>>. Two users have been pre defined: "`admin`" with password "`admin`" and "`scott`" with password "`tiger`".
+You can find this configuration in the [filename]+config.properties+ file of the application.
 
 Please note: In a productive environment it is recommended to deploy the server and the user interface into two different servlet containers (like Tomcat) running on dedicated machines. This because these two tiers have different requirements on resources, load balancing and access protection.
-Furthermore it is hardly recommended to use an encrypted connection (e.g. TLS 1.2 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security]) between client browser and user interface AND between user interface and server!
+Furthermore it is hardly recommended to use an encrypted connection (e.g. TLS 1.2 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security]) between client browser and html ui server AND between html ui server and backend server!
 
 [[cha-helloworld_background]]
 == "`Hello World`" Background
