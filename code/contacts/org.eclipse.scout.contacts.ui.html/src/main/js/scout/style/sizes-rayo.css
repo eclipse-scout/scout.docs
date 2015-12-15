@@ -8,6 +8,8 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
+@import (less) "scout/style/sizes.css";
+
 @size-desktop-navigation: 290px;
 @size-desktop-navigation-breadcrumb: 200px;
 
@@ -16,7 +18,8 @@
 
 @text-field-padding-y: 7px;
 @text-field-padding-x: 10px;
-@button-padding: 7px;
+@button-padding-x: 7px;
+@button-padding-y: 7px;
 @borderless-field-padding-y: 8px;
 
 @border-radius: 3px;

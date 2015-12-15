@@ -8,12 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
+@import (less) "scout/desktop/outline/Outline.css";
 
-.popup-body {
-  position: inherit;
-  
-  &.down  {
-    background-color: @palette-white;
+.outline.tree {
+  &.in-background .tree-node.selected {
+  	color: @palette-gray-8; 
+  }
+}
+
+.outline > .tree-data {
+  & > .tree-node {
+    &.selected {
+      color: @palette-black;
+    }
   }
 }

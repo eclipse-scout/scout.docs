@@ -8,17 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
+@import (less) "scout/splitter/Splitter.css";
+
 .splitter {
   background-color: @palette-blue-1;
 
-  position: absolute;
-  z-index: 1;
-
-  /* | */
   &.x-axis {
-    top: 0px;
-    height: 100%;
     width: 2px;
-    cursor: col-resize;
   }
 }

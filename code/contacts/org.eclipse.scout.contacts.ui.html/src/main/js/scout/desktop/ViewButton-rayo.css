@@ -8,12 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/popup/Popup.css";
+@import (less) "scout/desktop/ViewButton.css";
 
-.popup-body {
-  position: inherit;
-  
-  &.down  {
-    background-color: @palette-white;
+.view-button-tab {
+  & > .arrow-icon {
+    visibility: hidden;
   }
+}
+
+.view-menu-item {
+  line-height: 35px;
+  font-size: 14px;
+  
+  &.selected {
+    color: @palette-black;
+    background-color: @palette-blue-1;
+  }  
+}
+
+.view-menu-popup-body {
+  width: 160% !important;
 }

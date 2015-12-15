@@ -8,90 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@menubar-height: 24px;
-
-#scout {
-  .menubar-background-color-inherit {
-    background-color: inherit;
-
-    & > .menu-button.disabled {
-      /* use regular button color since menubar has no color */
-      background-color: @button-disabled-background-color;
-    }
-  }
-
-  /* a transparent main-menubar with a smaller bottom border */
-  .main-menubar-light {
-    #scout.menubar-background-color-inherit();
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: @bench-padding-x;
-    margin-right: @bench-padding-x;
-  }
-}
+@import (less) "scout/menu/MenuBar.css";
 
 .menubar {
-  position: relative;
-  width: 100%;
-  height: @menubar-height;
-  border-bottom: 1px solid @border-color;
-  white-space: nowrap;
-
   &.bottom {
-    /* border-top: 1px solid @border-color; */
-    border-bottom: 0;
+    border-top: 0px;
   }
-
-  & > .menu-item, .menu-separator {
-    /* reset a possible different value (e.g. set by .form-field)
-       which might cause 'display: inline-block' to be ignored for
-       the computed style */
-    position: relative;
-    display: inline-block;
-    height: @menubar-height;
-    line-height: @menubar-height;
-    vertical-align: middle;
-  }
-
-  & > .menu-item {
-
-    &:focus:not(.disabled):not(.menu-button) {
-      text-decoration: underline;
-      color: @focus-color;
-
-      &::before {
-        color: @focus-color;
+  
+  & > .menubox {
+    & > .menu-item {
+      height: 25px;
+      
+      &.menu-button {
+        border: 0px;
+        border-radius: 5px;
+		padding: 0;
+		        
+        &:focus::after {
+          visibility: hidden;
+        }        
       }
-    }
-  }
-
-  & > .menu-separator {
-    margin-top: 4px;
-    height: @logical-grid-height - 12px;
-  }
-}
-
-.main-menubar {
-  margin-left: @bench-padding-x;
-  margin-right: @bench-padding-x;
-  height: 55px;
-  padding-top: 15px;
-
-  & > .menu-item {
-    &.small > .font-icon {
-      font-size: 18px;
-      vertical-align: baseline;
-    }
-    & > .font-icon {
-      font-size: 22px;
-    }
-  }
-
-  & > .menu-item.last {
-    margin-right: 0;
-
-    &.right-aligned {
-      margin-right: 5px;
     }
   }
 }
