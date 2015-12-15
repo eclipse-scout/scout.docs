@@ -22,13 +22,8 @@ import org.eclipsescout.demo.bahbah.shared.notification.MessageNotification;
 import org.eclipsescout.demo.bahbah.shared.security.CreateNotificationPermission;
 import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcessService;
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class NotificationProcessService implements INotificationProcessService {
-  private static Logger LOG = LoggerFactory.getLogger(NotificationProcessService.class);
-
-  private final static long TIMEOUT = 1000 * 60 * 10; // 10min
 
   @Override
   public void sendMessage(String buddyName, String message) {

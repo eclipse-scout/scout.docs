@@ -15,6 +15,7 @@ import org.eclipse.scout.rt.platform.job.IDoneHandler;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.IJobManager;
 import org.eclipse.scout.rt.platform.job.JobInput;
+import org.eclipse.scout.rt.platform.job.JobState;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.job.listener.IJobListener;
 import org.eclipse.scout.rt.platform.job.listener.JobEvent;
@@ -162,7 +163,7 @@ public final class JobManagerSnippet {
     // tag::BlockingCondition[]
 
     // Create the blocking condition <1>
-    final IBlockingCondition condition = Jobs.newBlockingCondition("Operation", true);
+    final IBlockingCondition condition = Jobs.newBlockingCondition(true);
 
     // Schedule the job <2>
     IFuture<Boolean> future = Jobs.schedule(new LongRunningOperation(), Jobs.newInput()
@@ -189,7 +190,8 @@ public final class JobManagerSnippet {
 
     Jobs.getJobManager().addListener(Jobs.newEventFilterBuilder()
         .andMatchRunContext(ServerRunContext.class)
-        .andMatchEventType(JobEventType.ABOUT_TO_RUN)
+        .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
+        .andMatchState(JobState.RUNNING)
         .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
         .toFilter(), new IJobListener() {
 
@@ -207,7 +209,8 @@ public final class JobManagerSnippet {
 
     Jobs.newEventFilterBuilder()
         .andMatchRunContext(ServerRunContext.class)
-        .andMatchEventType(JobEventType.ABOUT_TO_RUN)
+        .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
+        .andMatchState(JobState.RUNNING)
         .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
         .toFilter();
     // end::BlockingCondition[]

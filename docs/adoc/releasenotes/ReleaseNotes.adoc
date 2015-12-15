@@ -26,3 +26,5 @@ Here are the release notes for the Scout Release 6.0
 ** old: `protected void execResetColumns(boolean visibility, boolean order, boolean sorting, boolean widths)`
 ** new: `protected void execResetColumns(Set<String> options)`
 * OutlineMenuWrapper: refactored constructors, for details consult the javadoc. This was needed to ensure the correct menuTypes throughout the wrapped menu's sub-hierarchy.
+* Deleted AbstractCheckBox, AbstractCheckboxExtension, ICheckBoxExtension, ICheckBox. Use AbstractBooleanField, AbstractBooleanExtension, IBooleanExtension, IBooleanField instead.
+* Deleted AbstractTextField, AbstractTextFieldExtension, ITextFieldExtension, ITextField. Use AbstractStringField, AbstractStringExtension, IStringExtension, IStringField instead.

@@ -148,7 +148,6 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
     @Order(20)
     public class MenuWithIconMenu extends AbstractMenu {
-      private int counter = 0;
 
       @Override
       protected String getConfiguredIconId() {

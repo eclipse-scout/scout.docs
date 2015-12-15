@@ -248,7 +248,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
 
       @Override
       protected void execAction() {
-        PersonForm form = new PersonForm();
+        final PersonForm form = new PersonForm();
         form.setPersonId(getPersonIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
@@ -265,28 +265,28 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
 
     @Order(2)
     public class NewMenu extends AbstractMenu {
-    
+
       @Override
       protected String getConfiguredKeyStroke() {
         return "alt-n";
       }
-    
+
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
       }
-    
+
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("New");
       }
-    
+
       @Override
       protected void execAction() {
-        PersonForm form = new PersonForm();
+        final PersonForm form = new PersonForm();
         form.getOrganizationField().setValue(getOrganizationId());
         form.addFormListener(new FormListener() {
-    
+
           @Override
           public void formChanged(FormEvent e) {
             if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {

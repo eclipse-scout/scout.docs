@@ -1,6 +1,7 @@
 # Set default behaviour, in case users don't have core.autocrlf set.
 * text=auto
 
+#
 # The above will handle all files NOT found below
 #
 # These files are text and should be normalized (Convert crlf => lf)
@@ -21,7 +22,6 @@
 .project     text
 .classpath   text
 
-
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
 *.class  binary
@@ -36,3 +36,6 @@
 *.tar    binary
 *.exe    binary
 *.zip    binary
+*.exe    binary
+*polite.ini    binary
+*.ise    binary

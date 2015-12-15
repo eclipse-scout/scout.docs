@@ -161,7 +161,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
 
       @Override
       protected void execAction() {
-        OrganizationForm form = new OrganizationForm();
+        final OrganizationForm form = new OrganizationForm();
         form.setOrganizationId(getOrganizationIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 
@@ -196,7 +196,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
 
       @Override
       protected void execAction() {
-        OrganizationForm form = new OrganizationForm();
+        final OrganizationForm form = new OrganizationForm();
         form.addFormListener(new FormListener() {
 
           @Override

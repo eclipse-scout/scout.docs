@@ -242,7 +242,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         @Order(10)
         public class WarningButton extends AbstractRadioButton {
 
-          // TODO [5.2] jgu: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436714
           @Override
           protected String getConfiguredIconId() {
             return Icons.StarYellow;
@@ -419,12 +418,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         @Override
         protected void execChangedValue() {
           getNo3Button().setRadioValue(getValue());
-        }
-      }
-
-      private void updateRadioValues() {
-        if (getValueButton1Field().getValue() != null) {
-          getNo1Button().setRadioValue(getValueButton1Field().getValue());
         }
       }
     }

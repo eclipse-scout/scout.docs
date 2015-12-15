@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.old.ui.desktop.pages;
 
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,23 +71,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   @Override
   protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
-        {"String 10", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 11", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 12", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 13", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2},
-        {"String 22", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1},
-        {"String 23", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1},
-        {"String 24", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1},
-        {"String 25", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1},
-        {"String 31", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 32", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 33", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 37", m_random.nextLong(), m_random.nextInt(), 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 38", m_random.nextLong(), m_random.nextInt(), 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
-        {"String 39", m_random.nextLong(), m_random.nextInt(), 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3},
+        {"String 10", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 1.0, 1.0},
+        {"String 11", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 10.0, 1.120},
+        {"String 12", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 100.0, 1.123},
+        {"String 13", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2, 0.1, 0.1, 1.150},
+        {"String 22", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1, -1.0, -1.0, 1.151},
+        {"String 23", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1, -10.0, -10.0, 1.5},
+        {"String 24", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1, -100.0, -100.0, 1.51},
+        {"String 25", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1, -0.1, -0.1, 1.511},
+        {"String 31", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.2, 1.2, 1.0},
+        {"String 32", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.02, 1.02, -1.0},
+        {"String 33", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 1.002, -1.120},
+        {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
+        {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
+        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002,-1.151},
+        {"String 37", m_random.nextLong(), m_random.nextInt(), 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
+        {"String 38", m_random.nextLong(), m_random.nextInt(), 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
+        {"String 39", m_random.nextLong(), m_random.nextInt(), 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
     });
   }
 
@@ -123,6 +124,18 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     public StringColumn getStringColumn() {
       return getColumnSet().getColumnByClass(StringColumn.class);
+    }
+
+    public PercentColumn getPercentColumn() {
+      return getColumnSet().getColumnByClass(PercentColumn.class);
+    }
+
+    public MultiplierColumn getMultiplierColumn() {
+      return getColumnSet().getColumnByClass(MultiplierColumn.class);
+    }
+
+    public RoundingModeColumn getRoundingModeColumn() {
+    	return getColumnSet().getColumnByClass(RoundingModeColumn.class);
     }
 
     @Order(10)
@@ -226,6 +239,63 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
         return CompanyTypeLookupCall.class;
       }
+    }
+
+    @Order(80)
+    public class PercentColumn extends AbstractBigDecimalColumn {
+
+      @Override
+      protected boolean getConfiguredEditable() {
+        return true;
+      }
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("PercentColumn");
+      }
+
+      @Override
+      protected boolean getConfiguredPercent() {
+  		return true;
+      }
+    }
+
+    @Order(90)
+    public class MultiplierColumn extends AbstractBigDecimalColumn {
+
+      @Override
+      protected boolean getConfiguredEditable() {
+        return true;
+      }
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("MultiplierColumn");
+      }
+
+      @Override
+      protected int getConfiguredMultiplier() {
+    	return -100;
+      }
+    }
+
+    @Order(100)
+    public class RoundingModeColumn extends AbstractBigDecimalColumn {
+
+    	@Override
+    	protected boolean getConfiguredEditable() {
+    		return true;
+    	}
+
+    	@Override
+    	protected String getConfiguredHeaderText() {
+    		return TEXTS.get("MultiplierColumn");
+    	}
+
+    	@Override
+    	protected RoundingMode getConfiguredRoundingMode() {
+    		return RoundingMode.CEILING;
+    	}
     }
 
     @Order(20)
