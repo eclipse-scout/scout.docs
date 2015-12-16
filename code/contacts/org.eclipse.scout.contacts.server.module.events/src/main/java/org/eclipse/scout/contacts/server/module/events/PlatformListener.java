@@ -41,6 +41,9 @@ import org.slf4j.LoggerFactory;
 public class PlatformListener implements IPlatformListener {
   private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
 
+  private static final String EVENT1 = "JavaLand 2015";
+  private static final String EVENT2 = "EclipseCon Europe 2015";
+
   @Override
   public void stateChanged(PlatformEvent event) {
     if (event.getState() == State.BeanManagerValid) {
@@ -89,10 +92,8 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'EVENT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createEventEntry("EclipseCon 2015", DateUtility.parse("09.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("12.03.2015 16:45", "dd.MM.yyyy HH:mm"), "San Francisco", "US", "https://www.eclipsecon.org/na2015/");
-        createEventEntry("JavaLand 2015", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm"), "Bruehl", "DE", "http://www.javaland.eu/javaland-2015/");
-        createEventEntry("EclipseCon Europe 2015", DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm"), "Ludwigsburg", "DE", "https://www.eclipsecon.org/europe2015/");
-        createEventEntry("Bilbo's Party", null, null, "Shire", "NZ", null);
+        createEventEntry(EVENT1, DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm"), "Bruehl", "DE", "http://www.javaland.eu/javaland-2015/");
+        createEventEntry(EVENT2, DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm"), "Ludwigsburg", "DE", "https://www.eclipsecon.org/europe2015/");
 
         LOG.info("Database table 'EVENT' populated with sample data");
       }
@@ -115,14 +116,9 @@ public class PlatformListener implements IPlatformListener {
       LOG.info("Database table 'PARTICIPANT' created");
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createParticipantEntry("EclipseCon Europe 2015", "Rabbit");
-        createParticipantEntry("EclipseCon Europe 2015", "Alice");
-        createParticipantEntry("JavaLand 2015", "Alice");
-        createParticipantEntry("Bilbo's Party", "Alice");
-        createParticipantEntry("Bilbo's Party", "Bilbo");
-        createParticipantEntry("Bilbo's Party", "Gandalf");
-        createParticipantEntry("EclipseCon Europe 2015", "Gandalf");
-        createParticipantEntry("Bilbo's Party", "Thorin");
+        createParticipantEntry(EVENT1, "Rabbit");
+        createParticipantEntry(EVENT1, "Alice");
+        createParticipantEntry(EVENT2, "Alice");
 
         LOG.info("Database table 'PARTICIPANT' populated with sample data");
       }
