@@ -20,16 +20,18 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Replace
 public class CustomDateFormatProvider extends DateFormatProvider {
 
-  public final static int CUSTOM_MEDIUM = 101;
+  public static final int CUSTOM_MEDIUM = 101;
+
+  private static final Logger LOG = LoggerFactory.getLogger(CustomDateFormatProvider.class);
 
   private final Set<Locale> m_customLocales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
@@ -179,7 +181,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
 
     Locale countryDefaultLocale = m_countryDefaultLocaleMap.get(locale.getCountry());
     if (countryDefaultLocale == null) {
-      Logger.getLogger(CustomDateFormatProvider.class.getName()).log(Level.WARNING, "Unexpected: No default locale found for country '" + locale.getCountry() + "'");
+      LOG.warn("Unexpected: No default locale found for country '{}'", locale.getCountry());
       return null;
     }
     return countryDefaultLocale;
@@ -208,7 +210,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
         sdf.applyPattern(pattern);
       }
       catch (IllegalArgumentException e) {
-        Logger.getLogger(CustomDateFormatProvider.class.getName()).log(Level.SEVERE, "Unexpected: ", e);
+        LOG.error("Could not apply pattern '{}'", pattern, e);
       }
     }
 
