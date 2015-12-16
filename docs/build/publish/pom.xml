@@ -45,6 +45,12 @@
       <version>5.2.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_migration</artifactId>
+      <version>5.2.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
   </dependencies>
 
   <pluginRepositories>
@@ -87,6 +93,7 @@
                   <htmlOutput/>
                 </inputSource>
                 <!-- publish for downloads -->
+                <!-- scout install -->
                 <inputSource>
                   <inputFolder>../scout_install/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/article_install</outputSubFolder>
@@ -96,6 +103,7 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- scout hello world -->
                 <inputSource>
                   <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/article_helloworld</outputSubFolder>
@@ -105,6 +113,7 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- scout book frontend -->
                 <inputSource>
                   <inputFolder>../book_scout_frontend/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/book_scout_frontend</outputSubFolder>
@@ -114,6 +123,7 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- scout book intro -->
                 <inputSource>
                   <inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/book_scout_intro</outputSubFolder>
@@ -123,12 +133,23 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- scout book architecture -->
                 <inputSource>
                   <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/book_scout_architecture</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_architecture</outputSubFolder>
                     <outputZipFileName>scout_architecture.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
+                <!-- scout book migration -->
+                <inputSource>
+                  <inputFolder>../scout_migration/target/generated-docs</inputFolder>
+                  <outputSubFolder>downloads/scout_migration</outputSubFolder>
+                  <htmlOutput>
+                    <outputSubFolder>scout_migration</outputSubFolder>
+                    <outputZipFileName>scout_migration.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
