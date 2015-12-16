@@ -84,7 +84,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         {"String 33", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 1.002, -1.120},
         {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
         {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
-        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002,-1.151},
+        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002, -1.151},
         {"String 37", m_random.nextLong(), m_random.nextInt(), 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
         {"String 38", m_random.nextLong(), m_random.nextInt(), 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
         {"String 39", m_random.nextLong(), m_random.nextInt(), 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
@@ -135,7 +135,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     }
 
     public RoundingModeColumn getRoundingModeColumn() {
-    	return getColumnSet().getColumnByClass(RoundingModeColumn.class);
+      return getColumnSet().getColumnByClass(RoundingModeColumn.class);
     }
 
     @Order(10)
@@ -256,7 +256,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       @Override
       protected boolean getConfiguredPercent() {
-  		return true;
+        return true;
       }
     }
 
@@ -275,27 +275,27 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       @Override
       protected int getConfiguredMultiplier() {
-    	return -100;
+        return -100;
       }
     }
 
     @Order(100)
     public class RoundingModeColumn extends AbstractBigDecimalColumn {
 
-    	@Override
-    	protected boolean getConfiguredEditable() {
-    		return true;
-    	}
+      @Override
+      protected boolean getConfiguredEditable() {
+        return true;
+      }
 
-    	@Override
-    	protected String getConfiguredHeaderText() {
-    		return TEXTS.get("MultiplierColumn");
-    	}
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("RoundingModeColumn");
+      }
 
-    	@Override
-    	protected RoundingMode getConfiguredRoundingMode() {
-    		return RoundingMode.CEILING;
-    	}
+      @Override
+      protected RoundingMode getConfiguredRoundingMode() {
+        return RoundingMode.CEILING;
+      }
     }
 
     @Order(20)
