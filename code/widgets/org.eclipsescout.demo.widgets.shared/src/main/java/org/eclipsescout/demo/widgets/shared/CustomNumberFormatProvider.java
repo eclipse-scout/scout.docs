@@ -18,14 +18,16 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Replace
 public class CustomNumberFormatProvider extends NumberFormatProvider {
+
+  private static final Logger LOG = LoggerFactory.getLogger(CustomNumberFormatProvider.class);
 
   private final Set<Locale> m_customLocales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
@@ -112,7 +114,7 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
 
     Locale countryDefaultLocale = m_countryDefaultLocaleMap.get(locale.getCountry());
     if (countryDefaultLocale == null) {
-      Logger.getLogger(CustomNumberFormatProvider.class.getName()).log(Level.WARNING, "Unexpected: No default locale found for country '" + locale.getCountry() + "'");
+      LOG.warn("Unexpected: No default locale found for country '{}'", locale.getCountry());
       return null;
     }
     return countryDefaultLocale;
