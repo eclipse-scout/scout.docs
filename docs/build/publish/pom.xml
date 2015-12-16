@@ -143,13 +143,23 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
-                <!-- scout book migration -->
+                <!-- scout article migration -->
                 <inputSource>
                   <inputFolder>../scout_migration/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/scout_migration</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_migration</outputSubFolder>
                     <outputZipFileName>scout_migration.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
+                <!-- scout article releasenotes -->
+                <inputSource>
+                  <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
+                  <outputSubFolder>downloads/scout_releasenotes</outputSubFolder>
+                  <htmlOutput>
+                    <outputSubFolder>scout_releasenotes</outputSubFolder>
+                    <outputZipFileName>scout_releasenotes.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
