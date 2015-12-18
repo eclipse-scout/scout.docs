@@ -263,6 +263,20 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(5)
+      public class SayHelloMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Say Hello";
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withBody("Hello!").show();
+        }
+      }
+
       @Order(10)
       public class CountMenu extends AbstractMenu {
 
