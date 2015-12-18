@@ -1,4 +1,3 @@
-
 package org.eclipse.scout.contacts.shared.organization;
 
 import javax.annotation.Generated;
@@ -14,9 +13,6 @@ import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 public class OrganizationTablePageData extends AbstractTablePageData {
 
   private static final long serialVersionUID = 1L;
-
-  public OrganizationTablePageData() {
-  }
 
   @Override
   public OrganizationTableRowData addRow() {
@@ -66,47 +62,44 @@ public class OrganizationTablePageData extends AbstractTablePageData {
     private String m_country;
     private String m_homepage;
 
-    public OrganizationTableRowData() {
-    }
-
     public String getOrganizationId() {
       return m_organizationId;
     }
 
-    public void setOrganizationId(String organizationId) {
-      m_organizationId = organizationId;
+    public void setOrganizationId(String newOrganizationId) {
+      m_organizationId = newOrganizationId;
     }
 
     public String getName() {
       return m_name;
     }
 
-    public void setName(String name) {
-      m_name = name;
+    public void setName(String newName) {
+      m_name = newName;
     }
 
     public String getCity() {
       return m_city;
     }
 
-    public void setCity(String city) {
-      m_city = city;
+    public void setCity(String newCity) {
+      m_city = newCity;
     }
 
     public String getCountry() {
       return m_country;
     }
 
-    public void setCountry(String country) {
-      m_country = country;
+    public void setCountry(String newCountry) {
+      m_country = newCountry;
     }
 
     public String getHomepage() {
       return m_homepage;
     }
 
-    public void setHomepage(String homepage) {
-      m_homepage = homepage;
+    public void setHomepage(String newHomepage) {
+      m_homepage = newHomepage;
     }
   }
 }

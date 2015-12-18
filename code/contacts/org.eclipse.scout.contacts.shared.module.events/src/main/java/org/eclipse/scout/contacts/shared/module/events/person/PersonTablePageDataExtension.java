@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.contacts.shared.module.events.person;
 
 import java.io.Serializable;
@@ -29,14 +19,11 @@ public class PersonTablePageDataExtension implements Serializable {
   public static final String events = "events";
   private Long m_events;
 
-  public PersonTablePageDataExtension() {
-  }
-
   public Long getEvents() {
     return m_events;
   }
 
-  public void setEvents(Long events) {
-    m_events = events;
+  public void setEvents(Long newEvents) {
+    m_events = newEvents;
   }
 }

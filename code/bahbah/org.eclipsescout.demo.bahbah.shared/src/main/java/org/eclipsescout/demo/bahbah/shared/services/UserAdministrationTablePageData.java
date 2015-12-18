@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.services;
 
 import javax.annotation.Generated;
@@ -23,9 +13,6 @@ import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 public class UserAdministrationTablePageData extends AbstractTablePageData {
 
   private static final long serialVersionUID = 1L;
-
-  public UserAdministrationTablePageData() {
-  }
 
   @Override
   public UserAdministrationTableRowData addRow() {
@@ -71,31 +58,28 @@ public class UserAdministrationTablePageData extends AbstractTablePageData {
     private String m_username;
     private Integer m_role;
 
-    public UserAdministrationTableRowData() {
-    }
-
     public Long getUserId() {
       return m_userId;
     }
 
-    public void setUserId(Long userId) {
-      m_userId = userId;
+    public void setUserId(Long newUserId) {
+      m_userId = newUserId;
     }
 
     public String getUsername() {
       return m_username;
     }
 
-    public void setUsername(String username) {
-      m_username = username;
+    public void setUsername(String newUsername) {
+      m_username = newUsername;
     }
 
     public Integer getRole() {
       return m_role;
     }
 
-    public void setRole(Integer role) {
-      m_role = role;
+    public void setRole(Integer newRole) {
+      m_role = newRole;
     }
   }
 }

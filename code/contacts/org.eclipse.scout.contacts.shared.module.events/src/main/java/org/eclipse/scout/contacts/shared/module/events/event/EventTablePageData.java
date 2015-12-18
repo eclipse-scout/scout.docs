@@ -1,4 +1,3 @@
-
 package org.eclipse.scout.contacts.shared.module.events.event;
 
 import java.util.Date;
@@ -16,9 +15,6 @@ import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 public class EventTablePageData extends AbstractTablePageData {
 
   private static final long serialVersionUID = 1L;
-
-  public EventTablePageData() {
-  }
 
   @Override
   public EventTableRowData addRow() {
@@ -74,71 +70,68 @@ public class EventTablePageData extends AbstractTablePageData {
     private String m_homepage;
     private Integer m_participants;
 
-    public EventTableRowData() {
-    }
-
     public String getEventId() {
       return m_eventId;
     }
 
-    public void setEventId(String eventId) {
-      m_eventId = eventId;
+    public void setEventId(String newEventId) {
+      m_eventId = newEventId;
     }
 
     public String getTitle() {
       return m_title;
     }
 
-    public void setTitle(String title) {
-      m_title = title;
+    public void setTitle(String newTitle) {
+      m_title = newTitle;
     }
 
     public Date getStarts() {
       return m_starts;
     }
 
-    public void setStarts(Date starts) {
-      m_starts = starts;
+    public void setStarts(Date newStarts) {
+      m_starts = newStarts;
     }
 
     public Date getEnds() {
       return m_ends;
     }
 
-    public void setEnds(Date ends) {
-      m_ends = ends;
+    public void setEnds(Date newEnds) {
+      m_ends = newEnds;
     }
 
     public String getCity() {
       return m_city;
     }
 
-    public void setCity(String city) {
-      m_city = city;
+    public void setCity(String newCity) {
+      m_city = newCity;
     }
 
     public String getCountry() {
       return m_country;
     }
 
-    public void setCountry(String country) {
-      m_country = country;
+    public void setCountry(String newCountry) {
+      m_country = newCountry;
     }
 
     public String getHomepage() {
       return m_homepage;
     }
 
-    public void setHomepage(String homepage) {
-      m_homepage = homepage;
+    public void setHomepage(String newHomepage) {
+      m_homepage = newHomepage;
     }
 
     public Integer getParticipants() {
       return m_participants;
     }
 
-    public void setParticipants(Integer participants) {
-      m_participants = participants;
+    public void setParticipants(Integer newParticipants) {
+      m_participants = newParticipants;
     }
   }
 }

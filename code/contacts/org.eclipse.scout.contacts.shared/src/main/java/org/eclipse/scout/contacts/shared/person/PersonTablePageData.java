@@ -1,4 +1,3 @@
-
 package org.eclipse.scout.contacts.shared.person;
 
 import javax.annotation.Generated;
@@ -14,9 +13,6 @@ import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 public class PersonTablePageData extends AbstractTablePageData {
 
   private static final long serialVersionUID = 1L;
-
-  public PersonTablePageData() {
-  }
 
   @Override
   public PersonTableRowData addRow() {
@@ -74,79 +70,76 @@ public class PersonTablePageData extends AbstractTablePageData {
     private String m_email;
     private String m_organization;
 
-    public PersonTableRowData() {
-    }
-
     public String getPersonId() {
       return m_personId;
     }
 
-    public void setPersonId(String personId) {
-      m_personId = personId;
+    public void setPersonId(String newPersonId) {
+      m_personId = newPersonId;
     }
 
     public String getFirstName() {
       return m_firstName;
     }
 
-    public void setFirstName(String firstName) {
-      m_firstName = firstName;
+    public void setFirstName(String newFirstName) {
+      m_firstName = newFirstName;
     }
 
     public String getLastName() {
       return m_lastName;
     }
 
-    public void setLastName(String lastName) {
-      m_lastName = lastName;
+    public void setLastName(String newLastName) {
+      m_lastName = newLastName;
     }
 
     public String getCity() {
       return m_city;
     }
 
-    public void setCity(String city) {
-      m_city = city;
+    public void setCity(String newCity) {
+      m_city = newCity;
     }
 
     public String getCountry() {
       return m_country;
     }
 
-    public void setCountry(String country) {
-      m_country = country;
+    public void setCountry(String newCountry) {
+      m_country = newCountry;
     }
 
     public String getPhone() {
       return m_phone;
     }
 
-    public void setPhone(String phone) {
-      m_phone = phone;
+    public void setPhone(String newPhone) {
+      m_phone = newPhone;
     }
 
     public String getMobile() {
       return m_mobile;
     }
 
-    public void setMobile(String mobile) {
-      m_mobile = mobile;
+    public void setMobile(String newMobile) {
+      m_mobile = newMobile;
     }
 
     public String getEmail() {
       return m_email;
     }
 
-    public void setEmail(String email) {
-      m_email = email;
+    public void setEmail(String newEmail) {
+      m_email = newEmail;
     }
 
     public String getOrganization() {
       return m_organization;
     }
 
-    public void setOrganization(String organization) {
-      m_organization = organization;
+    public void setOrganization(String newOrganization) {
+      m_organization = newOrganization;
     }
   }
 }

@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.contacts.shared.person;
 
 import java.util.Date;
@@ -30,9 +20,6 @@ import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 public class PersonFormData extends AbstractFormData {
 
   private static final long serialVersionUID = 1L;
-
-  public PersonFormData() {
-  }
 
   public AddressBox getAddressBox() {
     return getFieldByClass(AddressBox.class);
@@ -111,120 +98,75 @@ public class PersonFormData extends AbstractFormData {
   public static class AddressBox extends AbstractAddressBoxData {
 
     private static final long serialVersionUID = 1L;
-
-    public AddressBox() {
-    }
   }
 
   public static class Comments extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Comments() {
-    }
   }
 
   public static class DateOfBirth extends AbstractValueFieldData<Date> {
 
     private static final long serialVersionUID = 1L;
-
-    public DateOfBirth() {
-    }
   }
 
   public static class Email extends AbstractEmailFieldData {
 
     private static final long serialVersionUID = 1L;
-
-    public Email() {
-    }
   }
 
   public static class EmailWork extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public EmailWork() {
-    }
   }
 
   public static class FirstName extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public FirstName() {
-    }
   }
 
   public static class GenderGroup extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public GenderGroup() {
-    }
   }
 
   public static class LastName extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public LastName() {
-    }
   }
 
   public static class Mobile extends AbstractPhoneFieldData {
 
     private static final long serialVersionUID = 1L;
-
-    public Mobile() {
-    }
   }
 
   public static class Organization extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Organization() {
-    }
   }
 
   public static class PersonIdProperty extends AbstractPropertyData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public PersonIdProperty() {
-    }
   }
 
   public static class Phone extends AbstractPhoneFieldData {
 
     private static final long serialVersionUID = 1L;
-
-    public Phone() {
-    }
   }
 
   public static class PhoneWork extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public PhoneWork() {
-    }
   }
 
   public static class PictureBox extends AbstractPictureBoxData {
 
     private static final long serialVersionUID = 1L;
-
-    public PictureBox() {
-    }
   }
 
   public static class Position extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Position() {
-    }
   }
 }

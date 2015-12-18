@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.contacts.shared.module.events.person;
 
 import java.util.Date;
@@ -30,9 +20,6 @@ public class PersonFormTabExtensionData extends AbstractFormFieldData {
 
   private static final long serialVersionUID = 1L;
 
-  public PersonFormTabExtensionData() {
-  }
-
   public Events getEvents() {
     return getFieldByClass(Events.class);
   }
@@ -40,9 +27,6 @@ public class PersonFormTabExtensionData extends AbstractFormFieldData {
   public static class Events extends AbstractTableFieldBeanData {
 
     private static final long serialVersionUID = 1L;
-
-    public Events() {
-    }
 
     @Override
     public EventsRowData addRow() {
@@ -92,47 +76,44 @@ public class PersonFormTabExtensionData extends AbstractFormFieldData {
       private String m_city;
       private String m_country;
 
-      public EventsRowData() {
-      }
-
       public String getId() {
         return m_id;
       }
 
-      public void setId(String id) {
-        m_id = id;
+      public void setId(String newId) {
+        m_id = newId;
       }
 
       public String getTitle() {
         return m_title;
       }
 
-      public void setTitle(String title) {
-        m_title = title;
+      public void setTitle(String newTitle) {
+        m_title = newTitle;
       }
 
       public Date getStarts() {
         return m_starts;
       }
 
-      public void setStarts(Date starts) {
-        m_starts = starts;
+      public void setStarts(Date newStarts) {
+        m_starts = newStarts;
       }
 
       public String getCity() {
         return m_city;
       }
 
-      public void setCity(String city) {
-        m_city = city;
+      public void setCity(String newCity) {
+        m_city = newCity;
       }
 
       public String getCountry() {
         return m_country;
       }
 
-      public void setCountry(String country) {
-        m_country = country;
+      public void setCountry(String newCountry) {
+        m_country = newCountry;
       }
     }
   }

@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.contacts.shared.module.events.event;
 
 import java.util.Date;
@@ -31,9 +21,6 @@ import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 public class EventFormData extends AbstractFormData {
 
   private static final long serialVersionUID = 1L;
-
-  public EventFormData() {
-  }
 
   public Comments getComments() {
     return getFieldByClass(Comments.class);
@@ -92,57 +79,36 @@ public class EventFormData extends AbstractFormData {
   public static class Comments extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Comments() {
-    }
   }
 
   public static class Email extends AbstractEmailFieldData {
 
     private static final long serialVersionUID = 1L;
-
-    public Email() {
-    }
   }
 
   public static class Ends extends AbstractValueFieldData<Date> {
 
     private static final long serialVersionUID = 1L;
-
-    public Ends() {
-    }
   }
 
   public static class EventIdProperty extends AbstractPropertyData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public EventIdProperty() {
-    }
   }
 
   public static class Homepage extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Homepage() {
-    }
   }
 
   public static class LocationBox extends AbstractAddressBoxData {
 
     private static final long serialVersionUID = 1L;
-
-    public LocationBox() {
-    }
   }
 
   public static class ParticipantTableField extends AbstractTableFieldBeanData {
 
     private static final long serialVersionUID = 1L;
-
-    public ParticipantTableField() {
-    }
 
     @Override
     public ParticipantTableFieldRowData addRow() {
@@ -190,39 +156,36 @@ public class EventFormData extends AbstractFormData {
       private String m_lastName;
       private String m_organization;
 
-      public ParticipantTableFieldRowData() {
-      }
-
       public String getPersonId() {
         return m_personId;
       }
 
-      public void setPersonId(String personId) {
-        m_personId = personId;
+      public void setPersonId(String newPersonId) {
+        m_personId = newPersonId;
       }
 
       public String getFirstName() {
         return m_firstName;
       }
 
-      public void setFirstName(String firstName) {
-        m_firstName = firstName;
+      public void setFirstName(String newFirstName) {
+        m_firstName = newFirstName;
       }
 
       public String getLastName() {
         return m_lastName;
       }
 
-      public void setLastName(String lastName) {
-        m_lastName = lastName;
+      public void setLastName(String newLastName) {
+        m_lastName = newLastName;
       }
 
       public String getOrganization() {
         return m_organization;
       }
 
-      public void setOrganization(String organization) {
-        m_organization = organization;
+      public void setOrganization(String newOrganization) {
+        m_organization = newOrganization;
       }
     }
   }
@@ -230,24 +193,15 @@ public class EventFormData extends AbstractFormData {
   public static class Phone extends AbstractPhoneFieldData {
 
     private static final long serialVersionUID = 1L;
-
-    public Phone() {
-    }
   }
 
   public static class Starts extends AbstractValueFieldData<Date> {
 
     private static final long serialVersionUID = 1L;
-
-    public Starts() {
-    }
   }
 
   public static class Title extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
-
-    public Title() {
-    }
   }
 }
