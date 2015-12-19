@@ -15,7 +15,7 @@ public class HelloWorldFormService implements IHelloWorldFormService {
   public HelloWorldFormData load(HelloWorldFormData input) {
     StringBuilder msg = new StringBuilder();
     msg.append("Hello ").append(ServerSession.get().getUserId()).append("!");
-    input.getMessage().setValue(msg.toString());
+//    input.getMessage().setValue(msg.toString());
     return input;
   }
 }

@@ -1,14 +1,14 @@
 package org.eclipse.scout.heatmap.demo.client.helloworld;
 
+import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.AbstractHeatmapField;
 import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.MessageField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.HeatmapField;
 import org.eclipse.scout.heatmap.demo.shared.helloworld.HelloWorldFormData;
 import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.AbstractIcons;
@@ -50,8 +50,8 @@ public class HelloWorldForm extends AbstractForm {
     return getFieldByClass(TopBox.class);
   }
 
-  public MessageField getMessageField() {
-    return getFieldByClass(MessageField.class);
+  public HeatmapField getHeatmapField() {
+    return getFieldByClass(HeatmapField.class);
   }
 
   @Order(1000.0)
@@ -66,10 +66,15 @@ public class HelloWorldForm extends AbstractForm {
       }
 
       @Order(1000.0)
-      public class MessageField extends AbstractStringField {
+      public class HeatmapField extends AbstractHeatmapField {
         @Override
         protected int getConfiguredGridW() {
           return 2;
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 5;
         }
 
         @Override

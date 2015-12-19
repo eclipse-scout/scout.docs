@@ -1,1 +1,2 @@
-__include("scout-5.0.0-fingerprint.min.js");
+__include("scout-module.js");
+__include("heatmap-module.js");

@@ -3,7 +3,6 @@ package org.eclipse.scout.heatmap.demo.shared.helloworld;
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
-import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 
 /**
  * <b>NOTE:</b><br>
@@ -15,17 +14,5 @@ public class HelloWorldFormData extends AbstractFormData {
   private static final long serialVersionUID = 1L;
 
   public HelloWorldFormData() {
-  }
-
-  public Message getMessage() {
-    return getFieldByClass(Message.class);
-  }
-
-  public static class Message extends AbstractValueFieldData<String> {
-
-    private static final long serialVersionUID = 1L;
-
-    public Message() {
-    }
   }
 }
