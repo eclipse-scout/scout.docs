@@ -10,4 +10,8 @@ public interface IHeatmapField extends IFormField {
 
   HeatmapViewParameter getViewParameter();
 
+  void setViewParameter(HeatmapViewParameter parameter);
+
+  IHeatmapFieldUIFacade getUIFacade();
+
 }

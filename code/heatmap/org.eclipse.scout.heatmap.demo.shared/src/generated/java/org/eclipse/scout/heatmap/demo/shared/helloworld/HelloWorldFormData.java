@@ -1,8 +1,11 @@
 package org.eclipse.scout.heatmap.demo.shared.helloworld;
 
+import java.math.BigDecimal;
+
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
+import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 
 /**
  * <b>NOTE:</b><br>
@@ -14,5 +17,41 @@ public class HelloWorldFormData extends AbstractFormData {
   private static final long serialVersionUID = 1L;
 
   public HelloWorldFormData() {
+  }
+
+  public CenterX getCenterX() {
+    return getFieldByClass(CenterX.class);
+  }
+
+  public CenterY getCenterY() {
+    return getFieldByClass(CenterY.class);
+  }
+
+  public ZoomLevel getZoomLevel() {
+    return getFieldByClass(ZoomLevel.class);
+  }
+
+  public static class CenterX extends AbstractValueFieldData<BigDecimal> {
+
+    private static final long serialVersionUID = 1L;
+
+    public CenterX() {
+    }
+  }
+
+  public static class CenterY extends AbstractValueFieldData<BigDecimal> {
+
+    private static final long serialVersionUID = 1L;
+
+    public CenterY() {
+    }
+  }
+
+  public static class ZoomLevel extends AbstractValueFieldData<Integer> {
+
+    private static final long serialVersionUID = 1L;
+
+    public ZoomLevel() {
+    }
   }
 }

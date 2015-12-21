@@ -1,5 +1,6 @@
 package org.eclipse.scout.heatmap.ui.html;
 
+import java.beans.PropertyChangeEvent;
 import java.math.BigDecimal;
 
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
@@ -34,16 +35,35 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
 
       @Override
       public Object valueToJson() {
-        JSONObject json = new JSONObject();
-        MapPoint point = modelValue().getCenter();
-        JSONObject center = new JSONObject();
-        center.put("x", point.getX());
-        center.put("y", point.getY());
-        json.put("center", center);
-        json.put("zoomFactor", modelValue().getZoomFactor());
-        return json;
+        HeatmapViewParameter modelValue = modelValue();
+        return viewParameterToJson(modelValue);
       }
     });
+  }
+
+  @Override
+  protected void handleModelPropertyChange(PropertyChangeEvent event) {
+    String propertyName = event.getPropertyName();
+    if (IHeatmapField.PROP_VIEW_PARAMETER.equals(propertyName)) {
+      PropertyChangeEvent filteredEvent = filterPropertyChangeEvent(event);
+      if (filteredEvent != null) {
+        addPropertyChangeEvent(IHeatmapField.PROP_VIEW_PARAMETER, viewParameterToJson((HeatmapViewParameter) event.getNewValue()));
+      }
+    }
+    else {
+      super.handleModelPropertyChange(event);
+    }
+  }
+
+  private JSONObject viewParameterToJson(HeatmapViewParameter modelValue) {
+    JSONObject json = new JSONObject();
+    MapPoint point = modelValue.getCenter();
+    JSONObject center = new JSONObject();
+    center.put("x", point.getX());
+    center.put("y", point.getY());
+    json.put("center", center);
+    json.put("zoomFactor", modelValue.getZoomFactor());
+    return json;
   }
 
   @Override
@@ -58,17 +78,15 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
 
   private void handleUiViewParameterChanged(JsonEvent event) {
     JSONObject data = event.getData();
-    HeatmapViewParameter parameter = new HeatmapViewParameter();
-    parameter.setCenter(jsonToMapPoint(data.optJSONObject("center")));
-    parameter.setZoomFactor(data.getInt("zoomFactor"));
-
-    // TODO ASA0
-//    getModel().getUIFacade().setViewParameter(paramater);
+    HeatmapViewParameter parameter = new HeatmapViewParameter(
+        jsonToMapPoint(data.optJSONObject("center")),
+        data.getInt("zoomFactor"));
+    addPropertyEventFilterCondition(IHeatmapField.PROP_VIEW_PARAMETER, parameter);
+    getModel().getUIFacade().setViewParameterFromUI(parameter);
   }
 
-  private MapPoint jsonToMapPoint(JSONObject optJSONObject) {
-    // TODO Auto-generated method stub
-    return new MapPoint(BigDecimal.ONE, BigDecimal.ONE);
+  private MapPoint jsonToMapPoint(JSONObject center) {
+    return new MapPoint(new BigDecimal(center.getString("x")), new BigDecimal(center.getString("y")));
   }
 
 }
