@@ -36,5 +36,5 @@
     </plugins>
   </build>
 
-  <modules><module>org.eclipse.scout.heatmap.demo.parent</module></modules>
+  <modules><module>org.eclipse.scout.heatmap.parent</module></modules>
 </project>
