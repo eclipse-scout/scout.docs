@@ -13,18 +13,67 @@ ifndef::mdledir[:mdledir: .]
 // This file contains the release notes
 //-----------------------------------------------------------------------------
 
+= Release Notes for Scout 6.0
+
 //!!! not finished yet
 Here are the release notes for the Scout Release 6.0
 
 *TODO: a lot is still missing!*
 
-== API Changes
-* renamed `ITable.resetDisplayableColumns()` to `resetColumns()`
-* removed `ITable.resetColumns(boolean, boolean, boolean, boolean)` from interface (is now protected in `AbstractTable`)
-* AbstractAccessControlService is now generic with key as a type parameter, execLoadPermissions takes the key as parameter
-* `AbstractTable.execResetTable(...)`: changed signature
-** old: `protected void execResetColumns(boolean visibility, boolean order, boolean sorting, boolean widths)`
-** new: `protected void execResetColumns(Set<String> options)`
-* OutlineMenuWrapper: refactored constructors, for details consult the javadoc. This was needed to ensure the correct menuTypes throughout the wrapped menu's sub-hierarchy.
-* Deleted AbstractCheckBox, AbstractCheckboxExtension, ICheckBoxExtension, ICheckBox. Use AbstractBooleanField, AbstractBooleanExtension, IBooleanExtension, IBooleanField instead.
-* Deleted AbstractTextField, AbstractTextFieldExtension, ITextFieldExtension, ITextField. Use AbstractStringField, AbstractStringExtension, IStringExtension, IStringField instead.
+== HTML
+Use the class `org.eclipse.scout.rt.platform.html.HTML` to build html content instead of concatenate the strings manually.
+
+== Various Notes
+* Behavior change of `Table` in `AbstractTableField`: Do not execute `AbstractTable.execContentChanged()` when `valueChangeTriggers` flag on `IFormField` is `false`.
+* Removed chart box because it has not been used and there is no ui implementation.
+* Tree: Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible
+* `ITree.getConfiguredDefaultIconId()` in addition to `ITree.getConfiguredIconId`
++
+Difference: DefaultIconId is used as default for all tree nodes that don't have an icon on their own. IconId may be used in the same way as the title, e.g as outline icon.
+* File upload size is always limited now (otherwise server might run out of memory if too large files are sent). Default size is 50 MB, but every field might specify lower/higher sizes:
+** `org.eclipse.scout.rt.client.ui.IDNDSupport.setDropMaximumSize(long)`
+** `org.eclipse.scout.rt.client.ui.IDNDSupport.getDropMaximumSize()`
+** `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.setMaximumUploadSize(long)`
+** `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.getMaximumUploadSize()`
+** `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.setMaximumUploadSize(long)`
+** `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.getMaximumUploadSize()`
+** Also added `getConfigured...()` methods were applicable for properties above.
+* The model can define whether child pages of a page should be added immediately to the outline tree or lazily. If nodes are added lazily, a dummy "show all" node is shown instead.
++
+Node pages never add child pages lazily. Table pages add child nodes lazily when they have more than a specific number of child pages (default 1).
++
+The behavior may be controlled using:
++
+** `boolean getConfiguredLazyAddChildPagesToOutline()` --> default `false`, for `AbstractPageWithTable` the default is `true`.
+** `int getConfiguredLazyAddChildPagesToOutlineThreshold()` --> setting for `AbstractPageWithTable`, after how many child pages the lazy setting should be active (default 1)
+* `AbstractGroupBox.setBorderVisible(false)` does not change visibility of label anymore. Label of group-box must be made invisible by calling `setLabelVisible(false)`.
+* returned collection of `ITableColumnFilterManager.getFilters()` is now unmodifiable.
+** new method `ITableColumnFilterManager.removeFilter(IColumn col)`.
+* `ILabelField`, `IHtmlField` and `IStringField` are now `IHtmlCapable`.
+* `AbstractContentAssistField` and `IProposalChooser` implementations now have the ability to provide an inner class which extend `AbstractTree` or `AbstractTable` to provide a custom implementation used in the proposal chooser.
+* Added `cssClass` property to formField, column and cell for custom css styling. See also interface `IStyleable` and class `CssClasses`.
+* Menus of a page are now added to the detail form. This was necessary because the outline tree does not show any menus anymore. See also method `AbstractPageWithNodes.enhanceDetailFormWithPageMenus`.
+* Added bean field and bean column. See `AbstractBeanField`, `AbstractBeanColumn` for details.
+* A new widget has been added: `WizardProgressField`. It is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
+* `AbstractSplitBox` now returns `IFormField.FULL_SIZE` in `getConfiguredGridW()` by default. Reason: The split box widget does not really have a representation of its own, but is more like a container for other fields. It can never have label, mandatory indicator etc. Its layout should behave like a group box or a tab box, therefore the default gridW value was adjusted accordingly.
+* Added `AbstractDesktop.getConfiguredAutoTabKeyStrokesEnabled`: It should be possible to change view Tabs with modifier+number. The number should be generated by the ui. 9 is reserved to jump to the last tab, 0 to jump to the first tab. If this property is set to false there is no Keystroke for tab change on the ui.
+** `getConfiguredAutoTabKeyStrokeModifier`: if the property is set to `true` the modifier specified by this property is used in combination with a number to change to the specific tab.
+* Added `ISearchOutline`: The intention of the search outline is to provide a search over several table pages. The `AbstractSearchOutline` provides a frame, the search itself has to be implemented by the project. In order to use it add the `SearchOutline` to the desktop using `getConfiguredOutlines` (don't create an outlineViewButton).
+* Added default detail form on outline: It is now possible to configure a default detail form for outlines. The default detail form gets shown when no page is selected. API added `getConfiguredDefaultDetailForm`, `execInitDefaultDetailForm`, `createDefaultDetailForm`, `startDefaultDetailForm`.
+* Added `getConfiguredTableStatusVisible` on `IPageWithTable`: It is now possible to configure whether the table status should be visible for a table page. Until now table status was set visible by the `OutlineTableForm`.
+* API added to `AbstractTable` and `ITable`:
+** `List<ITableControl> getTableControls()`
+** `<T extends ITableControl> T getTableControl(Class<T> controlClass)`
+** `boolean isTableStatusVisible()`
+** `void setTableStatusVisible(boolean visible)`
+** `String getMenuBarPosition()`
+** `void setMenuBarPosition(String position)`
+* API added to ITableUIFacade
+** `void fireTableReloadFromUI()`
+** `void fireSortColumnRemovedFromUI(IColumn<?> column)
+* API Added `IForm.start()`: Mainly useful for forms with just one handler. (detail forms, tool forms etc.). Maybe implemented by the concrete form. The default implementation at AbstractForm uses getHandler() to start the form.
+* Improved page search form disposal: Search form is now closed when the page gets disposed.
+* `UiLayer`: Removed values `JSP`, `JSF`, `RAP`, `SWING` and added value `HTML`.
+* `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
+* `AbstractFormField.set/isStatusVisible` added.
+* `AbstractDesktop.isOutlineChanging` added.
