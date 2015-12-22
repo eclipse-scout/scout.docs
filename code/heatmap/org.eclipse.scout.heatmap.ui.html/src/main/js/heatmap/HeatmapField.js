@@ -36,8 +36,8 @@ scout.HeatmapField.prototype._render = function($parent) {
                        [47.3916, 8.51170, 2.0]
                        ];
   
-  addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
-  var heat = L.heatLayer(addressPoints, {radius: 20, max: 1.0}).addTo(this.heatmap);
+//  addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+  var heat = L.heatLayer(addressPoints, {radius: 20, max: 5.0}).addTo(this.heatmap);
 
   this.heatmap.on('zoomend', this._handleViewParameterChanged.bind(this));
   this.heatmap.on('moveend', this._handleViewParameterChanged.bind(this));
@@ -56,7 +56,5 @@ scout.HeatmapField.prototype._handleViewParameterChanged = function() {
 };
 
 scout.HeatmapField.prototype._renderViewParameter = function() {
-//  if(this.viewParameter && this.viewParameter.center && this.viewParameter.center.x && this.viewParameter.center.y && this.viewParameter.zoomFactor) {
 	  this.heatmap.setView([this.viewParameter.center.x, this.viewParameter.center.y],this.viewParameter.zoomFactor);
-//  }
 };

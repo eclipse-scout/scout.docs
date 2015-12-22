@@ -6,16 +6,22 @@ import org.eclipse.scout.rt.client.ModelContextProxy;
 import org.eclipse.scout.rt.client.ModelContextProxy.ModelContext;
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.annotations.ConfigProperty;
 
 public class AbstractHeatmapField extends AbstractFormField implements IHeatmapField {
 
   private IHeatmapFieldUIFacade m_uiFacade;
 
+  @ConfigProperty(ConfigProperty.OBJECT)
+  public HeatmapViewParameter getConfiguredViewParameter() {
+    return new HeatmapViewParameter(new MapPoint(BigDecimal.valueOf(48.39141), BigDecimal.valueOf(9.51180)), 5);
+  }
+
   @Override
   protected void initConfig() {
     m_uiFacade = BEANS.get(ModelContextProxy.class).newProxy(new P_UIFacade(), ModelContext.copyCurrent());
     super.initConfig();
-    setViewParameter(new HeatmapViewParameter(new MapPoint(BigDecimal.valueOf(47.39141), BigDecimal.valueOf(8.51180)), 12));
+    setViewParameter(getConfiguredViewParameter());
   }
 
   @Override

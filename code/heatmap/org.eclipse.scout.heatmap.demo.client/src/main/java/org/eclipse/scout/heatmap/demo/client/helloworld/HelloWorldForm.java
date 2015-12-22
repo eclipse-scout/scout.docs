@@ -2,6 +2,7 @@ package org.eclipse.scout.heatmap.demo.client.helloworld;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
 
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.AbstractHeatmapField;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
@@ -129,6 +130,11 @@ public class HelloWorldForm extends AbstractForm {
         @Override
         protected int getConfiguredGridH() {
           return 5;
+        }
+
+        @Override
+        public HeatmapViewParameter getConfiguredViewParameter() {
+          return new HeatmapViewParameter(new MapPoint(BigDecimal.valueOf(47.39141), BigDecimal.valueOf(8.51180)), 17);
         }
 
         @Override
