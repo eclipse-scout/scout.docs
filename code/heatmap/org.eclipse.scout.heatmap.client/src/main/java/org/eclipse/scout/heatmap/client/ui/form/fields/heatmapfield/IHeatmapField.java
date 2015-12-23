@@ -16,7 +16,7 @@ public interface IHeatmapField extends IFormField {
 
   void addHeatPoint(HeatPoint heatPoint);
 
-  void addHeatPoints(Collection<HeatPoint> heatPoint);
+  void addHeatPoints(Collection<HeatPoint> heatPoints);
 
   void setHeatPoints(Collection<HeatPoint> heatPoints);
 

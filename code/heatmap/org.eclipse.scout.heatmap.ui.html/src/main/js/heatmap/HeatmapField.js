@@ -32,22 +32,32 @@ scout.HeatmapField.prototype._render = function($parent) {
 
   this.heatmap.on('zoomend', this._handleViewParameterChanged.bind(this));
   this.heatmap.on('moveend', this._handleViewParameterChanged.bind(this));
-
+  this.heatmap.on('click', this._handleClicked.bind(this));
+  this.heatmap.on('contextmenu', this._handleClicked.bind(this));
 
 };
 
 scout.HeatmapField.prototype._handleViewParameterChanged = function() {
-	this._send('viewParameterChanged', {
-		center: {
-			x: this.heatmap.getCenter().lat,
-			y: this.heatmap.getCenter().lng
-		},
-		zoomFactor: this.heatmap.getZoom()
-	});
+  this._send('viewParameterChanged', {
+    center: {
+      x: this.heatmap.getCenter().lat,
+      y: this.heatmap.getCenter().lng
+    },
+    zoomFactor: this.heatmap.getZoom()
+  });
+};
+
+scout.HeatmapField.prototype._handleClicked = function(event) {
+  this._send('clicked', {
+    point: {
+      x: event.latlng.lat,
+      y: event.latlng.lng
+    }
+  });
 };
 
 scout.HeatmapField.prototype._renderViewParameter = function() {
-	  this.heatmap.setView([this.viewParameter.center.x, this.viewParameter.center.y],this.viewParameter.zoomFactor);
+    this.heatmap.setView([this.viewParameter.center.x, this.viewParameter.center.y],this.viewParameter.zoomFactor);
 };
 
 scout.HeatmapField.prototype._renderHeatPointList = function() {

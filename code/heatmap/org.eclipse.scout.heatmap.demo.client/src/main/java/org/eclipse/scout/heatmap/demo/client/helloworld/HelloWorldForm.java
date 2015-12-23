@@ -4,13 +4,16 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.AbstractHeatmapField;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatPoint;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapField;
+import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapListener;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.MapPoint;
 import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox;
 import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.CenterXField;
@@ -62,6 +65,19 @@ public class HelloWorldForm extends AbstractForm {
   protected void execInitForm() {
     updateViewParamFields();
     getHeatmapField().addPropertyChangeListener(IHeatmapField.PROP_VIEW_PARAMETER, m_viewParameterListener);
+    getHeatmapField().addHeatmapListener(new IHeatmapListener() {
+
+      @Override
+      public void heatPointsAdded(Collection<HeatPoint> points) {
+        Iterator<HeatPoint> iterator = points.iterator();
+        if (iterator.hasNext()) {
+          HeatPoint heatPoint = iterator.next();
+          getXField().setValue(heatPoint.getX());
+          getYField().setValue(heatPoint.getY());
+          getIntensityField().setValue(BigDecimal.valueOf(heatPoint.getIntensity()));
+        }
+      }
+    });
   }
 
   private void updateViewParamFields() {

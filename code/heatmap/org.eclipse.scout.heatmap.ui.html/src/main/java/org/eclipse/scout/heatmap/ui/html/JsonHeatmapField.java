@@ -111,9 +111,19 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
     if ("viewParameterChanged".equals(event.getType())) {
       handleUiViewParameterChanged(event);
     }
+    else if ("clicked".equals(event.getType())) {
+      handleUiClicked(event);
+    }
     else {
       super.handleUiEvent(event);
     }
+  }
+
+  private void handleUiClicked(JsonEvent event) {
+    JSONObject data = event.getData();
+    MapPoint point = jsonToMapPoint(data.optJSONObject("point"));
+    HeatPoint heatPoint = new HeatPoint(point.getX(), point.getY(), 0.5f);
+    getModel().getUIFacade().addHeatPointFromUI(heatPoint);
   }
 
   private void handleUiViewParameterChanged(JsonEvent event) {

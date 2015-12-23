@@ -55,6 +55,16 @@ public class AbstractHeatmapField extends AbstractFormField implements IHeatmapF
       setViewParameter(parameter);
     }
 
+    @Override
+    public void addHeatPointFromUI(HeatPoint heatPoint) {
+      addHeatPoint(heatPoint);
+    }
+
+    @Override
+    public void addHeatPointsFromUI(Collection<HeatPoint> heatPoints) {
+      addHeatPoints(heatPoints);
+    }
+
   }
 
   @SuppressWarnings("unchecked")
