@@ -1,23 +1,38 @@
 package org.eclipse.scout.heatmap.ui.html;
 
-import java.beans.PropertyChangeEvent;
 import java.math.BigDecimal;
+import java.util.Collection;
 
+import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatPoint;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapField;
+import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapListener;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.MapPoint;
 import org.eclipse.scout.rt.ui.html.IUiSession;
 import org.eclipse.scout.rt.ui.html.json.IJsonAdapter;
 import org.eclipse.scout.rt.ui.html.json.JsonEvent;
 import org.eclipse.scout.rt.ui.html.json.JsonProperty;
 import org.eclipse.scout.rt.ui.html.json.form.fields.JsonFormField;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
 
+  private static final String EVENT_HEAT_POINTS_ADDED = "heatPointsAdded";
+
   public JsonHeatmapField(IHeatmapField model, IUiSession uiSession, String id, IJsonAdapter<?> parent) {
     super(model, uiSession, id, parent);
   }
+
+  private IHeatmapListener m_listener = new IHeatmapListener() {
+
+    @Override
+    public void heatPointsAdded(Collection<HeatPoint> points) {
+      JSONObject json = new JSONObject();
+      putProperty(json, "points", heatPointsToJson(points));
+      addActionEvent(EVENT_HEAT_POINTS_ADDED, json);
+    }
+  };
 
   @Override
   public String getObjectType() {
@@ -34,25 +49,36 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
       }
 
       @Override
-      public Object valueToJson() {
-        HeatmapViewParameter modelValue = modelValue();
-        return viewParameterToJson(modelValue);
+      public Object prepareValueForToJson(Object value) {
+        return viewParameterToJson((HeatmapViewParameter) value);
       }
+
+    });
+    putJsonProperty(new JsonProperty<IHeatmapField>(IHeatmapField.PROP_HEAT_POINT_LIST, model) {
+      @Override
+      protected Collection<HeatPoint> modelValue() {
+        return getModel().getHeatPoints();
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public Object prepareValueForToJson(Object value) {
+        return heatPointsToJson((Collection<HeatPoint>) value);
+      }
+
     });
   }
 
   @Override
-  protected void handleModelPropertyChange(PropertyChangeEvent event) {
-    String propertyName = event.getPropertyName();
-    if (IHeatmapField.PROP_VIEW_PARAMETER.equals(propertyName)) {
-      PropertyChangeEvent filteredEvent = filterPropertyChangeEvent(event);
-      if (filteredEvent != null) {
-        addPropertyChangeEvent(IHeatmapField.PROP_VIEW_PARAMETER, viewParameterToJson((HeatmapViewParameter) event.getNewValue()));
-      }
-    }
-    else {
-      super.handleModelPropertyChange(event);
-    }
+  protected void attachModel() {
+    super.attachModel();
+    getModel().addHeatmapListener(m_listener);
+  }
+
+  @Override
+  protected void detachModel() {
+    super.detachModel();
+    getModel().removeHeatmapListener(m_listener);
   }
 
   private JSONObject viewParameterToJson(HeatmapViewParameter modelValue) {
@@ -64,6 +90,20 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
     json.put("center", center);
     json.put("zoomFactor", modelValue.getZoomFactor());
     return json;
+  }
+
+  private JSONArray heatPointsToJson(Collection<HeatPoint> points) {
+    JSONArray array = new JSONArray();
+    if (points != null) {
+      for (HeatPoint point : points) {
+        JSONArray jsonHeatPoint = new JSONArray();
+        jsonHeatPoint.put(point.getX());
+        jsonHeatPoint.put(point.getY());
+        jsonHeatPoint.put(point.getIntensity());
+        array.put(jsonHeatPoint);
+      }
+    }
+    return array;
   }
 
   @Override

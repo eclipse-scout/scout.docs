@@ -27,6 +27,18 @@ public class HelloWorldFormData extends AbstractFormData {
     return getFieldByClass(CenterY.class);
   }
 
+  public Intensity getIntensity() {
+    return getFieldByClass(Intensity.class);
+  }
+
+  public X getX() {
+    return getFieldByClass(X.class);
+  }
+
+  public Y getY() {
+    return getFieldByClass(Y.class);
+  }
+
   public ZoomLevel getZoomLevel() {
     return getFieldByClass(ZoomLevel.class);
   }
@@ -44,6 +56,30 @@ public class HelloWorldFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
 
     public CenterY() {
+    }
+  }
+
+  public static class Intensity extends AbstractValueFieldData<BigDecimal> {
+
+    private static final long serialVersionUID = 1L;
+
+    public Intensity() {
+    }
+  }
+
+  public static class X extends AbstractValueFieldData<BigDecimal> {
+
+    private static final long serialVersionUID = 1L;
+
+    public X() {
+    }
+  }
+
+  public static class Y extends AbstractValueFieldData<BigDecimal> {
+
+    private static final long serialVersionUID = 1L;
+
+    public Y() {
     }
   }
 

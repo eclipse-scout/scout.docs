@@ -3,19 +3,26 @@ package org.eclipse.scout.heatmap.demo.client.helloworld;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.AbstractHeatmapField;
+import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatPoint;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapField;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.MapPoint;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.CenterXField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.CenterYField;
 import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.CenterXField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.CenterYField;
 import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.HeatmapField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.ZoomLevelField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.IntensityField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.XField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.YField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.ZoomLevelField;
 import org.eclipse.scout.heatmap.demo.shared.helloworld.HelloWorldFormData;
 import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
@@ -93,6 +100,18 @@ public class HelloWorldForm extends AbstractForm {
     return getFieldByClass(ZoomLevelField.class);
   }
 
+  public XField getXField() {
+    return getFieldByClass(XField.class);
+  }
+
+  public YField getYField() {
+    return getFieldByClass(YField.class);
+  }
+
+  public IntensityField getIntensityField() {
+    return getFieldByClass(IntensityField.class);
+  }
+
   private final class P_ViewParameterListener implements PropertyChangeListener {
 
     private boolean m_enabled = true;
@@ -133,6 +152,23 @@ public class HelloWorldForm extends AbstractForm {
         }
 
         @Override
+        protected void execInitField() {
+          resetHeatPoints();
+        }
+
+        private void resetHeatPoints() {
+          List<HeatPoint> heatPoints = new ArrayList<>();
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.3914), BigDecimal.valueOf(8.51180), 1.0f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.39155), BigDecimal.valueOf(8.5119), 0.4f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.3915), BigDecimal.valueOf(8.51185), 0.7f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.3916), BigDecimal.valueOf(8.51170), 0.2f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.391), BigDecimal.valueOf(8.511), 0.5f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.390), BigDecimal.valueOf(8.511), 0.5f));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.390), BigDecimal.valueOf(8.511), 0.3f));
+          setHeatPoints(heatPoints);
+        }
+
+        @Override
         public HeatmapViewParameter getConfiguredViewParameter() {
           return new HeatmapViewParameter(new MapPoint(BigDecimal.valueOf(47.39141), BigDecimal.valueOf(8.51180)), 17);
         }
@@ -142,104 +178,194 @@ public class HelloWorldForm extends AbstractForm {
           return TEXTS.get("Message");
         }
 
+        public void reset() {
+          setViewParameter(getConfiguredViewParameter());
+          resetHeatPoints();
+        }
+
+      }
+
+      @Order(2000.0)
+      public class CenterXField extends AbstractBigDecimalField {
+
+        @Override
+        protected int getConfiguredMinFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredMaxFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("CenterX");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
+          try {
+            m_viewParameterListener.setEnabled(false);
+            MapPoint newCenter = new MapPoint(getValue(), oldViewParameter.getCenter().getY());
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
+          }
+          finally {
+            m_viewParameterListener.setEnabled(true);
+          }
+        }
+      }
+
+      @Order(3000.0)
+      public class CenterYField extends AbstractBigDecimalField {
+
+        @Override
+        protected int getConfiguredMinFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredMaxFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("CenterY");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
+          try {
+            m_viewParameterListener.setEnabled(false);
+            MapPoint newCenter = new MapPoint(oldViewParameter.getCenter().getX(), getValue());
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
+          }
+          finally {
+            m_viewParameterListener.setEnabled(true);
+          }
+        }
+
+      }
+
+      @Order(4000.0)
+      public class ZoomLevelField extends AbstractIntegerField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ZoomLevel");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
+          try {
+            m_viewParameterListener.setEnabled(false);
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(oldViewParameter.getCenter(), getValue()));
+          }
+          finally {
+            m_viewParameterListener.setEnabled(true);
+          }
+        }
+
+      }
+
+      @Order(5000.0)
+      public class XField extends AbstractBigDecimalField {
+
+        @Override
+        protected int getConfiguredMinFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredMaxFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("X");
+        }
+
+      }
+
+      @Order(6000.0)
+      public class YField extends AbstractBigDecimalField {
+
+        @Override
+        protected int getConfiguredMinFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredMaxFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected int getConfiguredFractionDigits() {
+          return 5;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Y");
+        }
+
+      }
+
+      @Order(7000.0)
+      public class IntensityField extends AbstractBigDecimalField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Intensity");
+        }
+
       }
     }
 
-    @Order(2000.0)
-    public class CenterXField extends AbstractBigDecimalField {
-
+    public class AddHeatPointMenu extends AbstractMenu {
       @Override
-      protected int getConfiguredMinFractionDigits() {
-        return 5;
+      protected String getConfiguredText() {
+        return TEXTS.get("AddHeatPoint");
       }
 
       @Override
-      protected int getConfiguredMaxFractionDigits() {
-        return 5;
-      }
-
-      @Override
-      protected int getConfiguredFractionDigits() {
-        return 5;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("CenterX");
-      }
-
-      @Override
-      protected void execChangedValue() {
-        HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
-        try {
-          m_viewParameterListener.setEnabled(false);
-          MapPoint newCenter = new MapPoint(getValue(), oldViewParameter.getCenter().getY());
-          getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
-        }
-        finally {
-          m_viewParameterListener.setEnabled(true);
-        }
+      protected void execAction() {
+        HeatPoint heatPoint = new HeatPoint(getXField().getValue(), getYField().getValue(), getIntensityField().getValue().floatValue());
+        getHeatmapField().addHeatPoint(heatPoint);
       }
     }
 
-    @Order(3000.0)
-    public class CenterYField extends AbstractBigDecimalField {
-
+    public class ResetMenu extends AbstractMenu {
       @Override
-      protected int getConfiguredMinFractionDigits() {
-        return 5;
+      protected String getConfiguredText() {
+        return TEXTS.get("Reset");
       }
-
+    
       @Override
-      protected int getConfiguredMaxFractionDigits() {
-        return 5;
+      protected void execAction() {
+        getHeatmapField().reset();
       }
-
-      @Override
-      protected int getConfiguredFractionDigits() {
-        return 5;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("CenterY");
-      }
-
-      @Override
-      protected void execChangedValue() {
-        HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
-        try {
-          m_viewParameterListener.setEnabled(false);
-          MapPoint newCenter = new MapPoint(oldViewParameter.getCenter().getX(), getValue());
-          getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
-        }
-        finally {
-          m_viewParameterListener.setEnabled(true);
-        }
-      }
-
-    }
-
-    @Order(4000.0)
-    public class ZoomLevelField extends AbstractIntegerField {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("ZoomLevel");
-      }
-
-      @Override
-      protected void execChangedValue() {
-        HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
-        try {
-          m_viewParameterListener.setEnabled(false);
-          getHeatmapField().setViewParameter(new HeatmapViewParameter(oldViewParameter.getCenter(), getValue()));
-        }
-        finally {
-          m_viewParameterListener.setEnabled(true);
-        }
-      }
-
     }
   }
 
@@ -254,4 +380,5 @@ public class HelloWorldForm extends AbstractForm {
       importFormData(formData);
     }
   }
+
 }
