@@ -1,0 +1,39 @@
+== Create Custom Widget
+
+This is a very rough guide how to create your custom widget/field.
+For details please refer to https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs under
+/code/heatmap you find the example of a heat map implemented as custom scout field using the java script libraries from http://leafletjs.com and
+https://github.com/Leaflet/Leaflet.heat.
+
+=== Step by step scaffolding
+* As a host for your new widget either create a new scout project with {yourWidgtetName}.demo as artifact id or use an existing scout neon project.
+* Create a new maven project {yourWidgetName}.client
+** add dependency to org.eclipse.scout.rt.client
+* Create a new maven projet {yourWidgetName}.ui.html
+** add dependency to org.eclipse.scout.rt.ui.html
+** add dependency {yourWidgetName}.client
+* Create a AbstractFormField implementation in the new client project with an interface that extends IFormField.
+* crate src/main/js as source folder
+* Create {YourFieldName}.js in {yourWidgetName}.ui.html\src/main/js/{yourWidgetName}
+** scout.{YourFieldName} inherits from scout.FormField
+** implement at least _render($parent)
+* Create {YourFieldName}.css in {yourWidgetName}.ui.html\src/main/js/{yourWidgetName}
+* Create {yourWidgetName}-module.js in {yourWidgetName}.ui.html\src/main/js
+* Create {yourWidgetName}-module.css in {yourWidgetName}.ui.html\src/main/js
+* Create {yourWidgetName}.ui.html\src\main\resources\META-INF\scout.xml
+* Still in {yourWidgetName}.ui.html create classes:
+** Json{YourFieldName}
+** JsonObjectFactory
+* {yourWidgetName}.demo.client gets a dependency to {yourWidgetName}.client
+* {yourWidgetName}.demo.ui.html.app.dev gets a dependency to {yourWidgetName}.ui.html
+* in index.html: make sure res/all-macro.css and res/all-macro.js are used (instead of scout-module.css/js directly)
+* edit all-macro.css and all-macro.js to include scout-module.css/js and {yourWidgetName}-module.js/css
+
+=== Properties and Events
+* Properties: See JsonHeatmapField.initJsonProperties(IHeatmapField model) for how to init properties that are automatically managed by the JsonAdapter,
+which means they're automatically included in the object returned by the toJson() method and also are propagated to the browser-side client
+when a property change event occurs.
+* Events: See IHeatmapListener and it's implementation for how to propagate events from the client model to the html-ui
+
+=== Testing with Selenium
+TODO!
