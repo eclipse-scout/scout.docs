@@ -23,6 +23,7 @@
     <module>../../bahbah/org.eclipsescout.demo.bahbah.parent</module>
     <module>../../contacts/org.eclipse.scout.contacts</module>
     <module>../../widgets/org.eclipsescout.demo.widgets.parent</module>
+    <module>../../heatmap/org.eclipse.scout.heatmap.parent</module>
   </modules>
 
   <build>
