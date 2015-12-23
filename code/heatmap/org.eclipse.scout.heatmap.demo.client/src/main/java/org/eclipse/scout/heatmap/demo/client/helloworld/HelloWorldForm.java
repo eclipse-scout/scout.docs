@@ -383,7 +383,7 @@ public class HelloWorldForm extends AbstractForm {
 
       @Override
       protected void execAction() {
-        getHeatmapField().setHeatPoints(Collections.emptyList());
+        getHeatmapField().setHeatPoints(Collections.<HeatPoint> emptyList());
       }
     }
   }

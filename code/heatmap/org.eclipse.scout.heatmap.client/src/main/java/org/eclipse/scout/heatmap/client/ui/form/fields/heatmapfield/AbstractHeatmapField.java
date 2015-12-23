@@ -30,7 +30,7 @@ public class AbstractHeatmapField extends AbstractFormField implements IHeatmapF
     m_uiFacade = BEANS.get(ModelContextProxy.class).newProxy(new P_UIFacade(), ModelContext.copyCurrent());
     super.initConfig();
     setViewParameter(getConfiguredViewParameter());
-    setHeatPoints(Collections.emptyList());
+    setHeatPoints(Collections.<HeatPoint> emptyList());
   }
 
   @Override
