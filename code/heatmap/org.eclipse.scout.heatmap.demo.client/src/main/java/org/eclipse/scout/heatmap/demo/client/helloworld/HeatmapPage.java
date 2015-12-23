@@ -5,9 +5,9 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
- * <h3>{@link HelloWorldPage}</h3>
+ * <h3>{@link HeatmapPage}</h3>
  */
-public class HelloWorldPage extends AbstractPageWithNodes {
+public class HeatmapPage extends AbstractPageWithNodes {
 
   @Override
   protected boolean getConfiguredLeaf() {
@@ -21,11 +21,11 @@ public class HelloWorldPage extends AbstractPageWithNodes {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("HelloWorld");
+    return TEXTS.get("Heatmap");
   }
 
   @Override
   protected Class<? extends IForm> getConfiguredDetailForm() {
-    return HelloWorldForm.class;
+    return HeatmapForm.class;
   }
 }

@@ -2,7 +2,7 @@ package org.eclipse.scout.heatmap.demo.client.work;
 
 import java.util.List;
 
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldPage;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapPage;
 import org.eclipse.scout.heatmap.demo.shared.Icons;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -18,7 +18,7 @@ public class WorkOutline extends AbstractOutline {
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     super.execCreateChildPages(pageList);
-    pageList.add(new HelloWorldPage());
+    pageList.add(new HeatmapPage());
   }
 
   @Override

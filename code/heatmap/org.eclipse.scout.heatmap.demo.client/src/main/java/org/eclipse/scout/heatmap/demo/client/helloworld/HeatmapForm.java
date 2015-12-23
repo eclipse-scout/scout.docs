@@ -15,16 +15,16 @@ import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewP
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapField;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.IHeatmapListener;
 import org.eclipse.scout.heatmap.client.ui.form.fields.heatmapfield.MapPoint;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.CenterXField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.CenterYField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.HeatmapField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.IntensityField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.XField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.YField;
-import org.eclipse.scout.heatmap.demo.client.helloworld.HelloWorldForm.MainBox.TopBox.ZoomLevelField;
-import org.eclipse.scout.heatmap.demo.shared.helloworld.HelloWorldFormData;
-import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.CenterXField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.CenterYField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.HeatmapField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.IntensityField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.XField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.YField;
+import org.eclipse.scout.heatmap.demo.client.helloworld.HeatmapForm.MainBox.TopBox.ZoomLevelField;
+import org.eclipse.scout.heatmap.demo.shared.helloworld.HeatmapFormData;
+import org.eclipse.scout.heatmap.demo.shared.helloworld.IHeatmapFormService;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -39,14 +39,14 @@ import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
- * <h3>{@link HelloWorldForm}</h3>
+ * <h3>{@link HeatmapForm}</h3>
  */
-@FormData(value = HelloWorldFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
-public class HelloWorldForm extends AbstractForm {
+@FormData(value = HeatmapFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+public class HeatmapForm extends AbstractForm {
 
   private P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
 
-  public HelloWorldForm() {
+  public HeatmapForm() {
     super();
     setHandler(new ViewHandler());
   }
@@ -150,11 +150,6 @@ public class HelloWorldForm extends AbstractForm {
     @Order(1000.0)
     public class TopBox extends AbstractGroupBox {
 
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("MessageFromServer");
-      }
-
       @Order(1000.0)
       public class HeatmapField extends AbstractHeatmapField {
         @Override
@@ -192,7 +187,7 @@ public class HelloWorldForm extends AbstractForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Message");
+          return TEXTS.get("HeatmapField");
         }
 
         public void reset() {
@@ -419,8 +414,8 @@ public class HelloWorldForm extends AbstractForm {
 
     @Override
     protected void execLoad() {
-      IHelloWorldFormService service = BEANS.get(IHelloWorldFormService.class);
-      HelloWorldFormData formData = new HelloWorldFormData();
+      IHeatmapFormService service = BEANS.get(IHeatmapFormService.class);
+      HeatmapFormData formData = new HeatmapFormData();
       exportFormData(formData);
       formData = service.load(formData);
       importFormData(formData);

@@ -4,9 +4,9 @@ import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 
 /**
- * <h3>{@link IHelloWorldFormService}</h3>
+ * <h3>{@link IHeatmapFormService}</h3>
  */
 @TunnelToServer
-public interface IHelloWorldFormService extends IService {
-  HelloWorldFormData load(HelloWorldFormData input);
+public interface IHeatmapFormService extends IService {
+  HeatmapFormData load(HeatmapFormData input);
 }

@@ -1,7 +1,7 @@
 package org.eclipse.scout.heatmap.demo.client.helloworld;
 
-import org.eclipse.scout.heatmap.demo.shared.helloworld.HelloWorldFormData;
-import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
+import org.eclipse.scout.heatmap.demo.shared.helloworld.HeatmapFormData;
+import org.eclipse.scout.heatmap.demo.shared.helloworld.IHeatmapFormService;
 import org.eclipse.scout.rt.client.testenvironment.TestEnvironmentClientSession;
 import org.eclipse.scout.rt.testing.client.runner.ClientTestRunner;
 import org.eclipse.scout.rt.testing.client.runner.RunWithClientSession;
@@ -15,30 +15,30 @@ import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 /**
- * <h3>{@link HelloWorldFormTest}</h3> Contains Tests for the {@link HelloWorldForm}.
+ * <h3>{@link HeatmapFormTest}</h3> Contains Tests for the {@link HeatmapForm}.
  */
 @RunWith(ClientTestRunner.class)
 @RunWithSubject("anonymous")
 @RunWithClientSession(TestEnvironmentClientSession.class)
-public class HelloWorldFormTest {
+public class HeatmapFormTest {
 
   // Register a mock service for {@link IHelloWorldFormService}
   @BeanMock
-  private IHelloWorldFormService m_mockSvc;
+  private IHeatmapFormService m_mockSvc;
 
   /**
-   * Return a reference {@link HelloWorldFormData} on method {@link IHelloWorldFormService#load(HelloWorldFormData)}.
+   * Return a reference {@link HeatmapFormData} on method {@link IHeatmapFormService#load(HeatmapFormData)}.
    */
   @Before
   public void setup() {
-    HelloWorldFormData result = new HelloWorldFormData();
+    HeatmapFormData result = new HeatmapFormData();
 
-    Mockito.when(m_mockSvc.load(Matchers.any(HelloWorldFormData.class))).thenReturn(result);
+    Mockito.when(m_mockSvc.load(Matchers.any(HeatmapFormData.class))).thenReturn(result);
   }
 
   @Test
   public void testMessageFieldDisabled() {
-    HelloWorldForm frm = new HelloWorldForm();
+    HeatmapForm frm = new HeatmapForm();
     Assert.assertEquals(17, frm.getHeatmapField().getViewParameter().getZoomFactor());
   }
 }
