@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.AbstractIcons;
@@ -355,9 +356,19 @@ public class HelloWorldForm extends AbstractForm {
 
       @Override
       protected void execAction() {
-        HeatPoint heatPoint = new HeatPoint(getXField().getValue(), getYField().getValue(),
-            getIntensityField().getValue().floatValue());
-        getHeatmapField().addHeatPoint(heatPoint);
+        BigDecimal x = getXField().getValue();
+        BigDecimal y = getYField().getValue();
+        BigDecimal intensity = getIntensityField().getValue();
+
+        if (x != null && y != null && intensity != null) {
+          HeatPoint heatPoint = new HeatPoint(x, y,
+              intensity.floatValue());
+          getHeatmapField().addHeatPoint(heatPoint);
+        }
+        else {
+          MessageBoxes.createOk().withHeader(TEXTS.get("PleaseProvideCoordinatesAndIntensity")).show();
+        }
+
       }
     }
 
