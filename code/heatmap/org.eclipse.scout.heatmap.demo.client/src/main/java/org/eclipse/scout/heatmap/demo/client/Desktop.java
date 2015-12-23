@@ -21,8 +21,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
  * <h3>{@link Desktop}</h3>
- *
- * @author asa
  */
 public class Desktop extends AbstractDesktop {
   @Override

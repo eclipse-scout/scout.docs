@@ -9,8 +9,6 @@ import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlS
 
 /**
  * <h3>{@link AccessControlService}</h3>
- *
- * @author asa
  */
 @Order(-1)
 public class AccessControlService extends UserIdAccessControlService {

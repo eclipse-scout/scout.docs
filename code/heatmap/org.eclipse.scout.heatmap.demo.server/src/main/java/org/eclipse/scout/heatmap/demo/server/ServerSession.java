@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <h3>{@link ServerSession}</h3>
- *
- * @author asa
  */
 public class ServerSession extends AbstractServerSession {
 

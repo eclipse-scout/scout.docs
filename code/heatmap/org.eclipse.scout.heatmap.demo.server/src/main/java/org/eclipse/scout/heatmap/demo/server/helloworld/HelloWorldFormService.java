@@ -6,8 +6,6 @@ import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
 
 /**
  * <h3>{@link HelloWorldFormService}</h3>
- *
- * @author asa
  */
 public class HelloWorldFormService implements IHelloWorldFormService {
 

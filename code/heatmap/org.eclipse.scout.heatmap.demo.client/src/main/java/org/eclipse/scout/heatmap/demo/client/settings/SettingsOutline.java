@@ -7,8 +7,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
  * <h3>{@link SettingsOutline}</h3>
- *
- * @author asa
  */
 @Order(3000)
 public class SettingsOutline extends AbstractOutline {
@@ -17,7 +15,7 @@ public class SettingsOutline extends AbstractOutline {
   protected String getConfiguredTitle() {
     return TEXTS.get("Settings");
   }
-  
+
   @Override
   protected String getConfiguredIconId() {
     return Icons.Gear;

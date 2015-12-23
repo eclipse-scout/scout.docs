@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <h3>{@link SearchOutline}</h3>
- *
- * @author asa
  */
 @Order(2000)
 public class SearchOutline extends AbstractSearchOutline {

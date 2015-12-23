@@ -2,6 +2,7 @@ package org.eclipse.scout.heatmap.demo.client.helloworld;
 
 import org.eclipse.scout.heatmap.demo.shared.helloworld.HelloWorldFormData;
 import org.eclipse.scout.heatmap.demo.shared.helloworld.IHelloWorldFormService;
+import org.eclipse.scout.rt.client.AbstractDesktopTest.CheckSaveTestForm.MainBox.MessageField;
 import org.eclipse.scout.rt.client.testenvironment.TestEnvironmentClientSession;
 import org.eclipse.scout.rt.testing.client.runner.ClientTestRunner;
 import org.eclipse.scout.rt.testing.client.runner.RunWithClientSession;
@@ -15,8 +16,6 @@ import org.mockito.Mockito;
 
 /**
  * <h3>{@link HelloWorldFormTest}</h3> Contains Tests for the {@link HelloWorldForm}.
- *
- * @author asa
  */
 @RunWith(ClientTestRunner.class)
 @RunWithSubject("anonymous")

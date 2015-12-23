@@ -11,8 +11,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
  * <h3>{@link WorkOutline}</h3>
- *
- * @author asa
  */
 @Order(1000)
 public class WorkOutline extends AbstractOutline {

@@ -22,8 +22,6 @@ import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessControlle
 
 /**
  * <h3>{@link UiHtmlServletFilter}</h3>
- *
- * @author asa
  */
 public class UiHtmlServletFilter implements Filter {
   private TrivialAccessController m_trivialAccessController;

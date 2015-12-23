@@ -5,8 +5,6 @@ import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextPr
 
 /**
  * <h3>{@link DefaultTextProviderService}</h3>
- *
- * @author asa
  */
 @Order(-2000)
 public class DefaultTextProviderService extends AbstractDynamicNlsTextProviderService {

@@ -7,8 +7,6 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 
 /**
  * <h3>{@link ClientSession}</h3>
- *
- * @author asa
  */
 public class ClientSession extends AbstractClientSession {
 
@@ -27,7 +25,7 @@ public class ClientSession extends AbstractClientSession {
   protected void execLoadSession() {
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipse.scout.heatmap.demo.shared");
-	
+
     setDesktop(new Desktop());
   }
 }

@@ -19,8 +19,6 @@ import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessControlle
 
 /**
  * <h3>{@link ServerServletFilter}</h3> This is the main server side servlet filter.
- *
- * @author asa
  */
 public class ServerServletFilter implements Filter {
   private TrivialAccessController m_trivialAccessController;

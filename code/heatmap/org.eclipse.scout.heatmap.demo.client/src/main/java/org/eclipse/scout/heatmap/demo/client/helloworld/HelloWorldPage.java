@@ -6,8 +6,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 /**
  * <h3>{@link HelloWorldPage}</h3>
- *
- * @author asa
  */
 public class HelloWorldPage extends AbstractPageWithNodes {
 
