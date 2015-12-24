@@ -35,5 +35,8 @@ which means they're automatically included in the object returned by the toJson(
 when a property change event occurs.
 * Events: See IHeatmapListener and it's implementation for how to propagate events from the client model to the html-ui
 
+=== Layouting
+See HeatmapFieldLayout.js and it's usage in HeatmapField._render() for an example how to hook in scout's layout mechanism.
+
 === Testing with Selenium
 TODO!
