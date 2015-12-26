@@ -27,8 +27,11 @@ public class SuperUserRunContextProvider {
   private final Subject m_subject = CONFIG.getPropertyValue(SuperUserSubjectProperty.class);
 
   public ServerRunContext provide() {
-    ServerRunContext serverRunContext = ServerRunContexts.empty().withUserAgent(UserAgent.createDefault()).withSubject(m_subject);
-    return serverRunContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(serverRunContext.copy()));
+    ServerRunContext serverRunContext = ServerRunContexts.empty();
+    serverRunContext.withUserAgent(UserAgent.createDefault()).withSubject(m_subject);
+    serverRunContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(serverRunContext.copy()));
+
+    return serverRunContext;
   }
 
   public Subject getSubject() {
