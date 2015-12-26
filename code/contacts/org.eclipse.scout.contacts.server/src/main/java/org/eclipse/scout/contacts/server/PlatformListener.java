@@ -27,7 +27,6 @@ import org.eclipse.scout.rt.platform.holders.StringArrayHolder;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
-import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +49,7 @@ public class PlatformListener implements IPlatformListener {
     if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
 
       try {
-        ServerRunContext superUserRunContext = BEANS.get(SuperUserRunContextProvider.class).provide();
-        superUserRunContext.run(new IRunnable() {
+        BEANS.get(SuperUserRunContextProducer.class).produce().run(new IRunnable() {
 
           @Override
           public void run() throws Exception {

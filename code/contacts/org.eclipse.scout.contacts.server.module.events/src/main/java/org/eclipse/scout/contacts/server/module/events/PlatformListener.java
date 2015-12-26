@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.eclipse.scout.contacts.server.ConfigProperties;
-import org.eclipse.scout.contacts.server.SuperUserRunContextProvider;
+import org.eclipse.scout.contacts.server.SuperUserRunContextProducer;
 import org.eclipse.scout.contacts.server.module.events.sql.SQLs;
 import org.eclipse.scout.contacts.shared.module.events.person.PersonFormTabExtensionData;
 import org.eclipse.scout.contacts.shared.module.events.person.PersonTablePageDataExtension;
@@ -31,7 +31,6 @@ import org.eclipse.scout.rt.platform.holders.StringArrayHolder;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
-import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
 import org.slf4j.Logger;
@@ -55,8 +54,7 @@ public class PlatformListener implements IPlatformListener {
   public void autoCreateDatabase() {
     if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
       try {
-        ServerRunContext superUserRunContext = BEANS.get(SuperUserRunContextProvider.class).provide();
-        superUserRunContext.run(new IRunnable() {
+        BEANS.get(SuperUserRunContextProducer.class).produce().run(new IRunnable() {
 
           @Override
           public void run() throws Exception {
