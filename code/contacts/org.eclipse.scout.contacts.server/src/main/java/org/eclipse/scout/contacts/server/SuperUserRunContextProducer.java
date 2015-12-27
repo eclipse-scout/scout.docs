@@ -22,21 +22,22 @@ import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.context.RunContextProducer;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.util.FinalValue;
 import org.eclipse.scout.rt.server.IServerSession;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
+import org.eclipse.scout.rt.server.context.ServerRunContextProducer;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
 import org.eclipse.scout.rt.shared.ui.UserAgent;
 
 /**
- * Central point to obtain run contexts with super user rights, and to get the super user subject and super user
- * session.
+ * Central point to obtain run contexts with super user rights, and to get the super user subject and session.
+ * <p>
+ * A super user run context is a {@link ServerRunContext} with a user that has administrator privileges.
  */
-public class SuperUserRunContextProducer extends RunContextProducer {
+public class SuperUserRunContextProducer extends ServerRunContextProducer {
 
   private final FinalValue<IServerSession> m_session = new FinalValue<>();
   private final FinalValue<Subject> m_subject = new FinalValue<>();
