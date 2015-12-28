@@ -336,12 +336,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) {
-          if (newMasterValue != null) {
-            setValue(((Double) newMasterValue).toString());
-          }
-          else {
-            setValue(null);
-          }
+          setValue(newMasterValue == null ? null : newMasterValue.toString());
         }
       }
 
