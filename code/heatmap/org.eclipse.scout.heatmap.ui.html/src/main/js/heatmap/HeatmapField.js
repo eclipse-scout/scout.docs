@@ -6,7 +6,6 @@ scout.inherits(scout.HeatmapField, scout.FormField);
 scout.HeatmapField.prototype._render = function($parent) {
   this.addContainer($parent, 'heatmap-field');
   this.addLabel();
-  this.addMandatoryIndicator();
   this.addStatus();
 
   var heatmapId = scout.objectFactory.createUniqueId();
