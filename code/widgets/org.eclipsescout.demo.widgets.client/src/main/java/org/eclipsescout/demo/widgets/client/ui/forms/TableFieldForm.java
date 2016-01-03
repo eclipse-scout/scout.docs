@@ -51,6 +51,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -810,7 +811,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                     newRow();
                   }
                 }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                    .withSchedulingDelay(2, TimeUnit.SECONDS));
+                    .withExecutionTrigger(Jobs.newExecutionTrigger()
+                        .withStartIn(2, TimeUnit.SECONDS)));
 
               }
             }
@@ -876,7 +878,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                   deleteRows(rows);
                 }
               }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                  .withSchedulingDelay(2, TimeUnit.SECONDS));
+                  .withExecutionTrigger(Jobs.newExecutionTrigger()
+                      .withStartIn(2, TimeUnit.SECONDS)));
             }
           }
 

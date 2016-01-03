@@ -33,6 +33,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -217,7 +218,8 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
                     newNode();
                   }
                 }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                    .withSchedulingDelay(2, TimeUnit.SECONDS));
+                    .withExecutionTrigger(Jobs.newExecutionTrigger()
+                        .withStartIn(2, TimeUnit.SECONDS)));
 
               }
             }

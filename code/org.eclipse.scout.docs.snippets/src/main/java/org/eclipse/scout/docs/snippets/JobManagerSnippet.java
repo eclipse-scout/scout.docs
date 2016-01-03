@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.job.filter.event.SessionJobEventFilter;
+import org.quartz.SimpleScheduleBuilder;
 
 @SuppressWarnings("unused")
 public final class JobManagerSnippet {
@@ -141,7 +142,8 @@ public final class JobManagerSnippet {
         .withRunContext(RunContexts.empty()
             .withSubject(subject)
             .withLocale(Locale.US))
-        .withPeriodicExecutionAtFixedRate(60, TimeUnit.SECONDS));
+        .withExecutionTrigger(Jobs.newExecutionTrigger()
+            .withSchedule(SimpleScheduleBuilder.repeatMinutelyForever())));
     // end::Jobs.scheduleAtFixedRate[]
   }
 
@@ -155,7 +157,8 @@ public final class JobManagerSnippet {
       }
     }, Jobs.newInput()
         .withRunContext(RunContexts.copyCurrent())
-        .withSchedulingDelay(5, TimeUnit.SECONDS));
+        .withExecutionTrigger(Jobs.newExecutionTrigger()
+            .withStartIn(5, TimeUnit.SECONDS)));
     // end::Jobs.scheduleDelayed[]
   }
 

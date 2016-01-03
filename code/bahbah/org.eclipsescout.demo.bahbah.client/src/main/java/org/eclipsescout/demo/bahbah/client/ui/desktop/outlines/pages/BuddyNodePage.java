@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
 import org.eclipsescout.demo.bahbah.client.services.BuddyAvatarIconProviderService;
@@ -58,7 +59,8 @@ public class BuddyNodePage extends AbstractPageWithNodes {
         getChatForm().getMessageField().requestFocus();
       }
     }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-        .withSchedulingDelay(200, TimeUnit.MILLISECONDS));
+        .withExecutionTrigger(Jobs.newExecutionTrigger()
+            .withStartIn(200, TimeUnit.MILLISECONDS)));
   }
 
   public ChatForm getChatForm() {

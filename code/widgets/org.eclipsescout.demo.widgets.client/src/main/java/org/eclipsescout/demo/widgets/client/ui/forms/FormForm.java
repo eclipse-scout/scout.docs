@@ -380,7 +380,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 }
               }, Jobs.newInput()
                   .withRunContext(ClientRunContexts.copyCurrent())
-                  .withSchedulingDelay(openingDelay, TimeUnit.SECONDS));
+                  .withExecutionTrigger(Jobs.newExecutionTrigger()
+                      .withStartIn(openingDelay, TimeUnit.SECONDS)));
             }
           }
         }
@@ -444,7 +445,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 getField1Field().setVisible(false);
               }
             }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withSchedulingDelay(3, TimeUnit.SECONDS));
+                .withExecutionTrigger(Jobs.newExecutionTrigger()
+                    .withStartIn(3, TimeUnit.SECONDS)));
           }
         }
       }
@@ -493,7 +495,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 getField2Field().setVisible(false);
               }
             }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withSchedulingDelay(3, TimeUnit.SECONDS));
+                .withExecutionTrigger(Jobs.newExecutionTrigger()
+                    .withStartIn(3, TimeUnit.SECONDS)));
           }
         }
       }
@@ -542,7 +545,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 getField3Field().setVisible(false);
               }
             }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withSchedulingDelay(3, TimeUnit.SECONDS));
+                .withExecutionTrigger(Jobs.newExecutionTrigger()
+                    .withStartIn(3, TimeUnit.SECONDS)));
           }
         }
       }
@@ -591,7 +595,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 getField4Field().setVisible(false);
               }
             }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withSchedulingDelay(3, TimeUnit.SECONDS));
+                .withExecutionTrigger(Jobs.newExecutionTrigger()
+                    .withStartIn(3, TimeUnit.SECONDS)));
           }
         }
       }
