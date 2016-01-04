@@ -15,18 +15,29 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipsescout.demo.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.ThemeRadioButtonGroup;
+import org.eclipsescout.demo.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipsescout.demo.widgets.shared.services.code.UiThemeCodeType;
 
 public class OptionsForm extends AbstractForm {
 
   public OptionsForm() {
     super();
+  }
+
+  @Override
+  protected String getConfiguredTitle() {
+    return TEXTS.get("Options");
+  }
+
+  @Override
+  protected void execInitForm() {
+    String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
+    getUiThemeField().setValue(theme);
   }
 
   public void startNew() {
@@ -37,18 +48,28 @@ public class OptionsForm extends AbstractForm {
     return getFieldByClass(MainBox.class);
   }
 
-  public ThemeRadioButtonGroup getThemeRadioButtonGroup() {
-    return getFieldByClass(ThemeRadioButtonGroup.class);
+  public UiThemeField getUiThemeField() {
+    return getFieldByClass(UiThemeField.class);
   }
 
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
+    @Override
+    protected int getConfiguredGridW() {
+      return 1;
+    }
+
     @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
+      @Override
+      protected int getConfiguredGridW() {
+        return 1;
+      }
+
       @Order(10)
-      public class ThemeRadioButtonGroup extends AbstractRadioButtonGroup<String> {
+      public class UiThemeField extends AbstractSmartField<String> {
 
         @Override
         protected String getConfiguredLabel() {
@@ -61,33 +82,25 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Override
-        protected void execInitField() {
-          setValue(UiThemeCodeType.DefaultCode.ID);
+        protected boolean getConfiguredMandatory() {
+          return true;
         }
       }
     }
 
     @Order(10)
     public class OkButton extends AbstractOkButton {
-
     }
 
     @Order(20)
     public class CancelButton extends AbstractCancelButton {
-
     }
-  }
-
-  @Override
-  protected void execInitForm() {
-    String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
-    getThemeRadioButtonGroup().setValue(theme);
   }
 
   public class NewHandler extends AbstractFormHandler {
     @Override
     protected void execStore() {
-      getDesktop().setTheme(getThemeRadioButtonGroup().getValue());
+      getDesktop().setTheme(getUiThemeField().getValue());
     }
   }
 }
