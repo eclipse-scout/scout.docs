@@ -88,7 +88,7 @@ protected abstract PermissionCollection execLoadPermissions(String userId)
 The ShellService can no longer be used because there is no access to the client side shell. Instead you can use the following code to send a document to clients:
 [source,java,indent=0]
 ----
-BinaryResource binaryResource = new BinaryResource(templateFile.getName(), myRawData);  
+BinaryResource binaryResource = new BinaryResource(templateFile.getName(), myRawData);
 ClientSessionProvider.currentSession().getDesktop()
   .openUri(binaryResource, OpenUriAction.DOWNLOAD);
 ----
@@ -254,7 +254,7 @@ New code:
   protected IWizardContainerForm execCreateContainerForm() {
     return new MyWizardContainerForm(this);
   }
-  
+
   @Override
   protected void execDecorateContainerForm() {
     getContainerForm().setXyz(...);
@@ -291,7 +291,7 @@ Use `AbstractBooleanField`, `AbstractBooleanExtension`, `IBooleanExtension`, `IB
 * All `AbstractExtensible*` Scout elements have been deleted. Use the normal element instead (e.g. use `AbstractStringField` instead of `AbstractExtensibleStringField`). For extension support use the corresponding extension object (e.g. `AbstractStringFieldExtension`).
 * Deleted `IMailField`, `AbstractMailField` and all associated classes and files.
 +
-An application that requires a facility to compose an e-mail should create a form with the fields required for that application (Multiline-StringField for plain-text E-Mails, RichTextField for HTML e-mails, FileChooserField for file uploads, etc.)	
+An application that requires a facility to compose an e-mail should create a form with the fields required for that application (Multiline-StringField for plain-text E-Mails, RichTextField for HTML e-mails, FileChooserField for file uploads, etc.)
 * Deleted ICustomField/AbstractCustomField and all associated classes and files.
 * Deleted IDocumentField/AbstractDocumentField and all associated classes and files.
 * `getConfiguredTreat0AsNull` in Smartfield has been deleted. (see also Bugzilla 469902).
@@ -445,7 +445,8 @@ NOTE: Indexed placeholders are actually deprecated since Scout's open-source deb
 
 migrate logging.properties to logback.xml
 
-1) in logging.properties applay the following regex
+1) in logging.properties apply the following regex replacements:
+----
 search: ^(\w.*)\.level\s*=\s*(ALL|OFF|SEVERE|WARNING|INFO|FINE|FINEST)\s*$
 replace: <logger name="$1" level="$2"/>
 
@@ -466,10 +467,10 @@ replace: WARN
 
 search: (SEVERE|severe)
 replace: ERROR
-
+----
 
 2) create a new logback.xml as
-
+----
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
 
@@ -483,17 +484,17 @@ replace: ERROR
   <root level="INFO">
     <appender-ref ref="CONSOLE" />
   </root>
-
   <!-- (3) -->
 
 </configuration>
+----
 
-
-3) include the converted content of logging.properties at (3)
-
+3) include the converted content of logging.properties at 1.
 
 4) adjust the format pattern if needed
+
 available variables are
+----
 %d{HH:mm:ss.SSS}
 %thread
 %-5level
@@ -507,11 +508,14 @@ available variables are
 %X{http.session.id}
 %X{scout.user.name}
 %X{subject.principal.name}
+----
 
 Default ui.html pattern
-      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.request.method} %X{http.request.uri} %X{scout.ui.session.id}]%n</pattern>
+----
+<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.request.method} %X{http.request.uri} %X{scout.ui.session.id}]%n</pattern>
+----
 Default server pattern
-      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.session.id} in %thread ]%n</pattern>
-
-
+----
+<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.session.id} in %thread ]%n</pattern>
+----
 
