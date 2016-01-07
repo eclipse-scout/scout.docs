@@ -77,3 +77,4 @@ The behavior may be controlled using:
 * `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
 * `AbstractFormField.set/isStatusVisible` added.
 * `AbstractDesktop.isOutlineChanging` added.
+* `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
