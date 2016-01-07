@@ -22,7 +22,6 @@
   </parent>
 
   <artifactId>org.eclipsescout.demo.widgets.shared</artifactId>
-  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
