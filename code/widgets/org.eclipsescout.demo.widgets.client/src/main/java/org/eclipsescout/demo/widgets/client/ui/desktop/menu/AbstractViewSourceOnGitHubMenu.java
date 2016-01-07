@@ -11,6 +11,7 @@
 package org.eclipsescout.demo.widgets.client.ui.desktop.menu;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.platform.config.ConfigUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ClientSession;
@@ -26,19 +27,19 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
   protected void execAction() {
     String canonicalName = provideSourceClass().getCanonicalName();
     StringBuilder sb = new StringBuilder();
-    sb.append("https://github.com/BSI-Business-Systems-Integration-AG/org.eclipsescout.demo/tree/");
-    sb.append(ConfigUtility.getProperty("git.branch"));
-    sb.append("/widgets/");
+    sb.append(ConfigUtility.getProperty("git.url")).append("/");
+    sb.append(ConfigUtility.getProperty("git.branch")).append("/");
+    sb.append(ConfigUtility.getProperty("git.folder")).append("/");
     if (canonicalName.contains("widgets.client.old")) {
-      sb.append("org.eclipsescout.demo.widgets.client.old");
+      sb.append("org.eclipsescout.demo.widgets.client.old").append("/");
     }
     else {
-      sb.append("org.eclipsescout.demo.widgets.client");
+      sb.append("org.eclipsescout.demo.widgets.client").append("/");
     }
-    sb.append("/src/");
+    sb.append(ConfigUtility.getProperty("git.source")).append("/");
     sb.append(canonicalName.replace(".", "/"));
     sb.append(".java");
-    ClientSession.get().getDesktop().openUri(sb.toString(), null);
+    ClientSession.get().getDesktop().openUri(sb.toString(), OpenUriAction.NEW_WINDOW);
   }
 
   abstract protected Class<?> provideSourceClass();
