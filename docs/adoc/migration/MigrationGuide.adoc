@@ -15,9 +15,13 @@ ifndef::mdledir[:mdledir: .]
 
 = Scout 6.0 Migration Guide
 
-
-//!!! not finished yet
 This document describes the migration from Scout 5.0 to Scout 6.0
+
+////
+Howto:
+- Write this document such that it helps people to migrate. Describe what they should do.
+- Chronological order is not necessary.
+////
 
 == Project Structure
 
