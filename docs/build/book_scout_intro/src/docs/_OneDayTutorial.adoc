@@ -177,7 +177,7 @@ first.
 [source,java]
 .The [java]+ExportToExcelMenu+ class added by the Docx4j support to the application's tools menu.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..170]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..170]
 ----
 
 
@@ -202,7 +202,7 @@ In the [field]_Title_ field enter the string "`My Contacts`" and create a new tr
 [source,java]
 .The [java]+execOpened+ method of desktop class of the "My Contacts" application. The application's organisation into a tree and a table form is defined here.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=56..79]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=56..79]
 ----
 
 
@@ -238,7 +238,7 @@ Make sure the other fields are filled in as shown in <<img-new_page_person>> and
 [source,java]
 .The [java]+execCreateChildPages+ method of the standard outline. At the current implementation step the company table page is not (yet) added.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java[lines=25..31]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java[lines=25..31]
 ----
 
 
@@ -274,7 +274,7 @@ image::{imgsdir}/person_id_property.png[]
 [source,java]
 .The person id and the first name columns of the [java]+PersonTablePage+ class.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=82..104]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=82..104]
 ----
 
 
@@ -294,7 +294,7 @@ image::{imgsdir}/new_bean_companyid.png[]
 [source,java]
 .The company id variable of the [java]+PersonTablePage+ class.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=31..35;172..183]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=31..35;172..183]
 ----
 
 
@@ -314,7 +314,7 @@ image::{imgsdir}/add_existing_page.png[]
 [source,java]
 .Linking the [java]+PersonTablePage+ with the parent [java]+CompanyTablePage+.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/CompanyTablePage.java[lines=38..44]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/CompanyTablePage.java[lines=38..44]
 ----
 
 
@@ -352,7 +352,7 @@ From the drop-down list in the [field]_Super Class_ field choose the [java]+Abst
 [source,ini]
 .Setting up the database parameters in the Scout server's `config.ini` file.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini[lines=42..48]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini[lines=42..48]
 ----
 
 
@@ -380,7 +380,7 @@ image::{imgsdir}/new_operation_installstorage.png[]
 [source,java]
 .New tables are created if they are not found by [java]+getExistingTables+ in the existing schema.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=20..50;107..108]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=20..50;107..108]
 ----
 
 
@@ -397,7 +397,7 @@ For this, the member variable [java]+m_doSetup+ is used that might also be set b
 [source,java]
 .Setting up the [java]+COMPANY+ table of the "`My Contacts`" application.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=51..70]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=51..70]
 ----
 
 
@@ -405,14 +405,14 @@ include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclip
 [source,java]
 .Setting up the [java]+PERSON+ table of the "`My Contacts`" application.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=71..93]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=71..93]
 ----
 
 [[lst-mycontacts.server.services.installdb.users_param, Listing USER_PARAM table setup]]
 [source,java]
 .Setting up the [java]+USERS_PARAM+ table of the "`My Contacts`" application.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=94..106]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=94..106]
 ----
 
 
@@ -443,7 +443,7 @@ To create a data object for the persons day of birth, the Scout utility class [j
 [source,java]
 .Scheduling the database installation in the [java]+start+ method of the [java]+ServerApplication+ class during the server application startup.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=30..57;62..63]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=30..57;62..63]
 ----
 
 
@@ -499,7 +499,7 @@ The company page in the "`My Contacts`" application will always show all availab
 [source,java]
 .Fetching the table data for the person and the company page of the "`My Contacts`" application. The list of persons is restricted to employees of a specific company if a company id parameter is provided.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/StandardOutlineService.java[lines=10..29]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/StandardOutlineService.java[lines=10..29]
 ----
 
 
@@ -527,7 +527,7 @@ image::{imgsdir}/implement_execloadtabledata_properties.png[]
 [source,java]
 .Loading the person data into the person table page.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=168..172]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=168..172]
 ----
 
 
@@ -628,7 +628,7 @@ This results in the picture to cover the vertical space of 5 form fields.
 [source,java]
 .The behaviour of the person form's [java]+PictureField+ is triggered by changes in field [java]+PictureUrlField+.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=233..235;251..267;286..287]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=233..235;251..267;286..287]
 ----
 
 
@@ -655,7 +655,7 @@ That is why almost all form and service artefacts are deselected in the second w
 [source,java]
 .The UI structure of the [java]+PictureURLForm+ used to update the URL of the picture field in the person form.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=24..25;99..113;122..122;126..127]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=24..25;99..113;122..122;126..127]
 ----
 
 
@@ -676,7 +676,7 @@ See <<lst-mycontacts.client.forms.person.picturefield.editmenu>> for the actual 
 [source,java]
 .The edit menu implemented in class [java]+EditURLMenu+ of the picture field. If the URL was changed the picture URL field of the person form is set accordingly in method [java]+execAction+
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=268..285]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=268..285]
 ----
 
 
@@ -697,7 +697,7 @@ image::{imgsdir}/new_menu_editperson.png[]
 [source,java]
 .The [java]+EditPersonMenu+ to edit the person selected in the person table. The person id taken from the corresponding (invisible) column is transferred to the person form before the form is started.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=123..142]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=123..142]
 ----
 
 
@@ -722,7 +722,7 @@ image::{imgsdir}/person_table_properties.png[]
 [source,java]
 .The [java]+execRowAction+ method on table pages is used to trigger an action when a row is selected with a double click or `<Enter>`.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=63..67]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=63..67]
 ----
 
 
@@ -765,7 +765,7 @@ We can now close this wizard with the btn:[Finish] button and add the business l
 [source,java]
 .The company lookup call with its [java]+getConfiguredService+ method in the application's shared plugin.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java[lines=12..21]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java[lines=12..21]
 ----
 
 
@@ -774,7 +774,7 @@ include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclip
 [source,java]
 .The company lookup service in the application's server plugin. The [java]+key+ and the [java]+text+ criteria are used to search for values by key or by the provided name substring.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/lookup/CompanyLookupService.java[lines=6..20]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/lookup/CompanyLookupService.java[lines=6..20]
 ----
 
 
@@ -811,7 +811,7 @@ Finally, the position of the new company smart field can be set in the [field]_S
 [source,java]
 .The smart field [java]+CompanyField+ of the person form and its wiring with the company lookup call.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=324..337]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=324..337]
 ----
 
 
@@ -849,7 +849,7 @@ Here, we set the [property]_Grid H_ property to 6 and update the [property]_Widt
 [source,java]
 .In the [java]+execInitField+ method of the map form the image content is fetched from the Google Maps API.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java[lines=115..133]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java[lines=115..133]
 ----
 
 
@@ -871,7 +871,7 @@ Here, just enter the new translated text "`Show Map ...`" into the [field]_Name_
 [source,java]
 .The implementation of the "`Show Map ...`" link button. %In method `execClickAction` a new map form is first created, the the address variable is set with the content of the person's location and the form is opened with `startModify`.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=347..362]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=347..362]
 ----
 
 
@@ -886,7 +886,7 @@ As shown in <<lst-mycontacts.client.forms.person.clickmaplink>>, we only need to
 [source,java]
 .The [java]+execLoad+ and the  [java]+execStore+ methods of the person form's modify handler.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=364..384]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=364..384]
 ----
 
 
@@ -902,7 +902,7 @@ And method [java]+execStore+ is called by the Scout framework after the user has
 [source,java]
 .The [java]+load+ and the [java]+store+ methods of the server's [java]+PersonService+.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;55..104]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;55..104]
 ----
 
 
@@ -925,7 +925,7 @@ As its implementation has been created by the Scout SDK wizard, it does not do a
 [source,java]
 .The [java]+create+ method of the server's [java]+PersonService+.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;35..54;103..104]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;35..54;103..104]
 ----
 
 
@@ -1003,7 +1003,7 @@ Once the wizard has completed the classes defined in the two JAR files can direc
 [source,java]
 .The [java]+LinkedInService+ service with it's [java]+initializeService+ method defined in the [java]+IService+ interface.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=38..57;195..196]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=38..57;195..196]
 ----
 
 
@@ -1025,7 +1025,7 @@ image::{imgsdir}/new_operation_authurl.png[]
 [source,java]
 .The [java]+getAuthUrl+ method of the LinkedIn service.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=58..65]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=58..65]
 ----
 
 
@@ -1049,7 +1049,7 @@ Then, open class [java]+LinkedInService+ and add the String parameter [java]+sec
 [source,java]
 .The [java]+refreshToken+ method is used to create a new access token to fetch data from the LinkedIn API.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=66..98]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=66..98]
 ----
 
 
@@ -1062,7 +1062,7 @@ Once we have both the access token and the user id available in method {refreshT
 [source,java]
 .The [java]+readContacts+ method to fetch the users connection using the LinkedIn API. The necessary access token is created in method [java]+getToken+ based on the information stored in the database for the logged in user.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=136..166]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=136..166]
 ----
 
 
@@ -1070,7 +1070,7 @@ include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclip
 [source,java]
 .The necessary access token is created in method [java]+getToken+ based on the information stored in the database for the logged in user.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=168..195]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=168..195]
 ----
 
 
@@ -1130,7 +1130,7 @@ image::{imgsdir}/new_class_domutil_2.png[]
 [source,java]
 .The [java]+DomUtility+ class provides functions to parse the XML data structure provided by the LinkedIn API.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java[lines=16..48]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java[lines=16..48]
 ----
 
 
@@ -1146,7 +1146,7 @@ Before the class can be saved, the necessary imports need to be fixed by pressin
 [source,java]
 .The [java]+updateContacts+ method is used to enter/update existing contacts based on new data fetched from LinkedIn.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=99..135]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=99..135]
 ----
 
 
@@ -1194,7 +1194,7 @@ As shown on the right side of <<img-tokenform_securitycode>>, deselect the [prop
 [source,java]
 .The structure of the refresh token form. The security code field gets enabled in method [java]+execClickAction+ after the authentication link button is pressed.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=29..30;113..133;142..158;195..196]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=29..30;113..133;142..158;195..196]
 ----
 
 
@@ -1220,7 +1220,7 @@ To close the wizard, click the btn:[Finish] button.
 [source,java]
 .The menu to refresh the LinkedIn token starts the token form and then sends token parameters with the new security code to the LinkedIn backend service.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=88..114]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=88..114]
 ----
 
 
@@ -1238,7 +1238,7 @@ image::{imgsdir}/new_menu_updatecontacts.png[]
 [source,java]
 .The menu to update the stored persons with current LinkedIn data.
 ----
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..171]
+TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..171]
 ----
 
 

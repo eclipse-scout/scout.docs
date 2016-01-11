@@ -566,7 +566,7 @@ Of interest is the overwritten callback method [java]+execOpened+ shown in <<lst
 [source,java]  
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java[lines=32..41]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java[lines=32..41]
 ----
 
 
@@ -618,8 +618,8 @@ The necessary wiring is provided by the Scout framework, either by the initial p
 [source,java]  
 .Class [java]+DesktopForm+ with its view handler and [java]+startView+ method. Other inner classes and methods are omitted here.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=19..20]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=86..103]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=19..20]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=86..103]
 ----
 
 In the "`Hello World`" application, it is the overwritten [java]+execLoad+ method in the [java]+ViewHandler+ that defines what will happen before the desktop form is shown to the user.
@@ -819,9 +819,9 @@ support of Scout for texts.
 [source,java]  
 .The [java]+DesktopForm+ with its inner class [java]+MainBox+ containing the desktop box and message field
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=69..84]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=102..103]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=69..84]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=102..103]
 ----
 
 As discussed in Section <<sec-helloworld.form>> Scout forms consist of variables, the main box and a number of form handlers.
@@ -847,7 +847,7 @@ The Scout SDK takes care of this time consuming and error prone task.
 [source,java]  
 .The [java]+HelloworldTextProviderService+ class. Its getter method provides the path and the base name for the text property files
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
 ----
 
 [[img-nls_editor, Figure 000]]
@@ -890,7 +890,7 @@ To support Scout developers as much as possible, the Scout SDK offers wizards th
 [source,java]  
 .The server service class [java]+DesktopService+.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[lines=8..15]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[lines=8..15]
 ----
 
 All Scout services need to extend Scout's [java]+AbstractService+ class and implement their own corresponding interface.
@@ -915,9 +915,9 @@ image::{imgsdir}/sdk_plugin_editor_desktopservice.png[]
 [source,xml]  
 .The registration of the [java]+DesktopService+ in the server's [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..6]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=22..27]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=105..106]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..6]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=22..27]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=105..106]
 ----
 
 
@@ -940,7 +940,7 @@ As the name implies, a client proxy service acts as a local proxy service (runni
 [source,xml]  
 .The registration of the [java]+IDesktopService+ proxy service in the client plugin of the "`Hello World`" application. This is the complete content of the client's [java]+plugin.xml+ file.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.client/plugin.xml[]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/plugin.xml[]
 ----
 
 Client proxy services are defined by a Java interface located in the shared plugin of the Scout application.
@@ -1040,10 +1040,10 @@ image::{imgsdir}/helloworld_server_war_plugin.png[]
 [source,xml]  
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ---- 
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..3]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=28..30]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=51..62]
-include::{codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=104..106]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..3]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=28..30]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=51..62]
+TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=104..106]
 ----
 
 

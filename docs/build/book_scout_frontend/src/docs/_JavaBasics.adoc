@@ -88,7 +88,7 @@ may be found online do servlet stuff with annotations (JEE6) not JEE5?
 [source,html]  
 .The [java]+index.html+ start page for the tiny servlet application.
 ---- 
-include::{codedir}/tinyservlet/index.html[]
+TODO include was {codedir}/tinyservlet/index.html[]
 ----
 
 
@@ -96,7 +96,7 @@ include::{codedir}/tinyservlet/index.html[]
 [source,xml]  
 .The [java]+web.xml+ file of the tiny servlet application.
 ---- 
-include::{codedir}/tinyservlet/WEB-INF/web.xml[]
+TODO include was {codedir}/tinyservlet/WEB-INF/web.xml[]
 ----
 
 
@@ -104,7 +104,7 @@ include::{codedir}/tinyservlet/WEB-INF/web.xml[]
 [source,java]  
 .The complete [java]+TinyServlet+ source code.
 ---- 
-include::{codedir}/tinyservlet/WEB-INF/sources/TinyServlet.java[]
+TODO include was {codedir}/tinyservlet/WEB-INF/sources/TinyServlet.java[]
 ----
 
 DONT include servlet jar inside of war file (tomcat doesn't like it)
