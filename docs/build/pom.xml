@@ -67,9 +67,9 @@
               <sourcedir>${project.build.sourceDirectory}</sourcedir>
               <project-version>${project.version}</project-version>
               <imagesdir></imagesdir>
-              <imgsdir>${project.build.directory}/../../../imgs</imgsdir>
-              <mdledir>${project.build.directory}/../../../adoc</mdledir>
-              <codedir>${project.build.directory}/../../../../code</codedir>
+              <imgsdir>${project.basedir}/../../imgs</imgsdir>
+              <mdledir>${project.basedir}/../../adoc</mdledir>
+              <codedir>${project.basedir}/../../../code</codedir>
             </attributes>
           </configuration>
         </plugin>
