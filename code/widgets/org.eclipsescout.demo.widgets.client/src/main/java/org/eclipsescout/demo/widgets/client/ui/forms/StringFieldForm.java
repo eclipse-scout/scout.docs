@@ -781,6 +781,30 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(127)
+      public class TrimTextField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Trim text";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTextInputField().isTrimText());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTextInputField().setTrimText(getValue());
+        }
+      }
+
       @Order(130)
       public class StringInputField extends AbstractStringField {
 
