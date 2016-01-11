@@ -37,6 +37,16 @@
       <artifactId>org.eclipsescout.demo.widgets.client.old</artifactId>
     </dependency>
 
+    <!-- Components for custom components -->
+    <dependency>
+      <groupId>org.eclipsescout.demo.widgets</groupId>
+      <artifactId>org.eclipsescout.demo.widgets.client.custom</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.demo.widgets</groupId>
+      <artifactId>org.eclipsescout.demo.widgets.ui.html.custom</artifactId>
+    </dependency>
+    
     <!-- Jetty Server -->
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>

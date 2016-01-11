@@ -76,7 +76,7 @@ scout.HeatmapField.prototype._renderHeatPointList = function() {
     this.heatmap.removeLayer(this._heatLayer);
   }
   this._heatLayer = L.heatLayer(this.heatPointList, {
-    radius: 20
+    radius: 20, blur: 40, max: 0.0001
   });
   this._heatLayer.addTo(this.heatmap);
 };
