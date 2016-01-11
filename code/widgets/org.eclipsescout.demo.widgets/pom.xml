@@ -31,7 +31,7 @@
   <version>5.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Widgets Application</name>
-  
+
   <modules>
     <!-- Widgets application (core) -->
     <module>../org.eclipsescout.demo.widgets.client</module>
@@ -43,11 +43,12 @@
     <!-- Components from previous widgets application -->
     <module>../org.eclipsescout.demo.widgets.client.old</module>
     <module>../org.eclipsescout.demo.widgets.shared.old</module>
-    
+
     <!-- Components for custom widgets -->
-    <module>../org.eclipsescout.demo.widgets.client.custom</module>
-    <module>../org.eclipsescout.demo.widgets.shared.custom</module>
-    <module>../org.eclipsescout.demo.widgets.ui.html.custom</module>
+<!--    TODO mzi -->
+<!--     <module>../org.eclipsescout.demo.widgets.client.custom</module> -->
+<!--     <module>../org.eclipsescout.demo.widgets.shared.custom</module> -->
+<!--     <module>../org.eclipsescout.demo.widgets.ui.html.custom</module> -->
   </modules>
 
   <dependencyManagement>
@@ -87,7 +88,7 @@
         <artifactId>org.eclipsescout.demo.widgets.ui.html.app.war</artifactId>
         <version>${project.version}</version>
       </dependency>
-	  
+
       <!-- Previous component dependencies -->
       <dependency>
         <groupId>org.eclipsescout.demo.widgets</groupId>
@@ -99,7 +100,7 @@
         <artifactId>org.eclipsescout.demo.widgets.shared.old</artifactId>
         <version>${project.version}</version>
       </dependency>
-	  
+
       <!-- Custom widget component dependencies -->
       <dependency>
         <groupId>org.eclipsescout.demo.widgets</groupId>
@@ -116,7 +117,7 @@
         <artifactId>org.eclipsescout.demo.widgets.ui.html.custom</artifactId>
         <version>${project.version}</version>
       </dependency>
-	  
+
     </dependencies>
   </dependencyManagement>
 
