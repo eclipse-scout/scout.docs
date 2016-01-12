@@ -272,6 +272,11 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             return TEXTS.get("Default");
           }
 
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("DefaultBoxTooltip");
+          }
+
           @Order(10)
           public class FirstNameField extends AbstractStringField {
 

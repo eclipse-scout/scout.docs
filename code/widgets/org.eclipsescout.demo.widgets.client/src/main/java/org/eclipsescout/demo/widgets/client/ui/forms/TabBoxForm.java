@@ -15,7 +15,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox;
@@ -24,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.ExamplesBox;
@@ -34,12 +34,10 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox.CommentsField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox;
-import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.AddFileButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.FileTableField;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox.MonthDetailsBox;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
-import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField.Table.AddMenu;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonthsBox;
 import org.eclipsescout.demo.widgets.shared.Icons;
 
@@ -62,13 +60,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
   @Override
   public void startPageForm() {
     startInternal(new PageFormHandler());
-  }
-
-  /**
-   * @return the AddFileButton
-   */
-  public AddFileButton getAddFileButton() {
-    return getFieldByClass(AddFileButton.class);
   }
 
   @Override
@@ -175,6 +166,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     @Order(20)
     public class TabBox extends AbstractTabBox {
 
+      @Override
+      protected String getConfiguredTooltipText() {
+        return TEXTS.get("TabBoxTooltip");
+      }
+
       @Order(10)
       public class MonthsBox extends AbstractGroupBox {
 
@@ -199,6 +195,39 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Comments");
+        }
+
+        @Order(1000.0)
+        @ClassId("4cf584fb-c3ef-44ce-8e0d-3e3a29a1b43e")
+        public class ClearTextMenu extends AbstractMenu {
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ClearText");
+          }
+
+          @Override
+          protected void execAction() {
+            getCommentsField().setValue(null);
+          }
+        }
+
+        @Order(2000.0)
+        @ClassId("5bc64195-0c6d-4028-ba40-fe1d7ee65a1f")
+        public class ShowTooltipMenu extends AbstractMenu {
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ToggleTooltip");
+          }
+
+          @Override
+          protected void execAction() {
+            if (getCommentsBox().getTooltipText() == null) {
+              getCommentsBox().setTooltipText(TEXTS.get("DynamicTooltip"));
+            }
+            else {
+              getCommentsBox().setTooltipText(null);
+            }
+          }
         }
 
         @Order(10)
@@ -229,6 +258,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           return TEXTS.get("Documents");
         }
 
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("TooltipOfTab", getConfiguredLabel());
+        }
+
         @Order(10)
         public class FileTableField extends AbstractFileTableField {
 
@@ -240,25 +274,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
-          }
-        }
-
-        @Order(20)
-        public class AddFileButton extends AbstractButton {
-
-          @Override
-          protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("AddFile");
-          }
-
-          @Override
-          protected void execClickAction() {
-            getFileTableField().getTable().getMenuByClass(AddMenu.class).doAction();
           }
         }
       }
