@@ -1288,7 +1288,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         getDateTimeMandatoryField().setValue(d);
       }
 
-      Locale oldLocale = NlsLocale.getOrElse(null);
+      Locale oldLocale = NlsLocale.get();
       try {
         NlsLocale.set(getConfigLocaleField().getValue());
         getInputField().setFormat(getDateFieldFormatField().getValue());
