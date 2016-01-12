@@ -45,10 +45,9 @@
     <module>../org.eclipsescout.demo.widgets.shared.old</module>
 
     <!-- Components for custom widgets -->
-<!--    TODO mzi -->
-<!--     <module>../org.eclipsescout.demo.widgets.client.custom</module> -->
-<!--     <module>../org.eclipsescout.demo.widgets.shared.custom</module> -->
-<!--     <module>../org.eclipsescout.demo.widgets.ui.html.custom</module> -->
+    <module>../org.eclipsescout.demo.widgets.client.custom</module>
+    <module>../org.eclipsescout.demo.widgets.shared.custom</module>
+    <module>../org.eclipsescout.demo.widgets.ui.html.custom</module>
   </modules>
 
   <dependencyManagement>
