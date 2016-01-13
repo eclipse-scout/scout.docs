@@ -10,20 +10,19 @@
  ******************************************************************************/
 package org.eclipsescout.demo.widgets.client.ui.desktop.outlines;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.inventory.ClassInventory;
+import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
-import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm;
-import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm;
+import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 
 /**
  * @author mzi
@@ -35,31 +34,45 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
     return TEXTS.get("AdvancedWidgets");
   }
 
+  /**
+   * Adds all example forms that implement IAdvancedExampleForm to this page. From each form a FormPage is created and
+   * added to the page list. The form pages are sorted according to their Order annotation.
+   */
+  @SuppressWarnings("unchecked")
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
+    // assemble a sorted list of all classes implementing IAdvancedExampleForm
+    List<IClassInfo> forms = new ArrayList<>(ClassInventory.get().getAllKnownSubClasses(IAdvancedExampleForm.class));
+    Collections.sort(forms, new Comparator<IClassInfo>() {
 
-    FormPage listBoxFieldPage = new FormPage(ListBoxForm.class);
-    pageList.add(listBoxFieldPage);
+      @Override
+      public int compare(IClassInfo arg1, IClassInfo arg2) {
+        double o1 = -1;
+        double o2 = -1;
 
-    FormPage treeBoxPage = new FormPage(TreeBoxForm.class);
-    pageList.add(treeBoxPage);
+        if (arg1 != null) {
+          Class<IPageForm> c = (Class<IPageForm>) arg1.resolveClass();
+          if (c.getAnnotation(Order.class) != null) {
+            o1 = c.getAnnotation(Order.class).value();
+          }
+        }
 
-    FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
-    pageList.add(smartFieldPage);
+        if (arg2 != null) {
+          Class<IPageForm> c = (Class<IPageForm>) arg2.resolveClass();
+          if (c.getAnnotation(Order.class) != null) {
+            o2 = c.getAnnotation(Order.class).value();
+          }
+        }
 
-    FormPage treeFieldPage = new FormPage(TreeFieldForm.class);
-    pageList.add(treeFieldPage);
+        return (int) Math.signum(o1 - o2);
+      }
 
-    FormPage tableFieldPage = new FormPage(TableFieldForm.class);
-    pageList.add(tableFieldPage);
+    });
 
-    FormPage htmlFieldPage = new FormPage(HtmlFieldForm.class);
-    pageList.add(htmlFieldPage);
-
-    FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
-    pageList.add(imageFieldPage);
-
-    FormPage svgFieldPage = new FormPage(SvgFieldForm.class);
-    pageList.add(svgFieldPage);
+    for (IClassInfo classInfo : forms) {
+      Class<IPageForm> pageForm = (Class<IPageForm>) classInfo.resolveClass();
+      FormPage page = new FormPage(pageForm);
+      pageList.add(page);
+    }
   }
 }

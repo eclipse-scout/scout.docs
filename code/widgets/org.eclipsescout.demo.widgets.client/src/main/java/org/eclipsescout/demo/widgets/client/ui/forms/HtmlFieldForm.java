@@ -33,13 +33,15 @@ import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.BlankButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.ScoutHtmlButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.HtmlFieldForm.MainBox.HTMLField;
 
-public class HtmlFieldForm extends AbstractForm implements IPageForm {
+@Order(6000.0)
+public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public HtmlFieldForm() {
     super();

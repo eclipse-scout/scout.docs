@@ -8,16 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.client.custom;
+package org.eclipsescout.demo.widgets.client.custom.services.common.text;
 
-/**
- * This class is the base for resources contained in this module
- * <p>
- * Do not move it to another package, the package is part of the resource name
- * <p>
- * Usage: <code>ResourceBase.class.getResource("relativeFolder/file.ext")</code>
- */
-public final class ResourceBase {
-  private ResourceBase() {
+import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
+
+@Order(2000)
+public class HeatmapTextProviderService extends AbstractDynamicNlsTextProviderService {
+  @Override
+  protected String getDynamicNlsBaseName() {
+    return "org.eclipsescout.demo.widgets.shared.custom.texts.Texts";
   }
 }

@@ -28,9 +28,5 @@
       <groupId>org.eclipsescout.demo.widgets</groupId>
       <artifactId>org.eclipsescout.demo.widgets.client</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.eclipsescout.demo.widgets</groupId>
-      <artifactId>org.eclipsescout.demo.widgets.shared.custom</artifactId>
-    </dependency>
   </dependencies>
 </project>

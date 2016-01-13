@@ -40,6 +40,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.YearsMonthsLookupCall;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.AutoCheckChildNodesField;
@@ -56,7 +57,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TreeBoxForm.MainBox.Example
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
-public class TreeBoxForm extends AbstractForm implements IPageForm {
+@Order(2000.0)
+public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
   public TreeBoxForm() {
     super();

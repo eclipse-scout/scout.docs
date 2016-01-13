@@ -46,7 +46,6 @@
 
     <!-- Components for custom widgets -->
     <module>../org.eclipsescout.demo.widgets.client.custom</module>
-    <module>../org.eclipsescout.demo.widgets.shared.custom</module>
     <module>../org.eclipsescout.demo.widgets.ui.html.custom</module>
   </modules>
 
@@ -104,11 +103,6 @@
       <dependency>
         <groupId>org.eclipsescout.demo.widgets</groupId>
         <artifactId>org.eclipsescout.demo.widgets.client.custom</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipsescout.demo.widgets</groupId>
-        <artifactId>org.eclipsescout.demo.widgets.shared.custom</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

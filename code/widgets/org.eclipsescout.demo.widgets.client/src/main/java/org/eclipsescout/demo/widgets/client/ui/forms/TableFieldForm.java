@@ -63,6 +63,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.DefaultIconIdField;
@@ -86,7 +87,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TableFieldForm.MainBox.Exam
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
-public class TableFieldForm extends AbstractForm implements IPageForm {
+@Order(5000.0)
+public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public TableFieldForm() {
     super();

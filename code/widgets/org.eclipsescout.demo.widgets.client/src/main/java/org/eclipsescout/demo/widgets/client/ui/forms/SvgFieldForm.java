@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.svg.client.SVGUtility;
 import org.eclipse.scout.rt.svg.client.svgfield.AbstractSvgField;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SvgFieldForm.MainBox.CloseButton;
@@ -42,9 +43,8 @@ import org.w3c.dom.svg.SVGCircleElement;
 import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGLength;
 
-//github.com/BSI-Business-Systems-Integration-AG/org.eclipsescout.demo.git
-
-public class SvgFieldForm extends AbstractForm implements IPageForm {
+@Order(8000.0)
+public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public SvgFieldForm() {
     super();

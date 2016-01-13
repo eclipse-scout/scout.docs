@@ -33,12 +33,13 @@ import org.eclipsescout.demo.widgets.client.custom.ui.forms.HeatmapFieldForm.Mai
 import org.eclipsescout.demo.widgets.client.custom.ui.forms.HeatmapFieldForm.MainBox.TopBox.XField;
 import org.eclipsescout.demo.widgets.client.custom.ui.forms.HeatmapFieldForm.MainBox.TopBox.YField;
 import org.eclipsescout.demo.widgets.client.custom.ui.forms.HeatmapFieldForm.MainBox.TopBox.ZoomLevelField;
-import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 
 /**
  * <h3>{@link HeatmapFieldForm}</h3>
  */
-public class HeatmapFieldForm extends AbstractForm implements IPageForm {
+@Order(100000.0)
+public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
 

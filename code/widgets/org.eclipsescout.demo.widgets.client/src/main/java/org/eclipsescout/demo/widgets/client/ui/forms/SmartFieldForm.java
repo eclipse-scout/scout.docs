@@ -40,6 +40,7 @@ import org.eclipsescout.demo.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentListLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentTreeLookupCall;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseAutoExpandAllField;
@@ -70,7 +71,8 @@ import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType.IC
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SmartFieldForm extends AbstractForm implements IPageForm {
+@Order(3000.0)
+public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
 

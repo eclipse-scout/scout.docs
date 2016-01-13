@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ResourceBase;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image1Field;
@@ -43,7 +44,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.Exam
 import org.eclipsescout.demo.widgets.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
 import org.eclipsescout.demo.widgets.shared.Icons;
 
-public class ImageFieldForm extends AbstractForm implements IPageForm {
+@Order(7000.0)
+public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public ImageFieldForm() {
     super();

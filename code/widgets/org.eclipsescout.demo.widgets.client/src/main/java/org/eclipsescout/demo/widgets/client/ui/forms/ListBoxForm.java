@@ -38,6 +38,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipsescout.demo.widgets.client.services.lookup.FontStyleLookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.UserContentListLookupCall;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.CheckUncheckBox;
@@ -53,7 +54,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.ListBoxForm.MainBox.Example
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipsescout.demo.widgets.shared.services.code.ColorsCodeType;
 
-public class ListBoxForm extends AbstractForm implements IPageForm {
+@Order(1000.0)
+public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
   public ListBoxForm() {
     super();

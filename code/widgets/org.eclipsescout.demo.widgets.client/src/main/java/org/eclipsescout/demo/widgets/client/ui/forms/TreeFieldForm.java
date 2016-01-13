@@ -38,6 +38,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
+import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.MenuContentField;
@@ -48,7 +49,8 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TreeFieldForm.MainBox.Examp
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipsescout.demo.widgets.shared.services.code.IndustryICBCodeType;
 
-public class TreeFieldForm extends AbstractForm implements IPageForm {
+@Order(4000.0)
+public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public TreeFieldForm() {
     super();
