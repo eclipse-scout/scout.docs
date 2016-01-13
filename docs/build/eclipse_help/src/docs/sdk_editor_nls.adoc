@@ -1,4 +1,4 @@
-=== Scout Perspective
+==== NLS Editor
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -9,5 +9,5 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/SdkPerspective.adoc[]
+include::{mdledir}/SdkViewScoutObjectProperties.adoc[]
 

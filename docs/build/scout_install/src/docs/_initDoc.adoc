@@ -7,6 +7,3 @@ include::{mdledir}/_initCommon.adoc[]
 
 :finaldoc: true
 
-:scoutExplorerView: Scout Explorer View
-:scoutPropView: Scout Properties View
-

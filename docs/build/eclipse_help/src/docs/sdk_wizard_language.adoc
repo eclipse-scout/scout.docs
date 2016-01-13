@@ -1,4 +1,4 @@
-== Scout Tooling
+==== Add a Language Wizard
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -9,12 +9,4 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Eclipse Scout comes with a comprehensive tooling, the Scout SDK.
-
-include::{mdledir}/SdkScoutTooling.adoc[]
-
-The Scout Tooling provides: 
-
-* <<sdk_editor.adoc#, Editor>>
-* <<sdk_wizard.adoc#, Scout Wizards>>
-
+Text is missing

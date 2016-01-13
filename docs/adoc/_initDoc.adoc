@@ -5,9 +5,6 @@ ifndef::imgsdir[:imgsdir: ../imgs]
 ifndef::codedir[:codedir: ../../code]
 ifndef::mdledir[:mdledir: .]
 
-:scoutExplorerView: Scout Explorer view
-:scoutPropView: Scout Object Properties view
-
 :sectanchors:
 
 include::_initCommon.adoc[]

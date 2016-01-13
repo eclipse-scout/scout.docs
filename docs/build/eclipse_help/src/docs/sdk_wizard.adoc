@@ -1,4 +1,4 @@
-==== Scout Object Properties View
+=== Scout Wizards
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -9,5 +9,8 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/SdkViewScoutObjectProperties.adoc[]
+The Scout SDK provides following Wizards:
 
+* <<sdk_wizard_project.adoc#, New Project Wizard>>
+* <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>>
+* <<sdk_wizard_language.adoc#, Add a Language Wizard>>

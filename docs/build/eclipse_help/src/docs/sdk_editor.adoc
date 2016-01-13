@@ -1,4 +1,4 @@
-==== Scout Explorer View
+=== Scout Editors
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -9,5 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/SdkViewScoutExplorer.adoc[]
+The Scout SDK provides following Editors:
 
+* Some extensions to the existing <<sdk_editor_java.adoc#, Java Editor>>.
+* A <<sdk_editor_nls.adoc#, NLS Editor>> to edit the different localization Texts properties files.

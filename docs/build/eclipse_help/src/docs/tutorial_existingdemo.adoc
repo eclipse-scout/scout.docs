@@ -1,0 +1,85 @@
+=== Import existing Demo Application Tutorial
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+With this tutorial you will learn how to import existing Scout Demo Application into your workspace. 
+
+==== Import projects
+
+Open the Import wizard with the File => Import... Menu.
+In the dialog select "Projects into Workspace" and click on Next.
+
+[[img-oomph_existing_project, Figure Import Wizard]]
+.The Import Wizard in Eclipse.
+image::{imgsdir}/oomph_existing_project.png[]
+
+In the next Step:
+
+As long as the Eclipse Scout project is not integrated in the default catalog, you need to import the setup file manually.
+Click on the green plus icon "Add user projects" (top right corner).
+In the Dialog:
+
+* Select "Eclipse Projects" as Catalog
+* Enter the URI to our Setup File: `https://git.eclipse.org/c/scout/oomph.git/plain/Scout.setup`
+
+[[img-oomph_add_user_projects, Figure Add User Projects Dialog]]
+.Add User Projects Dialog.
+image::{imgsdir}/oomph_add_user_projects.png[]
+
+When the project is available in the catalog:
+
+[[img-oomph_exiting_projects1, Figure "Projects" Step 1]]
+.Top part of the "Projects" Step of the Importer.
+image::{imgsdir}/oomph_exiting_projects1.png[]
+
+* [1] search for the "Scout Demo App".
+* [2] add it to the list of projects with the "Add Projects" arrow button.
+* [3] adjust the Stream: select the latest milestone release (called "Neon (M4 release)" by time of writing).
+
+[[img-oomph_exiting_projects2, Figure "Projects" Step 2]]
+.Bottom part of the "Projects" Step of the Importer.
+image::{imgsdir}/oomph_exiting_projects2.png[]
+
+Click on Next.
+
+User variables are cached by Oomph (for example, choices selected previously).
+To display all variables activate the Checkbox "Show all Variables" in the bottom left corner.
+
+[[img-oomph_exiting_variables, Figure "Variables" Step]]
+."Variables" Step of the Importer.
+image::{imgsdir}/oomph_exiting_variables.png[]
+
+It is important to set the variables that correspond to your use case.
+
+* Git clone location rule: select the pattern that correspond to your workflow (If you do not know the pattern corresponding to "Located in a folder named '.git/{lt}repo{gt}' within the workspace folder" is probably the easiest one to use)
+* Target Platform: default good ("None" because we do not used Target platform)
+* JRE 1.7 Location: put here the path to a Java 7 JRE
+* JRE 1.8 Location: put here the path to a Java 8 JRE
+* Scout Github repository: if you do not have a GitHub account the pattern corresponding to "HTTPS (read-only, anonymous)" is the easiest to use.
+
+
+==== Start the application
+
+Open the `contacts-all-dev.launch` file in the `org.eclipse.scout.contacts.all.app.dev` project.
+
+image::{imgsdir}/run_contracts_all_dev.png[]
+
+Select "Run As => contacts-all-dev".
+
+Open the application in a web browser: http://localhost:8082/
+
+==== What's Next?
+
+Try the Contracts application out.
+It will give you an overview of what you can do with Scout.
+You can browse through the data and open the different forms.
+
+Have a look at the code.
+The Scout Team welcomes pull requests with improvements.

@@ -9,7 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-After installing the Eclipse Scout package you are now ready to implement your first Scout application. 
+With this tutorial you will learn how to create your first Scout application. 
 
 ==== Create a Scout Project
 
@@ -19,3 +19,6 @@ include::{mdledir}/CreateNewProject.adoc[]
 
 include::{mdledir}/RunTheApplication.adoc[]
 
+==== What's Next?
+
+In the next tutorial, you will learn how to import existing scout applications into your workspace.
