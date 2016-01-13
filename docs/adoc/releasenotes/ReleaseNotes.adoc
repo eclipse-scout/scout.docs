@@ -20,12 +20,14 @@ Here are the release notes for the Scout Release 6.0
 
 *TODO: a lot is still missing!*
 
-== HTML
-Use the class `org.eclipse.scout.rt.platform.html.HTML` to build html content instead of concatenate the strings manually.
+== What's New
 
-== Various Notes
+=== HTML
+Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content instead of concatenate the strings manually.
+
+=== API Changes
 * Behavior change of `Table` in `AbstractTableField`: Do not execute `AbstractTable.execContentChanged()` when `valueChangeTriggers` flag on `IFormField` is `false`.
-* Removed chart box because it has not been used and there is no ui implementation.
+* Removed chart box because it has not been used and there is no UI implementation.
 * Tree: Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible
 * `ITree.getConfiguredDefaultIconId()` in addition to `ITree.getConfiguredIconId`
 +
@@ -78,3 +80,14 @@ The behavior may be controlled using:
 * `AbstractFormField.set/isStatusVisible` added.
 * `AbstractDesktop.isOutlineChanging` added.
 * `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
+
+== Known Bugs and Limitations
+
+=== Selection in disabled text fields
+Firefox (tested with v 35.0.1): it's not possible to select text in a disabled text field. There is no workaround. An often suggested workaround is to use the readonly attribute instead of disabled, but this leads to a completely different behavior when it comes to event handling. When a field is disabled it doesn't fire any events (for instance: click), but when it's set to readonly event handling is still enabled. In other words: we'd have to implement browser/widget default behavior to work around this problem -- additionally the workaround should only affect Firefox but none of the other browsers (where this is not an issue at all).
+
+=== Drag and drop support
+IE9 does not support dropping files. Therefore, drag and drop in file chooser is not supported for that browser.
+
+=== Input placeholders
+On-field labels are not visible in IE9 because it lacks support for the "placeholder" attribute.
