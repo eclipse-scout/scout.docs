@@ -25,10 +25,6 @@ import org.eclipsescout.demo.widgets.shared.services.code.UiThemeCodeType;
 
 public class OptionsForm extends AbstractForm {
 
-  public OptionsForm() {
-    super();
-  }
-
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Options");
@@ -98,6 +94,7 @@ public class OptionsForm extends AbstractForm {
   }
 
   public class NewHandler extends AbstractFormHandler {
+
     @Override
     protected void execStore() {
       getDesktop().setTheme(getUiThemeField().getValue());
