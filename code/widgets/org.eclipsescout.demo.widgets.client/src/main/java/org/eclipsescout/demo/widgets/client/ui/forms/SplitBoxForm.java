@@ -13,7 +13,9 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -26,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -34,6 +37,10 @@ import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipsescout.demo.widgets.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox.FromField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox;
@@ -47,7 +54,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.Exampl
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.SizeField;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox.FileTableField;
-import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.FieldVisibilityBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
@@ -71,9 +78,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the DetailsBox
-   */
   public DetailsBox getBottomBox() {
     return getFieldByClass(DetailsBox.class);
   }
@@ -83,30 +87,18 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DetailsBox
-   */
   public DetailsBox getDetailsBox() {
     return getFieldByClass(DetailsBox.class);
   }
 
-  /**
-   * @return the FieldVisibilityBox
-   */
-  public FieldVisibilityBox getFieldVisibilityBox() {
-    return getFieldByClass(FieldVisibilityBox.class);
+  public SplitterVisibilityBox getSplitterVisibilityBox() {
+    return getFieldByClass(SplitterVisibilityBox.class);
   }
 
-  /**
-   * @return the FileTableField
-   */
   public FileTableField getFileTableField() {
     return getFieldByClass(FileTableField.class);
   }
 
-  /**
-   * @return the FilesBox
-   */
   public FilesBox getFilesBox() {
     return getFieldByClass(FilesBox.class);
   }
@@ -115,65 +107,38 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the ModifiedField
-   */
   public ModifiedField getModifiedField() {
     return getFieldByClass(ModifiedField.class);
   }
 
-  /**
-   * @return the NameField
-   */
   public NameField getNameField() {
     return getFieldByClass(NameField.class);
   }
 
-  /**
-   * @return the PreviewField
-   */
   public PreviewField getPreviewField() {
     return getFieldByClass(PreviewField.class);
   }
 
-  /**
-   * @return the PreviewBox
-   */
   public PreviewBox getPreviewBox() {
     return getFieldByClass(PreviewBox.class);
   }
 
-  /**
-   * @return the SizeField
-   */
   public SizeField getSizeField() {
     return getFieldByClass(SizeField.class);
   }
 
-  /**
-   * @return the ExamplesBox
-   */
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the SplitHorizontalField
-   */
   public SplitHorizontalField getSplitHorizontalField() {
     return getFieldByClass(SplitHorizontalField.class);
   }
 
-  /**
-   * @return the SplitVerticalField
-   */
   public SplitVerticalField getSplitVerticalField() {
     return getFieldByClass(SplitVerticalField.class);
   }
 
-  /**
-   * @return the undefined
-   */
   public FromField getfromField() {
     return getFieldByClass(FromField.class);
   }
@@ -373,7 +338,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     public class SplitVisibleEnabledField extends AbstractSplitBox {
 
       @Order(10)
-      public class FieldVisibilityBox extends AbstractGroupBox {
+      public class SplitterVisibilityBox extends AbstractGroupBox {
 
         @Override
         protected int getConfiguredGridColumnCount() {
@@ -387,20 +352,20 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("SplitterVisibility");
+          return "Splitter visibility";
         }
 
         @Order(10)
         public class VisiblePreviewField extends AbstractBooleanField {
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisiblePreview");
           }
 
           @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisiblePreview");
+          protected boolean getConfiguredLabelVisible() {
+            return true;
           }
 
           @Override
@@ -418,13 +383,13 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         public class VisibleDetailsField extends AbstractBooleanField {
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisibleDetails");
           }
 
           @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleDetails");
+          protected boolean getConfiguredLabelVisible() {
+            return true;
           }
 
           @Override
@@ -437,10 +402,67 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             setValue(getDetailsBox().isVisible());
           }
         }
+
+        @Order(30)
+        public class EnabledSequenceBox extends AbstractSequenceBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Splitter enabled";
+          }
+
+          @Order(10)
+          public class EnabledVerticalField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Vertical";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getSplitVerticalField().setSplitterEnabled(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getSplitVerticalField().isSplitterEnabled());
+            }
+          }
+
+          @Order(20)
+          public class EnabledHorizontalField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Horizontal";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getSplitHorizontalField().setSplitterEnabled(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getSplitHorizontalField().isSplitterEnabled());
+            }
+          }
+        }
       }
 
       @Order(20)
-      public class FieldEnabledBox extends AbstractGroupBox {
+      public class SplitterPositionBox extends AbstractGroupBox {
 
         @Override
         protected int getConfiguredGridColumnCount() {
@@ -454,96 +476,114 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("SplitterEnabled");
+          return "Splitter position";
         }
 
         @Order(10)
-        public class VisiblePreviewField extends AbstractBooleanField {
+        public class SplitterPositionTypeVField extends AbstractSmartField<String> {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("EnabledHorizontal");
+            return "Position type (V)";
           }
 
           @Override
-          protected void execChangedValue() {
-            getSplitHorizontalField().setSplitterEnabled(getValue());
+          protected String getConfiguredTooltipText() {
+            return "Splitter position type of vertical splitter";
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+            return P_SplitterPositionTypeLookupCall.class;
           }
 
           @Override
           protected void execInitField() {
-            setValue(getSplitHorizontalField().isSplitterEnabled());
+            setValue(getSplitVerticalField().getSplitterPositionType());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getSplitVerticalField().setSplitterPositionType(getValue());
+            if (CompareUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+              getFieldByClass(SplitterPositionVField.class).setMaxValue(BigDecimal.ONE);
+            }
+            else {
+              getFieldByClass(SplitterPositionVField.class).setMaxValue(null);
+            }
           }
         }
 
         @Order(20)
-        public class VisibleDetailsField extends AbstractBooleanField {
+        public class SplitterPositionVField extends P_AbstractSplitterPositionField {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("EnabledVertical");
+            return "Position (V)";
           }
 
           @Override
-          protected void execChangedValue() {
-            getSplitVerticalField().setSplitterEnabled(getValue());
+          protected String getConfiguredTooltipText() {
+            return "Splitter position of vertical splitter";
           }
 
           @Override
-          protected void execInitField() {
-            setValue(getSplitVerticalField().isSplitterEnabled());
+          protected ISplitBox getSplitBox() {
+            return getSplitVerticalField();
           }
         }
 
         @Order(30)
-        public class SplitterPositionBox extends AbstractSequenceBox {
+        public class SplitterPositionTypeHField extends AbstractSmartField<String> {
 
           @Override
           protected String getConfiguredLabel() {
-            return "Splitter position";
+            return "Position type (H)";
           }
 
           @Override
-          protected boolean getConfiguredAutoCheckFromTo() {
-            return false;
+          protected String getConfiguredTooltipText() {
+            return "Splitter position type of horizontal splitter";
           }
 
-          @Order(10)
-          public class SplitterPositionVField extends P_AbstractSplitterPositionField {
-
-            @Override
-            protected String getConfiguredLabel() {
-              return "V";
-            }
-
-            @Override
-            protected String getConfiguredTooltipText() {
-              return "Splitter position of vertical splitter";
-            }
-
-            @Override
-            protected ISplitBox getSplitBox() {
-              return getSplitVerticalField();
-            }
+          @Override
+          protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+            return P_SplitterPositionTypeLookupCall.class;
           }
 
-          @Order(20)
-          public class SplitterPositionHField extends P_AbstractSplitterPositionField {
+          @Override
+          protected void execInitField() {
+            setValue(getSplitHorizontalField().getSplitterPositionType());
+          }
 
-            @Override
-            protected String getConfiguredLabel() {
-              return "H";
+          @Override
+          protected void execChangedValue() {
+            getSplitHorizontalField().setSplitterPositionType(getValue());
+            if (CompareUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+              getFieldByClass(SplitterPositionHField.class).setMaxValue(BigDecimal.ONE);
             }
+            else {
+              getFieldByClass(SplitterPositionHField.class).setMaxValue(null);
+            }
+          }
+        }
 
-            @Override
-            protected String getConfiguredTooltipText() {
-              return "Splitter position of horizontal splitter";
-            }
+        @Order(40)
+        public class SplitterPositionHField extends P_AbstractSplitterPositionField {
 
-            @Override
-            protected ISplitBox getSplitBox() {
-              return getSplitHorizontalField();
-            }
+          @Override
+          protected String getConfiguredLabel() {
+            return "Position (H)";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Splitter position of horizontal splitter";
+          }
+
+          @Override
+          protected ISplitBox getSplitBox() {
+            return getSplitHorizontalField();
           }
         }
       }
@@ -567,11 +607,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Override
-    protected BigDecimal getConfiguredMaxValue() {
-      return BigDecimal.ONE;
-    }
-
-    @Override
     protected void execChangedValue() {
       if (getValue() != null) {
         getSplitBox().setSplitterPosition(getValue().doubleValue());
@@ -586,7 +621,9 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       getSplitBox().addPropertyChangeListener(ISplitBox.PROP_SPLITTER_POSITION, new PropertyChangeListener() {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-          setValueWithoutValueChangeTriggers((double) evt.getNewValue());
+          if (!P_AbstractSplitterPositionField.this.isValueChanging()) {
+            setValueWithoutValueChangeTriggers((double) evt.getNewValue());
+          }
         }
       });
     }
@@ -599,6 +636,19 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       finally {
         setValueChangeTriggerEnabled(true);
       }
+    }
+  }
+
+  public static class P_SplitterPositionTypeLookupCall extends LocalLookupCall<String> {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<String>> execCreateLookupRows() {
+      ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE, "Relative"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST, "Absolute (first box)"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND, "Absolute (second box)"));
+      return rows;
     }
   }
 }
