@@ -22,7 +22,7 @@
   </parent>
 
   <properties>
-    <jdk.source.version>1.8</jdk.source.version>
+    <jdk.source.version>1.7</jdk.source.version>
     <scout.version>5.2.0-SNAPSHOT</scout.version>
   </properties>
 
