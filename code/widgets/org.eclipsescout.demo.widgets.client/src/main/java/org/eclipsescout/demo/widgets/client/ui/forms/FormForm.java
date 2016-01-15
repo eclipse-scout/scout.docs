@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -30,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
@@ -57,20 +59,19 @@ import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.Controller
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox.Buttons1Box;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox.Field1Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox.HideField1Button;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField2GroupbBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField2GroupbBox.Buttons2Box;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField2GroupbBox.Field2Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField2GroupbBox.HideField2Button;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField3GroupbBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField3GroupbBox.Field3Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField3GroupbBox.HideField3Button;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField4GroupbBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField4GroupbBox.Field4Field;
-import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField4GroupbBox.HideField4Button;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.CancellationDurationField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
@@ -127,6 +128,14 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseOnChildCloseField.class);
   }
 
+  public Buttons1Box getButtons1Box() {
+    return getFieldByClass(Buttons1Box.class);
+  }
+
+  public Buttons2Box getButtons2Box() {
+    return getFieldByClass(Buttons2Box.class);
+  }
+
   public OpenFormButton getOpenFormButton() {
     return getFieldByClass(OpenFormButton.class);
   }
@@ -143,20 +152,12 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Field1Field.class);
   }
 
-  public HideField1Button getHideField1Button() {
-    return getFieldByClass(HideField1Button.class);
-  }
-
   public FormField2GroupbBox getFormField2GroupbBox() {
     return getFieldByClass(FormField2GroupbBox.class);
   }
 
   public Field2Field getField2Field() {
     return getFieldByClass(Field2Field.class);
-  }
-
-  public HideField2Button getHideField2Button() {
-    return getFieldByClass(HideField2Button.class);
   }
 
   public FormField3GroupbBox getFormField3GroupbBox() {
@@ -167,20 +168,12 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Field3Field.class);
   }
 
-  public HideField3Button getHideField3Button() {
-    return getFieldByClass(HideField3Button.class);
-  }
-
   public FormField4GroupbBox getFormField4GroupbBox() {
     return getFieldByClass(FormField4GroupbBox.class);
   }
 
   public Field4Field getField4Field() {
     return getFieldByClass(Field4Field.class);
-  }
-
-  public HideField4Button getHideField4Button() {
-    return getFieldByClass(HideField4Button.class);
   }
 
   public LongRunningOperationBox getLongRunningOperationBox() {
@@ -418,35 +411,12 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20)
-        public class HideField1Button extends AbstractButton {
-
+        @Order(15)
+        @ClassId("628359df-90ac-4954-bd69-aa38bbf1d2c6")
+        public class Buttons1Box extends AbstractFieldButtonsBox {
           @Override
-          protected String getConfiguredLabel() {
-            return "Hide field in 3s";
-          }
-
-          @Override
-          protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected void execClickAction() {
-            ModelJobs.schedule(new IRunnable() {
-
-              @Override
-              public void run() throws Exception {
-                getField1Field().setVisible(false);
-              }
-            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withExecutionTrigger(Jobs.newExecutionTrigger()
-                    .withStartIn(3, TimeUnit.SECONDS)));
+          protected IFormField getField() {
+            return getField1Field();
           }
         }
       }
@@ -468,35 +438,12 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @ClassId("b057fa1f-d478-4007-896b-254a71d6dfba")
         @Order(20)
-        public class HideField2Button extends AbstractButton {
-
+        public class Buttons2Box extends AbstractFieldButtonsBox {
           @Override
-          protected String getConfiguredLabel() {
-            return "Hide field in 3s";
-          }
-
-          @Override
-          protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected void execClickAction() {
-            ModelJobs.schedule(new IRunnable() {
-
-              @Override
-              public void run() throws Exception {
-                getField2Field().setVisible(false);
-              }
-            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withExecutionTrigger(Jobs.newExecutionTrigger()
-                    .withStartIn(3, TimeUnit.SECONDS)));
+          protected IFormField getField() {
+            return getField2Field();
           }
         }
       }
@@ -519,34 +466,10 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class HideField3Button extends AbstractButton {
-
+        public class Buttons3Box extends AbstractFieldButtonsBox {
           @Override
-          protected String getConfiguredLabel() {
-            return "Hide field in 3s";
-          }
-
-          @Override
-          protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected void execClickAction() {
-            ModelJobs.schedule(new IRunnable() {
-
-              @Override
-              public void run() throws Exception {
-                getField3Field().setVisible(false);
-              }
-            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withExecutionTrigger(Jobs.newExecutionTrigger()
-                    .withStartIn(3, TimeUnit.SECONDS)));
+          protected IFormField getField() {
+            return getField3Field();
           }
         }
       }
@@ -569,34 +492,10 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class HideField4Button extends AbstractButton {
-
+        public class Buttons4Box extends AbstractFieldButtonsBox {
           @Override
-          protected String getConfiguredLabel() {
-            return "Hide field in 3s";
-          }
-
-          @Override
-          protected int getConfiguredDisplayStyle() {
-            return DISPLAY_STYLE_LINK;
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected void execClickAction() {
-            ModelJobs.schedule(new IRunnable() {
-
-              @Override
-              public void run() throws Exception {
-                getField4Field().setVisible(false);
-              }
-            }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
-                .withExecutionTrigger(Jobs.newExecutionTrigger()
-                    .withStartIn(3, TimeUnit.SECONDS)));
+          protected IFormField getField() {
+            return getField4Field();
           }
         }
       }
@@ -760,6 +659,68 @@ public class FormForm extends AbstractForm implements IPageForm {
       };
 
       public abstract IDisplayParent getValue();
+    }
+  }
+
+  @Order(15)
+  public static abstract class AbstractFieldButtonsBox extends AbstractSequenceBox {
+    @Override
+    protected boolean getConfiguredAutoCheckFromTo() {
+      return false;
+    }
+
+    @Override
+    protected boolean getConfiguredLabelVisible() {
+      return false;
+    }
+
+    protected abstract IFormField getField();
+
+    @Order(20)
+    public class HideFieldButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return "Hide field in 3s";
+      }
+
+      @Override
+      protected int getConfiguredDisplayStyle() {
+        return DISPLAY_STYLE_LINK;
+      }
+
+      @Override
+      protected boolean getConfiguredProcessButton() {
+        return false;
+      }
+
+      @Override
+      protected void execClickAction() {
+        ModelJobs.schedule(new IRunnable() {
+
+          @Override
+          public void run() throws Exception {
+            getField().setVisible(false);
+          }
+        }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+            .withExecutionTrigger(Jobs.newExecutionTrigger()
+                .withStartIn(3, TimeUnit.SECONDS)));
+      }
+    }
+
+    @Order(2000)
+    @ClassId("e2e8be68-0b2e-47d9-a25e-155d2628a71b")
+    public class StatusButton extends AbstractStatusButton {
+
+      @Override
+      protected IFormField getField() {
+        return AbstractFieldButtonsBox.this.getField();
+      }
+
+      @Override
+      protected boolean getConfiguredProcessButton() {
+        return false;
+      }
     }
   }
 }

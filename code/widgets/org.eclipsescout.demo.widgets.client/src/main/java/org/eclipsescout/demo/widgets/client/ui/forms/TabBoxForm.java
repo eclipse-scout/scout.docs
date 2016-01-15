@@ -14,6 +14,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -39,6 +40,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.M
 import org.eclipsescout.demo.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox.MonthDetailsBox;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractMonthsBox;
+import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractStatusButton;
 import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
@@ -230,7 +232,17 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(10)
+        @Order(2500)
+        @ClassId("bdbbd8ca-0cf3-4993-b266-69d4730b0c56")
+        public class StatusButton extends AbstractStatusButton {
+
+          @Override
+          protected IFormField getField() {
+            return CommentsBox.this;
+          }
+        }
+
+        @Order(3000.0)
         public class CommentsField extends AbstractStringField {
 
           @Override
