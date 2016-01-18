@@ -34,7 +34,22 @@ Example scenarios for client notifications are:
 
 Scout itself uses client notifications to synchronize code type and permission caches and session shared variables.
 
+== Data Flow
+
+A client notification message is just a serializable object.
+It is published on the server and can be addressed either to all client nodes or only to a specific session or user.
+On the UI server side, handlers can be used to react upon incoming notifications.
+
+Client notification handlers may change the state of the client model. In case of visible changes in the UI, these changes are automatically
+reflected in the UI.
+
+In case of multiple server nodes, the client notifications are synchronized using cluster notifications to ensure that all UI servers receive the notifications.
+
 == Push Technology
+
+[[img-client_notifications, figure]]
+.Long Polling
+image::{imgsdir}/cn_long_polling.png[]
 
 Client notifications are implemented using `long polling` as described below, because long polling works reliably in most corporate networks with proxy servers between server and client
  as well as with security policies that do not allow server push.
@@ -44,12 +59,21 @@ the server holds the request open and waits until new notifications are availabl
 
 In addition to the long polling mechanism, pending client notifications are also transferred to the client along with the response of regular client requests.
 
-== Compontents
+== Components
+A client notification can be published on the server using the `ClientNotificationRegistry`.
+Publishing can be done either in a non-transactional or transactional way (only processed, when the transaction is committed).
 
-A client notification message can be any serializable Object.
-It is published on the server and can be addressed either to all client nodes or only to a specific session or user.
-On the client side, handlers can be used to react upon incoming notifications.
-If there are multiple server nodes, the client notifications are synchronized using cluster notifications to ensure that all clients receive the notifications.
+The UI Server either receives the notifications via the `ClientNotificationPoller` or in case of transactional notifications
+together with the response of a regular service request. The notification is then dispatched to the corresponding handler.
+
+When a client notifications is published on the server, it is automatically synchronized with the other server nodes (by default).
+
+[[img-client_notification_big_picture, figure]]
+.Client Notification Big Picture
+image::{imgsdir}/cn_big_picture.png[]
+
+== Publishing ClientNotifications
+
 
 ////
 [[img-client_notification_queues, figure]]
