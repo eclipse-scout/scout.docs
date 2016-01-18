@@ -72,8 +72,39 @@ When a client notifications is published on the server, it is automatically sync
 .Client Notification Big Picture
 image::{imgsdir}/cn_big_picture.png[]
 
-== Publishing ClientNotifications
+== Publishing
 
+[source,java,indent=0]
+.Publishing Client Notifications
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=PublishClientNotification]
+----
+
+There are several options to choose from when publishing a new client notification:
+
+=== ClientNotificationAddress
+
+The `ClientNotificationAddress` determines which how the client notification needs to be dispatched and handled.
+A client notification can be addressed to
+
+* all nodes
+* all sessions
+* one or more specific session
+* one or more specific user
+
+
+=== Transactional vs. Non-transactional
+
+Client notifications can be published in a transactional or non-transactional way.
+
+* Transactional means that the client notifications are only published once the transaction is committed.
+If the transaction fails, client notifications are disregarded.
+* Non-transactional means that client notifications are published immediately without considering any transactions.
+
+=== Distributing to all Cluster Nodes
+
+Generally, it makes sense to distribute the client notifications automatically to all other server cluster nodes (if available). This is achieved using `ClusterNotifications`.
+It is however also possible to publish client notifications without cluster distribution. E.g. in case of client notifications already received from other cluster nodes.
 
 ////
 [[img-client_notification_queues, figure]]
