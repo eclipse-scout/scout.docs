@@ -29,18 +29,13 @@ Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content in
 
 ==== Table
 * Behavior change of `Table` in `AbstractTableField`: Do not execute `AbstractTable.execContentChanged()` when `valueChangeTriggers` flag on `IFormField` is `false`.
-* returned collection of `ITableColumnFilterManager.getFilters()` is now unmodifiable.
-** new method `ITableColumnFilterManager.removeFilter(IColumn col)`.
-
-==== Chart Box
-* Removed chart box because it has not been used and there is no UI implementation.
+* Returned collection of `ITableColumnFilterManager.getFilters()` is now unmodifiable.
+* New method `ITableColumnFilterManager.removeFilter(IColumn col)`.
 
 ==== Tree
-* Tree: Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible
-* `ITree.getConfiguredDefaultIconId()` in addition to `ITree.getConfiguredIconId`
-+
-Difference: DefaultIconId is used as default for all tree nodes that don't have an icon on their own. IconId may be used in the same way as the title, e.g as outline icon.
-* The model can define whether child pages of a page should be added immediately to the outline tree or lazily. If nodes are added lazily, a dummy "show all" node is shown instead.
+* `ITree.getConfiguredDefaultIconId()` in addition to `ITree.getConfiguredIconId`. The difference is as follows: _DefaultIconId_ is used as default for all tree nodes that don't have an icon on their own. _IconId_ may be used in the same way as the title, e.g as outline icon.
+
+* Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible. The model can define whether child pages of a page should be added immediately to the outline tree or lazily. If nodes are added lazily, a dummy "show all" node is shown instead.
 +
 Node pages never add child pages lazily. Table pages add child nodes lazily when they have more than a specific number of child pages (default 1).
 +
@@ -49,18 +44,22 @@ The behavior may be controlled using:
 ** `boolean getConfiguredLazyAddChildPagesToOutline()` --> default `false`, for `AbstractPageWithTable` the default is `true`.
 ** `int getConfiguredLazyAddChildPagesToOutlineThreshold()` --> setting for `AbstractPageWithTable`, after how many child pages the lazy setting should be active (default 1)
 
+==== Chart Box
+Removed chart box because it has not been used and there is no UI implementation.
+
 ==== File Chooser (File Upload)
-* File upload size is always limited now (otherwise server might run out of memory if too large files are sent). Default size is 50 MB, but every field might specify lower/higher sizes:
-** `org.eclipse.scout.rt.client.ui.IDNDSupport.setDropMaximumSize(long)`
-** `org.eclipse.scout.rt.client.ui.IDNDSupport.getDropMaximumSize()`
-** `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.setMaximumUploadSize(long)`
-** `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.getMaximumUploadSize()`
-** `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.setMaximumUploadSize(long)`
-** `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.getMaximumUploadSize()`
-** Also added `getConfigured...()` methods were applicable for properties above.
+File upload size is always limited now (otherwise server might run out of memory if too large files are sent). Default size is 50 MB, but every field might specify lower/higher sizes:
+
+* `org.eclipse.scout.rt.client.ui.IDNDSupport.setDropMaximumSize(long)`
+* `org.eclipse.scout.rt.client.ui.IDNDSupport.getDropMaximumSize()`
+* `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.setMaximumUploadSize(long)`
+* `org.eclipse.scout.rt.client.ui.basic.filechooser.IFileChooser.getMaximumUploadSize()`
+* `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.setMaximumUploadSize(long)`
+* `org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.IFileChooserField.getMaximumUploadSize()`
+* Also added `getConfigured...()` methods were applicable for properties above.
 
 ==== Group Box
-* `AbstractGroupBox.setBorderVisible(false)` does not change visibility of label anymore. Label of group-box must be made invisible by calling `setLabelVisible(false)`.
+`AbstractGroupBox.setBorderVisible(false)` does not change visibility of label anymore. Label of group-box must be made invisible by calling `setLabelVisible(false)`.
 
 ==== Smart Field
 * `AbstractContentAssistField` and `IProposalChooser` implementations now have the ability to provide an inner class which extend `AbstractTree` or `AbstractTable` to provide a custom implementation used in the proposal chooser.
@@ -91,11 +90,13 @@ The behavior may be controlled using:
 * `AbstractDesktop.isOutlineChanging` added.
 
 ==== Form
-* API Added `IForm.start()`: Mainly useful for forms with just one handler. (detail forms, tool forms etc.). Maybe implemented by the concrete form. The default implementation at AbstractForm uses getHandler() to start the form.
+Added `IForm.start()`: Mainly useful for forms with just one handler. (detail forms, tool forms etc.). May be implemented by the concrete form. The default implementation at AbstractForm uses getHandler() to start the form.
 
-==== New Widgets
-* Added bean field and bean column. See `AbstractBeanField`, `AbstractBeanColumn` for details.
-* A new widget has been added: `WizardProgressField`. It is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
+==== Bean Field / Bean Column [New]
+Added bean field and bean column. See `AbstractBeanField`, `AbstractBeanColumn` for details.
+
+==== Wizard Progress Field [New]
+A new widget has been added: `WizardProgressField`. It is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
 
 ==== Various Changes
 * `ILabelField`, `IHtmlField` and `IStringField` are now `IHtmlCapable`.
@@ -103,6 +104,7 @@ The behavior may be controlled using:
 * `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
 * `AbstractFormField.set/isStatusVisible` added.
 * `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
+* The unused, obsolete classes `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent` and `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener` were removed.
 
 == Known Bugs and Limitations
 
