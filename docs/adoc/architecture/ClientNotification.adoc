@@ -72,6 +72,19 @@ When a client notifications is published on the server, it is automatically sync
 .Client Notification Big Picture
 image::{imgsdir}/cn_big_picture.png[]
 
+=== Multiple Server Nodes
+
+[[img-client_notification_big_picture, figure]]
+.Client Notification Multiple Server Nodes
+image::{imgsdir}/cn_multiple_servers.png[]
+
+In order to deal with multiple ui-server nodes, the server holds a single notifications queue per ui-server node.
+
+In this queues only the relevant notifications need to be kept:
+If a client notification is addressed to a session or user, that does not exist on a ui-server node, it is not added to the queue.
+
+Sessions and corresponding users are registered on the server upon creation (and de-registered after destruction).
+
 == Publishing
 
 [source,java,indent=0]
@@ -92,7 +105,6 @@ A client notification can be addressed to
 * one or more specific session
 * one or more specific user
 
-
 === Transactional vs. Non-transactional
 
 Client notifications can be published in a transactional or non-transactional way.
@@ -106,9 +118,60 @@ If the transaction fails, client notifications are disregarded.
 Generally, it makes sense to distribute the client notifications automatically to all other server cluster nodes (if available). This is achieved using `ClusterNotifications`.
 It is however also possible to publish client notifications without cluster distribution. E.g. in case of client notifications already received from other cluster nodes.
 
-////
-[[img-client_notification_queues, figure]]
-.Client Notification Queues
-image::{imgsdir}/clientNotificationQueues.png[]
-////
+=== Coalescing Notifications
+It is possible that a service generates a lot of client notifications that are obsolete once a newer notification is created.
+In this case a coalescer can be created to reduce the notifications:
+
+[source,java,indent=0]
+.Client Notification Coalescer
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_bookmarkCoalescer]
+----
+
+== Handling
+
+The `ClientNotificationDispatcher` is responsible for dispatching the client notifications to the correct handler.
+
+=== Creating a Client Notification Handler
+To create a new client notification handler for a specific client notification, all you need to do is creating a class implementing
+`org.eclipse.scout.rt.shared.notification.INotificationHandler<T>`, where `T` is the type (or subtype) of the notification to handle.
+
+The new handler does not need to be registered anywhere. It is available via jandex class inventory.
+
+[source,java,indent=0]
+.Notification Handler for `MessageNotifications`
+----
+include::{codedir}/bahbah/org.eclipsescout.demo.bahbah.client/src/main/java/org/eclipsescout/demo/bahbah/client/MessageNotificationHandler.java[tags=notificationHandler]
+----
+
+=== Handling Notifications Temporarily
+
+Sometimes it is necessary to start and stop handling notification dynamically, (e.g. when a form is opened) in this case `AbstractObservableNotificationHandler`
+can be used to add and remove listeners.
+
+=== Asynchronous Dispatching
+Dispatching is always done asynchronously. However, in case of transactional notifications,
+a service call blocks until all transactional notifications returned with the service response are handled.
+
+This behavior was implemented to simplify for example the usage of shared caches:
+
+[source,java,indent=0]
+.Blocking until notification handling completed
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientNotificationSnippet.java[tags=cn_reloadCodeType]
+----
+
+In the example above, it is guaranteed, that the codetype is up-to-date as soon as reloadCodeType is finished.
+
+=== Updating Scout Model
+Notification handlers are never called from a scout model thread.
+If the scout model needs to be updated when handling notifications, a model job needs to be created for that task.
+
+[source,java,indent=0]
+.Notification Handler Creating Model Job
+----
+include::{codedir}/bahbah/org.eclipsescout.demo.bahbah.client/src/main/java/org/eclipsescout/demo/bahbah/client/MessageNotificationHandler.java[tags=handleNotification]
+----
+
+TIP: Make sure to always run updates to the scout models in a model job (forms, pages, ...): Use ModelJobs.schedule(...) where necessary in notification handlers.
 

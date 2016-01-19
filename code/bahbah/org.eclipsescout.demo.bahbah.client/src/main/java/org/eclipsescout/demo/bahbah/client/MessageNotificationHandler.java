@@ -21,10 +21,13 @@ import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePag
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
 import org.eclipsescout.demo.bahbah.shared.notification.MessageNotification;
 
+//tag::notificationHandler[]
 public class MessageNotificationHandler implements INotificationHandler<MessageNotification> {
 
+  // tag::handleNotification[]
   @Override
   public void handleNotification(final MessageNotification notification) {
+    // end::notificationHandler[]
     ModelJobs.schedule(new IRunnable() {
       @Override
       public void run() throws Exception {
@@ -40,6 +43,7 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
       }
     }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
   }
+  // end::handleNotification[]
 
   private UserNodePage getUserNodePage() {
     if (Desktop.get() == null) {
