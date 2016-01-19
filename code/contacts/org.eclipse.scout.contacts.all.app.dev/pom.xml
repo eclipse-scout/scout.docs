@@ -28,12 +28,17 @@
   <packaging>war</packaging>
 
   <dependencies>
-    <!-- Contacts Application -->
+    <!-- Contacts Application Client -->
     <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.ui.html</artifactId>
     </dependency>
+    
     <!-- Events module -->
+    <dependency>
+      <groupId>org.eclipse.scout.contacts</groupId>
+      <artifactId>org.eclipse.scout.contacts.client.module.events</artifactId>
+    </dependency>
 
     <!-- Jetty Server -->
     <dependency>
@@ -50,10 +55,19 @@
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
     </dependency>
+
+    <!-- Contacts Application Server -->
     <dependency>
     	<groupId>org.eclipse.scout.contacts</groupId>
     	<artifactId>org.eclipse.scout.contacts.server</artifactId>
     </dependency>
+
+    <!-- Events module -->
+    <dependency>
+      <groupId>org.eclipse.scout.contacts</groupId>
+      <artifactId>org.eclipse.scout.contacts.server.module.events</artifactId>
+    </dependency>
+    
     <dependency>
     	<groupId>org.eclipse.scout.rt</groupId>
     	<artifactId>org.eclipse.scout.rt.serverbridge</artifactId>
