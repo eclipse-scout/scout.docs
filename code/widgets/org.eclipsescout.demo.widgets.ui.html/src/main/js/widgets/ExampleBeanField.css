@@ -1,0 +1,11 @@
+.example-bean-field > .field {
+  padding-top: @borderless-field-padding-y;
+  padding-bottom: @borderless-field-padding-y;
+}
+
+.example-bean-field-header {
+  font-size: @font-size-plus;
+  font-weight: bold;
+  border-bottom: 1px solid @palette-gray-5;
+}
+
