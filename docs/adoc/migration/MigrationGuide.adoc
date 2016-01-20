@@ -427,6 +427,7 @@ NOTE: When changing the cryptography algorithms in you application please keep i
 
 * Changed `ILookupRow` to fluent API: use with... instead of set...
 * `IClientSession.stopSession()` was renamed to `stop()` to match `IServerSession.stop()`.
+* Deleted validation rule infrastructure: Deleted package org.eclipse.scout.rt.shared.validate with all subpackages and the containing classes. Furthermore the class org.eclipse.scout.rt.shared.data.form.ValidationRule has been deleted.
 
 
 == Logging API

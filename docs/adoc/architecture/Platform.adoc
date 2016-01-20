@@ -84,7 +84,7 @@ https://github.com/wildfly/jandex
 
 == Bean Manager
 
-The Scout bean manager is dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the bean.
+The Scout bean manager is a dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the class.
 
 The bean manager can be changed at any time. This means beans can be registered or unregistered while the application is running. For this the bean manager contains methods to register and unregister beans. Furthermore methods to retrieve beans are provided.
 

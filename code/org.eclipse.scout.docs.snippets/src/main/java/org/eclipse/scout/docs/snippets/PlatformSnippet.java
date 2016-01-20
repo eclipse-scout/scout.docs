@@ -23,7 +23,6 @@ import org.eclipse.scout.rt.platform.IBean;
 import org.eclipse.scout.rt.platform.IBeanInstanceProducer;
 import org.eclipse.scout.rt.platform.IPlatform;
 import org.eclipse.scout.rt.platform.IPlatformListener;
-import org.eclipse.scout.rt.platform.Platform;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
@@ -55,11 +54,11 @@ public final class PlatformSnippet {
     public void stateChanged(PlatformEvent event) {
       if (event.getState() == IPlatform.State.BeanManagerPrepared) {
         // register the class directly
-        Platform.get().getBeanManager().registerClass(BeanSingletonClass.class);
+        BEANS.getBeanManager().registerClass(BeanSingletonClass.class);
 
         // Or register with meta information
         BeanMetaData beanData = new BeanMetaData(BeanClass.class).withApplicationScoped(true);
-        Platform.get().getBeanManager().registerBean(beanData);
+        BEANS.getBeanManager().registerBean(beanData);
       }
     }
   }
