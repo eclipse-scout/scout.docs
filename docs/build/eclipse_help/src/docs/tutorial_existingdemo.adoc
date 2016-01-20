@@ -17,12 +17,7 @@ The tutorial consists of the following two parts:
 
 === Install the Scout Demo Application
 
-For the first part of the tutorial we start with a fresh install of the "Eclipse for Scout developers" package.
-
-==== Start the Eclipse IDE
-
-Start your Eclipse IDE and select an empty directory for your workspace in the [wizard]_Eclipse Launcher_ dialog.
-In case the Eclipse welcome screen is shown, click it away.
+In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer] tool.
 
 ==== Import the Scout demo projects
 
@@ -67,6 +62,8 @@ image::{imgsdir}/oomph_exiting_projects2.png[]
 Once the project selection in your Eclipse importer looks as shown in <<img-oomph_exiting_projects2>> Click on the btn:[Next] button.
 
 On the [wizard]_Variables_ dialog of the Eclipse importer a number of Oomph variables have to be specified. 
+In case you have used already used Oomph for other purposes, this step might look different or empty (for example when all variables have been set in a previous Oomph session).
+
 Make sure to display all variables by activating checkbox `Show all Variables` in the bottom left corner as shown in <<img-oomph_exiting_variables>>.
 
 [[img-oomph_exiting_variables, Figure "Variables" Step]]
@@ -80,15 +77,16 @@ For the settings proposed below we assume that we only need read access for the 
 
 * `Git clone location rule`: "`Located in a folder named '.git/{lt}repo{gt}' within the workspace folder`"
 * `Target Platform`: "`None`"
-* `JRE 1.7 Location`: Enter the path to your Java 7 JRE
-* `JRE 1.8 Location`: Enter the path to your Java 8 JRE
-* `Scout Demo App Github repository`: "`HTTPS (read-only, anonymous)`"
+* `JRE 1.7 Location`: Path to your Java 7 JRE
+* `JRE 1.8 Location`: Path to your Java 8 JRE
+* `Scout Demo App Github repository`: "`HTTPS (read-write)`" if you already have a GitHub account. Otherwise use "`HTTPS (read-only, anonymous)`"
 
 Once the setting of the variables is completed click btn:[Next].
 This leads to the [wizard]_Confirmation_ dialog. 
 This last step can be completed by clicking on btn:[Finish].
 
-After the successful installation Oomph asks to restart the Eclipse IDE as shown in <<img-oomph_restart>>.
+The Oomph installer first makes sure that all necessary Scout componets and M2E connectors are available. 
+In case one or more components are missing, Oomph will first download and install these components which triggers a restart request as shown in <<img-oomph_restart>>.
 
 [[img-oomph_restart, Figure Restart after installation]]
 .Restart of the IDE after installation.
@@ -141,7 +139,7 @@ The list on the left side of the application containing the nodes [folder]_Perso
 [source,java]
 .ContactOutline implementation.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[lines=21..50]
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
 ----
 
 If you have clicked on the [folder]_Persons_ node a page with all available persons is shown. 

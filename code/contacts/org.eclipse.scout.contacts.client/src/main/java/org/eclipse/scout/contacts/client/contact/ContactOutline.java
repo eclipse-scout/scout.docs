@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 
+//tag::Outline[]
 public class ContactOutline extends AbstractOutline {
 
   @Override
@@ -37,3 +38,4 @@ public class ContactOutline extends AbstractOutline {
     return Icons.Contacts;
   }
 }
+//end::Outline[]
