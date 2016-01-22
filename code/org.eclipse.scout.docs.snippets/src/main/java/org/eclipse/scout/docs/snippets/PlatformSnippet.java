@@ -13,7 +13,6 @@ package org.eclipse.scout.docs.snippets;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.scout.rt.client.ClientBeanDecorationFactory;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
@@ -25,6 +24,7 @@ import org.eclipse.scout.rt.platform.IPlatform;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.platform.SimpleBeanDecorationFactory;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.interceptor.IBeanDecorator;
@@ -66,7 +66,7 @@ public final class PlatformSnippet {
 
   //tag::BeanDecorationFactory[]
   @Replace
-  public class ProfilerDecorationFactory extends ClientBeanDecorationFactory {
+  public class ProfilerDecorationFactory extends SimpleBeanDecorationFactory {
     @Override
     public <T> IBeanDecorator<T> decorate(IBean<T> bean, Class<? extends T> queryType) {
       return new BackendCallProfilerDecorator<>(super.decorate(bean, queryType));

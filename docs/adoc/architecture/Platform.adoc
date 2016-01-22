@@ -114,6 +114,15 @@ TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotatio
 
 TIP: If you inherit a `@Bean` annotation from one of you super types but don't want to be automatically registered into the bean manger you can use the `org.eclipse.scout.rt.platform.@IgnoreBean` annotation. Those classes will then be skipped.
 
+==== @TunnelToServer
+
+There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
+
+To achieve this a bean is registered on client side for each of those interfaces. Because the platform cannot directly create an instance for these beans a specific producer is registered which creates a proxy that delegates the call to the server.
+Please note that this annotation is not inherited. Therefore if an interface extends a tunnel-to-server interface and the new methods of this interface should be called on the server as well the new child interface has to repeat the annotation!
+
+The proxy is created only once for a specific interface bean.
+
 === Bean Scopes
 
 The most important meta data of a bean is the scope. It describes how many instances of a bean can exist in a single application. There are two different possibilities:
@@ -239,6 +248,8 @@ In case no decoration is required the factory may return `null`. Then the origin
 
 TIP: Decorations are only supported if the class obtained by the bean manager (e.g. by using `BEANS.get()`) is an interface!
 
+TIP: It is best practice to mark all annotations that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
+
 The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler decorator that measures how long a server call takes.
 
 [[lst-BeanDecorationFactory, bean decoration]]
@@ -247,13 +258,6 @@ The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the serve
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
 ----
-
-==== @TunnelToServer
-
-There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
-To achieve this a bean decoration factory on client side checks for availability of this annotation and creates a decorator that forwards the operation to the server.
-
-It is best practice to mark all annotations that are interpreted in the bean decoration factory with the annotation `org.eclipse.scout.rt.platform.@BeanInvocationHint`. However this annotation has no effect at runtime and is only for documentation reasons.
 
 == Configuration Management
 
