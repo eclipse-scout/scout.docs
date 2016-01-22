@@ -15,11 +15,11 @@ The tutorial consists of the following two parts:
 * Install the Scout Demo application
 * Run the Scout demo from your IDE
 
-=== Install the Scout Demo Application
+==== Install the Scout Demo Application
 
 In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer] tool.
 
-==== Import the Scout demo projects
+===== Import the Scout demo projects
 
 In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File -> Import...[].
 This opens the dialog shown in <<img-oomph_existing_project>>.
@@ -85,24 +85,25 @@ Once the setting of the variables is completed click btn:[Next].
 This leads to the [wizard]_Confirmation_ dialog. 
 This last step can be completed by clicking on btn:[Finish].
 
-The Oomph installer first makes sure that all necessary Scout componets and M2E connectors are available. 
-In case one or more components are missing, Oomph will first download and install these components which triggers a restart request as shown in <<img-oomph_restart>>.
+The Oomph installer first makes sure that all necessary Scout components and M2E connectors are available. 
+In case one or more components are missing, Oomph will first download and install them.
+This triggers a restart request as shown in <<img-oomph_restart>>.
 
 [[img-oomph_restart, Figure Restart after installation]]
 .Restart of the IDE after installation.
 image::{imgsdir}/oomph_restart.png[]
 
-To complete the installation click btn:[Finish] which will restart the IDE. 
-During the restart confirm the workspace shown in the [wizard]_Eclipse Launcher_ dialog.
+To complete the installation click btn:[Finish]. 
+If your IDE needs to be restarted, select the same workspace in the [wizard]_Eclipse Launcher_ dialog.
 
 After the restart Oomph will continue to download and install the Scout demo application showing the progress in the Eclipse importer dialog. 
 Once the download and installation has completed you may close the dialog with clicking the btn:[Finish] button.
 
-=== Run the Demo Application
+==== Run the Demo Application
 
 With the Scout demo installed in our workspace we are now ready to start the application from within our IDE.
 
-==== Start the application in the IDE
+===== Start the application in the IDE
 
 In the [wizard]_Package Explorer_ view of the IDE open the Maven module `org.eclipse.scout.contacts.all.app.dev`.
 To run the Contacts application use the [menu]_Run As_ context menu on file `contacts-all-dev.launch` as shown in <<img-oomph_run_contacts_all>>.
@@ -117,7 +118,7 @@ Once the startup sequence of the Contacts application has completed the console 
 .Console view after starting the Contacts demo.
 image::{imgsdir}/oomph_contacts_console.png[]
 
-==== Use the Contacts Demo in a Browser
+===== Use the Contacts Demo in a Browser
 
 With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082/.
 To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double click on the ''Alice'' row.
@@ -126,11 +127,11 @@ To get the screen shown in <<img-contacts_persons_alice>> first click on the [fo
 .The Contacts application.
 image::{imgsdir}/contacts_persons_alice.png[]
 
-==== What's Next?
+===== What's Next?
 
 Play with the Contacts application. 
 This provides a good overview of a typical Scout application. 
-You can browse through the data, open different forms and add/change entitites.
+You can browse through the data, open different forms and add/change entities.
 
 Also have a quick look at the code.
 The list on the left side of the application containing the nodes [folder]_Persons_ and [folder]_Organizations_ is implemented in class [java]+ContactOutline+ as shown in <<lst-contacts_outline>>. 

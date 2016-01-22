@@ -9,5 +9,5 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/SdkViewScoutObjectProperties.adoc[]
+Text is missing
 

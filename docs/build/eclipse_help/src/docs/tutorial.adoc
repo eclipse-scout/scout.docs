@@ -11,10 +11,13 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 To get started with Eclipse Scout, we propose you to follow this tutorial: 
 
+* <<tutorial_existingdemo.html#import-the-scout-demo-applications-tutorial, Import the Scout Demo Applications Tutorial>>
+** <<tutorial_existingdemo.html#install-the-scout-demo-application, Install the Scout Demo Application>>
+*** <<tutorial_existingdemo.html#import-the-scout-demo-projects, Import the Scout demo projects>>
+** <<tutorial_existingdemo.html#run-the-demo-application, Run the Demo Application>>
+*** <<tutorial_existingdemo.html#start-the-application-in-the-ide, Start the application in the IDE>>
+*** <<tutorial_existingdemo.html#use-the-contacts-demo-in-a-browser, Use the Contacts Demo in a Browser>>
+*** <<tutorial_existingdemo.html#what-s-next, What’s Next?>>
 * <<tutorial_helloworld.adoc#hello-world-tutorial, Hello world Tutorial>>
 ** <<tutorial_helloworld.adoc#create-a-scout-project, Create a Scout Project>>
 ** <<tutorial_helloworld.adoc#run-the-application, Run the Application>>
-* <<tutorial_existingdemo.adoc#import-existing-demo-application-tutorial, Import existing Demo Application Tutorial>>
-** <<tutorial_existingdemo.adoc#import-projects, Import projects>>
-** <<tutorial_existingdemo.adoc#start-the-application, Start the application>>
-
