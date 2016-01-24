@@ -24,6 +24,7 @@ Scout Architecture and Concepts are described here.
 
 :numbered:
 include::{mdledir}/architecture/Platform.adoc[]
+include::{mdledir}/architecture/ExceptionHandling.adoc[]
 include::{mdledir}/architecture/JobManager.adoc[]
 include::{mdledir}/architecture/RunContext.adoc[]
 include::{mdledir}/architecture/RunMonitor.adoc[]
