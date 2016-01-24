@@ -12,33 +12,40 @@ import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 
 public final class RunContextSnippet {
 
-  void snippet_createEmptyRunContext() throws Exception {
-    // tag::RunContexts.empty[]
-    Subject subject = new Subject(); // <1>
-    subject.getPrincipals().add(new SimplePrincipal("john"));
-    subject.setReadOnly();
+  void snippets() throws Exception {
+    {
+      // tag::RunContexts.empty[]
+      Subject subject = new Subject(); // <1>
+      subject.getPrincipals().add(new SimplePrincipal("john"));
+      subject.setReadOnly();
 
-    RunContexts.empty().withSubject(subject).withLocale(Locale.US).run(new IRunnable() { // <2>
+      RunContexts.empty()
+          .withSubject(subject)
+          .withLocale(Locale.US)
+          .run(new IRunnable() { // <2>
 
-      @Override
-      public void run() throws Exception {
-        // run some code <3>
-        System.out.println(NlsLocale.CURRENT.get()); // > Locale.US
-        System.out.println(Subject.getSubject(AccessController.getContext())); // > john
-      }
-    });
-    // end::RunContexts.empty[]
-  }
+            @Override
+            public void run() throws Exception {
+              // run some code <3>
+              System.out.println(NlsLocale.CURRENT.get()); // > Locale.US
+              System.out.println(Subject.getSubject(AccessController.getContext())); // > john
+            }
+          });
+      // end::RunContexts.empty[]
+    }
 
-  void snippet_copyCurrentRunContext() throws Exception {
-    // tag::RunContexts.copyCurrent[]
-    RunContexts.copyCurrent().withLocale(Locale.US).run(new IRunnable() {
+    {
+      // tag::RunContexts.copyCurrent[]
+      RunContexts.copyCurrent()
+          .withLocale(Locale.US)
+          .run(new IRunnable() {
 
-      @Override
-      public void run() throws Exception {
-        // run some code
-      }
-    });
-    // end::RunContexts.copyCurrent[]
+            @Override
+            public void run() throws Exception {
+              // run some code
+            }
+          });
+      // end::RunContexts.copyCurrent[]
+    }
   }
 }
