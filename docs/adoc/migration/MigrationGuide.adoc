@@ -660,3 +660,174 @@ grep diff.log -e rename.*java > renames.txt
 | org.eclipse.scout.rt.server.services.common.jdbc.style.AbstractSqlStyle.java | org.eclipse.scout.rt.server.jdbc.style.AbstractSqlStyle.java
 | org.eclipse.scout.rt.testing.commons.ScoutAssert.java | org.eclipse.scout.rt.testing.platform.util.ScoutAssert.java
 |===
+
+== Migrate to the new Job API
+Eclipse jobs are replaced by Scout Job Manager API.
+
+=== In a nutshell
+Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan.
+
+A job is defined as some work to be executed asynchronously and is associated with a `JobInput` to describe how to run that work. The work is given to the job manager in the form of a `Runnable` or `Callable`. The only difference is, that a `Runnable` represents  a 'fire-and-forget' action, meaning that the submitter of the job does not expect the job to return a result. On the other hand, a `Callable` returns the computation's result, which the submitter can await for. Of course, a runnable's completion can also be waited for.
+
+See Scout architecture documentation for more information.
+
+=== Static accessors
+* ServerJob.getCurrentSession() -> ServerSessionProvider.currentSession()
+* ClientJob.getCurrentSession() -> ClientSessionProvider.currentSession()
+* ServerJob.isCurrentJobCancelled() -> RunMonitor.CURRENT.get().isCancelled()
+
+=== Raw Eclipse Job
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.rawEclipseJob.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.rawEclipseJob.new]
+----
+
+=== ServerJob
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.new]
+----
+
+=== ServerJob.runNow(...)
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.runNow.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.runNow.new]
+
+----
+=== ServerJob with other Subject
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.otherSubject.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.otherSubject.new]
+----
+
+=== ClientSyncJob
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientSyncJob.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientSyncJob.new]
+----
+
+=== ClientAsyncJob
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientAsyncJob.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientAsyncJob.new]
+----
+
+=== Delayed execution
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.delayedExecution.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.delayedExecution.new]
+----
+
+=== Repeatedly execution with a fixed delay
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.fixedDelayExecution.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.fixedDelayExecution.new]
+----
+
+=== Check for cancellation
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.checkForCancellation.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.checkForCancellation.new]
+----
+
+=== Join job
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join.new]
+----
+
+=== Join job with a maximal wait time
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join_with_timeout.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join_with_timeout.new]
+----
+
+=== Join job and get the job's computation result
+[source,java,indent=0]
+.before Scout 'N' release (<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.new]
+----
