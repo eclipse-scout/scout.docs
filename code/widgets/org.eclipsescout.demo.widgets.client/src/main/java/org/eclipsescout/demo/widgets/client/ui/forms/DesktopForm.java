@@ -3,6 +3,7 @@ package org.eclipsescout.demo.widgets.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.desktop.notification.DesktopNotification;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -17,6 +18,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipsescout.demo.widgets.client.ClientSession;
 import org.eclipsescout.demo.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipsescout.demo.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.CloseableField;
 import org.eclipsescout.demo.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.DurationField;
 import org.eclipsescout.demo.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.MessageField;
 import org.eclipsescout.demo.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.SeverityField;
@@ -51,6 +53,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(DurationField.class);
   }
 
+  public CloseableField getCloseableField() {
+    return getFieldByClass(CloseableField.class);
+  }
+
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -74,7 +80,8 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       protected void execClickAction() {
         IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
         long duration = getDurationField().getValue();
-        DesktopNotification notification = new DesktopNotification(status, duration);
+        boolean closeable = getCloseableField().getValue();
+        DesktopNotification notification = new DesktopNotification(status, duration, closeable);
         ClientSession.get().getDesktop().addNotification(notification);
       }
     }
@@ -131,6 +138,20 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(5000);
+        }
+      }
+
+      @Order(60)
+      public class CloseableField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Closeable");
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(true);
         }
       }
     }
