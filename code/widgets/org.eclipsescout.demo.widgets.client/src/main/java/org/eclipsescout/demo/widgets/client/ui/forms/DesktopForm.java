@@ -1,6 +1,7 @@
 package org.eclipsescout.demo.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.desktop.notification.DesktopNotification;
+import org.eclipse.scout.rt.client.ui.desktop.notification.IDesktopNotification;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -26,6 +27,8 @@ import org.eclipsescout.demo.widgets.shared.services.code.SeverityCodeType;
 
 @Order(8100.0)
 public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
+
+  private IDesktopNotification m_lastNotification;
 
   public DesktopForm() {
     super();
@@ -83,10 +86,30 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         boolean closeable = getCloseableField().getValue();
         DesktopNotification notification = new DesktopNotification(status, duration, closeable);
         ClientSession.get().getDesktop().addNotification(notification);
+        m_lastNotification = notification;
       }
     }
 
     @Order(30)
+    public class RemoveNotificationButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("RemoveNotification");
+      }
+
+      @Override
+      protected String getConfiguredTooltipText() {
+        return TEXTS.get("RemoveNotificationTooltip");
+      }
+
+      @Override
+      protected void execClickAction() {
+        ClientSession.get().getDesktop().removeNotification(m_lastNotification);
+      }
+    }
+
+    @Order(40)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -108,7 +131,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(40)
+      @Order(50)
       public class SeverityField extends AbstractSmartField<Integer> {
 
         @Override
@@ -127,7 +150,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(50)
+      @Order(60)
       public class DurationField extends AbstractIntegerField {
 
         @Override
@@ -141,7 +164,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(60)
+      @Order(70)
       public class CloseableField extends AbstractBooleanField {
 
         @Override
