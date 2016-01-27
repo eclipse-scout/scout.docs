@@ -65,6 +65,9 @@ File upload size is always limited now (otherwise server might run out of memory
 * `AbstractContentAssistField` and `IProposalChooser` implementations now have the ability to provide an inner class which extend `AbstractTree` or `AbstractTable` to provide a custom implementation used in the proposal chooser.
 * Added `cssClass` property to formField, column and cell for custom css styling. See also interface `IStyleable` and class `CssClasses`.
 
+==== Date Field
+The date field no longer inherits from _BasicField_. Instead it inherits directly from _ValueField_. This means that the `PROP_UPDATE_DISPLAY_TEXT_ON_MODIFY` is no longer supported on date fields. The reason for this change was the separation of UI (Browser) and UI-Server (Java). To get a good performance, fast date predictions and offline capability, the parsing must be done in the UI and not on the server. Because the "update on modify" flag had no effect anyway, it was completely removed from the UI. (More details in the Migration Guide).
+
 ==== Split Box
 * `AbstractSplitBox` now returns `IFormField.FULL_SIZE` in `getConfiguredGridW()` by default. Reason: The split box widget does not really have a representation of its own, but is more like a container for other fields. It can never have label, mandatory indicator etc. Its layout should behave like a group box or a tab box, therefore the default gridW value was adjusted accordingly.
 * Split boxes now support absolute splitter positions. The old relative position is the default, which uses a value between 0 and 1 for the `splitterPosition`. By changing the property `splitterPositionType`, the interpretation of the `splitterPosition` value can be changed to pixels (either fixed for the first or the second inner box).
@@ -88,6 +91,7 @@ File upload size is always limited now (otherwise server might run out of memory
 ** `void fireSortColumnRemovedFromUI(IColumn<?> column)
 * Improved page search form disposal: Search form is now closed when the page gets disposed.
 * `AbstractDesktop.isOutlineChanging` added.
+* The methods `traverseFocusNext()` and `traverseFocusPrevious` were removed from _IDesktop_ because traversing is not supported by the HTML UI. (Neither was it supported by the former RAP UI). The corresponding _DesktopEvent_ types (`TYPE_TRAVERSE_FOCUS_NEXT`, `TYPE_TRAVERSE_FOCUS_PREVIOUS`) were removed as well.
 
 ==== Form
 Added `IForm.start()`: Mainly useful for forms with just one handler. (detail forms, tool forms etc.). May be implemented by the concrete form. The default implementation at AbstractForm uses getHandler() to start the form.
