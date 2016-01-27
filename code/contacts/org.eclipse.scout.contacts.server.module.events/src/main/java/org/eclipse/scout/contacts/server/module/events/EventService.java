@@ -44,7 +44,7 @@ public class EventService implements IEventService {
 
     String sql = sqlSelect.append(sqlWhere).append(SQLs.EVENT_PAGE_DATA_INTO).toString();
 
-    SQL.selectInto(sql, new NVPair("page", pageData));
+    SQL.selectInto(sql, new NVPair("organizationId", organizationId), new NVPair("page", pageData));
 
     return pageData;
   }

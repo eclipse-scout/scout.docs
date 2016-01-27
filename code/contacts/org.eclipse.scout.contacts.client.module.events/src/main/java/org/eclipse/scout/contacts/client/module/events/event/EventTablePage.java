@@ -52,7 +52,6 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
   @Override
   protected void execInitPage() {
-    // TODO [dwi] verify
     OrganizationDetailsNodePage organizationParentPage = getParentNode(OrganizationDetailsNodePage.class);
 
     if (organizationParentPage != null) {

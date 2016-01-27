@@ -31,7 +31,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
     super(owner);
   }
 
-  @Order(2)
+  @Order(25)
   public class EventBox extends AbstractGroupBox {
 
     @Override

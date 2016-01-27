@@ -11,7 +11,9 @@
 package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractSearchOutline;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.shared.TEXTS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,5 +25,9 @@ public class SearchOutline extends AbstractSearchOutline {
   @Override
   protected void execSearch(final String query) {
     LOG.info("Search started");
+    MessageBoxes.createOk()
+        .withHeader(TEXTS.get("Search"))
+        .withBody(TEXTS.get("ImplementSearch"))
+        .show();
   }
 }

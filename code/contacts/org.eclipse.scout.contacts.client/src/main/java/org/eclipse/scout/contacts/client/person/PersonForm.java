@@ -235,7 +235,7 @@ public class PersonForm extends AbstractForm {
     @Order(2)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1)
+      @Order(10)
       public class PersonDetailsBox extends AbstractGroupBox {
 
         @Override
@@ -287,7 +287,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(2)
+      @Order(20)
       public class WorkBox extends AbstractGroupBox {
 
         @Override
@@ -337,7 +337,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(3)
+      @Order(30)
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
