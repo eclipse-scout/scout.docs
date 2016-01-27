@@ -102,6 +102,28 @@
   </pluginRepositories>
 
   <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxws-maven-plugin</artifactId>
+        <executions>
+          <!-- PingWebService.wsdl -->
+          <execution>
+            <id>wsimport-1</id>
+            <goals>
+              <goal>wsimport</goal>
+            </goals>
+            <configuration>
+              <wsdlLocation>WEB-INF/wsdl/PingWebService.wsdl</wsdlLocation>
+              <wsdlFiles>
+                <wsdlFile>PingWebService.wsdl</wsdlFile>
+              </wsdlFiles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
     <!-- Use APT settings to enable APT in Eclipse IDE (used for jaxws) -->
     <pluginManagement>
       <plugins>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="PingWebService"
+  targetNamespace="http://scout.eclipse.org/docs/ws/PingWebService/"
+  xmlns:tns="http://scout.eclipse.org/docs/ws/PingWebService/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://scout.eclipse.org/docs/ws/PingWebService/">
+      <xsd:element name="pingRequest" type="xsd:string"/>
+      <xsd:element name="pingResponse" type="xsd:string"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="pingRequest">
+    <wsdl:part element="tns:pingRequest" name="ping" />
+  </wsdl:message>
+  <wsdl:message name="pingResponse">
+    <wsdl:part element="tns:pingResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:portType name="PingWebServicePortType">
+    <wsdl:operation name="ping">
+      <wsdl:input message="tns:pingRequest" />
+      <wsdl:output message="tns:pingResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PingWebServiceSOAP" type="tns:PingWebServicePortType">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ping">
+      <soap:operation soapAction="http://scout.eclipse.org/docs/ws/PingWebService/ping" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PingWebService">
+    <wsdl:port binding="tns:PingWebServiceSOAP" name="PingWebServiceSOAP">
+      <soap:address location="http://scout.eclipse.org/docs/ws/PingWebService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
