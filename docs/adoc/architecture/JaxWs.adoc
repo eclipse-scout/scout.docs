@@ -13,7 +13,7 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the architecture of JAX-WS
 //-----------------------------------------------------------------------------
 
-= JAX-WS with Eclipse Scout
+= Webservices with JAX-WS
 The Java API for XML-Based Web Services (JAX-WS) is a Java programming language API for creating web services. JAX-WS is one of the Java XML programming APIs, and is part of the Java EE platform.
 
 Scout facilitates working with webservices, supports you in the generation of artifacts, and provides the following functionality.
