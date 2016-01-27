@@ -838,8 +838,9 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedDisplayText() {
-            getDisplayTextField().setValue(getDisplayText());
+          public void setDisplayText(String s) {
+            super.setDisplayText(s);
+            getDateTimeDisplayTextField().setValue(s);
           }
         }
 
@@ -1046,8 +1047,9 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedDisplayText() {
-            getTimeDisplayTextField().setValue(getDisplayText());
+          public void setDisplayText(String s) {
+            super.setDisplayText(s);
+            getDateTimeDisplayTextField().setValue(s);
           }
         }
 
@@ -1191,8 +1193,9 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected void execChangedDisplayText() {
-            getDateTimeDisplayTextField().setValue(getDisplayText());
+          public void setDisplayText(String s) {
+            super.setDisplayText(s);
+            getDateTimeDisplayTextField().setValue(s);
           }
         }
 
