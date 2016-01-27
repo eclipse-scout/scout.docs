@@ -52,7 +52,7 @@ For instance, support for _Apache CXF_ implementor is activated as following:
 jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
 ----
 
-[cols="30,70]
+[cols="30,70"]
 |===
 |class |description
 
