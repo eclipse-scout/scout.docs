@@ -10,6 +10,12 @@
  ******************************************************************************/
 @import (less) "scout/style/colors.css";
 
+
+/* -------------------------------- */
+/* Palette colors                   */
+/* -------------------------------- */
+@palette-gray-11: #222222;
+
 /* -------------------------------- */
 /* Global colors                    */
 /* -------------------------------- */
@@ -54,6 +60,10 @@
 @button-color: @palette-gray-2;
 @button-background-color: @palette-gray-9;
 @button-border-color: @button-background-color;
+
+@menubar-button-disabled-background-color: @palette-gray-7;
+@menubar-button-disabled-border-color: @palette-gray-7;
+@menubar-button-font-icon-disabled-color: @palette-gray-6;
 
 @calendar-day-color: @palette-gray-6;
 @calendar-out-color: @palette-gray-4;
