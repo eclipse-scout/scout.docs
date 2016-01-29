@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipsescout.demo.widgets.shared.old.services.common.text;
+package org.eclipsescout.demo.widgets.shared.custom.services.common.text;
 
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
