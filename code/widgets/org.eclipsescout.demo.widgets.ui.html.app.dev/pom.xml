@@ -71,7 +71,8 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.2.3</version>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.groupId}</imageName>
+				<!-- TODO mzi: reset to explicit group id to ${project.groupId} once the renaming from org.eclipsescout.demo.widgets to org.eclipse.scout.widgets is complete -->
+					<imageName>${docker.image.prefix}/org.eclipse.scout.widgets</imageName>
 					<dockerDirectory>.</dockerDirectory>
 					<resources>
 						<resource>
