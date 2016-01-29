@@ -28,7 +28,6 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ClientSession;
@@ -78,11 +77,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   @Override
   protected void execOpened() {
     if (DesktopStyle.DEFAULT == m_desktopStyle) {
-      // default desktop
-      IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
-      if (firstOutline != null) {
-        setOutline(firstOutline);
-      }
+      setOutline(SimpleWidgetsOutline.class);
     }
     else {
       // "bench-only" desktop
