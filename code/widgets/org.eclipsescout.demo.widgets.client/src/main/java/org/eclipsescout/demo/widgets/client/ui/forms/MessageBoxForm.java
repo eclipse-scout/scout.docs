@@ -456,7 +456,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected void execClickAction() {
           String header = getHeaderField().getValue();
           String body = getBodyField().getValue();
-          IHtmlContent html = HTML.plain(getHtmlField().getValue());
+          IHtmlContent html = HTML.raw(getHtmlField().getValue());
           String yesButtonText = getYesButtonTextField().getValue();
           String noButtonText = getNoButtonTextField().getValue();
           String cancelButtonText = getCancelButtonTextField().getValue();
