@@ -12,7 +12,7 @@
 
   <groupId>org.eclipse.scout.heatmap.demo</groupId>
   <artifactId>org.eclipse.scout.heatmap.parent</artifactId>
-  <version>5.2.0-SNAPSHOT</version>
+  <version>6.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Heatmap Demo Parent Module</name>
@@ -20,7 +20,7 @@
   <properties>
     <org.eclipse.scout.heatmap.demo.version>${project.version}</org.eclipse.scout.heatmap.demo.version>
     <jdk.source.version>1.8</jdk.source.version>
-    <org.eclipse.scout.rt_version>5.2.0-SNAPSHOT</org.eclipse.scout.rt_version>
+    <org.eclipse.scout.rt_version>6.0.0-SNAPSHOT</org.eclipse.scout.rt_version>
   </properties>
 
   <modules>

@@ -23,12 +23,12 @@
 
   <properties>
     <jdk.source.version>1.7</jdk.source.version>
-    <scout.version>5.2.0-SNAPSHOT</scout.version>
+    <scout.version>6.0.0-SNAPSHOT</scout.version>
   </properties>
 
   <groupId>org.eclipsescout.demo.widgets</groupId>
   <artifactId>org.eclipsescout.demo.widgets</artifactId>
-  <version>5.2.0-SNAPSHOT</version>
+  <version>6.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Widgets Application</name>
 
