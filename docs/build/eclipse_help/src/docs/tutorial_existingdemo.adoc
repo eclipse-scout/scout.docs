@@ -29,21 +29,8 @@ Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Worksp
 .The Import Wizard in Eclipse.
 image::{imgsdir}/oomph_existing_project.png[]
 
-WARNING: As long as the Eclipse Scout project is not integrated in the default catalog, you need to import the setup file manually.
-
-To import the setup file manually click on the green plus icon btn:[Add user projects] which opens dialog [wizard]_Add User Projects_ as shown in <<img-oomph_add_user_projects>>.
-
-[[img-oomph_add_user_projects, Figure Add User Projects Dialog]]
-.Add User Projects Dialog.
-image::{imgsdir}/oomph_add_user_projects.png[]
-
-In this dialog fill in the elements provided below. 
-
-* For field `Catalog` select option "`Eclipse Projects`"
-* For field `Resource URIs` enter our our Setup File: `https://git.eclipse.org/c/scout/oomph.git/plain/Scout.setup`
-
-To close the dialog click the btn:[OK] button.
-The [wizard]_Eclipse Importer_ should then contain the folder hierarchy [folder]_Eclipse Projects_, [folder]_<User>_, [folder]_Scout_ and [folder]_Scout Demo App_ as shown in <<img-oomph_exiting_projects1>>.
+The [wizard]_Eclipse Importer_ contains the folder hierarchy [folder]_Eclipse Projects_, [folder]_Scout_ and [folder]_Scout Demo App_ as shown in <<img-oomph_exiting_projects1>>.
+You can enter "Scout Demo" in the search filter to find the project easily.
 
 [[img-oomph_exiting_projects1, Figure "Projects" Step 1]]
 .Top part of the "Projects" Step of the Importer.
