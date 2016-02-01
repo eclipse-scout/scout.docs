@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.old.FormFieldsNodePage;
 import org.eclipsescout.demo.widgets.client.old.MenusNodePage;
@@ -21,6 +22,7 @@ import org.eclipsescout.demo.widgets.client.old.MenusNodePage;
 /**
  * @author mzi
  */
+@Order(1300.0)
 public class WidgetsOutline extends AbstractOutline {
 
   @Override

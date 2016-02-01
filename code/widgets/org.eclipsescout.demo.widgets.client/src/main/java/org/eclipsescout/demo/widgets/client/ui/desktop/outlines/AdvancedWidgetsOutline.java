@@ -27,6 +27,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.IPageForm;
 /**
  * @author mzi
  */
+@Order(1100.0)
 public class AdvancedWidgetsOutline extends AbstractOutline {
 
   @Override

@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.demo.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipsescout.demo.widgets.client.ui.forms.ButtonForm;
@@ -30,6 +31,7 @@ import org.eclipsescout.demo.widgets.client.ui.forms.StringFieldForm;
 /**
  * @author mzi
  */
+@Order(1000.0)
 public class SimpleWidgetsOutline extends AbstractOutline {
 
   @Override
