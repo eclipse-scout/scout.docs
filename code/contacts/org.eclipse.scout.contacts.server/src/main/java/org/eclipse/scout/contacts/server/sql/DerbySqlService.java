@@ -10,7 +10,12 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.sql;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.exception.PlatformExceptionTranslator;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 
 @Order(1950)
@@ -19,5 +24,17 @@ public class DerbySqlService extends AbstractDerbySqlService {
   @Override
   protected String getConfiguredJdbcMappingName() {
     return "jdbc:derby:memory:contacts-database;create=true";
+  }
+
+  /**
+   * Drop in-memory database
+   */
+  public void dropDB() {
+    try {
+      DriverManager.getConnection("jdbc:derby:memory:contacts-database;drop=true");
+    }
+    catch (SQLException e) {
+      BEANS.get(PlatformExceptionTranslator.class).translate(e);
+    }
   }
 }
