@@ -1,6 +1,5 @@
 package org.eclipse.scout.contacts.client.module.events.event;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
@@ -29,11 +28,11 @@ public class EventOutlineExtension extends AbstractOutlineExtension<ContactOutli
   }
 
   @Override
-  public void execNodesChecked(TreeNodesCheckedChain chain, Collection<ITreeNode> nodes) {
+  public void execNodesChecked(TreeNodesCheckedChain chain, List<ITreeNode> nodes) {
   }
 
   @Override
-  public void execAutoCheckChildNodes(TreeAutoCheckChildNodesChain chain, Collection<? extends ITreeNode> nodes) {
+  public void execAutoCheckChildNodes(TreeAutoCheckChildNodesChain chain, List<ITreeNode> nodes) {
   }
 
   @Override
