@@ -164,6 +164,13 @@ The Maven plugin 'org.codehaus.mojo:jaxws-maven-plugin' with the goal 'wsimport'
 
 This profile is for convenience purpose, and provides a ready-to-go configuration to generate webservice stubs and webservice provider artifacts. It configures the 'jaxws-maven-plugin' to look for WSDL and XSD files in the folder 'src/main/resources/WEB-INF/wsdl', and for binding files in the folder '/src/main/resources/WEB-INF/binding'. Upon generation, the stub will be put into the folder 'target/generated-sources/wsimport'.
 
+The profiles requires the Scout runtime version to be specified, and which is used to refer to `org.eclipse.scout.jaxws.apt` module to generate webservice provider artifacts. However, this version is typically defined in pom.xml of the parent module, because also used to refer to other Scout runtime artifacts.
+
+[source,xml,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
+----
+
 If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module's pom.xml.
 
 .wsimport configuration in pom.xml if working with a single WSDL file per JAR module

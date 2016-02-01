@@ -1,3 +1,9 @@
+// tag::jaxws.pom.scoutversion[]
+<properties>
+  <org.eclipse.scout.rt.version>5.2.0-SNAPSHOT</org.eclipse.scout.rt.version>
+</properties>
+// end::jaxws.pom.scoutversion[]
+
 // tag::jaxws.pom.single-wsdl-file-per-module[]
 <properties>
   <jaxws.wsdl.file>YourWebService.wsdl</jaxws.wsdl.file>
