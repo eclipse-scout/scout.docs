@@ -13,10 +13,12 @@ ifndef::mdledir[:mdledir: .]
 // This file describes exception handling
 //-----------------------------------------------------------------------------
 
-= Exception Handling
+= Working with exceptions
 Exceptions can be logged via SLF4J Logger, or given to exception handler for centralized, consistent exception handling, or translated into other exceptions. Scout provides some few exceptions, which are used by the framework. They all are runtime exceptions, and typically inherit from <<PlatformException>>.
 
-== PlatformException
+== Scout Runtime Exceptions
+
+=== PlatformException
 Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.
 
 There is a single constructor which accepts the exception's message, and optionally a variable number of arguments. Typically, a potential cause is given as its argument. The message allows further the use of formatting anchors in the form of {} pairs. The respective formatting arguments are provided via the constructor's _varArg_ parameter. If the last argument is of the type `Throwable` and not referenced as formatting anchor in the message, that `Throwable` is used as the exception's cause. Internally, SLF4J `MessageFormatter` is used to provide substitution functionality. Hence, The format is the very same as if using SLF4j Logger.
@@ -32,7 +34,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 === ProcessingException
 Represents a <<PlatformException>> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.
 
-==== VetoException
+=== VetoException
 Represents a <<ProcessingException>> with VETO character. If thrown server-side, exceptions of this type are transported to the client and typically visualized in the form of a message box.
 
 === AssertionException
@@ -50,11 +52,11 @@ Represents a <<PlatformException>> and indicates that the maximal wait time elap
 === TransactionRequiredException
 Represents a <<PlatformException>> and is thrown  if a ServerRunContext requires a transaction to be available.
 
-== ExceptionHandler
+== Exception handling
 An exception handler is the central point for exception handling. It provides a single method 'handle' which accepts a `Throwable`, and which never throws an exception. It is implemented as a bean, meaning managed by the bean manager to allow easy replacement, e.g. to use a different handler when running client or server side.
 By default, a <<ProcessingException>> is logged according to its severity, a <<VetoException>>, <<ThreadInterruptedException>> or <<FutureCancelledException>> logged in _DEBUG_ level, and any other exception logged as an _ERROR_. If running client side, exceptions are additionally visualized and showed to the user.
 
-== Exception Translator
+== Exception translation
 Exception translators are used to translate an exception into another exception.
 
 Also, they unwrap the cause of wrapper exceptions, like `UndeclaredThrowableException`, or `InvocationTargetException`, or `ExecutionException`. If the exception is of the type `Error`, it is normally not translated, but re-thrown instead. That is because an `Error` indicates a serious problem due to an abnormal condition.
