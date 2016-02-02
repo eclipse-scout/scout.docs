@@ -71,6 +71,9 @@ import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.FormFieldB
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.CancellationDurationField;
 import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.TestLayoutValidatorBox;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.TestLayoutValidatorBox.CloseFormButton;
+import org.eclipsescout.demo.widgets.client.ui.forms.FormForm.MainBox.TestLayoutValidatorBox.HideFieldButton;
 import org.eclipsescout.demo.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
@@ -134,6 +137,18 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public Buttons2Box getButtons2Box() {
     return getFieldByClass(Buttons2Box.class);
+  }
+
+  public TestLayoutValidatorBox getTestLayoutValidatorBox() {
+    return getFieldByClass(TestLayoutValidatorBox.class);
+  }
+
+  public HideFieldButton getHideFieldButton() {
+    return getFieldByClass(HideFieldButton.class);
+  }
+
+  public CloseFormButton getCloseFormButton() {
+    return getFieldByClass(CloseFormButton.class);
   }
 
   public OpenFormButton getOpenFormButton() {
@@ -497,6 +512,74 @@ public class FormForm extends AbstractForm implements IPageForm {
           protected IFormField getField() {
             return getField4Field();
           }
+        }
+      }
+    }
+
+    @Order(25)
+    @ClassId("95a7bd0b-3a10-4f5b-b0f4-781cfae0e207")
+    public class TestLayoutValidatorBox extends AbstractGroupBox {
+      private IForm m_layoutValidatorForm = null;
+
+      @Override
+      protected String getConfiguredLabel() {
+        return "LayoutValidator test";
+      }
+
+      @Order(1000)
+      @ClassId("f72345cc-10b5-4e71-95b1-3d60ec7cd55b")
+      public class OpenFormButton extends AbstractButton {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Open form tab";
+        }
+
+        @Override
+        protected void execClickAction() {
+          if (m_layoutValidatorForm != null) {
+            return;
+          }
+          m_layoutValidatorForm = new FormForm();
+
+          m_layoutValidatorForm.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
+          m_layoutValidatorForm.setModal(false);
+          m_layoutValidatorForm.start();
+        }
+      }
+
+      @Order(2000)
+      @ClassId("27fe690d-96f6-4e5c-9755-1384312d398c")
+      public class HideFieldButton extends AbstractButton {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Toggle Field1 visibility on Form";
+        }
+
+        @Override
+        protected void execClickAction() {
+          if (m_layoutValidatorForm == null) {
+            return;
+          }
+          IFormField field = m_layoutValidatorForm.getFieldByClass(Field1Field.class);
+          field.setVisible(!field.isVisible());
+        }
+      }
+
+      @Order(3000)
+      @ClassId("f71a484c-a417-4551-9d7c-a79df6899a0b")
+      public class CloseFormButton extends AbstractButton {
+        @Override
+        protected String getConfiguredLabel() {
+          return "close form";
+        }
+
+        @Override
+        protected void execClickAction() {
+          if (m_layoutValidatorForm == null) {
+            return;
+          }
+          m_layoutValidatorForm.doClose();
+          m_layoutValidatorForm = null;
         }
       }
     }
