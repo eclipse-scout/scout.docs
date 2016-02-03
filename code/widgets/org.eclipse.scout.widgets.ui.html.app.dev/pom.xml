@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2015 BSI Business Systems Integration AG. All rights reserved. 
+	This program and the accompanying materials are made available under the 
+	terms of the Eclipse Distribution License v1.0 which accompanies this distribution, 
+	and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors: 
+	BSI Business Systems Integration AG - initial API and implementation -->
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.scout.widgets</groupId>
+		<artifactId>org.eclipse.scout.widgets</artifactId>
+		<version>5.2.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.scout.widgets</relativePath>
+	</parent>
+
+	<artifactId>org.eclipse.scout.widgets.ui.html.app.dev</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<docker.image.prefix>eclipsescout</docker.image.prefix>
+	</properties>
+
+	<dependencies>
+		<!-- Widget Application -->
+		<dependency>
+			<groupId>org.eclipse.scout.widgets</groupId>
+			<artifactId>org.eclipse.scout.widgets.ui.html</artifactId>
+		</dependency>
+
+		<!-- Components from previous Widget Application -->
+		<dependency>
+			<groupId>org.eclipse.scout.widgets</groupId>
+			<artifactId>org.eclipse.scout.widgets.old.client</artifactId>
+		</dependency>
+
+		<!-- Components for custom components -->
+		<dependency>
+			<groupId>org.eclipse.scout.widgets</groupId>
+			<artifactId>org.eclipse.scout.widgets.heatmap.client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.scout.widgets</groupId>
+			<artifactId>org.eclipse.scout.widgets.heatmap.ui.html</artifactId>
+		</dependency>
+
+		<!-- Jetty Server -->
+		<dependency>
+			<groupId>org.eclipse.scout.rt</groupId>
+			<artifactId>org.eclipse.scout.dev.jetty</artifactId>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.2.3</version>
+				<configuration>
+				<!-- TODO mzi: reset to explicit group id to ${project.groupId} once the renaming from org.eclipse.scout.widgets to org.eclipse.scout.widgets is complete -->
+					<imageName>${docker.image.prefix}/org.eclipse.scout.widgets</imageName>
+					<dockerDirectory>.</dockerDirectory>
+					<resources>
+						<resource>
+							<!-- https://github.com/spotify/docker-maven-plugin/issues/68 -->
+							<!-- <targetPath>/</targetPath> -->
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.war</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
