@@ -34,7 +34,7 @@
 		<!-- Events module -->
 		<dependency>
 			<groupId>org.eclipse.scout.contacts</groupId>
-			<artifactId>org.eclipse.scout.contacts.client.module.events</artifactId>
+			<artifactId>org.eclipse.scout.contacts.events.client</artifactId>
 		</dependency>
 
 		<!-- Jetty Server -->
@@ -62,7 +62,7 @@
 		<!-- Events module -->
 		<dependency>
 			<groupId>org.eclipse.scout.contacts</groupId>
-			<artifactId>org.eclipse.scout.contacts.server.module.events</artifactId>
+			<artifactId>org.eclipse.scout.contacts.events.server</artifactId>
 		</dependency>
 
 		<dependency>

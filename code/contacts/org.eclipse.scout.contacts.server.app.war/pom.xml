@@ -43,7 +43,7 @@
     <!-- Events module -->
     <dependency>
       <groupId>org.eclipse.scout.contacts</groupId>
-      <artifactId>org.eclipse.scout.contacts.server.module.events</artifactId>
+      <artifactId>org.eclipse.scout.contacts.events.server</artifactId>
     </dependency>
 
     <!-- Logging -->
