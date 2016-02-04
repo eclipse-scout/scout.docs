@@ -109,28 +109,11 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     node.setText(t[tlen - 6]);
     node.setIconId(t[tlen - 5]);
     node.setToolTip(t[tlen - 4]);
-    node.setFont(parseFont(t[tlen - 3]));
+    node.setFont(FontSpec.parse(t[tlen - 3]));
     node.setEnabled(parseBoolean(t[tlen - 2]));
     node.setActive(parseBoolean(t[tlen - 1]));
 
     return node;
-  }
-
-  private FontSpec parseFont(String font) {
-    if (StringUtility.isNullOrEmpty(font)) {
-      return null;
-    }
-
-    FontSpec f = new FontSpec("Arial", 0, 12);
-
-    if (font.equals("italic")) {
-      f = f.getItalicCopy();
-    }
-    else if (font.equals("bold")) {
-      f = f.getBoldCopy();
-    }
-
-    return f;
   }
 
   private boolean parseBoolean(String bool) {
