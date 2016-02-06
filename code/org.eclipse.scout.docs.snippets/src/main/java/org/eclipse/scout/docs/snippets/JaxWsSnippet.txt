@@ -19,6 +19,8 @@
       <executions>
         <!-- YourFirstWebService.wsdl -->
         <execution> <1>
+          <!-- DO NOT CHANGE THE ID: 'wsimport-1';
+               it overrides an execution defined in the parent pom -->
           <id>wsimport-1</id> <2>
           <goals>
             <goal>wsimport</goal> <3>
@@ -63,7 +65,7 @@
       <bindingFile>global-bindings.xml</bindingFile> <1>
       <bindingFile>your-first-webservice-ws-bindings.xml</bindingFile> <2>
       <bindingFile>your-first-webservice-xs-bindings.xml</bindingFile> <3>
-    <bindingFiles>
+    </bindingFiles>
   </configuration>
 </execution>
 
@@ -76,7 +78,7 @@
       <bindingFile>global-bindings.xml</bindingFile> <1>
       <bindingFile>your-second-webservice-ws-bindings.xml</bindingFile> <2>
       <bindingFile>your-second-webservice-xs-bindings.xml</bindingFile> <3>
-    <bindingFiles>
+    </bindingFiles>
   </configuration>
 </execution>
 

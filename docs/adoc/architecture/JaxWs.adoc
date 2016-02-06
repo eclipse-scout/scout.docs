@@ -96,14 +96,16 @@ A generally applicable configuration cannot be given, because the effective conf
 
 If running in an EE application server, refer to the containers documentation for more information.
 
-In the following, there is a sample configuration for shipping with _JAX_WS METRO_ or _Apache CXF_:
+<<lst-maven.dep.metro>> provides sample configuration for shipping with _JAX_WS METRO_ and <<lst-maven.dep.cxf>> does the same for _Apache CXF_
 
+[[lst-maven.dep.metro, maven Listing]]
 .Maven dependency for _JAX-WS METRO_
 [source,xml,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.dependency.metro]
 ----
 
+[[lst-maven.dep.cxf, maven Listing]]
 .Maven dependency for _Apache CXF_
 [source,xml,indent=0]
 ----
@@ -113,8 +115,9 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ==== Configure JAX-WS servlet in web.xml
 This section describes the configuration of the entry point Servlet to publish webservices. If working with webservice consumers only, no configuration is required.
 
-Similar to the pom.xml as described in <<jaxws.implementor.dependency>>, the _web.xml_ differs from implementor to implementor, and whether the implementor is already shipped with the application server. Nevertheless, the following listings show a sample configuration for _JAX-WS METRO_ and _Apache CXF_.
+Similar to the pom.xml as described in <<jaxws.implementor.dependency>>, the _web.xml_ differs from implementor to implementor, and whether the implementor is already shipped with the application server. Nevertheless, the following <<lst-jaxws.webxml.metro>> show a sample configuration for _JAX-WS METRO_ and <<lst-jaxws.webxml.cxf>> for _Apache CXF_.
 
+[[lst-jaxws.webxml.metro, web.xml Listing]]
 .web.xml for _JAX-WS METRO_ Servlet
 [source,xml,indent=0]
 ----
@@ -122,13 +125,13 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 <1> the base URL where to publish the webservice endpoints
 
-[[jaxws.webxml.cxf]]
+[[lst-jaxws.webxml.cxf, web.xml Listing]]
 .web.xml for _Apache CXF_ Servlet
 [source,xml,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.webxml.cxf]
 ----
-<1> _Apache CXF_ specific configuration file for endpoints to be published. See <<jaxws.registration.endpoints.cxf,web.xml>> for more information.
+<1> _Apache CXF_ specific configuration file for endpoints to be published. See <<jaxws.registration.endpoints.cxf>> for more information.
 <2> the base URL where to publish the webservice endpoints
 
 But, if running in an EE container, it is most likely that a Servlet configuration must not be configured, because the endpoints are discovered by the application server, or registered in a vendor specific way. Refer to the containers documentation for more information.
@@ -171,17 +174,27 @@ The profiles requires the Scout runtime version to be specified, and which is us
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
 ----
 
-If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module's pom.xml.
+If your project design envisions a separate JAR module per WSDL, you simply have to set the property 'jaxws.wsdl.file' with the name of your WSDL file in the module's pom.xml (example in <<lst-jaxws.pom.single-wsdl-file>>).
 
+[[lst-jaxws.pom.single-wsdl-file, Listing]]
 .wsimport configuration in pom.xml if working with a single WSDL file per JAR module
 [source,xml,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.single-wsdl-file-per-module]
 ----
 
-Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. Thereby, the 'id' of the execution section must be unique. Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file, and names it 'wsimport-1'. It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on. +
-For each execution section, you must configure its unique _id_, the _goal_ 'wsimport', and in the configuration section the respective _wsdlLocation_ and _wsdlFile_. For 'wsimport' to work, _wsdlLocation_ is not required. However, that location will be referenced in generated artifacts to set the wsdl location via `@WebService` and `@WebServiceClient`.
+Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. 
+Thereby, the 'id' of the execution section must be unique. 
+Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <<lst-jaxws.pom.single-wsdl-file>>), and names it 'wsimport-1'.
+It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on. +
+For each execution section, you must configure its unique _id_, the _goal_ 'wsimport', and in the configuration section the respective _wsdlLocation_ and _wsdlFile_. 
+For 'wsimport' to work, _wsdlLocation_ is not required.
+However, that location will be referenced in generated artifacts to set the wsdl location via `@WebService` and `@WebServiceClient`.
+The complete configuration is presented in <<lst-jaxws.pom.multiple-wsdl>>.
 
+WARNING: If you decide to configure multiple WSDL files in your POM as described in <<lst-jaxws.pom.multiple-wsdl>>, the configuration defined in the parent POM (`maven_rt_plugin_config-master`) and expecting a configuration as presented in <<lst-jaxws.pom.single-wsdl-file>> needs to be overridden, therefore one of your execution id needs to be `wsimport-1`.
+
+[[lst-jaxws.pom.multiple-wsdl, Listing]]
 .wsimport configuration in pom.xml if working with multiple WSDL files per JAR module
 [source,xml,indent=0]
 ----
@@ -200,22 +213,23 @@ Also, it is good practice to create a separate folder for each WSDL file, which 
 
 === Customize WSDL components and XSD schema elements via binding files
 
-By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See the following listing how to explicitly configure binding files.
+By default, all XML files contained in folder 'WEB-INF/binding' are used as binding files. But, most often, you will have a global binding file, which applies to all your WSDL files, and some custom binding files different per WSDL file and XSD schema files. See how to explicitly configure binding files in <<lst-jaxws.pom.multiple-binding>>.
 
+[[lst-jaxws.pom.multiple-binding, Listing]]
 .explicit configuration of binding files
 [source,xml,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.multiple-binding-files]
 ----
-<1> global binding file which applies to all XSD schema elements
-<2> custom binding file to customize the webservice's WSDL components in the namespace _http://java.sun.com/xml/ns/jaxws_
-<2> custom binding file to customize the webservice's XSD schema elements in the namespace _http://java.sun.com/xml/ns/jaxb_
+<1> global binding file which applies to all XSD schema elements. See <<lst-jaxws.example.globalbindingfile>>  for an example.
+<2> custom binding file to customize the webservice's WSDL components in the namespace _http://java.sun.com/xml/ns/jaxws_. See <<lst-jaxws.bindingfile.ws>> for an example.
+<3> custom binding file to customize the webservice's XSD schema elements in the namespace _http://java.sun.com/xml/ns/jaxb_. See <<lst-jaxws.bindingfile.xs>> for an example.
 
 With binding files in place, you can customize almost every WSDL component and XSD element that can be mapped to Java, such as the service endpoint interface class, packages, method name, parameter name, exception class, etc.
 
 The global binding file typically contains some customization for common data types like _java.util.Date_ or _java.util.Calendar_, whereas the custom binding files are specific for a WSDL or XSD schema. See <<jaxws.xmladapters>>.
 
-[[jaxws.example.globalbindingfile]]
+[[lst-jaxws.example.globalbindingfile, global binding file Listing]]
 .example of global binding file in the namespace http://java.sun.com/xml/ns/jaxb
 [source,xml,indent=0]
 ----
@@ -227,6 +241,7 @@ By default, generated artifacts are put into the package corresponding to the el
 Two separate binding files are required to customize WSDL components and XSD schema elements. +
 That is because WSDL component customization is to be done in 'jaxws' namespace http://java.sun.com/xml/ns/jaxws, whereas XSD schema element customization in 'jaxb' namespace http://java.sun.com/xml/ns/jaxb.
 
+[[lst-jaxws.bindingfile.ws, WS binding File Listing]]
 .example of jaxws component customization in the namespace http://java.sun.com/xml/ns/jaxws
 [source,xml,indent=0]
 ----
@@ -235,6 +250,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <1> customization via jaxws namespace: http://java.sun.com/xml/ns/jaxws
 <2> instructs to put all webservice components (port type, service) into package _org.eclipse.ws.yourfirstwebservice_
 
+[[lst-jaxws.bindingfile.xs, XS binding File Listing]]
 .example of xsd schema element customization in the namespace http://java.sun.com/xml/ns/jaxb
 [source,xml,indent=0]
 ----
@@ -299,10 +315,10 @@ In this chapter, you will learn how to publish a webservice provider via an entr
 === The concept of an Entry Point
 An entry point implements the endpoint interface (or port type interface), and is published as the webservice endpoint for that endpoint interface. The entry point itself is auto generated by <<JaxWsAnnotationProcessor>> during compile time, based on instructions as given by the respective class/interface annotated with `WebServiceEntryPoint` annotation. The entry point is responsible to enforce authentication and to run the web request in a `RunContext`. In turn, the request is propagated to the bean implementing the endpoint interface.
 
-The following <<img_interaction_entrypoint_porttype,figure>> illustrates the endpoint's class hierarchy and the message flow for a web request.
+<<img-interaction_entrypoint_porttype>> illustrates the endpoint's class hierarchy and the message flow for a web request.
 
-.interaction of entry point and port type
-[[img_interaction_entrypoint_porttype]]
+[[img-interaction_entrypoint_porttype]]
+.Interaction of entry point and port type
 image::{imgsdir}/jaxws_interaction_entrypoint_porttype.png[]
 
 As you can see, both, entry point and port type implement the endpoint interface. But it is the entry point which is actually installed as the webservice endpoint, and which receives web requests. However, the webservice itself is implemented in the implementing bean, which typically is located in _server_ module. See <<jaxws.modularization>> for more information. Upon a web request, the entry point simply intercepts the web request, and then invokes the web method on the implementing bean for further processing.
@@ -317,7 +333,7 @@ This section describes the steps required to generate an entry point. For demons
 See the WSDL file of ping webservice: <<PingWebService.wsdl>> +
 See the endpoint interface of ping webservice: <<PingWebServicePortType.java>>
 
-To generate an entry point for the webservice's endpoint interface, create an interface as following.
+To generate an entry point for the webservice's endpoint interface, create an interface as following in your jaxws project.
 [source,java,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.entrypoint.definition]
@@ -528,7 +544,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 [[jaxws.registration.endpoints.cxf]]
 ==== Apache CXF
-During startup, _Apache CXF_ looks for the config file as specified in 'web.xml' via 'config-location'. See <<jaxws.webxml.cxf,web.xml>> for more information.
+During startup, _Apache CXF_ looks for the config file as specified in 'web.xml' via 'config-location'. See <<lst-jaxws.webxml.cxf>> for more information.
 
 .WEB-INF/cxf-jaxws.xml
 [source,xml,indent=0]
@@ -671,7 +687,7 @@ Depending on the implementor used, cached ports may increase performance, becaus
 [[jaxws.xmladapters]]
 == XML adapters to work with java.util.Date and java.util.Calendar
 Scout ships with some XML adapters to not have to work with `XMLGregorianCalendar`, but with `java.util.Date` instead. +
-It is recommended to configure your global binding file accordingly. See <<jaxws.example.globalbindingfile,global binding file>> for an example.
+It is recommended to configure your global binding file accordingly. See <<lst-jaxws.example.globalbindingfile>> for an example.
 
 See the adapter's JavaDoc for more detailed information.
 
