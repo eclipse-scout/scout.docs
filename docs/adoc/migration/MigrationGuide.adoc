@@ -678,7 +678,7 @@ See Scout architecture documentation for more information.
 
 === Raw Eclipse Job
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.rawEclipseJob.old]
 ----
@@ -691,7 +691,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === ServerJob
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.old]
 ----
@@ -704,7 +704,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === ServerJob.runNow(...)
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.runNow.old]
 ----
@@ -717,7 +717,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 === ServerJob with other Subject
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.otherSubject.old]
 ----
@@ -730,7 +730,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === ClientSyncJob
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientSyncJob.old]
 ----
@@ -743,7 +743,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === ClientAsyncJob
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientAsyncJob.old]
 ----
@@ -756,7 +756,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Delayed execution
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.delayedExecution.old]
 ----
@@ -769,7 +769,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Repeatedly execution with a fixed delay
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.fixedDelayExecution.old]
 ----
@@ -782,7 +782,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Check for cancellation
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.checkForCancellation.old]
 ----
@@ -795,7 +795,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Join job
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join.old]
 ----
@@ -808,7 +808,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Join job with a maximal wait time
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join_with_timeout.old]
 ----
@@ -821,7 +821,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === Join job and get the job's computation result
 [source,java,indent=0]
-.before Scout 'N' release (<=5.0.x)
+.before Scout 'N' release (\<=5.0.x)
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.old]
 ----
