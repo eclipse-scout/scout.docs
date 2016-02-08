@@ -9,4 +9,17 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Text is missing
+The _New Scout Project_ wizard can be used to create a new Scout project.
+To open it, select the menu:File[New,Project...] Menu and type "`Scout Project`" in the wizard search field.
+
+image::{imgsdir}/sdk_new_project.png[]
+
+Group Id:: Maven groupId used for all created projects.
+Artifact Id:: Maven artifactId for the parent project. The additional projects are derived from this name (If you select `myapp` you will get several other projects `myapp.client`, `myapp.shared`, ...)
+Display Name:: The name of the application presented to the user (e.g. in the Browser title bar).
+
+With the [element]_Project Location_ group box, you can control where the project will be created.
+Unchecked the [element]_Use default Workspace location_ checkbox to enter an other value in the [element]_Target Directory_ Field.
+The btn:[Browse...] button can help you to find the appropriate path.
+
+See also the <<tutorial_helloworld.adoc#,Hello world Tutorial>> for a complete project creation example.

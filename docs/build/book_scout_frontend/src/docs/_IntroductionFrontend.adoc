@@ -890,7 +890,7 @@ TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/or
 
 [[img-nls_editor, Figure 000]]
 .The NLS editor provided by the Scout SDK. This editor is opened via the [link]_Open NLS Editor ..._ link in the Scout Object Properties of the [node]_HelloworldTextProviderService_ node.
-image::{imgsdir}/sdk_nls_editor.png[]
+image::{imgsdir}/sdk_editor_nls.png[]
 
 When we did add the [field]_Message_ field to the desktop form of the "`Hello World`" application we had to enter a new translation entry for the label of the message field as shown in <<img-helloworld_stringfield>>.
 The individual translation entries are then stored in language specific text property files.

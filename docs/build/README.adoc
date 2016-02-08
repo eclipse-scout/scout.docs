@@ -10,7 +10,7 @@ This folder contains the documents that are build.
 * `book_scout_frontend`: produces a book called "Eclipse Scout: Frontend Development".
 * `book_scout_architecture`: produces a book called "Eclipse Scout: Architecture".
 * `scout_migration`: produces an article called "Eclipse Scout: Migration Guide".
-* `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.help` plugin). The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt].
+* `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.s2e.doc` plugin). The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt].
 * `publish`: this last step prepares all the documents in order to publish them (post processing of the Asciidoctor documents). You should run the other tasks, before running this task.
 
 == Usage
@@ -44,12 +44,16 @@ Output:
                 |   toc.xml
                 |
                 \---html
-                    |   <html files>
+                    |   {html files}
+                    |
+                    +---css
+                    |       {css files}
                     |
                     \---images
                             {image files}
 
-This output needs to be synced with the `org.eclipse.scout.sdk.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository]
+This output needs to be synced with the `org.eclipse.scout.sdk.s2e.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository].
+The content of `scout-sdk-help` should be copied inside `org.eclipse.scout.sdk.s2e.doc`.
 
 === Eclipse.org/scout website
 This part of the output contains the pages published on the link:http://www.eclipse.org/scout[Scout Homepage]:

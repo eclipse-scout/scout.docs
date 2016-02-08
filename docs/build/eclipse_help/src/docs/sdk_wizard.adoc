@@ -12,5 +12,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 The Scout SDK provides following Wizards:
 
 * <<sdk_wizard_project.adoc#, New Project Wizard>>
+* <<sdk_wizard_form.adoc#, New Form Wizard>>
+* <<sdk_wizard_page.adoc#, New Page Wizard>>
 * <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>>
+* <<sdk_wizard_lookupcall.adoc#, New LookupCall Wizard>>
+* <<sdk_wizard_code-type.adoc#, New CodeType Wizard>>
+* <<sdk_wizard_permission.adoc#, New Permission Wizard>>
 * <<sdk_wizard_language.adoc#, Add a Language Wizard>>

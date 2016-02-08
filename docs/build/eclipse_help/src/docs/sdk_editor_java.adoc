@@ -9,4 +9,36 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Text is missing
+Scout uses the standard Java Editor as provided by Eclipse.
+In order to ease the development, some additional features are added the Editor.
+
+===== Create new Scout Elements
+
+To create new Scout Elements (like Form-Fields, Codes, Columns, Extensions, Form-Handlers, Key-Strokes or Menus) some additional proposals are available in the content assist.
+With kbd:[Ctrl,Space] the depending on the context, additional templates can be selected to create the corresponding inner-classes.
+<<img-java_proposals_groupbox>> provides an example the content assist proposal in a `GroupBox` context and <<img-java_proposals_table>> does the same for a `Table`
+
+[[img-java_proposals_groupbox, Figure Proposals in a GroupBox]]
+.Proposals to create new entities in a GroupBox
+image::{imgsdir}/java_proposals_groupbox.png[]
+
+[[img-java_proposals_table, Figure Proposals in a Table]]
+.Proposals to create new entities in a Table
+image::{imgsdir}/java_proposals_table.png[]
+
+When a template is selected, it is possible to customized it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
+With this mechanism you can quickly define the class name, the parent class and other properties.
+With kbd:[Enter] you will exit the Edit-Mode.
+
+===== NLS-Entry support
+
+When the carret is inside the String parameter of the `TEXTS.get()` code, the content assist provide support for the NLS entries.
+<<img-java_proposals_texts>> provides an example.
+
+[[img-java_proposals_texts, Figure Proposals in a TEXTS.get()]]
+.Proposals corresponding to NLS Support.
+image::{imgsdir}/java_proposals_texts.png[]
+
+You can select one of the matching entries (like "DateOfBirth" in the example) and you will see the different translations on the right.
+
+You can select "New text..." to open the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.

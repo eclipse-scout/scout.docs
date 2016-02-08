@@ -102,6 +102,9 @@ Added bean field and bean column. See `AbstractBeanField`, `AbstractBeanColumn` 
 ==== Wizard Progress Field [New]
 A new widget has been added: `WizardProgressField`. It is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
 
+==== HTMLUtility
+`org.eclipse.scout.rt.platform.html.HTMLUtility` and `org.eclipse.scout.rt.platform.html.CSSPatch` were deprecated because they contained only legacy code of doubtful quality. Do not use them anymore -- they will be removed in the next Scout release. The support for most of the contained methods was dropped, because they are not required anymore with the new UI. A slightly improved version of the `getPlainText()` method is available on the new bean `org.eclipse.scout.rt.platform.html.HtmlHelper`.
+
 ==== Various Changes
 * `ILabelField`, `IHtmlField` and `IStringField` are now `IHtmlCapable`.
 * `UiLayer`: Removed values `JSP`, `JSF`, `RAP`, `SWING` and added value `HTML`.

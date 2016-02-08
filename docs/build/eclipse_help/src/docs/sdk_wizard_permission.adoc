@@ -1,0 +1,12 @@
+==== New Permission Wizard
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+Text is missing

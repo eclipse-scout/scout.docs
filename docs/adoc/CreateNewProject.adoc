@@ -18,7 +18,7 @@ ifndef::mdledir[:mdledir: .]
 Start your Eclipse IDE and select an empty directory for your workspace. 
 This workspace directory will then hold all the project code for the `Hello World` application. 
 Once the Eclipse IDE is running it will show the Java perspective.
-To create a new Scout project select the menu menu:File -> New -> Project...[] and type "`Scout Project`" in the wizard search field.
+To create a new Scout project select the menu menu:File[New,Project...] and type "`Scout Project`" in the wizard search field.
 Select the Scout Project wizard and press btn:[Next].
 
 In the [wizard]_New Scout Project_ wizard you have to enter a `group id`, `artifact id` and a `display name` for your Scout project. 

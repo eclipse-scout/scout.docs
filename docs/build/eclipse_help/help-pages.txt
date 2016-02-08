@@ -8,5 +8,10 @@ sdk_editor_java.html
 sdk_editor_nls.html
 sdk_wizard.html
 sdk_wizard_project.html
+sdk_wizard_form.html
+sdk_wizard_page.html
 sdk_wizard_nls-entry.html
+sdk_wizard_lookupcall.html
+sdk_wizard_code-type.html
+sdk_wizard_permission.html
 sdk_wizard_language.html
