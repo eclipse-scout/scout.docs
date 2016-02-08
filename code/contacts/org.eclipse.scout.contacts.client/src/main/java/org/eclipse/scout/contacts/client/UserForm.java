@@ -122,7 +122,7 @@ public class UserForm extends AbstractForm {
     return HTML.div(
         HTML.div(getGravatarImage()),
         HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))),
-        HTML.div(HTML.appLink("logout", TEXTS.get("Logout")))).toEncodedHtml();
+        HTML.div(HTML.appLink("logout", TEXTS.get("Logout")))).toHtml();
   }
 
   private IHtmlElement getGravatarImage() {
