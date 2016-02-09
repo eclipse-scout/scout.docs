@@ -10,16 +10,13 @@
  ******************************************************************************/
 package org.eclipse.scout.docs.snippets;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
 import org.eclipse.scout.rt.platform.BeanMetaData;
-import org.eclipse.scout.rt.platform.BeanProducer;
 import org.eclipse.scout.rt.platform.IBean;
-import org.eclipse.scout.rt.platform.IBeanInstanceProducer;
 import org.eclipse.scout.rt.platform.IPlatform;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
@@ -121,21 +118,6 @@ public final class PlatformSnippet {
   }
   //end::BeanClass[]
 
-  //tag::BeanProducer[]
-  @Bean
-  @BeanProducer(MyCustomProducer.class)
-  public class BeanWithCustomProducer {
-  }
-
-  public class MyCustomProducer<T> implements IBeanInstanceProducer<T> {
-    @Override
-    public T produce(IBean<T> bean) {
-      // create instance of bean
-      return null;
-    }
-  }
-  //end::BeanProducer[]
-
   //tag::ConfigProperties[]
   /**
    * Defines a new property of data type {@link String} with key 'my.application.key' and default value 'defaultValue'.
@@ -174,7 +156,6 @@ public final class PlatformSnippet {
     //tag::BeanRetrieval[]
     BeanSingletonClass bean = BEANS.get(BeanSingletonClass.class);
     BeanClass beanOrNull = BEANS.opt(BeanClass.class);
-    List<BeanWithCustomProducer> all = BEANS.all(BeanWithCustomProducer.class);
     //end::BeanRetrieval[]
   }
 }
