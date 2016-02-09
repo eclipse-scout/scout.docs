@@ -160,17 +160,6 @@ But sometimes it is necessary to create beans already at the application startup
 
 Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after the instance have been created.
 
-==== Bean Producers
-
-By default all scout beans use a predefined mechanism to create instances as learned in the sections before. This mechanism can be modified for each bean to implement custom bean instance creation logic. For this the bean must be annotated with a producer as shown in listing <<lst-BeanProducer>>.
-
-[[lst-BeanProducer, bean producer]]
-[source,java,indent=0]
-.A bean with custom instanciation logic
-----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanProducer]
-----
-
 === Bean Retrieval
 
 To retrieve a bean the class `org.eclipse.scout.rt.platform.BEANS` should be used. This class provides (amongst others) the following methods:
