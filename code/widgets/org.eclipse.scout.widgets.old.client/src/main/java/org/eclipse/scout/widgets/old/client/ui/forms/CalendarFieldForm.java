@@ -38,10 +38,9 @@ import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
-import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.GroupBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.GroupBox.CalendarField;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
+import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,10 +76,6 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  public GroupBox getGroupBox() {
-    return getFieldByClass(GroupBox.class);
-  }
-
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
@@ -88,199 +83,116 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20)
-    public class GroupBox extends AbstractGroupBox {
+    @Order(10)
+    public class CalendarField extends AbstractCalendarField<CalendarField.Calendar> {
+
+      @Override
+      protected int getConfiguredGridH() {
+        return 20;
+      }
+
+      @Override
+      protected int getConfiguredGridW() {
+        return 0;
+      }
+
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
+      @Override
+      protected boolean getConfiguredStatusVisible() {
+        return false;
+      }
 
       @Order(10)
-      public class CalendarField extends AbstractCalendarField<CalendarField.Calendar> {
+      public class Calendar extends AbstractCalendar {
+
+        private ContextMenuListener m_cml;
+
+        private List<IMenu> m_calendarMenus = new ArrayList<>();
 
         @Override
-        protected int getConfiguredGridH() {
-          return 20;
+        protected void execInitCalendar() {
+          m_cml = new ContextMenuListener() {
+            @Override
+            public void contextMenuChanged(ContextMenuEvent event) {
+              if (ContextMenuEvent.TYPE_STRUCTURE_CHANGED == event.getType()) {
+                IContextMenu rootContextMenu = getForm().getRootGroupBox().getContextMenu();
+                rootContextMenu.removeChildActions(m_calendarMenus);
+                m_calendarMenus.clear();
+                for (IMenu menu : event.getSource().getChildActions()) {
+                  m_calendarMenus.add(OutlineMenuWrapper.wrapMenu(menu));
+                }
+                rootContextMenu.addChildActions(m_calendarMenus);
+              }
+            }
+          };
+          getCalendar().getContextMenu().addContextMenuListener(m_cml);
         }
 
         @Override
-        protected int getConfiguredGridW() {
-          return 0;
-        }
-
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected boolean getConfiguredStatusVisible() {
-          return false;
+        protected void execDisposeCalendar() {
+          getCalendar().getContextMenu().removeContextMenuListener(m_cml);
         }
 
         @Order(10)
-        public class Calendar extends AbstractCalendar {
-
-          private ContextMenuListener m_cml;
-
-          private List<IMenu> m_calendarMenus = new ArrayList<>();
+        public class ItemProvdider01 extends AbstractCalendarItemProvider {
 
           @Override
-          protected void execInitCalendar() {
-            m_cml = new ContextMenuListener() {
-              @Override
-              public void contextMenuChanged(ContextMenuEvent event) {
-                if (ContextMenuEvent.TYPE_STRUCTURE_CHANGED == event.getType()) {
-                  IContextMenu rootContextMenu = getForm().getRootGroupBox().getContextMenu();
-                  rootContextMenu.removeChildActions(m_calendarMenus);
-                  m_calendarMenus.clear();
-                  for (IMenu menu : event.getSource().getChildActions()) {
-                    m_calendarMenus.add(OutlineMenuWrapper.wrapMenu(menu));
-                  }
-                  rootContextMenu.addChildActions(m_calendarMenus);
-                }
-              }
-            };
-            getCalendar().getContextMenu().addContextMenuListener(m_cml);
-          }
+          protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
+            LOG.info("ItemProvdider01#execLoadItemsInBackground");
+            System.out.println("START long running item fetch operation... ");
+            SleepUtil.sleepSafe(5, TimeUnit.SECONDS);
+            System.out.println("END item fetch operation");
 
-          @Override
-          protected void execDisposeCalendar() {
-            getCalendar().getContextMenu().removeContextMenuListener(m_cml);
-          }
+            String cssClass = "calendar-appointment";
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            Date start = cal.getTime();
+            Date end = cal.getTime();
+            result.add(new CalendarAppointment(0L, 0L, start, end, true, "FULL DAY [P1]", "This appointment takes the full day", cssClass));
+            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.HOUR, 2);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(1L, 2L, start, end, false, "app1 [P1]", "appointment1 body", cssClass));
 
-          @Order(10)
-          public class ItemProvdider01 extends AbstractCalendarItemProvider {
+            cal.add(java.util.Calendar.HOUR, 1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.MINUTE, 30);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(2L, 2L, start, end, false, "app2 [P1]", "appointment2 body", cssClass));
 
-            @Override
-            protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
-              LOG.info("ItemProvdider01#execLoadItemsInBackground");
-              System.out.println("START long running item fetch operation... ");
-              SleepUtil.sleepSafe(5, TimeUnit.SECONDS);
-              System.out.println("END item fetch operation");
+            // future
+            cal.setTime(new Date());
+            cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.HOUR, 48);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(3L, 2L, start, end, false, "app3 [P1]", null, cssClass));
+            cal.add(java.util.Calendar.HOUR, 2);
+            end = cal.getTime();
 
-              String cssClass = "calendar-appointment";
-              java.util.Calendar cal = java.util.Calendar.getInstance();
-              Date start = cal.getTime();
-              Date end = cal.getTime();
-              result.add(new CalendarAppointment(0L, 0L, start, end, true, "FULL DAY [P1]", "This appointment takes the full day", cssClass));
-              cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.HOUR, 2);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(1L, 2L, start, end, false, "app1 [P1]", "appointment1 body", cssClass));
-
-              cal.add(java.util.Calendar.HOUR, 1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.MINUTE, 30);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(2L, 2L, start, end, false, "app2 [P1]", "appointment2 body", cssClass));
-
-              // future
-              cal.setTime(new Date());
-              cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.HOUR, 48);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(3L, 2L, start, end, false, "app3 [P1]", null, cssClass));
-              cal.add(java.util.Calendar.HOUR, 2);
-              end = cal.getTime();
-
-              result.add(new CalendarAppointment(4L, 2L, start, end, false, null, "appointment4 body", cssClass));
-            }
-
-            @Order(200)
-            public class Provider1ComponentMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return getClass().getSimpleName();
-              }
-
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-              }
-            }
-
-            @Order(210)
-            public class Provider1EmptySpaceMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return getClass().getSimpleName();
-              }
-
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
-              }
-            }
-          }
-
-          @Order(20)
-          public class ItemProvdider02 extends AbstractCalendarItemProvider {
-
-            @Override
-            protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
-              LOG.info("ItemProvdider02#execLoadItems");
-
-              String cssClass = "calendar-task";
-              java.util.Calendar cal = java.util.Calendar.getInstance();
-              Date start = cal.getTime();
-              Date end = cal.getTime();
-              result.add(new CalendarAppointment(5L, 0L, start, end, true, "FULL DAY [P2]", "This appointment takes the full day", cssClass));
-              cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.HOUR, 2);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(6L, 2L, start, end, false, "app1 [P2]", "appointment1 body", cssClass));
-
-              cal.add(java.util.Calendar.HOUR, 1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.MINUTE, 30);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(7L, 2L, start, end, false, "app2 [P2]", "appointment2 body", cssClass));
-
-              // future
-              cal.setTime(new Date());
-              cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
-              start = cal.getTime();
-              cal.add(java.util.Calendar.HOUR, 48);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(8L, 2L, start, end, false, "app3 [P2]", "appointment3 body", cssClass));
-              cal.add(java.util.Calendar.HOUR, 2);
-              end = cal.getTime();
-              result.add(new CalendarAppointment(9L, 2L, start, end, false, "app4 [P2]", "appointment4 body", cssClass));
-            }
-
-            @Order(200)
-            public class Provider2ComponentMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return getClass().getSimpleName();
-              }
-
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-              }
-            }
-
-            @Order(210)
-            public class Provider2EmptySpaceMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return getClass().getSimpleName();
-              }
-
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
-              }
-            }
+            result.add(new CalendarAppointment(4L, 2L, start, end, false, null, "appointment4 body", cssClass));
           }
 
           @Order(200)
-          public class CalendarEmptySpaceMenu extends AbstractMenu {
+          public class Provider1ComponentMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+            }
+          }
+
+          @Order(210)
+          public class Provider1EmptySpaceMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
@@ -291,6 +203,85 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
               return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
             }
+          }
+        }
+
+        @Order(20)
+        public class ItemProvdider02 extends AbstractCalendarItemProvider {
+
+          @Override
+          protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
+            LOG.info("ItemProvdider02#execLoadItems");
+
+            String cssClass = "calendar-task";
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            Date start = cal.getTime();
+            Date end = cal.getTime();
+            result.add(new CalendarAppointment(5L, 0L, start, end, true, "FULL DAY [P2]", "This appointment takes the full day", cssClass));
+            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.HOUR, 2);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(6L, 2L, start, end, false, "app1 [P2]", "appointment1 body", cssClass));
+
+            cal.add(java.util.Calendar.HOUR, 1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.MINUTE, 30);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(7L, 2L, start, end, false, "app2 [P2]", "appointment2 body", cssClass));
+
+            // future
+            cal.setTime(new Date());
+            cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.HOUR, 48);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(8L, 2L, start, end, false, "app3 [P2]", "appointment3 body", cssClass));
+            cal.add(java.util.Calendar.HOUR, 2);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(9L, 2L, start, end, false, "app4 [P2]", "appointment4 body", cssClass));
+          }
+
+          @Order(200)
+          public class Provider2ComponentMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+            }
+          }
+
+          @Order(210)
+          public class Provider2EmptySpaceMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
+            }
+          }
+        }
+
+        @Order(200)
+        public class CalendarEmptySpaceMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return getClass().getSimpleName();
+          }
+
+          @Override
+          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+            return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
           }
         }
       }
