@@ -266,7 +266,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getParticipantsColumn().setValue(r, 680L);
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
-          table.getTrendColumn().setValue(r, "font:\uF176");
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
 
           //Second Row:
@@ -281,7 +281,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getParticipantsColumn().setValue(r, 810L);
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
           table.getAttendedColumn().setValue(r, true);
-          table.getTrendColumn().setValue(r, "font:\uF175");
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
 
@@ -668,7 +668,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
-            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.ChevronUp);
+            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
 
             addRow(row, true);
           }
