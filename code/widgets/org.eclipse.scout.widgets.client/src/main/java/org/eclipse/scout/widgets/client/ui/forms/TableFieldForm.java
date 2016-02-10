@@ -58,6 +58,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
+import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -667,6 +668,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
+            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.ChevronUp);
 
             addRow(row, true);
           }
