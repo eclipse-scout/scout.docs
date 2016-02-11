@@ -300,8 +300,6 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         public class Table extends AbstractTable {
 
-          // FIXME dwi: BUG, Table bug: organize columns throws null pointer exception
-
           public NameColumn getNameColumn() {
             return getColumnSet().getColumnByClass(NameColumn.class);
           }
