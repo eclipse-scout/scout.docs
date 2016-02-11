@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -250,109 +251,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Examples");
-      }
-
-      @Order(10)
-      public class ShowDefaultValueButton extends AbstractButton {
-
-        @Override
-        protected int getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_LINK;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ShowValue");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ShowValueOfDefaultField");
-        }
-
-        @Override
-        protected String getConfiguredKeyStroke() {
-          return "Ctrl-Alt-P";
-        }
-
-        @Override
-        protected void execClickAction() {
-          MessageBoxes.createOk().withBody(getDefaultField().getValue() + "").show();
-        }
-      }
-
-      @Order(15)
-      public class SwitchLookupCall extends AbstractButton {
-
-        private boolean m_localLookupCall = true;
-
-        @Override
-        protected int getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_LINK;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("SwitchToRemote");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("SwitchToRemoteTooltip");
-        }
-
-        @Override
-        protected void execClickAction() {
-          m_localLookupCall = !m_localLookupCall;
-          if (m_localLookupCall) {
-            getDefaultField().setLookupCall(new LocaleLookupCall());
-            setLabel(TEXTS.get("SwitchToRemote"));
-            setTooltipText(TEXTS.get("SwitchToRemoteTooltip"));
-          }
-          else {
-            getDefaultField().setLookupCall(new RemoteLocaleLookupCall());
-            setLabel(TEXTS.get("SwitchToLocal"));
-            setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
-          }
-          LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
-        }
-      }
-
-      @Order(17)
-      public class AutoPrefixWildcard extends AbstractButton {
-
-        private boolean m_active = false;
-
-        @Override
-        protected int getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_LINK;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EnableAutoPrefixWildcard");
-        }
-
-        @Override
-        protected void execInitField() {
-          m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
-        }
-
-        @Override
-        protected void execClickAction() {
-          m_active = !m_active;
-          ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
-          updateLabel();
-        }
-
-        private void updateLabel() {
-          if (m_active) {
-            setLabel(TEXTS.get("DisableAutoPrefixWildcard"));
-          }
-          else {
-            setLabel(TEXTS.get("EnableAutoPrefixWildcard"));
-          }
-        }
       }
 
       @Order(20)
@@ -859,48 +757,157 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(35)
-    public class ChangeWildcardButton extends AbstractButton {
+    public class SeleniumTestMenu extends AbstractMenu {
 
       @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("ChangeWildcard");
+      protected String getConfiguredText() {
+        return TEXTS.get("Selenium");
       }
 
-      @Override
-      protected void execInitField() {
-        updateLabel(getDefaultField().getWildcard());
+      @Order(10)
+      public class WildcardMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Wildcard");
+        }
+
+        @Order(10)
+        public class AutoPrefixWildcardMenu extends AbstractMenu {
+
+          private boolean m_active;
+
+          @Override
+          protected void execInitAction() {
+            m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
+            updateText();
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("EnableAutoPrefixWildcard");
+          }
+
+          @Override
+          protected void execAction() {
+            m_active = !m_active;
+            ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
+            updateText();
+          }
+
+          private void updateText() {
+            setText(TEXTS.get(m_active ? "DisableAutoPrefixWildcard" : "EnableAutoPrefixWildcard"));
+          }
+        }
+
+        @Order(20)
+        public class ChangeWildcard1Menu extends AbstractMenu {
+          @Override
+          protected void execAction() {
+            changeWildcard("*");
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ChangeWildcard", "*");
+          }
+        }
+
+        @Order(30)
+        public class ChangeWildcard2Menu extends AbstractMenu {
+          @Override
+          protected void execAction() {
+            changeWildcard(".*");
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ChangeWildcard", ".*");
+          }
+        }
+
+        @Order(40)
+        public class ChangeWildcard3Menu extends AbstractMenu {
+          @Override
+          protected void execAction() {
+            changeWildcard("\\");
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ChangeWildcard", "\\");
+          }
+        }
+
+        @Order(50)
+        public class ChangeWildcard4Menu extends AbstractMenu {
+          @Override
+          protected void execAction() {
+            changeWildcard("°");
+          }
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ChangeWildcard", "°");
+          }
+        }
       }
 
-      private void updateLabel(String wildcard) {
-        setLabel(TEXTS.get("ChangeWildcard") + ": " + wildcard);
+      @Order(20)
+      public class ShowValueMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ShowValue");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ShowValueOfDefaultField");
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withBody(getDefaultField().getValue() + "").show();
+        }
+
+        @Override
+        protected String getConfiguredKeyStroke() {
+          return "Ctrl-Alt-P";
+        }
       }
 
-      @Override
-      protected void execClickAction() {
-        String newWildcard;
-        if (getDefaultField().getWildcard() == "*") {
-          newWildcard = "°";
-        }
-        else if (getDefaultField().getWildcard() == "°") {
-          newWildcard = ".*";
-        }
-        else if (getDefaultField().getWildcard() == ".*") {
-          newWildcard = "\\";
-        }
-        else {
-          newWildcard = "*";
-        }
-        getDefaultField().setWildcard(newWildcard);
-        getMandatoryField().setWildcard(newWildcard);
-        getDefaultSmartField().setWildcard(newWildcard);
-        getMandatorySmartfieldField().setWildcard(newWildcard);
-        getDefaultProposalField().setWildcard(newWildcard);
-        getMandatoryProposalField().setWildcard(newWildcard);
-        getListSmartField().setWildcard(newWildcard);
-        getTreeSmartField().setWildcard(newWildcard);
-        updateLabel(newWildcard);
-      }
+      @Order(30)
+      public class SwitchLookupCallMenu extends AbstractMenu {
 
+        private boolean m_localLookupCall = true;
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("SwitchToRemote");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("SwitchToRemoteTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          m_localLookupCall = !m_localLookupCall;
+          if (m_localLookupCall) {
+            getDefaultField().setLookupCall(new LocaleLookupCall());
+            setText(TEXTS.get("SwitchToRemote"));
+            setTooltipText(TEXTS.get("SwitchToRemoteTooltip"));
+          }
+          else {
+            getDefaultField().setLookupCall(new RemoteLocaleLookupCall());
+            setText(TEXTS.get("SwitchToLocal"));
+            setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
+          }
+          LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
+        }
+      }
     }
 
     @Order(40)
@@ -910,4 +917,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public class PageFormHandler extends AbstractFormHandler {
   }
+
+  private void changeWildcard(String wildcard) {
+    getDefaultField().setWildcard(wildcard);
+    getMandatoryField().setWildcard(wildcard);
+    getDefaultSmartField().setWildcard(wildcard);
+    getMandatorySmartfieldField().setWildcard(wildcard);
+    getDefaultProposalField().setWildcard(wildcard);
+    getMandatoryProposalField().setWildcard(wildcard);
+    getListSmartField().setWildcard(wildcard);
+    getTreeSmartField().setWildcard(wildcard);
+  }
+
 }
