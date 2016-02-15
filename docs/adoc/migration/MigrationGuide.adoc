@@ -362,6 +362,10 @@ As a consequence, not all date format patterns defined in SimpleDateFormat are s
 Both the date and the time part of a date field have a separate pattern, because they are rendered in two separate fields on the UI.
 +
 The method `AbstractDateField.execParseValue()` is no longer supported. It cannot be removed entirely, because it is defined on `AbstractValueField`, but is marked as deprecated and final to make it clear that it is never called. If any subclass had overridden this method, it should be deleted. The code cannot be migrated, because it is now performed in the UI only.
+* Removed methods not used by the HTML UI:
++ remove unused execShiftDate, execShiftTime from AbstractDateField
++ remove unused adjustDate, adjustTime from IDateField
++ removed fireDateShiftActionFromUI, fireTimeShiftActionFromUI from IDateFieldUIFacade
 
 === HTML Field
 
