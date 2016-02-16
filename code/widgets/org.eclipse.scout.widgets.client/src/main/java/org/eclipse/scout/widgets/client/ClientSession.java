@@ -20,7 +20,6 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
-import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
 import org.eclipse.scout.widgets.client.ui.desktop.Desktop;
 import org.slf4j.Logger;
@@ -49,7 +48,6 @@ public class ClientSession extends AbstractClientSession {
     }
 
     execInitLocale();
-    CODES.getAllCodeTypes("org.eclipse.scout.widgets.shared");
     setDesktop(new Desktop(resolveDesktopStyle()));
 
     if (createTunnelToServerBeans) {
