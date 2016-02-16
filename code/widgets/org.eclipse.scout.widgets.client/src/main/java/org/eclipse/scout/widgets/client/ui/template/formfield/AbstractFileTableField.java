@@ -136,12 +136,6 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Override
-    protected TransferObject execCopy(List<? extends ITableRow> rows) {
-      //TODO [5.2] jgu: BUG method call leads to runtime exceptions: tunnel is null ??
-      return super.execCopy(rows);
-    }
-
-    @Override
     protected TransferObject execDrag(List<ITableRow> rows) {
       List<BinaryResource> resources = new ArrayList<BinaryResource>();
 

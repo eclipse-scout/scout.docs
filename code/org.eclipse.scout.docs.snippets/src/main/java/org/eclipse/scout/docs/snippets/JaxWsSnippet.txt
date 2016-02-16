@@ -136,7 +136,7 @@
 <!-- Replace 'XXX-VERSION-XXX' by the respective Scout RT version -->
 <factorypath>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.jaxws.apt/XXX-VERSION-XXX/org.eclipse.scout.jaxws.apt-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/unquietcode/tools/jcodemodel/codemodel/1.0.2/codemodel-1.0.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/unquietcode/tools/jcodemodel/codemodel/1.0.3/codemodel-1.0.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.platform/XXX-VERSION-XXX/org.eclipse.scout.rt.platform-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.server.jaxws/XXX-VERSION-XXX/org.eclipse.scout.rt.server.jaxws-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar" enabled="true" runInBatchMode="false"/>

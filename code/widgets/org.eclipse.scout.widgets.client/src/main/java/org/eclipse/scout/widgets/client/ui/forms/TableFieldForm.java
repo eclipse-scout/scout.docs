@@ -24,6 +24,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
+import org.eclipse.scout.rt.client.ui.basic.table.HeaderCell;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
@@ -58,6 +59,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
+import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -265,7 +267,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getParticipantsColumn().setValue(r, 680L);
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
-          table.getTrendColumn().setValue(r, "font:\uF176");
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
 
           //Second Row:
@@ -280,7 +282,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getParticipantsColumn().setValue(r, 810L);
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
           table.getAttendedColumn().setValue(r, true);
-          table.getTrendColumn().setValue(r, "font:\uF175");
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
 
@@ -298,8 +300,6 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         public class Table extends AbstractTable {
-
-          // FIXME dwi: BUG, Table bug: organize columns throws null pointer exception
 
           public NameColumn getNameColumn() {
             return getColumnSet().getColumnByClass(NameColumn.class);
@@ -661,12 +661,106 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           }
 
+          @Order(110)
+          public class TextAndIconHeaderColumn extends AbstractStringColumn {
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Text and Icon";
+            }
+
+            @Override
+            protected void execDecorateHeaderCell(HeaderCell cell) {
+              super.execDecorateHeaderCell(cell);
+              cell.setIconId(AbstractIcons.Chart);
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 120;
+            }
+          }
+
+          @Order(120)
+          public class IconHeaderColumn extends AbstractStringColumn {
+
+            @Override
+            protected void execDecorateHeaderCell(HeaderCell cell) {
+              super.execDecorateHeaderCell(cell);
+              cell.setIconId(AbstractIcons.Chart);
+            }
+
+            @Override
+            protected String getConfiguredHeaderTooltipText() {
+              return "Icon only";
+            }
+
+          }
+
+          @Order(130)
+          public class EmptyHeaderColumn extends AbstractStringColumn {
+
+            @Override
+            protected String getConfiguredHeaderTooltipText() {
+              return "Empty Header";
+            }
+          }
+
+          @Order(140)
+          public class LegacyHeaderColumn extends AbstractStringColumn {
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Legacy Style";
+            }
+
+            @Override
+            protected String getConfiguredHeaderBackgroundColor() {
+              return "ddfff9";
+            }
+
+            @Override
+            protected String getConfiguredHeaderForegroundColor() {
+              return "ff0000";
+            }
+
+            @Override
+            protected String getConfiguredHeaderFont() {
+              return "italic";
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 100;
+            }
+
+            @Override
+            protected boolean getConfiguredVisible() {
+              return false;
+            }
+          }
+
+          @Order(150)
+          public class MultilineHeaderColumn extends AbstractStringColumn {
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Multiline\nHeader";
+            }
+
+            @Override
+            protected boolean getConfiguredVisible() {
+              return false;
+            }
+          }
+
           private void newRow() {
             ColumnSet cols = getColumnSet();
             ITableRow row = new TableRow(cols);
 
             row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
+            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
 
             addRow(row, true);
           }
