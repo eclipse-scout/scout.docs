@@ -14,7 +14,6 @@ import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
@@ -40,20 +39,11 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() {
-
-    //pre-load all known code types
-    CODES.getAllCodeTypes("org.eclipsescout.demo.bahbah.shared");
-
-    // turn client notification polling on
-//    getServiceTunnel().setClientNotificationPollInterval(1000L);
-
     setDesktop(new Desktop());
   }
 
   @Override
   protected void execStoreSession() {
-    // disable notification polling with -1
-//    ClientSession.get().getServiceTunnel().setClientNotificationPollInterval(-1);
     BEANS.get(IUserProcessService.class).unregisterUser();
   }
 
