@@ -335,7 +335,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(15)
-      public class Image1ScrollbarsEnabledCheckbox extends AbstractBooleanField {
+      public class Image1ScrollBarEnabledCheckbox extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
