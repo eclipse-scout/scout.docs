@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
+import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
@@ -630,7 +631,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
         @Override
         public IDisplayParent getValue() {
-          return ClientRunContexts.copyCurrent().getDesktop();
+          return IDesktop.CURRENT.get();
         }
 
       },
