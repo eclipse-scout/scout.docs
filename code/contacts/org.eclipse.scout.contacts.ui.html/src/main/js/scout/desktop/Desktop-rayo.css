@@ -10,7 +10,7 @@
  ******************************************************************************/
 @import (less) "scout/desktop/Desktop.css";
 
-.desktop-taskbar {
+.desktop-header {
   background-color: @palette-blue-0;
 }
 

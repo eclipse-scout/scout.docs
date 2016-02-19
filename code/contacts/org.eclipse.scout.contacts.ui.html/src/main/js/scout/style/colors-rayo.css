@@ -73,6 +73,6 @@
 
 @button-hover-background-color: @palette-blue-2;
 
-.taskbar-logo {
+.application-logo {
   visibility: hidden;
 }
