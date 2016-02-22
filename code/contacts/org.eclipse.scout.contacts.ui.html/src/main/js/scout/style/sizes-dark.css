@@ -10,5 +10,5 @@
  ******************************************************************************/
 @import (less) "scout/style/sizes.css";
 
-@size-desktop-navigation-breadcrumb: 200px;
+@desktop-navigation-breadcrumb-size: 200px;
 @desktop-header-height: 51px;

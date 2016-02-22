@@ -10,8 +10,8 @@
  ******************************************************************************/
 @import (less) "scout/style/sizes.css";
 
-@size-desktop-navigation: 290px;
-@size-desktop-navigation-breadcrumb: 200px;
+@desktop-navigation-width: 290px;
+@desktop-navigation-breadcrumb-width: 200px;
 
 @desktop-header-height: 51px;
 @bench-padding-x: 20px;
