@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
+import java.util.Date;
+
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox;
@@ -55,6 +57,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -214,6 +217,14 @@ public class PersonForm extends AbstractForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DateOfBirth");
+        }
+
+        @Override
+        protected Date execValidateValue(Date rawValue) {
+          if (CompareUtility.compareTo(rawValue, new Date()) > 0) {
+            throw new VetoException(TEXTS.get("DateOfBirthCanNotBeInFuture"));
+          }
+          return super.execValidateValue(rawValue);
         }
       }
 

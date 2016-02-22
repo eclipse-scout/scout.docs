@@ -24,7 +24,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
-import org.eclipse.scout.rt.client.ui.basic.table.HeaderCell;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
@@ -670,9 +669,8 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             }
 
             @Override
-            protected void execDecorateHeaderCell(HeaderCell cell) {
-              super.execDecorateHeaderCell(cell);
-              cell.setIconId(AbstractIcons.Chart);
+            protected String getConfiguredHeaderIconId() {
+              return AbstractIcons.Chart;
             }
 
             @Override
@@ -685,9 +683,8 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           public class IconHeaderColumn extends AbstractStringColumn {
 
             @Override
-            protected void execDecorateHeaderCell(HeaderCell cell) {
-              super.execDecorateHeaderCell(cell);
-              cell.setIconId(AbstractIcons.Chart);
+            protected String getConfiguredHeaderIconId() {
+              return AbstractIcons.Chart;
             }
 
             @Override
