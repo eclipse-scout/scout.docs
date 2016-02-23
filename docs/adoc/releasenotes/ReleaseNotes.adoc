@@ -123,3 +123,9 @@ IE9 does not support dropping files. Therefore, drag and drop in file chooser is
 
 === Input placeholders
 On-field labels are not visible in IE9 because it lacks support for the "placeholder" attribute.
+
+=== HttpServiceTunnel
+It is now possible again to call services on a different scout server by specifying server
+org.eclipse.scout.rt.servicetunnel.targetUrl and scout.auth.privatekey.
+For all interfaces annotated with @TunnelToServer without implementation, a proxy is created.
+
