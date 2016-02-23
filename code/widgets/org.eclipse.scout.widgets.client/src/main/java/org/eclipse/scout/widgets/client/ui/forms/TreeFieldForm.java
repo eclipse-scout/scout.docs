@@ -257,6 +257,30 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 deselectNodes(getSelectedNodes());
               }
             }
+
+            @Order(40)
+            public class SwitchDisplayStyle extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("SwitchDisplayStyle");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                String displayStyle = getTree().getDisplayStyle();
+                if (ITree.DISPLAY_STYLE_DEFAULT.equals(displayStyle)) {
+                  getTree().setDisplayStyle(ITree.DISPLAY_STYLE_BREADCRUMB);
+                }
+                else {
+                  getTree().setDisplayStyle(ITree.DISPLAY_STYLE_DEFAULT);
+                }
+              }
+            }
           }
 
           @Order(10)
