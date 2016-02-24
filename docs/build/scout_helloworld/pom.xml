@@ -12,7 +12,7 @@
 
   <artifactId>scout_helloworld</artifactId>
   <name>Scout helloworld article</name>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
     <sourceDirectory>src/docs</sourceDirectory>

@@ -228,7 +228,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <5> Specifies to exclude the current future (if any)
 <6> Specifies to match only jobs running on behalf of a `ClientRunContext`
 <7> Specifies to match only jobs of the current session
-<7> Builds the filters to get a Filter instance
+<8> Builds the filters to get a Filter instance
 
 Fore more information, refer to the JavaDoc of `FutureFilterBuilder`.
 
@@ -253,7 +253,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <3> Specifies to match only events for jobs which transitioned into running state
 <4> Specifies to match only events for jobs of the current session
 <5> Specifies to match only events for jobs which are associated with the execution hint 'computation'
-<7> Builds the filters to get a Filter instance
+<6> Builds the filters to get a Filter instance
 
 Fore more information, refer to the JavaDoc of `JobEventFilterBuilder`.
 

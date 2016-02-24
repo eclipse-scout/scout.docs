@@ -12,7 +12,7 @@
 
   <artifactId>scout_install</artifactId>
   <name>Scout Install article</name>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
     <sourceDirectory>src/docs</sourceDirectory>
