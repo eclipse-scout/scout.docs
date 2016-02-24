@@ -76,6 +76,11 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   }
 
   @Override
+  protected String getConfiguredApplicationLogoId() {
+    return "application_logo";
+  }
+
+  @Override
   protected void execOpened() {
     if (DesktopStyle.DEFAULT == m_desktopStyle) {
       // default desktop
