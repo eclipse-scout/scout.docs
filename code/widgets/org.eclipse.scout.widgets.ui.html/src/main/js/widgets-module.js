@@ -7,4 +7,6 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-__include("widgets/ExampleBeanField.js");
+(function(scout, $, undefined) {
+  __include("widgets/ExampleBeanField.js");
+}(scout, jQuery));
