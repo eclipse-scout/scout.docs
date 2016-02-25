@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2015 BSI Business Systems Integration AG. All rights reserved. 
-	This program and the accompanying materials are made available under the 
-	terms of the Eclipse Distribution License v1.0 which accompanies this distribution, 
-	and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors: 
+<!-- Copyright (c) 2015 BSI Business Systems Integration AG. All rights reserved.
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Distribution License v1.0 which accompanies this distribution,
+	and is available at http://www.eclipse.org/org/documents/edl-v10.html Contributors:
 	BSI Business Systems Integration AG - initial API and implementation -->
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
@@ -27,23 +27,7 @@
 		<!-- Widget Application -->
 		<dependency>
 			<groupId>org.eclipse.scout.widgets</groupId>
-			<artifactId>org.eclipse.scout.widgets.ui.html</artifactId>
-		</dependency>
-
-		<!-- Components from previous Widget Application -->
-		<dependency>
-			<groupId>org.eclipse.scout.widgets</groupId>
-			<artifactId>org.eclipse.scout.widgets.old.client</artifactId>
-		</dependency>
-
-		<!-- Components for custom components -->
-		<dependency>
-			<groupId>org.eclipse.scout.widgets</groupId>
-			<artifactId>org.eclipse.scout.widgets.heatmap.client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.scout.widgets</groupId>
-			<artifactId>org.eclipse.scout.widgets.heatmap.ui.html</artifactId>
+			<artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
 		</dependency>
 
 		<!-- Jetty Server -->

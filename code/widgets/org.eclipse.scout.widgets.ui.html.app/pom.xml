@@ -11,7 +11,7 @@
         BSI Business Systems Integration AG - initial API and implementation
 
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -21,28 +21,22 @@
     <relativePath>../org.eclipse.scout.widgets</relativePath>
   </parent>
 
-  <artifactId>org.eclipse.scout.widgets.ui.html.app.war</artifactId>
-  <packaging>war</packaging>
-
-  <build>
-      <finalName>scout.widgets</finalName>
-  </build>
+  <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
 
   <dependencies>
-    <!-- Widget Application -->
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
-      <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
+      <artifactId>org.eclipse.scout.widgets.ui.html</artifactId>
     </dependency>
 
-    <!-- Logging -->
+    <!-- Custom components -->
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
+      <groupId>org.eclipse.scout.widgets</groupId>
+      <artifactId>org.eclipse.scout.widgets.heatmap.client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
+      <groupId>org.eclipse.scout.widgets</groupId>
+      <artifactId>org.eclipse.scout.widgets.heatmap.ui.html</artifactId>
     </dependency>
   </dependencies>
 </project>
