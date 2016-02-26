@@ -3,7 +3,7 @@
 
   <contextListener class="org.eclipse.scout.rt.platform.logger.AutoRegisteringJulLevelChangePropagator" />
 
-  <variable name="mdcPattern" scope="context" value="httpSessionId: '%X{http.session.id}', majorPrincipal: '%X{subject.principal.name}'" />
+  <variable name="mdcPattern" scope="context" value="httpSessionId: '%X{http.session.id}', majorPrincipal: '%X{subject.principal.name}', cid=%X{scout.correlation.id}" />
   <variable name="mdcPatternWithoutEmptyValues" scope="context" value="%replace(${mdcPattern}){'[a-zA-Z0-9]+: \\'\\'(, )?', ''}" />
   <variable name="logPattern" scope="context" value="%date{ISO8601} %-5level %thread %logger{50} - %m [${mdcPatternWithoutEmptyValues}]%n" />
 
