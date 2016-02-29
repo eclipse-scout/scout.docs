@@ -12,7 +12,7 @@
 
   <artifactId>eclipse_help</artifactId>
   <name>Eclipse Scout User Guide</name>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
     <sourceDirectory>src/docs</sourceDirectory>

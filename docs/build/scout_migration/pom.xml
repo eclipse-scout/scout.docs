@@ -12,7 +12,7 @@
 
   <artifactId>scout_migration</artifactId>
   <name>Eclipse Scout Migration Guide</name>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
     <sourceDirectory>src/docs</sourceDirectory>

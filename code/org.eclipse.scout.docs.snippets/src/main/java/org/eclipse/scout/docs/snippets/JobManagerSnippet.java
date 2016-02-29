@@ -215,7 +215,7 @@ public final class JobManagerSnippet {
 
             @Override
             public void changed(JobEvent event) {
-              IFuture<?> future = event.getData().getFuture(); // <4>
+              IFuture<?> future = event.getData().getFuture(); // <2>
               System.out.println("Job commences execution: " + future.getJobInput().getName());
             }
           });

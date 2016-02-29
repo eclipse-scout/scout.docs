@@ -12,7 +12,7 @@
 
   <artifactId>scout_architecture</artifactId>
   <name>Eclipse Scout Architecture Book</name>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
     <sourceDirectory>src/docs</sourceDirectory>
