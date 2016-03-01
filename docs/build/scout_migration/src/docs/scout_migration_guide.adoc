@@ -19,4 +19,4 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 include::{mdledir}/migration/MigrationGuide.adoc[]
 
-
+include::{mdledir}/_footer.adoc[]

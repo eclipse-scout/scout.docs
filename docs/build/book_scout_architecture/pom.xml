@@ -33,6 +33,7 @@
               <sourceHighlighter>coderay</sourceHighlighter>
               <doctype>book</doctype>
               <attributes>
+                <icons>font</icons>
                 <pagenums />
                 <toc />
                 <idprefix />

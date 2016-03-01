@@ -10,3 +10,5 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 Text is missing
+
+include::{mdledir}/_footer.adoc[]

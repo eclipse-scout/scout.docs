@@ -52,10 +52,29 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.10</version>
+          <executions>
+            <execution>
+              <phase>initialize</phase>
+              <id>parse-version</id>
+              <goals>
+                <goal>parse-version</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <groupId>org.asciidoctor</groupId>
           <artifactId>asciidoctor-maven-plugin</artifactId>
           <version>${asciidoctor.maven.plugin.version}</version>
           <dependencies>
+            <dependency>
+              <groupId>com.bsiag.asciidoctorj</groupId>
+              <artifactId>gh-edit</artifactId>
+              <version>1.0.0</version>
+            </dependency>
             <dependency>
               <groupId>org.jruby</groupId>
               <artifactId>jruby-complete</artifactId>
@@ -82,6 +101,7 @@
               <imgsdir>${project.basedir}/../../imgs</imgsdir>
               <mdledir>${project.basedir}/../../adoc</mdledir>
               <codedir>${project.basedir}/../../../code</codedir>
+              <doc-short-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</doc-short-version>
             </attributes>
           </configuration>
         </plugin>
@@ -145,6 +165,16 @@
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>bintray.jmini.maven</id>
+      <url>http://dl.bintray.com/jmini/maven/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </pluginRepository>
   </pluginRepositories>
 </project>

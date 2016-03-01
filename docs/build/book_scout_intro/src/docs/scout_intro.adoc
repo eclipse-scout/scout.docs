@@ -23,3 +23,4 @@ include::_OneDayTutorial.adoc[]
 include::{mdledir}/BookCopyright.adoc[]
 include::{mdledir}/BookScoutInstallation.adoc[]
 
+include::{mdledir}/_footer.adoc[]

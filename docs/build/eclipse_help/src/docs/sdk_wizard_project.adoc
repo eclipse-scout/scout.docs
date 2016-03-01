@@ -23,3 +23,5 @@ Unchecked the [element]_Use default Workspace location_ checkbox to enter an oth
 The btn:[Browse...] button can help you to find the appropriate path.
 
 See also the <<tutorial_helloworld.adoc#,Hello world Tutorial>> for a complete project creation example.
+
+include::{mdledir}/_footer.adoc[]

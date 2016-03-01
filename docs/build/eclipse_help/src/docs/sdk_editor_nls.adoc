@@ -95,3 +95,4 @@ where:
 ** `Texts_de.properties` is for german
 ** `Texts_fr_BE` will be for french in Belgium
 
+include::{mdledir}/_footer.adoc[]

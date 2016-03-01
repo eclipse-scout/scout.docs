@@ -20,3 +20,4 @@ include::_Architecture.adoc[]
 
 include::{mdledir}/BookCopyright.adoc[]
 
+include::{mdledir}/_footer.adoc[]

@@ -26,3 +26,4 @@ include::_UsefulUtilities.adoc[]
 include::_JavaBasics.adoc[]
 include::_EclipseBasics.adoc[]
 
+include::{mdledir}/_footer.adoc[]

@@ -53,19 +53,6 @@
     </dependency>
   </dependencies>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>bintray.jmini.maven</id>
-      <url>http://dl.bintray.com/jmini/maven/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
-
   <build>
     <plugins>
       <plugin>

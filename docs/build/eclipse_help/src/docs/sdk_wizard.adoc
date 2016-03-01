@@ -19,3 +19,5 @@ The Scout SDK provides following Wizards:
 * <<sdk_wizard_code-type.adoc#, New CodeType Wizard>>
 * <<sdk_wizard_permission.adoc#, New Permission Wizard>>
 * <<sdk_wizard_language.adoc#, Add a Language Wizard>>
+
+include::{mdledir}/_footer.adoc[]
