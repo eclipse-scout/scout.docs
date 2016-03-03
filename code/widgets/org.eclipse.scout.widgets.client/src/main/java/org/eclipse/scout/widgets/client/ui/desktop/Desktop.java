@@ -76,7 +76,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   }
 
   @Override
-  protected String getConfiguredApplicationLogoId() {
+  protected String getConfiguredLogoId() {
     return "application_logo";
   }
 

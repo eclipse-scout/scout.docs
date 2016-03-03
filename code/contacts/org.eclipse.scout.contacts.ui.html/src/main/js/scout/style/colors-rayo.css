@@ -73,6 +73,6 @@
 
 @button-hover-background-color: @palette-blue-2;
 
-.application-logo {
+.desktop-logo {
   visibility: hidden;
 }

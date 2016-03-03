@@ -125,7 +125,7 @@
 @view-tab-background-color: @palette-gray-9;
 @view-tab-active-background-color: @palette-gray-10;
 
-.application-logo {
+.desktop-logo {
   visibility: hidden;
 }
 

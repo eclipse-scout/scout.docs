@@ -42,7 +42,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Override
-  protected String getConfiguredApplicationLogoId() {
+  protected String getConfiguredLogoId() {
     return "application_logo";
   }
 
