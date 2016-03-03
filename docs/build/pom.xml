@@ -57,7 +57,7 @@
           <version>1.10</version>
           <executions>
             <execution>
-              <phase>initialize</phase>
+              <phase>validate</phase>
               <id>parse-version</id>
               <goals>
                 <goal>parse-version</goal>

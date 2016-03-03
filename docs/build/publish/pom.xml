@@ -56,6 +56,10 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>com.bsiag.htmltools</groupId>
         <artifactId>htmltools-maven-plugin</artifactId>
         <version>1.0.0</version>
@@ -83,7 +87,7 @@
                 <!-- scout install -->
                 <inputSource>
                   <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/article_install</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_install</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_install</outputSubFolder>
                     <outputZipFileName>scout_install.zip</outputZipFileName>
@@ -93,7 +97,7 @@
                 <!-- scout hello world -->
                 <inputSource>
                   <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/article_helloworld</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_helloworld</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_helloworld</outputSubFolder>
                     <outputZipFileName>scout_helloworld.zip</outputZipFileName>
@@ -103,7 +107,7 @@
                 <!-- scout book frontend -->
                 <inputSource>
                   <inputFolder>../book_scout_frontend/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/book_scout_frontend</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_frontend</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_frontend</outputSubFolder>
                     <outputZipFileName>scout_frontend.zip</outputZipFileName>
@@ -113,7 +117,7 @@
                 <!-- scout book intro -->
                 <inputSource>
                   <inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/book_scout_intro</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_intro</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_intro</outputSubFolder>
                     <outputZipFileName>scout_intro.zip</outputZipFileName>
@@ -123,7 +127,7 @@
                 <!-- scout book architecture -->
                 <inputSource>
                   <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/book_scout_architecture</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_architecture</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_architecture</outputSubFolder>
                     <outputZipFileName>scout_architecture.zip</outputZipFileName>
@@ -133,7 +137,7 @@
                 <!-- scout article migration -->
                 <inputSource>
                   <inputFolder>../scout_migration/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/scout_migration</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_migration</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_migration</outputSubFolder>
                     <outputZipFileName>scout_migration.zip</outputZipFileName>
@@ -143,7 +147,7 @@
                 <!-- scout article releasenotes -->
                 <inputSource>
                   <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/scout_releasenotes</outputSubFolder>
+                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_releasenotes</outputSubFolder>
                   <htmlOutput>
                     <outputSubFolder>scout_releasenotes</outputSubFolder>
                     <outputZipFileName>scout_releasenotes.zip</outputZipFileName>
