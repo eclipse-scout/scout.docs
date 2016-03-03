@@ -264,6 +264,22 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
         MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
       }
     }
+
+    @Order(60.0)
+    public class FindActiveFormMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return "Find active form";
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        System.out.println("active form:_ " + getActiveForm());
+        String menuname = this.getClass().getSimpleName();
+        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
+      }
+    }
   }
 
   @Order(30.0)
