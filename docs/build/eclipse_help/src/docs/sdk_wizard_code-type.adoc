@@ -9,4 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Text is missing
+The _New Scout CodeType_ wizard can be used to create a new code type classes.
+
+image::{imgsdir}/sdk_new_codetype.png[]
+

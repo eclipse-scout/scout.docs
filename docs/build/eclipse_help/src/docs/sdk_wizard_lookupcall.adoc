@@ -9,4 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Text is missing
+The _New Scout Lookup Call_ wizard can be used to create a new form and related classes.
+
+image::{imgsdir}/sdk_new_lookupcall.png[]
+
