@@ -36,7 +36,7 @@
   </modules>
 
   <properties>
-    <scout.version>5.2.0-SNAPSHOT</scout.version>
+    <org.eclipse.scout.rt.version>5.2.0-SNAPSHOT</org.eclipse.scout.rt.version>
   </properties>
 
   <dependencyManagement>
@@ -44,7 +44,7 @@
       <dependency>
         <groupId>org.eclipse.scout.rt</groupId>
         <artifactId>org.eclipse.scout.rt</artifactId>
-        <version>${scout.version}</version>
+        <version>${org.eclipse.scout.rt.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

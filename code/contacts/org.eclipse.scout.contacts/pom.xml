@@ -23,7 +23,7 @@
 
   <properties>
     <jdk.source.version>1.8</jdk.source.version>
-    <scout.version>5.2.0-SNAPSHOT</scout.version>
+    <org.eclipse.scout.rt.version>5.2.0-SNAPSHOT</org.eclipse.scout.rt.version>
     <apache.derby.version>10.11.1.1</apache.derby.version>
   </properties>
 
@@ -57,7 +57,7 @@
       <dependency>
         <groupId>org.eclipse.scout.rt</groupId>
         <artifactId>org.eclipse.scout.rt</artifactId>
-        <version>${scout.version}</version>
+        <version>${org.eclipse.scout.rt.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
