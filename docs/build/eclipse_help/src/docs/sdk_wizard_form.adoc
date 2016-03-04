@@ -9,7 +9,9 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-The _New Scout Form_ wizard can be used to create a new form and related classes.
+The _New Form_ wizard is be used to create a new form and related classes such as the form data class and a related service class.
+To start the wizard use menu:File[New,Other...] or press Ctrl+N.
+In the first wizard step type _Scout_ into the search field to restrict the result list to the creation of new Scout components.
 
 image::{imgsdir}/sdk_new_form.png[]
 

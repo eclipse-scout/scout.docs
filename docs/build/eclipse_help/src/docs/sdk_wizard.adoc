@@ -19,3 +19,8 @@ The Scout SDK provides following Wizards:
 * <<sdk_wizard_code-type.adoc#, New CodeType Wizard>>
 * <<sdk_wizard_permission.adoc#, New Permission Wizard>>
 * <<sdk_wizard_language.adoc#, Add a Language Wizard>>
+
+To start any of these wizards use menu:File[New,Other...] or press Ctrl+N.
+In the first wizard step type _Scout_ into the search field to restrict the result list to the creation of new Scout components.
+
+image::{imgsdir}/sdk_new_wizard.png[]
