@@ -700,6 +700,50 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.new]
 ----
 
+=== Client Notifications
+
+Check out the
+link:https://eclipsescout.github.io/6.0/latest/book_scout_architecture/scout_architecture/scout_architecture.html#client-notifications[docs]
+for a description about client notifications.
+
+==== Changes in a nutshell
+
+* There is only one poller per client (instead of per session): `ClientNotificationPoller`
+* Long polling is used instead of polling in regular intervals
+* Client notifications are plain serializable objects and do not need to implement the interface `IClientNotification` anymore
+* `ClientNotificationRegistry` is used to register client notifications instead of `IClientNotificationService`
+* If a notification needs to be handled temporarily, `AbstractObservableNotificationHandler` can be used to register a listener
+* If a notification needs to be handled always, a handler can be created as subtypes of `INotificationHandler<T extends Serializable>` to always handle messages of type `T `instead of creating a `IClientNotificationConsumerListener`
+* The method `coalesce` on the client notification is replaced with a class of type `ICoalescer<T>`
+* ServiceTunnel is now a bean instead of a member of the client session
+
+==== Publishing Notifications
+[source,java,indent=0]
+.before Scout 'N' release (\<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.publish.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.publish.new]
+----
+
+==== Handling Notifications
+[source,java,indent=0]
+.before Scout 'N' release (\<=5.0.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.handle.old]
+----
+
+[source,java,indent=0]
+.since Scout 'N' release (>=5.1.x)
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.handle.new]
+----
+
+
 ////
 renames, should always be at the end of the document
 ////

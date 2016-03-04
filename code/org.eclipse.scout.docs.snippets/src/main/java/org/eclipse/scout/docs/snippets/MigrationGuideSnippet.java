@@ -1,5 +1,6 @@
 package org.eclipse.scout.docs.snippets;
 
+import java.io.Serializable;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -7,12 +8,15 @@ import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.job.FixedDelayScheduleBuilder;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
+import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
+import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 
 public class MigrationGuideSnippet {
 
@@ -105,11 +109,11 @@ public class MigrationGuideSnippet {
       // tag::jobManager.serverJob.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession()) {
       
-        @Override
-        protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
-          // do something
-          return Status.OK_STATUS;
-        }
+      @Override
+      protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
+        // do something
+        return Status.OK_STATUS;
+      }
       }.schedule();
       // end::jobManager.serverJob.old[]
        */
@@ -134,11 +138,11 @@ public class MigrationGuideSnippet {
       // tag::jobManager.serverJob.runNow.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession()) {
       
-        @Override
-        protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
-          // do something
-          return Status.OK_STATUS;
-        }
+      @Override
+      protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
+        // do something
+        return Status.OK_STATUS;
+      }
       }.runNow(new NullProgressMonitor());
       // end::jobManager.serverJob.runNow.old[]
        */
@@ -161,10 +165,10 @@ public class MigrationGuideSnippet {
       // tag::jobManager.delayedExecution.old[]
       new Job("job-name") {
       
-        @Override
-        protected IStatus run(IProgressMonitor monitor) {
-          // do something
-        }
+      @Override
+      protected IStatus run(IProgressMonitor monitor) {
+        // do something
+      }
       }.schedule(5_000);
       // end::jobManager.delayedExecution.old[]
        */
@@ -190,11 +194,11 @@ public class MigrationGuideSnippet {
       // tag::jobManager.fixedDelayExecution.old[]
       new Job("job-name") {
       
-        @Override
-        protected IStatus run(IProgressMonitor monitor) {
-          // do something
-          schedule(5_000);
-        }
+      @Override
+      protected IStatus run(IProgressMonitor monitor) {
+        // do something
+        schedule(5_000);
+      }
       }.schedule(5_000);
       // end::jobManager.fixedDelayExecution.old[]
        */
@@ -221,11 +225,11 @@ public class MigrationGuideSnippet {
       // tag::jobManager.serverJob.otherSubject.old[]
       new ServerJob("job-name", ServerJob.getCurrentSession(), subject) {
       
-        @Override
-        protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
-          // do something
-          return Status.OK_STATUS;
-        }
+      @Override
+      protected IStatus runTransaction(IProgressMonitor monitor) throws Exception {
+        // do something
+        return Status.OK_STATUS;
+      }
       }.schedule();
       // end::jobManager.serverJob.otherSubject.old[]
        */
@@ -252,19 +256,19 @@ public class MigrationGuideSnippet {
       // tag::jobManager.job.checkForCancellation.old[]
       new Job("job-name") {
       
-        @Override
-        protected IStatus run(IProgressMonitor monitor) {
-          // do first chunk of work
-          if (monitor.isCanceled()) {
-              return Status.CANCEL_STATUS;
-          }
-          // do second chunk of work
-          if (monitor.isCanceled()) {
+      @Override
+      protected IStatus run(IProgressMonitor monitor) {
+        // do first chunk of work
+        if (monitor.isCanceled()) {
             return Status.CANCEL_STATUS;
-          }
-          // do third chunk of work
-          return Status.OK_STATUS;
         }
+        // do second chunk of work
+        if (monitor.isCanceled()) {
+          return Status.CANCEL_STATUS;
+        }
+        // do third chunk of work
+        return Status.OK_STATUS;
+      }
       }.schedule();
       // end::jobManager.job.checkForCancellation.old[]
        */
@@ -294,16 +298,16 @@ public class MigrationGuideSnippet {
     {
       /*
       // tag::jobManager.job.join.old[]
-        Job job = new Job("job-name") {
+      Job job = new Job("job-name") {
       
-          @Override
-          protected IStatus run(IProgressMonitor monitor) {
-            // do something
-            return Status.OK_STATUS;
-          }
-        };
-        job.schedule();
-        job.join();
+        @Override
+        protected IStatus run(IProgressMonitor monitor) {
+          // do something
+          return Status.OK_STATUS;
+        }
+      };
+      job.schedule();
+      job.join();
       // end::jobManager.job.join.old[]
        */
     }
@@ -326,16 +330,16 @@ public class MigrationGuideSnippet {
     {
       /*
       // tag::jobManager.job.join_with_timeout.old[]
-        Job job = new Job("job-name") {
+      Job job = new Job("job-name") {
       
-          @Override
-          protected IStatus run(IProgressMonitor monitor) {
-            // do something
-            return Status.OK_STATUS;
-          }
-        };
-        job.schedule();
-        job.join(5_000, new NullProgressMonitor());
+        @Override
+        protected IStatus run(IProgressMonitor monitor) {
+          // do something
+          return Status.OK_STATUS;
+        }
+      };
+      job.schedule();
+      job.join(5_000, new NullProgressMonitor());
       // end::jobManager.job.join_with_timeout.old[]
        */
     }
@@ -358,20 +362,20 @@ public class MigrationGuideSnippet {
     {
       /*
       // tag::jobManager.job.get_result.old[]
-        final AtomicReference<String> result = new AtomicReference<>();
+      final AtomicReference<String> result = new AtomicReference<>();
       
-        Job job = new Job("job-name") {
+      Job job = new Job("job-name") {
       
-          @Override
-          protected IStatus run(IProgressMonitor monitor) {
-            // do something
-            result.set("abc");
-            return Status.OK_STATUS;
-          }
-        };
-        job.schedule();
-        job.join();
-        System.out.println(result);
+        @Override
+        protected IStatus run(IProgressMonitor monitor) {
+          // do something
+          result.set("abc");
+          return Status.OK_STATUS;
+        }
+      };
+      job.schedule();
+      job.join();
+      System.out.println(result);
       // end::jobManager.job.get_result.old[]
        */
     }
@@ -391,6 +395,65 @@ public class MigrationGuideSnippet {
       String result = future.awaitDoneAndGet();
       System.out.println(result);
       // end::jobManager.job.get_result.new[]
+    }
+  }
+
+  void snippetsClientNotificationPublish() {
+    {
+      /*
+      // tag::clientnotification.publish.old[]
+      SERVICES.getService(IClientNotificationService.class)
+          .putNotification(new UserChangedClientNotification(userId), new UserKeyClientNotificationFilter(userId, 60000L));
+      // end::clientnotification.publish.old[]
+       */
+    }
+
+    {
+      // tag::clientnotification.publish.new[]
+      String userId = "testUser";
+      BEANS.get(ClientNotificationRegistry.class)
+          .putForUser(userId, new UserChangedClientNotification(userId));
+      // end::clientnotification.publish.new[]
+    }
+
+  }
+
+  void snippetsClientNotificationHandle() {
+    {
+      /*
+      // tag::clientnotification.handle.old[]
+      IClientNotificationConsumerListener m_userChangedNotificationListener = new IClientNotificationConsumerListener() {
+      @Override
+      public void handleEvent(ClientNotificationConsumerEvent event, boolean sync) {
+        if (event.getClientNotification() instanceof UserChangedClientNotification) {
+          //handle ...
+        }
+      }
+      };
+      SERVICES.getService(IClientNotificationConsumerService.class)
+          .addClientNotificationConsumerListener(AbstractCoreClientSession.get(), m_userChangedNotificationListener);
+      // end::clientnotification.handle.old[]
+      */
+    }
+  }
+
+  // tag::clientnotification.handle.new[]
+  class UserChangedClientNotificationHandler implements INotificationHandler<UserChangedClientNotification> {
+
+    @Override
+    public void handleNotification(UserChangedClientNotification notification) {
+      //handle ...
+    }
+  }
+  // end::clientnotification.handle.new[]
+
+  class UserChangedClientNotification implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @SuppressWarnings("unused")
+    private String m_userId;
+
+    public UserChangedClientNotification(String userId) {
+      m_userId = userId;
     }
   }
 }
