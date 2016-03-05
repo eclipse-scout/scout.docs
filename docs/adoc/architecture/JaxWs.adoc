@@ -169,6 +169,8 @@ This profile is for convenience purpose, and provides a ready-to-go configuratio
 
 The profiles requires the Scout runtime version to be specified, and which is used to refer to `org.eclipse.scout.jaxws.apt` module to generate webservice provider artifacts. However, this version is typically defined in pom.xml of the parent module, because also used to refer to other Scout runtime artifacts.
 
+[[lst-jaxws.pom.scoutversion, Listing]]
+.Scout version defined as Maven property
 [source,xml,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.scoutversion]
@@ -182,6 +184,7 @@ If your project design envisions a separate JAR module per WSDL, you simply have
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.txt[tags=jaxws.pom.single-wsdl-file-per-module]
 ----
+<1> name of the wsdl file
 
 Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. 
 Thereby, the 'id' of the execution section must be unique. 

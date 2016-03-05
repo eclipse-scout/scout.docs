@@ -22,8 +22,6 @@ import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.SimpleBeanDecorationFactory;
-import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
-import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.interceptor.IBeanDecorator;
 import org.eclipse.scout.rt.platform.interceptor.IBeanInvocationContext;
 import org.eclipse.scout.rt.platform.inventory.ClassInventory;
@@ -118,30 +116,6 @@ public final class PlatformSnippet {
   }
   //end::BeanClass[]
 
-  //tag::ConfigProperties[]
-  /**
-   * Defines a new property of data type {@link String} with key 'my.application.key' and default value 'defaultValue'.
-   */
-  public class MyCustomStringProperty extends AbstractStringConfigProperty {
-
-    @Override
-    public String getKey() {
-      return "my.application.key";
-    }
-
-    @Override
-    protected String getDefaultValue() {
-      return "defaultValue";
-    }
-  }
-
-  /**
-   * @return The current value of the property 'my.application.key'.
-   */
-  private String getMyCustomPropertyValue() {
-    return CONFIG.getPropertyValue(MyCustomStringProperty.class);
-  }
-  //end::ConfigProperties[]
 
   private void snippets() {
     //tag::ClassInventory[]
