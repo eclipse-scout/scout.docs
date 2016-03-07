@@ -10,6 +10,30 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 The _New Scout Permission_ wizard can be used to create a new permission classes.
+To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#, Scout Wizards>>.
 
+[[img-sdk_wizard_permission, The new Permission Wizard]]
+.The new Permission wizard
 image::{imgsdir}/sdk_new_permission.png[]
 
+// TODO mzi: replace *Name* field
+In the case of <<img-sdk_wizard_permission>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer. 
+The only wizard fields that then needs to be filled in manually is the *Name* fields. 
+
+By clicking on the btn:[Finish] button the wizard is started and the specified component is created.
+
+===== Wizard Fields and Default Values
+Most of the fields of the <<img-sdk_wizard_permission>> will be filled with default values depending on the current context of the IDE. 
+The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor. 
+
+Source Folder:: The source folder of the Maven shared module used for the creation of the permission class. The default value is the `src/main/java` folder in the Maven shared module.
+Package:: The Java package that will contain the permission class. The Scout SDK will try to guess the package name from the current context.
+Name:: The name of the permission class. According to Scout conventions the class name ends with the suffix `Permission`.
+Super Class:: The super class for the form. `BasicPermission` is the default value.
+
+===== Created Components
+In the <<img-sdk_wizard_permission>> example shown above the Scout SDK will create the following components.
+
+* In Maven module *helloworld.shared*
+** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+*** The `MyPermission` class

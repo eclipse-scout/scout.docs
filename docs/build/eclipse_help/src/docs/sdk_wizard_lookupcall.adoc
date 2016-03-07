@@ -9,7 +9,39 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-The _New Scout Lookup Call_ wizard can be used to create a new form and related classes.
+The _New Scout Lookup Call_ wizard can be used to create a lookup call and a corresponding lookup service.
+To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#, Scout Wizards>>.
 
+[[img-sdk_wizard_lookupcall, The new LookupCall Wizard]]
+.The new LookupCall wizard
 image::{imgsdir}/sdk_new_lookupcall.png[]
 
+// TODO mzi: replace *Name* field
+In the case of <<img-sdk_wizard_lookupcall>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer. 
+The only wizard fields that then needs to be filled in manually are the *Name* and the *Key Class* fields. 
+
+By clicking on the btn:[Finish] button the wizard is started and the specified components are created.
+
+===== Wizard Fields and Default Values
+Most of the fields of the <<img-sdk_wizard_lookupcall>> will be filled with default values depending on the current context of the IDE. 
+The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor. 
+
+
+Source Folder:: The source folder of the Maven shared module used for the creation of the lookup call class. The default value is the `src/main/java` folder in the Maven shared module.
+Package:: The Java package that will contain the lookup call class. The Scout SDK will try to guess the package name from the current context and derive a matching package names for the Maven server module.
+Name:: The name of the lookup call class. According to Scout conventions the class name ends with the suffix `LookupCall`.
+Super Class:: The super class for the form. `LookupCall` is the default value.
+Key Class:: The class to be used for key values of the lookup call.
+Server Source Folder:: The source folder of the Maven server module used for the service class creation. The default value is the `src/main/java` folder in the Maven server module.
+Service Super Class:: The super class for the lookup service associated with this lookup call. The default value is `AbstractLookupService`.
+
+===== Created Components
+In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will create the following components.
+
+* In Maven module *helloworld.shared*
+** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+*** The `MyLookupCall` class
+*** The `IMyLookupService` interface
+* In Maven module *helloworld.server* 
+** In folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
+*** The `MyLookupService` service class
