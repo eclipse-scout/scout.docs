@@ -22,3 +22,5 @@ include::{mdledir}/RunTheApplication.adoc[]
 ==== What's Next?
 
 In the next tutorial, you will learn how to import existing scout applications into your workspace.
+
+include::{mdledir}/_footer.adoc[]

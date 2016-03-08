@@ -71,3 +71,5 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ** The file `config.properties` in folder `src/main/resources` contains the application configuration.
 ** The file `web.xml` in folder `src/main/webapp` contains the web configuration.
 ** The file `pom.xml` is used to build the Scout UI WAR file.
+
+include::{mdledir}/_footer.adoc[]

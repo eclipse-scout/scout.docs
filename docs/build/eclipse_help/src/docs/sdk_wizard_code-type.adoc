@@ -40,3 +40,5 @@ In the <<img-sdk_wizard_codetype>> example shown above the Scout SDK will create
 * In Maven module *helloworld.shared*
 ** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 *** The `MyCodeType` class
+
+include::{mdledir}/_footer.adoc[]

@@ -19,4 +19,4 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
 
-
+include::{mdledir}/_footer.adoc[]

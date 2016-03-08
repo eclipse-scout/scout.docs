@@ -53,3 +53,4 @@ In the <<img-sdk_wizard_form>> example shown above the Scout SDK will create the
 ** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 *** The `MyFormService` service class
 
+include::{mdledir}/_footer.adoc[]

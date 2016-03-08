@@ -42,3 +42,5 @@ image::{imgsdir}/java_proposals_texts.png[]
 You can select one of the matching entries (like "DateOfBirth" in the example) and you will see the different translations on the right.
 
 You can select "New text..." to open the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
+
+include::{mdledir}/_footer.adoc[]

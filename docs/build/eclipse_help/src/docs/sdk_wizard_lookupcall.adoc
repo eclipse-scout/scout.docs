@@ -45,3 +45,5 @@ In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will crea
 * In Maven module *helloworld.server* 
 ** In folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 *** The `MyLookupService` service class
+
+include::{mdledir}/_footer.adoc[]

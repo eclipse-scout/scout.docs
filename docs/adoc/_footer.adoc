@@ -1,0 +1,2 @@
+
+TIP: Do you want to improve this document? Please gh-edit:BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs[releases/{doc-short-version}.x,edit this page] on GitHub.

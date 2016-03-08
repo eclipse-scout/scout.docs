@@ -19,6 +19,10 @@
     <defaultGoal>process-resources</defaultGoal>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <executions>
@@ -33,6 +37,7 @@
               <sourceHighlighter>coderay</sourceHighlighter>
               <doctype>article</doctype>
               <attributes>
+                <icons>font</icons>
                 <pagenums />
                 <toc />
                 <idprefix />

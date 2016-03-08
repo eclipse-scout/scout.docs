@@ -13,3 +13,5 @@ Eclipse Scout User Guide
 
 * <<tutorial.adoc#, Getting Started>>
 * <<sdk.adoc#, Scout Tooling>>
+
+include::{mdledir}/_footer.adoc[]

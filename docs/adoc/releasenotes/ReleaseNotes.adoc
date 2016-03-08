@@ -129,3 +129,9 @@ It is now possible again to call services on a different scout server by specify
 org.eclipse.scout.rt.servicetunnel.targetUrl and scout.auth.privatekey.
 For all interfaces annotated with @TunnelToServer without implementation, a proxy is created.
 
+=== Security: MalwareScanner
+Facility used to scan files and resources for malware.
+The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine
+and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy.
+Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder.
+The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.

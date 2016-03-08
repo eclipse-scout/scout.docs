@@ -134,3 +134,5 @@ If you have clicked on the [folder]_Persons_ node a page with all available pers
 This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
 
 And as always, the Scout Team welcomes pull requests with improvements.
+
+include::{mdledir}/_footer.adoc[]

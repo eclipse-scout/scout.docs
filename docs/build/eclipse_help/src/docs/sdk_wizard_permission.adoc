@@ -37,3 +37,5 @@ In the <<img-sdk_wizard_permission>> example shown above the Scout SDK will crea
 * In Maven module *helloworld.shared*
 ** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 *** The `MyPermission` class
+
+include::{mdledir}/_footer.adoc[]
