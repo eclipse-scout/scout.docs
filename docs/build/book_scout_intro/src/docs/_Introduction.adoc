@@ -275,18 +275,12 @@ Finally, the information needs of IT managers are considered.
 
 The good news first.
 This book is written for you! 
-For the purpose of this book we do not assume any significant understanding of the Java Enterprise Edition (Java EE).footnote:[
+For the purpose of this book we do not assume that you have a solid understanding of the Java Enterprise Edition (Java EE) is required.footnote:[
 Java Enterprise Edition: http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition
 ]
-and the Eclipse Platform.footnote:[
-Eclipse Platform: http://wiki.eclipse.org/Platform
-]. 
-
-Of course, having prior experience in client server programming with Java is helpful.
-And having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse platform.footnote:[
-By reading through the book you will learn that there is much more to the Eclipse platform than just the IDE
-]
-is certainly of benefit.
+. 
+However, having prior experience in client server programming with Java will be useful occasionally and having used the Eclipse IDE for Java development before 
+is certainly a plus.
 
 The "`bad`" news is, that writing Scout applications requires a solid understanding of Java.
 To properly benefit from this book, we assume that you have been developing software for a year or more.
@@ -323,29 +317,6 @@ If you find a bug in Eclipse Scout that makes your life miserable you can report
 And when your bug is fixed, you can test the fix.
 All of these actions will add to the healthy grow of the Scout community.
 
-
-==== I know tons of both Java and Eclipse
-
-This means that you are one of these software wizards that get easily bored.
-You prefer to get a quick impression before deciding to dig deeper and hate going through lengthy descriptions.
-In that case let us assume that you are prepared to spend two hours to grasp the scope of Eclipse Scout and get an impression of its strengths and limitations.
-The list below suggests a sequence of sections to digest including a brief motivation for each one.
-
- * Chapter <<cha-helloworld>> `"Hello World"` Tutorial. 
-      Download and installation of the Scout package should take less than 30 minutes, going through the `"Hello World"` takes another 15 minutes.
- * Section <<sec-initial_helloworld>> "`Walking through the Initial Application`"
-      Read about some key elements used in every Scout client application including integration of server services and data binding.
- * Chapter <<cha-tooling>> "`Scout Tooling`".
-      Browse through the tooling chapter to get an impression on the tooling provided with Scout. 
-	  Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.
- * Chapter <<cha-large_example>> "`The My Contacts Application`". 
-      Check out the slightly larger demo application. 
-	  In case you are not yet running out of time, download the demo app as described in the Scout wiki.footnote:[
-		Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications.
-	  ].
-
-
-
 ==== I am a manager
 
 Being a manager and actually reading this book may indicate one of the following situations:
@@ -362,7 +333,6 @@ Then, flip through Section <<sec-my_contacts_guide>> to get an impression of the
 In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.footnote:[
 To contact the Scout team, use the feedback provided on the Scout homepage: https://eclipse.org/scout.
 ].
-
 
 
 [[cha-helloworld]]
@@ -393,7 +363,6 @@ Before you can start with the "`Hello World`" example you need to have a complet
 For this, see the step-by-step installation guide provided in Appendix <<apx-install_scout>>.
 Once you have everything installed, you are ready to create your first Scout project.
 
-
 [[sec-create_project_simple]]
 === Create a new Project
 [[create_project_simple]]
@@ -406,8 +375,6 @@ include::{mdledir}/CreateNewProject.adoc[]
 === Run the Initial Application
 
 include::{mdledir}/RunTheApplication.adoc[]
-
-
 
 [[sec-helloworld_export]]
 === Exporting the Application

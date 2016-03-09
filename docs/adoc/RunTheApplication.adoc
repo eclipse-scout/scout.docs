@@ -22,8 +22,7 @@ One for the backend server and one for the HTML user interface server. Please la
 In case the launch configurations are not shown in the toolbar under the debug/run icons, 
 you may find the `server-dev.launch` launch file under project `helloworld.server.app.dev` 
 and the `ui-html-dev.launch` launch file under `helloworld.ui.html.app.dev`.
-These launch files can be started using the context menu `Run As`. 
-This will also add them to the `Run` toolbar button for the next time.
+These launch files can be started using the context menu [menu]_Run As_ which will add the launch file to the [button]_Run_ toolbar button. 
 
 During startup of the Scout applications you should see console output providing information about the startup.
 After both have been started successfully the HTML user interface can be accessed by navigating to http://localhost:8082/ in your favorite web browser.
