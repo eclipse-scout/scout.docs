@@ -9,7 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-The Scout SDK provides a number of Wizards to create new Scout projects and a number of Scout application components.
+The Scout SDK provides a set of wizards to create new Scout projects and various components for your Scout applications.
 
 To start any of these wizards press kbd:[Ctrl,N] or use menu menu:File[New,Other...].
 In the first wizard step type "_Scout_" into the *Wizards* field as shown in <<img-sdk_wizard_new>>.
@@ -24,7 +24,6 @@ With the <<sdk_wizard_project.adoc#, New Project Wizard>> a new Scout client ser
 ==== Wizards for Scout Components
 To create new components such as Scout forms or pages the following component wizards are provided by the Scout SDK.
 
-
 * <<sdk_wizard_form.adoc#, New Form Wizard>>, includes creation of a form, a form data, a service and permissions.
 * <<sdk_wizard_page.adoc#, New Page Wizard>>, includes creation of a page and a page data.
 * <<sdk_wizard_lookupcall.adoc#, New LookupCall Wizard>>, includes creation of a lookup call and a lookup service.
@@ -37,4 +36,9 @@ For the Scout NLS support two additional wizards are provided by the Scout SDK.
 Content assistance for the String parameter in `TEXTS.get()` is added to the Java editor. There, the <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>> can be used to add translated texts. 
 Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add a Language Wizard>> is handled in the <<sdk_editor_nls.adoc#, NLS Editor>>.
 
+<<<<<<< HEAD
 include::{mdledir}/_footer.adoc[]
+=======
+==== Scout Tooling
+Go back to the <<sdk.adoc#, Scout Tooling>>.
+>>>>>>> eclipse help docs, iteration 2

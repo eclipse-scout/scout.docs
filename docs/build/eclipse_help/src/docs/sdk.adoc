@@ -9,13 +9,23 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Eclipse Scout comes with a comprehensive tooling, the Scout SDK.
+The Eclipse Scout package also includes Scout specific tooling, the Scout SDK that is available for the Eclipse IDE.
+
+The Scout Tooling provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.
+
+=== Effects on Productivity and Code Quality
 
 include::{mdledir}/SdkScoutTooling.adoc[]
 
-The Scout Tooling provides: 
+=== Learn More
 
-* <<sdk_editor.adoc#, Editor>>
+To learn more about the wizards and the editor support follow the links provided below.
+
 * <<sdk_wizard.adoc#, Scout Wizards>>
+* <<sdk_editor_java.adoc#, Java Editor Support>>
+* <<sdk_editor_nls.adoc#, NLS Editor>>
+
+=== Eclipse Scout User Guide
+Go back to the <<scout_user_guide.html#scout_user_guide, Eclipse Scout User Guide>>.
 
 include::{mdledir}/_footer.adoc[]
