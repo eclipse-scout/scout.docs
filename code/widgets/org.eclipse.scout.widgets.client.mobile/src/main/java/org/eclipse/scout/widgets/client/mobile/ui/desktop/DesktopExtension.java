@@ -30,9 +30,9 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Override
-  protected ContributionCommand execGuiAttached() {
+  protected ContributionCommand execGuiAttached(String pathInfo) {
     if (!isActive()) {
-      return super.execGuiAttached();
+      return super.execGuiAttached(pathInfo);
     }
     return ContributionCommand.Continue;
   }
