@@ -35,8 +35,6 @@
       <param-name>filter-exclude</param-name>
       <param-value>
         /res/*
-        /login.html
-        /logout.html
       </param-value>
     </init-param>
   </filter>
