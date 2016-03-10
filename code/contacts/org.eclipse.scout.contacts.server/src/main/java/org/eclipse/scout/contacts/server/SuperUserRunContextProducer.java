@@ -30,7 +30,7 @@ import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.context.ServerRunContextProducer;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
-import org.eclipse.scout.rt.shared.ui.UserAgent;
+import org.eclipse.scout.rt.shared.ui.UserAgents;
 
 /**
  * Central point to obtain run contexts with super user rights, and to get the super user subject and session.
@@ -70,7 +70,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
   public ServerRunContext produce() {
     final ServerRunContext superUserRunContext = ServerRunContexts.empty()
         .withRunMonitor(BEANS.get(RunMonitor.class))
-        .withUserAgent(UserAgent.createDefault())
+        .withUserAgent(UserAgents.createDefault())
         .withSubject(m_subject.get());
 
     return superUserRunContext
