@@ -1,0 +1,95 @@
+= Eclipse Scout Tutorial
+:doctype: article
+:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:toc: left
+
+//:numbered:
+
+[[sec-contacts_tutorial_overview]]
+== A One Day Tutorial
+
+In this tutorial we will create a "`Contacts`" Scout application. 
+The goal of this tutorial is to learn about the most prominent features of the Eclipse Scout framework.
+
+Within a single day you will not only have learned more about Scout but also implemented a complete Scout application from the user interface to the data stored in a relational database. 
+
+For this tutorial we assume that you have successfully <<scout_install.adoc#scout_install, installed Eclipse Scout>> and gone through the <<scout_helloworld.adoc#scout_helloworld, "`Hello World`" tutorial>>.
+
+== Tutorial Overview
+
+This tutorial is organized as follows.
+In the <<sec-contacts_guide, first section>>, the finished demo application is explained from the user perspective.
+The remaining sections listed below focus on the individual steps to implement the "`Contacts`" application.
+
+* Create a new Scout project
+* Add a page with a table to display persons
+* Add Derby database support
+* Add a form to enter/edit persons
+* Add a code type for the gender
+* Add a lookup call for countries
+* Add form field validations
+* Add a page and a form to manage companies
+* Link the person page to the company page
+
+According to this step-by-step tutorial, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form.
+In addition, the application also shows how to work with forms to enter and/or update data, menus and context menus.
+On the server side, we show how to work with services, databases and how to use logging in Scout applications.
+
+[[sec-contacts_guide]]
+== The "`Contacts`" Application
+
+The "`Contacts`" application is a client server application to manage personal contacts, organizations and events.
+The persistence of entered data is achieved via simple JDBC access to a Derby database.
+
+[[img-app_contacts_personpage, Figure 000]]
+.The "`Contacts`" application with the person page.
+image::{imgsdir}/app_contacts_personpage.png[]
+
+Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after connecting to the Scout UI application. 
+Clicking on a row in the person page activates the [menu]_Edit_ menu which is also available as a context menu on the table row.
+The selected person can then be opened in a form to view and edit its data as shown in <<img-app_contacts_personform>>.
+
+[[img-app_contacts_personform, Figure 000]]
+.The "`Contacts`" application with a person opened in a form.
+image::{imgsdir}/app_contacts_personform.png[]
+
+To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
+https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github]
+and start from there.
+Alternatively, you can pull a Docker image of the "`Contacts`" application from https://hub.docker.com/r/eclipsescout/org.eclipse.scout.contacts/[Docker Hub].
+
+== Create a new Scout Project
+Bla
+
+== Add a Person Page with a Table to display Persons
+Bla
+
+== Add Derby database support
+Bla
+
+== Add a form to enter/edit persons
+Bla
+
+== Add a code type for the gender
+Bla
+
+== Add a lookup call for countries
+Bla
+
+== Add form field validations
+Bla
+
+== Add a page and a form to manage companies
+Bla
+
+== Link the person page to the company page

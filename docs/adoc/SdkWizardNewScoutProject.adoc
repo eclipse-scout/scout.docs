@@ -13,6 +13,7 @@ ifndef::mdledir[:mdledir: .]
 //Asciidoctor input file: "SDK - Wizard - New Scout Project"
 //
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//TODO: cleanup -> this file is/was a copy of the file sdk_wizard document in the eclipse_help directory
 //-----------------------------------------------------------------------------
 
 ==== New Scout Project Wizard
