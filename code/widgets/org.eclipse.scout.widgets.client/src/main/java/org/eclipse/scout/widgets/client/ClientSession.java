@@ -15,10 +15,8 @@ import java.util.Locale;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop.DesktopStyle;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
 import org.eclipse.scout.widgets.client.ui.desktop.Desktop;
@@ -48,25 +46,11 @@ public class ClientSession extends AbstractClientSession {
     }
 
     execInitLocale();
-    setDesktop(new Desktop(resolveDesktopStyle()));
+    setDesktop(new Desktop());
 
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
       BEANS.get(IPingService.class).ping("ping");
-    }
-  }
-
-  /**
-   * Returns the 'desktopStyle' provided as part of the URL, or the default style otherwise.<br/>
-   * E.g. http://[host:port]/?desktopStyle=BENCH to start in bench mode.
-   */
-  protected DesktopStyle resolveDesktopStyle() {
-    String desktopStyle = PropertyMap.CURRENT.get().get("desktopStyle");
-    if (desktopStyle != null) {
-      return DesktopStyle.valueOf(desktopStyle);
-    }
-    else {
-      return DesktopStyle.DEFAULT;
     }
   }
 

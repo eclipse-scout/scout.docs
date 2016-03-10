@@ -28,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -40,20 +41,23 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
 
-  private final DesktopStyle m_desktopStyle;
-
-  public Desktop(DesktopStyle desktopStyle) {
-    super(false);
-    if (desktopStyle == null) {
-      throw new IllegalArgumentException("desktopStyle cannot be null");
-    }
-    m_desktopStyle = desktopStyle;
-    callInitializer();
-  }
-
   @Override
   protected DesktopStyle getConfiguredDesktopStyle() {
-    return m_desktopStyle;
+    return resolveDesktopStyle();
+  }
+
+  /**
+   * Returns the 'desktopStyle' provided as part of the URL, or the default style otherwise.<br/>
+   * E.g. http://[host:port]/?desktopStyle=BENCH to start in bench mode.
+   */
+  protected DesktopStyle resolveDesktopStyle() {
+    String desktopStyle = PropertyMap.CURRENT.get().get("desktopStyle");
+    if (desktopStyle != null) {
+      return DesktopStyle.valueOf(desktopStyle);
+    }
+    else {
+      return DesktopStyle.DEFAULT;
+    }
   }
 
   @Override
@@ -82,7 +86,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execOpened() {
-    if (DesktopStyle.DEFAULT == m_desktopStyle) {
+    if (DesktopStyle.DEFAULT == getDesktopStyle()) {
       // default desktop
       IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
       if (firstOutline != null) {
