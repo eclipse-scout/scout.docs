@@ -135,3 +135,12 @@ The new @Bean MalwareScanner assumes that an appropriate malware scanner is in p
 and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy.
 Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder.
 The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.
+
+=== IMimeTypeDetector [New]
+The new interface IMimeTypeDetector provides multiple ordered implementations that can detect mime types
+PrimaryMimeTypeDetector with order 0 defines important webapp mime types
+ServletContextMimeTypeDetector with order 10 uses ServletContext.getMimeType
+JavaNioMimeTypeDetector uses java.nio Files.probeContentType
+
+=== UploadRequestHandler [Added features]
+The UploadRequestHandler checks for malware and limits the file types that can be uploaded.
