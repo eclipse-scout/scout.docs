@@ -401,6 +401,7 @@ Also the implementation to check child nodes of a tree when a parent is checked 
 * `NumberUtility.sum(long...)` --> use `sum(Number...)`
 * Removed `NumberUtility.avg(double...)`
 * Removed `NumberUtility.divide(double, double)`
+** `NlsUtility.getDefaultLocale()` has been removed --> use `NlsLocale.CURRENT`
 * The following Classes have been moved. Organize imports to fix errors:
 ** `IDNDSupport`
 ** `TransferObject`
