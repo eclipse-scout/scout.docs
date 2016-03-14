@@ -1,4 +1,4 @@
-= Eclipse Scout: an Introduction
+= Eclipse Scout: Frontend
 :doctype: book
 :author: Matthias Zimmermann
 :email: matthias.zimmermann@bsi-software.com
