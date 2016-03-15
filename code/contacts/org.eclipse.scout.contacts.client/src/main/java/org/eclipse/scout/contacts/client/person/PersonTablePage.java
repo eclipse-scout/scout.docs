@@ -249,6 +249,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       @Override
       protected void execAction() {
         final PersonForm form = new PersonForm();
+
         form.setPersonId(getPersonIdColumn().getSelectedValue());
         form.addFormListener(new FormListener() {
 

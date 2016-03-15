@@ -13,11 +13,26 @@ package org.eclipse.scout.contacts.server;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
+import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractSubjectConfigProperty;
 
+// tag::databaseProperties[]
 public final class ConfigProperties {
 
   private ConfigProperties() {
+  }
+
+  public static class JdbcMappingNameProperty extends AbstractStringConfigProperty {
+
+    @Override
+    protected String getDefaultValue() {
+      return "jdbc:derby:memory:contacts-database";
+    }
+
+    @Override
+    public String getKey() {
+      return "contacts.database.jdbc.mapping.name";
+    }
   }
 
   public static class DatabaseAutoCreateProperty extends AbstractBooleanConfigProperty {
@@ -33,6 +48,8 @@ public final class ConfigProperties {
     }
   }
 
+  // end::databaseProperties[]
+
   public static class DatabaseAutoPopulateProperty extends AbstractBooleanConfigProperty {
 
     @Override
@@ -46,6 +63,7 @@ public final class ConfigProperties {
     }
   }
 
+  // tag::databaseProperties[]
   public static class SuperUserSubjectProperty extends AbstractSubjectConfigProperty {
 
     @Override
@@ -58,5 +76,5 @@ public final class ConfigProperties {
       return "contacts.superuser";
     }
   }
-
 }
+//tag::databaseProperties[]

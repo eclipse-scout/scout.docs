@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 
 @Order(10)
+//tag::listener[]
 public class PlatformListener implements IPlatformListener {
 
   @Override
@@ -26,5 +27,5 @@ public class PlatformListener implements IPlatformListener {
       BEANS.get(DBSetupService.class).autoCreateDatabase();
     }
   }
-
 }
+//end::listener[]

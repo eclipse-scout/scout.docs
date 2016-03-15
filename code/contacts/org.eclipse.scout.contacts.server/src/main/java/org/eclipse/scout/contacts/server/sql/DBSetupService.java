@@ -19,10 +19,13 @@ import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//  tag::service[]
 @ApplicationScoped
 public class DBSetupService {
   private static final Logger LOG = LoggerFactory.getLogger(DBSetupService.class);
+  // end::service[]
   private static final String ORGANISATION1 = "Alice's Adventures in Wonderland";
+  //tag::service[]
 
   public void autoCreateDatabase() {
     if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
@@ -50,15 +53,18 @@ public class DBSetupService {
     return CollectionUtility.hashSet(tables.getValue());
   }
 
+  // end::service[]
+
   public void createOrganizationTable() {
     createOrganizationTable(getExistingTables());
   }
 
+  // tag::service[]
   private void createOrganizationTable(Set<String> tables) {
     if (!tables.contains("ORGANIZATION")) {
       SQL.insert(SQLs.ORGANIZATION_CREATE_TABLE);
       LOG.info("Database table 'ORGANIZATION' created");
-
+      // end::service[]
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         createOrganizationEntry(ORGANISATION1, "London", "GB", "http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
             "https://upload.wikimedia.org/wikipedia/en/3/3f/Alice_in_Wonderland%2C_cover_1865.jpg");
@@ -67,18 +73,23 @@ public class DBSetupService {
 
         LOG.info("Database table 'ORGANIZATION' populated with sample data");
       }
+      // tag::service[]
     }
   }
+
+  // end::service[]
 
   private void createOrganizationEntry(String name, String city, String country, String url, String logoUrl) {
     SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA, new NVPair("organization_id", UUID.randomUUID().toString()), new NVPair("name", name), new NVPair("city", city), new NVPair("country", country), new NVPair("url", url),
         new NVPair("logoUrl", logoUrl));
   }
 
+  // tag::service[]
   private void createPersonTable(Set<String> tables) {
     if (!tables.contains("PERSON")) {
       SQL.insert(SQLs.PERSON_CREATE_TABLE);
       LOG.info("Database table 'PERSON' created");
+      // end::service[]
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
         createPersonEntry("Alice", null, "http://www.uergsel.de/uploads/Alice.png", DateUtility.parse("26.11.1865", "dd.MM.yyyy"), "F", "Daresbury, Cheshire", "GB", "The curious girl", ORGANISATION1);
@@ -87,8 +98,10 @@ public class DBSetupService {
 
         LOG.info("Database table 'PERSON' populated with sample data");
       }
+      // tag::service[]
     }
   }
+  // end::service[]
 
   private void createPersonEntry(String firstName, String lastName, String pictureUrl, Date dob, String gender, String city, String country, String position, String organizationId) {
     SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA,

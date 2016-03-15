@@ -13,28 +13,34 @@ package org.eclipse.scout.contacts.server.sql;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.PlatformExceptionTranslator;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 
 @Order(1950)
+// tag::derbyService[]
 public class DerbySqlService extends AbstractDerbySqlService {
+
+  private String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
 
   @Override
   protected String getConfiguredJdbcMappingName() {
-    return "jdbc:derby:memory:contacts-database;create=true";
+    return CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class)
+        + ";create=true";
   }
+  // end::derbyService[]
 
-  /**
-   * Drop in-memory database
-   */
   public void dropDB() {
     try {
-      DriverManager.getConnection("jdbc:derby:memory:contacts-database;drop=true");
+      DriverManager.getConnection(jdbcMappingName + ";drop=true");
     }
     catch (SQLException e) {
       BEANS.get(PlatformExceptionTranslator.class).translate(e);
     }
   }
+// tag::derbyService[]
 }
+// end::derbyService[]
