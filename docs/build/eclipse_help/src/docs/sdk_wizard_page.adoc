@@ -30,17 +30,19 @@ Source Folder:: The source folder of the Maven client module used for the creati
 Package:: The Java package that will contain the page class. The Scout SDK will try to guess the package name from the current context and derive matching package names for the Maven shared module.
 Name:: The name of the page class. According to Scout conventions the class name ends with the suffix `Page`.
 Super Class:: The super class for the form. `AbstractPageWithTable` is the default value.
-Shared Source Folder:: The source folder of the Maven shared module used for creation of the form data, the service interface and the permission classes. The default value is the `src/main/java` folder in the Maven shared module.
+Shared Source Folder:: The source folder of the Maven shared module used for creation of the page data and the service interface. The default value is the `src/main/java` folder in the Maven shared module.
+Server Source Folder:: The source folder of the Maven server module used for creation of the service implementation. The default value is the `src/main/java` folder in the Maven server module.
 
 ===== Created Components
 In the <<img-sdk_wizard_page>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.client*
-** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.client.helloworld`
-*** The `MyPage` page class
+** The `MyPage` page class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.client.helloworld`
 * In Maven module *helloworld.shared* 
-** In folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
-*** The `MyPageData` form data class
+** The `IMyService` service interface in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+** `MyPageData` page data class in folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+* In Maven module *helloworld.server* 
+** The `MyService` implementation in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.

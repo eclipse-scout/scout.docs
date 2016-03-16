@@ -40,18 +40,15 @@ Server Source Folder:: The source folder of the Maven server module used for the
 In the <<img-sdk_wizard_form>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.client*
-** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.client.helloworld`
-*** The `MyForm` form class
+** The `MyForm` form class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.client.helloworld`
 * In Maven module *helloworld.shared*
 ** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
-*** The `IMyFormService` service interface
-*** The `ReadMyPermission` permission class
-*** The `UpdateMyPermission` permission class
-** In folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
-*** The `MyFormData` form data class
+*** The `IMyService` service interface  
+*** The `ReadMyPermission` permission class  
+*** The `UpdateMyPermission` permission class  
+** The `MyFormData` form data class in folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 * In Maven module *helloworld.server*
-** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
-*** The `MyFormService` service class
+** The `MyService` service class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
