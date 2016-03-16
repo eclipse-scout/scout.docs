@@ -10,16 +10,20 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
+import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.deeplink.WidgetsDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.shared.Icons;
 
-public class FormPage extends AbstractPageWithNodes {
+public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
   private Class<? extends IPageForm> m_formType;
   private boolean m_enabled = true;
@@ -67,6 +71,13 @@ public class FormPage extends AbstractPageWithNodes {
   }
 
   @Override
+  protected void execPageActivated() {
+    WidgetsDeepLinkHandler deepLinkHandler = BEANS.get(WidgetsDeepLinkHandler.class);
+    IDesktop desktop = ClientSessionProvider.currentSession().getDesktop();
+    desktop.setBrowserHistoryEntry(deepLinkHandler.createBrowserHistoryEntry(this));
+  }
+
+  @Override
   protected void ensureDetailFormCreated() {
     if (m_enabled) {
       super.ensureDetailFormCreated();
@@ -80,6 +91,11 @@ public class FormPage extends AbstractPageWithNodes {
 
   @Override
   protected Class<? extends IForm> getConfiguredDetailForm() {
+    return m_formType;
+  }
+
+  @Override
+  public Class<? extends IPageForm> getFormType() {
     return m_formType;
   }
 
