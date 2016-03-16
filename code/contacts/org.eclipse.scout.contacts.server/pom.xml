@@ -39,13 +39,13 @@
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
-    	<groupId>org.eclipse.scout.rt</groupId>
-    	<artifactId>org.eclipse.scout.rt.server.test</artifactId>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.test</artifactId>
     </dependency>
   <!-- tag::Derby[] -->
     <dependency>
-    	<groupId>org.eclipse.scout.rt</groupId>
-    	<artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.derby</groupId>

@@ -109,7 +109,7 @@
       </dependency>
 
       <!-- Other dependencies -->
-	  <!-- tag::DerbyDependency[] -->
+      <!-- tag::DerbyDependency[] -->
       <dependency>
         <groupId>org.apache.derby</groupId>
         <artifactId>derby</artifactId>
