@@ -1,4 +1,4 @@
-==== Additions to the Java Editor
+=== Additions to the Java Editor
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -9,30 +9,45 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-Scout uses the standard Java Editor as provided by Eclipse.
-In order to ease the development, some additional features are added the Editor.
+Scout uses the standard Java Editor of the Eclipse IDE.
+To ease the development, the Scout SDK provides additional features for the Java Editor.
 
-===== Create new Scout Elements
+To create new Scout Elements, content assist offers Scout specific propsals. 
+The Eclipse content assist can be started by typing kbd:[Ctrl,Space]. 
+Depending on the location of the current position in the Java editor context specific Scout propoals are added that trigger the creation of inner classes for form fields, table columns or codes.
 
-To create new Scout Elements (like Form-Fields, Codes, Columns, Extensions, Form-Handlers, Key-Strokes or Menus) some additional proposals are available in the content assist.
-With kbd:[Ctrl,Space] the depending on the context, additional templates can be selected to create the corresponding inner-classes.
-<<img-java_proposals_groupbox>> provides an example the content assist proposal in a `GroupBox` context and <<img-java_proposals_table>> does the same for a `Table`
+==== Create new Form Fields
+To add additional form fields to a form the current edit position needs to be inside of a Scout group box. 
+Typing kbd:[Ctrl,Space] then provides access to the most frequently used Scout widgets as shown in <<img-java_proposals_groupbox>>.
 
 [[img-java_proposals_groupbox, Figure Proposals in a GroupBox]]
-.Proposals to create new entities in a GroupBox
-image::{imgsdir}/java_proposals_groupbox.png[]
-
-[[img-java_proposals_table, Figure Proposals in a Table]]
-.Proposals to create new entities in a Table
-image::{imgsdir}/java_proposals_table.png[]
+.Proposals to create new form fields in a GroupBox
+image::{imgsdir}/java_proposals_groupbox2.png[]
 
 When a template is selected, it is possible to customized it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
 With this mechanism you can quickly define the class name, the parent class and other properties.
-With kbd:[Enter] you will exit the Edit-Mode.
+To exit the Edit-Mode just press kbd:[Enter].
 
-===== NLS-Entry support
+==== Create new Table Columns
+For adding new columns in a table the set the current edit position inside a Scout table. 
+The Scout table itself may be located inside of a TableField as shown in <<img-java_proposals_table>> or can also be located inside of a Scout TablePage.
 
-When the carret is inside the String parameter of the `TEXTS.get()` code, the content assist provide support for the NLS entries.
+[[img-java_proposals_table, Figure Proposals in a Table]]
+.Proposals to create new columns in a Table
+image::{imgsdir}/java_proposals_table2.png[]
+
+Next to adding columns the content assist shown in <<img-java_proposals_table>> can also be used to add key stroke actions and menus to tables.
+
+==== Create new Codes
+Adding new Codes to an existing CodeType is supported by the content assist as shown in <<img-java_proposals_code>>. 
+
+[[img-java_proposals_code, Figure Proposals in a CodeType]]
+.Proposals to create new codes in a CodeType
+image::{imgsdir}/java_proposals_code.png[]
+
+==== NLS-Entry support
+
+When the the current edit position is inside the String parameter of the `TEXTS.get()` code, the content assist provide support for the NLS entries.
 <<img-java_proposals_texts>> provides an example.
 
 [[img-java_proposals_texts, Figure Proposals in a TEXTS.get()]]
@@ -43,4 +58,8 @@ You can select one of the matching entries (like "DateOfBirth" in the example) a
 
 You can select "New text..." to open the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
 
+==== Scout Tooling
+Go back to the <<sdk.adoc#, Scout Tooling>>.
+
+=======
 include::{mdledir}/_footer.adoc[]

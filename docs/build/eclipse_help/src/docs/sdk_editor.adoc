@@ -14,4 +14,5 @@ The Scout SDK provides following Editors:
 * Some extensions to the existing <<sdk_editor_java.adoc#, Java Editor>>.
 * A <<sdk_editor_nls.adoc#, NLS Editor>> to edit the different localization Texts properties files.
 
+=======
 include::{mdledir}/_footer.adoc[]

@@ -1,0 +1,290 @@
+= Eclipse Scout Tutorial
+:doctype: article
+:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:toc: left
+
+//:numbered:
+
+[[sec-contacts_tutorial_overview]]
+== A One Day Tutorial
+
+In this tutorial we will create a "`Contacts`" Scout application. 
+The goal of this tutorial is to learn about the most prominent features of the Eclipse Scout framework.
+
+Within a single day you will not only have learned more about Scout but also implemented a complete Scout application from the user interface to the data stored in a relational database. 
+
+For this tutorial we assume that you have successfully <<scout_install.adoc#scout_install, installed Eclipse Scout>> and gone through the <<scout_helloworld.adoc#scout_helloworld, "`Hello World`" tutorial>>.
+
+== Tutorial Overview
+
+According to this step-by-step tutorial, we will build a classical client server Scout application that includes a relational database to persist the entered data.
+
+This application shows how to implement the most frequently used user interface components such as forms, tables, trees, menus and keyboard control.
+On the server side, we show how to work with services, databases and how to use logging in Scout applications.
+
+This tutorial is organized as follows.
+In the <<sec-contacts_guide, first section>>, the finished demo application is explained from the user perspective.
+The remaining sections focus on the individual steps to implement the "`Contacts`" application as listed below.
+
+* Create <<sec-tutorial_new_project, a new Scout project>>
+* Add <<sec-tutorial_database, database support>> for Apache Derby
+* Add components to <<sec-tutorial_persons, manage persons>>
+* Add Components to <<sec-tutorial_organizations, manage organizations>>
+* <<sec-tutorial_module, Add a module>> to manage events
+//** Add the module infrastructure
+//** bla
+* <<sec-tutorial_extensions, Add extensions>> to the core application
+//** Outline
+//** Person Form
+//** Person Page
+
+[[sec-contacts_guide]]
+== The "`Contacts`" Application
+
+The "`Contacts`" application is a client server application to manage personal contacts, organizations and events.
+The persistence of entered data is achieved via simple JDBC access to a Derby database.
+
+[[img-app_contacts_personpage, Figure 000]]
+.The "`Contacts`" application with the person page.
+image::{imgsdir}/app_contacts_personpage.png[]
+
+Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after connecting to the Scout UI application. 
+Clicking on a row in the person page activates the [menu]_Edit_ menu which is also available as a context menu on the table row.
+The selected person can then be opened in a form to view and edit its data as shown in <<img-app_contacts_personform>>.
+
+[[img-app_contacts_personform, Figure 000]]
+.The "`Contacts`" application with a person opened in a form.
+image::{imgsdir}/app_contacts_personform.png[]
+
+To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
+https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github]
+and start from there.
+Alternatively, you can pull a Docker image of the "`Contacts`" application from https://hub.docker.com/r/eclipsescout/org.eclipse.scout.contacts/[Docker Hub].
+
+[[sec-tutorial_new_project]]
+== Create a new Scout Project
+The first step of this tutorial is to create the initial "`Contacts`" application. 
+As in the <<scout_helloworld.adoc#,"`Hello World`" tutorial>> we start the Eclipse IDE with an empty workspace.
+// TODO: move wizard desc into module, add scout tooling chapter and refactor eclipse_help
+In the <<New Scout Project>> wizard enter the values shown below into the wizard fields.
+
+Group Id:: `org.eclipse.scout.contacts`
+Artifact Id:: `contacts`
+Display Name:: _"Contacts Application"_
+
+To start the wizard click the btn:[Next] button.
+
+=== Tailoring of the Initial Project
+
+For the purpose of the Contacts application, the created project needs to be slightly altered. 
+The items below list the necessary changes as of Neon milestone M5.
+// TODO verify/adapt from milestone to milestone
+Therefore, the content of this section will have to be updated for the final release of the Scout Neon package in June 2016.
+
+* contact.client classes/packages edits/renames
+** rename WorkOutline to ContactOutline
+** change label in ContactOutline.getConfiguredTitle from "Work" to "Contacts"
+** change icon in ContactOutline.getConfiguredIconId from Icons.Pencil to AbstractIcons.Category
+** rename package org.eclipse.scout.contacts.client.work to package org.eclipse.scout.contacts.client.contact
+** ContactOutline.execCreateChildPages remove/comment out `pageList.add(new HelloWorldPage())`
+** method Desktop.getConfiguredOutlines change `arrayList(WorkOutline.class, SearchOutline.class, SettingsOutline.class)` to `arrayList(ContactOutline.class)`
+** class Desktop.WorkOutlineViewButton to Desktop.ContactOutlineViewButton
+* contact.client removals: classes
+** Desktop.BookmarkMenu
+** Desktop.SearchOutlineViewButton
+** Desktop.SettingsOutlineViewButton
+* contact.shared server: packages
+** {main|test}*.helloworld
+* contact.client removals: packages
+** {main|test}*.helloworld
+** *.search 
+** *.setting
+* contact.shared removals: packages
+** *.helloworld
+
+// TODO add metadata for this listing in proper format
+resulting
+include::{codedir}contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
+
+[[sec-tutorial_database]]
+== Add JDBC support for Apache Derby
+In this we add Apache Derby and the necessary JDBC support to our Scout project. 
+With this infrastructure in place we will be ready to read existing data from a database and persist changes back to the database.
+
+For this we first have to add the <<sec-tutorial.jdbc.maven>>. 
+Then we can add the <<sec-tutorial.jdbc.components>> to access a Derby database in the demo application itself.
+
+[[sec-tutorial.jdbc.maven, necessary Maven depencencies]]
+=== The Maven Dependencies
+
+[[lst-tutorial.derby.version, Derby version property]]
+[source,xml]  
+.Adding the Derby version property to the parent [file]_pom.xml_ file.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyVersion]
+----
+
+[[lst-tutorial.derby.dependency, Derby dependency]]
+[source,xml]  
+.Adding the Derby dependency to the parent [file]_pom.xml_ file.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyDependency]
+----
+
+[[lst-tutorial.server.derby.dependency, JDBC and Derby dependencies]]
+[source,xml]  
+.Adding the Scout JDBC and the Apache Derby dependency to the server [file]_pom.xml_ file.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
+----
+
+[[sec-tutorial.jdbc.components, Scout database components]]
+=== The Scout Components
+
+* add sever package org.eclipse.scout.contacts.server.sql
+
+==== Scout Application Properties
+
+[[lst-tutorial.server.derby.properties, Scout application properties]]
+[source,java]  
+.Scout application properties to configure the database handling.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/ConfigProperties.java[tags=databaseProperties]
+----
+
+[[lst-tutorial.server.app.properties, Scout config.properties file entries]]
+[source]  
+.Entries in the Scout config.properties file.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
+----
+
+==== Scout SQL Service
+
+[[lst-tutorial.server.derby.service, Scout Derby service]]
+[source,java]  
+.The Scout Derby SQL service.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=derbyService]
+----
+
+[[lst-tutorial.server.derby.createDb, SQL statments to create the initial database scheme]]
+[source,java]  
+.SQL statments to create the initial database scheme.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=createDB]
+----
+
+==== Setting up the Database
+
+* add SuperUserRunContextProvider
+
+[[lst-tutorial.server.derby.setup, setup service to create the initial database]]
+[source,java]  
+.The setup service to create the initial "Contacts" database.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DBSetupService.java[tags=service]
+----
+
+==== Hooking into the Server Startup Sequence
+
+[[lst-tutorial.server.derby.listener, platform listener]]
+[source,java]  
+.The PlatformListener that creates Derby in-memory database at application startup.
+---- 
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/PlatformListener.java[tags=listener]
+----
+
+=== What have we done?
+
+* added the maven dependencies
+* created scout properties
+* added the derbysql service and sql statements
+* created a scout service to setup the database scheme
+* call the initial database during sever startup
+
+[[sec-tutorial_persons]]
+== Add Components to manage Persons
+Bla
+
+=== Add a Form to enter/update Persons
+Bla
+
+=== Add a code type for the gender
+Bla
+
+=== Add a lookup call for countries
+Bla
+
+=== Add form field validations
+Bla
+
+=== Add a Person Page with a Table to display Persons
+Bla
+
+=== Link the Person Page and the Peron Form
+Bla
+
+[[sec-tutorial_organizations]]
+== Add Components to manage Organizations
+Bla
+
+* Add Components to manage organizations
+//** Add a form to manage organizsations
+//** Create address form field template
+//** Add a page and a form to manage organizations
+//** Link the person page to the organization page
+//** Person form: Add organization tab:
+//*** position field
+//*** smartfield with lookup call
+
+=== Add a page and a form to manage companies
+Bla
+
+=== Link the person page to the company page
+Bla
+
+=== Add the Organization Form
+Bla
+
+=== Create and use a Template Field for Addresses
+Bla
+
+=== Add a "`Work`" Tab to the Person Form
+
+[[sec-tutorial_module]]
+== Bla module
+
+=== Add the Module Infrastructure
+Bla
+
+=== Add Components to manage Events
+Bla
+
+=== Missing Stuff
+Bla
+
+[[sec-tutorial_extensions]]
+== Add Extensions to the Core application
+Bla
+
+=== Menu Extensions
+Bla
+
+=== Outline Extension
+Bla
+
+=== Page Extensions
+Bla
+
+=== Form Extensions

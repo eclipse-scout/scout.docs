@@ -15,7 +15,12 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-Start your Eclipse IDE and select an empty directory for your workspace. 
+Start your Eclipse IDE and select an empty directory for your workspace as shown in <<img-sdk_start_new_workspace>>.
+
+[[img-sdk_start_new_workspace, Figure Start the Eclipse IDE with a new project folder]]
+.Select a new empty folder to hold your project workspace
+image::{imgsdir}/sdk_start_new_workspace.png[]
+ 
 This workspace directory will then hold all the project code for the `Hello World` application. 
 Once the Eclipse IDE is running it will show the Java perspective.
 To create a new Scout project select the menu menu:File[New,Project...] and type "`Scout Project`" in the wizard search field.
@@ -23,7 +28,8 @@ Select the Scout Project wizard and press btn:[Next].
 
 In the [wizard]_New Scout Project_ wizard you have to enter a `group id`, `artifact id` and a `display name` for your Scout project. 
 As the created project will make use of https://maven.apache.org/[Apache Maven] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `group id` and `artifact id` for your project.
-The `artifact id` will then also be the project name in the Eclipse workspace. The `display name` is used as the application name presented to the user (e.g. in the Browser title bar).
+The `artifact id` will then also be the project name in the Eclipse workspace. 
+The `display name` is used as the application name presented to the user (e.g. in the Browser title bar).
 
 For the `Hello World` application just use the already prefilled values as sown in <<img-sdk_new_project_wizard>>.
 Then, click the btn:[Finish] button to let the Scout SDK create the initial project code for you.
@@ -32,7 +38,8 @@ Then, click the btn:[Finish] button to let the Scout SDK create the initial proj
 .The new Scout project wizard.
 image::{imgsdir}/sdk_new_project.png[]
 
-Depending on your Eclipse installation some `Maven plugin connectors` may be missing initially. In that case a dialog as shown in <<img-sdk_new_project_connector>> may be shown.
+Depending on your Eclipse installation some `Maven plugin connectors` may be missing initially. 
+In that case a dialog as shown in <<img-sdk_new_project_connector>> may be shown.
 Please choose the desired actions from the combo box in the `Action` column until all mappings are green.
 E.g. for the `compiler-plugin` choose `Install M2E connector for the Eclipse JDT Compiler` from the combo box.
 Afterwards the selected connectors are resolved and you need to confirm the installation, accept the license, accept that some content has not been signed and restart Eclipse afterwards.
@@ -41,3 +48,10 @@ To read more about `Maven plugin connectors` please refer to the https://www.ecl
 [[img-sdk_new_project_connector, Figure Maven plugin connector installation dialog]]
 .The Maven plugin connector installation dialog.
 image::{imgsdir}/sdk_new_project_connectors.png[]
+
+After the [wizard]_New Scout Project_ wizard has created the initial Maven modules for the `Hello World` application these modules are compiled and built by the Eclipse IDE.
+In case of a successful Eclipse Scout installation your Eclipse IDE should display all created Maven modules in the Package Explorer and have an empty Problems view as shown in <<img-sdk_new_project_initial_helloworld>>.
+
+[[img-sdk_new_project_initial_helloworld, Figure The Hello World Maven Modules]]
+.The inital set of Maven modules created for the Hello World application.
+image::{imgsdir}/sdk_new_project_initial_helloworld.png[]

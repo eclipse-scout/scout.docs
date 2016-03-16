@@ -1,4 +1,4 @@
-=== Import the Scout Demo Applications Tutorial
+=== Import the Scout Demo Applications
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -49,7 +49,7 @@ image::{imgsdir}/oomph_exiting_projects2.png[]
 Once the project selection in your Eclipse importer looks as shown in <<img-oomph_exiting_projects2>> Click on the btn:[Next] button.
 
 On the [wizard]_Variables_ dialog of the Eclipse importer a number of Oomph variables have to be specified. 
-In case you have used already used Oomph for other purposes, this step might look different or empty (for example when all variables have been set in a previous Oomph session).
+In case you have already used Oomph for other purposes, this step might look different or empty (for example when all variables have been set in a previous Oomph session).
 
 Make sure to display all variables by activating checkbox `Show all Variables` in the bottom left corner as shown in <<img-oomph_exiting_variables>>.
 
@@ -133,6 +133,11 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 If you have clicked on the [folder]_Persons_ node a page with all available persons is shown. 
 This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
 
+==== What's Next?
+
+This is the end of the <<tutorial.html#tutorial, getting started>> guide.
+
 And as always, the Scout Team welcomes pull requests with improvements.
 
+=======
 include::{mdledir}/_footer.adoc[]

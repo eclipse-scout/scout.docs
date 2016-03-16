@@ -1,4 +1,4 @@
-=== Hello world Tutorial
+=== Hello World Tutorial
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -21,6 +21,7 @@ include::{mdledir}/RunTheApplication.adoc[]
 
 ==== What's Next?
 
-In the next tutorial, you will learn how to import existing scout applications into your workspace.
+In the <<tutorial_existingdemo.html#import-the-scout-demo-applications-tutorial, next tutorial>>, you will learn how to import the Scout demo applications into your workspace.
 
+=======
 include::{mdledir}/_footer.adoc[]

@@ -15,139 +15,62 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-
 [[cha-large_example]]
-== A Larger Example
+== A One Day Tutorial
 
-In this chapter we will create the "`My Contacts`" Scout application.
-This small.footnote:[
+In this chapter we will create the "`Contacts`" Scout application. 
+The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework that is based on a fully functioning application. 
+The application is still kept small.footnote:[
 Small in comparison with real world application. But significantly larger and complexer than the "`Hello World`" application of Chapter <<cha-helloworld>>.
-] application covers additional aspects of the Eclipse Scout framework.
-The presented demo application borrows heavily from a Scout tutorial published 2012 in the German _Java Magazin_.footnote:[
+]
+enough to complete this tutorial within 
+application covers additional aspects of the Eclipse Scout framework.
+The presented demo application borrows from a Scout tutorial published 2012 in the German _Java Magazin_.footnote:[
 Java Magazin 7.12: https://jaxenter.de/magazines/JavaMagazin72012.
 ]
-for the Scout release 3.8 (Juno).
-Compared to the 2012 tutorial, the version presented in this chapter has been slightly polished and updated to the Scout release 4.0 (Luna).
+.
 
 According to this step-by-step tutorial, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form.
 In addition, the application also shows how to work with forms to enter and/or update data, menus and context menus.
-On the server side, we show how to work with databases, how to use logging in Scout applications and how to include standard Java libraries in the form of JAR files.
+On the server side, we show how to work with services, databases and how to use logging in Scout applications.
 
 The chapter is organized as follows.
 In the first section, the finished demo application is explained from the user perspective.
-The remaining sections focus on the individual steps to implement the "`My Contacts`" application.
+The remaining sections focus on the individual steps to implement the "`Contacts`" application.
+
 To be able to easily follow the text, we assume that the reader is familiar with the "`Hello World`" tutorial and the Scout SDK as described in Chapter <<cha-tooling>>.
 
-
 [[sec-my_contacts_guide]]
-=== The "`My Contacts`" Application
+=== The "`Contacts`" Application
 
-The "`My Contacts`" application is a client server application to manage personal contacts.
-Persistence of entered data is achieved through a database backend.
+The "`Contacts`" application is a client server application to manage personal contacts, organizations and events.
+The persistence of entered data is achieved via simple JDBC access to a Derby database.
 
-As social networking services.footnote:[
-Social networking services in Wikipedia: http://en.wikipedia.org/wiki/Social_network_service
-]
-such as Facebook, LinkedIn or Xing are widely used, the application also provides an example integration with the LinkedIn.footnote:[
-http://www.linkedin.com/
-]
-platform.
-The implemented integration allows to download the personal contacts into the local database.
-In the local database it is possible to mix persons entered manually with contact data downloaded from LinkedIn.
+[[img-app_contacts_personpage, Figure 000]]
+.The "`Contacts`" application with the person page.
+image::{imgsdir}/app_contacts_personpage.png[]
 
-[[img-my_contacts_swt, Figure 000]]
-.The SWT client of the "`My Contacts`" application.
-image::{imgsdir}/my_contacts_swt.png[]
+Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after connecting to the Scout UI application. 
+Clicking on a row in the person page activates the [menu]_Edit_ menu which is also available as a context menu on the table row.
+The selected person can then be opened in a form to view and edit its data as shown in <<img-app_contacts_personform>>.
 
-After starting the Scout server application a client application may be started that then connects to the server.
-In <<img-my_contacts_swt>> the SWT desktop client is shown.
-In the background, the main application window is visible showing a navigation tree on the left hand side.
-On the right side, a table holds the elements corresponding to the selected tree node.
-Using an edit context menu on the selected table row, a form to edit the relevant data may be opened as shown in the example screen shot for '`Alice`'.
-Clicking on the link 'Show Map ...' in the person form opens the person's location information in a map form using the data provided by Google Maps Image API.footnote:[
-The Google Maps Image APIs: https://developers.google.com/maps/documentation/imageapis/.
+[[img-app_contacts_personform, Figure 000]]
+.The "`Contacts`" application with a person opened in a form.
+image::{imgsdir}/app_contacts_personform.png[]
+
+To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
+Github.footnote:[
+"`Contacts`" on Github: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts
+],
+and start from there.
+Alternatively, you can pull a Docker image of the "`Contacts`" application from Docker Hub.footnote:[
+"`Contacts`" on Docker Hub: https://hub.docker.com/r/eclipsescout/org.eclipse.scout.contacts/
 ].
 
-[[img-my_contacts_rayo_refresh, Figure 000]]
-.To refresh/generate an access token for reading LinkedIn contacts data select the menu shown in the screen shot.
-image::{imgsdir}/my_contacts_rayo_refresh.png[]
+[[sec-contacts_tutorial_overview]]
+=== Tutorial Overview
 
-[[img-my_contacts_rayo_openauthurl, Figure 000]]
-image::{imgsdir}/my_contacts_rayo_openauthurl.png[]
-.To refresh/create the access token click on the provided 'Open Auth URL' link first (left). Then, the security code field is enabled and the user can fill in the security code provided on the LinkedIn web page.
-image::{imgsdir}/my_contacts_rayo_entercode.png[]
-
-Before any LinkedIn data can be accessed from the "`My Contacts`" application an access token needs to be retrieved from LinkedIn.
-To obtain such a token use the menu:Refresh LinkedIn Token ...[] menu as shown in <<img-my_contacts_rayo_refresh>>.
-This opens the refresh token form shown on the left side of <<img-my_contacts_rayo_openauthurl>>.
-
-[[img-oauth_security_code, Figure 000]]
-image::{imgsdir}/oauth_grant_access.png[]
-.The LinkedIn granting dialog steps shown in a web browser. In the first step (right) confirm the access request, then the security code to create an access token is provided in the second step (left).
-image::{imgsdir}/oauth_security_code.png[]
-
-Clicking on the 'Open Auth URL' link then opens the granting page provided by LinkedIn shown on the left hand side of <<img-oauth_security_code>>.
-After logging into your LinkedIn account.footnote:[
-Yes, for this use case you need a LinkedIn account. But at least it's free and you will not need to provide very sensitive information such as a mobile phone number, a credit card number or a social security number.
-]
-you can specify the desired access duration and confirm the "`OAuth test for Scribe`" access.footnote:[
-This is the name of the example code provided with the Scribe library that is used with the "`My Contacts`" application.
-]
-to your LinkedIn data.
-If the authorization is successful, a security code as shown on the right side of <<img-oauth_security_code>> is presented by LinkedIn.
-This code needs then to be entered into the [field]_Security Code_ field as shown on the right side of <<img-my_contacts_rayo_openauthurl>>.
-Then, click the btn:[OK] button to refresh the access token.
-
-[[img-my_contacts_rayo_updatecontacts, Figure 000]]
-.Executing the 'Update LinkedIn Contacts for the first time imports the users LinkedIn contacts into the "`My Contacts`" application.
-image::{imgsdir}/my_contacts_rayo_updatecontacts.png[]
-
-To import/update your LinkedIn contacts into your "`My Contacts`" application select the menu:Update LinkedIn Contacts[] menu as shown in <<img-my_contacts_rayo_updatecontacts>>.
-Once you have downloaded or entered a number of persons in your "`My Contacts`" application, try to get yourself familiar with the application's person table.
-This is one of the very powerful Scout widgets.
-Columns may be filtered, moved, hidden or sorted (including multi level sort) using the table header context menus menu:Organize Columns...[] menu  and menu:Column Filter...[] menu.
-
-Editing and viewing of person data is available by the menu:Edit Person...[] context menu on a selected row.
-To manually add a person use the menu:New Person...[] context menu available on the table header or in the white area outside the displayed columns.
-
-[[img-my_contacts_rayo_filteredcontacts, Figure 000]]
-.After importing the contacts from LinkedIn the data is shown in the person page. The filter applied on the headline column is indicated by the filter icon. In the front, the filter form shows the filter criteria '`Eclipse`'.
-image::{imgsdir}/my_contacts_rayo_filteredcontacts.png[]
-
-[[img-my_contacts_rapweb_excelexport, Figure 000]]
-.The "`My Contacts`" application running in the browser as web application. The Excel sheet shown in the front is exported from the person page using the 'Tools/Export to Excel' menu.
-image::{imgsdir}/my_contacts_rapweb_excelexport.png[]
-
-[[img-my_contacts_rapmobile, Figure 000]]
-image::{imgsdir}/my_contacts_rapmobile_1.png[]
-.The "`My Contacts`" application running on an iPhone device. On the left hand side, the person page is shown. The person form is shown on the right.
-image::{imgsdir}/my_contacts_rapmobile_2.png[]
-
-In <<img-my_contacts_rapweb_excelexport>> the "`My Contacts`" application is running in a web browser.
-In this example, the menu:Tools[Export to Excel] menu is used to export the selected row into an Excel sheet.
-Finally, the "`My Contacts`" application is also running on iPhone and Android mobile devices out of the box.
-Two example screens are provided in <<img-my_contacts_rapmobile>>.
-
-Once you no longer feel confident about having the "`My Contacts`" application accessing you data you can revoke this access permission in the LinkedIn menu "`Privacy and Settings`".
-In the lower part of the settings page switch to the tab "`Groups, Companies and Applications`" and click on the link "`View your applications`".
-There, you will find again the partner name "`OAuth test for Scribe`".
-To revoke the access, select the associated checkbox and click the "`Remove`" button.
-The next time you try to refresh your LinkedIn data from the "`My Contacts`" application will result in an Error message.
-Before you can again access data from your LinkedIn account you just need to refresh the access token as described above.
-
-To run the "`My Contacts`" Scout application without implementing it first, you may take advantage of the fact that the application is hosted in the same Github repository as this book.
-If you are familiar with Github.footnote:[
-Github: https://en.wikipedia.org/wiki/GitHub.
-],
-fork the Scout Book repository.footnote:[
-Scout Book repository: https://github.com/BSI-Business-Systems-Integration-AG/scoutbook.
-]
-and start from there.
-Alternatively, you can follow the description provided in the Scout wiki.footnote:[
-Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/3.9#Download_and_Run_the_Scout_Sample_Applications.
-]
-to download, install and run the "`My Contacts`" application.
-
+* Bla
 
 === Setting up the new Scout project
 

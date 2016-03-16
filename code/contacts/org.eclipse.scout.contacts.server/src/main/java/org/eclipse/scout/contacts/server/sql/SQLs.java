@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.sql;
 
+// tag::createDB[]
 public interface SQLs {
 
   String SELECT_TABLE_NAMES = ""
@@ -52,6 +53,7 @@ public interface SQLs {
       + "          comment VARCHAR(1024), "
       + "          CONSTRAINT ORGANIZATION_FK FOREIGN KEY (organization_id) REFERENCES ORGANIZATION (organization_id)"
       + "         )";
+// end::createDB[]
 
   String PERSON_LOOKUP = ""
       + "SELECT   person_id, "
@@ -261,4 +263,6 @@ public interface SQLs {
       + "           FROM    ORGANIZATION "
       + "           WHERE   name = :organizationId)"
       + "           )";
+// tag::createDB[]
 }
+// end::createDB[]

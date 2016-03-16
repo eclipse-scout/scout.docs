@@ -1,4 +1,4 @@
-==== NLS Editor
+=== NLS Editor
 :doctype: article
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -12,16 +12,16 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 The NLS Editor allows to edit the different properties files containing the translated text entries.
 It is a efficient way to edit all the property files for multilingual texts in one go.
 
-===== Open the editor
+==== Open the editor
 
 Search for the `*.nls` files in the `shared` projects.
 Select menu:Open With[NLS Editor] in the context menu
 
-===== Screenshot
+==== Screenshot
 
 image::{imgsdir}/sdk_editor_nls.png[]
 
-===== Description
+==== Description
 
 Actions on the top right corner:
 
@@ -80,7 +80,7 @@ On each row it is possible to call following context menu:
 | Delete the NLS Entry from the files
 |===
 
-===== Modified files
+==== Modified files
 
 The mapping between the properties files is registered in the "Text Provider Service" class.
 Per default the files follow this pattern:
@@ -95,4 +95,8 @@ where:
 ** `Texts_de.properties` is for german
 ** `Texts_fr_BE` will be for french in Belgium
 
+==== Scout Tooling
+Go back to the <<sdk.adoc#, Scout Tooling>>.
+
+=======
 include::{mdledir}/_footer.adoc[]

@@ -23,7 +23,9 @@
 
   <artifactId>org.eclipse.scout.contacts.server</artifactId>
 
+  <!-- tag::Derby[] -->
   <dependencies>
+  <!-- end::Derby[] -->
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.server</artifactId>
@@ -37,16 +39,18 @@
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.test</artifactId>
+    </dependency>
+  <!-- tag::Derby[] -->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
     </dependency>
-    <dependency>
-    	<groupId>org.eclipse.scout.rt</groupId>
-    	<artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>org.eclipse.scout.rt</groupId>
-    	<artifactId>org.eclipse.scout.rt.server.test</artifactId>
-    </dependency>
   </dependencies>
+  <!-- end::Derby[] -->
 </project>
