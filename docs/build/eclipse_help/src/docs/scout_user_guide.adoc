@@ -15,4 +15,5 @@ In the second part, the Scout tooling available in the Eclipse IDE is described.
 * <<tutorial.adoc#, Getting Started>>
 * <<sdk.adoc#, Scout Tooling>>
 
+=======
 include::{mdledir}/_footer.adoc[]

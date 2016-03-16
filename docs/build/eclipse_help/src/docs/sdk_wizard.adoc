@@ -36,9 +36,8 @@ For the Scout NLS support two additional wizards are provided by the Scout SDK.
 Content assistance for the String parameter in `TEXTS.get()` is added to the Java editor. There, the <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>> can be used to add translated texts. 
 Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add a Language Wizard>> is handled in the <<sdk_editor_nls.adoc#, NLS Editor>>.
 
-<<<<<<< HEAD
-include::{mdledir}/_footer.adoc[]
-=======
 ==== Scout Tooling
 Go back to the <<sdk.adoc#, Scout Tooling>>.
->>>>>>> eclipse help docs, iteration 2
+
+=======
+include::{mdledir}/_footer.adoc[]

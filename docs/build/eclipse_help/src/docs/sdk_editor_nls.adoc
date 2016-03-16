@@ -98,4 +98,5 @@ where:
 ==== Scout Tooling
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

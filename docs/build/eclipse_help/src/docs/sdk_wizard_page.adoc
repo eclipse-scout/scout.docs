@@ -47,4 +47,5 @@ In the <<img-sdk_wizard_page>> example shown above the Scout SDK will create the
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

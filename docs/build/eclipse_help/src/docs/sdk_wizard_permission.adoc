@@ -35,10 +35,10 @@ Super Class:: The super class for the form. `BasicPermission` is the default val
 In the <<img-sdk_wizard_permission>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.shared*
-** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
-*** The `MyPermission` class
+** The `MyPermission` class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

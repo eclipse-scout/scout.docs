@@ -38,10 +38,10 @@ Second Argument:: The class to identify individual codes within this code type.
 In the <<img-sdk_wizard_codetype>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.shared*
-** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
-*** The `MyCodeType` class
+** The `MyCodeType` class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

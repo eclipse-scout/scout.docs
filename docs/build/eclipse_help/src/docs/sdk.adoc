@@ -28,4 +28,5 @@ To learn more about the wizards and the editor support follow the links provided
 === Eclipse Scout User Guide
 Go back to the <<scout_user_guide.html#scout_user_guide, Eclipse Scout User Guide>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

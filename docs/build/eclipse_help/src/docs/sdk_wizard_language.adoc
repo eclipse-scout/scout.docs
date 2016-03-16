@@ -20,4 +20,5 @@ Language:: The language of the locale.
 Country:: (optional) The country of the locale.
 Folder:: The location where the Texts properties file will be created.
 
+=======
 include::{mdledir}/_footer.adoc[]

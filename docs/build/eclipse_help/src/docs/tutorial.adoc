@@ -17,4 +17,5 @@ To get started with Eclipse Scout, we propose that you first go through the "`He
 === Eclipse Scout User Guide
 Go back to the <<scout_user_guide.html#scout_user_guide, Eclipse Scout User Guide>>.
 
+=======
 include::{mdledir}/_footer.adoc[]

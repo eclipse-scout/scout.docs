@@ -75,4 +75,5 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ==== Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+=======
 include::{mdledir}/_footer.adoc[]
