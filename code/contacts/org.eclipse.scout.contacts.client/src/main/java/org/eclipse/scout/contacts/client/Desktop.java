@@ -52,8 +52,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Override
-  protected void execGuiAttached(String deepLinkPath) {
-    super.execGuiAttached(deepLinkPath);
+  protected void execDefaultView() {
     setOutline(ContactOutline.class);
   }
 

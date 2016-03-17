@@ -13,8 +13,6 @@ package org.eclipse.scout.widgets.client.ui.desktop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.rt.client.deeplink.DeepLinkException;
-import org.eclipse.scout.rt.client.deeplink.IDeepLinks;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
@@ -29,7 +27,6 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
-import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -78,47 +75,12 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   }
 
   @Override
-  protected boolean getConfiguredTrayVisible() {
-    return true;
-  }
-
-  @Override
   protected String getConfiguredLogoId() {
     return "application_logo";
   }
 
   @Override
-  protected void execGuiAttached(String deepLinkPath) {
-    IDeepLinks deepLinks = BEANS.get(IDeepLinks.class);
-    if (deepLinks.canHandleDeepLink(deepLinkPath)) {
-      try {
-        deepLinks.handleDeepLink(deepLinkPath);
-      }
-      catch (DeepLinkException e) {
-        activateStartupView();
-        // FIXME awe: (deep-links) show error message-box #2, review with J.GU
-      }
-    }
-    else {
-      activateStartupView();
-    }
-  }
-
-  @Override
-  protected void execDeepLink(String deepLinkPath) {
-    IDeepLinks deepLinks = BEANS.get(IDeepLinks.class);
-    if (deepLinks.canHandleDeepLink(deepLinkPath)) {
-      try {
-        deepLinks.handleDeepLink(deepLinkPath);
-      }
-      catch (DeepLinkException e) {
-        // FIXME awe: (deep-links) do something here, merge with guiAttached, new method required?
-        System.out.println(e);
-      }
-    }
-  }
-
-  protected void activateStartupView() {
+  protected void execDefaultView() {
     if (DesktopStyle.DEFAULT == getDesktopStyle()) {
       // default desktop
       IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
