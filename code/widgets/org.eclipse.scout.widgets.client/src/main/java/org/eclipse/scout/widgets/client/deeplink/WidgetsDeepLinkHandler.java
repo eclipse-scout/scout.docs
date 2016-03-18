@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 
 import org.eclipse.scout.rt.client.deeplink.AbstractDeepLinkHandler;
 import org.eclipse.scout.rt.client.deeplink.DeepLinkException;
-import org.eclipse.scout.rt.client.deeplink.IDeepLinks;
+import org.eclipse.scout.rt.client.deeplink.DeepLinkUriBuilder;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.desktop.BrowserHistoryEntry;
@@ -12,7 +12,6 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.UriBuilder;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 
 /**
@@ -41,10 +40,10 @@ public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
 
   public BrowserHistoryEntry createBrowserHistoryEntry(IFormPage formPage) {
     String widgetName = toWidgetName(formPage.getFormType());
-    String deepLinkPath = toDeepLinkPath(widgetName);
-    UriBuilder uri = new UriBuilder("./");
-    uri.parameter(IDeepLinks.PARAM_NAME_DEEP_LINK, toDeepLinkPath(widgetName));
-    return new BrowserHistoryEntry(uri.createURI().toString(), formPage.getCell().getText(), deepLinkPath);
+    return DeepLinkUriBuilder.createRelative()
+        .info(formPage.getCell().getText())
+        .parameterPath(toDeepLinkPath(widgetName))
+        .createBrowserHistoryEntry();
   }
 
   @Override
