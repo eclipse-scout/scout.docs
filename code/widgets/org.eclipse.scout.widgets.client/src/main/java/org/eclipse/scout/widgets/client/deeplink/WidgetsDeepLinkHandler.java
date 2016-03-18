@@ -15,8 +15,12 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 
 /**
- * This deep-link handler allows to navigate to a specific outline and form within the widgets application. The format
- * of the handler is <code>widget-[class-name of form without 'Form' suffix]</code>.
+ * Deep-link handler allows to navigate to a specific outline and form within the widgets application.
+ * <ul>
+ * <li>Format: <code>widget-[formName]</code>, Form name is a string created from the class name of the widgets form
+ * without the 'Form' suffix.</li>
+ * <li>Example: <code>widget-stringfield</code></li>
+ * </ul>
  */
 @Order(1100)
 public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
