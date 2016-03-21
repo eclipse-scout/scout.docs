@@ -25,7 +25,7 @@ To learn more about the wizards and the editor support follow the links provided
 * <<sdk_editor_java.adoc#, Java Editor Support>>
 * <<sdk_editor_nls.adoc#, NLS Editor>>
 
-=== Eclipse Scout User Guide
+=== Back to Scout User Guide
 Go back to the <<scout_user_guide.html#scout_user_guide, Eclipse Scout User Guide>>.
 
 =======

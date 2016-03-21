@@ -3,7 +3,6 @@ tutorial.html
 tutorial_existingdemo.html
 tutorial_helloworld.html
 sdk.html
-sdk_editor.html
 sdk_editor_java.html
 sdk_editor_nls.html
 sdk_wizard.html

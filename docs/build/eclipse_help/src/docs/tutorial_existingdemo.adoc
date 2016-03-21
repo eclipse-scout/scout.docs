@@ -19,8 +19,6 @@ The tutorial consists of the following two parts:
 
 In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer] tool.
 
-===== Import the Scout demo projects
-
 In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File -> Import...[].
 This opens the dialog shown in <<img-oomph_existing_project>>.
 Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Workspace_ and click the btn:[Next] button.
@@ -114,7 +112,7 @@ To get the screen shown in <<img-contacts_persons_alice>> first click on the [fo
 .The Contacts application.
 image::{imgsdir}/contacts_persons_alice.png[]
 
-===== What's Next?
+==== What's Next?
 
 Play with the Contacts application. 
 This provides a good overview of a typical Scout application. 
@@ -133,11 +131,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 If you have clicked on the [folder]_Persons_ node a page with all available persons is shown. 
 This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
 
-==== What's Next?
-
 This is the end of the <<tutorial.html#tutorial, getting started>> guide.
-
-And as always, the Scout Team welcomes pull requests with improvements.
 
 =======
 include::{mdledir}/_footer.adoc[]

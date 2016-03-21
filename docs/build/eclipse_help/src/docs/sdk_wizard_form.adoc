@@ -50,7 +50,7 @@ In the <<img-sdk_wizard_form>> example shown above the Scout SDK will create the
 * In Maven module *helloworld.server*
 ** The `MyService` service class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 
-==== Scout Wizards
+===== Back to Scout Wizards
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
 =======
