@@ -84,7 +84,20 @@ If your IDE needs to be restarted, select the same workspace in the [wizard]_Ecl
 After the restart Oomph will continue to download and install the Scout demo application showing the progress in the Eclipse importer dialog. 
 Once the download and installation has completed you may close the dialog with clicking the btn:[Finish] button.
 
-==== Run the Demo Application
+===== Setup result
+
+After the Setup of the "Scout Demo App", a lot of projects are materialized in the workspace (see the screenshot in figure <<img-oomph_workingsets>>).
+The projects are oranized in three working sets:
+
+Demo App: Contacts:: The projects corresponding to the Scout Demo Application "Contacts".
+Demo App: Widgets:: The projects corresponding to the Scout Demo Application "Widgets".
+Demo Docs:: The scout documentation and the project containing most of the code snippets included in the documentation.
+
+[[img-oomph_workingsets, Figure Working Sets]]
+.Projects in the workspace after the "Scout Demo App" setup.
+image::{imgsdir}/oomph_workingsets.png[]
+
+==== Run the Contacts Demo Application
 
 With the Scout demo installed in our workspace we are now ready to start the application from within our IDE.
 
