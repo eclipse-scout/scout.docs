@@ -11,10 +11,10 @@
 package org.eclipse.scout.widgets.old.client.ui.desktop.pages;
 
 import java.math.RoundingMode;
+import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -47,7 +47,7 @@ import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
 
-  private Random m_random = new Random();
+  private SecureRandom m_random = new SecureRandom();
 
   public PageWithTableTablePage() {
     super();
