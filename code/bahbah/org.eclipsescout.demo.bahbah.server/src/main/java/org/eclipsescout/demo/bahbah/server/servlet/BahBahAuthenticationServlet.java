@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.server.commons.servlet.cache.HttpCacheControl;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +34,7 @@ public class BahBahAuthenticationServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    res.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-    res.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    res.setDateHeader("Expires", 0); //prevents caching at the proxy server
+    BEANS.get(HttpCacheControl.class).checkAndSetCacheHeaders(req, res, null, null);
     try {
       String user = req.getHeader("User");
       String pass = req.getHeader("Pass");
