@@ -1,5 +1,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
+import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.notification.DesktopNotification;
 import org.eclipse.scout.rt.client.ui.desktop.notification.IDesktopNotification;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -11,18 +13,25 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
+import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.CloseableField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.DurationField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.MessageField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.ExamplesBox.SeverityField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.SeverityField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.BenchVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(8100.0)
@@ -48,6 +57,22 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(MessageField.class);
   }
 
+  public StyleBox getStyleBox() {
+    return getFieldByClass(StyleBox.class);
+  }
+
+  public HeaderVisibleButton getHeaderVisibleButton() {
+    return getFieldByClass(HeaderVisibleButton.class);
+  }
+
+  public BenchVisibleButton getBenchVisibleButton() {
+    return getFieldByClass(BenchVisibleButton.class);
+  }
+
+  public NavigationVisibleButton getNavigationVisibleButton() {
+    return getFieldByClass(NavigationVisibleButton.class);
+  }
+
   public SeverityField getSeverityField() {
     return getFieldByClass(SeverityField.class);
   }
@@ -71,50 +96,55 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     public class CloseButton extends AbstractCloseButton {
     }
 
-    @Order(20)
-    public class ShowNotificationButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("ShowNotification");
-      }
-
-      @Override
-      protected void execClickAction() {
-        IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
-        long duration = getDurationField().getValue();
-        boolean closeable = getCloseableField().getValue();
-        DesktopNotification notification = new DesktopNotification(status, duration, closeable);
-        ClientSession.get().getDesktop().addNotification(notification);
-        m_lastNotification = notification;
-      }
-    }
-
-    @Order(30)
-    public class RemoveNotificationButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("RemoveNotification");
-      }
-
-      @Override
-      protected String getConfiguredTooltipText() {
-        return TEXTS.get("RemoveNotificationTooltip");
-      }
-
-      @Override
-      protected void execClickAction() {
-        ClientSession.get().getDesktop().removeNotification(m_lastNotification);
-      }
-    }
-
     @Order(40)
-    public class ExamplesBox extends AbstractGroupBox {
+    public class NotificationsBox extends AbstractGroupBox {
 
       @Override
       protected int getConfiguredGridColumnCount() {
         return 2;
+      }
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Notifications");
+      }
+
+      @Order(20)
+      public class ShowNotificationButton extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ShowNotification");
+        }
+
+        @Override
+        protected void execClickAction() {
+          IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
+          long duration = getDurationField().getValue();
+          boolean closeable = getCloseableField().getValue();
+          DesktopNotification notification = new DesktopNotification(status, duration, closeable);
+          ClientSession.get().getDesktop().addNotification(notification);
+          m_lastNotification = notification;
+        }
+      }
+
+      @Order(30)
+      public class RemoveNotificationButton extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("RemoveNotification");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("RemoveNotificationTooltip");
+        }
+
+        @Override
+        protected void execClickAction() {
+          ClientSession.get().getDesktop().removeNotification(m_lastNotification);
+        }
       }
 
       @Order(10)
@@ -178,6 +208,104 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
     }
+
+    @Order(2000)
+    @ClassId("753dc7e4-e1b9-4016-a5b5-0ce1b682b6e6")
+    public class StyleBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("DisplayStyle");
+      }
+
+      @Order(1000)
+      @ClassId("222b4c59-000d-4798-a96b-0da35e2b7734")
+      public class NavigationVisibleButton extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("NavigationVisible");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().isNavigationVisible());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDesktop().setNavigationVisible(getValue());
+        }
+
+      }
+
+      @Order(2000)
+      @ClassId("6c2bc3b0-ebb5-4c6f-8227-4002d81a355c")
+      public class HeaderVisibleButton extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("HeaderVisible");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().isHeaderVisible());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDesktop().setHeaderVisible(getValue());
+        }
+      }
+
+      @Order(3000)
+      @ClassId("64c23201-83d2-44a6-9a04-810a630446e8")
+      public class BenchVisibleButton extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("BenchVisible");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().isBenchVisible());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDesktop().setBenchVisible(getValue());
+          if (!getValue()) {
+            MessageBoxes.createOk().withHeader(TEXTS.get("Help0")).withYesButtonText(TEXTS.get("GetBenchBack")).withDisplayParent(getDesktop()).show();
+
+            // Need to schedule a model job otherwise it would fail due to the loop detection
+            ModelJobs.schedule(new IRunnable() {
+
+              @Override
+              public void run() throws Exception {
+                setValue(true);
+              }
+
+            }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+          }
+        }
+      }
+
+    }
+
   }
 
   public class PageFormHandler extends AbstractFormHandler {
