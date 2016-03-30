@@ -104,6 +104,7 @@ ClientSessionProvider.currentSession().getDesktop()
 * Renamed `IUrlTarget` to `ITargetWindows`, `UrlTarget` to `TargetWindow`
 * Renamed `DesktopEvent.TYPE_OPEN_URL_IN_BROWSER` to `TYPE_OPEN_URI`
 * Renamed `DesktopEvent.TYPE_OPEN_DOWNLOAD_IN_BROWSER` to `TYPE_DOWNLOAD_RESOURCE`
+* F5 Keystroke on the desktop to reload the current page is no longer necessary because the table itself now provides the f5 keystroke → Remove the keystroke from your desktop to prevent refreshing the table twice.
 
 === Offline
 Offline functionality in the scout client was removed (not needed anymore). Delete
