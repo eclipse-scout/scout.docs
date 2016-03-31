@@ -74,7 +74,7 @@
       </dependency>
       <dependency>
         <groupId>org.eclipse.scout.widgets</groupId>
-        <artifactId>org.eclipse.scout.widgets.mobile</artifactId>
+        <artifactId>org.eclipse.scout.widgets.client.mobile</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
