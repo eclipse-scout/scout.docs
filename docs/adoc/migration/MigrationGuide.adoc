@@ -171,7 +171,9 @@ If you used `ITableRow#setIconId` or `AbstractTable#getConfiguredDefaultIconId` 
 * `InternalTableRow` / `AbstractTable`: checked state of a row is moved to the table. The `TYPE_ROWS_UPDATED` is no longer used to notify about rows checked. Instead there is an event `TYPE_ROWS_CHECKED` which is fired when rows are checked or unchecked. Also there is a new Method on the model which is executed when rows are checked (`execRowsChecked`). This method is also available in extensions.
 +
 A row should be set to checked from the model even if the row is disabled. For this, the method `setRowsChecked` is extended with a new parameter to identify if only enabled rows should be checked or not. The ui should only check enabled rows, so the ui-facade calls the method with true.
-
+* Removed `ITable#rowHeightHint` / `getConfiguredRowHeightHint`
++
+This property was added because with rap and swt it was not possible to have variable table rows as height as their content. The only possibility to get multiline rows was to set a fixed height. This limitation is now gone. If you still want every row to have a fixed height on multiline tables, you can use css to achieve it.
 
 ==== Custom Table Sorting
 Added `IColumn.uiSortPossible`
