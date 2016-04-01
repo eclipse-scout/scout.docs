@@ -42,7 +42,7 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
-  protected DesktopStyle getConfiguredDesktopStyle() {
+  protected String getConfiguredDisplayStyle() {
     return resolveDesktopStyle();
   }
 
@@ -50,13 +50,13 @@ public class Desktop extends AbstractDesktop implements IDesktop {
    * Returns the 'desktopStyle' provided as part of the URL, or the default style otherwise.<br/>
    * E.g. http://[host:port]/?desktopStyle=BENCH to start in bench mode.
    */
-  protected DesktopStyle resolveDesktopStyle() {
+  protected String resolveDesktopStyle() {
     String desktopStyle = PropertyMap.CURRENT.get().get("desktopStyle");
     if (desktopStyle != null) {
-      return DesktopStyle.valueOf(desktopStyle);
+      return desktopStyle.toLowerCase();
     }
     else {
-      return DesktopStyle.DEFAULT;
+      return DISPLAY_STYLE_DEFAULT;
     }
   }
 
@@ -81,7 +81,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execDefaultView() {
-    if (DesktopStyle.DEFAULT == getDesktopStyle()) {
+    if (DISPLAY_STYLE_DEFAULT == getDisplayStyle()) {
       // default desktop
       IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
       if (firstOutline != null) {

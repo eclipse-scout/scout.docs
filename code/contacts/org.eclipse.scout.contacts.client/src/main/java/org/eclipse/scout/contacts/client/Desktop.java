@@ -56,11 +56,6 @@ public class Desktop extends AbstractDesktop {
     setOutline(ContactOutline.class);
   }
 
-  @Override
-  protected void setDesktopStyle(DesktopStyle desktopStyle) {
-    super.setDesktopStyle(desktopStyle);
-  }
-
   public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
 
     @Override
