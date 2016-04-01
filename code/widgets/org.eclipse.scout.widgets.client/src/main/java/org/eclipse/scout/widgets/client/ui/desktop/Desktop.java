@@ -81,14 +81,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execDefaultView() {
-    if (DISPLAY_STYLE_DEFAULT == getDisplayStyle()) {
-      // default desktop
-      IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
-      if (firstOutline != null) {
-        setOutline(firstOutline);
-      }
-    }
-    else {
+    if (DISPLAY_STYLE_BENCH.equals(getDisplayStyle())) {
       // "bench-only" desktop
       IForm benchForm = null;
       for (IDesktopExtension ext : getDesktopExtensions()) {
@@ -101,6 +94,13 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       }
       benchForm.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
       benchForm.start();
+    }
+    else {
+      // default desktop
+      IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+      if (firstOutline != null) {
+        setOutline(firstOutline);
+      }
     }
   }
 
