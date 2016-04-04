@@ -30,12 +30,19 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
     sb.append(ConfigUtility.getProperty("git.url")).append("/");
     sb.append(ConfigUtility.getProperty("git.branch")).append("/");
     sb.append(ConfigUtility.getProperty("git.folder")).append("/");
-    if (canonicalName.contains("widgets.client.old")) {
-      sb.append("org.eclipse.scout.widgets.old.client").append("/");
+    sb.append("org.eclipse.scout.widgets");
+
+    // maven module specific part
+    if (canonicalName.contains("widgets.old.client")) {
+      sb.append(".old.client").append("/");
+    }
+    else if (canonicalName.contains("widgets.heatmap.client")) {
+      sb.append(".heatmap.client").append("/");
     }
     else {
-      sb.append("org.eclipse.scout.widgets.client").append("/");
+      sb.append(".client").append("/");
     }
+
     sb.append(ConfigUtility.getProperty("git.source")).append("/");
     sb.append(canonicalName.replace(".", "/"));
     sb.append(".java");
