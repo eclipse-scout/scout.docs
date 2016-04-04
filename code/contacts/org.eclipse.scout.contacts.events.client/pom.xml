@@ -32,5 +32,10 @@
       <groupId>org.eclipse.scout.contacts</groupId>
       <artifactId>org.eclipse.scout.contacts.events.shared</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.client.test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
