@@ -12,7 +12,7 @@ ifndef::mdledir[:mdledir: .]
 The UiServlet checks after the creation of a session cookie if the server is configured safely. The validation is implemented in the Bean `SessionCookieValidator` and can be replaced or customized by developers.
 The validation is only automatically performed by the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!
 
-If the validation fails, the validator assumes that the session has been tampered and invalidates the session immediately. For the end user this leads to a session timeout message right after login. In this case the application should be taken offline and the configuration should be fixed.
+If the validation fails, the validator assumes that the session has been tampered and invalidates the session immediately. For the end user this leads to a session timeout message right after application access or that the user cannot login at all. In this case the application should be taken offline and the configuration should be fixed.
 
 == HttpOnly
 First the default implementation checks the existence of the `HttpOnly` flag on the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
