@@ -836,3 +836,6 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.new]
 ----
+
+=== Session Cookie Configuration
+The Scout HTML UI Session cookie requires some security flags. Please refer to the Scout documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration" to learn how to configure your JSESSIONID cookie.

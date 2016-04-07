@@ -22,31 +22,31 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 === What is Scout?
 
 Scout is an open source framework for building business applications.
-The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end. 
-With its multi-device capability, a Scout client applications may run simultaneously as a rich client, in the browser and on mobile and tablet devices. 
+The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end.
+With its multi-device capability, a Scout client applications may run simultaneously as a rich client, in the browser and on mobile and tablet devices.
 
-To different groups of people, Scout means different things. 
-End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues. 
+To different groups of people, Scout means different things.
+End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues.
 This is why the text below describes Scout from the perspective of these three roles.
 
 
 ==== End User Perspective
 
-End users of enterprise applications care about friendly user interfaces (UI) and well designed functionality that support them in their everyday work. 
-Depending on the current context/location of an end user, either desktop, web or mobile clients work best. 
-If working in the office, a good integration of the enterprise software with Lotus Notes or Microsoft Office often help to boost the users productivity. 
-As office software is typically installed locally on the users PC, integrating this software also requires a desktop client for the enterprise application. 
+End users of enterprise applications care about friendly user interfaces (UI) and well designed functionality that support them in their everyday work.
+Depending on the current context/location of an end user, either desktop, web or mobile clients work best.
+If working in the office, a good integration of the enterprise software with Lotus Notes or Microsoft Office often help to boost the users productivity.
+As office software is typically installed locally on the users PC, integrating this software also requires a desktop client for the enterprise application.
 When a user is working on a computer outside of his company where the enterprise client is not installed (or the user lacks the permissions to install any software), the natural choice is to work with a web application.
-And when the user is on the move or sitting in a meeting, the only meaningful option is to work with a mobile device. 
+And when the user is on the move or sitting in a meeting, the only meaningful option is to work with a mobile device.
 
 [[img-bsi_crm_desktop, Figure 000]]
 .The desktop client of a Scout enterprise application.
 image::{imgsdir}/bsi_crm_desktop.png[]
 
-To provide a concrete example, we briefly describe a real world enterprise application based on Scout. 
-A first screenshot of a Scout desktop client is provided in <<img-bsi_crm_desktop>>. 
-The screenshot provides an overview of the layout of a customer relationship management (CRM) solution. 
-On the left hand side, an entity class such as companies can be selected. 
+To provide a concrete example, we briefly describe a real world enterprise application based on Scout.
+A first screenshot of a Scout desktop client is provided in <<img-bsi_crm_desktop>>.
+The screenshot provides an overview of the layout of a customer relationship management (CRM) solution.
+On the left hand side, an entity class such as companies can be selected.
 Once an entity such is selected, a form is presented on the right hand side to enter the search criteria.
 After entering "`eclipse`" into the company search field, the list of matching companies is presented.
 Using the context menu on a specific company, the corresponding company dialog can be opened for editing.
@@ -55,117 +55,117 @@ Using the context menu on a specific company, the corresponding company dialog c
 .A Scout enterprise application running in a web browser.
 image::{imgsdir}/bsi_crm_web.png[]
 
-In <<img-bsi_crm_web>> a screenshot of the web client of the CRM Scout application is shown. 
-When comparing the screenshots of the desktop client with the web application it is interesting to note how Scout applications offer a consistent look and feel for the two clients. 
-This is important as it makes the end user feel "`at home`" on the web client. 
+In <<img-bsi_crm_web>> a screenshot of the web client of the CRM Scout application is shown.
+When comparing the screenshots of the desktop client with the web application it is interesting to note how Scout applications offer a consistent look and feel for the two clients.
+This is important as it makes the end user feel "`at home`" on the web client.
 
 [[img-bsi_crm_mobile, Figure 000]]
 .The same Scout enterprise application running on a mobile device.
 image::{imgsdir}/bsi_crm_mobile_galaxy.png[]
 
-Finally, <<img-bsi_crm_mobile>> provides a screenshot of the now familiar CRM application. 
+Finally, <<img-bsi_crm_mobile>> provides a screenshot of the now familiar CRM application.
 In contrast to desktop and web applications, most tablets and mobile phones are controlled using touch features instead of mouse clicks.
 In addition, less elements may be presented on a single screen compared to desktop devices.
 These two aspects makes it impractical to directly reuse the desktop user interface on mobile devices.
-The look and feel still relates to the desktop and web clients but is optimized to the different form factor of the mobile device. 
+The look and feel still relates to the desktop and web clients but is optimized to the different form factor of the mobile device.
 And the end user benefits from the identical behaviour and the the known functionality of the application.
 
-Comparing the company table shown in the background of <<img-bsi_crm_desktop>> with <<img-bsi_crm_mobile>> it can be observed that the multi-column table of the desktop client has been transformed into a list on the mobile device. 
+Comparing the company table shown in the background of <<img-bsi_crm_desktop>> with <<img-bsi_crm_mobile>> it can be observed that the multi-column table of the desktop client has been transformed into a list on the mobile device.
 In addition, the context menu "`New company`" is now provided as a touch button.
 As the navigation in the application and the offered choices remain the same for Scout desktop and mobile applications, the end user feels immediately comfortable working with Scout mobile applications.
 
 
 ==== Management Perspective
 
-For the management, Scout is best explained in terms of benefits it brings to the organisation in question. 
-This is why we are going to concentrate on a (typical) application migration scenario here. 
-Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed. 
-Including host systems, client server applications with desktop clients, as well as applications with a web based front-end. 
+For the management, Scout is best explained in terms of benefits it brings to the organisation in question.
+This is why we are going to concentrate on a (typical) application migration scenario here.
+Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed.
+Including host systems, client server applications with desktop clients, as well as applications with a web based front-end.
 
 [[img-scout_with_other_apps, Figure 000]]
 .A typical application landscape including a service bus and a Scout application.
 image::{imgsdir}/scout_with_other_apps.png[]
 
-Usually, these applications interact with each other through a service bus as shown in <<img-scout_with_other_apps>>. 
-Often, some of the applications that are vital to the organisation's core business have grown historically and are based on legacy technologies. 
-And for technologies that are no longer under active development it can get difficult to find staff having the necessary expertise or motivation. 
-Sometimes, the organisation is no longer willing to accept the costs and technology risks of such mission critical applications. 
+Usually, these applications interact with each other through a service bus as shown in <<img-scout_with_other_apps>>.
+Often, some of the applications that are vital to the organisation's core business have grown historically and are based on legacy technologies.
+And for technologies that are no longer under active development it can get difficult to find staff having the necessary expertise or motivation.
+Sometimes, the organisation is no longer willing to accept the costs and technology risks of such mission critical applications.
 
 [[img-scout_integration, Figure 000]]
 .The integration of a Scout application in a typical enterprise setup.
 image::{imgsdir}/scout_integration.png[]
 
-In this situation, the company needs to evaluate if it should buy a new standard product or if the old application has to be migrated to a new technology stack. 
+In this situation, the company needs to evaluate if it should buy a new standard product or if the old application has to be migrated to a new technology stack.
 Now let us assume, that available products do not fit the company's requirements well enough and we have to settle for the migration scenario.
 In the target architecture, a clean layering similar to the one shown in <<img-scout_integration>> is often desirable.
 
-While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer. 
+While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer.
 The number of frameworks to develop web applications with Java is excessively large.footnote:[
 Web application framework comparison: http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java.
 ],
-but the choice between desktop application technologies in the Java domain is restricted to three options only. 
+but the choice between desktop application technologies in the Java domain is restricted to three options only.
 Swing, SWT and JavaFX.
 Both Eclipse SWT and Java Swing are mature and well established but Swing is moving into 'maintenance only' mode and will be replaced by JavaFX.
-However, the maturity of the new JavaFX technology in large complex enterprise applications is not yet established. 
-Obviously, deciding for the right UI technology is a challenge and needs to be made very carefully. 
-Reverting this decision late in a project or after going into production can get very expensive and time consuming. 
+However, the maturity of the new JavaFX technology in large complex enterprise applications is not yet established.
+Obviously, deciding for the right UI technology is a challenge and needs to be made very carefully.
+Reverting this decision late in a project or after going into production can get very expensive and time consuming.
 
-Once the organisation has decided for a specific UI technology, additional components and frameworks need to be evaluated to cover client server communication, requirements for the application layer, and integration into the existing application landscape. 
-To avoid drowning in the integration effort for all the elements necessary to cover the UI and the application layer a '`lightweight`' framework is frequently developed. 
-When available, this framework initially leads to desirable gains in productivity. 
-Unfortunately, such frameworks often become legacy by themselves. 
-Setting up a dedicated team to actively maintain the framework and adapt to new technologies can reduce this risk. 
-But then again, such a strategy is expensive and developing business application frameworks is usually not the core business of a company. 
+Once the organisation has decided for a specific UI technology, additional components and frameworks need to be evaluated to cover client server communication, requirements for the application layer, and integration into the existing application landscape.
+To avoid drowning in the integration effort for all the elements necessary to cover the UI and the application layer a '`lightweight`' framework is frequently developed.
+When available, this framework initially leads to desirable gains in productivity.
+Unfortunately, such frameworks often become legacy by themselves.
+Setting up a dedicated team to actively maintain the framework and adapt to new technologies can reduce this risk.
+But then again, such a strategy is expensive and developing business application frameworks is usually not the core business of a company.
 
-Can we do better? 
+Can we do better?
 To implement a business application that covers the UI and the application layer as shown in <<img-scout_integration>>, Eclipse Scout substantially reduces both risk and costs compared to the inhouse development presented above.
-First or all, Scout is completely based on Java and Eclipse. 
+First or all, Scout is completely based on Java and Eclipse.
 Chances are, that developers are already familiar with some of these technologies.
-This helps in getting developers up to speed and keeping training costs low. 
+This helps in getting developers up to speed and keeping training costs low.
 
-On the UI side, Scout's multi-device support almost allows to skip the decision for a specific UI technology. 
-Should a particular web framework become the de-facto standard in the next years, it will be the responsibility of the Scout framework to provide the necessary support. 
-Existing Scout applications can then switch to this new technology with only minimal effort. 
+On the UI side, Scout's multi-device support almost allows to skip the decision for a specific UI technology.
+Should a particular web framework become the de-facto standard in the next years, it will be the responsibility of the Scout framework to provide the necessary support.
+Existing Scout applications can then switch to this new technology with only minimal effort.
 This is possible because the Scout developers are designing and building the UI of an application using Scout's client model.
-And this client model is not linked to any specific UI technology. 
-Rather, specific UI renderers provided by the Scout framework are responsible to draw the UI at runtime. 
+And this client model is not linked to any specific UI technology.
+Rather, specific UI renderers provided by the Scout framework are responsible to draw the UI at runtime.
 
-As Scout is an open source project, no licence fees are collected. 
-Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum. 
+As Scout is an open source project, no licence fees are collected.
+Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum.
 At the same time, professional support is available if the organisation decides for it.
 
-As the migration of aging applications to current technology is always a challenge, it surely helps to have Scout in the technology portfolio. 
-Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team. 
+As the migration of aging applications to current technology is always a challenge, it surely helps to have Scout in the technology portfolio.
+Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team.
 Additional reasons on why Scout helps to drive down cost and risks are discussed in Section <<sec-why_scout>>.
 
 
 ==== Developer Perspective
 
-From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture. 
-This implies that -- once familiar with the Scout framework -- the developer can concentrate on a single framework language (Java) and a single set of development tools. 
+From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture.
+This implies that -- once familiar with the Scout framework -- the developer can concentrate on a single framework language (Java) and a single set of development tools.
 
-As Scout is completely based on Java and Eclipse, Scout developers can take full advantage of existing knowledge and experience in these domains. 
+As Scout is completely based on Java and Eclipse, Scout developers can take full advantage of existing knowledge and experience in these domains.
 And to make learning Scout as simple as possible, Scout includes a comprehensive software development kit (SDK), the Scout SDK.
 The Scout SDK helps to create a robust initial project setup for client server applications and includes a large set of wizards for repetitive and error prone tasks.
 
-On the client-side Scout's flexible client model allows the developer to create a good user experience without having to care about specific UI technologies. 
+On the client-side Scout's flexible client model allows the developer to create a good user experience without having to care about specific UI technologies.
 The reason for this can be found in Scout's client architecture that cleanly separates the UI model from the UI technology.
-In Scout (almost) every UI component is implemented four times. 
-First the implementation of the UI model component and then, three rendering components for each UI technology supported by Scout. 
-For desktop clients these are the Swing and the SWT technologies, and for the web and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript parts.  
+In Scout (almost) every UI component is implemented four times.
+First the implementation of the UI model component and then, three rendering components for each UI technology supported by Scout.
+For desktop clients these are the Swing and the SWT technologies, and for the web and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript parts.
 
 Not having to worry about Swing, SWT or JavaScript can significantly boost the productivity.
-With one exception. 
-If a specific UI widget is missing for the user story to be implemented, the Scout developer first needs to implement such a widget. 
-Initially, this task is slightly more complex than not working with Scout. 
-For custom widgets the Scout developer needs to implement both a model component and a rendering component for a specific UI technology. 
+With one exception.
+If a specific UI widget is missing for the user story to be implemented, the Scout developer first needs to implement such a widget.
+Initially, this task is slightly more complex than not working with Scout.
+For custom widgets the Scout developer needs to implement both a model component and a rendering component for a specific UI technology.
 But as soon as the client application needs to be available on more than a single frontend, the investment already pays off.
 The developer already did implement the model component and only needs to provide an additional rendering component for the new UI technology.
-In most situations the large set of Scouts UI components provided out-of-the box are sufficient and user friendly applications are straight forward to implement. 
+In most situations the large set of Scouts UI components provided out-of-the box are sufficient and user friendly applications are straight forward to implement.
 Even if the application needs to run on different target devices simultaneously.
 
 Client-server communication is an additional aspect where the developers is supported by Scout.
-Calling remote services in the client application that are provided by the Scout server looks identical to the invocation of local services. 
+Calling remote services in the client application that are provided by the Scout server looks identical to the invocation of local services.
 The complete communication including the transfer of parameter objects is handled fully transparent by the Scout framework.
 In addition, the Scout SDK can completely manage the necessary transfer objects to fetch data from the Scout server that is to be shown in dialog forms on the Scout client.
 The binding of the transferred data to the form fields is done by the framework.
@@ -173,66 +173,66 @@ The binding of the transferred data to the form fields is done by the framework.
 Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application.
 Just the Java code.footnote:[
 With the exception of the [filename]+plugin.xml+ and [filename]+MANIFEST.MF+ files required for Eclipse plugins.
-]. 
-Developers preferring to write the necessary code manually, may do so. 
-The Scout SDK parses the application's Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK. 
+].
+Developers preferring to write the necessary code manually, may do so.
+The Scout SDK parses the application's Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK.
 
-Finally, Scout is an open source framework hosted at the Eclipse foundation. 
-This provides a number of interesting options to developers that are not available for closed source frameworks. 
-First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform. 
-This allows for complete debugging of all problems and errors found in Scout applications. 
-Starting from the application code, including the Scout framework, Eclipse and down to the Java platform. 
+Finally, Scout is an open source framework hosted at the Eclipse foundation.
+This provides a number of interesting options to developers that are not available for closed source frameworks.
+First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform.
+This allows for complete debugging of all problems and errors found in Scout applications.
+Starting from the application code, including the Scout framework, Eclipse and down to the Java platform.
 
-Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the Scout Wiki pages. 
-And problems with Scout or questions that are not clearly addressed by existing documentation can be discussed in the Scout forum. 
-The forum is also a great place for Scout developers to help out in tricky situation and learn from others. 
+Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the Scout Wiki pages.
+And problems with Scout or questions that are not clearly addressed by existing documentation can be discussed in the Scout forum.
+The forum is also a great place for Scout developers to help out in tricky situation and learn from others.
 Ideally, answered questions lead to improved or additional documentation in the Scout Wiki.
 
-At times, framework bugs can be identified from questions asked in the forum. 
-As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer. 
+At times, framework bugs can be identified from questions asked in the forum.
+As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer.
 Using Bugzilla, Scout developers can also contribute bug analysis and patch proposals to solve the reported issue.
 With this process, Scout developers can actively contribute to the code base of Eclipse Scout.
 This has the advantage, that workarounds in existing Scout applications can be removed when an upgrade of the Scout framework is made.
 
-Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer. 
-Fundamentally, such a nomination is based on the trust of Scout committers in the candidate. 
+Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer.
+Fundamentally, such a nomination is based on the trust of Scout committers in the candidate.
 To quote the official guidelines.footnote:[
 Nominating and electing a new Eclipse Scout committer: http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer.
-] 
+]
 for nominating and electing a new committer:
 
 [quote]
-A Committer gains voting rights allowing them to affect the future of the Project. 
-Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment. 
+A Committer gains voting rights allowing them to affect the future of the Project.
+Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment.
 It is a responsibility that should be neither given nor taken lightly, nor is it a right based on employment by an Eclipse Member company or any company employing existing committers.
 
-After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer. 
-With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the future of Scout. 
+After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer.
+With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the future of Scout.
 
 
 [[sec-why_scout]]
 === Why Scout?
 
-Most large organizations develop and maintain enterprise applications that have a direct impact on the success of the ongoing business. 
-And at the same time, those responsible for the development and maintenance of these applications struggle with this task. 
-It is a big challenge to adapt to changing business demands and complying with the latest legal requirements in time. 
+Most large organizations develop and maintain enterprise applications that have a direct impact on the success of the ongoing business.
+And at the same time, those responsible for the development and maintenance of these applications struggle with this task.
+It is a big challenge to adapt to changing business demands and complying with the latest legal requirements in time.
 And the increasing pressure to lower recurring maintenance costs does not make the situation any easier.
 
-It often seems that too many resources are required to keep a heterogeneous set of legacy technologies alive. 
-In this situation, modernizing mission critical applications can help to improve over the current situation. 
-For the target platform stack, Java is a natural choice as it is mature, widely adopted by in the industries and unlikely to become legacy in the foreseeable future. 
-While for the back-end side of enterprise applications well-known and proven frameworks do exist, the situation on the client side is less clear. 
-Unfortunately, user interface (UI) technologies often have lifetimes that are substantially shorter than the lifetimes of larger mission critical applications. 
-This is particularly true for the web, where many of today's frameworks will no longer be relevant in five or more years. 
+It often seems that too many resources are required to keep a heterogeneous set of legacy technologies alive.
+In this situation, modernizing mission critical applications can help to improve over the current situation.
+For the target platform stack, Java is a natural choice as it is mature, widely adopted by in the industries and unlikely to become legacy in the foreseeable future.
+While for the back-end side of enterprise applications well-known and proven frameworks do exist, the situation on the client side is less clear.
+Unfortunately, user interface (UI) technologies often have lifetimes that are substantially shorter than the lifetimes of larger mission critical applications.
+This is particularly true for the web, where many of today's frameworks will no longer be relevant in five or more years.
 
-Enter Eclipse Scout. This open source framework covers most of the recurring needs that are relevant to the front-end development of business applications. 
-And Scout forces a clean separation between the user interface and the specific UI technology used for rendering. 
-This has two major benefits. 
-First, Scout developers implement the user interface against an abstraction layer, which helps to focus on the business functionality and saves development time. 
-And second, long term maintenance costs are lower, as the Scout code remains valid even when the rendering technology needs to be exchanged. 
-Therefore, Scout helps to improve the productivity of the development teams and reduces the risk of major application rewrites. 
+Enter Eclipse Scout. This open source framework covers most of the recurring needs that are relevant to the front-end development of business applications.
+And Scout forces a clean separation between the user interface and the specific UI technology used for rendering.
+This has two major benefits.
+First, Scout developers implement the user interface against an abstraction layer, which helps to focus on the business functionality and saves development time.
+And second, long term maintenance costs are lower, as the Scout code remains valid even when the rendering technology needs to be exchanged.
+Therefore, Scout helps to improve the productivity of the development teams and reduces the risk of major application rewrites.
 
-To provide a first impression on the scope and goals of the Scout framework, a number of scenarios where Scout typically contributes to your projects success are listed below . 
+To provide a first impression on the scope and goals of the Scout framework, a number of scenarios where Scout typically contributes to your projects success are listed below .
 
  * You are looking for a reasonable client side framework for your business application.
  * You need an application that works on the desktop, in browsers and on mobiles devices.
@@ -241,29 +241,29 @@ To provide a first impression on the scope and goals of the Scout framework, a n
  * Your application's expected lifespan is 10 years or more.
 
 
-That Scout should help in the last two situations mentioned above seems to be contradictory at first but is just based on a simple principle.  
+That Scout should help in the last two situations mentioned above seems to be contradictory at first but is just based on a simple principle.
 Where possible, the Scout framework provides abstractions for areas/topics.footnote:[
-Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging. 
-] 
-that need to be implemented for business applications again and again. 
+Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging.
+]
+that need to be implemented for business applications again and again.
 And for each of these abstractions Scout provides a default implementation out of the box.
-Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used. 
+Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.
 
-When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality. 
+When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality.
 The necessary default implementations are then automatically included by the Scout tooling into the Scout project setup.
-The provided Scout SDK tooling also helps to get started quickly with Scout. 
+The provided Scout SDK tooling also helps to get started quickly with Scout.
 It also allows to efficiently implement application components such as user interface components, server services or connections to databases.
 
-In the case of applications with long lifespans, the abstractions provided by Scout help the developer to stay productive and concentrate on the actual business functionality. 
-At the same time, this keeps the code base as independent of specific technologies and frameworks as possible. 
-This is a big advantage when individual technologies incorporated in the application reach their end of life. 
-As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary. 
-Instead, it is sufficient to exchange the implementation for the legacy technology with a new one. 
-And often, an implementation for a new technology/framework is already provided by a more recent version of Scout. 
+In the case of applications with long lifespans, the abstractions provided by Scout help the developer to stay productive and concentrate on the actual business functionality.
+At the same time, this keeps the code base as independent of specific technologies and frameworks as possible.
+This is a big advantage when individual technologies incorporated in the application reach their end of life.
+As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary.
+Instead, it is sufficient to exchange the implementation for the legacy technology with a new one.
+And often, an implementation for a new technology/framework is already provided by a more recent version of Scout.
 
 
 [[sec-whatshouldiread]]
-=== What should I read? 
+=== What should I read?
 
 The text below provides guidelines on what to read (or what to skip) depending on your existing background.
 We first address the needs of junior Java developers that like to learn more about developing enterprise applications.
@@ -274,26 +274,26 @@ Finally, the information needs of IT managers are considered.
 ==== I know Java
 
 The good news first.
-This book is written for you! 
+This book is written for you!
 For the purpose of this book we do not assume that you have a solid understanding of the Java Enterprise Edition (Java EE) is required.footnote:[
 Java Enterprise Edition: http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition
 ]
-. 
-However, having prior experience in client server programming with Java will be useful occasionally and having used the Eclipse IDE for Java development before 
+.
+However, having prior experience in client server programming with Java will be useful occasionally and having used the Eclipse IDE for Java development before
 is certainly a plus.
 
 The "`bad`" news is, that writing Scout applications requires a solid understanding of Java.
 To properly benefit from this book, we assume that you have been developing software for a year or more.
-And you should have mastered the Java Standard Edition 
+And you should have mastered the Java Standard Edition
 (Java SE).footnote:[
 Java Standard Edition: http://en.wikipedia.org/wiki/Java_SE
-] 
-to a significant extent. 
-To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I 
+]
+to a significant extent.
+To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I
 Exam.footnote:[
 Level I Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html
 ]
-and most of the material required for 
+and most of the material required for
 Level II.footnote:[
 Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html
 ].
@@ -301,10 +301,10 @@ Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-prog
 We now propose to start downloading and installing Scout as described in Appendix <<apx-install_scout>> and do some actual coding.
 To do so, please continue with the "`Hello World`" example provided in Chapter <<cha-helloworld>>.
 You can expect to complete this example in less than one hour including the necessary download and installation steps.
-Afterwards, you might want to continue with the remaining material in "`Getting Started`". 
-Working through the complete book should take no more than two days. 
+Afterwards, you might want to continue with the remaining material in "`Getting Started`".
+Working through the complete book should take no more than two days.
 
-Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout 
+Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout
 forum.footnote:[
 Eclipse Scout forum: http://www.eclipse.org/forums/eclipse.scout
 ].
@@ -312,8 +312,8 @@ When your question gets answered, please ask yourself if your initial problem co
 In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages.footnote:[
 Eclipse Scout wiki: http://wiki.eclipse.org/Scout
 ].
-Or this book. 
-If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. 
+Or this book.
+If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch.
 And when your bug is fixed, you can test the fix.
 All of these actions will add to the healthy grow of the Scout community.
 
@@ -323,13 +323,13 @@ Being a manager and actually reading this book may indicate one of the following
 
  * Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money.
         And you did not understand why (again) a new technology should work better than the ones you already use.
- * Your are a product manager of a valuable product that is based on legacy technology. 
+ * Your are a product manager of a valuable product that is based on legacy technology.
         And you are now evaluating options to modernize your product.
  * Think about your current situation. There must be a reason why you are checking out this book.
 
 
 To learn about Scout and about its benefits first go through Section <<sec-what_is_scout>> and Section <<sec-why_scout>>.
-Then, flip through Section <<sec-my_contacts_guide>> to get an impression of the "`My Contacts`" application. 
+Then, flip through Section <<sec-my_contacts_guide>> to get an impression of the "`My Contacts`" application.
 In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.footnote:[
 To contact the Scout team, use the feedback provided on the Scout homepage: https://eclipse.org/scout.
 ].
@@ -341,7 +341,7 @@ To contact the Scout team, use the feedback provided on the Scout homepage: http
 The "`Hello World`" chapter walks you through the creation of an Eclipse Scout client server application.
 When the user starts the client part of this application, the client connects to the server.footnote:[
 The Scout server part of the "`Hello World`" application will be running on a web server.
-] 
+]
 and asks for some text content that is to be displayed to the user.
 Next, the server retrieves the desired information and sends it back to the client.
 The client then copies the content obtained from the server into a text field widget.
@@ -379,6 +379,17 @@ include::{mdledir}/RunTheApplication.adoc[]
 [[sec-helloworld_export]]
 === Exporting the Application
 
+==== Verify Target Container Security Settings
+First you need to know if you would like to use https for your application (which is hardly recommended for a productive environment). If yes and your servlet container (e.g. Tomcat) is already configured to use https you are already done and you can skip this chapter.
+
+If you would like to use https with Tomcat but have not yet setup your installation accordingly, please refer to the http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
+
+Otherwise if the application should be used without encrypted channel, we first have to disable the secure flag for the session cookie. More on this topic can be found in the Scout Documentation.
+
+* For this we have to add the property `scout.auth.cookie.session.validate.secure=false` to the file `helloworld.ui.html.app.war\src\main\resources\config.properties`. This disables the security check that the flag is active. We don't need this check because we don't use this flag.
+* Then we actually need to remove the flag. For this we delete the tag `<secure>true</secure>` in the `helloworld.ui.html.app.war\src\main\webapp\WEB-INF\web.xml` file.
+
+==== Create WAR Files
 We are now ready to move the `Hello World` application from our development environment to a productive setup.
 The simplest option to move our application into the 'wild' is to build it using Maven.
 This produces two WAR files footnote:[
@@ -395,7 +406,7 @@ In the dialog that appears enter `clean verify` into the `Goals` field and press
 .Starting the Maven build.
 image::{imgsdir}/sdk_export_war_menu.png[]
 
-Afterwards the compilation starts, executes all test cases and bundles the result into two WAR files. The output of the build is shown in the Console view within Eclipse. 
+Afterwards the compilation starts, executes all test cases and bundles the result into two WAR files. The output of the build is shown in the Console view within Eclipse.
 As soon as the build is reporting success you can find the built war files:
 
 * workspace_root/helloworld.server.app.war/target/org.eclipse.scout.apps.helloworld.server.war
@@ -499,7 +510,7 @@ Should you have a catchy naming for you application in mind, [java]+com.mycompan
 [[sec-initial_helloworld]]
 === Walking through the Initial Application
 
-In this section, we will walk you through the central Scout application model components of the "`Hello World`" example. 
+In this section, we will walk you through the central Scout application model components of the "`Hello World`" example.
 As each of these components is represented by a Java class in the Scout framework, we can explain the basic concept using the available "`Hello World`" source code.
 Below, we will introduce the following Scout components.
 
@@ -530,9 +541,9 @@ Of interest is the overwritten callback method [java]+execOpened+ shown in <<lst
 
 (((DesktopForm)))
 [[lst-helloworld.execopened, Listing Desktop]]
-[source,java]  
+[source,java]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java[lines=32..41]
 ----
 
@@ -554,7 +565,7 @@ In the "`Hello World`" application a [java]+DesktopForm+ object is created and d
 
 To find the desktop form class in the Scout Explorer, expand the orange [node]_client_ node.footnote:[
 To expand elements (nodes, folders, etc.) in the Scout Explorer, use a double click on the element or a single click on the plus icon in front of the element.].
-Below this node, you will find the [folder]_Forms_ folder. 
+Below this node, you will find the [folder]_Forms_ folder.
 Expand this folder to show the [element]_DesktopForm_ as shown in <<img-helloworld_viewhandler>>.
 In the Scout Object Property window in the screenshot, we can also see the [property]_Display Hint_ property.
 Its value is set to '`View`' to display the desktop form as a view and not as a dialog in its own frame.
@@ -582,9 +593,9 @@ The necessary wiring is provided by the Scout framework, either by the initial p
 
 (((ViewHandler)))
 [[lst-helloworld.viewhandler, Listing ViewHandler in DesktopForm]]
-[source,java]  
+[source,java]
 .Class [java]+DesktopForm+ with its view handler and [java]+startView+ method. Other inner classes and methods are omitted here.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=19..20]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=86..103]
 ----
@@ -622,7 +633,7 @@ Next, using the [java]+load+ service method highlighted in <<lst-helloworld.view
 Finally, these new values are imported from the form data into the form via the [java]+importFormData+ method.
 Once the desktop form is ready, showing it to the user is handled by the framework.
 
-To add some background to the implementation of the [java]+execLoad+ above, the next section introduces services and form data objects. 
+To add some background to the implementation of the [java]+execLoad+ above, the next section introduces services and form data objects.
 
 
 ==== Form Services and Form Data Objects
@@ -634,7 +645,7 @@ In fact, when we get a service reference using [java]+SERVICES.getService+, we d
 
 In the "`Hello World`" example application, the client's desktop form has an associated desktop service running on the server.
 This correspondence between forms and form services is also reflected in the [element]_Links_ section of the Scout Object Properties of the desktop form.
-As shown in <<img-helloworld_viewhandler>>, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop form service as well as for the service interface [java]+IDesktopService+. 
+As shown in <<img-helloworld_viewhandler>>, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop form service as well as for the service interface [java]+IDesktopService+.
 On the client, this interface is used to identify and register the proxy service for the desktop service.
 
 To transfer data between the client and the server, the "`Hello World`" application uses a [java]+DesktopFormData+ object as a DTO.
@@ -679,15 +690,15 @@ image::{imgsdir}/sdk_server_node_properties.png[]
 image::{imgsdir}/sdk_server_plugin_explorer.png[]
 
 We assume that Scout applications will be run in at least two different environments.
-Once from within the Eclipse IDE in the development environment, and once by the actual end users outside the Eclipse IDE. 
-This second environment is named production environment. 
-Depending on the complexity of deployment processes there might be some more environments to consider, such as testing and integration environments. 
+Once from within the Eclipse IDE in the development environment, and once by the actual end users outside the Eclipse IDE.
+This second environment is named production environment.
+Depending on the complexity of deployment processes there might be some more environments to consider, such as testing and integration environments.
 This is the reason that the Scout SDK initially creates two product files that are associated with the development and the production environment.
 
 Even in the case of the simple "`Hello World`" example, the Scout application is started in two target environments.
 The development environment defines the product in the context of the Scout SDK.
 To export and run the Scout application outside of the Scout SDK, the production product files are used to define the application when it is to be started on a Tomcat web server.
-<<img-server_plugin>> illustrates this situation for the "`Hello World`" server application. 
+<<img-server_plugin>> illustrates this situation for the "`Hello World`" server application.
 On the left side, the blue server node is selected in the Scout Explorer.
 This opens the two server launcher boxes for the production and the development environment.
 On the right side of <<img-server_plugin>>, the corresponding plugin project [element]_org.eclipse.scout.helloworld.server_ is expanded to show the file based organisation of the two product definitions.
@@ -696,21 +707,21 @@ On the right side of <<img-server_plugin>>, the corresponding plugin project [el
 .The Eclipse product file editor showing file [java]+helloworld-server-dev.product+ of the "`Hello World`" application. In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
 image::{imgsdir}/sdk_server_dev_product.png[]
 
-For the case of the "`Hello World`" example we did not need to edit or change the product files generated by the Scout SDK. 
+For the case of the "`Hello World`" example we did not need to edit or change the product files generated by the Scout SDK.
 However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor.
 A screenshot of this editor is shown in <<img-server_dev_product>> with the tab [element]_Dependencies_ opened.
 In the tab Dependencies, the complete list of necessary plugins is provided.
 Example plugins visible in <<img-server_dev_product>> include the "`Hello World`" server and shared plugins, Scout framework plugins, and Jetty plugins.
 The Jetty.footnote:[
 Jetty is web server with a small footprint: http://www.eclipse.org/jetty/.
-] 
+]
 plugins are only needed to run the "`Hello World`" server application inside the Scout SDK.
 Consequently, Jetty plugins are not listed as a dependency in the Scout server's production product file.
 
 
 [[sec-config_ini]]
 ==== Eclipse Configuration Files
-(((Eclipe config.ini file))) 
+(((Eclipe config.ini file)))
 
 
 [[img-server_dev_ini, Figure 000]]
@@ -736,7 +747,7 @@ Standard Widget Toolkit (SWT): http://en.wikipedia.org/wiki/Standard_Widget_Tool
 ], two alternative UI technologies are currently available to build Scout desktop client applications.
 More recently, JavaFX.footnote:[
 JavaFX is the most recent Java UI technology: http://en.wikipedia.org/wiki/JavaFX.
-] 
+]
 is promoted as a successor to Swing and it is therefore likely, that Scout will provide JavaFX client applications in the future.
 
 When we compare the product files for the Swing and the SWT client applications, it is apparent that both client applications share a large number of plugins.
@@ -745,7 +756,7 @@ In other words, the value created by the Scout developer is contained in the two
 To create an executable client application, we only need to combine these two plugins with a set of plugins specific to the desired UI technology.
 
 After starting the "`Hello World`" Swing client or the corresponding SWT client application, the client application first reads the startup parameters from its [filename]+config.ini+ file.
-Among other things, this client configuration file contains the parameter [java]+server.url+ to specify the URL to the "`Hello World`" server. 
+Among other things, this client configuration file contains the parameter [java]+server.url+ to specify the URL to the "`Hello World`" server.
 After the startup of the "`Hello World`" client application, it can then connect to the "`Hello World`" server application using this address.
 
 
@@ -774,18 +785,18 @@ As in the case of the desktop client applications, the RAP or Ajax server applic
 [[sec-helloworld.userinterface.background]]
 === The User Interface Part
 
-Using the UI of the "`Hello World`" application we explain in this section how the Scout UI form model is represented in Java. 
+Using the UI of the "`Hello World`" application we explain in this section how the Scout UI form model is represented in Java.
 We also describe how this representation is exploited by the Scout SDK to automatically manage the form data objects used for data transfer between Scout client and Scout server applications.
 Finally, will have a brief look at internationalization.footnote:[
 Internationalization and localization, also called NLS support: http://en.wikipedia.org/wiki/Internationalization_and_localization.
-] 
+]
 support of Scout for texts.
 
 (((MainBox)))
 [[lst-helloworld.mainbox, Listing MainBox]]
-[source,java]  
+[source,java]
 .The [java]+DesktopForm+ with its inner class [java]+MainBox+ containing the desktop box and message field
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=69..84]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=102..103]
@@ -811,9 +822,9 @@ The Scout SDK takes care of this time consuming and error prone task.
 
 (((Text Provider Service)))
 [[lst-helloworld.textproviderservice, Listing TextProviderService]]
-[source,java]  
+[source,java]
 .The [java]+HelloworldTextProviderService+ class. Its getter method provides the path and the base name for the text property files
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
 ----
 
@@ -825,7 +836,7 @@ When we did add the [field]_Message_ field to the desktop form of the "`Hello Wo
 The individual translation entries are then stored in language specific text property files.
 To modify translated texts we can use the NLS editor.footnote:[
 See Section <<sec-nls_editor>> for a detailed description of the NLS editor.
-] 
+]
 provided by the Scout SDK as shown in <<img-nls_editor>>.
 
 To access the translated label field entry in the application, the Scout SDK generated the implementation of [java]+getConfiguredLabel+ using [java]+TEXTS.get("Message")+ as shown in <<lst-helloworld.mainbox>>.
@@ -849,14 +860,14 @@ Scout services are OSGi services.footnote:[
 A good introduction to OSGi services is provided by Lars Vogel's tutorial: http://www.vogella.com/articles/OSGiServices/article.html.
 ]
 which in turn are defined by standard Java classes or interfaces.
-Scout is just adding a convenience layer to cover typical requirements in the context of client server applications. 
+Scout is just adding a convenience layer to cover typical requirements in the context of client server applications.
 To support Scout developers as much as possible, the Scout SDK offers wizards that generate the necessary classes and interfaces and also take care of service registration.
 
 (((Text Provider Service)))
 [[lst-helloworld.desktop_service, Listing DesktopService]]
-[source,java]  
+[source,java]
 .The server service class [java]+DesktopService+.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[lines=8..15]
 ----
 
@@ -879,9 +890,9 @@ image::{imgsdir}/sdk_plugin_editor_desktopservice.png[]
 
 (((Plugin service registration)))
 [[lst-helloworld.server_plugin_xml, Listing server plugin.xml]]
-[source,xml]  
+[source,xml]
 .The registration of the [java]+DesktopService+ in the server's [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..6]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=22..27]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=105..106]
@@ -904,9 +915,9 @@ As the name implies, a client proxy service acts as a local proxy service (runni
 
 (((Plugin service registration)))
 [[lst-helloworld.client_plugin_xml, Listing client plugin.xml]]
-[source,xml]  
+[source,xml]
 .The registration of the [java]+IDesktopService+ proxy service in the client plugin of the "`Hello World`" application. This is the complete content of the client's [java]+plugin.xml+ file.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/plugin.xml[]
 ----
 
@@ -914,7 +925,7 @@ Client proxy services are defined by a Java interface located in the shared plug
 As shown in <<lst-helloworld.desktop_service>> of the desktop service, this service interface is also implemented by the desktop service class in the server plugin.
 Corresponding to the registration of the desktop service in the server plugin, client proxy services need to be registered in the client's [filename]+plugin.xml+ file.
 The content of the "`Hello World`" client plugin configuration file is provided in <<lst-helloworld.client_plugin_xml>>.
-To create proxy services in Scout clients, the [java]+ClientProxyServiceFactory+ is used. 
+To create proxy services in Scout clients, the [java]+ClientProxyServiceFactory+ is used.
 This is also reflected in the extension defined in <<lst-helloworld.client_plugin_xml>>.
 Internally, this service factory then uses the service tunnel to create the local proxy services.
 
@@ -928,14 +939,14 @@ Connecting to the server, serializing the method call including parameters (and 
 === Add the Rayo Look and Feel
 
 Rayo has been designed in 2009 by BSI for its CRM.footnote:[
-Customer Relationship Management (CRM): https://en.wikipedia.org/wiki/Customer_relationship_management] 
+Customer Relationship Management (CRM): https://en.wikipedia.org/wiki/Customer_relationship_management]
 application and contact center solution.
 Since then, Rayo has been copied for Scout web applications and also adapted to work on touch/mobile devices.
 
 The implementation of Rayo for desktop clients is based on the Java Synth look and feel.footnote:[
 Java Synth Look and Feel: http://en.wikipedia.org/wiki/Synth_Look_and_Feel
 ].
-However, in a few cases it was necessary to adjust some of the synth classes. 
+However, in a few cases it was necessary to adjust some of the synth classes.
 In order to do this, the adapted classes are copied form the OpenJDK implementation.footnote:[
 OpenJDK is an open source implementation of the Java platform: http://openjdk.java.net/.
 ]
@@ -970,7 +981,7 @@ image::{imgsdir}/helloworld_server_war.png[]
 .The organisation of the "`Hello World`" server WAR file. The right side reveals the location of the [java]+config.ini+ file and the application's plugin files
 image::{imgsdir}/helloworld_server_war_eclipse.png[]
 
-The content and its organisation of the exported WAR files was not specifically designed for Scout applications. 
+The content and its organisation of the exported WAR files was not specifically designed for Scout applications.
 Rather, it is defined according to server-side Equinox.footnote:[
 See Appendix <<apx-osgi_basics>> for more information regarding server-side Equinox.
 ],
@@ -986,7 +997,7 @@ While the [filename]+web.xml+ file and directory [filename]+lib+ are standard fo
 See Appendix <<apx-javaee_basics>> for more information regarding servlets.
 ],
 directory [filename]+eclipse+ contains all necessary artefacts for servlet based Eclipse applications.footnote:[
-See Appendix <<apx-osgi_basics>> for more information regarding server-side Eclipse applications (server-side Equinox). 
+See Appendix <<apx-osgi_basics>> for more information regarding server-side Eclipse applications (server-side Equinox).
 ].
 Such as Eclipse Scout server applications.
 
@@ -1004,9 +1015,9 @@ image::{imgsdir}/helloworld_server_war_plugin.png[]
 
 
 [[lst-helloworld.server_plugin_xml.resourceservlet, Listing servlet registration]]
-[source,xml]  
+[source,xml]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
----- 
+----
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..3]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=28..30]
 TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=51..62]
@@ -1049,19 +1060,19 @@ To modify Jetty's port number in the Scout SDK you have to update the correspond
 In the Scout server's [filename]+config.ini+ file the property is named [java]+org.eclipse.equinox.http.jetty.http.port+, in the client [filename]+config.ini+ files the relevant property is called [java]+server.url+.
 To change the port number to 8081 for the "`Hello World`" example in the Scout SDK you could use the following lines in the individual [filename]+config.ini+ files.
 
-|=== 
+|===
 
-| Scout Server | org.eclipse.equinox.http.jetty.http.port=8081 
+| Scout Server | org.eclipse.equinox.http.jetty.http.port=8081
 
-| Scout Desktop Client | server.url=http://localhost:8081/helloworld_server/process 
+| Scout Desktop Client | server.url=http://localhost:8081/helloworld_server/process
 
 | Scout Ajax Server | server.url=http://localhost:8081/helloworld_server/ajax
 
-|=== 
+|===
 
 
 The second pitfall is connected to a web application that seems to refuse to update to the content of a freshly generated WAR file.
-At times it seems that your changes to a deployed WAR file do not find their way to the application actually running. 
+At times it seems that your changes to a deployed WAR file do not find their way to the application actually running.
 In many cases this is caused by a cached instance of the previous version of your application located in Tomcat's working directory.
 To save yourself much frustration, it often helps just to clear Tomcat's working directory and restart Tomcat.
 For this, you may follow the following procedure.
@@ -1073,7 +1084,7 @@ For this, you may follow the following procedure.
  . Start the Tomcat web server
 
 
-How you start and stop Tomcat depends on the platform you are running it. 
+How you start and stop Tomcat depends on the platform you are running it.
 If you have installed Tomcat on a Windows box according to Appendix <<apx-install_tomcat>> it will be running as a service.
 This means that to stop the Tomcat web server you need to stop the corresponding Windows service.
 For starting and stopping Tomcat on Mac/Linux/Unix systems, you can use the command line script files [filename]+startup.sh+ and [filename]+shutdown.sh+ located in Tomcat's subdirectory [filename]+bin+.

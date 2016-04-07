@@ -139,3 +139,6 @@ JavaNioMimeTypeDetector uses java.nio Files.probeContentType
 
 === UploadRequestHandler [Added features]
 The UploadRequestHandler checks for malware and limits the file types that can be uploaded.
+
+=== Session Cookie (JSESSIONID Cookie) configuration validation
+The HTML UI checks if the application is configured safe by validating some flags set on the session cookie. For more details on how to configure your session cookie please refer to the Scout Documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration".
