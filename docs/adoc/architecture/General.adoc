@@ -9,7 +9,7 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 = Session Cookie (JSESSIONID Cookie) Configuration
-The UiServlet checks after the creation of a session cookie if the server is configured safely. The validation is implemented in the Bean `org.eclipse.scout.rt.ui.html.SessionCookieValidator` and can be replaced or customized by developers.
+The UiServlet checks after the creation of a session cookie if the server is configured safely. The validation is implemented in the Bean `SessionCookieValidator` and can be replaced or customized by developers.
 The validation is only automatically performed by the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!
 
 If the validation fails, the validator assumes that the session has been tampered and invalidates the session immediately. For the end user this leads to a session timeout message right after login. In this case the application should be taken offline and the configuration should be fixed.
@@ -20,7 +20,7 @@ For a list of user agents supporting this feature please refer to https://www.ow
 
 It is recommended to always enable this flag.
 
-Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`: 
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
 
 [source,xml]
 ----
@@ -47,7 +47,7 @@ Since Java Servlet 3.0 specification this property can be set in the configurati
 == Secure
 Second the default implementation checks the existence of the `Secure` flag on the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
 
-Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`: 
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
 
 [source,xml]
 ----
