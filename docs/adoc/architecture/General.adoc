@@ -8,14 +8,13 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-= Session Cookie (JSESSIONID Cookie) Configuration
-The UiServlet checks after the creation of a session cookie if the server is configured safely. The validation is implemented in the Bean `SessionCookieValidator` and can be replaced or customized by developers.
-The validation is only automatically performed by the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!
+= Session Cookie (JSESSIONID Cookie) Configuration Validation
+The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!
 
-If the validation fails, the validator assumes that the session has been tampered and invalidates the session immediately. For the end user this leads to a session timeout message right after application access or that the user cannot login at all. In this case the application should be taken offline and the configuration should be fixed.
+If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the UiServlet inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.
 
 == HttpOnly
-First the default implementation checks the existence of the `HttpOnly` flag on the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
+First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
 For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
 
 It is recommended to always enable this flag.
@@ -45,7 +44,7 @@ Since Java Servlet 3.0 specification this property can be set in the configurati
 <1> The HttpOnly flag activated
 
 == Secure
-Second the default implementation checks the existence of the `Secure` flag on the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
+Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
 
 Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
 
@@ -71,11 +70,11 @@ Since Java Servlet 3.0 specification this property can be set in the configurati
 ----
 <1> The Secure flag activated
 
-This of course only makes sense if the application is exposed to the end user using an encrypted channel like HTTPS (which is hardly recommended).
+This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is hardly recommended).
 
-Unfortunately it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
+Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
 
-Because of this the cookie validator assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
+Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
 
 `scout.auth.cookie.session.validate.secure=false`
 
