@@ -29,7 +29,6 @@
 
   <modules>
     <module>../org.eclipsescout.demo.bahbah.client</module>
-    <module>../org.eclipsescout.demo.bahbah.security</module>
     <module>../org.eclipsescout.demo.bahbah.mysql</module>
     <module>../org.eclipsescout.demo.bahbah.server</module>
     <module>../org.eclipsescout.demo.bahbah.shared</module>
