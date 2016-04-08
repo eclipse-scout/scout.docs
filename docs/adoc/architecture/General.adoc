@@ -1,0 +1,81 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+= Session Cookie (JSESSIONID Cookie) Configuration Validation
+The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the UiServlet. There is no automatic validation on the backend server side or on any custom servlets!
+
+If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the UiServlet inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.
+
+== HttpOnly
+First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
+For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
+
+It is recommended to always enable this flag.
+
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    version="3.1">
+  ...
+  <session-config>
+    ...
+    <cookie-config>
+      <http-only>true</http-only> <!--1-->
+      ...
+    </cookie-config>
+    ...
+  </session-config>
+  ...
+</web-app>
+----
+<1> The HttpOnly flag activated
+
+== Secure
+Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
+
+Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    version="3.1">
+  ...
+  <session-config>
+    ...
+    <cookie-config>
+      <secure>true</secure> <!--1-->
+      ...
+    </cookie-config>
+    ...
+  </session-config>
+  ...
+</web-app>
+----
+<1> The Secure flag activated
+
+This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is hardly recommended).
+
+Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
+
+Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
+
+`scout.auth.cookie.session.validate.secure=false`
+
+This skips the `Secure` flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the `WEB-INF/web.xml`.

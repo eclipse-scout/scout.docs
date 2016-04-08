@@ -62,7 +62,7 @@
       <plugin>
         <groupId>com.bsiag.htmltools</groupId>
         <artifactId>htmltools-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
@@ -158,6 +158,7 @@
                 <inputSource>
                   <inputFolder>../eclipse_help/target/generated-docs</inputFolder>
                   <outputSubFolder>scout-sdk-help</outputSubFolder>
+                  <fixExternalLinks>true</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>html</outputSubFolder>
                     <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
