@@ -41,6 +41,8 @@ import org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient;
 import org.eclipse.scout.rt.server.jaxws.consumer.InvocationContext;
 import org.eclipse.scout.rt.server.jaxws.consumer.auth.handler.BasicAuthenticationHandler;
 import org.eclipse.scout.rt.server.jaxws.handler.LogHandler;
+import org.eclipse.scout.rt.server.jaxws.handler.WsConsumerCorrelationIdHandler;
+import org.eclipse.scout.rt.server.jaxws.handler.WsProviderCorrelationIdHandler;
 import org.eclipse.scout.rt.server.jaxws.provider.annotation.Authentication;
 import org.eclipse.scout.rt.server.jaxws.provider.annotation.Clazz;
 import org.eclipse.scout.rt.server.jaxws.provider.annotation.Handler;
@@ -271,6 +273,24 @@ public final class JaxWsSnippet {
   }
   // end::jaxws.example.statepropagation.porttype[]
 
+  //tag::jaxws.example.pingwsWithCorrelationId.entrypoint.definition[]
+  @WebServiceEntryPoint(
+      endpointInterface = PingWebServicePortType.class,
+      entryPointName = "PingWebServiceEntryPoint",
+      entryPointPackage = "org.eclipse.scout.docs.ws.ping",
+      serviceName = "PingWebService",
+      portName = "PingWebServicePort",
+      handlerChain = {
+          @Handler(@Clazz(WsProviderCorrelationIdHandler.class)), // <1>
+          @Handler(@Clazz(LogHandler.class)),
+      },
+      authentication = @Authentication(
+          method = @Clazz(BasicAuthenticationMethod.class) ,
+          verifier = @Clazz(ConfigFileCredentialVerifier.class) ) )
+  // end::jaxws.example.pingwsWithCorrelationId.entrypoint.definition[]
+  public interface PingWebServiceEntryPointDefinition2 {
+  }
+
   // tag::jaxws.example.wsclient1[]
   public class PingWebServiceClient extends AbstractWebServiceClient<PingWebService, PingWebServicePortType> { // <1>
   }
@@ -312,10 +332,22 @@ public final class JaxWsSnippet {
     @Override
     protected void execInstallHandlers(List<javax.xml.ws.handler.Handler<?>> handlerChain) {
       handlerChain.add(new BasicAuthenticationHandler());
-      handlerChain.add(new LogHandler());
+      handlerChain.add(BEANS.get(LogHandler.class));
     }
   }
   // end::jaxws.example.wsclient3[]
+
+  // tag::jaxws.example.wsclient4[]
+  public class PingWebServiceClient3 extends AbstractWebServiceClient<PingWebService, PingWebServicePortType> {
+
+    @Override
+    protected void execInstallHandlers(List<javax.xml.ws.handler.Handler<?>> handlerChain) {
+      handlerChain.add(new BasicAuthenticationHandler());
+      handlerChain.add(BEANS.get(LogHandler.class));
+      handlerChain.add(BEANS.get(WsConsumerCorrelationIdHandler.class)); // <1>
+    }
+  }
+  // end::jaxws.example.wsclient4[]
 
   public static class JaxWsPingEndpointUrlProperty extends AbstractStringConfigProperty {
     @Override
