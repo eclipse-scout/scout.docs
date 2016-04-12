@@ -277,7 +277,7 @@ public final class JaxWsSnippet {
   @WebServiceEntryPoint(
       endpointInterface = PingWebServicePortType.class,
       entryPointName = "PingWebServiceEntryPoint",
-      entryPointPackage = "org.eclipse.scout.docs.ws.ping",
+      entryPointPackage = "org.eclipse.scout.docs.ws.ping2",
       serviceName = "PingWebService",
       portName = "PingWebServicePort",
       handlerChain = {
