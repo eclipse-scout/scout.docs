@@ -1,48 +1,46 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
-import org.eclipse.scout.rt.client.ui.desktop.notification.DesktopNotification;
-import org.eclipse.scout.rt.client.ui.desktop.notification.IDesktopNotification;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.SeverityField;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.BenchVisibleButton;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
-import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
-import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.MessageField;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.OpenFormBasedButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.ViewIdSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox.BenchVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox.HeaderVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox.NavigationVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.ViewIdLookupCall.ViewId;
 
-@Order(8100.0)
-public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
-
-  private IDesktopNotification m_lastNotification;
-
-  public DesktopForm() {
-    super();
-  }
-
+/**
+ * <h3>{@link FormLayoutForm}</h3>
+ *
+ * @author aho
+ */
+public class FormLayoutForm extends AbstractForm implements IAdvancedExampleForm {
   @Override
   public void startPageForm() {
     startInternal(new PageFormHandler());
@@ -69,20 +67,16 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(BenchVisibleButton.class);
   }
 
+  public OpenFormBasedButton getOpenFormBasedButton() {
+    return getFieldByClass(OpenFormBasedButton.class);
+  }
+
+  public ViewIdSmartField getViewIdSmartField() {
+    return getFieldByClass(ViewIdSmartField.class);
+  }
+
   public NavigationVisibleButton getNavigationVisibleButton() {
     return getFieldByClass(NavigationVisibleButton.class);
-  }
-
-  public SeverityField getSeverityField() {
-    return getFieldByClass(SeverityField.class);
-  }
-
-  public DurationField getDurationField() {
-    return getFieldByClass(DurationField.class);
-  }
-
-  public CloseableField getCloseableField() {
-    return getFieldByClass(CloseableField.class);
   }
 
   public class MainBox extends AbstractGroupBox {
@@ -93,54 +87,11 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
-    public class NotificationsBox extends AbstractGroupBox {
+    public class ContentBox extends AbstractGroupBox {
 
       @Override
       protected int getConfiguredGridColumnCount() {
         return 2;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Notifications");
-      }
-
-      @Order(20)
-      public class ShowNotificationButton extends AbstractButton {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ShowNotification");
-        }
-
-        @Override
-        protected void execClickAction() {
-          IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
-          long duration = getDurationField().getValue();
-          boolean closeable = getCloseableField().getValue();
-          DesktopNotification notification = new DesktopNotification(status, duration, closeable);
-          ClientSession.get().getDesktop().addNotification(notification);
-          m_lastNotification = notification;
-        }
-      }
-
-      @Order(30)
-      public class RemoveNotificationButton extends AbstractButton {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("RemoveNotification");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("RemoveNotificationTooltip");
-        }
-
-        @Override
-        protected void execClickAction() {
-          ClientSession.get().getDesktop().removeNotification(m_lastNotification);
-        }
       }
 
       @Order(10)
@@ -157,56 +108,44 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(50)
-      public class SeverityField extends AbstractSmartField<Integer> {
-
+      @Order(1005)
+      public class ViewIdSmartField extends AbstractSmartField<ViewId> {
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Severity");
+          return TEXTS.get("ViewID");
         }
 
         @Override
-        protected Class<? extends ICodeType<?, Integer>> getConfiguredCodeType() {
-          return SeverityCodeType.class;
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(IStatus.INFO);
+        protected Class<? extends ILookupCall<ViewId>> getConfiguredLookupCall() {
+          return ViewIdLookupCall.class;
         }
       }
 
-      @Order(60)
-      public class DurationField extends AbstractIntegerField {
-
+      @Order(2000)
+      public class OpenFormBasedButton extends AbstractButton {
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Duration");
+          return TEXTS.get("OpenFormBased");
         }
 
         @Override
-        protected void execInitField() {
-          setValue(5000);
+        protected void execClickAction() {
+          ViewId viewId = getViewIdSmartField().getValue();
+          if (viewId == null) {
+            viewId = ViewId.South;
+          }
+          FormLayoutForm form = new FormLayoutForm();
+          form.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
+          form.setDisplayViewId(viewId.getValue());
+          form.startPageForm();
+          form.getMessageField().setValue(String.format("View Id: %s", viewId));
         }
       }
 
-      @Order(70)
-      public class CloseableField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Closeable");
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(true);
-        }
-      }
     }
 
     @Order(2000)
-    @ClassId("753dc7e4-e1b9-4016-a5b5-0ce1b682b6e6")
+    @ClassId("05cdb9cf-1c45-4f3c-9463-5b9f160b50c0")
     public class StyleBox extends AbstractGroupBox {
 
       @Override
@@ -215,7 +154,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(1000)
-      @ClassId("3db84b66-1c8f-478a-910d-27922fac5bad")
+      @ClassId("222b4c59-000d-4798-a96b-0da35e2b7734")
       public class NavigationVisibleButton extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
@@ -240,7 +179,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(2000)
-      @ClassId("6c2bc3b0-ebb5-4c6f-8227-4002d81a355c")
+      @ClassId("74182203-c9a0-43c1-b47b-b02d46f039c2")
       public class HeaderVisibleButton extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
@@ -264,7 +203,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(3000)
-      @ClassId("6fedb013-f83c-4d07-9303-a48f0e456f60")
+      @ClassId("759b00bb-0427-4ec2-84f1-935299f60ead")
       public class BenchVisibleButton extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
@@ -302,7 +241,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
     }
 
-    @Order(10000)
+    @Order(10)
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -310,4 +249,35 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  @ApplicationScoped
+  public static class ViewIdLookupCall extends LocalLookupCall<ViewId> {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<ViewId>> execCreateLookupRows() {
+      List<LookupRow<ViewId>> rows = new ArrayList<>();
+      for (ViewId displayHint : ViewId.values()) {
+        rows.add(new LookupRow<>(displayHint, displayHint.name()));
+      }
+      return rows;
+    }
+
+    public static enum ViewId {
+
+      North(IForm.VIEW_ID_N),
+      South(IForm.VIEW_ID_S),
+      East(IForm.VIEW_ID_E);
+
+      String m_value;
+
+      private ViewId(String value) {
+        m_value = value;
+      }
+
+      public String getValue() {
+        return m_value;
+      }
+    }
+  }
 }
