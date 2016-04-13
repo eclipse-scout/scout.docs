@@ -1,7 +1,7 @@
 scout_user_guide.html
 tutorial.html
-tutorial_existingdemo.html
 tutorial_helloworld.html
+tutorial_existingdemo.html
 sdk.html
 sdk_editor_java.html
 sdk_editor_nls.html

@@ -44,8 +44,7 @@ In the <<img-sdk_wizard_page>> example shown above the Scout SDK will create the
 * In Maven module *helloworld.server* 
 ** The `MyService` implementation in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 
-===== Back to Scout Wizards
+'''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
-=======
-include::{mdledir}/_footer.adoc[]
+include::{mdledir}/_footer-text.adoc[]

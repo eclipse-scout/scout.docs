@@ -58,8 +58,7 @@ You can select one of the matching entries (like "DateOfBirth" in the example) a
 
 You can select "New text..." to open the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
 
-==== Back to Scout Tooling
+'''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
-=======
-include::{mdledir}/_footer.adoc[]
+include::{mdledir}/_footer-text.adoc[]

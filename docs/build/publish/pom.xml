@@ -76,11 +76,13 @@
                 <inputSource>
                   <inputFolder>../scout_install/target/generated-docs</inputFolder>
                   <outputSubFolder>eclipse.org-scout</outputSubFolder>
+                  <fixExternalLinks>true</fixExternalLinks>
                   <htmlOutput/>
                 </inputSource>
                 <inputSource>
                   <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
                   <outputSubFolder>eclipse.org-scout</outputSubFolder>
+                  <fixExternalLinks>true</fixExternalLinks>
                   <htmlOutput/>
                 </inputSource>
                 <!-- publish for downloads -->
@@ -88,6 +90,7 @@
                 <inputSource>
                   <inputFolder>../scout_install/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_install</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_install</outputSubFolder>
                     <outputZipFileName>scout_install.zip</outputZipFileName>
@@ -98,6 +101,7 @@
                 <inputSource>
                   <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_helloworld</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_helloworld</outputSubFolder>
                     <outputZipFileName>scout_helloworld.zip</outputZipFileName>
@@ -108,6 +112,7 @@
                 <inputSource>
                   <inputFolder>../book_scout_frontend/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_frontend</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_frontend</outputSubFolder>
                     <outputZipFileName>scout_frontend.zip</outputZipFileName>
@@ -118,6 +123,7 @@
                 <inputSource>
                   <inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_intro</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_intro</outputSubFolder>
                     <outputZipFileName>scout_intro.zip</outputZipFileName>
@@ -128,6 +134,7 @@
                 <inputSource>
                   <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_architecture</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_architecture</outputSubFolder>
                     <outputZipFileName>scout_architecture.zip</outputZipFileName>
@@ -138,6 +145,7 @@
                 <inputSource>
                   <inputFolder>../scout_migration/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_migration</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_migration</outputSubFolder>
                     <outputZipFileName>scout_migration.zip</outputZipFileName>
@@ -148,6 +156,7 @@
                 <inputSource>
                   <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
                   <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_releasenotes</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_releasenotes</outputSubFolder>
                     <outputZipFileName>scout_releasenotes.zip</outputZipFileName>
