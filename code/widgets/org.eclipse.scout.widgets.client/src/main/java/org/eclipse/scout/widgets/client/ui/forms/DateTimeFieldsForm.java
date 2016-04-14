@@ -12,17 +12,22 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import org.eclipse.scout.rt.client.context.ClientRunContext;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.IButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractTimeField;
@@ -34,6 +39,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
+import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
@@ -65,9 +71,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Exam
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeDisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeMandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.NineteenSeventyButton;
-import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.NowButton;
-import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.SampleFormatButton;
 import org.eclipse.scout.widgets.shared.CustomDateFormatProvider;
 
 public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
@@ -94,10 +97,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TimeField.class);
   }
 
-  public SampleFormatButton getSampleFormatButton() {
-    return getFieldByClass(SampleFormatButton.class);
-  }
-
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
@@ -117,10 +116,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   public DisabledField getDisabledField() {
     return getFieldByClass(DisabledField.class);
-  }
-
-  public NowButton getNowButton() {
-    return getFieldByClass(NowButton.class);
   }
 
   public GetValueField getGetValueField() {
@@ -201,10 +196,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
-  }
-
-  public NineteenSeventyButton getNineteenSeventyButton() {
-    return getFieldByClass(NineteenSeventyButton.class);
   }
 
   public ConfigurationBox getConfigurationBox() {
@@ -1303,109 +1294,159 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
     }
 
+    @Order(10)
+    public class SetDateMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("SetDate");
+      }
+
+      @Order(10)
+      public class NowMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Now");
+        }
+
+        @Override
+        protected void execAction() {
+          updateDateTimeFields(new Date());
+        }
+      }
+
+      @Order(20)
+      public class NineteenSeventyMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("NineteenSeventy");
+        }
+
+        @Override
+        protected void execAction() {
+          Date d = new Date();
+          d.setTime(0);
+          updateDateTimeFields(d);
+        }
+      }
+
+    }
+
+    @Order(20)
+    public class SetFormatMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("SetFormat");
+      }
+
+      @Order(10)
+      public class SampleFormatMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("SampleFormat");
+        }
+
+        @Override
+        protected void execAction() {
+          getDateFieldFormatField().setValue("EEEE, dd. MMMM yyyy");
+          getTimeFieldFormatField().setValue("HH:mm:ss Z");
+          getDateTimeFieldFormatField().setValue("MM/dd/yy h:mm a");
+        }
+      }
+
+      @Order(20)
+      public class ShortFormatMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ShortFormat");
+        }
+
+        @Override
+        protected void execAction() {
+          DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.SHORT, getConfigLocaleField().getValue());
+          if (df instanceof SimpleDateFormat) {
+            getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+          }
+        }
+      }
+
+      @Order(30)
+      public class MediumFormatMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("MediumFormat");
+        }
+
+        @Override
+        protected void execAction() {
+          DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.MEDIUM, getConfigLocaleField().getValue());
+          if (df instanceof SimpleDateFormat) {
+            getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+          }
+        }
+      }
+
+      @Order(40)
+      public class CustomMediumFormatMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("CustomMediumFormat");
+        }
+
+        @Override
+        protected void execAction() {
+          DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(CustomDateFormatProvider.CUSTOM_MEDIUM, getConfigLocaleField().getValue());
+          if (df instanceof SimpleDateFormat) {
+            getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+          }
+        }
+      }
+    }
+
     @Order(30)
-    public class NowButton extends AbstractButton {
+    public class ToggleAllowedDatesButton extends AbstractButton {
 
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("Now");
+        return TEXTS.get("AllowedDates");
       }
 
       @Override
-      protected void execClickAction() {
-        updateDateTimeFields(new Date());
-      }
-    }
-
-    @Order(40)
-    public class NineteenSeventyButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("NineteenSeventy");
+      protected int getConfiguredDisplayStyle() {
+        return IButton.DISPLAY_STYLE_TOGGLE;
       }
 
       @Override
-      protected void execClickAction() {
-        Date d = new Date();
-        d.setTime(0);
-        updateDateTimeFields(d);
-      }
-    }
-
-    @Order(50)
-    public class SampleFormatButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("SampleFormat");
+      protected String getConfiguredTooltipText() {
+        return TEXTS.get("AllowedDatesTooltip");
       }
 
       @Override
-      protected void execClickAction() {
-        getDateFieldFormatField().setValue("EEEE, dd. MMMM yyyy");
-        getTimeFieldFormatField().setValue("HH:mm:ss Z");
-        getDateTimeFieldFormatField().setValue("MM/dd/yy h:mm a");
-      }
-    }
-
-    @Order(60)
-    public class ShortFormatButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("ShortFormat");
-      }
-
-      @Override
-      protected void execClickAction() {
-        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.SHORT, getConfigLocaleField().getValue());
-        if (df instanceof SimpleDateFormat) {
-          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
+      protected void execSelectionChanged(boolean selection) {
+        List<Date> allowedDates = null;
+        if (selection) {
+          allowedDates = new ArrayList<>();
+          Date today = DateUtility.truncDate(new Date());
+          allowedDates.add(DateUtility.addTime(today, Calendar.DATE, -1));
+          allowedDates.add(DateUtility.addTime(today, Calendar.DATE, 1));
+          allowedDates.add(DateUtility.addTime(today, Calendar.MONTH, -1));
+          allowedDates.add(DateUtility.addTime(today, Calendar.MONTH, 1));
         }
-      }
-    }
-
-    @Order(70)
-    public class MediumFormatButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("MediumFormat");
-      }
-
-      @Override
-      protected void execClickAction() {
-        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(DateFormat.MEDIUM, getConfigLocaleField().getValue());
-        if (df instanceof SimpleDateFormat) {
-          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
-        }
-      }
-    }
-
-    @Order(80)
-    public class CustomMediumFormatButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("CustomMediumFormat");
-      }
-
-      @Override
-      protected void execClickAction() {
-        DateFormat df = BEANS.get(DateFormatProvider.class).getDateInstance(CustomDateFormatProvider.CUSTOM_MEDIUM, getConfigLocaleField().getValue());
-        if (df instanceof SimpleDateFormat) {
-          getDateFieldFormatField().setValue(((SimpleDateFormat) df).toPattern());
-        }
+        getDefaultField().setAllowedDates(allowedDates);
       }
     }
 
     @Order(170)
     public class CloseButton extends AbstractCloseButton {
-
       @Override
       protected void execClickAction() {
-
       }
     }
   }
