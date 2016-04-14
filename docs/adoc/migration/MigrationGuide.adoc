@@ -112,6 +112,10 @@ Offline functionality in the scout client was removed (not needed anymore). Dele
 - IClientSession.getOfflineSubject
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
+=== ToolButton
+* `IToolButton` has been removed, it is not necessary anymore because the desktop may now display any kind of menus.
+* `IFormToolButton` has been renamed to `IFormMenu`. These menus, which display a form when selected, may now be used on any menu capable component and not only on the desktop. Therefore it has been moved from the package `org.eclipse.scout.rt.client.ui.desktop.outline` to `org.eclipse.scout.rt.client.ui.form`.
+
 === Menu
 All owners of an `IContextMenu` now share a common interface: `IContextMenuOwner`. This interface provides a method `getMenuByClass(T)`, analogous to `getFieldByClass(T)`, `getColumnByClass(T)` etc.
 
