@@ -33,8 +33,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.AggregationFunction;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.BackgroundEffect;
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
+import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -422,7 +422,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     }
 
     @Order(50)
-    public class FormToolButton extends AbstractFormToolButton<CheckboxFieldForm> {
+    public class FormMenu extends AbstractFormMenu<CheckboxFieldForm> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -439,7 +439,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
       @Override
       protected String getConfiguredText() {
-        return "Form-ToolButton";
+        return "Form-Menu";
       }
 
     }

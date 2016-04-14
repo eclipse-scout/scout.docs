@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktopExtension;
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
+import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.desktop.outlines.PagesSearchFormsOutline;
 import org.eclipse.scout.widgets.old.client.ui.desktop.outlines.WidgetsOutline;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton2Form;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form;
 import org.eclipse.scout.widgets.shared.Icons;
 
 public class DesktopExtension extends AbstractDesktopExtension {
@@ -52,11 +52,11 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Order(10)
-  public class ToolButton1Tool extends AbstractFormToolButton<ToolButton1Form> {
+  public class Menu1 extends AbstractFormMenu<Menu1Form> {
 
     @Override
     protected String getConfiguredText() {
-      return TEXTS.get("ToolButton1");
+      return TEXTS.get("Menu1");
     }
 
     @Override
@@ -65,13 +65,13 @@ public class DesktopExtension extends AbstractDesktopExtension {
     }
 
     @Override
-    protected Class<ToolButton1Form> getConfiguredForm() {
-      return ToolButton1Form.class;
+    protected Class<Menu1Form> getConfiguredForm() {
+      return Menu1Form.class;
     }
   }
 
   @Order(20)
-  public class ToolButton2Tool extends AbstractFormToolButton<ToolButton2Form> {
+  public class Menu2 extends AbstractFormMenu<Menu2Form> {
 
     @Override
     protected String getConfiguredIconId() {
@@ -80,12 +80,12 @@ public class DesktopExtension extends AbstractDesktopExtension {
 
     @Override
     protected String getConfiguredText() {
-      return TEXTS.get("ToolButton2");
+      return TEXTS.get("Menu2");
     }
 
     @Override
-    protected Class<ToolButton2Form> getConfiguredForm() {
-      return ToolButton2Form.class;
+    protected Class<Menu2Form> getConfiguredForm() {
+      return Menu2Form.class;
     }
   }
 }

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.old.client.ui.desktop.pages;
 
-import org.eclipse.scout.rt.client.ui.action.tool.IToolButton;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
@@ -62,17 +62,17 @@ public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePa
   @Override
   protected void execPageActivated() {
     setSearchActive(true);
-    IToolButton firstToolButton = CollectionUtility.firstElement(ClientSession.get().getDesktop().getToolButtons());
-    if (firstToolButton != null) {
+    IMenu firstMenu = CollectionUtility.firstElement(ClientSession.get().getDesktop().getMenus());
+    if (firstMenu != null) {
       if (m_displayViewId == ISearchForm.VIEW_ID_NE || m_displayViewId == ISearchForm.VIEW_ID_SE) {
-        firstToolButton.setSelected(true);
-        firstToolButton.setToggleAction(true);
-        firstToolButton.doAction();
+        firstMenu.setSelected(true);
+        firstMenu.setToggleAction(true);
+        firstMenu.doAction();
       }
       else {
-        firstToolButton.setSelected(false);
-        firstToolButton.setToggleAction(false);
-        firstToolButton.doAction();
+        firstMenu.setSelected(false);
+        firstMenu.setToggleAction(false);
+        firstMenu.doAction();
       }
     }
   }

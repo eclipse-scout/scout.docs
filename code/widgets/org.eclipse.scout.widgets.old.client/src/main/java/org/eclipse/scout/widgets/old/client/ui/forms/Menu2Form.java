@@ -17,18 +17,18 @@ import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton2Form.MainBox.TreeBoxField;
 import org.eclipse.scout.widgets.client.services.lookup.DateLookupCall;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form.MainBox.TreeBoxField;
 
-public class ToolButton2Form extends AbstractForm {
+public class Menu2Form extends AbstractForm {
 
-  public ToolButton2Form() {
+  public Menu2Form() {
     super();
   }
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("ToolButton2");
+    return TEXTS.get("Menu2");
   }
 
   @Override

@@ -20,21 +20,21 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form.MainBox.GroupBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form.MainBox.GroupBox.FileChooserField;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form.MainBox.GroupBox.IntegerField;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form.MainBox.GroupBox.SequenceBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.ToolButton1Form.MainBox.GroupBox.StringField;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.FileChooserField;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.IntegerField;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.SequenceBox;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.StringField;
 
-public class ToolButton1Form extends AbstractForm {
+public class Menu1Form extends AbstractForm {
 
-  public ToolButton1Form() {
+  public Menu1Form() {
     super();
   }
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("ToolButton1");
+    return TEXTS.get("Menu1");
   }
 
   @Override

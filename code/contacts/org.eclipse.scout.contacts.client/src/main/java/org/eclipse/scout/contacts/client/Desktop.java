@@ -22,10 +22,10 @@ import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractFormToolButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.ApplicationNameProperty;
@@ -171,7 +171,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(2)
-  public class OptionsToolButton extends AbstractFormToolButton<OptionsForm> {
+  public class OptionsMenu extends AbstractFormMenu<OptionsForm> {
 
     @Override
     protected String getConfiguredIconId() {
@@ -195,7 +195,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(3)
-  public class UserMenuToolButton extends AbstractFormToolButton<UserForm> {
+  public class UserMenu extends AbstractFormMenu<UserForm> {
 
     @Override
     protected String getConfiguredIconId() {
