@@ -99,8 +99,7 @@ where:
 ** `Texts_de.properties` is for german
 ** `Texts_fr_BE` will be for french in Belgium
 
-==== Back to Scout Tooling
+'''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
-=======
-include::{mdledir}/_footer.adoc[]
+include::{mdledir}/_footer-text.adoc[]

@@ -258,9 +258,20 @@ For each property a class cares about default values and value validation. These
 
 [[lst-ConfigProperties, config properties]]
 [source,java,indent=0]
-.A configuration property of type string.
+.A configuration property of type Long.
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ConfigProperties]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/MyCustomTimeoutProperty.java[tags=ConfigProperties]
+----
+<1> key
+<2> default value
+
+To read the configured value you can use the `CONFIG` class as demonstrated in <<lst-getPropertyValue>>.
+
+[[lst-getPropertyValue, Listing]]
+[source,java,indent=0]
+.Read the configured value in your code.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
 ----
 
 The given property key is searched in the following environments:

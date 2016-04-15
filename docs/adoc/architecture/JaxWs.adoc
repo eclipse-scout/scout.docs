@@ -186,11 +186,11 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 <1> name of the wsdl file
 
-Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file. 
-Thereby, the 'id' of the execution section must be unique. 
+Otherwise, if having multiple WSDL files in your JAR module, some little more configuration is required, namely a respective execution section per WSDL file.
+Thereby, the 'id' of the execution section must be unique.
 Scout 'jaxws' profile already provides one such section, which is used to generate the stub for a single WSDL file (see such configuration in <<lst-jaxws.pom.single-wsdl-file>>), and names it 'wsimport-1'.
 It is simplest to name the subsequent execution sections 'wsimport-2', 'wsimport-3', and so on. +
-For each execution section, you must configure its unique _id_, the _goal_ 'wsimport', and in the configuration section the respective _wsdlLocation_ and _wsdlFile_. 
+For each execution section, you must configure its unique _id_, the _goal_ 'wsimport', and in the configuration section the respective _wsdlLocation_ and _wsdlFile_.
 For 'wsimport' to work, _wsdlLocation_ is not required.
 However, that location will be referenced in generated artifacts to set the wsdl location via `@WebService` and `@WebServiceClient`.
 The complete configuration is presented in <<lst-jaxws.pom.multiple-wsdl>>.
@@ -529,6 +529,20 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <1> Get the current message context via thread local `IWebServiceContext`
 <2> Get the 'correlation ID' from message context.
 
+=== JAX-WS Correlation ID Propagation
+Scout's JAX-WS integration already provides complete support for reading a correlation ID from the HTTP header named `X-Scout-Correlation-Id` of the incoming web service request and propagates it to the <<RunContext>> that executes the actual service operation. A new correlation ID is created if the HTTP header is empty or missing.
+
+NOTE: The CorrelationIdHandler example above just illustrates the capabilities of a SOAPHandler.
+
+NOTE: You have to implement your own handler if the consumer provides a correlation ID in another header parameter or as part of the request's payload.
+
+.Add Scout's WsProviderCorrelationIdHandler to the handler chain
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.pingwsWithCorrelationId.entrypoint.definition]
+----
+<1> Add the correlation ID handler *at the beginning* of the handler chain to ensure that all handlers can use its value (especially the `LogHandler` has to be added after the correlation ID handler).
+
 === Registration of webservice endpoints
 The registration of webservice endpoints depends on the implementor you use, and whether you are running in an EE container with webservice auto discovery enabled.
 
@@ -655,6 +669,15 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 TIP: The credentials as provided via `InvocationContext` can be accessed via request context with the property `InvocationContext.PROP_USERNAME` and `InvocationContext.PROP_PASSWORD`.
+
+=== JAX-WS Client Correlation ID Propagation
+The current context's correlation ID can be forwarded to the consumed web service. Scout provides a handler that sets the `X-Scout-Correlation-Id` HTTP header on the outgoing request.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JaxWsSnippet.java[tags=jaxws.example.wsclient4]
+----
+<1> The handler can be at any position in the handler chain.
 
 [[jaxws.consumer.configuration]]
 === Default configuration of WS-Clients

@@ -25,5 +25,7 @@ Make sure to at least provide a text in the [element]_default_ tab.
 
 With the [element]_copy key to the clipboard_ you can copy the key name to the clipboard and paste it later in your code.
 
-=======
-include::{mdledir}/_footer.adoc[]
+'''
+Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
+
+include::{mdledir}/_footer-text.adoc[]

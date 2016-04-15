@@ -152,5 +152,5 @@ This page is implemented in class [java]+PersonTablePage+ and the dialog to show
 
 This is the end of the <<tutorial.html#tutorial, getting started>> guide.
 
-=======
-include::{mdledir}/_footer.adoc[]
+'''
+include::{mdledir}/_footer-text.adoc[]

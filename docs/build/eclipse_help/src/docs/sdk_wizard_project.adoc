@@ -72,8 +72,7 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ** The file `web.xml` in folder `src/main/webapp` contains the web configuration.
 ** The file `pom.xml` is used to build the Scout UI WAR file.
 
-===== Back to Scout Wizards
+'''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
-=======
-include::{mdledir}/_footer.adoc[]
+include::{mdledir}/_footer-text.adoc[]
