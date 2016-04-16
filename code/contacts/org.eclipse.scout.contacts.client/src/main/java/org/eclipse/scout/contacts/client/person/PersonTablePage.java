@@ -52,6 +52,11 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     importPageData(BEANS.get(IPersonService.class).getTableData(filter, getOrganizationId()));
   }
 
+  @Override
+  protected boolean getConfiguredLeaf() {
+    return true;
+  }
+
   public class Table extends AbstractTable {
 
     public LastNameColumn getLastNameColumn() {
