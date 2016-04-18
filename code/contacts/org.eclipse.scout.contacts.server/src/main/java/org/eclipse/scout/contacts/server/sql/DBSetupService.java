@@ -24,7 +24,11 @@ import org.slf4j.LoggerFactory;
 public class DBSetupService {
   private static final Logger LOG = LoggerFactory.getLogger(DBSetupService.class);
   // end::service[]
-  private static final String ORGANISATION1 = "Alice's Adventures in Wonderland";
+  public static final UUID ORGANISATION1 = UUID.randomUUID();
+  public static final UUID ORGANISATION2 = UUID.randomUUID();
+
+  public static final UUID PERSON01 = UUID.randomUUID();
+  public static final UUID PERSON02 = UUID.randomUUID();
   //tag::service[]
 
   public void autoCreateDatabase() {
@@ -66,9 +70,9 @@ public class DBSetupService {
       LOG.info("Database table 'ORGANIZATION' created");
       // end::service[]
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createOrganizationEntry(ORGANISATION1, "London", "GB", "http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
+        createOrganizationEntry(ORGANISATION1, "Alice's Adventures in Wonderland", "London", "GB", "http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland",
             "https://upload.wikimedia.org/wikipedia/en/3/3f/Alice_in_Wonderland%2C_cover_1865.jpg");
-        createOrganizationEntry("BSI Business Systems Integration AG", "Daettwil, Baden", "CH", "https://www.bsi-software.com",
+        createOrganizationEntry(ORGANISATION2, "BSI Business Systems Integration AG", "Daettwil, Baden", "CH", "https://www.bsi-software.com",
             "https://wiki.eclipse.org/images/4/4f/Bsiag.png");
 
         LOG.info("Database table 'ORGANIZATION' populated with sample data");
@@ -79,8 +83,8 @@ public class DBSetupService {
 
   // end::service[]
 
-  private void createOrganizationEntry(String name, String city, String country, String url, String logoUrl) {
-    SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA, new NVPair("organization_id", UUID.randomUUID().toString()), new NVPair("name", name), new NVPair("city", city), new NVPair("country", country), new NVPair("url", url),
+  private void createOrganizationEntry(UUID organizationUuid, String name, String city, String country, String url, String logoUrl) {
+    SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE_DATA, new NVPair("organizationUuid", organizationUuid.toString()), new NVPair("name", name), new NVPair("city", city), new NVPair("country", country), new NVPair("url", url),
         new NVPair("logoUrl", logoUrl));
   }
 
@@ -92,8 +96,8 @@ public class DBSetupService {
       // end::service[]
 
       if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createPersonEntry("Alice", null, "http://www.uergsel.de/uploads/Alice.png", DateUtility.parse("26.11.1865", "dd.MM.yyyy"), "F", "Daresbury, Cheshire", "GB", "The curious girl", ORGANISATION1);
-        createPersonEntry("Rabbit", "the White", "https://upload.wikimedia.org/wikipedia/commons/4/42/The_White_Rabbit_%28Tenniel%29_-_The_Nursery_Alice_%281890%29_-_BL.jpg", DateUtility.parse("26.11.1861", "dd.MM.yyyy"), "F",
+        createPersonEntry(PERSON01, "Alice", null, "http://www.uergsel.de/uploads/Alice.png", DateUtility.parse("26.11.1865", "dd.MM.yyyy"), "F", "Daresbury, Cheshire", "GB", "The curious girl", ORGANISATION1);
+        createPersonEntry(PERSON02, "Rabbit", "the White", "https://upload.wikimedia.org/wikipedia/commons/4/42/The_White_Rabbit_%28Tenniel%29_-_The_Nursery_Alice_%281890%29_-_BL.jpg", DateUtility.parse("26.11.1861", "dd.MM.yyyy"), "F",
             "Daresbury, Cheshire", "GB", "Follow me", ORGANISATION1);
 
         LOG.info("Database table 'PERSON' populated with sample data");
@@ -103,9 +107,9 @@ public class DBSetupService {
   }
   // end::service[]
 
-  private void createPersonEntry(String firstName, String lastName, String pictureUrl, Date dob, String gender, String city, String country, String position, String organizationId) {
+  private void createPersonEntry(UUID personUuid, String firstName, String lastName, String pictureUrl, Date dob, String gender, String city, String country, String position, UUID organizationUuid) {
     SQL.insert(SQLs.PERSON_INSERT_SAMPLE_DATA,
-        new NVPair("person_id", UUID.randomUUID().toString()),
+        new NVPair("personUuid", personUuid.toString()),
         new NVPair("firstName", firstName),
         new NVPair("lastName", lastName),
         new NVPair("pictureUrl", pictureUrl),
@@ -114,7 +118,7 @@ public class DBSetupService {
         new NVPair("city", city),
         new NVPair("country", country),
         new NVPair("position", position),
-        new NVPair("organizationId", organizationId));
+        new NVPair("organizationUuid", organizationUuid.toString()));
   }
 
 }

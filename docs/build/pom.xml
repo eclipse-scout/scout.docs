@@ -73,7 +73,7 @@
             <dependency>
               <groupId>com.bsiag.asciidoctorj</groupId>
               <artifactId>gh-edit</artifactId>
-              <version>1.0.1</version>
+              <version>2.0.0</version>
             </dependency>
             <dependency>
               <groupId>org.jruby</groupId>
@@ -97,6 +97,8 @@
             <attributes>
               <sourcedir>${project.build.sourceDirectory}</sourcedir>
               <project-version>${project.version}</project-version>
+              <repository>BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs</repository>
+              <branch>releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x</branch>
               <imagesdir></imagesdir>
               <imgsdir>${project.basedir}/../../imgs</imgsdir>
               <mdledir>${project.basedir}/../../adoc</mdledir>

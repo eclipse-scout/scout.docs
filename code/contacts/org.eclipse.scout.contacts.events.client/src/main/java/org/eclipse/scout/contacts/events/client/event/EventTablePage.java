@@ -12,8 +12,8 @@ package org.eclipse.scout.contacts.events.client.event;
 
 import java.util.Set;
 
-import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.client.organization.OrganizationDetailsNodePage;
+import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
 import org.eclipse.scout.rt.client.dto.FormData;
@@ -48,6 +48,11 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Events");
+  }
+
+  @Override
+  protected boolean getConfiguredLeaf() {
+    return true;
   }
 
   @Override
