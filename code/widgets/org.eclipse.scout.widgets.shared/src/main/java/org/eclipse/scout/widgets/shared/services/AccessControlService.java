@@ -8,19 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.widgets.client.services;
+package org.eclipse.scout.widgets.shared.services;
 
 import java.security.AllPermission;
 import java.security.Permissions;
 
-import org.eclipse.scout.rt.platform.Replace;
-import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
+import org.eclipse.scout.rt.shared.services.common.security.AbstractAccessControlService;
 
 /**
- * Client implementation of {@link org.eclipse.scout.rt.shared.services.common.security.IAccessControlService}
+ * Implementation of {@link org.eclipse.scout.rt.shared.services.common.security.IAccessControlService}
  */
-@Replace
-public class ClientAccessControlService extends UserIdAccessControlService {
+public class AccessControlService extends AbstractAccessControlService<String> {
+
+  @Override
+  protected String getCurrentUserCacheKey() {
+    return getUserIdOfCurrentUser();
+  }
 
   @Override
   protected Permissions execLoadPermissions(String userId) {

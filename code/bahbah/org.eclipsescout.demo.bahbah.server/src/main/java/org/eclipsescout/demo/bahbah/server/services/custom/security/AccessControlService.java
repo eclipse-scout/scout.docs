@@ -16,7 +16,6 @@ import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
 import org.eclipse.scout.rt.shared.security.UpdateServiceConfigurationPermission;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
-import org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.security.CreateNotificationPermission;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
@@ -29,6 +28,7 @@ import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
+import org.eclipsescout.demo.bahbah.shared.services.custom.security.UserIdAccessControlService;
 
 @Replace
 public class AccessControlService extends UserIdAccessControlService {
