@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.shared.security;
+package org.eclipsescout.demo.bahbah.shared.services.custom.security;
 
 import java.security.PermissionCollection;
 
@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.shared.services.common.security.IAccessControlServic
  * Replace this service at server side to load permission collection. It is <b>not</b> required to implement
  * {@link #execLoadPermissions(String)} at client side.
  */
-public class UserIdAccessControlService extends AbstractAccessControlService<String> {
+public class AccessControlService extends AbstractAccessControlService<String> {
 
   @Override
   protected String getCurrentUserCacheKey() {

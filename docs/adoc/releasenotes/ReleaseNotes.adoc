@@ -142,3 +142,6 @@ The UploadRequestHandler checks for malware and limits the file types that can b
 
 === Session Cookie (JSESSIONID Cookie) configuration validation
 The HTML UI checks if the application is configured safe by validating some flags set on the session cookie. For more details on how to configure your session cookie please refer to the Scout Documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration".
+
+=== UserIdAccessControlService [Removed]
+`org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).

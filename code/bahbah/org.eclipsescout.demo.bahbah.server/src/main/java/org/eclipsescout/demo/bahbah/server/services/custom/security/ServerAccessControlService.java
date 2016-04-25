@@ -28,10 +28,10 @@ import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
 import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
-import org.eclipsescout.demo.bahbah.shared.services.custom.security.UserIdAccessControlService;
+import org.eclipsescout.demo.bahbah.shared.services.custom.security.AccessControlService;
 
 @Replace
-public class AccessControlService extends UserIdAccessControlService {
+public class ServerAccessControlService extends AccessControlService {
 
   @Override
   protected Permissions execLoadPermissions(String userId) {
