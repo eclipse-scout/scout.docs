@@ -537,6 +537,38 @@ Default server pattern
 ----
 
 
+=== Text cleanup
+All unused texts in ScoutTextProviderService were removed. If you were using one of the deleted ones, you find them in:
+
+* link:ScoutTexts/ScoutTexts_bg.properties[ScoutTexts_bg.properties]
+* link:ScoutTexts/ScoutTexts_cs.properties[ScoutTexts_cs.properties]
+* link:ScoutTexts/ScoutTexts_da.properties[ScoutTexts_da.properties]
+* link:ScoutTexts/ScoutTexts_de_DE.properties[ScoutTexts_de_DE.properties]
+* link:ScoutTexts/ScoutTexts_de.properties[ScoutTexts_de.properties]
+* link:ScoutTexts/ScoutTexts_el.properties[ScoutTexts_el.properties]
+* link:ScoutTexts/ScoutTexts_es.properties[ScoutTexts_es.properties]
+* link:ScoutTexts/ScoutTexts_fi.properties[ScoutTexts_fi.properties]
+* link:ScoutTexts/ScoutTexts_fr_BE.properties[ScoutTexts_fr_BE.properties]
+* link:ScoutTexts/ScoutTexts_fr.properties[ScoutTexts_fr.properties]
+* link:ScoutTexts/ScoutTexts_hr.properties[ScoutTexts_hr.properties]
+* link:ScoutTexts/ScoutTexts_hu.properties[ScoutTexts_hu.properties]
+* link:ScoutTexts/ScoutTexts_it.properties[ScoutTexts_it.properties]
+* link:ScoutTexts/ScoutTexts_ja.properties[ScoutTexts_ja.properties]
+* link:ScoutTexts/ScoutTexts_nl_BE.properties[ScoutTexts_nl_BE.properties]
+* link:ScoutTexts/ScoutTexts_nl.properties[ScoutTexts_nl.properties]
+* link:ScoutTexts/ScoutTexts_no.properties[ScoutTexts_no.properties]
+* link:ScoutTexts/ScoutTexts_pl.properties[ScoutTexts_pl.properties]
+* link:ScoutTexts/ScoutTexts_pt_br.properties[ScoutTexts_pt_br.properties]
+* link:ScoutTexts/ScoutTexts_ru.properties[ScoutTexts_ru.properties]
+* link:ScoutTexts/ScoutTexts_se.properties[ScoutTexts_se.properties]
+* link:ScoutTexts/ScoutTexts_sk.properties[ScoutTexts_sk.properties]
+* link:ScoutTexts/ScoutTexts_sl.properties[ScoutTexts_sl.properties]
+* link:ScoutTexts/ScoutTexts_sr.properties[ScoutTexts_sr.properties]
+* link:ScoutTexts/ScoutTexts_tr.properties[ScoutTexts_tr.properties]
+* link:ScoutTexts/ScoutTexts_zh_TW.properties[ScoutTexts_zh_TW.properties]
+* link:ScoutTexts/ScoutTexts_zh.properties[ScoutTexts_zh.properties]
+* link:ScoutTexts/ScoutTexts.properties[ScoutTexts.properties]
+
 === Migrate to the new Job API
 Eclipse jobs are replaced by Scout Job Manager API.
 

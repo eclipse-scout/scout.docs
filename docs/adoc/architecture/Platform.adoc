@@ -18,15 +18,16 @@ ifndef::mdledir[:mdledir: .]
 
 Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:
 
-* Application Lifecycle Management
-* Object Instance Management (Bean Management)
-* Configuration Management
-* Application Inventory
+* <<sec-app.lifecycle,Application Lifecycle Management>>
+* <<sec-bean.manager,Object Instance Management (Bean Management)>>
+* <<sec-config.management>>
+* <<sec-class.inventory,Application Inventory>>
 
+[[sec-app.lifecycle]]
 == Application Lifecycle
 
 The lifecycle of a Scout application is controlled by implementations of `org.eclipse.scout.rt.platform.IPlatform`.
-This interface contains methods to start and stop the application and to retrieve the <<Bean Manager>> associated with this application.
+This interface contains methods to start and stop the application and to retrieve the <<sec-bean.manager>> associated with this application.
 The class `org.eclipse.scout.rt.platform.Platform` provides access to the current platform instance. On first access the platform is automatically created and started.
 
 image::{imgsdir}/platformStates.png[]
@@ -39,7 +40,7 @@ See enum `org.eclipse.scout.rt.platform.IPlatform.State` for a description of ea
 
 To participate in the application startup or shutdown a platform listener can be created.
 For this a class implementing `org.eclipse.scout.rt.platform.IPlatformListener` must be created. The listener is automatically a bean and must therefore not be registered anywhere.
-See <<Bean Manager>> to learn more about bean management in Scout and how the listener becomes a bean.
+See <<sec-bean.manager>> to learn more about bean management in Scout and how the listener becomes a bean.
 As soon as the state of the platform changes the listener will be notified.
 
 [source,java,indent=0]
@@ -50,6 +51,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 TIP: As platform listeners may run as part of the startup or shutdown not the full Scout platform may be available. Depending on the state some tasks cannot be performed or some platform models are not available yet!
 
+[[sec-class.inventory]]
 == Class Inventory
 
 Scout applications use an inventory containing the classes available together with some meta data about them.
@@ -82,6 +84,7 @@ Scout uses Jandex footnote:[
 https://github.com/wildfly/jandex
 ] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
 
+[[sec-bean.manager]]
 == Bean Manager
 
 The Scout bean manager is a dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the class.
@@ -248,6 +251,7 @@ The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the serve
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
 ----
 
+[[sec-config.management]]
 == Configuration Management
 
 Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files footnote:[
@@ -281,6 +285,38 @@ The given property key is searched in the following environments:
 .. a file on the local filesystem where the system property with key `config.properties` holds the absolute path to the file or
 .. a file on the classpath with path `/config.properties` (recommended).
 . In the environment variables of the system (`java.lang.System.getenv(String)`).
+
+=== Additional examples
+
+Because the property a class are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
+
+<<lst-PropertyConstant>> demonstrates how you can use the replace annotation to change the existing `ApplicationNameProperty` class.
+The value is no longer fetched via the config mechanism, because the `createValue()` method is overriden.
+In this case a fixed value is returned.
+
+[[lst-PropertyConstant, Listing]]
+[source,java,indent=0]
+.Property class providing a constant value.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNameConstant.java[tags=code]
+----
+
+The next example presented in <<lst-PropertyRedirection>> uses the same idea.
+In this case, the `getKey()` method is overriden to read the value from an other key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
+
+[[lst-PropertyRedirection, Listing]]
+[source,java,indent=0]
+.Property class reading the value from an other key.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNamePropertyRedirection.java[tags=code]
+----
+
+[[lst-PropertyRedirectionConfig, Listing]]
+[source,properties,indent=0]
+.Read the configured value in your code.
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/resources/config.properties[tags=redirection]
+----
 
 == Testing
 
