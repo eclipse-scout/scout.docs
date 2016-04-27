@@ -626,7 +626,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <4> Add a HTTP request header
 <5> Invoke the webservice operation
 
-The WS-Client provides port instances via a preemptive port cache. This cache improves performance because port creation may be an expensive operation due to WSDL/schema validation. The cache is based on a 'corePoolSize', meaning that that number of ports is created on a preemptively basis. If more ports than that number are required, they are are created on demand, and additionally added to the cache until expired, which is useful at a high load.
+The WS-Client provides port instances via a preemptive port cache. This cache improves performance because port creation may be an expensive operation due to WSDL/schema validation. The cache is based on a 'corePoolSize', meaning that that number of ports is created on a preemptively basis. If more ports than that number are required, they are created on demand, and additionally added to the cache until expired, which is useful at a high load.
 
 WARNING: The JAX-WS specification does not specify thread safety of a port instance. Therefore, a port should not be used concurrently among threads. Further, JAX-WS API does not support to reset the Port's request and response context,  which is why a port should only be used for a single webservice call.
 
