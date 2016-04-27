@@ -31,6 +31,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.Notificatio
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.BenchVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
@@ -67,6 +68,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   public BenchVisibleButton getBenchVisibleButton() {
     return getFieldByClass(BenchVisibleButton.class);
+  }
+
+  public NavigationHandleVisibleButton getNavigationHandleVisibleButton() {
+    return getFieldByClass(NavigationHandleVisibleButton.class);
   }
 
   public NavigationVisibleButton getNavigationVisibleButton() {
@@ -237,6 +242,30 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           getDesktop().setNavigationVisible(getValue());
         }
 
+      }
+
+      @Order(1500)
+      @ClassId("0f1681fe-5e1b-45a0-8007-a69c13df4a3a")
+      public class NavigationHandleVisibleButton extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("NavigationHandleVisible");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().isNavigationHandleVisible());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDesktop().setNavigationHandleVisible(getValue());
+        }
       }
 
       @Order(2000)
