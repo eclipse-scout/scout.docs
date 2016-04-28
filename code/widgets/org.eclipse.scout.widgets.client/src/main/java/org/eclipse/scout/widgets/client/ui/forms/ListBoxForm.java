@@ -393,6 +393,25 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
+      @Order(35)
+      public class EnableActiveFilterField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EnableActiveFilter");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDefaultField().setFilterActiveRows(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDefaultField().isFilterActiveRows());
+        }
+      }
+
       @Order(40)
       public class ListEntriesField extends AbstractUserTreeField {
 

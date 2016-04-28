@@ -600,7 +600,22 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(50)
-      public class Placeholder1Field extends AbstractPlaceholderField {
+      public class EnableActiveFilterField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EnableActiveFilter");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getListSmartField().setActiveFilterEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getListSmartField().isActiveFilterEnabled());
+        }
       }
 
       @Order(70)
