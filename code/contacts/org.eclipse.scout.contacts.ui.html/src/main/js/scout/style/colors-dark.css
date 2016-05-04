@@ -65,6 +65,8 @@
 @menubar-button-disabled-border-color: @palette-gray-7;
 @menubar-button-font-icon-disabled-color: @palette-gray-6;
 
+@boxbutton-background-color: @button-background-color;
+
 @calendar-day-color: @palette-gray-6;
 @calendar-out-color: @palette-gray-4;
 @calendar-week-axis-color: @palette-gray-5;
@@ -95,6 +97,12 @@
 @scrollbar-thumb-color: @palette-gray-5;
 @scrollbar-thumb-inverted-color: @palette-gray-4;
 
+@status-warning-color: @palette-orange-4;
+@status-warning-hover-color: @palette-orange-3;
+
+@status-error-color: @error-color;
+@status-error-hover-color: @palette-red-4;
+
 @table-aggregate-cell-selection-color: @palette-blue-4;
 @table-aggregate-row-background-color: @palette-gray-7;
 
@@ -116,8 +124,8 @@
 @tooltip-border-color: @palette-gray-5;
 @tooltip-color: @palette-gray-0;
 
-@tooltip-warning-background-color: @palette-orange-0;
-@tooltip-warning-border-color: @palette-orange-3;
+@tooltip-warning-background-color: @palette-orange-4;
+@tooltip-warning-border-color: @palette-orange-4;
 
 @view-button-tab-color: @active-inverted-color;
 @view-button-tab-background-color: @palette-gray-6;
