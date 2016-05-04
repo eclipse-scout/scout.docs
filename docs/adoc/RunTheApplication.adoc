@@ -15,18 +15,29 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-After the initial project creation step we can start the Scout application for the first time.
-For this, we use the `Run` toolbar button as shown in <<img-start_client>>. Two launch configurations have already been created.
-One for the backend server and one for the HTML user interface server. Please launch the server first and the HTML UI afterwards.
+After the initial project creation step we can start the Scout application for the first time. 
+For this, the following three steps are necessary
 
-In case the launch configurations are not shown in the toolbar under the debug/run icons, 
-you may find the `server-dev.launch` launch file under project `helloworld.server.app.dev` 
-and the `ui-html-dev.launch` launch file under `helloworld.ui.html.app.dev`.
-These launch files can be started using the context menu [menu]_Run As_ which will add the launch file to the [button]_Run_ toolbar button. 
+. Start the Scout backend server 
+. Start the Scout frontend server 
+. Open the application in the browser
 
-During startup of the Scout applications you should see console output providing information about the startup.
-After both have been started successfully the HTML user interface can be accessed by navigating to http://localhost:8082/ in your favorite web browser.
+To start the Scout backend server we first select the `[webapp] dev server.launch` file in the Package Explorer view 
+of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_client>>. 
 
 [[img-start_client, Figure Starting the Hello World application]]
 .Starting the Hello World application.
 image::{imgsdir}/sdk_start_client_product.png[]
+
+Starting the Scout frontend server works exactely the same.
+But first select the `[webapp] dev ui.launch` file in the Eclipse IDE. 
+This launch file is located under module `helloworld.ui.html.app.dev` in the Package Explorer.
+
+During startup of the Scout applications you should see console output providing information about the startup.
+After having successfully started the Scout backend and frontend servers the Hello World application can then be accessed by navigating to http://localhost:8082/ in your favorite web browser.
+
+The running Hello World application should then be started in your browser as shown in <<img-start_browser>>.
+
+[[img-start_browser, Figure The Hello World application]]
+.The Hello World application in the browser.
+image::{imgsdir}/run_helloworld_in_browser.png[]
