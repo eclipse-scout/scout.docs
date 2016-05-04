@@ -12,14 +12,14 @@
 
 .box-buttons {
   & > .button {
-    background-color: @palette-gray-6;
+    background-color: @palette-gray-2;
   }
 
   & > .box-button:first-child {
-    color: @palette-gray-9;
+    color: @palette-gray-3;
   }
   
   & > .box-button:first-child ~ .box-button {
-    color: @palette-gray-9;
+    color: @palette-gray-3;
   }  
 }
