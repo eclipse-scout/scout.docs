@@ -12,6 +12,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -26,9 +27,10 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.MessageField;
-import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.OpenFormBasedButton;
-import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.ViewIdSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.NewViewBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.NewViewBox.OpenFormBasedButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.NewViewBox.TitleField;
+import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.ContentBox.NewViewBox.ViewIdSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox.BenchVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormLayoutForm.MainBox.StyleBox.HeaderVisibleButton;
@@ -51,8 +53,8 @@ public class FormLayoutForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(CloseButton.class);
   }
 
-  public MessageField getMessageField() {
-    return getFieldByClass(MessageField.class);
+  public TitleField getTitleField() {
+    return getFieldByClass(TitleField.class);
   }
 
   public StyleBox getStyleBox() {
@@ -75,6 +77,10 @@ public class FormLayoutForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(ViewIdSmartField.class);
   }
 
+  public NewViewBox getNewViewBox() {
+    return getFieldByClass(NewViewBox.class);
+  }
+
   public NavigationVisibleButton getNavigationVisibleButton() {
     return getFieldByClass(NavigationVisibleButton.class);
   }
@@ -89,56 +95,76 @@ public class FormLayoutForm extends AbstractForm implements IAdvancedExampleForm
     @Order(40)
     public class ContentBox extends AbstractGroupBox {
 
-      @Override
-      protected int getConfiguredGridColumnCount() {
-        return 2;
-      }
+//      @Override
+//      protected int getConfiguredGridColumnCount() {
+//        return 2;
+//      }
 
-      @Order(10)
-      public class MessageField extends AbstractStringField {
+      @Order(-1000)
+      public class NewViewBox extends AbstractSequenceBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Message");
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
         }
 
-        @Override
-        protected void execInitField() {
-          setValue("Foo Bar");
-        }
-      }
+        @Order(10)
+        public class TitleField extends AbstractStringField {
 
-      @Order(1005)
-      public class ViewIdSmartField extends AbstractSmartField<ViewId> {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ViewID");
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<ViewId>> getConfiguredLookupCall() {
-          return ViewIdLookupCall.class;
-        }
-      }
-
-      @Order(2000)
-      public class OpenFormBasedButton extends AbstractButton {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("OpenFormBased");
-        }
-
-        @Override
-        protected void execClickAction() {
-          ViewId viewId = getViewIdSmartField().getValue();
-          if (viewId == null) {
-            viewId = ViewId.South;
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Title");
           }
-          FormLayoutForm form = new FormLayoutForm();
-          form.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
-          form.setDisplayViewId(viewId.getValue());
-          form.startPageForm();
-          form.getMessageField().setValue(String.format("View Id: %s", viewId));
+
+          @Override
+          protected void execInitField() {
+            setValue("Foo Bar");
+          }
+        }
+
+        @Order(1005)
+        public class ViewIdSmartField extends AbstractSmartField<ViewId> {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ViewID");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(ViewId.South);
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<ViewId>> getConfiguredLookupCall() {
+            return ViewIdLookupCall.class;
+          }
+        }
+
+        @Order(2000)
+        public class OpenFormBasedButton extends AbstractButton {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("OpenFormBased");
+          }
+
+          @Override
+          protected void execClickAction() {
+            ViewId viewId = getViewIdSmartField().getValue();
+            if (viewId == null) {
+              viewId = ViewId.South;
+            }
+
+            FormLayoutForm form = new FormLayoutForm();
+            form.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
+            form.setDisplayViewId(viewId.getValue());
+
+            form.setTitle(getTitleField().getValue());
+            form.setSubTitle(TEXTS.get("ViewID") + ": " + form.getDisplayViewId());
+            form.getTitleField().setValue(null);
+
+            form.startPageForm();
+            form.getViewIdSmartField().setValue(viewId);
+          }
         }
       }
 
@@ -267,7 +293,9 @@ public class FormLayoutForm extends AbstractForm implements IAdvancedExampleForm
 
       North(IForm.VIEW_ID_N),
       South(IForm.VIEW_ID_S),
-      East(IForm.VIEW_ID_E);
+      East(IForm.VIEW_ID_E),
+      West(IForm.VIEW_ID_W),
+      Center(IForm.VIEW_ID_CENTER);
 
       String m_value;
 
