@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -156,6 +157,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
       @Order(10)
       public class SplitVerticalField extends AbstractSplitBox {
+
+        @Override
+        protected Class<? extends IFormField> getConfiguredCollapsibleField() {
+          return PreviewBox.class;
+        }
 
         @Order(10)
         public class SplitHorizontalField extends AbstractSplitBox {
