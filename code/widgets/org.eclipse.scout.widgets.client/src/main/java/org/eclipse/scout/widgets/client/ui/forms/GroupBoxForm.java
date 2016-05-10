@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.internal.VerticalSmar
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.CloseButton;
@@ -41,6 +42,7 @@ import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.ExamplesBo
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.FirstNameField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.LastNameField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.LabelVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.Placeholder2Field;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.VisibleCompanyField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.VisibleFirstNameField;
@@ -160,6 +162,10 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
 
   public Example3Box getExample3Box() {
     return getFieldByClass(Example3Box.class);
+  }
+
+  public LabelVisibleField getLabelVisibleField() {
+    return getFieldByClass(LabelVisibleField.class);
   }
 
   /**
@@ -704,11 +710,37 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
+      @ClassId("f1f338d4-3fec-4c44-9ba7-4c352e31bd57")
+      public class LabelVisibleField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleDefaultGroupBoxLabel");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDefaultBox().setLabelVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDefaultBox().isLabelVisible());
+        }
+
+      }
+
+      @Order(80)
       public class Placeholder2Field extends AbstractPlaceholderField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 3;
+          return 2;
         }
       }
     }
