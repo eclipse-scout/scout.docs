@@ -1,0 +1,109 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Export the hello world application"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+At some point during the application development you will want to install your software on a machine that is intended for productive use. 
+This is the moment where you need to be able to build and package your Scout application in a way that can be deployed to an application server.
+
+As Scout applications only require a simple servlet container to run, Scout applications can be deployed to almost any Java appliction servers. 
+For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-8.0-doc/index.html[Apache Tomcat]. 
+
+==== Verify the Container Security Settings
+
+First you need to decide if the users of your application should communicate via HTTPS with the Scout frontend server. 
+As we strongly recommended this setup for a productive environment even the "`Hello World`" example is configured for this scenario. 
+But you need to make sure that your Tomcat installation is configured accordingly.
+
+In case HTTPS support is already enabled for your Tomcat installation, you may skip this section.
+Otherwise, follow the steps described in the http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
+
+If you should prefer to work with HTTP only, you need to modify the security settings of your Scout application.
+This can be done in module `helloworld.ui.html.app.war` with the two steps described below.
+
+* In file `config.properties` (in folder `src\main\resources`) add property `scout.auth.cookie.session.validate.secure=false` to disable the check for an encrypted channel (HTTPS).
+* In file `web.xml` (in folder `src\main\webapp\WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
+
+More on this topic can be found in the Scout Architecture Documentation.
+
+==== Create WAR Files
+
+We are now ready to move the `Hello World` application from our development environment to a productive setup.
+The simplest option to move our application into the 'wild' is to build it using Maven.
+This produces two WAR files footnote:[
+Web application ARchive (WAR): http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29
+].
+
+The first WAR file contains the Scout backend server with all business logic.
+The second WAR file contains the Scout frontend server that is responsible for communicating with the web browser part of the Scout application.
+
+To start the build right click on the project `helloworld` and select the context menu menu:Run As -> Maven build...[] as shown in <<img-sdk_export_war>>.
+In the dialog that appears enter `clean verify` into the `Goals` field and press btn:[Run].
+
+[[img-sdk_export_war, Figure Maven build]]
+.Starting the Maven build.
+image::{imgsdir}/sdk_export_war_menu.png[]
+
+Afterwards the compilation starts, executes all test cases and bundles the result into two WAR files. The output of the build is shown in the Console view within Eclipse.
+As soon as the build is reporting success you can find the built WAR files:
+
+* The Scout backend WAR file `org.eclipse.scout.apps.helloworld.server.war` in folder `workspace_root/helloworld.server.app.war/target`
+* The Scout frontend WAR file `org.eclipse.scout.apps.helloworld.ui.html.war` in folder `workspace_root/helloworld.ui.html.app.war/target`
+
+To see the new files within Eclipse you may need to refresh the `target` folder below each project using the F5 keystroke.
+
+[[sec-helloworld_deploy]]
+=== Deploy to Tomcat
+
+As the final step of this tutorial, we deploy the two WAR files representing our "`Hello World`" application to a Tomcat web server.
+For this, we first need a working Tomcat installation.
+If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <<apx-install_tomcat>>.
+To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
+You should then see the page shown in <<img-deploy_tomcat_1>>.
+
+[[img-deploy_tomcat_1, Tomcat start page]]
+.The Tomcat shown after a successful installation. After clicking on the "`Manager App`" button (highlighted in red) the login box is shown in front. A successful login shows the "`Tomcat Web Application Manager`".
+image::{imgsdir}/tomcat_managerapp_login.png[]
+
+Once the web browser displays the successful running of your Tomcat instance, switch to its "`Manager App`" by clicking on the button highlighted in <<img-deploy_tomcat_1>>.
+After entering user name and password the browser will display the "`Tomcat Web Application Manager`" as shown in <<img-deploy_tomcat_2>>.
+If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in Appendix <<apx-tomcat_dirs_and_files>>.
+
+[[img-deploy_tomcat_2, Tomcat Manager]]
+.The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
+image::{imgsdir}/tomcat_managerapp_selectwar.png[]
+
+After logging into Tomcat's manager application, you can select the WAR files to be deployed using button "`Choose File`" according to the right hand side of <<img-deploy_tomcat_2>>.
+After picking your just built [filename]+org.eclipse.scout.apps.helloworld.server.war+ and closing the file chooser, click on button "`Deploy`" (located below button "`Choose File`") to deploy the application to the Tomcat web server.
+Then we repeat this step with the second WAR file [filename]+org.eclipse.scout.apps.helloworld.ui.html.war+.
+
+This will copy the selected WAR files into Tomcats [filename]+webapps+ directory and unpack its contents into subdirectories with the same name.
+You can now connect to the application using the browser of your choice and enter the following address:
+
+----
+  http://localhost:8080/org.eclipse.scout.apps.helloworld.ui.html/
+----
+
+[[img-helloworld_running_download, Figure Login Page]]
+.The "`Hello World`" login page.
+image::{imgsdir}/tomcat_helloworld_download.png[]
+
+Then you will see the login page as shown in <<img-helloworld_running_download>>. Two users have been pre defined: "`admin`" with password "`admin`" and "`scott`" with password "`tiger`".
+You can find this configuration in the [filename]+config.properties+ file of the application.
+
+Please note: In a productive environment it is recommended to deploy the server and the user interface into two different servlet containers running on dedicated machines. 
+This because these two tiers have different requirements on resources, load balancing and access protection.
+Furthermore, it is strongly recommended to use an encrypted connection (e.g. TLS 1.2 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security]) 
+between client browsers and the Scout frontend server AND between the Scout frontend and and backend server!
