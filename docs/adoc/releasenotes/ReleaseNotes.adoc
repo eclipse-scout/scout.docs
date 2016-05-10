@@ -71,6 +71,11 @@ The date field no longer inherits from _BasicField_. Instead it inherits directl
 ==== Split Box
 * `AbstractSplitBox` now returns `IFormField.FULL_SIZE` in `getConfiguredGridW()` by default. Reason: The split box widget does not really have a representation of its own, but is more like a container for other fields. It can never have label, mandatory indicator etc. Its layout should behave like a group box or a tab box, therefore the default gridW value was adjusted accordingly.
 * Split boxes now support absolute splitter positions. The old relative position is the default, which uses a value between 0 and 1 for the `splitterPosition`. By changing the property `splitterPositionType`, the interpretation of the `splitterPosition` value can be changed to pixels (either fixed for the first or the second inner box).
+* `AbstractSplitBox` now provides a _collapse_ state for one of the two fields. When a field is marked as collapsible, the UI shows a toggle-button which allows to collapse and expand that field. The following methods and configurations are new:
+** `Class<? extends IFormField> getConfiguredCollapsibleField()` returns the class of the field which should be collapsible. Default is null.
+** `boolean getConfiguredFieldCollapsed()` returns whether or not the field is initially collapsed. Default is false.
+** `String getConfiguredCollapseKeyStroke()` returns the key-stroke used to trigger the collapse button. Default is null.
+** At runtime use the methods `setCollapsedField(IFormField)`, `setFieldCollapsed(boolean)` and `setCollapseKeyStroke(String)` to change the properties described above.
 
 ==== Desktop / Outline
 * Menus of a page are now added to the detail form. This was necessary because the outline tree does not show any menus anymore. See also method `AbstractPageWithNodes.enhanceDetailFormWithPageMenus`.
