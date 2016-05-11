@@ -18,7 +18,7 @@ import org.eclipse.scout.contacts.shared.person.PersonCreatePermission;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonReadPermission;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
-import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
+import org.eclipse.scout.contacts.shared.person.PersonPageData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -31,8 +31,8 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class PersonService implements IPersonService {
 
   @Override
-  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) {
-    PersonTablePageData pageData = new PersonTablePageData();
+  public PersonPageData getTableData(SearchFilter filter, String organizationId) {
+    PersonPageData pageData = new PersonPageData();
     PersonSearchFormData searchData = (PersonSearchFormData) filter.getFormData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.PERSON_PAGE_SELECT);

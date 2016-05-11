@@ -4,10 +4,13 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+
 import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.contacts.server.SuperUserRunContextProducer;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.CreateImmediately;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -21,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 //  tag::service[]
 @ApplicationScoped
+@CreateImmediately
 public class DBSetupService {
   private static final Logger LOG = LoggerFactory.getLogger(DBSetupService.class);
   // end::service[]
@@ -31,6 +35,7 @@ public class DBSetupService {
   public static final UUID PERSON02 = UUID.randomUUID();
   //tag::service[]
 
+  @PostConstruct
   public void autoCreateDatabase() {
     if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
 

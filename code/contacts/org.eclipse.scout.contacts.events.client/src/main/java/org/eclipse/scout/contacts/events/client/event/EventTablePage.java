@@ -38,7 +38,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @PageData(EventTablePageData.class)
 public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> {
 
-  private String m_organizationId;
+  private String organizationId;
 
   @Override
   protected String getConfiguredIconId() {
@@ -282,11 +282,11 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
   @FormData
   public String getOrganizationId() {
-    return m_organizationId;
+    return organizationId;
   }
 
   @FormData
   public void setOrganizationId(String organizationId) {
-    m_organizationId = organizationId;
+    this.organizationId = organizationId;
   }
 }

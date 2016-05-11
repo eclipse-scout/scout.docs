@@ -30,7 +30,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 @FormData(value = AbstractPictureBoxData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractPictureBox extends AbstractGroupBox {
 
-  private String m_pictureUrl;
+  private String pictureUrl;
 
   @Override
   protected boolean getConfiguredBorderVisible() {
@@ -62,14 +62,14 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
 
   @FormData
   public String getPictureUrl() {
-    return m_pictureUrl;
+    return pictureUrl;
   }
 
   @FormData
-  public void setPictureUrl(String pictureUrl) {
-    m_pictureUrl = pictureUrl;
+  public void setPictureUrl(String url) {
+    pictureUrl = url;
 
-    if (m_pictureUrl == null) {
+    if (pictureUrl == null) {
       getPictureField().clearErrorStatus();
       getPictureField().setImage(null);
       getForm().touch();
@@ -77,7 +77,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     else {
       try {
         getPictureField().clearErrorStatus();
-        getPictureField().setImage(IOUtility.getContent(new URL((String) m_pictureUrl).openStream()));
+        getPictureField().setImage(IOUtility.getContent(new URL((String) pictureUrl).openStream()));
         getPictureField().setAutoFit(true);
         getForm().touch();
       }

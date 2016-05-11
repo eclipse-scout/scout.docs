@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 public class PersonChooserFormTest {
 
   @BeanMock
-  private IPersonLookupService m_mock_service;
+  private IPersonLookupService mock_service;
 
   @SuppressWarnings("unchecked")
   @Before
@@ -38,7 +38,7 @@ public class PersonChooserFormTest {
     List<ILookupRow<String>> l = new ArrayList<>();
     ILookupRow<String> row = new LookupRow<String>("123", "Alice");
     l.add(row);
-    when(m_mock_service.getDataByAll((ILookupCall<String>) any(ILookupCall.class))).thenReturn(l);
+    when(mock_service.getDataByAll((ILookupCall<String>) any(ILookupCall.class))).thenReturn(l);
   }
 
   @Test

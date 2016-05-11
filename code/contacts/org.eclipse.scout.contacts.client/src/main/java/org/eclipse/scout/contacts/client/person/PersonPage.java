@@ -15,7 +15,7 @@ import java.util.Set;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
-import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
+import org.eclipse.scout.contacts.shared.person.PersonPageData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -37,10 +37,10 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@PageData(PersonTablePageData.class)
-public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table> {
+@PageData(PersonPageData.class)
+public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
 
-  private String m_organizationId;
+  private String organizationId;
 
   @Override
   protected String getConfiguredTitle() {
@@ -78,7 +78,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     }
 
     public EmailColumn getEmailColumn() {
-      return getColumnSet().getColumnByClass(PersonTablePage.Table.EmailColumn.class);
+      return getColumnSet().getColumnByClass(PersonPage.Table.EmailColumn.class);
     }
 
     public OrganizationColumn getOrganizationColumn() {
@@ -317,11 +317,11 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
 
   @FormData
   public String getOrganizationId() {
-    return m_organizationId;
+    return organizationId;
   }
 
   @FormData
   public void setOrganizationId(String organizationId) {
-    m_organizationId = organizationId;
+    this.organizationId = organizationId;
   }
 }

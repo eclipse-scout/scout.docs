@@ -12,22 +12,22 @@ package org.eclipse.scout.contacts.events.server;
 
 public class EventCountBean {
 
-  private String m_personId;
-  private Long m_eventCount;
+  private String personId;
+  private Long eventCount;
 
   public Long getEventCount() {
-    return m_eventCount;
+    return eventCount;
   }
 
   public void setEventCount(Long eventCount) {
-    m_eventCount = eventCount;
+    this.eventCount = eventCount;
   }
 
   public String getPersonId() {
-    return m_personId;
+    return personId;
   }
 
   public void setPersonId(String personId) {
-    m_personId = personId;
+    this.personId = personId;
   }
 }

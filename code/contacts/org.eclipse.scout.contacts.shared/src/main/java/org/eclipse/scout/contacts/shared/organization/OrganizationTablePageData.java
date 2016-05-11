@@ -51,55 +51,56 @@ public class OrganizationTablePageData extends AbstractTablePageData {
   public static class OrganizationTableRowData extends AbstractTableRowData {
 
     private static final long serialVersionUID = 1L;
-    public static final String organizationId = "organizationId";
-    public static final String name = "name";
-    public static final String city = "city";
-    public static final String country = "country";
-    public static final String homepage = "homepage";
-    private String m_organizationId;
-    private String m_name;
-    private String m_city;
-    private String m_country;
-    private String m_homepage;
+    public static final String organizationIdElement = "organizationId";
+    public static final String nameElement = "name";
+    public static final String cityElement = "city";
+    public static final String countryElement = "country";
+    public static final String homepageElement = "homepage";
+
+    private String organizationId;
+    private String name;
+    private String city;
+    private String country;
+    private String homepage;
 
     public String getOrganizationId() {
-      return m_organizationId;
+      return organizationId;
     }
 
     public void setOrganizationId(String newOrganizationId) {
-      m_organizationId = newOrganizationId;
+      organizationId = newOrganizationId;
     }
 
     public String getName() {
-      return m_name;
+      return name;
     }
 
     public void setName(String newName) {
-      m_name = newName;
+      name = newName;
     }
 
     public String getCity() {
-      return m_city;
+      return city;
     }
 
     public void setCity(String newCity) {
-      m_city = newCity;
+      city = newCity;
     }
 
     public String getCountry() {
-      return m_country;
+      return country;
     }
 
     public void setCountry(String newCountry) {
-      m_country = newCountry;
+      country = newCountry;
     }
 
     public String getHomepage() {
-      return m_homepage;
+      return homepage;
     }
 
     public void setHomepage(String newHomepage) {
-      m_homepage = newHomepage;
+      homepage = newHomepage;
     }
   }
 }

@@ -24,17 +24,16 @@ import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 // tag::derbyService[]
 public class DerbySqlService extends AbstractDerbySqlService {
 
-  private String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
-
   @Override
   protected String getConfiguredJdbcMappingName() {
-    return CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class)
-        + ";create=true";
+    String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
+    return jdbcMappingName + ";create=true";
   }
   // end::derbyService[]
 
   public void dropDB() {
     try {
+      String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
       DriverManager.getConnection(jdbcMappingName + ";drop=true");
     }
     catch (SQLException e) {

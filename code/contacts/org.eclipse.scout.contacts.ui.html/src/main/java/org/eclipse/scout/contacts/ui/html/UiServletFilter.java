@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.server;
+package org.eclipse.scout.contacts.ui.html;
 
 import java.io.IOException;
 
@@ -22,27 +22,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier;
 import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
-import org.eclipse.scout.rt.server.commons.authentication.ServiceTunnelAccessTokenAccessController;
+import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController;
+import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController.FormBasedAuthConfig;
+import org.eclipse.scout.rt.server.commons.authentication.ServletFilterHelper;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController.TrivialAuthConfig;
 
 /**
- * Backend servlet filter to protected resources from unauthenticated access.
+ * Frontend servlet filter to protected resources from unauthenticated access.
  *
  * @since 5.1
  */
-public class ContactsServerServletFilter implements Filter {
+public class UiServletFilter implements Filter {
 
-  private TrivialAccessController m_trivialAccessController;
-  private ServiceTunnelAccessTokenAccessController m_tunnelAccessController;
-  private DevelopmentAccessController m_developmentAccessController;
+  private TrivialAccessController trivialAccessController;
+  private FormBasedAccessController formBasedAccessController;
+  private DevelopmentAccessController developmentAccessController;
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
-    m_trivialAccessController = BEANS.get(TrivialAccessController.class).init(new TrivialAuthConfig().withExclusionFilter(filterConfig.getInitParameter("filter-exclude")));
-    m_tunnelAccessController = BEANS.get(ServiceTunnelAccessTokenAccessController.class).init();
-    m_developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
+    trivialAccessController = BEANS.get(TrivialAccessController.class)
+        .init(new TrivialAuthConfig()
+            .withExclusionFilter(filterConfig.getInitParameter("filter-exclude"))
+            .withLoginPageInstalled(true));
+    formBasedAccessController = BEANS.get(FormBasedAccessController.class)
+        .init(new FormBasedAuthConfig()
+            .withCredentialVerifier(BEANS.get(ConfigFileCredentialVerifier.class)));
+    developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
   }
 
   @Override
@@ -50,25 +58,25 @@ public class ContactsServerServletFilter implements Filter {
     final HttpServletRequest req = (HttpServletRequest) request;
     final HttpServletResponse resp = (HttpServletResponse) response;
 
-    if (m_trivialAccessController.handle(req, resp, chain)) {
+    if (trivialAccessController.handle(req, resp, chain)) {
       return;
     }
 
-    if (m_tunnelAccessController.handle(req, resp, chain)) {
+    if (formBasedAccessController.handle(req, resp, chain)) {
       return;
     }
 
-    if (m_developmentAccessController.handle(req, resp, chain)) {
+    if (developmentAccessController.handle(req, resp, chain)) {
       return;
     }
 
-    resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+    BEANS.get(ServletFilterHelper.class).forwardToLoginForm(req, resp);
   }
 
   @Override
   public void destroy() {
-    m_developmentAccessController.destroy();
-    m_tunnelAccessController.destroy();
-    m_trivialAccessController.destroy();
+    developmentAccessController.destroy();
+    formBasedAccessController.destroy();
+    trivialAccessController.destroy();
   }
 }

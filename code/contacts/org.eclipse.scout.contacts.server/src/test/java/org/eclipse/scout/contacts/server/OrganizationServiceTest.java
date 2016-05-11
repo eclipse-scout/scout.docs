@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 @RunWithSubject("default")
 public class OrganizationServiceTest {
 
-  private OrganizationFormData m_testOrg = new OrganizationFormData();
+  private OrganizationFormData testOrg = new OrganizationFormData();
 
   @BeforeClass
   public static void setupDatabase() {
@@ -41,15 +41,15 @@ public class OrganizationServiceTest {
 
   @Before
   public void before() {
-    m_testOrg.getName().setValue("test");
-    m_testOrg.getEmail().setValue("testEmail");
-    m_testOrg.getPhone().setValue("000");
+    testOrg.getName().setValue("test");
+    testOrg.getEmail().setValue("testEmail");
+    testOrg.getPhone().setValue("000");
   }
 
   @Test
   public void testCreate() {
     OrganizationService svc = new OrganizationService();
-    OrganizationFormData created = svc.create(m_testOrg);
+    OrganizationFormData created = svc.create(testOrg);
     assertTestOrg(created);
     assertNotNull(created.getOrganizationId());
   }
@@ -57,9 +57,9 @@ public class OrganizationServiceTest {
   @Test
   public void testLoad() {
     OrganizationService svc = new OrganizationService();
-    m_testOrg.setOrganizationId("testId");
-    svc.create(m_testOrg);
-    OrganizationFormData res = svc.load(m_testOrg);
+    testOrg.setOrganizationId("testId");
+    svc.create(testOrg);
+    OrganizationFormData res = svc.load(testOrg);
     assertTestOrg(res);
     assertEquals("testId", res.getOrganizationId());
   }
@@ -67,19 +67,19 @@ public class OrganizationServiceTest {
   @Test
   public void testStore() {
     OrganizationService svc = new OrganizationService();
-    m_testOrg.setOrganizationId("testId2");
-    OrganizationFormData created = svc.create(m_testOrg);
+    testOrg.setOrganizationId("testId2");
+    OrganizationFormData created = svc.create(testOrg);
     created.getName().setValue("newName");
-    OrganizationFormData res = svc.store(m_testOrg);
+    OrganizationFormData res = svc.store(testOrg);
     assertEquals("testId2", res.getOrganizationId());
     assertEquals("newName", res.getName().getValue());
   }
 
-  private void assertTestOrg(OrganizationFormData testOrg) {
-    assertNotNull(testOrg);
-    assertEquals("test", testOrg.getName().getValue());
-    assertEquals("testEmail", testOrg.getEmail().getValue());
-    assertEquals("000", testOrg.getPhone().getValue());
+  private void assertTestOrg(OrganizationFormData inputOrg) {
+    assertNotNull(inputOrg);
+    assertEquals("test", inputOrg.getName().getValue());
+    assertEquals("testEmail", inputOrg.getEmail().getValue());
+    assertEquals("000", inputOrg.getPhone().getValue());
   }
 
 }

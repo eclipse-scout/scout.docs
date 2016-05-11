@@ -14,6 +14,10 @@ import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.person.PersonForm;
+import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
+import org.eclipse.scout.contacts.client.template.AbstractEmailField;
+import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.CommentsBox;
@@ -31,10 +35,6 @@ import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralB
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralBox.TitleField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.events.client.person.PersonChooserForm;
-import org.eclipse.scout.contacts.client.person.PersonForm;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
-import org.eclipse.scout.contacts.client.template.AbstractEmailField;
-import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.events.shared.event.EventFormData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
 import org.eclipse.scout.contacts.events.shared.event.UpdateEventPermission;
@@ -74,7 +74,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 @FormData(value = EventFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class EventForm extends AbstractForm {
 
-  private String m_eventId;
+  private String eventId;
 
   public EventForm() {
     super();
@@ -582,11 +582,11 @@ public class EventForm extends AbstractForm {
 
   @FormData
   public String getEventId() {
-    return m_eventId;
+    return eventId;
   }
 
   @FormData
   public void setEventId(String eventId) {
-    m_eventId = eventId;
+    this.eventId = eventId;
   }
 }

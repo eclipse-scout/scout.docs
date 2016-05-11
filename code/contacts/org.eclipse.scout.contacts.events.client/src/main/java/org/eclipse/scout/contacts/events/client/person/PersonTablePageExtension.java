@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.events.client.person;
 
-import org.eclipse.scout.contacts.client.person.PersonTablePage;
+import org.eclipse.scout.contacts.client.person.PersonPage;
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.extension.ui.basic.table.AbstractTableExtension;
@@ -19,9 +19,9 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @Data(PersonTablePageDataExtension.class)
-public class PersonTablePageExtension extends AbstractTableExtension<PersonTablePage.Table> {
+public class PersonTablePageExtension extends AbstractTableExtension<PersonPage.Table> {
 
-  public PersonTablePageExtension(PersonTablePage.Table owner) {
+  public PersonTablePageExtension(PersonPage.Table owner) {
     super(owner);
   }
 

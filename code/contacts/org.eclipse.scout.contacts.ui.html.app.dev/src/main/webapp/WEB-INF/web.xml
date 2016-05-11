@@ -19,7 +19,7 @@
 
   <filter>
     <filter-name>AuthFilter</filter-name>
-    <filter-class>org.eclipse.scout.contacts.ui.html.ContactsUiServletFilter</filter-class>
+    <filter-class>org.eclipse.scout.contacts.ui.html.UiServletFilter</filter-class>
     <init-param>
       <param-name>filter-exclude</param-name>
       <param-value>

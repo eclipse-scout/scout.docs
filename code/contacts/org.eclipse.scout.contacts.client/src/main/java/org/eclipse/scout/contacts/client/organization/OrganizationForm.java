@@ -51,7 +51,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 @FormData(value = OrganizationFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class OrganizationForm extends AbstractForm {
 
-  private String m_organizationId;
+  private String organizationId;
 
   public OrganizationForm() {
     super();
@@ -346,12 +346,12 @@ public class OrganizationForm extends AbstractForm {
 
   @FormData
   public String getOrganizationId() {
-    return m_organizationId;
+    return organizationId;
   }
 
   @FormData
   public void setOrganizationId(String organizationId) {
-    m_organizationId = organizationId;
+    this.organizationId = organizationId;
   }
 
   private String calculateSubTitle() {

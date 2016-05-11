@@ -39,12 +39,12 @@ import org.eclipse.scout.rt.shared.ui.UserAgents;
  */
 public class SuperUserRunContextProducer extends ServerRunContextProducer {
 
-  private final FinalValue<IServerSession> m_session = new FinalValue<>();
-  private final FinalValue<Subject> m_subject = new FinalValue<>();
+  private final FinalValue<IServerSession> session = new FinalValue<>();
+  private final FinalValue<Subject> subject = new FinalValue<>();
 
   @PostConstruct
   protected void initSuperUserSubject() {
-    m_subject.set(CONFIG.getPropertyValue(SuperUserSubjectProperty.class));
+    subject.set(CONFIG.getPropertyValue(SuperUserSubjectProperty.class));
   }
 
   /**
@@ -57,7 +57,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
    * @see #produce()
    */
   @Override
-  public final ServerRunContext produce(final Subject subject) {
+  public final ServerRunContext produce(final Subject inputSubject) {
     return produce();
   }
 
@@ -71,10 +71,10 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
     final ServerRunContext superUserRunContext = ServerRunContexts.empty()
         .withRunMonitor(BEANS.get(RunMonitor.class))
         .withUserAgent(UserAgents.createDefault())
-        .withSubject(m_subject.get());
+        .withSubject(subject.get());
 
     return superUserRunContext
-        .withSession(m_session.setIfAbsent(new Callable<IServerSession>() {
+        .withSession(session.setIfAbsent(new Callable<IServerSession>() {
 
           @Override
           public IServerSession call() throws Exception {
@@ -87,7 +87,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
    * Returns the superuser's {@link Subject}; is not <code>null</code>.
    */
   public Subject getSubject() {
-    return m_subject.get();
+    return subject.get();
   }
 
   /**

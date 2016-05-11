@@ -30,9 +30,9 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 public class MapForm extends AbstractForm {
 
-  private String m_street;
-  private String m_city;
-  private String m_country;
+  private String street;
+  private String city;
+  private String country;
 
   public MapForm() {
     super();
@@ -62,32 +62,32 @@ public class MapForm extends AbstractForm {
 
   @FormData
   public String getStreet() {
-    return m_street;
+    return street;
   }
 
   @FormData
   public void setStreet(String street) {
-    m_street = street;
+    this.street = street;
   }
 
   @FormData
   public String getCity() {
-    return m_city;
+    return city;
   }
 
   @FormData
   public void setCity(String city) {
-    m_city = city;
+    this.city = city;
   }
 
   @FormData
   public String getCountry() {
-    return m_country;
+    return country;
   }
 
   @FormData
   public void setCountry(String country) {
-    m_country = country;
+    this.country = country;
   }
 
   @Order(1000)

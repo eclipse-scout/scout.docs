@@ -15,12 +15,12 @@ import java.util.Map;
 
 import org.eclipse.scout.contacts.events.server.EventCountBean;
 import org.eclipse.scout.contacts.events.server.sql.SQLs;
-import org.eclipse.scout.contacts.server.person.PersonService;
 import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionData;
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
+import org.eclipse.scout.contacts.server.person.PersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
-import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
-import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
+import org.eclipse.scout.contacts.shared.person.PersonPageData;
+import org.eclipse.scout.contacts.shared.person.PersonPageData.PersonRowData;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.holders.BeanArrayHolder;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -32,8 +32,8 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 public class PersonServiceExtension extends PersonService {
 
   @Override
-  public PersonTablePageData getTableData(SearchFilter filter, String organizationId) {
-    PersonTablePageData pageData = super.getTableData(filter, organizationId);
+  public PersonPageData getTableData(SearchFilter filter, String organizationId) {
+    PersonPageData pageData = super.getTableData(filter, organizationId);
 
     // Add number of events to persons
     BeanArrayHolder<EventCountBean> arrayHolder = new BeanArrayHolder<>(EventCountBean.class);
@@ -46,7 +46,7 @@ public class PersonServiceExtension extends PersonService {
     }
 
     // Add event count to persons
-    for (PersonTableRowData personRow : pageData.getRows()) {
+    for (PersonRowData personRow : pageData.getRows()) {
       long eventCount = NumberUtility.nvl(eventCounts.get(personRow.getPersonId()), 0L);
       personRow.getContribution(PersonTablePageDataExtension.class).setEvents(eventCount);
     }

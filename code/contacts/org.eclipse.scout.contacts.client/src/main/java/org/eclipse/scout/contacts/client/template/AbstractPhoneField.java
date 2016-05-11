@@ -20,9 +20,9 @@ import org.eclipse.scout.rt.shared.TEXTS;
 @FormData(value = AbstractPhoneFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractPhoneField extends AbstractStringField {
 
-//  private PhoneNumberUtil m_util = PhoneNumberUtil.getInstance();
-//  private PhoneNumber m_number = null;
-  private String m_country = null;
+//  private PhoneNumberUtil util = PhoneNumberUtil.getInstance();
+//  private PhoneNumber number = null;
+  private String country = null;
 
   @Override
   protected String getConfiguredLabel() {
@@ -34,12 +34,12 @@ public abstract class AbstractPhoneField extends AbstractStringField {
     clearErrorStatus();
 
     if (StringUtility.isNullOrEmpty(rawValue)) {
-//      m_number = null;
+//      number = null;
       return null;
     }
 
 //    try {
-//      m_number = m_util.parse(rawValue, getCountry());
+//      number = util.parse(rawValue, getCountry());
 //      setCountry(m_util.getRegionCodeForNumber(m_number));
 //    }
 //    catch (NumberParseException e) {
@@ -47,20 +47,20 @@ public abstract class AbstractPhoneField extends AbstractStringField {
 //    }
 //
 //    if (!m_util.isValidNumber(m_number)) {
-//      setErrorStatus(new ProcessingStatus(TEXTS.get("NoValidPhoneNumberException", rawValue, m_util.getRegionCodeForNumber(m_number)), IProcessingStatus.WARNING));
+//      setErrorStatus(new ProcessingStatus(TEXTS.get("NoValidPhoneNumberException", rawValue, util.getRegionCodeForNumber(m_number)), IProcessingStatus.WARNING));
 //    }
 //
-//    return m_util.format(m_number, PhoneNumberFormat.INTERNATIONAL);
+//    return util.format(m_number, PhoneNumberFormat.INTERNATIONAL);
 
     return rawValue;
   }
 
   public String getCountry() {
-    return m_country;
+    return country;
   }
 
   public void setCountry(String country) {
-    m_country = country;
+    this.country = country;
   }
 
 }

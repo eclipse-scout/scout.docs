@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IPersonService {
 
-  PersonTablePageData getTableData(SearchFilter filter, String organizationId);
+  PersonPageData getTableData(SearchFilter filter, String organizationId);
 
   PersonFormData create(PersonFormData formData);
 

@@ -32,7 +32,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 
 public class PersonChooserForm extends AbstractForm {
 
-  private List<String> m_filteredPersons = new ArrayList<>();
+  private List<String> filteredPersons = new ArrayList<>();
 
   public PersonChooserForm() {
     super();
@@ -96,7 +96,7 @@ public class PersonChooserForm extends AbstractForm {
           Iterator<ILookupRow<String>> iterator = result.iterator();
           while (iterator.hasNext()) {
             ILookupRow<String> row = iterator.next();
-            if (m_filteredPersons.contains(row.getKey())) {
+            if (filteredPersons.contains(row.getKey())) {
               iterator.remove();
             }
           }
@@ -117,6 +117,6 @@ public class PersonChooserForm extends AbstractForm {
   }
 
   public void setFilteredPersons(List<String> filteredPersons) {
-    m_filteredPersons = filteredPersons;
+    this.filteredPersons = filteredPersons;
   }
 }

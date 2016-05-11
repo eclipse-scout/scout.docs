@@ -12,7 +12,7 @@ package org.eclipse.scout.contacts.client.organization;
 
 import java.util.List;
 
-import org.eclipse.scout.contacts.client.person.PersonTablePage;
+import org.eclipse.scout.contacts.client.person.PersonPage;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 public class OrganizationDetailsNodePage extends AbstractPageWithNodes {
 
-  private String m_organizationId;
+  private String organizationId;
 
   @Override
   protected String getConfiguredTitle() {
@@ -29,7 +29,7 @@ public class OrganizationDetailsNodePage extends AbstractPageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    PersonTablePage personTablePage = new PersonTablePage();
+    PersonPage personTablePage = new PersonPage();
     personTablePage.setOrganizationId(getOrganizationId());
     pageList.add(personTablePage);
 
@@ -37,11 +37,11 @@ public class OrganizationDetailsNodePage extends AbstractPageWithNodes {
 
   @FormData
   public String getOrganizationId() {
-    return m_organizationId;
+    return organizationId;
   }
 
   @FormData
   public void setOrganizationId(String organizationId) {
-    m_organizationId = organizationId;
+    this.organizationId = organizationId;
   }
 }

@@ -66,7 +66,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 @FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class PersonForm extends AbstractForm {
 
-  private String m_personId;
+  private String personId;
 
   public PersonForm() {
     super();
@@ -448,12 +448,12 @@ public class PersonForm extends AbstractForm {
 
   @FormData
   public String getPersonId() {
-    return m_personId;
+    return personId;
   }
 
   @FormData
   public void setPersonId(String personId) {
-    m_personId = personId;
+    this.personId = personId;
   }
 
   private String calculateSubTitle() {
