@@ -25,6 +25,22 @@ Here are the release notes for the Scout Release 6.0
 === HTML
 Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content instead of concatenate the strings manually.
 
+=== Security: MalwareScanner
+Facility used to scan files and resources for malware.
+The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine
+and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy.
+Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder.
+The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.
+
+=== IMimeTypeDetector [New]
+The new interface IMimeTypeDetector provides multiple ordered implementations that can detect mime types
+PrimaryMimeTypeDetector with order 0 defines important webapp mime types
+ServletContextMimeTypeDetector with order 10 uses ServletContext.getMimeType
+JavaNioMimeTypeDetector uses java.nio Files.probeContentType
+
+=== UploadRequestHandler [Added features]
+The UploadRequestHandler checks for malware and limits the file types that can be uploaded.
+
 === API Changes
 
 ==== Table
@@ -133,22 +149,6 @@ On-field labels are not visible in IE9 because it lacks support for the "placeho
 It is now possible again to call services on a different scout server by specifying server
 org.eclipse.scout.rt.servicetunnel.targetUrl and scout.auth.privatekey.
 For all interfaces annotated with @TunnelToServer without implementation, a proxy is created.
-
-=== Security: MalwareScanner
-Facility used to scan files and resources for malware.
-The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine
-and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy.
-Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder.
-The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.
-
-=== IMimeTypeDetector [New]
-The new interface IMimeTypeDetector provides multiple ordered implementations that can detect mime types
-PrimaryMimeTypeDetector with order 0 defines important webapp mime types
-ServletContextMimeTypeDetector with order 10 uses ServletContext.getMimeType
-JavaNioMimeTypeDetector uses java.nio Files.probeContentType
-
-=== UploadRequestHandler [Added features]
-The UploadRequestHandler checks for malware and limits the file types that can be uploaded.
 
 === Session Cookie (JSESSIONID Cookie) configuration validation
 The HTML UI checks if the application is configured safe by validating some flags set on the session cookie. For more details on how to configure your session cookie please refer to the Scout Documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration".
