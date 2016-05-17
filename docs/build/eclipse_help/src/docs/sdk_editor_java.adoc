@@ -47,16 +47,9 @@ image::{imgsdir}/java_proposals_code.png[]
 
 ==== NLS-Entry support
 
-When the the current edit position is inside the String parameter of the `TEXTS.get()` code, the content assist provide support for the NLS entries.
-<<img-java_proposals_texts>> provides an example.
+include::{mdledir}/SdkEditorNlsContentAssist.adoc[]
 
-[[img-java_proposals_texts, Figure Proposals in a TEXTS.get()]]
-.Proposals corresponding to NLS Support.
-image::{imgsdir}/java_proposals_texts.png[]
-
-You can select one of the matching entries (like "DateOfBirth" in the example) and you will see the different translations on the right.
-
-You can select "New text..." to open the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
+Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
 
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.

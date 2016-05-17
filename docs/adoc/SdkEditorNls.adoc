@@ -15,25 +15,82 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-===== Open the NLS Editor
+The screenshot below shows the opened NLS editor.
+In the first column the `key` values are shown that are used in accessing translations through `TEXTS.get("key")`.
+The second columns holds the default translations followed by columns holding the translations for other translated languages.
 
-include::{mdledir}/SdkEditorNls_open.adoc[]
+image::{imgsdir}/sdk_editor_nls.png[]
 
-===== Description of the NLS Editor
+==== Action Buttons
 
-include::{mdledir}/SdkEditorNls_figure.adoc[]
+Actions on the top right corner:
 
-In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
-This opens an editor where the text can be changed to the desired value.
+[cols="10,45,45"] 
+|===
 
-* Refresh: 
-* Show NLS entry usage:
-* New entry...: this will open the 
-* New language...
-* Import...
-* Export...
+| image:{imgsdir}/icon_refresh.gif[]
+| Refresh NLS Project
+| Reload the content of the editor.
 
+| image:{imgsdir}/icon_find_obj.gif[]
+| Show NLS entry usage
+| Search in the Java code where the NLS Key is used.
 
-To add a new translated text, the corresponding dialog can be opened by clicking on the button with the '`T`' icon next to the 'New language' button (shown in <<img-nls_editor>>).
+| image:{imgsdir}/icon_text_add.png[]
+| New entry...
+| Opens the <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>>
 
+| image:{imgsdir}/icon_fileadd_pending.gif[]
+| New language...
+| Opens the <<sdk_wizard_language.adoc#, Add a Language Wizard>>
 
+| image:{imgsdir}/icon_import.gif[]
+| Import...
+| Import the NLS entries of an external file
+
+| image:{imgsdir}/icon_export.gif[]
+| Export...
+| Export the NLS entries to an external file
+|===
+
+Import and Export requires additional components.
+
+Hide inherited rows checkbox
+
+On the top of each columns, the text fields allow you to filter the entries in the table.
+With the btn:[Reset] button on the right you will empty those filters.
+
+The entries in the table can be directly edited by pressing F2 or double-clicking into a text cell.
+
+On each row it is possible to call following context menu:
+
+[cols="10,45,45"] 
+|===
+
+| image:{imgsdir}/icon_text.png[]
+| Modify Entry
+| Opens the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>
+
+| image:{imgsdir}/icon_find_obj.gif[]
+| Find references to 'Xxx'
+| Search in the Java code where the NLS Key is used.
+
+| image:{imgsdir}/icon_text_remove.png[]
+| Remove Xxx
+| Delete the NLS Entry from the files
+|===
+
+==== Default Mapping to Property Files
+
+The mapping between the properties files is registered in the "Text Provider Service" class.
+Per default the files follow this pattern:
+`<your application>.shared/src/main/resources/<identifier of the project>/texts/Texts<language>.properties`
+
+where:
+
+* `<identifier of the project>` is a chain of folders following the same convention as the Java source files with the package name. 
+  For example the `org.eclipse.contacts.shared` project uses `org/eclipse/scout/contacts/shared` as path.
+* `<language>` is an identifier of the language and the country. Some possible file names:
+** `Texts.properties` is the default language
+** `Texts_de.properties` is for german
+** `Texts_fr_BE` will be for french in Belgium

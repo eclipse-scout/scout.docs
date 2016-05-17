@@ -19,16 +19,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 == A One Day Tutorial
 
 In this chapter we will create the "`Contacts`" Scout application. 
-The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework that is based on a fully functioning application. 
-The application is still kept small.footnote:[
-Small in comparison with real world application. But significantly larger and complexer than the "`Hello World`" application of Chapter <<cha-helloworld>>.
-]
-enough to complete this tutorial within 
-application covers additional aspects of the Eclipse Scout framework.
-The presented demo application borrows from a Scout tutorial published 2012 in the German _Java Magazin_.footnote:[
-Java Magazin 7.12: https://jaxenter.de/magazines/JavaMagazin72012.
-]
-.
+The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functioning application. 
+The application is kept small enough to complete this tutorial within less than a day.
+A more elaborate version of the same application is available as a Scout sample application on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github].
 
 According to this step-by-step tutorial, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form.
 In addition, the application also shows how to work with forms to enter and/or update data, menus and context menus.
@@ -70,73 +63,68 @@ Alternatively, you can pull a Docker image of the "`Contacts`" application from 
 [[sec-contacts_tutorial_overview]]
 === Tutorial Overview
 
-* Bla
+* Setting up the initial project
+* Adding the person page
+* Adding a form to create/edit persons
 
-=== Setting up the new Scout project
-
-[[img-new_project_contacts, Figure 000]]
-image::{imgsdir}/new_project_contacts_1.png[]
-.Start with creating a new Scout project.
-image::{imgsdir}/new_project_contacts_2.png[]
+=== Setting up the new Scout Project
 
 The initial code for the "`My Contacts`" application is generated using the [wizard]_New Scout Project_ wizard as described in Section <<sec-wizard_new_project>>.
-For the [field]_Project Name_ field use the name [java]+org.eclipsescout.contacts+ as shown on the left side of <<img-new_project_contacts>> and click on the btn:[Next] button.
-In the second wizard step select the application template [element]_Outline Tree and Table Form_ as shown on the right side of <<img-new_project_contacts>>.
+For the wizard fiels you may use the following values:
 
-[[img-project_contacts_properties, Figure 000]]
-image::{imgsdir}/project_contacts_explorer.png[]
-.The setting of the _Technology_ section in the Scout Object Properties of the "`My Contacts`" application.
-image::{imgsdir}/project_contacts_properties.png[]
+* [field]_Group Id_: `org.eclipse.scout.contacts`
+* [field]_Artefact Id_: `org.eclipse.scout.contacts`
+* [field]_Display Name_: "Contacts Application"
 
-After the Scout SDK has created the initial application code select the top-level [node]_org.eclipsescout.contacts_ node in the Scout Explorer.
-In the technology section of the corresponding Scout Object Properties select the Derby database driver, the Docx4j support and the Rayo look and feel as shown on the right side of <<img-project_contacts_properties>>.
-In case you have not yet used the Scout Docx4j support or the Rayo look and feel components, the Scout SDK will need to download these packages from the Eclipse Marketplace.footnote:[
-See Section <<sec-scout_sdk_object_properties>> for additional information regarding the download of marketplace packages
+To create this initial application click on btn:[Finish].
+The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>. 
+
+[[img-contacts_package_explorer, Figure 000]]
+image::{imgsdir}/app_contacts_package_explorer_initial.png[]
+.The package explorer with the initial Maven modules created for the "Contacts" application.
+
+Before we start to add components for the "Contacts" application we will remove elements that we will not need and perfom some refactoring/renaming of the generated source code.
+
+We start with removing all `*.helloworld` packages from the client, server and shared modules. 
+As shown in <<img-contacts_package_explorer>> we have to delete footnote:[
+To delete a package select the package with the mouse and hit the `Delete` key.
 ]
-first.
+two `org.eclipse.scout.contacts.client.helloworld` packages in the client module as related code is found in `src/main/java` and `src/test/java`. 
 
-(((ScoutXlsxSpreadsheetAdapter,IShellService,shellOpen)))
-[[lst-mycontacts.desktop.menu.exportoexcel, Listing ExportToExcelMenu]]
+In the server module delete the `org.eclipse.scout.contacts.server.helloworld` packages in `src/main/java` and `src/test/java`, and in the shared module
+delete package `org.eclipse.scout.contacts.server.helloworld` in folder `src/main/java`. 
+
+Next, we perform a number of modifications to class WorkOutline.
+
+* Rename the class to `ContactOutline`
+* Rename the class package to `org.eclipse.scout.contacts.client.contact`
+* Change the outline title to "Contacts"
+
+Let us start with the class rename.
+To quickly find the class we open the [wizard]_Open Type_ dialog from the Eclipse IDE footnote:[
+Type 'open type' into the [field]_Quick Access_ field of the Eclipse IDE or hit `Ctrl`,`Shift`, and `T` at the same time.
+]
+and enter 'workoutline' into the search field as shown in <<img-eclipse_open_type>>.
+In the result list, we select the desired class and click btn:[OK] which opens the file `WorkOutline.java` in the Java editor.
+
+[[img-eclipse_open_type, Figure 000]]
+image::{imgsdir}/eclipse_open_type.png[]
+.Use the Open Type dialog to quickly find java types in the Eclipse IDE.
+
+In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and using menu menu:Refactor[Rename...].
+Inside the edit box we can then change the class name to `ContactOutline` and press btn:[Enter].
+
+Next, we rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` by clicking into the package name and using the rename menu menu:Refactor[Rename...] again.
+
+Finally, we change the outline title in method `getConfiguredTitle` to "Contacts" using the method described in <<sec-add_text_entry>>.
+
 [source,java]
-.The [java]+ExportToExcelMenu+ class added by the Docx4j support to the application's tools menu.
 ----
-TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=154..170]
+@Override
+protected String getConfiguredTitle() {
+	return TEXTS.get("Contact");
+}
 ----
-
-
-Remark: Adding the Docx4j support will add the menu:Export to Excel[] menu under tools menu on the application's desktop.
-This presence of this feature will then allow to export contacts shown in the application to an Excel sheet.
-As shown in <<lst-mycontacts.desktop.menu.exportoexcel>>, the [java]+ScoutXlsxSpreadsheetAdapter+ first creates an excel file based on the currently active page in the [java]+execAction+ method.
-Then the file is opened on the client using the [java]+shellOpen+ method.
-
-[[img-desktop_properties, Figure 000]]
-image::{imgsdir}/desktop_explorer.png[]
-.Configure the application name "`My Contacts`" in the title field of the Desktop's properties.
-image::{imgsdir}/desktop_properties.png[]
-
-After this initial project setup step we first define the application's name shown on the main dialog.
-For this, select the [node]_Desktop_ node under the orange client node in the Scout Explorer.
-This opens it's Scout Object Properties as shown in <<img-desktop_properties>>.
-In the [field]_Title_ field enter the string "`My Contacts`" and create a new translated text entry.
-
-
-(((execOpened,Desktop,UserAgentUtility)))
-[[lst-mycontacts.desktop.execopened, Listing execOpened]]
-[source,java]
-.The [java]+execOpened+ method of desktop class of the "My Contacts" application. The application's organisation into a tree and a table form is defined here.
-----
-TODO include was {codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java[lines=56..79]
-----
-
-
-As shown in <<lst-mycontacts.desktop.execopened>> the application's organisation into a tree and a table form is explicitly defined in method [java]+execOpened+.
-Click on the [link]_Exec Opened_ link in the desktop's Scout Object Properties to access the Java code of this method.
-First, using the [java]+UserAgentUtility+ class, the method checks if the client is working with a desktop, a web or a mobile client.
-If the user is not working with a desktop client, [java]+execOpened+ returns immediately and the tree and table setup is not used.
-Instead, the [java]+MobileHomeForm+ defined in plugin [element]_org.eclipsescout.contacts.client.mobile_ is used.
-In case the user is working with a web client or a desktop client, the default tree and table forms are created and started.
-Finally, the currently active outline is set to the [java]+StandardOutline+, as this is the only outline defined in this application.
-
 
 [[img-new_page_person_contextmenu, Figure 000]]
 === Adding the Person Page
@@ -385,7 +373,7 @@ In it's [java]+runTransaction+ method we can then call the [java]+installStorage
 An additional Scout topic that is touched in this [java]+ServerApplication+ class is the Scout logging. Scout uses http://slf4j.org[SLF4J] for logging.
 As shown in <<lst-mycontacts.server.serverapplication>>, a static [java]+logger+ object is created using SLF4J's [java]+LoggerFactory+ class.
 Events can then be logged with the [java]+logger.info+ method where [java]+info+ refers to the log level attached to this message.
-Further information regarding logging in Eclipse Scout is available on the SLF4J home page and in the Scout wikifootnote:[
+Further information regarding logging in Eclipse Scout is available on the SLF4J home page and in the Scout wiki footnote:[
 Logging in Eclipse Scout: http://wiki.eclipse.org/Scout/Concepts/Logging.
 ].
 

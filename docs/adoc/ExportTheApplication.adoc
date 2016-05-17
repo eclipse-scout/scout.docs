@@ -18,23 +18,75 @@ ifndef::mdledir[:mdledir: .]
 At some point during the application development you will want to install your software on a machine that is intended for productive use. 
 This is the moment where you need to be able to build and package your Scout application in a way that can be deployed to an application server.
 
-As Scout applications only require a simple servlet container to run, Scout applications can be deployed to almost any Java appliction servers. 
+As Scout applications just need a servlet container to run, Scout applications can be deployed to almost any Java appliction servers. 
 For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-8.0-doc/index.html[Apache Tomcat]. 
 
 ==== Verify the Container Security Settings
 
 First you need to decide if the users of your application should communicate via HTTPS with the Scout frontend server. 
-As we strongly recommended this setup for a productive environment even the "`Hello World`" example is configured for this scenario. 
-But you need to make sure that your Tomcat installation is configured accordingly.
+We strongly recommended this setup for any productive environment.
+This is why even the Scout "`Hello World`" example is configured to use HTTPS. 
 
+As a default Tomcat installation is configured to use HTTP only, we need to first verify if the installtion is properly configured for HTTPS too.
 In case HTTPS support is already enabled for your Tomcat installation, you may skip this section.
-Otherwise, follow the steps described in the http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
+
+Otherwise, check out the configuration process described in the http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
+
+==== Create and Install a Self-Signed Certificate
+
+This section describes the creation and usage of a self-signed certificat in a localhost setting. 
+
+. Create a keystore file with a self-signed certificate
+. Uncomment/adapt the HTTPS connector port in Tomcat's server.xml configuration
+. Export the self-signed certificate from the keystore
+. Import the self-signed certificate into the Java certificate store
+
+The first step is to create a self-signed certificate using the keytool provided with the Java runtime. 
+The example command line below will create such a certificate using the alias `tomcat_localhost` and place it into the keystore file `tomcat_localhost.jks`
+
+  keytool.exe -genkey -keyalg RSA -dname CN=localhost -alias tomcat_localhost -keystore tomcat_localhost.jks -keypass changeit -storepass changeit
+
+The second step is to uncomment the HTTPS connector element in the Tomcat's `server.xml` configuration file. 
+Make sure that parameter `keystoreFile` points to your newly created keystore file (if you are using a windows box, make sure not to use the backslash characters in the path to the keystore).
+After a restart of Tomcat you should then be able to access Tomcat on https://localhost:8443/manager/html[https://localhost:8443/manager/html]
+
+[source,xml]
+----
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" 
+               keystoreFile="file:///c:/keystore/tomcat_localhost.jks" keystorePass="changeit"
+/>
+----
+
+The third step is to export the newly created self-signed certificate from the `tomcat_localhost.jks` keystore file into the `tomcat_localhost.der` certificate file.
+
+  keytool.exe -exportcert -alias tomcat_localhost -storepass changeit -keystore tomcat_localhost.jks -file tomcat_localhost.der
+
+In the fourth and last step we add the self-signed certificate to the known certificates of the Java runtime.
+Make sure that you modify the `cacerts` file of the Java runtime that is used in your Tomcat installation and modify the path to the `cacerts` file accordingly.
+
+  keytool.exe -import -alias tomcat_localhost -trustcacerts -storepass changeit -keystore C:\java\jre8\lib\security\cacerts -file tomcat_localhost.der
+
+Your Scout application should now properly communicate over HTTPS in your Tomcat installation and after having installed the "Hello World" application 
+to Tomcat it should become available on https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html[https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html/].
+
+In case the Scout frontend server cannot access the Scout backend server your self-signed certificate might be missing in the Java installation.
+To verify that the certificate has been included in file `cacerts` file use the following command.
+
+  keytool.exe -list -storepass changeit -keystore C:\java\jre8\lib\security\cacerts | find "localhost"
+
+Once you no longer need the self-signed certificate file in your Java installation make sure to remove the certificate again.
+
+  keytool.exe -delete -alias tomcat_localhost -storepass changeit -keystore C:\java\jre8\lib\security\cacerts
+  
+==== Update the Scout Application to work with HTTP
 
 If you should prefer to work with HTTP only, you need to modify the security settings of your Scout application.
 This can be done in module `helloworld.ui.html.app.war` with the two steps described below.
 
-* In file `config.properties` (in folder `src\main\resources`) add property `scout.auth.cookie.session.validate.secure=false` to disable the check for an encrypted channel (HTTPS).
-* In file `web.xml` (in folder `src\main\webapp\WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
+* In file `config.properties` (in folder `src/main/resources`) add property `scout.auth.cookie.session.validate.secure=false` to disable the check for an encrypted channel (HTTPS).
+* In file `web.xml` (in folder `src/main/webapp/WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
 
 More on this topic can be found in the Scout Architecture Documentation.
 

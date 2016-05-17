@@ -16,14 +16,7 @@ It can be opened from:
 * <<sdk_editor_nls.adoc#, The NLS Editor>> by selecting "New Entry" or "Modify Entry".
 * <<sdk_editor_java.adoc#, The Java Editor>> by using the proposal editor inside the string parameter of the `TEXTS.get("")` code.
 
-image::{imgsdir}/sdk_wizard_nls_entry.png[]
-
-The [field]_Key Name_ field holds the text key that is used to access translated text.
-
-In the tabs below the key name field, the text translations for the registered languages can be provided. 
-Make sure to at least provide a text in the [element]_default_ tab. 
-
-With the [element]_copy key to the clipboard_ you can copy the key name to the clipboard and paste it later in your code.
+include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
 
 '''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
