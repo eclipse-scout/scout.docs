@@ -10,9 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
@@ -93,8 +92,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
   }
 
   private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) {
-    try {
-      String s = IOUtility.getContent(new InputStreamReader(ResourceBase.class.getResource("html/" + simpleName).openStream()));
+    try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
+      String s = IOUtility.readString(in, null);
       getHTMLField().setValue(null);
       getHTMLField().setScrollToAnchor(null);
       getHTMLField().setAttachments(attachments);
@@ -234,8 +233,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         protected void execClickAction() {
           URL url = ResourceBase.class.getResource("icons/eclipse_scout_logo.png");
           byte[] content;
-          try {
-            content = IOUtility.getContent(new BufferedInputStream(url.openStream()));
+          try (InputStream in = url.openStream()) {
+            content = IOUtility.readBytes(in);
             BinaryResource file = new BinaryResource("eclipse_scout_logo.png", content);
             loadFile("HtmlFieldCustomHtml.html", Collections.<BinaryResource> singleton(file));
           }

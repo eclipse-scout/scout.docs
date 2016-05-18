@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -203,8 +204,8 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected void execInitField() {
           clearErrorStatus();
 
-          try {
-            setImage(IOUtility.getContent(ResourceBase.class.getResourceAsStream(SCOUT_LOGO)));
+          try (InputStream in = ResourceBase.class.getResourceAsStream(SCOUT_LOGO)) {
+            setImage(IOUtility.readBytes(in));
             setImageId(SCOUT_LOGO_FILENAME);
           }
           catch (Exception e) {
@@ -323,9 +324,8 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
-          try {
-            URL url = getUrl((String) newMasterValue);
-            setImage(IOUtility.getContent(url.openStream()));
+          try (InputStream in = getUrl((String) newMasterValue).openStream()) {
+            setImage(IOUtility.readBytes(in));
           }
           catch (Exception e) {
             e.printStackTrace();
@@ -425,9 +425,8 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
-          try {
-            URL url = getUrl((String) newMasterValue);
-            setImage(IOUtility.getContent(url.openStream()));
+          try (InputStream in = getUrl((String) newMasterValue).openStream()) {
+            setImage(IOUtility.readBytes(in));
           }
           catch (Exception e) {
             e.printStackTrace();

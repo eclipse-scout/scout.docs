@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.Normalizer;
@@ -140,9 +141,9 @@ public class MapForm extends AbstractForm {
 
         address = normalize(address);
 
-        try {
+        try (InputStream in = new URL(url).openStream()) {
           url = "http://maps.googleapis.com/maps/api/staticmap?center=" + URLEncoder.encode(address, "ISO-8859-1") + "&zoom=" + zoom + "&size=" + size + "&maptype=roadmap&sensor=false";
-          setImage(IOUtility.getContent((new URL(url)).openStream()));
+          setImage(IOUtility.readBytes(in));
         }
         catch (Exception e) {
           addErrorStatus(new ProcessingStatus("Bad Link: " + url + ", please check", ProcessingStatus.ERROR));

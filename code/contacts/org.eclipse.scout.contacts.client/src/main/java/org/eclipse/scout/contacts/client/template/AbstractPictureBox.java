@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.template;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -75,9 +76,9 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
       getForm().touch();
     }
     else {
-      try {
+      try (InputStream in = new URL((String) pictureUrl).openStream()) {
         getPictureField().clearErrorStatus();
-        getPictureField().setImage(IOUtility.getContent(new URL((String) pictureUrl).openStream()));
+        getPictureField().setImage(IOUtility.readBytes(in));
         getPictureField().setAutoFit(true);
         getForm().touch();
       }

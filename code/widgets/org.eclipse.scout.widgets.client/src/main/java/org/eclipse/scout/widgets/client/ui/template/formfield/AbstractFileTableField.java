@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.template.formfield;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -57,8 +57,8 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
   protected void execInitField() {
     URL url = ResourceBase.class.getResource("images/bird_1008.jpg");
 
-    try {
-      byte[] content = IOUtility.getContent(new BufferedInputStream(url.openStream()));
+    try (InputStream in = url.openStream()) {
+      byte[] content = IOUtility.readBytes(in);
       BinaryResource file = new BinaryResource("bird.jpg", content);
       getTable().addRowByArray(fileToArray(file));
     }
