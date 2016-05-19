@@ -35,7 +35,7 @@ import org.eclipse.scout.rt.platform.config.IConfigProperty;
 import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.context.RunWithRunContext;
 import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
-import org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier;
+import org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier;
 import org.eclipse.scout.rt.server.jaxws.MessageContexts;
 import org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient;
 import org.eclipse.scout.rt.server.jaxws.consumer.InvocationContext;
