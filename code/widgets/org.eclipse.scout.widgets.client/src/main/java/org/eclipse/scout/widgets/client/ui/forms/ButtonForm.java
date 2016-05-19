@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
@@ -34,14 +35,17 @@ import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.Configuratio
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ConfigurationBox.LabelField;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ButtonGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ButtonGroupBox.CssStyledButton;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ButtonGroupBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ButtonGroupBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.LinkButtonGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.LinkButtonGroupBox.CssStyledLinkButton;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.LinkButtonGroupBox.DefaultLinkButton;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox.ToggleButtonDefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox.ToggleButtonDisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox.ToggleButtonStyledField;
+import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox.ToggleCssStyledButton;
 import org.eclipse.scout.widgets.shared.Icons;
 
 public class ButtonForm extends AbstractForm implements IPageForm {
@@ -101,6 +105,18 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
   public ToggleButtonDisabledField getToggleButtonDisabledField() {
     return getFieldByClass(ToggleButtonDisabledField.class);
+  }
+
+  public CssStyledButton getCssStyledButton() {
+    return getFieldByClass(CssStyledButton.class);
+  }
+
+  public ToggleCssStyledButton getToggleCssStyledButton() {
+    return getFieldByClass(ToggleCssStyledButton.class);
+  }
+
+  public CssStyledLinkButton getCssStyledLinkButton() {
+    return getFieldByClass(CssStyledLinkButton.class);
   }
 
   public ToggleButtonDefaultField getToggleButtonDefaultField() {
@@ -279,10 +295,40 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected String getConfiguredBackgroundColor() {
+            return "FDEEEE";
+          }
+
+          @Override
           protected boolean getConfiguredProcessButton() {
             return false;
           }
         }
+
+        @Order(2000)
+        @ClassId("d10308ef-877b-44ca-9782-6ec9361a4db1")
+        public class CssStyledButton extends AbstractButton {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("CSSStyled");
+          }
+
+          @Override
+          protected boolean getConfiguredFillHorizontal() {
+            return true;
+          }
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "highlight";
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+        }
+
       }
 
       @Order(20)
@@ -438,10 +484,40 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected String getConfiguredBackgroundColor() {
+            return "FDEEEE";
+          }
+
+          @Override
           protected String getConfiguredTooltipText() {
             return TEXTS.get("ButtonWithIconOnly");
           }
         }
+
+        @Order(2000)
+        @ClassId("8877629c-ec8c-47bf-af80-285572cb3723")
+        public class ToggleCssStyledButton extends AbstractButton {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("CSSStyled");
+          }
+
+          @Override
+          protected int getConfiguredDisplayStyle() {
+            return DISPLAY_STYLE_TOGGLE;
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "highlight";
+          }
+        }
+
       }
 
       @Order(30)
@@ -561,10 +637,40 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected String getConfiguredForegroundColor() {
+            return "FF0000";
+          }
+
+          @Override
           protected boolean getConfiguredProcessButton() {
             return false;
           }
         }
+
+        @Order(2000)
+        @ClassId("d4c2acf8-c413-4730-ab53-3ab94c4f19f7")
+        public class CssStyledLinkButton extends AbstractLinkButton {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("CSSStyled");
+          }
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "highlight";
+          }
+
+          @Override
+          protected boolean getConfiguredFillHorizontal() {
+            return true;
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+        }
+
       }
     }
 

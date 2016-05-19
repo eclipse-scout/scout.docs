@@ -1,0 +1,19 @@
+.button-field.highlight {
+
+  & > .button {
+    background-color: @palette-green-0;
+
+    &:not(.disabled):active {
+      background-color: @palette-green-1;
+    }
+
+  }
+
+  & > .link-button > .link > .button-label {
+    color: @palette-green-3;
+
+    &:not(.disabled):hover {
+      color: @palette-green-4;
+    }
+  }
+}

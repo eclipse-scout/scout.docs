@@ -1,0 +1,8 @@
+.table-cell {
+  &.highlight {
+    background-color: @palette-cyan-0;
+  }
+  &.row-icon-cell.highlight > .table-cell-icon {
+    color: @palette-red-3;
+  }
+}
