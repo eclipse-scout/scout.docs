@@ -78,7 +78,7 @@ public abstract class AbstractPictureBox extends AbstractGroupBox {
     else {
       try (InputStream in = new URL((String) pictureUrl).openStream()) {
         getPictureField().clearErrorStatus();
-        getPictureField().setImage(IOUtility.readBytes(in));
+        getPictureField().setImage(IOUtility.getContent(in));
         getPictureField().setAutoFit(true);
         getForm().touch();
       }

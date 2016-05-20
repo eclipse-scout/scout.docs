@@ -93,7 +93,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) {
     try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
-      String s = IOUtility.readString(in, null);
+      String s = IOUtility.getContentUtf8(in);
       getHTMLField().setValue(null);
       getHTMLField().setScrollToAnchor(null);
       getHTMLField().setAttachments(attachments);
@@ -234,7 +234,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
           URL url = ResourceBase.class.getResource("icons/eclipse_scout_logo.png");
           byte[] content;
           try (InputStream in = url.openStream()) {
-            content = IOUtility.readBytes(in);
+            content = IOUtility.getContent(in);
             BinaryResource file = new BinaryResource("eclipse_scout_logo.png", content);
             loadFile("HtmlFieldCustomHtml.html", Collections.<BinaryResource> singleton(file));
           }

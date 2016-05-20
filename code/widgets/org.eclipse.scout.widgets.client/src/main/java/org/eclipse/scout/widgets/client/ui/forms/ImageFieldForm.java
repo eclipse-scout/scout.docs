@@ -205,7 +205,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           clearErrorStatus();
 
           try (InputStream in = ResourceBase.class.getResourceAsStream(SCOUT_LOGO)) {
-            setImage(IOUtility.readBytes(in));
+            setImage(IOUtility.getContent(in));
             setImageId(SCOUT_LOGO_FILENAME);
           }
           catch (Exception e) {
@@ -325,7 +325,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
           try (InputStream in = getUrl((String) newMasterValue).openStream()) {
-            setImage(IOUtility.readBytes(in));
+            setImage(IOUtility.getContent(in));
           }
           catch (Exception e) {
             e.printStackTrace();
@@ -426,7 +426,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected void execChangedMasterValue(Object newMasterValue) {
           getImageURLField().clearErrorStatus();
           try (InputStream in = getUrl((String) newMasterValue).openStream()) {
-            setImage(IOUtility.readBytes(in));
+            setImage(IOUtility.getContent(in));
           }
           catch (Exception e) {
             e.printStackTrace();

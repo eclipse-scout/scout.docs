@@ -58,7 +58,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     URL url = ResourceBase.class.getResource("images/bird_1008.jpg");
 
     try (InputStream in = url.openStream()) {
-      byte[] content = IOUtility.readBytes(in);
+      byte[] content = IOUtility.getContent(in);
       BinaryResource file = new BinaryResource("bird.jpg", content);
       getTable().addRowByArray(fileToArray(file));
     }

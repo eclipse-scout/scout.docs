@@ -143,7 +143,7 @@ public class MapForm extends AbstractForm {
 
         try (InputStream in = new URL(url).openStream()) {
           url = "http://maps.googleapis.com/maps/api/staticmap?center=" + URLEncoder.encode(address, "ISO-8859-1") + "&zoom=" + zoom + "&size=" + size + "&maptype=roadmap&sensor=false";
-          setImage(IOUtility.readBytes(in));
+          setImage(IOUtility.getContent(in));
         }
         catch (Exception e) {
           addErrorStatus(new ProcessingStatus("Bad Link: " + url + ", please check", ProcessingStatus.ERROR));
