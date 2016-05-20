@@ -25,7 +25,7 @@
   <name>Snippets used in technical documentation of Eclipse Scout framework</name>
 
   <properties>
-    <org.eclipse.scout.rt.version>6.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>6.0.0.RC1</org.eclipse.scout.rt.version>
   </properties>
 
   <dependencyManagement>
