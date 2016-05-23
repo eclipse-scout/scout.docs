@@ -20,6 +20,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 //tag::Outline[]
+//tag::OutlineInit[]
 public class ContactOutline extends AbstractOutline {
 
   @Override
@@ -29,13 +30,16 @@ public class ContactOutline extends AbstractOutline {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
+    //end::OutlineInit[]
     pageList.add(new PersonPage());
     pageList.add(new OrganizationTablePage());
+    //tag::OutlineInit[]
   }
 
   @Override
   protected String getConfiguredIconId() {
-    return Icons.Contacts;
+    return Icons.Category;
   }
 }
+//end::OutlineInit[]
 //end::Outline[]

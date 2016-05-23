@@ -116,7 +116,6 @@ Step 6: <<sec-contacts_outlook>>::
 This step discusses the gap between the tutorial application and the complete "Contacts" demo application and suggests possible next steps to close the gap. 
 
 //--- tutorial_section ------------------------------------------------------//
-
 [[sec-contacts_initial_project]]
 === Setting up the Initial Project
 
@@ -213,14 +212,11 @@ If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Ecli
 Now, we change the outline title in method `getConfiguredTitle` to "Contacts" using the method described in <<sec-add_text_entry>>.
 Finally we change the return value of method `getConfiguredIconId` to value `Icons.Category`.
 
-TODO: source code of demo app for class WorkOutline
-
+[[lst-contacts_outline, Listing contacts outline]]
 [source,java]
+.Initial implementation of class ContactOutline.
 ----
-@Override
-protected String getConfiguredTitle() {
-	return TEXTS.get("Contact");
-}
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=OutlineInit]
 ----
 
 Before we conclude the modifications in class ContactOutline let us remove the remaining compile error in class `ContactOutline`. 
@@ -230,18 +226,47 @@ Then, update the imports using Eclipse menu menu:Source[Organize Imports] and sa
 [[sec-contacts_change_desktop]]
 ==== Changes to Class Desktop
 
-TODO: Intro text
+The second class to adapt for the "Contacts" application is class Desktop. 
+This class is implemented exactly once in each Scout application and holds the available outlines and top level menus of the application in the form of inner classes.
 
-Class for Desktop
+For the "Contacts" application we adapt the initial implementation to have outline view buttons for the "Contacts" and "Search" outlines. 
+The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user. 
 
-* Rename inner class WorkOutlineViewButton to ContactOutlineViewButton
+Start with removing `SettingsOutline.class` from the list of return values in `getConfiguredOutlines` as shown in <<lst-contacts_getConfiguredOutlines>>.
+
+[[lst-contacts_getConfiguredOutlines, Listing getConfiguredOutlines]]
+[source,java]
+.Method getConfiguredOutlines defines the outlines associated with the desktop of the application.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=getConfiguredOutlines]
+----
+
+Then, perform the following changes in class `Desktop`
+
 * Delete inner class SettingOutlineViewButton
-* Remove entry `SettingsOutline.class` from the return value of method `getConfiguredOutlines`
-* Change FileMenu to QuickAccesMenu (source code)
-* Change BookmarkMenu to Options (source code)
-* Change HelpMenu to UserMenu (source code)
+* Rename inner class WorkOutlineViewButton to ContactOutlineViewButton
+* Change FileMenu to QuickAccesMenu and let `getConfiguredText` return "Quick Access"
+* Change BookmarkMenu to OptionsMenu. Let `getConfiguredText` return "Options", and add method `getConfiguredIconId` to return `AbstractIcons.Gear`.
+* Change HelpMenu to UserMenuLet. `getConfiguredText` return "", and add method `getConfiguredIconId` to return `AbstractIcons.Person`.
 
-TODO: source code of demo app for reduced class Desktop
+At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.  
+
+[[lst-contacts_desktop, Listing Desktop]]
+[source,java]
+.Structure of class Desktop with outline buttons and top level menus.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
+----
+
+The explicit listing for the changed class OptionsMenu is provided in <<lst-contacts_OptionsMenu>>. 
+Please note that for now your class `OptionsMenu` will just extend `AbstractMenu`.
+
+[[lst-contacts_OptionsMenu, Listing OptionsMenu]]
+[source,java]
+.Initial implementation for the "Options" menu.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=OptionsMenu]
+----
 
 [[sec-contacts_summary]]
 ==== What have we done so far?
@@ -259,6 +284,87 @@ The same is true for the user perspective: The layout of the current state of th
 //--- tutorial_section ------------------------------------------------------//
 [[sec-contacts_pages]]
 === Adding the Person and Organization Page
+
+In the second step of the Scout tutorial the components to display persons and organizations are added to the "Contacts" outline of the user interface of the Scout application.   
+Specifically, a "Persons" page and an "Organizations" page are created and added to navigation tree of the "Contacts" outline.  
+
+Database access and populating the pages with actual data from the database is not part of this section but will be covered in section <<sec-contacts_jdbc>> in the next tutorial step.  
+
+The addition of the "Persons" page is described in detail in the sections listed below.
+
+* <<sec-contacts_creating_person_package>>
+* <<sec-contacts_creating_person_page>>
+* <<sec-contacts_adding_page_columns>>
+
+The addition of the company page is described in <<sec-contacts_adding_company_page>>. 
+Finally, the state of the "Contacts" application is summarized in section <<sec-contacts_summary_step_2>>.
+
+[[sec-contacts_creating_person_package]]
+==== Creating the Person Package
+
+A substantial part of the "Contacts" application deals with persons. 
+In addition to the "Persons" page we will also add a Scout form to enter/edit persons in a later tutorial step.
+For the "Contacts" application we use this fact to justify the addition of a specific Java package that will hold all classes related to persons. 
+This person package can be created with the following steps.
+
+* Open the "Contacts" Maven module `org.eclipse.scout.contacts.client` in the Eclipse Package Explorer
+* Select the Java package `org.eclipse.scout.contacts.client` in folder `src/main/java` 
+* Press kbd:[Ctrl]+kbd:[N], enter "package" into the search field
+* Select the [wizard]_Package_ wizard in the proposal box and click [button]_Next_
+* Enter `org.eclipse.scout.contacts.client.person` and click [button]_Finish_ as shown in <<img-contacts_person_package>>
+* Make sure the newly created person package is selected in the Eclipse Package Explorer
+
+[[img-contacts_person_package, Figure 000]]
+.Add the person package to the "Contacts" application.
+image::{imgsdir}/sdk_new_package_wizard.png[]
+
+[[sec-contacts_creating_person_page]]
+==== Creating the Person Page
+
+In this section we create the Scout page that will be used to list all entered persons to the user of the "Contacts" application.  
+Out-of-the box this page will support the sorting and filtering of all the persons. 
+This "Persons" page is then added to the navigation tree below the "Contacts" outline.  
+
+We can now add the Scout person page as described below.
+
+* Press kbd:[Ctrl]+kbd:[N], enter "scout page" into the search field
+* Select the [wizard]_Scout Page_ wizard in the proposal box and click [button]_Next_
+* Enter `PersonPage` as the class name and click [button]_Finish_ as shown in <<img-contacts_new_person_page>>
+ 
+[[img-contacts_new_person_page, Figure 000]]
+.Add the person page to the "Contacts" application.
+image::{imgsdir}/sdk_new_personpage_wizard.png[]
+
+The Scout [wizard]_New Page Wizard_ then creates an initial implementation for the `PersonPage` class. 
+Before we start to add the columns to the table of the page we need to modify the source code according to <<lst-contacts_PersonPage>>.
+
+[[lst-contacts_PersonPage, Listing PersonPage]]
+[source,java]
+.Initial implementation of class PersonPage.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonPage.java[tags=PageInit]
+----
+
+<1> Specify the title "Persons" for the page using the Scout NLS tooling (see <<sec-add_text_entry>>)
+<2> You don't need to update method `execLoadData` to match this listing for now
+<3> Add method `getConfiguredLeaf` to specify that the person page will not have any child pages
+
+
+[[sec-contacts_adding_page_columns]]
+==== Adding Table Columns to the Page
+// add columns
+id column (source code)
+first name column (source code)
+other columns just list with properties
+
+[[sec-contacts_adding_company_page]]
+==== Adding the Company Page
+
+// high level description with attributes
+
+[[sec-contacts_summary_step_2]]
+==== What have we done in Tutorial Step 2?
+
 
 //--- tutorial_section ------------------------------------------------------//
 [[sec-contacts_jdbc]]

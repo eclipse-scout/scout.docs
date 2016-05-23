@@ -34,8 +34,10 @@ import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.TEXTS;
 
+//tag::DesktopInit[]
 public class Desktop extends AbstractDesktop {
 
+  //end::DesktopInit[]
   @Override
   protected String getConfiguredTitle() {
     return CONFIG.getPropertyValue(ApplicationNameProperty.class);
@@ -46,10 +48,12 @@ public class Desktop extends AbstractDesktop {
     return "application_logo";
   }
 
+  //tag::getConfiguredOutlines[]
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
     return CollectionUtility.<Class<? extends IOutline>> arrayList(ContactOutline.class, SearchOutline.class);
   }
+  //end::getConfiguredOutlines[]
 
   @Override
   protected void execDefaultView() {
@@ -73,9 +77,11 @@ public class Desktop extends AbstractDesktop {
       }
     }
   }
+  //tag::DesktopInit[]
 
   @Order(1)
   public class ContactOutlineViewButton extends AbstractOutlineViewButton {
+    //end::DesktopInit[]
 
     public ContactOutlineViewButton() {
       this(ContactOutline.class);
@@ -94,10 +100,12 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredKeyStroke() {
       return "ctrl-shift-c";
     }
+    //tag::DesktopInit[]
   }
 
   @Order(2)
   public class SearchOutlineViewButton extends AbstractOutlineViewButton {
+    //end::DesktopInit[]
 
     public SearchOutlineViewButton() {
       this(SearchOutline.class);
@@ -121,10 +129,12 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredKeyStroke() {
       return IKeyStroke.F3;
     }
+    //tag::DesktopInit[]
   }
 
   @Order(1)
   public class QuickAccessMenu extends AbstractMenu {
+    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredText() {
@@ -168,20 +178,13 @@ public class Desktop extends AbstractDesktop {
         new OrganizationForm().startNew();
       }
     }
+    //tag::DesktopInit[]
   }
 
+  //tag::OptionsMenu[]
   @Order(2)
   public class OptionsMenu extends AbstractFormMenu<OptionsForm> {
-
-    @Override
-    protected String getConfiguredIconId() {
-      return AbstractIcons.Gear;
-    }
-
-    @Override
-    protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F11;
-    }
+    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredText() {
@@ -189,13 +192,28 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Override
+    protected String getConfiguredIconId() {
+      return AbstractIcons.Gear;
+    }
+
+    //end::OptionsMenu[]
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F11;
+    }
+
+    @Override
     protected Class<OptionsForm> getConfiguredForm() {
       return OptionsForm.class;
     }
+    //tag::OptionsMenu[]
+    //tag::DesktopInit[]
   }
+  //end::OptionsMenu[]
 
   @Order(3)
   public class UserMenu extends AbstractFormMenu<UserForm> {
+    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredIconId() {
@@ -221,5 +239,7 @@ public class Desktop extends AbstractDesktop {
     protected Class<UserForm> getConfiguredForm() {
       return UserForm.class;
     }
+    //tag::DesktopInit[]
   }
 }
+//end::DesktopInit[]

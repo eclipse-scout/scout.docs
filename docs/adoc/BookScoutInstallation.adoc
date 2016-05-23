@@ -57,7 +57,7 @@ Official JDK 8 download: http://www.oracle.com/technetwork/java/javase/downloads
 and accept the licence agreement by clicking on the appropriate radio button.
 Then, select the _Windows x64_ package if you are running 64-bit Windows as shown in <<img-jdk_download_oracle>>.
 If you are running 32-bit Windows, go for the _Windows x86_ package.
-It is also recommended to download the _Java SE 7 Documentation_.
+It is also recommended to download the _Java SE 8 Documentation_.
 The Java API documentation package is available from the official download site.footnote:[
 Java API documentation download: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 ], located further down under section _Additional Resources_.

@@ -10,7 +10,7 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 //-----------------------------------------------------------------------------
-//Asciidoctor input file: "SDK - Editor - NLS"
+//Asciidoctor input file: "SDK - Wizard Project"
 //
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------

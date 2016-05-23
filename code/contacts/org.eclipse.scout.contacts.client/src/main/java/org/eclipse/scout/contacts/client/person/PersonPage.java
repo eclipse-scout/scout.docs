@@ -37,27 +37,32 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+//tag::PageInit[]
 @PageData(PersonPageData.class)
 public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
+  //end::PageInit[]
 
   private String organizationId;
+  //tag::PageInit[]
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Persons");
+    return TEXTS.get("Persons"); // <1>
   }
 
-  @Override
+  @Override // <2>
   protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IPersonService.class).getTableData(filter, getOrganizationId()));
   }
 
-  @Override
+  @Override // <3>
   protected boolean getConfiguredLeaf() {
     return true;
   }
 
+  //tag::PageInit[]
   public class Table extends AbstractTable {
+    //end::PageInit[]
 
     public LastNameColumn getLastNameColumn() {
       return getColumnSet().getColumnByClass(LastNameColumn.class);
@@ -303,7 +308,9 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
         form.startNew();
       }
     }
+    //tag::PageInit[]
   }
+  //end::PageInit[]
 
   @Override
   protected String getConfiguredIconId() {
@@ -324,4 +331,6 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
   public void setOrganizationId(String organizationId) {
     this.organizationId = organizationId;
   }
+  //tag::PageInit[]
 }
+//end::PageInit[]
