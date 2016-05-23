@@ -140,6 +140,10 @@ move org.eclipse.scout.rt.server.commons.authentication.ICredentialVerifier to o
 move org.eclipse.scout.rt.server.commons.authentication.IPrincipalProducer to org.eclipse.scout.rt.platform.security.IPrincipalProducer
 move org.eclipse.scout.rt.server.commons.authentication.SimplePrincipalProducer to org.eclipse.scout.rt.platform.security.SimplePrincipalProducer
 
+=== URL Hints (security)
+The new config property `scout.urlHints.enabled` controls if the URL parameters ?cache, ?compress, ?minify, ?debug, ?inspector are active.
+By default these are not enabled. This means, that by default it is not possible (for an attacker) to disable minify and get the original javascript sources.
+
 == Known Bugs and Limitations
 
 === Selection in disabled text fields
