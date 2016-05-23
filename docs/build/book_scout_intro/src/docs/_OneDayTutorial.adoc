@@ -35,6 +35,7 @@ The "`Contacts`" tutorial is organized as follows.
 In the first section, the finished "`Contacts`" application is explained from the user perspective.
 The remaining sections focus on the individual steps to implement the "`Contacts`" tutorial application.
 
+//--- tutorial_section ------------------------------------------------------//
 [[sec-my_contacts_guide]]
 === The "`Contacts`" Application
 
@@ -80,20 +81,60 @@ An example of an opened view is shown for person "Alice" in in <<img-app_contact
 .The "`Contacts`" application with a person opened in a form.
 image::{imgsdir}/app_contacts_personform.png[]
 
-[[sec-contacts_tutorial_overview]]
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_overview]]
 === Tutorial Overview
 
 This tutorial walks you through the implementation of a Scout application consisting of a frontend and a backend application. 
 The frontend application contains outlines with navigation trees, pages to present information in tabular form and forms to view and edit data. 
 In the backend appliation the tutorial shows how to implement services, logging, databases access, and serveral other aspects of Scout applications. 
 
-* Setting up the initial project
-* Adding the person page
-* Adding a form to create/edit persons
+The tutorial is organized into the sequence of the consecutive steps listed below.
+Each of the step is described in a individual section that results in a executable application that can be tested and compared against the full "Contacts" demo application. 
 
-=== Setting up the new Scout Project
+Step 1: <<sec-contacts_initial_project>>:: 
+We start with an empty workspace and the "Hello World" project. 
+At the end of step one we have a project setup that matches the "Contacts" application.
+This includes the organization and naming of Maven modules and the individual Java packages. 
 
-This section deals with setting up the initial workspace and codebase for the "
+Step 2: <<sec-contacts_pages>>:: 
+The second step adds the user interface components to display persons and organizations.
+For this a "Persons" page and an "Organizations" page are created and added to the "Contacts" outline as shown in <<img-app_contacts_personpage>>.
+
+Step 3: <<sec-contacts_jdbc>>:: 
+This step concentrates on the backend of the "Contacts" application. 
+The covered topics includes dealing with application properties, setup and access of a database and using the database to povide data for the person and organization page created in the previous step.
+
+Step 4: <<sec-contacts_forms>>:: 
+Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application. 
+
+Step 5: <<sec-contacts_link_organization_person>>:: 
+In this step we modify the user interface to implement a 1:n relationship between organizations and persons. 
+This includes the creation of a hierachical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
+
+Step 6: <<sec-contacts_outlook>>:: 
+This step discusses the gap between the tutorial application and the complete "Contacts" demo application and suggests possible next steps to close the gap. 
+
+//--- tutorial_section ------------------------------------------------------//
+
+[[sec-contacts_initial_project]]
+=== Setting up the Initial Project
+
+This section deals with setting up the initial workspace and codebase for the "Contacts" application. 
+The goal of this step lies in the project setup that closely matches the "Contacts" application. 
+This includes the organization and naming of Maven modules and the individual Java packages.
+
+The creation up of the initial project setup described in this section consists of the tasks listed below.
+
+* <<sec-contacts_initial_codebase>>
+* <<sec-contacts_remove_stuff>>
+* <<sec-contacts_change_workoutline>>
+* <<sec-contacts_change_desktop>>
+
+This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in section <<sec-contacts_summary>>.
+
+[[sec-contacts_initial_codebase]]
+==== Creating the initial Codebase
 
 The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard as described in Section <<sec-wizard_new_project>>.
 For the wizard fiels you may use the following values:
@@ -106,43 +147,73 @@ To create this initial application click on btn:[Finish].
 The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>. 
 
 [[img-contacts_package_explorer, Figure 000]]
-image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 .The package explorer with the initial Maven modules created for the "Contacts" application.
+image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
-Before we start to add components for the "Contacts" application we will remove elements that we will not need and perfom some refactoring/renaming of the generated source code.
+[[sec-contacts_remove_stuff]]
+==== Removing unnecessery Components
 
-We start with removing all `*.helloworld` packages from the client, server and shared modules. 
-As shown in <<img-contacts_package_explorer>> we have to delete footnote:[
-To delete a package select the package with the mouse and hit the `Delete` key.
-]
-two `org.eclipse.scout.contacts.client.helloworld` packages in the client module as related code is found in `src/main/java` and `src/test/java`. 
+We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application. 
+To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
+The explicit list of packages to delete per Maven module is provided in the text below. 
 
-In the server module delete the `org.eclipse.scout.contacts.server.helloworld` packages in `src/main/java` and `src/test/java`, and in the shared module
-delete package `org.eclipse.scout.contacts.server.helloworld` in folder `src/main/java`. 
+Client Module `org.eclipse.scout.contacts.client`::
+* In folder `src/main/java` 
+** Delete package `org.eclipse.scout.contacts.client.helloworld` 
+** Delete package `org.eclipse.scout.contacts.client.settings` 
+* In folder `src/test/java` 
+** Delete package `org.eclipse.scout.contacts.client.helloworld` 
 
-Next, we perform a number of modifications to class WorkOutline.
+Server Module `org.eclipse.scout.contacts.server`::
+* In folder `src/main/java` 
+** Delete package `org.eclipse.scout.contacts.server.helloworld` 
+* In folder `src/test/java` 
+** Delete package `org.eclipse.scout.contacts.server.helloworld` 
 
-* Rename the class to `ContactOutline`
+Shared Module `org.eclipse.scout.contacts.shared`::
+* In folder `src/main/java` 
+** Delete package `org.eclipse.scout.contacts.shared.helloworld` 
+* In folder `src/generated/java` 
+** Delete package `org.eclipse.scout.contacts.shared.helloworld` 
+
+[[sec-contacts_change_workoutline]]
+==== Changes to Class WorkOutline
+
+Instead of adding a new "Contacts" outline to the application re simply reuse and rename the "Work" outline that was created during the initial project setup. 
+For this, we perform the following modifications to class WorkOutline.
+
 * Rename the class package to `org.eclipse.scout.contacts.client.contact`
-* Change the outline title to "Contacts"
+* Rename the class to `ContactOutline`
+* Change the outline title to "Contact"
+* Change the outline icon to `Icons.Category`
 
-Let us start with the class rename.
 To quickly find the class we open the [wizard]_Open Type_ dialog from the Eclipse IDE footnote:[
 Type 'open type' into the [field]_Quick Access_ field of the Eclipse IDE or hit `Ctrl`,`Shift`, and `T` at the same time.
 ]
 and enter 'workoutline' into the search field as shown in <<img-eclipse_open_type>>.
-In the result list, we select the desired class and click btn:[OK] which opens the file `WorkOutline.java` in the Java editor.
+In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
 
 [[img-eclipse_open_type, Figure 000]]
 image::{imgsdir}/eclipse_open_type.png[]
 .Use the Open Type dialog to quickly find java types in the Eclipse IDE.
 
-In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and using menu menu:Refactor[Rename...].
-Inside the edit box we can then change the class name to `ContactOutline` and press btn:[Enter].
+We start with the package rename.
+To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the package name and using the Eclipse menu menu:Refactor[Rename...].
+This opens the package rename dialog as shown in <<img-sdk_rename_package>>.
 
-Next, we rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` by clicking into the package name and using the rename menu menu:Refactor[Rename...] again.
+[[img-sdk_rename_package, Figure 000]]
+image::{imgsdir}/sdk_rename_package.png[]
+.Use the Eclipse Rename Package dialog to rename a Java package.
 
-Finally, we change the outline title in method `getConfiguredTitle` to "Contacts" using the method described in <<sec-add_text_entry>>.
+In next step we rename class `WorkOutline` to `ContactOutline` 
+In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and use the Eclipse menu menu:Refactor[Rename...] again.
+Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change. 
+If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Eclipse complete the rename operation.
+
+Now, we change the outline title in method `getConfiguredTitle` to "Contacts" using the method described in <<sec-add_text_entry>>.
+Finally we change the return value of method `getConfiguredIconId` to value `Icons.Category`.
+
+TODO: source code of demo app for class WorkOutline
 
 [source,java]
 ----
@@ -151,6 +222,67 @@ protected String getConfiguredTitle() {
 	return TEXTS.get("Contact");
 }
 ----
+
+Before we conclude the modifications in class ContactOutline let us remove the remaining compile error in class `ContactOutline`. 
+For this remove the line `pageList.add(new HelloWorldPage());` in method `execCreateChildPages`.
+Then, update the imports using Eclipse menu menu:Source[Organize Imports] and save the modified class.
+
+[[sec-contacts_change_desktop]]
+==== Changes to Class Desktop
+
+TODO: Intro text
+
+Class for Desktop
+
+* Rename inner class WorkOutlineViewButton to ContactOutlineViewButton
+* Delete inner class SettingOutlineViewButton
+* Remove entry `SettingsOutline.class` from the return value of method `getConfiguredOutlines`
+* Change FileMenu to QuickAccesMenu (source code)
+* Change BookmarkMenu to Options (source code)
+* Change HelpMenu to UserMenu (source code)
+
+TODO: source code of demo app for reduced class Desktop
+
+[[sec-contacts_summary]]
+==== What have we done so far?
+
+In the first step of the "Contacts" tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps. 
+
+[[img-contacts_tutorial_result_step_1, Figure 000]]
+.The "Contacts" application at the end of tutorial step 1.
+image::{imgsdir}/contacts_tutorial_result_step_1.png[]
+
+From the coding perspective we now have all necessary maven Modules for "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application. 
+This fact is very important as simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application. 
+The same is true for the user perspective: The layout of the current state of the tutorial matches with the complete "Contacts" sample application.
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_pages]]
+=== Adding the Person and Organization Page
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_jdbc]]
+=== Creating and Accessing the Database
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_forms]]
+=== Adding Forms to Create/Edit Persons and Organizations
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_organizations]]
+=== Adding Organizations
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_link_organization_person]]
+=== Linking Oranizations and Persons
+
+//--- tutorial_section ------------------------------------------------------//
+[[sec-contacts_outlook]]
+=== Next Steps and Outlook
+
+
+
+== OLD STUFF
 
 [[img-new_page_person_contextmenu, Figure 000]]
 === Adding the Person Page

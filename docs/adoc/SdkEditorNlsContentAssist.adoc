@@ -15,7 +15,7 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-When the the current edit position is inside the String parameter of the `TEXTS.get()` code, the content assist provides support for the NLS entries as shown in <<img-java_proposals_texts>>.
+When the the current edit position is inside the String parameter of the `TEXTS.get()` code, the content assist (opened with kbd:[Ctrl] + kbd:[Space]) provides support for the NLS entries as shown in <<img-java_proposals_texts>>.
 
 [[img-java_proposals_texts, Figure Proposals in a TEXTS.get()]]
 .Proposals corresponding to NLS Support.
