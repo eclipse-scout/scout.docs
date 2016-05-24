@@ -18,7 +18,7 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationCreatePermissi
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationReadPermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationSearchFormData;
-import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
+import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -31,8 +31,8 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 public class OrganizationService implements IOrganizationService {
 
   @Override
-  public OrganizationTablePageData getTableData(SearchFilter filter) {
-    OrganizationTablePageData pageData = new OrganizationTablePageData();
+  public OrganizationPageData getTableData(SearchFilter filter) {
+    OrganizationPageData pageData = new OrganizationPageData();
     OrganizationSearchFormData searchData = (OrganizationSearchFormData) filter.getFormData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.ORGANIZATION_PAGE_SELECT);

@@ -77,8 +77,9 @@ public class Desktop extends AbstractDesktop {
       }
     }
   }
-  //tag::DesktopInit[]
 
+  // tag::DesktopInit[]
+  // outline buttons of the application
   @Order(1)
   public class ContactOutlineViewButton extends AbstractOutlineViewButton {
     //end::DesktopInit[]
@@ -132,6 +133,7 @@ public class Desktop extends AbstractDesktop {
     //tag::DesktopInit[]
   }
 
+  // top level menus for the header area of the application
   @Order(1)
   public class QuickAccessMenu extends AbstractMenu {
     //end::DesktopInit[]

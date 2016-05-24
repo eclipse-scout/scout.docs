@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNode
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-public class OrganizationDetailsNodePage extends AbstractPageWithNodes {
+public class OrganizationDetailsPage extends AbstractPageWithNodes {
 
   private String organizationId;
 

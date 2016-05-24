@@ -2,7 +2,7 @@ package org.eclipse.scout.contacts.events.client.event;
 
 import java.util.List;
 
-import org.eclipse.scout.contacts.client.organization.OrganizationDetailsNodePage;
+import org.eclipse.scout.contacts.client.organization.OrganizationDetailsPage;
 import org.eclipse.scout.rt.client.extension.ui.desktop.outline.pages.AbstractPageWithNodesExtension;
 import org.eclipse.scout.rt.client.extension.ui.desktop.outline.pages.PageWithNodesChains.PageWithNodesCreateChildPagesChain;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -12,9 +12,9 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
  *
  * @author mzi
  */
-public class EventPageExtension extends AbstractPageWithNodesExtension<OrganizationDetailsNodePage> {
+public class EventPageExtension extends AbstractPageWithNodesExtension<OrganizationDetailsPage> {
 
-  public EventPageExtension(OrganizationDetailsNodePage owner) {
+  public EventPageExtension(OrganizationDetailsPage owner) {
     super(owner);
   }
 

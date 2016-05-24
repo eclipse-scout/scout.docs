@@ -12,7 +12,7 @@ package org.eclipse.scout.contacts.events.client.event;
 
 import java.util.Set;
 
-import org.eclipse.scout.contacts.client.organization.OrganizationDetailsNodePage;
+import org.eclipse.scout.contacts.client.organization.OrganizationDetailsPage;
 import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
@@ -57,7 +57,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
   @Override
   protected void execInitPage() {
-    OrganizationDetailsNodePage organizationParentPage = getParentNode(OrganizationDetailsNodePage.class);
+    OrganizationDetailsPage organizationParentPage = getParentNode(OrganizationDetailsPage.class);
 
     if (organizationParentPage != null) {
       setOrganizationId(organizationParentPage.getOrganizationId());

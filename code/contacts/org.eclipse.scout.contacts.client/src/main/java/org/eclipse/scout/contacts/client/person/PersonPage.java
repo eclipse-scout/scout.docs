@@ -62,6 +62,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
 
   //tag::PageInit[]
   public class Table extends AbstractTable {
+    // container class to hold columns and other elements for this table page <4>
     //end::PageInit[]
 
     public LastNameColumn getLastNameColumn() {
@@ -102,20 +103,23 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
       return getColumnSet().getColumnByClass(PersonIdColumn.class);
     }
 
+    //tag::PersonIdColumn[]
     @Order(1)
     public class PersonIdColumn extends AbstractStringColumn {
 
-      @Override
+      @Override // <1>
       protected boolean getConfiguredDisplayable() {
         return false;
       }
 
-      @Override
+      @Override // <2>
       protected boolean getConfiguredPrimaryKey() {
         return true;
       }
     }
+    //end::PersonIdColumn[]
 
+    //tag::FirstNameColumn[]
     @Order(2)
     public class FirstNameColumn extends AbstractStringColumn {
 
@@ -129,6 +133,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
         return 120;
       }
     }
+    //end::FirstNameColumn[]
 
     @Order(3)
     public class LastNameColumn extends AbstractStringColumn {
@@ -167,6 +172,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
       }
     }
 
+    //tag::PhoneColumn[]
     @Order(6)
     public class PhoneColumn extends AbstractStringColumn {
 
@@ -175,7 +181,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
         return TEXTS.get("Phone");
       }
 
-      @Override
+      @Override // <1>
       protected boolean getConfiguredVisible() {
         return false;
       }
@@ -185,6 +191,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
         return 120;
       }
     }
+    //end::PhoneColumn[]
 
     @Order(7)
     public class MobileColumn extends AbstractStringColumn {

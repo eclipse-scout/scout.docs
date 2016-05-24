@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
-import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
+import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -34,20 +34,23 @@ import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-@PageData(OrganizationTablePageData.class)
-public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTablePage.Table> {
+//tag::PageInit[]
+@PageData(OrganizationPageData.class)
+public class OrganizationPage extends AbstractPageWithTable<OrganizationPage.Table> {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Organizations");
+    return TEXTS.get("Organizations"); // <1>
   }
+  //end::PageInit[]
 
   @Override
   protected IPage<?> execCreateChildPage(ITableRow row) {
-    OrganizationDetailsNodePage childPage = new OrganizationDetailsNodePage();
+    OrganizationDetailsPage childPage = new OrganizationDetailsPage();
     childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row));
     return childPage;
   }
+  //tag::PageInit[]
 
   @Override
   protected void execLoadData(SearchFilter filter) {
@@ -55,6 +58,8 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
   }
 
   public class Table extends AbstractTable {
+    // container class to hold columns and other elements for this table page
+    //end::PageInit[]
 
     public NameColumn getNameColumn() {
       return getColumnSet().getColumnByClass(NameColumn.class);
@@ -141,6 +146,11 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       }
 
       @Override
+      protected boolean getConfiguredVisible() {
+        return false;
+      }
+
+      @Override
       protected int getConfiguredWidth() {
         return 200;
       }
@@ -209,7 +219,9 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
         form.startNew();
       }
     }
+    //tag::PageInit[]
   }
+  //end::PageInit[]
 
   @Override
   protected String getConfiguredIconId() {
@@ -220,4 +232,6 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
   protected Class<? extends ISearchForm> getConfiguredSearchForm() {
     return OrganizationSearchForm.class;
   }
+  //tag::PageInit[]
 }
+//end::PageInit[]

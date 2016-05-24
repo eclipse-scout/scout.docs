@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.client.contact;
 import java.util.List;
 
 import org.eclipse.scout.contacts.client.Icons;
-import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
+import org.eclipse.scout.contacts.client.organization.OrganizationPage;
 import org.eclipse.scout.contacts.client.person.PersonPage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -23,17 +23,24 @@ import org.eclipse.scout.rt.shared.TEXTS;
 //tag::OutlineInit[]
 public class ContactOutline extends AbstractOutline {
 
+  //tag::execCreateChildPagesPerson[]
+  @Override
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
+    // pages to be shown in the navigation area of this outline
+    //end::OutlineInit[]
+    pageList.add(new PersonPage()); // <1>
+    //end::execCreateChildPagesPerson[]
+    //tag::execCreateChildPagesOrganization[]
+    pageList.add(new OrganizationPage());
+    //end::execCreateChildPagesOrganization[]
+    //tag::execCreateChildPagesPerson[]
+    //tag::OutlineInit[]
+  }
+  //end::execCreateChildPagesPerson[]
+
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Contacts");
-  }
-
-  @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) {
-    //end::OutlineInit[]
-    pageList.add(new PersonPage());
-    pageList.add(new OrganizationTablePage());
-    //tag::OutlineInit[]
   }
 
   @Override
