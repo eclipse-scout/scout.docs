@@ -16,9 +16,9 @@ import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationCreatePermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
+import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationReadPermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationSearchFormData;
-import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -30,11 +30,16 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 
 public class OrganizationService implements IOrganizationService {
 
+  //tag::getTableData[]
   @Override
   public OrganizationPageData getTableData(SearchFilter filter) {
     OrganizationPageData pageData = new OrganizationPageData();
+    //end::getTableData[]
     OrganizationSearchFormData searchData = (OrganizationSearchFormData) filter.getFormData();
 
+    //tag::getTableData[]
+    // fetch database data and store it into the pageData object
+    //end::getTableData[]
     StringBuilder sqlSelect = new StringBuilder(SQLs.ORGANIZATION_PAGE_SELECT);
     StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");
 
@@ -49,8 +54,10 @@ public class OrganizationService implements IOrganizationService {
 
     SQL.selectInto(sql, searchData, new NVPair("page", pageData));
 
+    //tag::getTableData[]
     return pageData;
   }
+  //end::getTableData[]
 
   @Override
   public OrganizationFormData create(OrganizationFormData formData) {

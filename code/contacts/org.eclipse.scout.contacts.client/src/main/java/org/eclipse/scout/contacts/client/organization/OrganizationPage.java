@@ -52,10 +52,12 @@ public class OrganizationPage extends AbstractPageWithTable<OrganizationPage.Tab
   }
   //tag::PageInit[]
 
+  //tag::execLoadData[]
   @Override
   protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IOrganizationService.class).getTableData(filter));
   }
+  //end::execLoadData[]
 
   public class Table extends AbstractTable {
     // container class to hold columns and other elements for this table page

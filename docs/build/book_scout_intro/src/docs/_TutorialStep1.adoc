@@ -152,7 +152,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 ----
 
 [[sec-contacts_summary]]
-==== What have we done so far?
+==== What have we achieved?
 
 In the first step of the "Contacts" tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps. 
 

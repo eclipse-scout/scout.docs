@@ -1,3 +1,152 @@
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
+
+This tutorial step shows how Scout applications can interact with databases. 
+In the context of the "Contacts" tutorial we will use a https://db.apache.org/derby/index.html[Derby database]. 
+The choice of Derby as a tutorial database is based on the fact that no additional installation is required and it is possible to work with in-memory databases.   
+
+At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server. 
+As the Scout "Contacts" application implements a clean layering, only the Scout backend server connects to the database. 
+We can therefore completely focus on the Scout backend server to provided this functionality. 
+
+Before we start to add and implement the components to access a database we review the current state of the implementation in section <<sec-contacts_jdbc_starting>>.
+The necessary components to create and access a database are then detailed in the sections listed below.
+
+* <<sec-contacts_jdbc_properties>>
+* <<sec-contacts_jdbc_sql>>
+* <<sec-contacts_jdbc_initial_db>>
+* <<sec-contacts_jdbc_fetching_data>>
+
+Finally, the state of the "Contacts" application after this tutorial is summarized in <<sec-contacts_jdbc_summary>>.
+
+[[sec-contacts_jdbc_starting]]
+==== What is our Starting Position?
+
+During the creation of the person page and the organization page the Scout wizards created more than just Scout pages that are visible in the user interface. 
+It also added corresponding classes in the shared module and the server module of the "Contacts" application. 
+
+The new page wizard basically added the complete round trip from the client (frontend server) to the server (backend server) and back.  
+Using the organization page as an example, the setup created by the page wizard involves the following classes.
+ 
+* Class `OrganizationPage` with method `execLoadData` in the client module  
+* The service interface `IOrganizationService` and class `OrganizationPageData` in the shared module
+* Class `OrganizationService` with the method stub `getTableData` in the server module
+
+[[lst-contacts_organization_page_loaddata, Listing loading data from the server]]
+[source,java]
+.Accessing the "Contacts" backend server to fetch organization data.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/organization/OrganizationPage.java[tags=execLoadData]
+----
+
+On the client side the server roundtrip is implemented in method `execLoadData` as shown in <<lst-contacts_organization_page_loaddata>>.
+This roundtrip between class `OrganizationPage` and `OrganizationService` works through the following steps.
+
+. `BEANS.get(IOrganizationService.class)` returns a reference to a client proxy service 
+. Method `getTableData(filter)` is executed on the corresponding server service
+. This method returns the organization data in the form of an `OrganizationPageData` object
+. Method `importPageData` transfers the data from the page data into the table of the user interface
+
+On the server side fetching the data from the database will be implemented in class `OrganizationService` according to <<lst-contacts_organization_page_getdata>>. 
+
+[[lst-contacts_organization_page_getdata, Listing getTableData]]
+[source,java]
+.Method getTableData to access the database and map the data into a pageData object.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData]
+----
+
+At the end of this tutorial step we will be able to implement the database access logic in the `getTableData` methods of the server classes `OrganizationService` and `PersonService`. 
+
+[[sec-contacts_jdbc_properties]]
+==== Adding Configuration Properties
+
+don't want to hardwire database setup. connection string, in-memory, ...
+instead keep configuration in a config file
+this allows to change the setup without any need to reprogram the contacts application
+necessary parameters
+
+[[lst-contacts_database_props, Listing database properties]]
+[source]
+.Properties relevant for creating and accessing the database.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
+----
+
+
+configuration properties as bean/services
+central configuration class
+default file/syntax to store configs
+
+config file as source code
+
+add class ConfigProperties
+inner classes define values and provide access to values
+framework resolves stuff via class ConfigUtility
+
+[[sec-contacts_jdbc_sql]]
+==== Adding SQL Statements and a Scout SQL Service 
+
+
+[[sec-contacts_jdbc_initial_db]]
+==== Creating an Initial Database
+
+[[sec-contacts_jdbc_fetching_data]]
+==== Fetching Person and Organization Data 
+
+
+[[sec-contacts_jdbc_summary]]
+==== What have we achieved?
+
+functionality:
+
+* DBSetupService
+
+* Scout beans (mini intro)
+* Scout configuration properties
+* Scout logging
+* Scout sql service
+* Scout platform 
+
+DBSetupService
+   
+focus on scout backend application
+correspond to maven server module
+
+config properties
+@ApplicationScoped
+public interface IConfigProperty<DATA_TYPE> {
+
+
+derby:
+
+DerbySqlService -> AbstractDerbySqlService -> ... -> IService with @ApplicationScoped 
+
+* connect url https://db.apache.org/derby/docs/10.11/ref/rrefjdbc37352.html[https://db.apache.org/derby/docs/10.11/ref/rrefjdbc37352.html]
+
+basic ideas: work with in memory database for tutorial. keep database access configurable.
+goal: to work with a database stored on disk only changes to the properties file are necessary, code change required. 
+
+* connect string from neon code: "jdbc:derby:memory:contacts-database" (and add attribute ";create=true")
+* connect for local db on disk (mars tutorial): "jdbc:derby:c:\\DerbyDB" (don't user single backslashes in path name on windows boxes)
+* work with attributes ";user=<username>;password=<password>" for password protection  
+
+mini intro to properties files
+* add class ConfigProperties
+
+* copy & paste class SuperUserRunContextProducer from demo app to tutorial app
+
+* add  `org.eclipse.scout.contacts.server.sql` Java package to scout backend server
+
+* add class `DerbySqlService`
+
+* copy & paste class SQL from demo app to tutorial app
+
+mini intro to scout platform & bean manager and logging
+
+* add class `DBSetupService`
+
+mini intro to services created by new page wizard and link between page and service
+
+adapt method getTableData in PersonService and OrganizationService

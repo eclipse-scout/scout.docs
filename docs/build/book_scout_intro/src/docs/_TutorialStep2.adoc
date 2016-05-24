@@ -216,7 +216,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <1> The pages will appear in the user interface according to the order in which they are added to the outline.
 
 [[sec-contacts_summary_step_2]]
-==== What have we done in Tutorial Step 2?
+==== What have we achieved?
 
 In the second step of the "Contacts" tutorial we have created a person page and an organization page to display data of persons and organizations. 
 

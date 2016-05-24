@@ -44,7 +44,7 @@ public final class ConfigProperties {
 
     @Override
     public String getKey() {
-      return "contacts.database.schema.autocreate";
+      return "contacts.database.autocreate";
     }
   }
 
@@ -59,7 +59,7 @@ public final class ConfigProperties {
 
     @Override
     public String getKey() {
-      return "contacts.database.data.autopopulate";
+      return "contacts.database.autopopulate";
     }
   }
 
