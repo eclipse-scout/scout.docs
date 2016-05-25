@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.server;
+package org.eclipse.scout.contacts.server.sql;
 
 import javax.security.auth.Subject;
 
@@ -16,41 +16,26 @@ import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractSubjectConfigProperty;
 
-// tag::databaseProperties[]
-public final class ConfigProperties {
-
-  private ConfigProperties() {
-  }
-
-  public static class JdbcMappingNameProperty extends AbstractStringConfigProperty {
-
-    @Override
-    protected String getDefaultValue() {
-      return "jdbc:derby:memory:contacts-database";
-    }
-
-    @Override
-    public String getKey() {
-      return "contacts.database.jdbc.mapping.name";
-    }
-  }
+// tag::structure[]
+public class DatabaseProperties {
 
   public static class DatabaseAutoCreateProperty extends AbstractBooleanConfigProperty {
+    // defines default value and key
 
     @Override
     protected Boolean getDefaultValue() {
-      return Boolean.TRUE;
+      return Boolean.TRUE; // <1>
     }
 
     @Override
     public String getKey() {
-      return "contacts.database.autocreate";
+      return "contacts.database.autocreate"; // <2>
     }
   }
 
-  // end::databaseProperties[]
-
   public static class DatabaseAutoPopulateProperty extends AbstractBooleanConfigProperty {
+    // defines default value and key
+    // end::structure[]
 
     @Override
     protected Boolean getDefaultValue() {
@@ -61,10 +46,28 @@ public final class ConfigProperties {
     public String getKey() {
       return "contacts.database.autopopulate";
     }
+    // tag::structure[]
   }
 
-  // tag::databaseProperties[]
+  public static class JdbcMappingNameProperty extends AbstractStringConfigProperty {
+    // defines default value and key
+    // end::structure[]
+
+    @Override
+    protected String getDefaultValue() {
+      return "jdbc:derby:memory:contacts-database";
+    }
+
+    @Override
+    public String getKey() {
+      return "contacts.database.jdbc.mapping.name";
+    }
+    // tag::structure[]
+  }
+
   public static class SuperUserSubjectProperty extends AbstractSubjectConfigProperty {
+    // defines default value and key
+    // end::structure[]
 
     @Override
     protected Subject getDefaultValue() {
@@ -75,6 +78,7 @@ public final class ConfigProperties {
     public String getKey() {
       return "contacts.superuser";
     }
+    // tag::structure[]
   }
 }
-//tag::databaseProperties[]
+// end::structure[]

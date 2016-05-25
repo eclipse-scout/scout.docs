@@ -8,14 +8,14 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.server;
+package org.eclipse.scout.contacts.server.sql;
 
 import java.util.concurrent.Callable;
 
 import javax.annotation.PostConstruct;
 import javax.security.auth.Subject;
 
-import org.eclipse.scout.contacts.server.ConfigProperties.SuperUserSubjectProperty;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.SuperUserSubjectProperty;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;

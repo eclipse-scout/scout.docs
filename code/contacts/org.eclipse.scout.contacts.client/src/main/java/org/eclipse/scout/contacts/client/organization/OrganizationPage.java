@@ -24,7 +24,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
-import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -230,10 +229,6 @@ public class OrganizationPage extends AbstractPageWithTable<OrganizationPage.Tab
     return AbstractIcons.World;
   }
 
-  @Override
-  protected Class<? extends ISearchForm> getConfiguredSearchForm() {
-    return OrganizationSearchForm.class;
-  }
   //tag::PageInit[]
 }
 //end::PageInit[]

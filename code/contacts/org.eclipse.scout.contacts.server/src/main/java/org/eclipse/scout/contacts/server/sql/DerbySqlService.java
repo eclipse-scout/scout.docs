@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.server.sql;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.eclipse.scout.contacts.server.ConfigProperties;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
@@ -21,25 +20,27 @@ import org.eclipse.scout.rt.platform.exception.PlatformExceptionTranslator;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 
 @Order(1950)
-// tag::derbyService[]
+// tag::service[]
 public class DerbySqlService extends AbstractDerbySqlService {
 
   @Override
   protected String getConfiguredJdbcMappingName() {
-    String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
-    return jdbcMappingName + ";create=true";
+    String mappingName = CONFIG.getPropertyValue(
+        DatabaseProperties.JdbcMappingNameProperty.class);
+
+    return mappingName + ";create=true"; // <1>
   }
-  // end::derbyService[]
+  // end::service[]
 
   public void dropDB() {
     try {
-      String jdbcMappingName = CONFIG.getPropertyValue(ConfigProperties.JdbcMappingNameProperty.class);
+      String jdbcMappingName = CONFIG.getPropertyValue(DatabaseProperties.JdbcMappingNameProperty.class);
       DriverManager.getConnection(jdbcMappingName + ";drop=true");
     }
     catch (SQLException e) {
       BEANS.get(PlatformExceptionTranslator.class).translate(e);
     }
   }
-// tag::derbyService[]
+// tag::service[]
 }
-// end::derbyService[]
+// end::service[]

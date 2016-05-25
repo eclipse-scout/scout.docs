@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.scout.contacts.server.organization.OrganizationService;
-import org.eclipse.scout.contacts.server.sql.DBSetupService;
+import org.eclipse.scout.contacts.server.sql.DatabaseSetupService;
 import org.eclipse.scout.contacts.server.sql.DerbySqlService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -30,7 +30,7 @@ public class OrganizationServiceTest {
 
   @BeforeClass
   public static void setupDatabase() {
-    BEANS.get(DBSetupService.class).createOrganizationTable();
+    BEANS.get(DatabaseSetupService.class).createOrganizationTable();
   }
 
   @AfterClass

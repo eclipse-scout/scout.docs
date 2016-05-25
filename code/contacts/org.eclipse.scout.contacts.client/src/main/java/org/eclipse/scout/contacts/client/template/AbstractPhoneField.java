@@ -16,12 +16,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-// TODO [mzi] fix this class
 @FormData(value = AbstractPhoneFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractPhoneField extends AbstractStringField {
 
-//  private PhoneNumberUtil util = PhoneNumberUtil.getInstance();
-//  private PhoneNumber number = null;
   private String country = null;
 
   @Override
@@ -34,23 +31,8 @@ public abstract class AbstractPhoneField extends AbstractStringField {
     clearErrorStatus();
 
     if (StringUtility.isNullOrEmpty(rawValue)) {
-//      number = null;
       return null;
     }
-
-//    try {
-//      number = util.parse(rawValue, getCountry());
-//      setCountry(m_util.getRegionCodeForNumber(m_number));
-//    }
-//    catch (NumberParseException e) {
-//      throw new ProcessingException(TEXTS.get("PhoneNumberParseException", rawValue, e.getMessage()));
-//    }
-//
-//    if (!m_util.isValidNumber(m_number)) {
-//      setErrorStatus(new ProcessingStatus(TEXTS.get("NoValidPhoneNumberException", rawValue, util.getRegionCodeForNumber(m_number)), IProcessingStatus.WARNING));
-//    }
-//
-//    return util.format(m_number, PhoneNumberFormat.INTERNATIONAL);
 
     return rawValue;
   }

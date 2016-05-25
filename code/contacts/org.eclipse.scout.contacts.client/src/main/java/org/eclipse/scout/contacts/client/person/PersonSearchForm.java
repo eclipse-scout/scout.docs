@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
-import org.eclipse.scout.contacts.client.organization.OrganizationSearchForm.MainBox.ResetButton;
+import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.ResetButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.SearchButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.FieldBox;

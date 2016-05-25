@@ -29,7 +29,7 @@ public interface SQLs {
       + "             url VARCHAR(64), "
       + "             comment VARCHAR(1024))";
 
-  String EVENT_INSERT_SAMPLE_DATA = ""
+  String EVENT_INSERT_SAMPLE = ""
       + "INSERT       "
       + "INTO         EVENT "
       + "            (event_id, "
@@ -38,14 +38,25 @@ public interface SQLs {
       + "             date_end, "
       + "             city, "
       + "             country, "
-      + "             url) "
-      + "VALUES      (:eventUuid, "
-      + "             :title, "
-      + "             :starts, "
-      + "             :ends, "
-      + "             :city, "
-      + "             :country, "
-      + "             :url)";
+      + "             url) ";
+
+  String EVENT_INSERT_VALUES_01 = ""
+      + "VALUES      ('evt01', "
+      + "             'JavaLand 2016', "
+      + "             '2016-03-08 09:00:00', "
+      + "             '2016-03-10 17:00:00', "
+      + "             'Bruehl', "
+      + "             'DE', "
+      + "             'https://www.javaland.eu/de/archiv-2016/')";
+
+  String EVENT_INSERT_VALUES_02 = ""
+      + "VALUES      ('evt02', "
+      + "             'EclipseCon Europe 2016', "
+      + "             '2016-10-25 09:00:00', "
+      + "             '2016-10-27 17:00:00', "
+      + "             'Ludwigsburg', "
+      + "             'DE', "
+      + "             'https://www.eclipsecon.org/europe2016/')";
 
   String PARTICIPANT_CREATE_TABLE = ""
       + "CREATE       "
@@ -54,13 +65,15 @@ public interface SQLs {
       + "              person_id VARCHAR(64) NOT NULL, "
       + "PRIMARY KEY  (event_id, person_id))";
 
-  String PARTICIPANT_INSERT_SAMPLE_DATA = ""
+  String PARTICIPANT_INSERT_SAMPLE = ""
       + "INSERT       "
       + "INTO         PARTICIPANT "
       + "            (event_id, "
-      + "             person_id) "
-      + "VALUES      (:eventUuid, "
-      + "             :personUuid)";
+      + "             person_id) ";
+
+  String PARTICIPANT_INSERT_VALUES_01 = "VALUES ('evt01', 'prs01')";
+  String PARTICIPANT_INSERT_VALUES_02 = "VALUES ('evt02', 'prs01')";
+  String PARTICIPANT_INSERT_VALUES_03 = "VALUES ('evt01', 'prs02')";
 
   String PERSON_EVENT_SELECT = ""
       + "SELECT       e.event_id, "

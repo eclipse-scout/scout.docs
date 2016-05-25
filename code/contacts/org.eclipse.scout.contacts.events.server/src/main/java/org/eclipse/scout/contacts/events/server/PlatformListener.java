@@ -10,28 +10,25 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.events.server;
 
-import java.util.Date;
 import java.util.Set;
-import java.util.UUID;
 
 import org.eclipse.scout.contacts.events.server.sql.SQLs;
 import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionData;
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
-import org.eclipse.scout.contacts.server.ConfigProperties;
-import org.eclipse.scout.contacts.server.SuperUserRunContextProducer;
-import org.eclipse.scout.contacts.server.sql.DBSetupService;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties;
+import org.eclipse.scout.contacts.server.sql.SuperUserRunContextProducer;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.holders.StringArrayHolder;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
-import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
 import org.slf4j.Logger;
@@ -40,9 +37,6 @@ import org.slf4j.LoggerFactory;
 @Order(20)
 public class PlatformListener implements IPlatformListener {
   private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
-
-  private static final UUID EVENT1 = UUID.randomUUID();
-  private static final UUID EVENT2 = UUID.randomUUID();
 
   @Override
   public void stateChanged(PlatformEvent event) {
@@ -53,17 +47,19 @@ public class PlatformListener implements IPlatformListener {
   }
 
   public void autoCreateDatabase() {
-    if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoCreateProperty.class)) {
+    if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoCreateProperty.class)) {
       try {
-        BEANS.get(SuperUserRunContextProducer.class).produce().run(new IRunnable() {
+        RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
+        IRunnable runnable = new IRunnable() {
 
           @Override
           public void run() throws Exception {
-            Set<String> tables = getExistingTables();
-            createEventTable(tables);
-            createParticipantTable(tables);
+            createEventTable();
+            createParticipantTable();
           }
-        });
+        };
+
+        context.run(runnable);
       }
       catch (RuntimeException e) {
         BEANS.get(ExceptionHandler.class).handle(e);
@@ -79,53 +75,36 @@ public class PlatformListener implements IPlatformListener {
     extensionRegistry.register(PersonFormTabExtensionData.class);
   }
 
-  protected Set<String> getExistingTables() {
-    StringArrayHolder tables = new StringArrayHolder();
-    SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables));
-    return CollectionUtility.hashSet(tables.getValue());
-  }
-
-  private void createEventTable(Set<String> tables) {
-    if (!tables.contains("EVENT")) {
+  public void createEventTable() {
+    if (!getExistingTables().contains("EVENT")) {
       SQL.insert(SQLs.EVENT_CREATE_TABLE);
       LOG.info("Database table 'EVENT' created");
-      if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createEventEntry(EVENT1, "JavaLand 2015", DateUtility.parse("24.03.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("26.03.2015 17:00", "dd.MM.yyyy HH:mm"), "Bruehl", "DE", "http://www.javaland.eu/javaland-2015/");
-        createEventEntry(EVENT2, "EclipseCon Europe 2015", DateUtility.parse("02.11.2015 09:00", "dd.MM.yyyy HH:mm"), DateUtility.parse("05.11.2015 17:00", "dd.MM.yyyy HH:mm"), "Ludwigsburg", "DE", "https://www.eclipsecon.org/europe2015/");
 
+      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE + SQLs.EVENT_INSERT_VALUES_01);
+        SQL.insert(SQLs.EVENT_INSERT_SAMPLE + SQLs.EVENT_INSERT_VALUES_02);
         LOG.info("Database table 'EVENT' populated with sample data");
       }
     }
   }
 
-  private void createEventEntry(UUID eventUuid, String title, Date starts, Date ends, String city, String country, String url) {
-    SQL.insert(SQLs.EVENT_INSERT_SAMPLE_DATA, new NVPair("eventUuid", eventUuid.toString()),
-        new NVPair("title", title),
-        new NVPair("starts", starts),
-        new NVPair("ends", ends),
-        new NVPair("city", city),
-        new NVPair("country", country),
-        new NVPair("url", url));
-  }
-
-  private void createParticipantTable(Set<String> tables) {
-    if (!tables.contains("PARTICIPANT")) {
+  protected void createParticipantTable() {
+    if (!getExistingTables().contains("PARTICIPANT")) {
       SQL.insert(SQLs.PARTICIPANT_CREATE_TABLE);
       LOG.info("Database table 'PARTICIPANT' created");
 
-      if (CONFIG.getPropertyValue(ConfigProperties.DatabaseAutoPopulateProperty.class)) {
-        createParticipantEntry(EVENT1, DBSetupService.PERSON02);
-        createParticipantEntry(EVENT1, DBSetupService.PERSON01);
-        createParticipantEntry(EVENT2, DBSetupService.PERSON01);
-
+      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_01);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_02);
+        SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_03);
         LOG.info("Database table 'PARTICIPANT' populated with sample data");
       }
     }
   }
 
-  private void createParticipantEntry(UUID eventUuid, UUID personUuid) {
-    SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE_DATA,
-        new NVPair("eventUuid", eventUuid.toString()),
-        new NVPair("personUuid", personUuid.toString()));
+  private Set<String> getExistingTables() {
+    StringArrayHolder tables = new StringArrayHolder();
+    SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables));
+    return CollectionUtility.hashSet(tables.getValue());
   }
 }

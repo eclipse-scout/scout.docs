@@ -10,17 +10,19 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.sql;
 
-// tag::createDB[]
+//tag::createDB[]
+//tag::organizationListing[]
 public interface SQLs {
+  //end::organizationListing[]
 
   String SELECT_TABLE_NAMES = ""
       + "SELECT   UPPER(tablename) "
       + "FROM     sys.systables "
-      + "INTO     :result";
+      + "INTO     :result"; // <1>
 
   String ORGANIZATION_CREATE_TABLE = ""
       + "CREATE   TABLE ORGANIZATION "
-      + "         (organization_id VARCHAR(64) NOT NULL CONSTRAINT ORGANIZATION_PK PRIMARY KEY, "
+      + "         (organization_id VARCHAR(64) NOT NULL CONSTRAINT ORGANIZATION_PK PRIMARY KEY,"
       + "          name VARCHAR(64), "
       + "          logo_url VARCHAR(512), "
       + "          url VARCHAR(64), "
@@ -84,20 +86,22 @@ public interface SQLs {
 
   String AND_LIKE_CAUSE = "AND UPPER(%s) LIKE UPPER(:%s || '%s')";
 
+  //tag::organizationListing[]
   String ORGANIZATION_PAGE_SELECT = ""
       + "SELECT   organization_id, "
       + "         name, "
       + "         city, "
       + "         country, "
       + "         url "
-      + "FROM     ORGANIZATION";
+      + "FROM     ORGANIZATION ";
 
   String ORGANIZATION_PAGE_DATA_SELECT_INTO = ""
-      + "INTO     :{page.organizationId}, "
+      + "INTO     :{page.organizationId}, " // <1>
       + "         :{page.name}, "
       + "         :{page.city}, "
       + "         :{page.country}, "
       + "         :{page.homepage}";
+  //end::organizationListing[]
 
   String ORGANIZATION_INSERT = ""
       + "INSERT   INTO "
@@ -149,7 +153,7 @@ public interface SQLs {
       + "         mobile, "
       + "         email, "
       + "         organization_id "
-      + "FROM     PERSON";
+      + "FROM     PERSON ";
 
   String PERSON_PAGE_DATA_SELECT_INTO = ""
       + "INTO     :{page.personId}, "
@@ -223,22 +227,32 @@ public interface SQLs {
       + "         comment = :comments "
       + "WHERE    person_id = :personId";
 
-  String ORGANIZATION_INSERT_SAMPLE_DATA = ""
+  String ORGANIZATION_INSERT_SAMPLE = ""
       + "INSERT   INTO ORGANIZATION "
       + "        (organization_id, "
       + "         name, "
       + "         city, "
       + "         country, "
       + "         url, "
-      + "         logo_url) "
-      + "VALUES  (:organizationUuid, "
-      + "         :name, "
-      + "         :city, "
-      + "         :country, "
-      + "         :url, "
-      + "         :logoUrl)";
+      + "         logo_url) ";
 
-  String PERSON_INSERT_SAMPLE_DATA = ""
+  String ORGANIZATION_VALUES_01 = ""
+      + "VALUES  ('org01', "
+      + "         'Alice''s Adventures in Wonderland', "
+      + "         'London', "
+      + "         'GB', "
+      + "         'http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland', "
+      + "         'https://upload.wikimedia.org/wikipedia/en/3/3f/Alice_in_Wonderland%2C_cover_1865.jpg')";
+
+  String ORGANIZATION_VALUES_02 = ""
+      + "VALUES  ('org02', "
+      + "         'BSI Business Systems Integration AG', "
+      + "         'Daettwil, Baden', "
+      + "         'CH', "
+      + "         'https://www.bsi-software.com', "
+      + "         'https://wiki.eclipse.org/images/4/4f/Bsiag.png')";
+
+  String PERSON_INSERT_SAMPLE = ""
       + "INSERT   INTO PERSON "
       + "         (person_id, "
       + "          first_name, "
@@ -249,17 +263,34 @@ public interface SQLs {
       + "          city, "
       + "          country, "
       + "          position, "
-      + "          organization_id) "
-      + "VALUES   (:personUuid, "
-      + "          :firstName, "
-      + "          :lastName, "
-      + "          :pictureUrl, "
-      + "          :dob, "
-      + "          :gender, "
-      + "          :city, "
-      + "          :country, "
-      + "          :position, "
-      + "          :organizationUuid)";
-// tag::createDB[]
+      + "          organization_id) ";
+
+  String PERSON_VALUES_01 = ""
+      + "VALUES   ('prs01', "
+      + "          'Alice', "
+      + "          null, "
+      + "          'http://www.uergsel.de/uploads/Alice.png', "
+      + "          '26.11.1865', "
+      + "          'F', "
+      + "          'Daresbury, Cheshire', "
+      + "          'GB', "
+      + "          'The curious girl', "
+      + "          'org01')";
+
+  String PERSON_VALUES_02 = ""
+      + "VALUES   ('prs02', "
+      + "          'Rabbit', "
+      + "          'White', "
+      + "          'https://upload.wikimedia.org/wikipedia/commons/4/42/The_White_Rabbit_%28Tenniel%29_-_The_Nursery_Alice_%281890%29_-_BL.jpg', "
+      + "          '26.11.1865', "
+      + "          'M', "
+      + "          'Daresbury, Cheshire', "
+      + "          'GB', "
+      + "          null, "
+      + "          'org01')";
+
+  // tag::organizationListing[]
+  // tag::createDB[]
 }
 // end::createDB[]
+// end::organizationListing[]

@@ -96,8 +96,9 @@ For the person page of the "Contacts" application we will add the following colu
 * *City*: String column. Class name: `CityColumn` 
 * *Country*: String column. Class name: `CountryColumn` 
 * *Phone*: String column, not visible per default. Class name: `PhoneColumn` 
-* *Mobile Phone*: String column, not visible per default. Class name: `MobilePhoneColumn` 
+* *Mobile Phone*: String column, not visible per default. Class name: `MobileColumn` 
 * *Email*: String column, not visible per default. Class name: `EmailColumn` 
+* *Organization*: String column, not visible per default. Class name: `OrganizationColumn` 
 
 TIP: Use the column class names as indicated above. 
 Working with different names is possible but requires additional work later in the tutorial when the data retrieved from the database is mapped to these column class names.  

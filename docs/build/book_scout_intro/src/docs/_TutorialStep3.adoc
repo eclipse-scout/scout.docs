@@ -2,26 +2,144 @@
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-This tutorial step shows how Scout applications can interact with databases. 
-In the context of the "Contacts" tutorial we will use a https://db.apache.org/derby/index.html[Derby database]. 
-The choice of Derby as a tutorial database is based on the fact that no additional installation is required and it is possible to work with in-memory databases.   
+This tutorial step shows how Scout applications can interact with databases via JDBC. 
+As the "Contacts" application implements a clean layering, only the Scout backend server connects to the database. 
+We can therefore completely focus on the Scout backend in this part of the tutorial.  
 
-At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server. 
-As the Scout "Contacts" application implements a clean layering, only the Scout backend server connects to the database. 
-We can therefore completely focus on the Scout backend server to provided this functionality. 
+For the "Contacts" application we will work with a https://db.apache.org/derby/index.html[Derby database]. 
+The choice of Derby is based on the fact that no additional installation is required and it is possible to work with in-memory databases.   
 
-Before we start to add and implement the components to access a database we review the current state of the implementation in section <<sec-contacts_jdbc_starting>>.
-The necessary components to create and access a database are then detailed in the sections listed below.
+We start this tutorial step with copying the classes that handle the database creation/access from the full "Contacts" demo application as described in <<sec-contacts_jdbc_infra>>. 
+The added infrastructure is then explained in the sections listed below. 
 
 * <<sec-contacts_jdbc_properties>>
 * <<sec-contacts_jdbc_sql>>
 * <<sec-contacts_jdbc_initial_db>>
-* <<sec-contacts_jdbc_fetching_data>>
 
-Finally, the state of the "Contacts" application after this tutorial is summarized in <<sec-contacts_jdbc_summary>>.
+With the basic infrastructure in place we first review the already existing backend application and answer the question <<sec-contacts_jdbc_starting>>.
+Section <<sec-contacts_jdbc_fetching_data>> then describes how to add the missing pieces.
+
+At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server as summarized in <<sec-contacts_jdbc_summary>>. 
+
+
+[[sec-contacts_jdbc_infra]]
+==== Adding the Infrastructure
+
+This section describes the installation of the necessary components and classes that handle the database creation/access of the "Contacts" application.
+
+To add the support for the Scout JDBC components and the Derby database we first need to declare the corresponding dependencies in the pom.xml file of the Maven server module. 
+This can be done using the following steps.
+
+* Expanding the Maven module `org.eclipse.scout.contacts.server` in the Eclipse Package Explorer
+* Open the `pom.xml` file (use a double click on the file in the package explorer) and switch to the "pom.xml" tab in the Maven POM Editor.
+* Add the database related dependencies according to <<lst-contacts_db_pom>>
+
+[[lst-contacts_db_pom, Listing additional Maven dependencies]]
+[source,xml]
+.The additional dependencies needed in the server pom.xml to use the derby database
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
+----
+
+<1> Add the 'derby' and the 'org.eclipse.scout.rt.server.jdbc' dependencies to the pom.xml of your "Contacts" server module.
+
+The next step is to create the `org.eclipse.scout.contacts.server.sql` package.
+
+* Expand folder `src/main/java` of the Maven server module in the Eclipse Package Explorer
+* Select the existing package `org.eclipse.scout.contacts.server.sql` and hit kbd:[Ctrl+N]
+* This opens the dialog to select a wizard. Enter "package" into the serach field
+* Double click on the Java [element]_Package_ proposal to select the [wizard]_New Java Package_ wizard
+* Enter `org.eclipse.scout.contacts.server.sql` into the [field]_Name_ field of the wizard and click btn:[Finish]
+
+We are now ready to copy the classes related to the database infrastructure from the "Contacts" demo application to our tutorial workspace.  
+
+The simplest way to do this is to open a second Eclipse IDE with the workspace where you have imported the Scout demo applications.
+If you have not done this yet go to the beginning of this tutorial <<cha-large_example>> and catch up now.
+
+In the demo application workspace navigate to the same package `org.eclipse.scout.contacts.server.sql` and copy over all its classes. 
+After copying these classes make sure that the structure of your server Maven module looks as shown in <<img-contacts_tutorial_copied_db_classes>>.
+
+[[img-contacts_tutorial_copied_db_classes, Figure 000]]
+.The copied database classes in the tutorial workspace.
+image::{imgsdir}/contacts_tutorial_copied_db_classes.png[]
+
+The imported classes are described in the following sections. 
+Additional information is provided where these classes are relying on Scout concepts that have not previously been introduced.  
+
+[[sec-contacts_jdbc_properties]]
+==== Configuration Properties
+
+don't want to hardwire database setup. connection string, in-memory, ...
+instead keep configuration in a config file
+this allows to change the setup without any need to reprogram the contacts application
+necessary parameters
+
+inner classes define values and provide access to values
+scout framework reads file at startup and populates property values, if value is not defined in config file, default values of properties are used
+framework resolves stuff via class ConfigUtility
+
+[[lst-contacts_props, Listing config properties]]
+[source,java]
+.Typed properties for the "Contacts" application
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseProperties.java[tags=structure]
+----
+
+<1> Defines the default value of the property that is used if the property is not defined in file config.properties
+<2> Defines the key to be used in file config.properties
+
+property file(s) defined in src/main/resources
+
+[[lst-contacts_database_props, Listing database properties]]
+[source]
+.Properties relevant for creating and accessing the database.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
+----
+
+[[sec-contacts_jdbc_sql]]
+==== The SQL Service and SQL Statements  
+
+[[lst-contacts_derby_service, Listing DerbySqlService]]
+[source,java]
+.The Derby SQL service to connect to the database
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=service]
+----
+
+<1> The attribute 'create=true' is added to create the database on the fly
+
+[[lst-contacts_sql_createdb, Listing SQLs]]
+[source,java]
+.Interface SQLs with the SQL commands for the creation of the database tables.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=createDB]
+----
+
+<1> The syntax ':identifier' adds convenience and is supported by the Scout framework   
+
+[[sec-contacts_jdbc_initial_db]]
+==== The Database Setup Service
+
+[[lst-contacts_dbsetup_service, Listing DatabaseSetupService]]
+[source,java]
+.Class DatabaseSetupService to create the database tables for the "Contacts" application.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DatabaseSetupService.java[tags=service]
+----
+
+<1> The existing tables are stored in the `StringArrayHolder` object named "result". 
+
+Scout class `NVPair` is used to create named objects. 
+These named objects are used by the Scout SQL support to map between SQL strings and objects in the Java source code.  
+Therefore, the identifier "result" in the NVPair object will be connected with the same identifier used in the `SELECT_TABLE_NAMES` statement.
+See <<lst-contacts_sql_createdb>> for the matching usage of "result".
+
 
 [[sec-contacts_jdbc_starting]]
-==== What is our Starting Position?
+==== What is missing?
+
+This section reviews the backend infrastructure that has been created previously and identify the pieces that are missing to fetch person and organization data to send it to the frontend server of the "Contacts" application.    
 
 During the creation of the person page and the organization page the Scout wizards created more than just Scout pages that are visible in the user interface. 
 It also added corresponding classes in the shared module and the server module of the "Contacts" application. 
@@ -57,48 +175,56 @@ On the server side fetching the data from the database will be implemented in cl
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData]
 ----
 
-At the end of this tutorial step we will be able to implement the database access logic in the `getTableData` methods of the server classes `OrganizationService` and `PersonService`. 
+In the next section we will implement the database access logic in the `getTableData` methods of the server classes `OrganizationService` and `PersonService`. 
 
-[[sec-contacts_jdbc_properties]]
-==== Adding Configuration Properties
-
-don't want to hardwire database setup. connection string, in-memory, ...
-instead keep configuration in a config file
-this allows to change the setup without any need to reprogram the contacts application
-necessary parameters
-
-[[lst-contacts_database_props, Listing database properties]]
-[source]
-.Properties relevant for creating and accessing the database.
-----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
-----
-
-
-configuration properties as bean/services
-central configuration class
-default file/syntax to store configs
-
-config file as source code
-
-add class ConfigProperties
-inner classes define values and provide access to values
-framework resolves stuff via class ConfigUtility
-
-[[sec-contacts_jdbc_sql]]
-==== Adding SQL Statements and a Scout SQL Service 
-
-
-[[sec-contacts_jdbc_initial_db]]
-==== Creating an Initial Database
 
 [[sec-contacts_jdbc_fetching_data]]
-==== Fetching Person and Organization Data 
+==== Fetching Organization and Person Data 
+
+We are now ready to fetch data from the Derby database using the available infrastructure and the SQL statements prepared in class `SQLs`. 
+For the implementation of method `getTableData` in class `OrganizationService` we will use the two SQL snippet provided in <<lst-contacts_sql_list_org>>.  
+
+[[lst-contacts_sql_list_org, Listing SELECT FROM ORGANIZATION]]
+[source,java]
+.Interface SQLs with the SQL to fetch the list of organizations with their attributes.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=organizationListing]
+----
+
+<1> The syntax ':{identifier.attribute}' adds convenience to map SQL result sets to Scout page data objects.
+
+Taking advantage of the SQL convenience offered by the Scout framework, we can add the missing functionality with two lines of code.  
+See <<lst-contacts_fetch_orgs>> for the full listing of method `getTableData`. 
+After adding the two additional lines, we update the imports of the classes with pressing kbd:[Ctrl+Shift+O].
+
+[[lst-contacts_fetch_orgs, Listing OrganizationService]]
+[source,java]
+.Method getTableData to access the database and map the data into a pageData object.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/organization/OrganizationService.java[tags=getTableData;allOrgs]
+----
+
+<1> Added line 1: Assembling of the SQL statement
+<2> Added line 2: Fetching the data from the database and storing the result in `pageData`
+
+Note that the identifier "page" in the NVPair object will be mapped to the same identifier used in the `ORGANIZATION_PAGE_DATA_SELECT_INTO` statement.
 
 
 [[sec-contacts_jdbc_summary]]
 ==== What have we achieved?
 
+In the third step of the "Contacts" tutorial we have added the infrastructure to work with a Derby database. 
+The infrastructure is used to create and populate the initial database. 
+In addition person and organization data is now fetched from the database on the "Contacts" backend server and handed to the "Contacts" frontend server via a page data object.   
+
+The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. 
+Person and company data is now visible in the user interface as shown in <<img-contacts_tutorial_result_step_3>>.
+
+[[img-contacts_tutorial_result_step_3, Figure 000]]
+.The "Contacts" application displaying person data at the end of tutorial step 3.
+image::{imgsdir}/contacts_tutorial_result_step_3.png[]
+
+==== TEMP STUFF 
 functionality:
 
 * DBSetupService
@@ -133,20 +259,5 @@ goal: to work with a database stored on disk only changes to the properties file
 * work with attributes ";user=<username>;password=<password>" for password protection  
 
 mini intro to properties files
-* add class ConfigProperties
-
-* copy & paste class SuperUserRunContextProducer from demo app to tutorial app
-
-* add  `org.eclipse.scout.contacts.server.sql` Java package to scout backend server
-
-* add class `DerbySqlService`
-
-* copy & paste class SQL from demo app to tutorial app
 
 mini intro to scout platform & bean manager and logging
-
-* add class `DBSetupService`
-
-mini intro to services created by new page wizard and link between page and service
-
-adapt method getTableData in PersonService and OrganizationService

@@ -21,13 +21,10 @@
     <relativePath></relativePath>
   </parent>
 
-  <!-- tag::DerbyVersion[] -->
   <properties>
     <jdk.source.version>1.8</jdk.source.version>
     <org.eclipse.scout.rt.version>6.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
-    <apache.derby.version>10.11.1.1</apache.derby.version>
   </properties>
-  <!-- end::DerbyVersion[] -->
 
   <groupId>org.eclipse.scout.contacts</groupId>
   <artifactId>org.eclipse.scout.contacts</artifactId>
@@ -54,10 +51,8 @@
     <module>../org.eclipse.scout.contacts.settings_java8</module>
   </modules>
 
-  <!-- tag::DerbyDependency[] -->
   <dependencyManagement>
     <dependencies>
-  <!-- end::DerbyDependency[] -->
       <dependency>
         <groupId>org.eclipse.scout.rt</groupId>
         <artifactId>org.eclipse.scout.rt</artifactId>
@@ -107,17 +102,8 @@
         <artifactId>org.eclipse.scout.contacts.events.server</artifactId>
         <version>${project.version}</version>
       </dependency>
-
-      <!-- Other dependencies -->
-      <!-- tag::DerbyDependency[] -->
-      <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>${apache.derby.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
-  <!-- end::DerbyDependency[] -->
 
   <build>
     <pluginManagement>

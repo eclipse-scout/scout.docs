@@ -18,7 +18,6 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationCreatePermissi
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationReadPermission;
-import org.eclipse.scout.contacts.shared.organization.OrganizationSearchFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -28,32 +27,20 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 
+//tag::getTableData[]
 public class OrganizationService implements IOrganizationService {
 
-  //tag::getTableData[]
   @Override
   public OrganizationPageData getTableData(SearchFilter filter) {
     OrganizationPageData pageData = new OrganizationPageData();
-    //end::getTableData[]
-    OrganizationSearchFormData searchData = (OrganizationSearchFormData) filter.getFormData();
-
-    //tag::getTableData[]
     // fetch database data and store it into the pageData object
     //end::getTableData[]
-    StringBuilder sqlSelect = new StringBuilder(SQLs.ORGANIZATION_PAGE_SELECT);
-    StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");
+    //tag::allOrgs[]
 
-    if (searchData != null) {
-      addToWhere(sqlWhere, searchData.getName().getValue(), "name", "name");
-      addToWhere(sqlWhere, searchData.getLocation().getCity().getValue(), "city", "location.city");
-      addToWhere(sqlWhere, searchData.getLocation().getCountry().getValue(), "country", "location.country");
-      addToWhere(sqlWhere, searchData.getHomepage().getValue(), "url", "homepage");
-    }
+    String sql = SQLs.ORGANIZATION_PAGE_SELECT + SQLs.ORGANIZATION_PAGE_DATA_SELECT_INTO; // <1>
+    SQL.selectInto(sql, new NVPair("page", pageData)); // <2>
 
-    String sql = sqlSelect.append(sqlWhere).append(SQLs.ORGANIZATION_PAGE_DATA_SELECT_INTO).toString();
-
-    SQL.selectInto(sql, searchData, new NVPair("page", pageData));
-
+    //end::allOrgs[]
     //tag::getTableData[]
     return pageData;
   }
@@ -104,10 +91,6 @@ public class OrganizationService implements IOrganizationService {
 
     return formData;
   }
-
-  protected void addToWhere(StringBuilder sqlWhere, String fieldValue, String sqlAttribute, String searchAttribute) {
-    if (StringUtility.hasText(fieldValue)) {
-      sqlWhere.append(String.format(SQLs.AND_LIKE_CAUSE, sqlAttribute, searchAttribute, "%"));
-    }
-  }
+  //tag::getTableData[]
 }
+//end::getTableData[]
