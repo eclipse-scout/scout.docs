@@ -67,16 +67,30 @@ The imported classes are described in the following sections.
 Additional information is provided where these classes are relying on Scout concepts that have not previously been introduced.  
 
 [[sec-contacts_jdbc_properties]]
-==== Configuration Properties
+==== Scout Config Properties
 
-don't want to hardwire database setup. connection string, in-memory, ...
-instead keep configuration in a config file
-this allows to change the setup without any need to reprogram the contacts application
-necessary parameters
+Scout Config properties can greatly improve the flexibility of Scout applications. 
+For the "Contacts" application this feature is used to keep its database setup configurable.   
+Moving from a in-memory setup to a disk based database becomes possible without any reprogramming. 
+It is enough to exchange the parameter values in a properties file.
 
-inner classes define values and provide access to values
-scout framework reads file at startup and populates property values, if value is not defined in config file, default values of properties are used
-framework resolves stuff via class ConfigUtility
+The Scout backend (and frontent) application initializes all defined config properties from matching values found in the file `config.properties` or the default values defined in the config property class. 
+In the case of the "Contacts" application the config property files are located in the subfolder `src/main/resrouces` of the Maven modules that specify the frontend and the backend application.   
+Example entries for the "Contacts" database setup are provided in <<lst-contacts_database_props>>.  
+We can use these entries for the configuration of the "Contacts" backend server. 
+Just add these lines to the file config.properties in Maven module `org.eclipse.scout.contacts.server.app.dev`. 
+
+[[lst-contacts_database_props, Listing database properties]]
+[source]
+.Properties relevant for creating and accessing the database.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
+----
+
+In the Scout framework config properties are always typed and need to implement interface `IConfigProperty`. 
+For commonly used types Scout already provides classes. 
+A boolean property may be created by extending Scout class `AbstractBooleanConfigProperty` as shown in <<lst-contacts_props>>. 
+This listing also shows how thematically related properties can be implemented as inner classes.
 
 [[lst-contacts_props, Listing config properties]]
 [source,java]
@@ -88,17 +102,14 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 <1> Defines the default value of the property that is used if the property is not defined in file config.properties
 <2> Defines the key to be used in file config.properties
 
-property file(s) defined in src/main/resources
-
-[[lst-contacts_database_props, Listing database properties]]
-[source]
-.Properties relevant for creating and accessing the database.
-----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
-----
+Accessing the actual property values in the code is demonstrated in the next section.
 
 [[sec-contacts_jdbc_sql]]
 ==== The SQL Service and SQL Statements  
+
+Accessing databases with the Scout framework is implemented with SQL services that extend base class `AbstractSqlService`. 
+As the "Contacts" application will be working with Derby a Derby SQL service class can be created using the `AbstractDerbySqlService` provided by the Scout framework. 
+The only project specific method is `getConfiguredJdbcMappingName` as implemented in <<lst-contacts_derby_service>>.
 
 [[lst-contacts_derby_service, Listing DerbySqlService]]
 [source,java]
@@ -107,8 +118,29 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/r
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=service]
 ----
 
-<1> The attribute 'create=true' is added to create the database on the fly
+<1> Check the https://db.apache.org/derby/docs/10.11/ref/rrefattrib24612.html[Derby documentation] for additional attributes. 
 
+This listing also demonstrates how to use the config properties in the code.  
+With the property values defined in the previous section the "Contacts" application is working with an in-memory database. 
+
+To change the setup to a disk based version, we would have to change the value for the property `contacts.database.jdbc.mapping.name` 
+from `jdbc:derby:memory:contacts-database` to `jdbc:derby:<path-to-dir>`. 
+For a Windows box a concrete example could look like this: `jdbc:derby:c:\\derby\\contacts-database`. 
+
+Having described the Derby SQL service that we will use in the "Contacts" application the text below discusses how the actual 
+SQL statements are handled.
+For the "Contacts" application all statements used by the application are defined in class `SQLs`. 
+While there are many more options how to organize SQL and Java code this setup has its own advantages. 
+
+* Efficient maintenance as all SQL statements are located in a single place
+* Code completion support in the Eclispe IDE when using the statements    
+* The setup is easy to explain
+
+The SQL statements related to the database structure are provided in <<lst-contacts_sql_createdb>>. 
+The statements (or building blocks of statments) in class `SQLs` are plain SQL in many cases. 
+In the other cases the statement texts include Scout specific syntax extensions with `:` as a prefix character.
+Examples are `:<identifier>` and `:{<identifier>.<attribute>}`.   
+  
 [[lst-contacts_sql_createdb, Listing SQLs]]
 [source,java]
 .Interface SQLs with the SQL commands for the creation of the database tables.
@@ -118,8 +150,25 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 
 <1> The syntax ':identifier' adds convenience and is supported by the Scout framework   
 
+The next section discusses how the components introduced above are used by the "Contacts" appliction to create an initial "Contacts" database during the startup phase of the application. 
+
 [[sec-contacts_jdbc_initial_db]]
 ==== The Database Setup Service
+
+The database setup service is responsible to create the "Contacts" database during the startup of the application.  
+In order to implement such a service, a number of Scout concepts need to be integrated. 
+In class `DatabaseSetupService` we will make use of the features listed below.
+
+* Access config properties using class `CONFIG`  
+* Executing SQL statements via class `SQL`
+* Logging via class `LOG`
+* Scout platform with the annotations `@ApplicationScoped`, `@CreateImmediately` and `@PostConstruct`  
+
+How these elements are used in class `DatabaseSetupService` is shown in <<lst-contacts_dbsetup_service>>. 
+The actual creation of the "Contacts" database is performed by method `autoCreateDatabase` and before anything is created, the method checks if the auto creation is actually set to true. 
+
+For the database creation we first create a run context that is associated with the super user as no user is yet logged into the application. 
+The context is then used to execute the runnable that creates the organization and person tables.
 
 [[lst-contacts_dbsetup_service, Listing DatabaseSetupService]]
 [source,java]
@@ -130,11 +179,40 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 
 <1> The existing tables are stored in the `StringArrayHolder` object named "result". 
 
-Scout class `NVPair` is used to create named objects. 
-These named objects are used by the Scout SQL support to map between SQL strings and objects in the Java source code.  
-Therefore, the identifier "result" in the NVPair object will be connected with the same identifier used in the `SELECT_TABLE_NAMES` statement.
-See <<lst-contacts_sql_createdb>> for the matching usage of "result".
+The usage of `CONFIG` is already covered by the previous section. 
+Introductions for `SQL`, `LOG` and the Scout platform annotations are provided below. 
 
+Logging::
+Scout uses the http://www.slf4j.org/manual.html[SLF4J] framework for logging. 
+For the actual implementation of the loggers Scout uses Logback per default. 
+To use logging a local logger is first created using the SLF4J `LoggerFactory` class. 
+
+Executing SQL Statements::
+For the execution of SQL statements Scout provides the convenience class `SQL`.
+The various methods can be used with a simple SQL command as in `SQL.insert(mySqlCommand)` or using additional named objects as in `SQL.insertInto(mySqlCommand, myHolder)`. 
+The Scout class `NVPair` is frequently used to create such named objects. 
+Make sure that the identifiers (using the Scout `:` syntax) provided in the SQL commands always match with the names associated with the named objects.   
+
+Scout Platform::
+The Scout platform provides the basic infrastructure and a number of services to a Scout application. 
+Services are represented by Scout beans that are registered at startup with the platform and created once they are needed. 
+For class `DatabaseSetupService` we can use the Scout annotation `@ApplicationScoped` to register the service and to make sure that there will only be a single instance of this class. 
+To force the creation of a bean `DatabaseSetupService` at startup time we also add Scout annotation `@CreateImmediately`.  
+Finally, the annotation `@PostConstruct` executes our method `autoCreateDatabase` as soon as the `DatabaseSetupService` bean is created. 
+
+Changing the basic log level of an application is a frequently used scenario. 
+As Scout is using Logback per default we can adapt the log level in the `logback.xml` configuration files as shown in <<lst-contacts_logback_loglevel>>.
+For the "Contacts" application these configuration files are located in folder `src/main/resources` of the Maven modules that define the frontend and the backend applications. 
+More information regarding these configuration files is provided in the http://logback.qos.ch/manual/configuration.html[Logback manual].
+
+[[lst-contacts_logback_loglevel, Listing Logback configuration]]
+[source,xml]
+.Setting the log level in the logback.xml configuration file.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/logback.xml[tags=loglevel]
+----
+
+<1> The `level` attribute of the `<root>` element is used as the basic log level. Try "DEBUG" or "WARN" as alternative values.
 
 [[sec-contacts_jdbc_starting]]
 ==== What is missing?
@@ -224,40 +302,21 @@ Person and company data is now visible in the user interface as shown in <<img-c
 .The "Contacts" application displaying person data at the end of tutorial step 3.
 image::{imgsdir}/contacts_tutorial_result_step_3.png[]
 
-==== TEMP STUFF 
+==== STUFF TO ADD 
 functionality:
 
 * DBSetupService
 
 * Scout beans (mini intro)
-* Scout configuration properties
 * Scout logging
 * Scout sql service
 * Scout platform 
 
 DBSetupService
-   
-focus on scout backend application
-correspond to maven server module
-
-config properties
-@ApplicationScoped
-public interface IConfigProperty<DATA_TYPE> {
 
 
 derby:
 
 DerbySqlService -> AbstractDerbySqlService -> ... -> IService with @ApplicationScoped 
-
-* connect url https://db.apache.org/derby/docs/10.11/ref/rrefjdbc37352.html[https://db.apache.org/derby/docs/10.11/ref/rrefjdbc37352.html]
-
-basic ideas: work with in memory database for tutorial. keep database access configurable.
-goal: to work with a database stored on disk only changes to the properties file are necessary, code change required. 
-
-* connect string from neon code: "jdbc:derby:memory:contacts-database" (and add attribute ";create=true")
-* connect for local db on disk (mars tutorial): "jdbc:derby:c:\\DerbyDB" (don't user single backslashes in path name on windows boxes)
-* work with attributes ";user=<username>;password=<password>" for password protection  
-
-mini intro to properties files
 
 mini intro to scout platform & bean manager and logging

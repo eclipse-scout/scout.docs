@@ -28,8 +28,11 @@ import org.eclipse.scout.rt.platform.exception.ProcessingStatus;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MapForm extends AbstractForm {
+  private static final Logger LOG = LoggerFactory.getLogger(MapForm.class);
 
   private String street;
   private String city;
@@ -140,13 +143,17 @@ public class MapForm extends AbstractForm {
         }
 
         address = normalize(address);
+        address = encode(address);
+
+        url = "http://maps.googleapis.com/maps/api/staticmap?center=" + address + "&zoom=" + zoom + "&size=" + size + "&maptype=roadmap&sensor=false";
+        LOG.info("Map image URL: {}", url);
 
         try (InputStream in = new URL(url).openStream()) {
-          url = "http://maps.googleapis.com/maps/api/staticmap?center=" + URLEncoder.encode(address, "ISO-8859-1") + "&zoom=" + zoom + "&size=" + size + "&maptype=roadmap&sensor=false";
           setImage(IOUtility.readBytes(in));
         }
         catch (Exception e) {
           addErrorStatus(new ProcessingStatus("Bad Link: " + url + ", please check", ProcessingStatus.ERROR));
+          LOG.error("Bad URL? URL is {}", url, e);
           setImage(null);
         }
       }
@@ -154,10 +161,29 @@ public class MapForm extends AbstractForm {
       private String normalize(String s) {
         return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
       }
+
+      private String encode(String s) {
+
+        try {
+          return URLEncoder.encode(s, "ISO-8859-1");
+        }
+        catch (Exception e) {
+          LOG.error("Failed to encode string '{}'", s, e);
+        }
+
+        return s;
+      }
     }
 
     @Order(2000)
     public class OkButton extends AbstractOkButton {
+
+      @Override
+      protected void execClickAction() {
+        getMapField().clearErrorStatus();
+        super.execClickAction();
+      }
+
       @Override
       protected boolean getConfiguredFocusable() {
         return false;

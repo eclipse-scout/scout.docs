@@ -13,6 +13,8 @@ package org.eclipse.scout.contacts.server.sql;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoCreateProperty;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.JdbcMappingNameProperty;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
@@ -25,10 +27,14 @@ public class DerbySqlService extends AbstractDerbySqlService {
 
   @Override
   protected String getConfiguredJdbcMappingName() {
-    String mappingName = CONFIG.getPropertyValue(
-        DatabaseProperties.JdbcMappingNameProperty.class);
+    String mappingName = CONFIG.getPropertyValue(JdbcMappingNameProperty.class);
 
-    return mappingName + ";create=true"; // <1>
+    // add create attribute if we need to autocreate the db
+    if (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
+      return mappingName + ";create=true"; // <1>
+    }
+
+    return mappingName;
   }
   // end::service[]
 
