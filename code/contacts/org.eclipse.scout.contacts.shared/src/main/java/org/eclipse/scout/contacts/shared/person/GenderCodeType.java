@@ -15,19 +15,11 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
+//tag::all[]
 public class GenderCodeType extends AbstractCodeType<String, String> {
 
   private static final long serialVersionUID = 1L;
   public static final String ID = "Gender";
-
-  public GenderCodeType() {
-    super();
-  }
-
-  @Override
-  protected String getConfiguredText() {
-    return TEXTS.get("Gender");
-  }
 
   @Override
   public String getId() {
@@ -68,3 +60,4 @@ public class GenderCodeType extends AbstractCodeType<String, String> {
     }
   }
 }
+//end::all[]

@@ -17,18 +17,21 @@ import java.util.Locale;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
-public class CountryLookupCall extends LocalLookupCall<String> {
+//tag::all[]
+public class CountryLookupCall extends LocalLookupCall<String> { // <1>
 
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow<String>> execCreateLookupRows() {
+  protected List<LookupRow<String>> execCreateLookupRows() { // <2>
     List<LookupRow<String>> rows = new ArrayList<>();
 
-    for (String country : Locale.getISOCountries()) {
-      rows.add(new LookupRow<>(country, country));
+    for (String countryCode : Locale.getISOCountries()) {
+      Locale country = new Locale("", countryCode);
+      rows.add(new LookupRow<>(countryCode, country.getDisplayCountry())); // <3>
     }
 
     return rows;
   }
 }
+//end::all[]

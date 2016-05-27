@@ -16,9 +16,9 @@ import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonCreatePermission;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
+import org.eclipse.scout.contacts.shared.person.PersonPageData;
 import org.eclipse.scout.contacts.shared.person.PersonReadPermission;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
-import org.eclipse.scout.contacts.shared.person.PersonPageData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -28,8 +28,10 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 
+//tag::all[]
 public class PersonService implements IPersonService {
 
+  //end::all[]
   @Override
   public PersonPageData getTableData(SearchFilter filter, String organizationId) {
     PersonPageData pageData = new PersonPageData();
@@ -54,19 +56,21 @@ public class PersonService implements IPersonService {
     return pageData;
   }
 
+  //tag::all[]
   @Override
   public PersonFormData create(PersonFormData formData) {
     if (!ACCESS.check(new PersonCreatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 
+    // add a unique person id if necessary
     if (StringUtility.isNullOrEmpty(formData.getPersonId())) {
       formData.setPersonId(UUID.randomUUID().toString());
     }
 
     SQL.insert(SQLs.PERSON_INSERT, formData);
 
-    return store(formData);
+    return store(formData); // <1>
   }
 
   @Override
@@ -90,10 +94,13 @@ public class PersonService implements IPersonService {
 
     return formData;
   }
+  //end::all[]
 
   protected void addToWhere(StringBuilder sqlWhere, String fieldValue, String sqlAttribute, String searchAttribute) {
     if (StringUtility.hasText(fieldValue)) {
       sqlWhere.append(String.format(SQLs.AND_LIKE_CAUSE, sqlAttribute, searchAttribute, "%"));
     }
   }
+  //tag::all[]
 }
+//end::all[]

@@ -1,3 +1,217 @@
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
+
+In this tutorial step we add the Scout forms that are used to edit existing persons and organizations and to enter new data in the user interface. 
+
+* <<sec-contacts_form_design>>
+* <<sec-contacts_form_implement>>
+* <<sec-contacts_form_code>>
+* <<sec-contacts_form_add_fields>>
+* <<sec-contacts_form_integrate_service>>
+
+* <<sec-contacts_form_refactoring>>
+* <<sec-contacts_form_add_company>>
+* <<sec-contacts_forms_summary>>
+
+[[sec-contacts_form_design]]
+==== Designing the Person Form
+
+We start with the sketch of the form layout as shown in <<img-contacts_tutorial_person_form_1>>.
+
+[[img-contacts_tutorial_person_form_1, Figure 000]]
+.A sketch of the target layout for the person form.
+image::{imgsdir}/contacts_person_form.png[]
+
+The upper half of the form shows a picture of the person and contains some primary attributes such as first name and the gender of the person. 
+
+The lower half of the form contains tab boxes. 
+A "Details" tab provides contact details of the person and adding notes for the person in the form of free text is possible in the "Comments" tab.
+
+<<img-contacts_person_form_grid>> below shows how the sketched form can fit with the logical grid layout of the Scout framework. 
+Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as are needed. 
+
+[[img-contacts_person_form_grid, Figure 000]]
+.Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
+image::{imgsdir}/contacts_person_form_grid.png[]
+
+Individual form fields consist of a label part and a field part and occupy a single cell in the logical grid.  
+Examples for fields using the default configuration are the first name field or the email field. 
+When needed, fields can be configured to occupy several columns or rows. 
+An example for this case is the image field that will hold the picture of the person. 
+This field is configured to occupy 5 logical rows.  
+
+With Scout's container widgets such as group boxes, tab boxes and sequence boxes complex layouts can be achieved. 
+Containers provide a lot of flexibility as these widgets can be nested hierarchically as shown in <<img-contacts_person_form_groups>>
+
+[[img-contacts_person_form_groups, Figure 000]]
+.The hierarchical organization of the form including Scout group boxes, tab boxes and a sequence box.   
+image::{imgsdir}/contacts_person_form_groups.png[]
+
+The sketch above details the organization of the container components to match the desired layout for the person form. 
+The different container widgets can all be used with their default settings except for the address box.
+
+For the address box we will have to modify its size and its inner organization. 
+As group boxes occupy two columns per default we will need to reduce the width of the address box to a single column. 
+The second change is to the inner layout of the address box. 
+To force the location box to come below the street field we have to change the inner layout of the group box to a single column as well. 
+Otherwise, the location box would be shown next to the street field.
+
+In the next section we will start to implement the person form with the layout described above.
+
+[[sec-contacts_form_implement]]
+==== Implementing the Form
+
+In this section we implement the person form with its container widgets as described in the previous section.
+To be able to use the form to create and edit persons we will "New" and "Edit" context menus to the table in the person page. 
+Finally we will also add a "Create Person" entry to the the "Quick Access" top level menu of the application.   
+
+Start the form creation with the Scout new form wizard following the steps listed below.
+
+. Expand the Maven module `org.eclipse.scout.contacts.client` in the Eclipse package explorer
+. Select package `org.eclipse.scout.contacts.client.person` in folder `src/main/java`
+. Press kbd:[Ctrl+N] and enter "form" into the search field of the wizard selection dialog
+. Select the [element]_Scout Form_ proposal and click the btn:[Next] button
+. Enter "Person" into the [field]_Name_ and verify that the field contents match <<img-contacts_create_new_person_form>>
+. Click btn:[Finish] to start the creation of the form and its related components
+
+
+[[img-contacts_create_new_person_form, Figure 000]]
+.Use the [wizard]_New Scout Form_ to create the person form.   
+image::{imgsdir}/contacts_create_new_person_form.png[]
+
+Now open the newly created class `PersonForm` in the Java editor. 
+Before we start to add the container widgets for the layouting of the form verify the translated text entry in method `getConfiguredTitle` and then add method `getConfiguredDisplayHint` as shown in <<lst-contacts_form_displayhint>>.   
+
+[[lst-contacts_form_displayhint, Listing PersonForm display hint]]
+[source,java]
+.Add method getConfiguredDisplayHint to open person form as a view. 
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=displayHint]
+----
+
+TODO: continue description here Add many boxes
+
+
+[[lst-contacts_form_layout, Listing PersonForm layout]]
+[source,java]
+.The layouting structure of the person form using Scout container widgets. 
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonForm.java[tags=structure;layout]
+----
+
+<1> Every Scout form has a class `MainBox`. It contains all visible UI components. 
+<2> The `GeneralBox` will hold the picture field, first name and last names, the date of birth and the gender. 
+<3> The `DetailsBox` tab box will contain the various tabs implemented in inner group boxes. 
+<4> The `AbstractAddressBox` is defined in its own class. We will reuse this component in the company form. 
+
+[[sec-contacts_form_code]]
+==== Adding a Gender Code 
+
+we can do all fields for the form except for the gender field. 
+here we need a gender code type to configure the radio button group
+
+Code types represent a fixed set of named entities.
+To keep things simple, the gender code type will contain a "Male" code and a "Female" code. 
+
+Code types are frequently used in both the frontend and the backend of an application. 
+This implies that code type classes need to be implemented in the shared Maven module of the application. 
+As the gender code type is related to persons we will implement this class in the person package. 
+
+Follow the steps described below to create the gender code type.
+
+. Expand the Maven module `org.eclipse.scout.contacts.shared` in the Eclipse package explorer
+. Select package `org.eclipse.scout.contacts.shared.person` in folder `src/main/java`
+. Press kbd:[Ctrl+N] and enter "code" into the search field of the wizard selection dialog
+. Select the [element]_Scout CodeType_ proposal and click the btn:[Next] button
+. Enter "Gender" into the [field]_Name_ field and use the type `String` for the first and second type argument
+. Click button btn:[Finish] 
+. Set the `ID` constant to "Gender" in the created class `GenderCodeType`
+
+The created class `GenderCodeType` will then look like <<lst-contacts_gender_code>> except for the missing inner code classes.
+
+[[lst-contacts_gender_code, Listing Gender code type]]
+[source,java]
+.The Scout code type to represent the gender of a person. This code type will be used for the gender field.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/GenderCodeType.java[tags=all]
+----
+
+To add inner class `MaleCode` code to the gender code type perform the steps below.
+
+. Press kbd:[Ctrl+Space] and select the [element]_Code_ proposal with a double click
+. Enter "Male" into the first box to be used in the `MaleCode` class name
+. Tab to the value for the `ID` constant and set it to "M"
+. Tab to the value in `TEXTS.get` and add "Male" and its translated text
+. Hit kbd:[Enter] to finish  
+
+Then repeat the steps above for the female code.
+
+[[sec-contacts_form_add_fields]]
+==== Adding Form Fields
+
+* add group box structure
+* add fields to boxes
+* add stuff for picture field
+
+[[sec-contacts_form_integrate_service]]
+==== Integrating with the Person Service
+
+[[lst-contacts_form_service, Listing PersonService methods]]
+[source,java]
+.The PersonService methods to load, create and update person data.
+----
+include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/person/PersonService.java[tags=all]
+----
+
+<1> The `create` method creates a new person with a primary key only. To save all other attributes the `store` method is reused.
+
+For the individual fields that we will fill into the container widgets we can completely rely on the widgets that come out of the box with the Scout framework.  
+The only component that we will add before we start implementing the person form is a code type that represents the gender of the person.  
+We will create this code type in the next section.
+
+[[sec-contacts_form_refactoring]]
+==== Refactoring Form Fields
+
+* refactor/prepare picture field
+* refactor the address field
+
+[[sec-contacts_form_add_company]]
+==== Adding the Company Form
+
+Add the Company Form: Copy & Paste
+
+
+layout person form
+
+* general box (group box, no title)
+**  picture (image h=5)
+**  first name (string) 
+**  last name (string)
+**  dob  (date)
+**  gender (radio button group<string>) [needs code type. add later?]
+* details box (tab box, no title)
+** person details (group box)
+***    address (group, no title, gridcolumncount=1,gridw=1,gridh=3)
+**** street (string)
+**** location (sequence)
+***** city (string LABEL_POSITION_ON_FIELD)
+***** country (smart<string> LABEL_POSITION_ON_FIELD) [needs lookup call. add later?]
+*** phone (string)
+*** mobile (string)
+*** email (string)
+** comments (group box)
+***    comments field (string, nolabel, multiline, gridw=2, gridh=3)
+
+[[sec-contacts_forms_summary]]
+==== What have we achieved?
+
+In the third step of the "Contacts" tutorial we have added Scout forms to edit and create persons and organisations in the "Contacts" application. 
+TODO: put more details here
+
+The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. 
+Person and company data is now visible in the user interface as shown in <<img-contacts_tutorial_result_step_4]].
+
+[[img-contacts_tutorial_result_step_4, Figure 000]]
+.The "Contacts" application with the person form at the end of tutorial step 4.
+image::{imgsdir}/contacts_tutorial_result_step_4.png[]

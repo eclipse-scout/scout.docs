@@ -301,22 +301,3 @@ Person and company data is now visible in the user interface as shown in <<img-c
 [[img-contacts_tutorial_result_step_3, Figure 000]]
 .The "Contacts" application displaying person data at the end of tutorial step 3.
 image::{imgsdir}/contacts_tutorial_result_step_3.png[]
-
-==== STUFF TO ADD 
-functionality:
-
-* DBSetupService
-
-* Scout beans (mini intro)
-* Scout logging
-* Scout sql service
-* Scout platform 
-
-DBSetupService
-
-
-derby:
-
-DerbySqlService -> AbstractDerbySqlService -> ... -> IService with @ApplicationScoped 
-
-mini intro to scout platform & bean manager and logging

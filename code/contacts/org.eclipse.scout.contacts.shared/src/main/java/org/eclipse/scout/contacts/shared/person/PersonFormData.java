@@ -6,7 +6,6 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.template.AbstractAddressBoxData;
 import org.eclipse.scout.contacts.shared.template.AbstractEmailFieldData;
-import org.eclipse.scout.contacts.shared.template.AbstractPhoneFieldData;
 import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
@@ -135,7 +134,7 @@ public class PersonFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Mobile extends AbstractPhoneFieldData {
+  public static class Mobile extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
@@ -150,7 +149,7 @@ public class PersonFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Phone extends AbstractPhoneFieldData {
+  public static class Phone extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }

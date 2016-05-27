@@ -36,7 +36,6 @@ import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.Pi
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.template.AbstractEmailField;
-import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.GenderCodeType;
@@ -64,23 +63,23 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+//tag::structure[]
 public class PersonForm extends AbstractForm {
 
+  //end::structure[]
   private String personId;
-
-  public PersonForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Person");
   }
 
+  //tag::displayHint[]
   @Override
   protected int getConfiguredDisplayHint() {
     return IForm.DISPLAY_HINT_VIEW;
   }
+  //end::displayHint[]
 
   public void startModify() {
     startInternalExclusive(new ModifyHandler());
@@ -183,17 +182,19 @@ public class PersonForm extends AbstractForm {
     return getPersonId();
   }
 
-  @Order(1)
-  public class MainBox extends AbstractGroupBox {
+  //tag::layout[]
+  @Order(10)
+  public class MainBox extends AbstractGroupBox { // <1>
 
-    @Order(1)
-    public class GeneralBox extends AbstractGroupBox {
+    @Order(10)
+    public class GeneralBox extends AbstractGroupBox { // <2>
+      //end::layout[]
 
-      @Order(1)
+      @Order(10)
       public class PictureBox extends AbstractPictureBox {
       }
 
-      @Order(2)
+      @Order(20)
       public class FirstNameField extends AbstractStringField {
 
         @Override
@@ -202,7 +203,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(3)
+      @Order(30)
       public class LastNameField extends AbstractStringField {
 
         @Override
@@ -211,7 +212,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(4)
+      @Order(40)
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
@@ -228,7 +229,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(5)
+      @Order(50)
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
 
         @Override
@@ -241,62 +242,56 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("Gender");
         }
       }
+      //tag::layout[]
     }
 
-    @Order(2)
-    public class DetailsBox extends AbstractTabBox {
+    @Order(20)
+    public class DetailsBox extends AbstractTabBox { // <3>
 
       @Order(10)
       public class PersonDetailsBox extends AbstractGroupBox {
 
+        //end::layout[]
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Details");
         }
 
-        @Order(1)
-        public class AddressBox extends AbstractAddressBox {
+        //tag::layout[]
+        @Order(10)
+        public class AddressBox extends AbstractAddressBox { // <4>
         }
+        //end::layout[]
 
-        @Order(2)
-        public class PhoneField extends AbstractPhoneField {
+        @Order(20)
+        public class PhoneField extends AbstractStringField {
 
           @Override
-          protected String execValidateValue(String rawValue) {
-            String addressCountry = getAddressBox().getCountryField().getValue();
-
-            if (StringUtility.isNullOrEmpty(getCountry()) && StringUtility.hasText(addressCountry)) {
-              setCountry(addressCountry);
-            }
-
-            return super.execValidateValue(rawValue);
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Phone");
           }
         }
 
-        @Order(3)
-        public class MobileField extends AbstractPhoneField {
+        @Order(30)
+        public class MobileField extends AbstractStringField {
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Mobile");
           }
+        }
+
+        @Order(40)
+        public class EmailField extends AbstractEmailField {
 
           @Override
-          protected String execValidateValue(String rawValue) {
-            String addressCountry = getAddressBox().getCountryField().getValue();
-
-            if (StringUtility.isNullOrEmpty(getCountry()) && StringUtility.hasText(addressCountry)) {
-              setCountry(addressCountry);
-            }
-
-            return super.execValidateValue(rawValue);
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Email");
           }
         }
-
-        @Order(4)
-        public class EmailField extends AbstractEmailField {
-        }
+        //tag::layout[]
       }
+      //end::layout[]
 
       @Order(20)
       public class WorkBox extends AbstractGroupBox {
@@ -306,7 +301,7 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("Work");
         }
 
-        @Order(1)
+        @Order(10)
         public class PositionField extends AbstractStringField {
 
           @Override
@@ -315,7 +310,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(2)
+        @Order(20)
         public class OrganizationField extends AbstractSmartField<String> {
 
           @Override
@@ -329,7 +324,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(3)
+        @Order(30)
         public class PhoneWorkField extends AbstractStringField {
 
           @Override
@@ -338,7 +333,7 @@ public class PersonForm extends AbstractForm {
           }
         }
 
-        @Order(4)
+        @Order(40)
         public class EmailWorkField extends AbstractStringField {
 
           @Override
@@ -347,16 +342,18 @@ public class PersonForm extends AbstractForm {
           }
         }
       }
+      //tag::layout[]
 
       @Order(30)
       public class CommentsBox extends AbstractGroupBox {
+        //end::layout[]
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Comments");
         }
 
-        @Order(1)
+        @Order(10)
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -374,6 +371,7 @@ public class PersonForm extends AbstractForm {
             return true;
           }
         }
+        //tag::layout[]
       }
     }
 
@@ -381,10 +379,11 @@ public class PersonForm extends AbstractForm {
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(101)
+    @Order(110)
     public class CancelButton extends AbstractCancelButton {
     }
   }
+  //end::layout[]
 
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
@@ -443,6 +442,8 @@ public class PersonForm extends AbstractForm {
       throw new VetoException(TEXTS.get("MissingName"));
     }
 
+    super.execValidate();
+
     return true;
   }
 
@@ -459,4 +460,6 @@ public class PersonForm extends AbstractForm {
   private String calculateSubTitle() {
     return StringUtility.join(" ", getFirstNameField().getValue(), getLastNameField().getValue());
   }
+//tag::structure[]
 }
+//end::structure[]

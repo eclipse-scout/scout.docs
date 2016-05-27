@@ -12,6 +12,7 @@ package org.eclipse.scout.contacts.events.client.event;
 
 import java.util.Set;
 
+import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.client.organization.OrganizationDetailsPage;
 import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
@@ -25,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
@@ -34,6 +36,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @PageData(EventTablePageData.class)
 public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> {
@@ -184,11 +187,21 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
     }
 
     @Order(6)
-    public class CountryColumn extends AbstractStringColumn {
+    public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Country");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 120;
+      }
+
+      @Override
+      protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+        return CountryLookupCall.class;
       }
     }
 

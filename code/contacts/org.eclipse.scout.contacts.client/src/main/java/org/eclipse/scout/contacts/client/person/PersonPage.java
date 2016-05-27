@@ -13,6 +13,7 @@ package org.eclipse.scout.contacts.client.person;
 import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonPageData;
@@ -163,14 +164,26 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
       }
     }
 
+    //tag::CountryColumn[]
     @Order(5)
-    public class CountryColumn extends AbstractStringColumn {
+    public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Country");
       }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 120;
+      }
+
+      @Override // <1>
+      protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+        return CountryLookupCall.class;
+      }
     }
+    //end::CountryColumn[]
 
     //tag::PhoneColumn[]
     @Order(6)
