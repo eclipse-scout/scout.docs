@@ -35,7 +35,6 @@
   <modules>
     <!-- Widgets application (core) -->
     <module>../org.eclipse.scout.widgets.client</module>
-    <module>../org.eclipse.scout.widgets.client.mobile</module>
     <module>../org.eclipse.scout.widgets.shared</module>
     <module>../org.eclipse.scout.widgets.ui.html</module>
     <module>../org.eclipse.scout.widgets.ui.html.app</module>
@@ -70,11 +69,6 @@
       <dependency>
         <groupId>org.eclipse.scout.widgets</groupId>
         <artifactId>org.eclipse.scout.widgets.shared</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.scout.widgets</groupId>
-        <artifactId>org.eclipse.scout.widgets.client.mobile</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
