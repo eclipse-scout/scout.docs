@@ -112,6 +112,18 @@ Offline functionality in the scout client was removed (not needed anymore). Dele
 - IClientSession.getOfflineSubject
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
+=== Mobile
+org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client. 
+A lot of the mobile code in that plugin has been removed because the ui is now smarter and reacts bettter to smaller screens than the previous uis.
+
+If your project contains a mobile plugin, it is suggested to merge it with your client plugin as well.
+
+The new mobile approach is slightly different than the one before Neon:
+
+* There is still a device transformer which transforms the client model into a mobile optimized model. But the transformation is a lot simpler than before and is more or less limited to the adjustment of some properties.
+* The transformation mainly affects mobile phones (resp. devices with a small screen size). On tablets the application will look nearly the same as on a desktop device. There are just a few optimizations made regarding touch input (e.g. the smartfield looks different).
+* Previously a form based approach had been used. Every outline page was wrapped in a page form, the navigation happened by showing or hiding the corerct form. Now, the outline tree has been enhanced with mobile specific functionality. This means the navigation happens completely in the outline tree, no forms are used. There is also no need for a home form anymore which displays the available outlines. The outlines may be switched in the same way as with the desktop style. The advantage is that the mobile style (or rather the style for small devices) looks and behaves similar to the regular desktop style which should make it easier for the user.
+
 === ToolButton
 * `IToolButton` has been removed, it is not necessary anymore because the desktop may now display any kind of menus.
 * `IFormToolButton` has been renamed to `IFormMenu`. These menus, which display a form when selected, may now be used on any menu capable component and not only on the desktop. Therefore it has been moved from the package `org.eclipse.scout.rt.client.ui.desktop.outline` to `org.eclipse.scout.rt.client.ui.form`.
