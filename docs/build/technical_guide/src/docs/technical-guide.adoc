@@ -1,0 +1,52 @@
+= Eclipse Scout: Technical Guide
+:doctype: book
+:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:toc: left
+
+//:numbered:
+//-----------------------------------------------------------------------------
+// Some Scout Archite
+//-----------------------------------------------------------------------------
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Introduction"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+!!! WORK IN PROGRESS !!!
+
+Scout Architecture and Concepts are described here.
+
+:numbered:
+include::{mdledir}/technicalGuide/Platform.adoc[]
+include::{mdledir}/technicalGuide/ExceptionHandling.adoc[]
+include::{mdledir}/technicalGuide/JobManager.adoc[]
+include::{mdledir}/technicalGuide/RunContext.adoc[]
+include::{mdledir}/technicalGuide/RunMonitor.adoc[]
+include::{mdledir}/technicalGuide/SecureOutput.adoc[]
+include::{mdledir}/technicalGuide/ClientNotification.adoc[]
+include::{mdledir}/technicalGuide/JaxWs.adoc[]
+include::{mdledir}/technicalGuide/General.adoc[]
+
+//Appendix:
+
+include::{mdledir}/BookCopyright.adoc[]
+
+include::{mdledir}/_footer.adoc[]
