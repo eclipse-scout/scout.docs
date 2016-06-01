@@ -114,6 +114,8 @@ grep diff.log -e rename.*java > renames.txt
 | org.eclipse.scout.rt.platform.util.DateUtility.java | org.eclipse.scout.rt.platform.util.date.DateUtility.java
 | org.eclipse.scout.rt.server.commons.servlet.filter.authentication.PathInfoFilter.java | org.eclipse.scout.rt.server.commons.authentication.PathInfoFilter.java
 | org.eclipse.scout.rt.server.commons.servlet.filter.authentication.SecureHttpServletRequestWrapper.java | org.eclipse.scout.rt.server.commons.authentication.SecureHttpServletRequestWrapper.java
+| org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier | org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier
+| org.eclipse.scout.rt.server.commons.authentication.ICredentialVerifier | org.eclipse.scout.rt.platform.security.ICredentialVerifier
 | org.eclipse.scout.rt.server.services.common.csv.CsvSqlSettings.java | org.eclipse.scout.rt.server.csv.CsvSettings.java
 | org.eclipse.scout.rt.server.services.common.jdbc.builder.AliasMapper.java | org.eclipse.scout.rt.server.jdbc.builder.AliasMapper.java
 | org.eclipse.scout.rt.server.services.common.jdbc.builder.DataModelEntityPartDefinition.java | org.eclipse.scout.rt.server.jdbc.builder.DataModelEntityPartDefinition.java
