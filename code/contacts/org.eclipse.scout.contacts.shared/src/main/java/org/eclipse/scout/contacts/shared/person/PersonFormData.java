@@ -4,9 +4,6 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.contacts.shared.template.AbstractAddressBoxData;
-import org.eclipse.scout.contacts.shared.template.AbstractEmailFieldData;
-import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
@@ -20,12 +17,12 @@ public class PersonFormData extends AbstractFormData {
 
   private static final long serialVersionUID = 1L;
 
-  public AddressBox getAddressBox() {
-    return getFieldByClass(AddressBox.class);
+  public City getCity() {
+    return getFieldByClass(City.class);
   }
 
-  public Comments getComments() {
-    return getFieldByClass(Comments.class);
+  public Country getCountry() {
+    return getFieldByClass(Country.class);
   }
 
   public DateOfBirth getDateOfBirth() {
@@ -54,6 +51,10 @@ public class PersonFormData extends AbstractFormData {
 
   public Mobile getMobile() {
     return getFieldByClass(Mobile.class);
+  }
+
+  public Notes getNotes() {
+    return getFieldByClass(Notes.class);
   }
 
   public Organization getOrganization() {
@@ -86,20 +87,24 @@ public class PersonFormData extends AbstractFormData {
     return getFieldByClass(PhoneWork.class);
   }
 
-  public PictureBox getPictureBox() {
-    return getFieldByClass(PictureBox.class);
+  public PictureUrl getPictureUrl() {
+    return getFieldByClass(PictureUrl.class);
   }
 
   public Position getPosition() {
     return getFieldByClass(Position.class);
   }
 
-  public static class AddressBox extends AbstractAddressBoxData {
+  public Street getStreet() {
+    return getFieldByClass(Street.class);
+  }
+
+  public static class City extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Comments extends AbstractValueFieldData<String> {
+  public static class Country extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
@@ -109,7 +114,7 @@ public class PersonFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Email extends AbstractEmailFieldData {
+  public static class Email extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
@@ -139,6 +144,11 @@ public class PersonFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
+  public static class Notes extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+  }
+
   public static class Organization extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
@@ -159,12 +169,17 @@ public class PersonFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class PictureBox extends AbstractPictureBoxData {
+  public static class PictureUrl extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
 
   public static class Position extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+  }
+
+  public static class Street extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }

@@ -39,8 +39,10 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 //tag::PageInit[]
+//tag::structure[]
 @PageData(PersonPageData.class)
 public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
+  //end::structure[]
   //end::PageInit[]
 
   private String organizationId;
@@ -60,9 +62,11 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
   protected boolean getConfiguredLeaf() {
     return true;
   }
+  //tag::structure[]
 
   //tag::PageInit[]
   public class Table extends AbstractTable {
+    //end::structure[]
     // container class to hold columns and other elements for this table page <4>
     //end::PageInit[]
 
@@ -74,11 +78,13 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
     protected String getConfiguredDefaultIconId() {
       return Icons.Person;
     }
+    //tag::menu[]
 
     @Override
-    protected Class<? extends IMenu> getConfiguredDefaultMenu() {
+    protected Class<? extends IMenu> getConfiguredDefaultMenu() { // <1>
       return EditMenu.class;
     }
+    //end::menu[]
 
     public CountryColumn getCountryColumn() {
       return getColumnSet().getColumnByClass(CountryColumn.class);
@@ -103,6 +109,76 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
     public PersonIdColumn getPersonIdColumn() {
       return getColumnSet().getColumnByClass(PersonIdColumn.class);
     }
+    // tag::menu[]
+
+    @Order(10)
+    public class EditMenu extends AbstractMenu {
+      // end::menu[]
+
+      @Override
+      protected String getConfiguredKeyStroke() {
+        return "alt-e";
+      }
+
+      // tag::menu[]
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("Edit");
+      }
+
+      @Override
+      protected void execAction() {
+        PersonForm form = new PersonForm();
+        form.setPersonId(getPersonIdColumn().getSelectedValue()); // <2>
+        form.addFormListener(new PersonFormListener());
+        form.startModify(); // <3>
+      }
+    }
+
+    @Order(20)
+    public class NewMenu extends AbstractMenu {
+      // end::menu[]
+
+      @Override
+      protected String getConfiguredKeyStroke() {
+        return "alt-n";
+      }
+      // tag::menu[]
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("New");
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() { // <4>
+        return CollectionUtility.<IMenuType> hashSet(
+            TableMenuType.EmptySpace, TableMenuType.SingleSelection);
+      }
+
+      @Override
+      protected void execAction() {
+        PersonForm form = new PersonForm();
+        // end::menu[]
+        // pre-fill the organization id if available
+        form.getOrganizationField().setValue(getOrganizationId());
+        // tag::menu[]
+        form.addFormListener(new PersonFormListener());
+        form.startNew(); // <5>
+      }
+    }
+
+    private class PersonFormListener implements FormListener {
+
+      @Override
+      public void formChanged(FormEvent e) {
+        // reload page to reflect new/changed data after saving the content of the form
+        if (FormEvent.TYPE_CLOSED == e.getType() && e.getForm().isFormStored()) {
+          reloadPage();
+        }
+      }
+    }
+    // end::menu[]
 
     //tag::PersonIdColumn[]
     @Order(1)
@@ -262,75 +338,11 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
         return 200;
       }
     }
-
-    @Order(1)
-    public class EditMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredKeyStroke() {
-        return "alt-e";
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Edit");
-      }
-
-      @Override
-      protected void execAction() {
-        final PersonForm form = new PersonForm();
-
-        form.setPersonId(getPersonIdColumn().getSelectedValue());
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
-          }
-        });
-        form.startModify();
-      }
-    }
-
-    @Order(2)
-    public class NewMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredKeyStroke() {
-        return "alt-n";
-      }
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("New");
-      }
-
-      @Override
-      protected void execAction() {
-        final PersonForm form = new PersonForm();
-        form.getOrganizationField().setValue(getOrganizationId());
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
-          }
-        });
-        form.startNew();
-      }
-    }
+    //tag::structure[]
     //tag::PageInit[]
   }
   //end::PageInit[]
+  //end::structure[]
 
   @Override
   protected String getConfiguredIconId() {
@@ -352,5 +364,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
     this.organizationId = organizationId;
   }
   //tag::PageInit[]
+  //tag::structure[]
 }
 //end::PageInit[]
+//end::structure[]

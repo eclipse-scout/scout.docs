@@ -27,7 +27,7 @@ public interface SQLs {
       + "             city VARCHAR(64), "
       + "             country VARCHAR(2), "
       + "             url VARCHAR(64), "
-      + "             comment VARCHAR(1024))";
+      + "             notes VARCHAR(1024))";
 
   String EVENT_INSERT_SAMPLE = ""
       + "INSERT       "
@@ -133,7 +133,7 @@ public interface SQLs {
       + "             city, "
       + "             country, "
       + "             url, "
-      + "             comment "
+      + "             notes "
       + "FROM         EVENT "
       + "WHERE        event_id = :eventId "
       + "INTO         :title, "
@@ -142,7 +142,7 @@ public interface SQLs {
       + "             :locationBox.city, "
       + "             :locationBox.country, "
       + "             :homepage, "
-      + "             :comments";
+      + "             :notes";
 
   String EVENT_UPDATE = ""
       + "UPDATE       EVENT "
@@ -152,7 +152,7 @@ public interface SQLs {
       + "             url = :homepage, "
       + "             city = :locationBox.city, "
       + "             country = :locationBox.country, "
-      + "             comment = :comments "
+      + "             notes = :notes "
       + "WHERE        event_id = :eventId";
 
   String EVENT_PARTICIPANTS_SELECT = ""

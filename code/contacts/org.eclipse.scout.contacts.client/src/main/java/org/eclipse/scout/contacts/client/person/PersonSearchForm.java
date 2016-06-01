@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.ResetButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.SearchButton;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox;
@@ -18,7 +19,6 @@ import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.FieldBox.LastNameField;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.FieldBox.Location;
 import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.FieldBox.OrganizationField;
-import org.eclipse.scout.contacts.client.template.AbstractLocationBox;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
@@ -129,7 +129,23 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(3125)
-        public class Location extends AbstractLocationBox {
+        public class Location extends AbstractAddressBox {
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 1;
+          }
+
+          @Override
+          protected void execInitField() {
+            getStreetField().setVisible(false);
+            getShowOnMapButton().setVisible(false);
+          }
+
+          @Override
+          protected void verifyAllFields() {
+            // no verification required for search
+          }
         }
 
         @Order(3750)

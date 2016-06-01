@@ -4,9 +4,8 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.contacts.shared.template.AbstractAddressBoxData;
-import org.eclipse.scout.contacts.shared.template.AbstractEmailFieldData;
-import org.eclipse.scout.contacts.shared.template.AbstractPhoneFieldData;
+import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
+import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
@@ -21,10 +20,6 @@ import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 public class EventFormData extends AbstractFormData {
 
   private static final long serialVersionUID = 1L;
-
-  public Comments getComments() {
-    return getFieldByClass(Comments.class);
-  }
 
   public Email getEmail() {
     return getFieldByClass(Email.class);
@@ -60,6 +55,10 @@ public class EventFormData extends AbstractFormData {
     return getFieldByClass(LocationBox.class);
   }
 
+  public Notes getNotes() {
+    return getFieldByClass(Notes.class);
+  }
+
   public ParticipantTableField getParticipantTableField() {
     return getFieldByClass(ParticipantTableField.class);
   }
@@ -74,11 +73,6 @@ public class EventFormData extends AbstractFormData {
 
   public Title getTitle() {
     return getFieldByClass(Title.class);
-  }
-
-  public static class Comments extends AbstractValueFieldData<String> {
-
-    private static final long serialVersionUID = 1L;
   }
 
   public static class Email extends AbstractEmailFieldData {
@@ -102,6 +96,11 @@ public class EventFormData extends AbstractFormData {
   }
 
   public static class LocationBox extends AbstractAddressBoxData {
+
+    private static final long serialVersionUID = 1L;
+  }
+
+  public static class Notes extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
@@ -190,7 +189,7 @@ public class EventFormData extends AbstractFormData {
     }
   }
 
-  public static class Phone extends AbstractPhoneFieldData {
+  public static class Phone extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }

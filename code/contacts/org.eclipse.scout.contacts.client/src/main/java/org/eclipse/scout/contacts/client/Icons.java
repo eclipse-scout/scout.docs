@@ -20,9 +20,7 @@ public class Icons extends AbstractIcons {
 
   public static final String Organization = "house";
 
-  public static final String Person = AbstractIcons.Person;
+  public static final String Person = "user";
 
   public static final String Contacts = AbstractIcons.Category;
-
-  public static final String AnonymousUser = "anonymous_user";
 }

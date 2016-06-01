@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.client.common;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox;
-import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.PictureUrlField;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.UrlField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -50,8 +50,8 @@ public class PictureUrlForm extends AbstractForm {
     return getFieldByClass(OkButton.class);
   }
 
-  public PictureUrlField getPictureUrlField() {
-    return getFieldByClass(PictureUrlField.class);
+  public UrlField getUrlField() {
+    return getFieldByClass(UrlField.class);
   }
 
   public UrlBox getUrlBox() {
@@ -70,7 +70,7 @@ public class PictureUrlForm extends AbstractForm {
     public class UrlBox extends AbstractGroupBox {
 
       @Order(1000)
-      public class PictureUrlField extends AbstractStringField {
+      public class UrlField extends AbstractStringField {
 
         @Override
         protected boolean getConfiguredLabelVisible() {

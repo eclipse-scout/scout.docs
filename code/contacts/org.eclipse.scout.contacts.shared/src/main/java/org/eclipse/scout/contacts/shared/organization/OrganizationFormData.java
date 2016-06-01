@@ -2,10 +2,9 @@ package org.eclipse.scout.contacts.shared.organization;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.contacts.shared.template.AbstractAddressBoxData;
-import org.eclipse.scout.contacts.shared.template.AbstractEmailFieldData;
-import org.eclipse.scout.contacts.shared.template.AbstractPhoneFieldData;
-import org.eclipse.scout.contacts.shared.template.AbstractPictureBoxData;
+import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
+import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
+import org.eclipse.scout.contacts.shared.common.AbstractUrlImageFieldData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
@@ -23,10 +22,6 @@ public class OrganizationFormData extends AbstractFormData {
     return getFieldByClass(AddressBox.class);
   }
 
-  public Comments getComments() {
-    return getFieldByClass(Comments.class);
-  }
-
   public Email getEmail() {
     return getFieldByClass(Email.class);
   }
@@ -35,12 +30,16 @@ public class OrganizationFormData extends AbstractFormData {
     return getFieldByClass(Homepage.class);
   }
 
-  public LogoBox getLogoBox() {
-    return getFieldByClass(LogoBox.class);
+  public Logo getLogo() {
+    return getFieldByClass(Logo.class);
   }
 
   public Name getName() {
     return getFieldByClass(Name.class);
+  }
+
+  public Notes getNotes() {
+    return getFieldByClass(Notes.class);
   }
 
   /**
@@ -70,11 +69,6 @@ public class OrganizationFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Comments extends AbstractValueFieldData<String> {
-
-    private static final long serialVersionUID = 1L;
-  }
-
   public static class Email extends AbstractEmailFieldData {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +79,7 @@ public class OrganizationFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class LogoBox extends AbstractPictureBoxData {
+  public static class Logo extends AbstractUrlImageFieldData {
 
     private static final long serialVersionUID = 1L;
   }
@@ -95,12 +89,17 @@ public class OrganizationFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
+  public static class Notes extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+  }
+
   public static class OrganizationIdProperty extends AbstractPropertyData<String> {
 
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Phone extends AbstractPhoneFieldData {
+  public static class Phone extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }

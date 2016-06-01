@@ -1,4 +1,4 @@
-package org.eclipse.scout.contacts.client.template;
+package org.eclipse.scout.contacts.client.common;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

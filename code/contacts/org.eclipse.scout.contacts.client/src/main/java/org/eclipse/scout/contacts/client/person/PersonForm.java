@@ -10,18 +10,28 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
+import java.util.regex.Pattern;
 
+import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.common.CountryLookupCall;
+import org.eclipse.scout.contacts.client.common.MapForm;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.CommentsBox;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.CommentsBox.CommentsField;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.PersonDetailsBox;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.PersonDetailsBox.AddressBox;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.PersonDetailsBox.EmailField;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.PersonDetailsBox.MobileField;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.PersonDetailsBox.PhoneField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox.LocationBox.CityField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox.LocationBox.CountryField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.EmailField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.MobileField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.PhoneField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.NotesBox;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.NotesBox.NotesField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.WorkBox;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.WorkBox.EmailWorkField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.WorkBox.OrganizationField;
@@ -32,54 +42,76 @@ import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.Da
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.FirstNameField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.GenderGroup;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.LastNameField;
-import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.PictureBox;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.PictureField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.GeneralBox.PictureUrlField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.OkButton;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
-import org.eclipse.scout.contacts.client.template.AbstractEmailField;
-import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.GenderCodeType;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.status.IStatus;
+import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CompareUtility;
+import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+//tag::init[]
+@FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE) // <1>
 //tag::structure[]
 public class PersonForm extends AbstractForm {
 
   //end::structure[]
+  // represents the person's primary key
   private String personId;
+
+  @FormData // <2>
+  public String getPersonId() {
+    return personId;
+  }
+
+  @FormData // <2>
+  public void setPersonId(String personId) {
+    this.personId = personId;
+  }
+
+  @Override
+  public Object computeExclusiveKey() { // <3>
+    return getPersonId();
+  }
+
+  @Override
+  protected int getConfiguredDisplayHint() { // <4>
+    return IForm.DISPLAY_HINT_VIEW;
+  }
 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Person");
   }
-
-  //tag::displayHint[]
-  @Override
-  protected int getConfiguredDisplayHint() {
-    return IForm.DISPLAY_HINT_VIEW;
-  }
-  //end::displayHint[]
+  //end::init[]
 
   public void startModify() {
     startInternalExclusive(new ModifyHandler());
@@ -97,20 +129,24 @@ public class PersonForm extends AbstractForm {
     return getFieldByClass(CancelButton.class);
   }
 
-  public CommentsBox getCommentsBox() {
-    return getFieldByClass(CommentsBox.class);
+  public PictureUrlField getPictureUrlField() {
+    return getFieldByClass(PictureUrlField.class);
   }
 
-  public CommentsField getCommentsField() {
-    return getFieldByClass(CommentsField.class);
+  public NotesBox getNotesBox() {
+    return getFieldByClass(NotesBox.class);
+  }
+
+  public NotesField getNotesField() {
+    return getFieldByClass(NotesField.class);
   }
 
   public OrganizationField getOrganizationField() {
     return getFieldByClass(OrganizationField.class);
   }
 
-  public PersonDetailsBox getPersonDetailsBox() {
-    return getFieldByClass(PersonDetailsBox.class);
+  public ContactInfoBox getPersonDetailsBox() {
+    return getFieldByClass(ContactInfoBox.class);
   }
 
   public DateOfBirthField getDateOfBirthField() {
@@ -165,8 +201,8 @@ public class PersonForm extends AbstractForm {
     return getFieldByClass(PhoneWorkField.class);
   }
 
-  public PictureBox getPictureBox() {
-    return getFieldByClass(PictureBox.class);
+  public PictureField getPictureField() {
+    return getFieldByClass(PictureField.class);
   }
 
   public PositionField getPositionField() {
@@ -177,11 +213,6 @@ public class PersonForm extends AbstractForm {
     return getFieldByClass(WorkBox.class);
   }
 
-  @Override
-  public Object computeExclusiveKey() {
-    return getPersonId();
-  }
-
   //tag::layout[]
   @Order(10)
   public class MainBox extends AbstractGroupBox { // <1>
@@ -190,11 +221,101 @@ public class PersonForm extends AbstractForm {
     public class GeneralBox extends AbstractGroupBox { // <2>
       //end::layout[]
 
+      // in a real world scenario avoid copy&paste: delete the pictureUrlField and let PictureField extend AbstractUrlImageField
+      // tag::pictureField[]
+
       @Order(10)
-      public class PictureBox extends AbstractPictureBox {
+      public class PictureUrlField extends AbstractStringField {
+
+        @Override // <1>
+        protected boolean getConfiguredVisible() {
+          return false;
+        }
       }
 
       @Order(20)
+      public class PictureField extends AbstractImageField {
+
+        @Override // <2>
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return PictureUrlField.class;
+        }
+
+        @Override // <3>
+        protected void execChangedMasterValue(Object newMasterValue) {
+          updateImage((String) newMasterValue);
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 5;
+        }
+        // end::pictureField[]
+
+        @Override
+        protected String getConfiguredImageId() {
+          return Icons.Person;
+        }
+
+        @Order(10)
+        public class EditURLMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("EditURL");
+          }
+
+          @Override
+          protected void execAction() {
+            String oldUrl = getPictureUrlField().getValue();
+            PictureUrlForm form = new PictureUrlForm();
+
+            if (StringUtility.hasText(oldUrl)) {
+              form.getUrlField().setValue(oldUrl);
+            }
+
+            form.startModify();
+            form.waitFor();
+
+            if (form.isFormStored()) {
+              getPictureUrlField().setValue(form.getUrlField().getValue());
+            }
+          }
+        }
+        // tag::pictureField[]
+
+        protected void updateImage(String url) {
+          clearErrorStatus(); // <4>
+
+          if (url == null) {
+            setImage(null);
+          }
+          else {
+            try (InputStream in = new URL((String) url).openStream()) {
+              setImage(IOUtility.readBytes(in));
+              setAutoFit(true);
+            }
+            // end::pictureField[]
+            catch (MalformedURLException e) {
+              addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
+            }
+            // tag::pictureField[]
+            catch (Exception e) { // <5>
+              String message = TEXTS.get("FailedToAccessImageFromUrl");
+              addErrorStatus(new Status(message, IStatus.WARNING));
+            }
+          }
+        }
+      }
+      // end::pictureField[]
+
+      // tag::nameFields[]
+      @Order(30)
       public class FirstNameField extends AbstractStringField {
 
         @Override
@@ -203,7 +324,7 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(30)
+      @Order(40)
       public class LastNameField extends AbstractStringField {
 
         @Override
@@ -211,57 +332,236 @@ public class PersonForm extends AbstractForm {
           return TEXTS.get("LastName");
         }
       }
+      // end::nameFields[]
+      // tag::dateOfBirthField[]
 
-      @Order(40)
+      @Order(50)
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DateOfBirth");
         }
+        // end::dateOfBirthField[]
 
         @Override
         protected Date execValidateValue(Date rawValue) {
           if (CompareUtility.compareTo(rawValue, new Date()) > 0) {
             throw new VetoException(TEXTS.get("DateOfBirthCanNotBeInFuture"));
           }
+
           return super.execValidateValue(rawValue);
         }
+        // tag::dateOfBirthField[]
       }
+      // end::dateOfBirthField[]
+      // tag::genderField[]
 
-      @Order(50)
+      @Order(60)
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
-
-        @Override
-        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
-          return GenderCodeType.class;
-        }
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Gender");
         }
+
+        @Override // <1>
+        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
+          return GenderCodeType.class;
+        }
       }
-      //tag::layout[]
+      // end::genderField[]
+      // tag::layout[]
     }
 
     @Order(20)
     public class DetailsBox extends AbstractTabBox { // <3>
 
       @Order(10)
-      public class PersonDetailsBox extends AbstractGroupBox {
+      public class ContactInfoBox extends AbstractGroupBox { // <4>
 
         //end::layout[]
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Details");
+          return TEXTS.get("ContactInfo");
         }
 
         //tag::layout[]
+        //tag::addressBox[]
         @Order(10)
-        public class AddressBox extends AbstractAddressBox { // <4>
+        public class AddressBox extends AbstractGroupBox {
+
+          @Override
+          protected boolean getConfiguredBorderVisible() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridH() { // <1>
+            return 3;
+          }
+
+          @Override
+          protected int getConfiguredGridW() { // <1>
+            return 1;
+          }
+
+          @Override
+          protected int getConfiguredGridColumnCount() { // <2>
+            return 1;
+          }
+          //end::addressBox[]
+
+          public StreetField getStreetField() {
+            return getFieldByClass(StreetField.class);
+          }
+
+          public LocationBox getLocationBox() {
+            return getFieldByClass(LocationBox.class);
+          }
+
+          public CityField getCityField() {
+            return getFieldByClass(CityField.class);
+          }
+
+          public CountryField getCountryField() {
+            return getFieldByClass(CountryField.class);
+          }
+
+          public ShowOnMapButton getShowOnMapButton() {
+            return getFieldByClass(ShowOnMapButton.class);
+          }
+
+          //end::layout[]
+          //tag::addressBox[]
+          @Order(10)
+          public class StreetField extends AbstractStringField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Street");
+            }
+            // end::addressBox[]
+
+            @Override
+            protected void execChangedValue() {
+              verifyAllFields();
+            }
+            // tag::addressBox[]
+          }
+
+          @Order(20)
+          public class LocationBox extends AbstractSequenceBox { // <3>
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Location");
+            }
+
+            @Override
+            protected boolean getConfiguredAutoCheckFromTo() { // <4>
+              return false;
+            }
+
+            @Order(10)
+            public class CityField extends AbstractStringField {
+
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("City");
+              }
+
+              @Override
+              protected int getConfiguredLabelPosition() {
+                return LABEL_POSITION_ON_FIELD; // <5>
+              }
+              // end::addressBox[]
+
+              @Override
+              protected void execChangedValue() {
+                verifyAllFields();
+              }
+              // tag::addressBox[]
+            }
+
+            @Order(20)
+            public class CountryField extends AbstractSmartField<String> {
+
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("Country");
+              }
+              // end::addressBox[]
+
+              @Override
+              protected void execChangedValue() {
+                verifyAllFields();
+              }
+              // tag::addressBox[]
+
+              @Override
+              protected int getConfiguredLabelPosition() {
+                return LABEL_POSITION_ON_FIELD;
+              }
+
+              @Override
+              protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+                return CountryLookupCall.class;
+              }
+            }
+          }
+          // end::addressBox[]
+
+          @Order(30)
+          public class ShowOnMapButton extends AbstractLinkButton {
+
+            @Override
+            protected int getConfiguredHorizontalAlignment() {
+              return 1;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("ShowOnMap");
+            }
+
+            @Override
+            protected Class<? extends IValueField> getConfiguredMasterField() {
+              return CountryField.class;
+            }
+
+            @Override
+            protected boolean getConfiguredMasterRequired() {
+              return true;
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected void execClickAction() {
+              MapForm mapForm = new MapForm();
+              mapForm.setStreet(getStreetField().getValue());
+              mapForm.setCity(getCityField().getValue());
+              mapForm.setCountry(getCountryField().getValue());
+              mapForm.startModify();
+            }
+          }
+
+          protected void verifyAllFields() {
+            boolean hasStreet = StringUtility.hasText(getStreetField().getValue());
+            boolean hasCity = StringUtility.hasText(getCityField().getValue());
+
+            getCityField().setMandatory(hasStreet);
+            getCountryField().setMandatory(hasStreet || hasCity);
+          }
+          // tag::addressBox[]
+          // tag::layout[]
         }
         //end::layout[]
+        //end::addressBox[]
 
         @Order(20)
         public class PhoneField extends AbstractStringField {
@@ -282,19 +582,31 @@ public class PersonForm extends AbstractForm {
         }
 
         @Order(40)
-        public class EmailField extends AbstractEmailField {
+        public class EmailField extends AbstractStringField {
+
+          // http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
+          private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Email");
           }
+
+          @Override
+          protected String execValidateValue(String rawValue) {
+            if (rawValue != null && !Pattern.matches(EMAIL_PATTERN, rawValue)) {
+              throw new VetoException(TEXTS.get("BadEmailAddress"));
+            }
+
+            return super.execValidateValue(rawValue);
+          }
         }
         //tag::layout[]
       }
-      //end::layout[]
 
       @Order(20)
       public class WorkBox extends AbstractGroupBox {
+        //end::layout[]
 
         @Override
         protected String getConfiguredLabel() {
@@ -341,20 +653,21 @@ public class PersonForm extends AbstractForm {
             return TEXTS.get("Email");
           }
         }
+        //tag::layout[]
       }
-      //tag::layout[]
 
+      //tag::notes[]
       @Order(30)
-      public class CommentsBox extends AbstractGroupBox {
+      public class NotesBox extends AbstractGroupBox {
         //end::layout[]
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Comments");
+          return TEXTS.get("Notes");
         }
 
         @Order(10)
-        public class CommentsField extends AbstractStringField {
+        public class NotesField extends AbstractStringField {
 
           @Override
           protected int getConfiguredGridH() {
@@ -374,6 +687,7 @@ public class PersonForm extends AbstractForm {
         //tag::layout[]
       }
     }
+    //end::notes[]
 
     @Order(100)
     public class OkButton extends AbstractOkButton {
@@ -384,6 +698,7 @@ public class PersonForm extends AbstractForm {
     }
   }
   //end::layout[]
+  //tag::handler[]
 
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
@@ -430,6 +745,7 @@ public class PersonForm extends AbstractForm {
       getForm().setSubTitle(calculateSubTitle());
     }
   }
+  //end::handler[]
 
   @Override
   protected boolean execValidate() {
@@ -447,19 +763,11 @@ public class PersonForm extends AbstractForm {
     return true;
   }
 
-  @FormData
-  public String getPersonId() {
-    return personId;
-  }
-
-  @FormData
-  public void setPersonId(String personId) {
-    this.personId = personId;
-  }
-
   private String calculateSubTitle() {
     return StringUtility.join(" ", getFirstNameField().getValue(), getLastNameField().getValue());
   }
 //tag::structure[]
+//tag::init[]
 }
 //end::structure[]
+//tag::init[]

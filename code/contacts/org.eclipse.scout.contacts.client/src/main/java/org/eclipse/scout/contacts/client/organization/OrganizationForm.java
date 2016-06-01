@@ -11,25 +11,24 @@
 package org.eclipse.scout.contacts.client.organization;
 
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.common.AbstractEmailField;
+import org.eclipse.scout.contacts.client.common.AbstractUrlImageField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.CommentsBox;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.CommentsBox.CommentsField;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.OrganizationDetailsBox;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.OrganizationDetailsBox.AddressBox;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.OrganizationDetailsBox.EmailField;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.OrganizationDetailsBox.PhoneField;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox.AddressBox;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox.EmailField;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox.PhoneField;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.NotesBox;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.NotesBox.NotesField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.HomepageField;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.LogoBox;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.LogoField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.NameField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.OpenInBrowserButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.OkButton;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
-import org.eclipse.scout.contacts.client.template.AbstractEmailField;
-import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
-import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
@@ -83,16 +82,16 @@ public class OrganizationForm extends AbstractForm {
     return getFieldByClass(CancelButton.class);
   }
 
-  public CommentsBox getCommentsBox() {
-    return getFieldByClass(CommentsBox.class);
+  public NotesBox getNotesBox() {
+    return getFieldByClass(NotesBox.class);
   }
 
-  public CommentsField getCommentsField() {
-    return getFieldByClass(CommentsField.class);
+  public NotesField getNotesField() {
+    return getFieldByClass(NotesField.class);
   }
 
-  public OrganizationDetailsBox getOrganizationDetailsBox() {
-    return getFieldByClass(OrganizationDetailsBox.class);
+  public ContactInfoBox getOrganizationDetailsBox() {
+    return getFieldByClass(ContactInfoBox.class);
   }
 
   public DetailsBox getDetailsBox() {
@@ -111,8 +110,8 @@ public class OrganizationForm extends AbstractForm {
     return getFieldByClass(HomepageField.class);
   }
 
-  public LogoBox getLogoBox() {
-    return getFieldByClass(LogoBox.class);
+  public LogoField getLogoField() {
+    return getFieldByClass(LogoField.class);
   }
 
   public MainBox getMainBox() {
@@ -147,7 +146,7 @@ public class OrganizationForm extends AbstractForm {
     public class GeneralBox extends AbstractGroupBox {
 
       @Order(1000)
-      public class LogoBox extends AbstractPictureBox {
+      public class LogoField extends AbstractUrlImageField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -222,11 +221,11 @@ public class OrganizationForm extends AbstractForm {
     public class DetailsBox extends AbstractTabBox {
 
       @Order(1000)
-      public class OrganizationDetailsBox extends AbstractGroupBox {
+      public class ContactInfoBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Details");
+          return TEXTS.get("ContactInfo");
         }
 
         @Order(1000)
@@ -234,7 +233,7 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Order(2000)
-        public class PhoneField extends AbstractPhoneField {
+        public class PhoneField extends AbstractStringField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -253,15 +252,15 @@ public class OrganizationForm extends AbstractForm {
       }
 
       @Order(2000)
-      public class CommentsBox extends AbstractGroupBox {
+      public class NotesBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Comments");
+          return TEXTS.get("Notes");
         }
 
         @Order(1000)
-        public class CommentsField extends AbstractStringField {
+        public class NotesField extends AbstractStringField {
 
           @Override
           protected int getConfiguredGridH() {

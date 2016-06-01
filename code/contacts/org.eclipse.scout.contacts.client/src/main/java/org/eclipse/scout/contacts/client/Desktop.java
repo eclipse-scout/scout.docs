@@ -35,8 +35,10 @@ import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 //tag::DesktopInit[]
+//tag::quickAccessMenu[]
 public class Desktop extends AbstractDesktop {
 
+  //end::quickAccessMenu[]
   //end::DesktopInit[]
   @Override
   protected String getConfiguredTitle() {
@@ -134,7 +136,8 @@ public class Desktop extends AbstractDesktop {
   }
 
   // top level menus for the header area of the application
-  @Order(1)
+  //tag::quickAccessMenu[]
+  @Order(10)
   public class QuickAccessMenu extends AbstractMenu {
     //end::DesktopInit[]
 
@@ -142,18 +145,20 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredText() {
       return TEXTS.get("QuickAccess");
     }
+    //end::quickAccessMenu[]
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F10;
+    }
+    //tag::quickAccessMenu[]
 
     @Order(10)
-    public class PersonNewMenu extends AbstractMenu {
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet();
-      }
+    public class NewPersonMenu extends AbstractMenu {
 
       @Override
       protected String getConfiguredText() {
-        return TEXTS.get("CreateNewPersonMenu");
+        return TEXTS.get("NewPersonMenu");
       }
 
       @Override
@@ -161,9 +166,10 @@ public class Desktop extends AbstractDesktop {
         new PersonForm().startNew();
       }
     }
+    //end::quickAccessMenu[]
 
     @Order(20)
-    public class OrganizationNewMenu extends AbstractMenu {
+    public class NewOrganizationMenu extends AbstractMenu {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -172,7 +178,7 @@ public class Desktop extends AbstractDesktop {
 
       @Override
       protected String getConfiguredText() {
-        return TEXTS.get("CreateNewOrganizationMenu");
+        return TEXTS.get("NewOrganizationMenu");
       }
 
       @Override
@@ -180,11 +186,13 @@ public class Desktop extends AbstractDesktop {
         new OrganizationForm().startNew();
       }
     }
+    //tag::quickAccessMenu[]
     //tag::DesktopInit[]
   }
+  //end::quickAccessMenu[]
 
   //tag::OptionsMenu[]
-  @Order(2)
+  @Order(20)
   public class OptionsMenu extends AbstractFormMenu<OptionsForm> {
     //end::DesktopInit[]
 
@@ -213,7 +221,7 @@ public class Desktop extends AbstractDesktop {
   }
   //end::OptionsMenu[]
 
-  @Order(3)
+  @Order(30)
   public class UserMenu extends AbstractFormMenu<UserForm> {
     //end::DesktopInit[]
 
@@ -243,5 +251,7 @@ public class Desktop extends AbstractDesktop {
     }
     //tag::DesktopInit[]
   }
+  //tag::quickAccessMenu[]
 }
 //end::DesktopInit[]
+//end::quickAccessMenu[]

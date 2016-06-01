@@ -8,13 +8,11 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.client.template;
+package org.eclipse.scout.contacts.client.common;
 
-import org.eclipse.scout.contacts.client.common.CountryLookupCall;
-import org.eclipse.scout.contacts.client.common.MapForm;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox.LocationBox.CityField;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox.LocationBox.CountryField;
-import org.eclipse.scout.contacts.shared.template.AbstractAddressBoxData;
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.CityField;
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.CountryField;
+import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -70,6 +68,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     return getFieldByClass(ShowOnMapButton.class);
   }
 
+  // tag::addressBoxContent[]
   @Order(1000)
   public class StreetField extends AbstractStringField {
 
@@ -77,11 +76,13 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     protected String getConfiguredLabel() {
       return TEXTS.get("Street");
     }
+    // end::addressBoxContent[]
 
     @Override
     protected void execChangedValue() {
       verifyAllFields();
     }
+    // tag::addressBoxContent[]
   }
 
   @Order(2000)
@@ -109,11 +110,13 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       protected int getConfiguredLabelPosition() {
         return LABEL_POSITION_ON_FIELD;
       }
+      // end::addressBoxContent[]
 
       @Override
       protected void execChangedValue() {
         verifyAllFields();
       }
+      // tag::addressBoxContent[]
     }
 
     @Order(2000)
@@ -123,11 +126,13 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       protected String getConfiguredLabel() {
         return TEXTS.get("Country");
       }
+      // end::addressBoxContent[]
 
       @Override
       protected void execChangedValue() {
         verifyAllFields();
       }
+      // tag::addressBoxContent[]
 
       @Override
       protected int getConfiguredLabelPosition() {
@@ -139,8 +144,8 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
         return CountryLookupCall.class;
       }
     }
-
   }
+  // end::addressBoxContent[]
 
   @Order(3000)
   public class ShowOnMapButton extends AbstractLinkButton {
@@ -180,11 +185,13 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
   }
 
-  private void verifyAllFields() {
+  protected void verifyAllFields() {
     boolean hasStreet = StringUtility.hasText(getStreetField().getValue());
     boolean hasCity = StringUtility.hasText(getCityField().getValue());
 
     getCityField().setMandatory(hasStreet);
     getCountryField().setMandatory(hasStreet || hasCity);
   }
+  // end::addressBoxContent[]
 }
+// tag::addressBoxContent[]

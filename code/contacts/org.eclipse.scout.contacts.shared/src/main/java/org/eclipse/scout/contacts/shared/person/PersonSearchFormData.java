@@ -2,7 +2,7 @@ package org.eclipse.scout.contacts.shared.person;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.contacts.shared.template.AbstractLocationBoxData;
+import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 
@@ -41,7 +41,7 @@ public class PersonSearchFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Location extends AbstractLocationBoxData {
+  public static class Location extends AbstractAddressBoxData {
 
     private static final long serialVersionUID = 1L;
   }

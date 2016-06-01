@@ -13,19 +13,18 @@ package org.eclipse.scout.contacts.events.client.event;
 import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.common.AbstractEmailField;
 import org.eclipse.scout.contacts.client.person.PersonForm;
-import org.eclipse.scout.contacts.client.template.AbstractAddressBox;
-import org.eclipse.scout.contacts.client.template.AbstractEmailField;
-import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.CommentsBox;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.CommentsBox.CommentsField;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.EventDetailsBox;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.EventDetailsBox.EmailField;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.EventDetailsBox.LocationBox;
-import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.EventDetailsBox.PhoneField;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ContactInfoBox;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ContactInfoBox.EmailField;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ContactInfoBox.LocationBox;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ContactInfoBox.PhoneField;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.NotesBox;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.NotesBox.NotesField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ParticipantsBox;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralBox;
@@ -102,16 +101,16 @@ public class EventForm extends AbstractForm {
     return getFieldByClass(CancelButton.class);
   }
 
-  public CommentsBox getCommentsBox() {
-    return getFieldByClass(CommentsBox.class);
+  public NotesBox getNotesBox() {
+    return getFieldByClass(NotesBox.class);
   }
 
-  public CommentsField getCommentsField() {
-    return getFieldByClass(CommentsField.class);
+  public NotesField getNotesField() {
+    return getFieldByClass(NotesField.class);
   }
 
-  public EventDetailsBox getEventDetailsBox() {
-    return getFieldByClass(EventDetailsBox.class);
+  public ContactInfoBox getContactInfoBox() {
+    return getFieldByClass(ContactInfoBox.class);
   }
 
   public DetailsBox getDetailsBox() {
@@ -252,11 +251,11 @@ public class EventForm extends AbstractForm {
     public class DetailsBox extends AbstractTabBox {
 
       @Order(1)
-      public class EventDetailsBox extends AbstractGroupBox {
+      public class ContactInfoBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Details");
+          return TEXTS.get("ContactInfo");
         }
 
         @Order(1)
@@ -269,7 +268,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(2)
-        public class PhoneField extends AbstractPhoneField {
+        public class PhoneField extends AbstractStringField {
 
           @Override
           protected String getConfiguredLabel() {
@@ -489,15 +488,15 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(3)
-      public class CommentsBox extends AbstractGroupBox {
+      public class NotesBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Comments");
+          return TEXTS.get("Notes");
         }
 
         @Order(1)
-        public class CommentsField extends AbstractStringField {
+        public class NotesField extends AbstractStringField {
 
           @Override
           protected int getConfiguredGridH() {
