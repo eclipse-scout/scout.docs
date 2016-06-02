@@ -10,9 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
-import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.CancelButton;
-import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.OkButton;
-import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.UrlField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -23,11 +20,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
+// tag::all[]
 public class PictureUrlForm extends AbstractForm {
-
-  public PictureUrlForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -38,56 +32,36 @@ public class PictureUrlForm extends AbstractForm {
     startInternal(new ModifyHandler());
   }
 
-  public CancelButton getCancelButton() {
-    return getFieldByClass(CancelButton.class);
-  }
-
-  public MainBox getMainBox() {
-    return getFieldByClass(MainBox.class);
-  }
-
-  public OkButton getOkButton() {
-    return getFieldByClass(OkButton.class);
-  }
-
   public UrlField getUrlField() {
     return getFieldByClass(UrlField.class);
   }
 
-  public UrlBox getUrlBox() {
-    return getFieldByClass(UrlBox.class);
-  }
-
-  @Order(1000)
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Override
-    protected int getConfiguredGridColumnCount() {
-      return 1;
-    }
-
-    @Order(1000)
+    @Order(10)
     public class UrlBox extends AbstractGroupBox {
 
-      @Order(1000)
+      @Order(10)
       public class UrlField extends AbstractStringField {
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
+        protected boolean getConfiguredLabelVisible() { // <1>
           return false;
         }
       }
     }
 
-    @Order(2000)
+    @Order(20)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(3000)
+    @Order(30)
     public class CancelButton extends AbstractCancelButton {
     }
   }
 
-  public class ModifyHandler extends AbstractFormHandler {
+  public class ModifyHandler extends AbstractFormHandler { // <2>
   }
 }
+// end::all[]

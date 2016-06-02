@@ -150,7 +150,7 @@ public class OrganizationForm extends AbstractForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
+          return 3;
         }
 
         @Override
@@ -243,11 +243,6 @@ public class OrganizationForm extends AbstractForm {
 
         @Order(3000)
         public class EmailField extends AbstractEmailField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Email");
-          }
         }
       }
 

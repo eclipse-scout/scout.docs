@@ -68,9 +68,9 @@ public class PersonService implements IPersonService {
       formData.setPersonId(UUID.randomUUID().toString());
     }
 
-    SQL.insert(SQLs.PERSON_INSERT, formData);
+    SQL.insert(SQLs.PERSON_INSERT, formData); // <1>
 
-    return store(formData); // <1>
+    return store(formData); // <2>
   }
 
   @Override
@@ -79,7 +79,7 @@ public class PersonService implements IPersonService {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 
-    SQL.selectInto(SQLs.PERSON_SELECT, formData);
+    SQL.selectInto(SQLs.PERSON_SELECT, formData); // <3>
 
     return formData;
   }
@@ -90,7 +90,7 @@ public class PersonService implements IPersonService {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 
-    SQL.update(SQLs.PERSON_UPDATE, formData);
+    SQL.update(SQLs.PERSON_UPDATE, formData); // <4>
 
     return formData;
   }
