@@ -21,7 +21,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>book_scout_intro</artifactId>
+			<artifactId>scout_beginners_guide</artifactId>
 			<version>6.0.0-SNAPSHOT</version>
 			<type>pom</type>
 		</dependency>
@@ -90,13 +90,13 @@
 									<htmlOutput />
 								</inputSource>
 								<!-- publish for downloads -->
-								<!-- scout book intro -->
+								<!-- beginners guide -->
 								<inputSource>
-									<inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
+									<inputFolder>../beginners_guide/target/generated-docs</inputFolder>
 									<outputSubFolder>${outputSubFolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
 									<htmlOutput>
-										<outputZipFileName>user-guide.zip</outputZipFileName>
+										<outputZipFileName>beginners-guide.zip</outputZipFileName>
 									</htmlOutput>
 									<pdfOutput />
 								</inputSource>

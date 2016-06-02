@@ -35,7 +35,7 @@
   </properties>
 
   <modules>
-    <module>book_scout_intro</module>
+    <module>beginners_guide</module>
     <module>technical_guide</module>
     <module>eclipse_help</module>
     <module>scout_helloworld</module>
