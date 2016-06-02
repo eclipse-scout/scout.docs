@@ -13,9 +13,9 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the scout migration from the previous version
 //-----------------------------------------------------------------------------
 
-== Scout 6.0 Migration Guide
+== Scout 6.1 Migration Guide
 
-This document describes the migration from Scout 5.0 to Scout 6.0
+This document describes the migration from Scout 5.0 to Scout 6.1
 
 ////
 Howto:
@@ -113,7 +113,7 @@ Offline functionality in the scout client was removed (not needed anymore). Dele
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
 === Mobile
-org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client. 
+org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client.
 A lot of the mobile code in that plugin has been removed because the ui is now smarter and reacts bettter to smaller screens than the previous uis.
 
 If your project contains a mobile plugin, it is suggested to merge it with your client plugin as well.
