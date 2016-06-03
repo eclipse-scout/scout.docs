@@ -91,10 +91,7 @@ In the *New package wizard* you can define the following properties:
 
 Click on btn:[Next] to create the project. The *Project Browser*
 
-
-
 ////
-
 
 ==== The Open Type Dialog
 
@@ -111,18 +108,49 @@ Click on btn:[Next] to create the project. The *Project Browser*
 * Run as
 * Debug as
 
+
+////
 ==== Organize Java imports
+The _import_ section of a java class needs to be kept up-to-date.
+New imports need to be added and no longer used ones should be removed.
+Eclipse offers a the shortcut kbd:[Ctrl,Shift,O] to accomplish this task.
 
-(CTRL+Shift+O)
-
+In case an import cannot be resolved because several candidates exist, a selection list is displayed.
 
 ==== Rename a class
+Renaming a class without SDK support is not so easy.
+The class and possibly the compilation unit need to be renamed.
+Then every reference to the class within the workspace needs to be updated.
+
+All this work is accomplished by using the _Class rename Wizard_.
+
+1. Open the Wizard using one of the following methods
+ * kbd:[Alt,Shift,R]
+ * menu:Context Menu[Refactor,Rename...]
+ * Select the class in the tree and press kbd:[F2]
+2. Choose the new name for the class
+3. Specify which references need to be updated
+4. Click *[Finish]* or *[Next]* to continue
+
+===== Alternative Method
+A class can be renamed by select the class name anywhere in code and pressing kbd:[Ctrl,1].
+The option *[Rename in Workspace]* will rename the class without using a the wizard.
 
 
 ==== Rename a package
+Renaming a package without SDK support would be a tedious undertaking.
+All classes in the package and its subpackages would have to be modified as well as the directory structure on disk.
+Then every reference to the package within the workspace needs to be updated.
 
+All this work is accomplished by using the _Package rename Wizard_.
 
-////
+1. Open the Wizard using one of the following methods
+ * kbd:[Alt,Shift,R]
+ * menu:Context Menu[Refactor,Rename...]
+ * Select the package in the tree and press kbd:[F2]
+2. Choose the new name for the package
+3. Specify which references need to be updated
+4. Click *[OK]* or *[Prview]* to continue
 
 
 [[sec-sdk_overview]]
