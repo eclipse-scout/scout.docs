@@ -23,14 +23,65 @@ This chapter presents the Scout SDK tooling that is included with the Eclipse Sc
 The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.
 
 The chapter is organized as follows. 
-Section <<sec-sdk_motivation>> describes the goals and benefits of the tooling included. 
-A high level description of the tooling is provided in section <<sec-sdk_overview>>.
+Section <<sec-sdk_motivation>> describes the goals and benefits of the tooling included.
+Because the Scout Tooling is based on the Eclipse IDE, section <<sec-eclipse_ide_tooling>> provides a short overview of frequently used Eclipse features.
+A high level description of the Scout tooling is provided in section <<sec-sdk_overview>>.
 Sections <<sec-sdk_wizard>>, <<sec-sdk_content_assist>> and <<sec-sdk_nls>> then provide detailed descriptions of the functionality offered by the Scout SDK.
 
 [[sec-sdk_motivation]]
 === Motivation for the Tooling
  
 include::{mdledir}/SdkScoutTooling.adoc[]
+
+[[sec-eclipse_ide_tooling]]
+=== Eclipse IDE tooling
+
+The Scout tooling is an extension of the Eclipse IDE.
+The goal of this section is not to provide a complete overview on the features contained in the Eclipse IDE.
+It provides a short overview of the important eclipse features, frequently used during the development of a Scout Application.
+Experimented Eclipse IDE users might skip this section.
+
+////
+
+==== Start one of the New Wizard
+
+(CTRL+N)
+
+
+==== Create a new Java class
+
+
+==== Create a new Java package
+
+
+==== The Open Type Dialog
+
+(CTRL+Shift+T)
+
+
+==== Content Assist proposals
+
+(CTRL+Space)
+
+
+==== Launchers files
+
+* Run as
+* Debug as
+
+==== Organize Java imports
+
+(CTRL+Shift+O)
+
+
+==== Rename a class
+
+
+==== Rename a package
+
+
+////
+
 
 [[sec-sdk_overview]]
 === Scout SDK Overview
