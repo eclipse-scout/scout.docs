@@ -19,10 +19,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 == Scout Tooling
 (((Scout SDK)))
 
-This chapter presents the Scout SDK tooling that is included with the Eclipse Scout. 
+This chapter presents the Scout SDK tooling that is included with the Eclipse Scout.
 The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.
 
-The chapter is organized as follows. 
+The chapter is organized as follows.
 Section <<sec-sdk_motivation>> describes the goals and benefits of the tooling included.
 Because the Scout Tooling is based on the Eclipse IDE, section <<sec-eclipse_ide_tooling>> provides a short overview of frequently used Eclipse features.
 A high level description of the Scout tooling is provided in section <<sec-sdk_overview>>.
@@ -30,7 +30,7 @@ Sections <<sec-sdk_wizard>>, <<sec-sdk_content_assist>> and <<sec-sdk_nls>> then
 
 [[sec-sdk_motivation]]
 === Motivation for the Tooling
- 
+
 include::{mdledir}/SdkScoutTooling.adoc[]
 
 [[sec-eclipse_ide_tooling]]
@@ -41,17 +41,59 @@ The goal of this section is not to provide a complete overview on the features c
 It provides a short overview of the important eclipse features, frequently used during the development of a Scout Application.
 Experimented Eclipse IDE users might skip this section.
 
-////
 
-==== Start one of the New Wizard
 
-(CTRL+N)
+==== Start the New Wizard
+To start the *New Wizard* wizard press kbd:[Ctrl,N] or use menu menu:File[New,Other...].
+In the first wizard step type the name of the object you want to create into the *Wizards* field as shown in <<img-eclipse_new_wizard>>.
+
+[[img-eclipse_new_wizard, New Wizard]]
+image::{imgsdir}/eclipse_new_wizard.png[]
 
 
 ==== Create a new Java class
 
+Start the *New Wizard* and type *Class* in the Wizards field.
+Select *Class*
+Click on btn:[Next] to open the *New class wizard*
+
+[[img-eclipse_new_class, New Class]]
+image::{imgsdir}/eclipse_new_class.png[]
+
+You can choose define the following properties:
+
+* *Source folder*: Click on btn:[Browse] to choose the project where the class belongs.
+* *Package*: Click on btn:[Browse] to choose the package in the given project.
+If the package does not exist it will be created a new one automatically.
+* *Name*: Type the class name
+* *Modifiers*: Choose public or default. Or abstract and/or final.
+* *Superclass*: Choose the parent class clicking on btn:[Browse]
+* *Interfaces*: Click on btn:[Add] to add the list of interfaces your class implements.
+* *Method stubs*: Include methods in your class.
+* *Comments*: Generate predefine comments.
+
+Click on btn:[Finish] when you are done with the class definition.
+The java editor will open and you can start editing.
 
 ==== Create a new Java package
+
+Start the *New Wizard* and type *Package* in the Wizards field.
+Select *Package*
+Click on btn:[Next] to open the *New package wizard*
+
+image::{imgsdir}/create_new_package_wizard.png[]
+
+In the *New package wizard* you can define the following properties:
+
+* *Source folder*: Click on btn:[Browse] to choose the project where the package belongs.
+* *Name*: Write the name of the package.
+* *Package info*: Choose the checkbox if you want package-info
+
+Click on btn:[Next] to create the project. The *Project Browser*
+
+
+
+////
 
 
 ==== The Open Type Dialog
@@ -86,24 +128,24 @@ Experimented Eclipse IDE users might skip this section.
 [[sec-sdk_overview]]
 === Scout SDK Overview
 
-The Scout SDK tooling helps the Scout developer to quickly create frequently used Scout components. 
+The Scout SDK tooling helps the Scout developer to quickly create frequently used Scout components.
 This Scout Tooling is implemented as extensions of the Eclipse IDE in the form of wizards, content assist extension to the Eclipse Java editor and support for dealing with translated texts called NLS support.
 
 Scout Wizards::
-The Scout SDK tooling includes a number of wizards for the creation of frequently used Scout components. 
-In many cases the execution of such wizards involves the creation/editing of several source files. 
-In the case of the creation of a new Scout form this includes the form class in the client module of the Scout application, a form data class and a service that communicates 
+The Scout SDK tooling includes a number of wizards for the creation of frequently used Scout components.
+In many cases the execution of such wizards involves the creation/editing of several source files.
+In the case of the creation of a new Scout form this includes the form class in the client module of the Scout application, a form data class and a service that communicates
 Descriptions for the individual wizards are provided in section <<sec-sdk_wizard>>.
 
 Content Assist::
-In the Scout framework the hierarchical organization of Scout components if frequently reflected in the form of inner classes. 
-This allows the Scout tooling to provide context specific proposals in the form of content assist proposals offered in the Java editor of the Eclipse IDE. 
-Examples for this form of the tooling includes the creation of form fields or adding columns and context menus to tables.  
+In the Scout framework the hierarchical organization of Scout components if frequently reflected in the form of inner classes.
+This allows the Scout tooling to provide context specific proposals in the form of content assist proposals offered in the Java editor of the Eclipse IDE.
+Examples for this form of the tooling includes the creation of form fields or adding columns and context menus to tables.
 Content assist support is described in detail in <<sec-sdk_content_assist>>.
 
 NLS Tooling::
-Eclipse Scout comes with NLS (National Language Support). 
-To support Scout developers in using Scout's NLS (National Language Support) the Scout SDK offers corresponding tooling to work with translated texts. 
+Eclipse Scout comes with NLS (National Language Support).
+To support Scout developers in using Scout's NLS (National Language Support) the Scout SDK offers corresponding tooling to work with translated texts.
 This tooling is described in section <<sec-sdk_nls>>.
 
 
@@ -122,9 +164,9 @@ image::{imgsdir}/sdk_new_wizard.png[]
 
 The Wizards provided by the Scout SDK are introduced and described in the sections listed below.
 
-* <<sec-wizard_project>>  
-* <<sec-wizard_page>>  
-* <<sec-wizard_form>>  
+* <<sec-wizard_project>>
+* <<sec-wizard_page>>
+* <<sec-wizard_form>>
 
 [[sec-wizard_project]]
 ==== New Project Wizard
@@ -158,7 +200,7 @@ bla
 ==== Adding a new Translated Text Entry
 (((Adding translated text entries)))
 
-Translated text entries are most frequently added when working in the Java editor view. 
+Translated text entries are most frequently added when working in the Java editor view.
 
 include::{mdledir}/SdkEditorNlsContentAssist.adoc[]
 
@@ -171,11 +213,11 @@ include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
 (((Managing translated application texts)))
 (((Adding application languages)))
 
-To manage translated application texts for different languages the Scout SDK includes a NLS editor. 
+To manage translated application texts for different languages the Scout SDK includes a NLS editor.
 This editor helps to efficiently deal to edit all the property files that are used with the default setup of Scout.
 
-The NLS editor can be accessed for each text provider service of a Scout application via the `*.nls` files of the shared Maven modules of the application. 
-In the case of the "Hello World" application you will find the `Texts.nls` file in module `org.eclipse.scout.helloworld.shared`. 
-To open the editor for the "Hello World" application select the `Texts.nls` file first and then use context menu menu:Open With[NLS Editor]. 
+The NLS editor can be accessed for each text provider service of a Scout application via the `*.nls` files of the shared Maven modules of the application.
+In the case of the "Hello World" application you will find the `Texts.nls` file in module `org.eclipse.scout.helloworld.shared`.
+To open the editor for the "Hello World" application select the `Texts.nls` file first and then use context menu menu:Open With[NLS Editor].
 
 include::{mdledir}/SdkEditorNls.adoc[]
