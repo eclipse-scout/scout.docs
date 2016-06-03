@@ -72,10 +72,10 @@ To verify the installation you might want to go through this Java "`Hello World!
 tutorial.footnote:[Windows Java "`Hello World!`": http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html].
 
 Installation instructions for Linux.footnote:[
-Install the JDK on Linux: http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html
+Install the JDK on Linux: https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html
 ]
 and Mac.footnote:[
-Install the JDK on Mac: http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html.
+Install the JDK on Mac: https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html.
 ]
 are also available from Oracle.
 
