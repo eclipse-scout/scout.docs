@@ -51,8 +51,8 @@ public class AbstractUrlImageField extends AbstractImageField {
   protected String getConfiguredImageId() {
     return Icons.Person;
   }
-  // tag::menu[]
 
+  // tag::menu[]
   @Order(10)
   public class EditURLMenu extends AbstractMenu {
 
@@ -63,7 +63,19 @@ public class AbstractUrlImageField extends AbstractImageField {
 
     @Override
     protected void execAction() {
-      updateUrl();
+      PictureUrlForm form = new PictureUrlForm();
+      String oldUrl = getUrl();
+
+      if (StringUtility.hasText(oldUrl)) { // <1>
+        form.getUrlField().setValue(oldUrl);
+      }
+
+      form.startModify();
+      form.waitFor(); // <2>
+
+      if (form.isFormStored()) { // <3>
+        setUrl(form.getUrlField().getValue());
+      }
     }
   }
   // end::menu[]
@@ -89,26 +101,9 @@ public class AbstractUrlImageField extends AbstractImageField {
         addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
       }
     }
+
+    getForm().touch();
   }
-  // end::template[]
-
-  // tag::menu[]
-  protected void updateUrl() {
-    PictureUrlForm form = new PictureUrlForm();
-    String oldUrl = getUrl();
-
-    if (StringUtility.hasText(oldUrl)) {
-      form.getUrlField().setValue(oldUrl);
-    }
-
-    form.startModify();
-    form.waitFor();
-
-    if (form.isFormStored()) {
-      setUrl(form.getUrlField().getValue());
-    }
-  }
-  // tag::template[]
 }
 // end::template[]
 // end::menu[]

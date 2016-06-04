@@ -139,13 +139,13 @@ public class Desktop extends AbstractDesktop {
   //tag::quickAccessMenu[]
   @Order(10)
   public class QuickAccessMenu extends AbstractMenu {
-    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("QuickAccess");
     }
     //end::quickAccessMenu[]
+    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredKeyStroke() {
@@ -193,8 +193,7 @@ public class Desktop extends AbstractDesktop {
 
   //tag::OptionsMenu[]
   @Order(20)
-  public class OptionsMenu extends AbstractFormMenu<OptionsForm> {
-    //end::DesktopInit[]
+  public class OptionsMenu extends AbstractFormMenu<OptionsForm> { // <1>
 
     @Override
     protected String getConfiguredText() {
@@ -205,6 +204,7 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredIconId() {
       return AbstractIcons.Gear;
     }
+    //end::DesktopInit[]
 
     //end::OptionsMenu[]
     @Override
@@ -222,22 +222,17 @@ public class Desktop extends AbstractDesktop {
   //end::OptionsMenu[]
 
   @Order(30)
-  public class UserMenu extends AbstractFormMenu<UserForm> {
-    //end::DesktopInit[]
+  public class UserMenu extends AbstractFormMenu<UserForm> { // <2>
 
     @Override
     protected String getConfiguredIconId() {
       return AbstractIcons.Person;
     }
+    //end::DesktopInit[]
 
     @Override
     protected String getConfiguredKeyStroke() {
       return IKeyStroke.F12;
-    }
-
-    @Override
-    protected String getConfiguredText() {
-      return "";
     }
 
     @Override

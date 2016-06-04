@@ -16,9 +16,9 @@ import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonCreatePermission;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
-import org.eclipse.scout.contacts.shared.person.PersonPageData;
 import org.eclipse.scout.contacts.shared.person.PersonReadPermission;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
+import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -29,16 +29,18 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 
 //tag::all[]
+//tag::getTableData[]
 public class PersonService implements IPersonService {
 
   //end::all[]
   @Override
-  public PersonPageData getTableData(SearchFilter filter, String organizationId) {
-    PersonPageData pageData = new PersonPageData();
+  public PersonTablePageData getPersonTableData(SearchFilter filter, String organizationId) {
+    PersonTablePageData pageData = new PersonTablePageData();
     PersonSearchFormData searchData = (PersonSearchFormData) filter.getFormData();
 
     StringBuilder sqlSelect = new StringBuilder(SQLs.PERSON_PAGE_SELECT);
     StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");
+    // end::getTableData[]
 
     if (searchData != null) {
       addToWhere(sqlWhere, searchData.getFirstName().getValue(), "first_name", "firstName");
@@ -49,12 +51,13 @@ public class PersonService implements IPersonService {
       addToWhere(sqlWhere, organizationId, "organization_id", "organizationId");
     }
 
+    // tag::getTableData[]
     String sql = sqlSelect.append(sqlWhere).append(SQLs.PERSON_PAGE_DATA_SELECT_INTO).toString();
-
     SQL.selectInto(sql, searchData, new NVPair("organizationId", organizationId), new NVPair("page", pageData));
 
     return pageData;
   }
+  // end::getTableData[]
 
   //tag::all[]
   @Override
@@ -101,6 +104,8 @@ public class PersonService implements IPersonService {
       sqlWhere.append(String.format(SQLs.AND_LIKE_CAUSE, sqlAttribute, searchAttribute, "%"));
     }
   }
-  //tag::all[]
+  // tag::all[]
+  // tag::getTableData[]
 }
-//end::all[]
+// end::all[]
+// end::getTableData[]

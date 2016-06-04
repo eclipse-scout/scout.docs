@@ -16,8 +16,8 @@ import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationCreatePermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
-import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationReadPermission;
+import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -27,24 +27,26 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 
-//tag::getTableData[]
+// tag::getTableData[]
+// tag::all[]
 public class OrganizationService implements IOrganizationService {
+  // end::all[]
 
   @Override
-  public OrganizationPageData getTableData(SearchFilter filter) {
-    OrganizationPageData pageData = new OrganizationPageData();
-    // fetch database data and store it into the pageData object
-    //end::getTableData[]
-    //tag::allOrgs[]
+  public OrganizationTablePageData getOrganizationTableData(SearchFilter filter) {
+    OrganizationTablePageData pageData = new OrganizationTablePageData();
+    // end::getTableData[]
+    // tag::allOrgs[]
 
     String sql = SQLs.ORGANIZATION_PAGE_SELECT + SQLs.ORGANIZATION_PAGE_DATA_SELECT_INTO; // <1>
     SQL.selectInto(sql, new NVPair("page", pageData)); // <2>
 
-    //end::allOrgs[]
-    //tag::getTableData[]
+    // end::allOrgs[]
+    // tag::getTableData[]
     return pageData;
   }
-  //end::getTableData[]
+  // end::getTableData[]
+  // tag::all[]
 
   @Override
   public OrganizationFormData create(OrganizationFormData formData) {
@@ -73,15 +75,6 @@ public class OrganizationService implements IOrganizationService {
   }
 
   @Override
-  public OrganizationFormData prepareCreate(OrganizationFormData formData) {
-    if (!ACCESS.check(new OrganizationCreatePermission())) {
-      throw new VetoException(TEXTS.get("InsufficientPrivileges"));
-    }
-
-    return formData;
-  }
-
-  @Override
   public OrganizationFormData store(OrganizationFormData formData) {
     if (!ACCESS.check(new OrganizationUpdatePermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
@@ -94,3 +87,4 @@ public class OrganizationService implements IOrganizationService {
   //tag::getTableData[]
 }
 //end::getTableData[]
+//end::all[]

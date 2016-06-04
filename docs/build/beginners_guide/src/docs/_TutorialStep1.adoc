@@ -18,12 +18,17 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 [[sec-contacts_initial_codebase]]
 ==== Creating the initial Codebase
 
-The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard as described in Section <<sec-wizard_new_project>>.
-For the wizard fiels you may use the following values:
+The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard. 
+For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
 
 * [field]_Group Id_: `org.eclipse.scout.contacts`
 * [field]_Artefact Id_: `org.eclipse.scout.contacts`
 * [field]_Display Name_: "Contacts Application"
+
+
+[[img-sdk_new_project_tutorial, Figure 000]]
+.The creation of the initial "Contacts" application.
+image::{imgsdir}/sdk_new_project_tutorial.png[]
 
 To create this initial application click on btn:[Finish].
 The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>. 
@@ -37,7 +42,8 @@ image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
 We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application. 
 To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
-The explicit list of packages to delete per Maven module is provided in the text below. 
+
+The packages to delete is provided per Maven module in the list below. 
 
 Client Module `org.eclipse.scout.contacts.client`::
 * In folder `src/main/java` 
@@ -58,21 +64,21 @@ Shared Module `org.eclipse.scout.contacts.shared`::
 * In folder `src/generated/java` 
 ** Delete package `org.eclipse.scout.contacts.shared.helloworld` 
 
+The deletion of these outlines results in a number of compile errors in classes `WorkOutline` and `Desktop`. 
+All these errors will be resolved in the following two sections where we modify the two classes to our needs. 
+
 [[sec-contacts_change_workoutline]]
 ==== Changes to Class WorkOutline
 
-Instead of adding a new "Contacts" outline to the application re simply reuse and rename the "Work" outline that was created during the initial project setup. 
-For this, we perform the following modifications to class WorkOutline.
+Instead of adding a new "Contacts" outline to the application we reuse the generated code and rename the "Work" outline into "Contacts" outline. 
+For this, we perform the following modifications to class `WorkOutline`.
 
 * Rename the class package to `org.eclipse.scout.contacts.client.contact`
 * Rename the class to `ContactOutline`
 * Change the outline title to "Contact"
 * Change the outline icon to `Icons.Category`
 
-To quickly find the class we open the [wizard]_Open Type_ dialog from the Eclipse IDE footnote:[
-Type 'open type' into the [field]_Quick Access_ field of the Eclipse IDE or hit `Ctrl`,`Shift`, and `T` at the same time.
-]
-and enter 'workoutline' into the search field as shown in <<img-eclipse_open_type>>.
+To quickly find class `WorkOutline` we first open the [wizard]_Open Type_ dialog from the Eclipse IDE by hitting kbd:[Ctrl+Shift+T] and enter "workoutline" into the search field as shown in <<img-eclipse_open_type>>.
 In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
 
 [[img-eclipse_open_type, Figure 000]]
@@ -80,20 +86,33 @@ image::{imgsdir}/eclipse_open_type.png[]
 .Use the Open Type dialog to quickly find java types in the Eclipse IDE.
 
 We start with the package rename.
-To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the package name and using the Eclipse menu menu:Refactor[Rename...].
-This opens the package rename dialog as shown in <<img-sdk_rename_package>>.
+To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
+This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field. 
 
 [[img-sdk_rename_package, Figure 000]]
 image::{imgsdir}/sdk_rename_package.png[]
 .Use the Eclipse Rename Package dialog to rename a Java package.
 
-In next step we rename class `WorkOutline` to `ContactOutline` 
-In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and use the Eclipse menu menu:Refactor[Rename...] again.
+In next step we rename class `WorkOutline` to `ContactOutline`. 
+In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
+
 Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change. 
 If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Eclipse complete the rename operation.
+To get rid of the compile error in method `execCreateChildPages` we simply delete the content in the method body.
 
-Now, we change the outline title in method `getConfiguredTitle` to "Contacts" using the method described in <<sec-add_text_entry>>.
-Finally we change the return value of method `getConfiguredIconId` to value `Icons.Category`.
+Next, we change the outline title in method `getConfiguredTitle` by replacing the string "Work" with "Contacts", setting the cursor at the end of the word "Contacts" and hitting kbd:[Ctrl+Space] to open the Scout content assist as shown in <<img-sdk_new_text_entry_contact>>.
+
+[[img-sdk_new_text_entry_contact, Figure 000]]
+image::{imgsdir}/sdk_new_text_entry_contact.png[]
+.Use the Scout content assist to add new translations.
+
+To enter a new translated text we double click on the proposal [element]_New text..._ to open the Scout new entry wizard as shown in <<img-sdk_new_text_entry_contact_wizard>>.
+
+[[img-sdk_new_text_entry_contact_wizard, Figure 000]]
+image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
+.The Scout new entry wizard to add translated texts to the application.
+
+As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Category` and end with the code shown in <<lst-contacts_outline>>.
 
 [[lst-contacts_outline, Listing contacts outline]]
 [source,java]
@@ -102,20 +121,19 @@ Finally we change the return value of method `getConfiguredIconId` to value `Ico
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=OutlineInit]
 ----
 
-Before we conclude the modifications in class ContactOutline let us remove the remaining compile error in class `ContactOutline`. 
-For this remove the line `pageList.add(new HelloWorldPage());` in method `execCreateChildPages`.
-Then, update the imports using Eclipse menu menu:Source[Organize Imports] and save the modified class.
+To conclude the modifications we update the imports by hitting kbd:[Ctrl+Shift+O] and save the modified class using kbd:[Ctrl+S].
 
 [[sec-contacts_change_desktop]]
 ==== Changes to Class Desktop
 
-The second class to adapt for the "Contacts" application is class Desktop. 
+The second class to adapt for the "Contacts" application is the `Desktop` class. 
 This class is implemented exactly once in each Scout application and holds the available outlines and top level menus of the application in the form of inner classes.
 
 For the "Contacts" application we adapt the initial implementation to have outline view buttons for the "Contacts" and "Search" outlines. 
 The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user. 
 
-Start with removing `SettingsOutline.class` from the list of return values in `getConfiguredOutlines` as shown in <<lst-contacts_getConfiguredOutlines>>.
+Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class. 
+In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values in as shown in <<lst-contacts_getConfiguredOutlines>>.
 
 [[lst-contacts_getConfiguredOutlines, Listing getConfiguredOutlines]]
 [source,java]
@@ -126,11 +144,11 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 Then, perform the following changes in class `Desktop`
 
-* Delete inner class SettingOutlineViewButton
-* Rename inner class WorkOutlineViewButton to ContactOutlineViewButton
-* Change FileMenu to QuickAccesMenu and let `getConfiguredText` return "Quick Access"
-* Change BookmarkMenu to OptionsMenu. Let `getConfiguredText` return "Options", and add method `getConfiguredIconId` to return `AbstractIcons.Gear`.
-* Change HelpMenu to UserMenuLet. `getConfiguredText` return "", and add method `getConfiguredIconId` to return `AbstractIcons.Person`.
+* Delete inner class `SettingOutlineViewButton`
+* Rename inner class WorkOutlineViewButton to `ContactOutlineViewButton`
+* Rename FileMenu to `QuickAccesMenu`, let `getConfiguredText` return "Quick Access" and delete the remaining content.
+* Rename BookmarkMenu to `OptionsMenu`. Add methods `getConfiguredText` and  `getConfiguredIconId` according to <<lst-contacts_desktop>>.
+* Change HelpMenu to `UserMenu`. Remove method `getConfiguredText` and add method `getConfiguredIconId` that returns `AbstractIcons.Person`.
 
 At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.  
 
@@ -141,15 +159,8 @@ At the end of these changes the inner class structure of class Desktop will look
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
 ----
 
-The explicit listing for the changed class OptionsMenu is provided in <<lst-contacts_OptionsMenu>>. 
-Please note that for now your class `OptionsMenu` will just extend `AbstractMenu`.
-
-[[lst-contacts_OptionsMenu, Listing OptionsMenu]]
-[source,java]
-.Initial implementation for the "Options" menu.
-----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=OptionsMenu]
-----
+<1> In your implementation `QuickAccesMenu` should extend `AbstractMenu`
+<2> In your implementation `UserMenu` should extend `AbstractMenu`
 
 [[sec-contacts_summary]]
 ==== What have we achieved?
@@ -168,5 +179,5 @@ The user interface of the application will now look as shown in <<img-contacts_t
 image::{imgsdir}/contacts_tutorial_result_step_1.png[]
 
 From the coding perspective we now have all necessary maven Modules for "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application. 
-This fact is very important as simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application. 
+This point is important as it simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application. 
 The same is true for the user perspective: The layout of the current state of the tutorial matches with the complete "Contacts" sample application.

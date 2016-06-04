@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
+import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
@@ -55,8 +56,8 @@ public class EventFormData extends AbstractFormData {
     return getFieldByClass(LocationBox.class);
   }
 
-  public Notes getNotes() {
-    return getFieldByClass(Notes.class);
+  public NotesBox getNotesBox() {
+    return getFieldByClass(NotesBox.class);
   }
 
   public ParticipantTableField getParticipantTableField() {
@@ -100,7 +101,7 @@ public class EventFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Notes extends AbstractValueFieldData<String> {
+  public static class NotesBox extends AbstractNotesBoxData {
 
     private static final long serialVersionUID = 1L;
   }

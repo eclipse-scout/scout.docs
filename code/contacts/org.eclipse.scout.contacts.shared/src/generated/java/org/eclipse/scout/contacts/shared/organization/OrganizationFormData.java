@@ -4,6 +4,7 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
+import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractUrlImageFieldData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
@@ -30,16 +31,12 @@ public class OrganizationFormData extends AbstractFormData {
     return getFieldByClass(Homepage.class);
   }
 
-  public Logo getLogo() {
-    return getFieldByClass(Logo.class);
-  }
-
   public Name getName() {
     return getFieldByClass(Name.class);
   }
 
-  public Notes getNotes() {
-    return getFieldByClass(Notes.class);
+  public NotesBox getNotesBox() {
+    return getFieldByClass(NotesBox.class);
   }
 
   /**
@@ -64,6 +61,10 @@ public class OrganizationFormData extends AbstractFormData {
     return getFieldByClass(Phone.class);
   }
 
+  public Picture getPicture() {
+    return getFieldByClass(Picture.class);
+  }
+
   public static class AddressBox extends AbstractAddressBoxData {
 
     private static final long serialVersionUID = 1L;
@@ -79,17 +80,12 @@ public class OrganizationFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Logo extends AbstractUrlImageFieldData {
-
-    private static final long serialVersionUID = 1L;
-  }
-
   public static class Name extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Notes extends AbstractValueFieldData<String> {
+  public static class NotesBox extends AbstractNotesBoxData {
 
     private static final long serialVersionUID = 1L;
   }
@@ -100,6 +96,11 @@ public class OrganizationFormData extends AbstractFormData {
   }
 
   public static class Phone extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+  }
+
+  public static class Picture extends AbstractUrlImageFieldData {
 
     private static final long serialVersionUID = 1L;
   }

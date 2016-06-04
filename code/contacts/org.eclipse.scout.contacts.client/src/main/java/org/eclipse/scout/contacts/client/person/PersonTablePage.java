@@ -16,7 +16,7 @@ import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
-import org.eclipse.scout.contacts.shared.person.PersonPageData;
+import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -40,8 +40,8 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 //tag::PageInit[]
 //tag::structure[]
-@PageData(PersonPageData.class)
-public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
+@PageData(PersonTablePageData.class)
+public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table> {
   //end::structure[]
   //end::PageInit[]
 
@@ -55,7 +55,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
 
   @Override // <2>
   protected void execLoadData(SearchFilter filter) {
-    importPageData(BEANS.get(IPersonService.class).getTableData(filter, getOrganizationId()));
+    importPageData(BEANS.get(IPersonService.class).getPersonTableData(filter, getOrganizationId()));
   }
 
   @Override // <3>
@@ -91,7 +91,7 @@ public class PersonPage extends AbstractPageWithTable<PersonPage.Table> {
     }
 
     public EmailColumn getEmailColumn() {
-      return getColumnSet().getColumnByClass(PersonPage.Table.EmailColumn.class);
+      return getColumnSet().getColumnByClass(PersonTablePage.Table.EmailColumn.class);
     }
 
     public OrganizationColumn getOrganizationColumn() {

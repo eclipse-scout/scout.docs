@@ -15,7 +15,7 @@ import java.util.Set;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
-import org.eclipse.scout.contacts.shared.organization.OrganizationPageData;
+import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -37,8 +37,8 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 //tag::PageInit[]
-@PageData(OrganizationPageData.class)
-public class OrganizationPage extends AbstractPageWithTable<OrganizationPage.Table> {
+@PageData(OrganizationTablePageData.class)
+public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTablePage.Table> {
 
   @Override
   protected String getConfiguredTitle() {
@@ -57,7 +57,7 @@ public class OrganizationPage extends AbstractPageWithTable<OrganizationPage.Tab
   //tag::execLoadData[]
   @Override
   protected void execLoadData(SearchFilter filter) {
-    importPageData(BEANS.get(IOrganizationService.class).getTableData(filter));
+    importPageData(BEANS.get(IOrganizationService.class).getOrganizationTableData(filter));
   }
   //end::execLoadData[]
 

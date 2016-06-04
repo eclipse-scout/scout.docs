@@ -14,6 +14,8 @@ import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractAddressBox;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.common.AbstractEmailField;
+import org.eclipse.scout.contacts.client.common.AbstractNotesBox;
+import org.eclipse.scout.contacts.client.common.AbstractNotesBox.NotesField;
 import org.eclipse.scout.contacts.client.common.AbstractUrlImageField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox;
@@ -22,12 +24,11 @@ import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.D
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox.EmailField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox.PhoneField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.NotesBox;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.NotesBox.NotesField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.HomepageField;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.LogoField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.NameField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.OpenInBrowserButton;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.PictureField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
@@ -48,13 +49,22 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @FormData(value = OrganizationFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+// tag::layout[]
 public class OrganizationForm extends AbstractForm {
+  // end::layout[]
 
   private String organizationId;
 
-  public OrganizationForm() {
-    super();
+  @FormData
+  public String getOrganizationId() {
+    return organizationId;
   }
+
+  @FormData
+  public void setOrganizationId(String organizationId) {
+    this.organizationId = organizationId;
+  }
+  // tag::layout[]
 
   @Override
   protected String getConfiguredTitle() {
@@ -65,6 +75,7 @@ public class OrganizationForm extends AbstractForm {
   protected int getConfiguredDisplayHint() {
     return IForm.DISPLAY_HINT_VIEW;
   }
+  // end::layout[]
 
   public void startModify() {
     startInternalExclusive(new ModifyHandler());
@@ -87,7 +98,8 @@ public class OrganizationForm extends AbstractForm {
   }
 
   public NotesField getNotesField() {
-    return getFieldByClass(NotesField.class);
+//    return getFieldByClass(NotesField.class);
+    return getNotesBox().getNotesField();
   }
 
   public ContactInfoBox getOrganizationDetailsBox() {
@@ -110,8 +122,8 @@ public class OrganizationForm extends AbstractForm {
     return getFieldByClass(HomepageField.class);
   }
 
-  public LogoField getLogoField() {
-    return getFieldByClass(LogoField.class);
+  public PictureField getLogoField() {
+    return getFieldByClass(PictureField.class);
   }
 
   public MainBox getMainBox() {
@@ -138,28 +150,41 @@ public class OrganizationForm extends AbstractForm {
   public Object computeExclusiveKey() {
     return getOrganizationId();
   }
+  // tag::layout[]
 
-  @Order(1000)
+  // tag::refactor[]
+  @Order(10)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(1000)
+    @Order(10)
     public class GeneralBox extends AbstractGroupBox {
+      // end::refactor[]
+      // tag::picture[]
 
-      @Order(1000)
-      public class LogoField extends AbstractUrlImageField {
+      @Order(10)
+      public class PictureField extends AbstractUrlImageField { // <1>
+        // end::picture[]
 
         @Override
-        protected int getConfiguredGridH() {
-          return 3;
+        protected int getConfiguredGridH() { // <2>
+          return 4;
         }
+        // end::layout[]
 
         @Override
         protected String getConfiguredImageId() {
           return Icons.Organization;
         }
+        // tag::layout[]
+        // tag::picture[]
       }
+      // end::layout[]
 
-      @Order(2000)
+      // additional form field
+      // tag::layout[]
+
+      // end::picture[]
+      @Order(20)
       public class NameField extends AbstractStringField {
 
         @Override
@@ -168,12 +193,12 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Override
-        protected boolean getConfiguredMandatory() {
+        protected boolean getConfiguredMandatory() { // <3>
           return true;
         }
       }
 
-      @Order(3000)
+      @Order(30)
       public class HomepageField extends AbstractStringField {
 
         @Override
@@ -181,8 +206,9 @@ public class OrganizationForm extends AbstractForm {
           return TEXTS.get("Homepage");
         }
       }
+      // end::layout[]
 
-      @Order(4000)
+      @Order(40)
       public class OpenInBrowserButton extends AbstractLinkButton {
 
         @Override
@@ -215,12 +241,15 @@ public class OrganizationForm extends AbstractForm {
           getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
         }
       }
+      // tag::layout[]
+      // tag::refactor[]
     }
+    // end::refactor[]
 
-    @Order(2000)
+    @Order(20)
     public class DetailsBox extends AbstractTabBox {
 
-      @Order(1000)
+      @Order(10)
       public class ContactInfoBox extends AbstractGroupBox {
 
         @Override
@@ -228,11 +257,11 @@ public class OrganizationForm extends AbstractForm {
           return TEXTS.get("ContactInfo");
         }
 
-        @Order(1000)
-        public class AddressBox extends AbstractAddressBox {
+        @Order(10)
+        public class AddressBox extends AbstractAddressBox { // <4>
         }
 
-        @Order(2000)
+        @Order(20)
         public class PhoneField extends AbstractStringField {
 
           @Override
@@ -241,48 +270,27 @@ public class OrganizationForm extends AbstractForm {
           }
         }
 
-        @Order(3000)
-        public class EmailField extends AbstractEmailField {
+        @Order(30)
+        public class EmailField extends AbstractEmailField { // <5>
         }
       }
 
-      @Order(2000)
-      public class NotesBox extends AbstractGroupBox {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Notes");
-        }
-
-        @Order(1000)
-        public class NotesField extends AbstractStringField {
-
-          @Override
-          protected int getConfiguredGridH() {
-            return 3;
-          }
-
-          @Override
-          protected boolean getConfiguredLabelVisible() {
-            return false;
-          }
-
-          @Override
-          protected boolean getConfiguredMultilineText() {
-            return true;
-          }
-        }
+      @Order(20)
+      public class NotesBox extends AbstractNotesBox { // <6>
       }
     }
 
-    @Order(3000)
+    @Order(30)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(4000)
+    @Order(40)
     public class CancelButton extends AbstractCancelButton {
     }
+    // tag::refactor[]
   }
+  // end::refactor[]
+  // end::layout[]
 
   public class ModifyHandler extends AbstractDirtyFormHandler {
 
@@ -318,14 +326,6 @@ public class OrganizationForm extends AbstractForm {
   public class NewHandler extends AbstractDirtyFormHandler {
 
     @Override
-    protected void execLoad() {
-      OrganizationFormData formData = new OrganizationFormData();
-      exportFormData(formData);
-      formData = BEANS.get(IOrganizationService.class).prepareCreate(formData);
-      importFormData(formData);
-    }
-
-    @Override
     protected void execStore() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
@@ -338,17 +338,9 @@ public class OrganizationForm extends AbstractForm {
     }
   }
 
-  @FormData
-  public String getOrganizationId() {
-    return organizationId;
-  }
-
-  @FormData
-  public void setOrganizationId(String organizationId) {
-    this.organizationId = organizationId;
-  }
-
   private String calculateSubTitle() {
     return getNameField().getValue();
   }
+  // tag::layout[]
 }
+// end::layout[]

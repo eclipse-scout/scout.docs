@@ -719,11 +719,11 @@ public class PersonForm extends AbstractForm {
     }
     //end::notes[]
 
-    @Order(100)
+    @Order(30)
     public class OkButton extends AbstractOkButton {
     }
 
-    @Order(110)
+    @Order(40)
     public class CancelButton extends AbstractCancelButton {
     }
   }

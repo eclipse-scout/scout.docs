@@ -19,13 +19,11 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IOrganizationService extends IService {
 
-  OrganizationPageData getTableData(SearchFilter filter);
+  OrganizationTablePageData getOrganizationTableData(SearchFilter filter);
 
   OrganizationFormData create(OrganizationFormData formData);
 
   OrganizationFormData load(OrganizationFormData formData);
-
-  OrganizationFormData prepareCreate(OrganizationFormData formData);
 
   OrganizationFormData store(OrganizationFormData formData);
 }

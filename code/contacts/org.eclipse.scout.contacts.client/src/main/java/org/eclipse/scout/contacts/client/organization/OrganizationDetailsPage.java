@@ -12,7 +12,7 @@ package org.eclipse.scout.contacts.client.organization;
 
 import java.util.List;
 
-import org.eclipse.scout.contacts.client.person.PersonPage;
+import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -29,7 +29,7 @@ public class OrganizationDetailsPage extends AbstractPageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    PersonPage personTablePage = new PersonPage();
+    PersonTablePage personTablePage = new PersonTablePage();
     personTablePage.setOrganizationId(getOrganizationId());
     pageList.add(personTablePage);
 

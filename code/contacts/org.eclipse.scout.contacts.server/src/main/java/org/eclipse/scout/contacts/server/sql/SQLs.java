@@ -121,26 +121,26 @@ public interface SQLs {
       + "FROM     ORGANIZATION "
       + "WHERE    organization_id = :organizationId "
       + "INTO     :name, "
-      + "         :logo.url, "
+      + "         :picture.url, "
       + "         :homepage, "
       + "         :phone, "
       + "         :email, "
       + "         :addressBox.street, "
       + "         :addressBox.city, "
       + "         :addressBox.country, "
-      + "         :notes";
+      + "         :notesBox.notes";
 
   String ORGANIZATION_UPDATE = ""
       + "UPDATE   ORGANIZATION "
       + "SET      name = :name, "
-      + "         logo_url = :logo.url, "
+      + "         logo_url = :picture.url, "
       + "         url = :homepage, "
       + "         phone = :phone, "
       + "         email = :email, "
       + "         street = :addressBox.street, "
       + "         city = :addressBox.city, "
       + "         country = :addressBox.country, "
-      + "         notes = :notes "
+      + "         notes = :notesBox.notes "
       + "WHERE    organization_id = :organizationId";
 
   String PERSON_PAGE_SELECT = ""
