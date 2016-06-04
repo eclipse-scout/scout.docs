@@ -221,6 +221,16 @@ public class PersonForm extends AbstractForm {
     public class GeneralBox extends AbstractGroupBox { // <2>
       //end::layout[]
 
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("General");
+      }
+
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
       // in a real world scenario avoid copy&paste: delete the pictureUrlField and let PictureField extend AbstractUrlImageField
       // tag::pictureField[]
 
@@ -237,7 +247,7 @@ public class PersonForm extends AbstractForm {
       public class PictureField extends AbstractImageField {
 
         @Override // <2>
-        protected Class<? extends IValueField> getConfiguredMasterField() {
+        protected Class<PictureUrlField> getConfiguredMasterField() {
           return PictureUrlField.class;
         }
 
@@ -790,9 +800,10 @@ public class PersonForm extends AbstractForm {
     boolean noLastName = StringUtility.isNullOrEmpty(getLastNameField().getValue());
 
     if (noFirstName && noLastName) {
-      getFirstNameField().requestFocus(); // <2>
+      getGeneralBox().addErrorStatus(TEXTS.get("MissingName")); // <2>
+      getFirstNameField().requestFocus(); // <3>
 
-      throw new VetoException(TEXTS.get("MissingName")); // <3>
+      return false; // <4>
     }
 
     return true; // <4>

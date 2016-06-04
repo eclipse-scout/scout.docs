@@ -51,7 +51,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 @FormData(value = OrganizationFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 // tag::layout[]
 public class OrganizationForm extends AbstractForm {
-  // end::layout[]
 
   private String organizationId;
 
@@ -64,7 +63,11 @@ public class OrganizationForm extends AbstractForm {
   public void setOrganizationId(String organizationId) {
     this.organizationId = organizationId;
   }
-  // tag::layout[]
+
+  @Override
+  public Object computeExclusiveKey() {
+    return getOrganizationId();
+  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -144,11 +147,6 @@ public class OrganizationForm extends AbstractForm {
 
   public PhoneField getPhoneField() {
     return getFieldByClass(PhoneField.class);
-  }
-
-  @Override
-  public Object computeExclusiveKey() {
-    return getOrganizationId();
   }
   // tag::layout[]
 

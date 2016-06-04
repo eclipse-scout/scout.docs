@@ -55,18 +55,24 @@ include::_TutorialStep2.adoc[]
 include::_TutorialStep3.adoc[]
 
 [[sec-contacts_forms]]
-=== Adding Forms to Create/Edit Persons and Organizations
+=== Adding a Form to Create/Edit Persons
 include::_TutorialStep4.adoc[]
+
+[[sec-contacts_fields]]
+=== Form Field Validation and Template Fields
+include::_TutorialStep5.adoc[]
+
+[[sec-contacts_form_add_company]]
+=== Adding the Company Form
+include::_TutorialStep6.adoc[]
 
 [[sec-contacts_link_organization_person]]
 === Linking Oranizations and Persons
-include::_TutorialStep5.adoc[]
+include::_TutorialStep7.adoc[]
 
 [[sec-contacts_outlook]]
 === Next Steps and Outlook
-include::_TutorialStep6.adoc[]
-
-
+include::_TutorialStep8.adoc[]
 
 == OLD STUFF
 
