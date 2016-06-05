@@ -15,6 +15,7 @@ include::{mdledir}/BookPreface.adoc[]
 
 :numbered:
 include::_Introduction.adoc[]
+include::_HelloWorldTutorial.adoc[]
 include::_ScoutTooling.adoc[]
 include::_OneDayTutorial.adoc[]
 

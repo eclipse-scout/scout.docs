@@ -23,7 +23,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 Scout is an open source framework for building business applications.
 The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end.
-With its multi-device capability, a Scout client applications may run simultaneously as a rich client, in the browser and on mobile and tablet devices.
+Scout applications are Single Page Applications that run in the browser optimized for sesktop, mobile and tablet devices.
 
 To different groups of people, Scout means different things.
 End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues.
@@ -33,12 +33,9 @@ This is why the text below describes Scout from the perspective of these three r
 ==== End User Perspective
 
 End users of enterprise applications care about friendly user interfaces (UI) and well designed functionality that support them in their everyday work.
-Depending on the current context/location of an end user, either desktop, web or mobile clients work best.
-If working in the office, a good integration of the enterprise software with Lotus Notes or Microsoft Office often help to boost the users productivity.
-As office software is typically installed locally on the users PC, integrating this software also requires a desktop client for the enterprise application.
-When a user is working on a computer outside of his company where the enterprise client is not installed (or the user lacks the permissions to install any software), the natural choice is to work with a web application.
-And when the user is on the move or sitting in a meeting, the only meaningful option is to work with a mobile device.
+Depending on the current device of an end user, either desktop web or mobile clients work best.
 
+////
 [[img-bsi_crm_desktop, Figure 000]]
 .The desktop client of a Scout enterprise application.
 image::{imgsdir}/bsi_crm_desktop.png[]
@@ -73,15 +70,15 @@ And the end user benefits from the identical behaviour and the the known functio
 Comparing the company table shown in the background of <<img-bsi_crm_desktop>> with <<img-bsi_crm_mobile>> it can be observed that the multi-column table of the desktop client has been transformed into a list on the mobile device.
 In addition, the context menu "`New company`" is now provided as a touch button.
 As the navigation in the application and the offered choices remain the same for Scout desktop and mobile applications, the end user feels immediately comfortable working with Scout mobile applications.
-
+////
 
 ==== Management Perspective
 
 For the management, Scout is best explained in terms of benefits it brings to the organisation in question.
 This is why we are going to concentrate on a (typical) application migration scenario here.
 Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed.
-Including host systems, client server applications with desktop clients, as well as applications with a web based front-end.
 
+////
 [[img-scout_with_other_apps, Figure 000]]
 .A typical application landscape including a service bus and a Scout application.
 image::{imgsdir}/scout_with_other_apps.png[]
@@ -129,6 +126,7 @@ Existing Scout applications can then switch to this new technology with only min
 This is possible because the Scout developers are designing and building the UI of an application using Scout's client model.
 And this client model is not linked to any specific UI technology.
 Rather, specific UI renderers provided by the Scout framework are responsible to draw the UI at runtime.
+////
 
 As Scout is an open source project, no licence fees are collected.
 Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum.
@@ -150,6 +148,7 @@ The Scout SDK helps to create a robust initial project setup for client server a
 
 On the client-side Scout's flexible client model allows the developer to create a good user experience without having to care about specific UI technologies.
 The reason for this can be found in Scout's client architecture that cleanly separates the UI model from the UI technology.
+////
 In Scout (almost) every UI component is implemented four times.
 First the implementation of the UI model component and then, three rendering components for each UI technology supported by Scout.
 For desktop clients these are the Swing and the SWT technologies, and for the web and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript parts.
@@ -169,11 +168,10 @@ Calling remote services in the client application that are provided by the Scout
 The complete communication including the transfer of parameter objects is handled fully transparent by the Scout framework.
 In addition, the Scout SDK can completely manage the necessary transfer objects to fetch data from the Scout server that is to be shown in dialog forms on the Scout client.
 The binding of the transferred data to the form fields is done by the framework.
+////
 
 Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application.
-Just the Java code.footnote:[
-With the exception of the [filename]+plugin.xml+ and [filename]+MANIFEST.MF+ files required for Eclipse plugins.
-].
+Just the Java code.
 Developers preferring to write the necessary code manually, may do so.
 The Scout SDK parses the application's Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK.
 
@@ -183,10 +181,9 @@ First of all, it is simple to get all the source code of Scout and the underlyin
 This allows for complete debugging of all problems and errors found in Scout applications.
 Starting from the application code, including the Scout framework, Eclipse and down to the Java platform.
 
-Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the Scout Wiki pages.
+Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the other guides.
 And problems with Scout or questions that are not clearly addressed by existing documentation can be discussed in the Scout forum.
 The forum is also a great place for Scout developers to help out in tricky situation and learn from others.
-Ideally, answered questions lead to improved or additional documentation in the Scout Wiki.
 
 At times, framework bugs can be identified from questions asked in the forum.
 As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer.
@@ -234,8 +231,8 @@ Therefore, Scout helps to improve the productivity of the development teams and 
 
 To provide a first impression on the scope and goals of the Scout framework, a number of scenarios where Scout typically contributes to your projects success are listed below .
 
- * You are looking for a reasonable client side framework for your business application.
- * You need an application that works on the desktop, in browsers and on mobiles devices.
+ * You are looking for a reasonable framework for your business application.
+ * You need a Single Page Application optimized for browsers runing on a desktop or on mobiles devices.
  * You don't have the time to evaluate and learn a new UI technology.
  * You need a working prototype application by the end of the week.
  * Your application's expected lifespan is 10 years or more.
@@ -335,47 +332,3 @@ To contact the Scout team, use the feedback provided on the Scout homepage: http
 ].
 
 
-[[cha-helloworld]]
-== "`Hello World`" Tutorial
-
-The "`Hello World`" chapter walks you through the creation of an Eclipse Scout client server application.
-When the user starts the client part of this application, the client connects to the server.footnote:[
-The Scout server part of the "`Hello World`" application will be running on a web server.
-]
-and asks for some text content that is to be displayed to the user.
-Next, the server retrieves the desired information and sends it back to the client.
-The client then copies the content obtained from the server into a text field widget.
-Finally, the client displays the message obtained from the server in a text field widget.
-
-The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
-We will start by building the application from scratch and then we'll deploy the complete application to a Tomcat web server.
-
-Based on this simple "`Hello World`" applications a large number of Scout concepts can be illustrated.
-Rather than including such background material in this tutorial, this information is provided separately in Chapter <<cha-helloworld_background>>.
-This tutorial is also available in the Scout wiki.footnote:[
-"`Hello World`" wiki tutorial: http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld
-].
-
-
-=== Installation and Setup
-
-Before you can start with the "`Hello World`" example you need to have a complete and working Scout installation.
-For this, see the step-by-step installation guide provided in Appendix <<apx-install_scout>>.
-Once you have everything installed, you are ready to create your first Scout project.
-
-[[sec-create_project_simple]]
-=== Create a new Project
-[[create_project_simple]]
-(((Project creation)))
-
-include::{mdledir}/CreateNewProject.adoc[]
-
-[[sec-run_initial]]
-=== Run the Initial Application
-
-include::{mdledir}/RunTheApplication.adoc[]
-
-[[sec-helloworld_export]]
-=== Export the Application
-
-include::{mdledir}/ExportTheApplication.adoc[]
