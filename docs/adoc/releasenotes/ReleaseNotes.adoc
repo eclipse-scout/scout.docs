@@ -61,15 +61,21 @@ TODO
 === Bean Manager
 TODO
 
+=== Keyboard Shortcut Visualization
+Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
+Currently available means that the focused element as well as the enabled state is respected so that only those shortcuts which really can be executed are shown.
+
+=== Font Icons
+The new UI uses font icons instead of bitmap icons because they are scalable, can be colored using CSS and can be loaded with one request.
+It is suggested that you use font icons as well. Scout provides the font _scoutIcons_ which contains the icons used by Scout itself. If they are not sufficient you can either create a custom font with only the icons you need, or include a pre-built one like link:++http://fontawesome.io/++[FontAwesome].
+
+Anyway, bitmap icons are still supported.
+
+=== Login Page
+Compared to the previous web ui, adding a form based login page is now a lot simpler. Scout provides a login.html which can either used as it is or adjusted to your needs.
+
 === New and better widgets
-
-==== Bean Field / Bean Column [New]
-The new `IBeanField` and `IBeanColumn` are used for advanced visualization as an alternative to the `IHtmlField`. As the name suggests the datatype is a plain java bean.
-Compared to the `IHtmlField` the visualization does not happen in the model but in the UI layer using HTML/CSS/JavaScript, where it actually belongs to.
-The bean field is mainly intended for a custom visualization of data. If you want to provide interactive functionality you probably need to create a custom widget.
-
-==== Wizard Progress Field [New]
-The new `WizardProgressField` is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
+Beside the new look of every widget, most of them got new functionality as well.
 
 ==== Desktop
 ===== New Layout
@@ -111,6 +117,9 @@ API Notes:
 The new navigate buttons may be used to navigate through the outline.
 
 * If you don't need them you can remove them using the property `navigateButtonsVisible`.
+
+===== Bread Crumb Style
+The outline (and actually every tree) can now be displayed as a bread crumb tree which arranges the nodes in a different way than a classic tree.
 
 ===== Various Changes
 * Added `getConfiguredTableStatusVisible` on `IPageWithTable`: It is now possible to configure whether the table status should be visible for a table page. Until now table status was set visible by the `OutlineTableForm`.
@@ -172,8 +181,8 @@ API Notes:
 ===== Table Settings
 The user may now have multiple table settings. These settings may be managed using the revised `OrganizeColumnsForm`.
 
-===== New Possibility to Reload the Table.
-The new table may show a link to let the user reload the table. To make this work the table needs to provide a `IReloadHandler`. Default reload handlers are `PageReloadHandler` and `TableFieldReloadHandler`.
+===== Possibility to Reload the Table.
+The table may show a link to let the user reload the table. To make this work the table needs to provide a `IReloadHandler`. Default reload handlers are `PageReloadHandler` and `TableFieldReloadHandler`.
 
 ===== New Table Status
 The table status was moved from `ITableField` to `ITable` so that the status may be shown in the detail table used in an outline as well.
@@ -189,12 +198,18 @@ In addition to the column based filters there is now a single text filter availa
 To make the filtering as fast as possible, the filtering does now happen in the UI and not in the Java model anymore. To make this happen the table filters have been reworked.
 See `TableUserFilterManager` for details.
 
+===== Icon Column
+The icon column may be used to show icons or images, no text. The advantage compared to a string column with a cell icon is that sorting and grouping works as expected.
+
 ===== Various Changes
 Behavior change of `Table` in `AbstractTableField`: Do not execute `AbstractTable.execContentChanged()` when `valueChangeTriggers` flag on `IFormField` is `false`.
 
 ==== Tree
-===== New property defaultIconId
-Compared to the property `iconId` the difference is as follows: _DefaultIconId_ is used as default for all tree nodes that don't have an icon on their own. _IconId_ may be used in the same way as the title, e.g as outline icon.
+===== Default Icon ID
+The difference between the new property `defaultIconId` and the property `iconId` is as follows: _DefaultIconId_ is used as default for all tree nodes that don't have an icon on their own. _IconId_ may be used in the same way as the title, e.g as outline icon.
+
+===== Auto Check Child Nodes
+If this new property is set to true, every check of a node automatically checks its child nodes as well.
 
 ===== Lazy expansion
 Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible. The model can define whether child pages of a page should be added immediately to the outline tree or lazily.
@@ -247,6 +262,20 @@ Split boxes now support absolute splitter positions. The old relative position i
 ===== Various Changes
 `AbstractSplitBox` now returns `IFormField.FULL_SIZE` in `getConfiguredGridW()` by default. Reason: The split box widget does not really have a representation of its own, but is more like a container for other fields. It can never have label, mandatory indicator etc. Its layout should behave like a group box or a tab box, therefore the default gridW value was adjusted accordingly.
 
+==== Calendar
+The calendar got a complete new modern look and new functionality like the year panel.
+
+==== Planner
+The planner used to be a combination of a table and an activity map. This has been reworked to make it simpler to use.
+
+==== Bean Field / Bean Column [New]
+The new `IBeanField` and `IBeanColumn` are used for advanced visualization as an alternative to the `IHtmlField`. As the name suggests the datatype is a plain java bean.
+Compared to the `IHtmlField` the visualization does not happen in the model but in the UI layer using HTML/CSS/JavaScript, where it actually belongs to.
+The bean field is mainly intended for a custom visualization of data. If you want to provide interactive functionality you probably need to create a custom widget.
+
+==== Wizard Progress Field [New]
+The new `WizardProgressField` is normally visualized as a list of steps with some indication which step is the current step etc. It replaces the old "HTML status" field on the default wizard container form.
+
 ==== Chart Box
 Removed chart box because it has not been used and there is no UI implementation.
 
@@ -294,9 +323,6 @@ The HTML UI checks if the application is configured safe by validating some flag
 `org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).
 
 == Known Bugs and Limitations
-
-=== Selection in disabled text fields
-Firefox (tested with v 35.0.1): it's not possible to select text in a disabled text field. There is no workaround. An often suggested workaround is to use the readonly attribute instead of disabled, but this leads to a completely different behavior when it comes to event handling. When a field is disabled it doesn't fire any events (for instance: click), but when it's set to readonly event handling is still enabled. In other words: we'd have to implement browser/widget default behavior to work around this problem -- additionally the workaround should only affect Firefox but none of the other browsers (where this is not an issue at all).
 
 === Drag and drop support
 IE9 does not support dropping files. Therefore, drag and drop in file chooser is not supported for that browser.
