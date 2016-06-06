@@ -116,6 +116,11 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       // end::menu[]
 
       @Override
+      protected String getConfiguredIconId() {
+        return Icons.Pencil;
+      }
+
+      @Override
       protected String getConfiguredKeyStroke() {
         return "alt-e";
       }
@@ -142,6 +147,12 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       @Override
       protected String getConfiguredKeyStroke() {
         return "alt-n";
+      }
+
+      @Override
+      protected String getConfiguredIconId() {
+        // get unicode from http://fontawesome.io/icon/magic/
+        return "font:awesomeIcons \uf0d0";
       }
       // tag::menu[]
 

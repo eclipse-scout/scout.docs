@@ -10,16 +10,13 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.organization;
 
-import java.util.Set;
-
 import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.AbstractEditMenu;
+import org.eclipse.scout.contacts.client.common.AbstractNewMenu;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.rt.client.dto.PageData;
-import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
@@ -30,7 +27,6 @@ import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -171,17 +167,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
     }
 
     @Order(1000)
-    public class EditMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredKeyStroke() {
-        return "alt-e";
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Edit");
-      }
+    public class EditMenu extends AbstractEditMenu {
 
       @Override
       protected void execAction() {
@@ -196,27 +182,13 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
             }
           }
         });
+
         form.startModify();
       }
     }
 
     @Order(2000)
-    public class NewMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredKeyStroke() {
-        return "alt-n";
-      }
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("New");
-      }
+    public class NewMenu extends AbstractNewMenu {
 
       @Override
       protected void execAction() {
@@ -230,6 +202,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
             }
           }
         });
+
         form.startNew();
       }
     }
