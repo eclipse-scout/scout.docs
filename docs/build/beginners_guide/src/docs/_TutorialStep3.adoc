@@ -224,7 +224,13 @@ More information regarding these configuration files is provided in the http://l
 [source,xml]
 .Setting the log level in the logback.xml configuration file.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/logback.xml[tags=loglevel]
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+  <root level="INFO"> <!--1-->
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="STDERR" />
+  </root>
+</configuration>
 ----
 
 <1> The `level` attribute of the `<root>` element is used as the basic log level. Try "DEBUG" or "WARN" as alternative values.
