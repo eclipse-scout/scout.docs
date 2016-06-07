@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -30,6 +31,21 @@ public class UserContentListLookupCall extends LocalLookupCall<String> {
 
   @Override
   protected List<LookupRow<String>> execCreateLookupRows() {
-    return m_rows;
+    // simulate active-filter logic which happens usually in an SQL statement
+    // so we can test the active-filter with a local lookup call
+    TriState active = getActive();
+    if (TriState.UNDEFINED == active) {
+      return m_rows;
+    }
+    List<LookupRow<String>> filteredRows = new ArrayList<>();
+    for (LookupRow<String> row : m_rows) {
+      if (active.isTrue() && row.isActive()) {
+        filteredRows.add(row);
+      }
+      else if (active.isFalse() && !row.isActive()) {
+        filteredRows.add(row);
+      }
+    }
+    return filteredRows;
   }
 }
