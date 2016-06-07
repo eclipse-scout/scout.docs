@@ -32,12 +32,45 @@ Without the restrictions of the old UIs we were able to create a new UI tailored
 
 The new HTML UI not only gives your application a modern look & feel, it also gives you more possibilities regarding styling and customizing.
 
+== From OSGi to Plain Java
+
+With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pure java project. The reasons for this change were
+
+* to bring simplicity back to Scout
+* integrate easier with Java EE containers
+* build projects with Maven only, express project dependencies with Maven only
+* integrate third party libraries directly via Maven Central
+
+=== Project Structure
+
+The project structure is now typically converted to the standard maven link:{migrationguide}#project-structure[project structure].
+
+[[img-maven, figure]]
+.Maven
+image::{imgsdir}/maven.png[]
+
+=== Platform
+
+OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
+Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform].
+
+==== Various Changes
+* `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
+
+=== Job Framework
+
+The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
+
 == New styling possibilities with CSS
 It is now finally possible to use the full power of CSS to style your application. To make it more maintainable Scout uses link:++http://lesscss.org++[LESS] which you can use as well.
 
 === Theming
 With the new theming support you can create a custom theme for your application instead of taking the default one provided by Scout.
 Or you could even define multiple themes and offer them to your users.
+
+[[img-theming, figure]]
+.Theming
+image::{imgsdir}/theming.png[]
 
 === IStylable
 Every form field and some other widgets now provide a new property called CssClass. It accepts one or more css classes separated with a space.
@@ -55,31 +88,13 @@ Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content in
 === HTMLUtility
 `org.eclipse.scout.rt.platform.html.HTMLUtility` and `org.eclipse.scout.rt.platform.html.CSSPatch` were deprecated because they contained only legacy code of doubtful quality. Do not use them anymore -- they will be removed in the next Scout release. The support for most of the contained methods was dropped, because they are not required anymore with the new UI. A slightly improved version of the `getPlainText()` method is available on the new bean `org.eclipse.scout.rt.platform.html.HtmlHelper`.
 
-== From OSGi to Plain Java
-
-With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pure java project. The reasons for this change were
-
-* to bring simplicity back to Scout
-* integrate easier with Java EE containers
-* build projects with Maven only, express project dependencies with Maven only
-* integrate third party libraries directly via Maven Central
-
-=== Project structure
-
-The project structure is now typically converted to the standard maven link:{migrationguide}#project-structure[project structure].
-
-=== Platform
-
-OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
-Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform].
-
-=== Job framework
-
-The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
-
 == Keyboard Shortcut Visualization
 Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
 Currently available means that the focused element as well as the enabled state is respected so that only those shortcuts which really can be executed are shown.
+
+[[img-keyboard_shortcuts, figure]]
+.Keyboard Shortcut Visualization
+image::{imgsdir}/keyboard_shortcuts.png[]
 
 == Font Icons
 The new UI uses font icons instead of bitmap icons because they are scalable, can be colored using CSS and can be loaded with one request.
@@ -90,7 +105,18 @@ Anyway, bitmap icons are still supported.
 == Login Page
 Compared to the previous web ui, adding a form based login page is now a lot simpler. Scout provides a login.html which can either used as it is or adjusted to your needs.
 
-=== New and better widgets
+[[img-login_page, figure]]
+.Login Page
+image::{imgsdir}/login.png[]
+
+== UI Debugging using URL Hints
+The new UI provides url hints for easier debugging: ?cache, ?compress, ?minify, ?debug, ?inspector.
+By default they only enabled in development mode. This behavior can be controlled using the property `scout.urlHints.enabled`.
+
+== Documentation goes AsciiDoc
+The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on GitHub and the output of the documentation build is available on github.io: link:{techdoc}[Technical Guide].
+
+== New and better widgets
 Beside the new look of every widget, most of them got new functionality as well.
 
 === Desktop
@@ -98,6 +124,10 @@ Beside the new look of every widget, most of them got new functionality as well.
 The new desktop consists of three areas: The navigation, the header and the bench.
 
 The navigation shows the outline, the header may contain tools and the bench shows the detail content of the outline (table/form) or forms opened as views.
+
+[[img-desktop, figure]]
+.Desktop Layout
+image::{imgsdir}/desktop.png[]
 
 Compared to previous Scout releases, there are no forms required anymore to show the outline and its table. Therefore, `DefaultOutlineTreeForm` and `DefaultOutlineTableForm` have been removed.
 
@@ -110,6 +140,13 @@ To adjust the desktop layout you can use these new properties:
 * `headerVisible`: Hide/Show the header
 * `benchVisible`: Hide/Show the bench
 * `DisplayStyle`: More or less controls the above properties. With `DISPLAY_STYLE_BENCH` only the bench is visible, with `DISPLAY_STYLE_COMPACT` (which is used for mobile devices) either the navigation or bench and header are visible.
+
+==== Notifications
+The desktop may now display toast notifications on the top right corner.
+
+[[img-desktop_notification, figure]]
+.Desktop Notification
+image::{imgsdir}/desktop_notification.png[]
 
 ==== Various Changes
 * Menus of a page are now added to the detail form. This was necessary because the outline tree does not show any menus anymore. See also method `AbstractPageWithNodes.enhanceDetailFormWithPageMenus`.
@@ -132,22 +169,38 @@ API Notes:
 ==== Navigate Buttons
 The new navigate buttons may be used to navigate through the outline.
 
-* If you don't need them you can remove them using the property `navigateButtonsVisible`.
+If you don't need them you can remove them using the property `navigateButtonsVisible`.
+
+[[img-outline-navigate-buttons, figure]]
+.Navigate Buttons
+image::{imgsdir}/outline_navigate_buttons.png[]
 
 ==== Bread Crumb Style
 The outline (and actually every tree) can now be displayed as a bread crumb tree which arranges the nodes in a different way than a classic tree.
+
+[[img-outline-outline-breadcrumb, figure]]
+.Breadcrumb Navigation
+image::{imgsdir}/outline_breadcrumb.png[]
 
 ===== Various Changes
 * Added `getConfiguredTableStatusVisible` on `IPageWithTable`: It is now possible to configure whether the table status should be visible for a table page. Until now table status was set visible by the `OutlineTableForm`.
 * Improved page search form disposal: Search form is now closed when the page gets disposed.
 
 === Form
-==== Tab Forms
+==== Form Tabs
 It is now possible to stack multiple forms and switch between them using tabs. This already worked with SWT and Rap but not with the Swing UI.
 Just set the property `displayHint` to `DISPLAY_HINT_VIEW` and use the same `displayViewId`.
 
+[[img-form-tabs, figure]]
+.Open multiple forms simultaneously
+image::{imgsdir}/form_tabs.png[]
+
 ==== Form Menu
 It is now possible to embed a form in a menu using `IFormMenu`.
+
+[[img-outline-form-menu, figure]]
+.A form embedded in a menu
+image::{imgsdir}/form_menu.png[]
 
 ==== Various Changes
 * Added `IForm.start()`: Mainly useful for forms with just one handler (detail forms, tool forms etc.). May be implemented by the concrete form. The default implementation at AbstractForm uses getHandler() to start the form.
@@ -158,6 +211,10 @@ It is now possible to embed a form in a menu using `IFormMenu`.
 On the right side of every form field there is space reserved for the status (info, warn, error), the menu or the tooltip of the field. This means it is now apparent to the user whether the field has a tooltip or a menu.
 
 The visibility of that space is controllable using the property `statusVisible`. Setting it to false will make the field using the whole space, but if there is a status, tooltip or menu it will be shown anyway.
+
+[[img-formfield-error, figure]]
+.Display of an input error
+image::{imgsdir}/formfield_error.png[]
 
 === Group Box
 ==== Menu Bar
@@ -179,8 +236,12 @@ API Notes:
 * `List<ITableControl> getTableControls()`
 * `<T extends ITableControl> T getTableControl(Class<T> controlClass)`
 
-==== Grouping and Aggregation functionality
+==== Grouping and Aggregation Functionality
 The table now provides a possibility to group the data by multiple columns. Additionally, there are aggregation functions available on number columns like _SUM_ or _AVG_ which may be used in combination with the grouping functionality and the `AggregationTableControl`.
+
+[[img-table-grouping, figure]]
+.Grouped by city
+image::{imgsdir}/table_grouping.png[]
 
 API Notes:
 
@@ -190,12 +251,20 @@ API Notes:
 ==== Background Effect
 Number columns may now have a background effect to visualize numeric data.
 
+[[img-table-coloring, figure]]
+.Background effect used to visualize the number of events
+image::{imgsdir}/table_coloring.png[]
+
 API Notes:
 
 * `AbstractTable.getConfiguredBackgroundEffect`
 
 ==== Table Settings
 The user may now have multiple table settings. These settings may be managed using the revised `OrganizeColumnsForm`.
+
+[[img-table-settings, figure]]
+.Table settings
+image::{imgsdir}/table_settings.png[]
 
 ==== Possibility to Reload the Table.
 The table may show a link to let the user reload the table. To make this work the table needs to provide a `IReloadHandler`. Default reload handlers are `PageReloadHandler` and `TableFieldReloadHandler`.
@@ -210,6 +279,10 @@ API Notes:
 
 ==== New Table Filters
 In addition to the column based filters there is now a single text filter available to filter the whole table data.
+
+[[img-table-filter, figure]]
+.Table text filter
+image::{imgsdir}/table_filter.png[]
 
 To make the filtering as fast as possible, the filtering does now happen in the UI and not in the Java model anymore. To make this happen the table filters have been reworked.
 See `TableUserFilterManager` for details.
@@ -227,8 +300,12 @@ The difference between the new property `defaultIconId` and the property `iconId
 ==== Auto Check Child Nodes
 If this new property is set to true, every check of a node automatically checks its child nodes as well.
 
-==== Lazy expansion
+==== Lazy Expansion
 Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible. The model can define whether child pages of a page should be added immediately to the outline tree or lazily.
+
+[[img-tree-lazy, figure]]
+.Lazy expansion of organizations
+image::{imgsdir}/tree_lazy.png[]
 
 Concerns only `IOutline`:
 
@@ -237,7 +314,7 @@ Concerns only `IOutline`:
 ** `boolean getConfiguredLazyAddChildPagesToOutline()` -> default `false`, for `AbstractPageWithTable` the default is `true`.
 ** `int getConfiguredLazyAddChildPagesToOutlineThreshold()` -> setting for `AbstractPageWithTable`, after how many child pages the lazy setting should be active (default 1)
 
-=== File Chooser (File Upload)
+=== File Chooser
 File upload size is always limited now (otherwise server might run out of memory if too large files are sent). Default size is 50 MB, but every field might specify lower/higher sizes:
 
 * `org.eclipse.scout.rt.client.ui.IDNDSupport.setDropMaximumSize(long)`
@@ -256,6 +333,10 @@ Nevertheless you still have the possibility to provide a custom table or tree us
 === Date Field
 ==== Date Prediction
 New new date field tries to predict the date the user is about to enter. The predicted date is shown with a brighter color and may be accepted using the _return_ or _tab_ key.
+
+[[img-datefield-prediction, figure]]
+.User entered 01, the predicted date is 01/07/2016
+image::{imgsdir}/datefield_prediction.png[]
 
 ==== Allowed Dates
 You may now restrict the available dates in a date field using `setAllowedDates`. If the list is empty all dates are allowed. Otherwise the dates are not selectable.
@@ -281,8 +362,16 @@ Split boxes now support absolute splitter positions. The old relative position i
 === Calendar
 The calendar got a complete new modern look and new functionality like the year panel.
 
+[[img-calendar, figure]]
+.Calendar
+image::{imgsdir}/calendar.png[]
+
 === Planner
 The planner used to be a combination of a table and an activity map. This has been reworked to make it simpler to use.
+
+[[img-planner, figure]]
+.Planner
+image::{imgsdir}/planner.png[]
 
 === Bean Field / Bean Column [New]
 The new `IBeanField` and `IBeanColumn` are used for advanced visualization as an alternative to the `IHtmlField`. As the name suggests the datatype is a plain java bean.
@@ -295,47 +384,26 @@ The new `WizardProgressField` is normally visualized as a list of steps with som
 === Chart Box
 Removed chart box because it has not been used and there is no UI implementation.
 
-== Security: MalwareScanner
+== Security
+=== MalwareScanner
 Facility used to scan files and resources for malware.
 The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine
 and is configured to scan the TEMP folder (as used by File#createTempFile) using a realtime filesystem scan strategy.
 Malware should therefore immediately be removed or blocked by the malware implementation when placed in that folder.
 The new MalwareScanner is used in the ui.html file upload handler and thus checks every uploaded file.
 
-== IMimeTypeDetector [New]
+=== IMimeTypeDetector [New]
 The new interface IMimeTypeDetector provides multiple ordered implementations that can detect mime types
 PrimaryMimeTypeDetector with order 0 defines important webapp mime types
 ServletContextMimeTypeDetector with order 10 uses ServletContext.getMimeType
 JavaNioMimeTypeDetector uses java.nio Files.probeContentType
 
-== UploadRequestHandler [Added features]
+=== UploadRequestHandler [Added features]
 The UploadRequestHandler checks for malware and limits the file types that can be uploaded.
-
-=== Various Changes
-* `UiLayer`: Removed values `JSP`, `JSF`, `RAP`, `SWING` and added value `HTML`.
-* `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
-* `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
-* The unused, obsolete classes `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent` and `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener` were removed.
-
-== Moved to correct module
-move org.eclipse.scout.rt.server.commons.authentication.ConfigFileCredentialVerifier to org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier
-move org.eclipse.scout.rt.server.commons.authentication.ICredentialVerifier to org.eclipse.scout.rt.platform.security.ICredentialVerifier
-move org.eclipse.scout.rt.server.commons.authentication.IPrincipalProducer to org.eclipse.scout.rt.platform.security.IPrincipalProducer
-move org.eclipse.scout.rt.server.commons.authentication.SimplePrincipalProducer to org.eclipse.scout.rt.platform.security.SimplePrincipalProducer
-
-== URL Hints (security)
-The new config property `scout.urlHints.enabled` controls if the URL parameters ?cache, ?compress, ?minify, ?debug, ?inspector are active.
-By default these are not enabled. This means, that by default it is not possible (for an attacker) to disable minify and get the original javascript sources.
-
-== HttpServiceTunnel
-It is now possible again to call services on a different scout server by specifying server
-org.eclipse.scout.rt.servicetunnel.targetUrl and scout.auth.privatekey.
-For all interfaces annotated with @TunnelToServer without implementation, a proxy is created.
-
 == Session Cookie (JSESSIONID Cookie) configuration validation
 The HTML UI checks if the application is configured safe by validating some flags set on the session cookie. For more details on how to configure your session cookie please refer to the Scout Documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration".
 
-== UserIdAccessControlService [Removed]
+=== UserIdAccessControlService [Removed]
 `org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).
 
 = Known Limitations
@@ -345,4 +413,3 @@ IE9 does not support dropping files. Therefore, drag and drop in file chooser is
 
 == Input placeholders
 On-field labels are not visible in IE9 because it lacks support for the "placeholder" attribute.
-

@@ -113,7 +113,7 @@ Offline functionality in the scout client was removed (not needed anymore). Dele
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
 === Mobile
-org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client. 
+org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client.
 A lot of the mobile code in that plugin has been removed because the ui is now smarter and reacts bettter to smaller screens than the previous uis.
 
 If your project contains a mobile plugin, it is suggested to merge it with your client plugin as well.
@@ -452,7 +452,9 @@ NOTE: When changing the cryptography algorithms in you application please keep i
 * Changed `ILookupRow` to fluent API: use with... instead of set...
 * `IClientSession.stopSession()` was renamed to `stop()` to match `IServerSession.stop()`.
 * Deleted validation rule infrastructure: Deleted package org.eclipse.scout.rt.shared.validate with all subpackages and the containing classes. Furthermore the class org.eclipse.scout.rt.shared.data.form.ValidationRule has been deleted.
-
+* `UiLayer`: Removed values `JSP`, `JSF`, `RAP`, `SWING` and added value `HTML`.
+* `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
+* The unused, obsolete classes `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent` and `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener` were removed.
 
 === Logging API
 
