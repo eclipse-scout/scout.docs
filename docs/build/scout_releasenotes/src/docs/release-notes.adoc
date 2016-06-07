@@ -1,6 +1,6 @@
 = Eclipse Scout: Release Notes
 :doctype: article
-:author:
+:author: Scout Team
 :email: scout-dev@eclipse.org
 :revnumber: {project-version}
 include::_initDoc.adoc[]

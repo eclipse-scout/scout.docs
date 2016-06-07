@@ -1,6 +1,6 @@
 = Eclipse Scout: Migration Guide
 :doctype: article
-:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:author: Scout Team
 :email: scout-dev@eclipse.org
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -14,8 +14,6 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :toc: left
 
 //:numbered:
-
-!!! WORK IN PROGRESS !!!
 
 include::{mdledir}/migration/MigrationGuide.adoc[]
 
