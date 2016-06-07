@@ -1,6 +1,6 @@
 = Eclipse Scout: Release Notes
 :doctype: article
-:author: Judith Gull, Matthias Villiger
+:author:
 :email: scout-dev@eclipse.org
 :revnumber: {project-version}
 include::_initDoc.adoc[]
@@ -14,8 +14,6 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :toc: left
 
 //:numbered:
-
-!!! WORK IN PROGRESS !!!
 
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
 

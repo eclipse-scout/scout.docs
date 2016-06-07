@@ -64,12 +64,18 @@ With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pur
 * build projects with Maven only, express project dependencies with Maven only
 * integrate third party libraries directly via Maven Central
 
-The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
-
-OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
-Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform]
+=== Project structure
 
 The project structure is now typically converted to the standard maven link:{migrationguide}#project-structure[project structure].
+
+=== Platform
+
+OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
+Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform].
+
+=== Job framework
+
+The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
 
 == Keyboard Shortcut Visualization
 Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
