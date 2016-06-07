@@ -9,6 +9,9 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
+:techdoc: https://eclipsescout.github.io/6.0/technical-guide.html
+:migrationguide: https://eclipsescout.github.io/6.0/migration-guide.html
+
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
@@ -60,10 +63,20 @@ Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content in
 `org.eclipse.scout.rt.platform.html.HTMLUtility` and `org.eclipse.scout.rt.platform.html.CSSPatch` were deprecated because they contained only legacy code of doubtful quality. Do not use them anymore -- they will be removed in the next Scout release. The support for most of the contained methods was dropped, because they are not required anymore with the new UI. A slightly improved version of the `getPlainText()` method is available on the new bean `org.eclipse.scout.rt.platform.html.HtmlHelper`.
 
 === From OSGi to Plain Java
-TODO
 
-=== Bean Manager
-TODO
+With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pure java project. The reasons for this change were
+
+* to bring simplicity back to Scout
+* integrate easier with Java EE containers
+* build projects with Maven only, express project dependencies with Maven only
+* integrate third party libraries directly via Maven Central
+
+The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
+
+OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
+Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform]
+
+The project structure is now typically converted to the standard maven link:{migrationguide}#project-structure[project structure].
 
 === Keyboard Shortcut Visualization
 Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
@@ -333,3 +346,4 @@ IE9 does not support dropping files. Therefore, drag and drop in file chooser is
 
 === Input placeholders
 On-field labels are not visible in IE9 because it lacks support for the "placeholder" attribute.
+
