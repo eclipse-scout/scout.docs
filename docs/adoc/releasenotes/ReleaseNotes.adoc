@@ -27,6 +27,10 @@ With the previous Scout release 3 UIs were available: SWT and Swing for rich cli
 The fact that every change in the Scout model resulted either in a huge effort to adjust every UI or in a divergence of the UIs if the effort could not be taken, led us to a radical step:
 We deleted these 3 UIs and replaced them with a complete new one: The HTML UI.
 
+[[img-multi-device, figure]]
+.The new UI for Scout
+image::{imgsdir}/multi_device.png[]
+
 As the name implies it is a UI for a web client based on state of the art web technologies: HTML 5, CSS 3 and JavaScript.
 Without the restrictions of the old UIs we were able to create a new UI tailored to the needs of the Scout users. And because it perfectly fits the Scout model no compromises had to be made.
 
@@ -322,7 +326,7 @@ The HTML UI checks if the application is configured safe by validating some flag
 === UserIdAccessControlService [Removed]
 `org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).
 
-== Known Bugs and Limitations
+== Known Limitations
 
 === Drag and drop support
 IE9 does not support dropping files. Therefore, drag and drop in file chooser is not supported for that browser.
