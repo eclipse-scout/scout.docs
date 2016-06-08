@@ -12,6 +12,7 @@ The creation up of the initial project setup described in this section consists 
 * <<sec-contacts_remove_stuff>>
 * <<sec-contacts_change_workoutline>>
 * <<sec-contacts_change_desktop>>
+* <<sec-contacts_default_theme>>
 
 This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in section <<sec-contacts_summary>>.
 
@@ -161,6 +162,35 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> In your implementation `QuickAccesMenu` should extend `AbstractMenu`
 <2> In your implementation `UserMenu` should extend `AbstractMenu`
+
+[[sec-contacts_default_theme]]
+==== Switching to the Default Theme
+
+We will use the Scout default theme for the "Contacts" application. 
+The initial code base created above comes with a very simple project specific "application" theming. 
+
+To disable the theming property follow the steps described below.
+
+. Expand the module `org.eclipse.scout.contacts.ui.html.app.dev` in the Eclipse package explorer
+. Expand folder `src/main/resources`
+. Open file `config.property` in a text editor
+. Comment out property `scout.ui.theme` as shown in <<lst-contacts_theming_property>>
+. Save the modified property file
+
+[[lst-contacts_theming_property, Listing theming property]]
+[source]
+.Commenting out the application specific theming re-activates the Scout default theme.
+----
+### Application theming
+# scout.ui.theme=application // <1>
+
+### Application Config
+scout.application.version=1.0.0-SNAPSHOT
+scout.application.name=Contacts
+----
+    
+<1> Comment out this line. Alternatively you may replace "application" with "default"
+
 
 [[sec-contacts_summary]]
 ==== What have we achieved?

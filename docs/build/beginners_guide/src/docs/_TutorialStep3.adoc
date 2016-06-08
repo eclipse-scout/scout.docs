@@ -310,11 +310,13 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 Note that the identifier "page" in the NVPair object will be mapped to the same identifier used in the `ORGANIZATION_PAGE_DATA_SELECT_INTO` statement.
 
 Finally, we have to also implement the loading of the person data in class `PersonService`. 
-The implementation of method `getPersonTableData` is provided in <<>>.
+The implementation of method `getPersonTableData` is provided in <<lst-contacts_fetch_pers>>.
 
+// unfortunately, the listing in "contacts" demo app is not a good match for the tutorial
+// to keep things simpler we are not including the stuff related to the person search form
 [[lst-contacts_fetch_pers, Listing PersonService]]
 [source,java]
-.Method getPersonTableData to access the database and map the data into a pageData object.
+.Method getPersonTableData to access the database and map the data into a page data object.
 ----
 public class PersonService implements IPersonService {
 

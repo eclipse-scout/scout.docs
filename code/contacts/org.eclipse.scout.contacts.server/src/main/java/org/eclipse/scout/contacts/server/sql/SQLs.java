@@ -75,16 +75,18 @@ public interface SQLs {
       + "</text>"
       + "<all> </all>";
 
+  //tag::lookupService[]
   String ORGANIZATION_LOOKUP = ""
       + "SELECT   organization_id, "
       + "         name "
       + "FROM     ORGANIZATION "
       + "WHERE    1 = 1 "
-      + "<key>    AND organization_id = :key</key> "
-      + "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> "
-      + "<all></all>";
+      + "<key>    AND organization_id = :key</key> " // <1>
+      + "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " // <2>
+      + "<all></all>"; // <3>
+  //end::lookupService[]
 
-  String AND_LIKE_CAUSE = "AND UPPER(%s) LIKE UPPER(:%s || '%s')";
+  String AND_LIKE_CAUSE = "AND LOWER(%s) LIKE LOWER(:%s || '%%') ";
 
   //tag::organizationListing[]
   String ORGANIZATION_PAGE_SELECT = ""

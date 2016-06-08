@@ -8,19 +8,9 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.shared.organization;
+@import (less) "scout/desktop/navigation/DesktopNavigation.css";
 
-import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
-
-//tag::all[]
-public class OrganizationLookupCall extends LookupCall<String> {
-
-  private static final long serialVersionUID = 1L;
-
-  @Override
-  protected Class<? extends ILookupService<String>> getConfiguredService() {
-    return IOrganizationLookupService.class;
-  }
+.desktop-navigation > .desktop-tool-box {
+  background-color: @palette-gray-7;
+  text-align: right;
 }
-//end::all[]

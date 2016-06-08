@@ -133,9 +133,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> This action gets executed when the user presses kbd:[Enter] on a table row or double clicks on a table row.
 <2> Transfer the primary key of the selected person row to the person form.
-<3> The "Edit" menu is using the modify handler. This handler loads the data using the person's primary key.
 <3> Including `TableMenuType.EmptySpace` in the return value activates the "New" menu even when no row is selected.   
-<4> The "New" menu opens the form using the new handler. 
 
 In addition to the context menus defined for the person page we also add a "Create new person" menu on the desktop under the "Quick Access" top level menu. 
 To do this open class `Desktop` in the Java editor and navigate to the inner class `QuickAccessMenu`. 

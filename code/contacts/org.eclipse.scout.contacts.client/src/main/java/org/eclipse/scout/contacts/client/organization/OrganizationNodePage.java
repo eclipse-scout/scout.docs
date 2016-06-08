@@ -13,35 +13,27 @@ package org.eclipse.scout.contacts.client.organization;
 import java.util.List;
 
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
-import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
-import org.eclipse.scout.rt.shared.TEXTS;
 
-public class OrganizationDetailsPage extends AbstractPageWithNodes {
+// tag::all[]
+public class OrganizationNodePage extends AbstractPageWithNodes {
 
-  private String organizationId;
+  private String organizationId; // <1>
 
-  @Override
-  protected String getConfiguredTitle() {
-    return TEXTS.get("OrganizationDetails");
-  }
-
-  @Override
-  protected void execCreateChildPages(List<IPage<?>> pageList) {
-    PersonTablePage personTablePage = new PersonTablePage();
-    personTablePage.setOrganizationId(getOrganizationId());
-    pageList.add(personTablePage);
-
-  }
-
-  @FormData
   public String getOrganizationId() {
     return organizationId;
   }
 
-  @FormData
   public void setOrganizationId(String organizationId) {
     this.organizationId = organizationId;
   }
+
+  @Override // <2>
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
+    PersonTablePage personTablePage = new PersonTablePage();
+    personTablePage.setOrganizationId(getOrganizationId()); // <3>
+    pageList.add(personTablePage);
+  }
 }
+// end::all[]

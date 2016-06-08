@@ -32,30 +32,34 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-//tag::PageInit[]
+// tag::PageInit[]
+// tag::childPage[]
 @PageData(OrganizationTablePageData.class)
 public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTablePage.Table> {
+// end::childPage[]
 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Organizations"); // <1>
   }
-  //end::PageInit[]
+  // end::PageInit[]
+  // tag::childPage[]
 
-  @Override
+  @Override // <1>
   protected IPage<?> execCreateChildPage(ITableRow row) {
-    OrganizationDetailsPage childPage = new OrganizationDetailsPage();
-    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row));
+    OrganizationNodePage childPage = new OrganizationNodePage();
+    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row)); // <2>
     return childPage;
   }
-  //tag::PageInit[]
+  // end::childPage[]
+  // tag::PageInit[]
 
-  //tag::execLoadData[]
+  // tag::execLoadData[]
   @Override
   protected void execLoadData(SearchFilter filter) {
     importPageData(BEANS.get(IOrganizationService.class).getOrganizationTableData(filter));
   }
-  //end::execLoadData[]
+  // end::execLoadData[]
 
   public class Table extends AbstractTable {
     // container class to hold columns and other elements for this table page
@@ -206,15 +210,17 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
         form.startNew();
       }
     }
-    //tag::PageInit[]
+    // tag::PageInit[]
   }
-  //end::PageInit[]
+  // end::PageInit[]
 
   @Override
   protected String getConfiguredIconId() {
     return AbstractIcons.World;
   }
 
-  //tag::PageInit[]
+  // tag::childPage[]
+  // tag::PageInit[]
 }
-//end::PageInit[]
+// end::PageInit[]
+// end::childPage[]

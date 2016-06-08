@@ -37,27 +37,39 @@ public class PersonService implements IPersonService {
   public PersonTablePageData getPersonTableData(SearchFilter filter, String organizationId) {
     PersonTablePageData pageData = new PersonTablePageData();
     PersonSearchFormData searchData = (PersonSearchFormData) filter.getFormData();
+    StringBuilder sql = new StringBuilder();
 
-    StringBuilder sqlSelect = new StringBuilder(SQLs.PERSON_PAGE_SELECT);
-    StringBuilder sqlWhere = new StringBuilder(" WHERE 1 = 1 ");
+    sql.append(SQLs.PERSON_PAGE_SELECT);
     // end::getTableData[]
+    // tag::addOrganizationCriteria[]
+    sql.append(" WHERE 1 = 1 ");
+    addToWhere(sql, organizationId, "organization_id", "organizationId");
+    // end::addOrganizationCriteria[]
 
     if (searchData != null) {
-      addToWhere(sqlWhere, searchData.getFirstName().getValue(), "first_name", "firstName");
-      addToWhere(sqlWhere, searchData.getLastName().getValue(), "last_name", "lastName");
-      addToWhere(sqlWhere, searchData.getLocation().getCity().getValue(), "city", "location.city");
-      addToWhere(sqlWhere, searchData.getLocation().getCountry().getValue(), "country", "location.country");
-      addToWhere(sqlWhere, searchData.getOrganization().getValue(), "organization_id", "organization");
-      addToWhere(sqlWhere, organizationId, "organization_id", "organizationId");
+      addToWhere(sql, searchData.getFirstName().getValue(), "first_name", "firstName");
+      addToWhere(sql, searchData.getLastName().getValue(), "last_name", "lastName");
+      addToWhere(sql, searchData.getLocation().getCity().getValue(), "city", "location.city");
+      addToWhere(sql, searchData.getLocation().getCountry().getValue(), "country", "location.country");
+      addToWhere(sql, searchData.getOrganization().getValue(), "organization_id", "organization");
     }
 
     // tag::getTableData[]
-    String sql = sqlSelect.append(sqlWhere).append(SQLs.PERSON_PAGE_DATA_SELECT_INTO).toString();
-    SQL.selectInto(sql, searchData, new NVPair("organizationId", organizationId), new NVPair("page", pageData));
+    sql.append(SQLs.PERSON_PAGE_DATA_SELECT_INTO);
+
+    SQL.selectInto(sql.toString(), searchData, new NVPair("organizationId", organizationId), new NVPair("page", pageData));
 
     return pageData;
   }
   // end::getTableData[]
+  // tag::addOrganizationCriteria[]
+
+  protected void addToWhere(StringBuilder sqlWhere, String fieldValue, String sqlAttribute, String searchAttribute) {
+    if (StringUtility.hasText(fieldValue)) {
+      sqlWhere.append(String.format(SQLs.AND_LIKE_CAUSE, sqlAttribute, searchAttribute));
+    }
+  }
+  // end::addOrganizationCriteria[]
 
   //tag::all[]
   @Override
@@ -97,14 +109,6 @@ public class PersonService implements IPersonService {
 
     return formData;
   }
-  //end::all[]
-
-  protected void addToWhere(StringBuilder sqlWhere, String fieldValue, String sqlAttribute, String searchAttribute) {
-    if (StringUtility.hasText(fieldValue)) {
-      sqlWhere.append(String.format(SQLs.AND_LIKE_CAUSE, sqlAttribute, searchAttribute, "%"));
-    }
-  }
-  // tag::all[]
   // tag::getTableData[]
 }
 // end::all[]

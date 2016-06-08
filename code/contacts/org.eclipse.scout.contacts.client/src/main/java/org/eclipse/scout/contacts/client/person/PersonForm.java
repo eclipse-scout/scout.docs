@@ -644,9 +644,11 @@ public class PersonForm extends AbstractForm {
         // tag::layout[]
       }
 
+      // tag::organizationField[]
       @Order(20)
       public class WorkBox extends AbstractGroupBox {
         // end::layout[]
+        // end::organizationField[]
 
         @Override
         protected String getConfiguredLabel() {
@@ -661,20 +663,22 @@ public class PersonForm extends AbstractForm {
             return TEXTS.get("Position");
           }
         }
+        // tag::organizationField[]
 
         @Order(20)
-        public class OrganizationField extends AbstractSmartField<String> {
+        public class OrganizationField extends AbstractSmartField<String> { // <1>
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Organization");
           }
 
-          @Override
+          @Override // <2>
           protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
             return OrganizationLookupCall.class;
           }
         }
+        // end::organizationField[]
 
         @Order(30)
         public class PhoneWorkField extends AbstractStringField {
@@ -693,8 +697,10 @@ public class PersonForm extends AbstractForm {
             return TEXTS.get("Email");
           }
         }
-        //tag::layout[]
+        // tag::layout[]
+        // tag::organizationField[]
       }
+      // end::organizationField[]
 
       //tag::notes[]
       @Order(30)
@@ -799,14 +805,16 @@ public class PersonForm extends AbstractForm {
     boolean noFirstName = StringUtility.isNullOrEmpty(getFirstNameField().getValue());
     boolean noLastName = StringUtility.isNullOrEmpty(getLastNameField().getValue());
 
-    if (noFirstName && noLastName) {
-      getGeneralBox().addErrorStatus(TEXTS.get("MissingName")); // <2>
-      getFirstNameField().requestFocus(); // <3>
+    getGeneralBox().clearErrorStatus(); // <2>
 
-      return false; // <4>
+    if (noFirstName && noLastName) {
+      getGeneralBox().addErrorStatus(TEXTS.get("MissingName")); // <3>
+      getFirstNameField().requestFocus();
+
+      throw new VetoException(TEXTS.get("MissingName")); // <4>
     }
 
-    return true; // <4>
+    return true; // <5>
   }
   // end::validate[]
   // tag::handler[]

@@ -14,11 +14,12 @@ import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
+//tag::all[]
 @ApplicationScoped
 @TunnelToServer
 public interface IPersonService {
 
-  PersonTablePageData getPersonTableData(SearchFilter filter, String organizationId);
+  PersonTablePageData getPersonTableData(SearchFilter filter, String organizationId); // <1>
 
   PersonFormData create(PersonFormData formData);
 
@@ -26,3 +27,4 @@ public interface IPersonService {
 
   PersonFormData store(PersonFormData formData);
 }
+//end::all[]

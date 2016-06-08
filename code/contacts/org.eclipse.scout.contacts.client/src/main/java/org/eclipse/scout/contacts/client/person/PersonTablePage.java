@@ -17,7 +17,6 @@ import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
-import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -38,37 +37,54 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-//tag::PageInit[]
-//tag::structure[]
+// tag::PageInit[]
+// tag::structure[]
+// tag::linkToOrganization[]
 @PageData(PersonTablePageData.class)
 public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table> {
-  //end::structure[]
-  //end::PageInit[]
+  // end::structure[]
+  // end::PageInit[]
 
-  private String organizationId;
-  //tag::PageInit[]
+  private String organizationId; // <1>
+
+  public String getOrganizationId() {
+    return organizationId;
+  }
+
+  public void setOrganizationId(String organizationId) {
+    this.organizationId = organizationId;
+  }
+  // end::linkToOrganization[]
+  // tag::PageInit[]
 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Persons"); // <1>
   }
+  // tag::linkToOrganization[]
 
-  @Override // <2>
+  @Override
   protected void execLoadData(SearchFilter filter) {
-    importPageData(BEANS.get(IPersonService.class).getPersonTableData(filter, getOrganizationId()));
+    importPageData(BEANS.get(IPersonService.class)
+        .getPersonTableData(filter, getOrganizationId())); // <2>
   }
+  // end::linkToOrganization[]
 
   @Override // <3>
   protected boolean getConfiguredLeaf() {
     return true;
   }
-  //tag::structure[]
+  // tag::structure[]
+  // tag::linkToOrganization[]
 
-  //tag::PageInit[]
+  // tag::organizationColumn[]
+  // tag::PageInit[]
   public class Table extends AbstractTable {
-    //end::structure[]
+    // end::linkToOrganization[]
+    // end::organizationColumn[]
+    // end::structure[]
     // container class to hold columns and other elements for this table page <4>
-    //end::PageInit[]
+    // end::PageInit[]
 
     public LastNameColumn getLastNameColumn() {
       return getColumnSet().getColumnByClass(LastNameColumn.class);
@@ -136,13 +152,16 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
         PersonForm form = new PersonForm();
         form.setPersonId(getPersonIdColumn().getSelectedValue()); // <2>
         form.addFormListener(new PersonFormListener());
-        form.startModify(); // <3>
+        // start the form using its modify handler
+        form.startModify();
       }
     }
+    // tag::linkToOrganization[]
 
     @Order(20)
     public class NewMenu extends AbstractMenu {
       // end::menu[]
+      // end::linkToOrganization[]
 
       @Override
       protected String getConfiguredKeyStroke() {
@@ -162,28 +181,30 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       }
 
       @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() { // <4>
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() { // <3>
         return CollectionUtility.<IMenuType> hashSet(
             TableMenuType.EmptySpace, TableMenuType.SingleSelection);
       }
+      // tag::linkToOrganization[]
 
       @Override
       protected void execAction() {
         PersonForm form = new PersonForm();
         // end::menu[]
-        // pre-fill the organization id if available
-        form.getOrganizationField().setValue(getOrganizationId());
+        form.getOrganizationField().setValue(getOrganizationId()); // <3>
         // tag::menu[]
         form.addFormListener(new PersonFormListener());
-        form.startNew(); // <5>
+        // start the form using its new handler
+        form.startNew();
       }
     }
+    // end::linkToOrganization[]
 
     private class PersonFormListener implements FormListener {
 
       @Override
       public void formChanged(FormEvent e) {
-        // reload page to reflect new/changed data after saving the content of the form
+        // reload page to reflect new/changed data after saving any changes
         if (FormEvent.TYPE_CLOSED == e.getType() && e.getForm().isFormStored()) {
           reloadPage();
         }
@@ -330,6 +351,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
         return 200;
       }
     }
+    // tag::organizationColumn[]
 
     @Order(9)
     public class OrganizationColumn extends AbstractSmartColumn<String> {
@@ -343,17 +365,22 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
         return OrganizationLookupCall.class;
       }
+      // end::organizationColumn[]
 
       @Override
       protected int getConfiguredWidth() {
         return 200;
       }
+      // tag::organizationColumn[]
     }
-    //tag::structure[]
-    //tag::PageInit[]
+    // tag::structure[]
+    // tag::PageInit[]
+    // tag::linkToOrganization[]
   }
-  //end::PageInit[]
-  //end::structure[]
+  // end::PageInit[]
+  // end::structure[]
+  // end::organizationColumn[]
+  // end::linkToOrganization[]
 
   @Override
   protected String getConfiguredIconId() {
@@ -364,18 +391,10 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
   protected Class<? extends ISearchForm> getConfiguredSearchForm() {
     return PersonSearchForm.class;
   }
-
-  @FormData
-  public String getOrganizationId() {
-    return organizationId;
-  }
-
-  @FormData
-  public void setOrganizationId(String organizationId) {
-    this.organizationId = organizationId;
-  }
-  //tag::PageInit[]
-  //tag::structure[]
+  // tag::PageInit[]
+  // tag::structure[]
+  // tag::linkToOrganization[]
 }
-//end::PageInit[]
-//end::structure[]
+// end::PageInit[]
+// end::structure[]
+// end::linkToOrganization[]

@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.events.client.event;
 import org.eclipse.scout.contacts.client.common.AbstractEditMenu;
 import org.eclipse.scout.contacts.client.common.AbstractNewMenu;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
-import org.eclipse.scout.contacts.client.organization.OrganizationDetailsPage;
+import org.eclipse.scout.contacts.client.organization.OrganizationNodePage;
 import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
@@ -56,7 +56,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
   @Override
   protected void execInitPage() {
-    OrganizationDetailsPage organizationParentPage = getParentNode(OrganizationDetailsPage.class);
+    OrganizationNodePage organizationParentPage = getParentNode(OrganizationNodePage.class);
 
     if (organizationParentPage != null) {
       setOrganizationId(organizationParentPage.getOrganizationId());
