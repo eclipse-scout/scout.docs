@@ -19,7 +19,7 @@
 @text-field-padding-y: 7px;
 @text-field-padding-x: 10px;
 @button-padding-x: 7px;
-@button-padding-y: 7px;
+@button-padding-y: 0px;
 @borderless-field-padding-y: 8px;
 
 @border-radius: 3px;

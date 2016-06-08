@@ -17,11 +17,12 @@
 .tab-area {
   margin-top: 10px;
   margin-left: @mandatory-indicator-width;
+  margin-bottom: -8px;
 
   & > .tab-item {
     padding: @group-title-padding-y @tabbox-padding-x 12px;
     margin-bottom: -5px;
-    border-radius: 5px;
+    border-radius: 8px;
     border-bottom: 0px;
     font-weight: normal;
     color: @palette-blue-6;
@@ -49,8 +50,6 @@
 
 .tab-content {
   background-color: @palette-blue-0;	
-  margin-top: -5px;
   border: 10px;
   border-top: 15px;
-  padding-left: 15px;
 }

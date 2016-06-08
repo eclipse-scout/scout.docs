@@ -8,11 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/splitter/Splitter.css";
+@import (less) "scout/boxbuttons/BoxButtons.css";
 
-.splitter {
-
-  &.x-axis {
-    width: 2px;
+.box-buttons {
+  & > .button {
+    background-color: @palette-gray-2;
   }
+
+  & > .box-button:first-child {
+    color: @palette-gray-3;
+  }
+  
+  & > .box-button:first-child ~ .box-button {
+    color: @palette-gray-3;
+  }  
 }

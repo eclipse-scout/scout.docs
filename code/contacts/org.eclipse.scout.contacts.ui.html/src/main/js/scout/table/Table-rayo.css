@@ -8,26 +8,8 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-@import (less) "scout/menu/MenuBar.css";
-
-.menubar {
-  &.bottom {
-    border-top: 0px;
-  }
-  
-  & > .menubox {
-    & > .menu-item {
-      height: 25px;
-      
-      &.menu-button {
-        border: 0px;
-        border-radius: 5px;
-		padding: 0;
-		        
-        &:focus::after {
-          visibility: hidden;
-        }        
-      }
-    }
-  }
+ @import (less) "scout/table/Table.css";
+ 
+.table-data {
+  background-color: @palette-gray-1;	
 }
