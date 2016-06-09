@@ -71,5 +71,5 @@ include::_TutorialStep6.adoc[]
 include::_TutorialStep7.adoc[]
 
 [[sec-contacts_outlook]]
-=== Next Steps and Outlook
+=== Additional Concepts and Features 
 include::_TutorialStep8.adoc[]

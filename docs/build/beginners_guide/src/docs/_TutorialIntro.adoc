@@ -89,4 +89,4 @@ In this step we modify the user interface to implement a 1:n relationship betwee
 This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
 
 Step 8: <<sec-contacts_outlook>>:: 
-This step discusses the gap between the tutorial application and the complete "Contacts" demo application and suggests possible next steps to close the gap. 
+The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application. 
