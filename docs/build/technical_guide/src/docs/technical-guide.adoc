@@ -15,24 +15,13 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 //:numbered:
 //-----------------------------------------------------------------------------
-// Some Scout Archite
+// Scout Technical Guide
 //-----------------------------------------------------------------------------
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+This guide documents the Scout architecture and describes important concepts used in Scout.
 
-//-----------------------------------------------------------------------------
-//Asciidoctor input file: "Introduction"
-//
-//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
-//-----------------------------------------------------------------------------
-
-!!! WORK IN PROGRESS !!!
-
-Scout Architecture and Concepts are described here.
+WARNING: This document is not complete. Contributions are are welcome! If you like to help, please create a pull request for
+ https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs, thanks!
 
 :numbered:
 include::{mdledir}/technicalGuide/Platform.adoc[]

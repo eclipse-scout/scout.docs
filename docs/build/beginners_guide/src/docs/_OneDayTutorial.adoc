@@ -1,0 +1,75 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "One Day Tutorial"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[[cha-large_example]]
+== A One Day Tutorial
+
+In this chapter we will create the "`Contacts`" Scout application. 
+The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functioning application. 
+
+The application is kept small enough to complete this tutorial within less than a day.
+An extended version of "`Contacts`" is available as a Scout sample application on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github].
+
+As a prerequisite to this tutorial we assume that the reader has successfully completed the chapters "Hello World Tutorial" and "Import the Scout Demo Applications" as described in the Eclipse Scout user guide.
+To access the Scout user guide help hit kbd:[F1] in the Eclipse IDE.
+This opens the Eclipse help view that includes the Eclipse Scout User Guide as shown in <<img-sdk_f1>>.
+
+[[img-sdk_f1, Figure 000]]
+.The Eclipse help view including the Eclipse Scout User Guide.
+image::{imgsdir}/sdk_f1.png[]
+
+The "`Contacts`" tutorial is organized as follows.
+In the first section, the finished "`Contacts`" application is explained from the user perspective.
+The remaining sections focus on the individual steps to implement the "`Contacts`" tutorial application.
+
+//--- tutorial intro --------------------------------------------------------//
+
+include::_TutorialIntro.adoc[]
+
+//--- tutorial steps --------------------------------------------------------//
+
+[[sec-contacts_initial_project]]
+=== Setting up the Initial Project
+include::_TutorialStep1.adoc[]
+
+[[sec-contacts_pages]]
+=== Adding the Person and Organization Page
+include::_TutorialStep2.adoc[]
+
+[[sec-contacts_jdbc]]
+=== Creating and Accessing the Database
+include::_TutorialStep3.adoc[]
+
+[[sec-contacts_forms]]
+=== Adding a Form to Create/Edit Persons
+include::_TutorialStep4.adoc[]
+
+[[sec-contacts_fields]]
+=== Form Field Validation and Template Fields
+include::_TutorialStep5.adoc[]
+
+[[sec-contacts_form_add_company]]
+=== Adding the Company Form
+include::_TutorialStep6.adoc[]
+
+[[sec-contacts_link_organization_person]]
+=== Linking Organizations and Persons
+include::_TutorialStep7.adoc[]
+
+[[sec-contacts_outlook]]
+=== Additional Concepts and Features 
+include::_TutorialStep8.adoc[]

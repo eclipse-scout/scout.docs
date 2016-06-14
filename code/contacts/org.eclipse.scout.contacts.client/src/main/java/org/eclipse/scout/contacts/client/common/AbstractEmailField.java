@@ -34,7 +34,8 @@ public abstract class AbstractEmailField extends AbstractStringField {
     if (rawValue != null && !Pattern.matches(EMAIL_PATTERN, rawValue)) {
       throw new VetoException(TEXTS.get("BadEmailAddress"));
     }
-    return super.execValidateValue(rawValue);
+
+    return rawValue;
   }
 
 }

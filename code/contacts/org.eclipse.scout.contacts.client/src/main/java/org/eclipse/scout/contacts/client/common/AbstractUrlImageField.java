@@ -1,6 +1,5 @@
 package org.eclipse.scout.contacts.client.common;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -16,22 +15,25 @@ import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-@FormData(value = AbstractUrlImageFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+// tag::template[]
+@FormData(value = AbstractUrlImageFieldData.class, // <1>
+    sdkCommand = FormData.SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+// tag::menu[]
 public class AbstractUrlImageField extends AbstractImageField {
 
-  private String url;
+  // end::menu[]
+  private String url; // <2>
 
-  @FormData
+  @FormData // <2>
   public String getUrl() {
     return url;
   }
 
-  @FormData
+  @FormData // <2>
   public void setUrl(String url) {
     this.url = url;
-    clearErrorStatus();
     updateImage();
-    getForm().touch();
   }
 
   @Override
@@ -40,11 +42,18 @@ public class AbstractUrlImageField extends AbstractImageField {
   }
 
   @Override
+  protected int getConfiguredGridH() {
+    return 5;
+  }
+  // end::template[]
+
+  @Override
   protected String getConfiguredImageId() {
     return Icons.Person;
   }
 
-  @Order(1)
+  // tag::menu[]
+  @Order(10)
   public class EditURLMenu extends AbstractMenu {
 
     @Override
@@ -54,41 +63,47 @@ public class AbstractUrlImageField extends AbstractImageField {
 
     @Override
     protected void execAction() {
-      updateUrl();
+      PictureUrlForm form = new PictureUrlForm();
+      String oldUrl = getUrl();
+
+      if (StringUtility.hasText(oldUrl)) { // <1>
+        form.getUrlField().setValue(oldUrl);
+      }
+
+      form.startModify();
+      form.waitFor(); // <2>
+
+      if (form.isFormStored()) { // <3>
+        setUrl(form.getUrlField().getValue());
+      }
     }
   }
+  // end::menu[]
+  // tag::template[]
 
   protected void updateImage() {
+    clearErrorStatus();
+
     if (url == null) {
       setImage(null);
     }
     else {
-      try (InputStream in = new URL((String) url).openStream()) {
-        setImage(IOUtility.readBytes(in));
+      try {
+        setImage(IOUtility.readFromUrl(new URL((String) url)));
         setAutoFit(true);
       }
+      // end::template[]
       catch (MalformedURLException e) {
         addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
       }
+      // tag::template[]
       catch (Exception e) {
         addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
       }
     }
-  }
 
-  protected void updateUrl() {
-    String oldUrl = getUrl();
-    PictureUrlForm form = new PictureUrlForm();
-
-    if (StringUtility.hasText(oldUrl)) {
-      form.getUrlField().setValue(oldUrl);
-    }
-
-    form.startModify();
-    form.waitFor();
-
-    if (form.isFormStored()) {
-      setUrl(form.getUrlField().getValue());
-    }
+    getForm().touch();
   }
 }
+// end::template[]
+// end::menu[]

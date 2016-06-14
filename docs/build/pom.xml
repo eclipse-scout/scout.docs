@@ -35,7 +35,7 @@
   </properties>
 
   <modules>
-    <module>book_scout_intro</module>
+    <module>beginners_guide</module>
     <module>technical_guide</module>
     <module>eclipse_help</module>
     <module>scout_helloworld</module>
@@ -95,7 +95,6 @@
             <sourceDirectory>src/docs</sourceDirectory>
             <attributes>
               <sourcedir>${project.build.sourceDirectory}</sourcedir>
-              <project-version>${project.version}</project-version>
               <repository>BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs</repository>
               <branch>releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x</branch>
               <imagesdir></imagesdir>
@@ -103,6 +102,7 @@
               <mdledir>${project.basedir}/../../adoc</mdledir>
               <codedir>${project.basedir}/../../../code</codedir>
               <doc-short-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</doc-short-version>
+              <project-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</project-version>
             </attributes>
           </configuration>
         </plugin>

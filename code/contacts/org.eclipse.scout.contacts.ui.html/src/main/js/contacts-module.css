@@ -6,4 +6,16 @@
 * Released under the Eclipse Public License v1.0
 * http://www.eclipse.org/legal/epl-v10.html
 */
+
 //@include("contacts/form/UserForm.css")
+
+@font-face {
+  font-family: awesomeIcons;
+  font-weight: normal;
+  src: url('fontawesome-webfont.woff') format('woff'),
+ 	   url('fontawesome-webfont.ttf')  format('truetype');
+}
+
+.font-awesomeIcons {
+  font-family: awesomeIcons, @font-default-family;
+}

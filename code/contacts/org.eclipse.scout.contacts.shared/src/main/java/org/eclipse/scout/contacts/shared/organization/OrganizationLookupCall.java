@@ -13,6 +13,7 @@ package org.eclipse.scout.contacts.shared.organization;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
+//tag::all[]
 public class OrganizationLookupCall extends LookupCall<String> {
 
   private static final long serialVersionUID = 1L;
@@ -22,3 +23,4 @@ public class OrganizationLookupCall extends LookupCall<String> {
     return IOrganizationLookupService.class;
   }
 }
+//end::all[]

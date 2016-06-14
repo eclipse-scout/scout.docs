@@ -26,6 +26,8 @@ public interface SQLs {
       + "             date_end TIMESTAMP, "
       + "             city VARCHAR(64), "
       + "             country VARCHAR(2), "
+      + "             phone VARCHAR(20), "
+      + "             email VARCHAR(64), "
       + "             url VARCHAR(64), "
       + "             notes VARCHAR(1024))";
 
@@ -132,6 +134,8 @@ public interface SQLs {
       + "             date_end, "
       + "             city, "
       + "             country, "
+      + "             phone, "
+      + "             email, "
       + "             url, "
       + "             notes "
       + "FROM         EVENT "
@@ -141,8 +145,10 @@ public interface SQLs {
       + "             :ends, "
       + "             :locationBox.city, "
       + "             :locationBox.country, "
+      + "             :phone, "
+      + "             :email, "
       + "             :homepage, "
-      + "             :notes";
+      + "             :notesBox.notes";
 
   String EVENT_UPDATE = ""
       + "UPDATE       EVENT "
@@ -152,7 +158,9 @@ public interface SQLs {
       + "             url = :homepage, "
       + "             city = :locationBox.city, "
       + "             country = :locationBox.country, "
-      + "             notes = :notes "
+      + "             phone = :phone, "
+      + "             email = :email, "
+      + "             notes = :notesBox.notes "
       + "WHERE        event_id = :eventId";
 
   String EVENT_PARTICIPANTS_SELECT = ""

@@ -13,17 +13,13 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the scout migration from the previous version
 //-----------------------------------------------------------------------------
 
-== Scout 6.1 Migration Guide
-
-This document describes the migration from Scout 5.0 to Scout 6.1
-
 ////
 Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 ////
 
-=== Project Structure
+== Project Structure
 
 With the upgrade to pure maven without OSGi the project structure should be changed to the maven default footnote:[
 https://maven.apache.org/guides/getting-started/
@@ -73,11 +69,11 @@ org.eclipsescout.helloworld.client
                             HelloworldTest.java
 ----
 
-=== Manifest.MF
+== Manifest.MF
 
 Manifest.MF is no longer used. Migrate dependencies to `pom.xml`!
 
-=== AccessControlService
+== AccessControlService
 
 The IAccessControlService has been improved to allow for other keys than the userId. AbstractAccessControlService is now generic with key as a type parameter.
 
@@ -87,7 +83,7 @@ If you want to use access control based on the userid as before, extend UserIdAc
 protected abstract PermissionCollection execLoadPermissions(String userId)
 ----
 
-=== IShellService
+== IShellService
 
 The ShellService can no longer be used because there is no access to the client side shell. Instead you can use the following code to send a document to clients:
 [source,java,indent=0]
@@ -97,7 +93,7 @@ ClientSessionProvider.currentSession().getDesktop()
   .openUri(binaryResource, OpenUriAction.DOWNLOAD);
 ----
 
-=== Desktop
+== Desktop
 
 * Renamed `IDesktop.openUrlInBrowser` to `openUri`, since passed String is not always an URL but sometimes an URI like tel:123 or mailto:foo@bar.com, etc.
 * Renamed `IDesktop.openDownloadInBrowser` to `downloadResource`, added overridden methods with `BinaryResource` parameter, so it's not required to create a `IDownloadHandler` instance to use the download methods.
@@ -106,13 +102,13 @@ ClientSessionProvider.currentSession().getDesktop()
 * Renamed `DesktopEvent.TYPE_OPEN_DOWNLOAD_IN_BROWSER` to `TYPE_DOWNLOAD_RESOURCE`
 * F5 Keystroke on the desktop to reload the current page is no longer necessary because the table itself now provides the f5 keystroke -> Remove the keystroke from your desktop to prevent refreshing the table twice.
 
-=== Offline
+== Offline
 Offline functionality in the scout client was removed (not needed anymore). Delete
 - OfflineState
 - IClientSession.getOfflineSubject
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
-=== Mobile
+== Mobile
 org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client.
 A lot of the mobile code in that plugin has been removed because the ui is now smarter and reacts bettter to smaller screens than the previous uis.
 
@@ -124,11 +120,11 @@ The new mobile approach is slightly different than the one before Neon:
 * The transformation mainly affects mobile phones (resp. devices with a small screen size). On tablets the application will look nearly the same as on a desktop device. There are just a few optimizations made regarding touch input (e.g. the smartfield looks different).
 * Previously a form based approach had been used. Every outline page was wrapped in a page form, the navigation happened by showing or hiding the corerct form. Now, the outline tree has been enhanced with mobile specific functionality. This means the navigation happens completely in the outline tree, no forms are used. There is also no need for a home form anymore which displays the available outlines. The outlines may be switched in the same way as with the desktop style. The advantage is that the mobile style (or rather the style for small devices) looks and behaves similar to the regular desktop style which should make it easier for the user.
 
-=== ToolButton
+== ToolButton
 * `IToolButton` has been removed, it is not necessary anymore because the desktop may now display any kind of menus.
 * `IFormToolButton` has been renamed to `IFormMenu`. These menus, which display a form when selected, may now be used on any menu capable component and not only on the desktop. Therefore it has been moved from the package `org.eclipse.scout.rt.client.ui.desktop.outline` to `org.eclipse.scout.rt.client.ui.form`.
 
-=== Menu
+== Menu
 All owners of an `IContextMenu` now share a common interface: `IContextMenuOwner`. This interface provides a method `getMenuByClass(T)`, analogous to `getFieldByClass(T)`, `getColumnByClass(T)` etc.
 
 `ITree` and `ITable` provided a similar method `getMenu(T)`. This method was deprecated in favor of `getMenuByClass(T)`.
@@ -139,7 +135,7 @@ The constructors of OutlineMenuWrapper changed. For details consult the javadoc.
 
 The `CopyColumnsWidthsMenu` has been deleted and was replaced with a new button in `OrganizeColumnsForm`.
 
-=== Message Box
+== Message Box
 
 * Removed title. No replacement, title is not supported anymore.
 * renamed intro text to header & info/actionText to body.
@@ -153,9 +149,9 @@ The `CopyColumnsWidthsMenu` has been deleted and was replaced with a new button 
 * Moved MessageBox.showDeleteConfirmationMessage methods to MessagesBoxes class
 * If html needs to be displayed, use the new html(IHtmlContent) method. Header / body methods do not support html.
 
-=== Table
+== Table
 
-==== Table API Changes
+=== Table API Changes
 
 * Renamed `ITable.resetDisplayableColumns()` to `resetColumns()`
 * Removed `ITable.resetColumns(boolean, boolean, boolean, boolean)` from interface (is now protected in `AbstractTable`)
@@ -191,7 +187,7 @@ A row should be set to checked from the model even if the row is disabled. For t
 +
 This property was added because with rap and swt it was not possible to have variable table rows as height as their content. The only possibility to get multiline rows was to set a fixed height. This limitation is now gone. If you still want every row to have a fixed height on multiline tables, you can use css to achieve it.
 
-==== Custom Table Sorting
+=== Custom Table Sorting
 Added `IColumn.uiSortPossible`
 
 Sorting of table data is done by the ui whenever possible.
@@ -203,7 +199,7 @@ Furthermore smart columns can not be sorted by the ui because the value is not k
 
 If you implemented custom sorting (e.g. by overriding `AbstractColumn.compareTableRows`), you have to set `getConfiguredUiSortPossible` to `false`.
 
-==== Table Field & Page
+=== Table Field & Page
 
 * Removed "populate status" and "selection status" methods from `IPage` and `ITableField`. The only status is on the table itself and is called "table status". `IPage` and `ITableField` have new convenience methods for getting/setting the table status (without requiring null checks on getTable()).
 +
@@ -243,18 +239,18 @@ Migration:
 +
 Remove the detail form handling code from `execPageActivated` / `execPageDeactivated` / `execPageDisposed` and use either `getConfiguredDetailForm` / `execInitDetailForm` or `createDetailForm`.
 
-=== Outline
+== Outline
 
 * Removed `IOutlineTableForm`, `IOutlineTreeForm` and all sub-classes. They're not supported by the new Html UI anymore.
 
-==== Default Page selection of Outlines
+=== Default Page selection of Outlines
 For an Outline having a selected page is not mandatory anymore.
 An outline overview or the default detail form will be displayed if no page is selected.
 Therefore activating an outline does not automatically select the first page anymore.
 
 If the previous behavior is still wanted, one can implemented `IDesktop.execOutlineChanged` and call `activateFirstPage` if active page is `null`.
 
-=== Wizard
+== Wizard
 
 * Argument `containerForm` was removed. Use `getContainerForm()` instead.
 * Method `decorateWizardContainerForm` was renamed to `execDecorateContainerForm` (same as `execCreateContainerForm`).
@@ -292,7 +288,7 @@ New code:
 ** For own implementations of `IWizardContainerForm`, replace the return value `IButton` by `IWizardAction`.
 ** For code that previously used the `setView(boolean, boolean, boolean)` method on wizard buttons, a new `setView(boolean, boolean)` method was introduced on `IButton` and `IAction` (because it does not make sense to make a button "mandatory"). This can be migrated by just deleting the third argument.
 
-=== Form
+== Form
 
 * `get/setBasicTitle` removed
 * `get/setSubTitle` added
@@ -301,7 +297,7 @@ New code:
 * Added default behaviour to `AbstractForm.execCreateFormData` The method now creates a new instance of the form data based on the form data annotation. Also added createFormData to the IForm interface. If `execCreateFormData` was implemented and just used the default constructor of the corresponding form data class, the method may be removed.
 * Removed display-hint `IForm.DISPLAY_HINT_POPUP_DIALOG`. Not supported anymore. Use dialog or popup-window instead.
 
-=== Form Fields
+== Form Fields
 
 * Deleted `AbstractCheckBox`, `AbstractCheckboxExtension`, `ICheckBoxExtension`, `ICheckBox`.
 +
@@ -329,7 +325,7 @@ Migration:
 * The search table control now gets selected if the search is required. If you had a `SearchFormToolButton`, remove the code in `Desktop.execPageSearchFormChanged`.
 * When setting an inner form into an `WrappedFormField` using `setInnerForm(IForm)` the given form life cycle is handled by the wrapped form field. This means it is automatically started, disposed etc.
 
-==== Validate on any Key
+=== Validate on any Key
 
 Replace ValidateOnAnyKey mechanism (`getConfiguredValidateOnAnyKey`) (Bug 459893):
 
@@ -347,7 +343,7 @@ Replace ValidateOnAnyKey mechanism (`getConfiguredValidateOnAnyKey`) (Bug 459893
 ** to: `void setValueFromUI(String value)`
 * removed `IColorFieldUiFacade`
 
-==== String Field
+=== String Field
 
 * Deleted `AbstractTextField`, `AbstractTextFieldExtension`, `ITextFieldExtension`, ITextField`.
 +
@@ -359,7 +355,7 @@ Use `AbstractStringField`, `AbstractStringExtension`, `IStringExtension`, `IStri
 * Removed `IStringField.isSpellCheckAsYouTypeEnabled()`, `IStringField.setSpellCheckAsYouTypeEnabled(boolean)` added `IStringField.setSpellCheckEnabled(boolean)` new ui delegates spell checker to browser, new property can be used to enable/disable spell checker for certain fields (by default it is enabled for multi-line fields, see `AbstractStringField.computeSpellCheckEnabled()`).
 * Removed `IStringField.isSelectAllOnFocus()`, `IStringField.setSelectAllOnFocus(boolean)`, `IStringColumn.isSelectAllOnEdit()`, `IStringColumn.setSelectAllOnEdit(boolean)`.
 
-==== Browser Field
+=== Browser Field
 * `IBrowserField` is no longer a value field. The `RemoteFile` value was changed to a property of type `BinaryResource`.
 ** Instead of `setValue()/getValue()` use `setBinaryResource()/getBinaryResource()`.
 ** Instead of `execChangedValue()` use a `BrowserFieldListener`.
@@ -369,7 +365,7 @@ Use `AbstractStringField`, `AbstractStringExtension`, `IStringExtension`, `IStri
 ** Removed parameter url and local and renamed path to ref.
 ** Renamed to `execAppLinkAction`
 
-==== Date Field
+=== Date Field
 
 * Removed the members `m_autoDate` and `m_autoTimeMillis` from `AbstractDateField`. They were replaced by a single property `PROP_AUTO_DATE` of type `java.util.Date`.
 +
@@ -386,7 +382,7 @@ The method `AbstractDateField.execParseValue()` is no longer supported. It canno
 + remove unused adjustDate, adjustTime from IDateField
 + removed fireDateShiftActionFromUI, fireTimeShiftActionFromUI from IDateFieldUIFacade
 
-==== HTML Field
+=== HTML Field
 
 * For `IHtmlField` attachments `RemoteFile` has been replaced by `BinaryResource`, therefore method signatures of `getAttachments()` and `setAttachments` have changed.
 ** Replace `RemoteFile` with `BinaryResource`.
@@ -395,7 +391,7 @@ The method `AbstractDateField.execParseValue()` is no longer supported. It canno
 ** New property for selection tracking, changeable with methods `isSelectionTrackingEnabled()` and `setSelectionTrackingEnabled(boolean)`. Selection tracking with `getSelectionStart()` and `getSelectionEnd()` is only possible when selection tracking is enabled.
 * Removed html editor support on html field. If you used a html editor you can create a custom field an include an existing html editor.
 
-==== Tree, TreeField & TreeBox
+=== Tree, TreeField & TreeBox
 
 * If all child nodes of a node in a tree are deleted, a `TreeEvent` with the new type `ALL_CHILD_NODES_DELETED` is fired (instead of `NODES_DELETED`). This is useful for optimization.
 +
@@ -404,7 +400,7 @@ If you previously added a listener for the type `NODES_DELETED`, you have to che
 +
 Also the implementation to check child nodes of a tree when a parent is checked is moved from the `AbstractTreeBox` to the tree. But the configuration can be done on the `AbstractTreeBox`. A node should be set to checked from the model even if the node is disabled. For this, the method `setNodesChecked` is extended with a new param to identify if only enabled nodes should be checked or not. The ui should only check enabled nodes, so the ui-facade calls the method with true.
 
-==== Calendar, CalendarField, Planner
+=== Calendar, CalendarField, Planner
 
 * Moved display-mode constants from `ICalender` and `IPlanner` to separate interface classes and let `IPlannerDisplayMode` extend `ICalenderDisplayMode` because they share some constants.
 * Removed `get/setColor()` from `ICalenderItem`, replaced with `get/setCssClass()`.
@@ -412,7 +408,7 @@ Also the implementation to check child nodes of a tree when a parent is checked 
 * Moved `get/setExternalKey()` from `ICalendarAppointment` to base class `ICalenderItem`.
 * Removed cell instance from `CalendarComponent`
 
-=== Utilities
+== Utilities
 
 * Removed methods `UserAgentUtility.isRichClient()` and `.isWebClient()`.
 * `HTMLUtility` has been deprecated. There is no replacement.
@@ -439,7 +435,7 @@ To make the service tunnel work with multiple sessions over HTTP, the `MultiSess
 ** Set the default cookie manager programmatically somewhere in your code. This is the way provided by the JVM, see http://docs.oracle.com/javase/tutorial/networking/cookies/cookiemanager.html for details.
 ** Use Scout's auto-install mechanism by setting the property `org.eclipse.scout.rt.servicetunnel.multiSessionCookieStoreEnabled` in your `config.properties` to `true`. This is the recommended way.
 
-==== Cryptography
+=== Cryptography
 `EncryptionUtility`, `PublicKeyUtility`, `TripleDES` have been deprecated because these classes use insecure cryptography. Use the new `SecurityUtility` or the Java Cryptography Architecture instead footnote:[
 http://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec.html
 ].
@@ -447,14 +443,16 @@ http://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec
 NOTE: When changing the cryptography algorithms in you application please keep in mind that all existing encrypted, hashed or signed data becomes invalid! Consider migrating these data first.
 
 
-=== Various API Changes
+== Various API Changes
 
 * Changed `ILookupRow` to fluent API: use with... instead of set...
 * `IClientSession.stopSession()` was renamed to `stop()` to match `IServerSession.stop()`.
 * Deleted validation rule infrastructure: Deleted package org.eclipse.scout.rt.shared.validate with all subpackages and the containing classes. Furthermore the class org.eclipse.scout.rt.shared.data.form.ValidationRule has been deleted.
+* `UiLayer`: Removed values `JSP`, `JSF`, `RAP`, `SWING` and added value `HTML`.
+* `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
+* The unused, obsolete classes `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent` and `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener` were removed.
 
-
-=== Logging API
+== Logging API
 
 Scout switched from a custom, typically java.util.logging-based logger implementation to SLF4j. The log format does not support indexed placeholders anymore.
 
@@ -470,7 +468,7 @@ LOG.info("message {0}", obj); // the index is not supported anymore. You have to
 
 NOTE: Indexed placeholders are actually deprecated since Scout's open-source debut. The values were filled in from left to right, independent of the possibly declared index.
 
-=== Logging configuration
+== Logging configuration
 
 migrate logging.properties to logback.xml
 
@@ -549,7 +547,7 @@ Default server pattern
 ----
 
 
-=== Text cleanup
+== Text cleanup
 All unused texts in ScoutTextProviderService were removed. If you were using one of the deleted ones, you find them in:
 
 * link:ScoutTexts/ScoutTexts_bg.properties[ScoutTexts_bg.properties]
@@ -581,22 +579,22 @@ All unused texts in ScoutTextProviderService were removed. If you were using one
 * link:ScoutTexts/ScoutTexts_zh.properties[ScoutTexts_zh.properties]
 * link:ScoutTexts/ScoutTexts.properties[ScoutTexts.properties]
 
-=== Migrate to the new Job API
+== Migrate to the new Job API
 Eclipse jobs are replaced by Scout Job Manager API.
 
-==== In a nutshell
+=== In a nutshell
 Scout provides a job manager based on Java Executors framework to run tasks in parallel, and on Quartz Trigger API to support for schedule plans. A task (aka job) can be scheduled to commence execution either immediately upon being scheduled, or delayed some time in the future. A job can be single executing, or recurring based on some schedule plan.
 
 A job is defined as some work to be executed asynchronously and is associated with a `JobInput` to describe how to run that work. The work is given to the job manager in the form of a `Runnable` or `Callable`. The only difference is, that a `Runnable` represents  a 'fire-and-forget' action, meaning that the submitter of the job does not expect the job to return a result. On the other hand, a `Callable` returns the computation's result, which the submitter can await for. Of course, a runnable's completion can also be waited for.
 
 See Scout architecture documentation for more information.
 
-==== Static accessors
+=== Static accessors
 * ServerJob.getCurrentSession() -> ServerSessionProvider.currentSession()
 * ClientJob.getCurrentSession() -> ClientSessionProvider.currentSession()
 * ServerJob.isCurrentJobCancelled() -> RunMonitor.CURRENT.get().isCancelled()
 
-==== Raw Eclipse Job
+=== Raw Eclipse Job
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -609,7 +607,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.rawEclipseJob.new]
 ----
 
-==== ServerJob
+=== ServerJob
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -622,7 +620,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.new]
 ----
 
-==== ServerJob.runNow(...)
+=== ServerJob.runNow(...)
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -635,7 +633,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.runNow.new]
 
 ----
-==== ServerJob with other Subject
+=== ServerJob with other Subject
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -648,7 +646,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.serverJob.otherSubject.new]
 ----
 
-==== ClientSyncJob
+=== ClientSyncJob
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -661,7 +659,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientSyncJob.new]
 ----
 
-==== ClientAsyncJob
+=== ClientAsyncJob
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -674,7 +672,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.clientAsyncJob.new]
 ----
 
-==== Delayed execution
+=== Delayed execution
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -687,7 +685,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.delayedExecution.new]
 ----
 
-==== Repeatedly execution with a fixed delay
+=== Repeatedly execution with a fixed delay
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -700,7 +698,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.fixedDelayExecution.new]
 ----
 
-==== Check for cancellation
+=== Check for cancellation
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -713,7 +711,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.checkForCancellation.new]
 ----
 
-==== Join job
+=== Join job
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -726,7 +724,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join.new]
 ----
 
-==== Join job with a maximal wait time
+=== Join job with a maximal wait time
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -739,7 +737,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.join_with_timeout.new]
 ----
 
-==== Join job and get the job's computation result
+=== Join job and get the job's computation result
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -752,17 +750,17 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.new]
 ----
 
-=== Session Cookie Configuration
+== Session Cookie Configuration
 
 The Scout HTML UI Session cookie requires some security flags. Please refer to the Scout documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration" to learn how to configure your JSESSIONID cookie.
 
-=== Client Notifications
+== Client Notifications
 
 Check out the
 link:https://eclipsescout.github.io/6.0/latest/book_scout_architecture/scout_architecture/scout_architecture.html#client-notifications[docs]
 for a description about client notifications.
 
-==== Changes in a nutshell
+=== Changes in a nutshell
 
 * There is only one poller per client (instead of per session): `ClientNotificationPoller`
 * Long polling is used instead of polling in regular intervals
@@ -773,7 +771,7 @@ for a description about client notifications.
 * The method `coalesce` on the client notification is replaced with a class of type `ICoalescer<T>`
 * ServiceTunnel is now a bean instead of a member of the client session
 
-==== Publishing Notifications
+=== Publishing Notifications
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----
@@ -786,7 +784,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.publish.new]
 ----
 
-==== Handling Notifications
+=== Handling Notifications
 [source,java,indent=0]
 .before Scout 'N' release (\<=5.0.x)
 ----

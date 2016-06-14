@@ -11,7 +11,6 @@
 @import (less) "scout/splitter/Splitter.css";
 
 .splitter {
-  background-color: @palette-blue-1;
 
   &.x-axis {
     width: 2px;

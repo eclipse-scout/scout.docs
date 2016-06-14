@@ -32,6 +32,7 @@ public class OptionsForm extends AbstractForm {
   protected void execInitForm() {
     String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
     getUiThemeField().setValue(theme);
+    getUiThemeField().setStatusVisible(false);
   }
 
   public MainBox getMainBox() {

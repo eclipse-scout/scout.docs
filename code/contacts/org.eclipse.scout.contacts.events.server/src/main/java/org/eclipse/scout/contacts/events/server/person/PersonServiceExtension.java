@@ -19,8 +19,8 @@ import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionDat
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.contacts.server.person.PersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
-import org.eclipse.scout.contacts.shared.person.PersonPageData;
-import org.eclipse.scout.contacts.shared.person.PersonPageData.PersonRowData;
+import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
+import org.eclipse.scout.contacts.shared.person.PersonTablePageData.PersonTableRowData;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.holders.BeanArrayHolder;
 import org.eclipse.scout.rt.platform.holders.NVPair;
@@ -32,8 +32,8 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 public class PersonServiceExtension extends PersonService {
 
   @Override
-  public PersonPageData getTableData(SearchFilter filter, String organizationId) {
-    PersonPageData pageData = super.getTableData(filter, organizationId);
+  public PersonTablePageData getPersonTableData(SearchFilter filter, String organizationId) {
+    PersonTablePageData pageData = super.getPersonTableData(filter, organizationId);
 
     // Add number of events to persons
     BeanArrayHolder<EventCountBean> arrayHolder = new BeanArrayHolder<>(EventCountBean.class);
@@ -46,7 +46,7 @@ public class PersonServiceExtension extends PersonService {
     }
 
     // Add event count to persons
-    for (PersonRowData personRow : pageData.getRows()) {
+    for (PersonTableRowData personRow : pageData.getRows()) {
       long eventCount = NumberUtility.nvl(eventCounts.get(personRow.getPersonId()), 0L);
       personRow.getContribution(PersonTablePageDataExtension.class).setEvents(eventCount);
     }

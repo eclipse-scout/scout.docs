@@ -13,8 +13,8 @@ package org.eclipse.scout.contacts.client.contact;
 import java.util.List;
 
 import org.eclipse.scout.contacts.client.Icons;
-import org.eclipse.scout.contacts.client.organization.OrganizationPage;
-import org.eclipse.scout.contacts.client.person.PersonPage;
+import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
+import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -26,12 +26,12 @@ public class ContactOutline extends AbstractOutline {
   //tag::execCreateChildPagesPerson[]
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    // pages to be shown in the navigation area of this outline
     //end::OutlineInit[]
-    pageList.add(new PersonPage()); // <1>
+    // pages to be shown in the navigation area of this outline
+    pageList.add(new PersonTablePage()); // <1>
     //end::execCreateChildPagesPerson[]
     //tag::execCreateChildPagesOrganization[]
-    pageList.add(new OrganizationPage());
+    pageList.add(new OrganizationTablePage());
     //end::execCreateChildPagesOrganization[]
     //tag::execCreateChildPagesPerson[]
     //tag::OutlineInit[]

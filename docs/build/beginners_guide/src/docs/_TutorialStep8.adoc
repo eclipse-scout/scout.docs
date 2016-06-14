@@ -1,0 +1,41 @@
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+This last part of the "Contacts" tutorial discusses the gap between the tutorial application and the complete "Contacts" demo application. 
+In a number of aspects the full "Contacts" demo application comes with additional features and improvements over the functionality of its tutorial version.  
+
+The sections below highlight the following areas.
+
+* <<sec-contacts_theming_styling>>    
+* <<sec-contacts_modular_apps>>    
+* <<sec-contacts_infra>>    
+
+[[sec-contacts_theming_styling]]
+==== Theming and Styling
+
+* theme switching form for top level options menu <<img-contacts_theming_styling>>
+* project specific themes "rayo" and "dark"
+
+[[img-contacts_theming_styling, Figure 000]]
+.Scout application can change between different themes at runtime.
+image::{imgsdir}/contacts_theming_styling.png[]
+
+[[sec-contacts_modular_apps]]
+==== Modular Scout Applications
+
+* separate entity "event"
+* additional pattern for managing m:n relationships using table fields
+* contributions to core:
+** menu to desktop
+** column to person page
+** tab to person form
+** event page as child page of organization page
+
+[[sec-contacts_infra]]
+==== Infrastructure
+
+* maven module that combines frontend and backend into a single war file
+* docker integration
+** docker-maven-plugin in pom.xml
+** Dockerfile 

@@ -10,19 +10,16 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.events.client.event;
 
-import java.util.Set;
-
+import org.eclipse.scout.contacts.client.common.AbstractEditMenu;
+import org.eclipse.scout.contacts.client.common.AbstractNewMenu;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
-import org.eclipse.scout.contacts.client.organization.OrganizationDetailsPage;
+import org.eclipse.scout.contacts.client.organization.OrganizationNodePage;
 import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.PageData;
-import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
@@ -33,7 +30,6 @@ import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -60,7 +56,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
 
   @Override
   protected void execInitPage() {
-    OrganizationDetailsPage organizationParentPage = getParentNode(OrganizationDetailsPage.class);
+    OrganizationNodePage organizationParentPage = getParentNode(OrganizationNodePage.class);
 
     if (organizationParentPage != null) {
       setOrganizationId(organizationParentPage.getOrganizationId());
@@ -239,12 +235,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
     }
 
     @Order(1)
-    public class EditMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Edit");
-      }
+    public class EditMenu extends AbstractEditMenu {
 
       @Override
       protected void execAction() {
@@ -259,22 +250,13 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
             }
           }
         });
+
         form.startModify();
       }
     }
 
     @Order(2)
-    public class NewMenu extends AbstractMenu {
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("New");
-      }
+    public class NewMenu extends AbstractNewMenu {
 
       @Override
       protected void execAction() {
@@ -288,6 +270,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
             }
           }
         });
+
         form.startNew();
       }
     }
