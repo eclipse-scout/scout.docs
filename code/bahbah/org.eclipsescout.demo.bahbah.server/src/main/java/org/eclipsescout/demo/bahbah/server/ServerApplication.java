@@ -23,11 +23,8 @@ import org.eclipse.scout.rt.platform.security.SimplePrincipal;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
-import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.server.session.ServerSessionProviderWithCache;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
-import org.eclipsescout.demo.bahbah.server.services.notification.RegisterUserNotificationListener;
-import org.eclipsescout.demo.bahbah.server.services.notification.UnregisterUserNotificationListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,8 +51,6 @@ public class ServerApplication implements IPlatformListener {
           @Override
           public void run() throws Exception {
             BEANS.get(IDbSetupService.class).installDb();
-            BEANS.get(IClusterSynchronizationService.class).addListener(new RegisterUserNotificationListener());
-            BEANS.get(IClusterSynchronizationService.class).addListener(new UnregisterUserNotificationListener());
           }
         }, DefaultExceptionTranslator.class);
       }

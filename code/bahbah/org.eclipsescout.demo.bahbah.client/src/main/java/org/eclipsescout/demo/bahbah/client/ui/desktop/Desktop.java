@@ -52,7 +52,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   protected void execOpened() {
     IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
     if (firstOutline != null) {
-      setOutline(firstOutline);
+      activateOutline(firstOutline);
     }
   }
 
