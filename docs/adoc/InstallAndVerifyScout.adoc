@@ -15,8 +15,9 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice.
-Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the `eclipse.exe` file on a Windows plattform. 
+As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice such as `C:\eclipse_scout` on a Windows box.
+Inside the sub-folder `eclipse` you will find the `eclipse.exe` file.
+This is the Eclipse IDE executable file. 
 Starting the Eclipse executable brings up the workspace launcher as shown in <<img-scout_start>>.
 
 [[img-scout_start, Figure 000]]
