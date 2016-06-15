@@ -18,6 +18,9 @@ ifndef::mdledir[:mdledir: .]
 === Java and Maven
 
 Before you download Scout make sure that you have a working Java Development Kit (JDK) and a working Maven installation. 
+In case you first need to download and install a JDK we recommend to work with either the http://www.oracle.com/technetwork/java/javase/downloads/index.html[Oracle JDK] or the http://openjdk.java.net/install/[Open JDK]. 
+For Maven, head over to the https://maven.apache.org/[Maven project page].
+
 To verify your Java installation use your command line.
 
 ----
@@ -31,7 +34,7 @@ We recommend to use a JDK version 8.
 Take note of the fact if your JDK is a 64-bit or a 32-bit installation. 
 In case your version text does not explicitly mention a 64-bit version your JDK is 32-bit installation.
 
-Now check your Maven installation on the command line as well.
+Now check your Maven installation on the command line as well. 
 
 ----
 C:\Users\mzi>mvn -version
@@ -52,18 +55,23 @@ Download the Eclipse Scout package by visiting the official Eclipse download pag
 https://www.eclipse.org/downloads/[www.eclipse.org/downloads]
 
 The download page then looks as shown in <<img-scout_download>>.
-If the download page shows the wrong platform, manually select the correct platform in the dropdown list.
 
 [[img-scout_download, Figure 000]]
-.The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+.The Eclipse download page. The Scout package download can be accessed via the link shown in the red box.
 image::{imgsdir}/scout_download.png[]
 
-The Eclipse Scout package is available in the form of a 32 bit and a 64 bit package as shown in<<img-scout_download>>. 
+Clicking on the link leads to a list of individual download packages as shown in <<img-scout_download_package>>. 
+
+[[img-scout_download_package, Figure 000]]
+.The Scout download package.
+image::{imgsdir}/scout_download_package.png[]
+
+As shown above, the Eclipse Scout package is available in the form of a 32 bit and a 64 bit package. 
 To download the correct package, make sure to matche your JDK installation as described in the previous section. 
 
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 
 [[img-scout_download_mirror, Figure 000]]
-.Downloading the Scout package from a mirror.
+.Downloading the selected Scout package from a mirror.
 image::{imgsdir}/scout_download_mirror.png[]
 
