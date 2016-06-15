@@ -85,9 +85,9 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
         {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
         {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002, -1.151},
-        {"String 37", m_random.nextLong(), m_random.nextInt(), 8731.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
-        {"String 38", m_random.nextLong(), m_random.nextInt(), 8831.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
-        {"String 39", m_random.nextLong(), m_random.nextInt(), 8931.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
+        {"String 37", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
+        {"String 38", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
+        {"String 39", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
     });
   }
 
