@@ -14,11 +14,11 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the Scout extensibility
 //-----------------------------------------------------------------------------
 
-= Extensibility
+== Extensibility
 
 NOTE: Required version: The API described here requires Scout version 4.2 or newer.
 
-== Overview
+=== Overview
 Since December 2014 and Scout 4.2 or newer a new extensibility concept is available for Scout. This article explains the new features and gives some examples how to use them.
 
 When working with large business applications it is often required to split the application into several modules. Some of those modules may be very basic and can be reused in multiple applications. For those it makes sense to provide them as binary library. But what if you have created great templates for your applications but in one special case you want to include one more column in a table or want to execute some other code when a pre-defined context menu is pressed? You cannot just modify the code because it is a general library used everywhere. This is where the new extensibility concept helps.
@@ -36,7 +36,7 @@ The Scout extensibility concept offers three basic possibilites to extend existi
 
 The following chapers will introduce this concepts and present some examples.
 
-== Extensions
+=== Extensions
 Extensions contain modifications to a target class. This target class must be extensible. All elements that implement `org.eclipse.scout.rt.shared.extension.IExtensibleObject` are extensible. And for all extensible elements there exists a corresponding abstract extension class.
 
 Examples:
@@ -66,7 +66,7 @@ The extension needs to be registeres when starting the application:
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=RegisterNameFieldExtension]
 ----
 
-== Contributions
+=== Contributions
 The section before explained how to modify the behavior of existing Scout elements. This section will describe how to contribute new elements into existing containers.
 
 This is done by using the same mechanism as before. It is required to create an Extension too. But instead of overwriting any Scout Operation we directly define the new elements within the Extension. A lot of new elements can be added this way: https://wiki.eclipse.org/Scout/Concepts/Field[Fields], https://wiki.eclipse.org/Scout/Concepts/Menu[Menus], https://wiki.eclipse.org/Scout/Concepts/Column[Columns], https://wiki.eclipse.org/Scout/Concepts/Code[Codes], ...
@@ -105,7 +105,7 @@ You can also access the values of the DTO extension as follows:
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=accessExtendedFields]
 ----
 
-=== Extending a form and a handler
+==== Extending a form and a handler
 
 Extending a AbstractForm and one (or more) of its AbstractFormHandlers that can be achieved as follows:
 
@@ -122,7 +122,7 @@ There are a few things to note about this example:
 * You can access the element you are extending by calling `getOwner()`.
 * Since you cannot access elements from your form extension directly from the inner handler extension (because it is static), you will need to retrieve the form extension via the `getExtension(Class<T extends IExtension<?>>)` method on the extended object, as done here to retrieve the form extension from the form handler extension.
 
-== Move elements
+=== Move elements
 You can also move existing Scout elements to other positions. For this you have to register a move command in the IExtensionRegistry. As with all extension registration it is added to the extension registration Job in your Activator class:
 
 [source,java,indent=0]
@@ -131,7 +131,7 @@ You can also move existing Scout elements to other positions. For this you have 
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=moveElement]
 ----
 
-== Migration
+=== Migration
 The new extensibility concept is added on top of all existing extension possibilities like injection or sub-classing. Therefore it works together with the current mechanisms. But for some use cases (like modifying template classes) it offers a lot of benefits. Therefore no migration is necessary. The concepts do exist alongside each others.
 
 However there is one impact: Because the Scout Operation methods are now part of a call chain they may no longer be invoked directly. So any call to e.g. `execValidateValue()` is no longer allowed because this would exclude the extensions for this call. The Scout SDK marks such calls with error markers in the Eclipse Problems view. If really required the corresponding intercept-Method can be used. So instead directly calling `myField.execChangedValue` you may call `myField.interceptChangedValue()`.

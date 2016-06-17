@@ -13,17 +13,23 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 :toc: left
 
-//:numbered:
 //-----------------------------------------------------------------------------
 // Scout Technical Guide
 //-----------------------------------------------------------------------------
 
-This guide documents the Scout architecture and describes important concepts used in Scout.
+:sectnums!:
 
-WARNING: This document is not complete. Contributions are are welcome! If you like to help, please create a pull request for
- https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs, thanks!
+== Introduction
 
-:numbered:
+This technical guide documents the Scout architecture and describes important concepts used in Scout.
+
+WARNING: This document is not complete. Contributions are are welcome! +
+If you like to help, please create a pull request thanks! +
+ +
+Repository: +
+https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs
+
+:sectnums:
 
 include::{mdledir}/technicalGuide/Platform.adoc[]
 include::{mdledir}/technicalGuide/ExceptionHandling.adoc[]
