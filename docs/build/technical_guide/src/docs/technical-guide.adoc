@@ -24,6 +24,7 @@ WARNING: This document is not complete. Contributions are are welcome! If you li
  https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs, thanks!
 
 :numbered:
+
 include::{mdledir}/technicalGuide/Platform.adoc[]
 include::{mdledir}/technicalGuide/ExceptionHandling.adoc[]
 include::{mdledir}/technicalGuide/JobManager.adoc[]
@@ -33,6 +34,7 @@ include::{mdledir}/technicalGuide/SecureOutput.adoc[]
 include::{mdledir}/technicalGuide/ClientNotification.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
 include::{mdledir}/technicalGuide/General.adoc[]
+include::{mdledir}/technicalGuide/Extensibility.adoc[]
 
 //Appendix:
 
