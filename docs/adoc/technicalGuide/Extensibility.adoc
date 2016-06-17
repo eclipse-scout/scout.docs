@@ -48,7 +48,16 @@ Target classes can be all that are instanceof those extensible elements. This me
 
 Extensions contain methods for all Scout Operations (see https://wiki.eclipse.org/Scout/Concepts/Exec_Methods[Exec Methods]). Those methods have the same signature except that they have one more input parameter. This method allows you to intercept the given Scout Operation and execute your own code even though the declaring class exists in a binary library. It is then your decision if you call the original code or completely replace it. To achieve this the http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern[Chain Pattern] is used: All extensions for a target class are called as part of a chain. The order is given by the order in which the extensions are registered. And the original method of the Scout element is an extension as well.
 
+Extensions to specific types of elements are prepared as abstract classes:
+
+* AbstractGroupBoxExtension
+* AbstractImageFieldExtension
+
+The following image visualizes the extension chain used to intercept the default behavior of a component:
+
 image::{imgsdir}/scout_extensibility_chain_concept.png[]
+
+==== Extending a StringField example
 
 The following example changes the initial value of a https://wiki.eclipse.org/Scout/Concepts/StringField[StringField] called `NameField`:
 
@@ -57,6 +66,8 @@ The following example changes the initial value of a https://wiki.eclipse.org/Sc
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ExtensibilitySnippets.java[tags=NameFieldExtension]
 ----
+
+Note: The type parameter of the extension (e.g. `NameField`) denotes the element which is extended.
 
 The extension needs to be registeres when starting the application:
 
