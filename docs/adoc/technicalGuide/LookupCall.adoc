@@ -1,0 +1,106 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Lookup Call
+
+Lookup calls are mainly used by SmartFields and SmartColumns to look up single or multiple LookupRows.
+
+Class: `LookupCall`
+
+=== Description
+The Lookup call mechanism is used to lookup up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltiptext.
+
+This schema explains the role of a LookupCall in a SmartField:
+
+image::{imgsdir}/Schema_LookupCall.png[]
+
+=== Input
+
+Lookup calls provide different method to compute the set of LookupRows :
+
+* *getDataByKey():* Retrieves a single lookup row for a specific key value. Used by SmartFields and SmatColumns to get the display text for a given key value.
+* *getDataByText():* Retrieve multiple lookup rows which match a certain String. Used by SmartFields when the user starts to enter some text in the field.
+* *getDataByAll():* Retrieves all available lookup rows. Used by SmartFields when the user clicks on the browse icon.
+* *getDataByRec():* This can only be used for hierarchical lookup calls. It retrieves all available sub-tree lookup rows for a given parent.
+
+=== Members
+The Lookup call contains attributes (accessible with getter and setter) that can be used to compute the list of lookups rows. Out of the box you have:
+
+* key: contains the key value when the lookup is queried by key.
+* text: contains the text input in case of a text lookup (typically this is the text entered by the user smart field).
+* all: contains the browse hint in case of a lookup by all (typically when a user click on the button to see all proposal in a smart field).
+* rec: contains the key of the parent entry, in when the children of a node are loaded.
+* master: contains the value of the master field (if a master field is associated to the field using the lookup call).
+
+It is possible to add you own additional attributes, for example validityFrom, validityTo as date parameter. Just add them as field with getter and setter:
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupCall.java[tags=LanguageLookupCall]
+----
+
+In this case, you might want to set your properties bevor the lookupcall query is sent. This can be done with the PrepareLookup event of the SmartField or the ListBox:
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookup]
+----
+
+If you follow this pattern, you will consume the values in the server, by casting the call:
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupService.java[tags=getDataByAll]
+----
+
+=== Type of lookup calls
+
+==== With a Lookup Service
+
+Delegation to the Lookup Service on server side.
+
+They are not necessarily restricted to a fix number of records. Instead they should be favoured if the set of records is rather large.
+
+==== Directy
+Principe of the Local Lookup Calls
+
+An example of this approach is when a SmartField or a SmartColumn is configured to be use with a CodeType. A `CodeLookupCall` is instantiated for the CodeType. It creates the LookupRows corresponding to the codes in the CodeType.
+
+==== Overview
+
+image::{imgsdir}/LookupCall.png[]
+
+==== Properties
+
+Defined with `getConfiguredXxxxxx()` methods.
+
+* Service: Defines which service is used to retrieve lookup rows
+* MasterRequired: Defines whether a master value must be set in order to query for multiple lookup rows
+
+==== Code examples
+
+*Using a LookupCall in a SmartField:*
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookupCall]
+----
+
+*Accessing a LookupRow directly:*
+
+It is possible to access a LookupRow direclty.
+In this example the input is a key (thisKey) and the method getDataByKey() is used.
+Before accessing the text, we ensure that a LookupRow has been retrived.
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=executeLookupCall]
+----

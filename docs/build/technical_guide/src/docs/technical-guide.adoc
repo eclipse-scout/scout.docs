@@ -41,6 +41,11 @@ include::{mdledir}/technicalGuide/ClientNotification.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
 include::{mdledir}/technicalGuide/General.adoc[]
 include::{mdledir}/technicalGuide/Extensibility.adoc[]
+include::{mdledir}/technicalGuide/CodeType.adoc[]
+include::{mdledir}/technicalGuide/Icons.adoc[]
+include::{mdledir}/technicalGuide/LookupCall.adoc[]
+include::{mdledir}/technicalGuide/Texts.adoc[]
+include::{mdledir}/technicalGuide/ThreadingAndJobs.adoc[]
 
 //Appendix:
 

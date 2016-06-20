@@ -1,0 +1,99 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Texts
+
+The `TEXTS` class is a convenience class to access the default Text Provider Service used for the localization of the texts in the user interface.
+
+[source,java]
+.Text lookup
+----
+TEXTS.get("persons");
+----
+
+Its also possible to use some parameters:
+
+[source,java]
+.Text lookup
+----
+String name = "Bob";
+int age = 13;
+
+TEXTS.get("NameWithAge", name, age);
+----
+
+In this case, some placeholders for the parameters are needed in the translated text:
+
+[source,java]
+.Text lookup
+----
+ NameWithAge={0} is {1} years old;
+----
+
+=== Text properties files
+
+Scout uses the java.util.ResourceBundle mechanism for native language support. So whatever language files you have in your `<project-prefix>.shared/resources/texts/*.properties` are taken as translation base.
+
+Example setup:
+
+* <project-prefix>.shared/resources/texts/Texts.properties
+* <project-prefix>.shared/resources/texts/Texts_fr.properties
+
+If your application starts with the `-vmargs -Duser.language=fr` or `eclipse.exe -nl=fr` the translations in Texts_fr.properties are considered.
+In case of any other user language the translations in Texts.properties are considered.
+
+It is possible to edit these files in the Eclipse Scout SDK with the NLS Editor.
+
+=== Text Provider Service
+
+Text Provider Services are services responsible to provide localization for texts in the user interface. A typical application contains a such service contributed by the Shared Project.
+
+* implements: `ITextProviderService`
+* extends: `AbstractDynamicNlsTextProviderService` (default, translations are stored in properties files)
+
+Using Text Provider Services developers can decide to store the translations in a custom container like a database or XML files. Furthermore using TextProviderServices it is very easy to overwrite any translated text in the application (also texts used in Scout itself) using the service ranking.
+
+The mechanism is aligned with the icon retrieval which is also managed using https://wiki.eclipse.org/index.php?title=Scout/Concepts/Icon_Provider_Service&action=edit&redlink=1[Icon Provider Services].
+
+==== Localization using .properties files
+
+By default the internationalization mechanism relies on .properties files using a reference implementation of the TextProviderServices:
+
+Service extending the `AbstractDynamicNlsTextProviderService` class.
+
+A Text Provider Service working with the default implementation need to define where the properties files are located.
+This is realized by overriding the getter getDynamicNlsBaseName(). Here an example:
+
+[source,java]
+.Text lookup
+----
+  @Override
+  protected String getDynamicNlsBaseName() {
+    return "resources.texts.Texts";
+  }
+----
+
+If configured like this, it means that the .properties files will be located in the same plug-in at the location:
+
+* `/resources/texts/Texts.properties` (default)
+* `/resources/texts/Texts_fr.properties` (french)
+* `/resources/texts/Texts_de.properties` (german)
+* `...` (additional languages)
+
+If you decide to store your translated texts in .properties files, you migth want to use the https://wiki.eclipse.org/Scout/SDK/NLS_Editor[NLS Editor] to edit them.
+
+You need to respect the format defined by the Java Properties class. In particular the encoding of a .properties file is ISO-8859-1 (also known as Latin-1). All non-Latin-1 characters must be encoded. Examples:
+
+ 'à' => "\u00E0"
+ 'ç' => "\u00E7"
+ 'ß' => "\u00DF"
+
+The encoding is the "Unicode escape characters": \uXXXX where XXXX is a hexadecimal id of the character in the http://en.wikipedia.org/wiki/List_of_Unicode_characters[Unicode character table]. Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].
