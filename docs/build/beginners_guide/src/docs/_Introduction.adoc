@@ -23,12 +23,24 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 Scout is an open source framework for building business applications.
 The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end.
-Scout applications are Single Page Applications that run in the browser optimized for sesktop, mobile and tablet devices.
+Scout applications are Single Page Applications that run in the browser on the desktop, on tablet and on mobile devices.
 
-To different groups of people, Scout means different things.
-End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues.
-This is why the text below describes Scout from the perspective of these three roles.
+==== Problem Statment
 
+Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. 
+For the implementation of the enterprise backend many successful Java frameworks exist. 
+On the frontend side the situation is challenging as many competing user interface technologies exist.
+This is particularly true for web technologies where it is hard to predict which frameworks will remain relevant in the coming years. 
+
+The implementation of business applications requires a substantial investment of time and money and most organizations have an interest in the protection of this investment. 
+Business application life spans of 10 or more years match badly with the average life spans of web frameworks. 
+Implementing substantial amounts of code against web frameworks with short lifespans and/or an uncertain future is to be avoided in this context. 
+Abstracting common user interface concepts away from any specific UI technology therefore helps to reduce the risk of the frontend code becoming legacy within a short period of time. 
+
+This is exactly where Eclipse Scout fits in.
+The primary goal of Scout is to make your life as a developer easier and to help organisations to save money and time.
+For this, the Scout framework covers most of the recurring front-end aspects such as user authentication, client-server communication and the user interface.
+This comprehensive scope reduces the amount of necessary boiler plate code, and let developers concentrate on understanding and implementing business functionality.
 
 ==== End User Perspective
 
@@ -257,78 +269,4 @@ This is a big advantage when individual technologies incorporated in the applica
 As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary.
 Instead, it is sufficient to exchange the implementation for the legacy technology with a new one.
 And often, an implementation for a new technology/framework is already provided by a more recent version of Scout.
-
-
-[[sec-whatshouldiread]]
-=== What should I read?
-
-The text below provides guidelines on what to read (or what to skip) depending on your existing background.
-We first address the needs of junior Java developers that like to learn more about developing enterprise applications.
-Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technologies, and real world applications.
-Finally, the information needs of IT managers are considered.
-
-
-==== I know Java
-
-The good news first.
-This book is written for you!
-For the purpose of this book we do not assume that you have a solid understanding of the Java Enterprise Edition (Java EE) is required.footnote:[
-Java Enterprise Edition: http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition
-]
-.
-However, having prior experience in client server programming with Java will be useful occasionally and having used the Eclipse IDE for Java development before
-is certainly a plus.
-
-The "`bad`" news is, that writing Scout applications requires a solid understanding of Java.
-To properly benefit from this book, we assume that you have been developing software for a year or more.
-And you should have mastered the Java Standard Edition
-(Java SE).footnote:[
-Java Standard Edition: http://en.wikipedia.org/wiki/Java_SE
-]
-to a significant extent.
-To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I
-Exam.footnote:[
-Level I Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html
-]
-and most of the material required for
-Level II.footnote:[
-Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html
-].
-
-We now propose to start downloading and installing Scout as described in Appendix <<apx-install_scout>> and do some actual coding.
-To do so, please continue with the "`Hello World`" example provided in Chapter <<cha-helloworld>>.
-You can expect to complete this example in less than one hour including the necessary download and installation steps.
-Afterwards, you might want to continue with the remaining material in "`Getting Started`".
-Working through the complete book should take no more than two days.
-
-Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout
-forum.footnote:[
-Eclipse Scout forum: http://www.eclipse.org/forums/eclipse.scout
-].
-When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation.
-In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages.footnote:[
-Eclipse Scout wiki: http://wiki.eclipse.org/Scout
-].
-Or this book.
-If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch.
-And when your bug is fixed, you can test the fix.
-All of these actions will add to the healthy grow of the Scout community.
-
-==== I am a manager
-
-Being a manager and actually reading this book may indicate one of the following situations:
-
- * Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money.
-        And you did not understand why (again) a new technology should work better than the ones you already use.
- * Your are a product manager of a valuable product that is based on legacy technology.
-        And you are now evaluating options to modernize your product.
- * Think about your current situation. There must be a reason why you are checking out this book.
-
-
-To learn about Scout and about its benefits first go through Section <<sec-what_is_scout>> and Section <<sec-why_scout>>.
-Then, flip through Section <<sec-my_contacts_guide>> to get an impression of the "`My Contacts`" application.
-In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.footnote:[
-To contact the Scout team, use the feedback provided on the Scout homepage: https://eclipse.org/scout.
-].
-
 
