@@ -32,10 +32,6 @@
     <!-- Custom components -->
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
-      <artifactId>org.eclipse.scout.widgets.heatmap.client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.scout.widgets</groupId>
       <artifactId>org.eclipse.scout.widgets.heatmap.ui.html</artifactId>
     </dependency>
   </dependencies>

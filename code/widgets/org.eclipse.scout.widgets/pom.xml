@@ -23,7 +23,8 @@
 
   <properties>
     <jdk.source.version>1.7</jdk.source.version>
-    <org.eclipse.scout.rt.version>6.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <!-- <org.eclipse.scout.rt.version>6.0.0-SNAPSHOT</org.eclipse.scout.rt.version>  -->
+    <org.eclipse.scout.rt.version>6.0.0.RC4</org.eclipse.scout.rt.version>
   </properties>
 
   <groupId>org.eclipse.scout.widgets</groupId>
