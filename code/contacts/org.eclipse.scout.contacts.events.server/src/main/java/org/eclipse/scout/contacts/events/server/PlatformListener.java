@@ -16,6 +16,7 @@ import org.eclipse.scout.contacts.events.server.sql.SQLs;
 import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionData;
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties;
+import org.eclipse.scout.contacts.server.sql.IDataStoreService;
 import org.eclipse.scout.contacts.server.sql.SuperUserRunContextProducer;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.IPlatform.State;
@@ -35,7 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Order(20)
-public class PlatformListener implements IPlatformListener {
+public class PlatformListener implements IPlatformListener, IDataStoreService {
   private static final Logger LOG = LoggerFactory.getLogger(PlatformListener.class);
 
   @Override
@@ -106,5 +107,17 @@ public class PlatformListener implements IPlatformListener {
     StringArrayHolder tables = new StringArrayHolder();
     SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables));
     return CollectionUtility.hashSet(tables.getValue());
+  }
+
+  @Override
+  public void dropDataStore() {
+    SQL.update(SQLs.PARTICIPANT_DROP_TABLE);
+    SQL.update(SQLs.EVENT_DROP_TABLE);
+  }
+
+  @Override
+  public void createDataStore() {
+    createEventTable();
+    createParticipantTable();
   }
 }

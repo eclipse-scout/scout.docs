@@ -196,4 +196,8 @@ public interface SQLs {
       + "GROUP BY     person_id "
       + "INTO         :{bean.personId}, "
       + "             :{bean.eventCount}";
+
+  String PARTICIPANT_DROP_TABLE = "DROP TABLE PARTICIPANT";
+
+  String EVENT_DROP_TABLE = "DROP TABLE EVENT";
 }

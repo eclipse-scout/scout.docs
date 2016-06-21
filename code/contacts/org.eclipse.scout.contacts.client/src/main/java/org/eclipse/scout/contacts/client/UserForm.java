@@ -19,11 +19,13 @@ import java.security.NoSuchAlgorithmException;
 
 import org.eclipse.scout.contacts.client.ConfigProperties.UserDomainProperty;
 import org.eclipse.scout.contacts.client.UserForm.MainBox.GroupBox.HtmlField;
+import org.eclipse.scout.contacts.shared.common.IResetDataStoreService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.html.HTML;
@@ -109,6 +111,9 @@ public class UserForm extends AbstractForm {
               ScoutInfoForm form = new ScoutInfoForm();
               form.startModify();
               break;
+            case "reset-data":
+              BEANS.get(IResetDataStoreService.class).resetDataStore();
+              break;
             case "logout":
               ClientSessionProvider.currentSession(ClientSession.class).stop();
               break;
@@ -122,6 +127,7 @@ public class UserForm extends AbstractForm {
     return HTML.div(
         HTML.div(getGravatarImage()),
         HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))),
+        HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))),
         HTML.div(HTML.appLink("logout", TEXTS.get("Logout")))).toHtml();
   }
 
