@@ -15,34 +15,63 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-Before you download Scout make sure that you have a working Java Development Kit (JDK) of version 7 or 8.
-To download Eclipse Scout visit the official Eclipse download page.
+=== Java and Maven
 
-https://www.eclipse.org/downloads/
+Before you download Scout make sure that you have a working Java Development Kit (JDK) and a working Maven installation. 
+In case you first need to download and install a JDK we recommend to work with either the http://www.oracle.com/technetwork/java/javase/downloads/index.html[Oracle JDK] or the http://openjdk.java.net/install/[Open JDK]. 
+For Maven, head over to the https://maven.apache.org/[Maven project page].
+
+To verify your Java installation use your command line.
+
+----
+C:\Users\mzi>java -version
+java version "1.8.0_92"
+Java(TM) SE Runtime Environment (build 1.8.0_92-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.92-b14, mixed mode)
+----
+
+We recommend to use a JDK version 8.
+Take note of the fact if your JDK is a 64-bit or a 32-bit installation. 
+In case your version text does not explicitly mention a 64-bit version your JDK is 32-bit installation.
+
+Now check your Maven installation on the command line as well. 
+
+----
+C:\Users\mzi>mvn -version
+Apache Maven 3.2.3 (33f8c3e1027c3ddde99d3cdebad2656a31e8fdf4; 2014-08-11T22:58:10+02:00)
+Maven home: C:\maven\apache-maven-3.2.3
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: C:\java\jdk1.8.0_92\jre
+Default locale: en_US, platform encoding: Cp1252
+OS name: "windows 7", version: "6.1", arch: "amd64", family: "dos"
+----
+
+Having verified the above prerequisites it is now time to download the Scout package.
+
+=== Download Scout 
+
+Download the Eclipse Scout package by visiting the official Eclipse download page.
+
+https://www.eclipse.org/downloads/[www.eclipse.org/downloads]
 
 The download page then looks as shown in <<img-scout_download>>.
-If the download page shows the wrong platform, manually select the correct platform in the dropdown list.
 
 [[img-scout_download, Figure 000]]
-.The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
+.The Eclipse download page. The Scout package download can be accessed via the link shown in the red box.
 image::{imgsdir}/scout_download.png[]
 
-The Eclipse Scout package is available in the form of a 32 bit and a 64 bit package as shown in<<img-scout_download>>. 
-To download the correct package, make sure to matche your JDK installation. 
-You can check your installation on the command line as follows.
+Clicking on the link leads to a list of individual download packages as shown in <<img-scout_download_package>>. 
 
-----
-console-prompt>java -version
-java version "1.7.0_55"
-Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
-----
+[[img-scout_download_package, Figure 000]]
+.The Scout download package.
+image::{imgsdir}/scout_download_package.png[]
 
-If the output explicitly mentions the 64 bit installation as shown in the example above, you have a 64 bit installation and you need to download the 64 bit Eclipse Scout package. 
-Otherwise, you have a 32 bit JDK installed and you need to pick the 32 bit package of Eclipse Scout.
+As shown above, the Eclipse Scout package is available in the form of a 32 bit and a 64 bit package. 
+To download the correct package, make sure to matche your JDK installation as described in the previous section. 
+
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 
 [[img-scout_download_mirror, Figure 000]]
-.Downloading the Scout package from a mirror.
+.Downloading the selected Scout package from a mirror.
 image::{imgsdir}/scout_download_mirror.png[]
 

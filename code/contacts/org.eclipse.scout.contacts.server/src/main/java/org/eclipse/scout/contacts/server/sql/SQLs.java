@@ -645,6 +645,9 @@ public interface SQLs {
       + "          null, "
       + "          'org02')";
 
+  String PERSON_DROP_TABLE = "DROP TABLE PERSON";
+  String ORGANIZATION_DROP_TABLE = "DROP TABLE ORGANIZATION";
+
   // tag::organizationListing[]
   // tag::createDB[]
 }

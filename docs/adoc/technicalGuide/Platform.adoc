@@ -14,7 +14,7 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the architecture of the Scout Platform
 //-----------------------------------------------------------------------------
 
-= Scout Platform
+== Scout Platform
 
 Scout contains a platform which provides basic functionality required by many software applications. The following list gives some examples for which tasks the platform is responsible for:
 
@@ -24,7 +24,7 @@ Scout contains a platform which provides basic functionality required by many so
 * <<sec-class.inventory,Application Inventory>>
 
 [[sec-app.lifecycle]]
-== Application Lifecycle
+=== Application Lifecycle
 
 The lifecycle of a Scout application is controlled by implementations of `org.eclipse.scout.rt.platform.IPlatform`.
 This interface contains methods to start and stop the application and to retrieve the <<sec-bean.manager>> associated with this application.
@@ -36,7 +36,7 @@ During its startup, the platform transitions through several states. Depending o
 
 See enum `org.eclipse.scout.rt.platform.IPlatform.State` for a description of each state and what may be used in a certain state.
 
-=== Platform Listener
+==== Platform Listener
 
 To participate in the application startup or shutdown a platform listener can be created.
 For this a class implementing `org.eclipse.scout.rt.platform.IPlatformListener` must be created. The listener is automatically a bean and must therefore not be registered anywhere.
@@ -52,7 +52,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 TIP: As platform listeners may run as part of the startup or shutdown not the full Scout platform may be available. Depending on the state some tasks cannot be performed or some platform models are not available yet!
 
 [[sec-class.inventory]]
-== Class Inventory
+=== Class Inventory
 
 Scout applications use an inventory containing the classes available together with some meta data about them.
 This allows finding classes available on the classpath by certain criteria:
@@ -69,7 +69,7 @@ This class inventory can be accessed as described in listing <<lst-ClassInventor
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=ClassInventory]
 ----
 
-=== scout.xml
+==== scout.xml
 
 In its static initializer, the `ClassInventory` collects classes in projects containing a resource called META-INF/scout.xml.
 
@@ -85,7 +85,7 @@ https://github.com/wildfly/jandex
 ] to build the class inventory. The meta data to find classes can be pre-computed during build time into an index file describing the contents of the jar file. See the jandex project for details.
 
 [[sec-bean.manager]]
-== Bean Manager
+=== Bean Manager
 
 The Scout bean manager is a dynamic registry for beans. Beans are normal Java classes usually having some meta data describing the characteristics of the class.
 
@@ -93,7 +93,7 @@ The bean manager can be changed at any time. This means beans can be registered 
 
 The next sections describe how beans are registered, the different meta data of beans, how instances are created, how they can be retrieved and finally how the bean decoration works.
 
-=== Bean registration
+==== Bean registration
 
 Usually beans are registered during application startup. The application startup can be intercepted using platform listeners as described in section <<Platform Listener>>.
 
@@ -117,7 +117,7 @@ TIP: As the `@Bean` annotation is an `java.lang.annotation.@Inherited` annotatio
 
 TIP: If you inherit a `@Bean` annotation from one of you super types but don't want to be automatically registered into the bean manger you can use the `org.eclipse.scout.rt.platform.@IgnoreBean` annotation. Those classes will then be skipped.
 
-==== @TunnelToServer
+===== @TunnelToServer
 
 There is a built in annotation `org.eclipse.scout.rt.shared.@TunnelToServer`. Interfaces marked with this annotation are called on the server. The server itself ignores this annotation.
 
@@ -126,7 +126,7 @@ Please note that this annotation is not inherited. Therefore if an interface ext
 
 The proxy is created only once for a specific interface bean.
 
-=== Bean Scopes
+==== Bean Scopes
 
 The most important meta data of a bean is the scope. It describes how many instances of a bean can exist in a single application. There are two different possibilities:
 
@@ -149,21 +149,21 @@ So the Java annotation `org.eclipse.scout.rt.platform.@ApplicationScoped` descri
 
 TIP: Also `@ApplicationScoped` is an `@Inherited` annotation. Therefore all child classes automatically inherit this characteristic like with the `@Bean` annotation.
 
-=== Bean Creation
+==== Bean Creation
 
 It is not only possible to influence the number of instances to be created as learned before. It is also possible to create beans eagerly, execute methods after creation (like constructors) or to delegate the bean creation completely. These topics are described in the next sections.
 
-==== Eager Beans
+===== Eager Beans
 
 By default beans are created on each request. An exception are the beans marked to be application scoped (as shown in section <<Bean Scopes>>). Those beans are only created on first request (lazy). This means if a bean is never requested while the application is running, there will never be an instance of this class.
 
 But sometimes it is necessary to create beans already at the application startup (eager). This can be done by marking the bean as `org.eclipse.scout.rt.platform.@CreateImmediately`. All classes holding this annotation must also be marked as `@ApplicationScoped`! These beans will then be created as part of the application startup.
 
-==== Constructors
+===== Constructors
 
 Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after the instance have been created.
 
-=== Bean Retrieval
+==== Bean Retrieval
 
 To retrieve a bean the class `org.eclipse.scout.rt.platform.BEANS` should be used. This class provides (amongst others) the following methods:
 
@@ -189,7 +189,7 @@ But which one is returned by `BEANS.get(IMyService.class)`? Or by `BEANS.get(MyS
 This can be influenced with the `org.eclipse.scout.rt.platform.@Order` and `org.eclipse.scout.rt.platform.@Replace` annotations.
 The next sections describe the idea behind these annotations and gives some examples.
 
-==== @Order
+===== @Order
 
 This annotation works exactly the same as in the Scout user interface where it brings classes into an order. It allows to assign a `double` value to a class. All beans of a certain type are sorted according to this value in ascending order. This means a low order value is equivalent with a low position in a list (come first).
 
@@ -203,7 +203,7 @@ For testing bean mocks the value `-10'000` can be used which then usually comes 
 
 image::{imgsdir}/defaultOrders.png[]
 
-==== @Replace
+===== @Replace
 
 The `@Replace` annotation can be set to beans having another bean as super class. This means that the original bean (the super class) is no longer available in the Scout bean manager and only the new child class is returned.
 
@@ -228,7 +228,7 @@ The bean `MySpecialVersion` is not part of the bean manager because it has been 
 
 TIP: If `MyServiceMod` would have no `@Order` annotation, there would be two bean candidates available with the same default order of 5000: `MyServiceImpl` and `MyServiceMod`. In this case a call to `BEANS.get(IMyService.class)` would fail because there are several equivalent candidates. Equivalent candidates means they have the same `@Order` value and the system cannot decide which one is the right one.
 
-=== Bean Decoration
+==== Bean Decoration
 
 Bean decorations allow to wrap interfaces with a proxy to intercept each method call to the interface of a bean and apply some custom logic.
 For this a `IBeanDecorationFactory` has to be implemented. This is one single factory instance for the entire application. It decides which decorators are created for a bean request.
@@ -252,7 +252,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 [[sec-config.management]]
-== Configuration Management
+=== Configuration Management
 
 Applications usually require some kind of configuration mechanism to use the same binaries in a different environment or situation. Scout applications provide a configuration mechanism using properties files footnote:[
 https://en.wikipedia.org/wiki/.properties
@@ -286,7 +286,7 @@ The given property key is searched in the following environments:
 .. a file on the classpath with path `/config.properties` (recommended).
 . In the environment variables of the system (`java.lang.System.getenv(String)`).
 
-=== Additional examples
+==== Additional examples
 
 Because the property a class are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
 
@@ -318,6 +318,6 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/test/resources/config.properties[tags=redirection]
 ----
 
-== Testing
+=== Testing
 
 TODO

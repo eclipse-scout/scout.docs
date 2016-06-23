@@ -1,0 +1,31 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Icons
+
+Class that contains as static members the icons that are available.
+
+Everywhere icons are needed, a String `IconId` is requested. (for example property _IconId_ of a Code).
+
+Static members mapping from the requested IconId String values to the name of the icon image files.
+
+[source,java]
+----
+public static final String UserHome ="home_red";
+----
+
+[source,java]
+----
+@Override
+protected String getConfiguredIconId(){
+  return Icons.UserHome;
+ }
+----

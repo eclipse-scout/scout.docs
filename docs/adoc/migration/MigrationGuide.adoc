@@ -355,6 +355,9 @@ Use `AbstractStringField`, `AbstractStringExtension`, `IStringExtension`, `IStri
 * Removed `IStringField.isSpellCheckAsYouTypeEnabled()`, `IStringField.setSpellCheckAsYouTypeEnabled(boolean)` added `IStringField.setSpellCheckEnabled(boolean)` new ui delegates spell checker to browser, new property can be used to enable/disable spell checker for certain fields (by default it is enabled for multi-line fields, see `AbstractStringField.computeSpellCheckEnabled()`).
 * Removed `IStringField.isSelectAllOnFocus()`, `IStringField.setSelectAllOnFocus(boolean)`, `IStringColumn.isSelectAllOnEdit()`, `IStringColumn.setSelectAllOnEdit(boolean)`.
 
+=== Button
+* The default of `getConfiguredGridUseUiWidth` was changed from true to false. This was done so that buttons are aligned with other fields by default. This only affects the grid cell, the button itself is still as width as it used to be because of `fillHorizontal = false`.
+
 === Browser Field
 * `IBrowserField` is no longer a value field. The `RemoteFile` value was changed to a property of type `BinaryResource`.
 ** Instead of `setValue()/getValue()` use `setBinaryResource()/getBinaryResource()`.

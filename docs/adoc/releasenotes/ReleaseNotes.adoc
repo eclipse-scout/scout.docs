@@ -9,6 +9,8 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
+:docsource: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/docs
+:docroot: https://eclipsescout.github.io/6.0/
 :techdoc: https://eclipsescout.github.io/6.0/technical-guide.html
 :migrationguide: https://eclipsescout.github.io/6.0/migration-guide.html
 
@@ -83,7 +85,7 @@ Certain widgets support html content instead of plain text, like `ILabelField` o
 To prevent HTML injection and cross-site scripting you need to enable the interpretation of HTML explicitly using the property `htmlEnabled`. See `IHtmlCapable` for details.
 
 === HTML
-Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content instead of concatenate the strings manually.
+Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content instead of concatenate the strings manually. This not only is an easy and type safe way of building HTML, but also a way to create safe HTML because the content is encoded.
 
 === HTMLUtility
 `org.eclipse.scout.rt.platform.html.HTMLUtility` and `org.eclipse.scout.rt.platform.html.CSSPatch` were deprecated because they contained only legacy code of doubtful quality. Do not use them anymore -- they will be removed in the next Scout release. The support for most of the contained methods was dropped, because they are not required anymore with the new UI. A slightly improved version of the `getPlainText()` method is available on the new bean `org.eclipse.scout.rt.platform.html.HtmlHelper`.
@@ -114,7 +116,7 @@ The new UI provides url hints for easier debugging: ?cache, ?compress, ?minify, 
 By default they only enabled in development mode. This behavior can be controlled using the property `scout.urlHints.enabled`.
 
 == Documentation goes AsciiDoc
-The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on GitHub and the output of the documentation build is available on github.io: link:{techdoc}[Technical Guide].
+The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on link:{docsource}[GitHub] and the output of the documentation build is available on github.io: link:{docroot}[github.io].
 
 == New and better widgets
 Beside the new look of every widget, most of them got new functionality as well.

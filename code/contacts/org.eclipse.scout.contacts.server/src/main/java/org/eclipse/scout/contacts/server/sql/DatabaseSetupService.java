@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 // tag::service[]
 @ApplicationScoped
 @CreateImmediately
-public class DatabaseSetupService {
+public class DatabaseSetupService implements IDataStoreService {
   private static final Logger LOG = LoggerFactory.getLogger(DatabaseSetupService.class);
 
   @PostConstruct
@@ -106,5 +106,19 @@ public class DatabaseSetupService {
     SQL.selectInto(SQLs.SELECT_TABLE_NAMES, new NVPair("result", tables)); // <1>
     return CollectionUtility.hashSet(tables.getValue());
   }
+  // end::service[]
+
+  @Override
+  public void dropDataStore() {
+    SQL.update(SQLs.PERSON_DROP_TABLE);
+    SQL.update(SQLs.ORGANIZATION_DROP_TABLE);
+  }
+
+  @Override
+  public void createDataStore() {
+    createOrganizationTable();
+    createPersonTable();
+  }
+  // tag::service[]
 }
 // end::service[]

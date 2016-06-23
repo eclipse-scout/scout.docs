@@ -13,14 +13,14 @@ ifndef::mdledir[:mdledir: .]
 // This file describes the architecture of RunContext
 //-----------------------------------------------------------------------------
 
-= RunContext
+== RunContext
 Mostly, code is run on behalf of some semantic context, for example as a particular `Subject` and with some context related `ThreadLocals` set, e.g. the user's `session` and its `Locale`. Scout provides you with different `RunContexts`, such as `ClientRunContext` or `ServerRunContext`. They all share some common characteristics like `Subject`, `Locale` and `RunMonitor`, but also provide some additional functionality like transaction boundaries if using `ServerRunContext`. Also, a `RunContext` facilitates propagation of state among different threads. In order to ease readability, the 'setter-methods' of the `RunContext` support method chaining.
 
 All a `RunContext` does is to provide some setter methods to construct the context, and a `run` and `call` method to run an action on behalf of that context. Thereby, the only difference among those two methods is their argument. Whereas `run` takes a `IRunnable` instance, `call` takes a `Callable` to additionally return a result to the caller. The action is run in the current thread, meaning that the  caller is blocked until completion.
 
 By default, a `RunContext` is associated with a `RunMonitor`, and the monitor's cancellation status can be queried via `RunMonitor.CURRENT.get().isCancelled()`. The monitor allows for hard cancellation, meaning that the executing thread is interrupted upon cancellation. For instance if waiting on an interruptible construct like `Object.wait()` or `IFuture.awaitDone()`, the waiting thread returns with an interruption exception.
 
-== Factory methods to create a RunContext
+=== Factory methods to create a RunContext
 Typically, a `RunContext` is created from a respective factory like `RunContexts` to create a `RunContext`, or `ServerRunContexts` to create a `ServerRunContext`, or `ClientRunContexts` to create a `ClientRunContext`. Internally, the `BeanManager` is asked to provide a new instance of the `RunContext`, which allows you to replace the default implementation of a `RunContext` in an easy way. The factories declare two factory methods: `empty()` and `copyCurrent()`. Whereas `empty()` provides you an empty `RunContext`, `copyCurrent()` takes a snapshot of the current calling context and initializes the `RunContext` accordingly. That is useful if only some few values are to be changed, or, if using `ServerRunContext`, to run the code on behalf of a new transaction.
 
 The following <<lst-RunContexts.copyCurrent>> illustrates the creation of an empty `RunContext` initialized with a particular `Subject` and `Locale`.
@@ -44,7 +44,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 An important difference is related to the `RunMonitor`. By using the `copyCurrent()` factory method, the context's monitor is additionally registered as child monitor of the monitor of the current calling context. That way, a cancellation request to the calling context is propagated down to this context as well. Of course, that behavior can be overwritten by providing another monitor yourself.
 
-== Properties of a RunContext
+=== Properties of a RunContext
 The following properties are declared on a `RunContext` and are inherited by `ServerRunContext` and `ClientRunContext`.
 
 [cols="10%,80%,10%"]
@@ -72,7 +72,7 @@ The following properties are declared on a `RunContext` and are inherited by `Se
 |PropertyMap.CURRENT.get()
 |===
 
-== Properties of a ServerRunContext
+=== Properties of a ServerRunContext
 A `ServerRunContext` controls propagation of server-side state and sets the transaction boundaries, and is a specialization of `RunContext`.
 
 [cols="10%,80%,10%"]
@@ -111,7 +111,7 @@ Typically, this node ID is set by ServiceTunnelServlet for the processing of a s
 
 |===
 
-== Properties of a ClientRunContext
+=== Properties of a ClientRunContext
 A `ClientRunContext` controls propagation of client-side state, and is a specialization of `RunContext`.
 
 [cols="10%,80%,10%"]

@@ -12,8 +12,6 @@ This folder contains the source for producing the different documentation items 
 * `adoc` folder: contains text modules (Asciidoc files) that are included in the documentation items
 * `build` folder: contains the documentation items and the script to build them (based on maven, using Asciidoctor), link:build/[read more],
 * `imgs` folder: contains all the images used in the documentation items.
-* `publish` folder: contains some tasks written in Java used as post-processing engine for the documentation items contained in the `build` folder, link:publish/[read more].
-
 
 == Building the documents
 

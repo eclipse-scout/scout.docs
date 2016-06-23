@@ -6,9 +6,8 @@ This folder contains the documents that are build.
 
 * `scout_helloworld`: produces an article as single page to explain how to create an demo application (the html version is published on the scout webpage).
 * `scout_install`: produces an article as single page to explain how to downlaod the scout IDE (the html version is published on the scout webpage).
-* `book_scout_intro`: produces a book called "Eclipse Scout: an Introduction".
-* `book_scout_frontend`: produces a book called "Eclipse Scout: Frontend Development".
-* `book_scout_architecture`: produces a book called "Eclipse Scout: Architecture".
+* `beginners_guide`: produces a book called "Eclipse Scout Beginners Guide".
+* `technical_guide`: produces a book called "Eclipse Scout: Technical Guide".
 * `scout_migration`: produces an article called "Eclipse Scout: Migration Guide".
 * `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.s2e.doc` plugin). **IMPORTANT**: The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt]. In case  `help-pages.txt` gets out of sync with the available `*.adoc` source files the Maven publish step may fail.
 * `publish`: this last step prepares all the documents in order to publish them (post processing of the Asciidoctor documents). You should run the other tasks, before running this task.
@@ -29,28 +28,8 @@ The results are generated in the `target` subfolder. For example for `scout_hell
  scout_helloworld/target/generated-docs/scout_helloworld.html
  scout_helloworld/target/generated-docs/scout_helloworld.pdf
 
-== Output
-The output of the `publish` task prepares the documents in order to publish them.
-
 === Eclipse Help
 This part of the output is the "Eclipse Scout User Guide" delivered as part of the Scout SDK.
-
-Output:
-
-    publish
-    \---target
-        \---published-docs
-            \---scout-sdk-help
-                |   toc.xml
-                |
-                \---html
-                    |   {html files}
-                    |
-                    +---css
-                    |       {css files}
-                    |
-                    \---images
-                            {image files}
 
 This output needs to be synced with the `org.eclipse.scout.sdk.s2e.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository].
 The content of `scout-sdk-help` should be copied inside `org.eclipse.scout.sdk.s2e.doc`.
@@ -61,70 +40,10 @@ This part of the output contains the pages published on the link:http://www.ecli
 * link:http://www.eclipse.org/scout/scout_install.html[]
 * link:http://www.eclipse.org/scout/scout_helloworld.html[]
 
-Output:
-
-    publish
-    \---target
-        \---published-docs
-            \---eclipse.org-scout
-                |   scout_helloworld.html
-                |   scout_install.html
-                |
-                \---images
-                        {image files}
-
 This output needs to be synced with the root of the in the link:http://git.eclipse.org/c/www.eclipse.org/scout.git[www.eclipse.org/scout repository]
 
 === Documentation for download
 This part of the output contains the documents ready for downloads.
 
-Output:
-
-    publish
-    \---target
-        \---published-docs
-            \---downloads
-                +---article_helloworld
-                |   |   scout_helloworld.pdf
-                |   |   scout_helloworld.zip
-                |   |
-                |   \---scout_helloworld
-                |       |   scout_helloworld.html
-                |       |
-                |       \---images
-                |               {image files}
-                |
-                +---article_install
-                |   |   scout_install.pdf
-                |   |   scout_install.zip
-                |   |
-                |   \---scout_install
-                |       |   scout_install.html
-                |       |
-                |       \---images
-                |               {image files}
-                |
-                +---book_scout_frontend
-                |   |   scout_frontend.pdf
-                |   |   scout_frontend.zip
-                |   |
-                |   \---scout_frontend
-                |       |   scout_frontend.html
-                |       |
-                |       \---images
-                |               {image files}
-                |
-                \---book_scout_intro
-                    |   scout_intro.pdf
-                    |   scout_intro.zip
-                    |
-                    \---scout_intro
-                        |   scout_intro.html
-                        |
-                        \---images
-                                {image files}
-
-This output is at the moment continuously published on a server hosted by BSI:
-
-http://tools.bsi-software.com/scoutbook/
+This output is manually pushed to link:https://eclipsescout.github.io/[]
 

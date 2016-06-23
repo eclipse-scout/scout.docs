@@ -8,7 +8,8 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-= Default HTTP Response Headers
+== General
+=== Default HTTP Response Headers
 
 All Scout HTTP servlets delegate to a central authority to append HTTP response headers. This is the bean `HttpServletControl`.
 It enables developers to control which headers that should be added to the HTTP response for each servlet and request.
@@ -21,7 +22,7 @@ The next sections describe the headers that are added to any response by default
 
 NOTE: Please note that not all headers are supported in all user agents!
 
-== X-Frame-Options
+==== X-Frame-Options
 
 The X-Frame-Options HTTP response header footnote:[https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options] can be used to indicate whether or not a user agent should be allowed to render a page in a `<frame>`, `<iframe>` or `<object>`.
 Sites can use this to avoid clickjacking footnote:[https://en.wikipedia.org/wiki/Clickjacking] attacks, by ensuring that their content is not embedded into other sites.
@@ -29,15 +30,15 @@ The X-Frame-Options header is described in RFC 7034 footnote:[https://tools.ietf
 
 In Scout this header is set to `SAMEORIGIN` which allows the page to be displayed in a frame on the same origin (scheme, host and port) as the page itself only.
 
-== X-XSS-Protection
+==== X-XSS-Protection
 
 This header enables the XSS footnote:[https://en.wikipedia.org/wiki/Cross-site_scripting] filter built into most recent user agents.
-It's usually enabled by default anyway, so the role of this header is to re-enable the filter for the website if it was disabled by the user. 
+It's usually enabled by default anyway, so the role of this header is to re-enable the filter for the website if it was disabled by the user.
 The X-XSS-Protection header is described in https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter/[controlling-the-xss-filter].
 
 In Scout this header is configured to enable XSS protections and instructs the user-agent to block a page from loading if reflected XSS is detected.
 
-== Content Security Policy
+==== Content Security Policy
 
 Content Security Policy is a HTTP response header that helps you reduce XSS  risks on modern user agents by declaring what dynamic resources are allowed to load footnote:[http://content-security-policy.com/].
 The CSP header is described in http://www.w3.org/TR/CSP1/[Level 1] and http://www.w3.org/TR/CSP2/[Level 2]. There is also a working draft for a http://www.w3.org/TR/CSP3/[Level 3].
@@ -52,12 +53,12 @@ Scout makes use of Level 1 (and one directive from Level 2) and sets by default 
 If a resource is blocked because it violates the CSP a report is created and logged on server side using level `warning`. This is done in the class `ContentSecurityPolicyReportHandler`.
 This enables admins to monitor the application and to react if a CSP violation is detected.
 
-= Session Cookie (JSESSIONID Cookie) Configuration Validation
+=== Session Cookie (JSESSIONID Cookie) Configuration Validation
 The UiServlet checks if the session cookie is configured safely. The validation is only performed on first access to the `UiServlet`. There is no automatic validation on the backend server side or on any custom servlets!
 
 If the validation fails, a corresponding error message is logged to the server and an exception is thrown making the `UiServlet` inaccessible. Because of security reasons the exception shown to the user includes no details about the error. These can only be seen on the server side log.
 
-== HttpOnly
+==== HttpOnly
 First the existence of the `HttpOnly` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. If the user agent supports this flag, the cookie cannot be accessed through a client side script. As a result even if a cross-site scripting (XSS) flaw exists and a user accidentally accesses a link that exploits this flaw, the user agent will not reveal the cookie to a third party.
 For a list of user agents supporting this feature please refer to https://www.owasp.org/index.php/HTTPOnly#Browsers_Supporting_HttpOnly[OWASP].
 
@@ -87,7 +88,7 @@ Since Java Servlet 3.0 specification this property can be set in the configurati
 ----
 <1> The HttpOnly flag activated
 
-== Secure
+==== Secure
 Second the existence of the `Secure` flag is checked. The servlet container will then add this flag to the `Set-Cookie` HTTP response header. The purpose of the secure flag is to prevent cookies from being observed by unauthorized parties due to the transmission of a the cookie in clear text. Therefore setting this flag will prevent the user agent from transmitting the session id over an unencrypted channel.
 
 Since Java Servlet 3.0 specification this property can be set in the configuration in the deployment descriptor `WEB-INF/web.xml`:
