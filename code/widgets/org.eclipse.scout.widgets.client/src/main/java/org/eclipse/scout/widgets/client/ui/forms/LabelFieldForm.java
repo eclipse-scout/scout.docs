@@ -156,7 +156,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() {
           String value = TEXTS.get("Lorem");
-          this.setValue("[html]" + value + "[/html]");
+          this.setValue(value);
         }
       }
 
@@ -181,7 +181,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() {
           String value = TEXTS.get("Lorem");
-          this.setValue("[html]" + value + "[/html]");
+          this.setValue(value);
         }
       }
     }

@@ -244,7 +244,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarYellow;
+            return Icons.Star;
           }
 
           @Order(10)
@@ -286,7 +286,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarRed;
+            return Icons.World;
           }
 
           @Override
@@ -475,7 +475,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarRed;
+            return Icons.World;
           }
 
           @Override
@@ -628,7 +628,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarRed;
+            return Icons.World;
           }
 
           @Override

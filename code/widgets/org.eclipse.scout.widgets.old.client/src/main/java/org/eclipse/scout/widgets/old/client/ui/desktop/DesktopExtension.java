@@ -51,7 +51,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
     }
   }
 
-  @Order(10)
+  @Order(1)
   public class Menu1 extends AbstractFormMenu<Menu1Form> {
 
     @Override
@@ -61,7 +61,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.StarYellow;
+      return Icons.Star;
     }
 
     @Override
@@ -70,12 +70,12 @@ public class DesktopExtension extends AbstractDesktopExtension {
     }
   }
 
-  @Order(20)
+  @Order(2)
   public class Menu2 extends AbstractFormMenu<Menu2Form> {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.StarRed;
+      return Icons.Gear;
     }
 
     @Override
