@@ -9,7 +9,14 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-== Threading and Jobs
+
+//-----------------------------------------------------------------------------
+// This file describes an overview of the scout architecture
+//-----------------------------------------------------------------------------
+
+== Overview
+
+=== Threading and Jobs
 
 Another fundament of Eclipse Scout's simplicity is the Client Job Queue.
 Every logic processed on client side like calling services, opening a form, validating a field, etc. is run inside a ClientSyncJob and therefore synchronously.
