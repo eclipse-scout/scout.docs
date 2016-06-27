@@ -26,10 +26,11 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.ClearButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox;
@@ -37,7 +38,6 @@ import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBo
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.Tree2Field;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.TreeDNDDescriptionField;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.TreeField;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 public class TreeDNDForm extends AbstractForm implements IPageForm {
 
@@ -371,7 +371,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class DNDStatusField extends AbstractArrayTableField<DNDStatusField.Table> {
+      public class DNDStatusField extends AbstractTableField<DNDStatusField.Table> {
 
         public void addLine(String text) {
           ITableRow row = getTable().addRow(getTable().createRow());
