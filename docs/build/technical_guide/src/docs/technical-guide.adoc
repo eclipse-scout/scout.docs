@@ -30,7 +30,9 @@ Repository: +
 https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs
 
 :sectnums:
-include::{mdledir}/technicalGuide/Overview.adoc[]
+// TODO
+// include::{mdledir}/technicalGuide/Overview.adoc[]
+//
 include::{mdledir}/technicalGuide/Platform.adoc[]
 include::{mdledir}/technicalGuide/Texts.adoc[]
 include::{mdledir}/technicalGuide/Icons.adoc[]
@@ -40,11 +42,11 @@ include::{mdledir}/technicalGuide/ExceptionHandling.adoc[]
 include::{mdledir}/technicalGuide/JobManager.adoc[]
 include::{mdledir}/technicalGuide/RunContext.adoc[]
 include::{mdledir}/technicalGuide/RunMonitor.adoc[]
-include::{mdledir}/technicalGuide/SecureOutput.adoc[]
 include::{mdledir}/technicalGuide/ClientNotification.adoc[]
 include::{mdledir}/technicalGuide/Extensibility.adoc[]
+include::{mdledir}/technicalGuide/Security.adoc[]
+include::{mdledir}/technicalGuide/SecureOutput.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
-include::{mdledir}/technicalGuide/General.adoc[]
 
 //Appendix:
 
