@@ -1,6 +1,6 @@
 = Eclipse Scout: Technical Guide
 :doctype: book
-:author: Matthias Zimmermann, Daniel Wiehl, Judith Gull, Matthias Villiger
+:author: Scout Team
 :email: scout-dev@eclipse.org
 :revnumber: {project-version}
 include::_initDoc.adoc[]
