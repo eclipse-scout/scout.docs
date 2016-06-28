@@ -132,7 +132,7 @@ This chapter describes how HTML Output can be handled in a secure way.
 Scout applications often display potentially dangerous data, e.g. user input or data from other systems.
 Encoding this input in such a way, that it can not be executed, prevents security vulnerabilities like cross-site scripting.
 
-===== Encoding by Default
+==== Encoding by Default
 
 By default, all input in the Scout model is encoded. Examples are values/labels in value fields, cells in tables, message in message box.
 The reason behind this default choice is that developers do not have to think about output encoding in the standard case
@@ -144,7 +144,7 @@ image::{imgsdir}/encodedField.png[]
 
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/StringFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
 
-===== Html Enabled
+==== Html Enabled
 
 Sometimes developers may want to use HTML in the Scout model.
 
@@ -162,25 +162,25 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 There are several ways to implement the use cases above. Some typical implementations are described in the following sections.
 
-====== CSS Class and Other Model Properties
+===== CSS Class and Other Model Properties
 
 Often using HTML in value fields or table cells is not necessary for styling. Very basic styling can be done for example by setting the CSS class.
 
-====== HTML Builder
+===== HTML Builder
 
 For creating simple HTML files or fragments with encoded user input, the class `org.eclipse.scout.rt.platform.html.HTML` can be used. It is also easily possible to create application internal and external link with this approach.
 
-====== Styling in the UI-Layer
+===== Styling in the UI-Layer
 
 For more complex HTML, using `IBeanField` in the scout model and implementing the styling in the UI-Layer is often the preferred way.
 Links are possible as well.
 
-====== Manual Encoding
+===== Manual Encoding
 
 It is also possible to encode any String manually using `StringUtility.htmlEncode(String)`. `org.eclipse.scout.rt.platform.html.HTML` uses this method internally for encoding.
 However, using `HTML` is recommended, where possible, because it is more concise and leads to less errors.
 
-====== Using a White-List Filter
+===== Using a White-List Filter
 If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs.
 Libraries, such as http://jsoup.org/[JSoup] provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters,
 because the configuration and usage is very use-case-specific and would therefore not add much benefit.

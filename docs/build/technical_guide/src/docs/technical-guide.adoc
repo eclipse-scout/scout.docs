@@ -45,7 +45,6 @@ include::{mdledir}/technicalGuide/RunMonitor.adoc[]
 include::{mdledir}/technicalGuide/ClientNotification.adoc[]
 include::{mdledir}/technicalGuide/Extensibility.adoc[]
 include::{mdledir}/technicalGuide/Security.adoc[]
-include::{mdledir}/technicalGuide/SecureOutput.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
 
 //Appendix:
