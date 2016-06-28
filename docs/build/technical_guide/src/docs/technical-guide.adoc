@@ -30,9 +30,7 @@ Repository: +
 https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs
 
 :sectnums:
-// TODO
-// include::{mdledir}/technicalGuide/Overview.adoc[]
-//
+include::{mdledir}/technicalGuide/Overview.adoc[]
 include::{mdledir}/technicalGuide/Platform.adoc[]
 include::{mdledir}/technicalGuide/Texts.adoc[]
 include::{mdledir}/technicalGuide/Icons.adoc[]
