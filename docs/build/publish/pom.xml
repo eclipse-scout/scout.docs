@@ -14,6 +14,10 @@
   <name>Publish documents</name>
   <packaging>pom</packaging>
 
+  <properties>
+    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest</gh-io-subfolder>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
@@ -89,7 +93,7 @@
                 <!-- scout install -->
                 <inputSource>
                   <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_install</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/article_install</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_install</outputSubFolder>
@@ -100,7 +104,7 @@
                 <!-- scout hello world -->
                 <inputSource>
                   <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/article_helloworld</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/article_helloworld</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_helloworld</outputSubFolder>
@@ -111,7 +115,7 @@
                 <!-- scout book frontend -->
                 <inputSource>
                   <inputFolder>../book_scout_frontend/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_frontend</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/book_scout_frontend</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_frontend</outputSubFolder>
@@ -122,7 +126,7 @@
                 <!-- scout book intro -->
                 <inputSource>
                   <inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_intro</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/book_scout_intro</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_intro</outputSubFolder>
@@ -133,7 +137,7 @@
                 <!-- scout book architecture -->
                 <inputSource>
                   <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/book_scout_architecture</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/book_scout_architecture</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_architecture</outputSubFolder>
@@ -144,7 +148,7 @@
                 <!-- scout article migration -->
                 <inputSource>
                   <inputFolder>../scout_migration/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_migration</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/scout_migration</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_migration</outputSubFolder>
@@ -155,7 +159,7 @@
                 <!-- scout article releasenotes -->
                 <inputSource>
                   <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-                  <outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest/scout_releasenotes</outputSubFolder>
+                  <outputSubFolder>${gh-io-subfolder}/scout_releasenotes</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
                     <outputSubFolder>scout_releasenotes</outputSubFolder>
