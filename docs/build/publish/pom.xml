@@ -18,6 +18,10 @@
 	<name>Publish documents</name>
 	<packaging>pom</packaging>
 
+  <properties>
+    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest</gh-io-subfolder>
+  </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipsescout.docs</groupId>
