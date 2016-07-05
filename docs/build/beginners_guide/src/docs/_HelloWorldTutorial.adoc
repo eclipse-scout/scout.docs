@@ -30,10 +30,6 @@ Finally, the client displays the message obtained from the server in a text fiel
 The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
 We will start by building the application from scratch and then we'll deploy the complete application to a Tomcat web server.
 
-Based on this simple "`Hello World`" applications a large number of Scout concepts can be illustrated.
-Rather than including such background material in this tutorial, this information is provided separately in Chapter <<cha-helloworld_background>>.
-
-
 === Installation and Setup
 
 Before you can start with the "`Hello World`" example you need to have a complete and working Scout installation.

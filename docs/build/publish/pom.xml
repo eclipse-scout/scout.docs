@@ -11,7 +11,7 @@
 	</parent>
 
 	<properties>
-		<outputSubFolder>downloads/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</outputSubFolder>
+		<gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</gh-io-subfolder>
 	</properties>
 
 	<artifactId>publish</artifactId>
@@ -93,7 +93,7 @@
 								<!-- beginners guide -->
 								<inputSource>
 									<inputFolder>../beginners_guide/target/generated-docs</inputFolder>
-									<outputSubFolder>${outputSubFolder}</outputSubFolder>
+									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
 									<htmlOutput>
 										<outputZipFileName>beginners-guide.zip</outputZipFileName>
@@ -103,7 +103,7 @@
 								<!-- technical guide -->
 								<inputSource>
 									<inputFolder>../technical_guide/target/generated-docs</inputFolder>
-									<outputSubFolder>${outputSubFolder}</outputSubFolder>
+									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
 									<htmlOutput>
 										<outputZipFileName>technical-guide.zip</outputZipFileName>
@@ -113,7 +113,7 @@
 								<!-- scout article migration -->
 								<inputSource>
 									<inputFolder>../scout_migration/target/generated-docs</inputFolder>
-									<outputSubFolder>${outputSubFolder}</outputSubFolder>
+									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
 									<htmlOutput>
 										<outputZipFileName>migration-guide.zip</outputZipFileName>
@@ -123,7 +123,7 @@
 								<!-- scout article releasenotes -->
 								<inputSource>
 									<inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-									<outputSubFolder>${outputSubFolder}</outputSubFolder>
+									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
 									<htmlOutput>
 										<outputZipFileName>release-notes.zip</outputZipFileName>

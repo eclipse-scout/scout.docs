@@ -111,7 +111,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
     getDetailForm().startPageForm();
   }
 
-  @Order(10)
+  @Order(1000)
   public class OpenInADialogMenu extends AbstractMenu {
 
     @Override
@@ -129,7 +129,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
     }
   }
 
-  @Order(20)
+  @Order(2000)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

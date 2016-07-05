@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.DateLookupCall;
-import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form.MainBox.TreeBoxField;
+import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form.MainBox.GroupBox.TreeBoxField;
 
 public class Menu2Form extends AbstractForm {
 
@@ -47,22 +47,31 @@ public class Menu2Form extends AbstractForm {
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
+    @Override
+    protected int getConfiguredGridColumnCount() {
+      return 1;
+    }
+
     @Order(10)
-    public class TreeBoxField extends AbstractTreeBox<Long> {
+    public class GroupBox extends AbstractGroupBox {
 
-      @Override
-      protected int getConfiguredGridH() {
-        return 5;
-      }
+      @Order(10)
+      public class TreeBoxField extends AbstractTreeBox<Long> {
 
-      @Override
-      protected boolean getConfiguredLabelVisible() {
-        return false;
-      }
+        @Override
+        protected int getConfiguredGridH() {
+          return 5;
+        }
 
-      @Override
-      protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-        return DateLookupCall.class;
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+          return DateLookupCall.class;
+        }
       }
     }
   }

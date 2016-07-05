@@ -1,0 +1,33 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+
+//-----------------------------------------------------------------------------
+// This file describes an overview of the scout architecture
+//-----------------------------------------------------------------------------
+
+== Overview
+
+Scout is a framework for creating modern business applications.
+Such applications are typically separated into multiple tiers where each tier is responsible for a specific part of the application like presenting information to the user or processing business logic and persisting data.
+Scout solves these requirements by providing a separation of such tiers out of the box.
+
+image::{imgsdir}/big_picture.png[]
+
+A typical Scout application consists of the following parts:
+
+* A server layer responsible for persisting data on a database and possibly providing and consuming webservices. The scout server layer provides utilities to simplify the most common tasks.
+* A client layer responsible for handling the java UI code. It consists of a model represented by plain java classes as well as services and utilities to implement behaviour associeted with client code.
+ The scout client layer provides utilities to simplify the most common tasks. For simplicity, the client model is processed in a single threaded way to avoid synchronization.
+  Callbacks, e.g. for validating a field or calling services when opening a form run inside a <<ModelJobs,model job>>.
+* A UI layer responsible for rendering the client model in the browser. Since the scout UI layer already provides javascript/html/css code for many common UIs, the project specific code in this layer is typically quite small. Examples are specific css styling or a new custom input field for special purposes.
+
+Server and client both run in a servlet container, such as link:http://tomcat.apache.org[Apache Tomcat]. They are usually deployed as separate war files in order to be able to scale them differently. However, it is also possible to create a single war file.

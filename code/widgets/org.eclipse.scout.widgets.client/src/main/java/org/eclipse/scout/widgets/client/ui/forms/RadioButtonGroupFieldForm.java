@@ -240,11 +240,11 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(10)
-        public class WarningButton extends AbstractRadioButton {
+        public class RotateLeftButton extends AbstractRadioButton {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarYellow;
+            return Icons.RotateLeft;
           }
 
           @Override
@@ -254,11 +254,11 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(20)
-        public class ErrorButton extends AbstractRadioButton {
+        public class RotateRightButton extends AbstractRadioButton {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.StarRed;
+            return Icons.RotateRight;
           }
 
           @Override

@@ -35,7 +35,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
-import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractArrayTableField;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -43,11 +43,11 @@ import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.ContextMenuForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.ContextMenuForm.MainBox.TableTabBox.TableFieldBox.TableField;
 import org.eclipse.scout.widgets.old.client.ui.forms.internal.AbstractTableFieldWithDisabledRows;
-import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.CountryCodeType;
 import org.eclipse.scout.widgets.shared.services.code.CountryCodeType.FranceCode;
@@ -97,7 +97,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Order(5)
-        public class TableField extends AbstractArrayTableField<TableField.Table> {
+        public class TableField extends AbstractTableField<TableField.Table> {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
