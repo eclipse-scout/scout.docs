@@ -92,3 +92,4 @@ Tables are displayed the same way on a mobile phone as on the desktop device, if
 If you have tables with `autoResizeColumns` set to true, you should make sure that the column widths are set properly. Just check how the table looks on a small screen and adjust the values accordingly.
 . Know the difference between small screens and touch capable.
 If you do checks against different device types, you should be aware that a touch device is not necessarily a small device. That means `UserAgentUtility.isTouchDevice()` may be true on a laptop as well, so use it with care.
+. If you use filler fields for layouting purpose, make sure you use the official `IPlaceholderField`. Such filler fields normally waste space on a one column layout, so the mobile transformer will make them invisible.
