@@ -18,3 +18,12 @@ Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 ////
+
+== Table
+=== Changed behavior for tables with autoResizeColumns = true.
+
+Before 6.0.1, the column width was used as weight for the calculation of the real column width. To make sure the columns don't get too
+small on small screens, this width is now also used as minimum / preferred width. It is not a hard minimum, the user can still make the column smaller.
+
+So if you have tables with autoResizeColumns set to true, check the widths of the columns and adjust them if needed. The easiest way to do this is to make the screen smaller until a horizontal scrollbar appears.
+Then adjust the values if the column is too small and make sure the content is readable most of the time. But don't make the columns too big because you want to avoid horizontal scrollbar on large screens.
