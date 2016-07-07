@@ -292,6 +292,16 @@ See `TableUserFilterManager` for details.
 ==== Icon Column
 The icon column may be used to show icons or images, no text. The advantage compared to a string column with a cell icon is that sorting and grouping works as expected.
 
+=== Responsive Table (since 6.0.1)
+With release 6.0, the columns of a table got very small if autoResizeColumns was set to true. The content was not readable in many cases. This has been improved with 6.0.1: The configured width is not only used as ratio to calculate the real width anymore, it now acts as minimum width as well. It is not a hard minimum, the user can still make the column smaller.
+See also the link:{migrationguide}#changed-behavior-for-tables-with-autoresizecolumns-true[Migration Guide] for more information.
+
+Furthermore, the table header menu is now responsive as well. If there is not enough space the menu gets smaller and vertically scrollable.
+
+[[img-table-header-menu, figure]]
+.Responsive table header menu
+image::{imgsdir}/table_header_menu.png[]
+
 ==== Various Changes
 Behavior change of `Table` in `AbstractTableField`: Do not execute `AbstractTable.execContentChanged()` when `valueChangeTriggers` flag on `IFormField` is `false`.
 
