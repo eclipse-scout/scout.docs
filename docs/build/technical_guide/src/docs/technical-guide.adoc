@@ -23,8 +23,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 This technical guide documents the Scout architecture and describes important concepts used in Scout.
 
-WARNING: This document is not complete. Contributions are are welcome! +
-If you like to help, please create a pull request thanks! +
+WARNING: This document is not complete. Contributions are welcome! +
+If you like to help, please create a pull request. Thanks! +
  +
 Repository: +
 https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs
@@ -42,6 +42,7 @@ include::{mdledir}/technicalGuide/RunContext.adoc[]
 include::{mdledir}/technicalGuide/RunMonitor.adoc[]
 include::{mdledir}/technicalGuide/ClientNotification.adoc[]
 include::{mdledir}/technicalGuide/Extensibility.adoc[]
+include::{mdledir}/technicalGuide/Mobile.adoc[]
 include::{mdledir}/technicalGuide/Security.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
 
