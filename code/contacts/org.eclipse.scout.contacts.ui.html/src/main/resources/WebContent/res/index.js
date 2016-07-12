@@ -1,7 +1,7 @@
 $(document).ready(function() {
-scout.init({
-  bootstrap: {
-    fonts: ['scoutIcons']
+  scout.init({
+    bootstrap: {
+      fonts: ['scoutIcons']
     }
-  })
+  });
 });

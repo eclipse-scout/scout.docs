@@ -18,3 +18,74 @@ Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 ////
+
+== Content Security Policy (CSP)
+
+[red yellow-background]*TODO IMO:* Describe CSP, its implications on Scout applications and how to configure it.
+
+By default, inline `<script>` tags in HTML files are prohibited by CSP rules. Bootstrapping JavaScript code was therefore moved to dedicated _*.js_ files in the `WebContent/res` folder. Existing projects using CSP have to manually perform the following steps:
+
+. Open each _*.html_ file in `your.project.ui.html/src/main/resources/WebContent` folder and check if there are any inline script parts. Only `<script>` tags with embedded JavaScript code are considered "inline". Tags with a `src` attribute don't need to be changed.
+. Transfer the content of each script part to a _*.js_ file in the `res` subdirectory (e.g. _index.html_ => _res/index.js_) and delete the now empty <script> part.
+. Add a reference to the _*.js_ file in the `<head>` section using the `<scout:script>` tag, e.g.: +
+`<scout:script src="res/index.js" />`
+. If the extracted _*.js_ file contains `<scout:message>` tags, they have to be moved back to the `<body>` of the corresponding _*.html_ file (because the NLS translation can only process HTML files). The attribute `style` has to be changed from `javascript` to `tag`.
+
+Example:
+
+.login.html before migration (Scout 6.0)
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contacts Application</title>
+    <scout:include template="head.html" />
+    <scout:stylesheet src="res/scout-login-module.css" />
+    <scout:script src="res/jquery-all-macro.js" />
+    <scout:script src="res/scout-login-module.js" />
+    <script> <!--1-->
+      $(document).ready(function() {
+        scout.login.init({texts: <scout:message style="javascript" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" /> });
+      });
+    </script>
+  </head>
+  <body>
+    <scout:include template="no-script.html" />
+  </body>
+</html>
+----
+<1> Prohibited inline script.
+
+.login.html after migration (Scout 6.1)
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contacts Application</title>
+    <scout:include template="head.html" />
+    <scout:stylesheet src="res/scout-login-module.css" />
+    <scout:script src="res/jquery-all-macro.js" />
+    <scout:script src="res/scout-login-module.js" />
+    <scout:script src="res/login.js" /> <!--1-->
+  </head>
+  <body>
+    <scout:include template="no-script.html" />
+    <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" /> <!--2-->
+  </body>
+</html>
+----
+<1> External script reference allowed by CSP.
+<2> Moved from JavaScript call to `<body>`, changed style to `tag`.
+
+.res/login.js after migration (Scout 6.1)
+[source,javascript]
+----
+$(document).ready(function() {
+  scout.login.init(); // <1>
+});
+----
+<1> Translated texts are extracted automatically from DOM.
