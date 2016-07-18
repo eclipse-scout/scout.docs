@@ -3,5 +3,5 @@ $(document).ready(function() {
     bootstrap: {
       fonts: ['scoutIcons']
     }
-  })
+  });
 });

@@ -1,0 +1,7 @@
+.open-form-button > .button {
+  @open-form-button-background-color: @palette-green-3;
+
+  background-color: @open-form-button-background-color;
+  color: @palette-white;
+  border-color: darken(@open-form-button-background-color, 5%);
+}

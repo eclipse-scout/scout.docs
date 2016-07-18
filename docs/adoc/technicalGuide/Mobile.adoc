@@ -1,0 +1,95 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Mobile Support
+
+[[img-mobile-support, figure]]
+.Scout apps run on desktops, tablets and mobile phones
+image::{imgsdir}/multi_device.png[]
+
+Scout applications are mobile capable, meaning that they can be used on portable touch devices like smart phones and tablets. This capability is based on 2 main parts:
+
+* Responsive and Touch Capable Widgets
+* Device Transformation
+
+=== Responsive and Touch Capable Widgets
+Responsive design in context of a web application means that the design reacts to screen size changes.
+A Scout application does not use responsive design for the whole page, but many widgets itself may change the appearance when they don't fit into screen.
+
+One example is the menu bar that stacks all menus which don't fit into an ellipsis menu.
+
+[[img-responsive-menubar, figure]]
+.Responsive menu bar
+image::{imgsdir}/responsive_menubar.png[]
+
+Beside being responsive, the widgets may deal with touch devices as well. This means they are big enough to be used with the finger.
+And they don't need a mouse, especially the right mouse button.
+
+One example is the tooltip of a form field which is reflected by an info icon on the right side of the field.
+Instead of hovering over the field the user can press that info icon to bring up the tooltip.
+This approach not only provides an indicator where tooltips are available, it also works for mouse and touch based devices.
+
+[[img-field-tooltip, figure]]
+.Touch friendly widgets
+image::{imgsdir}/tooltip.png[]
+
+=== Device Transformation
+The second part of the mobile support is called device transformation. Transformation means the adaptation of model properties for different devices. Example: Setting the property labelPosition from 'left' to 'top' in order to move the label to the top.
+
+Such transformations are done on the UI server by so called device transformers. Currently 3 device transformers are available:
+
+* Mobile Device Transformer
+* Tablet Device Transformer
+* Touch Device Transformer
+
+Which transformer is active depends on the used user agent. The mobile transformer is active if the Scout app is used on a smart phone, the tablet one is active if it is used from a tablet, and the touch transformer is active in both cases. And may also be active if a desktop device supports touch.
+The order in which these transformers are processed is defined using the `@Order` annotation which is possible because they are regular Scout beans. This also means you can add your own transformer if you need custom transformations.
+
+The transformations are mainly limited to the adjustment of properties, although some properties have a bigger effect than others. The property `displayStyle` of the desktop for example controls the look of the desktop and setting it to `COMPACT` rearranges the desktop in a mobile friendly way.
+
+[[img-mobile-desktop, figure]]
+.Desktop with displayStyle set to 'compact'
+image::{imgsdir}/contacts_mobile.png[]
+
+All the transformations are triggered by extensions to components like form fields or the desktop. These extensions are registered by `DeviceTransformationPlatformListener`. If you don't want any of these transformers to be active you could simply replace this listener and do nothing.
+
+=== Adapt specific Components
+The device transformers take care of global transformations which should be applied for most of the components. If you need to adapt a specific component you can do it at the component itself.
+Let's say you want to hide a field if the application is running on a smart phone, you could do the following.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MobileSnippet.java[tags=UserAgentUtility]
+----
+
+=== User Agent
+The class `UserAgent` is essential for the mobile support. It stores information about the running device like the used browser or OS. The user agent is available on the UI server as well as on the backend server and can be accessed using the static method `UserAgent.get()`.
+
+The class `UserAgentUtility` provides some useful helper methods to check which type of device is running, like if it's a mobile phone, a tablet, or a desktop device.
+
+=== Best Practices
+When creating a Scout application which should run on touch devices as well, the following tipps may help you.
+
+. Focus on the essential.
+Even though most of the application should run fine on a mobile device, some parts may not make sense. Identify those parts and make them invisible using `setVisibleGranted(false)`.
+The advantage of using setVisibleGranted over setVisible is that the model of the invisible components won't be sent to the client at all, which might increase the performance a little.
+But remember: The users nowadays might expect every functionality to be available even on a mobile phone, so don't take them away too much.
+. Limit the usage of custom HTML.
+Custom HTML cannot be automatically transformed, so you need to do it by yourself.
+Example: You created a table with several columns using HTML. On a small screen this table will be too large, so you have to make sure that your table is responsive, or provide other HTML code when running on a mobile device.
+. Don't use too large values for gridH.
+GridH actually is the minimum grid height, so if you set gridH to 10 the field will always be at least 10 logical grid rows height. This may be too big on a mobile device.
+. Use appropriate values for table column width.
+Tables are displayed the same way on a mobile phone as on the desktop device, if the content is not fully visible the user can scroll.
+If you have tables with `autoResizeColumns` set to true, you should make sure that the column widths are set properly. Just check how the table looks on a small screen and adjust the values accordingly.
+. Know the difference between small screens and touch capable.
+If you do checks against different device types, you should be aware that a touch device is not necessarily a small device. That means `UserAgentUtility.isTouchDevice()` may be true on a laptop as well, so use it with care.
+. If you use filler fields for layouting purpose, make sure you use the official `IPlaceholderField`. Such filler fields normally waste space on a one column layout, so the mobile transformer will make them invisible.

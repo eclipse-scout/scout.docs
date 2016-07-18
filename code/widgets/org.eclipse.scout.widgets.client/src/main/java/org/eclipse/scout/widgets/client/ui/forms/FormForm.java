@@ -41,6 +41,7 @@ import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -50,15 +51,19 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.BlockModelThreadField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CloseOnChildCloseField;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayHintField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayViewIdField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayParentField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityField;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenFormButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormSubTitleField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox.Buttons1Box;
@@ -108,6 +113,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public DisplayHintField getDisplayHintField() {
     return getFieldByClass(DisplayHintField.class);
+  }
+
+  public DisplayViewIdField getDisplayViewIdField() {
+    return getFieldByClass(DisplayViewIdField.class);
   }
 
   public ModalityField getModalityField() {
@@ -190,6 +199,14 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(StartLongRunningOperationButton.class);
   }
 
+  public FormTitleField getFormTitleField() {
+    return getFieldByClass(FormTitleField.class);
+  }
+
+  public FormSubTitleField getFormSubTitleField() {
+    return getFieldByClass(FormSubTitleField.class);
+  }
+
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
@@ -207,21 +224,58 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class DisplayHintField extends AbstractSmartField<DisplayHint> {
+      public class DisplayHintAndViewIdBox extends AbstractSequenceBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("DisplayHint");
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
         }
 
-        @Override
-        protected Class<? extends ILookupCall<DisplayHint>> getConfiguredLookupCall() {
-          return DisplayHintLookupCall.class;
+        @Order(10)
+        public class DisplayHintField extends AbstractSmartField<DisplayHint> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DisplayHint");
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<DisplayHint>> getConfiguredLookupCall() {
+            return DisplayHintLookupCall.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(DisplayHint.Dialog);
+            fireValueChanged(); // update button label
+          }
+
+          @Override
+          protected void execChangedValue() {
+            DisplayHint displayHint = (getValue() != null ? getValue() : DisplayHint.Dialog);
+            getOpenFormButton().setLabel("Open " + displayHint.name());
+            getDisplayViewIdField().setEnabled(displayHint == DisplayHint.View);
+            getFormTitleField().setEnabled(CompareUtility.isOneOf(displayHint, DisplayHint.Dialog, DisplayHint.View, DisplayHint.PopupWindow));
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setValue(DisplayHint.Dialog);
+        @Order(10)
+        public class DisplayViewIdField extends AbstractSmartField<DisplayViewId> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "ViewId";
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<DisplayViewId>> getConfiguredLookupCall() {
+            return DisplayViewIdLookupCall.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(null);
+          }
         }
       }
 
@@ -254,6 +308,38 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      public class TitleBox extends AbstractSequenceBox {
+
+        @Order(10)
+        public class FormTitleField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Form title";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getForm().getTitle());
+          }
+        }
+
+        @Order(20)
+        public class FormSubTitleField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Subtitle";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getForm().getSubTitle());
+          }
+        }
+      }
+
+      @Order(45)
       public class OpeningDelayField extends AbstractIntegerField {
 
         @Override
@@ -281,109 +367,118 @@ public class FormForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return "close this when child closed";
+          return "Close this form when child is closed";
         }
       }
 
       @Order(60)
-      public class OpenFormButton extends AbstractButton {
+      public class OpenFormBox extends AbstractSequenceBox {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return "Open Form";
-        }
+        @Order(10)
+        public class OpenFormButton extends AbstractButton {
 
-        @Override
-        protected int getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_LINK;
-        }
-
-        @Override
-        protected void execClickAction() {
-          int openingDelay = (getOpeningDelayField().getValue() != null ? getOpeningDelayField().getValue() : 0);
-
-          final IRunnable openFormRunnable = new IRunnable() {
-
-            @Override
-            public void run() throws Exception {
-              DisplayHint displayHint = (getDisplayHintField().getValue() != null ? getDisplayHintField().getValue() : DisplayHint.Dialog);
-
-              switch (displayHint) {
-                case Dialog:
-                case View:
-                case PopupWindow: {
-                  FormForm form = new FormForm();
-                  form.setDisplayHint(displayHint.getValue());
-                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                  if (displayParent != DisplayParent.Auto) {
-                    form.setDisplayParent(displayParent.getValue());
-                  }
-                  form.setModal(getModalityField().isChecked());
-                  form.start();
-                  if (getCloseOnChildCloseField().getValue()) {
-                    form.addFormListener(new FormListener() {
-
-                      @Override
-                      public void formChanged(FormEvent e) {
-                        if (e.getType() == FormEvent.TYPE_CLOSED) {
-                          FormForm.this.doClose();
-                        }
-                      }
-                    });
-                  }
-
-                  break;
-                }
-                case MessageBox: {
-                  IMessageBox messageBox = MessageBoxes.createYesNoCancel().withHeader("Message box").withBody("I am a message box");
-                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                  if (displayParent != DisplayParent.Auto) {
-                    messageBox.withDisplayParent(displayParent.getValue());
-                  }
-                  messageBox.show();
-                  break;
-                }
-                case FileChooser: {
-                  FileChooser fileChooser = new FileChooser();
-                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                  if (displayParent != DisplayParent.Auto) {
-                    fileChooser.setDisplayParent(displayParent.getValue());
-                  }
-                  fileChooser.startChooser();
-                  break;
-                }
-                default:
-                  throw new IllegalArgumentException();
-              }
-            }
-          };
-
-          if (openingDelay == 0) {
-            ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+          @Override
+          protected String getConfiguredLabel() {
+            return null;//"Open form";
           }
-          else {
-            if (getBlockModelThreadField().isChecked()) {
-              SleepUtil.sleepElseThrow(openingDelay, TimeUnit.SECONDS);
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "open-form-button";
+          }
+
+          @Override
+          protected void execClickAction() {
+            int openingDelay = (getOpeningDelayField().getValue() != null ? getOpeningDelayField().getValue() : 0);
+
+            final IRunnable openFormRunnable = new IRunnable() {
+              @Override
+              public void run() throws Exception {
+                DisplayHint displayHint = (getDisplayHintField().getValue() != null ? getDisplayHintField().getValue() : DisplayHint.Dialog);
+
+                switch (displayHint) {
+                  case Dialog:
+                  case View:
+                  case PopupWindow: {
+                    FormForm form = new FormForm();
+                    form.setTitle(getFormTitleField().getValue());
+                    form.setSubTitle(getFormSubTitleField().getValue());
+                    form.setDisplayHint(displayHint.getValue());
+                    DisplayViewId viewId = getDisplayViewIdField().getValue();
+                    if (viewId != null) {
+                      form.setDisplayViewId(viewId.getValue());
+                    }
+                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                    if (displayParent != DisplayParent.Auto) {
+                      form.setDisplayParent(displayParent.getValue());
+                    }
+                    form.setModal(getModalityField().isChecked());
+                    form.start();
+                    if (getCloseOnChildCloseField().getValue()) {
+                      form.addFormListener(new FormListener() {
+
+                        @Override
+                        public void formChanged(FormEvent e) {
+                          if (e.getType() == FormEvent.TYPE_CLOSED) {
+                            FormForm.this.doClose();
+                          }
+                        }
+                      });
+                    }
+
+                    break;
+                  }
+                  case MessageBox: {
+                    IMessageBox messageBox = MessageBoxes.createYesNoCancel().withHeader("Message box").withBody("I am a message box");
+                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                    if (displayParent != DisplayParent.Auto) {
+                      messageBox.withDisplayParent(displayParent.getValue());
+                    }
+                    messageBox.show();
+                    break;
+                  }
+                  case FileChooser: {
+                    FileChooser fileChooser = new FileChooser();
+                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                    if (displayParent != DisplayParent.Auto) {
+                      fileChooser.setDisplayParent(displayParent.getValue());
+                    }
+                    fileChooser.startChooser();
+                    break;
+                  }
+                  default:
+                    throw new IllegalArgumentException();
+                }
+              }
+            };
+
+            if (openingDelay == 0) {
               ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
             }
             else {
-              Jobs.schedule(new IRunnable() {
+              if (getBlockModelThreadField().isChecked()) {
+                SleepUtil.sleepElseThrow(openingDelay, TimeUnit.SECONDS);
+                ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+              }
+              else {
+                Jobs.schedule(new IRunnable() {
 
-                @Override
-                public void run() throws Exception {
-                  ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
-                }
-              }, Jobs.newInput()
-                  .withRunContext(ClientRunContexts.copyCurrent())
-                  .withExecutionTrigger(Jobs.newExecutionTrigger()
-                      .withStartIn(openingDelay, TimeUnit.SECONDS)));
+                  @Override
+                  public void run() throws Exception {
+                    ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+                  }
+                }, Jobs.newInput()
+                    .withRunContext(ClientRunContexts.copyCurrent())
+                    .withExecutionTrigger(Jobs.newExecutionTrigger()
+                        .withStartIn(openingDelay, TimeUnit.SECONDS)));
+              }
             }
           }
-        }
-
-        @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
         }
       }
     }
@@ -601,7 +696,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       MessageBox(100),
       FileChooser(200);
 
-      int m_value;
+      private final int m_value;
 
       private DisplayHint(int value) {
         m_value = value;
@@ -614,8 +709,60 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @ApplicationScoped
-  public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParentLookupCall.DisplayParent> {
+  public static class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
 
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<DisplayViewId>> execCreateLookupRows() {
+      List<LookupRow<DisplayViewId>> rows = new ArrayList<>();
+      for (DisplayViewId displayViewId : DisplayViewId.values()) {
+        rows.add(new LookupRow<>(displayViewId, displayViewId.getDisplayText()));
+      }
+      return rows;
+    }
+
+    public static enum DisplayViewId {
+
+      N(IForm.VIEW_ID_N),
+      NE(IForm.VIEW_ID_NE),
+      E(IForm.VIEW_ID_E),
+      SE(IForm.VIEW_ID_SE),
+      S(IForm.VIEW_ID_S),
+      SW(IForm.VIEW_ID_SW),
+      W(IForm.VIEW_ID_W),
+      NW(IForm.VIEW_ID_NW),
+      Center(IForm.VIEW_ID_CENTER, "C (Center)"),
+      Outline(IForm.VIEW_ID_OUTLINE, "[Deprecated] Outline"),
+      OutlineSelector(IForm.VIEW_ID_OUTLINE_SELECTOR, "[Deprecated] OutlineSelector"),
+      Detail(IForm.VIEW_ID_PAGE_DETAIL, "[Deprecated] PageDetail"),
+      Search(IForm.VIEW_ID_PAGE_SEARCH, "[Deprecated] PageSearch"),
+      Table(IForm.VIEW_ID_PAGE_TABLE, "[Deprecated] PageTable");
+
+      private final String m_value;
+      private final String m_displayText;
+
+      private DisplayViewId(String value) {
+        this(value, null);
+      }
+
+      private DisplayViewId(String value, String displayText) {
+        m_value = value;
+        m_displayText = (displayText == null ? name() : displayText);
+      }
+
+      public String getValue() {
+        return m_value;
+      }
+
+      public String getDisplayText() {
+        return m_displayText;
+      }
+    }
+  }
+
+  @ApplicationScoped
+  public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParentLookupCall.DisplayParent> {
     private static final long serialVersionUID = 1L;
 
     @Override

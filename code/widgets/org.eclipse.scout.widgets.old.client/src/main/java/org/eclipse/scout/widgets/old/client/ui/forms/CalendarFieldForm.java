@@ -246,6 +246,17 @@ public class CalendarFieldForm extends AbstractForm implements IPageForm {
             cal.add(java.util.Calendar.HOUR, 2);
             end = cal.getTime();
             result.add(new CalendarAppointment(9L, 2L, start, end, false, "app4 [P2]", "appointment4 body", cssClass));
+
+            // multi-day
+            cal.setTime(new Date());
+            cal.add(java.util.Calendar.DAY_OF_YEAR, 4);
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 17); // set to 17:00
+            cal.set(java.util.Calendar.MINUTE, 0);
+            cal.set(java.util.Calendar.SECOND, 0);
+            start = cal.getTime();
+            cal.add(java.util.Calendar.HOUR, 15); // add 15 hours -> 08:00 the next day
+            end = cal.getTime();
+            result.add(new CalendarAppointment(10L, 2L, start, end, false, "app5 [P2]", "appointment5 body", cssClass));
           }
 
           @Order(200)
