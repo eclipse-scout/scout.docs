@@ -17,20 +17,23 @@ import org.eclipse.scout.rt.client.ui.form.fields.browserfield.AbstractBrowserFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
+import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BinaryResourceField;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,6 +115,10 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
   public URLField getURLField() {
     return getFieldByClass(URLField.class);
+  }
+
+  public BinaryResourceField getBinaryResourceField() {
+    return getFieldByClass(BinaryResourceField.class);
   }
 
   @Order(10)
@@ -236,6 +243,20 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(50)
+        public class BinaryResourceField extends AbstractFileChooserField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("File");
+          }
+
+          @Override
+          protected int getConfiguredLabelPosition() {
+            return LABEL_POSITION_ON_FIELD;
+          }
+        }
+
+        @Order(60)
         public class RefreshButton extends AbstractButton {
 
           @Override
@@ -245,7 +266,14 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            getBrowserField().setLocation(getURLField().getValue());
+            String url = getURLField().getValue();
+            if (!StringUtility.isNullOrEmpty(url)) {
+              getBrowserField().setLocation(url);
+            }
+            else {
+
+              getBrowserField().setBinaryResource(getBinaryResourceField().getValue());
+            }
           }
         }
       }
