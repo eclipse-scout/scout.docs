@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractAlphanumericSortingStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
@@ -71,23 +72,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   @Override
   protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
-        {"String 10", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 1.0, 1.0},
-        {"String 11", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 10.0, 1.120},
-        {"String 12", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 100.0, 1.123},
-        {"String 13", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2, 0.1, 0.1, 1.150},
-        {"String 22", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1, -1.0, -1.0, 1.151},
-        {"String 23", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1, -10.0, -10.0, 1.5},
-        {"String 24", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1, -100.0, -100.0, 1.51},
-        {"String 25", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1, -0.1, -0.1, 1.511},
-        {"String 31", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.2, 1.2, 1.0},
-        {"String 32", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.02, 1.02, -1.0},
-        {"String 33", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 1.002, -1.120},
-        {"String 34", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
-        {"String 35", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
-        {"String 36", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002, -1.151},
-        {"String 37", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
-        {"String 38", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
-        {"String 39", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
+        {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 1.0, 1.0},
+        {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 10.0, 1.120},
+        {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 100.0, 1.123},
+        {"String 13", "String 1", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2, 0.1, 0.1, 1.150},
+        {"String 22", "String 1000", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1, -1.0, -1.0, 1.151},
+        {"String 23", "String .txt", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1, -10.0, -10.0, 1.5},
+        {"String 24", "String 1 mit 10", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1, -100.0, -100.0, 1.51},
+        {"String 25", "String 1 mit 3", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1, -0.1, -0.1, 1.511},
+        {"String 31", "String 1 mit 1020", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.2, 1.2, 1.0},
+        {"String 32", "String 1.txt", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.02, 1.02, -1.0},
+        {"String 33", "String 2.txt", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 1.002, -1.120},
+        {"String 34", "String 19.txt", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
+        {"String 35", "String 200.txt", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
+        {"String 36", "String 1", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002, -1.151},
+        {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
+        {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
+        {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
     });
   }
 
@@ -126,6 +127,10 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       return getColumnSet().getColumnByClass(StringColumn.class);
     }
 
+    public AlphanumericSortingStringColumn getAlphanumericSortingStringColumn() {
+      return getColumnSet().getColumnByClass(AlphanumericSortingStringColumn.class);
+    }
+
     public PercentColumn getPercentColumn() {
       return getColumnSet().getColumnByClass(PercentColumn.class);
     }
@@ -140,6 +145,20 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     @Order(10)
     public class StringColumn extends AbstractStringColumn {
+
+      @Override
+      protected boolean getConfiguredEditable() {
+        return true;
+      }
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("StringColumn");
+      }
+    }
+
+    @Order(15)
+    public class AlphanumericSortingStringColumn extends AbstractAlphanumericSortingStringColumn {
 
       @Override
       protected boolean getConfiguredEditable() {
