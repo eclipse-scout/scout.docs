@@ -192,6 +192,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       menu.setText(node.getText());
       menu.setTooltipText(node.getToolTip());
       menu.setIconId(node.getIconId());
+      menu.setEnabled(node.isEnabled());
       menu.setChildActions(nodesToMenus(node.getChildren()));
 
       menus.add(menu);
