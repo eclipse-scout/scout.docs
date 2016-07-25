@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
@@ -27,23 +28,27 @@ import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
+import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractHierarchicalTreeMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.MenuContentField;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.TreeEntriesField;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.TreeField;
+import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ConfigurationBox.TreeField.Tree.DynamicMenu;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TreeFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
@@ -110,6 +115,18 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(TreeEntriesField.class);
   }
 
+  protected ITreeNode newNode(ITree tree) {
+    ITreeNode node = new AbstractTreeNode() {
+    };
+    node.getCellForUpdate().setText("New Node");
+    ITreeNode parent = tree.getSelectedNode();
+    if (parent == null) {
+      parent = tree.getRootNode();
+    }
+    tree.addChildNode(parent, node);
+    return node;
+  }
+
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
@@ -157,17 +174,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             return true;
           }
 
-          protected void newNode() {
-            ITreeNode node = new AbstractTreeNode() {
-            };
-            node.getCellForUpdate().setText("New Node");
-            ITreeNode parent = getSelectedNode();
-            if (parent == null) {
-              parent = getRootNode();
-            }
-            addChildNode(parent, node);
-          }
-
           @Order(10)
           public class NewMenu extends AbstractMenu {
 
@@ -183,7 +189,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
             @Override
             protected void execAction() {
-              newNode();
+              newNode(getTree());
             }
           }
 
@@ -217,7 +223,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 ModelJobs.schedule(new IRunnable() {
                   @Override
                   public void run() throws Exception {
-                    newNode();
+                    newNode(getTree());
                   }
                 }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
@@ -339,6 +345,30 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
+          @Order(22)
+          @ClassId("b43eaa82-5241-4688-b8f9-4a32ddd44f83")
+          public class DeleteNodeMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("Delete");
+            }
+
+            @Override
+            protected String getConfiguredKeyStroke() {
+              return IKeyStroke.DELETE;
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
+            }
+
+            @Override
+            protected void execAction() {
+              getTree().removeNode(getSelectedNode());
+            }
+          }
+
           @Order(40)
           public class Info_Menu extends AbstractMenu {
 
@@ -354,117 +384,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(50)
-          public class HierarchicalMenu extends AbstractMenu {
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(
-                  TreeMenuType.SingleSelection);
-            }
-
-            @Override
-            protected String getConfiguredText() {
-              return "HierarchicalMenu";
-            }
-
-            @Order(10)
-            public class SubSingleMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.SingleSelection);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubSingle";
-              }
-
-            }
-
-            @Order(20)
-            public class SubMultiMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.MultiSelection);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubMulti";
-              }
-
-            }
-
-            @Order(30)
-            public class SubEmptySpaceMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.EmptySpace);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubEmpty";
-              }
-
-            }
-
-            @Order(40)
-            public class IntermediateMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return "Intermediate Menu";
-              }
-
-              @Order(10)
-              public class SubSubSingleMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.SingleSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubSingle";
-                }
-
-              }
-
-              @Order(20)
-              public class SubSubMultiMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.MultiSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubMulti";
-                }
-
-              }
-
-              @Order(30)
-              public class SubSubEmptySpaceMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.EmptySpace);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubEmpty";
-                }
-
-              }
-
-            }
+          public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
 
           }
 
@@ -512,7 +432,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected int getConfiguredGridH() {
-          return 5;
+          return 8;
         }
 
         @Override
@@ -527,119 +447,75 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Order(10)
         public class Tree extends AbstractTree {
-          @Order(50)
-          public class HierarchicalMenu extends AbstractMenu {
+
+          @Order(10)
+          public class NewMenu extends AbstractMenu {
+
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(
-                  TreeMenuType.SingleSelection);
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
             }
 
             @Override
             protected String getConfiguredText() {
-              return "HierarchicalMenu";
+              return TEXTS.get("New");
             }
 
-            @Order(10)
-            public class SubSingleMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.SingleSelection);
-              }
+            @Override
+            protected void execAction() {
+              ITreeNode node = newNode(getTree());
+              node.getParentNode().setLeaf(false);
+            }
+          }
 
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubSingle";
-              }
-
+          @Order(15)
+          @ClassId("b43eaa82-5241-4688-b8f9-4a32ddd44f83")
+          public class DeleteNodeMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("Delete");
             }
 
-            @Order(20)
-            public class SubMultiMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.MultiSelection);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubMulti";
-              }
-
+            @Override
+            protected String getConfiguredKeyStroke() {
+              return IKeyStroke.DELETE;
             }
 
-            @Order(30)
-            public class SubEmptySpaceMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TreeMenuType.EmptySpace);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "TreeSubEmpty";
-              }
-
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
             }
 
-            @Order(40)
-            public class IntermediateMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return "Intermediate Menu";
+            @Override
+            protected void execAction() {
+              ITreeNode parentNode = null;
+              if (getSelectedNode() != null) {
+                parentNode = getSelectedNode().getParentNode();
               }
-
-              @Order(10)
-              public class SubSubSingleMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.SingleSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubSingle";
-                }
-
+              getTree().removeNode(getSelectedNode());
+              if (parentNode != null && parentNode.getChildNodeCount() == 0) {
+                parentNode.setLeaf(true);
               }
+            }
+          }
 
-              @Order(20)
-              public class SubSubMultiMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.MultiSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubMulti";
-                }
-
-              }
-
-              @Order(30)
-              public class SubSubEmptySpaceMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TreeMenuType.EmptySpace);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "TreeSubSubEmpty";
-                }
-
-              }
-
+          @Order(20)
+          @ClassId("bd858b45-2f64-4b6f-8881-302f684a4ecc")
+          public class DynamicMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("DynamicMenu");
             }
 
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
+            }
+
+          }
+
+          @Order(50)
+          public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
           }
         }
 
@@ -685,7 +561,76 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
-          getTreeField().getTree().getContextMenu().addChildActions(nodesToMenus(nodes));
+          DynamicMenu dynamicMenu = getTreeField().getTree().getMenuByClass(DynamicMenu.class);
+          dynamicMenu.removeChildActions(dynamicMenu.getChildActions());
+          dynamicMenu.addChildActions(nodesToMenus(nodes));
+        }
+      }
+
+      @Order(35)
+      public class AutoCheckChildNodesField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckChildNodes");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeField().getTree().setAutoCheckChildNodes(getValue());
+        }
+      }
+
+      @Order(40)
+      public class IsEnabledField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("IsEnabled");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeField().setEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeField().isEnabled());
+        }
+      }
+
+      @Order(50)
+      public class CheckableField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checkable";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeField().getTree().setCheckable(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeField().getTree().isCheckable());
         }
       }
     }
