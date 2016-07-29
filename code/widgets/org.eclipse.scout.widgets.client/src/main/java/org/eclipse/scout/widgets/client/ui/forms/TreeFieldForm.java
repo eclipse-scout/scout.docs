@@ -469,7 +469,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(15)
-          @ClassId("378e162c-e2f4-4688-89ff-b433e75cf8d7")
+          @ClassId("091c930e-cd4c-4ac0-a87a-60f87b189c00")
           public class DeleteNodeMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {

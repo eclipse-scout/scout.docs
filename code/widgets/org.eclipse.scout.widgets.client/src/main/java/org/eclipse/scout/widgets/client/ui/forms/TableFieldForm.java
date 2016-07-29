@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -34,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIconColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractProposalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
@@ -62,6 +65,9 @@ import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -90,6 +96,8 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 @Order(5000.0)
 public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm {
+
+  public static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
 
   public TableFieldForm() {
     super();
@@ -258,7 +266,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           r = table.addRow(getTable().createRow());
           table.getIdColumn().setValue(r, getNextId());
           table.getNameColumn().setValue(r, "Eclipsecon USA");
-          table.getLocationColumn().setValue(r, "San Francisco, USA");
+          table.getLocationColumn().setValue(r, LOCATIONS[0]);
           table.getDateColumn().setValue(r, DateUtility.parse("18.03.2014", "dd.MM.yyyy"));
           table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
           table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
@@ -273,7 +281,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           r = table.addRow(getTable().createRow());
           table.getIdColumn().setValue(r, getNextId());
           table.getNameColumn().setValue(r, "Javaland");
-          table.getLocationColumn().setValue(r, "Bruehl, Germany");
+          table.getLocationColumn().setValue(r, LOCATIONS[1]);
           table.getDateColumn().setValue(r, DateUtility.parse("25.03.2014", "dd.MM.yyyy"));
           table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
           table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
@@ -421,7 +429,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(30)
-          public class LocationColumn extends AbstractStringColumn {
+          public class LocationColumn extends AbstractProposalColumn<String> {
 
             @Override
             protected boolean getConfiguredEditable() {
@@ -438,6 +446,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               return 150;
             }
 
+            @Override
+            protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+              return LocationLookupCall.class;
+            }
           }
 
           @Order(40)
@@ -1688,5 +1700,29 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   public class PageFormHandler extends AbstractFormHandler {
+  }
+
+  public static class LocationLookupCall extends LocalLookupCall<String> {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<String>> execCreateLookupRows() {
+      final List<ILookupRow<String>> rows = new ArrayList<>();
+      for (String location : LOCATIONS) {
+        rows.add(new LookupRow<String>(location, location));
+      }
+      return rows;
+    }
+
+    @Override
+    public List<? extends ILookupRow<String>> getDataByKey() {
+      final List<? extends ILookupRow<String>> rows = super.getDataByKey();
+      if (!rows.isEmpty() && getKey() == null) {
+        return rows;
+      }
+      else {
+        return Collections.singletonList(new LookupRow<>(getKey(), getKey().toString()));
+      }
+    }
   }
 }
