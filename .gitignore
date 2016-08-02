@@ -13,8 +13,6 @@
 # Eclipse #
 code/.project
 code/.settings
-docs/**/.project
-docs/**/.settings
 bin
 classes
 
