@@ -1,4 +1,5 @@
 scout.HeatmapFieldLayout = function(field) {
+  scout.HeatmapFieldLayout.parent.call(this);
   this.field = field;
 };
 scout.inherits(scout.HeatmapFieldLayout, scout.AbstractLayout);

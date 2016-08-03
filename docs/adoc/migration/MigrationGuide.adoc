@@ -89,3 +89,12 @@ $(document).ready(function() {
 });
 ----
 <1> Translated texts are extracted automatically from DOM.
+
+== scout.graphics.prefSize() [JS]
+
+The signature of JavaScript method `scout.graphics.prefSize()` has changed:
+
+* *Old*: scout.graphics.prefSize($elem, [line-through]##includeMargin##, options)
+* *New*: scout.graphics.prefSize($elem, options)
+
+The argument _includeMargin_ was moved to the options object. See code documentation for a description of all options.
