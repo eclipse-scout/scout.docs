@@ -52,17 +52,12 @@ public class OptionsForm extends AbstractForm {
   public class MainBox extends AbstractGroupBox {
 
     @Override
-    protected int getConfiguredGridW() {
+    protected int getConfiguredGridColumnCount() {
       return 1;
     }
 
     @Order(10)
     public class GroupBox extends AbstractGroupBox {
-
-      @Override
-      protected int getConfiguredGridW() {
-        return 1;
-      }
 
       @Order(10)
       public class UiThemeField extends AbstractSmartField<String> {

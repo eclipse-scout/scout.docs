@@ -37,7 +37,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButt
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.BlankButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.ScoutHtmlButton;
-import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.HTMLField;
+import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.HtmlField;
 
 @Order(6000.0)
 public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -79,8 +79,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(GroupBox.class);
   }
 
-  public HTMLField getHTMLField() {
-    return getFieldByClass(HTMLField.class);
+  public HtmlField getHhtmlField() {
+    return getFieldByClass(HtmlField.class);
   }
 
   public MainBox getMainBox() {
@@ -94,10 +94,10 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
   private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) {
     try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
       String s = IOUtility.readString(in, null);
-      getHTMLField().setValue(null);
-      getHTMLField().setScrollToAnchor(null);
-      getHTMLField().setAttachments(attachments);
-      getHTMLField().setValue(s);
+      getHhtmlField().setValue(null);
+      getHhtmlField().setScrollToAnchor(null);
+      getHhtmlField().setAttachments(attachments);
+      getHhtmlField().setValue(s);
     }
     catch (IOException e) {
       throw new ProcessingException("Html-Field can't load file ", e);
@@ -106,6 +106,11 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   @Order(10)
   public class MainBox extends AbstractGroupBox {
+
+    @Override
+    protected void execInitField() {
+      setStatusVisible(false);
+    }
 
     @Order(5)
     public class ActionGroupBox extends AbstractGroupBox {
@@ -134,7 +139,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getHTMLField().setEnabled(getValue());
+          getHhtmlField().setEnabled(getValue());
         }
       }
 
@@ -147,7 +152,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getHTMLField().setScrollToAnchor(getValue());
+          getHhtmlField().setScrollToAnchor(getValue());
         }
       }
 
@@ -170,13 +175,13 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execClickAction() {
-          getHTMLField().scrollToEnd();
+          getHhtmlField().scrollToEnd();
         }
       }
     }
 
     @Order(10)
-    public class HTMLField extends AbstractHtmlField {
+    public class HtmlField extends AbstractHtmlField {
 
       @Override
       protected int getConfiguredGridH() {
@@ -206,6 +211,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
     @Order(20)
     public class GroupBox extends AbstractGroupBox {
+
       @Order(30)
       public class BlankButton extends AbstractLinkButton {
 
@@ -216,8 +222,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execClickAction() {
-          getHTMLField().setAttachments(null);
-          getHTMLField().setValue(null);
+          getHhtmlField().setAttachments(null);
+          getHhtmlField().setValue(null);
         }
       }
 
