@@ -316,7 +316,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       if (StringUtility.isNullOrEmpty(svgData)) {
         return null;
       }
-      return SVGUtility.readSVGDocument(new ByteArrayInputStream(svgData.getBytes(StandardCharsets.UTF_8.name())));
+      return SVGUtility.readSVGDocument(new ByteArrayInputStream(svgData.getBytes(StandardCharsets.UTF_8)));
     }
   }
 
