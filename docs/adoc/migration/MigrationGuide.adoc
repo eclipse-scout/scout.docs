@@ -98,3 +98,29 @@ The signature of JavaScript method `scout.graphics.prefSize()` has changed:
 * *New*: scout.graphics.prefSize($elem, options)
 
 The argument _includeMargin_ was moved to the options object. See code documentation for a description of all options.
+
+== scout.ModelAdapter._send() [JS]
+
+The signature of JavaScript method `scout.ModelAdapter._send()` has changed:
+
+* *Old*: scout.ModelAdapter._send(type, data, [line-through]##delay, coalesceFunc, noBusyIndicator##)
+* *New*: scout.ModelAdapter._send(type, data, options)
+
+Instead of passing individual arguments, pass all but the first two arguments in an options object:
+* `delay`
+* `coalesce`
+* `showBusyIndicator`
+
+Old:
+[source,javascript]
+----
+this._send('selected', eventData, null, function() { ... });
+----
+
+New:
+[source,javascript]
+----
+this._send('selected', eventData, {
+  coalesce: function() { ... }
+});
+----
