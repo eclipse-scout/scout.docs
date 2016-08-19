@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextPr
 @Order(1000)
 public class TextProviderService extends AbstractDynamicNlsTextProviderService {
   @Override
-  protected String getDynamicNlsBaseName() {
+  public String getDynamicNlsBaseName() {
     return "org.eclipse.scout.contacts.events.shared.texts.Texts";
   }
 }

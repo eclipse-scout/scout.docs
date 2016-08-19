@@ -76,10 +76,10 @@ scout.HeatmapField.prototype._renderHeatPointList = function() {
     this.heatmap.removeLayer(this._heatLayer);
   }
   this._heatLayer = L.heatLayer(this.heatPointList,
-	  // TODO make this parameter list configurable from the model!
+    // TODO make this parameter list configurable from the model!
       // parameters to control the appearance of heat points
-	  // see leaflet.heat docu for full spec
-	  { radius: 20, blur: 30, max: 1.0 }
+    // see leaflet.heat docu for full spec
+    { radius: 20, blur: 30, max: 1.0 }
   );
   this._heatLayer.addTo(this.heatmap);
 };

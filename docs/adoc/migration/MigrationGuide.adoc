@@ -19,6 +19,9 @@ Howto:
 - Chronological order is not necessary.
 ////
 
+== Text Provider Service
+The method `AbstractDynamicNlsTextProviderService#getDynamicNlsBaseName` has been made public. Adjust the method in your text provider service accordingly.
+
 == Content Security Policy (CSP)
 
 [red yellow-background]*TODO IMO:* Describe CSP, its implications on Scout applications and how to configure it.
