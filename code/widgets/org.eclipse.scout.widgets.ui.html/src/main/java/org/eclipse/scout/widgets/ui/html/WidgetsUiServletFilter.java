@@ -35,7 +35,7 @@ import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessControlle
  *
  * @since 5.1
  */
-public class UiServletFilter implements Filter {
+public class WidgetsUiServletFilter implements Filter {
 
   private TrivialAccessController m_trivialAccessController;
   private FormBasedAccessController m_formBasedAccessController;
