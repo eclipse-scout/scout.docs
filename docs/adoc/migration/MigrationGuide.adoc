@@ -93,6 +93,12 @@ $(document).ready(function() {
 ----
 <1> Translated texts are extracted automatically from DOM.
 
+=== Customizing CSP directives ===
+
+The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style with_XXX_() methods.
+
+By default, the `report-uri` for CSP violations is now called */csp-report* (instead of /csp.cgi).
+
 == scout.graphics.prefSize() [JS]
 
 The signature of JavaScript method `scout.graphics.prefSize()` has changed:
