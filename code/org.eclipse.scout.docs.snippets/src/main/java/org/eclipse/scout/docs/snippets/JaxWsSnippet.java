@@ -16,19 +16,18 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.MessageContext.Scope;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
-import javax.xml.ws.http.HTTPException;
 import javax.xml.ws.soap.MTOM;
 
 import org.eclipse.scout.docs.ws.pingwebservice.PingWebService;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.annotations.Internal;
 import org.eclipse.scout.rt.platform.config.AbstractPositiveIntegerConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.IConfigProperty;
@@ -36,7 +35,6 @@ import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.context.RunWithRunContext;
 import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
 import org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier;
-import org.eclipse.scout.rt.server.jaxws.MessageContexts;
 import org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient;
 import org.eclipse.scout.rt.server.jaxws.consumer.InvocationContext;
 import org.eclipse.scout.rt.server.jaxws.consumer.auth.handler.BasicAuthenticationHandler;
@@ -51,7 +49,8 @@ import org.eclipse.scout.rt.server.jaxws.provider.annotation.InitParam;
 import org.eclipse.scout.rt.server.jaxws.provider.annotation.WebServiceEntryPoint;
 import org.eclipse.scout.rt.server.jaxws.provider.auth.method.BasicAuthenticationMethod;
 import org.eclipse.scout.rt.server.jaxws.provider.context.IWebServiceContext;
-import org.eclipse.scout.rt.server.jaxws.provider.context.JaxWsServletRunContexts;
+import org.eclipse.scout.rt.server.jaxws.provider.context.JaxWsRunContextLookup;
+import org.eclipse.scout.rt.server.jaxws.provider.context.JaxWsUndeclaredExceptionTranslator;
 
 @SuppressWarnings("unused")
 public final class JaxWsSnippet {
@@ -124,25 +123,11 @@ public final class JaxWsSnippet {
 
     @Override
     public String ping(final String ping) {
-      final RunContext servletRunContext = JaxWsServletRunContexts.copyCurrent().withWebServiceContext(m_webServiceContext);
-      final RunContext requestRunContext = MessageContexts.getRunContext(m_webServiceContext.getMessageContext());
       try {
-        return servletRunContext.call(new Callable<String>() {
-
+        return lookupRunContext().call(new Callable<String>() {
           @Override
           public final String call() throws Exception {
-            if (requestRunContext == null) {
-              return BEANS.get(org.eclipse.scout.docs.ws.pingwebservice.PingWebServicePortType.class).ping(ping);
-            }
-            else {
-              return requestRunContext.call(new Callable<String>() {
-
-                @Override
-                public final String call() throws Exception {
-                  return BEANS.get(org.eclipse.scout.docs.ws.pingwebservice.PingWebServicePortType.class).ping(ping);
-                }
-              }, DefaultExceptionTranslator.class);
-            }
+            return BEANS.get(PingWebServicePortType.class).ping(ping);
           }
         }, DefaultExceptionTranslator.class);
       }
@@ -151,18 +136,20 @@ public final class JaxWsSnippet {
       }
     }
 
+    @Internal
     protected RuntimeException handleUndeclaredFault(final Exception e) {
-      if (e instanceof RuntimeException) {
-        throw (RuntimeException) e;
-      }
-      else {
-        throw new HTTPException(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      }
+      throw BEANS.get(JaxWsUndeclaredExceptionTranslator.class).translate(e);
+    }
+
+    @Internal
+    protected RunContext lookupRunContext() {
+      return BEANS.get(JaxWsRunContextLookup.class).lookup(m_webServiceContext);
     }
   }
-  // end::jaxws.example.entrypoint[]
 
-  // tag::jaxws.example.porttype.bean[]
+// end::jaxws.example.entrypoint[]
+
+// tag::jaxws.example.porttype.bean[]
   @ApplicationScoped
   public class PingWebServicePortTypeBean implements PingWebServicePortType {
 
