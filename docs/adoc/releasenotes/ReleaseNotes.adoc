@@ -20,3 +20,5 @@ ifndef::mdledir[:mdledir: .]
 
 = What's New
 
+== Mnemonics
+Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.

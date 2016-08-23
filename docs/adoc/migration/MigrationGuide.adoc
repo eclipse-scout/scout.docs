@@ -127,3 +127,20 @@ this._send('selected', eventData, {
   coalesce: function() { ... }
 });
 ----
+
+== Mnemonics
+
+Mnemonics are not supported anymore. Remove all mnemonics (&) from your text files as they will not be considered anymore!
+&& was used escape the mnemonic behaviour and display a single '&' in a text. Replace && with &!
+
+The following methods were or will be removed:
+* `StringUtility.removeMnemonic`
+* `StringUtility.getMnemonic`
+* `IAction.PROP_TEXT_WITH_MNEMONIC`
+* `IAction.PROP_MNEMONIC`
+* `IAction.getTextWithMnemonic`
+* `IAction.getMnemonic`
+* `strings.removeMnemonic`
+* `strings.removeAmpersand`
+
+
