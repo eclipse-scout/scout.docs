@@ -19,6 +19,9 @@ Howto:
 - Chronological order is not necessary.
 ////
 
+== WebContent Resources
+The *.html files (index.html, login.html, logout.html etc.) have been changed. The simplest way to migrate these files is to create them anew using the Scout SDK or maven archetype and compare them with your files. For details see chapter <<Content Security Policy (CSP)>>.
+
 == Text Provider Service
 The method `AbstractDynamicNlsTextProviderService#getDynamicNlsBaseName` has been made public. Adjust the method in your text provider service accordingly.
 
@@ -108,7 +111,28 @@ The signature of JavaScript method `scout.graphics.prefSize()` has changed:
 
 The argument _includeMargin_ was moved to the options object. See code documentation for a description of all options.
 
-== scout.ModelAdapter._send() [JS]
+== scout.ModelAdapter [JS]
+If you have not created any custom widgets, you can skip this. If you only used `BeanFields` for customizing you can skip it as well.
+
+Previously every widget with a corresponding part on the server extended `scout.ModelAdapter`.
+A model adapter is the connector with the server, it takes the events sent from the server and calls the corresponding methods on the widget. It also sends events to the server whenever an action happens on the widget.
+To make the widgets usable without a server, they don't extend from `scout.ModelAdapter` anymore but directly from `scout.Widget`.
+That means every widget with a server counter part have been separated into widget and model adapter, similarly to the server side where a `IJsonAdapter` exists for every model object.
+The model adapter creates the widget and attaches itself to it meaning it listens for events triggered by the widget and sends elected ones to the server. It also takes the events from the server and calls the corresponding methods of the widget.
+
+So if you created custom widgets you have to separate them as well. Create for each widget a separate file called the same way as the Widget + 'Adapter'. That adapter extends either directly from `scout.ModelAdapter` or from the corresponding adapter of the parent widget.
+
+Example: You have created a `XyField.js` which extends from `FormField.js`. Now create a file called `XyFieldAdapter.js` and extend it from `FormFieldAdapter.js`.
+
+You now have to move the server event handling methods to the adapter, if there are any at all. If your widget does not contain a method called `onModelAction`, you are fine.
+Beside these action events the server may send property change events as well. For every property change event the adapter will automatically call the corresponding setter method. If there is none it will call the generic method `Widget.setProperty` which eventually calls the `_sync` and `_render` methods of the property.
+So if your widget contains `_sync` methods they will still be called on a server property change like before. But now you should create a JS property event to inform other widgets by using `Widget._setProperty` (note the _).
+This was previously done automatically for every property which is still done if there is no `_sync` method. If there is one you have to take care of it by yourself.
+
+For the opposite direction meaning events from UI to server you have to more or less replace the calls of `_send()` with `trigger()`. In the adapter you have to handle these widget events and call the `_send()` method accordingly.
+If it is a property change event it is even simpler. Just call `_addRemoteProperties` in the constructor of the model adapter for every property which should be sent to the server.
+
+=== _send()
 
 The signature of JavaScript method `scout.ModelAdapter._send()` has changed:
 
@@ -134,6 +158,33 @@ this._send('selected', eventData, {
 });
 ----
 
+== scout.Widget [JS]
+If you have not created any custom widgets, you can skip this.
+
+=== destroy()
+With the separation of widget and model adapter the destroy handling has been refactored.
+This means every widget may now be destroyed. Previously only the widgets which extended from `scout.ModelAdapter` could be destroyed.
+The big advantage is that every widget now behaves the same and that there finally is a counter part for the `_init()` called `_destroy()` which makes it possible to do cleanup like removing listeners.
+
+For you it means you have to decide whether you want to destroy or only remove your widgets. A widget knows the following states:
+
+. initialized
+. rendered
+. removed
+. destroyed
+
+You can remove and render the same widget as many times you want, but if you destroy it you may not use it again and you would have to create a new one.
+It eventually has to be destroyed though for a proper cleanup. Normally this is done by the parent widget, but in some rare cases you have to take care of it by your own.
+
+So check all the occurrences of `YourWidget.remove()` and maybe replace them with destroy.
+
+=== EventSupport
+Every widget now installs the event support by default. Previously `_addEventSupport` had to be called in the constructor of the widget. This may now be removed.
+
+=== KeyStrokeContext
+The method `_addKeyStrokeContextSupport` has been removed. If your widget needs keystroke support override `_createKeyStrokeContext` and provide one. You can probably use the default `scout.KeyStrokeContext`.
+The parameter of `_initKeyStrokeContext` has been removed as well. Just use `this.keyStrokeContext` instead.
+
 == Mnemonics
 
 Mnemonics are not supported anymore. Remove all mnemonics (&) from your text files as they will not be considered anymore!
@@ -149,5 +200,3 @@ The following methods were or will be removed:
 * `IAction.getMnemonic`
 * `strings.removeMnemonic`
 * `strings.removeAmpersand`
-
-
