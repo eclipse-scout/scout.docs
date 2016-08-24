@@ -140,6 +140,7 @@ Mnemonics are not supported anymore. Remove all mnemonics (&) from your text fil
 && was used escape the mnemonic behaviour and display a single '&' in a text. Replace && with &!
 
 The following methods were or will be removed:
+
 * `StringUtility.removeMnemonic`
 * `StringUtility.getMnemonic`
 * `IAction.PROP_TEXT_WITH_MNEMONIC`
