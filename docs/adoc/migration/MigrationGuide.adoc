@@ -200,3 +200,13 @@ The following methods were or will be removed:
 * `IAction.getMnemonic`
 * `strings.removeMnemonic`
 * `strings.removeAmpersand`
+
+== Changes in objectType syntax and scout.create() [JS] ==
+
+The "objectType" is a string describing which JavaScipt "class" to use when creating an object instance using `scout.create()` (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from `.` to `:`. The namespace separator remains `.`. This allows the following forms of object types:.
+
+* `"StringField"`: name without namespace, i.e. a type in the default namespace (resolves to `scout.StringField`)
+* `"myproject.StringField"`: namespace qualified name
+* `"StringField:MyVariant"`: type with variant (resolves to `scout.MyVariantStringField`), can also be combined with a namespace
+
+*Migration:* Check your _objectFactories.js_ and _defaultValues.json_ files (if you have any in your project) for types with variant and convert the separator from `.` to `:`.
