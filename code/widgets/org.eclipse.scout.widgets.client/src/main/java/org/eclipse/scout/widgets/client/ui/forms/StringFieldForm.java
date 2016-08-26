@@ -805,6 +805,26 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(128)
+      public class EnableTextField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Multiline Text enabled";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(true);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTextInputField().setEnabled(getValue());
+        }
+
+      }
+
       @Order(130)
       public class StringInputField extends AbstractStringField {
 
