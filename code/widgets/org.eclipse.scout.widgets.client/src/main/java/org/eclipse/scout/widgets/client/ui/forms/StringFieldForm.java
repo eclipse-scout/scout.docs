@@ -324,7 +324,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return "&Default";
+          return "Default";
         }
       }
 
