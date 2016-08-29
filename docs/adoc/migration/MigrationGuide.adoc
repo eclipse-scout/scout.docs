@@ -210,3 +210,10 @@ The "objectType" is a string describing which JavaScipt "class" to use when crea
 * `"StringField:MyVariant"`: type with variant (resolves to `scout.MyVariantStringField`), can also be combined with a namespace
 
 *Migration:* Check your _objectFactories.js_ and _defaultValues.json_ files (if you have any in your project) for types with variant and convert the separator from `.` to `:`.
+
+== getFocusOwner
+Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since replacing the old rich client ui technologies (swing, swt) with the modern html ui, this method didn't work correctly anymore.
+
+There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.
+
+If such functionality is needed, it has to be programmed with java script within the browser.
