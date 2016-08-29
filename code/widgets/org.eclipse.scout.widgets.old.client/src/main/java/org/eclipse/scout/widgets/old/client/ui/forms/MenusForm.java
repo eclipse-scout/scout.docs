@@ -31,12 +31,14 @@ import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.reflect.ConfigurationUtility;
 import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.old.client.ui.forms.MenusForm.MainBox.MenusButton;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.old.client.ui.forms.MenusForm.MainBox.GroupBox.ToggleMenusMenuSelectionButton;
+import org.eclipse.scout.widgets.old.client.ui.forms.MenusForm.MainBox.MenusButton;
 import org.eclipse.scout.widgets.shared.Icons;
 
 public class MenusForm extends AbstractForm implements IPageForm {
@@ -57,6 +59,10 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
+  }
+
+  public ToggleMenusMenuSelectionButton getToggleMenusMenuSelectionButton() {
+    return getFieldByClass(ToggleMenusMenuSelectionButton.class);
   }
 
   public MenusButton getMenusButton() {
@@ -442,6 +448,26 @@ public class MenusForm extends AbstractForm implements IPageForm {
               return true;
             }
           });
+        }
+      }
+
+      @Order(35)
+      @ClassId("b6a80467-a6a6-4240-b3b3-e9bf26af6a35")
+      public class ToggleMenusMenuSelectionButton extends AbstractLinkButton {
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Toggle Menus Menu Selection";
+        }
+
+        @Override
+        protected void execClickAction() {
+          getMenuByClass(MenusMenu.class).setSelected(!getMenuByClass(MenusMenu.class).isSelected());
         }
       }
 
