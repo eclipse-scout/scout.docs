@@ -11,10 +11,10 @@
 package org.eclipsescout.demo.bahbah.server.services.process;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.context.NodeIdentifier;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
-import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
@@ -41,12 +41,7 @@ public class NotificationProcessService implements INotificationProcessService {
     }
 
     // process message
-    String nodeId = null;
-    IClusterSynchronizationService s = BEANS.opt(IClusterSynchronizationService.class);
-    if (s != null) {
-      nodeId = s.getNodeId();
-    }
-
+    String nodeId = BEANS.get(NodeIdentifier.class).get();
     BEANS.get(ClientNotificationRegistry.class).putForUser(buddyName, new MessageNotification(ServerSession.get().getUserId(), message, nodeId));
   }
 
