@@ -26,3 +26,16 @@ Mnemonics are not supported anymore. All affected texts were either edited or re
 == Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element.
+
+== Binary resources in different widgets
+Binary resources such as images or videos can now be used in the following widgets:
+* HtmlField
+* BeanField
+[[img-binary_resource_field, Figure 000]]
+.Binary resource on a model field.
+image::{imgsdir}/binary_resource_field.png[]
+* Html enabled StringColumn
+* BeanColumn
+[[img-binary_resource_column, Figure 000]]
+.Binary resource on a column
+image::{imgsdir}/binary_resource_column.png[]

@@ -10,6 +10,10 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.ModelVariant;
@@ -19,8 +23,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.html.AppLink;
+import org.eclipse.scout.rt.platform.resource.BinaryResource;
+import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.BeanFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.BeanFieldForm.MainBox.ExamplesBox;
@@ -46,6 +54,17 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
   @Override
   public void startPageForm() {
     startInternal(new PageFormHandler());
+  }
+
+  public BinaryResource getSampleImage() {
+    URL url = ResourceBase.class.getResource("images/bird_1008.jpg");
+    try (InputStream in = url.openStream()) {
+      byte[] content = IOUtility.readBytes(in);
+      return new BinaryResource("bird.jpg", content);
+    }
+    catch (IOException e) {
+      throw new ProcessingException("", e);
+    }
   }
 
   @Override
@@ -87,6 +106,7 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
           bean.setHeader(TEXTS.get("ExampleBeanFieldHeader"));
           bean.setDescription(TEXTS.get("ExampleBeanFieldDescription"));
           bean.setAppLink(new AppLink("exampleRef", TEXTS.get("ExampleBeanFieldAppLink")));
+          bean.setImage(getSampleImage());
           setValue(bean);
         }
 

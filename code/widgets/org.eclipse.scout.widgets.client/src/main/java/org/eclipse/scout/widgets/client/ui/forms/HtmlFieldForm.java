@@ -58,7 +58,17 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   @Override
   protected void execInitForm() {
-    loadFile("ScoutHtml.html", Collections.<BinaryResource> emptySet());
+    URL url = ResourceBase.class.getResource("images/bird_1008.jpg");
+
+    try (InputStream in = url.openStream()) {
+      byte[] content = IOUtility.readBytes(in);
+      BinaryResource image = new BinaryResource("bird.jpg", content);
+      loadFile("ScoutHtml.html", Collections.<BinaryResource> singleton(image));
+    }
+    catch (IOException e) {
+      throw new ProcessingException("", e);
+    }
+
   }
 
   @Override

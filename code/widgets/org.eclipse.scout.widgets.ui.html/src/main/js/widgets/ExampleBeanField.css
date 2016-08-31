@@ -9,3 +9,8 @@
   border-bottom: 1px solid @palette-gray-5;
 }
 
+.example-bean-field-image {
+  max-height: 300px;
+  max-width: 400px;
+}
+

@@ -6,3 +6,9 @@
     color: @palette-red-3;
   }
 }
+
+
+.table-cell-html-image {
+  max-height: 100px;
+  max-width: 120px;
+}

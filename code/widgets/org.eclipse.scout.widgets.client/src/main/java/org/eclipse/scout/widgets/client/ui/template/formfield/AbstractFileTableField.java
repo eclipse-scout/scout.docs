@@ -25,9 +25,11 @@ import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBeanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
@@ -36,16 +38,20 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.dnd.ResourceListTransferObject;
 import org.eclipse.scout.rt.client.ui.dnd.TransferObject;
+import org.eclipse.scout.rt.client.ui.form.fields.ModelVariant;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widgets.client.ResourceBase;
+import org.eclipse.scout.widgets.client.ui.forms.ExampleBean;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
 import org.eclipse.scout.widgets.shared.FileCodeType;
 
@@ -86,7 +92,10 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     size /= FILE_SIZE_FACTOR;
 
-    return new Object[]{file, file.getFilename(), size, type, new Date(file.getLastModified())};
+    ExampleBean bean = new ExampleBean();
+    bean.setImage(file);
+
+    return new Object[]{file, null, bean, file.getFilename(), size, type, new Date(file.getLastModified())};
   }
 
   @Order(10)
@@ -190,6 +199,10 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       return getColumnSet().getColumnByClass(ResourceColumn.class);
     }
 
+    public HtmlImageColumn getHtmlImageColumn() {
+      return getColumnSet().getColumnByClass(HtmlImageColumn.class);
+    }
+
     public NameColumn getNameColumn() {
       return getColumnSet().getColumnByClass(NameColumn.class);
     }
@@ -210,6 +223,52 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
       @Override
       protected boolean getConfiguredVisible() {
         return false;
+      }
+    }
+
+    @Order(15)
+    public class HtmlImageColumn extends AbstractStringColumn {
+
+      @Override
+      protected boolean getConfiguredHtmlEnabled() {
+        return true;
+      }
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Image_StringColumn");
+      }
+
+      @Override
+      protected void execDecorateCell(Cell cell, ITableRow row) {
+        if (StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), FileCodeType.JpgCode.ID)
+            || StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), FileCodeType.PngCode.ID)) {
+          BinaryResource value = getResourceColumn().getValue(row);
+          if (value != null) {
+            addAttachment(value);
+            cell.setText(HTML.imgByBinaryResource(value.getFilename()).cssClass("table-cell-html-image").toHtml());
+          }
+        }
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 150;
+      }
+    }
+
+    @Order(18)
+    @ModelVariant("Example")
+    public class ImageBeanColumn extends AbstractBeanColumn<ExampleBean> {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Image_BeanColumn");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 150;
       }
     }
 
