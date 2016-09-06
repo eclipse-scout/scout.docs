@@ -27,7 +27,6 @@ import javax.xml.ws.soap.MTOM;
 import org.eclipse.scout.docs.ws.pingwebservice.PingWebService;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.annotations.Internal;
 import org.eclipse.scout.rt.platform.config.AbstractPositiveIntegerConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 import org.eclipse.scout.rt.platform.config.IConfigProperty;
@@ -71,15 +70,15 @@ public final class JaxWsSnippet {
       portName = "PingWebServicePort",
       handlerChain = {// <2>
           @Handler(@Clazz(CorrelationIdHandler.class)), // <3>
-          @Handler(value = @Clazz(IPAddressFilter.class) , initParams = { // <4>
+          @Handler(value = @Clazz(IPAddressFilter.class), initParams = { // <4>
               @InitParam(key = "rangeFrom", value = "192.200.0.0"),
               @InitParam(key = "rangeTo", value = "192.255.0.0")}),
           @Handler(@Clazz(LogHandler.class)), // <5>
       },
       authentication = @Authentication( // <6>
           order = 2, // <7>
-          method = @Clazz(BasicAuthenticationMethod.class) , // <8>
-          verifier = @Clazz(ConfigFileCredentialVerifier.class) ) ) // <9>
+          method = @Clazz(BasicAuthenticationMethod.class), // <8>
+          verifier = @Clazz(ConfigFileCredentialVerifier.class))) // <9>
   @MTOM // <10>
   // end::jaxws.example.pingws.entrypoint.definition[]
   public interface PingWebServiceEntryPointDefinition1 {
@@ -136,12 +135,10 @@ public final class JaxWsSnippet {
       }
     }
 
-    @Internal
     protected RuntimeException handleUndeclaredFault(final Exception e) {
       throw BEANS.get(JaxWsUndeclaredExceptionTranslator.class).translate(e);
     }
 
-    @Internal
     protected RunContext lookupRunContext() {
       return BEANS.get(JaxWsRunContextLookup.class).lookup(m_webServiceContext);
     }
@@ -272,8 +269,8 @@ public final class JaxWsSnippet {
           @Handler(@Clazz(LogHandler.class)),
       },
       authentication = @Authentication(
-          method = @Clazz(BasicAuthenticationMethod.class) ,
-          verifier = @Clazz(ConfigFileCredentialVerifier.class) ) )
+          method = @Clazz(BasicAuthenticationMethod.class),
+          verifier = @Clazz(ConfigFileCredentialVerifier.class)))
   // end::jaxws.example.pingwsWithCorrelationId.entrypoint.definition[]
   public interface PingWebServiceEntryPointDefinition2 {
   }
