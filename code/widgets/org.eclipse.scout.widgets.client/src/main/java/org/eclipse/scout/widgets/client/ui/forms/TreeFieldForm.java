@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.treefield.AbstractTreeField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.job.ExecutionTrigger;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
@@ -386,6 +387,42 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           @Order(50)
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
 
+          }
+
+          @Order(60)
+          @ClassId("cebf3848-8194-4cb0-b0ee-4206b937961d")
+          public class DelayedClearSelectionMenu extends AbstractMenu {
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TreeMenuType.SingleSelection);
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return "Clear selection after 3 sec";
+            }
+
+            @Override
+            protected void execAction() {
+              final String subjectName = getSelectedNode().getCell().getText();
+
+              Jobs.schedule(new IRunnable() {
+
+                @Override
+                public void run() throws Exception {
+
+                  ModelJobs.schedule(new IRunnable() {
+                    @Override
+                    public void run() throws Exception {
+                      getTree().selectNode(null);
+                    }
+                  }, ModelJobs.newInput(ClientRunContexts.copyCurrent()).withName(String.format("execute job: '%s'", subjectName)));
+
+                }
+              }, Jobs.newInput().withRunContext(ClientRunContexts.copyCurrent())
+                  .withExecutionTrigger(new ExecutionTrigger().withStartIn(3, TimeUnit.SECONDS)));
+            }
           }
 
           private void showInfo(ITreeNode node) {
