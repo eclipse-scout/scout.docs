@@ -1,0 +1,8 @@
+{
+    "id": "jswidgets.Desktop",
+    "title": "${textKey:Widgets}",
+    "objectType": "Desktop",
+    "outline": {
+      "objectType": "jswidgets.FormFieldOutline"
+    }
+}

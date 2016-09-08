@@ -44,6 +44,11 @@
     <module>../org.eclipse.scout.widgets.old.client</module>
     <module>../org.eclipse.scout.widgets.old.shared</module>
 
+    <!-- Scout JS widgets -->
+    <module>../org.eclipse.scout.jswidgets.ui.html</module>
+    <module>../org.eclipse.scout.jswidgets.ui.html.app</module>
+    <module>../org.eclipse.scout.jswidgets.ui.html.app.dev</module>
+
     <!-- Components for custom widgets -->
     <module>../org.eclipse.scout.widgets.heatmap.client</module>
     <module>../org.eclipse.scout.widgets.heatmap.ui.html</module>
@@ -96,6 +101,24 @@
       <dependency>
         <groupId>org.eclipse.scout.widgets</groupId>
         <artifactId>org.eclipse.scout.widgets.old.shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+
+      <!-- JS Widgets dependencies -->
+      <dependency>
+        <groupId>org.eclipse.scout.widgets</groupId>
+        <artifactId>org.eclipse.scout.jswidgets.ui.html</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.widgets</groupId>
+        <artifactId>org.eclipse.scout.jswidgets.ui.html.app</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.widgets</groupId>
+        <artifactId>org.eclipse.scout.jswidgets.ui.html.app.dev</artifactId>
         <version>${project.version}</version>
       </dependency>
 

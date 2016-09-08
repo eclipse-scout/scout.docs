@@ -1,0 +1,55 @@
+{
+  "id": "jswidgets.TableFieldForm",
+  "objectType": "Form",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "TableField",
+            "objectType": "TableField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "h": 2
+            },
+            "table": {
+              "id": "Table",
+              "objectType": "Table",
+              "columns": [
+                {
+                  "index": 0,
+                  "text": "${textKey:Column}",
+                  "id": "Column",
+                  "width": 300,
+                  "objectType": "Column"
+                },
+                {
+                  "index": 1,
+                  "text": "${textKey:NumberColumn}",
+                  "id": "NumberColumn",
+                  "width": 300,
+                  "objectType": "NumberColumn"
+                }
+              ],
+              "menus": [
+                {
+                  "id": "AddRowsMenu",
+                  "objectType": "Menu",
+                  "text": "${textKey:AddRows}",
+                  "menuTypes": ["Table.EmptySpace"]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

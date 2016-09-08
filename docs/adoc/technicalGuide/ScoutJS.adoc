@@ -1,0 +1,25 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Scout JS
+
+=== Widget
+
+==== What is a widget?
+
+==== How to create a custom widget?
+
+=== Table
+
+==== How to add a row?
+
+==== How to change the column title?
+
