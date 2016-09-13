@@ -27,6 +27,7 @@ import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm;
 
 /**
  * @author mzi
@@ -59,6 +60,9 @@ public class SimpleWidgetsOutline extends AbstractOutline {
 
     FormPage checkboxFieldPage = new FormPage(CheckboxFieldForm.class);
     pageList.add(checkboxFieldPage);
+
+    FormPage triStateFieldPage = new FormPage(CheckboxFieldWithTristateForm.class);
+    pageList.add(triStateFieldPage);
 
     FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupFieldForm.class);
     pageList.add(radioButtonFieldPage);

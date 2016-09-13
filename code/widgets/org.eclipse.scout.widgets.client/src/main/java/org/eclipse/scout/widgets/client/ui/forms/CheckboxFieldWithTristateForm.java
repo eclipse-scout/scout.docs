@@ -25,19 +25,19 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.FontStyleLookupCall;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox.CheckboxField;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox.FontNameField;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox.FontStyleField;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox.IsCheckedField;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ConfigurationBox.FontNameField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ConfigurationBox.FontStyleField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ConfigurationBox.ReportedValueField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ConfigurationBox.TriStateField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm.MainBox.ExamplesBox.DisabledField;
 
-public class CheckboxFieldForm extends AbstractForm implements IPageForm {
+public class CheckboxFieldWithTristateForm extends AbstractForm implements IPageForm {
 
-  public CheckboxFieldForm() {
+  public CheckboxFieldWithTristateForm() {
     super();
   }
 
@@ -48,7 +48,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("LabelField");
+    return TEXTS.get("TriStateField");
   }
 
   @Override
@@ -64,10 +64,10 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the CheckboxField
+   * @return the TriStateField
    */
-  public CheckboxField getCheckboxField() {
-    return getFieldByClass(CheckboxField.class);
+  public TriStateField getTriStateField() {
+    return getFieldByClass(TriStateField.class);
   }
 
   /**
@@ -101,10 +101,10 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the IsCheckedField
+   * @return the ReportedValueField
    */
-  public IsCheckedField getIsCheckedField() {
-    return getFieldByClass(IsCheckedField.class);
+  public ReportedValueField getReportedValueField() {
+    return getFieldByClass(ReportedValueField.class);
   }
 
   public MainBox getMainBox() {
@@ -140,6 +140,11 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredTristateEnabled() {
+          return true;
+        }
+
+        @Override
         protected void execChangedValue() {
           getDisabledField().setValue(this.getValue());
         }
@@ -154,13 +159,13 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
+        protected boolean getConfiguredTristateEnabled() {
+          return true;
         }
 
         @Override
-        protected void execInitField() {
-          setChecked(true);
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Disabled");
         }
       }
     }
@@ -179,16 +184,21 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class CheckboxField extends AbstractBooleanField {
+      public class TriStateField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Checkbox");
+          return TEXTS.get("TriStateField");
+        }
+
+        @Override
+        protected boolean getConfiguredTristateEnabled() {
+          return true;
         }
       }
 
       @Order(20)
-      public class IsCheckedField extends AbstractStringField {
+      public class ReportedValueField extends AbstractStringField {
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -197,17 +207,17 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IsChecked");
+          return TEXTS.get("Value");
         }
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return CheckboxFieldForm.MainBox.ConfigurationBox.CheckboxField.class;
+          return CheckboxFieldWithTristateForm.MainBox.ConfigurationBox.TriStateField.class;
         }
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) {
-          setValue(Boolean.toString(getCheckboxField().isChecked()));
+          setValue("" + getTriStateField().getValue());
         }
       }
 
@@ -259,7 +269,7 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         int style = NumberUtility.nvl(getFontStyleField().getValue(), 0);
         FontSpec fs = new FontSpec(name, style, 0);
 
-        getCheckboxField().setFont(fs);
+        getTriStateField().setFont(fs);
       }
     }
 
