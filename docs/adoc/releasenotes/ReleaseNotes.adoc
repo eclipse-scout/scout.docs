@@ -39,3 +39,10 @@ image::{imgsdir}/binary_resource_field.png[]
 [[img-binary_resource_column, Figure 000]]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
+
+== Added tristate capability to checkbox and boolean column
+Added support for tristate to checkbox and boolean column.
+The new property tristateEnabled controls whether the checkbox/column behaves as a normal checkbox (false)
+or a tristate checkbox (true).
+A normal checkbox has values true/false. A tristate checkbox has values true/false/null. The null value is
+interpreted as undefined and rendered as a filled square.
