@@ -273,6 +273,8 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getIndustryColumn().setValue(r, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
           table.getParticipantsColumn().setValue(r, 680L);
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
+          table.getAttendedColumn().setValue(r, null);
+          table.getMixedStateColumn().setValue(r, null);
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
@@ -289,6 +291,8 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getParticipantsColumn().setValue(r, 810L);
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
           table.getAttendedColumn().setValue(r, true);
+          table.getMixedStateColumn().setValue(r, true);
+          table.getPhoneColumn().setValue(r, null);
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
@@ -358,6 +362,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           public AttendedColumn getAttendedColumn() {
             return getColumnSet().getColumnByClass(AttendedColumn.class);
+          }
+
+          public MixedStateColumn getMixedStateColumn() {
+            return getColumnSet().getColumnByClass(MixedStateColumn.class);
           }
 
           @Override
@@ -642,6 +650,35 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               return 120;
             }
 
+          }
+
+          @Order(92)
+          public class MixedStateColumn extends AbstractBooleanColumn {
+
+            @Override
+            protected boolean getConfiguredTristateEnabled() {
+              return true;
+            }
+
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return TEXTS.get("MixedState");
+            }
+
+            @Override
+            protected boolean getConfiguredVisible() {
+              return true;
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 120;
+            }
           }
 
           @Order(100)
