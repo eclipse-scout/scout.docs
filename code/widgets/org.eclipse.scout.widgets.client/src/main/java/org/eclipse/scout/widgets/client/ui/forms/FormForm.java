@@ -43,6 +43,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -95,6 +96,11 @@ public class FormForm extends AbstractForm implements IPageForm {
   @Override
   protected String getConfiguredTitle() {
     return "Form";
+  }
+
+  @Override
+  protected String getConfiguredSubTitle() {
+    return "#1";
   }
 
   @Override
@@ -310,6 +316,11 @@ public class FormForm extends AbstractForm implements IPageForm {
       @Order(40)
       public class TitleBox extends AbstractSequenceBox {
 
+        @Override
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
+        }
+
         @Order(10)
         public class FormTitleField extends AbstractStringField {
 
@@ -407,7 +418,11 @@ public class FormForm extends AbstractForm implements IPageForm {
                   case PopupWindow: {
                     FormForm form = new FormForm();
                     form.setTitle(getFormTitleField().getValue());
-                    form.setSubTitle(getFormSubTitleField().getValue());
+                    String newSubTitle = StringUtility.nvl(getFormSubTitleField().getValue(), "");
+                    if (newSubTitle.matches("^#\\d+$")) {
+                      newSubTitle = "#" + (Integer.parseInt(newSubTitle.substring(1)) + 1);
+                    }
+                    form.setSubTitle(newSubTitle);
                     form.setDisplayHint(displayHint.getValue());
                     DisplayViewId viewId = getDisplayViewIdField().getValue();
                     if (viewId != null) {
