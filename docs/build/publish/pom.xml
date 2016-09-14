@@ -174,8 +174,7 @@
 							<helpContexts>
 								<helpContext>
 									<id>scout_wizard_new_project_page_context</id>
-									<description>This wizard creates a new Scout helloworld
-										project.</description>
+									<description>This wizard creates a new Scout helloworld project.</description>
 									<topicPages>
 										<topicPage>sdk_wizard_project.html</topicPage>
 										<topicPage>tutorial_helloworld.html</topicPage>
@@ -197,8 +196,7 @@
 								</helpContext>
 								<helpContext>
 									<id>scout_wizard_nls-entry_page_context</id>
-									<description>This wizard creates or modifies a nls entry to
-										localize the user interface.</description>
+									<description>This wizard creates or modifies a nls entry to localize the user interface.</description>
 									<topicPages>
 										<topicPage>sdk_wizard_nls-entry.html</topicPage>
 									</topicPages>
@@ -226,8 +224,7 @@
 								</helpContext>
 								<helpContext>
 									<id>scout_wizard_language_page_context</id>
-									<description>This wizard creates an additional translation file
-										in order to localize the user interface.</description>
+									<description>This wizard creates an additional translation file in order to localize the user interface.</description>
 									<topicPages>
 										<topicPage>sdk_wizard_language.html</topicPage>
 									</topicPages>

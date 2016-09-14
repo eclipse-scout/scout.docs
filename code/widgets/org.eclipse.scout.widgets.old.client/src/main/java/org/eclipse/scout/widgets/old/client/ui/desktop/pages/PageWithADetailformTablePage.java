@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
@@ -22,8 +23,8 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
-import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
+import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm;
 
 public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWithADetailformTablePage.Table> {
 
@@ -49,10 +50,10 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
   @Override
   protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
-        {1, "Exxon Mobil Corporation", "XOM"},
-        {2, "IBM", "IBM"},
-        {3, "UBS", "UBS"},
-        {4, "Coca-Cola Company", "KO"}});
+        {1, "Exxon Mobil Corporation", "XOM", 1},
+        {2, "IBM", "IBM", 2},
+        {3, "UBS", "UBS", 3},
+        {4, "Coca-Cola Company", "KO", 55}});
   }
 
   public class Table extends AbstractTable {
@@ -65,9 +66,13 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       return getColumnSet().getColumnByClass(SymbolColumn.class);
     }
 
+    public NumberColumn getNumberColumn() {
+      return getColumnSet().getColumnByClass(NumberColumn.class);
+    }
+
     @Override
     protected boolean getConfiguredAutoResizeColumns() {
-      return true;
+      return false;
     }
 
     @Override
@@ -104,6 +109,16 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Symbol");
       }
+    }
+
+    @Order(40)
+    public class NumberColumn extends AbstractIntegerColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("IntegerColumn");
+      }
+
     }
 
     @Order(10)

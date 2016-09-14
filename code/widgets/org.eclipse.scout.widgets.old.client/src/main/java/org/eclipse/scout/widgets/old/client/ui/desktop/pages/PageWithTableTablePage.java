@@ -100,7 +100,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     @Override
     protected boolean getConfiguredAutoResizeColumns() {
-      return true;
+      return false;
     }
 
     public BooleanColumn getBooleanColumn() {
