@@ -20,14 +20,11 @@ ifndef::mdledir[:mdledir: .]
 
 = What's New
 
-== Mnemonics
-Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.
-
 == Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element.
 
-== Binary resources in different widgets
+== Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
 * HtmlField
 * BeanField
@@ -40,9 +37,14 @@ image::{imgsdir}/binary_resource_field.png[]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
-== Added tristate capability to checkbox and boolean column
+== Tristate capability for checkbox and boolean column
 Added support for tristate to checkbox and boolean column.
+
 The new property tristateEnabled controls whether the checkbox/column behaves as a normal checkbox (false)
 or a tristate checkbox (true).
+
 A normal checkbox has values true/false. A tristate checkbox has values true/false/null. The null value is
 interpreted as undefined and rendered as a filled square.
+
+== Mnemonics
+Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.

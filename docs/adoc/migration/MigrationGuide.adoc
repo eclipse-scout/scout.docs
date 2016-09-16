@@ -217,3 +217,10 @@ Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since 
 There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.
 
 If such functionality is needed, it has to be programmed with java script within the browser.
+
+== FinalValue
+setIfAbsent has been renamed to setIfAbsentAndGet. setIfAbsent now returns a boolean denoting, if a value was set or not.
+
+== @PostConstruct
+A method annotated with @PostConstruct in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.
+
