@@ -74,7 +74,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
         .withSubject(subject.get());
 
     return superUserRunContext
-        .withSession(session.setIfAbsent(new Callable<IServerSession>() {
+        .withSession(session.setIfAbsentAndGet(new Callable<IServerSession>() {
 
           @Override
           public IServerSession call() throws Exception {
