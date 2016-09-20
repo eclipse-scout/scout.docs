@@ -30,9 +30,6 @@ public class ClientSession extends AbstractClientSession {
     super(true);
   }
 
-  /**
-   * @return session in current ThreadContext
-   */
   public static ClientSession get() {
     return ClientSessionProvider.currentSession(ClientSession.class);
   }
