@@ -147,7 +147,7 @@ Then, perform the following changes in class `Desktop`
 
 * Delete inner class `SettingOutlineViewButton`
 * Rename inner class WorkOutlineViewButton to `ContactOutlineViewButton`
-* Rename FileMenu to `QuickAccesMenu`, let `getConfiguredText` return "Quick Access" and delete the remaining content.
+* Rename FileMenu to `QuickAccessMenu`, let `getConfiguredText` return "Quick Access" and delete the remaining content.
 * Rename BookmarkMenu to `OptionsMenu`. Add methods `getConfiguredText` and  `getConfiguredIconId` according to <<lst-contacts_desktop>>.
 * Change HelpMenu to `UserMenu`. Remove method `getConfiguredText` and add method `getConfiguredIconId` that returns `AbstractIcons.Person`.
 
@@ -160,7 +160,7 @@ At the end of these changes the inner class structure of class Desktop will look
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
 ----
 
-<1> In your implementation `QuickAccesMenu` should extend `AbstractMenu`
+<1> In your implementation `QuickAccessMenu` should extend `AbstractMenu`
 <2> In your implementation `UserMenu` should extend `AbstractMenu`
 
 [[sec-contacts_default_theme]]
