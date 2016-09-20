@@ -656,7 +656,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           public class MixedStateColumn extends AbstractBooleanColumn {
 
             @Override
-            protected boolean getConfiguredTristateEnabled() {
+            protected boolean getConfiguredTriStateEnabled() {
               return true;
             }
 

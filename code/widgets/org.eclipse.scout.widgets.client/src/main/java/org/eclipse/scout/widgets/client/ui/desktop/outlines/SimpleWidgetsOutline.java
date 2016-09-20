@@ -17,8 +17,8 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
+import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm;
@@ -27,7 +27,6 @@ import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldWithTristateForm;
 
 /**
  * @author mzi
@@ -58,11 +57,9 @@ public class SimpleWidgetsOutline extends AbstractOutline {
     FormPage dateTimeFieldPage = new FormPage(DateTimeFieldsForm.class);
     pageList.add(dateTimeFieldPage);
 
-    FormPage checkboxFieldPage = new FormPage(CheckboxFieldForm.class);
-    pageList.add(checkboxFieldPage);
-
-    FormPage triStateFieldPage = new FormPage(CheckboxFieldWithTristateForm.class);
-    pageList.add(triStateFieldPage);
+    FormPage booleanFieldPage = new FormPage(BooleanFieldForm.class);
+    booleanFieldPage.getCellForUpdate().setText("BooleanField (CheckBox)");
+    pageList.add(booleanFieldPage);
 
     FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupFieldForm.class);
     pageList.add(radioButtonFieldPage);

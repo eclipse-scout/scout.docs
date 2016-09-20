@@ -44,7 +44,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
-import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
 
@@ -441,7 +441,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     }
 
     @Order(50)
-    public class FormMenu extends AbstractFormMenu<CheckboxFieldForm> {
+    public class FormMenu extends AbstractFormMenu<BooleanFieldForm> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -452,15 +452,14 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       }
 
       @Override
-      protected Class<CheckboxFieldForm> getConfiguredForm() {
-        return CheckboxFieldForm.class;
+      protected Class<BooleanFieldForm> getConfiguredForm() {
+        return BooleanFieldForm.class;
       }
 
       @Override
       protected String getConfiguredText() {
         return "Form-Menu";
       }
-
     }
 
     @Order(20)

@@ -37,14 +37,14 @@ image::{imgsdir}/binary_resource_field.png[]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
-== Tristate capability for checkbox and boolean column
-Added support for tristate to checkbox and boolean column.
+== TriState capability for check boxes
+Added support for tri-state value (`true`, `false` and `null` instead of just `true` and `false`) to boolean field and boolean column.
 
-The new property tristateEnabled controls whether the checkbox/column behaves as a normal checkbox (false)
-or a tristate checkbox (true).
+The new property `triStateEnabled` controls whether the boolean field/column behaves as a normal checkbox (false)
+or a tri-state checkbox (true).
 
-A normal checkbox has values true/false. A tristate checkbox has values true/false/null. The null value is
-interpreted as undefined and rendered as a filled square.
+A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is
+interpreted as "undefined" and rendered as a filled square.
 
 == Mnemonics
 Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.
