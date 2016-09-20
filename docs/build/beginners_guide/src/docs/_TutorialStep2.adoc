@@ -190,7 +190,7 @@ As an example for such a column <<lst-contacts_PhoneColumn>> is provided below.
 [source,java]
 .Implementation of the (initially invisible) phone column.
 ----
-include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage	.java[tags=PhoneColumn]
+include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/person/PersonTablePage.java[tags=PhoneColumn]
 ----
 
 <1> Returning `false` hides the column initially. Using the table control the user can then make this column visible in the user interface.	
