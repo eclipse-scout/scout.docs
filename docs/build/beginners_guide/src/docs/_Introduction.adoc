@@ -40,7 +40,7 @@ The modularization into slices is controlled by different business needs such as
 The goals of the Scout framework can be summarized as follows.
 
 * Boost developer productivity
-* Make the framwork simple to learn
+* Make the framework simple to learn
 * Support building large applications with long life spans 
 
 Boosting developer productivity is of a very high importance and developers should be able to focus on the business value of the application. 
