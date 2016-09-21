@@ -154,7 +154,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <1> Returning `false` here makes this column invisible. As this column will be excluded from the table control the user is not aware of the existence of this column. 
 <2> Returning `true` marks this attibute as a primary key (or part of a primary key) 
 
-We can now add the additional columns `FirstNameColumn`, `FirstNameColumn`, `LastNameColumn`, `CityColumn` below. 
+We can now add the additional columns `FirstNameColumn`, `LastNameColumn`, `CityColumn` below. 
 After entering the class name press kbd:[Tab] twice to move the cursor to the label text of the field. 
 In the case of the first name enter "FirstName" and hit kbd:[Ctrl+Space] to open the wizard to add the translated text "First Name" as described in <<sec-add_text_entry>>.
  
