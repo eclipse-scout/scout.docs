@@ -194,7 +194,7 @@ We will add these inner codes as the next step.
 include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/GenderCodeType.java[tags=all]
 ----
 
-To add inner class `MaleCode` code to the gender code type perform the steps below.
+To add an inner class `MaleCode` code to the gender code type perform the steps below.
 
 . Press kbd:[Ctrl+Space] and select the [element]_Code_ proposal with a double click
 . Enter "Male" into the first box to be used in the `MaleCode` class name
