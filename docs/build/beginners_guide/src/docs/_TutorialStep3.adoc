@@ -84,7 +84,7 @@ Moving from a in-memory setup to a disk based database is then possible without 
 The Scout backend (and frontent) applications initialize config properties from matching values found in file `config.properties`.
 For missing property values the default values defined in the config property classes are used. 
 
-In the case of the "Contacts" application the config property files are located in the subfolder `src/main/resrouces` of the Maven modules that specify the frontend and the backend application. 
+In the case of the "Contacts" application the config property files are located in the subfolder `src/main/resources` of the Maven modules that specify the frontend and the backend application. 
 
 * Expand Maven module `org.eclipse.scout.contacts.server.app.dev`
 * Expand subfolder `src/main/resources`
