@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 
 In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface. 
-This tutorial steps also also provides an introduction into the design and implementation complex form layouts with the Scout framework.
+This tutorial step also provides an introduction into the design and implementation complex form layouts with the Scout framework.
 
 Before we start with the actual implementation of the form section <<sec-contacts_form_design>> provides an introduction to the layouting concepts of the Scout framework. 
 Based on this information we design a hierarchical form layout for the person form and can then dive into the creation of the person form.
@@ -64,7 +64,7 @@ In the next section we will start to implement the person form with the layout d
 ==== Implementing the Form
 
 In this section we implement the person form with its container widgets as described in the previous section.
-To be able to use the form to create and edit persons we will "New" and "Edit" context menus to the table in the person page. 
+To be able to use the form to create and edit persons we will add "New" and "Edit" context menus to the table in the person page. 
 Finally we will also add a "Create Person" entry to the the "Quick Access" top level menu of the application.   
 
 Start the form creation with the Scout new form wizard following the steps listed below.
@@ -104,7 +104,7 @@ First add class `GeneralBox` using the Scout content assist selecting the [eleme
 Delete method `getConfiguredLabel`, as we are only using this group box to organize fields. 
   
 After the general box add a tab box container class  by choosing the [element]_Tab Box_ proposal in the Scout content assist. 
-Inside of class `DetailsBox` create the individual tab contai`DetailsBox`ners "Contact Info", "Work" and "Notes" as as inner classes of the details box according to <<lst-contacts_form_layout>>.
+Inside of class `DetailsBox` create the individual tab containers "Contact Info", "Work" and "Notes" as inner classes of the details box according to <<lst-contacts_form_layout>>.
 
 [[lst-contacts_form_layout, Listing PersonForm layout]]
 [source,java]
@@ -194,7 +194,7 @@ We will add these inner codes as the next step.
 include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/eclipse/scout/contacts/shared/person/GenderCodeType.java[tags=all]
 ----
 
-To add inner class `MaleCode` code to the gender code type perform the steps below.
+To add an inner class `MaleCode` code to the gender code type perform the steps below.
 
 . Press kbd:[Ctrl+Space] and select the [element]_Code_ proposal with a double click
 . Enter "Male" into the first box to be used in the `MaleCode` class name
@@ -234,9 +234,9 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 Using the combination of the `PictureField` and `PictureUrlField` as its master field has two benefits. 
 First, having a field that contains the the URL makes sure that this information is also stored in the form data and second, the method `execChangedMasterValue` can then be used to trigger the refresh of the actual picture when the picture URL is changed. 
 
-The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_picture_field>> into the code below the picture field. 
+The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_general_fields>> into the code below the picture field. 
 
-[[lst-contacts_picture_field, Listing general fields]]
+[[lst-contacts_general_fields, Listing general fields]]
 [source,java]
 .The other fields in the general box. 
 ----
@@ -338,8 +338,8 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 ----
 
 <1> Obtains a reference to the person service located on the Scout backend application.
-<2> All form field values are transferred the form data. In this case the person primary key property will be transferred to the form data. Remember that we have set this key in the "Edit" context menu.
-<3> The form data (including the person primary key) is sent to the `load` method. the load method returns the person data from the backend.
+<2> All form field values are transferred to the form data. In this case the person primary key property will be transferred to the form data. Remember that we have set this key in the "Edit" context menu.
+<3> The form data (including the person primary key) is sent to the `load` method. The load method returns the person data from the backend.
 <4> The field values in the form data are loaded into the form fields of the person form.
 <5> The sub title on the view tab of the form is updated to reflect the name of the person.
 <6> Calls the `store` method of the person service providing the updated person data.
