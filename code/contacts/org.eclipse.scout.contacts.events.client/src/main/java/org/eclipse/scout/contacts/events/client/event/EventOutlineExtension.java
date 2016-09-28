@@ -32,7 +32,7 @@ public class EventOutlineExtension extends AbstractOutlineExtension<ContactOutli
   }
 
   @Override
-  public void execAutoCheckChildNodes(TreeAutoCheckChildNodesChain chain, List<ITreeNode> nodes) {
+  public void execAutoCheckChildNodes(TreeAutoCheckChildNodesChain chain, List<ITreeNode> nodes, boolean checked, boolean enabledNodesOnly) {
   }
 
   @Override

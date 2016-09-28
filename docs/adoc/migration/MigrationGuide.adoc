@@ -224,3 +224,5 @@ setIfAbsent has been renamed to setIfAbsentAndGet. setIfAbsent now returns a boo
 == @PostConstruct
 A method annotated with @PostConstruct in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.
 
+== Tree
+The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the default implementation now considers `enabledNodesOnly` and does not always ignore disabled nodes.
