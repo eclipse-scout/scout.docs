@@ -201,7 +201,7 @@ The following methods were or will be removed:
 * `strings.removeMnemonic`
 * `strings.removeAmpersand`
 
-== Changes in objectType syntax and scout.create() [JS] ==
+== Changes in objectType syntax and scout.create() [JS]
 
 The "objectType" is a string describing which JavaScipt "class" to use when creating an object instance using `scout.create()` (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from `.` to `:`. The namespace separator remains `.`. This allows the following forms of object types:.
 
@@ -226,3 +226,21 @@ A method annotated with @PostConstruct in a Bean is now guaranteed to run exactl
 
 == Tree
 The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the default implementation now considers `enabledNodesOnly` and does not always ignore disabled nodes.
+
+== Changed behavior of scout.HtmlComponent() constructor function [JS]
+The constructor function scout.HtmlComponent() no longer links the $comp to the new instance. Instead, the static function scout.HtmlComponent.install() should be used to create a new HtmlComponent and link it to $comp. The constructor function should never be used anymore in custom code. (If you do, you will get errors.)
+
+The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.
+
+*Migration:* Check all _*.js_ files in your project for occurences of `new scout.HtlmComponent` and replace them with `scout.HtmlComponent.install`.
+
+[source,javascript]
+----
+  // Old, do not use anymore!
+  this.$container = $parent.appendDiv('my-widget');
+  new scout.HtmlComponent(this.$container, this.session);
+
+  // New, change your code to this (no change in first line):
+  this.$container = $parent.appendDiv('my-widget');
+  scout.HtmlComponent.install(this.$container, this.session);
+----

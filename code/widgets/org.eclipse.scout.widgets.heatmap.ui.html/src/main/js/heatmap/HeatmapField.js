@@ -18,7 +18,7 @@ scout.HeatmapField.prototype._render = function($parent) {
   // get smaller than that, because Leaflet.js throws an error when the drawing canvas has size 0.
   // After the initial rendering, this condition is ensured by HeapmapFieldLayout.js.
   scout.graphics.setSize($field, new scout.Dimension(1, 1));
-  var fieldHtmlComp = new scout.HtmlComponent($field, this.session);
+  var fieldHtmlComp = scout.HtmlComponent.install($field, this.session);
   fieldHtmlComp.setLayout(new scout.HeatmapFieldLayout(this));
 
   this.heatmap = L.map(heatmapId, {
