@@ -1,0 +1,112 @@
+{
+   "id":"jswidgets.CarouselForm",
+   "objectType":"Form",
+   "displayHint":"view",
+   "rootGroupBox":{
+      "id":"MainBox",
+      "mainBox":true,
+      "objectType":"GroupBox",
+      "fields":[
+         {
+            "id":"DetailBox",
+            "objectType":"GroupBox",
+            "gridColumnCount":1,
+            "fields":[
+               {
+                  "id":"Carousel",
+                  "objectType":"Carousel",
+                  "gridDataHints":{
+                     "h":2
+                  },
+                  "widgets":[
+                     {
+                      "id": "CarouselItem1",
+                        "objectType":"Form",
+                        "displayHint":"view",
+                        "modal":false,
+                        "rootGroupBox":{
+                           "id":"MainBox",
+                           "mainBox":true,
+                           "objectType":"GroupBox",
+                           "fields":[
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 1"
+                              },
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 2"
+                              }
+                           ]
+                        }
+                     },
+                     {
+                        "id": "CarouselItem2",
+                        "objectType":"Form",
+                        "displayHint":"view",
+                        "modal":false,
+                        "rootGroupBox":{
+                           "id":"MainBox",
+                           "mainBox":true,
+                           "objectType":"GroupBox",
+                           "fields":[
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 3"
+                              },
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 4"
+                              }
+                           ]
+                        }
+                     },
+                     {
+                        "id": "CarouselItem3",
+                        "objectType":"Form",
+                        "displayHint":"view",
+                        "modal":false,
+                        "rootGroupBox":{
+                           "id":"MainBox",
+                           "mainBox":true,
+                           "objectType":"GroupBox",
+                           "fields":[
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 5"
+                              },
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 6"
+                              }
+                           ]
+                        }
+                     },
+                     {
+                        "id": "CarouselItem4",
+                        "objectType":"Form",
+                        "displayHint":"view",
+                        "modal":false,
+                        "rootGroupBox":{
+                           "id":"MainBox",
+                           "mainBox":true,
+                           "objectType":"GroupBox",
+                           "fields":[
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 7"
+                              },
+                              {
+                                 "objectType":"StringField",
+                                 "label":"Field 8"
+                              }
+                           ]
+                        }
+                     }
+                  ]
+               }
+            ]
+         }
+      ]
+   }
+}

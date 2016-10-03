@@ -1,11 +1,20 @@
 {
   "id": "jswidgets.FormFieldOutline",
   "title": "${textKey:FormFields}",
-  "nodes": [{
-    "objectType": "PageWithNodes",
-    "text": "${textKey:TableField}",
-    "detailForm": {
-      "objectType": "jswidgets.TableFieldForm"
+  "nodes": [
+    {
+      "objectType": "PageWithNodes",
+      "text": "${textKey:Carousel}",
+      "detailForm": {
+        "objectType": "jswidgets.CarouselForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "text": "${textKey:TableField}",
+      "detailForm": {
+        "objectType": "jswidgets.TableFieldForm"
+      }
     }
-  }]
+  ]
 }
