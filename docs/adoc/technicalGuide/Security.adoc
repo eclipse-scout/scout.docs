@@ -115,7 +115,7 @@ Since Java Servlet 3.0 specification this property can be set in the configurati
 ----
 <1> The Secure flag activated
 
-This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is hardly recommended).
+This of course only makes sense if the application is exposed to the end user using an encrypted channel like https://en.wikipedia.org/wiki/HTTPS[HTTPS] (which is strongly recommended).
 
 Unfortunately for the UI server it is not possible to detect if an application uses a secured channel. Consider the following example: The servlet container is protected by a reverse proxy. The communication between the user agent and the proxy is encrypted while the channel between the proxy and the servlet container is not. In this scenario the container cannot know that from a user agent point of view the channel is secured.
 
