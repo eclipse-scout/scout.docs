@@ -244,3 +244,7 @@ The new static method makes it clearer that it will alter the state of $comp. Fo
   this.$container = $parent.appendDiv('my-widget');
   scout.HtmlComponent.install(this.$container, this.session);
 ----
+
+== CookieUtility
+
+`CookieUtility` was moved from _org.eclipse.scout.rt.ui.html_ to _org.eclipse.scout.rt.server.commons_. Migrate by updating your imports. The Method `addCookie()` is now called `addPersistentCookie()`. Additional methods are available (to add a session cookie, or delete an existing cookie).
