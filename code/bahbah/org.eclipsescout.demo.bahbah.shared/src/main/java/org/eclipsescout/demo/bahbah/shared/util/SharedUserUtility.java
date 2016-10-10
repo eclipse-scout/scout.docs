@@ -41,11 +41,11 @@ public class SharedUserUtility {
     }
   }
 
-  public static void checkPassword(String password) {
-    if (StringUtility.length(password) < MIN_PASSWORD_LENGTH) {
+  public static void checkPassword(char[] password) {
+    if (password == null || password.length < MIN_PASSWORD_LENGTH) {
       throw new VetoException(TEXTS.get("PasswordMinLength", "" + MIN_PASSWORD_LENGTH));
     }
-    if (StringUtility.length(password) > MAX_PASSWORD_LENGTH) {
+    if (password.length > MAX_PASSWORD_LENGTH) {
       throw new VetoException();
     }
   }

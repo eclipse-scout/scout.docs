@@ -40,7 +40,7 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
       }
 
       @Override
-      public void check(String userId, String newPassword, String userName, int historyIndex) {
+      public void check(String userId, char[] newPassword, String userName, int historyIndex) {
         SharedUserUtility.checkPassword(newPassword);
         SharedUserUtility.checkUsername(userName);
       }
@@ -56,7 +56,7 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
   }
 
   @Override
-  protected void checkAccess(String userId, String password) {
+  protected void checkAccess(String userId, char[] password) {
     if (!ACCESS.check(new ResetPasswordPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
@@ -70,12 +70,12 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
   }
 
   @Override
-  protected int getHistoryIndexFor(String userId, String password) {
+  protected int getHistoryIndexFor(String userId, char[] password) {
     return 0;
   }
 
   @Override
-  protected void resetPasswordInternal(String userId, String newPassword) {
+  protected void resetPasswordInternal(String userId, char[] newPassword) {
     Long u_id = Long.parseLong(userId);
     UserUtility.resetPassword(u_id, newPassword);
   }

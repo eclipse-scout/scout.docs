@@ -158,7 +158,11 @@ public class UserForm extends AbstractForm {
 
         @Override
         protected String execValidateValue(String rawValue) {
-          SharedUserUtility.checkPassword(rawValue);
+          char[] chars = null;
+          if (rawValue != null) {
+            chars = rawValue.toCharArray();
+          }
+          SharedUserUtility.checkPassword(chars);
           return rawValue;
         }
       }

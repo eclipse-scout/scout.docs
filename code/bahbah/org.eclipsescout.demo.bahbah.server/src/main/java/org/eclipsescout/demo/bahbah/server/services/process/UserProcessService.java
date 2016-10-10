@@ -73,7 +73,7 @@ public class UserProcessService implements IUserProcessService {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
 
-    UserUtility.createNewUser(formData.getUsername().getValue(), formData.getPassword().getValue(), formData.getUserRole().getValue());
+    UserUtility.createNewUser(formData.getUsername().getValue(), formData.getPassword().getValue().toCharArray(), formData.getUserRole().getValue());
   }
 
   @Override

@@ -26,17 +26,19 @@ import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 public class UserUtility extends SharedUserUtility {
 
-  public static boolean createNewUser(String username, String password) {
+  private static final int HASH_ITERATIONS = 20000;
+
+  public static boolean createNewUser(String username, char[] password) {
     return createNewUser(username, password, UserRoleCodeType.UserCode.ID);
   }
 
-  public static boolean createNewUser(String username, String password, Integer permission) {
+  public static boolean createNewUser(String username, char[] password, Integer permission) {
     checkUsername(username);
     checkPassword(password);
     checkPermissionId(permission);
 
     byte[] bSalt = SecurityUtility.createRandomBytes();
-    byte[] bHash = SecurityUtility.hash(password.getBytes(StandardCharsets.UTF_8), bSalt);
+    byte[] bHash = SecurityUtility.hashPassword(password, bSalt, HASH_ITERATIONS);
 
     String salt = Base64Utility.encode(bSalt);
     String digest = Base64Utility.encode(bHash);
@@ -50,7 +52,7 @@ public class UserUtility extends SharedUserUtility {
     return true;
   }
 
-  public static void resetPassword(Long u_Id, String newPassword) {
+  public static void resetPassword(Long u_Id, char[] newPassword) {
     checkPassword(newPassword);
     if (!UserRoleCodeType.AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
       // I am not an administrator -> can only reset my own password
@@ -61,7 +63,7 @@ public class UserUtility extends SharedUserUtility {
     }
 
     byte[] bSalt = SecurityUtility.createRandomBytes();
-    byte[] bHash = SecurityUtility.hash(newPassword.getBytes(StandardCharsets.UTF_8), bSalt);
+    byte[] bHash = SecurityUtility.hashPassword(newPassword, bSalt, HASH_ITERATIONS);
 
     String salt = Base64Utility.encode(bSalt);
     String digest = Base64Utility.encode(bHash);

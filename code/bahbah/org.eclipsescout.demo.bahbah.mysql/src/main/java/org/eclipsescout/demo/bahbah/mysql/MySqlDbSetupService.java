@@ -44,7 +44,7 @@ public class MySqlDbSetupService implements IDbSetupService {
       SQL.commit();
 
       // create first admin account
-      UserUtility.createNewUser("admin", "admin", UserRoleCodeType.AdministratorCode.ID);
+      UserUtility.createNewUser("admin", "admin".toCharArray(), UserRoleCodeType.AdministratorCode.ID);
       SQL.commit();
     }
 
