@@ -71,7 +71,7 @@ public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
       }
     }
     if (outlineToActivate == null) {
-      return;
+      throw new DeepLinkException("outline could not be resolved for widget: " + widgetName);
     }
     if (desktop.getOutline() != outlineToActivate) {
       desktop.activateOutline(outlineToActivate);
