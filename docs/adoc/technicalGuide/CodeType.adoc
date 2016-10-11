@@ -17,7 +17,7 @@ A CodeType is a structure to represent a tree key-code association. They are use
 * extends: `AbstractCodeType<T>`
 
 === Description
-CodeTypes are used in https://wiki.eclipse.org/Scout/Concepts/SmartField[SmartField] to let the user choose between a finite list of values. The value stored by the field correspond to the key of the selected code.
+CodeTypes are used in https://wiki.eclipse.org/Scout/Concepts/SmartField[SmartField] to let the user choose between a finite list of values. The value stored by the field corresponds to the key of the selected code.
 
 image::{imgsdir}/Scout_SmartField_Hierarchy_SWT.png[]
 
