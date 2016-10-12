@@ -34,9 +34,9 @@ function is called on an extended object, the functions are called on the regist
 first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the
 last element of the chain is the original (extended) object.
 
-The base class for all extensions is +scout.Extension+. This class is used to extend an existing
+The base class for all extensions is `scout.Extension`. This class is used to extend an existing
 Scout object. In order to use the extension feature you must subclass +scout.Extension+ and
-implement an +init+ function, where you register the functions you want to extend. Example:
+implement an `init` function, where you register the functions you want to extend. Example:
 
 [source,javascript]
 ----
@@ -64,7 +64,7 @@ next:: is a reference to the next extended function or the original function of 
   in case the current extension is the last extension in the extension chain.
 extended:: is the extended or original object.
 
-All extensions must be registered in the +installExtensions+ function of your +scout.App+.
+All extensions must be registered in the `installExtensions` function of your `scout.App`.
 Example:
 
 [source,javascript]
