@@ -405,7 +405,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
-        getFieldByClass(TableField.class).setEnabled(!isSelected());
+        getFieldByClass(TableField.class).setEnabled(!isSelected(), true, true);
       }
     }
 
@@ -772,15 +772,14 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
       @Override
       protected void execClickAction() {
         getMainBox().visitFields(new IFormFieldVisitor() {
-
           @Override
           public boolean visitField(IFormField field, int level, int fieldIndex) {
             if (field instanceof IValueField<?>) {
-              field.setEnabled(!isSelected());
+              field.setEnabled(!isSelected(), true, true);
             }
             return true;
           }
-        }, 0);
+        });
 //        getFieldByClass(CountrySmartField.class).setEnabled(isSelected());
       }
 

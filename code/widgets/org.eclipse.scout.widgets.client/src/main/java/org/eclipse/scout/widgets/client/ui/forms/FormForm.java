@@ -260,8 +260,8 @@ public class FormForm extends AbstractForm implements IPageForm {
           protected void execChangedValue() {
             DisplayHint displayHint = (getValue() != null ? getValue() : DisplayHint.Dialog);
             getOpenFormButton().setLabel("Open " + displayHint.name());
-            getDisplayViewIdField().setEnabled(displayHint == DisplayHint.View);
-            getFormTitleField().setEnabled(CompareUtility.isOneOf(displayHint, DisplayHint.Dialog, DisplayHint.View, DisplayHint.PopupWindow));
+            getDisplayViewIdField().setEnabled(displayHint == DisplayHint.View, true, true);
+            getFormTitleField().setEnabled(CompareUtility.isOneOf(displayHint, DisplayHint.Dialog, DisplayHint.View, DisplayHint.PopupWindow), true, true);
           }
         }
 

@@ -249,8 +249,8 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected int getConfiguredHorizontalAlignment() {
-        return 1;
+      protected byte getConfiguredHorizontalAlignment() {
+        return HORIZONTAL_ALIGNMENT_RIGHT;
       }
 
       @Override
@@ -274,8 +274,8 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected int getConfiguredHorizontalAlignment() {
-        return 1;
+      protected byte getConfiguredHorizontalAlignment() {
+        return HORIZONTAL_ALIGNMENT_RIGHT;
       }
 
       @Override
@@ -466,7 +466,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
                 }
               }
               if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
-                field.setEnabled(!field.isEnabled());
+                field.setEnabled(!field.isEnabled(), true, true);
               }
               return true;
             }
@@ -664,8 +664,8 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 1;
+        protected byte getConfiguredHorizontalAlignment() {
+          return HORIZONTAL_ALIGNMENT_RIGHT;
         }
 
         @Override
@@ -689,8 +689,8 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 1;
+        protected byte getConfiguredHorizontalAlignment() {
+          return HORIZONTAL_ALIGNMENT_RIGHT;
         }
 
         @Override

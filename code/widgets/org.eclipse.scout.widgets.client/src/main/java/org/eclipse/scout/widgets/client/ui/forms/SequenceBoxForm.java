@@ -511,7 +511,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected int getConfiguredLabelPosition() {
+            protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_ON_FIELD;
             }
           }
@@ -525,7 +525,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected int getConfiguredLabelPosition() {
+            protected byte getConfiguredLabelPosition() {
               return LABEL_POSITION_ON_FIELD;
             }
           }
@@ -845,7 +845,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1050,7 +1050,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1166,7 +1166,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1180,7 +1180,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1212,7 +1212,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1270,7 +1270,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }
@@ -1386,7 +1386,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected int getConfiguredLabelPosition() {
+          protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
           }
         }

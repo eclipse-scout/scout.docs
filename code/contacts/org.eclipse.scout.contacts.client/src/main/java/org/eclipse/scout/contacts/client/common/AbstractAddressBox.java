@@ -109,7 +109,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       }
 
       @Override
-      protected int getConfiguredLabelPosition() {
+      protected byte getConfiguredLabelPosition() {
         return LABEL_POSITION_ON_FIELD;
       }
 
@@ -133,7 +133,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
       }
 
       @Override
-      protected int getConfiguredLabelPosition() {
+      protected byte getConfiguredLabelPosition() {
         return LABEL_POSITION_ON_FIELD;
       }
 

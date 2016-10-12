@@ -431,12 +431,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredLabelHorizontalAlignment() {
-          return -1;
+        protected byte getConfiguredLabelHorizontalAlignment() {
+          return LABEL_HORIZONTAL_ALIGNMENT_LEFT;
         }
 
         @Override
-        protected int getConfiguredLabelPosition() {
+        protected byte getConfiguredLabelPosition() {
           return LABEL_POSITION_ON_FIELD;
         }
       }
@@ -445,8 +445,8 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       public class LabelLeftField extends AbstractStringField {
 
         @Override
-        protected int getConfiguredLabelHorizontalAlignment() {
-          return -1;
+        protected byte getConfiguredLabelHorizontalAlignment() {
+          return LABEL_HORIZONTAL_ALIGNMENT_LEFT;
         }
 
         @Override
@@ -464,8 +464,8 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredLabelHorizontalAlignment() {
-          return 0;
+        protected byte getConfiguredLabelHorizontalAlignment() {
+          return LABEL_HORIZONTAL_ALIGNMENT_CENTER;
         }
       }
 
@@ -478,8 +478,8 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredLabelHorizontalAlignment() {
-          return 1;
+        protected byte getConfiguredLabelHorizontalAlignment() {
+          return LABEL_HORIZONTAL_ALIGNMENT_RIGHT;
         }
       }
     }
@@ -820,7 +820,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() {
-          getTextInputField().setEnabled(getValue());
+          getTextInputField().setEnabled(getValue(), true, true);
         }
 
       }

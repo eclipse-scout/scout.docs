@@ -211,7 +211,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getHtmlField().setEnabled(getValue());
+          getHtmlField().setEnabled(getValue(), true, true);
         }
       }
 

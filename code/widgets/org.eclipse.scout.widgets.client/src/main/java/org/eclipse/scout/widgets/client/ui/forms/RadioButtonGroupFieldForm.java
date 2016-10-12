@@ -221,7 +221,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
 
           // TODO [5.2] jgu: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
           for (IRadioButton<Long> button : getButtons()) {
-            button.setEnabled(false);
+            button.setEnabled(false, true, true);
           }
         }
       }

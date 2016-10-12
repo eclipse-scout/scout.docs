@@ -85,6 +85,15 @@ The class `BrowserInfo` was renamed to a more generic `HttpClientInfo` name, sin
 
 Futher the `HttpClientInfo` instance for each request is cached on the current HTTP session, if a session is available. Use the new `HttpClientInfo get(HttpServletRequest request)` method to get the cached HTTP client info.
 
+
+=== Enabled Property of Form Fields
+The inheritance of the enabled property of form fields has been changed so that changing this property on a composite field does no longer automatically propagate the value to the children.
+Instead a form field is only considered to be enabled if all parent fields are enabled too.
+
+To have the same behaviour you can use the method `formField.setEnabled(yourValue, true /* update parents \*/, true /* update children */)` which also propagates the value to parent and child fields.
+The same method also exists for the enabled-granted property: `formField.setEnabledGranted(yourValue, true, true)`.
+However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.
+
 // ^^^
 // Insert descriptions of Java API changes here
 

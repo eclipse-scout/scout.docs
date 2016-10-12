@@ -459,7 +459,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         // Prevent opening message boxes that cannot be closed again
         boolean messageBoxClosable = (yesButtonText != null || noButtonText != null || cancelButtonText != null || autoCloseMillis != -1);
-        getMessageBoxConfiguredButton().setEnabled(messageBoxClosable);
+        getMessageBoxConfiguredButton().setEnabled(messageBoxClosable, true, true);
       }
 
       @Order(10)

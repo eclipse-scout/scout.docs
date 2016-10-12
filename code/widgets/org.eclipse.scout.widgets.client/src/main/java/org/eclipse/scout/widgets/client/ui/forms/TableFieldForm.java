@@ -1440,7 +1440,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execChangedValue() {
-            getTableField().setEnabled(getValue());
+            getTableField().setEnabled(getValue(), true, true);
           }
 
           @Override

@@ -473,7 +473,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execChangedValue() {
-          getListBoxField().setEnabled(getValue());
+          getListBoxField().setEnabled(getValue(), true, true);
         }
 
         @Override

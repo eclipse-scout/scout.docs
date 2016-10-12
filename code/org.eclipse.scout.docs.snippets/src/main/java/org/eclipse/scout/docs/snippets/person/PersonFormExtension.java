@@ -23,7 +23,7 @@ public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
   public void execInitForm(FormInitFormChain chain) throws ProcessingException {
     chain.execInitForm();
     // Example logic: Access the form, disable field
-    getOwner().getNameField().setEnabled(false);
+    getOwner().getNameField().setEnabled(false, true, true);
   }
 
   public void testMethod() {

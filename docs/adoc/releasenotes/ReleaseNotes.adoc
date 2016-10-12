@@ -30,7 +30,7 @@ This version is under development and scheduled for release in June 2017.
 
 ==== Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
-per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout 6.1 Migration Guide].
+per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout Migration Guide].
 
 ==== Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
@@ -74,3 +74,29 @@ All methods are null-safe, unit tested and documented with JavaDoc.
 
 ==== New form field property "preventInitialFocus"
 By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
+
+==== Multiple Dimensions Support
+Some components now support more dimensions for various attributes.
+E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available.
+See the chapter 'Multiple Dimensions Support' in the link:{techdoc}[Scout Technical Documentation] for details and examples.
+
+Currently the following attributes support multiple dimensions:
+
+* Actions: visible, enabled
+* Columns: visible
+* Tree Nodes: visible, enabled
+* Outlines: visible
+* Form Fields: visible, enabled, label-visible
+* Data Model Attributes: visible
+* Data Model Entity: visible
+* Wizard Steps: visible, enabled
+* Trees: enabled
+* Tables: enabled
+
+==== Form Field Enabled Inheritance
+
+The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field.
+Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields.
+This has the advantage that the original state is restored when the box is set back to enabled.
+
+With this change the `getConfiguredEnabled` on composite fields now also automatically affects children. There is no need to overwrite `execInit()` and call `setEnabled(false)` anymore.

@@ -638,7 +638,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getTreeField().setEnabled(getValue());
+          getTreeField().setEnabled(getValue(), true, true);
         }
 
         @Override

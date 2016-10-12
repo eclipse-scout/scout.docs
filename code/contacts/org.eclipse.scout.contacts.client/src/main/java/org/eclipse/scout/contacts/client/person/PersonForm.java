@@ -493,7 +493,7 @@ public class PersonForm extends AbstractForm {
               }
 
               @Override
-              protected int getConfiguredLabelPosition() {
+              protected byte getConfiguredLabelPosition() {
                 return LABEL_POSITION_ON_FIELD; // <5>
               }
               // end::addressBox[]
@@ -525,7 +525,7 @@ public class PersonForm extends AbstractForm {
               // end::validateAddress[]
 
               @Override
-              protected int getConfiguredLabelPosition() {
+              protected byte getConfiguredLabelPosition() {
                 return LABEL_POSITION_ON_FIELD;
               }
 

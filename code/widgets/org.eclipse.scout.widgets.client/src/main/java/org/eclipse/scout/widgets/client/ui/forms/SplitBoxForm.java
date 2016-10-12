@@ -261,9 +261,9 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execInitField() {
-              getNameField().setEnabled(false);
-              getSizeField().setEnabled(false);
-              getModifiedField().setEnabled(false);
+              getNameField().setEnabled(false, true, true);
+              getSizeField().setEnabled(false, true, true);
+              getModifiedField().setEnabled(false, true, true);
             }
 
             @Order(10)

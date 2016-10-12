@@ -1,0 +1,51 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== Client Model
+
+=== Desktop
+
+=== Outlines
+
+=== Pages
+
+=== Forms
+
+=== Form Fields
+
+=== Actions
+
+=== Multiple Dimensions Support
+
+Several components support multiple dimensions for visibility or enabled flags. This means the component is only visible or enabled if all dimensions are set to true.
+This gives developers the flexibility to e.g. use a dimension for granting and one for the business logic. 
+
+A total of 8 dimensions are available for a certain component type and attribute.
+This means you e.g. have a total of 8 dimensions for Form Field visibility in your application. And 8 dimensions for enabled-states of Actions.
+So the dimensions are not consumed by component instance but by component type. This means you have to be careful in defining new dimensions as all components of the same type share these dimensions.
+
+NOTE: Some of these dimensions are already used internally. Refer to the implementation and JavaDoc of the component for details about how many dimensions are available for custom use.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ClientModelSnippet.java[tags=DimensionSamples]
+----
+<1> Disables the menu using the internal default dimension
+<2> Disables the menu using the internal granted dimension
+<3> Hides the menu with a third custom dimension
+<4> Form Fields also support the propagation of new values to children and parents. This sets the custom dimension of this field and all of its children to true.
+<5> This sets the internal default enabled dimension of this field and all of its parents and children to true.
+<6> Checks if the custom dimension is set to true
+<7> Checks if the internal default dimension is set to true
+<8> Checks if all dimensions of formField2 are true
+<9> Checks if all dimensions of formField2 and all dimensions of all parent Form Fields are enabled.
+
+NOTE: In the example above the instance 'formField3' uses 4 dimensions for the enabled attribute: ENABLED_CUSTOM because it is explicitly used and the 3 dimensions that are used internally (ENABLED, ENABLED_GRANTED, ENABLED_SLAVE). Even though the instance 'formField2' makes no use of the custom dimension it is consumed for this instance as well because the dimensions do not exist by instance but by attribute (as explained above).

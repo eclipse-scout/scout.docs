@@ -520,7 +520,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execChangedValue() {
-          getTreeBoxField().setEnabled(getValue());
+          getTreeBoxField().setEnabled(getValue(), true, true);
         }
 
         @Override
