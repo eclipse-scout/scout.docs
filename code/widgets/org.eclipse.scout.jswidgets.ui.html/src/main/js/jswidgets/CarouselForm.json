@@ -1,6 +1,7 @@
 {
    "id":"jswidgets.CarouselForm",
    "objectType":"Form",
+   "type": "model",
    "displayHint":"view",
    "rootGroupBox":{
       "id":"MainBox",

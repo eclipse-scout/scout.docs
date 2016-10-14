@@ -2,6 +2,7 @@
     "id": "jswidgets.Desktop",
     "title": "${textKey:Widgets}",
     "objectType": "Desktop",
+    "type": "model",
     "outline": {
       "objectType": "jswidgets.FormFieldOutline"
     }

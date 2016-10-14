@@ -1,6 +1,7 @@
 {
   "id": "jswidgets.FormFieldOutline",
   "title": "${textKey:FormFields}",
+  "type": "model",
   "nodes": [
     {
       "objectType": "PageWithNodes",

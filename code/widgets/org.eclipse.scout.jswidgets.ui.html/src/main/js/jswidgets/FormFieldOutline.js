@@ -3,10 +3,6 @@ jswidgets.FormFieldOutline = function() {
 };
 scout.inherits(jswidgets.FormFieldOutline, scout.Outline);
 
-/**
- * @override Outline.js
- */
-jswidgets.FormFieldOutline.prototype._init = function(model) {
-  jswidgets.FormFieldOutline.parent.prototype._init.call(this,
-      this._loadJsonModel('jswidgets.FormFieldOutline', model));
+jswidgets.FormFieldOutline.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.FormFieldOutline');
 };

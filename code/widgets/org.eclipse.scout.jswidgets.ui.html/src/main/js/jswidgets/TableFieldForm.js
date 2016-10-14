@@ -4,8 +4,7 @@ jswidgets.TableFieldForm = function() {
 scout.inherits(jswidgets.TableFieldForm, scout.Form);
 
 jswidgets.TableFieldForm.prototype._init = function(model) {
-  jswidgets.TableFieldForm.parent.prototype._init.call(this,
-      this._loadJsonModel('jswidgets.TableFieldForm', model));
+  jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
   bodyGrid.validate(this.getWidgetById("DetailBox"));
@@ -14,6 +13,10 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   this.addRowsMenu.on('doAction', this._onAddRowsMenuDoAction.bind(this));
 
   this.table = this.getWidgetById("Table");
+};
+
+jswidgets.TableFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TableFieldForm');
 };
 
 jswidgets.TableFieldForm.prototype._onAddRowsMenuDoAction = function(event) {
