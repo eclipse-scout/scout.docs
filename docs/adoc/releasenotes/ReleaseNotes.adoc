@@ -17,19 +17,21 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
-Oxygen (latest version):
+= Releases
+
+== Oxygen
+This version is under development and scheduled for release in June 2017.
 
 * Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
 * Runtime on Maven Central: link:http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22[6.1.0.x]
 
+=== What's New
 
-= What's New
-
-== Strong content security policy CSP
+==== Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element.
 
-== Binary resources support for HtmlField and BeanField
+==== Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
 * HtmlField
 * BeanField
@@ -42,7 +44,7 @@ image::{imgsdir}/binary_resource_field.png[]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
-== TriState capability for check boxes
+==== TriState capability for check boxes
 Added support for tri-state value (`true`, `false` and `null` instead of just `true` and `false`) to boolean field and boolean column.
 
 The new property `triStateEnabled` controls whether the boolean field/column behaves as a normal checkbox (false)
@@ -51,5 +53,5 @@ or a tri-state checkbox (true).
 A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is
 interpreted as "undefined" and rendered as a filled square.
 
-== Mnemonics
+==== Mnemonics
 Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.
