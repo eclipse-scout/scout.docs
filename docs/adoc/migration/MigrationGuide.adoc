@@ -248,3 +248,7 @@ The new static method makes it clearer that it will alter the state of $comp. Fo
 == CookieUtility
 
 `CookieUtility` was moved from _org.eclipse.scout.rt.ui.html_ to _org.eclipse.scout.rt.server.commons_. Migrate by updating your imports. The Method `addCookie()` is now called `addPersistentCookie()`. Additional methods are available (to add a session cookie, or delete an existing cookie).
+
+== Pair
+
+The `Pair` class was made abstract and two default implementations for a mutable pair (class `MutablePair`) and immutable pair (`ImmutablePair`) were added. Since the former `Pair` class was immutable, all occurences were changed to use the new `ImmutablePair` class. Migrate by update all occurences to use the new `ImmutablePair`.
