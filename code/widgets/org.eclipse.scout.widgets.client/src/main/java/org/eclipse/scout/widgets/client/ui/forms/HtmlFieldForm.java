@@ -89,7 +89,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(GroupBox.class);
   }
 
-  public HtmlField getHhtmlField() {
+  public HtmlField getHtmlField() {
     return getFieldByClass(HtmlField.class);
   }
 
@@ -104,10 +104,10 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
   private void loadFile(String simpleName, Collection<? extends BinaryResource> attachments) {
     try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
       String s = IOUtility.readString(in, null);
-      getHhtmlField().setValue(null);
-      getHhtmlField().setScrollToAnchor(null);
-      getHhtmlField().setAttachments(attachments);
-      getHhtmlField().setValue(s);
+      getHtmlField().setValue(null);
+      getHtmlField().setScrollToAnchor(null);
+      getHtmlField().setAttachments(attachments);
+      getHtmlField().setValue(s);
     }
     catch (IOException e) {
       throw new ProcessingException("Html-Field can't load file ", e);
@@ -149,7 +149,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getHhtmlField().setEnabled(getValue());
+          getHtmlField().setEnabled(getValue());
         }
       }
 
@@ -162,7 +162,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execChangedValue() {
-          getHhtmlField().setScrollToAnchor(getValue());
+          getHtmlField().setScrollToAnchor(getValue());
         }
       }
 
@@ -185,7 +185,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execClickAction() {
-          getHhtmlField().scrollToEnd();
+          getHtmlField().scrollToEnd();
         }
       }
     }
@@ -232,8 +232,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execClickAction() {
-          getHhtmlField().setAttachments(null);
-          getHhtmlField().setValue(null);
+          getHtmlField().setAttachments(null);
+          getHtmlField().setValue(null);
         }
       }
 
