@@ -190,6 +190,39 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(15)
+      public class MessageBoxHtmlButton extends AbstractLinkButton {
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("MessageBoxWithHtml");
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected void execClickAction() {
+          int result = MessageBoxes.createOk()
+              .withHeader("This is the header.")
+              .withBody("This is the body.")
+              .withHtml(HTML.fragment(
+                  HTML.italic("This"),
+                  " is ",
+                  HTML.link("https://en.wikipedia.org/wiki/HTML", "HTML").addAttribute("target", "_blank"),
+                  " content"))
+              .show();
+          getResultField().setMessageBoxResult(result);
+        }
+      }
+
       @Order(20)
       public class MessageBoxYesNoButton extends AbstractLinkButton {
 
