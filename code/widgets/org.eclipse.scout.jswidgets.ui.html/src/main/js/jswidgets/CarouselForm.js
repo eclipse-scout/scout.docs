@@ -7,9 +7,9 @@ jswidgets.CarouselForm.prototype._init = function(model) {
   jswidgets.CarouselForm.parent.prototype._init.call(this, model);
 
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.getWidgetById("DetailBox"));
+  bodyGrid.validate(this.widget('DetailBox'));
 
-  scout.arrays.ensure(this.getWidgetById("Carousel").widgets).forEach(function (widget) {
+  scout.arrays.ensure(this.widget('Carousel').widgets).forEach(function(widget) {
     if (widget.rootGroupBox) {
       var grid = new scout.HorizontalGroupBoxBodyGrid();
       grid.validate(widget.rootGroupBox);

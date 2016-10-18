@@ -7,12 +7,12 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.getWidgetById("DetailBox"));
+  bodyGrid.validate(this.widget('DetailBox'));
 
-  this.addRowsMenu = this.getWidgetById("AddRowsMenu");
+  this.addRowsMenu = this.widget('AddRowsMenu');
   this.addRowsMenu.on('doAction', this._onAddRowsMenuDoAction.bind(this));
 
-  this.table = this.getWidgetById("Table");
+  this.table = this.widget("Table");
 };
 
 jswidgets.TableFieldForm.prototype._jsonModel = function() {
