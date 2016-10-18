@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,6 +75,7 @@ import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.ContextColumnField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.DefaultIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.DeletedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.InsertedRowsField;
@@ -193,6 +196,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public DeletedRowsField getDeletedRowsField() {
     return getFieldByClass(DeletedRowsField.class);
+  }
+
+  public ContextColumnField getContextColumnField() {
+    return getFieldByClass(ContextColumnField.class);
   }
 
   @Order(10)
@@ -378,6 +385,21 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execInitTable() {
+            addPropertyChangeListener(
+                new PropertyChangeListener() {
+                  @Override
+                  public void propertyChange(PropertyChangeEvent e) {
+                    if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
+                      if (e.getNewValue() == null) {
+                        getContextColumnField().setValue("");
+                      }
+                      else {
+                        getContextColumnField().setValue(Table.this.getContextColumn().getHeaderCell().getText());
+                      }
+                    }
+                  }
+                });
+
             addTableListener(new TableAdapter() {
 
               @Override
@@ -1264,6 +1286,20 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DeletedRows");
+        }
+      }
+
+      @Order(55)
+      public class ContextColumnField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ContextColumn");
         }
       }
 
