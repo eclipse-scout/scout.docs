@@ -9,10 +9,10 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-:docsource: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/docs
-:docroot: https://eclipsescout.github.io/6.0/
-:techdoc: https://eclipsescout.github.io/6.0/technical-guide.html
-:migrationguide: https://eclipsescout.github.io/6.0/migration-guide.html
+:docsource: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.1.x/docs
+:docroot: https://eclipsescout.github.io/6.1/
+:techdoc: https://eclipsescout.github.io/6.1/technical-guide.html
+:migrationguide: https://eclipsescout.github.io/6.1/migration-guide.html
 
 //-----------------------------------------------------------------------------
 // This file contains the release notes
@@ -30,7 +30,7 @@ This version is under development and scheduled for release in June 2017.
 
 ==== Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
-per html file and includes it using the script element.
+per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout 6.1 Migration Guide].
 
 ==== Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
@@ -54,5 +54,20 @@ or a tri-state checkbox (true).
 A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is
 interpreted as "undefined" and rendered as a filled square.
 
-==== Mnemonics
-Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.
+==== New UriOpenAction: SAME_WINDOW
+The enum `UriOpenAction` provides a new value to open a URI in the current window: `SAME_WINDOW`
+
+==== New methods in StringUtility
+`StringUtility` provides the following new methods:
+
+* `containsString()`
+* `containsStringIgnoreCase()`
+* `containsRegEx()`
+* `matches()`
+* `endsWidth()`
+* `startsWith()`
+* `length()`
+* `indexOf()`
+* `lastIndexOf()`
+
+All methods are null-safe, unit tested and documented with JavaDoc.
