@@ -40,7 +40,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.Configura
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.BlankButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.ScoutHtmlButton;
-import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.HtmlField;
+import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.HtmlField;
 
 @Order(6000.0)
 public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -79,7 +79,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(CloseButton.class);
   }
 
-  public SetContentButtonsBox getGroupBox() {
+  public SetContentButtonsBox getSetContentButtonsBox() {
     return getFieldByClass(SetContentButtonsBox.class);
   }
 
@@ -137,31 +137,35 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(10)
-    public class HtmlField extends AbstractHtmlField {
+    public class GroupBox extends AbstractGroupBox {
 
-      @Override
-      protected int getConfiguredGridH() {
-        return 12;
-      }
+      @Order(10)
+      public class HtmlField extends AbstractHtmlField {
 
-      @Override
-      protected int getConfiguredGridW() {
-        return 2;
-      }
+        @Override
+        protected int getConfiguredGridH() {
+          return 12;
+        }
 
-      @Override
-      protected boolean getConfiguredLabelVisible() {
-        return false;
-      }
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
 
-      @Override
-      protected boolean getConfiguredScrollBarEnabled() {
-        return true;
-      }
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
 
-      @Override
-      protected void execAppLinkAction(String ref) {
-        MessageBoxes.createOk().withHeader(TEXTS.get("LocalUrlClicked")).withBody(TEXTS.get("Parameters") + ":\n" + ref).show();
+        @Override
+        protected boolean getConfiguredScrollBarEnabled() {
+          return true;
+        }
+
+        @Override
+        protected void execAppLinkAction(String ref) {
+          MessageBoxes.createOk().withHeader(TEXTS.get("LocalUrlClicked")).withBody(TEXTS.get("Parameters") + ":\n" + ref).show();
+        }
       }
     }
 
@@ -237,7 +241,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
       }
 
-      @Order(30)
+      @Order(40)
       public class SetContentButtonsBox extends AbstractSequenceBox {
 
         @Override
