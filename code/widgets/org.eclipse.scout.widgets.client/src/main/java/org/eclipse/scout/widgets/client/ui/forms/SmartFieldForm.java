@@ -14,9 +14,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -29,10 +32,15 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -64,6 +72,8 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
@@ -76,6 +86,9 @@ import org.slf4j.LoggerFactory;
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
+
+  private boolean m_delayEnabled = false;
+  private boolean m_localLookupCall = true;
 
   public SmartFieldForm() {
     super();
@@ -448,6 +461,12 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
+
+        @Override
+        protected IProposalChooserProvider<Long> createProposalChooserProvider() {
+          return new P_ProposalChooserProvider();
+        }
+
       }
 
       @Order(120)
@@ -869,16 +888,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(20)
-      public class ShowValueMenu extends AbstractMenu {
+      public class ShowSmartFieldValueMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("ShowValue");
+          return TEXTS.get("ShowValue", "Smart field");
         }
 
         @Override
         protected String getConfiguredTooltipText() {
-          return TEXTS.get("ShowValueOfDefaultField");
+          return TEXTS.get("ShowValueOfDefaultField", "Smart field");
         }
 
         @Override
@@ -893,9 +912,50 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(30)
-      public class SwitchLookupCallMenu extends AbstractMenu {
+      public class ShowProposalFieldValueMenu extends AbstractMenu {
 
-        private boolean m_localLookupCall = true;
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ShowValue", "Proposal field");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ShowValueOfDefaultField", "Proposal field");
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withBody(getDefaultProposalField().getValue() + "").show();
+        }
+
+        @Override
+        protected String getConfiguredKeyStroke() {
+          return "Ctrl-Alt-Q";
+        }
+      }
+
+      @Order(40)
+      public class SlowProposalChooserMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("EnableSlowProposalChooser");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("SlowProposalChooserDisabledTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          setDelayEnabled(!m_delayEnabled);
+        }
+      }
+
+      @Order(50)
+      public class SwitchLookupCallMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
@@ -909,18 +969,22 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execAction() {
-          m_localLookupCall = !m_localLookupCall;
-          if (m_localLookupCall) {
-            getDefaultField().setLookupCall(new LocaleLookupCall());
-            setText(TEXTS.get("SwitchToRemote"));
-            setTooltipText(TEXTS.get("SwitchToRemoteTooltip"));
-          }
-          else {
-            getDefaultField().setLookupCall(new RemoteLocaleLookupCall());
-            setText(TEXTS.get("SwitchToLocal"));
-            setTooltipText(TEXTS.get("SwitchToLocalTooltip"));
-          }
-          LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
+          setLocalLookupCall(!m_localLookupCall);
+        }
+      }
+
+      @Order(60)
+      public class SeleniumResetMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Reset");
+        }
+
+        @Override
+        protected void execAction() {
+          setDelayEnabled(false);
+          setLocalLookupCall(true);
         }
       }
     }
@@ -933,6 +997,23 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  public void setDelayEnabled(boolean delayEnabled) {
+    m_delayEnabled = delayEnabled;
+    IMenu menu = getMainBox().getMenuByClass(SlowProposalChooserMenu.class);
+    menu.setText(TEXTS.get(m_delayEnabled ? "DisableSlowProposalChooser" : "EnableSlowProposalChooser"));
+    menu.setTooltipText(TEXTS.get(m_delayEnabled ? "SlowProposalChooserEnabledTooltip" : "SlowProposalChooserDisabledTooltip"));
+    LOG.debug("Slow proposal chooser is {}", (m_delayEnabled ? "enabled" : "disabled"));
+  }
+
+  public void setLocalLookupCall(boolean localLookupCall) {
+    m_localLookupCall = localLookupCall;
+    IMenu menu = getMainBox().getMenuByClass(SwitchLookupCallMenu.class);
+    getDefaultField().setLookupCall(m_localLookupCall ? new LocaleLookupCall() : new RemoteLocaleLookupCall());
+    menu.setText(TEXTS.get(m_localLookupCall ? "SwitchToRemote" : "SwitchToLocal"));
+    menu.setTooltipText(TEXTS.get(m_localLookupCall ? "SwitchToRemoteTooltip" : "SwitchToLocalTooltip"));
+    LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
+  }
+
   private void changeWildcard(String wildcard) {
     getDefaultField().setWildcard(wildcard);
     getMandatoryField().setWildcard(wildcard);
@@ -942,6 +1023,27 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     getMandatoryProposalField().setWildcard(wildcard);
     getListSmartField().setWildcard(wildcard);
     getTreeSmartField().setWildcard(wildcard);
+  }
+
+  /**
+   * Custom proposal chooser provider is only used to simulate a slow connection when user clicks on a row in the
+   * proposal chooser
+   */
+  private class P_ProposalChooserProvider implements IProposalChooserProvider<Long> {
+
+    @Override
+    public IProposalChooser<?, Long> createProposalChooser(IContentAssistField<?, Long> proposalField, boolean allowCustomText) {
+      return new TableProposalChooser<Long>(proposalField, allowCustomText) {
+        @Override
+        protected void execResultTableRowClicked(ITableRow row) {
+          if (m_delayEnabled) {
+            SleepUtil.sleepSafe(600, TimeUnit.MILLISECONDS);
+          }
+          super.execResultTableRowClicked(row);
+        }
+      };
+    }
+
   }
 
 }
