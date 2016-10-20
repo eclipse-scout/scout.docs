@@ -95,6 +95,7 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
       @ClassId("81b27554-42f2-4fb9-99f6-a86c17b91d1b")
       @ModelVariant("Example")
       public class ExampleBeanField extends AbstractBeanField<ExampleBean> {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("BeanField");
@@ -114,8 +115,12 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
         protected void execAppLinkAction(String ref) {
           MessageBoxes.createOk().withBody(TEXTS.get("ExampleBeanFieldAppLinkClicked", ref)).show();
         }
-      }
 
+        @Override
+        protected int getConfiguredGridH() {
+          return 12;
+        }
+      }
     }
 
     @Order(50)

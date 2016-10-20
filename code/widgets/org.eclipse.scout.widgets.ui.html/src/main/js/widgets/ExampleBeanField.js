@@ -36,9 +36,8 @@ scout.ExampleBeanField.prototype._renderValue = function() {
     .text(this.session.text('ExampleBeanFieldUiText'));
 
   $content.appendElement('<p>')
-    .text(this.session.text('ExampleBeanFieldAppLinkText'))
-    .appendAppLink(this.value.appLink)
-    .on('click', this._onAppLinkAction.bind(this));
+    .text(this.session.text('ExampleBeanFieldAppLinkText') + ' ')
+    .appendAppLink(this.value.appLink);
 
   $content.appendElement('<p>')
     .appendElement('<img>')
