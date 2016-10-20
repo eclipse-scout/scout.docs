@@ -65,55 +65,55 @@ public class PersonFormTabExtensionData extends AbstractFormFieldData {
     public static class EventsRowData extends AbstractTableRowData {
 
       private static final long serialVersionUID = 1L;
-      public static final String idElement = "id";
-      public static final String titleElement = "title";
-      public static final String startsElement = "starts";
-      public static final String cityElement = "city";
-      public static final String countryElement = "country";
-      private String id;
-      private String title;
-      private Date starts;
-      private String city;
-      private String country;
+      public static final String id = "id";
+      public static final String title = "title";
+      public static final String starts = "starts";
+      public static final String city = "city";
+      public static final String country = "country";
+      private String m_id;
+      private String m_title;
+      private Date m_starts;
+      private String m_city;
+      private String m_country;
 
       public String getId() {
-        return id;
+        return m_id;
       }
 
       public void setId(String newId) {
-        id = newId;
+        m_id = newId;
       }
 
       public String getTitle() {
-        return title;
+        return m_title;
       }
 
       public void setTitle(String newTitle) {
-        title = newTitle;
+        m_title = newTitle;
       }
 
       public Date getStarts() {
-        return starts;
+        return m_starts;
       }
 
       public void setStarts(Date newStarts) {
-        starts = newStarts;
+        m_starts = newStarts;
       }
 
       public String getCity() {
-        return city;
+        return m_city;
       }
 
       public void setCity(String newCity) {
-        city = newCity;
+        m_city = newCity;
       }
 
       public String getCountry() {
-        return country;
+        return m_country;
       }
 
       public void setCountry(String newCountry) {
-        country = newCountry;
+        m_country = newCountry;
       }
     }
   }

@@ -3,7 +3,6 @@ package org.eclipse.scout.contacts.shared.organization;
 import javax.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
-import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
 import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;
 import org.eclipse.scout.contacts.shared.common.AbstractUrlImageFieldData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
@@ -70,7 +69,7 @@ public class OrganizationFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
   }
 
-  public static class Email extends AbstractEmailFieldData {
+  public static class Email extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
   }

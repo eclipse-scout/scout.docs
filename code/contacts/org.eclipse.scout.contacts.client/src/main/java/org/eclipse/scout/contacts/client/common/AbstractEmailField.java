@@ -12,13 +12,13 @@ package org.eclipse.scout.contacts.client.common;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.scout.contacts.shared.common.AbstractEmailFieldData;
-import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-@FormData(value = AbstractEmailFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+/**
+ * Email field with validation
+ */
 public abstract class AbstractEmailField extends AbstractStringField {
 
   // http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
