@@ -49,53 +49,61 @@ scout.HeatmapField.prototype._remove = function() {
 };
 
 scout.HeatmapField.prototype._handleViewParameterChanged = function() {
-  this._send('viewParameterChanged', {
+  this.trigger('viewParameterChange', {
     center: {
-      x: this.heatmap.getCenter().lat,
-      y: this.heatmap.getCenter().lng
+      x: this.heatmap.getCenter().lng,
+      y: this.heatmap.getCenter().lat
     },
     zoomFactor: this.heatmap.getZoom()
   });
 };
 
 scout.HeatmapField.prototype._handleClicked = function(event) {
-  this._send('clicked', {
+  this.trigger('click', {
     point: {
-      x: event.latlng.lat,
-      y: event.latlng.lng
+      x: event.latlng.lng,
+      y: event.latlng.lat
     }
   });
 };
 
 scout.HeatmapField.prototype._renderViewParameter = function() {
-  this.heatmap.setView([this.viewParameter.center.x, this.viewParameter.center.y], this.viewParameter.zoomFactor);
+  this.heatmap.setView([
+    this.viewParameter.center.y,
+    this.viewParameter.center.x
+  ], this.viewParameter.zoomFactor);
 };
 
 scout.HeatmapField.prototype._renderHeatPointList = function() {
   if (this._heatLayer) {
     this.heatmap.removeLayer(this._heatLayer);
   }
-  this._heatLayer = L.heatLayer(this.heatPointList,
+  var heatPoints = [];
+  if (this.heatPointList) {
+    this.heatPointList.forEach(function(point) {
+      heatPoints.push([
+        point.y,
+        point.x,
+        point.intensity
+      ]);
+    });
+  }
+  this._heatLayer = L.heatLayer(heatPoints, {
     // TODO make this parameter list configurable from the model!
-      // parameters to control the appearance of heat points
+    // parameters to control the appearance of heat points
     // see leaflet.heat docu for full spec
-    { radius: 20, blur: 30, max: 1.0 }
-  );
+    radius: 20,
+    blur: 30,
+    max: 1.0
+  });
   this._heatLayer.addTo(this.heatmap);
 };
 
-scout.HeatmapField.prototype._onHeatPointsAdded = function(points) {
+scout.HeatmapField.prototype.addHeatPoint = function(point) {
   if (this._heatLayer) {
-    for (i = 0; i < points.length; i++) {
-      this._heatLayer.addLatLng(points[i]);
-    }
-  }
-};
-
-scout.HeatmapField.prototype.onModelAction = function(event) {
-  if (event.type === 'heatPointsAdded') {
-    this._onHeatPointsAdded(event.points);
-  } else {
-    scout.HeatmapField.parent.prototype.onModelAction.call(this, event);
+    this._heatLayer.addLatLng([
+      point.y,
+      point.x
+    ]);
   }
 };

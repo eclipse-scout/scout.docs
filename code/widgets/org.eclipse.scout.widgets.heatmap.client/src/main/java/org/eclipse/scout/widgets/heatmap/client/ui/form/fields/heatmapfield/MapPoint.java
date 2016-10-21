@@ -3,12 +3,13 @@ package org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield;
 import java.math.BigDecimal;
 
 public class MapPoint {
+
   private final BigDecimal m_x;
   private final BigDecimal m_y;
 
   public MapPoint(BigDecimal x, BigDecimal y) {
-    this.m_x = x;
-    this.m_y = y;
+    m_x = x;
+    m_y = y;
   }
 
   public BigDecimal getX() {
@@ -59,4 +60,8 @@ public class MapPoint {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "MapPoint [m_x=" + m_x + ", m_y=" + m_y + "]";
+  }
 }

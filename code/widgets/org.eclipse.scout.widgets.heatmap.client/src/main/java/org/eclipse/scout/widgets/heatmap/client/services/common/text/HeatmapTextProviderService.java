@@ -13,7 +13,7 @@ package org.eclipse.scout.widgets.heatmap.client.services.common.text;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
 
-@Order(2000)
+@Order(1900)
 public class HeatmapTextProviderService extends AbstractDynamicNlsTextProviderService {
   @Override
   public String getDynamicNlsBaseName() {

@@ -12,3 +12,40 @@ scout.HeatmapFieldAdapter = function() {
   scout.HeatmapFieldAdapter.parent.call(this);
 };
 scout.inherits(scout.HeatmapFieldAdapter, scout.FormFieldAdapter);
+
+scout.HeatmapFieldAdapter.prototype._onWidgetEvent = function(event) {
+  if (event.type === 'viewParameterChange') {
+    this._onWidgetViewParameterChange(event);
+  } else if (event.type === 'click') {
+    this._onWidgetClick(event);
+  } else {
+    scout.HeatmapFieldAdapter.parent.prototype._onWidgetEvent.call(this, event);
+  }
+};
+
+scout.HeatmapFieldAdapter.prototype._onWidgetViewParameterChange = function(event) {
+  this._send('viewParameterChanged', {
+    center: event.center,
+    zoomFactor: event.zoomFactor
+  });
+};
+
+scout.HeatmapFieldAdapter.prototype._onWidgetClick = function(event) {
+  this._send('clicked', {
+    point: event.point
+  });
+};
+
+scout.HeatmapFieldAdapter.prototype.onModelAction = function(event) {
+  if (event.type === 'heatPointsAdded') {
+    this._onHeatPointsAdded(event);
+  } else {
+    scout.HeatmapFieldAdapter.parent.prototype.onModelAction.call(this, event);
+  }
+};
+
+scout.HeatmapFieldAdapter.prototype._onHeatPointsAdded = function(event) {
+  event.points.forEach(function(point) {
+    this.widget.addHeatPoint(point);
+  }, this);
+};

@@ -6,8 +6,8 @@ public class HeatmapViewParameter {
   private final int m_zoomFactor;
 
   public HeatmapViewParameter(MapPoint center, int zoomFactor) {
-    this.m_center = center;
-    this.m_zoomFactor = zoomFactor;
+    m_center = center;
+    m_zoomFactor = zoomFactor;
   }
 
   public MapPoint getCenter() {
@@ -53,4 +53,8 @@ public class HeatmapViewParameter {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "HeatmapViewParameter [m_center=" + m_center + ", m_zoomFactor=" + m_zoomFactor + "]";
+  }
 }

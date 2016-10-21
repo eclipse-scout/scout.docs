@@ -8,7 +8,7 @@ public class HeatPoint extends MapPoint {
 
   public HeatPoint(BigDecimal x, BigDecimal y, Float intensity) {
     super(x, y);
-    this.m_intensity = intensity;
+    m_intensity = intensity;
   }
 
   public Float getIntensity() {
@@ -46,4 +46,8 @@ public class HeatPoint extends MapPoint {
     return true;
   }
 
+  @Override
+  public String toString() {
+    return "HeatPoint [m_x=" + getX() + ", m_y=" + getY() + ", m_intensity=" + m_intensity + "]";
+  }
 }

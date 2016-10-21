@@ -7,7 +7,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 public interface IHeatmapField extends IFormField {
 
   String PROP_VIEW_PARAMETER = "viewParameter";
-
   String PROP_HEAT_POINT_LIST = "heatPointList";
 
   HeatmapViewParameter getViewParameter();
@@ -29,5 +28,4 @@ public interface IHeatmapField extends IFormField {
   void addHeatmapListener(IHeatmapListener listener);
 
   void removeHeatmapListener(IHeatmapListener listener);
-
 }

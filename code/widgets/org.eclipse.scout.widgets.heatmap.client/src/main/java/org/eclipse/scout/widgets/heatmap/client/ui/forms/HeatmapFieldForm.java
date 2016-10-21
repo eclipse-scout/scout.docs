@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
+import org.eclipse.scout.rt.client.ui.Coordinates;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -17,7 +20,11 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.status.IStatus;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.AbstractHeatmapField;
 import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.HeatPoint;
 import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.HeatmapViewParameter;
@@ -25,19 +32,15 @@ import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.IHea
 import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.IHeatmapListener;
 import org.eclipse.scout.widgets.heatmap.client.ui.form.fields.heatmapfield.MapPoint;
 import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.CenterXField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.CenterYField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.HeatmapField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.IntensityField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.XField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.YField;
-import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.TopBox.ZoomLevelField;
-import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.CenterXField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.CenterYField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.HeatmapField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.IntensityField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.XField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.YField;
+import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.ZoomLevelField;
 
-/**
- * <h3>{@link HeatmapFieldForm}</h3>
- */
 @Order(100000.0)
 public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
@@ -66,8 +69,8 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(MainBox.class);
   }
 
-  public TopBox getTopBox() {
-    return getFieldByClass(TopBox.class);
+  public GroupBox getTopBox() {
+    return getFieldByClass(GroupBox.class);
   }
 
   public HeatmapField getHeatmapField() {
@@ -123,7 +126,6 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       @Override
       public void heatPointsAdded(Collection<HeatPoint> points) {
       }
-
     });
   }
 
@@ -153,11 +155,17 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
   @Order(1000.0)
   public class MainBox extends AbstractGroupBox {
 
+    @Override
+    protected void execInitField() {
+      setStatusVisible(false);
+    }
+
     @Order(1000.0)
-    public class TopBox extends AbstractGroupBox {
+    public class GroupBox extends AbstractGroupBox {
 
       @Order(1000.0)
       public class HeatmapField extends AbstractHeatmapField {
+
         @Override
         protected int getConfiguredGridW() {
           return 2;
@@ -177,21 +185,20 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           List<HeatPoint> heatPoints = new ArrayList<>();
           Float intensity = 100000.0f;
 
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.18360), BigDecimal.valueOf(8.51954), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.44996), BigDecimal.valueOf(8.29276), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(46.95217), BigDecimal.valueOf(7.43259), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(51.21540), BigDecimal.valueOf(6.75074), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(49.87163), BigDecimal.valueOf(8.63468), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(48.13750), BigDecimal.valueOf(11.57106), intensity));
-          heatPoints.add(new HeatPoint(BigDecimal.valueOf(47.39153), BigDecimal.valueOf(8.51093), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.51954), BigDecimal.valueOf(47.18360), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.29276), BigDecimal.valueOf(47.44996), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(7.43259), BigDecimal.valueOf(46.95217), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(6.75074), BigDecimal.valueOf(51.21540), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.63468), BigDecimal.valueOf(49.87163), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(11.57106), BigDecimal.valueOf(48.13750), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.51093), BigDecimal.valueOf(47.39153), intensity));
 
           setHeatPoints(heatPoints);
         }
 
         @Override
         public HeatmapViewParameter getConfiguredViewParameter() {
-          return new HeatmapViewParameter(
-              new MapPoint(BigDecimal.valueOf(49.16015), BigDecimal.valueOf(7.87720)), 6);
+          return new HeatmapViewParameter(new MapPoint(BigDecimal.valueOf(7.87720), BigDecimal.valueOf(49.16015)), 6);
         }
 
         @Override
@@ -203,7 +210,6 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           setViewParameter(getConfiguredViewParameter());
           resetHeatPoints();
         }
-
       }
 
       @Order(2000.0)
@@ -235,8 +241,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           try {
             m_viewParameterListener.setEnabled(false);
             MapPoint newCenter = new MapPoint(getValue(), oldViewParameter.getCenter().getY());
-            getHeatmapField().setViewParameter(
-                new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
           }
           finally {
             m_viewParameterListener.setEnabled(true);
@@ -273,14 +278,12 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           try {
             m_viewParameterListener.setEnabled(false);
             MapPoint newCenter = new MapPoint(oldViewParameter.getCenter().getX(), getValue());
-            getHeatmapField().setViewParameter(
-                new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(newCenter, oldViewParameter.getZoomFactor()));
           }
           finally {
             m_viewParameterListener.setEnabled(true);
           }
         }
-
       }
 
       @Order(4000.0)
@@ -296,14 +299,12 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           HeatmapViewParameter oldViewParameter = getHeatmapField().getViewParameter();
           try {
             m_viewParameterListener.setEnabled(false);
-            getHeatmapField()
-                .setViewParameter(new HeatmapViewParameter(oldViewParameter.getCenter(), getValue()));
+            getHeatmapField().setViewParameter(new HeatmapViewParameter(oldViewParameter.getCenter(), getValue()));
           }
           finally {
             m_viewParameterListener.setEnabled(true);
           }
         }
-
       }
 
       @Order(5000.0)
@@ -328,7 +329,6 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
         protected String getConfiguredLabel() {
           return TEXTS.get("X");
         }
-
       }
 
       @Order(6000.0)
@@ -353,7 +353,6 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
         protected String getConfiguredLabel() {
           return TEXTS.get("Y");
         }
-
       }
 
       @Order(7000.0)
@@ -363,12 +362,12 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
         protected String getConfiguredLabel() {
           return TEXTS.get("Intensity");
         }
-
       }
     }
 
     @Order(30)
     public class AddHeatPointMenu extends AbstractMenu {
+
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("AddHeatPoint");
@@ -392,6 +391,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
 
     @Order(40)
     public class ResetMenu extends AbstractMenu {
+
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("Reset");
@@ -405,6 +405,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
 
     @Order(50)
     public class ClearMenu extends AbstractMenu {
+
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("Clear");
@@ -416,7 +417,37 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
     }
 
-    @Order(40)
+    @Order(60)
+    @ClassId("dc57d776-8462-4636-960f-cac4358d06ab")
+    public class ScrollToCurrentLocationMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("ScrollToCurrentLocation");
+      }
+
+      @Override
+      protected void execAction() {
+        try {
+          Future<Coordinates> future = getDesktop().requestGeolocation();
+          Coordinates location = future.get();
+          getCenterXField().setValue(location.getLongitudeAsBigDecimal());
+          getCenterYField().setValue(location.getLatitudeAsBigDecimal());
+          if (NumberUtility.nvl(getZoomLevelField().getValue(), 0) < 16) {
+            getZoomLevelField().setValue(16);
+          }
+        }
+        catch (InterruptedException | ExecutionException e) {
+          MessageBoxes.createOk()
+              .withSeverity(IStatus.ERROR)
+              .withHeader(TEXTS.get("ErrorWhileGettingLocation"))
+              .withBody(e.getMessage())
+              .show();
+        }
+      }
+    }
+
+    @Order(70)
     public class CloseButton extends AbstractCloseButton {
     }
   }
