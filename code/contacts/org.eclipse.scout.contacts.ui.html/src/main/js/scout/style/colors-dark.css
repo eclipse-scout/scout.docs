@@ -26,6 +26,11 @@
 @background-color: @palette-gray-8;
 @border-color: @palette-gray-7;
 @control-background-color: @background-color;
+
+// DEMO GLOBAL STYLING uncomment following two lines
+/* @control-background-color: #af1; */
+/* @control-color: #040; */
+
 @disabled-color: @palette-gray-5;
 
 @focus-border-color: @palette-gray-5;
