@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -31,6 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
+import org.eclipse.scout.rt.client.ui.form.fields.treebox.ITreeBox;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -206,6 +208,11 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
+        }
+
+        @Override
+        protected boolean getConfiguredFilterActiveNodes() {
+          return true;
         }
       }
 
@@ -563,11 +570,69 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
-    public class CloseButton extends AbstractCloseButton {
+    public class ToggleFilterBoxesButton extends AbstractButton {
+
+      private ToggleState m_toggleState = ToggleState.None;
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ToggleFilterBoxes");
+      }
+
+      @Override
+      protected void execClickAction() {
+        m_toggleState = m_toggleState.next();
+        for (IFormField field : getAllFields()) {
+          if (field instanceof ITreeBox<?>) {
+            ITreeBox<?> treeBox = (ITreeBox<?>) field;
+            treeBox.setFilterActiveNodes(m_toggleState.isActive());
+            treeBox.setFilterCheckedNodes(m_toggleState.isChecked());
+          }
+        }
+      }
     }
 
+    @Order(40)
+    public class CloseButton extends AbstractCloseButton {
+    }
   }
 
   public class PageFormHandler extends AbstractFormHandler {
+  }
+
+  private enum ToggleState {
+    None(false, false),
+    Active(true, false),
+    Checked(false, true),
+    Both(true, true);
+
+    private final boolean m_active;
+    private final boolean m_checked;
+
+    private ToggleState(boolean active, boolean checked) {
+      m_active = active;
+      m_checked = checked;
+    }
+
+    public ToggleState next() {
+      switch (this) {
+        case None:
+          return Active;
+        case Active:
+          return Checked;
+        case Checked:
+          return Both;
+        default:
+          return None;
+      }
+    }
+
+    public boolean isActive() {
+      return m_active;
+    }
+
+    public boolean isChecked() {
+      return m_checked;
+    }
   }
 }
