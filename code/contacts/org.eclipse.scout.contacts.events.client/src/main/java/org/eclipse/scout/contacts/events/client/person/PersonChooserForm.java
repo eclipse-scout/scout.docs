@@ -30,9 +30,12 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 
+/**
+ * Form to select a person that is not excluded.
+ */
 public class PersonChooserForm extends AbstractForm {
 
-  private List<String> filteredPersons = new ArrayList<>();
+  private List<String> excludedPersons = new ArrayList<>();
 
   public PersonChooserForm() {
     super();
@@ -96,7 +99,7 @@ public class PersonChooserForm extends AbstractForm {
           Iterator<ILookupRow<String>> iterator = result.iterator();
           while (iterator.hasNext()) {
             ILookupRow<String> row = iterator.next();
-            if (filteredPersons.contains(row.getKey())) {
+            if (excludedPersons.contains(row.getKey())) {
               iterator.remove();
             }
           }
@@ -116,7 +119,7 @@ public class PersonChooserForm extends AbstractForm {
   public class NewHandler extends AbstractFormHandler {
   }
 
-  public void setFilteredPersons(List<String> filteredPersons) {
-    this.filteredPersons = filteredPersons;
+  public void setExcludedPersons(List<String> excludedPersons) {
+    this.excludedPersons = excludedPersons;
   }
 }

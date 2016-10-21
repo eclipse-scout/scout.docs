@@ -53,7 +53,7 @@ public class PersonChooserFormTest {
     PersonChooserForm f = new PersonChooserForm();
     List<String> persons = new ArrayList<>();
     persons.add("123");
-    f.setFilteredPersons(persons);
+    f.setExcludedPersons(persons);
     List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup("", 100);
     assertEquals(0, res.size());
   }

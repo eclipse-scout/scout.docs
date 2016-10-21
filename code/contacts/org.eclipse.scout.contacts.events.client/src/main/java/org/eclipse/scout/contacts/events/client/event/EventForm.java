@@ -419,7 +419,7 @@ public class EventForm extends AbstractForm {
               @Override
               protected void execAction() {
                 PersonChooserForm personChooserForm = new PersonChooserForm();
-                personChooserForm.setFilteredPersons(getPersonIdColumn().getValues(false));
+                personChooserForm.setExcludedPersons(getPersonIdColumn().getValues(false));
                 personChooserForm.startNew();
                 personChooserForm.waitFor();
 
