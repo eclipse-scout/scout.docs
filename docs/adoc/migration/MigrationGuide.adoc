@@ -80,6 +80,11 @@ containsStringIgnoreCase():: like containsString(), but ignores capitaliziation.
 containsRegEx():: checks if the given regular expression matches part of the given string (essentially, this method automatically adds `.*` on both sides of the regular expression)
 matches():: null-safe variant of String.matches(), also allows to set the pattern flags
 
+=== BrowserInfo
+The class `BrowserInfo` was renamed to a more generic `HttpClientInfo` name, since the HTTP client can either be a browser, but may also be another server using the built-in HTTP client of the VM.
+
+Futher the `HttpClientInfo` instance for each request is cached on the current HTTP session, if a session is available. Use the new `HttpClientInfo get(HttpServletRequest request)` method to get the cached HTTP client info.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
