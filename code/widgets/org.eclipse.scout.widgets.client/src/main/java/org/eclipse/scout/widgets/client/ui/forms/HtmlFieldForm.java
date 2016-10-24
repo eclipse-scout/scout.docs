@@ -41,6 +41,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.Configura
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.BlankButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.ScoutHtmlButton;
+import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.HtmlField;
 
 @Order(6000.0)
@@ -102,10 +103,6 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   public GroupBox getGroupBox() {
     return getFieldByClass(GroupBox.class);
-  }
-  
-  protected void loadFile(String simpleName) {
-    loadFile(simpleName, null);
   }
 
   public EnabledCheckBox getEnabledCheckBox() {
