@@ -37,6 +37,7 @@ import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.EnabledCheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.BlankButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.ScoutHtmlButton;
@@ -97,6 +98,18 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   public ConfigurationGroupBox getConfigurationGroupBox() {
     return getFieldByClass(ConfigurationGroupBox.class);
+  }
+
+  public GroupBox getGroupBox() {
+    return getFieldByClass(GroupBox.class);
+  }
+  
+  protected void loadFile(String simpleName) {
+    loadFile(simpleName, null);
+  }
+
+  public EnabledCheckBox getEnabledCheckBox() {
+    return getFieldByClass(EnabledCheckBox.class);
   }
 
   protected void loadFile(String simpleName) {
