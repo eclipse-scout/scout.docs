@@ -78,7 +78,34 @@ scout.MyApp.prototype.installExtensions = function() {
 };
 ----
 
-
 ==== How to extend JSON model
 
-TODO
+TODO: Cyrill Wyss?
+
+==== Export Scout model from a Scout classic (online) application
+
+With the steps described here you can export model-data (e.g. forms, tables, etc.) from an existing classic, online Scout application into JSON format which
+can be used in a Scout JS application. This is a fast and convenient method to re-use an existing form in a Scout JS application, because you don't have to
+build the model manually. Here's how to use the export feature:
+
+* Activate the `TextKeyTextProviderService` in your Scout classic application. You can do this either by calling the static `register` Method at
+  runtime (using the Debugger) or by setting the config property _scout.text.providers.show.keys_. Once the TextProvider is active, it returns text keys instead
+  of localized texts. The format of the returned string is `${textKey:[text-key]}`. Strings in this format are interpreted browser side by Scout JS and
+  are resolved and localized in _texts.js_.
+* Call the Scout classic web application with the URL parameter adapterExportEnabled=true. This parameter is checked by Scout JS and the effect of it is that
+  Scout JS keeps adapter-data loaded from the server, so we can use it for a later export operation. Usually Scout JS deletes adapter-data right after it has
+  been used to create an adapter instance.
+* Start your browsers developer tools (F12) from your running Scout classic app, inspect the form or another adapter you'd like to export, and search for
+  the ID of that adapter by looking at the `data-id` attribute in the DOM. Then call the following JavaScript function from the console: `JSON.stringify(scout.exportAdapter([id]))`.
+  The console will now output the JSON code for that adapter. Copy/paste that string from the console and tidy it up with a tool of your choice (for instance http://www.jsoneditoronline.org[jsoneditoronline.org]).
+* Now the formatted JSON code is ready to be used in your Scout JS project. Simply store the JSON to a .json File and load it in the `_jsonModel` function of
+  your widget by calling `scout.models.getModel('[ID of json model]')`. Most likely you must edit the JSON file and apply some changes manually.
+  For instance:
+  ** Replace numeric adapter IDs by human-readable, semantic string IDs. You will need these IDs to reference a model element from the JSON model in your
+    JavaScript code, e.g. to register a listener on a Menu.
+  ** Maybe you'll have to adjust objectType and namespace of some widgets in the JSON. This needs to be done for widgets
+     that do not belong to the default _scout_ namespace.
+
+Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.
+
+
