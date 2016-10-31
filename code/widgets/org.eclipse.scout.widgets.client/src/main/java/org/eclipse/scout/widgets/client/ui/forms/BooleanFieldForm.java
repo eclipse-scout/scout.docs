@@ -15,7 +15,9 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
@@ -364,6 +366,39 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
         FontSpec fs = new FontSpec(name, style, 0);
 
         getCheckboxField().setFont(fs);
+      }
+
+      @Order(50)
+      public class ButtonsBox extends AbstractSequenceBox {
+
+        @Override
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Order(10)
+        public class RequestFocusButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Request focus";
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            getCheckboxField().requestFocus();
+          }
+        }
       }
     }
 
