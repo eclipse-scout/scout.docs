@@ -92,7 +92,7 @@ build the model manually. Here's how to use the export feature:
   runtime (using the Debugger) or by setting the config property _scout.text.providers.show.keys_. Once the TextProvider is active, it returns text keys instead
   of localized texts. The format of the returned string is `${textKey:[text-key]}`. Strings in this format are interpreted browser side by Scout JS and
   are resolved and localized in _texts.js_.
-* Call the Scout classic web application with the URL parameter adapterExportEnabled=true. This parameter is checked by Scout JS and the effect of it is that
+* Call the Scout classic web application with the URL parameter `?adapterExportEnabled=true`. This parameter is checked by Scout JS and the effect of it is that
   Scout JS keeps adapter-data loaded from the server, so we can use it for a later export operation. Usually Scout JS deletes adapter-data right after it has
   been used to create an adapter instance.
 * Start your browsers developer tools (F12) from your running Scout classic app, inspect the form or another adapter you'd like to export, and search for
@@ -105,6 +105,8 @@ build the model manually. Here's how to use the export feature:
     JavaScript code, e.g. to register a listener on a Menu.
   ** Maybe you'll have to adjust objectType and namespace of some widgets in the JSON. This needs to be done for widgets
      that do not belong to the default _scout_ namespace.
+  ** Remove form fields and menus which are never used in your Scout JS app
+  ** Remove unused menu types from the menuTypes property of a scout.Menu
 
 Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.
 
