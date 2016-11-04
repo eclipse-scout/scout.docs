@@ -10,26 +10,28 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.old.client.ui.forms;
 
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFormField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.StaticFormLookupCall;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.InnerFormsField;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.StaticInnerFormsField;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
-import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
-import org.eclipse.scout.widgets.client.services.lookup.StaticFormLookupCall;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm;
 
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 
@@ -208,6 +210,65 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("CloseButton");
+      }
+    }
+
+    @Order(50)
+    public class FormActionsMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return "Form Actions";
+      }
+
+      @Order(10)
+      public class IsEmptyMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "execIsEmpty";
+        }
+
+        @Override
+        protected void execAction() {
+          WrappedFormFieldForm.this.checkSaveNeeded();
+          MessageBoxes.createOk()
+              .withBody("isEmpty() = " + WrappedFormFieldForm.this.isEmpty())
+              .show();
+        }
+      }
+
+      @Order(20)
+      public class IsSaveNeededMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "execIsSaveNeeded";
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk()
+              .withBody("isSaveNeeded() = " + WrappedFormFieldForm.this.isSaveNeeded())
+              .show();
+        }
+      }
+
+      @Order(30)
+      public class MarkSavedMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "execMarkSaved";
+        }
+
+        @Override
+        protected void execAction() {
+          WrappedFormFieldForm.this.markSaved();
+          MessageBoxes.createOk()
+              .withBody("markSaved() = void")
+              .show();
+        }
       }
     }
   }
