@@ -94,6 +94,16 @@ To have the same behaviour you can use the method `formField.setEnabled(yourValu
 The same method also exists for the enabled-granted property: `formField.setEnabledGranted(yourValue, true, true)`.
 However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.
 
+=== NumberUtility.nvl(), DateUtility.nvl()
+The nvl() methods on NumberUtility and DateUtility were moved to a generic ObjectUtility.nvl().
+The existing methods were deprecated and will be removed with next Scout release.
+Additionally the existing methods were restricted to use Number respectively Date only.
+
+=== CompareUtility
+The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility.
+The existing methods were deprecated and will be removed with next Scout release.
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
