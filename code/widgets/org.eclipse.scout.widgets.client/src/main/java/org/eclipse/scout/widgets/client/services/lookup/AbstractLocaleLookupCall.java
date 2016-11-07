@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
-import org.eclipse.scout.rt.platform.util.CompareUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -35,7 +35,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
       public int compare(Locale locale1, Locale locale2) {
         String name1 = locale1.getDisplayName(NlsLocale.get());
         String name2 = locale2.getDisplayName(NlsLocale.get());
-        return CompareUtility.compareTo(name1, name2);
+        return ObjectUtility.compareTo(name1, name2);
       }
     };
     Arrays.sort(locales, localeComparator);

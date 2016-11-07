@@ -39,7 +39,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.rt.platform.util.CompareUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -353,7 +353,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execOwnerValueChanged(Object newOwnerValue) {
-                setVisible(!CompareUtility.equals(getNameColumn().getValue(getSelectedRow()), "Baluu"));
+                setVisible(ObjectUtility.notEquals(getNameColumn().getValue(getSelectedRow()), "Baluu"));
               }
 
               @Order(10)
@@ -460,7 +460,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execOwnerValueChanged(Object newOwnerValue) {
-            setVisible(!CompareUtility.equals(newOwnerValue, FranceCode.ID));
+            setVisible(ObjectUtility.notEquals(newOwnerValue, FranceCode.ID));
           }
         }
 
@@ -498,7 +498,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execOwnerValueChanged(Object newOwnerValue) {
-            setVisible(CompareUtility.equals(newOwnerValue, USACode.ID));
+            setVisible(ObjectUtility.equals(newOwnerValue, USACode.ID));
           }
         }
       }

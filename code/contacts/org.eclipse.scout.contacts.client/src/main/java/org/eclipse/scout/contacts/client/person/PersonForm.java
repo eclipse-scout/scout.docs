@@ -69,8 +69,8 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
-import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -356,7 +356,7 @@ public class PersonForm extends AbstractForm {
 
         @Override
         protected Date execValidateValue(Date rawValue) {
-          if (CompareUtility.compareTo(rawValue, new Date()) > 0) {
+          if (ObjectUtility.compareTo(rawValue, new Date()) > 0) {
             throw new VetoException(TEXTS.get("DateOfBirthCanNotBeInFuture"));
           }
 

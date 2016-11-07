@@ -41,7 +41,7 @@ import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
-import org.eclipse.scout.rt.platform.util.CompareUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
@@ -261,7 +261,7 @@ public class FormForm extends AbstractForm implements IPageForm {
             DisplayHint displayHint = (getValue() != null ? getValue() : DisplayHint.Dialog);
             getOpenFormButton().setLabel("Open " + displayHint.name());
             getDisplayViewIdField().setEnabled(displayHint == DisplayHint.View, true, true);
-            getFormTitleField().setEnabled(CompareUtility.isOneOf(displayHint, DisplayHint.Dialog, DisplayHint.View, DisplayHint.PopupWindow), true, true);
+            getFormTitleField().setEnabled(ObjectUtility.isOneOf(displayHint, DisplayHint.Dialog, DisplayHint.View, DisplayHint.PopupWindow), true, true);
           }
         }
 

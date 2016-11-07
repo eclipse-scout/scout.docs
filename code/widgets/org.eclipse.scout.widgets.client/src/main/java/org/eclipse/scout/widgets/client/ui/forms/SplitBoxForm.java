@@ -35,8 +35,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
-import org.eclipse.scout.rt.platform.util.CompareUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -228,7 +228,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
                   return false;
                 }
                 String ext = IOUtility.getFileExtension(resource.getFilename()).toLowerCase();
-                return CompareUtility.isOneOf(ext, "jpg", "jpeg", "png");
+                return ObjectUtility.isOneOf(ext, "jpg", "jpeg", "png");
               }
 
               private void reloadDetails(BinaryResource resource) {
@@ -511,7 +511,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void execChangedValue() {
             getSplitVerticalField().setSplitterPositionType(getValue());
-            if (CompareUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+            if (ObjectUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
               getFieldByClass(SplitterPositionVField.class).setMaxValue(BigDecimal.ONE);
             }
             else {
@@ -565,7 +565,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void execChangedValue() {
             getSplitHorizontalField().setSplitterPositionType(getValue());
-            if (CompareUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+            if (ObjectUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
               getFieldByClass(SplitterPositionHField.class).setMaxValue(BigDecimal.ONE);
             }
             else {
