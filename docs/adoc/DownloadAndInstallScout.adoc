@@ -23,7 +23,7 @@ To download the Eclipse Scout package visit the official Eclipse download page a
 image::{imgsdir}/scout_download.png[]
 
 If the download page shows the wrong platform, manually select the correct platform in the dropdown list.
-As shown in <<img-scout_download>>, the Scout package is available as a 32 bit and a 46 bit package.
+As shown in <<img-scout_download>>, the Scout package is available as a 32 bit and a 64 bit package.
 Make sure to pick the package that matches your JDK installation.
 You can check your installation on the command line as follows.
 
