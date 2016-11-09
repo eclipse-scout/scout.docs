@@ -85,6 +85,11 @@ The class `BrowserInfo` was renamed to a more generic `HttpClientInfo` name, sin
 
 Futher the `HttpClientInfo` instance for each request is cached on the current HTTP session, if a session is available. Use the new `HttpClientInfo get(HttpServletRequest request)` method to get the cached HTTP client info.
 
+=== Virtual Tree Node
+The Virtual tree node has been deleted. The main reason for this was because of table pages: If an `AbstractPageWithTable` contains a lot of rows, for each of them a child page is created. To have these child pages as lightweight as possible the virtual node was introduced. This node was created for each row and only after activating a row (click by the user) the real child page has been created.
+
+Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls.
+To assure this it is recommended to move any expensive operation currently implemented in the `execInit()` method to `execCreateChildPages()` or `execPageActivated()`.
 
 === Enabled Property of Form Fields
 The inheritance of the enabled property of form fields has been changed so that changing this property on a composite field does no longer automatically propagate the value to the children.
