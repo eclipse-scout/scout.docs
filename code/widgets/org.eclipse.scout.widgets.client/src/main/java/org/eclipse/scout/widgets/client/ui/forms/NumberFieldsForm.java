@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -26,32 +28,26 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.numberfield.AbstractNumberField;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.services.lookup.NumberFormatLocaleLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.BigIntegerInputField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigLocaleField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.FormatField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GetValue0Field;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GroupingField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.InputField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.LongInputField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.MaximumValueField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.MinimumValueField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.Place1Field;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.Place2Field;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.Place3Field;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.Place4Field;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.Place5Field;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.ConfigLocaleField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.FormatField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.GroupingField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MaximumValueField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MinimumValueField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.BigIntegerInputField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.InputField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.LongInputField;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntDisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntMandatoryField;
@@ -98,10 +94,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   public DisabledField getDisabledField() {
     return getFieldByClass(DisabledField.class);
-  }
-
-  public GetValue0Field getGetValue0Field() {
-    return getFieldByClass(GetValue0Field.class);
   }
 
   public GroupingField getGroupingField() {
@@ -194,26 +186,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
-  }
-
-  public Place1Field getPlace1Field() {
-    return getFieldByClass(Place1Field.class);
-  }
-
-  public Place2Field getPlace2Field() {
-    return getFieldByClass(Place2Field.class);
-  }
-
-  public Place3Field getPlace3Field() {
-    return getFieldByClass(Place3Field.class);
-  }
-
-  public Place4Field getPlace4Field() {
-    return getFieldByClass(Place4Field.class);
-  }
-
-  public Place5Field getPlace5Field() {
-    return getFieldByClass(Place5Field.class);
   }
 
   public SmallestValueButton getSmallestValueButton() {
@@ -333,7 +305,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() {
-          if (getValue() < 0) {
+          if (NumberUtility.nvl(getValue(), 0) < 0) {
             setForegroundColor("FF0000");
           }
           else {
@@ -523,316 +495,397 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
-      protected int getConfiguredGridColumnCount() {
-        return 3;
-      }
-
-      @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Configure");
       }
 
       @Order(10)
-      public class InputField extends AbstractIntegerField {
+      public class ConfigurationTopBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("IntegerFieldInput");
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
+        @Override
+        protected int getConfiguredGridColumnCount() {
+          return 3;
+        }
+
+        @Order(10)
+        public class InputField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("IntegerFieldInput");
+          }
+        }
+
+        @Order(20)
+        public class Value0Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_VALUE";
+          }
+
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.InputField.class;
+          }
+
+          @Override
+          protected void execChangedMasterValue(Object newMasterValue) {
+            if (newMasterValue != null) {
+              setValue(((Integer) newMasterValue).toString());
+            }
+            else {
+              setValue(null);
+            }
+          }
+        }
+
+        @Order(25)
+        public class DisplayText0Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_DISPLAY_TEXT";
+          }
+
+          @Override
+          protected void execInitField() {
+            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                DisplayText0Field.this.setValue((String) evt.getNewValue());
+              }
+            });
+          }
+        }
+
+        @Order(70)
+        public class LongInputField extends AbstractLongField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("LongFieldInput");
+          }
+        }
+
+        @Order(80)
+        public class Value1Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_VALUE";
+          }
+
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.LongInputField.class;
+          }
+
+          @Override
+          protected void execChangedMasterValue(Object newMasterValue) {
+            if (newMasterValue != null) {
+              setValue(((Long) newMasterValue).toString());
+            }
+            else {
+              setValue(null);
+            }
+          }
+        }
+
+        @Order(85)
+        public class DisplayText1Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_DISPLAY_TEXT";
+          }
+
+          @Override
+          protected void execInitField() {
+            getLongInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                DisplayText1Field.this.setValue((String) evt.getNewValue());
+              }
+            });
+          }
+        }
+
+        @Order(120)
+        public class BigIntegerInputField extends AbstractBigIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("BigIntegerFieldInput");
+          }
+        }
+
+        @Order(130)
+        public class Value3Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_VALUE";
+          }
+
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.BigIntegerInputField.class;
+          }
+
+          @Override
+          protected void execChangedMasterValue(Object newMasterValue) {
+            if (newMasterValue != null) {
+              setValue(((BigInteger) newMasterValue).toString());
+            }
+            else {
+              setValue(null);
+            }
+          }
+        }
+
+        @Order(135)
+        public class DisplayText2Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_DISPLAY_TEXT";
+          }
+
+          @Override
+          protected void execInitField() {
+            getBigIntegerInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                DisplayText2Field.this.setValue((String) evt.getNewValue());
+              }
+            });
+          }
+        }
       }
 
       @Order(20)
-      public class GetValue0Field extends AbstractStringField {
+      public class ConfigurationBottomBox extends AbstractGroupBox {
 
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
+        @Order(30)
+        public class MinimumValueField extends AbstractLongField {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("GetValue");
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return NumberFieldsForm.MainBox.ConfigurationBox.InputField.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          if (newMasterValue != null) {
-            setValue(((Integer) newMasterValue).toString());
-          }
-          else {
-            setValue(null);
-          }
-        }
-
-      }
-
-      @Order(30)
-      public class MinimumValueField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MinimumValue");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue() != null) {
-            getInputField().setMinValue(getValue().intValue());
-            getLongInputField().setMinValue(getValue());
-            getBigIntegerInputField().setMinValue(BigInteger.valueOf(getValue()));
-          }
-          else {
-            getInputField().setMinValue(null);
-            getLongInputField().setMinValue(null);
-            getBigIntegerInputField().setMinValue(null);
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MinimumValue");
           }
 
-          getInputField().validateContent();
-          getLongInputField().validateContent();
-          getBigIntegerInputField().validateContent();
-        }
-      }
-
-      @Order(40)
-      public class MaximumValueField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MaximumValue");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue() != null) {
-            getInputField().setMaxValue(getValue().intValue());
-            getLongInputField().setMaxValue(getValue());
-            getBigIntegerInputField().setMaxValue(BigInteger.valueOf(getValue()));
-          }
-          else {
-            getInputField().setMaxValue(null);
-            getLongInputField().setMaxValue(null);
-            getBigIntegerInputField().setMaxValue(null);
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
           }
 
-          getInputField().validateContent();
-          getLongInputField().validateContent();
-          getBigIntegerInputField().validateContent();
-        }
-      }
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null) {
+              getInputField().setMinValue(getValue().intValue());
+              getLongInputField().setMinValue(getValue());
+              getBigIntegerInputField().setMinValue(BigInteger.valueOf(getValue()));
+            }
+            else {
+              getInputField().setMinValue(null);
+              getLongInputField().setMinValue(null);
+              getBigIntegerInputField().setMinValue(null);
+            }
 
-      @Order(50)
-      public class GroupingField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Grouping");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setGroupingUsed(getValue());
-          getLongInputField().setGroupingUsed(getValue());
-          getBigIntegerInputField().setGroupingUsed(getValue());
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(true);
-        }
-      }
-
-      @Order(60)
-      public class FormatField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Format");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          DecimalFormat format = new DecimalFormat();
-
-          if (getValue() != null) {
-            format = new DecimalFormat(getValue());
-          }
-
-          getInputField().setFormat(format);
-          getLongInputField().setFormat(format);
-          getBigIntegerInputField().setFormat(format);
-        }
-      }
-
-      @Order(65)
-      public class ConfigLocaleField extends AbstractSmartField<Locale> {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Locale");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) NumberFormatLocaleLookupCall.class;
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("SelectLocale");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          changeLocale(getInputField(), getValue());
-          changeLocale(getLongInputField(), getValue());
-          changeLocale(getBigIntegerInputField(), getValue());
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(ClientSession.get().getLocale());
-        }
-      }
-
-      @Order(70)
-      public class LongInputField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("LongFieldInput");
-        }
-      }
-
-      @Order(80)
-      public class GetValue1Field extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("GetValue");
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return NumberFieldsForm.MainBox.ConfigurationBox.LongInputField.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          if (newMasterValue != null) {
-            setValue(((Long) newMasterValue).toString());
-          }
-          else {
-            setValue(null);
+            getInputField().validateContent();
+            getLongInputField().validateContent();
+            getBigIntegerInputField().validateContent();
           }
         }
-      }
 
-      @Order(90)
-      public class Place1Field extends AbstractPlaceholderField {
-      }
+        @Order(40)
+        public class MaximumValueField extends AbstractLongField {
 
-      @Order(100)
-      public class Place2Field extends AbstractPlaceholderField {
-      }
-
-      @Order(110)
-      public class Place3Field extends AbstractPlaceholderField {
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 3;
-        }
-      }
-
-      @Order(120)
-      public class BigIntegerInputField extends AbstractBigIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("BigIntegerFieldInput");
-        }
-      }
-
-      @Order(130)
-      public class GetValue2Field extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("GetValue");
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return NumberFieldsForm.MainBox.ConfigurationBox.BigIntegerInputField.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          if (newMasterValue != null) {
-            setValue(((BigInteger) newMasterValue).toString());
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MaximumValue");
           }
-          else {
-            setValue(null);
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null) {
+              getInputField().setMaxValue(getValue().intValue());
+              getLongInputField().setMaxValue(getValue());
+              getBigIntegerInputField().setMaxValue(BigInteger.valueOf(getValue()));
+            }
+            else {
+              getInputField().setMaxValue(null);
+              getLongInputField().setMaxValue(null);
+              getBigIntegerInputField().setMaxValue(null);
+            }
+
+            getInputField().validateContent();
+            getLongInputField().validateContent();
+            getBigIntegerInputField().validateContent();
           }
         }
-      }
 
-      @Order(140)
-      public class Place4Field extends AbstractPlaceholderField {
-      }
+        @Order(50)
+        public class GroupingField extends AbstractBooleanField {
 
-      @Order(150)
-      public class Place5Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
 
-      @Order(160)
-      public class Place6Field extends AbstractPlaceholderField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Grouping");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setGroupingUsed(getValue());
+            getLongInputField().setGroupingUsed(getValue());
+            getBigIntegerInputField().setGroupingUsed(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(true);
+          }
+        }
+
+        @Order(55)
+        public class UpdateDisplayTextOnModify extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("UpdateDisplayTextOnModify");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setUpdateDisplayTextOnModify(getValue());
+            getLongInputField().setUpdateDisplayTextOnModify(getValue());
+            getBigIntegerInputField().setUpdateDisplayTextOnModify(getValue());
+          }
+        }
+
+        @Order(60)
+        public class FormatField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Format");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            DecimalFormat format = new DecimalFormat();
+
+            if (getValue() != null) {
+              format = new DecimalFormat(getValue());
+            }
+
+            getInputField().setFormat(format);
+            getLongInputField().setFormat(format);
+            getBigIntegerInputField().setFormat(format);
+          }
+        }
+
+        @Order(65)
+        public class ConfigLocaleField extends AbstractSmartField<Locale> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Locale");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+            return (Class<? extends ILookupCall<Locale>>) NumberFormatLocaleLookupCall.class;
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("SelectLocale");
+          }
+
+          @Override
+          protected void execChangedValue() {
+            changeLocale(getInputField(), getValue());
+            changeLocale(getLongInputField(), getValue());
+            changeLocale(getBigIntegerInputField(), getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(ClientSession.get().getLocale());
+          }
+        }
+
       }
     }
 
