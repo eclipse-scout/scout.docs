@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -23,34 +25,28 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.FormatField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.FractionDigitsField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.GetValue0Field;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.GroupingField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.InputField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.MaxFractionDigitsField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.MaximumValueField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.MinFractionDigitsField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.MinimumValueField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.MultiplierField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.PercentField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.Place1Field;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.Place2Field;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.Place3Field;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.Place4Field;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.Place5Field;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.FormatField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.FractionDigitsField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.GroupingField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MaxFractionDigitsField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MaximumValueField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MinFractionDigitsField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MinimumValueField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.MultiplierField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.PercentField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.InputField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.Value0Field;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalDisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalMandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalStyledField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalColumn.BigDecimalDisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalColumn.BigDecimalField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalColumn.BigDecimalMandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalColumn.BigDecimalStyledField;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.HighestValueButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.PiButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.SampleFormatButton;
@@ -82,9 +78,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the FormatField
-   */
   public FormatField getFormatField() {
     return getFieldByClass(FormatField.class);
   }
@@ -93,8 +86,8 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(FractionDigitsField.class);
   }
 
-  public GetValue0Field getGetValue0Field() {
-    return getFieldByClass(GetValue0Field.class);
+  public Value0Field getValue0Field() {
+    return getFieldByClass(Value0Field.class);
   }
 
   public GroupingField getGroupingField() {
@@ -149,18 +142,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  public Place1Field getPlace1Field() {
-    return getFieldByClass(Place1Field.class);
-  }
-
-  public Place2Field getPlace2Field() {
-    return getFieldByClass(Place2Field.class);
-  }
-
-  public Place3Field getPlace3Field() {
-    return getFieldByClass(Place3Field.class);
-  }
-
   public MultiplierField getMultiplierField() {
     return getFieldByClass(MultiplierField.class);
   }
@@ -173,17 +154,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(PiButton.class);
   }
 
-  public Place4Field getPlace4Field() {
-    return getFieldByClass(Place4Field.class);
-  }
-
-  public Place5Field getPlace5Field() {
-    return getFieldByClass(Place5Field.class);
-  }
-
-  /**
-   * @return the SampleFormatButton
-   */
   public SampleFormatButton getSampleFormatButton() {
     return getFieldByClass(SampleFormatButton.class);
   }
@@ -212,89 +182,108 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         return true;
       }
 
-      @Order(110)
-      public class BigDecimalColumnField extends AbstractLabelField {
+      @Order(10)
+      public class BigDecimalColumn extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("BigDecimalField"));
-        }
-      }
-
-      @Order(120)
-      public class BigDecimalField extends AbstractBigDecimalField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-      }
-
-      @Order(130)
-      public class BigDecimalMandatoryField extends AbstractBigDecimalField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(140)
-      public class BigDecimalDisabledField extends AbstractBigDecimalField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
+        protected boolean getConfiguredBorderVisible() {
           return false;
         }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
+        @Order(110)
+        public class BigDecimalColumnField extends AbstractLabelField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("EmptyString");
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "BOLD";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(TEXTS.get("BigDecimalField"));
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setValue(BigDecimal.valueOf(Math.E));
-        }
-      }
+        @Order(120)
+        public class BigDecimalField extends AbstractBigDecimalField {
 
-      @Order(150)
-      public class BigDecimalStyledField extends AbstractBigDecimalField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Styled");
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
         }
 
-        @Override
-        protected void execChangedValue() {
-          if (getValue().signum() < 0) {
+        @Order(130)
+        public class BigDecimalMandatoryField extends AbstractBigDecimalField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(140)
+        public class BigDecimalDisabledField extends AbstractBigDecimalField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(BigDecimal.valueOf(Math.E));
+          }
+        }
+
+        @Order(150)
+        public class BigDecimalStyledField extends AbstractBigDecimalField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Styled");
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null && getValue().signum() < 0) {
+              setForegroundColor("FF0000");
+            }
+            else {
+              setForegroundColor(null);
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(BigDecimal.valueOf(-3.5));
             setForegroundColor("FF0000");
           }
-          else {
-            setForegroundColor(null);
-          }
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(BigDecimal.valueOf(-3.5));
-          setForegroundColor("FF0000");
         }
       }
     }
@@ -308,288 +297,323 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class InputField extends AbstractBigDecimalField {
+      public class ConfigurationTopBox extends AbstractGroupBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("BigDecimalFieldInput");
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Override
+        protected boolean getConfiguredBorderVisible() {
+          return false;
+        }
+
+        @Order(10)
+        public class InputField extends AbstractBigDecimalField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("BigDecimalFieldInput");
+          }
+        }
+
+        @Order(20)
+        public class Value0Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_VALUE";
+          }
+
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return InputField.class;
+          }
+
+          @Override
+          protected void execChangedMasterValue(Object newMasterValue) {
+            setValue(newMasterValue == null ? null : newMasterValue.toString());
+          }
+        }
+
+        @Order(25)
+        public class DisplayText0Field extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "PROP_DISPLAY_TEXT";
+          }
+
+          @Override
+          protected void execInitField() {
+            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                DisplayText0Field.this.setValue((String) evt.getNewValue());
+              }
+            });
+          }
         }
       }
 
       @Order(20)
-      public class GetValue0Field extends AbstractStringField {
+      public class ConfigurationBottomBox extends AbstractGroupBox {
 
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
+        @Order(30)
+        public class MinimumValueField extends AbstractBigDecimalField {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("GetValue");
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return InputField.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          setValue(newMasterValue == null ? null : newMasterValue.toString());
-        }
-      }
-
-      @Order(30)
-      public class MinimumValueField extends AbstractBigDecimalField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MinimumValue");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue() != null) {
-            getInputField().setMinValue(getValue());
-          }
-          else {
-            getInputField().setMinValue(null);
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MinimumValue");
           }
 
-          getInputField().validateContent();
-        }
-      }
-
-      @Order(40)
-      public class MaximumValueField extends AbstractBigDecimalField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MaximumValue");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue() != null) {
-            getInputField().setMaxValue(getValue());
-          }
-          else {
-            getInputField().setMaxValue(null);
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
           }
 
-          getInputField().validateContent();
-        }
-      }
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null) {
+              getInputField().setMinValue(getValue());
+            }
+            else {
+              getInputField().setMinValue(null);
+            }
 
-      @Order(50)
-      public class GroupingField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Grouping");
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
+            getInputField().validateContent();
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setValue(getInputField().isGroupingUsed());
-        }
+        @Order(40)
+        public class MaximumValueField extends AbstractBigDecimalField {
 
-        @Override
-        protected void execChangedValue() {
-          getInputField().setGroupingUsed(getValue());
-        }
-      }
-
-      @Order(60)
-      public class MinFractionDigitsField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MinFractionDigits");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getInputField().getMinFractionDigits());
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setMinFractionDigits(NumberUtility.nvl(getValue(), 0));
-        }
-      }
-
-      @Order(70)
-      public class MaxFractionDigitsField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MaxFractionDigits");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getInputField().getMaxFractionDigits());
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setMaxFractionDigits(NumberUtility.nvl(getValue(), 2));
-        }
-      }
-
-      @Order(80)
-      public class FractionDigitsField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("FractionDigits");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getInputField().getFractionDigits());
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setFractionDigits(NumberUtility.nvl(getValue(), 2));
-        }
-      }
-
-      @Order(90)
-      public class MultiplierField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Multiplier");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getInputField().getMultiplier());
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setMultiplier(NumberUtility.nvl(getValue(), 1));
-        }
-      }
-
-      @Order(100)
-      public class PercentField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Percent");
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getInputField().setPercent(getValue());
-        }
-      }
-
-      @Order(110)
-      public class FormatField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Format");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          DecimalFormat format = new DecimalFormat();
-
-          if (getValue() != null) {
-            format = new DecimalFormat(getValue());
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MaximumValue");
           }
 
-          getInputField().setFormat(format);
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null) {
+              getInputField().setMaxValue(getValue());
+            }
+            else {
+              getInputField().setMaxValue(null);
+            }
+
+            getInputField().validateContent();
+          }
         }
-      }
 
-      @Order(140)
-      public class Place1Field extends AbstractPlaceholderField {
-      }
+        @Order(50)
+        public class GroupingField extends AbstractBooleanField {
 
-      @Order(150)
-      public class Place2Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Grouping");
+          }
 
-      @Order(160)
-      public class Place3Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
 
-      @Order(170)
-      public class Place4Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().isGroupingUsed());
+          }
 
-      @Order(180)
-      public class Place5Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected void execChangedValue() {
+            getInputField().setGroupingUsed(getValue());
+          }
+        }
 
-      @Order(190)
-      public class Place6Field extends AbstractPlaceholderField {
-      }
+        @Order(55)
+        public class UpdateDisplayTextOnModify extends AbstractBooleanField {
 
-      @Order(200)
-      public class Place7Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
 
-      @Order(210)
-      public class Place8Field extends AbstractPlaceholderField {
-      }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("UpdateDisplayTextOnModify");
+          }
 
-      @Order(220)
-      public class Place9Field extends AbstractPlaceholderField {
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setUpdateDisplayTextOnModify(getValue());
+          }
+        }
+
+        @Order(60)
+        public class MinFractionDigitsField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MinFractionDigits");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().getMinFractionDigits());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setMinFractionDigits(NumberUtility.nvl(getValue(), 0));
+          }
+        }
+
+        @Order(70)
+        public class MaxFractionDigitsField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("MaxFractionDigits");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().getMaxFractionDigits());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setMaxFractionDigits(NumberUtility.nvl(getValue(), 2));
+          }
+        }
+
+        @Order(80)
+        public class FractionDigitsField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("FractionDigits");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().getFractionDigits());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setFractionDigits(NumberUtility.nvl(getValue(), 2));
+          }
+        }
+
+        @Order(90)
+        public class MultiplierField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Multiplier");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().getMultiplier());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setMultiplier(NumberUtility.nvl(getValue(), 1));
+          }
+        }
+
+        @Order(100)
+        public class PercentField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Percent");
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setPercent(getValue());
+          }
+        }
+
+        @Order(110)
+        public class FormatField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Format");
+          }
+
+          @Override
+          protected String getConfiguredLabelFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            DecimalFormat format = new DecimalFormat();
+
+            if (getValue() != null) {
+              format = new DecimalFormat(getValue());
+            }
+
+            getInputField().setFormat(format);
+          }
+        }
       }
     }
 
