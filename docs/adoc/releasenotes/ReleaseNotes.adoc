@@ -20,32 +20,35 @@ ifndef::mdledir[:mdledir: .]
 
 = Releases
 
-== Oxygen
-This version is under development and scheduled for release in June 2017.
+Oxygen: This version is under development and scheduled for release in June 2017.
 
 * Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
 * Runtime on Maven Central: link:http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22[6.1.0.x]
 
-=== What's New
+== What's New
 
-==== Strong content security policy CSP
+=== Strong content security policy CSP
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout Migration Guide].
 
-==== Binary resources support for HtmlField and BeanField
+=== Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
+
 * HtmlField
 * BeanField
+
 [[img-binary_resource_field, Figure 000]]
 .Binary resource on a model field.
 image::{imgsdir}/binary_resource_field.png[]
+
 * Html enabled StringColumn
 * BeanColumn
+
 [[img-binary_resource_column, Figure 000]]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
-==== TriState capability for check boxes
+=== TriState capability for check boxes
 Added support for tri-state value (`true`, `false` and `null` instead of just `true` and `false`) to boolean field and boolean column.
 
 The new property `triStateEnabled` controls whether the boolean field/column behaves as a normal checkbox (false)
@@ -54,10 +57,10 @@ or a tri-state checkbox (true).
 A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is
 interpreted as "undefined" and rendered as a filled square.
 
-==== New UriOpenAction: SAME_WINDOW
+=== New UriOpenAction: SAME_WINDOW
 The enum `UriOpenAction` provides a new value to open a URI in the current window: `SAME_WINDOW`
 
-==== New methods in StringUtility
+=== New methods in StringUtility
 `StringUtility` provides the following new methods:
 
 * `containsString()`
@@ -72,10 +75,10 @@ The enum `UriOpenAction` provides a new value to open a URI in the current windo
 
 All methods are null-safe, unit tested and documented with JavaDoc.
 
-==== New form field property "preventInitialFocus"
+=== New form field property "preventInitialFocus"
 By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
 
-==== Multiple Dimensions Support
+=== Multiple Dimensions Support
 Some components now support more dimensions for various attributes.
 E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available.
 See the chapter 'Multiple Dimensions Support' in the link:{techdoc}[Scout Technical Documentation] for details and examples.
@@ -93,7 +96,7 @@ Currently the following attributes support multiple dimensions:
 * Trees: enabled
 * Tables: enabled
 
-==== Form Field Enabled Inheritance
+=== Form Field Enabled Inheritance
 
 The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field.
 Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields.
