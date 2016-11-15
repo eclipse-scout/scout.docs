@@ -72,6 +72,7 @@ The enum `UriOpenAction` provides a new value to open a URI in the current windo
 * `length()`
 * `indexOf()`
 * `lastIndexOf()`
+* `split()` (with _limit_ argument)
 
 All methods are null-safe, unit tested and documented with JavaDoc.
 
