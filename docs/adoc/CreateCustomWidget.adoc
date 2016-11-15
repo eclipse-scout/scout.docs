@@ -6,7 +6,7 @@ For details please refer to https://github.com/BSI-Business-Systems-Integration-
 https://github.com/Leaflet/Leaflet.heat.
 
 === Step by step scaffolding
-* As a host for your new widget either create a new scout project with {yourWidgtetName}.demo as artifact id or use an existing scout neon project.
+* As a host for your new widget either create a new scout project with {yourWidgtetName}.demo as artifact id or use an existing scout project.
 * Create a new maven project {yourWidgetName}.client
 ** add dependency to org.eclipse.scout.rt.client
 * Create a new maven projet {yourWidgetName}.ui.html

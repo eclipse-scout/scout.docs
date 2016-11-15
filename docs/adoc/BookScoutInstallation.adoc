@@ -22,9 +22,9 @@ ifndef::mdledir[:mdledir: .]
 === Overview
 
 This chapter walks you through the installation of Eclipse Scout.
-The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 6.0 which is delivered as integral part of the Eclipse Neon release train, 2016.
+The installation description (as well as the rest of this book) is written and tested for Eclipse Scout {doc-short-version} which is delivered as integral part of the Eclipse Oxygen release train, 2017.
 Detailed information regarding the scheduling of this release train is provided in the Eclipse
-wiki.footnote:[Luna release plan: http://wiki.eclipse.org/Neon/Simultaneous_Release_Plan].
+wiki.footnote:[Release plan: http://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan].
 
 We assume that you have not installed any software relevant for the content of this book.
 This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK).
@@ -137,9 +137,9 @@ image::{imgsdir}/eclipse_add_repository.png[]
 
 In the install dialog, click on the btn:[Add...] button to enter the link to the Scout repository.
 This opens the popup dialog _Add Repository_
-As shown in <<img-eclipse_add_repository>>, you may use "`Scout Luna`" for the [field]_Name_ field.
+As shown in <<img-eclipse_add_repository>>, you may use "`Scout Oxygen`" for the [field]_Name_ field.
 For the [field]_Location_ field enter the Scout release repository as specified below.
-http://download.eclipse.org/scout/releases/4.0.
+http://download.eclipse.org/scout/releases/{doc-short-version}.
 
 [[img-eclipse_select_scout_features, Figure 000]]
 .Select the Scout features to add to the Eclipse installation
