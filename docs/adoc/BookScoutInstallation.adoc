@@ -97,7 +97,7 @@ C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll
 where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.
 
 If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation.
-Fist, select the menu:Help[About Eclipse] menu to open the about dialog.
+First, select the menu:Help[About Eclipse] menu to open the about dialog.
 Then, click on the btn:[Installation Details] button and switch to the [tab]_Configuration_ tab.
 In the long list of system properties you will find lines similar to the ones shown below.
 
