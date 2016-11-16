@@ -383,7 +383,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
             INumberColumn column = (INumberColumn) c;
             String oldAggr = column.getAggregationFunction();
             for (i = 0; i < aggrFunctions.size(); ++i) {
-              if (StringUtility.nvl(oldAggr, "").equals(StringUtility.nvl(aggrFunctions.get(i), ""))) {
+              if (StringUtility.emptyIfNull(oldAggr).equals(StringUtility.emptyIfNull(aggrFunctions.get(i)))) {
                 column.setAggregationFunction(aggrFunctions.get((i + 1) % (aggrFunctions.size())));
                 break;
               }
@@ -428,16 +428,14 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
             INumberColumn column = (INumberColumn) c;
             String oldEffect = column.getBackgroundEffect();
             for (int i = 0; i < effects.size(); ++i) {
-              if (StringUtility.nvl(oldEffect, "").equals(StringUtility.nvl(effects.get(i), ""))) {
+              if (StringUtility.emptyIfNull(oldEffect).equals(StringUtility.emptyIfNull(effects.get(i)))) {
                 column.setBackgroundEffect(effects.get((i + 1) % (effects.size())));
                 break;
               }
             }
-
           }
         }
       }
-
     }
 
     @Order(50)

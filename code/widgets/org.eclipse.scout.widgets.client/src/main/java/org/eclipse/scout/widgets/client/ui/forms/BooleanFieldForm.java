@@ -361,7 +361,7 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
       }
 
       private void updateFontAndColors() {
-        String name = StringUtility.nvl(getFontNameField().getValue(), "");
+        String name = StringUtility.emptyIfNull(getFontNameField().getValue());
         int style = NumberUtility.nvl(getFontStyleField().getValue(), 0);
         FontSpec fs = new FontSpec(name, style, 0);
 

@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 
@@ -30,7 +30,7 @@ public class OptionsForm extends AbstractForm {
 
   @Override
   protected void execInitForm() {
-    String theme = StringUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
+    String theme = ObjectUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
     getUiThemeField().setValue(theme);
     getUiThemeField().setStatusVisible(false);
   }

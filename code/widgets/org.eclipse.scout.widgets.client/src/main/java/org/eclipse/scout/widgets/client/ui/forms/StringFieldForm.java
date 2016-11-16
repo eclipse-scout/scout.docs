@@ -28,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
@@ -548,15 +549,15 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       }
 
       private void updateFontAndColors() {
-        String name = StringUtility.nvl(getFontNameField().getValue(), "");
+        String name = StringUtility.emptyIfNull(getFontNameField().getValue());
         int style = NumberUtility.nvl(getFontStyleField().getValue(), 0);
         int size = NumberUtility.nvl(getFontSizeField().getValue(), 0);
         FontSpec fs = new FontSpec(name, style, size);
 
         getTextInputField().setFont(fs);
 
-        String foreground = StringUtility.nvl(getForegroundColorField().getValue(), "000000");
-        String background = StringUtility.nvl(getBackgroundColorField().getValue(), "ffffff");
+        String foreground = ObjectUtility.nvl(getForegroundColorField().getValue(), "000000");
+        String background = ObjectUtility.nvl(getBackgroundColorField().getValue(), "ffffff");
 
         getTextInputField().setForegroundColor(foreground);
         getTextInputField().setBackgroundColor(background);

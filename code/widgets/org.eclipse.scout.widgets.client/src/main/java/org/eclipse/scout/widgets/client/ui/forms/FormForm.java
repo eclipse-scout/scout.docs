@@ -418,7 +418,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   case PopupWindow: {
                     FormForm form = new FormForm();
                     form.setTitle(getFormTitleField().getValue());
-                    String newSubTitle = StringUtility.nvl(getFormSubTitleField().getValue(), "");
+                    String newSubTitle = StringUtility.emptyIfNull(getFormSubTitleField().getValue());
                     if (newSubTitle.matches("^#\\d+$")) {
                       newSubTitle = "#" + (Integer.parseInt(newSubTitle.substring(1)) + 1);
                     }
