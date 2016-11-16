@@ -76,6 +76,18 @@ The enum `UriOpenAction` provides a new value to open a URI in the current windo
 
 All methods are null-safe, unit tested and documented with JavaDoc.
 
+=== New ObjectUtility
+ObjectUtility was added as new utility for generic object methods and provides null-safe implementations of various Object methods. Various methods from former `CompareUtility`:
+
+* `equals()`
+* `notEquals()`
+* `nvl()`
+* `isOneOf()`
+* `compareTo()`
+
+And a new method `ObjectUtility.toString(Object)` providing a null-safe implementation of `Object.toString()` returning `null` if specified object is `null`.
+
+
 === New form field property "preventInitialFocus"
 By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
 
