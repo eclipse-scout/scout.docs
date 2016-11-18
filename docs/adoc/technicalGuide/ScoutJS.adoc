@@ -15,6 +15,31 @@ ifndef::mdledir[:mdledir: .]
 
 ==== What is a widget?
 
+==== Icons
+Widgets that have a property `iconId` (for instance `Menu`) can display an icon. This iconId references
+an icon which can be either a bitmap image (GIF, PNG, JPEG, etc.) or a character from an icon-font. An example
+for an icon-font is the _scoutIcons.ttf_ which comes shipped with Scout.
+
+Depending on the type (image, font-icon) the iconId property references:
+
+* **Image**: iconId is an URL which points to an image resource accessible via HTTP.
++
+Example: `/icons/person.png`
+* **Font-icon**: iconId has the format `font:[UTF-character]`.
++
+Example: `font:\uE043`, references a character in _scoutIcons.ttf_
++
+Example: `font:fooIcons \uE109`, references a character in custom font _fooIcons.ttf_
+* **Icon Constants**: iconId has the format: `${iconId:[constant]}`, where constant is a constant in `scout.icons`.
+  This format is especially useful when you configure a Scout widget with a JSON model. The value of the constant
+  is again either an image or a font-icon as described above.
++
+Example: `${iconId:ANGLE_UP}` uses `scout.icons.ANGLE_UP`, icons predefined by Scout
++
+Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon constant objects
+
+
+
 ==== How to create a custom widget
 
 === Table
