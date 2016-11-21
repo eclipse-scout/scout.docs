@@ -31,6 +31,11 @@ Oxygen: This version is under development and scheduled for release in June 2017
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout Migration Guide].
 
+=== Enforcement of Model Thread
+Every operation which results in a modification of the model and eventually of the ui has to be performed by the model thread. This has been true for a long time and still is. If the wrong thread was used, unexpected behavior was the result, like a delayed update of the ui or concurrency exceptions. To prevent such behavior in the future, an exception will be thrown if an operation is executed in the wrong thread.
+
+If you get such an exception, you'll need to wrap your operation in a model job and schedule it using `ModelJobs.schedule()`, see the chapter ModelJobs in the link:{techdoc}#modeljobs[Scout Technical Documentation] for details.
+
 === Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
 
@@ -86,7 +91,6 @@ ObjectUtility was added as new utility for generic object methods and provides n
 * `compareTo()`
 
 And a new method `ObjectUtility.toString(Object)` providing a null-safe implementation of `Object.toString()` returning `null` if specified object is `null`.
-
 
 === New form field property "preventInitialFocus"
 By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
