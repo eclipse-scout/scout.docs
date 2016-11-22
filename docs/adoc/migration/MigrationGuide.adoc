@@ -112,9 +112,6 @@ Use StringUtility.hasText() and StringUtility.emptyIfNull() or StringUtility.nul
 The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility.
 The existing methods were deprecated and will be removed with next Scout release.
 
-=== POP3Adapter, IPOP3MessageVisitor
-The old POP3-based mail implementation was deprecated and will be removed with next Scout release.
-
 // ^^^
 // Insert descriptions of Java API changes here
 
