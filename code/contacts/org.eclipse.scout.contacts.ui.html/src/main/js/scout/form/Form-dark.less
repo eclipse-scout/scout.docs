@@ -1,0 +1,41 @@
+/*******************************************************************************
+ * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ ******************************************************************************/
+@import "scout/form/Form.less";
+
+.form {
+  background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
+}
+
+.dialog {
+  position: absolute !important; /* ignore positioning of 'ui-resizable' */
+  background-image: linear-gradient(0deg, @background-color, @palette-gray-10);
+  border: solid 1px @border-color;
+  border-top-left-radius: @border-radius;
+  border-top-right-radius: @border-radius;
+  #scout.drop-shadow-large();
+  margin: 10px; /* minimum padding to desktop */
+  margin-bottom: 15px;
+  top: 0px; /* must be specified otherwise dialogs will be positioned at end of document and increase document size */
+
+/* DEMO COMPONENT STYLING uncomment following lines */
+/*   position: absolute !important; */
+/*   background-image: linear-gradient(0deg, @background-color, @palette-gray-10); */
+/*   transform: rotate(-20deg); */
+/*   box-shadow: 10px 10px 5px #aaa; */
+/*   margin-top: 100px; */
+/*   margin-left: 50px; */
+/*   padding: 10px; */
+/*   text-align: center; */
+/*   width: 300px; */
+/*   border-radius: 5px; */
+/*   border: 10px solid #fa1;  */
+/*   top: 0px; */
+}

@@ -1,0 +1,55 @@
+/*******************************************************************************
+ * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ ******************************************************************************/
+@import "scout/form/fields/tabbox/TabBox.less";
+
+.tab-box {
+  background-color: @palette-blue-1;
+}
+
+.tab-area {
+  margin-top: 10px;
+  margin-left: @mandatory-indicator-width;
+  margin-bottom: -8px;
+
+  & > .tab-item {
+    padding: @group-title-padding-y @tabbox-padding-x 12px;
+    margin-bottom: -5px;
+    border-radius: 8px;
+    border-bottom: 0px;
+    font-weight: normal;
+    color: @palette-blue-6;
+
+    &.selected {
+      background-color: @palette-blue-0;
+      border-bottom-color: @palette-gray-3;
+    color: @palette-black;
+    }
+
+    &.marked:not(.selected) {
+      border-bottom-color: @palette-gray-5;
+    }
+
+    &:focus::before {
+      content: none;
+    }
+  }
+
+  &::after {
+    visibility: hidden;
+  }
+
+}
+
+.tab-content {
+  background-color: @palette-blue-0;
+  border: 10px;
+  border-top: 15px;
+}
