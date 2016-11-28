@@ -295,7 +295,7 @@ Example:
     <meta charset="UTF-8">
     <title>Contacts Application</title>
     <scout:include template="head.html" />
-    <scout:stylesheet src="res/scout-login-module.css" />
+    <scout:stylesheet src="res/scout-login-module.less" />
     <scout:script src="res/jquery-all-macro.js" />
     <scout:script src="res/scout-login-module.js" />
     <scout:script src="res/login.js" /> <!--1-->
@@ -320,3 +320,22 @@ $(document).ready(function() {
 
 // ^^^
 // Insert descriptions of other important changes here
+
+=== Renamed *.css files to *.less
+Because the former .css files actually were LESS files, we've changed the wrong file extension from .css to .less. This allows editors with
+LESS support/validation to properly work with the LESS syntax and simplifies the usage of the LESS @import clause, since the (less) hint is
+not required anymore.
+
+When migrating from an older Scout version to version 6.1 you must:
+
+* Rename all *.css files in directory /WebContent/res to *.less
+* The include syntax in macro and module files has changed:
+** Old: `//@include("scout-module.css")`
+** New: `@import "scout-module.less";`
+* in each *.html file in directory /WebContent, use *.less extension in stylesheet tag:
+** Old: `<scout:stylesheet src="res/bsicrm-all-macro.css" />`
+** New: `<scout:stylesheet src="res/bsicrm-all-macro.less" />`
+
+Note: you can still import regular .css files in your *-module.less. So importing a .css file is still possible and required in some cases.
+Just make sure that all stylesheets using LESS do have a *.less file extension.
+
