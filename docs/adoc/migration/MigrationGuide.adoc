@@ -100,7 +100,7 @@ The same method also exists for the enabled-granted property: `formField.setEnab
 However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.
 
 === NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()
-The nvl() methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic ObjectUtility.nvl().
+The `nvl()` methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic `ObjectUtility.nvl()`.
 The existing methods were deprecated and will be removed with next Scout release.
 Additionally the existing methods were restricted to use Number respectively Date only.
 
@@ -126,8 +126,8 @@ The existing methods were deprecated and will be removed with next Scout release
 === scout.graphics.prefSize()
 The signature of JavaScript method `scout.graphics.prefSize()` has changed:
 
-* *Old*: scout.graphics.prefSize($elem, [line-through]##includeMargin##, options)
-* *New*: scout.graphics.prefSize($elem, options)
+* Old: `scout.graphics.prefSize($elem, [line-through]##includeMargin##, options)`
+* New: `scout.graphics.prefSize($elem, options)`
 
 The argument _includeMargin_ was moved to the options object. See code documentation for a description of all options.
 
@@ -156,8 +156,8 @@ If it is a property change event it is even simpler. Just call `_addRemoteProper
 
 The signature of JavaScript method `scout.ModelAdapter._send()` has changed:
 
-* *Old*: scout.ModelAdapter._send(type, data, [line-through]##delay, coalesceFunc, noBusyIndicator##)
-* *New*: scout.ModelAdapter._send(type, data, options)
+* Old: `scout.ModelAdapter._send(type, data, [line-through]##delay, coalesceFunc, noBusyIndicator##)`
+* New: `scout.ModelAdapter._send(type, data, options)`
 
 Instead of passing individual arguments, pass all but the first two arguments in an options object:
 * `delay`
@@ -181,7 +181,7 @@ this._send('selected', eventData, {
 === scout.Widget
 If you have not created any custom widgets, you can skip this.
 
-=== destroy()
+==== destroy()
 With the separation of widget and model adapter the destroy handling has been refactored.
 This means every widget may now be destroyed. Previously only the widgets which extended from `scout.ModelAdapter` could be destroyed.
 The big advantage is that every widget now behaves the same and that there finally is a counter part for the `_init()` called `_destroy()` which makes it possible to do cleanup like removing listeners.
@@ -198,15 +198,15 @@ It eventually has to be destroyed though for a proper cleanup. Normally this is 
 
 So check all the occurrences of `YourWidget.remove()` and maybe replace them with destroy.
 
-=== EventSupport
+==== EventSupport
 Every widget now installs the event support by default. Previously `_addEventSupport` had to be called in the constructor of the widget. This may now be removed.
 
-=== KeyStrokeContext
+==== KeyStrokeContext
 The method `_addKeyStrokeContextSupport` has been removed. If your widget needs keystroke support override `_createKeyStrokeContext` and provide one. You can probably use the default `scout.KeyStrokeContext`.
 The parameter of `_initKeyStrokeContext` has been removed as well. Just use `this.keyStrokeContext` instead.
 
-=== Changes in objectType syntax and scout.create()
-The "objectType" is a string describing which JavaScipt "class" to use when creating an object instance using `scout.create()` (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant was change from `.` to `:`. The namespace separator remains `.`. This allows the following forms of object types:.
+=== Changes in "objectType" syntax and scout.create()
+The "objectType" is a string describing which JavaScipt "class" to use when creating an object instance using `scout.create()` (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant (e.g. defined by `@ModelVariant` annotation in Java) was change from `.` to `:`. The namespace separator remains `.`. This allows the following forms of object types:.
 
 * `"StringField"`: name without namespace, i.e. a type in the default namespace (resolves to `scout.StringField`)
 * `"myproject.StringField"`: namespace qualified name
