@@ -70,7 +70,7 @@ The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the
 The `Pair` class was made abstract and two default implementations for a mutable pair (class `MutablePair`) and immutable pair (`ImmutablePair`) were added. Since the former `Pair` class was immutable, all occurences were changed to use the new `ImmutablePair` class. Migrate by update all occurences to use the new `ImmutablePair`.
 
 === Customizing CSP directives
-The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style with_XXX_() methods.
+The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style _withXXX()_ methods.
 
 === StringUtility.contains() deprecated
 The method `StringUtility.contains()` was marked as deprecated and will be removed in the P-release. The method was often used incorrectly due to poor documentation and unconventional implementation. The utility provides multiple new methods that can be used as a replacement:
@@ -318,24 +318,22 @@ $(document).ready(function() {
 ----
 <1> Translated texts are extracted automatically from DOM.
 
-// ^^^
-// Insert descriptions of other important changes here
-
 === Renamed *.css files to *.less
-Because the former .css files actually were LESS files, we've changed the wrong file extension from .css to .less. This allows editors with
-LESS support/validation to properly work with the LESS syntax and simplifies the usage of the LESS @import clause, since the (less) hint is
-not required anymore.
+Because the former _*.css_ files actually were http://lesscss.org[LESS] files, we've changed the wrong file extension from `.css` to `.less`.
+This allows editors with LESS support/validation to properly work with the LESS syntax and simplifies the usage of the LESS _@import_ clause, since the `(less)` hint is not required anymore.
 
-When migrating from an older Scout version to version 6.1 you must:
+Steps required to migrate from an older Scout version to version 6.1:
 
-* Rename all *.css files in directory /WebContent/res to *.less
-* The include syntax in macro and module files has changed:
+* Rename all _*.css_ files in directory `/WebContent/res` to _*.less_
+* Chane the include syntax in _*-macro.less_ and _*-module.less_:
 ** Old: `//@include("scout-module.css")`
 ** New: `@import "scout-module.less";`
-* in each *.html file in directory /WebContent, use *.less extension in stylesheet tag:
+* In each _*.html_ file in directory `/WebContent`, use _*.less_ extension in stylesheet tag:
 ** Old: `<scout:stylesheet src="res/bsicrm-all-macro.css" />`
 ** New: `<scout:stylesheet src="res/bsicrm-all-macro.less" />`
 
-Note: you can still import regular .css files in your *-module.less. So importing a .css file is still possible and required in some cases.
-Just make sure that all stylesheets using LESS do have a *.less file extension.
+NOTE: Importing regular `.css` files in module files (_*-module.less_) is still supported, and required in some cases.
+Just make sure that all stylesheets using LESS do have a _*.less_ file extension. Macros and modules must always be LESS files.
 
+// ^^^
+// Insert descriptions of other important changes here
