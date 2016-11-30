@@ -5,6 +5,7 @@
   "nodes": [
     {
       "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:Carousel}",
       "detailForm": {
         "objectType": "jswidgets.CarouselForm"
@@ -12,6 +13,7 @@
     },
     {
       "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:TableField}",
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"
