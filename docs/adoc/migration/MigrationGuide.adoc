@@ -116,6 +116,11 @@ Use StringUtility.hasText() and StringUtility.emptyIfNull() or StringUtility.nul
 The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility.
 The existing methods were deprecated and will be removed with next Scout release.
 
+=== *ThreadInterrupted-, TimedOut- and FutureCancelled-Exception* _(extends java.lang.RuntimeException)_ are now *PlatofromErrors* _(extends java.lang.Error)_
+There were circumstances where the cancellation of long-running actions did not work or lead to unpleasant behaviors (for example multiple `ExceptionForm`, that is displayed after a cancellation by the user).  Most of time caught exceptions where the reason for such behaviors.
+
+In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch(RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
