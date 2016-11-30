@@ -20,9 +20,6 @@
                   "carousel": {
                      "id":"Carousel",
                      "objectType": "Carousel",
-                     "gridDataHints":{
-                        "h":2
-                     },
                      "widgets":[
                         {
                            "id": "CarouselItem1",
