@@ -369,7 +369,6 @@ public final class JaxWsSnippet {
       return "jaxws.ping.timeout.read";
     }
   }
-  // end::jaxws.example.wsclient.config[]
 
   {
     // tag::jaxws.example.wsclient.call_1[]
