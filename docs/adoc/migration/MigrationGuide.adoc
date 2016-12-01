@@ -99,6 +99,10 @@ To have the same behaviour you can use the method `formField.setEnabled(yourValu
 The same method also exists for the enabled-granted property: `formField.setEnabledGranted(yourValue, true, true)`.
 However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.
 
+Furthermore the meaning of property change listeners changed. Check all the listeners using the `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED` property.
+This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired.
+The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED`.
+
 === NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()
 The `nvl()` methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic `ObjectUtility.nvl()`.
 The existing methods were deprecated and will be removed with next Scout release.
