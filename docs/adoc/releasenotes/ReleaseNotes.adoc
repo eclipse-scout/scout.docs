@@ -36,6 +36,10 @@ Every operation which results in a modification of the model and eventually of t
 
 If you get such an exception, you'll need to wrap your operation in a model job and schedule it using `ModelJobs.schedule()`, see the chapter ModelJobs in the link:{techdoc}#modeljobs[Scout Technical Documentation] for details.
 
+== Properties support for Lists, Maps and imports
+
+Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section "Configuration Management" for more details.
+
 == Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:
 

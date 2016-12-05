@@ -103,6 +103,10 @@ Furthermore the meaning of property change listeners changed. Check all the list
 This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired.
 The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED`.
 
+=== ITableHolder
+The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
+Therefore the class `ITableHolder` has been removed. The constants that were present on that interface can be accessed using the interface `org.eclipse.scout.rt.client.ui.basic.table.ITableRow` from the client or `org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder` from outside the client.
+
 === NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()
 The `nvl()` methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic `ObjectUtility.nvl()`.
 The existing methods were deprecated and will be removed with next Scout release.
@@ -338,8 +342,8 @@ Steps required to migrate from an older Scout version to version 6.1:
 ** Old: `//@include("scout-module.css")`
 ** New: `@import "scout-module.less";`
 * In each _*.html_ file in directory `/WebContent`, use _*.less_ extension in stylesheet tag:
-** Old: `<scout:stylesheet src="res/bsicrm-all-macro.css" />`
-** New: `<scout:stylesheet src="res/bsicrm-all-macro.less" />`
+** Old: `<scout:stylesheet src="res/myapp-all-macro.css" />`
+** New: `<scout:stylesheet src="res/myapp-all-macro.less" />`
 
 NOTE: Importing regular `.css` files in module files (_*-module.less_) is still supported, and required in some cases.
 Just make sure that all stylesheets using LESS do have a _*.less_ file extension. Macros and modules must always be LESS files.

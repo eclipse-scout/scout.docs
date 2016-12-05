@@ -12,9 +12,13 @@ package org.eclipse.scout.widgets.client.ui.desktop.menu;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
-import org.eclipse.scout.rt.platform.config.ConfigUtility;
+import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitBranchConfigProperty;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitFolderConfigProperty;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitSourceConfigProperty;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitUrlConfigProperty;
 
 public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
 
@@ -27,9 +31,9 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
   protected void execAction() {
     String canonicalName = provideSourceClass().getCanonicalName();
     StringBuilder sb = new StringBuilder();
-    sb.append(ConfigUtility.getProperty("git.url")).append("/");
-    sb.append(ConfigUtility.getProperty("git.branch")).append("/");
-    sb.append(ConfigUtility.getProperty("git.folder")).append("/");
+    sb.append(CONFIG.getPropertyValue(GitUrlConfigProperty.class)).append("/");
+    sb.append(CONFIG.getPropertyValue(GitBranchConfigProperty.class)).append("/");
+    sb.append(CONFIG.getPropertyValue(GitFolderConfigProperty.class)).append("/");
     sb.append("org.eclipse.scout.widgets");
 
     // maven module specific part
@@ -43,7 +47,7 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
       sb.append(".client").append("/");
     }
 
-    sb.append(ConfigUtility.getProperty("git.source")).append("/");
+    sb.append(CONFIG.getPropertyValue(GitSourceConfigProperty.class)).append("/");
     sb.append(canonicalName.replace(".", "/"));
     sb.append(".java");
     ClientSession.get().getDesktop().openUri(sb.toString(), OpenUriAction.NEW_WINDOW);

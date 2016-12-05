@@ -284,16 +284,24 @@ The given property key is searched in the following environments:
 
 . In the system properties (`java.lang.System.getProperty(String)`).
 . In the properties file. The properties file can be
-.. a file on the local filesystem where the system property with key `config.properties` holds the absolute path to the file or
+.. a file on the local filesystem where the system property with key `config.properties` holds an absolute URL to the file or
 .. a file on the classpath with path `/config.properties` (recommended).
 . In the environment variables of the system (`java.lang.System.getenv(String)`).
 
+Supported formats are simple key-value pairs, list values and map values. For more details about the format please refer to the JavaDoc of the `org.eclipse.scout.rt.platform.config.PropertiesHelper` class.
+
+A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list:
+
+* `import[0]=classpath:myConfigs/other.properties`
+* `import[1]=file:/C:/path/to/my/settings.properties`
+
+
 ==== Additional examples
 
-Because the property a class are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
+Because the property classes are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
 
 <<lst-PropertyConstant>> demonstrates how you can use the replace annotation to change the existing `ApplicationNameProperty` class.
-The value is no longer fetched via the config mechanism, because the `createValue()` method is overriden.
+The value is no longer fetched via the config mechanism, because the `getValue(String)` method is overriden.
 In this case a fixed value is returned.
 
 [[lst-PropertyConstant, Listing]]
