@@ -1,4 +1,5 @@
 jswidgets.App = function() {
+  jswidgets.App.parent.call(this);
   this.presentationMode = false;
   this.presentation;
 };
