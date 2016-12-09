@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2015 BSI Business Systems Integration AG.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Distribution License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/org/documents/edl-v10.html
+
+    Contributors:
+        BSI Business Systems Integration AG - initial API and implementation
+
+-->
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse.scout.widgets</groupId>
+    <artifactId>org.eclipse.scout.widgets</artifactId>
+    <version>6.1.0-SNAPSHOT</version>
+    <relativePath>../org.eclipse.scout.widgets</relativePath>
+  </parent>
+
+  <artifactId>org.eclipse.scout.widgets.ui.html.app.selenium</artifactId>
+  <packaging>war</packaging>
+
+  <properties>
+    <master_test_timeout>3600</master_test_timeout>
+    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/2.25</chromedriver_base_url>
+    <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
+  </properties>
+
+  <dependencies>
+    <!-- Widget Application -->
+    <dependency>
+      <groupId>org.eclipse.scout.widgets</groupId>
+      <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
+    </dependency>
+
+    <!-- Jetty Server -->
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.dev.jetty</artifactId>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.ui.html.selenium</artifactId>
+      <version>6.1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+
+ <profiles>
+    <profile>
+      <id>win32_chrome_driver</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <chromedriver_url>${chromedriver_base_url}/chromedriver_win32.zip</chromedriver_url>
+        <chromedriver_md5>2727729883ac960c2edd63558f08f601</chromedriver_md5>
+        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver.exe</webdriver.chrome.driver>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux32_chrome_driver</id>
+      <activation>
+        <os>
+          <family>unix</family>
+          <arch>x86</arch>
+        </os>
+      </activation>
+      <properties>
+        <chromedriver_url>${chromedriver_base_url}/chromedriver_linux32.zip</chromedriver_url>
+        <chromedriver_md5>175ac6d5a9d7579b612809434020fd3c</chromedriver_md5>
+        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux64_chrome_driver</id>
+      <activation>
+        <os>
+          <family>unix</family>
+          <arch>x86_64</arch>
+        </os>
+      </activation>
+      <properties>
+        <chromedriver_url>${chromedriver_base_url}/chromedriver_linux64.zip</chromedriver_url>
+        <chromedriver_md5>16673c4a4262d0f4c01836b5b3b2b110</chromedriver_md5>
+        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
+      </properties>
+    </profile>
+    <profile>
+      <id>osx_chrome_driver</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <chromedriver_url>${chromedriver_base_url}/chromedriver_mac64.zip</chromedriver_url>
+        <chromedriver_md5>384031f9bb782edce149c0bea89921b6</chromedriver_md5>
+        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>download_chrome_driver</id>
+      <activation>
+        <file>
+          <missing>${seleniumDrivers}/chrome*</missing>
+        </file>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+                        <versionRange>[1.2.1,)</versionRange>
+                        <goals>
+                          <goal>wget</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <execute>
+                          <!-- to run on full and incremental build -->
+                          <runOnIncremental>true</runOnIncremental>
+                          <!-- to run once a this module is imported into workspace -->
+                          <runOnConfiguration>true</runOnConfiguration>
+                        </execute>
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>com.googlecode.maven-download-plugin</groupId>
+            <artifactId>download-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <executions>
+              <execution>
+                <id>get-chromedriver</id>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <phase>validate</phase>
+                <configuration>
+                  <url>${chromedriver_url}</url>
+                  <md5>${chromedriver_md5}</md5>
+                  <outputDirectory>${seleniumDrivers}</outputDirectory>
+                  <unpack>true</unpack>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
