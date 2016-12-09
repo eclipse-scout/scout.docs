@@ -263,7 +263,7 @@ The simplest way to migrate these files is to create them anew using the Scout S
 By default, inline `<script>` tags in HTML files are prohibited by CSP rules. Bootstrapping JavaScript code was therefore moved to dedicated _*.js_ files in the `WebContent/res` folder. Existing projects using CSP have to manually perform the following steps:
 
 . Open each _*.html_ file in `your.project.ui.html/src/main/resources/WebContent` folder and check if there are any inline script parts. Only `<script>` tags with embedded JavaScript code are considered "inline". Tags with a `src` attribute don't need to be changed.
-. Transfer the content of each script part to a _*.js_ file in the `res` subdirectory (e.g. _index.html_ => _res/index.js_) and delete the now empty <script> part.
+. Transfer the content of each script part to a _*.js_ file in the `res` subdirectory (e.g. _index.html_ => _res/index.js_) and delete the now empty <script> part. Note that the content has changed as well, to initialize the application the new app object has to be used (scout.init -> new scout.RemoteApp().init, scout.login.init -> new scout.LoginApp().init, scout.logout.init -> new scout.LogoutApp().init)).
 . Add a reference to the _*.js_ file in the `<head>` section using the `<scout:script>` tag, e.g.: +
 `<scout:script src="res/index.js" />`
 . If the extracted _*.js_ file contains `<scout:message>` tags, they have to be moved back to the `<body>` of the corresponding _*.html_ file (because the NLS translation can only process HTML files). The attribute `style` has to be changed from `javascript` to `tag`.
@@ -322,7 +322,7 @@ Example:
 [source,javascript]
 ----
 $(document).ready(function() {
-  scout.login.init(); // <1>
+  new scout.LoginApp().init(); // <1>
 });
 ----
 <1> Translated texts are extracted automatically from DOM.
