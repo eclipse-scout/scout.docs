@@ -40,15 +40,15 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Organizations"); // <1>
+    return TEXTS.get("Organizations");
   }
   // end::PageInit[]
   // tag::childPage[]
 
-  @Override // <1>
+  @Override
   protected IPage<?> execCreateChildPage(ITableRow row) {
     OrganizationNodePage childPage = new OrganizationNodePage();
-    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row)); // <2>
+    childPage.setOrganizationId(getTable().getOrganizationIdColumn().getValue(row));
     return childPage;
   }
   // end::childPage[]
