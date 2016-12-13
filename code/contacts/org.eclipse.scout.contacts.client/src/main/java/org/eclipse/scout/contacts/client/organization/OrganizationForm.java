@@ -32,7 +32,7 @@ import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.G
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
-import org.eclipse.scout.contacts.shared.organization.OrganizationUpdatePermission;
+import org.eclipse.scout.contacts.shared.organization.UpdateOrganizationPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -298,7 +298,7 @@ public class OrganizationForm extends AbstractForm {
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).load(formData);
       importFormData(formData);
-      setEnabledPermission(new OrganizationUpdatePermission());
+      setEnabledPermission(new UpdateOrganizationPermission());
 
       getForm().setSubTitle(calculateSubTitle());
     }

@@ -12,11 +12,11 @@ package org.eclipse.scout.contacts.shared.organization;
 
 import java.security.BasicPermission;
 
-public class OrganizationCreatePermission extends BasicPermission {
+public class CreateOrganizationPermission extends BasicPermission {
 
   private static final long serialVersionUID = 1L;
 
-  public OrganizationCreatePermission() {
+  public CreateOrganizationPermission() {
     super("CreateOrganization");
   }
 }
