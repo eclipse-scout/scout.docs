@@ -38,11 +38,11 @@ Actions on the top right corner:
 
 | image:{imgsdir}/icon_text_add.png[]
 | New entry...
-| Opens the <<sdk_wizard_nls-entry.adoc#, New Text Entry Wizard>>
+| Opens the {sdk_wizard_nls-entry}
 
 | image:{imgsdir}/icon_fileadd_pending.gif[]
 | New language...
-| Opens the <<sdk_wizard_language.adoc#, Add a Language Wizard>>
+| Opens the {sdk_wizard_language}
 
 | image:{imgsdir}/icon_import.gif[]
 | Import...
@@ -69,7 +69,7 @@ On each row it is possible to call following context menu:
 
 | image:{imgsdir}/icon_text.png[]
 | Modify Entry
-| Opens the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>
+| Opens the {sdk_wizard_nls-entry}
 
 | image:{imgsdir}/icon_find_obj.gif[]
 | Find references to 'Xxx'
