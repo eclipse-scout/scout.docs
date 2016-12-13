@@ -190,7 +190,7 @@ In the first wizard step type "_Scout_" into the *Wizards* field as shown in <<i
 .Selecting Scout Wizards in the Eclipse wizard dialog
 image::{imgsdir}/sdk_new_wizard.png[]
 
-The Wizards provided by the Scout SDK are introduced and described in the sections listed below.
+The wizards provided by the Scout SDK are introduced and described in the sections listed below.
 
 * <<sec-wizard_project>>
 * <<sec-wizard_page>>

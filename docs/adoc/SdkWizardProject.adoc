@@ -51,16 +51,16 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ** The class `HelloWorldForm` in package `org.eclipse.scout.apps.helloworld.client.helloworld` is an example of a model class.
 * Maven module *helloworld.shared* 
 ** Contains components needed in both the client and the server application.
-** For examples see the `IHelloWorldFormService` interface in `src/main/java` and class `HelloWorldFormData` in `src/generated/java`.
+** For examples see the `IHelloWorldService` interface in `src/main/java` and class `HelloWorldFormData` in `src/generated/java`.
 ** The `Texts.nls` file that can be opened in the {sdk_editor_nls}.
 * Maven module *helloworld.server* 
 ** Contains the model components of the server application in `src/main/java` and model tests in `src/test/java`.
-** The class `HelloWorldFormService` in package `org.eclipse.scout.apps.helloworld.server.helloworld` is an example of such a model class.
+** The class `HelloWorldService` in package `org.eclipse.scout.apps.helloworld.server.helloworld` is an example of such a model class.
 * Maven module *helloworld.server.app.dev* 
 ** Contains all components to run the Scout server application from within the Eclipse IDE.
 ** The file `config.properties` in folder `src/main/resources` contains the development configuration for the Scout server application.
 ** The file `pom.xml` bundles the Jetty web server with the server application.
-** The file `server-dev.launch` contains the launch configuration for the Eclipse IDE.
+** The file `[webapp] dev server.launch` contains the launch configuration for the Eclipse IDE.
 * Maven module *helloworld.server.app.war*
 ** Contains all components to create a Scout server WAR file to deploy to an external web server.
 ** The file `config.properties` in folder `src/main/resources` contains the server configuration.
@@ -73,7 +73,7 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ** The file `config.properties` in folder `src/main/resources` contains the development configuration for the application.
 ** The file `web.xml` in folder `src/main/webapp` contains the web configuration for the application.
 ** The file `pom.xml` bundles the Jetty web server with the application.
-** The file `ui-html-dev.launch` contains the launch configuration for the Eclipse IDE.
+** The file `[webapp] dev ui.launch` contains the launch configuration for the Eclipse IDE.
 * Maven module *helloworld.ui.html.app.war* 
 ** Contains all components to create a Scout UI WAR file to deploy to an external web server.
 ** The file `config.properties` in folder `src/main/resources` contains the application configuration.

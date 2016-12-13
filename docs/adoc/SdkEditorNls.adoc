@@ -57,7 +57,7 @@ Import and Export requires additional components.
 
 Hide inherited rows checkbox
 
-On the top of each columns, the text fields allow you to filter the entries in the table.
+On the top of each column, the text fields allow you to filter the entries in the table.
 With the btn:[Reset] button on the right you will empty those filters.
 
 The entries in the table can be directly edited by pressing F2 or double-clicking into a text cell.
@@ -80,7 +80,7 @@ On each row it is possible to call following context menu:
 | Delete the NLS Entry from the files
 |===
 
-==== Default Mapping to Property Files
+==== Default Mapping to Properties Files
 
 The mapping between the properties files is registered in the "Text Provider Service" class.
 Per default the files follow this pattern:

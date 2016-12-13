@@ -57,9 +57,9 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 ----
 
 Method `prepareCreate` is not needed for the creation of a new organization and we can remove it from `OrganizationService` and `IOrganizationService`. 
-Therefore, the implementation of the method `execLoad` in the new handler of the organization form can be removed also.  
+Therefore, the implementation of the method `execLoad` in the new handler of the organization form can also be removed.  
 
-With these implementation of the organization form and organization service the "Contacts" application can now also be used to maintain a list of organizations. 
+With these implementations of the organization form and organization service the "Contacts" application can now also be used to maintain a list of organizations. 
 
 [[sec-contacts_form_rest_summary]]
 ==== What have we achieved?

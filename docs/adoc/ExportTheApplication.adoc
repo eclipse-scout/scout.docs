@@ -18,7 +18,7 @@ ifndef::mdledir[:mdledir: .]
 At some point during the application development you will want to install your software on a machine that is intended for productive use.
 This is the moment where you need to be able to build and package your Scout application in a way that can be deployed to an application server.
 
-As Scout applications just need a servlet container to run, Scout applications can be deployed to almost any Java appliction servers.
+As Scout applications just need a servlet container to run, Scout applications can be deployed to almost any Java appliction server.
 For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-8.0-doc/index.html[Apache Tomcat].
 
 ==== Verify the Container Security Settings
@@ -158,6 +158,6 @@ Then you will see the login page as shown in <<img-helloworld_running_download>>
 You can find this configuration in the [filename]+config.properties+ file of the application.
 
 Please note: In a productive environment it is recommended to deploy the server and the user interface into two different servlet containers running on dedicated machines.
-This because these two tiers have different requirements on resources, load balancing and access protection.
+This is because these two tiers have different requirements on resources, load balancing and access protection.
 Furthermore, it is strongly recommended to use an encrypted connection (e.g. TLS 1.2 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security])
-between client browsers and the Scout frontend server AND between the Scout frontend and and backend server!
+between client browsers and the Scout frontend server AND between the Scout frontend and backend server!

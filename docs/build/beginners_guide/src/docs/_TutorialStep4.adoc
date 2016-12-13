@@ -27,10 +27,10 @@ image::{imgsdir}/contacts_person_form.png[]
 The upper half of the form shows a picture of the person and contains some primary attributes such as first name and the gender of the person. 
 
 The lower half of the form contains tab boxes. 
-A "Details" tab provides contact details of the person and adding notes for the person in the form of free text is possible in the "Comments" tab.
+A "Contact Info" tab provides contact details of the person and adding notes for the person in the form of free text is possible in the "Notes" tab.
 
 <<img-contacts_person_form_grid>> below shows how the sketched form can fit with the logical grid layout of the Scout framework. 
-Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as are needed. 
+Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as needed. 
 
 [[img-contacts_person_form_grid, Figure 000]]
 .Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
