@@ -74,7 +74,7 @@ The covered topics includes dealing with application properties, setup and acces
 
 Step 4: <<sec-contacts_forms>>::
 Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application.
-In addition, this tutorial steps also demonstrates how to design and implement complex form layouts with the Scout framework.   
+In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.   
 
 Step 5: <<sec-contacts_fields>>:: 
 This step provides an introduction into form field validation and the creation of template fields.

@@ -142,12 +142,12 @@ To change the setup to a disk based version, we would have to change the value f
 from `jdbc:derby:memory:contacts-database` to `jdbc:derby:<path-to-dir>`. 
 For a Windows box a concrete example could look like this: `jdbc:derby:c:\\derby\\contacts-database`. 
 
-We now look at how the actual SQL statements of the "Contacts" application. 
+Now we look at how the actual SQL statements of the "Contacts" application work. 
 For our application all statements are collected into a single class.  
 While there are many more options how to organize SQL and Java code this setup has its own advantages. 
 
 * Efficient maintenance as all SQL statements are located in a single place
-* Code completion support in the Eclispe IDE when using the statements    
+* Code completion support in the Eclipse IDE when using the statements    
 * The setup is easy to explain
 
 The SQL statements related to the database structure are provided in <<lst-contacts_sql_createdb>>. 

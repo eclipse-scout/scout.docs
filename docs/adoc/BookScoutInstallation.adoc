@@ -228,7 +228,7 @@ Note that some folders and many files of a Tomcat installation are not represent
 We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book.
 In the [filename]+bin+ folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.
 
-The [filename]+conf+ folder contains a set of XML and property configuration file.
+The [filename]+conf+ folder contains a set of XML and property configuration files.
 The file [filename]+server.xml+ represents Tomcat's main configuration file.
 It is used to configure general web server aspects such as the port number of its connectors for the client server communication.
 For the default setup, port number 8080 is used for the communication between clients applications and the web server.
@@ -258,6 +258,9 @@ To access this application you can switch to the "`Manager App`" with a click on
 The button can be found on the right hand side of <<img-tomcat_install>>.
 Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats's [java]+manager-gui+ role.
 
+[[lst-tomcat.users, Tomcat Users]]
+[source,xml]
+.Tomcat Users configuration file.
 ----
   <tomcat-users>
     <!--
