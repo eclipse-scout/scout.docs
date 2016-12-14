@@ -217,7 +217,7 @@ To create the company node page follow the steps listed below.
 . Enter "scout page" into the search field of the wizard selection and double click on propsal [element]_Scout Page_
 . Add "Organization" to the class name field
 . Switch the super class field to "AbstractPageWithNodes"
-. Verify that the fields in the wizard match the values provided in <<img-sdk_new_lookupcall_organization>>  
+. Verify that the fields in the wizard match the values provided in <<img-sdk_new_organization_nodepage>>  
 . Click btn:[Finish] to start the Scout page wizard
 
 [[img-sdk_new_organization_nodepage, Figure 000]]

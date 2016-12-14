@@ -34,7 +34,7 @@ Actions on the top right corner:
 
 | image:{imgsdir}/icon_find_obj.gif[]
 | Show NLS entry usage
-| Search in the Java code where the NLS Key is used.
+| For each row, search in the Java code where the NLS Key is used. Results are displayed in the first column.
 
 | image:{imgsdir}/icon_text_add.png[]
 | New entry...

@@ -83,16 +83,16 @@ To quickly find class `WorkOutline` we first open the [wizard]_Open Type_ dialog
 In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
 
 [[img-eclipse_open_type, Figure 000]]
-image::{imgsdir}/eclipse_open_type.png[]
 .Use the Open Type dialog to quickly find java types in the Eclipse IDE.
+image::{imgsdir}/eclipse_open_type.png[]
 
 We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
 This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field. 
 
 [[img-sdk_rename_package, Figure 000]]
-image::{imgsdir}/sdk_rename_package.png[]
 .Use the Eclipse Rename Package dialog to rename a Java package.
+image::{imgsdir}/sdk_rename_package.png[]
 
 In next step we rename class `WorkOutline` to `ContactOutline`. 
 In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
@@ -104,14 +104,14 @@ To get rid of the compile error in method `execCreateChildPages` we simply delet
 Next, we change the outline title in method `getConfiguredTitle` by replacing the string "Work" with "Contacts", setting the cursor at the end of the word "Contacts" and hitting kbd:[Ctrl+Space] to open the Scout content assist as shown in <<img-sdk_new_text_entry_contact>>.
 
 [[img-sdk_new_text_entry_contact, Figure 000]]
-image::{imgsdir}/sdk_new_text_entry_contact.png[]
 .Use the Scout content assist to add new translations.
+image::{imgsdir}/sdk_new_text_entry_contact.png[]
 
 To enter a new translated text we double click on the proposal [element]_New text..._ to open the Scout new entry wizard as shown in <<img-sdk_new_text_entry_contact_wizard>>.
 
 [[img-sdk_new_text_entry_contact_wizard, Figure 000]]
-image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 .Use the Scout new entry wizard to add translated texts to the application.
+image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 
 As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Category` and end with the code shown in <<lst-contacts_outline>>.
 

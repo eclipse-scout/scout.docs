@@ -258,6 +258,9 @@ To access this application you can switch to the "`Manager App`" with a click on
 The button can be found on the right hand side of <<img-tomcat_install>>.
 Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats's [java]+manager-gui+ role.
 
+[[lst-tomcat.users, Tomcat Users]]
+[source,xml]
+.Tomcat Users configuration file.
 ----
   <tomcat-users>
     <!--

@@ -280,5 +280,5 @@ The user interface should look like the screenshot provided in <<img-contacts_tu
 .The "Contacts" application with the person and organization pages at the end of tutorial step 2.
 image::{imgsdir}/contacts_tutorial_result_step_2.png[]
 
-When comparing the state of the "Contacts" tutorial application with the Scout demo application in <<img-app_contacts_PersonTable>> the main difference is the missing person data.
+When comparing the state of the "Contacts" tutorial application with the Scout demo application in <<img-app_contacts_personpage>> the main difference is the missing person data.
 Adding access to a database is the focus of the next tutorial step.
