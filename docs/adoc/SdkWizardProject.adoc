@@ -52,7 +52,7 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 * Maven module *helloworld.shared* 
 ** Contains components needed in both the client and the server application.
 ** For examples see the `IHelloWorldFormService` interface in `src/main/java` and class `HelloWorldFormData` in `src/generated/java`.
-** The `Texts.nls` file that can be opened in the <<sdk_editor_nls.adoc#, Scout NLS Editor>>.
+** The `Texts.nls` file that can be opened in the {sdk_editor_nls}.
 * Maven module *helloworld.server* 
 ** Contains the model components of the server application in `src/main/java` and model tests in `src/test/java`.
 ** The class `HelloWorldFormService` in package `org.eclipse.scout.apps.helloworld.server.helloworld` is an example of such a model class.

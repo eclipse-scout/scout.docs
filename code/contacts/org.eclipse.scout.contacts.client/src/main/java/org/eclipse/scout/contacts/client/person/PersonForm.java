@@ -51,6 +51,7 @@ import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
+import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -114,11 +115,11 @@ public class PersonForm extends AbstractForm {
   //end::init[]
 
   public void startModify() {
-    startInternalExclusive(new ModifyHandler());
+    startInternalExclusive(new ModifyDirtyHandler());
   }
 
   public void startNew() {
-    startInternal(new NewHandler());
+    startInternal(new NewDirtyHandler());
   }
 
   public AddressBox getAddressBox() {
@@ -744,9 +745,10 @@ public class PersonForm extends AbstractForm {
     }
   }
   //end::layout[]
-  //tag::handler[]
 
-  public class ModifyHandler extends AbstractDirtyFormHandler {
+  //These classes (ModifyHandler and NewHandler) are only for documentation, they are not used in the application production:
+  //tag::handler[]
+  public class ModifyHandler extends AbstractFormHandler {
 
     @Override
     protected void execLoad() {
@@ -766,7 +768,41 @@ public class PersonForm extends AbstractForm {
       exportFormData(formData);
       service.store(formData); // <6>
     }
-    //end::handler[]
+  }
+
+  public class NewHandler extends AbstractFormHandler {
+
+    @Override
+    protected void execStore() {
+      IPersonService service = BEANS.get(IPersonService.class);
+      PersonFormData formData = new PersonFormData();
+      exportFormData(formData);
+      service.create(formData); // <7>
+    }
+  }
+  // end::handler[]
+
+  //This modify handler is used in the application:
+  public class ModifyDirtyHandler extends AbstractDirtyFormHandler {
+
+    @Override
+    protected void execLoad() {
+      IPersonService service = BEANS.get(IPersonService.class);
+      PersonFormData formData = new PersonFormData();
+      exportFormData(formData);
+      formData = service.load(formData);
+      importFormData(formData);
+
+      getForm().setSubTitle(calculateSubTitle());
+    }
+
+    @Override
+    protected void execStore() {
+      IPersonService service = BEANS.get(IPersonService.class);
+      PersonFormData formData = new PersonFormData();
+      exportFormData(formData);
+      service.store(formData);
+    }
 
     @Override
     protected void execDirtyStatusChanged(boolean dirty) {
@@ -777,27 +813,24 @@ public class PersonForm extends AbstractForm {
     protected boolean getConfiguredOpenExclusive() {
       return true;
     }
-    //tag::handler[]
   }
 
-  public class NewHandler extends AbstractDirtyFormHandler {
+  //This new handler is used in the application:
+  public class NewDirtyHandler extends AbstractDirtyFormHandler {
 
     @Override
     protected void execStore() {
       IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
-      service.create(formData); // <7>
+      service.create(formData);
     }
-    //end::handler[]
 
     @Override
     protected void execDirtyStatusChanged(boolean dirty) {
       getForm().setSubTitle(calculateSubTitle());
     }
-    // tag::handler[]
   }
-  // end::handler[]
 
   // tag::validate[]
   @Override // <1>
