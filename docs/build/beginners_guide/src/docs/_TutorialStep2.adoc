@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 
 In the second step of the Scout tutorial the components to display persons and organizations are added to the "Contacts" outline of the user interface of the Scout application.
-Specifically, a "Persons" page and an "Organizations" page are created and added to navigation tree of the "Contacts" outline.
+Specifically, a "Persons" page and an "Organizations" page are created and added to the navigation tree of the "Contacts" outline.
 
 Database access and populating the pages with actual data from the database is not part of this section but will be covered in section <<sec-contacts_jdbc>> in the next tutorial step.
 
@@ -80,7 +80,7 @@ We can now add the Scout person page as described below.
 .Add the person page to the "Contacts" application.
 image::{imgsdir}/sdk_new_personpage_wizard.png[]
 
-The Scout [wizard]_New Page Wizard_ then creates an initial implementation for the `PersonTable` class very similar to the listing provided in <<lst-contacts_PersonTable>> below.
+The Scout [wizard]_New Page Wizard_ then creates an initial implementation for the `PersonTablePage` class very similar to the listing provided in <<lst-contacts_PersonTable>> below.
 
 [[lst-contacts_PersonTable, Listing PersonTablePage]]
 [source,java]
@@ -103,7 +103,7 @@ We are now ready to populate the inner class `Table` of the person page with the
 
 Table pages are an important UI element of Scout applications as they frequently play a central role in the interactions of a user with the application.
 Out of the box table pages offer powerful options to sort, filter and re-arrange the data contained in the table.
-This functionality offers a good starting point to decide on the columns to add to a table page.
+This functionality offers a good starting point to decide which columns to add to a table page.
 
 To decide the columns to add the following criterias have been useful in practice.
 
@@ -170,7 +170,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 For column `CountryColumn` we will use a smart column.
 We again use kbd:[Ctrl+Space] to open the wizard and enter "Country" for the class name box and press kbd:[Tab] once and select [element]_AbstractSmartColumn_ as column type.
-Next we press kbd:[Tab] again to enter "City" as the translated text.
+Next we press kbd:[Tab] again to enter "Country" as the translated text.
 
 In the created class `CountryColumn` we need to update the class to extend `AbstractSmartColumn<String>` and add the method `getConfiguredLookupCall` according to <<lst-contacts_CountryColumn>>.
 
@@ -221,7 +221,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> A new instance of the `PersonTable` is added to this outline. This makes the person page visible in the navigation area below the contacts outline.
 
-Before we can save the class `ContactOutline` we have to update its imports to include the import statement for class `PersonTable`.
+Before we can save the class `ContactOutline` we have to update its imports to include the import statement for class `PersonTablePage`.
 To update the imports you can either user the menu menu:Source[Organize Imports] or use the keyboard shortcut kbd:[Ctrl+Shift+O].
 
 The application is now in a state where we can restart the backend and the frontend server to verify our changes in the user interface.
@@ -274,7 +274,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 In the second step of the "Contacts" tutorial we have created a person page and an organization page to display data of persons and organizations.
 
 The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the user interface in your browser.
-The user interface should the look as the screenshot provided in <<img-contacts_tutorial_result_step_2>>.
+The user interface should look like the screenshot provided in <<img-contacts_tutorial_result_step_2>>.
 
 [[img-contacts_tutorial_result_step_2, Figure 000]]
 .The "Contacts" application with the person and organization pages at the end of tutorial step 2.

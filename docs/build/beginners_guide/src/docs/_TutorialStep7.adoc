@@ -71,9 +71,9 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 
 <1> We only need to return a single SQL statement for lookup services that extend `AbstractSqlLookupService`
 
-The SQL statment that backs the lookup service is provided in <<lst-contacts_lookup_service_sql>>. 
+The SQL statement that backs the lookup service is provided in <<lst-contacts_lookup_service_sql>>. 
 Lookup services can provide data for three different use cases. 
-The most straight forward case is the mapping of a key to a specific lookup row. 
+The most straightforward case is the mapping of a key to a specific lookup row. 
 Next is the case where the lookup service returns a number of lookup rows that match a provided substring and finally the case where the lookup service simply returns all available rows. 
 
 [[lst-contacts_lookup_service_sql, Listing SQL.ORGANIZATION_LOOKUP]]
@@ -90,7 +90,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 [[sec-contacts_modify_person_form_and_page]]
 ==== Using the Lookup Call in the Person Form and the Person Table
 
-We can now use the organization lookup call to transform the organization field in the "Work" tab of the person form into a smart field. 
+Now we can use the organization lookup call to transform the organization field in the "Work" tab of the person form into a smart field. 
 To do this we open class `PersonForm` in the Java editor and navigate to its inner class `WorkBox`. 
 Then, update the implementation of the OrganizationField according to <<lst-contacts_organization_smart_field>> 
 
@@ -104,7 +104,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <1> The OrganizationField now extends a Scout smart field  
 <2> The smart field is backed by the newly created organization lookup call
 
-This change has the effect, that we can now assign an organization in the person form by typing a substring of the organizations name into the organization field. 
+This change has the effect, that now we can assign an organization in the person form by typing a substring of the organizations name into the organization field. 
 The conversion of the field into a smart field has the additional benefit that only valid organizations can be selected that respect the referential integrity defined by the database. 
 
 As a next step we also modify the organization column of the person page. 
@@ -262,7 +262,7 @@ To implement a drill-down functionality for the organization table we have creat
 To link the two table pages we have also created and integrated a Scout node page.
 
 The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser. 
-As shown in <<img-contacts_tutorial_result_step_7>> the organizaion specific person data is now presented in a hierarchical form in the navigation area of the application. 
+As shown in <<img-contacts_tutorial_result_step_7>> the organization specific person data is now presented in a hierarchical form in the navigation area of the application. 
 
 [[img-contacts_tutorial_result_step_7, Figure 000]]
 .The linked person page only shows person related to the parent organization page.

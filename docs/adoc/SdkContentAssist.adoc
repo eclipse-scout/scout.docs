@@ -20,7 +20,7 @@ The offered proposals are context specific.
 Depending on the current cursor position in the Java editor, possible Scout components are added to the proposal list. 
 
 In a class representing a group box in a form, the Scout content assist adds proposals for various form fields are shown and in a table class the content assist adds proposals to add table columns or context menus. 
-are added that trigger the creation of inner classes for form fields, table columns or codes.
+Those proposals trigger the creation of inner classes for form fields, table columns or codes.
 The Eclipse content assist can be started by typing kbd:[Ctrl,Space]. 
 
 [[sec-sdk_new_form_field]]
@@ -34,7 +34,7 @@ Typing kbd:[Ctrl,Space] then provides access to the most frequently used Scout w
 .Proposals to create new form fields in a GroupBox
 image::{imgsdir}/java_proposals_groupbox2.png[]
 
-When a template is selected, it is possible to customized it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
+When a template is selected, it is possible to customize it by navigating between the different Edit-Groups with the kbd:[Tab] Key (this works exactly like other templates in the Eclipse Editor).
 With this mechanism you can quickly define the class name, the parent class and other properties.
 To exit the Edit-Mode just press kbd:[Enter].
 
