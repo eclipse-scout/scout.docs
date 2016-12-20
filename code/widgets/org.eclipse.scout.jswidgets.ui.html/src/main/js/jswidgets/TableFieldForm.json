@@ -45,6 +45,26 @@
                   "objectType": "Menu",
                   "text": "${textKey:AddRows}",
                   "menuTypes": ["Table.EmptySpace"]
+                },
+                {
+                  "id": "AggregationStyle",
+                  "objectType": "Menu",
+                  "text": "${textKey:AggregationStyle}",
+                  "menuTypes": ["Table.EmptySpace"],
+                  "childActions": [
+                    {
+                      "id": "AggregationStyleTop",
+                      "objectType": "Menu",
+                      "text": "${textKey:AggregationStyleTop}",
+                      "menuTypes": ["Table.EmptySpace"]
+                    },
+                    {
+                      "id": "AggregationStyleBottom",
+                      "objectType": "Menu",
+                      "text": "${textKey:AggregationStyleBottom}",
+                      "menuTypes": ["Table.EmptySpace"]
+                    }
+                  ]
                 }
               ]
             }
