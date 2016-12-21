@@ -47,21 +47,21 @@
                   "menuTypes": ["Table.EmptySpace"]
                 },
                 {
-                  "id": "AggregationStyle",
+                  "id": "GroupingStyle",
                   "objectType": "Menu",
-                  "text": "${textKey:AggregationStyle}",
+                  "text": "${textKey:GroupingStyle}",
                   "menuTypes": ["Table.EmptySpace"],
                   "childActions": [
                     {
-                      "id": "AggregationStyleTop",
+                      "id": "GroupingStyleTop",
                       "objectType": "Menu",
-                      "text": "${textKey:AggregationStyleTop}",
+                      "text": "${textKey:GroupingStyleTop}",
                       "menuTypes": ["Table.EmptySpace"]
                     },
                     {
-                      "id": "AggregationStyleBottom",
+                      "id": "GroupingStyleBottom",
                       "objectType": "Menu",
-                      "text": "${textKey:AggregationStyleBottom}",
+                      "text": "${textKey:GroupingStyleBottom}",
                       "menuTypes": ["Table.EmptySpace"]
                     }
                   ]

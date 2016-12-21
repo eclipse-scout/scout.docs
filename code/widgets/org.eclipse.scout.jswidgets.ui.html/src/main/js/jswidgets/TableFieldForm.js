@@ -14,15 +14,10 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('DetailBox'));
 
-  this.widget('AddRowsMenu').on('doAction', this._onAddRowsMenuAction.bind(this));
-  this.widget('AggregationStyleTop').on('doAction', function(event) {
-    this.table.aggregateStyle = scout.Table.AggregateStyle.TOP;
-  }.bind(this));
-  this.widget('AggregationStyleBottom').on('doAction', function(event) {
-    this.table.aggregateStyle = scout.Table.AggregateStyle.BOTTOM;
-  }.bind(this));
-
   this.table = this.widget('Table');
+  this.widget('AddRowsMenu').on('doAction', this._onAddRowsMenuAction.bind(this));
+  this.widget('GroupingStyleTop').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
+  this.widget('GroupingStyleBottom').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
 };
 
 jswidgets.TableFieldForm.prototype._jsonModel = function() {
@@ -37,4 +32,8 @@ jswidgets.TableFieldForm.prototype._onAddRowsMenuAction = function(event) {
     this.groupSeqNo++;
   }
   this.seqNo++;
+};
+
+jswidgets.TableFieldForm.prototype._onGroupingStyleAction = function(groupingStyle) {
+  this.table.setProperty('groupingStyle', groupingStyle);
 };

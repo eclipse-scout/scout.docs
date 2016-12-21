@@ -28,6 +28,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
+import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
@@ -991,6 +992,37 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               @Override
               protected void execAction() {
                 scrollToSelection();
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+              }
+            }
+
+            @Order(20)
+            public class ToggleGroupingStyle extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("ToggleGroupingStyle");
+              }
+
+              @Override
+              protected void execAction() {
+                ITable table = getTable();
+                GroupingStyle groupingStyle = table.getGroupingStyle();
+                if (groupingStyle == GroupingStyle.BOTTOM) {
+                  table.setGroupingStyle(GroupingStyle.TOP);
+                }
+                else {
+                  table.setGroupingStyle(GroupingStyle.BOTTOM);
+                }
+                setTooltipText(TEXTS.get("CurrentGroupingStyle", getTable().getGroupingStyle().name()));
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return TEXTS.get("CurrentGroupingStyle", GroupingStyle.BOTTOM.name());
               }
 
               @Override
