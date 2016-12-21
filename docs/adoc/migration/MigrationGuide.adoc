@@ -232,7 +232,7 @@ The constructor function scout.HtmlComponent() no longer links the $comp to the 
 
 The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.
 
-*Migration:* Check all _*.js_ files in your project for occurences of `new scout.HtlmComponent` and replace them with `scout.HtmlComponent.install`.
+*Migration:* Check all _*.js_ files in your project for occurences of `new scout.HtmlComponent` and replace them with `scout.HtmlComponent.install`.
 
 [source,javascript]
 ----
