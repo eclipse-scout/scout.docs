@@ -124,3 +124,8 @@ Instead a field is only considered to be enabled if itself and all of its parent
 This has the advantage that the original state is restored when the box is set back to enabled.
 
 With this change the `getConfiguredEnabled` on composite fields now also automatically affects children. There is no need to overwrite `execInit()` and call `setEnabled(false)` anymore.
+
+== Table: new property "groupingStyle"
+The new property `groupingStyle` can be set to `bottom` (default) or `top`. Depending on the value aggregate rows are rendered on the bottom of grouped rows
+or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table
+into multiple categories.
