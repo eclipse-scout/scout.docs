@@ -120,10 +120,10 @@ Use StringUtility.hasText() and StringUtility.emptyIfNull() or StringUtility.nul
 The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility.
 The existing methods were deprecated and will be removed with next Scout release.
 
-=== *ThreadInterrupted-, TimedOut- and FutureCancelled-Exception* _(extends java.lang.RuntimeException)_ are now *PlatformErrors* _(extends java.lang.Error)_
+=== ThreadInterrupted-, TimedOut- and FutureCancelledExceptions ("extends java.lang.RuntimeException") are now PlatformErrors ("extends java.lang.Error")
 There were circumstances where the cancellation of long-running actions did not work or lead to unpleasant behaviors (for example multiple `ExceptionForm`, that is displayed after a cancellation by the user).  Most of time caught exceptions where the reason for such behaviors.
 
-In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch(RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
+In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch (RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -244,6 +244,13 @@ The new static method makes it clearer that it will alter the state of $comp. Fo
   this.$container = $parent.appendDiv('my-widget');
   scout.HtmlComponent.install(this.$container, this.session);
 ----
+
+=== Popup: Renamed option "installFocusContext" to "withFocusContext"
+
+The initialization option `installFocusContext` for _Popup.js_ instances was renamed to `withFocusContext` to match the corresponding property name.
+
+*Migration:* Check if your project explicitly sets `installFocusContext = false` in popup widget instance (created via `scout.create('scout.Popup', { ... })`) or in subclasses of `scout.Popup`. If it does, rename the option name to `withFocusContext`.
+
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
