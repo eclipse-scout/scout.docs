@@ -14,12 +14,12 @@ import java.util.UUID;
 
 import org.eclipse.scout.contacts.server.sql.SQLs;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
-import org.eclipse.scout.contacts.shared.person.PersonCreatePermission;
+import org.eclipse.scout.contacts.shared.person.CreatePersonPermission;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
-import org.eclipse.scout.contacts.shared.person.PersonReadPermission;
+import org.eclipse.scout.contacts.shared.person.ReadPersonPermission;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
-import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
+import org.eclipse.scout.contacts.shared.person.UpdatePersonPermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -74,7 +74,7 @@ public class PersonService implements IPersonService {
   //tag::all[]
   @Override
   public PersonFormData create(PersonFormData formData) {
-    if (!ACCESS.check(new PersonCreatePermission())) {
+    if (!ACCESS.check(new CreatePersonPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 
@@ -90,7 +90,7 @@ public class PersonService implements IPersonService {
 
   @Override
   public PersonFormData load(PersonFormData formData) {
-    if (!ACCESS.check(new PersonReadPermission())) {
+    if (!ACCESS.check(new ReadPersonPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 
@@ -101,7 +101,7 @@ public class PersonService implements IPersonService {
 
   @Override
   public PersonFormData store(PersonFormData formData) {
-    if (!ACCESS.check(new PersonUpdatePermission())) {
+    if (!ACCESS.check(new UpdatePersonPermission())) {
       throw new VetoException(TEXTS.get("InsufficientPrivileges"));
     }
 

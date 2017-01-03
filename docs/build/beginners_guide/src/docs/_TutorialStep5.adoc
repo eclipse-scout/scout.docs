@@ -1,3 +1,14 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
 //-----------------------------------------------------------------------------
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------

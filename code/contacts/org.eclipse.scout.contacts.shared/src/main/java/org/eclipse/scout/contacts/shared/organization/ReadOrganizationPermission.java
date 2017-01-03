@@ -8,15 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.contacts.shared.person;
+package org.eclipse.scout.contacts.shared.organization;
 
 import java.security.BasicPermission;
 
-public class PersonUpdatePermission extends BasicPermission {
+public class ReadOrganizationPermission extends BasicPermission {
 
   private static final long serialVersionUID = 1L;
 
-  public PersonUpdatePermission() {
-    super("UpdatePerson");
+  public ReadOrganizationPermission() {
+    super("ReadOrganization");
   }
 }
