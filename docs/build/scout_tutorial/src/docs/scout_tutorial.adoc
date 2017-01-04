@@ -18,10 +18,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 [[sec-contacts_tutorial_overview]]
 == A One Day Tutorial
 
-In this tutorial we will create a "`Contacts`" Scout application. 
+In this tutorial we will create a "`Contacts`" Scout application.
 The goal of this tutorial is to learn about the most prominent features of the Eclipse Scout framework.
 
-Within a single day you will not only have learned more about Scout but also implemented a complete Scout application from the user interface to the data stored in a relational database. 
+Within a single day you will not only have learned more about Scout but also implemented a complete Scout application from the user interface to the data stored in a relational database.
 
 For this tutorial we assume that you have successfully <<scout_install.adoc#scout_install, installed Eclipse Scout>> and gone through the <<scout_helloworld.adoc#scout_helloworld, "`Hello World`" tutorial>>.
 
@@ -58,7 +58,7 @@ The persistence of entered data is achieved via simple JDBC access to a Derby da
 .The "`Contacts`" application with the person page.
 image::{imgsdir}/app_contacts_personpage.png[]
 
-Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after connecting to the Scout UI application. 
+Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after connecting to the Scout UI application.
 Clicking on a row in the person page activates the [menu]_Edit_ menu which is also available as a context menu on the table row.
 The selected person can then be opened in a form to view and edit its data as shown in <<img-app_contacts_personform>>.
 
@@ -66,14 +66,14 @@ The selected person can then be opened in a form to view and edit its data as sh
 .The "`Contacts`" application with a person opened in a form.
 image::{imgsdir}/app_contacts_personform.png[]
 
-To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
+To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on
 https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github]
 and start from there.
 Alternatively, you can pull a Docker image of the "`Contacts`" application from https://hub.docker.com/r/eclipsescout/org.eclipse.scout.contacts/[Docker Hub].
 
 [[sec-tutorial_new_project]]
 == Create a new Scout Project
-The first step of this tutorial is to create the initial "`Contacts`" application. 
+The first step of this tutorial is to create the initial "`Contacts`" application.
 As in the <<scout_helloworld.adoc#,"`Hello World`" tutorial>> we start the Eclipse IDE with an empty workspace.
 // TODO: move wizard desc into module, add scout tooling chapter and refactor eclipse_help
 In the <<New Scout Project>> wizard enter the values shown below into the wizard fields.
@@ -86,7 +86,7 @@ To start the wizard click the btn:[Next] button.
 
 === Tailoring of the Initial Project
 
-For the purpose of the Contacts application, the created project needs to be slightly altered. 
+For the purpose of the Contacts application, the created project needs to be slightly altered.
 The items below list the necessary changes as of Neon milestone M5.
 // TODO verify/adapt from milestone to milestone
 Therefore, the content of this section will have to be updated for the final release of the Scout Neon package in June 2016.
@@ -107,7 +107,7 @@ Therefore, the content of this section will have to be updated for the final rel
 ** {main|test}*.helloworld
 * contact.client removals: packages
 ** {main|test}*.helloworld
-** *.search 
+** *.search
 ** *.setting
 * contact.shared removals: packages
 ** *.helloworld
@@ -118,33 +118,33 @@ include::{codedir}contacts/org.eclipse.scout.contacts.client/src/main/java/org/e
 
 [[sec-tutorial_database]]
 == Add JDBC support for Apache Derby
-In this we add Apache Derby and the necessary JDBC support to our Scout project. 
+In this we add Apache Derby and the necessary JDBC support to our Scout project.
 With this infrastructure in place we will be ready to read existing data from a database and persist changes back to the database.
 
-For this we first have to add the <<sec-tutorial.jdbc.maven>>. 
+For this we first have to add the <<sec-tutorial.jdbc.maven>>.
 Then we can add the <<sec-tutorial.jdbc.components>> to access a Derby database in the demo application itself.
 
 [[sec-tutorial.jdbc.maven, necessary Maven depencencies]]
 === The Maven Dependencies
 
 [[lst-tutorial.derby.version, Derby version property]]
-[source,xml]  
+[source,xml]
 .Adding the Derby version property to the parent [file]_pom.xml_ file.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyVersion]
 ----
 
 [[lst-tutorial.derby.dependency, Derby dependency]]
-[source,xml]  
+[source,xml]
 .Adding the Derby dependency to the parent [file]_pom.xml_ file.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyDependency]
 ----
 
 [[lst-tutorial.server.derby.dependency, JDBC and Derby dependencies]]
-[source,xml]  
+[source,xml]
 .Adding the Scout JDBC and the Apache Derby dependency to the server [file]_pom.xml_ file.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
 ----
 
@@ -156,32 +156,32 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby
 ==== Scout Application Properties
 
 [[lst-tutorial.server.derby.properties, Scout application properties]]
-[source,java]  
+[source,java]
 .Scout application properties to configure the database handling.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/ConfigProperties.java[tags=databaseProperties]
 ----
 
 [[lst-tutorial.server.app.properties, Scout config.properties file entries]]
-[source]  
+[source]
 .Entries in the Scout config.properties file.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/resources/config.properties[tags=databaseProperties]
 ----
 
 ==== Scout SQL Service
 
 [[lst-tutorial.server.derby.service, Scout Derby service]]
-[source,java]  
+[source,java]
 .The Scout Derby SQL service.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=derbyService]
 ----
 
 [[lst-tutorial.server.derby.createDb, SQL statments to create the initial database scheme]]
-[source,java]  
+[source,java]
 .SQL statments to create the initial database scheme.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/SQLs.java[tags=createDB]
 ----
 
@@ -190,18 +190,18 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 * add SuperUserRunContextProvider
 
 [[lst-tutorial.server.derby.setup, setup service to create the initial database]]
-[source,java]  
+[source,java]
 .The setup service to create the initial "Contacts" database.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DBSetupService.java[tags=service]
 ----
 
 ==== Hooking into the Server Startup Sequence
 
 [[lst-tutorial.server.derby.listener, platform listener]]
-[source,java]  
+[source,java]
 .The PlatformListener that creates Derby in-memory database at application startup.
----- 
+----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/PlatformListener.java[tags=listener]
 ----
 

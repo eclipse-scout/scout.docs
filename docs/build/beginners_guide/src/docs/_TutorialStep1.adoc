@@ -13,8 +13,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-This section deals with setting up the initial workspace and codebase for the "Contacts" application. 
-The goal of this step lies in the project setup that closely matches the "Contacts" application. 
+This section deals with setting up the initial workspace and codebase for the "Contacts" application.
+The goal of this step lies in the project setup that closely matches the "Contacts" application.
 This includes the organization and naming of Maven modules and the individual Java packages.
 
 The creation up of the initial project setup described in this section consists of the tasks listed below.
@@ -30,7 +30,7 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 [[sec-contacts_initial_codebase]]
 ==== Creating the initial Codebase
 
-The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard. 
+The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard.
 For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
 
 * [field]_Group Id_: `org.eclipse.scout.contacts`
@@ -43,7 +43,7 @@ For the wizard fields you may use the values below and as shown in <<img-sdk_new
 image::{imgsdir}/sdk_new_project_tutorial.png[]
 
 To create this initial application click on btn:[Finish].
-The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>. 
+The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>.
 
 [[img-contacts_package_explorer, Figure 000]]
 .The package explorer with the initial Maven modules created for the "Contacts" application.
@@ -52,37 +52,37 @@ image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 [[sec-contacts_remove_stuff]]
 ==== Removing unnecessery Components
 
-We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application. 
+We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application.
 To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
 
-The packages to delete is provided per Maven module in the list below. 
+The packages to delete is provided per Maven module in the list below.
 
 Client Module `org.eclipse.scout.contacts.client`::
-* In folder `src/main/java` 
-** Delete package `org.eclipse.scout.contacts.client.helloworld` 
-** Delete package `org.eclipse.scout.contacts.client.settings` 
-* In folder `src/test/java` 
-** Delete package `org.eclipse.scout.contacts.client.helloworld` 
+* In folder `src/main/java`
+** Delete package `org.eclipse.scout.contacts.client.helloworld`
+** Delete package `org.eclipse.scout.contacts.client.settings`
+* In folder `src/test/java`
+** Delete package `org.eclipse.scout.contacts.client.helloworld`
 
 Server Module `org.eclipse.scout.contacts.server`::
-* In folder `src/main/java` 
-** Delete package `org.eclipse.scout.contacts.server.helloworld` 
-* In folder `src/test/java` 
-** Delete package `org.eclipse.scout.contacts.server.helloworld` 
+* In folder `src/main/java`
+** Delete package `org.eclipse.scout.contacts.server.helloworld`
+* In folder `src/test/java`
+** Delete package `org.eclipse.scout.contacts.server.helloworld`
 
 Shared Module `org.eclipse.scout.contacts.shared`::
-* In folder `src/main/java` 
-** Delete package `org.eclipse.scout.contacts.shared.helloworld` 
-* In folder `src/generated/java` 
-** Delete package `org.eclipse.scout.contacts.shared.helloworld` 
+* In folder `src/main/java`
+** Delete package `org.eclipse.scout.contacts.shared.helloworld`
+* In folder `src/generated/java`
+** Delete package `org.eclipse.scout.contacts.shared.helloworld`
 
-The deletion of these outlines results in a number of compile errors in classes `WorkOutline` and `Desktop`. 
-All these errors will be resolved in the following two sections where we modify the two classes to our needs. 
+The deletion of these outlines results in a number of compile errors in classes `WorkOutline` and `Desktop`.
+All these errors will be resolved in the following two sections where we modify the two classes to our needs.
 
 [[sec-contacts_change_workoutline]]
 ==== Changes to Class WorkOutline
 
-Instead of adding a new "Contacts" outline to the application we reuse the generated code and rename the "Work" outline into "Contacts" outline. 
+Instead of adding a new "Contacts" outline to the application we reuse the generated code and rename the "Work" outline into "Contacts" outline.
 For this, we perform the following modifications to class `WorkOutline`.
 
 * Rename the class package to `org.eclipse.scout.contacts.client.contact`
@@ -99,16 +99,16 @@ image::{imgsdir}/eclipse_open_type.png[]
 
 We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
-This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field. 
+This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field.
 
 [[img-sdk_rename_package, Figure 000]]
 .Use the Eclipse Rename Package dialog to rename a Java package.
 image::{imgsdir}/sdk_rename_package.png[]
 
-In next step we rename class `WorkOutline` to `ContactOutline`. 
+In next step we rename class `WorkOutline` to `ContactOutline`.
 In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
 
-Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change. 
+Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change.
 If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Eclipse complete the rename operation.
 To get rid of the compile error in method `execCreateChildPages` we simply delete the content in the method body.
 
@@ -138,13 +138,13 @@ To conclude the modifications we update the imports by hitting kbd:[Ctrl+Shift+O
 [[sec-contacts_change_desktop]]
 ==== Changes to Class Desktop
 
-The second class to adapt for the "Contacts" application is the `Desktop` class. 
+The second class to adapt for the "Contacts" application is the `Desktop` class.
 This class is implemented exactly once in each Scout application and holds the available outlines and top level menus of the application in the form of inner classes.
 
-For the "Contacts" application we adapt the initial implementation to have outline view buttons for the "Contacts" and "Search" outlines. 
-The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user. 
+For the "Contacts" application we adapt the initial implementation to have outline view buttons for the "Contacts" and "Search" outlines.
+The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user.
 
-Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class. 
+Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class.
 In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values in as shown in <<lst-contacts_getConfiguredOutlines>>.
 
 [[lst-contacts_getConfiguredOutlines, Listing getConfiguredOutlines]]
@@ -162,7 +162,7 @@ Then, perform the following changes in class `Desktop`
 * Rename BookmarkMenu to `OptionsMenu`. Add methods `getConfiguredText` and  `getConfiguredIconId` according to <<lst-contacts_desktop>>.
 * Change HelpMenu to `UserMenu`. Remove method `getConfiguredText` and add method `getConfiguredIconId` that returns `AbstractIcons.Person`.
 
-At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.  
+At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.
 
 [[lst-contacts_desktop, Listing Desktop]]
 [source,java]
@@ -177,8 +177,8 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 [[sec-contacts_default_theme]]
 ==== Switching to the Default Theme
 
-We will use the Scout default theme for the "Contacts" application. 
-The initial code base created above comes with a very simple project specific "application" theming. 
+We will use the Scout default theme for the "Contacts" application.
+The initial code base created above comes with a very simple project specific "application" theming.
 
 To disable the theming property follow the steps described below.
 
@@ -199,14 +199,14 @@ To disable the theming property follow the steps described below.
 scout.application.version=1.0.0-SNAPSHOT
 scout.application.name=Contacts
 ----
-    
+
 <1> Comment out this line. Alternatively you may replace "application" with "default"
 
 
 [[sec-contacts_summary]]
 ==== What have we achieved?
 
-In the first step of the "Contacts" tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps. 
+In the first step of the "Contacts" tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps.
 
 As the "Contacts" application is in a clean state you can now test the application using the following steps.
 The user interface of the application will now look as shown in <<img-contacts_tutorial_result_step_1>>.
@@ -219,6 +219,6 @@ The user interface of the application will now look as shown in <<img-contacts_t
 .The "Contacts" application at the end of tutorial step 1.
 image::{imgsdir}/contacts_tutorial_result_step_1.png[]
 
-From the coding perspective we now have all necessary maven Modules for "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application. 
-This point is important as it simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application. 
+From the coding perspective we now have all necessary maven Modules for "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application.
+This point is important as it simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application.
 The same is true for the user perspective: The layout of the current state of the tutorial matches with the complete "Contacts" sample application.

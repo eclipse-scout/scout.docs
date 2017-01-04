@@ -18,4 +18,3 @@ ifndef::mdledir[:mdledir: .]
 [[img-nls_editor, Figure 000]]
 .The NLS editor provided by the Scout SDK. This editor is opened via the [link]_Open NLS Editor ..._ link in the Scout Object Properties of the [node]_DefaultTextProviderService_ node.
 image::{imgsdir}/sdk_editor_nls.png[]
-

@@ -283,4 +283,3 @@ Note that you will need to restart your Tomcat application after adapting the co
 
 With working credentials you can now start the "`Manager App`" as described the "`Hello World`" tutorial in Section <<sec-helloworld_deploy>>.
 
-

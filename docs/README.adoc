@@ -16,4 +16,3 @@ This folder contains the source for producing the different documentation items 
 == Building the documents
 
 Building the documents using Asciidoctor: check the link:build/README.adoc[README of the build folder].
-

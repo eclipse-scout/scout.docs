@@ -13,14 +13,14 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-This last part of the "Contacts" tutorial discusses the gap between the tutorial application and the complete "Contacts" demo application. 
-In a number of aspects the full "Contacts" demo application comes with additional features and improvements over the functionality of its tutorial version.  
+This last part of the "Contacts" tutorial discusses the gap between the tutorial application and the complete "Contacts" demo application.
+In a number of aspects the full "Contacts" demo application comes with additional features and improvements over the functionality of its tutorial version.
 
 The sections below highlight the following areas.
 
-* <<sec-contacts_theming_styling>>    
-* <<sec-contacts_modular_apps>>    
-* <<sec-contacts_infra>>    
+* <<sec-contacts_theming_styling>>
+* <<sec-contacts_modular_apps>>
+* <<sec-contacts_infra>>
 
 [[sec-contacts_theming_styling]]
 ==== Theming and Styling
@@ -49,4 +49,4 @@ image::{imgsdir}/contacts_theming_styling.png[]
 * maven module that combines frontend and backend into a single war file
 * docker integration
 ** docker-maven-plugin in pom.xml
-** Dockerfile 
+** Dockerfile

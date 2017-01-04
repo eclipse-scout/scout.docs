@@ -17,27 +17,26 @@ ifndef::mdledir[:mdledir: .]
 
 As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its content to a folder of your choice such as `C:\eclipse_scout` on a Windows box.
 Inside the sub-folder `eclipse` you will find the `eclipse.exe` file.
-This is the Eclipse IDE executable file. 
+This is the Eclipse IDE executable file.
 Starting the Eclipse executable brings up the workspace launcher as shown in <<img-scout_start>>.
 
 [[img-scout_start, Figure 000]]
 .Starting the Eclipse Scout package and selecting an empty workspace.
 image::{imgsdir}/scout_startup_select_workspace.png[]
 
-Into the [field]_Workspace_ field you enter an empty target directory for your first Scout project. 
-After clicking the btn:[Ok] button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace. 
-When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <<img-scout_welcome>>. 
+Into the [field]_Workspace_ field you enter an empty target directory for your first Scout project.
+After clicking the btn:[Ok] button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace.
+When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <<img-scout_welcome>>.
 
 [[img-scout_welcome, Figure 000]]
 .Eclipse welcome screen.
 image::{imgsdir}/scout_startup_welcome.png[]
 
-To close the welcome page click on the [icon]_Workbench_ icon in the top right corner. 
-As a result the empty Java perspective is displayed according to <<img-scout_perspective>>. 
+To close the welcome page click on the [icon]_Workbench_ icon in the top right corner.
+As a result the empty Java perspective is displayed according to <<img-scout_perspective>>.
 
 [[img-scout_perspective, Figure 000]]
-.Eclipse started in the Java perspective. 
+.Eclipse started in the Java perspective.
 image::{imgsdir}/scout_startup_scout_explorer.png[]
 
 Congratulations, you just have successfully completed the Eclipse Scout installation!
-

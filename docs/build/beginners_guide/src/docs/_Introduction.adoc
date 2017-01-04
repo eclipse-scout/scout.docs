@@ -17,15 +17,15 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 == Introduction
 
-Scout is an open source framework for implementing business applications. 
-The framework is based on Java and HTML5 and covers most recurring aspects of enterprise applications. 
+Scout is an open source framework for implementing business applications.
+The framework is based on Java and HTML5 and covers most recurring aspects of enterprise applications.
 
-Scout defines an abstract application model that makes developing applications faster and helps to decouple the business code as much as possible from any specific technologies. 
-This is particularly useful as the life span of today's web technologies is substantially shorter then the life span of large enterprise applications. 
+Scout defines an abstract application model that makes developing applications faster and helps to decouple the business code as much as possible from any specific technologies.
+This is particularly useful as the life span of today's web technologies is substantially shorter then the life span of large enterprise applications.
 
 Scout comes with multi-device support.
-With a single code base Scout applications run on desktop, tablet and mobile devices. 
-The framework automatically adapts the rendering of the application to the form factor of the used device. 
+With a single code base Scout applications run on desktop, tablet and mobile devices.
+The framework automatically adapts the rendering of the application to the form factor of the used device.
 An example of a commercial application built with Scout is provided in <<img-bsi_crm_indigo>>.
 
 [[img-bsi_crm_indigo, Figure 000]]
@@ -33,27 +33,27 @@ An example of a commercial application built with Scout is provided in <<img-bsi
 image::{imgsdir}/bsi_crm_indigo.png[]
 
 Scout supports a modularization of applications into layers and slices.
-This helps to define a clean architecture for large applications. 
-The layering is driven by the fact the Scout applications have a rending part, a frontend part and a backend part. 
+This helps to define a clean architecture for large applications.
+The layering is driven by the fact the Scout applications have a rending part, a frontend part and a backend part.
 The modularization into slices is controlled by different business needs such as front office, back office, reporting or the administraion of application users, roles and permissions.
 
 The goals of the Scout framework can be summarized as follows.
 
 * Boost developer productivity
 * Make the framework simple to learn
-* Support building large applications with long life spans 
+* Support building large applications with long life spans
 
-Boosting developer productivity is of a very high importance and developers should be able to focus on the business value of the application. 
-This is why Scout provides abstractions for areas/topics that are needed in most business applications again and again. 
+Boosting developer productivity is of a very high importance and developers should be able to focus on the business value of the application.
+This is why Scout provides abstractions for areas/topics that are needed in most business applications again and again.
 Example areas/topics that are abstracted by the Scout framework are user interface (UI) technologies, databases, client-server communication or logging.
 For each of these abstractions Scout provides a default implementation out of the box.
 Typically, the default implementation of such an abstraction integrates a framework or technology that is commonly used.
 
-Learning a new framework should be efficient and enjoyable. 
-For developers that have a good understanding of the Java language learning the Scout framework will be straight forward. 
+Learning a new framework should be efficient and enjoyable.
+For developers that have a good understanding of the Java language learning the Scout framework will be straight forward.
 The required skill level roughly corresponds to the Oracle Certified Professional Java SE Programmer for Java version 7 or higher.
-As the Scout framework takes care of the transformation of the user interface from Java to HTML5, Scout developers only needs a minimal understanding of HTML5/CSS3/JavaScript. 
-In the case of writing project specific UI components a deeper understanding of today's web technologies might be required of course. 
+As the Scout framework takes care of the transformation of the user interface from Java to HTML5, Scout developers only needs a minimal understanding of HTML5/CSS3/JavaScript.
+In the case of writing project specific UI components a deeper understanding of today's web technologies might be required of course.
 
 When needing a working prototype application by the end of the week, the developer just needs to care about the desired functionality.
 The necessary default implementations are then automatically included by the Scout tooling into the Scout project setup.
@@ -63,4 +63,3 @@ It also allows to efficiently implement application components such as user inte
 In the case of applications with long life spans, the abstractions provided by Scout help the developer to concentrate on the actual business functionality.
 As all the implemented business functionality is written against abstractions only, no big rewrite of the application is necessary when individual technologies reach their end of life.
 In such cases it is sufficient to exchange the implementation of the adaptor for the legacy technology with a new one.
-

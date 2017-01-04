@@ -9,7 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-With this tutorial you will learn how to create your first Scout application. 
+With this tutorial you will learn how to create your first Scout application.
 
 ==== Create a Scout Project
 

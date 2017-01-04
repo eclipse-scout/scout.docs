@@ -67,4 +67,3 @@ As a result the empty Java perspective is displayed according to <<img-scout_per
 image::{imgsdir}/scout_startup_scout_explorer.png[]
 
 Congratulations, you just have successfully completed the Eclipse Scout installation!
-

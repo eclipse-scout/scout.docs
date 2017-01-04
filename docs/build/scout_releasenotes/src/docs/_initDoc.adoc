@@ -6,4 +6,3 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 include::{mdledir}/_initCommon.adoc[]
 
 :finaldoc: true
-

@@ -46,4 +46,3 @@ This output needs to be synced with the root of the in the link:http://git.eclip
 This part of the output contains the documents ready for downloads.
 
 This output is manually pushed to link:https://eclipsescout.github.io/[]
-

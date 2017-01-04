@@ -11,9 +11,9 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-This document describes how to install an Eclipse IDE ready to create Scout applications. 
-The text below assumes that you are working with a windows box. 
-The installation process does not differ much for other platforms. 
+This document describes how to install an Eclipse IDE ready to create Scout applications.
+The text below assumes that you are working with a windows box.
+The installation process does not differ much for other platforms.
 
 == Get the Package
 
@@ -25,7 +25,7 @@ include::{mdledir}/InstallAndVerifyScout.adoc[]
 
 == What's Next?
 
-With your working Scout installation you are now ready to create your first Scout application. 
+With your working Scout installation you are now ready to create your first Scout application.
 Go ahead and follow the '`Hello World!`' tutorial.
 
 include::{mdledir}/_footer.adoc[]

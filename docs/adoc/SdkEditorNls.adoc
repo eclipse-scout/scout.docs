@@ -25,7 +25,7 @@ image::{imgsdir}/sdk_editor_nls.png[]
 
 Actions on the top right corner:
 
-[cols="10,45,45"] 
+[cols="10,45,45"]
 |===
 
 | image:{imgsdir}/icon_refresh.gif[]
@@ -64,7 +64,7 @@ The entries in the table can be directly edited by pressing F2 or double-clickin
 
 On each row it is possible to call following context menu:
 
-[cols="10,45,45"] 
+[cols="10,45,45"]
 |===
 
 | image:{imgsdir}/icon_text.png[]
@@ -88,7 +88,7 @@ Per default the files follow this pattern:
 
 where:
 
-* `<identifier of the project>` is a chain of folders following the same convention as the Java source files with the package name. 
+* `<identifier of the project>` is a chain of folders following the same convention as the Java source files with the package name.
   For example the `org.eclipse.contacts.shared` project uses `org/eclipse/scout/contacts/shared` as path.
 * `<language>` is an identifier of the language and the country. Some possible file names:
 ** `Texts.properties` is the default language

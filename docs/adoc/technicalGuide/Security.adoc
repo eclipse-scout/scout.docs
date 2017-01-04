@@ -184,4 +184,3 @@ However, using `HTML` is recommended, where possible, because it is more concise
 If HTML or XML from external sources or more complex HTML are used in the Scout model, using a white-list filter might be the best way to avoid security bugs.
 Libraries, such as http://jsoup.org/[JSoup] provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters,
 because the configuration and usage is very use-case-specific and would therefore not add much benefit.
-
