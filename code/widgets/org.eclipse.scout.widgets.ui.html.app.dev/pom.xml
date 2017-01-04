@@ -34,7 +34,7 @@
     <!-- Widget Application -->
     <dependency>
       <groupId>org.eclipse.scout.widgets</groupId>
-      <artifactId>org.eclipse.scout.widgets.ui.html</artifactId>
+      <artifactId>org.eclipse.scout.widgets.ui.html.app</artifactId>
     </dependency>
 
     <!-- Jetty Server -->
