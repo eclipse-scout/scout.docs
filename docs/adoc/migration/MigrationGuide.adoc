@@ -808,6 +808,28 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.handle.new]
 ----
 
+== JAX-WS Pooled Port Provider (since 6.0.300)
+
+Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).
+
+The `PooledPortProvider` is the new default strategy for creating ports. Actually the pooled provider uses two pools, one for service instances and another for port instances (which are created by a service instance). A Scout transaction member keeps track of leased ports and puts them back into the pool when the Scout transaction releases its resources. Further, the transaction member ensures that the same port is used within a transaction, once it has been leased.
+
+Port instances are reset when they are put back into the pool. Some JAX-WS implementations provide a suitable operation for resetting the port (i.e. Metro as well as the RI bundled with Java 8). Otherwise the request context is cleansed as good as possible. The corresponding `JaxWsImplementorSpecifics.resetRequestContext(Object)` can be extended to customize the cleansing.
+
+The `AbstractWebServiceClient` does not distinguish between `PortProducer` and `PortCache` anymore. Both are `IPortProvider` strategies and the new `PooledPortPorvider` is just another one, frankly the new default. Setting the configuration property `jaxws.consumer.portPool.enabled` to `false` disables the pool and enables the previous behavior (bare `PortProducer`, wrapped by a `PortCache` instance that stashes ports).
+
+The internal state of the pools is reported on the diagnostics servlet.
+
+=== Migration
+
+The following method has been renamed and the return type has been changed to `IPortProvider`. More important it returns a pooled, cached, bare provider or uses any other strategy. In other words, the `AbstractWebServiceClient` does not wrap the producer into a `PortCache` anymore.
+[source]
+----
+class: org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient
+old:   getConfiguredPortProducer(Class<SERVICE>, Class<PORT>, URL, String, String, IPortInitializer)
+new:   getConfiguredPortProvider(Class<SERVICE>, Class<PORT>, URL, String, String, IPortInitializer)
+                        ^^^^^^^^
+----
 
 ////
 renames, should always be at the end of the document

@@ -1,5 +1,5 @@
 
-=== Class Renames or Moves
+== Class Renames or Moves
 Excluding Tests
 ////
 renames since ccc997439b:
