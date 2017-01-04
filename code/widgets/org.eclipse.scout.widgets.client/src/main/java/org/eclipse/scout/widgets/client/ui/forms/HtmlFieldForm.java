@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -30,8 +31,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -43,6 +48,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.Configura
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.ScoutHtmlButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.HtmlField;
+import org.eclipse.scout.widgets.shared.Icons;
 
 @Order(6000.0)
 public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -323,6 +329,32 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
           @Override
           protected void execClickAction() {
             loadFile("ALotOfContent.html");
+          }
+        }
+
+        @Order(80)
+        public class HtmlBuilderButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Programmatic value (with icon)";
+          }
+
+          @Override
+          protected void execClickAction() {
+            getHtmlField().setAttachments(null);
+            String randomColor = "#"
+                + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
+                + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
+                + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2);
+            getHtmlField().setValue(HTML.fragment(
+                HTML.icon(Icons.Clock)
+                    .style("font-size: 50px; padding-right: 10px; vertical-align: middle; color: " + randomColor),
+                HTML.span(
+                    "The current server time is: ",
+                    HTML.bold(DateUtility.formatTime(new Date())))
+                    .style("vertical-align: middle;"))
+                .toHtml());
           }
         }
       }

@@ -12,30 +12,37 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.dnd.ResourceListTransferObject;
 import org.eclipse.scout.rt.client.ui.dnd.TransferObject;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.imagefield.IImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.client.ResourceBase;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image1Field;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image2Field;
+import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageIdField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
@@ -44,9 +51,13 @@ import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.IconContentField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.shared.Icons;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Order(7000.0)
 public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ImageFieldForm.class);
 
   public ImageFieldForm() {
     super();
@@ -106,6 +117,10 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public ImageURLField getImageURLField() {
     return getFieldByClass(ImageURLField.class);
+  }
+
+  public ImageIdField getImageIdField() {
+    return getFieldByClass(ImageIdField.class);
   }
 
   public MainBox getMainBox() {
@@ -286,13 +301,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         return TEXTS.get("Configure");
       }
 
-      private URL getUrl(String urlString) throws Exception {
-        if (urlString.equals(BIRD)) {
-          return ResourceBase.class.getResource(BIRD_OFFLINE);
-        }
-        return new URL((String) urlString);
-      }
-
       @Order(10)
       public class Image1Field extends AbstractImageField {
 
@@ -314,23 +322,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected String getConfiguredTooltipText() {
           return "Image alignment: horizontally and vertically centered.";
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return ImageFieldForm.MainBox.ConfigurationBox.ImageURLField.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          getImageURLField().clearErrorStatus();
-          try (InputStream in = getUrl((String) newMasterValue).openStream()) {
-            setImage(IOUtility.readBytes(in));
-          }
-          catch (Exception e) {
-            e.printStackTrace();
-            getImageURLField().addErrorStatus(e.getMessage());
-          }
         }
       }
 
@@ -403,11 +394,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return ImageFieldForm.MainBox.ConfigurationBox.ImageURLField.class;
-        }
-
-        @Override
         protected boolean getConfiguredScrollBarEnabled() {
           return true;
         }
@@ -420,18 +406,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected int getConfiguredVerticalAlignment() {
           return 1;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          getImageURLField().clearErrorStatus();
-          try (InputStream in = getUrl((String) newMasterValue).openStream()) {
-            setImage(IOUtility.readBytes(in));
-          }
-          catch (Exception e) {
-            e.printStackTrace();
-            getImageURLField().addErrorStatus(e.getMessage());
-          }
         }
       }
 
@@ -501,6 +475,94 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected String getConfiguredLabelFont() {
           return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getImageIdField().clearErrorStatus();
+          getImageIdField().setValueChangeTriggerEnabled(false);
+          try {
+            getImageIdField().setValue(null);
+          }
+          finally {
+            getImageIdField().setValueChangeTriggerEnabled(true);
+          }
+          setImageFromUrl(getImage1Field(), getValue());
+          setImageFromUrl(getImage2Field(), getValue());
+        }
+
+        protected void setImageFromUrl(IImageField field, String urlString) {
+          getImageURLField().clearErrorStatus();
+          byte[] img = null;
+          try {
+            URL url = null;
+            if (urlString != null) {
+              if (urlString.equals(BIRD)) {
+                url = ResourceBase.class.getResource(BIRD_OFFLINE);
+              }
+              else {
+                url = new URL(urlString);
+              }
+            }
+            img = IOUtility.readFromUrl(url);
+          }
+          catch (Exception e) {
+            LOG.warn("Error while loading image from URL {}", urlString, e);
+            getImageURLField().addErrorStatus(e.getMessage());
+          }
+          field.setImageId(null);
+          field.setImage(img);
+        }
+      }
+
+      @Order(40)
+      public class ImageIdField extends AbstractSmartField<String> {
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "ImageId";
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return IconIdLookupCall.class;
+        }
+
+        @Override
+        protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
+          for (Iterator<ILookupRow<String>> it = result.iterator(); it.hasNext();) {
+            ILookupRow<String> l = it.next();
+            if (StringUtility.startsWith(l.getKey(), "font:")) {
+              it.remove();
+            }
+          }
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getImageURLField().clearErrorStatus();
+          getImageURLField().setValueChangeTriggerEnabled(false);
+          try {
+            getImageURLField().clearErrorStatus();
+            getImageURLField().setValue(null);
+          }
+          finally {
+            getImageURLField().setValueChangeTriggerEnabled(true);
+          }
+          getImage1Field().setImage(null);
+          getImage1Field().setImageId(getValue());
+          getImage2Field().setImage(null);
+          getImage2Field().setImageId(getValue());
         }
       }
     }
