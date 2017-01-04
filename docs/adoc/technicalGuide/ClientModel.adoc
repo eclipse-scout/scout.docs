@@ -26,7 +26,7 @@ ifndef::mdledir[:mdledir: .]
 === Multiple Dimensions Support
 
 Several components support multiple dimensions for visibility or enabled flags. This means the component is only visible or enabled if all dimensions are set to true.
-This gives developers the flexibility to e.g. use a dimension for granting and one for the business logic. 
+This gives developers the flexibility to e.g. use a dimension for granting and one for the business logic.
 
 A total of 8 dimensions are available for a certain component type and attribute.
 This means you e.g. have a total of 8 dimensions for Form Field visibility in your application. And 8 dimensions for enabled-states of Actions.

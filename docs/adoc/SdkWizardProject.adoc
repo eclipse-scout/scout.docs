@@ -18,7 +18,7 @@ ifndef::mdledir[:mdledir: .]
 The _New Scout Project_ wizard can be used to create a new Scout project from scratch.
 
 To open the wizard press kbd:[Ctrl,N] or use menu:File[New,Other...] and type "_Scout_" into the *Wizards* search field.
-Then, select the entry "_Scout Project_" and click on btn:[Next]. 
+Then, select the entry "_Scout Project_" and click on btn:[Next].
 This leads to the initial dialog of the _New Scout Project_ wizard as shown in <<img-sdk_wizard_project>>.
 
 [[img-sdk_wizard_project, The new Project Wizard]]
@@ -30,7 +30,7 @@ A detailed description of the indiviudal wizard fields of <<img-sdk_wizard_proje
 By clicking on the btn:[Finish] button the wizard is started and a new Scout client server application is created in the form of a Maven multi-module project.
 
 ===== Wizard Fields and Default Values
-All fields of the <<img-sdk_wizard_project>> are initially filled with default values. 
+All fields of the <<img-sdk_wizard_project>> are initially filled with default values.
 
 Group Id:: Maven groupId used for all created projects. The default value is `org.eclipse.scout.apps`.
 Artifact Id:: Maven artifactId for the parent project. The additional projects are derived from this name. The default value is *helloworld*.
@@ -46,17 +46,17 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 
 * Maven module *helloworld*
 ** Contains the project's parent `pom.xml` file
-* Maven module *helloworld.client* 
+* Maven module *helloworld.client*
 ** Contains model components of the client application in `src/main/java` and model tests in `src/test/java`.
 ** The class `HelloWorldForm` in package `org.eclipse.scout.apps.helloworld.client.helloworld` is an example of a model class.
-* Maven module *helloworld.shared* 
+* Maven module *helloworld.shared*
 ** Contains components needed in both the client and the server application.
 ** For examples see the `IHelloWorldService` interface in `src/main/java` and class `HelloWorldFormData` in `src/generated/java`.
 ** The `Texts.nls` file that can be opened in the {sdk_editor_nls}.
-* Maven module *helloworld.server* 
+* Maven module *helloworld.server*
 ** Contains the model components of the server application in `src/main/java` and model tests in `src/test/java`.
 ** The class `HelloWorldService` in package `org.eclipse.scout.apps.helloworld.server.helloworld` is an example of such a model class.
-* Maven module *helloworld.server.app.dev* 
+* Maven module *helloworld.server.app.dev*
 ** Contains all components to run the Scout server application from within the Eclipse IDE.
 ** The file `config.properties` in folder `src/main/resources` contains the development configuration for the Scout server application.
 ** The file `pom.xml` bundles the Jetty web server with the server application.
@@ -65,16 +65,16 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 ** Contains all components to create a Scout server WAR file to deploy to an external web server.
 ** The file `config.properties` in folder `src/main/resources` contains the server configuration.
 ** The file `pom.xml` is used to build the Scout server WAR file.
-* Maven module *helloworld.ui.html* 
+* Maven module *helloworld.ui.html*
 ** Contains servlet filters and the HTML pages as well as custom CSS and JavaScript files for the Scout UI Server.
-** See class `UiServletFilter` in `src/main/java` and folder `WebContent` in `source/main/resources`. 
-* Maven module *helloworld.ui.html.app.dev* 
+** See class `UiServletFilter` in `src/main/java` and folder `WebContent` in `source/main/resources`.
+* Maven module *helloworld.ui.html.app.dev*
 ** Contains all components to run the Scout UI application from within the Eclipse IDE.
 ** The file `config.properties` in folder `src/main/resources` contains the development configuration for the application.
 ** The file `web.xml` in folder `src/main/webapp` contains the web configuration for the application.
 ** The file `pom.xml` bundles the Jetty web server with the application.
 ** The file `[webapp] dev ui.launch` contains the launch configuration for the Eclipse IDE.
-* Maven module *helloworld.ui.html.app.war* 
+* Maven module *helloworld.ui.html.app.war*
 ** Contains all components to create a Scout UI WAR file to deploy to an external web server.
 ** The file `config.properties` in folder `src/main/resources` contains the application configuration.
 ** The file `web.xml` in folder `src/main/webapp` contains the web configuration.

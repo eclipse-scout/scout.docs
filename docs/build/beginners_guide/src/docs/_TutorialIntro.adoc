@@ -85,19 +85,19 @@ The covered topics includes dealing with application properties, setup and acces
 
 Step 4: <<sec-contacts_forms>>::
 Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application.
-In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.   
+In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.
 
-Step 5: <<sec-contacts_fields>>:: 
+Step 5: <<sec-contacts_fields>>::
 This step provides an introduction into form field validation and the creation of template fields.
-Validation of user input is important for many business applications and template fields help to improve code quality with a mechanism to reuse application specific user interface components.  
+Validation of user input is important for many business applications and template fields help to improve code quality with a mechanism to reuse application specific user interface components.
 
-Step 6: <<sec-contacts_form_add_company>>:: 
-We create the organization form to create and enter organizations in the "Contacts" application. 
-As we can reuse many of the components developed so far this is the shortest tutorial step.     
+Step 6: <<sec-contacts_form_add_company>>::
+We create the organization form to create and enter organizations in the "Contacts" application.
+As we can reuse many of the components developed so far this is the shortest tutorial step.
 
-Step 7: <<sec-contacts_link_organization_person>>:: 
+Step 7: <<sec-contacts_link_organization_person>>::
 In this step we modify the user interface to implement a 1:n relationship between organizations and persons.
 This includes the creation of a hierarchical page structure for organization, adding an organization column to the person page and adding an organization field to the person form to manage the association of a person to an organization.
 
-Step 8: <<sec-contacts_outlook>>:: 
-The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application. 
+Step 8: <<sec-contacts_outlook>>::
+The last tutorial part discusses the gap between the tutorial application and the complete "Contacts" demo application.

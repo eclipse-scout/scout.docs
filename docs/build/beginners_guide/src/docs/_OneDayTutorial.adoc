@@ -18,8 +18,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 [[cha-large_example]]
 == A One Day Tutorial
 
-In this chapter we will create the "`Contacts`" Scout application. 
-The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application. 
+In this chapter we will create the "`Contacts`" Scout application.
+The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application.
 
 The application is kept small enough to complete this tutorial within less than a day.
 An extended version of "`Contacts`" is available as a Scout sample application on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github].
@@ -71,5 +71,5 @@ include::_TutorialStep6.adoc[]
 include::_TutorialStep7.adoc[]
 
 [[sec-contacts_outlook]]
-=== Additional Concepts and Features 
+=== Additional Concepts and Features
 include::_TutorialStep8.adoc[]

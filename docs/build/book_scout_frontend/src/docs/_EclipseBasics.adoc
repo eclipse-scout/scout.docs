@@ -30,18 +30,18 @@ Excellent Eclipse IDE tutorial by L. Vogel http://www.vogella.com/articles/Eclip
 [[apx-eclipse_perspective]]
 ==== Perspectives
 
-A perspective contains the visual elements and the arrangement of those elements to support a specific development task within the Eclipse IDE. 
-Perspectives relevant to the development of Scout applications are the Scout perspective, the Java perspective, the Debug perspective, and many others. 
-To open a perspective available in the Eclipse IDE, the btn:[Open Perspective] button or the menu:Window[Open Perspective,Other...] menu can be used. 
+A perspective contains the visual elements and the arrangement of those elements to support a specific development task within the Eclipse IDE.
+Perspectives relevant to the development of Scout applications are the Scout perspective, the Java perspective, the Debug perspective, and many others.
+To open a perspective available in the Eclipse IDE, the btn:[Open Perspective] button or the menu:Window[Open Perspective,Other...] menu can be used.
 
 [[img-eclipse_ide_parts, Figure 000]]
-.The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple). 
+.The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple).
 image::{imgsdir}/eclipse_ide_parts.png[]
 
-<<img-eclipse_ide_parts>> provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved. 
+<<img-eclipse_ide_parts>> provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved.
 Using drag and drop, views and editors can be freely moved around in the Eclipse IDE to suit the developer's needs.
-Perspectives can be further individualized using the menu:Window[Customize Perspective...] menu. 
-Here, the visibility of the toolbar items and menu entries can be defined. 
+Perspectives can be further individualized using the menu:Window[Customize Perspective...] menu.
+Here, the visibility of the toolbar items and menu entries can be defined.
 Once a suitable layout of all desired elements has been defined, this organisation may be saved as a personal perspective using the Eclipse IDE menu:Window[Save Perspective As...] menu.
 
 In case a customizing step does not turn out as intended, with the menu:Window[Reset Perspective...] menu is always possible to go back to the last saved state of the current perspective.
@@ -50,7 +50,7 @@ In case a customizing step does not turn out as intended, with the menu:Window[R
 [[apx-osgi_basics]]
 === OSGi and Equinox
 
-TIP: The goal of this section is to provide the reader with a solid overview of OSGi concepts and its Equinox implementation. 
+TIP: The goal of this section is to provide the reader with a solid overview of OSGi concepts and its Equinox implementation.
     Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
 
 What is OSGi: http://www.osgi.org/Technology/WhatIsOSGi
@@ -68,12 +68,12 @@ needs text
   * bundles
   * services
   * classloading
-  
+
 
 [[apx-platform_basics]]
 === Eclipse
 
-TIP: The goal of section is to provide the reader with a solid overview of standard Eclipse concepts relevant for scout projects and central parts of the Scout framework and Scout SDK tooling. 
+TIP: The goal of section is to provide the reader with a solid overview of standard Eclipse concepts relevant for scout projects and central parts of the Scout framework and Scout SDK tooling.
     where appropriate, provide links to high quality online material that is likely to exist for at least the next year or two
 
 needs text

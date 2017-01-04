@@ -21,6 +21,6 @@ When the the current edit position is inside the String parameter of the `TEXTS.
 .Proposals corresponding to NLS Support.
 image::{imgsdir}/java_proposals_texts.png[]
 
-Selecting one of proposal entries (like "DateOfBirth" in the example) shows the available translations on the right hand side. 
+Selecting one of proposal entries (like "DateOfBirth" in the example) shows the available translations on the right hand side.
 To select a specific proposal entry you may double click on the entry or hit the kbd:[Enter] key.
 To create a new text entry select *New text...* at the end of the proposal list.

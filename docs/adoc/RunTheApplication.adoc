@@ -15,22 +15,22 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-After the initial project creation step we can start the Scout application for the first time. 
+After the initial project creation step we can start the Scout application for the first time.
 For this, the following three steps are necessary
 
-. Start the Scout backend server 
-. Start the Scout frontend server 
+. Start the Scout backend server
+. Start the Scout frontend server
 . Open the application in the browser
 
-To start the Scout backend server we first select the `[webapp] dev server.launch` file in the Package Explorer view 
-of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_client>>. 
+To start the Scout backend server we first select the `[webapp] dev server.launch` file in the Package Explorer view
+of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_client>>.
 
 [[img-start_client, Figure Starting the Hello World application]]
 .Starting the Hello World application.
 image::{imgsdir}/sdk_start_client_product.png[]
 
 Starting the Scout frontend server works exactely the same.
-But first select the `[webapp] dev ui.launch` file in the Eclipse IDE. 
+But first select the `[webapp] dev ui.launch` file in the Eclipse IDE.
 This launch file is located under module `helloworld.ui.html.app.dev` in the Package Explorer.
 
 During startup of the Scout applications you should see console output providing information about the startup.

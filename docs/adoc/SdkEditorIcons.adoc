@@ -15,11 +15,11 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-The Icons Editor allows to visualize the Icons defined in the [java]+Icons+ class. 
+The Icons Editor allows to visualize the Icons defined in the [java]+Icons+ class.
 
 ===== Open the Icons Editor
 
-Expand the [node]_shared_ node node of the Eclipse Scout project in the {scoutExplorerView} and select the [folder]_Icons_ folder folder. Click the link `Open Icons Editor` in the {scoutPropView}. 
+Expand the [node]_shared_ node node of the Eclipse Scout project in the {scoutExplorerView} and select the [folder]_Icons_ folder folder. Click the link `Open Icons Editor` in the {scoutPropView}.
 
 ===== Description of the Icons Editor
 

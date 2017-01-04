@@ -9,7 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-With this tutorial you will learn how to import the Scout Demo Application into your workspace. 
+With this tutorial you will learn how to import the Scout Demo Application into your workspace.
 The tutorial consists of the following two parts:
 
 * Install the Scout Demo application
@@ -46,7 +46,7 @@ image::{imgsdir}/oomph_exiting_projects2.png[]
 
 Once the project selection in your Eclipse importer looks as shown in <<img-oomph_exiting_projects2>> Click on the btn:[Next] button.
 
-On the [wizard]_Variables_ dialog of the Eclipse importer a number of Oomph variables have to be specified. 
+On the [wizard]_Variables_ dialog of the Eclipse importer a number of Oomph variables have to be specified.
 In case you have already used Oomph for other purposes, this step might look different or empty (for example when all variables have been set in a previous Oomph session).
 
 Make sure to display all variables by activating checkbox `Show all Variables` in the bottom left corner as shown in <<img-oomph_exiting_variables>>.
@@ -55,9 +55,9 @@ Make sure to display all variables by activating checkbox `Show all Variables` i
 ."Variables" Step of the Importer.
 image::{imgsdir}/oomph_exiting_variables.png[]
 
-WARNING: The variables in <<img-oomph_exiting_variables>> may be shown in a different order in your case. 
+WARNING: The variables in <<img-oomph_exiting_variables>> may be shown in a different order in your case.
 
-Before you proceed make sure that all shown variables are set appropriately for your use case. 
+Before you proceed make sure that all shown variables are set appropriately for your use case.
 For the settings proposed below we assume that we only need read access for the git repository hosting the Scout demo application.
 
 * `Git clone location rule`: "`Located in a folder named '.git/{lt}repo{gt}' within the workspace folder`"
@@ -67,10 +67,10 @@ For the settings proposed below we assume that we only need read access for the 
 * `Scout Demo App Github repository`: "`HTTPS (read-write)`" if you already have a GitHub account. Otherwise use "`HTTPS (read-only, anonymous)`"
 
 Once the setting of the variables is completed click btn:[Next].
-This leads to the [wizard]_Confirmation_ dialog. 
+This leads to the [wizard]_Confirmation_ dialog.
 This last step can be completed by clicking on btn:[Finish].
 
-The Oomph installer first makes sure that all necessary Scout components and M2E connectors are available. 
+The Oomph installer first makes sure that all necessary Scout components and M2E connectors are available.
 In case one or more components are missing, Oomph will first download and install them.
 This triggers a restart request as shown in <<img-oomph_restart>>.
 
@@ -78,10 +78,10 @@ This triggers a restart request as shown in <<img-oomph_restart>>.
 .Restart of the IDE after installation.
 image::{imgsdir}/oomph_restart.png[]
 
-To complete the installation click btn:[Finish]. 
+To complete the installation click btn:[Finish].
 If your IDE needs to be restarted, select the same workspace in the [wizard]_Eclipse Launcher_ dialog.
 
-After the restart Oomph will continue to download and install the Scout demo application showing the progress in the Eclipse importer dialog. 
+After the restart Oomph will continue to download and install the Scout demo application showing the progress in the Eclipse importer dialog.
 Once the download and installation has completed you may close the dialog with clicking the btn:[Finish] button.
 
 ===== Setup result
@@ -133,12 +133,12 @@ image::{imgsdir}/contacts_persons_alice.png[]
 
 ==== What's Next?
 
-Play with the Contacts application. 
-This provides a good overview of a typical Scout application. 
+Play with the Contacts application.
+This provides a good overview of a typical Scout application.
 You can browse through the data, open different forms and add/change entities.
 
 Also have a quick look at the code.
-The list on the left side of the application containing the nodes [folder]_Persons_ and [folder]_Organizations_ is implemented in class [java]+ContactOutline+ as shown in <<lst-contacts_outline>>. 
+The list on the left side of the application containing the nodes [folder]_Persons_ and [folder]_Organizations_ is implemented in class [java]+ContactOutline+ as shown in <<lst-contacts_outline>>.
 
 [[lst-contacts_outline, Listing contacts outline]]
 [source,java]
@@ -147,7 +147,7 @@ The list on the left side of the application containing the nodes [folder]_Perso
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
 ----
 
-If you have clicked on the [folder]_Persons_ node a page with all available persons is shown. 
+If you have clicked on the [folder]_Persons_ node a page with all available persons is shown.
 This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
 
 This is the end of the <<tutorial.html#tutorial, getting started>> guide.
