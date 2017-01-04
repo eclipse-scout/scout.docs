@@ -359,7 +359,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         public class TreeBoxTree extends DefaultTreeBoxTree {
 
-          @Order(30)
+          @Order(10)
           public class ToggleNodeEnabledMenu extends AbstractMenu {
 
             @Override
@@ -380,6 +380,30 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
             @Override
             protected void execAction() {
               getSelectedNode().setEnabled(!getSelectedNode().isEnabled());
+            }
+          }
+
+          @Order(20)
+          public class ToggleNodeCheckedMenu extends AbstractMenu {
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ToggleNodeCheckedState");
+            }
+
+            @Override
+            protected boolean getConfiguredInheritAccessibility() {
+              return false;
+            }
+
+            @Override
+            protected void execAction() {
+              getSelectedNode().setChecked(!getSelectedNode().isChecked());
             }
           }
         }
