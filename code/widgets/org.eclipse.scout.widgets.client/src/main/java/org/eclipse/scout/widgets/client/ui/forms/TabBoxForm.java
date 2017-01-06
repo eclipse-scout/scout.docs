@@ -441,6 +441,124 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    public class SetSelectedTabMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("SelectTab");
+      }
+
+      @Order(10)
+      public class SelectMonthsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Months");
+        }
+
+        @Override
+        protected void execAction() {
+          getTabBox().setSelectedTab(getMonthsBox());
+        }
+      }
+
+      @Order(20)
+      public class SelectCommentsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Comments");
+        }
+
+        @Override
+        protected void execAction() {
+          getTabBox().setSelectedTab(getCommentsBox());
+        }
+      }
+
+      @Order(30)
+      public class SelectDocumentsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Documents");
+        }
+
+        @Override
+        protected void execAction() {
+          getTabBox().setSelectedTab(getDocumentsBox());
+        }
+      }
+
+    }
+
+    @Order(50)
+    public class SetFocusTabMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("FocusTab");
+      }
+
+      @Order(10)
+      public class FocusMonthsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Months");
+        }
+
+        @Override
+        protected void execAction() {
+          getMonthsBox().requestFocus();
+        }
+      }
+
+      @Order(20)
+      public class FocusCommentsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Comments");
+        }
+
+        @Override
+        protected void execAction() {
+          getCommentsBox().requestFocus();
+        }
+      }
+
+      @Order(30)
+      public class FocusDocumentsMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("Documents");
+        }
+
+        @Override
+        protected void execAction() {
+          getDocumentsBox().requestFocus();
+        }
+      }
+
+      @Order(40)
+      public class FocusTabBoxMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("TabBox");
+        }
+
+        @Override
+        protected void execAction() {
+          getTabBox().requestFocus();
+        }
+      }
+
+    }
+
+    @Order(60)
     public class CloseButton extends AbstractCloseButton {
     }
   }
