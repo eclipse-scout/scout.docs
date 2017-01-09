@@ -939,6 +939,11 @@ public class MenusForm extends AbstractForm implements IPageForm {
         return TEXTS.get("MenuWithMenus");
       }
 
+      @Override
+      protected String getConfiguredIconId() {
+        return "eclipse_scout_logo";
+      }
+
       @Order(10)
       @ClassId("4035f395-bbee-4b88-9088-fec12b4b4787")
       public class Menu1Menu extends AbstractMenu {
@@ -946,6 +951,11 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredText() {
           return TEXTS.get("Menu1");
+        }
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "eclipse_scout";
         }
 
         @Override
@@ -965,6 +975,11 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected String getConfiguredIconId() {
+          return "eclipse16";
+        }
+
+        @Override
         protected void execAction() {
           String menuname = this.getClass().getSimpleName();
           MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
@@ -978,6 +993,32 @@ public class MenusForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredText() {
           return TEXTS.get("Menu3");
+        }
+
+        @Override
+        protected void execAction() {
+          String menuname = this.getClass().getSimpleName();
+          MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
+        }
+      }
+    }
+
+    @Order(45)
+    @ClassId("8e6c0d7e-8d52-445e-8afb-f8058788c629")
+    public class MenuWithSimpleSubMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return "Menu with simple menu";
+      }
+
+      @Order(10)
+      @ClassId("33f19e4d-f78c-4a61-87ea-67b6c29568fc")
+      public class SimpleMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Simple menu";
         }
 
         @Override
