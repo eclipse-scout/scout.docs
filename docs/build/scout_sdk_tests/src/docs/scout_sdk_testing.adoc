@@ -1,0 +1,41 @@
+= Scout SDK Testing Procedure
+:doctype: article
+:author: Scout Team
+:email: scout@bsi-software.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+After installing the Eclipse Scout package you are ready for testing the SDK version
+
+== Precondition
+
+Before executing the SDK tests described below, make sure that you already have (at least) checked that the Scout Hello World is working properly.
+
+== Verify Version
+
+
+. Open Eclipse About dialog
+. Click on Eclipse Scout project button
+. Check Scout SDK feature version
+. Click on button Plug-in Details
+. Check Scout SDK plug-in version (same as feature version)
+
+SDK Version Check:
+
+- [ ] Scout SDK version matches expected version for testing.
+
+== Test Bla
+
+TODO 1
+
+== Test Blu
+
+TODO 2
+
+include::{mdledir}/_footer.adoc[]
