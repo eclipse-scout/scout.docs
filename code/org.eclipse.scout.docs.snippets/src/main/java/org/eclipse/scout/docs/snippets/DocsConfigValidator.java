@@ -12,8 +12,4 @@ public class DocsConfigValidator implements IConfigurationValidator {
     // the config.properties contains an example entry with this key. It should be ignored in validation.
     return "myproject.application.name".equals(key);
   }
-
-  @Override
-  public void dispose() {
-  }
 }
