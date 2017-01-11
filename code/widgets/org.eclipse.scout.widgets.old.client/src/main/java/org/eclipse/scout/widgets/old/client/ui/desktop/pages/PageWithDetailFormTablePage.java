@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
+import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -26,15 +27,15 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm;
 
-public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWithADetailformTablePage.Table> {
+public class PageWithDetailFormTablePage extends AbstractPageWithTable<PageWithDetailFormTablePage.Table> {
 
-  private DetailForm m_detailForm;
-
-  public PageWithADetailformTablePage() {
+  public PageWithDetailFormTablePage() {
     super(true, DetailForm.class.getName());
-    m_detailForm = new DetailForm();
-    setDetailForm(m_detailForm);
-    m_detailForm.startNew();
+  }
+
+  @Override
+  protected Class<? extends IForm> getConfiguredDetailForm() {
+    return DetailForm.class;
   }
 
   @Override
@@ -58,6 +59,16 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
 
   public class Table extends AbstractTable {
 
+    @Override
+    protected boolean getConfiguredAutoResizeColumns() {
+      return false;
+    }
+
+    @Override
+    protected boolean getConfiguredMultiSelect() {
+      return false;
+    }
+
     public NameColumn getNameColumn() {
       return getColumnSet().getColumnByClass(NameColumn.class);
     }
@@ -68,16 +79,6 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
 
     public NumberColumn getNumberColumn() {
       return getColumnSet().getColumnByClass(NumberColumn.class);
-    }
-
-    @Override
-    protected boolean getConfiguredAutoResizeColumns() {
-      return false;
-    }
-
-    @Override
-    protected boolean getConfiguredMultiSelect() {
-      return false;
     }
 
     public CompanyNrColumn getCompanyNrColumn() {
@@ -100,6 +101,11 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Name");
       }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 300;
+      }
     }
 
     @Order(30)
@@ -108,6 +114,11 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Symbol");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
       }
     }
 
@@ -119,6 +130,10 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
         return TEXTS.get("IntegerColumn");
       }
 
+      @Override
+      protected int getConfiguredWidth() {
+        return 200;
+      }
     }
 
     @Order(10)
@@ -131,7 +146,7 @@ public class PageWithADetailformTablePage extends AbstractPageWithTable<PageWith
 
       @Override
       protected Class<?> provideSourceClass() {
-        return PageWithADetailformTablePage.class;
+        return PageWithDetailFormTablePage.class;
       }
     }
   }

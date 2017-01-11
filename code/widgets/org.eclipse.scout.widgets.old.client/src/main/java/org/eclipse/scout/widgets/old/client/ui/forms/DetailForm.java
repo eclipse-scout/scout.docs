@@ -14,6 +14,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm.MainBox.GroupBox;
@@ -26,6 +27,11 @@ public class DetailForm extends AbstractForm {
 
   public DetailForm() {
     super();
+  }
+
+  @Override
+  public void start() {
+    startNew();
   }
 
   public void startNew() {
@@ -62,14 +68,28 @@ public class DetailForm extends AbstractForm {
     @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
-      @Override
-      protected boolean getConfiguredGridUseUiHeight() {
-        return false;
-      }
+      @Order(5)
+      public class NavigationButtonInfoField extends AbstractLabelField {
 
-      @Override
-      protected int getConfiguredHeightInPixel() {
-        return 80;
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "italic";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue("Tip: Use the navigation buttons above to toggle between detail form and detail table.");
+        }
       }
 
       @Order(10)
