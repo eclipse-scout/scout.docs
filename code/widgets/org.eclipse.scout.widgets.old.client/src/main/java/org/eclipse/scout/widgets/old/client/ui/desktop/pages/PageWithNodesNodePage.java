@@ -16,8 +16,8 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNode
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.old.client.SearchFormsNodePage;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
+import org.eclipse.scout.widgets.old.client.SearchFormsNodePage;
 
 public class PageWithNodesNodePage extends AbstractPageWithNodes {
 
@@ -28,14 +28,9 @@ public class PageWithNodesNodePage extends AbstractPageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    IPage<?> pageWithTableTablePage = new PageWithTableTablePage(TEXTS.get("PageWithTable") + " 1");
-    pageList.add(pageWithTableTablePage);
-
-    IPage<?> pageWithTableTablePage0 = new SearchFormsNodePage();
-    pageList.add(pageWithTableTablePage0);
-
-    IPage<?> pageWithTableTablePage1 = new PageWithADetailformTablePage();
-    pageList.add(pageWithTableTablePage1);
+    pageList.add(new PageWithTableTablePage());
+    pageList.add(new SearchFormsNodePage());
+    pageList.add(new PageWithDetailFormTablePage());
   }
 
   @Order(10)

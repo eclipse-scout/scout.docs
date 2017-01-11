@@ -15,7 +15,8 @@ import java.util.List;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithADetailformTablePage;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithDetailFormTablePage;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithEditableTableTablePage;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithNodesNodePage;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithTableTablePage;
 
@@ -31,13 +32,9 @@ public class PagesNodePage extends AbstractPageWithNodes {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    PageWithTableTablePage pageWithTableTablePage = new PageWithTableTablePage();
-    pageList.add(pageWithTableTablePage);
-
-    PageWithNodesNodePage pageWithNodesNodePage = new PageWithNodesNodePage();
-    pageList.add(pageWithNodesNodePage);
-
-    PageWithADetailformTablePage pageWithADetailformPage = new PageWithADetailformTablePage();
-    pageList.add(pageWithADetailformPage);
+    pageList.add(new PageWithTableTablePage());
+    pageList.add(new PageWithEditableTableTablePage());
+    pageList.add(new PageWithNodesNodePage());
+    pageList.add(new PageWithDetailFormTablePage());
   }
 }

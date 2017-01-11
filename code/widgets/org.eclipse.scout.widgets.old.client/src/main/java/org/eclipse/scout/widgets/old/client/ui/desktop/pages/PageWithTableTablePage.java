@@ -72,23 +72,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
   @Override
   protected void execLoadData(SearchFilter filter) {
     importTableData(new Object[][]{
-        {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 1.0, 1.0},
-        {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 10.0, 1.120},
-        {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 100.0, 1.123},
-        {"String 13", "String 1", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2, 0.1, 0.1, 1.150},
-        {"String 22", "String 1000", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1, -1.0, -1.0, 1.151},
-        {"String 23", "String .txt", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1, -10.0, -10.0, 1.5},
-        {"String 24", "String 1 mit 10", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1, -100.0, -100.0, 1.51},
-        {"String 25", "String 1 mit 3", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1, -0.1, -0.1, 1.511},
-        {"String 31", "String 1 mit 1020", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.2, 1.2, 1.0},
-        {"String 32", "String 1.txt", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.02, 1.02, -1.0},
-        {"String 33", "String 2.txt", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 1.002, -1.120},
-        {"String 34", "String 19.txt", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -1.2, -1.123},
-        {"String 35", "String 200.txt", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -1.02, -1.150},
-        {"String 36", "String 1", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -1.002, -1.151},
-        {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.5},
-        {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.51},
-        {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 1.0, -1.511},
+        {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 0.01, 1.0},
+        {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 0.10, 1.120},
+        {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 1.0, 1.123},
+        {"String 13", "String 1", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2, 0.1, 0.001, 1.150},
+        {"String 22", "String 1000", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1, -1.0, -0.01, 1.151},
+        {"String 23", "String .txt", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1, -10.0, -0.1, 1.5},
+        {"String 24", "String 1 mit 10", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1, -100.0, -1.0, 1.51},
+        {"String 25", "String 1 mit 3", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1, -0.1, -0.001, 1.511},
+        {"String 31", "String 1 mit 1020", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.2, 0.012, 1.0},
+        {"String 32", "String 1.txt", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.02, 0.0102, -1.0},
+        {"String 33", "String 2.txt", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.002, 0.01002, -1.120},
+        {"String 34", "String 19.txt", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.2, -0.012, -1.123},
+        {"String 35", "String 200.txt", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.02, -0.0102, -1.150},
+        {"String 36", "String 1", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3, -1.002, -0.01002, -1.151},
+        {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.5},
+        {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.51},
+        {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.511},
     });
   }
 
@@ -96,11 +96,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     public SmartColumn getSmartColumn() {
       return getColumnSet().getColumnByClass(SmartColumn.class);
-    }
-
-    @Override
-    protected boolean getConfiguredAutoResizeColumns() {
-      return false;
     }
 
     public BooleanColumn getBooleanColumn() {
@@ -147,13 +142,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class StringColumn extends AbstractStringColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("StringColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("StringColumn");
+      protected int getConfiguredWidth() {
+        return 120;
       }
     }
 
@@ -161,13 +156,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class AlphanumericSortingStringColumn extends AbstractAlphanumericSortingStringColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("StringColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("StringColumn");
+      protected int getConfiguredWidth() {
+        return 120;
       }
     }
 
@@ -175,13 +170,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class LongColumn extends AbstractLongColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("LongColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("LongColumn");
+      protected int getConfiguredWidth() {
+        return 200;
       }
     }
 
@@ -189,13 +184,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class IntegerColumn extends AbstractIntegerColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("IntegerColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("IntegerColumn");
+      protected int getConfiguredWidth() {
+        return 130;
       }
     }
 
@@ -203,13 +198,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class BigDecimalColumn extends AbstractBigDecimalColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("BigDecimalColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("BigDecimalColumn");
+      protected int getConfiguredWidth() {
+        return 150;
       }
     }
 
@@ -217,13 +212,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class DateColumn extends AbstractDateColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("DateColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("DateColumn");
+      protected int getConfiguredWidth() {
+        return 100;
       }
     }
 
@@ -231,23 +226,18 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     public class BooleanColumn extends AbstractBooleanColumn {
 
       @Override
-      protected boolean getConfiguredEditable() {
-        return true;
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("BooleanColumn");
       }
 
       @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("BooleanColumn");
+      protected int getConfiguredWidth() {
+        return 100;
       }
     }
 
     @Order(70)
     public class SmartColumn extends AbstractSmartColumn<Long> {
-
-      @Override
-      protected boolean getConfiguredEditable() {
-        return true;
-      }
 
       @Override
       protected String getConfiguredHeaderText() {
@@ -258,15 +248,15 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
         return CompanyTypeLookupCall.class;
       }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
+      }
     }
 
     @Order(80)
     public class PercentColumn extends AbstractBigDecimalColumn {
-
-      @Override
-      protected boolean getConfiguredEditable() {
-        return true;
-      }
 
       @Override
       protected String getConfiguredHeaderText() {
@@ -277,15 +267,15 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       protected boolean getConfiguredPercent() {
         return true;
       }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
+      }
     }
 
     @Order(90)
     public class MultiplierColumn extends AbstractBigDecimalColumn {
-
-      @Override
-      protected boolean getConfiguredEditable() {
-        return true;
-      }
 
       @Override
       protected String getConfiguredHeaderText() {
@@ -296,15 +286,15 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       protected int getConfiguredMultiplier() {
         return -100;
       }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 100;
+      }
     }
 
     @Order(100)
     public class RoundingModeColumn extends AbstractBigDecimalColumn {
-
-      @Override
-      protected boolean getConfiguredEditable() {
-        return true;
-      }
 
       @Override
       protected String getConfiguredHeaderText() {
@@ -315,37 +305,11 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       protected RoundingMode getConfiguredRoundingMode() {
         return RoundingMode.CEILING;
       }
-    }
-
-    @Order(20)
-    public class ToggleMandatoryMenu extends AbstractMenu {
 
       @Override
-      protected void execInitAction() {
-        super.execInitAction();
+      protected int getConfiguredWidth() {
+        return 80;
       }
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection,
-            TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Mandatory");
-      }
-
-      @Override
-      protected void execAction() {
-        List<IColumn<?>> columns = getTable().getColumns();
-        for (IColumn<?> c : columns) {
-          c.setMandatory(!c.isMandatory());
-        }
-      }
-
     }
 
     @Order(30)
@@ -395,7 +359,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
           getColumnSet().resetSortingAndGrouping();
         }
       }
-
     }
 
     @Order(40)
@@ -462,6 +425,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
     @Order(20)
     public class TableSingleMenu extends AbstractMenu {
+
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(
@@ -494,7 +458,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         protected String getConfiguredText() {
           return "SubSingle";
         }
-
       }
 
       @Order(20)
@@ -509,7 +472,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         protected String getConfiguredText() {
           return "SubMulti";
         }
-
       }
 
       @Order(30)
@@ -524,7 +486,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         protected String getConfiguredText() {
           return "SubEmpty";
         }
-
       }
 
       @Order(40)
@@ -547,7 +508,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
           protected String getConfiguredText() {
             return "SubSubSingle";
           }
-
         }
 
         @Order(20)
@@ -562,7 +522,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
           protected String getConfiguredText() {
             return "SubSubMulti";
           }
-
         }
 
         @Order(30)
@@ -577,16 +536,14 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
           protected String getConfiguredText() {
             return "SubSubEmpty";
           }
-
         }
-
       }
     }
-
   }
 
   @Order(10)
   public class HierarchicalPageMenu extends AbstractMenu {
+
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
       return CollectionUtility.<IMenuType> hashSet(
@@ -693,20 +650,12 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         protected String getConfiguredText() {
           return "TreeSubSubEmpty";
         }
-
       }
-
     }
-
   }
 
   @Order(10)
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
-
-    @Override
-    protected void execInitAction() {
-      super.execInitAction();
-    }
 
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
