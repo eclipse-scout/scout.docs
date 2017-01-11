@@ -91,6 +91,8 @@ The Virtual tree node has been deleted. The main reason for this was because of 
 Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls.
 To assure this it is recommended to move any expensive operation currently implemented in the `execInit()` method to `execCreateChildPages()` or `execPageActivated()`.
 
+Furthermore to save memory it is recommended to create the tables below pages lazily. The table is created upon the first access to `IPage.getTable()`. Therefore try not to use `getTable()` in the page init phase. Instead a new callback `execInitTable` is available to initialize the table at the moment it is created. There is also an overload `getTable(boolean)` that can be used to access the table without automatically creating it.
+
 === Enabled Property of Form Fields
 The inheritance of the enabled property of form fields has been changed so that changing this property on a composite field does no longer automatically propagate the value to the children.
 Instead a form field is only considered to be enabled if all parent fields are enabled too.
