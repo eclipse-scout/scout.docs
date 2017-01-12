@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithDetailFormTablePage;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithEditableTableTablePage;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithNodesNodePage;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithTableRecTablePage;
 import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithTableTablePage;
 
 /**
@@ -34,6 +35,7 @@ public class PagesNodePage extends AbstractPageWithNodes {
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new PageWithTableTablePage());
     pageList.add(new PageWithEditableTableTablePage());
+    pageList.add(new PageWithTableRecTablePage());
     pageList.add(new PageWithNodesNodePage());
     pageList.add(new PageWithDetailFormTablePage());
   }
