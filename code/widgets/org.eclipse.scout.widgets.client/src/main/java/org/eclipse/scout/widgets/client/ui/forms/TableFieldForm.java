@@ -1375,7 +1375,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected int getConfiguredGridH() {
-          return 6;
+          return 7;
         }
 
         @Override
