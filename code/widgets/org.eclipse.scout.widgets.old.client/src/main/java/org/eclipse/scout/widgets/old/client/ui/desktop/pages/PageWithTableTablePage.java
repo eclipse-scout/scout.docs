@@ -48,7 +48,7 @@ import org.eclipse.scout.widgets.client.ui.forms.CheckboxFieldForm;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
 
-  private Random m_random = new Random();
+  protected final Random m_random = new Random();
 
   public PageWithTableTablePage() {
     super();
@@ -71,7 +71,11 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
 
   @Override
   protected void execLoadData(SearchFilter filter) {
-    importTableData(new Object[][]{
+    importTableData(loadDemoData());
+  }
+
+  protected Object[][] loadDemoData() {
+    return new Object[][]{
         {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2, 1.0, 0.01, 1.0},
         {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2, 10.0, 0.10, 1.120},
         {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2, 100.0, 1.0, 1.123},
@@ -89,7 +93,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
         {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.5},
         {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.51},
         {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3, 1.0, 0.01, -1.511},
-    });
+    };
   }
 
   public class Table extends AbstractTable {
