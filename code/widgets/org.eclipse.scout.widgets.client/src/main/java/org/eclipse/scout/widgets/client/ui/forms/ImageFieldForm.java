@@ -507,8 +507,9 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
             img = IOUtility.readFromUrl(url);
           }
           catch (Exception e) {
-            LOG.warn("Error while loading image from URL {}", urlString, e);
-            getImageURLField().addErrorStatus(e.getMessage());
+            String errorMsg = "Error while loading image from URL " + urlString;
+            LOG.warn(errorMsg, e);
+            getImageURLField().addErrorStatus(errorMsg);
           }
           field.setImageId(null);
           field.setImage(img);
