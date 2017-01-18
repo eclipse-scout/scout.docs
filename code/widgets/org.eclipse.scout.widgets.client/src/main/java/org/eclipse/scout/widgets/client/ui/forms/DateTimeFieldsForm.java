@@ -831,7 +831,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           public void setDisplayText(String s) {
             super.setDisplayText(s);
-            getDateTimeDisplayTextField().setValue(s);
+            getDisplayTextField().setValue(s);
           }
         }
 
@@ -909,6 +909,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("DisplayText");
+          }
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
           }
         }
 
@@ -1040,7 +1045,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           public void setDisplayText(String s) {
             super.setDisplayText(s);
-            getDateTimeDisplayTextField().setValue(s);
+            getTimeDisplayTextField().setValue(s);
           }
         }
 
@@ -1118,6 +1123,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("DisplayText");
+          }
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
           }
         }
       }
@@ -1264,6 +1274,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("DisplayText");
+          }
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
           }
         }
       }
