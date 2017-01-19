@@ -127,6 +127,12 @@ There were circumstances where the cancellation of long-running actions did not 
 
 In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch (RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
 
+=== Type of labelPosition property changed to byte (IFormField)
+The type of the labelPosition property was changed from `int` to `byte`. This affects the setters, getters and `getConfiguredLabelWidth` methods.
+The position constants in `IFormField` were adjusted.
+
+Occurrences where such methods were overridden need to be adjusted. Otherwise no changes should be necessary.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
