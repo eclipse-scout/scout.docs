@@ -3,7 +3,8 @@ $(document).ready(function() {
   app.init({
     bootstrap: {
       fonts: ['scoutIcons'],
-      modelsUrl: 'res/jswidgets-all.json'
+      modelsUrl: 'res/jswidgets-all.json',
+      textsUrl: 'res/texts.json'
     }
   });
 });
