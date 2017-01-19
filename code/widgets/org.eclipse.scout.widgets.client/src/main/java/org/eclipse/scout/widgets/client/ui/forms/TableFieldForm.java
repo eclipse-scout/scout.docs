@@ -1032,6 +1032,11 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             protected void execAction() {
               getSelectedRow().setEnabled(!getSelectedRow().isEnabled());
             }
+
+            @Override
+            protected int getConfiguredHorizontalAlignment() {
+              return HORIZONTAL_ALIGNMENT_RIGHT;
+            }
           }
 
           @Order(40)
@@ -1064,6 +1069,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               }
             }
 
+            @Override
+            protected int getConfiguredHorizontalAlignment() {
+              return HORIZONTAL_ALIGNMENT_RIGHT;
+            }
           }
 
           @Order(50)
@@ -1711,7 +1720,6 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               column.setHorizontalAlignment(newAlignment);
             }
           }
-
         }
       }
     }
