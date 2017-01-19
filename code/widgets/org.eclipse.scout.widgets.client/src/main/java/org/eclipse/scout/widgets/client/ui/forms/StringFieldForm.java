@@ -978,6 +978,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("Value");
         }
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
       }
 
       @Order(4000)
@@ -986,6 +991,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DisplayText");
+        }
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
         }
       }
 
