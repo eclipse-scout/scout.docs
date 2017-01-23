@@ -100,7 +100,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredSubTitle() {
-    return "#1";
+    return "#0";
   }
 
   @Override
