@@ -100,7 +100,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredSubTitle() {
-    return "#1";
+    return "#0";
   }
 
   @Override
@@ -345,7 +345,11 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execInitField() {
-            setValue(getForm().getSubTitle());
+            String newSubTitle = StringUtility.emptyIfNull(getForm().getSubTitle());
+            if (newSubTitle.matches("^#\\d+$")) {
+              newSubTitle = "#" + (Integer.parseInt(newSubTitle.substring(1)) + 1);
+            }
+            setValue(newSubTitle);
           }
         }
       }
@@ -418,11 +422,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   case PopupWindow: {
                     FormForm form = new FormForm();
                     form.setTitle(getFormTitleField().getValue());
-                    String newSubTitle = StringUtility.emptyIfNull(getFormSubTitleField().getValue());
-                    if (newSubTitle.matches("^#\\d+$")) {
-                      newSubTitle = "#" + (Integer.parseInt(newSubTitle.substring(1)) + 1);
-                    }
-                    form.setSubTitle(newSubTitle);
+                    form.setSubTitle(getFormSubTitleField().getValue());
                     form.setDisplayHint(displayHint.getValue());
                     DisplayViewId viewId = getDisplayViewIdField().getValue();
                     if (viewId != null) {
