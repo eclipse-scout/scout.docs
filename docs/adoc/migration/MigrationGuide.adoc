@@ -127,11 +127,32 @@ There were circumstances where the cancellation of long-running actions did not 
 
 In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch (RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
 
-=== Type of labelPosition property changed to byte (IFormField)
+=== Type of "labelPosition" property changed to "byte" (IFormField)
 The type of the labelPosition property was changed from `int` to `byte`. This affects the setters, getters and `getConfiguredLabelWidth` methods.
 The position constants in `IFormField` were adjusted.
 
 Occurrences where such methods were overridden need to be adjusted. Otherwise no changes should be necessary.
+
+=== IDeviceTransformer
+Some methods on `IDeviceTransformer` where changed. Projects with own contributions to the device transformation process must apply these changes accordingly.
+
+[width="100%",options="header",cols="2,2,3"]
+|===
+|Old method|New method|Description
+
+|--
+|`transformPageTable(table, page)`
+|New callback that can be used to transform the page's table. Unlike `transformPage` this method is not called during the _execInitPage_ phase, but during the _execInitTable_ phase.
+
+|`transformPageDetailForm(form)`
+|`notifyPageDetailFormChanged(form)`
+|The existing method was renamed to avoid confusion with `transformPageTable` and to clearify that this method is called every time, the desktop's detail form changes (not only when the detail form is first initialized).
+
+|`transformPageDetailTable(table)`
+|`notifyPageDetailTableChanged(table)`
+|The existing method was renamed to match the new method `notifyPageDetailFormChanged` and to clearify that this method is called every time, the desktop's detail table changes (not only when the detail table is first initialized).
+
+|===
 
 // ^^^
 // Insert descriptions of Java API changes here
