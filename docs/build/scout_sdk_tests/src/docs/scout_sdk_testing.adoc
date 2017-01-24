@@ -35,6 +35,7 @@ SDK Version Check:
 - [ ] Open HelloWorld Form and create a new form field using Ctrl+Space. Ensure the Scout Templates (E.g. StringField, TableField) are available.
 - [ ] Select a Template. The corresponding code is inserted and edit locations can be switched using Tab key.
 - [ ] When moving to a super class by using the Tab key, ensure the possible super class proposals are displayed.
+TODO: Add screenshot for super class proposal test.
 
 == Test DTO update
 
@@ -49,7 +50,11 @@ SDK Version Check:
 
 - [ ] Press the menu Scout -> Create all missing @Classid Annotations and ensure they are correctly created.
 
-== Test Wizards
+== Test Wizards Small Set
+- [ ] Create a new Form (Ctrl+N) and verify that it is created correctly (no compilation errors)
+- [ ] Create a new Table Page (Ctrl+N) and verify that it is created correctly (no compilation errors)
+
+== Test Wizards Full Set
 
 - [ ] Create a new CodeType (Ctrl+N) and verify that it is created correctly (no compilation errors)
 - [ ] Create a new Form (Ctrl+N) and verify that it is created correctly (no compilation errors)
