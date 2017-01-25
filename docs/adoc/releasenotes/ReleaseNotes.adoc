@@ -129,3 +129,10 @@ With this change the `getConfiguredEnabled` on composite fields now also automat
 The new property `groupingStyle` can be set to `bottom` (default) or `top`. Depending on the value aggregate rows are rendered on the bottom of grouped rows
 or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table
 into multiple categories.
+
+== UnloadRequestHandler for `navigator.sendBeacon()`
+When a client leaves the application (e.g. puts `about:blank` in the address bar) one last "unload" request to the UI server is sent in order to property clean up the session on the server.
+
+If the browser supports the https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon[Beacon API] `navigator.sendBeacon()` is used for this request. Unfortunately `application/json` is not a CORS-safelisted request-header which implies that we can’t use the `JsonMessageRequestHandler` for the unload handling. Therefore a separate `UnloadRequestHandler` was introduced which handles all requests to `/unload/[UiSessionId]`. (For more Information, see https://git.eclipse.org/r/#/c/89422/)
+
+To cut a long story short, new traffic to /unload will be sent by the clients. Please check your container and firewall configuration.
