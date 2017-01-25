@@ -11,7 +11,7 @@ import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.Application
 @Replace
 public class ApplicationNameConstant extends ApplicationNameProperty {
   @Override
-  public String getValue(String namespace) {
+  protected String readFromSource(String namespace) {
     return "Contacts Application";
   }
 }
