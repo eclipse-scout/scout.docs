@@ -90,6 +90,7 @@ The Virtual tree node has been deleted. The main reason for this was because of 
 
 Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls.
 To assure this it is recommended to move any expensive operation currently implemented in the `execInit()` method to `execCreateChildPages()` or `execPageActivated()`.
+Permission checks or similar operations, which use the `setVisibleGranted(boolean)` method, should be moved to the newly created `execCalculateVisible()` method. The default behavior is that the `execCalculateVisible` method is executed on instance creation. Subclasses of `AbstractPageWithTable` potentially have a large number of child pages. To avoid performance issues due to expensive permission checks, the `execCalculateVisible` for these children is only executed before loading the page data.
 
 Furthermore to save memory it is recommended to create the tables below pages lazily. The table is created upon the first access to `IPage.getTable()`. Therefore try not to use `getTable()` in the page init phase. Instead a new callback `execInitTable` is available to initialize the table at the moment it is created. There is also an overload `getTable(boolean)` that can be used to access the table without automatically creating it.
 
