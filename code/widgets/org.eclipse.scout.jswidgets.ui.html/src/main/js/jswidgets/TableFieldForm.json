@@ -26,17 +26,32 @@
               "columns": [
                 {
                   "index": 0,
-                  "text": "${textKey:Column}",
-                  "id": "Column",
+                  "text": "${textKey:RowName}",
+                  "id": "RowName",
                   "width": 300,
                   "objectType": "Column"
                 },
                 {
                   "index": 1,
-                  "text": "${textKey:NumberColumn}",
-                  "id": "NumberColumn",
-                  "width": 300,
+                  "text": "${textKey:GroupNo}",
+                  "id": "GroupNo",
+                  "width": 175,
                   "objectType": "NumberColumn"
+                },
+                {
+                  "index": 2,
+                  "text": "${textKey:RowNo}",
+                  "id": "RowNo",
+                  "width": 175,
+                  "objectType": "NumberColumn"
+                }
+              ],
+              "tableControls": [
+                {
+                  "id": "AggregateTableControl",
+                  "objectType": "AggregateTableControl",
+                  "iconId": "${iconId:SUM}",
+                  "tooltipText": "${textKey:ui.Total}"
                 }
               ],
               "menus": [
@@ -44,6 +59,12 @@
                   "id": "AddRowsMenu",
                   "objectType": "Menu",
                   "text": "${textKey:AddRows}",
+                  "menuTypes": ["Table.EmptySpace"]
+                },
+                {
+                  "id": "ColumnVisibilityMenu",
+                  "objectType": "Menu",
+                  "text": "${textKey:ColumnVisibility}",
                   "menuTypes": ["Table.EmptySpace"]
                 },
                 {
