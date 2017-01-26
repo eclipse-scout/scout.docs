@@ -102,16 +102,10 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the MenuContentField
-   */
   public MenuContentField getMenuContentField() {
     return getFieldByClass(MenuContentField.class);
   }
 
-  /**
-   * @return the TreeEntriesField
-   */
   public TreeEntriesField getTreeEntriesField() {
     return getFieldByClass(TreeEntriesField.class);
   }
@@ -290,65 +284,222 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
-          @Order(10)
-          public class ExpandNodeMenu extends AbstractMenu {
+          @Order(60)
+          public class ExpandMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
-              return TEXTS.get("ExpandNode");
+              return "Expand";
             }
 
             @Override
-            protected void execAction() {
-              getSelectedNode().setExpanded(true);
-
-              // trigger menu visible/enabled change
-              calculateVisibility();
-              getMenuByClass(CollapseNodeMenu.class).calculateVisibility();
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
             }
 
-            @Override
-            protected void execOwnerValueChanged(Object newOwnerValue) {
-              calculateVisibility();
+            @Order(10)
+            public class ExpandTreeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Expand tree";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Expands all nodes in the entire tree.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                getTree().expandAll(getRootNode());
+              }
             }
 
-            protected void calculateVisibility() {
-              setVisible(getSelectedNode().getChildNodeCount() > 0);
-              setEnabled(!getSelectedNode().isExpanded());
+            @Order(20)
+            public class ExpandThisNodeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Expand node";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Expands the selected node.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace, TreeMenuType.SingleSelection);
+              }
+
+              @Override
+              protected boolean getConfiguredVisible() {
+                return false; // no initial selected node
+              }
+
+              @Override
+              protected void execAction() {
+                getSelectedNode().setExpanded(true);
+              }
+
+              @Override
+              protected void execOwnerValueChanged(Object newOwnerValue) {
+                setVisible(getSelectedNode() != null);
+              }
+            }
+
+            @Order(30)
+            public class ExpandSubtreeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Expand subtree";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Expands the selected node and all child nodes.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace, TreeMenuType.SingleSelection);
+              }
+
+              @Override
+              protected boolean getConfiguredVisible() {
+                return false; // no initial selected node
+              }
+
+              @Override
+              protected void execAction() {
+                getTree().expandAll(getSelectedNode());
+              }
+
+              @Override
+              protected void execOwnerValueChanged(Object newOwnerValue) {
+                setVisible(getSelectedNode() != null);
+              }
             }
           }
 
-          @Order(20)
-          public class CollapseNodeMenu extends AbstractMenu {
+          @Order(70)
+          public class CollapseMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
-              return TEXTS.get("CollapseNode");
+              return "Collapse";
             }
 
             @Override
-            protected void execAction() {
-              getSelectedNode().setExpanded(false);
-
-              // trigger menu visible/enabled change
-              calculateVisibility();
-              getMenuByClass(ExpandNodeMenu.class).calculateVisibility();
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
             }
 
-            @Override
-            protected void execOwnerValueChanged(Object newOwnerValue) {
-              calculateVisibility();
+            @Order(10)
+            public class CollapseTreeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Collapse tree";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Collapses all nodes in the entire tree.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                getTree().collapseAll(getRootNode());
+              }
             }
 
-            protected void calculateVisibility() {
-              setVisible(getSelectedNode().getChildNodeCount() > 0);
-              setEnabled(getSelectedNode().isExpanded());
+            @Order(20)
+            public class CollapseThisNodeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Collapse node";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Collapses the selected node.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace, TreeMenuType.SingleSelection);
+              }
+
+              @Override
+              protected boolean getConfiguredVisible() {
+                return false; // no initial selected node
+              }
+
+              @Override
+              protected void execAction() {
+                getSelectedNode().setExpanded(false);
+              }
+
+              @Override
+              protected void execOwnerValueChanged(Object newOwnerValue) {
+                setVisible(getSelectedNode() != null);
+              }
+            }
+
+            @Order(30)
+            public class CollapseSubtreeMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return "Collapse subtree";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Collapses the selected node and all child nodes.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace, TreeMenuType.SingleSelection);
+              }
+
+              @Override
+              protected boolean getConfiguredVisible() {
+                return false; // no initial selected node
+              }
+
+              @Override
+              protected void execAction() {
+                getTree().collapseAll(getSelectedNode());
+              }
+
+              @Override
+              protected void execOwnerValueChanged(Object newOwnerValue) {
+                setVisible(getSelectedNode() != null);
+              }
             }
           }
 
           @Order(22)
           @ClassId("b43eaa82-5241-4688-b8f9-4a32ddd44f83")
           public class DeleteNodeMenu extends AbstractMenu {
+
             @Override
             protected String getConfiguredText() {
               return TEXTS.get("Delete");
@@ -371,7 +522,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(40)
-          public class Info_Menu extends AbstractMenu {
+          public class InfoMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
@@ -386,7 +537,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           @Order(50)
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
-
           }
 
           @Order(60)
