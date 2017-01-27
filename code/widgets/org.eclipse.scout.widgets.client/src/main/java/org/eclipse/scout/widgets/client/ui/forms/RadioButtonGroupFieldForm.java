@@ -219,7 +219,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         protected void execInitField() {
           getButtonFor(EventTypeCodeType.PublicCode.ID).setSelected(true);
 
-          // TODO [5.2] jgu: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
+          // TODO [6.2] mvi: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
           for (IRadioButton<Long> button : getButtons()) {
             button.setEnabled(false, true, true);
           }
