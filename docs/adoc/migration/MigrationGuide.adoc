@@ -385,6 +385,10 @@ Steps required to migrate from an older Scout version to version 6.1:
 NOTE: Importing regular `.css` files in module files (_*-module.less_) is still supported, and required in some cases.
 Just make sure that all stylesheets using LESS do have a _*.less_ file extension. Macros and modules must always be LESS files.
 
+=== UiHttpSessionListener replaced by HttpSessionMutex
+The HttpSessionListener class `org.eclipse.scout.rt.ui.html.UiHttpSessionListener` has been replaced by the listener class `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
+Therefore if the class `UiHttpSessionListener` is registered in the `web.xml` file replace it with `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
+
 == JAX-WS Pooled Port Provider (since 6.0.300)
 
 Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).
