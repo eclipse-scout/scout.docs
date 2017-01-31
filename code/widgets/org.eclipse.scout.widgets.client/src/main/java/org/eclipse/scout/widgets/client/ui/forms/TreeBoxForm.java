@@ -344,7 +344,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
+          return 6;
         }
 
         @Override
@@ -466,12 +466,45 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
+      @Order(35)
+      public class SetCheckedKeysBox extends AbstractSequenceBox {
+
+        @Order(10)
+        public class SetCheckedKeysField extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return true;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "setCheckedKeys()";
+          }
+        }
+
+        @Order(20)
+        public class SetCheckedKeysButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Set";
+          }
+
+          @Override
+          protected void execClickAction() {
+            String[] keys = StringUtility.split(getFieldByClass(SetCheckedKeysField.class).getValue(), ";");
+            getTreeBoxField().setValue(CollectionUtility.hashSet(keys));
+          }
+        }
+      }
+
       @Order(40)
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 3;
+          return 6;
         }
 
         @Override

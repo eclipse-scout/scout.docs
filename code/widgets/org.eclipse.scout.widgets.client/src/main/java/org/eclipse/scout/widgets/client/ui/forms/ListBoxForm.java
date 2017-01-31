@@ -32,6 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
@@ -324,7 +325,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
+          return 6;
         }
 
         @Override
@@ -395,22 +396,36 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
-      @Order(35)
-      public class EnableActiveFilterField extends AbstractBooleanField {
+      @Order(33)
+      public class SetCheckedKeysBox extends AbstractSequenceBox {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EnableActiveFilter");
+        @Order(10)
+        public class SetCheckedKeysField extends AbstractStringField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return true;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "setCheckedKeys()";
+          }
         }
 
-        @Override
-        protected void execChangedValue() {
-          getDefaultField().setFilterActiveRows(getValue());
-        }
+        @Order(20)
+        public class SetCheckedKeysButton extends AbstractLinkButton {
 
-        @Override
-        protected void execInitField() {
-          setValue(getDefaultField().isFilterActiveRows());
+          @Override
+          protected String getConfiguredLabel() {
+            return "Set";
+          }
+
+          @Override
+          protected void execClickAction() {
+            String[] keys = StringUtility.split(getFieldByClass(SetCheckedKeysField.class).getValue(), ";");
+            getListBoxField().setValue(CollectionUtility.hashSet(keys));
+          }
         }
       }
 
@@ -419,7 +434,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 5;
+          return 7;
         }
 
         @Override
