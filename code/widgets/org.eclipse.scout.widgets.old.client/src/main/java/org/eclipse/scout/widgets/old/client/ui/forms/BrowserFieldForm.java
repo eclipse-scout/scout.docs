@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.old.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.browserfield.AbstractBrowserField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -147,7 +148,7 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 20;
+          return 10;
         }
 
         @Override
@@ -276,6 +277,36 @@ public class BrowserFieldForm extends AbstractForm implements IPageForm {
             }
           }
         }
+      }
+
+      @Order(30)
+      public class ScrollableField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ScrollbarEnabled");
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getBrowserField().setScrollBarEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getBrowserField().isScrollBarEnabled());
+        }
+
       }
     }
 
