@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.widgets.old.client.ui.forms;
+package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,13 +38,14 @@ import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
-import org.eclipse.scout.widgets.old.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
+import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CalendarFieldForm extends AbstractForm implements IPageForm {
+@Order(8200)
+public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(CalendarFieldForm.class);
 

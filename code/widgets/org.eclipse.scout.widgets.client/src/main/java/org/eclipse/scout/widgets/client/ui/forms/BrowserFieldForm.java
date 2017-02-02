@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.widgets.old.client.ui.forms;
+package org.eclipse.scout.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -25,16 +25,16 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BinaryResourceField;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BinaryResourceField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +56,8 @@ import org.slf4j.LoggerFactory;
  * should be allowed to receive post messages from the IFRAME content.
  * </pre>
  */
-public class BrowserFieldForm extends AbstractForm implements IPageForm {
+@Order(8100)
+public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleForm {
   private static final Logger LOG = LoggerFactory.getLogger(BrowserFieldForm.class);
 
   public BrowserFieldForm() {

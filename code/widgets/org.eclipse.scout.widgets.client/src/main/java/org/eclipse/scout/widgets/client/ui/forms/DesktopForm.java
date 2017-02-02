@@ -35,7 +35,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.Na
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
-@Order(8100.0)
+@Order(9000.0)
 public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   private IDesktopNotification m_lastNotification;

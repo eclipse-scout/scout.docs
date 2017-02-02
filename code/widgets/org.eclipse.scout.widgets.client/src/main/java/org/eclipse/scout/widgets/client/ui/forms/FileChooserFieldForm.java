@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-package org.eclipse.scout.widgets.old.client.ui.forms;
+package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.Date;
 import java.util.List;
@@ -37,18 +37,19 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox.ChooseAnImageField;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadMultipleFilesButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadSingleFileButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox.ServerLogField;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox.ChooseAnImageField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadMultipleFilesButton;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadSingleFileButton;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox.ServerLogField;
 
-public class FileChooserFieldForm extends AbstractForm implements IPageForm {
+@Order(8050)
+public class FileChooserFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public FileChooserFieldForm() {
     super();
