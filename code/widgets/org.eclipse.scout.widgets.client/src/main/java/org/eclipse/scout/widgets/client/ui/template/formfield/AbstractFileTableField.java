@@ -258,7 +258,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Order(18)
-    @ModelVariant("Example")
+    @ModelVariant("widgets.Example")
     public class ImageBeanColumn extends AbstractBeanColumn<ExampleBean> {
 
       @Override

@@ -7,20 +7,20 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-scout.ExampleBeanField = function() {
-  scout.ExampleBeanField.parent.call(this);
+widgets.ExampleBeanField = function() {
+  widgets.ExampleBeanField.parent.call(this);
 };
-scout.inherits(scout.ExampleBeanField, scout.BeanField);
+scout.inherits(widgets.ExampleBeanField, scout.BeanField);
 
-scout.ExampleBeanField.prototype._render = function($parent) {
-  scout.ExampleBeanField.parent.prototype._render.call(this, $parent);
+widgets.ExampleBeanField.prototype._render = function($parent) {
+  widgets.ExampleBeanField.parent.prototype._render.call(this, $parent);
   this.$container.addClass('example-bean-field');
 };
 
 /**
  * @override
  */
-scout.ExampleBeanField.prototype._renderValue = function() {
+widgets.ExampleBeanField.prototype._renderValue = function() {
   this.$field.empty();
   if (!this.value) {
     return;

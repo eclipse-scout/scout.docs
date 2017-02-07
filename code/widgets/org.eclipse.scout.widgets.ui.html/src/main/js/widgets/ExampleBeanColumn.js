@@ -7,12 +7,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-scout.ExampleBeanColumn = function() {
-  scout.ExampleBeanColumn.parent.call(this);
+widgets.ExampleBeanColumn = function() {
+  widgets.ExampleBeanColumn.parent.call(this);
 };
-scout.inherits(scout.ExampleBeanColumn, scout.BeanColumn);
+scout.inherits(widgets.ExampleBeanColumn, scout.BeanColumn);
 
-scout.ExampleBeanColumn.prototype._renderValue = function($cell, value) {
+widgets.ExampleBeanColumn.prototype._renderValue = function($cell, value) {
   $cell.appendElement('<img>')
     .attr('src', value.image)
     .addClass('example-bean-column-image');

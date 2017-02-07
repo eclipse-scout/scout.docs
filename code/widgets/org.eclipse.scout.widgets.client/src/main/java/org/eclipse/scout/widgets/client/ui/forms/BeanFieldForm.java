@@ -93,7 +93,7 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Order(1000)
       @ClassId("81b27554-42f2-4fb9-99f6-a86c17b91d1b")
-      @ModelVariant("Example")
+      @ModelVariant("widgets.Example")
       public class ExampleBeanField extends AbstractBeanField<ExampleBean> {
 
         @Override
