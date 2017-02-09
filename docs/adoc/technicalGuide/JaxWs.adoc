@@ -61,7 +61,7 @@ For instance, support for _Apache CXF_ implementor is activated as following:
 jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
 ----
 
-[cols="30,70"]
+[cols="30,70", options="header"]
 |===
 |class |description
 
@@ -277,7 +277,7 @@ When using 'jaxws' Scout Maven profile, annotation processing is enabled for tha
 ===== Enable Annotation Processing Tool (APT) in Eclipse IDE
 In Eclipse IDE, the workspace build ignores annotation processing as configured in pom.xml. Instead, it must be enabled separately with the following files. Nevertheless, to simply run Maven build with annotation support from within Eclipse IDE, those files are not required.
 
-[cols="40,60"]
+[cols="40,60", options="header"]
 |===
 |file |description
 |<<settings_org.eclipse.jdt.core.prefs,.settings/org.eclipse.jdt.core.prefs>>
@@ -354,7 +354,7 @@ If you should experience some problems in the entry point generation, refer to <
 ==== Instrument the Entry Point generation
 This section gives an overview on how to configure the entry point to be generated.
 
-[cols="30,70"]
+[cols="30,70", options="header"]
 |===
 |attribute |description
 
@@ -683,7 +683,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ==== Default configuration of WS-Clients
 The following properties can be set globally for all WS-Clients. However, a WS-Client can overwrite any of this values.
 
-[cols="30,50,20"]
+[cols="30,50,20", options="header"]
 |===
 |property |description |default value
 
@@ -718,7 +718,7 @@ It is recommended to configure your global binding file accordingly. See <<lst-j
 See the adapter's JavaDoc for more detailed information.
 
 .UTC Date adapters
-[cols="35,65"]
+[cols="35,65", options="header"]
 |===
 |adapter |description
 
@@ -735,7 +735,7 @@ This adapter converts xsd:dateTime into UTC milliseconds, by respecting the time
 |===
 
 .Calendar adapters
-[cols="35,65"]
+[cols="35,65", options="header"]
 |===
 |adapter |description
 
@@ -750,7 +750,7 @@ This adapter converts xsd:dateTime into UTC milliseconds, by respecting the time
 |===
 
 .Default timezone Date adapters
-[cols="35,65"]
+[cols="35,65", options="header"]
 |===
 |adapter |description
 

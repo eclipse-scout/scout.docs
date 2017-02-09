@@ -174,7 +174,7 @@ Learn more about awaiting the job's completion in section <<Awaiting job complet
 === Job states
 Upon scheduling a job, the job transitions different states. The current state of a job can be queried from its associated <<IFuture>>.
 
-[cols="25,75"]
+[cols="25,75", options="header"]
 |===
 |state |description
 
@@ -289,7 +289,7 @@ TIP: A job which is scheduled to run on a copy of the submitting `RunContext`, i
 === Subscribe for job lifecycle events
 Sometimes it is useful to register for some job lifecycle events. The following event types can be subscribed for:
 
-[cols="25,75"]
+[cols="25,75", options="header"]
 |===
 |state |description
 
@@ -470,7 +470,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 === Configuration
 Job manager can be configured with the following config properties.
 
-[cols="30,20,50"]
+[cols="30,20,50", options="header"]
 |===
 |property |default value |description
 
