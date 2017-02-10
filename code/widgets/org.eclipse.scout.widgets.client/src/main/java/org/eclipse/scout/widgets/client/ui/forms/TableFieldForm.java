@@ -83,6 +83,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.AutoResizeColumnsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsCheckableField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnMandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsEditableField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableHeaderVisibleField;
@@ -157,6 +158,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public IsCheckableField getIsCheckableField() {
     return getFieldByClass(IsCheckableField.class);
+  }
+
+  public IsColumnMandatoryField getIsColumnMandatoryField() {
+    return getFieldByClass(IsColumnMandatoryField.class);
   }
 
   public WrapTextField getWrapText() {
@@ -393,9 +398,16 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
                     if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
                       if (e.getNewValue() == null) {
                         getContextColumnField().setValue("");
+                        // Is Column Mandatory Field
+                        getIsColumnMandatoryField().setEnabled(false);
+                        getIsColumnMandatoryField().setValue(false);
                       }
                       else {
-                        getContextColumnField().setValue(Table.this.getContextColumn().getHeaderCell().getText());
+                        IColumn<?> contextColumn = Table.this.getContextColumn();
+                        getContextColumnField().setValue(contextColumn.getHeaderCell().getText());
+                        // Is Column Mandatory Field
+                        getIsColumnMandatoryField().setEnabled(true);
+                        getIsColumnMandatoryField().setValue(contextColumn.isMandatory());
                       }
                     }
                   }
@@ -1581,7 +1593,47 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         }
 
-        @Order(122)
+        @Order(130)
+        public class IsColumnMandatoryField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ColumnIsMandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
+            if (contextColumn != null) {
+              contextColumn.setMandatory(getValue());
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            if (getTableField().getTable().getContextColumn() != null) {
+              setEnabled(true);
+              setValue(getTableField().getTable().getContextColumn().isMandatory());
+            }
+            else {
+              setEnabled(false);
+              setValue(false);
+            }
+          }
+
+        }
+
+        @Order(140)
         public class IsRowIconVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1613,7 +1665,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         }
 
-        @Order(125)
+        @Order(150)
         public class WrapTextField extends AbstractBooleanField {
 
           @Override
@@ -1643,7 +1695,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         }
 
-        @Order(130)
+        @Order(160)
         public class TableStatusVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1674,7 +1726,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(140)
+        @Order(170)
         public class TableHeaderVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1703,7 +1755,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(142)
+        @Order(180)
         public class TableHeaderEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1732,7 +1784,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(145)
+        @Order(190)
         public class TableSortEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1761,7 +1813,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(150)
+        @Order(200)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
