@@ -10,10 +10,15 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
@@ -58,6 +63,11 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
   @Override
   protected void execInitPage() {
+    this.ensureText();
+    setTableVisible(false);
+  }
+
+  protected void ensureText() {
     if (getCellForUpdate().getText() == null) {
       String s = m_formType.getSimpleName();
       s = s.replaceAll("Form$", "");
@@ -67,7 +77,12 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
       }
       getCellForUpdate().setText(s);
     }
-    setTableVisible(false);
+  }
+
+  @Override
+  public String getText() {
+    this.ensureText();
+    return getCell().getText();
   }
 
   @Override
@@ -136,5 +151,22 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
     protected Class<?> provideSourceClass() {
       return m_formType;
     }
+  }
+
+  public static void sort(List<IPage<?>> pageList) {
+    Collections.sort(pageList, new Comparator<IPage<?>>() {
+      @Override
+      public int compare(IPage<?> o1, IPage<?> o2) {
+        String s1 = "";
+        String s2 = "";
+        if (o1 != null) {
+          s1 = ((IFormPage) o1).getText();
+        }
+        if (o2 != null) {
+          s2 = ((IFormPage) o2).getText();
+        }
+        return s1.compareTo(s2);
+      }
+    });
   }
 }

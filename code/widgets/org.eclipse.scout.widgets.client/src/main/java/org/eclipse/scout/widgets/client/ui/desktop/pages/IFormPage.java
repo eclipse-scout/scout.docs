@@ -7,4 +7,6 @@ public interface IFormPage extends IPageWithNodes {
 
   Class<? extends IPageForm> getFormType();
 
+  String getText();
+
 }
