@@ -47,7 +47,7 @@ An important difference is related to the `RunMonitor`. By using the `copyCurren
 === Properties of a RunContext
 The following properties are declared on a `RunContext` and are inherited by `ServerRunContext` and `ClientRunContext`.
 
-[cols="10%,80%,10%"]
+[cols="10%,80%,10%", options="header"]
 |===
 |property |description | accessibility
 
@@ -75,7 +75,7 @@ The following properties are declared on a `RunContext` and are inherited by `Se
 === Properties of a ServerRunContext
 A `ServerRunContext` controls propagation of server-side state and sets the transaction boundaries, and is a specialization of `RunContext`.
 
-[cols="10%,80%,10%"]
+[cols="10%,80%,10%", options="header"]
 |===
 |property |description | accessibility
 
@@ -114,7 +114,7 @@ Typically, this node ID is set by ServiceTunnelServlet for the processing of a s
 === Properties of a ClientRunContext
 A `ClientRunContext` controls propagation of client-side state, and is a specialization of `RunContext`.
 
-[cols="10%,80%,10%"]
+[cols="10%,80%,10%", options="header"]
 |===
 |property |description | accessibility
 
