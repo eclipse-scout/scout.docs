@@ -20,7 +20,7 @@ import org.eclipse.scout.contacts.events.shared.event.IEventService;
 import org.eclipse.scout.contacts.events.shared.event.ReadEventPermission;
 import org.eclipse.scout.contacts.events.shared.event.UpdateEventPermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
-import org.eclipse.scout.rt.platform.holders.ITableHolder;
+import org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.holders.TableBeanHolderFilter;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -93,8 +93,8 @@ public class EventService implements IEventService {
 
     SQL.update(SQLs.EVENT_UPDATE, formData);
 
-    TableBeanHolderFilter deletedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableHolder.STATUS_DELETED);
-    TableBeanHolderFilter insertedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableHolder.STATUS_INSERTED);
+    TableBeanHolderFilter deletedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableBeanRowHolder.STATUS_DELETED);
+    TableBeanHolderFilter insertedParticipants = new TableBeanHolderFilter(formData.getParticipantTableField(), ITableBeanRowHolder.STATUS_INSERTED);
     NVPair eventId = new NVPair("eventId", formData.getEventId());
 
     SQL.delete(SQLs.EVENT_PARTICIPANTS_DELETE, deletedParticipants, eventId);
