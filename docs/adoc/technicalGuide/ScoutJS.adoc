@@ -10,10 +10,97 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 == Scout JS
+A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
+
+With Scout JS this will change. You will be able to create applications running without a UI server because there won't be a Java model anymore. The client code will be written using JavaScript (or TypeScript) and executed directly in the browser.
+
+You still don't have to care about how the model will be rendered. There isn't a strict separation of the UI and the model anymore, but that doesn't mean you have to write HTML and CSS. You can of course, if you want to. But typically you will be using the Scout widgets you already know.
 
 === Widget
+A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too.
+A widget contains the model, which represents the state of the widget. In a Scout Classic application, that model will be sent from the UI server to the browser and the Scout UI will use that model to create the widget. In a Scout JS app, the model may be provided using JSON or directly with JavaScript.
 
-==== What is a widget?
+==== Lifecycle
+Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using `init`. If you want to display it, you have to call the `render` method. If you want to remove it from the DOM, call the `remove` method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If you really don't need it anymore, call the `destroy` method.
+
+So you see the widget actually has 3 important states:
+
+* initialized
+* rendered
+* destroyed
+
+The big advantage of this concept is that the model of the widget may be changed any time, even if the widget is not rendered. This means you can prepare a widget like a form, prepare all its child widgets like the form fields, and then render them at once. If you want to hide the form, just remove it. It won't be displayed anymore, but you can still modify it, like changing the label of a field or adding rows to a table. The next time it is rendered the changes will be reflected. If you do such a modification when it is rendered, it will be reflected immediately.
+
+Destroying a widget means it will detach itself from the parent and destroy all children. If you have attached listeners to other widgets at initialization time, now is the time to detach them. After a widget is destroyed it cannot be used anymore. Every attempt will result in a `Widget is destroyed` error.
+
+==== Creating a Widget
+A widget may be created using the constructor function or `scout.create`. Best practice is to always use `scout.create` which gives you two benefits:
+
+1. You don't have to call `init` by yourself.
+2. The widget may be extended (see chapter ObjectFactory for details).
+
+The following example creates a `StringField`.
+
+[source,javascript]
+----
+var field = scout.create('StringField', {
+  parent: groupBox,
+  label: 'hello',
+  value: 'world'
+};
+----
+
+The first parameter is the object type, which typically is the name of the constructor function preceded by the name space. `StringField` belongs to the `scout` name space which is the default and may be omitted. If your widget is part of another name space you have to specify it like following:
+
+[source,javascript]
+----
+scout.create('scout.StringField', {});
+----
+
+The second parameter of scout.create is the model. The model actually is the specification for your widget. In case of the `StringField` you can specify the label, the max length, whether it is enabled and visible and more. If you don't specify them, the defaults are used. The only needed property is the `parent`. To see what the defaults are, have a look at the source code of the widget constructor.
+
+Every widget needs a parent. The parent is responsible to render (and remove) its children. In the example above, the parent is a group box. This group box has a property called `fields`. If the group box is rendered, it will render its fields too.
+
+You don't need a group box to render the string field, you could render it directly onto the desktop. But if you want to use a form, you need a group box and create the form, group box and the field. Doing this programmatically is time consuming, that is why we suggest to use the declarative JSON based approach.
+
+==== Creating a Widget using JSON
+Using the JSON based approach makes it easier to specify multiple widgets in a structured way. The following example defines a fom with a group box and a string field.
+
+[source,json]
+----
+{
+  "id": "example.MyForm",
+  "type": "model",
+  "title": "My first form!",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "mainBox": true,
+    "borderDecoration": "empty",
+    "fields": [
+      {
+        "id": "MyStringField",
+        "objectType": "StringField",
+        "label": "hello",
+        "value": "world"
+      }
+    ]
+  }
+}
+----
+
+This description of the form is put in a separate file called `MyForm.json`. Typically you would create a file called `MyForm.js` as well, which contains the logic to interact with the fields. But since we just want to open the form it is not necessary. Instead you can use the following code to create the form:
+
+[source,javascript]
+----
+scout.create('Form', scout.models.getModel('example.MyForm', parent));
+----
+
+When the form is shown it will look like this:
+
+[[img-scoutjs_myform, Figure 000]]
+.A form described using JSON
+image::{imgsdir}/scoutjs_myform.png[]
 
 ==== Icons
 Widgets that have a property `iconId` (for instance `Menu`) can display an icon. This iconId references

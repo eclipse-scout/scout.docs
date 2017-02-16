@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.TableFieldForm",
-  "objectType": "Form",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {

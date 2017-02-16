@@ -14,6 +14,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "${textKey:Form}",
+      "detailForm": {
+        "objectType": "jswidgets.FormForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:TableField}",
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"

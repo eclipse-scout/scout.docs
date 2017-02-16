@@ -1,0 +1,31 @@
+{
+  "id": "jswidgets.FormForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "mainBox": true,
+    "gridColumnCount": 1,
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "OpenAsDialogButton",
+            "objectType": "Button",
+            "label": "${textKey:OpenAsDialog}",
+            "processButton": false
+          },{
+            "id": "OpenAsViewButton",
+            "objectType": "Button",
+            "label": "${textKey:OpenAsView}",
+            "processButton": false
+          }
+        ]
+      }
+    ]
+  }
+}
