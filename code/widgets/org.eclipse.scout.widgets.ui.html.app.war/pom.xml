@@ -11,10 +11,10 @@
         BSI Business Systems Integration AG - initial API and implementation
 
 -->
-<project 
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.eclipse.scout.widgets</groupId>
@@ -27,7 +27,26 @@
   <packaging>war</packaging>
 
   <build>
-      <finalName>scout.widgets</finalName>
+    <finalName>scout.widgets</finalName>
+
+    <!-- configure maven-resources-plugin to replace placeholders in resources -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- configure maven-resources-plugin to use '\' as escape character  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <escapeString>\</escapeString>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <dependencies>

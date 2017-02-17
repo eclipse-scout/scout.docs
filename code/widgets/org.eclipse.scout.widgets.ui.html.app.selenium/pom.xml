@@ -32,6 +32,27 @@
     <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
   </properties>
 
+  <build>
+    <!-- configure maven-resources-plugin to replace placeholders in resources -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- configure maven-resources-plugin to use '\' as escape character  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <escapeString>\</escapeString>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <dependencies>
     <!-- Widget Application -->
     <dependency>

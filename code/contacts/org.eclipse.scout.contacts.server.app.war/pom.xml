@@ -31,7 +31,15 @@
   <packaging>war</packaging>
 
   <build>
-      <finalName>contacts-server</finalName>
+    <finalName>contacts-server</finalName>
+
+    <!-- configure maven-resources-plugin to replace placeholders in resources -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
 
   <dependencies>

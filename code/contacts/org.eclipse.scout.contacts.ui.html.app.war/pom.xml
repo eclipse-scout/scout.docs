@@ -31,7 +31,26 @@
   <packaging>war</packaging>
 
   <build>
-      <finalName>contacts-ui</finalName>
+    <finalName>contacts-ui</finalName>
+
+    <!-- configure maven-resources-plugin to replace placeholders in resources -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- configure maven-resources-plugin to use '\' as escape character  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <escapeString>\</escapeString>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <dependencies>

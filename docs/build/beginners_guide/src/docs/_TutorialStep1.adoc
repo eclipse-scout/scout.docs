@@ -192,12 +192,12 @@ To disable the theming property follow the steps described below.
 [source]
 .Commenting out the application specific theming re-activates the Scout default theme.
 ----
-### Application theming
-# scout.ui.theme=application // <1>
-
-### Application Config
-scout.application.version=1.0.0-SNAPSHOT
+### Application
 scout.application.name=Contacts
+scout.application.version=1.0.0-SNAPSHOT
+
+### UI
+# scout.ui.theme=application // <1>
 ----
 
 <1> Comment out this line. Alternatively you may replace "application" with "default"
