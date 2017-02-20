@@ -63,6 +63,9 @@ A method annotated with `@PostConstruct` in a Bean is now guaranteed to run exac
 === Tree
 The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the default implementation now considers `enabledNodesOnly` and does not always ignore disabled nodes.
 
+=== Table
+`Cell.setText(null)` has no effect anymore. The JavaScript table has been improved so that every column is now able to compute the text based on the value of a cell. This does only happen if no explicit text is provided which means `cell.setText(null)` would trigger that behavior. If you really want to set a value but no text, you can use `cell.textText("")` instead.
+
 === CookieUtility
 `CookieUtility` was moved from _org.eclipse.scout.rt.ui.html_ to _org.eclipse.scout.rt.server.commons_. Migrate by updating your imports. The Method `addCookie()` is now called `addPersistentCookie()`. Additional methods are available (to add a session cookie, or delete an existing cookie).
 
@@ -308,6 +311,7 @@ By default, inline `<script>` tags in HTML files are prohibited by CSP rules. Bo
 . Add a reference to the _*.js_ file in the `<head>` section using the `<scout:script>` tag, e.g.: +
 `<scout:script src="res/index.js" />`
 . If the extracted _*.js_ file contains `<scout:message>` tags, they have to be moved back to the `<body>` of the corresponding _*.html_ file (because the NLS translation can only process HTML files). The attribute `style` has to be changed from `javascript` to `tag`.
+. Check the web.xml files of your _ui.html.app.\*_ projects. If you use the scout login form and if you have listed the files to be excluded explicitly (instead of using _/res/*_), then you need to add the new _*.js_ files to the `filter-exclude` section as well.
 
 Example:
 
@@ -388,29 +392,6 @@ Just make sure that all stylesheets using LESS do have a _*.less_ file extension
 === UiHttpSessionListener replaced by HttpSessionMutex
 The HttpSessionListener class `org.eclipse.scout.rt.ui.html.UiHttpSessionListener` has been replaced by the listener class `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
 Therefore if the class `UiHttpSessionListener` is registered in the `web.xml` file replace it with `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
-
-== JAX-WS Pooled Port Provider (since 6.0.300)
-
-Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).
-
-The `PooledPortProvider` is the new default strategy for creating ports. Actually the pooled provider uses two pools, one for service instances and another for port instances (which are created by a service instance). A Scout transaction member keeps track of leased ports and puts them back into the pool when the Scout transaction releases its resources. Further, the transaction member ensures that the same port is used within a transaction, once it has been leased.
-
-Port instances are reset when they are put back into the pool. Some JAX-WS implementations provide a suitable operation for resetting the port (i.e. Metro as well as the RI bundled with Java 8). Otherwise the request context is cleansed as good as possible. The corresponding `JaxWsImplementorSpecifics.resetRequestContext(Object)` can be extended to customize the cleansing.
-
-The `AbstractWebServiceClient` does not distinguish between `PortProducer` and `PortCache` anymore. Both are `IPortProvider` strategies and the new `PooledPortPorvider` is just another one, frankly the new default. Setting the configuration property `jaxws.consumer.portPool.enabled` to `false` disables the pool and enables the previous behavior (bare `PortProducer`, wrapped by a `PortCache` instance that stashes ports).
-
-The internal state of the pools is reported on the diagnostics servlet.
-
-=== Migration
-
-The following method has been renamed and the return type has been changed to `IPortProvider`. More important it returns a pooled, cached, bare provider or uses any other strategy. In other words, the `AbstractWebServiceClient` does not wrap the producer into a `PortCache` anymore.
-[source]
-----
-class: org.eclipse.scout.rt.server.jaxws.consumer.AbstractWebServiceClient
-old:   getConfiguredPortProducer(Class<SERVICE>, Class<PORT>, URL, String, String, IPortInitializer)
-new:   getConfiguredPortProvider(Class<SERVICE>, Class<PORT>, URL, String, String, IPortInitializer)
-                        ^^^^^^^^
-----
 
 // ^^^
 // Insert descriptions of other important changes here
