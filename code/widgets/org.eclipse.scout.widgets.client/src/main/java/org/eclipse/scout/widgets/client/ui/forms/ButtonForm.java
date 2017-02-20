@@ -191,6 +191,25 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
+        @Order(5)
+        public class RegularField extends AbstractButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Regular");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            setLoading(true);
+          }
+        }
+
         @Order(10)
         public class DefaultField extends AbstractButton {
 
@@ -202,6 +221,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredProcessButton() {
             return false;
+          }
+
+          @Override
+          protected boolean getConfiguredDefaultButton() {
+            return true;
           }
 
           @Override
@@ -349,8 +373,8 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
-        @Order(10)
-        public class ToggleButtonDefaultField extends AbstractButton {
+        @Order(5)
+        public class ToggleButtonRegularField extends AbstractButton {
 
           @Override
           protected int getConfiguredDisplayStyle() {
@@ -404,6 +428,39 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             @Override
             protected void execAction() {
               System.out.println("B");
+            }
+          }
+        }
+
+        @Order(10)
+        public class ToggleButtonDefaultField extends ToggleButtonRegularField {
+          @Override
+          protected boolean getConfiguredDefaultButton() {
+            return true;
+          }
+
+          @Override
+          protected int getConfiguredDisplayStyle() {
+            return DISPLAY_STYLE_TOGGLE;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("PushToSelect");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execSelectionChanged(boolean selected) {
+            if (selected) {
+              setLabel(TEXTS.get("Selected"));
+            }
+            else {
+              setLabel(TEXTS.get("PushToSelect"));
             }
           }
         }
@@ -538,6 +595,27 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           return 1;
         }
 
+        @Order(5)
+        public class RegularLinkButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Regular");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withHeader(TEXTS.get("LinkClicked", getLabel())).withBody(TEXTS.get("LinkButtonExecClickAction")).show();
+
+            setLoading(true);
+          }
+        }
+
         @Order(10)
         public class DefaultLinkButton extends AbstractLinkButton {
 
@@ -549,6 +627,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredProcessButton() {
             return false;
+          }
+
+          @Override
+          protected boolean getConfiguredDefaultButton() {
+            return true;
           }
 
           @Override
