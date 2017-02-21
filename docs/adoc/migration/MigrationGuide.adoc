@@ -73,7 +73,7 @@ The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the
 The `Pair` class was made abstract and two default implementations for a mutable pair (class `MutablePair`) and immutable pair (`ImmutablePair`) were added. Since the former `Pair` class was immutable, all occurences were changed to use the new `ImmutablePair` class. Migrate by update all occurences to use the new `ImmutablePair`.
 
 === Customizing CSP directives
-The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style _withXXX()_ methods.
+The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style _withFooBar()_ methods.
 
 === StringUtility.contains() deprecated
 The method `StringUtility.contains()` was marked as deprecated and will be removed in the P-release. The method was often used incorrectly due to poor documentation and unconventional implementation. The utility provides multiple new methods that can be used as a replacement:

@@ -96,4 +96,4 @@ You need to respect the format defined by the Java Properties class. In particul
  'ç' => "\u00E7"
  'ß' => "\u00DF"
 
-The encoding is the "Unicode escape characters": \uXXXX where XXXX is a hexadecimal id of the character in the http://en.wikipedia.org/wiki/List_of_Unicode_characters[Unicode character table]. Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].
+The encoding is the "Unicode escape characters": \uHHHH where HHHH is a hexadecimal id of the character in the http://en.wikipedia.org/wiki/List_of_Unicode_characters[Unicode character table]. Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].

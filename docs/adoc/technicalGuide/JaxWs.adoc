@@ -854,4 +854,4 @@ Credentials are loaded from property `scout.auth.credentials`. Multiple credenti
 To work with plaintext passwords, set the property `scout.auth.credentials.plaintext`  to _true_.
 
 Example of hashed passwords: `scott:SALT.PASSWORD-HASH;jack:SALT.PASSWORD-HASH;john:SALT.PASSWORD-HASH`
-Example of plaintext passwords: `scott:XXXX;jack:XXXX;john:XXXX`
+Example of plaintext passwords: `scott:****;jack:****;john:****`
