@@ -393,5 +393,25 @@ Just make sure that all stylesheets using LESS do have a _*.less_ file extension
 The HttpSessionListener class `org.eclipse.scout.rt.ui.html.UiHttpSessionListener` has been replaced by the listener class `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
 Therefore if the class `UiHttpSessionListener` is registered in the `web.xml` file replace it with `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
 
+=== Version check on startup
+
+After a release upgrade, the cached resources (e.g. index.html, *.js, *.css) have most likely changed and must be re-downloaded from the server. Usually, this happens automatically, because the _index.html_'s ETag has changed and the server does not respond with `HTTP 304 Not Modified`. However, we have found that there are rare cases where browsers start the JS app without checking if _index.html_ has to be updated (e.g. in Firefox when restoring tabs from a previous session or in Chrome when the "auto discard tab" feature has discarded the application's tab). This results in a mismatch between the UI and the UI server.
+
+To fix potential problems caused by old resources, a version check is performed during application startup. To enable this version check in existing applications, include the tag `<scout:version>` in `index.html`. New Scout projects created using the _helloworld_ archetype already include the tag.
+
+NOTE: The current version is determined by the value of the configuration property `scout.application.version`.
+
+Example:
+[source,html]
+----
+  ...
+  <body>
+    ...
+    <scout:version /> <!-- <1> -->
+  </body>
+  ...
+----
+<1> will be replaced by the application's version
+
 // ^^^
 // Insert descriptions of other important changes here
