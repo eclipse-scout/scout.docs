@@ -203,11 +203,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
-
-          @Override
-          protected void execClickAction() {
-            setLoading(true);
-          }
         }
 
         @Order(10)
@@ -611,8 +606,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected void execClickAction() {
             MessageBoxes.createOk().withHeader(TEXTS.get("LinkClicked", getLabel())).withBody(TEXTS.get("LinkButtonExecClickAction")).show();
-
-            setLoading(true);
           }
         }
 
