@@ -10,9 +10,13 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.browserfield.AbstractBrowserField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -23,18 +27,23 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.resource.BinaryResource;
+import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BinaryResourceField;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.RefreshButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetFileBox.BinaryResourceField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetFileBox.SetFileButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetUrlBox.SetUrlButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetUrlBox.URLField;
+import org.eclipse.scout.widgets.shared.Icons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,9 +105,6 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(EclipseScoutButton.class);
   }
 
-  /**
-   * @return the ExamplesBox
-   */
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
   }
@@ -111,16 +117,20 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(MainBox.class);
   }
 
-  public RefreshButton getRefreshButton() {
-    return getFieldByClass(RefreshButton.class);
-  }
-
   public URLField getURLField() {
     return getFieldByClass(URLField.class);
   }
 
   public BinaryResourceField getBinaryResourceField() {
     return getFieldByClass(BinaryResourceField.class);
+  }
+
+  public SetUrlButton getSetUrlButton() {
+    return getFieldByClass(SetUrlButton.class);
+  }
+
+  public SetFileButton getSetFileButton() {
+    return getFieldByClass(SetFileButton.class);
   }
 
   @Order(10)
@@ -158,11 +168,6 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return BrowserFieldForm.MainBox.ExamplesBox.LinksBox.URLField.class;
-        }
-
-        @Override
         protected boolean getConfiguredScrollBarEnabled() {
           return true;
         }
@@ -173,18 +178,86 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          String url = (String) newMasterValue;
-          setLocation(url);
-        }
-
-        @Override
         protected void execPostMessage(String data, String origin) {
           LOG.info("Received post-message: data={}, origin={}", data, origin);
         }
       }
 
-      @Order(20)
+      @Order(22)
+      public class SetUrlBox extends AbstractSequenceBox {
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Order(10)
+        public class URLField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("URL");
+          }
+
+          @Override
+          protected byte getConfiguredLabelPosition() {
+            return LABEL_POSITION_ON_FIELD;
+          }
+        }
+
+        @Order(20)
+        public class SetUrlButton extends AbstractButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Set";
+          }
+
+          @Override
+          protected void execClickAction() {
+            getBrowserField().setLocation(getURLField().getValue());
+          }
+        }
+      }
+
+      @Order(23)
+      public class SetFileBox extends AbstractSequenceBox {
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Order(10)
+        public class BinaryResourceField extends AbstractFileChooserField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("File");
+          }
+
+          @Override
+          protected byte getConfiguredLabelPosition() {
+            return LABEL_POSITION_ON_FIELD;
+          }
+        }
+
+        @Order(60)
+        public class SetFileButton extends AbstractButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Set";
+          }
+
+          @Override
+          protected void execClickAction() {
+            getBrowserField().setBinaryResource(getBinaryResourceField().getValue());
+          }
+        }
+      }
+
+      @Order(25)
       public class LinksBox extends AbstractSequenceBox {
 
         @Override
@@ -201,6 +274,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
           }
 
           @Override
+          protected String getConfiguredIconId() {
+            return Icons.World;
+          }
+
+          @Override
           protected boolean getConfiguredProcessButton() {
             return false;
           }
@@ -208,6 +286,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
           @Override
           protected void execClickAction() {
             getURLField().setValue("http://www.bing.com/search?q=Eclipse%20Scout");
+            getSetUrlButton().doClick();
           }
         }
 
@@ -220,6 +299,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
           }
 
           @Override
+          protected String getConfiguredIconId() {
+            return Icons.World;
+          }
+
+          @Override
           protected boolean getConfiguredProcessButton() {
             return false;
           }
@@ -227,65 +311,81 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
           @Override
           protected void execClickAction() {
             getURLField().setValue("http://www.bsi-software.com");
+            getSetUrlButton().doClick();
           }
         }
 
-        @Order(40)
-        public class URLField extends AbstractStringField {
+        @Order(20)
+        public class TestHtmlButton extends AbstractLinkButton {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("URL");
+            return "BrowserFieldCustomHtml.html";
           }
 
           @Override
-          protected byte getConfiguredLabelPosition() {
-            return LABEL_POSITION_ON_FIELD;
-          }
-        }
-
-        @Order(50)
-        public class BinaryResourceField extends AbstractFileChooserField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("File");
+          protected String getConfiguredIconId() {
+            return Icons.File;
           }
 
           @Override
-          protected byte getConfiguredLabelPosition() {
-            return LABEL_POSITION_ON_FIELD;
-          }
-        }
-
-        @Order(60)
-        public class RefreshButton extends AbstractButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Refresh");
+          protected boolean getConfiguredProcessButton() {
+            return false;
           }
 
           @Override
           protected void execClickAction() {
-            String url = getURLField().getValue();
-            if (!StringUtility.isNullOrEmpty(url)) {
-              getBrowserField().setLocation(url);
+            try (InputStream in = ResourceBase.class.getResourceAsStream("html/BrowserFieldCustomHtml.html")) {
+              BinaryResource resource = new BinaryResource("BrowserFieldCustomHtml.html", IOUtility.readBytes(in));
+              getBinaryResourceField().setValue(resource);
+              getSetFileButton().doClick();
             }
-            else {
-
-              getBrowserField().setBinaryResource(getBinaryResourceField().getValue());
+            catch (IOException e) {
+              throw new ProcessingException("resource", e);
             }
           }
         }
+
+        @Order(999)
+        public class ClearButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "(null)";
+          }
+
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.Remove;
+          }
+
+          @Override
+          protected void execClickAction() {
+            getBrowserField().setLocation(null);
+          }
+        }
+      }
+    }
+
+    @Order(30)
+    public class ConfigurationBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Configure");
       }
 
-      @Order(30)
-      public class ScrollableField extends AbstractBooleanField {
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 2;
+      }
+
+      @Order(10)
+      public class VisibleField extends AbstractBooleanField {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ScrollbarEnabled");
+          return "Visible";
         }
 
         @Override
@@ -294,20 +394,145 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
-          getBrowserField().setScrollBarEnabled(getValue());
+          getBrowserField().setVisible(isChecked());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getBrowserField().isScrollBarEnabled());
+          setChecked(getBrowserField().isVisible());
+        }
+      }
+
+      @Order(20)
+      public class EnabledField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Enabled";
         }
 
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getBrowserField().setEnabled(isChecked());
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(getBrowserField().isEnabled());
+        }
+      }
+
+      @Order(30)
+      public class ScrollableField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Scrollbar enabled";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getBrowserField().setScrollBarEnabled(isChecked());
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(getBrowserField().isScrollBarEnabled());
+        }
+      }
+
+      @Order(50)
+      public class ShowInExternalWindowField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Show in external window";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getBrowserField().setShowInExternalWindow(isChecked());
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(getBrowserField().isShowInExternalWindow());
+        }
+      }
+
+      @Order(60)
+      public class AutoCloseExternalWindowField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Auto close external window";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getBrowserField().setAutoCloseExternalWindow(isChecked());
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(getBrowserField().isAutoCloseExternalWindow());
+        }
+      }
+
+      @Order(99)
+      public class SandboxPermissionsField extends AbstractLinkButton {
+
+        private BrowserFieldSandboxForm m_sandboxForm;
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Sandbox settings...";
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected void execClickAction() {
+          if (m_sandboxForm == null) {
+            m_sandboxForm = new BrowserFieldSandboxForm(getBrowserField());
+            m_sandboxForm.addFormListener(new FormListener() {
+              @Override
+              public void formChanged(FormEvent e) {
+                if (e.getType() == FormEvent.TYPE_CLOSED) {
+                  m_sandboxForm = null;
+                }
+              }
+            });
+            m_sandboxForm.start();
+          }
+          else {
+            m_sandboxForm.doClose();
+          }
+        }
       }
     }
 
