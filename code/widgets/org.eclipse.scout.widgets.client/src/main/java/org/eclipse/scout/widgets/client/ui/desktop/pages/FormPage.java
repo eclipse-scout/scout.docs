@@ -26,7 +26,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.deeplink.WidgetsDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.shared.Icons;
 
 public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
@@ -49,11 +48,6 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   @Override
   protected boolean getConfiguredEnabled() {
     return m_enabled;
-  }
-
-  @Override
-  protected String getConfiguredIconId() {
-    return Icons.Forms;
   }
 
   @Override

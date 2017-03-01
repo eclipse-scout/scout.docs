@@ -621,8 +621,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
       @Override
       protected void execClickAction() {
-        TreeEntriesField treeEntries = getTreeEntriesField();
-        treeEntries.setValue(TEXTS.get("TreeUserContent"));
+        getTreeEntriesField().setValue(TEXTS.get("TreeUserContent"));
       }
     }
 
