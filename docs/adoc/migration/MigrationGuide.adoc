@@ -109,6 +109,25 @@ Furthermore the meaning of property change listeners changed. Check all the list
 This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired.
 The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED`.
 
+=== Icons in Tree
+When the new Html UI was introduced the support for icons on tree nodes was dropped. But some projects really missed that feature so it was introduced again with this release. This means when your tree node
+provides an `iconId`, the UI will display the icon referenced by the ID. The tree supports bitmap and font-icons. Since there are Scout projects migrating from an older Scout version (before Html UI
+was introduced) to a Scout version with Html UI (but before 6.1) they may still have iconIds configured, but since these icons were never displayed in their application, they probably want to stick
+with that behavior without changing their getConfiguredIconId() methods. For that purpose the Session init property `showTreeIcons` was introduced. By default the property is false, which means you
+won't see icons in the Tree, even if your model has an iconId configured. Set the property to true, to enable the support for icons (this will be default starting from release 6.2.x). Example for `index.js`:
+
+[source,javascript]
+----
+$(document).ready(function() {
+  var app = new scout.RemoteApp();
+  app.init({
+    session: {
+      showTreeIcons: true
+    }
+  });
+});
+----
+
 === ITableHolder
 The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
 Therefore the class `ITableHolder` has been removed. The constants that were present on that interface can be accessed using the interface `org.eclipse.scout.rt.client.ui.basic.table.ITableRow` from the client or `org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder` from outside the client.
