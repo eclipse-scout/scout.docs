@@ -22,7 +22,7 @@ To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N].
 .The new Form Wizard
 image::{imgsdir}/sdk_new_form.png[]
 
-// TODO mzi: replace *Name* field
+// TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_form>> the package `org.eclipse.scout.apps.helloworld.client.helloworld` has been selected in the Package Explorer.
 The only wizard field that then needs to be filled in manually is the *Name* field.
 

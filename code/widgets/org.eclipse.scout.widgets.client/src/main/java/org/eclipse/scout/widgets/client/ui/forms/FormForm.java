@@ -656,7 +656,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         @Override
         protected void execClickAction() {
           int cancellationDuration = (getCancellationDurationField().getValue() != null ? getCancellationDurationField().getValue() : 0);
-          // FIXME DWI: (von A.WE) dieser case und der Test BusyIndicatorTest funktioniert so nicht mehr. In den meisten Fällen wird
+          // TODO [7.0] mot: (von A.WE) dieser case und der Test BusyIndicatorTest funktioniert so nicht mehr. In den meisten Fällen wird
           // nicht mehr auf den ge-cancelten Job gewartet. Darum hat das zweite Sleep hier keinen Nutzen mehr. Im BusyIndicator ist das
           // rückwärts drehende Icon darum nie mehr sichtbar, ausser in dem seltenen Fall, dass der Cancel-Request lange dauern würde
           // (und zwar nicht wegen Jobs, sondern wegen Netzwerk-Latenz o.ä.). Die Frage ist nun was wir damit anfangen sollen. Der Latenz

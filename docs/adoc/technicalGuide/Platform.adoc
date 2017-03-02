@@ -330,4 +330,4 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/resources/config.pro
 
 === Testing
 
-TODO
+TODO [7.0] mvi

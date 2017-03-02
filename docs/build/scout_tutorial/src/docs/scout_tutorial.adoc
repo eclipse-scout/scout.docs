@@ -75,7 +75,7 @@ Alternatively, you can pull a Docker image of the "`Contacts`" application from 
 == Create a new Scout Project
 The first step of this tutorial is to create the initial "`Contacts`" application.
 As in the <<scout_helloworld.adoc#,"`Hello World`" tutorial>> we start the Eclipse IDE with an empty workspace.
-// TODO: move wizard desc into module, add scout tooling chapter and refactor eclipse_help
+//  [7.0] jbr: move wizard desc into module, add scout tooling chapter and refactor eclipse_help
 In the <<New Scout Project>> wizard enter the values shown below into the wizard fields.
 
 Group Id:: `org.eclipse.scout.contacts`
@@ -88,7 +88,7 @@ To start the wizard click the btn:[Next] button.
 
 For the purpose of the Contacts application, the created project needs to be slightly altered.
 The items below list the necessary changes as of Neon milestone M5.
-// TODO verify/adapt from milestone to milestone
+// TODO [7.0] jbr: verify/adapt from milestone to milestone
 Therefore, the content of this section will have to be updated for the final release of the Scout Neon package in June 2016.
 
 * contact.client classes/packages edits/renames
@@ -112,7 +112,7 @@ Therefore, the content of this section will have to be updated for the final rel
 * contact.shared removals: packages
 ** *.helloworld
 
-// TODO add metadata for this listing in proper format
+// TODO [7.0] jbr: add metadata for this listing in proper format
 resulting
 include::{codedir}contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=Outline]
 

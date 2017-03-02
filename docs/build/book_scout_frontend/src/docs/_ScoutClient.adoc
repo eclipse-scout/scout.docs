@@ -89,7 +89,7 @@ See Listing <<lst-codetype.simple>> for a possible implementation of such a code
 [source,java]
 .A code type with associated codes.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=15..66;89..90]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=15..66;89..90]
 ----
 
 
@@ -116,7 +116,7 @@ In fact, any Java class may be used as a key type for code types and codes as lo
 [source,java]
 .A codes that is set to inactive.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=68..88]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=68..88]
 ----
 
 To allow for language specific translations, the configuration method [java]+getConfiguredText+ is used for both the names of code types and codes.
@@ -143,7 +143,7 @@ This setup can easily be transferred to a hierarchical Scout code type.
 [source,java]
 .A hierarchical code type for the Industry Classification Benchmark.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=12..34;2942..2942]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=12..34;2942..2942]
 ----
 
 [[img-hierarchicalcodetype, Figure 000]]
@@ -166,7 +166,7 @@ Clearly, such a setup is not sustainable and this is why Scout allows to dynamic
 [source,java]
 .Adding codes dynamically in method [java]+execLoadCodes+.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=21..51;195..211]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=21..51;195..211]
 ----
 
 At startup of a Scout application the codes of all defined code types are loaded into memory.
@@ -186,8 +186,8 @@ As a result, the translated text for key [java]+"YellowDynamic"+ is shown in the
 
 To have access to all codes at runtime, Scout provides the convenience accessor [java]+CODES+.
 This accessor encapsulates the access to the [java]+ICodeService+ and provides a number of useful methods.
-// TODO where are the code services? widget has localcodeservice in client, registered in plugin.xml of client
-// TODO helloworld does not seem to have registered a code service in shared or server or client. why not???
+// TODO [7.0] jbr: where are the code services? widget has localcodeservice in client, registered in plugin.xml of client
+// TODO [7.0] jbr: helloworld does not seem to have registered a code service in shared or server or client. why not???
 At startup, all codes are loaded and cached in the applications client session using method [java]+getAllCodeTypes+.
 And for a class [java]+MyCodeType+, all its codes can be retrieved by [java]+CODES.getCodeType(MyCodeType.class).getCodes()+.
 
@@ -226,7 +226,7 @@ in the text below
 [source,java]
 .A simple local lookup call defining it's entries in method [java]+execCreateLookupRows+.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/FontStyleLookupCall.java[lines=17..30]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/FontStyleLookupCall.java[lines=17..30]
 ----
 
 
@@ -235,10 +235,10 @@ TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/
 [source,java]
 .A local code lookup call. This lookup removes inactive codes in the lookup data.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/EventTypeLookupCall.java[lines=14..36]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/EventTypeLookupCall.java[lines=14..36]
 ----
 
-TODO: fix <<img-lookup_call>>: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which
+TODO [7.0] jbr: fix <<img-lookup_call>>: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which
 
 [[img-lookup_call, Figure 000]]
 .Implementing a lookup call with a corresponding lookup service. Scout framework components are shown in orange, user code in blue.
@@ -588,7 +588,7 @@ In the text below the client only setup of the widget demo application is explai
 [source,java]
 .The setup of the client session in the Scout widget demo application.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ClientSession.java[lines=25..33]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ClientSession.java[lines=25..33]
 ----
 
 
@@ -645,7 +645,7 @@ A subset of these properties are shown in the list below.
 [source,java]
 .A simple LabelField.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java[lines=66..73]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java[lines=66..73]
 ----
 
 
@@ -656,7 +656,7 @@ To display text in the right hand area an empty string can be used as label text
 [source,java]
 .A label field displaying multi-line text that covers the whole width of a column.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java[lines=168..195]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java[lines=168..195]
 ----
 
 
@@ -690,7 +690,7 @@ Please note that changing this property dynamically at runtime currently only wo
 [source,java]
 .A masked string field.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/StringFieldForm.java[lines=595..607]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/StringFieldForm.java[lines=595..607]
 ----
 
 
@@ -728,7 +728,7 @@ See Listing <<lst-field.integer.input>> for the code corresponding to the input 
 [source,java]
 .A simple Integer field.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/NumberFieldsForm.java[lines=510..517]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/NumberFieldsForm.java[lines=510..517]
 ----
 
 
@@ -770,7 +770,7 @@ This example form is defined in class [java]+DecimalFieldsForm+ of the Scout wid
 [source,java]
 .A styled decimal field holding Java [java]+Double+ values. Negative values are shown in red
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DecimalFieldsForm.java[lines=313..337]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DecimalFieldsForm.java[lines=313..337]
 ----
 
 
@@ -833,7 +833,7 @@ Simultaneously pressing the kbd:[Shift] or the kbd:[Ctrl] allows to step to the 
 [source,java]
 .A disabled combined date time field initialized with the current time
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DateTimeFieldsForm.java[lines=448..465]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DateTimeFieldsForm.java[lines=448..465]
 ----
 
 
@@ -867,7 +867,7 @@ This naming reflects the boolean state of a check boxes and differs from the oth
 [source,java]
 .A disabled check box field initialized with a checked state
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/CheckboxFieldForm.java[lines=144..163]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/CheckboxFieldForm.java[lines=144..163]
 ----
 
 
@@ -895,7 +895,7 @@ As shown in the example section of the form, radio buttons may have labes and/or
 [source,java]
 .A radio button group defined by a code type
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java[lines=186..202]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java[lines=186..202]
 ----
 
 
@@ -910,7 +910,7 @@ The generic parameter used in the definition of a radio button group also determ
 [source,java]
 .A complete radio button group with two radio buttons with individual radio values assigned
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java[lines=257..296]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java[lines=257..296]
 ----
 
 
@@ -944,7 +944,7 @@ Example uses of buttons and links are shown in the form [java]+ButtonLinkFieldsF
 [source,java]
 .A button with a label and an icon that horizontally stretches over the whole column
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java[lines=207..229]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java[lines=207..229]
 ----
 
 
@@ -959,7 +959,7 @@ Otherwise, buttons (and links) are placed at the bottom of the container they ar
 [source,java]
 .A toggle button implementation that changes the label text depending on its toggled state
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java[lines=244..271]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java[lines=244..271]
 ----
 
 
@@ -999,7 +999,7 @@ For example, calling [java]+MessageBox.showOkMessage(title, header, info)+ opens
 [source,java]
 .Configuring and starting of a message box.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/MessageBoxForm.java[lines=434..453]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/MessageBoxForm.java[lines=434..453]
 ----
 
 
@@ -1050,7 +1050,7 @@ image::{imgsdir}/listbox.png[]
 [source,java]
 .A simple ListBox field backed by a code type that returns elements of type [java]+Color+.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java[lines=172..189]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java[lines=172..189]
 ----
 
 
@@ -1074,7 +1074,7 @@ For this, the configuration method [java]+getConfiguredFilterCheckedNodes+ may b
 [source,java]
 .Updating the [field]_getCheckedKeys_ field whenever the use changes the selection of elements
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java[lines=356..379]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java[lines=356..379]
 ----
 
 To access the currently selected elements of a list box method [java]+getCheckedKeys+ may be used.
@@ -1108,7 +1108,7 @@ image::{imgsdir}/treebox.png[]
 [source,java]
 .A simple TreeBox field backed by a lookup call that returns element keys of type [java]+String+.
 ----
-TODO include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/TreeBoxForm.java[lines=252..269]
+TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/TreeBoxForm.java[lines=252..269]
 ----
 
 

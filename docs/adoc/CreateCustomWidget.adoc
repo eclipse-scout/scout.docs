@@ -39,4 +39,4 @@ when a property change event occurs.
 See HeatmapFieldLayout.js and it's usage in HeatmapField._render() for an example how to hook in scout's layout mechanism.
 
 === Testing with Selenium
-TODO!
+TODO [7.0] cgu

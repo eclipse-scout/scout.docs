@@ -16,7 +16,7 @@ To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as describ
 .The new Permission wizard
 image::{imgsdir}/sdk_new_permission.png[]
 
-// TODO mzi: replace *Name* field
+// TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_permission>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer.
 The only wizard fields that then needs to be filled in manually is the *Name* fields.
 

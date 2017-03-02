@@ -192,7 +192,7 @@ scout.MyApp.prototype.installExtensions = function() {
 
 ==== How to extend JSON model
 
-TODO: Cyrill Wyss?
+TODO [7.0] cgu: Cyrill Wyss?
 
 ==== Export Scout model from a Scout classic (online) application
 

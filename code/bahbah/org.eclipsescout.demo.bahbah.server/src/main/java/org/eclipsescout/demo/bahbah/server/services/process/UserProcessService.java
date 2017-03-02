@@ -94,7 +94,7 @@ public class UserProcessService implements IUserProcessService {
 
     SQL.delete("DELETE FROM TABUSERS WHERE u_id = :ids", new NVPair("ids", u_id));
 
-    //TODO [15.4] jbr: what to do if the deleted user is still logged in somewhere?
+    //TODO [7.0] jbr: what to do if the deleted user is still logged in somewhere?
   }
 
   @Override

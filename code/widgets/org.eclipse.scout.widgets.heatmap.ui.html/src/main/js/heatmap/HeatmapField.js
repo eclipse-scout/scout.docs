@@ -89,7 +89,7 @@ scout.HeatmapField.prototype._renderHeatPointList = function() {
     });
   }
   this._heatLayer = L.heatLayer(heatPoints, {
-    // TODO make this parameter list configurable from the model!
+    // TODO [7.0] bsh: make this parameter list configurable from the model!
     // parameters to control the appearance of heat points
     // see leaflet.heat docu for full spec
     radius: 20,

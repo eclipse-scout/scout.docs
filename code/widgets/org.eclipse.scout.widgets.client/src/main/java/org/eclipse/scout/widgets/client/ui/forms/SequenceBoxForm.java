@@ -472,7 +472,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             return false;
           }
 
-          // FIXME dwi: BUG, this property seems to be pretty broken
+          // TODO [7.0] bsh: BUG, this property seems to be pretty broken
           @Override
           protected boolean getConfiguredEqualColumnWidths() {
             return false;

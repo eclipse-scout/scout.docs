@@ -337,12 +337,12 @@ The list below suggests a sequence of sections to digest including a brief motiv
       Read about some key elements used in every Scout client application including integration of server services and data binding.
  * Chapter <<cha-tooling>> "`Scout Tooling`".
       Browse through the tooling chapter to get an impression on the tooling provided with Scout.
-	  Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.
+    Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.
  * Chapter <<cha-large_example>> "`The My Contacts Application`".
       Check out the slightly larger demo application.
-	  In case you are not yet running out of time, download the demo app as described in the Scout wiki.footnote:[
-		Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications.
-	  ].
+    In case you are not yet running out of time, download the demo app as described in the Scout wiki.footnote:[
+    Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications.
+    ].
 
 
 
@@ -607,7 +607,7 @@ Of interest is the overwritten callback method [java]+execOpened+ shown in <<lst
 [source,java]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java[lines=32..41]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java[lines=32..41]
 ----
 
 
@@ -659,7 +659,7 @@ The necessary wiring is provided by the Scout framework, either by the initial p
 [source,java]
 .Class [java]+DesktopForm+ with its view handler and [java]+startView+ method. Other inner classes and methods are omitted here.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=19..20;86..103]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=19..20;86..103]
 ----
 
 In the "`Hello World`" application, it is the overwritten [java]+execLoad+ method in the [java]+ViewHandler+ that defines what will happen before the desktop form is shown to the user.
@@ -859,7 +859,7 @@ support of Scout for texts.
 [source,java]
 .The [java]+DesktopForm+ with its inner class [java]+MainBox+ containing the desktop box and message field
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20;69..84;102..103]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20;69..84;102..103]
 ----
 
 As discussed in Section <<sec-helloworld.form>> Scout forms consist of variables, the main box and a number of form handlers.
@@ -885,7 +885,7 @@ The Scout SDK takes care of this time consuming and error prone task.
 [source,java]
 .The [java]+HelloworldTextProviderService+ class. Its getter method provides the path and the base name for the text property files
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
 ----
 
 [[img-nls_editor, Figure 000]]
@@ -928,7 +928,7 @@ To support Scout developers as much as possible, the Scout SDK offers wizards th
 [source,java]
 .The server service class [java]+DesktopService+.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[lines=8..15]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java[lines=8..15]
 ----
 
 All Scout services need to extend Scout's [java]+AbstractService+ class and implement their own corresponding interface.
@@ -953,7 +953,7 @@ image::{imgsdir}/sdk_plugin_editor_desktopservice.png[]
 [source,xml]
 .The registration of the [java]+DesktopService+ in the server's [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..6;22..27;105..106]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..6;22..27;105..106]
 ----
 
 
@@ -976,7 +976,7 @@ As the name implies, a client proxy service acts as a local proxy service (runni
 [source,xml]
 .The registration of the [java]+IDesktopService+ proxy service in the client plugin of the "`Hello World`" application. This is the complete content of the client's [java]+plugin.xml+ file.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/plugin.xml[]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/plugin.xml[]
 ----
 
 Client proxy services are defined by a Java interface located in the shared plugin of the Scout application.
@@ -1017,12 +1017,12 @@ In this case you will be obliged to redistribute your modified version of Rayo u
 With Eclipse Scout 3.8 (Juno), the Scout framework also allows to build web clients based on Eclipse RAP.
 Great care has been taken to ensure, that the look and feel for Scout web applications matches the look and feel of the desktop as closely as possible.
 As RAP is already distributed under the EPL licence the Rayo for web apps is directly contained in the Scout package.
-TODO: Describe what to change to use RAP default look and feel
+TODO [7.0] jbr: Describe what to change to use RAP default look and feel
 
 A similar approach was chosen for Rayo on tablets and mobile devices that are supported with Eclipse Scout 3.9 (Kepler).
 For such devices optimized components are used to take into account the smaller screens and the absence of a mouse (no context menus!)
 But as far as possible, the Rayo look and feel also applies to touch devices.
-TODO: Pointer to more info regarding mobile devices.
+TODO [7.0] jbr: Pointer to more info regarding mobile devices.
 
 
 [[sec-helloworld_export_background]]
@@ -1076,7 +1076,7 @@ image::{imgsdir}/helloworld_server_war_plugin.png[]
 [source,xml]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
-TODO include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..3;28..30;51..62;104..106]
+TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.server/plugin.xml[lines=1..3;28..30;51..62;104..106]
 ----
 
 

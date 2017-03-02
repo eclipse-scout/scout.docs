@@ -235,7 +235,7 @@ For the default setup, port number 8080 is used for the communication between cl
 The file [filename]+tomcat-users.xml+ contains a database of users, passwords and associated roles.
 
 Folder [filename]+logs+ contains various logfiles of Tomcat itself as well as host and web application log files.
-TODO jbr need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
+TODO [7.0] jbr: need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
 
 The folder needed for deploying web applications into a Tomcat instance is called [filename]+webapps+.
 It can be used as the target for copying WAR files into the web server.
