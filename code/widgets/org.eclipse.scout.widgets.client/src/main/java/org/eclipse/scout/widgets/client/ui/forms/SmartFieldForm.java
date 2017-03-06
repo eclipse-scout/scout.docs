@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -28,17 +29,18 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -61,16 +63,18 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeEntriesField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultProposalField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DefaultSmartField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.DisabledSmartFieldField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatoryProposalField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.MandatorySmartfieldField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.DefaultProposalField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.MandatoryProposalField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.MandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.SmartFieldWithCustomTableField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DefaultSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
@@ -216,24 +220,26 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   /**
-   * @return the SmartFieldWithListContentField
-   */
-  public SmartFieldWithListContentField getSmartFieldWithListContentField() {
-    return getFieldByClass(SmartFieldWithListContentField.class);
-  }
-
-  /**
-   * @return the SmartFieldWithTreeContentField
-   */
-  public SmartFieldWithTreeContentField getSmartFieldWithTreeContentField() {
-    return getFieldByClass(SmartFieldWithTreeContentField.class);
-  }
-
-  /**
    * @return the TreeEntriesField
    */
   public TreeEntriesField getTreeEntriesField() {
     return getFieldByClass(TreeEntriesField.class);
+  }
+
+  public SmartFieldWithCustomTableField getSmartFieldWithCustomTableField() {
+    return getFieldByClass(SmartFieldWithCustomTableField.class);
+  }
+
+  public SmartFieldWithListGroupBox getSmartFieldWithListGroupBox() {
+    return getFieldByClass(SmartFieldWithListGroupBox.class);
+  }
+
+  public SmartFieldWithTreeGroupBox getSmartFieldWithTreeGroupBox() {
+    return getFieldByClass(SmartFieldWithTreeGroupBox.class);
+  }
+
+  public ProposalFieldWithListContentBox getProposalFieldWithListContentBox() {
+    return getFieldByClass(ProposalFieldWithListContentBox.class);
   }
 
   /**
@@ -266,251 +272,312 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         return TEXTS.get("Examples");
       }
 
-      @Order(20)
-      public class SmartFieldWithListContentField extends AbstractLabelField {
-
+      @Order(1000)
+      @ClassId("b5e634ef-def4-457a-8a40-17737f0a89db")
+      public class SmartFieldWithListGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+          return TEXTS.get("SmartFieldWithListContent");
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("SmartFieldWithListContent"));
-        }
-      }
-
-      @Order(30)
-      public class DefaultField extends AbstractSmartField<Locale> {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
-        @Override
-        protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
-        }
-      }
+        @Order(30)
+        public class DefaultField extends AbstractSmartField<Locale> {
 
-      @Order(40)
-      public class MandatoryField extends AbstractSmartField<Color> {
-
-        @Override
-        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
-          return ColorsCodeType.class;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-
-        @Override
-        protected void execChangedValue() {
-          Color color = getValue();
-          if (color == null) {
-            setBackgroundColor(null);
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
           }
-          else {
-            String hex = Integer.toHexString(color.getRGB()).substring(2);
-            setBackgroundColor(hex);
+
+          @Override
+          protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+            return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
           }
         }
+
+        @Order(40)
+        public class MandatoryField extends AbstractSmartField<Color> {
+
+          @Override
+          protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
+            return ColorsCodeType.class;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            Color color = getValue();
+            if (color == null) {
+              setBackgroundColor(null);
+            }
+            else {
+              String hex = Integer.toHexString(color.getRGB()).substring(2);
+              setBackgroundColor(hex);
+            }
+          }
+        }
+
+        @Order(50)
+        public class DisabledField extends AbstractSmartField<Color> {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
+            return ColorsCodeType.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(new Color(255, 255, 255));
+          }
+        }
+
+        @Order(55)
+        @ClassId("dc925ae2-0568-46ff-a1ee-2b56f1e17105")
+        public class SmartFieldWithCustomTableField extends AbstractSmartField<Locale> {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("CustomTable");
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+            return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
+          }
+
+          @Order(10.0)
+          public class Table extends ContentAssistFieldTable<Locale> {
+
+            public CountryColumn getCountryColumn() {
+              return getColumnSet().getColumnByClass(CountryColumn.class);
+            }
+
+            public LanguageColumn getLanguageColumn() {
+              return getColumnSet().getColumnByClass(LanguageColumn.class);
+            }
+
+            @Override
+            protected boolean getConfiguredHeaderVisible() {
+              return true;
+            }
+
+            @Order(100.0)
+            public class CountryColumn extends AbstractStringColumn {
+
+              @Override
+              protected String getConfiguredHeaderText() {
+                return TEXTS.get("Country");
+              }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 60;
+              }
+            }
+
+            @Order(110.0)
+            public class LanguageColumn extends AbstractStringColumn {
+
+              @Override
+              protected String getConfiguredHeaderText() {
+                return TEXTS.get("Language");
+              }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 60;
+              }
+            }
+          }
+        }
+
       }
 
-      @Order(50)
-      public class DisabledField extends AbstractSmartField<Color> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
+      @Order(2000)
+      @ClassId("08d450ef-10d8-4d4a-ad89-eed0f832b964")
+      public class SmartFieldWithTreeGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
+          return TEXTS.get("SmartFieldWithTreeContent");
         }
 
         @Override
-        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
-          return ColorsCodeType.class;
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(new Color(255, 255, 255));
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Order(70)
+        public class DefaultSmartField extends AbstractSmartField<Long> {
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+        }
+
+        @Order(80)
+        public class MandatorySmartfieldField extends AbstractSmartField<Long> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(90)
+        public class DisabledSmartFieldField extends AbstractSmartField<Long> {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(ICB9537.ID);
+          }
         }
       }
 
-      @Order(60)
-      public class SmartFieldWithTreeContentField extends AbstractLabelField {
-
+      @Order(3000)
+      @ClassId("caf4df06-02ab-41b6-a18d-c9620578bb8e")
+      public class ProposalFieldWithListContentBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+          return TEXTS.get("ProposalFieldWithListContent");
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("SmartFieldWithTreeContent"));
-        }
-      }
-
-      @Order(70)
-      public class DefaultSmartField extends AbstractSmartField<Long> {
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return IndustryICBCodeType.class;
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-      }
+        @Order(110)
+        public class DefaultProposalField extends AbstractProposalField<Long> {
 
-      @Order(80)
-      public class MandatorySmartfieldField extends AbstractSmartField<Long> {
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return EventTypeCodeType.class;
+          }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return IndustryICBCodeType.class;
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(90)
-      public class DisabledSmartFieldField extends AbstractSmartField<Long> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return IndustryICBCodeType.class;
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(ICB9537.ID);
-        }
-      }
-
-      @Order(100)
-      public class ProposalFieldWithListContentField extends AbstractLabelField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("ProposalFieldWithListContent"));
-        }
-      }
-
-      @Order(110)
-      public class DefaultProposalField extends AbstractProposalField<Long> {
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return EventTypeCodeType.class;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
 
         @Override
         protected IProposalChooserProvider<Long> createProposalChooserProvider() {
           return new P_ProposalChooserProvider();
         }
 
+        }
+
+        @Order(120)
+        public class MandatoryProposalField extends AbstractProposalField<Long> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return EventTypeCodeType.class;
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(130)
+        public class DisabledProposalField extends AbstractProposalField<Long> {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return EventTypeCodeType.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(TEXTS.get("Public"));
+          }
+        }
       }
 
-      @Order(120)
-      public class MandatoryProposalField extends AbstractProposalField<Long> {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return EventTypeCodeType.class;
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(130)
-      public class DisabledProposalField extends AbstractProposalField<Long> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return EventTypeCodeType.class;
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("Public"));
-        }
-      }
     }
 
     @Order(20)

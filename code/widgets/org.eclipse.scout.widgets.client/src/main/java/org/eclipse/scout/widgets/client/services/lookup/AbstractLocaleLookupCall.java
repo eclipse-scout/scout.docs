@@ -19,6 +19,7 @@ import java.util.Locale;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -49,11 +50,45 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
     for (Locale locale : sort(locales)) {
       String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
-        rows.add(new LookupRow<Locale>(locale, displayName));
+        LookupRow<Locale> row = new LookupRow<Locale>(locale, displayName);
+        LocaleTableRowData bean = new LocaleTableRowData();
+        bean.setCountry(locale.getCountry());
+        bean.setLanguage(locale.getLanguage());
+        row.withAdditionalTableRowData(bean);
+        rows.add(row);
       }
     }
     return rows;
   }
 
   protected abstract Locale[] availableLocales();
+
+  public static class LocaleTableRowData extends AbstractTableRowData {
+
+    private static final long serialVersionUID = 1L;
+    public static final String country = "country";
+    public static final String language = "language";
+
+    private String m_country;
+    private String m_language;
+
+    public LocaleTableRowData() {
+    }
+
+    public String getLanguage() {
+      return m_language;
+    }
+
+    public void setLanguage(String language) {
+      m_language = language;
+    }
+
+    public String getCountry() {
+      return m_country;
+    }
+
+    public void setCountry(String country) {
+      m_country = country;
+    }
+  }
 }
