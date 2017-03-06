@@ -111,7 +111,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
         }
 
         @Override
-        protected int getConfiguredLabelPosition() {
+        protected byte getConfiguredLabelPosition() {
           return LABEL_POSITION_TOP;
         }
 
