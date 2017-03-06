@@ -19,6 +19,22 @@ Howto:
 - Chronological order is not necessary.
 ////
 
+This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <<Service Release Migration>>.
+
+== Service Release Migration
+
+*Neon.3 (6.0.300)*
+
+* <<JAX-WS Pooled Port Provider (since 6.0.300)>>
+
+*Neon.2 (6.0.200)*
+
+None.
+
+*Neon.1 (6.0.100)*
+
+* <<Changed behavior for tables with autoResizeColumns = true (since 6.0.100)>>
+
 == Project Structure
 
 With the upgrade to pure maven without OSGi the project structure should be changed to the maven default footnote:[
@@ -239,7 +255,7 @@ Migration:
 +
 Remove the detail form handling code from `execPageActivated` / `execPageDeactivated` / `execPageDisposed` and use either `getConfiguredDetailForm` / `execInitDetailForm` or `createDetailForm`.
 
-=== Changed behavior for tables with autoResizeColumns = true (since 6.0.1)
+=== Changed behavior for tables with autoResizeColumns = true (since 6.0.100)
 
 Before 6.0.1, the column width was used as weight for the calculation of the real column width. To make sure the columns don't get too
 small on small screens, this width is now also used as minimum / preferred width. It is not a hard minimum, the user can still make the column smaller.

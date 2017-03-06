@@ -18,12 +18,28 @@ ifndef::mdledir[:mdledir: .]
 // This file contains the release notes
 //-----------------------------------------------------------------------------
 
-= Releases
+= Overview
 
-Neon 1 (latest stable version):
+Eclipse Scout 6.0 is part of the Eclipse Neon release. The latest stable version is _Neon.2 (6.0.200.0)_. See also https://wiki.eclipse.org/Simultaneous_Release for the release schedule.
 
-* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/neon1[Eclipse for Scout Developers]
-* Runtime on Maven Central: link:http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.0.100.RC4%22[6.0.100.RC4]
+* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/neon2[Eclipse for Scout Developers]
+* Runtime on Maven Central: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.0.200.0%22[6.0.200.0]
+
+== Service Release Change Log
+
+*Neon.3 (6.0.300)*
+
+* <<Improved iOS Homescreen Mode (since 6.0.300)>>
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2].
+
+*Neon.2 (6.0.200)*
+
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2%2E%2E%2E6.0.200.0[https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2...6.0.200.0].
+
+*Neon.1 (6.0.100)*
+
+* <<Responsive Table (since 6.0.100)>>
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.0.RC4%2E%2E%2E6.0.100.RC4.2[https://github.com/eclipse/scout.rt/compare/6.0.0.RC4...6.0.100.RC4.2].
 
 = What's New
 
@@ -299,7 +315,7 @@ See `TableUserFilterManager` for details.
 ==== Icon Column
 The icon column may be used to show icons or images, no text. The advantage compared to a string column with a cell icon is that sorting and grouping works as expected.
 
-=== Responsive Table (since 6.0.1)
+=== Responsive Table (since 6.0.100)
 With release 6.0, the columns of a table got very small if autoResizeColumns was set to true. The content was not readable in many cases. This has been improved with 6.0.1: The configured width is not only used as ratio to calculate the real width anymore, it now acts as minimum width as well. It is not a hard minimum, the user can still make the column smaller.
 See also the link:{migrationguide}#changed-behavior-for-tables-with-autoresizecolumns-true[Migration Guide] for more information.
 
@@ -424,6 +440,11 @@ The HTML UI checks if the application is configured safe by validating some flag
 
 === UserIdAccessControlService [Removed]
 `org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).
+
+== Improved iOS Homescreen Mode (since 6.0.300)
+If the app is running in iOS home screen mode the HTTP session will be lost whenever the user leaves the app (e.g. switches to another app or just downloads a file). This means he has to login again and navigate to the previous location, again. To avoid this a persistent mode has been introduced. This means if the app is running in the home screen mode, a persistent session cookie is created so that the same http session may be used the next time the app is activated. Also, the client session id will be put in the local storage instead of the session storage. This makes sure the same client session as before is used. Deep link handling is deactivated in that case otherwise it would always navigate to the url which was active when "add to home screen" was pressed.
+
+This persistent mode is only active when the app is running on iOS with the home screen mode.
 
 = Known Limitations
 
