@@ -5,3 +5,14 @@
   color: @palette-white;
   border-color: darken(@open-form-button-background-color, 5%);
 }
+
+.form-field-alternative > .field {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0;
+
+  &:focus {
+    box-shadow: none;
+  }
+}

@@ -12,11 +12,15 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -41,6 +45,7 @@ import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -547,6 +552,78 @@ public class FormForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return "Field 2";
+          }
+
+          @Order(1000)
+          @ClassId("0847a312-c6a5-4238-b588-10215c8c1425")
+          public class ShowValueMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("DisplayValue");
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(ValueFieldMenuType.NotNull);
+            }
+
+            @Override
+            protected void execAction() {
+              MessageBoxes.createOk().withBody("Value is " + getValue()).show();
+            }
+
+          }
+
+          @Order(2000)
+          @ClassId("1077cbce-f7c2-4097-b76f-f6482f6db08e")
+          public class StyleMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("FieldStyle");
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(ValueFieldMenuType.NotNull, ValueFieldMenuType.Null);
+            }
+
+            @Order(1000)
+            @ClassId("f13aa648-a3de-4cab-90e0-e7559ca1df7d")
+            public class DefaultMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("Default");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(ValueFieldMenuType.NotNull, ValueFieldMenuType.Null);
+              }
+
+              @Override
+              protected void execAction() {
+                getField2Field().setCssClass("");
+              }
+            }
+
+            @Order(2000)
+            @ClassId("10861a5b-cb69-4dd7-ac8b-e33956386fe6")
+            public class AlternativeMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("Alternative");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(ValueFieldMenuType.NotNull, ValueFieldMenuType.Null);
+              }
+
+              @Override
+              protected void execAction() {
+                getField2Field().setCssClass("form-field-alternative");
+              }
+            }
           }
         }
 
