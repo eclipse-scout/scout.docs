@@ -10,13 +10,17 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client;
 
+import java.util.Locale;
+
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
+import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
+import org.eclipse.scout.rt.platform.nls.LocaleUtility;
 
 public class ClientSession extends AbstractClientSession {
+
+  public static final String PREF_USER_LOCALE = "PREF_USER_LOCALE";
 
   public ClientSession() {
     super(true);
@@ -31,8 +35,15 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() {
-    BEANS.get(IPingService.class).ping("");
+    initializeSharedVariables();
+
+    // The locale needs to be set before the Desktop is created.
+    String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(PREF_USER_LOCALE, null);
+    if (localeString != null) {
+      Locale userLocale = LocaleUtility.parse(localeString);
+      setLocale(userLocale);
+    }
+
     setDesktop(new Desktop());
   }
-
 }
