@@ -250,7 +250,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
               @Override
               protected void execAction() {
-                deselectNodes(getSelectedNodes());
+                selectNode(null);
               }
             }
 
