@@ -164,11 +164,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Order(10)
         public class Tree extends AbstractTree {
 
-          @Override
-          protected boolean getConfiguredMultiSelect() {
-            return true;
-          }
-
           @Order(10)
           public class NewMenu extends AbstractMenu {
 
@@ -511,11 +506,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
-            }
-
-            @Override
             protected void execAction() {
               getTree().removeNode(getSelectedNode());
             }
@@ -669,11 +659,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
-            }
-
-            @Override
             protected void execAction() {
               ITreeNode parentNode = null;
               if (getSelectedNode() != null) {
@@ -693,12 +678,6 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             protected String getConfiguredText() {
               return TEXTS.get("DynamicMenu");
             }
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
-            }
-
           }
 
           @Order(50)
