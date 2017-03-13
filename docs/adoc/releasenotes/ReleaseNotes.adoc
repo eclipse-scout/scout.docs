@@ -25,6 +25,22 @@ Eclipse Scout 6.1 is a preview of the Eclipse Oxygen release. The latest stable 
 * Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
 * Runtime on Maven Central: link:http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.1.0.B006%22[6.1.0.B006]
 
+== Service Release Change Log
+
+*Neon.3 (6.0.300)*
+
+* <<Improved iOS Homescreen Mode (since 6.0.300)>>
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2].
+
+*Neon.2 (6.0.200)*
+
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2%2E%2E%2E6.0.200.0[https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2...6.0.200.0].
+
+*Neon.1 (6.0.100)*
+
+* <<Responsive Table (since 6.0.100)>>
+* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.0.RC4%2E%2E%2E6.0.100.RC4.2[https://github.com/eclipse/scout.rt/compare/6.0.0.RC4...6.0.100.RC4.2].
+
 = What's New
 This document shows some of the new features delivered with the release 6.1. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see https://github.com/eclipse/scout.rt/compare/releases/6.0.x%2E%2E%2Ereleases/6.1.x[https://github.com/eclipse/scout.rt/compare/releases/6.0.x...releases/6.1.x].
 
@@ -162,6 +178,11 @@ Note: The first button or menu which has an `Enter` keystroke will automatically
 
 == Icons for tree nodes
 As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the `iconId` property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property `showTreeIcons` which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here's an example for an outline with icons:
+
+== Improved iOS Homescreen Mode (since 6.0.300)
+If the app is running in iOS home screen mode the HTTP session will be lost whenever the user leaves the app (e.g. switches to another app or just downloads a file). This means he has to login again and navigate to the previous location, again. To avoid this a persistent mode has been introduced. This means if the app is running in the home screen mode, a persistent session cookie is created so that the same http session may be used the next time the app is activated. Also, the client session id will be put in the local storage instead of the session storage. This makes sure the same client session as before is used. Deep link handling is deactivated in that case otherwise it would always navigate to the url which was active when "add to home screen" was pressed.
+
+This persistent mode is only active when the app is running on iOS with the home screen mode.
 
 [[img-tree_icons, Figure 000]]
 .Outline with icons
