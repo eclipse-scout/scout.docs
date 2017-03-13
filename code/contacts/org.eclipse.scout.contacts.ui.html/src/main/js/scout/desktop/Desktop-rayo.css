@@ -14,7 +14,7 @@
   background-color: @palette-blue-0;
 }
 
-.desktop-view-tab {
+.simple-tab {
   background-color: @palette-blue-1;
 
   &.selected {
