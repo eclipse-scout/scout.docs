@@ -20,28 +20,12 @@ Howto:
 - Choose the right top level chapter (java, js, other)
 ////
 
-This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <<Service Release Migration>>.
-
-== Service Release Migration
-
-*Neon.3 (6.0.300)*
-
-* <<JAX-WS Pooled Port Provider (since 6.0.300)>>
-
-*Neon.2 (6.0.200)*
-
-None.
-
-*Neon.1 (6.0.100)*
-
-* <<Changed behavior for tables with autoResizeColumns = true (since 6.0.100)>>
-
-
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
   =============================================================================
 ////
+
 == API Changes (Java)
 
 === Text Provider Service
