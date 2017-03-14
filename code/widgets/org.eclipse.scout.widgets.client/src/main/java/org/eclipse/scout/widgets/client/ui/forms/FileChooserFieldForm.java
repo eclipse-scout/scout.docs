@@ -28,8 +28,11 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
@@ -47,6 +50,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.Fi
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadSingleFileButton;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox.ServerLogField;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @Order(8050)
 public class FileChooserFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -151,6 +155,113 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           @Override
           protected void execChangedValue() {
             getServerLogField().addLine(getValue());
+          }
+        }
+
+        @Order(70)
+        public class PropertiesGroupBox extends AbstractGroupBox {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 2;
+          }
+
+          @Override
+          protected int getConfiguredGridColumnCount() {
+            return 2;
+          }
+
+          @Override
+          protected boolean getConfiguredBorderVisible() {
+            return false;
+          }
+
+          @Order(10)
+          public class EnabledField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Enabled");
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected String getConfiguredFont() {
+              return "ITALIC";
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getChooseAnImageField().setEnabled(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getChooseAnImageField().isEnabled());
+            }
+          }
+
+          @Order(20)
+          public class MandatoryField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Mandatory");
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected String getConfiguredFont() {
+              return "ITALIC";
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getChooseAnImageField().setMandatory(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getChooseAnImageField().isMandatory());
+            }
+          }
+
+          @Order(30)
+          public class StatusButton extends AbstractStatusButton {
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected IFormField getField() {
+              return getChooseAnImageField();
+            }
+
+            @Override
+            protected String getConfiguredFont() {
+              return "ITALIC";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
           }
         }
       }
@@ -345,6 +456,14 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
     @Order(180)
     public class CloseButton extends AbstractCloseButton {
+    }
+
+    @Order(280)
+    public class OkButton extends AbstractOkButton {
+      @Override
+      protected void execInitField() {
+        setVisible(getDisplayHint() == DISPLAY_HINT_DIALOG);
+      }
     }
   }
 
