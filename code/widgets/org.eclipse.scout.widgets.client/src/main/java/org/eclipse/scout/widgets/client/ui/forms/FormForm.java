@@ -46,6 +46,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -55,20 +56,22 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CheckboxGroupField.BlockModelThreadField;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CheckboxGroupField.CacheBoundsField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CacheBoundsField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CloseOnChildCloseField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayHintField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayViewIdField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayParentField;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.IconIdField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityBox.ModalityField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenFormButton;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.BlockModelThreadField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.OpeningDelayField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormSubTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox;
@@ -83,7 +86,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.F
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField4GroupbBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField4GroupbBox.Field4Field;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.CancellationDurationField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.LongRunningDurationField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 
@@ -133,6 +136,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public ModalityField getModalityField() {
     return getFieldByClass(ModalityField.class);
+  }
+
+  public IconIdField getIconIdField() {
+    return getFieldByClass(IconIdField.class);
   }
 
   public DisplayParentField getDisplayParentField() {
@@ -203,8 +210,8 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(LongRunningOperationBox.class);
   }
 
-  public CancellationDurationField getCancellationDurationField() {
-    return getFieldByClass(CancellationDurationField.class);
+  public LongRunningDurationField getLongRunningDurationField() {
+    return getFieldByClass(LongRunningDurationField.class);
   }
 
   public StartLongRunningOperationButton getStartLongRunningOperationButton() {
@@ -296,11 +303,20 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class ModalityField extends AbstractBooleanField {
+      public class ModalityBox extends AbstractSequenceBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return "Modal";
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
+        }
+
+        @Order(10)
+        public class ModalityField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Modal";
+          }
         }
       }
 
@@ -364,48 +380,67 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(45)
-      public class OpeningDelayField extends AbstractIntegerField {
+      @Order(42)
+      public class IconIdField extends AbstractSmartField<String> {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Opening delay [s]";
+          return "Icon";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return IconIdLookupCall.class;
         }
 
         @Override
         protected void execInitField() {
-          setValue(0);
+          setValue(getForm().getIconId());
+        }
+
+        @Order(10)
+        public class ChangeCurrentFormIconIdMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Set to current form";
+          }
+
+          @Override
+          protected void execAction() {
+            getForm().setIconId(getIconIdField().getValue());
+          }
         }
       }
 
-      @Order(50)
-      public class CheckboxGroupField extends AbstractSequenceBox {
+      @Order(45)
+      public class OpeningDelayBox extends AbstractSequenceBox {
+
+        @Override
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
+        }
 
         @Order(10)
+        public class OpeningDelayField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Opening delay [s]";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(0);
+          }
+        }
+
+        @Order(30)
         public class BlockModelThreadField extends AbstractBooleanField {
 
           @Override
           protected String getConfiguredLabel() {
             return "Block model thread during open";
-          }
-        }
-
-        @Order(20)
-        public class CacheBoundsField extends AbstractBooleanField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return "Cache bounds";
-          }
-
-          @Override
-          protected void execInitField() {
-            setValue(FormForm.this.isCacheBounds());
-          }
-
-          @Override
-          protected void execChangedValue() {
-            FormForm.this.setCacheBounds(getValue());
           }
         }
       }
@@ -419,16 +454,32 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(55)
+      public class CacheBoundsField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Cache bounds";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getForm().isCacheBounds());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getForm().setCacheBounds(getValue());
+        }
+      }
+
       @Order(60)
       public class OpenFormBox extends AbstractSequenceBox {
 
         @Order(10)
         public class OpenFormButton extends AbstractButton {
 
-          @Override
-          protected String getConfiguredLabel() {
-            return null;//"Open form";
-          }
+          // Note: Label is set by DisplayHintField
 
           @Override
           protected boolean getConfiguredProcessButton() {
@@ -467,6 +518,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                       form.setDisplayParent(displayParent.getValue());
                     }
                     form.setModal(getModalityField().isChecked());
+                    form.setIconId(getIconIdField().getValue());
                     form.start();
                     if (getCloseOnChildCloseField().getValue()) {
                       form.addFormListener(new FormListener() {
@@ -488,6 +540,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                     if (displayParent != DisplayParent.Auto) {
                       messageBox.withDisplayParent(displayParent.getValue());
                     }
+                    messageBox.withIconId(getIconIdField().getValue());
                     messageBox.show();
                     break;
                   }
@@ -733,16 +786,16 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class CancellationDurationField extends AbstractIntegerField {
+      public class LongRunningDurationField extends AbstractIntegerField {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Cancellation duration [s]";
+          return "Duration [s]";
         }
 
         @Override
         protected void execInitField() {
-          setValue(2);
+          setValue(30);
         }
       }
 
@@ -761,18 +814,8 @@ public class FormForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() {
-          int cancellationDuration = (getCancellationDurationField().getValue() != null ? getCancellationDurationField().getValue() : 0);
-          // TODO [7.0] mot: (von A.WE) dieser case und der Test BusyIndicatorTest funktioniert so nicht mehr. In den meisten Fällen wird
-          // nicht mehr auf den ge-cancelten Job gewartet. Darum hat das zweite Sleep hier keinen Nutzen mehr. Im BusyIndicator ist das
-          // rückwärts drehende Icon darum nie mehr sichtbar, ausser in dem seltenen Fall, dass der Cancel-Request lange dauern würde
-          // (und zwar nicht wegen Jobs, sondern wegen Netzwerk-Latenz o.ä.). Die Frage ist nun was wir damit anfangen sollen. Der Latenz
-          // Fall lässt sich schlecht Selenium-Testen. Sollen wir die Rückwärtsdrehen Logik ausbauen und den Test anpassen? Dann müsste
-          // auch dieses Form hier angepasst werden.
-
-          // Long running operation
-          SleepUtil.sleepSafe(30, TimeUnit.SECONDS);
-          // Long running cancellation
-          SleepUtil.sleepSafe(cancellationDuration, TimeUnit.SECONDS);
+          int duration = NumberUtility.nvl(getLongRunningDurationField().getValue(), 0);
+          SleepUtil.sleepSafe(duration, TimeUnit.SECONDS);
         }
 
         @Override
