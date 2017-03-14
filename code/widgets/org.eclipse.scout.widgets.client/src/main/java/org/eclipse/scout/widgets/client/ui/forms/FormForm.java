@@ -60,7 +60,8 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCal
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.BlockModelThreadField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CheckboxGroupField.BlockModelThreadField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CheckboxGroupField.CacheBoundsField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CloseOnChildCloseField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayHintField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayViewIdField;
@@ -216,6 +217,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public FormSubTitleField getFormSubTitleField() {
     return getFieldByClass(FormSubTitleField.class);
+  }
+
+  public CacheBoundsField getCacheBoundsField() {
+    return getFieldByClass(CacheBoundsField.class);
   }
 
   @Order(10)
@@ -374,11 +379,34 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
-      public class BlockModelThreadField extends AbstractBooleanField {
+      public class CheckboxGroupField extends AbstractSequenceBox {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return "Block model thread during open";
+        @Order(10)
+        public class BlockModelThreadField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Block model thread during open";
+          }
+        }
+
+        @Order(20)
+        public class CacheBoundsField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Cache bounds";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(FormForm.this.isCacheBounds());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            FormForm.this.setCacheBounds(getValue());
+          }
         }
       }
 
@@ -429,6 +457,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                     form.setTitle(getFormTitleField().getValue());
                     form.setSubTitle(getFormSubTitleField().getValue());
                     form.setDisplayHint(displayHint.getValue());
+                    form.setCacheBounds(getCacheBoundsField().getValue());
                     DisplayViewId viewId = getDisplayViewIdField().getValue();
                     if (viewId != null) {
                       form.setDisplayViewId(viewId.getValue());
