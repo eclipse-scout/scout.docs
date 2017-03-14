@@ -45,6 +45,8 @@ import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.status.IStatus;
+import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
@@ -56,7 +58,6 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
@@ -74,6 +75,14 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.OpeningDelayField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormSubTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormTitleField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.ClosableField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.CssClassField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.IconField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.SaveNeededVisibleField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.ShowInfoStatusField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.SubtitleField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.TitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.FormFieldBox.FormField1GroupbBox.Buttons1Box;
@@ -89,9 +98,12 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOpe
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.LongRunningDurationField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
+import org.eclipse.scout.widgets.shared.Icons;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
+
+  private static IStatus INFO_STATUS = new Status(TEXTS.get("SampleInfoStatus"), IStatus.INFO).withIconId(Icons.Info);
 
   public FormForm() {
     super();
@@ -166,6 +178,38 @@ public class FormForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Buttons2Box.class);
   }
 
+  public EditFormPropertiesBox getEditFormPropertiesBox() {
+    return getFieldByClass(EditFormPropertiesBox.class);
+  }
+
+  public TitleField getTitleField() {
+    return getFieldByClass(TitleField.class);
+  }
+
+  public IconField getIconField() {
+    return getFieldByClass(IconField.class);
+  }
+
+  public SubtitleField getSubTitleField() {
+    return getFieldByClass(SubtitleField.class);
+  }
+
+  public ClosableField getClosableField() {
+    return getFieldByClass(ClosableField.class);
+  }
+
+  public SaveNeededVisibleField getSaveNeededVisibleField() {
+    return getFieldByClass(SaveNeededVisibleField.class);
+  }
+
+  public ShowInfoStatusField getShowInfoStatusField() {
+    return getFieldByClass(ShowInfoStatusField.class);
+  }
+
+  public CssClassField getCssClassField() {
+    return getFieldByClass(CssClassField.class);
+  }
+
   public OpenFormButton getOpenFormButton() {
     return getFieldByClass(OpenFormButton.class);
   }
@@ -232,6 +276,173 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   @Order(10)
   public class MainBox extends AbstractGroupBox {
+    @Order(5)
+    @ClassId("b1003336-c9c3-43de-803a-940cf1a0d1cb")
+    public class EditFormPropertiesBox extends AbstractGroupBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("EditFormPropertiesOfCurrentForm");
+      }
+
+      @Order(0)
+      @ClassId("95b3d616-11e8-4db6-8649-2ac768a834a7")
+      public class IconField extends AbstractSmartField<String> {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Icon");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return IconIdLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setIconId(getValue());
+        }
+      }
+
+      @Order(500)
+      @ClassId("ca12f0e6-4d6b-4cac-9543-e687f6c5dbde")
+      public class CssClassField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("CssClass");
+        }
+
+        @Override
+        protected int getConfiguredMaxLength() {
+          return 128;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.getCssClass());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setCssClass(getValue());
+        }
+      }
+
+      @Order(1000)
+      @ClassId("b41819c4-a682-4d72-8dd3-07d6a5765d95")
+      public class TitleField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Title");
+        }
+
+        @Override
+        protected int getConfiguredMaxLength() {
+          return 128;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.getTitle());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setTitle(getValue());
+        }
+      }
+
+      @Order(2000)
+      @ClassId("55d26edf-2671-4bf7-859b-769d48d5c0c4")
+      public class SubtitleField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Subtitle");
+        }
+
+        @Override
+        protected int getConfiguredMaxLength() {
+          return 128;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.getSubTitle());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setSubTitle(getValue());
+        }
+      }
+
+      @Order(3000)
+      @ClassId("77d914ff-e380-42ff-9159-ccdac0ea4e7b")
+      public class ClosableField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Closable");
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.isClosable());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setClosable(getValue());
+        }
+      }
+
+      @Order(4000)
+      @ClassId("759caced-dc61-4623-bc91-7362f4e659fa")
+      public class SaveNeededVisibleField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("SaveNeededVisible");
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.isSaveNeededVisible());
+        }
+
+        @Override
+        protected boolean execIsSaveNeeded() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          FormForm.this.setSaveNeededVisible(getValue());
+        }
+      }
+
+      @Order(5000)
+      @ClassId("3b03139a-36b3-4b2b-bca1-ee85b2479ac7")
+      public class ShowInfoStatusField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ShowInfoStatus");
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(FormForm.this.getStatus() != null && FormForm.this.getStatus().containsStatus(INFO_STATUS));
+        }
+
+        @Override
+        protected void execChangedValue() {
+          if (getValue()) {
+            FormForm.this.addStatus(INFO_STATUS);
+          }
+          else {
+            FormForm.this.removeStatus(INFO_STATUS);
+          }
+        }
+      }
+
+    }
 
     @Order(10)
     public class ControllerBox extends AbstractGroupBox {
@@ -366,7 +577,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return "Subtitle";
+            return TEXTS.get("Subtitle");
           }
 
           @Override
@@ -505,6 +716,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   case View:
                   case PopupWindow: {
                     FormForm form = new FormForm();
+                    form.setHandler(new FormHandler());
                     form.setTitle(getFormTitleField().getValue());
                     form.setSubTitle(getFormSubTitleField().getValue());
                     form.setDisplayHint(displayHint.getValue());
@@ -831,6 +1043,13 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   public class PageFormHandler extends AbstractFormHandler {
+    @Override
+    protected void execLoad() {
+      getEditFormPropertiesBox().setVisible(getDisplayHint() == DISPLAY_HINT_DIALOG);
+    }
+  }
+
+  public class FormHandler extends AbstractFormHandler {
   }
 
   @Override
@@ -972,6 +1191,51 @@ public class FormForm extends AbstractForm implements IPageForm {
       };
 
       public abstract IDisplayParent getValue();
+    }
+  }
+
+  @ApplicationScoped
+  public static class IconIdLookupCall extends LocalLookupCall<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<String>> execCreateLookupRows() {
+      List<ILookupRow<String>> rows = new ArrayList<>();
+      for (IconId iconId : IconId.values()) {
+        rows.add(
+            new LookupRow<>(iconId.getValue(), iconId.getDisplayText()).withIconId(iconId.getValue()));
+      }
+      return rows;
+    }
+
+    public static enum IconId {
+      Calendar(Icons.Calendar),
+      Person(Icons.Person),
+      Square(Icons.Square),
+      Star(Icons.Star),
+      Sum(Icons.Sum),
+      World(Icons.World);
+
+      private final String m_value;
+      private final String m_displayText;
+
+      private IconId(String value) {
+        this(value, null);
+      }
+
+      private IconId(String value, String displayText) {
+        m_value = value;
+        m_displayText = (displayText == null ? name() : displayText);
+      }
+
+      public String getValue() {
+        return m_value;
+      }
+
+      public String getDisplayText() {
+        return m_displayText;
+      }
     }
   }
 
