@@ -777,7 +777,8 @@ public class PersonForm extends AbstractForm {
       IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
-      service.create(formData); // <7>
+      formData = service.create(formData); // <7>
+      importFormData(formData);
     }
   }
   // end::handler[]
@@ -823,7 +824,8 @@ public class PersonForm extends AbstractForm {
       IPersonService service = BEANS.get(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
-      service.create(formData);
+      formData = service.create(formData);
+      importFormData(formData);
     }
 
     @Override

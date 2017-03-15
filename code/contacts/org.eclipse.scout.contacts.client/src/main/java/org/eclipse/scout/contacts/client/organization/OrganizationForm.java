@@ -307,7 +307,7 @@ public class OrganizationForm extends AbstractForm {
     protected void execStore() {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
-      formData = BEANS.get(IOrganizationService.class).store(formData);
+      BEANS.get(IOrganizationService.class).store(formData);
     }
 
     @Override
@@ -328,6 +328,7 @@ public class OrganizationForm extends AbstractForm {
       OrganizationFormData formData = new OrganizationFormData();
       exportFormData(formData);
       formData = BEANS.get(IOrganizationService.class).create(formData);
+      importFormData(formData);
     }
 
     @Override
