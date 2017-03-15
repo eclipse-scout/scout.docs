@@ -366,7 +366,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("Subtitle");
+            return "Subtitle";
           }
 
           @Override
