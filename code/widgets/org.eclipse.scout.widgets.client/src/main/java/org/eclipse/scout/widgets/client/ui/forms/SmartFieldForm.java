@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -35,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -577,6 +579,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       @Order(10)
       public class ListSmartField extends AbstractSmartField<String> {
 
+        private boolean m_throttled = false;
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("ListSmartField");
@@ -586,6 +590,28 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
         }
+
+        @Override
+        protected void execPrepareLookup(ILookupCall<String> call) {
+          if (m_throttled) {
+            SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
+          }
+          super.execPrepareLookup(call);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          if (m_throttled) {
+            SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
+          }
+          super.execChangedValue();
+        }
+
+        public boolean toggleThrottle() {
+          m_throttled = !m_throttled;
+          return m_throttled;
+        }
+
       }
 
       @Order(20)
@@ -989,6 +1015,34 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
           LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
         }
+      }
+
+      @Order(40)
+      public class ThrottleSmartFieldMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ThrottleSmartFieldRequests");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          boolean throttled = getListSmartField().toggleThrottle();
+          if (throttled) {
+            setText(TEXTS.get("NoThrottling"));
+            setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
+          }
+          else {
+            setText(TEXTS.get("ThrottleSmartFieldRequests"));
+            setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
+          }
+        }
+
       }
     }
 
