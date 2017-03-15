@@ -201,6 +201,16 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         protected int getConfiguredGridW() {
           return 2;
         }
+
+        @Override
+        public void setInnerForm(IPageForm form) {
+          super.setInnerForm(form, false);
+        }
+
+        @Override
+        protected void execInitField() {
+          getInnerForm().start();
+        }
       }
     }
 
@@ -268,6 +278,27 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
           MessageBoxes.createOk()
               .withBody("markSaved() = void")
               .show();
+        }
+      }
+
+      @Order(40)
+      public class ToggleStartCloseMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "wrapped form: doClose";
+        }
+
+        @Override
+        protected void execAction() {
+          if (getWrappedFormField().getInnerForm() == null || getWrappedFormField().getInnerForm().isFormStarted()) {
+            getWrappedFormField().getInnerForm().doClose();
+            setText("wrapped form: start");
+          }
+          else {
+            getWrappedFormField().getInnerForm().start();
+            setText("wrapped form: doClose");
+          }
         }
       }
     }
