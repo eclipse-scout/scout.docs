@@ -596,6 +596,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       @Order(10)
       public class ListSmartField extends AbstractSmartField<String> {
 
+        private boolean m_throttled = false;
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("ListSmartField");
@@ -605,6 +607,28 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
         }
+
+        @Override
+        protected void execPrepareLookup(ILookupCall<String> call) {
+          if (m_throttled) {
+            SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
+          }
+          super.execPrepareLookup(call);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          if (m_throttled) {
+            SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
+          }
+          super.execChangedValue();
+        }
+
+        public boolean toggleThrottle() {
+          m_throttled = !m_throttled;
+          return m_throttled;
+        }
+
       }
 
       @Order(20)
@@ -1053,6 +1077,34 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           setDelayEnabled(false);
           setLocalLookupCall(true);
         }
+      }
+
+      @Order(40)
+      public class ThrottleSmartFieldMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ThrottleSmartFieldRequests");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          boolean throttled = getListSmartField().toggleThrottle();
+          if (throttled) {
+            setText(TEXTS.get("NoThrottling"));
+            setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
+          }
+          else {
+            setText(TEXTS.get("ThrottleSmartFieldRequests"));
+            setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
+          }
+        }
+
       }
     }
 
