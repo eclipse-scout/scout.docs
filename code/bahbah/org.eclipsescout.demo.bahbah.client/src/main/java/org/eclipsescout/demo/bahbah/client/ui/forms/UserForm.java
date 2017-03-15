@@ -214,6 +214,7 @@ public class UserForm extends AbstractForm {
       UserFormData formData = new UserFormData();
       exportFormData(formData);
       BEANS.get(IUserProcessService.class).updateUser(formData);
+      importFormData(formData);
     }
   }
 
@@ -229,6 +230,7 @@ public class UserForm extends AbstractForm {
       UserFormData formData = new UserFormData();
       exportFormData(formData);
       BEANS.get(IUserProcessService.class).createUser(formData);
+      importFormData(formData);
     }
   }
 }

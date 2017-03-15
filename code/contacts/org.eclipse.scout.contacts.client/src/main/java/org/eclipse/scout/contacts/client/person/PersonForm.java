@@ -767,6 +767,7 @@ public class PersonForm extends AbstractForm {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       service.store(formData); // <6>
+      importFormData(formData);
     }
   }
 
@@ -778,6 +779,7 @@ public class PersonForm extends AbstractForm {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       service.create(formData); // <7>
+      importFormData(formData);
     }
   }
   // end::handler[]
@@ -802,6 +804,7 @@ public class PersonForm extends AbstractForm {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       service.store(formData);
+      importFormData(formData);
     }
 
     @Override
@@ -824,6 +827,7 @@ public class PersonForm extends AbstractForm {
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       service.create(formData);
+      importFormData(formData);
     }
 
     @Override

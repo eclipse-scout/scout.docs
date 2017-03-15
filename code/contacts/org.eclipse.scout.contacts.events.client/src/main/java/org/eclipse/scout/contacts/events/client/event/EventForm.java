@@ -521,6 +521,7 @@ public class EventForm extends AbstractForm {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).store(formData);
+      importFormData(formData);
     }
 
     @Override
@@ -549,6 +550,7 @@ public class EventForm extends AbstractForm {
       EventFormData formData = new EventFormData();
       exportFormData(formData);
       formData = BEANS.get(IEventService.class).create(formData);
+      importFormData(formData);
     }
 
     @Override
