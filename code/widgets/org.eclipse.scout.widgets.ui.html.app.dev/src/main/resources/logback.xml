@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration>
 
+  <contextListener class="org.eclipse.scout.rt.platform.logger.AutoRegisteringJulLevelChangePropagator" />
+
   <variable scope="context" name="mdcPattern" value="%X{subject.principal.name} @ %X{http.request.method} %X{http.request.uri} %X{scout.ui.session.id}, cid=%X{scout.correlation.id}" />
   <variable scope="context" name="logPattern" value="%date{ISO8601} %-5level %thread %logger{50} - %m [${mdcPattern}]%n" />
 
