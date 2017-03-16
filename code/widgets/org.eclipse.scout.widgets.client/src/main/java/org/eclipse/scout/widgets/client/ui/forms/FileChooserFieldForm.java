@@ -35,8 +35,10 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -45,6 +47,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.Cl
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox.ChooseAnImageField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox.PropertiesGroupBox.MaximumUploadSizeField;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadMultipleFilesButton;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadSingleFileButton;
@@ -97,6 +100,10 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
   public FileUploadBox getFileUploadBox() {
     return getFieldByClass(FileUploadBox.class);
+  }
+
+  public MaximumUploadSizeField getMaximumUploadSizeField() {
+    return getFieldByClass(MaximumUploadSizeField.class);
   }
 
   public ServerLogBox getServerLogBox() {
@@ -186,7 +193,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
             @Override
             protected String getConfiguredLabel() {
-              return TEXTS.get("Enabled");
+              return "Enabled";
             }
 
             @Override
@@ -215,7 +222,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
             @Override
             protected String getConfiguredLabel() {
-              return TEXTS.get("Mandatory");
+              return "Mandatory";
             }
 
             @Override
@@ -261,7 +268,25 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             protected boolean getConfiguredProcessButton() {
               return false;
             }
+          }
 
+          @Order(40)
+          @ClassId("8bb43b90-eb17-40c4-ac6a-62de849e1c5c")
+          public class MaximumUploadSizeField extends AbstractLongField {
+            @Override
+            protected String getConfiguredLabel() {
+              return "Maximum Upload Size";
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getChooseAnImageField().getMaximumUploadSize());
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getChooseAnImageField().setMaximumUploadSize(getValue());
+            }
           }
         }
       }
