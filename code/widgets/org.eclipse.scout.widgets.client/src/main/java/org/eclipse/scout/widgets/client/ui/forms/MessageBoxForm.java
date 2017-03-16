@@ -69,7 +69,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("LabelField");
+    return TEXTS.get("MessageBoxes");
   }
 
   @Override
@@ -269,6 +269,35 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execClickAction() {
           int result = MessageBoxes.createYesNoCancel().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\", \"No\" or \"Cancel\"").show();
+          getResultField().setMessageBoxResult(result);
+        }
+      }
+
+      @Order(35)
+      public class MessageBoxWithLongText extends AbstractLinkButton {
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("MessageBoxWithVeryLongText");
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected void execClickAction() {
+          int result = MessageBoxes.create()
+              .withHeader(TEXTS.get("Lorem"))
+              .withBody(TEXTS.get("Lorem") + "\n\n" + TEXTS.get("Lorem") + "\n\n" + TEXTS.get("Lorem"))
+              .withYesButtonText(TEXTS.get("Lorem"))
+              .show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -543,6 +572,21 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected int getConfiguredGridH() {
+          return 2;
+        }
+
+        @Override
+        protected boolean getConfiguredMultilineText() {
+          return true;
+        }
+
+        @Override
+        protected boolean getConfiguredWrapText() {
+          return true;
+        }
+
+        @Override
         protected String getConfiguredLabelFont() {
           return "ITALIC";
         }
@@ -554,6 +598,21 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Body");
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
+        }
+
+        @Override
+        protected boolean getConfiguredMultilineText() {
+          return true;
+        }
+
+        @Override
+        protected boolean getConfiguredWrapText() {
+          return true;
         }
 
         @Override
@@ -572,7 +631,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
+          return 2;
         }
 
         @Override
@@ -747,7 +806,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         getHiddenTextContentField().setValue(TEXTS.get("Lorem"));
         getIconIdField().setValue("status_info");
         getDefaultReturnValueField().setValue(IMessageBox.NO_OPTION);
-        getAutoCloseMillisField().setValue(5000L);
       }
     }
   }
