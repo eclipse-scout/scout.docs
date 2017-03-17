@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -454,11 +455,17 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
+        if (!getField().isVisible()) {
+          getField().setVisible(true);
+          setLabel(getConfiguredLabel());
+          return;
+        }
         ModelJobs.schedule(new IRunnable() {
 
           @Override
           public void run() throws Exception {
             getField().setVisible(false);
+            setLabel("Show field");
           }
         }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
             .withExecutionTrigger(Jobs.newExecutionTrigger()
@@ -478,6 +485,29 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
       @Override
       protected boolean getConfiguredProcessButton() {
         return false;
+      }
+    }
+
+    @Order(3000)
+    @ClassId("dd5e9aec-c92c-4bae-b3d5-2062fe62abb6")
+    public class TooltipButton extends AbstractLinkButton {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ToggleTooltip");
+      }
+
+      @Override
+      protected boolean getConfiguredProcessButton() {
+        return false;
+      }
+
+      @Override
+      protected void execClickAction() {
+        String text = null;
+        if (AbstractFieldButtonsBox.this.getField().getTooltipText() == null) {
+          text = "Hello, I am a tooltip!";
+        }
+        AbstractFieldButtonsBox.this.getField().setTooltipText(text);
       }
     }
   }
