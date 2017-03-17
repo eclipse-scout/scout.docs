@@ -10,30 +10,55 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.old.client.ui.forms;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
+import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
+import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFormField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.util.Assertions;
+import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
-import org.eclipse.scout.widgets.client.services.lookup.StaticFormLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
-import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.InnerFormsField;
-import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.StaticInnerFormsField;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.InnerFormField;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.NewInstanceField;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.InnerFormStateBox.InnerFormStateButton;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.InnerFormStateBox.SetInnerFormButton;
+import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.WrappedFormFieldManagesFormLifecycleField;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
+
+  protected final Map<Class<? extends IForm>, IForm> m_formInstances = new HashMap<>();
+  protected IForm m_externallyManagedForm = null;
+  protected IForm m_currentFormInstance = null;
+  protected FormListener m_formOpenCloseListener = new FormListener() {
+    @Override
+    public void formChanged(FormEvent e) {
+      if (e.getType() == FormEvent.TYPE_CLOSED || e.getType() == FormEvent.TYPE_LOAD_COMPLETE) {
+        getInnerFormStateButton().update();
+      }
+    }
+  };
 
   public WrappedFormFieldForm() {
     super();
@@ -54,21 +79,83 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
+  protected IForm getFormInstance(Class<? extends IForm> formClass) {
+    IForm form;
+    if (getNewInstanceField().isChecked()) {
+      form = createNewFormInstance(formClass);
+    }
+    else {
+      form = m_formInstances.get(formClass);
+      if (form == null) {
+        form = createNewFormInstance(formClass);
+        m_formInstances.put(formClass, form);
+      }
+    }
+    return form;
+  }
+
+  protected IForm createNewFormInstance(Class<? extends IForm> formClass) {
+    try {
+      IForm form = formClass.newInstance();
+      form.setShowOnStart(false);
+      form.setModal(false);
+      return form;
+    }
+    catch (InstantiationException | IllegalAccessException e) {
+      throw new ProcessingException("Error while creating instance of {}", formClass);
+    }
+  }
+
+  protected void setInnerForm() {
+    // Remove form listener from previous form
+    if (m_currentFormInstance != null) {
+      m_currentFormInstance.removeFormListener(m_formOpenCloseListener);
+    }
+    // If form is not managed by wrapped form field, we manage it ourselves
+    if (m_externallyManagedForm != null) {
+      m_externallyManagedForm.doClose();
+      m_externallyManagedForm = null;
+    }
+
+    // Set new value
+    Class<? extends IForm> formClass = getInnerFormField().getValue();
+    if (formClass == null) {
+      // No form
+      getWrappedFormField().setInnerForm(null);
+      m_currentFormInstance = null;
+    }
+    else {
+      // Get instance for form class provided by lookup call
+      IForm form = getFormInstance(formClass);
+      if (getWrappedFormFieldManagesFormLifecycleField().isChecked()) {
+        getWrappedFormField().setInnerForm(form); // implies "true"
+      }
+      else {
+        // Ensure form is started (because the wrapped form field will _not_ manage it automatically)
+        if (form.isFormStartable()) {
+          form.start();
+        }
+        m_externallyManagedForm = form;
+        getWrappedFormField().setInnerForm(form, false);
+      }
+      // Add a form listener, so we can update the form state button when the form is closed
+      m_currentFormInstance = form;
+      m_currentFormInstance.addFormListener(m_formOpenCloseListener);
+    }
+    getInnerFormStateButton().update();
+  }
+
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
   }
 
-  public GroupBox getGroupBox() {
-    return getFieldByClass(GroupBox.class);
+  public GroupBox1 getGroupBox() {
+    return getFieldByClass(GroupBox1.class);
   }
 
-  public InnerFormsField getInnerFormsField() {
-    return getFieldByClass(InnerFormsField.class);
-  }
-
-  public StaticInnerFormsField getStaticInnerFormsField() {
-    return getFieldByClass(StaticInnerFormsField.class);
+  public InnerFormField getInnerFormField() {
+    return getFieldByClass(InnerFormField.class);
   }
 
   public MainBox getMainBox() {
@@ -83,104 +170,215 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(WrappedFormFieldBox.class);
   }
 
+  public WrappedFormFieldManagesFormLifecycleField getWrappedFormFieldManagesFormLifecycleField() {
+    return getFieldByClass(WrappedFormFieldManagesFormLifecycleField.class);
+  }
+
+  public InnerFormStateButton getInnerFormStateButton() {
+    return getFieldByClass(InnerFormStateButton.class);
+  }
+
+  public NewInstanceField getNewInstanceField() {
+    return getFieldByClass(NewInstanceField.class);
+  }
+
+  public SetInnerFormButton getSetInnerFormButton() {
+    return getFieldByClass(SetInnerFormButton.class);
+  }
+
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
     public class GroupBox extends AbstractGroupBox {
-
       @Order(10)
-      public class InnerFormsField extends AbstractSmartField<Class<? extends IPageForm>> {
+      public class GroupBox1 extends AbstractGroupBox {
 
         @Override
-        protected int getConfiguredGridW() {
-          return 1;
+        protected int getConfiguredGridColumnCount() {
+          return 2;
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("InnerForms") + " (dynamic)";
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
-        @Override
-        protected Class<? extends ILookupCall<Class<? extends IPageForm>>> getConfiguredLookupCall() {
-          return FormLookupCall.class;
-        }
+        @Order(10)
+        public class InnerFormField extends AbstractSmartField<Class<? extends IPageForm>> {
 
-        @Override
-        protected void execInitField() {
-          setValue(ImageFieldForm.class);
-          fireValueChanged(); // because events are not fired by default in execInitField()
-        }
-
-        @Override
-        protected void execChangedValue() {
-          // Clear other field
-          getStaticInnerFormsField().setValueChangeTriggerEnabled(false);
-          try {
-            getStaticInnerFormsField().setValue(null);
-          }
-          finally {
-            getStaticInnerFormsField().setValueChangeTriggerEnabled(true);
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
           }
 
-          // Set inner form
-          Class<? extends IPageForm> value = getValue();
-          if (value == null) {
-            getWrappedFormField().setInnerForm(null);
+          @Override
+          protected String getConfiguredLabel() {
+            return "Inner form";
           }
-          else {
-            IPageForm form;
-            try {
-              form = value.newInstance();
-            }
-            catch (InstantiationException | IllegalAccessException e) {
-              throw new ProcessingException("Error while creating instance of " + value.getName());
-            }
-            getWrappedFormField().setInnerForm(form);
+
+          @Override
+          protected Class<FormLookupCall> getConfiguredLookupCall() {
+            return FormLookupCall.class;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            setInnerForm();
+            getSetInnerFormButton().update();
+          }
+        }
+
+        @Order(20)
+        public class NewInstanceField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "New instance";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Override
+          protected void execInitField() {
+            setChecked(false);
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getSetInnerFormButton().update();
           }
         }
       }
 
-      @Order(20)
-      public class StaticInnerFormsField extends AbstractSmartField<IPageForm> {
-
-        private StaticFormLookupCall m_lookupCall = null;
+      @Order(10)
+      public class GroupBox2 extends AbstractGroupBox {
 
         @Override
-        protected int getConfiguredGridW() {
-          return 1;
+        protected int getConfiguredGridColumnCount() {
+          return 2;
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("InnerForms") + " (static)";
+        protected boolean getConfiguredBorderVisible() {
+          return false;
         }
 
-        @Override
-        protected void execInitField() {
-          m_lookupCall = new StaticFormLookupCall();
-          setLookupCall(m_lookupCall);
+        @Order(10)
+        public class InnerFormStateBox extends AbstractSequenceBox {
+
+          @Order(10)
+          public class InnerFormStateButton extends AbstractLinkButton {
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected int getConfiguredGridW() {
+              return 1;
+            }
+
+            @Override
+            protected void execInitField() {
+              update();
+            }
+
+            @Override
+            protected void execClickAction() {
+              IForm form = Assertions.assertNotNull(getWrappedFormField().getInnerForm());
+              if (form.isFormStartable()) {
+                form.start();
+              }
+              else {
+                form.doClose();
+              }
+              update();
+            }
+
+            public void update() {
+              IForm form = getWrappedFormField().getInnerForm();
+              if (form == null) {
+                setLabel("(No inner form set)");
+                setEnabled(false);
+                ModelJobs.schedule(new IRunnable() {
+                  @Override
+                  public void run() throws Exception {
+                    getInnerFormField().setValue(null);
+                  }
+                }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+              }
+              else {
+                setLabel(form.isFormStartable() ? "Start inner form" : "Close inner form");
+                setEnabled(true);
+              }
+            }
+          }
+
+          @Order(20)
+          public class SetInnerFormButton extends AbstractLinkButton {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Set new inner form";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredVisible() {
+              return false;
+            }
+
+            @Override
+            protected int getConfiguredGridW() {
+              return 1;
+            }
+
+            @Override
+            protected void execClickAction() {
+              setInnerForm();
+            }
+
+            public void update() {
+              setVisible(getInnerFormField().getValue() != null && getNewInstanceField().isChecked());
+            }
+          }
         }
 
-        @Override
-        protected void execChangedValue() {
-          // Clear other field
-          getInnerFormsField().setValueChangeTriggerEnabled(false);
-          try {
-            getInnerFormsField().setValue(null);
-          }
-          finally {
-            getInnerFormsField().setValueChangeTriggerEnabled(true);
+        @Order(20)
+        public class WrappedFormFieldManagesFormLifecycleField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "WrappedFormField manages form life-cycle";
           }
 
-          // Set inner form
-          IPageForm form = getValue();
-          if (form == null) {
-            getWrappedFormField().setInnerForm(null);
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
           }
-          else {
-            getWrappedFormField().setInnerForm(form);
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Override
+          protected void execInitField() {
+            setChecked(true);
           }
         }
       }
@@ -195,21 +393,11 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
-      public class WrappedFormField extends AbstractWrappedFormField<IPageForm> {
+      public class WrappedFormField extends AbstractWrappedFormField<IForm> {
 
         @Override
         protected int getConfiguredGridW() {
           return 2;
-        }
-
-        @Override
-        public void setInnerForm(IPageForm form) {
-          super.setInnerForm(form, false);
-        }
-
-        @Override
-        protected void execInitField() {
-          getInnerForm().start();
         }
       }
     }
@@ -278,27 +466,6 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
           MessageBoxes.createOk()
               .withBody("markSaved() = void")
               .show();
-        }
-      }
-
-      @Order(40)
-      public class ToggleStartCloseMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return "wrapped form: doClose";
-        }
-
-        @Override
-        protected void execAction() {
-          if (getWrappedFormField().getInnerForm() == null || getWrappedFormField().getInnerForm().isFormStarted()) {
-            getWrappedFormField().getInnerForm().doClose();
-            setText("wrapped form: start");
-          }
-          else {
-            getWrappedFormField().getInnerForm().start();
-            setText("wrapped form: doClose");
-          }
         }
       }
     }
