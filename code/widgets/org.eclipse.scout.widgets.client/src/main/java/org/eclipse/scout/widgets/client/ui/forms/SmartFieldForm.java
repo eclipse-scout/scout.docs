@@ -1106,6 +1106,34 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
       }
+
+      @Order(40)
+      public class ThrottleSmartFieldMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ThrottleSmartFieldRequests");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          boolean throttled = getListSmartField().toggleThrottle();
+          if (throttled) {
+            setText(TEXTS.get("NoThrottling"));
+            setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
+          }
+          else {
+            setText(TEXTS.get("ThrottleSmartFieldRequests"));
+            setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
+          }
+        }
+
+      }
     }
 
     @Order(40)

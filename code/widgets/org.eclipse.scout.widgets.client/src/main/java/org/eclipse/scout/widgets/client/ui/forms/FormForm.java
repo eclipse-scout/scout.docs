@@ -58,12 +58,14 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CacheBoundsField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ClosableField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CloseOnChildCloseField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayHintField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayViewIdField;
@@ -148,6 +150,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public ModalityField getModalityField() {
     return getFieldByClass(ModalityField.class);
+  }
+
+  public ClosableField getClosableField() {
+    return getFieldByClass(ClosableField.class);
   }
 
   public IconIdField getIconIdField() {
@@ -531,6 +537,20 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(25)
+      public class ClosableField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Closable";
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(true);
+        }
+      }
+
       @Order(30)
       public class DisplayParentField extends AbstractSmartField<DisplayParent> {
 
@@ -646,7 +666,7 @@ public class FormForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(30)
+        @Order(20)
         public class BlockModelThreadField extends AbstractBooleanField {
 
           @Override
@@ -656,7 +676,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(55)
+      @Order(50)
       public class CloseOnChildCloseField extends AbstractBooleanField {
 
         @Override
@@ -730,6 +750,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                       form.setDisplayParent(displayParent.getValue());
                     }
                     form.setModal(getModalityField().isChecked());
+                    form.setClosable(getClosableField().isChecked());
                     form.setIconId(getIconIdField().getValue());
                     form.start();
                     if (getCloseOnChildCloseField().getValue()) {
