@@ -58,7 +58,6 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
@@ -78,7 +77,6 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormSubTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.ClosableField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.CssClassField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.IconField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.EditFormPropertiesBox.SaveNeededVisibleField;
@@ -198,10 +196,6 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public SubtitleField getSubTitleField() {
     return getFieldByClass(SubtitleField.class);
-  }
-
-  public ClosableField getClosableField() {
-    return getFieldByClass(ClosableField.class);
   }
 
   public SaveNeededVisibleField getSaveNeededVisibleField() {

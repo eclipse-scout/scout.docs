@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -32,8 +32,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
@@ -527,10 +527,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             return TEXTS.get("Default");
           }
 
-        @Override
-        protected IProposalChooserProvider<Long> createProposalChooserProvider() {
-          return new P_ProposalChooserProvider();
-        }
+          @Override
+          protected IProposalChooserProvider<Long> createProposalChooserProvider() {
+            return new P_ProposalChooserProvider();
+          }
 
         }
 
@@ -1107,33 +1107,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       }
 
-      @Order(40)
-      public class ThrottleSmartFieldMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("ThrottleSmartFieldRequests");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          boolean throttled = getListSmartField().toggleThrottle();
-          if (throttled) {
-            setText(TEXTS.get("NoThrottling"));
-            setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
-          }
-          else {
-            setText(TEXTS.get("ThrottleSmartFieldRequests"));
-            setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
-          }
-        }
-
-      }
     }
 
     @Order(40)
