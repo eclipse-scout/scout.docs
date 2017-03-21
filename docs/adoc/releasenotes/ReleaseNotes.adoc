@@ -97,9 +97,6 @@ ObjectUtility was added as new utility for generic object methods and provides n
 
 And a new method `ObjectUtility.toString(Object)` providing a null-safe implementation of `Object.toString()` returning `null` if specified object is `null`.
 
-== New form field property "preventInitialFocus"
-By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
-
 == Multiple Dimensions Support
 Some components now support more dimensions for various attributes.
 E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available.
@@ -118,17 +115,32 @@ Currently the following attributes support multiple dimensions:
 * Trees: enabled
 * Tables: enabled
 
-== Form Field Enabled Inheritance
+== Form Field
+=== Enabled Inheritance
 The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field.
 Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields.
 This has the advantage that the original state is restored when the box is set back to enabled.
 
 With this change the `getConfiguredEnabled` on composite fields now also automatically affects children. There is no need to overwrite `execInit()` and call `setEnabled(false)` anymore.
 
-== Table: new property "groupingStyle"
+=== New Property "preventInitialFocus"
+By default, the first enabled field on a form gets the focus when the form is opened. This may not be desired in some cases (e.g. if the first field is a HTML field that contains app links). The new property `PROP_PREVENT_INITIAL_FOCUS` can be used to prevent the initial focus to be set to this field. The default value is `false`. For `AbstractHtmlField` and `AbstractBeanField`, the default is set to `true`.
+
+=== Menus in Tooltip
+Form fields may have a tooltip and a context menu. Until now, it was not possible to display both simultaneously. This has been changed so that the menu items are now included in the tooltip if a tooltip text and menus are configured.
+
+[[img-tooltip_menus, Figure 000]]
+.Tooltip with menus
+image::{imgsdir}/tooltip_menus.png[]
+
+== Table
+=== New property "groupingStyle"
 The new property `groupingStyle` can be set to `bottom` (default) or `top`. Depending on the value aggregate rows are rendered on the bottom of grouped rows
 or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table
 into multiple categories.
+
+=== NumberColumn: new property "allowedAggregationFunctions", new aggregation type for no aggregation
+The new property `allowedAggregationFunctions` can be set to any array of the aggregation functions `sum`, `avg`, `min`, `max` and `none` (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type `none` was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type `none` is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.
 
 == UnloadRequestHandler for `navigator.sendBeacon()`
 When a client leaves the application (e.g. puts `about:blank` in the address bar) one last "unload" request to the UI server is sent in order to property clean up the session on the server.
@@ -170,7 +182,6 @@ As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Tre
 .Outline with icons
 image::{imgsdir}/tree_icons.png[]
 
-== NumberColumn: new property "allowedAggregationFunctions", new aggregation type for no aggregation
-The new property `allowedAggregationFunctions` can be set to any array of the aggregation functions `sum`, `avg`, `min`, `max` and `none` (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type `none` was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type `none` is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.
-
-
+== File Chooser Field: Improved Usability
+The file chooser field does not open an intermediate window anymore when clicked. Instead, the native file chooser is opened directly. This saves several clicks when a file needs to be uploaded.
+Furthermore, the whole field is now clickable. Until now the icon had to be clicked to choose a file which did not work well on touch devices.
