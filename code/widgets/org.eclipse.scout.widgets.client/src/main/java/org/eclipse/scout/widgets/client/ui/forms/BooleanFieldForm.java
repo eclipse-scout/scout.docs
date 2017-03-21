@@ -223,6 +223,16 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
           // Update slave fields
           fireValueChanged();
         }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Hi, I am a tooltip!";
+        }
+
+        @Override
+        protected boolean getConfiguredFillHorizontal() {
+          return false;
+        }
       }
 
       @Order(15)
