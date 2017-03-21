@@ -177,6 +177,9 @@ Some methods on `IDeviceTransformer` where changed. Projects with own contributi
 
 |===
 
+=== AbstractTree.getConfiguredMultiSelect() deprecated
+The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. Multiselection on trees was never supported by the UI even though the model suggested so. The method will be declared final in the next Scout release, with its default implementation returning false, in case multiselection support is added in a future release.
+
 // ^^^
 // Insert descriptions of Java API changes here
 

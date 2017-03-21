@@ -227,6 +227,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected String getConfiguredKeyStroke() {
             return "ctrl-d";
           }
+
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Default button has been clicked.").show();
+          }
         }
 
         @Order(20)
@@ -428,7 +433,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class ToggleButtonDefaultField extends ToggleButtonRegularField {
+        public class ToggleButtonDefaultField extends AbstractButton {
           @Override
           protected boolean getConfiguredDefaultButton() {
             return true;

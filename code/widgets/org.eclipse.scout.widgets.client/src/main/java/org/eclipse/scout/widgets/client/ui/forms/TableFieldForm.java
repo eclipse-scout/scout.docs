@@ -35,6 +35,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
 import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIconColumn;
@@ -56,6 +57,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.status.IStatus;
@@ -91,8 +93,10 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.WrapTextField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.SelectedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.CustomColumn;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.LocationColumn;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.TableStatusVisibleMenu;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.TrendColumn;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.UpdatedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox.DefaultField;
@@ -324,6 +328,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         public class Table extends AbstractTable {
+
+          public CustomColumn getCustomColumn() {
+            return getColumnSet().getColumnByClass(CustomColumn.class);
+          }
 
           public NameColumn getNameColumn() {
             return getColumnSet().getColumnByClass(NameColumn.class);
@@ -732,6 +740,11 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             protected void execDecorateCell(Cell cell, ITableRow row) {
               cell.setIconId("font:\uE011");//Icons.Phone
             }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 150;
+            }
           }
 
           @Order(100)
@@ -740,6 +753,11 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected String getConfiguredHeaderText() {
               return TEXTS.get("Trend");
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 60;
             }
 
           }
@@ -785,6 +803,72 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             protected String getConfiguredHeaderTooltipText() {
               return "Empty Header";
             }
+          }
+
+          @Order(135)
+          public class DateWithEmptyTextColumn extends AbstractDateColumn {
+
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Empty Cell Text";
+            }
+
+            @Override
+            protected String getConfiguredHeaderTooltipText() {
+              return "This column shows a custom text if there is no value";
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 120;
+            }
+
+            @Override
+            protected void execDecorateCell(Cell cell, ITableRow row) {
+              if (cell.getValue() == null) {
+                cell.setText("-empty-");
+              }
+            }
+          }
+
+          @Order(137)
+          @ClassId("6cdd58cb-34e3-4f6c-8cdb-7ae89dde2b06")
+          public class CustomColumn extends AbstractColumn<ExampleBean> {
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Custom";
+            }
+
+            @Override
+            protected String getConfiguredHeaderTooltipText() {
+              return "This column uses a pojo as data type with a custom formatting. The value is not sent to client.";
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 100;
+            }
+
+            @Override
+            protected String formatValueInternal(ITableRow row, ExampleBean value) {
+              if (value == null) {
+                return null;
+              }
+              return value.getHeader();
+            }
+
+            @Override
+            protected void execDecorateCell(Cell cell, ITableRow row) {
+              if (row.getRowIndex() == 1) {
+                cell.setBackgroundColor("f99494");
+              }
+            }
+
           }
 
           @Order(140)
@@ -842,6 +926,9 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
             row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
             row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
+            ExampleBean bean = new ExampleBean();
+            bean.setHeader("header property");
+            row.getCellForUpdate(getCustomColumn()).setValue(bean);
 
             addRow(row, true);
           }
@@ -1523,6 +1610,9 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execChangedValue() {
             for (IColumn<?> column : getTableField().getTable().getColumns()) {
+              if (column instanceof TrendColumn || column instanceof CustomColumn) {
+                continue;
+              }
               column.setEditable(getValue());
             }
           }

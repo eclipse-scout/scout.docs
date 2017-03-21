@@ -35,21 +35,28 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
+import org.eclipse.scout.rt.shared.ScoutTexts;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileChooserFieldBox.ChooseAnImageField;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadMultipleFilesButton;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.FileDialogBox.UploadSingleFileButton;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox;
-import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.FileUploadBox.ServerLogBox.ServerLogField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserBox.UploadButtonsBox.UploadMultipleFilesButton;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserBox.UploadButtonsBox.UploadSingleFileButton;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserFieldBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserFieldBox.ChooseAnImageField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserFieldBox.PropertiesGroupBox.MaximumUploadSizeField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.ServerLogBox;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.ServerLogBox.ServerLogField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @Order(8050)
@@ -87,16 +94,20 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
     return getFieldByClass(FileChooserFieldBox.class);
   }
 
-  public FileDialogBox getFileDialogBox() {
-    return getFieldByClass(FileDialogBox.class);
+  public FileChooserBox getFileChooserBox() {
+    return getFieldByClass(FileChooserBox.class);
   }
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
-  public FileUploadBox getFileUploadBox() {
-    return getFieldByClass(FileUploadBox.class);
+  public GroupBox getGroupBox() {
+    return getFieldByClass(GroupBox.class);
+  }
+
+  public MaximumUploadSizeField getMaximumUploadSizeField() {
+    return getFieldByClass(MaximumUploadSizeField.class);
   }
 
   public ServerLogBox getServerLogBox() {
@@ -119,16 +130,16 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
-    public class FileUploadBox extends AbstractGroupBox {
+    public class GroupBox extends AbstractGroupBox {
+
+      @Override
+      protected boolean getConfiguredBorderVisible() {
+        return false;
+      }
 
       @Override
       protected int getConfiguredGridColumnCount() {
         return 1;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("FileUpload");
       }
 
       @Order(10)
@@ -136,7 +147,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("FileChooserField");
+          return "File Chooser Field";
         }
 
         @Order(20)
@@ -186,7 +197,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
             @Override
             protected String getConfiguredLabel() {
-              return TEXTS.get("Enabled");
+              return "Enabled";
             }
 
             @Override
@@ -215,7 +226,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
             @Override
             protected String getConfiguredLabel() {
-              return TEXTS.get("Mandatory");
+              return "Mandatory";
             }
 
             @Override
@@ -261,51 +272,112 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             protected boolean getConfiguredProcessButton() {
               return false;
             }
+          }
 
+          @Order(40)
+          @ClassId("8bb43b90-eb17-40c4-ac6a-62de849e1c5c")
+          public class MaximumUploadSizeField extends AbstractLongField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Max. upload size";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Maximum file size in bytes that is accepted by the file chooser field.";
+            }
+
+            @Override
+            protected String getConfiguredLabelFont() {
+              return "ITALIC";
+            }
+
+            @Override
+            protected boolean getConfiguredMandatory() {
+              return true;
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getChooseAnImageField().getMaximumUploadSize());
+            }
+
+            @Override
+            protected Long execValidateValue(Long rawValue) {
+              if (rawValue == null || rawValue < 0) {
+                throw new VetoException(ScoutTexts.get("InvalidValueMessageX", ObjectUtility.toString(rawValue)));
+              }
+              return super.execValidateValue(rawValue);
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getChooseAnImageField().setMaximumUploadSize(getValue());
+            }
           }
         }
       }
 
       @Order(30)
-      public class FileDialogBox extends AbstractGroupBox {
+      public class FileChooserBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("FileDialogBox");
+          return "File Chooser";
         }
 
-        @Order(40)
-        public class UploadSingleFileButton extends AbstractButton {
+        @Order(10)
+        public class UploadButtonsBox extends AbstractSequenceBox {
 
           @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("UploadSingleFile");
+          protected boolean getConfiguredLabelVisible() {
+            return false;
           }
 
-          @Override
-          protected void execClickAction() {
-            FileChooser fc = new FileChooser(false);
-            List<BinaryResource> files = fc.startChooser();
-            for (BinaryResource file : files) {
-              getServerLogField().addLine(file);
+          @Order(40)
+          public class UploadSingleFileButton extends AbstractButton {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("UploadSingleFile");
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected void execClickAction() {
+              FileChooser fc = new FileChooser(false);
+              List<BinaryResource> files = fc.startChooser();
+              for (BinaryResource file : files) {
+                getServerLogField().addLine(file);
+              }
             }
           }
-        }
 
-        @Order(50)
-        public class UploadMultipleFilesButton extends AbstractButton {
+          @Order(50)
+          public class UploadMultipleFilesButton extends AbstractButton {
 
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("UploadMultipleFiles");
-          }
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("UploadMultipleFiles");
+            }
 
-          @Override
-          protected void execClickAction() {
-            FileChooser fc = new FileChooser(true);
-            List<BinaryResource> files = fc.startChooser();
-            for (BinaryResource file : files) {
-              getServerLogField().addLine(file);
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected void execClickAction() {
+              FileChooser fc = new FileChooser(true);
+              List<BinaryResource> files = fc.startChooser();
+              for (BinaryResource file : files) {
+                getServerLogField().addLine(file);
+              }
             }
           }
         }
@@ -324,7 +396,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
           @Override
           protected int getConfiguredGridH() {
-            return 3;
+            return 5;
           }
 
           public void addLine(BinaryResource file) {
@@ -460,6 +532,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
     @Order(280)
     public class OkButton extends AbstractOkButton {
+
       @Override
       protected void execInitField() {
         setVisible(getDisplayHint() == DISPLAY_HINT_DIALOG);
