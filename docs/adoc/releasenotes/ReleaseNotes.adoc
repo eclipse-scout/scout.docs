@@ -25,4 +25,4 @@ Eclipse Scout 6.0 is part of the Eclipse Neon release. The latest stable version
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
-include:ReleaseNotes_6_0.adoc[]
+include::ReleaseNotes_6_0.adoc[]
