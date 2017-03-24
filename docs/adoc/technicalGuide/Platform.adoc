@@ -161,7 +161,7 @@ But sometimes it is necessary to create beans already at the application startup
 
 ===== Constructors
 
-Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after the instance have been created.
+Beans must have empty constructors so that the bean manager can create instances. But furthermore it is possible to mark methods with the `javax.annotation.@PostConstruct` annotation. Those methods must have no parameters and will be called after instances have been created.
 
 TIP: When querying the bean manager for an application scoped bean, it will always return the same instance. However, the constructor of an application scoped bean may run more than once, whereas a method annotated with @PostConstruct in an application scoped been is guaranteed to run exactly once.
 
@@ -252,6 +252,17 @@ The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the serve
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanDecorationFactory]
 ----
+
+==== Destroy Beans
+
+Application scoped beans can declare methods annotated with `javax.annotation.@PreDestroy`. These methods will be called when the Scout platform is stopping.
+The methods may have any visibility modifier but must not be static and must not declare any parameters.
+If such a pre-destroy method throws an exception, the platform will continue to call all other pre-destroy methods (even methods on the same bean).
+
+Please note that pre-destroy methods are only called for application-scoped beans that already have created their instance.
+
+Pre-destroy methods inherited from super classes are always called after the ones from the class itself. Methods that are overridden are only called on the leaf class.
+Private methods are always called (because they cannot be overridden). The order in which multiple methods in the same declaring class are called is undefined.
 
 [[sec-config.management]]
 === Configuration Management

@@ -153,3 +153,5 @@ image::{imgsdir}/tree_icons.png[]
 == NumberColumn: new property "allowedAggregationFunctions", new aggregation type for no aggregation
 The new property `allowedAggregationFunctions` can be set to any array of the aggregation functions `sum`, `avg`, `min`, `max` and `none` (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type `none` was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type `none` is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.
 
+== @PreDestroy support for @ApplicationScoped beans
+Application scoped beans can declare methods annotated with `javax.annotation.@PreDestroy`. These methods will be called when the Scout platform is stopping. For more details see the link:{techdoc}#destroy-beans[Scout Technical Documentation].
