@@ -43,8 +43,8 @@
       <artifactId>org.eclipse.scout.rt.server.test</artifactId>
       <scope>test</scope>
     </dependency>
-	<!-- tag::Derby[] -->
-	<!-- database related dependencies --> <!--1-->
+  <!-- tag::Derby[] -->
+  <!-- database related dependencies --> <!--1-->
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
-      <version>10.11.1.1</version>
+      <version>10.13.1.1</version>
     </dependency>
   </dependencies>
   <!-- end::Derby[] -->
