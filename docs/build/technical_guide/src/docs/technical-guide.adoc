@@ -17,6 +17,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 // Scout Technical Guide
 //-----------------------------------------------------------------------------
 
+:doc_version_7_0: https://eclipsescout.github.io/7.0/technical-guide.html
+include::{mdledir}/release_oxygen_6_1.adoc[]
+
 :sectnums!:
 
 == Introduction
