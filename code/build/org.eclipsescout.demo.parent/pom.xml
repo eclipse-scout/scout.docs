@@ -14,7 +14,7 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo</artifactId>
-  <version>6.0.300-SNAPSHOT</version>
+  <version>6.0.300.0</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo</name>
