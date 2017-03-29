@@ -23,12 +23,12 @@
 
   <properties>
     <jdk.source.version>1.7</jdk.source.version>
-    <org.eclipse.scout.rt.version>6.1.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>6.1.0.M6</org.eclipse.scout.rt.version>
   </properties>
 
   <groupId>org.eclipse.scout.widgets</groupId>
   <artifactId>org.eclipse.scout.widgets</artifactId>
-  <version>6.1.0-SNAPSHOT</version>
+  <version>6.1.0.M6</version>
   <packaging>pom</packaging>
   <name>Widgets Application</name>
 
