@@ -11,6 +11,9 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
+:doc_version_7_0: https://eclipsescout.github.io/7.0/beginners-guide.html
+include::{mdledir}/release_oxygen_6_1.adoc[]
+
 include::{mdledir}/BookPreface.adoc[]
 
 :numbered:

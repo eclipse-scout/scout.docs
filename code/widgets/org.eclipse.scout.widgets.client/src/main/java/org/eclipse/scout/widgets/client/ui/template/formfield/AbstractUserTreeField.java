@@ -43,6 +43,11 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     return true;
   }
 
+  @Override
+  protected int getConfiguredMaxLength() {
+    return Integer.MAX_VALUE;
+  }
+
   protected List<Node> parseFieldValue(boolean isTree) {
     Map<String, Node> parents = new HashMap<String, Node>();
     Node root = new Node();
