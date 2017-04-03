@@ -17,11 +17,17 @@
 = Eclipse Scout - Docs
 
 This Repository is part of the *Eclipse Scout* project.
-It contains the source of the documentation items (Eclipse Help, Scout Books, HTML pages...) and some demo applications created with the framework.
+It contains the source of the documentation items and some demo applications created with the framework.
+The documentation is published on link:http://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:http://help.eclipse.org/[Eclipse Help Center].
 
 link:{scout_home}[Eclipse Scout] is a mature and open framework for modern, service oriented business applications.
-It substantially boosts developer productivity and is simple to learn.
+The framework is based on Java/HTML5. 
 
+Eclipse Scout is built to
+
+* Support the implementation of sustainable business applications
+* Boosts developer productivity
+* Make it simple to learn
 
 
 == Documentation & Links
@@ -40,7 +46,6 @@ It substantially boosts developer productivity and is simple to learn.
 * `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
 
 This repository follows the same link:{scout_branch}[git branching policy] as the other eclipse scout repositories.
-The *develop* branch contains the latest version.
 
 
 == Build
