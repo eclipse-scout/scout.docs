@@ -56,9 +56,10 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayParentLookupCall.DisplayParent;
-import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.CacheBoundsField;
@@ -909,59 +910,6 @@ public class FormForm extends AbstractForm implements IPageForm {
 
       public int getValue() {
         return m_value;
-      }
-    }
-  }
-
-  @ApplicationScoped
-  public static class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
-
-    private static final long serialVersionUID = 1L;
-
-    @Override
-    protected List<? extends ILookupRow<DisplayViewId>> execCreateLookupRows() {
-      List<LookupRow<DisplayViewId>> rows = new ArrayList<>();
-      for (DisplayViewId displayViewId : DisplayViewId.values()) {
-        rows.add(new LookupRow<>(displayViewId, displayViewId.getDisplayText()));
-      }
-      return rows;
-    }
-
-    public static enum DisplayViewId {
-
-      N(IForm.VIEW_ID_N),
-      NE(IForm.VIEW_ID_NE),
-      E(IForm.VIEW_ID_E),
-      SE(IForm.VIEW_ID_SE),
-      S(IForm.VIEW_ID_S),
-      SW(IForm.VIEW_ID_SW),
-      W(IForm.VIEW_ID_W),
-      NW(IForm.VIEW_ID_NW),
-      Center(IForm.VIEW_ID_CENTER, "C (Center)"),
-      Outline(IForm.VIEW_ID_OUTLINE, "[Deprecated] Outline"),
-      OutlineSelector(IForm.VIEW_ID_OUTLINE_SELECTOR, "[Deprecated] OutlineSelector"),
-      Detail(IForm.VIEW_ID_PAGE_DETAIL, "[Deprecated] PageDetail"),
-      Search(IForm.VIEW_ID_PAGE_SEARCH, "[Deprecated] PageSearch"),
-      Table(IForm.VIEW_ID_PAGE_TABLE, "[Deprecated] PageTable");
-
-      private final String m_value;
-      private final String m_displayText;
-
-      private DisplayViewId(String value) {
-        this(value, null);
-      }
-
-      private DisplayViewId(String value, String displayText) {
-        m_value = value;
-        m_displayText = (displayText == null ? name() : displayText);
-      }
-
-      public String getValue() {
-        return m_value;
-      }
-
-      public String getDisplayText() {
-        return m_displayText;
       }
     }
   }
