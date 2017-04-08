@@ -1,2 +1,0 @@
-NOTE: Are you looking for the _Oxygen version_ (2017) of the Eclipse Scout documentation?
-      See the link:{doc_version_7_0}[7.0 version] of this document.

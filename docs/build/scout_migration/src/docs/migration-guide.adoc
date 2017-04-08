@@ -15,9 +15,6 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 //:numbered:
 
-:doc_version_7_0: https://eclipsescout.github.io/7.0/migration-guide.html
-include::{mdledir}/release_oxygen_6_1.adoc[]
-
 include::{mdledir}/migration/MigrationGuide.adoc[]
 
 include::{mdledir}/_footer.adoc[]
