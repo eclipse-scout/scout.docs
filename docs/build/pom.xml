@@ -28,10 +28,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
-    <asciidoctorj.pdf.version>1.5.0-alpha.11</asciidoctorj.pdf.version>
-    <asciidoctorj.version>1.5.4</asciidoctorj.version>
-    <jruby.version>9.0.4.0</jruby.version>
+    <asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
+    <asciidoctorj.pdf.version>1.5.0-alpha.14</asciidoctorj.pdf.version>
+    <asciidoctorj.version>1.5.5</asciidoctorj.version>
+    <jruby.version>9.1.8.0</jruby.version>
   </properties>
 
   <modules>
