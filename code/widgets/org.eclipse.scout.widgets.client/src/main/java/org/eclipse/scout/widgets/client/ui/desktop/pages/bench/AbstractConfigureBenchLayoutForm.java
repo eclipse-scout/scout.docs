@@ -1,8 +1,6 @@
 package org.eclipse.scout.widgets.client.ui.desktop.pages.bench;
 
 import java.math.BigDecimal;
-import java.util.Optional;
-import java.util.function.Function;
 
 import org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -140,12 +138,13 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
 
       @Override
       protected void execInitField() {
-        setValue(Optional.ofNullable(getLayoutDataForUpdate()).map(new Function<T, BigDecimal>() {
-          @Override
-          public BigDecimal apply(T t) {
-            return BigDecimal.valueOf(t.getInitial());
-          }
-        }).orElse(BigDecimal.ZERO));
+        T ld = getLayoutDataForUpdate();
+        if (ld == null) {
+          setValue(BigDecimal.ZERO);
+        }
+        else {
+          setValue(BigDecimal.valueOf(ld.getInitial()));
+        }
       }
 
       @Override
@@ -166,12 +165,13 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
 
       @Override
       protected void execInitField() {
-        setValue(Optional.ofNullable(getLayoutDataForUpdate()).map(new Function<T, Boolean>() {
-          @Override
-          public Boolean apply(T t) {
-            return t.isRelative();
-          }
-        }).orElse(Boolean.FALSE));
+        T ld = getLayoutDataForUpdate();
+        if (ld == null) {
+          setValue(Boolean.FALSE);
+        }
+        else {
+          setValue(ld.isRelative());
+        }
       }
 
       @Override
@@ -207,12 +207,13 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
 
       @Override
       protected void execInitField() {
-        setValue(Optional.ofNullable(getLayoutDataForUpdate()).map(new Function<T, BigDecimal>() {
-          @Override
-          public BigDecimal apply(T t) {
-            return BigDecimal.valueOf(t.getGrow());
-          }
-        }).orElse(BigDecimal.ONE));
+        T ld = getLayoutDataForUpdate();
+        if (ld == null) {
+          setValue(BigDecimal.ONE);
+        }
+        else {
+          setValue(BigDecimal.valueOf(ld.getGrow()));
+        }
       }
 
       @Override
@@ -248,12 +249,13 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
 
       @Override
       protected void execInitField() {
-        setValue(Optional.ofNullable(getLayoutDataForUpdate()).map(new Function<T, BigDecimal>() {
-          @Override
-          public BigDecimal apply(T t) {
-            return BigDecimal.valueOf(t.getShrink());
-          }
-        }).orElse(BigDecimal.ONE));
+        T ld = getLayoutDataForUpdate();
+        if (ld == null) {
+          setValue(BigDecimal.ONE);
+        }
+        else {
+          setValue(BigDecimal.valueOf(ld.getShrink()));
+        }
       }
 
       @Override
