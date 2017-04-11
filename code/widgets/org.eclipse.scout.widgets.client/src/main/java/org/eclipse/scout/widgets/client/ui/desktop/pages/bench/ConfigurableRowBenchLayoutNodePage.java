@@ -45,7 +45,7 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
 
   }
 
-  @ClassId("c0d9b110-01b0-4456-9dd0-2671253c0e90")
+  @ClassId("b88bd47c-54b3-49cb-88e4-448b3c4dda12")
   private class TopForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
@@ -66,7 +66,7 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
 
   }
 
-  @ClassId("2f9a63ae-3c2c-4a12-b7fc-0114a834dbfd")
+  @ClassId("824b1cca-c378-4980-be7f-06fa7cf6dc34")
   private class CenterForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {

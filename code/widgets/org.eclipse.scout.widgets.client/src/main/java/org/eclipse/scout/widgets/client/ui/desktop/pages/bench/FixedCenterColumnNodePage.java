@@ -8,7 +8,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm;
 
-@ClassId("c63c9a87-c387-4e8f-ad6f-3b56974ae1bb")
+@ClassId("fa1b1d26-4e3e-468b-b091-dd24671a1948")
 public class FixedCenterColumnNodePage extends AbstractBenchLayoutPageWithNodes {
 
   @Override

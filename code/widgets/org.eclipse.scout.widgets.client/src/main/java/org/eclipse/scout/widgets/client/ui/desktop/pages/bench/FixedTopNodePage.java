@@ -8,7 +8,7 @@ import org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 
-@ClassId("c63c9a87-c387-4e8f-ad6f-3b56974ae1bb")
+@ClassId("79c3d957-ecf3-4b1f-9059-444758612221")
 public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
 
   @Override
@@ -48,7 +48,7 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
 
   }
 
-  @ClassId("c0d9b110-01b0-4456-9dd0-2671253c0e90")
+  @ClassId("f7eb276e-25b2-4ec2-9072-c33d0e954bce")
   private class TopForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
@@ -69,7 +69,7 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
 
   }
 
-  @ClassId("2f9a63ae-3c2c-4a12-b7fc-0114a834dbfd")
+  @ClassId("49ad0efa-6f20-442f-ac0e-ba25ef2740a8")
   private class CenterForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
