@@ -36,6 +36,7 @@ public class DesktopBenchLayoutPage extends AbstractPageWithNodes implements IFo
     pageList.add(new ConfigurableColumnBenchLayoutNodePage());
     pageList.add(new ConfigurableRowBenchLayoutNodePage());
     pageList.add(new NullLayoutDataNodePage());
+    pageList.add(new CachedBenchLayoutNodePage());
   }
 
 }

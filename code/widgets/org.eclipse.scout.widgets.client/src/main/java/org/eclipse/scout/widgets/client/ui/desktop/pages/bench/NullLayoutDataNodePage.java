@@ -12,7 +12,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
 
   @Override
   protected String getConfiguredTitle() {
-    return "Null layout";
+    return "Null Layout";
   }
 
   @Override

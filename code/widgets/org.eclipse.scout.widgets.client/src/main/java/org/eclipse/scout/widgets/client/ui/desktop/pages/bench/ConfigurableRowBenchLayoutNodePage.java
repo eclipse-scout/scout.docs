@@ -10,10 +10,11 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 
 @ClassId("29c3d138-cf65-4359-8a8b-0dda7cb48c37")
 public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes {
+  public static final String TITLE = "Row Bench Layout";
 
   @Override
   protected String getConfiguredTitle() {
-    return "Row Bench Layout";
+    return TITLE;
   }
 
   @Override
@@ -30,7 +31,7 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
   protected void execCreatePageForms(List<IForm> formList) {
 
     // top form
-    TopForm top = new TopForm();
+    NorthForm top = new NorthForm();
     top.start();
     formList.add(top);
 
@@ -39,14 +40,14 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
     center.start();
     formList.add(center);
     // south
-    BottomForm bottom = new BottomForm();
+    SouthForm bottom = new SouthForm();
     bottom.start();
     formList.add(bottom);
 
   }
 
   @ClassId("b88bd47c-54b3-49cb-88e4-448b3c4dda12")
-  private class TopForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
+  public class NorthForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
       return VIEW_ID_N;
@@ -67,7 +68,7 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
   }
 
   @ClassId("824b1cca-c378-4980-be7f-06fa7cf6dc34")
-  private class CenterForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
+  public class CenterForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
       return VIEW_ID_CENTER;
@@ -87,7 +88,7 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
   }
 
   @ClassId("3441dbef-e4d4-4bcb-a919-41fe955f8f53")
-  private class BottomForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
+  public class SouthForm extends AbstractConfigureBenchLayoutForm<FlexboxLayoutData> {
     @Override
     protected String getConfiguredDisplayViewId() {
       return VIEW_ID_S;
