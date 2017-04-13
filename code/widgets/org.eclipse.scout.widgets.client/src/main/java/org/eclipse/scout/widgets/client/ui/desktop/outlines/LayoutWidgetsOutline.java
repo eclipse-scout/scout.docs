@@ -17,6 +17,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.bench.DesktopBenchLayoutPage;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.SequenceBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm;
@@ -39,6 +40,7 @@ public class LayoutWidgetsOutline extends AbstractOutline {
     pageList.add(new FormPage(SequenceBoxForm.class));
     pageList.add(new FormPage(TabBoxForm.class));
     pageList.add(new FormPage(SplitBoxForm.class));
+    pageList.add(new DesktopBenchLayoutPage());
     FormPage.sort(pageList);
   }
 }

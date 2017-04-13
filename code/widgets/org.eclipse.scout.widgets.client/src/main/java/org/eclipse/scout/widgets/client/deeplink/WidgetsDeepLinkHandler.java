@@ -13,6 +13,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 /**
  * Deep-link handler allows to navigate to a specific outline and form within the widgets application.
@@ -61,7 +62,11 @@ public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
       for (ITreeNode topLevelNode : rootNode.getChildNodes()) {
         if (topLevelNode.isVisible() && topLevelNode instanceof IFormPage) {
           IFormPage formPage = (IFormPage) topLevelNode;
-          String tmpWidgetName = toWidgetName(formPage.getFormType());
+          Class<? extends IPageForm> formType = formPage.getFormType();
+          if (formType == null) {
+            continue;
+          }
+          String tmpWidgetName = toWidgetName(formType);
           if (widgetName.equals(tmpWidgetName)) {
             outlineToActivate = outline;
             pageToActivate = (IPage) topLevelNode;
