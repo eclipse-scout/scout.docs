@@ -166,3 +166,8 @@ image::{imgsdir}/tree_icons.png[]
 == File Chooser Field: Improved Usability
 The file chooser field does not open an intermediate window anymore when clicked. Instead, the native file chooser is opened directly. This saves several clicks when a file needs to be uploaded.
 Furthermore, the whole field is now clickable. Until now the icon had to be clicked to choose a file which did not work well on touch devices.
+
+
+== Desktop Bench Layout configurable
+The Desktop Layout can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the applications lifecycle.
+For more information take a look at teh https://eclipsescout.github.io/6.1/technical-guide.html#desktop[Technical Guide].
