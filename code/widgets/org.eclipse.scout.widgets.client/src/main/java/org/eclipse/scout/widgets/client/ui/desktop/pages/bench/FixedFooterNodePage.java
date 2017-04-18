@@ -29,7 +29,7 @@ public class FixedFooterNodePage extends AbstractBenchLayoutPageWithNodes {
     return new BenchLayoutData()
         .withCenter(new BenchColumnData()
             .withCenter(new FlexboxLayoutData())
-            .withBottom(new FlexboxLayoutData().withRelative(false).withInitial(-1).withGrow(0).withShrink(0)));
+            .withSouth(new FlexboxLayoutData().withRelative(false).withInitial(-1).withGrow(0).withShrink(0)));
   }
 
   @Override
