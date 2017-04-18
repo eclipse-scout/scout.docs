@@ -77,7 +77,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getWest().withTop(layoutData);
+      benchLayoutData.getWest().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
 
@@ -118,7 +118,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getWest().withBottom(layoutData);
+      benchLayoutData.getWest().withSouth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
@@ -138,7 +138,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getCenter().withTop(layoutData);
+      benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
 
@@ -179,7 +179,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getCenter().withBottom(layoutData);
+      benchLayoutData.getCenter().withSouth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
@@ -199,7 +199,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getEast().withTop(layoutData);
+      benchLayoutData.getEast().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
 
@@ -240,7 +240,7 @@ public class NullLayoutDataNodePage extends AbstractBenchLayoutPageWithNodes {
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getEast().withBottom(layoutData);
+      benchLayoutData.getEast().withSouth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }

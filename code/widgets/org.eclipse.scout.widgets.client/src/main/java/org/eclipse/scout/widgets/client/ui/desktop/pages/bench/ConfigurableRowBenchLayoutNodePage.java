@@ -22,9 +22,9 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
     return new BenchLayoutData()
         .withCenter(
             new BenchColumnData()
-                .withTop(new FlexboxLayoutData())
+                .withNorth(new FlexboxLayoutData())
                 .withCenter(new FlexboxLayoutData())
-                .withBottom(new FlexboxLayoutData()));
+                .withSouth(new FlexboxLayoutData()));
   }
 
   @Override
@@ -55,13 +55,13 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
 
     @Override
     protected FlexboxLayoutData getLayoutDataForUpdate() {
-      return getDesktop().getBenchLayoutData().getCenter().getTop().copy();
+      return getDesktop().getBenchLayoutData().getCenter().getNorth().copy();
     }
 
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getCenter().withTop(layoutData);
+      benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
 
@@ -96,13 +96,13 @@ public class ConfigurableRowBenchLayoutNodePage extends AbstractBenchLayoutPageW
 
     @Override
     protected FlexboxLayoutData getLayoutDataForUpdate() {
-      return getDesktop().getBenchLayoutData().getCenter().getBottom().copy();
+      return getDesktop().getBenchLayoutData().getCenter().getSouth().copy();
     }
 
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getCenter().withBottom(layoutData);
+      benchLayoutData.getCenter().withSouth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }

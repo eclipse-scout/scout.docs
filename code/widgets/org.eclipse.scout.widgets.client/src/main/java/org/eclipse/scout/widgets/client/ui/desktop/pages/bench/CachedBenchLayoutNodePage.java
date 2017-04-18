@@ -99,13 +99,13 @@ public class CachedBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes 
 
     @Override
     protected FlexboxLayoutData getLayoutDataForUpdate() {
-      return getDesktop().getBenchLayoutData().getEast().getTop().copy();
+      return getDesktop().getBenchLayoutData().getEast().getNorth().copy();
     }
 
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getEast().withTop(layoutData);
+      benchLayoutData.getEast().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }
@@ -139,13 +139,13 @@ public class CachedBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes 
 
     @Override
     protected FlexboxLayoutData getLayoutDataForUpdate() {
-      return getDesktop().getBenchLayoutData().getEast().getBottom().copy();
+      return getDesktop().getBenchLayoutData().getEast().getSouth().copy();
     }
 
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getEast().withBottom(layoutData);
+      benchLayoutData.getEast().withSouth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
   }

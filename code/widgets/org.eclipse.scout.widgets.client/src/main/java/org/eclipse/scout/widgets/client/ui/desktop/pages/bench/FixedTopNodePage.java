@@ -21,7 +21,7 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
     return new BenchLayoutData()
         .withCenter(
             new BenchColumnData()
-                .withTop(new FlexboxLayoutData().withInitial(-1).withGrow(0).withShrink(0))
+                .withNorth(new FlexboxLayoutData().withInitial(-1).withGrow(0).withShrink(0))
                 .withCenter(new FlexboxLayoutData()));
 
   }
@@ -57,13 +57,13 @@ public class FixedTopNodePage extends AbstractBenchLayoutPageWithNodes {
 
     @Override
     protected FlexboxLayoutData getLayoutDataForUpdate() {
-      return getDesktop().getBenchLayoutData().getCenter().getTop().copy();
+      return getDesktop().getBenchLayoutData().getCenter().getNorth().copy();
     }
 
     @Override
     protected void storeLayoutData(FlexboxLayoutData layoutData) {
       BenchLayoutData benchLayoutData = getDesktop().getBenchLayoutData().copy();
-      benchLayoutData.getCenter().withTop(layoutData);
+      benchLayoutData.getCenter().withNorth(layoutData);
       getDesktop().setBenchLayoutData(benchLayoutData);
     }
 
