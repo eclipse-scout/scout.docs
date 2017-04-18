@@ -733,6 +733,26 @@ public class MenusForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(15)
+      @ClassId("e8c7155f-3ea7-45fc-a38e-97743854fcc7")
+      public class LargePngIconMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredIconId() {
+          return "eclipse_scout_logo";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Large PNG Icon Menu";
+        }
+
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withHeader("You clicked me!").show();
+        }
+      }
+
       @Order(20)
       @ClassId("eca8764e-1839-4912-9c0d-ff64b39c300a")
       public class PngIconWithTextMenu extends AbstractMenu {
