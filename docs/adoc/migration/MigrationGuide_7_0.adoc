@@ -5,165 +5,42 @@ Howto:
 - Choose the right top level chapter (java, js, other)
 ////
 
+== Migration Guide from Scout 6.1 to Scout 7.0
+
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
   =============================================================================
 ////
 
-== API Changes (Java)
+=== API Changes (Java)
 
-=== Text Provider Service
-The method `AbstractDynamicNlsTextProviderService#getDynamicNlsBaseName` has been made public. Adjust the method in your text provider service accordingly.
+==== New scout modules for Jackson-based REST services
 
-=== Mnemonics
-Mnemonics are not supported anymore. All affected texts were either edited or removed because they are not used anymore.
+The following new Scout modules were added to support Jackson-based REST services:
 
-Migration: Remove all mnemonics (`&`) from your text files as they will not be considered anymore. Replace `&&`  with `&`. (`&&` was used to escape the mnemonic behaviour and display a single `&` in a text.)
+* `org.eclipse.scout.rt.rest`
+* `org.eclipse.scout.rt.rest.test`
+* `org.eclipse.scout.rt.jackson`
+* `org.eclipse.scout.rt.jackson.test`
 
-The following methods were or will be removed:
+In order to use REST services based on the JAX-RS Jersey implementation, the following section must be added to the project `web.xml`:
 
-* `StringUtility.removeMnemonic`
-* `StringUtility.getMnemonic`
-* `IAction.PROP_TEXT_WITH_MNEMONIC`
-* `IAction.PROP_MNEMONIC`
-* `IAction.getTextWithMnemonic`
-* `IAction.getMnemonic`
-* `strings.removeMnemonic`
-* `strings.removeAmpersand`
-
-=== getFocusOwner
-Method getFocusOwner() was removed from IDesktop, IForm and DesktopEvent. Since replacing the old rich client ui technologies (swing, swt) with the modern html ui, this method didn't work correctly anymore.
-
-There are no plans to implement correctly because of multiple reasons. It would increase network traffic between browser and ui server and also would be quite unreliable. The old behaviour was a synchronious result from the ui (swing, swt), which was feasible in rich client environments. But with a distant browser, a realtime result is hard to achieve and might already by outdated by its arrival at the ui server.
-
-If such functionality is needed, it has to be programmed with java script within the browser.
-
-=== FinalValue
-`setIfAbsent` has been renamed to `setIfAbsentAndGet`. `setIfAbsent` now returns a boolean denoting, if a value was set or not.
-
-=== @PostConstruct
-A method annotated with `@PostConstruct` in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.
-
-=== Tree
-The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the default implementation now considers `enabledNodesOnly` and does not always ignore disabled nodes.
-
-=== Table
-`Cell.setText(null)` has no effect anymore. The JavaScript table has been improved so that every column is now able to compute the text based on the value of a cell. This does only happen if no explicit text is provided which means `cell.setText(null)` would trigger that behavior. If you really want to set a value but no text, you can use `cell.textText("")` instead.
-
-=== CookieUtility
-`CookieUtility` was moved from _org.eclipse.scout.rt.ui.html_ to _org.eclipse.scout.rt.server.commons_. Migrate by updating your imports. The Method `addCookie()` is now called `addPersistentCookie()`. Additional methods are available (to add a session cookie, or delete an existing cookie).
-
-=== Pair
-The `Pair` class was made abstract and two default implementations for a mutable pair (class `MutablePair`) and immutable pair (`ImmutablePair`) were added. Since the former `Pair` class was immutable, all occurences were changed to use the new `ImmutablePair` class. Migrate by update all occurences to use the new `ImmutablePair`.
-
-=== Customizing CSP directives
-The method `org.eclipse.scout.rt.server.commons.servlet.HttpServletControl.getCspDirectives()` is no longer available. CSP directives are now configured by the the bean `org.eclipse.scout.rt.server.commons.servlet.ContentSecurityPolicy`. To customize the rules, replace this bean with your own implementation and override the method `initDirectives()`. The bean provides fluent-style _withFooBar()_ methods.
-
-=== StringUtility.contains() deprecated
-The method `StringUtility.contains()` was marked as deprecated and will be removed in the P-release. The method was often used incorrectly due to poor documentation and unconventional implementation. The utility provides multiple new methods that can be used as a replacement:
-
-containsString():: null-safe variant of String.contains()
-containsStringIgnoreCase():: like containsString(), but ignores capitaliziation. Make sure to read the JavaDoc!
-containsRegEx():: checks if the given regular expression matches part of the given string (essentially, this method automatically adds `.*` on both sides of the regular expression)
-matches():: null-safe variant of String.matches(), also allows to set the pattern flags
-
-=== BrowserInfo
-The class `BrowserInfo` was renamed to a more generic `HttpClientInfo` name, since the HTTP client can either be a browser, but may also be another server using the built-in HTTP client of the VM.
-
-Futher the `HttpClientInfo` instance for each request is cached on the current HTTP session, if a session is available. Use the new `HttpClientInfo get(HttpServletRequest request)` method to get the cached HTTP client info.
-
-=== Virtual Tree Node
-The Virtual tree node has been deleted. The main reason for this was because of table pages: If an `AbstractPageWithTable` contains a lot of rows, for each of them a child page is created. To have these child pages as lightweight as possible the virtual node was introduced. This node was created for each row and only after activating a row (click by the user) the real child page has been created.
-
-Now instead of creating a virtual node first an probably the real page afterwards the real page is created directly. Therefore the instance creation of pages below table pages should be very fast and not perform any backend calls.
-To assure this it is recommended to move any expensive operation currently implemented in the `execInit()` method to `execCreateChildPages()` or `execPageActivated()`.
-Permission checks or similar operations, which use the `setVisibleGranted(boolean)` method, should be moved to the newly created `execCalculateVisible()` method. The default behavior is that the `execCalculateVisible` method is executed on instance creation. Subclasses of `AbstractPageWithTable` potentially have a large number of child pages. To avoid performance issues due to expensive permission checks, the `execCalculateVisible` for these children is only executed before loading the page data.
-
-Furthermore to save memory it is recommended to create the tables below pages lazily. The table is created upon the first access to `IPage.getTable()`. Therefore try not to use `getTable()` in the page init phase. Instead a new callback `execInitTable` is available to initialize the table at the moment it is created. There is also an overload `getTable(boolean)` that can be used to access the table without automatically creating it.
-
-=== Enabled Property of Form Fields
-The inheritance of the enabled property of form fields has been changed so that changing this property on a composite field does no longer automatically propagate the value to the children.
-Instead a form field is only considered to be enabled if all parent fields are enabled too.
-
-To have the same behaviour you can use the method `formField.setEnabled(yourValue, true /* update parents \*/, true /* update children */)` which also propagates the value to parent and child fields.
-The same method also exists for the enabled-granted property: `formField.setEnabledGranted(yourValue, true, true)`.
-However often it may no longer be required to actively propagate the new value to children. Therefore it is recommended to check the business logic manually where possible.
-
-Furthermore the meaning of property change listeners changed. Check all the listeners using the `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED` property.
-This property is now only fired if the state of the form field itself has changed. If the enabled state of a parent field is modified, this property change event will no longer be fired.
-The actual enabled state of the field could have changed even though because the parents have an influence now. If the listener should also be notified about changes of the parents use the new property `org.eclipse.scout.rt.client.ui.form.fields.IFormField.PROP_ENABLED_COMPUTED`.
-
-=== Icons in Tree
-When the new Html UI was introduced the support for icons on tree nodes was dropped. But some projects really missed that feature so it was introduced again with this release. This means when your tree node
-provides an `iconId`, the UI will display the icon referenced by the ID. The tree supports bitmap and font-icons. Since there are Scout projects migrating from an older Scout version (before Html UI
-was introduced) to a Scout version with Html UI (but before 6.1) they may still have iconIds configured, but since these icons were never displayed in their application, they probably want to stick
-with that behavior without changing their getConfiguredIconId() methods. For that purpose the Session init property `showTreeIcons` was introduced. By default the property is false, which means you
-won't see icons in the Tree, even if your model has an iconId configured. Set the property to true, to enable the support for icons (this will be default starting from release 6.2.x). Example for `index.js`:
-
-[source,javascript]
+[source,xml]
 ----
-$(document).ready(function() {
-  var app = new scout.RemoteApp();
-  app.init({
-    session: {
-      showTreeIcons: true
-    }
-  });
-});
+<!-- JAX-RS Jersey Servlet -->
+<servlet>
+  <servlet-name>api</servlet-name>
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+  <init-param>
+    <param-name>javax.ws.rs.Application</param-name>
+    <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+</servlet>
 ----
 
-=== ITableHolder
-The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
-Therefore the class `ITableHolder` has been removed. The constants that were present on that interface can be accessed using the interface `org.eclipse.scout.rt.client.ui.basic.table.ITableRow` from the client or `org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder` from outside the client.
-
-=== NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()
-The `nvl()` methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic `ObjectUtility.nvl()`.
-The existing methods were deprecated and will be removed with next Scout release.
-Additionally the existing methods were restricted to use Number respectively Date only.
-
-=== StringUtility.substituteWhenEmpty()
-The existing methods was deprecated and will be removed with next Scout release.
-Use StringUtility.hasText() and StringUtility.emptyIfNull() or StringUtility.nullIfEmpty() instead.
-
-=== CompareUtility
-The various null-safe compare methods on CompareUtility were moved to the new generic ObjectUtility.
-The existing methods were deprecated and will be removed with next Scout release.
-
-=== ThreadInterrupted-, TimedOut- and FutureCancelledExceptions ("extends java.lang.RuntimeException") are now PlatformErrors ("extends java.lang.Error")
-There were circumstances where the cancellation of long-running actions did not work or lead to unpleasant behaviors (for example multiple `ExceptionForm`, that is displayed after a cancellation by the user).  Most of time caught exceptions where the reason for such behaviors.
-
-In order to get rid of those problems, we have decided that the former `RuntimeExceptions` will become `Errors` and therefore should no longer be swallowed by `catch (RuntimeException e)`. See *Eclipse Scout: Technical Guide* for more information about the new `Throwable` hierarchy.
-
-=== Type of "labelPosition" property changed to "byte" (IFormField)
-The type of the labelPosition property was changed from `int` to `byte`. This affects the setters, getters and `getConfiguredLabelWidth` methods.
-The position constants in `IFormField` were adjusted.
-
-Occurrences where such methods were overridden need to be adjusted. Otherwise no changes should be necessary.
-
-=== IDeviceTransformer
-Some methods on `IDeviceTransformer` where changed. Projects with own contributions to the device transformation process must apply these changes accordingly.
-
-[width="100%",options="header",cols="2,2,3"]
-|===
-|Old method|New method|Description
-
-|--
-|`transformPageTable(table, page)`
-|New callback that can be used to transform the page's table. Unlike `transformPage` this method is not called during the _execInitPage_ phase, but during the _execInitTable_ phase.
-
-|`transformPageDetailForm(form)`
-|`notifyPageDetailFormChanged(form)`
-|The existing method was renamed to avoid confusion with `transformPageTable` and to clearify that this method is called every time, the desktop's detail form changes (not only when the detail form is first initialized).
-
-|`transformPageDetailTable(table)`
-|`notifyPageDetailTableChanged(table)`
-|The existing method was renamed to match the new method `notifyPageDetailFormChanged` and to clearify that this method is called every time, the desktop's detail table changes (not only when the detail table is first initialized).
-
-|===
-
-=== AbstractTree.getConfiguredMultiSelect() deprecated
-The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. Multiselection on trees was never supported by the UI even though the model suggested so. The method will be declared final in the next Scout release, with its default implementation returning false, in case multiselection support is added in a future release.
+The `RestApplication` class searches for all implemenations of `IRestResource` and exposes them as REST services.
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -174,123 +51,9 @@ The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. M
   =============================================================================
 ////
 
-== API Changes (JS)
+=== API Changes (JavaScript)
 
-=== scout.graphics.prefSize()
-The signature of JavaScript method `scout.graphics.prefSize()` has changed:
-
-* Old: `scout.graphics.prefSize($elem, [line-through]##includeMargin##, options)`
-* New: `scout.graphics.prefSize($elem, options)`
-
-The argument _includeMargin_ was moved to the options object. See code documentation for a description of all options.
-
-=== scout.ModelAdapter
-If you have not created any custom widgets, you can skip this. If you only used `BeanFields` for customizing you can skip it as well.
-
-Previously every widget with a corresponding part on the server extended `scout.ModelAdapter`.
-A model adapter is the connector with the server, it takes the events sent from the server and calls the corresponding methods on the widget. It also sends events to the server whenever an action happens on the widget.
-To make the widgets usable without a server, they don't extend from `scout.ModelAdapter` anymore but directly from `scout.Widget`.
-That means every widget with a server counter part have been separated into widget and model adapter, similarly to the server side where a `IJsonAdapter` exists for every model object.
-The model adapter creates the widget and attaches itself to it meaning it listens for events triggered by the widget and sends elected ones to the server. It also takes the events from the server and calls the corresponding methods of the widget.
-
-So if you created custom widgets you have to separate them as well. Create for each widget a separate file called the same way as the Widget + 'Adapter'. That adapter extends either directly from `scout.ModelAdapter` or from the corresponding adapter of the parent widget.
-
-Example: You have created a `XyField.js` which extends from `FormField.js`. Now create a file called `XyFieldAdapter.js` and extend it from `FormFieldAdapter.js`.
-
-You now have to move the server event handling methods to the adapter, if there are any at all. If your widget does not contain a method called `onModelAction`, you are fine.
-Beside these action events the server may send property change events as well. For every property change event the adapter will automatically call the corresponding setter method. If there is none it will call the generic method `Widget.setProperty` which eventually calls the `_sync` and `_render` methods of the property.
-So if your widget contains `_sync` methods they will still be called on a server property change like before. But now you should create a JS property event to inform other widgets by using `Widget._setProperty` (note the _).
-This was previously done automatically for every property which is still done if there is no `_sync` method. If there is one you have to take care of it by yourself.
-
-For the opposite direction meaning events from UI to server you have to more or less replace the calls of `_send()` with `trigger()`. In the adapter you have to handle these widget events and call the `_send()` method accordingly.
-If it is a property change event it is even simpler. Just call `_addRemoteProperties` in the constructor of the model adapter for every property which should be sent to the server.
-
-=== scout.ModelAdapter._send()
-
-The signature of JavaScript method `scout.ModelAdapter._send()` has changed:
-
-* Old: `scout.ModelAdapter._send(type, data, [line-through]##delay, coalesceFunc, noBusyIndicator##)`
-* New: `scout.ModelAdapter._send(type, data, options)`
-
-Instead of passing individual arguments, pass all but the first two arguments in an options object:
-* `delay`
-* `coalesce`
-* `showBusyIndicator`
-
-Old:
-[source,javascript]
-----
-this._send('selected', eventData, null, function() { ... });
-----
-
-New:
-[source,javascript]
-----
-this._send('selected', eventData, {
-  coalesce: function() { ... }
-});
-----
-
-=== scout.Widget
-If you have not created any custom widgets, you can skip this.
-
-==== destroy()
-With the separation of widget and model adapter the destroy handling has been refactored.
-This means every widget may now be destroyed. Previously only the widgets which extended from `scout.ModelAdapter` could be destroyed.
-The big advantage is that every widget now behaves the same and that there finally is a counter part for the `_init()` called `_destroy()` which makes it possible to do cleanup like removing listeners.
-
-For you it means you have to decide whether you want to destroy or only remove your widgets. A widget knows the following states:
-
-. initialized
-. rendered
-. removed
-. destroyed
-
-You can remove and render the same widget as many times you want, but if you destroy it you may not use it again and you would have to create a new one.
-It eventually has to be destroyed though for a proper cleanup. Normally this is done by the parent widget, but in some rare cases you have to take care of it by your own.
-
-So check all the occurrences of `YourWidget.remove()` and maybe replace them with destroy.
-
-==== EventSupport
-Every widget now installs the event support by default. Previously `_addEventSupport` had to be called in the constructor of the widget. This may now be removed.
-
-==== KeyStrokeContext
-The method `_addKeyStrokeContextSupport` has been removed. If your widget needs keystroke support override `_createKeyStrokeContext` and provide one. You can probably use the default `scout.KeyStrokeContext`.
-The parameter of `_initKeyStrokeContext` has been removed as well. Just use `this.keyStrokeContext` instead.
-
-=== Changes in "objectType" syntax and scout.create()
-The "objectType" is a string describing which JavaScipt "class" to use when creating an object instance using `scout.create()` (roughly similar to a Java class name). To make the object factory more robust, the separator between the type and the model variant (e.g. defined by `@ModelVariant` annotation in Java) was change from `.` to `:`. The namespace separator remains `.`. This allows the following forms of object types:.
-
-* `"StringField"`: name without namespace, i.e. a type in the default namespace (resolves to `scout.StringField`)
-* `"myproject.StringField"`: namespace qualified name
-* `"StringField:MyVariant"`: type with variant (resolves to `scout.MyVariantStringField`), can also be combined with a namespace
-
-*Migration:* Check your _objectFactories.js_ and _defaultValues.json_ files (if you have any in your project) for types with variant and convert the separator from `.` to `:`.
-
-=== Changed behavior of scout.HtmlComponent() constructor function
-The constructor function scout.HtmlComponent() no longer links the $comp to the new instance. Instead, the static function scout.HtmlComponent.install() should be used to create a new HtmlComponent and link it to $comp. The constructor function should never be used anymore in custom code. (If you do, you will get errors.)
-
-The new static method makes it clearer that it will alter the state of $comp. For a normal constructor, such behavior is unexpected and thus discouraged.
-
-*Migration:* Check all _*.js_ files in your project for occurences of `new scout.HtmlComponent` and replace them with `scout.HtmlComponent.install`.
-
-[source,javascript]
-----
-  // Old, do not use anymore!
-  this.$container = $parent.appendDiv('my-widget');
-  new scout.HtmlComponent(this.$container, this.session);
-
-  // New, change your code to this (no change in first line):
-  this.$container = $parent.appendDiv('my-widget');
-  scout.HtmlComponent.install(this.$container, this.session);
-----
-
-=== Popup: Renamed option "installFocusContext" to "withFocusContext"
-
-The initialization option `installFocusContext` for _Popup.js_ instances was renamed to `withFocusContext` to match the corresponding property name.
-
-*Migration:* Check if your project explicitly sets `installFocusContext = false` in popup widget instance (created via `scout.create('scout.Popup', { ... })`) or in subclasses of `scout.Popup`. If it does, rename the option name to `withFocusContext`.
-
+#TODO#
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
@@ -301,124 +64,9 @@ The initialization option `installFocusContext` for _Popup.js_ instances was ren
   =============================================================================
 ////
 
-== Other Changes
+=== Other Changes
 
-=== CSP report URL
-By default, the `report-uri` for CSP violations is now called */csp-report* (instead of /csp.cgi).
-
-=== Reorganized *.html files due to strict CSP rules
-The *.html files (index.html, login.html, logout.html etc.) have been changed to comply with the default Content Security Policy (CSP) rules.
-
-The simplest way to migrate these files is to create them anew using the Scout SDK or maven archetype and compare them with your files. Otherwise, following this guide:
-
-By default, inline `<script>` tags in HTML files are prohibited by CSP rules. Bootstrapping JavaScript code was therefore moved to dedicated _*.js_ files in the `WebContent/res` folder. Existing projects using CSP have to manually perform the following steps:
-
-. Open each _*.html_ file in `your.project.ui.html/src/main/resources/WebContent` folder and check if there are any inline script parts. Only `<script>` tags with embedded JavaScript code are considered "inline". Tags with a `src` attribute don't need to be changed.
-. Transfer the content of each script part to a _*.js_ file in the `res` subdirectory (e.g. _index.html_ => _res/index.js_) and delete the now empty <script> part. Note that the content has changed as well, to initialize the application the new app object has to be used (scout.init -> new scout.RemoteApp().init, scout.login.init -> new scout.LoginApp().init, scout.logout.init -> new scout.LogoutApp().init)).
-. Add a reference to the _*.js_ file in the `<head>` section using the `<scout:script>` tag, e.g.: +
-`<scout:script src="res/index.js" />`
-. If the extracted _*.js_ file contains `<scout:message>` tags, they have to be moved back to the `<body>` of the corresponding _*.html_ file (because the NLS translation can only process HTML files). The attribute `style` has to be changed from `javascript` to `tag`.
-. Check the web.xml files of your _ui.html.app.\*_ projects. If you use the scout login form and if you have listed the files to be excluded explicitly (instead of using _/res/*_), then you need to add the new _*.js_ files to the `filter-exclude` section as well.
-
-Example:
-
-.login.html before migration (Scout 6.0)
-[source,html]
-----
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Contacts Application</title>
-    <scout:include template="head.html" />
-    <scout:stylesheet src="res/scout-login-module.css" />
-    <scout:script src="res/jquery-all-macro.js" />
-    <scout:script src="res/scout-login-module.js" />
-    <script> <!--1-->
-      $(document).ready(function() {
-        scout.login.init({texts: <scout:message style="javascript" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" /> });
-      });
-    </script>
-  </head>
-  <body>
-    <scout:include template="no-script.html" />
-  </body>
-</html>
-----
-<1> Prohibited inline script.
-
-.login.html after migration (Scout 6.1)
-[source,html]
-----
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Contacts Application</title>
-    <scout:include template="head.html" />
-    <scout:stylesheet src="res/scout-login-module.less" />
-    <scout:script src="res/jquery-all-macro.js" />
-    <scout:script src="res/scout-login-module.js" />
-    <scout:script src="res/login.js" /> <!--1-->
-  </head>
-  <body>
-    <scout:include template="no-script.html" />
-    <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" /> <!--2-->
-  </body>
-</html>
-----
-<1> External script reference allowed by CSP.
-<2> Moved from JavaScript call to `<body>`, changed style to `tag`.
-
-.res/login.js after migration (Scout 6.1)
-[source,javascript]
-----
-$(document).ready(function() {
-  new scout.LoginApp().init(); // <1>
-});
-----
-<1> Translated texts are extracted automatically from DOM.
-
-=== Renamed *.css files to *.less
-Because the former _*.css_ files actually were http://lesscss.org[LESS] files, we've changed the wrong file extension from `.css` to `.less`.
-This allows editors with LESS support/validation to properly work with the LESS syntax and simplifies the usage of the LESS _@import_ clause, since the `(less)` hint is not required anymore.
-
-Steps required to migrate from an older Scout version to version 6.1:
-
-* Rename all _*.css_ files in directory `/WebContent/res` to _*.less_
-* Chane the include syntax in _*-macro.less_ and _*-module.less_:
-** Old: `//@include("scout-module.css")`
-** New: `@import "scout-module.less";`
-* In each _*.html_ file in directory `/WebContent`, use _*.less_ extension in stylesheet tag:
-** Old: `<scout:stylesheet src="res/myapp-all-macro.css" />`
-** New: `<scout:stylesheet src="res/myapp-all-macro.less" />`
-
-NOTE: Importing regular `.css` files in module files (_*-module.less_) is still supported, and required in some cases.
-Just make sure that all stylesheets using LESS do have a _*.less_ file extension. Macros and modules must always be LESS files.
-
-=== UiHttpSessionListener replaced by HttpSessionMutex
-The HttpSessionListener class `org.eclipse.scout.rt.ui.html.UiHttpSessionListener` has been replaced by the listener class `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
-Therefore if the class `UiHttpSessionListener` is registered in the `web.xml` file replace it with `org.eclipse.scout.rt.server.commons.HttpSessionMutex`.
-
-=== Version check on startup
-
-After a release upgrade, the cached resources (e.g. index.html, *.js, *.css) have most likely changed and must be re-downloaded from the server. Usually, this happens automatically, because the _index.html_'s ETag has changed and the server does not respond with `HTTP 304 Not Modified`. However, we have found that there are rare cases where browsers start the JS app without checking if _index.html_ has to be updated (e.g. in Firefox when restoring tabs from a previous session or in Chrome when the "auto discard tab" feature has discarded the application's tab). This results in a mismatch between the UI and the UI server.
-
-To fix potential problems caused by old resources, a version check is performed during application startup. To enable this version check in existing applications, include the tag `<scout:version>` in `index.html`. New Scout projects created using the _helloworld_ archetype already include the tag.
-
-NOTE: The current version is determined by the value of the configuration property `scout.application.version`.
-
-Example:
-[source,html]
-----
-  ...
-  <body>
-    ...
-    <scout:version /> <!-- <1> -->
-  </body>
-  ...
-----
-<1> will be replaced by the application's version
+#TODO#
 
 // ^^^
 // Insert descriptions of other important changes here

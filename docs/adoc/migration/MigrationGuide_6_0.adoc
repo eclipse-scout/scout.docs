@@ -4,6 +4,8 @@ Howto:
 - Chronological order is not necessary.
 ////
 
+== Migration Guide to Scout 6.0
+
 This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <<Service Release Migration>>.
 
 == Service Release Migration

@@ -6,6 +6,8 @@ Howto:
 - Choose the right top level chapter (java, js, other)
 ////
 
+== Migration Guide from Scout 6.0 to Scout 6.1
+
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
@@ -415,7 +417,7 @@ Example:
   ...
   <body>
     ...
-    <scout:version /> <!-- <1> -->
+    <scout:version /> <!--1-->
   </body>
   ...
 ----
