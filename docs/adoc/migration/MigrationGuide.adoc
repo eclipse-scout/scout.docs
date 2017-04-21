@@ -15,7 +15,7 @@ ifndef::mdledir[:mdledir: .]
 include::MigrationGuide_7_0.adoc[]
 
 //-----------------------------------------------------------------------------
-// This files describe the scout migration from older previous versions
+// These files describe the scout migration from older previous versions
 //-----------------------------------------------------------------------------
 include::MigrationGuide_6_1.adoc[]
 include::MigrationGuide_6_0.adoc[]

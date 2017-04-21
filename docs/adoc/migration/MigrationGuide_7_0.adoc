@@ -13,6 +13,9 @@ Howto:
   =============================================================================
 ////
 
+NOTE: If you upgrade from version 6.0, also see the migration guide for the 6.1 release. +
+https://eclipsescout.github.io/6.1/migration-guide.html +
+
 === API Changes (Java)
 
 ==== New scout modules for Jackson-based REST services
