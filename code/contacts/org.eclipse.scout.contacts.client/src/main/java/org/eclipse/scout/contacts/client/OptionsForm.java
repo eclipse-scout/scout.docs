@@ -60,7 +60,8 @@ public class OptionsForm extends AbstractForm {
   protected void storeOptions() {
     // Not inside form handler, because the form is used in a FormToolButton without a handler
     getDesktop().setTheme(getUiThemeField().getValue());
-    boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, getLocaleField().getValue().toString());
+    Locale locale = ObjectUtility.nvl(getLocaleField().getValue(), Locale.getDefault());
+    boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toString());
     if (localeChanged) {
       ClientUIPreferences.getClientPreferences(ClientSession.get()).flush();
       MessageBoxes.createOk()
