@@ -26,7 +26,7 @@ jswidgets.FormForm.prototype._onOpenAsDialogButtonClick = function(model) {
     displayHint: scout.Form.DisplayHint.DIALOG,
     title: 'Dialog'
   });
-  this.session.desktop.showForm(form);
+  form.open();
 };
 
 jswidgets.FormForm.prototype._onOpenAsViewButtonClick = function(model) {
@@ -36,5 +36,5 @@ jswidgets.FormForm.prototype._onOpenAsViewButtonClick = function(model) {
     title: 'View',
     modal: false
   });
-  this.session.desktop.showForm(form);
+  form.open();
 };
