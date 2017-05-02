@@ -1,2 +1,2 @@
 
-TIP: Do you want to improve this document? Please gh:edit[link-text='edit this page'] on GitHub.
+TIP: Do you want to improve this document? Please git-link:self[link-text='edit this page'] on GitHub.
