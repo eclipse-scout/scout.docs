@@ -69,6 +69,40 @@ The `RestApplication` class searches for all implemenations of `IRestResource` a
 
 === Other Changes
 
+==== Maven provided dependencies
+
+In Maven dependencies with the scope provided are not transitive.
+This makes sense if a dependency is set to provided depending on the environment.
+Any artifacts that are not intended to be used in a certain environment should not have the scope provided and are therefore now transitive.
+We removed any current dependency `javax.servlet:javax.servlet-api` except for the one in the artifact `org.eclipse.scout.rt.server.commons`.
+
+To migrate your project, remove any dependency to `javax.servlet:javax.servlet-api`, `javax.xml.ws:jaxws-api` or `javax.ws.rs:javax.ws.rs-api`.
+Then add to all artifacts with packaging type war the dependency to `javax.servlet:javax.servlet-api` with scope provided.
+Depending on the container, you may want also to add the depdendency `javax.xml.ws:jaxws-api` with scope provided to the war artifact.
+
+[source,xml]
+----
+<project>
+
+  <artifactId>myproject.server.war</artifactId>
+  <packaging>war</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>myproject</groupId>
+      <artifactId>myproject.server</artifactId>
+    </dependency>
+
+    <!-- provided by container -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>
+----
+
 #TODO#
 
 // ^^^

@@ -40,13 +40,8 @@
       <artifactId>org.eclipsescout.demo.bahbah.shared</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.eclipse.scout.rt</groupId>
-    	<artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.jdbc</artifactId>
     </dependency>
   </dependencies>
 </project>
