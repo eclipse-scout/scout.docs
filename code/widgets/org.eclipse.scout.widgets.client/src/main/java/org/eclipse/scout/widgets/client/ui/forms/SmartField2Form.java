@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.ColumnDescriptor;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -32,11 +32,11 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -47,37 +47,38 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall.LocaleTableRowData;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentListLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseAutoExpandAllField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseHierarchyField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseMaxRowCountField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.GetValueField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.ListEntriesField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.ListSmartField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeEntriesField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.DefaultProposalField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.MandatoryProposalField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.MandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.SmartFieldWithCustomTableField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DefaultSmartField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.BrowseAutoExpandAllField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.BrowseHierarchyField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.BrowseMaxRowCountField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.GetValueField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.ListEntriesField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.ListSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.TreeEntriesField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ConfigurationBox.TreeSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.ProposalFieldWithListContentBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.ProposalFieldWithListContentBox.DefaultProposalField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.ProposalFieldWithListContentBox.MandatoryProposalField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithListGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithListGroupBox.MandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithListGroupBox.SmartFieldWithCustomTableField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DefaultSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SampleContentButton;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
@@ -87,14 +88,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Order(3000.0)
-public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
+public class SmartField2Form extends AbstractForm implements IAdvancedExampleForm {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SmartField2Form.class);
 
   private boolean m_delayEnabled = false;
   private boolean m_localLookupCall = true;
 
-  public SmartFieldForm() {
+  public SmartField2Form() {
     super();
   }
 
@@ -105,7 +106,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("SmartField");
+    return TEXTS.get("SmartField2");
   }
 
   @Override
@@ -273,7 +274,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(1000)
-      @ClassId("2ef66f5c-cb5a-4c82-885a-5bdad18eedb4")
+      @ClassId("d7594941-dad5-4ce2-af9d-e5a9950d2303")
       public class SmartFieldWithListGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -291,7 +292,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
-        public class DefaultField extends AbstractSmartField<Locale> {
+        public class DefaultField extends AbstractSmartField2<Locale> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -360,8 +361,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(55)
-        @ClassId("e5fdd969-8372-45d6-8225-bd3358536d17")
-        public class SmartFieldWithCustomTableField extends AbstractSmartField<Locale> {
+        @ClassId("75eed6c0-aee7-4632-80ec-e4768c9c4bdb")
+        public class SmartFieldWithCustomTableField extends AbstractSmartField2<Locale> {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("CustomTable");
@@ -372,56 +373,19 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
           }
 
-          @Order(10.0)
-          public class Table extends ContentAssistFieldTable<Locale> {
-
-            public CountryColumn getCountryColumn() {
-              return getColumnSet().getColumnByClass(CountryColumn.class);
-            }
-
-            public LanguageColumn getLanguageColumn() {
-              return getColumnSet().getColumnByClass(LanguageColumn.class);
-            }
-
-            @Override
-            protected boolean getConfiguredHeaderVisible() {
-              return true;
-            }
-
-            @Order(100.0)
-            public class CountryColumn extends AbstractStringColumn {
-
-              @Override
-              protected String getConfiguredHeaderText() {
-                return TEXTS.get("Country");
-              }
-
-              @Override
-              protected int getConfiguredWidth() {
-                return 60;
-              }
-            }
-
-            @Order(110.0)
-            public class LanguageColumn extends AbstractStringColumn {
-
-              @Override
-              protected String getConfiguredHeaderText() {
-                return TEXTS.get("Language");
-              }
-
-              @Override
-              protected int getConfiguredWidth() {
-                return 60;
-              }
-            }
+          @Override
+          protected ColumnDescriptor[] getConfiguredColumnDescriptors() {
+            return new ColumnDescriptor[]{
+                new ColumnDescriptor(null, "Text", 200),
+                new ColumnDescriptor(LocaleTableRowData.country, TEXTS.get("Country"), 90),
+                new ColumnDescriptor(LocaleTableRowData.language, TEXTS.get("Language"), 90)
+            };
           }
         }
-
       }
 
       @Order(2000)
-      @ClassId("d2224f6f-a6cd-4c06-99ca-960bbd3d0153")
+      @ClassId("ce63629e-21ca-4d0c-aeeb-915aaf650636")
       public class SmartFieldWithTreeGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -497,7 +461,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(3000)
-      @ClassId("da633124-cdf8-4eb5-8905-f3b4c442e5a9")
+      @ClassId("2a8481a4-6fcc-446d-8d10-384ac37cb739")
       public class ProposalFieldWithListContentBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -594,7 +558,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(10)
-      public class ListSmartField extends AbstractSmartField<String> {
+      public class ListSmartField extends AbstractSmartField2<String> {
 
         private boolean m_throttled = false;
 
@@ -646,7 +610,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SmartFieldForm.MainBox.ConfigurationBox.ListSmartField.class;
+          return SmartField2Form.MainBox.ConfigurationBox.ListSmartField.class;
         }
 
         @Override
@@ -767,7 +731,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField.class;
+          return SmartField2Form.MainBox.ConfigurationBox.TreeSmartField.class;
         }
 
         @Override

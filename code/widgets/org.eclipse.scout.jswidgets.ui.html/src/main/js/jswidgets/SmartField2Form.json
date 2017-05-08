@@ -1,0 +1,35 @@
+{
+  "id": "jswidgets.SmartField2Form",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+           {
+            "id": "DefaultField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.LocaleLookupCall",
+            "label": "${textKey:Locale}"
+           },
+           {
+            "id": "ValueField",
+            "objectType": "StringField",
+            "label": "Smartfield value"
+           },
+           {
+             "id": "SetValueButton",
+             "objectType": "Button",
+             "label": "Set value"
+           }
+        ]
+      }
+    ]
+  }
+}

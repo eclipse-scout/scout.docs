@@ -26,6 +26,14 @@
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"
       }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:SmartField2}",
+      "detailForm": {
+        "objectType": "jswidgets.SmartField2Form"
+      }
     }
   ]
 }

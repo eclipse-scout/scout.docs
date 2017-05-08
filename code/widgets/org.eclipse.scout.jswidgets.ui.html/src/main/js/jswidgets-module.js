@@ -9,7 +9,9 @@
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
   __include("jswidgets/CarouselForm.js");
+  __include("jswidgets/LocaleLookupCall.js");
   __include("jswidgets/FormForm.js");
   __include("jswidgets/FormFieldOutline.js");
+  __include("jswidgets/SmartField2Form.js");
   __include("jswidgets/TableFieldForm.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));
