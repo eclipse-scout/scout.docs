@@ -417,6 +417,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             return "Splitter enabled";
           }
 
+          @Override
+          protected boolean getConfiguredAutoCheckFromTo() {
+            return false;
+          }
+
           @Order(10)
           public class EnabledVerticalField extends AbstractBooleanField {
 
