@@ -28,8 +28,12 @@
 
   <properties>
     <master_test_timeout>3600</master_test_timeout>
-    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/2.28</chromedriver_base_url>
-    <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
+    <!-- http://chromedriver.storage.googleapis.com/index.html -->
+    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/2.29</chromedriver_base_url>
+    <chromedriver_hash_linux32>ba8f027f85b60ba5b46d3913f8135ec2</chromedriver_hash_linux32>
+    <chromedriver_hash_linux64>06a3f9c57ced2e3ea4e7f3ec258b3957</chromedriver_hash_linux64>
+    <chromedriver_hash_mac64>5d71bc70834c2ad8a7baf7a901d53566</chromedriver_hash_mac64>
+    <chromedriver_hash_win32>b6e3a3fa31d2b45e482b44dcf8abd833</chromedriver_hash_win32>
   </properties>
 
   <build>
@@ -112,7 +116,7 @@
       </activation>
       <properties>
         <chromedriver_url>${chromedriver_base_url}/chromedriver_win32.zip</chromedriver_url>
-        <chromedriver_md5>daef8743d113cecc3bfe0c65c3423565</chromedriver_md5>
+        <chromedriver_md5>${chromedriver_hash_win32}</chromedriver_md5>
         <webdriver.chrome.driver>${seleniumDrivers}/chromedriver.exe</webdriver.chrome.driver>
       </properties>
     </profile>
@@ -126,7 +130,7 @@
       </activation>
       <properties>
         <chromedriver_url>${chromedriver_base_url}/chromedriver_linux32.zip</chromedriver_url>
-        <chromedriver_md5>82e4c112862be0e7e06e5ddcbe8b077c</chromedriver_md5>
+        <chromedriver_md5>${chromedriver_hash_linux32}</chromedriver_md5>
         <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
       </properties>
     </profile>
@@ -140,7 +144,7 @@
       </activation>
       <properties>
         <chromedriver_url>${chromedriver_base_url}/chromedriver_linux64.zip</chromedriver_url>
-        <chromedriver_md5>a72088c0a6b018ded2c0fff616da8f65</chromedriver_md5>
+        <chromedriver_md5>${chromedriver_hash_linux64}</chromedriver_md5>
         <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
       </properties>
     </profile>
@@ -153,7 +157,7 @@
       </activation>
       <properties>
         <chromedriver_url>${chromedriver_base_url}/chromedriver_mac64.zip</chromedriver_url>
-        <chromedriver_md5>7261a8a4d45f63e6c6f5b712e089cbc3</chromedriver_md5>
+        <chromedriver_md5>${chromedriver_hash_mac64}</chromedriver_md5>
         <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
       </properties>
     </profile>
