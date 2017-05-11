@@ -14,12 +14,12 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.platform.Order;
 
-public class StringFieldEncodingForm extends AbstractForm {
+public class LabelFieldEncodingForm extends AbstractForm {
 
-  public StringFieldEncodingForm() {
+  public LabelFieldEncodingForm() {
     super();
   }
 
@@ -28,7 +28,7 @@ public class StringFieldEncodingForm extends AbstractForm {
 
     @Order(2000)
     // tag::SecureOutput.encodingByDefault[]
-    public class StringField extends AbstractStringField {
+    public class LabelField extends AbstractLabelField {
       @Override
       protected void execInitField() {
         setValue("...<b>Bold text</b>...");
@@ -37,10 +37,10 @@ public class StringFieldEncodingForm extends AbstractForm {
 
     @Order(2000)
     // tag::SecureOutput.noEncodingField[]
-    public class NoEncodingStringField extends AbstractStringField {
+    public class NoEncodingLabelField extends AbstractLabelField {
       @Override
       protected boolean getConfiguredHtmlEnabled() {
-        return false;
+        return true;
       }
 
       @Override

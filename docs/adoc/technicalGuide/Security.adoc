@@ -138,11 +138,11 @@ By default, all input in the Scout model is encoded. Examples are values/labels 
 The reason behind this default choice is that developers do not have to think about output encoding in the standard case
 and are therefore less likely to forget output encoding and introduce a security vulnerability.
 
-Example: In the following string field, the HTML <b> tag is encoded as `\&lt;b\&gt;bold text\&lt;/b\&gt;`:
+Example: In the following label field, the HTML <b> tag is encoded as `\&lt;b\&gt;bold text\&lt;/b\&gt;`:
 
 image::{imgsdir}/encodedField.png[]
 
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/StringFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.encodingByDefault]
 
 ==== Html Enabled
 
@@ -158,7 +158,7 @@ Html input should only partially be encoded or not at all.
 
 To disable the encoding of the whole value, the property `HtmlEnabled` can be used:
 
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/StringFieldEncodingForm.java[tags=SecureOutput.noEncodingField]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/LabelFieldEncodingForm.java[tags=SecureOutput.noEncodingField]
 
 There are several ways to implement the use cases above. Some typical implementations are described in the following sections.
 
