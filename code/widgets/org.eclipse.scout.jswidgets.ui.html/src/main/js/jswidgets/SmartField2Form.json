@@ -8,12 +8,13 @@
     "objectType": "GroupBox",
     "fields": [
       {
-        "id": "DetailBox",
+        "id": "TableSmartFieldBox",
         "objectType": "GroupBox",
         "gridColumnCount": 1,
+        "label": "SmartField with table proposal",
         "fields": [
            {
-            "id": "DefaultField",
+            "id": "TableSmartField",
             "objectType": "SmartField2",
             "lookupCall": "jswidgets.LocaleLookupCall",
             "label": "${textKey:Locale}"
@@ -27,6 +28,40 @@
              "id": "SetValueButton",
              "objectType": "Button",
              "label": "Set value"
+           }
+        ]
+      },
+      {
+        "id": "TreeSmartFieldBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "label": "Smart field with tree proposal",
+        "fields": [
+           {
+            "id": "TreeSmartField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.WorldLookupCall",
+            "label": "${textKey:WorldRegion}",
+            "browseHierarchy": true
+           },
+           {
+             "id": "ExpandTreeNodesField",
+             "objectType": "CheckBoxField",
+             "label": "${textKey:ExpandTreeNodes}"
+           }
+        ]
+      },
+      {
+        "id": "ProposalFieldBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "label": "Proposal field",
+        "fields": [
+           {
+            "id": "ProposalField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.LocaleLookupCall",
+            "label": "${textKey:Locale}"
            }
         ]
       }

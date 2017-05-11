@@ -14,4 +14,5 @@
   __include("jswidgets/FormFieldOutline.js");
   __include("jswidgets/SmartField2Form.js");
   __include("jswidgets/TableFieldForm.js");
+  __include("jswidgets/WorldLookupCall.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

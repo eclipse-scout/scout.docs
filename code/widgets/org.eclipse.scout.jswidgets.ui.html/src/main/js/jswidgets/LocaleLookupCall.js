@@ -6,9 +6,9 @@ scout.inherits(jswidgets.LocaleLookupCall, scout.LookupCall);
 jswidgets.LocaleLookupCall.prototype.getAll = function() {
   this._newDeferred();
   setTimeout(function() {
-    var rows = jswidgets.LocaleLookupCall.DATA.slice(0, 101);
+    var datas = jswidgets.LocaleLookupCall.DATA.slice(0, 101);
     this.resolveLookup({
-      lookupRows: this._dataToLookupRow(rows)
+      lookupRows: datas.map(this._dataToLookupRow)
     });
   }.bind(this), 300);
   return this.deferred.promise();
@@ -17,11 +17,11 @@ jswidgets.LocaleLookupCall.prototype.getAll = function() {
 jswidgets.LocaleLookupCall.prototype.getByText = function(text) {
   this._newDeferred();
   setTimeout(function() {
-    var rows = jswidgets.LocaleLookupCall.DATA.filter(function(data) {
+    var datas = jswidgets.LocaleLookupCall.DATA.filter(function(data) {
       return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
     });
     this.resolveLookup({
-      lookupRows: this._dataToLookupRow(rows)
+      lookupRows: datas.map(this._dataToLookupRow)
     });
   }.bind(this), 200);
   return this.deferred.promise();
@@ -30,11 +30,11 @@ jswidgets.LocaleLookupCall.prototype.getByText = function(text) {
 jswidgets.LocaleLookupCall.prototype.getByKey = function(key) {
   this._newDeferred();
   setTimeout(function() {
-    var result = scout.arrays.find(jswidgets.LocaleLookupCall.DATA, function(data) {
+    var data = scout.arrays.find(jswidgets.LocaleLookupCall.DATA, function(data) {
       return data[1] === key;
     });
-    if (result) {
-      this.resolveLookup(new scout.LookupRow(result[1], result[0]));
+    if (data) {
+      this.resolveLookup(this._dataToLookupRow(data));
     } else {
       this.deferred.reject();
     }
@@ -56,12 +56,8 @@ jswidgets.LocaleLookupCall.prototype._newDeferred = function() {
   this.deferred = $.Deferred();
 };
 
-jswidgets.LocaleLookupCall.prototype._dataToLookupRow = function(datas) {
-  var rows = [];
-  datas.forEach(function(data) {
-    rows.push(new scout.LookupRow(data[1], data[0]));
-  });
-  return rows;
+jswidgets.LocaleLookupCall.prototype._dataToLookupRow = function(data) {
+  return new scout.LookupRow(data[1], data[0]);
 };
 
 jswidgets.LocaleLookupCall.DATA = [

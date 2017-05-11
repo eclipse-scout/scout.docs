@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.ColumnDescriptor;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -32,10 +31,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -403,7 +398,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(70)
-        public class DefaultSmartField extends AbstractSmartField<Long> {
+        public class DefaultSmartField extends AbstractSmartField2<Long> {
 
           @Override
           protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
@@ -479,7 +474,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(110)
-        public class DefaultProposalField extends AbstractProposalField<Long> {
+        public class DefaultProposalField extends AbstractSmartField2<Long> {
 
           @Override
           protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
@@ -492,10 +487,9 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           }
 
           @Override
-          protected IProposalChooserProvider<Long> createProposalChooserProvider() {
-            return new P_ProposalChooserProvider();
+          protected String getConfiguredVariant() {
+            return VARIANT_PROPOSAL;
           }
-
         }
 
         @Order(120)
@@ -1109,25 +1103,27 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
     getTreeSmartField().setWildcard(wildcard);
   }
 
-  /**
-   * Custom proposal chooser provider is only used to simulate a slow connection when user clicks on a row in the
-   * proposal chooser
-   */
-  private class P_ProposalChooserProvider implements IProposalChooserProvider<Long> {
+  // FIXME [awe] 7.0 - SF2: move this delay code to the lookup call EventTypeCodeType
 
-    @Override
-    public IProposalChooser<?, Long> createProposalChooser(IContentAssistField<?, Long> proposalField, boolean allowCustomText) {
-      return new TableProposalChooser<Long>(proposalField, allowCustomText) {
-        @Override
-        protected void execResultTableRowClicked(ITableRow row) {
-          if (m_delayEnabled) {
-            SleepUtil.sleepSafe(600, TimeUnit.MILLISECONDS);
-          }
-          super.execResultTableRowClicked(row);
-        }
-      };
-    }
-
-  }
+//  /**
+//   * Custom proposal chooser provider is only used to simulate a slow connection when user clicks on a row in the
+//   * proposal chooser
+//   */
+//  private class P_ProposalChooserProvider implements IProposalChooserProvider<Long> {
+//
+//    @Override
+//    public IProposalChooser<?, Long> createProposalChooser(IContentAssistField<?, Long> proposalField, boolean allowCustomText) {
+//      return new TableProposalChooser<Long>(proposalField, allowCustomText) {
+//        @Override
+//        protected void execResultTableRowClicked(ITableRow row) {
+//          if (m_delayEnabled) {
+//            SleepUtil.sleepSafe(600, TimeUnit.MILLISECONDS);
+//          }
+//          super.execResultTableRowClicked(row);
+//        }
+//      };
+//    }
+//
+//  }
 
 }
