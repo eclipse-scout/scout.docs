@@ -12,8 +12,8 @@ widgets.ExampleBeanField = function() {
 };
 scout.inherits(widgets.ExampleBeanField, scout.BeanField);
 
-widgets.ExampleBeanField.prototype._render = function($parent) {
-  widgets.ExampleBeanField.parent.prototype._render.call(this, $parent);
+widgets.ExampleBeanField.prototype._render = function() {
+  widgets.ExampleBeanField.parent.prototype._render.call(this);
   this.$container.addClass('example-bean-field');
 };
 

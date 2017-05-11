@@ -56,6 +56,12 @@ The `RestApplication` class searches for all implemenations of `IRestResource` a
 
 === API Changes (JavaScript)
 
+==== render()
+The parameter `$parent` has been removed from the `_render` method because `this.$parent` is available for every widget. There is no need to have a parameter `$parent` which points to the same variable. Use `this.$parent` instead.
+
+Also `$parent` is now optional when calling widget.render(). The `$parent` may be resolved using `this.parent`. No need to always write
+`widget.render(this.$container)` anymore, instead just write `widget.render()` if the `$container` of the `parent` should be used as `$parent`.
+
 ==== Promises
 With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.
 

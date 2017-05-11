@@ -183,7 +183,7 @@ var button = scout.create('scout.Button', {
   parent: scout.sessions[0].desktop,
   label: 'click me!'
 });
-button.render(button.parent.$container);
+button.render();
 button.on('click', function(event) {
   // print 'Button "click me!" has been clicked'
   console.log('Button "' + event.source.label + '" has been clicked');
@@ -199,7 +199,7 @@ var button = scout.create('scout.Button', {
   parent: scout.sessions[0].desktop,
   label: 'click me!'
 });
-button.render(button.parent.$container);
+button.render();
 var callback = function(event) {
   // print 'Button "click me!" has been clicked'
   console.log('Button "' + event.source.label + '" has been clicked');
@@ -248,7 +248,7 @@ var button = scout.create('scout.Button', {
   label: 'click me!',
   displayStyle: scout.Button.DisplayStyle.TOGGLE
 });
-button.render(button.parent.$container);
+button.render();
 button.on('propertyChange', function(event) {
   // prints 'Property selected changed from false to true'
   console.log('Property ' + event.name + ' changed from ' + event.oldValue + ' to ' + event.newValue);
