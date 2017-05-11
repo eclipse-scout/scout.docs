@@ -56,7 +56,43 @@ The `RestApplication` class searches for all implemenations of `IRestResource` a
 
 === API Changes (JavaScript)
 
-#TODO#
+==== Promises
+With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.
+
+We noticed the following effects:
+
+- If a rejection is catched using a fail handler, the fail handler has
+to return a rejected promise as well, otherwise the next success handler
+would be called instead of the next fail handler.
+- Every callback is now executed asynchronously. This is especially
+relevant for the tests.
+- Catch has been added -> replace fail(null, func) for better
+readability.
+
+See also https://jquery.com/upgrade-guide/3.0/ for details.
+
+==== Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG
+These functions are now supported by jQuery directly. Just use `addClass`, `removeClass`, `attr` and `removeAttr`.
+
+==== Property Change Event
+
+The property change event has been simplified.
+
+The event had 3 properties:
+- newProperties
+- oldProperties
+- changedProperties
+
+This was added to be able to react to multiple property change events at
+once. Since 6.1, bulk property changes don't exist anymore, so there is
+no need for these properties anymore.
+
+Now, with 7.0, the property change event has the following properties:
+- name
+- oldValue
+- newValue
+
+This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here

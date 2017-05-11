@@ -227,6 +227,35 @@ function(event) {
 }
 ----
 
+===== Property Change Event
+A special kind of event is the property change event. Whenever a property changes, such an event is triggered.
+
+The event has the following properties:
+
+. `type`: the type of the event which is always `propertyChange`
+. `source`: the widget which triggered the event
+. `name`: the name of the property
+. `newValue`: the new value of the property
+. `oldValue`: the old value of the property
+
+Listening to such an event works in the same way as for other events, just use the type `propertyChange`. The listening below shows how to handle the property change event if the `selected` property of a toggle button changes.
+
+[source,javascript]
+.Example of a property change event
+----
+var button = scout.create('scout.Button', {
+  parent: scout.sessions[0].desktop,
+  label: 'click me!',
+  displayStyle: scout.Button.DisplayStyle.TOGGLE
+});
+button.render(button.parent.$container);
+button.on('propertyChange', function(event) {
+  // prints 'Property selected changed from false to true'
+  console.log('Property ' + event.name + ' changed from ' + event.oldValue + ' to ' + event.newValue);
+});
+button.setSelected(true);
+----
+
 ==== Icons
 Widgets that have a property `iconId` (for instance `Menu`) can display an icon. This iconId references
 an icon which can be either a bitmap image (GIF, PNG, JPEG, etc.) or a character from an icon-font. An example
