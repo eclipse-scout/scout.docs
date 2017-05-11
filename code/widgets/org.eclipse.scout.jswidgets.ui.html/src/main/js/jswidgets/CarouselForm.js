@@ -31,8 +31,7 @@ jswidgets.CarouselForm.prototype._jsonModel = function() {
 };
 
 jswidgets.CarouselForm.prototype._onStatusEnabledPropertyChange = function(event) {
-  if (scout.arrays.containsAny(event.changedProperties, ['value'])) {
-    var enabled = event.source.value;
-    this.widget('Carousel').setStatusEnabled(enabled);
+  if (event.name === 'value') {
+    this.widget('Carousel').setStatusEnabled(event.newValue);
   }
 };
