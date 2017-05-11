@@ -1,63 +1,10 @@
 jswidgets.LocaleLookupCall = function() {
   jswidgets.LocaleLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.LocaleLookupCall, scout.LookupCall);
+scout.inherits(jswidgets.LocaleLookupCall, jswidgets.StaticLookupCall);
 
-jswidgets.LocaleLookupCall.prototype.getAll = function() {
-  this._newDeferred();
-  setTimeout(function() {
-    var datas = jswidgets.LocaleLookupCall.DATA.slice(0, 101);
-    this.resolveLookup({
-      lookupRows: datas.map(this._dataToLookupRow)
-    });
-  }.bind(this), 300);
-  return this.deferred.promise();
-};
-
-jswidgets.LocaleLookupCall.prototype.getByText = function(text) {
-  this._newDeferred();
-  setTimeout(function() {
-    var datas = jswidgets.LocaleLookupCall.DATA.filter(function(data) {
-      return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
-    });
-    this.resolveLookup({
-      lookupRows: datas.map(this._dataToLookupRow)
-    });
-  }.bind(this), 200);
-  return this.deferred.promise();
-};
-
-jswidgets.LocaleLookupCall.prototype.getByKey = function(key) {
-  this._newDeferred();
-  setTimeout(function() {
-    var data = scout.arrays.find(jswidgets.LocaleLookupCall.DATA, function(data) {
-      return data[1] === key;
-    });
-    if (data) {
-      this.resolveLookup(this._dataToLookupRow(data));
-    } else {
-      this.deferred.reject();
-    }
-  }.bind(this), 100);
-  return this.deferred.promise();
-};
-
-
-jswidgets.LocaleLookupCall.prototype.resolveLookup = function(lookupResult) {
-  this.deferred.resolve(lookupResult);
-};
-
-jswidgets.LocaleLookupCall.prototype._newDeferred = function() {
-  if (this.deferred) {
-    this.deferred.reject({
-      canceled: true
-    });
-  }
-  this.deferred = $.Deferred();
-};
-
-jswidgets.LocaleLookupCall.prototype._dataToLookupRow = function(data) {
-  return new scout.LookupRow(data[1], data[0]);
+jswidgets.LocaleLookupCall.prototype._data = function() {
+  return jswidgets.LocaleLookupCall.DATA;
 };
 
 jswidgets.LocaleLookupCall.DATA = [

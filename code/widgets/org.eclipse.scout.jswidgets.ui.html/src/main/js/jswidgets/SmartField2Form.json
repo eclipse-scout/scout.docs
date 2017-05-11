@@ -60,8 +60,9 @@
            {
             "id": "ProposalField",
             "objectType": "SmartField2",
-            "lookupCall": "jswidgets.LocaleLookupCall",
-            "label": "${textKey:Locale}"
+            "lookupCall": "jswidgets.SalutationLookupCall",
+            "label": "${textKey:Salutation}",
+            "variant": "proposal"
            }
         ]
       }
