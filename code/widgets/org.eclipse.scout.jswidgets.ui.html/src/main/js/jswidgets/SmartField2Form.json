@@ -65,6 +65,21 @@
             "variant": "proposal"
            }
         ]
+      },
+      {
+        "id": "DropdownFieldBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "label": "Dropdown field",
+        "fields": [
+           {
+            "id": "DropdownField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.SalutationLookupCall",
+            "label": "${textKey:Salutation}",
+            "variant": "dropdown"
+           }
+        ]
       }
     ]
   }

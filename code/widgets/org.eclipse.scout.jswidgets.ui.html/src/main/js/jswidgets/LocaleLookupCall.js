@@ -1,7 +1,9 @@
 jswidgets.LocaleLookupCall = function() {
   jswidgets.LocaleLookupCall.parent.call(this);
+
+  this.setDelay(250);
 };
-scout.inherits(jswidgets.LocaleLookupCall, jswidgets.StaticLookupCall);
+scout.inherits(jswidgets.LocaleLookupCall, scout.StaticLookupCall);
 
 jswidgets.LocaleLookupCall.prototype._data = function() {
   return jswidgets.LocaleLookupCall.DATA;

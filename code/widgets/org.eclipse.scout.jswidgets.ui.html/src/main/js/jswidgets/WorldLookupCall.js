@@ -1,7 +1,9 @@
 jswidgets.WorldLookupCall = function() {
   jswidgets.WorldLookupCall.parent.call(this);
+
+  this.setDelay(250);
 };
-scout.inherits(jswidgets.WorldLookupCall, jswidgets.StaticLookupCall);
+scout.inherits(jswidgets.WorldLookupCall, scout.StaticLookupCall);
 
 jswidgets.WorldLookupCall.prototype._data = function() {
   return jswidgets.WorldLookupCall.DATA;

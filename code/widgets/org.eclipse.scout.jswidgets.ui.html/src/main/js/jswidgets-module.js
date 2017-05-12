@@ -14,7 +14,6 @@
   __include("jswidgets/SmartField2Form.js");
   __include("jswidgets/TableFieldForm.js");
   // lookup calls
-  __include("jswidgets/StaticLookupCall.js");
   __include("jswidgets/WorldLookupCall.js");
   __include("jswidgets/LocaleLookupCall.js");
   __include("jswidgets/SalutationLookupCall.js");
