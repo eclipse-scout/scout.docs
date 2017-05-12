@@ -17,4 +17,5 @@
   __include("jswidgets/WorldLookupCall.js");
   __include("jswidgets/LocaleLookupCall.js");
   __include("jswidgets/SalutationLookupCall.js");
+  __include("jswidgets/WidgetsRoute.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));
