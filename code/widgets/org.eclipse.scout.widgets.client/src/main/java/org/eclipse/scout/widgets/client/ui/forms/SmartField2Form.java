@@ -29,8 +29,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -301,7 +299,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(40)
-        public class MandatoryField extends AbstractSmartField<Color> {
+        public class MandatoryField extends AbstractSmartField2<Color> {
 
           @Override
           protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
@@ -332,7 +330,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(50)
-        public class DisabledField extends AbstractSmartField<Color> {
+        public class DisabledField extends AbstractSmartField2<Color> {
 
           @Override
           protected boolean getConfiguredEnabled() {
@@ -412,7 +410,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(80)
-        public class MandatorySmartfieldField extends AbstractSmartField<Long> {
+        public class MandatorySmartfieldField extends AbstractSmartField2<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -431,7 +429,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(90)
-        public class DisabledSmartFieldField extends AbstractSmartField<Long> {
+        public class DisabledSmartFieldField extends AbstractSmartField2<Long> {
 
           @Override
           protected boolean getConfiguredEnabled() {
@@ -493,7 +491,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(120)
-        public class MandatoryProposalField extends AbstractProposalField<Long> {
+        public class MandatoryProposalField extends AbstractSmartField2<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -509,10 +507,15 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           protected boolean getConfiguredMandatory() {
             return true;
           }
+
+          @Override
+          protected String getConfiguredVariant() {
+            return VARIANT_PROPOSAL;
+          }
         }
 
         @Order(130)
-        public class DisabledProposalField extends AbstractProposalField<Long> {
+        public class DisabledProposalField extends AbstractSmartField2<Long> {
 
           @Override
           protected boolean getConfiguredEnabled() {
@@ -531,7 +534,12 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
           @Override
           protected void execInitField() {
-            setValue(TEXTS.get("Public"));
+            setValueForProposal(TEXTS.get("Public"));
+          }
+
+          @Override
+          protected String getConfiguredVariant() {
+            return VARIANT_PROPOSAL;
           }
         }
       }
@@ -687,7 +695,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
       }
 
       @Order(70)
-      public class TreeSmartField extends AbstractSmartField<String> {
+      public class TreeSmartField extends AbstractSmartField2<String> {
 
         @Override
         protected boolean getConfiguredBrowseAutoExpandAll() {
