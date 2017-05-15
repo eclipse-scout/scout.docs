@@ -34,7 +34,6 @@
     <chromedriver_hash_linux32>ba8f027f85b60ba5b46d3913f8135ec2</chromedriver_hash_linux32>
     <chromedriver_hash_linux64>06a3f9c57ced2e3ea4e7f3ec258b3957</chromedriver_hash_linux64>
     <chromedriver_hash_mac64>5d71bc70834c2ad8a7baf7a901d53566</chromedriver_hash_mac64>
-    <chromedriver_hash_win32>b6e3a3fa31d2b45e482b44dcf8abd833</chromedriver_hash_win32>
   </properties>
 
   <build>
