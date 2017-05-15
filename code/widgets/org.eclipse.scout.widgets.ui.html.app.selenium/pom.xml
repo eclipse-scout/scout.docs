@@ -28,6 +28,7 @@
 
   <properties>
     <master_test_timeout>3600</master_test_timeout>
+    <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
     <!-- http://chromedriver.storage.googleapis.com/index.html -->
     <chromedriver_base_url>http://chromedriver.storage.googleapis.com/2.29</chromedriver_base_url>
     <chromedriver_hash_linux32>ba8f027f85b60ba5b46d3913f8135ec2</chromedriver_hash_linux32>
