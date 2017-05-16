@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractProposalField2;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -472,7 +473,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
 
         @Order(110)
-        public class DefaultProposalField extends AbstractSmartField2<Long> {
+        public class DefaultProposalField extends AbstractProposalField2<Long> {
 
           @Override
           protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
@@ -483,15 +484,10 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           protected String getConfiguredLabel() {
             return TEXTS.get("Default");
           }
-
-          @Override
-          protected String getConfiguredVariant() {
-            return VARIANT_PROPOSAL;
-          }
         }
 
         @Order(120)
-        public class MandatoryProposalField extends AbstractSmartField2<Long> {
+        public class MandatoryProposalField extends AbstractProposalField2<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -507,15 +503,10 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           protected boolean getConfiguredMandatory() {
             return true;
           }
-
-          @Override
-          protected String getConfiguredVariant() {
-            return VARIANT_PROPOSAL;
-          }
         }
 
         @Order(130)
-        public class DisabledProposalField extends AbstractSmartField2<Long> {
+        public class DisabledProposalField extends AbstractProposalField2<Long> {
 
           @Override
           protected boolean getConfiguredEnabled() {
@@ -534,12 +525,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
           @Override
           protected void execInitField() {
-            setValueForProposal(TEXTS.get("Public"));
-          }
-
-          @Override
-          protected String getConfiguredVariant() {
-            return VARIANT_PROPOSAL;
+            setValueAsString(TEXTS.get("Public"));
           }
         }
       }
