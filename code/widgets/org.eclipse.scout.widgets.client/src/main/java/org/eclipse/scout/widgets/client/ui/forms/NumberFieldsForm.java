@@ -864,6 +864,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredVisible() {
+            // Changing the locale on the fly for a specific field is currently not supported.
+            // Only the pattern of the decimal format is transferred to the UI. The locale is taken from the session.
+            return false;
+          }
+
+          @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
             return (Class<? extends ILookupCall<Locale>>) NumberFormatLocaleLookupCall.class;
           }

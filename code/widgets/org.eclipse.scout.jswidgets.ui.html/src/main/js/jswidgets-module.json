@@ -3,6 +3,7 @@
 "jswidgets/Desktop.json",
 "jswidgets/FormFieldOutline.json",
 "jswidgets/FormForm.json",
+"jswidgets/NumberFieldForm.json",
 "jswidgets/SmartField2Form.json",
 "jswidgets/TableFieldForm.json"
 ]}

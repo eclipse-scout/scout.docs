@@ -22,6 +22,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "${textKey:NumberField}",
+      "detailForm": {
+        "objectType": "jswidgets.NumberFieldForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:TableField}",
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"

@@ -11,6 +11,7 @@
   __include("jswidgets/CarouselForm.js");
   __include("jswidgets/FormForm.js");
   __include("jswidgets/FormFieldOutline.js");
+  __include("jswidgets/NumberFieldForm.js");
   __include("jswidgets/SmartField2Form.js");
   __include("jswidgets/TableFieldForm.js");
   // lookup calls

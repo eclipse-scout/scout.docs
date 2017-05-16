@@ -1,0 +1,47 @@
+{
+  "id": "jswidgets.NumberFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "NumberField",
+            "objectType": "NumberField",
+            "label": "${textKey:NumberField}"
+          },
+          {
+            "id": "NumberField",
+            "objectType": "NumberField",
+            "label": "${textKey:Calculator}",
+            "tooltipText": "${textKey:NumberFieldCalculatorHint}"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "FormatField",
+            "objectType": "StringField",
+            "label": "Format"
+          },
+          {
+            "id": "EnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Enabled"
+          }
+        ]
+      }
+    ]
+  }
+}
