@@ -60,6 +60,7 @@ jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
 jswidgets.WidgetsRoute.ROUTES = [ // FIXME [awe] 7.0 - Extract routeRef dynamically from objectType, then delete this array
   ['carousel', 'jswidgets.CarouselForm'],
   ['form', 'jswidgets.FormForm'],
+  ['datefield', 'jswidgets.DateFieldForm'],
   ['numberfield', 'jswidgets.NumberFieldForm'],
   ['tablefield', 'jswidgets.TableFieldForm'],
   ['smartfield2', 'jswidgets.SmartField2Form']

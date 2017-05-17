@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.NumberFieldForm",
+  "id": "jswidgets.DateFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -13,15 +13,9 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "NumberField",
-            "objectType": "NumberField",
-            "label": "${textKey:NumberField}"
-          },
-          {
-            "id": "NumberField",
-            "objectType": "NumberField",
-            "label": "${textKey:Calculator}",
-            "tooltipText": "${textKey:NumberFieldCalculatorHint}"
+            "id": "DateField",
+            "objectType": "DateField",
+            "label": "${textKey:DateField}"
           }
         ]
       },

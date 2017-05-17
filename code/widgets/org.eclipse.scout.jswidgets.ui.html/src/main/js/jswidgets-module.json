@@ -4,7 +4,9 @@
 "jswidgets/desktop/FormFieldOutline.json",
 "jswidgets/form/FormForm.json",
 "jswidgets/formfield/FormFieldPropertiesBox.json",
+"jswidgets/datefield/DateFieldForm.json",
 "jswidgets/numberfield/NumberFieldForm.json",
 "jswidgets/smartfield/SmartField2Form.json",
-"jswidgets/tablefield/TableFieldForm.json"
+"jswidgets/tablefield/TableFieldForm.json",
+"jswidgets/valuefield/ValueFieldPropertiesBox.json"
 ]}

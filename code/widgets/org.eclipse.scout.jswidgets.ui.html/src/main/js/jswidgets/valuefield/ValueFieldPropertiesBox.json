@@ -1,0 +1,20 @@
+{
+  "id": "jswidgets.ValueFieldPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "gridColumnCount": 2,
+  "label": "Value Field Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "ValueField",
+      "objectType": "StringField",
+      "label": "Value"
+    },
+    {
+      "id": "DisplayTextField",
+      "objectType": "StringField",
+      "label": "DisplayText"
+    }
+  ]
+}

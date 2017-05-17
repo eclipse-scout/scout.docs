@@ -14,10 +14,12 @@
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
   __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
+  __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/FormFieldOutline.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartField2Form.js");
   __include("jswidgets/tablefield/TableFieldForm.js");
+  __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   // lookup calls
   __include("jswidgets/smartfield/WorldLookupCall.js");
   __include("jswidgets/smartfield/LocaleLookupCall.js");

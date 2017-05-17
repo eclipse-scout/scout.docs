@@ -8,13 +8,13 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.NumberFieldForm = function() {
-  jswidgets.NumberFieldForm.parent.call(this);
+jswidgets.DateFieldForm = function() {
+  jswidgets.DateFieldForm.parent.call(this);
 };
-scout.inherits(jswidgets.NumberFieldForm, scout.Form);
+scout.inherits(jswidgets.DateFieldForm, scout.Form);
 
-jswidgets.NumberFieldForm.prototype._init = function(model) {
-  jswidgets.NumberFieldForm.parent.prototype._init.call(this, model);
+jswidgets.DateFieldForm.prototype._init = function(model) {
+  jswidgets.DateFieldForm.parent.prototype._init.call(this, model);
 
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
   bodyGrid.validate(this.rootGroupBox);
@@ -23,20 +23,20 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('PropertiesBox'));
 
-  var numberField = this.widget('NumberField');
+  var dateField = this.widget('DateField');
   var formatField = this.widget('FormatField');
-  formatField.setValue(numberField.decimalFormat.pattern);
+  formatField.setValue(dateField.dateFormatPattern);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
-  this.widget('ValueFieldPropertiesBox').setField(numberField);
-  this.widget('FormFieldPropertiesBox').setField(numberField);
+  this.widget('ValueFieldPropertiesBox').setField(dateField);
+  this.widget('FormFieldPropertiesBox').setField(dateField);
 };
 
-jswidgets.NumberFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.NumberFieldForm');
+jswidgets.DateFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.DateFieldForm');
 };
 
-jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
+jswidgets.DateFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.name === 'value') {
-    this.widget('NumberField').setDecimalFormat(event.newValue);
+    this.widget('DateField').setDateFormatPattern(event.newValue);
   }
 };
