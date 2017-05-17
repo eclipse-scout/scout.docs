@@ -17,6 +17,5 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
  */
 public interface IBenchFormProvider {
 
-  IForm provideForm();
-
+  IForm provideBenchForm();
 }
