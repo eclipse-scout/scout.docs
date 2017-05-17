@@ -22,6 +22,8 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
   var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  bodyGrid.validate(this.rootGroupBox);
+  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('DetailBox'));
 
   this.table = this.widget('Table');
@@ -29,6 +31,7 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   this.widget('ColumnVisibilityMenu').on('doAction', this._onColumnVisibilityMenu.bind(this));
   this.widget('GroupingStyleTop').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
   this.widget('GroupingStyleBottom').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
+  this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
 };
 
 jswidgets.TableFieldForm.prototype._jsonModel = function() {

@@ -1,0 +1,69 @@
+{
+  "id": "jswidgets.FormFieldPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "gridColumnCount": 2,
+  "label": "Form Field Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "EnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Enabled",
+      "labelVisible": false
+    },
+    {
+      "id": "VisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "LabelVisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Label Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "StatusVisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Status Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "MandatoryField",
+      "objectType": "CheckBoxField",
+      "label": "Mandatory",
+      "labelVisible": false
+    },
+    {
+      "id": "DisabledStyleField",
+      "objectType": "SmartField2",
+      "lookupCall": "jswidgets.DisabledStyleLookupCall",
+      "label": "Disabled Style"
+    },
+    {
+      "id": "LabelField",
+      "objectType": "StringField",
+      "label": "Label"
+    },
+    {
+      "id": "LabelPositionField",
+      "objectType": "SmartField2",
+      "lookupCall": "jswidgets.LabelPositionLookupCall",
+      "label": "Label Position"
+    },
+    {
+      "id": "LabelWidthInPixelField",
+      "objectType": "SmartField2",
+      "variant": "proposal",
+      "lookupCall": "jswidgets.LabelWidthInPixelLookupCall",
+      "label": "Label Width in Pixel"
+    },
+    {
+      "id": "TooltipTextField",
+      "objectType": "StringField",
+      "label": "Tooltip Text"
+    }
+  ]
+}

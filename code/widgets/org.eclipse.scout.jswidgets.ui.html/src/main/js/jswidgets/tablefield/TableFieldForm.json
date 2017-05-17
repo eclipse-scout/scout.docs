@@ -90,6 +90,10 @@
             }
           }
         ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
       }
     ]
   }

@@ -27,9 +27,7 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   var formatField = this.widget('FormatField');
   formatField.setValue(numberField.decimalFormat.pattern);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
-  var enabledField = this.widget('EnabledField');
-  enabledField.setValue(numberField.enabled);
-  enabledField.on('propertyChange', this._onEnabledPropertyChange.bind(this));
+  this.widget('FormFieldPropertiesBox').setField(numberField);
 };
 
 jswidgets.NumberFieldForm.prototype._jsonModel = function() {
@@ -39,11 +37,5 @@ jswidgets.NumberFieldForm.prototype._jsonModel = function() {
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.name === 'value') {
     this.widget('NumberField').setDecimalFormat(event.newValue);
-  }
-};
-
-jswidgets.NumberFieldForm.prototype._onEnabledPropertyChange = function(event) {
-  if (event.name === 'value') {
-    this.widget('NumberField').setEnabled(event.newValue);
   }
 };

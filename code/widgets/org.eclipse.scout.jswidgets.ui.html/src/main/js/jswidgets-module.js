@@ -10,6 +10,10 @@
   __include("jswidgets/App.js");
   __include("jswidgets/carousel/CarouselForm.js");
   __include("jswidgets/form/FormForm.js");
+  __include("jswidgets/formfield/FormFieldPropertiesBox.js");
+  __include("jswidgets/formfield/LabelPositionLookupCall.js");
+  __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
+  __include("jswidgets/formfield/DisabledStyleLookupCall.js");
   __include("jswidgets/desktop/FormFieldOutline.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartField2Form.js");

@@ -29,18 +29,18 @@
         "id": "PropertiesBox",
         "objectType": "GroupBox",
         "gridColumnCount": 1,
+        "label": "Properties",
         "fields": [
           {
             "id": "FormatField",
             "objectType": "StringField",
             "label": "Format"
-          },
-          {
-            "id": "EnabledField",
-            "objectType": "CheckBoxField",
-            "label": "Enabled"
           }
         ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
       }
     ]
   }
