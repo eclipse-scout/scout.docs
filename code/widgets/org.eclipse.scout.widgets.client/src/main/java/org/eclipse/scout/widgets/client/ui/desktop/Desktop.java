@@ -24,6 +24,8 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -40,6 +42,9 @@ import org.eclipse.scout.widgets.client.ui.forms.OptionsForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
 public class Desktop extends AbstractDesktop implements IDesktop {
+
+  private IForm m_benchModeForm = null;
+  private FormListener m_benchModeFormListener = new P_BenchModeFormListener();
 
   @Override
   protected String getConfiguredDisplayStyle() {
@@ -83,17 +88,23 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   protected void execDefaultView() {
     if (DISPLAY_STYLE_BENCH.equals(getDisplayStyle())) {
       // "bench-only" desktop
-      IForm benchForm = null;
-      for (IDesktopExtension ext : getDesktopExtensions()) {
-        if (ext instanceof IBenchFormProvider) {
-          benchForm = ((IBenchFormProvider) ext).provideForm();
+      if (m_benchModeForm != null) {
+        m_benchModeForm.activate();
+      }
+      else {
+        IForm benchForm = null;
+        for (IDesktopExtension ext : getDesktopExtensions()) {
+          if (ext instanceof IBenchFormProvider) {
+            benchForm = ((IBenchFormProvider) ext).provideBenchForm();
+          }
         }
+        if (benchForm == null) {
+          benchForm = new StringFieldForm();
+        }
+        benchForm.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
+        benchForm.start();
+        setBenchModeForm(benchForm);
       }
-      if (benchForm == null) {
-        benchForm = new StringFieldForm();
-      }
-      benchForm.setDisplayHint(IForm.DISPLAY_HINT_VIEW);
-      benchForm.start();
     }
     else {
       // default desktop
@@ -102,6 +113,23 @@ public class Desktop extends AbstractDesktop implements IDesktop {
         activateOutline(firstOutline);
       }
     }
+  }
+
+  protected void setBenchModeForm(IForm form) {
+    // Uninstall
+    if (m_benchModeForm != null) {
+      m_benchModeForm.removeFormListener(m_benchModeFormListener);
+      m_benchModeForm = null;
+    }
+    // Install
+    if (form != null) {
+      m_benchModeForm = form;
+      m_benchModeForm.addFormListener(m_benchModeFormListener);
+    }
+  }
+
+  protected IForm getBenchModeForm() {
+    return m_benchModeForm;
   }
 
   @Order(10)
@@ -353,6 +381,16 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public LayoutWidgetsOutlineViewButton() {
       super(Desktop.this, LayoutWidgetsOutline.class);
+    }
+  }
+
+  protected class P_BenchModeFormListener implements FormListener {
+
+    @Override
+    public void formChanged(FormEvent e) {
+      if (e.getType() == FormEvent.TYPE_CLOSED) {
+        setBenchModeForm(null);
+      }
     }
   }
 }
