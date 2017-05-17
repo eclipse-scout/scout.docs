@@ -8,15 +8,15 @@
 */
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
-  __include("jswidgets/CarouselForm.js");
-  __include("jswidgets/FormForm.js");
-  __include("jswidgets/FormFieldOutline.js");
-  __include("jswidgets/NumberFieldForm.js");
-  __include("jswidgets/SmartField2Form.js");
-  __include("jswidgets/TableFieldForm.js");
+  __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/form/FormForm.js");
+  __include("jswidgets/desktop/FormFieldOutline.js");
+  __include("jswidgets/numberfield/NumberFieldForm.js");
+  __include("jswidgets/smartfield/SmartField2Form.js");
+  __include("jswidgets/tablefield/TableFieldForm.js");
   // lookup calls
-  __include("jswidgets/WorldLookupCall.js");
-  __include("jswidgets/LocaleLookupCall.js");
-  __include("jswidgets/SalutationLookupCall.js");
+  __include("jswidgets/smartfield/WorldLookupCall.js");
+  __include("jswidgets/smartfield/LocaleLookupCall.js");
+  __include("jswidgets/smartfield/SalutationLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

@@ -1,9 +1,9 @@
 {"files": [
-"jswidgets/CarouselForm.json",
-"jswidgets/Desktop.json",
-"jswidgets/FormFieldOutline.json",
-"jswidgets/FormForm.json",
-"jswidgets/NumberFieldForm.json",
-"jswidgets/SmartField2Form.json",
-"jswidgets/TableFieldForm.json"
+"jswidgets/carousel/CarouselForm.json",
+"jswidgets/desktop/Desktop.json",
+"jswidgets/desktop/FormFieldOutline.json",
+"jswidgets/form/FormForm.json",
+"jswidgets/numberfield/NumberFieldForm.json",
+"jswidgets/smartfield/SmartField2Form.json",
+"jswidgets/tablefield/TableFieldForm.json"
 ]}
