@@ -255,6 +255,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue("");
           }
@@ -265,6 +270,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredStatusVisible() {
             return false;
           }
 
@@ -283,6 +293,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue(TEXTS.get("Mandatory"));
           }
@@ -297,6 +312,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue(TEXTS.get("Disabled"));
           }
@@ -307,6 +327,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredStatusVisible() {
             return false;
           }
 
@@ -677,6 +702,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue("");
           }
@@ -687,6 +717,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredStatusVisible() {
             return false;
           }
 
@@ -705,6 +740,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue(TEXTS.get("Value"));
           }
@@ -715,6 +755,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredStatusVisible() {
             return false;
           }
 
@@ -733,6 +778,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue(TEXTS.get("DisplayText"));
           }
@@ -747,6 +797,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected boolean getConfiguredStatusVisible() {
+            return false;
+          }
+
+          @Override
           protected void execInitField() {
             setValue(TEXTS.get("Locale"));
           }
@@ -757,6 +812,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredStatusVisible() {
             return false;
           }
 
