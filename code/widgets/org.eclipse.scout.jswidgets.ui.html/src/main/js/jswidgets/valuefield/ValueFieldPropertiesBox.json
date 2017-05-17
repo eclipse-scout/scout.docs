@@ -9,12 +9,14 @@
     {
       "id": "ValueField",
       "objectType": "StringField",
-      "label": "Value"
+      "label": "Value",
+      "enabled": false
     },
     {
       "id": "DisplayTextField",
       "objectType": "StringField",
-      "label": "DisplayText"
+      "label": "DisplayText",
+      "enabled": false
     }
   ]
 }

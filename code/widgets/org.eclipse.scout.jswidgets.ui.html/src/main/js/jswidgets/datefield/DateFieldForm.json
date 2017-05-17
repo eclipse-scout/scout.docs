@@ -22,13 +22,30 @@
       {
         "id": "PropertiesBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
+        "gridColumnCount": 2,
         "label": "Properties",
         "fields": [
+          {
+            "id": "HasTimeField",
+            "objectType": "CheckBoxField",
+            "label": "Has Time",
+            "labelVisible": false
+          },
+          {
+            "id": "HasDateField",
+            "objectType": "CheckBoxField",
+            "label": "Has Date",
+            "labelVisible": false
+          },
           {
             "id": "FormatField",
             "objectType": "StringField",
             "label": "Format"
+          },
+          {
+            "id": "AutoDateField",
+            "objectType": "DateField",
+            "label": "Auto Date"
           }
         ]
       },
