@@ -42,6 +42,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall.LocaleTableRowData;
+import org.eclipse.scout.widgets.client.services.lookup.HierarchicalLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentListLookupCall;
@@ -400,13 +401,28 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         public class DefaultSmartField extends AbstractSmartField2<Long> {
 
           @Override
-          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-            return IndustryICBCodeType.class;
+          protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+            return HierarchicalLookupCall.class;
+          }
+
+          @Override
+          protected boolean getConfiguredBrowseHierarchy() {
+            return true;
+          }
+
+          @Override
+          protected boolean getConfiguredBrowseLoadIncremental() {
+            return true;
           }
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Default");
+          }
+
+          @Override
+          protected void execPrepareBrowseLookup(ILookupCall<Long> call, String browseHint) {
+            ((HierarchicalLookupCall) call).setLoadIncremental(isBrowseLoadIncremental());
           }
         }
 
@@ -450,6 +466,25 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           @Override
           protected void execInitField() {
             setValue(ICB9537.ID);
+          }
+        }
+
+        @Order(100)
+        public class LoadIncrementalField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Load incremental";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getDefaultSmartField().isBrowseLoadIncremental());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getDefaultSmartField().setBrowseLoadIncremental(getValue());
           }
         }
       }
