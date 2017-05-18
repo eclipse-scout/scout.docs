@@ -1,9 +1,14 @@
 .open-form-button > .button {
   @open-form-button-background-color: @palette-green-3;
+  @open-form-button-active-background-color: @palette-green-1;
 
   background-color: @open-form-button-background-color;
   color: @palette-white;
   border-color: darken(@open-form-button-background-color, 5%);
+
+  &:active {
+    background-color: @open-form-button-active-background-color;
+  }
 }
 
 .form-field-alternative > .field {
