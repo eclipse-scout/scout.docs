@@ -1,9 +1,15 @@
 package org.eclipse.scout.widgets.client.services.lookup;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -28,12 +34,56 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
       long key = getRec();
       addSubTreeRec(getDepth(key) + 1, rows, key, false);
     }
+    else if (getText() != null) {
+      addSubTreeRec(0, rows, null, true);
+    }
     else {
       // all: when lookup is not 'load incremental', then load root nodes with child nodes
       // until level 3, otherwise only load root nodes
       addSubTreeRec(0, rows, null, !isLoadIncremental());
     }
     return rows;
+  }
+
+  /**
+   * Complete override using local data
+   */
+  @Override
+  public List<? extends ILookupRow<Long>> getDataByText() {
+    List<LookupRow<Long>> rows = execCreateLookupRows();
+    return filterByText(rows, getText());
+  }
+
+  private List<LookupRow<Long>> filterByText(List<LookupRow<Long>> rows, String text) {
+    // make a map to access all rows by key
+    Map<Long, LookupRow<Long>> rowMap = new TreeMap<Long, LookupRow<Long>>();
+    for (LookupRow<Long> row : rows) {
+      rowMap.put(row.getKey(), row);
+    }
+
+    // create a set with the results that match the search text
+    Set<LookupRow<Long>> results = new HashSet<LookupRow<Long>>();
+    Pattern pattern = createSearchPattern(text);
+    for (LookupRow<Long> row : rows) {
+      if (row.getText() != null && pattern.matcher(row.getText().toLowerCase()).matches()) {
+        results.add(row);
+        // info: we don't have to deal with parent nodes. This is done the LocalLookupCall impl. anyway
+        // also put all parent nodes of the row to the result
+        while (row != null) {
+          Long parentKey = row.getParentKey();
+          LookupRow<Long> parentNode = null;
+          if (parentKey != null) {
+            parentNode = rowMap.get(parentKey);
+            if (parentNode != null) {
+              results.add(parentNode);
+            }
+          }
+          row = parentNode;
+        }
+      }
+    }
+
+    return new ArrayList<LookupRow<Long>>(results);
   }
 
   private int getDepth(long key) {
@@ -49,11 +99,11 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
       long key = (parentKey == null ? 0 : parentKey.intValue()) * 10 + i;
       LookupRow<Long> row = newLookupRow(key, depth);
       rows.add(row);
-      if (recursive && depth < MAX_DEPTH) {
-        addSubTreeRec(depth + 1, rows, row.getKey(), recursive);
-      }
       if (parentKey != null) {
         row.withParentKey(parentKey);
+      }
+      if (recursive && depth < MAX_DEPTH) {
+        addSubTreeRec(depth + 1, rows, row.getKey(), recursive);
       }
     }
   }

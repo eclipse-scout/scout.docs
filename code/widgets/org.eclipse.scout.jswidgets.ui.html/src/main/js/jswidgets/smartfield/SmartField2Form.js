@@ -31,7 +31,6 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
     this.smartField.setValue(value);
   }.bind(this));
 
-
   var treeSmartField = this.widget('TreeSmartField');
   var expandTreeNodesField = this.widget('ExpandTreeNodesField');
 
@@ -41,9 +40,17 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
       treeSmartField.setBrowseAutoExpandAll(event.source.value);
     }
   });
+
+  var loadIncrementalField = this.widget('LoadIncrementalField');
+  loadIncrementalField.setValue(treeSmartField.browseLoadIncremental);
+  loadIncrementalField.on('propertyChange', function(event) {
+    if (scout.arrays.containsAny(event.changedProperties, ['value'])) {
+      treeSmartField.setBrowseLoadIncremental(event.source.value);
+    }
+  });
+
 };
 
 jswidgets.SmartField2Form.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.SmartField2Form');
 };
-

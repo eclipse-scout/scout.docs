@@ -48,6 +48,11 @@
              "id": "ExpandTreeNodesField",
              "objectType": "CheckBoxField",
              "label": "${textKey:ExpandTreeNodes}"
+           },
+           {
+             "id": "LoadIncrementalField",
+             "objectType": "CheckBoxField",
+             "label": "${textKey:LoadIncremental}"
            }
         ]
       },
@@ -59,7 +64,7 @@
         "fields": [
            {
             "id": "ProposalField",
-            "objectType": "SmartField2",
+            "objectType": "ProposalField2",
             "lookupCall": "jswidgets.SalutationLookupCall",
             "label": "${textKey:Salutation}",
             "variant": "proposal"
