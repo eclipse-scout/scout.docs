@@ -8,7 +8,7 @@ import org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData;
 /**
  * <h3>{@link BenchLayoutSnippet}</h3>
  *
- * @author aho
+ * @author Andreas Hoegger
  */
 public class BenchLayoutSnippet {
 
