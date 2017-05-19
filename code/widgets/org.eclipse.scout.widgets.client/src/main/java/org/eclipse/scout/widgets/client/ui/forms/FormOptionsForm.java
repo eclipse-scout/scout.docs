@@ -27,7 +27,7 @@ import org.eclipse.scout.widgets.shared.Icons;
 /**
  * <h3>{@link FormOptionsForm}</h3>
  *
- * @author aho
+ * @author Andreas Hoegger
  */
 public class FormOptionsForm extends AbstractForm {
 

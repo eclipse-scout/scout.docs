@@ -14,7 +14,7 @@ import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.
 /**
  * <h3>{@link DisplayViewIdLookupCall}</h3>
  *
- * @author aho
+ * @author Andreas Hoegger
  */
 
 @ApplicationScoped

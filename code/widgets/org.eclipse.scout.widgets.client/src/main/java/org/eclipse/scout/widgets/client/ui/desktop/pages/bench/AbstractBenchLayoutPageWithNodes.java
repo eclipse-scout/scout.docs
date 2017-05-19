@@ -12,7 +12,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 /**
  * <h3>{@link AbstractBenchLayoutPageWithNodes}</h3>
  *
- * @author aho
+ * @author Andreas Hoegger
  */
 public class AbstractBenchLayoutPageWithNodes extends AbstractPageWithNodes {
 
