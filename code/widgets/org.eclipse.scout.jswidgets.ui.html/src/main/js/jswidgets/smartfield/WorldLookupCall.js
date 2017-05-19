@@ -12,6 +12,8 @@ jswidgets.WorldLookupCall = function() {
   jswidgets.WorldLookupCall.parent.call(this);
 
   this.setDelay(250);
+  this.setLoadIncremental(true);
+  this.setHierarchical(true);
 };
 scout.inherits(jswidgets.WorldLookupCall, scout.StaticLookupCall);
 
@@ -19,40 +21,80 @@ jswidgets.WorldLookupCall.prototype._data = function() {
   return jswidgets.WorldLookupCall.DATA;
 };
 
-jswidgets.WorldLookupCall.prototype.getByText = function(text) {
+jswidgets.WorldLookupCall.prototype._queryAll = function() {
+  var lookupRows;
+  if (this.loadIncremental) {
+    // only select root nodes
+    lookupRows = [];
+    this._data().forEach(function(data) {
+      if (data[2] === null) {
+        lookupRows.push(this._dataToLookupRow(data));
+      }
+    }, this);
+  } else {
+    lookupRows = this._data().map(this._dataToLookupRow);
+  }
+  this.resolveLookup({
+    lookupRows: lookupRows
+  });
+};
+
+jswidgets.WorldLookupCall.prototype.getByRec = function(rec) {
   this._newDeferred();
   setTimeout(function() {
-    // this map contains all data elements, for easier access by key (index 1)
-    var dataMap = {};
-    jswidgets.WorldLookupCall.DATA.forEach(function(data) {
-      dataMap[data[1]] = data;
-    });
 
-    // 1. find nodes that match the search text
-    var datas = jswidgets.WorldLookupCall.DATA.filter(function(data) {
-      return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
-    });
-
-    // 2. for each found node, make sure that all its parent nodes up to the root
-    //    are in the search result. The map prevents duplicates
-    var resultMap = {};
-    datas.forEach(function(data) {
-      resultMap[data[1]] = data;
-
-      while(data[2]) {
-        data = dataMap[data[2]];
-        resultMap[data[1]] = data;
+    var lookupRows = [];
+    this._data().forEach(function(data) {
+      if (data[2] === rec) {
+        lookupRows.push(this._dataToLookupRow(data));
       }
-    });
-
-    // 3. convert the result in an array again
-    datas = scout.objects.values(resultMap);
+    }, this);
 
     this.resolveLookup({
-      lookupRows: datas.map(this._dataToLookupRow)
+      lookupRows: lookupRows
     });
-  }.bind(this), 200);
+
+  }.bind(this), this._delay);
   return this.deferred.promise();
+};
+
+/**
+ * Creates a map that contains all data elements, for easier access by key (index 1)
+ */
+jswidgets.WorldLookupCall.prototype._createDataMap = function() {
+  var dataMap = {};
+  this._data().forEach(function(data) {
+    dataMap[data[1]] = data;
+  });
+  return dataMap;
+};
+
+jswidgets.WorldLookupCall.prototype._queryByText = function(text) {
+  var dataMap = this._createDataMap();
+
+  // 1. find nodes that match the search text
+  var datas = this._data().filter(function(data) {
+    return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
+  });
+
+  // 2. for each found node, make sure that all its parent nodes up to the root
+  //    are in the search result. The map prevents duplicates
+  var resultMap = {};
+  datas.forEach(function(data) {
+    resultMap[data[1]] = data;
+
+    while(data[2]) {
+      data = dataMap[data[2]];
+      resultMap[data[1]] = data;
+    }
+  });
+
+  // 3. convert the result in an array again
+  datas = scout.objects.values(resultMap);
+
+  this.resolveLookup({
+    lookupRows: datas.map(this._dataToLookupRow)
+  });
 };
 
 jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
@@ -66,6 +108,9 @@ jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
   return lookupRow;
 };
 
+// 0: text
+// 1: key
+// 2: [parentKey]
 jswidgets.WorldLookupCall.DATA = [
   ['Africa', 'AF', null],
   ['Eastern Africa', 'EAF', 'AF'],

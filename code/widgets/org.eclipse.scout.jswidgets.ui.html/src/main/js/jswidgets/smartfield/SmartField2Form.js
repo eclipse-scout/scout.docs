@@ -36,16 +36,16 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
 
   expandTreeNodesField.setValue(treeSmartField.browseAutoExpandAll);
   expandTreeNodesField.on('propertyChange', function(event) {
-    if (scout.arrays.containsAny(event.changedProperties, ['value'])) {
-      treeSmartField.setBrowseAutoExpandAll(event.source.value);
+    if ('value' === event.name) {
+      treeSmartField.setBrowseAutoExpandAll(event.newValue);
     }
   });
 
   var loadIncrementalField = this.widget('LoadIncrementalField');
   loadIncrementalField.setValue(treeSmartField.browseLoadIncremental);
   loadIncrementalField.on('propertyChange', function(event) {
-    if (scout.arrays.containsAny(event.changedProperties, ['value'])) {
-      treeSmartField.setBrowseLoadIncremental(event.source.value);
+    if ('value' === event.name) {
+      treeSmartField.setBrowseLoadIncremental(event.newValue);
     }
   });
 
