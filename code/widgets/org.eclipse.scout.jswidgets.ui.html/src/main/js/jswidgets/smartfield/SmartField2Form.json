@@ -66,8 +66,7 @@
             "id": "ProposalField",
             "objectType": "ProposalField2",
             "lookupCall": "jswidgets.SalutationLookupCall",
-            "label": "${textKey:Salutation}",
-            "variant": "proposal"
+            "label": "${textKey:Salutation}"
            }
         ]
       },
@@ -82,7 +81,7 @@
             "objectType": "SmartField2",
             "lookupCall": "jswidgets.SalutationLookupCall",
             "label": "${textKey:Salutation}",
-            "variant": "dropdown"
+            "displayStyle": "dropdown"
            }
         ]
       }
