@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.IButton;
@@ -37,6 +38,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
@@ -49,8 +52,10 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Conf
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.ConfigLocaleField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DateFieldFormatField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DisplayTextField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DontAllowCurrentDateField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.GetValueField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.InputField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.DontAllow1000TimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeDisplayTextField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeFieldFormatField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeInputField;
@@ -128,6 +133,14 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   public DateColumnField getDateColumnField() {
     return getFieldByClass(DateColumnField.class);
+  }
+
+  public DontAllowCurrentDateField getDontAllowCurrentDateField() {
+    return getFieldByClass(DontAllowCurrentDateField.class);
+  }
+
+  public DontAllow1000TimeField getDontAllow1000TimeField() {
+    return getFieldByClass(DontAllow1000TimeField.class);
   }
 
   public TimeColumnField getTimeColumnField() {
@@ -893,6 +906,15 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             super.setDisplayText(s);
             getDisplayTextField().setValue(s);
           }
+
+          @Override
+          protected Date execValidateValue(Date rawValue) {
+            Date date = super.execValidateValue(rawValue);
+            if (getDontAllowCurrentDateField().getValue() && DateUtility.isSameDay(date, new Date())) {
+              throw new VetoException("You are not allowed to select the current day");
+            }
+            return date;
+          }
         }
 
         @Order(20)
@@ -1039,6 +1061,26 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn3Box.DateTimeInputField.class).setAutoDate(autoDate);
           }
         }
+
+        @Order(2000)
+        @ClassId("f12e34f8-a2d6-4c12-8246-a2db6d4aeec4")
+        public class DontAllowCurrentDateField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DontAllowCurrentDate");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            InputField field = getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class);
+            field.setValue(field.getValue()); // revalidate
+          }
+        }
       }
 
       @Order(30)
@@ -1106,6 +1148,20 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           public void setDisplayText(String s) {
             super.setDisplayText(s);
             getTimeDisplayTextField().setValue(s);
+          }
+
+          @Override
+          protected Date execValidateValue(Date rawValue) {
+            Date date = super.execValidateValue(rawValue);
+            if (date == null) {
+              return null;
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            if (getDontAllow1000TimeField().getValue() && cal.get(Calendar.HOUR_OF_DAY) == 10 && cal.get(Calendar.MINUTE) == 0) {
+              throw new VetoException("You are not allowed to select 10:00");
+            }
+            return date;
           }
         }
 
@@ -1190,6 +1246,27 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             return false;
           }
         }
+
+        @Order(2000)
+        @ClassId("b7ed1507-62b8-447f-b23f-3d9883aec82c")
+        public class DontAllow1000TimeField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DontAllow1000Time");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            TimeInputField field = getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class);
+            field.setValue(field.getValue()); // revalidate
+          }
+        }
+
       }
 
       @Order(40)
