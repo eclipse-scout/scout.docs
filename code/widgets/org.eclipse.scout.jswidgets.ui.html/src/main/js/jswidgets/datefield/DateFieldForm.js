@@ -32,9 +32,13 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   hasDateField.setValue(dateField.hasDate);
   hasDateField.on('propertyChange', this._onHasDatePropertyChange.bind(this));
 
-  var formatField = this.widget('FormatField');
-  formatField.setValue(dateField.dateFormatPattern);
-  formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+  var dateFormatField = this.widget('DateFormatField');
+  dateFormatField.setValue(dateField.dateFormatPattern);
+  dateFormatField.on('propertyChange', this._onDateFormatPropertyChange.bind(this));
+
+  var timeFormatField = this.widget('TimeFormatField');
+  timeFormatField.setValue(dateField.timeFormatPattern);
+  timeFormatField.on('propertyChange', this._onTimeFormatPropertyChange.bind(this));
 
   var autoDateField = this.widget('AutoDateField');
   autoDateField.setValue(dateField.autoDate);
@@ -60,9 +64,15 @@ jswidgets.DateFieldForm.prototype._onHasTimePropertyChange = function(event) {
   }
 };
 
-jswidgets.DateFieldForm.prototype._onFormatPropertyChange = function(event) {
+jswidgets.DateFieldForm.prototype._onDateFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setDateFormatPattern(event.newValue);
+  }
+};
+
+jswidgets.DateFieldForm.prototype._onTimeFormatPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('DateField').setTimeFormatPattern(event.newValue);
   }
 };
 
