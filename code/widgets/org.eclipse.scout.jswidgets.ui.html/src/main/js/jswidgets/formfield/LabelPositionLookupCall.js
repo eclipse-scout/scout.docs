@@ -10,8 +10,6 @@
  ******************************************************************************/
 jswidgets.LabelPositionLookupCall = function() {
   jswidgets.LabelPositionLookupCall.parent.call(this);
-
-  this.setDelay(250);
 };
 scout.inherits(jswidgets.LabelPositionLookupCall, scout.StaticLookupCall);
 

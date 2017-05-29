@@ -72,9 +72,23 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   labelWidthInPixelField.setValue(this.field.labelWidthInPixel);
   labelWidthInPixelField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var errorStatusField = this.widget('ErrorStatusField');
+  errorStatusField.setValue(this.field.errorStatus ? this.field.errorStatus.severity: null);
+  errorStatusField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var tooltipTextField = this.widget('TooltipTextField');
   tooltipTextField.setValue(this.field.tooltipText);
   tooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
+};
+
+jswidgets.FormFieldPropertiesBox.prototype._createErrorStatus = function(severity) {
+  if (!severity ) {
+    return null;
+  }
+  return new scout.Status({
+    severity: severity,
+    message: this.session.text('FormFieldStatusMessage', scout.objects.keyByValue(scout.Status.Severity, severity))
+  });
 };
 
 jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
@@ -100,6 +114,8 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     } else {
       this.field.setLabelWidthInPixel(scout.numbers.ensure(event.newValue));
     }
+  } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
+    this.field.setErrorStatus(this._createErrorStatus(event.newValue));
   } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
     this.field.setTooltipText(event.newValue);
   }

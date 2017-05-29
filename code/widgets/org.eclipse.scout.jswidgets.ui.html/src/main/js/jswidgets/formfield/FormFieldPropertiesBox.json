@@ -40,7 +40,8 @@
       "id": "DisabledStyleField",
       "objectType": "SmartField2",
       "lookupCall": "jswidgets.DisabledStyleLookupCall",
-      "label": "Disabled Style"
+      "label": "Disabled Style",
+      "displayStyle": "dropdown"
     },
     {
       "id": "LabelField",
@@ -51,14 +52,20 @@
       "id": "LabelPositionField",
       "objectType": "SmartField2",
       "lookupCall": "jswidgets.LabelPositionLookupCall",
-      "label": "Label Position"
+      "label": "Label Position",
+      "displayStyle": "dropdown"
     },
     {
       "id": "LabelWidthInPixelField",
-      "objectType": "SmartField2",
-      "variant": "proposal",
+      "objectType": "ProposalField2",
       "lookupCall": "jswidgets.LabelWidthInPixelLookupCall",
       "label": "Label Width in Pixel"
+    },
+    {
+      "id": "ErrorStatusField",
+      "objectType": "SmartField2",
+      "lookupCall": "jswidgets.StatusSeverityLookupCall",
+      "label": "Error Status"
     },
     {
       "id": "TooltipTextField",

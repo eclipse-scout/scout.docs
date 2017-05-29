@@ -8,16 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.LabelWidthInPixelLookupCall = function() {
-  jswidgets.LabelWidthInPixelLookupCall.parent.call(this);
+jswidgets.StatusSeverityLookupCall = function() {
+  jswidgets.StatusSeverityLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.LabelWidthInPixelLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.StatusSeverityLookupCall, scout.StaticLookupCall);
 
-jswidgets.LabelWidthInPixelLookupCall.prototype._data = function() {
-  return jswidgets.LabelWidthInPixelLookupCall.DATA;
+jswidgets.StatusSeverityLookupCall.prototype._data = function() {
+  return jswidgets.StatusSeverityLookupCall.DATA;
 };
 
-jswidgets.LabelWidthInPixelLookupCall.DATA = [
-  ['default', scout.FormField.LabelWidth.DEFAULT],
-  ['ui width', scout.FormField.LabelWidth.UI],
+jswidgets.StatusSeverityLookupCall.DATA = [
+  ['info', scout.Status.Severity.INFO],
+  ['warning', scout.Status.Severity.WARNING],
+  ['error', scout.Status.Severity.ERROR]
 ];

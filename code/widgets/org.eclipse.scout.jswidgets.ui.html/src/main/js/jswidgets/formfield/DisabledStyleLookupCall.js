@@ -10,8 +10,6 @@
  ******************************************************************************/
 jswidgets.DisabledStyleLookupCall = function() {
   jswidgets.DisabledStyleLookupCall.parent.call(this);
-
-  this.setDelay(250);
 };
 scout.inherits(jswidgets.DisabledStyleLookupCall, scout.StaticLookupCall);
 
