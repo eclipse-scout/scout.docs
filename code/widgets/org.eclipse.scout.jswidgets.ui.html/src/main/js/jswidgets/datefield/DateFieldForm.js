@@ -49,25 +49,25 @@ jswidgets.DateFieldForm.prototype._jsonModel = function() {
 };
 
 jswidgets.DateFieldForm.prototype._onHasDatePropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('DateField').setHasDate(event.newValue);
   }
 };
 
 jswidgets.DateFieldForm.prototype._onHasTimePropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('DateField').setHasTime(event.newValue);
   }
 };
 
 jswidgets.DateFieldForm.prototype._onFormatPropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('DateField').setDateFormatPattern(event.newValue);
   }
 };
 
 jswidgets.DateFieldForm.prototype._onAutoDatePropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('DateField').setAutoDate(event.newValue);
   }
 };

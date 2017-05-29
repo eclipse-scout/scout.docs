@@ -36,7 +36,7 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
 
   expandTreeNodesField.setValue(treeSmartField.browseAutoExpandAll);
   expandTreeNodesField.on('propertyChange', function(event) {
-    if ('value' === event.name) {
+    if ('value' === event.propertyName) {
       treeSmartField.setBrowseAutoExpandAll(event.newValue);
     }
   });
@@ -44,7 +44,7 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
   var loadIncrementalField = this.widget('LoadIncrementalField');
   loadIncrementalField.setValue(treeSmartField.browseLoadIncremental);
   loadIncrementalField.on('propertyChange', function(event) {
-    if ('value' === event.name) {
+    if ('value' === event.propertyName) {
       treeSmartField.setBrowseLoadIncremental(event.newValue);
     }
   });

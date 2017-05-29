@@ -53,17 +53,17 @@ jswidgets.ValueFieldPropertiesBox.prototype._setField = function(field) {
 };
 
 jswidgets.ValueFieldPropertiesBox.prototype._onFieldPropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('ValueField').setValue(event.newValue);
-  } else if (event.name === 'displayText') {
+  } else if (event.propertyName === 'displayText') {
     this.widget('DisplayTextField').setValue(event.newValue);
   }
 };
 
 jswidgets.ValueFieldPropertiesBox.prototype._onPropertyChange = function(event) {
-  if (event.name === 'value' && event.source.id === 'ValueField') {
+  if (event.propertyName === 'value' && event.source.id === 'ValueField') {
     this.field.setValue(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'DisplayTextField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'DisplayTextField') {
     this.field.setDisplayText(event.newValue);
   }
 };

@@ -251,7 +251,7 @@ var button = scout.create('scout.Button', {
 button.render();
 button.on('propertyChange', function(event) {
   // prints 'Property selected changed from false to true'
-  console.log('Property ' + event.name + ' changed from ' + event.oldValue + ' to ' + event.newValue);
+  console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
 });
 button.setSelected(true);
 ----

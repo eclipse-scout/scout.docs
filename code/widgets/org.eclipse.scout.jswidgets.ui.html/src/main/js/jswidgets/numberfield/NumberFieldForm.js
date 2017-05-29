@@ -36,7 +36,7 @@ jswidgets.NumberFieldForm.prototype._jsonModel = function() {
 };
 
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('NumberField').setDecimalFormat(event.newValue);
   }
 };

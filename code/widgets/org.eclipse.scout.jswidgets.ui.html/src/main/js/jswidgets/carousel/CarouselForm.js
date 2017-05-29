@@ -41,7 +41,7 @@ jswidgets.CarouselForm.prototype._jsonModel = function() {
 };
 
 jswidgets.CarouselForm.prototype._onStatusEnabledPropertyChange = function(event) {
-  if (event.name === 'value') {
+  if (event.propertyName === 'value') {
     this.widget('Carousel').setStatusEnabled(event.newValue);
   }
 };

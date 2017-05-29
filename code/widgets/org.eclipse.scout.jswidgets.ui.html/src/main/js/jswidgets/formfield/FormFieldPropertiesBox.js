@@ -78,29 +78,29 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
 };
 
 jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
-  if (event.name === 'value' && event.source.id === 'EnabledField') {
+  if (event.propertyName === 'value' && event.source.id === 'EnabledField') {
     this.field.setEnabled(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'VisibleField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
     this.field.setVisible(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'LabelVisibleField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'LabelVisibleField') {
     this.field.setLabelVisible(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'StatusVisibleField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'StatusVisibleField') {
     this.field.setStatusVisible(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'MandatoryField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'MandatoryField') {
     this.field.setMandatory(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'DisabledStyleField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
     this.field.setDisabledStyle(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'LabelField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'LabelField') {
     this.field.setLabel(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'LabelPositionField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'LabelPositionField') {
     this.field.setLabelPosition(event.newValue);
-  } else if (event.name === 'value' && event.source.id === 'LabelWidthInPixelField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'LabelWidthInPixelField') {
     if (this.field.lookupRow) {
       this.field.setLabelWidthInPixel(this.field.lookupRow.key);
     } else {
       this.field.setLabelWidthInPixel(scout.numbers.ensure(event.newValue));
     }
-  } else if (event.name === 'value' && event.source.id === 'TooltipTextField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
     this.field.setTooltipText(event.newValue);
   }
 };
