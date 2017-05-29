@@ -33,6 +33,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractProposalFi
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -401,6 +402,11 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         public class DefaultSmartField extends AbstractSmartField2<Long> {
 
           @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
           protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
             return HierarchicalLookupCall.class;
           }
@@ -413,11 +419,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           @Override
           protected boolean getConfiguredBrowseLoadIncremental() {
             return true;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Default");
           }
 
           @Override
@@ -1091,7 +1092,34 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
             setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
           }
         }
+      }
 
+      @Order(50)
+      public class ToggleHierarchicalLookupMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          ILookupCall<Long> lookupCall = getDefaultSmartField().getLookupCall();
+          getDefaultSmartField().setValue(null);
+          if (lookupCall instanceof HierarchicalLookupCall) {
+            setText(TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall"));
+            getDefaultSmartField().setCodeTypeClass(IndustryICBCodeType.class);
+          }
+          else {
+            setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
+            getDefaultSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
+          }
+        }
       }
 
     }
