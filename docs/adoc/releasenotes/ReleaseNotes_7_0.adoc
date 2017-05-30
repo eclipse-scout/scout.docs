@@ -2,7 +2,7 @@
 = Overview
 
 Eclipse Scout 7.0 will be the Eclipse Oxygen release.
-The latest stable version is _Oxygen.RC1 (7.0.0.001_RC1)_.
+The latest stable version is _Oxygen.RC1 (7.0.0.005_RC1)_.
 The official release for Eclipse Oxygen will be released in June 2017.
 See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the release schedule.
 
