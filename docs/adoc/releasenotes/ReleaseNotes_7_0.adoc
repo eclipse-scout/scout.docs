@@ -6,8 +6,8 @@ The latest stable version is _Oxygen.RC1 (7.0.0.005_RC1)_.
 The official release for Eclipse Oxygen will be released in June 2017.
 See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the release schedule.
 
-* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm7[Eclipse for Scout Developers]
-* Runtime on Maven Central: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.001_M7[7.0.0.001_M7]
+* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenrc1[Eclipse for Scout Developers]
+* Runtime on Maven Central: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.005_RC1[7.0.0.005_RC1]
 
 = What's New
 This document shows some of the new features delivered with the release 7.0. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x[https://github.com/eclipse/scout.rt/compare/releases/6.1.x...releases/7.0.x].
