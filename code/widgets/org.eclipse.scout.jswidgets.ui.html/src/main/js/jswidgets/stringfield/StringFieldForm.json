@@ -34,6 +34,22 @@
         ]
       },
       {
+        "id": "CustomizationBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Customization Examples",
+        "fields": [
+          {
+            "id": "BlockFormatField",
+            "objectType": "CheckBoxField",
+            "label": "Make 4 character blocks",
+            "labelVisible": false,
+            "tooltipText": '${textKey:BlockFormatTooltip}',
+            "gridUseUiWidth": true
+          }
+        ]
+      },
+      {
         "id": "ValueFieldPropertiesBox",
         "objectType": "jswidgets.ValueFieldPropertiesBox"
       },

@@ -55,6 +55,20 @@
           }
         ]
       },
+     {
+        "id": "CustomizationBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Customization Examples",
+        "fields": [
+          {
+            "id": "DontAllowCurrentDateField",
+            "objectType": "CheckBoxField",
+            "label": "Don't allow current date",
+            "labelVisible": false
+          }
+        ]
+      },
       {
         "id": "ValueFieldPropertiesBox",
         "objectType": "jswidgets.ValueFieldPropertiesBox"

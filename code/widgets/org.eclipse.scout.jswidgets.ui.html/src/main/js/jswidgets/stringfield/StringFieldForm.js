@@ -28,6 +28,10 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   formatField.setValue(stringField.format);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
 
+  var blockFormatField = this.widget('BlockFormatField');
+  blockFormatField.setValue(stringField.format);
+  blockFormatField.on('propertyChange', this._onBlockFormatPropertyChange.bind(this));
+
   this.widget('ValueFieldPropertiesBox').setField(stringField);
   this.widget('FormFieldPropertiesBox').setField(stringField);
 };
@@ -40,4 +44,32 @@ jswidgets.StringFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setFormat(event.newValue);
   }
+};
+
+jswidgets.StringFieldForm.prototype._onBlockFormatPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var stringField = this.widget('StringField');
+    if (event.newValue) {
+      stringField.setFormatter(jswidgets.StringFieldForm.blockFormatter);
+      stringField.setParser(jswidgets.StringFieldForm.blockParser);
+    } else {
+      stringField.setFormatter(null);
+      stringField.setParser(null);
+    }
+  }
+};
+
+jswidgets.StringFieldForm.blockFormatter = function(value, defaultFormatter) {
+  var displayText = defaultFormatter(value);
+  if (!displayText) {
+    return displayText;
+  }
+  return displayText.match(/.{4}/g).join('-');
+};
+
+jswidgets.StringFieldForm.blockParser = function(displayText, defaultParser) {
+  if (displayText) {
+    return displayText.replace(/-/g, '');
+  }
+  return defaultParser(displayText);
 };

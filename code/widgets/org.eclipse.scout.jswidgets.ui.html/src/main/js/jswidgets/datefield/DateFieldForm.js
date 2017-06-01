@@ -44,6 +44,15 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   autoDateField.setValue(dateField.autoDate);
   autoDateField.on('propertyChange', this._onAutoDatePropertyChange.bind(this));
 
+  var dontAllowCurrentDateField = this.widget('DontAllowCurrentDateField');
+  this._dontAllowCurrentDateValidator = function(value) {
+    if (scout.dates.isSameDay(value, new Date())) {
+      throw 'You are not allowed to select the current date';
+    }
+    return value;
+  };
+  dontAllowCurrentDateField.on('propertyChange', this._onDontAllowCurrentDateField.bind(this));
+
   this.widget('ValueFieldPropertiesBox').setField(dateField);
   this.widget('FormFieldPropertiesBox').setField(dateField);
 };
@@ -79,5 +88,16 @@ jswidgets.DateFieldForm.prototype._onTimeFormatPropertyChange = function(event) 
 jswidgets.DateFieldForm.prototype._onAutoDatePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setAutoDate(event.newValue);
+  }
+};
+
+jswidgets.DateFieldForm.prototype._onDontAllowCurrentDateField = function(event) {
+  if (event.propertyName === 'value') {
+    var dateField = this.widget('DateField');
+    if (event.newValue) {
+      dateField.addValidator(this._dontAllowCurrentDateValidator);
+    } else {
+      dateField.removeValidator(this._dontAllowCurrentDateValidator);
+    }
   }
 };
