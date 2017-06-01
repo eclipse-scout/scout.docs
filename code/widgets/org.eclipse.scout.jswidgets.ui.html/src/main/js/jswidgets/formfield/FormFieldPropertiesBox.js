@@ -109,8 +109,8 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'LabelPositionField') {
     this.field.setLabelPosition(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'LabelWidthInPixelField') {
-    if (this.field.lookupRow) {
-      this.field.setLabelWidthInPixel(this.field.lookupRow.key);
+    if (event.source.lookupRow) {
+      this.field.setLabelWidthInPixel(event.source.lookupRow.key);
     } else {
       this.field.setLabelWidthInPixel(scout.numbers.ensure(event.newValue));
     }
