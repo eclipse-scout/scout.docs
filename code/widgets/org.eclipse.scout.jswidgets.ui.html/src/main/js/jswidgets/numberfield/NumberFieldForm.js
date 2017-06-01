@@ -16,11 +16,11 @@ scout.inherits(jswidgets.NumberFieldForm, scout.Form);
 jswidgets.NumberFieldForm.prototype._init = function(model) {
   jswidgets.NumberFieldForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  var bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.rootGroupBox);
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('DetailBox'));
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('PropertiesBox'));
 
   var numberField = this.widget('NumberField');

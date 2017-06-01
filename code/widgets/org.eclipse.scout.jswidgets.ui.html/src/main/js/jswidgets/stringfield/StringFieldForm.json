@@ -22,14 +22,64 @@
       {
         "id": "PropertiesBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
         "label": "Properties",
         "fields": [
+           {
+            "id": "HasActionField",
+            "objectType": "CheckBoxField",
+            "label": "Has Action",
+            "labelVisible": false
+          },
+          {
+            "id": "InputMaskedField",
+            "objectType": "CheckBoxField",
+            "label": "Input Masked",
+            "labelVisible": false
+          },
+          {
+            "id": "SpellCheckEnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Spell Check Enabled",
+            "labelVisible": false
+          },
+          {
+            "id": "TrimTextField",
+            "objectType": "CheckBoxField",
+            "label": "Trim Text",
+            "labelVisible": false
+          },
+          {
+            "id": "UpdateDisplayTextOnModifyField",
+            "objectType": "CheckBoxField",
+            "label": "Update Display Text On Modify",
+            "labelVisible": false
+          },
           {
             "id": "FormatField",
             "objectType": "SmartField2",
             "lookupCall": "jswidgets.StringFormatLookupCall",
             "label": "Format"
+          },
+          {
+            "id": "MaxLengthField",
+            "objectType": "NumberField",
+            "label": "Max Length"
+          },
+          {
+            "id": "SelectionTrackingEnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Selection Tracking Enabled",
+            "labelVisible": false
+          },
+          {
+            "id": "SelectionStartField",
+            "objectType": "NumberField",
+            "label": "Selection Start"
+          },
+          {
+            "id": "SelectionEndField",
+            "objectType": "NumberField",
+            "label": "Selection End"
           }
         ]
       },

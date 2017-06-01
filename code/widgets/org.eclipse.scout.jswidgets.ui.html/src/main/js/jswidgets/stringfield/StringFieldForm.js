@@ -16,17 +16,56 @@ scout.inherits(jswidgets.StringFieldForm, scout.Form);
 jswidgets.StringFieldForm.prototype._init = function(model) {
   jswidgets.StringFieldForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  var bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.rootGroupBox);
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('DetailBox'));
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
+  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
   bodyGrid.validate(this.widget('PropertiesBox'));
 
   var stringField = this.widget('StringField');
+  stringField.on('selectionChange', this._onFieldSelectionChange.bind(this));
+  stringField.on('action', this._onFieldAction.bind(this));
+
+  var hasActionField = this.widget('HasActionField');
+  hasActionField.setValue(stringField.hasActionField);
+  hasActionField.on('propertyChange', this._onHasActionPropertyChange.bind(this));
+
+  var inputMaskedField = this.widget('InputMaskedField');
+  inputMaskedField.setValue(stringField.inputMasked);
+  inputMaskedField.on('propertyChange', this._onInputMaskedPropertyChange.bind(this));
+
+  var spellCheckEnabledField = this.widget('SpellCheckEnabledField');
+  spellCheckEnabledField.setValue(stringField.spellCheckEnabled);
+  spellCheckEnabledField.on('propertyChange', this._onSpellCheckEnabledPropertyChange.bind(this));
+
+  var trimTextField = this.widget('TrimTextField');
+  trimTextField.setValue(stringField.trimText);
+  trimTextField.on('propertyChange', this._onTrimTextPropertyChange.bind(this));
+
+  var updateDisplayTextOnModifyField = this.widget('UpdateDisplayTextOnModifyField');
+  updateDisplayTextOnModifyField.setValue(stringField.updateDisplayTextOnModify);
+  updateDisplayTextOnModifyField.on('propertyChange', this._onUpdateDisplayTextOnModifyPropertyChange.bind(this));
+
   var formatField = this.widget('FormatField');
   formatField.setValue(stringField.format);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+
+  var maxLengthField = this.widget('MaxLengthField');
+  maxLengthField.setValue(stringField.maxLength);
+  maxLengthField.on('propertyChange', this._onMaxLengthPropertyChange.bind(this));
+
+  var selectionTrackingEnabledField = this.widget('SelectionTrackingEnabledField');
+  selectionTrackingEnabledField.setValue(stringField.selectionTrackingEnabled);
+  selectionTrackingEnabledField.on('propertyChange', this._onSelectionTrackingEnabledPropertyChange.bind(this));
+
+  var selectionStartField = this.widget('SelectionStartField');
+  selectionStartField.setValue(stringField.selectionStart);
+  selectionStartField.on('propertyChange', this._onSelectionStartPropertyChange.bind(this));
+
+  var selectionEndField = this.widget('SelectionEndField');
+  selectionEndField.setValue(stringField.selectionEnd);
+  selectionEndField.on('propertyChange', this._onSelectionEndPropertyChange.bind(this));
 
   var blockFormatField = this.widget('BlockFormatField');
   blockFormatField.setValue(stringField.format);
@@ -40,9 +79,67 @@ jswidgets.StringFieldForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.StringFieldForm');
 };
 
+jswidgets.StringFieldForm.prototype._onHasActionPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setHasAction(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onInputMaskedPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setInputMasked(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onSpellCheckEnabledPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setSpellCheckEnabled(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onTrimTextPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setTrimText(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onUpdateDisplayTextOnModifyPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setUpdateDisplayTextOnModify(event.newValue);
+  }
+};
+
 jswidgets.StringFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setFormat(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onMaxLengthPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setMaxLength(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onSelectionTrackingEnabledPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('StringField').setSelectionTrackingEnabled(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onSelectionStartPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var stringField = this.widget('StringField');
+    stringField.focus();
+    stringField.setSelectionStart(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onSelectionEndPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var stringField = this.widget('StringField');
+    stringField.focus();
+    stringField.setSelectionEnd(event.newValue);
   }
 };
 
@@ -57,6 +154,25 @@ jswidgets.StringFieldForm.prototype._onBlockFormatPropertyChange = function(even
       stringField.setParser(null);
     }
   }
+};
+
+jswidgets.StringFieldForm.prototype._onFieldAction = function(event) {
+  var msgBox = scout.create('scout.MessageBox', {
+    parent: this,
+    yesButtonText: this.session.text('Thanks') + '!',
+    body: this.session.text('StringFieldHasActionMessage')
+  });
+  msgBox.open();
+  msgBox.on('action', function() {
+    msgBox.close();
+  });
+};
+
+jswidgets.StringFieldForm.prototype._onFieldSelectionChange = function(event) {
+  var selectionStartField = this.widget('SelectionStartField');
+  selectionStartField.setValue(event.selectionStart);
+  var selectionEndField = this.widget('SelectionEndField');
+  selectionEndField.setValue(event.selectionEnd);
 };
 
 jswidgets.StringFieldForm.blockFormatter = function(value, defaultFormatter) {

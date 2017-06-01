@@ -28,7 +28,6 @@
       {
         "id": "PropertiesBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
         "label": "Properties",
         "fields": [
           {

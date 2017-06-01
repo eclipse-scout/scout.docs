@@ -62,15 +62,15 @@
       "label": "Label Width in Pixel"
     },
     {
+      "id": "TooltipTextField",
+      "objectType": "StringField",
+      "label": "Tooltip Text"
+    },
+    {
       "id": "ErrorStatusField",
       "objectType": "SmartField2",
       "lookupCall": "jswidgets.StatusSeverityLookupCall",
       "label": "Error Status"
-    },
-    {
-      "id": "TooltipTextField",
-      "objectType": "StringField",
-      "label": "Tooltip Text"
     }
   ]
 }
