@@ -19,12 +19,13 @@
   __include("jswidgets/desktop/FormFieldOutline.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartField2Form.js");
-  __include("jswidgets/tablefield/TableFieldForm.js");
-  __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
-  // lookup calls
   __include("jswidgets/smartfield/HierarchicalLookupCall.js");
   __include("jswidgets/smartfield/WorldLookupCall.js");
   __include("jswidgets/smartfield/LocaleLookupCall.js");
   __include("jswidgets/smartfield/SalutationLookupCall.js");
+  __include("jswidgets/stringfield/StringFieldForm.js");
+  __include("jswidgets/stringfield/StringFormatLookupCall.js");
+  __include("jswidgets/tablefield/TableFieldForm.js");
+  __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   __include("jswidgets/WidgetsRoute.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

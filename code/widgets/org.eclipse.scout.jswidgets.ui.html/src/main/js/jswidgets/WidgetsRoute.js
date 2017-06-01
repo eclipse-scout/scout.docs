@@ -63,7 +63,8 @@ jswidgets.WidgetsRoute.ROUTES = [ // FIXME [awe] 7.0 - Extract routeRef dynamica
   ['datefield', 'jswidgets.DateFieldForm'],
   ['numberfield', 'jswidgets.NumberFieldForm'],
   ['tablefield', 'jswidgets.TableFieldForm'],
-  ['smartfield2', 'jswidgets.SmartField2Form']
+  ['smartfield2', 'jswidgets.SmartField2Form'],
+  ['stringfield', 'jswidgets.StringFieldForm']
 ];
 
 

@@ -50,6 +50,14 @@
       "detailForm": {
         "objectType": "jswidgets.SmartField2Form"
       }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:StringField}",
+      "detailForm": {
+        "objectType": "jswidgets.StringFieldForm"
+      }
     }
   ]
 }

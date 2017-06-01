@@ -7,6 +7,7 @@
 "jswidgets/datefield/DateFieldForm.json",
 "jswidgets/numberfield/NumberFieldForm.json",
 "jswidgets/smartfield/SmartField2Form.json",
+"jswidgets/stringfield/StringFieldForm.json",
 "jswidgets/tablefield/TableFieldForm.json",
 "jswidgets/valuefield/ValueFieldPropertiesBox.json"
 ]}

@@ -1,0 +1,46 @@
+{
+  "id": "jswidgets.StringFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "StringField",
+            "objectType": "StringField",
+            "label": "${textKey:StringField}"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "FormatField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.StringFormatLookupCall",
+            "label": "Format"
+          }
+        ]
+      },
+      {
+        "id": "ValueFieldPropertiesBox",
+        "objectType": "jswidgets.ValueFieldPropertiesBox"
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}
