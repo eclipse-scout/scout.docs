@@ -45,6 +45,26 @@ In order to use REST services based on the JAX-RS Jersey implementation, the fol
 
 The `RestApplication` class searches for all implemenations of `IRestResource` and exposes them as REST services.
 
+==== Removed properties "enabledProcessing" on IButton and IAction
+
+When a user performs two consecutive clicks on a button or a menu within a very short period of time, the action is executed twice. In some cases, this is an unwanted behavior. A new property "preventDoubleClick" was added to IButton and IMenu to disable it (see release notes).
+
+In older Scout versions, two flags (`m_enabledProcessing` and `m_enabledProcessingAction`, respectively) were use to accomplish a
+similar objective. Whenever the click/action handler was started, the flag was set to `false`, and set back to `true` at the end of the execution. A second call to the method had no effect. However, this logic no longer works since the introduction of the HTML UI. The new UI strictly allows _only one_ UI event to work on the client model simultaneously (subsequent click events are hold back by the _UiSession_ lock). Consequently, the "enabledProcessing" flag is never `false`, and no clicks are prevented.
+
+Because this construct no longer works, the corresponding properties and methods were removed, namely:
+
+* [line-through]#`AbstractButton: m_enabledProcessing`#
+* [line-through]#`IButton/AbstractButton: isEnabledProcessing()`#
+* [line-through]#`IButton/AbstractButton: setEnabledProcessing()`#
+* [line-through]#`IButton/AbstractButton: disarm()`#
+* [line-through]#`ButtonEvent: TYPE_DISARM`#
+* [line-through]#`AbstractAction: m_enabledProcessingAction`#
+* [line-through]#`IAction/AbstractAction: isEnabledProcessingAction`#
+
+*Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
@@ -85,18 +105,20 @@ These functions are now supported by jQuery directly. Just use `addClass`, `remo
 The property change event has been simplified.
 
 The event had 3 properties:
-- newProperties
-- oldProperties
-- changedProperties
+
+* [line-through]#`newProperties`#
+* [line-through]#`oldProperties`#
+* [line-through]#`changedProperties`#
 
 This was added to be able to react to multiple property change events at
 once. Since 6.1, bulk property changes don't exist anymore, so there is
 no need for these properties anymore.
 
 Now, with 7.0, the property change event has the following properties:
-- name
-- oldValue
-- newValue
+
+* `name`
+* `oldValue`
+* `newValue`
 
 This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.
 
@@ -144,8 +166,6 @@ Depending on the container, you may want also to add the depdendency `javax.xml.
   </dependencies>
 </project>
 ----
-
-#TODO#
 
 // ^^^
 // Insert descriptions of other important changes here
