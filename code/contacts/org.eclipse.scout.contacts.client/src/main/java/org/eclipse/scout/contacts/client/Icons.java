@@ -18,7 +18,9 @@ public class Icons extends AbstractIcons {
 
   public static final String EclipseScout = "eclipse_scout";
 
-  public static final String Organization = "house";
+  public static final String OrganizationLarge = "house";
+
+  public static final String Organization = "font:awesomeIcons \uf015";
 
   public static final String Person = "user";
 

@@ -171,7 +171,7 @@ public class OrganizationForm extends AbstractForm {
 
         @Override
         protected String getConfiguredImageId() {
-          return Icons.Organization;
+          return Icons.OrganizationLarge;
         }
         // tag::layout[]
         // tag::picture[]

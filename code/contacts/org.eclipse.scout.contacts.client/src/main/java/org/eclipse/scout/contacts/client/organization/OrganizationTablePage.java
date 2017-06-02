@@ -216,7 +216,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
 
   @Override
   protected String getConfiguredIconId() {
-    return AbstractIcons.World;
+    return Icons.Organization;
   }
 
   // tag::childPage[]

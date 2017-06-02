@@ -630,7 +630,7 @@ public interface SQLs {
       + "          'Gebenstorf', "
       + "          'CH', "
       + "          null, "
-      + "          'org02')";
+      + "          null)";
 
   String PERSON_VALUES_29 = ""
       + "VALUES   ('prs29', "

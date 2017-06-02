@@ -44,21 +44,21 @@ public interface SQLs {
 
   String EVENT_INSERT_VALUES_01 = ""
       + "VALUES      ('evt01', "
-      + "             'JavaLand 2016', "
-      + "             '2016-03-08 09:00:00', "
-      + "             '2016-03-10 17:00:00', "
+      + "             'JavaLand 2017', "
+      + "             '2017-03-28 09:00:00', "
+      + "             '2017-03-30 17:00:00', "
       + "             'Bruehl', "
       + "             'DE', "
-      + "             'https://www.javaland.eu/de/archiv-2016/')";
+      + "             'https://www.javaland.eu/de/javaland-2017/')";
 
   String EVENT_INSERT_VALUES_02 = ""
       + "VALUES      ('evt02', "
-      + "             'EclipseCon Europe 2016', "
-      + "             '2016-10-25 09:00:00', "
-      + "             '2016-10-27 17:00:00', "
+      + "             'EclipseCon Europe 2017', "
+      + "             '2016-10-24 09:00:00', "
+      + "             '2016-10-26 17:00:00', "
       + "             'Ludwigsburg', "
       + "             'DE', "
-      + "             'https://www.eclipsecon.org/europe2016/')";
+      + "             'https://www.eclipsecon.org/europe2017/')";
 
   String PARTICIPANT_CREATE_TABLE = ""
       + "CREATE       "
