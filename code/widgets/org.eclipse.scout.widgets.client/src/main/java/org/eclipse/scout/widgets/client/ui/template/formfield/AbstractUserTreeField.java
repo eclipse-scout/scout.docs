@@ -54,7 +54,8 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
 
     clearErrorStatus();
 
-    for (String line : getValue().split("\n")) {
+    String value = StringUtility.emptyIfNull(getValue());
+    for (String line : value.split("\n")) {
       line = line.trim();
 
       if (line.length() > 0 && !line.startsWith("#")) {
