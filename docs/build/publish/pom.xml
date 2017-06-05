@@ -66,7 +66,7 @@
       <plugin>
         <groupId>com.bsiag.htmltools</groupId>
         <artifactId>htmltools-maven-plugin</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
