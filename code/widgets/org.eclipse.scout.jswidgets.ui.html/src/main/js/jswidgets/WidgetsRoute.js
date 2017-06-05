@@ -66,6 +66,3 @@ jswidgets.WidgetsRoute.ROUTES = [ // FIXME [awe] 7.0 - Extract routeRef dynamica
   ['smartfield2', 'jswidgets.SmartField2Form'],
   ['stringfield', 'jswidgets.StringFieldForm']
 ];
-
-
-

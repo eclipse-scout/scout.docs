@@ -48,6 +48,7 @@
     <module>../org.eclipse.scout.jswidgets.ui.html</module>
     <module>../org.eclipse.scout.jswidgets.ui.html.app</module>
     <module>../org.eclipse.scout.jswidgets.ui.html.app.dev</module>
+    <module>../org.eclipse.scout.jswidgets.ui.html.app.war</module>
 
     <!-- Components for custom widgets -->
     <module>../org.eclipse.scout.widgets.heatmap.client</module>

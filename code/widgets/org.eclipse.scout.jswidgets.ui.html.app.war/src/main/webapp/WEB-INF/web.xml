@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (c) 2015 BSI Business Systems Integration AG.
-    All rights reserved. This program and the accompanying materials
-    are made available under the terms of the Eclipse Distribution License v1.0
-    which accompanies this distribution, and is available at
-    http://www.eclipse.org/org/documents/edl-v10.html
-
-    Contributors:
-        BSI Business Systems Integration AG - initial API and implementation
-
--->
 <web-app
   metadata-complete="true"
   xmlns="http://java.sun.com/xml/ns/javaee"
@@ -18,7 +6,7 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   version="3.0">
 
-  <display-name>My Application HTML UI</display-name>
+  <display-name>Scout JS Widgets</display-name>
 
   <!-- Platform Startup listener -->
   <listener>
@@ -28,22 +16,6 @@
   <listener>
     <listener-class>org.eclipse.scout.rt.server.commons.HttpSessionMutex</listener-class>
   </listener>
-
-  <filter>
-    <filter-name>AuthFilter</filter-name>
-    <filter-class>org.eclipse.scout.widgets.ui.html.WidgetsUiServletFilter</filter-class>
-    <init-param>
-      <param-name>filter-exclude</param-name>
-      <param-value>
-        /res/*
-      </param-value>
-    </init-param>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>AuthFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
 
   <servlet>
     <servlet-name>UiServlet</servlet-name>
