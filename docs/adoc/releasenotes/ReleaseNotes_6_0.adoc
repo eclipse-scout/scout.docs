@@ -112,7 +112,7 @@ The new UI provides url hints for easier debugging: ?cache, ?compress, ?minify, 
 By default they only enabled in development mode. This behavior can be controlled using the property `scout.urlHints.enabled`.
 
 == Documentation goes AsciiDoc
-The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on link:{docsource}[GitHub] and the output of the documentation build is available on github.io: link:{docroot}[github.io].
+The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on git-link:docs/[GitHub] and the output of the documentation build is available on github.io: link:{docroot}[github.io].
 
 == New and better widgets
 Beside the new look of every widget, most of them got new functionality as well.

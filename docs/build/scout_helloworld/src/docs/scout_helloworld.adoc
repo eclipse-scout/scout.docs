@@ -26,12 +26,12 @@ include::{mdledir}/RunTheApplication.adoc[]
 Now that you have successfully created your first Scout application, you might want to learn more about Scout.
 To gain experience with Scout we recommend looking at the beginner's guide.
 
-https://eclipsescout.github.io/6.0/beginners-guide.html[Scout Beginner's Guide]
+https://eclipsescout.github.io/{doc-short-version}/beginners-guide.html[Scout Beginner's Guide]
 
 If you are interested in Scout's concepts, architecture and features you probably want to have a look a the technical guide.
 For this, we are writing the Scout books.
 
-https://eclipsescout.github.io/6.0/technical-guide.html[Scout Technical Guide]
+https://eclipsescout.github.io/{doc-short-version}/technical-guide.html[Scout Technical Guide]
 
 In case you should get stuck somewhere and need help, try to get answers by searching the web.
 And if despite reasonable efforts this approach does not help, contact us on the forum.

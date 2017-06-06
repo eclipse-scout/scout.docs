@@ -9,10 +9,9 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-:docsource: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.1.x/docs
-:docroot: https://eclipsescout.github.io/6.1/
-:techdoc: https://eclipsescout.github.io/6.1/technical-guide.html
-:migrationguide: https://eclipsescout.github.io/6.1/migration-guide.html
+:docroot: https://eclipsescout.github.io/{doc-short-version}/
+:techdoc: https://eclipsescout.github.io/{doc-short-version}/technical-guide.html
+:migrationguide: https://eclipsescout.github.io/{doc-short-version}/migration-guide.html
 
 //-----------------------------------------------------------------------------
 // This file contains the release notes
