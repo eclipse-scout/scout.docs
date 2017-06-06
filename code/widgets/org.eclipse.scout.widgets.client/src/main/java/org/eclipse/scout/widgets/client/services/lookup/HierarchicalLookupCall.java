@@ -35,7 +35,10 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
     }
     else if (getRec() != null) {
       long key = getRec();
-      addSubTreeRec(getDepth(key) + 1, rows, key, false);
+      int depth = getDepth(key) + 1;
+      if (depth <= MAX_DEPTH) {
+        addSubTreeRec(depth, rows, key, false);
+      }
     }
     else if (getText() != null) {
       addSubTreeRec(0, rows, null, true);
