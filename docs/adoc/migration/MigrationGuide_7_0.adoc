@@ -64,6 +64,13 @@ Because this construct no longer works, the corresponding properties and methods
 
 *Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
 
+==== Added HTTP abstraction layer Google HTTP Client for service tunnel.
+
+If your application previously used a custom (not provided by Scout) implementation of the `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class a migration might be necessary. For the service tunnel a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the `java.net.HttpURLConnection` was used).
+
+For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
+`HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter.
+
 
 // ^^^
 // Insert descriptions of Java API changes here
