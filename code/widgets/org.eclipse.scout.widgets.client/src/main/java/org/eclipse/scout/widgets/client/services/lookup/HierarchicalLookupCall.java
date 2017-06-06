@@ -1,6 +1,8 @@
 package org.eclipse.scout.widgets.client.services.lookup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -42,7 +45,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
       // until level 3, otherwise only load root nodes
       addSubTreeRec(0, rows, null, !isLoadIncremental());
     }
-    return rows;
+    return sortResults(rows);
   }
 
   /**
@@ -52,6 +55,21 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
   public List<? extends ILookupRow<Long>> getDataByText() {
     List<LookupRow<Long>> rows = execCreateLookupRows();
     return filterByText(rows, getText());
+  }
+
+  private List<LookupRow<Long>> sortResults(List<LookupRow<Long>> lookupRows) {
+    Collections.sort(lookupRows, new Comparator<LookupRow<Long>>() {
+      @Override
+      public int compare(LookupRow<Long> r1, LookupRow<Long> r2) {
+        P_Data d1 = (P_Data) r1.getAdditionalTableRowData();
+        P_Data d2 = (P_Data) r2.getAdditionalTableRowData();
+        if (d1.getDepth() == d2.getDepth()) {
+          return (int) (d1.getKey() - d2.getKey());
+        }
+        return d1.getDepth() - d2.getDepth();
+      }
+    });
+    return lookupRows;
   }
 
   private List<LookupRow<Long>> filterByText(List<LookupRow<Long>> rows, String text) {
@@ -83,7 +101,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
       }
     }
 
-    return new ArrayList<LookupRow<Long>>(results);
+    return sortResults(new ArrayList<LookupRow<Long>>(results));
   }
 
   private int getDepth(long key) {
@@ -91,7 +109,10 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
   }
 
   private LookupRow<Long> newLookupRow(long key, int depth) {
-    return new LookupRow<Long>(key, "Node " + key + " (lv " + depth + ")");
+    P_Data data = new P_Data(key, depth);
+    LookupRow<Long> lookupRow = new LookupRow<Long>(key, "Node " + key + " (lv " + depth + ")");
+    lookupRow.withAdditionalTableRowData(data);
+    return lookupRow;
   }
 
   private void addSubTreeRec(int depth, List<LookupRow<Long>> rows, Long parentKey, boolean recursive) {
@@ -114,6 +135,25 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
 
   public boolean isLoadIncremental() {
     return m_loadIncremental;
+  }
+
+  static class P_Data extends AbstractTableRowData {
+
+    private static final long serialVersionUID = 1L;
+
+    P_Data(long key, int depth) {
+      setCustomValue("key", key);
+      setCustomValue("depth", depth);
+    }
+
+    public long getKey() {
+      return (Long) getCustomValue("key");
+    }
+
+    public int getDepth() {
+      return (Integer) getCustomValue("depth");
+    }
+
   }
 
 }
