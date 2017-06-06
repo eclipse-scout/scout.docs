@@ -10,12 +10,14 @@ See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the relea
 * Runtime on Maven Central: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.005_RC1[7.0.0.005_RC1]
 
 = What's New
+
 This document shows some of the new features delivered with the release 7.0. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x[https://github.com/eclipse/scout.rt/compare/releases/6.1.x...releases/7.0.x].
 
 NOTE: If you upgrade from version 6.0, also see the release notes for the 6.1 release. +
 https://eclipsescout.github.io/6.1/release-notes.html +
 
 == Upgrade to jQuery 3
+
 We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).
 
 Beside upgrading jQuery, we upgraded the Jasmine Maven Plugin to version 2.2 and the PhantomJS Maven Plugin to version 2.1.1, too. The YUI compressor has also been upgraded from 2.4.8 to version 2.4.9, but unfortunately it is not compatible with jQuery 3. To make it work again we had to fork it and now use the version 2.4.9-BSI-1.
@@ -30,3 +32,16 @@ If a button or a menu is clicked twice within a short period of time, the corres
 * `AbstractMenu.getConfiguredPreventDoubleClick()`
 
 The default value is `false`.
+
+== Service tunnel connections now use Google HTTP Client Library for Java
+
+The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class was changed to use the Google HTTP Client Library for Java 1.22. These libraries add an HTTP abstraction layer and allow to use different low-level libraries like  `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default used).
+
+Currently the new classes are only used for the service tunnel but applications may be able to use (custom) implementations of `org.eclipse.scout.rt.shared.http.IHttpTransportManager` also for other connections.
+
+The following new configuration properties (defaults are provided for all of them) were added:
+
+* `scout.http.transport_factory`, possible values are `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (default, see above), `org.eclipse.scout.rt.shared.http.NetHttpTransportFactory` (to use previous HttpURLConnection layer) or any custom implementation of `org.eclipse.scout.rt.shared.http.IHttpTransportFactory`.
+* `scout.http.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, for Apache HTTP Client).
+* `scout.http.apache_max_connections_per_route`, maximum number of connections per route (default: 1024, for Apache HTTP Client).
+* `scout.http.apache_max_connections_total`, maximum number of connections in total (default: 1024, for Apache HTTP Client).
