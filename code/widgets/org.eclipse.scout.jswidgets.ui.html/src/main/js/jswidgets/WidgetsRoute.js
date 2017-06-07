@@ -59,10 +59,11 @@ jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
 // 1: objectType of the detail form of a node in FormFieldOutline
 jswidgets.WidgetsRoute.ROUTES = [ // FIXME [awe] 7.0 - Extract routeRef dynamically from objectType, then delete this array
   ['carousel', 'jswidgets.CarouselForm'],
-  ['form', 'jswidgets.FormForm'],
   ['datefield', 'jswidgets.DateFieldForm'],
+  ['form', 'jswidgets.FormForm'],
+  ['groupbox', 'jswidgets.GroupBoxForm'],
   ['numberfield', 'jswidgets.NumberFieldForm'],
-  ['tablefield', 'jswidgets.TableFieldForm'],
   ['smartfield2', 'jswidgets.SmartField2Form'],
-  ['stringfield', 'jswidgets.StringFieldForm']
+  ['stringfield', 'jswidgets.StringFieldForm'],
+  ['tablefield', 'jswidgets.TableFieldForm']
 ];

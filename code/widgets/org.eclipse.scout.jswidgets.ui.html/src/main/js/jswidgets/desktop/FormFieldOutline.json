@@ -14,14 +14,6 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:Form}",
-      "detailForm": {
-        "objectType": "jswidgets.FormForm"
-      }
-    },
-    {
-      "objectType": "PageWithNodes",
-      "leaf": true,
       "text": "${textKey:DateField}",
       "detailForm": {
         "objectType": "jswidgets.DateFieldForm"
@@ -30,17 +22,25 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:NumberField}",
+      "text": "${textKey:Form}",
       "detailForm": {
-        "objectType": "jswidgets.NumberFieldForm"
+        "objectType": "jswidgets.FormForm"
       }
     },
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:TableField}",
+      "text": "${textKey:GroupBox}",
       "detailForm": {
-        "objectType": "jswidgets.TableFieldForm"
+        "objectType": "jswidgets.GroupBoxForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:NumberField}",
+      "detailForm": {
+        "objectType": "jswidgets.NumberFieldForm"
       }
     },
     {
@@ -57,6 +57,14 @@
       "text": "${textKey:StringField}",
       "detailForm": {
         "objectType": "jswidgets.StringFieldForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:TableField}",
+      "detailForm": {
+        "objectType": "jswidgets.TableFieldForm"
       }
     }
   ]

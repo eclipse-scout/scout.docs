@@ -5,6 +5,7 @@
 "jswidgets/form/FormForm.json",
 "jswidgets/formfield/FormFieldPropertiesBox.json",
 "jswidgets/datefield/DateFieldForm.json",
+"jswidgets/groupbox/GroupBoxForm.json",
 "jswidgets/numberfield/NumberFieldForm.json",
 "jswidgets/smartfield/SmartField2Form.json",
 "jswidgets/stringfield/StringFieldForm.json",

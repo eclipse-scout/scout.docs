@@ -17,6 +17,9 @@
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/FormFieldOutline.js");
+  __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
+  __include("jswidgets/groupbox/GroupBoxForm.js");
+  __include("jswidgets/groupbox/GroupBoxFieldsLookupCall.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartField2Form.js");
   __include("jswidgets/smartfield/HierarchicalLookupCall.js");

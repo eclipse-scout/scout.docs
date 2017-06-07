@@ -1,0 +1,100 @@
+{
+  "id": "jswidgets.GroupBoxForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "label": "Group Box",
+        "fields": [
+          {
+            "id": "StringField1",
+            "objectType": "StringField",
+            "label": "String Field 1"
+          },
+                    {
+            "id": "StringField2",
+            "objectType": "StringField",
+            "label": "String Field 2"
+          },
+                    {
+            "id": "StringField3",
+            "objectType": "StringField",
+            "label": "String Field 3"
+          },
+                    {
+            "id": "StringField4",
+            "objectType": "StringField",
+            "label": "String Field 4"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "BorderVisibleField",
+            "objectType": "CheckBoxField",
+            "label": "Border Visible",
+            "labelVisible": false
+          },
+          {
+            "id": "BorderDecorationField",
+            "objectType": "SmartField2",
+            "label": "Border Decoration",
+            "lookupCall": "jswidgets.BorderDecorationLookupCall"
+          },
+          {
+            "id": "ExpandableField",
+            "objectType": "CheckBoxField",
+            "label": "Expandable",
+            "labelVisible": false
+          },
+          {
+            "id": "ExpandedField",
+            "objectType": "CheckBoxField",
+            "label": "Expanded",
+            "labelVisible": false
+          },
+          {
+            "id": "GridColumnCountField",
+            "objectType": "NumberField",
+            "label": "Grid Column Count"
+          }
+        ]
+      },
+     {
+        "id": "CustomizationBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Customization Examples",
+        "fields": [
+          {
+            "id": "ToggleVisibilityField",
+            "objectType": "SmartField2",
+            "label": "Toggle Visibility",
+            "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+          },
+          {
+            "id": "ToggleVisibilityButton",
+            "objectType": "Button",
+            "label": "${textKey:Toggle}",
+            "processButton": false
+          }
+        ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}
