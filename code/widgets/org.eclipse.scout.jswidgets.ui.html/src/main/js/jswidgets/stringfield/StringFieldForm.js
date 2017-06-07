@@ -16,13 +16,6 @@ scout.inherits(jswidgets.StringFieldForm, scout.Form);
 jswidgets.StringFieldForm.prototype._init = function(model) {
   jswidgets.StringFieldForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.rootGroupBox);
-  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('DetailBox'));
-  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('PropertiesBox'));
-
   var stringField = this.widget('StringField');
   stringField.on('selectionChange', this._onFieldSelectionChange.bind(this));
   stringField.on('action', this._onFieldAction.bind(this));

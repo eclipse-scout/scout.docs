@@ -16,13 +16,6 @@ scout.inherits(jswidgets.DateFieldForm, scout.Form);
 jswidgets.DateFieldForm.prototype._init = function(model) {
   jswidgets.DateFieldForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.rootGroupBox);
-  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('DetailBox'));
-  bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('PropertiesBox'));
-
   var dateField = this.widget('DateField');
   var hasTimeField = this.widget('HasTimeField');
   hasTimeField.setValue(dateField.hasTime);

@@ -16,12 +16,6 @@ scout.inherits(jswidgets.FormForm, scout.Form);
 jswidgets.FormForm.prototype._init = function(model) {
   jswidgets.FormForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.rootGroupBox);
-
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('DetailBox'));
-
   this.widget('OpenAsDialogButton').on('click', this._onOpenAsDialogButtonClick.bind(this));
   this.widget('OpenAsViewButton').on('click', this._onOpenAsViewButtonClick.bind(this));
 };

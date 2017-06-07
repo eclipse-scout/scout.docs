@@ -73,13 +73,13 @@
                   "menuTypes": ["Table.EmptySpace"],
                   "childActions": [
                     {
-                      "id": "GroupingStyleTop",
+                      "id": "GroupingStyleTopMenu",
                       "objectType": "Menu",
                       "text": "${textKey:GroupingStyleTop}",
                       "menuTypes": ["Table.EmptySpace"]
                     },
                     {
-                      "id": "GroupingStyleBottom",
+                      "id": "GroupingStyleBottomMenu",
                       "objectType": "Menu",
                       "text": "${textKey:GroupingStyleBottom}",
                       "menuTypes": ["Table.EmptySpace"]

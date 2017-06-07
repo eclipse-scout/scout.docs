@@ -18,11 +18,6 @@ jswidgets.SmartField2Form.GROUP_SIZE = 2;
 jswidgets.SmartField2Form.prototype._init = function(model) {
   jswidgets.SmartField2Form.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('MainBox'));
-  bodyGrid.validate(this.widget('TableSmartFieldBox'));
-  bodyGrid.validate(this.widget('TreeSmartFieldBox'));
-
   this.smartField = this.widget('TableSmartField');
   this.valueField = this.widget('ValueField');
 

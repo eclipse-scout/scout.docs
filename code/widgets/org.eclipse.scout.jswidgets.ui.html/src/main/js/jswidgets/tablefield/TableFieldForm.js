@@ -21,16 +21,11 @@ jswidgets.TableFieldForm.GROUP_SIZE = 2;
 jswidgets.TableFieldForm.prototype._init = function(model) {
   jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.rootGroupBox);
-  bodyGrid = new scout.HorizontalGroupBoxBodyGrid();
-  bodyGrid.validate(this.widget('DetailBox'));
-
   this.table = this.widget('Table');
   this.widget('AddRowsMenu').on('doAction', this._onAddRowsMenuAction.bind(this));
-  this.widget('ColumnVisibilityMenu').on('doAction', this._onColumnVisibilityMenu.bind(this));
-  this.widget('GroupingStyleTop').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
-  this.widget('GroupingStyleBottom').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
+  this.widget('ColumnVisibilityMenu').on('doAction', this._onColumnVisibilityMenuAction.bind(this));
+  this.widget('GroupingStyleTopMenu').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
+  this.widget('GroupingStyleBottomMenu').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
 };
 
@@ -52,7 +47,7 @@ jswidgets.TableFieldForm.prototype._onGroupingStyleAction = function(groupingSty
   this.table.setProperty('groupingStyle', groupingStyle);
 };
 
-jswidgets.TableFieldForm.prototype._onColumnVisibilityMenu = function() {
+jswidgets.TableFieldForm.prototype._onColumnVisibilityMenuAction = function() {
   var table = this.widget('Table');
   var column = table._columnById('GroupNo');
   column.setVisible(!column.visible);

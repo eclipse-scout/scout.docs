@@ -50,7 +50,8 @@
             "id": "BorderDecorationField",
             "objectType": "SmartField2",
             "label": "Border Decoration",
-            "lookupCall": "jswidgets.BorderDecorationLookupCall"
+            "lookupCall": "jswidgets.BorderDecorationLookupCall",
+            "visible": false // Temporarily made invisible because it is confusing what the property really does
           },
           {
             "id": "ExpandableField",

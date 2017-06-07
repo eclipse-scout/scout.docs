@@ -17,9 +17,6 @@ scout.inherits(jswidgets.FormFieldPropertiesBox, scout.GroupBox);
 jswidgets.FormFieldPropertiesBox.prototype._init = function(model) {
   jswidgets.FormFieldPropertiesBox.parent.prototype._init.call(this, model);
 
-  var bodyGrid = new scout.VerticalSmartGroupBoxBodyGrid();
-  bodyGrid.validate(this);
-
   this._setField(this.field);
 };
 
