@@ -18,6 +18,6 @@ jswidgets.StringFormatLookupCall.prototype._data = function() {
 };
 
 jswidgets.StringFormatLookupCall.DATA = [
-  ['Upper Case', scout.StringField.Format.UPPER],
-  ['Lower Case', scout.StringField.Format.LOWER]
+  [scout.StringField.Format.UPPER, 'Upper Case'],
+  [scout.StringField.Format.LOWER, 'Lower Case']
 ];

@@ -30,18 +30,18 @@ jswidgets.HierarchicalLookupCall.prototype.getByText = function(text) {
 
     // 1. find nodes that match the search text
     var datas = jswidgets.HierarchicalLookupCall.DATA.filter(function(data) {
-      return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
+      return scout.strings.startsWith(data[1].toLowerCase(), text.toLowerCase());
     });
 
     // 2. for each found node, make sure that all its parent nodes up to the root
     //    are in the search result. The map prevents duplicates
     var resultMap = {};
     datas.forEach(function(data) {
-      resultMap[data[1]] = data;
+      resultMap[data[0]] = data;
 
       while(data[2]) {
         data = dataMap[data[2]];
-        resultMap[data[1]] = data;
+        resultMap[data[0]] = data;
       }
     });
 
@@ -56,7 +56,7 @@ jswidgets.HierarchicalLookupCall.prototype.getByText = function(text) {
 };
 
 jswidgets.HierarchicalLookupCall.prototype._dataToLookupRow = function(data) {
-  var lookupRow = new scout.LookupRow(data[1], data[0]);
+  var lookupRow = new scout.LookupRow(data[0], data[1]);
   lookupRow.parentKey = data[2];
   if (lookupRow.parentKey) {
     lookupRow.iconId = scout.icons.WORLD;

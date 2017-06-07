@@ -20,8 +20,8 @@ jswidgets.SalutationLookupCall.prototype._data = function() {
 };
 
 jswidgets.SalutationLookupCall.DATA = [
-  ['Weiblich', 'female'],
-  ['Männlich', 'male'],
-  ['Unpersönlich', 'impersonal'],
-  ['Unbekannt', 'unknown']
+  ['female', 'Weiblich'],
+  ['male', 'Männlich'],
+  ['impersonal', 'Unpersönlich'],
+  ['unknown', 'Unbekannt']
 ];

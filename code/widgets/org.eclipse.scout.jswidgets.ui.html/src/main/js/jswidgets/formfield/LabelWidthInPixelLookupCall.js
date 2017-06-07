@@ -18,6 +18,6 @@ jswidgets.LabelWidthInPixelLookupCall.prototype._data = function() {
 };
 
 jswidgets.LabelWidthInPixelLookupCall.DATA = [
-  ['default', scout.FormField.LabelWidth.DEFAULT],
-  ['ui width', scout.FormField.LabelWidth.UI],
+  [scout.FormField.LabelWidth.DEFAULT, 'default'],
+  [scout.FormField.LabelWidth.UI, 'ui width'],
 ];

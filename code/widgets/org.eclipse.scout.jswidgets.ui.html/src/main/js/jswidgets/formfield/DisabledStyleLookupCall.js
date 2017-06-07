@@ -18,6 +18,6 @@ jswidgets.DisabledStyleLookupCall.prototype._data = function() {
 };
 
 jswidgets.DisabledStyleLookupCall.DATA = [
-  ['default', scout.Widget.DisabledStyle.DEFAULT],
-  ['read only', scout.Widget.DisabledStyle.READ_ONLY]
+  [scout.Widget.DisabledStyle.DEFAULT, 'default'],
+  [scout.Widget.DisabledStyle.READ_ONLY, 'read only']
 ];

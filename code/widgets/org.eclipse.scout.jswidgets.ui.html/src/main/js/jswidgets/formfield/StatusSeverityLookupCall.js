@@ -18,7 +18,7 @@ jswidgets.StatusSeverityLookupCall.prototype._data = function() {
 };
 
 jswidgets.StatusSeverityLookupCall.DATA = [
-  ['info', scout.Status.Severity.INFO],
-  ['warning', scout.Status.Severity.WARNING],
-  ['error', scout.Status.Severity.ERROR]
+  [scout.Status.Severity.INFO, 'info'],
+  [scout.Status.Severity.WARNING, 'warning'],
+  [scout.Status.Severity.ERROR, 'error']
 ];

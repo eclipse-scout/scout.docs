@@ -64,7 +64,7 @@ jswidgets.WorldLookupCall.prototype.getByRec = function(rec) {
 jswidgets.WorldLookupCall.prototype._createDataMap = function() {
   var dataMap = {};
   this._data().forEach(function(data) {
-    dataMap[data[1]] = data;
+    dataMap[data[0]] = data;
   });
   return dataMap;
 };
@@ -74,18 +74,18 @@ jswidgets.WorldLookupCall.prototype._queryByText = function(text) {
 
   // 1. find nodes that match the search text
   var datas = this._data().filter(function(data) {
-    return scout.strings.startsWith(data[0].toLowerCase(), text.toLowerCase());
+    return scout.strings.startsWith(data[1].toLowerCase(), text.toLowerCase());
   });
 
   // 2. for each found node, make sure that all its parent nodes up to the root
   //    are in the search result. The map prevents duplicates
   var resultMap = {};
   datas.forEach(function(data) {
-    resultMap[data[1]] = data;
+    resultMap[data[0]] = data;
 
     while(data[2]) {
       data = dataMap[data[2]];
-      resultMap[data[1]] = data;
+      resultMap[data[0]] = data;
     }
   });
 
@@ -98,7 +98,7 @@ jswidgets.WorldLookupCall.prototype._queryByText = function(text) {
 };
 
 jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
-  var lookupRow = new scout.LookupRow(data[1], data[0]);
+  var lookupRow = new scout.LookupRow(data[0], data[1]);
   lookupRow.parentKey = data[2];
   if (lookupRow.parentKey) {
     lookupRow.iconId = scout.icons.WORLD;
@@ -108,33 +108,33 @@ jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
   return lookupRow;
 };
 
-// 0: text
-// 1: key
+// 0: key
+// 1: text
 // 2: [parentKey]
 jswidgets.WorldLookupCall.DATA = [
-  ['Africa', 'AF', null],
-  ['Eastern Africa', 'EAF', 'AF'],
-  ['Middle Africa', 'MAF', 'AF'],
-  ['Northern Africa', 'NAF', 'AF'],
-  ['Southern Africa', 'SAF', 'AF'],
-  ['Western Africa', 'WAF', 'AF'],
-  ['Americas', 'AM', null],
-  ['Latin America', 'LAM', 'AM'],
-  ['South America', 'SAM', 'LAM'],
-  ['Caribbean', 'CARAM', 'LAM'],
-  ['Central America', 'CAM', 'LAM'],
-  ['Northern America', 'NAM', 'AM'],
-  ['Antarctica', 'AN', null],
-  ['Asia', 'AS', null],
-  ['Central Asia', 'CAS', 'AS'],
-  ['Eastern Asia', 'EAS', 'AS'],
-  ['Southern Asia', 'SAS', 'AS'],
-  ['South-Eastern Asia', 'SEAS', 'AS'],
-  ['Western Asia', 'WAS', 'AS'],
-  ['Europe', 'ER', null],
-  ['Eastern Europe', 'EER', 'ER'],
-  ['Northern Europe', 'NER', 'ER'],
-  ['Southern Europe', 'SER', 'ER'],
-  ['Western Europe', 'WER', 'ER'],
-  ['Oceania', 'OC', null],
+  ['AF', 'Africa', null],
+  ['EAF', 'Eastern Africa', 'AF'],
+  ['MAF', 'Middle Africa', 'AF'],
+  ['NAF', 'Northern Africa', 'AF'],
+  ['SAF', 'Southern Africa', 'AF'],
+  ['WAF', 'Western Africa', 'AF'],
+  ['AM', 'Americas', null],
+  ['LAM', 'Latin America', 'AM'],
+  ['SAM', 'South America', 'LAM'],
+  ['CARAM', 'Caribbean', 'LAM'],
+  ['CAM', 'Central America', 'LAM'],
+  ['NAM', 'Northern America', 'AM'],
+  ['AN', 'Antarctica', null],
+  ['AS', 'Asia', null],
+  ['CAS', 'Central Asia', 'AS'],
+  ['EAS', 'Eastern Asia', 'AS'],
+  ['SAS', 'Southern Asia', 'AS'],
+  ['SEAS', 'South-Eastern Asia', 'AS'],
+  ['WAS', 'Western Asia', 'AS'],
+  ['ER', 'Europe', null],
+  ['EER', 'Eastern Europe', 'ER'],
+  ['NER', 'Northern Europe', 'ER'],
+  ['SER', 'Southern Europe', 'ER'],
+  ['WER', 'Western Europe', 'ER'],
+  ['OC', 'Oceania', null],
 ];

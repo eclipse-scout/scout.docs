@@ -18,8 +18,8 @@ jswidgets.LabelPositionLookupCall.prototype._data = function() {
 };
 
 jswidgets.LabelPositionLookupCall.DATA = [
-  ['default', scout.FormField.LabelPosition.DEFAULT],
-  ['left', scout.FormField.LabelPosition.LEFT],
-  ['on field', scout.FormField.LabelPosition.ON_FIELD],
-  ['top', scout.FormField.LabelPosition.TOP]
+  [scout.FormField.LabelPosition.DEFAULT, 'default'],
+  [scout.FormField.LabelPosition.LEFT, 'left'],
+  [scout.FormField.LabelPosition.ON_FIELD, 'on field'],
+  [scout.FormField.LabelPosition.TOP, 'top']
 ];
