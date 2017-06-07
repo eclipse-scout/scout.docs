@@ -24,6 +24,22 @@ Beside upgrading jQuery, we upgraded the Jasmine Maven Plugin to version 2.2 and
 
 Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.
 
+== Validators, Parser and Formatter (JS)
+The `ValueField.js` now provides an API to add custom parse, validate and format logic. This is especially useful for the `StringField`, but you may also use it for the `NumberField` and the `DateField`. See the technical guide for details.
+
+== Simplified API (JS)
+The parameter `$parent` is now optional when calling widget.render(). The `$parent` may be resolved using `this.parent`. No need to always write
+`widget.render(this.$container)` anymore, instead just write `widget.render()` if the `$container` of the `parent` should be used as `$parent`.
+
+The property change event has been simplified. Instead of `newProperties`, `oldProperties` and `changedProperties`, the event now contains `propertyName`, `oldValue` and `newValue`. This makes handling the event easier.
+
+`DateField`, `StringField` and `NumberField` now use the value based API provided by `ValueField`. This means you can write the value using `field.setValue(value)`, and read it using `field.value`. The validators and formatter will be called accordingly.
+
+== Logical Grid Validation (JS)
+When writing a Scout Form with Java, you don't have to care about the logical grid. You only have to specify some grid hints like width and height of a cell. The positioning of the cell is calculated automatically by the logical grid.
+
+This is now also possible with JS based Scout applications. There is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done automatically by the `LogicalGridLayout` itself.
+
 == Prevent double clicks on buttons and menus
 
 If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property "preventDoubleClick" is provided on buttons and menus:

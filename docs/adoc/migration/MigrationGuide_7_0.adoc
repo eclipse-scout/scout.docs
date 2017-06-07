@@ -108,7 +108,6 @@ See also https://jquery.com/upgrade-guide/3.0/ for details.
 These functions are now supported by jQuery directly. Just use `addClass`, `removeClass`, `attr` and `removeAttr`.
 
 ==== Property Change Event
-
 The property change event has been simplified.
 
 The event had 3 properties:
@@ -123,11 +122,14 @@ no need for these properties anymore.
 
 Now, with 7.0, the property change event has the following properties:
 
-* `name`
+* `propertyName`
 * `oldValue`
 * `newValue`
 
 This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.
+
+==== Logical Grid Validation
+Automatic Grid Data Validation has been introduced. This means there is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done by the `LogicalGridLayout` itself. Also, check your JSON files, remove any explicit x, y grid definitions because they will be calculated by the `LogicalGrid`. Make sure to always use the property `gridDataHints` instead of `gridData`.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
