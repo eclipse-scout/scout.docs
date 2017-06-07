@@ -69,6 +69,13 @@
             "id": "GridColumnCountField",
             "objectType": "NumberField",
             "label": "Grid Column Count"
+          },
+          {
+            "id": "LogicalGridField",
+            "objectType": "SmartField2",
+            "label": "Logical Grid",
+            "lookupCall": "jswidgets.GroupBoxBodyGridLookupCall",
+            "tooltipText": "${textKey:GroupBoxLogicalGrid}"
           }
         ]
       },

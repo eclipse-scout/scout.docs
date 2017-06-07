@@ -18,7 +18,7 @@ jswidgets.BorderDecorationLookupCall.prototype._data = function() {
 };
 
 jswidgets.BorderDecorationLookupCall.DATA = [
-  ['auto', scout.GroupBox.BorderDecoration.AUTO],
-  ['empty', scout.GroupBox.BorderDecoration.EMPTY],
-  ['line', scout.GroupBox.BorderDecoration.LINE]
+  [scout.GroupBox.BorderDecoration.AUTO, 'auto'],
+  [scout.GroupBox.BorderDecoration.EMPTY, 'empty'],
+  [scout.GroupBox.BorderDecoration.LINE, 'line']
 ];

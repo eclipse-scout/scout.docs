@@ -37,6 +37,10 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   gridColumnCountField.setValue(groupBox.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountChange.bind(this));
 
+  var logicalGridField = this.widget('LogicalGridField');
+  logicalGridField.setValue(groupBox.logicalGrid ? groupBox.logicalGrid.objectType : null);
+  logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
+
   var toggleVisibilityField = this.widget('ToggleVisibilityField');
   toggleVisibilityField.on('propertyChange', this._onToggleVisibilityChange.bind(this));
 
@@ -72,6 +76,12 @@ jswidgets.GroupBoxForm.prototype._onExpandableChange = function(event) {
 jswidgets.GroupBoxForm.prototype._onExpandedChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DetailBox').setExpanded(event.newValue);
+  }
+};
+
+jswidgets.GroupBoxForm.prototype._onLogicalGridChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('DetailBox').setLogicalGrid(event.newValue);
   }
 };
 

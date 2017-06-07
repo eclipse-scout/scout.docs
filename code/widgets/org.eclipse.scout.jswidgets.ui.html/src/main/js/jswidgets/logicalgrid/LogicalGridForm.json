@@ -1,0 +1,72 @@
+{
+  "id": "jswidgets.LogicalGridForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "mainBox": true,
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "label": "Group Box",
+        "fields": [
+          {
+            "id": "StringField1",
+            "objectType": "StringField",
+            "label": "String Field 1"
+          },
+          {
+            "id": "StringField2",
+            "objectType": "StringField",
+            "label": "String Field 2"
+          },
+          {
+            "id": "StringField3",
+            "objectType": "StringField",
+            "label": "String Field 3"
+          },
+          {
+            "id": "StringField4",
+            "objectType": "StringField",
+            "label": "String Field 4"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "TargetField",
+            "objectType": "SmartField2",
+            "label": "${textKey:Target}",
+            "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+          },
+          {
+            "id": "LogicalGridField",
+            "objectType": "SmartField2",
+            "label": "Logical Grid",
+            "lookupCall": "jswidgets.GroupBoxBodyGridLookupCall"
+          }
+        ]
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints"
+      },
+      {
+        "id": "CalculatedGridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Calculated Grid Data",
+        "enabled": false,
+        "useHints": false,
+        "expandable": true,
+        "expanded": false
+      }
+    ]
+  }
+}

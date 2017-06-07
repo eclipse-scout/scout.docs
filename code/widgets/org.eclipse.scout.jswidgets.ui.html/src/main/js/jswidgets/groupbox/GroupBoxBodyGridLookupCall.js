@@ -8,18 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.GroupBoxFieldsLookupCall = function() {
-  jswidgets.GroupBoxFieldsLookupCall.parent.call(this);
+jswidgets.GroupBoxBodyGridLookupCall = function() {
+  jswidgets.GroupBoxBodyGridLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.GroupBoxFieldsLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.GroupBoxBodyGridLookupCall, scout.StaticLookupCall);
 
-jswidgets.GroupBoxFieldsLookupCall.prototype._data = function() {
-  return jswidgets.GroupBoxFieldsLookupCall.DATA;
+jswidgets.GroupBoxBodyGridLookupCall.prototype._data = function() {
+  return jswidgets.GroupBoxBodyGridLookupCall.DATA;
 };
 
-jswidgets.GroupBoxFieldsLookupCall.DATA = [
-  ['StringField1', 'String Field 1'],
-  ['StringField2', 'String Field 2'],
-  ['StringField3', 'String Field 3'],
-  ['StringField4', 'String Field 4']
+jswidgets.GroupBoxBodyGridLookupCall.DATA = [
+  ['scout.HorizontalGroupBoxBodyGrid', 'Horizontal'],
+  ['scout.VerticalSmartGroupBoxBodyGrid', 'Vertical (Smart)']
 ];
