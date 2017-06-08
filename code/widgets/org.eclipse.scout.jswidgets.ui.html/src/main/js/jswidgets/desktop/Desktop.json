@@ -4,6 +4,6 @@
     "objectType": "Desktop",
     "type": "model",
     "outline": {
-      "objectType": "jswidgets.FormFieldOutline"
+      "objectType": "jswidgets.WidgetsOutline"
     }
 }

@@ -8,11 +8,11 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.FormFieldOutline = function() {
-  jswidgets.FormFieldOutline.parent.call(this);
+jswidgets.WidgetsOutline = function() {
+  jswidgets.WidgetsOutline.parent.call(this);
 };
-scout.inherits(jswidgets.FormFieldOutline, scout.Outline);
+scout.inherits(jswidgets.WidgetsOutline, scout.Outline);
 
-jswidgets.FormFieldOutline.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FormFieldOutline');
+jswidgets.WidgetsOutline.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.WidgetsOutline');
 };

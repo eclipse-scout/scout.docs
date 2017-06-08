@@ -1,7 +1,7 @@
 {"files": [
 "jswidgets/carousel/CarouselForm.json",
 "jswidgets/desktop/Desktop.json",
-"jswidgets/desktop/FormFieldOutline.json",
+"jswidgets/desktop/WidgetsOutline.json",
 "jswidgets/form/FormForm.json",
 "jswidgets/formfield/FormFieldPropertiesBox.json",
 "jswidgets/datefield/DateFieldForm.json",
