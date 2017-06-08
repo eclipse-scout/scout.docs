@@ -11,8 +11,6 @@
 package org.eclipse.scout.contacts.client;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,6 +32,11 @@ import org.eclipse.scout.rt.platform.util.HexUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.ISession;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.http.DefaultHttpTransportManager;
+
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
 
 public class UserForm extends AbstractForm {
 
@@ -147,12 +150,16 @@ public class UserForm extends AbstractForm {
       String emailMd5Hash = HexUtility.encode(messageDigest.digest(emailAddress.getBytes(StandardCharsets.UTF_8)));
 
       // Get the Gravatar image
-      URL url = new URL("http://www.gravatar.com/avatar/" + emailMd5Hash);
-      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-      connection.setRequestMethod("GET");
-      connection.connect();
-      if (connection.getResponseCode() == 200) {
-        return HTML.div(HTML.img(url.toString()));
+      GenericUrl url = new GenericUrl("http://www.gravatar.com/avatar/" + emailMd5Hash);
+      HttpRequest req = BEANS.get(DefaultHttpTransportManager.class).getHttpRequestFactory().buildHeadRequest(url);
+      HttpResponse resp = req.execute();
+      try {
+        if (resp.getStatusCode() == 200) {
+          return HTML.div(HTML.img(url.toString()));
+        }
+      }
+      finally {
+        resp.disconnect();
       }
     }
     catch (IOException | NoSuchAlgorithmException e) {
