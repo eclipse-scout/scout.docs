@@ -15,10 +15,10 @@ ifndef::mdledir[:mdledir: .]
 
 = Overview
 
-Eclipse Scout 6.0 is part of the Eclipse Neon release. The latest stable version is _Neon.2 (6.0.200.0)_. See also https://wiki.eclipse.org/Simultaneous_Release for the release schedule.
+Eclipse Scout 6.0 is part of the Eclipse Neon release. The latest stable version is _Neon.3 (6.0.300.1)_. See also https://wiki.eclipse.org/Simultaneous_Release for the release schedule.
 
 * Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/neon2[Eclipse for Scout Developers]
-* Runtime on Maven Central: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.0.200.0%22[6.0.200.0]
+* Runtime on Maven Central: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.0.300.1%22[6.0.300.1]
 
 
 //-----------------------------------------------------------------------------
