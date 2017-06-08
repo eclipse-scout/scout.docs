@@ -10,12 +10,6 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 //-----------------------------------------------------------------------------
-// This file describes the scout migration from the previous version
+// This file contains the migration guide
 //-----------------------------------------------------------------------------
 include::MigrationGuide_7_0.adoc[]
-
-//-----------------------------------------------------------------------------
-// These files describe the scout migration from older previous versions
-//-----------------------------------------------------------------------------
-include::MigrationGuide_6_1.adoc[]
-include::MigrationGuide_6_0.adoc[]

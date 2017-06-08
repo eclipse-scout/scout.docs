@@ -20,7 +20,7 @@ https://eclipsescout.github.io/6.1/migration-guide.html +
 
 ==== New scout modules for Jackson-based REST services
 
-The following new Scout modules were added to support Jackson-based REST services:
+The following new Scout modules have been added to support REST services with Jackson as marshaller:
 
 * `org.eclipse.scout.rt.rest`
 * `org.eclipse.scout.rt.rest.test`
@@ -43,7 +43,7 @@ In order to use REST services based on the JAX-RS Jersey implementation, the fol
 </servlet>
 ----
 
-The `RestApplication` class searches for all implemenations of `IRestResource` and exposes them as REST services.
+The `RestApplication` class searches for all implementations of `IRestResource` and exposes them as REST services.
 
 ==== Removed properties "enabledProcessing" on IButton and IAction
 
@@ -71,6 +71,12 @@ If your application previously used a custom (not provided by Scout) implementat
 For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
 `HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter. The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
 
+==== IGroupBox: changed behaviour of getGridColumnCount
+The function `getGridColumnCount()` returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.
+
+Example: the default of the property `gridColumnCount` is -1 which will typically result in 2 columns.
+
+So in case you used this method, you should consider calling `getFieldGrid().getGridColumnCount()` instead.
 
 // ^^^
 // Insert descriptions of Java API changes here

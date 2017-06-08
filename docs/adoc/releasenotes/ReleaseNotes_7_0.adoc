@@ -49,7 +49,7 @@ If a button or a menu is clicked twice within a short period of time, the corres
 
 The default value is `false`.
 
-== New HTTP abstraction layer Google HTTP Client for Java.
+== New HTTP abstraction layer Google HTTP Client for Java
 
 The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).
 
@@ -72,3 +72,15 @@ For the `DefaultHttpTransportManager`:
 * `scout.http.apache_max_connections_total`, maximum number of connections in total (default: 128, only applicable for Apache HTTP Client).
 
 For each Apache HTTP Client created using the `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (by default each `org.eclipse.scout.rt.shared.http.IHttpTransportManager` using the Apache HTTP Client) their own `org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore` and `org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector` (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.
+
+== Support for REST services
+The following new Scout modules have been added to support REST services with Jackson as marshaller:
+
+* `org.eclipse.scout.rt.rest`
+* `org.eclipse.scout.rt.rest.test`
+* `org.eclipse.scout.rt.jackson`
+* `org.eclipse.scout.rt.jackson.test`
+
+The most important class is the `org.eclipse.scout.rt.rest.RestApplication` which searches for all implementations of `IRestResource` and exposes them as REST services. It also registers `ExceptionMappers` and setups Jackson to work with Jandex.
+
+So if you want to use REST services, you could use the Jersey REST servlet (`org.glassfish.jersey.servlet.ServletContainer`), pass the `RestApplication` as parameter and install the `org.eclipse.scout.rt.server.context.ServerRunContextFilter` to have the proper run context for every REST call. Creating the REST resource is straight forward using the annotations from `javax.ws.rs`. Just make sure the resource implements the interface `IRestResource` so that it will be registered by the `RestApplication` on startup.
