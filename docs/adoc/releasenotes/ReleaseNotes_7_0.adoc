@@ -49,15 +49,26 @@ If a button or a menu is clicked twice within a short period of time, the corres
 
 The default value is `false`.
 
-== Service tunnel connections now use Google HTTP Client Library for Java
+== New HTTP abstraction layer Google HTTP Client for Java.
 
-The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class was changed to use the Google HTTP Client Library for Java 1.22. These libraries add an HTTP abstraction layer and allow to use different low-level libraries like  `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default used).
+The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).
 
-Currently the new classes are only used for the service tunnel but applications may be able to use (custom) implementations of `org.eclipse.scout.rt.shared.http.IHttpTransportManager` also for other connections.
+Different HTTP clients with different parameters (even with different low-level libraries) may be used and kept using (custom) implementations of `org.eclipse.scout.rt.shared.http.IHttpTransportManager`. Currently there are two internal implementations of this interface: `HttpServiceTunnelTransportManager` (only used by the service tunnel) and `DefaultHttpTransportManager` (used for all other HTTP connections).
 
-The following new configuration properties (defaults are provided for all of them) were added:
+The following new configuration properties (none of them is required to be set, defaults are provided for all of them) were added:
 
-* `scout.http.transport_factory`, possible values are `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (default, see above), `org.eclipse.scout.rt.shared.http.NetHttpTransportFactory` (to use previous HttpURLConnection layer) or any custom implementation of `org.eclipse.scout.rt.shared.http.IHttpTransportFactory`.
-* `scout.http.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, for Apache HTTP Client).
-* `scout.http.apache_max_connections_per_route`, maximum number of connections per route (default: 1024, for Apache HTTP Client).
-* `scout.http.apache_max_connections_total`, maximum number of connections in total (default: 1024, for Apache HTTP Client).
+* `scout.http.transport_factory`, possible values are `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (default, see above), `org.eclipse.scout.rt.shared.http.NetHttpTransportFactory` (to use previous HttpURLConnection layer) or any custom implementation of an `org.eclipse.scout.rt.shared.http.IHttpTransportFactory`.
+
+For the `HttpServiceTunnelTransportManager`:
+
+* `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).
+* `org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route`, maximum number of connections per route (default: 2048, only applicable for for Apache HTTP Client).
+* `org.eclipse.scout.rt.servicetunnel.apache_max_connections_total`, maximum number of connections in total (default: 2048, only applicable for for Apache HTTP Client).
+
+For the `DefaultHttpTransportManager`:
+
+* `scout.http.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).
+* `scout.http.apache_max_connections_per_route`, maximum number of connections per route (default: 32, only applicable for Apache HTTP Client).
+* `scout.http.apache_max_connections_total`, maximum number of connections in total (default: 128, only applicable for Apache HTTP Client).
+
+For each Apache HTTP Client created using the `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (by default each `org.eclipse.scout.rt.shared.http.IHttpTransportManager` using the Apache HTTP Client) their own `org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore` and `org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector` (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.
