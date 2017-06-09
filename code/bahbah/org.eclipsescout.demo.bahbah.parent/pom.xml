@@ -23,7 +23,7 @@
 
   <groupId>org.eclipsescout.demo.bahbah</groupId>
   <artifactId>org.eclipsescout.demo.bahbah.parent</artifactId>
-  <version>7.0.0-SNAPSHOT</version>
+  <version>7.0.0.007_RC3</version>
   <packaging>pom</packaging>
   <name>bahbah - parent</name>
 
@@ -35,7 +35,7 @@
   </modules>
 
   <properties>
-    <org.eclipse.scout.rt.version>7.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>7.0.0.007_RC3</org.eclipse.scout.rt.version>
   </properties>
 
   <dependencyManagement>
@@ -51,12 +51,12 @@
       <dependency>
         <groupId>org.eclipsescout.demo.bahbah</groupId>
         <artifactId>org.eclipsescout.demo.bahbah.shared</artifactId>
-        <version>7.0.0-SNAPSHOT</version>
+        <version>7.0.0.007_RC3</version>
       </dependency>
       <dependency>
         <groupId>org.eclipsescout.demo.bahbah</groupId>
         <artifactId>org.eclipsescout.demo.bahbah.server</artifactId>
-        <version>7.0.0-SNAPSHOT</version>
+        <version>7.0.0.007_RC3</version>
       </dependency>
       <dependency>
         <groupId>mysql</groupId>

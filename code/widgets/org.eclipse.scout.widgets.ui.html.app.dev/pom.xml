@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.eclipse.scout.widgets</groupId>
     <artifactId>org.eclipse.scout.widgets</artifactId>
-    <version>7.0.0-SNAPSHOT</version>
+    <version>7.0.0.007_RC3</version>
     <relativePath>../org.eclipse.scout.widgets</relativePath>
   </parent>
 
