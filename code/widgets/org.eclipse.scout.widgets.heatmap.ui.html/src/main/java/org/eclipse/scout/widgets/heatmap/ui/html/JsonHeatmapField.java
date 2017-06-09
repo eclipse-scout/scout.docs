@@ -137,24 +137,24 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
 
   @Override
   public void handleUiEvent(JsonEvent event) {
-    if ("viewParameterChanged".equals(event.getType())) {
-      handleUiViewParameterChanged(event);
+    if ("viewParameterChange".equals(event.getType())) {
+      handleUiViewParameterChange(event);
     }
-    else if ("clicked".equals(event.getType())) {
-      handleUiClicked(event);
+    else if ("click".equals(event.getType())) {
+      handleUiClick(event);
     }
     else {
       super.handleUiEvent(event);
     }
   }
 
-  private void handleUiClicked(JsonEvent event) {
+  private void handleUiClick(JsonEvent event) {
     JSONObject data = event.getData();
     MapPoint point = jsonToMapPoint(data.optJSONObject("point"));
     getModel().getUIFacade().handleClickFromUI(new MapPoint(point.getX(), point.getY()));
   }
 
-  private void handleUiViewParameterChanged(JsonEvent event) {
+  private void handleUiViewParameterChange(JsonEvent event) {
     JSONObject data = event.getData();
     HeatmapViewParameter parameter = new HeatmapViewParameter(
         jsonToMapPoint(data.optJSONObject("center")),

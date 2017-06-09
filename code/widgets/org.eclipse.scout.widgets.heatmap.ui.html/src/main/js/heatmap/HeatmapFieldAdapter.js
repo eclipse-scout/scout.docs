@@ -24,14 +24,14 @@ scout.HeatmapFieldAdapter.prototype._onWidgetEvent = function(event) {
 };
 
 scout.HeatmapFieldAdapter.prototype._onWidgetViewParameterChange = function(event) {
-  this._send('viewParameterChanged', {
+  this._send('viewParameterChange', {
     center: event.center,
     zoomFactor: event.zoomFactor
   });
 };
 
 scout.HeatmapFieldAdapter.prototype._onWidgetClick = function(event) {
-  this._send('clicked', {
+  this._send('click', {
     point: event.point
   });
 };
