@@ -22,10 +22,10 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
   this.table = this.widget('Table');
-  this.widget('AddRowsMenu').on('doAction', this._onAddRowsMenuAction.bind(this));
-  this.widget('ColumnVisibilityMenu').on('doAction', this._onColumnVisibilityMenuAction.bind(this));
-  this.widget('GroupingStyleTopMenu').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
-  this.widget('GroupingStyleBottomMenu').on('doAction', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
+  this.widget('AddRowsMenu').on('action', this._onAddRowsMenuAction.bind(this));
+  this.widget('ColumnVisibilityMenu').on('action', this._onColumnVisibilityMenuAction.bind(this));
+  this.widget('GroupingStyleTopMenu').on('action', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.TOP));
+  this.widget('GroupingStyleBottomMenu').on('action', this._onGroupingStyleAction.bind(this, scout.Table.GroupingStyle.BOTTOM));
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
 };
 
