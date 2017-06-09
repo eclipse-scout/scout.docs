@@ -35,7 +35,7 @@
             <configuration>
               <backend>pdf</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
-              <doctype>article</doctype>
+              <doctype>book</doctype>
               <attributes>
                 <icons>font</icons>
                 <pagenums />
@@ -54,6 +54,7 @@
             <configuration>
               <backend>html5</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
+              <doctype>book</doctype>
               <attributes>
                 <toc>left</toc>
                 <icons>font</icons>
