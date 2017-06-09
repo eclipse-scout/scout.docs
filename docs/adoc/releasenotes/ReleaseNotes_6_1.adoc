@@ -20,7 +20,7 @@ If you get such an exception, you'll need to wrap your operation in a model job 
 
 == Properties support for Lists, Maps and imports
 
-Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section "Configuration Management" for more details.
+Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section "link:{techdoc}#sec-config.management[Configuration Management]" for more details.
 
 == Binary resources support for HtmlField and BeanField
 Binary resources such as images or videos can now be used in the following widgets:

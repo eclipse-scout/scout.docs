@@ -294,6 +294,7 @@ A properties file may import other config files from the classpath or any other 
 
 * `import[0]=classpath:myConfigs/other.properties`
 * `import[1]=file:/C:/path/to/my/settings.properties`
+* `import[2]=file:${catalina.base}/conf/db_connection.properties`
 
 
 ==== Additional examples
