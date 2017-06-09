@@ -2,12 +2,45 @@
 = Overview
 
 Eclipse Scout 7.0 will be the Eclipse Oxygen release.
-The latest stable version is _Oxygen.RC1 (7.0.0.005_RC1)_.
+
 The official release for Eclipse Oxygen will be released in June 2017.
 See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the release schedule.
 
-* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenrc1[Eclipse for Scout Developers]
-* Runtime on Maven Central: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.005_RC1[7.0.0.005_RC1]
+== Lastest stable version
+
+=== Runtime (Scout RT)
+
+Eclipse Runtime on maven central: Version `7.0.0.007_RC3`
+
+Usage example in the parent POM of your scout application:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>7.0.0.007_RC3</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+See this artifact on mvnrepository.com: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.007_RC3[org.eclipse.scout.rt]
+
+=== Eclipse Tooling (Scout SDK)
+
+Eclipse IDE distribution (also called EPP): link:https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenrc3[Eclipse for Scout Developers (RC3)]
+
+Update site to install the Scout SDK in your Eclipse IDE (already installed in the Scout EPP):
+
+[source,plain]
+----
+http://download.eclipse.org/scout/releases/7.0/7.0.0/007_RC3/
+----
+
+=== Demo Applications
+
+The demo applications using this version can be found on the link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.007_RC3[features/version/7.0.0.007_RC3] branch of our docs repository on GitHub. 
 
 = What's New
 
