@@ -11,7 +11,7 @@
 jswidgets.WorldLookupCall = function() {
   jswidgets.WorldLookupCall.parent.call(this);
 
-  this.setDelay(250);
+  this.setDelay(0);
   this.setLoadIncremental(true);
   this.setHierarchical(true);
 };
@@ -21,7 +21,7 @@ jswidgets.WorldLookupCall.prototype._data = function() {
   return jswidgets.WorldLookupCall.DATA;
 };
 
-jswidgets.WorldLookupCall.prototype._queryAll = function() {
+jswidgets.WorldLookupCall.prototype._queryAll = function(deferred) {
   var lookupRows;
   if (this.loadIncremental) {
     // only select root nodes
@@ -34,28 +34,9 @@ jswidgets.WorldLookupCall.prototype._queryAll = function() {
   } else {
     lookupRows = this._data().map(this._dataToLookupRow);
   }
-  this.resolveLookup({
+  deferred.resolve({
     lookupRows: lookupRows
   });
-};
-
-jswidgets.WorldLookupCall.prototype.getByRec = function(rec) {
-  this._newDeferred();
-  setTimeout(function() {
-
-    var lookupRows = [];
-    this._data().forEach(function(data) {
-      if (data[2] === rec) {
-        lookupRows.push(this._dataToLookupRow(data));
-      }
-    }, this);
-
-    this.resolveLookup({
-      lookupRows: lookupRows
-    });
-
-  }.bind(this), this._delay);
-  return this.deferred.promise();
 };
 
 /**
@@ -67,34 +48,6 @@ jswidgets.WorldLookupCall.prototype._createDataMap = function() {
     dataMap[data[0]] = data;
   });
   return dataMap;
-};
-
-jswidgets.WorldLookupCall.prototype._queryByText = function(text) {
-  var dataMap = this._createDataMap();
-
-  // 1. find nodes that match the search text
-  var datas = this._data().filter(function(data) {
-    return scout.strings.startsWith(data[1].toLowerCase(), text.toLowerCase());
-  });
-
-  // 2. for each found node, make sure that all its parent nodes up to the root
-  //    are in the search result. The map prevents duplicates
-  var resultMap = {};
-  datas.forEach(function(data) {
-    resultMap[data[0]] = data;
-
-    while(data[2]) {
-      data = dataMap[data[2]];
-      resultMap[data[0]] = data;
-    }
-  });
-
-  // 3. convert the result in an array again
-  datas = scout.objects.values(resultMap);
-
-  this.resolveLookup({
-    lookupRows: datas.map(this._dataToLookupRow)
-  });
 };
 
 jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
