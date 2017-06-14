@@ -5,8 +5,6 @@ Howto:
 - Choose the right top level chapter (java, js, other)
 ////
 
-== Migration Guide from Scout 6.1 to Scout 7.0
-
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
@@ -16,9 +14,9 @@ Howto:
 NOTE: If you upgrade from version 6.0, also see the migration guide for the 6.1 release. +
 https://eclipsescout.github.io/6.1/migration-guide.html +
 
-=== API Changes (Java)
+== API Changes (Java)
 
-==== New scout modules for Jackson-based REST services
+=== New scout modules for Jackson-based REST services
 
 The following new Scout modules have been added to support REST services with Jackson as marshaller:
 
@@ -45,7 +43,7 @@ In order to use REST services based on the JAX-RS Jersey implementation, the fol
 
 The `RestApplication` class searches for all implementations of `IRestResource` and exposes them as REST services.
 
-==== Removed properties "enabledProcessing" on IButton and IAction
+=== Removed properties "enabledProcessing" on IButton and IAction
 
 When a user performs two consecutive clicks on a button or a menu within a very short period of time, the action is executed twice. In some cases, this is an unwanted behavior. A new property "preventDoubleClick" was added to IButton and IMenu to disable it (see release notes).
 
@@ -64,14 +62,14 @@ Because this construct no longer works, the corresponding properties and methods
 
 *Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
 
-==== Added HTTP abstraction layer Google HTTP Client.
+=== Added HTTP abstraction layer Google HTTP Client.
 
 If your application previously used a custom (not provided by Scout) implementation of the `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the `java.net.HttpURLConnection` was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the `java.net` connections are not used anymore by default the MultiSessionCookieStore (for `java.net` connections) is not installed by default (could be installed manually).
 
 For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
 `HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter. The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
 
-==== IGroupBox: changed behaviour of getGridColumnCount
+=== IGroupBox: changed behaviour of getGridColumnCount
 The function `getGridColumnCount()` returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.
 
 Example: the default of the property `gridColumnCount` is -1 which will typically result in 2 columns.
@@ -87,15 +85,15 @@ So in case you used this method, you should consider calling `getFieldGrid().get
   =============================================================================
 ////
 
-=== API Changes (JavaScript)
+== API Changes (JavaScript)
 
-==== render()
+=== render()
 The parameter `$parent` has been removed from the `_render` method because `this.$parent` is available for every widget. There is no need to have a parameter `$parent` which points to the same variable. Use `this.$parent` instead.
 
 Also `$parent` is now optional when calling widget.render(). The `$parent` may be resolved using `this.parent`. No need to always write
 `widget.render(this.$container)` anymore, instead just write `widget.render()` if the `$container` of the `parent` should be used as `$parent`.
 
-==== Promises
+=== Promises
 With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.
 
 We noticed the following effects:
@@ -110,10 +108,10 @@ readability.
 
 See also https://jquery.com/upgrade-guide/3.0/ for details.
 
-==== Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG
+=== Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG
 These functions are now supported by jQuery directly. Just use `addClass`, `removeClass`, `attr` and `removeAttr`.
 
-==== Property Change Event
+=== Property Change Event
 The property change event has been simplified.
 
 The event had 3 properties:
@@ -134,7 +132,7 @@ Now, with 7.0, the property change event has the following properties:
 
 This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.
 
-==== Logical Grid Validation
+=== Logical Grid Validation
 Automatic Grid Data Validation has been introduced. This means there is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done by the `LogicalGridLayout` itself. Also, check your JSON files, remove any explicit x, y grid definitions because they will be calculated by the `LogicalGrid`. Make sure to always use the property `gridDataHints` instead of `gridData`.
 
 // ^^^
@@ -146,9 +144,9 @@ Automatic Grid Data Validation has been introduced. This means there is no need 
   =============================================================================
 ////
 
-=== Other Changes
+== Other Changes
 
-==== Maven provided dependencies
+=== Maven provided dependencies
 
 In Maven dependencies with the scope provided are not transitive.
 This makes sense if a dependency is set to provided depending on the environment.
