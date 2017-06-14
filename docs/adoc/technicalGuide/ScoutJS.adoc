@@ -12,9 +12,11 @@ ifndef::mdledir[:mdledir: .]
 == Scout JS
 A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
 
-With Scout JS this will change. You will be able to create applications running without a UI server because there won't be a Java model anymore. The client code will be written using JavaScript (or TypeScript) and executed directly in the browser.
+With Scout JS this will change. You will be able to create applications running without a UI server because there won't be a Java model anymore. The client code will be written using JavaScript and executed directly in the browser.
 
 You still don't have to care about how the model will be rendered. There isn't a strict separation of the UI and the model anymore, but that doesn't mean you have to write HTML and CSS. You can of course, if you want to. But typically you will be using the Scout widgets you already know.
+
+Scout JS is used in classic Scout applications as well. This means if you understand the concepts of Scout JS, writing custom widgets will be a lot easier.
 
 === Widget
 A widget is a component which may be rendered. It may be simple like a label, or more complex like a tree or table. A form is a widget and a form field, too.
@@ -286,6 +288,31 @@ Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon cons
 // Explain parent and owner and the differences (see also WidgetSpec.js)
 
 //TODO [7.0] cgu ==== How to build a custom widget
+
+=== Form Field
+A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.
+
+Every form field contains of the following parts:
+
+[[img-formfield, Figure 000]]
+.Parts of a form field
+image::{imgsdir}/formfield.png[]
+
+Typical form fields are `StringField`, `DateField` or `TableField`. All these fields have the API of `FormField` in common (like `setLabel()`, `setErrorStatus()`, etc.) but also provide additional API.
+
+Some form fields are actually just a wrapper for another widget. This is for example the case for the `TableField`. The `Table` itself may be used stand-alone, just call `scout.create('Table', {})`. But if you want to use it in a `GroupBox`, which is a form field, you have to use a `TableField` wrapping the `Table`.
+
+=== Value Field
+A value field extends the form field by the ability to store a value. Typical form fields are `StringField`, `NumberField`, `DateField` or `SmartField`. All these fields provide a value which is accessible using `field.value` and may be set using `field.setValue(value)`.
+
+==== Parser, Validator, Formatter
+The value always has the target data type of the field. When using a `StringField` the type is `string`, when using a `NumberField` the type is `number`, when using a `DateField` the type is `date`. This means you don't have to care about how to parse the value from the user input, this will be done by the field for you. The field also validates the value, meaning if the user entered a string in a `NumberField`, an error is shown. Furthermore, if you already have the value and want to show it in the field, you don't have to format the value by yourself.
+
+This process of parsing, validating and formatting is provided by every value field. The responsible functions are `parseValue`, `validateValue` and `formatValue`. If a user enters text, it will be parsed to get the value with the correct type. The value will then be validated to ensure it is allowed to enter that specific value. Afterwards it will be formatted again to make sure the input looks as expected (e.g. if the user enters 2 it may be formatted to 2.0).
+
+Even though the fields already provide a default implementation of this functionality, you may want to extend or replace it. For that purpose you may set a custom parser and formatter or one or more validators.
+
+// TODO [7.0] cgu examples
 
 === Extensibility
 
