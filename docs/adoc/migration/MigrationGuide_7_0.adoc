@@ -138,6 +138,51 @@ Automatic Grid Data Validation has been introduced. This means there is no need 
 // ^^^
 // Insert descriptions of JavaScript API changes here
 
+=== Event Naming
+The naming of the events has been harmonized to conform with the event naming guide. This is only relevant, if you attached listeners using JavaScript or if you do some kind of load testing using the events in the requests.
+
+The following changes have been made:
+
+* Rename doAction to action
+* Rename linkPageWithRow to pageRowLink
+* Rename initPage to pageInit
+* Rename exportToClipboard to clipboardExport
+* Rename parseerror to parseError
+* Rename selectionChanged to selectionChange
+* Rename callAction to action
+* Removed insertText
+* Rename popupopen to popupOpen
+* Rename locationChanged to locationChange
+* Rename sessionready to sessionReady
+* Rename desktopcreated to desktopReady
+* Rename positionChanged to positionChange
+* Rename scrollstart to scrollStart
+* Rename scrollend to scrollEnd
+* Rename clicked to click
+* Rename modelChanged to modelChange
+* Rename selectionChanged to selectionChange
+* Rename viewRangeChanged to viewRangeChange
+* Rename formActivated to formActivate
+* Rename historyEntryActivated to historyEntryActivate
+* Rename viewAdded to viewAdd
+* Rename viewRemoved to viewRemove
+* Rename viewActivated to viewActivate
+* Rename viewDeactivated to viewDeactivate
+* Rename tabClicked to click
+* Rename tabSelected to tabSelect
+* Rename nodeClicked to nodeClick
+* Rename rowClicked to rowClick
+* Rename rowsSorted to sort
+* Remove sortRows
+* Rename rowsGrouped to group
+* Remove groupRows
+* Rename exportToClipboard to clipboardExport
+* Rename rowsFiltered to filter
+* Rename addFilter to filterAdded
+* Rename removeFilter to filterRemoved
+* Rename filterResetted to filterReset
+* Remove groupingChanged
+
 ////
   =============================================================================
   === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================
