@@ -1,16 +1,16 @@
 
 = Overview
 
-Eclipse Scout 7.0 will be the Eclipse Oxygen release.
+Eclipse Scout 7.0 is the Eclipse Oxygen release.
 
-The official release for Eclipse Oxygen will be released in June 2017.
+The official release for Eclipse Oxygen is June 2017.
 See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the release schedule.
 
 == Lastest stable version
 
 === Runtime (Scout RT)
 
-Eclipse Runtime on maven central: Version `7.0.0.007_RC3`
+Eclipse Runtime on maven central: Version `7.0.0.008_Oxygen`
 
 Usage example in the parent POM of your scout application:
 
@@ -19,28 +19,28 @@ Usage example in the parent POM of your scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>7.0.0.007_RC3</version>
+    <version>7.0.0.008_Oxygen</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
 ----
 
-See this artifact on mvnrepository.com: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.007_RC3[org.eclipse.scout.rt]
+See this artifact on mvnrepository.com: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen[org.eclipse.scout.rt]
 
 === Eclipse Tooling (Scout SDK)
 
-Eclipse IDE distribution (also called EPP): link:https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenrc3[Eclipse for Scout Developers (RC3)]
+Eclipse IDE distribution (also called EPP): link:https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen[Eclipse for Scout Developers (Oxygen)]
 
 Update site to install the Scout SDK in your Eclipse IDE (already installed in the Scout EPP):
 
 [source,plain]
 ----
-http://download.eclipse.org/scout/releases/7.0/7.0.0/007_RC3/
+http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/
 ----
 
 === Demo Applications
 
-The demo applications using this version can be found on the link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.007_RC3[features/version/7.0.0.007_RC3] branch of our docs repository on GitHub. 
+The demo applications using this version can be found on the link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen[features/version/7.0.0.008_Oxygen] branch of our docs repository on GitHub.
 
 = What's New
 
