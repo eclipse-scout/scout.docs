@@ -41,6 +41,10 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   logicalGridField.setValue(groupBox.logicalGrid ? groupBox.logicalGrid.objectType : null);
   logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
 
+  var notificationField = this.widget('NotificationField');
+  notificationField.setValue(groupBox.notification ? groupBox.notification.status.severity: null);
+  notificationField.on('propertyChange', this._onNotificationChange.bind(this));
+
   var toggleVisibilityField = this.widget('ToggleVisibilityField');
   toggleVisibilityField.on('propertyChange', this._onToggleVisibilityChange.bind(this));
 
@@ -79,15 +83,21 @@ jswidgets.GroupBoxForm.prototype._onExpandedChange = function(event) {
   }
 };
 
+jswidgets.GroupBoxForm.prototype._onGridColumnCountChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('DetailBox').setGridColumnCount(event.newValue);
+  }
+};
+
 jswidgets.GroupBoxForm.prototype._onLogicalGridChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DetailBox').setLogicalGrid(event.newValue);
   }
 };
 
-jswidgets.GroupBoxForm.prototype._onGridColumnCountChange = function(event) {
+jswidgets.GroupBoxForm.prototype._onNotificationChange = function(event) {
   if (event.propertyName === 'value') {
-    this.widget('DetailBox').setGridColumnCount(event.newValue);
+    this.widget('DetailBox').setNotification(this._createNotification(event.newValue));
   }
 };
 
@@ -100,4 +110,15 @@ jswidgets.GroupBoxForm.prototype._onToggleVisibilityChange = function(event) {
 jswidgets.GroupBoxForm.prototype._onToggleVisibilityButtonClick = function(event) {
   var field = this.widget(this.widget('ToggleVisibilityField').value);
   field.setVisible(!field.visible);
+};
+
+jswidgets.GroupBoxForm.prototype._createNotification = function(severity) {
+  if (!severity ) {
+    return null;
+  }
+  return scout.create('Notification', {
+    parent: this,
+    severity: severity,
+    message: this.session.text('NotificationMessage', scout.objects.keyByValue(scout.Status.Severity, severity))
+  });
 };
