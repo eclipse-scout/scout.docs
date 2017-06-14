@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier;
+import org.eclipse.scout.rt.server.commons.authentication.AnonymousAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController.FormBasedAuthConfig;
@@ -40,6 +41,7 @@ public class WidgetsUiServletFilter implements Filter {
   private TrivialAccessController m_trivialAccessController;
   private FormBasedAccessController m_formBasedAccessController;
   private DevelopmentAccessController m_developmentAccessController;
+  private AnonymousAccessController m_anonymousAccessController;
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
@@ -51,6 +53,7 @@ public class WidgetsUiServletFilter implements Filter {
         .init(new FormBasedAuthConfig()
             .withCredentialVerifier(BEANS.get(ConfigFileCredentialVerifier.class)));
     m_developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
+    m_anonymousAccessController = BEANS.get(AnonymousAccessController.class).init();
   }
 
   @Override
@@ -67,6 +70,10 @@ public class WidgetsUiServletFilter implements Filter {
     }
 
     if (m_developmentAccessController.handle(req, resp, chain)) {
+      return;
+    }
+
+    if (m_anonymousAccessController.handle(req, resp, chain)) {
       return;
     }
 
