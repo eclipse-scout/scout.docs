@@ -24,18 +24,22 @@ import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
+import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -55,7 +59,9 @@ import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBo
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.DetailsBox.SizeField;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBox.SplitVerticalField.SplitHorizontalField.FilesBox.FileTableField;
+import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterPositionBox.MinSplitterPositionField;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox;
+import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox.CollapsibleFieldBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
@@ -112,6 +118,14 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ModifiedField.class);
   }
 
+  public MinSplitterPositionField getMinSplitterPositionField() {
+    return getFieldByClass(MinSplitterPositionField.class);
+  }
+
+  public CollapsibleFieldBox getCollapsibleFieldBox() {
+    return getFieldByClass(CollapsibleFieldBox.class);
+  }
+
   public NameField getNameField() {
     return getFieldByClass(NameField.class);
   }
@@ -161,6 +175,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected Class<? extends IFormField> getConfiguredCollapsibleField() {
           return PreviewBox.class;
+        }
+
+        @Override
+        protected String getConfiguredSplitterPositionType() {
+          return SPLITTER_POSITION_TYPE_RELATIVE_SECOND;
         }
 
         @Order(10)
@@ -358,7 +377,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Splitter visibility";
+          return "Splitter configuration";
         }
 
         @Order(10)
@@ -470,6 +489,164 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
           }
         }
+
+        @Order(40)
+        public class VerticalFieldConfigurationSequenceBox extends AbstractSequenceBox {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Field (V)";
+          }
+
+          @Override
+          protected boolean getConfiguredAutoCheckFromTo() {
+            return false;
+          }
+
+          @Order(10)
+          public class MinimizedVerticalField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Minimized";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getSplitVerticalField().setFieldMinimized(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getSplitVerticalField().isFieldMinimized());
+
+              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_MINIMIZED, new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                  if (!isValueChanging()) {
+                    setValueChangeTriggerEnabled(false);
+                    try {
+                      setValue((Boolean) evt.getNewValue());
+                    }
+                    finally {
+                      setValueChangeTriggerEnabled(true);
+                    }
+                  }
+                }
+              });
+            }
+          }
+
+          @Order(20)
+          public class CollapsedVerticalField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Collapsed";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getSplitVerticalField().setFieldCollapsed(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getSplitVerticalField().isFieldCollapsed());
+
+              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_COLLAPSED, new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                  if (!isValueChanging()) {
+                    setValueChangeTriggerEnabled(false);
+                    try {
+                      setValue((Boolean) evt.getNewValue());
+                    }
+                    finally {
+                      setValueChangeTriggerEnabled(true);
+                    }
+                  }
+                }
+              });
+            }
+          }
+        }
+
+        @Order(50)
+        @ClassId("28608587-a22c-4a7e-b7bf-38eb6e5a8566")
+        public class CollapsibleFieldBox extends AbstractRadioButtonGroup<Class<? extends IFormField>> {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Collapsible field (V)";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue() != null) {
+              getSplitVerticalField().setCollapsibleField(getForm().getFieldByClass(getValue()));
+            }
+            else {
+              getSplitVerticalField().setCollapsibleField(null);
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getSplitVerticalField().getCollapsibleField().getClass());
+          }
+
+          @Order(1000)
+          @ClassId("56d65119-9b5b-42ee-ab6c-0b2e854f1f43")
+          public class FirstFieldButton extends AbstractRadioButton<Class<? extends IFormField>> {
+            @Override
+            protected Class<? extends IFormField> getConfiguredRadioValue() {
+              return SplitHorizontalField.class;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "First";
+            }
+          }
+
+          @Order(2000)
+          @ClassId("c1ea9514-2730-40f1-88d6-23714baf05b0")
+          public class SecondFieldButton extends AbstractRadioButton<Class<? extends IFormField>> {
+            @Override
+            protected Class<? extends IFormField> getConfiguredRadioValue() {
+              return PreviewBox.class;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Second";
+            }
+          }
+
+          @Order(3000)
+          @ClassId("5548008f-4c9a-49c3-a47e-61f6885813a8")
+          public class NoneFieldButton extends AbstractRadioButton<Class> {
+            @Override
+            protected Class getConfiguredRadioValue() {
+              return null;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "None";
+            }
+          }
+        }
       }
 
       @Order(20)
@@ -511,16 +688,31 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() {
             setValue(getSplitVerticalField().getSplitterPositionType());
+            updateSplitterPositionVFieldBounds();
+          }
+
+          @Override
+          protected String validateValueInternal(String rawValue) {
+            if (rawValue == null) {
+              return getInitValue();
+            }
+            return super.validateValueInternal(rawValue);
           }
 
           @Override
           protected void execChangedValue() {
             getSplitVerticalField().setSplitterPositionType(getValue());
-            if (ObjectUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+            updateSplitterPositionVFieldBounds();
+          }
+
+          protected void updateSplitterPositionVFieldBounds() {
+            if (ObjectUtility.isOneOf(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST, ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND)) {
               getFieldByClass(SplitterPositionVField.class).setMaxValue(BigDecimal.ONE);
+              getFieldByClass(MinSplitterPositionField.class).setMaxValue(BigDecimal.ONE);
             }
             else {
               getFieldByClass(SplitterPositionVField.class).setMaxValue(null);
+              getFieldByClass(MinSplitterPositionField.class).setMaxValue(null);
             }
           }
         }
@@ -541,6 +733,50 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected ISplitBox getSplitBox() {
             return getSplitVerticalField();
+          }
+        }
+
+        @Order(25)
+        @ClassId("3b873c6a-280b-4944-bfef-307455d34e4c")
+        public class MinSplitterPositionField extends AbstractBigDecimalField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Min Position (V)";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Minimum splitter position of vertical splitter";
+          }
+
+          @Override
+          protected BigDecimal getConfiguredMinValue() {
+            return BigDecimal.ZERO;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(NumberUtility.toBigDecimal(getSplitVerticalField().getMinSplitterPosition()));
+
+            getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_MIN_SPLITTER_POSITION, new PropertyChangeListener() {
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                if (!isValueChanging()) {
+                  setValueChangeTriggerEnabled(false);
+                  try {
+                    setValue(NumberUtility.toBigDecimal((Double) evt.getNewValue()));
+                  }
+                  finally {
+                    setValueChangeTriggerEnabled(true);
+                  }
+                }
+              }
+            });
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getSplitVerticalField().setMinSplitterPosition(NumberUtility.toDouble(getValue()));
           }
         }
 
@@ -565,17 +801,30 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() {
             setValue(getSplitHorizontalField().getSplitterPositionType());
+            updateSplitterPositionHFieldBounds();
           }
 
           @Override
           protected void execChangedValue() {
             getSplitHorizontalField().setSplitterPositionType(getValue());
-            if (ObjectUtility.equals(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE)) {
+            updateSplitterPositionHFieldBounds();
+          }
+
+          protected void updateSplitterPositionHFieldBounds() {
+            if (ObjectUtility.isOneOf(getValue(), ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST, ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND)) {
               getFieldByClass(SplitterPositionHField.class).setMaxValue(BigDecimal.ONE);
             }
             else {
               getFieldByClass(SplitterPositionHField.class).setMaxValue(null);
             }
+          }
+
+          @Override
+          protected String validateValueInternal(String rawValue) {
+            if (rawValue == null) {
+              return getInitValue();
+            }
+            return super.validateValueInternal(rawValue);
           }
         }
 
@@ -656,9 +905,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     @Override
     protected List<? extends ILookupRow<String>> execCreateLookupRows() {
       ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE, "Relative"));
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST, "Absolute (first box)"));
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND, "Absolute (second box)"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST, "Relative (first field)"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND, "Relative (second field)"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST, "Absolute (first field)"));
+      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND, "Absolute (second field)"));
       return rows;
     }
   }
