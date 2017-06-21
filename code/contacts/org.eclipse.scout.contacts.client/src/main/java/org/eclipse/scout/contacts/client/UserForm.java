@@ -147,7 +147,7 @@ public class UserForm extends AbstractForm {
       String emailMd5Hash = HexUtility.encode(messageDigest.digest(emailAddress.getBytes(StandardCharsets.UTF_8)));
 
       // Get the Gravatar image
-      URL url = new URL("http://www.gravatar.com/avatar/" + emailMd5Hash);
+      URL url = new URL("http://www.gravatar.com/avatar/" + emailMd5Hash + "?d=404");
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("GET");
       connection.connect();
