@@ -14,10 +14,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
 /**
  * @author mzi
  */
+@ClassId("4dba3948-7754-4a6d-a833-1c63b92a3b21")
 public abstract class AbstractMonthsBox extends AbstractGroupBox {
 
   /**
@@ -63,6 +65,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(10)
+  @ClassId("1c10dc2a-69e3-47a5-a10e-797bef282c3a")
   public class JanuaryField extends AbstractStringField {
 
     @Override
@@ -77,6 +80,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(20)
+  @ClassId("e34451c9-985b-4f13-8ce7-9b0db199be51")
   public class FebruaryField extends AbstractStringField {
 
     @Override
@@ -91,6 +95,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(30)
+  @ClassId("e2a96ff9-f437-4e95-8f90-0a21f7dd7cce")
   public class MarchField extends AbstractStringField {
 
     @Override
@@ -105,6 +110,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(40)
+  @ClassId("a3706d10-4320-44c0-b502-0cb25e1d0799")
   public class AprilField extends AbstractStringField {
 
     @Override
@@ -119,6 +125,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(50)
+  @ClassId("ad00582f-bbc9-45ac-a4f9-bc3ded004bef")
   public class MayField extends AbstractStringField {
 
     @Override
@@ -133,6 +140,7 @@ public abstract class AbstractMonthsBox extends AbstractGroupBox {
   }
 
   @Order(60)
+  @ClassId("bd60159a-dbe2-4d68-a6c0-304ab594871a")
   public class JuneField extends AbstractStringField {
 
     @Override
