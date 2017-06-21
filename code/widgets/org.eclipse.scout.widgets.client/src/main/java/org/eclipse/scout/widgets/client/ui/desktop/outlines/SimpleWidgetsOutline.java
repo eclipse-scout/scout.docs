@@ -25,7 +25,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm;
 import org.eclipse.scout.widgets.client.ui.forms.LabelFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm;
-import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
 /**
@@ -60,7 +60,7 @@ public class SimpleWidgetsOutline extends AbstractOutline {
     FormPage checkboxFieldPage = new FormPage(CheckboxFieldForm.class);
     pageList.add(checkboxFieldPage);
 
-    FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupFieldForm.class);
+    FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupForm.class);
     pageList.add(radioButtonFieldPage);
 
     FormPage buttonLinkFieldsPage = new FormPage(ButtonForm.class);
