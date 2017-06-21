@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.bench.DesktopBenchLayoutPage;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxForm;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm;
 import org.eclipse.scout.widgets.client.ui.forms.SequenceBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm;
@@ -37,6 +38,7 @@ public class LayoutWidgetsOutline extends AbstractOutline {
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new FormPage(GroupBoxForm.class));
+    pageList.add(new FormPage(GroupBoxHorizontalScrollingForm.class));
     pageList.add(new FormPage(SequenceBoxForm.class));
     pageList.add(new FormPage(TabBoxForm.class));
     pageList.add(new FormPage(SplitBoxForm.class));
