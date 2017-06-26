@@ -24,11 +24,11 @@ import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
  * </ul>
  */
 @Order(1100)
-public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
+public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
 
   private static final String HANDLER_NAME = "widget";
 
-  public WidgetsDeepLinkHandler() {
+  public FormPageDeepLinkHandler() {
     super(defaultPattern(HANDLER_NAME, "[A-Za-z0-9_]+"));
   }
 
@@ -44,11 +44,14 @@ public class WidgetsDeepLinkHandler extends AbstractDeepLinkHandler {
   }
 
   public BrowserHistoryEntry createBrowserHistoryEntry(IFormPage formPage) {
+    return createUriForPage(formPage).createBrowserHistoryEntry();
+  }
+
+  public DeepLinkUriBuilder createUriForPage(IFormPage formPage) {
     String widgetName = toWidgetName(formPage.getFormType());
     return DeepLinkUriBuilder.createRelative()
         .info(formPage.getCell().getText())
-        .parameterPath(toDeepLinkPath(widgetName))
-        .createBrowserHistoryEntry();
+        .parameterPath(toDeepLinkPath(widgetName));
   }
 
   @Override
