@@ -69,12 +69,26 @@ If your application previously used a custom (not provided by Scout) implementat
 For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
 `HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter. The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
 
-=== IGroupBox: changed behaviour of getGridColumnCount
+=== IGroupBox: changed behavior of getGridColumnCount
 The function `getGridColumnCount()` returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.
 
 Example: the default of the property `gridColumnCount` is -1 which will typically result in 2 columns.
 
 So in case you used this method, you should consider calling `getFieldGrid().getGridColumnCount()` instead.
+
+=== ScoutTexts
+Removed support for session scope specific `ScoutTexts` instances because support of scoped services was removed in Scout without OSGi (version >= 5.0).
+
+Changes:
+* `ScoutTexts` is now an application-scoped bean
+* `ScoutTexts.CURRENT` thread local removed without replacement (use `BEANS.get(ScoutTexts.class)` instead)
+
+Deprecations (methods will be removed in P-release):
+* `ScoutTexts.get` -> `TEXTS.get`
+* `ScoutTexts.getInstance()` -> `BEANS.get(ScoutTexts.class)`
+* `ISession.getTexts()` -> `BEANS.get(ScoutTexts.class)`
+* `AbstractSqlService.getConfiguredNlsProvider()` -> method is not used anymore (returns `null`)
+* `AbstractSqlService.getNlsProvider()` -> method is not used anymore (returns `null`)
 
 // ^^^
 // Insert descriptions of Java API changes here

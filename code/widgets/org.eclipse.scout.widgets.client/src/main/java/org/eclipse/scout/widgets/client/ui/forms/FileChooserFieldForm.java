@@ -44,7 +44,6 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
-import org.eclipse.scout.rt.shared.ScoutTexts;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.CloseButton;
@@ -306,7 +305,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             @Override
             protected Long execValidateValue(Long rawValue) {
               if (rawValue == null || rawValue < 0) {
-                throw new VetoException(ScoutTexts.get("InvalidValueMessageX", ObjectUtility.toString(rawValue)));
+                throw new VetoException(TEXTS.get("InvalidValueMessageX", ObjectUtility.toString(rawValue)));
               }
               return super.execValidateValue(rawValue);
             }
