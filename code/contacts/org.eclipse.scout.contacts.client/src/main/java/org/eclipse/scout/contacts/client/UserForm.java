@@ -150,7 +150,7 @@ public class UserForm extends AbstractForm {
       String emailMd5Hash = HexUtility.encode(messageDigest.digest(emailAddress.getBytes(StandardCharsets.UTF_8)));
 
       // Get the Gravatar image
-      GenericUrl url = new GenericUrl("http://www.gravatar.com/avatar/" + emailMd5Hash);
+      GenericUrl url = new GenericUrl("http://www.gravatar.com/avatar/" + emailMd5Hash + "?d=404");
       HttpRequest req = BEANS.get(DefaultHttpTransportManager.class).getHttpRequestFactory().buildHeadRequest(url);
       HttpResponse resp = req.execute();
       try {
