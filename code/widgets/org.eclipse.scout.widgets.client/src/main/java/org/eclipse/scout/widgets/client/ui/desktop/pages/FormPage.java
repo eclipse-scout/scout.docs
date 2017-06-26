@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,13 +18,14 @@ import java.util.List;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.client.deeplink.WidgetsDeepLinkHandler;
+import org.eclipse.scout.widgets.client.deeplink.FormPageDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
@@ -81,7 +83,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
   @Override
   protected void execPageActivated() {
-    WidgetsDeepLinkHandler deepLinkHandler = BEANS.get(WidgetsDeepLinkHandler.class);
+    FormPageDeepLinkHandler deepLinkHandler = BEANS.get(FormPageDeepLinkHandler.class);
     IDesktop desktop = ClientSessionProvider.currentSession().getDesktop();
     desktop.setBrowserHistoryEntry(deepLinkHandler.createBrowserHistoryEntry(this));
   }
@@ -135,6 +137,25 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
       form.setAskIfNeedSave(false);
       form.startPageForm();
       form.waitFor();
+    }
+  }
+
+  @Order(1500)
+  public class OpenInNewSessionMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("OpenInNewSession");
+    }
+
+    @Override
+    protected void execAction() {
+      URI deepLink = BEANS.get(FormPageDeepLinkHandler.class)
+          .createUriForPage(FormPage.this)
+          .parameter("desktopStyle", "BENCH")
+          .parameter("forceNewClientSession", "true")
+          .createURI();
+      ClientSessionProvider.currentSession().getDesktop().openUri(deepLink.toString(), OpenUriAction.NEW_WINDOW);
     }
   }
 

@@ -17,12 +17,14 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
+import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.IDisplayParent;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
+import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
@@ -42,6 +44,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
@@ -56,6 +59,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.deeplink.FormDeepLinkHandler;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.DisplayHintLookupCall.DisplayHint;
@@ -71,6 +75,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.IconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityBox.ModalityField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenFormButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenInNewSessionButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.BlockModelThreadField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpeningDelayBox.OpeningDelayField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.TitleBox.FormSubTitleField;
@@ -175,6 +180,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public EditFormPropertiesButton getEditFormPropertiesButton() {
     return getFieldByClass(EditFormPropertiesButton.class);
+  }
+
+  public OpenInNewSessionButton getOpenInNewSessionButton() {
+    return getFieldByClass(OpenInNewSessionButton.class);
   }
 
   public OpenFormButton getOpenFormButton() {
@@ -613,6 +622,28 @@ public class FormForm extends AbstractForm implements IPageForm {
             }
           }
         }
+
+        @Order(2000)
+        @ClassId("61e5e631-0f04-4235-bc01-30b08830fbdf")
+        public class OpenInNewSessionButton extends AbstractButton {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("OpenInNewSession");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            String deepLink = BEANS.get(FormDeepLinkHandler.class)
+                .createUriForForm(FormForm.class);
+            ClientSessionProvider.currentSession().getDesktop().openUri(deepLink, OpenUriAction.NEW_WINDOW);
+          }
+        }
+
       }
     }
 
