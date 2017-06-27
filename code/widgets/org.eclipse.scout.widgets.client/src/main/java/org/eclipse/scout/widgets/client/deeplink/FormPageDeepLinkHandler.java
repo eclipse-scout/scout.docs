@@ -86,5 +86,4 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     }
     outlineToActivate.selectNode(pageToActivate);
   }
-
 }
