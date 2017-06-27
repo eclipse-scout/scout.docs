@@ -643,7 +643,6 @@ public class FormForm extends AbstractForm implements IPageForm {
             ClientSessionProvider.currentSession().getDesktop().openUri(deepLink, OpenUriAction.NEW_WINDOW);
           }
         }
-
       }
     }
 

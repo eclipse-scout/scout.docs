@@ -152,7 +152,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
     protected void execAction() {
       URI deepLink = BEANS.get(FormPageDeepLinkHandler.class)
           .createUriForPage(FormPage.this)
-          .parameter("desktopStyle", "BENCH")
+          .parameter("desktopStyle", IDesktop.DISPLAY_STYLE_BENCH)
           .parameter("forceNewClientSession", "true")
           .createURI();
       ClientSessionProvider.currentSession().getDesktop().openUri(deepLink.toString(), OpenUriAction.NEW_WINDOW);
