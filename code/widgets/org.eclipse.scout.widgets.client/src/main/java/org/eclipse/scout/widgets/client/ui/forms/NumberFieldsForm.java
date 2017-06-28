@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.numberfield.AbstractNumberField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
@@ -851,7 +851,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(65)
-        public class ConfigLocaleField extends AbstractSmartField<Locale> {
+        public class ConfigLocaleField extends AbstractSmartField2<Locale> {
 
           @Override
           protected String getConfiguredLabel() {

@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -491,7 +491,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class SplitterPositionTypeVField extends AbstractSmartField<String> {
+        public class SplitterPositionTypeVField extends AbstractSmartField2<String> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -545,7 +545,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class SplitterPositionTypeHField extends AbstractSmartField<String> {
+        public class SplitterPositionTypeHField extends AbstractSmartField2<String> {
 
           @Override
           protected String getConfiguredLabel() {

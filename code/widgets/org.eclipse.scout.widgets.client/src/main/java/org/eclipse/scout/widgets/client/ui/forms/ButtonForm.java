@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -832,7 +832,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class IconIdField extends AbstractSmartField<String> {
+      public class IconIdField extends AbstractSmartField2<String> {
 
         @Override
         protected String getConfiguredLabel() {

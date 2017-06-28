@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -545,7 +545,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class ReturnValueField extends AbstractSmartField<Integer> {
+      public class ReturnValueField extends AbstractSmartField2<Integer> {
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -722,7 +722,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(120)
-      public class IconIdField extends AbstractSmartField<String> {
+      public class IconIdField extends AbstractSmartField2<String> {
 
         @Override
         protected String getConfiguredLabel() {
@@ -741,7 +741,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(130)
-      public class DefaultReturnValueField extends AbstractSmartField<Integer> {
+      public class DefaultReturnValueField extends AbstractSmartField2<Integer> {
 
         @Override
         protected String getConfiguredLabel() {

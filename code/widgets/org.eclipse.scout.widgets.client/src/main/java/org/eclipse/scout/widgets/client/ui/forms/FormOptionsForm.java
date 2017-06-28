@@ -6,7 +6,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -100,7 +100,7 @@ public class FormOptionsForm extends AbstractForm {
 
     @Order(0)
     @ClassId("95b3d616-11e8-4db6-8649-2ac768a834a7")
-    public class IconField extends AbstractSmartField<String> {
+    public class IconField extends AbstractSmartField2<String> {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Icon");

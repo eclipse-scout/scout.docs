@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -342,7 +342,7 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class FontStyleField extends AbstractSmartField<Integer> {
+      public class FontStyleField extends AbstractSmartField2<Integer> {
 
         @Override
         protected int getConfiguredGridW() {

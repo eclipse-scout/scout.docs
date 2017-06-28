@@ -39,7 +39,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeFiel
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -280,7 +280,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class DisplayHintField extends AbstractSmartField<DisplayHint> {
+        public class DisplayHintField extends AbstractSmartField2<DisplayHint> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -308,7 +308,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class DisplayViewIdField extends AbstractSmartField<DisplayViewId> {
+        public class DisplayViewIdField extends AbstractSmartField2<DisplayViewId> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -360,7 +360,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
-      public class DisplayParentField extends AbstractSmartField<DisplayParent> {
+      public class DisplayParentField extends AbstractSmartField2<DisplayParent> {
 
         @Override
         protected String getConfiguredLabel() {
@@ -420,7 +420,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(42)
-      public class IconIdField extends AbstractSmartField<String> {
+      public class IconIdField extends AbstractSmartField2<String> {
 
         @Override
         protected String getConfiguredLabel() {
