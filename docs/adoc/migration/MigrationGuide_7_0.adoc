@@ -85,10 +85,12 @@ So in case you used this method, you should consider calling `getFieldGrid().get
 Removed support for session scope specific `ScoutTexts` instances because support of scoped services was removed in Scout without OSGi (version >= 5.0).
 
 Changes:
+
 * `ScoutTexts` is now an application-scoped bean
 * `ScoutTexts.CURRENT` thread local removed without replacement (use `BEANS.get(ScoutTexts.class)` instead)
 
 Deprecations (methods will be removed in P-release):
+
 * `ScoutTexts.get` -> `TEXTS.get`
 * `ScoutTexts.getInstance()` -> `BEANS.get(ScoutTexts.class)`
 * `ISession.getTexts()` -> `BEANS.get(ScoutTexts.class)`
