@@ -1,18 +1,22 @@
+// ----------------------------------------------------------------------------
+== About This Release
 
-= Overview
+Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was release in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is _7.0.0.008_Oxygen_.
 
-Eclipse Scout 7.0 is the Eclipse Oxygen release.
+IMPORTANT: If you are upgrading from version 6.0, please also read the release notes for the 6.1 (_Oxygen preview_) release: +
+https://eclipsescout.github.io/6.1/release-notes.html
 
-The official release for Eclipse Oxygen is June 2017.
-See also https://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan for the release schedule.
+You can see the https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x[detailed change log] on GitHub.
 
-== Lastest stable version
+=== Obtaining the Latest Version
 
-=== Runtime (Scout RT)
+==== Runtime (Scout RT)
+Scout RT artifacts are distributed via Maven:
 
-Eclipse Runtime on maven central: Version `7.0.0.008_Oxygen`
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.0.0.008_Oxygen%22[7.0.0.008_Oxygen] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen[7.0.0.008_Oxygen] on _mvnrepository.com_
 
-Usage example in the parent POM of your scout application:
+Usage example in the parent POM of your Scout application:
 
 [source,xml]
 ----
@@ -25,30 +29,25 @@ Usage example in the parent POM of your scout application:
 </dependency>
 ----
 
-See this artifact on mvnrepository.com: link:https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.0.008_Oxygen[org.eclipse.scout.rt]
+==== Eclipse IDE Tooling (Scout SDK)
+You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
+https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen[Eclipse for Scout Developers]
 
-=== Eclipse Tooling (Scout SDK)
-
-Eclipse IDE distribution (also called EPP): link:https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen[Eclipse for Scout Developers (Oxygen)]
-
-Update site to install the Scout SDK in your Eclipse IDE (already installed in the Scout EPP):
-
-[source,plain]
-----
+To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/7.0/7.0.0/008_Oxygen/
-----
 
-=== Demo Applications
+==== Demo Applications
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen[features/version/7.0.0.008_Oxygen] branch of our docs repository on GitHub.
 
-The demo applications using this version can be found on the link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.0.008_Oxygen[features/version/7.0.0.008_Oxygen] branch of our docs repository on GitHub.
+// === Service Release Change Log
+//
+// ==== Neon.3 (6.0.300)
+//
+// * <<Improved iOS Homescreen Mode (since 6.0.300)>>
+//
+// Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2]
 
-= What's New
-
-This document shows some of the new features delivered with the release 7.0. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x[https://github.com/eclipse/scout.rt/compare/releases/6.1.x...releases/7.0.x].
-
-NOTE: If you upgrade from version 6.0, also see the release notes for the 6.1 release. +
-https://eclipsescout.github.io/6.1/release-notes.html +
-
+// ----------------------------------------------------------------------------
 == Upgrade to jQuery 3
 
 We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).
@@ -57,7 +56,9 @@ Beside upgrading jQuery, we upgraded the Jasmine Maven Plugin to version 2.2 and
 
 Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.
 
+// ----------------------------------------------------------------------------
 == Scout JS
+
 With release 6.1 first steps had been taken to allow creating Scout applications with JavaScript only (see https://eclipsescout.github.io/6.1/release-notes.html#preparations-for-scout-js[6.1 Release Notes]). The development has been continued so that the current release comes with a cleaner API, more working widgets and even some documentation (link:{techdoc}#scout-js[Tech Doc]) and sample code (https://scout.bsi-software.com/jswidgets/). Still, it has not been finished yet and will be improved with the upcoming service releases. Let us know what you think!
 
 It is important to note that _Scout JS_ is not a separate framework. It actually just names the JavaScript part of the Scout framework. Classic Scout applications use it as well. This means effort made in this area also improves the stability of the Scout framework itself and even makes the development of custom widgets easier.
@@ -78,6 +79,7 @@ When writing a Scout Form with Java, you don't have to care about the logical gr
 
 This is now also possible with JS based Scout applications. There is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done automatically by the `LogicalGridLayout` itself.
 
+// ----------------------------------------------------------------------------
 == New HTTP abstraction layer Google HTTP Client for Java
 
 The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).
@@ -102,7 +104,9 @@ For the `DefaultHttpTransportManager`:
 
 For each Apache HTTP Client created using the `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (by default each `org.eclipse.scout.rt.shared.http.IHttpTransportManager` using the Apache HTTP Client) their own `org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore` and `org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector` (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.
 
+// ----------------------------------------------------------------------------
 == Support for REST services
+
 The following new Scout modules have been added to support REST services with Jackson as marshaller:
 
 * `org.eclipse.scout.rt.rest`
@@ -114,6 +118,7 @@ The most important class is the `org.eclipse.scout.rt.rest.RestApplication` whic
 
 So if you want to use REST services, you could use the Jersey REST servlet (`org.glassfish.jersey.servlet.ServletContainer`), pass the `RestApplication` as parameter and install the `org.eclipse.scout.rt.server.context.ServerRunContextFilter` to have the proper run context for every REST call. Creating the REST resource is straight forward using the annotations from `javax.ws.rs`. Just make sure the resource implements the interface `IRestResource` so that it will be registered by the `RestApplication` on startup.
 
+// ----------------------------------------------------------------------------
 == Prevent double clicks on buttons and menus
 
 If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property "preventDoubleClick" is provided on buttons and menus:

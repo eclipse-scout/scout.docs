@@ -5,18 +5,22 @@ Howto:
 - Choose the right top level chapter (java, js, other)
 ////
 
+== About This Document
+
+This document describes all relevant changes *from Eclipse Scout 6.1 to Eclipse Scout 7.0*. If existing code has to be migrated, instructions are provided here.
+
+IMPORTANT: If you are upgrading from version 6.0, please also read the migration guide for the 6.1 (_Oxygen preview_) release: +
+https://eclipsescout.github.io/6.1/migration-guide.html
+
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
   =============================================================================
 ////
 
-NOTE: If you upgrade from version 6.0, also see the migration guide for the 6.1 release. +
-https://eclipsescout.github.io/6.1/migration-guide.html +
-
 == API Changes (Java)
 
-=== New scout modules for Jackson-based REST services
+=== New Scout Modules for Jackson-based REST Services
 
 The following new Scout modules have been added to support REST services with Jackson as marshaller:
 
@@ -62,14 +66,15 @@ Because this construct no longer works, the corresponding properties and methods
 
 *Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
 
-=== Added HTTP abstraction layer Google HTTP Client.
+=== Added HTTP Abstraction Layer Google HTTP Client.
 
 If your application previously used a custom (not provided by Scout) implementation of the `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the `java.net.HttpURLConnection` was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the `java.net` connections are not used anymore by default the MultiSessionCookieStore (for `java.net` connections) is not installed by default (could be installed manually).
 
 For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
 `HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter. The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
 
-=== IGroupBox: changed behavior of getGridColumnCount
+=== IGroupBox: Changed Behavior of "getGridColumnCount"
+
 The function `getGridColumnCount()` returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.
 
 Example: the default of the property `gridColumnCount` is -1 which will typically result in 2 columns.
@@ -92,6 +97,7 @@ Deprecations (methods will be removed in P-release):
 
 // ^^^
 // Insert descriptions of Java API changes here
+
 
 ////
   =============================================================================
@@ -157,45 +163,45 @@ The naming of the events has been harmonized to conform with the event naming gu
 
 The following changes have been made:
 
-* Rename doAction to action
-* Rename linkPageWithRow to pageRowLink
-* Rename initPage to pageInit
-* Rename exportToClipboard to clipboardExport
-* Rename parseerror to parseError
-* Rename selectionChanged to selectionChange
-* Rename callAction to action
-* Removed insertText
-* Rename popupopen to popupOpen
-* Rename locationChanged to locationChange
-* Rename sessionready to sessionReady
-* Rename desktopcreated to desktopReady
-* Rename positionChanged to positionChange
-* Rename scrollstart to scrollStart
-* Rename scrollend to scrollEnd
-* Rename clicked to click
-* Rename modelChanged to modelChange
-* Rename selectionChanged to selectionChange
-* Rename viewRangeChanged to viewRangeChange
-* Rename formActivated to formActivate
-* Rename historyEntryActivated to historyEntryActivate
-* Rename viewAdded to viewAdd
-* Rename viewRemoved to viewRemove
-* Rename viewActivated to viewActivate
-* Rename viewDeactivated to viewDeactivate
-* Rename tabClicked to click
-* Rename tabSelected to tabSelect
-* Rename nodeClicked to nodeClick
-* Rename rowClicked to rowClick
-* Rename rowsSorted to sort
-* Remove sortRows
-* Rename rowsGrouped to group
-* Remove groupRows
-* Rename exportToClipboard to clipboardExport
-* Rename rowsFiltered to filter
-* Rename addFilter to filterAdded
-* Rename removeFilter to filterRemoved
-* Rename filterResetted to filterReset
-* Remove groupingChanged
+* Rename `doAction` to `action`
+* Rename `linkPageWithRow` to `pageRowLink`
+* Rename `initPage` to `pageInit`
+* Rename `exportToClipboard` to `clipboardExport`
+* Rename `parseerror` to `parseError`
+* Rename `selectionChanged` to `selectionChange`
+* Rename `callAction` to `action`
+* Remove `insertText`
+* Rename `popupopen` to `popupOpen`
+* Rename `locationChanged` to `locationChange`
+* Rename `sessionready` to `sessionReady`
+* Rename `desktopcreated` to `desktopReady`
+* Rename `positionChanged` to `positionChange`
+* Rename `scrollstart` to `scrollStart`
+* Rename `scrollend` to `scrollEnd`
+* Rename `clicked` to `click`
+* Rename `modelChanged` to `modelChange`
+* Rename `selectionChanged` to `selectionChange`
+* Rename `viewRangeChanged` to `viewRangeChange`
+* Rename `formActivated` to `formActivate`
+* Rename `historyEntryActivated` to `historyEntryActivate`
+* Rename `viewAdded` to `viewAdd`
+* Rename `viewRemoved` to `viewRemove`
+* Rename `viewActivated` to `viewActivate`
+* Rename `viewDeactivated` to `viewDeactivate`
+* Rename `tabClicked` to `click`
+* Rename `tabSelected` to `tabSelect`
+* Rename `nodeClicked` to `nodeClick`
+* Rename `rowClicked` to `rowClick`
+* Rename `rowsSorted` to `sort`
+* Remove `sortRows`
+* Rename `rowsGrouped` to `group`
+* Remove `groupRows`
+* Rename `exportToClipboard` to `clipboardExport`
+* Rename `rowsFiltered` to `filter`
+* Rename `addFilter` to `filterAdded`
+* Rename `removeFilter` to `filterRemoved`
+* Rename `filterResetted` to `filterReset`
+* Remove `groupingChanged`
 
 ////
   =============================================================================
@@ -205,7 +211,7 @@ The following changes have been made:
 
 == Other Changes
 
-=== Maven provided dependencies
+=== Maven "provided" Dependencies
 
 In Maven dependencies with the scope provided are not transitive.
 This makes sense if a dependency is set to provided depending on the environment.
@@ -219,7 +225,6 @@ Depending on the container, you may want also to add the depdendency `javax.xml.
 [source,xml]
 ----
 <project>
-
   <artifactId>myproject.server.war</artifactId>
   <packaging>war</packaging>
 
