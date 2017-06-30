@@ -1,28 +1,57 @@
+// ----------------------------------------------------------------------------
+== About This Release
 
-= Overview
+Eclipse Scout 6.1 is a preview of the Eclipse _Oxygen_ release (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest public build on this branch is _6.1.0.B009_. The official release for Eclipse Oxygen is Eclipse Scout 7.0 and will be released in June 2017.
 
-Eclipse Scout 6.1 is a preview of the Eclipse Oxygen release. The latest public build on this branch is _6.1.0.B006_. The official release for Eclipse Oxygen is Eclipse Scout 7.0 and will be released in June 2017.
+This document shows some of the new features delivered with the release 6.1. The release contains a lot of bugfixes and even some features not mentioned here.
 
-* Download SDK: link:http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
-* Runtime on Maven Central: link:http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.1.0.B006%22[6.1.0.B006]
+You can see the https://github.com/eclipse/scout.rt/compare/releases/6.0.x%2E%2E%2Ereleases/6.1.x[detailed change log] on GitHub.
 
-= What's New
-This document shows some of the new features delivered with the release 6.1. The release contains a lot of bugfixes and even some features not mentioned here. If you are interested in the detailed change log see https://github.com/eclipse/scout.rt/compare/releases/6.0.x%2E%2E%2Ereleases/6.1.x[https://github.com/eclipse/scout.rt/compare/releases/6.0.x...releases/6.1.x].
+=== Obtaining the Latest Version
 
+==== Runtime (Scout RT)
+Scout RT artifacts are distributed via Maven:
+
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.1.0.B009%22[6.1.0.B009] on _Maven Central_
+
+Usage example in the parent POM of your Scout application:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>6.1.0.B009</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+==== Eclipse IDE Tooling (Scout SDK)
+You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
+http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
+
+// ----------------------------------------------------------------------------
 == Strong content security policy CSP
+
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout Migration Guide].
 
+// ----------------------------------------------------------------------------
 == Enforcement of Model Thread
+
 Every operation which results in a modification of the model and eventually of the ui has to be performed by the model thread. This has been true for a long time and still is. If the wrong thread was used, unexpected behavior was the result, like a delayed update of the ui or concurrency exceptions. To prevent such behavior in the future, an exception will be thrown if an operation is executed in the wrong thread.
 
 If you get such an exception, you'll need to wrap your operation in a model job and schedule it using `ModelJobs.schedule()`, see the chapter ModelJobs in the link:{techdoc}#modeljobs[Scout Technical Documentation] for details.
 
+// ----------------------------------------------------------------------------
 == Properties support for Lists, Maps and imports
 
 Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section "link:{techdoc}#sec-config.management[Configuration Management]" for more details.
 
+// ----------------------------------------------------------------------------
 == Binary resources support for HtmlField and BeanField
+
 Binary resources such as images or videos can now be used in the following widgets:
 
 * HtmlField
@@ -39,7 +68,9 @@ image::{imgsdir}/binary_resource_field.png[]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
+// ----------------------------------------------------------------------------
 == TriState capability for check boxes
+
 Added support for tri-state value (`true`, `false` and `null` instead of just `true` and `false`) to boolean field and boolean column.
 
 The new property `triStateEnabled` controls whether the boolean field/column behaves as a normal checkbox (false)
@@ -48,10 +79,14 @@ or a tri-state checkbox (true).
 A normal checkbox has values true/false. A tri-state checkbox has values true/false/null. The null value is
 interpreted as "undefined" and rendered as a filled square.
 
+// ----------------------------------------------------------------------------
 == New UriOpenAction: SAME_WINDOW
+
 The enum `UriOpenAction` provides a new value to open a URI in the current window: `SAME_WINDOW`
 
+// ----------------------------------------------------------------------------
 == New methods in StringUtility
+
 `StringUtility` provides the following new methods:
 
 * `containsString()`
@@ -67,7 +102,9 @@ The enum `UriOpenAction` provides a new value to open a URI in the current windo
 
 All methods are null-safe, unit tested and documented with JavaDoc.
 
+// ----------------------------------------------------------------------------
 == New ObjectUtility
+
 ObjectUtility was added as new utility for generic object methods and provides null-safe implementations of various Object methods. Various methods from former `CompareUtility`:
 
 * `equals()`
@@ -78,7 +115,9 @@ ObjectUtility was added as new utility for generic object methods and provides n
 
 And a new method `ObjectUtility.toString(Object)` providing a null-safe implementation of `Object.toString()` returning `null` if specified object is `null`.
 
+// ----------------------------------------------------------------------------
 == Multiple Dimensions Support
+
 Some components now support more dimensions for various attributes.
 E.g. until now there have been two dimensions for Form Field visibility: visible and visible-granted. Now there are also custom dimensions available.
 See the chapter 'Multiple Dimensions Support' in the link:{techdoc}[Scout Technical Documentation] for details and examples.
@@ -96,7 +135,9 @@ Currently the following attributes support multiple dimensions:
 * Trees: enabled
 * Tables: enabled
 
+// ----------------------------------------------------------------------------
 == Form Field
+
 === Enabled Inheritance
 The inheritance of the enabled property for Form Fields has been changed. Now the enabled properties are no longer propagated to children if it is changed on a composite field.
 Instead a field is only considered to be enabled if itself and all of its parents are enabled. This allows to toggle an entire box to disabled and back to enabled without touching the child fields.
@@ -114,7 +155,9 @@ Form fields may have a tooltip and a context menu. Until now, it was not possibl
 .Tooltip with menus
 image::{imgsdir}/tooltip_menus.png[]
 
+// ----------------------------------------------------------------------------
 == Table
+
 === New property "groupingStyle"
 The new property `groupingStyle` can be set to `bottom` (default) or `top`. Depending on the value aggregate rows are rendered on the bottom of grouped rows
 or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table
@@ -123,17 +166,23 @@ into multiple categories.
 === NumberColumn: new property "allowedAggregationFunctions", new aggregation type for no aggregation
 The new property `allowedAggregationFunctions` can be set to any array of the aggregation functions `sum`, `avg`, `min`, `max` and `none` (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type `none` was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type `none` is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.
 
+// ----------------------------------------------------------------------------
 == UnloadRequestHandler for `navigator.sendBeacon()`
+
 When a client leaves the application (e.g. puts `about:blank` in the address bar) one last "unload" request to the UI server is sent in order to property clean up the session on the server.
 
 If the browser supports the https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon[Beacon API] `navigator.sendBeacon()` is used for this request. Unfortunately `application/json` is not a CORS-safelisted request-header which implies that we can’t use the `JsonMessageRequestHandler` for the unload handling. Therefore a separate `UnloadRequestHandler` was introduced which handles all requests to `/unload/[UiSessionId]`. (For more Information, see https://git.eclipse.org/r/#/c/89422/)
 
 To cut a long story short, new traffic to /unload will be sent by the clients. Please check your container and firewall configuration.
 
+// ----------------------------------------------------------------------------
 == New annotation RemoteServiceWithoutAuthorization
+
 Remote services called through IServiceTunnel may whitelist authorization exclusions using this new annotation.
 
+// ----------------------------------------------------------------------------
 == Preparations for Scout JS
+
 A classic Scout application has a client model written in Java, and a UI which is rendered using JavaScript. With this approach you can write your client code using a mature and type safe language. Unfortunately you cannot develop applications which have to run offline because the UI and the Java model need to be synchronized.
 
 With Scout JS this will change. You will be able to create applications running without a UI server because there won't be a Java model anymore. The client code will be written using JavaScript (or TypeScript) and executed directly in the browser.
@@ -151,11 +200,13 @@ With a Scout Classic app a lot happens on the UI server, like validating a form 
 
 The preparations done in this release are just the first step. You could create a Scout JS app with this release, but a lot of the widgets are not ready to use yet. See also the link:{migrationguide}[Scout Migration Guide] to migrate your existing JavaScript code.
 
+// ----------------------------------------------------------------------------
 == Button: new property 'defaultButton'
 A button may now be marked as default button which gives him a dedicated look to attract users attention. It will just change the look, the behavior stays the same.
 
 Note: The first button or menu which has an `Enter` keystroke will automatically get that look too. This is existing behavior and hasn't changed. The new property has been added to give you more control, but actually you should always prefer the _enter keystroke approach_ to provide a consistent behavior.
 
+// ----------------------------------------------------------------------------
 == Icons for tree nodes
 As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the `iconId` property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property `showTreeIcons` which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here's an example for an outline with icons:
 
@@ -163,11 +214,12 @@ As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Tre
 .Outline with icons
 image::{imgsdir}/tree_icons.png[]
 
+// ----------------------------------------------------------------------------
 == File Chooser Field: Improved Usability
 The file chooser field does not open an intermediate window anymore when clicked. Instead, the native file chooser is opened directly. This saves several clicks when a file needs to be uploaded.
 Furthermore, the whole field is now clickable. Until now the icon had to be clicked to choose a file which did not work well on touch devices.
 
-
+// ----------------------------------------------------------------------------
 == Desktop Bench Layout configurable
 The Desktop Layout can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the applications lifecycle.
 For more information take a look at teh https://eclipsescout.github.io/6.1/technical-guide.html#desktop[Technical Guide].

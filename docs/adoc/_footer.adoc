@@ -1,2 +1,2 @@
 
-TIP: Do you want to improve this document? Please git-link:self[link-text='edit this page'] on GitHub.
+TIP: Do you want to improve this document? Have a look at the git-link:self[link-text='sources'] on GitHub.

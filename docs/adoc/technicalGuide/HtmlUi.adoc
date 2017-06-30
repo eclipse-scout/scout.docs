@@ -1,0 +1,56 @@
+
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+== HTML UI
+
+=== Browser Support
+
+The Scout HTML UI requires a web browser with modern built-in technologies: HTML 5, CSS 3, JavaScript (ECMAScript 5). Scout does its best to support all browsers widely in use today by making use of vendor-specific prefixes, polyfills or other workarounds. However, some older or obscure browsers are not supported deliberately, simply because they are lacking basic capabilities or the required effort would be beyond reason.
+
+Here is a non-exhaustive list of supported browsers:
+
+Desktop::
+* Mozilla Firefox >= 35
+* Google Chrome >= 36
+* Microsoft Internet Explorer >= 9 (preferrably 10 or later, see limitations listed below)
+* Microsoft Edge >= 12
+* Apple Safari >= 7
+
+Mobile::
+_(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
+* iOS >= 8
+* Android >= 5
+* Windows Mobile >= 10
+
+.Known Limitations
+[width="100%",options="header",cols="3,9"]
+|=======
+|Affected System|Description
+
+|Internet Explorer 9
+|*Drag and drop* of files from disk to the file chooser is not possible. IE9 is missing the required API (and it cannot be added with a polyfill). You can also only *upload one file at a time*, because the File API is missing as well.
+
+|Internet Explorer 9
+|*On-field labels* are not visible in IE9 because it lacks support for the "placeholder" attribute.
+
+|Internet Explorer 9
+|Some *loading animations* may appear static, because IE9 does not support CSS3 animations.
+
+|Internet Explorer 9
+|Tables and trees with many entries tend to degrade *performance* in IE9.
+
+|Internet Explorer
+|If the browser is configured to enable the so-called *"protected mode"*, the state of a popup window cannot be determined correctly. This is noticeable when a `AbstractBrowserField` has the property _"show in external window"_ set to `true`. Even though the popup window is still open, the method `execExternalWindowStateChanged()` is called immediately, telling you the window was closed (because IE reports so). There is no workaround for this problem, apart from disabling the "protected mode".
+
+|Internet Explorer and Edge
+|*Performance in popup windows* (e.g. opening a form with `DISPLAY_HINT_POPUP_WINDOW`) is very poor. We have https://connect.microsoft.com/IE/feedback/details/1778700/edge-manipulating-dom-from-another-window-is-slow-in-ms-edge[filed a bug] with the folks at Microsoft in 2015, but unfortunately the issue is still unresolved. To prevent slow forms in IE, they should be using a different display hint. Alternatively, users can use a different browser.
+
+|=======
