@@ -1,22 +1,55 @@
-== Service Release Change Log
+// ----------------------------------------------------------------------------
+== About This Release
 
-*Neon.3 (6.0.300)*
+Eclipse Scout 6.0 is part of the Eclipse _Neon_ release (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest stable version of this release is _Neon.3 (6.0.300.1)_.
+
+You can see the https://github.com/eclipse/scout.rt/compare/releases/5.2.x%2E%2E%2Ereleases/6.0.x[detailed change log] on GitHub.
+
+=== Obtaining the Latest Version
+
+==== Runtime (Scout RT)
+Scout RT artifacts are distributed via Maven:
+
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%226.0.300.1%22[6.0.300.1] on _Maven Central_
+
+Usage example in the parent POM of your Scout application:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>6.0.300.1</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+==== Eclipse IDE Tooling (Scout SDK)
+You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
+http://www.eclipse.org/downloads/packages/eclipse-scout-developers/neon3[Eclipse for Scout Developers]
+
+=== Service Release Change Log
+
+==== Neon.3 (6.0.300)
 
 * <<Improved iOS Homescreen Mode (since 6.0.300)>>
-* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2].
 
-*Neon.2 (6.0.200)*
+Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2]
 
-* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2%2E%2E%2E6.0.200.0[https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2...6.0.200.0].
+==== Neon.2 (6.0.200)
 
-*Neon.1 (6.0.100)*
+Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2%2E%2E%2E6.0.200.0[https://github.com/eclipse/scout.rt/compare/6.0.100.RC4.2...6.0.200.0]
+
+==== Neon.1 (6.0.100)
 
 * <<Responsive Table (since 6.0.100)>>
-* Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.0.RC4%2E%2E%2E6.0.100.RC4.2[https://github.com/eclipse/scout.rt/compare/6.0.0.RC4...6.0.100.RC4.2].
 
-= What's New
+Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.0.RC4%2E%2E%2E6.0.100.RC4.2[https://github.com/eclipse/scout.rt/compare/6.0.0.RC4...6.0.100.RC4.2]
 
+// ----------------------------------------------------------------------------
 == The HTML UI
+
 With the previous Scout release 3 UIs were available: SWT and Swing for rich clients and Rap for web clients.
 The fact that every change in the Scout model resulted either in a huge effort to adjust every UI or in a divergence of the UIs if the effort could not be taken, led us to a radical step:
 We deleted these 3 UIs and replaced them with a complete new one: The HTML UI.
@@ -30,6 +63,7 @@ Without the restrictions of the old UIs we were able to create a new UI tailored
 
 The new HTML UI not only gives your application a modern look & feel, it also gives you more possibilities regarding styling and customizing.
 
+// ----------------------------------------------------------------------------
 == From OSGi to Plain Java
 
 With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pure java project. The reasons for this change were
@@ -52,14 +86,16 @@ image::{imgsdir}/maven.png[]
 OSGi services and extension points have been replaced by beans managed by the link:{techdoc}#sec-bean.manager[Scout bean manager].
 Applications are replaced by link:{techdoc}#platform-listener[platform listeners] provided by the Scout link:{techdoc}#platform[platform].
 
-==== Various Changes
+=== Various Changes
 * `org.eclipse.scout.commons` reorganized, classes moved to `org.eclipse.scout.rt.platform` and other projects
 
 === Job Framework
 
 The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
 
+// ----------------------------------------------------------------------------
 == New styling possibilities with CSS
+
 It is now finally possible to use the full power of CSS to style your application. To make it more maintainable Scout uses link:++http://lesscss.org++[LESS] which you can use as well.
 
 === Theming
@@ -74,6 +110,7 @@ image::{imgsdir}/theming.png[]
 Every form field and some other widgets now provide a new property called CssClass. It accepts one or more css classes separated with a space.
 This makes it possible to adjust the style of a specific form field and even a table cell or tree node. Look for the interface `IStyleable` for stylable widgets.
 
+// ----------------------------------------------------------------------------
 == Better HTML support at Java level
 
 === IHtmlCapable
@@ -86,7 +123,9 @@ Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content in
 === HTMLUtility
 `org.eclipse.scout.rt.platform.html.HTMLUtility` and `org.eclipse.scout.rt.platform.html.CSSPatch` were deprecated because they contained only legacy code of doubtful quality. Do not use them anymore -- they will be removed in the next Scout release. The support for most of the contained methods was dropped, because they are not required anymore with the new UI. A slightly improved version of the `getPlainText()` method is available on the new bean `org.eclipse.scout.rt.platform.html.HtmlHelper`.
 
+// ----------------------------------------------------------------------------
 == Keyboard Shortcut Visualization
+
 Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
 Currently available means that the focused element as well as the enabled state is respected so that only those shortcuts which really can be executed are shown.
 
@@ -94,12 +133,14 @@ Currently available means that the focused element as well as the enabled state 
 .Keyboard Shortcut Visualization
 image::{imgsdir}/keyboard_shortcuts.png[]
 
+// ----------------------------------------------------------------------------
 == Font Icons
 The new UI uses font icons instead of bitmap icons because they are scalable, can be colored using CSS and can be loaded with one request.
 It is suggested that you use font icons as well. Scout provides the font _scoutIcons_ which contains the icons used by Scout itself. If they are not sufficient you can either create a custom font with only the icons you need, or include a pre-built one like link:++http://fontawesome.io/++[FontAwesome].
 
 Anyway, bitmap icons are still supported.
 
+// ----------------------------------------------------------------------------
 == Login Page
 Compared to the previous web ui, adding a form based login page is now a lot simpler. Scout provides a login.html which can either used as it is or adjusted to your needs.
 
@@ -107,13 +148,16 @@ Compared to the previous web ui, adding a form based login page is now a lot sim
 .Login Page
 image::{imgsdir}/login.png[]
 
+// ----------------------------------------------------------------------------
 == UI Debugging using URL Hints
 The new UI provides url hints for easier debugging: ?cache, ?compress, ?minify, ?debug, ?inspector.
 By default they only enabled in development mode. This behavior can be controlled using the property `scout.urlHints.enabled`.
 
+// ----------------------------------------------------------------------------
 == Documentation goes AsciiDoc
 The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on git-link:docs/[GitHub] and the output of the documentation build is available on github.io: link:{docroot}[github.io].
 
+// ----------------------------------------------------------------------------
 == New and better widgets
 Beside the new look of every widget, most of them got new functionality as well.
 
@@ -392,7 +436,9 @@ The new `WizardProgressField` is normally visualized as a list of steps with som
 === Chart Box
 Removed chart box because it has not been used and there is no UI implementation.
 
+// ----------------------------------------------------------------------------
 == Security
+
 === MalwareScanner
 Facility used to scan files and resources for malware.
 The new @Bean MalwareScanner assumes that an appropriate malware scanner is in place on the webapp deployment machine
@@ -414,15 +460,8 @@ The HTML UI checks if the application is configured safe by validating some flag
 === UserIdAccessControlService [Removed]
 `org.eclipse.scout.rt.shared.services.common.security.UserIdAccessControlService` was removed in M7. When creating a new Scout project via SDK, an own implementation of AbstractAccessControlService is now explicitly created in shared, named `AccessControlService` (as replacement for the removed `UserIdAccessControlService`). The class generated at the server side now replaces (@Replace) the new one generated in shared (class name of server side changed from `AccessControlService` to `ServerAccessControlService`).
 
+// ----------------------------------------------------------------------------
 == Improved iOS Homescreen Mode (since 6.0.300)
 If the app is running in iOS home screen mode the HTTP session will be lost whenever the user leaves the app (e.g. switches to another app or just downloads a file). This means he has to login again and navigate to the previous location, again. To avoid this a persistent mode has been introduced. This means if the app is running in the home screen mode, a persistent session cookie is created so that the same http session may be used the next time the app is activated. Also, the client session id will be put in the local storage instead of the session storage. This makes sure the same client session as before is used. Deep link handling is deactivated in that case otherwise it would always navigate to the url which was active when "add to home screen" was pressed.
 
 This persistent mode is only active when the app is running on iOS with the home screen mode.
-
-= Known Limitations
-
-== Drag and drop support
-IE9 does not support dropping files. Therefore, drag and drop in file chooser is not supported for that browser.
-
-== Input placeholders
-On-field labels are not visible in IE9 because it lacks support for the "placeholder" attribute.

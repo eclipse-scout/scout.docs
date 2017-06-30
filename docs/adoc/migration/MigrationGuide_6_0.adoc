@@ -4,28 +4,30 @@ Howto:
 - Chronological order is not necessary.
 ////
 
-This document describes what needs to be done when migrating from Eclipse Scout 5.0 to Eclipse Scout 6.0. If you are updating to a 6.0 service release, see the chapter <<Service Release Migration>>.
+// ----------------------------------------------------------------------------
+== About This Document
 
-== Service Release Migration
+This document describes all relevant changes *from Eclipse Scout 5.0 to Eclipse Scout 6.0*. If existing code has to be migrated, instructions are provided here.
 
-*Neon.3 (6.0.300)*
+=== Service Release Migration
 
+The following changes were made after the inital 6.0 release. Follow these instructions when updating to a _service release_.
+
+==== Neon.3 (6.0.300)
 * <<JAX-WS Pooled Port Provider (since 6.0.300)>>
 
-*Neon.2 (6.0.200)*
+==== Neon.2 (6.0.200)
+* No migration required
 
-None.
-
-*Neon.1 (6.0.100)*
-
+==== Neon.1 (6.0.100)
 * <<Changed behavior for tables with autoResizeColumns = true (since 6.0.100)>>
 
+// ----------------------------------------------------------------------------
 == Project Structure
 
 With the upgrade to pure maven without OSGi the project structure should be changed to the maven default footnote:[
 https://maven.apache.org/guides/getting-started/
 ]:
-
 
 [source,text,indent=0]
 .Eclipse Plugin Structure (Scout 5.0, old)
@@ -70,10 +72,12 @@ org.eclipsescout.helloworld.client
                             HelloworldTest.java
 ----
 
+// ----------------------------------------------------------------------------
 == Manifest.MF
 
 Manifest.MF is no longer used. Migrate dependencies to `pom.xml`!
 
+// ----------------------------------------------------------------------------
 == AccessControlService
 
 The IAccessControlService has been improved to allow for other keys than the userId. AbstractAccessControlService is now generic with key as a type parameter.
@@ -84,6 +88,7 @@ If you want to use access control based on the userid as before, extend UserIdAc
 protected abstract PermissionCollection execLoadPermissions(String userId)
 ----
 
+// ----------------------------------------------------------------------------
 == IShellService
 
 The ShellService can no longer be used because there is no access to the client side shell. Instead you can use the following code to send a document to clients:
@@ -94,6 +99,7 @@ ClientSessionProvider.currentSession().getDesktop()
   .openUri(binaryResource, OpenUriAction.DOWNLOAD);
 ----
 
+// ----------------------------------------------------------------------------
 == Desktop
 
 * Renamed `IDesktop.openUrlInBrowser` to `openUri`, since passed String is not always an URL but sometimes an URI like tel:123 or mailto:foo@bar.com, etc.
@@ -103,13 +109,17 @@ ClientSessionProvider.currentSession().getDesktop()
 * Renamed `DesktopEvent.TYPE_OPEN_DOWNLOAD_IN_BROWSER` to `TYPE_DOWNLOAD_RESOURCE`
 * F5 Keystroke on the desktop to reload the current page is no longer necessary because the table itself now provides the f5 keystroke -> Remove the keystroke from your desktop to prevent refreshing the table twice.
 
+// ----------------------------------------------------------------------------
 == Offline
+
 Offline functionality in the scout client was removed (not needed anymore). Delete
 - OfflineState
 - IClientSession.getOfflineSubject
 - IDesktop.changeVisibilityAfterOfflineSwitch
 
+// ----------------------------------------------------------------------------
 == Mobile
+
 org.eclipse.scout.rt.client.mobile has been merged with org.eclipse.scout.rt.client.
 A lot of the mobile code in that plugin has been removed because the ui is now smarter and reacts bettter to smaller screens than the previous uis.
 
@@ -121,11 +131,15 @@ The new mobile approach is slightly different than the one before Neon:
 * The transformation mainly affects mobile phones (resp. devices with a small screen size). On tablets the application will look nearly the same as on a desktop device. There are just a few optimizations made regarding touch input (e.g. the smartfield looks different).
 * Previously a form based approach had been used. Every outline page was wrapped in a page form, the navigation happened by showing or hiding the corerct form. Now, the outline tree has been enhanced with mobile specific functionality. This means the navigation happens completely in the outline tree, no forms are used. There is also no need for a home form anymore which displays the available outlines. The outlines may be switched in the same way as with the desktop style. The advantage is that the mobile style (or rather the style for small devices) looks and behaves similar to the regular desktop style which should make it easier for the user.
 
+// ----------------------------------------------------------------------------
 == ToolButton
+
 * `IToolButton` has been removed, it is not necessary anymore because the desktop may now display any kind of menus.
 * `IFormToolButton` has been renamed to `IFormMenu`. These menus, which display a form when selected, may now be used on any menu capable component and not only on the desktop. Therefore it has been moved from the package `org.eclipse.scout.rt.client.ui.desktop.outline` to `org.eclipse.scout.rt.client.ui.form`.
 
+// ----------------------------------------------------------------------------
 == Menu
+
 All owners of an `IContextMenu` now share a common interface: `IContextMenuOwner`. This interface provides a method `getMenuByClass(T)`, analogous to `getFieldByClass(T)`, `getColumnByClass(T)` etc.
 
 `ITree` and `ITable` provided a similar method `getMenu(T)`. This method was deprecated in favor of `getMenuByClass(T)`.
@@ -136,6 +150,7 @@ The constructors of OutlineMenuWrapper changed. For details consult the javadoc.
 
 The `CopyColumnsWidthsMenu` has been deleted and was replaced with a new button in `OrganizeColumnsForm`.
 
+// ----------------------------------------------------------------------------
 == Message Box
 
 * Removed title. No replacement, title is not supported anymore.
@@ -150,6 +165,7 @@ The `CopyColumnsWidthsMenu` has been deleted and was replaced with a new button 
 * Moved MessageBox.showDeleteConfirmationMessage methods to MessagesBoxes class
 * If html needs to be displayed, use the new html(IHtmlContent) method. Header / body methods do not support html.
 
+// ----------------------------------------------------------------------------
 == Table
 
 === Table API Changes
@@ -248,6 +264,7 @@ small on small screens, this width is now also used as minimum / preferred width
 So if you have tables with autoResizeColumns set to true, check the widths of the columns and adjust them if needed. The easiest way to do this is to make the screen smaller until a horizontal scrollbar appears.
 Then adjust the values if the column is too small and make sure the content is readable most of the time. But don't make the columns too big because you want to avoid horizontal scrollbar on large screens.
 
+// ----------------------------------------------------------------------------
 == Outline
 
 * Removed `IOutlineTableForm`, `IOutlineTreeForm` and all sub-classes. They're not supported by the new Html UI anymore.
@@ -259,6 +276,7 @@ Therefore activating an outline does not automatically select the first page any
 
 If the previous behavior is still wanted, one can implemented `IDesktop.execOutlineChanged` and call `activateFirstPage` if active page is `null`.
 
+// ----------------------------------------------------------------------------
 == Wizard
 
 * Argument `containerForm` was removed. Use `getContainerForm()` instead.
@@ -297,6 +315,7 @@ New code:
 ** For own implementations of `IWizardContainerForm`, replace the return value `IButton` by `IWizardAction`.
 ** For code that previously used the `setView(boolean, boolean, boolean)` method on wizard buttons, a new `setView(boolean, boolean)` method was introduced on `IButton` and `IAction` (because it does not make sense to make a button "mandatory"). This can be migrated by just deleting the third argument.
 
+// ----------------------------------------------------------------------------
 == Form
 
 * `get/setBasicTitle` removed
@@ -306,6 +325,7 @@ New code:
 * Added default behaviour to `AbstractForm.execCreateFormData` The method now creates a new instance of the form data based on the form data annotation. Also added createFormData to the IForm interface. If `execCreateFormData` was implemented and just used the default constructor of the corresponding form data class, the method may be removed.
 * Removed display-hint `IForm.DISPLAY_HINT_POPUP_DIALOG`. Not supported anymore. Use dialog or popup-window instead.
 
+// ----------------------------------------------------------------------------
 == Form Fields
 
 * Deleted `AbstractCheckBox`, `AbstractCheckboxExtension`, `ICheckBoxExtension`, `ICheckBox`.
@@ -420,6 +440,7 @@ Also the implementation to check child nodes of a tree when a parent is checked 
 * Moved `get/setExternalKey()` from `ICalendarAppointment` to base class `ICalenderItem`.
 * Removed cell instance from `CalendarComponent`
 
+// ----------------------------------------------------------------------------
 == Utilities
 
 * Removed methods `UserAgentUtility.isRichClient()` and `.isWebClient()`.
@@ -454,7 +475,7 @@ http://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec
 
 NOTE: When changing the cryptography algorithms in you application please keep in mind that all existing encrypted, hashed or signed data becomes invalid! Consider migrating these data first.
 
-
+// ----------------------------------------------------------------------------
 == Various API Changes
 
 * Changed `ILookupRow` to fluent API: use with... instead of set...
@@ -464,6 +485,7 @@ NOTE: When changing the cryptography algorithms in you application please keep i
 * `UserAgentUtility`: API removed `isRapUi()`, `isSwingUi()`
 * The unused, obsolete classes `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldEvent` and `org.eclipse.scout.rt.client.ui.form.fields.ValueFieldListener` were removed.
 
+// ----------------------------------------------------------------------------
 == Logging API
 
 Scout switched from a custom, typically java.util.logging-based logger implementation to SLF4j. The log format does not support indexed placeholders anymore.
@@ -480,6 +502,7 @@ LOG.info("message {0}", obj); // the index is not supported anymore. You have to
 
 NOTE: Indexed placeholders are actually deprecated since Scout's open-source debut. The values were filled in from left to right, independent of the possibly declared index.
 
+// ----------------------------------------------------------------------------
 == Logging configuration
 
 migrate logging.properties to logback.xml
@@ -558,7 +581,7 @@ Default server pattern
 <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg [%X{subject.principal.name} @ %X{http.session.id} in %thread ]%n</pattern>
 ----
 
-
+// ----------------------------------------------------------------------------
 == Text cleanup
 All unused texts in ScoutTextProviderService were removed. If you were using one of the deleted ones, you find them in:
 
@@ -591,7 +614,8 @@ All unused texts in ScoutTextProviderService were removed. If you were using one
 * link:ScoutTexts/ScoutTexts_zh.properties[ScoutTexts_zh.properties]
 * link:ScoutTexts/ScoutTexts.properties[ScoutTexts.properties]
 
-== Migrate to the new Job API
+// ----------------------------------------------------------------------------
+== New Job API
 Eclipse jobs are replaced by Scout Job Manager API.
 
 === In a nutshell
@@ -762,10 +786,12 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=jobManager.job.get_result.new]
 ----
 
+// ----------------------------------------------------------------------------
 == Session Cookie Configuration
 
 The Scout HTML UI Session cookie requires some security flags. Please refer to the Scout documentation chapter "Session Cookie (JSESSIONID Cookie) Configuration" to learn how to configure your JSESSIONID cookie.
 
+// ----------------------------------------------------------------------------
 == Client Notifications
 
 Check out the
@@ -809,6 +835,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MigrationGuideSnippet.java[tags=clientnotification.handle.new]
 ----
 
+// ----------------------------------------------------------------------------
 == JAX-WS Pooled Port Provider (since 6.0.300)
 
 Creating web service and port instances are expensive operations (at least if the reference implementation Metro or the one bundled with the JRE is used). Especially parsing the WSDL and XSD files as well as building JAXB contexts and it is even worse if they are performed in parallel (due to synchronization).
