@@ -94,7 +94,7 @@ Applications are replaced by link:{techdoc}#platform-listener[platform listeners
 The eclipse job framework has been replaced by a new link:{techdoc}#sec-bean.manager[job framework] based on Java executors framework.
 
 // ----------------------------------------------------------------------------
-== New styling possibilities with CSS
+== New Styling Possibilities With CSS
 
 It is now finally possible to use the full power of CSS to style your application. To make it more maintainable Scout uses link:++http://lesscss.org++[LESS] which you can use as well.
 
@@ -111,7 +111,7 @@ Every form field and some other widgets now provide a new property called CssCla
 This makes it possible to adjust the style of a specific form field and even a table cell or tree node. Look for the interface `IStyleable` for stylable widgets.
 
 // ----------------------------------------------------------------------------
-== Better HTML support at Java level
+== Better HTML Support at Java Level
 
 === IHtmlCapable
 Certain widgets support html content instead of plain text, like `ILabelField` or `IColumn`.
@@ -149,16 +149,16 @@ Compared to the previous web ui, adding a form based login page is now a lot sim
 image::{imgsdir}/login.png[]
 
 // ----------------------------------------------------------------------------
-== UI Debugging using URL Hints
+== UI Debugging Using URL Hints
 The new UI provides url hints for easier debugging: ?cache, ?compress, ?minify, ?debug, ?inspector.
 By default they only enabled in development mode. This behavior can be controlled using the property `scout.urlHints.enabled`.
 
 // ----------------------------------------------------------------------------
-== Documentation goes AsciiDoc
+== Documentation Goes AsciiDoc
 The Scout documentation has been moved to AsciiDoctor. The documentation is currently hosted on git-link:docs/[GitHub] and the output of the documentation build is available on github.io: link:{docroot}[github.io].
 
 // ----------------------------------------------------------------------------
-== New and better widgets
+== New and Better Widgets
 Beside the new look of every widget, most of them got new functionality as well.
 
 === Desktop
