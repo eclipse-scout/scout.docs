@@ -271,7 +271,7 @@ Applications usually require some kind of configuration mechanism to use the sam
 https://en.wikipedia.org/wiki/.properties
 ].
 
-For each property a class cares about default values and value validation. These classes share the `org.eclipse.scout.rt.platform.config.IConfigProperty` interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <<lst-ConfigProperties>>.
+For each property a class cares about default values and value validation. These classes share the `org.eclipse.scout.rt.platform.config.IConfigProperty` interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <<lst-ConfigProperties>>. If the property class is an inner class it has to be defined as a static class with the `static` modifier.
 
 [[lst-ConfigProperties, config properties]]
 [source,java,indent=0]
