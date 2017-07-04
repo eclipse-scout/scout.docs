@@ -32,7 +32,7 @@ You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
 http://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygenm2[Eclipse for Scout Developers]
 
 // ----------------------------------------------------------------------------
-== Strong content security policy CSP
+== Strong Content Security Policy (CSP)
 
 The stronger CSP disables inline javscript in html. Therefore the 'New Scout Project' wizard now creates a js file
 per html file and includes it using the script element. To migrate existing projects, see the link:{migrationguide}[Scout Migration Guide].
@@ -45,12 +45,12 @@ Every operation which results in a modification of the model and eventually of t
 If you get such an exception, you'll need to wrap your operation in a model job and schedule it using `ModelJobs.schedule()`, see the chapter ModelJobs in the link:{techdoc}#modeljobs[Scout Technical Documentation] for details.
 
 // ----------------------------------------------------------------------------
-== Properties support for Lists, Maps and imports
+== Properties Support for Lists, Maps and Imports
 
 Config properties support list- and map-data-structures. Furthermore other properties files can be imported. See the tech documentation section "link:{techdoc}#sec-config.management[Configuration Management]" for more details.
 
 // ----------------------------------------------------------------------------
-== Binary resources support for HtmlField and BeanField
+== BinaryResource Support for HtmlField and BeanField
 
 Binary resources such as images or videos can now be used in the following widgets:
 
@@ -69,7 +69,7 @@ image::{imgsdir}/binary_resource_field.png[]
 image::{imgsdir}/binary_resource_column.png[]
 
 // ----------------------------------------------------------------------------
-== TriState capability for check boxes
+== TriState Capability for Check Boxes
 
 Added support for tri-state value (`true`, `false` and `null` instead of just `true` and `false`) to boolean field and boolean column.
 
@@ -85,7 +85,7 @@ interpreted as "undefined" and rendered as a filled square.
 The enum `UriOpenAction` provides a new value to open a URI in the current window: `SAME_WINDOW`
 
 // ----------------------------------------------------------------------------
-== New methods in StringUtility
+== New Methods in StringUtility
 
 `StringUtility` provides the following new methods:
 
@@ -158,12 +158,12 @@ image::{imgsdir}/tooltip_menus.png[]
 // ----------------------------------------------------------------------------
 == Table
 
-=== New property "groupingStyle"
+=== New Property "groupingStyle"
 The new property `groupingStyle` can be set to `bottom` (default) or `top`. Depending on the value aggregate rows are rendered on the bottom of grouped rows
 or on the top of grouped rows. The new top style can be set to have an aggregate row as a title for a group of table rows, this is useful for separating a table
 into multiple categories.
 
-=== NumberColumn: new property "allowedAggregationFunctions", new aggregation type for no aggregation
+=== NumberColumn: New Property "allowedAggregationFunctions", New Aggregation Type for no Aggregation
 The new property `allowedAggregationFunctions` can be set to any array of the aggregation functions `sum`, `avg`, `min`, `max` and `none` (default: all aggregation functions are allowed). It defines the allowed aggregation functions for this number column (e.g. a sum aggregation is not always useful for all number columns). Also a new aggregation type `none` was introduced, with the new type it is possible to remove an aggregation from a column which has previously been aggregated. For the new aggregation type no additional button has been introduced, if the new aggregation type `none` is enabled an aggregation which previously has been used can be removed by using the same aggregation button again.
 
 // ----------------------------------------------------------------------------
@@ -176,7 +176,7 @@ If the browser supports the https://developer.mozilla.org/en-US/docs/Web/API/Nav
 To cut a long story short, new traffic to /unload will be sent by the clients. Please check your container and firewall configuration.
 
 // ----------------------------------------------------------------------------
-== New annotation RemoteServiceWithoutAuthorization
+== New Annotation RemoteServiceWithoutAuthorization
 
 Remote services called through IServiceTunnel may whitelist authorization exclusions using this new annotation.
 
@@ -201,13 +201,13 @@ With a Scout Classic app a lot happens on the UI server, like validating a form 
 The preparations done in this release are just the first step. You could create a Scout JS app with this release, but a lot of the widgets are not ready to use yet. See also the link:{migrationguide}[Scout Migration Guide] to migrate your existing JavaScript code.
 
 // ----------------------------------------------------------------------------
-== Button: new property 'defaultButton'
+== Button: New Property "defaultButton"
 A button may now be marked as default button which gives him a dedicated look to attract users attention. It will just change the look, the behavior stays the same.
 
 Note: The first button or menu which has an `Enter` keystroke will automatically get that look too. This is existing behavior and hasn't changed. The new property has been added to give you more control, but actually you should always prefer the _enter keystroke approach_ to provide a consistent behavior.
 
 // ----------------------------------------------------------------------------
-== Icons for tree nodes
+== Icons for Tree Nodes
 As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the `iconId` property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property `showTreeIcons` which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here's an example for an outline with icons:
 
 [[img-tree_icons, Figure 000]]
@@ -220,6 +220,6 @@ The file chooser field does not open an intermediate window anymore when clicked
 Furthermore, the whole field is now clickable. Until now the icon had to be clicked to choose a file which did not work well on touch devices.
 
 // ----------------------------------------------------------------------------
-== Desktop Bench Layout configurable
+== Configurable Desktop Bench Layout
 The Desktop Layout can be configured using the `IDesktop.setBenchLayoutData` method. This property is observed and might be changed during the applications lifecycle.
 For more information take a look at teh https://eclipsescout.github.io/6.1/technical-guide.html#desktop[Technical Guide].
