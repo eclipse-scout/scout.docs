@@ -47,7 +47,7 @@ In order to use REST services based on the JAX-RS Jersey implementation, the fol
 
 The `RestApplication` class searches for all implementations of `IRestResource` and exposes them as REST services.
 
-=== Removed properties "enabledProcessing" on IButton and IAction
+=== Removed Properties "enabledProcessing" on IButton and IAction
 
 When a user performs two consecutive clicks on a button or a menu within a very short period of time, the action is executed twice. In some cases, this is an unwanted behavior. A new property "preventDoubleClick" was added to IButton and IMenu to disable it (see release notes).
 
@@ -66,7 +66,7 @@ Because this construct no longer works, the corresponding properties and methods
 
 *Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
 
-=== Added HTTP Abstraction Layer Google HTTP Client.
+=== Added HTTP Abstraction Layer: Google HTTP Client
 
 If your application previously used a custom (not provided by Scout) implementation of the `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the `java.net.HttpURLConnection` was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the `java.net` connections are not used anymore by default the MultiSessionCookieStore (for `java.net` connections) is not installed by default (could be installed manually).
 
