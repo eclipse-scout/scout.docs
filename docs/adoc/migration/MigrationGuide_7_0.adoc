@@ -3,6 +3,7 @@ Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 - Choose the right top level chapter (java, js, other)
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.0.xxx" note)
 ////
 
 == About This Document
@@ -11,6 +12,16 @@ This document describes all relevant changes *from Eclipse Scout 6.1 to Eclipse 
 
 IMPORTANT: If you are upgrading from version 6.0, please also read the migration guide for the 6.1 (_Oxygen preview_) release: +
 https://eclipsescout.github.io/6.1/migration-guide.html
+
+=== Service Release Migration
+
+The following changes were made after the initial 7.0 release (Eclipse Oxygen release). Additionally follow these instructions when updating to a _service release_.
+
+==== Oxygen.1 (7.0.100) Release expected on September 27, 2017
+
+{NotReleasedWarning}
+
+* (No migration notes for Oxygen.1 have been created yet)
 
 ////
   =============================================================================

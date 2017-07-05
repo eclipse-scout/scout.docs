@@ -1,4 +1,7 @@
-// ----------------------------------------------------------------------------
+////
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.0.xxx" note)
+////
+
 == About This Release
 
 Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was release in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is _7.0.0.008_Oxygen_.
@@ -7,6 +10,16 @@ IMPORTANT: If you are upgrading from version 6.0, please also read the release n
 https://eclipsescout.github.io/6.1/release-notes.html
 
 You can see the https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E%2Ereleases/7.0.x[detailed change log] on GitHub.
+
+=== Service Releases
+
+The following changes were made after the initial 7.0 release (Eclipse Oxygen release). The following notes relate to a _service release_.
+
+==== Oxygen.1 (7.0.100) Release expected on September 27, 2017
+
+{NotReleasedWarning}
+
+* (No release notes for Oxygen.1 have been created yet)
 
 === Obtaining the Latest Version
 
