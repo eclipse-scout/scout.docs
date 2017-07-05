@@ -14,14 +14,12 @@ jswidgets.IconIdLookupCall = function() {
 scout.inherits(jswidgets.IconIdLookupCall, scout.StaticLookupCall);
 
 jswidgets.IconIdLookupCall.prototype._data = function() {
-  var data = [];
-  Object.keys(scout.icons)
+  return Object.keys(scout.icons)
   .filter(function(name) {
     var value = scout.icons[name];
     return typeof value === 'string' && value.startsWith('font:');
-  }).forEach(function(name, i) {
+  }).map(function(name, i) {
     var iconId = scout.icons[name];
-    data[i] = [iconId, name];
+    return [iconId, name];
   });
-  return data;
 };
