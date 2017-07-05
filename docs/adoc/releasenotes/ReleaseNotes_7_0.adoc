@@ -4,7 +4,7 @@
 
 == About This Release
 
-Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was release in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is _7.0.0.008_Oxygen_.
+Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was released in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is _7.0.0.008_Oxygen_.
 
 IMPORTANT: If you are upgrading from version 6.0, please also read the release notes for the 6.1 (_Oxygen preview_) release: +
 https://eclipsescout.github.io/6.1/release-notes.html
