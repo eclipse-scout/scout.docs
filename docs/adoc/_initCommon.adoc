@@ -9,5 +9,5 @@
 :lt: &#60;
 :gt: &#62;
 
-:NotReleasedWarning: + \
+:NotReleasedWarning: \
 WARNING: The here described functionality has not yet been released and is part of an upcoming release.
