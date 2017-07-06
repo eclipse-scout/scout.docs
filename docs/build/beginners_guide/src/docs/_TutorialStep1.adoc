@@ -171,7 +171,7 @@ At the end of these changes the inner class structure of class Desktop will look
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
 ----
 
-<1> In your implementation `QuickAccessMenu` should extend `AbstractMenu`
+<1> In your implementation `OptionsMenu` should extend `AbstractMenu`
 <2> In your implementation `UserMenu` should extend `AbstractMenu`
 
 [[sec-contacts_default_theme]]
