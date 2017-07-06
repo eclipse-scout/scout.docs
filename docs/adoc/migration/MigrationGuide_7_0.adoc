@@ -21,7 +21,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 
 {NotReleasedWarning}
 
-* (No migration notes for Oxygen.1 have been created yet)
+* <<Graphic Utility Naming (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -184,6 +184,7 @@ The following changes have been made:
 * Rename `selectionChanged` to `selectionChange`
 * Rename `callAction` to `action`
 * Remove `insertText`
+* Rename `displayTextChanged` to `acceptInput`
 * Rename `popupopen` to `popupOpen`
 * Rename `locationChanged` to `locationChange`
 * Rename `sessionready` to `sessionReady`
@@ -215,6 +216,30 @@ The following changes have been made:
 * Rename `removeFilter` to `filterRemoved`
 * Rename `filterResetted` to `filterReset`
 * Remove `groupingChanged`
+
+
+=== Graphic Utility Naming (since 7.0.100)
+The naming of the functions of `scout.graphics` and `scout.HtmlComponent` has been harmonized. Also, they now consistently use an `options` parameter.
+
+The following changes have been made:
+
+scout.graphics:
+
+* Rename `getBounds` to `cssBounds`
+* Rename `getMargins` to `margins`
+* Rename `getInsets` to `insets`
+* Rename `getSize` to `size`
+
+scout.HtmlComponent:
+
+* Rename `getBounds` to `cssBounds`
+* Rename `getMargins` to `margins`
+* Rename `getInsets` to `insets`
+* Rename `getSize` to `size`
+* Rename `getPreferredSize` to `prefSize`
+* Rename `getAvailableSize` to `availableSize`
+
+Also note that `cssBounds` does not include margins anymore, and `bounds` and `offsetBounds` now take an `options` object instead of 2 boolean parameters.
 
 ////
   =============================================================================
