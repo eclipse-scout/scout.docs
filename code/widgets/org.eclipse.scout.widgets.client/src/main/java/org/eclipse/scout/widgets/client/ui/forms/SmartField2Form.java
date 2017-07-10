@@ -31,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractProposalField2;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.ISmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -376,6 +377,29 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
                 new ColumnDescriptor(LocaleTableRowData.country, TEXTS.get("Country"), 90),
                 new ColumnDescriptor(LocaleTableRowData.language, TEXTS.get("Language"), 90)
             };
+          }
+        }
+
+        @Order(60)
+        @ClassId("96674af1-a590-42e6-985c-6adb210e8504")
+        public class SmartFieldDisplayStyleField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Dropdown";
+          }
+
+          protected boolean isDropdown() {
+            return ISmartField2.DISPLAY_STYLE_DROPDOWN.equals(getDefaultField().getDisplayStyle());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(isDropdown());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getDefaultField().setDisplayStyle(getValue() ? ISmartField2.DISPLAY_STYLE_DROPDOWN : ISmartField2.DISPLAY_STYLE_DEFAULT);
           }
         }
       }
