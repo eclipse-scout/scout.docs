@@ -15,6 +15,10 @@ import org.eclipse.scout.rt.shared.AbstractIcons;
 public class Icons extends AbstractIcons {
   private static final long serialVersionUID = 1L;
 
+  /**
+   * PNG Icons
+   */
+
   public static final String Alarmclock = "alarmclock";
   public static final String Bookmark = "bookmark";
   public static final String Eye = "eye";
@@ -24,4 +28,9 @@ public class Icons extends AbstractIcons {
   public static final String StarYellow = "star_yellow";
   public static final String WizardBack = "wizard_back";
   public static final String WizardNext = "wizard_next";
+
+  /**
+   * Font Icons
+   */
+  public static final String Phone = "font:awesomeIcons \uF095";
 }

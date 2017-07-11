@@ -102,6 +102,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
+import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 @Order(5000.0)
@@ -739,7 +740,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected void execDecorateCell(Cell cell, ITableRow row) {
-              cell.setIconId("font:\uE011");//Icons.Phone
+              cell.setIconId(Icons.Phone);
             }
 
             @Override
