@@ -22,6 +22,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 {NotReleasedWarning}
 
 * <<Graphic Utility Naming (since 7.0.100)>>
+* <<Focus and RequestFocus merged (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -240,6 +241,9 @@ scout.HtmlComponent:
 * Rename `getAvailableSize` to `availableSize`
 
 Also note that `cssBounds` does not include margins anymore, and `bounds` and `offsetBounds` now take an `options` object instead of 2 boolean parameters.
+
+=== Focus and RequestFocus merged (since 7.0.100)
+`scout.Widget` had a function called `requestFocus`. Some concrete widgets provided a function named `focus`. Because there is no need to have two methods doing the same, these functions have been merged. `scout.Widget` now provides a function `focus`. `RequestFocus` has been deprecated.
 
 ////
   =============================================================================
