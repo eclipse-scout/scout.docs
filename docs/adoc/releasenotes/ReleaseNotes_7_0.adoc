@@ -140,3 +140,17 @@ If a button or a menu is clicked twice within a short period of time, the corres
 * `AbstractMenu.getConfiguredPreventDoubleClick()`
 
 The default value is `false`.
+
+// ----------------------------------------------------------------------------
+== SplitBox
+
+The SplitBox widget now supports a minimum splitter position according to the collapsible field. The collapsible field size is limited between minimum splitter position and maximum available size. The collapse buttons now toggles between three modes of the collapsible field: `default`, `minimized` and `collapsed`. The default value for minimal splitter size is `null`, which means, no minimal splitter size is set and no change in existing behavior.
+
+New API methods on `AbstractSplitBox`:
+
+* `Double getMinSplitterPosition()`
+* `void setMinSplitterPosition(Double minPosition)`
+* `boolean isFieldMinimized()`
+* `void setFieldMinimized(boolean minimized)`
+
+Additional to the existing three splitbox position types a new `SPLITTER_POSITION_TYPE_RELATIVE_SECOND` type was added. This new splitter position type allows to specify the size of the second field relative to the full size of the splitbox.
