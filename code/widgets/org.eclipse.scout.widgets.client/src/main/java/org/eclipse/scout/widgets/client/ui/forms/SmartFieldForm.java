@@ -86,6 +86,9 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB900
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Test form for the old smart field (since 7.0). Do not migrate to SmartField2. Will be removed with 7.1
+ */
 @Order(3000.0)
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 

@@ -40,7 +40,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIconColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractProposalColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractProposalColumn2;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
@@ -481,7 +481,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(30)
-          public class LocationColumn extends AbstractProposalColumn<String> {
+          public class LocationColumn extends AbstractProposalColumn2<String> {
 
             @Override
             protected boolean getConfiguredEditable() {

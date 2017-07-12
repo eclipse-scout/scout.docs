@@ -62,7 +62,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -508,7 +508,7 @@ public class PersonForm extends AbstractForm {
             }
 
             @Order(20)
-            public class CountryField extends AbstractSmartField<String> {
+            public class CountryField extends AbstractSmartField2<String> {
               // end::validateAddress[]
 
               @Override
@@ -667,7 +667,7 @@ public class PersonForm extends AbstractForm {
         // tag::organizationField[]
 
         @Order(20)
-        public class OrganizationField extends AbstractSmartField<String> { // <1>
+        public class OrganizationField extends AbstractSmartField2<String> { // <1>
 
           @Override
           protected String getConfiguredLabel() {
