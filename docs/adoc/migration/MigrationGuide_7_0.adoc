@@ -226,21 +226,21 @@ The following changes have been made:
 
 scout.graphics:
 
-* Rename `getBounds` to `cssBounds`
 * Rename `getMargins` to `margins`
 * Rename `getInsets` to `insets`
 * Rename `getSize` to `size`
+* Remove `getBounds`
 
 scout.HtmlComponent:
 
-* Rename `getBounds` to `cssBounds`
 * Rename `getMargins` to `margins`
 * Rename `getInsets` to `insets`
 * Rename `getSize` to `size`
 * Rename `getPreferredSize` to `prefSize`
 * Rename `getAvailableSize` to `availableSize`
+* Remove `getBounds`
 
-Also note that `cssBounds` does not include margins anymore, and `bounds` and `offsetBounds` now take an `options` object instead of 2 boolean parameters.
+The old methods still exists but are marked as deprecated. Note that `getBounds` does not include margins anymore, and `bounds` and `offsetBounds` now take an `options` object instead of 2 boolean parameters.
 
 === Focus and RequestFocus merged (since 7.0.100)
 `scout.Widget` had a function called `requestFocus`. Some concrete widgets provided a function named `focus`. Because there is no need to have two methods doing the same, these functions have been merged. `scout.Widget` now provides a function `focus`. `RequestFocus` has been deprecated.
