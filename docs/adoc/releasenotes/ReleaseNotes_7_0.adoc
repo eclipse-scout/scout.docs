@@ -61,6 +61,36 @@ The demo applications for this version can be found on the https://github.com/BS
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/6.0.200.0%2E%2E%2E6.0.300.RC2[https://github.com/eclipse/scout.rt/compare/6.0.200.0...6.0.300.RC2]
 
 // ----------------------------------------------------------------------------
+== New smart-field: ISmartField2
+
+This release introduces a new smart-field: ISmartField2. It has almost the same interface as the old smart-field ISmartField, which still exists
+in this Scout release, but will be removed with 7.1. The main differences to the old smart-field:
+* In "Scout classic" (Java UI server) there is no longer a model representation of the proposal chooser. In the new smart-field the whole state of the proposal chooser is kept on client side in the browser. The Java UI server only sends lookup rows to the client. Depending on the smart-field configuration SmartField2.js will render either a proposal-chooser with a Table or a Tree (hierarchical). It's still possible to replace the default proposal chooser, but now you have to write a bit of JavaScript code to do that.
+* The smart-field can now be used with Scout JS. This means you're no longer restricted to "Scout classic" when you want to use a smart-field and you can use the smart-field with any static or dynamic data source, for instance a REST service. Take a look at the jswidgets demo-app to see examples how to use the smart-field with JavaScript.
+
+Migrating from ISmartField to ISmartField2 should be simple in most cases, since the interfaces of the old and the new smart-field are almost identical. Differences are:
+* There is no longer a IMixedSmartField with two generic types for VALUE and LOOKUP_TYPE, since these two types are identical in 99.9% of all cases. When you migrate an old Scout application that uses different types you could either provide a new LookupCall that has the same lookup-type as the smart-field value, or you could simply cast the value of the smart-field where needed.
+* The value of the proposal-field is now always a String. The generic type you pass to the proposal-field is the lookup-type. Use the methods setValueAsString and getValueAsString to read and write the value of the proposal-field. Additionally you can still access the selected lookup-row of the proposal-field and get the key of the lookup-row.
+* When you migrate an old Scout application that has a custom proposal chooser, you should probably create a custom JavaScript implementation for your smart-field. There you can override the behavior of the default implementation.
+
+Note: With 7.1 the old smart-field will be deleted and replaced by the new smart-field ISmartField2, additionally in 7.1 ISmartField2 will be renamed to ISmartField again. When you start a new Scout project with this release you should use ISmartField2.
+
+
+== ISmartField(2) API changes
+
+The following methods have been removed from ISmartField(2):
+* String getBrowseNewText()
+* setBrowseNewText(String s)
+* void doBrowseNew(String newText)
+
+The following methods have been removed from AbstractSmartField(2):
+* protected ILookupRow<VALUE> execBrowseNew(String searchText)
+* protected String getConfiguredBrowseNewText()
+
+Note: with 7.0 these methods still exist on the old smart-field ISmartField but are marked as deprecated.
+
+
+// ----------------------------------------------------------------------------
 == Upgrade to jQuery 3
 
 We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).
