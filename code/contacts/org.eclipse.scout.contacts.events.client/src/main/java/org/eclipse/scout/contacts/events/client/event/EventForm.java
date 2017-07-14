@@ -51,7 +51,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -385,7 +385,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(40)
-            public class OrganizationColumn extends AbstractSmartColumn<String> {
+            public class OrganizationColumn extends AbstractSmartColumn2<String> {
 
               @Override
               protected String getConfiguredHeaderText() {

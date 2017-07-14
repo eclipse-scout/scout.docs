@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
@@ -183,7 +183,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
     }
 
     @Order(6)
-    public class CountryColumn extends AbstractSmartColumn<String> {
+    public class CountryColumn extends AbstractSmartColumn2<String> {
 
       @Override
       protected String getConfiguredHeaderText() {

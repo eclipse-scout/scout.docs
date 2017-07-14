@@ -54,12 +54,10 @@ public class OrganizationTablePageData extends AbstractTablePageData {
     public static final String organizationId = "organizationId";
     public static final String name = "name";
     public static final String city = "city";
-    public static final String country = "country";
     public static final String homepage = "homepage";
     private String m_organizationId;
     private String m_name;
     private String m_city;
-    private String m_country;
     private String m_homepage;
 
     public String getOrganizationId() {
@@ -84,14 +82,6 @@ public class OrganizationTablePageData extends AbstractTablePageData {
 
     public void setCity(String newCity) {
       m_city = newCity;
-    }
-
-    public String getCountry() {
-      return m_country;
-    }
-
-    public void setCountry(String newCountry) {
-      m_country = newCountry;
     }
 
     public String getHomepage() {

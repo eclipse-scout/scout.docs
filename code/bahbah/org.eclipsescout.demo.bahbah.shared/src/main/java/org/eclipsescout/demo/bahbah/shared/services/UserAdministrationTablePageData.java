@@ -53,10 +53,8 @@ public class UserAdministrationTablePageData extends AbstractTablePageData {
     private static final long serialVersionUID = 1L;
     public static final String userId = "userId";
     public static final String username = "username";
-    public static final String role = "role";
     private Long m_userId;
     private String m_username;
-    private Integer m_role;
 
     public Long getUserId() {
       return m_userId;
@@ -72,14 +70,6 @@ public class UserAdministrationTablePageData extends AbstractTablePageData {
 
     public void setUsername(String newUsername) {
       m_username = newUsername;
-    }
-
-    public Integer getRole() {
-      return m_role;
-    }
-
-    public void setRole(Integer newRole) {
-      m_role = newRole;
     }
   }
 }

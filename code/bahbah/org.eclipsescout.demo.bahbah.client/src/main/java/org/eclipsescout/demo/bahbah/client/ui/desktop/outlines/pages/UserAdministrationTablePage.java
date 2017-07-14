@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.useradmin.DefaultPasswordForm;
@@ -143,7 +143,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
     }
 
     @Order(30)
-    public class RoleColumn extends AbstractSmartColumn<Integer> {
+    public class RoleColumn extends AbstractSmartColumn2<Integer> {
 
       @Override
       protected String getConfiguredHeaderText() {
