@@ -23,6 +23,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 
 * <<Graphic Utility Naming (since 7.0.100)>>
 * <<Focus and RequestFocus merged (since 7.0.100)>>
+* <<ISmartField(2) (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -108,6 +109,21 @@ Deprecations (methods will be removed in P-release):
 * `ISession.getTexts()` -> `BEANS.get(ScoutTexts.class)`
 * `AbstractSqlService.getConfiguredNlsProvider()` -> method is not used anymore (returns `null`)
 * `AbstractSqlService.getNlsProvider()` -> method is not used anymore (returns `null`)
+
+== ISmartField(2) (since 7.0.100)
+
+The following methods have been removed from `ISmartField(2)`:
+
+* `String getBrowseNewText()`
+* `setBrowseNewText(String s)`
+* `void doBrowseNew(String newText)`
+
+The following methods have been removed from `AbstractSmartField(2)`:
+
+* `protected ILookupRow<VALUE> execBrowseNew(String searchText)`
+* `protected String getConfiguredBrowseNewText()`
+
+Note: with 7.0 these methods still exist on the old smart field `ISmartField` but are marked as deprecated.
 
 // ^^^
 // Insert descriptions of Java API changes here
