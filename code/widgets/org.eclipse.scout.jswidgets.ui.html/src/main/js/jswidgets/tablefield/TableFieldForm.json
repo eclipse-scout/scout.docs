@@ -24,21 +24,18 @@
               "objectType": "Table",
               "columns": [
                 {
-                  "index": 0,
                   "text": "${textKey:RowName}",
                   "id": "RowName",
                   "width": 300,
                   "objectType": "Column"
                 },
                 {
-                  "index": 1,
                   "text": "${textKey:GroupNo}",
                   "id": "GroupNo",
                   "width": 175,
                   "objectType": "NumberColumn"
                 },
                 {
-                  "index": 2,
                   "text": "${textKey:RowNo}",
                   "id": "RowNo",
                   "width": 175,
