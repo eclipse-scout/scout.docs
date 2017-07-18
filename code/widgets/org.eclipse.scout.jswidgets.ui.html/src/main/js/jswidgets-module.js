@@ -34,6 +34,8 @@
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/tablefield/TableFieldForm.js");
+  __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
+  __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
   __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   __include("jswidgets/WidgetsRoute.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

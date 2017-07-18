@@ -26,7 +26,7 @@
                 {
                   "text": "${textKey:RowName}",
                   "id": "RowName",
-                  "width": 300,
+                  "width": 200,
                   "objectType": "Column"
                 },
                 {
@@ -52,36 +52,24 @@
               ],
               "menus": [
                 {
-                  "id": "AddRowsMenu",
+                  "id": "AddRowMenu",
                   "objectType": "Menu",
-                  "text": "${textKey:AddRows}",
-                  "menuTypes": ["Table.EmptySpace"]
-                },
-                {
-                  "id": "ColumnVisibilityMenu",
-                  "objectType": "Menu",
-                  "text": "${textKey:ColumnVisibility}",
-                  "menuTypes": ["Table.EmptySpace"]
-                },
-                {
-                  "id": "GroupingStyle",
-                  "objectType": "Menu",
-                  "text": "${textKey:GroupingStyle}",
+                  "text": "${textKey:AddRow}",
                   "menuTypes": ["Table.EmptySpace"],
-                  "childActions": [
-                    {
-                      "id": "GroupingStyleTopMenu",
-                      "objectType": "Menu",
-                      "text": "${textKey:GroupingStyleTop}",
-                      "menuTypes": ["Table.EmptySpace"]
-                    },
-                    {
-                      "id": "GroupingStyleBottomMenu",
-                      "objectType": "Menu",
-                      "text": "${textKey:GroupingStyleBottom}",
-                      "menuTypes": ["Table.EmptySpace"]
-                    }
-                  ]
+                  "keyStroke": "insert"
+                },
+                {
+                  "id": "DeleteRowMenu",
+                  "objectType": "Menu",
+                  "text": "${textKey:DeleteRow}",
+                  "menuTypes": ["Table.SingleSelection", "Table.MultiSelection"],
+                  "keyStroke": "delete"
+                },
+                {
+                  "id": "ToggleGroupNoColumnMenu",
+                  "objectType": "Menu",
+                  "text": "${textKey:ToggleGroupNoColumn}",
+                  "menuTypes": ["Table.EmptySpace"]
                 }
               ]
             }
@@ -89,8 +77,88 @@
         ]
       },
       {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "AutoResizeColumnsField",
+            "objectType": "CheckBoxField",
+            "label": "Auto Resize Columns",
+            "labelVisible": false
+          },
+          {
+            "id": "CheckableField",
+            "objectType": "CheckBoxField",
+            "label": "Checkable",
+            "labelVisible": false
+          },
+          {
+            "id": "HeaderEnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Header Enabled",
+            "labelVisible": false
+          },
+          {
+            "id": "HeaderVisibleField",
+            "objectType": "CheckBoxField",
+            "label": "Header Visible",
+            "labelVisible": false
+          },
+          {
+            "id": "MultiCheckField",
+            "objectType": "CheckBoxField",
+            "label": "Multi Check",
+            "labelVisible": false
+          },
+          {
+            "id": "MultiSelectField",
+            "objectType": "CheckBoxField",
+            "label": "Multi Select",
+            "labelVisible": false
+          },
+          {
+            "id": "ScrollToSelectionField",
+            "objectType": "CheckBoxField",
+            "label": "Scroll To Selection",
+            "labelVisible": false
+          },
+          {
+            "id": "SortEnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Sort Enabled",
+            "labelVisible": false
+          },
+          {
+            "id": "FooterVisibleField",
+            "objectType": "CheckBoxField",
+            "label": "Footer Visible",
+            "labelVisible": false
+          },
+          {
+            "id": "RowIconVisibleField",
+            "objectType": "CheckBoxField",
+            "label": "Row Icon Visible",
+            "labelVisible": false
+          },
+          {
+            "id": "CheckableStyleField",
+            "objectType": "SmartField2",
+            "label": "Checkable Style",
+            "lookupCall": "jswidgets.CheckableStyleLookupCall"
+          },
+          {
+            "id": "GroupingStyleField",
+            "objectType": "SmartField2",
+            "label": "Grouping Style",
+            "lookupCall": "jswidgets.GroupingStyleLookupCall"
+          }
+        ]
+      },
+      {
         "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
+        "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
       }
     ]
   }
