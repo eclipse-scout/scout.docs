@@ -23,6 +23,13 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
 
+* Minor changes for HTTP abstraction properties.
+** Existing configuration property classes have been bundled in two `org.eclipse.scout.rt.shared.http.HttpConfigurationProperties` and `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties` classes.
+** The configuration property `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live` has been removed (`scout.http.apache_connection_time_to_live` is used instead).
+** New configuration properties have been added:
+*** `scout.http.apache_keep_alive` (possible values: true/false), whether to use keep-alive connections. If property is not set the system property `http.keepAlive` is evaluated, if this system property is also not set true will be used as a last resort.
+*** `scout.http.apache_retry_post` (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property `sun.net.http.retryPost` is evaluated, if this system property is also not set true will be used as a last resort.
+
 === Obtaining the Latest Version
 
 ==== Runtime (Scout RT)
@@ -107,11 +114,10 @@ The following new configuration properties (none of them is required to be set, 
 
 For the `HttpServiceTunnelTransportManager`:
 
-* `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).
 * `org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route`, maximum number of connections per route (default: 2048, only applicable for for Apache HTTP Client).
 * `org.eclipse.scout.rt.servicetunnel.apache_max_connections_total`, maximum number of connections in total (default: 2048, only applicable for for Apache HTTP Client).
 
-For the `DefaultHttpTransportManager`:
+For the all other `org.eclipse.scout.rt.shared.http.AbstractHttpTransportManager` (if not overriding these settings):
 
 * `scout.http.apache_connection_time_to_live`, time to live (milliseconds) for kept alive connections (default: 1 hour, only applicable for Apache HTTP Client).
 * `scout.http.apache_max_connections_per_route`, maximum number of connections per route (default: 32, only applicable for Apache HTTP Client).
