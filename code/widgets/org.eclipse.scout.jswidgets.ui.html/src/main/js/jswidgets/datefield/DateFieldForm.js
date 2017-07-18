@@ -33,6 +33,10 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   timeFormatField.setValue(dateField.timeFormatPattern);
   timeFormatField.on('propertyChange', this._onTimeFormatPropertyChange.bind(this));
 
+  var timePickerResolutionField = this.widget('TimePickerResolutionField');
+  timePickerResolutionField.setValue(dateField.timePickerResolution);
+  timePickerResolutionField.on('propertyChange', this._onTimePickerResolutionPropertyChange.bind(this));
+
   var autoDateField = this.widget('AutoDateField');
   autoDateField.setValue(dateField.autoDate);
   autoDateField.on('propertyChange', this._onAutoDatePropertyChange.bind(this));
@@ -75,6 +79,12 @@ jswidgets.DateFieldForm.prototype._onDateFormatPropertyChange = function(event) 
 jswidgets.DateFieldForm.prototype._onTimeFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setTimeFormatPattern(event.newValue);
+  }
+};
+
+jswidgets.DateFieldForm.prototype._onTimePickerResolutionPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('DateField').setTimePickerResolution(event.newValue);
   }
 };
 

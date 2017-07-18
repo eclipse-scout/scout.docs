@@ -52,6 +52,11 @@
             "id": "TimeFormatField",
             "objectType": "StringField",
             "label": "Time Format"
+          },
+          {
+            "id": "TimePickerResolutionField",
+            "objectType": "NumberField",
+            "label": "Time Picker Resolution"
           }
         ]
       },
