@@ -11,7 +11,6 @@
 jswidgets.WorldLookupCall = function() {
   jswidgets.WorldLookupCall.parent.call(this);
 
-  this.setDelay(0);
   this.setLoadIncremental(true);
   this.setHierarchical(true);
 };

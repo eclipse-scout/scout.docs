@@ -10,8 +10,6 @@
  ******************************************************************************/
 jswidgets.SalutationLookupCall = function() {
   jswidgets.SalutationLookupCall.parent.call(this);
-
-  this.setDelay(250);
 };
 scout.inherits(jswidgets.SalutationLookupCall, scout.StaticLookupCall);
 

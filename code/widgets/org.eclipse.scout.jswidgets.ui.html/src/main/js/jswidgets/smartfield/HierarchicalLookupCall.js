@@ -10,8 +10,6 @@
  ******************************************************************************/
 jswidgets.HierarchicalLookupCall = function() {
   jswidgets.HierarchicalLookupCall.parent.call(this);
-
-  this.setDelay(250);
 };
 scout.inherits(jswidgets.HierarchicalLookupCall, scout.StaticLookupCall);
 

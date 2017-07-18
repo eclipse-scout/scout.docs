@@ -10,8 +10,6 @@
  ******************************************************************************/
 jswidgets.LocaleLookupCall = function() {
   jswidgets.LocaleLookupCall.parent.call(this);
-
-  this.setDelay(250);
 };
 scout.inherits(jswidgets.LocaleLookupCall, scout.StaticLookupCall);
 
