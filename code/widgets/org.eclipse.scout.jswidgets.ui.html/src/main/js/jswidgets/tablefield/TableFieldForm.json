@@ -106,6 +106,12 @@
             "labelVisible": false
           },
           {
+            "id": "HeaderMenusEnabledField",
+            "objectType": "CheckBoxField",
+            "label": "Header Menus Enabled",
+            "labelVisible": false
+          },
+          {
             "id": "MultiCheckField",
             "objectType": "CheckBoxField",
             "label": "Multi Check",
