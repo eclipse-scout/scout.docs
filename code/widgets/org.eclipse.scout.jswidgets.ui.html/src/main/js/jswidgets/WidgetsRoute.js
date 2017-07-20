@@ -12,11 +12,32 @@ jswidgets.WidgetsRoute = function(desktop) {
   jswidgets.WidgetsRoute.parent.call(this);
 
   this.desktop = desktop;
+  this.routes = this._createRoutes(desktop);
 
   // This listener updates the URL in the browsers location field whenever a page has been activated
   desktop.outline.on('nodesSelected', this._onPageChanged.bind(this));
 };
 scout.inherits(jswidgets.WidgetsRoute, scout.Route);
+
+/**
+ * Creates an array which maps a routeRef to an objectType.
+ * 0: routeRef
+ * 1: objectType of the detail form of a node in FormFieldOutline
+ */
+jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
+  var regex = /^jswidgets\.(\w*)Form$/;
+  return desktop.outline.nodes.map(function(node) {
+    var routeRef = null,
+      objectType = node.detailForm.objectType,
+      result = regex.exec(objectType);
+
+    if (result === null || result.length === 0) {
+      $.log.error('Failed to create route for objectType=' + objectType);
+    }
+    routeRef = result[1].toLowerCase();
+    return [routeRef, objectType];
+  });
+};
 
 jswidgets.WidgetsRoute.prototype.matches = function(location) {
   return !!this._getRouteData(location);
@@ -26,13 +47,13 @@ jswidgets.WidgetsRoute.prototype._getRouteData = function(location) {
   if (scout.strings.empty(location)) {
     return null;
   }
-  return scout.arrays.find(jswidgets.WidgetsRoute.ROUTES, function(routeData) {
+  return scout.arrays.find(this.routes, function(routeData) {
     return location.indexOf(routeData[0]) > -1;
   });
 };
 
 jswidgets.WidgetsRoute.prototype._getRouteDataByObjectType = function(objectType) {
-  return scout.arrays.find(jswidgets.WidgetsRoute.ROUTES, function(routeData) {
+  return scout.arrays.find(this.routes, function(routeData) {
     return routeData[1] === objectType;
   });
 };
@@ -55,16 +76,3 @@ jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
   }
 };
 
-// 0: routeRef
-// 1: objectType of the detail form of a node in FormFieldOutline
-jswidgets.WidgetsRoute.ROUTES = [ // FIXME [awe] 7.0 - Extract routeRef dynamically from objectType, then delete this array
-  ['carousel', 'jswidgets.CarouselForm'],
-  ['datefield', 'jswidgets.DateFieldForm'],
-  ['form', 'jswidgets.FormForm'],
-  ['groupbox', 'jswidgets.GroupBoxForm'],
-  ['logicalgrid', 'jswidgets.LogicalGridForm'],
-  ['numberfield', 'jswidgets.NumberFieldForm'],
-  ['smartfield2', 'jswidgets.SmartField2Form'],
-  ['stringfield', 'jswidgets.StringFieldForm'],
-  ['tablefield', 'jswidgets.TableFieldForm']
-];
