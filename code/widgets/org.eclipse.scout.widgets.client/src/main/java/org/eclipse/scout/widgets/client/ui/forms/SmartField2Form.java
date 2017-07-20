@@ -74,7 +74,6 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.Example
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
@@ -89,7 +88,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartField2Form.class);
 
-  private boolean m_delayEnabled = false;
   private boolean m_localLookupCall = true;
 
   public SmartField2Form() {
@@ -1042,25 +1040,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
       }
 
       @Order(40)
-      public class SlowProposalChooserMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("EnableSlowProposalChooser");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("SlowProposalChooserDisabledTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          setDelayEnabled(!m_delayEnabled);
-        }
-      }
-
-      @Order(50)
       public class SwitchLookupCallMenu extends AbstractMenu {
 
         @Override
@@ -1079,7 +1058,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
       }
 
-      @Order(60)
+      @Order(50)
       public class SeleniumResetMenu extends AbstractMenu {
 
         @Override
@@ -1089,12 +1068,11 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
         @Override
         protected void execAction() {
-          setDelayEnabled(false);
           setLocalLookupCall(true);
         }
       }
 
-      @Order(40)
+      @Order(60)
       public class ThrottleSmartFieldMenu extends AbstractMenu {
 
         @Override
@@ -1121,7 +1099,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
       }
 
-      @Order(50)
+      @Order(70)
       public class ToggleHierarchicalLookupMenu extends AbstractMenu {
 
         @Override
@@ -1159,14 +1137,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
   public class PageFormHandler extends AbstractFormHandler {
   }
 
-  public void setDelayEnabled(boolean delayEnabled) {
-    m_delayEnabled = delayEnabled;
-    IMenu menu = getMainBox().getMenuByClass(SlowProposalChooserMenu.class);
-    menu.setText(TEXTS.get(m_delayEnabled ? "DisableSlowProposalChooser" : "EnableSlowProposalChooser"));
-    menu.setTooltipText(TEXTS.get(m_delayEnabled ? "SlowProposalChooserEnabledTooltip" : "SlowProposalChooserDisabledTooltip"));
-    LOG.debug("Slow proposal chooser is {}", (m_delayEnabled ? "enabled" : "disabled"));
-  }
-
   public void setLocalLookupCall(boolean localLookupCall) {
     m_localLookupCall = localLookupCall;
     IMenu menu = getMainBox().getMenuByClass(SwitchLookupCallMenu.class);
@@ -1186,28 +1156,5 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
     getListSmartField().setWildcard(wildcard);
     getTreeSmartField().setWildcard(wildcard);
   }
-
-  // FIXME [awe] 7.0 - SF2: move this delay code to the lookup call EventTypeCodeType
-
-//  /**
-//   * Custom proposal chooser provider is only used to simulate a slow connection when user clicks on a row in the
-//   * proposal chooser
-//   */
-//  private class P_ProposalChooserProvider implements IProposalChooserProvider<Long> {
-//
-//    @Override
-//    public IProposalChooser<?, Long> createProposalChooser(IContentAssistField<?, Long> proposalField, boolean allowCustomText) {
-//      return new TableProposalChooser<Long>(proposalField, allowCustomText) {
-//        @Override
-//        protected void execResultTableRowClicked(ITableRow row) {
-//          if (m_delayEnabled) {
-//            SleepUtil.sleepSafe(600, TimeUnit.MILLISECONDS);
-//          }
-//          super.execResultTableRowClicked(row);
-//        }
-//      };
-//    }
-//
-//  }
 
 }
