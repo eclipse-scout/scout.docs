@@ -47,7 +47,7 @@ As this is a common requirement the Scout framework comes with the base class `A
 The necessary infrastructure can be created using the Scout lookup wizard according to the steps described below.
 
 . Expand folder `src/main/java` in the client module in the package explorer
-. Select package `org.eclipse.scout.contacts.client.organization` and hit kbd:[Ctrl+N]
+. Select package `org.eclipse.scout.contacts.shared.organization` and hit kbd:[Ctrl+N]
 . Enter "lookup" into the search field of the wizard selection and double click on propsal [element]_Scout LookupCall_
 . Use "OrganizationLookupCall" as class name
 . Enter "String" as the key class and use service super class "AbstractSqlLookupService" in the wizard
