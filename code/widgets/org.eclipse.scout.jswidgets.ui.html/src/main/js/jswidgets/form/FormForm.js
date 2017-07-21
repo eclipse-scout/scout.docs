@@ -11,6 +11,7 @@
 jswidgets.FormForm = function() {
   jswidgets.FormForm.parent.call(this);
   this.openedByButton = false;
+  this.LifecycleData = {};
 };
 scout.inherits(jswidgets.FormForm, scout.Form);
 
@@ -18,6 +19,7 @@ jswidgets.FormForm.prototype._init = function(model) {
   jswidgets.FormForm.parent.prototype._init.call(this, model);
 
   this.widget('OpenFormButton').on('click', this._onOpenFormButtonClick.bind(this));
+  this.widget('OpenLifecycleFormButton').on('click', this._onOpenLifecycleFormButtonClick.bind(this));
 
   var titleField = this.widget('TitleField');
   titleField.setValue(this.openedByButton ? this.title : 'Title');
@@ -67,6 +69,54 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
     openedByButton: true
   });
   form.open();
+};
+
+jswidgets.FormForm.prototype._onOpenLifecycleFormButtonClick = function(model) {
+  var form = scout.create('jswidgets.LifecycleForm', {
+    parent: this,
+    title: this.widget('TitleField').value,
+    subTitle: this.widget('SubTitleField').value,
+    iconId: this.widget('IconIdField').value,
+    displayHint: this.widget('DisplayHintField').value,
+    modal: this.widget('ModalField').value,
+    closable: this.widget('ClosableField').value,
+    resizable: this.widget('ResizableField').value,
+    status: this._createStatus(this.widget('StatusField').value),
+    data: this.LifecycleData
+  });
+
+  var lifecycleDataField = this.widget('LifecycleDataField');
+  form.on('load', function(event) {
+    var data = form.data;
+    var text = 'Form loaded (' + this.lifecycleDataToString(data) + ')';
+    lifecycleDataField.setValue(text);
+  }.bind(this));
+  form.on('save', function(event) {
+    var data = form.data;
+    var text = lifecycleDataField.value;
+    text += '\n' + 'Form saved (' + this.lifecycleDataToString(data) + ')';
+    lifecycleDataField.setValue(text);
+  }.bind(this));
+  form.on('reset', function(event) {
+    var data = form.data;
+    var text = lifecycleDataField.value;
+    text += '\n' + 'Form reset (' + this.lifecycleDataToString(data) + ')';
+    lifecycleDataField.setValue(text);
+  }.bind(this));
+  form.on('close', function(event) {
+    var data = form.data;
+    var text = lifecycleDataField.value;
+    text += '\n' + 'Form closed (' + this.lifecycleDataToString(data) + ')';
+    lifecycleDataField.setValue(text);
+    this.lifecycleData = data;
+  }.bind(this));
+
+  lifecycleDataField.setVisible(true);
+  form.open();
+};
+
+jswidgets.FormForm.prototype.lifecycleDataToString = function(data) {
+  return 'Name: ' + data.name + ', Birthday: ' + data.birthday;
 };
 
 jswidgets.FormForm.prototype._onTitleChange = function(event) {

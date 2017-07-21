@@ -3,6 +3,7 @@
 "jswidgets/desktop/Desktop.json",
 "jswidgets/desktop/WidgetsOutline.json",
 "jswidgets/form/FormForm.json",
+"jswidgets/form/LifeCycleForm.json",
 "jswidgets/formfield/FormFieldPropertiesBox.json",
 "jswidgets/datefield/DateFieldForm.json",
 "jswidgets/groupbox/GroupBoxForm.json",

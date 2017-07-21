@@ -21,6 +21,25 @@
             "gridDataHints": {
               "horizontalAlignment": 0
             }
+          },
+          {
+            "id": "OpenLifecycleFormButton",
+            "objectType": "Button",
+            "label": "${textKey:OpenLifecycleForm}",
+            "processButton": false,
+            "gridDataHints": {
+              "horizontalAlignment": 0
+            }
+          },
+          {
+            "id": "LifecycleDataField",
+            "objectType": "LabelField",
+            "label": "${textKey:LifecycleData}",
+            "visible": false,
+            "gridDataHints": {
+              "h": 3,
+              "weightY": 0
+            }
           }
         ]
       },

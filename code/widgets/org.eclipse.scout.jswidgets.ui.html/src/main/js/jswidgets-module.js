@@ -12,6 +12,7 @@
   __include("jswidgets/common/IconIdLookupCall.js");
   __include("jswidgets/form/DisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
+  __include("jswidgets/form/LifeCycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
   __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
