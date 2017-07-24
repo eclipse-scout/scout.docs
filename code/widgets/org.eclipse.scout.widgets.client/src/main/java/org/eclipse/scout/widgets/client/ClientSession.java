@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ClientSession extends AbstractClientSession {
-  private static Logger LOG = LoggerFactory.getLogger(ClientSession.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ClientSession.class);
 
   public ClientSession() {
     super(true);

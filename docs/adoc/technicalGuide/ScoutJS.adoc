@@ -39,7 +39,7 @@ Destroying a widget means it will detach itself from the parent and destroy all 
 A widget may be created using the constructor function or `scout.create`. Best practice is to always use `scout.create` which gives you two benefits:
 
 1. You don't have to call `init` by yourself.
-2. The widget may be extended (see chapter ObjectFactory for details).
+2. The widget may be extended (see chapter <<Object Factory>> for details).
 
 The following example creates a `StringField`.
 
@@ -288,6 +288,36 @@ Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon cons
 // Explain parent and owner and the differences (see also WidgetSpec.js)
 
 //TODO [7.0] cgu ==== How to build a custom widget
+
+=== Object Factory
+As seen in the chapter <<Creating a Widget>> a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
+
+The `ObjectFactory` is responsible to create and initialize a Scout object. A typical Scout object has an `objectType` and an `init` function. But actually any kind of object with a constructor function in the scout or a custom namespace may be created.
+
+By default, objects are created using naming convention. This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`. Since `scout` is the default namespace, it may be omitted. So calling `scout.create('Table', model)` has the same effect. If there is such a class found, it will be instantiated and the `init` function called, if there is one. The `model` is passed to that `init` function. So instead of using `scout.create` you could also use the following code: 
+
+[source,javascript]
+.Creating an object without the ObjectFactory
+----
+var table = new scout.Table();
+table.init(model);
+----
+
+This will work fine, but you will loose the big benefit of the `ObjectFactory`: the ability to replace existing classes. So if you want to customize the default `Table`, you would likely extend that table and override some functions. In that case you need to make sure every time a table is created, your class is used instead of the default. To do that you have to register your class in the `ObjectFactory` with the `objectType` `Table`. If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used. Only if there is no registration found, the default approach using the naming convention is performed.
+
+In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. yourproject-module.js). The content of that file may look as following:
+
+[source,javascript]
+.Adding a new object factory registration
+----
+scout.objectFactories = $.extend(scout.objectFactories, {
+  'Table': function() {
+    return new yourproject.CustomTable();
+  }
+});
+----
+
+This will simply add a new factory for the type `Table` the the list of existing factories. From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
 
 === Form Field
 A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.

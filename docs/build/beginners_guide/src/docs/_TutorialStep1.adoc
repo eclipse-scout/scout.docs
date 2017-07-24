@@ -99,7 +99,7 @@ image::{imgsdir}/eclipse_open_type.png[]
 
 We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
-This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field.
+This opens the package rename dialog as shown in <<img-sdk_rename_package>> where we replace "work" by "contact" in the [element]_New name_ field.
 
 [[img-sdk_rename_package, Figure 000]]
 .Use the Eclipse Rename Package dialog to rename a Java package.
