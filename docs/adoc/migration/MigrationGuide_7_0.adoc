@@ -26,6 +26,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<ISmartField(2) (since 7.0.100)>>
 * <<Table Column Index now optional (since 7.0.100)>>
 * <<AbstractLifecycle and FormLifecycle simplified (since 7.0.100)>>
+* <<GroupBox: mainBox flag now set automatically (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -279,6 +280,9 @@ The life cycle has been reworked and simplified:
 * Added system menus (`OkMenu`, `CancelMenu` etc.).
 
 To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.
+
+=== GroupBox: mainBox flag now set automatically (since 7.0.100)
+Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.
 
 ////
   =============================================================================
