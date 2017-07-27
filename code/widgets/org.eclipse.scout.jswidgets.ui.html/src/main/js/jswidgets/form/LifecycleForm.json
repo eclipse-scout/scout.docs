@@ -5,7 +5,6 @@
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
-    "mainBox": true,
     "menus": [
       {
         "id": "OkMenu",

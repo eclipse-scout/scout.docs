@@ -80,7 +80,6 @@ Using the JSON based approach makes it easier to specify multiple widgets in a s
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
-    "mainBox": true,
     "borderDecoration": "empty",
     "fields": [
       {
