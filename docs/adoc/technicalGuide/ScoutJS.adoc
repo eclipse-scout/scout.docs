@@ -80,7 +80,6 @@ Using the JSON based approach makes it easier to specify multiple widgets in a s
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
-    "mainBox": true,
     "borderDecoration": "empty",
     "fields": [
       {
@@ -294,7 +293,7 @@ As seen in the chapter <<Creating a Widget>> a widget may be created using `scou
 
 The `ObjectFactory` is responsible to create and initialize a Scout object. A typical Scout object has an `objectType` and an `init` function. But actually any kind of object with a constructor function in the scout or a custom namespace may be created.
 
-By default, objects are created using naming convention. This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`. Since `scout` is the default namespace, it may be omitted. So calling `scout.create('Table', model)` has the same effect. If there is such a class found, it will be instantiated and the `init` function called, if there is one. The `model` is passed to that `init` function. So instead of using `scout.create` you could also use the following code: 
+By default, objects are created using naming convention. This means when calling `scout.create('scout.Table', model)`, the `scout` namespace is searched for a class called `Table`. Since `scout` is the default namespace, it may be omitted. So calling `scout.create('Table', model)` has the same effect. If there is such a class found, it will be instantiated and the `init` function called, if there is one. The `model` is passed to that `init` function. So instead of using `scout.create` you could also use the following code:
 
 [source,javascript]
 .Creating an object without the ObjectFactory
@@ -318,6 +317,41 @@ scout.objectFactories = $.extend(scout.objectFactories, {
 ----
 
 This will simply add a new factory for the type `Table` the the list of existing factories. From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
+
+=== Form
+A form is typically used for two purposes:
+
+1. Allowing the user to enter data in a structured way
+2. Displaying the data in a structured way
+
+This is achieved by using <<Form Field>>s. Every form has one root group box (also called main box) which has 1:n form fields. The form fields are layouted using the logical grid layout, unless no custom layout is used. This makes it easy to arrange the fields in a uniform way.
+
+A form may be displayed in various ways, mainly controlled by the property `displayHint`.
+The following display hints are available by default:
+
+* **view**: the form will be opened in a tab and will take full width and height of the bench
+* **dialog**: the form will be opened as overlaying dialog and will be as width and height as necessary
+* **popup-window**: the form will be opened in a separate browser window (please note that this feature does not work properly with Internet Explorer)
+
+To display the form, just set one of the above display hints and call `form.open()`.
+
+Beside opening the form as separate dialog or view, you can also embed it into any other widget because it is actually a widget by itself. Just call `form.render()` for that purpose.
+
+==== Form Life Cycle
+When working with forms, you likely want to load, validate and save data as well. The form uses a so called `FormLifecycle` to manage the state of that data. The life cycle is installed by default, so you don't have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.
+
+* **open**: displays the form and calls `load`.
+* **load**: calls `_load` and `importData` which you can implement to load the data and then marks the fields as saved to set their initial values.
+* **save**: validates the data by checking the mandatory and validation state of the fields. If every mandatory field is filled and every field contains a valid value, the `exportData` and `_save` functions are called which you can implement to save the data. After that every field is marked as saved and the initial value set to the current value.
+* **reset**: resets the value of every field to its initial value marking the fields as untouched.
+* **ok**: saves and closes the form.
+* **cancel**: closes the form if there are no changes made. Otherwise it shows a message box asking to save the changes.
+* **close**: closes the form and discards any unsaved changes.
+* **abort**: called when the user presses the "x" icon. It will call `close` if there is a close menu or button, otherwise `cancel`.
+
+If you embed the form into another widget, you probably don't need the functions `open`, `ok`, `close`, `cancel` and `abort`. But `load`, `reset` and `save` may come in handy as well.
+
+Because it is quite common to have a button activating one of these functions (like an 'ok' or 'cancel' button), the following buttons (resp. menus because they are used in the menu bar) are available by default: `OkMenu`, `CancelMenu`, `SaveMenu`, `ResetMenu`, `CloseMenu`.
 
 === Form Field
 A form field is a special kind of a widget. It is mainly used on forms but may actually be added to any other widget.
@@ -358,7 +392,7 @@ function formatter(value, defaultFormatter) {
   return displayText.match(/.{4}/g).join('-');
 };
 ----
-Keep in mind that you should call the default formatter first unless you want to replace it completely. 
+Keep in mind that you should call the default formatter first unless you want to replace it completely.
 
 To make your formatter active, just use the corresponding setter.
 
@@ -367,7 +401,7 @@ To make your formatter active, just use the corresponding setter.
 ----
 field.setFormatter(formatter);
 ----
- 
+
 Formatting the value is most of the time only half the job. You probably want to set a parser as well, so that if the user enters the text with the dashes it will be converted to a string without dashes.
 
 [source,javascript]
@@ -388,7 +422,7 @@ Use the corresponding setter to activate the parser.
 ----
 field.setParser(parser);
 ----
- 
+
 ===== Custom Validator
 The purpose of a validator is to only allow valid values. This mostly depends on your business rules, this is why the default validators don't do a whole lot of things.
 
@@ -421,7 +455,7 @@ In order to activate your validator, you can either call `setValidator` to repla
 field.addValidator(validator);
 ----
 
-Compared to parse and format you may have multiple validators. When the value is validated, every validator is called and has to aggree. If one validation fails, the value is not accepted. This should make it easier to reuse existing validators or separate your validation into tiny validators according to your business rules. 
+Compared to parse and format you may have multiple validators. When the value is validated, every validator is called and has to aggree. If one validation fails, the value is not accepted. This should make it easier to reuse existing validators or separate your validation into tiny validators according to your business rules.
 
 If you now ask yourself, why this is not possible for parsing and formatting, consider the following: `Validate` takes a value and returns a value, the data type is the same for input and output. `Parse` takes a text and creates a value, `format` takes a value and creates a text. The data type is likely not the same (besides for the `StringField`). If you had multiple parsers, the output of the previous parser would be the input of the next one, so depending on the index of your parser you would either get the text or the already parsed value as input. Confusing, isn't it? So in order to keep it simple, there is only one parser and only one formatter for each field.
 

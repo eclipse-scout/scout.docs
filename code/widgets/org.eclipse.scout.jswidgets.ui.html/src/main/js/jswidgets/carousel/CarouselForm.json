@@ -4,7 +4,6 @@
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",
-    "mainBox": true,
     "objectType": "GroupBox",
     "fields": [
       {
@@ -32,8 +31,7 @@
                   "displayHint": "view",
                   "modal": false,
                   "rootGroupBox": {
-                    "id": "MainBox",
-                    "mainBox": true,
+                    "id": "InnerMainBox1",
                     "objectType": "GroupBox",
                     "fields": [
                       {
@@ -59,8 +57,7 @@
                   "displayHint": "view",
                   "modal": false,
                   "rootGroupBox": {
-                    "id": "MainBox",
-                    "mainBox": true,
+                    "id": "InnerMainBox2",
                     "objectType": "GroupBox",
                     "fields": [
                       {

@@ -25,6 +25,8 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<Focus and RequestFocus merged (since 7.0.100)>>
 * <<ISmartField(2) (since 7.0.100)>>
 * <<Table Column Index now optional (since 7.0.100)>>
+* <<AbstractLifecycle and FormLifecycle simplified (since 7.0.100)>>
+* <<GroupBox: mainBox flag now set automatically (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -264,6 +266,23 @@ The old methods still exists but are marked as deprecated. Note that `getBounds`
 
 === Table Column Index now optional (since 7.0.100)
 When creating a table using JavaScript and `scout.create('Table')`, specifying the index for each column has been necessary. This has changed, the column indices are now set automatically based on the order of the columns. Just remove the index settings from your JSON files.
+
+=== AbstractLifecycle and FormLifecycle simplified (since 7.0.100)
+The life cycle has been reworked and simplified:
+
+* Renamed `AbstractLifecycle` to `Lifecycle`.
+* Installed form life cycle by default and added delegating functions to the form to make it easier to use.
+* Implemented reset.
+* Added default callbacks on form which may be implemented by subclasses: `_load`, `_save`, `importData`, `exportData`
+* Removed `doFinally`, because it is not needed yet.
+* Renamed `disposeWidget` to `close`.
+* Removed the do prefix from all the life cycle functions.
+* Added system menus (`OkMenu`, `CancelMenu` etc.).
+
+To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.
+
+=== GroupBox: mainBox flag now set automatically (since 7.0.100)
+Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.
 
 ////
   =============================================================================

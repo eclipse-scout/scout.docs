@@ -4,7 +4,6 @@
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",
-    "mainBox": true,
     "objectType": "GroupBox",
     "fields": [
       {
