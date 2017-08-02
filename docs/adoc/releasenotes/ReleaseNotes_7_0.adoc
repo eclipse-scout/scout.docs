@@ -1,3 +1,5 @@
+:imgsdir: ../../imgs
+
 ////
 - Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.0.xxx" note)
 ////
@@ -20,6 +22,9 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 {NotReleasedWarning}
 
 * <<New Smart Field: ISmartField2 (since 7.0.100)>>
+* <<Time Picker for Date Field (since 7.0.100)>>
+* <<Clear Icon for Input Fields (since 7.0.100)>>
+* <<Improved Touch Popups (since 7.0.100)>>
 
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
 
@@ -178,3 +183,24 @@ Migrating from `ISmartField` to `ISmartField2` should be simple in most cases, s
 * When you migrate an old Scout application that has a custom proposal chooser, you should probably create a custom JavaScript implementation for your smart field. There you can override the behavior of the default implementation.
 
 Note: With 7.1 the old smart field will be deleted and replaced by the new smart field `ISmartField2`, additionally in 7.1 `ISmartField2` will be renamed to `ISmartField` again. When you start a new Scout project with this release you should use `ISmartField2`.
+
+== Time Picker for Date Field (since 7.0.100)
+The date picker has been there for a long time and provides a convenient way to pick a date. To enter a time however, you had to use the keyboard. These days are now gone because with this service release a time picker has been added. It shows the hours from 0 to 23 and the commonly used minutes. The resolution is configurable, so you could change to 00, 15, 30, 45 instead of 00, 30 if you want. You can still use your keyboard, though.
+
+[[img-timepicker, Figure 000]]
+.Time picker
+image::{imgsdir}/timepicker.png[]
+
+== Clear Icon for Input Fields (since 7.0.100)
+Every input field now has a clear icon. It is active while the field has the focus. This makes it easy to clear the input with one click.
+
+[[img-clearable, Figure 000]]
+.Clear icon
+image::{imgsdir}/clearable.png[]
+
+== Improved Touch Popups (since 7.0.100)
+When using the smart field or date field on a mobile phone or tablet, the popup will be shown in a different way to make it easier to pick a value with the finger. This existing behavior has been improved so that it is now easier and more intuitive to clear the value and close the popup.
+
+[[img-date-picker-touch-popup, Figure 000]]
+.Date picker touch popup
+image::{imgsdir}/date_picker_touch_popup.png[]
