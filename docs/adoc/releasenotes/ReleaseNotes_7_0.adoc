@@ -21,10 +21,12 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 
 {NotReleasedWarning}
 
+* <<Minimized Mode for Split Box (since 7.0.100)>>
 * <<New Smart Field: ISmartField2 (since 7.0.100)>>
 * <<Time Picker for Date Field (since 7.0.100)>>
 * <<Clear Icon for Input Fields (since 7.0.100)>>
 * <<Improved Touch Popups (since 7.0.100)>>
+* <<Sorting of Filter Table (since 7.0.100)>>
 
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
 
@@ -83,7 +85,6 @@ Beside upgrading jQuery, we upgraded the Jasmine Maven Plugin to version 2.2 and
 
 Along with the jQuery upgrade we decided to remove jQuery UI and jQuery Mobile completely. Scout only included parts of these libraries and the usage was limited to 2 or 3 functions. Without these dependencies it will be easier in the future to upgrade jQuery itself.
 
-// ----------------------------------------------------------------------------
 == Scout JS
 
 With release 6.1 first steps had been taken to allow creating Scout applications with JavaScript only (see https://eclipsescout.github.io/6.1/release-notes.html#preparations-for-scout-js[6.1 Release Notes]). The development has been continued so that the current release comes with a cleaner API, more working widgets and even some documentation (link:{techdoc}#scout-js[Tech Doc]) and sample code (https://scout.bsi-software.com/jswidgets/). Still, it has not been finished yet and will be improved with the upcoming service releases. Let us know what you think!
@@ -106,7 +107,6 @@ When writing a Scout Form with Java, you don't have to care about the logical gr
 
 This is now also possible with JS based Scout applications. There is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done automatically by the `LogicalGridLayout` itself.
 
-// ----------------------------------------------------------------------------
 == New HTTP Abstraction Layer: Google HTTP Client for Java
 
 The `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class and other HTTP usages were changed to use the Google HTTP Client Library for Java 1.22. This library adds a HTTP abstraction layer and allows to use different low-level libraries like `java.net.HttpURLConnection` (one and only layer used in previous versions) or Apache HTTP Client 4.5.3 (new default).
@@ -130,7 +130,6 @@ For the all other `org.eclipse.scout.rt.shared.http.AbstractHttpTransportManager
 
 For each Apache HTTP Client created using the `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` (by default each `org.eclipse.scout.rt.shared.http.IHttpTransportManager` using the Apache HTTP Client) their own `org.eclipse.scout.rt.shared.http.ApacheMultiSessionCookieStore` and `org.eclipse.scout.rt.shared.http.proxy.ConfigurableProxySelector` (see javadoc for detailed description and configurability) are created. These instances are therefore not registered globally for the java virtual machine anymore.
 
-// ----------------------------------------------------------------------------
 == Support for REST Services
 
 The following new Scout modules have been added to support REST services with Jackson as marshaller:
@@ -144,7 +143,6 @@ The most important class is the `org.eclipse.scout.rt.rest.RestApplication` whic
 
 So if you want to use REST services, you could use the Jersey REST servlet (`org.glassfish.jersey.servlet.ServletContainer`), pass the `RestApplication` as parameter and install the `org.eclipse.scout.rt.server.context.ServerRunContextFilter` to have the proper run context for every REST call. Creating the REST resource is straight forward using the annotations from `javax.ws.rs`. Just make sure the resource implements the interface `IRestResource` so that it will be registered by the `RestApplication` on startup.
 
-// ----------------------------------------------------------------------------
 == Prevent Double Clicks on Buttons and Menus
 
 If a button or a menu is clicked twice within a short period of time, the corresponding action is executed twice. This can be convenient (e.g. when inserting new rows in a table) or unproblematic (e.g. when closing a form - the second click will just be ignored). However, there are cases where executing an action twice would break things. To instruct the UI to block double clicks, a new property "preventDoubleClick" is provided on buttons and menus:
@@ -154,8 +152,7 @@ If a button or a menu is clicked twice within a short period of time, the corres
 
 The default value is `false`.
 
-// ----------------------------------------------------------------------------
-== SplitBox
+== Minimized Mode for Split Box (since 7.0.100)
 
 The SplitBox widget now supports a minimum splitter position according to the collapsible field. The collapsible field size is limited between minimum splitter position and maximum available size. The collapse buttons now toggles between three modes of the collapsible field: `default`, `minimized` and `collapsed`. The default value for minimal splitter size is `null`, which means, no minimal splitter size is set and no change in existing behavior.
 
@@ -204,3 +201,10 @@ When using the smart field or date field on a mobile phone or tablet, the popup 
 [[img-date-picker-touch-popup, Figure 000]]
 .Date picker touch popup
 image::{imgsdir}/date_picker_touch_popup.png[]
+
+== Sorting of Filter Table (since 7.0.100)
+The column header menu shows a list of all the different values which occur in the cells of that column. If one of these values is selected the table will be filtered and will only show rows which contain that value. These values are sorted alphabetically. Because sometimes it might be useful to only display the rows which contain the most used values, a possibility was added to sort the values by the number of occurrences. Just press the icon on the left of the 'All' button.
+
+[[img-table-header-menu-filter-sorting, Figure 000]]
+.Column Filter Sorting
+image::{imgsdir}/table_header_menu_filter_sorting.png[]
