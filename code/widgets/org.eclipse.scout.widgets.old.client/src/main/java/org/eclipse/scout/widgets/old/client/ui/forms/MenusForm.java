@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.old.client.ui.forms;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.action.IAction;
@@ -284,6 +285,15 @@ public class MenusForm extends AbstractForm implements IPageForm {
       }
     }
 
+    @Order(150)
+    @ClassId("b6b9f6b5-f78f-4d0f-9783-654e9f66995d")
+    public class DynamicSubMenusMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return "Menu with dynamic submenus";
+      }
+    }
+
     @Order(10)
     @ClassId("370431be-8ef3-489e-8f9a-061c65455524")
     public class GroupBox extends AbstractGroupBox {
@@ -429,6 +439,39 @@ public class MenusForm extends AbstractForm implements IPageForm {
           @Override
           protected void execAction() {
             MessageBoxes.createOk().withHeader("You clicked me!").show();
+          }
+        }
+      }
+
+      @Order(55)
+      public class ToggleDynamicSubMenusButton extends AbstractLinkButton {
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Toggle dynamic submenus";
+        }
+
+        @Override
+        protected void execClickAction() {
+          DynamicSubMenusMenu menu = MenusForm.this.getMainBox().getMenuByClass(DynamicSubMenusMenu.class);
+          if (menu.getChildActionCount() == 0) {
+            menu.addChildAction(new EmptyMenu());
+          }
+          else {
+            menu.setChildActions(Collections.<IMenu> emptyList());
+          }
+        }
+
+        @ClassId("0452826c-c79c-459c-96c3-b78296b8bbb2")
+        private class EmptyMenu extends AbstractMenu {
+          @Override
+          protected String getConfiguredText() {
+            return "Empty menu";
           }
         }
       }
