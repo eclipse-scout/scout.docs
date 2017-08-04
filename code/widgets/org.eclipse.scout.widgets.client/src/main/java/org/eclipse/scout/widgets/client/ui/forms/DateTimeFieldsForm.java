@@ -54,6 +54,8 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Conf
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DisplayTextField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DontAllowCurrentDateField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.GetValueField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.HasDateField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.HasTimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.InputField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.DontAllow1000TimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeDisplayTextField;
@@ -141,6 +143,14 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   public DontAllow1000TimeField getDontAllow1000TimeField() {
     return getFieldByClass(DontAllow1000TimeField.class);
+  }
+
+  public HasDateField getHasDateField() {
+    return getFieldByClass(HasDateField.class);
+  }
+
+  public HasTimeField getHasTimeField() {
+    return getFieldByClass(HasTimeField.class);
   }
 
   public TimeColumnField getTimeColumnField() {
@@ -1079,6 +1089,54 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           protected void execChangedValue() {
             InputField field = getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class);
             field.setValue(field.getValue()); // revalidate
+          }
+        }
+
+        @Order(3000)
+        @ClassId("ea115900-a7b4-410b-a14d-2405f74026ec")
+        public class HasDateField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("HasDate");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setHasDate(!getInputField().isHasDate());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().isHasDate());
+          }
+        }
+
+        @Order(4000)
+        @ClassId("86d06171-f93b-4d19-86f1-f3e1fc79cc82")
+        public class HasTimeField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("HasTime");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setHasTime(!getInputField().isHasTime());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().isHasTime());
           }
         }
       }
