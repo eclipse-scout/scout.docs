@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.IButton;
@@ -37,6 +38,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
@@ -50,6 +52,8 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Conf
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DateFieldFormatField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.DisplayTextField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.GetValueField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.HasDateField;
+import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.HasTimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.InputField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeDisplayTextField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeFieldFormatField;
@@ -128,6 +132,14 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
   public DateColumnField getDateColumnField() {
     return getFieldByClass(DateColumnField.class);
+  }
+
+  public HasDateField getHasDateField() {
+    return getFieldByClass(HasDateField.class);
+  }
+
+  public HasTimeField getHasTimeField() {
+    return getFieldByClass(HasTimeField.class);
   }
 
   public TimeColumnField getTimeColumnField() {
@@ -977,6 +989,54 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
             getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class).setAutoDate(autoDate);
             getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class).setAutoDate(autoDate);
             getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn3Box.DateTimeInputField.class).setAutoDate(autoDate);
+          }
+        }
+
+        @Order(2000)
+        @ClassId("ea115900-a7b4-410b-a14d-2405f74026ec")
+        public class HasDateField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("HasDate");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setHasDate(!getInputField().isHasDate());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().isHasDate());
+          }
+        }
+
+        @Order(3000)
+        @ClassId("86d06171-f93b-4d19-86f1-f3e1fc79cc82")
+        public class HasTimeField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("HasTime");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getInputField().setHasTime(!getInputField().isHasTime());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getInputField().isHasTime());
           }
         }
       }
