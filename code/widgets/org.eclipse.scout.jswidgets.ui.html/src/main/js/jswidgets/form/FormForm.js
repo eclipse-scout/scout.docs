@@ -46,6 +46,7 @@ jswidgets.FormForm.prototype._init = function(model) {
 
   var modalField = this.widget('ModalField');
   modalField.setValue(this.modal);
+  modalField.on('propertyChange', this._onModalChange.bind(this));
 
   var displayHintField = this.widget('DisplayHintField');
   displayHintField.setValue(this.openedByButton ? this.displayHint : scout.Form.DisplayHint.DIALOG);
@@ -146,6 +147,12 @@ jswidgets.FormForm.prototype._onStatusChange = function(event) {
 jswidgets.FormForm.prototype._onClosableChange = function(event) {
   if (event.propertyName === 'value') {
     this.setClosable(event.newValue);
+  }
+};
+
+jswidgets.FormForm.prototype._onModalChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.setModal(event.newValue);
   }
 };
 
