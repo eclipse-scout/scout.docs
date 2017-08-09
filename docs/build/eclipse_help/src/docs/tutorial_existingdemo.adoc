@@ -23,14 +23,14 @@ In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File[Import..
 This opens the dialog shown in <<img-oomph_existing_project>>.
 Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Workspace_ and click the btn:[Next] button.
 
-[[img-oomph_existing_project, Figure Import Wizard]]
+[[img-oomph_existing_project]]
 .The Import Wizard in Eclipse.
 image::{imgsdir}/oomph_existing_project.png[]
 
 The [wizard]_Eclipse Importer_ contains the folder hierarchy [folder]_Eclipse Projects_, [folder]_Scout_ and [folder]_Scout Demo App_ as shown in <<img-oomph_exiting_projects1>>.
 You can enter "Scout Demo" in the search filter to find the project easily.
 
-[[img-oomph_exiting_projects1, Figure "Projects" Step 1]]
+[[img-oomph_exiting_projects1]]
 .Top part of the "Projects" Step of the Importer.
 image::{imgsdir}/oomph_exiting_projects1.png[]
 
@@ -40,7 +40,7 @@ Now, add the desired project to the list to import according to the following st
 * [2] Add it to the list of projects using the btn:["Add Projects"] (down arrow) button.
 * [3] Adjust the Stream to the milestone build matching your Eclipse IDE, eg. "`Neon (M4 release)`" for January 2016.
 
-[[img-oomph_exiting_projects2, Figure "Projects" Step 2]]
+[[img-oomph_exiting_projects2]]
 .Bottom part of the "Projects" Step of the Importer.
 image::{imgsdir}/oomph_exiting_projects2.png[]
 
@@ -51,7 +51,7 @@ In case you have already used Oomph for other purposes, this step might look dif
 
 Make sure to display all variables by activating checkbox `Show all Variables` in the bottom left corner as shown in <<img-oomph_exiting_variables>>.
 
-[[img-oomph_exiting_variables, Figure "Variables" Step]]
+[[img-oomph_exiting_variables]]
 ."Variables" Step of the Importer.
 image::{imgsdir}/oomph_exiting_variables.png[]
 
@@ -74,7 +74,7 @@ The Oomph installer first makes sure that all necessary Scout components and M2E
 In case one or more components are missing, Oomph will first download and install them.
 This triggers a restart request as shown in <<img-oomph_restart>>.
 
-[[img-oomph_restart, Figure Restart after installation]]
+[[img-oomph_restart]]
 .Restart of the IDE after installation.
 image::{imgsdir}/oomph_restart.png[]
 
@@ -93,13 +93,13 @@ Demo App: Contacts:: The projects corresponding to the Scout Demo Application "C
 Demo App: Widgets:: The projects corresponding to the Scout Demo Application "Widgets".
 Demo Docs:: The scout documentation and the project containing most of the code snippets included in the documentation.
 
-[[img-oomph_workingsets, Figure Working Sets]]
+[[img-oomph_workingsets]]
 .Projects in the workspace after the "Scout Demo App" setup.
 image::{imgsdir}/oomph_workingsets.png[]
 
 If you do not see the workingsets, you might need to select "menu:Top Level Elements[Working Sets]" from the Menu as displayed in <<img-workingsets_top_level>>
 
-[[img-workingsets_top_level, Figure Working Sets]]
+[[img-workingsets_top_level]]
 .Select "Working Sets" as "Top Level Elements" in the "Package Explorer".
 image::{imgsdir}/workingsets_top_level.png[]
 
@@ -112,13 +112,13 @@ With the Scout demo installed in our workspace we are now ready to start the app
 In the [wizard]_Package Explorer_ view of the IDE open the Maven module `org.eclipse.scout.contacts.all.app.dev`.
 To run the Contacts application use the [menu]_Run As_ context menu on file `contacts-all-dev.launch` as shown in <<img-oomph_run_contacts_all>>.
 
-[[img-oomph_run_contacts_all, Figure Start the Contacts application]]
+[[img-oomph_run_contacts_all]]
 .Start the Contacts application.
 image::{imgsdir}/run_contracts_all_dev.png[]
 
 Once the startup sequence of the Contacts application has completed the console view in your Eclipse IDE should look like <<img-oomph_contacts_console>>.
 
-[[img-oomph_contacts_console, Figure Console for the Contacts demo]]
+[[img-oomph_contacts_console]]
 .Console view after starting the Contacts demo.
 image::{imgsdir}/oomph_contacts_console.png[]
 
@@ -127,7 +127,7 @@ image::{imgsdir}/oomph_contacts_console.png[]
 With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082/.
 To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double click on the ''Alice'' row.
 
-[[img-contacts_persons_alice, Figure the Contacts application]]
+[[img-contacts_persons_alice]]
 .The Contacts application.
 image::{imgsdir}/contacts_persons_alice.png[]
 
@@ -140,7 +140,7 @@ You can browse through the data, open different forms and add/change entities.
 Also have a quick look at the code.
 The list on the left side of the application containing the nodes [folder]_Persons_ and [folder]_Organizations_ is implemented in class [java]+ContactOutline+ as shown in <<lst-contacts_outline>>.
 
-[[lst-contacts_outline, Listing contacts outline]]
+[[lst-contacts_outline]]
 [source,java]
 .ContactOutline implementation.
 ----

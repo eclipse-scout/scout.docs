@@ -30,7 +30,7 @@ The Eclipse content assist can be started by typing kbd:[Ctrl,Space].
 To add additional form fields to a form the current edit position needs to be inside of a Scout group box.
 Typing kbd:[Ctrl,Space] then provides access to the most frequently used Scout widgets as shown in <<img-java_proposals_groupbox>>.
 
-[[img-java_proposals_groupbox, Figure Proposals in a GroupBox]]
+[[img-java_proposals_groupbox]]
 .Proposals to create new form fields in a GroupBox
 image::{imgsdir}/java_proposals_groupbox2.png[]
 
@@ -45,7 +45,7 @@ To exit the Edit-Mode just press kbd:[Enter].
 For adding new columns in a table the set the current edit position inside a Scout table.
 The Scout table itself may be located inside of a TableField as shown in <<img-java_proposals_table>> or can also be located inside of a Scout TablePage.
 
-[[img-java_proposals_table, Figure Proposals in a Table]]
+[[img-java_proposals_table]]
 .Proposals to create new columns in a Table
 image::{imgsdir}/java_proposals_table2.png[]
 
@@ -54,6 +54,6 @@ Next to adding columns the content assist shown in <<img-java_proposals_table>> 
 ==== Create new Codes
 Adding new Codes to an existing CodeType is supported by the content assist as shown in <<img-java_proposals_code>>.
 
-[[img-java_proposals_code, Figure Proposals in a CodeType]]
+[[img-java_proposals_code]]
 .Proposals to create new codes in a CodeType
 image::{imgsdir}/java_proposals_code.png[]

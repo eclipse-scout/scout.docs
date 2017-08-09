@@ -106,7 +106,7 @@ The second WAR file contains the Scout frontend server that is responsible for c
 To start the build right click on the project `helloworld` and select the context menu menu:Run As -> Maven build...[] as shown in <<img-sdk_export_war>>.
 In the dialog that appears enter `clean verify` into the `Goals` field and press btn:[Run].
 
-[[img-sdk_export_war, Figure Maven build]]
+[[img-sdk_export_war]]
 .Starting the Maven build.
 image::{imgsdir}/sdk_export_war_menu.png[]
 
@@ -127,7 +127,7 @@ If you do not yet have such an installation you may want to read and follow the 
 To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
 You should then see the page shown in <<img-deploy_tomcat_1>>.
 
-[[img-deploy_tomcat_1, Tomcat start page]]
+[[img-deploy_tomcat_1]]
 .The Tomcat shown after a successful installation. After clicking on the "`Manager App`" button (highlighted in red) the login box is shown in front. A successful login shows the "`Tomcat Web Application Manager`".
 image::{imgsdir}/tomcat_managerapp_login.png[]
 
@@ -135,7 +135,7 @@ Once the web browser displays the successful running of your Tomcat instance, sw
 After entering user name and password the browser will display the "`Tomcat Web Application Manager`" as shown in <<img-deploy_tomcat_2>>.
 If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in Appendix <<apx-tomcat_dirs_and_files>>.
 
-[[img-deploy_tomcat_2, Tomcat Manager]]
+[[img-deploy_tomcat_2]]
 .The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
 image::{imgsdir}/tomcat_managerapp_selectwar.png[]
 
@@ -150,7 +150,7 @@ You can now connect to the application using the browser of your choice and ente
   http://localhost:8080/org.eclipse.scout.apps.helloworld.ui.html/
 ----
 
-[[img-helloworld_running_download, Figure Login Page]]
+[[img-helloworld_running_download]]
 .The "`Hello World`" login page.
 image::{imgsdir}/tomcat_helloworld_download.png[]
 

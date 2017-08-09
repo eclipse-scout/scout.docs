@@ -11,7 +11,7 @@ ifndef::mdledir[:mdledir: .]
 
 == Mobile Support
 
-[[img-mobile-support, figure]]
+[[img-mobile-support]]
 .Scout apps run on desktops, tablets and mobile phones
 image::{imgsdir}/multi_device.png[]
 
@@ -26,7 +26,7 @@ A Scout application does not use responsive design for the whole page, but many 
 
 One example is the menu bar that stacks all menus which don't fit into an ellipsis menu.
 
-[[img-responsive-menubar, figure]]
+[[img-responsive-menubar]]
 .Responsive menu bar
 image::{imgsdir}/responsive_menubar.png[]
 
@@ -37,7 +37,7 @@ One example is the tooltip of a form field which is reflected by an info icon on
 Instead of hovering over the field the user can press that info icon to bring up the tooltip.
 This approach not only provides an indicator where tooltips are available, it also works for mouse and touch based devices.
 
-[[img-field-tooltip, figure]]
+[[img-field-tooltip]]
 .Touch friendly widgets
 image::{imgsdir}/tooltip.png[]
 
@@ -55,7 +55,7 @@ The order in which these transformers are processed is defined using the `@Order
 
 The transformations are mainly limited to the adjustment of properties, although some properties have a bigger effect than others. The property `displayStyle` of the desktop for example controls the look of the desktop and setting it to `COMPACT` rearranges the desktop in a mobile friendly way.
 
-[[img-mobile-desktop, figure]]
+[[img-mobile-desktop]]
 .Desktop with displayStyle set to 'compact'
 image::{imgsdir}/contacts_mobile.png[]
 
