@@ -47,7 +47,7 @@ In case of multiple server nodes, the client notifications are synchronized usin
 
 === Push Technology
 
-[[img-client_notifications]]
+[[img-long_polling]]
 .Long Polling
 image::{imgsdir}/cn_long_polling.png[]
 
@@ -74,7 +74,7 @@ image::{imgsdir}/cn_big_picture.png[]
 
 ==== Multiple Server Nodes
 
-[[img-client_notification_big_picture]]
+[[img-client_notification_multiple]]
 .Client Notification Multiple Server Nodes
 image::{imgsdir}/cn_multiple_servers.png[]
 
