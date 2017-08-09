@@ -98,7 +98,7 @@ scout.create('Form', scout.models.getModel('example.MyForm', parent));
 
 When the form is shown it will look like this:
 
-[[img-scoutjs_myform, Figure 000]]
+[[img-scoutjs_myform]]
 .A form described using JSON
 image::{imgsdir}/scoutjs_myform.png[]
 

@@ -21,7 +21,7 @@ To open the wizard press kbd:[Ctrl,N] or use menu:File[New,Other...] and type "_
 Then, select the entry "_Scout Project_" and click on btn:[Next].
 This leads to the initial dialog of the _New Scout Project_ wizard as shown in <<img-sdk_wizard_project>>.
 
-[[img-sdk_wizard_project, The new Project Wizard]]
+[[img-sdk_wizard_project]]
 .The new Project Wizard
 image::{imgsdir}/sdk_new_project.png[]
 

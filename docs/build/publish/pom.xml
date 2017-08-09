@@ -81,12 +81,14 @@
 									<inputFolder>../scout_install/target/generated-docs</inputFolder>
 									<outputSubFolder>eclipse.org-scout</outputSubFolder>
 									<fixExternalLinks>true</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput />
 								</inputSource>
 								<inputSource>
 									<inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
 									<outputSubFolder>eclipse.org-scout</outputSubFolder>
 									<fixExternalLinks>true</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput />
 								</inputSource>
 								<!-- publish for downloads -->
@@ -95,6 +97,7 @@
 									<inputFolder>../beginners_guide/target/generated-docs</inputFolder>
 									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput>
 										<outputZipFileName>beginners-guide.zip</outputZipFileName>
 									</htmlOutput>
@@ -105,6 +108,7 @@
 									<inputFolder>../technical_guide/target/generated-docs</inputFolder>
 									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput>
 										<outputZipFileName>technical-guide.zip</outputZipFileName>
 									</htmlOutput>
@@ -115,6 +119,7 @@
 									<inputFolder>../scout_migration/target/generated-docs</inputFolder>
 									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput>
 										<outputZipFileName>migration-guide.zip</outputZipFileName>
 									</htmlOutput>
@@ -125,6 +130,7 @@
 									<inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
 									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
 									<fixExternalLinks>false</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput>
 										<outputZipFileName>release-notes.zip</outputZipFileName>
 									</htmlOutput>
@@ -135,6 +141,7 @@
 									<inputFolder>../eclipse_help/target/generated-docs</inputFolder>
 									<outputSubFolder>scout-sdk-help</outputSubFolder>
 									<fixExternalLinks>true</fixExternalLinks>
+									<fixXrefLinks>false</fixXrefLinks>
 									<htmlOutput>
 										<outputSubFolder>html</outputSubFolder>
 										<pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>

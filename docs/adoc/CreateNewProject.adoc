@@ -19,7 +19,7 @@ Start your Eclipse IDE and select an empty directory for your workspace as shown
 This workspace directory will then hold all the project code for the `Hello World` application.
 Once the Eclipse IDE is running it will show the Java perspective.
 
-[[img-sdk_start_new_workspace, Figure Start the Eclipse IDE with a new project folder]]
+[[img-sdk_start_new_workspace]]
 .Select a new empty folder to hold your project workspace
 image::{imgsdir}/sdk_start_new_workspace.png[]
 
@@ -27,7 +27,7 @@ To create a new Scout project select the menu menu:File[New,Project...] and type
 Select the Scout Project wizard and press btn:[Next].
 The [wizard]_New Scout Project_ wizard is then started as shown in <<img-sdk_new_project_wizard>>.
 
-[[img-sdk_new_project_wizard, Figure New Scout Project Wizard]]
+[[img-sdk_new_project_wizard]]
 .The new Scout project wizard.
 image::{imgsdir}/sdk_new_project.png[]
 
@@ -45,13 +45,13 @@ To continue click on btn:[Finish] to resolve the selected connectors.
 Afterwards confirm the installation, accept the license and the message that some content has not been signed.
 Finally, the installation of the maven plugin connectors requires a restart of the Eclipse IDE.
 
-[[img-sdk_new_project_connector, Figure Maven plugin connector installation dialog]]
+[[img-sdk_new_project_connector]]
 .The Maven plugin connector installation dialog.
 image::{imgsdir}/sdk_new_project_connectors.png[]
 
 After the [wizard]_New Scout Project_ wizard has created the initial Maven modules for the `Hello World` application these modules are compiled and built by the Eclipse IDE.
 In case of a successful Eclipse Scout installation your Eclipse IDE should display all created Maven modules in the Package Explorer and have an empty Problems view as shown in <<img-sdk_new_project_initial_helloworld>>.
 
-[[img-sdk_new_project_initial_helloworld, Figure The Hello World Maven Modules]]
+[[img-sdk_new_project_initial_helloworld]]
 .The inital set of Maven modules created for the Hello World application.
 image::{imgsdir}/sdk_new_project_initial_helloworld.png[]

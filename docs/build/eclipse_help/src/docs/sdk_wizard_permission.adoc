@@ -12,7 +12,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 The _New Scout Permission_ wizard can be used to create a new permission classes.
 To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#, Scout Wizards>>.
 
-[[img-sdk_wizard_permission, The new Permission Wizard]]
+[[img-sdk_wizard_permission]]
 .The new Permission wizard
 image::{imgsdir}/sdk_new_permission.png[]
 

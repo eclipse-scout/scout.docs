@@ -57,14 +57,14 @@ Binary resources such as images or videos can now be used in the following widge
 * HtmlField
 * BeanField
 
-[[img-binary_resource_field, Figure 000]]
+[[img-binary_resource_field]]
 .Binary resource on a model field.
 image::{imgsdir}/binary_resource_field.png[]
 
 * Html enabled StringColumn
 * BeanColumn
 
-[[img-binary_resource_column, Figure 000]]
+[[img-binary_resource_column]]
 .Binary resource on a column
 image::{imgsdir}/binary_resource_column.png[]
 
@@ -151,7 +151,7 @@ By default, the first enabled field on a form gets the focus when the form is op
 === Menus in Tooltip
 Form fields may have a tooltip and a context menu. Until now, it was not possible to display both simultaneously. This has been changed so that the menu items are now included in the tooltip if a tooltip text and menus are configured.
 
-[[img-tooltip_menus, Figure 000]]
+[[img-tooltip_menus]]
 .Tooltip with menus
 image::{imgsdir}/tooltip_menus.png[]
 
@@ -210,7 +210,7 @@ Note: The first button or menu which has an `Enter` keystroke will automatically
 == Icons for Tree Nodes
 As in earlier Scout releases with Swing, SWT and RAP UI, the Outline and all Trees in Scout now support an icon per tree node. Simply set the `iconId` property on a TreeNode and reference either a character from an icon-font in your Scout project or a bitmap icon which is defined in your Scout project. See the migration guide for more details and the global property `showTreeIcons` which can turn on/off icons for all Tree instances. You should take care that all icons you use in a single tree have the same size. Here's an example for an outline with icons:
 
-[[img-tree_icons, Figure 000]]
+[[img-tree_icons]]
 .Outline with icons
 image::{imgsdir}/tree_icons.png[]
 

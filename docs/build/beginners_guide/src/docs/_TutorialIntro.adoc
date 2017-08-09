@@ -28,7 +28,7 @@ Alternatively, you can also view the source code of the "`Contacts`" demo applic
 
 Figure <<img-app_contacts_personpage>> below shows the "`Contacts`" application after connecting to the Scout UI application.
 
-[[img-app_contacts_personpage, Figure 000]]
+[[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.
 image::{imgsdir}/app_contacts_personpage.png[]
 
@@ -55,7 +55,7 @@ Several views can also be opened simultaneously.
 To show a specific view the user has to click on the view button associated with the desired view.
 An example of an opened view is shown for person "Alice" in in <<img-app_contacts_personform>>.
 
-[[img-app_contacts_personform, Figure 000]]
+[[img-app_contacts_personform]]
 .The "`Contacts`" application with a person opened in a form.
 image::{imgsdir}/app_contacts_personform.png[]
 

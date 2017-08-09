@@ -56,13 +56,13 @@ https://www.eclipse.org/downloads/[www.eclipse.org/downloads]
 
 The download page then looks as shown in <<img-scout_download>>.
 
-[[img-scout_download, Figure 000]]
+[[img-scout_download]]
 .The Eclipse download page. The Scout package download can be accessed via the link shown in the red box.
 image::{imgsdir}/scout_download.png[]
 
 Clicking on the link leads to a list of individual download packages as shown in <<img-scout_download_package>>.
 
-[[img-scout_download_package, Figure 000]]
+[[img-scout_download_package]]
 .The Scout download package.
 image::{imgsdir}/scout_download_package.png[]
 
@@ -71,7 +71,7 @@ To download the correct package, make sure to matche your JDK installation as de
 
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 
-[[img-scout_download_mirror, Figure 000]]
+[[img-scout_download_mirror]]
 .Downloading the selected Scout package from a mirror.
 image::{imgsdir}/scout_download_mirror.png[]
 

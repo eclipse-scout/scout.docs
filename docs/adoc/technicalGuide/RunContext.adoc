@@ -24,7 +24,7 @@ By default, a `RunContext` is associated with a `RunMonitor`, and the monitor's 
 Typically, a `RunContext` is created from a respective factory like `RunContexts` to create a `RunContext`, or `ServerRunContexts` to create a `ServerRunContext`, or `ClientRunContexts` to create a `ClientRunContext`. Internally, the `BeanManager` is asked to provide a new instance of the `RunContext`, which allows you to replace the default implementation of a `RunContext` in an easy way. The factories declare two factory methods: `empty()` and `copyCurrent()`. Whereas `empty()` provides you an empty `RunContext`, `copyCurrent()` takes a snapshot of the current calling context and initializes the `RunContext` accordingly. That is useful if only some few values are to be changed, or, if using `ServerRunContext`, to run the code on behalf of a new transaction.
 
 The following <<lst-RunContexts.copyCurrent>> illustrates the creation of an empty `RunContext` initialized with a particular `Subject` and `Locale`.
-[[lst-RunContexts.empty, snippet]]
+[[lst-RunContexts.empty]]
 [source,java,indent=0]
 .Creation of an empty `RunContext`
 ----
@@ -35,7 +35,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <3> This code is run on behalf of the `RunContext`
 
 The following <<lst-RunContexts.copyCurrent>> illustrates the creation of a 'snapshot' of the current calling `RunContext` with another `Locale` set.
-[[lst-RunContexts.copyCurrent, snippet]]
+[[lst-RunContexts.copyCurrent]]
 [source,java,indent=0]
 .Create a copy of the current calling `RunContext`
 ----

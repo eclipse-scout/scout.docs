@@ -85,7 +85,7 @@ Both the code type and all its elements will have an assigned ID and associated 
 See Listing <<lst-codetype.simple>> for a possible implementation of such a code type.
 
 (((AbstractCodeType,Code Type)))
-[[lst-codetype.simple, Listing Code]]
+[[lst-codetype.simple]]
 [source,java]
 .A code type with associated codes.
 ----
@@ -93,7 +93,7 @@ TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shar
 ----
 
 
-The code type class and its codes shown in Listing <<lst-codetype.simple>> have been created using the creation wizards provided by the Scout SDK as described in Section <<sec-wizard_code_type>>.
+The code type class and its codes shown in Listing <<lst-codetype.simple>> have been created using the creation wizards provided by the Scout SDK as described in <<sec-wizard_code_type>>.
 In Scout, code type classes are derived from class [java]+AbstractCodeType<CODE_TYPE_ID, CODE_ID>+.
 In the provided example, both the code type ID and the code ID are typed with [java]+Long+.
 The value of the event code type ID is assigned by [java]+Long ID = 10000L+.
@@ -112,7 +112,7 @@ In fact, any Java class may be used as a key type for code types and codes as lo
 
 
 (((AbstractCode, Code)))
-[[lst-code.inactive, Listing Code]]
+[[lst-code.inactive]]
 [source,java]
 .A codes that is set to inactive.
 ----
@@ -139,14 +139,14 @@ Each organizational level has a unique number assigned and a name.
 This setup can easily be transferred to a hierarchical Scout code type.
 
 (((execLoadCodes,Code Type,Load Codes Dynamically)))
-[[lst-codetype.hierarchical, Listing Code execLoadCodes]]
+[[lst-codetype.hierarchical]]
 [source,java]
 .A hierarchical code type for the Industry Classification Benchmark.
 ----
 TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=12..34;2942..2942]
 ----
 
-[[img-hierarchicalcodetype, Figure 000]]
+[[img-hierarchicalcodetype]]
 .A hierarchical code type class shown in the Scout SDK.
 image::{imgsdir}/hierarchicalcodetype.png[]
 
@@ -162,7 +162,7 @@ Requiring that all codes are statically defined in the application's code base w
 Clearly, such a setup is not sustainable and this is why Scout allows to dynamically update the set of codes contained in a code type.
 
 (((execLoadCodes,Code Type,Load Codes Dynamically)))
-[[lst-codetype.addcodes, Listing Load Codes Dynamically]]
+[[lst-codetype.addcodes]]
 [source,java]
 .Adding codes dynamically in method [java]+execLoadCodes+.
 ----
@@ -205,7 +205,7 @@ In this situation, the lookup data can be directly created in the call itself.
 As an example, you may consider a lookup call where the lookup data is based on a code type.
 In the other case, the lookup data is dynamic in nature, the amount of data is large and needs to be read from some external source, such as a database or a web service.
 To access large amounts of external data, a lookup call typically invokes a so called lookup service that is providing the necessary data.
-This is exactly the scenario that was used in the "`My Contacts`" application of the book's first part in Section <<sec-adding_the_smartfield>>.
+This is exactly the scenario that was used in the "`My Contacts`" application of the book's first part in <<sec-adding_the_smartfield>>.
 In the contact form of that application, a company smart field is used to let the user select a specific entry from a list of companies.
 And in turn, this smart field uses a company lookup call that is backed by a company lookup service.
 This lookup service then accesses a database to create the list of companies required for the company smart field.
@@ -222,7 +222,7 @@ in the text below
 
 
 (((execCreateLookupRows,Lookup Call,Local Lookup Call)))
-[[lst-lookup.local.simple, Listing Local Lookup Call]]
+[[lst-lookup.local.simple]]
 [source,java]
 .A simple local lookup call defining it's entries in method [java]+execCreateLookupRows+.
 ----
@@ -231,7 +231,7 @@ TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.clie
 
 
 (((Code Lookup Call)))
-[[lst-lookup.local.code, Listing Local Code Lookup Call]]
+[[lst-lookup.local.code]]
 [source,java]
 .A local code lookup call. This lookup removes inactive codes in the lookup data.
 ----
@@ -240,7 +240,7 @@ TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.clie
 
 TODO [7.0] jbr: fix <<img-lookup_call>>: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which
 
-[[img-lookup_call, Figure 000]]
+[[img-lookup_call]]
 .Implementing a lookup call with a corresponding lookup service. Scout framework components are shown in orange, user code in blue.
 image::{imgsdir}/lookup_call.png[]
 
@@ -302,7 +302,7 @@ needs text
 === Client Model
 
 needs text
-[[img-scoutclientmodel, Figure 000]]
+[[img-scoutclientmodel]]
 .A class diagram for the Scout's client model
 image::{imgsdir}/scoutclientmodel.png[]
 
@@ -523,8 +523,8 @@ Comparing individual aspects of the the desktop application with its mobile/tabl
 Please observe that for the complete widget application only a handful of lines of code actually depend on a specific UI technology.
 The interested reader can easily verify this by searching the application's code for the occurrences of class [java]+UserAgentUtility+.
 
-In the text below the organisation of the widget demo application is first described in Section <<sec-widgetdemo_ui>>.
-And in Section <<sec-widgetdemo_architecture>>, the setup in the form of a Scout client only application is explained.
+In the text below the organisation of the widget demo application is first described in <<sec-widgetdemo_ui>>.
+And in <<sec-widgetdemo_architecture>>, the setup in the form of a Scout client only application is explained.
 
 
 [[sec-widgetdemo_ui]]
@@ -534,7 +534,7 @@ The application is organized into separate outlines for thematic groups of widge
 Each of the application's outline then presents a list of widgets in a navigation tree.
 This is shown in <<img-widgetapp_github>> for the [outline]_Simple Widgets_ outline that contains examples for simple UI widgets such as label fields or string fields.
 
-[[img-widgetapp_github, Figure 000]]
+[[img-widgetapp_github]]
 .The "Scout Widgets Demo App". The widgets demo application features examples of the most commonly used Scout widgets. For each widget shown, example use cases are presented in a individual form. As shown in the screenshot, the corresponding Scout source code is made available via the menu:View Source on GitHub[] context menu.
 image::{imgsdir}/widgetapp_github_menu.png[]
 
@@ -544,11 +544,11 @@ It should therefore be possible to read and understand the source code of each e
 Via the menu:Open in Dialog ...[] context menu the content of the view is displayed in a modal scout form.
 As shown in <<img-widgetapp_github>>, the complete source code for the selected form can be accessd via the menu:View Source on GitHub[] context menu.
 
-[[img-widgetapp_swt, Figure 000]]
+[[img-widgetapp_swt]]
 .The "Scout Widgets Demo App" running as an SWT desktop application.
 image::{imgsdir}/widgetapp_swt.png[]
 
-[[img-widgetapp_web, Figure 000]]
+[[img-widgetapp_web]]
 .The "Scout Widgets Demo App" running in the browser.
 image::{imgsdir}/widgetapp_web.png[]
 
@@ -556,7 +556,7 @@ The widget demo application can also be run as a native SWT desktop application.
 This is shown in <<img-widgetapp_swt>>.
 And the exact same application also runs in a browser as a web application shown in <<img-widgetapp_web>>.
 
-[[img-widgetapp_mobile, Figure 000]]
+[[img-widgetapp_mobile]]
 image::{imgsdir}/widgetapp_mobile1.png[]
 image::{imgsdir}/widgetapp_mobile2.png[]
 .The "Scout Widgets Demo App" running on a mobile device.  On the left, all outlines of the application are displayed on the home screen. The screens shown in the middle allows to navigate through "`Simple Widgets`" outline while the selected "`StringField`" form is shown on the right.
@@ -581,10 +581,10 @@ As in typical Scout client server projects, the presentation logic can be implem
 A detailed description of this setup including step-by-step instructions is available on the Scout Wiki.footnote:[
 Standalone Client with DB Access: http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access
 ].
-In the text below the client only setup of the widget demo application is explained by looking at the main differences to the setup of the "`Hello World`" application introduced in Chapter <<cha-helloworld>>.
+In the text below the client only setup of the widget demo application is explained by looking at the main differences to the setup of the "`Hello World`" application introduced in <<cha-helloworld>>.
 
 (((ClientSession,execLoadSession)))
-[[lst-demoapp.clientsession, Listing ClientSession]]
+[[lst-demoapp.clientsession]]
 [source,java]
 .The setup of the client session in the Scout widget demo application.
 ----
@@ -620,7 +620,7 @@ Label fields are used to place a read only text anywhere in a Scout form.
 As shown in the configuration section of <<img-labelfield>> such texts can occupy the typical area assigned to a label field on the left, the area typically assigned to data entry on the right or on both sides.
 The form shown in <<img-labelfield>> is implemented in class [java]+LabelFieldForm+ of the Scout widget application.
 
-[[img-labelfield, Figure 000]]
+[[img-labelfield]]
 .Scout fields and example use cases.
  In the examples section of the form the standard usage of label fields is shown.
  To display text over the whole width of a column or in the area right to the label use method [java]+setValue+ as shown in the configuration section of the form.
@@ -641,7 +641,7 @@ A subset of these properties are shown in the list below.
  * Label Font
 
 (((AbstractLabelField,Label Field)))
-[[lst-demoapp.clientsession, Listing LabelField]]
+[[lst-demoapp.clientsession]]
 [source,java]
 .A simple LabelField.
 ----
@@ -652,7 +652,7 @@ TODO [7.0] jbr: include was {codedir}/widgets/org.eclipsescout.demo.widgets.clie
 To display text in the right hand area an empty string can be used as label text and the text for the value area of the label field can be set with method [java]+setValue+ in method [java]+execInitField+ according to Listing <<lst-field.label.value>>.
 
 (((AbstractLabelField,Label Field)))
-[[lst-field.label.multiline, Listing LabelField Multiline]]
+[[lst-field.label.multiline]]
 [source,java]
 .A label field displaying multi-line text that covers the whole width of a column.
 ----
@@ -670,7 +670,7 @@ String fields are used to enter simple text strings.
 In addition, string fields are also useful to enter multiline text or capture masked input.
 The form shown in <<img-stringfield>> is implemented in class [java]+StringFieldForm+ of the Scout widget application.
 
-[[img-stringfield, Figure 000]]
+[[img-stringfield]]
 .String fields and example use cases.
  Text content shown in disabled fields can be read and copied to the clipboard, but not edited.
  In multi line string fields the text can be displayed as entered or the text may be wrapped to fit into the available column with.
@@ -686,7 +686,7 @@ This property can be set with the string field's method [java]+getConfiguredWrap
 Please note that changing this property dynamically at runtime currently only works with the SWT and the Swing rendering components.
 
 (((AbstractStringField,String Field))
-[[lst-field.string.masked, Listing masked string field]]
+[[lst-field.string.masked]]
 [source,java]
 .A masked string field.
 ----
@@ -713,7 +713,7 @@ For entering numbers, Scout provides three different fields.
 Depending on the valid range of numbers that may be entered, an integer field, a long field or a big integer field best matches the given use case.
 These fields are represented by the classes [java]+AbstractIntegerField+, [java]+AbstractLongField+ and [java]+AbstractBigIntegerField+, each one of them extinding class [java]+AbstractNumberField+.
 
-[[img-numberfield, Figure 000]]
+[[img-numberfield]]
 .Number fields and example use cases.
  Distinct number fields are available for [java]+Integer+, a [java]+Long+ or a [java]+BigInteger+ value classes.
 image::{imgsdir}/numberfield.png[]
@@ -724,7 +724,7 @@ In the case of the [field]_BigInteger_ field, arbitrarily large or small values 
 See Listing <<lst-field.integer.input>> for the code corresponding to the input integer field in the configuration section of the example form.
 
 (((AbstractIntegerField,Integer Field))
-[[lst-field.integer.input, Listing Integer field]]
+[[lst-field.integer.input]]
 [source,java]
 .A simple Integer field.
 ----
@@ -757,7 +757,7 @@ Depending on the required precision and range of values to be entered a double f
 The two field types are represented by Scout's classes [java]+AbstractDoubleField+ and [java]+AbstractBigDecimalField+ and can hold values of the Java types [java]+Double+ and [java]+BigDecimal+ respectively.
 Both the double and the big decimal field extend class [java]+AbstractDecimalField+ which in turn extends class [java]+AbstractNumberField+.
 
-[[img-decimalfield, Figure 000]]
+[[img-decimalfield]]
 .Decimal fields and example use cases.
  Distinct number fields are available for the [java]+Double+ and [java]+BigDecimal+ value classes.
 image::{imgsdir}/decimalfield.png[]
@@ -766,7 +766,7 @@ The example form shown in <<img-decimalfield>> demonstrates the usage and some o
 This example form is defined in class [java]+DecimalFieldsForm+ of the Scout widget application.
 
 (((AbstractDoubleField,Double Field))
-[[lst-field.double.styled, Listing Integer field]]
+[[lst-field.double.styled]]
 [source,java]
 .A styled decimal field holding Java [java]+Double+ values. Negative values are shown in red
 ----
@@ -813,7 +813,7 @@ The [java]+AbstractDateField+ allows the user to enter a date and the [java]+Abs
 The third field [java]+AbstractDateTimeField+ combines date and time entry into a single form field.
 Both classes [java]+AbstractTimeField+ and [java]+AbstractDateTimeField+ are extending the [java]+AbstractDateField+ field.
 
-[[img-datetimefield, Figure 000]]
+[[img-datetimefield]]
 .Example use cases for a date, a time and a combined date/time field.
 image::{imgsdir}/datetimefield.png[]
 
@@ -829,7 +829,7 @@ Once a day is entered in a date or a combined day time field, the kbd:[Up] and t
 Simultaneously pressing the kbd:[Shift] or the kbd:[Ctrl] allows to step to the next/previous month or year.
 
 (((AbstractDateTimeField,DateTime Field)))
-[[lst-field.datetime.disabled, Listing date time field]]
+[[lst-field.datetime.disabled]]
 [source,java]
 .A disabled combined date time field initialized with the current time
 ----
@@ -854,7 +854,7 @@ As expected, the textual representation of the day of the week is depending on t
 Check boxes can be used to enter/represent simple boolean values.
 In Scout, check boxes are derived from class [java]+AbstractCheckBox+.
 
-[[img-checkboxfield, Figure 000]]
+[[img-checkboxfield]]
 .Check box field and example use cases.
 image::{imgsdir}/checkboxfield.png[]
 
@@ -863,7 +863,7 @@ To access the current value, Scout provides the method [java]+isChecked+ for che
 This naming reflects the boolean state of a check boxes and differs from the other Scout value fields that provide a [java]+getValue+ method.
 
 (((AbstractCheckBox,Check Box)))
-[[lst-field.checkbox.disabled, Listing check box field]]
+[[lst-field.checkbox.disabled]]
 [source,java]
 .A disabled check box field initialized with a checked state
 ----
@@ -881,7 +881,7 @@ With radio buttons the user can select a single element out of a number of disti
 For this, a number of radio buttons may be placed into a radio button group field where a radio button group extends class [java]+AbstractRadioButtonGroup+.
 The contained individual buttons are extending class [java]+AbstractRadioButton+.
 
-[[img-radiobuttonfield, Figure 000]]
+[[img-radiobuttonfield]]
 .Radio buttons in a radio button group field and example use cases.
  Assigning distinct values to the individual radio buttons allows to query the selected radio button.
 image::{imgsdir}/radiobuttonfield.png[]
@@ -891,7 +891,7 @@ It is implemented in class [java]+RadioButtonGroupFieldForm+ of the Scout widget
 As shown in the example section of the form, radio buttons may have labes and/or icons assigned.
 
 (((AbstractRadioButtonGroup,Radio Button Group)))
-[[lst-field.radiobuttongroup, Listing radio button group]]
+[[lst-field.radiobuttongroup]]
 [source,java]
 .A radio button group defined by a code type
 ----
@@ -906,7 +906,7 @@ Please note that the [java]+Long+ type matches the key type of the codes in the 
 The generic parameter used in the definition of a radio button group also determines the type that will be returned by the group's [java]+getValue+ method.
 
 (((AbstractRadioButtonGroup,Radio Button Group)))
-[[lst-field.radiobuttongroup.styled, Listing complete radio button group]]
+[[lst-field.radiobuttongroup.styled]]
 [source,java]
 .A complete radio button group with two radio buttons with individual radio values assigned
 ----
@@ -931,7 +931,7 @@ Buttons come in two variations, normal push buttons and toggle buttons.
 While buttons have an associated label and/or icon, links can only have a label.
 Buttons extend class [java]+AbstractButton+ and links extend [java]+AbstractLinkButton+.
 
-[[img-buttonlink, Figure 000]]
+[[img-buttonlink]]
 .Buttons and links may be placed on a Scout form to initiate actions.
  Buttons may have an associated icon and/or a label.
  Links only have a label.
@@ -940,7 +940,7 @@ image::{imgsdir}/buttonlink.png[]
 Example uses of buttons and links are shown in the form [java]+ButtonLinkFieldsForm+ of the Scout widget application shown in <<img-buttonlink>>.
 
 (((AbstractButton,Button)))
-[[lst-field.button.styled, Listing button with a label]]
+[[lst-field.button.styled]]
 [source,java]
 .A button with a label and an icon that horizontally stretches over the whole column
 ----
@@ -955,7 +955,7 @@ This has the effect that buttons (and links) appear at the exact location where 
 Otherwise, buttons (and links) are placed at the bottom of the container they are defined in.
 
 (((AbstractButton,Toggle Button)))
-[[lst-field.togglebutton, Listing Toggle Button field]]
+[[lst-field.togglebutton]]
 [source,java]
 .A toggle button implementation that changes the label text depending on its toggled state
 ----
@@ -985,7 +985,7 @@ The processing exceptions type [java]+ProcessingException+ represents Scout's co
 The veto exception type [java]+VetoException+ is a direct subclass of the processing exception and is typically used in service calls for subjects with insuffiecient authorization.
 ].
 
-[[img-messagebox, Figure 000]]
+[[img-messagebox]]
 .Message boxes are available for different use cases.
  The message box shown in front is defined by the properties entered in the configuration section.
 image::{imgsdir}/messagebox.png[]
@@ -995,7 +995,7 @@ Clicking on any of these links opens a corresponding message box via the static 
 For example, calling [java]+MessageBox.showOkMessage(title, header, info)+ opens a message box with a title, a header text and some additional information.
 
 (((MessageBox,Configure a Message Box)))
-[[lst-field.openmessagebox, Listing MessageBox]]
+[[lst-field.openmessagebox]]
 [source,java]
 .Configuring and starting of a message box.
 ----
@@ -1041,12 +1041,12 @@ To define the list of elements that are presented in a list box, code types or a
 Example use cases using both code types and lookup calls for the definition of the presented elements are implemented in class [java]+ListBoxForm+ of the Scout widget application.
 See <<img-listbox>> for a screenshot of the example form.
 
-[[img-listbox, Figure 000]]
+[[img-listbox]]
 .List boxes to select elements represented by code types and lookup calls.
 image::{imgsdir}/listbox.png[]
 
 (((ListBox)))
-[[lst-field.listbox, Listing button field]]
+[[lst-field.listbox]]
 [source,java]
 .A simple ListBox field backed by a code type that returns elements of type [java]+Color+.
 ----
@@ -1070,7 +1070,7 @@ List boxes can be configured to only display the checked elements.
 For this, the configuration method [java]+getConfiguredFilterCheckedNodes+ may be used.
 
 (((ListBox.getCheckedKeys)))
-[[lst-field.getcheckedkeys, Listing ListBox.getCheckedKey]]
+[[lst-field.getcheckedkeys]]
 [source,java]
 .Updating the [field]_getCheckedKeys_ field whenever the use changes the selection of elements
 ----
@@ -1099,12 +1099,12 @@ To define the trees presented in tree boxes, hierarchical code types and lookup 
 Example use cases for tree box fields are implemented in class [java]+TreeBoxForm+ of the Scout widget application.
 A screenshot of the tree box example form is shown in <<img-treebox>>.
 
-[[img-treebox, Figure 000]]
+[[img-treebox]]
 .Tree box fields displaying elements defined by hierarchical code types and lookup calls.
 image::{imgsdir}/treebox.png[]
 
 (((TreeBox)))
-[[lst-field.treebox, xxx]]
+[[lst-field.treebox]]
 [source,java]
 .A simple TreeBox field backed by a lookup call that returns element keys of type [java]+String+.
 ----
@@ -1145,7 +1145,7 @@ Alternatively, the use can click with the mouse on the smart field icon.
 By typing a part of the name of the desired entry into the field, the "`search-as-you-type`" support kicks in and a filtered list of elements is displayed.
 The selected entry can be confirmed by using the kbd:[Enter] or the kbd:[Tab].
 
-[[img-smartfield, Figure 000]]
+[[img-smartfield]]
 .Smart field examples. Smart fields support "`search-as-you-type`" and are used to select a value from of a list of elements or a tree.
 image::{imgsdir}/smartfield.png[]
 
@@ -1163,7 +1163,7 @@ Existing Documentation
 
 ==== Menus
 Each smart field can have menus attached. The menus will be shown when the user clicks on the _arrow_ symbol next to the smart field. Figure <<fig-smartfield_menu>> shows an example of a smart field along with a set of menus.
-[[img-smartfieldmenu, Figure 000]]
+[[img-smartfieldmenu]]
 .Menus attached to a smart field.
 image::{imgsdir}/smartfieldmenu.png[]
 
@@ -1173,7 +1173,7 @@ By default, the menus will only be shown if a value of the smart field has been 
 === Tree Field
 needs text
 
-[[img-treefield, Figure 000]]
+[[img-treefield]]
 .Tree fields and example use cases. More text.
 image::{imgsdir}/treefield.png[]
 
@@ -1181,11 +1181,11 @@ image::{imgsdir}/treefield.png[]
 === Table Field
 needs text
 
-[[img-tablefield, Figure 000]]
+[[img-tablefield]]
 .Table fields and example use cases. More text.
 image::{imgsdir}/tablefield.png[]
 
-[[img-editabletablefield, Figure 000]]
+[[img-editabletablefield]]
 .An editable table field. More text.
 image::{imgsdir}/editabletablefield.png[]
 
@@ -1199,7 +1199,7 @@ Existing Documentation
 === Image Field
 needs text
 
-[[img-imagefield, Figure 000]]
+[[img-imagefield]]
 .Image fields are used to display images and icons.
 image::{imgsdir}/imagefield.png[]
 
@@ -1211,7 +1211,7 @@ Existing Documentation
 === SVG Field
 needs text
 
-[[img-svgfield, Figure 000]]
+[[img-svgfield]]
 .SVG fields and example use cases. More text.
 image::{imgsdir}/svgfield.png[]
 
@@ -1252,7 +1252,7 @@ Existing Documentation
 needs text
 
 
-[[img-groupbox, Figure 000]]
+[[img-groupbox]]
 .Group boxes and example use cases. More text.
 image::{imgsdir}/groupbox.png[]
 
@@ -1260,7 +1260,7 @@ image::{imgsdir}/groupbox.png[]
 === Tab Box
 needs text
 
-[[img-tabbox, Figure 000]]
+[[img-tabbox]]
 .Tab boxes and example use cases. More text.
 image::{imgsdir}/tabbox.png[]
 
@@ -1268,7 +1268,7 @@ image::{imgsdir}/tabbox.png[]
 === Sequence Box
 needs text
 
-[[img-sequencebox, Figure 000]]
+[[img-sequencebox]]
 .Sequence boxes and example use cases. More text.
 image::{imgsdir}/sequencebox.png[]
 
@@ -1284,7 +1284,7 @@ Existing Documentation
 === Split Box
 needs text
 
-[[img-splitbox, Figure 000]]
+[[img-splitbox]]
 .Split boxes and example use cases. More text.
 image::{imgsdir}/splitbox.png[]
 

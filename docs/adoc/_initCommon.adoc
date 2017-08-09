@@ -5,6 +5,7 @@
 :idseparator: -
 
 :listing-caption: Listing
+:xrefstyle: short
 
 :lt: &#60;
 :gt: &#62;

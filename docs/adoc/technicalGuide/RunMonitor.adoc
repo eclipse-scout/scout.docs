@@ -25,5 +25,5 @@ Furthermore, a job's Future is linked with the job's `RunMonitor`, meaning that 
 The following <<img-runmonitor_associations>> illustrates the `RunMonitor` and its associations.
 
 .RunMonitor and its associations
-[[img-runmonitor_associations, figure]]
+[[img-runmonitor_associations]]
 image::{imgsdir}/runmonitor_associations.png[]
