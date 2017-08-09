@@ -33,7 +33,7 @@ The implementation of the features described above can be achieved by the the fo
 * <<sec-contacts_modify_person_form_and_page>>
 * <<sec-contacts_organization_node_page>>
 
-This last tutorial step ends with a short review in section <<sec-contacts_link_person_organization_summary>>
+This last tutorial step ends with a short review in <<sec-contacts_link_person_organization_summary>>
 
 [[sec-contacts_company_lookup_call]]
 ==== Creating an Organization Lookup Call
@@ -54,7 +54,7 @@ The necessary infrastructure can be created using the Scout lookup wizard accord
 . Verify that the fields in the wizard match the values provided in <<img-sdk_new_lookupcall_organization>>
 . Click btn:[Finish] to start the Scout lookup call wizard.
 
-[[img-sdk_new_lookupcall_organization, Figure 000]]
+[[img-sdk_new_lookupcall_organization]]
 .Using the Scout lookup call wizard for creating class OrganizationLookupCall.
 image::{imgsdir}/sdk_new_lookupcall_organization.png[]
 
@@ -63,7 +63,7 @@ We will only need to provide some implementation for the lookup service.
 The service interface and the lookup call class can be used as provided by the Scout wizard.
 <<lst-contacts_lookup_call_organization>> shows the code generated for the lookup call
 
-[[lst-contacts_lookup_call_organization, Listing OrganizationLookupCall]]
+[[lst-contacts_lookup_call_organization]]
 [source,java]
 .The OrganizationLookupCall implemented by the Scout wizard.
 ----
@@ -73,7 +73,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.shared/src/main/java/org/
 We are now ready to implement method `getConfiguredSqlSelect` of the organization lookup service.
 Open class `OrganizationLookupService` in the Java editor and change the implementation according to <<lst-contacts_lookup_service_organization>>.
 
-[[lst-contacts_lookup_service_organization, Listing OrganizationLookupService]]
+[[lst-contacts_lookup_service_organization]]
 [source,java]
 .The OrganizationService methods to load, create and update organization data.
 ----
@@ -87,7 +87,7 @@ Lookup services can provide data for three different use cases.
 The most straightforward case is the mapping of a key to a specific lookup row.
 Next is the case where the lookup service returns a number of lookup rows that match a provided substring and finally the case where the lookup service simply returns all available rows.
 
-[[lst-contacts_lookup_service_sql, Listing SQL.ORGANIZATION_LOOKUP]]
+[[lst-contacts_lookup_service_sql]]
 [source,java]
 .The SQL statement to provide the data for the organization lookup service.
 ----
@@ -105,7 +105,7 @@ Now we can use the organization lookup call to transform the organization field 
 To do this we open class `PersonForm` in the Java editor and navigate to its inner class `WorkBox`.
 Then, update the implementation of the OrganizationField according to <<lst-contacts_organization_smart_field>>
 
-[[lst-contacts_organization_smart_field, Listing organization smart field]]
+[[lst-contacts_organization_smart_field]]
 [source,java]
 .The organization smart field in the "Work" tab backed by the OrganizationLookupCall.
 ----
@@ -122,7 +122,7 @@ As a next step we also modify the organization column of the person page.
 For this open class `PersonTablePage` in the Java editor and navigate to its inner class `Table`.
 Then, change the implementation of `OrganizationColumn` according to <<lst-contacts_organization_smart_column>>.
 
-[[lst-contacts_organization_smart_column, Listing organization smart column]]
+[[lst-contacts_organization_smart_column]]
 [source,java]
 .The organization smart column in the person page.
 ----
@@ -142,7 +142,7 @@ Scout node pages are useful when we want to display different entities that are 
 In the "Contacts" demo application this mechanism is used to link both persons and events to an organization as shown in <<img-contacts_demo_organization_nodepage>>.
 The coloring of the application has been modified to indicate that this is a screenshot of the "Contacts" demo application, not the tutorial application that we are building here.
 
-[[img-contacts_demo_organization_nodepage, Figure 000]]
+[[img-contacts_demo_organization_nodepage]]
 .A drill-down on an organization in the "Contacts" demo application provides access to related persons and events.
 image::{imgsdir}/contacts_demo_organization_nodepage.png[]
 
@@ -160,7 +160,7 @@ We start with adapting method `getPersonTableData` in the person service by addi
 Using this parameter we can then restrict the person search to the subset that is linked to the specified organization.
 For this change we first update the person service interface as shown in <<lst-contacts_ipersonservice>>.
 
-[[lst-contacts_ipersonservice, Listing IPersonService]]
+[[lst-contacts_ipersonservice]]
 [source,java]
 .The updated method `getPersonTableData` for the person service interface.
 ----
@@ -173,7 +173,7 @@ We now adapt the method implementation in the person service according to <<lst-
 
 // unfortunately, the listing in "contacts" demo app is not a good match for the tutorial
 // to keep things simpler we are not including the stuff related to the person search form
-[[lst-contacts_personservice_organization, Listing getPersonTableData]]
+[[lst-contacts_personservice_organization]]
 [source,java]
 .Method getPersonTableData to access the database and map the data into a page data object.
 ----
@@ -202,7 +202,7 @@ Having modified the person service we add a organization id property to the pers
 We can then populate this property when the person page is attached to the company node page.
 Finally we can use in method `execLoadData` according to <<lst-contacts_person_page_modification>>.
 
-[[lst-contacts_person_page_modification, Listing person page modification]]
+[[lst-contacts_person_page_modification]]
 [source,java]
 .Add the possibility to restrict the list of persons to those assigned to a specific organization.
 ----
@@ -231,13 +231,13 @@ To create the company node page follow the steps listed below.
 . Verify that the fields in the wizard match the values provided in <<img-sdk_new_organization_nodepage>>
 . Click btn:[Finish] to start the Scout page wizard
 
-[[img-sdk_new_organization_nodepage, Figure 000]]
+[[img-sdk_new_organization_nodepage]]
 .Creating the organization node page.
 image::{imgsdir}/sdk_new_organization_nodepage.png[]
 
 After the wizard has created the initial implementation of the node page open class `OrganizationNodePage` in the Java editor and adapt its implementation accordin to <<lst-contacts_organization_node_page>>.
 
-[[lst-contacts_organization_node_page, Listing OrganizationNodePage]]
+[[lst-contacts_organization_node_page]]
 [source,java]
 .The complete implementation of the class `OrganizationNodePage`.
 ----
@@ -252,7 +252,7 @@ We have now created a organization node page that contains a person page as its 
 The only missing step to create the discussed page hierarchy is the link between the organization page with the organization node page.
 Create this missing link by adding method `execCreateChildPage` to the organization page as shown in <<lst-contacts_organization_page_modification>>.
 
-[[lst-contacts_organization_page_modification, Listing modified OrganizationTablePage]]
+[[lst-contacts_organization_page_modification]]
 [source,java]
 .Add the organization node page as a child page to the organization page.
 ----
@@ -275,6 +275,6 @@ To link the two table pages we have also created and integrated a Scout node pag
 The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser.
 As shown in <<img-contacts_tutorial_result_step_7>> the organization specific person data is now presented in a hierarchical form in the navigation area of the application.
 
-[[img-contacts_tutorial_result_step_7, Figure 000]]
+[[img-contacts_tutorial_result_step_7]]
 .The linked person page only shows person related to the parent organization page.
 image::{imgsdir}/contacts_tutorial_result_step_7.png[]

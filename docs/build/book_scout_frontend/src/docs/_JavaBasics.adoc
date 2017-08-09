@@ -84,7 +84,7 @@ Get Start with Java Servlet Programming: http://www.ntu.edu.sg/home/ehchua/progr
 
 may be found online do servlet stuff with annotations (JEE6) not JEE5?
 
-[[lst-tinyservlet.index_html, Listing Index.html]]
+[[lst-tinyservlet.index_html]]
 [source,html]
 .The [java]+index.html+ start page for the tiny servlet application.
 ----
@@ -92,7 +92,7 @@ TODO include was {codedir}/tinyservlet/index.html[]
 ----
 
 
-[[lst-tinyservlet.web_xml, Listing web.xml]]
+[[lst-tinyservlet.web_xml]]
 [source,xml]
 .The [java]+web.xml+ file of the tiny servlet application.
 ----
@@ -100,7 +100,7 @@ TODO include was {codedir}/tinyservlet/WEB-INF/web.xml[]
 ----
 
 
-[[lst-tinyservlet.TinyServlet, Listing TinyServlet]]
+[[lst-tinyservlet.TinyServlet]]
 [source,java]
 .The complete [java]+TinyServlet+ source code.
 ----

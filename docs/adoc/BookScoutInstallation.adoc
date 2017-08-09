@@ -62,7 +62,7 @@ The Java API documentation package is available from the official download site.
 Java API documentation download: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 ], located further down under section _Additional Resources_.
 
-[[img-jdk_download_oracle, Figure 000]]
+[[img-jdk_download_oracle]]
 .Installer download for Oracle JDK 8.
 image::{imgsdir}/oracle_jdk_download.png[]
 
@@ -124,14 +124,14 @@ This section describes the installation of Scout into an existing Eclipse instal
 As the audience of this section is assumed to be familiar with Eclipse, we do not describe how you got your Eclipse installation in the first place.
 For the provided screenshots we start from the popular package _Eclipse IDE for Java EE Developers_.
 
-[[img-eclipse_install_new_software, Figure 000]]
+[[img-eclipse_install_new_software]]
 .Eclipse menu to install additional software
 image::{imgsdir}/eclipse_install_new_software.png[]
 
 To add Scout to your existing Eclipse installation, you need to start Eclipse.
 Then select the menu:Help[Install New Software...] menu as shown in <<img-eclipse_install_new_software>> to open the install dialog.
 
-[[img-eclipse_add_repository, Figure 000]]
+[[img-eclipse_add_repository]]
 .Add the current Scout repository
 image::{imgsdir}/eclipse_add_repository.png[]
 
@@ -141,7 +141,7 @@ As shown in <<img-eclipse_add_repository>>, you may use "`Scout Luna`" for the [
 For the [field]_Location_ field enter the Scout release repository as specified below.
 http://download.eclipse.org/scout/releases/4.0.
 
-[[img-eclipse_select_scout_features, Figure 000]]
+[[img-eclipse_select_scout_features]]
 .Select the Scout features to add to the Eclipse installation
 image::{imgsdir}/eclipse_select_scout_features.png[]
 
@@ -156,7 +156,7 @@ Clicking on the Scout perspective button should then result in a state very simi
 === Verifying the Installation
 
 After you can start your Eclipse Scout package you need to verify that Scout is working as intended.
-The simplest way to verify your Scout installation is to create a "`Hello World`" Scout project and run the corresponding Scout application as described in Chapter <<cha-helloworld>>.
+The simplest way to verify your Scout installation is to create a "`Hello World`" Scout project and run the corresponding Scout application as described in <<cha-helloworld>>.
 
 [appendix]
 [[apx-install_tomcat]]
@@ -181,7 +181,7 @@ Start your download from the official download site.footnote:[
 Tomcat 8 Downloads: http://tomcat.apache.org/download-80.cgi
 ].
 
-[[img-tomcat_install, Figure 000]]
+[[img-tomcat_install]]
 .A successful Tomcat 7 installation.
 image::{imgsdir}/tomcat_install.png[]
 
@@ -220,7 +220,7 @@ for downloading and installing Tomcat provided by Lars Vogel.
 Tomcat's installation directory follows the same organisation on all platforms.
 Here, we will only introduce the most important aspects of the Tomcat installation for the purpose of this book.
 
-[[img-tomcat_install_dir, Figure 000]]
+[[img-tomcat_install_dir]]
 .The organisation of a Tomcat installation including specific files of interest. As an example, the "`Hello World`" server application is contained in subdirectory `webapps`.
 image::{imgsdir}/tomcat_install_dir.png[]
 
@@ -258,7 +258,7 @@ To access this application you can switch to the "`Manager App`" with a click on
 The button can be found on the right hand side of <<img-tomcat_install>>.
 Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats's [java]+manager-gui+ role.
 
-[[lst-tomcat.users, Tomcat Users]]
+[[lst-tomcat.users]]
 [source,xml]
 .Tomcat Users configuration file.
 ----
@@ -281,5 +281,5 @@ Alternatively, you also can add the necessary role to an existing user.
 Just append a comma to the existing right(s) followed by the string [java]+manager-gui+.
 Note that you will need to restart your Tomcat application after adapting the content of file [filename]+tomcat-users.xml+.
 
-With working credentials you can now start the "`Manager App`" as described the "`Hello World`" tutorial in Section <<sec-helloworld_deploy>>.
+With working credentials you can now start the "`Manager App`" as described the "`Hello World`" tutorial in <<sec-helloworld_deploy>>.
 

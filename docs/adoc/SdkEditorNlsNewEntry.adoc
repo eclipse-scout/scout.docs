@@ -15,7 +15,7 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-[[img-new_text_entry_wizard, new text entry wizard]]
+[[img-new_text_entry_wizard]]
 .Adding a new text with the New Entry wizard.
 image::{imgsdir}/sdk_wizard_nls_entry.png[]
 

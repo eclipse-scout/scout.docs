@@ -25,7 +25,7 @@ The creation up of the initial project setup described in this section consists 
 * <<sec-contacts_change_desktop>>
 * <<sec-contacts_default_theme>>
 
-This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in section <<sec-contacts_summary>>.
+This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in <<sec-contacts_summary>>.
 
 [[sec-contacts_initial_codebase]]
 ==== Creating the initial Codebase
@@ -38,14 +38,14 @@ For the wizard fields you may use the values below and as shown in <<img-sdk_new
 * [field]_Display Name_: "Contacts Application"
 
 
-[[img-sdk_new_project_tutorial, Figure 000]]
+[[img-sdk_new_project_tutorial]]
 .The creation of the initial "Contacts" application.
 image::{imgsdir}/sdk_new_project_tutorial.png[]
 
 To create this initial application click on btn:[Finish].
 The project wizard then creates a number of Maven modules as shown in <<img-contacts_package_explorer>>.
 
-[[img-contacts_package_explorer, Figure 000]]
+[[img-contacts_package_explorer]]
 .The package explorer with the initial Maven modules created for the "Contacts" application.
 image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
@@ -93,7 +93,7 @@ For this, we perform the following modifications to class `WorkOutline`.
 To quickly find class `WorkOutline` we first open the [wizard]_Open Type_ dialog from the Eclipse IDE by hitting kbd:[Ctrl+Shift+T] and enter "workoutline" into the search field as shown in <<img-eclipse_open_type>>.
 In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
 
-[[img-eclipse_open_type, Figure 000]]
+[[img-eclipse_open_type]]
 .Use the Open Type dialog to quickly find java types in the Eclipse IDE.
 image::{imgsdir}/eclipse_open_type.png[]
 
@@ -101,7 +101,7 @@ We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
 This opens the package rename dialog as shown in <<img-sdk_rename_package>> where re replace "work" by "contacts" in the [element]_New name_ field.
 
-[[img-sdk_rename_package, Figure 000]]
+[[img-sdk_rename_package]]
 .Use the Eclipse Rename Package dialog to rename a Java package.
 image::{imgsdir}/sdk_rename_package.png[]
 
@@ -114,19 +114,19 @@ To get rid of the compile error in method `execCreateChildPages` we simply delet
 
 Next, we change the outline title in method `getConfiguredTitle` by replacing the string "Work" with "Contacts", setting the cursor at the end of the word "Contacts" and hitting kbd:[Ctrl+Space] to open the Scout content assist as shown in <<img-sdk_new_text_entry_contact>>.
 
-[[img-sdk_new_text_entry_contact, Figure 000]]
+[[img-sdk_new_text_entry_contact]]
 .Use the Scout content assist to add new translations.
 image::{imgsdir}/sdk_new_text_entry_contact.png[]
 
 To enter a new translated text we double click on the proposal [element]_New text..._ to open the Scout new entry wizard as shown in <<img-sdk_new_text_entry_contact_wizard>>.
 
-[[img-sdk_new_text_entry_contact_wizard, Figure 000]]
+[[img-sdk_new_text_entry_contact_wizard]]
 .Use the Scout new entry wizard to add translated texts to the application.
 image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 
 As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Category` and end with the code shown in <<lst-contacts_outline>>.
 
-[[lst-contacts_outline, Listing contacts outline]]
+[[lst-contacts_outline]]
 [source,java]
 .Initial implementation of class ContactOutline.
 ----
@@ -147,7 +147,7 @@ The top level menus are then adapted to hold the menus "Quick Access", "Options"
 Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class.
 In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values in as shown in <<lst-contacts_getConfiguredOutlines>>.
 
-[[lst-contacts_getConfiguredOutlines, Listing getConfiguredOutlines]]
+[[lst-contacts_getConfiguredOutlines]]
 [source,java]
 .Method getConfiguredOutlines defines the outlines associated with the desktop of the application.
 ----
@@ -164,7 +164,7 @@ Then, perform the following changes in class `Desktop`
 
 At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.
 
-[[lst-contacts_desktop, Listing Desktop]]
+[[lst-contacts_desktop]]
 [source,java]
 .Structure of class Desktop with outline buttons and top level menus.
 ----
@@ -188,7 +188,7 @@ To disable the theming property follow the steps described below.
 . Comment out property `scout.ui.theme` as shown in <<lst-contacts_theming_property>>
 . Save the modified properties file
 
-[[lst-contacts_theming_property, Listing theming property]]
+[[lst-contacts_theming_property]]
 [source]
 .Commenting out the application specific theming re-activates the Scout default theme.
 ----
@@ -215,7 +215,7 @@ The user interface of the application will now look as shown in <<img-contacts_t
 * Start the frontend application
 * Open address http://localhost:8082/[http://localhost:8082/] in your browser
 
-[[img-contacts_tutorial_result_step_1, Figure 000]]
+[[img-contacts_tutorial_result_step_1]]
 .The "Contacts" application at the end of tutorial step 1.
 image::{imgsdir}/contacts_tutorial_result_step_1.png[]
 

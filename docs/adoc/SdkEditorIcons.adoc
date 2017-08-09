@@ -23,7 +23,7 @@ Expand the [node]_shared_ node node of the Eclipse Scout project in the {scoutEx
 
 ===== Description of the Icons Editor
 
-[[img-sdk_editor_icons, Figure 000]]
+[[img-sdk_editor_icons]]
 .Screenshot of the Icons Editor
 image::{imgsdir}/sdk_editor_icons.png[]
 

@@ -28,7 +28,7 @@ With a single code base Scout applications run on desktop, tablet and mobile dev
 The framework automatically adapts the rendering of the application to the form factor of the used device.
 An example of a commercial application built with Scout is provided in <<img-bsi_crm_indigo>>.
 
-[[img-bsi_crm_indigo, Figure 000]]
+[[img-bsi_crm_indigo]]
 .A commercial enterprise application built with Eclipse Scout.
 image::{imgsdir}/bsi_crm_indigo.png[]
 

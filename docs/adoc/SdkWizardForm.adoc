@@ -18,7 +18,7 @@ ifndef::mdledir[:mdledir: .]
 The _New Form_ wizard is be used to create a new form including a form data, permissions and and related service.
 To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N].
 
-[[img-sdk_wizard_form, The new Form Wizard]]
+[[img-sdk_wizard_form]]
 .The new Form Wizard
 image::{imgsdir}/sdk_new_form.png[]
 

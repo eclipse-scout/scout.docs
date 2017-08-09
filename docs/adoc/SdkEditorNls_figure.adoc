@@ -15,6 +15,6 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-[[img-nls_editor, Figure 000]]
+[[img-nls_editor]]
 .The NLS editor provided by the Scout SDK. This editor is opened via the [link]_Open NLS Editor ..._ link in the Scout Object Properties of the [node]_DefaultTextProviderService_ node.
 image::{imgsdir}/sdk_editor_nls.png[]

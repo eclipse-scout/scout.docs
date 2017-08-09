@@ -54,7 +54,7 @@ With the previous Scout release 3 UIs were available: SWT and Swing for rich cli
 The fact that every change in the Scout model resulted either in a huge effort to adjust every UI or in a divergence of the UIs if the effort could not be taken, led us to a radical step:
 We deleted these 3 UIs and replaced them with a complete new one: The HTML UI.
 
-[[img-multi-device, figure]]
+[[img-multi-device]]
 .The new UI for Scout
 image::{imgsdir}/multi_device.png[]
 
@@ -77,7 +77,7 @@ With the Neon release, Scout changes from an Eclipse/OSGi based runtime to a pur
 
 The project structure is now typically converted to the standard maven link:{migrationguide}#project-structure[project structure].
 
-[[img-maven, figure]]
+[[img-maven]]
 .Maven
 image::{imgsdir}/maven.png[]
 
@@ -102,7 +102,7 @@ It is now finally possible to use the full power of CSS to style your applicatio
 With the new theming support you can create a custom theme for your application instead of taking the default one provided by Scout.
 Or you could even define multiple themes and offer them to your users.
 
-[[img-theming, figure]]
+[[img-theming]]
 .Theming
 image::{imgsdir}/theming.png[]
 
@@ -129,7 +129,7 @@ Use the class `org.eclipse.scout.rt.platform.html.HTML` to build HTML content in
 Keyboard shortcuts are an important tool for power users. To make them more accessible it is now possible to show the currently available shortcuts just by pressing F1.
 Currently available means that the focused element as well as the enabled state is respected so that only those shortcuts which really can be executed are shown.
 
-[[img-keyboard_shortcuts, figure]]
+[[img-keyboard_shortcuts]]
 .Keyboard Shortcut Visualization
 image::{imgsdir}/keyboard_shortcuts.png[]
 
@@ -144,7 +144,7 @@ Anyway, bitmap icons are still supported.
 == Login Page
 Compared to the previous web ui, adding a form based login page is now a lot simpler. Scout provides a login.html which can either used as it is or adjusted to your needs.
 
-[[img-login_page, figure]]
+[[img-login_page]]
 .Login Page
 image::{imgsdir}/login.png[]
 
@@ -167,7 +167,7 @@ The new desktop consists of three areas: The navigation, the header and the benc
 
 The navigation shows the outline, the header may contain tools and the bench shows the detail content of the outline (table/form) or forms opened as views.
 
-[[img-desktop, figure]]
+[[img-desktop]]
 .Desktop Layout
 image::{imgsdir}/desktop.png[]
 
@@ -186,7 +186,7 @@ To adjust the desktop layout you can use these new properties:
 ==== Notifications
 The desktop may now display toast notifications on the top right corner.
 
-[[img-desktop_notification, figure]]
+[[img-desktop_notification]]
 .Desktop Notification
 image::{imgsdir}/desktop_notification.png[]
 
@@ -213,14 +213,14 @@ The new navigate buttons may be used to navigate through the outline.
 
 If you don't need them you can remove them using the property `navigateButtonsVisible`.
 
-[[img-outline-navigate-buttons, figure]]
+[[img-outline-navigate-buttons]]
 .Navigate Buttons
 image::{imgsdir}/outline_navigate_buttons.png[]
 
 ==== Bread Crumb Style
 The outline (and actually every tree) can now be displayed as a bread crumb tree which arranges the nodes in a different way than a classic tree.
 
-[[img-outline-outline-breadcrumb, figure]]
+[[img-outline-outline-breadcrumb]]
 .Breadcrumb Navigation
 image::{imgsdir}/outline_breadcrumb.png[]
 
@@ -233,14 +233,14 @@ image::{imgsdir}/outline_breadcrumb.png[]
 It is now possible to stack multiple forms and switch between them using tabs. This already worked with SWT and Rap but not with the Swing UI.
 Just set the property `displayHint` to `DISPLAY_HINT_VIEW` and use the same `displayViewId`.
 
-[[img-form-tabs, figure]]
+[[img-form-tabs]]
 .Open multiple forms simultaneously
 image::{imgsdir}/form_tabs.png[]
 
 ==== Form Menu
 It is now possible to embed a form in a menu using `IFormMenu`.
 
-[[img-outline-form-menu, figure]]
+[[img-outline-form-menu]]
 .A form embedded in a menu
 image::{imgsdir}/form_menu.png[]
 
@@ -254,7 +254,7 @@ On the right side of every form field there is space reserved for the status (in
 
 The visibility of that space is controllable using the property `statusVisible`. Setting it to false will make the field using the whole space, but if there is a status, tooltip or menu it will be shown anyway.
 
-[[img-formfield-error, figure]]
+[[img-formfield-error]]
 .Display of an input error
 image::{imgsdir}/formfield_error.png[]
 
@@ -281,7 +281,7 @@ API Notes:
 ==== Grouping and Aggregation Functionality
 The table now provides a possibility to group the data by multiple columns. Additionally, there are aggregation functions available on number columns like _SUM_ or _AVG_ which may be used in combination with the grouping functionality and the `AggregationTableControl`.
 
-[[img-table-grouping, figure]]
+[[img-table-grouping]]
 .Grouped by city
 image::{imgsdir}/table_grouping.png[]
 
@@ -293,7 +293,7 @@ API Notes:
 ==== Background Effect
 Number columns may now have a background effect to visualize numeric data.
 
-[[img-table-coloring, figure]]
+[[img-table-coloring]]
 .Background effect used to visualize the number of events
 image::{imgsdir}/table_coloring.png[]
 
@@ -304,7 +304,7 @@ API Notes:
 ==== Table Settings
 The user may now have multiple table settings. These settings may be managed using the revised `OrganizeColumnsForm`.
 
-[[img-table-settings, figure]]
+[[img-table-settings]]
 .Table settings
 image::{imgsdir}/table_settings.png[]
 
@@ -322,7 +322,7 @@ API Notes:
 ==== New Table Filters
 In addition to the column based filters there is now a single text filter available to filter the whole table data.
 
-[[img-table-filter, figure]]
+[[img-table-filter]]
 .Table text filter
 image::{imgsdir}/table_filter.png[]
 
@@ -338,7 +338,7 @@ See also the link:{migrationguide}#changed-behavior-for-tables-with-autoresizeco
 
 Furthermore, the table header menu is now responsive as well. If there is not enough space the menu gets smaller and vertically scrollable.
 
-[[img-table-header-menu, figure]]
+[[img-table-header-menu]]
 .Responsive table header menu
 image::{imgsdir}/table_header_menu.png[]
 
@@ -355,7 +355,7 @@ If this new property is set to true, every check of a node automatically checks 
 ==== Lazy Expansion
 Nodes may now be expanded in a lazy way. This means only those child nodes are visible which are expanded as well and the parent gets a '+' symbol. If the user clicks on this symbol all child nodes gets visible. The model can define whether child pages of a page should be added immediately to the outline tree or lazily.
 
-[[img-tree-lazy, figure]]
+[[img-tree-lazy]]
 .Lazy expansion of organizations
 image::{imgsdir}/tree_lazy.png[]
 
@@ -386,7 +386,7 @@ Nevertheless you still have the possibility to provide a custom table or tree us
 ==== Date Prediction
 New new date field tries to predict the date the user is about to enter. The predicted date is shown with a brighter color and may be accepted using the _return_ or _tab_ key.
 
-[[img-datefield-prediction, figure]]
+[[img-datefield-prediction]]
 .User entered 01, the predicted date is 01/07/2016
 image::{imgsdir}/datefield_prediction.png[]
 
@@ -414,14 +414,14 @@ Split boxes now support absolute splitter positions. The old relative position i
 === Calendar
 The calendar got a complete new modern look and new functionality like the year panel.
 
-[[img-calendar, figure]]
+[[img-calendar]]
 .Calendar
 image::{imgsdir}/calendar.png[]
 
 === Planner
 The planner used to be a combination of a table and an activity map. This has been reworked to make it simpler to use.
 
-[[img-planner, figure]]
+[[img-planner]]
 .Planner
 image::{imgsdir}/planner.png[]
 

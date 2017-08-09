@@ -18,7 +18,7 @@ ifndef::mdledir[:mdledir: .]
 Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 8.
 To download the Eclipse Scout package visit the official Eclipse download page as shown in <<img-scout_download>>.
 
-[[img-scout_download, Figure 000]]
+[[img-scout_download]]
 .The Eclipse download page. The platform filter is set to Windows and the available Packages are filtered for Scout.
 image::{imgsdir}/scout_download.png[]
 
@@ -39,7 +39,7 @@ Otherwise, you have a 32 bit JDK installed.
 Now you can select the correct Scout package from the Eclipse download site.
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 
-[[img-scout_download_mirror, Figure 000]]
+[[img-scout_download_mirror]]
 .Downloading the Scout package from a mirror.
 image::{imgsdir}/scout_download_mirror.png[]
 
@@ -47,7 +47,7 @@ As the Scout package is a simple ZIP (or tar.gz) file, you may unpack its conten
 Inside the eclipse sub-folder, you will then find the Eclipse executable file, such as the `eclipse.exe` file on a Windows plattform.
 Starting the Eclipse executable brings up the workspace launcher as shown in <<img-scout_start>>.
 
-[[img-scout_start, Figure 000]]
+[[img-scout_start]]
 .Starting the Eclipse Scout package and selecting an empty workspace.
 image::{imgsdir}/scout_startup_select_workspace.png[]
 
@@ -55,14 +55,14 @@ Into the [field]_Workspace_ field you enter an empty target directory for your f
 After clicking the btn:[Ok] button, the Eclipse IDE creates any directories that do not yet exist and opens the specified workspace.
 When opening a new workspace for the first time, Eclipse then displays the welcome screen shown in <<img-scout_welcome>>.
 
-[[img-scout_welcome, Figure 000]]
+[[img-scout_welcome]]
 .Eclipse Scout welcome screen.
 image::{imgsdir}/scout_startup_welcome.png[]
 
 To close the welcome page and open the Scout perspective in the Eclipse IDE click on the [icon]_Workbench_ icon.
 As a result the empty Java perspective is displayed according to <<img-scout_perspective>>.
 
-[[img-scout_perspective, Figure 000]]
+[[img-scout_perspective]]
 .Eclipse Scout started in the Scout SDK perspective.
 image::{imgsdir}/scout_startup_scout_explorer.png[]
 
