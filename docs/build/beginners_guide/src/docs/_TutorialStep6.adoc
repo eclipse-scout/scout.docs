@@ -17,7 +17,7 @@ This section describes the implementation of the organization form.
 For the implementation of the organization form we can apply many of the concepts we have learned in the previous sections.
 As a result, the descriptions of this section can be kept on a much higher level.
 
-[[img-contacts_organization_form, Figure 000]]
+[[img-contacts_organization_form]]
 .The sketch of the organization form layout.
 image::{imgsdir}/contacts_organization_form.png[]
 
@@ -40,7 +40,7 @@ We can now implement the company form according to the following steps.
 
 After creating the initial form class using Scout's new form wizard the form layout can be implemented according to <<lst-contacts_organization>>.
 
-[[lst-contacts_organization, Listing OrganizationForm]]
+[[lst-contacts_organization]]
 [source,java]
 .The layout implementation of the organization form
 ----
@@ -60,7 +60,7 @@ Following the pattern for the person form we define the context menus "Edit" and
 The implementation of the organization form is completed by providing the logic to interact with the database in the organization service according to <<lst-contacts_form_service_organization>>.
 The technical setup exactly follows the implementation of the person service.
 
-[[lst-contacts_form_service_organization, Listing OrganizationService methods]]
+[[lst-contacts_form_service_organization]]
 [source,java]
 .The OrganizationService methods to load, create and update organization data.
 ----
@@ -81,6 +81,6 @@ The focus of this part of the tutorial was on re-using previous work and applyin
 The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser.
 As shown in <<img-contacts_tutorial_result_step_6>> company data can now be viewed and entered in the user interface.
 
-[[img-contacts_tutorial_result_step_6, Figure 000]]
+[[img-contacts_tutorial_result_step_6]]
 .The "Contacts" application with the newly created organization form.
 image::{imgsdir}/contacts_tutorial_result_step_6.png[]

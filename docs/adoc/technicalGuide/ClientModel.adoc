@@ -20,7 +20,7 @@ If multiple forms are assigned to the same view stack the views will be displaye
 
 NOTE: Tabs are only visible if the form does have a title, subtitle or an image.
 
-[[img-benchLayout-overview, Desktop Bench overview]]
+[[img-benchLayout-overview]]
 .Desktop Bench overview
 image::{imgsdir}/BenchLayout_overview.png[]
 

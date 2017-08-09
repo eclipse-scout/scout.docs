@@ -62,7 +62,7 @@ This allows finding classes available on the classpath by certain criteria:
 
 This class inventory can be accessed as described in listing <<lst-ClassInventory>>.
 
-[[lst-ClassInventory, class inventory]]
+[[lst-ClassInventory]]
 [source,java,indent=0]
 .Access the Scout class inventory.
 ----
@@ -95,9 +95,9 @@ The next sections describe how beans are registered, the different meta data of 
 
 ==== Bean registration
 
-Usually beans are registered during application startup. The application startup can be intercepted using platform listeners as described in section <<Platform Listener>>.
+Usually beans are registered during application startup. The application startup can be intercepted using platform listeners as described in <<Platform Listener>>.
 
-[[lst-RegisterBeansListener, register beans]]
+[[lst-RegisterBeansListener]]
 [source,java,indent=0]
 .A listener that registers a bean (direct class or with meta data).
 ----
@@ -106,7 +106,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 There is also a predefined bean registration built into the Scout runtime. This automatically registers all classes having an `org.eclipse.scout.rt.platform.@Bean` annotation. Therefore it is usually sufficient to only annotate a class with `@Bean` to have it available in the bean manager as shown in listing <<lst-NormalBeanClass>>.
 
-[[lst-NormalBeanClass, bean class]]
+[[lst-NormalBeanClass]]
 [source,java,indent=0]
 .An normal bean
 ----
@@ -138,7 +138,7 @@ As like all bean meta data this characteristic can be provided in two different 
 . With a Java annotation on the bean class as shown in the listing <<lst-BeanClass>>.
 . With bean meta data as shown in listing <<lst-RegisterBeansListener>>.
 
-[[lst-BeanClass, application scoped bean class]]
+[[lst-BeanClass]]
 [source,java,indent=0]
 .An application scoped bean using annotations
 ----
@@ -155,7 +155,7 @@ It is not only possible to influence the number of instances to be created (see 
 
 ===== Eager Beans
 
-By default beans are created on each request. An exception are the beans marked to be application scoped (as shown in section <<Bean Scopes>>). Those beans are only created on first request (lazy). This means if a bean is never requested while the application is running, there will never be an instance of this class.
+By default beans are created on each request. An exception are the beans marked to be application scoped (as shown in <<Bean Scopes>>). Those beans are only created on first request (lazy). This means if a bean is never requested while the application is running, there will never be an instance of this class.
 
 But sometimes it is necessary to create beans already at the application startup (eager). This can be done by marking the bean as `org.eclipse.scout.rt.platform.@CreateImmediately`. All classes holding this annotation must also be marked as `@ApplicationScoped`! These beans will then be created as part of the application startup.
 
@@ -169,7 +169,7 @@ TIP: When querying the bean manager for an application scoped bean, it will alwa
 
 To retrieve a bean the class `org.eclipse.scout.rt.platform.BEANS` should be used. This class provides (amongst others) the following methods:
 
-[[lst-BeanRetrieval, bean retrieval]]
+[[lst-BeanRetrieval]]
 [source,java,indent=0]
 .How to get beans.
 ----
@@ -182,7 +182,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 There are now two more annotations that have an effect on which beans are returned if multiple beans match a certain class. Consider the following example bean hierarchy:
 
-[[img-beanHierarchy, bean hierarchy]]
+[[img-beanHierarchy]]
 .A sample bean hierarchy.
 image::{imgsdir}/beanHierarchy.png[]
 
@@ -246,7 +246,7 @@ TIP: It is best practice to mark all annotations that are interpreted in the bea
 
 The sample in listing <<lst-BeanDecorationFactory>> wraps each call to the server with a profiler decorator that measures how long a server call takes.
 
-[[lst-BeanDecorationFactory, bean decoration]]
+[[lst-BeanDecorationFactory]]
 [source,java,indent=0]
 .Bean decoration example.
 ----
@@ -273,7 +273,7 @@ https://en.wikipedia.org/wiki/.properties
 
 For each property a class cares about default values and value validation. These classes share the `org.eclipse.scout.rt.platform.config.IConfigProperty` interface and are normal application scoped beans providing access to a specific configuration value as shown in listing <<lst-ConfigProperties>>. If the property class is an inner class it has to be defined as a static class with the `static` modifier.
 
-[[lst-ConfigProperties, config properties]]
+[[lst-ConfigProperties]]
 [source,java,indent=0]
 .A configuration property of type Long.
 ----
@@ -284,7 +284,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/sco
 
 To read the configured value you can use the `CONFIG` class as demonstrated in <<lst-getPropertyValue>>.
 
-[[lst-getPropertyValue, Listing]]
+[[lst-getPropertyValue]]
 [source,java,indent=0]
 .Read the configured value in your code.
 ----
@@ -316,7 +316,7 @@ Because the property classes are managed by the bean manager, you can use all th
 The value is no longer fetched via the config mechanism, because the `getValue(String)` method is overriden.
 In this case a fixed value is returned.
 
-[[lst-PropertyConstant, Listing]]
+[[lst-PropertyConstant]]
 [source,java,indent=0]
 .Property class providing a constant value.
 ----
@@ -326,14 +326,14 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/sco
 The next example presented in <<lst-PropertyRedirection>> uses the same idea.
 In this case, the `getKey()` method is overriden to read the value from an other key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
 
-[[lst-PropertyRedirection, Listing]]
+[[lst-PropertyRedirection]]
 [source,java,indent=0]
 .Property class reading the value from an other key.
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ApplicationNamePropertyRedirection.java[tags=code]
 ----
 
-[[lst-PropertyRedirectionConfig, Listing]]
+[[lst-PropertyRedirectionConfig]]
 [source,properties,indent=0]
 .Read the configured value in your code.
 ----

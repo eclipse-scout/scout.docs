@@ -54,7 +54,7 @@ The remaining sections focus on the individual steps to implement the "`Contacts
 The "`Contacts`" application is a client server application to manage personal contacts, organizations and events.
 The persistence of entered data is achieved via simple JDBC access to a Derby database.
 
-[[img-app_contacts_personpage, Figure 000]]
+[[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.
 image::{imgsdir}/app_contacts_personpage.png[]
 
@@ -62,7 +62,7 @@ Figure <<img-app_contacts_personpage>> shows the "`Contacts`" application after 
 Clicking on a row in the person page activates the [menu]_Edit_ menu which is also available as a context menu on the table row.
 The selected person can then be opened in a form to view and edit its data as shown in <<img-app_contacts_personform>>.
 
-[[img-app_contacts_personform, Figure 000]]
+[[img-app_contacts_personform]]
 .The "`Contacts`" application with a person opened in a form.
 image::{imgsdir}/app_contacts_personform.png[]
 
@@ -124,45 +124,45 @@ With this infrastructure in place we will be ready to read existing data from a 
 For this we first have to add the <<sec-tutorial.jdbc.maven>>.
 Then we can add the <<sec-tutorial.jdbc.components>> to access a Derby database in the demo application itself.
 
-[[sec-tutorial.jdbc.maven, necessary Maven depencencies]]
+[[sec-tutorial.jdbc.maven]]
 === The Maven Dependencies
 
-[[lst-tutorial.derby.version, Derby version property]]
+[[lst-tutorial.derby.version]]
 [source,xml]
 .Adding the Derby version property to the parent [file]_pom.xml_ file.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyVersion]
 ----
 
-[[lst-tutorial.derby.dependency, Derby dependency]]
+[[lst-tutorial.derby.dependency]]
 [source,xml]
 .Adding the Derby dependency to the parent [file]_pom.xml_ file.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts/pom.xml[tags=DerbyDependency]
 ----
 
-[[lst-tutorial.server.derby.dependency, JDBC and Derby dependencies]]
+[[lst-tutorial.server.derby.dependency]]
 [source,xml]
 .Adding the Scout JDBC and the Apache Derby dependency to the server [file]_pom.xml_ file.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/pom.xml[tags=Derby]
 ----
 
-[[sec-tutorial.jdbc.components, Scout database components]]
+[[sec-tutorial.jdbc.components]]
 === The Scout Components
 
 * add sever package org.eclipse.scout.contacts.server.sql
 
 ==== Scout Application Properties
 
-[[lst-tutorial.server.derby.properties, Scout application properties]]
+[[lst-tutorial.server.derby.properties]]
 [source,java]
 .Scout application properties to configure the database handling.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/ConfigProperties.java[tags=databaseProperties]
 ----
 
-[[lst-tutorial.server.app.properties, Scout config.properties file entries]]
+[[lst-tutorial.server.app.properties]]
 [source]
 .Entries in the Scout config.properties file.
 ----
@@ -171,14 +171,14 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server.app.dev/src/main/r
 
 ==== Scout SQL Service
 
-[[lst-tutorial.server.derby.service, Scout Derby service]]
+[[lst-tutorial.server.derby.service]]
 [source,java]
 .The Scout Derby SQL service.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/sql/DerbySqlService.java[tags=derbyService]
 ----
 
-[[lst-tutorial.server.derby.createDb, SQL statments to create the initial database scheme]]
+[[lst-tutorial.server.derby.createDb]]
 [source,java]
 .SQL statments to create the initial database scheme.
 ----
@@ -189,7 +189,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 
 * add SuperUserRunContextProvider
 
-[[lst-tutorial.server.derby.setup, setup service to create the initial database]]
+[[lst-tutorial.server.derby.setup]]
 [source,java]
 .The setup service to create the initial "Contacts" database.
 ----
@@ -198,7 +198,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 
 ==== Hooking into the Server Startup Sequence
 
-[[lst-tutorial.server.derby.listener, platform listener]]
+[[lst-tutorial.server.derby.listener]]
 [source,java]
 .The PlatformListener that creates Derby in-memory database at application startup.
 ----

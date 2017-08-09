@@ -28,7 +28,7 @@ The sections below highlight the following areas.
 * theme switching form for top level options menu <<img-contacts_theming_styling>>
 * project specific themes "rayo" and "dark"
 
-[[img-contacts_theming_styling, Figure 000]]
+[[img-contacts_theming_styling]]
 .Scout application can change between different themes at runtime.
 image::{imgsdir}/contacts_theming_styling.png[]
 

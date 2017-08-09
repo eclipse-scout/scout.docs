@@ -16,22 +16,22 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface.
 This tutorial step also provides an introduction into the design and implementation complex form layouts with the Scout framework.
 
-Before we start with the actual implementation of the form section <<sec-contacts_form_design>> provides an introduction to the layouting concepts of the Scout framework.
+Before we start with the actual implementation of the form <<sec-contacts_form_design>> provides an introduction to the layouting concepts of the Scout framework.
 Based on this information we design a hierarchical form layout for the person form and can then dive into the creation of the person form.
 
-* <<sec-contacts_form_implement>>
-* <<sec-contacts_form_code>>
-* <<sec-contacts_form_add_fields>>
-* <<sec-contacts_form_integrate_service>>
+* Implementing the Form (<<sec-contacts_form_implement>>)
+* Adding a Gender Code Type (<<sec-contacts_form_code>>)
+* Adding Form Fields (<<sec-contacts_form_add_fields>>)
+* Person Form Handler and Person Service (<<sec-contacts_form_integrate_service>>)
 
-The tutorial step concludes with a summary in section <<sec-contacts_forms_summary>>.
+The tutorial step concludes with a summary in <<sec-contacts_forms_summary>>.
 
 [[sec-contacts_form_design]]
 ==== Designing the Person Form
 
 We start with the sketch of the form layout as shown in <<img-contacts_tutorial_person_form_1>>.
 
-[[img-contacts_tutorial_person_form_1, Figure 000]]
+[[img-contacts_tutorial_person_form_1]]
 .A sketch of the target layout for the person form.
 image::{imgsdir}/contacts_person_form.png[]
 
@@ -43,7 +43,7 @@ A "Contact Info" tab provides contact details of the person and adding notes for
 <<img-contacts_person_form_grid>> below shows how the sketched form can fit with the logical grid layout of the Scout framework.
 Scout containers have two columns (indicated in red) per default and as many rows (indicated in yellow) as needed.
 
-[[img-contacts_person_form_grid, Figure 000]]
+[[img-contacts_person_form_grid]]
 .Logical columns and rows of the Scout form layout. Scout containers have two columns per default.
 image::{imgsdir}/contacts_person_form_grid.png[]
 
@@ -56,7 +56,7 @@ This field is configured to occupy 5 logical rows.
 With Scout's container widgets such as group boxes, tab boxes and sequence boxes complex layouts can be achieved.
 Containers provide a lot of flexibility as these widgets can be nested hierarchically as shown in <<img-contacts_person_form_groups>>
 
-[[img-contacts_person_form_groups, Figure 000]]
+[[img-contacts_person_form_groups]]
 .The hierarchical organization of the form including Scout group boxes, tab boxes and a sequence box.
 image::{imgsdir}/contacts_person_form_groups.png[]
 
@@ -87,7 +87,7 @@ Start the form creation with the Scout new form wizard following the steps liste
 . Enter "Person" into the [field]_Name_ and verify that the field contents match <<img-contacts_create_new_person_form>>
 . Click btn:[Finish] to start the creation of the form and its related components
 
-[[img-contacts_create_new_person_form, Figure 000]]
+[[img-contacts_create_new_person_form]]
 .Use the [wizard]_New Scout Form_ to create the person form.
 image::{imgsdir}/contacts_create_new_person_form.png[]
 
@@ -98,7 +98,7 @@ Now open the newly created class `PersonForm` in the Java editor and perform the
 * Add method `getConfiguredDisplayHint`
 * Verify the translated text entry in method `getConfiguredTitle`
 
-[[lst-contacts_form_init, Listing PersonForm initial code]]
+[[lst-contacts_form_init]]
 [source,java]
 .Add getConfiguredDisplayHint and the methods related to the person's primary key.
 ----
@@ -117,7 +117,7 @@ Delete method `getConfiguredLabel`, as we are only using this group box to organ
 After the general box add a tab box container class  by choosing the [element]_Tab Box_ proposal in the Scout content assist.
 Inside of class `DetailsBox` create the individual tab containers "Contact Info", "Work" and "Notes" as inner classes of the details box according to <<lst-contacts_form_layout>>.
 
-[[lst-contacts_form_layout, Listing PersonForm layout]]
+[[lst-contacts_form_layout]]
 [source,java]
 .The layouting structure of the person form using Scout container widgets.
 ----
@@ -135,7 +135,7 @@ For the "Contacts" application we will follow this pattern too.
 
 Open class `PersonTablePage` in the Java editor and create the context menus "New" and "Edit" in the inner class `Table` according to <<lst-contacts_form_context_menu>>.
 
-[[lst-contacts_form_context_menu, Listing page context menus]]
+[[lst-contacts_form_context_menu]]
 [source,java]
 .The page context menus to open the person form.
 ----
@@ -151,7 +151,7 @@ To do this open class `Desktop` in the Java editor and navigate to the inner cla
 We can then add a `NewPersonMenu` using the Scout content assist and selecting the [element]_Menu_ proposal entry.
 The final implementation for the "Create new person" menu is provided in <<lst-contacts_form_quick_menu>>.
 
-[[lst-contacts_form_quick_menu, Listing top level person menu]]
+[[lst-contacts_form_quick_menu]]
 [source,java]
 .The "Create new person" menu on the desktop.
 ----
@@ -162,7 +162,7 @@ We have now created the initial implementation of the person form including cont
 At this point it is already possible to verify that the person form can be opened on the user interface via the context menus.
 A screenshot of the current state is shown in <<img-contacts_tutorial_result_step_4_intermediate>>.
 
-[[img-contacts_tutorial_result_step_4_intermediate, Figure 000]]
+[[img-contacts_tutorial_result_step_4_intermediate]]
 .The initial person form and the top level menu "Create new person".
 image::{imgsdir}/contacts_tutorial_result_step_4_intermediate.png[]
 
@@ -189,7 +189,7 @@ Follow the steps described below to create the gender code type.
 . Select the [element]_Scout CodeType_ proposal and click the btn:[Next] button
 . Enter "Gender" into the [field]_Name_ field and use the type `String` for the first and second type argument according to <<img-contacts_tutorial_new_gender_codetype>>
 
-[[img-contacts_tutorial_new_gender_codetype, Figure 000]]
+[[img-contacts_tutorial_new_gender_codetype]]
 .Create the gender code using the Scout new code wizard.
 image::{imgsdir}/contacts_tutorial_new_gender_codetype.png[]
 
@@ -198,7 +198,7 @@ Then, open the newly created class `GenderCodeType` in the Java editor and set t
 The created class will then look like <<lst-contacts_gender_code>> except for the missing inner code classes.
 We will add these inner codes as the next step.
 
-[[lst-contacts_gender_code, Listing Gender code type]]
+[[lst-contacts_gender_code]]
 [source,java]
 .The Scout code type to represent the gender of a person. This code type will be used for the gender field.
 ----
@@ -229,7 +229,7 @@ As the first field we add the field that will show the picture of the person to 
 . Copy the code provided in <<lst-contacts_picture_field>> into the general box.
 . Hit kbd:[Ctrl+Shift+O] and fix the necessary imports.
 
-[[lst-contacts_picture_field, Listing picture field]]
+[[lst-contacts_picture_field]]
 [source,java]
 .The picture field for the person form.
 ----
@@ -247,7 +247,7 @@ First, having a field that contains the the URL makes sure that this information
 
 The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_general_fields>> into the code below the picture field.
 
-[[lst-contacts_general_fields, Listing general fields]]
+[[lst-contacts_general_fields]]
 [source,java]
 .The other fields in the general box.
 ----
@@ -275,7 +275,7 @@ Use the Scout content assist to add the fields and select [element]_String Field
 The "Notes" tab represented by the container field `NotesBox` only contains a single string field.
 This field will not need a label, span 4 rows of the logical grid and hold a multi line text according to <<lst-contacts_notes_box>>.
 
-[[lst-contacts_notes_box, Listing notes box]]
+[[lst-contacts_notes_box]]
 [source,java]
 .The notes tab box with its multi line text field.
 ----
@@ -293,7 +293,7 @@ Inner fields of a sequence box will be arranged on a single row from left to rig
 Taking advantage of these properties we implement the location box as a sequence field according to <<lst-contacts_address_box>>.
 To further optimize screen real estate we also switch to on-field labels for the city field and the country field.
 
-[[lst-contacts_address_box, Listing address box]]
+[[lst-contacts_address_box]]
 [source,java]
 .The content of the address box.
 ----
@@ -341,7 +341,7 @@ In these methods the form fetches data from the Scout backend application and/or
 
 Adapt the default implementation of the form handlers according to <<lst-contacts_form_handler>>.
 
-[[lst-contacts_form_handler, Listing form handler]]
+[[lst-contacts_form_handler]]
 [source,java]
 .The new handler and modify handler for the person form.
 ----
@@ -363,7 +363,7 @@ For these methods we can again rely on the default implementations created by th
 
 Modify the person service methods according to <<lst-contacts_form_service>>.
 
-[[lst-contacts_form_service, Listing PersonService methods]]
+[[lst-contacts_form_service]]
 [source,java]
 .The PersonService methods to load, create and update person data.
 ----
@@ -387,6 +387,6 @@ The "Contacts" application is in a clean state again and you can (re)start the b
 We can now verify the creation of new person entries and the modification of existing person data in the current state of the "Contacts" application.
 The created person form is shown in <<img-contacts_tutorial_result_step_4>>.
 
-[[img-contacts_tutorial_result_step_4, Figure 000]]
+[[img-contacts_tutorial_result_step_4]]
 .The "Contacts" application with the person form at the end of tutorial step 4.
 image::{imgsdir}/contacts_tutorial_result_step_4.png[]

@@ -167,9 +167,9 @@ In contrast, the trigger's end time specifies the time at which the trigger will
 === IFuture
 A future represents the result of an asynchronous computation, and is returned by the job manager upon scheduling a job. The future provides functionality to await for the job to complete, or to get its computation result or exception, or to cancel its execution, and more.
 
-Learn more about job cancellation in section <<Job cancellation>>. +
-Learn more about listening for job lifecycle events in section <<Subscribe for job lifecycle events>>. +
-Learn more about awaiting the job's completion in section <<Awaiting job completion>>.
+Learn more about job cancellation in <<Job cancellation>>. +
+Learn more about listening for job lifecycle events in <<Subscribe for job lifecycle events>>. +
+Learn more about awaiting the job's completion in <<Awaiting job completion>>.
 
 === Job states
 Upon scheduling a job, the job transitions different states. The current state of a job can be queried from its associated <<IFuture>>.

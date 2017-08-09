@@ -28,7 +28,7 @@ As a prerequisite to this tutorial we assume that the reader has successfully co
 To access the Scout user guide help hit kbd:[F1] in the Eclipse IDE.
 This opens the Eclipse help view that includes the Eclipse Scout User Guide as shown in <<img-sdk_f1>>.
 
-[[img-sdk_f1, Figure 000]]
+[[img-sdk_f1]]
 .The Eclipse help view including the Eclipse Scout User Guide.
 image::{imgsdir}/sdk_f1.png[]
 

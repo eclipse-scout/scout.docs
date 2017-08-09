@@ -20,7 +20,7 @@ In a scout application, typically, the scout client requests some data from the 
 The scout server needs to inform the scout client about something.
 With client notifications it is possible to do so.
 
-[[img-client_notifications, figure]]
+[[img-client_notifications]]
 .Client Notifications
 image::{imgsdir}/clientNotifications.png[]
 
@@ -47,7 +47,7 @@ In case of multiple server nodes, the client notifications are synchronized usin
 
 === Push Technology
 
-[[img-client_notifications, figure]]
+[[img-client_notifications]]
 .Long Polling
 image::{imgsdir}/cn_long_polling.png[]
 
@@ -68,13 +68,13 @@ together with the response of a regular service request. The notification is the
 
 When a client notifications is published on the server, it is automatically synchronized with the other server nodes (by default).
 
-[[img-client_notification_big_picture, figure]]
+[[img-client_notification_big_picture]]
 .Client Notification Big Picture
 image::{imgsdir}/cn_big_picture.png[]
 
 ==== Multiple Server Nodes
 
-[[img-client_notification_big_picture, figure]]
+[[img-client_notification_big_picture]]
 .Client Notification Multiple Server Nodes
 image::{imgsdir}/cn_multiple_servers.png[]
 

@@ -25,7 +25,7 @@ For this, the following three steps are necessary
 To start the Scout backend server we first select the `[webapp] dev server.launch` file in the Package Explorer view
 of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_client>>.
 
-[[img-start_client, Figure Starting the Hello World application]]
+[[img-start_client]]
 .Starting the Hello World application.
 image::{imgsdir}/sdk_start_client_product.png[]
 
@@ -38,6 +38,6 @@ After having successfully started the Scout backend and frontend servers the Hel
 
 The running Hello World application should then be started in your browser as shown in <<img-start_browser>>.
 
-[[img-start_browser, Figure The Hello World application]]
+[[img-start_browser]]
 .The Hello World application in the browser.
 image::{imgsdir}/run_helloworld_in_browser.png[]

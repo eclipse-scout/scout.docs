@@ -39,7 +39,7 @@ Destroying a widget means it will detach itself from the parent and destroy all 
 A widget may be created using the constructor function or `scout.create`. Best practice is to always use `scout.create` which gives you two benefits:
 
 1. You don't have to call `init` by yourself.
-2. The widget may be extended (see chapter <<Object Factory>> for details).
+2. The widget may be extended (see <<Object Factory>> for details).
 
 The following example creates a `StringField`.
 
@@ -102,7 +102,7 @@ scout.create('Form', scout.models.getModel('example.MyForm', parent));
 
 When the form is shown it will look like this:
 
-[[img-scoutjs_myform, Figure 000]]
+[[img-scoutjs_myform]]
 .A form described using JSON
 image::{imgsdir}/scoutjs_myform.png[]
 
@@ -125,7 +125,7 @@ console.log(field.labelVisible); // prints true
 It is important to always use the setter to modify a property, because calling it does not just change the value. Instead it will call the method `setProperty(propertyName, value)` which does the following:
 
 . It will check if the property has changed at all. If the value is still the same, nothing happens. To compare the values `scout.objects.equals` is used, which uses `===` to compare and if that returns false, uses the equals methods of the given objects, if available.
-. If the values are not equal, the model is updated using the method `\_setProperty` (notice the `_`). Beside setting the value it also notifies every listener about the property change. So if another widget is interested in that property it may attach a listener and will be informed on every property change (see also the chapter <<Events>> for details).
+. If the values are not equal, the model is updated using the method `\_setProperty` (notice the `_`). Beside setting the value it also notifies every listener about the property change. So if another widget is interested in that property it may attach a listener and will be informed on every property change (see also the <<Events>> for details).
 . In order to reflect the property change in the UI, the `_render` method is called, if available. The name of this method depends on the property name, it always starts with `_render` and ends with the property name. Example: `_renderLabelVisible`. If the widget does not implement such a method, nothing happens.
 
 It is worth to mention that the behavior of step 2 may be influenced by the widget. If the widget provides a method called `\_setPropertyName` (e.g. `_setLabelVisible`, notice the `_`), that method will be called instead of `_setProperty`. This may be useful if something other should be done beside setting the property. If that is the case, that new function is responsible to call `_setProperty` by itself in order to set the property and inform the listeners. That method may also be called by the `_init` method to make sure the additional code is also executed during initialization (calling the public setter in `_init` would not have any effect due to the equals check at the beginning).
@@ -289,7 +289,7 @@ Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon cons
 //TODO [7.0] cgu ==== How to build a custom widget
 
 === Object Factory
-As seen in the chapter <<Creating a Widget>> a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
+As seen in the <<Creating a Widget>> a widget may be created using `scout.create`. When using this function, the call is delegated to the `ObjectFactory`.
 
 The `ObjectFactory` is responsible to create and initialize a Scout object. A typical Scout object has an `objectType` and an `init` function. But actually any kind of object with a constructor function in the scout or a custom namespace may be created.
 

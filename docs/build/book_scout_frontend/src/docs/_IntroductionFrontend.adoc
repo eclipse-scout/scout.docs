@@ -39,7 +39,7 @@ As office software is typically installed locally on the users PC, integrating t
 When a user is working on a computer outside of his company where the enterprise client is not installed (or the user lacks the permissions to install any software), the natural choice is to work with a web application.
 And when the user is on the move or sitting in a meeting, the only meaningful option is to work with a mobile device.
 
-[[img-bsi_crm_desktop, Figure 000]]
+[[img-bsi_crm_desktop]]
 .The desktop client of a Scout enterprise application.
 image::{imgsdir}/bsi_crm_desktop.png[]
 
@@ -51,7 +51,7 @@ Once an entity such is selected, a form is presented on the right hand side to e
 After entering "`eclipse`" into the company search field, the list of matching companies is presented.
 Using the context menu on a specific company, the corresponding company dialog can be opened for editing.
 
-[[img-bsi_crm_web, Figure 000]]
+[[img-bsi_crm_web]]
 .A Scout enterprise application running in a web browser.
 image::{imgsdir}/bsi_crm_web.png[]
 
@@ -59,7 +59,7 @@ In <<img-bsi_crm_web>> a screenshot of the web client of the CRM Scout applicati
 When comparing the screenshots of the desktop client with the web application it is interesting to note how Scout applications offer a consistent look and feel for the two clients.
 This is important as it makes the end user feel "`at home`" on the web client.
 
-[[img-bsi_crm_mobile, Figure 000]]
+[[img-bsi_crm_mobile]]
 .The same Scout enterprise application running on a mobile device.
 image::{imgsdir}/bsi_crm_mobile_galaxy.png[]
 
@@ -82,7 +82,7 @@ This is why we are going to concentrate on a (typical) application migration sce
 Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed.
 Including host systems, client server applications with desktop clients, as well as applications with a web based front-end.
 
-[[img-scout_with_other_apps, Figure 000]]
+[[img-scout_with_other_apps]]
 .A typical application landscape including a service bus and a Scout application.
 image::{imgsdir}/scout_with_other_apps.png[]
 
@@ -91,7 +91,7 @@ Often, some of the applications that are vital to the organisation's core busine
 And for technologies that are no longer under active development it can get difficult to find staff having the necessary expertise or motivation.
 Sometimes, the organisation is no longer willing to accept the costs and technology risks of such mission critical applications.
 
-[[img-scout_integration, Figure 000]]
+[[img-scout_integration]]
 .The integration of a Scout application in a typical enterprise setup.
 image::{imgsdir}/scout_integration.png[]
 
@@ -136,7 +136,7 @@ At the same time, professional support is available if the organisation decides 
 
 As the migration of aging applications to current technology is always a challenge, it surely helps to have Scout in the technology portfolio.
 Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team.
-Additional reasons on why Scout helps to drive down cost and risks are discussed in Section <<sec-why_scout>>.
+Additional reasons on why Scout helps to drive down cost and risks are discussed in <<sec-why_scout>>.
 
 
 ==== Developer Perspective
@@ -305,7 +305,7 @@ Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-prog
 ].
 
 We now propose to start downloading and installing Scout as described in Appendix <<apx-install_scout>> and do some actual coding.
-To do so, please continue with the "`Hello World`" example provided in Chapter <<cha-helloworld>>.
+To do so, please continue with the "`Hello World`" example provided in <<cha-helloworld>>.
 You can expect to complete this example in less than one hour including the necessary download and installation steps.
 Afterwards, you might want to continue with the remaining material in "`Getting Started`".
 Working through the complete book should take no more than two days.
@@ -331,14 +331,14 @@ You prefer to get a quick impression before deciding to dig deeper and hate goin
 In that case let us assume that you are prepared to spend two hours to grasp the scope of Eclipse Scout and get an impression of its strengths and limitations.
 The list below suggests a sequence of sections to digest including a brief motivation for each one.
 
- * Chapter <<cha-helloworld>> `"Hello World"` Tutorial.
+ * <<cha-helloworld>> `"Hello World"` Tutorial.
       Download and installation of the Scout package should take less than 30 minutes, going through the `"Hello World"` takes another 15 minutes.
- * Section <<sec-initial_helloworld>> "`Walking through the Initial Application`"
+ * <<sec-initial_helloworld>> "`Walking through the Initial Application`"
       Read about some key elements used in every Scout client application including integration of server services and data binding.
- * Chapter <<cha-tooling>> "`Scout Tooling`".
+ * <<cha-tooling>> "`Scout Tooling`".
       Browse through the tooling chapter to get an impression on the tooling provided with Scout.
     Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.
- * Chapter <<cha-large_example>> "`The My Contacts Application`".
+ * <<cha-large_example>> "`The My Contacts Application`".
       Check out the slightly larger demo application.
     In case you are not yet running out of time, download the demo app as described in the Scout wiki.footnote:[
     Download and installation of the "`My Contacts`" application: http://wiki.eclipse.org/Scout/Book/#Download_and_Run_the_Scout_Sample_Applications.
@@ -357,8 +357,8 @@ Being a manager and actually reading this book may indicate one of the following
  * Think about your current situation. There must be a reason why you are checking out this book.
 
 
-To learn about Scout and about its benefits first go through Section <<sec-what_is_scout>> and Section <<sec-why_scout>>.
-Then, flip through Section <<sec-my_contacts_guide>> to get an impression of the "`My Contacts`" application.
+To learn about Scout and about its benefits first go through <<sec-what_is_scout>> and <<sec-why_scout>>.
+Then, flip through <<sec-my_contacts_guide>> to get an impression of the "`My Contacts`" application.
 In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us.footnote:[
 To contact the Scout team, use the feedback provided on the Scout homepage: https://eclipse.org/scout.
 ].
@@ -382,7 +382,7 @@ We will start by building the application from scratch and then we'll deploy the
 Except for a single line of code in the server part of the "`Hello World`" application, we will only be using the tooling provided by the Scout SDK.
 
 Based on this simple "`Hello World`" applications a large number of Scout concepts can be illustrated.
-Rather than including such background material in this tutorial, this information is provided separately in Chapter <<cha-helloworld_background>>.
+Rather than including such background material in this tutorial, this information is provided separately in <<cha-helloworld_background>>.
 This tutorial is also available in the Scout wiki.footnote:[
 "`Hello World`" wiki tutorial: http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld
 ].
@@ -423,11 +423,11 @@ To deploy the application to a web server the WAR files generated by the wizard 
 The first WAR file contains the Scout server including a zipped desktop client for downloading.
 In the second WAR file, the RAP server application that provides both the web client and the client for mobile devices.
 
-[[img-sdk_export_war, Figure 000]]
+[[img-sdk_export_war]]
 .Starting the [wizard]_Export Scout Project_ wizard in the Scout SDK with the context menu. In the first wizard step, the target directory for the WAR files and the artefacts to export are specified.
 image::{imgsdir}/sdk_export_war_menu.png[]
 
-[[img-export_wizard_1, Figure 000]]
+[[img-export_wizard_1]]
 .The first dialog of the [wizard]_Export Scout Project_ wizard. Here, the target directory for the WAR files that will be generated by the wizard is specified.
 image::{imgsdir}/export_wizard_1.png[]
 
@@ -442,7 +442,7 @@ After clicking btn:[Next] button the second wizard step proposes the server prod
 Typically, the proposed default values are fine.
 Move to the third dialog with btn:[Next] button.
 
-[[img-export_wizard_3, Figure 000]]
+[[img-export_wizard_3]]
 .The third dialog of the [wizard]_Export Scout Project_ wizard defines the client application to be included in the `helloworld_server.war` file. In the last step of the export wizard the RAP sever is exported to the specified file name (right).
 image::{imgsdir}/export_wizard_3.png[]
 
@@ -452,7 +452,7 @@ For the "`Hello World`" example, we want to include the Swing client application
 For this, we need to change the selected product to [element]_helloworld-swing-client.product (production)_ according to <<img-export_wizard_3>>.
 With btn:[Next] button we move to the last wizard step.
 
-[[img-export_wizard_4, Figure 000]]
+[[img-export_wizard_4]]
 .The last dialog of the [wizard]_Export Scout Project_ wizard defines the export of the RAP server. Normally, the proposed field values do not need any adjustments.
 image::{imgsdir}/export_wizard_4.png[]
 
@@ -471,11 +471,11 @@ If you do not yet have such an installation you may want to read and follow the 
 To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
 You should then see the page shown in <<img-deploy_tomcat_1>>.
 
-[[img-deploy_tomcat_1, Figure 000]]
+[[img-deploy_tomcat_1]]
 .The Tomcat shown after a successful installation. After clicking on the "`Manager App`" button (highlighted in red) the login box is shown in front. A successful login shows the "`Tomcat Web Application Manager`".
 image::{imgsdir}/tomcat_managerapp_login.png[]
 
-[[img-deploy_tomcat_2, Figure 000]]
+[[img-deploy_tomcat_2]]
 .The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.
 image::{imgsdir}/tomcat_managerapp_selectwar.png[]
 
@@ -494,7 +494,7 @@ You can now connect to the deployed application using the browser of your choice
   http://localhost:8080/helloworld_server/
 ----
 
-[[img-helloworld_running_download, Figure 000]]
+[[img-helloworld_running_download]]
 .The "`Hello World`" home page, providing a link to download the desktop client.
 image::{imgsdir}/tomcat_helloworld_download.png[]
 
@@ -508,7 +508,7 @@ To start the "`Hello World`" web application, open a browser and enter the follo
   http://localhost:8080/helloworld/
 ----
 
-[[img-helloworld_running_clients, Figure 000]]
+[[img-helloworld_running_clients]]
 image::{imgsdir}/helloworld_finished_rayo_swing.png[]
 image::{imgsdir}/helloworld_finished_rayo_rap.png[]
 .The "`Hello World`" client application running on the desktop, in the browser and on a mobile device.
@@ -528,7 +528,7 @@ The goal is to explain many of the used concepts in the context of a concrete Sc
 
 The structure of this chapter is closely related to the "`Hello World`" tutorial.
 As you will notice, the order of the material presented here exactly follows the previous tutorial and identical section titles are used where applicable.
-In addition to Chapter <<cha-helloworld>>, we include Section <<sec-initial_helloworld>> to discuss the initial application generated by the Scout SDK.
+In addition to <<cha-helloworld>>, we include <<sec-initial_helloworld>> to discuss the initial application generated by the Scout SDK.
 
 
 [[sec-create_project_simple_background]]
@@ -538,7 +538,7 @@ The first thing you need for the creation of a new Scout project is to select a 
 For Eclipse, a workspace is a directory where Eclipse can store a set of projects in a single place.
 As Scout projects typically consist of several Eclipse plugin projects the default (and recommended) setting is to use a single workspace for a single Scout project.
 
-[[img-package_explorer, Figure 000]]
+[[img-package_explorer]]
 image::{imgsdir}/sdk_package_explorer.png[]
 .The Eclipse plugin projects of the "`Hello World`" application shown by the Package Explorer in the Scout SDK on the left hand side. The corresponding view in the Scout Explorer is provided on the right hand side.
 image::{imgsdir}/sdk_scout_explorer.png[]
@@ -564,8 +564,8 @@ In the case of the "`Hello World`" tutorial we could create the complete applica
 
 When we revisit the [wizard]_New Scout Project_ wizard in <<img-sdk_new_project_wizard>>, it now becomes trivial to explain how the [field]_Project Name_ field [java]+org.eclipse.scout.helloworld+ was used as the common prefix for plugin project names and Java package names.
 Based on the project name, the last part [java]+helloworld+ was used for the [field]_Project Alias_ field.
-As we have seen in Section <<sec-helloworld_export>>, this project alias is used by the Scout SDK to build the base names of the WAR files in the export step.
-In turn, after deploying the WAR files as described in Section <<sec-helloworld_deploy>>, the RAP server application becomes available under the URL [java]+http://localhost:8080/helloworld+.
+As we have seen in <<sec-helloworld_export>>, this project alias is used by the Scout SDK to build the base names of the WAR files in the export step.
+In turn, after deploying the WAR files as described in <<sec-helloworld_deploy>>, the RAP server application becomes available under the URL [java]+http://localhost:8080/helloworld+.
 Should you have a catchy naming for you application in mind, [java]+com.mycompany.mycatchyname+ is therefore a good choice for the [field]_Project Name_ field.
 
 
@@ -603,7 +603,7 @@ This will open the associated Java file `Desktop.java` in the editor view of the
 Of interest is the overwritten callback method [java]+execOpened+ shown in <<lst-helloworld.execopened>>.
 
 (((DesktopForm)))
-[[lst-helloworld.execopened, Listing Desktop]]
+[[lst-helloworld.execopened]]
 [source,java]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
@@ -633,7 +633,7 @@ Expand this folder to show the [element]_DesktopForm_ as shown in <<img-hellowor
 In the Scout Object Property window in the screenshot, we can also see the [property]_Display Hint_ property.
 Its value is set to '`View`' to display the desktop form as a view and not as a dialog in its own frame.
 
-[[img-helloworld_viewhandler, Figure 000]]
+[[img-helloworld_viewhandler]]
 .Scout SDK showing the DesktopForm's _ViewHandler_ in the Scout Explorer and the properties of the DesktopForm in the Scout Object Properties.
 image::{imgsdir}/sdk_helloworld_viewhandler.png[]
 
@@ -655,7 +655,7 @@ This is achieved by overwriting callback methods defined in [java]+AbstractFormH
 The necessary wiring is provided by the Scout framework, either by the initial project creation step or when using one of the provided Scout SDK wizards.
 
 (((ViewHandler)))
-[[lst-helloworld.viewhandler, Listing ViewHandler in DesktopForm]]
+[[lst-helloworld.viewhandler]]
 [source,java]
 .Class [java]+DesktopForm+ with its view handler and [java]+startView+ method. Other inner classes and methods are omitted here.
 ----
@@ -726,11 +726,11 @@ It also implements its corresponding [java]+IDesktopService+ interface used for 
 
 ==== The Launcher Boxes
 
-To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in Section <<sec-run_initial>>.
+To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in <<sec-run_initial>>.
 These object properties are associated to the top level project node in the Scout Explorer.
 Using the [icon]_Edit_ icon provided in the product launcher section of the Scout Object Properties, the list of launcher boxes can be specified as shown in <<img-select_product_launchers>>.
 
-[[img-select_product_launchers, Figure 000]]
+[[img-select_product_launchers]]
 image::{imgsdir}/sdk_edit_product_launcher.png[]
 .Using the [icon]_Edit Content..._ icon shown on the left hand side, the product selection dialog shown on the right side is opened. Using this product selection dialog, the list of launcher boxes can be specified.
 image::{imgsdir}/sdk_select_product_launcher.png[]
@@ -744,9 +744,9 @@ Read the following article for an introduction to Eclipse product files: http://
 ]
 are used in Eclipse to specify the configuration and content of an executable application.
 In the case of the "`Hello World`" project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK.
-The four applications, one for the server application and one for each client technology, have already been discussed in Section <<sec-run_initial>>.
+The four applications, one for the server application and one for each client technology, have already been discussed in <<sec-run_initial>>.
 
-[[img-server_plugin, Figure 000]]
+[[img-server_plugin]]
 image::{imgsdir}/sdk_server_node_properties.png[]
 .The production and development launcher boxes associated with the "`Hello World`" server application are shown on the left side.  In the Package Explorer shown on the right side, the production and development products are located under the [folder]_products_ folder in the server plugin project.
 image::{imgsdir}/sdk_server_plugin_explorer.png[]
@@ -765,7 +765,7 @@ On the left side, the blue server node is selected in the Scout Explorer.
 This opens the two server launcher boxes for the production and the development environment.
 On the right side of <<img-server_plugin>>, the corresponding plugin project [element]_org.eclipse.scout.helloworld.server_ is expanded to show the file based organisation of the two product definitions.
 
-[[img-server_dev_product, Figure 000]]
+[[img-server_dev_product]]
 .The Eclipse product file editor showing file [java]+helloworld-server-dev.product+ of the "`Hello World`" application. In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
 image::{imgsdir}/sdk_server_dev_product.png[]
 
@@ -786,7 +786,7 @@ Consequently, Jetty plugins are not listed as a dependency in the Scout server's
 (((Eclipe config.ini file)))
 
 
-[[img-server_dev_ini, Figure 000]]
+[[img-server_dev_ini]]
 image::{imgsdir}/sdk_server_dev_product_config.png[]
 .Above, the definition of the products [java]+config.ini+ in tab [element]_Configuration_ of the product file editor. Below, the content of the configuration file of the "`Hello World`" server application is provided in a normal text editor.
 image::{imgsdir}/sdk_server_dev_configini.png[]
@@ -855,14 +855,14 @@ Internationalization and localization, also called NLS support: http://en.wikipe
 support of Scout for texts.
 
 (((MainBox)))
-[[lst-helloworld.mainbox, Listing MainBox]]
+[[lst-helloworld.mainbox]]
 [source,java]
 .The [java]+DesktopForm+ with its inner class [java]+MainBox+ containing the desktop box and message field
 ----
 TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java[lines=18..20;69..84;102..103]
 ----
 
-As discussed in Section <<sec-helloworld.form>> Scout forms consist of variables, the main box and a number of form handlers.
+As discussed in <<sec-helloworld.form>> Scout forms consist of variables, the main box and a number of form handlers.
 The main box represents the visible part of Scout's form model.
 It may holds any number of form fields.
 Using container fields such as group boxes, it is possible to define complex structures such as hierarchical UI models containing multiple levels.
@@ -881,21 +881,21 @@ As a result, Scout developers don't need to manually update form data objects wh
 The Scout SDK takes care of this time consuming and error prone task.
 
 (((Text Provider Service)))
-[[lst-helloworld.textproviderservice, Listing TextProviderService]]
+[[lst-helloworld.textproviderservice]]
 [source,java]
 .The [java]+HelloworldTextProviderService+ class. Its getter method provides the path and the base name for the text property files
 ----
 TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java[lines=5..10]
 ----
 
-[[img-nls_editor, Figure 000]]
+[[img-nls_editor]]
 .The NLS editor provided by the Scout SDK. This editor is opened via the [link]_Open NLS Editor ..._ link in the Scout Object Properties of the [node]_HelloworldTextProviderService_ node.
 image::{imgsdir}/sdk_editor_nls.png[]
 
 When we did add the [field]_Message_ field to the desktop form of the "`Hello World`" application we had to enter a new translation entry for the label of the message field as shown in <<img-helloworld_stringfield>>.
 The individual translation entries are then stored in language specific text property files.
 To modify translated texts we can use the NLS editor.footnote:[
-See Section <<sec-nls_editor>> for a detailed description of the NLS editor.
+See <<sec-nls_editor>> for a detailed description of the NLS editor.
 ]
 provided by the Scout SDK as shown in <<img-nls_editor>>.
 
@@ -924,7 +924,7 @@ Scout is just adding a convenience layer to cover typical requirements in the co
 To support Scout developers as much as possible, the Scout SDK offers wizards that generate the necessary classes and interfaces and also take care of service registration.
 
 (((Text Provider Service)))
-[[lst-helloworld.desktop_service, Listing DesktopService]]
+[[lst-helloworld.desktop_service]]
 [source,java]
 .The server service class [java]+DesktopService+.
 ----
@@ -944,12 +944,12 @@ And in order to work, as in the case of outlets and plugs, the plug must fit to 
 In our "`Hello World`" example, the extension (plug) is represented by class [java]+DesktopService+ and the service extension point (outlet) is named [java]+org.eclipse.scout.service.services+.
 What makes the desktop service fit to the service extension point is the fact that its interface [java]+IDesktopService+ extends Scout's [java]+IService+ interface.
 
-[[img-plugin_editor, Figure 000]]
+[[img-plugin_editor]]
 .The Eclipse plugin editor for [java]+plugin.xml+ files. In the tab [element]_Extensions_ the "`Hello World`" desktop service is registered under the extension point [java]+org.eclipse.scout.service.services+.
 image::{imgsdir}/sdk_plugin_editor_desktopservice.png[]
 
 (((Plugin service registration)))
-[[lst-helloworld.server_plugin_xml, Listing server plugin.xml]]
+[[lst-helloworld.server_plugin_xml]]
 [source,xml]
 .The registration of the [java]+DesktopService+ in the server's [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
@@ -972,7 +972,7 @@ To call server service methods remotely from Scout client applications, the Scou
 As the name implies, a client proxy service acts as a local proxy service (running in the Scout client application) of a server service (running remotely in the Scout server application).
 
 (((Plugin service registration)))
-[[lst-helloworld.client_plugin_xml, Listing client plugin.xml]]
+[[lst-helloworld.client_plugin_xml]]
 [source,xml]
 .The registration of the [java]+IDesktopService+ proxy service in the client plugin of the "`Hello World`" application. This is the complete content of the client's [java]+plugin.xml+ file.
 ----
@@ -1034,7 +1034,7 @@ The desktop client is provided in the form of a standalone ZIP file.
 In the second WAR file, the Ajax server based on Eclipse RAP is contained.
 This Ajax server provides the URLs that can be accessed by web browsers running on desktop computers or tablet and mobile devices.
 
-[[img-helloworld_server_war, Figure 000]]
+[[img-helloworld_server_war]]
 image::{imgsdir}/helloworld_server_war.png[]
 .The organisation of the "`Hello World`" server WAR file. The right side reveals the location of the [java]+config.ini+ file and the application's plugin files
 image::{imgsdir}/helloworld_server_war_eclipse.png[]
@@ -1060,19 +1060,19 @@ See Appendix <<apx-osgi_basics>> for more information regarding server-side Ecli
 Such as Eclipse Scout server applications.
 
 On the right hand side of <<img-helloworld_server_war>> the eclipse specific content of the WAR file is shown.
-From top to bottom we find the configuration file [filename]+config.ini+ introduced in Section <<sec-config_ini>>.
+From top to bottom we find the configuration file [filename]+config.ini+ introduced in <<sec-config_ini>>.
 In folder [filename]+plugins+ the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files.footnote:[
 JAR files contain a set of Java classes and associated resources. http://en.wikipedia.org/wiki/JAR_%28file_format%29.
 ].
 This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our "`Hello World`" server and shared plugin.
-These "`Hello World`" jar files exactly match with the plugin projects discussed in Section <<sec-create_project_simple_background>>.
+These "`Hello World`" jar files exactly match with the plugin projects discussed in <<sec-create_project_simple_background>>.
 
-[[img-helloworld_server_plugin, Figure 000]]
+[[img-helloworld_server_plugin]]
 .The content of the "`Hello World`" server plugin contained in the [java]+helloworld_server.war+ file. The necessary files for the download page including the zipped client application are in the [java]+resources/html+ directory.
 image::{imgsdir}/helloworld_server_war_plugin.png[]
 
 
-[[lst-helloworld.server_plugin_xml.resourceservlet, Listing servlet registration]]
+[[lst-helloworld.server_plugin_xml.resourceservlet]]
 [source,xml]
 .The configuration of the server's resource servlet in the [java]+plugin.xml+ configuration file. The remaining content of the file has been omitted.
 ----
@@ -1081,14 +1081,14 @@ TODO [7.0] jbr: include was {codedir}/helloworld/org.eclipse.scout.helloworld.se
 
 
 In <<img-helloworld_server_plugin>> some of the content of the "`Hello World`" server plugin is shown.
-The first thing to note is that the plugin file conforms to the JAR file format including a [filename]+META-INF/MANIFEST.MF+ file and the directory tree containing the Java class files, as the [filename]+DesktopService.class+ implemented in Section <<sec-helloworld.server>> of the "`Hello World`" tutorial.
+The first thing to note is that the plugin file conforms to the JAR file format including a [filename]+META-INF/MANIFEST.MF+ file and the directory tree containing the Java class files, as the [filename]+DesktopService.class+ implemented in <<sec-helloworld.server>> of the "`Hello World`" tutorial.
 In folder [filename]+resources/html+ the necessary files for the download page shown in <<img-helloworld_running_download>> including the zipped desktop client are contained.
 To access this download page the Scout server's resource servlet [java]+ResourceServlet+ is responsible.
 It is registered under the servlet registry as shown in <<lst-helloworld.server_plugin_xml.resourceservlet>>.
 With setting "/" of the [java]+alias+ parameter the download page becomes available under the root path of the Scout server application.
 For the mapping to the contents [filename]+resources/html+ the parameter [java]+bundle-path+ is used.
 
-[[img-helloworld_server_explorer, Figure 000]]
+[[img-helloworld_server_explorer]]
 .The "`Hello World`" server plugin shown in the Eclipse package explorer. The files for the download page are located under [java]+resources/html+.
 image::{imgsdir}/helloworld_server_plugin.png[]
 
