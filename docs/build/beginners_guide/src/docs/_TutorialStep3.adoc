@@ -23,9 +23,9 @@ The choice of Derby is based on the fact that no additional installation is requ
 We start this tutorial step with copying the classes that handle the database creation/access from the full "Contacts" demo application as described in <<sec-contacts_jdbc_infra>>.
 The setup is then explained in the following sections.
 
-* <<sec-contacts_jdbc_properties>>
-* <<sec-contacts_jdbc_sql>>
-* <<sec-contacts_jdbc_initial_db>>
+* Scout Config Properties (<<sec-contacts_jdbc_properties>>)
+* The SQL Service and SQL Statements (<<sec-contacts_jdbc_sql>>)
+* The Database Setup Service (<<sec-contacts_jdbc_initial_db>>)
 
 With the basic infrastructure in place we review the existing "Contacts" backend to answer the question <<sec-contacts_jdbc_starting>>.
 In <<sec-contacts_jdbc_fetching_data>> we then add the missing pieces.

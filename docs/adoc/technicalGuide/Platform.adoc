@@ -20,14 +20,14 @@ Scout contains a platform which provides basic functionality required by many so
 
 * <<sec-app.lifecycle,Application Lifecycle Management>>
 * <<sec-bean.manager,Object Instance Management (Bean Management)>>
-* <<sec-config.management>>
+* <<sec-config.management,Configuration Management>>
 * <<sec-class.inventory,Application Inventory>>
 
 [[sec-app.lifecycle]]
 === Application Lifecycle
 
 The lifecycle of a Scout application is controlled by implementations of `org.eclipse.scout.rt.platform.IPlatform`.
-This interface contains methods to start and stop the application and to retrieve the <<sec-bean.manager>> associated with this application.
+This interface contains methods to start and stop the application and to retrieve the <<sec-bean.manager,Bean Manager>> associated with this application.
 The class `org.eclipse.scout.rt.platform.Platform` provides access to the current platform instance. On first access the platform is automatically created and started.
 
 image::{imgsdir}/platformStates.png[]

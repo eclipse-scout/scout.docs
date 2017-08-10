@@ -20,11 +20,11 @@ Database access and populating the pages with actual data from the database is n
 
 The addition of the "Persons" page is described in detail in the sections listed below.
 
-* <<sec-contacts_creating_person_package>>
-* <<sec-contacts_country_lookup_call>>
-* <<sec-contacts_creating_person_page>>
-* <<sec-contacts_adding_page_columns>>
-* <<sec-contacts_link_person_page>>
+* Creating additional Packages (<<sec-contacts_creating_person_package>>)
+* Creating the Country Lookup Call (<<sec-contacts_country_lookup_call>>)
+* Creating the Person Page (<<sec-contacts_creating_person_page>>)
+* Adding Table Columns to the Page (<<sec-contacts_adding_page_columns>>)
+* Link the Person Page to the Contacts Outline (<<sec-contacts_link_person_page>>)
 
 The addition of the company page is described in <<sec-contacts_adding_company_page>>.
 Finally, the state of the "Contacts" application is summarized in <<sec-contacts_summary_step_2>>.
