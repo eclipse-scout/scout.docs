@@ -18,9 +18,9 @@ In a number of aspects the full "Contacts" demo application comes with additiona
 
 The sections below highlight the following areas.
 
-* <<sec-contacts_theming_styling>>
-* <<sec-contacts_modular_apps>>
-* <<sec-contacts_infra>>
+* Theming and Styling (<<sec-contacts_theming_styling>>)
+* Modular Scout Applications (<<sec-contacts_modular_apps>>)
+* Infrastructure (<<sec-contacts_infra>>)
 
 [[sec-contacts_theming_styling]]
 ==== Theming and Styling

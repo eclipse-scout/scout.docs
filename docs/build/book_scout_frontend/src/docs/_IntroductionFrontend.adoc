@@ -304,7 +304,7 @@ Level II.footnote:[
 Level II Exam: docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html
 ].
 
-We now propose to start downloading and installing Scout as described in Appendix <<apx-install_scout>> and do some actual coding.
+We now propose to start downloading and installing Scout as described in <<apx-install_scout>> and do some actual coding.
 To do so, please continue with the "`Hello World`" example provided in <<cha-helloworld>>.
 You can expect to complete this example in less than one hour including the necessary download and installation steps.
 Afterwards, you might want to continue with the remaining material in "`Getting Started`".
@@ -391,7 +391,7 @@ This tutorial is also available in the Scout wiki.footnote:[
 === Installation and Setup
 
 Before you can start with the "`Hello World`" example you need to have a complete and working Scout installation.
-For this, see the step-by-step installation guide provided in Appendix <<apx-install_scout>>.
+For this, see the step-by-step installation guide provided in <<apx-install_scout>>.
 Once you have everything installed, you are ready to create your first Scout project.
 
 
@@ -467,7 +467,7 @@ These two WAR files are the only items needed for deploying the "`Hello World`" 
 
 As the final step of this tutorial, we deploy the two WAR files representing our "`Hello World`" application to a Tomcat web server.
 For this, we first need a working Tomcat installation.
-If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <<apx-install_tomcat>>.
+If you do not yet have such an installation you may want to read and follow the instructions provided in <<apx-install_tomcat>>.
 To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
 You should then see the page shown in <<img-deploy_tomcat_1>>.
 
@@ -481,7 +481,7 @@ image::{imgsdir}/tomcat_managerapp_selectwar.png[]
 
 Once the web browser displays the successful running of your Tomcat instance, switch to its "`Manager App`" by clicking on the button highlighted in <<img-deploy_tomcat_1>>.
 After entering user name and password the browser will display the "`Tomcat Web Application Manager`" as shown in <<img-deploy_tomcat_2>>.
-If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in Appendix <<apx-tomcat_dirs_and_files>>.
+If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in <<apx-tomcat_dirs_and_files>>.
 
 After logging successfully into Tomcat's manager application, you can select the WAR file(s) to be deployed using button "`Choose File`" according to the right hand side of <<img-deploy_tomcat_2>>.
 After picking your [filename]+helloworld_server.war+ and [filename]+helloworld.war+ file and closing the file chooser, click on button "`Deploy`" (located below button "`Choose File`") to deploy the application to the Tomcat web server.
@@ -1041,7 +1041,7 @@ image::{imgsdir}/helloworld_server_war_eclipse.png[]
 
 The content and its organisation of the exported WAR files was not specifically designed for Scout applications.
 Rather, it is defined according to server-side Equinox.footnote:[
-See Appendix <<apx-osgi_basics>> for more information regarding server-side Equinox.
+See <<apx-osgi_basics>> for more information regarding server-side Equinox.
 ],
 the typical setup for running Eclipse based server applications on a web server.
 Using file [filename]+helloworld_server.war+ as a concrete example, we will first describe the general organisation of the WAR file.
@@ -1052,10 +1052,10 @@ From the left hand side of the figure we can see that on the top level only fold
 This folder contains all files and directories that are private to the web application.
 Inside, the web deployment descriptor file [filename]+web.xml+ as well as the directories [filename]+lib+ and [filename]+eclipse+ are located.
 While the [filename]+web.xml+ file and directory [filename]+lib+ are standard for servlet based based applications.footnote:[
-See Appendix <<apx-javaee_basics>> for more information regarding servlets.
+See <<apx-javaee_basics>> for more information regarding servlets.
 ],
 directory [filename]+eclipse+ contains all necessary artefacts for servlet based Eclipse applications.footnote:[
-See Appendix <<apx-osgi_basics>> for more information regarding server-side Eclipse applications (server-side Equinox).
+See <<apx-osgi_basics>> for more information regarding server-side Eclipse applications (server-side Equinox).
 ].
 Such as Eclipse Scout server applications.
 
@@ -1140,7 +1140,7 @@ For this, you may follow the following procedure.
 
 
 How you start and stop Tomcat depends on the platform you are running it.
-If you have installed Tomcat on a Windows box according to Appendix <<apx-install_tomcat>> it will be running as a service.
+If you have installed Tomcat on a Windows box according to <<apx-install_tomcat>> it will be running as a service.
 This means that to stop the Tomcat web server you need to stop the corresponding Windows service.
 For starting and stopping Tomcat on Mac/Linux/Unix systems, you can use the command line script files [filename]+startup.sh+ and [filename]+shutdown.sh+ located in Tomcat's subdirectory [filename]+bin+.
 

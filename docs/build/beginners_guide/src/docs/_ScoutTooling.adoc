@@ -194,9 +194,9 @@ image::{imgsdir}/sdk_new_wizard.png[]
 
 The wizards provided by the Scout SDK are introduced and described in the sections listed below.
 
-* <<sec-wizard_project>>
-* <<sec-wizard_page>>
-* <<sec-wizard_form>>
+* New Project Wizard (<<sec-wizard_project>>)
+* New Page Wizard (<<sec-wizard_page>>)
+* New Form Wizard (<<sec-wizard_form>>)
 
 [[sec-wizard_project]]
 ==== New Project Wizard

@@ -78,7 +78,6 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
   // tag::linkToOrganization[]
 
   // tag::organizationColumn[]
-  // tag::PageInit[]
   public class Table extends AbstractTable {
     // end::linkToOrganization[]
     // end::organizationColumn[]

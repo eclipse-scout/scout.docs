@@ -123,7 +123,7 @@ To see the new files within Eclipse you may need to refresh the `target` folder 
 
 As the final step of this tutorial, we deploy the two WAR files representing our "`Hello World`" application to a Tomcat web server.
 For this, we first need a working Tomcat installation.
-If you do not yet have such an installation you may want to read and follow the instructions provided in Appendix <<apx-install_tomcat>>.
+If you do not yet have such an installation you may want to read and follow the instructions provided in <<apx-install_tomcat>>.
 To verify a running Tomcat instance, type http://localhost:8080/ into the address bar of the web browser of your choice.
 You should then see the page shown in <<img-deploy_tomcat_1>>.
 
@@ -133,7 +133,7 @@ image::{imgsdir}/tomcat_managerapp_login.png[]
 
 Once the web browser displays the successful running of your Tomcat instance, switch to its "`Manager App`" by clicking on the button highlighted in <<img-deploy_tomcat_1>>.
 After entering user name and password the browser will display the "`Tomcat Web Application Manager`" as shown in <<img-deploy_tomcat_2>>.
-If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in Appendix <<apx-tomcat_dirs_and_files>>.
+If you don't know the correct username or password you may look it up in the file [filename]+tomcat-users.xml+ as described in <<apx-tomcat_dirs_and_files>>.
 
 [[img-deploy_tomcat_2]]
 .The "`Tomcat Web Application Manager`". The WAR files to be deployed can then be selected using button "`Choose File`" highlighted in red.

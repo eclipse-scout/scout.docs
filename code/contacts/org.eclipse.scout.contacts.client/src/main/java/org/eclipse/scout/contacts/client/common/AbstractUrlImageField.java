@@ -104,6 +104,7 @@ public class AbstractUrlImageField extends AbstractImageField {
 
     getForm().touch();
   }
+// tag::menu[]
 }
 // end::template[]
 // end::menu[]
