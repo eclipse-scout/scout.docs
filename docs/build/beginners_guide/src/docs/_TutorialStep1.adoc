@@ -19,11 +19,11 @@ This includes the organization and naming of Maven modules and the individual Ja
 
 The creation up of the initial project setup described in this section consists of the tasks listed below.
 
-* <<sec-contacts_initial_codebase>>
-* <<sec-contacts_remove_stuff>>
-* <<sec-contacts_change_workoutline>>
-* <<sec-contacts_change_desktop>>
-* <<sec-contacts_default_theme>>
+* Creating the initial Codebase (<<sec-contacts_initial_codebase>>)
+* Removing unnecessery Components (<<sec-contacts_remove_stuff>>)
+* Changes to Class WorkOutline (<<sec-contacts_change_workoutline>>)
+* Changes to Class Desktop (<<sec-contacts_change_desktop>>)
+* Switching to the Default Theme (<<sec-contacts_default_theme>>)
 
 This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in <<sec-contacts_summary>>.
 

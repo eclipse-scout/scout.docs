@@ -29,9 +29,9 @@ This will result in a drill-down functionality for the organization page.
 
 The implementation of the features described above can be achieved by the the following steps.
 
-* <<sec-contacts_company_lookup_call>>
-* <<sec-contacts_modify_person_form_and_page>>
-* <<sec-contacts_organization_node_page>>
+* Creating an Organization Lookup Call (<<sec-contacts_company_lookup_call>>)
+* Using the Lookup Call in the Person Form and the Person Table (<<sec-contacts_modify_person_form_and_page>>)
+* Link the Person Page to Organizations (<<sec-contacts_organization_node_page>>)
 
 This last tutorial step ends with a short review in <<sec-contacts_link_person_organization_summary>>
 
