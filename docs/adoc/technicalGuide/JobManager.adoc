@@ -58,7 +58,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <1> Use to schedule a runnable which does not return a result to the submitter
 <2> Use to schedule a callable which does return a result to the submitter
 
-The second and mandatory argument to be provided is the `JobInput`, which tells the job manager how to run the job. Learn more about <<JobInput>>.
+The second and mandatory argument to be provided is the `JobInput`, which tells the job manager how to run the job. Learn more about <<JobInput,JobInput>>.
 
 The following snippet illustrates how a job is actually scheduled.
 
@@ -122,7 +122,7 @@ Use the static factory method `Jobs.newExecutionTrigger()` to get an instance:
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=executionTrigger.examples]
 ----
-Learn more about <<ExecutionTrigger>>.
+Learn more about <<ExecutionTrigger,ExecutionTrigger>>.
 
 ==== JobInput.withExecutionSemaphore
 To optionally control the maximal concurrently level among jobs assigned to the same semaphore.
@@ -141,7 +141,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <2> Schedule 100 jobs in a row.
 <3> Set the semaphore to limit the maximal concurrency level to 5 jobs.
 
-Learn more about <<ExecutionSemaphore>>.
+Learn more about <<ExecutionSemaphore,ExecutionSemaphore>>.
 
 ==== JobInput.withExecutionHint
 To associate the job with an execution hint. An execution hint is simply a marker to mark a job, and can be evaluated by filters to select jobs, e.g. to listen to job lifecycle events of some particular jobs, or to wait for some particular jobs to complete, or to cancel some particular jobs. A job may have multiple hints associated. Further, hints can be registered directly on the future via `IFuture.addExecutionHint(hint)`, or removed via `IFuture.removeExecutionHint(hint)`.
@@ -172,7 +172,7 @@ Learn more about listening for job lifecycle events in <<Subscribe for job lifec
 Learn more about awaiting the job's completion in <<Awaiting job completion>>.
 
 === Job states
-Upon scheduling a job, the job transitions different states. The current state of a job can be queried from its associated <<IFuture>>.
+Upon scheduling a job, the job transitions different states. The current state of a job can be queried from its associated <<IFuture,IFuture>>.
 
 [cols="25,75", options="header"]
 |===
@@ -258,7 +258,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 Fore more information, refer to the JavaDoc of `JobEventFilterBuilder`.
 
 === Job cancellation
-A job can be cancelled in two ways, either directly via its <<IFuture>>, or via job manager. Both expect you to provide a boolean flag indicating whether to interrupt the executing working thread. Upon cancellation, the job immediately enters 'done' state. Learn more about <<Job states>>. If cancelling via job manager, a future filter must be given to select the jobs to be cancelled. Learn more about <<Future filter>>
+A job can be cancelled in two ways, either directly via its <<IFuture,IFuture>>, or via job manager. Both expect you to provide a boolean flag indicating whether to interrupt the executing working thread. Upon cancellation, the job immediately enters 'done' state. Learn more about <<Job states>>. If cancelling via job manager, a future filter must be given to select the jobs to be cancelled. Learn more about <<Future filter>>
 
 The cancellation attempt will be ignored if the job has already completed or was cancelled. If not running yet, the job will never run. If the job has already started, then the _interruptIfRunning_ parameter determines whether the thread executing the job should be interrupted in an attempt to stop the job.
 
@@ -327,27 +327,27 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 
 === Awaiting job completion
-A job's completion can be either awaited on its <<IFuture>>, or via job manager - the first optionally allows to consume the job's computation result, whereas the second allows multiple futures to be awaited for.
+A job's completion can be either awaited on its <<IFuture,IFuture>>, or via job manager - the first optionally allows to consume the job's computation result, whereas the second allows multiple futures to be awaited for.
 
 ==== Difference between 'done' and 'finished' state
 When awaiting futures, the definition of 'done' and 'finished' state should be understood - 'done' means that the future completed either normally, or was cancelled. But, if cancelled while running, the job may still continue its execution, whereas a job which not commenced execution yet, will never do so. The latter typically applies for jobs scheduled with a delay. However, 'finished' state differs from 'done' state insofar as a cancelled, currently running job enters 'finished' state only upon its actual completion. Otherwise, if not cancelled, or cancelled before executing, it is equivalent to 'done' state. In most situations, it is sufficient to await for the future's done state, especially because a cancelled job cannot return a result to the submitter anyway.
 
 ==== Awaiting a single future's 'done' state
-Besides of some overloaded methods, <<IFuture>> basically provides two methods to wait for a future to enter 'done' state, namely `awaitDone` and `awaitDoneAndGet`, with the difference that the latter additionally returns the job's result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a `TimedOutError` thrown.
+Besides of some overloaded methods, <<IFuture,IFuture>> basically provides two methods to wait for a future to enter 'done' state, namely `awaitDone` and `awaitDoneAndGet`, with the difference that the latter additionally returns the job's result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a `TimedOutError` thrown.
 
-Further, `awaitDoneAndGet` allows to specify an <<IExceptionTranslator>> to control exception translation. By default, <<DefaultRuntimeExceptionTranslator>> is used, meaning that a `RuntimeException` is propagated as it is, whereas a checked exception would be wrapped into a <<PlatformException>>. If you require checked exceptions to be thrown as they are, use <<DefaultExceptionTranslator>> instead, or even <<NullExceptionTranslator>> to work with the raw `ExecutionException` as being thrown by Java Executor framework.
+Further, `awaitDoneAndGet` allows to specify an <<exception-translation,IExceptionTranslator>> to control exception translation. By default, <<DefaultRuntimeExceptionTranslator,DefaultRuntimeExceptionTranslator>> is used, meaning that a `RuntimeException` is propagated as it is, whereas a checked exception would be wrapped into a <<PlatformException,PlatformException>>. If you require checked exceptions to be thrown as they are, use <<DefaultExceptionTranslator,DefaultExceptionTranslator>> instead, or even <<NullExceptionTranslator,NullExceptionTranslator>> to work with the raw `ExecutionException` as being thrown by Java Executor framework.
 
 .Examples of how to await done state on a future
 [source,java,indent=0]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.awaitDone]
 ----
-<1>  Waits if necessary for the job to complete, or until cancelled. This method does not throw an exception if cancelled or the computation failed, but throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
-<2> Waits if necessary for at most 10 seconds for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the computation failed, but throws <<TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
-<3> Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to <<DefaultRuntimeExceptionTranslator>>, or throws <<FutureCancelledError>> if cancelled, or throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
-<4> Waits if necessary for at most 10 seconds for the job to complete, and then returns its result, if available, or throws its exception according to <<DefaultRuntimeExceptionTranslator>>, or throws <<FutureCancelledError>> if cancelled, or throws <<TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
-<5> Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to the given <<DefaultExceptionTranslator>>, or throws <<FutureCancelledError>> if cancelled, or throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
-<6> Waits if necessary for at most the given time for the job to complete, and then returns its result, if available, or throws its exception according to the given <<DefaultExceptionTranslator>>, or throws <<FutureCancelledError>> if cancelled, or throws <<TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<1> Waits if necessary for the job to complete, or until cancelled. This method does not throw an exception if cancelled or the computation failed, but throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<2> Waits if necessary for at most 10 seconds for the job to complete, or until cancelled, or the timeout elapses. This method does not throw an exception if cancelled, or the computation failed, but throws <<TimedOutError,TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<3> Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to <<DefaultRuntimeExceptionTranslator,DefaultRuntimeExceptionTranslator>>, or throws <<FutureCancelledError,FutureCancelledError>> if cancelled, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<4> Waits if necessary for at most 10 seconds for the job to complete, and then returns its result, if available, or throws its exception according to <<DefaultRuntimeExceptionTranslator,DefaultRuntimeExceptionTranslator>>, or throws <<FutureCancelledError,FutureCancelledError>> if cancelled, or throws <<TimedOutError,TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<5> Waits if necessary for the job to complete, and then returns its result, if available, or throws its exception according to the given <<DefaultExceptionTranslator,DefaultExceptionTranslator>>, or throws <<FutureCancelledError,FutureCancelledError>> if cancelled, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
+<6> Waits if necessary for at most the given time for the job to complete, and then returns its result, if available, or throws its exception according to the given <<DefaultExceptionTranslator,DefaultExceptionTranslator>>, or throws <<FutureCancelledError,FutureCancelledError>> if cancelled, or throws <<TimedOutError,TimedOutError>> if waiting timeout elapsed, or throws <<ThreadInterruptedError,ThreadInterruptedError>> if the current thread was interrupted while waiting.
 
 It is further possible to await asynchronously on a future to enter done state by registering a callback via `whenDone` method. The advantage over registering a listener is that the callback is invoked even if the future already entered done state upon registration.
 
@@ -357,7 +357,7 @@ It is further possible to await asynchronously on a future to enter done state b
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/JobManagerSnippet.java[tags=future.whenDone]
 ----
 
-Because invoked in another thread, this method optionally accepts a <<RunContext>> to be applied when being invoked.
+Because invoked in another thread, this method optionally accepts a <<RunContext,RunContext>> to be applied when being invoked.
 
 ==== Awaiting a single future's 'finished' state
 Use the method `awaitFinished` to wait for the job to finish, meaning that the job either completed normally or by an exception, or that it will never commence execution due to a premature cancellation. To learn more about the difference between 'done' and 'finished' state, click <<Difference between 'done' and 'finished' state, here>>.
@@ -396,7 +396,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 === Uncaught job exceptions
 If a job throws an exception, that exception is handled by `ExceptionHandler`, and propagated to the submitter. However, the exception is only propagated if having a waiting submitter. Also, an uncaught exception causes repetitive jobs to terminate.
 
-This default behavior as described can be changed via <<JobInput.withExceptionHandling>>.
+This default behavior as described can be changed via <<JobInput.withExceptionHandling,JobInput.withExceptionHandling(..)>>.
 
 === Blocking condition
 A blocking condition allows a thread to wait for a condition to become _true_. That is similar to the Java Object's 'wait/notify' mechanism, but with some additional functionality regarding semaphore aware jobs. If a semaphore aware job enters a blocking condition, it releases ownership of the permit, which allows another job of that same semaphore to commence execution. Upon the condition becomes _true_, the job then must compete for a permit anew.
@@ -441,13 +441,13 @@ Use the static factory method 'Jobs.newExecutionTrigger()' to get an instance.
 Regardless of the schedule used, job manager guarantees no concurrent execution of the same job. That may happen, if using a repeatedly schedule with the job not terminated its last execution yet, but the schedule's trigger would like to fire for the next execution already. Such a situation is called a misfiring. The action to be taken upon a misfiring is configurable via the schedule's misfiring policy. A policy can be to run the job immediately upon termination of the previous execution, or to just ignore that missed firing. See the JavaDoc of the schedule for more information.
 
 === Stopping the platform
-Upon stopping the platform, the job manager will also be shutdown. If having a <<IPlatformListener>> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an `@Order` less than `IJobManager.DESTROY_ORDER`, which is 5'900. If not specifying an `@Order` explicitly, the listener will have the default order of _5_, meaning being invoked before job manager shutdown anyway.
+Upon stopping the platform, the job manager will also be shutdown. If having a <<platform-listener,IPlatformListener>> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an `@Order` less than `IJobManager.DESTROY_ORDER`, which is 5'900. If not specifying an `@Order` explicitly, the listener will have the default order of _5_, meaning being invoked before job manager shutdown anyway.
 
 
 === ModelJobs
 Model jobs exist client side only, and are used to interact with the Scout client model to read and write model values in a serial manner per session. That enables no synchronization to be used when interacting with the model.
 
-By definition, a model job requires to be run on behalf of a <<ClientRunContext>> with a <<IClientSession>> set, and must have the session's model job semaphore set as its <<ExecutionSemaphore>>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.
+By definition, a model job requires to be run on behalf of a <<properties-of-a-clientruncontext,ClientRunContext>> with a `IClientSession` set, and must have the session's model job semaphore set as its <<ExecutionSemaphore,ExecutionSemaphore>>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.
 
 The class `ModelJobs` is a helper class, and is for convenience purpose to facilitate the creation of model job related artifacts, and to schedule model jobs.
 

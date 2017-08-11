@@ -33,7 +33,7 @@ We will start by building the application from scratch and then we'll deploy the
 === Installation and Setup
 
 Before you can start with the "`Hello World`" example you need to have a complete and working Scout installation.
-For this, see the step-by-step installation guide provided in Appendix <<apx-install_scout>>.
+For this, see the step-by-step installation guide provided in <<apx-install_scout>>.
 Once you have everything installed, you are ready to create your first Scout project.
 
 [[sec-create_project_simple]]
