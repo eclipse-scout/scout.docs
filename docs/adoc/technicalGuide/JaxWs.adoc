@@ -157,7 +157,7 @@ It is important to note, that the _server_ depends on the _jaxws_ module, and no
 
 You may ask yourself, how the _jaxws_ module can access the implementing port type and handlers located in the _server_ module. That works because of the indirection via bean manager, and because there is a flat classpath at runtime.
 
-See <<WebServiceEntryPoint>> for more information.
+See <<WebServiceEntryPoint,WebServiceEntryPoint>> for more information.
 
 === Build webservice stubs and artifacts
 
