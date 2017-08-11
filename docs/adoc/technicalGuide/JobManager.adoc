@@ -335,7 +335,7 @@ When awaiting futures, the definition of 'done' and 'finished' state should be u
 ==== Awaiting a single future's 'done' state
 Besides of some overloaded methods, <<IFuture,IFuture>> basically provides two methods to wait for a future to enter 'done' state, namely `awaitDone` and `awaitDoneAndGet`, with the difference that the latter additionally returns the job's result or exception. If the future is already done, those methods will return immediately. For both methods, there exists an overloaded version to wait for at most a given time, which once elapsed results in a `TimedOutException` thrown.
 
-Further, `awaitDoneAndGet` allows to specify an <<IExceptionTranslator,IExceptionTranslator>> to control exception translation. By default, <<DefaultRuntimeExceptionTranslator,DefaultRuntimeExceptionTranslator>> is used, meaning that a `RuntimeException` is propagated as it is, whereas a checked exception would be wrapped into a <<PlatformException,PlatformException>>. If you require checked exceptions to be thrown as they are, use <<DefaultExceptionTranslator,DefaultExceptionTranslator>> instead, or even <<NullExceptionTranslator,NullExceptionTranslator>> to work with the raw `ExecutionException` as being thrown by Java Executor framework.
+Further, `awaitDoneAndGet` allows to specify an <<exception-translation,IExceptionTranslator>> to control exception translation. By default, <<DefaultRuntimeExceptionTranslator>> is used, meaning that a `RuntimeException` is propagated as it is, whereas a checked exception would be wrapped into a <<PlatformException>>. If you require checked exceptions to be thrown as they are, use <<DefaultExceptionTranslator>> instead, or even <<NullExceptionTranslator>> to work with the raw `ExecutionException` as being thrown by Java Executor framework.
 
 .Examples of how to await done state on a future
 [source,java,indent=0]
@@ -441,13 +441,13 @@ Use the static factory method 'Jobs.newExecutionTrigger()' to get an instance.
 Regardless of the schedule used, job manager guarantees no concurrent execution of the same job. That may happen, if using a repeatedly schedule with the job not terminated its last execution yet, but the schedule's trigger would like to fire for the next execution already. Such a situation is called a misfiring. The action to be taken upon a misfiring is configurable via the schedule's misfiring policy. A policy can be to run the job immediately upon termination of the previous execution, or to just ignore that missed firing. See the JavaDoc of the schedule for more information.
 
 === Stopping the platform
-Upon stopping the platform, the job manager will also be shutdown. If having a <<IPlatformListener>> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an `@Order` less than `IJobManager.DESTROY_ORDER`, which is 5'900. If not specifying an `@Order` explicitly, the listener will have the default order of _5_, meaning being invoked before job manager shutdown anyway.
+Upon stopping the platform, the job manager will also be shutdown. If having a <<platform-listener,IPlatformListener>> to perform some cleanup work, and which requires the job manager to be still functional, that listener must be annotated with an `@Order` less than `IJobManager.DESTROY_ORDER`, which is 5'900. If not specifying an `@Order` explicitly, the listener will have the default order of _5_, meaning being invoked before job manager shutdown anyway.
 
 
 === ModelJobs
 Model jobs exist client side only, and are used to interact with the Scout client model to read and write model values in a serial manner per session. That enables no synchronization to be used when interacting with the model.
 
-By definition, a model job requires to be run on behalf of a <<RunContext,RunContext>> with a `IClientSession` set, and must have the session's model job semaphore set as its <<ExecutionSemaphore,ExecutionSemaphore>>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.
+By definition, a model job requires to be run on behalf of a <<properties-of-a-runcontext,ClientRunContext>> with a `IClientSession` set, and must have the session's model job semaphore set as its <<ExecutionSemaphore,ExecutionSemaphore>>. That causes all such jobs to be run in sequence in the model thread. At any given time, there is only one model thread active per client session.
 
 The class `ModelJobs` is a helper class, and is for convenience purpose to facilitate the creation of model job related artifacts, and to schedule model jobs.
 
