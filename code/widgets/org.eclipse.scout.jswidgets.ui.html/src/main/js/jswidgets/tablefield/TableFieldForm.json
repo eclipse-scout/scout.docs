@@ -84,7 +84,21 @@
             "id": "AutoResizeColumnsField",
             "objectType": "CheckBoxField",
             "label": "Auto Resize Columns",
-            "labelVisible": false
+            "tooltipText": "${textKey:AutoResizeColumnsTooltip}",
+            "labelVisible": false,
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
+          },
+          {
+            "id": "AutoOptimizeColumnWidthsField",
+            "objectType": "CheckBoxField",
+            "label": "Auto Optimize Column Widths",
+            "tooltipText": "${textKey:AutoOptimizeColumnWidthsTooltip}",
+            "labelVisible": false,
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
           },
           {
             "id": "CheckableField",

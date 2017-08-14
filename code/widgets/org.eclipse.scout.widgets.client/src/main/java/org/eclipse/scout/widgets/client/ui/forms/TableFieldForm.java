@@ -1484,7 +1484,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected int getConfiguredGridH() {
-          return 7;
+          return 8;
         }
 
         @Override
@@ -1506,6 +1506,16 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("AutoResizeColumnsTooltip");
+          }
+
+          @Override
+          protected boolean getConfiguredFillHorizontal() {
+            return false;
+          }
+
+          @Override
           protected boolean getConfiguredLabelVisible() {
             return false;
           }
@@ -1523,6 +1533,48 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isAutoResizeColumns());
+          }
+
+        }
+
+        @Order(85)
+        public class AutoOptimizeColumnWidthsField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("AutoOptimizeColumnWidths");
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("AutoOptimizeColumnWidthsTooltip");
+          }
+
+          @Override
+          protected boolean getConfiguredFillHorizontal() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            for (IColumn<?> column : getTableField().getTable().getColumns()) {
+              column.setAutoOptimizeWidth(getValue());
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(false);
           }
 
         }

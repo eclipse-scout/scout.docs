@@ -30,6 +30,10 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   autoResizeColumnsField.setValue(this.table.autoResizeColumns);
   autoResizeColumnsField.on('propertyChange', this._onAutoResizeColumnsPropertyChange.bind(this));
 
+  var autoOptimizeColumnWidthsField = this.widget('AutoOptimizeColumnWidthsField');
+  autoOptimizeColumnWidthsField.setValue(false);
+  autoOptimizeColumnWidthsField.on('propertyChange', this._onAutoOptimizeColumnWidthsPropertyChange.bind(this));
+
   var checkableField = this.widget('CheckableField');
   checkableField.setValue(this.table.checkable);
   checkableField.on('propertyChange', this._onCheckablePropertyChange.bind(this));
@@ -108,6 +112,14 @@ jswidgets.TableFieldForm.prototype._onToggleGroupNoColumnMenuAction = function()
 jswidgets.TableFieldForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setAutoResizeColumns(event.newValue);
+  }
+};
+
+jswidgets.TableFieldForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.columns.forEach(function(column) {
+      column.setAutoOptimizeWidth(event.newValue);
+    });
   }
 };
 

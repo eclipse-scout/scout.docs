@@ -27,6 +27,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<Clear Icon for Input Fields (since 7.0.100)>>
 * <<Improved Touch Popups (since 7.0.100)>>
 * <<Sorting of Filter Table (since 7.0.100)>>
+* <<Auto Optimize Column Width (since 7.0.100)>>
 
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
 
@@ -208,3 +209,6 @@ The column header menu shows a list of all the different values which occur in t
 [[img-table-header-menu-filter-sorting, Figure 000]]
 .Column Filter Sorting
 image::{imgsdir}/table_header_menu_filter_sorting.png[]
+
+== Auto Optimize Column Width (since 7.0.100)
+The column has a property called `autoOptimizeWidth`. This property has been there for a while but has not been interpreted yet. With 7.0.100 the support for this property has been implemented. If you set it to true on a specific column, the column will always be as width as its content. If not set, the user can still optimize the width manually by double clicking the separator between two columns.
