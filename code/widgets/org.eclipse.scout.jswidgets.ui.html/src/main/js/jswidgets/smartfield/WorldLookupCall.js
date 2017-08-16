@@ -11,7 +11,7 @@
 jswidgets.WorldLookupCall = function() {
   jswidgets.WorldLookupCall.parent.call(this);
 
-  this.setLoadIncremental(true);
+  this.setLoadIncremental(false);
   this.setHierarchical(true);
 };
 scout.inherits(jswidgets.WorldLookupCall, scout.StaticLookupCall);
