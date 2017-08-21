@@ -39,15 +39,18 @@ jswidgets.FormForm.prototype._init = function(model) {
 
   var closableField = this.widget('ClosableField');
   closableField.setValue(this.closable);
-  closableField.on('propertyChange', this._onClosableChange.bind(this));
+  if (this.openedByButton) {
+    closableField.on('propertyChange', this._onClosableChange.bind(this));
+  }
 
   var resizableField = this.widget('ResizableField');
   resizableField.setValue(this.resizable);
 
   var modalField = this.widget('ModalField');
   modalField.setValue(this.modal);
-  modalField.on('propertyChange', this._onModalChange.bind(this));
-
+  if (this.openedByButton) {
+    modalField.on('propertyChange', this._onModalChange.bind(this));
+  }
   var displayHintField = this.widget('DisplayHintField');
   displayHintField.setValue(this.openedByButton ? this.displayHint : scout.Form.DisplayHint.DIALOG);
 };

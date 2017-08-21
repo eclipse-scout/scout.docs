@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.GridData;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
@@ -27,16 +28,24 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.EventTypeLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.FontStyleLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox.FontNameField;
+import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox.FontStyleField;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox.RadioButtonGroup;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox.RadioButtonGroup.No1Button;
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ConfigurationBox.RadioButtonGroup.No2Button;
@@ -128,6 +137,14 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
   public RadioButtonGroup getRadioButtonGroup() {
     return getFieldByClass(RadioButtonGroup.class);
+  }
+
+  public FontNameField getFontNameField() {
+    return getFieldByClass(FontNameField.class);
+  }
+
+  public FontStyleField getFontStyleField() {
+    return getFieldByClass(FontStyleField.class);
   }
 
   public SampleContentButton getSampleContentButton() {
@@ -288,13 +305,18 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
       @Override
       protected int getConfiguredGridColumnCount() {
-        return 1;
+        return 2;
       }
 
       @Order(10)
       public class RadioButtonGroup extends AbstractRadioButtonGroup<String> {
 
         private boolean m_showMessageBox = true;
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -408,30 +430,6 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
-      public class ValueField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return "Selected value";
-        }
-
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return RadioButtonGroup.class;
-        }
-
-        @Override
-        protected void execChangedMasterValue(Object newMasterValue) {
-          setValue(getRadioButtonGroup().getValue());
-        }
-      }
-
-      @Order(40)
       public class RadioButtonValuesBox extends AbstractSequenceBox {
 
         @Override
@@ -442,6 +440,11 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         @Override
         protected boolean getConfiguredAutoCheckFromTo() {
           return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
         }
 
         @Override
@@ -539,12 +542,41 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70)
+      @Order(30)
+      public class ValueField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Selected value";
+        }
+
+        @Override
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return RadioButtonGroup.class;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) {
+          setValue(getRadioButtonGroup().getValue());
+        }
+      }
+
+      @Order(40)
       public class RadioButtonGroupHeightField extends AbstractIntegerField {
 
         @Override
         protected String getConfiguredLabel() {
           return "Group Height";
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
         }
 
         @Override
@@ -567,6 +599,138 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
           getRadioButtonGroup().setGridDataHints(gdh);
           getConfigurationBox().rebuildFieldGrid();
           getRadioButtonGroup().rebuildFieldGrid();
+        }
+      }
+
+      @Order(50)
+      public class LabelField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Label");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getRadioButtonGroup().getButtons().get(0).getLabel());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getRadioButtonGroup().getButtons().get(0).setLabel(getValue());
+        }
+      }
+
+      @Order(60)
+      public class IconIdField extends AbstractSmartField2<String> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("IconId");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getRadioButtonGroup().getButtons().get(0).getIconId());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getRadioButtonGroup().getButtons().get(0).setIconId(getValue());
+        }
+      }
+
+      @Order(70)
+      public class FontNameField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Font");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          updateFontAndColors();
+        }
+      }
+
+      @Order(80)
+      public class FontStyleField extends AbstractSmartField2<Integer> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FontStyle");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          updateFontAndColors();
+        }
+      }
+
+      private void updateFontAndColors() {
+        String name = StringUtility.emptyIfNull(getFontNameField().getValue());
+        int style = NumberUtility.nvl(getFontStyleField().getValue(), 0);
+        FontSpec fs = new FontSpec(name, style, 0);
+        getRadioButtonGroup().getButtons().get(0).setFont(fs);
+      }
+
+      @Order(90)
+      public class EnabledField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Enabled";
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getRadioButtonGroup().getButtons().get(0).setEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getRadioButtonGroup().getButtons().get(0).isEnabled());
         }
       }
     }
