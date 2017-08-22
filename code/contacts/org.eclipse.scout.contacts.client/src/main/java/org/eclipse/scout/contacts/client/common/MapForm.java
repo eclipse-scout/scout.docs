@@ -185,6 +185,7 @@ public class MapForm extends AbstractForm {
       }
 
       @Override
+      @SuppressWarnings("deprecation")
       protected boolean getConfiguredFocusable() {
         return false;
       }
