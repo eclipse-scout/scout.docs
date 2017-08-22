@@ -183,11 +183,6 @@ public class MapForm extends AbstractForm {
         getMapField().clearErrorStatus();
         super.execClickAction();
       }
-
-      @Override
-      protected boolean getConfiguredFocusable() {
-        return false;
-      }
     }
   }
 

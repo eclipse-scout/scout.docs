@@ -1,0 +1,73 @@
+////
+Howto:
+- Write this document such that it helps people to migrate. Describe what they should do.
+- Chronological order is not necessary.
+- Choose the right top level chapter (java, js, other)
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.1.xxx" note)
+////
+
+== About This Document
+
+This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse Scout 7.1*. If existing code has to be migrated, instructions are provided here.
+
+IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen preview_) release: +
+https://eclipsescout.github.io/7.0/migration-guide.html
+
+* <<Removed property `focusable` from IFormField, AbstractFormField>>
+
+=== Service Release Migration
+
+The following changes were made after the initial 7.1 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
+
+==== Photon.1 (7.1.100) Release expected on September, 2018
+
+{NotReleasedWarning}
+
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA CODE ================================================
+  =============================================================================
+////
+
+== API Changes (Java)
+
+== Removed property `focusable` from IFormField, AbstractFormField
+Since the new Html UI was introduced with Scout 5.2 this property has no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:
+
+* boolean IFormField#isFocusable()
+* void IFormField#setFocusable(boolean f)
+* boolean IFormField#PROP_FOCUSABLE
+* boolean AbstractFormField#getConfiguredFocusable()
+
+Since there is no replacement for the focusable property, remove all code that uses one of the methods/properties listed above.
+
+// ^^^
+// Insert descriptions of Java API changes here
+
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA SCRIPT CODE =========================================
+  =============================================================================
+////
+
+== API Changes (JavaScript)
+
+N/A
+
+// ^^^
+// Insert descriptions of JavaScript API changes here
+
+////
+  =============================================================================
+  === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================
+  =============================================================================
+////
+
+== Other Changes
+
+N/A
+
+// ^^^
+// Insert descriptions of other important changes here
