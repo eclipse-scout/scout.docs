@@ -33,12 +33,14 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 == API Changes (Java)
 
 == Removed property `focusable` from IFormField, AbstractFormField
-Since the new Html UI was introduced with Scout 5.2 this property has no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:
+Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:
 
 * boolean IFormField#isFocusable()
 * void IFormField#setFocusable(boolean f)
 * boolean IFormField#PROP_FOCUSABLE
 * boolean AbstractFormField#getConfiguredFocusable()
+* class AbstractNonFocusableButton
+* class AbstractNonFocusableRadioButton
 
 Since there is no replacement for the focusable property, remove all code that uses one of the methods/properties listed above.
 
