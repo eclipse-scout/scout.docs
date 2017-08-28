@@ -183,6 +183,7 @@ public class MapForm extends AbstractForm {
         getMapField().clearErrorStatus();
         super.execClickAction();
       }
+      @SuppressWarnings("deprecation")
     }
   }
 
