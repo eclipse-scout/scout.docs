@@ -47,6 +47,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
   protected List<LookupRow<Locale>> execCreateLookupRows() {
     List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
     Locale[] locales = availableLocales();
+    boolean browse = this.getAll() != null;
     for (Locale locale : sort(locales)) {
       String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
@@ -56,6 +57,9 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
         bean.setLanguage(locale.getLanguage());
         row.withAdditionalTableRowData(bean);
         rows.add(row);
+      }
+      if (browse && rows.size() >= getMaxRowCount()) {
+        break;
       }
     }
     return rows;
