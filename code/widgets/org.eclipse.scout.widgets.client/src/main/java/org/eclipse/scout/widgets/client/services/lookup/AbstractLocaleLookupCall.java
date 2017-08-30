@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -24,7 +25,10 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
+
   private static final long serialVersionUID = 1L;
+
+  private boolean m_throwVetoException;
 
   public AbstractLocaleLookupCall() {
     super();
@@ -45,6 +49,9 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
   @Override
   protected List<LookupRow<Locale>> execCreateLookupRows() {
+    if (m_throwVetoException) {
+      throw new VetoException("Lookup failed");
+    }
     List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
     Locale[] locales = availableLocales();
     boolean browse = this.getAll() != null;
@@ -94,5 +101,12 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
     public void setCountry(String country) {
       m_country = country;
     }
+  }
+
+  /**
+   * Used to simulate a lookup that fails with a VetoException.
+   */
+  public void setThrowVetoException(boolean throwVetoException) {
+    m_throwVetoException = throwVetoException;
   }
 }

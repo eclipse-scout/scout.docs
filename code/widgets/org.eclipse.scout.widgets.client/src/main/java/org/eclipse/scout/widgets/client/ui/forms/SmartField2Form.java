@@ -289,6 +289,8 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         @Order(30)
         public class DefaultField extends AbstractSmartField2<Locale> {
 
+          private boolean m_throwVetoException = false;
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Default");
@@ -296,8 +298,22 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
+            return (Class<? extends ILookupCall<Locale>>) /*Remote*/ LocaleLookupCall.class;
           }
+
+          @Override
+          protected void execPrepareLookup(ILookupCall<Locale> call) {
+            ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+          }
+
+          public void setThrowVetoException(boolean throwVetoException) {
+            m_throwVetoException = throwVetoException;
+          }
+
+          public boolean isThrowVetoException() {
+            return m_throwVetoException;
+          }
+
         }
 
         @Order(40)
@@ -1124,6 +1140,32 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
             setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
             getDefaultSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
           }
+        }
+      }
+
+      @Order(80)
+      public class ToggleExceptionOnLookupMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Throw VetoException on lookup";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "DefaultSmartField throws a VetoException on every lookup";
+        }
+
+        @Override
+        protected void execAction() {
+          boolean isThrow = getDefaultField().isThrowVetoException();
+          if (isThrow) {
+            setText("Throw VetoException on lookup");
+          }
+          else {
+            setText("Don't throw VetoException on lookup");
+          }
+          getDefaultField().setThrowVetoException(!isThrow);
         }
       }
 
