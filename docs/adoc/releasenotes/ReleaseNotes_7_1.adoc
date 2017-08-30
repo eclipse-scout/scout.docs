@@ -6,9 +6,9 @@
 
 == About This Release
 
-Eclipse Scout 7.1 is part of the Eclipse _Photon_ release. It was released in June 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is _7.1.0.001_Photon_.
+Eclipse Scout 7.1 is a preview version of the Eclipse _Photon_ release. It will be released in June 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is: None released yet.
 
-IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen preview_) release: +
+IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen_) release: +
 https://eclipsescout.github.io/7.0/migration-guide.html
 
 * <<PLACEHOLDER>>
@@ -65,4 +65,7 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-N/A
+== Java 8 required
+
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout _Photon_, a Java 8 (or newer) runtime is required.
+
