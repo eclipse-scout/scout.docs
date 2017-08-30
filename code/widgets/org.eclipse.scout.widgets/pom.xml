@@ -17,12 +17,12 @@
   <parent>
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>2.0.13</version>
+    <version>3.0.0</version>
     <relativePath/>
   </parent>
 
   <properties>
-    <jdk.source.version>1.7</jdk.source.version>
+    <jdk.source.version>1.8</jdk.source.version>
     <org.eclipse.scout.rt.version>7.1.0-SNAPSHOT</org.eclipse.scout.rt.version>
   </properties>
 
