@@ -303,7 +303,9 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
           @Override
           protected void execPrepareLookup(ILookupCall<Locale> call) {
-            ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+            if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
+              ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+            }
           }
 
           public void setThrowVetoException(boolean throwVetoException) {
