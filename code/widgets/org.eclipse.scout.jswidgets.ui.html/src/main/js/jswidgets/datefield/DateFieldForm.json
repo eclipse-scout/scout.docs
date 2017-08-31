@@ -40,7 +40,8 @@
             "id": "AutoDateField",
             "objectType": "DateField",
             "label": "Auto Date",
-            "tooltipText": "${textKey:AutoDateTooltip}"
+            "tooltipText": "${textKey:AutoDateTooltip}",
+            "hasTime": true
           },
           {
             "id": "DateFormatField",
