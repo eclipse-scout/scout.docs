@@ -4,6 +4,7 @@
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Grid Data",
+  "expandable": true,
   "fields": [
     {
       "id": "WField",

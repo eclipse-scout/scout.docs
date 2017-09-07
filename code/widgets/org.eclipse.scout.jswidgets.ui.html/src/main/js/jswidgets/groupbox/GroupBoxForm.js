@@ -33,6 +33,10 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   expandedField.setValue(groupBox.expanded);
   expandedField.on('propertyChange', this._onExpandedChange.bind(this));
 
+  var scrollableField = this.widget('ScrollableField');
+  scrollableField.setValue(groupBox.scrollable);
+  scrollableField.on('propertyChange', this._onScrollableChange.bind(this));
+
   var gridColumnCountField = this.widget('GridColumnCountField');
   gridColumnCountField.setValue(groupBox.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountChange.bind(this));
@@ -53,6 +57,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   toggleVisibilityButton.on('click', this._onToggleVisibilityButtonClick.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(groupBox);
+  this.widget('GridDataBox').setField(groupBox);
 };
 
 jswidgets.GroupBoxForm.prototype._jsonModel = function() {
@@ -80,6 +85,12 @@ jswidgets.GroupBoxForm.prototype._onExpandableChange = function(event) {
 jswidgets.GroupBoxForm.prototype._onExpandedChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('DetailBox').setExpanded(event.newValue);
+  }
+};
+
+jswidgets.GroupBoxForm.prototype._onScrollableChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('DetailBox').setScrollable(event.newValue);
   }
 };
 
