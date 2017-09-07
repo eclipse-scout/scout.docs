@@ -109,6 +109,14 @@
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"
       }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:Tiles}",
+      "detailForm": {
+        "objectType": "jswidgets.TilesForm"
+      }
     }
   ]
 }

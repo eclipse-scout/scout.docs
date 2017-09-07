@@ -1,0 +1,52 @@
+{
+  "id": "jswidgets.TilesForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "TilesField",
+            "objectType": "TilesField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "h": 2
+            },
+            "tiles": {
+              "id": "Tiles",
+              "objectType": "Tiles",
+              "tiles": [
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 1"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 2"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 3"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 4"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 5"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

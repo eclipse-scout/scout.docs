@@ -21,6 +21,7 @@
     "jswidgets/stringfield/StringFieldForm.json",
     "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tablefield/TableFieldForm.json",
+    "jswidgets/tiles/TilesForm.json",
     "jswidgets/valuefield/ValueFieldPropertiesBox.json"
   ]
 }

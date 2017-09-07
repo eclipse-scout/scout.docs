@@ -46,6 +46,8 @@
   __include("jswidgets/tabbox/TabBoxForm.js");
   __include("jswidgets/tabbox/SelectedTabLookupCall.js");
   __include("jswidgets/tablefield/TableFieldForm.js");
+  __include("jswidgets/tiles/SimpleTile.js");
+  __include("jswidgets/tiles/TilesForm.js");
   __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
   __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");
