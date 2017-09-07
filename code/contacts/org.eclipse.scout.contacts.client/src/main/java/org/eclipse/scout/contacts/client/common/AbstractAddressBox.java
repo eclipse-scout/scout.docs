@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -120,7 +120,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
 
     @Order(2000)
-    public class CountryField extends AbstractSmartField2<String> {
+    public class CountryField extends AbstractSmartField<String> {
 
       @Override
       protected String getConfiguredLabel() {

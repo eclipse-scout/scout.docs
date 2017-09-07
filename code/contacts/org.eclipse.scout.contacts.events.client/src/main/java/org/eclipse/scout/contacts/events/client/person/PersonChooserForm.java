@@ -24,7 +24,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -82,7 +82,7 @@ public class PersonChooserForm extends AbstractForm {
     public class PersonBox extends AbstractGroupBox {
 
       @Order(1)
-      public class PersonField extends AbstractSmartField2<String> {
+      public class PersonField extends AbstractSmartField<String> {
 
         @Override
         protected boolean getConfiguredLabelVisible() {

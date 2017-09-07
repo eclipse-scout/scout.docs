@@ -32,7 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
@@ -410,7 +410,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
     }
 
     @Order(10)
-    public class CountrySmartField extends AbstractSmartField2<Long> {
+    public class CountrySmartField extends AbstractSmartField<Long> {
 
       @Override
       protected String getConfiguredLabel() {
@@ -506,7 +506,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
-    public class CompanySmartField extends AbstractSmartField2<Long> {
+    public class CompanySmartField extends AbstractSmartField<Long> {
 
       @Override
       protected String getConfiguredLabel() {

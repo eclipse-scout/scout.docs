@@ -11,7 +11,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -163,7 +163,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(50)
-      public class SeverityField extends AbstractSmartField2<Integer> {
+      public class SeverityField extends AbstractSmartField<Integer> {
 
         @Override
         protected String getConfiguredLabel() {

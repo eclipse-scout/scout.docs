@@ -27,7 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractResetButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractSearchButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.Order;
@@ -149,7 +149,7 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(3750)
-        public class OrganizationField extends AbstractSmartField2<String> {
+        public class OrganizationField extends AbstractSmartField<String> {
 
           @Override
           protected String getConfiguredLabel() {

@@ -30,7 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.ISequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -627,7 +627,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class IndustryField extends AbstractSmartField2<Long> {
+        public class IndustryField extends AbstractSmartField<Long> {
 
           @Override
           protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
@@ -831,7 +831,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class WidgetSmartField extends AbstractSmartField2<IFormField> {
+        public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -851,7 +851,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class VisibleSmartField extends AbstractSmartField2<Boolean> {
+        public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -870,7 +870,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class MandatorySmartField extends AbstractSmartField2<Boolean> {
+        public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -889,7 +889,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
-        public class ErrorStatusSmartField extends AbstractSmartField2<Boolean> {
+        public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1036,7 +1036,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class WidgetSmartField extends AbstractSmartField2<IFormField> {
+        public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1056,7 +1056,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class VisibleSmartField extends AbstractSmartField2<Boolean> {
+        public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1075,7 +1075,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class MandatorySmartField extends AbstractSmartField2<Boolean> {
+        public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1094,7 +1094,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
-        public class ErrorStatusSmartField extends AbstractSmartField2<Boolean> {
+        public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1256,7 +1256,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class WidgetSmartField extends AbstractSmartField2<IFormField> {
+        public class WidgetSmartField extends AbstractSmartField<IFormField> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1276,7 +1276,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
-        public class VisibleSmartField extends AbstractSmartField2<Boolean> {
+        public class VisibleSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1295,7 +1295,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
-        public class MandatorySmartField extends AbstractSmartField2<Boolean> {
+        public class MandatorySmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -1314,7 +1314,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
-        public class ErrorStatusSmartField extends AbstractSmartField2<Boolean> {
+        public class ErrorStatusSmartField extends AbstractSmartField<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {

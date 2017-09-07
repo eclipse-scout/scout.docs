@@ -23,7 +23,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
@@ -273,7 +273,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
 
     //tag::CountryColumn[]
     @Order(5)
-    public class CountryColumn extends AbstractSmartColumn2<String> {
+    public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected String getConfiguredHeaderText() {
@@ -353,7 +353,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     // tag::organizationColumn[]
 
     @Order(9)
-    public class OrganizationColumn extends AbstractSmartColumn2<String> {
+    public class OrganizationColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected String getConfiguredHeaderText() {

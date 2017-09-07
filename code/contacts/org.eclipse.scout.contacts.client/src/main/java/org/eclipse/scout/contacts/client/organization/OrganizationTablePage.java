@@ -19,7 +19,7 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -132,7 +132,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
     }
 
     @Order(4000)
-    public class CountryColumn extends AbstractSmartColumn2<String> {
+    public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected String getConfiguredHeaderText() {

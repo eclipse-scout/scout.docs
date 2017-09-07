@@ -34,7 +34,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeFiel
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
@@ -1010,7 +1010,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
-        public class ConfigLocaleField extends AbstractSmartField2<Locale> {
+        public class ConfigLocaleField extends AbstractSmartField<Locale> {
 
           @Override
           protected boolean getConfiguredLabelVisible() {

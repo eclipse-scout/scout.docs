@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -60,7 +60,7 @@ public class OptionsForm extends AbstractForm {
     public class GroupBox extends AbstractGroupBox {
 
       @Order(10)
-      public class UiThemeField extends AbstractSmartField2<String> {
+      public class UiThemeField extends AbstractSmartField<String> {
 
         @Override
         protected String getConfiguredLabel() {

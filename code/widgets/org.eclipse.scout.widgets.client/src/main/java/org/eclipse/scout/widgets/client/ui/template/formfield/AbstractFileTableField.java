@@ -33,7 +33,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBeanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.dnd.ResourceListTransferObject;
@@ -301,7 +301,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     }
 
     @Order(40)
-    public class TypeColumn extends AbstractSmartColumn2<String> {
+    public class TypeColumn extends AbstractSmartColumn<String> {
 
       @Override
       protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {

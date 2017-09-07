@@ -40,8 +40,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIconColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractProposalColumn2;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractProposalColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractTimeColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
@@ -52,7 +52,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -481,7 +481,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(30)
-          public class LocationColumn extends AbstractProposalColumn2<String> {
+          public class LocationColumn extends AbstractProposalColumn<String> {
 
             @Override
             protected boolean getConfiguredEditable() {
@@ -562,7 +562,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(50)
-          public class IndustryColumn extends AbstractSmartColumn2<Long> {
+          public class IndustryColumn extends AbstractSmartColumn<Long> {
 
             @Override
             protected boolean getConfiguredEditable() {
@@ -592,7 +592,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(60)
-          public class LanguageColumn extends AbstractSmartColumn2<Locale> {
+          public class LanguageColumn extends AbstractSmartColumn<Locale> {
 
             @Override
             protected boolean getConfiguredEditable() {
@@ -1445,7 +1445,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(60)
-      public class DefaultIconIdField extends AbstractSmartField2<String> {
+      public class DefaultIconIdField extends AbstractSmartField<String> {
 
         @Override
         protected String getConfiguredLabel() {

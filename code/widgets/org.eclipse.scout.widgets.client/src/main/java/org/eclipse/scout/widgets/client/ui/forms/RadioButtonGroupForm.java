@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -627,7 +627,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
-      public class IconIdField extends AbstractSmartField2<String> {
+      public class IconIdField extends AbstractSmartField<String> {
 
         @Override
         protected String getConfiguredLabel() {
@@ -675,7 +675,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80)
-      public class FontStyleField extends AbstractSmartField2<Integer> {
+      public class FontStyleField extends AbstractSmartField<Integer> {
 
         @Override
         protected String getConfiguredLabel() {

@@ -27,7 +27,7 @@
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
   __include("jswidgets/logicalgrid/LogicalGridForm.js");
-  __include("jswidgets/smartfield/SmartField2Form.js");
+  __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/HierarchicalLookupCall.js");
   __include("jswidgets/smartfield/WorldLookupCall.js");
   __include("jswidgets/smartfield/LocaleLookupCall.js");

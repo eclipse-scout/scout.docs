@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.SmartField2Form",
+  "id": "jswidgets.SmartFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -14,7 +14,7 @@
         "fields": [
            {
             "id": "TableSmartField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.LocaleLookupCall",
             "label": "${textKey:Locale}"
            },
@@ -38,7 +38,7 @@
         "fields": [
            {
             "id": "TreeSmartField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.WorldLookupCall",
             "label": "${textKey:WorldRegion}",
             "browseHierarchy": true
@@ -63,7 +63,7 @@
         "fields": [
            {
             "id": "ProposalField",
-            "objectType": "ProposalField2",
+            "objectType": "ProposalField",
             "lookupCall": "jswidgets.SalutationLookupCall",
             "label": "${textKey:Salutation}"
            }
@@ -77,7 +77,7 @@
         "fields": [
            {
             "id": "DropdownField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.SalutationLookupCall",
             "label": "${textKey:Salutation}",
             "displayStyle": "dropdown"

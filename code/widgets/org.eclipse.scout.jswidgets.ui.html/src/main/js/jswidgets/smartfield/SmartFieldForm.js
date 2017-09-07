@@ -8,15 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.SmartField2Form = function() {
-  jswidgets.SmartField2Form.parent.call(this);
+jswidgets.SmartFieldForm = function() {
+  jswidgets.SmartFieldForm.parent.call(this);
 };
-scout.inherits(jswidgets.SmartField2Form, scout.Form);
+scout.inherits(jswidgets.SmartFieldForm, scout.Form);
 
-jswidgets.SmartField2Form.GROUP_SIZE = 2;
+jswidgets.SmartFieldForm.GROUP_SIZE = 2;
 
-jswidgets.SmartField2Form.prototype._init = function(model) {
-  jswidgets.SmartField2Form.parent.prototype._init.call(this, model);
+jswidgets.SmartFieldForm.prototype._init = function(model) {
+  jswidgets.SmartFieldForm.parent.prototype._init.call(this, model);
 
   this.smartField = this.widget('TableSmartField');
   this.valueField = this.widget('ValueField');
@@ -46,6 +46,6 @@ jswidgets.SmartField2Form.prototype._init = function(model) {
 
 };
 
-jswidgets.SmartField2Form.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SmartField2Form');
+jswidgets.SmartFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.SmartFieldForm');
 };

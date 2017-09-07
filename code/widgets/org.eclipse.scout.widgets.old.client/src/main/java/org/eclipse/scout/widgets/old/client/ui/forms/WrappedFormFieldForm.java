@@ -26,7 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField2;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFormField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -205,7 +205,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
-        public class InnerFormField extends AbstractSmartField2<Class<? extends IPageForm>> {
+        public class InnerFormField extends AbstractSmartField<Class<? extends IPageForm>> {
 
           @Override
           protected int getConfiguredGridW() {

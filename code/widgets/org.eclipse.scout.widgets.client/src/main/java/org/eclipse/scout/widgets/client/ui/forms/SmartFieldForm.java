@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.ColumnDescriptor;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
@@ -32,13 +31,10 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IContentAssistField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -47,6 +43,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall.LocaleTableRowData;
+import org.eclipse.scout.widgets.client.services.lookup.HierarchicalLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.RemoteLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.UserContentListLookupCall;
@@ -76,7 +74,6 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SlowProposalChooserMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
@@ -86,15 +83,11 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB900
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Test form for the old smart field (since 7.0). Do not migrate to SmartField2. Will be removed with 7.1
- */
 @Order(3000.0)
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
 
-  private boolean m_delayEnabled = false;
   private boolean m_localLookupCall = true;
 
   public SmartFieldForm() {
@@ -276,7 +269,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(1000)
-      @ClassId("2ef66f5c-cb5a-4c82-885a-5bdad18eedb4")
+      @ClassId("d7594941-dad5-4ce2-af9d-e5a9950d2303")
       public class SmartFieldWithListGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -296,6 +289,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Order(30)
         public class DefaultField extends AbstractSmartField<Locale> {
 
+          private boolean m_throwVetoException = false;
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Default");
@@ -303,8 +298,24 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
+            return (Class<? extends ILookupCall<Locale>>) /*Remote*/ LocaleLookupCall.class;
           }
+
+          @Override
+          protected void execPrepareLookup(ILookupCall<Locale> call) {
+            if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
+              ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+            }
+          }
+
+          public void setThrowVetoException(boolean throwVetoException) {
+            m_throwVetoException = throwVetoException;
+          }
+
+          public boolean isThrowVetoException() {
+            return m_throwVetoException;
+          }
+
         }
 
         @Order(40)
@@ -363,7 +374,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(55)
-        @ClassId("e5fdd969-8372-45d6-8225-bd3358536d17")
+        @ClassId("75eed6c0-aee7-4632-80ec-e4768c9c4bdb")
         public class SmartFieldWithCustomTableField extends AbstractSmartField<Locale> {
           @Override
           protected String getConfiguredLabel() {
@@ -375,56 +386,42 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             return (Class<? extends ILookupCall<Locale>>) /*Remote*/LocaleLookupCall.class;
           }
 
-          @Order(10.0)
-          public class Table extends ContentAssistFieldTable<Locale> {
-
-            public CountryColumn getCountryColumn() {
-              return getColumnSet().getColumnByClass(CountryColumn.class);
-            }
-
-            public LanguageColumn getLanguageColumn() {
-              return getColumnSet().getColumnByClass(LanguageColumn.class);
-            }
-
-            @Override
-            protected boolean getConfiguredHeaderVisible() {
-              return true;
-            }
-
-            @Order(100.0)
-            public class CountryColumn extends AbstractStringColumn {
-
-              @Override
-              protected String getConfiguredHeaderText() {
-                return TEXTS.get("Country");
-              }
-
-              @Override
-              protected int getConfiguredWidth() {
-                return 60;
-              }
-            }
-
-            @Order(110.0)
-            public class LanguageColumn extends AbstractStringColumn {
-
-              @Override
-              protected String getConfiguredHeaderText() {
-                return TEXTS.get("Language");
-              }
-
-              @Override
-              protected int getConfiguredWidth() {
-                return 60;
-              }
-            }
+          @Override
+          protected ColumnDescriptor[] getConfiguredColumnDescriptors() {
+            return new ColumnDescriptor[]{
+                new ColumnDescriptor(null, "Text", 200),
+                new ColumnDescriptor(LocaleTableRowData.country, TEXTS.get("Country"), 90),
+                new ColumnDescriptor(LocaleTableRowData.language, TEXTS.get("Language"), 90)
+            };
           }
         }
 
+        @Order(60)
+        @ClassId("96674af1-a590-42e6-985c-6adb210e8504")
+        public class SmartFieldDisplayStyleField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Dropdown";
+          }
+
+          protected boolean isDropdown() {
+            return ISmartField.DISPLAY_STYLE_DROPDOWN.equals(getDefaultField().getDisplayStyle());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(isDropdown());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getDefaultField().setDisplayStyle(getValue() ? ISmartField.DISPLAY_STYLE_DROPDOWN : ISmartField.DISPLAY_STYLE_DEFAULT);
+          }
+        }
       }
 
       @Order(2000)
-      @ClassId("d2224f6f-a6cd-4c06-99ca-960bbd3d0153")
+      @ClassId("ce63629e-21ca-4d0c-aeeb-915aaf650636")
       public class SmartFieldWithTreeGroupBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -445,13 +442,31 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         public class DefaultSmartField extends AbstractSmartField<Long> {
 
           @Override
-          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-            return IndustryICBCodeType.class;
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
           }
 
           @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Default");
+          protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+            return HierarchicalLookupCall.class;
+          }
+
+          @Override
+          protected boolean getConfiguredBrowseHierarchy() {
+            return true;
+          }
+
+          @Override
+          protected boolean getConfiguredBrowseLoadIncremental() {
+            return true;
+          }
+
+          @Override
+          protected void execPrepareBrowseLookup(ILookupCall<Long> call, String browseHint) {
+            // instanceof is required because in this form the lookup can be switched at runtime
+            if (call instanceof HierarchicalLookupCall) {
+              ((HierarchicalLookupCall) call).setLoadIncremental(isBrowseLoadIncremental());
+            }
           }
         }
 
@@ -497,10 +512,29 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             setValue(ICB9537.ID);
           }
         }
+
+        @Order(100)
+        public class LoadIncrementalField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Load incremental";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getDefaultSmartField().isBrowseLoadIncremental());
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getDefaultSmartField().setBrowseLoadIncremental(getValue());
+          }
+        }
       }
 
       @Order(3000)
-      @ClassId("da633124-cdf8-4eb5-8905-f3b4c442e5a9")
+      @ClassId("2a8481a4-6fcc-446d-8d10-384ac37cb739")
       public class ProposalFieldWithListContentBox extends AbstractGroupBox {
         @Override
         protected String getConfiguredLabel() {
@@ -529,12 +563,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           protected String getConfiguredLabel() {
             return TEXTS.get("Default");
           }
-
-          @Override
-          protected IProposalChooserProvider<Long> createProposalChooserProvider() {
-            return new P_ProposalChooserProvider();
-          }
-
         }
 
         @Order(120)
@@ -576,7 +604,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execInitField() {
-            setValue(TEXTS.get("Public"));
+            setValueAsString(TEXTS.get("Public"));
           }
         }
       }
@@ -1030,25 +1058,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(40)
-      public class SlowProposalChooserMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("EnableSlowProposalChooser");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("SlowProposalChooserDisabledTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          setDelayEnabled(!m_delayEnabled);
-        }
-      }
-
-      @Order(50)
       public class SwitchLookupCallMenu extends AbstractMenu {
 
         @Override
@@ -1067,7 +1076,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
       }
 
-      @Order(60)
+      @Order(50)
       public class SeleniumResetMenu extends AbstractMenu {
 
         @Override
@@ -1077,12 +1086,11 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execAction() {
-          setDelayEnabled(false);
           setLocalLookupCall(true);
         }
       }
 
-      @Order(40)
+      @Order(60)
       public class ThrottleSmartFieldMenu extends AbstractMenu {
 
         @Override
@@ -1107,7 +1115,60 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
           }
         }
+      }
 
+      @Order(70)
+      public class ToggleHierarchicalLookupMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+        }
+
+        @Override
+        protected void execAction() {
+          ILookupCall<Long> lookupCall = getDefaultSmartField().getLookupCall();
+          getDefaultSmartField().setValue(null);
+          if (lookupCall instanceof HierarchicalLookupCall) {
+            setText(TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall"));
+            getDefaultSmartField().setCodeTypeClass(IndustryICBCodeType.class);
+          }
+          else {
+            setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
+            getDefaultSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
+          }
+        }
+      }
+
+      @Order(80)
+      public class ToggleExceptionOnLookupMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Throw VetoException on lookup";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "DefaultSmartField throws a VetoException on every lookup";
+        }
+
+        @Override
+        protected void execAction() {
+          boolean isThrow = getDefaultField().isThrowVetoException();
+          if (isThrow) {
+            setText("Throw VetoException on lookup");
+          }
+          else {
+            setText("Don't throw VetoException on lookup");
+          }
+          getDefaultField().setThrowVetoException(!isThrow);
+        }
       }
 
     }
@@ -1118,14 +1179,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   public class PageFormHandler extends AbstractFormHandler {
-  }
-
-  public void setDelayEnabled(boolean delayEnabled) {
-    m_delayEnabled = delayEnabled;
-    IMenu menu = getMainBox().getMenuByClass(SlowProposalChooserMenu.class);
-    menu.setText(TEXTS.get(m_delayEnabled ? "DisableSlowProposalChooser" : "EnableSlowProposalChooser"));
-    menu.setTooltipText(TEXTS.get(m_delayEnabled ? "SlowProposalChooserEnabledTooltip" : "SlowProposalChooserDisabledTooltip"));
-    LOG.debug("Slow proposal chooser is {}", (m_delayEnabled ? "enabled" : "disabled"));
   }
 
   public void setLocalLookupCall(boolean localLookupCall) {
@@ -1146,27 +1199,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     getMandatoryProposalField().setWildcard(wildcard);
     getListSmartField().setWildcard(wildcard);
     getTreeSmartField().setWildcard(wildcard);
-  }
-
-  /**
-   * Custom proposal chooser provider is only used to simulate a slow connection when user clicks on a row in the
-   * proposal chooser
-   */
-  private class P_ProposalChooserProvider implements IProposalChooserProvider<Long> {
-
-    @Override
-    public IProposalChooser<?, Long> createProposalChooser(IContentAssistField<?, Long> proposalField, boolean allowCustomText) {
-      return new TableProposalChooser<Long>(proposalField, allowCustomText) {
-        @Override
-        protected void execResultTableRowClicked(ITableRow row) {
-          if (m_delayEnabled) {
-            SleepUtil.sleepSafe(600, TimeUnit.MILLISECONDS);
-          }
-          super.execResultTableRowClicked(row);
-        }
-      };
-    }
-
   }
 
 }

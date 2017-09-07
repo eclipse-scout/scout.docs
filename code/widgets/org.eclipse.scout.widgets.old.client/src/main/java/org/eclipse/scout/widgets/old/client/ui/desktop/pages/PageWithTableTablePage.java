@@ -28,7 +28,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn2;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn;
@@ -241,7 +241,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
     }
 
     @Order(70)
-    public class SmartColumn extends AbstractSmartColumn2<Long> {
+    public class SmartColumn extends AbstractSmartColumn<Long> {
 
       @Override
       protected String getConfiguredHeaderText() {
