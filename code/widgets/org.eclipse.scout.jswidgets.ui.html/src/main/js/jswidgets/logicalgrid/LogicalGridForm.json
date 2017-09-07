@@ -40,13 +40,13 @@
         "fields": [
           {
             "id": "TargetField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "${textKey:Target}",
             "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
           },
           {
             "id": "LogicalGridField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Logical Grid",
             "lookupCall": "jswidgets.GroupBoxBodyGridLookupCall"
           }

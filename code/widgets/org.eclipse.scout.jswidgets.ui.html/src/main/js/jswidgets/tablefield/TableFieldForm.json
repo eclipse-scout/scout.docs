@@ -162,13 +162,13 @@
           },
           {
             "id": "CheckableStyleField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Checkable Style",
             "lookupCall": "jswidgets.CheckableStyleLookupCall"
           },
           {
             "id": "GroupingStyleField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Grouping Style",
             "lookupCall": "jswidgets.GroupingStyleLookupCall"
           }

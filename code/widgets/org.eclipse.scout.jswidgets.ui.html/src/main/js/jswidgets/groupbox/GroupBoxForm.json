@@ -47,7 +47,7 @@
           },
           {
             "id": "BorderDecorationField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Border Decoration",
             "lookupCall": "jswidgets.BorderDecorationLookupCall",
             "visible": false // Temporarily made invisible because it is confusing what the property really does
@@ -71,14 +71,14 @@
           },
           {
             "id": "LogicalGridField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Logical Grid",
             "lookupCall": "jswidgets.GroupBoxBodyGridLookupCall",
             "tooltipText": "${textKey:GroupBoxLogicalGrid}"
           },
           {
             "id": "NotificationField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.StatusSeverityLookupCall",
             "label": "Notification"
           }
@@ -92,7 +92,7 @@
         "fields": [
           {
             "id": "ToggleVisibilityField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "label": "Toggle Visibility",
             "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
           },

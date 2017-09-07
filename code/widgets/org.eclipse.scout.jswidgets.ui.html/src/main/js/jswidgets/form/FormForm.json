@@ -59,19 +59,19 @@
           },
           {
             "id": "IconIdField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.IconIdLookupCall",
             "label": "Icon Id"
           },
           {
             "id": "DisplayHintField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.DisplayHintLookupCall",
             "label": "Display Hint"
           },
           {
             "id": "StatusField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.StatusSeverityLookupCall",
             "label": "Status",
             "visible": false // does not really work as expected

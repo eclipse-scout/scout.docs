@@ -54,9 +54,9 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:SmartField2}",
+      "text": "${textKey:SmartField}",
       "detailForm": {
-        "objectType": "jswidgets.SmartField2Form"
+        "objectType": "jswidgets.SmartFieldForm"
       }
     },
     {

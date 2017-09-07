@@ -55,7 +55,7 @@
           },
           {
             "id": "FormatField",
-            "objectType": "SmartField2",
+            "objectType": "SmartField",
             "lookupCall": "jswidgets.StringFormatLookupCall",
             "label": "Format"
           },
