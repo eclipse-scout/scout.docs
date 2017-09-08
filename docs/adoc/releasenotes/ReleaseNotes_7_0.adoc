@@ -79,6 +79,7 @@ If you just want to play around with them without looking at the source code, yo
 // ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
+
 == Upgrade to jQuery 3
 
 We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).

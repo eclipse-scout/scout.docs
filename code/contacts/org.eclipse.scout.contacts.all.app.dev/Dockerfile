@@ -1,6 +1,6 @@
 FROM tomcat:jre8
 MAINTAINER BSI-Business-Systems-Integration-AG
 
-ADD org.eclipse.scout.contacts.all.app.dev-7.0.100-SNAPSHOT.war /usr/local/tomcat/webapps/contacts.war
+ADD org.eclipse.scout.contacts.all.app.dev-7.0.100.016_RC3.war /usr/local/tomcat/webapps/contacts.war
 
 CMD ["catalina.sh", "run"]
