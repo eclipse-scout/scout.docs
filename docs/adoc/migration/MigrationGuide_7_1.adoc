@@ -44,6 +44,28 @@ Since the new Html UI was introduced with Scout 5.2 this property had no effect 
 
 Since there is no replacement for the focusable property, remove all code that uses one of the methods/properties listed above.
 
+== ISmartField2 replaced old ISmartField
+In Scout 7.0 the new SmartField implementation used the package and name `smartfield2.SmartField2`. With Scout 7.1 the new SmartField replaced the old SmartField completely, and thus was moved to and renamed to `smartfield.SmartField`. If you have already used the new SmartField in Scout 7.0 you must move / rename all references to these classes.
+
+== IContentAssistField classes and interfaces removed
+The base class and interfaces of the old SmartField implementation was IContentAssistField. With the new SmartField implementation this interfaces and all classes containing the word "ContentAssist" in their name, have been either removed or renamed to "SmartField". If your code references one of these classes you should simply try to rename all references. Since the API of the new SmartField is almost the same as the old, this should work and should cause no or few changes in your code. The following classes have been removed without replacement:
+
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractMixedSmartField
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldEvent
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldListener
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IMixedSmartField
+
+Since the new SmartImplementation does not have a proposal chooser model anymore these classes have also been removed. If you must have a special implementation of a proposal chooser, you must implement a proposal chooser in JavaScript (see: ProposalChooser.js), which renders the data / lookup-rows it receives from the server-side SmartField:
+
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalChooser
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser
+* org.eclipse.scout.rt.client.ui.form.fields.smartfield.TreeProposalChooser
+
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
