@@ -16,3 +16,18 @@ scout.inherits(jswidgets.TilesForm, scout.Form);
 jswidgets.TilesForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.TilesForm');
 };
+
+jswidgets.TilesForm.prototype._init = function(model) {
+  jswidgets.TilesForm.parent.prototype._init.call(this, model);
+
+  var tiles = this.widget('Tiles');
+  var withPlaceholdersField = this.widget('WithPlaceholdersField');
+  withPlaceholdersField.setValue(tiles.withPlaceholders);
+  withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
+};
+
+jswidgets.TilesForm.prototype._onWithPlacehodersPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('Tiles').setWithPlaceholders(event.newValue);
+  }
+};

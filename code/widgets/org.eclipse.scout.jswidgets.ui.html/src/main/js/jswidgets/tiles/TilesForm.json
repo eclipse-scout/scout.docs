@@ -44,6 +44,19 @@
                 }
               ]
             }
+          },
+          {
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "gridColumnCount": 1,
+            "fields": [
+              {
+                "id": "WithPlaceholdersField",
+                "objectType": "CheckBoxField",
+                "labelVisible": false,
+                "label": "With Placeholders"
+              }
+            ]
           }
         ]
       }
