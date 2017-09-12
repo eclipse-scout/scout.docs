@@ -14,7 +14,13 @@
           {
             "id": "NumberField",
             "objectType": "NumberField",
-            "label": "${textKey:NumberField}"
+            "label": "${textKey:NumberField}",
+            "gridData": {
+              "horizontalAlignment" : 1
+             },
+             "gridDataHints": {
+              "horizontalAlignment" : 1
+             }
           },
           {
             "id": "NumberField",

@@ -16,6 +16,7 @@
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
   __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
+  __include("jswidgets/formfield/ClearableStyleLookupCall.js");
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
   __include("jswidgets/datefield/DateFieldForm.js");

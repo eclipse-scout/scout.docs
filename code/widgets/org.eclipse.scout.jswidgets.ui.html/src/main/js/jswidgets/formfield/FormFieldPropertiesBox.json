@@ -44,6 +44,13 @@
       "displayStyle": "dropdown"
     },
     {
+      "id": "ClearableStyleField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.ClearableStyleLookupCall",
+      "label": "Clearable Style",
+      "displayStyle": "dropdown"
+    },
+    {
       "id": "LabelField",
       "objectType": "StringField",
       "label": "Label"
