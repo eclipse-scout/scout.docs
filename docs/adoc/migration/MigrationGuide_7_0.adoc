@@ -128,6 +128,18 @@ The following methods have been removed from `AbstractSmartField(2)`:
 
 Note: with 7.0 these methods still exist on the old smart field `ISmartField` but are marked as deprecated.
 
+== Deprecated property `focusable` from IFormField, AbstractFormField
+Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated all methods from the interface/class FormField. The following methods/properties will be removed with Scout 7.1:
+
+* boolean IFormField#isFocusable()
+* void IFormField#setFocusable(boolean f)
+* boolean IFormField#PROP_FOCUSABLE
+* boolean AbstractFormField#getConfiguredFocusable()
+* class AbstractNonFocusableButton
+* class AbstractNonFocusableRadioButton
+
+You should no longer use these methods. Since there will be no replacement in later Scout releases, you should delete code that uses these methods/properties.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
@@ -281,17 +293,9 @@ To migrate: check your forms, remove the life cycle, use the new callback functi
 === GroupBox: mainBox flag now set automatically (since 7.0.100)
 Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.
 
-== Deprecated property `focusable` from IFormField, AbstractFormField
-Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated all methods from the interface/class FormField. The following methods/properties will be removed with Scout 7.1:
+== Charts: fixed typo in function name
+Incorrect function name `handelToBigLabels` in AbstractGridChartRenderer.js was renamed to `handleTooBigLabels`. You must apply this renaming to your code if this function is called or overridden.
 
-* boolean IFormField#isFocusable()
-* void IFormField#setFocusable(boolean f)
-* boolean IFormField#PROP_FOCUSABLE
-* boolean AbstractFormField#getConfiguredFocusable()
-* class AbstractNonFocusableButton
-* class AbstractNonFocusableRadioButton
-
-You should no longer use these methods. Since there will be no replacement in later Scout releases, you should delete code that uses these methods/properties.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
