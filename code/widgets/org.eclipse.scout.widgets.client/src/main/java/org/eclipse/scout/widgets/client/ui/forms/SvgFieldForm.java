@@ -11,7 +11,6 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -23,7 +22,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.svg.client.SVGUtility;
@@ -45,10 +43,6 @@ import org.w3c.dom.svg.SVGLength;
 
 @Order(8000.0)
 public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
-
-  public SvgFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -158,12 +152,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execInitField() {
-          try {
-            setSvgDocument(loadDocument("svg/SvgLogo.svg"));
-          }
-          catch (IOException e) {
-            throw new ProcessingException("Exception occured while reading svg file", e);
-          }
+          setSvgDocument(loadDocument("svg/SvgLogo.svg"));
         }
       }
 
@@ -182,15 +171,9 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execInitField() {
-          try {
-            setSvgDocument(loadDocument("svg/World_map.svg"));
-          }
-          catch (IOException e) {
-            throw new ProcessingException("Exception occured while reading svg file", e);
-          }
+          setSvgDocument(loadDocument("svg/World_map.svg"));
         }
       }
-
     }
 
     @Order(20)
@@ -221,7 +204,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SvgFieldForm.MainBox.ConfigurationBox.SvgSourceField.class;
+          return SvgSourceField.class;
         }
 
         @Override
@@ -305,14 +288,14 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     public class CloseButton extends AbstractCloseButton {
     }
 
-    private SVGDocument loadDocument(String resourceName) throws IOException {
+    private SVGDocument loadDocument(String resourceName) {
       if (StringUtility.isNullOrEmpty(resourceName)) {
         return null;
       }
       return SVGUtility.readSVGDocument(ResourceBase.class.getResourceAsStream(resourceName));
     }
 
-    private SVGDocument parseDocument(String svgData) throws IOException {
+    private SVGDocument parseDocument(String svgData) {
       if (StringUtility.isNullOrEmpty(svgData)) {
         return null;
       }

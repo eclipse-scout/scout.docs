@@ -12,7 +12,6 @@ package org.eclipsescout.demo.bahbah.client;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
@@ -21,19 +20,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RefreshBuddiesNotificationHandler implements INotificationHandler<RefreshBuddiesNotification> {
-  private static Logger LOG = LoggerFactory.getLogger(RefreshBuddiesNotificationHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RefreshBuddiesNotificationHandler.class);
 
   @Override
   public void handleNotification(RefreshBuddiesNotification notification) {
-    ModelJobs.schedule(new IRunnable() {
-      @Override
-      public void run() throws Exception {
-        UserNodePage userPage = getUserNodePage();
+    ModelJobs.schedule(() -> {
+      UserNodePage userPage = getUserNodePage();
 
-        if (userPage != null) {
-          LOG.info("refreshing buddies on client");
-          userPage.updateBuddyPages();
-        }
+      if (userPage != null) {
+        LOG.info("refreshing buddies on client");
+        userPage.updateBuddyPages();
       }
     }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
   }

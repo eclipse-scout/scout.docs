@@ -52,10 +52,14 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.forms.ExampleBean;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
 import org.eclipse.scout.widgets.shared.FileCodeType;
+import org.eclipse.scout.widgets.shared.FileCodeType.JpgCode;
+import org.eclipse.scout.widgets.shared.FileCodeType.PngCode;
+import org.eclipse.scout.widgets.shared.FileCodeType.UknownCode;
 
-public abstract class AbstractFileTableField extends AbstractTableField<AbstractFileTableField.Table> {
+public abstract class AbstractFileTableField extends AbstractTableField<Table> {
   protected static final String FILE_SIZE_FORMAT = "#,### KB";
   protected static final long FILE_SIZE_FACTOR = 1024;
 
@@ -87,7 +91,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
     int size = file.getContentLength();
 
     if (BEANS.get(FileCodeType.class).getCode(type) == null) {
-      type = FileCodeType.UknownCode.ID;
+      type = UknownCode.ID;
     }
 
     size /= FILE_SIZE_FACTOR;
@@ -114,7 +118,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
   public class Table extends AbstractTable {
 
-    private Set<BinaryResource> m_keys = new HashSet<>();
+    private final Set<BinaryResource> m_keys = new HashSet<>();
 
     public SizeColumn getSizeColumn() {
       return getColumnSet().getColumnByClass(SizeColumn.class);
@@ -146,7 +150,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
     @Override
     protected TransferObject execDrag(List<ITableRow> rows) {
-      List<BinaryResource> resources = new ArrayList<BinaryResource>();
+      List<BinaryResource> resources = new ArrayList<>();
 
       for (ITableRow row : rows) {
         resources.add(getTable().getResourceColumn().getValue(row));
@@ -241,8 +245,8 @@ public abstract class AbstractFileTableField extends AbstractTableField<Abstract
 
       @Override
       protected void execDecorateCell(Cell cell, ITableRow row) {
-        if (StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), FileCodeType.JpgCode.ID)
-            || StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), FileCodeType.PngCode.ID)) {
+        if (StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), JpgCode.ID)
+            || StringUtility.equalsIgnoreCase(getTypeColumn().getValue(row), PngCode.ID)) {
           BinaryResource value = getResourceColumn().getValue(row);
           if (value != null) {
             addAttachment(value);

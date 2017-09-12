@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
-import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
 
 /**
  * class that installs the bahbah DB schema
@@ -41,7 +41,7 @@ public class DerbyDbSetupService implements IDbSetupService {
       SQL.commit();
 
       // create first admin account
-      UserUtility.createNewUser("admin", "admin".toCharArray(), UserRoleCodeType.AdministratorCode.ID);
+      UserUtility.createNewUser("admin", "admin".toCharArray(), AdministratorCode.ID);
       SQL.commit();
     }
 
@@ -49,7 +49,7 @@ public class DerbyDbSetupService implements IDbSetupService {
 
   private Set<String> getExistingTables() {
     Object[][] existingTables = SQL.select("SELECT tablename FROM sys.systables");
-    HashSet<String> result = new HashSet<String>(existingTables.length);
+    HashSet<String> result = new HashSet<>(existingTables.length);
     for (Object[] row : existingTables) {
       result.add(row[0] + "");
     }

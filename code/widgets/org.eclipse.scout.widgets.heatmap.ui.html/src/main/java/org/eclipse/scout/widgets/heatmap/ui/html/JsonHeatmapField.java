@@ -26,7 +26,7 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
     super(model, uiSession, id, parent);
   }
 
-  private IHeatmapListener m_listener = new IHeatmapListener() {
+  private final IHeatmapListener m_listener = new IHeatmapListener() {
 
     @Override
     public void heatPointsAdded(Collection<HeatPoint> points) {

@@ -14,13 +14,12 @@ import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
-import org.eclipse.scout.rt.platform.IPlatform;
+import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.security.SimplePrincipal;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.server.context.ServerRunContext;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
 import org.eclipse.scout.rt.server.session.ServerSessionProviderWithCache;
@@ -30,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 @Bean
 public class ServerApplication implements IPlatformListener {
-  private static Logger LOG = LoggerFactory.getLogger(ServerApplication.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ServerApplication.class);
 
   public static Subject s_subject;
 
@@ -42,17 +41,12 @@ public class ServerApplication implements IPlatformListener {
 
   @Override
   public void stateChanged(PlatformEvent event) throws PlatformException {
-    if (event.getState() == IPlatform.State.PlatformStarted) {
+    if (event.getState() == State.PlatformStarted) {
       try {
         ServerRunContext runContext = ServerRunContexts.empty();
         runContext.withSubject(s_subject);
         runContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(runContext.copy()));
-        runContext.run(new IRunnable() {
-          @Override
-          public void run() throws Exception {
-            BEANS.get(IDbSetupService.class).installDb();
-          }
-        }, DefaultExceptionTranslator.class);
+        runContext.run(BEANS.get(IDbSetupService.class)::installDb, DefaultExceptionTranslator.class);
       }
       catch (Exception e) {
         throw new PlatformException("Unable to start server application.", e);

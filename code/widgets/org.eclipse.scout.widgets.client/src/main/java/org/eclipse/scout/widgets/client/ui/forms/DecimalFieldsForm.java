@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -54,10 +52,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.Small
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
 
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
-
-  public DecimalFieldsForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -362,12 +356,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execInitField() {
-            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                DisplayText0Field.this.setValue((String) evt.getNewValue());
-              }
-            });
+            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, evt -> DisplayText0Field.this.setValue((String) evt.getNewValue()));
           }
         }
       }

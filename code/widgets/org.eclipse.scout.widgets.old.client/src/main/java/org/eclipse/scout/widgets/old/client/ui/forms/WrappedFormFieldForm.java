@@ -32,7 +32,6 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.util.Assertions;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
@@ -51,18 +50,11 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
   protected final Map<Class<? extends IForm>, IForm> m_formInstances = new HashMap<>();
   protected IForm m_externallyManagedForm = null;
   protected IForm m_currentFormInstance = null;
-  protected FormListener m_formOpenCloseListener = new FormListener() {
-    @Override
-    public void formChanged(FormEvent e) {
-      if (e.getType() == FormEvent.TYPE_CLOSED || e.getType() == FormEvent.TYPE_LOAD_COMPLETE) {
-        getInnerFormStateButton().update();
-      }
+  protected FormListener m_formOpenCloseListener = e -> {
+    if (e.getType() == FormEvent.TYPE_CLOSED || e.getType() == FormEvent.TYPE_LOAD_COMPLETE) {
+      getInnerFormStateButton().update();
     }
   };
-
-  public WrappedFormFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -85,11 +77,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       form = createNewFormInstance(formClass);
     }
     else {
-      form = m_formInstances.get(formClass);
-      if (form == null) {
-        form = createNewFormInstance(formClass);
-        m_formInstances.put(formClass, form);
-      }
+      form = m_formInstances.computeIfAbsent(formClass, k -> createNewFormInstance(formClass));
     }
     return form;
   }
@@ -310,12 +298,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
               if (form == null) {
                 setLabel("(No inner form set)");
                 setEnabled(false);
-                ModelJobs.schedule(new IRunnable() {
-                  @Override
-                  public void run() throws Exception {
-                    getInnerFormField().setValue(null);
-                  }
-                }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+                ModelJobs.schedule(() -> getInnerFormField().setValue(null), ModelJobs.newInput(ClientRunContexts.copyCurrent()));
               }
               else {
                 setLabel(form.isFormStartable() ? "Start inner form" : "Close inner form");

@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.shared.TunnelToServer;
 @TunnelToServer
 public interface IIconProcessService extends IService {
 
-  public byte[] loadIcon(String name);
+  byte[] loadIcon(String name);
 
-  public void saveIcon(byte[] icon);
+  void saveIcon(byte[] icon);
 }

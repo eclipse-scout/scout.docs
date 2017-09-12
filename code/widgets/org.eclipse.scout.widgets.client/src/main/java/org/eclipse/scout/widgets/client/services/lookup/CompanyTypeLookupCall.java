@@ -23,10 +23,10 @@ public class CompanyTypeLookupCall extends LocalLookupCall<Long> {
 
   @Override
   protected List<ILookupRow<Long>> execCreateLookupRows() {
-    ArrayList<ILookupRow<Long>> rows = new ArrayList<ILookupRow<Long>>();
-    rows.add(new LookupRow<Long>(1L, "Customer"));
-    rows.add(new LookupRow<Long>(2L, "Supplier"));
-    rows.add(new LookupRow<Long>(3L, "Other"));
+    ArrayList<ILookupRow<Long>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>(1L, "Customer"));
+    rows.add(new LookupRow<>(2L, "Supplier"));
+    rows.add(new LookupRow<>(3L, "Other"));
     return rows;
   }
 }

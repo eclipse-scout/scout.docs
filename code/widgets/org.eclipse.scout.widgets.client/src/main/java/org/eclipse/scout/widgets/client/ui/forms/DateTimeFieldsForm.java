@@ -17,7 +17,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
 import org.eclipse.scout.rt.client.context.ClientRunContext;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
@@ -81,10 +80,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Exam
 import org.eclipse.scout.widgets.shared.CustomDateFormatProvider;
 
 public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
-
-  public DateTimeFieldsForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -903,12 +898,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String execFormatValue(final Date value) {
             final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-            return runContext.call(new Callable<String>() {
-              @Override
-              public String call() throws Exception {
-                return InputField.super.execFormatValue(value);
-              }
-            });
+            return runContext.call(() -> InputField.super.execFormatValue(value));
           }
 
           @Override
@@ -947,7 +937,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn1Box.InputField.class;
+            return InputField.class;
           }
 
           @Override
@@ -1066,9 +1056,9 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected void execChangedValue() {
             Date autoDate = getValue();
-            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class).setAutoDate(autoDate);
-            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class).setAutoDate(autoDate);
-            getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn3Box.DateTimeInputField.class).setAutoDate(autoDate);
+            getForm().getFieldByClass(InputField.class).setAutoDate(autoDate);
+            getForm().getFieldByClass(TimeInputField.class).setAutoDate(autoDate);
+            getForm().getFieldByClass(DateTimeInputField.class).setAutoDate(autoDate);
           }
         }
 
@@ -1087,7 +1077,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedValue() {
-            InputField field = getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn1Box.InputField.class);
+            InputField field = getForm().getFieldByClass(InputField.class);
             field.setValue(field.getValue()); // revalidate
           }
         }
@@ -1194,12 +1184,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String execFormatValue(final Date value) {
             final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-            return runContext.call(new Callable<String>() {
-              @Override
-              public String call() throws Exception {
-                return TimeInputField.super.execFormatValue(value);
-              }
-            });
+            return runContext.call(() -> TimeInputField.super.execFormatValue(value));
           }
 
           @Override
@@ -1243,7 +1228,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class;
+            return TimeInputField.class;
           }
 
           @Override
@@ -1320,7 +1305,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedValue() {
-            TimeInputField field = getForm().getFieldByClass(ConfigurationBox.ConfigurationColumn2Box.TimeInputField.class);
+            TimeInputField field = getForm().getFieldByClass(TimeInputField.class);
             field.setValue(field.getValue()); // revalidate
           }
         }
@@ -1380,12 +1365,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String execFormatValue(final Date value) {
             final ClientRunContext runContext = ClientRunContexts.copyCurrent().withLocale(getConfigLocaleField().getValue());
-            return runContext.call(new Callable<String>() {
-              @Override
-              public String call() throws Exception {
-                return DateTimeInputField.super.execFormatValue(value);
-              }
-            });
+            return runContext.call(() -> DateTimeInputField.super.execFormatValue(value));
           }
 
           @Override
@@ -1415,7 +1395,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return DateTimeFieldsForm.MainBox.ConfigurationBox.ConfigurationColumn3Box.DateTimeInputField.class;
+            return DateTimeInputField.class;
           }
 
           @Override

@@ -53,10 +53,6 @@ import org.eclipse.scout.widgets.shared.Icons;
 @Order(6000.0)
 public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
-  public HtmlFieldForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;

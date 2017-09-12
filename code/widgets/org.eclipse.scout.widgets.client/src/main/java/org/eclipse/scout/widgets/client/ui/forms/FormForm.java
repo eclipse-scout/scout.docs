@@ -28,7 +28,6 @@ import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
-import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -100,10 +99,6 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 @ClassId("b612310f-59b6-427d-93c9-57b384564a94")
 public class FormForm extends AbstractForm implements IPageForm {
-
-  public FormForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -534,68 +529,61 @@ public class FormForm extends AbstractForm implements IPageForm {
           protected void execClickAction() {
             int openingDelay = (getOpeningDelayField().getValue() != null ? getOpeningDelayField().getValue() : 0);
 
-            final IRunnable openFormRunnable = new IRunnable() {
-              @Override
-              public void run() throws Exception {
-                DisplayHint displayHint = (getDisplayHintField().getValue() != null ? getDisplayHintField().getValue() : DisplayHint.Dialog);
+            final IRunnable openFormRunnable = () -> {
+              DisplayHint displayHint = (getDisplayHintField().getValue() != null ? getDisplayHintField().getValue() : DisplayHint.Dialog);
 
-                switch (displayHint) {
-                  case Dialog:
-                  case View:
-                  case PopupWindow: {
-                    FormForm form = new FormForm();
-                    form.setTitle(getFormTitleField().getValue());
-                    form.setSubTitle(getFormSubTitleField().getValue());
-                    form.setDisplayHint(displayHint.getValue());
-                    form.setCacheBounds(getCacheBoundsField().getValue());
-                    DisplayViewId viewId = getDisplayViewIdField().getValue();
-                    if (viewId != null) {
-                      form.setDisplayViewId(viewId.getValue());
-                    }
-                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                    if (displayParent != DisplayParent.Auto) {
-                      form.setDisplayParent(displayParent.getValue());
-                    }
-                    form.setModal(getModalityField().isChecked());
-                    form.setClosable(getClosableField().isChecked());
-                    form.setIconId(getIconIdField().getValue());
-                    form.start();
-                    if (getCloseOnChildCloseField().getValue()) {
-                      form.addFormListener(new FormListener() {
+              switch (displayHint) {
+                case Dialog:
+                case View:
+                case PopupWindow: {
+                  FormForm form = new FormForm();
+                  form.setTitle(getFormTitleField().getValue());
+                  form.setSubTitle(getFormSubTitleField().getValue());
+                  form.setDisplayHint(displayHint.getValue());
+                  form.setCacheBounds(getCacheBoundsField().getValue());
+                  DisplayViewId viewId = getDisplayViewIdField().getValue();
+                  if (viewId != null) {
+                    form.setDisplayViewId(viewId.getValue());
+                  }
+                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                  if (displayParent != DisplayParent.Auto) {
+                    form.setDisplayParent(displayParent.getValue());
+                  }
+                  form.setModal(getModalityField().isChecked());
+                  form.setClosable(getClosableField().isChecked());
+                  form.setIconId(getIconIdField().getValue());
+                  form.start();
+                  if (getCloseOnChildCloseField().getValue()) {
+                    form.addFormListener(e -> {
+                      if (e.getType() == FormEvent.TYPE_CLOSED) {
+                        FormForm.this.doClose();
+                      }
+                    });
+                  }
 
-                        @Override
-                        public void formChanged(FormEvent e) {
-                          if (e.getType() == FormEvent.TYPE_CLOSED) {
-                            FormForm.this.doClose();
-                          }
-                        }
-                      });
-                    }
-
-                    break;
-                  }
-                  case MessageBox: {
-                    IMessageBox messageBox = MessageBoxes.createYesNoCancel().withHeader("Message box").withBody("I am a message box");
-                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                    if (displayParent != DisplayParent.Auto) {
-                      messageBox.withDisplayParent(displayParent.getValue());
-                    }
-                    messageBox.withIconId(getIconIdField().getValue());
-                    messageBox.show();
-                    break;
-                  }
-                  case FileChooser: {
-                    FileChooser fileChooser = new FileChooser();
-                    DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
-                    if (displayParent != DisplayParent.Auto) {
-                      fileChooser.setDisplayParent(displayParent.getValue());
-                    }
-                    fileChooser.startChooser();
-                    break;
-                  }
-                  default:
-                    throw new IllegalArgumentException();
+                  break;
                 }
+                case MessageBox: {
+                  IMessageBox messageBox = MessageBoxes.createYesNoCancel().withHeader("Message box").withBody("I am a message box");
+                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                  if (displayParent != DisplayParent.Auto) {
+                    messageBox.withDisplayParent(displayParent.getValue());
+                  }
+                  messageBox.withIconId(getIconIdField().getValue());
+                  messageBox.show();
+                  break;
+                }
+                case FileChooser: {
+                  FileChooser fileChooser = new FileChooser();
+                  DisplayParent displayParent = (getDisplayParentField().getValue() != null ? getDisplayParentField().getValue() : DisplayParent.Auto);
+                  if (displayParent != DisplayParent.Auto) {
+                    fileChooser.setDisplayParent(displayParent.getValue());
+                  }
+                  fileChooser.startChooser();
+                  break;
+                }
+                default:
+                  throw new IllegalArgumentException();
               }
             };
 
@@ -608,12 +596,8 @@ public class FormForm extends AbstractForm implements IPageForm {
                 ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
               }
               else {
-                Jobs.schedule(new IRunnable() {
-
-                  @Override
-                  public void run() throws Exception {
-                    ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
-                  }
+                Jobs.schedule(() -> {
+                  ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
                 }, Jobs.newInput()
                     .withRunContext(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
@@ -924,7 +908,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       return rows;
     }
 
-    public static enum DisplayHint {
+    public enum DisplayHint {
 
       View(IForm.DISPLAY_HINT_VIEW),
       Dialog(IForm.DISPLAY_HINT_DIALOG),
@@ -934,7 +918,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
       private final int m_value;
 
-      private DisplayHint(int value) {
+      DisplayHint(int value) {
         m_value = value;
       }
 
@@ -945,7 +929,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @ApplicationScoped
-  public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParentLookupCall.DisplayParent> {
+  public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParent> {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -957,7 +941,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       return rows;
     }
 
-    public static enum DisplayParent {
+    public enum DisplayParent {
       Desktop() {
 
         @Override
@@ -1009,7 +993,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       return rows;
     }
 
-    public static enum IconId {
+    public enum IconId {
       Calendar(Icons.Calendar),
       Person(Icons.Person),
       Square(Icons.Square),
@@ -1020,11 +1004,11 @@ public class FormForm extends AbstractForm implements IPageForm {
       private final String m_value;
       private final String m_displayText;
 
-      private IconId(String value) {
+      IconId(String value) {
         this(value, null);
       }
 
-      private IconId(String value, String displayText) {
+      IconId(String value, String displayText) {
         m_value = value;
         m_displayText = (displayText == null ? name() : displayText);
       }
@@ -1040,7 +1024,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @Order(15)
-  public static abstract class AbstractFieldButtonsBox extends AbstractSequenceBox {
+  public abstract static class AbstractFieldButtonsBox extends AbstractSequenceBox {
     @Override
     protected boolean getConfiguredAutoCheckFromTo() {
       return false;
@@ -1073,13 +1057,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
-        ModelJobs.schedule(new IRunnable() {
-
-          @Override
-          public void run() throws Exception {
-            getField().setVisible(false);
-          }
-        }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+        ModelJobs.schedule(() -> getField().setVisible(false), ModelJobs.newInput(ClientRunContexts.copyCurrent())
             .withExecutionTrigger(Jobs.newExecutionTrigger()
                 .withStartIn(3, TimeUnit.SECONDS)));
       }

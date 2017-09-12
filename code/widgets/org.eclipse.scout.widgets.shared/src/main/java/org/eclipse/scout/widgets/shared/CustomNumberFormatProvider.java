@@ -31,11 +31,11 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
 
   private final Set<Locale> m_customLocales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
-  private Locale[] m_availableLocales;
+  private final Locale[] m_availableLocales;
 
   public CustomNumberFormatProvider() {
-    m_customLocales = new HashSet<Locale>();
-    m_countryDefaultLocaleMap = new HashMap<String, Locale>();
+    m_customLocales = new HashSet<>();
+    m_countryDefaultLocaleMap = new HashMap<>();
 
     // add locale support for en_CH
     init(new Locale("en", "CH"), "de");
@@ -53,7 +53,7 @@ public class CustomNumberFormatProvider extends NumberFormatProvider {
     init(new Locale("en", "ES"), "es");
 
     // available locales
-    HashSet<Locale> availableLocales = new HashSet<Locale>();
+    HashSet<Locale> availableLocales = new HashSet<>();
     availableLocales.addAll(m_customLocales);
     availableLocales.addAll(Arrays.asList(super.getAvailableLocales()));
     m_availableLocales = availableLocales.toArray(new Locale[availableLocales.size()]);

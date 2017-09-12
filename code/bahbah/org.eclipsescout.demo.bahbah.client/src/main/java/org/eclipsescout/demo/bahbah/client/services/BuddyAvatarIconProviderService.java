@@ -32,9 +32,6 @@ public class BuddyAvatarIconProviderService implements IIconProviderService {
   public static final String BUDDY_ICON_PREFIX = "@@BUDDY_ICON@@_";
   public static final String OPT_BUDDY_ICON_SUFFIX = "_open";
 
-  public BuddyAvatarIconProviderService() {
-  }
-
   @Override
   public IconSpec getIconSpec(String iconName) {
     if (iconName.startsWith(BUDDY_ICON_PREFIX)) {

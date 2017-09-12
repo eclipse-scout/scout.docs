@@ -26,10 +26,10 @@ public class AnswerOptionsLookupCall extends LocalLookupCall<Integer> {
 
   @Override
   protected List<LookupRow<Integer>> execCreateLookupRows() {
-    ArrayList<LookupRow<Integer>> rows = new ArrayList<LookupRow<Integer>>();
-    rows.add(new LookupRow<Integer>(IMessageBox.YES_OPTION, "IMessageBox.YES_OPTION"));
-    rows.add(new LookupRow<Integer>(IMessageBox.NO_OPTION, "IMessageBox.NO_OPTION"));
-    rows.add(new LookupRow<Integer>(IMessageBox.CANCEL_OPTION, "IMessageBox.CANCEL_OPTION"));
+    ArrayList<LookupRow<Integer>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>(IMessageBox.YES_OPTION, "IMessageBox.YES_OPTION"));
+    rows.add(new LookupRow<>(IMessageBox.NO_OPTION, "IMessageBox.NO_OPTION"));
+    rows.add(new LookupRow<>(IMessageBox.CANCEL_OPTION, "IMessageBox.CANCEL_OPTION"));
     return rows;
   }
 }

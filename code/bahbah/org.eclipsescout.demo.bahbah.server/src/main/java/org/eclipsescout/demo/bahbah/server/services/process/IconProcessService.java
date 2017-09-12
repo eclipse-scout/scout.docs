@@ -32,8 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IconProcessService implements IIconProcessService {
-  public final static int MAX_SIZE = 16;
-  private final static Logger LOG = LoggerFactory.getLogger(IconProcessService.class);
+  public static final int MAX_SIZE = 16;
+  private static final Logger LOG = LoggerFactory.getLogger(IconProcessService.class);
 
   private byte[] resize(byte[] content) {
     try {

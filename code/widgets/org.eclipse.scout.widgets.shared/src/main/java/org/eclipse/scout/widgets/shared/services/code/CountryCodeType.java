@@ -20,10 +20,6 @@ public class CountryCodeType extends AbstractCodeType<Long, Long> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 20000L;
 
-  public CountryCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("Country");

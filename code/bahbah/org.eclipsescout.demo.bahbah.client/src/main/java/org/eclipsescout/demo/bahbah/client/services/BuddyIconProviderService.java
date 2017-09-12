@@ -14,12 +14,13 @@ import java.net.URL;
 
 import org.eclipse.scout.rt.client.services.common.icon.AbstractIconProviderService;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipsescout.demo.bahbah.client.ResourceBase;
 
 @Order(2000)
 public class BuddyIconProviderService extends AbstractIconProviderService {
 
   @Override
   protected URL findResource(String relativePath) {
-    return org.eclipsescout.demo.bahbah.client.ResourceBase.class.getResource("icons/" + relativePath);
+    return ResourceBase.class.getResource("icons/" + relativePath);
   }
 }

@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
+import org.eclipse.scout.contacts.client.person.PersonTablePage.Table;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
@@ -41,7 +42,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 // tag::structure[]
 // tag::linkToOrganization[]
 @PageData(PersonTablePageData.class)
-public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table> {
+public class PersonTablePage extends AbstractPageWithTable<Table> {
   // end::structure[]
   // end::PageInit[]
 
@@ -106,7 +107,7 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     }
 
     public EmailColumn getEmailColumn() {
-      return getColumnSet().getColumnByClass(PersonTablePage.Table.EmailColumn.class);
+      return getColumnSet().getColumnByClass(EmailColumn.class);
     }
 
     public OrganizationColumn getOrganizationColumn() {

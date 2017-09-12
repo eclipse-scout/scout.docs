@@ -32,7 +32,7 @@ public class LanguageLookupService extends AbstractLookupService<String> impleme
     Date validityFrom = c.getValidityFrom();
     Date validityTo = c.getValidityTo();
 
-    List<? extends ILookupRow<String>> result = new ArrayList<ILookupRow<String>>();
+    List<? extends ILookupRow<String>> result = new ArrayList<>();
     //compute result: corresponding lookup rows (depending on validityFrom and validityTo).
     return result;
   }

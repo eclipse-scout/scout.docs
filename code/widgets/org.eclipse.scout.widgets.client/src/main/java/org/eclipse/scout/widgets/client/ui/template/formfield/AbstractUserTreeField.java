@@ -49,7 +49,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
   }
 
   protected List<Node> parseFieldValue(boolean isTree) {
-    Map<String, Node> parents = new HashMap<String, Node>();
+    Map<String, Node> parents = new HashMap<>();
     Node root = new Node();
 
     clearErrorStatus();
@@ -58,7 +58,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     for (String line : value.split("\n")) {
       line = line.trim();
 
-      if (line.length() > 0 && !line.startsWith("#")) {
+      if (!line.isEmpty() && !line.startsWith("#")) {
         Node node = parseLine(line, isTree);
 
         if (node.isInvalid()) {
@@ -123,7 +123,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
   }
 
   private boolean parseBoolean(String bool) {
-    return !(!StringUtility.isNullOrEmpty(bool) && bool.equals("false"));
+    return !(!StringUtility.isNullOrEmpty(bool) && "false".equals(bool));
   }
 
   protected void printNodes(List<Node> nodes, String ident) {
@@ -170,7 +170,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
   }
 
   private LookupRow<String> nodeToLookupRow(Node node) {
-    LookupRow<String> row = new LookupRow<String>(node.getKey(), node.getText());
+    LookupRow<String> row = new LookupRow<>(node.getKey(), node.getText());
 
     row.withIconId(node.getIconId());
     row.withParentKey(node.getParentKey());
@@ -183,7 +183,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
   }
 
   protected List<IMenu> nodesToMenus(List<Node> nodes) {
-    ArrayList<IMenu> menus = new ArrayList<IMenu>();
+    ArrayList<IMenu> menus = new ArrayList<>();
 
     for (final Node node : nodes) {
       AbstractMenu menu = new AbstractMenu() {
@@ -211,7 +211,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     private String m_key;
     private String m_parentKey;
     private Node m_parent;
-    private List<Node> m_children;
+    private final List<Node> m_children;
 
     private String m_text;
     private String m_icon;
@@ -225,15 +225,15 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
 
     public Node() {
       m_parent = null;
-      m_children = new ArrayList<Node>();
+      m_children = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-      StringBuffer buf = new StringBuffer();
-      buf.append(getKey() + "[" + getParentKey());
-      buf.append("," + getText());
-      buf.append("," + getIconId());
+      StringBuilder buf = new StringBuilder();
+      buf.append(getKey()).append("[").append(getParentKey());
+      buf.append(",").append(getText());
+      buf.append(",").append(getIconId());
       buf.append("]");
       return buf.toString();
     }
@@ -248,7 +248,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     }
 
     public boolean isLeaf() {
-      return m_children.size() == 0;
+      return m_children.isEmpty();
     }
 
     public boolean isRoot() {

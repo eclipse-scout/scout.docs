@@ -39,7 +39,6 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.ExecutionTrigger;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractHierarchicalTreeMenu;
@@ -57,10 +56,6 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 @Order(4000.0)
 public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm {
-
-  public TreeFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -210,11 +205,8 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
               @Override
               protected void execAction() {
-                ModelJobs.schedule(new IRunnable() {
-                  @Override
-                  public void run() throws Exception {
-                    newNode(getTree());
-                  }
+                ModelJobs.schedule(() -> {
+                  newNode(getTree());
                 }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
@@ -547,19 +539,10 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             protected void execAction() {
               final String subjectName = getSelectedNode().getCell().getText();
 
-              Jobs.schedule(new IRunnable() {
+              Jobs.schedule(() -> {
 
-                @Override
-                public void run() throws Exception {
+                ModelJobs.schedule(() -> getTree().selectNode(null), ModelJobs.newInput(ClientRunContexts.copyCurrent()).withName(String.format("execute job: '%s'", subjectName)));
 
-                  ModelJobs.schedule(new IRunnable() {
-                    @Override
-                    public void run() throws Exception {
-                      getTree().selectNode(null);
-                    }
-                  }, ModelJobs.newInput(ClientRunContexts.copyCurrent()).withName(String.format("execute job: '%s'", subjectName)));
-
-                }
               }, Jobs.newInput().withRunContext(ClientRunContexts.copyCurrent())
                   .withExecutionTrigger(new ExecutionTrigger().withStartIn(3, TimeUnit.SECONDS)));
             }
@@ -841,7 +824,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         // recursively add child nodes (if any)
         List<? extends ICode<Long>> children = code.getChildCodes();
-        if (children.size() > 0) {
+        if (!children.isEmpty()) {
           addCodesToTree(children, node, tree);
         }
       }
@@ -852,7 +835,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
      */
     private void updateLeafNodes(ITreeNode node) {
       List<ITreeNode> children = node.getChildNodes();
-      node.setLeaf(children.size() == 0);
+      node.setLeaf(children.isEmpty());
 
       for (ITreeNode child : children) {
         updateLeafNodes(child);

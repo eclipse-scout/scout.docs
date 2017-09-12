@@ -20,10 +20,6 @@ public class IndustryICBCodeType extends AbstractCodeType<Long, Long> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 0000L;
 
-  public IndustryICBCodeType() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredIsHierarchy() {
     return true;

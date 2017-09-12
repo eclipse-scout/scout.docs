@@ -6,6 +6,8 @@ import java.net.URL;
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.common.AbstractUrlImageFieldData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.DefaultSubtypeSdkCommand;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.platform.Order;
@@ -17,8 +19,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 
 // tag::template[]
 @FormData(value = AbstractUrlImageFieldData.class, // <1>
-    sdkCommand = FormData.SdkCommand.CREATE,
-    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+    sdkCommand = SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
 // tag::menu[]
 public class AbstractUrlImageField extends AbstractImageField {
 

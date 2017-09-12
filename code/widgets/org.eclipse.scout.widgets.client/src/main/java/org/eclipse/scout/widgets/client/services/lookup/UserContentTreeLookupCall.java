@@ -22,7 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 public class UserContentTreeLookupCall extends LocalLookupCall<String> {
 
   private static final long serialVersionUID = 1L;
-  private List<LookupRow<String>> m_rows = new ArrayList<LookupRow<String>>();
+  private List<LookupRow<String>> m_rows = new ArrayList<>();
 
   public void setLookupRows(List<LookupRow<String>> rows) {
     m_rows = rows;

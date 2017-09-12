@@ -58,10 +58,6 @@ import org.slf4j.LoggerFactory;
 public class MessageBoxForm extends AbstractForm implements IPageForm {
   private static final Logger LOG = LoggerFactory.getLogger(MessageBoxForm.class);
 
-  public MessageBoxForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;
@@ -455,10 +451,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           String optionName = "" + result;
           try {
             Field[] f = IMessageBox.class.getDeclaredFields();
-            for (int i = 0; i < f.length; i++) {
-              if (Modifier.isPublic(f[i].getModifiers()) && Modifier.isStatic(f[i].getModifiers()) && f[i].getName().endsWith("_OPTION")) {
-                if (((Number) f[i].get(null)).intValue() == result) {
-                  optionName = IMessageBox.class.getSimpleName() + "." + f[i].getName();
+            for (Field aF : f) {
+              if (Modifier.isPublic(aF.getModifiers()) && Modifier.isStatic(aF.getModifiers()) && aF.getName().endsWith("_OPTION")) {
+                if (((Number) aF.get(null)).intValue() == result) {
+                  optionName = IMessageBox.class.getSimpleName() + "." + aF.getName();
                   break;
                 }
               }

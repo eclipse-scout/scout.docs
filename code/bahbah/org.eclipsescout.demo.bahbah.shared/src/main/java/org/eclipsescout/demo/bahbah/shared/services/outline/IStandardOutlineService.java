@@ -13,8 +13,9 @@ package org.eclipsescout.demo.bahbah.shared.services.outline;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 
+@FunctionalInterface
 @TunnelToServer
 public interface IStandardOutlineService extends IService {
 
-  public String[] getOnlineUsers();
+  String[] getOnlineUsers();
 }

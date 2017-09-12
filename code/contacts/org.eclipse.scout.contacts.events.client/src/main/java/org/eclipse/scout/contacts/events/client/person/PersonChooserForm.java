@@ -11,7 +11,6 @@
 package org.eclipse.scout.contacts.events.client.person;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.scout.contacts.events.client.person.PersonChooserForm.MainBox.CancelButton;
@@ -36,10 +35,6 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 public class PersonChooserForm extends AbstractForm {
 
   private List<String> excludedPersons = new ArrayList<>();
-
-  public PersonChooserForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -96,13 +91,7 @@ public class PersonChooserForm extends AbstractForm {
 
         @Override
         protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
-          Iterator<ILookupRow<String>> iterator = result.iterator();
-          while (iterator.hasNext()) {
-            ILookupRow<String> row = iterator.next();
-            if (excludedPersons.contains(row.getKey())) {
-              iterator.remove();
-            }
-          }
+          result.removeIf(row -> excludedPersons.contains(row.getKey()));
         }
       }
     }

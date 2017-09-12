@@ -15,7 +15,8 @@ import java.util.Set;
 import org.eclipse.scout.contacts.events.server.sql.SQLs;
 import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionData;
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
-import org.eclipse.scout.contacts.server.sql.DatabaseProperties;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoCreateProperty;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoPopulateProperty;
 import org.eclipse.scout.contacts.server.sql.IDataStoreService;
 import org.eclipse.scout.contacts.server.sql.SuperUserRunContextProducer;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -48,16 +49,12 @@ public class PlatformListener implements IPlatformListener, IDataStoreService {
   }
 
   public void autoCreateDatabase() {
-    if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoCreateProperty.class)) {
+    if (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
       try {
         RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
-        IRunnable runnable = new IRunnable() {
-
-          @Override
-          public void run() throws Exception {
-            createEventTable();
-            createParticipantTable();
-          }
+        IRunnable runnable = () -> {
+          createEventTable();
+          createParticipantTable();
         };
 
         context.run(runnable);
@@ -81,7 +78,7 @@ public class PlatformListener implements IPlatformListener, IDataStoreService {
       SQL.insert(SQLs.EVENT_CREATE_TABLE);
       LOG.info("Database table 'EVENT' created");
 
-      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.EVENT_INSERT_SAMPLE + SQLs.EVENT_INSERT_VALUES_01);
         SQL.insert(SQLs.EVENT_INSERT_SAMPLE + SQLs.EVENT_INSERT_VALUES_02);
         LOG.info("Database table 'EVENT' populated with sample data");
@@ -94,7 +91,7 @@ public class PlatformListener implements IPlatformListener, IDataStoreService {
       SQL.insert(SQLs.PARTICIPANT_CREATE_TABLE);
       LOG.info("Database table 'PARTICIPANT' created");
 
-      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_01);
         SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_02);
         SQL.insert(SQLs.PARTICIPANT_INSERT_SAMPLE + SQLs.PARTICIPANT_INSERT_VALUES_03);

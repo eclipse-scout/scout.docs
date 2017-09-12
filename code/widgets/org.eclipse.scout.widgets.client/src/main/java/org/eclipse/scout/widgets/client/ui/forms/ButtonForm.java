@@ -50,10 +50,6 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 public class ButtonForm extends AbstractForm implements IPageForm {
 
-  public ButtonForm() {
-    super();
-  }
-
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Buttons");

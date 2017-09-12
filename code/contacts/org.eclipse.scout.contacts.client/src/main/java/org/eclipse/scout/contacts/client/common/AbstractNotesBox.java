@@ -2,14 +2,16 @@ package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.contacts.shared.common.AbstractNotesBoxData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.DefaultSubtypeSdkCommand;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @FormData(value = AbstractNotesBoxData.class,
-    sdkCommand = FormData.SdkCommand.CREATE,
-    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+    sdkCommand = SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
 public class AbstractNotesBox extends AbstractGroupBox {
 
   public NotesField getNotesField() {

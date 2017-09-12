@@ -31,9 +31,9 @@ import org.eclipse.scout.widgets.shared.Icons;
  */
 public class FormOptionsForm extends AbstractForm {
 
-  private static IStatus INFO_STATUS = new Status(TEXTS.get("SampleInfoStatus"), IStatus.INFO).withIconId(Icons.Info);
+  private static final IStatus INFO_STATUS = new Status(TEXTS.get("SampleInfoStatus"), IStatus.INFO).withIconId(Icons.Info);
 
-  private IForm m_configurableForm;
+  private final IForm m_configurableForm;
 
   /**
    *

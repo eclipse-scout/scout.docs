@@ -14,6 +14,7 @@ import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractEditMenu;
 import org.eclipse.scout.contacts.client.common.AbstractNewMenu;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
+import org.eclipse.scout.contacts.client.organization.OrganizationTablePage.Table;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
 import org.eclipse.scout.rt.client.dto.PageData;
@@ -24,7 +25,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
-import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -34,7 +34,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 // tag::PageInit[]
 // tag::childPage[]
 @PageData(OrganizationTablePageData.class)
-public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTablePage.Table> {
+public class OrganizationTablePage extends AbstractPageWithTable<Table> {
 // end::childPage[]
 
   @Override
@@ -176,13 +176,9 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       protected void execAction() {
         final OrganizationForm form = new OrganizationForm();
         form.setOrganizationId(getOrganizationIdColumn().getSelectedValue());
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
+        form.addFormListener(e -> {
+          if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+            reloadPage();
           }
         });
 
@@ -196,13 +192,9 @@ public class OrganizationTablePage extends AbstractPageWithTable<OrganizationTab
       @Override
       protected void execAction() {
         final OrganizationForm form = new OrganizationForm();
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
+        form.addFormListener(e -> {
+          if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+            reloadPage();
           }
         });
 

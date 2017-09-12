@@ -23,10 +23,6 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 10000L;
 
-  public EventTypeCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("EventType");

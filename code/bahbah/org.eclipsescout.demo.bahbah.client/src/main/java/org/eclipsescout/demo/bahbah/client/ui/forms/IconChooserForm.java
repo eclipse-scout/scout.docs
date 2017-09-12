@@ -26,10 +26,6 @@ import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
 
 public class IconChooserForm extends AbstractForm {
 
-  public IconChooserForm() {
-    super();
-  }
-
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("IconChangeTitle");

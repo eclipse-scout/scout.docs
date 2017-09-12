@@ -25,9 +25,10 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithDetailFormTablePage.Table;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm;
 
-public class PageWithDetailFormTablePage extends AbstractPageWithTable<PageWithDetailFormTablePage.Table> {
+public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
 
   public PageWithDetailFormTablePage() {
     super(true, DetailForm.class.getName());

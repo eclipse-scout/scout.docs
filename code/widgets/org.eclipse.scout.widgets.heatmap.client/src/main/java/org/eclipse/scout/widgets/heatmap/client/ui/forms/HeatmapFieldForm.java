@@ -44,11 +44,7 @@ import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBo
 @Order(100000.0)
 public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
-  private P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
-
-  public HeatmapFieldForm() {
-    super();
-  }
+  private final P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {

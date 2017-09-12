@@ -1,7 +1,6 @@
 package org.eclipse.scout.docs.snippets;
 
 import java.io.Serializable;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import javax.security.auth.Subject;
@@ -13,7 +12,6 @@ import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.job.FixedDelayScheduleBuilder;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.Jobs;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.context.ServerRunContexts;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
@@ -37,12 +35,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.rawEclipseJob.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name"));
       // end::jobManager.rawEclipseJob.new[]
@@ -64,12 +58,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.clientSyncJob.new[]
-      ModelJobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      ModelJobs.schedule(() -> {
+        // do something
       }, ModelJobs
           .newInput(ClientRunContexts.copyCurrent())
           .withName("job-name"));
@@ -92,12 +82,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.clientAsyncJob.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withRunContext(ClientRunContexts.copyCurrent())
           .withName("job-name"));
@@ -121,12 +107,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.serverJob.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withRunContext(ServerRunContexts.copyCurrent())
           .withName("job-name"));
@@ -150,12 +132,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.serverJob.runNow.new[]
-      ServerRunContexts.copyCurrent().run(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      ServerRunContexts.copyCurrent().run(() -> {
+        // do something
       });
       // end::jobManager.serverJob.runNow.new[]
     }
@@ -176,12 +154,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.delayedExecution.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name")
           .withExecutionTrigger(Jobs.newExecutionTrigger()
@@ -206,12 +180,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.fixedDelayExecution.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name")
           .withExecutionTrigger(Jobs.newExecutionTrigger()
@@ -238,12 +208,8 @@ public class MigrationGuideSnippet {
     {
       Subject subject = null;
       // tag::jobManager.serverJob.otherSubject.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name")
           .withRunContext(ServerRunContexts.copyCurrent()
@@ -276,20 +242,16 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.job.checkForCancellation.new[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do first chunk of work
-          if (RunMonitor.CURRENT.get().isCancelled()) {
-            return;
-          }
-          // do second chunk of work
-          if (RunMonitor.CURRENT.get().isCancelled()) {
-            return;
-          }
-          // do third chunk of work
+      Jobs.schedule(() -> {
+        // do first chunk of work
+        if (RunMonitor.CURRENT.get().isCancelled()) {
+          return;
         }
+        // do second chunk of work
+        if (RunMonitor.CURRENT.get().isCancelled()) {
+          return;
+        }
+        // do third chunk of work
       }, Jobs.newInput()
           .withName("job-name"));
       // end::jobManager.job.checkForCancellation.new[]
@@ -314,12 +276,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.job.join.new[]
-      IFuture<Void> future = Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      IFuture<Void> future = Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name"));
 
@@ -346,12 +304,8 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.job.join_with_timeout.new[]
-      IFuture<Void> future = Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      IFuture<Void> future = Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job-name"));
 
@@ -382,13 +336,9 @@ public class MigrationGuideSnippet {
 
     {
       // tag::jobManager.job.get_result.new[]
-      IFuture<String> future = Jobs.schedule(new Callable<String>() {
-
-        @Override
-        public String call() throws Exception {
-          // do something
-          return "result";
-        }
+      IFuture<String> future = Jobs.schedule(() -> {
+        // do something
+        return "result";
       }, Jobs.newInput()
           .withName("job-name"));
 
@@ -450,7 +400,7 @@ public class MigrationGuideSnippet {
   class UserChangedClientNotification implements Serializable {
     private static final long serialVersionUID = 1L;
     @SuppressWarnings("unused")
-    private String m_userId;
+    private final String m_userId;
 
     public UserChangedClientNotification(String userId) {
       m_userId = userId;

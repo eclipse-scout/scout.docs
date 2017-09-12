@@ -21,10 +21,6 @@ import org.eclipse.scout.widgets.client.ui.forms.LabelFieldForm.MainBox.CloseBut
 
 public class LabelFieldForm extends AbstractForm implements IPageForm {
 
-  public LabelFieldForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;

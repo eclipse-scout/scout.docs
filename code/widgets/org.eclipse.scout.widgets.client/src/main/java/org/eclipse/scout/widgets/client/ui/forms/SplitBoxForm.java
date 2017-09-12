@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,12 +61,9 @@ import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisib
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox.CollapsibleFieldBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DateModifiedColumn;
 
 public class SplitBoxForm extends AbstractForm implements IPageForm {
-
-  public SplitBoxForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -221,7 +216,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
                 super.execInitField();
 
                 for (IColumn c : getTable().getColumns()) {
-                  if (c instanceof AbstractFileTableField.Table.DateModifiedColumn) {
+                  if (c instanceof DateModifiedColumn) {
                     c.setVisible(false);
                   }
                 }
@@ -525,17 +520,14 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             protected void execInitField() {
               setValue(getSplitVerticalField().isFieldMinimized());
 
-              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_MINIMIZED, new PropertyChangeListener() {
-                @Override
-                public void propertyChange(PropertyChangeEvent evt) {
-                  if (!isValueChanging()) {
-                    setValueChangeTriggerEnabled(false);
-                    try {
-                      setValue((Boolean) evt.getNewValue());
-                    }
-                    finally {
-                      setValueChangeTriggerEnabled(true);
-                    }
+              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_MINIMIZED, evt -> {
+                if (!isValueChanging()) {
+                  setValueChangeTriggerEnabled(false);
+                  try {
+                    setValue((Boolean) evt.getNewValue());
+                  }
+                  finally {
+                    setValueChangeTriggerEnabled(true);
                   }
                 }
               });
@@ -564,17 +556,14 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             protected void execInitField() {
               setValue(getSplitVerticalField().isFieldCollapsed());
 
-              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_COLLAPSED, new PropertyChangeListener() {
-                @Override
-                public void propertyChange(PropertyChangeEvent evt) {
-                  if (!isValueChanging()) {
-                    setValueChangeTriggerEnabled(false);
-                    try {
-                      setValue((Boolean) evt.getNewValue());
-                    }
-                    finally {
-                      setValueChangeTriggerEnabled(true);
-                    }
+              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_FIELD_COLLAPSED, evt -> {
+                if (!isValueChanging()) {
+                  setValueChangeTriggerEnabled(false);
+                  try {
+                    setValue((Boolean) evt.getNewValue());
+                  }
+                  finally {
+                    setValueChangeTriggerEnabled(true);
                   }
                 }
               });
@@ -758,17 +747,14 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           protected void execInitField() {
             setValue(NumberUtility.toBigDecimal(getSplitVerticalField().getMinSplitterPosition()));
 
-            getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_MIN_SPLITTER_POSITION, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                if (!isValueChanging()) {
-                  setValueChangeTriggerEnabled(false);
-                  try {
-                    setValue(NumberUtility.toBigDecimal((Double) evt.getNewValue()));
-                  }
-                  finally {
-                    setValueChangeTriggerEnabled(true);
-                  }
+            getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_MIN_SPLITTER_POSITION, evt -> {
+              if (!isValueChanging()) {
+                setValueChangeTriggerEnabled(false);
+                try {
+                  setValue(NumberUtility.toBigDecimal((Double) evt.getNewValue()));
+                }
+                finally {
+                  setValueChangeTriggerEnabled(true);
                 }
               }
             });
@@ -878,12 +864,9 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       // set initial value
       setValueWithoutValueChangeTriggers(getSplitBox().getSplitterPosition());
       // add listener
-      getSplitBox().addPropertyChangeListener(ISplitBox.PROP_SPLITTER_POSITION, new PropertyChangeListener() {
-        @Override
-        public void propertyChange(PropertyChangeEvent evt) {
-          if (!P_AbstractSplitterPositionField.this.isValueChanging()) {
-            setValueWithoutValueChangeTriggers((double) evt.getNewValue());
-          }
+      getSplitBox().addPropertyChangeListener(ISplitBox.PROP_SPLITTER_POSITION, evt -> {
+        if (!P_AbstractSplitterPositionField.this.isValueChanging()) {
+          setValueWithoutValueChangeTriggers((double) evt.getNewValue());
         }
       });
     }
@@ -904,11 +887,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
     @Override
     protected List<? extends ILookupRow<String>> execCreateLookupRows() {
-      ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST, "Relative (first field)"));
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND, "Relative (second field)"));
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST, "Absolute (first field)"));
-      rows.add(new LookupRow<String>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND, "Absolute (second field)"));
+      ArrayList<LookupRow<String>> rows = new ArrayList<>();
+      rows.add(new LookupRow<>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_FIRST, "Relative (first field)"));
+      rows.add(new LookupRow<>(ISplitBox.SPLITTER_POSITION_TYPE_RELATIVE_SECOND, "Relative (second field)"));
+      rows.add(new LookupRow<>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_FIRST, "Absolute (first field)"));
+      rows.add(new LookupRow<>(ISplitBox.SPLITTER_POSITION_TYPE_ABSOLUTE_SECOND, "Absolute (second field)"));
       return rows;
     }
   }

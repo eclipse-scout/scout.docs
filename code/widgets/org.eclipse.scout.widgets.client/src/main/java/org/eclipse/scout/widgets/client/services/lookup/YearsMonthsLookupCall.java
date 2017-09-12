@@ -37,11 +37,11 @@ public class YearsMonthsLookupCall extends LocalLookupCall<String> {
       String text = String.valueOf(i);
       String parentKey = String.valueOf(100 * i);
 
-      rows.add(new LookupRow<String>(parentKey, text));
+      rows.add(new LookupRow<>(parentKey, text));
 
       for (int j = 0; j < 12; j++) {
         String key = String.valueOf(100 * i + j + 1);
-        rows.add(new LookupRow<String>(key, months[j]).withParentKey(parentKey));
+        rows.add(new LookupRow<>(key, months[j]).withParentKey(parentKey));
       }
     }
 

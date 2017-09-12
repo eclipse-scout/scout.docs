@@ -9,7 +9,6 @@ import org.eclipse.scout.rt.client.deeplink.DeepLinkUriBuilder;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
-import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.Order;
 
@@ -59,12 +58,9 @@ public class FormDeepLinkHandler extends AbstractDeepLinkHandler {
         form.setTitle(null); // Removing title and subtitle prevents the form from being displayed as a tab.
         form.setSubTitle(null);
         form.setDisplayHint(AbstractForm.DISPLAY_HINT_VIEW);
-        form.addFormListener(new FormListener() {
-          @Override
-          public void formChanged(FormEvent e) {
-            if (e.getType() == FormEvent.TYPE_CLOSED) {
-              IClientSession.CURRENT.get().stop(); // Stopping the client session has also the effect that the popup-window will be closed.
-            }
+        form.addFormListener(e -> {
+          if (e.getType() == FormEvent.TYPE_CLOSED) {
+            IClientSession.CURRENT.get().stop(); // Stopping the client session has also the effect that the popup-window will be closed.
           }
         });
         form.start();

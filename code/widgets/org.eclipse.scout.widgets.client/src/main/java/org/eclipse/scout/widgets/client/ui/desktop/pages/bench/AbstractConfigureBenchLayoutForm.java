@@ -60,15 +60,15 @@ public abstract class AbstractConfigureBenchLayoutForm<T extends FlexboxLayoutDa
     return getFieldByClass(HeaderField.class);
   }
 
-  public AbstractConfigureBenchLayoutForm<?>.MainBox.ShrinkField getShrinkField() {
+  public ShrinkField getShrinkField() {
     return getFieldByClass(ShrinkField.class);
   }
 
-  public AbstractConfigureBenchLayoutForm<?>.MainBox.GrowField getGrowField() {
+  public GrowField getGrowField() {
     return getFieldByClass(GrowField.class);
   }
 
-  public AbstractConfigureBenchLayoutForm<?>.MainBox.RelativeField getRelativeField() {
+  public RelativeField getRelativeField() {
     return getFieldByClass(RelativeField.class);
   }
 

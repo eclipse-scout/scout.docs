@@ -21,9 +21,6 @@ import org.eclipse.scout.rt.platform.Order;
 
 public class DesktopExtension extends AbstractDesktopExtension {
 
-  public DesktopExtension() {
-  }
-
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
     List<Class<? extends IOutline>> outlines = new ArrayList<>();

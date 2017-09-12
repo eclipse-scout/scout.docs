@@ -13,11 +13,11 @@ package org.eclipse.scout.contacts.server.organization;
 import java.util.UUID;
 
 import org.eclipse.scout.contacts.server.sql.SQLs;
-import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.CreateOrganizationPermission;
+import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
-import org.eclipse.scout.contacts.shared.organization.ReadOrganizationPermission;
 import org.eclipse.scout.contacts.shared.organization.OrganizationTablePageData;
+import org.eclipse.scout.contacts.shared.organization.ReadOrganizationPermission;
 import org.eclipse.scout.contacts.shared.organization.UpdateOrganizationPermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;

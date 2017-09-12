@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Bean;
 import org.eclipse.scout.rt.platform.BeanMetaData;
 import org.eclipse.scout.rt.platform.IBean;
-import org.eclipse.scout.rt.platform.IPlatform;
+import org.eclipse.scout.rt.platform.IPlatform.State;
 import org.eclipse.scout.rt.platform.IPlatformListener;
 import org.eclipse.scout.rt.platform.PlatformEvent;
 import org.eclipse.scout.rt.platform.Replace;
@@ -36,7 +36,7 @@ public final class PlatformSnippet {
   public class MyListener implements IPlatformListener {
     @Override
     public void stateChanged(PlatformEvent event) {
-      if (event.getState() == IPlatform.State.PlatformStarted) {
+      if (event.getState() == State.PlatformStarted) {
         // do some work as soon as the platform has been started completely
       }
     }
@@ -47,7 +47,7 @@ public final class PlatformSnippet {
   public class RegisterBeansListener implements IPlatformListener {
     @Override
     public void stateChanged(PlatformEvent event) {
-      if (event.getState() == IPlatform.State.BeanManagerPrepared) {
+      if (event.getState() == State.BeanManagerPrepared) {
         // register the class directly
         BEANS.getBeanManager().registerClass(BeanSingletonClass.class);
 
@@ -115,7 +115,6 @@ public final class PlatformSnippet {
   public class BeanClass {
   }
   //end::BeanClass[]
-
 
   private void snippets() {
     //tag::ClassInventory[]

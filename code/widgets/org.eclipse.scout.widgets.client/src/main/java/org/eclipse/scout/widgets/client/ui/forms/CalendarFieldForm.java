@@ -40,6 +40,7 @@ import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
+import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField.Calendar;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,10 +49,6 @@ import org.slf4j.LoggerFactory;
 public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(CalendarFieldForm.class);
-
-  public CalendarFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -85,7 +82,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
-    public class CalendarField extends AbstractCalendarField<CalendarField.Calendar> {
+    public class CalendarField extends AbstractCalendarField<Calendar> {
 
       @Override
       protected int getConfiguredGridH() {
@@ -112,22 +109,19 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
         private ContextMenuListener m_cml;
 
-        private List<IMenu> m_calendarMenus = new ArrayList<>();
+        private final List<IMenu> m_calendarMenus = new ArrayList<>();
 
         @Override
         protected void execInitCalendar() {
-          m_cml = new ContextMenuListener() {
-            @Override
-            public void contextMenuChanged(ContextMenuEvent event) {
-              if (ContextMenuEvent.TYPE_STRUCTURE_CHANGED == event.getType()) {
-                IContextMenu rootContextMenu = getForm().getRootGroupBox().getContextMenu();
-                rootContextMenu.removeChildActions(m_calendarMenus);
-                m_calendarMenus.clear();
-                for (IMenu menu : event.getSource().getChildActions()) {
-                  m_calendarMenus.add(OutlineMenuWrapper.wrapMenu(menu));
-                }
-                rootContextMenu.addChildActions(m_calendarMenus);
+          m_cml = event -> {
+            if (ContextMenuEvent.TYPE_STRUCTURE_CHANGED == event.getType()) {
+              IContextMenu rootContextMenu = getForm().getRootGroupBox().getContextMenu();
+              rootContextMenu.removeChildActions(m_calendarMenus);
+              m_calendarMenus.clear();
+              for (IMenu menu : event.getSource().getChildActions()) {
+                m_calendarMenus.add(OutlineMenuWrapper.wrapMenu(menu));
               }
+              rootContextMenu.addChildActions(m_calendarMenus);
             }
           };
           getCalendar().getContextMenu().addContextMenuListener(m_cml);

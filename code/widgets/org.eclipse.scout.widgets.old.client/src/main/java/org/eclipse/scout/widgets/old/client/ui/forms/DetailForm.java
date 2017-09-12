@@ -25,10 +25,6 @@ import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm.MainBox.GroupBox
 
 public class DetailForm extends AbstractForm {
 
-  public DetailForm() {
-    super();
-  }
-
   @Override
   public void start() {
     startNew();

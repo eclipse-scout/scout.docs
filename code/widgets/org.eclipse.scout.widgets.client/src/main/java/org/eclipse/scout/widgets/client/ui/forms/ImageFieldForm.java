@@ -12,7 +12,6 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.dnd.ResourceListTransferObject;
@@ -58,10 +57,6 @@ import org.slf4j.LoggerFactory;
 public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(ImageFieldForm.class);
-
-  public ImageFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -204,7 +199,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           if (transferObject instanceof ResourceListTransferObject) {
             List<BinaryResource> resources = ((ResourceListTransferObject) transferObject).getResources();
 
-            if (resources.size() > 0) {
+            if (!resources.isEmpty()) {
               BinaryResource resource = CollectionUtility.firstElement(resources);
               // if you want to work with buffered images
               // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
@@ -541,12 +536,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
-          for (Iterator<ILookupRow<String>> it = result.iterator(); it.hasNext();) {
-            ILookupRow<String> l = it.next();
-            if (StringUtility.startsWith(l.getKey(), "font:")) {
-              it.remove();
-            }
-          }
+          result.removeIf(l -> StringUtility.startsWith(l.getKey(), "font:"));
         }
 
         @Override

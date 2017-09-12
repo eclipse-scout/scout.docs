@@ -19,8 +19,9 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.widgets.old.client.ui.forms.internal.AbstractTableFieldWithDisabledRows.Table;
 
-public abstract class AbstractTableFieldWithDisabledRows extends AbstractTableField<AbstractTableFieldWithDisabledRows.Table> {
+public abstract class AbstractTableFieldWithDisabledRows extends AbstractTableField<Table> {
 
   @Override
   protected boolean getConfiguredLabelVisible() {
@@ -40,7 +41,7 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractTableFi
   @Override
   public void reloadTableData() {
 
-    Object[][] data = new Object[][]{{1l, "Anna"}, {2l, "Cleo"}};
+    Object[][] data = {{1l, "Anna"}, {2l, "Cleo"}};
     getTable().replaceRowsByMatrix(data);
 
   }

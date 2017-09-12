@@ -42,10 +42,6 @@ import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm.MainBox.Exampl
 
 public class BooleanFieldForm extends AbstractForm implements IPageForm {
 
-  public BooleanFieldForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;
@@ -258,7 +254,7 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return MainBox.ConfigurationBox.CheckboxField.class;
+            return CheckboxField.class;
           }
 
           @Override
@@ -282,7 +278,7 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return MainBox.ConfigurationBox.CheckboxField.class;
+            return CheckboxField.class;
           }
 
           @Override

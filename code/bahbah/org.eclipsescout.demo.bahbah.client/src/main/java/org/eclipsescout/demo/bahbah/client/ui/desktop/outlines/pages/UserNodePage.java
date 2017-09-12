@@ -11,6 +11,7 @@
 package org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -84,13 +85,11 @@ public class UserNodePage extends AbstractPageWithNodes {
   }
 
   public void updateBuddyPages() {
-    HashSet<String> newBuddy = new HashSet<String>();
-    ArrayList<String> updatedList = new ArrayList<String>();
+    HashSet<String> newBuddy = new HashSet<>();
+    ArrayList<String> updatedList = new ArrayList<>();
     String[] buddies = BEANS.get(IStandardOutlineService.class).getOnlineUsers();
 
-    for (String buddy : buddies) {
-      newBuddy.add(buddy);
-    }
+    newBuddy.addAll(Arrays.asList(buddies));
 
     // keep track of known buddies and remove buddies that are no longer here
     List<IPage<?>> childPages = getChildPages();

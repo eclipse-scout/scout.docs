@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Locale;
 
 import org.eclipse.scout.contacts.client.common.MapForm.MainBox.MapField;
@@ -37,10 +38,6 @@ public class MapForm extends AbstractForm {
   private String street;
   private String city;
   private String country;
-
-  public MapForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -159,7 +156,7 @@ public class MapForm extends AbstractForm {
       }
 
       private String normalize(String s) {
-        return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        return Normalizer.normalize(s, Form.NFD).replaceAll("[^\\p{ASCII}]", "");
       }
 
       private String encode(String s) {

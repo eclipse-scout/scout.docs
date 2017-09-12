@@ -16,6 +16,10 @@ code/.settings
 bin
 classes
 
+# IntelliJ IDEA #
+*.iml
+/.idea
+
 # Maven #
 target/
 .surefire-*

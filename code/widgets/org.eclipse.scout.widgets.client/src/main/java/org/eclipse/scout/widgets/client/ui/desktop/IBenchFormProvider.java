@@ -15,6 +15,7 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 /**
  * Provides a form instance which is displayed when Desktop is in bench-only mode.
  */
+@FunctionalInterface
 public interface IBenchFormProvider {
 
   IForm provideBenchForm();

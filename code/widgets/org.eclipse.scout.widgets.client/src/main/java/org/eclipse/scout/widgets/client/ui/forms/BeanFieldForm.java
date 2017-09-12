@@ -37,10 +37,6 @@ import org.eclipse.scout.widgets.client.ui.forms.BeanFieldForm.MainBox.ExamplesB
 @Order(6500)
 public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
-  public BeanFieldForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;

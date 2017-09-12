@@ -12,7 +12,6 @@ import org.eclipse.scout.rt.client.extension.ui.form.fields.stringfield.Abstract
 import org.eclipse.scout.rt.client.ui.desktop.bookmark.BookmarkFolderForm.MainBox.GroupBox.NameField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.job.Jobs;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
 
 /**
@@ -40,12 +39,7 @@ public class ExtensibilitySnippets {
 
   public void registerExtension() {
     //tag::RegisterNameFieldExtension[]
-    Jobs.schedule(new IRunnable() {
-      @Override
-      public void run() throws Exception {
-        BEANS.get(IExtensionRegistry.class).register(NameFieldExtension.class);
-      }
-    }, Jobs.newInput()
+    Jobs.schedule(() -> BEANS.get(IExtensionRegistry.class).register(NameFieldExtension.class), Jobs.newInput()
         .withRunContext(ClientRunContexts.copyCurrent())
         .withName("register extension"));
     //end::RegisterNameFieldExtension[]

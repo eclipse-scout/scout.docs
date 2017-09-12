@@ -64,12 +64,10 @@ import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.Ex
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
+import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType.ExternalCode;
+import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType.PublicCode;
 
 public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
-
-  public RadioButtonGroupForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -207,7 +205,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          setValue(EventTypeCodeType.ExternalCode.ID);
+          setValue(ExternalCode.ID);
         }
       }
 
@@ -231,7 +229,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() {
-          getButtonFor(EventTypeCodeType.PublicCode.ID).setSelected(true);
+          getButtonFor(PublicCode.ID).setSelected(true);
           for (IRadioButton<Long> button : getButtons()) {
             button.setEnabled(false);
           }
@@ -261,7 +259,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Object getConfiguredRadioValue() {
-            return Long.valueOf(-1L);
+            return -1L;
           }
         }
 
@@ -275,7 +273,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Object getConfiguredRadioValue() {
-            return Long.valueOf(-2L);
+            return -2L;
           }
         }
 
@@ -289,7 +287,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Object getConfiguredRadioValue() {
-            return Long.valueOf(-3L);
+            return -3L;
           }
         }
       }

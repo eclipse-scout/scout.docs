@@ -58,13 +58,12 @@ import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
+import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB8000;
+import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB8000.ICB8500;
+import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(2000.0)
 public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
-
-  public TreeBoxForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -241,10 +240,10 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execInitField() {
-          Set<Long> codes = new HashSet<Long>();
-          codes.add(IndustryICBCodeType.ICB8000.ID);
-          codes.add(IndustryICBCodeType.ICB8000.ICB8500.ID);
-          codes.add(IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
+          Set<Long> codes = new HashSet<>();
+          codes.add(ICB8000.ID);
+          codes.add(ICB8500.ID);
+          codes.add(ICB9537.ID);
           setValue(codes);
           setFilterCheckedNodesValue(true);
         }
@@ -321,7 +320,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
           int year = Calendar.getInstance().get(Calendar.YEAR);
           int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
           int key = 100 * year + month;
-          Set<String> times = new HashSet<String>();
+          Set<String> times = new HashSet<>();
           times.add(String.valueOf(key));
           times.add(String.valueOf(key + 1));
           times.add(String.valueOf(key + 2));
@@ -456,7 +455,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return TreeBoxForm.MainBox.ConfigurationBox.TreeBoxField.class;
+          return TreeBoxField.class;
         }
 
         @Override
@@ -515,7 +514,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
-          List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+          List<LookupRow<String>> rows = new ArrayList<>();
 
           addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeBoxField().getLookupCall()).setLookupRows(rows);
@@ -665,7 +664,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     private final boolean m_active;
     private final boolean m_checked;
 
-    private ToggleState(boolean active, boolean checked) {
+    ToggleState(boolean active, boolean checked) {
       m_active = active;
       m_checked = checked;
     }

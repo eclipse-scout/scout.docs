@@ -29,9 +29,9 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
   private final List<ILookupRow<IPageForm>> m_lookupRows = new ArrayList<>();
 
   public StaticFormLookupCall() {
-    m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(StringFieldForm.class), TEXTS.get("StringField")));
-    m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(SmartFieldForm.class), TEXTS.get("SmartField")));
-    m_lookupRows.add(new LookupRow<IPageForm>(createAndStartForm(ImageFieldForm.class), TEXTS.get("ImageField")));
+    m_lookupRows.add(new LookupRow<>(createAndStartForm(StringFieldForm.class), TEXTS.get("StringField")));
+    m_lookupRows.add(new LookupRow<>(createAndStartForm(SmartFieldForm.class), TEXTS.get("SmartField")));
+    m_lookupRows.add(new LookupRow<>(createAndStartForm(ImageFieldForm.class), TEXTS.get("ImageField")));
   }
 
   protected IPageForm createAndStartForm(Class<? extends IPageForm> formType) {

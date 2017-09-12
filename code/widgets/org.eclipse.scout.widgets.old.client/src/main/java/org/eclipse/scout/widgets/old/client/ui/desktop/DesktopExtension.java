@@ -26,12 +26,10 @@ import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form;
 import org.eclipse.scout.widgets.shared.Icons;
 
 public class DesktopExtension extends AbstractDesktopExtension {
-  public DesktopExtension() {
-  }
 
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
+    List<Class<? extends IOutline>> outlines = new ArrayList<>();
     outlines.add(WidgetsOutline.class);
     outlines.add(PagesSearchFormsOutline.class);
     return outlines;

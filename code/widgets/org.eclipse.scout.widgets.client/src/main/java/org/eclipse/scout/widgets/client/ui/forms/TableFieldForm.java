@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +62,6 @@ import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -93,6 +90,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.WrapTextField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.SelectedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.CustomColumn;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.LocationColumn;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField.Table.TableStatusVisibleMenu;
@@ -103,15 +101,12 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
+import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(5000.0)
 public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
-
-  public TableFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -253,7 +248,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(10)
-      public class TableField extends AbstractTableField<TableField.Table> {
+      public class TableField extends AbstractTableField<Table> {
 
         private long m_maxId = 0;
 
@@ -288,7 +283,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getDateColumn().setValue(r, DateUtility.parse("18.03.2014", "dd.MM.yyyy"));
           table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
           table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
-          table.getIndustryColumn().setValue(r, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
+          table.getIndustryColumn().setValue(r, ICB9537.ID);
           table.getParticipantsColumn().setValue(r, 680L);
           table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
           table.getAttendedColumn().setValue(r, null);
@@ -305,7 +300,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getDateColumn().setValue(r, DateUtility.parse("25.03.2014", "dd.MM.yyyy"));
           table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
           table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
-          table.getIndustryColumn().setValue(r, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
+          table.getIndustryColumn().setValue(r, ICB9537.ID);
           table.getParticipantsColumn().setValue(r, 810L);
           table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
           table.getAttendedColumn().setValue(r, true);
@@ -316,13 +311,13 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         private String rowsToKeyString(List<ITableRow> list) {
-          if (list == null || list.size() == 0) {
+          if (list == null || list.isEmpty()) {
             return "";
           }
 
-          StringBuffer buf = new StringBuffer(Long.toString((Long) list.get(0).getCellValue(0)));
+          StringBuilder buf = new StringBuilder(Long.toString((Long) list.get(0).getCellValue(0)));
           for (int i = 1; i < list.size(); i++) {
-            buf.append(";" + (Long) list.get(i).getCellValue(0));
+            buf.append(";").append((Long) list.get(i).getCellValue(0));
           }
 
           return buf.toString();
@@ -401,23 +396,20 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execInitTable() {
             addPropertyChangeListener(
-                new PropertyChangeListener() {
-                  @Override
-                  public void propertyChange(PropertyChangeEvent e) {
-                    if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
-                      if (e.getNewValue() == null) {
-                        getContextColumnField().setValue("");
-                        // Is Column Mandatory Field
-                        getIsColumnMandatoryField().setEnabled(false);
-                        getIsColumnMandatoryField().setValue(false);
-                      }
-                      else {
-                        IColumn<?> contextColumn = Table.this.getContextColumn();
-                        getContextColumnField().setValue(contextColumn.getHeaderCell().getText());
-                        // Is Column Mandatory Field
-                        getIsColumnMandatoryField().setEnabled(true);
-                        getIsColumnMandatoryField().setValue(contextColumn.isMandatory());
-                      }
+                e -> {
+                  if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
+                    if (e.getNewValue() == null) {
+                      getContextColumnField().setValue("");
+                      // Is Column Mandatory Field
+                      getIsColumnMandatoryField().setEnabled(false);
+                      getIsColumnMandatoryField().setValue(false);
+                    }
+                    else {
+                      IColumn<?> contextColumn = Table.this.getContextColumn();
+                      getContextColumnField().setValue(contextColumn.getHeaderCell().getText());
+                      // Is Column Mandatory Field
+                      getIsColumnMandatoryField().setEnabled(true);
+                      getIsColumnMandatoryField().setValue(contextColumn.isMandatory());
                     }
                   }
                 });
@@ -1070,12 +1062,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected void execAction() {
-                ModelJobs.schedule(new IRunnable() {
-                  @Override
-                  public void run() throws Exception {
-                    newRow();
-                  }
-                }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+                ModelJobs.schedule(Table.this::newRow, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
 
@@ -1167,12 +1154,9 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected void execAction() {
-              ModelJobs.schedule(new IRunnable() {
-                @Override
-                public void run() throws Exception {
-                  List<ITableRow> rows = getSelectedRows();
-                  deleteRows(rows);
-                }
+              ModelJobs.schedule(() -> {
+                List<ITableRow> rows = getSelectedRows();
+                deleteRows(rows);
               }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                   .withExecutionTrigger(Jobs.newExecutionTrigger()
                       .withStartIn(2, TimeUnit.SECONDS)));
@@ -2017,7 +2001,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
     protected List<? extends ILookupRow<String>> execCreateLookupRows() {
       final List<ILookupRow<String>> rows = new ArrayList<>();
       for (String location : LOCATIONS) {
-        rows.add(new LookupRow<String>(location, location));
+        rows.add(new LookupRow<>(location, location));
       }
       return rows;
     }

@@ -19,10 +19,6 @@ import org.eclipse.scout.rt.platform.Order;
 
 public class LabelFieldEncodingForm extends AbstractForm {
 
-  public LabelFieldEncodingForm() {
-    super();
-  }
-
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 

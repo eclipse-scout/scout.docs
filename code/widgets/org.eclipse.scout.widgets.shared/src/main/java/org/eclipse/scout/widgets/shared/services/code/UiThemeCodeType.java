@@ -20,10 +20,6 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 10000L;
 
-  public UiThemeCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("UiTheme");

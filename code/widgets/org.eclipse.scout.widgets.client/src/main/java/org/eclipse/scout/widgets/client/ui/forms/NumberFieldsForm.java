@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -68,10 +66,6 @@ import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.Highes
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.SmallestValueButton;
 
 public class NumberFieldsForm extends AbstractForm implements IPageForm {
-
-  public NumberFieldsForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -536,7 +530,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.InputField.class;
+            return InputField.class;
           }
 
           @Override
@@ -565,12 +559,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execInitField() {
-            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                DisplayText0Field.this.setValue((String) evt.getNewValue());
-              }
-            });
+            getInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, evt -> DisplayText0Field.this.setValue((String) evt.getNewValue()));
           }
         }
 
@@ -598,7 +587,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.LongInputField.class;
+            return LongInputField.class;
           }
 
           @Override
@@ -627,12 +616,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execInitField() {
-            getLongInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                DisplayText1Field.this.setValue((String) evt.getNewValue());
-              }
-            });
+            getLongInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, evt -> DisplayText1Field.this.setValue((String) evt.getNewValue()));
           }
         }
 
@@ -660,7 +644,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.BigIntegerInputField.class;
+            return BigIntegerInputField.class;
           }
 
           @Override
@@ -689,12 +673,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execInitField() {
-            getBigIntegerInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                DisplayText2Field.this.setValue((String) evt.getNewValue());
-              }
-            });
+            getBigIntegerInputField().addPropertyChangeListener(PROP_DISPLAY_TEXT, evt -> DisplayText2Field.this.setValue((String) evt.getNewValue()));
           }
         }
       }

@@ -31,7 +31,9 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
+import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserAdministrationTablePage.Table;
 import org.eclipsescout.demo.bahbah.client.ui.forms.UserForm;
+import org.eclipsescout.demo.bahbah.shared.Icons;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.DeleteUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.ResetPasswordPermission;
@@ -42,7 +44,7 @@ import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.UserFormData;
 
 @PageData(UserAdministrationTablePageData.class)
-public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdministrationTablePage.Table> {
+public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
 
   @Override
   protected boolean getConfiguredLeaf() {
@@ -78,7 +80,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
 
     @Override
     protected String getConfiguredDefaultIconId() {
-      return org.eclipsescout.demo.bahbah.shared.Icons.Eye;
+      return Icons.Eye;
     }
 
     @Override

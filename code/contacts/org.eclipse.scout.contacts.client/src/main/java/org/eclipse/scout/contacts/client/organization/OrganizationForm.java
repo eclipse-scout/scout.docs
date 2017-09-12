@@ -34,6 +34,7 @@ import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
 import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.UpdateOrganizationPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -48,7 +49,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
-@FormData(value = OrganizationFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+@FormData(value = OrganizationFormData.class, sdkCommand = SdkCommand.CREATE)
 // tag::layout[]
 public class OrganizationForm extends AbstractForm {
 
@@ -221,7 +222,7 @@ public class OrganizationForm extends AbstractForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return OrganizationForm.MainBox.GeneralBox.HomepageField.class;
+          return HomepageField.class;
         }
 
         @Override

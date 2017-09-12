@@ -13,12 +13,12 @@ package org.eclipse.scout.contacts.server.person;
 import java.util.UUID;
 
 import org.eclipse.scout.contacts.server.sql.SQLs;
-import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.CreatePersonPermission;
+import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
-import org.eclipse.scout.contacts.shared.person.ReadPersonPermission;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
+import org.eclipse.scout.contacts.shared.person.ReadPersonPermission;
 import org.eclipse.scout.contacts.shared.person.UpdatePersonPermission;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;

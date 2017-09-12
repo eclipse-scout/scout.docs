@@ -45,10 +45,6 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 public class TabBoxForm extends AbstractForm implements IPageForm {
 
-  public TabBoxForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;

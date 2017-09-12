@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.ERRORStatusButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.GroupBox;
@@ -39,15 +40,10 @@ import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.GroupBox
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.GroupBox.StringField;
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.INFOStatusButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.StatusForm.MainBox.WARNINGStatusButton;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 public class StatusForm extends AbstractForm implements IPageForm {
 
   private Long statusNr;
-
-  public StatusForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {

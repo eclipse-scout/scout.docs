@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType;
+import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType.DefaultCode;
 
 public class OptionsForm extends AbstractForm {
 
@@ -32,7 +33,7 @@ public class OptionsForm extends AbstractForm {
 
   @Override
   protected void execInitForm() {
-    String theme = ObjectUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
+    String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
   }
 

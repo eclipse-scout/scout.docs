@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -30,14 +29,11 @@ import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.AdministrationOut
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.ChatOutline;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
 
-public class Desktop extends AbstractDesktop implements IDesktop {
-
-  public Desktop() {
-  }
+public class Desktop extends AbstractDesktop {
 
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
+    List<Class<? extends IOutline>> outlines = new ArrayList<>();
     outlines.add(ChatOutline.class);
     outlines.add(AdministrationOutline.class);
     return outlines;

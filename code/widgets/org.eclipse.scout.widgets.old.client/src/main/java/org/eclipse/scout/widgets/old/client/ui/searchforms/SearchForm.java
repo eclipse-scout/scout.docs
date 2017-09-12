@@ -32,6 +32,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.ResetButton;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.SearchButton;
@@ -52,13 +53,8 @@ import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.Ta
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.TabBox.FieldBox.LongBox.LongTo;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.TabBox.FieldBox.SmartField;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm.MainBox.TabBox.FieldBox.StringField;
-import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 
 public class SearchForm extends AbstractSearchForm {
-
-  public SearchForm() {
-    super();
-  }
 
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);

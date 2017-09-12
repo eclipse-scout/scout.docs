@@ -27,10 +27,10 @@ public class FormLookupCall extends LocalLookupCall<Class<? extends IPageForm>> 
 
   @Override
   protected List<ILookupRow<Class<? extends IPageForm>>> execCreateLookupRows() {
-    List<ILookupRow<Class<? extends IPageForm>>> rows = new ArrayList<ILookupRow<Class<? extends IPageForm>>>();
-    rows.add(new LookupRow<Class<? extends IPageForm>>(StringFieldForm.class, TEXTS.get("StringField")));
-    rows.add(new LookupRow<Class<? extends IPageForm>>(SmartFieldForm.class, TEXTS.get("SmartField")));
-    rows.add(new LookupRow<Class<? extends IPageForm>>(ImageFieldForm.class, TEXTS.get("ImageField")));
+    List<ILookupRow<Class<? extends IPageForm>>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>(StringFieldForm.class, TEXTS.get("StringField")));
+    rows.add(new LookupRow<>(SmartFieldForm.class, TEXTS.get("SmartField")));
+    rows.add(new LookupRow<>(ImageFieldForm.class, TEXTS.get("ImageField")));
     return rows;
   }
 }

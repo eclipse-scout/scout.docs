@@ -1,8 +1,6 @@
 package org.eclipse.scout.widgets.client.services.lookup;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +26,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
 
   @Override
   protected List<LookupRow<Long>> execCreateLookupRows() {
-    List<LookupRow<Long>> rows = new ArrayList<LookupRow<Long>>();
+    List<LookupRow<Long>> rows = new ArrayList<>();
     if (getKey() != null) {
       long key = getKey();
       rows.add(newLookupRow(key, getDepth(key)));
@@ -61,29 +59,26 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
   }
 
   private List<LookupRow<Long>> sortResults(List<LookupRow<Long>> lookupRows) {
-    Collections.sort(lookupRows, new Comparator<LookupRow<Long>>() {
-      @Override
-      public int compare(LookupRow<Long> r1, LookupRow<Long> r2) {
-        P_Data d1 = (P_Data) r1.getAdditionalTableRowData();
-        P_Data d2 = (P_Data) r2.getAdditionalTableRowData();
-        if (d1.getDepth() == d2.getDepth()) {
-          return (int) (d1.getKey() - d2.getKey());
-        }
-        return d1.getDepth() - d2.getDepth();
+    lookupRows.sort((r1, r2) -> {
+      P_Data d1 = (P_Data) r1.getAdditionalTableRowData();
+      P_Data d2 = (P_Data) r2.getAdditionalTableRowData();
+      if (d1.getDepth() == d2.getDepth()) {
+        return (int) (d1.getKey() - d2.getKey());
       }
+      return d1.getDepth() - d2.getDepth();
     });
     return lookupRows;
   }
 
   private List<LookupRow<Long>> filterByText(List<LookupRow<Long>> rows, String text) {
     // make a map to access all rows by key
-    Map<Long, LookupRow<Long>> rowMap = new TreeMap<Long, LookupRow<Long>>();
+    Map<Long, LookupRow<Long>> rowMap = new TreeMap<>();
     for (LookupRow<Long> row : rows) {
       rowMap.put(row.getKey(), row);
     }
 
     // create a set with the results that match the search text
-    Set<LookupRow<Long>> results = new HashSet<LookupRow<Long>>();
+    Set<LookupRow<Long>> results = new HashSet<>();
     Pattern pattern = createSearchPattern(text);
     for (LookupRow<Long> row : rows) {
       if (row.getText() != null && pattern.matcher(row.getText().toLowerCase()).matches()) {
@@ -104,7 +99,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
       }
     }
 
-    return sortResults(new ArrayList<LookupRow<Long>>(results));
+    return sortResults(new ArrayList<>(results));
   }
 
   private int getDepth(long key) {
@@ -113,7 +108,7 @@ public class HierarchicalLookupCall extends LocalLookupCall<Long> {
 
   private LookupRow<Long> newLookupRow(long key, int depth) {
     P_Data data = new P_Data(key, depth);
-    LookupRow<Long> lookupRow = new LookupRow<Long>(key, "Node " + key + " (lv " + depth + ")");
+    LookupRow<Long> lookupRow = new LookupRow<>(key, "Node " + key + " (lv " + depth + ")");
     lookupRow.withAdditionalTableRowData(data);
     return lookupRow;
   }

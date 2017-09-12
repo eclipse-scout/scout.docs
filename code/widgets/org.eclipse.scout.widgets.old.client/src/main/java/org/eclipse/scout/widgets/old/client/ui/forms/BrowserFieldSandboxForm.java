@@ -158,7 +158,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
     protected List<? extends ILookupRow<SandboxPermission>> execCreateLookupRows() {
       List<ILookupRow<SandboxPermission>> rows = new ArrayList<>();
       for (SandboxPermission permission : SandboxPermission.values()) {
-        rows.add(new LookupRow<SandboxPermission>(permission, permission.name()));
+        rows.add(new LookupRow<>(permission, permission.name()));
       }
       return rows;
     }

@@ -22,6 +22,7 @@ import org.eclipse.scout.contacts.client.person.PersonSearchForm.MainBox.TabBox.
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.PersonSearchFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractResetButton;
@@ -35,12 +36,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@FormData(value = PersonSearchFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+@FormData(value = PersonSearchFormData.class, sdkCommand = SdkCommand.CREATE)
 public class PersonSearchForm extends AbstractSearchForm {
-
-  public PersonSearchForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {

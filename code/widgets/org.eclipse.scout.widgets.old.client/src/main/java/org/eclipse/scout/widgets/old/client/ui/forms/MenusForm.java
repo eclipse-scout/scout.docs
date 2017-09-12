@@ -13,7 +13,6 @@ package org.eclipse.scout.widgets.old.client.ui.forms;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.scout.rt.client.ui.action.IAction;
 import org.eclipse.scout.rt.client.ui.action.IActionVisitor;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -21,9 +20,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.root.IContextMenuOwner;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.IFormFieldVisitor;
 import org.eclipse.scout.rt.client.ui.form.fields.ICompositeField;
-import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -35,6 +32,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.reflect.ConfigurationUtility;
 import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
+import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
@@ -44,10 +42,6 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 @ClassId("df3e491c-5a37-424c-8c22-5a3403895b94")
 public class MenusForm extends AbstractForm implements IPageForm {
-
-  public MenusForm() {
-    super();
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -492,27 +486,20 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() {
-          MenusForm.this.visitFields(new IFormFieldVisitor() {
-
-            @Override
-            public boolean visitField(IFormField field, int level, int fieldIndex) {
-              if (field instanceof IContextMenuOwner) {
-                IContextMenuOwner menuOwner = (IContextMenuOwner) field;
-                if (menuOwner.getContextMenu() != null) {
-                  menuOwner.getContextMenu().acceptVisitor(new IActionVisitor() {
-                    @Override
-                    public int visit(IAction action) {
-                      action.setEnabled(!action.isEnabled());
-                      return IActionVisitor.CONTINUE;
-                    }
-                  });
-                }
+          MenusForm.this.visitFields((field, level, fieldIndex) -> {
+            if (field instanceof IContextMenuOwner) {
+              IContextMenuOwner menuOwner = (IContextMenuOwner) field;
+              if (menuOwner.getContextMenu() != null) {
+                menuOwner.getContextMenu().acceptVisitor(action -> {
+                  action.setEnabled(!action.isEnabled());
+                  return IActionVisitor.CONTINUE;
+                });
               }
-              if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
-                field.setEnabled(!field.isEnabled(), true, true);
-              }
-              return true;
             }
+            if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
+              field.setEnabled(!field.isEnabled(), true, true);
+            }
+            return true;
           });
         }
       }
@@ -986,7 +973,7 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
       @Override
       protected String getConfiguredIconId() {
-        return org.eclipse.scout.rt.shared.AbstractIcons.Gear;
+        return AbstractIcons.Gear;
       }
 
       @Override

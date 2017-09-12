@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoCreateProperty;
+import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoPopulateProperty;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.CreateImmediately;
@@ -26,16 +28,12 @@ public class DatabaseSetupService implements IDataStoreService {
 
   @PostConstruct
   public void autoCreateDatabase() {
-    if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoCreateProperty.class)) {
+    if (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
       try {
         RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
-        IRunnable runnable = new IRunnable() {
-
-          @Override
-          public void run() throws Exception {
-            createOrganizationTable();
-            createPersonTable();
-          }
+        IRunnable runnable = () -> {
+          createOrganizationTable();
+          createPersonTable();
         };
 
         context.run(runnable);
@@ -51,7 +49,7 @@ public class DatabaseSetupService implements IDataStoreService {
       SQL.insert(SQLs.ORGANIZATION_CREATE_TABLE);
       LOG.info("Database table 'ORGANIZATION' created");
 
-      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE + SQLs.ORGANIZATION_VALUES_01);
         SQL.insert(SQLs.ORGANIZATION_INSERT_SAMPLE + SQLs.ORGANIZATION_VALUES_02);
         LOG.info("Database table 'ORGANIZATION' populated with sample data");
@@ -64,7 +62,7 @@ public class DatabaseSetupService implements IDataStoreService {
       SQL.insert(SQLs.PERSON_CREATE_TABLE);
       LOG.info("Database table 'PERSON' created");
 
-      if (CONFIG.getPropertyValue(DatabaseProperties.DatabaseAutoPopulateProperty.class)) {
+      if (CONFIG.getPropertyValue(DatabaseAutoPopulateProperty.class)) {
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_01);
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_02);
         // end::service[]

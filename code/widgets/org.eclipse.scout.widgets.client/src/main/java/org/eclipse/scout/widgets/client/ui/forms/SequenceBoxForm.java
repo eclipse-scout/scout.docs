@@ -77,10 +77,6 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
-  public SequenceBoxForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;
@@ -542,7 +538,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
             protected void execClickAction() {
               String name = StringUtility.concatenateTokens(getFirstNameField().getValue(), " ", getLastNameField().getValue());
 
-              if (name.length() > 0) {
+              if (!name.isEmpty()) {
                 MessageBoxes.create()
                     .withHeader(TEXTS.get("SearchPerson", name))
                     .withAutoCloseMillis(2500)
@@ -596,7 +592,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String execValidateValue(String rawValue) {
-            if (rawValue != null && rawValue.equals("error")) {
+            if (rawValue != null && "error".equals(rawValue)) {
               throw new VetoException("Value is not allowed");
             }
             return rawValue;
@@ -841,7 +837,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void initConfig() {
             super.initConfig();
-            setLookupCall(new WidgetLookupCall(Widget1GroupBox.WidgetSequenceBox.class));
+            setLookupCall(new WidgetLookupCall(WidgetSequenceBox.class));
           }
 
           @Override
@@ -917,11 +913,11 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
+            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
+            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
 
-            IFormField field = getFieldByClass(Widget1GroupBox.WidgetControlSequenceBox.WidgetSmartField.class).getValue();
+            IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
             field.setMandatory(mandatory);
             if (errorStatus) {
@@ -934,7 +930,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return Widget1GroupBox.WidgetControlSequenceBox.WidgetSmartField.class;
+            return WidgetSmartField.class;
           }
 
           @Override
@@ -1046,7 +1042,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void initConfig() {
             super.initConfig();
-            setLookupCall(new WidgetLookupCall(Widget2GroupBox.WidgetSequenceBox.class));
+            setLookupCall(new WidgetLookupCall(WidgetSequenceBox.class));
           }
 
           @Override
@@ -1122,11 +1118,11 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
+            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
+            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
 
-            IFormField field = getFieldByClass(Widget2GroupBox.WidgetControlSequenceBox.WidgetSmartField.class).getValue();
+            IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
             field.setMandatory(mandatory);
             if (errorStatus) {
@@ -1139,7 +1135,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return Widget2GroupBox.WidgetControlSequenceBox.WidgetSmartField.class;
+            return WidgetSmartField.class;
           }
 
           @Override
@@ -1266,7 +1262,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected void initConfig() {
             super.initConfig();
-            setLookupCall(new WidgetLookupCall(Widget3GroupBox.WidgetSequenceBox.class));
+            setLookupCall(new WidgetLookupCall(WidgetSequenceBox.class));
           }
 
           @Override
@@ -1342,11 +1338,11 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
+            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
+            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
 
-            IFormField field = getFieldByClass(Widget3GroupBox.WidgetControlSequenceBox.WidgetSmartField.class).getValue();
+            IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
             field.setMandatory(mandatory);
             if (errorStatus) {
@@ -1359,7 +1355,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends IValueField> getConfiguredMasterField() {
-            return Widget3GroupBox.WidgetControlSequenceBox.WidgetSmartField.class;
+            return WidgetSmartField.class;
           }
 
           @Override
@@ -1443,9 +1439,9 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
     @Override
     protected List<? extends ILookupRow<Boolean>> execCreateLookupRows() {
-      List<ILookupRow<Boolean>> rows = new ArrayList<ILookupRow<Boolean>>();
-      rows.add(new LookupRow<Boolean>(Boolean.TRUE, "Yes"));
-      rows.add(new LookupRow<Boolean>(Boolean.FALSE, "No"));
+      List<ILookupRow<Boolean>> rows = new ArrayList<>();
+      rows.add(new LookupRow<>(Boolean.TRUE, "Yes"));
+      rows.add(new LookupRow<>(Boolean.FALSE, "No"));
       return rows;
     }
   }
@@ -1453,7 +1449,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   public class WidgetLookupCall extends LocalLookupCall<IFormField> {
 
     private static final long serialVersionUID = 1L;
-    private Class<? extends ISequenceBox> m_sequenceBox;
+    private final Class<? extends ISequenceBox> m_sequenceBox;
 
     public WidgetLookupCall(Class<? extends ISequenceBox> sequenceBox) {
       m_sequenceBox = sequenceBox;
@@ -1461,14 +1457,14 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
     @Override
     protected List<? extends ILookupRow<IFormField>> execCreateLookupRows() {
-      List<ILookupRow<IFormField>> rows = new ArrayList<ILookupRow<IFormField>>();
+      List<ILookupRow<IFormField>> rows = new ArrayList<>();
 
       ISequenceBox sequenceBox = getFieldByClass(m_sequenceBox);
       for (IFormField field : sequenceBox.getFields()) {
-        rows.add(new LookupRow<IFormField>(field, field.getLabel()));
+        rows.add(new LookupRow<>(field, field.getLabel()));
       }
 
-      rows.add(new LookupRow<IFormField>(sequenceBox, sequenceBox.getLabel()));
+      rows.add(new LookupRow<>(sequenceBox, sequenceBox.getLabel()));
 
       return rows;
     }

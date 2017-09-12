@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.server.sql;
 
-import java.util.concurrent.Callable;
-
 import javax.annotation.PostConstruct;
 import javax.security.auth.Subject;
 
@@ -74,13 +72,7 @@ public class SuperUserRunContextProducer extends ServerRunContextProducer {
         .withSubject(subject.get());
 
     return superUserRunContext
-        .withSession(session.setIfAbsentAndGet(new Callable<IServerSession>() {
-
-          @Override
-          public IServerSession call() throws Exception {
-            return createServerSession(superUserRunContext);
-          }
-        }));
+        .withSession(session.setIfAbsentAndGet(() -> createServerSession(superUserRunContext)));
   }
 
   /**

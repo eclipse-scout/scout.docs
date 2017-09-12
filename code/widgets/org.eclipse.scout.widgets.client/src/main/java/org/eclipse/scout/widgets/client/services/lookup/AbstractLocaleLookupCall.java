@@ -30,18 +30,11 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
   private boolean m_throwVetoException;
 
-  public AbstractLocaleLookupCall() {
-    super();
-  }
-
   protected Locale[] sort(Locale[] locales) {
-    Comparator<Locale> localeComparator = new Comparator<Locale>() {
-      @Override
-      public int compare(Locale locale1, Locale locale2) {
-        String name1 = locale1.getDisplayName(NlsLocale.get());
-        String name2 = locale2.getDisplayName(NlsLocale.get());
-        return ObjectUtility.compareTo(name1, name2);
-      }
+    Comparator<Locale> localeComparator = (locale1, locale2) -> {
+      String name1 = locale1.getDisplayName(NlsLocale.get());
+      String name2 = locale2.getDisplayName(NlsLocale.get());
+      return ObjectUtility.compareTo(name1, name2);
     };
     Arrays.sort(locales, localeComparator);
     return locales;
@@ -52,13 +45,13 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
     if (m_throwVetoException) {
       throw new VetoException("Lookup failed");
     }
-    List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
+    List<LookupRow<Locale>> rows = new ArrayList<>();
     Locale[] locales = availableLocales();
     boolean browse = this.getAll() != null;
     for (Locale locale : sort(locales)) {
       String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
-        LookupRow<Locale> row = new LookupRow<Locale>(locale, displayName);
+        LookupRow<Locale> row = new LookupRow<>(locale, displayName);
         LocaleTableRowData bean = new LocaleTableRowData();
         bean.setCountry(locale.getCountry());
         bean.setLanguage(locale.getLanguage());
@@ -82,9 +75,6 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
     private String m_country;
     private String m_language;
-
-    public LocaleTableRowData() {
-    }
 
     public String getLanguage() {
       return m_language;

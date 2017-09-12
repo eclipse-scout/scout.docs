@@ -24,8 +24,8 @@ import org.eclipsescout.demo.bahbah.shared.Icons;
  */
 public class NodeIconService implements INodeIconService {
 
-  private final List<String> m_icons = new ArrayList<String>();
-  private final Map<String, String> m_nodeIcons = new HashMap<String, String>();
+  private final List<String> m_icons = new ArrayList<>();
+  private final Map<String, String> m_nodeIcons = new HashMap<>();
   private final Object m_lockObject = new Object();
 
   @PostConstruct

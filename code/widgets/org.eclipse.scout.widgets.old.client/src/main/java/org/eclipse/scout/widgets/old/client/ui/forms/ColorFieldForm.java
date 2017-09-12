@@ -20,15 +20,11 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.ColorFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.ColorFieldForm.MainBox.GroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 public class ColorFieldForm extends AbstractForm implements IPageForm {
-
-  public ColorFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {

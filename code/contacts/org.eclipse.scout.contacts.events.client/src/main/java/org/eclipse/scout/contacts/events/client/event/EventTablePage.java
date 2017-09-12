@@ -15,6 +15,7 @@ import org.eclipse.scout.contacts.client.common.AbstractNewMenu;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.client.organization.OrganizationNodePage;
 import org.eclipse.scout.contacts.events.client.Icons;
+import org.eclipse.scout.contacts.events.client.event.EventTablePage.Table;
 import org.eclipse.scout.contacts.events.shared.event.EventTablePageData;
 import org.eclipse.scout.contacts.events.shared.event.IEventService;
 import org.eclipse.scout.rt.client.dto.FormData;
@@ -27,7 +28,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
-import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -35,7 +35,7 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @PageData(EventTablePageData.class)
-public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> {
+public class EventTablePage extends AbstractPageWithTable<Table> {
 
   private String organizationId;
 
@@ -95,7 +95,7 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
     }
 
     public HomepageColumn getHomepageColumn() {
-      return getColumnSet().getColumnByClass(EventTablePage.Table.HomepageColumn.class);
+      return getColumnSet().getColumnByClass(HomepageColumn.class);
     }
 
     public ParticipantsColumn getParticipantsColumn() {
@@ -241,13 +241,9 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       protected void execAction() {
         final EventForm form = new EventForm();
         form.setEventId(getEventIdColumn().getSelectedValue());
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
+        form.addFormListener(e -> {
+          if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+            reloadPage();
           }
         });
 
@@ -261,13 +257,9 @@ public class EventTablePage extends AbstractPageWithTable<EventTablePage.Table> 
       @Override
       protected void execAction() {
         final EventForm form = new EventForm();
-        form.addFormListener(new FormListener() {
-
-          @Override
-          public void formChanged(FormEvent e) {
-            if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
-              reloadPage();
-            }
+        form.addFormListener(e -> {
+          if (FormEvent.TYPE_CLOSED == e.getType() && form.isFormStored()) {
+            reloadPage();
           }
         });
 

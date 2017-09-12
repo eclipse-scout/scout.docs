@@ -8,6 +8,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.exception.PlatformExceptionTranslator;
 import org.eclipse.scout.rt.platform.job.IFuture;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("unused")
@@ -40,7 +41,7 @@ public final class ExceptionHandlingSnippet {
     // tag::slf4Jlogging[]
     Exception e = new Exception();
 
-    org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     // Log a message
     logger.error("Failed to persist data");

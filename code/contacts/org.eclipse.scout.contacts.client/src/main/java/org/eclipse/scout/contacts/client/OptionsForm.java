@@ -16,6 +16,7 @@ import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.LocaleFiel
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.contacts.client.common.AvailableLocaleLookupCall;
 import org.eclipse.scout.contacts.shared.UiThemeCodeType;
+import org.eclipse.scout.contacts.shared.UiThemeCodeType.DefaultCode;
 import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
@@ -38,7 +39,7 @@ public class OptionsForm extends AbstractForm {
 
   @Override
   protected void execInitForm() {
-    String theme = ObjectUtility.nvl(getDesktop().getTheme(), UiThemeCodeType.DefaultCode.ID);
+    String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
 
     String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(ClientSession.PREF_USER_LOCALE, null);

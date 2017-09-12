@@ -11,17 +11,14 @@ import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
 import org.eclipse.scout.rt.platform.filter.IFilter;
-import org.eclipse.scout.rt.platform.job.DoneEvent;
 import org.eclipse.scout.rt.platform.job.FixedDelayScheduleBuilder;
 import org.eclipse.scout.rt.platform.job.IBlockingCondition;
-import org.eclipse.scout.rt.platform.job.IDoneHandler;
 import org.eclipse.scout.rt.platform.job.IExecutionSemaphore;
 import org.eclipse.scout.rt.platform.job.IFuture;
 import org.eclipse.scout.rt.platform.job.IJobManager;
 import org.eclipse.scout.rt.platform.job.JobInput;
 import org.eclipse.scout.rt.platform.job.JobState;
 import org.eclipse.scout.rt.platform.job.Jobs;
-import org.eclipse.scout.rt.platform.job.listener.IJobListener;
 import org.eclipse.scout.rt.platform.job.listener.JobEvent;
 import org.eclipse.scout.rt.platform.job.listener.JobEventType;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
@@ -101,12 +98,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::jobInput.example[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput()
           .withName("job name") // <1>
           .withRunContext(ClientRunContexts.copyCurrent()) // <2>
@@ -127,24 +120,17 @@ public final class JobManagerSnippet {
       // tag::jobManager.schedule1[]
       IJobManager jobManager = BEANS.get(IJobManager.class); // <1>
 
-      jobManager.schedule(new IRunnable() { // <2>
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      // <2>
+      jobManager.schedule(() -> {
+        // do something
       }, BEANS.get(JobInput.class)); // <3>
       // end::jobManager.schedule1[]
     }
 
     {
       // tag::jobManager.schedule2[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // do something
-        }
+      Jobs.schedule(() -> {
+        // do something
       }, Jobs.newInput());
       // end::jobManager.schedule2[]
     }
@@ -211,13 +197,9 @@ public final class JobManagerSnippet {
           .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
           .andMatchState(JobState.RUNNING)
           .andMatch(new SessionJobEventFilter(ISession.CURRENT.get()))
-          .toFilter(), new IJobListener() {
-
-            @Override
-            public void changed(JobEvent event) {
-              IFuture<?> future = event.getData().getFuture(); // <2>
-              System.out.println("Job commences execution: " + future.getJobInput().getName());
-            }
+          .toFilter(), event -> {
+            IFuture<?> future = event.getData().getFuture(); // <2>
+            System.out.println("Job commences execution: " + future.getJobInput().getName());
           });
       // end::jobManager.registerListener[]
     }
@@ -228,25 +210,15 @@ public final class JobManagerSnippet {
       future.addListener(Jobs.newEventFilterBuilder()
           .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
           .andMatchState(JobState.RUNNING)
-          .toFilter(), new IJobListener() {
-
-            @Override
-            public void changed(JobEvent event) {
-              System.out.println("Job commences execution");
-            }
-          });
+          .toFilter(), event -> System.out.println("Job commences execution"));
       // end::future.registerListener[]
     }
 
     {
       // tag::future.awaitDone[]
-      IFuture<String> future = Jobs.schedule(new Callable<String>() {
-
-        @Override
-        public String call() throws Exception {
-          // doing something
-          return "computation result";
-        }
+      IFuture<String> future = Jobs.schedule(() -> {
+        // doing something
+        return "computation result";
       }, Jobs.newInput());
 
       // Wait until done without consuming the result
@@ -268,12 +240,8 @@ public final class JobManagerSnippet {
       IFuture<String> future = null;
 
       // tag::future.whenDone[]
-      future.whenDone(new IDoneHandler<String>() {
-
-        @Override
-        public void onDone(DoneEvent<String> event) {
-          // invoked upon entering done state.
-        }
+      future.whenDone(event -> {
+        // invoked upon entering done state.
       }, ClientRunContexts.copyCurrent());
 
       // end::future.whenDone[]
@@ -281,13 +249,9 @@ public final class JobManagerSnippet {
 
     {
       // tag::future.awaitFinished[]
-      IFuture<String> future = Jobs.schedule(new Callable<String>() {
-
-        @Override
-        public String call() throws Exception {
-          // doing something
-          return "computation result";
-        }
+      IFuture<String> future = Jobs.schedule(() -> {
+        // doing something
+        return "computation result";
       }, Jobs.newInput());
 
       // Wait until finished
@@ -356,13 +320,9 @@ public final class JobManagerSnippet {
       IFuture<Void> future = Jobs.schedule(new LongRunningOperation(), Jobs.newInput());
 
       // Register done callback to unblock the condition.
-      future.whenDone(new IDoneHandler<Void>() {
-
-        @Override
-        public void onDone(DoneEvent<Void> event) {
-          // Let the waiting job re-acquire a permit and continue execution.
-          operationCompleted.setBlocking(false);
-        }
+      future.whenDone(event -> {
+        // Let the waiting job re-acquire a permit and continue execution.
+        operationCompleted.setBlocking(false);
       }, null);
 
       // Wait until done. Thereby, the permit of the current job is released for the time while waiting.
@@ -400,12 +360,9 @@ public final class JobManagerSnippet {
       IExecutionSemaphore semaphore = Jobs.newExecutionSemaphore(5); // <1>
 
       for (int i = 0; i < 100; i++) {
-        Jobs.schedule(new IRunnable() { // <2>
-
-          @Override
-          public void run() throws Exception {
-            // doing something
-          }
+        // <2>
+        Jobs.schedule(() -> {
+          // doing something
         }, Jobs.newInput()
             .withName("job-{}", i)
             .withExecutionSemaphore(semaphore)); // <3>
@@ -415,12 +372,9 @@ public final class JobManagerSnippet {
 
     {
       // tag::modelJobs.example[]
-      ModelJobs.schedule(new IRunnable() { // <1>
-
-        @Override
-        public void run() throws Exception {
-          // doing something in model thread
-        }
+      // <1>
+      ModelJobs.schedule(() -> {
+        // doing something in model thread
       }, ModelJobs.newInput(ClientRunContexts.copyCurrent()) // <2>
           .withName("Doing something in model thread"));
       // end::modelJobs.example[]
@@ -447,12 +401,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.one-shot[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running once")
           .withRunContext(ClientRunContexts.copyCurrent()));
@@ -461,12 +411,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.delayed[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running in 10 seconds")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -477,12 +423,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.at-fixed-rate-infinitely[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running every minute")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -496,12 +438,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.at-fixed-rate-finitely[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running every minute for total 60 times")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -515,12 +453,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.at-fixed-delay-infinitely[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running forever with a delay of 1 minute between the termination of the previous and the next execution")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -532,12 +466,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.at-fixed-delay-finitely[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running 60 times with a delay of 1 minute between the termination of the previous and the next execution")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -549,12 +479,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.cron-1[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -565,12 +491,8 @@ public final class JobManagerSnippet {
 
     {
       // tag::examples.scheduling.cron-2[]
-      Jobs.schedule(new IRunnable() {
-
-        @Override
-        public void run() throws Exception {
-          // doing something
-        }
+      Jobs.schedule(() -> {
+        // doing something
       }, Jobs.newInput()
           .withName("Running every minute starting at 14:00 and ending at 14:05, every day")
           .withRunContext(ClientRunContexts.copyCurrent())
@@ -584,12 +506,8 @@ public final class JobManagerSnippet {
       IExecutionSemaphore semaphore = Jobs.newExecutionSemaphore(5); // <1>
 
       for (int i = 0; i < 100; i++) {
-        Jobs.schedule(new IRunnable() {
-
-          @Override
-          public void run() throws Exception {
-            // doing something
-          }
+        Jobs.schedule(() -> {
+          // doing something
         }, Jobs.newInput()
             .withName("job-{}", i)
             .withExecutionSemaphore(semaphore)); // <2>

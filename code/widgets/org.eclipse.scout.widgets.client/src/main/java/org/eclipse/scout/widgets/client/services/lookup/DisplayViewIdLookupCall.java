@@ -22,7 +22,7 @@ public class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
 
   private static final long serialVersionUID = 1L;
 
-  public static enum DisplayViewId {
+  public enum DisplayViewId {
 
     N(IForm.VIEW_ID_N),
     NE(IForm.VIEW_ID_NE),
@@ -42,11 +42,11 @@ public class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
     private final String m_value;
     private final String m_displayText;
 
-    private DisplayViewId(String value) {
+    DisplayViewId(String value) {
       this(value, null);
     }
 
-    private DisplayViewId(String value, String displayText) {
+    DisplayViewId(String value, String displayText) {
       m_value = value;
       m_displayText = (displayText == null ? name() : displayText);
     }

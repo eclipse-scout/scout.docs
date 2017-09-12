@@ -41,10 +41,6 @@ public class UserForm extends AbstractForm {
 
   private Long m_userId;
 
-  public UserForm() {
-    super();
-  }
-
   @FormData
   public Long getUserId() {
     return m_userId;

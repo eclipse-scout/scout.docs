@@ -80,10 +80,6 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.SampleF
 
 public class StringFieldForm extends AbstractForm implements IPageForm {
 
-  public StringFieldForm() {
-    super();
-  }
-
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
     return false;

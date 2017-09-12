@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,33 +45,29 @@ public abstract class AbstractDirtyFormHandler extends AbstractFormHandler {
   private void installDirtyListener(final IForm form) {
     final Set<IFormField> dirtyFields = new HashSet<>();
 
-    final PropertyChangeListener dirtyListener = new PropertyChangeListener() {
+    final PropertyChangeListener dirtyListener = evt -> {
+      if (form.isFormLoading()) {
+        return;
+      }
 
-      @Override
-      public void propertyChange(final PropertyChangeEvent evt) {
-        if (form.isFormLoading()) {
-          return;
-        }
+      // Check whether this field is dirty
+      final IFormField formField = (IFormField) evt.getSource();
+      formField.checkSaveNeeded();
+      if (formField.isSaveNeeded()) {
+        dirtyFields.add(formField);
+      }
+      else {
+        dirtyFields.remove(formField);
+      }
 
-        // Check whether this field is dirty
-        final IFormField formField = (IFormField) evt.getSource();
-        formField.checkSaveNeeded();
-        if (formField.isSaveNeeded()) {
-          dirtyFields.add(formField);
-        }
-        else {
-          dirtyFields.remove(formField);
-        }
+      final boolean dirty = dirtyFields.isEmpty();
+      form.setIconId(dirty ? null : Icons.Pencil);
 
-        final boolean dirty = dirtyFields.isEmpty();
-        form.setIconId(dirty ? null : Icons.Pencil);
-
-        try {
-          execDirtyStatusChanged(dirty);
-        }
-        catch (final Exception e) {
-          BEANS.get(ExceptionHandler.class).handle(e);
-        }
+      try {
+        execDirtyStatusChanged(dirty);
+      }
+      catch (final Exception e) {
+        BEANS.get(ExceptionHandler.class).handle(e);
       }
     };
     form.setProperty(PROP_DIRTY_LISTENER, dirtyListener);

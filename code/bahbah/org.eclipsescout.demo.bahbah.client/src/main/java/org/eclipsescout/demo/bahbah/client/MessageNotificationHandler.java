@@ -14,7 +14,6 @@ import java.util.Date;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
@@ -28,17 +27,14 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
   @Override
   public void handleNotification(final MessageNotification notification) {
     // end::notificationHandler[]
-    ModelJobs.schedule(new IRunnable() {
-      @Override
-      public void run() throws Exception {
-        UserNodePage userPage = getUserNodePage();
-        String buddy = notification.getSenderName();
+    ModelJobs.schedule(() -> {
+      UserNodePage userPage = getUserNodePage();
+      String buddy = notification.getSenderName();
 
-        if (userPage != null) {
-          ChatForm form = userPage.getChatForm(buddy);
-          if (form != null) {
-            form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
-          }
+      if (userPage != null) {
+        ChatForm form = userPage.getChatForm(buddy);
+        if (form != null) {
+          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
         }
       }
     }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));

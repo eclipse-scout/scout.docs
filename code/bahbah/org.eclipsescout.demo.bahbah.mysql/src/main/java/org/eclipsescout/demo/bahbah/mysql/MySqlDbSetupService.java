@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.services.db.IDbSetupService;
 import org.eclipsescout.demo.bahbah.server.util.UserUtility;
-import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
 
 /**
  * class that installs the bahbah DB schema
@@ -44,7 +44,7 @@ public class MySqlDbSetupService implements IDbSetupService {
       SQL.commit();
 
       // create first admin account
-      UserUtility.createNewUser("admin", "admin".toCharArray(), UserRoleCodeType.AdministratorCode.ID);
+      UserUtility.createNewUser("admin", "admin".toCharArray(), AdministratorCode.ID);
       SQL.commit();
     }
 
@@ -52,7 +52,7 @@ public class MySqlDbSetupService implements IDbSetupService {
 
   private Set<String> getExistingTables() {
     Object[][] existingTables = SQL.select("SHOW TABLES");
-    HashSet<String> result = new HashSet<String>(existingTables.length);
+    HashSet<String> result = new HashSet<>(existingTables.length);
     for (Object[] row : existingTables) {
       result.add(row[0] + "");
     }

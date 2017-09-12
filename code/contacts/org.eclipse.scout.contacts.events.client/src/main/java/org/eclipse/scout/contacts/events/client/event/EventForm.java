@@ -28,6 +28,7 @@ import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsB
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.NotesBox;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ParticipantsBox;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField;
+import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox.ParticipantsBox.ParticipantTableFieldField.Table;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralBox;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralBox.EndsField;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.GeneralBox.HomepageField;
@@ -42,6 +43,7 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.ActivityMapMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -71,7 +73,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-@FormData(value = EventFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+@FormData(value = EventFormData.class, sdkCommand = SdkCommand.CREATE)
 public class EventForm extends AbstractForm {
 
   private String eventId;
@@ -216,7 +218,7 @@ public class EventForm extends AbstractForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return EventForm.MainBox.GeneralBox.HomepageField.class;
+          return HomepageField.class;
         }
 
         @Override
@@ -297,7 +299,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(10)
-        public class ParticipantTableFieldField extends AbstractTableField<ParticipantTableFieldField.Table> {
+        public class ParticipantTableFieldField extends AbstractTableField<Table> {
 
           @Override
           protected int getConfiguredGridH() {

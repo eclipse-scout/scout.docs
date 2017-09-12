@@ -16,6 +16,7 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
@@ -85,8 +86,9 @@ public final class JaxWsSnippet {
   }
 
   // tag::jaxws.example.endpointinterface[]
+  @FunctionalInterface
   @WebService(name = "PingWebServicePortType", targetNamespace = "http://scout.eclipse.org/docs/ws/PingWebService/")
-  @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+  @SOAPBinding(parameterStyle = ParameterStyle.BARE)
   public interface PingWebServicePortType {
 
     @WebMethod(action = "http://scout.eclipse.org/docs/ws/PingWebService/ping")
@@ -103,7 +105,7 @@ public final class JaxWsSnippet {
       portName = "PingWebServicePort")
   @MTOM
   @HandlerChain(file = "PingWebServiceEntryPoint_handler-chain.xml")
-  public class PingWebServiceEntryPoint implements org.eclipse.scout.docs.snippets.JaxWsSnippet.PingWebServicePortType {
+  public class PingWebServiceEntryPoint implements PingWebServicePortType {
 
     // end::jaxws.example.pingws.porttype[]
     @Override

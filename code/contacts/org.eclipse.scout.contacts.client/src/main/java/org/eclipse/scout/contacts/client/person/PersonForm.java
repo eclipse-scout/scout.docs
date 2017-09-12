@@ -49,6 +49,7 @@ import org.eclipse.scout.contacts.shared.person.GenderCodeType;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -78,7 +79,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 // tag::init[]
-@FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE) // <1>
+@FormData(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE) // <1>
 // tag::structure[]
 // tag::validate[]
 public class PersonForm extends AbstractForm {

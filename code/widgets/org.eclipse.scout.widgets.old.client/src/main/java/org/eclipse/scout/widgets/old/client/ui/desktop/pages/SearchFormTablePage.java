@@ -21,9 +21,10 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.SearchFormTablePage.Table;
 import org.eclipse.scout.widgets.old.client.ui.searchforms.SearchForm;
 
-public class SearchFormTablePage extends AbstractPageWithTable<SearchFormTablePage.Table> {
+public class SearchFormTablePage extends AbstractPageWithTable<Table> {
   private String m_displayViewId;
 
   public SearchFormTablePage(String displayViewId, String displayViewName) {

@@ -22,10 +22,6 @@ import org.eclipse.scout.widgets.old.client.ui.forms.Menu2Form.MainBox.GroupBox.
 
 public class Menu2Form extends AbstractForm {
 
-  public Menu2Form() {
-    super();
-  }
-
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Menu2");

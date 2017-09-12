@@ -16,7 +16,6 @@ import java.io.InputStream;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
-import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.browserfield.AbstractBrowserField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -68,10 +67,6 @@ import org.slf4j.LoggerFactory;
 @Order(8100)
 public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleForm {
   private static final Logger LOG = LoggerFactory.getLogger(BrowserFieldForm.class);
-
-  public BrowserFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -519,12 +514,9 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         protected void execClickAction() {
           if (m_sandboxForm == null) {
             m_sandboxForm = new BrowserFieldSandboxForm(getBrowserField());
-            m_sandboxForm.addFormListener(new FormListener() {
-              @Override
-              public void formChanged(FormEvent e) {
-                if (e.getType() == FormEvent.TYPE_CLOSED) {
-                  m_sandboxForm = null;
-                }
+            m_sandboxForm.addFormListener(e -> {
+              if (e.getType() == FormEvent.TYPE_CLOSED) {
+                m_sandboxForm = null;
               }
             });
             m_sandboxForm.start();

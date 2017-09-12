@@ -12,7 +12,7 @@ import org.eclipse.scout.rt.platform.Order;
  * Extension for the MainBox of the PersonForm
  */
 @Data(PersonFormMainBoxExtensionData.class)
-public class PersonFormMainBoxExtension extends AbstractGroupBoxExtension<PersonForm.MainBox> {
+public class PersonFormMainBoxExtension extends AbstractGroupBoxExtension<MainBox> {
 
   public PersonFormMainBoxExtension(MainBox ownerBox) {
     super(ownerBox);

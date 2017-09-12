@@ -10,8 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.server.services.common.sql;
 
-import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
 
-public class DerbySqlService extends AbstractDerbySqlService implements IService {
+public class DerbySqlService extends AbstractDerbySqlService {
 }

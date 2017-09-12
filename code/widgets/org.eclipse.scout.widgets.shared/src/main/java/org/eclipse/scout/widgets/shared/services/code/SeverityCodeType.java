@@ -11,10 +11,6 @@ public class SeverityCodeType extends AbstractCodeType<Long, Integer> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 10001L;
 
-  public SeverityCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("SeverityType");

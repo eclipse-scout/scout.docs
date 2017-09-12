@@ -34,6 +34,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipsescout.demo.bahbah.client.services.BuddyAvatarIconProviderService;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.HistoryField;
+import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.HistoryField.Table;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.MessageField;
 import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcessService;
 
@@ -42,10 +43,6 @@ public class ChatForm extends AbstractForm {
 
   private String m_buddyName;
   private String m_userName;
-
-  public ChatForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -116,7 +113,7 @@ public class ChatForm extends AbstractForm {
     }
 
     @Order(20)
-    public class HistoryField extends AbstractTableField<HistoryField.Table> {
+    public class HistoryField extends AbstractTableField<Table> {
 
       private final Integer MESSAGE_TYPE_LOCAL = 1;
       private final Integer MESSAGE_TYPE_REMOTE = 2;

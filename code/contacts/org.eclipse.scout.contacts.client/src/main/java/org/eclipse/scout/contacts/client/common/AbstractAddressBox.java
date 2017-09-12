@@ -14,6 +14,8 @@ import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.C
 import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.CountryField;
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.DefaultSubtypeSdkCommand;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -27,8 +29,8 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 // tag::template[]
 @FormData(value = AbstractAddressBoxData.class, // <1>
-    sdkCommand = FormData.SdkCommand.CREATE,
-    defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
+    sdkCommand = SdkCommand.CREATE,
+    defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractAddressBox extends AbstractGroupBox {
   // no modifications to the content of the address box necessary
   // end::template[]

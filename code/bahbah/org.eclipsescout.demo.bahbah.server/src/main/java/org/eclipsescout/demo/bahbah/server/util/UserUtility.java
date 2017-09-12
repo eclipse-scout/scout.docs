@@ -21,7 +21,8 @@ import org.eclipse.scout.rt.platform.security.SecurityUtility;
 import org.eclipse.scout.rt.platform.util.Base64Utility;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
-import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
 import org.eclipsescout.demo.bahbah.shared.util.SharedUserUtility;
 
 public class UserUtility extends SharedUserUtility {
@@ -29,7 +30,7 @@ public class UserUtility extends SharedUserUtility {
   private static final int HASH_ITERATIONS = 20000;
 
   public static boolean createNewUser(String username, char[] password) {
-    return createNewUser(username, password, UserRoleCodeType.UserCode.ID);
+    return createNewUser(username, password, UserCode.ID);
   }
 
   public static boolean createNewUser(String username, char[] password, Integer permission) {
@@ -54,7 +55,7 @@ public class UserUtility extends SharedUserUtility {
 
   public static void resetPassword(Long u_Id, char[] newPassword) {
     checkPassword(newPassword);
-    if (!UserRoleCodeType.AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
+    if (!AdministratorCode.ID.equals(ServerSession.get().getPermission().getId())) {
       // I am not an administrator -> can only reset my own password
       Long myUserId = Long.parseLong(ServerSession.get().getUserId());
       if (!myUserId.equals(u_Id)) {

@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.events.client.person;
 
-import org.eclipse.scout.contacts.events.client.Icons;
-import org.eclipse.scout.contacts.client.person.PersonForm;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox;
+import org.eclipse.scout.contacts.events.client.Icons;
+import org.eclipse.scout.contacts.events.client.person.PersonFormTabExtension.EventBox.EventsField.Table;
 import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionData;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.extension.ui.form.fields.tabbox.AbstractTabBoxExtension;
@@ -25,7 +25,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
 
 @Data(PersonFormTabExtensionData.class)
-public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.MainBox.DetailsBox> {
+public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> {
 
   public PersonFormTabExtension(DetailsBox owner) {
     super(owner);
@@ -40,7 +40,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<PersonForm.M
     }
 
     @Order(1000)
-    public class EventsField extends AbstractTableField<EventsField.Table> {
+    public class EventsField extends AbstractTableField<Table> {
 
       @Override
       protected int getConfiguredGridH() {

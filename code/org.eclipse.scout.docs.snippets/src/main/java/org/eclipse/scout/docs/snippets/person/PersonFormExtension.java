@@ -30,7 +30,7 @@ public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
     MessageBoxes.create().withHeader("Extension method test").withBody("A method from the form extension was called").show();
   }
 
-  public static class NewFormHandlerExtension extends AbstractFormHandlerExtension<PersonForm.NewHandler> {
+  public static class NewFormHandlerExtension extends AbstractFormHandlerExtension<NewHandler> {
 
     public NewFormHandlerExtension(NewHandler owner) {
       super(owner);

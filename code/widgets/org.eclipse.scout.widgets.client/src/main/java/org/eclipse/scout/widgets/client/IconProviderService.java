@@ -20,6 +20,6 @@ public class IconProviderService extends AbstractIconProviderService {
 
   @Override
   protected URL findResource(String relativePath) {
-    return org.eclipse.scout.widgets.client.ResourceBase.class.getResource("icons/" + relativePath);
+    return ResourceBase.class.getResource("icons/" + relativePath);
   }
 }

@@ -36,7 +36,6 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox;
@@ -57,10 +56,6 @@ import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButt
 
 @ClassId("cd2b4857-8c7f-49d9-8284-f000464c0212")
 public class FormFieldForm extends AbstractForm implements IPageForm {
-
-  public FormFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -419,9 +414,9 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  @Order(15)
   @ClassId("8701cebc-6086-445a-ab42-ac268461bbe3")
-  public static abstract class AbstractFieldButtonsBox extends AbstractSequenceBox {
+  @Order(15)
+  public abstract static class AbstractFieldButtonsBox extends AbstractSequenceBox {
     @Override
     protected boolean getConfiguredAutoCheckFromTo() {
       return false;
@@ -460,13 +455,9 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
           setLabel(getConfiguredLabel());
           return;
         }
-        ModelJobs.schedule(new IRunnable() {
-
-          @Override
-          public void run() throws Exception {
-            getField().setVisible(false);
-            setLabel("Show field");
-          }
+        ModelJobs.schedule(() -> {
+          getField().setVisible(false);
+          setLabel("Show field");
         }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
             .withExecutionTrigger(Jobs.newExecutionTrigger()
                 .withStartIn(3, TimeUnit.SECONDS)));

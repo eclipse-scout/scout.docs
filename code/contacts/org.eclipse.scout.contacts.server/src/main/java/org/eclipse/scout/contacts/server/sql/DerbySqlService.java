@@ -40,7 +40,7 @@ public class DerbySqlService extends AbstractDerbySqlService {
 
   public void dropDB() {
     try {
-      String jdbcMappingName = CONFIG.getPropertyValue(DatabaseProperties.JdbcMappingNameProperty.class);
+      String jdbcMappingName = CONFIG.getPropertyValue(JdbcMappingNameProperty.class);
       DriverManager.getConnection(jdbcMappingName + ";drop=true");
     }
     catch (SQLException e) {

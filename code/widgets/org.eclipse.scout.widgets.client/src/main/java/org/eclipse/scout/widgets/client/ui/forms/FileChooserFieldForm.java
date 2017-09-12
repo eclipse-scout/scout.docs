@@ -56,14 +56,11 @@ import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.Gr
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.FileChooserFieldBox.PropertiesGroupBox.MaximumUploadSizeField;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.ServerLogBox;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.ServerLogBox.ServerLogField;
+import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox.ServerLogBox.ServerLogField.Table;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @Order(8050)
 public class FileChooserFieldForm extends AbstractForm implements IAdvancedExampleForm {
-
-  public FileChooserFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -391,7 +388,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         }
 
         @Order(1000)
-        public class ServerLogField extends AbstractTableField<ServerLogField.Table> {
+        public class ServerLogField extends AbstractTableField<Table> {
 
           @Override
           protected int getConfiguredGridH() {

@@ -17,7 +17,6 @@ import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.platform.job.Jobs;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipsescout.demo.bahbah.client.ClientSession;
 import org.eclipsescout.demo.bahbah.client.services.BuddyAvatarIconProviderService;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
@@ -53,12 +52,7 @@ public class BuddyNodePage extends AbstractPageWithNodes {
   }
 
   public void setDefaultFocus() {
-    ModelJobs.schedule(new IRunnable() {
-      @Override
-      public void run() throws Exception {
-        getChatForm().getMessageField().requestFocus();
-      }
-    }, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+    ModelJobs.schedule(getChatForm().getMessageField()::requestFocus, ModelJobs.newInput(ClientRunContexts.copyCurrent())
         .withExecutionTrigger(Jobs.newExecutionTrigger()
             .withStartIn(200, TimeUnit.MILLISECONDS)));
   }

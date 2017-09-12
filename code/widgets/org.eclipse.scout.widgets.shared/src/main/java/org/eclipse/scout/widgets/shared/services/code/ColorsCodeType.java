@@ -29,10 +29,6 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
   private static final long serialVersionUID = 1L;
   public static final Long ID = 20000L;
 
-  public ColorsCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("Colors");
@@ -45,12 +41,12 @@ public class ColorsCodeType extends AbstractCodeType<Long, Color> {
 
   @Override
   protected List<? extends ICodeRow<Color>> execLoadCodes(Class<? extends ICodeRow<Color>> codeRowType) {
-    List<ICodeRow<Color>> codes = new ArrayList<ICodeRow<Color>>();
+    List<ICodeRow<Color>> codes = new ArrayList<>();
 
-    codes.add(new CodeRow<Color>(Color.PINK, TEXTS.get("Pink")));
-    codes.add(new CodeRow<Color>(Color.RED, TEXTS.get("Red")));
-    codes.add(new CodeRow<Color>(Color.WHITE, TEXTS.get("White")));
-    codes.add(new CodeRow<Color>(Color.YELLOW, TEXTS.get("YellowDynamic")));
+    codes.add(new CodeRow<>(Color.PINK, TEXTS.get("Pink")));
+    codes.add(new CodeRow<>(Color.RED, TEXTS.get("Red")));
+    codes.add(new CodeRow<>(Color.WHITE, TEXTS.get("White")));
+    codes.add(new CodeRow<>(Color.YELLOW, TEXTS.get("YellowDynamic")));
 
     return codes;
   }

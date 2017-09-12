@@ -18,11 +18,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
 
   private static final long serialVersionUID = 1L;
-  public static final Long ID = Long.valueOf(1000);
-
-  public UserRoleCodeType() {
-    super();
-  }
+  public static final Long ID = 1000L;
 
   @Override
   protected String getConfiguredText() {

@@ -38,7 +38,7 @@ public class ClientSession extends AbstractClientSession {
     initializeSharedVariables();
 
     // The locale needs to be set before the Desktop is created.
-    String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(PREF_USER_LOCALE, null);
+    String localeString = ClientUIPreferences.getClientPreferences(get()).get(PREF_USER_LOCALE, null);
     if (localeString != null) {
       Locale userLocale = LocaleUtility.parse(localeString);
       setLocale(userLocale);

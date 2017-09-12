@@ -18,7 +18,6 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
-import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widgets.client.ClientSession;
@@ -39,10 +38,6 @@ import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   private IDesktopNotification m_lastNotification;
-
-  public DesktopForm() {
-    super();
-  }
 
   @Override
   public void startPageForm() {
@@ -317,14 +312,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             MessageBoxes.createOk().withHeader(TEXTS.get("Help0")).withYesButtonText(TEXTS.get("GetBenchBack")).withDisplayParent(getDesktop()).show();
 
             // Need to schedule a model job otherwise it would fail due to the loop detection
-            ModelJobs.schedule(new IRunnable() {
-
-              @Override
-              public void run() throws Exception {
-                setValue(true);
-              }
-
-            }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+            ModelJobs.schedule(() -> setValue(true), ModelJobs.newInput(ClientRunContexts.copyCurrent()));
           }
         }
       }

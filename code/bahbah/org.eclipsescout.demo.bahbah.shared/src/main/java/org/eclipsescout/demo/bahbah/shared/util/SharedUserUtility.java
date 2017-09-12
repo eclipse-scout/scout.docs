@@ -13,7 +13,8 @@ package org.eclipsescout.demo.bahbah.shared.util;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.AdministratorCode;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
 
 public class SharedUserUtility {
 
@@ -36,7 +37,7 @@ public class SharedUserUtility {
   }
 
   public static void checkPermissionId(Integer id) {
-    if (!UserRoleCodeType.UserCode.ID.equals(id) && !UserRoleCodeType.AdministratorCode.ID.equals(id)) {
+    if (!UserCode.ID.equals(id) && !AdministratorCode.ID.equals(id)) {
       throw new VetoException();
     }
   }

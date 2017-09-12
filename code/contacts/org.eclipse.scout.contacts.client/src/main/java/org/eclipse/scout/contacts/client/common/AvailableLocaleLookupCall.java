@@ -12,7 +12,6 @@ package org.eclipse.scout.contacts.client.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,28 +24,25 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 public class AvailableLocaleLookupCall extends LocalLookupCall<Locale> {
 
-  private static final Locale[] AVAILABLE_LOCALES = new Locale[]{Locale.US, LocaleUtility.parse("de_CH")};
+  private static final Locale[] AVAILABLE_LOCALES = {Locale.US, LocaleUtility.parse("de_CH")};
   private static final long serialVersionUID = 1L;
 
   protected Locale[] sort(Locale[] locales) {
-    Arrays.sort(locales, new Comparator<Locale>() {
-      @Override
-      public int compare(Locale locale1, Locale locale2) {
-        String name1 = locale1.getDisplayName(NlsLocale.get());
-        String name2 = locale2.getDisplayName(NlsLocale.get());
-        return ObjectUtility.compareTo(name1, name2);
-      }
+    Arrays.sort(locales, (locale1, locale2) -> {
+      String name1 = locale1.getDisplayName(NlsLocale.get());
+      String name2 = locale2.getDisplayName(NlsLocale.get());
+      return ObjectUtility.compareTo(name1, name2);
     });
     return locales;
   }
 
   @Override
   protected List<LookupRow<Locale>> execCreateLookupRows() {
-    List<LookupRow<Locale>> rows = new ArrayList<LookupRow<Locale>>();
+    List<LookupRow<Locale>> rows = new ArrayList<>();
     for (Locale locale : sort(AVAILABLE_LOCALES)) {
       String displayName = locale.getDisplayName(NlsLocale.get());
       if (StringUtility.hasText(displayName)) {
-        rows.add(new LookupRow<Locale>(locale, displayName));
+        rows.add(new LookupRow<>(locale, displayName));
       }
     }
     return rows;

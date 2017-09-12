@@ -43,6 +43,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.AbstractLocaleLookupCall.LocaleTableRowData;
 import org.eclipse.scout.widgets.client.services.lookup.HierarchicalLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
@@ -89,10 +90,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
 
   private boolean m_localLookupCall = true;
-
-  public SmartFieldForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -304,7 +301,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execPrepareLookup(ILookupCall<Locale> call) {
             if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
-              ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+              ((AbstractLocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
             }
           }
 
@@ -677,7 +674,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SmartFieldForm.MainBox.ConfigurationBox.ListSmartField.class;
+          return ListSmartField.class;
         }
 
         @Override
@@ -707,7 +704,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(false);
-          ArrayList<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+          ArrayList<LookupRow<String>> rows = new ArrayList<>();
           addNodesToLookupRows(nodes, rows);
 
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
@@ -798,7 +795,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return SmartFieldForm.MainBox.ConfigurationBox.TreeSmartField.class;
+          return TreeSmartField.class;
         }
 
         @Override
@@ -828,7 +825,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(true);
-          List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+          List<LookupRow<String>> rows = new ArrayList<>();
 
           addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeSmartField().getLookupCall()).setLookupRows(rows);

@@ -53,5 +53,5 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
     ClientSession.get().getDesktop().openUri(sb.toString(), OpenUriAction.NEW_WINDOW);
   }
 
-  abstract protected Class<?> provideSourceClass();
+  protected abstract Class<?> provideSourceClass();
 }

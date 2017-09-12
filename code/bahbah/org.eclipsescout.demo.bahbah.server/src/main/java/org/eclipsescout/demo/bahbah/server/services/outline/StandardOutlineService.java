@@ -23,7 +23,7 @@ public class StandardOutlineService implements IStandardOutlineService {
   @Override
   public String[] getOnlineUsers() {
     Set<String> allUsers = BEANS.get(IUserProcessService.class).getUsersOnline();
-    Set<String> users = new HashSet<String>(allUsers);
+    Set<String> users = new HashSet<>(allUsers);
     // remove myself
     users.remove(ServerSession.get().getUserId());
     return users.toArray(new String[users.size()]);

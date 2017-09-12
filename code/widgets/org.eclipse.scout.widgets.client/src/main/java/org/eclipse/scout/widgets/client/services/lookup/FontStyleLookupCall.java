@@ -26,11 +26,11 @@ public class FontStyleLookupCall extends LocalLookupCall<Integer> {
 
   @Override
   protected List<LookupRow<Integer>> execCreateLookupRows() {
-    ArrayList<LookupRow<Integer>> rows = new ArrayList<LookupRow<Integer>>();
-    rows.add(new LookupRow<Integer>(0, TEXTS.get("Default")));
-    rows.add(new LookupRow<Integer>(1, TEXTS.get("Bold")));
-    rows.add(new LookupRow<Integer>(2, TEXTS.get("Italic")));
-    rows.add(new LookupRow<Integer>(3, TEXTS.get("Bold") + " " + TEXTS.get("Italic")));
+    ArrayList<LookupRow<Integer>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>(0, TEXTS.get("Default")));
+    rows.add(new LookupRow<>(1, TEXTS.get("Bold")));
+    rows.add(new LookupRow<>(2, TEXTS.get("Italic")));
+    rows.add(new LookupRow<>(3, TEXTS.get("Bold") + " " + TEXTS.get("Italic")));
     return rows;
   }
 }

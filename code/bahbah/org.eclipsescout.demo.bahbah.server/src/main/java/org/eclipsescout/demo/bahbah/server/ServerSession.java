@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
-import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
+import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType.UserCode;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +52,7 @@ public class ServerSession extends AbstractServerSession {
   protected void execLoadSession() {
     if (getUserId() != null) {
       if (Subject.getSubject(AccessController.getContext()) == ServerApplication.getSubject()) {
-        setPermission(CODES.getCode(UserRoleCodeType.UserCode.class));
+        setPermission(CODES.getCode(UserCode.class));
       }
       else {
         LOG.info("created a new session for {}", getUserId());

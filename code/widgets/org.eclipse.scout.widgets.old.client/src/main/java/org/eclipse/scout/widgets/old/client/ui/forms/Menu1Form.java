@@ -28,10 +28,6 @@ import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.
 
 public class Menu1Form extends AbstractForm {
 
-  public Menu1Form() {
-    super();
-  }
-
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Menu1");

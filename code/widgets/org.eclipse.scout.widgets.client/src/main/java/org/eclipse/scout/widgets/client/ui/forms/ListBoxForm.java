@@ -56,13 +56,11 @@ import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox
 import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
+import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType.BlueCode;
+import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType.GreenCode;
 
 @Order(1000.0)
 public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
-
-  public ListBoxForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -227,10 +225,10 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execInitField() {
-          Set<Color> colors = new HashSet<Color>();
+          Set<Color> colors = new HashSet<>();
 
-          colors.add(ColorsCodeType.GreenCode.ID);
-          colors.add(ColorsCodeType.BlueCode.ID);
+          colors.add(GreenCode.ID);
+          colors.add(BlueCode.ID);
           // get a dynamically added code
           ICode<Color> red = BEANS.get(ColorsCodeType.class).getCode(Color.RED);
           colors.add(red.getId());
@@ -303,7 +301,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execInitField() {
-          Set<Integer> set = new HashSet<Integer>();
+          Set<Integer> set = new HashSet<>();
           set.add(2);
           set.add(3);
           setValue(set);
@@ -386,7 +384,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return ListBoxForm.MainBox.ConfigurationBox.ListBoxField.class;
+          return ListBoxField.class;
         }
 
         @Override
@@ -445,7 +443,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execChangedValue() {
           List<Node> nodes = parseFieldValue(false);
-          List<LookupRow<String>> rows = new ArrayList<LookupRow<String>>();
+          List<LookupRow<String>> rows = new ArrayList<>();
 
           addNodesToLookupRows(nodes, rows);
           ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
@@ -553,7 +551,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
     private final boolean m_active;
     private final boolean m_checked;
 
-    private ToggleState(boolean active, boolean checked) {
+    ToggleState(boolean active, boolean checked) {
       m_active = active;
       m_checked = checked;
     }

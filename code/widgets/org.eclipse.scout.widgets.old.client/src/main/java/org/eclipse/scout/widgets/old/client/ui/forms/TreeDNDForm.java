@@ -35,15 +35,12 @@ import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.ClearBu
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.DNDStatusField;
+import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.DNDStatusField.Table;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.Tree2Field;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.TreeDNDDescriptionField;
 import org.eclipse.scout.widgets.old.client.ui.forms.TreeDNDForm.MainBox.GroupBox.TreeField;
 
 public class TreeDNDForm extends AbstractForm implements IPageForm {
-
-  public TreeDNDForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -371,7 +368,7 @@ public class TreeDNDForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
-      public class DNDStatusField extends AbstractTableField<DNDStatusField.Table> {
+      public class DNDStatusField extends AbstractTableField<Table> {
 
         public void addLine(String text) {
           ITableRow row = getTable().addRow(getTable().createRow());

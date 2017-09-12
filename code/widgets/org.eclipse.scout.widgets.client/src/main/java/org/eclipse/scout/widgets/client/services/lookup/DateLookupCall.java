@@ -24,32 +24,32 @@ public class DateLookupCall extends LocalLookupCall<Long> {
 
   @Override
   protected List<ILookupRow<Long>> execCreateLookupRows() {
-    List<ILookupRow<Long>> rows = new ArrayList<ILookupRow<Long>>();
+    List<ILookupRow<Long>> rows = new ArrayList<>();
     for (long l = 0L; l <= 5L; l++) {
-      ILookupRow<Long> year = new LookupRow<Long>(l * 5, "201" + l).withEnabled(false);
+      ILookupRow<Long> year = new LookupRow<>(l * 5, "201" + l).withEnabled(false);
       rows.add(year);
 
       FontSpec font = new FontSpec("Courir", FontSpec.STYLE_PLAIN, 12);
       long parentKey = l * 5;
-      rows.add(new LookupRow<Long>(parentKey + 1, "Jan")
+      rows.add(new LookupRow<>(parentKey + 1, "Jan")
           .withBackgroundColor("FFFFFF")
           .withForegroundColor("000000")
           .withFont(font)
           .withEnabled(true)
           .withParentKey(parentKey));
-      rows.add(new LookupRow<Long>(parentKey + 2, "Mar")
+      rows.add(new LookupRow<>(parentKey + 2, "Mar")
           .withBackgroundColor("FFFFFF")
           .withForegroundColor("000000")
           .withFont(font)
           .withEnabled(false)
           .withParentKey(parentKey));
-      rows.add(new LookupRow<Long>(parentKey + 3, "Sep")
+      rows.add(new LookupRow<>(parentKey + 3, "Sep")
           .withBackgroundColor("FFFFFF")
           .withForegroundColor("000000")
           .withFont(font)
           .withEnabled(true)
           .withParentKey(parentKey));
-      rows.add(new LookupRow<Long>(parentKey + 4, "Nov")
+      rows.add(new LookupRow<>(parentKey + 4, "Nov")
           .withBackgroundColor("FFFFFF")
           .withForegroundColor("000000")
           .withFont(font)

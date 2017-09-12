@@ -21,8 +21,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.IFormFieldVisitor;
-import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -47,6 +45,7 @@ import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.ContextMenuForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.ContextMenuForm.MainBox.TableTabBox.TableFieldBox.TableField;
+import org.eclipse.scout.widgets.old.client.ui.forms.ContextMenuForm.MainBox.TableTabBox.TableFieldBox.TableField.Table;
 import org.eclipse.scout.widgets.old.client.ui.forms.internal.AbstractTableFieldWithDisabledRows;
 import org.eclipse.scout.widgets.shared.Icons;
 import org.eclipse.scout.widgets.shared.services.code.CountryCodeType;
@@ -54,10 +53,6 @@ import org.eclipse.scout.widgets.shared.services.code.CountryCodeType.FranceCode
 import org.eclipse.scout.widgets.shared.services.code.CountryCodeType.USACode;
 
 public class ContextMenuForm extends AbstractForm implements IPageForm {
-
-  public ContextMenuForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -97,7 +92,7 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
         }
 
         @Order(5)
-        public class TableField extends AbstractTableField<TableField.Table> {
+        public class TableField extends AbstractTableField<Table> {
 
           @Override
           protected boolean getConfiguredLabelVisible() {
@@ -771,14 +766,11 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
-        getMainBox().visitFields(new IFormFieldVisitor() {
-          @Override
-          public boolean visitField(IFormField field, int level, int fieldIndex) {
-            if (field instanceof IValueField<?>) {
-              field.setEnabled(!isSelected(), true, true);
-            }
-            return true;
+        getMainBox().visitFields((field, level, fieldIndex) -> {
+          if (field instanceof IValueField<?>) {
+            field.setEnabled(!isSelected(), true, true);
           }
+          return true;
         });
 //        getFieldByClass(CountrySmartField.class).setEnabled(isSelected());
       }

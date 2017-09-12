@@ -19,18 +19,14 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.KeyStrokeForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.old.client.ui.forms.KeyStrokeForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.KeyStrokeForm.MainBox.GroupBox.ChangeValueWithCtrlshiftcField;
 import org.eclipse.scout.widgets.old.client.ui.forms.KeyStrokeForm.MainBox.GroupBox.CtrlshiftdForFocusField;
 import org.eclipse.scout.widgets.old.client.ui.forms.KeyStrokeForm.MainBox.GroupBox.CtrlshiftsForFocusField;
-import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 public class KeyStrokeForm extends AbstractForm implements IPageForm {
-
-  public KeyStrokeForm() {
-    super();
-  }
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {

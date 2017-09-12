@@ -14,10 +14,6 @@ public class YesOrNoCodeType extends AbstractCodeType<Long, Boolean> {
 
   public static final Long ID = 10000L;
 
-  public YesOrNoCodeType() {
-    super();
-  }
-
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("text");

@@ -45,8 +45,9 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
+import org.eclipse.scout.widgets.old.client.ui.desktop.pages.PageWithTableTablePage.Table;
 
-public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableTablePage.Table> {
+public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
   protected final Random m_random = new Random();
 
@@ -335,7 +336,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       @Override
       protected void execAction() {
         List<IColumn<?>> columns = getTable().getColumns();
-        List<String> aggrFunctions = new ArrayList<String>();
+        List<String> aggrFunctions = new ArrayList<>();
         aggrFunctions.add(AggregationFunction.SUM);
         aggrFunctions.add(AggregationFunction.AVG);
         aggrFunctions.add(AggregationFunction.MIN);
@@ -384,7 +385,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<PageWithTableT
       @Override
       protected void execAction() {
         List<IColumn<?>> columns = getTable().getColumns();
-        List<String> effects = new ArrayList<String>();
+        List<String> effects = new ArrayList<>();
         effects.add(null);
         effects.add(BackgroundEffect.COLOR_GRADIENT_1);
         effects.add(BackgroundEffect.COLOR_GRADIENT_2);

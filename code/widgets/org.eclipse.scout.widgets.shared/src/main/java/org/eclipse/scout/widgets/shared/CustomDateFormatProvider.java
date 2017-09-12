@@ -36,12 +36,12 @@ public class CustomDateFormatProvider extends DateFormatProvider {
   private final Set<Locale> m_customLocales;
   private final Map<String, Locale> m_countryDefaultLocaleMap;
   private final Map<Locale, PatternBean> m_localePatternMap;
-  private Locale[] m_availableLocales;
+  private final Locale[] m_availableLocales;
 
   public CustomDateFormatProvider() {
-    m_customLocales = new HashSet<Locale>();
-    m_countryDefaultLocaleMap = new HashMap<String, Locale>();
-    m_localePatternMap = new HashMap<Locale, CustomDateFormatProvider.PatternBean>();
+    m_customLocales = new HashSet<>();
+    m_countryDefaultLocaleMap = new HashMap<>();
+    m_localePatternMap = new HashMap<>();
 
     // add locale support for en_CH
     init(new Locale("en", "CH"), "de");
@@ -65,7 +65,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     init(new Locale("it", "CH"), "de");
 
     // available locales
-    HashSet<Locale> availableLocales = new HashSet<Locale>();
+    HashSet<Locale> availableLocales = new HashSet<>();
     availableLocales.addAll(m_customLocales);
     availableLocales.addAll(Arrays.asList(super.getAvailableLocales()));
     m_availableLocales = availableLocales.toArray(new Locale[availableLocales.size()]);
@@ -85,13 +85,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     }
 
     DateFormat df = DateFormat.getTimeInstance(style, defaultLocaleForCountry);
-    return toLocalizedDateFormat(df, locale, new IPatternCallback() {
-
-      @Override
-      public String getPattern(PatternBean patternBean) {
-        return patternBean.getTimePattern(style);
-      }
-    });
+    return toLocalizedDateFormat(df, locale, patternBean -> patternBean.getTimePattern(style));
   }
 
   @Override
@@ -106,13 +100,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     }
 
     DateFormat df = DateFormat.getDateInstance(style, defaultLocaleForCountry);
-    return toLocalizedDateFormat(df, locale, new IPatternCallback() {
-
-      @Override
-      public String getPattern(PatternBean patternBean) {
-        return patternBean.getDatePattern(style);
-      }
-    });
+    return toLocalizedDateFormat(df, locale, patternBean -> patternBean.getDatePattern(style));
   }
 
   /**
@@ -134,30 +122,26 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     }
 
     DateFormat df = DateFormat.getDateTimeInstance(dateStyle, timeStyle, defaultLocaleForCountry);
-    return toLocalizedDateFormat(df, locale, new IPatternCallback() {
+    return toLocalizedDateFormat(df, locale, patternBean -> {
+      String datePattern = patternBean.getDatePattern(dateStyle);
+      String timePattern = patternBean.getTimePattern(timeStyle);
 
-      @Override
-      public String getPattern(PatternBean patternBean) {
-        String datePattern = patternBean.getDatePattern(dateStyle);
-        String timePattern = patternBean.getTimePattern(timeStyle);
-
-        if (datePattern != null && timePattern != null) {
-          return datePattern + " " + timePattern;
-        }
-        else if (datePattern != null) {
-          DateFormat defaultTimeFormat = getTimeInstance(timeStyle, locale);
-          if (defaultTimeFormat instanceof SimpleDateFormat) {
-            return datePattern + " " + ((SimpleDateFormat) defaultTimeFormat).toPattern();
-          }
-        }
-        else if (timePattern != null) {
-          DateFormat defaultDateFormat = getDateInstance(dateStyle, locale);
-          if (defaultDateFormat instanceof SimpleDateFormat) {
-            return ((SimpleDateFormat) defaultDateFormat).toPattern() + " " + timePattern;
-          }
-        }
-        return null;
+      if (datePattern != null && timePattern != null) {
+        return datePattern + " " + timePattern;
       }
+      else if (datePattern != null) {
+        DateFormat defaultTimeFormat = getTimeInstance(timeStyle, locale);
+        if (defaultTimeFormat instanceof SimpleDateFormat) {
+          return datePattern + " " + ((SimpleDateFormat) defaultTimeFormat).toPattern();
+        }
+      }
+      else if (timePattern != null) {
+        DateFormat defaultDateFormat = getDateInstance(dateStyle, locale);
+        if (defaultDateFormat instanceof SimpleDateFormat) {
+          return ((SimpleDateFormat) defaultDateFormat).toPattern() + " " + timePattern;
+        }
+      }
+      return null;
     });
   }
 
@@ -205,7 +189,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     }
 
     String pattern = patternCallback.getPattern(patternBean);
-    if (pattern != null && pattern.length() > 0) {
+    if (pattern != null && !pattern.isEmpty()) {
       try {
         sdf.applyPattern(pattern);
       }
@@ -222,8 +206,8 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     Map<Integer, String> m_datePatterns;
 
     public PatternBean() {
-      m_timePatterns = new HashMap<Integer, String>();
-      m_datePatterns = new HashMap<Integer, String>();
+      m_timePatterns = new HashMap<>();
+      m_datePatterns = new HashMap<>();
     }
 
     public void putTimePattern(int timeStyle, String pattern) {
@@ -243,7 +227,8 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     }
   }
 
-  private static interface IPatternCallback {
-    public String getPattern(PatternBean patternBean);
+  @FunctionalInterface
+  private interface IPatternCallback {
+    String getPattern(PatternBean patternBean);
   }
 }

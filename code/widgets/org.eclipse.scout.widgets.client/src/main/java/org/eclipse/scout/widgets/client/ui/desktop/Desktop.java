@@ -19,7 +19,6 @@ import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
@@ -41,10 +40,10 @@ import org.eclipse.scout.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
-public class Desktop extends AbstractDesktop implements IDesktop {
+public class Desktop extends AbstractDesktop {
 
   private IForm m_benchModeForm = null;
-  private FormListener m_benchModeFormListener = new P_BenchModeFormListener();
+  private final FormListener m_benchModeFormListener = new P_BenchModeFormListener();
 
   @Override
   protected String getConfiguredDisplayStyle() {
@@ -67,7 +66,7 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
+    List<Class<? extends IOutline>> outlines = new ArrayList<>();
     outlines.add(SimpleWidgetsOutline.class);
     outlines.add(AdvancedWidgetsOutline.class);
     outlines.add(LayoutWidgetsOutline.class);

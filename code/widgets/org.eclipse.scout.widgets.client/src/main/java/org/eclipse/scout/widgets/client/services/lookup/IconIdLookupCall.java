@@ -13,7 +13,6 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
       if (Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
         try {
           final String iconId = (String) field.get(null);
-          rows.add(new LookupRow<String>(iconId, field.getName()).withIconId(iconId));
+          rows.add(new LookupRow<>(iconId, field.getName()).withIconId(iconId));
         }
         catch (RuntimeException | IllegalAccessException e) {
           // nop
@@ -46,30 +45,27 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
       }
     }
 
-    Collections.sort(rows, new Comparator<ILookupRow>() {
-      @Override
-      public int compare(ILookupRow o1, ILookupRow o2) {
-        if (o1 == null && o2 == null) {
-          return 0;
-        }
-        if (o1 == null) {
-          return -1;
-        }
-        if (o2 == null) {
-          return 1;
-        }
-        // sort font icons first, then other icons
-        String iconId1 = (String) o1.getKey();
-        String iconId2 = (String) o2.getKey();
-        if (iconId1 != null && iconId1.startsWith("font:") && (iconId2 == null || !iconId2.startsWith("font:"))) {
-          return -1;
-        }
-        if (iconId2 != null && iconId2.startsWith("font:") && (iconId1 == null || !iconId1.startsWith("font:"))) {
-          return 1;
-        }
-        // then, sort by name
-        return ObjectUtility.compareTo(o1.getText(), o2.getText());
+    rows.sort((Comparator<ILookupRow>) (o1, o2) -> {
+      if (o1 == null && o2 == null) {
+        return 0;
       }
+      if (o1 == null) {
+        return -1;
+      }
+      if (o2 == null) {
+        return 1;
+      }
+      // sort font icons first, then other icons
+      String iconId1 = (String) o1.getKey();
+      String iconId2 = (String) o2.getKey();
+      if (iconId1 != null && iconId1.startsWith("font:") && (iconId2 == null || !iconId2.startsWith("font:"))) {
+        return -1;
+      }
+      if (iconId2 != null && iconId2.startsWith("font:") && (iconId1 == null || !iconId1.startsWith("font:"))) {
+        return 1;
+      }
+      // then, sort by name
+      return ObjectUtility.compareTo(o1.getText(), o2.getText());
     });
 
     return rows;
