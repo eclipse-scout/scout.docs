@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
+import org.eclipse.scout.rt.client.ui.action.keystroke.KeyStroke;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -180,6 +182,16 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredSplitterPositionType() {
           return SPLITTER_POSITION_TYPE_RELATIVE_SECOND;
+        }
+
+        @Override
+        protected String getConfiguredFirstCollapseKeyStroke() {
+          return KeyStroke.combineKeyStrokes(IKeyStroke.CONTROL, IKeyStroke.SHIFT, IKeyStroke.COMMA);
+        }
+
+        @Override
+        protected String getConfiguredSecondCollapseKeyStroke() {
+          return KeyStroke.combineKeyStrokes(IKeyStroke.CONTROL, IKeyStroke.SHIFT, IKeyStroke.POINT);
         }
 
         @Order(10)
