@@ -162,10 +162,33 @@ New API methods on `AbstractSplitBox`:
 
 * `Double getMinSplitterPosition()`
 * `void setMinSplitterPosition(Double minPosition)`
+* `Double getConfiguredMinSplitterPosition()`
 * `boolean isFieldMinimized()`
 * `void setFieldMinimized(boolean minimized)`
+* `boolean getConfiguredFieldMinimized()`
 
 Additional to the existing three splitbox position types a new `SPLITTER_POSITION_TYPE_RELATIVE_SECOND` type was added. This new splitter position type allows to specify the size of the second field relative to the full size of the splitbox.
+
+=== Split Box Keystrokes
+The former `AbstractSplitBox.setCollapseKeyStroke()` and `AbstractSplitBox.getCollapseKeyStroke()` methods were deprecated and renamed, since the configured keystroke toggles between collapsed and default size of the collapsible field.
+
+Renamed methods:
+
+* `AbstractSplitBox.setToggleCollapseKeyStroke(String keyStroke)`
+* `AbstractSplitBox.getToggleCollapseKeyStroke()`
+
+New API methods to define keystrokes allowing to toggle between default, minimized and collapsed mode.
+The _First_ keystroke corresponds to the left button for a vertical split boxe and the top button for a horizontal splitbox.
+The _Second_ keystroke corresponds to the right button for a vertical split boxe and the bottom button for a horizontal splitbox.
+
+New API methods:
+
+* `AbstractSplitBox.setFirstCollapseKeyStroke(String keyStroke)`
+* `AbstractSplitBox.getFirstCollapseKeyStroke()`
+* `AbstractSplitBox.setSecondCollapseKeyStroke(String keyStroke)`
+* `AbstractSplitBox.getSecondCollapseKeyStroke()`
+* `AbstractSplitBox.getConfiguredToogleCollapseKeyStroke()`
+* `AbstractSplitBox.getConfiguredFirstCollapseKeyStroke()`
 
 == New Smart Field: ISmartField2 (since 7.0.100)
 
