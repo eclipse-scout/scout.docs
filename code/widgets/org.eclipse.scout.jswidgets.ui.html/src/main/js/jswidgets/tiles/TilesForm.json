@@ -21,6 +21,7 @@
             "tiles": {
               "id": "Tiles",
               "objectType": "Tiles",
+              "scrollable": true,
               "tiles": [
                 {
                   "objectType": "jswidgets.SimpleTile",
@@ -44,19 +45,31 @@
                 }
               ]
             }
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "ColorSchemeField",
+            "objectType": "SmartField",
+            "label": "Color Scheme",
+            "lookupCall": "jswidgets.ColorSchemeLookupCall"
           },
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
-            "gridColumnCount": 1,
-            "fields": [
-              {
-                "id": "WithPlaceholdersField",
-                "objectType": "CheckBoxField",
-                "labelVisible": false,
-                "label": "With Placeholders"
-              }
-            ]
+            "id": "WithPlaceholdersField",
+            "objectType": "CheckBoxField",
+            "labelVisible": false,
+            "label": "With Placeholders"
+          },
+          {
+            "id": "InvertColorsField",
+            "objectType": "CheckBoxField",
+            "labelVisible": false,
+            "label": "Invert Colors"
           }
         ]
       }
