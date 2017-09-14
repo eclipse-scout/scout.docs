@@ -92,5 +92,14 @@ where:
   For example the `org.eclipse.contacts.shared` project uses `org/eclipse/scout/contacts/shared` as path.
 * `<language>` is an identifier of the language and the country. Some possible file names:
 ** `Texts.properties` is the default language
-** `Texts_de.properties` is for german
-** `Texts_fr_BE` will be for french in Belgium
+** `Texts_de.properties` is for German
+** `Texts_fr_BE` will be for French in Belgium
+
+==== Find missing NLS Keys
+
+If NLS keys are used in the code that do not exist in a properties, file an ugly placeholder is displayed to the user. To find such missing translations the Menu `Scout -> Search missing text keys...` may be handy.
+The result is listed in the Eclipse `Search` view.
+
+The search also takes the scope of each NLS key into account. So that the key is considered to be available there must be a `TextProviderService` with that key on the classpath of that module.
+
+Reported false positives can be suppressed using the following comment at the end of the corresponding line: `NO-NLS-CHECK`. Matches on that line are then not reported in future searches anymore.

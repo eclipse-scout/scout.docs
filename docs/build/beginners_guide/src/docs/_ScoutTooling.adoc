@@ -224,8 +224,6 @@ include::{mdledir}/SdkContentAssist.adoc[]
 [[sec-sdk_nls]]
 === Scout NLS Tooling
 
-bla
-
 [[sec-add_text_entry]]
 ==== Adding a new Translated Text Entry
 (((Adding translated text entries)))
