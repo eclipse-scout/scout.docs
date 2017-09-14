@@ -1,17 +1,19 @@
-{"files": [
-"jswidgets/carousel/CarouselForm.json",
-"jswidgets/desktop/Desktop.json",
-"jswidgets/desktop/WidgetsOutline.json",
-"jswidgets/form/FormForm.json",
-"jswidgets/form/LifeCycleForm.json",
-"jswidgets/formfield/FormFieldPropertiesBox.json",
-"jswidgets/datefield/DateFieldForm.json",
-"jswidgets/groupbox/GroupBoxForm.json",
-"jswidgets/logicalgrid/GridDataBox.json",
-"jswidgets/logicalgrid/LogicalGridForm.json",
-"jswidgets/numberfield/NumberFieldForm.json",
-"jswidgets/smartfield/SmartField2Form.json",
-"jswidgets/stringfield/StringFieldForm.json",
-"jswidgets/tablefield/TableFieldForm.json",
-"jswidgets/valuefield/ValueFieldPropertiesBox.json"
-]}
+{
+  "files": [
+    "jswidgets/carousel/CarouselForm.json",
+    "jswidgets/desktop/Desktop.json",
+    "jswidgets/desktop/WidgetsOutline.json",
+    "jswidgets/form/FormForm.json",
+    "jswidgets/form/LifecycleForm.json",
+    "jswidgets/formfield/FormFieldPropertiesBox.json",
+    "jswidgets/datefield/DateFieldForm.json",
+    "jswidgets/groupbox/GroupBoxForm.json",
+    "jswidgets/logicalgrid/GridDataBox.json",
+    "jswidgets/logicalgrid/LogicalGridForm.json",
+    "jswidgets/numberfield/NumberFieldForm.json",
+    "jswidgets/smartfield/SmartField2Form.json",
+    "jswidgets/stringfield/StringFieldForm.json",
+    "jswidgets/tablefield/TableFieldForm.json",
+    "jswidgets/valuefield/ValueFieldPropertiesBox.json"
+  ]
+}
