@@ -46,7 +46,7 @@ public class ServerApplication implements IPlatformListener {
         ServerRunContext runContext = ServerRunContexts.empty();
         runContext.withSubject(s_subject);
         runContext.withSession(BEANS.get(ServerSessionProviderWithCache.class).provide(runContext.copy()));
-        runContext.run(BEANS.get(IDbSetupService.class)::installDb, DefaultExceptionTranslator.class);
+        runContext.run(() -> BEANS.get(IDbSetupService.class).installDb(), DefaultExceptionTranslator.class);
       }
       catch (Exception e) {
         throw new PlatformException("Unable to start server application.", e);
