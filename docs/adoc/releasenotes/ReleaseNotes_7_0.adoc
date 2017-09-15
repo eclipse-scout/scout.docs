@@ -29,15 +29,9 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<Sorting of Filter Table (since 7.0.100)>>
 * <<Auto Optimize Column Width (since 7.0.100)>>
 * <<New Property for Request Timeout (since 7.0.100)>>
+* <<Minor Changes for HTTP Abstraction Properties (since 7.0.100)>>
 
 // Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
-
-* Minor changes for HTTP abstraction properties.
-** Existing configuration property classes have been bundled in two `org.eclipse.scout.rt.shared.http.HttpConfigurationProperties` and `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties` classes.
-** The configuration property `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live` has been removed (`scout.http.apache_connection_time_to_live` is used instead).
-** New configuration properties have been added:
-*** `scout.http.apache_keep_alive` (possible values: true/false), whether to use keep-alive connections. If property is not set the system property `http.keepAlive` is evaluated, if this system property is also not set true will be used as a last resort.
-*** `scout.http.apache_retry_post` (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property `sun.net.http.retryPost` is evaluated, if this system property is also not set true will be used as a last resort.
 
 === Obtaining the Latest Version
 
@@ -239,3 +233,10 @@ The column has a property called `autoOptimizeWidth`. This property has been the
 
 == New Property for Request Timeout (since 7.0.100)
 Every ui request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property `scout.ui.model.jobs.await.timeout` (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.
+
+== Minor Changes for HTTP Abstraction Properties (since 7.0.100)
+* Existing configuration property classes have been bundled in two `org.eclipse.scout.rt.shared.http.HttpConfigurationProperties` and `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties` classes.
+* The configuration property `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live` has been removed (`scout.http.apache_connection_time_to_live` is used instead).
+* New configuration properties have been added:
+** `scout.http.apache_keep_alive` (possible values: true/false), whether to use keep-alive connections. If property is not set the system property `http.keepAlive` is evaluated, if this system property is also not set true will be used as a last resort.
+** `scout.http.apache_retry_post` (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property `sun.net.http.retryPost` is evaluated, if this system property is also not set true will be used as a last resort.
