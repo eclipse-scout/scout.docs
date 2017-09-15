@@ -1,0 +1,67 @@
+{
+  "id": "jswidgets.TabBoxForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "TabBox",
+            "objectType": "TabBox",
+            "selectedTab":"TabItem1",
+            "tabItems": [
+              {
+                "id": "TabItem1",
+                "objectType": "TabItem",
+                "label": "First Tab",
+                "fields": [
+                  {
+                    "id": "StringField1",
+                    "objectType": "StringField",
+                    "label": "String Field 1"
+                  }
+                ]
+              },
+              {
+                "id": "TabItem2",
+                "objectType": "TabItem",
+                "label": "Second Tab",
+                "fields": [
+                  {
+                    "id": "StringField2",
+                    "objectType": "StringField",
+                    "label": "String Field 2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "SelectedTabField",
+            "objectType": "SmartField",
+            "label": "Selected Tab",
+            "lookupCall": "jswidgets.SelectedTabLookupCall"
+          }
+        ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}

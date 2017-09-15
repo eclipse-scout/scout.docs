@@ -47,6 +47,10 @@ jswidgets.ValueFieldPropertiesBox.prototype._setField = function(field) {
   if (this.listenForPropertyChanges) {
     displayTextField.on('propertyChange', this._onPropertyChange.bind(this));
   }
+
+  var clearableStyleField = this.widget('ClearableStyleField');
+  clearableStyleField.setValue(this.field.clearable);
+    clearableStyleField.on('propertyChange', this._onPropertyChange.bind(this));
 };
 
 jswidgets.ValueFieldPropertiesBox.prototype._onFieldPropertyChange = function(event) {
@@ -62,5 +66,7 @@ jswidgets.ValueFieldPropertiesBox.prototype._onPropertyChange = function(event) 
     this.field.setValue(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'DisplayTextField') {
     this.field.setDisplayText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'ClearableStyleField') {
+    this.field.setClearable(event.newValue);
   }
 };

@@ -13,6 +13,7 @@
     "jswidgets/numberfield/NumberFieldForm.json",
     "jswidgets/smartfield/SmartFieldForm.json",
     "jswidgets/stringfield/StringFieldForm.json",
+    "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tablefield/TableFieldForm.json",
     "jswidgets/valuefield/ValueFieldPropertiesBox.json"
   ]

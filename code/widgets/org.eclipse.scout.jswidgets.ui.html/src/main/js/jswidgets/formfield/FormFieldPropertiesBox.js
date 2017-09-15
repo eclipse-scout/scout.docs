@@ -57,10 +57,6 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   disabledStyleField.setValue(this.field.disabledStyle);
   disabledStyleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-  var clearableStyleField = this.widget('ClearableStyleField');
-  clearableStyleField.setValue(this.field.clearable);
-  clearableStyleField.on('propertyChange', this._onPropertyChange.bind(this));
-
   var labelField = this.widget('LabelField');
   labelField.setValue(this.field.label);
   labelField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -105,8 +101,6 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setMandatory(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
     this.field.setDisabledStyle(event.newValue);
-  } else if (event.propertyName === 'value' && event.source.id === 'ClearableStyleField') {
-    this.field.setClearable(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'LabelField') {
     this.field.setLabel(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'LabelPositionField') {

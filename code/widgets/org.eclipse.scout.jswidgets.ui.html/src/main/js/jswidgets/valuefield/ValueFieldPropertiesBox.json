@@ -17,6 +17,13 @@
       "objectType": "StringField",
       "label": "DisplayText",
       "enabled": false
+    },
+    {
+      "id": "ClearableStyleField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.ClearableStyleLookupCall",
+      "label": "Clearable Style",
+      "displayStyle": "dropdown"
     }
   ]
 }

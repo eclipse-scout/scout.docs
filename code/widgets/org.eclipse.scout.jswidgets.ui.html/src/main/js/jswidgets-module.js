@@ -35,6 +35,8 @@
   __include("jswidgets/smartfield/SalutationLookupCall.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
+  __include("jswidgets/tabbox/TabBoxForm.js");
+  __include("jswidgets/tabbox/SelectedTabLookupCall.js");
   __include("jswidgets/tablefield/TableFieldForm.js");
   __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
   __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
