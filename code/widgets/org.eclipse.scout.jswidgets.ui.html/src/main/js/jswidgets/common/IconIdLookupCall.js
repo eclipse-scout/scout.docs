@@ -17,7 +17,7 @@ jswidgets.IconIdLookupCall.prototype._data = function() {
   return Object.keys(scout.icons)
   .filter(function(name) {
     var value = scout.icons[name];
-    return typeof value === 'string' && value.startsWith('font:');
+    return typeof value === 'string' && scout.strings.startsWith(value, 'font:');
   }).map(function(name, i) {
     var iconId = scout.icons[name];
     return [iconId, name];
