@@ -33,7 +33,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<New Property for Request Timeout (since 7.0.100)>>
 * <<Minor Changes for HTTP Abstraction Properties (since 7.0.100)>>
 
-// Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.x%2E%2E%2E7.0.100[https://github.com/eclipse/scout.rt/compare/7.0.x...7.0.100]
+Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.0.008_Oxygen%2E%2E%2E7.0.100.017_Oxygen_1[https://github.com/eclipse/scout.rt/compare/7.0.0.008_Oxygen...7.0.100.017_Oxygen_1]
 
 === Obtaining the Latest Version
 
