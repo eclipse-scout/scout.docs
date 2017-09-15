@@ -1,0 +1,37 @@
+{
+  "id": "jswidgets.SmartFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "SmartField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.LocaleLookupCall",
+            "label": "Smart Field"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "jswidgets.SmartFieldPropertiesBox",
+        "label": "Properties"
+      },
+      {
+        "id": "ValueFieldPropertiesBox",
+        "objectType": "jswidgets.ValueFieldPropertiesBox"
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}

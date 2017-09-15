@@ -1,0 +1,37 @@
+{
+  "id": "jswidgets.ProposalFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "ProposalField",
+            "objectType": "ProposalField2",
+            "lookupCall": "jswidgets.SalutationLookupCall",
+            "label": "Proposal Field"
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "jswidgets.ProposalFieldPropertiesBox",
+        "label": "Properties"
+      },
+      {
+        "id": "ValueFieldPropertiesBox",
+        "objectType": "jswidgets.ValueFieldPropertiesBox"
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "jswidgets.SmartFieldPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "label": "Smart Field Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "DisplayStyleField",
+      "objectType": "SmartField2",
+      "lookupCall": "jswidgets.SmartFieldDisplayStyleLookupCall",
+      "label": "Display Style"
+    },
+    {
+      "id": "BrowseMaxRowCountField",
+      "objectType": "NumberField",
+      "label": "Browse Max Row Count"
+    },
+    {
+      "id": "ActiveFilterEnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Active Filter Enabled"
+    }
+  ]
+}
