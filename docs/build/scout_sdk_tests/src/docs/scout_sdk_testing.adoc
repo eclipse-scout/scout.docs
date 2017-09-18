@@ -48,7 +48,7 @@ TODO: Add screenshot for super class proposal test.
 
 == Test ClassId creation
 
-- [ ] Press the menu Scout -> Create all missing @Classid Annotations and ensure they are correctly created.
+- [ ] Press the menu Scout -> Create all missing @Classid Annotations and ensure they are correctly created (all types that implement ITypeWithClassId should have a class id after this step)
 
 == Test Wizards Small Set
 - [ ] Create a new Form (Ctrl+N) and verify that it is created correctly (no compilation errors)
