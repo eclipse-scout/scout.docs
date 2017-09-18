@@ -19,6 +19,8 @@ jswidgets.ValueFieldPropertiesBox.prototype._init = function(model) {
   jswidgets.ValueFieldPropertiesBox.parent.prototype._init.call(this, model);
 
   this._setField(this.field);
+  this.widget('ValueField').setTrimText(false);
+  this.widget('DisplayTextField').setTrimText(false);
 };
 
 jswidgets.ValueFieldPropertiesBox.prototype._jsonModel = function() {

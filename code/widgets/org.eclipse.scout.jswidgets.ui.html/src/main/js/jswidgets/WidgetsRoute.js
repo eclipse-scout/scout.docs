@@ -26,7 +26,8 @@ scout.inherits(jswidgets.WidgetsRoute, scout.Route);
  */
 jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
   var regex = /^jswidgets\.(\w*)Form$/;
-  return desktop.outline.nodes.map(function(node) {
+  var routes = [];
+  scout.Tree.visitNodes(desktop.outline.nodes, function(node) {
     var routeRef = null,
       objectType = node.detailForm.objectType,
       result = regex.exec(objectType);
@@ -35,8 +36,9 @@ jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
       $.log.error('Failed to create route for objectType=' + objectType);
     }
     routeRef = result[1].toLowerCase();
-    return [routeRef, objectType];
+    routes.push([routeRef, objectType]);
   });
+  return routes;
 };
 
 jswidgets.WidgetsRoute.prototype.matches = function(location) {
@@ -48,7 +50,7 @@ jswidgets.WidgetsRoute.prototype._getRouteData = function(location) {
     return null;
   }
   return scout.arrays.find(this.routes, function(routeData) {
-    return location.indexOf(routeData[0]) > -1;
+    return location.substring(1) === routeData[0];
   });
 };
 
@@ -62,10 +64,14 @@ jswidgets.WidgetsRoute.prototype.activate = function(location) {
   jswidgets.WidgetsRoute.parent.prototype.activate.call(this, location);
 
   var objectType = this._getRouteData(location)[1];
-  var node = scout.arrays.find(this.desktop.outline.nodes, function(node) {
-    return node.detailForm.objectType === objectType;
+  var foundNode = null;
+  scout.Tree.visitNodes(this.desktop.outline.nodes, function(node) {
+    if (node.detailForm.objectType === objectType) {
+      foundNode = node;
+      return false;
+    }
   });
-  this.desktop.outline.selectNode(node);
+  this.desktop.outline.selectNode(foundNode);
 };
 
 jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {

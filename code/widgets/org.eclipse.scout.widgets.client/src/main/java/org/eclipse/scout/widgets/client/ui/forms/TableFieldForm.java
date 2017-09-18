@@ -1686,7 +1686,6 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isMultiSelect());
-            setValue(getTableField().getTable().isHeaderVisible());
           }
         }
 

@@ -1,0 +1,38 @@
+{
+  "id": "jswidgets.TreeSmartFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "TreeSmartField",
+            "objectType": "SmartField2",
+            "lookupCall": "jswidgets.WorldLookupCall",
+            "label": "Tree Smart Field",
+            "browseHierarchy": true
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "jswidgets.TreeSmartFieldPropertiesBox",
+        "label": "Properties"
+      },
+      {
+        "id": "ValueFieldPropertiesBox",
+        "objectType": "jswidgets.ValueFieldPropertiesBox"
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}

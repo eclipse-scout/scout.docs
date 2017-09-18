@@ -30,6 +30,7 @@ public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
   private boolean m_throwVetoException;
 
+
   protected Locale[] sort(Locale[] locales) {
     Comparator<Locale> localeComparator = (locale1, locale2) -> {
       String name1 = locale1.getDisplayName(NlsLocale.get());

@@ -53,11 +53,38 @@
     },
     {
       "objectType": "PageWithNodes",
-      "leaf": true,
       "text": "${textKey:SmartField}",
+      "expanded": true,
       "detailForm": {
         "objectType": "jswidgets.SmartFieldForm"
-      }
+      },
+      "childNodes": [
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "${textKey:ProposalField}",
+          "detailForm": {
+            "objectType": "jswidgets.ProposalFieldForm"
+          }
+        },
+        {
+          "objectType": "PageWithNodes",
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "${textKey:MultilineSmartField}",
+          "detailForm": {
+            "objectType": "jswidgets.MultilineSmartFieldForm"
+          }
+        },
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "${textKey:TreeSmartField}",
+          "detailForm": {
+            "objectType": "jswidgets.TreeSmartFieldForm"
+          }
+        }
+      ]
     },
     {
       "objectType": "PageWithNodes",

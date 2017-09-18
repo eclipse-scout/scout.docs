@@ -38,6 +38,7 @@
         "objectType": "GroupBox",
         "gridColumnCount": 2,
         "label": "Properties",
+        "expandable": true,
         "fields": [
           {
             "id": "BorderVisibleField",
@@ -65,6 +66,16 @@
             "labelVisible": false
           },
           {
+            "id": "ScrollableField",
+            "objectType": "CheckBoxField",
+            "label": "Scrollable",
+            "labelVisible": false,
+            "tooltipText": "${textKey:GroupBoxScrollableTooltip}",
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
+          },
+          {
             "id": "GridColumnCountField",
             "objectType": "NumberField",
             "label": "Grid Column Count"
@@ -89,6 +100,7 @@
         "objectType": "GroupBox",
         "gridColumnCount": 2,
         "label": "Customization Examples",
+        "expandable": true,
         "fields": [
           {
             "id": "ToggleVisibilityField",
@@ -107,6 +119,11 @@
       {
         "id": "FormFieldPropertiesBox",
         "objectType": "jswidgets.FormFieldPropertiesBox"
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints"
       }
     ]
   }
