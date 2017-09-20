@@ -7,7 +7,7 @@
   "fields": [
     {
       "id": "DisplayStyleField",
-      "objectType": "SmartField2",
+      "objectType": "SmartField",
       "lookupCall": "jswidgets.SmartFieldDisplayStyleLookupCall",
       "label": "Display Style"
     },

@@ -13,7 +13,7 @@
         "fields": [
           {
             "id": "MultilineSmartField",
-            "objectType": "SmartField2Multiline",
+            "objectType": "SmartFieldMultiline",
             "lookupCall": "jswidgets.MultilinePersonLookupCall",
             "label": "Multiline Smart Field",
             "gridDataHints": {

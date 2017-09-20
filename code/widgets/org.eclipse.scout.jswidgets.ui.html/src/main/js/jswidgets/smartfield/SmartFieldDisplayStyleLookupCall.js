@@ -18,6 +18,6 @@ jswidgets.SmartFieldDisplayStyleLookupCall.prototype._data = function() {
 };
 
 jswidgets.SmartFieldDisplayStyleLookupCall.DATA = [
-  [scout.SmartField2.DisplayStyle.DEFAULT, 'default'],
-  [scout.SmartField2.DisplayStyle.DROPDOWN, 'dropdown']
+  [scout.SmartField.DisplayStyle.DEFAULT, 'default'],
+  [scout.SmartField.DisplayStyle.DROPDOWN, 'dropdown']
 ];

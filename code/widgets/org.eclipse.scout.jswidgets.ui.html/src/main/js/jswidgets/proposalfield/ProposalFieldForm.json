@@ -13,7 +13,7 @@
         "fields": [
           {
             "id": "ProposalField",
-            "objectType": "ProposalField2",
+            "objectType": "ProposalField",
             "lookupCall": "jswidgets.SalutationLookupCall",
             "label": "Proposal Field"
           }

@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.TreeSmartFieldForm",
+  "id": "jswidgets.SmartFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -12,17 +12,16 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "TreeSmartField",
+            "id": "SmartField",
             "objectType": "SmartField",
-            "lookupCall": "jswidgets.WorldLookupCall",
-            "label": "Tree Smart Field",
-            "browseHierarchy": true
+            "lookupCall": "jswidgets.LocaleLookupCall",
+            "label": "Smart Field"
           }
         ]
       },
       {
         "id": "PropertiesBox",
-        "objectType": "jswidgets.TreeSmartFieldPropertiesBox",
+        "objectType": "jswidgets.SmartFieldPropertiesBox",
         "label": "Properties"
       },
       {
