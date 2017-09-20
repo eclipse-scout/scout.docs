@@ -338,21 +338,21 @@ public final class JaxWsSnippet {
   public static class JaxWsPingEndpointUrlProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "jaxws.ping.url";
+      return "project.myWebService.url";
     }
   }
 
   public static class JaxWsPingUsernameProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "jaxws.ping.username";
+      return "project.myWebService.username";
     }
   }
 
   public static class JaxWsPingPasswordProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "jaxws.ping.password";
+      return "project.myWebService.password";
     }
   }
 
@@ -360,7 +360,7 @@ public final class JaxWsSnippet {
 
     @Override
     public String getKey() {
-      return "jaxws.ping.timeout.connect";
+      return "project.myWebService.timeout.connect";
     }
   }
 
@@ -368,7 +368,7 @@ public final class JaxWsSnippet {
 
     @Override
     public String getKey() {
-      return "jaxws.ping.timeout.read";
+      return "project.myWebService.timeout.read";
     }
   }
 
