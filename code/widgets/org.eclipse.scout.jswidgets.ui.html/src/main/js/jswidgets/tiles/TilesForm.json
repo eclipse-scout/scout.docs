@@ -53,6 +53,11 @@
         "objectType": "GroupBox",
         "label": "Properties",
         "fields": [
+      {
+            "id": "GridColumnCountField",
+            "objectType": "NumberField",
+            "label": "Grid Column Count"
+          },
           {
             "id": "ColorSchemeField",
             "objectType": "SmartField",

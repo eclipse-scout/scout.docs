@@ -21,6 +21,11 @@ jswidgets.TilesForm.prototype._init = function(model) {
   jswidgets.TilesForm.parent.prototype._init.call(this, model);
 
   this.tiles = this.widget('Tiles');
+
+  var gridColumnCountField = this.widget('GridColumnCountField');
+  gridColumnCountField.setValue(this.tiles.gridColumnCount);
+  gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
+
   var withPlaceholdersField = this.widget('WithPlaceholdersField');
   withPlaceholdersField.setValue(this.tiles.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
@@ -32,6 +37,12 @@ jswidgets.TilesForm.prototype._init = function(model) {
   var invertColorsField = this.widget('InvertColorsField');
   invertColorsField.setValue(this.tiles.tiles[0].colorScheme.inverted);
   invertColorsField.on('propertyChange', this._onInvertColorsPropertyChange.bind(this));
+};
+
+jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setGridColumnCount(event.newValue);
+  }
 };
 
 jswidgets.TilesForm.prototype._onWithPlacehodersPropertyChange = function(event) {

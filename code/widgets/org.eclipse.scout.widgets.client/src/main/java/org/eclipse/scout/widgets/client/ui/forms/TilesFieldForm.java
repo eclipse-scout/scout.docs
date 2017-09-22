@@ -4,6 +4,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.tilesfield.AbstractTilesField;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
 import org.eclipse.scout.rt.platform.Order;
@@ -96,9 +97,36 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(2000)
+      @ClassId("fc28a174-b683-4aae-8ec9-7f73dc2b45e2")
       public class PropertiesGroupBox extends AbstractGroupBox {
 
         @Order(10)
+        @ClassId("1f474645-120a-4386-b826-13a395cf2924")
+        public class GridColumnCountField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Grid Column Count";
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTilesField().getTiles().setGridColumnCount(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTilesField().getTiles().getGridColumnCount());
+          }
+        }
+
+        @Order(10)
+        @ClassId("ac5a4cf5-61c1-4254-82b0-c4daa81d92bf")
         public class WithPlaceholdersField extends AbstractBooleanField {
 
           @Override
