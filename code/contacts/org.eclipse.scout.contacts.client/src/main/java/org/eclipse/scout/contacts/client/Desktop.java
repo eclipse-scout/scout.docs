@@ -207,7 +207,6 @@ public class Desktop extends AbstractDesktop {
     }
 
     //end::DesktopInit[]
-
     //end::OptionsMenu[]
     @Override
     protected String getConfiguredKeyStroke() {
