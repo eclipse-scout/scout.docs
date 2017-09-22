@@ -188,6 +188,7 @@ public class Desktop extends AbstractDesktop {
     }
     //tag::quickAccessMenu[]
     //tag::DesktopInit[]
+
   }
   //end::quickAccessMenu[]
 
@@ -204,6 +205,7 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredIconId() {
       return AbstractIcons.Gear;
     }
+
     //end::DesktopInit[]
 
     //end::OptionsMenu[]
@@ -211,13 +213,14 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredKeyStroke() {
       return IKeyStroke.F11;
     }
+    //tag::OptionsMenu[]
 
+    //tag::DesktopInit[]
     @Override
     protected Class<OptionsForm> getConfiguredForm() {
       return OptionsForm.class;
     }
-    //tag::OptionsMenu[]
-    //tag::DesktopInit[]
+
   }
   //end::OptionsMenu[]
 
@@ -228,6 +231,7 @@ public class Desktop extends AbstractDesktop {
     protected String getConfiguredIconId() {
       return AbstractIcons.Person;
     }
+
     //end::DesktopInit[]
 
     @Override
@@ -240,11 +244,12 @@ public class Desktop extends AbstractDesktop {
       setText(ISession.CURRENT.get().getUserId());
     }
 
+    //tag::DesktopInit[]
     @Override
     protected Class<UserForm> getConfiguredForm() {
       return UserForm.class;
     }
-    //tag::DesktopInit[]
+
   }
   //tag::quickAccessMenu[]
 }
