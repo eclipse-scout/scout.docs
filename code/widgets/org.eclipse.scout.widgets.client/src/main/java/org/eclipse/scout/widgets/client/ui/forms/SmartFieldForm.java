@@ -459,7 +459,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Override
-          protected void execPrepareBrowseLookup(ILookupCall<Long> call, String browseHint) {
+          protected void execPrepareBrowseLookup(ILookupCall<Long> call) {
             // instanceof is required because in this form the lookup can be switched at runtime
             if (call instanceof HierarchicalLookupCall) {
               ((HierarchicalLookupCall) call).setLoadIncremental(isBrowseLoadIncremental());

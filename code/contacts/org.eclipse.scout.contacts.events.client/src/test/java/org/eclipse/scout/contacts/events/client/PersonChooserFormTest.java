@@ -44,7 +44,7 @@ public class PersonChooserFormTest {
   @Test
   public void testNoFilter() {
     PersonChooserForm f = new PersonChooserForm();
-    List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup("", 100);
+    List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup(100);
     assertEquals(1, res.size());
   }
 
@@ -54,7 +54,7 @@ public class PersonChooserFormTest {
     List<String> persons = new ArrayList<>();
     persons.add("123");
     f.setExcludedPersons(persons);
-    List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup("", 100);
+    List<? extends ILookupRow<String>> res = f.getPersonField().callBrowseLookup(100);
     assertEquals(0, res.size());
   }
 
