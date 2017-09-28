@@ -5,13 +5,21 @@ import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.tilesfield.AbstractTilesField;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
+import org.eclipse.scout.rt.client.ui.tile.ITile;
+import org.eclipse.scout.rt.client.ui.tile.ITileColorScheme;
+import org.eclipse.scout.rt.client.ui.tile.TileColorScheme;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.ColorSchemeField;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.ConfigurationBox.TilesField;
+import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.ConfigurationBox.TilesField.Tiles;
 import org.eclipse.scout.widgets.client.ui.tiles.AbstractSimpleTile;
 
 @ClassId("1c8091c8-6a6b-4860-9d12-e8bf6cab115a")
@@ -20,6 +28,10 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
   @Override
   public void startPageForm() {
     start();
+  }
+
+  public ColorSchemeField getColorSchemeField() {
+    return getFieldByClass(ColorSchemeField.class);
   }
 
   public TilesField getTilesField() {
@@ -110,11 +122,6 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getTilesField().getTiles().setGridColumnCount(getValue());
           }
@@ -125,7 +132,38 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(10)
+        @Order(20)
+        @ClassId("a79b08d7-7a19-44fb-843f-455928d71861")
+        public class ColorSchemeField extends AbstractSmartField<ITileColorScheme> {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Color Scheme";
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<ITileColorScheme>> getConfiguredLookupCall() {
+            return TileColorSchemeLookupCall.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            Tiles tiles = getTilesField().getTiles();
+            ITileColorScheme colorScheme = TileColorScheme.DEFAULT;
+            if (tiles.getTiles().size() > 0) {
+              colorScheme = getTilesField().getTiles().getTiles().get(0).getColorScheme();
+            }
+            setValue(colorScheme);
+          }
+
+          @Override
+          protected void execChangedValue() {
+            for (ITile tile : getTilesField().getTiles().getTiles()) {
+              tile.setColorScheme(getValue());
+            }
+          }
+        }
+
+        @Order(30)
         @ClassId("ac5a4cf5-61c1-4254-82b0-c4daa81d92bf")
         public class WithPlaceholdersField extends AbstractBooleanField {
 
