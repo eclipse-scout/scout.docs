@@ -18,6 +18,6 @@ jswidgets.GroupBoxBodyGridLookupCall.prototype._data = function() {
 };
 
 jswidgets.GroupBoxBodyGridLookupCall.DATA = [
-  ['scout.HorizontalGroupBoxBodyGrid', 'Horizontal'],
-  ['scout.VerticalSmartGroupBoxBodyGrid', 'Vertical (Smart)']
+  ['scout.HorizontalGrid', 'Horizontal'],
+  ['scout.VerticalSmartGrid', 'Vertical (Smart)']
 ];

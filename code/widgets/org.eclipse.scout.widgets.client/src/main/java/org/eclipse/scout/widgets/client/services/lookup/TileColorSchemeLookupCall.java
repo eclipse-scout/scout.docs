@@ -13,8 +13,8 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.rt.client.ui.tile.ITileColorScheme;
-import org.eclipse.scout.rt.client.ui.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.data.tile.ITileColorScheme;
+import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
