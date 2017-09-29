@@ -112,23 +112,14 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the FilterCheckedRowsValueField
-   */
   public FilterCheckedRowsValueField getFilterCheckedRowsValueField() {
     return getFieldByClass(FilterCheckedRowsValueField.class);
   }
 
-  /**
-   * @return the IsEnabledField
-   */
   public IsEnabledField getIsEnabledField() {
     return getFieldByClass(IsEnabledField.class);
   }
 
-  /**
-   * @return the TreeField
-   */
   public ListBoxField getListBoxField() {
     return getFieldByClass(ListBoxField.class);
   }
@@ -137,16 +128,10 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the TreeEntriesField
-   */
   public ListEntriesField getListEntriesField() {
     return getFieldByClass(ListEntriesField.class);
   }
 
-  /**
-   * @return the UncheckAllButton
-   */
   public UncheckAllButton getUncheckAllButton() {
     return getFieldByClass(UncheckAllButton.class);
   }

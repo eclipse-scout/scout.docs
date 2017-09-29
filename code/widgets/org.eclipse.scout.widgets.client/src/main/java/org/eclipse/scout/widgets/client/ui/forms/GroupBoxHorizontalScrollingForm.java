@@ -82,9 +82,6 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     }
   }
 
-  /**
-   * @return the CityField
-   */
   public CityField getCityField() {
     return getFieldByClass(CityField.class);
   }
@@ -94,44 +91,26 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the CommentField
-   */
   public CommentField getCommentField() {
     return getFieldByClass(CommentField.class);
   }
 
-  /**
-   * @return the CompanyField
-   */
   public CompanyField getCompanyField() {
     return getFieldByClass(CompanyField.class);
   }
 
-  /**
-   * @return the CountryField
-   */
   public CountryField getCountryField() {
     return getFieldByClass(CountryField.class);
   }
 
-  /**
-   * @return the DefaultBox
-   */
   public DefaultBox getDefaultBox() {
     return getFieldByClass(DefaultBox.class);
   }
 
-  /**
-   * @return the Example1Box
-   */
   public Example1Box getExample1Box() {
     return getFieldByClass(Example1Box.class);
   }
 
-  /**
-   * @return the Example2Box
-   */
   public Example2Box getExample2Box() {
     return getFieldByClass(Example2Box.class);
   }
@@ -140,23 +119,14 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the FirstNameField
-   */
   public FirstNameField getFirstNameField() {
     return getFieldByClass(FirstNameField.class);
   }
 
-  /**
-   * @return the HorizontalMonthsBox
-   */
   public HorizontalMonthsBox getHorizontalMonthsBox() {
     return getFieldByClass(HorizontalMonthsBox.class);
   }
 
-  /**
-   * @return the LastNameField
-   */
   public LastNameField getLastNameField() {
     return getFieldByClass(LastNameField.class);
   }
@@ -173,65 +143,38 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     return getFieldByClass(LabelVisibleField.class);
   }
 
-  /**
-   * @return the Placeholder2Field
-   */
   public Placeholder2Field getPlaceholder2Field() {
     return getFieldByClass(Placeholder2Field.class);
   }
 
-  /**
-   * @return the ScrollableBox
-   */
   public ScrollableBox getScrollableBox() {
     return getFieldByClass(ScrollableBox.class);
   }
 
-  /**
-   * @return the SectionBox
-   */
   public SectionBox getSectionBox() {
     return getFieldByClass(SectionBox.class);
   }
 
-  /**
-   * @return the SingleColumnBox
-   */
   public SingleColumnBox getSingleColumnBox() {
     return getFieldByClass(SingleColumnBox.class);
   }
 
-  /**
-   * @return the VerticalMonthsBox
-   */
   public VerticalMonthsBox getVerticalMonthsBox() {
     return getFieldByClass(VerticalMonthsBox.class);
   }
 
-  /**
-   * @return the VisibilityBox
-   */
   public VisibilityBox getVisibilityBox() {
     return getFieldByClass(VisibilityBox.class);
   }
 
-  /**
-   * @return the VisibleCompanyField
-   */
   public VisibleCompanyField getVisibleCompanyField() {
     return getFieldByClass(VisibleCompanyField.class);
   }
 
-  /**
-   * @return the VisibleFirstNameField
-   */
   public VisibleFirstNameField getVisibleFirstNameField() {
     return getFieldByClass(VisibleFirstNameField.class);
   }
 
-  /**
-   * @return the VisibleLastNameField
-   */
   public VisibleLastNameField getVisibleLastNameField() {
     return getFieldByClass(VisibleLastNameField.class);
   }
@@ -534,9 +477,6 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           return false;
         }
 
-        /**
-         * @return the CompanyField
-         */
         public CompanyField getCompanyField() {
           return getFieldByClass(CompanyField.class);
         }

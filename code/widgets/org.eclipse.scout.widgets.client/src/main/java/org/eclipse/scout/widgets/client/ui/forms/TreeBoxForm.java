@@ -80,30 +80,18 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the AutoCheckChildNodesField
-   */
   public AutoCheckChildNodesField getAutoCheckChildNodesField() {
     return getFieldByClass(AutoCheckChildNodesField.class);
   }
 
-  /**
-   * @return the IsEnabledField
-   */
   public IsEnabledField getIsEnabledField() {
     return getFieldByClass(IsEnabledField.class);
   }
 
-  /**
-   * @return the CheckAllButton
-   */
   public CheckAllButton getCheckAllButton() {
     return getFieldByClass(CheckAllButton.class);
   }
 
-  /**
-   * @return the CheckUncheckBox
-   */
   public CheckUncheckBox getCheckUncheckBox() {
     return getFieldByClass(CheckUncheckBox.class);
   }
@@ -129,16 +117,10 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the FilterCheckedRowsValueField
-   */
   public FilterCheckedRowsValueField getFilterCheckedRowsValueField() {
     return getFieldByClass(FilterCheckedRowsValueField.class);
   }
 
-  /**
-   * @return the TreeField
-   */
   public TreeBoxField getTreeBoxField() {
     return getFieldByClass(TreeBoxField.class);
   }
@@ -147,16 +129,10 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the TreeEntriesField
-   */
   public TreeEntriesField getTreeEntriesField() {
     return getFieldByClass(TreeEntriesField.class);
   }
 
-  /**
-   * @return the UncheckAllButton
-   */
   public UncheckAllButton getUncheckAllButton() {
     return getFieldByClass(UncheckAllButton.class);
   }

@@ -60,9 +60,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the ButtonFieldButton
-   */
   public ButtonFieldButton getButtonFieldButton() {
     return getFieldByClass(ButtonFieldButton.class);
   }
@@ -84,9 +81,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ButtonGroupBox.class);
   }
 
-  /**
-   * @return the DefaultLinkButton
-   */
   public DefaultLinkButton getDefaultLinkButton() {
     return getFieldByClass(DefaultLinkButton.class);
   }
@@ -127,16 +121,10 @@ public class ButtonForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the IconIdField
-   */
   public IconIdField getIconIdField() {
     return getFieldByClass(IconIdField.class);
   }
 
-  /**
-   * @return the LabelField
-   */
   public LabelField getLabelField() {
     return getFieldByClass(LabelField.class);
   }

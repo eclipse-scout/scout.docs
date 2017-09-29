@@ -65,9 +65,6 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DocumentsBox
-   */
   public DocumentsBox getDocumentsBox() {
     return getFieldByClass(DocumentsBox.class);
   }
@@ -76,16 +73,10 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the FieldVisibilityBox
-   */
   public FieldVisibilityBox getFieldVisibilityBox() {
     return getFieldByClass(FieldVisibilityBox.class);
   }
 
-  /**
-   * @return the FileTableField
-   */
   public FileTableField getFileTableField() {
     return getFieldByClass(FileTableField.class);
   }
@@ -94,51 +85,30 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the CommentsBox
-   */
   public CommentsBox getCommentsBox() {
     return getFieldByClass(CommentsBox.class);
   }
 
-  /**
-   * @return the CommentsField
-   */
   public CommentsField getCommentsField() {
     return getFieldByClass(CommentsField.class);
   }
 
-  /**
-   * @return the VisibleDocumentsField
-   */
   public VisibleDocumentsField getVisibleDocumentsField() {
     return getFieldByClass(VisibleDocumentsField.class);
   }
 
-  /**
-   * @return the MonthDetailsBox
-   */
   public MonthDetailsBox getMonthDetailsBox() {
     return getFieldByClass(MonthDetailsBox.class);
   }
 
-  /**
-   * @return the MonthsBox
-   */
   public MonthsBox getMonthsBox() {
     return getFieldByClass(MonthsBox.class);
   }
 
-  /**
-   * @return the Placeholder1Field
-   */
   public Placeholder1Field getPlaceholder1Field() {
     return getFieldByClass(Placeholder1Field.class);
   }
 
-  /**
-   * @return the TabBox
-   */
   public TabBox getTabBox() {
     return getFieldByClass(TabBox.class);
   }

@@ -59,16 +59,10 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the AlignedCenterField
-   */
   public AlignedCenterField getAlignedCenterField() {
     return getFieldByClass(AlignedCenterField.class);
   }
 
-  /**
-   * @return the AlignedRightField
-   */
   public AlignedRightField getAlignedRightField() {
     return getFieldByClass(AlignedRightField.class);
   }
@@ -78,9 +72,6 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DefaultField
-   */
   public DefaultField getDefaultField() {
     return getFieldByClass(DefaultField.class);
   }
@@ -105,9 +96,6 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the SampleContentButton
-   */
   public SampleContentButton getSampleContentButton() {
     return getFieldByClass(SampleContentButton.class);
   }

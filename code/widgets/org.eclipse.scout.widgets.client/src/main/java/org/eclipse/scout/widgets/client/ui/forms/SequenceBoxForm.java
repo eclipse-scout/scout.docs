@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.util.BooleanUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -97,37 +98,22 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DefaultBox
-   */
   public DefaultBox getDefaultBox() {
     return getFieldByClass(DefaultBox.class);
   }
 
-  /**
-   * @return the DisabledBox
-   */
   public DisabledBox getDisabledBox() {
     return getFieldByClass(DisabledBox.class);
   }
 
-  /**
-   * @return the DisabledFrom
-   */
   public DisabledFrom getDisabledFrom() {
     return getFieldByClass(DisabledFrom.class);
   }
 
-  /**
-   * @return the DisabledTo
-   */
   public DisabledTo getDisabledTo() {
     return getFieldByClass(DisabledTo.class);
   }
 
-  /**
-   * @return the EmployeesField
-   */
   public EmployeesField getEmployeesField() {
     return getFieldByClass(EmployeesField.class);
   }
@@ -136,58 +122,34 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the FieldVisibilityBox
-   */
   public FieldVisibilityBox getFieldVisibilityBox() {
     return getFieldByClass(FieldVisibilityBox.class);
   }
 
-  /**
-   * @return the FirstNameField
-   */
   public FirstNameField getFirstNameField() {
     return getFieldByClass(FirstNameField.class);
   }
 
-  /**
-   * @return the FormResetButton
-   */
   public FormResetButton getFormResetButton() {
     return getFieldByClass(FormResetButton.class);
   }
 
-  /**
-   * @return the FromField
-   */
   public FromField getFromField() {
     return getFieldByClass(FromField.class);
   }
 
-  /**
-   * @return the FromToBox
-   */
   public FromToBox getFromToBox() {
     return getFieldByClass(FromToBox.class);
   }
 
-  /**
-   * @return the IconField
-   */
   public IconField getIconField() {
     return getFieldByClass(IconField.class);
   }
 
-  /**
-   * @return the IndustryField
-   */
   public IndustryField getIndustryField() {
     return getFieldByClass(IndustryField.class);
   }
 
-  /**
-   * @return the LastNameField
-   */
   public LastNameField getLastNameField() {
     return getFieldByClass(LastNameField.class);
   }
@@ -196,107 +158,62 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the CompanyField
-   */
   public CompanyField getCompanyField() {
     return getFieldByClass(CompanyField.class);
   }
 
-  /**
-   * @return the CompanySearchBox
-   */
   public CompanySearchBox getCompanySearchBox() {
     return getFieldByClass(CompanySearchBox.class);
   }
 
-  /**
-   * @return the CompanySearchButton
-   */
   public CompanySearchButton getCompanySearchButton() {
     return getFieldByClass(CompanySearchButton.class);
   }
 
-  /**
-   * @return the MandatoryBox
-   */
   public MandatoryBox getMandatoryBox() {
     return getFieldByClass(MandatoryBox.class);
   }
 
-  /**
-   * @return the MandatoryFrom
-   */
   public MandatoryFrom getMandatoryFrom() {
     return getFieldByClass(MandatoryFrom.class);
   }
 
-  /**
-   * @return the MandatoryTo
-   */
   public MandatoryTo getMandatoryTo() {
     return getFieldByClass(MandatoryTo.class);
   }
 
-  /**
-   * @return the HorizontalFieldGroupBox
-   */
   public HorizontalFieldGroupBox getHorizontalFieldGroupBox() {
     return getFieldByClass(HorizontalFieldGroupBox.class);
   }
 
-  /**
-   * @return the Placeholder1Field
-   */
   public Placeholder1Field getPlaceholder1Field() {
     return getFieldByClass(Placeholder1Field.class);
   }
 
-  /**
-   * @return the SearchBox
-   */
   public SearchBox getSearchBox() {
     return getFieldByClass(SearchBox.class);
   }
 
-  /**
-   * @return the SearchButton
-   */
   public SearchButton getSearchButton() {
     return getFieldByClass(SearchButton.class);
   }
 
-  /**
-   * @return the ToField
-   */
   public ToField getToField() {
     return getFieldByClass(ToField.class);
   }
 
-  /**
-   * @return the VisibleCompanyField
-   */
   public VisibleCompanyField getVisibleCompanyField() {
     return getFieldByClass(VisibleCompanyField.class);
   }
 
-  /**
-   * @return the VisibleMonthsField
-   */
   public VisibleEmployeeField getVisibleEmployeeField() {
     return getFieldByClass(VisibleEmployeeField.class);
   }
 
-  /**
-   * @return the VisibleCommentsField
-   */
   public VisibleIndustryField getVisibleIndustryField() {
     return getFieldByClass(VisibleIndustryField.class);
   }
 
-  /**
-   * @return the undefined
-   */
   public FromField getfromField() {
     return getFieldByClass(FromField.class);
   }
@@ -913,9 +830,9 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = BooleanUtility.nvl(getFieldByClass(VisibleSmartField.class).getValue());
+            boolean mandatory = BooleanUtility.nvl(getFieldByClass(MandatorySmartField.class).getValue());
+            boolean errorStatus = BooleanUtility.nvl(getFieldByClass(ErrorStatusSmartField.class).getValue());
 
             IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
@@ -1118,9 +1035,9 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = BooleanUtility.nvl(getFieldByClass(VisibleSmartField.class).getValue());
+            boolean mandatory = BooleanUtility.nvl(getFieldByClass(MandatorySmartField.class).getValue());
+            boolean errorStatus = BooleanUtility.nvl(getFieldByClass(ErrorStatusSmartField.class).getValue());
 
             IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
@@ -1338,9 +1255,9 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            boolean visible = defaultIfNull(getFieldByClass(VisibleSmartField.class).getValue(), false);
-            boolean mandatory = defaultIfNull(getFieldByClass(MandatorySmartField.class).getValue(), false);
-            boolean errorStatus = defaultIfNull(getFieldByClass(ErrorStatusSmartField.class).getValue(), false);
+            boolean visible = BooleanUtility.nvl(getFieldByClass(VisibleSmartField.class).getValue());
+            boolean mandatory = BooleanUtility.nvl(getFieldByClass(MandatorySmartField.class).getValue());
+            boolean errorStatus = BooleanUtility.nvl(getFieldByClass(ErrorStatusSmartField.class).getValue());
 
             IFormField field = getFieldByClass(WidgetSmartField.class).getValue();
             field.setVisible(visible);
@@ -1468,9 +1385,5 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
       return rows;
     }
-  }
-
-  private static <V> V defaultIfNull(V value, V defaultValue) {
-    return value != null ? value : defaultValue;
   }
 }

@@ -22,44 +22,26 @@ import org.eclipse.scout.rt.shared.TEXTS;
 @ClassId("4dba3948-7754-4a6d-a833-1c63b92a3b21")
 public abstract class AbstractMonthsBox extends AbstractGroupBox {
 
-  /**
-   * @return the AprilField
-   */
   public AprilField getAprilField() {
     return getFieldByClass(AprilField.class);
   }
 
-  /**
-   * @return the FebruaryField
-   */
   public FebruaryField getFebruaryField() {
     return getFieldByClass(FebruaryField.class);
   }
 
-  /**
-   * @return the JanuaryField
-   */
   public JanuaryField getJanuaryField() {
     return getFieldByClass(JanuaryField.class);
   }
 
-  /**
-   * @return the JuneField
-   */
   public JuneField getJuneField() {
     return getFieldByClass(JuneField.class);
   }
 
-  /**
-   * @return the MarchField
-   */
   public MarchField getMarchField() {
     return getFieldByClass(MarchField.class);
   }
 
-  /**
-   * @return the MayField
-   */
   public MayField getMayField() {
     return getFieldByClass(MayField.class);
   }

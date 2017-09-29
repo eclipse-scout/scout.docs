@@ -140,30 +140,18 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the FontField
-   */
   public FontNameField getFontNameField() {
     return getFieldByClass(FontNameField.class);
   }
 
-  /**
-   * @return the FontSizeField
-   */
   public FontSizeField getFontSizeField() {
     return getFieldByClass(FontSizeField.class);
   }
 
-  /**
-   * @return the FontStyleField
-   */
   public FontStyleField getFontStyleField() {
     return getFieldByClass(FontStyleField.class);
   }
 
-  /**
-   * @return the ForegroundColorField
-   */
   public ForegroundColorField getForegroundColorField() {
     return getFieldByClass(ForegroundColorField.class);
   }
@@ -172,9 +160,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(NumCharsField.class);
   }
 
-  /**
-   * @return the OnFieldLabelField
-   */
   public OnFieldLabelField getOnFieldLabelField() {
     return getFieldByClass(OnFieldLabelField.class);
   }
@@ -183,23 +168,14 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(InputMaskedField.class);
   }
 
-  /**
-   * @return the LabelCenterField
-   */
   public LabelCenterField getLabelCenterField() {
     return getFieldByClass(LabelCenterField.class);
   }
 
-  /**
-   * @return the LabelLeftField
-   */
   public LabelLeftField getLabelLeftField() {
     return getFieldByClass(LabelLeftField.class);
   }
 
-  /**
-   * @return the LabelRightField
-   */
   public LabelRightField getLabelRightField() {
     return getFieldByClass(LabelRightField.class);
   }
@@ -216,9 +192,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MandatoryField.class);
   }
 
-  /**
-   * @return the MaxLengthField
-   */
   public MaxLengthField getMaxLengthField() {
     return getFieldByClass(MaxLengthField.class);
   }
@@ -227,16 +200,10 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Placeholder1Field.class);
   }
 
-  /**
-   * @return the PlaceholderField
-   */
   public PlaceholderField getPlaceholderField() {
     return getFieldByClass(PlaceholderField.class);
   }
 
-  /**
-   * @return the SampleFormatButton
-   */
   public SampleFormatButton getSampleFormatButton() {
     return getFieldByClass(SampleFormatButton.class);
   }

@@ -106,23 +106,14 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     startInternal(new PageFormHandler());
   }
 
-  /**
-   * @return the BrowseAutoExpandAllField
-   */
   public BrowseAutoExpandAllField getBrowseAutoExpandAllField() {
     return getFieldByClass(BrowseAutoExpandAllField.class);
   }
 
-  /**
-   * @return the BrowseHierarchyField
-   */
   public BrowseHierarchyField getBrowseHierarchyField() {
     return getFieldByClass(BrowseHierarchyField.class);
   }
 
-  /**
-   * @return the BrowseMaxRowCountField
-   */
   public BrowseMaxRowCountField getBrowseMaxRowCountField() {
     return getFieldByClass(BrowseMaxRowCountField.class);
   }
@@ -132,9 +123,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(CloseButton.class);
   }
 
-  /**
-   * @return the DisabledSmartFieldField
-   */
   public DisabledSmartFieldField getDisabledSmartFieldField() {
     return getFieldByClass(DisabledSmartFieldField.class);
   }
@@ -143,9 +131,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(ExamplesBox.class);
   }
 
-  /**
-   * @return the DefaultField
-   */
   public DefaultField getDefaultField() {
     return getFieldByClass(DefaultField.class);
   }
@@ -154,16 +139,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(DisabledField.class);
   }
 
-  /**
-   * @return the MandatoryField
-   */
   public MandatoryField getMandatoryField() {
     return getFieldByClass(MandatoryField.class);
   }
 
-  /**
-   * @return the MandatorySmartfieldField
-   */
   public MandatorySmartfieldField getMandatorySmartfieldField() {
     return getFieldByClass(MandatorySmartfieldField.class);
   }
@@ -172,9 +151,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  /**
-   * @return the DefaultSmartField
-   */
   public DefaultSmartField getDefaultSmartField() {
     return getFieldByClass(DefaultSmartField.class);
   }
@@ -187,16 +163,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(MandatoryProposalField.class);
   }
 
-  /**
-   * @return the GetCheckedKeysField
-   */
   public GetValueField getGetValueField() {
     return getFieldByClass(GetValueField.class);
   }
 
-  /**
-   * @return the ListSmartField
-   */
   public ListSmartField getListSmartField() {
     return getFieldByClass(ListSmartField.class);
   }
@@ -205,16 +175,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the TreeEntriesField
-   */
   public ListEntriesField getListEntriesField() {
     return getFieldByClass(ListEntriesField.class);
   }
 
-  /**
-   * @return the TreeEntriesField
-   */
   public TreeEntriesField getTreeEntriesField() {
     return getFieldByClass(TreeEntriesField.class);
   }
@@ -235,16 +199,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(ProposalFieldWithListContentBox.class);
   }
 
-  /**
-   * @return the SampleContentButton
-   */
   public SampleContentButton getSampleContentButton() {
     return getFieldByClass(SampleContentButton.class);
   }
 
-  /**
-   * @return the TreeSmartField
-   */
   public TreeSmartField getTreeSmartField() {
     return getFieldByClass(TreeSmartField.class);
   }
@@ -605,7 +563,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
       }
-
     }
 
     @Order(20)
@@ -887,7 +844,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected int getConfiguredGridH() {
           return 6;
         }
-
       }
     }
 
@@ -948,7 +904,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             updateText();
           }
 
-          private void updateText() {
+          protected void updateText() {
             setText(TEXTS.get(m_active ? "DisableAutoPrefixWildcard" : "EnableAutoPrefixWildcard"));
           }
         }
@@ -1167,7 +1123,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           getDefaultField().setThrowVetoException(!isThrow);
         }
       }
-
     }
 
     @Order(40)
@@ -1187,7 +1142,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
   }
 
-  private void changeWildcard(String wildcard) {
+  protected void changeWildcard(String wildcard) {
     getDefaultField().setWildcard(wildcard);
     getMandatoryField().setWildcard(wildcard);
     getDefaultSmartField().setWildcard(wildcard);
@@ -1197,5 +1152,4 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     getListSmartField().setWildcard(wildcard);
     getTreeSmartField().setWildcard(wildcard);
   }
-
 }
