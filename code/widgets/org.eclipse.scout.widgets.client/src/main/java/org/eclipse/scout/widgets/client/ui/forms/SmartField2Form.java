@@ -75,6 +75,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.Example
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchValidateValueMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
@@ -87,8 +88,10 @@ import org.slf4j.LoggerFactory;
 public class SmartField2Form extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartField2Form.class);
+  private static final Locale ALBANIAN = new Locale("sq");
 
   private boolean m_localLookupCall = true;
+  private boolean m_validateValue = false;
 
   public SmartField2Form() {
     super();
@@ -306,6 +309,15 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
             if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
               ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
             }
+          }
+
+          @Override
+          protected Locale execValidateValue(Locale rawValue) {
+            Locale validValue = rawValue;
+            if (m_validateValue) {
+              validValue = ALBANIAN;
+            }
+            return validValue;
           }
 
           public void setThrowVetoException(boolean throwVetoException) {
@@ -1087,6 +1099,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         @Override
         protected void execAction() {
           setLocalLookupCall(true);
+          setValidateValue(false);
         }
       }
 
@@ -1118,7 +1131,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
       }
 
       @Order(70)
-      public class ToggleHierarchicalLookupMenu extends AbstractMenu {
+      public class SwitchHierarchicalLookupMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
@@ -1146,7 +1159,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
       }
 
       @Order(80)
-      public class ToggleExceptionOnLookupMenu extends AbstractMenu {
+      public class SwitchExceptionOnLookupMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
@@ -1171,6 +1184,25 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
       }
 
+      @Order(90)
+      public class SwitchValidateValueMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Set Locale 'ar' in validateValue";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Always set the value to Locale 'ar' in validateValue";
+        }
+
+        @Override
+        protected void execAction() {
+          setValidateValue(!m_validateValue);
+        }
+      }
+
     }
 
     @Order(40)
@@ -1188,6 +1220,12 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
     menu.setText(TEXTS.get(m_localLookupCall ? "SwitchToRemote" : "SwitchToLocal"));
     menu.setTooltipText(TEXTS.get(m_localLookupCall ? "SwitchToRemoteTooltip" : "SwitchToLocalTooltip"));
     LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
+  }
+
+  public void setValidateValue(boolean validateValue) {
+    m_validateValue = validateValue;
+    IMenu menu = getMainBox().getMenuByClass(SwitchValidateValueMenu.class);
+    menu.setText(validateValue ? "Do nothing in validateValue" : "Set Locale 'ar' in validateValue");
   }
 
   private void changeWildcard(String wildcard) {
