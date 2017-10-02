@@ -693,11 +693,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String validateValueInternal(String rawValue) {
+          protected String execValidateValue(String rawValue) {
             if (rawValue == null) {
               return getInitValue();
             }
-            return super.validateValueInternal(rawValue);
+            return rawValue;
           }
 
           @Override
@@ -818,11 +818,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String validateValueInternal(String rawValue) {
+          protected String execValidateValue(String rawValue) {
             if (rawValue == null) {
               return getInitValue();
             }
-            return super.validateValueInternal(rawValue);
+            return rawValue;
           }
         }
 
