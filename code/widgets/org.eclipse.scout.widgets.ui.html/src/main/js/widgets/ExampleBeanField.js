@@ -40,6 +40,7 @@ widgets.ExampleBeanField.prototype._renderValue = function() {
     .appendAppLink(this.value.appLink);
 
   $content.appendElement('<p>')
+    .appLink(this.value.appLink.ref)
     .appendElement('<img>')
     .attr('src', this.value.image)
     .addClass('example-bean-field-image');
