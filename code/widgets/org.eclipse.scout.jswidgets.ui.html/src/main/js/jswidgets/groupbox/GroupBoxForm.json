@@ -84,8 +84,8 @@
             "id": "LogicalGridField",
             "objectType": "SmartField",
             "label": "Logical Grid",
-            "lookupCall": "jswidgets.GroupBoxBodyGridLookupCall",
-            "tooltipText": "${textKey:GroupBoxLogicalGrid}"
+            "lookupCall": "jswidgets.LogicalGridLookupCall",
+            "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
           },
           {
             "id": "NotificationField",

@@ -53,10 +53,27 @@
         "objectType": "GroupBox",
         "label": "Properties",
         "fields": [
-      {
+          {
             "id": "GridColumnCountField",
             "objectType": "NumberField",
             "label": "Grid Column Count"
+          },
+          {
+            "id": "LogicalGridField",
+            "objectType": "SmartField",
+            "label": "Logical Grid",
+            "lookupCall": "jswidgets.LogicalGridLookupCall",
+            "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+          },
+          {
+            "id": "LogicalGridColumnWidthField",
+            "objectType": "NumberField",
+            "label": "Logical Grid Column Width"
+          },
+          {
+            "id": "LogicalGridRowHeightField",
+            "objectType": "NumberField",
+            "label": "Logical Grid Row Height"
           },
           {
             "id": "ColorSchemeField",

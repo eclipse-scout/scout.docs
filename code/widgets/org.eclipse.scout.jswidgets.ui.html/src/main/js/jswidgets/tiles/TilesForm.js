@@ -26,6 +26,18 @@ jswidgets.TilesForm.prototype._init = function(model) {
   gridColumnCountField.setValue(this.tiles.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
+  var logicalGridField = this.widget('LogicalGridField');
+  logicalGridField.setValue(this.tiles.logicalGrid ? this.tiles.logicalGrid.objectType : null);
+  logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
+
+  var logicalGridColumnWidthField = this.widget('LogicalGridColumnWidthField');
+  logicalGridColumnWidthField.setValue(this.tiles.logicalGridColumnWidth);
+  logicalGridColumnWidthField.on('propertyChange', this._onLogicalGridColumnWidthPropertyChange.bind(this));
+
+  var logicalGridRowHeightField = this.widget('LogicalGridRowHeightField');
+  logicalGridRowHeightField.setValue(this.tiles.logicalGridRowHeight);
+  logicalGridRowHeightField.on('propertyChange', this._onLogicalGridRowHeightPropertyChange.bind(this));
+
   var withPlaceholdersField = this.widget('WithPlaceholdersField');
   withPlaceholdersField.setValue(this.tiles.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
@@ -42,6 +54,24 @@ jswidgets.TilesForm.prototype._init = function(model) {
 jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.tiles.setGridColumnCount(event.newValue);
+  }
+};
+
+jswidgets.TilesForm.prototype._onLogicalGridChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setLogicalGrid(event.newValue);
+  }
+};
+
+jswidgets.TilesForm.prototype._onLogicalGridColumnWidthPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setLogicalGridColumnWidth(event.newValue);
+  }
+};
+
+jswidgets.TilesForm.prototype._onLogicalGridRowHeightPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setLogicalGridRowHeight(event.newValue);
   }
 };
 
