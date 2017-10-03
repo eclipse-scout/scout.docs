@@ -13,7 +13,6 @@ package org.eclipse.scout.contacts.shared.common;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 
-@FunctionalInterface
 @ApplicationScoped
 @TunnelToServer
 public interface IResetDataStoreService {
