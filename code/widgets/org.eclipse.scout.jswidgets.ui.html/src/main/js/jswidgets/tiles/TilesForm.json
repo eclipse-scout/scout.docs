@@ -76,6 +76,11 @@
             "label": "Logical Grid Row Height"
           },
           {
+            "id": "MaxContentWidthField",
+            "objectType": "NumberField",
+            "label": "Max Content Width"
+          },
+          {
             "id": "ColorSchemeField",
             "objectType": "SmartField",
             "label": "Color Scheme",
@@ -84,14 +89,20 @@
           {
             "id": "WithPlaceholdersField",
             "objectType": "CheckBoxField",
-            "labelVisible": false,
-            "label": "With Placeholders"
+            "label": "With Placeholders",
+            "labelVisible": false
           },
           {
             "id": "InvertColorsField",
             "objectType": "CheckBoxField",
-            "labelVisible": false,
-            "label": "Invert Colors"
+            "label": "Invert Colors",
+            "labelVisible": false
+          },
+          {
+            "id": "ScrollableField",
+            "objectType": "CheckBoxField",
+            "label": "Scrollable",
+            "labelVisible": false
           }
         ]
       }

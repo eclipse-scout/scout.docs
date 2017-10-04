@@ -38,6 +38,10 @@ jswidgets.TilesForm.prototype._init = function(model) {
   logicalGridRowHeightField.setValue(this.tiles.logicalGridRowHeight);
   logicalGridRowHeightField.on('propertyChange', this._onLogicalGridRowHeightPropertyChange.bind(this));
 
+  var maxContentWidthField = this.widget('MaxContentWidthField');
+  maxContentWidthField.setValue(this.tiles.maxContentWidth);
+  maxContentWidthField.on('propertyChange', this._onMaxContentWidthPropertyChange.bind(this));
+
   var withPlaceholdersField = this.widget('WithPlaceholdersField');
   withPlaceholdersField.setValue(this.tiles.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
@@ -49,6 +53,10 @@ jswidgets.TilesForm.prototype._init = function(model) {
   var invertColorsField = this.widget('InvertColorsField');
   invertColorsField.setValue(this.tiles.tiles[0].colorScheme.inverted);
   invertColorsField.on('propertyChange', this._onInvertColorsPropertyChange.bind(this));
+
+  var scrollableField = this.widget('ScrollableField');
+  scrollableField.setValue(this.tiles.scrollable);
+  scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 };
 
 jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
@@ -72,6 +80,12 @@ jswidgets.TilesForm.prototype._onLogicalGridColumnWidthPropertyChange = function
 jswidgets.TilesForm.prototype._onLogicalGridRowHeightPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.tiles.setLogicalGridRowHeight(event.newValue);
+  }
+};
+
+jswidgets.TilesForm.prototype._onMaxContentWidthPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setMaxContentWidth(event.newValue);
   }
 };
 
@@ -100,5 +114,11 @@ jswidgets.TilesForm.prototype._onInvertColorsPropertyChange = function(event) {
       });
       tile.setColorScheme(scheme);
     });
+  }
+};
+
+jswidgets.TilesForm.prototype._onScrollablePropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setScrollable(event.newValue);
   }
 };
