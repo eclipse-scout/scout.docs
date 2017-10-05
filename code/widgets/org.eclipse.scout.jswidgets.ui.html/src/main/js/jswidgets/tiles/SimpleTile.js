@@ -14,6 +14,10 @@ jswidgets.SimpleTile.prototype._renderProperties = function() {
   this._renderLabel();
 };
 
+jswidgets.SimpleTile.prototype.setLabel = function(label) {
+  this.setProperty('label', label);
+};
+
 jswidgets.SimpleTile.prototype._renderLabel = function() {
   this.$container.text(this.label);
 };

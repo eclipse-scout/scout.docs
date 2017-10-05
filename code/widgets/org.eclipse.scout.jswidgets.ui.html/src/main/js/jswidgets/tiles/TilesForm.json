@@ -99,10 +99,48 @@
             "labelVisible": false
           },
           {
+            "id": "SelectableField",
+            "objectType": "CheckBoxField",
+            "label": "Selectable",
+            "labelVisible": false
+          },
+          {
             "id": "ScrollableField",
             "objectType": "CheckBoxField",
             "label": "Scrollable",
             "labelVisible": false
+          }
+        ]
+      },
+      {
+        "id": "ActionsBox",
+        "objectType": "GroupBox",
+        "label": "Actions",
+        "fields": [
+          {
+            "id": "InsertButton",
+            "objectType": "Button",
+            "label": "Insert tile"
+          },
+          {
+            "id": "InsertManyButton",
+            "objectType": "Button",
+            "label": "Insert many tiles"
+          },
+          {
+            "id": "DeleteButton",
+            "objectType": "Button",
+            "label": "Delete selected tiles"
+          },
+          {
+            "id": "SelectNextButton",
+            "objectType": "Button",
+            "label": "Select next tile"
+          },
+          {
+            "id": "SelectAllButton",
+            "objectType": "Button",
+            "label": "Select all tiles"
           }
         ]
       }
