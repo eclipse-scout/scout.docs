@@ -173,7 +173,7 @@ jswidgets.TilesForm.prototype._onInsertManyButtonClick = function(event) {
 };
 
 jswidgets.TilesForm.prototype._onDeleteButtonClick = function(event) {
-  this.tiles.deleteTiles(this.tiles.selectedTiles());
+  this.tiles.deleteTiles(this.tiles.selectedTiles);
 };
 
 jswidgets.TilesForm.prototype._onSelectNextButtonClick = function(event) {
