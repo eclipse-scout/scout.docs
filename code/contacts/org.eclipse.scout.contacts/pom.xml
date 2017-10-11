@@ -23,12 +23,12 @@
 
   <properties>
     <jdk.source.version>1.8</jdk.source.version>
-    <org.eclipse.scout.rt.version>7.0.150-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>7.0.150.004_Oxygen_1a</org.eclipse.scout.rt.version>
   </properties>
 
   <groupId>org.eclipse.scout.contacts</groupId>
   <artifactId>org.eclipse.scout.contacts</artifactId>
-  <version>7.0.150-SNAPSHOT</version>
+  <version>7.0.150.004_Oxygen_1a</version>
   <packaging>pom</packaging>
   <name>Contacts Application</name>
 
