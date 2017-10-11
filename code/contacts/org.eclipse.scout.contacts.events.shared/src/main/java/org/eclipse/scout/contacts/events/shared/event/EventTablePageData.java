@@ -58,6 +58,7 @@ public class EventTablePageData extends AbstractTablePageData {
     public static final String starts = "starts";
     public static final String ends = "ends";
     public static final String city = "city";
+    public static final String country = "country";
     public static final String homepage = "homepage";
     public static final String participants = "participants";
     private String m_eventId;
@@ -65,6 +66,7 @@ public class EventTablePageData extends AbstractTablePageData {
     private Date m_starts;
     private Date m_ends;
     private String m_city;
+    private String m_country;
     private String m_homepage;
     private Integer m_participants;
 
@@ -106,6 +108,14 @@ public class EventTablePageData extends AbstractTablePageData {
 
     public void setCity(String newCity) {
       m_city = newCity;
+    }
+
+    public String getCountry() {
+      return m_country;
+    }
+
+    public void setCountry(String newCountry) {
+      m_country = newCountry;
     }
 
     public String getHomepage() {
