@@ -45,7 +45,6 @@ import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.ActivityMapMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -471,7 +470,6 @@ public class EventForm extends AbstractForm {
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
                 return CollectionUtility.<IMenuType> hashSet(
                     TreeMenuType.SingleSelection,
-                    ActivityMapMenuType.Activity,
                     TableMenuType.MultiSelection,
                     TableMenuType.SingleSelection,
                     ValueFieldMenuType.NotNull);
