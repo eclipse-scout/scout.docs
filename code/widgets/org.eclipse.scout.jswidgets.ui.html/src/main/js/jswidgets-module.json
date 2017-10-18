@@ -6,6 +6,7 @@
     "jswidgets/form/FormForm.json",
     "jswidgets/form/LifecycleForm.json",
     "jswidgets/formfield/FormFieldPropertiesBox.json",
+    "jswidgets/custom/CustomFieldForm.json",
     "jswidgets/datefield/DateFieldForm.json",
     "jswidgets/groupbox/GroupBoxForm.json",
     "jswidgets/logicalgrid/GridDataBox.json",

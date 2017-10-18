@@ -20,6 +20,9 @@
   __include("jswidgets/formfield/ClearableStyleLookupCall.js");
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
+  __include("jswidgets/custom/CustomFieldForm.js");
+  __include("jswidgets/custom/WatchField.js");
+  __include("jswidgets/custom/WatchFieldLayout.js");
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
   __include("jswidgets/desktop/ServerStatusMenu.js");

@@ -1,0 +1,30 @@
+{
+  "id": "jswidgets.CustomFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "WatchField",
+            "objectType": "jswidgets.WatchField",
+            "label": "Watch",
+            "gridDataHints": {
+              "h": 5
+            }
+          }
+        ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      }
+    ]
+  }
+}
