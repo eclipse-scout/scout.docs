@@ -5,5 +5,15 @@
     "type": "model",
     "outline": {
       "objectType": "jswidgets.WidgetsOutline"
-    }
+    },
+    "menus": [
+      {
+        "id": "jswidgets.ServerStatusMenu",
+        "text": "OnOff",
+        "objectType": "jswidgets.ServerStatusMenu",
+        "type": "model",
+        "cssClass": "server-status"
+      }
+    ]
+
 }

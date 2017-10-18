@@ -45,6 +45,7 @@
     <module>../org.eclipse.scout.widgets.old.shared</module>
 
     <!-- Scout JS widgets -->
+    <module>../org.eclipse.scout.jswidgets.rest</module>
     <module>../org.eclipse.scout.jswidgets.ui.html</module>
     <module>../org.eclipse.scout.jswidgets.ui.html.app</module>
     <module>../org.eclipse.scout.jswidgets.ui.html.app.dev</module>
@@ -110,6 +111,11 @@
       <dependency>
         <groupId>org.eclipse.scout.widgets</groupId>
         <artifactId>org.eclipse.scout.jswidgets.ui.html</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.scout.widgets</groupId>
+        <artifactId>org.eclipse.scout.jswidgets.rest</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

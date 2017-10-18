@@ -22,6 +22,7 @@
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
+  __include("jswidgets/desktop/ServerStatusMenu.js");
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
   __include("jswidgets/groupbox/GroupBoxFieldsLookupCall.js");

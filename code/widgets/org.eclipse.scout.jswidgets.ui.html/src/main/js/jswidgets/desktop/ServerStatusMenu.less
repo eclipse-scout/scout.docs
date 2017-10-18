@@ -1,0 +1,23 @@
+.menu-item.server-status {
+
+  & > .icon {
+    font-size: large;
+  }
+
+  &.ok {
+    & > .icon {
+      color: green;
+    }
+  }
+
+  &.error {
+    & > .icon {
+      color: red;
+    }
+  }
+}
+
+/* override */
+.desktop-tool-box-item.menu-item.menu-textandicon > .icon {
+  padding-right: 0;
+}

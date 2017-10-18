@@ -28,5 +28,9 @@
       <groupId>org.eclipse.scout.widgets</groupId>
       <artifactId>org.eclipse.scout.jswidgets.ui.html</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.widgets</groupId>
+      <artifactId>org.eclipse.scout.jswidgets.rest</artifactId>
+    </dependency>
   </dependencies>
 </project>
