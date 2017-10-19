@@ -16,11 +16,6 @@ scout.inherits(jswidgets.CustomFieldForm, scout.Form);
 jswidgets.CustomFieldForm.prototype._init = function(model) {
   jswidgets.CustomFieldForm.parent.prototype._init.call(this, model);
   var watchField = this.widget('WatchField');
-//  tabBox.on('propertyChange', this._onFieldPropertyChange.bind(this));
-
-//  var selectedTabField = this.widget('SelectedTabField');
-//  selectedTabField.setValue(tabBox.selectedTab.id);
-//  selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(watchField);
 };

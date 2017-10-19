@@ -5,9 +5,20 @@ jswidgets.WatchFieldLayout = function(watchField) {
 scout.inherits(jswidgets.WatchFieldLayout, scout.NullLayout);
 
 jswidgets.WatchFieldLayout.prototype.layout = function($container) {
-  var size = Math.min($container.height(), $container.width());
-  this.watchField.$canvas.prop('width', size);
-  this.watchField.$canvas.prop('height', size);
+  var containerHeight = $container.height(),
+    containerWidth = $container.width(),
+    size = Math.min(containerHeight, containerWidth),
+    $canvas = this.watchField.$canvas;
+  // set width and height
+  $canvas.prop('width', size);
+  $canvas.prop('height', size);
+  // set css size and position
+  $canvas
+    .cssTop((containerHeight - size) / 2)
+    .cssRight((containerWidth - size) / 2)
+    .cssHeight(size)
+    .cssWidth(size);
+
   this.watchField._paintWatch();
   jswidgets.WatchFieldLayout.parent.prototype.layout.call(this, $container);
 };

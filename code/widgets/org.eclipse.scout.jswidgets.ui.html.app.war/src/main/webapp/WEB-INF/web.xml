@@ -22,10 +22,27 @@
     <servlet-class>org.eclipse.scout.rt.ui.html.UiServlet</servlet-class>
   </servlet>
 
+  <!-- JAX-RS Jersey Servlet -->
+  <servlet>
+    <servlet-name>apiServlet</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>UiServlet</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>apiServlet</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <!-- Session timeout in minutes -->

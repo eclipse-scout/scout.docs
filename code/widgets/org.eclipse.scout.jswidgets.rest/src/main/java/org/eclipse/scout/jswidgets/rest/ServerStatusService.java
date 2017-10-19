@@ -29,6 +29,6 @@ public class ServerStatusService implements IRestResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Status getStatus() {
-    return new Status(IStatus.OK);
+    return new Status("Server is up and running", IStatus.OK);
   }
 }

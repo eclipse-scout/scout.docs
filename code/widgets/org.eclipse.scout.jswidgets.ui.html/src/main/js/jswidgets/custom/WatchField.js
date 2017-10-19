@@ -46,8 +46,8 @@ jswidgets.WatchField.prototype._paintBackground = function(context, radius) {
   var strokeStyle;
 
   context.beginPath();
-  context.arc(0, 0, radius, 0, 2 * Math.PI);
   context.fillStyle = 'white';
+  context.arc(0, 0, radius, 0, 2 * Math.PI);
   context.fill();
   strokeStyle = context.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
   strokeStyle.addColorStop(0, 'white');
@@ -63,10 +63,10 @@ jswidgets.WatchField.prototype._paintNumbers = function(context, radius) {
   var ang;
   var hour;
   context.font = radius * 0.15 + "px arial";
-  context.textBaseline = "middle";
-  context.textAlign = "center";
   context.fillStyle = '#014786';
   context.strokeStyle = '#014786';
+  context.textAlign = "center";
+  context.textBaseline = "middle";
   for (hour = 1; hour <= 12; hour++) {
     ang = hour * 2*Math.PI / 12;
     context.rotate(ang);
@@ -99,17 +99,17 @@ jswidgets.WatchField.prototype._paintTime = function(context, radius) {
   secondAngle = (2 * Math.PI / 60 * second);
 
   // paint hour line
-  this._paintLine(context, hourAngle, radius * 0.05, radius * 0.6, radius * 0.05);
+  this._paintLine(context, hourAngle, 0, radius * 0.6, radius * 0.04);
   //minute
-  this._paintLine(context, minuteAngle, radius * 0.05, radius * 0.8, radius * 0.04);
+  this._paintLine(context, minuteAngle, 0, radius * 0.8, radius * 0.04);
   // second
   this._paintLine(context, secondAngle, radius * 0.7, radius * 1, radius * 0.02);
 };
 
 jswidgets.WatchField.prototype._paintLine = function(context, angle, begin,  length, width) {
   context.beginPath();
-  context.lineWidth = width;
   context.strokeStyle = '#014786';
+  context.lineWidth = width;
   context.lineCap = "round";
   context.rotate(angle);
   context.moveTo(0, -begin);
