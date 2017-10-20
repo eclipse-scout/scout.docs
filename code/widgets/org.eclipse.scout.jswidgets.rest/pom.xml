@@ -15,6 +15,7 @@
   <properties>
     <org.glassfish.jersey.version>2.25.1</org.glassfish.jersey.version>
   </properties>
+
   <dependencies>
     <!-- Scout RS -->
     <dependency>
