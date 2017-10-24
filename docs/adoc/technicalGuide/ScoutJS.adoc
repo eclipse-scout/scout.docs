@@ -258,6 +258,8 @@ button.setSelected(true);
 ----
 
 ==== Icons
+See chapter <<Icons>> for a general introduction to icons in Scout.
+
 Widgets that have a property `iconId` (for instance `Menu`) can display an icon. This iconId references
 an icon which can be either a bitmap image (GIF, PNG, JPEG, etc.) or a character from an icon-font. An example
 for an icon-font is the _scoutIcons.ttf_ which comes shipped with Scout.
@@ -543,5 +545,3 @@ build the model manually. Here's how to use the export feature:
   ** Remove unused menu types from the menuTypes property of a scout.Menu
 
 Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.
-
-
