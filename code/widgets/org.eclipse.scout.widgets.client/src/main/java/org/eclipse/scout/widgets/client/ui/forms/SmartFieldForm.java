@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.scout.rt.client.context.ClientRunContexts;
+import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -37,6 +39,8 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.context.RunContext;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -66,17 +70,17 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.DefaultProposalField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.ProposalFieldWithListContentBox.MandatoryProposalField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DefaultSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.MandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListGroupBox.SmartFieldWithCustomTableField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DefaultSmartField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DefaultTreeSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledTreeSmartField;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatoryTreeSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SwitchValidateValueMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.SwitchLookupCallMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.SwitchValidateValueMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
@@ -126,16 +130,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(CloseButton.class);
   }
 
-  public DisabledSmartFieldField getDisabledSmartFieldField() {
-    return getFieldByClass(DisabledSmartFieldField.class);
+  public DisabledTreeSmartField getDisabledTreeSmartField() {
+    return getFieldByClass(DisabledTreeSmartField.class);
   }
 
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
   }
 
-  public DefaultField getDefaultField() {
-    return getFieldByClass(DefaultField.class);
+  public DefaultSmartField getDefaultSmartField() {
+    return getFieldByClass(DefaultSmartField.class);
   }
 
   public DisabledField getDisabledField() {
@@ -146,16 +150,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(MandatoryField.class);
   }
 
-  public MandatorySmartfieldField getMandatorySmartfieldField() {
-    return getFieldByClass(MandatorySmartfieldField.class);
+  public MandatoryTreeSmartField getMandatoryTreeSmartField() {
+    return getFieldByClass(MandatoryTreeSmartField.class);
   }
 
   public ConfigurationBox getConfigurationBox() {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  public DefaultSmartField getDefaultSmartField() {
-    return getFieldByClass(DefaultSmartField.class);
+  public DefaultTreeSmartField getDefaultTreeSmartField() {
+    return getFieldByClass(DefaultTreeSmartField.class);
   }
 
   public DefaultProposalField getDefaultProposalField() {
@@ -245,7 +249,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
-        public class DefaultField extends AbstractSmartField<Locale> {
+        public class DefaultSmartField extends AbstractSmartField<Locale> {
 
           private boolean m_throwVetoException = false;
 
@@ -372,7 +376,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           protected boolean isDropdown() {
-            return ISmartField.DISPLAY_STYLE_DROPDOWN.equals(getDefaultField().getDisplayStyle());
+            return ISmartField.DISPLAY_STYLE_DROPDOWN.equals(getDefaultSmartField().getDisplayStyle());
           }
 
           @Override
@@ -382,7 +386,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execChangedValue() {
-            getDefaultField().setDisplayStyle(getValue() ? ISmartField.DISPLAY_STYLE_DROPDOWN : ISmartField.DISPLAY_STYLE_DEFAULT);
+            getDefaultSmartField().setDisplayStyle(getValue() ? ISmartField.DISPLAY_STYLE_DROPDOWN : ISmartField.DISPLAY_STYLE_DEFAULT);
           }
         }
       }
@@ -406,7 +410,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(70)
-        public class DefaultSmartField extends AbstractSmartField<Long> {
+        public class DefaultTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -438,7 +442,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(80)
-        public class MandatorySmartfieldField extends AbstractSmartField<Long> {
+        public class MandatoryTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -457,7 +461,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(90)
-        public class DisabledSmartFieldField extends AbstractSmartField<Long> {
+        public class DisabledTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
           protected boolean getConfiguredEnabled() {
@@ -490,12 +494,12 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execInitField() {
-            setValue(getDefaultSmartField().isBrowseLoadIncremental());
+            setValue(getDefaultTreeSmartField().isBrowseLoadIncremental());
           }
 
           @Override
           protected void execChangedValue() {
-            getDefaultSmartField().setBrowseLoadIncremental(getValue());
+            getDefaultTreeSmartField().setBrowseLoadIncremental(getValue());
           }
         }
       }
@@ -885,163 +889,312 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         return TEXTS.get("Selenium");
       }
 
-      @Order(10)
-      public class WildcardMenu extends AbstractMenu {
+      @Order(100)
+      @ClassId("5143086a-d88d-419a-8df6-b6b91d56eb38")
+      public class SmartFieldTestMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("Wildcard");
+          return "SmartField";
         }
 
         @Order(10)
-        public class AutoPrefixWildcardMenu extends AbstractMenu {
-
-          private boolean m_active;
-
-          @Override
-          protected void execInitAction() {
-            m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
-            updateText();
-          }
+        public class WildcardMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("EnableAutoPrefixWildcard");
+            return TEXTS.get("Wildcard");
           }
 
-          @Override
-          protected void execAction() {
-            m_active = !m_active;
-            ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
-            updateText();
+          @Order(10)
+          public class AutoPrefixWildcardMenu extends AbstractMenu {
+
+            private boolean m_active;
+
+            @Override
+            protected void execInitAction() {
+              m_active = ClientSessionProvider.currentSession().getDesktop().isAutoPrefixWildcardForTextSearch();
+              updateText();
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("EnableAutoPrefixWildcard");
+            }
+
+            @Override
+            protected void execAction() {
+              m_active = !m_active;
+              ClientSessionProvider.currentSession().getDesktop().setAutoPrefixWildcardForTextSearch(m_active);
+              updateText();
+            }
+
+            protected void updateText() {
+              setText(TEXTS.get(m_active ? "DisableAutoPrefixWildcard" : "EnableAutoPrefixWildcard"));
+            }
           }
 
-          protected void updateText() {
-            setText(TEXTS.get(m_active ? "DisableAutoPrefixWildcard" : "EnableAutoPrefixWildcard"));
+          @Order(20)
+          public class ChangeWildcard1Menu extends AbstractMenu {
+            @Override
+            protected void execAction() {
+              changeWildcard("*");
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ChangeWildcard", "*");
+            }
+          }
+
+          @Order(30)
+          public class ChangeWildcard2Menu extends AbstractMenu {
+            @Override
+            protected void execAction() {
+              changeWildcard(".*");
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ChangeWildcard", ".*");
+            }
+          }
+
+          @Order(40)
+          public class ChangeWildcard3Menu extends AbstractMenu {
+            @Override
+            protected void execAction() {
+              changeWildcard("\\");
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ChangeWildcard", "\\");
+            }
+          }
+
+          @Order(50)
+          public class ChangeWildcard4Menu extends AbstractMenu {
+            @Override
+            protected void execAction() {
+              changeWildcard("°");
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ChangeWildcard", "°");
+            }
           }
         }
 
         @Order(20)
-        public class ChangeWildcard1Menu extends AbstractMenu {
-          @Override
-          protected void execAction() {
-            changeWildcard("*");
-          }
+        public class ShowSmartFieldValueMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("ChangeWildcard", "*");
+            return TEXTS.get("ShowValue", "Smart field");
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("ShowValueOfDefaultField", "Smart field");
+          }
+
+          @Override
+          protected void execAction() {
+            MessageBoxes.createOk().withBody(getDefaultSmartField().getValue() + "").show();
+          }
+
+          @Override
+          protected String getConfiguredKeyStroke() {
+            return "Ctrl-Alt-P";
           }
         }
 
         @Order(30)
-        public class ChangeWildcard2Menu extends AbstractMenu {
-          @Override
-          protected void execAction() {
-            changeWildcard(".*");
-          }
+        public class SwitchLookupCallMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("ChangeWildcard", ".*");
+            return TEXTS.get("SwitchToRemote");
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("SwitchToRemoteTooltip");
+          }
+
+          @Override
+          protected void execAction() {
+            setLocalLookupCall(!m_localLookupCall);
           }
         }
 
-        @Order(40)
-        public class ChangeWildcard3Menu extends AbstractMenu {
-          @Override
-          protected void execAction() {
-            changeWildcard("\\");
-          }
-
-          @Override
-          protected String getConfiguredText() {
-            return TEXTS.get("ChangeWildcard", "\\");
-          }
-        }
-
-        @Order(50)
-        public class ChangeWildcard4Menu extends AbstractMenu {
-          @Override
-          protected void execAction() {
-            changeWildcard("°");
-          }
+        @Order(60)
+        public class ThrottleSmartFieldMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("ChangeWildcard", "°");
+            return TEXTS.get("ThrottleSmartFieldRequests");
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+          }
+
+          @Override
+          protected void execAction() {
+            boolean throttled = getListSmartField().toggleThrottle();
+            if (throttled) {
+              setText(TEXTS.get("NoThrottling"));
+              setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
+            }
+            else {
+              setText(TEXTS.get("ThrottleSmartFieldRequests"));
+              setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
+            }
+          }
+        }
+
+        @Order(80)
+        public class SwitchExceptionOnLookupMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Throw VetoException on lookup";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "DefaultSmartField throws a VetoException on every lookup";
+          }
+
+          @Override
+          protected void execAction() {
+            boolean isThrow = getDefaultSmartField().isThrowVetoException();
+            if (isThrow) {
+              setText("Throw VetoException on lookup");
+            }
+            else {
+              setText("Don't throw VetoException on lookup");
+            }
+            getDefaultSmartField().setThrowVetoException(!isThrow);
+          }
+        }
+
+        @Order(90)
+        public class SwitchValidateValueMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Set Locale 'ar' in validateValue";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Always set the value to Locale 'ar' in validateValue";
+          }
+
+          @Override
+          protected void execAction() {
+            setValidateValue(!m_validateValue);
+          }
+        }
+
+        @Order(100)
+        @ClassId("5f21c48b-433a-4743-b671-76982d01e3ef")
+        public class RequestInputMenu extends AbstractMenu {
+          @Override
+          protected String getConfiguredText() {
+            return "Request input in 2 secs.";
+          }
+
+          @Override
+          protected void execAction() {
+            Jobs.schedule(() -> {
+              SleepUtil.sleepSafe(2, TimeUnit.SECONDS);
+              ModelJobs.schedule(() -> {
+                getDefaultSmartField().requestInput();
+              }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+            }, Jobs.newInput().withRunContext(RunContext.CURRENT.get().copy()));
           }
         }
       }
 
-      @Order(20)
-      public class ShowSmartFieldValueMenu extends AbstractMenu {
+      @Order(200)
+      @ClassId("7b3bc826-de45-4076-925e-4523ff89fca2")
+      public class ProposalFieldTestMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("ShowValue", "Smart field");
+          return "ProposalField";
         }
 
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ShowValueOfDefaultField", "Smart field");
-        }
+        @Order(30)
+        public class ShowProposalFieldValueMenu extends AbstractMenu {
 
-        @Override
-        protected void execAction() {
-          MessageBoxes.createOk().withBody(getDefaultField().getValue() + "").show();
-        }
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("ShowValue", "Proposal field");
+          }
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-          return "Ctrl-Alt-P";
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("ShowValueOfDefaultField", "Proposal field");
+          }
+
+          @Override
+          protected void execAction() {
+            MessageBoxes.createOk().withBody(getDefaultProposalField().getValue() + "").show();
+          }
+
+          @Override
+          protected String getConfiguredKeyStroke() {
+            return "Ctrl-Alt-Q";
+          }
         }
       }
 
-      @Order(30)
-      public class ShowProposalFieldValueMenu extends AbstractMenu {
+      @Order(300)
+      @ClassId("9d4c6d2f-425c-4610-abdd-f3935549a360")
+      public class TreeSmartFieldTestMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("ShowValue", "Proposal field");
+          return "TreeSmartField";
         }
 
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ShowValueOfDefaultField", "Proposal field");
-        }
+        @Order(70)
+        public class SwitchHierarchicalLookupMenu extends AbstractMenu {
 
-        @Override
-        protected void execAction() {
-          MessageBoxes.createOk().withBody(getDefaultProposalField().getValue() + "").show();
-        }
+          @Override
+          protected String getConfiguredText() {
+            return TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall");
+          }
 
-        @Override
-        protected String getConfiguredKeyStroke() {
-          return "Ctrl-Alt-Q";
-        }
-      }
+          @Override
+          protected String getConfiguredTooltipText() {
+            return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+          }
 
-      @Order(40)
-      public class SwitchLookupCallMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("SwitchToRemote");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("SwitchToRemoteTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          setLocalLookupCall(!m_localLookupCall);
+          @Override
+          protected void execAction() {
+            ILookupCall<Long> lookupCall = getDefaultTreeSmartField().getLookupCall();
+            getDefaultTreeSmartField().setValue(null);
+            if (lookupCall instanceof HierarchicalLookupCall) {
+              setText(TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall"));
+              getDefaultTreeSmartField().setCodeTypeClass(IndustryICBCodeType.class);
+            }
+            else {
+              setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
+              getDefaultTreeSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
+            }
+          }
         }
       }
 
-      @Order(50)
+      @Order(400)
       public class SeleniumResetMenu extends AbstractMenu {
 
         @Override
@@ -1053,106 +1206,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected void execAction() {
           setLocalLookupCall(true);
           setValidateValue(false);
-        }
-      }
-
-      @Order(60)
-      public class ThrottleSmartFieldMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("ThrottleSmartFieldRequests");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          boolean throttled = getListSmartField().toggleThrottle();
-          if (throttled) {
-            setText(TEXTS.get("NoThrottling"));
-            setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
-          }
-          else {
-            setText(TEXTS.get("ThrottleSmartFieldRequests"));
-            setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
-          }
-        }
-      }
-
-      @Order(70)
-      public class SwitchHierarchicalLookupMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall");
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
-        }
-
-        @Override
-        protected void execAction() {
-          ILookupCall<Long> lookupCall = getDefaultSmartField().getLookupCall();
-          getDefaultSmartField().setValue(null);
-          if (lookupCall instanceof HierarchicalLookupCall) {
-            setText(TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall"));
-            getDefaultSmartField().setCodeTypeClass(IndustryICBCodeType.class);
-          }
-          else {
-            setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
-            getDefaultSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
-          }
-        }
-      }
-
-      @Order(80)
-      public class SwitchExceptionOnLookupMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return "Throw VetoException on lookup";
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return "DefaultSmartField throws a VetoException on every lookup";
-        }
-
-        @Override
-        protected void execAction() {
-          boolean isThrow = getDefaultField().isThrowVetoException();
-          if (isThrow) {
-            setText("Throw VetoException on lookup");
-          }
-          else {
-            setText("Don't throw VetoException on lookup");
-          }
-          getDefaultField().setThrowVetoException(!isThrow);
-        }
-      }
-
-      @Order(90)
-      public class SwitchValidateValueMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return "Set Locale 'ar' in validateValue";
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return "Always set the value to Locale 'ar' in validateValue";
-        }
-
-        @Override
-        protected void execAction() {
-          setValidateValue(!m_validateValue);
         }
       }
     }
@@ -1168,7 +1221,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   public void setLocalLookupCall(boolean localLookupCall) {
     m_localLookupCall = localLookupCall;
     IMenu menu = getMainBox().getMenuByClass(SwitchLookupCallMenu.class);
-    getDefaultField().setLookupCall(m_localLookupCall ? new LocaleLookupCall() : new RemoteLocaleLookupCall());
+    getDefaultSmartField().setLookupCall(m_localLookupCall ? new LocaleLookupCall() : new RemoteLocaleLookupCall());
     menu.setText(TEXTS.get(m_localLookupCall ? "SwitchToRemote" : "SwitchToLocal"));
     menu.setTooltipText(TEXTS.get(m_localLookupCall ? "SwitchToRemoteTooltip" : "SwitchToLocalTooltip"));
     LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
@@ -1181,13 +1234,18 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   protected void changeWildcard(String wildcard) {
-    getDefaultField().setWildcard(wildcard);
-    getMandatoryField().setWildcard(wildcard);
     getDefaultSmartField().setWildcard(wildcard);
-    getMandatorySmartfieldField().setWildcard(wildcard);
+    getMandatoryField().setWildcard(wildcard);
+    getDefaultTreeSmartField().setWildcard(wildcard);
+    getMandatoryTreeSmartField().setWildcard(wildcard);
     getDefaultProposalField().setWildcard(wildcard);
     getMandatoryProposalField().setWildcard(wildcard);
     getListSmartField().setWildcard(wildcard);
     getTreeSmartField().setWildcard(wildcard);
+  }
+
+  @Override
+  protected void execFormActivated() {
+    getDefaultSmartField().requestFocus();
   }
 }
