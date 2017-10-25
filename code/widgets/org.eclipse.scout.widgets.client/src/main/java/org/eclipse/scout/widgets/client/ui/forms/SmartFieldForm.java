@@ -20,7 +20,6 @@ import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.ColumnDescriptor;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -79,24 +78,24 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledTreeSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatoryTreeSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.SwitchLookupCallMenu;
-import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.SwitchValidateValueMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleExceptionOnLookupMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleLookupCallMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleRequestInputMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleThrottleSmartFieldMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleValidateValueMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.TreeSmartFieldTestMenu.ToggleHierarchicalLookupMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Order(3000.0)
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SmartFieldForm.class);
   private static final Locale ALBANIAN = new Locale("sq");
 
-  private boolean m_localLookupCall = true;
-  private boolean m_validateValue = false;
+  private boolean m_requestInput = false;
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -252,6 +251,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         public class DefaultSmartField extends AbstractSmartField<Locale> {
 
           private boolean m_throwVetoException = false;
+          private boolean m_validateValue = false;
 
           @Override
           protected String getConfiguredLabel() {
@@ -283,10 +283,9 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             m_throwVetoException = throwVetoException;
           }
 
-          public boolean isThrowVetoException() {
-            return m_throwVetoException;
+          public void setValidateValue(boolean validateValue) {
+            m_validateValue = validateValue;
           }
-
         }
 
         @Order(40)
@@ -597,7 +596,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       @Order(10)
       public class ListSmartField extends AbstractSmartField<String> {
 
-        private boolean m_throttled = false;
+        private boolean m_throttleActive = false;
 
         @Override
         protected String getConfiguredLabel() {
@@ -611,7 +610,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execPrepareLookup(ILookupCall<String> call) {
-          if (m_throttled) {
+          if (m_throttleActive) {
             SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
           }
           super.execPrepareLookup(call);
@@ -619,15 +618,14 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          if (m_throttled) {
+          if (m_throttleActive) {
             SleepUtil.sleepSafe(1, TimeUnit.SECONDS);
           }
           super.execChangedValue();
         }
 
-        public boolean toggleThrottle() {
-          m_throttled = !m_throttled;
-          return m_throttled;
+        public void setThrottleActive(boolean throttleActive) {
+          m_throttleActive = throttleActive;
         }
 
       }
@@ -988,16 +986,11 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(20)
-        public class ShowSmartFieldValueMenu extends AbstractMenu {
+        public class ShowDefaultSmartFieldValueMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("ShowValue", "Smart field");
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return TEXTS.get("ShowValueOfDefaultField", "Smart field");
+            return "Show value of DefaultSmartField";
           }
 
           @Override
@@ -1012,97 +1005,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
-        public class SwitchLookupCallMenu extends AbstractMenu {
-
-          @Override
-          protected String getConfiguredText() {
-            return TEXTS.get("SwitchToRemote");
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return TEXTS.get("SwitchToRemoteTooltip");
-          }
-
-          @Override
-          protected void execAction() {
-            setLocalLookupCall(!m_localLookupCall);
-          }
-        }
-
-        @Order(60)
-        public class ThrottleSmartFieldMenu extends AbstractMenu {
-
-          @Override
-          protected String getConfiguredText() {
-            return TEXTS.get("ThrottleSmartFieldRequests");
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
-          }
-
-          @Override
-          protected void execAction() {
-            boolean throttled = getListSmartField().toggleThrottle();
-            if (throttled) {
-              setText(TEXTS.get("NoThrottling"));
-              setTooltipText(TEXTS.get("NoThrottlingSmartFieldRequestsTooltip"));
-            }
-            else {
-              setText(TEXTS.get("ThrottleSmartFieldRequests"));
-              setTooltipText(TEXTS.get("ThrottleSmartFieldRequestsTooltip"));
-            }
-          }
-        }
-
-        @Order(80)
-        public class SwitchExceptionOnLookupMenu extends AbstractMenu {
-
-          @Override
-          protected String getConfiguredText() {
-            return "Throw VetoException on lookup";
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return "DefaultSmartField throws a VetoException on every lookup";
-          }
-
-          @Override
-          protected void execAction() {
-            boolean isThrow = getDefaultSmartField().isThrowVetoException();
-            if (isThrow) {
-              setText("Throw VetoException on lookup");
-            }
-            else {
-              setText("Don't throw VetoException on lookup");
-            }
-            getDefaultSmartField().setThrowVetoException(!isThrow);
-          }
-        }
-
-        @Order(90)
-        public class SwitchValidateValueMenu extends AbstractMenu {
-
-          @Override
-          protected String getConfiguredText() {
-            return "Set Locale 'ar' in validateValue";
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return "Always set the value to Locale 'ar' in validateValue";
-          }
-
-          @Override
-          protected void execAction() {
-            setValidateValue(!m_validateValue);
-          }
-        }
-
-        @Order(100)
         @ClassId("5f21c48b-433a-4743-b671-76982d01e3ef")
         public class RequestInputMenu extends AbstractMenu {
           @Override
@@ -1120,6 +1022,106 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             }, Jobs.newInput().withRunContext(RunContext.CURRENT.get().copy()));
           }
         }
+
+        @Order(40)
+        public class ToggleLookupCallMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Use remote lookup call";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "When active DefaultSmartField uses a remote lookup-call instead of a local lookup-call";
+          }
+
+          @Override
+          protected void execToggleActive() {
+            getDefaultSmartField().setLookupCall(new RemoteLocaleLookupCall());
+          }
+
+          @Override
+          protected void execToggleInactive() {
+            getDefaultSmartField().setLookupCall(new LocaleLookupCall());
+          }
+        }
+
+        @Order(50)
+        public class ToggleThrottleSmartFieldMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Simulate slow connection";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Lookups on the ListSmartField are delayed by 1 second";
+          }
+
+          @Override
+          protected void execAlways() {
+            getListSmartField().setThrottleActive(isActive());
+          }
+        }
+
+        @Order(60)
+        public class ToggleExceptionOnLookupMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Throw VetoException on lookup";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "DefaultSmartField throws a VetoException on every lookup";
+          }
+
+          @Override
+          protected void execAlways() {
+            getDefaultSmartField().setThrowVetoException(isActive());
+          }
+        }
+
+        @Order(90)
+        public class ToggleValidateValueMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Change Locale in validateValue";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "DefaultSmartField sets the value to Locale 'ar' in validateValue";
+          }
+
+          @Override
+          protected void execAlways() {
+            getDefaultSmartField().setValidateValue(isActive());
+          }
+        }
+
+        @Order(110)
+        @ClassId("1aac2053-a0c1-4cc8-b5fb-5516ffcdb7b6")
+        public class ToggleRequestInputMenu extends AbstractToggleMenu {
+          @Override
+          protected String getConfiguredText() {
+            return "RequestInput on formActivated";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Form calls requestInput on formActivated";
+          }
+
+          @Override
+          protected void execAlways() {
+            m_requestInput = isActive();
+          }
+        }
       }
 
       @Order(200)
@@ -1132,16 +1134,11 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
-        public class ShowProposalFieldValueMenu extends AbstractMenu {
+        public class ShowDefaultProposalFieldValueMenu extends AbstractMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("ShowValue", "Proposal field");
-          }
-
-          @Override
-          protected String getConfiguredTooltipText() {
-            return TEXTS.get("ShowValueOfDefaultField", "Proposal field");
+            return "Show value of DefaultProposalField";
           }
 
           @Override
@@ -1166,30 +1163,31 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(70)
-        public class SwitchHierarchicalLookupMenu extends AbstractMenu {
+        public class ToggleHierarchicalLookupMenu extends AbstractToggleMenu {
 
           @Override
           protected String getConfiguredText() {
-            return TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall");
+            return "Set hierarchical lookup-call";
           }
 
           @Override
           protected String getConfiguredTooltipText() {
-            return TEXTS.get("ThrottleSmartFieldRequestsTooltip");
+            return "When active DefaultSmartField uses HierarchicalLookupCall instead of code-type IndustryICBCodeType";
           }
 
           @Override
-          protected void execAction() {
-            ILookupCall<Long> lookupCall = getDefaultTreeSmartField().getLookupCall();
+          protected void execAlways() {
             getDefaultTreeSmartField().setValue(null);
-            if (lookupCall instanceof HierarchicalLookupCall) {
-              setText(TEXTS.get("SwitchLookupCall", "HierarchicalLookupCall"));
-              getDefaultTreeSmartField().setCodeTypeClass(IndustryICBCodeType.class);
-            }
-            else {
-              setText(TEXTS.get("SwitchLookupCall", "IndustryICBCodeType"));
-              getDefaultTreeSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
-            }
+          }
+
+          @Override
+          protected void execToggleActive() {
+            getDefaultTreeSmartField().setCodeTypeClass(IndustryICBCodeType.class);
+          }
+
+          @Override
+          protected void execToggleInactive() {
+            getDefaultTreeSmartField().setLookupCall(BEANS.get(HierarchicalLookupCall.class));
           }
         }
       }
@@ -1203,9 +1201,19 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         protected void execAction() {
-          setLocalLookupCall(true);
-          setValidateValue(false);
+          Class<?>[] menuClasses = {
+              ToggleExceptionOnLookupMenu.class,
+              ToggleHierarchicalLookupMenu.class,
+              ToggleLookupCallMenu.class,
+              ToggleRequestInputMenu.class,
+              ToggleThrottleSmartFieldMenu.class,
+              ToggleValidateValueMenu.class
+          };
+          for (Class<?> menuClass : menuClasses) {
+            getMenuByClass((Class<AbstractToggleMenu>) menuClass).reset();
+          }
         }
       }
     }
@@ -1216,21 +1224,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   public class PageFormHandler extends AbstractFormHandler {
-  }
-
-  public void setLocalLookupCall(boolean localLookupCall) {
-    m_localLookupCall = localLookupCall;
-    IMenu menu = getMainBox().getMenuByClass(SwitchLookupCallMenu.class);
-    getDefaultSmartField().setLookupCall(m_localLookupCall ? new LocaleLookupCall() : new RemoteLocaleLookupCall());
-    menu.setText(TEXTS.get(m_localLookupCall ? "SwitchToRemote" : "SwitchToLocal"));
-    menu.setTooltipText(TEXTS.get(m_localLookupCall ? "SwitchToRemoteTooltip" : "SwitchToLocalTooltip"));
-    LOG.debug("Switched lookup-call of DefaultField to {} instance", (m_localLookupCall ? "local" : "remote"));
-  }
-
-  public void setValidateValue(boolean validateValue) {
-    m_validateValue = validateValue;
-    IMenu menu = getMainBox().getMenuByClass(SwitchValidateValueMenu.class);
-    menu.setText(validateValue ? "Do nothing in validateValue" : "Set Locale 'ar' in validateValue");
   }
 
   protected void changeWildcard(String wildcard) {
@@ -1246,6 +1239,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @Override
   protected void execFormActivated() {
-    getDefaultSmartField().requestFocus();
+    if (m_requestInput) {
+      getDefaultSmartField().requestInput();
+    }
   }
 }
