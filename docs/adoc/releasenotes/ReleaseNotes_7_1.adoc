@@ -67,7 +67,26 @@ If you just want to play around with them without looking at the source code, yo
 
 == Java 8 required
 
-The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout _Photon_, a Java 8 (or newer) runtime is required.
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout _Photon_ (Scout 7.1 and newer), a Java 8 (or newer) runtime is required.
+
+To reflect this change some existing Scout classes have been migrated to the newly available Java 8 classes:
+
+`org.eclipse.scout.rt.platform.filter.IFilter` replaced with `java.util.function.Predicate`.
+
+`org.eclipse.scout.rt.platform.filter.AlwaysFilter` replaced with `java.util.function.Predicate` e.g. `a -> true`.
+
+`org.eclipse.scout.rt.platform.filter.NotFilter` replaced with `java.util.function.Predicate#negate`.
+
+`org.eclipse.scout.rt.platform.filter.OrFilter` replaced with `java.util.function.Predicate#or`.
+
+`org.eclipse.scout.rt.platform.util.concurrent.IConsumer` replaced with `java.util.function.Consumer`.
+
+`org.eclipse.scout.rt.platform.util.concurrent.IFunction` replaced with `java.util.function.Function`.
+
+`org.eclipse.scout.rt.platform.util.concurrent.IBiConsumer` replaced with `java.util.function.BiConsumer`.
+
+`org.eclipse.scout.rt.platform.util.concurrent.IBiFunction` replaced with `java.util.function.BiFunction`.
+
 
 == New SDK Feature in Eclipse: Search for missing NLS keys
 

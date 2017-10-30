@@ -2,6 +2,7 @@ package org.eclipse.scout.docs.snippets;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import org.eclipse.scout.rt.client.context.ClientRunContext;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
@@ -10,7 +11,6 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.context.RunMonitor;
 import org.eclipse.scout.rt.platform.exception.DefaultExceptionTranslator;
 import org.eclipse.scout.rt.platform.exception.ExceptionHandler;
-import org.eclipse.scout.rt.platform.filter.IFilter;
 import org.eclipse.scout.rt.platform.job.FixedDelayScheduleBuilder;
 import org.eclipse.scout.rt.platform.job.IBlockingCondition;
 import org.eclipse.scout.rt.platform.job.IExecutionSemaphore;
@@ -169,7 +169,7 @@ public final class JobManagerSnippet {
 
     {
       // tag::futureFilterBuilder.example[]
-      IFilter<IFuture<?>> filter = Jobs.newFutureFilterBuilder() // <1>
+      Predicate<IFuture<?>> filter = Jobs.newFutureFilterBuilder() // <1>
           .andMatchExecutionHint("computation") // <2>
           .andMatchNotState(JobState.PENDING) // <3>
           .andAreSingleExecuting() // <4>
@@ -182,7 +182,7 @@ public final class JobManagerSnippet {
 
     {
       // tag::jobEventFilterBuilder.example[]
-      IFilter<JobEvent> filter = Jobs.newEventFilterBuilder() // <1>
+      Predicate<JobEvent> filter = Jobs.newEventFilterBuilder() // <1>
           .andMatchEventType(JobEventType.JOB_STATE_CHANGED) // <2>
           .andMatchState(JobState.RUNNING) // <3>
           .andMatch(new SessionJobEventFilter(ISession.CURRENT.get())) // <4>
@@ -540,10 +540,10 @@ public final class JobManagerSnippet {
   }
 
   // tag::futureFilter.example[]
-  public class FutureFilter implements IFilter<IFuture<?>> {
+  public class FutureFilter implements Predicate<IFuture<?>> {
 
     @Override
-    public boolean accept(IFuture<?> future) {
+    public boolean test(IFuture<?> future) {
       // Accept or reject the future
       return false;
     }
@@ -551,10 +551,10 @@ public final class JobManagerSnippet {
   // end::futureFilter.example[]
 
   // tag::eventFilter.example[]
-  public class EventFilter implements IFilter<JobEvent> {
+  public class EventFilter implements Predicate<JobEvent> {
 
     @Override
-    public boolean accept(JobEvent event) {
+    public boolean test(JobEvent event) {
       // Accept or reject the event
       return false;
     }
