@@ -10,6 +10,33 @@
         "id": "DetailBox",
         "objectType": "GroupBox",
         "gridColumnCount": 1,
+        "menus": [
+          {
+            "id": "InsertMenu",
+            "objectType": "Menu",
+            "text": "Insert tile"
+          },
+          {
+            "id": "InsertManyMenu",
+            "objectType": "Menu",
+            "text": "Insert many tiles"
+          },
+          {
+            "id": "DeleteMenu",
+            "objectType": "Menu",
+            "text": "Delete selected tiles"
+          },
+          {
+            "id": "SelectNextMenu",
+            "objectType": "Menu",
+            "text": "Select next tile"
+          },
+          {
+            "id": "SelectAllMenu",
+            "objectType": "Menu",
+            "text": "Select all tiles"
+          }
+        ],
         "fields": [
           {
             "id": "TilesField",
@@ -87,15 +114,15 @@
             "lookupCall": "jswidgets.ColorSchemeLookupCall"
           },
           {
-            "id": "WithPlaceholdersField",
-            "objectType": "CheckBoxField",
-            "label": "With Placeholders",
-            "labelVisible": false
-          },
-          {
             "id": "InvertColorsField",
             "objectType": "CheckBoxField",
             "label": "Invert Colors",
+            "labelVisible": false
+          },
+          {
+            "id": "WithPlaceholdersField",
+            "objectType": "CheckBoxField",
+            "label": "With Placeholders",
             "labelVisible": false
           },
           {
@@ -105,42 +132,16 @@
             "labelVisible": false
           },
           {
+            "id": "MultiSelectField",
+            "objectType": "CheckBoxField",
+            "label": "Multi Select",
+            "labelVisible": false
+          },
+          {
             "id": "ScrollableField",
             "objectType": "CheckBoxField",
             "label": "Scrollable",
             "labelVisible": false
-          }
-        ]
-      },
-      {
-        "id": "ActionsBox",
-        "objectType": "GroupBox",
-        "label": "Actions",
-        "fields": [
-          {
-            "id": "InsertButton",
-            "objectType": "Button",
-            "label": "Insert tile"
-          },
-          {
-            "id": "InsertManyButton",
-            "objectType": "Button",
-            "label": "Insert many tiles"
-          },
-          {
-            "id": "DeleteButton",
-            "objectType": "Button",
-            "label": "Delete selected tiles"
-          },
-          {
-            "id": "SelectNextButton",
-            "objectType": "Button",
-            "label": "Select next tile"
-          },
-          {
-            "id": "SelectAllButton",
-            "objectType": "Button",
-            "label": "Select all tiles"
           }
         ]
       }

@@ -61,26 +61,30 @@ jswidgets.TilesForm.prototype._init = function(model) {
   selectableField.setValue(this.tiles.selectable);
   selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
 
+  var multiSelectField = this.widget('MultiSelectField');
+  multiSelectField.setValue(this.tiles.multiSelect);
+  multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
+
   var scrollableField = this.widget('ScrollableField');
   scrollableField.setValue(this.tiles.scrollable);
   scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
   // -- Actions
 
-  var insertButton = this.widget('InsertButton');
-  insertButton.on('click', this._onInsertButtonClick.bind(this));
+  var insertMenu = this.widget('InsertMenu');
+  insertMenu.on('action', this._onInsertMenuAction.bind(this));
 
-  var insertManyButton = this.widget('InsertManyButton');
-  insertManyButton.on('click', this._onInsertManyButtonClick.bind(this));
+  var insertManyMenu = this.widget('InsertManyMenu');
+  insertManyMenu.on('action', this._onInsertManyMenuAction.bind(this));
 
-  var deleteButton = this.widget('DeleteButton');
-  deleteButton.on('click', this._onDeleteButtonClick.bind(this));
+  var deleteMenu = this.widget('DeleteMenu');
+  deleteMenu.on('action', this._onDeleteMenuAction.bind(this));
 
-  var selectNextButton = this.widget('SelectNextButton');
-  selectNextButton.on('click', this._onSelectNextButtonClick.bind(this));
+  var selectNextMenu = this.widget('SelectNextMenu');
+  selectNextMenu.on('action', this._onSelectNextMenuAction.bind(this));
 
-  var selectAllButton = this.widget('SelectAllButton');
-  selectAllButton.on('click', this._onSelectAllButtonClick.bind(this));
+  var selectAllMenu = this.widget('SelectAllMenu');
+  selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
 };
 
 jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
@@ -147,13 +151,19 @@ jswidgets.TilesForm.prototype._onSelectablePropertyChange = function(event) {
   }
 };
 
+jswidgets.TilesForm.prototype._onMultiSelectPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tiles.setMultiSelect(event.newValue);
+  }
+};
+
 jswidgets.TilesForm.prototype._onScrollablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.tiles.setScrollable(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onInsertButtonClick = function(event) {
+jswidgets.TilesForm.prototype._onInsertMenuAction = function(event) {
   var tile = new scout.create('jswidgets.SimpleTile', {
     parent: this.tiles,
     label: 'New Tile ' + this.insertedTileCount++
@@ -161,7 +171,7 @@ jswidgets.TilesForm.prototype._onInsertButtonClick = function(event) {
   this.tiles.insertTile(tile);
 };
 
-jswidgets.TilesForm.prototype._onInsertManyButtonClick = function(event) {
+jswidgets.TilesForm.prototype._onInsertManyMenuAction = function(event) {
   var tiles = [];
   for (var i = 0; i < 50; i++) {
     tiles.push(new scout.create('jswidgets.SimpleTile', {
@@ -172,11 +182,11 @@ jswidgets.TilesForm.prototype._onInsertManyButtonClick = function(event) {
   this.tiles.insertTiles(tiles);
 };
 
-jswidgets.TilesForm.prototype._onDeleteButtonClick = function(event) {
+jswidgets.TilesForm.prototype._onDeleteMenuAction = function(event) {
   this.tiles.deleteTiles(this.tiles.selectedTiles);
 };
 
-jswidgets.TilesForm.prototype._onSelectNextButtonClick = function(event) {
+jswidgets.TilesForm.prototype._onSelectNextMenuAction = function(event) {
   if (this.tiles.tiles.length === 0) {
     return;
   }
@@ -186,6 +196,6 @@ jswidgets.TilesForm.prototype._onSelectNextButtonClick = function(event) {
   this.tiles.selectTile(this.tiles.tiles[selectedTileIndex + 1] || this.tiles.tiles[0]);
 };
 
-jswidgets.TilesForm.prototype._onSelectAllButtonClick = function(event) {
+jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {
   this.tiles.selectAllTiles();
 };

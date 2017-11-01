@@ -29,7 +29,6 @@ jswidgets.WatchField.prototype._render = function() {
   setInterval(this._paintWatch.bind(this), 1000);
 };
 
-
 jswidgets.WatchField.prototype._paintWatch = function() {
     var context = this.$canvas[0].getContext("2d");
     var radius = this.$canvas.height() / 2;
@@ -82,7 +81,6 @@ jswidgets.WatchField.prototype._paintNumbers = function(context, radius) {
     context.rotate(ang);
     context.translate(0, radius * 0.85);
     context.rotate(-ang);
-
   }
 };
 
@@ -117,5 +115,3 @@ jswidgets.WatchField.prototype._paintLine = function(context, angle, begin,  len
   context.stroke();
   context.rotate(-angle);
 };
-
-
