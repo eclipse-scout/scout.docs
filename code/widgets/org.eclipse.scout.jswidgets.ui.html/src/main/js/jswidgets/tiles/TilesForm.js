@@ -23,6 +23,9 @@ jswidgets.TilesForm.prototype._init = function(model) {
 
   this.tiles = this.widget('Tiles');
 
+  var filterField = this.widget('FilterField');
+  filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
+
   // -- Properties
 
   var gridColumnCountField = this.widget('GridColumnCountField');
@@ -85,6 +88,12 @@ jswidgets.TilesForm.prototype._init = function(model) {
 
   var selectAllMenu = this.widget('SelectAllMenu');
   selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
+};
+
+jswidgets.TilesForm.prototype._onFilterPropertyChange = function(event) {
+  if (event.propertyName === 'displayText') {
+    this.filterTilesByText(event.newValue);
+  }
 };
 
 jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
@@ -184,6 +193,9 @@ jswidgets.TilesForm.prototype._onInsertManyMenuAction = function(event) {
 
 jswidgets.TilesForm.prototype._onDeleteMenuAction = function(event) {
   this.tiles.deleteTiles(this.tiles.selectedTiles);
+  if (this.tiles.tiles.length === 0) {
+    this.insertedTileCount = 0;
+  }
 };
 
 jswidgets.TilesForm.prototype._onSelectNextMenuAction = function(event) {
@@ -198,4 +210,18 @@ jswidgets.TilesForm.prototype._onSelectNextMenuAction = function(event) {
 
 jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {
   this.tiles.selectAllTiles();
+};
+
+jswidgets.TilesForm.prototype.filterTilesByText = function(text) {
+  if (text) {
+    if (!this.tilesFilter) {
+      this.tilesFilter = scout.create('jswidgets.TilesFilter');
+      this.tiles.addFilter(this.tilesFilter);
+    }
+    this.tilesFilter.setText(text);
+  } else {
+    this.tiles.removeFilter(this.tilesFilter);
+    this.tilesFilter = null;
+  }
+  this.tiles.filter();
 };

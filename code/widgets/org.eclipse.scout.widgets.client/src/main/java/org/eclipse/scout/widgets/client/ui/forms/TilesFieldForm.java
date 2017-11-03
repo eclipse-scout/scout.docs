@@ -256,6 +256,9 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
             @Override
             protected void execAction() {
               getTilesField().getTiles().deleteTiles(getTilesField().getTiles().getSelectedTiles());
+              if (getTilesField().getTiles().getTiles().size() == 0) {
+                m_tilesAddedCount = 0;
+              }
             }
 
             @Override

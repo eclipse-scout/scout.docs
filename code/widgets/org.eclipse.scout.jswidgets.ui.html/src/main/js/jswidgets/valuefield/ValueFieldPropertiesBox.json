@@ -19,10 +19,10 @@
       "enabled": false
     },
     {
-      "id": "ClearableStyleField",
+      "id": "ClearableField",
       "objectType": "SmartField",
       "lookupCall": "jswidgets.ClearableStyleLookupCall",
-      "label": "Clearable Style",
+      "label": "Clearable",
       "displayStyle": "dropdown"
     }
   ]

@@ -72,6 +72,18 @@
                 }
               ]
             }
+          },
+          {
+            "id": "FilterField",
+            "objectType": "StringField",
+            "label": "${textKey:FilterBy}",
+            "labelPosition": 2,
+            "updateDisplayTextOnModify": true,
+            "clearable": "always",
+            "gridDataHints": {
+              "fillHorizontal": false,
+              "widthInPixel": 300
+            }
           }
         ]
       },
