@@ -9,7 +9,7 @@
       {
         "id": "DetailBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
+        "gridColumnCount": 2,
         "menus": [
           {
             "id": "InsertMenu",
@@ -43,7 +43,8 @@
             "objectType": "TilesField",
             "labelVisible": false,
             "gridDataHints": {
-              "h": 2
+              "h": 4,
+              "w": 2
             },
             "tiles": {
               "id": "Tiles",
@@ -83,6 +84,14 @@
             "gridDataHints": {
               "fillHorizontal": false,
               "widthInPixel": 300
+            }
+          },
+          {
+           "id": "StatusField",
+            "objectType": "LabelField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "horizontalAlignment": 1
             }
           }
         ]
@@ -156,6 +165,17 @@
             "labelVisible": false
           }
         ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints",
+        "expanded": false
       }
     ]
   }

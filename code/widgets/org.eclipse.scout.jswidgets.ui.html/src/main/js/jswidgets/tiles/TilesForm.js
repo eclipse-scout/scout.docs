@@ -11,6 +11,7 @@
 jswidgets.TilesForm = function() {
   jswidgets.TilesForm.parent.call(this);
   this.insertedTileCount = 0;
+  this.tileFilter = null;
 };
 scout.inherits(jswidgets.TilesForm, scout.Form);
 
@@ -22,6 +23,7 @@ jswidgets.TilesForm.prototype._init = function(model) {
   jswidgets.TilesForm.parent.prototype._init.call(this, model);
 
   this.tiles = this.widget('Tiles');
+  this.tiles.on('propertyChange', this._onTilesPropertyChange.bind(this));
 
   var filterField = this.widget('FilterField');
   filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
@@ -88,6 +90,17 @@ jswidgets.TilesForm.prototype._init = function(model) {
 
   var selectAllMenu = this.widget('SelectAllMenu');
   selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
+
+  var tilesField = this.widget('TilesField');
+  this.widget('FormFieldPropertiesBox').setField(tilesField);
+  this.widget('GridDataBox').setField(tilesField);
+  this.updateStatus();
+};
+
+jswidgets.TilesForm.prototype._onTilesPropertyChange = function(event) {
+  if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
+    this.updateStatus();
+  }
 };
 
 jswidgets.TilesForm.prototype._onFilterPropertyChange = function(event) {
@@ -214,14 +227,18 @@ jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {
 
 jswidgets.TilesForm.prototype.filterTilesByText = function(text) {
   if (text) {
-    if (!this.tilesFilter) {
-      this.tilesFilter = scout.create('jswidgets.TilesFilter');
-      this.tiles.addFilter(this.tilesFilter);
+    if (!this.tileFilter) {
+      this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
+      this.tiles.addFilter(this.tileFilter);
     }
-    this.tilesFilter.setText(text);
+    this.tileFilter.setText(text);
   } else {
-    this.tiles.removeFilter(this.tilesFilter);
-    this.tilesFilter = null;
+    this.tiles.removeFilter(this.tileFilter);
+    this.tileFilter = null;
   }
   this.tiles.filter();
+};
+
+jswidgets.TilesForm.prototype.updateStatus = function() {
+  this.widget('StatusField').setValue(this.session.text('TilesStatus', this.tiles.tiles.length, this.tiles.filteredTiles.length, this.tiles.selectedTiles.length));
 };

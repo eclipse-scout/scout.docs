@@ -52,8 +52,8 @@
   __include("jswidgets/tablefield/TableFieldForm.js");
   __include("jswidgets/tiles/ColorSchemeLookupCall.js");
   __include("jswidgets/tiles/SimpleTile.js");
+  __include("jswidgets/tiles/SimpleTileFilter.js");
   __include("jswidgets/tiles/TilesForm.js");
-  __include("jswidgets/tiles/TilesFilter.js");
   __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
   __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");

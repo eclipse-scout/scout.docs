@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.MenuMediator;
@@ -14,14 +15,19 @@ import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanFi
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tilesfield.AbstractTilesField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
+import org.eclipse.scout.rt.client.ui.tile.ITiles;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.tile.ITileColorScheme;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -29,6 +35,8 @@ import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCal
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox;
+import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.FilterField;
+import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.TilesField;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.TilesField.Tiles;
 import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox;
@@ -46,6 +54,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
   private static final Logger LOG = LoggerFactory.getLogger(TilesFieldForm.class);
 
   private int m_tilesAddedCount = 0;
+  private SimpleTileFilter m_tileFilter;
 
   @Override
   public void startPageForm() {
@@ -78,6 +87,14 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public MaxContentWidthField getMaxContentWidthField() {
     return getFieldByClass(MaxContentWidthField.class);
+  }
+
+  public FilterField getFilterField() {
+    return getFieldByClass(FilterField.class);
+  }
+
+  public StatusField getStatusField() {
+    return getFieldByClass(StatusField.class);
   }
 
   public PropertiesBox getPropertiesBox() {
@@ -126,6 +143,11 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           return FULL_WIDTH;
         }
 
+        @Override
+        protected void execInitField() {
+          updateStatus();
+        }
+
         @ClassId("269a1b03-5af1-4cf8-a063-20a9bbe85ae8")
         public class Tiles extends AbstractTiles {
 
@@ -133,12 +155,19 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           protected void initConfig() {
             super.initConfig();
             MenuUtility.updateMenuVisibilitiesForTiles(this);
+
+            addPropertyChangeListener((event) -> {
+              if (event.getPropertyName().equals(ITiles.PROP_TILES) || event.getPropertyName().equals(ITiles.PROP_FILTERED_TILES)) {
+                updateStatus();
+              }
+            });
           }
 
           @Override
           protected void execTilesSelected(List<? extends ITile> tiles) {
             super.execTilesSelected(tiles);
             MenuUtility.updateMenuVisibilitiesForTiles(this);
+            updateStatus();
           }
 
           @Order(1000)
@@ -409,6 +438,81 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
       }
+
+      @Order(2000)
+      @ClassId("64397690-7521-4fad-b149-b83ca0007af5")
+      public class FilterField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FilterBy");
+        }
+
+        @Override
+        protected boolean getConfiguredUpdateDisplayTextOnModify() {
+          return true;
+        }
+
+        @Override
+        protected byte getConfiguredLabelPosition() {
+          return LABEL_POSITION_ON_FIELD;
+        }
+
+        @Override
+        protected String getConfiguredClearable() {
+          return CLEARABLE_ALWAYS;
+        }
+
+        @Override
+        protected int getConfiguredWidthInPixel() {
+          return 300;
+        }
+
+        @Override
+        protected boolean getConfiguredFillHorizontal() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedDisplayText() {
+          filterTilesByText(getDisplayText());
+        }
+      }
+
+      @Order(3000)
+      @ClassId("16a80da8-a168-4b87-bf86-0ceff2823d36")
+      @FormData(sdkCommand = FormData.SdkCommand.IGNORE)
+      public class StatusField extends AbstractLabelField {
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+      }
+    }
+
+    protected void filterTilesByText(String text) {
+      if (!StringUtility.isNullOrEmpty(text)) {
+        if (m_tileFilter == null) {
+          m_tileFilter = new SimpleTileFilter();
+          getTilesField().getTiles().addFilter(m_tileFilter);
+        }
+        m_tileFilter.setText(text);
+      }
+      else {
+        getTilesField().getTiles().removeFilter(m_tileFilter);
+        m_tileFilter = null;
+      }
+      getTilesField().getTiles().filter();
+    }
+
+    protected void updateStatus() {
+      Tiles tiles = getTilesField().getTiles();
+      getStatusField().setValue(TEXTS.get("TilesStatus", tiles.getTileCount() + "", tiles.getFilteredTileCount() + "", tiles.getSelectedTileCount() + ""));
     }
 
     @Order(2000)
