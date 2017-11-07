@@ -23,6 +23,7 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(tabBox);
+  this.widget('GridDataBox').setField(tabBox);
 };
 
 jswidgets.TabBoxForm.prototype._jsonModel = function() {

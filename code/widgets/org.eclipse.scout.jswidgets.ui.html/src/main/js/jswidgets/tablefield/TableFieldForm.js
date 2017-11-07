@@ -83,6 +83,7 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   groupingStyleField.on('propertyChange', this._onGroupingStylePropertyChange.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
+  this.widget('GridDataBox').setField(this.widget('TableField'));
 };
 
 jswidgets.TableFieldForm.prototype._jsonModel = function() {

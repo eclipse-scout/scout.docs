@@ -87,7 +87,7 @@
       {
         "id": "PropertiesBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
+        "label": "Properties",
         "fields": [
           {
             "id": "StatusEnabledField",
@@ -96,6 +96,16 @@
             "label": "Status enabled"
           }
         ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints",
+        "expanded": false
       }
     ]
   }

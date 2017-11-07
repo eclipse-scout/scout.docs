@@ -16,7 +16,7 @@
             "objectType": "TableField",
             "labelVisible": false,
             "gridDataHints": {
-              "h": 2
+              "h": 4
             },
             "table": {
               "id": "Table",
@@ -178,6 +178,12 @@
       {
         "id": "FormFieldPropertiesBox",
         "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints",
         "expanded": false
       }
     ]

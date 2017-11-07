@@ -25,4 +25,5 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
   this.widget('PropertiesBox').setField(this.smartField);
   this.widget('ValueFieldPropertiesBox').setField(this.smartField);
   this.widget('FormFieldPropertiesBox').setField(this.smartField);
+  this.widget('GridDataBox').setField(this.smartField);
 };

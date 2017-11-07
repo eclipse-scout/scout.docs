@@ -20,6 +20,10 @@ jswidgets.CarouselForm.prototype._init = function(model) {
   var statusEnabledField = this.widget('StatusEnabledField');
   statusEnabledField.setValue(carousel.statusEnabled);
   statusEnabledField.on('propertyChange', this._onStatusEnabledPropertyChange.bind(this));
+
+  var carouselField = this.widget('CarouselField');
+  this.widget('FormFieldPropertiesBox').setField(carouselField);
+  this.widget('GridDataBox').setField(carouselField);
 };
 
 jswidgets.CarouselForm.prototype._jsonModel = function() {

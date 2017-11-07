@@ -15,11 +15,8 @@
             "id": "NumberField",
             "objectType": "NumberField",
             "label": "${textKey:NumberField}",
-            "gridData": {
-              "horizontalAlignment" : 1
-             },
              "gridDataHints": {
-              "horizontalAlignment" : 1
+               "horizontalAlignment" : 1
              }
           },
           {
@@ -49,6 +46,11 @@
       {
         "id": "FormFieldPropertiesBox",
         "objectType": "jswidgets.FormFieldPropertiesBox"
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints"
       }
     ]
   }

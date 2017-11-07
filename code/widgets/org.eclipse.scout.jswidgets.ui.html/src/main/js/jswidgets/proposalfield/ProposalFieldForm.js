@@ -25,4 +25,5 @@ jswidgets.ProposalFieldForm.prototype._init = function(model) {
   this.widget('PropertiesBox').setField(this.proposalField);
   this.widget('ValueFieldPropertiesBox').setField(this.proposalField);
   this.widget('FormFieldPropertiesBox').setField(this.proposalField);
+  this.widget('GridDataBox').setField(this.proposalField);
 };

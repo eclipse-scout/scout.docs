@@ -18,6 +18,7 @@ jswidgets.CustomFieldForm.prototype._init = function(model) {
   var watchField = this.widget('WatchField');
 
   this.widget('FormFieldPropertiesBox').setField(watchField);
+  this.widget('GridDataBox').setField(watchField);
 };
 
 jswidgets.CustomFieldForm.prototype._jsonModel = function() {
