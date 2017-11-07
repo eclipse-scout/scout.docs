@@ -149,7 +149,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 This listing also demonstrates how to use the config properties in the code.
 With the property values defined in the previous section the "Contacts" application is working with an in-memory database.
 
-To change the setup to a disk based version, we would have to change the value for the property `contacts.database.jdbc.mapping.name`
+To change the setup to a disk based version, we would have to change the value for the property `contacts.database.jdbc.mappingName`
 from `jdbc:derby:memory:contacts-database` to `jdbc:derby:<path-to-dir>`.
 For a Windows box a concrete example could look like this: `jdbc:derby:c:\\derby\\contacts-database`.
 

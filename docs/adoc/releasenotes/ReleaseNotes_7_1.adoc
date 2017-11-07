@@ -96,3 +96,22 @@ The result is listed in the Eclipse `Search` view.
 The search also takes the scope of each NLS key into account. So that the key is considered to be available there must be a `TextProviderService` with that key on the classpath of that module.
 
 Reported false positives can be suppressed using the following comment at the end of the corresponding line: `NO-NLS-CHECK`. Matches on that line are then not reported in future searches anymore.
+
+
+== Config Properties
+=== Descriptions
+Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
+
+The class `org.eclipse.scout.rt.platform.config.ConfigDescriptionExporter` can be used to export these descriptions. By default an AsciiDoctor exporter is included.
+
+All Scout properties have been extended with descriptions. The same text is also part of the technical documentation.
+
+=== Default value
+Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a default value. The default value is stored in the `getDefaultValue()` method.
+
+The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigProperty<DATA_TYPE, RAW_TYPE>` to the interface. Therefore the visibility has changed from protected to public.
+
+=== Validation
+The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
+In case it does a info message (warn in development mode) will be logged but platform will still start.
+To minimize configuration files such entries should be removed from `config.properties` files.

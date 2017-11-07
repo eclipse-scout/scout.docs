@@ -340,6 +340,11 @@ public final class JaxWsSnippet {
     public String getKey() {
       return "project.myWebService.url";
     }
+
+    @Override
+    public String description() {
+      return "Target URL for the Ping web service.";
+    }
   }
 
   public static class JaxWsPingUsernameProperty extends AbstractStringConfigProperty {
@@ -347,12 +352,22 @@ public final class JaxWsSnippet {
     public String getKey() {
       return "project.myWebService.username";
     }
+
+    @Override
+    public String description() {
+      return "Basic Auth username to connect to the ping web service.";
+    }
   }
 
   public static class JaxWsPingPasswordProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
       return "project.myWebService.password";
+    }
+
+    @Override
+    public String description() {
+      return "Basic Auth password to connect to the ping web service.";
     }
   }
 
@@ -362,6 +377,11 @@ public final class JaxWsSnippet {
     public String getKey() {
       return "project.myWebService.timeout.connect";
     }
+
+    @Override
+    public String description() {
+      return "Connect timeout in milliseconds.";
+    }
   }
 
   public static class JaxWsPingReadTimeoutProperty extends AbstractPositiveIntegerConfigProperty {
@@ -369,6 +389,11 @@ public final class JaxWsSnippet {
     @Override
     public String getKey() {
       return "project.myWebService.timeout.read";
+    }
+
+    @Override
+    public String description() {
+      return "Read timeout in milliseconds.";
     }
   }
 

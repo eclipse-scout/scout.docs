@@ -525,7 +525,7 @@ can be used in a Scout JS application. This is a fast and convenient method to r
 build the model manually. Here's how to use the export feature:
 
 * Activate the `TextKeyTextProviderService` in your Scout classic application. You can do this either by calling the static `register` Method at
-  runtime (using the Debugger) or by setting the config property _scout.text.providers.show.keys_. Once the TextProvider is active, it returns text keys instead
+  runtime (using the Debugger) or by setting the config property _scout.texts.showKeys_. Once the TextProvider is active, it returns text keys instead
   of localized texts. The format of the returned string is `${textKey:[text-key]}`. Strings in this format are interpreted browser side by Scout JS and
   are resolved and localized in _texts.js_.
 * Call the Scout classic web application with the URL parameter `?adapterExportEnabled=true`. This parameter is checked by Scout JS and the effect of it is that

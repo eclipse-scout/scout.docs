@@ -14,7 +14,12 @@ public class MyCustomTimeoutProperty extends AbstractLongConfigProperty {
   }
 
   @Override
-  protected Long getDefaultValue() {
+  public String description() {
+    return "Description of the custom timeout property. The default value is 3600.";
+  }
+
+  @Override
+  public Long getDefaultValue() {
     return 3600L; //<2>
   }
 }

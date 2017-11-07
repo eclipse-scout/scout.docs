@@ -21,7 +21,12 @@ public final class ConfigProperties {
 
     @Override
     public String getKey() {
-      return "contacts.user.domain";
+      return "contacts.userDomain";
+    }
+
+    @Override
+    public String description() {
+      return "User domain";
     }
   }
 }

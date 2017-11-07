@@ -23,13 +23,18 @@ public class DatabaseProperties {
     // defines default value and key
 
     @Override
-    protected Boolean getDefaultValue() {
+    public Boolean getDefaultValue() {
       return Boolean.TRUE; // <1>
     }
 
     @Override
     public String getKey() {
       return "contacts.database.autocreate"; // <2>
+    }
+
+    @Override
+    public String description() {
+      return "Specifies if the contacts database should automatically be created if it does not exist yet. The default value is true.";
     }
   }
 
@@ -38,13 +43,18 @@ public class DatabaseProperties {
     // end::structure[]
 
     @Override
-    protected Boolean getDefaultValue() {
+    public Boolean getDefaultValue() {
       return Boolean.TRUE;
     }
 
     @Override
     public String getKey() {
       return "contacts.database.autopopulate";
+    }
+
+    @Override
+    public String description() {
+      return "Specifies if test data should be inserted into a newly created contact database. The default value is true.";
     }
     // tag::structure[]
   }
@@ -54,13 +64,18 @@ public class DatabaseProperties {
     // end::structure[]
 
     @Override
-    protected String getDefaultValue() {
+    public String getDefaultValue() {
       return "jdbc:derby:memory:contacts-database";
     }
 
     @Override
     public String getKey() {
-      return "contacts.database.jdbc.mapping.name";
+      return "contacts.database.jdbc.mappingName";
+    }
+
+    @Override
+    public String description() {
+      return "JDBC mapping name for the contacts database. The default value is 'jdbc:derby:memory:contacts-database'.";
     }
     // tag::structure[]
   }
@@ -70,13 +85,18 @@ public class DatabaseProperties {
     // end::structure[]
 
     @Override
-    protected Subject getDefaultValue() {
+    public Subject getDefaultValue() {
       return convertToSubject("system");
     }
 
     @Override
     public String getKey() {
       return "contacts.superuser";
+    }
+
+    @Override
+    public String description() {
+      return "Contacts super user subject name. The default is 'contacts.superuser'.";
     }
     // tag::structure[]
   }

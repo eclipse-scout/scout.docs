@@ -65,6 +65,223 @@ Since the new SmartImplementation does not have a proposal chooser model anymore
 * org.eclipse.scout.rt.client.ui.form.fields.smartfield.TreeProposalChooser
 
 
+== Config Properties
+=== Descriptions
+Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
+
+All properties must now implement this new method and return a description text of that property. The class `org.eclipse.scout.rt.platform.config.ConfigDescriptionExporter` can be used to export these descriptions. By default an AsciiDoctor exporter is included.
+
+=== Default value
+Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a default value. The default value is stored in the `getDefaultValue()` method.
+
+The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigProperty<DATA_TYPE, RAW_TYPE>` to the interface. Therefore the visibility has changed from protected to public.
+
+=== Validation
+The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
+In case it does a info message (warn in development mode) will be logged but the platform will still start.
+
+To minimize configuration files such entries should be removed from `config.properties` files.
+
+== Renamed Config Property Keys
+
+The following config property keys have been renamed (the old keys are no longer valid and must be renamed accordingly):
+
+[cols="1,1", options="header"]
+.Config Property Renames
+|===
+|Old Key
+|New Key
+|`scout.auth.anonymous.enabled`
+|`scout.auth.anonymousEnabled`
+|`scout.auth.cookie.enabled`
+|`scout.auth.cookieEnabled`
+|`scout.auth.cookie.maxAge`
+|`scout.auth.cookieMaxAge`
+|`scout.auth.cookie.name`
+|`scout.auth.cookieName`
+|`scout.auth.cookie.session.validate.secure`
+|`scout.auth.cookieSessionValidateSecure`
+|`scout.auth.credentials.plaintext`
+|`scout.auth.credentialsPlaintext`
+|`scout.auth.token.ttl`
+|`scout.auth.tokenTtl`
+|`scout.server.url`
+|`scout.backendUrl`
+|`session.jobCompletionDelayOnSessionShutdown`
+|`scout.client.jobCompletionDelayOnSessionShutdown`
+|`org.eclipse.scout.memory`
+|`scout.client.memoryPolicy`
+|`notification.user.authenticator`
+|`scout.client.notificationSubject`
+|`org.eclipse.scout.testing.client.ClientSessionProviderWithCache#expiration`
+|`scout.client.testingSessionTtl`
+|`user.area`
+|`scout.client.userArea`
+|`org.eclipse.scout.rt.server.clientnotification.ClientNotificationService#maxMessages`
+|`scout.clientnotification.chunkSize`
+|`org.eclipse.scout.rt.server.clientnotification.ClientNotificationService#blockingTimeout`
+|`scout.clientnotification.maxNotificationBlockingTimeOut`
+|`org.eclipse.scout.rt.server.clientnotification.ClientNotificationNodeQueue#capacity`
+|`scout.clientnotification.nodeQueueCapacity`
+|`org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry#m_queueExpireTime`
+|`scout.clientnotification.notificationQueueExpireTime`
+|`org.eclipse.scout.rt.server.services.common.clustersync.ClusterSynchronizationService#user`
+|`scout.clustersync.user`
+|`scout.beans.createTunnelToServerBeans`
+|`scout.createTunnelToServerBeans`
+|`scout.csp.enabled`
+|`scout.cspEnabled`
+|`scout.csp.directive`
+|`scout.cspDirective`
+|`scout.dev.mode`
+|`scout.devMode`
+|`scout.external.base.url`
+|`scout.externalBaseUrl`
+|`scout.healthcheck.remoteUrls`
+|`scout.healthCheckRemoteUrls`
+|`scout.http.apache_connection_time_to_live`
+|`scout.http.connectionTtl`
+|`scout.http.ignore_proxy`
+|`scout.http.ignoreProxyPatterns`
+|`scout.http.apache_keep_alive`
+|`scout.http.keepAlive`
+|`scout.http.apache_max_connections_per_route`
+|`scout.http.maxConnectionsPerRoute`
+|`scout.http.apache_max_connections_total`
+|`scout.http.maxConnectionsTotal`
+|`scout.http.proxy`
+|`scout.http.proxyPatterns`
+|`scout.http.apache_retry_post`
+|`scout.http.retryHost`
+|`scout.http.transport_factory`
+|`scout.http.transportFactory`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#host`
+|`scout.imap.host`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#mailbox`
+|`scout.imap.mailbox`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#password`
+|`scout.imap.password`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#port`
+|`scout.imap.port`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#sslProtocols`
+|`scout.imap.sslProtocols`
+|`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#userName`
+|`scout.imap.username`
+|`jandex.rebuild`
+|`scout.jandex.rebuild`
+|`jaxws.consumer.connectTimeout`
+|`scout.jaxws.consumer.connectTimeout`
+|`jaxws.consumer.portCache.corePoolSize`
+|`scout.jaxws.consumer.portCache.corePoolSize`
+|`jaxws.consumer.portCache.enabled`
+|`scout.jaxws.consumer.portCache.enabled`
+|`jaxws.consumer.portCache.ttl`
+|`scout.jaxws.consumer.portCache.ttl`
+|`jaxws.consumer.portPool.enabled`
+|`scout.jaxws.consumer.portPoolEnabled`
+|`jaxws.consumer.readTimeout`
+|`scout.jaxws.consumer.readTimeout`
+|`jaxws.implementor`
+|`scout.jaxws.implementor`
+|`jaxws.loghandler.debug`
+|`scout.jaxws.loghandlerDebug`
+|`jaxws.provider.authentication.basic.realm`
+|`scout.jaxws.provider.authentication.basicRealm`
+|`jaxws.provider.user.authenticator`
+|`scout.jaxws.provider.user.authenticator`
+|`jaxws.provider.user.handler`
+|`scout.jaxws.provider.user.handler`
+|`scout.mom.requestreply.cancellation.topic`
+|`scout.mom.requestreply.cancellationTopic`
+|`scout.node.id`
+|`scout.nodeId`
+|`scout.permission.level.check.cache.ttl`
+|`scout.permissionLevelCacheTtl`
+|`org.eclipse.scout.rt.server.services.common.file.RemoteFileService#rootPath`
+|`scout.remotefileRootPath`
+|`org.eclipse.scout.rt.server.session.ServerSessionProviderWithCache#expiration`
+|`scout.serverSessionTtl`
+|`org.eclipse.scout.serviceTunnel.compress`
+|`scout.servicetunnel.compress`
+|`org.eclipse.scout.rt.servicetunnel.apache_max_connections_per_route`
+|`scout.servicetunnel.maxConnectionsPerRoute`
+|`org.eclipse.scout.rt.servicetunnel.apache_max_connections_total`
+|`scout.servicetunnel.maxConnectionsTotal`
+|`org.eclipse.scout.rt.servicetunnel.targetUrl`
+|`scout.servicetunnel.targetUrl`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#debugReceiverEmail`
+|`scout.smtp.debugReceiverEmail`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#defaultFromEmail`
+|`scout.smtp.defaultFromEmail`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#host`
+|`scout.smtp.host`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#password`
+|`scout.smtp.password`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#port`
+|`scout.smtp.port`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#sslProtocols`
+|`scout.smtp.sslProtocols`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#subjectPrefix`
+|`scout.smtp.subjectPrefix`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#useAuthentication`
+|`scout.smtp.useAuth`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#username`
+|`scout.smtp.username`
+|`org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService#useSmtps`
+|`scout.smtp.useSsl`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#directJdbcConnection`
+|`scout.sql.directJdbcConnection`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcDriverName`
+|`scout.sql.jdbc.driverName`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcDriverUnload`
+|`scout.sql.jdbc.driverUnload`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcMappingName`
+|`scout.sql.jdbc.mappingName`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcPoolConnectionBusyTimeout`
+|`scout.sql.jdbc.pool.connectionBusyTimeout`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcPoolConnectionLifetime`
+|`scout.sql.jdbc.pool.connectionIdleTimeout`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcPoolSize`
+|`scout.sql.jdbc.pool.size`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcProperties`
+|`scout.sql.jdbc.properties`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jdbcStatementCacheSize`
+|`scout.sql.jdbc.statementCacheSize`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jndiInitialContextFactory`
+|`scout.sql.jndi.initialContextFactory`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jndiName`
+|`scout.sql.jndi.name`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jndiProviderUrl`
+|`scout.sql.jndi.providerUrl`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#jndiUrlPkgPrefixes`
+|`scout.sql.jndi.urlPkgPrefixes`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#password`
+|`scout.sql.password`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#transactionMemberId`
+|`scout.sql.transactionMemberId`
+|`org.eclipse.scout.rt.server.services.common.jdbc.AbstractSqlService#username`
+|`scout.sql.username`
+|`scout.text.providers.show.keys`
+|`scout.texts.showKeys`
+|`scout.background.polling.interval`
+|`scout.ui.backgroundPollingMaxWaitTime`
+|`scout.max.user.idle.time`
+|`scout.ui.maxUserIdleTime`
+|`scout.ui.model.jobs.await.timeout`
+|`scout.ui.modelJobTimeout`
+|`scout.sessionstore.housekeepingDelay`
+|`scout.ui.sessionstore.housekeepingDelay`
+|`scout.sessionstore.housekeepingMaxWaitForShutdown`
+|`scout.ui.sessionstore.housekeepingMaxWaitForShutdown`
+|`scout.sessionStore.maxWaitForAllShutdown`
+|`scout.ui.sessionStore.maxWaitForAllShutdown`
+|`scout.sessionStore.valueUnboundMaxWaitForWriteLock`
+|`scout.ui.sessionStore.valueUnboundMaxWaitForWriteLock`
+|===
+
+== Default Values Validation
+
+
 
 // ^^^
 // Insert descriptions of Java API changes here

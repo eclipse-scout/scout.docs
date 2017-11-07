@@ -468,32 +468,8 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 === Configuration
-Job manager can be configured with the following config properties.
 
-[cols="30,20,50", options="header"]
-|===
-|property |default value |description
-
-|scout.jobmanager.corePoolSize
-|25
-|The number of threads to keep in the pool, even if they are idle
-
-|scout.jobmanager.prestartCoreThreads
-|true if running in productive environment, else false
-|Specifies whether all threads of the core-pool should be started upon job manager startup, so that they are idle waiting for work.
-
-|scout.jobmanager.maximumPoolSize
-|infinite
-|The maximal number of threads to be created once the core-pool-size is exceeded.
-
-|scout.jobmanager.keepAliveTime
-|60
-|The time limit (in seconds) for which threads, which are created upon exceeding the 'core-pool-size' limit, may remain idle before being terminated.
-
-|scout.jobmanager.allowCoreThreadTimeOut
-|false
-|Specifies whether threads of the core-pool should be terminated after being idle for longer than 'keepAliveTime'.
-|===
+Job manager can be configured with properties starting with `scout.jobmanager`. See <<sec-app.configProperties>>.
 
 === Extending job manager
 Job manager is implemented as an application scoped bean, and which can be replaced. To do so, create a class which extends `JobManager`, and annotate it with `@Replace` annotation. Most likely, you like to use the EE container's `ThreadPoolExecutor`, or to contribute some behavior to the callable chain which finally executes the job.

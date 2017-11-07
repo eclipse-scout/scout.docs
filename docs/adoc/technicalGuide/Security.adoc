@@ -121,7 +121,7 @@ Unfortunately for the UI server it is not possible to detect if an application u
 
 Because of this the validation assumes that the channel from the user agent to the entering node is secured and by default checks for the `Secure` flag. In case this assumption is not true and an unencrypted channel must be used this validation step can be disabled by setting the following property in the `config.propertis` file:
 
-`scout.auth.cookie.session.validate.secure=false`
+`scout.auth.cookieSessionValidateSecure=false`
 
 This skips the `Secure` flag check completely. In this scenario (not using https) it is also required to remove the secure tag from the cookie config in the `WEB-INF/web.xml`.
 

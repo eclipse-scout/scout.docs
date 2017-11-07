@@ -53,12 +53,12 @@ When running in an EE container, the container typically ships with a JAX-WS imp
 ==== Configure JAX-WS implementor
 JAX-WS Scout integration is prepared to run with different implementors. Unfortunately, some implementors do not implement the JSR exactly, or some important functionality is missing in the JSR. To address this fact without loosing implementor independence, the delegate bean <<JaxWsImplementorSpecifics,JaxWsImplementorSpecifics>> exists.
 
-As of now, Scout ships with three such implementor specific classes, which are activated via _config.properties_ by setting the property _jaxws.implementor_ with its fully qualified class name. By default, _JAX-WS METRO_ implementor is installed.
+As of now, Scout ships with three such implementor specific classes, which are activated via _config.properties_ by setting the property _scout.jaxws.implementor_ with its fully qualified class name. By default, _JAX-WS METRO_ implementor is installed.
 
 For instance, support for _Apache CXF_ implementor is activated as following:
 [source,txt]
 ----
-jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
+scout.jaxws.implementor=org.eclipse.scout.rt.server.jaxws.implementor.JaxWsCxfSpecifics
 ----
 
 [cols="30,70", options="header"]
@@ -487,7 +487,7 @@ A handler can be initialized with static 'init parameters', which will be inject
 
 Because handlers are looked up via bean manager, a handler must be annotated with `ApplicationScoped` annotation.
 
-If a handler requires to be run in a `RunContext`, annotate the handler with `RunWithRunContext` annotation, and optionally specify a `RunContextProducer`. If the web request is authenticated upon entering the handler, the `RunContext` is run on behalf of the authenticated user. Otherwise, if not authenticated yet, it is invoked with the Subject as configured in `jaxws.provider.user.handler` config property.
+If a handler requires to be run in a `RunContext`, annotate the handler with `RunWithRunContext` annotation, and optionally specify a `RunContextProducer`. If the web request is authenticated upon entering the handler, the `RunContext` is run on behalf of the authenticated user. Otherwise, if not authenticated yet, it is invoked with the Subject as configured in `scout.jaxws.provider.user.handler` config property.
 
 .Example of a JAX-WS Handler
 [source,java,indent=0]
@@ -687,24 +687,24 @@ The following properties can be set globally for all WS-Clients. However, a WS-C
 |===
 |property |description |default value
 
-|jaxws.consumer.portCache.enabled
+|scout.jaxws.consumer.portCache.enabled
 |To indicate whether to use a preemptive port cache for WS-Clients. +
 Depending on the implementor used, cached ports may increase performance, because port creation is an expensive operation due to WSDL and schema validation. The cache is based on a 'corePoolSize', meaning that that number of ports is created on a preemptive basis. If more ports than that number is required, they are are created on demand and also added to the cache until expired, which is useful at a high load.
 |true
 
-|jaxws.consumer.portCache.corePoolSize
+|scout.jaxws.consumer.portCache.corePoolSize
 |Number of ports to be preemptively cached to speed up webservice calls.
 |10
 
-|jaxws.consumer.portCache.ttl
+|scout.jaxws.consumer.portCache.ttl
 |Maximum time in seconds to retain ports in the cache if the 'corePoolSize' is exceeded. That typically occurs at high load, or if 'corePoolSize' is undersized.
 |15 minutes
 
-|jaxws.consumer.connectTimeout
+|scout.jaxws.consumer.connectTimeout
 |Connect timeout in milliseconds to abort a webservice request, if establishment of the HTTP connection takes longer than this timeout. A timeout of null means an infinite timeout.
 |infinite
 
-|jaxws.consumer.readTimeout
+|scout.jaxws.consumer.readTimeout
 |Read timeout in milliseconds to abort a webservice request, if it takes longer than this timeout for data to be available for read. A timeout of null means an infinite timeout.
 |infinite
 
@@ -851,7 +851,7 @@ By default, this verifier expects the passwords in 'config.properties' to be a h
 
 Credentials are loaded from property `scout.auth.credentials`. Multiple credentials are separated with the semicolon, username and password with the colon. If using hashed passwords (by default), the password's salt and hash are separated with the dot.
 
-To work with plaintext passwords, set the property `scout.auth.credentials.plaintext`  to _true_.
+To work with plaintext passwords, set the property `scout.auth.credentialsPlaintext`  to _true_.
 
 Example of hashed passwords: `scott:SALT.PASSWORD-HASH;jack:SALT.PASSWORD-HASH;john:SALT.PASSWORD-HASH`
 Example of plaintext passwords: `scott:****;jack:****;john:****`

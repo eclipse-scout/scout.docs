@@ -10,6 +10,6 @@ public class DocsConfigValidator implements IConfigurationValidator {
   @Override
   public boolean isValid(String key, String value) {
     // the config.properties contains an example entry with this key. It should be ignored in validation.
-    return "myproject.application.name".equals(key);
+    return "myproject.applicationName".equals(key);
   }
 }

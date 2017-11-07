@@ -13,7 +13,7 @@ public class ApplicationNamePropertyRedirection extends ApplicationNameProperty 
 
   @Override
   public String getKey() {
-    return "myproject.application.name";
+    return "myproject.applicationName";
   }
 }
 //end::code[]

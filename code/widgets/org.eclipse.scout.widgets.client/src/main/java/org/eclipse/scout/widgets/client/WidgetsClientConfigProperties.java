@@ -9,11 +9,16 @@ public final class WidgetsClientConfigProperties {
   public static class GitUrlConfigProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "git.url";
+      return "widgets.git.url";
     }
 
     @Override
-    protected String getDefaultValue() {
+    public String description() {
+      return "Base URL that points to the source code of the widgets app on github.";
+    }
+
+    @Override
+    public String getDefaultValue() {
       return "https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob";
     }
   }
@@ -21,11 +26,16 @@ public final class WidgetsClientConfigProperties {
   public static class GitBranchConfigProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "git.branch";
+      return "widgets.git.branch";
     }
 
     @Override
-    protected String getDefaultValue() {
+    public String description() {
+      return "Git branch that is used to build the URL to open the source code on github.";
+    }
+
+    @Override
+    public String getDefaultValue() {
       return "releases/7.1.x";
     }
   }
@@ -33,11 +43,16 @@ public final class WidgetsClientConfigProperties {
   public static class GitFolderConfigProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "git.folder";
+      return "widgets.git.folder";
     }
 
     @Override
-    protected String getDefaultValue() {
+    public String description() {
+      return "Git subfolder that is used to build the URL to open the source code on github.";
+    }
+
+    @Override
+    public String getDefaultValue() {
       return "code/widgets";
     }
   }
@@ -45,11 +60,16 @@ public final class WidgetsClientConfigProperties {
   public static class GitSourceConfigProperty extends AbstractStringConfigProperty {
     @Override
     public String getKey() {
-      return "git.source";
+      return "widgets.git.source";
     }
 
     @Override
-    protected String getDefaultValue() {
+    public String description() {
+      return "Git source folder that is used to build the URL to open the source code on github.";
+    }
+
+    @Override
+    public String getDefaultValue() {
       return "src/main/java";
     }
   }
