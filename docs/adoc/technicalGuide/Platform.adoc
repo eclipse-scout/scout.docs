@@ -346,11 +346,12 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/resources/config.pro
 During the Platform startup all classes implementing the interface `org.eclipse.scout.rt.platform.config.IConfigurationValidator` are asked to validate configuration provided in the `config.properties` files.
 If there is at least one `IConfigurationValidator` that accepts a given key-value-pair the configuration is considered to be valid. Otherwise the platform will not start.
 
-The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` will also check if a configured value matches the default value. In case it does a info message (warn in development mode) will be logged but the platform will still start.
+The concrete implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` will also check if a configured value matches the default value. In case it does an info message (warn in development mode) will be logged but the platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
 
 [[sec-app.configProperties]]
 === Scout Config Properties
+To harmonize config property keys every scout property should begin with the prefix `scout.`.
 
 [cols="2,4,1,1", options="header"]
 .Config Properties
