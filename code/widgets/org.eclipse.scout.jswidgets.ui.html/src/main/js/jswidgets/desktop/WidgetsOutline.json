@@ -6,6 +6,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "${textKey:Accordion}",
+      "detailForm": {
+        "objectType": "jswidgets.AccordionForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:Carousel}",
       "detailForm": {
         "objectType": "jswidgets.CarouselForm"

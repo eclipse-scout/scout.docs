@@ -1,0 +1,89 @@
+{
+  "id": "jswidgets.AccordionForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "menus": [
+          {
+            "id": "InsertMenu",
+            "objectType": "Menu",
+            "text": "Insert group"
+          },
+          {
+            "id": "DeleteFirstMenu",
+            "objectType": "Menu",
+            "text": "Delete first group"
+          },
+          {
+            "id": "CollapseExpandFirstMenu",
+            "objectType": "Menu",
+            "text": "Collapse/Expand first group"
+          },
+          {
+            "id": "CollapseAllMenu",
+            "objectType": "Menu",
+            "text": "Collapse all groups"
+          }
+        ],
+        "fields": [
+          {
+            "id": "AccordionField",
+            "objectType": "AccordionField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "h": 4,
+              "w": 2
+            },
+            "accordion": {
+              "id": "Accordion",
+              "objectType": "Accordion",
+              "scrollable": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "expandable": true,
+        "fields": [
+          {
+            "id": "ExclusiveExpandField",
+            "objectType": "CheckBoxField",
+            "label": "Exclusive Expand",
+            "labelVisible": false,
+            "tooltipText": "${textKey:ExclusiveExpandTooltip}",
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
+          },
+          {
+            "id": "ScrollableField",
+            "objectType": "CheckBoxField",
+            "label": "Scrollable",
+            "labelVisible": false
+          }
+        ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints",
+        "expanded": false
+      }
+    ]
+  }
+}

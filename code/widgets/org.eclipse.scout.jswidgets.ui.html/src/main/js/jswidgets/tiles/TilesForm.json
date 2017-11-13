@@ -100,6 +100,7 @@
         "id": "PropertiesBox",
         "objectType": "GroupBox",
         "label": "Properties",
+        "expandable": true,
         "fields": [
           {
             "id": "GridColumnCountField",
