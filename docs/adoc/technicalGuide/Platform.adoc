@@ -351,9 +351,8 @@ To minimize configuration files such entries should be removed from `config.prop
 
 [[sec-app.configProperties]]
 === Scout Config Properties
-To harmonize config property keys every scout property should begin with the prefix `scout.`.
 
-[cols="2,4,1,1", options="header"]
+[cols="2,4,1,1",options="header"]
 .Config Properties
 |===
 |Key
@@ -1021,7 +1020,7 @@ By default has the same value as the config property `scout.devMode` meaning it 
 |Integer
 |Servlet Filter Config
 |`get_pattern`
-|Regex (not case sensitive) of servlet request pathInfo that is compressed for GET requests. Used in `GzipServletFilter`. The default value is `.*\.(html|css|js|json|txt)`.
+|Regex (not case sensitive) of servlet request pathInfo that is compressed for GET requests. Used in `GzipServletFilter`. The default value is `.*\.(html\|css\|js\|json\|txt)`.
 |String
 |Servlet Filter Config
 |`post_min_size`
