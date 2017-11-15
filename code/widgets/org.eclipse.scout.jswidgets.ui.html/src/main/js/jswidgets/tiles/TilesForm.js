@@ -91,6 +91,12 @@ jswidgets.TilesForm.prototype._init = function(model) {
   var selectAllMenu = this.widget('SelectAllMenu');
   selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
 
+  var sortAscMenu = this.widget('SortAscMenu');
+  sortAscMenu.on('action', this._onSortAscMenuAction.bind(this));
+
+  var sortDescMenu = this.widget('SortDescMenu');
+  sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
+
   var tilesField = this.widget('TilesField');
   this.widget('FormFieldPropertiesBox').setField(tilesField);
   this.widget('GridDataBox').setField(tilesField);
@@ -225,6 +231,14 @@ jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {
   this.tiles.selectAllTiles();
 };
 
+jswidgets.TilesForm.prototype._onSortAscMenuAction = function(event) {
+  this._sortTiles(true);
+};
+
+jswidgets.TilesForm.prototype._onSortDescMenuAction = function(event) {
+  this._sortTiles();
+};
+
 jswidgets.TilesForm.prototype.filterTilesByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
@@ -241,4 +255,18 @@ jswidgets.TilesForm.prototype.filterTilesByText = function(text) {
 
 jswidgets.TilesForm.prototype.updateStatus = function() {
   this.widget('StatusField').setValue(this.session.text('TilesStatus', this.tiles.tiles.length, this.tiles.filteredTiles.length, this.tiles.selectedTiles.length));
+};
+
+jswidgets.TilesForm.prototype._sortTiles = function(asc) {
+  var tiles = this.tiles.tiles.slice();
+  var comparator = scout.comparators.ALPHANUMERIC;
+  comparator.install(this.session);
+  tiles.sort(function(tile1, tile2) {
+    var result = comparator.compare(tile1.label, tile2.label);
+    if (!asc) {
+      result = -result;
+    }
+    return result;
+  });
+  this.tiles.setTiles(tiles);
 };

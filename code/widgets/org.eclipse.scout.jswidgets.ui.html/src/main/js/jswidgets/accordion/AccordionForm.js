@@ -51,6 +51,12 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   var collapseAllMenu = this.widget('CollapseAllMenu');
   collapseAllMenu.on('action', this._onCollapseAllMenuAction.bind(this));
 
+  var sortAscMenu = this.widget('SortAscMenu');
+  sortAscMenu.on('action', this._onSortAscMenuAction.bind(this));
+
+  var sortDescMenu = this.widget('SortDescMenu');
+  sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
+
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
   this.widget('GridDataBox').setField(accordionField);
@@ -92,6 +98,14 @@ jswidgets.AccordionForm.prototype._onCollapseAllMenuAction = function(event) {
   });
 };
 
+jswidgets.AccordionForm.prototype._onSortAscMenuAction = function(event) {
+  this._sortGroups(true);
+};
+
+jswidgets.AccordionForm.prototype._onSortDescMenuAction = function(event) {
+  this._sortGroups();
+};
+
 jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
@@ -118,4 +132,18 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
     }
   });
   this.accordion.insertGroup(group);
+};
+
+jswidgets.AccordionForm.prototype._sortGroups = function(asc) {
+  var groups = this.accordion.groups.slice();
+  var comparator = scout.comparators.ALPHANUMERIC;
+  comparator.install(this.session);
+  groups.sort(function(group1, group2) {
+    var result = comparator.compare(group1.title, group2.title);
+    if (!asc) {
+      result = -result;
+    }
+    return result;
+  });
+  this.accordion.setGroups(groups);
 };

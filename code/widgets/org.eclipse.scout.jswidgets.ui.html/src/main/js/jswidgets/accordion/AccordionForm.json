@@ -30,6 +30,23 @@
             "id": "CollapseAllMenu",
             "objectType": "Menu",
             "text": "Collapse all groups"
+          },
+          {
+            "id": "SortMenu",
+            "objectType": "Menu",
+            "text": "Sort",
+            "childActions": [
+              {
+                "id": "SortAscMenu",
+                "objectType": "Menu",
+                "text": "Ascending"
+              },
+              {
+                "id": "SortDescMenu",
+                "objectType": "Menu",
+                "text": "Descending"
+              }
+            ]
           }
         ],
         "fields": [

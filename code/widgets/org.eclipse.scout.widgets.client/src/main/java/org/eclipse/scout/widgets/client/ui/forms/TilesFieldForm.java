@@ -1,6 +1,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -402,6 +403,58 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           }
 
+          @ClassId("7728b4be-e5b9-4682-ac32-1fcde1c13bea")
+          public class SortMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return "Sort";
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+            }
+
+            @Order(1000)
+            @ClassId("a41e1caa-aeaa-44cf-b7e5-224718b40788")
+            public class AscMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return "Ascending";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                sortTiles(true);
+              }
+            }
+
+            @Order(2000)
+            @ClassId("c85a8ee3-0ecf-4024-b451-1a0bf8709a84")
+            public class DescMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return "Descending";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                sortTiles(false);
+              }
+            }
+
+          }
+
           public class SimpleTile1 extends AbstractSimpleTile {
             @Override
             protected String getConfiguredLabel() {
@@ -513,6 +566,24 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
     protected void updateStatus() {
       Tiles tiles = getTilesField().getTiles();
       getStatusField().setValue(TEXTS.get("TilesStatus", tiles.getTileCount() + "", tiles.getFilteredTileCount() + "", tiles.getSelectedTileCount() + ""));
+    }
+
+    protected void sortTiles(boolean asc) {
+      List<? extends ITile> tiles = getTilesField().getTiles().getTiles();
+      tiles.sort(new Comparator<ITile>() {
+        @Override
+        public int compare(ITile tile1, ITile tile2) {
+          if (tile1 instanceof AbstractSimpleTile && tile2 instanceof AbstractSimpleTile) {
+            int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(((AbstractSimpleTile) tile1).getLabel(), ((AbstractSimpleTile) tile2).getLabel());
+            if (!asc) {
+              result = -result;
+            }
+            return result;
+          }
+          return 0;
+        }
+      });
+      getTilesField().getTiles().setTiles(tiles);
     }
 
     @Order(2000)
