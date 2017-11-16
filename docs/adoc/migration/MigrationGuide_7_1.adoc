@@ -64,6 +64,17 @@ Since the new SmartImplementation does not have a proposal chooser model anymore
 * org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser
 * org.eclipse.scout.rt.client.ui.form.fields.smartfield.TreeProposalChooser
 
+== GroupBox: moved minWidthInPixel
+The property `minWidthInPixel` has been moved to the object `LogicalGridLayoutConfig`. Instead of using `getConfiguredMinWidthInPixel` you should now set the property as follows:
+
+[source,java]
+----
+@Override
+protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+  return super.getConfiguredBodyLayoutConfig()
+      .withMinWidth(400);
+}
+----
 
 == Config Properties
 === Descriptions

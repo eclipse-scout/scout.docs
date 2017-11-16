@@ -24,6 +24,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.client.ui.tile.ITiles;
+import org.eclipse.scout.rt.client.ui.tile.TilesLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -666,12 +667,14 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setMaxContentWidth(getValue());
+          TilesLayoutConfig layoutConfig = getTilesField().getTiles().getLayoutConfig().copy()
+              .withMaxWidth(getValue());
+          getTilesField().getTiles().setLayoutConfig(layoutConfig);
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().getMaxContentWidth());
+          setValue(getTilesField().getTiles().getLayoutConfig().getMaxWidth());
         }
       }
 

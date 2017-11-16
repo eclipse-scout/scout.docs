@@ -57,6 +57,13 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   toggleVisibilityButton.on('click', this._onToggleVisibilityButtonClick.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(groupBox);
+  this.widget('BodyLayoutConfigBox').getLayoutConfig = function() {
+    return this.field.bodyLayoutConfig;
+  };
+  this.widget('BodyLayoutConfigBox').updateLayoutConfig = function(layoutConfig) {
+    this.field.setBodyLayoutConfig(layoutConfig);
+  };
+  this.widget('BodyLayoutConfigBox').setField(groupBox);
   this.widget('GridDataBox').setField(groupBox);
 };
 

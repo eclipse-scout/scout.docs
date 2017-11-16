@@ -132,21 +132,6 @@
             "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
           },
           {
-            "id": "LogicalGridColumnWidthField",
-            "objectType": "NumberField",
-            "label": "Logical Grid Column Width"
-          },
-          {
-            "id": "LogicalGridRowHeightField",
-            "objectType": "NumberField",
-            "label": "Logical Grid Row Height"
-          },
-          {
-            "id": "MaxContentWidthField",
-            "objectType": "NumberField",
-            "label": "Max Content Width"
-          },
-          {
             "id": "ColorSchemeField",
             "objectType": "SmartField",
             "label": "Color Scheme",
@@ -187,6 +172,11 @@
       {
         "id": "FormFieldPropertiesBox",
         "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "LayoutConfigBox",
+        "objectType": "jswidgets.TilesLayoutConfigBox",
         "expanded": false
       },
       {

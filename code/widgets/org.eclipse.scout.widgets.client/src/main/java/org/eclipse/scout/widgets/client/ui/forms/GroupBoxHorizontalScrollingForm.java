@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.client.ui.form.fields.LogicalGridLayoutConfig;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -76,7 +77,8 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     if (m_disableHorizontalScrolling) {
       for (IFormField field : getAllFields()) {
         if (field instanceof IGroupBox) {
-          ((IGroupBox) field).setMinWidthInPixel(0);
+          IGroupBox box = ((IGroupBox) field);
+          box.setBodyLayoutConfig(box.getBodyLayoutConfig().copy().withMinWidth(0));
         }
       }
     }
@@ -184,8 +186,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
   public class MainBox extends AbstractGroupBox {
 
     @Override
-    protected int getConfiguredMinWidthInPixel() {
-      return 400;
+    protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+      return super.getConfiguredBodyLayoutConfig()
+          .withMinWidth(400);
     }
 
     @Override
@@ -238,8 +241,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
         }
 
         @Override
-        protected int getConfiguredMinWidthInPixel() {
-          return 500;
+        protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+          return super.getConfiguredBodyLayoutConfig()
+              .withMinWidth(500);
         }
 
         @Override
@@ -268,8 +272,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 500;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(500);
           }
 
           @Override
@@ -353,8 +358,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 250;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(250);
           }
 
           @Override
@@ -417,8 +423,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 320;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(320);
           }
 
           @Override
@@ -446,8 +453,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 500;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(500);
           }
 
           @Override
@@ -496,8 +504,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 250;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(250);
           }
 
           @Override
@@ -591,8 +600,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
           }
 
           @Override
-          protected int getConfiguredMinWidthInPixel() {
-            return 500;
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withMinWidth(500);
           }
 
           @Order(10)
@@ -663,8 +673,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
       }
 
       @Override
-      protected int getConfiguredMinWidthInPixel() {
-        return 620;
+      protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+        return super.getConfiguredBodyLayoutConfig()
+            .withMinWidth(620);
       }
 
       @Override

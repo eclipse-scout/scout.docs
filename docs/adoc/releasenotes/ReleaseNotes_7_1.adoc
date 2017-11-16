@@ -115,3 +115,15 @@ The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigP
 The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
 In case it does a info message (warn in development mode) will be logged but platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
+
+== GroupBox enhancements
+=== Layout Configuration
+It is now possible to adjust the parameters of how the group box will be layouted. The following parameters may be set:
+
+* hgap: the horizontal gap in pixels to use between two logical grid columns
+* vgap: the vertical gap in pixels to use between two logical grid rows
+* columnWidth: the width in pixels to use for a grid column
+* rowHeight: the height in pixels to use for a grid row
+* minWidth: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
+
+These values may be set using `getConfiguredBodyLayoutConfig`.

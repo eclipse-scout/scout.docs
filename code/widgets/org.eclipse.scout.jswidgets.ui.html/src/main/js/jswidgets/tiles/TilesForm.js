@@ -38,18 +38,6 @@ jswidgets.TilesForm.prototype._init = function(model) {
   logicalGridField.setValue(this.tiles.logicalGrid ? this.tiles.logicalGrid.objectType : null);
   logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
 
-  var logicalGridColumnWidthField = this.widget('LogicalGridColumnWidthField');
-  logicalGridColumnWidthField.setValue(this.tiles.logicalGridColumnWidth);
-  logicalGridColumnWidthField.on('propertyChange', this._onLogicalGridColumnWidthPropertyChange.bind(this));
-
-  var logicalGridRowHeightField = this.widget('LogicalGridRowHeightField');
-  logicalGridRowHeightField.setValue(this.tiles.logicalGridRowHeight);
-  logicalGridRowHeightField.on('propertyChange', this._onLogicalGridRowHeightPropertyChange.bind(this));
-
-  var maxContentWidthField = this.widget('MaxContentWidthField');
-  maxContentWidthField.setValue(this.tiles.maxContentWidth);
-  maxContentWidthField.on('propertyChange', this._onMaxContentWidthPropertyChange.bind(this));
-
   var withPlaceholdersField = this.widget('WithPlaceholdersField');
   withPlaceholdersField.setValue(this.tiles.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
@@ -98,6 +86,7 @@ jswidgets.TilesForm.prototype._init = function(model) {
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
   var tilesField = this.widget('TilesField');
+  this.widget('LayoutConfigBox').setField(this.tiles);
   this.widget('FormFieldPropertiesBox').setField(tilesField);
   this.widget('GridDataBox').setField(tilesField);
   this.updateStatus();
@@ -124,24 +113,6 @@ jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event)
 jswidgets.TilesForm.prototype._onLogicalGridChange = function(event) {
   if (event.propertyName === 'value') {
     this.tiles.setLogicalGrid(event.newValue);
-  }
-};
-
-jswidgets.TilesForm.prototype._onLogicalGridColumnWidthPropertyChange = function(event) {
-  if (event.propertyName === 'value') {
-    this.tiles.setLogicalGridColumnWidth(event.newValue);
-  }
-};
-
-jswidgets.TilesForm.prototype._onLogicalGridRowHeightPropertyChange = function(event) {
-  if (event.propertyName === 'value') {
-    this.tiles.setLogicalGridRowHeight(event.newValue);
-  }
-};
-
-jswidgets.TilesForm.prototype._onMaxContentWidthPropertyChange = function(event) {
-  if (event.propertyName === 'value') {
-    this.tiles.setMaxContentWidth(event.newValue);
   }
 };
 

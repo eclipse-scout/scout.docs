@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.group.IGroup;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.client.ui.tile.ITiles;
+import org.eclipse.scout.rt.client.ui.tile.TilesLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
@@ -287,13 +288,10 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       }
 
       @Override
-      protected int getConfiguredLogicalGridColumnWidth() {
-        return 100;
-      }
-
-      @Override
-      protected int getConfiguredLogicalGridRowHeight() {
-        return 100;
+      protected TilesLayoutConfig getConfiguredLayoutConfig() {
+        return super.getConfiguredLayoutConfig()
+            .withColumnWidth(100)
+            .withRowHeight(100);
       }
 
       @Override

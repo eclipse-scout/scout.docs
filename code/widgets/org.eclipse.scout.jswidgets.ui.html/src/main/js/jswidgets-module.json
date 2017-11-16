@@ -12,6 +12,7 @@
     "jswidgets/groupbox/GroupBoxForm.json",
     "jswidgets/logicalgrid/GridDataBox.json",
     "jswidgets/logicalgrid/LogicalGridForm.json",
+    "jswidgets/logicalgrid/LogicalGridLayoutConfigBox.json",
     "jswidgets/numberfield/NumberFieldForm.json",
     "jswidgets/smartfield/SmartFieldForm.json",
     "jswidgets/smartfield/SmartFieldPropertiesBox.json",
@@ -24,6 +25,7 @@
     "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tablefield/TableFieldForm.json",
     "jswidgets/tiles/TilesForm.json",
+    "jswidgets/tiles/TilesLayoutConfigBox.json",
     "jswidgets/valuefield/ValueFieldPropertiesBox.json"
   ]
 }

@@ -121,6 +121,10 @@
         "objectType": "jswidgets.FormFieldPropertiesBox"
       },
       {
+        "id": "BodyLayoutConfigBox",
+        "objectType": "jswidgets.LogicalGridLayoutConfigBox"
+      },
+      {
         "id": "GridDataBox",
         "objectType": "jswidgets.GridDataBox",
         "label": "Grid Data Hints"

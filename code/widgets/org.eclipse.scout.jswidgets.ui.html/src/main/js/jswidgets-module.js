@@ -33,6 +33,7 @@
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
   __include("jswidgets/logicalgrid/LogicalGridForm.js");
+  __include("jswidgets/logicalgrid/LogicalGridLayoutConfigBox.js");
   __include("jswidgets/logicalgrid/LogicalGridLookupCall.js");
   __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldPropertiesBox.js");
@@ -55,6 +56,7 @@
   __include("jswidgets/tiles/SimpleTile.js");
   __include("jswidgets/tiles/SimpleTileFilter.js");
   __include("jswidgets/tiles/TilesForm.js");
+  __include("jswidgets/tiles/TilesLayoutConfigBox.js");
   __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
   __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");
