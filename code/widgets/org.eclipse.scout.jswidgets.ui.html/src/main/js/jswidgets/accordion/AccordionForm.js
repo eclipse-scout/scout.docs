@@ -57,6 +57,12 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   var sortDescMenu = this.widget('SortDescMenu');
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
+  var deleteAllInFirstGroupMenu = this.widget('DeleteAllInFirstGroupMenu');
+  deleteAllInFirstGroupMenu.on('action', this._onDeleteAllInFirstGroupMenuAction.bind(this));
+
+  var insertIntoFirstGroupMenu = this.widget('InsertIntoFirstGroupMenu');
+  insertIntoFirstGroupMenu.on('action', this._onInsertIntoFirstGroupMenuMenuAction.bind(this));
+
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
   this.widget('GridDataBox').setField(accordionField);
@@ -106,17 +112,26 @@ jswidgets.AccordionForm.prototype._onSortDescMenuAction = function(event) {
   this._sortGroups();
 };
 
+jswidgets.AccordionForm.prototype._onDeleteAllInFirstGroupMenuAction = function(event) {
+  if (this.accordion.groups.length > 0) {
+    this.accordion.groups[0].body.deleteAllTiles();
+  }
+};
+
+jswidgets.AccordionForm.prototype._onInsertIntoFirstGroupMenuMenuAction = function(event) {
+  if (this.accordion.groups.length > 0) {
+    this.accordion.groups[0].body.insertTile(this._createTile({
+      label: 'New tile'
+    }));
+  }
+};
+
 jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
   for (var i = 0; i < maxTiles; i++) {
-    tiles.push(scout.create('jswidgets.SimpleTile', {
-      parent: this,
-      label: 'Tile ' + i,
-      gridDataHints: {
-        weightX: 0
-      },
-      colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
+    tiles.push(this._createTile({
+      label: 'Tile ' + i
     }));
   }
   var group = new scout.create('Group', {
@@ -125,13 +140,27 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
     body: {
       objectType: 'Tiles',
       gridColumnCount: 6,
-      logicalGridColumnWidth: 100,
-      logicalGridRowHeight: 100,
+      layoutConfig: {
+        columnWidth: 100,
+        rowHeight: 100
+      },
       scrollable: false,
       tiles: tiles
     }
   });
   this.accordion.insertGroup(group);
+};
+
+jswidgets.AccordionForm.prototype._createTile = function(model) {
+  var defaults = {
+    parent: this,
+    gridDataHints: {
+      weightX: 0
+    },
+    colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
+  };
+  model = $.extend({}, defaults, model);
+  return scout.create('jswidgets.SimpleTile', model);
 };
 
 jswidgets.AccordionForm.prototype._sortGroups = function(asc) {

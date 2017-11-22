@@ -47,6 +47,23 @@
                 "text": "Descending"
               }
             ]
+          },
+          {
+            "id": "TilesMenu",
+            "objectType": "Menu",
+            "text": "Tiles",
+            "childActions": [
+              {
+                "id": "DeleteAllInFirstGroupMenu",
+                "objectType": "Menu",
+                "text": "Delete all tiles from first group"
+              },
+              {
+                "id": "InsertIntoFirstGroupMenu",
+                "objectType": "Menu",
+                "text": "Insert tile into first group"
+              }
+            ]
           }
         ],
         "fields": [
