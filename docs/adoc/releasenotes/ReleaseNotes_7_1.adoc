@@ -112,7 +112,7 @@ Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty
 The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigProperty<DATA_TYPE, RAW_TYPE>` to the interface. Therefore the visibility has changed from protected to public.
 
 === Validation
-The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
+The concrete implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
 In case it does a info message (warn in development mode) will be logged but platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
 
@@ -127,3 +127,34 @@ It is now possible to adjust the parameters of how the group box will be layoute
 * minWidth: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
 
 These values may be set using `getConfiguredBodyLayoutConfig`.
+
+== Introducing Widget.java
+On JavaScript side, there has been a class `Widget.js` for a long time now. With this release the counterpart `Widget.java` has been added. This gives all existing widgets like `FormField`, `Form`, `MessageBox`, `Menu` etc. a new common base class. It also helps creating widgets which aren't necessarily form fields.
+
+== New Widget 'Tiles'
+The new `Tiles` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
+
+A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/7.1.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
+
+In order to add the `Tiles` to a form, you can use the class `TilesField` which is basically a simple `FormField` wrapping the `Tiles`. You cannot use the `Tiles` directly because a `GroupBox` only accepts `FormField` s.
+
+A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilesfield.
+
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tiles.
+
+[[img-tiles]]
+.Tiles
+image::{imgsdir}/tiles.png[]
+
+== New Widget 'Accordion'
+The `Accordion` displays several collapsible `Group` s. The default behavior is to collapse every other group if one group is expanded. Because that is not in any case desired, the behavior may be disabled by setting the property `exclusiveExpand` to false.
+
+The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `Tiles`. Because having tiles in an accordion is a typical use case, there is a widget called `TilesAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group.
+
+A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield.
+
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#accordion.
+
+[[img-accordion]]
+.Accordion
+image::{imgsdir}/accordion.png[]

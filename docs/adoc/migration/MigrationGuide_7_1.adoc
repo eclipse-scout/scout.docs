@@ -306,7 +306,13 @@ The following config property keys have been renamed (the old keys are no longer
 
 == API Changes (JavaScript)
 
-N/A
+=== Rename of Less Variables
+If you created a custom theme, you might have to adjust some less variables.
+
+* Splitted @group-title-padding-y into @group-title-padding-top and @group-title-padding-bottom
+* Renamed @tabbox-padding-x to @tab-item-padding-x
+* Renamed @tabbox-focus-arrow-width to @tab-item-focus-arrow-width
+* Renamed @tabbox-border-width to @tab-area-border-width
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
