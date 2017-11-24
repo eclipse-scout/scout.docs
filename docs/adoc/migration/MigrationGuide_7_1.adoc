@@ -309,10 +309,18 @@ The following config property keys have been renamed (the old keys are no longer
 === Rename of Less Variables
 If you created a custom theme, you might have to adjust some less variables.
 
-* Splitted @group-title-padding-y into @group-title-padding-top and @group-title-padding-bottom
-* Renamed @tabbox-padding-x to @tab-item-padding-x
-* Renamed @tabbox-focus-arrow-width to @tab-item-focus-arrow-width
-* Renamed @tabbox-border-width to @tab-area-border-width
+* Splitted `@group-title-padding-y` into `@group-title-padding-top` and `@group-title-padding-bottom`
+* Splitted `@tree-node-padding` into `@tree-node-padding-y`, `@tree-node-padding-left` and `@tree-node-padding-right`
+* Renamed `@tabbox-padding-x` to `@tab-item-padding-x`
+* Renamed `@tabbox-focus-arrow-width` to `@tab-item-focus-arrow-width`
+* Renamed `@tabbox-border-width` to `@tab-area-border-width`
+* Renamed `@compact-outline-node-padding-v` to `@compact-outline-node-padding-y`
+* Renamed `@box-margin-v` to `@box-margin-y`
+* Renamed `@outline-breadcrumb-node-padding-v` to `@outline-breadcrumb-node-padding-y`
+* Renamed `@tile-padding-h` to `@tile-field-padding-x`
+* Renamed `@tile-padding-v` to `@tile-field-padding-y`
+* Renamed `@planner-header-buttons` to `@planner-header-button-height`
+* Renamed `@calendar-header-buttons` to `@calendar-header-button-height`
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
