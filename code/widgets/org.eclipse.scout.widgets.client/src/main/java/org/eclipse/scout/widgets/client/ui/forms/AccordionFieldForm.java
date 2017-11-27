@@ -134,7 +134,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       }
 
       @Order(1300)
-      @ClassId("09d44b29-d1b9-427b-af2a-89825f3f31f3")
+      @ClassId("bbea0547-f999-408a-a15f-a1342843a31d")
       public class CollapseAllMenu extends AbstractMenu {
         @Override
         protected String getConfiguredText() {

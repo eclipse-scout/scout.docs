@@ -219,7 +219,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(1100)
-          @ClassId("09d44b29-d1b9-427b-af2a-89825f3f31f3")
+          @ClassId("0ddffa11-4ab7-4815-b6fa-e3cc814df30c")
           public class SelectNextMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
