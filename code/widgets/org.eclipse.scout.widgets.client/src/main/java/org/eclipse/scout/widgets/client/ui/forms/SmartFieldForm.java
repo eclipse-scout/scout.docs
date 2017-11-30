@@ -679,7 +679,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           addNodesToLookupRows(nodes, rows);
 
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
-          getListSmartField().initField();
+          getListSmartField().reinit();
         }
       }
 

@@ -433,7 +433,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
           addNodesToLookupRows(nodes, rows);
           ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
 
-          getListBoxField().initField();
+          getListBoxField().reinit();
         }
       }
 

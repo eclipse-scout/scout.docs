@@ -495,7 +495,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
           addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeBoxField().getLookupCall()).setLookupRows(rows);
 
-          getTreeBoxField().initField();
+          getTreeBoxField().reinit();
         }
       }
 
