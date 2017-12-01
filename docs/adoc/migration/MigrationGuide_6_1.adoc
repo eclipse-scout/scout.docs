@@ -49,11 +49,31 @@ If such functionality is needed, it has to be programmed with java script within
 === @PostConstruct
 A method annotated with `@PostConstruct` in a Bean is now guaranteed to run exactly once. The constructor may still run more than once.
 
+=== Desktop
+Removed `setOutline(IOutline outline)`, use `activateOutline(IOutline outline)` instead.
+
 === Tree
+==== Adjusted execAutoCheckChildNodes
 The method `AbstractTree#execAutoCheckChildNodes` got two new parameters and the default implementation now considers `enabledNodesOnly` and does not always ignore disabled nodes.
 
+==== Deprecated getConfiguredMultiSelect()
+The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. Multiselection on trees was never supported by the UI even though the model suggested so. The method will be declared final in the next Scout release, with its default implementation returning false, in case multiselection support is added in a future release.
+
 === Table
+==== Adjusted behavior of Cell.setText()
 `Cell.setText(null)` has no effect anymore. The JavaScript table has been improved so that every column is now able to compute the text based on the value of a cell. This does only happen if no explicit text is provided which means `cell.setText(null)` would trigger that behavior. If you really want to set a value but no text, you can use `cell.textText("")` instead.
+
+==== Removed AbstractTableFieldData
+* With Scout 3.10.0 "Bean based TableData" had been introduced.
+* With Scout 4.3.0 (Mars-M5) "Bean based TableData" became default.
+* With Scout 6.0 (Neon), the SDK did not generate the FormData for "Array based TableData" anymore.
+
+Now it is time to remove the support for the "Array based TableData" completeley, see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=496292. A description of the differences between these two approaches can be found here: https://wiki.eclipse.org/Scout/Concepts/TableData 
+
+==== ITableHolder
+The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
+Therefore the class `ITableHolder` has been removed. The constants that were present on that interface can be accessed using the interface `org.eclipse.scout.rt.client.ui.basic.table.ITableRow` from the client or `org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder` from outside the client.
+
 
 === CookieUtility
 `CookieUtility` was moved from _org.eclipse.scout.rt.ui.html_ to _org.eclipse.scout.rt.server.commons_. Migrate by updating your imports. The Method `addCookie()` is now called `addPersistentCookie()`. Additional methods are available (to add a session cookie, or delete an existing cookie).
@@ -117,10 +137,6 @@ $(document).ready(function() {
 });
 ----
 
-=== ITableHolder
-The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
-Therefore the class `ITableHolder` has been removed. The constants that were present on that interface can be accessed using the interface `org.eclipse.scout.rt.client.ui.basic.table.ITableRow` from the client or `org.eclipse.scout.rt.platform.holders.ITableBeanRowHolder` from outside the client.
-
 === NumberUtility.nvl(), DateUtility.nvl(), StringUtility.nvl()
 The `nvl()` methods on NumberUtility, DateUtility and StringUtiltiy were moved to a generic `ObjectUtility.nvl()`.
 The existing methods were deprecated and will be removed with next Scout release.
@@ -165,9 +181,6 @@ Some methods on `IDeviceTransformer` where changed. Projects with own contributi
 |The existing method was renamed to match the new method `notifyPageDetailFormChanged` and to clearify that this method is called every time, the desktop's detail table changes (not only when the detail table is first initialized).
 
 |===
-
-=== AbstractTree.getConfiguredMultiSelect() deprecated
-The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. Multiselection on trees was never supported by the UI even though the model suggested so. The method will be declared final in the next Scout release, with its default implementation returning false, in case multiselection support is added in a future release.
 
 // ^^^
 // Insert descriptions of Java API changes here
