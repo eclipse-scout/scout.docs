@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipse.scout.widgets</groupId>
     <artifactId>org.eclipse.scout.widgets</artifactId>
-    <version>7.0.200-SNAPSHOT</version>
+    <version>7.0.200.004_Oxygen_2_RC3</version>
     <relativePath>../org.eclipse.scout.widgets</relativePath>
   </parent>
 

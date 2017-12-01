@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>7.0.200-SNAPSHOT</version>
+    <version>7.0.200.004_Oxygen_2_RC3</version>
   </parent>
 
   <properties>
@@ -22,37 +22,37 @@
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_beginners_guide</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>eclipse_help</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_helloworld</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_install</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_migration</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_technical_guide</artifactId>
-      <version>7.0.200-SNAPSHOT</version>
+      <version>7.0.200.004_Oxygen_2_RC3</version>
       <type>pom</type>
     </dependency>
   </dependencies>
