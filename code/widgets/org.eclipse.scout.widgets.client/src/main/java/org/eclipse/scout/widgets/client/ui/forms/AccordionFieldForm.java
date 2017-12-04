@@ -163,7 +163,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
           return FULL_WIDTH;
         }
 
-        @ClassId("269a1b03-5af1-4cf8-a063-20a9bbe85ae8")
+        @ClassId("8221d7df-6803-434b-ada8-ae1bdc4f0723")
         public class Accordion extends AbstractAccordion {
 
         }

@@ -150,7 +150,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           updateStatus();
         }
 
-        @ClassId("269a1b03-5af1-4cf8-a063-20a9bbe85ae8")
+        @ClassId("0cd4de91-68d0-4a1d-b123-5006b566481d")
         public class Tiles extends AbstractTiles {
 
           @Override
