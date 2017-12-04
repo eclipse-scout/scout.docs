@@ -151,7 +151,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @ClassId("0cd4de91-68d0-4a1d-b123-5006b566481d")
-        public class Tiles extends AbstractTiles {
+        public class Tiles extends AbstractTiles<AbstractSimpleTile> {
 
           @Override
           protected void initConfig() {
@@ -166,7 +166,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Override
-          protected void execTilesSelected(List<? extends ITile> tiles) {
+          protected void execTilesSelected(List<AbstractSimpleTile> tiles) {
             super.execTilesSelected(tiles);
             MenuUtility.updateMenuVisibilitiesForTiles(this);
             updateStatus();
@@ -208,7 +208,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected void execAction() {
-              List<ITile> tiles = new ArrayList<>();
+              List<AbstractSimpleTile> tiles = new ArrayList<>();
               for (int i = 0; i < 50; i++) {
                 SimpleTile tile = new SimpleTile();
                 tile.setLabel("New tile " + m_tilesAddedCount++);
@@ -237,8 +237,8 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
               if (tiles.getTiles().size() == 0) {
                 return;
               }
-              ITile selectedTile = tiles.getSelectedTile();
-              ITile tileToSelect = null;
+              AbstractSimpleTile selectedTile = tiles.getSelectedTile();
+              AbstractSimpleTile tileToSelect = null;
               if (selectedTile != null) {
                 int selectedTileIndex = tiles.getTiles().indexOf(selectedTile);
                 if (selectedTileIndex < tiles.getTiles().size() - 1) {
@@ -570,7 +570,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     protected void sortTiles(boolean asc) {
-      List<? extends ITile> tiles = getTilesField().getTiles().getTiles();
+      List<AbstractSimpleTile> tiles = getTilesField().getTiles().getTiles();
       tiles.sort(new Comparator<ITile>() {
         @Override
         public int compare(ITile tile1, ITile tile2) {
