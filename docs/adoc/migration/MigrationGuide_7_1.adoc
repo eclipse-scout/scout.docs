@@ -88,6 +88,9 @@ pattern as for `postInitConfig`, `init` and `dispose`.
 
 If you used one of the deprecated methods (`initField`, `initAction` etc.), replace them with one of the following methods: `init`, `reinit` or `initInternal`. Use `init` if you created a field and need to initialize it. Use `reinit` if you explicitly want to reinitialize an already initialized field. Use `initInternal` if your custom widget overrides `initField`.
 
+== GzipServletFilter
+Replaced `get_pattern` and `post_pattern` with `content_types`. If you set these init parameters in your web.xml, replace or remove them accordingly.
+
 == Config Properties
 === Descriptions
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
