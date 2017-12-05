@@ -93,7 +93,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       }
 
       @Order(1100)
-      @ClassId("64f7eb9c-bedd-4680-8b94-555c9c64fd97")
+      @ClassId("64f7eb9c-bedd-4680-8b94-565c9c64fd97")
       public class DeleteFirstMenu extends AbstractMenu {
         @Override
         protected String getConfiguredText() {
