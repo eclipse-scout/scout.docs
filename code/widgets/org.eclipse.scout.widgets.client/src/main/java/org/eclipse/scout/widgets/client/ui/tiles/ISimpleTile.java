@@ -9,4 +9,8 @@ public interface ISimpleTile extends ITile {
   String getLabel();
 
   void setLabel(String label);
+
+  String getGroup();
+
+  void setGroup(String group);
 }

@@ -5,6 +5,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.annotations.ConfigProperty;
 
 public abstract class AbstractSimpleTile extends AbstractTile implements ISimpleTile {
+  private String m_group;
 
   @Override
   protected void initConfig() {
@@ -27,5 +28,15 @@ public abstract class AbstractSimpleTile extends AbstractTile implements ISimple
   @Override
   public void setLabel(String label) {
     propertySupport.setProperty(PROP_LABEL, label);
+  }
+
+  @Override
+  public String getGroup() {
+    return m_group;
+  }
+
+  @Override
+  public void setGroup(String group) {
+    m_group = group;
   }
 }
