@@ -32,6 +32,17 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 
 == API Changes (Java)
 
+== Removed constants/methods from `ClientUIPreferences`
+Since the new Html UI was introduced with Scout 5.2 these constants and methods had no effect on the UI anymore. Since Scout is now a browser application we don't have any control over the application window anymore. The form-bounds are stored in the local browser storage thus they're not required in the Java model anymore. Removed constants/methods:
+
+* APPLICATION_WINDOW_MAXIMIZED
+* APPLICATION_WINDOW_BOUNDS
+* FORM_BOUNDS
+* getFormBounds()
+* setFormBounds(IForm form, Rectangle bounds)
+* getApplicationWindowMaximized()
+* setApplicationWindowPreferences(BoundsSpec r, boolean maximized)
+
 == Removed property `focusable` from IFormField, AbstractFormField
 Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:
 
