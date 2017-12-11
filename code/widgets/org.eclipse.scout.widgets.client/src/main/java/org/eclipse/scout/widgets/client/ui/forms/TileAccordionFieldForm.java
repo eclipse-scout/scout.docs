@@ -447,7 +447,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
       }
 
       @Order(40)
-      @ClassId("1f474645-120a-4386-b826-13a395cf2924")
+      @ClassId("eb20300a-a46d-4449-8613-75b6991b648f")
       public class GridColumnCountField extends AbstractIntegerField {
 
         @Override

@@ -679,7 +679,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(25)
-      @ClassId("e63c284c-1bc6-4e73-bd69-4c3bc8f321d5")
+      @ClassId("e3e5e1bc-ce2e-44d2-9669-d3c950fe4d88")
       public class SelectableField extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
