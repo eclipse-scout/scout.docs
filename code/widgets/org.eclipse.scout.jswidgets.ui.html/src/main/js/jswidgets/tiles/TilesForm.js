@@ -229,15 +229,14 @@ jswidgets.TilesForm.prototype.updateStatus = function() {
 };
 
 jswidgets.TilesForm.prototype._sortTiles = function(asc) {
-  var tiles = this.tiles.tiles.slice();
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
-  tiles.sort(function(tile1, tile2) {
+  this.tiles.setComparator(function(tile1, tile2) {
     var result = comparator.compare(tile1.label, tile2.label);
     if (!asc) {
       result = -result;
     }
     return result;
   });
-  this.tiles.setTiles(tiles);
+  this.tiles.sort();
 };

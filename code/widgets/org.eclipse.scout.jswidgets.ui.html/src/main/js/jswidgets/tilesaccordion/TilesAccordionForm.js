@@ -11,6 +11,7 @@
 jswidgets.TilesAccordionForm = function() {
   jswidgets.TilesAccordionForm.parent.call(this);
   this.insertedGroupCount = 0;
+  this.insertedTilesCount = 0;
 };
 scout.inherits(jswidgets.TilesAccordionForm, scout.Form);
 
@@ -150,7 +151,7 @@ jswidgets.TilesAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = fun
 jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = function(event) {
   if (this.accordion.groups.length > 0) {
     this.accordion.groups[0].body.insertTile(this._createTile({
-      label: 'New tile'
+      label: 'New tile ' + this.insertedTilesCount++
     }));
   }
 };
@@ -158,7 +159,7 @@ jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = funct
 jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = function(event) {
   if (this.accordion.groups.length > 1) {
     this.accordion.groups[1].body.insertTile(this._createTile({
-      label: 'New tile'
+      label: 'New tile ' + this.insertedTilesCount++
     }));
   }
 };
@@ -216,15 +217,14 @@ jswidgets.TilesAccordionForm.prototype._createTile = function(model) {
 };
 
 jswidgets.TilesAccordionForm.prototype._sortTiles = function(asc) {
-  var tiles = this.accordion.getTiles();
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
-  tiles.sort(function(tile1, tile2) {
+  this.accordion.setTileComparator(function(tile1, tile2) {
     var result = comparator.compare(tile1.label, tile2.label);
     if (!asc) {
       result = -result;
     }
     return result;
   });
-  this.accordion.setTiles(tiles);
+  this.accordion.sortTiles();
 };

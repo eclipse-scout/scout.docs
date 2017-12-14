@@ -164,15 +164,14 @@ jswidgets.AccordionForm.prototype._createTile = function(model) {
 };
 
 jswidgets.AccordionForm.prototype._sortGroups = function(asc) {
-  var groups = this.accordion.groups.slice();
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
-  groups.sort(function(group1, group2) {
+  this.accordion.setComparator(function(group1, group2) {
     var result = comparator.compare(group1.title, group2.title);
     if (!asc) {
       result = -result;
     }
     return result;
   });
-  this.accordion.setGroups(groups);
+  this.accordion.sort();
 };
