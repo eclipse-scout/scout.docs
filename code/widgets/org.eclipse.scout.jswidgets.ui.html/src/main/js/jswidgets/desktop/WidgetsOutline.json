@@ -133,6 +133,14 @@
       "detailForm": {
         "objectType": "jswidgets.TilesForm"
       }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "${textKey:TilesAccordion}",
+      "detailForm": {
+        "objectType": "jswidgets.TilesAccordionForm"
+      }
     }
   ]
 }

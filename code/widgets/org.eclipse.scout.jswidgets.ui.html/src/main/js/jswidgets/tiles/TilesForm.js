@@ -189,13 +189,13 @@ jswidgets.TilesForm.prototype._onDeleteMenuAction = function(event) {
 };
 
 jswidgets.TilesForm.prototype._onSelectNextMenuAction = function(event) {
-  if (this.tiles.tiles.length === 0) {
+  if (this.tiles.filteredTiles.length === 0) {
     return;
   }
-  var selectedTileIndex = scout.arrays.findIndex(this.tiles.tiles, function(tile) {
+  var selectedTileIndex = scout.arrays.findIndex(this.tiles.filteredTiles, function(tile) {
     return tile.selected;
   });
-  this.tiles.selectTile(this.tiles.tiles[selectedTileIndex + 1] || this.tiles.tiles[0]);
+  this.tiles.selectTile(this.tiles.filteredTiles[selectedTileIndex + 1] || this.tiles.filteredTiles[0]);
 };
 
 jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {

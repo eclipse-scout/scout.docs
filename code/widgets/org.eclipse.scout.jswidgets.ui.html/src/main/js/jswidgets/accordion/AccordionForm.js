@@ -61,7 +61,7 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   deleteAllInFirstGroupMenu.on('action', this._onDeleteAllInFirstGroupMenuAction.bind(this));
 
   var insertIntoFirstGroupMenu = this.widget('InsertIntoFirstGroupMenu');
-  insertIntoFirstGroupMenu.on('action', this._onInsertIntoFirstGroupMenuMenuAction.bind(this));
+  insertIntoFirstGroupMenu.on('action', this._onInsertIntoFirstGroupMenuAction.bind(this));
 
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
@@ -118,7 +118,7 @@ jswidgets.AccordionForm.prototype._onDeleteAllInFirstGroupMenuAction = function(
   }
 };
 
-jswidgets.AccordionForm.prototype._onInsertIntoFirstGroupMenuMenuAction = function(event) {
+jswidgets.AccordionForm.prototype._onInsertIntoFirstGroupMenuAction = function(event) {
   if (this.accordion.groups.length > 0) {
     this.accordion.groups[0].body.insertTile(this._createTile({
       label: 'New tile'

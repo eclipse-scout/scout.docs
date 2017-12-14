@@ -57,6 +57,7 @@
   __include("jswidgets/tiles/SimpleTileFilter.js");
   __include("jswidgets/tiles/TilesForm.js");
   __include("jswidgets/tiles/TilesLayoutConfigBox.js");
+  __include("jswidgets/tilesaccordion/TilesAccordionForm.js");
   __include("jswidgets/tablefield/CheckableStyleLookupCall.js");
   __include("jswidgets/tablefield/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");

@@ -1,0 +1,151 @@
+{
+  "id": "jswidgets.TilesAccordionForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "menus": [
+           {
+            "id": "GroupsMenu",
+            "objectType": "Menu",
+            "text": "Groups",
+            "childActions": [
+              {
+              "id": "InsertMenu",
+              "objectType": "Menu",
+              "text": "Insert group"
+              },
+              {
+                "id": "DeleteFirstMenu",
+                "objectType": "Menu",
+                "text": "Delete first group"
+              }
+            ]
+          },
+          {
+            "id": "InsertTileIntoGroup0Menu",
+            "objectType": "Menu",
+            "text": "Insert tile into group 0"
+          },
+          {
+            "id": "InsertTileIntoGroup1Menu",
+            "objectType": "Menu",
+            "text": "Insert tile into group 1"
+          },
+          {
+            "id": "DeleteSelectedTilesMenu",
+            "objectType": "Menu",
+            "text": "Delete selected tiles"
+          },
+          {
+            "id": "SelectNextMenu",
+            "objectType": "Menu",
+            "text": "Select next tile"
+          },
+          {
+            "id": "SelectAllMenu",
+            "objectType": "Menu",
+            "text": "Select all tiles"
+          },
+          {
+            "id": "SortMenu",
+            "objectType": "Menu",
+            "text": "Sort",
+            "childActions": [
+              {
+                "id": "SortAscMenu",
+                "objectType": "Menu",
+                "text": "Ascending"
+              },
+              {
+                "id": "SortDescMenu",
+                "objectType": "Menu",
+                "text": "Descending"
+              }
+            ]
+          }
+        ],
+        "fields": [
+          {
+            "id": "AccordionField",
+            "objectType": "AccordionField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "h": 4,
+              "w": 2
+            },
+            "accordion": {
+              "id": "Accordion",
+              "objectType": "TilesAccordion",
+              "scrollable": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "expandable": true,
+        "fields": [
+          {
+            "id": "GridColumnCountField",
+            "objectType": "NumberField",
+            "label": "Grid Column Count"
+          },
+          {
+            "id": "WithPlaceholdersField",
+            "objectType": "CheckBoxField",
+            "label": "With Placeholders",
+            "labelVisible": false
+          },
+          {
+            "id": "SelectableField",
+            "objectType": "CheckBoxField",
+            "label": "Selectable",
+            "labelVisible": false
+          },
+          {
+            "id": "MultiSelectField",
+            "objectType": "CheckBoxField",
+            "label": "Multi Select",
+            "labelVisible": false
+          },
+          {
+            "id": "ExclusiveExpandField",
+            "objectType": "CheckBoxField",
+            "label": "Exclusive Expand",
+            "labelVisible": false,
+            "tooltipText": "${textKey:ExclusiveExpandTooltip}",
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
+          },
+          {
+            "id": "ScrollableField",
+            "objectType": "CheckBoxField",
+            "label": "Scrollable",
+            "labelVisible": false
+          }
+        ]
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints",
+        "expanded": false
+      }
+    ]
+  }
+}

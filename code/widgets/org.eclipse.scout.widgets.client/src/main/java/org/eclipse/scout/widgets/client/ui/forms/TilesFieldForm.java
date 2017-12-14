@@ -570,21 +570,16 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     protected void sortTiles(boolean asc) {
-      List<AbstractSimpleTile> tiles = getTilesField().getTiles().getTiles();
-      tiles.sort(new Comparator<ITile>() {
+      getTilesField().getTiles().setComparator(new Comparator<AbstractSimpleTile>() {
         @Override
-        public int compare(ITile tile1, ITile tile2) {
-          if (tile1 instanceof AbstractSimpleTile && tile2 instanceof AbstractSimpleTile) {
-            int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(((AbstractSimpleTile) tile1).getLabel(), ((AbstractSimpleTile) tile2).getLabel());
-            if (!asc) {
-              result = -result;
-            }
-            return result;
+        public int compare(AbstractSimpleTile tile1, AbstractSimpleTile tile2) {
+          int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(((AbstractSimpleTile) tile1).getLabel(), ((AbstractSimpleTile) tile2).getLabel());
+          if (!asc) {
+            result = -result;
           }
-          return 0;
+          return result;
         }
       });
-      getTilesField().getTiles().setTiles(tiles);
     }
 
     @Order(2000)
