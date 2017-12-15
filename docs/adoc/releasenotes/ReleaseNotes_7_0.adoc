@@ -20,6 +20,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 ==== Oxygen.3 (7.0.300) Release expected on March 21, 2018
 
 {NotReleasedWarning}
+
 * <<New Property Auto Optimize Column Max Width (since 7.0.300)>>
 
 ==== Oxygen.2 (7.0.200) Released on December 20, 2017
