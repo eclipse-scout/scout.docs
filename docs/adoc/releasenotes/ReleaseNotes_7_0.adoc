@@ -20,6 +20,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 ==== Oxygen.3 (7.0.300) Release expected on March 21, 2018
 
 {NotReleasedWarning}
+* <<New Property Auto Optimize Column Max Width (since 7.0.300)>>
 
 ==== Oxygen.2 (7.0.200) Released on December 20, 2017
 
@@ -236,6 +237,9 @@ image::{imgsdir}/table_header_menu_filter_sorting.png[]
 
 == Auto Optimize Column Width (since 7.0.100)
 The column has a property called `autoOptimizeWidth`. This property has been there for a while but has not been interpreted yet. With 7.0.100 the support for this property has been implemented. If you set it to true on a specific column, the column will always be as width as its content. If not set, the user can still optimize the width manually by double clicking the separator between two columns.
+
+== New Property Auto Optimize Column Max Width (since 7.0.300)
+The new property `autoOptimizeMaxWidth` determines the maximum width columns will not grow to when they are auto optimized when `autoOptimizeWidth` is set to true. The user may still manually make columns wider by dragging or double-clicking the column separators.
 
 == New Property for Request Timeout (since 7.0.100)
 Every ui request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property `scout.ui.model.jobs.await.timeout` (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.
