@@ -17,9 +17,7 @@ https://eclipsescout.github.io/6.1/migration-guide.html
 
 The following changes were made after the initial 7.0 release (Eclipse Oxygen release). Additionally follow these instructions when updating to a _service release_.
 
-==== Oxygen.1 (7.0.100) Release expected on September 27, 2017
-
-{NotReleasedWarning}
+==== Oxygen.1 (7.0.100) Released on September 27, 2017
 
 * <<Graphic Utility Naming (since 7.0.100)>>
 * <<Focus and RequestFocus merged (since 7.0.100)>>

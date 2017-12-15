@@ -6,7 +6,7 @@
 
 == About This Release
 
-Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was released in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]), with the Service Release 1 released in September 2017. The latest version of this release is _7.0.100.017_Oxygen_1_.
+Eclipse Scout 7.0 is part of the Eclipse _Oxygen_ release. It was released in June 2017 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]), with the Service Release 1 released in September 2017. The latest version of this release is _7.0.200.005_Oxygen_2_.
 
 IMPORTANT: If you are upgrading from version 6.0, please also read the release notes for the 6.1 (_Oxygen preview_) release: +
 https://eclipsescout.github.io/6.1/release-notes.html
@@ -17,9 +17,13 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E
 
 The following changes were made after the initial 7.0 release (Eclipse Oxygen release). The following notes relate to a _service release_.
 
-==== Oxygen.2 (7.0.200) Release expected on December 20, 2017
+==== Oxygen.3 (7.0.300) Release expected on March 21, 2018
 
 {NotReleasedWarning}
+
+==== Oxygen.2 (7.0.200) Released on December 20, 2017
+
+Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.100.017_Oxygen_1%2E%2E%2E7.0.200.005_Oxygen_2[https://github.com/eclipse/scout.rt/compare/7.0.100.017_Oxygen_1...7.0.200.005_Oxygen_2]
 
 ==== Oxygen.1 (7.0.100) Released on September 27, 2017
 
@@ -40,8 +44,8 @@ Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.0.008_Oxyge
 ==== Runtime (Scout RT)
 Scout RT artifacts are distributed via Maven:
 
-* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.0.100.017_Oxygen_1%22[7.0.100.017_Oxygen_1] on _Maven Central_
-* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.100.017_Oxygen_1[7.0.100.017_Oxygen_1] on _mvnrepository.com_
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.0.200.005_Oxygen_2%22[7.0.200.005_Oxygen_2] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.0.200.005_Oxygen_2[7.0.200.005_Oxygen_2] on _mvnrepository.com_
 
 Usage example in the parent POM of your Scout application:
 
@@ -50,7 +54,7 @@ Usage example in the parent POM of your Scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>7.0.100.017_Oxygen_1</version>
+    <version>7.0.200.005_Oxygen_2</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -61,10 +65,10 @@ You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
 https://www.eclipse.org/downloads/packages/eclipse-scout-developers/oxygen[Eclipse for Scout Developers]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/7.0/7.0.100/017_Oxygen_1/
+http://download.eclipse.org/scout/releases/7.0/7.0.200/005_Oxygen_2/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.100.017_Oxygen_1[features/version/7.0.100.017_Oxygen_1] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.200.005_Oxygen_2[features/version/7.0.200.005_Oxygen_2] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
