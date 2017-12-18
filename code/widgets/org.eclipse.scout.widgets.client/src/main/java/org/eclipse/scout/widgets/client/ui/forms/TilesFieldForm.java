@@ -703,7 +703,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(27)
-      @ClassId("b4148e8c-a081-4807-beb7-bd0fc4264809")
+      @ClassId("2a421c5e-674f-4652-a0c5-a77d291c9c57")
       public class MultiSelectField extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {

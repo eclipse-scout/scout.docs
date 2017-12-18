@@ -472,7 +472,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
       }
 
       @Order(50)
-      @ClassId("24e33599-8612-4015-aad7-37e8b77c4815")
+      @ClassId("9dd5d66b-8626-42c2-8c45-e75f1ae8e81f")
       public class MaxContentWidthField extends AbstractIntegerField {
         @Override
         protected String getConfiguredLabel() {
