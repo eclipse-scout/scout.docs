@@ -36,6 +36,7 @@ In the text below, installation routines are described separately for Windows, M
 === Download and Install a JDK
 
 The first step to install Scout is to have an existing and working installation of a JDK version 8.
+Please note that the Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
 
 Currently, we recommend to install the Oracle JDK 8 together with Scout. Although, using OpenJDK with Scout should work too.
 To successfully install the JDK you need to have at least local admin rights.
