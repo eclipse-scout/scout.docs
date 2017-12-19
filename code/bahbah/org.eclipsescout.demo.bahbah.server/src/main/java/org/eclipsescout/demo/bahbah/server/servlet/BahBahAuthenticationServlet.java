@@ -34,7 +34,7 @@ public class BahBahAuthenticationServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    BEANS.get(HttpCacheControl.class).checkAndSetCacheHeaders(req, res, null, null);
+    BEANS.get(HttpCacheControl.class).checkAndSetCacheHeaders(req, res, null);
     try {
       String user = req.getHeader("User");
       String pass = req.getHeader("Pass");
