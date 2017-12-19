@@ -129,17 +129,17 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:Tiles}",
+      "text": "${textKey:TileField}",
       "detailForm": {
-        "objectType": "jswidgets.TilesForm"
+        "objectType": "jswidgets.TileFieldForm"
       }
     },
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:TilesAccordion}",
+      "text": "${textKey:TileAccordion}",
       "detailForm": {
-        "objectType": "jswidgets.TilesAccordionForm"
+        "objectType": "jswidgets.TileAccordionForm"
       }
     }
   ]

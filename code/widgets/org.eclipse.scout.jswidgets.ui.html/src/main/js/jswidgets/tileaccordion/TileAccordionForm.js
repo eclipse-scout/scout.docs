@@ -8,19 +8,19 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.TilesAccordionForm = function() {
-  jswidgets.TilesAccordionForm.parent.call(this);
+jswidgets.TileAccordionForm = function() {
+  jswidgets.TileAccordionForm.parent.call(this);
   this.insertedGroupCount = 0;
   this.insertedTilesCount = 0;
 };
-scout.inherits(jswidgets.TilesAccordionForm, scout.Form);
+scout.inherits(jswidgets.TileAccordionForm, scout.Form);
 
-jswidgets.TilesAccordionForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TilesAccordionForm');
+jswidgets.TileAccordionForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TileAccordionForm');
 };
 
-jswidgets.TilesAccordionForm.prototype._init = function(model) {
-  jswidgets.TilesAccordionForm.parent.prototype._init.call(this, model);
+jswidgets.TileAccordionForm.prototype._init = function(model) {
+  jswidgets.TileAccordionForm.parent.prototype._init.call(this, model);
 
   this.accordion = this.widget('Accordion');
 
@@ -89,66 +89,66 @@ jswidgets.TilesAccordionForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(accordionField);
 };
 
-jswidgets.TilesAccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setExclusiveExpand(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onScrollablePropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onScrollablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setScrollable(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onGridColumnCountPropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onGridColumnCountPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setGridColumnCount(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onWithPlacehodersPropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onWithPlacehodersPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setWithPlaceholders(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onSelectablePropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onSelectablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setSelectable(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onMultiSelectPropertyChange = function(event) {
+jswidgets.TileAccordionForm.prototype._onMultiSelectPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setMultiSelect(event.newValue);
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onInsertMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onInsertMenuAction = function(event) {
   this._insertGroupWithTiles();
 };
 
-jswidgets.TilesAccordionForm.prototype._onDeleteFirstMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onDeleteFirstMenuAction = function(event) {
   this.accordion.deleteGroup(this.accordion.groups[0]);
   if (this.accordion.groups.length === 0) {
     this.insertedGroupCount = 0;
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onSortAscMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onSortAscMenuAction = function(event) {
   this._sortTiles(true);
 };
 
-jswidgets.TilesAccordionForm.prototype._onSortDescMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onSortDescMenuAction = function(event) {
   this._sortTiles();
 };
 
-jswidgets.TilesAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = function(event) {
   this.accordion.deleteTiles(this.accordion.getSelectedTiles());
 };
 
-jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = function(event) {
   if (this.accordion.groups.length > 0) {
     this.accordion.groups[0].body.insertTile(this._createTile({
       label: 'New tile ' + this.insertedTilesCount++
@@ -156,7 +156,7 @@ jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = funct
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = function(event) {
   if (this.accordion.groups.length > 1) {
     this.accordion.groups[1].body.insertTile(this._createTile({
       label: 'New tile ' + this.insertedTilesCount++
@@ -164,7 +164,7 @@ jswidgets.TilesAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = funct
   }
 };
 
-jswidgets.TilesAccordionForm.prototype._onSelectNextMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onSelectNextMenuAction = function(event) {
   var filteredTiles = this.accordion.getFilteredTiles();
   if (filteredTiles.length === 0) {
     return;
@@ -175,11 +175,11 @@ jswidgets.TilesAccordionForm.prototype._onSelectNextMenuAction = function(event)
   this.accordion.selectTile(filteredTiles[selectedTileIndex + 1] || filteredTiles[0]);
 };
 
-jswidgets.TilesAccordionForm.prototype._onSelectAllMenuAction = function(event) {
+jswidgets.TileAccordionForm.prototype._onSelectAllMenuAction = function(event) {
   this.accordion.selectAllTiles();
 };
 
-jswidgets.TilesAccordionForm.prototype._insertGroupWithTiles = function() {
+jswidgets.TileAccordionForm.prototype._insertGroupWithTiles = function() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
   for (var i = 0; i < maxTiles; i++) {
@@ -191,7 +191,7 @@ jswidgets.TilesAccordionForm.prototype._insertGroupWithTiles = function() {
     parent: this.accordion,
     title: 'Group ' + this.insertedGroupCount++,
     body: {
-      objectType: 'Tiles',
+      objectType: 'TileGrid',
       gridColumnCount: 6,
       layoutConfig: {
         columnWidth: 100,
@@ -204,7 +204,7 @@ jswidgets.TilesAccordionForm.prototype._insertGroupWithTiles = function() {
   this.accordion.insertGroup(group);
 };
 
-jswidgets.TilesAccordionForm.prototype._createTile = function(model) {
+jswidgets.TileAccordionForm.prototype._createTile = function(model) {
   var defaults = {
     parent: this,
     gridDataHints: {
@@ -216,7 +216,7 @@ jswidgets.TilesAccordionForm.prototype._createTile = function(model) {
   return scout.create('jswidgets.SimpleTile', model);
 };
 
-jswidgets.TilesAccordionForm.prototype._sortTiles = function(asc) {
+jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
   this.accordion.setTileComparator(function(tile1, tile2) {

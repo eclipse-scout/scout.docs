@@ -10,7 +10,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.MenuMediator;
 import org.eclipse.scout.rt.client.ui.action.menu.MenuUtility;
-import org.eclipse.scout.rt.client.ui.action.menu.TilesMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TileGridMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -19,12 +19,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.client.ui.form.fields.tilesfield.AbstractTilesField;
+import org.eclipse.scout.rt.client.ui.form.fields.tilefield.AbstractTileField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
-import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
-import org.eclipse.scout.rt.client.ui.tile.ITiles;
-import org.eclipse.scout.rt.client.ui.tile.TilesLayoutConfig;
+import org.eclipse.scout.rt.client.ui.tile.ITileGrid;
+import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -35,25 +35,25 @@ import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.FilterField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.StatusField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.TilesField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.DetailBox.TilesField.Tiles;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox.ColorSchemeField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox.MaxContentWidthField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox.MultiSelectField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox.ScrollableField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.MainBox.PropertiesBox.SelectableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.FilterField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.StatusField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField.TileGrid;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ColorSchemeField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MaxContentWidthField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MultiSelectField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
 import org.eclipse.scout.widgets.client.ui.tiles.AbstractSimpleTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ClassId("1c8091c8-6a6b-4860-9d12-e8bf6cab115a")
-public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm {
-  private static final Logger LOG = LoggerFactory.getLogger(TilesFieldForm.class);
+public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm {
+  private static final Logger LOG = LoggerFactory.getLogger(TileFieldForm.class);
 
   private int m_tilesAddedCount = 0;
   private SimpleTileFilter m_tileFilter;
@@ -79,8 +79,8 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(ScrollableField.class);
   }
 
-  public TilesField getTilesField() {
-    return getFieldByClass(TilesField.class);
+  public TileField getTileField() {
+    return getFieldByClass(TileField.class);
   }
 
   public DetailBox getDetailBox() {
@@ -110,7 +110,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   @Override
   protected String getConfiguredTitle() {
-    return "TilesField";
+    return "TileField";
   }
 
   @ClassId("fcf36822-2d2d-4a23-a32d-74f7385370ea")
@@ -122,7 +122,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       @Override
       protected void execInitField() {
-        m_menuMediator = new MenuMediator(getTilesField().getTiles(), getDetailBox());
+        m_menuMediator = new MenuMediator(getTileField().getTileGrid(), getDetailBox());
         m_menuMediator.install();
       }
 
@@ -133,7 +133,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       @Order(1000)
       @ClassId("e06efe30-25db-446c-848f-22935dcff376")
-      public class TilesField extends AbstractTilesField<TilesField.Tiles> {
+      public class TileField extends AbstractTileField<TileField.TileGrid> {
 
         @Override
         protected boolean getConfiguredLabelVisible() {
@@ -151,7 +151,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @ClassId("0cd4de91-68d0-4a1d-b123-5006b566481d")
-        public class Tiles extends AbstractTiles<AbstractSimpleTile> {
+        public class TileGrid extends AbstractTileGrid<AbstractSimpleTile> {
 
           @Override
           protected void initConfig() {
@@ -159,7 +159,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
             MenuUtility.updateMenuVisibilitiesForTiles(this);
 
             addPropertyChangeListener((event) -> {
-              if (event.getPropertyName().equals(ITiles.PROP_TILES) || event.getPropertyName().equals(ITiles.PROP_FILTERED_TILES)) {
+              if (event.getPropertyName().equals(ITileGrid.PROP_TILES) || event.getPropertyName().equals(ITileGrid.PROP_FILTERED_TILES)) {
                 updateStatus();
               }
             });
@@ -182,14 +182,14 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
             }
 
             @Override
             protected void execAction() {
               SimpleTile tile = new SimpleTile();
               tile.setLabel("New tile " + m_tilesAddedCount++);
-              getTilesField().getTiles().addTile(tile);
+              getTileField().getTileGrid().addTile(tile);
             }
           }
 
@@ -203,7 +203,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
             }
 
             @Override
@@ -214,7 +214,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
                 tile.setLabel("New tile " + m_tilesAddedCount++);
                 tiles.add(tile);
               }
-              getTilesField().getTiles().addTiles(tiles);
+              getTileField().getTileGrid().addTiles(tiles);
             }
           }
 
@@ -228,27 +228,27 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
             }
 
             @Override
             protected void execAction() {
-              Tiles tiles = getTilesField().getTiles();
-              if (tiles.getTiles().size() == 0) {
+              TileGrid tileGrid = getTileField().getTileGrid();
+              if (tileGrid.getTiles().size() == 0) {
                 return;
               }
-              AbstractSimpleTile selectedTile = tiles.getSelectedTile();
+              AbstractSimpleTile selectedTile = tileGrid.getSelectedTile();
               AbstractSimpleTile tileToSelect = null;
               if (selectedTile != null) {
-                int selectedTileIndex = tiles.getTiles().indexOf(selectedTile);
-                if (selectedTileIndex < tiles.getTiles().size() - 1) {
-                  tileToSelect = tiles.getTiles().get(selectedTileIndex + 1);
+                int selectedTileIndex = tileGrid.getTiles().indexOf(selectedTile);
+                if (selectedTileIndex < tileGrid.getTiles().size() - 1) {
+                  tileToSelect = tileGrid.getTiles().get(selectedTileIndex + 1);
                 }
               }
               if (tileToSelect == null) {
-                tileToSelect = tiles.getTiles().get(0);
+                tileToSelect = tileGrid.getTiles().get(0);
               }
-              tiles.selectTile(tileToSelect);
+              tileGrid.selectTile(tileToSelect);
             }
           }
 
@@ -262,12 +262,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
             }
 
             @Override
             protected void execAction() {
-              getTilesField().getTiles().selectAllTiles();
+              getTileField().getTileGrid().selectAllTiles();
             }
           }
 
@@ -281,13 +281,13 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TilesMenuType.SingleSelection, TilesMenuType.MultiSelection);
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.SingleSelection, TileGridMenuType.MultiSelection);
             }
 
             @Override
             protected void execAction() {
-              getTilesField().getTiles().deleteTiles(getTilesField().getTiles().getSelectedTiles());
-              if (getTilesField().getTiles().getTiles().size() == 0) {
+              getTileField().getTileGrid().deleteTiles(getTileField().getTileGrid().getSelectedTiles());
+              if (getTileField().getTileGrid().getTiles().size() == 0) {
                 m_tilesAddedCount = 0;
               }
             }
@@ -308,7 +308,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TilesMenuType.SingleSelection);
+              return CollectionUtility.hashSet(TileGridMenuType.SingleSelection);
             }
 
             @Order(1000)
@@ -321,7 +321,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.SingleSelection);
+                return CollectionUtility.hashSet(TileGridMenuType.SingleSelection);
               }
 
               @Override
@@ -340,7 +340,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.SingleSelection);
+                return CollectionUtility.hashSet(TileGridMenuType.SingleSelection);
               }
 
               @Override
@@ -361,7 +361,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TilesMenuType.MultiSelection);
+              return CollectionUtility.hashSet(TileGridMenuType.MultiSelection);
             }
 
             @Order(1000)
@@ -374,7 +374,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.MultiSelection);
+                return CollectionUtility.hashSet(TileGridMenuType.MultiSelection);
               }
 
               @Override
@@ -393,7 +393,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.MultiSelection);
+                return CollectionUtility.hashSet(TileGridMenuType.MultiSelection);
               }
 
               @Override
@@ -413,7 +413,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+              return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
             }
 
             @Order(1000)
@@ -426,7 +426,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+                return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
               }
 
               @Override
@@ -445,7 +445,7 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+                return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
               }
 
               @Override
@@ -553,24 +553,24 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
       if (!StringUtility.isNullOrEmpty(text)) {
         if (m_tileFilter == null) {
           m_tileFilter = new SimpleTileFilter();
-          getTilesField().getTiles().addFilter(m_tileFilter);
+          getTileField().getTileGrid().addFilter(m_tileFilter);
         }
         m_tileFilter.setText(text);
       }
       else {
-        getTilesField().getTiles().removeFilter(m_tileFilter);
+        getTileField().getTileGrid().removeFilter(m_tileFilter);
         m_tileFilter = null;
       }
-      getTilesField().getTiles().filter();
+      getTileField().getTileGrid().filter();
     }
 
     protected void updateStatus() {
-      Tiles tiles = getTilesField().getTiles();
-      getStatusField().setValue(TEXTS.get("TilesStatus", tiles.getTileCount() + "", tiles.getFilteredTileCount() + "", tiles.getSelectedTileCount() + ""));
+      TileGrid tileGrid = getTileField().getTileGrid();
+      getStatusField().setValue(TEXTS.get("TilesStatus", tileGrid.getTileCount() + "", tileGrid.getFilteredTileCount() + "", tileGrid.getSelectedTileCount() + ""));
     }
 
     protected void sortTiles(boolean asc) {
-      getTilesField().getTiles().setComparator(new Comparator<AbstractSimpleTile>() {
+      getTileField().getTileGrid().setComparator(new Comparator<AbstractSimpleTile>() {
         @Override
         public int compare(AbstractSimpleTile tile1, AbstractSimpleTile tile2) {
           int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(((AbstractSimpleTile) tile1).getLabel(), ((AbstractSimpleTile) tile2).getLabel());
@@ -607,12 +607,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setGridColumnCount(getValue());
+          getTileField().getTileGrid().setGridColumnCount(getValue());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().getGridColumnCount());
+          setValue(getTileField().getTileGrid().getGridColumnCount());
         }
       }
 
@@ -636,17 +636,17 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execInitField() {
-          Tiles tiles = getTilesField().getTiles();
+          TileGrid tileGrid = getTileField().getTileGrid();
           ITileColorScheme colorScheme = TileColorScheme.DEFAULT;
-          if (tiles.getTiles().size() > 0) {
-            colorScheme = getTilesField().getTiles().getTiles().get(0).getColorScheme();
+          if (tileGrid.getTiles().size() > 0) {
+            colorScheme = getTileField().getTileGrid().getTiles().get(0).getColorScheme();
           }
           setValue(colorScheme);
         }
 
         @Override
         protected void execChangedValue() {
-          for (ITile tile : getTilesField().getTiles().getTiles()) {
+          for (ITile tile : getTileField().getTileGrid().getTiles()) {
             tile.setColorScheme(getValue());
           }
         }
@@ -662,14 +662,14 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          TilesLayoutConfig layoutConfig = getTilesField().getTiles().getLayoutConfig().copy()
+          TileGridLayoutConfig layoutConfig = getTileField().getTileGrid().getLayoutConfig().copy()
               .withMaxWidth(getValue());
-          getTilesField().getTiles().setLayoutConfig(layoutConfig);
+          getTileField().getTileGrid().setLayoutConfig(layoutConfig);
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().getLayoutConfig().getMaxWidth());
+          setValue(getTileField().getTileGrid().getLayoutConfig().getMaxWidth());
         }
       }
 
@@ -693,12 +693,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setSelectable(getValue());
+          getTileField().getTileGrid().setSelectable(getValue());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().isSelectable());
+          setValue(getTileField().getTileGrid().isSelectable());
         }
       }
 
@@ -722,12 +722,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setMultiSelect(getValue());
+          getTileField().getTileGrid().setMultiSelect(getValue());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().isMultiSelect());
+          setValue(getTileField().getTileGrid().isMultiSelect());
         }
       }
 
@@ -751,12 +751,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setScrollable(getValue());
+          getTileField().getTileGrid().setScrollable(getValue());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().isScrollable());
+          setValue(getTileField().getTileGrid().isScrollable());
         }
       }
 
@@ -781,12 +781,12 @@ public class TilesFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          getTilesField().getTiles().setWithPlaceholders(getValue());
+          getTileField().getTileGrid().setWithPlaceholders(getValue());
         }
 
         @Override
         protected void execInitField() {
-          setValue(getTilesField().getTiles().isWithPlaceholders());
+          setValue(getTileField().getTileGrid().isWithPlaceholders());
         }
       }
     }

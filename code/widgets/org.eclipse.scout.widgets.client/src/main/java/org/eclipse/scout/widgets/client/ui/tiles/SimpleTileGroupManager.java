@@ -4,10 +4,10 @@
  */
 package org.eclipse.scout.widgets.client.ui.tiles;
 
-import org.eclipse.scout.rt.client.ui.tile.AbstractTilesAccordionGroupManager;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordionGroupManager;
 import org.eclipse.scout.rt.client.ui.tile.GroupTemplate;
 
-public class SimpleTileGroupManager extends AbstractTilesAccordionGroupManager<ISimpleTile> {
+public class SimpleTileGroupManager extends AbstractTileAccordionGroupManager<ISimpleTile> {
 
   public static final Object ID = SimpleTileGroupManager.class;
   public static final String GROUP_ID_MARKED = "marked";

@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.TilesAccordionForm",
+  "id": "jswidgets.TileFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -11,35 +11,18 @@
         "objectType": "GroupBox",
         "gridColumnCount": 2,
         "menus": [
-           {
-            "id": "GroupsMenu",
+          {
+            "id": "InsertMenu",
             "objectType": "Menu",
-            "text": "Groups",
-            "childActions": [
-              {
-              "id": "InsertMenu",
-              "objectType": "Menu",
-              "text": "Insert group"
-              },
-              {
-                "id": "DeleteFirstMenu",
-                "objectType": "Menu",
-                "text": "Delete first group"
-              }
-            ]
+            "text": "Insert tile"
           },
           {
-            "id": "InsertTileIntoGroup0Menu",
+            "id": "InsertManyMenu",
             "objectType": "Menu",
-            "text": "Insert tile into group 0"
+            "text": "Insert many tiles"
           },
           {
-            "id": "InsertTileIntoGroup1Menu",
-            "objectType": "Menu",
-            "text": "Insert tile into group 1"
-          },
-          {
-            "id": "DeleteSelectedTilesMenu",
+            "id": "DeleteMenu",
             "objectType": "Menu",
             "text": "Delete selected tiles"
           },
@@ -73,17 +56,59 @@
         ],
         "fields": [
           {
-            "id": "AccordionField",
-            "objectType": "AccordionField",
+            "id": "TileField",
+            "objectType": "TileField",
             "labelVisible": false,
             "gridDataHints": {
               "h": 4,
               "w": 2
             },
-            "accordion": {
-              "id": "Accordion",
-              "objectType": "TilesAccordion",
-              "scrollable": true
+            "tileGrid": {
+              "id": "TileGrid",
+              "objectType": "TileGrid",
+              "scrollable": true,
+              "tiles": [
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 1"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 2"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 3"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 4"
+                },
+                {
+                  "objectType": "jswidgets.SimpleTile",
+                  "label": "Tile 5"
+                }
+              ]
+            }
+          },
+          {
+            "id": "FilterField",
+            "objectType": "StringField",
+            "label": "${textKey:FilterBy}",
+            "labelPosition": 2,
+            "updateDisplayTextOnModify": true,
+            "clearable": "always",
+            "gridDataHints": {
+              "fillHorizontal": false,
+              "widthInPixel": 300
+            }
+          },
+          {
+           "id": "StatusField",
+            "objectType": "LabelField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "horizontalAlignment": 1
             }
           }
         ]
@@ -98,6 +123,25 @@
             "id": "GridColumnCountField",
             "objectType": "NumberField",
             "label": "Grid Column Count"
+          },
+          {
+            "id": "LogicalGridField",
+            "objectType": "SmartField",
+            "label": "Logical Grid",
+            "lookupCall": "jswidgets.LogicalGridLookupCall",
+            "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+          },
+          {
+            "id": "ColorSchemeField",
+            "objectType": "SmartField",
+            "label": "Color Scheme",
+            "lookupCall": "jswidgets.ColorSchemeLookupCall"
+          },
+          {
+            "id": "InvertColorsField",
+            "objectType": "CheckBoxField",
+            "label": "Invert Colors",
+            "labelVisible": false
           },
           {
             "id": "WithPlaceholdersField",
@@ -118,16 +162,6 @@
             "labelVisible": false
           },
           {
-            "id": "ExclusiveExpandField",
-            "objectType": "CheckBoxField",
-            "label": "Exclusive Expand",
-            "labelVisible": false,
-            "tooltipText": "${textKey:ExclusiveExpandTooltip}",
-            "gridDataHints": {
-              "fillHorizontal": false
-            }
-          },
-          {
             "id": "ScrollableField",
             "objectType": "CheckBoxField",
             "label": "Scrollable",
@@ -138,6 +172,11 @@
       {
         "id": "FormFieldPropertiesBox",
         "objectType": "jswidgets.FormFieldPropertiesBox",
+        "expanded": false
+      },
+      {
+        "id": "LayoutConfigBox",
+        "objectType": "jswidgets.TileGridLayoutConfigBox",
         "expanded": false
       },
       {

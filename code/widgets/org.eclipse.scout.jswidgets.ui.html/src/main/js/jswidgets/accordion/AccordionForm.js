@@ -138,7 +138,7 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
     parent: this.accordion,
     title: 'Group ' + this.insertedGroupCount++,
     body: {
-      objectType: 'Tiles',
+      objectType: 'TileGrid',
       gridColumnCount: 6,
       layoutConfig: {
         columnWidth: 100,

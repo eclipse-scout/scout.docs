@@ -15,8 +15,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.group.AbstractGroup;
 import org.eclipse.scout.rt.client.ui.group.IGroup;
-import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
-import org.eclipse.scout.rt.client.ui.tile.TilesLayoutConfig;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
+import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
@@ -28,7 +28,7 @@ import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.Deta
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.SimpleTile;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.tiles.AbstractSimpleTile;
 
 @ClassId("59689d49-e6a5-4641-9d1a-a6a6ce98d9bf")
@@ -274,12 +274,12 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
   public static class TileGroup extends AbstractGroup {
 
     @Override
-    public Tiles getBody() {
-      return (Tiles) super.getBody();
+    public TileGrid getBody() {
+      return (TileGrid) super.getBody();
     }
 
     @ClassId("1af3bcc9-5cb0-486a-bb5a-6ef5dfc63230")
-    public class Tiles extends AbstractTiles<AbstractSimpleTile> {
+    public class TileGrid extends AbstractTileGrid<AbstractSimpleTile> {
 
       @Override
       protected int getConfiguredGridColumnCount() {
@@ -287,7 +287,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       }
 
       @Override
-      protected TilesLayoutConfig getConfiguredLayoutConfig() {
+      protected TileGridLayoutConfig getConfiguredLayoutConfig() {
         return super.getConfiguredLayoutConfig()
             .withColumnWidth(100)
             .withRowHeight(100);

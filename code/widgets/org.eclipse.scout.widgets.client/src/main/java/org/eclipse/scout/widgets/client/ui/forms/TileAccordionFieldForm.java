@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TilesMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TileGridMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.accordionfield.AbstractAccordionField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -15,10 +15,10 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.group.AbstractGroup;
-import org.eclipse.scout.rt.client.ui.tile.AbstractTiles;
-import org.eclipse.scout.rt.client.ui.tile.AbstractTilesAccordion;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordion;
 import org.eclipse.scout.rt.client.ui.tile.DefaultGroupManager;
-import org.eclipse.scout.rt.client.ui.tile.TilesLayoutConfig;
+import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -32,7 +32,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
-import org.eclipse.scout.widgets.client.ui.forms.TilesFieldForm.SimpleTile;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.tiles.ISimpleTile;
 import org.eclipse.scout.widgets.client.ui.tiles.SimpleTileGroupManager;
 import org.slf4j.Logger;
@@ -96,7 +96,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Override
@@ -119,7 +119,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Override
@@ -142,7 +142,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Override
@@ -176,7 +176,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Override
@@ -210,7 +210,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Override
@@ -229,7 +229,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(TilesMenuType.SingleSelection, TilesMenuType.MultiSelection);
+          return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.SingleSelection, TileGridMenuType.MultiSelection);
         }
 
         @Override
@@ -256,7 +256,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+          return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
         }
 
         @Order(1000)
@@ -269,7 +269,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+            return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
           }
 
           @Override
@@ -288,7 +288,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.hashSet(TilesMenuType.EmptySpace);
+            return CollectionUtility.hashSet(TileGridMenuType.EmptySpace);
           }
 
           @Override
@@ -341,18 +341,18 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
 
         @ClassId("f59eaed0-afeb-48f8-a99d-cc4a15aa4253")
-        public class Accordion extends AbstractTilesAccordion<ISimpleTile> {
+        public class Accordion extends AbstractTileAccordion<ISimpleTile> {
 
           @ClassId("0663a479-ff8f-4a72-b337-ff9759643955")
           public class TileGroup extends AbstractGroup {
 
             @Override
-            public Tiles getBody() {
-              return (Tiles) super.getBody();
+            public TileGrid getBody() {
+              return (TileGrid) super.getBody();
             }
 
             @ClassId("3d7e78f9-75b1-48f5-aefe-2fb2118b7577")
-            public class Tiles extends AbstractTiles<ISimpleTile> {
+            public class TileGrid extends AbstractTileGrid<ISimpleTile> {
 
               @Override
               protected int getConfiguredGridColumnCount() {
@@ -360,7 +360,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
               }
 
               @Override
-              protected TilesLayoutConfig getConfiguredLayoutConfig() {
+              protected TileGridLayoutConfig getConfiguredLayoutConfig() {
                 return super.getConfiguredLayoutConfig()
                     .withColumnWidth(100)
                     .withRowHeight(100);
@@ -481,7 +481,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected void execChangedValue() {
-          TilesLayoutConfig layoutConfig = getAccordionField().getAccordion().getTileGridLayoutConfig().copy()
+          TileGridLayoutConfig layoutConfig = getAccordionField().getAccordion().getTileGridLayoutConfig().copy()
               .withMaxWidth(getValue());
           getAccordionField().getAccordion().setTileGridLayoutConfig(layoutConfig);
         }

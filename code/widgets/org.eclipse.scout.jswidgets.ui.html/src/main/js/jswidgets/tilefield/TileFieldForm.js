@@ -8,22 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.TilesForm = function() {
-  jswidgets.TilesForm.parent.call(this);
+jswidgets.TileFieldForm = function() {
+  jswidgets.TileFieldForm.parent.call(this);
   this.insertedTileCount = 0;
   this.tileFilter = null;
 };
-scout.inherits(jswidgets.TilesForm, scout.Form);
+scout.inherits(jswidgets.TileFieldForm, scout.Form);
 
-jswidgets.TilesForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TilesForm');
+jswidgets.TileFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TileFieldForm');
 };
 
-jswidgets.TilesForm.prototype._init = function(model) {
-  jswidgets.TilesForm.parent.prototype._init.call(this, model);
+jswidgets.TileFieldForm.prototype._init = function(model) {
+  jswidgets.TileFieldForm.parent.prototype._init.call(this, model);
 
-  this.tiles = this.widget('Tiles');
-  this.tiles.on('propertyChange', this._onTilesPropertyChange.bind(this));
+  this.tileGrid = this.widget('TileGrid');
+  this.tileGrid.on('propertyChange', this._onTileGridPropertyChange.bind(this));
 
   var filterField = this.widget('FilterField');
   filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
@@ -31,35 +31,35 @@ jswidgets.TilesForm.prototype._init = function(model) {
   // -- Properties
 
   var gridColumnCountField = this.widget('GridColumnCountField');
-  gridColumnCountField.setValue(this.tiles.gridColumnCount);
+  gridColumnCountField.setValue(this.tileGrid.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
   var logicalGridField = this.widget('LogicalGridField');
-  logicalGridField.setValue(this.tiles.logicalGrid ? this.tiles.logicalGrid.objectType : null);
+  logicalGridField.setValue(this.tileGrid.logicalGrid ? this.tileGrid.logicalGrid.objectType : null);
   logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
 
   var withPlaceholdersField = this.widget('WithPlaceholdersField');
-  withPlaceholdersField.setValue(this.tiles.withPlaceholders);
+  withPlaceholdersField.setValue(this.tileGrid.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
 
   var colorSchemeField = this.widget('ColorSchemeField');
-  colorSchemeField.setValue(this.tiles.tiles[0].colorScheme.scheme);
+  colorSchemeField.setValue(this.tileGrid.tiles[0].colorScheme.scheme);
   colorSchemeField.on('propertyChange', this._onColorSchemePropertyChange.bind(this));
 
   var invertColorsField = this.widget('InvertColorsField');
-  invertColorsField.setValue(this.tiles.tiles[0].colorScheme.inverted);
+  invertColorsField.setValue(this.tileGrid.tiles[0].colorScheme.inverted);
   invertColorsField.on('propertyChange', this._onInvertColorsPropertyChange.bind(this));
 
   var selectableField = this.widget('SelectableField');
-  selectableField.setValue(this.tiles.selectable);
+  selectableField.setValue(this.tileGrid.selectable);
   selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
 
   var multiSelectField = this.widget('MultiSelectField');
-  multiSelectField.setValue(this.tiles.multiSelect);
+  multiSelectField.setValue(this.tileGrid.multiSelect);
   multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
 
   var scrollableField = this.widget('ScrollableField');
-  scrollableField.setValue(this.tiles.scrollable);
+  scrollableField.setValue(this.tileGrid.scrollable);
   scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
   // -- Actions
@@ -85,46 +85,46 @@ jswidgets.TilesForm.prototype._init = function(model) {
   var sortDescMenu = this.widget('SortDescMenu');
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
-  var tilesField = this.widget('TilesField');
-  this.widget('LayoutConfigBox').setField(this.tiles);
-  this.widget('FormFieldPropertiesBox').setField(tilesField);
-  this.widget('GridDataBox').setField(tilesField);
+  var tileField = this.widget('TileField');
+  this.widget('LayoutConfigBox').setField(this.tileGrid);
+  this.widget('FormFieldPropertiesBox').setField(tileField);
+  this.widget('GridDataBox').setField(tileField);
   this.updateStatus();
 };
 
-jswidgets.TilesForm.prototype._onTilesPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onTileGridPropertyChange = function(event) {
   if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
     this.updateStatus();
   }
 };
 
-jswidgets.TilesForm.prototype._onFilterPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onFilterPropertyChange = function(event) {
   if (event.propertyName === 'displayText') {
     this.filterTilesByText(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onGridColumnCountPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onGridColumnCountPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setGridColumnCount(event.newValue);
+    this.tileGrid.setGridColumnCount(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onLogicalGridChange = function(event) {
+jswidgets.TileFieldForm.prototype._onLogicalGridChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setLogicalGrid(event.newValue);
+    this.tileGrid.setLogicalGrid(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onWithPlacehodersPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onWithPlacehodersPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setWithPlaceholders(event.newValue);
+    this.tileGrid.setWithPlaceholders(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onColorSchemePropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onColorSchemePropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.tiles.forEach(function(tile) {
+    this.tileGrid.tiles.forEach(function(tile) {
       var scheme = $.extend({}, tile.colorScheme, {
         scheme: event.newValue
       });
@@ -133,9 +133,9 @@ jswidgets.TilesForm.prototype._onColorSchemePropertyChange = function(event) {
   }
 };
 
-jswidgets.TilesForm.prototype._onInvertColorsPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onInvertColorsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.tiles.forEach(function(tile) {
+    this.tileGrid.tiles.forEach(function(tile) {
       var scheme = $.extend({}, tile.colorScheme, {
         inverted: event.newValue
       });
@@ -144,99 +144,99 @@ jswidgets.TilesForm.prototype._onInvertColorsPropertyChange = function(event) {
   }
 };
 
-jswidgets.TilesForm.prototype._onSelectablePropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onSelectablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setSelectable(event.newValue);
+    this.tileGrid.setSelectable(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onMultiSelectPropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onMultiSelectPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setMultiSelect(event.newValue);
+    this.tileGrid.setMultiSelect(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onScrollablePropertyChange = function(event) {
+jswidgets.TileFieldForm.prototype._onScrollablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.tiles.setScrollable(event.newValue);
+    this.tileGrid.setScrollable(event.newValue);
   }
 };
 
-jswidgets.TilesForm.prototype._onInsertMenuAction = function(event) {
+jswidgets.TileFieldForm.prototype._onInsertMenuAction = function(event) {
   var tile = new scout.create('jswidgets.SimpleTile', {
-    parent: this.tiles,
+    parent: this.tileGrid,
     label: 'New Tile ' + this.insertedTileCount++
   });
-  this.tiles.insertTile(tile);
+  this.tileGrid.insertTile(tile);
 };
 
-jswidgets.TilesForm.prototype._onInsertManyMenuAction = function(event) {
+jswidgets.TileFieldForm.prototype._onInsertManyMenuAction = function(event) {
   var tiles = [];
   for (var i = 0; i < 50; i++) {
     tiles.push(new scout.create('jswidgets.SimpleTile', {
-      parent: this.tiles,
+      parent: this.tileGrid,
       label: 'New Tile ' + this.insertedTileCount++
     }));
   }
-  this.tiles.insertTiles(tiles);
+  this.tileGrid.insertTiles(tiles);
 };
 
-jswidgets.TilesForm.prototype._onDeleteMenuAction = function(event) {
-  this.tiles.deleteTiles(this.tiles.selectedTiles);
-  if (this.tiles.tiles.length === 0) {
+jswidgets.TileFieldForm.prototype._onDeleteMenuAction = function(event) {
+  this.tileGrid.deleteTiles(this.tileGrid.selectedTiles);
+  if (this.tileGrid.tiles.length === 0) {
     this.insertedTileCount = 0;
   }
 };
 
-jswidgets.TilesForm.prototype._onSelectNextMenuAction = function(event) {
-  if (this.tiles.filteredTiles.length === 0) {
+jswidgets.TileFieldForm.prototype._onSelectNextMenuAction = function(event) {
+  if (this.tileGrid.filteredTiles.length === 0) {
     return;
   }
-  var selectedTileIndex = scout.arrays.findIndex(this.tiles.filteredTiles, function(tile) {
+  var selectedTileIndex = scout.arrays.findIndex(this.tileGrid.filteredTiles, function(tile) {
     return tile.selected;
   });
-  this.tiles.selectTile(this.tiles.filteredTiles[selectedTileIndex + 1] || this.tiles.filteredTiles[0]);
+  this.tileGrid.selectTile(this.tileGrid.filteredTiles[selectedTileIndex + 1] || this.tileGrid.filteredTiles[0]);
 };
 
-jswidgets.TilesForm.prototype._onSelectAllMenuAction = function(event) {
-  this.tiles.selectAllTiles();
+jswidgets.TileFieldForm.prototype._onSelectAllMenuAction = function(event) {
+  this.tileGrid.selectAllTiles();
 };
 
-jswidgets.TilesForm.prototype._onSortAscMenuAction = function(event) {
+jswidgets.TileFieldForm.prototype._onSortAscMenuAction = function(event) {
   this._sortTiles(true);
 };
 
-jswidgets.TilesForm.prototype._onSortDescMenuAction = function(event) {
+jswidgets.TileFieldForm.prototype._onSortDescMenuAction = function(event) {
   this._sortTiles();
 };
 
-jswidgets.TilesForm.prototype.filterTilesByText = function(text) {
+jswidgets.TileFieldForm.prototype.filterTileGridByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
       this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
-      this.tiles.addFilter(this.tileFilter);
+      this.tileGrid.addFilter(this.tileFilter);
     }
     this.tileFilter.setText(text);
   } else {
-    this.tiles.removeFilter(this.tileFilter);
+    this.tileGrid.removeFilter(this.tileFilter);
     this.tileFilter = null;
   }
-  this.tiles.filter();
+  this.tileGrid.filter();
 };
 
-jswidgets.TilesForm.prototype.updateStatus = function() {
-  this.widget('StatusField').setValue(this.session.text('TilesStatus', this.tiles.tiles.length, this.tiles.filteredTiles.length, this.tiles.selectedTiles.length));
+jswidgets.TileFieldForm.prototype.updateStatus = function() {
+  this.widget('StatusField').setValue(this.session.text('TileGridStatus', this.tileGrid.tiles.length, this.tileGrid.filteredTiles.length, this.tileGrid.selectedTiles.length));
 };
 
-jswidgets.TilesForm.prototype._sortTiles = function(asc) {
+jswidgets.TileFieldForm.prototype._sortTiles = function(asc) {
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
-  this.tiles.setComparator(function(tile1, tile2) {
+  this.tileGrid.setComparator(function(tile1, tile2) {
     var result = comparator.compare(tile1.label, tile2.label);
     if (!asc) {
       result = -result;
     }
     return result;
   });
-  this.tiles.sort();
+  this.tileGrid.sort();
 };
