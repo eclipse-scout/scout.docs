@@ -14,18 +14,18 @@ import java.util.Arrays;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tagfield.AbstractTagField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelCenterField;
-import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelLeftField;
-import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelRightField;
-import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.LoremIpsumButton;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ConfigurationBox.EnabledField;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox.DisabledField;
@@ -64,24 +64,12 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
-  public LabelCenterField getLabelCenterField() {
-    return getFieldByClass(LabelCenterField.class);
-  }
-
-  public LabelLeftField getLabelLeftField() {
-    return getFieldByClass(LabelLeftField.class);
-  }
-
-  public LabelRightField getLabelRightField() {
-    return getFieldByClass(LabelRightField.class);
-  }
-
-  public LoremIpsumButton getLoremIpsumButton() {
-    return getFieldByClass(LoremIpsumButton.class);
-  }
-
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
+  }
+
+  public EnabledField getEnabledField() {
+    return getFieldByClass(EnabledField.class);
   }
 
   public MandatoryField getMandatoryField() {
@@ -105,6 +93,11 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return "Default";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return TagsLookupCall.class;
         }
       }
 
@@ -153,6 +146,25 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Configure");
+      }
+
+      @Order(1000)
+      @ClassId("e2b37a46-6e43-4f5e-9bfe-f0eddf31f123")
+      public class EnabledField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Enabled";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDisabledField().setEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(false);
+        }
       }
     }
 
