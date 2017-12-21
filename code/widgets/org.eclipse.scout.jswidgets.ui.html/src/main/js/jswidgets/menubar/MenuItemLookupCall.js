@@ -8,17 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.SelectedTabLookupCall = function() {
-  jswidgets.SelectedTabLookupCall.parent.call(this);
+jswidgets.MenuItemLookupCall = function() {
+  jswidgets.MenuItemLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.SelectedTabLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.MenuItemLookupCall, scout.StaticLookupCall);
 
-jswidgets.SelectedTabLookupCall.prototype._data = function() {
-  return jswidgets.SelectedTabLookupCall.DATA;
+jswidgets.MenuItemLookupCall.prototype._data = function() {
+  return jswidgets.MenuItemLookupCall.DATA;
 };
 
-jswidgets.SelectedTabLookupCall.DATA = [
-  ['TabItem1', 'First Tab'],
-  ['TabItem2', 'Second Tab'],
-  ['TabItem3', 'Third Tab']
+jswidgets.MenuItemLookupCall.DATA = [
+  ['Menu1', 'Menu 1'],
+  ['Menu2', 'Menu 2'],
+  ['Menu3', 'Menu 3']
 ];

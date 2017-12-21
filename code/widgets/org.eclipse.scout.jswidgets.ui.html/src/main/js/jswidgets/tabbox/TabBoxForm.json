@@ -2,6 +2,7 @@
   "id": "jswidgets.TabBoxForm",
   "type": "model",
   "displayHint": "view",
+  "cssClass": "tab-box-form",
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
@@ -18,27 +19,37 @@
             "tabItems": [
               {
                 "id": "TabItem1",
-                "objectType": "TabItem",
-                "label": "First Tab",
-                "fields": [
-                  {
-                    "id": "StringField1",
-                    "objectType": "StringField",
-                    "label": "String Field 1"
-                  }
-                ]
+                "objectType": "jswidgets.SampleTabItem",
+                "label": "First Tab"
               },
               {
                 "id": "TabItem2",
-                "objectType": "TabItem",
-                "label": "Second Tab",
-                "fields": [
-                  {
-                    "id": "StringField2",
-                    "objectType": "StringField",
-                    "label": "String Field 2"
-                  }
-                ]
+                "objectType": "jswidgets.SampleTabItem",
+                "label": "Second Tab"
+              },
+              {
+                "id": "TabItem3",
+                "objectType": "jswidgets.SampleTabItem",
+                "label": "Third Tab"
+              }
+            ],
+            "menus": [
+              {
+                "id": "AddTabMenu",
+                "objectType": "Menu",
+                "text": "Add tab item",
+                "iconId": "${iconId:PLUS}",
+                "stackable": true,
+                "menuTypes": ["TabBox.Header"],
+                "keyStroke": "insert"
+              },
+              {
+                "id": "ShareMenu",
+                "objectType": "Menu",
+                "iconId": "${iconId:MENU}",
+                "stackable": false,
+                "menuTypes": ["TabBox.Header"],
+                "horizontalAlignment": 1
               }
             ]
           }
@@ -51,22 +62,63 @@
         "label": "Properties",
         "fields": [
           {
-            "id": "SelectedTabField",
-            "objectType": "SmartField",
-            "label": "Selected Tab",
-            "lookupCall": "jswidgets.SelectedTabLookupCall"
+            "id": "TabBox",
+            "objectType": "TabBox",
+            "selectedTab":"TabBoxProperties",
+            "tabItems": [
+              {
+                "id": "TabBoxProperties",
+                "objectType": "TabItem",
+                "label": "TabBox",
+                "fields": [
+                  {
+                    "id": "SelectedTabField",
+                    "objectType": "SmartField",
+                    "label": "Selected Tab",
+                    "lookupCall": "jswidgets.SelectedTabLookupCall"
+                  },
+                  {
+                    "id": "FormFieldPropertiesBox",
+                    "objectType": "jswidgets.FormFieldPropertiesBox"
+                  },
+              {
+                    "id": "GridDataBox",
+                    "objectType": "jswidgets.GridDataBox",
+                    "label": "Grid Data Hints"
+                  }
+                ]
+              },
+              {
+                "id": "CurrentTabItemProperties",
+                "objectType": "TabItem",
+                "label": "Current Tab Item",
+                "fields": [
+                  {
+                    "id": "CurrentTab.MarkedField",
+                    "objectType": "CheckBoxField",
+                    "label": "Marked",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "CurrentTab.GroupBoxPropertiesBox",
+                    "objectType": "jswidgets.GroupBoxPropertiesBox"
+                  },
+                  {
+                    "id": "GridDataBox",
+                    "objectType": "jswidgets.GridDataBox",
+                    "label": "Grid Data Hints"
+                  },
+                  {
+                    "id": "CurrentTab.FormFieldPropertiesBox",
+                    "objectType": "jswidgets.FormFieldPropertiesBox"
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints"
       }
+
     ]
   }
 }

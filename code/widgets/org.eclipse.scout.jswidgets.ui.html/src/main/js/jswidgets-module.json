@@ -1,6 +1,7 @@
 {
   "files": [
     "jswidgets/accordion/AccordionForm.json",
+    "jswidgets/action/ActionPropertiesBox.json",
     "jswidgets/carousel/CarouselForm.json",
     "jswidgets/desktop/Desktop.json",
     "jswidgets/desktop/WidgetsOutline.json",
@@ -10,9 +11,11 @@
     "jswidgets/custom/CustomFieldForm.json",
     "jswidgets/datefield/DateFieldForm.json",
     "jswidgets/groupbox/GroupBoxForm.json",
+    "jswidgets/groupbox/GroupBoxPropertiesBox.json",
     "jswidgets/logicalgrid/GridDataBox.json",
     "jswidgets/logicalgrid/LogicalGridForm.json",
     "jswidgets/logicalgrid/LogicalGridLayoutConfigBox.json",
+    "jswidgets/menubar/MenuBarForm.json",
     "jswidgets/numberfield/NumberFieldForm.json",
     "jswidgets/smartfield/SmartFieldForm.json",
     "jswidgets/smartfield/SmartFieldPropertiesBox.json",
@@ -23,6 +26,7 @@
     "jswidgets/proposalfield/ProposalFieldPropertiesBox.json",
     "jswidgets/stringfield/StringFieldForm.json",
     "jswidgets/tabbox/TabBoxForm.json",
+    "jswidgets/tabbox/SampleTabItem.json",
     "jswidgets/tablefield/TableFieldForm.json",
     "jswidgets/tilefield/TileFieldForm.json",
     "jswidgets/tilefield/TileGridLayoutConfigBox.json",

@@ -303,8 +303,18 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredStackable() {
+          return false;
+        }
+
+        @Override
         protected void execAction() {
           MessageBoxes.createOk().withHeader("Sorry").withBody("There are currently no options available.").show();
+        }
+
+        @Override
+        protected byte getConfiguredHorizontalAlignment() {
+          return HORIZONTAL_ALIGNMENT_RIGHT;
         }
       }
     }

@@ -62,6 +62,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "${textKey:MenuBar}",
+      "detailForm": {
+        "objectType": "jswidgets.MenuBarForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:NumberField}",
       "detailForm": {
         "objectType": "jswidgets.NumberFieldForm"

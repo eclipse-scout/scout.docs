@@ -1,0 +1,43 @@
+{
+  "id": "jswidgets.ActionPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "gridColumnCount": 2,
+  "label": "Action Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "EnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Enabled",
+      "labelVisible": false
+    },
+    {
+      "id": "VisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "TextField",
+      "objectType": "StringField",
+      "label": "Text"
+    },
+    {
+      "id": "IconIdField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.IconIdLookupCall",
+      "label": "Icon Id"
+    },
+    {
+      "id": "TooltipTextField",
+      "objectType": "StringField",
+      "label": "Tooltip Text"
+    },
+    {
+      "id": "HorizontalAlignmentField",
+      "objectType": "NumberField",
+      "label": "Horizontal Alignment"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "jswidgets.GroupBoxPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "gridColumnCount": 2,
+  "label": "Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "SubLabelField",
+      "objectType": "StringField",
+      "label": "Sub label"
+    },
+    {
+      "id": "BorderVisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Border Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "BorderDecorationField",
+      "objectType": "SmartField",
+      "label": "Border Decoration",
+      "lookupCall": "jswidgets.BorderDecorationLookupCall",
+      "visible": false // Temporarily made invisible because it is confusing what the property really does
+    },
+    {
+      "id": "ExpandableField",
+      "objectType": "CheckBoxField",
+      "label": "Expandable",
+      "labelVisible": false
+    },
+    {
+      "id": "ExpandedField",
+      "objectType": "CheckBoxField",
+      "label": "Expanded",
+      "labelVisible": false
+    },
+    {
+      "id": "ScrollableField",
+      "objectType": "CheckBoxField",
+      "label": "Scrollable",
+      "labelVisible": false,
+      "tooltipText": "${textKey:GroupBoxScrollableTooltip}",
+      "gridDataHints": {
+        "fillHorizontal": false
+      }
+    },
+    {
+      "id": "GridColumnCountField",
+      "objectType": "NumberField",
+      "label": "Grid Column Count"
+    },
+    {
+      "id": "LogicalGridField",
+      "objectType": "SmartField",
+      "label": "Logical Grid",
+      "lookupCall": "jswidgets.LogicalGridLookupCall",
+      "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+    },
+    {
+      "id": "NotificationField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.StatusSeverityLookupCall",
+      "label": "Notification"
+    }
+  ]
+}

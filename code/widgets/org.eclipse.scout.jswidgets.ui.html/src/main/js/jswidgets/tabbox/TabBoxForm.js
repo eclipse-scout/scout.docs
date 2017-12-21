@@ -22,12 +22,29 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   selectedTabField.setValue(tabBox.selectedTab.id);
   selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
+  var markedField = this.widget('CurrentTab.MarkedField');
+  markedField.on('propertyChange', this._onCurrentTabMarkedChanged.bind(this));
+
+  var addTabMenu = this.widget('AddTabMenu');
+  addTabMenu.on('action', this._onAddTabMenuAction.bind(this));
+
+  this.widget('ShareMenu').on('action', function(){
+    addTabMenu.setEnabled(!addTabMenu.enabled);
+  }.bind(this));
+
+
+
   this.widget('FormFieldPropertiesBox').setField(tabBox);
   this.widget('GridDataBox').setField(tabBox);
+  this._updateSelectedTab();
 };
 
 jswidgets.TabBoxForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.TabBoxForm');
+};
+
+jswidgets.TabBoxForm.prototype._onAddTabMenuAction = function(event) {
+  // handle adding tab item here
 };
 
 jswidgets.TabBoxForm.prototype._onSelectedTabChange = function(event) {
@@ -40,8 +57,24 @@ jswidgets.TabBoxForm.prototype._onSelectedTabChange = function(event) {
   }
 };
 
+jswidgets.TabBoxForm.prototype._onCurrentTabMarkedChanged = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('TabBox').selectedTab.setMarked(event.newValue);
+  }
+};
+
+
 jswidgets.TabBoxForm.prototype._onFieldPropertyChange = function(event) {
   if (event.propertyName === 'selectedTab') {
-    this.widget('SelectedTabField').setValue((event.newValue) ? (event.newValue.id) : (null));
+    this._updateSelectedTab();
+
   }
+};
+
+jswidgets.TabBoxForm.prototype._updateSelectedTab = function(){
+  var tabBox = this.widget('TabBox');
+  this.widget('SelectedTabField').setValue((tabBox.selectedTab) ? (tabBox.selectedTab.id) : (null));
+  this.widget('CurrentTab.MarkedField').setValue(tabBox.selectedTab.marked);
+  this.widget('CurrentTab.GroupBoxPropertiesBox').setField(tabBox.selectedTab);
+  this.widget('CurrentTab.FormFieldPropertiesBox').setField(tabBox.selectedTab);
 };

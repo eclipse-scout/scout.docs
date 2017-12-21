@@ -1,0 +1,125 @@
+{
+  "id": "jswidgets.MenuBarForm",
+  "type": "model",
+  "displayHint": "view",
+  "cssClass": "tab-box-form",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "MenuBarField",
+            "objectType": "WidgetField",
+            "labelVisible": false,
+            "gridDataHints": {
+              "useUiHeight": true
+            },
+            "fieldWidget": {
+              "id": "MenuBar",
+              "objectType": "MenuBar",
+              "menuItems": [
+                {
+                  "id": "Menu1",
+                  "objectType": "scout.Menu",
+                  "text": "First menu"
+                },
+                {
+                  "id": "Menu2",
+                  "objectType": "scout.FormFieldMenu",
+                  "field": {
+                    "id": "SmartField",
+                    "objectType": "SmartField",
+                    "label": "Locale",
+                    "lookupCall": "jswidgets.LocaleLookupCall",
+                    "labelVisible": false,
+                    "statusVisible": false,
+                    "labelPosition": 2
+                  }
+                },
+                {
+                  "id": "Menu3",
+                  "objectType": "scout.Menu",
+                  "text": "Third menu",
+                  "horizontalAlignment": 1,
+                  "iconId": "${iconId:WORLD}",
+                  "stackable": false
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 2,
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "PropertiesTabBox",
+            "objectType": "TabBox",
+            "selectedTab":"MenuBar.PropertyTabBox",
+            "tabItems": [
+              {
+                "id": "MenuBar.PropertyTabBox",
+                "objectType": "TabItem",
+                "label": "Menu Bar",
+                "fields": [
+                  {
+                    "id": "FormFieldPropertiesBox",
+                    "objectType": "jswidgets.FormFieldPropertiesBox"
+                  },
+                  {
+                    "id": "GridDataBox",
+                    "objectType": "jswidgets.GridDataBox",
+                    "label": "Grid Data Hints"
+                  }
+                ]
+              },
+              {
+                "id": "MenuItem.PropertyTabBox",
+                "objectType": "TabItem",
+                "label": "Menu Item",
+                "fields": [
+                  {
+                    "id": "MenuItem.StackableField",
+                    "objectType": "CheckBoxField",
+                    "label": "Stackable",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "MenuItem.ActionPropertiesBox",
+                    "objectType": "jswidgets.ActionPropertiesBox"
+                  },
+                  {
+                    "id": "MenuItem.FormFieldPropertiesBox",
+                    "objectType": "jswidgets.FormFieldPropertiesBox"
+                  }
+                ]
+              }
+            ],
+            "menus": [
+              {
+                "id": "MenuItem.MenuItemMenu",
+                "objectType": "FormFieldMenu",
+                "field": {
+                  "id": "SelectedMenuItem",
+                  "objectType": "SmartField",
+                  "labelVisible": false,
+                  "lookupCall": "jswidgets.MenuItemLookupCall",
+                  "value": "Menu1",
+                  "statusVisible": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
