@@ -1,11 +1,11 @@
-package org.eclipse.scout.widgets.ui.html.tiles;
+package org.eclipse.scout.widgets.ui.html.json.tile;
 
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.ui.html.IUiSession;
 import org.eclipse.scout.rt.ui.html.json.IJsonAdapter;
 import org.eclipse.scout.rt.ui.html.json.JsonProperty;
 import org.eclipse.scout.rt.ui.html.json.tile.JsonTile;
-import org.eclipse.scout.widgets.client.ui.tiles.ISimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
 
 public class JsonSimpleTile<T extends ISimpleTile> extends JsonTile<T> {
 

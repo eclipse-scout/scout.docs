@@ -2,7 +2,7 @@
  * Copyright (c) BSI Business Systems Integration AG. All rights reserved.
  * http://www.bsiag.com/
  */
-package org.eclipse.scout.widgets.client.ui.tiles;
+package org.eclipse.scout.widgets.client.ui.tile;
 
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordionGroupManager;
 import org.eclipse.scout.rt.client.ui.tile.GroupTemplate;

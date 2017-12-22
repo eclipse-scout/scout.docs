@@ -5,8 +5,8 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.ui.html.IUiSession;
 import org.eclipse.scout.rt.ui.html.json.AbstractJsonObjectFactory;
 import org.eclipse.scout.rt.ui.html.json.IJsonAdapter;
-import org.eclipse.scout.widgets.client.ui.tiles.ISimpleTile;
-import org.eclipse.scout.widgets.ui.html.tiles.JsonSimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
+import org.eclipse.scout.widgets.ui.html.json.tile.JsonSimpleTile;
 
 @Bean
 @Order(100)

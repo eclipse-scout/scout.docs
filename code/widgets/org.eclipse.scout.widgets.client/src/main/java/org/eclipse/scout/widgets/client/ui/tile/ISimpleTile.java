@@ -1,4 +1,4 @@
-package org.eclipse.scout.widgets.client.ui.tiles;
+package org.eclipse.scout.widgets.client.ui.tile;
 
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 

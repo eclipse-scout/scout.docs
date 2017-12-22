@@ -33,8 +33,8 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
-import org.eclipse.scout.widgets.client.ui.tiles.ISimpleTile;
-import org.eclipse.scout.widgets.client.ui.tiles.SimpleTileGroupManager;
+import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.SimpleTileGroupManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

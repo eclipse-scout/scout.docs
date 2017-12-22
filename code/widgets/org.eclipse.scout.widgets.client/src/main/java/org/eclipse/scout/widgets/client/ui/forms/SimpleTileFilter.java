@@ -3,7 +3,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.client.ui.tile.ITileFilter;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
-import org.eclipse.scout.widgets.client.ui.tiles.AbstractSimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.AbstractSimpleTile;
 
 public class SimpleTileFilter implements ITileFilter {
   private String m_text;

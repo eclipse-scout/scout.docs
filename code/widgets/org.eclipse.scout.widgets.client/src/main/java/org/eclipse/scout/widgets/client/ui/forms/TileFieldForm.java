@@ -47,7 +47,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.Propertie
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
-import org.eclipse.scout.widgets.client.ui.tiles.AbstractSimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.AbstractSimpleTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
