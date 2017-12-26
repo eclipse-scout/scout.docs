@@ -22,6 +22,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 {NotReleasedWarning}
 
 * <<New Property Auto Optimize Column Max Width (since 7.0.300)>>
+* <<No value in JS for string fields with masked input (since 7.0.300)>>
 
 ==== Oxygen.2 (7.0.200) Released on December 20, 2017
 
@@ -259,3 +260,12 @@ Every ui request schedules a model job to process the user interaction and waits
 The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
 
 In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
+
+== No value in JS for string fields with masked input (since 7.0.300)
+A string field with masked input did send the value from the model to the UI layer allowing to read possibly sensitive data via JS.
+The value is not sent to the UI layer anymore resulting in a slightly different behavior. From the model perspective nothing changed.
+
+* A `value` property change in the model will send an obfuscated display text instead of the real display text to prevent data leakage.
+* On focus of the input field, the obfuscated text is removed, showing an empty input field. On blur, if nothing was typed, the obfuscated text is restored (model value is unchanged).
+* When text is typed into the input field, the display text represents the real display text (but is still masked).
+

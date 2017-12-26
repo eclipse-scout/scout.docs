@@ -26,7 +26,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield2.AbstractSmartField
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.util.BooleanUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -46,7 +48,6 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.Configu
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontStyleField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ForegroundColorField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.HasActionField;
-import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.InputMaskedField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.MaxLengthField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.Placeholder1Field;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
@@ -75,6 +76,16 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.Example
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.MandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.OnFieldLabelField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.StyledField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedDisplayTextField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedFlagField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedInsertTextButton;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedMaxLengthField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedSetValueButton;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedSourceField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedUpdateDisplayTextOnModifyField;
+import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.InputMaskedBox.InputMaskedValueField;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.LoremIpsumButton;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm.MainBox.SampleFormatButton;
 
@@ -170,6 +181,42 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
    */
   public ForegroundColorField getForegroundColorField() {
     return getFieldByClass(ForegroundColorField.class);
+  }
+
+  public InputMaskedBox getInputMaskedBox() {
+    return getFieldByClass(InputMaskedBox.class);
+  }
+
+  public InputMaskedMaxLengthField getInputMaskedMaxLengthField() {
+    return getFieldByClass(InputMaskedMaxLengthField.class);
+  }
+
+  public InputMaskedSourceField getInputMaskedSourceField() {
+    return getFieldByClass(InputMaskedSourceField.class);
+  }
+
+  public InputMaskedSetValueButton getInputMaskedSetValueButton() {
+    return getFieldByClass(InputMaskedSetValueButton.class);
+  }
+
+  public InputMaskedInsertTextButton getInputMaskedInsertTextButton() {
+    return getFieldByClass(InputMaskedInsertTextButton.class);
+  }
+
+  public InputMaskedValueField getInputMaskedValueField() {
+    return getFieldByClass(InputMaskedValueField.class);
+  }
+
+  public InputMaskedDisplayTextField getInputMaskedDisplayTextField() {
+    return getFieldByClass(InputMaskedDisplayTextField.class);
+  }
+
+  public InputMaskedUpdateDisplayTextOnModifyField getInputMaskedUpdateDisplayTextOnModifyField() {
+    return getFieldByClass(InputMaskedUpdateDisplayTextOnModifyField.class);
+  }
+
+  public InputMaskedFlagField getInputMaskedFlagField() {
+    return getFieldByClass(InputMaskedFlagField.class);
   }
 
   public NumCharsField getNumCharsField() {
@@ -857,20 +904,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(150)
-      public class InputMaskedField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredInputMasked() {
-          return true;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("InputMasked");
-        }
-      }
-
       @Order(154)
       public class HasActionField extends AbstractStringField {
 
@@ -933,7 +966,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           int maxlen = NumberUtility.nvl(getValue(), 4000);
           getStringInputField().setMaxLength(maxlen);
           getUpperCaseField().setMaxLength(maxlen);
-          getInputMaskedField().setMaxLength(maxlen);
         }
       }
 
@@ -1159,6 +1191,183 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected int getConfiguredGridH() {
           return 3;
+        }
+      }
+    }
+
+    @Order(25)
+    @ClassId("2094c44b-94d4-4df9-9efb-eaf4c8d4c986")
+    public class InputMaskedBox extends AbstractGroupBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Input masked";
+      }
+
+      @Order(1000)
+      @ClassId("a6c204e1-7cbd-46c4-86c6-4d9f5941aaba")
+      public class InputMaskedField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Input masked";
+        }
+
+        @Override
+        protected boolean getConfiguredInputMasked() {
+          return true;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getInputMaskedValueField().setValue(getValue());
+        }
+
+        @Override
+        protected void execChangedDisplayText() {
+          getInputMaskedDisplayTextField().setValue(getDisplayText());
+        }
+      }
+
+      @Order(1500)
+      @ClassId("3a428d96-b17b-4ad2-b829-d56c60cf37c5")
+      public class InputMaskedFlagField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Toggle input masked";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(true);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getInputMaskedField().setInputMasked(BooleanUtility.nvl(getValue()));
+        }
+      }
+
+      @Order(2000)
+      @ClassId("3922f893-4464-4322-bca1-7af17f38e6f5")
+      public class InputMaskedMaxLengthField extends AbstractIntegerField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Max length";
+        }
+
+        @Override
+        protected Integer getConfiguredMinValue() {
+          return 0;
+        }
+
+        @Override
+        protected Integer getConfiguredMaxValue() {
+          return 4000;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          int maxlen = NumberUtility.nvl(getValue(), 4000);
+          getInputMaskedField().setMaxLength(maxlen);
+        }
+      }
+
+      @Order(3000)
+      @ClassId("65e6c35e-4a4e-435f-b6dd-eb6d709b989a")
+      public class InputMaskedSourceField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Source";
+        }
+      }
+
+      @Order(4000)
+      @ClassId("534d02eb-b861-4b69-9907-900a415b70ce")
+      public class InputMaskedSetValueButton extends AbstractButton {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Set value";
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected void execClickAction() {
+          getInputMaskedField().setValue(getInputMaskedSourceField().getValue());
+        }
+      }
+
+      @Order(5000)
+      @ClassId("1f18741c-74f4-46d4-9af5-fa553b4044fb")
+      public class InputMaskedInsertTextButton extends AbstractButton {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Insert text";
+        }
+
+        @Override
+        protected boolean getConfiguredProcessButton() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_LINK;
+        }
+
+        @Override
+        protected void execClickAction() {
+          getInputMaskedField().insertText(getInputMaskedSourceField().getValue());
+        }
+      }
+
+      @Order(6000)
+      @ClassId("2f9c3276-9f87-4e98-b892-49f77d1ea85c")
+      public class InputMaskedValueField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Value";
+        }
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+      }
+
+      @Order(7000)
+      @ClassId("bf1d46fc-587c-4ac4-8085-ebc37f0319ed")
+      public class InputMaskedDisplayTextField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Display text";
+        }
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+      }
+
+      @Order(8000)
+      @ClassId("b1f8723c-85b1-42fe-9c91-952c097e03da")
+      public class InputMaskedUpdateDisplayTextOnModifyField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("UpdateDisplayTextOnModify");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getInputMaskedField().setUpdateDisplayTextOnModify(getValue());
         }
       }
     }
