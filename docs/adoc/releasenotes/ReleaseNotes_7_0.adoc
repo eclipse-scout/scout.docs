@@ -251,3 +251,11 @@ Every ui request schedules a model job to process the user interaction and waits
 * New configuration properties have been added:
 ** `scout.http.apache_keep_alive` (possible values: true/false), whether to use keep-alive connections. If property is not set the system property `http.keepAlive` is evaluated, if this system property is also not set true will be used as a last resort.
 ** `scout.http.apache_retry_post` (possible values: true/false), whether to retry HTTP POST requests. If not property is not set the system property `sun.net.http.retryPost` is evaluated, if this system property is also not set true will be used as a last resort.
+
+== Desktop splitter position remembered across sessions (since 7.0.300)
+
+{NotReleasedWarning}
+
+The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
+
+In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
