@@ -143,7 +143,7 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#acc
 .Accordion
 image::{imgsdir}/accordion.png[]
 
-== Menu, Menubar enhancements ==
+== Menu, Menubar enhancements
 The menubar supports form field menu items (`FormFieldMenu`). On the model side extend `AbstractFormFieldMenu` with a form field as an inner class to use a form field menu in any menu supporting environment.
 [[img-accordion]]
 .Menubar with form fields
@@ -151,15 +151,20 @@ image::{imgsdir}/FormFieldMenu.png[]
 
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackabel menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackabel menu in the menubar.
 
-== Tabbox enhancements ==
-* The menubar of a tabbox considers the menu alignemnts left or right. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
-* TabItems got a sublabel with is displayed in a very small font below the title.
+== Tabbox enhancements
+* The menubar of a tabbox considers the menu alignemnts _left_ or _right_. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
+* TabItems got a `sublabel` property with is displayed in a very small font below the title (see also <<sec-gb-enhancements>>).
 * The marker of the selected tab is now animated and follows the user or model selection.
 * Several bugfixes of pixel issues due to zoom levels.
 
-== GroupBox enhancements ==
-GroupBoxes got a new property called sublabel. The sublabel is displayed below the title in a very small font.
+[[sec-gb-enhancements]]
+== GroupBox enhancements
+GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
 
-== JS Widget clone ==
-The clone function of any widget got a options parameter. The options define what properties and events are synchonized between the widget and its clone.
+== JS Widget clone
+The clone function of any widget got an `options` parameter. The options define what properties and events are synchonized between the widget and its clone.
 
+== Desktop splitter position remembered across sessions
+The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
+
+In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
