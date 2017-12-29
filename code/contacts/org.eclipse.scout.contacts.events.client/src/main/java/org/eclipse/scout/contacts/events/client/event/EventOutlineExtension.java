@@ -11,11 +11,6 @@ import org.eclipse.scout.rt.client.extension.ui.desktop.outline.OutlineChains.Ou
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 
-/**
- * <h3>{@link EventOutlineExtension}</h3>
- *
- * @author mzi
- */
 public class EventOutlineExtension extends AbstractOutlineExtension<ContactOutline> {
 
   public EventOutlineExtension(ContactOutline owner) {

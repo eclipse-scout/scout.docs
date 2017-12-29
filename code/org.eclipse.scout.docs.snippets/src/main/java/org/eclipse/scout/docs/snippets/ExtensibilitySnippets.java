@@ -14,9 +14,6 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.shared.extension.IExtensionRegistry;
 
-/**
- * <h3>{@link ExtensibilitySnippets}</h3>
- */
 public class ExtensibilitySnippets {
 
   /**

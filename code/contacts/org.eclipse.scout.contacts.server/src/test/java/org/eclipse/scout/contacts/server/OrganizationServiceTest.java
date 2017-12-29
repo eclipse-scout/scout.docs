@@ -18,8 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for
- * <h3>{@link OrganizationService}</h3>
+ * Tests for {@link OrganizationService}
  */
 @RunWith(ServerTestRunner.class)
 @RunWithServerSession(ServerSession.class)

@@ -25,8 +25,6 @@ import org.eclipse.scout.widgets.client.ui.forms.FormOptionsForm.MainBox.TitleFi
 import org.eclipse.scout.widgets.shared.Icons;
 
 /**
- * <h3>{@link FormOptionsForm}</h3>
- *
  * @author Andreas Hoegger
  */
 public class FormOptionsForm extends AbstractForm {

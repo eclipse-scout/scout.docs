@@ -12,9 +12,8 @@ import org.eclipse.scout.rt.rest.RestApplication;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 /**
- * <h3>{@link ServerStatusService}</h3> This is an example of a rest service provider. A resource implementing
- * {@link IRestResource} is provided as rest resource in case the {@link ServletContainer} with a
- * {@link RestApplication} is registered in the web.xml.
+ * This is an example of a rest service provider. A resource implementing {@link IRestResource} is provided as rest
+ * resource in case the {@link ServletContainer} with a {@link RestApplication} is registered in the web.xml.
  *
  * @see RestApplication
  * @see IRestResource

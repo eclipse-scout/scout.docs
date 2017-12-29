@@ -12,11 +12,8 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.DisplayViewId;
 
 /**
- * <h3>{@link DisplayViewIdLookupCall}</h3>
- *
  * @author Andreas Hoegger
  */
-
 @ApplicationScoped
 public class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
 

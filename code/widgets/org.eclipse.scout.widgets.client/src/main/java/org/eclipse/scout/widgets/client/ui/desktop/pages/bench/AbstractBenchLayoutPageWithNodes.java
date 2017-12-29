@@ -10,8 +10,6 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
 /**
- * <h3>{@link AbstractBenchLayoutPageWithNodes}</h3>
- *
  * @author Andreas Hoegger
  */
 public class AbstractBenchLayoutPageWithNodes extends AbstractPageWithNodes {

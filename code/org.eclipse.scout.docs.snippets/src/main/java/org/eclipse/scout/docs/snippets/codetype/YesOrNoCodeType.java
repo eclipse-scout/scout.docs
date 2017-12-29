@@ -5,9 +5,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-/**
- * <h3>{@link YesOrNoCodeType}</h3>
- */
 public class YesOrNoCodeType extends AbstractCodeType<Long, Boolean> {
 
   private static final long serialVersionUID = 1L;

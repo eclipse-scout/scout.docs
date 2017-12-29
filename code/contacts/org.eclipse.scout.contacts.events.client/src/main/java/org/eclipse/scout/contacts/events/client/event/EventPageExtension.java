@@ -7,11 +7,6 @@ import org.eclipse.scout.rt.client.extension.ui.desktop.outline.pages.AbstractPa
 import org.eclipse.scout.rt.client.extension.ui.desktop.outline.pages.PageWithNodesChains.PageWithNodesCreateChildPagesChain;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 
-/**
- * <h3>{@link EventPageExtension}</h3>
- *
- * @author mzi
- */
 public class EventPageExtension extends AbstractPageWithNodesExtension<OrganizationNodePage> {
 
   public EventPageExtension(OrganizationNodePage owner) {

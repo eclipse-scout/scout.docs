@@ -8,9 +8,6 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
-/**
- * <h3>{@link LookupExample}</h3>
- */
 public class LookupExample {
 
   static class P_Field extends AbstractSmartField<String> {

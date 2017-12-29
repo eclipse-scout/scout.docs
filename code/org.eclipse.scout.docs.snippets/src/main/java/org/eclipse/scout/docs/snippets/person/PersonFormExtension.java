@@ -9,9 +9,6 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 
-/**
- * <h3>{@link PersonFormExtension}</h3>
- */
 //tag::PersonFormExtension[]
 public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
 

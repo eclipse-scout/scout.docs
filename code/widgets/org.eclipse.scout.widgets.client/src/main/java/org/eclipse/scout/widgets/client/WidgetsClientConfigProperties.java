@@ -2,9 +2,6 @@ package org.eclipse.scout.widgets.client;
 
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
-/**
- * <h3>{@link WidgetsClientConfigProperties}</h3>
- */
 public final class WidgetsClientConfigProperties {
   public static class GitUrlConfigProperty extends AbstractStringConfigProperty {
     @Override

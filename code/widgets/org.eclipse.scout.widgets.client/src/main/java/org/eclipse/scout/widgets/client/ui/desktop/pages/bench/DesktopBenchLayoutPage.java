@@ -8,11 +8,10 @@ import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 /**
- * <h3>{@link DesktopBenchLayoutPage}</h3>
- *
  * @author aho
  */
 public class DesktopBenchLayoutPage extends AbstractPageWithNodes implements IFormPage {
+
   @Override
   protected String getConfiguredTitle() {
     return "Bench Layout";
@@ -38,5 +37,4 @@ public class DesktopBenchLayoutPage extends AbstractPageWithNodes implements IFo
     pageList.add(new NullLayoutDataNodePage());
     pageList.add(new CachedBenchLayoutNodePage());
   }
-
 }
