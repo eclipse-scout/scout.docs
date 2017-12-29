@@ -11,6 +11,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -24,11 +25,6 @@ import org.eclipse.scout.widgets.client.ui.forms.MenuBarForm.MainBox.DetailBox.S
 import org.eclipse.scout.widgets.client.ui.forms.MenuBarForm.MainBox.DetailBox.StringFieldValueField;
 import org.eclipse.scout.widgets.shared.Icons;
 
-/**
- * <h3>{@link MenuBarForm}</h3>
- *
- * @author aho
- */
 public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -47,7 +43,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return "AccordionField";
+    return "MenuBar";
   }
 
   public DateFieldValueField getDateFieldValueField() {
@@ -70,9 +66,10 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(0)
       @ClassId("d5d0089e-106e-43f1-acf9-bee50c0d6abc")
       public class SmartFieldMenuValueField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
-          return "Menu SmartField Value";
+          return "SmartField Value";
         }
 
         @Override
@@ -89,9 +86,10 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(1000)
       @ClassId("de65cf39-0682-4767-b75b-ad31a46104ff")
       public class DateFieldValueField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
-          return "Menu DateField Value";
+          return "DateField value";
         }
 
         @Override
@@ -107,9 +105,10 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
       @Order(1000)
       public class StringFieldValueField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
-          return "Menu StringField Value";
+          return "StringField value";
         }
 
         @Override
@@ -125,14 +124,16 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
       @Order(0)
       @ClassId("6d7451e2-5771-4de9-8788-6efb9b7628ac")
-      public class BlubberMenu extends AbstractMenu {
+      public class ClickMeMenu extends AbstractMenu {
+
         @Override
         protected String getConfiguredText() {
-          return "Blubber";
+          return "Click me";
         }
 
         @Override
         protected void execAction() {
+          MessageBoxes.createOk().withHeader("Hello!").show();
         }
       }
 
@@ -188,7 +189,6 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
             m_throwVetoException = throwVetoException;
           }
         }
-
       }
 
       @Order(2000)
@@ -196,7 +196,8 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Order(1000)
         public class MenuDateField extends AbstractDateField {
-          private SimpleDateFormat m_dateFormatter = new SimpleDateFormat("MM-dd-yyyy hh:mm");
+
+          private final SimpleDateFormat m_dateFormatter = new SimpleDateFormat("MM-dd-yyyy hh:mm");
 
           @Override
           protected String getConfiguredLabel() {
@@ -224,7 +225,6 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
             System.out.println("Date changed to: " + getValue());
           }
         }
-
       }
 
       @Order(1000)
@@ -279,8 +279,12 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
         protected boolean getConfiguredStackable() {
           return false;
         }
-      }
 
+        @Override
+        protected void execAction() {
+          MessageBoxes.createOk().withHeader("Hello!").show();
+        }
+      }
     }
 
     @Order(50)
