@@ -313,6 +313,27 @@ Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon cons
 // TODO [7.0] awe ==== Texts
 //Write Explain textKey as done for iconId
 
+==== Parent and Owner
+As seen in the previous chapters, the creation of a widget requires a parent. This establishes a link between the child and the parent widget which is necessary for several actions.
+
+. Rendering a widget into the container of the parent +
+If you call `widget.render()` you don't have to specify the HTML container to which the widget should be appended. It takes the container of the parent widget by default which is `parent.$container`. You can still pass a custom `$parent` if you like.
+
+. Removing a widget and its children +
+If `widget.remove()` is called, the widget will be removed from the DOM. Even though removing the parent HTML node would be sufficient in order to make the children disappear from the screen, every child widget will be removed as well. This gives the child widgets the possibility to clean up their rendering state and detach listeners. This is necessary because the widgets still exist after removal and their data can still be updated. Such cleanup actions are typically done by overriding `widget._remove()`. Remember to call the `_remove` of the super class as well.
+
+. Finding child widgets +
+This is something you will have to do very often if you specified your widgets in a JSON file. If you want to access these widgets from JavaScript you need to get them first. This is easy due to the linkage of the widgets. You can just use the function `widget(id)`. See also chapter <<Finding a Widget>> for more details.
+
+. Establishing a link independent of the DOM structure +
+Normally a child widget contains HTML elements which are children of the parent's HTML elements. Even though this is the regular case it is not a must. Amongst others the following widgets have HTML elements appended to the HTML element of the desktop rather than their actual parents: dialogs, popups, tooltips. The main reason is because these widgets lay on top of every other widget. In order to not get into the z-index hell it is a lot easier to put these widgets on the top level of the DOM structure. But since the HTML elements are now separated, the only link is the parent/child hierarchy. +
+Imagine you have a string field which displays a tooltip. The parent of the tooltip is the string field but the HTML element is appended to the HTML element of the desktop. Removing the string field will now remove the tooltip as well even though their HTML elements are not linked. +
+Or think about the following case: there is a popup open which contains a smart field. The smart field shows a popup by itself displaying the proposals. The HTML elements of the main popup and the smart field popup are siblings meaning they are on the same level in the DOM. Normally a popup gets closed when an element not belonging to the popup is clicked. But why is the main popup not closed if the user clicks into the smart field popup even though their HTML elements are not linked? Exactly, because the smart field popup is a child of the smart field and therefore a child of the main popup.
+
+So far we have learned what the parent is. But what is the owner? The owner is the only one which is allowed to destroy its children. Normally, the parent and the owner are the same, that is why you don't have to specify the owner explicitly when creating a widget. The owner will be different if you specify it explicitly or if you use `setParent()` to temporarily change the parent of a widget. In that case the owner points to the old parent. This means if the new parent were destroyed, the newly linked child would not be destroyed, only removed from the DOM.
+
+This comes in handy if you want to temporarily give the control over rendering/removal to another widget (like a popup) but don't let the other widget destroy your widget (e.g. when the popup is closed) because you want to use your widget again (e.g. display it on another popup).
+
 //TODO [7.0] cgu ==== How to build a custom widget
 
 === Object Factory
@@ -344,27 +365,6 @@ scout.objectFactories = $.extend(scout.objectFactories, {
 ----
 
 This will simply add a new factory for the type `Table` the the list of existing factories. From now on `yourproject.CustomTable` will be instantiated every time a `Table` should be created.
-
-==== Parent and Owner
-As seen in the previous chapters, the creation of a widget requires a parent. This establishes a link between the child and the parent widget which is necessary for several actions.
-
-. Rendering a widget into the container of the parent +
-If you call `widget.render()` you don't have to specify the HTML container to which the widget should be appended. It takes the container of the parent widget by default which is `parent.$container`. You can still pass a custom `$parent` if you like.
-
-. Removing a widget and its children +
-If `widget.remove()` is called, the widget will be removed from the DOM. Even though removing the parent HTML node would be sufficient in order to make the children disappear from the screen, every child widget will be removed as well. This gives the child widgets the possibility to clean up their rendering state and detach listeners. This is necessary because the widgets still exist after removal and their data can still be updated. Such cleanup actions are typically done by overriding `widget._remove()`. Remember to call the `_remove` of the super class as well.
-
-. Finding child widgets +
-This is something you will have to do very often if you specified your widgets in a JSON file. If you want to access these widgets from JavaScript you need to get them first. This is easy due to the linkage of the widgets. You can just use the function `widget(id)`. See also chapter <<Finding a Widget>> for more details.
-
-. Establishing a link independent of the DOM structure +
-Normally a child widget contains HTML elements which are children of the parent's HTML elements. Even though this is the regular case it is not a must. Amongst others the following widgets have HTML elements appended to the HTML element of the desktop rather than their actual parents: dialogs, popups, tooltips. The main reason is because these widgets lay on top of every other widget. In order to not get into the z-index hell it is a lot easier to put these widgets on the top level of the DOM structure. But since the HTML elements are now separated, the only link is the parent/child hierarchy. +
-Imagine you have a string field which displays a tooltip. The parent of the tooltip is the string field but the HTML element is appended to the HTML element of the desktop. Removing the string field will now remove the tooltip as well even though their HTML elements are not linked. +
-Or think about the following case: there is a popup open which contains a smart field. The smart field shows a popup by itself displaying the proposals. The HTML elements of the main popup and the smart field popup are siblings meaning they are on the same level in the DOM. Normally a popup gets closed when an element not belonging to the popup is clicked. But why is the main popup not closed if the user clicks into the smart field popup even though their HTML elements are not linked? Exactly, because the smart field popup is a child of the smart field and therefore a child of the main popup.
-
-So far we have learned what the parent is. But what is the owner? The owner is the only one which is allowed to destroy its children. Normally, the parent and the owner are the same, that is why you don't have to specify the owner explicitly when creating a widget. The owner will be different if you specify it explicitly or if you use `setParent()` to temporarily change the parent of a widget. In that case the owner points to the old parent. This means if the new parent were destroyed, the newly linked child would not be destroyed, only removed from the DOM.
-
-This comes in handy if you want to temporarily give the control over rendering/removal to another widget (like a popup) but don't let the other widget destroy your widget (e.g. when the popup is closed) because you want to use your widget again (e.g. display it on another popup).
 
 === Form
 A form is typically used for two purposes:
