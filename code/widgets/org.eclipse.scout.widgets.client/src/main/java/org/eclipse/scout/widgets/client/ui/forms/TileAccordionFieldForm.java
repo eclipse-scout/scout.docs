@@ -15,8 +15,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.group.AbstractGroup;
-import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordion;
+import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
 import org.eclipse.scout.rt.client.ui.tile.DefaultGroupManager;
 import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
@@ -33,6 +33,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
 import org.eclipse.scout.widgets.client.ui.tile.SimpleTileGroupManager;
 import org.slf4j.Logger;
@@ -82,7 +83,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   @ClassId("eb0180d2-0c32-4198-9771-3dfef2a3662b")
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10)
+    @Order(100)
     @ClassId("eab5ced8-eceb-47d3-92f0-affda2c1547d")
     public class DetailBox extends AbstractGroupBox {
 
@@ -379,7 +380,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
     }
 
-    @Order(2000)
+    @Order(200)
     @ClassId("68892606-268e-4a13-a58c-f00ae6af47c4")
     public class PropertiesBox extends AbstractGroupBox {
 
@@ -552,7 +553,26 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
     }
 
-    @Order(50)
+    @Order(300)
+    @ClassId("a2286e1b-0a57-48ec-8720-558f5a8b9583")
+    public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Form Field Properties";
+      }
+
+      @Override
+      protected void execInitField() {
+        setFormField(getAccordionField());
+      }
+
+      @Override
+      protected boolean getConfiguredExpanded() {
+        return false;
+      }
+    }
+
+    @Order(500)
     public class CloseButton extends AbstractCloseButton {
     }
 

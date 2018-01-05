@@ -29,6 +29,7 @@ import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.Prop
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractSimpleTile;
 
 @ClassId("59689d49-e6a5-4641-9d1a-a6a6ce98d9bf")
@@ -74,7 +75,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
   @ClassId("4d6137e0-7d67-491b-969f-c02c3161581b")
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10)
+    @Order(100)
     @ClassId("41a25783-a1cb-4895-a417-73eebfb1b804")
     public class DetailBox extends AbstractGroupBox {
 
@@ -170,7 +171,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
 
     }
 
-    @Order(2000)
+    @Order(200)
     @ClassId("d556cf3b-699f-4c9f-a6a0-7eac28398cd1")
     public class PropertiesBox extends AbstractGroupBox {
 
@@ -239,7 +240,26 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
 
     }
 
-    @Order(50)
+    @Order(300)
+    @ClassId("eb1abced-79fd-4c31-b795-9074fab96134")
+    public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Form Field Properties";
+      }
+
+      @Override
+      protected void execInitField() {
+        setFormField(getAccordionField());
+      }
+
+      @Override
+      protected boolean getConfiguredExpanded() {
+        return false;
+      }
+    }
+
+    @Order(500)
     public class CloseButton extends AbstractCloseButton {
     }
   }

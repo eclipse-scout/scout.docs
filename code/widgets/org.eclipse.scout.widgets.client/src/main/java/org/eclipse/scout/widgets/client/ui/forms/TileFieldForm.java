@@ -41,12 +41,14 @@ import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField.TileGrid;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.FormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ColorSchemeField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MaxContentWidthField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractSimpleTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,6 +101,10 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(StatusField.class);
   }
 
+  public FormFieldPropertiesBox getFormFieldPropertiesBox() {
+    return getFieldByClass(FormFieldPropertiesBox.class);
+  }
+
   public PropertiesBox getPropertiesBox() {
     return getFieldByClass(PropertiesBox.class);
   }
@@ -116,7 +122,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
   @ClassId("fcf36822-2d2d-4a23-a32d-74f7385370ea")
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10)
+    @Order(100)
     public class DetailBox extends AbstractGroupBox {
       private MenuMediator m_menuMediator;
 
@@ -582,7 +588,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
       });
     }
 
-    @Order(2000)
+    @Order(200)
     @ClassId("fc28a174-b683-4aae-8ec9-7f73dc2b45e2")
     public class PropertiesBox extends AbstractGroupBox {
 
@@ -791,7 +797,26 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
     }
 
-    @Order(50)
+    @Order(300)
+    @ClassId("36584055-ed0a-464d-88d8-30c37cec1112")
+    public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Form Field Properties";
+      }
+
+      @Override
+      protected void execInitField() {
+        setFormField(getTileField());
+      }
+
+      @Override
+      protected boolean getConfiguredExpanded() {
+        return false;
+      }
+    }
+
+    @Order(500)
     public class CloseButton extends AbstractCloseButton {
     }
   }
