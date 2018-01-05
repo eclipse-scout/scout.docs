@@ -210,7 +210,7 @@ jswidgets.TileFieldForm.prototype._onSortDescMenuAction = function(event) {
   this._sortTiles();
 };
 
-jswidgets.TileFieldForm.prototype.filterTileGridByText = function(text) {
+jswidgets.TileFieldForm.prototype.filterTilesByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
       this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
