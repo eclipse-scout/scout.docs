@@ -14,7 +14,8 @@
           {
             "id": "InsertMenu",
             "objectType": "Menu",
-            "text": "Insert tile"
+            "text": "Insert tile",
+            "keyStroke": "insert"
           },
           {
             "id": "InsertManyMenu",
@@ -24,7 +25,8 @@
           {
             "id": "DeleteMenu",
             "objectType": "Menu",
-            "text": "Delete selected tiles"
+            "text": "Delete selected tiles",
+            "keyStroke": "delete"
           },
           {
             "id": "SelectNextMenu",

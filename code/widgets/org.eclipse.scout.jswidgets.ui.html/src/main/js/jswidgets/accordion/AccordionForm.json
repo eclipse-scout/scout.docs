@@ -14,12 +14,14 @@
           {
             "id": "InsertMenu",
             "objectType": "Menu",
-            "text": "Insert group"
+            "text": "Insert group",
+            "keyStroke": "insert"
           },
           {
             "id": "DeleteFirstMenu",
             "objectType": "Menu",
-            "text": "Delete first group"
+            "text": "Delete first group",
+            "keyStroke": "delete"
           },
           {
             "id": "CollapseExpandFirstMenu",

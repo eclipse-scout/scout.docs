@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.MenuMediator;
@@ -192,6 +193,11 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Override
+            protected String getConfiguredKeyStroke() {
+              return IKeyStroke.INSERT;
+            }
+
+            @Override
             protected void execAction() {
               SimpleTile tile = new SimpleTile();
               tile.setLabel("New tile " + m_tilesAddedCount++);
@@ -288,6 +294,11 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
               return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.SingleSelection, TileGridMenuType.MultiSelection);
+            }
+
+            @Override
+            protected String getConfiguredKeyStroke() {
+              return IKeyStroke.DELETE;
             }
 
             @Override

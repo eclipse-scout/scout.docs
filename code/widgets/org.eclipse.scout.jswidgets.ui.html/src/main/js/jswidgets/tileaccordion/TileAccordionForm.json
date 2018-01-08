@@ -31,7 +31,8 @@
           {
             "id": "InsertTileIntoGroup0Menu",
             "objectType": "Menu",
-            "text": "Insert tile into group 0"
+            "text": "Insert tile into group 0",
+            "keyStroke": "insert"
           },
           {
             "id": "InsertTileIntoGroup1Menu",
@@ -41,7 +42,8 @@
           {
             "id": "DeleteSelectedTilesMenu",
             "objectType": "Menu",
-            "text": "Delete selected tiles"
+            "text": "Delete selected tiles",
+            "keyStroke": "delete"
           },
           {
             "id": "SelectNextMenu",

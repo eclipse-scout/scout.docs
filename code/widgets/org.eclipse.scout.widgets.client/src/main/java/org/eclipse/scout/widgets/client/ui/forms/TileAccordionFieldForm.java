@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TileGridMenuType;
@@ -98,6 +99,11 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.EmptySpace);
+        }
+
+        @Override
+        protected String getConfiguredKeyStroke() {
+          return IKeyStroke.INSERT;
         }
 
         @Override
@@ -231,6 +237,11 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.SingleSelection, TileGridMenuType.MultiSelection);
+        }
+
+        @Override
+        protected String getConfiguredKeyStroke() {
+          return IKeyStroke.DELETE;
         }
 
         @Override

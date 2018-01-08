@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.accordion.AbstractAccordion;
 import org.eclipse.scout.rt.client.ui.accordion.IAccordion;
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.GridData;
@@ -88,6 +89,11 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
         }
 
         @Override
+        protected String getConfiguredKeyStroke() {
+          return IKeyStroke.INSERT;
+        }
+
+        @Override
         protected void execAction() {
           addGroupWithTiles();
         }
@@ -99,6 +105,11 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
         @Override
         protected String getConfiguredText() {
           return "Delete first group";
+        }
+
+        @Override
+        protected String getConfiguredKeyStroke() {
+          return IKeyStroke.DELETE;
         }
 
         @Override
