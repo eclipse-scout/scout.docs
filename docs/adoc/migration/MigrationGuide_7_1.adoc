@@ -344,7 +344,30 @@ The following config property keys have been renamed (the old keys are no longer
 
 == Default Values Validation
 
+== New Config Property scout.cspDirective
+The new property `scout.cspDirective` makes subclassing and replacing the `ContentSecurityPolicy` class obsolete as you can configure all CSP settings with this property now. An example from the Scout Widgets application:
 
+[source, java]
+----
+@Replace
+public class WidgetsContentSecurityPolicy extends ContentSecurityPolicy {
+
+  @Override
+  protected void initDirectives() {
+    super.initDirectives();
+    // Demo app uses external images in html field and custom widgets -> allow it
+    withImgSrc("*");
+  }
+}
+----
+
+This class was deleted and replaced by a config property in config.properties:
+
+[source, text]
+----
+# CSP - Demo app uses external images in html field and custom widgets -> allow it
+scout.cspDirective[img-src]=*
+----
 
 // ^^^
 // Insert descriptions of Java API changes here

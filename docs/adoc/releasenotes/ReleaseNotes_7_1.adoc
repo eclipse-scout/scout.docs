@@ -168,3 +168,20 @@ The clone function of any widget got an `options` parameter. The options define 
 The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
 
 In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
+
+== ImageField: support for SVG images and image URLs
+It's now possible to use SVG images in the same way as bitmap images. Simply put the .svg file in the `/icons` folder of the client module and reference the SVG image in any widget that supports the `iconId` property. Example:
+
+[source,java]
+----
+@Override
+protected String getConfiguredIconId() {
+  return "person.svg";
+}
+----
+
+Additionally you can now reference an image by URL, for instance an image hosted on an external server. Use the property ´imageUrl` of the AbstractImageField to reference the image. Note: the AbstractImageField defines a priority for which one of the three image properties is used to render the image in the browser:
+
+1. image (Binary resource)
+2. imageUrl
+3. imageId
