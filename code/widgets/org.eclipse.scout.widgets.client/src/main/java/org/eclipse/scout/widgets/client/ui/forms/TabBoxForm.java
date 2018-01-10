@@ -38,6 +38,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.Docum
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox.FileTableField;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.MonthsBox.MonthDetailsBox;
+import org.eclipse.scout.widgets.client.ui.forms.tabbox.DynamicTabItem;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractMonthsBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
@@ -253,6 +254,20 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredLabelVisible() {
             return false;
           }
+        }
+      }
+
+      @Order(5)
+      public class AddDynamicTabMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Add tab";
+        }
+
+        @Override
+        protected void execAction() {
+          getTabBox().addField(new DynamicTabItem());
         }
       }
 

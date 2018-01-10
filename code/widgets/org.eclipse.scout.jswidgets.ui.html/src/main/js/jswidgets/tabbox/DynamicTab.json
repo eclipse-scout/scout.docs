@@ -1,0 +1,13 @@
+{
+  "id": "jswidgets.DynamicTab",
+  "type": "model",
+  "objectType": "TabItem",
+  "label": "Dyn Tab",
+  "fields": [
+    {
+      "id": "StringField2",
+      "objectType": "StringField",
+      "label": "String Field 2"
+    }
+  ]
+}

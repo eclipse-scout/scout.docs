@@ -10,6 +10,7 @@
  ******************************************************************************/
 jswidgets.TabBoxForm = function() {
   jswidgets.TabBoxForm.parent.call(this);
+  this.dynamicTabCounter = 0;
 };
 scout.inherits(jswidgets.TabBoxForm, scout.Form);
 
@@ -18,6 +19,9 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   var tabBox = this.widget('TabBox');
   tabBox.on('propertyChange', this._onFieldPropertyChange.bind(this));
 
+  var addTabMenu = this.widget('AddTabMenu');
+  addTabMenu.on('action', this._onAddTabMenuAction.bind(this));
+
   var selectedTabField = this.widget('SelectedTabField');
   selectedTabField.setValue(tabBox.selectedTab.id);
   selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
@@ -25,14 +29,9 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   var markedField = this.widget('CurrentTab.MarkedField');
   markedField.on('propertyChange', this._onCurrentTabMarkedChanged.bind(this));
 
-  var addTabMenu = this.widget('AddTabMenu');
-  addTabMenu.on('action', this._onAddTabMenuAction.bind(this));
-
   this.widget('ShareMenu').on('action', function(){
     addTabMenu.setEnabled(!addTabMenu.enabled);
   }.bind(this));
-
-
 
   this.widget('FormFieldPropertiesBox').setField(tabBox);
   this.widget('GridDataBox').setField(tabBox);
@@ -43,9 +42,6 @@ jswidgets.TabBoxForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.TabBoxForm');
 };
 
-jswidgets.TabBoxForm.prototype._onAddTabMenuAction = function(event) {
-  // handle adding tab item here
-};
 
 jswidgets.TabBoxForm.prototype._onSelectedTabChange = function(event) {
   if (event.propertyName === 'value') {
@@ -62,6 +58,18 @@ jswidgets.TabBoxForm.prototype._onCurrentTabMarkedChanged = function(event) {
     this.widget('TabBox').selectedTab.setMarked(event.newValue);
   }
 };
+
+jswidgets.TabBoxForm.prototype._onAddTabMenuAction = function() {
+  var tabBox = this.widget('TabBox'),
+    tabItems = tabBox.tabItems || [],
+    tabModel = scout.models.getModel('jswidgets.DynamicTab');
+  tabModel.id = 'dynTab' + this.dynamicTabCounter++;
+  tabModel.parent = tabBox;
+  tabItems = tabItems.slice();
+  tabItems.push(scout.create('TabItem', tabModel));
+  tabBox.setTabItems(tabItems);
+};
+
 
 
 jswidgets.TabBoxForm.prototype._onFieldPropertyChange = function(event) {

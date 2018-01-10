@@ -27,6 +27,7 @@
     "jswidgets/stringfield/StringFieldForm.json",
     "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tabbox/SampleTabItem.json",
+    "jswidgets/tabbox/DynamicTab.json",
     "jswidgets/tablefield/TableFieldForm.json",
     "jswidgets/tilefield/TileFieldForm.json",
     "jswidgets/tilefield/TileGridLayoutConfigBox.json",
