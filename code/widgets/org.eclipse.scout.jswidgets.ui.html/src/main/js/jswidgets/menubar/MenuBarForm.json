@@ -2,7 +2,6 @@
   "id": "jswidgets.MenuBarForm",
   "type": "model",
   "displayHint": "view",
-  "cssClass": "tab-box-form",
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
