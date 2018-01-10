@@ -2,6 +2,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.form.fields.AbstractFormFieldMenu;
@@ -169,7 +170,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Override
           protected void execChangedValue() {
-            getSmartFieldMenuValueField().setValue(getValue().getDisplayName());
+            getSmartFieldMenuValueField().setValue(Optional.ofNullable(getValue()).map(v -> v.getDisplayName()).orElse(null));
             System.out.println("value changed to: " + getValue());
           }
 
@@ -221,7 +222,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Override
           protected void execChangedValue() {
-            getDateFieldValueField().setValue(m_dateFormatter.format(getValue()));
+            getDateFieldValueField().setValue(Optional.ofNullable(getValue()).map(v -> m_dateFormatter.format(v)).orElse(null));
             System.out.println("Date changed to: " + getValue());
           }
         }
