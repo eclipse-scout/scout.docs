@@ -50,9 +50,13 @@ jswidgets.LifecycleForm.prototype._save = function(data) {
 };
 
 jswidgets.LifecycleForm.prototype._onHasCloseButtonPropertyChange = function(event) {
-  this.widget('CloseMenu').setVisible(event.newValue);
+  if (event.propertyName === 'value') {
+    this.widget('CloseMenu').setVisible(event.newValue);
+  }
 };
 
 jswidgets.LifecycleForm.prototype._onAskIfNeedSavePropertyChange = function(event) {
-  this.setAskIfNeedSave(event.newValue);
+  if (event.propertyName === 'value') {
+    this.setAskIfNeedSave(event.newValue);
+  }
 };
