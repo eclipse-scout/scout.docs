@@ -30,6 +30,12 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
   =============================================================================
 ////
 
+== API Changes (Java)
+
+=== CalendarComponent
+Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.client.ui.basic.calendar.CalendarComponent`.
+Migration: Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
+
 == Java 8 required
 
 The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed:  Starting with Eclipse Scout 7.1, a Java 8 runtime is required.
