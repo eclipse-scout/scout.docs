@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.client.ui.tile.ITileGrid;
 import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -589,6 +590,14 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
 
         @Override
+        protected Integer execValidateValue(Integer rawValue) {
+          if (rawValue == null) {
+            throw new VetoException("Value must not be null");
+          }
+          return super.execValidateValue(rawValue);
+        }
+
+        @Override
         protected void execChangedValue() {
           getAccordionField().getAccordion().setGridColumnCount(getValue());
         }
@@ -605,6 +614,14 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected String getConfiguredLabel() {
           return "Max Content Width";
+        }
+
+        @Override
+        protected Integer execValidateValue(Integer rawValue) {
+          if (rawValue == null) {
+            throw new VetoException("Value must not be null");
+          }
+          return super.execValidateValue(rawValue);
         }
 
         @Override
