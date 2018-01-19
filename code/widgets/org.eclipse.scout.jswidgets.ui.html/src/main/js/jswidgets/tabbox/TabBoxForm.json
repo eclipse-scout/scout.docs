@@ -74,14 +74,13 @@
                   {
                     "id": "SelectedTabField",
                     "objectType": "SmartField",
-                    "label": "Selected Tab",
-                    "lookupCall": "jswidgets.SelectedTabLookupCall"
+                    "label": "Selected Tab Item"
                   },
                   {
                     "id": "FormFieldPropertiesBox",
                     "objectType": "jswidgets.FormFieldPropertiesBox"
                   },
-              {
+                  {
                     "id": "GridDataBox",
                     "objectType": "jswidgets.GridDataBox",
                     "label": "Grid Data Hints"
@@ -112,6 +111,68 @@
                     "id": "CurrentTab.FormFieldPropertiesBox",
                     "objectType": "jswidgets.FormFieldPropertiesBox"
                   }
+                ],
+                "menus": [
+                  {
+                    "id": "CurrentTab.DeleteMenu",
+                    "objectType": "Menu",
+                    "text": "Delete tab item",
+                    "iconId": "${iconId:MINUS}",
+                    "stackable": true,
+                    "menuTypes": ["TabBox.Header"]
+                  }
+                ]
+              },
+              {
+                "id": "AddTabItemTab",
+                "objectType": "TabItem",
+                "label": "Add Tab Item",
+                "fields": [
+                   {
+                     "id": "AddTabItemTab.Label",
+                     "objectType": "StringField",
+                     "label": "Label"
+                   },
+                   {
+                     "id": "AddTabItemTab.SubLabel",
+                     "objectType": "StringField",
+                     "label": "Sub Label"
+                   },
+                   {
+                     "id": "AddTabItemTab.TabItemSmartField",
+                     "objectType": "SmartField",
+                     "label": "Before"
+                   },
+                   {
+                     "id": "AddTabItemTab.CreateButton",
+                     "objectType": "Button",
+                     "label": "Create Tab Item",
+                     "processButton": false,
+                     "gridDataHints": {
+                       "horizontalAlignment": 0
+                     }
+                   }
+                ]
+              },
+              {
+                "id": "DeleteTabItemTab",
+                "objectType": "TabItem",
+                "label": "Delete Tab Item",
+                "fields": [
+                   {
+                     "id": "DeleteTabItemTab.TabItem",
+                     "objectType": "SmartField",
+                     "label": "Tab Item"
+                   },
+                   {
+                     "id": "DeleteTabItemTab.DeleteButton",
+                     "objectType": "Button",
+                     "label": "Delete Tab Item",
+                     "processButton": false,
+                     "gridDataHints": {
+                       "horizontalAlignment": 0
+                     }
+                   }
                 ]
               }
             ]

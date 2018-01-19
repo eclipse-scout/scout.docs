@@ -23,33 +23,51 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   addTabMenu.on('action', this._onAddTabMenuAction.bind(this));
 
   var selectedTabField = this.widget('SelectedTabField');
-  selectedTabField.setValue(tabBox.selectedTab.id);
+  selectedTabField.lookupCall = new jswidgets.TabItemLookupCall(tabBox);
   selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
   var markedField = this.widget('CurrentTab.MarkedField');
   markedField.on('propertyChange', this._onCurrentTabMarkedChanged.bind(this));
 
-  this.widget('ShareMenu').on('action', function(){
+  var deleteMenu = this.widget('CurrentTab.DeleteMenu');
+  deleteMenu.on('action', this._onDeleteTabMenuAction.bind(this));
+
+  this.widget('ShareMenu').on('action', function() {
     addTabMenu.setEnabled(!addTabMenu.enabled);
   }.bind(this));
 
   this.widget('FormFieldPropertiesBox').setField(tabBox);
   this.widget('GridDataBox').setField(tabBox);
+
+  // add tab item tab
+  var beforeField = this.widget('AddTabItemTab.TabItemSmartField');
+  beforeField.lookupCall = new jswidgets.TabItemLookupCall(tabBox);
+
+  var addTabItemButton = this.widget('AddTabItemTab.CreateButton');
+  addTabItemButton.on('click', this._onAddTabItemButtonClick.bind(this));
+
+  // remove tab
+  var tabItemField = this.widget('DeleteTabItemTab.TabItem');
+  tabItemField.lookupCall = new jswidgets.TabItemLookupCall(tabBox);
+
+  var deleteTabItemButton = this.widget('DeleteTabItemTab.DeleteButton');
+  deleteTabItemButton.on('click', this._onDeleteTabItemButtonClick.bind(this));
+
   this._updateSelectedTab();
+  this._updateAddTabLabel();
 };
 
 jswidgets.TabBoxForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.TabBoxForm');
 };
 
+jswidgets.TabBoxForm.prototype._updateAddTabLabel = function() {
+  this.widget('AddTabItemTab.Label').setValue('DynTab ' + this.dynamicTabCounter);
+};
 
 jswidgets.TabBoxForm.prototype._onSelectedTabChange = function(event) {
   if (event.propertyName === 'value') {
-    if (event.newValue) {
-      this.widget('TabBox').selectTabById(event.newValue);
-    } else {
-      this.widget('TabBox').setSelectedTab();
-    }
+    this.widget('TabBox').setSelectedTab(event.newValue);
   }
 };
 
@@ -59,10 +77,38 @@ jswidgets.TabBoxForm.prototype._onCurrentTabMarkedChanged = function(event) {
   }
 };
 
+jswidgets.TabBoxForm.prototype._onAddTabItemButtonClick = function(event) {
+  var tabBox = this.widget('TabBox'),
+    tabItems = tabBox.tabItems || [],
+    beforeSmartField = this.widget('AddTabItemTab.TabItemSmartField'),
+    beforeIndex,
+    tabModel = scout.models.getModel('jswidgets.DynamicTab');
+  tabModel.id = 'dynTab' + this.dynamicTabCounter++;
+  tabModel.parent = tabBox;
+  tabModel.label = this.widget('AddTabItemTab.Label').value || 'DynTab ' + this.dynamicTabCounter;
+  tabModel.subLabel = this.widget('AddTabItemTab.SubLabel').value;
+  if (beforeSmartField.value) {
+    beforeIndex = tabItems.indexOf(beforeSmartField.value);
+  }
+  tabBox.insertTabItem(scout.create('TabItem', tabModel), beforeIndex);
+  this._updateAddTabLabel();
+};
+
+jswidgets.TabBoxForm.prototype._onDeleteTabItemButtonClick = function(event) {
+  var tabBox = this.widget('TabBox'),
+    tabItemField = this.widget('DeleteTabItemTab.TabItem'),
+    tabItem = tabItemField.value;
+  if (tabItem) {
+    tabBox.deleteTabItem(tabItem);
+    tabItemField.setValue(null);
+  }
+};
+
 jswidgets.TabBoxForm.prototype._onAddTabMenuAction = function() {
   var tabBox = this.widget('TabBox'),
     tabItems = tabBox.tabItems || [],
     tabModel = scout.models.getModel('jswidgets.DynamicTab');
+
   tabModel.id = 'dynTab' + this.dynamicTabCounter++;
   tabModel.parent = tabBox;
   tabItems = tabItems.slice();
@@ -70,19 +116,26 @@ jswidgets.TabBoxForm.prototype._onAddTabMenuAction = function() {
   tabBox.setTabItems(tabItems);
 };
 
-
+jswidgets.TabBoxForm.prototype._onDeleteTabMenuAction = function() {
+  var tabBox = this.widget('TabBox'),
+    selectedTab = tabBox.selectedTab;
+  tabBox.deleteTabItem(selectedTab);
+};
 
 jswidgets.TabBoxForm.prototype._onFieldPropertyChange = function(event) {
   if (event.propertyName === 'selectedTab') {
     this._updateSelectedTab();
-
   }
 };
 
-jswidgets.TabBoxForm.prototype._updateSelectedTab = function(){
-  var tabBox = this.widget('TabBox');
-  this.widget('SelectedTabField').setValue((tabBox.selectedTab) ? (tabBox.selectedTab.id) : (null));
-  this.widget('CurrentTab.MarkedField').setValue(tabBox.selectedTab.marked);
-  this.widget('CurrentTab.GroupBoxPropertiesBox').setField(tabBox.selectedTab);
-  this.widget('CurrentTab.FormFieldPropertiesBox').setField(tabBox.selectedTab);
+jswidgets.TabBoxForm.prototype._updateSelectedTab = function() {
+  var tabBox = this.widget('TabBox'),
+    selectedTab = tabBox.selectedTab,
+    selectedTabField = this.widget('SelectedTabField');
+  selectedTabField.setValue(selectedTab);
+  selectedTabField.setEnabled(tabBox.tabItems.length > 0);
+  this.widget('CurrentTabItemProperties').setVisible(!!selectedTab);
+  this.widget('CurrentTab.MarkedField').setValue(selectedTab ? tabBox.selectedTab.marked : false);
+  this.widget('CurrentTab.GroupBoxPropertiesBox').setField(selectedTab);
+  this.widget('CurrentTab.FormFieldPropertiesBox').setField(selectedTab);
 };
