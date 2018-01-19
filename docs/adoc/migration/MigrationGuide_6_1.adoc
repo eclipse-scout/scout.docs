@@ -437,5 +437,19 @@ Example:
 ----
 <1> will be replaced by the application's version
 
+=== Run Contexts & HttpServiceTunnel
+
+A service tunnel request from UI server to the backend server is always performed within a copy of the current `RunContext`.
+Until Scout 6.0 if a service tunnel request was performed without a current RunContext available, an empty RunContext was created.
+This caused problems on the backend, since an empty RunContext does not provide any user information e.g. used for access control or permission checks.
+
+With Scout 6.1 the HttpServiceTunnel implementation was changed, in fact that copying the current context requires to run in
+an existing RunContext. If not given and copying the current context, this might be a programming error and should be revisited.
+Therefore the HttpServiceTunnel request fails without a current RunContext available.
+
+IMPORTANT: Migration note: Check service tunnel requests to backend, specially in servlets/filters handling access control and add a run context, if they perform any backend requests using the service tunnel.
+
+See also https://www.eclipse.org/forums/index.php?t=msg&th=1085119
+
 // ^^^
 // Insert descriptions of other important changes here
