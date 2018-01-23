@@ -38,6 +38,13 @@
       "id": "HorizontalAlignmentField",
       "objectType": "NumberField",
       "label": "Horizontal Alignment"
+    },
+    {
+      "id": "ActionStyleField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.ActionStyleLookupCall",
+      "label": "Action Style",
+      "displayStyle": 'dropdown'
     }
   ]
 }

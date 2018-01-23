@@ -12,43 +12,69 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "MenuBarField",
-            "objectType": "WidgetField",
+            "id": "LabelField",
+            "objectType": "LabelField",
             "labelVisible": false,
+            "value": "This is a group box containing menus. The menus are displayed in the menu bar on top.\nCheck out the properties on the bottom to configure each menu individually.",
             "gridDataHints": {
-              "useUiHeight": true
-            },
-            "fieldWidget": {
-              "id": "MenuBar",
-              "objectType": "MenuBar",
-              "menuItems": [
-                {
-                  "id": "Menu1",
-                  "objectType": "scout.Menu",
-                  "text": "First menu"
-                },
-                {
-                  "id": "Menu2",
-                  "objectType": "scout.FormFieldMenu",
-                  "field": {
-                    "id": "SmartField",
-                    "objectType": "SmartField",
-                    "label": "Locale",
-                    "lookupCall": "jswidgets.LocaleLookupCall",
-                    "labelVisible": false,
-                    "statusVisible": false,
-                    "labelPosition": 2
+              "h": 2,
+              "weightY": 0
+            }
+          }
+        ],
+        "menus": [
+          {
+            "id": "Menu1",
+            "objectType": "scout.Menu",
+            "text": "First menu"
+          },
+          {
+            "id": "Menu2",
+            "objectType": "scout.Menu",
+            "text": "Second menu",
+            "iconId": "${iconId:WORLD}"
+          },
+          {
+            "id": "HierarchicalMenu",
+            "objectType": "scout.Menu",
+            "text": "Hierarchical menu",
+            "childActions": [
+              {
+                "id": "SubMenu1",
+                "objectType": "Menu",
+                "text": "Sub Menu 1"
+              },
+              {
+                "id": "SubMenu2",
+                "objectType": "Menu",
+                "text": "Sub Menu 2",
+                "childActions": [
+                  {
+                    "id": "SubSubMenu1",
+                    "objectType": "Menu",
+                    "text": "Sub Sub Menu 1"
+                  },
+                  {
+                    "id": "SubSubMenu2",
+                    "objectType": "Menu",
+                    "text": "Sub Sub Menu 2"
                   }
-                },
-                {
-                  "id": "Menu3",
-                  "objectType": "scout.Menu",
-                  "text": "Third menu",
-                  "horizontalAlignment": 1,
-                  "iconId": "${iconId:WORLD}",
-                  "stackable": false
-                }
-              ]
+                ]
+              }
+            ]
+          },
+          {
+            "id": "FormFieldMenu",
+            "objectType": "scout.FormFieldMenu",
+            "horizontalAlignment": 1,
+            "field": {
+              "id": "SmartField",
+              "objectType": "SmartField",
+              "label": "Form Field Menu",
+              "lookupCall": "jswidgets.LocaleLookupCall",
+              "labelVisible": false,
+              "statusVisible": false,
+              "labelPosition": 2
             }
           }
         ]
@@ -56,66 +82,32 @@
       {
         "id": "PropertiesBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 2,
         "label": "Properties",
         "fields": [
           {
-            "id": "PropertiesTabBox",
-            "objectType": "TabBox",
-            "selectedTab":"MenuBar.PropertyTabBox",
-            "tabItems": [
-              {
-                "id": "MenuBar.PropertyTabBox",
-                "objectType": "TabItem",
-                "label": "Menu Bar",
-                "fields": [
-                  {
-                    "id": "FormFieldPropertiesBox",
-                    "objectType": "jswidgets.FormFieldPropertiesBox"
-                  },
-                  {
-                    "id": "GridDataBox",
-                    "objectType": "jswidgets.GridDataBox",
-                    "label": "Grid Data Hints"
-                  }
-                ]
-              },
-              {
-                "id": "MenuItem.PropertyTabBox",
-                "objectType": "TabItem",
-                "label": "Menu Item",
-                "fields": [
-                  {
-                    "id": "MenuItem.StackableField",
-                    "objectType": "CheckBoxField",
-                    "label": "Stackable",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "MenuItem.ActionPropertiesBox",
-                    "objectType": "jswidgets.ActionPropertiesBox"
-                  },
-                  {
-                    "id": "MenuItem.FormFieldPropertiesBox",
-                    "objectType": "jswidgets.FormFieldPropertiesBox"
-                  }
-                ]
-              }
-            ],
-            "menus": [
-              {
-                "id": "MenuItem.MenuItemMenu",
-                "objectType": "FormFieldMenu",
-                "field": {
-                  "id": "SelectedMenuItem",
-                  "objectType": "SmartField",
-                  "labelVisible": false,
-                  "lookupCall": "jswidgets.MenuItemLookupCall",
-                  "value": "Menu1",
-                  "statusVisible": false
-                }
-              }
-            ]
+            "id": "SelectedMenuField",
+            "objectType": "SmartField",
+            "label": "Target",
+            "lookupCall": "jswidgets.MenuItemLookupCall",
+            "value": "Menu1"
+          },
+          {
+            "id": "StackableField",
+            "objectType": "CheckBoxField",
+            "label": "Stackable",
+            "labelVisible": false,
+            "tooltipText": "${textKey:MenuStackableTooltipText}",
+            "gridDataHints": {
+              "fillHorizontal": false
+            }
+          },
+          {
+            "id": "ActionPropertiesBox",
+            "objectType": "jswidgets.ActionPropertiesBox"
+          },
+          {
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox"
           }
         ]
       }

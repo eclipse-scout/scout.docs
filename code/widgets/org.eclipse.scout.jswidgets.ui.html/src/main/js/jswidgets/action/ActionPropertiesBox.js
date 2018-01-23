@@ -57,6 +57,10 @@ jswidgets.ActionPropertiesBox.prototype._setField = function(field) {
   var horizontalAlignmentField = this.widget('HorizontalAlignmentField');
   horizontalAlignmentField.setValue(this.field.horizontalAlignment);
   horizontalAlignmentField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var actionStyleField = this.widget('ActionStyleField');
+  actionStyleField.setValue(this.field.actionStyle);
+  actionStyleField.on('propertyChange', this._onPropertyChange.bind(this));
 };
 
 jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
@@ -72,5 +76,13 @@ jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setTooltipText(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
     this.field.setHorizontalAlignment(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'ActionStyleField') {
+    // ActionStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole menu bar
+    this.field.actionStyle = event.newValue;
+    if (this.field.parent instanceof scout.MenuBar) {
+      var menuItems = this.field.parent.menuItems;
+      this.field.parent.setMenuItems([]);
+      this.field.parent.setMenuItems(menuItems);
+    }
   }
 };

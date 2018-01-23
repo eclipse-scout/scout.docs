@@ -44,6 +44,23 @@
                 "keyStroke": "insert"
               },
               {
+                "id": "FilterMenu",
+                "objectType": "Menu",
+                "stackable": false,
+                "menuTypes": ["TabBox.Header"],
+                "horizontalAlignment": 1,
+                "objectType": "scout.FormFieldMenu",
+/*                  "visible": false, */
+                "field": {
+                  "id": "FilterField",
+                  "objectType": "StringField",
+                  "label": "Filter by...",
+                  "labelVisible": false,
+                  "statusVisible": false,
+                  "labelPosition": 2
+                }
+              },
+              {
                 "id": "ShareMenu",
                 "objectType": "Menu",
                 "iconId": "${iconId:MENU}",

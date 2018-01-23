@@ -8,13 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.MenuItemLookupCall = function() {
-  jswidgets.MenuItemLookupCall.parent.call(this);
+jswidgets.ActionStyleLookupCall = function() {
+  jswidgets.ActionStyleLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.MenuItemLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.ActionStyleLookupCall, scout.StaticLookupCall);
 
-jswidgets.MenuItemLookupCall.prototype._data = function() {
-  return jswidgets.MenuItemLookupCall.DATA;
+jswidgets.ActionStyleLookupCall.prototype._data = function() {
+  return jswidgets.ActionStyleLookupCall.DATA;
 };
 
-jswidgets.MenuItemLookupCall.DATA = [];
+jswidgets.ActionStyleLookupCall.DATA = [
+  [scout.Action.ActionStyle.DEFAULT, 'default'],
+  [scout.Action.ActionStyle.BUTTON, 'button']
+];
