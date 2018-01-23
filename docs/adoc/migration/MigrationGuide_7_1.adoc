@@ -390,8 +390,12 @@ scout.cspDirective[img-src]=*
 === Rename of Less Variables
 If you created a custom theme, you might have to adjust some less variables.
 
-* Splitted `@group-title-padding-y` into `@group-title-padding-top` and `@group-title-padding-bottom`
+* Splitted `@group-title-padding-y` into `@group-box-title-padding-top` and `@group-box-title-padding-bottom`
 * Splitted `@tree-node-padding` into `@tree-node-padding-y`, `@tree-node-padding-left` and `@tree-node-padding-right`
+* Renamed `@group-title-border-width` to `@group-box-title-border-width`
+* Renamed `@group-margin-bottom` to `@group-box-body-padding-bottom`
+* Renamed `@group-margin-top` to `@group-box-body-padding-top`
+* Added `@group-box-title-margin-top`
 * Renamed `@tabbox-padding-x` to `@tab-item-padding-x`
 * Renamed `@tabbox-focus-arrow-width` to `@tab-item-focus-arrow-width`
 * Renamed `@tabbox-border-width` to `@tab-area-border-width`
