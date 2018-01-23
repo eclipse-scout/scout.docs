@@ -16,7 +16,7 @@ Lookup calls are mainly used by SmartFields and SmartColumns to look up single o
 Class: `LookupCall`
 
 === Description
-The Lookup call mechanism is used to lookup up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltiptext.
+The Lookup call mechanism is used to lookup up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltipText.
 
 This schema explains the role of a LookupCall in a SmartField:
 
@@ -47,14 +47,14 @@ It is possible to add you own additional attributes, for example validityFrom, v
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LanguageLookupCall.java[tags=LanguageLookupCall]
 ----
 
-In this case, you might want to set your properties bevor the lookupcall query is sent. This can be done with the PrepareLookup event of the SmartField or the ListBox:
+In this case, you might want to set your properties before the lookup call query is sent. This can be done with the PrepareLookup event of the SmartField or the ListBox:
 
 [source,java]
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/lookup/LookupExample.java[tags=SmartFieldLookup]
 ----
 
-If you follow this pattern, you will consume the values in the server, by casting the call:
+If you follow this pattern, you will consume the values on the server by casting the call:
 
 [source,java]
 ----
@@ -69,10 +69,11 @@ Delegation to the Lookup Service on server side.
 
 They are not necessarily restricted to a fix number of records. Instead they should be favoured if the set of records is rather large.
 
-==== Directy
-Principe of the Local Lookup Calls
+==== Local Lookup Call
 
-An example of this approach is when a SmartField or a SmartColumn is configured to be use with a CodeType. A `CodeLookupCall` is instantiated for the CodeType. It creates the LookupRows corresponding to the codes in the CodeType.
+Such a LookupCall is used if the data can be provided directly without the need to make a backend call.
+
+An example of this approach is when a SmartField or a SmartColumn is configured to be used with a CodeType. The code types are cached so it is not necessary to fetch them using a lookup service. Instead a LocalLookupCall, in that case the `CodeLookupCall`, may be used to load the data. It creates the LookupRows corresponding to the codes in the CodeType.
 
 ==== Overview
 
@@ -96,9 +97,9 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 *Accessing a LookupRow directly:*
 
-It is possible to access a LookupRow direclty.
+It is possible to access a LookupRow directly.
 In this example the input is a key (thisKey) and the method getDataByKey() is used.
-Before accessing the text, we ensure that a LookupRow has been retrived.
+Before accessing the text, we ensure that a LookupRow has been retrieved.
 
 [source,java]
 ----

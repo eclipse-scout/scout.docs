@@ -108,7 +108,7 @@ There is also a predefined bean registration built into the Scout runtime. This 
 
 [[lst-NormalBeanClass]]
 [source,java,indent=0]
-.An normal bean
+.A normal bean
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/PlatformSnippet.java[tags=BeanClass]
 ----
