@@ -7,11 +7,6 @@
   "expandable": true,
   "fields": [
     {
-      "id": "SubLabelField",
-      "objectType": "StringField",
-      "label": "Sub label"
-    },
-    {
       "id": "BorderVisibleField",
       "objectType": "CheckBoxField",
       "label": "Border Visible",
@@ -45,6 +40,11 @@
       "gridDataHints": {
         "fillHorizontal": false
       }
+    },
+    {
+      "id": "SubLabelField",
+      "objectType": "StringField",
+      "label": "Sub Label"
     },
     {
       "id": "GridColumnCountField",
