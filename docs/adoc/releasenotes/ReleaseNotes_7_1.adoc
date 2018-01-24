@@ -185,3 +185,21 @@ Additionally you can now reference an image by URL, for instance an image hosted
 1. image (Binary resource)
 2. imageUrl
 3. imageId
+
+== Dynamic fields
+It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.
+
+The Java API orders the added fields considering the `order` member.
+
+API:
+
+* TabBox.js `insertTabItem`, `deleteTabItem`, `setTabItems`
+* GroupBox.js `setFields`, `insertField`, `insertFieldBefore`, `deleteField`
+* ICompositeField.java `setFields` and the already existing `addField`, `removeField` methods which does not throw anymore an exception when a form is already initialized.
+
+[NOTE]
+====
+- The support for adding ProcessButtons dynamically is not implemented so far.
+- Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
+====
+
