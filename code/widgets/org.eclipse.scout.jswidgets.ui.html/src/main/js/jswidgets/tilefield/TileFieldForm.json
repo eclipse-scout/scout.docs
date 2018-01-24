@@ -116,76 +116,86 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
-        "expandable": true,
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "GridColumnCountField",
-            "objectType": "NumberField",
-            "label": "Grid Column Count"
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "expandable": true,
+            "fields": [
+              {
+                "id": "GridColumnCountField",
+                "objectType": "NumberField",
+                "label": "Grid Column Count"
+              },
+              {
+                "id": "LogicalGridField",
+                "objectType": "SmartField",
+                "label": "Logical Grid",
+                "lookupCall": "jswidgets.LogicalGridLookupCall",
+                "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+              },
+              {
+                "id": "ColorSchemeField",
+                "objectType": "SmartField",
+                "label": "Color Scheme",
+                "lookupCall": "jswidgets.ColorSchemeLookupCall"
+              },
+              {
+                "id": "InvertColorsField",
+                "objectType": "CheckBoxField",
+                "label": "Invert Colors",
+                "labelVisible": false
+              },
+              {
+                "id": "WithPlaceholdersField",
+                "objectType": "CheckBoxField",
+                "label": "With Placeholders",
+                "labelVisible": false
+              },
+              {
+                "id": "SelectableField",
+                "objectType": "CheckBoxField",
+                "label": "Selectable",
+                "labelVisible": false
+              },
+              {
+                "id": "MultiSelectField",
+                "objectType": "CheckBoxField",
+                "label": "Multi Select",
+                "labelVisible": false
+              },
+              {
+                "id": "ScrollableField",
+                "objectType": "CheckBoxField",
+                "label": "Scrollable",
+                "labelVisible": false
+              }
+            ]
           },
           {
-            "id": "LogicalGridField",
-            "objectType": "SmartField",
-            "label": "Logical Grid",
-            "lookupCall": "jswidgets.LogicalGridLookupCall",
-            "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox",
+            "expanded": false
           },
           {
-            "id": "ColorSchemeField",
-            "objectType": "SmartField",
-            "label": "Color Scheme",
-            "lookupCall": "jswidgets.ColorSchemeLookupCall"
+            "id": "LayoutConfigBox",
+            "objectType": "jswidgets.TileGridLayoutConfigBox",
+            "expanded": false
           },
           {
-            "id": "InvertColorsField",
-            "objectType": "CheckBoxField",
-            "label": "Invert Colors",
-            "labelVisible": false
-          },
-          {
-            "id": "WithPlaceholdersField",
-            "objectType": "CheckBoxField",
-            "label": "With Placeholders",
-            "labelVisible": false
-          },
-          {
-            "id": "SelectableField",
-            "objectType": "CheckBoxField",
-            "label": "Selectable",
-            "labelVisible": false
-          },
-          {
-            "id": "MultiSelectField",
-            "objectType": "CheckBoxField",
-            "label": "Multi Select",
-            "labelVisible": false
-          },
-          {
-            "id": "ScrollableField",
-            "objectType": "CheckBoxField",
-            "label": "Scrollable",
-            "labelVisible": false
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints",
+            "expanded": false
           }
         ]
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox",
-        "expanded": false
-      },
-      {
-        "id": "LayoutConfigBox",
-        "objectType": "jswidgets.TileGridLayoutConfigBox",
-        "expanded": false
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints",
-        "expanded": false
       }
     ]
   }

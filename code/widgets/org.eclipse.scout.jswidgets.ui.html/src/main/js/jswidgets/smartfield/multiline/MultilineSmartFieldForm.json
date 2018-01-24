@@ -24,22 +24,32 @@
         ]
       },
       {
-        "id": "PropertiesBox",
-        "objectType": "jswidgets.SmartFieldPropertiesBox",
-        "label": "Properties"
-      },
-      {
-        "id": "ValueFieldPropertiesBox",
-        "objectType": "jswidgets.ValueFieldPropertiesBox"
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints"
+        "id": "Properties",
+        "objectType": "GroupBox",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "PropertiesBox",
+            "objectType": "jswidgets.SmartFieldPropertiesBox",
+            "label": "Properties"
+          },
+          {
+            "id": "ValueFieldPropertiesBox",
+            "objectType": "jswidgets.ValueFieldPropertiesBox"
+          },
+          {
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox"
+          },
+          {
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints"
+          }
+        ]
       }
     ]
   }

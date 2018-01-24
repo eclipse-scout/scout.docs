@@ -85,27 +85,37 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "StatusEnabledField",
-            "objectType": "CheckBoxField",
-            "labelVisible": false,
-            "label": "Status enabled"
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "StatusEnabledField",
+                "objectType": "CheckBoxField",
+                "labelVisible": false,
+                "label": "Status enabled"
+              }
+            ]
+          },
+          {
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox"
+          },
+          {
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints",
+            "expanded": false
           }
         ]
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints",
-        "expanded": false
       }
     ]
   }

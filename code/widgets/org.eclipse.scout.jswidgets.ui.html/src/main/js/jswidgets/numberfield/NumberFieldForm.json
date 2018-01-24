@@ -28,29 +28,39 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "FormatField",
-            "objectType": "StringField",
-            "label": "Format"
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "FormatField",
+                "objectType": "StringField",
+                "label": "Format"
+              }
+            ]
+          },
+          {
+            "id": "ValueFieldPropertiesBox",
+            "objectType": "jswidgets.ValueFieldPropertiesBox"
+          },
+          {
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox"
+          },
+          {
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints"
           }
         ]
-      },
-      {
-        "id": "ValueFieldPropertiesBox",
-        "objectType": "jswidgets.ValueFieldPropertiesBox"
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints"
       }
     ]
   }

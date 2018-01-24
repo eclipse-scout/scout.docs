@@ -80,34 +80,44 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "SelectedMenuField",
-            "objectType": "SmartField",
-            "label": "Target",
-            "lookupCall": "jswidgets.MenuItemLookupCall",
-            "value": "Menu1"
-          },
-          {
-            "id": "StackableField",
-            "objectType": "CheckBoxField",
-            "label": "Stackable",
-            "labelVisible": false,
-            "tooltipText": "${textKey:MenuStackableTooltipText}",
-            "gridDataHints": {
-              "fillHorizontal": false
-            }
-          },
-          {
-            "id": "ActionPropertiesBox",
-            "objectType": "jswidgets.ActionPropertiesBox"
-          },
-          {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "SelectedMenuField",
+                "objectType": "SmartField",
+                "label": "Target",
+                "lookupCall": "jswidgets.MenuItemLookupCall",
+                "value": "Menu1"
+              },
+              {
+                "id": "StackableField",
+                "objectType": "CheckBoxField",
+                "label": "Stackable",
+                "labelVisible": false,
+                "tooltipText": "${textKey:MenuStackableTooltipText}",
+                "gridDataHints": {
+                  "fillHorizontal": false
+                }
+              },
+              {
+                "id": "ActionPropertiesBox",
+                "objectType": "jswidgets.ActionPropertiesBox"
+              },
+              {
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              }
+            ]
           }
         ]
       }

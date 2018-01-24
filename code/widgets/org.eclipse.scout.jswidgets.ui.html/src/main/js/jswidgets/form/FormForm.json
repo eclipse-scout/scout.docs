@@ -43,56 +43,66 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "TitleField",
-            "objectType": "StringField",
-            "label": "Title"
-          },
-          {
-            "id": "SubTitleField",
-            "objectType": "StringField",
-            "label": "Sub Title"
-          },
-          {
-            "id": "IconIdField",
-            "objectType": "SmartField",
-            "lookupCall": "jswidgets.IconIdLookupCall",
-            "label": "Icon Id"
-          },
-          {
-            "id": "DisplayHintField",
-            "objectType": "SmartField",
-            "lookupCall": "jswidgets.DisplayHintLookupCall",
-            "label": "Display Hint"
-          },
-          {
-            "id": "StatusField",
-            "objectType": "SmartField",
-            "lookupCall": "jswidgets.StatusSeverityLookupCall",
-            "label": "Status",
-            "visible": false // does not really work as expected
-          },
-          {
-            "id": "ClosableField",
-            "objectType": "CheckBoxField",
-            "label": "Closable",
-            "labelVisible": false
-          },
-          {
-            "id": "ResizableField",
-            "objectType": "CheckBoxField",
-            "label": "Resizable",
-            "labelVisible": false
-          },
-          {
-            "id": "ModalField",
-            "objectType": "CheckBoxField",
-            "label": "Modal",
-            "labelVisible": false
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "TitleField",
+                "objectType": "StringField",
+                "label": "Title"
+              },
+              {
+                "id": "SubTitleField",
+                "objectType": "StringField",
+                "label": "Sub Title"
+              },
+              {
+                "id": "IconIdField",
+                "objectType": "SmartField",
+                "lookupCall": "jswidgets.IconIdLookupCall",
+                "label": "Icon Id"
+              },
+              {
+                "id": "DisplayHintField",
+                "objectType": "SmartField",
+                "lookupCall": "jswidgets.DisplayHintLookupCall",
+                "label": "Display Hint"
+              },
+              {
+                "id": "StatusField",
+                "objectType": "SmartField",
+                "lookupCall": "jswidgets.StatusSeverityLookupCall",
+                "label": "Status",
+                "visible": false // does not really work as expected
+              },
+              {
+                "id": "ClosableField",
+                "objectType": "CheckBoxField",
+                "label": "Closable",
+                "labelVisible": false
+              },
+              {
+                "id": "ResizableField",
+                "objectType": "CheckBoxField",
+                "label": "Resizable",
+                "labelVisible": false
+              },
+              {
+                "id": "ModalField",
+                "objectType": "CheckBoxField",
+                "label": "Modal",
+                "labelVisible": false
+              }
+            ]
           }
         ]
       }

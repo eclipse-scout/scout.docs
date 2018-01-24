@@ -34,38 +34,48 @@
         ]
       },
       {
-        "id": "PropertiesBox",
+        "id": "Properties",
         "objectType": "GroupBox",
-        "label": "Properties",
+        "labelVisible": false,
+        "borderVisible": false;
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
         "fields": [
           {
-            "id": "TargetField",
-            "objectType": "SmartField",
-            "label": "${textKey:Target}",
-            "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "TargetField",
+                "objectType": "SmartField",
+                "label": "${textKey:Target}",
+                "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+              },
+              {
+                "id": "LogicalGridField",
+                "objectType": "SmartField",
+                "label": "Logical Grid",
+                "lookupCall": "jswidgets.LogicalGridLookupCall",
+                "tooltipText": "${textKey:LogicalGridTooltip}"
+              }
+            ]
           },
           {
-            "id": "LogicalGridField",
-            "objectType": "SmartField",
-            "label": "Logical Grid",
-            "lookupCall": "jswidgets.LogicalGridLookupCall",
-            "tooltipText": "${textKey:LogicalGridTooltip}"
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints"
+          },
+          {
+            "id": "CalculatedGridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Calculated Grid Data",
+            "enabled": false,
+            "useHints": false,
+            "expandable": true,
+            "expanded": false
           }
         ]
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints"
-      },
-      {
-        "id": "CalculatedGridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Calculated Grid Data",
-        "enabled": false,
-        "useHints": false,
-        "expandable": true,
-        "expanded": false
       }
     ]
   }
