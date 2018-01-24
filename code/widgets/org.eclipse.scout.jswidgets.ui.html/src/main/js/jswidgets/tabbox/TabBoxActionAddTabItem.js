@@ -54,15 +54,16 @@ jswidgets.TabBoxActionAddTabItem.prototype._onAddTabItemButtonClick = function(e
 jswidgets.TabBoxActionAddTabItem.prototype.addTabItem = function(label, subLabel, beforeTabItem) {
   var tabItems = this.tabBox.tabItems || [],
     beforeIndex,
-    tabModel = scout.models.getModel('jswidgets.DynamicTab');
-  tabModel.id = 'dynTab' + this.dynamicTabCounter;
-  tabModel.parent = this.tabBox;
-  tabModel.label = label || 'DynTab ' + this.dynamicTabCounter;
-  tabModel.subLabel = subLabel;
+    tabItem = scout.create('jswidgets.DynamicTab', {
+      parent: this.tabBox,
+      label: label || 'DynTab ' + this.dynamicTabCounter,
+      subLabel: subLabel
+    });
   if (beforeTabItem) {
     beforeIndex = tabItems.indexOf(beforeTabItem);
   }
-  this.tabBox.insertTabItem(scout.create('TabItem', tabModel), beforeIndex);
+
+  this.tabBox.insertTabItem(tabItem, beforeIndex);
   this.dynamicTabCounter++;
   this._updateAddTabLabel();
 };

@@ -5,6 +5,11 @@
   "label": "Dyn Tab",
   "fields": [
     {
+      "id": "label",
+      "objectType": "LabelField",
+      "labelVisible": false
+    },
+    {
       "id": "StringField",
       "objectType": "StringField",
       "label": "Sample Field"

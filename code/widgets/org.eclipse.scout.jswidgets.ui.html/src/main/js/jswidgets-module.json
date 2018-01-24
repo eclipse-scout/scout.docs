@@ -28,7 +28,6 @@
     "jswidgets/proposalfield/ProposalFieldPropertiesBox.json",
     "jswidgets/stringfield/StringFieldForm.json",
     "jswidgets/tabbox/DynamicTab.json",
-    "jswidgets/tabbox/SampleTabItem.json",
     "jswidgets/tabbox/TabBoxProperties.json",
     "jswidgets/tabbox/TabBoxActionAddTabItem.json",
     "jswidgets/tabbox/TabBoxActionDeleteTabItem.json",

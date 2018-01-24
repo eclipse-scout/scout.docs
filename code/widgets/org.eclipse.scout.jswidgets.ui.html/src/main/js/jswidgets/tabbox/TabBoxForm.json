@@ -19,17 +19,17 @@
             "tabItems": [
               {
                 "id": "TabItem1",
-                "objectType": "jswidgets.SampleTabItem",
+                "objectType": "jswidgets.DynamicTab",
                 "label": "First Tab"
               },
               {
                 "id": "TabItem2",
-                "objectType": "jswidgets.SampleTabItem",
+                "objectType": "jswidgets.DynamicTab",
                 "label": "Second Tab"
               },
               {
                 "id": "TabItem3",
-                "objectType": "jswidgets.SampleTabItem",
+                "objectType": "jswidgets.DynamicTab",
                 "label": "Third Tab"
               }
             ],

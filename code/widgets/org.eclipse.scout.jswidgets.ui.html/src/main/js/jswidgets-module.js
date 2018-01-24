@@ -57,7 +57,7 @@
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
-  __include("jswidgets/tabbox/SampleTabItem.js");
+  __include("jswidgets/tabbox/DynamicTab.js");
   __include("jswidgets/tabbox/TabBoxActionAddTabItem.js");
   __include("jswidgets/tabbox/TabBoxActionDeleteTabItem.js");
   __include("jswidgets/tabbox/TabBoxForm.js");

@@ -8,20 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.SampleTabItem = function() {
-  jswidgets.SampleTabItem.parent.call(this);
+jswidgets.DynamicTab = function() {
+  jswidgets.DynamicTab.parent.call(this);
 };
-scout.inherits(jswidgets.SampleTabItem, scout.TabItem);
+scout.inherits(jswidgets.DynamicTab, scout.TabItem);
 
-jswidgets.SampleTabItem.prototype._init = function(model) {
-  jswidgets.SampleTabItem.parent.prototype._init.call(this, model);
+jswidgets.DynamicTab.prototype._init = function(model) {
+  jswidgets.DynamicTab.parent.prototype._init.call(this, model);
 
-  this.widget('CurrentTab.Label').setValue(this.label);
+  this.widget('label').setValue('This is sample the content of \'TabItem\': ' + this.label);
 
-};
-
-jswidgets.SampleTabItem.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SampleTabItem');
 };
 
-
+jswidgets.DynamicTab.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.DynamicTab');
+};
