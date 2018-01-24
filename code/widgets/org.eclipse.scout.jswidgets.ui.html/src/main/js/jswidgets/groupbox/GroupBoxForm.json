@@ -34,42 +34,73 @@
         ]
       },
       {
-        "id": "GroupBoxPropertiesBox",
-        "objectType": "jswidgets.GroupBoxPropertiesBox"
-      },
-     {
-        "id": "CustomizationBox",
-        "objectType": "GroupBox",
-        "gridColumnCount": 2,
-        "label": "Customization Examples",
-        "expandable": true,
-        "fields": [
+        "id": "ConfigurationBox",
+        "objectType": "TabBox",
+        "cssClass": "jswidgets-configuration",
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "ToggleVisibilityField",
-            "objectType": "SmartField",
-            "label": "Toggle Visibility",
-            "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "GroupBoxPropertiesBox",
+                "objectType": "jswidgets.GroupBoxPropertiesBox",
+                "expandable": true,
+                "labelVisible": false
+              },
+              {
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "BodyLayoutConfigBox",
+                "objectType": "jswidgets.LogicalGridLayoutConfigBox"
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
+              }
+            ]
           },
           {
-            "id": "ToggleVisibilityButton",
-            "objectType": "Button",
-            "label": "${textKey:Toggle}",
-            "processButton": false
+            "id": "ActionsTab",
+            "objectType": "TabItem",
+            "label": "Actions",
+            "fields": [
+              {
+                "id": "CustomizationBox",
+                "objectType": "GroupBox",
+                "gridColumnCount": 2,
+                "labelVisible": false,
+                "fields": [
+                  {
+                    "id": "ToggleVisibilityField",
+                    "objectType": "SmartField",
+                    "label": "Toggle Visibility",
+                    "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+                  },
+                  {
+                    "id": "ToggleVisibilityButton",
+                    "objectType": "Button",
+                    "label": "${textKey:Toggle}",
+                    "processButton": false
+                  }
+                ]
+              },
+              {
+                "id": "Actions.AddFieldBox",
+                "objectType": "jswidgets.GroupBoxAddFieldBox"
+              },
+              {
+                "id": "Actions.DeleteFieldBox",
+                "objectType": "jswidgets.GroupBoxDeleteFieldBox"
+              }
+            ]
           }
         ]
-      },
-      {
-        "id": "FormFieldPropertiesBox",
-        "objectType": "jswidgets.FormFieldPropertiesBox"
-      },
-      {
-        "id": "BodyLayoutConfigBox",
-        "objectType": "jswidgets.LogicalGridLayoutConfigBox"
-      },
-      {
-        "id": "GridDataBox",
-        "objectType": "jswidgets.GridDataBox",
-        "label": "Grid Data Hints"
       }
     ]
   }

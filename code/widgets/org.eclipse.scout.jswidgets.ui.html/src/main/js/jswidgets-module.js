@@ -12,6 +12,7 @@
   __include("jswidgets/action/ActionPropertiesBox.js");
   __include("jswidgets/action/ActionStyleLookupCall.js");
   __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
   __include("jswidgets/form/DisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
@@ -29,6 +30,8 @@
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
   __include("jswidgets/desktop/ServerStatusMenu.js");
+  __include("jswidgets/groupbox/GroupBoxAddFieldBox.js");
+  __include("jswidgets/groupbox/GroupBoxDeleteFieldBox.js");
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
   __include("jswidgets/groupbox/GroupBoxFieldsLookupCall.js");
@@ -54,9 +57,13 @@
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
-  __include("jswidgets/tabbox/TabBoxForm.js");
-  __include('jswidgets/tabbox/TabItemLookupCall.js');
   __include("jswidgets/tabbox/SampleTabItem.js");
+  __include("jswidgets/tabbox/TabBoxActionAddTabItem.js");
+  __include("jswidgets/tabbox/TabBoxActionDeleteTabItem.js");
+  __include("jswidgets/tabbox/TabBoxForm.js");
+  __include('jswidgets/tabbox/TabBoxProperties.js');
+  __include('jswidgets/tabbox/TabItemLookupCall.js');
+  __include('jswidgets/tabbox/TabItemProperties.js');
   __include("jswidgets/tablefield/TableFieldForm.js");
   __include("jswidgets/tilefield/ColorSchemeLookupCall.js");
   __include("jswidgets/tilefield/SimpleTile.js");

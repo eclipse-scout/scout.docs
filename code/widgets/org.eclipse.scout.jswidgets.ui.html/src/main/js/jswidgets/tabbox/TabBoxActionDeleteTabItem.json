@@ -1,0 +1,22 @@
+ {
+   "id": "jswidgets.TabBoxActionDeleteTabItem",
+   "type": "model",
+   "objectType": "GroupBox",
+   "label": "Delete Tab Item",
+   "expandable": true,
+   "gridColumnCount": 2,
+   "fields": [
+     {
+       "id": "DeleteTabItem.TabItem",
+       "objectType": "SmartField",
+       "label": "Tab Item"
+     },
+     {
+       "id": "DeleteTabItem.DeleteButton",
+       "objectType": "Button",
+       "label": "Delete Tab Item",
+       "enabled": false,
+       "processButton": false
+     }
+   ]
+ }

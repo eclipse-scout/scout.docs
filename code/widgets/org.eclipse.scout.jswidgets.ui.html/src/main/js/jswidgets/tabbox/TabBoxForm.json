@@ -44,21 +44,13 @@
                 "keyStroke": "insert"
               },
               {
-                "id": "FilterMenu",
+                "id": "DeleteTabMenu",
                 "objectType": "Menu",
-                "stackable": false,
+                "text": "Delete tab item",
+                "iconId": "${iconId:MINUS}",
+                "stackable": true,
                 "menuTypes": ["TabBox.Header"],
-                "horizontalAlignment": 1,
-                "objectType": "scout.FormFieldMenu",
-/*                  "visible": false, */
-                "field": {
-                  "id": "FilterField",
-                  "objectType": "StringField",
-                  "label": "Filter by...",
-                  "labelVisible": false,
-                  "statusVisible": false,
-                  "labelPosition": 2
-                }
+                "keyStroke": "insert"
               },
               {
                 "id": "ShareMenu",
@@ -73,130 +65,37 @@
         ]
       },
       {
-        "id": "PropertiesBox",
-        "objectType": "GroupBox",
-        "gridColumnCount": 2,
-        "label": "Properties",
-        "fields": [
+        "id": "ConfigurationBox",
+        "objectType": "TabBox",
+        "cssClass": "jswidgets-configuration",
+        "selectedTab":"Properties.TabBox",
+        "tabItems": [
           {
-            "id": "TabBox",
-            "objectType": "TabBox",
-            "selectedTab":"TabBoxProperties",
-            "tabItems": [
+            "id": "Properties.TabBox",
+            "objectType": "jswidgets.TabBoxProperties"
+          },
+          {
+            "id": "Properties.TabItem",
+            "objectType": "jswidgets.TabItemProperties"
+          },
+          {
+            "id": "ActionsBox",
+            "objectType": "TabItem",
+            "label": "Actions",
+            "gridColumnCount": 2,
+            "fields": [
               {
-                "id": "TabBoxProperties",
-                "objectType": "TabItem",
-                "label": "TabBox",
-                "fields": [
-                  {
-                    "id": "SelectedTabField",
-                    "objectType": "SmartField",
-                    "label": "Selected Tab Item"
-                  },
-                  {
-                    "id": "FormFieldPropertiesBox",
-                    "objectType": "jswidgets.FormFieldPropertiesBox"
-                  },
-                  {
-                    "id": "GridDataBox",
-                    "objectType": "jswidgets.GridDataBox",
-                    "label": "Grid Data Hints"
-                  }
-                ]
+                "id": "ActionBox.AddTabItem",
+                "objectType": "jswidgets.TabBoxActionAddTabItem"
               },
               {
-                "id": "CurrentTabItemProperties",
-                "objectType": "TabItem",
-                "label": "Current Tab Item",
-                "fields": [
-                  {
-                    "id": "CurrentTab.MarkedField",
-                    "objectType": "CheckBoxField",
-                    "label": "Marked",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "CurrentTab.GroupBoxPropertiesBox",
-                    "objectType": "jswidgets.GroupBoxPropertiesBox"
-                  },
-                  {
-                    "id": "GridDataBox",
-                    "objectType": "jswidgets.GridDataBox",
-                    "label": "Grid Data Hints"
-                  },
-                  {
-                    "id": "CurrentTab.FormFieldPropertiesBox",
-                    "objectType": "jswidgets.FormFieldPropertiesBox"
-                  }
-                ],
-                "menus": [
-                  {
-                    "id": "CurrentTab.DeleteMenu",
-                    "objectType": "Menu",
-                    "text": "Delete tab item",
-                    "iconId": "${iconId:MINUS}",
-                    "stackable": true,
-                    "menuTypes": ["TabBox.Header"]
-                  }
-                ]
-              },
-              {
-                "id": "AddTabItemTab",
-                "objectType": "TabItem",
-                "label": "Add Tab Item",
-                "fields": [
-                   {
-                     "id": "AddTabItemTab.Label",
-                     "objectType": "StringField",
-                     "label": "Label"
-                   },
-                   {
-                     "id": "AddTabItemTab.SubLabel",
-                     "objectType": "StringField",
-                     "label": "Sub Label"
-                   },
-                   {
-                     "id": "AddTabItemTab.TabItemSmartField",
-                     "objectType": "SmartField",
-                     "label": "Before"
-                   },
-                   {
-                     "id": "AddTabItemTab.CreateButton",
-                     "objectType": "Button",
-                     "label": "Create Tab Item",
-                     "processButton": false,
-                     "gridDataHints": {
-                       "horizontalAlignment": 0
-                     }
-                   }
-                ]
-              },
-              {
-                "id": "DeleteTabItemTab",
-                "objectType": "TabItem",
-                "label": "Delete Tab Item",
-                "fields": [
-                   {
-                     "id": "DeleteTabItemTab.TabItem",
-                     "objectType": "SmartField",
-                     "label": "Tab Item"
-                   },
-                   {
-                     "id": "DeleteTabItemTab.DeleteButton",
-                     "objectType": "Button",
-                     "label": "Delete Tab Item",
-                     "processButton": false,
-                     "gridDataHints": {
-                       "horizontalAlignment": 0
-                     }
-                   }
-                ]
+                "id": "ActionBox.DeleteTabItem",
+                "objectType": "jswidgets.TabBoxActionDeleteTabItem"
               }
             ]
           }
         ]
       }
-
     ]
   }
 }

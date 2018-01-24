@@ -5,9 +5,9 @@
   "label": "Dyn Tab",
   "fields": [
     {
-      "id": "StringField2",
+      "id": "StringField",
       "objectType": "StringField",
-      "label": "String Field 2"
+      "label": "Sample Field"
     }
   ]
 }

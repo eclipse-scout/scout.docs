@@ -1,0 +1,32 @@
+{
+  "id": "jswidgets.TabItemProperties",
+  "type": "model",
+  "objectType": "TabItem",
+  "label": "TabItem Properties",
+  "fields": [
+    {
+      "id": "TabItemProperties.TargetField",
+      "objectType": "SmartField",
+      "label": "Target Item"
+    },
+    {
+      "id": "TabItemProperties.MarkedField",
+      "objectType": "CheckBoxField",
+      "label": "Marked",
+      "labelVisible": false
+    },
+    {
+      "id": "TabItemProperties.GroupBoxPropertiesBox",
+      "objectType": "jswidgets.GroupBoxPropertiesBox"
+    },
+    {
+      "id": "TabItemProperties.GridDataBox",
+      "objectType": "jswidgets.GridDataBox",
+      "label": "Grid Data Hints"
+    },
+    {
+      "id": "TabItemProperties.FormFieldPropertiesBox",
+      "objectType": "jswidgets.FormFieldPropertiesBox"
+    }
+  ]
+}

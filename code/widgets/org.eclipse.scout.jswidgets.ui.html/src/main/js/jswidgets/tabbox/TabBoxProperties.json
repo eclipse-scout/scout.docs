@@ -1,0 +1,22 @@
+{
+  "id": "jswidgets.TabBoxProperties",
+  "type": "model",
+  "objectType": "TabItem",
+  "label": "TabBox Properties",
+  "fields": [
+     {
+       "id": "TabBoxProperties.SelectedTabField",
+       "objectType": "SmartField",
+       "label": "Selected Tab Item"
+     },
+     {
+       "id": "TabBoxProperties.FormFieldPropertiesBox",
+       "objectType": "jswidgets.FormFieldPropertiesBox"
+     },
+     {
+       "id": "TabBoxProperties.GridDataBox",
+       "objectType": "jswidgets.GridDataBox",
+       "label": "Grid Data Hints"
+     }
+  ]
+}
