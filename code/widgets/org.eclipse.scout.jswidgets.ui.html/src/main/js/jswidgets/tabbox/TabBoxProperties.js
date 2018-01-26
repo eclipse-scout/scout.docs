@@ -14,13 +14,13 @@ jswidgets.TabBoxProperties = function() {
 };
 scout.inherits(jswidgets.TabBoxProperties, scout.TabItem);
 
+jswidgets.TabBoxProperties.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TabBoxProperties');
+};
+
 jswidgets.TabBoxProperties.prototype._init = function(model) {
   jswidgets.TabBoxProperties.parent.prototype._init.call(this, model);
   this._setTabBox(this.tabBox);
-};
-
-jswidgets.TabBoxProperties.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxProperties');
 };
 
 jswidgets.TabBoxProperties.prototype.setTabBox = function(tabBox) {

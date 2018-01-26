@@ -89,7 +89,7 @@
         "id": "Properties",
         "objectType": "GroupBox",
         "labelVisible": false,
-        "borderVisible": false;
+        "borderVisible": false,
         "cssClass": "jswidgets-configuration",
         "gridColumnCount": 1,
         "fields": [

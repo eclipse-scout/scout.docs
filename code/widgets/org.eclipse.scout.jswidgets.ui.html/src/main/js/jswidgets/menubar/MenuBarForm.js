@@ -14,6 +14,10 @@ jswidgets.MenuBarForm = function() {
 };
 scout.inherits(jswidgets.MenuBarForm, scout.Form);
 
+jswidgets.MenuBarForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.MenuBarForm');
+};
+
 jswidgets.MenuBarForm.prototype._init = function(model) {
   jswidgets.MenuBarForm.parent.prototype._init.call(this, model);
 
@@ -44,10 +48,6 @@ jswidgets.MenuBarForm.prototype._init = function(model) {
 
   this._fillSelectedMenuField();
   this._updateSelectedMenu();
-};
-
-jswidgets.MenuBarForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.MenuBarForm');
 };
 
 jswidgets.MenuBarForm.prototype._onMenuAction = function(event) {

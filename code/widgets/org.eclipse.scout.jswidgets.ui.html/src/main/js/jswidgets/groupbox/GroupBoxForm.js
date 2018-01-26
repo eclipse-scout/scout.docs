@@ -13,6 +13,10 @@ jswidgets.GroupBoxForm = function() {
 };
 scout.inherits(jswidgets.GroupBoxForm, scout.Form);
 
+jswidgets.GroupBoxForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.GroupBoxForm');
+};
+
 jswidgets.GroupBoxForm.prototype._init = function(model) {
   jswidgets.GroupBoxForm.parent.prototype._init.call(this, model);
 
@@ -37,10 +41,6 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   };
   this.widget('BodyLayoutConfigBox').setField(groupBox);
   this.widget('GridDataBox').setField(groupBox);
-};
-
-jswidgets.GroupBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxForm');
 };
 
 jswidgets.GroupBoxForm.prototype._onToggleVisibilityChange = function(event) {

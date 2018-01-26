@@ -15,13 +15,13 @@ jswidgets.TabBoxActionDeleteTabItem = function() {
 };
 scout.inherits(jswidgets.TabBoxActionDeleteTabItem, scout.GroupBox);
 
+jswidgets.TabBoxActionDeleteTabItem.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TabBoxActionDeleteTabItem');
+};
+
 jswidgets.TabBoxActionDeleteTabItem.prototype._init = function(model) {
   jswidgets.TabBoxActionDeleteTabItem.parent.prototype._init.call(this, model);
   this._setTabBox(this.tabBox);
-};
-
-jswidgets.TabBoxActionDeleteTabItem.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxActionDeleteTabItem');
 };
 
 jswidgets.TabBoxActionDeleteTabItem.prototype.setTabBox = function(tabBox) {

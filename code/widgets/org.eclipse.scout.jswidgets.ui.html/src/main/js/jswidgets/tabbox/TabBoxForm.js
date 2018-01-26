@@ -14,6 +14,10 @@ jswidgets.TabBoxForm = function() {
 };
 scout.inherits(jswidgets.TabBoxForm, scout.Form);
 
+jswidgets.TabBoxForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TabBoxForm');
+};
+
 jswidgets.TabBoxForm.prototype._init = function(model) {
   jswidgets.TabBoxForm.parent.prototype._init.call(this, model);
   var tabBox = this.widget('TabBox');
@@ -38,9 +42,4 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   this.widget('ShareMenu').on('action', function() {
     addTabMenu.setEnabled(!addTabMenu.enabled);
   }.bind(this));
-
-};
-
-jswidgets.TabBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxForm');
 };

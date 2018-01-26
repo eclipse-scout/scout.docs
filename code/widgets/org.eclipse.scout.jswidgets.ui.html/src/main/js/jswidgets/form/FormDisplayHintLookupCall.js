@@ -8,16 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.DisplayHintLookupCall = function() {
-  jswidgets.DisplayHintLookupCall.parent.call(this);
+jswidgets.FormDisplayHintLookupCall = function() {
+  jswidgets.FormDisplayHintLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.DisplayHintLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.FormDisplayHintLookupCall, scout.StaticLookupCall);
 
-jswidgets.DisplayHintLookupCall.prototype._data = function() {
-  return jswidgets.DisplayHintLookupCall.DATA;
+jswidgets.FormDisplayHintLookupCall.prototype._data = function() {
+  return jswidgets.FormDisplayHintLookupCall.DATA;
 };
 
-jswidgets.DisplayHintLookupCall.DATA = [
+jswidgets.FormDisplayHintLookupCall.DATA = [
   [scout.Form.DisplayHint.DIALOG, 'dialog'],
   [scout.Form.DisplayHint.VIEW, 'view'],
   [scout.Form.DisplayHint.POPUP_WINDOW, 'popupWindow']

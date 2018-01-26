@@ -15,13 +15,13 @@ jswidgets.TabBoxActionAddTabItem = function() {
 };
 scout.inherits(jswidgets.TabBoxActionAddTabItem, scout.GroupBox);
 
+jswidgets.TabBoxActionAddTabItem.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TabBoxActionAddTabItem');
+};
+
 jswidgets.TabBoxActionAddTabItem.prototype._init = function(model) {
   jswidgets.TabBoxActionAddTabItem.parent.prototype._init.call(this, model);
   this._setTabBox(this.tabBox);
-};
-
-jswidgets.TabBoxActionAddTabItem.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxActionAddTabItem');
 };
 
 jswidgets.TabBoxActionAddTabItem.prototype.setTabBox = function(tabBox) {

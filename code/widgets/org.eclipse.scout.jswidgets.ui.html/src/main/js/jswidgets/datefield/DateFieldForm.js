@@ -13,6 +13,10 @@ jswidgets.DateFieldForm = function() {
 };
 scout.inherits(jswidgets.DateFieldForm, scout.Form);
 
+jswidgets.DateFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.DateFieldForm');
+};
+
 jswidgets.DateFieldForm.prototype._init = function(model) {
   jswidgets.DateFieldForm.parent.prototype._init.call(this, model);
 
@@ -53,10 +57,6 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(dateField);
   this.widget('FormFieldPropertiesBox').setField(dateField);
   this.widget('GridDataBox').setField(dateField);
-};
-
-jswidgets.DateFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.DateFieldForm');
 };
 
 jswidgets.DateFieldForm.prototype._onHasDatePropertyChange = function(event) {

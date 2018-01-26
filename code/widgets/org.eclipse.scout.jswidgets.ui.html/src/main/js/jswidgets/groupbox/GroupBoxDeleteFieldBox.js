@@ -15,13 +15,13 @@ jswidgets.GroupBoxDeleteFieldBox = function() {
 };
 scout.inherits(jswidgets.GroupBoxDeleteFieldBox, scout.GroupBox);
 
+jswidgets.GroupBoxDeleteFieldBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.GroupBoxDeleteFieldBox');
+};
+
 jswidgets.GroupBoxDeleteFieldBox.prototype._init = function(model) {
   jswidgets.GroupBoxDeleteFieldBox.parent.prototype._init.call(this, model);
   this._setField(this.field);
-};
-
-jswidgets.GroupBoxDeleteFieldBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxDeleteFieldBox');
 };
 
 jswidgets.GroupBoxDeleteFieldBox.prototype.setField = function(field) {

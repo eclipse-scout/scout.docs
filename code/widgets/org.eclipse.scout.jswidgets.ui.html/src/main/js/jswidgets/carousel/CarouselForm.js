@@ -13,6 +13,10 @@ jswidgets.CarouselForm = function() {
 };
 scout.inherits(jswidgets.CarouselForm, scout.Form);
 
+jswidgets.CarouselForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.CarouselForm');
+};
+
 jswidgets.CarouselForm.prototype._init = function(model) {
   jswidgets.CarouselForm.parent.prototype._init.call(this, model);
 
@@ -24,10 +28,6 @@ jswidgets.CarouselForm.prototype._init = function(model) {
   var carouselField = this.widget('CarouselField');
   this.widget('FormFieldPropertiesBox').setField(carouselField);
   this.widget('GridDataBox').setField(carouselField);
-};
-
-jswidgets.CarouselForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.CarouselForm');
 };
 
 jswidgets.CarouselForm.prototype._onStatusEnabledPropertyChange = function(event) {

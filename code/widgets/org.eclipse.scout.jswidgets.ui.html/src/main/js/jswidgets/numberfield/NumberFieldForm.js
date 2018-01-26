@@ -13,6 +13,10 @@ jswidgets.NumberFieldForm = function() {
 };
 scout.inherits(jswidgets.NumberFieldForm, scout.Form);
 
+jswidgets.NumberFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.NumberFieldForm');
+};
+
 jswidgets.NumberFieldForm.prototype._init = function(model) {
   jswidgets.NumberFieldForm.parent.prototype._init.call(this, model);
 
@@ -23,10 +27,6 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(numberField);
   this.widget('FormFieldPropertiesBox').setField(numberField);
   this.widget('GridDataBox').setField(numberField);
-};
-
-jswidgets.NumberFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.NumberFieldForm');
 };
 
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {

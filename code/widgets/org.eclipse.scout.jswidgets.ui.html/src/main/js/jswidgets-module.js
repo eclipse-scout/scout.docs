@@ -14,7 +14,7 @@
   __include("jswidgets/carousel/CarouselForm.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
-  __include("jswidgets/form/DisplayHintLookupCall.js");
+  __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
   __include("jswidgets/form/LifecycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");

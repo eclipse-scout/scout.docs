@@ -14,14 +14,14 @@ jswidgets.ActionPropertiesBox = function() {
 };
 scout.inherits(jswidgets.ActionPropertiesBox, scout.GroupBox);
 
+jswidgets.ActionPropertiesBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.ActionPropertiesBox');
+};
+
 jswidgets.ActionPropertiesBox.prototype._init = function(model) {
   jswidgets.ActionPropertiesBox.parent.prototype._init.call(this, model);
 
   this._setField(this.field);
-};
-
-jswidgets.ActionPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ActionPropertiesBox');
 };
 
 jswidgets.ActionPropertiesBox.prototype.setField = function(field) {

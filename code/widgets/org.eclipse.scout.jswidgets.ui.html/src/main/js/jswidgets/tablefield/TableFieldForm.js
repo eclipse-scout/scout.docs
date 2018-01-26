@@ -18,6 +18,10 @@ scout.inherits(jswidgets.TableFieldForm, scout.Form);
 
 jswidgets.TableFieldForm.GROUP_SIZE = 2;
 
+jswidgets.TableFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TableFieldForm');
+};
+
 jswidgets.TableFieldForm.prototype._init = function(model) {
   jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
 
@@ -84,10 +88,6 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
-};
-
-jswidgets.TableFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TableFieldForm');
 };
 
 jswidgets.TableFieldForm.prototype._onAddRowMenuAction = function() {

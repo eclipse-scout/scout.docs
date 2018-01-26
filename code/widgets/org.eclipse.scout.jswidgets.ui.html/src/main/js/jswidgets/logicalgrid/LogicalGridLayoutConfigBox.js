@@ -14,6 +14,10 @@ jswidgets.LogicalGridLayoutConfigBox = function() {
 };
 scout.inherits(jswidgets.LogicalGridLayoutConfigBox, scout.GroupBox);
 
+jswidgets.LogicalGridLayoutConfigBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.LogicalGridLayoutConfigBox');
+};
+
 jswidgets.LogicalGridLayoutConfigBox.prototype._init = function(model) {
   jswidgets.LogicalGridLayoutConfigBox.parent.prototype._init.call(this, model);
 
@@ -23,10 +27,6 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._init = function(model) {
   this.widget('RowHeightField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('ColumnWidthField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('MinWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-};
-
-jswidgets.LogicalGridLayoutConfigBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LogicalGridLayoutConfigBox');
 };
 
 jswidgets.LogicalGridLayoutConfigBox.prototype.setField = function(field) {

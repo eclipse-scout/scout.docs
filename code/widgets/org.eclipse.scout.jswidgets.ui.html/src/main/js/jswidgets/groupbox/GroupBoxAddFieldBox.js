@@ -15,13 +15,13 @@ jswidgets.GroupBoxAddFieldBox = function() {
 };
 scout.inherits(jswidgets.GroupBoxAddFieldBox, scout.GroupBox);
 
+jswidgets.GroupBoxAddFieldBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.GroupBoxAddFieldBox');
+};
+
 jswidgets.GroupBoxAddFieldBox.prototype._init = function(model) {
   jswidgets.GroupBoxAddFieldBox.parent.prototype._init.call(this, model);
   this._setField(this.field);
-};
-
-jswidgets.GroupBoxAddFieldBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxAddFieldBox');
 };
 
 jswidgets.GroupBoxAddFieldBox.prototype.setField = function(field) {

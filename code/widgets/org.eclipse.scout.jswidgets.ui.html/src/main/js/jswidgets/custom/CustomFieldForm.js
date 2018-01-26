@@ -13,16 +13,16 @@ jswidgets.CustomFieldForm = function() {
 };
 scout.inherits(jswidgets.CustomFieldForm, scout.Form);
 
+jswidgets.CustomFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.CustomFieldForm');
+};
+
 jswidgets.CustomFieldForm.prototype._init = function(model) {
   jswidgets.CustomFieldForm.parent.prototype._init.call(this, model);
   var watchField = this.widget('WatchField');
 
   this.widget('FormFieldPropertiesBox').setField(watchField);
   this.widget('GridDataBox').setField(watchField);
-};
-
-jswidgets.CustomFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.CustomFieldForm');
 };
 
 jswidgets.CustomFieldForm.prototype._onSelectedTabChange = function(event) {

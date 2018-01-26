@@ -13,6 +13,10 @@ jswidgets.StringFieldForm = function() {
 };
 scout.inherits(jswidgets.StringFieldForm, scout.Form);
 
+jswidgets.StringFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.StringFieldForm');
+};
+
 jswidgets.StringFieldForm.prototype._init = function(model) {
   jswidgets.StringFieldForm.parent.prototype._init.call(this, model);
 
@@ -67,10 +71,6 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(stringField);
   this.widget('FormFieldPropertiesBox').setField(stringField);
   this.widget('GridDataBox').setField(stringField);
-};
-
-jswidgets.StringFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.StringFieldForm');
 };
 
 jswidgets.StringFieldForm.prototype._onHasActionPropertyChange = function(event) {

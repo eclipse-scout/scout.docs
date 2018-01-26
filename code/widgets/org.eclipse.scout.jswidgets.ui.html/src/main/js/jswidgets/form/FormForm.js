@@ -15,6 +15,10 @@ jswidgets.FormForm = function() {
 };
 scout.inherits(jswidgets.FormForm, scout.Form);
 
+jswidgets.FormForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.FormForm');
+};
+
 jswidgets.FormForm.prototype._init = function(model) {
   jswidgets.FormForm.parent.prototype._init.call(this, model);
 
@@ -53,10 +57,6 @@ jswidgets.FormForm.prototype._init = function(model) {
   }
   var displayHintField = this.widget('DisplayHintField');
   displayHintField.setValue(this.openedByButton ? this.displayHint : scout.Form.DisplayHint.DIALOG);
-};
-
-jswidgets.FormForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FormForm');
 };
 
 jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {

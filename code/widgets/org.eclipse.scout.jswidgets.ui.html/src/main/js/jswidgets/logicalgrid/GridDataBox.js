@@ -15,6 +15,10 @@ jswidgets.GridDataBox = function() {
 };
 scout.inherits(jswidgets.GridDataBox, scout.GroupBox);
 
+jswidgets.GridDataBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.GridDataBox');
+};
+
 jswidgets.GridDataBox.prototype._init = function(model) {
   jswidgets.GridDataBox.parent.prototype._init.call(this, model);
 
@@ -33,10 +37,6 @@ jswidgets.GridDataBox.prototype._init = function(model) {
   this.widget('FillVerticalField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('WidthInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('HeightInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
-};
-
-jswidgets.GridDataBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GridDataBox');
 };
 
 jswidgets.GridDataBox.prototype.setField = function(field) {
