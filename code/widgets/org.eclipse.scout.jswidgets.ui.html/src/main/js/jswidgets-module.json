@@ -2,6 +2,7 @@
   "files": [
     "jswidgets/accordion/AccordionForm.json",
     "jswidgets/action/ActionPropertiesBox.json",
+    "jswidgets/button/ButtonForm.json",
     "jswidgets/carousel/CarouselForm.json",
     "jswidgets/desktop/Desktop.json",
     "jswidgets/desktop/WidgetsOutline.json",

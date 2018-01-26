@@ -1,0 +1,92 @@
+{
+  "id": "jswidgets.ButtonForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "Button",
+            "objectType": "Button",
+            "label": "Button",
+            "processButton": false,
+            "gridDataHints": {
+              "horizontalAlignment": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "Properties",
+        "objectType": "GroupBox",
+        "labelVisible": false,
+        "borderVisible": false,
+        "cssClass": "jswidgets-configuration",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "PropertiesBox",
+            "objectType": "GroupBox",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "DefaultButtonField",
+                "objectType": "CheckBoxField",
+                "label": "Default Button",
+                "labelVisible": false
+              },
+              {
+                "id": "ProcessButtonField",
+                "objectType": "CheckBoxField",
+                "label": "Process Button",
+                "labelVisible": false,
+                "tooltipText": "${textKey:ProcessButtonTooltip}",
+                "gridDataHints": {
+                  "fillHorizontal": false
+                }
+              },
+              {
+                "id": "SelectedField",
+                "objectType": "CheckBoxField",
+                "label": "Selected",
+                "labelVisible": false
+              },
+              {
+                "id": "DisplayStyleField",
+                "objectType": "SmartField",
+                "lookupCall": "jswidgets.ButtonDisplayStyleLookupCall",
+                "label": "Display Style"
+              },
+              {
+                "id": "IconIdField",
+                "objectType": "SmartField",
+                "lookupCall": "jswidgets.IconIdLookupCall",
+                "label": "Icon Id"
+              },
+              {
+                "id": "KeyStrokeField",
+                "objectType": "StringField",
+                "label": "Key Stroke"
+              }
+            ]
+          },
+          {
+            "id": "FormFieldPropertiesBox",
+            "objectType": "jswidgets.FormFieldPropertiesBox"
+          },
+          {
+            "id": "GridDataBox",
+            "objectType": "jswidgets.GridDataBox",
+            "label": "Grid Data Hints"
+          }
+        ]
+      }
+    ]
+  }
+}

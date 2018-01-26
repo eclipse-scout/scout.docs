@@ -11,6 +11,8 @@
   __include("jswidgets/accordion/AccordionForm.js");
   __include("jswidgets/action/ActionPropertiesBox.js");
   __include("jswidgets/action/ActionStyleLookupCall.js");
+  __include("jswidgets/button/ButtonForm.js");
+  __include("jswidgets/button/ButtonDisplayStyleLookupCall.js");
   __include("jswidgets/carousel/CarouselForm.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");

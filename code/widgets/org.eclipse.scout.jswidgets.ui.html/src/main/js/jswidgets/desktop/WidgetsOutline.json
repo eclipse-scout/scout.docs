@@ -14,6 +14,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "Button",
+      "detailForm": {
+        "objectType": "jswidgets.ButtonForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:Carousel}",
       "detailForm": {
         "objectType": "jswidgets.CarouselForm"
