@@ -52,4 +52,6 @@ jswidgets.GroupBoxForm.prototype._onToggleVisibilityChange = function(event) {
 jswidgets.GroupBoxForm.prototype._onToggleVisibilityButtonClick = function(event) {
   var field = this.widget(this.widget('ToggleVisibilityField').value);
   field.setVisible(!field.visible);
+  // Validate layout immediately to prevent flickering
+  this.widget('DetailBox').validateLayoutTree();
 };

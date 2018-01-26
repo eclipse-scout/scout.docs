@@ -52,4 +52,6 @@ jswidgets.GroupBoxDeleteFieldBox.prototype._onTargetFieldPropertyChange = functi
 jswidgets.GroupBoxDeleteFieldBox.prototype._onDeleteFormFieldButtonClick = function(event) {
   this.field.deleteField(this.targetField.value);
   this.targetField.setValue(null);
+  // Validate layout immediately to prevent flickering
+  this.field.validateLayoutTree();
 };

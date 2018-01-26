@@ -61,6 +61,7 @@ jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(ev
   });
 
   this.field.insertFieldBefore(newField, beforeField);
-
   this._updateAddFieldLabel();
+  // Validate layout immediately to prevent flickering
+  this.field.validateLayoutTree();
 };
