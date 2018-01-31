@@ -406,6 +406,7 @@ If you created a custom theme, you might have to adjust some less variables.
 * Renamed `@tile-padding-v` to `@tile-field-padding-y`
 * Renamed `@planner-header-buttons` to `@planner-header-button-height`
 * Renamed `@calendar-header-buttons` to `@calendar-header-button-height`
+* Renamed `@logical-grid-height` to `@logical-grid-row-height`
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
