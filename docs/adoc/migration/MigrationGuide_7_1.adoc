@@ -134,6 +134,9 @@ Replaced `get_pattern` and `post_pattern` with `content_types`. If you set these
 == HttpCacheControl
 The parameter `pathInfo` has been removed from the method `HttpCacheControl.checkAndSetCacheHeaders` since it has no effect anymore.
 
+== HttpProxy
+HTTP Proxy doesn't set cache control `no-chache` header anymore.
+
 == Config Properties
 === Descriptions
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
@@ -374,6 +377,12 @@ This class was deleted and replaced by a config property in config.properties:
 # CSP - Demo app uses external images in html field and custom widgets -> allow it
 scout.cspDirective[img-src]=*
 ----
+
+== IUiServletRequestHandler
+The methods `handleGet` and `handlePost` on `IUiServletRequestHandler` were replaced by the single method `handle`. This new method is called for all HTTP methods.
+To retrieve the HTTP method, call `getMethod` on `HttpServletRequest`. When using `AbstractUiServletRequestHandler` no migration should be required because `AbstractUiServletRequestHandler` delegates to the Java methods for the common HTTP methods `handleGet`, `handlePost`, `handlePut` and `handleDelete`.
+
+Methods `proxyGet` and `proxyPost` on `HttpProxy` are replaced by the common method `proxy`.
 
 // ^^^
 // Insert descriptions of Java API changes here

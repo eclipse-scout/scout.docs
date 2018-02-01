@@ -203,3 +203,7 @@ API:
 - Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
 ====
 
+
+== IUiServletRequestHandler
+UI Servlet request handler now supports all HTTP methods and not only GET and POST.
+When using `AbstractUiServletRequestHandler` no migration should be required, see migration guide for further information.
