@@ -20,12 +20,13 @@
   __include("jswidgets/form/FormForm.js");
   __include("jswidgets/form/LifecycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
-  __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
   __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
-  __include("jswidgets/formfield/ClearableStyleLookupCall.js");
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
+  __include("jswidgets/formfield/FieldStyleLookupCall.js");
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
+  __include("jswidgets/valuefield/ClearableStyleLookupCall.js");
+  __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   __include("jswidgets/custom/CustomFieldForm.js");
   __include("jswidgets/custom/WatchField.js");
   __include("jswidgets/custom/WatchFieldLayout.js");

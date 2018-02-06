@@ -37,6 +37,13 @@
       "labelVisible": false
     },
     {
+      "id": "FieldStyleField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.FieldStyleLookupCall",
+      "label": "Field Style",
+      "displayStyle": "dropdown"
+    },
+    {
       "id": "DisabledStyleField",
       "objectType": "SmartField",
       "lookupCall": "jswidgets.DisabledStyleLookupCall",

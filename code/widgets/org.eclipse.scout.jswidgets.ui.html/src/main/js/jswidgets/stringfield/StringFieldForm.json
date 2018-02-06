@@ -29,6 +29,7 @@
           {
             "id": "PropertiesBox",
             "objectType": "GroupBox",
+            "expandable": true,
             "label": "Properties",
             "fields": [
                {
@@ -93,6 +94,7 @@
           {
             "id": "CustomizationBox",
             "objectType": "GroupBox",
+            "expandable": true,
             "gridColumnCount": 2,
             "label": "Customization Examples",
             "fields": [

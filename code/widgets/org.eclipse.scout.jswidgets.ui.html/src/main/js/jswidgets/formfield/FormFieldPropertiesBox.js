@@ -53,6 +53,10 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   mandatoryField.setValue(this.field.mandatory);
   mandatoryField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var fieldStyleField = this.widget('FieldStyleField');
+  fieldStyleField.setValue(this.field.fieldStyle);
+  fieldStyleField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var disabledStyleField = this.widget('DisabledStyleField');
   disabledStyleField.setValue(this.field.disabledStyle);
   disabledStyleField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -99,6 +103,8 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setStatusVisible(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'MandatoryField') {
     this.field.setMandatory(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'FieldStyleField') {
+    this.field.setFieldStyle(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
     this.field.setDisabledStyle(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'LabelField') {
