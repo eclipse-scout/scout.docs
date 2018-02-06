@@ -74,7 +74,10 @@
               "lookupCall": "jswidgets.LocaleLookupCall",
               "labelVisible": false,
               "statusVisible": false,
-              "labelPosition": 2
+              "labelPosition": 2,
+              "gridDataHints": {
+                  "widthInPixel": 200
+               }
             }
           }
         ]
