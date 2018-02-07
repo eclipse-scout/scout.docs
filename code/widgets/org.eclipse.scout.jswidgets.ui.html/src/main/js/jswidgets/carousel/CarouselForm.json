@@ -85,7 +85,7 @@
         ]
       },
       {
-        "id": "Properties",
+        "id": "ConfigurationBox",
         "objectType": "GroupBox",
         "labelVisible": false,
         "borderVisible": false,
