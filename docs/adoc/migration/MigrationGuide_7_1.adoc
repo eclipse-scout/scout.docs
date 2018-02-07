@@ -416,6 +416,7 @@ If you created a custom theme, you might have to adjust some less variables.
 * Renamed `@planner-header-buttons` to `@planner-header-button-height`
 * Renamed `@calendar-header-buttons` to `@calendar-header-button-height`
 * Renamed `@logical-grid-height` to `@logical-grid-row-height`
+* Renamed `@applink-color` to `@link-color`
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
