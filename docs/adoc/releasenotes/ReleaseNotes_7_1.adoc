@@ -152,7 +152,7 @@ image::{imgsdir}/FormFieldMenu.png[]
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackabel menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackabel menu in the menubar.
 
 == Tabbox enhancements
-* The menubar of a tabbox considers the menu alignemnts _left_ or _right_. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
+* The menubar of a tabbox considers the menu alignments _left_ or _right_. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
 * TabItems got a `sublabel` property with is displayed in a very small font below the title (see also <<sec-gb-enhancements>>).
 * The marker of the selected tab is now animated and follows the user or model selection.
 * Several bugfixes of pixel issues due to zoom levels.
