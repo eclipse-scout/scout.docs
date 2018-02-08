@@ -12,16 +12,21 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.ColumnDescriptor;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.AbstractStatusMenuMapping;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -37,6 +42,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -326,6 +332,42 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
           public boolean isThrowVetoException() {
             return m_throwVetoException;
+          }
+
+          @Order(1000)
+          @ClassId("70082ca3-63d1-4f19-a9d3-c756907de0c0")
+          public class NewMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return "Add new language";
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(ValueFieldMenuType.Null);
+            }
+
+            @Override
+            protected void execAction() {
+              MessageBoxes.createOk()
+                  .withHeader(TEXTS.get("ThanksForClickingMe"))
+                  .withBody(TEXTS.get("NewLanguageMessage"))
+                  .show();
+            }
+          }
+
+          public class NewMenuStatusMapping extends AbstractStatusMenuMapping {
+
+            @Override
+            protected Class<? extends IMenu> getConfiguredMenu() {
+              return NewMenu.class;
+            }
+
+            @Override
+            protected List<Integer> getConfiguredCodes() {
+              return Arrays.asList(ISmartField2.NO_RESULTS_ERROR_CODE);
+            }
+
           }
 
         }
