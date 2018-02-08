@@ -716,10 +716,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
             @Order(1000)
             @ClassId("f13aa648-a3de-4cab-90e0-e7559ca1df7d")
-            public class DefaultMenu extends AbstractMenu {
+            public class ClassicMenu extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
-                return TEXTS.get("Default");
+                return "Classic";
               }
 
               @Override
@@ -729,7 +729,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                getField2Field().setCssClass("");
+                getField2Field().setFieldStyle(IFormField.FIELD_STYLE_CLASSIC);
               }
             }
 
@@ -748,7 +748,7 @@ public class FormForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                getField2Field().setCssClass("form-field-alternative");
+                getField2Field().setFieldStyle(IFormField.FIELD_STYLE_ALTERNATIVE);
               }
             }
           }

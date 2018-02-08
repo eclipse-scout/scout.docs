@@ -15,7 +15,18 @@
             "id": "SmartField",
             "objectType": "SmartField",
             "lookupCall": "jswidgets.LocaleLookupCall",
-            "label": "Smart Field"
+            "label": "Smart Field",
+            "menus": [{
+              "id": "NewLanguageMenu",
+              "text": "${textKey:NewLanguageMenu}",
+              "objectType": "Menu"
+            }],
+            "statusMenuMappings": [{
+              "id": "NewLanguageMenuStatusMapping",
+              "objectType": "StatusMenuMapping",
+              "menu": "NewLanguageMenu",
+              "codes": [2]
+            }]
           }
         ]
       },

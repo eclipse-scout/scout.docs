@@ -22,8 +22,18 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
 
   this.smartField = this.widget('SmartField');
 
+  var newLanguageMenu = this.widget('NewLanguageMenu');
+  newLanguageMenu.on('action', this._onNewLanguageMenuAction.bind(this));
+
   this.widget('PropertiesBox').setField(this.smartField);
   this.widget('ValueFieldPropertiesBox').setField(this.smartField);
   this.widget('FormFieldPropertiesBox').setField(this.smartField);
   this.widget('GridDataBox').setField(this.smartField);
+};
+
+jswidgets.SmartFieldForm.prototype._onNewLanguageMenuAction = function(event) {
+  return scout.MessageBoxes.createOk(this)
+    .withHeader(this.session.text('ThanksForClickingMe'))
+    .withBody(this.session.text('NewLanguageMessage'))
+    .buildAndOpen();
 };

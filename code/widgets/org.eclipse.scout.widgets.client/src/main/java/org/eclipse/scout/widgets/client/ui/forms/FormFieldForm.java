@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +23,8 @@ import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.client.ui.form.fields.IStatusMenuMapping;
+import org.eclipse.scout.rt.client.ui.form.fields.StatusMenuMapping;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -34,6 +38,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -44,7 +49,9 @@ import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormField
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupbBox.Field1Field;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Buttons2Box;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Buttons2Box.ToggleStatusMenuButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Field2Field;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Field2Field.StyleMenu;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupbBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupbBox.Field3Field;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField4GroupbBox;
@@ -126,6 +133,10 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
   public CancellationDurationField getCancellationDurationField() {
     return getFieldByClass(CancellationDurationField.class);
+  }
+
+  public ToggleStatusMenuButton getToggleStatusMenuButton() {
+    return getFieldByClass(ToggleStatusMenuButton.class);
   }
 
   public StartLongRunningOperationButton getStartLongRunningOperationButton() {
@@ -227,10 +238,10 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
             @Order(1000)
             @ClassId("bc8efcd2-0a49-4e66-8860-d4bf3ec0574f")
-            public class DefaultMenu extends AbstractMenu {
+            public class ClassicMenu extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
-                return TEXTS.get("Default");
+                return "Classic";
               }
 
               @Override
@@ -240,7 +251,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                getField2Field().setCssClass("");
+                getField2Field().setFieldStyle(IFormField.FIELD_STYLE_CLASSIC);
               }
             }
 
@@ -259,7 +270,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
               @Override
               protected void execAction() {
-                getField2Field().setCssClass("form-field-alternative");
+                getField2Field().setFieldStyle(IFormField.FIELD_STYLE_ALTERNATIVE);
               }
             }
           }
@@ -271,6 +282,46 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected IFormField getField() {
             return getField2Field();
+          }
+
+          @Order(4000)
+          @ClassId("ef2bcc3d-498c-4bd6-90d1-97528a6d2c22")
+          public class ToggleStatusMenuButton extends AbstractLinkButton {
+            @Override
+            protected String getConfiguredLabel() {
+              return "Show menu in status";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Menus are not shown in the status tooltip by default. If you want them to be displayed, you can configure a status menu mapping. In this example the menu is mapped to the error status and therefore not shown on a warning or info.";
+            }
+
+            @Override
+            protected boolean getConfiguredFillHorizontal() {
+              return false;
+            }
+
+            @Override
+            protected void execClickAction() {
+              Field2Field field = getField2Field();
+              if (field.getStatusMenuMappings().size() > 0) {
+                field.setStatusMenuMappings(new ArrayList<IStatusMenuMapping>());
+                setLabel("Show menu in status");
+                return;
+              }
+
+              IStatusMenuMapping mapping = new StatusMenuMapping();
+              mapping.setSeverities(Arrays.asList(Status.ERROR));
+              mapping.setMenu(field.getMenuByClass(StyleMenu.class));
+              field.setStatusMenuMappings(Arrays.asList(mapping));
+              setLabel("Hide menu in status");
+            }
           }
         }
       }
