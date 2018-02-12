@@ -39,7 +39,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholde
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -269,42 +268,6 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
             return (Class<? extends ILookupCall<Locale>>) /*Remote*/ LocaleLookupCall.class;
-          }
-
-          @Order(1000)
-          @ClassId("efdb5f17-d14e-4700-be1a-2cb0689d36c2")
-          public class NewMenu extends AbstractMenu {
-            @Override
-            protected String getConfiguredText() {
-              return "Add new language";
-            }
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(ValueFieldMenuType.Null);
-            }
-
-            @Override
-            protected void execAction() {
-              MessageBoxes.createOk()
-                  .withHeader(TEXTS.get("ThanksForClickingMe"))
-                  .withBody(TEXTS.get("NewLanguageMessage"))
-                  .show();
-            }
-          }
-
-          public class NewMenuStatusMapping extends AbstractStatusMenuMapping {
-
-            @Override
-            protected Class<? extends IMenu> getConfiguredMenu() {
-              return NewMenu.class;
-            }
-
-            @Override
-            protected List<Integer> getConfiguredCodes() {
-              return Arrays.asList(ISmartField.NO_RESULTS_ERROR_CODE);
-            }
-
           }
 
           @Override
