@@ -24,7 +24,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.nls.LocaleUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -43,7 +42,7 @@ public class OptionsForm extends AbstractForm {
     getUiThemeField().setValue(theme);
 
     String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(ClientSession.PREF_USER_LOCALE, null);
-    getLocaleField().setValue(LocaleUtility.parse(localeString));
+    getLocaleField().setValue(Locale.forLanguageTag(localeString));
   }
 
   public MainBox getMainBox() {
@@ -62,7 +61,7 @@ public class OptionsForm extends AbstractForm {
     // Not inside form handler, because the form is used in a FormToolButton without a handler
     getDesktop().setTheme(getUiThemeField().getValue());
     Locale locale = ObjectUtility.nvl(getLocaleField().getValue(), Locale.getDefault());
-    boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toString());
+    boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
     if (localeChanged) {
       ClientUIPreferences.getClientPreferences(ClientSession.get()).flush();
       MessageBoxes.createOk()

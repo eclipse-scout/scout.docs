@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import org.eclipse.scout.rt.platform.nls.LocaleUtility;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -24,7 +23,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 public class AvailableLocaleLookupCall extends LocalLookupCall<Locale> {
 
-  private static final Locale[] AVAILABLE_LOCALES = {Locale.US, LocaleUtility.parse("de_CH")};
+  private static final Locale[] AVAILABLE_LOCALES = {Locale.US, new Locale("de", "CH")};
   private static final long serialVersionUID = 1L;
 
   protected Locale[] sort(Locale[] locales) {

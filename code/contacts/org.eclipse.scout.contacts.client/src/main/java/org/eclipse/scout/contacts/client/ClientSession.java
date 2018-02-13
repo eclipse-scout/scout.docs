@@ -16,7 +16,6 @@ import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
-import org.eclipse.scout.rt.platform.nls.LocaleUtility;
 
 public class ClientSession extends AbstractClientSession {
 
@@ -40,8 +39,7 @@ public class ClientSession extends AbstractClientSession {
     // The locale needs to be set before the Desktop is created.
     String localeString = ClientUIPreferences.getClientPreferences(get()).get(PREF_USER_LOCALE, null);
     if (localeString != null) {
-      Locale userLocale = LocaleUtility.parse(localeString);
-      setLocale(userLocale);
+      setLocale(Locale.forLanguageTag(localeString));
     }
 
     setDesktop(new Desktop());
