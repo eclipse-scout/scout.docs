@@ -80,7 +80,6 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.Example
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.DisabledSmartFieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatorySmartfieldField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchFormatValueMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartField2Form.MainBox.SeleniumTestMenu.SwitchValidateValueMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
@@ -96,11 +95,9 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
   private static final Logger LOG = LoggerFactory.getLogger(SmartField2Form.class);
   private static final Locale ALBANIAN = new Locale("sq");
-  private static final String FORMATED_DISPLAY_TEXT = " [Formated]";
 
   private boolean m_localLookupCall = true;
   private boolean m_validateValue = false;
-  private boolean m_formatValue = false;
 
   public SmartField2Form() {
     super();
@@ -327,15 +324,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
               validValue = ALBANIAN;
             }
             return validValue;
-          }
-
-          @Override
-          protected String execFormatValue(Locale value) {
-            String displayText = getValue() != null ? getValue().getDisplayName() : "";
-            if (m_formatValue) {
-              return displayText + FORMATED_DISPLAY_TEXT;
-            }
-            return displayText;
           }
 
           public void setThrowVetoException(boolean throwVetoException) {
@@ -1257,24 +1245,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         }
       }
 
-      @Order(100)
-      public class SwitchFormatValueMenu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return "Format value in execFormatValue";
-        }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return "Adjust display text with execFormatValue";
-        }
-
-        @Override
-        protected void execAction() {
-          setFormatValue(!m_formatValue);
-        }
-      }
     }
 
     @Order(40)
@@ -1298,12 +1268,6 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
     m_validateValue = validateValue;
     IMenu menu = getMainBox().getMenuByClass(SwitchValidateValueMenu.class);
     menu.setText(validateValue ? "Do nothing in validateValue" : "Set Locale 'ar' in validateValue");
-  }
-
-  public void setFormatValue(boolean formatValue) {
-    m_formatValue = formatValue;
-    IMenu menu = getMainBox().getMenuByClass(SwitchFormatValueMenu.class);
-    menu.setText(formatValue ? "Do nothing in execFormatValue" : "Format value in execFormatValue");
   }
 
   private void changeWildcard(String wildcard) {
