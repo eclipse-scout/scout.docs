@@ -224,7 +224,7 @@ The following config property keys have been renamed (the old keys are no longer
 |`scout.http.proxy`
 |`scout.http.proxyPatterns`
 |`scout.http.apache_retry_post`
-|`scout.http.retryHost`
+|`scout.http.retryPost`
 |`scout.http.transport_factory`
 |`scout.http.transportFactory`
 |`org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService#host`
