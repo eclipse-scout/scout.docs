@@ -13,14 +13,14 @@ package org.eclipse.scout.widgets.old.client.ui.forms;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.scout.rt.client.ui.action.IActionVisitor;
+import org.eclipse.scout.rt.client.ui.action.IAction;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.root.IContextMenuOwner;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.ICompositeField;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
@@ -486,20 +486,17 @@ public class MenusForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() {
-          MenusForm.this.visitFields((field, level, fieldIndex) -> {
-            if (field instanceof IContextMenuOwner) {
-              IContextMenuOwner menuOwner = (IContextMenuOwner) field;
-              if (menuOwner.getContextMenu() != null) {
-                menuOwner.getContextMenu().acceptVisitor(action -> {
-                  action.setEnabled(!action.isEnabled());
-                  return IActionVisitor.CONTINUE;
-                });
+          MenusForm.this.visit(widget -> {
+            if (widget instanceof IAction) {
+              IAction a = (IAction) widget;
+              a.setEnabled(!a.isEnabled());
+            }
+            else if (widget instanceof IFormField) {
+              IFormField field = (IFormField) widget;
+              if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
+                field.setEnabled(!field.isEnabled(), true, true);
               }
             }
-            if (!(field instanceof ICompositeField) && field != ToggleEnabledStateButton.this) {
-              field.setEnabled(!field.isEnabled(), true, true);
-            }
-            return true;
           });
         }
       }

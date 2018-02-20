@@ -315,7 +315,7 @@ Scout already has some config properties. For a list and the corresponding docum
 Because the property classes are managed by the bean manager, you can use all the mechanisms to change the behavior (`@Replace` in particular).
 
 <<lst-PropertyConstant>> demonstrates how you can use the replace annotation to change the existing `ApplicationNameProperty` class.
-The value is no longer fetched via the config mechanism, because the `getValue(String)` method is overriden.
+The value is no longer fetched via the config mechanism, because the `getValue(String)` method is overridden.
 In this case a fixed value is returned.
 
 [[lst-PropertyConstant]]
@@ -326,7 +326,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/sco
 ----
 
 The next example presented in <<lst-PropertyRedirection>> uses the same idea.
-In this case, the `getKey()` method is overriden to read the value from an other key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
+In this case, the `getKey()` method is overridden to read the value from an other key as demonstrated is the <<lst-PropertyRedirectionConfig>>.
 
 [[lst-PropertyRedirection]]
 [source,java,indent=0]

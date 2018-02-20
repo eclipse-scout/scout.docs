@@ -57,6 +57,7 @@ To reflect this change, some existing Scout classes have been migrated to the ne
 |`org.eclipse.scout.rt.platform.util.concurrent.IFunction` |`java.util.function.Function`
 |`org.eclipse.scout.rt.platform.util.concurrent.IBiConsumer` |`java.util.function.BiConsumer`
 |`org.eclipse.scout.rt.platform.util.concurrent.IBiFunction` |`java.util.function.BiFunction`
+|`org.eclipse.scout.rt.client.ui.action.IActionFilter` |`java.util.function.Predicate<IAction>`
 |===
 
 === Removed Constants/Methods From ClientUIPreferences
@@ -143,7 +144,15 @@ The goal was to harmonize all the init methods (`initField`, `initTile`, `initFo
 But: there may be cases which require `init()` to be called multiple times, like reseting a search form. For such cases, `reinit()` has to be used from now on. Also, after the widget is disposed, `init()` may be called again. So remember: `execInit` may be called more than once in some circumstances. This is existing behavior!
 
 We also renamed the initConfig guard of `IFormField` from `isInitialized` to `isInitDone` to make clear what initialization has been done. It has furthermore been moved to `AbstractWidget` so that individual widgets don't have to care about it and to use the same
-pattern as for `postInitConfig`, `init` and `dispose`.
+pattern as for `init` and `dispose`.
+
+These new methods (`init()`, `dispose()` and `reinit()`) handle the whole widget tree including all child widgets recursively. Child items that need initialization and are NO widgets must be initialized explicitly as it is already now. All children that are widgets must NOT be initialized because this is done automatically by the AbstractWidget implementation. To modify that behavior use the methods `initChildren()` or `disposeChildren()` (e.g. if you want to exclude a child widget from automatically getting initialized).
+This also means that the methods `ActionUtility.initActions()`, `ActionUtility.disposeActions()`, `FormUtility.postInitConfig()`, `FormUtility.initFormFields()` and `FormUtility.disposeFormFields()` have been removed because the corresponding method can be called directly on the instance instead. Use `widget.init()` or `widget.dispose()` instead of these utility functions.
+
+Please note that the phase `postInit` has been removed for the items that supported it. The corresponding code can be moved to the end of the `initConfigInternal()` method instead.
+
+We also renamed the initConfig guard of `IFormField` from `isInitialized` to `isInitDone` to make clear what initialization has been done. It has furthermore been moved to `AbstractWidget` so that individual widgets don't have to care about it and to use the same
+pattern as for `init` and `dispose`.
 
 _Migration:_
 
@@ -164,6 +173,30 @@ The argument `pathInfo` has been removed from the method `HttpCacheControl.check
 === HttpProxy
 
 HTTP Proxy doesn't set cache control `no-chache` header anymore.
+
+
+== Replacement for IActionVisitor, ITreeVisitor, IFormFieldVisitor
+
+A new tree visitor engine has been added to the `org.eclipse.scout.rt.platform.util.visitor` package. It contains classes to depth-first or breadth-first traverse any tree data structures.
+Use the class `org.eclipse.scout.rt.platform.util.visitor.TreeTraversals` as entry point.
+
+This new visitors can be used on any widget and tree node. It replaces the former IActionVisitor, ITreeVisitor and IFormFieldVisitor. The `org.eclipse.scout.rt.client.ui.IWidget` interface also declares various overloads accepting `java.util.function.Consumer`, `java.util.function.Function` and the new `org.eclipse.scout.rt.platform.util.visitor.IDepthFirstTreeVisitor` and `org.eclipse.scout.rt.platform.util.visitor.IBreadthFirstTreeVisitor`. Depending on how much control and data you need for your visitor the matching type can be used.
+
+Until now only pre-order visitors have been available on these items. Therefore the migration to the new visitor takes the following steps:
+
+* `visitFields` or `acceptVisitor` method on IFormField or `IAction` have been replaced with the `visit` method on IWidget.
+* The new visitor allows to control how visiting should be continued in a more detailed level. Instead returning `true` or `false` to indicate if visiting should continue all options as defined in `org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult` are available. A return value of `TreeVisitResult.CONTINUE` corresponds to `true` and a return value of `false` can be migrated to `TreeVisitResult.TERMINATE`.
+* If using the `IDepthFirstTreeVisitor` the method `preVisit` must be overridden to have the same functionality as before. Consider also using the `DepthFirstTreeVisitorAdapter` instead of directly using the interface.
+* If the visitor should only be called for a certain type of input element and just continue visiting for all others the overloads defining a type filter can be used for widgets. Using this instanceof checks and type casts are often not necessary anymore.
+* There is a `org.eclipse.scout.rt.platform.util.visitor.CollectingVisitor` class to convert the items of a tree to a list.
+* IFormField.visitParents takes a `java.util.function.Predicate<IFormField>` instead of an IFormFieldVisitor.
+
+
+== New convenience methods for setMandatory, setStatusVisible, setFieldStyle, setDisabledStyle on IFormField
+
+There are new methods for setting mandatory-state, status-visibility, field-style and disabled-style that allow to specify if child form fields should be changed as well.
+So if you have overridden one of these methods in your code, please override the new one instead. The method now takes an additional boolean flag to indicate if children should be processed as well.
+
 
 === Config Properties
 

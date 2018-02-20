@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -766,13 +767,11 @@ public class ContextMenuForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
-        getMainBox().visitFields((field, level, fieldIndex) -> {
+        getMainBox().visit(field -> {
           if (field instanceof IValueField<?>) {
             field.setEnabled(!isSelected(), true, true);
           }
-          return true;
-        });
-//        getFieldByClass(CountrySmartField.class).setEnabled(isSelected());
+        }, IFormField.class);
       }
 
       @Order(10)
