@@ -17,7 +17,7 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/6.1.x%2E%2E
 
 The following changes were made after the initial 7.0 release (Eclipse Oxygen release). The following notes relate to a _service release_.
 
-==== Oxygen.3 (7.0.300) Release expected on March 21, 2018
+==== Oxygen.3 (7.0.300) Release Expected on March 21, 2018
 
 {NotReleasedWarning}
 
@@ -83,7 +83,6 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------
 == Upgrade to jQuery 3
 
 We upgraded from jQuery 2.1.4 to jQuery 3.2.1. The new version contains a lot of improvements, including performance optimizations for animations and event handling. It also allowed us to remove some code which is now included in jQuery directly (e.g. addClassSVG, removeClassSVG, hasClassSVG).
@@ -212,6 +211,7 @@ Migrating from `ISmartField` to `ISmartField2` should be simple in most cases, s
 Note: With 7.1 the old smart field will be deleted and replaced by the new smart field `ISmartField2`, additionally in 7.1 `ISmartField2` will be renamed to `ISmartField` again. When you start a new Scout project with this release you should use `ISmartField2`.
 
 == Time Picker for Date Field (since 7.0.100)
+
 The date picker has been there for a long time and provides a convenient way to pick a date. To enter a time however, you had to use the keyboard. These days are now gone because with this service release a time picker has been added. It shows the hours from 0 to 23 and the commonly used minutes. The resolution is configurable, so you could change to 00, 15, 30, 45 instead of 00, 30 if you want. You can still use your keyboard, though.
 
 [[img-timepicker, Figure 000]]
@@ -219,6 +219,7 @@ The date picker has been there for a long time and provides a convenient way to 
 image::{imgsdir}/timepicker.png[]
 
 == Clear Icon for Input Fields (since 7.0.100)
+
 Every input field now has a clear icon. It is active while the field has the focus. This makes it easy to clear the input with one click.
 
 [[img-clearable, Figure 000]]
@@ -226,6 +227,7 @@ Every input field now has a clear icon. It is active while the field has the foc
 image::{imgsdir}/clearable.png[]
 
 == Improved Touch Popups (since 7.0.100)
+
 When using the smart field or date field on a mobile phone or tablet, the popup will be shown in a different way to make it easier to pick a value with the finger. This existing behavior has been improved so that it is now easier and more intuitive to clear the value and close the popup.
 
 [[img-date-picker-touch-popup, Figure 000]]
@@ -233,6 +235,7 @@ When using the smart field or date field on a mobile phone or tablet, the popup 
 image::{imgsdir}/date_picker_touch_popup.png[]
 
 == Sorting of Filter Table (since 7.0.100)
+
 The column header menu shows a list of all the different values which occur in the cells of that column. If one of these values is selected the table will be filtered and will only show rows which contain that value. These values are sorted alphabetically. Because sometimes it might be useful to only display the rows which contain the most used values, a possibility was added to sort the values by the number of occurrences. Just press the icon on the left of the 'All' button.
 
 [[img-table-header-menu-filter-sorting, Figure 000]]
@@ -240,15 +243,19 @@ The column header menu shows a list of all the different values which occur in t
 image::{imgsdir}/table_header_menu_filter_sorting.png[]
 
 == Auto Optimize Column Width (since 7.0.100)
+
 The column has a property called `autoOptimizeWidth`. This property has been there for a while but has not been interpreted yet. With 7.0.100 the support for this property has been implemented. If you set it to true on a specific column, the column will always be as width as its content. If not set, the user can still optimize the width manually by double clicking the separator between two columns.
 
 == New Property Auto Optimize Column Max Width (since 7.0.300)
+
 The new property `autoOptimizeMaxWidth` determines the maximum width a column will grow to when it is auto optimized when `autoOptimizeWidth` is set to true. The user may still manually make columns wider by dragging or double-clicking the column separators.
 
 == New Property for Request Timeout (since 7.0.100)
-Every ui request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property `scout.ui.model.jobs.await.timeout` (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.
+
+Every UI request schedules a model job to process the user interaction and waits for this job and other scheduled model jobs to complete. During that time the ui is blocked but the user may abort the processing manually by clicking cancel. If the user does not cancel it and it takes too long to complete the model jobs are now aborted automatically to free resources. The default is set to 1 hour but you may configure it by using the new property `scout.ui.model.jobs.await.timeout` (the unit is seconds). After the abortion a message box is displayed to the user saying the request timed out.
 
 == Minor Changes for HTTP Abstraction Properties (since 7.0.100)
+
 * Existing configuration property classes have been bundled in two `org.eclipse.scout.rt.shared.http.HttpConfigurationProperties` and `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnelConfigurationProperties` classes.
 * The configuration property `org.eclipse.scout.rt.servicetunnel.apache_connection_time_to_live` has been removed (`scout.http.apache_connection_time_to_live` is used instead).
 * New configuration properties have been added:
@@ -261,7 +268,8 @@ The position of the desktop splitter position (between the navigation and the be
 
 In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
 
-== No Value in JS for String Fields with Masked Input (since 7.0.300)
+== No Value in JS for String Fields With Masked Input (since 7.0.300)
+
 A string field with masked input did send the value from the model to the UI layer allowing to read possibly sensitive data via JS.
 The value is not sent to the UI layer anymore resulting in a slightly different behavior. From the model perspective nothing changed.
 
@@ -270,6 +278,7 @@ The value is not sent to the UI layer anymore resulting in a slightly different 
 * When text is typed into the input field, the display text represents the real display text (but is still masked).
 
 == Menus in the Status Tooltip of a Form Field (since 7.0.300)
+
 A form field can have menus which can be displayed by clicking the ellipsis icon on the right side of the field. A form field can also have a tooltip which can be displayed by clicking the info icon on the right side of the field. In fact, the ellipsis icon and the status icon are at the same position and called status icon. It is called like this because it even has a third purpose: to display the error status. Because this icon has multiple purposes it has to be defined what happens when the icon is clicked. Until now, if an error status was shown, the menus were not available.
 
 Until Scout 6.1. the problem was the same for tooltips. One had to decide which was more important: tooltip or menus. With Scout 6.1 a combination has been introduced: the tooltip now also shows the menus. But the problem still existed for error status. The reason is: not every menu makes sense when displayed along with the error status message. But there are menus which make sense and should be displayed. And this case is now supported.

@@ -17,14 +17,25 @@ https://eclipsescout.github.io/6.1/migration-guide.html
 
 The following changes were made after the initial 7.0 release (Eclipse Oxygen release). Additionally follow these instructions when updating to a _service release_.
 
+==== Oxygen.3 (7.0.300) Release Expected on March 21, 2018
+
+{NotReleasedWarning}
+
+* <<Deprecated Property "focusable" from IFormField, AbstractFormField (since 7.0.300)>>
+* <<Charts: Fixed Typo in Function Name (since 7.0.300)>>
+
+==== Oxygen.2 (7.0.200) Released on December 20, 2017
+
+&mdash;
+
 ==== Oxygen.1 (7.0.100) Released on September 27, 2017
 
 * <<Graphic Utility Naming (since 7.0.100)>>
-* <<Focus and RequestFocus merged (since 7.0.100)>>
+* <<Focus and RequestFocus Merged (since 7.0.100)>>
 * <<ISmartField(2) (since 7.0.100)>>
-* <<Table Column Index now optional (since 7.0.100)>>
-* <<AbstractLifecycle and FormLifecycle simplified (since 7.0.100)>>
-* <<GroupBox: mainBox flag now set automatically (since 7.0.100)>>
+* <<Table Column Index Now Optional (since 7.0.100)>>
+* <<AbstractLifecycle and FormLifecycle Simplified (since 7.0.100)>>
+* <<GroupBox: "mainBox" Flag Now Set Automatically (since 7.0.100)>>
 
 ////
   =============================================================================
@@ -78,24 +89,29 @@ Because this construct no longer works, the corresponding properties and methods
 * [line-through]#`AbstractAction: m_enabledProcessingAction`#
 * [line-through]#`IAction/AbstractAction: isEnabledProcessingAction`#
 
-*Migration*: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
+_Migration_: Delete any code that references any of the removed methods. There is not replacement, as the whole concept became disfunctional with the HTML UI. To prevent accidental double clicks, use the new `getConfiguredPreventDefault()` property. If for very rare and special cases such a flag is required, it has to be implemented manually by overriding `AbstractButton.doClick()` and `AbstractAction.doAction()`.
 
 === Added HTTP Abstraction Layer: Google HTTP Client
 
 If your application previously used a custom (not provided by Scout) implementation of the `org.eclipse.scout.rt.shared.servicetunnel.http.HttpServiceTunnel` class a migration might be necessary. For the service tunnel and a few other HTTP usages a new HTTP abstraction layer (Google HTTP Client 1.22) was introduced to support different low-level HTTP libraries (previously just the `java.net.HttpURLConnection` was used). The new default low-level HTTP library is the Apache HTTP Client 4.5.3, more details are available in the release notes. As the `java.net` connections are not used anymore by default the MultiSessionCookieStore (for `java.net` connections) is not installed by default (could be installed manually).
 
-For the `HttpServiceTunnel`class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
-`HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`, also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter. The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
+For the `HttpServiceTunnel` class the method `URLConnection createURLConnection(ServiceTunnelRequest call, byte[] callData)` has been replaced by
+`HttpResponse executeRequest(ServiceTunnelRequest call, byte[] callData)`.
+
+Also several methods (`addCustomHeaders`, `addSignatureHeader`, `addCorrelationId`, `createAuthToken` and `interceptHttpResponse`) signatures have changed their `URLConnection` parameter to either a `HttpRequest` or `HttpResponse` parameter.
+
+The same migration applies for subclasses of the `org.eclipse.scout.rt.server.commons.servlet.HttpProxy` class.
 
 === IGroupBox: Changed Behavior of "getGridColumnCount"
 
 The function `getGridColumnCount()` returned the calculated column count of the grid. This has been changed so that it returns the configured one which is not necessarily the same.
 
-Example: the default of the property `gridColumnCount` is -1 which will typically result in 2 columns.
+Example: the default of the property `gridColumnCount` is _-1_ which will typically result in 2 columns.
 
 So in case you used this method, you should consider calling `getFieldGrid().getGridColumnCount()` instead.
 
 === ScoutTexts
+
 Removed support for session scope specific `ScoutTexts` instances because support of scoped services was removed in Scout without OSGi (version >= 5.0).
 
 Changes:
@@ -105,42 +121,49 @@ Changes:
 
 Deprecations (methods will be removed in P-release):
 
-* `ScoutTexts.get` -> `TEXTS.get`
-* `ScoutTexts.getInstance()` -> `BEANS.get(ScoutTexts.class)`
-* `ISession.getTexts()` -> `BEANS.get(ScoutTexts.class)`
-* `AbstractSqlService.getConfiguredNlsProvider()` -> method is not used anymore (returns `null`)
-* `AbstractSqlService.getNlsProvider()` -> method is not used anymore (returns `null`)
+|===
+| Deprecated method | Comments
 
-== ISmartField(2) (since 7.0.100)
+| `ScoutTexts.get` |Replacement: `TEXTS.get`
+| `ScoutTexts.getInstance()` |Replacement: `BEANS.get(ScoutTexts.class)`
+| `ISession.getTexts()` |Replacement: `BEANS.get(ScoutTexts.class)`
+| `AbstractSqlService.getConfiguredNlsProvider()` |Method is not used anymore (returns `null`)
+| `AbstractSqlService.getNlsProvider()` |Method is not used anymore (returns `null`)
+
+|===
+
+=== ISmartField(2) (since 7.0.100)
 
 The following methods have been removed from `ISmartField(2)`:
 
-* `String getBrowseNewText()`
-* `setBrowseNewText(String s)`
-* `void doBrowseNew(String newText)`
+* [line-through]#`String getBrowseNewText()`#
+* [line-through]#`setBrowseNewText(String s)`#
+* [line-through]#`void doBrowseNew(String newText)`#
 
 The following methods have been removed from `AbstractSmartField(2)`:
 
-* `protected ILookupRow<VALUE> execBrowseNew(String searchText)`
-* `protected String getConfiguredBrowseNewText()`
+* [line-through]#`protected ILookupRow<VALUE> execBrowseNew(String searchText)`#
+* [line-through]#`protected String getConfiguredBrowseNewText()`#
 
 Note: with 7.0 these methods still exist on the old smart field `ISmartField` but are marked as deprecated.
 
-== Deprecated property `focusable` from IFormField, AbstractFormField
-Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated all methods from the interface/class FormField. The following methods/properties will be removed with Scout 7.1:
+=== Deprecated Property "focusable" From IFormField, AbstractFormField (since 7.0.300)
 
-* boolean IFormField#isFocusable()
-* void IFormField#setFocusable(boolean f)
-* boolean IFormField#PROP_FOCUSABLE
-* boolean AbstractFormField#getConfiguredFocusable()
-* class AbstractNonFocusableButton
-* class AbstractNonFocusableRadioButton
+Since the new Html UI was introduced with Scout 5.2 the property `focusable` had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a _LabelField_ is never focusable, a normal _StringField_ is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated the related code and plan to remove it with the following release.
+
+The following methods/properties will be removed with Scout 7.1:
+
+* Method `boolean IFormField#isFocusable()`
+* Method `void IFormField#setFocusable(boolean f)`
+* Field `boolean IFormField#PROP_FOCUSABLE`
+* Method `boolean AbstractFormField#getConfiguredFocusable()`
+* Class `AbstractNonFocusableButton`
+* Class `AbstractNonFocusableRadioButton`
 
 You should no longer use these methods. Since there will be no replacement in later Scout releases, you should delete code that uses these methods/properties.
 
 // ^^^
 // Insert descriptions of Java API changes here
-
 
 ////
   =============================================================================
@@ -151,12 +174,14 @@ You should no longer use these methods. Since there will be no replacement in la
 == API Changes (JavaScript)
 
 === render()
+
 The parameter `$parent` has been removed from the `_render` method because `this.$parent` is available for every widget. There is no need to have a parameter `$parent` which points to the same variable. Use `this.$parent` instead.
 
 Also `$parent` is now optional when calling widget.render(). The `$parent` may be resolved using `this.parent`. No need to always write
 `widget.render(this.$container)` anymore, instead just write `widget.render()` if the `$container` of the `parent` should be used as `$parent`.
 
 === Promises
+
 With jQuery 3 the promise API is now Promises/A+ compliant. This means you may need to adjust your code if you use promises.
 
 We noticed the following effects:
@@ -172,9 +197,13 @@ readability.
 See also https://jquery.com/upgrade-guide/3.0/ for details.
 
 === Removed addClassSVG, removeClassSVG, attrSVG, removeAttrSVG
+
 These functions are now supported by jQuery directly. Just use `addClass`, `removeClass`, `attr` and `removeAttr`.
 
+_Migration:_ Replace all function calls in your code by the corresponding alternative (see above).
+
 === Property Change Event
+
 The property change event has been simplified.
 
 The event had 3 properties:
@@ -196,9 +225,11 @@ Now, with 7.0, the property change event has the following properties:
 This makes handling the event easier. Check your propertyChange event handlers and adjust them accordingly.
 
 === Logical Grid Validation
+
 Automatic Grid Data Validation has been introduced. This means there is no need to manually create a Logical Grid (e.g. `VerticalSmartGroupBoxBodyGrid` or `HorizontalGroupBoxBodyGrid` and validate it anymore, this will be done by the `LogicalGridLayout` itself. Also, check your JSON files, remove any explicit x, y grid definitions because they will be calculated by the `LogicalGrid`. Make sure to always use the property `gridDataHints` instead of `gridData`.
 
 === Event Naming
+
 The naming of the events has been harmonized to conform with the event naming guide. This is only relevant, if you attached listeners using JavaScript or if you do some kind of load testing using the events in the requests.
 
 The following changes have been made:
@@ -246,6 +277,7 @@ The following changes have been made:
 
 
 === Graphic Utility Naming (since 7.0.100)
+
 The naming of the functions of `scout.graphics` and `scout.HtmlComponent` has been harmonized. Also, they now consistently use an `options` parameter.
 
 The following changes have been made:
@@ -268,13 +300,16 @@ scout.HtmlComponent:
 
 The old methods still exists but are marked as deprecated. Note that `getBounds` does not include margins anymore, and `bounds` and `offsetBounds` now take an `options` object instead of 2 boolean parameters.
 
-=== Focus and RequestFocus merged (since 7.0.100)
+=== Focus and RequestFocus Merged (since 7.0.100)
+
 `scout.Widget` had a function called `requestFocus`. Some concrete widgets provided a function named `focus`. Because there is no need to have two methods doing the same, these functions have been merged. `scout.Widget` now provides a function `focus`. `RequestFocus` has been deprecated.
 
-=== Table Column Index now optional (since 7.0.100)
+=== Table Column Index Now Optional (since 7.0.100)
+
 When creating a table using JavaScript and `scout.create('Table')`, specifying the index for each column has been necessary. This has changed, the column indices are now set automatically based on the order of the columns. Just remove the index settings from your JSON files.
 
-=== AbstractLifecycle and FormLifecycle simplified (since 7.0.100)
+=== AbstractLifecycle and FormLifecycle Simplified (since 7.0.100)
+
 The life cycle has been reworked and simplified:
 
 * Renamed `AbstractLifecycle` to `Lifecycle`.
@@ -286,14 +321,15 @@ The life cycle has been reworked and simplified:
 * Removed the do prefix from all the life cycle functions.
 * Added system menus (`OkMenu`, `CancelMenu` etc.).
 
-To migrate: check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.
+_Migration:_ Check your forms, remove the life cycle, use the new callback functions and system menus if needed, adjust your custom life cycles.
 
-=== GroupBox: mainBox flag now set automatically (since 7.0.100)
-Every form needs a root group box. That box has the flag mainBox set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the mainBox flags.
+=== GroupBox: "mainBox" Flag Now Set Automatically (since 7.0.100)
 
-== Charts: fixed typo in function name
-Incorrect function name `handelToBigLabels` in AbstractGridChartRenderer.js was renamed to `handleTooBigLabels`. You must apply this renaming to your code if this function is called or overridden.
+Every form needs a root group box. That box has the flag `mainBox` set to true. Until now, this has to be set explicitly. From now on, you can omit it. To migrate just remove the explicit `mainBox` flags.
 
+=== Charts: Fixed Typo in Function Name (since 7.0.300)
+
+Incorrect function name `handelToBigLabels` in _AbstractGridChartRenderer.js_ was renamed to `handleTooBigLabels`. You must apply this renaming to your code if this function is called or overridden.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
