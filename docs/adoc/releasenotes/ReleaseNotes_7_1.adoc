@@ -19,10 +19,9 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E
 
 The following changes were made after the initial 7.1 release (Eclipse Photon release). The following notes relate to a _service release_.
 
-==== Photon.1 (7.1.100) Release expected on September, 2018
+==== Photon.1 (7.1.100) Release Expected on September, 2018
 
 {NotReleasedWarning}
-
 
 === Obtaining the Latest Version
 
@@ -63,14 +62,11 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------
-
 == Java 8 required
 
-The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a Java 8 runtime is required.
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a *Java 8 runtime is required*.
 
 TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
-
 
 == New SDK Feature in Eclipse: Search for missing NLS keys
 
@@ -81,8 +77,8 @@ The search also takes the scope of each NLS key into account. So that the key is
 
 Reported false positives can be suppressed using the following comment at the end of the corresponding line: `NO-NLS-CHECK`. Matches on that line are then not reported in future searches anymore.
 
-
 == Config Properties
+
 === Descriptions
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
 
@@ -100,22 +96,33 @@ The concrete implementation `org.eclipse.scout.rt.platform.config.ConfigProperty
 In case it does a info message (warn in development mode) will be logged but platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
 
-== GroupBox enhancements
+== GroupBox Enhancements
+
 === Layout Configuration
 It is now possible to adjust the parameters of how the group box will be layouted. The following parameters may be set:
 
-* hgap: the horizontal gap in pixels to use between two logical grid columns
-* vgap: the vertical gap in pixels to use between two logical grid rows
-* columnWidth: the width in pixels to use for a grid column
-* rowHeight: the height in pixels to use for a grid row
-* minWidth: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
+hgap:: the horizontal gap in pixels to use between two logical grid columns
+vgap:: the vertical gap in pixels to use between two logical grid rows
+columnWidth:: the width in pixels to use for a grid column
+rowHeight:: the height in pixels to use for a grid row
+minWidth:: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
 
-These values may be set using `getConfiguredBodyLayoutConfig`.
+These values may be set using `getConfiguredBodyLayoutConfig()`.
+
+[[sec-gb-sublabel]]
+=== Sublabel
+GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
 
 == Introducing Widget.java
+
 On JavaScript side, there has been a class `Widget.js` for a long time now. With this release the counterpart `Widget.java` has been added. This gives all existing widgets like `FormField`, `Form`, `MessageBox`, `Menu` etc. a new common base class. It also helps creating widgets which aren't necessarily form fields.
 
+== Widget.js: New Argument for clone()
+
+The _clone()_ function of any widget got an `options` parameter. The options define what properties and events are synchonized between the widget and its clone.
+
 == New Widget 'Tiles'
+
 The new `Tiles` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
 
 A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/7.1.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
@@ -131,6 +138,7 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 image::{imgsdir}/tiles.png[]
 
 == New Widget 'Accordion'
+
 The `Accordion` displays several collapsible `Group` s. The default behavior is to collapse every other group if one group is expanded. Because that is not in any case desired, the behavior may be disabled by setting the property `exclusiveExpand` to false.
 
 The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `Tiles`. Because having tiles in an accordion is a typical use case, there is a widget called `TilesAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group.
@@ -143,7 +151,8 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#acc
 .Accordion
 image::{imgsdir}/accordion.png[]
 
-== Menu, Menubar enhancements
+== Menu, Menubar Enhancements
+
 The menubar supports form field menu items (`FormFieldMenu`). On the model side extend `AbstractFormFieldMenu` with a form field as an inner class to use a form field menu in any menu supporting environment.
 [[img-accordion]]
 .Menubar with form fields
@@ -151,25 +160,21 @@ image::{imgsdir}/FormFieldMenu.png[]
 
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackabel menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackabel menu in the menubar.
 
-== Tabbox enhancements
+== Tabbox Enhancements
+
 * The menubar of a tabbox considers the menu alignments _left_ or _right_. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
-* TabItems got a `sublabel` property with is displayed in a very small font below the title (see also <<sec-gb-enhancements>>).
+* TabItems got a `sublabel` property with is displayed in a very small font below the title (see also <<sec-gb-sublabel>>).
 * The marker of the selected tab is now animated and follows the user or model selection.
 * Several bugfixes of pixel issues due to zoom levels.
 
-[[sec-gb-enhancements]]
-== GroupBox enhancements
-GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
+== Desktop Splitter Position Remembered Across sessions
 
-== JS Widget clone
-The clone function of any widget got an `options` parameter. The options define what properties and events are synchonized between the widget and its clone.
-
-== Desktop splitter position remembered across sessions
 The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
 
 In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
 
-== ImageField: support for SVG images and image URLs
+== ImageField: Support for SVG Images and Image URLs
+
 It's now possible to use SVG images in the same way as bitmap images. Simply put the .svg file in the `/icons` folder of the client module and reference the SVG image in any widget that supports the `iconId` property. Example:
 
 [source,java]
@@ -182,11 +187,12 @@ protected String getConfiguredIconId() {
 
 Additionally you can now reference an image by URL, for instance an image hosted on an external server. Use the property ´imageUrl` of the AbstractImageField to reference the image. Note: the AbstractImageField defines a priority for which one of the three image properties is used to render the image in the browser:
 
-1. image (Binary resource)
-2. imageUrl
-3. imageId
+1. _image_ (Binary resource)
+2. _imageUrl_
+3. _imageId_
 
-== Dynamic fields
+== Dynamic Fields
+
 It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.
 
 The Java API orders the added fields considering the `order` member.
@@ -203,7 +209,11 @@ API:
 - Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
 ====
 
-
 == IUiServletRequestHandler
+
 UI Servlet request handler now supports all HTTP methods and not only GET and POST.
 When using `AbstractUiServletRequestHandler` no migration should be required, see migration guide for further information.
+
+== Automatic Preloading of Web Fonts
+
+To prevent incorrect measurements or the so-called "FOUT effect" (Flash Of Unstyled Text), Scout tries to preload all necessary web font files (*.woff) before rendering the application. To make it easier for projects to add theme-dependent fonts, the font preloader has been improved. The list of fonts to preload is now detected automatically by inspecting the document's style sheet (_@font-face_ rules). It's no longer necessary to manually list all fonts in the bootstrap argument of `scout.App` (see migration guide).

@@ -19,7 +19,7 @@ https://eclipsescout.github.io/7.0/migration-guide.html
 
 The following changes were made after the initial 7.1 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
 
-==== Photon.1 (7.1.100) Release expected on September, 2018
+==== Photon.1 (7.1.100) Release Expected on September, 2018
 
 {NotReleasedWarning}
 
@@ -33,79 +33,100 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 == API Changes (Java)
 
 === CalendarComponent
+
 Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.client.ui.basic.calendar.CalendarComponent`.
-Migration: Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
-== Java 8 required
+_Migration:_ Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
-The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed:  Starting with Eclipse Scout 7.1, a Java 8 runtime is required.
+=== Java 8 Required
 
-Please note that the Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a *Java 8 runtime is required*.
 
-To reflect this change some existing Scout classes have been migrated to the newly available Java 8 classes:
+TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
 
-`org.eclipse.scout.rt.platform.filter.IFilter` replaced with `java.util.function.Predicate`.
+To reflect this change, some existing Scout classes have been migrated to the newly available Java 8 classes:
 
-`org.eclipse.scout.rt.platform.filter.AlwaysFilter` replaced with `java.util.function.Predicate` e.g. `a -> true`.
+|===
+|Old Scout class: |Replaced with Java 8 equivalent:
 
-`org.eclipse.scout.rt.platform.filter.NotFilter` replaced with `java.util.function.Predicate#negate`.
+|`org.eclipse.scout.rt.platform.filter.IFilter` | `java.util.function.Predicate`
+|`org.eclipse.scout.rt.platform.filter.AlwaysFilter` | `java.util.function.Predicate` e.g. `a -> true`
+|`org.eclipse.scout.rt.platform.filter.NotFilter` |`java.util.function.Predicate#negate`
+|`org.eclipse.scout.rt.platform.filter.OrFilter` |`java.util.function.Predicate#or`
+|`org.eclipse.scout.rt.platform.util.concurrent.IConsumer` |`java.util.function.Consumer`
+|`org.eclipse.scout.rt.platform.util.concurrent.IFunction` |`java.util.function.Function`
+|`org.eclipse.scout.rt.platform.util.concurrent.IBiConsumer` |`java.util.function.BiConsumer`
+|`org.eclipse.scout.rt.platform.util.concurrent.IBiFunction` |`java.util.function.BiFunction`
+|===
 
-`org.eclipse.scout.rt.platform.filter.OrFilter` replaced with `java.util.function.Predicate#or`.
+=== Removed Constants/Methods From ClientUIPreferences
 
-`org.eclipse.scout.rt.platform.util.concurrent.IConsumer` replaced with `java.util.function.Consumer`.
+Since the new Html UI was introduced with Scout 5.2 some constants and methods in `ClientUIPreferences` had no effect on the UI anymore. Since Scout is now a browser application we don't have any control over the application window anymore. The form bounds are stored in the local browser storage thus they're not required in the Java model anymore.
 
-`org.eclipse.scout.rt.platform.util.concurrent.IFunction` replaced with `java.util.function.Function`.
+The following constants/methods were dropped:
 
-`org.eclipse.scout.rt.platform.util.concurrent.IBiConsumer` replaced with `java.util.function.BiConsumer`.
+* [line-through]#`APPLICATION_WINDOW_MAXIMIZED`#
+* [line-through]#`APPLICATION_WINDOW_BOUNDS`#
+* [line-through]#`FORM_BOUNDS`#
+* [line-through]#`getFormBounds()`#
+* [line-through]#`setFormBounds(IForm form, Rectangle bounds)`#
+* [line-through]#`getApplicationWindowMaximized()`#
+* [line-through]#`setApplicationWindowPreferences(BoundsSpec r, boolean maximized)`#
 
-`org.eclipse.scout.rt.platform.util.concurrent.IBiFunction` replaced with `java.util.function.BiFunction`.
+=== Removed Property "focusable" From IFormField, AbstractFormField
 
+Since the new Html UI was introduced with Scout 5.2 the property `focusable` had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a _LabelField_ is never focusable, a normal _StringField_ is always focusable, as long as it is enabled. Since the property was rarely used, we removed the related code:
 
-== Removed constants/methods from `ClientUIPreferences`
-Since the new Html UI was introduced with Scout 5.2 these constants and methods had no effect on the UI anymore. Since Scout is now a browser application we don't have any control over the application window anymore. The form-bounds are stored in the local browser storage thus they're not required in the Java model anymore. Removed constants/methods:
+* Method [line-through]#`boolean IFormField#isFocusable()`#
+* Method [line-through]#`void IFormField#setFocusable(boolean f)`#
+* Field [line-through]#`boolean IFormField#PROP_FOCUSABLE`#
+* Method [line-through]#`boolean AbstractFormField#getConfiguredFocusable()`#
+* Class [line-through]#`AbstractNonFocusableButton`#
+* Class [line-through]#`AbstractNonFocusableRadioButton`#
 
-* APPLICATION_WINDOW_MAXIMIZED
-* APPLICATION_WINDOW_BOUNDS
-* FORM_BOUNDS
-* getFormBounds()
-* setFormBounds(IForm form, Rectangle bounds)
-* getApplicationWindowMaximized()
-* setApplicationWindowPreferences(BoundsSpec r, boolean maximized)
+_Migration:_ Since there is no replacement for the `focusable` property, remove all code that uses one of the methods/properties listed above.
 
-== Removed property `focusable` from IFormField, AbstractFormField
-Since the new Html UI was introduced with Scout 5.2 this property had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a LabelField is never focusable, a normal StringField is always focusable, as long as it is enabled. Since the property was rarely used, we removed all methods from the interface/class FormField. Removed methods/properties:
+=== Removal of Old "SmartField", Renaming of "SmartField2" Back to "SmartField"
 
-* boolean IFormField#isFocusable()
-* void IFormField#setFocusable(boolean f)
-* boolean IFormField#PROP_FOCUSABLE
-* boolean AbstractFormField#getConfiguredFocusable()
-* class AbstractNonFocusableButton
-* class AbstractNonFocusableRadioButton
+In Scout 7.0 a new smart field implementation named _SmartField2_ was created. The old implementation was still available, but its use was discouraged. With Scout 7.1 the old _SmartField_ implementation was finally dropped. The new implementation _SmartField2_ was renamed back to _SmartField_.
 
-Since there is no replacement for the focusable property, remove all code that uses one of the methods/properties listed above.
+The following table lists the different names used in the past Scout releases. (The naming applies to all associated files, such as interfaces, abstract field classes, Java packages and JavaScript and LESS files.)
 
-== ISmartField2 replaced old ISmartField
-In Scout 7.0 the new SmartField implementation used the package and name `smartfield2.SmartField2`. With Scout 7.1 the new SmartField replaced the old SmartField completely, and thus was moved to and renamed to `smartfield.SmartField`. If you have already used the new SmartField in Scout 7.0 you must move / rename all references to these classes.
+|===
+|Scout \<= 6.1 |Scout 7.0 |Scout >= 7.1
 
-== IContentAssistField classes and interfaces removed
+|SmartField _(old implementation)_ |SmartField _(old implementation)_ |&mdash;
+|&mdash; |SmartField2 _(new implementation)_ |SmartField _(new implementation)_
+|===
+
+_Migration:_
+
+* If you have already used the new _SmartField2_ in Scout 7.0 you must move / rename all references back to the (new) _SmartField_.
+* If you are migrating from an older Scout version (\<= 6.1), you _might_ have to adjust your code to the new implementation. See the corresponding 7.0 migration guide.
+
+=== IContentAssistField Classes and Interfaces Removed
+
 The base class and interfaces of the old SmartField implementation was IContentAssistField. With the new SmartField implementation this interfaces and all classes containing the word "ContentAssist" in their name, have been either removed or renamed to "SmartField". If your code references one of these classes you should simply try to rename all references. Since the API of the new SmartField is almost the same as the old, this should work and should cause no or few changes in your code. The following classes have been removed without replacement:
 
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractMixedSmartField
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldEvent
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldListener
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IMixedSmartField
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractMixedSmartField`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldEvent`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldListener`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.ContentAssistFieldTable`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.IMixedSmartField`#
 
-Since the new SmartImplementation does not have a proposal chooser model anymore these classes have also been removed. If you must have a special implementation of a proposal chooser, you must implement a proposal chooser in JavaScript (see: ProposalChooser.js), which renders the data / lookup-rows it receives from the server-side SmartField:
+Since the new SmartField implementation does not have a proposal chooser model anymore these classes have also been removed. If you must have a special implementation of a proposal chooser, you must implement a proposal chooser in JavaScript (see: _ProposalChooser.js_), which renders the data and lookup rows it receives from the server-side SmartField. The following classes have been removed without replacement:
 
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalChooser
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser
-* org.eclipse.scout.rt.client.ui.form.fields.smartfield.TreeProposalChooser
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalChooser`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooser`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.IProposalChooserProvider`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.TableProposalChooser`#
+* [line-through]#`org.eclipse.scout.rt.client.ui.form.fields.smartfield.TreeProposalChooser`#
 
-== GroupBox: moved minWidthInPixel
-The property `minWidthInPixel` has been moved to the object `LogicalGridLayoutConfig`. Instead of using `getConfiguredMinWidthInPixel` you should now set the property as follows:
+=== GroupBox: Moved "minWidthInPixel"
+
+The property `minWidthInPixel` has been moved to _LogicalGridLayoutConfig_.
+
+_Migration:_ Instead of using `getConfiguredMinWidthInPixel` you should now set the property as follows:
 
 [source,java]
 ----
@@ -116,7 +137,7 @@ protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
 }
 ----
 
-== Adjusted Behavior of Widget Initialization
+=== Adjusted Behavior of Widget Initialization
 The goal was to harmonize all the init methods (`initField`, `initTile`, `initForm` etc.) and to make sure, `init()` is only executed once. This is important for dynamic widgets like accordion or tiles. These widgets initialize the newly added children by themselves so that the caller does not need to take care of it. For these cases it is important that `init()` is not called multiple times.
 
 But: there may be cases which require `init()` to be called multiple times, like reseting a search form. For such cases, `reinit()` has to be used from now on. Also, after the widget is disposed, `init()` may be called again. So remember: `execInit` may be called more than once in some circumstances. This is existing behavior!
@@ -124,37 +145,45 @@ But: there may be cases which require `init()` to be called multiple times, like
 We also renamed the initConfig guard of `IFormField` from `isInitialized` to `isInitDone` to make clear what initialization has been done. It has furthermore been moved to `AbstractWidget` so that individual widgets don't have to care about it and to use the same
 pattern as for `postInitConfig`, `init` and `dispose`.
 
-.This means the following for your code:
+_Migration:_
 
-If you used one of the deprecated methods (`initField`, `initAction` etc.), replace them with one of the following methods: `init`, `reinit` or `initInternal`. Use `init` if you created a field and need to initialize it. Use `reinit` if you explicitly want to reinitialize an already initialized field. Use `initInternal` if your custom widget overrides `initField`.
+If you used one of the deprecated methods (`initField`, `initAction` etc.), replace them with one of the following methods: `init`, `reinit` or `initInternal`.
 
-== GzipServletFilter
-Replaced `get_pattern` and `post_pattern` with `content_types`. If you set these init parameters in your web.xml, replace or remove them accordingly.
+* Use `init` if you created a field and need to initialize it.
+* Use `reinit` if you explicitly want to reinitialize an already initialized field.
+* Use `initInternal` if your custom widget overrides `initField`.
 
-== HttpCacheControl
-The parameter `pathInfo` has been removed from the method `HttpCacheControl.checkAndSetCacheHeaders` since it has no effect anymore.
+=== GzipServletFilter
 
-== HttpProxy
+Replaced init parameters `get_pattern` and `post_pattern` with `content_types`. If you set these init parameters in your web.xml, replace or remove them accordingly.
+
+=== HttpCacheControl
+
+The argument `pathInfo` has been removed from the method `HttpCacheControl.checkAndSetCacheHeaders` since it has no effect anymore.
+
+=== HttpProxy
+
 HTTP Proxy doesn't set cache control `no-chache` header anymore.
 
-== Config Properties
-=== Descriptions
+=== Config Properties
+
+==== Descriptions
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a description text. This description is stored in the new `description()` method.
 
 All properties must now implement this new method and return a description text of that property. The class `org.eclipse.scout.rt.platform.config.ConfigDescriptionExporter` can be used to export these descriptions. By default an AsciiDoctor exporter is included.
 
-=== Default value
+==== Default value
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a default value. The default value is stored in the `getDefaultValue()` method.
 
 The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigProperty<DATA_TYPE, RAW_TYPE>` to the interface. Therefore the visibility has changed from protected to public.
 
-=== Validation
+==== Validation
 The concreate implementation `org.eclipse.scout.rt.platform.config.ConfigPropertyValidator` which validates the configuration of `config.properties` files will also check if a configured value matches the default value.
 In case it does a info message (warn in development mode) will be logged but the platform will still start.
 
 To minimize configuration files such entries should be removed from `config.properties` files.
 
-== Renamed Config Property Keys
+==== Renamed Config Property Keys
 
 The following config property keys have been renamed (the old keys are no longer valid and must be renamed accordingly):
 
@@ -351,10 +380,9 @@ The following config property keys have been renamed (the old keys are no longer
 |`scout.ui.sessionStore.valueUnboundMaxWaitForWriteLock`
 |===
 
-== Default Values Validation
+== Customizing CSP Rules Via Config Property
 
-== New Config Property scout.cspDirective
-The new property `scout.cspDirective` makes subclassing and replacing the `ContentSecurityPolicy` class obsolete as you can configure all CSP settings with this property now. An example from the Scout Widgets application:
+The new config property `scout.cspDirective` makes subclassing and replacing the `ContentSecurityPolicy` class obsolete as you can configure all CSP settings with this property now. An example from the Scout Widgets application:
 
 [source, java]
 ----
@@ -370,7 +398,7 @@ public class WidgetsContentSecurityPolicy extends ContentSecurityPolicy {
 }
 ----
 
-This class was deleted and replaced by a config property in config.properties:
+This class was deleted and replaced by a config property in _config.properties_:
 
 [source, text]
 ----
@@ -379,7 +407,9 @@ scout.cspDirective[img-src]=*
 ----
 
 == IUiServletRequestHandler
+
 The methods `handleGet` and `handlePost` on `IUiServletRequestHandler` were replaced by the single method `handle`. This new method is called for all HTTP methods.
+
 To retrieve the HTTP method, call `getMethod` on `HttpServletRequest`. When using `AbstractUiServletRequestHandler` no migration should be required because `AbstractUiServletRequestHandler` delegates to the Java methods for the common HTTP methods `handleGet`, `handlePost`, `handlePut` and `handleDelete`.
 
 Methods `proxyGet` and `proxyPost` on `HttpProxy` are replaced by the common method `proxy`.
@@ -396,8 +426,9 @@ Methods `proxyGet` and `proxyPost` on `HttpProxy` are replaced by the common met
 
 == API Changes (JavaScript)
 
-=== Rename of Less Variables
-If you created a custom theme, you might have to adjust some less variables.
+=== Rename of LESS Variables
+
+If you created a custom theme, you might have to adjust some LESS variables.
 
 * Splitted `@group-title-padding-y` into `@group-box-title-padding-top` and `@group-box-title-padding-bottom`
 * Splitted `@tree-node-padding` into `@tree-node-padding-y`, `@tree-node-padding-left` and `@tree-node-padding-right`
@@ -418,6 +449,42 @@ If you created a custom theme, you might have to adjust some less variables.
 * Renamed `@logical-grid-height` to `@logical-grid-row-height`
 * Renamed `@applink-color` to `@link-color`
 
+=== Automatic Preloading of Web Fonts
+
+Scout can now detect the Web Fonts (*.woff files) to preload automatically. It's therefore no longer necessary to list the font names manually in the boostrap argument of `scout.App`.
+
+_Migration:_
+
+Remove the `fonts` property from the bootstrap parameter object passed to the _init()_ function of your Scout app.
+
+For example, the default _index.js_ file generated by the Scout "helloworld" archetype looks like this:
+
+[source, javascript]
+----
+$(document).ready(function() {
+  var app = new scout.RemoteApp();
+  app.init({
+    bootstrap: {
+      fonts: ['scoutIcons'] // <-- this property is no longer required
+    }
+  });
+});
+----
+
+If no other init options remain, the file can be simplified to:
+
+[source, javascript]
+----
+$(document).ready(function() {
+  var app = new scout.RemoteApp();
+  app.init();
+});
+----
+
+TIP: To find all files that need migration, search for the text `bootstrap: {` in all _*.js_ files in your workspace. The files are called _index.js_ by default and are usually located at _your.project.ui.html/src/main/resources/WebContent/res_.
+
+This migration is recommended but optional. Listing all fonts to preload manually still works. To disable font preloading entirely, set the _fonts_ bootstrap property to an empty array `[]`.
+
 // ^^^
 // Insert descriptions of JavaScript API changes here
 
@@ -429,7 +496,7 @@ If you created a custom theme, you might have to adjust some less variables.
 
 == Other Changes
 
-N/A
+&mdash;
 
 // ^^^
 // Insert descriptions of other important changes here
