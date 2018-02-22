@@ -129,9 +129,9 @@ A `Tile` directly extends `Widget` and is not much more than a `<div>` with the 
 
 In order to add the `TileGrid` to a form, you can use the class `TileField` which is basically a simple `FormField` wrapping the `TileGrid`. You cannot use the `TileGrid` directly because a `GroupBox` only accepts `FormField` s.
 
-A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilesfield.
+A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilefield.
 
-And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tiles.
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tilefield.
 
 [[img-tiles]]
 .TileGrid
@@ -143,9 +143,11 @@ The `Accordion` displays several collapsible `Group` s. The default behavior is 
 
 The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `TileGrid`. Because having tiles in an accordion is a typical use case, there is a widget called `TileAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group. It also takes care that selecting multiple tiles across the individual groups works as there were only one single `TileGrid`.
 
-A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield.
-
+A demo of the accordion may be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield. +
 And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#accordion.
+
+A demo of the tile accordion may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tileaccordionfield. +
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tileaccordion.
 
 [[img-accordion]]
 .Accordion
@@ -231,10 +233,12 @@ API:
 == Form Fields
 
 === New Field Style
-This release introduces a new field style called `alternative`. This is the new default style for every form field. The `classic` style is still available because it may be preferable in some circumstances, e.g. when used in a cell editor or on a form with background color like the search form. For these two cases the style is set to `classic` automatically but you can do it for your custom cases as well by setting the new property `FieldStyle`. If you want to revert your whole application to the classic style you can create an extension to `AbstractFormField` and change the default of the `FieldStyle` property.
+This release introduces a new field style called `alternative`. This is the new default style for every form field. The `classic` style is still available because it may be preferable in some circumstances, e.g. when used in a cell editor or on a form with background color like the search form. For these two cases the style is set to `classic` automatically but you can do it for your custom cases as well by setting the new property `FieldStyle`.
+
+If you want to revert your whole application to the classic style you can create an extension to `AbstractFormField` and change the default of the `FieldStyle` property. For Scout JS applications you can set the variable `scout.FormField.DEFAULT_FIELD_STYLE` to  `scout.FormField.FieldStyle.CLASSIC`;
 
 [[img-form-field-alternative-style]]
-.New alternative Field Style
+.New alternative field style
 image::{imgsdir}/formfield_alternative.png[]
 
 === Improved Accessibility
