@@ -121,27 +121,27 @@ On JavaScript side, there has been a class `Widget.js` for a long time now. With
 
 The _clone()_ function of any widget got an `options` parameter. The options define what properties and events are synchonized between the widget and its clone.
 
-== New Widget 'Tiles'
+== New Widget 'TileGrid'
 
-The new `Tiles` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
+The new `TileGrid` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
 
 A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/7.1.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
 
-In order to add the `Tiles` to a form, you can use the class `TilesField` which is basically a simple `FormField` wrapping the `Tiles`. You cannot use the `Tiles` directly because a `GroupBox` only accepts `FormField` s.
+In order to add the `TileGrid` to a form, you can use the class `TileField` which is basically a simple `FormField` wrapping the `TileGrid`. You cannot use the `TileGrid` directly because a `GroupBox` only accepts `FormField` s.
 
 A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilesfield.
 
 And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tiles.
 
 [[img-tiles]]
-.Tiles
+.TileGrid
 image::{imgsdir}/tiles.png[]
 
 == New Widget 'Accordion'
 
 The `Accordion` displays several collapsible `Group` s. The default behavior is to collapse every other group if one group is expanded. Because that is not in any case desired, the behavior may be disabled by setting the property `exclusiveExpand` to false.
 
-The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `Tiles`. Because having tiles in an accordion is a typical use case, there is a widget called `TilesAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group.
+The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `TileGrid`. Because having tiles in an accordion is a typical use case, there is a widget called `TileAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group. It also takes care that selecting multiple tiles across the individual groups works as there were only one single `TileGrid`.
 
 A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield.
 
@@ -153,19 +153,38 @@ image::{imgsdir}/accordion.png[]
 
 == Menu, Menubar Enhancements
 
-The menubar supports form field menu items (`FormFieldMenu`). On the model side extend `AbstractFormFieldMenu` with a form field as an inner class to use a form field menu in any menu supporting environment.
-[[img-accordion]]
+=== Form Field in Menu
+The menubar now supports form field menu items (`FormFieldMenu`). On the model side extend `AbstractFormFieldMenu` with a form field as an inner class to use a form field menu in any menu supporting environment.
+[[img-form-field-menu]]
 .Menubar with form fields
 image::{imgsdir}/FormFieldMenu.png[]
 
-The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackabel menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackabel menu in the menubar.
+=== New Property 'stackable'
+The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackable menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackable menu in the menubar.
 
 == Tabbox Enhancements
+=== Left Aligned Menu Items
+The menubar of a tabbox now considers the menu alignments _left_ and _right_. That means you can add menus directly on the right side of the last tab item (left aligned) or at the right side of the tab box header (right aligned).
 
-* The menubar of a tabbox considers the menu alignments _left_ or _right_. Menus in the menubar will be moved to an ellisis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is first all menus before the tabs will be collapsed from right to left.
-* TabItems got a `sublabel` property with is displayed in a very small font below the title (see also <<sec-gb-sublabel>>).
-* The marker of the selected tab is now animated and follows the user or model selection.
-* Several bugfixes of pixel issues due to zoom levels.
+[[img-tab-box-menus]]
+.Menus in a tab box header
+image::{imgsdir}/tabbox_menu_alignment.png[]
+
+=== Collapsible Menu Items
+Menus in the menubar will be moved to an ellipsis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is as following: all menus are collapsed first before the tabs will be collapsed from right to left.
+
+[[img-tab-box-ellipsis]]
+.Ellipsis menu for the tabs of a tab box
+image::{imgsdir}/tabbox_ellipsis.png[]
+
+=== Sublabel
+TabItems got a `sublabel` property which is displayed in a very small font below the title (see also <<sec-gb-sublabel>>).
+
+=== Animated Selection Marker
+The marker of the selected tab is now animated and follows the user or model selection.
+
+=== Optimized Zoom Behavior
+Several bugfixes of pixel issues due to zoom levels.
 
 == Desktop Splitter Position Remembered Across sessions
 
@@ -201,7 +220,7 @@ API:
 
 * TabBox.js `insertTabItem`, `deleteTabItem`, `setTabItems`
 * GroupBox.js `setFields`, `insertField`, `insertFieldBefore`, `deleteField`
-* ICompositeField.java `setFields` and the already existing `addField`, `removeField` methods which does not throw anymore an exception when a form is already initialized.
+* ICompositeField.java `setFields` and the already existing `addField`, `removeField` methods which don't throw an exception anymore when a form is already initialized.
 
 [NOTE]
 ====
@@ -209,7 +228,22 @@ API:
 - Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
 ====
 
-== IUiServletRequestHandler
+== Form Fields
+
+=== New Field Style
+This release introduces a new field style called `alternative`. This is the new default style for every form field. The `classic` style is still available because it may be preferable in some circumstances, e.g. when used in a cell editor or on a form with background color like the search form. For these two cases the style is set to `classic` automatically but you can do it for your custom cases as well by setting the new property `FieldStyle`. If you want to revert your whole application to the classic style you can create an extension to `AbstractFormField` and change the default of the `FieldStyle` property.
+
+[[img-form-field-alternative-style]]
+.New alternative Field Style
+image::{imgsdir}/formfield_alternative.png[]
+
+=== Improved Accessibility
+
+The label and the input are now linked by using `aria-labelledby`. This allows screen readers to read the label if an input is focused.
+
+Furthermore, clicking the label will now activate the field. This is especially helpful on mobile devices when the new alternative style is active, because the field boundaries are not obvious anymore.
+
+== Enhanced IUiServletRequestHandler
 
 UI Servlet request handler now supports all HTTP methods and not only GET and POST.
 When using `AbstractUiServletRequestHandler` no migration should be required, see migration guide for further information.
