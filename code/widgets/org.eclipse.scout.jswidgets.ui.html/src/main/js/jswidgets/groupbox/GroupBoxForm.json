@@ -79,8 +79,7 @@
                   {
                     "id": "ToggleVisibilityField",
                     "objectType": "SmartField",
-                    "label": "Toggle Visibility",
-                    "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+                    "label": "Toggle Visibility"
                   },
                   {
                     "id": "ToggleVisibilityButton",

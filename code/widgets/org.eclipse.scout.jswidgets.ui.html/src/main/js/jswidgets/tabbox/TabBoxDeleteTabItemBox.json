@@ -1,5 +1,5 @@
  {
-   "id": "jswidgets.TabBoxActionDeleteTabItem",
+   "id": "jswidgets.TabBoxDeleteTabItemBox",
    "type": "model",
    "objectType": "GroupBox",
    "label": "Delete Tab Item",
@@ -14,9 +14,10 @@
      {
        "id": "DeleteTabItem.DeleteButton",
        "objectType": "Button",
-       "label": "Delete Tab Item",
+       "label": "Delete",
        "enabled": false,
-       "processButton": false
+       "processButton": false,
+       "keyStroke": "ctrl-delete"
      }
    ]
  }

@@ -86,11 +86,11 @@
             "fields": [
               {
                 "id": "ActionBox.AddTabItem",
-                "objectType": "jswidgets.TabBoxActionAddTabItem"
+                "objectType": "jswidgets.TabBoxAddTabItemBox"
               },
               {
                 "id": "ActionBox.DeleteTabItem",
-                "objectType": "jswidgets.TabBoxActionDeleteTabItem"
+                "objectType": "jswidgets.TabBoxDeleteTabItemBox"
               }
             ]
           }

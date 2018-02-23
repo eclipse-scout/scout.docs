@@ -23,6 +23,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   var groupBox = this.widget('DetailBox');
 
   var toggleVisibilityField = this.widget('ToggleVisibilityField');
+  toggleVisibilityField.lookupCall = new jswidgets.FormFieldLookupCall(groupBox);
   toggleVisibilityField.on('propertyChange', this._onToggleVisibilityChange.bind(this));
 
   var toggleVisibilityButton = this.widget('ToggleVisibilityButton');
@@ -50,7 +51,7 @@ jswidgets.GroupBoxForm.prototype._onToggleVisibilityChange = function(event) {
 };
 
 jswidgets.GroupBoxForm.prototype._onToggleVisibilityButtonClick = function(event) {
-  var field = this.widget(this.widget('ToggleVisibilityField').value);
+  var field = this.widget('ToggleVisibilityField').value;
   field.setVisible(!field.visible);
   // Validate layout immediately to prevent flickering
   this.widget('DetailBox').validateLayoutTree();

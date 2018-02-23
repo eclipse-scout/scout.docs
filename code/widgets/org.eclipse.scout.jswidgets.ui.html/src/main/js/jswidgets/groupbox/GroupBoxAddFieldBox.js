@@ -60,8 +60,16 @@ jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(ev
     label: this.labelField.value || 'DynField ' + this.dynamicFieldCounter
   });
 
-  this.field.insertFieldBefore(newField, beforeField);
+  if (beforeField) {
+    this.field.insertFieldBefore(newField, beforeField);
+  } else {
+    this.field.insertField(newField);
+  }
   this._updateAddFieldLabel();
   // Validate layout immediately to prevent flickering
   this.field.validateLayoutTree();
+};
+
+jswidgets.GroupBoxAddFieldBox.prototype.setTargetField = function(field) {
+  this.beforeField.setValue(field);
 };

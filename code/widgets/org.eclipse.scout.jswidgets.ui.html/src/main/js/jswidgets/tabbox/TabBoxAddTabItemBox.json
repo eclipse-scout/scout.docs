@@ -1,5 +1,5 @@
  {
-   "id": "jswidgets.TabBoxActionAddTabItem",
+   "id": "jswidgets.TabBoxAddTabItemBox",
    "type": "model",
    "objectType": "GroupBox",
    "label": "Add Tab Item",
@@ -24,8 +24,9 @@
       {
         "id": "AddTabItem.CreateButton",
         "objectType": "Button",
-        "label": "Create Tab Item",
-        "processButton": false
+        "label": "Add",
+        "processButton": false,
+        "keyStroke": "ctrl-insert"
       }
    ]
  }

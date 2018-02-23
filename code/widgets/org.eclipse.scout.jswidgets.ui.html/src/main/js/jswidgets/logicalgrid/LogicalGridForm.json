@@ -35,45 +35,64 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
             "fields": [
               {
-                "id": "TargetField",
-                "objectType": "SmartField",
-                "label": "${textKey:Target}",
-                "lookupCall": "jswidgets.GroupBoxFieldsLookupCall"
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "labelVisible": false,
+                "fields": [
+                  {
+                    "id": "TargetField",
+                    "objectType": "SmartField",
+                    "label": "${textKey:Target}"
+                  },
+                  {
+                    "id": "LogicalGridField",
+                    "objectType": "SmartField",
+                    "label": "Logical Grid",
+                    "lookupCall": "jswidgets.LogicalGridLookupCall",
+                    "tooltipText": "${textKey:LogicalGridTooltip}"
+                  }
+                ]
               },
               {
-                "id": "LogicalGridField",
-                "objectType": "SmartField",
-                "label": "Logical Grid",
-                "lookupCall": "jswidgets.LogicalGridLookupCall",
-                "tooltipText": "${textKey:LogicalGridTooltip}"
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
+              },
+              {
+                "id": "CalculatedGridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Calculated Grid Data",
+                "enabled": false,
+                "useHints": false,
+                "expandable": true,
+                "expanded": false
               }
             ]
           },
           {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints"
-          },
-          {
-            "id": "CalculatedGridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Calculated Grid Data",
-            "enabled": false,
-            "useHints": false,
-            "expandable": true,
-            "expanded": false
+            "id": "ActionsTab",
+            "objectType": "TabItem",
+            "label": "Actions",
+            "fields": [
+              {
+                "id": "Actions.AddFieldBox",
+                "objectType": "jswidgets.GroupBoxAddFieldBox"
+              },
+              {
+                "id": "Actions.DeleteFieldBox",
+                "objectType": "jswidgets.GroupBoxDeleteFieldBox"
+              }
+            ]
           }
         ]
       }

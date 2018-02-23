@@ -19,8 +19,9 @@
     {
       "id": "CreateButton",
       "objectType": "Button",
-      "label": "Create Form Field",
-      "processButton": false
+      "label": "Add",
+      "processButton": false,
+      "keyStroke": "ctrl-insert"
     }
   ]
 }

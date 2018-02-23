@@ -8,27 +8,27 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.TabBoxActionAddTabItem = function() {
-  jswidgets.TabBoxActionAddTabItem.parent.call(this);
+jswidgets.TabBoxAddTabItemBox = function() {
+  jswidgets.TabBoxAddTabItemBox.parent.call(this);
   this.field = null;
   this.dynamicTabCounter = 0;
 };
-scout.inherits(jswidgets.TabBoxActionAddTabItem, scout.GroupBox);
+scout.inherits(jswidgets.TabBoxAddTabItemBox, scout.GroupBox);
 
-jswidgets.TabBoxActionAddTabItem.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxActionAddTabItem');
+jswidgets.TabBoxAddTabItemBox.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TabBoxAddTabItemBox');
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype._init = function(model) {
-  jswidgets.TabBoxActionAddTabItem.parent.prototype._init.call(this, model);
+jswidgets.TabBoxAddTabItemBox.prototype._init = function(model) {
+  jswidgets.TabBoxAddTabItemBox.parent.prototype._init.call(this, model);
   this._setTabBox(this.tabBox);
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype.setTabBox = function(tabBox) {
+jswidgets.TabBoxAddTabItemBox.prototype.setTabBox = function(tabBox) {
   this.setProperty('tabBox', tabBox);
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype._setTabBox = function(tabBox) {
+jswidgets.TabBoxAddTabItemBox.prototype._setTabBox = function(tabBox) {
   this._setProperty('tabBox', tabBox);
   if (!this.tabBox) {
     return;
@@ -47,11 +47,11 @@ jswidgets.TabBoxActionAddTabItem.prototype._setTabBox = function(tabBox) {
   this._updateAddTabLabel();
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype._onAddTabItemButtonClick = function(event) {
+jswidgets.TabBoxAddTabItemBox.prototype._onAddTabItemButtonClick = function(event) {
   this.addTabItem(this.labelField.value, this.subLabelField.value, this.beforeField.value);
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype.addTabItem = function(label, subLabel, beforeTabItem) {
+jswidgets.TabBoxAddTabItemBox.prototype.addTabItem = function(label, subLabel, beforeTabItem) {
   var tabItems = this.tabBox.tabItems || [],
     beforeIndex,
     tabItem = scout.create('jswidgets.DynamicTab', {
@@ -68,6 +68,6 @@ jswidgets.TabBoxActionAddTabItem.prototype.addTabItem = function(label, subLabel
   this._updateAddTabLabel();
 };
 
-jswidgets.TabBoxActionAddTabItem.prototype._updateAddTabLabel = function() {
+jswidgets.TabBoxAddTabItemBox.prototype._updateAddTabLabel = function() {
   this.labelField.setValue('DynTab ' + this.dynamicTabCounter);
 };

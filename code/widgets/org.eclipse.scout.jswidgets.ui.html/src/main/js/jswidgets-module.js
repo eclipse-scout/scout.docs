@@ -37,7 +37,6 @@
   __include("jswidgets/groupbox/GroupBoxDeleteFieldBox.js");
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
-  __include("jswidgets/groupbox/GroupBoxFieldsLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxPropertiesBox.js");
   __include("jswidgets/menubar/MenuBarForm.js");
   __include("jswidgets/menubar/MenuItemLookupCall.js");
@@ -61,8 +60,8 @@
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/tabbox/DynamicTab.js");
-  __include("jswidgets/tabbox/TabBoxActionAddTabItem.js");
-  __include("jswidgets/tabbox/TabBoxActionDeleteTabItem.js");
+  __include("jswidgets/tabbox/TabBoxAddTabItemBox.js");
+  __include("jswidgets/tabbox/TabBoxDeleteTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxForm.js");
   __include('jswidgets/tabbox/TabBoxProperties.js');
   __include('jswidgets/tabbox/TabItemLookupCall.js');

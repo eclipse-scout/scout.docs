@@ -40,7 +40,6 @@ jswidgets.GroupBoxDeleteFieldBox.prototype._setField = function(field) {
 
   this.deleteFieldButton = this.widget('DeleteButton');
   this.deleteFieldButton.on('click', this._onDeleteFormFieldButtonClick.bind(this));
-
 };
 
 jswidgets.GroupBoxDeleteFieldBox.prototype._onTargetFieldPropertyChange = function(event) {
@@ -54,4 +53,8 @@ jswidgets.GroupBoxDeleteFieldBox.prototype._onDeleteFormFieldButtonClick = funct
   this.targetField.setValue(null);
   // Validate layout immediately to prevent flickering
   this.field.validateLayoutTree();
+};
+
+jswidgets.GroupBoxDeleteFieldBox.prototype.setTargetField = function(field) {
+  this.targetField.setValue(field);
 };

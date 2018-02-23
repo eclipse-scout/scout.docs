@@ -14,9 +14,10 @@
     {
       "id": "DeleteButton",
       "objectType": "Button",
-      "label": "Delete Form Field",
+      "label": "Delete",
       "enabled": false,
-      "processButton": false
+      "processButton": false,
+      "keyStroke": "ctrl-delete"
     }
   ]
 }
