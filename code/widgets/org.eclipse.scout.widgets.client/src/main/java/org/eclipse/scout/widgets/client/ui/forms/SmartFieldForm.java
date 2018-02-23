@@ -220,6 +220,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(TreeSmartField.class);
   }
 
+  protected void showValueOfDefaultSmartField() {
+    MessageBoxes.createOk().withBody(getDefaultSmartField().getValue() + "").show();
+  }
+
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
@@ -908,6 +912,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     @Order(30)
     public class SampleContentButton extends AbstractButton {
 
+      private boolean m_showValue;
+
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("SampleContent");
@@ -915,11 +921,21 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       @Override
       protected void execClickAction() {
+        if (m_showValue) {
+          showValueOfDefaultSmartField();
+          return;
+        }
+
         ListEntriesField listEntries = getListEntriesField();
         listEntries.setValue(TEXTS.get("ListBoxUserContent"));
 
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
+      }
+
+      protected void setShowValue(boolean showValue) {
+        m_showValue = showValue;
+        setLabel(showValue ? "Show value" : TEXTS.get("SampleContent"));
       }
     }
 
@@ -1039,7 +1055,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execAction() {
-            MessageBoxes.createOk().withBody(getDefaultSmartField().getValue() + "").show();
+            showValueOfDefaultSmartField();
           }
 
           @Override
@@ -1164,6 +1180,20 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execAlways() {
             m_requestInput = isActive();
+          }
+        }
+
+        @Order(120)
+        @ClassId("aab18e2f-f9aa-4f1d-93b3-3f3d450ef775")
+        public class ToggleSampleContentButtonMenu extends AbstractToggleMenu {
+          @Override
+          protected String getConfiguredText() {
+            return "Sample button shows value";
+          }
+
+          @Override
+          protected void execAlways() {
+            getSampleContentButton().setShowValue(isActive());
           }
         }
       }
