@@ -294,6 +294,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getAttendedColumn().setValue(r, null);
           table.getMixedStateColumn().setValue(r, null);
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
+          table.getImageColumn().setValue(r, "large");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
 
@@ -311,6 +312,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getAttendedColumn().setValue(r, true);
           table.getMixedStateColumn().setValue(r, true);
           table.getPhoneColumn().setValue(r, null);
+          table.getImageColumn().setValue(r, "small");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
@@ -360,6 +362,10 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           public TrendColumn getTrendColumn() {
             return getColumnSet().getColumnByClass(TrendColumn.class);
+          }
+
+          public ImageColumn getImageColumn() {
+            return getColumnSet().getColumnByClass(ImageColumn.class);
           }
 
           public StartTimeColumn getStartColumn() {
@@ -761,6 +767,37 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
               return 60;
             }
 
+          }
+
+          @Order(105)
+          public class ImageColumn extends AbstractStringColumn {
+            @Override
+            protected boolean getConfiguredEditable() {
+              return true;
+            }
+
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Image";
+            }
+
+            @Override
+            protected void execDecorateCell(Cell cell, ITableRow row) {
+              if ("large".equals(cell.getValue())) {
+                cell.setIconId("eclipse16"); // larger icon
+              }
+              else if ("small".equals(cell.getValue())) {
+                cell.setIconId(Icons.EclipseScout);
+              }
+              else {
+                cell.setIconId(null);
+              }
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 150;
+            }
           }
 
           @Order(110)
