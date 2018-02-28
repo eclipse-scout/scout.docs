@@ -227,6 +227,7 @@ As the first field we add the field that will show the picture of the person to 
 . Open class `PersonForm` in the Java editor
 . Place the curson in the body of the inner class `GeneralBox`.
 . Copy the code provided in <<lst-contacts_picture_field>> into the general box.
+. Add for each field a getter method above the MainBox (where all other getters are). Alternatively you could use the SDK to create both fields (including getters) and add the code from <<lst-contacts_picture_field>>.
 . Hit kbd:[Ctrl+Shift+O] and fix the necessary imports.
 
 [[lst-contacts_picture_field]]
@@ -245,7 +246,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 Using the combination of the `PictureField` and `PictureUrlField` as its master field has two benefits.
 First, having a field that contains the the URL makes sure that this information is also stored in the form data and second, the method `execChangedMasterValue` can then be used to trigger the refresh of the actual picture when the picture URL is changed.
 
-The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_general_fields>> into the code below the picture field.
+The remaining fields for the general box can then be added using the Scout content assist or by copying <<lst-contacts_general_fields>> into the code below the picture field, again not forgetting the getters above the MainBox.
 
 [[lst-contacts_general_fields]]
 [source,java]
