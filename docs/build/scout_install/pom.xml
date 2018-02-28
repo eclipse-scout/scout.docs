@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>7.0.300-SNAPSHOT</version>
+    <version>7.0.300.004_Oxygen_3_RC3</version>
   </parent>
 
   <artifactId>scout_install</artifactId>

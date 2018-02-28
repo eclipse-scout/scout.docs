@@ -14,7 +14,7 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipsescout.demo.root</artifactId>
-  <version>7.0.300-SNAPSHOT</version>
+  <version>7.0.300.004_Oxygen_3_RC3</version>
   <packaging>pom</packaging>
 
   <name>Eclipse Scout Demo - Root</name>
