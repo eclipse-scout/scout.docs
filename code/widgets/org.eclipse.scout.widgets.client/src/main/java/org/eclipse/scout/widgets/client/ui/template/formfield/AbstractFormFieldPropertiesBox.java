@@ -70,6 +70,10 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     return getFieldByClass(ErrorStatusField.class);
   }
 
+  public LoadingField getLoadingField() {
+    return getFieldByClass(LoadingField.class);
+  }
+
   public StatusVisibleField getStatusVisibleField() {
     return getFieldByClass(StatusVisibleField.class);
   }
@@ -229,6 +233,35 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     @Override
     protected void execInitField() {
       setValue(getFormField().isMandatory());
+    }
+  }
+
+  @Order(5500)
+  @ClassId("fb06a141-d26d-4913-a9a5-0226cfad7fc2")
+  public class LoadingField extends AbstractBooleanField {
+    @Override
+    protected String getConfiguredLabel() {
+      return "Loading";
+    }
+
+    @Override
+    protected boolean getConfiguredLabelVisible() {
+      return false;
+    }
+
+    @Override
+    protected String getConfiguredFont() {
+      return "ITALIC";
+    }
+
+    @Override
+    protected void execChangedValue() {
+      getFormField().setLoading(getValue());
+    }
+
+    @Override
+    protected void execInitField() {
+      setValue(getFormField().isLoading());
     }
   }
 
