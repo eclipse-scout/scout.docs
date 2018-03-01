@@ -42,6 +42,7 @@ import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
@@ -298,7 +299,8 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         @Order(30)
         public class DefaultField extends AbstractSmartField2<Locale> {
 
-          private boolean m_throwVetoException = false;
+          private boolean m_throwOnLookup = false;
+          private boolean m_throwOnValidate = false;
 
           @Override
           protected String getConfiguredLabel() {
@@ -313,7 +315,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
           @Override
           protected void execPrepareLookup(ILookupCall<Locale> call) {
             if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
-              ((LocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+              ((LocaleLookupCall) call).setThrowVetoException(m_throwOnLookup);
             }
           }
 
@@ -322,16 +324,28 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
             Locale validValue = rawValue;
             if (m_validateValue) {
               validValue = ALBANIAN;
+
+            }
+            else if (m_throwOnValidate) {
+              throw new VetoException("Veto exception");
             }
             return validValue;
           }
 
-          public void setThrowVetoException(boolean throwVetoException) {
-            m_throwVetoException = throwVetoException;
+          public void setThrowOnLookup(boolean throwOnLookup) {
+            m_throwOnLookup = throwOnLookup;
           }
 
-          public boolean isThrowVetoException() {
-            return m_throwVetoException;
+          public boolean isThrowOnLookup() {
+            return m_throwOnLookup;
+          }
+
+          public void setThrowOnValidate(boolean throwOnValidate) {
+            m_throwOnValidate = throwOnValidate;
+          }
+
+          public boolean isThrowOnValidate() {
+            return m_throwOnValidate;
           }
 
           @Order(1000)
@@ -1142,6 +1156,8 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
         protected void execAction() {
           setLocalLookupCall(true);
           setValidateValue(false);
+          getDefaultField().setThrowOnLookup(false);
+          getDefaultField().setThrowOnValidate(false);
         }
       }
 
@@ -1201,7 +1217,7 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
       }
 
       @Order(80)
-      public class SwitchExceptionOnLookupMenu extends AbstractMenu {
+      public class SwitchThrowOnLookupMenu extends AbstractMenu {
 
         @Override
         protected String getConfiguredText() {
@@ -1215,18 +1231,44 @@ public class SmartField2Form extends AbstractForm implements IAdvancedExampleFor
 
         @Override
         protected void execAction() {
-          boolean isThrow = getDefaultField().isThrowVetoException();
+          boolean isThrow = getDefaultField().isThrowOnLookup();
           if (isThrow) {
             setText("Throw VetoException on lookup");
           }
           else {
             setText("Don't throw VetoException on lookup");
           }
-          getDefaultField().setThrowVetoException(!isThrow);
+          getDefaultField().setThrowOnLookup(!isThrow);
         }
       }
 
       @Order(90)
+      public class SwitchThrowOnValidateMenu extends AbstractMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Throw VetoException on execValidate";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "DefaultSmartField throws a VetoException when execValidate is called";
+        }
+
+        @Override
+        protected void execAction() {
+          boolean isThrow = getDefaultField().isThrowOnValidate();
+          if (isThrow) {
+            setText("Throw VetoException on execValidate");
+          }
+          else {
+            setText("Don't throw VetoException on execValidate");
+          }
+          getDefaultField().setThrowOnValidate(!isThrow);
+        }
+      }
+
+      @Order(100)
       public class SwitchValidateValueMenu extends AbstractMenu {
 
         @Override
