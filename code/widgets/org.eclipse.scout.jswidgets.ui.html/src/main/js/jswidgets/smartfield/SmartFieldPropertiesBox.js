@@ -45,6 +45,10 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
   var activeFilterEnabledField = this.widget('ActiveFilterEnabledField');
   activeFilterEnabledField.setValue(this.field.activeFilterEnabled);
   activeFilterEnabledField.on('propertyChange', this._onActiveFilterEnabledPropertyChange.bind(this));
+
+  var customDisplayTextField = this.widget('CustomDisplayTextField');
+  customDisplayTextField.setValue(this.field.hasOwnProperty('_formatLookupRow'));
+  customDisplayTextField.on('propertyChange', this._onCustomDisplayTextPropertyChange.bind(this));
 };
 
 jswidgets.SmartFieldPropertiesBox.prototype._onDisplayStylePropertyChange = function(event) {
@@ -66,5 +70,26 @@ jswidgets.SmartFieldPropertiesBox.prototype._onBrowseMaxRowCountPropertyChange =
 jswidgets.SmartFieldPropertiesBox.prototype._onActiveFilterEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.field.setActiveFilterEnabled(event.newValue);
+  }
+};
+
+jswidgets.SmartFieldPropertiesBox.prototype._onCustomDisplayTextPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    if (event.newValue) {
+      // Override prototype methods
+      this.field._formatLookupRow = function(lookupRow) {
+        return (lookupRow ? lookupRow.key + ' - ' + lookupRow.text : '');
+      }.bind(this.field);
+      this.field.getValueForSelection = function() {
+        return this.value;
+      }.bind(this.field);
+    } else {
+      // Restore prototype methods
+      delete this.field._formatLookupRow;
+      delete this.field.getValueForSelection;
+    }
+    var value = this.field.value;
+    this.field.setValue(null);
+    this.field.setValue(value);
   }
 };
