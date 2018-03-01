@@ -45,6 +45,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.context.RunContext;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -86,6 +87,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeGroupBox.MandatoryTreeSmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleExceptionOnLookupMenu;
+import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleExceptionOnValidateMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleLookupCallMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleRequestInputMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleThrottleSmartFieldMenu;
@@ -261,7 +263,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Order(30)
         public class DefaultSmartField extends AbstractSmartField<Locale> {
 
-          private boolean m_throwVetoException = false;
+          private boolean m_throwOnLookup = false;
+          private boolean m_throwOnValidate = false;
           private boolean m_validateValue = false;
 
           @Override
@@ -277,7 +280,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execPrepareLookup(ILookupCall<Locale> call) {
             if (call instanceof LocaleLookupCall) { // for some tests the lookup class is changed dynamically
-              ((AbstractLocaleLookupCall) call).setThrowVetoException(m_throwVetoException);
+              ((AbstractLocaleLookupCall) call).setThrowVetoException(m_throwOnLookup);
             }
           }
 
@@ -287,11 +290,18 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             if (m_validateValue) {
               validValue = ALBANIAN;
             }
+            else if (m_throwOnValidate) {
+              throw new VetoException("Veto exception");
+            }
             return validValue;
           }
 
-          public void setThrowVetoException(boolean throwVetoException) {
-            m_throwVetoException = throwVetoException;
+          public void setThrowOnLookup(boolean throwExceptionOnLookup) {
+            m_throwOnLookup = throwExceptionOnLookup;
+          }
+
+          public void setThrowOnValidate(boolean throwExceptionOnValidate) {
+            m_throwOnValidate = throwExceptionOnValidate;
           }
 
           public void setValidateValue(boolean validateValue) {
@@ -1141,7 +1151,26 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execAlways() {
-            getDefaultSmartField().setThrowVetoException(isActive());
+            getDefaultSmartField().setThrowOnLookup(isActive());
+          }
+        }
+
+        @Order(70)
+        public class ToggleExceptionOnValidateMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Throw VetoException on execValidateValue";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "DefaultSmartField throws a VetoException when execValidateValue is called";
+          }
+
+          @Override
+          protected void execAlways() {
+            getDefaultSmartField().setThrowOnValidate(isActive());
           }
         }
 
@@ -1279,6 +1308,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         protected void execAction() {
           Class<?>[] menuClasses = {
               ToggleExceptionOnLookupMenu.class,
+              ToggleExceptionOnValidateMenu.class,
               ToggleHierarchicalLookupMenu.class,
               ToggleLookupCallMenu.class,
               ToggleRequestInputMenu.class,
