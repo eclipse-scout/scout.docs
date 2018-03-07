@@ -252,8 +252,8 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
     }
 
     @Order(300)
-    @ClassId("eb1abced-79fd-4c31-b795-9074fab96134")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+
       @Override
       protected String getConfiguredLabel() {
         return "Form Field Properties";

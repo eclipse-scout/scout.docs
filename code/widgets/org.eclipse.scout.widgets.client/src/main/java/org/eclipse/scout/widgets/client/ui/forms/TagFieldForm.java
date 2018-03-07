@@ -45,6 +45,11 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
+  @Override
+  public CloseButton getCloseButton() {
+    return getFieldByClass(CloseButton.class);
+  }
+
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
   }
@@ -108,17 +113,13 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
         protected int getConfiguredGridW() {
           return 2;
         }
-
-        @Override
-        protected void execInitField() {
-          setTags(Arrays.asList("frühling", "gemeinsam bsi 2017", "prinzessin"));
-        }
       }
     }
 
     @Order(300)
-    @ClassId("eb1abced-79fd-4c31-b795-9074fab96134")
+    @ClassId("348f40aa-aef3-419b-aaa6-835a845ab8c9")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+
       @Override
       protected String getConfiguredLabel() {
         return "Form Field Properties";
@@ -144,20 +145,17 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("SampleFormat");
+        return TEXTS.get("SampleContent");
       }
 
       @Override
       protected void execClickAction() {
+        getDefaultField().setTags(Arrays.asList("hello", "scout is awesome", "princess", "ՄИȈҀӪÐε ௵", "♥"));
+        getDisabledField().setTags(Arrays.asList("hello", "scout is awesome", "princess", "ՄИȈҀӪÐε ௵", "♥"));
       }
     }
   }
 
   public class PageFormHandler extends AbstractFormHandler {
-  }
-
-  @Override
-  public CloseButton getCloseButton() {
-    return getFieldByClass(CloseButton.class);
   }
 }
