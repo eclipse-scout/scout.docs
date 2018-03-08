@@ -67,6 +67,7 @@
   __include('jswidgets/tabbox/TabItemLookupCall.js');
   __include('jswidgets/tabbox/TabItemProperties.js');
   __include("jswidgets/tablefield/TableFieldForm.js");
+  __include("jswidgets/tablefield/hierarchical/HierarchicalTableFieldForm.js");
   __include("jswidgets/tilefield/ColorSchemeLookupCall.js");
   __include("jswidgets/tilefield/SimpleTile.js");
   __include("jswidgets/tilefield/SimpleTileFilter.js");

@@ -145,6 +145,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "${textKey:HierarchicalTableField}",
+      "detailForm": {
+        "objectType": "jswidgets.HierarchicalTableFieldForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:TileField}",
       "detailForm": {
         "objectType": "jswidgets.TileFieldForm"
