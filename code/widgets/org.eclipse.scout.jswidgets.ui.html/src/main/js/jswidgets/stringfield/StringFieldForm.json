@@ -45,6 +45,12 @@
                 "labelVisible": false
               },
               {
+                "id": "MultilineTextField",
+                "objectType": "CheckBoxField",
+                "label": "Multiline Text",
+                "labelVisible": false
+              },
+              {
                 "id": "SpellCheckEnabledField",
                 "objectType": "CheckBoxField",
                 "label": "Spell Check Enabled",

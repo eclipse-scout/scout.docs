@@ -32,6 +32,10 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   inputMaskedField.setValue(stringField.inputMasked);
   inputMaskedField.on('propertyChange', this._onInputMaskedPropertyChange.bind(this));
 
+  var multilineTextField = this.widget('MultilineTextField');
+  multilineTextField.setValue(stringField.multilineText);
+  multilineTextField.on('propertyChange', this._onMultilineTextPropertyChange.bind(this));
+
   var spellCheckEnabledField = this.widget('SpellCheckEnabledField');
   spellCheckEnabledField.setValue(stringField.spellCheckEnabled);
   spellCheckEnabledField.on('propertyChange', this._onSpellCheckEnabledPropertyChange.bind(this));
@@ -82,6 +86,16 @@ jswidgets.StringFieldForm.prototype._onHasActionPropertyChange = function(event)
 jswidgets.StringFieldForm.prototype._onInputMaskedPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setInputMasked(event.newValue);
+  }
+};
+
+jswidgets.StringFieldForm.prototype._onMultilineTextPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var field = this.widget('StringField');
+    field.multilineText = event.newValue;
+    field.parent.rerenderControls();
+    // Validate layout immediately to prevent flickering
+    field.parent.htmlBody.validateLayoutTree();
   }
 };
 

@@ -50,10 +50,9 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
 jswidgets.SmartFieldPropertiesBox.prototype._onDisplayStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.field.displayStyle = event.newValue;
-    this.field.remove();
-    // Expects the parent to be a group box
-    this.field.parent._renderControls();
-    this.field.parent.htmlBody.revalidateLayoutTree();
+    this.field.parent.rerenderControls();
+    // Validate layout immediately to prevent flickering
+    this.field.parent.htmlBody.validateLayoutTree();
   }
 };
 
