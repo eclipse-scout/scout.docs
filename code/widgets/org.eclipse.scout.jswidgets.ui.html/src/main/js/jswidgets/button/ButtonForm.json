@@ -24,66 +24,76 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
             "fields": [
               {
-                "id": "DefaultButtonField",
-                "objectType": "CheckBoxField",
-                "label": "Default Button",
-                "labelVisible": false
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "label": "Properties",
+                "fields": [
+                  {
+                    "id": "DefaultButtonField",
+                    "objectType": "CheckBoxField",
+                    "label": "Default Button",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "ProcessButtonField",
+                    "objectType": "CheckBoxField",
+                    "label": "Process Button",
+                    "labelVisible": false,
+                    "tooltipText": "${textKey:ProcessButtonTooltip}",
+                    "gridDataHints": {
+                      "fillHorizontal": false
+                    }
+                  },
+                  {
+                    "id": "SelectedField",
+                    "objectType": "CheckBoxField",
+                    "label": "Selected",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "DisplayStyleField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.ButtonDisplayStyleLookupCall",
+                    "label": "Display Style"
+                  },
+                  {
+                    "id": "IconIdField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.IconIdLookupCall",
+                    "label": "Icon Id"
+                  },
+                  {
+                    "id": "KeyStrokeField",
+                    "objectType": "StringField",
+                    "label": "Key Stroke"
+                  }
+                ]
               },
               {
-                "id": "ProcessButtonField",
-                "objectType": "CheckBoxField",
-                "label": "Process Button",
-                "labelVisible": false,
-                "tooltipText": "${textKey:ProcessButtonTooltip}",
-                "gridDataHints": {
-                  "fillHorizontal": false
-                }
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
               },
               {
-                "id": "SelectedField",
-                "objectType": "CheckBoxField",
-                "label": "Selected",
-                "labelVisible": false
-              },
-              {
-                "id": "DisplayStyleField",
-                "objectType": "SmartField",
-                "lookupCall": "jswidgets.ButtonDisplayStyleLookupCall",
-                "label": "Display Style"
-              },
-              {
-                "id": "IconIdField",
-                "objectType": "SmartField",
-                "lookupCall": "jswidgets.IconIdLookupCall",
-                "label": "Icon Id"
-              },
-              {
-                "id": "KeyStrokeField",
-                "objectType": "StringField",
-                "label": "Key Stroke"
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
               }
             ]
           },
           {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints"
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab",
+            "eventNames": "action"
           }
         ]
       }

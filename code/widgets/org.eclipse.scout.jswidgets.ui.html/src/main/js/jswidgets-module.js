@@ -14,6 +14,7 @@
   __include("jswidgets/button/ButtonForm.js");
   __include("jswidgets/button/ButtonDisplayStyleLookupCall.js");
   __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
@@ -32,6 +33,7 @@
   __include("jswidgets/custom/WatchFieldLayout.js");
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
+  __include("jswidgets/desktop/WidgetsOutlineOverview.js");
   __include("jswidgets/desktop/ServerStatusMenu.js");
   __include("jswidgets/groupbox/GroupBoxAddFieldBox.js");
   __include("jswidgets/groupbox/GroupBoxDeleteFieldBox.js");

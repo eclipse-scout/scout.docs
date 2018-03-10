@@ -4,6 +4,7 @@
     "jswidgets/action/ActionPropertiesBox.json",
     "jswidgets/button/ButtonForm.json",
     "jswidgets/carousel/CarouselForm.json",
+    "jswidgets/common/EventsTab.json",
     "jswidgets/desktop/Desktop.json",
     "jswidgets/desktop/WidgetsOutline.json",
     "jswidgets/form/FormForm.json",

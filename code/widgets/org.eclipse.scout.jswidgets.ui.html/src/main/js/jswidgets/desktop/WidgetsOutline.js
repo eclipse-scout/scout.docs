@@ -16,3 +16,10 @@ scout.inherits(jswidgets.WidgetsOutline, scout.Outline);
 jswidgets.WidgetsOutline.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.WidgetsOutline');
 };
+
+jswidgets.WidgetsOutline.prototype._createOutlineOverview = function() {
+  return scout.create('WidgetsOutlineOverview', {
+    parent: this,
+    outline: this
+  });
+};

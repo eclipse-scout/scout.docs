@@ -49,6 +49,7 @@ jswidgets.ButtonForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(button);
   this.widget('GridDataBox').setField(button);
+  this.widget('EventsTab').setField(button);
 };
 
 jswidgets.ButtonForm.prototype._onButtonClick = function(event) {

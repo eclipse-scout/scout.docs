@@ -1,0 +1,37 @@
+ {
+  "id": "jswidgets.EventsTab",
+  "type": "model",
+  "objectType": "TabItem",
+  "label": "Events",
+  "gridColumnCount": 1,
+  "fields": [
+    {
+      "id": "EventsOverviewField",
+      "objectType": "LabelField",
+      "labelVisible": false,
+      "htmlEnabled": true,
+      "wrapText": true,
+      "gridDataHints": {
+        "useUiHeight": true
+      }
+    },
+    {
+      "id": "EventLogField",
+      "objectType": "StringField",
+      "label": "${textKey:EventLog}",
+      "labelPosition": 4,
+      "enabled": false,
+      "multilineText": true,
+      "gridDataHints": {
+        "h": 2
+      }
+    },
+    {
+      "id": "ClearEventLogButton",
+      "objectType": "Button",
+      "label": "${textKey:ClearEventLog}",
+      "displayStyle": 3,
+      "processButton": false
+    }
+  ]
+}

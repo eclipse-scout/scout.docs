@@ -16,17 +16,17 @@
             "objectType": "StringField",
             "label": "String Field 1"
           },
-                    {
+          {
             "id": "StringField2",
             "objectType": "StringField",
             "label": "String Field 2"
           },
-                    {
+          {
             "id": "StringField3",
             "objectType": "StringField",
             "label": "String Field 3"
           },
-                    {
+          {
             "id": "StringField4",
             "objectType": "StringField",
             "label": "String Field 4"
