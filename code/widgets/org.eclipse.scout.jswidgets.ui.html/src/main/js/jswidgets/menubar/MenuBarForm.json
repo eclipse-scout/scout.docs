@@ -40,6 +40,11 @@
             "text": "Hierarchical menu",
             "childActions": [
               {
+                "id": "ReplaceMenu",
+                "objectType": "scout.Menu",
+                "text": "Replace child menus"
+              },
+              {
                 "id": "SubMenu1",
                 "objectType": "Menu",
                 "text": "Sub Menu 1"

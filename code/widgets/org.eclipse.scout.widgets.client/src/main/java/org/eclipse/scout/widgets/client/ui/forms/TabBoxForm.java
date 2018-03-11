@@ -283,6 +283,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         protected void execAction() {
           MessageBoxes.createOk().withBody("Hello!").show();
         }
+
+        @Override
+        protected byte getConfiguredHorizontalAlignment() {
+          return HORIZONTAL_ALIGNMENT_RIGHT;
+        }
       }
 
       @Order(10)
@@ -291,6 +296,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredText() {
           return "Count";
+        }
+
+        @Override
+        protected byte getConfiguredHorizontalAlignment() {
+          return HORIZONTAL_ALIGNMENT_RIGHT;
         }
 
         @Override

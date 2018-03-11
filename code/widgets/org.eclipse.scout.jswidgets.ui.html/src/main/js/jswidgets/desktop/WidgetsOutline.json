@@ -163,19 +163,21 @@
     },
     {
       "objectType": "PageWithNodes",
-      "leaf": true,
       "text": "${textKey:TableField}",
+      "expanded": true,
       "detailForm": {
         "objectType": "jswidgets.TableFieldForm"
-      }
-    },
-    {
-      "objectType": "PageWithNodes",
-      "leaf": true,
-      "text": "${textKey:HierarchicalTableField}",
-      "detailForm": {
-        "objectType": "jswidgets.HierarchicalTableFieldForm"
-      }
+      },
+      "childNodes": [
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "${textKey:HierarchicalTableField}",
+          "detailForm": {
+            "objectType": "jswidgets.HierarchicalTableFieldForm"
+          }
+        }
+      ]
     },
     {
       "objectType": "PageWithNodes",
