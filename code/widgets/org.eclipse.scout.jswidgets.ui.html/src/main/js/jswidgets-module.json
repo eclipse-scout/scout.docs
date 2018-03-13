@@ -1,6 +1,7 @@
 {
   "files": [
     "jswidgets/carousel/CarouselForm.json",
+    "jswidgets/checkboxfield/CheckBoxFieldForm.json",    
     "jswidgets/desktop/Desktop.json",
     "jswidgets/desktop/WidgetsOutline.json",
     "jswidgets/form/FormForm.json",

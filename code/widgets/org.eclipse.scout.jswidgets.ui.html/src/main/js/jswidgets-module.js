@@ -9,6 +9,7 @@
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
   __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/common/IconIdLookupCall.js");
   __include("jswidgets/form/DisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");

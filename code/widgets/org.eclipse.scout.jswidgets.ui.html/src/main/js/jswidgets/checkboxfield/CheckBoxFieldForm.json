@@ -1,0 +1,57 @@
+{
+  "id": "jswidgets.CheckBoxFieldForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "CheckBoxField",
+            "objectType": "CheckBoxField",
+            "label": "Check Box Field",
+            "labelVisible": false,
+            "gridDataHints": {
+              "horizontalAlignment": 0,
+              "fillHorizontal": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "PropertiesBox",
+        "objectType": "GroupBox",
+        "label": "Properties",
+        "fields": [
+          {
+            "id": "KeyStrokeField",
+            "objectType": "StringField",
+            "label": "Key Stroke"
+          },
+          {
+            "id": "PlaceholderField",
+            "objectType": "PlaceholderField"
+          }
+        ]
+      },
+      {
+        "id": "ValueFieldPropertiesBox",
+        "objectType": "jswidgets.ValueFieldPropertiesBox"
+      },
+      {
+        "id": "FormFieldPropertiesBox",
+        "objectType": "jswidgets.FormFieldPropertiesBox"
+      },
+      {
+        "id": "GridDataBox",
+        "objectType": "jswidgets.GridDataBox",
+        "label": "Grid Data Hints"
+      }
+    ]
+  }
+}
