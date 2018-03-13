@@ -17,6 +17,7 @@
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
+  __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
   __include("jswidgets/form/LifecycleForm.js");

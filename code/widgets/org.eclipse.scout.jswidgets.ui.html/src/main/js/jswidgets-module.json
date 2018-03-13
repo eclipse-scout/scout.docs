@@ -5,6 +5,7 @@
     "jswidgets/button/ButtonForm.json",
     "jswidgets/carousel/CarouselForm.json",
     "jswidgets/common/EventsTab.json",
+    "jswidgets/checkboxfield/CheckBoxFieldForm.json",
     "jswidgets/desktop/Desktop.json",
     "jswidgets/desktop/WidgetsOutline.json",
     "jswidgets/form/FormForm.json",

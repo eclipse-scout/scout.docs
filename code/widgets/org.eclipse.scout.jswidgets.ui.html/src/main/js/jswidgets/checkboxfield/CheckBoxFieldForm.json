@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.ButtonForm",
+  "id": "jswidgets.CheckBoxFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -12,12 +12,13 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "Button",
-            "objectType": "Button",
-            "label": "Button",
-            "processButton": false,
+            "id": "CheckBoxField",
+            "objectType": "CheckBoxField",
+            "label": "Check Box Field",
+            "labelVisible": false,
             "gridDataHints": {
-              "horizontalAlignment": 0
+              "horizontalAlignment": 0,
+              "fillHorizontal": false
             }
           }
         ]
@@ -39,38 +40,10 @@
                 "label": "Properties",
                 "fields": [
                   {
-                    "id": "DefaultButtonField",
+                    "id": "TriStateEnabledField",
                     "objectType": "CheckBoxField",
-                    "label": "Default Button",
+                    "label": "Tri State Enabled",
                     "labelVisible": false
-                  },
-                  {
-                    "id": "ProcessButtonField",
-                    "objectType": "CheckBoxField",
-                    "label": "Process Button",
-                    "labelVisible": false,
-                    "tooltipText": "${textKey:ProcessButtonTooltip}",
-                    "gridDataHints": {
-                      "fillHorizontal": false
-                    }
-                  },
-                  {
-                    "id": "SelectedField",
-                    "objectType": "CheckBoxField",
-                    "label": "Selected",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "DisplayStyleField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.ButtonDisplayStyleLookupCall",
-                    "label": "Display Style"
-                  },
-                  {
-                    "id": "IconIdField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.IconIdLookupCall",
-                    "label": "Icon Id"
                   },
                   {
                     "id": "KeyStrokeField",
@@ -78,6 +51,10 @@
                     "label": "Key Stroke"
                   }
                 ]
+              },
+              {
+                "id": "ValueFieldPropertiesBox",
+                "objectType": "jswidgets.ValueFieldPropertiesBox"
               },
               {
                 "id": "FormFieldPropertiesBox",
