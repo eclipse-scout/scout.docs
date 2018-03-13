@@ -335,6 +335,11 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
           protected String getConfiguredLabel() {
             return "Button 1";
           }
+
+          @Override
+          protected String getConfiguredKeyStroke() {
+            return "ctrl-1";
+          }
         }
 
         @Order(20)
@@ -343,6 +348,11 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return "Button 2";
+          }
+
+          @Override
+          protected String getConfiguredKeyStroke() {
+            return "ctrl-2";
           }
         }
 
