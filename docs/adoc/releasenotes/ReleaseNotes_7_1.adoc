@@ -212,6 +212,9 @@ Additionally you can now reference an image by URL, for instance an image hosted
 2. _imageUrl_
 3. _imageId_
 
+== CheckBoxField: add support for key strokes
+The check box field (`IBooleanField`) got a new property called `keyStroke`. The property expects a string defining the key stroke, e.g. `ctrl-b`. When the key stroke is executed the check box value will be toggled. Other widgets like `Button`, `RadioButton` or `Menu` already support that feature in the same way.
+
 == Dynamic Fields
 
 It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.
