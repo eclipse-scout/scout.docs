@@ -135,6 +135,11 @@ public class BooleanFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected String getConfiguredKeyStroke() {
+          return "ctrl-b";
+        }
+
+        @Override
         protected void execChangedValue() {
           getDisabledField().setValue(this.getValue());
         }
