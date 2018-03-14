@@ -8,13 +8,13 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-scout.WidgetsOutlineOverview = function() {
-  scout.WidgetsOutlineOverview.parent.call(this);
+jswidgets.WidgetsOutlineOverview = function() {
+  jswidgets.WidgetsOutlineOverview.parent.call(this);
 };
-scout.inherits(scout.WidgetsOutlineOverview, scout.TileOutlineOverview);
+scout.inherits(jswidgets.WidgetsOutlineOverview, scout.TileOutlineOverview);
 
-scout.WidgetsOutlineOverview.prototype._render = function() {
-  scout.WidgetsOutlineOverview.parent.prototype._render.call(this);
+jswidgets.WidgetsOutlineOverview.prototype._render = function() {
+  jswidgets.WidgetsOutlineOverview.parent.prototype._render.call(this);
   this.$container.addClass('widgets-outline-overview');
 
   var title = this.session.text('AppWelcome');
@@ -24,7 +24,7 @@ scout.WidgetsOutlineOverview.prototype._render = function() {
   this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
 };
 
-scout.WidgetsOutlineOverview.prototype._createPageTileGrid = function() {
+jswidgets.WidgetsOutlineOverview.prototype._createPageTileGrid = function() {
   return scout.create('PageTileGrid', {
     parent: this,
     outline: this.outline,
