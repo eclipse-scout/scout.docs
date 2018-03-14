@@ -47,6 +47,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.context.RunContext;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.job.Jobs;
+import org.eclipse.scout.rt.platform.status.IMultiStatus;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
@@ -222,8 +223,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     return getFieldByClass(TreeSmartField.class);
   }
 
-  protected void showValueOfDefaultSmartField() {
-    MessageBoxes.createOk().withBody(getDefaultSmartField().getValue() + "").show();
+  protected void showStateOfDefaultSmartField() {
+    ISmartField<?> field = getDefaultSmartField();
+    IMultiStatus errorStatus = field.getErrorStatus();
+    StringBuilder text = new StringBuilder();
+    text.append(field.getValue());
+    if (errorStatus != null && !errorStatus.isOK()) {
+      text.append("\n");
+      text.append("[errorStatus.ok=false]");
+    }
+    MessageBoxes.createOk().withBody(text.toString()).show();
   }
 
   @Order(10)
@@ -290,7 +299,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             if (m_validateValue) {
               validValue = ALBANIAN;
             }
-            else if (m_throwOnValidate) {
+            else if (m_throwOnValidate && rawValue != null) {
               throw new VetoException("Veto exception");
             }
             return validValue;
@@ -922,7 +931,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     @Order(30)
     public class SampleContentButton extends AbstractButton {
 
-      private boolean m_showValue;
+      private boolean m_showState;
 
       @Override
       protected String getConfiguredLabel() {
@@ -931,8 +940,8 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       @Override
       protected void execClickAction() {
-        if (m_showValue) {
-          showValueOfDefaultSmartField();
+        if (m_showState) {
+          showStateOfDefaultSmartField();
           return;
         }
 
@@ -943,9 +952,9 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
       }
 
-      protected void setShowValue(boolean showValue) {
-        m_showValue = showValue;
-        setLabel(showValue ? "Show value" : TEXTS.get("SampleContent"));
+      protected void setShowState(boolean showValue) {
+        m_showState = showValue;
+        setLabel(showValue ? "Show state" : TEXTS.get("SampleContent"));
       }
     }
 
@@ -1065,7 +1074,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execAction() {
-            showValueOfDefaultSmartField();
+            showStateOfDefaultSmartField();
           }
 
           @Override
@@ -1217,12 +1226,12 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         public class ToggleSampleContentButtonMenu extends AbstractToggleMenu {
           @Override
           protected String getConfiguredText() {
-            return "Sample button shows value";
+            return "Sample button shows state";
           }
 
           @Override
           protected void execAlways() {
-            getSampleContentButton().setShowValue(isActive());
+            getSampleContentButton().setShowState(isActive());
           }
         }
       }
