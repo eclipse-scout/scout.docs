@@ -35,7 +35,7 @@ jswidgets.GroupBoxDeleteFieldBox.prototype._setField = function(field) {
   }
 
   this.targetField = this.widget('ToDeleteField');
-  this.targetField.lookupCall = new jswidgets.FormFieldLookupCall(this.field);
+  this.targetField.setLookupCall(new jswidgets.FormFieldLookupCall(this.field));
   this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
 
   this.deleteFieldButton = this.widget('DeleteButton');

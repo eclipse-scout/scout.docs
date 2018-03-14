@@ -23,7 +23,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   var groupBox = this.widget('DetailBox');
 
   var toggleVisibilityField = this.widget('ToggleVisibilityField');
-  toggleVisibilityField.lookupCall = new jswidgets.FormFieldLookupCall(groupBox);
+  toggleVisibilityField.setLookupCall(new jswidgets.FormFieldLookupCall(groupBox));
   toggleVisibilityField.on('propertyChange', this._onToggleVisibilityChange.bind(this));
 
   var toggleVisibilityButton = this.widget('ToggleVisibilityButton');

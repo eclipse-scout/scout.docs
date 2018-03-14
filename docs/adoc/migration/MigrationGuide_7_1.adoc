@@ -518,6 +518,10 @@ TIP: To find all files that need migration, search for the text `bootstrap: {` i
 
 This migration is recommended but optional. Listing all fonts to preload manually still works. To disable font preloading entirely, set the _fonts_ bootstrap property to an empty array `[]`.
 
+=== Radio Button Group
+* The property `formFields` has been renamed to `fields` to be consistent with the Java implementation and with other composites like `GroupBox`.
+* The function `selectButton` now selects the button even if it is disabled. Only the user must not select disabled buttons but the developer should still be able to do it. If you use this function, you may have to insert a check for the enabled state.
+
 // ^^^
 // Insert descriptions of JavaScript API changes here
 

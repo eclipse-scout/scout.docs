@@ -60,6 +60,7 @@
   __include("jswidgets/smartfield/tree/WorldLookupCall.js");
   __include("jswidgets/proposalfield/ProposalFieldForm.js");
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");
+  __include("jswidgets/radiobuttongroup/RadioButtonGroupForm.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/tabbox/DynamicTab.js");

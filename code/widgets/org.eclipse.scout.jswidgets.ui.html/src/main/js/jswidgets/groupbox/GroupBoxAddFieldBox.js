@@ -35,7 +35,7 @@ jswidgets.GroupBoxAddFieldBox.prototype._setField = function(field) {
   }
 
   this.beforeField = this.widget('BeforeField');
-  this.beforeField.lookupCall = new jswidgets.FormFieldLookupCall(this.field);
+  this.beforeField.setLookupCall(new jswidgets.FormFieldLookupCall(this.field));
 
   this.labelField = this.widget('LabelField');
 

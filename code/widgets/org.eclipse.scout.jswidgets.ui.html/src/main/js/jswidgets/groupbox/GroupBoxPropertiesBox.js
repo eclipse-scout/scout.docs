@@ -68,7 +68,6 @@ jswidgets.GroupBoxPropertiesBox.prototype._setField = function(field) {
   var notificationField = this.widget('NotificationField');
   notificationField.setValue(this.field.notification ? this.field.notification.status.severity : null);
   notificationField.on('propertyChange', this._onPropertyChange.bind(this));
-
 };
 
 jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
