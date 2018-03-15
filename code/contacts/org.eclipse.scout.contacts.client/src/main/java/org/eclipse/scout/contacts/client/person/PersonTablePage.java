@@ -388,6 +388,11 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
   }
 
   @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.MaleLine;
+  }
+
+  @Override
   protected Class<? extends ISearchForm> getConfiguredSearchForm() {
     return PersonSearchForm.class;
   }

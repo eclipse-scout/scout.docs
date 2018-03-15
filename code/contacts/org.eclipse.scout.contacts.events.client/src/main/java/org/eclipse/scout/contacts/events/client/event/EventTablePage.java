@@ -45,6 +45,11 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
   }
 
   @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.EventLine;
+  }
+
+  @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Events");
   }

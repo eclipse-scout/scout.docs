@@ -210,6 +210,11 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     return Icons.Organization;
   }
 
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.IndustryLine;
+  }
+
   // tag::childPage[]
   // tag::PageInit[]
 }
