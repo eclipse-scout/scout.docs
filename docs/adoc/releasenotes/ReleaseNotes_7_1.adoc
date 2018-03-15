@@ -153,6 +153,17 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 .Accordion
 image::{imgsdir}/accordion.png[]
 
+== New Outline Overview
+The `OutlineOverview` typically is the first thing a user sees when an outline based application starts. It is the widget displayed in the desktop bench when no page of the outline is selected. The previous `OutlineOverview` has been very simple, it basically just displayed the title and the icon of the outline. With this release a new widget has been added, it is called `TileOutlineOverview`.
+
+As the name implies it is based on the new `TileGrid` and shows the top level pages of the current outline. The tiles itself are very simple: they show the name of the page and an icon. Because they look a lot more interesting with an icon we encourage you to set a distinct icon for each page. You can do this by using the property `overviewIconId` of a page. Note that this is not the same property as `iconId`, to be able to use different icons for the outline tree itself and the outline overview tiles.
+
+The new outline overview is enabled by default. If you don't like the new style you can either use a `defaultDetailForm` which will be used instead of the `outlineOverview` if it is set. Or you can use the old `OutlineOverview` or even create a custom one. Compared to `defaultDetailForm`, the `outlineOverview` can only be set using JavaScript.
+
+[[img-tile-outline-overview]]
+.Tile Outline Overview
+image::{imgsdir}/tile_outline_overview.png[]
+
 == Menu, Menubar Enhancements
 
 === Form Field in Menu
