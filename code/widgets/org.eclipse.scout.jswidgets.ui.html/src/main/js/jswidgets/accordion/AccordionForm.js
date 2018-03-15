@@ -24,8 +24,6 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   this.accordion = this.widget('Accordion');
 
   this._insertGroupWithTiles();
-  this._insertGroupWithTiles();
-  this._insertGroupWithTiles();
 
   // -- Properties
 
@@ -56,12 +54,6 @@ jswidgets.AccordionForm.prototype._init = function(model) {
 
   var sortDescMenu = this.widget('SortDescMenu');
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
-
-  var deleteAllInFirstGroupMenu = this.widget('DeleteAllInFirstGroupMenu');
-  deleteAllInFirstGroupMenu.on('action', this._onDeleteAllInFirstGroupMenuAction.bind(this));
-
-  var insertIntoFirstGroupMenu = this.widget('InsertIntoFirstGroupMenu');
-  insertIntoFirstGroupMenu.on('action', this._onInsertIntoFirstGroupMenuAction.bind(this));
 
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
@@ -112,20 +104,6 @@ jswidgets.AccordionForm.prototype._onSortDescMenuAction = function(event) {
   this._sortGroups();
 };
 
-jswidgets.AccordionForm.prototype._onDeleteAllInFirstGroupMenuAction = function(event) {
-  if (this.accordion.groups.length > 0) {
-    this.accordion.groups[0].body.deleteAllTiles();
-  }
-};
-
-jswidgets.AccordionForm.prototype._onInsertIntoFirstGroupMenuAction = function(event) {
-  if (this.accordion.groups.length > 0) {
-    this.accordion.groups[0].body.insertTile(this._createTile({
-      label: 'New tile'
-    }));
-  }
-};
-
 jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
@@ -134,9 +112,13 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
       label: 'Tile ' + i
     }));
   }
+  var title = 'Group with Tiles';
+  if (this.insertedGroupCount > 0) {
+    title += ' ' + this.insertedGroupCount;
+  }
   var group = new scout.create('Group', {
     parent: this.accordion,
-    title: 'Group ' + this.insertedGroupCount++,
+    title: title,
     body: {
       objectType: 'TileGrid',
       gridColumnCount: 6,
@@ -149,6 +131,7 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
     }
   });
   this.accordion.insertGroup(group);
+  this.insertedGroupCount++;
 };
 
 jswidgets.AccordionForm.prototype._createTile = function(model) {
