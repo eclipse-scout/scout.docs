@@ -97,7 +97,7 @@ The following table lists the different names used in the past Scout releases. (
 |Scout \<= 6.1 |Scout 7.0 |Scout >= 7.1
 
 |SmartField _(old implementation)_ |SmartField _(old implementation)_ |&mdash;
-|&mdash; |SmartField2 _(new implementation)_ |SmartField _(new implementation)_
+|&mdash; |SmartField2 (new implementation) |SmartField (new implementation)
 |===
 
 _Migration:_
@@ -482,9 +482,19 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@logical-grid-height` to `@logical-grid-row-height`
 * Renamed `@applink-color` to `@link-color`
 
+=== Widget.js: New Argument for clone()
+
+The _clone()_ function of any widget got an `options` parameter. The options define what properties and events are synchronized between the widget and its clone.
+
+=== Widget.js: addChild & removeChild changed to private
+
+The methods `addChild()` and `removeChild()` have been renamed to `_addChild()` and `_removeChild()`.
+This means the methods are considered to have `private` visibility now. Use the methods `setParent()`, `setOwner()` and `destroy()` to connect or disconnect widgets.
+These methods will add or remove the child widget automatically.
+
 === Automatic Preloading of Web Fonts
 
-Scout can now detect the Web Fonts (*.woff files) to preload automatically. It's therefore no longer necessary to list the font names manually in the boostrap argument of `scout.App`.
+Scout can now detect the Web Fonts (*.woff files) to preload automatically. It's therefore no longer necessary to list the font names manually in the bootstrap argument of `scout.App`.
 
 _Migration:_
 
