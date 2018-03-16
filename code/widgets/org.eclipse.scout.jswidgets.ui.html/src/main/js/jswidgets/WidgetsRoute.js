@@ -27,7 +27,7 @@ scout.inherits(jswidgets.WidgetsRoute, scout.Route);
 jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
   var regex = /^jswidgets\.(\w*)Form$/;
   var routes = [];
-  scout.Tree.visitNodes(desktop.outline.nodes, function(node) {
+  scout.Tree.visitNodes(function(node) {
     var routeRef = null,
       objectType = node.detailForm.objectType,
       result = regex.exec(objectType);
@@ -37,7 +37,7 @@ jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
     }
     routeRef = result[1].toLowerCase();
     routes.push([routeRef, objectType]);
-  });
+  }, desktop.outline.nodes);
   return routes;
 };
 
@@ -65,12 +65,12 @@ jswidgets.WidgetsRoute.prototype.activate = function(location) {
 
   var objectType = this._getRouteData(location)[1];
   var foundNode = null;
-  scout.Tree.visitNodes(this.desktop.outline.nodes, function(node) {
+  scout.Tree.visitNodes(function(node) {
     if (node.detailForm.objectType === objectType) {
       foundNode = node;
       return false;
     }
-  });
+  }, this.desktop.outline.nodes);
   this.desktop.outline.selectNode(foundNode);
 };
 

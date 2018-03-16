@@ -514,6 +514,17 @@ The methods `addChild()` and `removeChild()` have been renamed to `_addChild()` 
 This means the methods are considered to have `private` visibility now. Use the methods `setParent()`, `setOwner()` and `destroy()` to connect or disconnect widgets.
 These methods will add or remove the child widget automatically.
 
+=== FormField.visit renamed to FormField.visitFields
+
+The `visit()` method on all FormFields has been renamed to `visitFields()`. This change is necessary to clarify what is visited and to distinguish between the visit methods available on widget level (e.g. `visitChildren()`).
+
+=== Tree._visitNodes & Tree.visitNodes
+
+The argument order of the method `scout.Tree.visitNodes` have changed from (nodes, func, parentNode) to (func, nodes, parentNode). So the func (the visitor) and the nodes to visit have changed positions.
+
+The arguments of `scout.Tree.prototype._visitNodes` have changed from (nodes, func, parentNode) to (func, parentNode). So the nodes to visit must no longer be specified. Instead always the root nodes of the tree are used. Furthermore the method is public now and has therefore be renamed to `visitNodes()`.
+
+
 === Automatic Preloading of Web Fonts
 
 Scout can now detect the Web Fonts (*.woff files) to preload automatically. It's therefore no longer necessary to list the font names manually in the bootstrap argument of `scout.App`.
