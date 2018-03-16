@@ -113,13 +113,26 @@ These values may be set using `getConfiguredBodyLayoutConfig()`.
 === Sublabel
 GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
 
+== Traversal Engine Added
+
+A tree (or graph) traversal engine has been added to the Scout Platform. The engine can traverse any tree- or graph-like structures.
+See the package `org.eclipse.scout.rt.platform.util.visitor` especially the class `org.eclipse.scout.rt.platform.util.visitor.TreeTraversals` as entry point.
+
+[source,java]
+----
+TreeTraversals.create(visitor, childrenSupplier).traverse(root);
+----
+
+The `root` element can be of any type. The `childrenSupplier` is a Function that returns the child elements for a given parent.
+The visitor can be a `IBreadthFirstTreeVisitor` for Breadth-First visiting strategy or a `IDepthFirstTreeVisitor` for a Depth-First visiting strategy supporting pre-order and post-order traversals.
+
+
 == Introducing Widget.java
 
-On JavaScript side, there has been a class `Widget.js` for a long time now. With this release the counterpart `Widget.java` has been added. This gives all existing widgets like `FormField`, `Form`, `MessageBox`, `Menu` etc. a new common base class. It also helps creating widgets which aren't necessarily form fields.
+On JavaScript side, there has been a class `Widget.js` for a long time now. With this release the counterpart `Widget.java` has been added. This gives all existing widgets like `FormField`, `Form`, `MessageBox`, `Action` (e.g. `Menu`), `Tree`, `Table`, `Accordion`, `Calendar`, `Desktop`, `Tile`, etc. a new common base class. It also helps creating widgets which aren't necessarily form fields.
 
-== Widget.js: New Argument for clone()
+The new Widget class handles the widget lifecycle (initConfig, init, disposed) and offers methods to visit Widget hierarchies. See `org.eclipse.scout.rt.client.ui.IWidget` for more details.
 
-The _clone()_ function of any widget got an `options` parameter. The options define what properties and events are synchonized between the widget and its clone.
 
 == New Widget 'TileGrid'
 
