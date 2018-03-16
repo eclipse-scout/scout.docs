@@ -4,6 +4,7 @@ Howto:
 - Chronological order is not necessary.
 - Choose the right top level chapter (java, js, other)
 - Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.1.xxx" note)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
 == About This Document
@@ -13,8 +14,6 @@ This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse 
 IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen preview_) release: +
 https://eclipsescout.github.io/7.0/migration-guide.html
 
-* <<Removed property `focusable` from IFormField, AbstractFormField>>
-
 === Service Release Migration
 
 The following changes were made after the initial 7.1 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
@@ -23,7 +22,6 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 
 {NotReleasedWarning}
 
-
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
@@ -31,12 +29,6 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 ////
 
 == API Changes (Java)
-
-=== CalendarComponent
-
-Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.client.ui.basic.calendar.CalendarComponent`.
-
-_Migration:_ Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
 === Java 8 Required
 
@@ -59,6 +51,12 @@ To reflect this change, some existing Scout classes have been migrated to the ne
 |`org.eclipse.scout.rt.platform.util.concurrent.IBiFunction` |`java.util.function.BiFunction`
 |`org.eclipse.scout.rt.client.ui.action.IActionFilter` |`java.util.function.Predicate<IAction>`
 |===
+
+=== CalendarComponent
+
+Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.client.ui.basic.calendar.CalendarComponent`.
+
+_Migration:_ Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
 === Removed Constants/Methods From ClientUIPreferences
 
@@ -139,6 +137,7 @@ protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
 ----
 
 === Adjusted Behavior of Widget Initialization
+
 The goal was to harmonize all the init methods (`initField`, `initTile`, `initForm` etc.) and to make sure, `init()` is only executed once. This is important for dynamic widgets like accordion or tiles. These widgets initialize the newly added children by themselves so that the caller does not need to take care of it. For these cases it is important that `init()` is not called multiple times.
 
 But: there may be cases which require `init()` to be called multiple times, like reseting a search form. For such cases, `reinit()` has to be used from now on. Also, after the widget is disposed, `init()` may be called again. So remember: `execInit` may be called more than once in some circumstances. This is existing behavior!
@@ -174,8 +173,7 @@ The argument `pathInfo` has been removed from the method `HttpCacheControl.check
 
 HTTP Proxy doesn't set cache control `no-chache` header anymore.
 
-
-== Replacement for IActionVisitor, ITreeVisitor, IFormFieldVisitor
+=== Replacement for IActionVisitor, ITreeVisitor, IFormFieldVisitor
 
 A new tree visitor engine has been added to the `org.eclipse.scout.rt.platform.util.visitor` package. It contains classes to depth-first or breadth-first traverse any tree data structures.
 Use the class `org.eclipse.scout.rt.platform.util.visitor.TreeTraversals` as entry point.
@@ -191,12 +189,11 @@ Until now only pre-order visitors have been available on these items. Therefore 
 * There is a `org.eclipse.scout.rt.platform.util.visitor.CollectingVisitor` class to convert the items of a tree to a list.
 * IFormField.visitParents takes a `java.util.function.Predicate<IFormField>` instead of an IFormFieldVisitor.
 
+=== New Convenience Methods on IFormField
 
-== New convenience methods for setMandatory, setStatusVisible, setFieldStyle, setDisabledStyle on IFormField
+There are new methods for setting mandatory state (`setMandatory`), status visibility (`setStatusVisible`), field style (`setFieldStyle`) and disabled style (`setDisabledStyle`) that allow to specify if child form fields should be changed as well.
 
-There are new methods for setting mandatory-state, status-visibility, field-style and disabled-style that allow to specify if child form fields should be changed as well.
 So if you have overridden one of these methods in your code, please override the new one instead. The method now takes an additional boolean flag to indicate if children should be processed as well.
-
 
 === Config Properties
 
@@ -413,7 +410,7 @@ The following config property keys have been renamed (the old keys are no longer
 |`scout.ui.sessionStore.valueUnboundMaxWaitForWriteLock`
 |===
 
-== Customizing CSP Rules Via Config Property
+=== Customizing CSP Rules Via Config Property
 
 The new config property `scout.cspDirective` makes subclassing and replacing the `ContentSecurityPolicy` class obsolete as you can configure all CSP settings with this property now. An example from the Scout Widgets application:
 
@@ -439,7 +436,7 @@ This class was deleted and replaced by a config property in _config.properties_:
 scout.cspDirective[img-src]=*
 ----
 
-== IUiServletRequestHandler
+=== IUiServletRequestHandler
 
 The methods `handleGet` and `handlePost` on `IUiServletRequestHandler` were replaced by the single method `handle`. This new method is called for all HTTP methods.
 
@@ -447,9 +444,17 @@ To retrieve the HTTP method, call `getMethod` on `HttpServletRequest`. When usin
 
 Methods `proxyGet` and `proxyPost` on `HttpProxy` are replaced by the common method `proxy`.
 
+=== Table: Remove Obsolete "POPULATED" Event and Methods
+
+We removed remnants of the long-obsolete "population" event in tables:
+
+* [line-through]#`ITable.tablePopulated()`#
+* [line-through]#`TableEvent.TYPE_TABLE_POPULATED`#
+
+_Migration:_ Remove any references to the removed method or event from your code. (This should not cause any change in behavior, as the event was not fired by Scout anyways.)
+
 // ^^^
 // Insert descriptions of Java API changes here
-
 
 ////
   =============================================================================
@@ -529,6 +534,7 @@ TIP: To find all files that need migration, search for the text `bootstrap: {` i
 This migration is recommended but optional. Listing all fonts to preload manually still works. To disable font preloading entirely, set the _fonts_ bootstrap property to an empty array `[]`.
 
 === Radio Button Group
+
 * The property `formFields` has been renamed to `fields` to be consistent with the Java implementation and with other composites like `GroupBox`.
 * The function `selectButton` now selects the button even if it is disabled. Only the user must not select disabled buttons but the developer should still be able to do it. If you use this function, you may have to insert a check for the enabled state.
 
