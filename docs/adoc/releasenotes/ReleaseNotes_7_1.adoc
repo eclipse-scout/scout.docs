@@ -86,7 +86,7 @@ The class `org.eclipse.scout.rt.platform.config.ConfigDescriptionExporter` can b
 
 All Scout properties have been extended with descriptions. The same text is also part of the technical documentation.
 
-=== Default value
+=== Default Value
 Config properties based on `org.eclipse.scout.rt.platform.config.IConfigProperty` include a default value. The default value is stored in the `getDefaultValue()` method.
 
 The method was moved  from `org.eclipse.scout.rt.platform.config.AbstractConfigProperty<DATA_TYPE, RAW_TYPE>` to the interface. Therefore the visibility has changed from protected to public.
@@ -126,13 +126,11 @@ TreeTraversals.create(visitor, childrenSupplier).traverse(root);
 The `root` element can be of any type. The `childrenSupplier` is a Function that returns the child elements for a given parent.
 The visitor can be a `IBreadthFirstTreeVisitor` for Breadth-First visiting strategy or a `IDepthFirstTreeVisitor` for a Depth-First visiting strategy supporting pre-order and post-order traversals.
 
-
 == Introducing Widget.java
 
 On JavaScript side, there has been a class `Widget.js` for a long time now. With this release the counterpart `Widget.java` has been added. This gives all existing widgets like `FormField`, `Form`, `MessageBox`, `Action` (e.g. `Menu`), `Tree`, `Table`, `Accordion`, `Calendar`, `Desktop`, `Tile`, etc. a new common base class. It also helps creating widgets which aren't necessarily form fields.
 
 The new Widget class handles the widget lifecycle (initConfig, init, disposed) and offers methods to visit Widget hierarchies. See `org.eclipse.scout.rt.client.ui.IWidget` for more details.
-
 
 == New Widget 'TileGrid'
 
@@ -167,6 +165,7 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 image::{imgsdir}/accordion.png[]
 
 == New Outline Overview
+
 The `OutlineOverview` typically is the first thing a user sees when an outline based application starts. It is the widget displayed in the desktop bench when no page of the outline is selected. The previous `OutlineOverview` has been very simple, it basically just displayed the title and the icon of the outline. With this release a new widget has been added, it is called `TileOutlineOverview`.
 
 As the name implies it is based on the new `TileGrid` and shows the top level pages of the current outline. The tiles itself are very simple: they show the name of the page and an icon. Because they look a lot more interesting with an icon we encourage you to set a distinct icon for each page. You can do this by using the property `overviewIconId` of a page. Note that this is not the same property as `iconId`, to be able to use different icons for the outline tree itself and the outline overview tiles.
@@ -189,6 +188,7 @@ image::{imgsdir}/FormFieldMenu.png[]
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackable menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackable menu in the menubar.
 
 == Tabbox Enhancements
+
 === Left Aligned Menu Items
 The menubar of a tabbox now considers the menu alignments _left_ and _right_. That means you can add menus directly on the right side of the last tab item (left aligned) or at the right side of the tab box header (right aligned).
 
@@ -236,7 +236,8 @@ Additionally you can now reference an image by URL, for instance an image hosted
 2. _imageUrl_
 3. _imageId_
 
-== CheckBoxField: add support for key strokes
+== CheckBoxField: Add Support for Key Strokes
+
 The check box field (`IBooleanField`) got a new property called `keyStroke`. The property expects a string defining the key stroke, e.g. `ctrl-b`. When the key stroke is executed the check box value will be toggled. Other widgets like `Button`, `RadioButton` or `Menu` already support that feature in the same way.
 
 == Dynamic Fields

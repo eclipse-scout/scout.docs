@@ -453,6 +453,23 @@ We removed remnants of the long-obsolete "population" event in tables:
 
 _Migration:_ Remove any references to the removed method or event from your code. (This should not cause any change in behavior, as the event was not fired by Scout anyways.)
 
+=== PageField: Status of Page Table Visible By Default
+
+The table field contained in a _PageField_ used to have `statusVisible` set to _false_. This default was changed back to _true_ to make it consistent with all other fields. Whether the status should be invisible can only be determined correctly by the programmer, because the PageField can not know about the status visibility in the inner forms (search form and search form).
+
+_Migration:_ To hide the status of a specific _PageField_'s table field, override `execInitField()` and set the desired status visibility:
+
+[source, java]
+----
+public class MyPageField extends AbstractPageField<MyTablePage> {
+
+  @Override
+  protected void execInitField() {
+    getTableField().setStatusVisible(false); // <--
+  }
+}
+----
+
 // ^^^
 // Insert descriptions of Java API changes here
 
