@@ -42,7 +42,9 @@ public class OptionsForm extends AbstractForm {
     getUiThemeField().setValue(theme);
 
     String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(ClientSession.PREF_USER_LOCALE, null);
-    getLocaleField().setValue(Locale.forLanguageTag(localeString));
+    if (localeString != null) {
+      getLocaleField().setValue(Locale.forLanguageTag(localeString));
+    }
   }
 
   public MainBox getMainBox() {
