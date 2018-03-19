@@ -20,8 +20,8 @@ Here is a non-exhaustive list of supported browsers:
 Desktop::
 * Mozilla Firefox >= 35
 * Google Chrome >= 40
-* Microsoft Internet Explorer 11
-* Microsoft Edge >= 12
+* Microsoft Internet Explorer 11 (see table below for known limitations)
+* Microsoft Edge >= 12 (see table below for known limitations)
 * Apple Safari >= 8
 
 Mobile::

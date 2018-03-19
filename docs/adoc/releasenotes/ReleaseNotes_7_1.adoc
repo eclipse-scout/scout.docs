@@ -66,7 +66,12 @@ If you just want to play around with them without looking at the source code, yo
 
 The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a *Java 8 runtime is required*.
 
-TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
+TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for a later release.
+
+== New browser version requirements
+
+The supported browser versions have been updated. See https://eclipsescout.github.io/7.1/technical-guide.html#browser-support for the new list of supported browsers.
+
 
 == New SDK Feature in Eclipse: Search for missing NLS keys
 
@@ -113,7 +118,7 @@ These values may be set using `getConfiguredBodyLayoutConfig()`.
 === Sublabel
 GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
 
-== Traversal Engine Added
+== Tree Traversal Engine Added
 
 A tree (or graph) traversal engine has been added to the Scout Platform. The engine can traverse any tree- or graph-like structures.
 See the package `org.eclipse.scout.rt.platform.util.visitor` especially the class `org.eclipse.scout.rt.platform.util.visitor.TreeTraversals` as entry point.
