@@ -72,6 +72,7 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   blockFormatField.setValue(stringField.format);
   blockFormatField.on('propertyChange', this._onBlockFormatPropertyChange.bind(this));
 
+  this.widget('ValueField').setEnabled(true);
   this.widget('ValueFieldPropertiesBox').setField(stringField);
   this.widget('FormFieldPropertiesBox').setField(stringField);
   this.widget('GridDataBox').setField(stringField);

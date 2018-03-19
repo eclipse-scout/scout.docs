@@ -37,6 +37,8 @@
                 "id": "PropertiesBox",
                 "objectType": "GroupBox",
                 "label": "Properties",
+                "labelVisible": false,
+                "borderVisible": false,
                 "fields": [
                   {
                     "id": "DefaultButtonField",

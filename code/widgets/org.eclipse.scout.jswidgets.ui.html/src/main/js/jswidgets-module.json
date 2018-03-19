@@ -17,6 +17,7 @@
     "jswidgets/groupbox/GroupBoxDeleteFieldBox.json",
     "jswidgets/groupbox/GroupBoxForm.json",
     "jswidgets/groupbox/GroupBoxPropertiesBox.json",
+    "jswidgets/labelfield/LabelFieldForm.json",
     "jswidgets/logicalgrid/GridDataBox.json",
     "jswidgets/logicalgrid/LogicalGridForm.json",
     "jswidgets/logicalgrid/LogicalGridLayoutConfigBox.json",

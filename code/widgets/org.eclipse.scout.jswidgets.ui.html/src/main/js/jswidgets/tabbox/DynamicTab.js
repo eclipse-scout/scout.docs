@@ -16,8 +16,7 @@ scout.inherits(jswidgets.DynamicTab, scout.TabItem);
 jswidgets.DynamicTab.prototype._init = function(model) {
   jswidgets.DynamicTab.parent.prototype._init.call(this, model);
 
-  this.widget('label').setValue('This is sample the content of \'TabItem\': ' + this.label);
-
+  this.widget('label').setValue('This is the content area of the \'TabItem\'. The selected tab is \'' + this.label + '\'.');
 };
 
 jswidgets.DynamicTab.prototype._jsonModel = function() {

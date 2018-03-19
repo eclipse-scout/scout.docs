@@ -26,6 +26,7 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
   newLanguageMenu.on('action', this._onNewLanguageMenuAction.bind(this));
 
   this.widget('PropertiesBox').setField(this.smartField);
+  this.widget('ValueField').setEnabled(true);
   this.widget('ValueFieldPropertiesBox').setField(this.smartField);
   this.widget('FormFieldPropertiesBox').setField(this.smartField);
   this.widget('GridDataBox').setField(this.smartField);

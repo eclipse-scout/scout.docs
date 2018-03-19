@@ -41,13 +41,14 @@
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
   __include("jswidgets/groupbox/GroupBoxPropertiesBox.js");
-  __include("jswidgets/menubar/MenuBarForm.js");
-  __include("jswidgets/menubar/MenuItemLookupCall.js");
-  __include("jswidgets/numberfield/NumberFieldForm.js");
+  __include("jswidgets/labelfield/LabelFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
   __include("jswidgets/logicalgrid/LogicalGridForm.js");
   __include("jswidgets/logicalgrid/LogicalGridLayoutConfigBox.js");
   __include("jswidgets/logicalgrid/LogicalGridLookupCall.js");
+  __include("jswidgets/menubar/MenuBarForm.js");
+  __include("jswidgets/menubar/MenuItemLookupCall.js");
+  __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldPropertiesBox.js");
   __include("jswidgets/smartfield/SmartFieldDisplayStyleLookupCall.js");

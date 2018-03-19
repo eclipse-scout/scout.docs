@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.CheckBoxFieldForm",
+  "id": "jswidgets.LabelFieldForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -12,14 +12,10 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "CheckBoxField",
-            "objectType": "CheckBoxField",
-            "label": "Check Box Field",
-            "labelVisible": false,
-            "gridDataHints": {
-              "horizontalAlignment": 0,
-              "fillHorizontal": false
-            }
+            "id": "LabelField",
+            "objectType": "LabelField",
+            "label": "Label Field",
+            "value": "${textKey:LabelFieldValue}"
           }
         ]
       },
@@ -42,15 +38,16 @@
                 "borderVisible": false,
                 "fields": [
                   {
-                    "id": "TriStateEnabledField",
+                    "id": "WrapTextField",
                     "objectType": "CheckBoxField",
-                    "label": "Tri State Enabled",
+                    "label": "Wrap Text",
                     "labelVisible": false
                   },
                   {
-                    "id": "KeyStrokeField",
-                    "objectType": "StringField",
-                    "label": "Key Stroke"
+                    "id": "HtmlEnabledField",
+                    "objectType": "CheckBoxField",
+                    "label": "Html Enabled",
+                    "labelVisible": false
                   }
                 ]
               },

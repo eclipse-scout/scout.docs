@@ -24,6 +24,7 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   var formatField = this.widget('FormatField');
   formatField.setValue(numberField.decimalFormat.pattern);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+  this.widget('ValueField').setEnabled(true);
   this.widget('ValueFieldPropertiesBox').setField(numberField);
   this.widget('FormFieldPropertiesBox').setField(numberField);
   this.widget('GridDataBox').setField(numberField);

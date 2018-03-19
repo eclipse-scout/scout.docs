@@ -11,7 +11,6 @@
 jswidgets.ValueFieldPropertiesBox = function() {
   jswidgets.ValueFieldPropertiesBox.parent.call(this);
   this.field = null;
-  this.listenForPropertyChanges = false;
 };
 scout.inherits(jswidgets.ValueFieldPropertiesBox, scout.GroupBox);
 
@@ -40,13 +39,13 @@ jswidgets.ValueFieldPropertiesBox.prototype._setField = function(field) {
 
   var valueField = this.widget('ValueField');
   valueField.setValue(this.field.value);
-  if (this.listenForPropertyChanges) {
+  if (valueField.enabled) {
     valueField.on('propertyChange', this._onPropertyChange.bind(this));
   }
 
   var displayTextField = this.widget('DisplayTextField');
   displayTextField.setValue(this.field.displayText);
-  if (this.listenForPropertyChanges) {
+  if (displayTextField.enabled) {
     displayTextField.on('propertyChange', this._onPropertyChange.bind(this));
   }
 
