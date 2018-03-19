@@ -110,7 +110,7 @@ jswidgets.HierarchicalTableFieldForm.prototype._onInsertMany = function() {
 };
 
 jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
-  this.table.insertRows([{
+  this.table.insertRows(this._scrumbleOrder([{
     id: 1,
     iconId: scout.icons.WORLD,
     cells: [
@@ -159,7 +159,7 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
     cells: [
       'Matthias Otterbach', 'Senior Software Engineer', '20.10.2015', true
     ]
-  }]);
+  }]));
 };
 
 jswidgets.HierarchicalTableFieldForm.prototype._insertManyRows = function() {
@@ -195,6 +195,12 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertManyRows = function() {
     };
   }
 
+};
+
+jswidgets.HierarchicalTableFieldForm.prototype._scrumbleOrder = function(rows) {
+  return rows.sort(function(a, b) {
+    return 0.5 - Math.random();
+  });
 };
 
 jswidgets.HierarchicalTableFieldForm.prototype._onAddRowMenuAction = function() {
