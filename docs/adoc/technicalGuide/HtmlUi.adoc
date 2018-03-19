@@ -19,10 +19,10 @@ Here is a non-exhaustive list of supported browsers:
 
 Desktop::
 * Mozilla Firefox >= 35
-* Google Chrome >= 36
-* Microsoft Internet Explorer >= 9 (preferrably 10 or later, see limitations listed below)
+* Google Chrome >= 40
+* Microsoft Internet Explorer 11
 * Microsoft Edge >= 12
-* Apple Safari >= 7
+* Apple Safari >= 8
 
 Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
@@ -34,18 +34,6 @@ _(Due to the nature of mobile operating systems, it is hard to specify exact ver
 [width="100%",options="header",cols="3,9"]
 |=======
 |Affected System|Description
-
-|Internet Explorer 9
-|*Drag and drop* of files from disk to the file chooser is not possible. IE9 is missing the required API (and it cannot be added with a polyfill). You can also only *upload one file at a time*, because the File API is missing as well.
-
-|Internet Explorer 9
-|*On-field labels* are not visible in IE9 because it lacks support for the "placeholder" attribute.
-
-|Internet Explorer 9
-|Some *loading animations* may appear static, because IE9 does not support CSS3 animations.
-
-|Internet Explorer 9
-|Tables and trees with many entries tend to degrade *performance* in IE9.
 
 |Internet Explorer
 |If the browser is configured to enable the so-called *"protected mode"*, the state of a popup window cannot be determined correctly. This is noticeable when a `AbstractBrowserField` has the property _"show in external window"_ set to `true`. Even though the popup window is still open, the method `execExternalWindowStateChanged()` is called immediately, telling you the window was closed (because IE reports so). There is no workaround for this problem, apart from disabling the "protected mode".
