@@ -12,7 +12,7 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "CheckBoxField",
+            "id": "CheckBoxField",2
             "objectType": "CheckBoxField",
             "label": "Check Box Field",
             "labelVisible": false,
