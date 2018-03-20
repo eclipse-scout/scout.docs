@@ -19,12 +19,14 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.group.AbstractGroup;
 import org.eclipse.scout.rt.client.ui.group.IGroup;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordion;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
 import org.eclipse.scout.rt.client.ui.tile.DefaultGroupManager;
+import org.eclipse.scout.rt.client.ui.tile.ITileAccordionGroupManager;
 import org.eclipse.scout.rt.client.ui.tile.ITileGrid;
 import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
@@ -34,6 +36,8 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox;
@@ -43,6 +47,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
+import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.GroupIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
@@ -61,6 +66,10 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   @Override
   public void startPageForm() {
     start();
+  }
+
+  public GroupIconIdField getGroupIconIdField() {
+    return getFieldByClass(GroupIconIdField.class);
   }
 
   public ScrollableField getScrollableField() {
@@ -546,6 +555,64 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
       }
 
+      @Order(25)
+      @ClassId("e63c284c-1bc6-4e73-bd69-4c3bc8f321d5")
+      public class SelectableField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Selectable";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getAccordionField().getAccordion().setSelectable(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getAccordionField().getAccordion().isSelectable());
+        }
+      }
+
+      @Order(27)
+      @ClassId("b4148e8c-a081-4807-beb7-bd0fc4264809")
+      public class MultiSelectField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Multi Select";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getAccordionField().getAccordion().setMultiSelect(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getAccordionField().getAccordion().isMultiSelect());
+        }
+      }
+
       @Order(38)
       @ClassId("78fc1ed3-b3b4-4834-96fc-5a0241e32ca3")
       public class ScrollableField extends AbstractBooleanField {
@@ -637,64 +704,30 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
       }
 
-      @Order(25)
-      @ClassId("e63c284c-1bc6-4e73-bd69-4c3bc8f321d5")
-      public class SelectableField extends AbstractBooleanField {
+      @Order(60)
+      @ClassId("d3db8fd8-76c5-4e1c-a308-1db55c4f98fe")
+      public class GroupIconIdField extends AbstractSmartField<String> {
+
         @Override
         protected String getConfiguredLabel() {
-          return "Selectable";
+          return TEXTS.get("GroupIcon");
         }
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
         }
 
         @Override
         protected void execChangedValue() {
-          getAccordionField().getAccordion().setSelectable(getValue());
-        }
+          ITileAccordionGroupManager<ISimpleTile> groupManager = getAccordionField().getAccordion().getGroupManager();
+          if (groupManager instanceof SimpleTileGroupManager) {
+            ((SimpleTileGroupManager) groupManager).setIconId(getValue());
+          }
 
-        @Override
-        protected void execInitField() {
-          setValue(getAccordionField().getAccordion().isSelectable());
-        }
-      }
-
-      @Order(27)
-      @ClassId("b4148e8c-a081-4807-beb7-bd0fc4264809")
-      public class MultiSelectField extends AbstractBooleanField {
-        @Override
-        protected String getConfiguredLabel() {
-          return "Multi Select";
-        }
-
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getAccordionField().getAccordion().setMultiSelect(getValue());
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(getAccordionField().getAccordion().isMultiSelect());
+          getAccordionField().getAccordion().getGroups().forEach(group -> group.setIconId(getValue()));
         }
       }
-
     }
 
     @Order(300)
@@ -717,9 +750,9 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     }
 
     @Order(500)
+    @ClassId("1c698f40-6c87-463d-be96-e74d5e0dfccc")
     public class CloseButton extends AbstractCloseButton {
     }
-
   }
 
   @Override
