@@ -17,6 +17,12 @@
       "label": "Label"
     },
     {
+      "id": "LabelType",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.FormFieldTypeLookupCall",
+      "label": "Type"
+    },
+    {
       "id": "CreateButton",
       "objectType": "Button",
       "label": "Add",

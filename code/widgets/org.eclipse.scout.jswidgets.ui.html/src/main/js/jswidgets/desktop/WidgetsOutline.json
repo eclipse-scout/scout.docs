@@ -112,6 +112,14 @@
     },
     {
       "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "Sequence Box",
+      "detailForm": {
+        "objectType": "jswidgets.SequenceBoxForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
       "text": "${textKey:SmartField}",
       "expanded": true,
       "detailForm": {

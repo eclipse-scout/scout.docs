@@ -28,6 +28,10 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   selectedButtonField.setValue(group.selectedButton);
   selectedButtonField.on('propertyChange', this._onSelectedButtonPropertyChange.bind(this));
 
+  var gridColumnCountField = this.widget('GridColumnCountField');
+  gridColumnCountField.setValue(group.gridColumnCount);
+  gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
+
   this.widget('FormFieldPropertiesBox').setField(group);
   this.widget('GridDataBox').setField(group);
   this.widget('EventsTab').setField(group);
@@ -52,12 +56,23 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
 jswidgets.RadioButtonGroupForm.prototype._onRadioButtonGroupPropertyChange = function(event) {
   if (event.propertyName === 'selectedButton') {
     this.widget('SelectedButtonField').setValue(event.newValue);
+  } else if (event.propertyName === 'gridColumnCount') {
+    this.widget('GridColumnCountField').setValue(event.newValue);
   }
 };
 
 jswidgets.RadioButtonGroupForm.prototype._onSelectedButtonPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('RadioButtonGroup').selectButton(event.newValue);
+  }
+};
+
+jswidgets.RadioButtonGroupForm.prototype._onGridColumnCountPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var newVal = event.newValue;
+    if (newVal > 0 || newVal === scout.RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
+      this.widget('RadioButtonGroup').setGridColumnCount(newVal);
+    }
   }
 };
 

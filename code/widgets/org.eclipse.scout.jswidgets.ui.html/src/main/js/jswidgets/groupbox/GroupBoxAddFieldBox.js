@@ -22,6 +22,9 @@ jswidgets.GroupBoxAddFieldBox.prototype._jsonModel = function() {
 jswidgets.GroupBoxAddFieldBox.prototype._init = function(model) {
   jswidgets.GroupBoxAddFieldBox.parent.prototype._init.call(this, model);
   this._setField(this.field);
+
+  var fieldType = this.widget('LabelType');
+  fieldType.setValue('StringField');
 };
 
 jswidgets.GroupBoxAddFieldBox.prototype.setField = function(field) {
@@ -54,7 +57,7 @@ jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(ev
     beforeField = this.beforeField.value;
 
   this.dynamicFieldCounter++;
-  var newField = scout.create('StringField', {
+  var newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
     parent: this.field,
     id: 'DynField ' + this.dynamicFieldCounter,
     label: this.labelField.value || 'DynField ' + this.dynamicFieldCounter

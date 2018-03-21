@@ -58,6 +58,13 @@ Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.cli
 
 _Migration:_ Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
+=== Deprecation of SequenceBox EqualColumnWidths
+
+The methods `SequenceBox#getConfiguredEqualColumnWidths()`, `SequenceBox#isEqualColumnWidths()` and `SequenceBox#setEqualColumnWidths()` have been deprecated. As this property was not used by Scout since several releases it can be deleted.
+
+You can search for these method names in your code to find any usages. Alternatively your IDE may mark the usage of deprecated methods (depends on settings).
+
+
 === Removed Constants/Methods From ClientUIPreferences
 
 Since the new Html UI was introduced with Scout 5.2 some constants and methods in `ClientUIPreferences` had no effect on the UI anymore. Since Scout is now a browser application we don't have any control over the application window anymore. The form bounds are stored in the local browser storage thus they're not required in the Java model anymore.
@@ -565,6 +572,12 @@ This migration is recommended but optional. Listing all fonts to preload manuall
 
 * The property `formFields` has been renamed to `fields` to be consistent with the Java implementation and with other composites like `GroupBox`.
 * The function `selectButton` now selects the button even if it is disabled. Only the user must not select disabled buttons but the developer should still be able to do it. If you use this function, you may have to insert a check for the enabled state.
+
+=== Layout of fields in Radio Button Group and Sequence Box
+
+Until now it was required to explicitly set grid positions for child fields of Radio Button Groups and Sequence Boxes. This was because the automatic grid layout was not yet implemented in the Scout JavaScript layer. This was no issue however if the fields have been used in connection with a Java model because then the Java layer takes care about the layout.
+
+Now also pure JavaScript Scout applications have automatic layout for child fields of Radio Button Groups and Sequence Boxes. So if explicit grid positions (gridData.x, gridData.y) have been specified, it can be removed now as Scout takes care about it now (as it was in the Java layer already).
 
 // ^^^
 // Insert descriptions of JavaScript API changes here

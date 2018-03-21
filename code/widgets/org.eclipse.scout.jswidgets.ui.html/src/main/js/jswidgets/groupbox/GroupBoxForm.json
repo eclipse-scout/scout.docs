@@ -42,7 +42,7 @@
           {
             "id": "PropertiesTab",
             "objectType": "TabItem",
-            "label": "Properties",
+            "label": "GroupBox Properties",
             "fields": [
               {
                 "id": "GroupBoxPropertiesBox",
@@ -67,30 +67,31 @@
             ]
           },
           {
+            "id": "ContentPropertiesTab",
+            "objectType": "TabItem",
+            "label": "Content Properties",
+            "fields": [
+              {
+                "id": "TargetField",
+                "objectType": "SmartField",
+                "label": "Target"
+              },
+              {
+                "id": "ContentFormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "ContentGridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
+              }
+            ]
+          },
+          {
             "id": "ActionsTab",
             "objectType": "TabItem",
             "label": "Actions",
             "fields": [
-              {
-                "id": "CustomizationBox",
-                "objectType": "GroupBox",
-                "gridColumnCount": 2,
-                "labelVisible": false,
-                "borderVisible": false,
-                "fields": [
-                  {
-                    "id": "ToggleVisibilityField",
-                    "objectType": "SmartField",
-                    "label": "Toggle Visibility"
-                  },
-                  {
-                    "id": "ToggleVisibilityButton",
-                    "objectType": "Button",
-                    "label": "${textKey:Toggle}",
-                    "processButton": false
-                  }
-                ]
-              },
               {
                 "id": "Actions.AddFieldBox",
                 "objectType": "jswidgets.GroupBoxAddFieldBox"

@@ -23,29 +23,17 @@
               {
                 "id": "RadioButton1",
                 "objectType": "RadioButton",
-                "label": "Radio Button 1",
-                "gridData": {
-                  "x": 0,
-                  "y": 0
-                }
+                "label": "Radio Button 1"
               },
               {
                 "id": "RadioButton2",
                 "objectType": "RadioButton",
-                "label": "Radio Button 2",
-                "gridData": {
-                  "x": 0,
-                  "y": 1
-                }
+                "label": "Radio Button 2"
               },
               {
                 "id": "RadioButton3",
                 "objectType": "RadioButton",
-                "label": "Radio Button 3",
-                "gridData": {
-                  "x": 0,
-                  "y": 2
-                }
+                "label": "Radio Button 3"
               }
             ]
           }
@@ -75,8 +63,9 @@
                     "label": "Selected Button"
                   },
                   {
-                    "id": "PlaceholderField",
-                    "objectType": "PlaceholderField"
+                    "id": "GridColumnCountField",
+                    "objectType": "NumberField",
+                    "label": "Grid Column Count"
                   }
                 ]
               },

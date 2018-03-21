@@ -240,11 +240,6 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       public class StyledGroupBox extends AbstractRadioButtonGroup<Long> {
 
         @Override
-        protected boolean getConfiguredFillHorizontal() {
-          return false;
-        }
-
-        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Styled");
         }

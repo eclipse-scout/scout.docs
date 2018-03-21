@@ -8,41 +8,31 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.GroupBoxForm = function() {
-  jswidgets.GroupBoxForm.parent.call(this);
+jswidgets.SequenceBoxForm = function() {
+  jswidgets.SequenceBoxForm.parent.call(this);
 };
-scout.inherits(jswidgets.GroupBoxForm, scout.Form);
+scout.inherits(jswidgets.SequenceBoxForm, scout.Form);
 
-jswidgets.GroupBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxForm');
+jswidgets.SequenceBoxForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.SequenceBoxForm');
 };
 
-jswidgets.GroupBoxForm.prototype._init = function(model) {
-  jswidgets.GroupBoxForm.parent.prototype._init.call(this, model);
+jswidgets.SequenceBoxForm.prototype._init = function(model) {
+  jswidgets.SequenceBoxForm.parent.prototype._init.call(this, model);
 
-  var groupBox = this.widget('DetailBox');
+  var sequenceBox = this.widget('SequenceBox');
 
-  // GroupBox Properties tab
-  this.widget('GroupBoxPropertiesBox').setField(groupBox);
-  this.widget('Actions.AddFieldBox').setField(groupBox);
-  this.widget('Actions.DeleteFieldBox').setField(groupBox);
-  this.widget('FormFieldPropertiesBox').setField(groupBox);
-
-  var bodyLayoutConfigBox = this.widget('BodyLayoutConfigBox');
-  bodyLayoutConfigBox.getLayoutConfig = function() {
-    return this.field.bodyLayoutConfig;
-  };
-  bodyLayoutConfigBox.updateLayoutConfig = function(layoutConfig) {
-    this.field.setBodyLayoutConfig(layoutConfig);
-  };
-  bodyLayoutConfigBox.setField(groupBox);
-  this.widget('GridDataBox').setField(groupBox);
+  // sequence box properties tab
+  var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
+  formFieldPropertiesBox.setField(sequenceBox);
+  this.widget('GridDataBox').setField(sequenceBox);
+  this.widget('EventsTab').setField(sequenceBox);
 
   // ContentProperties tab
   var targetField = this.widget('TargetField');
-  targetField.setLookupCall(new jswidgets.FormFieldLookupCall(groupBox));
+  targetField.setLookupCall(new jswidgets.FormFieldLookupCall(sequenceBox));
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-  targetField.setValue(groupBox.fields[0]);
+  targetField.setValue(sequenceBox.fields[0]);
 
   this._onTargetPropertyChange({
     propertyName: 'value',
@@ -50,7 +40,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   });
 };
 
-jswidgets.GroupBoxForm.prototype._onTargetPropertyChange = function(event) {
+jswidgets.SequenceBoxForm.prototype._onTargetPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     var targetField = event.newValue;
 

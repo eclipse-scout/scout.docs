@@ -245,6 +245,15 @@ Additionally you can now reference an image by URL, for instance an image hosted
 
 The check box field (`IBooleanField`) got a new property called `keyStroke`. The property expects a string defining the key stroke, e.g. `ctrl-b`. When the key stroke is executed the check box value will be toggled. Other widgets like `Button`, `RadioButton` or `Menu` already support that feature in the same way.
 
+== Layout Customizations for Radio Button Group
+
+A new property `gridColumnCount` has been added to the radio button group. It can be used using `setGridColumnCount()`, `getGridColumnCount()` and `getConfiguredGridColumnCount()`. By default the columns are configured to be dependent on the height of the field to create columns as needed to show all radio buttons within the height available (this also corresponds to the existing behavior).
+
+But it also allows to specify an exact number over how many columns radio buttons should be distributed. This is an alternative to layout the buttons using the group height and is especially useful if the number of radio buttons is unknown or dynamic. In that case the columns can be configured to e.g. 3 and the property `useUiHeight` to true allowing the group to vertically grow as needed to show all radio buttons within 3 columns. This property also corresponds to the layout possibilities of the group box.
+
+The same possibilities also exist in the JavaScript only layer of Scout using the method `setGridColumnCount()`.
+
+
 == Dynamic Fields
 
 It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.

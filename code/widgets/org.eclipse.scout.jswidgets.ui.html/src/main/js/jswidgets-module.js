@@ -23,6 +23,7 @@
   __include("jswidgets/form/LifecycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
+  __include("jswidgets/formfield/FormFieldTypeLookupCall.js");
   __include("jswidgets/formfield/LabelWidthInPixelLookupCall.js");
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
   __include("jswidgets/formfield/FieldStyleLookupCall.js");
@@ -63,6 +64,7 @@
   __include("jswidgets/proposalfield/ProposalFieldForm.js");
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");
   __include("jswidgets/radiobuttongroup/RadioButtonGroupForm.js");
+  __include("jswidgets/sequencebox/SequenceBoxForm.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/tabbox/DynamicTab.js");
