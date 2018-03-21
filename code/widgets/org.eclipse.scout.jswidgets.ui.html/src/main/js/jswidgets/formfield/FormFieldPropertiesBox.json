@@ -84,6 +84,13 @@
       "objectType": "SmartField",
       "lookupCall": "jswidgets.StatusSeverityLookupCall",
       "label": "Error Status"
+    },
+    {
+      "id": "StatusPositionField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.StatusPositionLookupCall",
+      "label": "Status Position",
+      "displayStyle": "dropdown"
     }
   ]
 }

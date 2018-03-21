@@ -71,7 +71,8 @@
                   "body": {
                     "objectType": "LabelField",
                     "labelVisible": false,
-                    "value": "This is the body of the current group. You can use any widget as body, in this case a LabelField is used."
+                    "wrapText": true,
+                    "value": "${textKey:AccordionTextGroup}"
                   }
                 },
                 {

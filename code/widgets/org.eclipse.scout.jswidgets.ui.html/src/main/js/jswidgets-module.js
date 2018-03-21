@@ -27,6 +27,7 @@
   __include("jswidgets/formfield/DisabledStyleLookupCall.js");
   __include("jswidgets/formfield/FieldStyleLookupCall.js");
   __include("jswidgets/formfield/StatusSeverityLookupCall.js");
+  __include("jswidgets/formfield/StatusPositionLookupCall.js");
   __include("jswidgets/valuefield/ClearableStyleLookupCall.js");
   __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
   __include("jswidgets/custom/CustomFieldForm.js");

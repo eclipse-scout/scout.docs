@@ -84,6 +84,10 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   var tooltipTextField = this.widget('TooltipTextField');
   tooltipTextField.setValue(this.field.tooltipText);
   tooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var statusPositionField = this.widget('StatusPositionField');
+  statusPositionField.setValue(this.field.statusPosition);
+  statusPositionField.on('propertyChange', this._onPropertyChange.bind(this));
 };
 
 jswidgets.FormFieldPropertiesBox.prototype._createErrorStatus = function(severity) {
@@ -127,5 +131,7 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setErrorStatus(this._createErrorStatus(event.newValue));
   } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
     this.field.setTooltipText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'StatusPositionField') {
+    this.field.setStatusPosition(event.newValue);
   }
 };
