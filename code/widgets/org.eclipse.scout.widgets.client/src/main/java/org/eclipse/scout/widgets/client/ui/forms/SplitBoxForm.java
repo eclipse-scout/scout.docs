@@ -702,8 +702,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedValue() {
-            getSplitVerticalField().setSplitterPositionType(getValue());
-            updateSplitterPositionVFieldBounds();
+            if (getValue() != null) {
+              getSplitVerticalField().setSplitterPositionType(getValue());
+              updateSplitterPositionVFieldBounds();
+            }
           }
 
           protected void updateSplitterPositionVFieldBounds() {
