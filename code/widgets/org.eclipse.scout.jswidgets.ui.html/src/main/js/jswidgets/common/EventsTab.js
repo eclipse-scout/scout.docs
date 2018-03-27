@@ -29,13 +29,6 @@ jswidgets.EventsTab.prototype._init = function(model) {
   this.widget('ClearEventLogButton').on('click', this._onClearEventLogClick.bind(this));
 };
 
-jswidgets.EventsTab.prototype._postRender = function() {
-  jswidgets.EventsTab.parent.prototype._postRender.call(this);
-  var overviewField = this.widget('EventsOverviewField');
-  // useUiHeight does not work correctly yet -> force relayout
-  setTimeout(overviewField.revalidateLayoutTree.bind(overviewField));
-};
-
 jswidgets.EventsTab.prototype.setField = function(field) {
   this.setProperty('field', field);
 };
@@ -52,6 +45,10 @@ jswidgets.EventsTab.prototype._setField = function(field) {
 };
 
 jswidgets.EventsTab.prototype._onEvent = function(event) {
+  if (event.type === 'destroy') {
+    // Do nothing if field is being destroyed (e.g. on form close)
+    return;
+  }
   var logField = this.widget('EventLogField');
   var log = logField.value || '';
   if (log) {

@@ -2,7 +2,7 @@
   "id": "jswidgets.TabItemProperties",
   "type": "model",
   "objectType": "TabItem",
-  "label": "TabItem Properties",
+  "label": "Tab Item Properties",
   "fields": [
     {
       "id": "TabItemProperties.TargetField",

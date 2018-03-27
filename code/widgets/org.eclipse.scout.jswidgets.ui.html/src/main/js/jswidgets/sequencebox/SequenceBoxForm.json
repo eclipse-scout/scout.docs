@@ -63,21 +63,21 @@
                 ]
               },
               {
-                "id": "ContentPropertiesTab",
+                "id": "FieldPropertiesTab",
                 "objectType": "TabItem",
-                "label": "Content Properties",
+                "label": "Field Properties",
                 "fields": [
                   {
-                    "id": "TargetField",
+                    "id": "Field.TargetField",
                     "objectType": "SmartField",
                     "label": "Target"
                   },
                   {
-                    "id": "ContentFormFieldPropertiesBox",
+                    "id": "Field.FormFieldPropertiesBox",
                     "objectType": "jswidgets.FormFieldPropertiesBox"
                   },
                   {
-                    "id": "ContentGridDataBox",
+                    "id": "Field.GridDataBox",
                     "objectType": "jswidgets.GridDataBox",
                     "label": "Grid Data Hints"
                   }

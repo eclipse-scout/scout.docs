@@ -28,8 +28,8 @@ jswidgets.SequenceBoxForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(sequenceBox);
   this.widget('EventsTab').setField(sequenceBox);
 
-  // ContentProperties tab
-  var targetField = this.widget('TargetField');
+  // FieldProperties tab
+  var targetField = this.widget('Field.TargetField');
   targetField.setLookupCall(new jswidgets.FormFieldLookupCall(sequenceBox));
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
   targetField.setValue(sequenceBox.fields[0]);
@@ -44,12 +44,12 @@ jswidgets.SequenceBoxForm.prototype._onTargetPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     var targetField = event.newValue;
 
-    var contentFormFieldPropertiesBox = this.widget('ContentFormFieldPropertiesBox');
-    contentFormFieldPropertiesBox.setField(targetField);
-    contentFormFieldPropertiesBox.setEnabled(!!targetField);
+    var fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
+    fieldPropertiesBox.setField(targetField);
+    fieldPropertiesBox.setEnabled(!!targetField);
 
-    var contentGridDataBox = this.widget('ContentGridDataBox');
-    contentGridDataBox.setField(targetField);
-    contentGridDataBox.setEnabled(!!targetField);
+    var fieldGridDataBox = this.widget('Field.GridDataBox');
+    fieldGridDataBox.setField(targetField);
+    fieldGridDataBox.setEnabled(!!targetField);
   }
 };

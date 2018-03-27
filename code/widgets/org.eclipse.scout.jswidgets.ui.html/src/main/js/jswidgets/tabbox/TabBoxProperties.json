@@ -2,7 +2,7 @@
   "id": "jswidgets.TabBoxProperties",
   "type": "model",
   "objectType": "TabItem",
-  "label": "TabBox Properties",
+  "label": "Tab Box Properties",
   "fields": [
      {
        "id": "TabBoxProperties.SelectedTabField",

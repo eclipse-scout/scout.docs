@@ -49,7 +49,7 @@ jswidgets.GroupBoxAddFieldBox.prototype._setField = function(field) {
 };
 
 jswidgets.GroupBoxAddFieldBox.prototype._updateAddFieldLabel = function() {
-  this.labelField.setValue('DynField ' + this.dynamicFieldCounter);
+  this.labelField.setValue('Dynamic Field ' + this.dynamicFieldCounter);
 };
 
 jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(event) {
@@ -60,7 +60,7 @@ jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(ev
   var newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
     parent: this.field,
     id: 'DynField ' + this.dynamicFieldCounter,
-    label: this.labelField.value || 'DynField ' + this.dynamicFieldCounter
+    label: this.labelField.value || 'Dynamic Field ' + this.dynamicFieldCounter
   });
 
   if (beforeField) {
