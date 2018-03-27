@@ -51,6 +51,7 @@ import org.eclipse.scout.rt.platform.status.IMultiStatus;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -275,6 +276,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           private boolean m_throwOnLookup = false;
           private boolean m_throwOnValidate = false;
           private boolean m_validateValue = false;
+          private boolean m_formatValue = false;
 
           @Override
           protected String getConfiguredLabel() {
@@ -305,6 +307,15 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
             return validValue;
           }
 
+          @Override
+          protected String execFormatValue(Locale value) {
+            String displayText = super.execFormatValue(value);
+            if (m_formatValue && StringUtility.hasText(displayText)) {
+              displayText = "[Formated] " + displayText;
+            }
+            return displayText;
+          }
+
           public void setThrowOnLookup(boolean throwExceptionOnLookup) {
             m_throwOnLookup = throwExceptionOnLookup;
           }
@@ -315,6 +326,10 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           public void setValidateValue(boolean validateValue) {
             m_validateValue = validateValue;
+          }
+
+          public void setFormatValue(boolean formatValue) {
+            m_formatValue = formatValue;
           }
 
           @Order(1000)
@@ -1232,6 +1247,25 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           @Override
           protected void execAlways() {
             getSampleContentButton().setShowState(isActive());
+          }
+        }
+
+        @Order(130)
+        public class ToggleFormatValueMenu extends AbstractToggleMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Format value in execFormatValue";
+          }
+
+          @Override
+          protected String getConfiguredTooltipText() {
+            return "Adjust display text with execFormatValue";
+          }
+
+          @Override
+          protected void execAlways() {
+            getDefaultSmartField().setFormatValue(isActive());
           }
         }
       }
