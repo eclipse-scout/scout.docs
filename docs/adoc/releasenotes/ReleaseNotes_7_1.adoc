@@ -297,3 +297,8 @@ When using `AbstractUiServletRequestHandler` no migration should be required, se
 == Automatic Preloading of Web Fonts
 
 To prevent incorrect measurements or the so-called "FOUT effect" (Flash Of Unstyled Text), Scout tries to preload all necessary web font files (*.woff) before rendering the application. To make it easier for projects to add theme-dependent fonts, the font preloader has been improved. The list of fonts to preload is now detected automatically by inspecting the document's style sheet (_@font-face_ rules). It's no longer necessary to manually list all fonts in the bootstrap argument of `scout.App` (see migration guide).
+
+== Improved useUiHeight calculation
+If a form field is set to use its ui height, it is supposed to be as big as its content. A typical example is the group box: `useUiHeight` is true by default to make the group box as height as the containing form fields. In that case it works fine because the height does not depend on the width.
+
+There are cases where the height depends on the width, e.g. if a label field is set to wrap its text (property `wrapText` = true). These cases did not work correctly because in order to calculate the preferred height the final width has to be known. This has been fixed so that setting `useUiHeight` to true should now work as expected.
