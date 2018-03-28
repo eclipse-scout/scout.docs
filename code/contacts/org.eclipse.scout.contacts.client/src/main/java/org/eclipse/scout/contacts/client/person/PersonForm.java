@@ -229,6 +229,12 @@ public class PersonForm extends AbstractForm {
       }
 
       @Override
+      protected double getConfiguredGridWeightY() {
+        // do not allow the general box to grow or shrink vertically.
+        return 0;
+      }
+
+      @Override
       protected boolean getConfiguredLabelVisible() {
         return false;
       }

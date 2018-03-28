@@ -49,10 +49,11 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> We reuse the picture template field to display the company logo.
 <2> We reduce the number of rows for the company logo compared to the person picture.
-<3> We configure the company name field to be mandatory for an organization.
-<4> As-is reuse of the address template box.
-<5> As-is reuse of the email template field.
-<6> As-is reuse of the notes tab box.
+<3> We do not allow the general box to grow or shrink vertically
+<4> We configure the company name field to be mandatory for an organization.
+<5> As-is reuse of the address template box.
+<6> As-is reuse of the email template field.
+<7> As-is reuse of the notes tab box.
 
 To be able to open the organization form we need to link the form to the user interface.
 Following the pattern for the person form we define the context menus "Edit" and "New" for the organization table and a menu "Create new organization" under the "Quick access" top level menu.

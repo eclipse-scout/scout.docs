@@ -168,6 +168,11 @@ public class OrganizationForm extends AbstractForm {
         protected int getConfiguredGridH() { // <2>
           return 4;
         }
+
+        @Override
+        protected double getConfiguredGridWeightY() { // <3>
+          return 0;
+        }
         // end::layout[]
 
         @Override
@@ -192,7 +197,7 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Override
-        protected boolean getConfiguredMandatory() { // <3>
+        protected boolean getConfiguredMandatory() { // <4>
           return true;
         }
       }
@@ -257,7 +262,7 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Order(10)
-        public class AddressBox extends AbstractAddressBox { // <4>
+        public class AddressBox extends AbstractAddressBox { // <5>
         }
 
         @Order(20)
@@ -270,12 +275,12 @@ public class OrganizationForm extends AbstractForm {
         }
 
         @Order(30)
-        public class EmailField extends AbstractEmailField { // <5>
+        public class EmailField extends AbstractEmailField { // <6>
         }
       }
 
       @Order(20)
-      public class NotesBox extends AbstractNotesBox { // <6>
+      public class NotesBox extends AbstractNotesBox { // <7>
       }
     }
 
