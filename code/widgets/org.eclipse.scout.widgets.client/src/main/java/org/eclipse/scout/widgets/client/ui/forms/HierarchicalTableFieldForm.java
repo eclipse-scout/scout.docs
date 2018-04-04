@@ -10,11 +10,16 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +34,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
-import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
+import org.eclipse.scout.rt.client.ui.basic.table.HierarchicalStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
@@ -46,7 +51,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -62,6 +66,7 @@ import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.TuningUtility;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -240,6 +245,10 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
         @Override
         protected void execInitField() {
+          getTable().replaceRows(createInitialRows());
+        }
+
+        private List<ITableRow> createInitialRows() {
           List<ITableRow> rows = new ArrayList<>();
           ITableRow javaRow = createRow(null, "Java", null, null, null, null, null);
           rows.add(javaRow);
@@ -253,8 +262,49 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
           ITableRow jsRow = createRow(null, "JavaScript", null, null, null, null, null);
           rows.add(jsRow);
-          getTable().replaceRows(rows);
+          return rows;
+        }
 
+        private List<ITableRow> createRows(int rowCount, int maxLevel) {
+          Table table = getTable();
+          List<ITableRow> result = new ArrayList<>();
+          List<ITableRow> potentialParents = new ArrayList<>();
+          Map<ITableRow, ITableRow> childToParent = new HashMap<>();
+
+          for (int i = 0; i < rowCount; i++) {
+            ITableRow parent = null;
+            String name = "";
+            if (potentialParents.size() > 0 && Math.random() > 0.2) {
+              parent = potentialParents.get((int) (Math.random() * potentialParents.size()));
+              name = table.getNameColumn().getValue(parent);
+            }
+            else {
+              name = "Row";
+            }
+            name = name + "_" + i;
+
+            ITableRow row = createRow(parent, name, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalTime.now().atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant()),
+                Date.from(LocalTime.now().atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant()), null);
+            result.add(row);
+
+            if (parent != null) {
+              childToParent.put(row, parent);
+            }
+            int rowLevel = getRowLevel(row, childToParent);
+            if (rowLevel < maxLevel) {
+              potentialParents.add(row);
+            }
+          }
+          return result;
+
+        }
+
+        private int getRowLevel(ITableRow row, Map<ITableRow, ITableRow> childToParent) {
+          ITableRow parent = childToParent.get(row);
+          if (parent != null) {
+            return 1 + getRowLevel(parent, childToParent);
+          }
+          return 0;
         }
 
         private ITableRow createRow(ITableRow parentRow, String name, String location, Date date, Date startTime, Date endDateTime, Long industery) {
@@ -271,43 +321,19 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
           return row;
         }
 
-        public void addExampleRows() {
-//          Table table = getTable();
-//          ITableRow r;
-//
-//          //First Row:
-//          r = table.addRow(getTable().createRow());
-//          table.getIdColumn().setValue(r, getNextId());
-//          table.getNameColumn().setValue(r, "Eclipsecon USA");
-//          table.getLocationColumn().setValue(r, LOCATIONS[0]);
-//          table.getDateColumn().setValue(r, DateUtility.parse("18.03.2014", "dd.MM.yyyy"));
-//          table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
-//          table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
-//          table.getIndustryColumn().setValue(r, ICB9537.ID);
-//          table.getParticipantsColumn().setValue(r, 680L);
-//          table.getWebPageColumn().setValue(r, "http://www.eclipsecon.org");
-//          table.getAttendedColumn().setValue(r, null);
-//          table.getMixedStateColumn().setValue(r, null);
-//          table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
-//          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
-//          table.getLanguageColumn().setValue(r, new Locale("en", "US"));
-//
-//          //Second Row:
-//          r = table.addRow(getTable().createRow());
-//          table.getIdColumn().setValue(r, getNextId());
-//          table.getNameColumn().setValue(r, "Javaland");
-//          table.getLocationColumn().setValue(r, LOCATIONS[1]);
-//          table.getDateColumn().setValue(r, DateUtility.parse("25.03.2014", "dd.MM.yyyy"));
-//          table.getStartColumn().setValue(r, DateUtility.parse("18.03.2014 09:00", "dd.MM.yyyy HH:mm"));
-//          table.getEndDateTimeColumn().setValue(r, DateUtility.parse("20.03.2014 17:45", "dd.MM.yyyy HH:mm"));
-//          table.getIndustryColumn().setValue(r, ICB9537.ID);
-//          table.getParticipantsColumn().setValue(r, 810L);
-//          table.getWebPageColumn().setValue(r, "http://www.javaland.eu");
-//          table.getAttendedColumn().setValue(r, true);
-//          table.getMixedStateColumn().setValue(r, true);
-//          table.getPhoneColumn().setValue(r, null);
-//          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
-//          table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
+        private void newRow() {
+          Table table = getTable();
+          ColumnSet cols = table.getColumnSet();
+          ITableRow row = new TableRow(cols);
+
+          row.getCellForUpdate(table.getIdColumn()).setValue(m_nextRowId.getAndIncrement());
+          row.getCellForUpdate(table.getNameColumn()).setValue("New Row");
+          row.getCellForUpdate(table.getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
+          ExampleBean bean = new ExampleBean();
+          bean.setHeader("header property");
+          row.getCellForUpdate(table.getCustomColumn()).setValue(bean);
+
+          table.addRow(row, true);
         }
 
         @Order(1000)
@@ -898,20 +924,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             }
           }
 
-          private void newRow() {
-            ColumnSet cols = getColumnSet();
-            ITableRow row = new TableRow(cols);
-
-            row.getCellForUpdate(getIdColumn()).setValue(m_nextRowId.getAndIncrement());
-            row.getCellForUpdate(getNameColumn()).setValue("New Row");
-            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUpBold);
-            ExampleBean bean = new ExampleBean();
-            bean.setHeader("header property");
-            row.getCellForUpdate(getCustomColumn()).setValue(bean);
-
-            addRow(row, true);
-          }
-
           @Order(10)
           public class NewMenu extends AbstractMenu {
 
@@ -1048,10 +1060,54 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
               @Override
               protected void execAction() {
-                ModelJobs.schedule(Table.this::newRow, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+                ModelJobs.schedule(TableField.this::newRow, ModelJobs.newInput(ClientRunContexts.copyCurrent())
                     .withExecutionTrigger(Jobs.newExecutionTrigger()
                         .withStartIn(2, TimeUnit.SECONDS)));
 
+              }
+            }
+
+            @Order(12)
+            @ClassId("cc32400c-a5d9-4621-8e1d-68869170d4d8")
+            public class DeleteAllRowsMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("DeleteRows");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                getTable().deleteAllRows();
+              }
+            }
+
+            @Order(13)
+            @ClassId("cf7c4860-ad75-48c0-9de8-3fe6c875d00d")
+            public class AddManyRowsMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("AddManyRows");
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+
+                TuningUtility.startTimer();
+                List<ITableRow> newRows = createRows(10000, 2);
+                TuningUtility.stopTimer("createRows");
+                TuningUtility.startTimer();
+                getTable().replaceRows(newRows);
+                TuningUtility.stopTimer("replacerows");
               }
             }
 
@@ -1074,28 +1130,25 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             }
 
             @Order(20)
-            public class ToggleGroupingStyle extends AbstractMenu {
+            public class ToggleHierarchicalStyle extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
-                return TEXTS.get("ToggleGroupingStyle");
+                return TEXTS.get("ToggleHierarchicalStyle");
               }
 
               @Override
               protected void execAction() {
-                ITable table = getTable();
-                GroupingStyle groupingStyle = table.getGroupingStyle();
-                if (groupingStyle == GroupingStyle.BOTTOM) {
-                  table.setGroupingStyle(GroupingStyle.TOP);
-                }
-                else {
-                  table.setGroupingStyle(GroupingStyle.BOTTOM);
-                }
-                setTooltipText(TEXTS.get("CurrentGroupingStyle", getTable().getGroupingStyle().name()));
-              }
+                HierarchicalStyle style = getHierarchicalStyle();
+                switch (style) {
+                  case STRUCTURED:
+                    style = HierarchicalStyle.DEFAULT;
+                    break;
 
-              @Override
-              protected String getConfiguredTooltipText() {
-                return TEXTS.get("CurrentGroupingStyle", GroupingStyle.BOTTOM.name());
+                  default:
+                    style = HierarchicalStyle.STRUCTURED;
+                    break;
+                }
+                getTable().setHierarchicalStyle(style);
               }
 
               @Override
@@ -1169,7 +1222,17 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
             @Override
             protected void execAction() {
-              getSelectedRow().setEnabled(!getSelectedRow().isEnabled());
+              HierarchicalStyle style = getHierarchicalStyle();
+              switch (style) {
+                case STRUCTURED:
+                  style = HierarchicalStyle.DEFAULT;
+                  break;
+
+                default:
+                  style = HierarchicalStyle.STRUCTURED;
+                  break;
+              }
+              getTable().setHierarchicalStyle(style);
             }
 
             @Override
@@ -1963,20 +2026,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             }
           }
         }
-      }
-    }
-
-    @Order(40)
-    public class SampleContentButton extends AbstractButton {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("SampleContent");
-      }
-
-      @Override
-      protected void execClickAction() {
-        getTableField().addExampleRows();
       }
     }
 

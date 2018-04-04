@@ -49,7 +49,7 @@ public class MenusNodePage extends AbstractPageWithNodes {
   }
 
   @Override
-  protected void execInitPage() {
+  protected void execPageActivated() {
     MenusForm form = new MenusForm();
     setDetailForm(form);
     form.startPageForm();
