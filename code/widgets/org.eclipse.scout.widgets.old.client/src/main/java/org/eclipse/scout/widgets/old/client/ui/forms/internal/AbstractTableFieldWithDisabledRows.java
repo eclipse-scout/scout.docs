@@ -40,10 +40,8 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractTableFi
 
   @Override
   public void reloadTableData() {
-
     Object[][] data = {{1l, "Anna"}, {2l, "Cleo"}};
     getTable().replaceRowsByMatrix(data);
-
   }
 
   public class Table extends AbstractTable {
@@ -122,7 +120,7 @@ public abstract class AbstractTableFieldWithDisabledRows extends AbstractTableFi
 
     @Override
     protected void execAction() {
-      ITableRow cleoRow = getTable().findRowByKey(CollectionUtility.arrayList(2L));
+      ITableRow cleoRow = getTable().getRowByKey(CollectionUtility.arrayList(2L));
       boolean newEnableState = !cleoRow.isEnabled();
       cleoRow.setEnabled(newEnableState);
       System.out.println("set enable state of cleo row to: " + newEnableState);
