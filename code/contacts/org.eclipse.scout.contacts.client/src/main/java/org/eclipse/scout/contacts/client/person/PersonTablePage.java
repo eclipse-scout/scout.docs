@@ -384,7 +384,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
   @Override
   protected String getConfiguredIconId() {
-    return AbstractIcons.Person;
+    return AbstractIcons.PersonSolid;
   }
 
   @Override

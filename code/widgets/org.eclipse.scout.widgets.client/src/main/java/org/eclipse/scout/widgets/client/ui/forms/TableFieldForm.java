@@ -290,7 +290,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getMixedStateColumn().setValue(r, null);
           table.getPhoneColumn().setValue(r, "+41 (0)79 123 45 67");
           table.getImageColumn().setValue(r, "large");
-          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUp);
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUpBold);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
 
           //Second Row:
@@ -308,7 +308,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           table.getMixedStateColumn().setValue(r, true);
           table.getPhoneColumn().setValue(r, null);
           table.getImageColumn().setValue(r, "small");
-          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDown);
+          table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDownBold);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
         }
 
@@ -955,7 +955,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
 
             row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
-            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
+            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUpBold);
             ExampleBean bean = new ExampleBean();
             bean.setHeader("header property");
             row.getCellForUpdate(getCustomColumn()).setValue(bean);

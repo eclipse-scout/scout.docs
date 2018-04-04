@@ -904,7 +904,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
             row.getCellForUpdate(getIdColumn()).setValue(m_nextRowId.getAndIncrement());
             row.getCellForUpdate(getNameColumn()).setValue("New Row");
-            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
+            row.getCellForUpdate(getTrendColumn()).setValue(AbstractIcons.LongArrowUpBold);
             ExampleBean bean = new ExampleBean();
             bean.setHeader("header property");
             row.getCellForUpdate(getCustomColumn()).setValue(bean);

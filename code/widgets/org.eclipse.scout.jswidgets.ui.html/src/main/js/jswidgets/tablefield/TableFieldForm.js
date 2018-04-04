@@ -92,7 +92,7 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
 
 jswidgets.TableFieldForm.prototype._onAddRowMenuAction = function() {
   this.table.insertRow({
-    iconId: scout.icons.STAR,
+    iconId: scout.icons.STAR_BOLD,
     cells: ['Row #' + this.rowNo, this.groupNo, this.rowNo]
   });
   if (this.rowNo % jswidgets.TableFieldForm.GROUP_SIZE === 0) {

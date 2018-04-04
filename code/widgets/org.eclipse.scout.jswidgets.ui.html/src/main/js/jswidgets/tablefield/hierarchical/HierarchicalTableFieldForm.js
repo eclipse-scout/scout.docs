@@ -119,21 +119,21 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
   }, {
     id: 2,
     parentId: 1,
-    iconId: scout.icons.STAR,
+    iconId: scout.icons.STAR_BOLD,
     cells: [
       'Christian Rusche', 'Stuff', '20.10.2015', true
     ]
   }, {
     id: 3,
     parentId: 1,
-    iconId: scout.icons.STAR,
+    iconId: scout.icons.STAR_BOLD,
     cells: [
       'Claudio Guglielmo', 'Frontend Engineer', '20.10.2015', true
     ]
   }, {
     id: 4,
     parentId: 1,
-    iconId: scout.icons.STAR,
+    iconId: scout.icons.STAR_BOLD,
     cells: [
       'Andreas Hoegger', 'Frontend Engineer', '20.10.2015', true
     ]
@@ -147,7 +147,7 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
   }, {
     id: 6,
     parentId: 5,
-    iconId: scout.icons.PERSON,
+    iconId: scout.icons.PERSON_SOLID,
     enabled: false,
     cells: [
       'Oliver Hechler', 'Project Manager', '20.10.2015', false
@@ -155,7 +155,7 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
   }, {
     id: 6,
     parentId: 5,
-    iconId: scout.icons.PERSON,
+    iconId: scout.icons.PERSON_SOLID,
     cells: [
       'Matthias Otterbach', 'Senior Software Engineer', '20.10.2015', true
     ]

@@ -320,7 +320,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.File;
+            return Icons.FileSolid;
           }
 
           @Override

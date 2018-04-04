@@ -228,7 +228,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected String getConfiguredIconId() {
-      return AbstractIcons.Person;
+      return AbstractIcons.PersonSolid;
     }
 
     //end::DesktopInit[]

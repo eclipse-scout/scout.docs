@@ -249,7 +249,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.RotateLeft;
+            return Icons.RotateLeftBold;
           }
 
           @Override
@@ -263,7 +263,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.RotateRight;
+            return Icons.RotateRightBold;
           }
 
           @Override
