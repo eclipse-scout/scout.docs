@@ -994,7 +994,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
 
     public enum IconId {
-      Calendar(Icons.Calendar),
+      Calendar(Icons.CalendarBold),
       Person(Icons.PersonSolid),
       Square(Icons.SquareSolid),
       Star(Icons.Star),

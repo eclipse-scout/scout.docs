@@ -344,7 +344,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2);
             getHtmlField().setValue(HTML.fragment(
-                HTML.icon(Icons.Clock)
+                HTML.icon(Icons.ClockBold)
                     .style("font-size: 50px; padding-right: 10px; vertical-align: middle; color: " + randomColor),
                 HTML.span(
                     "The current server time is: ",

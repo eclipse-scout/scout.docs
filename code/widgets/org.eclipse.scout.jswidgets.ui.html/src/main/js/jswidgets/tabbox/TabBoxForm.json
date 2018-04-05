@@ -55,7 +55,7 @@
               {
                 "id": "ShareMenu",
                 "objectType": "Menu",
-                "iconId": "${iconId:MENU}",
+                "iconId": "${iconId:MENU_BOLD}",
                 "stackable": false,
                 "menuTypes": ["TabBox.Header"],
                 "horizontalAlignment": 1

@@ -44,9 +44,7 @@
               "tableControls": [
                 {
                   "id": "AggregateTableControl",
-                  "objectType": "AggregateTableControl",
-                  "iconId": "${iconId:SUM}",
-                  "tooltipText": "${textKey:ui.Total}"
+                  "objectType": "AggregateTableControl"
                 }
               ],
               "menus": [
