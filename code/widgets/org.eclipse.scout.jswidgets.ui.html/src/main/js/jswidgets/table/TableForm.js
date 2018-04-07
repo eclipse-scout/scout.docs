@@ -1,18 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2017 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
+ * Copyright (c) 2017 BSI Business Systems Integration AG. All rights reserved.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Distribution License v1.0 which accompanies this
+ * distribution, and is available at
  * http://www.eclipse.org/org/documents/edl-v10.html
  *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
+ * Contributors: BSI Business Systems Integration AG - initial API and
+ * implementation
  ******************************************************************************/
 jswidgets.TableForm = function() {
   jswidgets.TableForm.parent.call(this);
 
-  this.rowNo = 1;
-  this.groupNo = 1;
+  this.rowNo = 0;
+  this.groupNo = 0;
 };
 scout.inherits(jswidgets.TableForm, scout.Form);
 
@@ -28,7 +28,6 @@ jswidgets.TableForm.prototype._init = function(model) {
   this.table = this.widget('Table');
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
   this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
-  this.widget('ToggleGroupNoColumnMenu').on('action', this._onToggleGroupNoColumnMenuAction.bind(this));
 
   var autoResizeColumnsField = this.widget('AutoResizeColumnsField');
   autoResizeColumnsField.setValue(this.table.autoResizeColumns);
@@ -88,26 +87,64 @@ jswidgets.TableForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
+  this.widget('EventsTab').setField(this.table);
+
+  var targetField = this.widget('Column.TargetField');
+  targetField.setLookupCall(new jswidgets.ColumnLookupCall(this.table));
+  targetField.setValue(this.table.columns[0]);
+  targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
+
+  this._onTargetPropertyChange({
+    propertyName: 'value',
+    newValue: targetField.value
+  });
+
+  this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
 };
 
-jswidgets.TableForm.prototype._onAddRowMenuAction = function() {
-  this.table.insertRow({
-    iconId: scout.icons.STAR_BOLD,
-    cells: ['Row #' + this.rowNo, this.groupNo, this.rowNo]
+jswidgets.TableForm.prototype._onTargetPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var oldColumn = event.oldValue;
+    var newColumn = event.newValue;
+
+    var columnPropertiesBox = this.widget('Column.PropertiesBox');
+    columnPropertiesBox.setColumn(newColumn);
+    columnPropertiesBox.setEnabled(!!newColumn);
+  }
+};
+
+jswidgets.TableForm.prototype._createRow = function() {
+  var date = new Date();
+  var icons = [ scout.icons.STAR_BOLD, scout.icons.PERSON_SOLID, scout.icons.FOLDER_BOLD ];
+  var locales = jswidgets.LocaleLookupCall.DATA.map(function(lookupRow) {
+    return lookupRow[0];
   });
+
+  var rowIcon = icons[this.rowNo % icons.length];
+  var iconValue = icons[this.rowNo % icons.length];
+  var stringValue = 'Row #' + this.rowNo;
+  var dateValue = scout.dates.shift(date, 0, 0, -this.groupNo);
+  var numberValue = this.rowNo;
+  var smartValue = locales[this.rowNo % locales.length];
+  var booleanValue = this.rowNo % 2 === 0;
+
   if (this.rowNo % jswidgets.TableForm.GROUP_SIZE === 0) {
     this.groupNo++;
   }
   this.rowNo++;
+
+  return {
+    iconId : rowIcon,
+    cells : [ stringValue, dateValue, numberValue, smartValue, booleanValue, iconValue ]
+  };
+};
+
+jswidgets.TableForm.prototype._onAddRowMenuAction = function() {
+  this.table.insertRow(this._createRow());
 };
 
 jswidgets.TableForm.prototype._onDeleteRowMenuAction = function() {
   this.table.deleteRows(this.table.selectedRows);
-};
-
-jswidgets.TableForm.prototype._onToggleGroupNoColumnMenuAction = function() {
-  var column = this.table.columnById('GroupNo');
-  column.setVisible(!column.visible);
 };
 
 jswidgets.TableForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {

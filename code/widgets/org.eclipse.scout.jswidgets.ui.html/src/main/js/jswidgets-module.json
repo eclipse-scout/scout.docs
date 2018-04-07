@@ -40,6 +40,7 @@
     "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tabbox/TabItemProperties.json",
     "jswidgets/table/TableForm.json",
+    "jswidgets/table/ColumnPropertiesBox.json",
     "jswidgets/table/hierarchical/HierarchicalTableForm.json",
     "jswidgets/tilegrid/TileGridForm.json",
     "jswidgets/tilegrid/TileGridLayoutConfigBox.json",

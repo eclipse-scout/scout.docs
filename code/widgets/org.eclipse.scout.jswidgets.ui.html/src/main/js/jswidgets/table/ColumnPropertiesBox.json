@@ -1,0 +1,154 @@
+{
+  "id": "jswidgets.ColumnPropertiesBox",
+  "type": "model",
+  "objectType": "GroupBox",
+  "gridColumnCount": 2,
+  "label": "Column Properties",
+  "expandable": true,
+  "fields": [
+    {
+      "id": "AutoOptimizeWidthField",
+      "objectType": "CheckBoxField",
+      "label": "Auto Optimize Width",
+      "labelVisible": false
+    },
+    {
+      "id": "AutoOptimizeMaxWidthField",
+      "objectType": "CheckBoxField",
+      "label": "Auto Optimize Max Width",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "EditableField",
+      "objectType": "CheckBoxField",
+      "label": "Editable",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "ModifiableField",
+      "objectType": "CheckBoxField",
+      "label": "Modifiable",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "RemovableField",
+      "objectType": "CheckBoxField",
+      "label": "Removable",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "FixedWidthField",
+      "objectType": "CheckBoxField",
+      "label": "Fixed Width",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "FixedPositionField",
+      "objectType": "CheckBoxField",
+      "label": "Fixed Position",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "GroupedField",
+      "objectType": "CheckBoxField",
+      "label": "Grouped",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "HeaderHtmlEnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Header Html Enabled",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "HtmlEnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Html Enabled",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "MandatoryField",
+      "objectType": "CheckBoxField",
+      "label": "Mandatory",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "SortActiveField",
+      "objectType": "CheckBoxField",
+      "label": "Sort Active",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "SortAscendingField",
+      "objectType": "CheckBoxField",
+      "label": "Sort Ascending",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "TextWrapField",
+      "objectType": "CheckBoxField",
+      "label": "Text Wrap",
+      "labelVisible": false,
+      "enabled": false
+    },
+    {
+      "id": "DisplayableField",
+      "objectType": "CheckBoxField",
+      "label": "Displayable",
+      "labelVisible": false
+    },
+    {
+      "id": "VisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "CssClassField",
+      "objectType": "StringField",
+      "label": "Css Class"
+    },
+    {
+      "id": "HorizontalAlignmentField",
+      "objectType": "NumberField",
+      "label": "Horizontal Alignment",
+      "enabled": false
+    },
+    {
+      "id": "TextField",
+      "objectType": "StringField",
+      "label": "Text",
+      "enabled": false
+    },
+    {
+      "id": "SortIndexField",
+      "objectType": "NumberField",
+      "label": "Sort Index",
+      "enabled": false
+    },
+    {
+      "id": "WidthField",
+      "objectType": "NumberField",
+      "label": "Width",
+      "enabled": false
+    },
+    {
+      "id": "MinWidthField",
+      "objectType": "NumberField",
+      "label": "Min Width",
+      "enabled": false
+    }
+  ]
+}
