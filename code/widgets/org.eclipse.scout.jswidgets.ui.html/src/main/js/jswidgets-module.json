@@ -39,10 +39,10 @@
     "jswidgets/tabbox/TabBoxDeleteTabItemBox.json",
     "jswidgets/tabbox/TabBoxForm.json",
     "jswidgets/tabbox/TabItemProperties.json",
-    "jswidgets/tablefield/TableFieldForm.json",
-    "jswidgets/tablefield/hierarchical/HierarchicalTableFieldForm.json",
-    "jswidgets/tilefield/TileFieldForm.json",
-    "jswidgets/tilefield/TileGridLayoutConfigBox.json",
+    "jswidgets/table/TableForm.json",
+    "jswidgets/table/hierarchical/HierarchicalTableForm.json",
+    "jswidgets/tilegrid/TileGridForm.json",
+    "jswidgets/tilegrid/TileGridLayoutConfigBox.json",
     "jswidgets/tileaccordion/TileAccordionForm.json",
     "jswidgets/valuefield/ValueFieldPropertiesBox.json"
   ]

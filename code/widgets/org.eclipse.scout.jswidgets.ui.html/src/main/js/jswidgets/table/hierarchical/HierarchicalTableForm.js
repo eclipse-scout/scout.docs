@@ -8,22 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.HierarchicalTableFieldForm = function() {
-  jswidgets.HierarchicalTableFieldForm.parent.call(this);
+jswidgets.HierarchicalTableForm = function() {
+  jswidgets.HierarchicalTableForm.parent.call(this);
 
   this.rowNo = 1;
   this.groupNo = 1;
 };
-scout.inherits(jswidgets.HierarchicalTableFieldForm, scout.Form);
+scout.inherits(jswidgets.HierarchicalTableForm, scout.Form);
 
-jswidgets.HierarchicalTableFieldForm.GROUP_SIZE = 2;
+jswidgets.HierarchicalTableForm.GROUP_SIZE = 2;
 
-jswidgets.HierarchicalTableFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.HierarchicalTableFieldForm');
+jswidgets.HierarchicalTableForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.HierarchicalTableForm');
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._init = function(model) {
-  jswidgets.HierarchicalTableFieldForm.parent.prototype._init.call(this, model);
+jswidgets.HierarchicalTableForm.prototype._init = function(model) {
+  jswidgets.HierarchicalTableForm.parent.prototype._init.call(this, model);
 
   this.table = this.widget('Table');
 
@@ -97,19 +97,19 @@ jswidgets.HierarchicalTableFieldForm.prototype._init = function(model) {
   this._insertFewRows();
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onRemoveAllRows = function() {
+jswidgets.HierarchicalTableForm.prototype._onRemoveAllRows = function() {
   this.table.deleteAllRows();
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onInsertFew = function() {
+jswidgets.HierarchicalTableForm.prototype._onInsertFew = function() {
   this._insertFewRows();
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onInsertMany = function() {
+jswidgets.HierarchicalTableForm.prototype._onInsertMany = function() {
   this._insertManyRows();
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
+jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
   this.table.insertRows(this._scrumbleOrder([{
     id: 1,
     iconId: scout.icons.WORLD,
@@ -162,7 +162,7 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertFewRows = function() {
   }]));
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._insertManyRows = function() {
+jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
   var i = 0,
     allRows = [];
 
@@ -197,45 +197,45 @@ jswidgets.HierarchicalTableFieldForm.prototype._insertManyRows = function() {
 
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._scrumbleOrder = function(rows) {
+jswidgets.HierarchicalTableForm.prototype._scrumbleOrder = function(rows) {
   return rows.sort(function(a, b) {
     return 0.5 - Math.random();
   });
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onAddRowMenuAction = function() {
+jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
   this.table.insertRow({
     iconId: scout.icons.STAR,
     cells: ['Row #' + this.rowNo, this.groupNo, this.rowNo]
   });
-  if (this.rowNo % jswidgets.HierarchicalTableFieldForm.GROUP_SIZE === 0) {
+  if (this.rowNo % jswidgets.HierarchicalTableForm.GROUP_SIZE === 0) {
     this.groupNo++;
   }
   this.rowNo++;
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onDeleteRowMenuAction = function() {
+jswidgets.HierarchicalTableForm.prototype._onDeleteRowMenuAction = function() {
   this.table.deleteRows(this.table.selectedRows);
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onToggleGroupNoColumnMenuAction = function() {
+jswidgets.HierarchicalTableForm.prototype._onToggleGroupNoColumnMenuAction = function() {
   var column = this.table.columnById('GroupNo');
   column.setVisible(!column.visible);
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onHierarchicalStylePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onHierarchicalStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHierarchicalStyle((event.newValue) ? (scout.Table.HierarchicalStyle.STRUCTURED) : (scout.Table.HierarchicalStyle.DEFAULT));
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setAutoResizeColumns(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.columns.forEach(function(column) {
       column.setAutoOptimizeWidth(event.newValue);
@@ -243,73 +243,73 @@ jswidgets.HierarchicalTableFieldForm.prototype._onAutoOptimizeColumnWidthsProper
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onCheckablePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onCheckablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckable(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onHeaderEnabledPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onHeaderEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderEnabled(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onHeaderVisiblePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onHeaderVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderVisible(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderMenusEnabled(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onMultiCheckPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onMultiCheckPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiCheck(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onMultiSelectPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onMultiSelectPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiSelect(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onScrollToSelectionPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onScrollToSelectionPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setScrollToSelection(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onSortEnabledPropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onSortEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setSortEnabled(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onFooterVisiblePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onFooterVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setFooterVisible(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onRowIconVisiblePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onRowIconVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setRowIconVisible(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onCheckableStylePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onCheckableStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckableStyle(event.newValue);
   }
 };
 
-jswidgets.HierarchicalTableFieldForm.prototype._onGroupingStylePropertyChange = function(event) {
+jswidgets.HierarchicalTableForm.prototype._onGroupingStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setGroupingStyle(event.newValue);
   }

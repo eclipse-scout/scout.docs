@@ -171,18 +171,18 @@
     },
     {
       "objectType": "PageWithNodes",
-      "text": "${textKey:TableField}",
+      "text": "Table",
       "expanded": true,
       "detailForm": {
-        "objectType": "jswidgets.TableFieldForm"
+        "objectType": "jswidgets.TableForm"
       },
       "childNodes": [
         {
           "objectType": "PageWithNodes",
           "leaf": true,
-          "text": "${textKey:HierarchicalTableField}",
+          "text": "Hierarchical Table",
           "detailForm": {
-            "objectType": "jswidgets.HierarchicalTableFieldForm"
+            "objectType": "jswidgets.HierarchicalTableForm"
           }
         }
       ]
@@ -190,15 +190,15 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:TileField}",
+      "text": "Tile Grid",
       "detailForm": {
-        "objectType": "jswidgets.TileFieldForm"
+        "objectType": "jswidgets.TileGridForm"
       }
     },
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:TileAccordion}",
+      "text": "Tile Accordion",
       "detailForm": {
         "objectType": "jswidgets.TileAccordionForm"
       }

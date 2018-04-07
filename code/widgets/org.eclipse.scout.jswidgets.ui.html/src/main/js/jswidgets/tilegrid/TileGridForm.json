@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.TileFieldForm",
+  "id": "jswidgets.TileGridForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {

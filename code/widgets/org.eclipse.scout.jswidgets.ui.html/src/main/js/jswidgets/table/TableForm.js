@@ -8,22 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.TableFieldForm = function() {
-  jswidgets.TableFieldForm.parent.call(this);
+jswidgets.TableForm = function() {
+  jswidgets.TableForm.parent.call(this);
 
   this.rowNo = 1;
   this.groupNo = 1;
 };
-scout.inherits(jswidgets.TableFieldForm, scout.Form);
+scout.inherits(jswidgets.TableForm, scout.Form);
 
-jswidgets.TableFieldForm.GROUP_SIZE = 2;
+jswidgets.TableForm.GROUP_SIZE = 2;
 
-jswidgets.TableFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TableFieldForm');
+jswidgets.TableForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.TableForm');
 };
 
-jswidgets.TableFieldForm.prototype._init = function(model) {
-  jswidgets.TableFieldForm.parent.prototype._init.call(this, model);
+jswidgets.TableForm.prototype._init = function(model) {
+  jswidgets.TableForm.parent.prototype._init.call(this, model);
 
   this.table = this.widget('Table');
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
@@ -90,33 +90,33 @@ jswidgets.TableFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.widget('TableField'));
 };
 
-jswidgets.TableFieldForm.prototype._onAddRowMenuAction = function() {
+jswidgets.TableForm.prototype._onAddRowMenuAction = function() {
   this.table.insertRow({
     iconId: scout.icons.STAR_BOLD,
     cells: ['Row #' + this.rowNo, this.groupNo, this.rowNo]
   });
-  if (this.rowNo % jswidgets.TableFieldForm.GROUP_SIZE === 0) {
+  if (this.rowNo % jswidgets.TableForm.GROUP_SIZE === 0) {
     this.groupNo++;
   }
   this.rowNo++;
 };
 
-jswidgets.TableFieldForm.prototype._onDeleteRowMenuAction = function() {
+jswidgets.TableForm.prototype._onDeleteRowMenuAction = function() {
   this.table.deleteRows(this.table.selectedRows);
 };
 
-jswidgets.TableFieldForm.prototype._onToggleGroupNoColumnMenuAction = function() {
+jswidgets.TableForm.prototype._onToggleGroupNoColumnMenuAction = function() {
   var column = this.table.columnById('GroupNo');
   column.setVisible(!column.visible);
 };
 
-jswidgets.TableFieldForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onAutoResizeColumnsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setAutoResizeColumns(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.columns.forEach(function(column) {
       column.setAutoOptimizeWidth(event.newValue);
@@ -124,73 +124,73 @@ jswidgets.TableFieldForm.prototype._onAutoOptimizeColumnWidthsPropertyChange = f
   }
 };
 
-jswidgets.TableFieldForm.prototype._onCheckablePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onCheckablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckable(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onHeaderEnabledPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onHeaderEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderEnabled(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onHeaderVisiblePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onHeaderVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderVisible(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderMenusEnabled(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onMultiCheckPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onMultiCheckPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiCheck(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onMultiSelectPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onMultiSelectPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiSelect(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onScrollToSelectionPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onScrollToSelectionPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setScrollToSelection(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onSortEnabledPropertyChange = function(event) {
+jswidgets.TableForm.prototype._onSortEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setSortEnabled(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onFooterVisiblePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onFooterVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setFooterVisible(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onRowIconVisiblePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onRowIconVisiblePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setRowIconVisible(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onCheckableStylePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onCheckableStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckableStyle(event.newValue);
   }
 };
 
-jswidgets.TableFieldForm.prototype._onGroupingStylePropertyChange = function(event) {
+jswidgets.TableForm.prototype._onGroupingStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setGroupingStyle(event.newValue);
   }
