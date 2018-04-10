@@ -29,8 +29,6 @@ import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.TableAdapter;
-import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
@@ -420,16 +418,12 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
                   }
                 });
 
-            addTableListener(new TableAdapter() {
-
-              @Override
-              public void tableChanged(TableEvent e) {
-                if (getRootGroupBox() != null) {
-                  getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
-                  getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));
-                  getUpdatedRowsField().setValue(rowsToKeyString(Table.this.getUpdatedRows()));
-                  getDeletedRowsField().setValue(rowsToKeyString(Table.this.getDeletedRows()));
-                }
+            addTableListener(e -> {
+              if (getRootGroupBox() != null) {
+                getSelectedRowsField().setValue(rowsToKeyString(Table.this.getSelectedRows()));
+                getInsertedRowsField().setValue(rowsToKeyString(Table.this.getInsertedRows()));
+                getUpdatedRowsField().setValue(rowsToKeyString(Table.this.getUpdatedRows()));
+                getDeletedRowsField().setValue(rowsToKeyString(Table.this.getDeletedRows()));
               }
             });
           }

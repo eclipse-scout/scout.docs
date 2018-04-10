@@ -302,3 +302,14 @@ To prevent incorrect measurements or the so-called "FOUT effect" (Flash Of Unsty
 If a form field is set to use its ui height, it is supposed to be as big as its content. A typical example is the group box: `useUiHeight` is true by default to make the group box as height as the containing form fields. In that case it works fine because the height does not depend on the width.
 
 There are cases where the height depends on the width, e.g. if a label field is set to wrap its text (property `wrapText` = true). These cases did not work correctly because in order to calculate the preferred height the final width has to be known. This has been fixed so that setting `useUiHeight` to true should now work as expected.
+
+== Refactored EventListenerList
+The class EventListenerList has poor performance with large numbers of listeners and add / remove operations.
+There are two new alternatives to this class that are also thread-safe and support higher performance.
+* FastListenerList<LISTENER> is used to manage a single type of listeners
+* AbstractGroupedListenerList is used as base class to handle a single type of listener with multiple type partitions. See the new classes TreeListeners and TableListeners for an example of applicability.
+
+[NOTE]
+====
+Consider refactoring the use of EventListenerList by one of the new alternatives.
+====

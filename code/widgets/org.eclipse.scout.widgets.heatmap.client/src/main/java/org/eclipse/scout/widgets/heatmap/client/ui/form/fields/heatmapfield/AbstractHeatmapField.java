@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EventListener;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ModelContextProxy;
@@ -12,13 +11,14 @@ import org.eclipse.scout.rt.client.ModelContextProxy.ModelContext;
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.annotations.ConfigProperty;
-import org.eclipse.scout.rt.platform.util.EventListenerList;
+import org.eclipse.scout.rt.platform.util.event.FastListenerList;
+import org.eclipse.scout.rt.platform.util.event.IFastListenerList;
 
 public class AbstractHeatmapField extends AbstractFormField implements IHeatmapField {
 
   private IHeatmapFieldUIFacade m_uiFacade;
 
-  private final EventListenerList m_listenerList = new EventListenerList();
+  private final FastListenerList<IHeatmapListener> m_listenerList = new FastListenerList<>();
 
   @ConfigProperty(ConfigProperty.OBJECT)
   public HeatmapViewParameter getConfiguredViewParameter() {
@@ -93,29 +93,15 @@ public class AbstractHeatmapField extends AbstractFormField implements IHeatmapF
   }
 
   private void fireMapClicked(MapPoint point) {
-    for (EventListener l : getHeatmapListeners()) {
-      ((IHeatmapListener) l).mapClicked(point);
-    }
+    heatmapListeners().list().forEach(listener -> listener.mapClicked(point));
   }
 
   private void fireHeatPointsAdded(Collection<HeatPoint> heatPoints) {
-    for (EventListener l : getHeatmapListeners()) {
-      ((IHeatmapListener) l).heatPointsAdded(heatPoints);
-    }
-  }
-
-  private EventListener[] getHeatmapListeners() {
-    return m_listenerList.getListeners(IHeatmapListener.class);
+    heatmapListeners().list().forEach(listener -> listener.heatPointsAdded(heatPoints));
   }
 
   @Override
-  public void addHeatmapListener(IHeatmapListener listener) {
-    m_listenerList.add(IHeatmapListener.class, listener);
+  public IFastListenerList<IHeatmapListener> heatmapListeners() {
+    return m_listenerList;
   }
-
-  @Override
-  public void removeHeatmapListener(IHeatmapListener listener) {
-    m_listenerList.remove(IHeatmapListener.class, listener);
-  }
-
 }
