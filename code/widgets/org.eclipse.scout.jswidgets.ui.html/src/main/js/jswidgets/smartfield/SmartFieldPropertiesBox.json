@@ -20,6 +20,11 @@
       "id": "ActiveFilterEnabledField",
       "objectType": "CheckBoxField",
       "label": "Active Filter Enabled"
+    },
+    {
+      "id": "SearchRequiredField",
+      "objectType": "CheckBoxField",
+      "label": "Search Required"
     }
   ]
 }

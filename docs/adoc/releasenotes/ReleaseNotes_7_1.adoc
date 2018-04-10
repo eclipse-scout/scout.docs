@@ -313,3 +313,15 @@ There are two new alternatives to this class that are also thread-safe and suppo
 ====
 Consider refactoring the use of EventListenerList by one of the new alternatives.
 ====
+
+
+== New Property 'searchRequired' on Smartfields
+A new property `searchRequired` has been introduced for Smartfields.
+It is similar to the one already existing in `org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable` and controls the Smartfield behavior if the proposal-list is opened without having a search constraint.
+By default (searchRequired=false) all existing proposals are shown if no search constraint has been typed. But if the property is set to `true`, the Smartfield only shows proposals if a search constraint is available.
+This is especially useful if a large data set is expected in a Smartfield lookup which usually makes no sense to present all to the user.
+In that case a message is shown instead informing that a search constraint is required to load data and to see proposals.
+
+In Java the property can be set using `org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField.setSearchRequired(boolean)` or `org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField.getConfiguredSearchRequired()`.
+In JavaScript the property can be set using `scout.SmartField.setSearchRequired(boolean)`.
+

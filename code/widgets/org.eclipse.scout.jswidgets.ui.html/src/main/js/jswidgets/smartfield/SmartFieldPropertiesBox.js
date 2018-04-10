@@ -45,6 +45,10 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
   var activeFilterEnabledField = this.widget('ActiveFilterEnabledField');
   activeFilterEnabledField.setValue(this.field.activeFilterEnabled);
   activeFilterEnabledField.on('propertyChange', this._onActiveFilterEnabledPropertyChange.bind(this));
+
+  var searchRequiredField = this.widget('SearchRequiredField');
+  searchRequiredField.setValue(this.field.searchRequired);
+  searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
 };
 
 jswidgets.SmartFieldPropertiesBox.prototype._onDisplayStylePropertyChange = function(event) {
@@ -65,5 +69,11 @@ jswidgets.SmartFieldPropertiesBox.prototype._onBrowseMaxRowCountPropertyChange =
 jswidgets.SmartFieldPropertiesBox.prototype._onActiveFilterEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.field.setActiveFilterEnabled(event.newValue);
+  }
+};
+
+jswidgets.SmartFieldPropertiesBox.prototype._onSearchRequiredPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.field.setSearchRequired(event.newValue);
   }
 };

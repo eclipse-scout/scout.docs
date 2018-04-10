@@ -809,6 +809,25 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
       }
 
+      @Order(60)
+      public class ListSearchRequiredFilterField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("SearchRequired");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getListSmartField().setSearchRequired(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getListSmartField().isSearchRequired());
+        }
+      }
+
       @Order(70)
       public class TreeSmartField extends AbstractSmartField<String> {
 
@@ -934,11 +953,30 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(120)
+      public class TreeSearchRequiredFilterField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("SearchRequired");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeSmartField().setSearchRequired(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeSmartField().isSearchRequired());
+        }
+      }
+
+      @Order(130)
       public class PlaceholderField extends AbstractPlaceholderField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 6;
+          return 8;
         }
       }
     }
