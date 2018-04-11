@@ -93,6 +93,8 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
   this.widget('RemoveAll').on('action', this._onRemoveAllRows.bind(this));
   this.widget('InsertFew').on('action', this._onInsertFew.bind(this));
   this.widget('InsertMany').on('action', this._onInsertMany.bind(this));
+  this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
+  this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
   this._insertFewRows();
 };
@@ -110,51 +112,53 @@ jswidgets.HierarchicalTableForm.prototype._onInsertMany = function() {
 };
 
 jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
+  var bsiAgId = this.rowNo++,
+  bsiGermany = this.rowNo++;
   this.table.insertRows(this._scrumbleOrder([{
-    id: 1,
+    id: bsiAgId,
     iconId: scout.icons.WORLD,
     cells: [
       'BSI AG', null, null, true
     ]
   }, {
-    id: 2,
-    parentId: 1,
+    id: this.rowNo++,
+    parentId: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Christian Rusche', 'Stuff', '20.10.2015', true
     ]
   }, {
-    id: 3,
-    parentId: 1,
+    id: this.rowNo++,
+    parentId: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Claudio Guglielmo', 'Frontend Engineer', '20.10.2015', true
     ]
   }, {
-    id: 4,
-    parentId: 1,
+    id: this.rowNo++,
+    parentId: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Andreas Hoegger', 'Frontend Engineer', '20.10.2015', true
     ]
   }, {
-    id: 5,
-    parentId: 1,
+    id: bsiGermany,
+    parentId: bsiAgId,
     iconId: scout.icons.GROUP,
     cells: [
       'BSI Deutschland GmbH', null, null, true
     ]
   }, {
-    id: 6,
-    parentId: 5,
+    id: this.rowNo++,
+    parentId: bsiGermany,
     iconId: scout.icons.PERSON_SOLID,
     enabled: false,
     cells: [
       'Oliver Hechler', 'Project Manager', '20.10.2015', false
     ]
   }, {
-    id: 6,
-    parentId: 5,
+    id: this.rowNo++,
+    parentId: bsiGermany,
     iconId: scout.icons.PERSON_SOLID,
     cells: [
       'Matthias Otterbach', 'Senior Software Engineer', '20.10.2015', true
@@ -167,21 +171,24 @@ jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
     allRows = [];
 
   for (i = 0; i < 100; i++) {
-    allRows = allRows.concat(createParentWithManyChildren(i, 'Abc', Math.floor(Math.random() * 100)));
+    allRows = allRows.concat(createParentWithManyChildren(this.rowNo++, 'Abc', Math.floor(Math.random() * 100)));
   }
 
   this.table.insertRows(allRows);
 
   function createParentWithManyChildren(id, name, childCount) {
     var rows = [],
+      i,
       rowId;
     rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
-    for (rowId = id + 1; rowId < id + childCount; rowId++) {
+
+    for(i = 0; i < childCount; i++){
+      rowId = this.rowNo++;
       rows.push(createRow(rowId, id, null, [
         name + rowId,
         'Any title',
         '20.10.2015'
-      ]));
+        ]));
     }
     return rows;
   }
@@ -204,14 +211,24 @@ jswidgets.HierarchicalTableForm.prototype._scrumbleOrder = function(rows) {
 };
 
 jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
-  this.table.insertRow({
-    iconId: scout.icons.STAR,
-    cells: ['Row #' + this.rowNo, this.groupNo, this.rowNo]
-  });
-  if (this.rowNo % jswidgets.HierarchicalTableForm.GROUP_SIZE === 0) {
-    this.groupNo++;
+  var id = this.rowNo++,
+  parentId = null,
+  selectedRow = this.table.selectedRow();
+  if(selectedRow){
+    parentId = selectedRow.id;
   }
-  this.rowNo++;
+
+  this.table.insertRow (
+      {
+        id: id,
+        parentId: parentId,
+        iconId: null,
+        cells: [
+          'newRow'+ id,
+          'Any title',
+          '20.10.2015'
+          ]
+      });
 };
 
 jswidgets.HierarchicalTableForm.prototype._onDeleteRowMenuAction = function() {

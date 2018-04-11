@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
-import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -57,7 +56,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
@@ -322,11 +320,16 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
         }
 
         private void newRow() {
+          newRowWithParent(null);
+        }
+
+        private void newRowWithParent(ITableRow parent) {
           Table table = getTable();
           ColumnSet cols = table.getColumnSet();
           ITableRow row = new TableRow(cols);
 
           row.getCellForUpdate(table.getIdColumn()).setValue(m_nextRowId.getAndIncrement());
+          row.getCellForUpdate(table.getParentIdColumn()).setValue(Optional.ofNullable(table.getIdColumn().getValue(parent)).orElse(null));
           row.getCellForUpdate(table.getNameColumn()).setValue("New Row");
           row.getCellForUpdate(table.getTrendColumn()).setValue(AbstractIcons.LongArrowUp);
           ExampleBean bean = new ExampleBean();
@@ -939,7 +942,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
 
             @Override
             protected void execAction() {
-              newRow();
+              newRowWithParent(getTable().getSelectedRow());
             }
           }
 
@@ -1106,8 +1109,27 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
                 List<ITableRow> newRows = createRows(10000, 2);
                 TuningUtility.stopTimer("createRows");
                 TuningUtility.startTimer();
-                getTable().replaceRows(newRows);
+                getTable().addRows(newRows);
                 TuningUtility.stopTimer("replacerows");
+              }
+            }
+
+            @Order(14)
+            @ClassId("c8725035-38d9-494c-9f46-0c83074a5498")
+            public class AddInitialRowsMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return "Add initial rows";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                getTable().addRows(createInitialRows());
               }
             }
 
@@ -1202,45 +1224,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             }
           }
 
-          @Order(30)
-          public class ToggleRowEnabledMenu extends AbstractMenu {
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
-            }
-
-            @Override
-            protected String getConfiguredText() {
-              return TEXTS.get("ToggleRowEnabled");
-            }
-
-            @Override
-            protected boolean getConfiguredInheritAccessibility() {
-              return false;
-            }
-
-            @Override
-            protected void execAction() {
-              HierarchicalStyle style = getHierarchicalStyle();
-              switch (style) {
-                case STRUCTURED:
-                  style = HierarchicalStyle.DEFAULT;
-                  break;
-
-                default:
-                  style = HierarchicalStyle.STRUCTURED;
-                  break;
-              }
-              getTable().setHierarchicalStyle(style);
-            }
-
-            @Override
-            protected byte getConfiguredHorizontalAlignment() {
-              return HORIZONTAL_ALIGNMENT_RIGHT;
-            }
-          }
-
           @Order(40)
           public class HighlightRow extends AbstractMenu {
 
@@ -1277,133 +1260,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             }
           }
 
-          @Order(50)
-          public class HierarchicalMenu extends AbstractMenu {
-
-            @Override
-            protected String getConfiguredText() {
-              return "Hierarchical Menu";
-            }
-
-            @Order(10)
-            public class SubSingleMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TableMenuType.SingleSelection);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "SubSingle";
-              }
-
-            }
-
-            @Order(20)
-            public class SubMultiMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TableMenuType.MultiSelection);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "SubMulti";
-              }
-
-            }
-
-            @Order(30)
-            public class SubEmptySpaceMenu extends AbstractMenu {
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.<IMenuType> hashSet(
-                    TableMenuType.EmptySpace);
-              }
-
-              @Override
-              protected String getConfiguredText() {
-                return "SubEmpty";
-              }
-
-            }
-
-            @Order(40)
-            public class IntermediateMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return "Intermediate Menu";
-              }
-
-              @Order(10)
-              public class SubSubSingleMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TableMenuType.SingleSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "SubSubSingle";
-                }
-
-              }
-
-              @Order(20)
-              public class SubSubMultiMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TableMenuType.MultiSelection);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "SubSubMulti";
-                }
-
-              }
-
-              @Order(30)
-              public class SubSubEmptySpaceMenu extends AbstractMenu {
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.<IMenuType> hashSet(
-                      TableMenuType.EmptySpace);
-                }
-
-                @Override
-                protected String getConfiguredText() {
-                  return "SubSubEmpty";
-                }
-
-              }
-
-            }
-          }
-
-          @Order(60)
-          public class KeyStroke extends AbstractKeyStroke {
-
-            @Override
-            protected String getConfiguredText() {
-              return getClass().getSimpleName();
-            }
-
-            @Override
-            protected String getConfiguredKeyStroke() {
-              return "Ctrl-Shift-Alt-h";
-            }
-
-            @Override
-            protected void execAction() {
-              MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
-            }
-          }
         }
       }
     }
