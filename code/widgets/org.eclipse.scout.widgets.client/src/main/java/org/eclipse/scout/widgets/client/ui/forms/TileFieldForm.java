@@ -10,7 +10,6 @@ import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.MenuMediator;
-import org.eclipse.scout.rt.client.ui.action.menu.MenuUtility;
 import org.eclipse.scout.rt.client.ui.action.menu.TileGridMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -165,7 +164,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
           @Override
           protected void initConfig() {
             super.initConfig();
-            MenuUtility.updateMenuVisibilitiesForTiles(this);
+            TileGridMenuType.updateMenuVisibilitiesForTiles(this);
 
             addPropertyChangeListener((event) -> {
               if (event.getPropertyName().equals(ITileGrid.PROP_TILES) || event.getPropertyName().equals(ITileGrid.PROP_FILTERED_TILES)) {
@@ -177,7 +176,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
           @Override
           protected void execTilesSelected(List<ISimpleTile> tiles) {
             super.execTilesSelected(tiles);
-            MenuUtility.updateMenuVisibilitiesForTiles(this);
+            TileGridMenuType.updateMenuVisibilitiesForTiles(this);
             updateStatus();
           }
 
