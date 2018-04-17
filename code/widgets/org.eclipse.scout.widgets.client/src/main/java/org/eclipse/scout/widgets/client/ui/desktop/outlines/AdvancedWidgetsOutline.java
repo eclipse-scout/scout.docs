@@ -12,6 +12,7 @@ package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -20,6 +21,7 @@ import org.eclipse.scout.rt.platform.inventory.ClassInventory;
 import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.IAdvancedFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 /**
@@ -40,8 +42,23 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
   @SuppressWarnings("unchecked")
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
+    pageList.addAll(ClassInventory.get().getAllKnownSubClasses(IAdvancedFormPage.class).stream()
+        .map(classInfo -> {
+          IPage<?> page = null;
+          try {
+
+            page = (IPage<?>) classInfo.resolveClass().newInstance();
+          }
+          catch (Exception e) {
+
+          }
+          return page;
+        }).filter(page -> page != null)
+        .collect(Collectors.toList()));
+
     // assemble a sorted list of all classes implementing IAdvancedExampleForm
     List<IClassInfo> forms = new ArrayList<>(ClassInventory.get().getAllKnownSubClasses(IAdvancedExampleForm.class));
+
     for (IClassInfo classInfo : forms) {
       Class<IPageForm> pageForm = (Class<IPageForm>) classInfo.resolveClass();
       FormPage page = new FormPage(pageForm);

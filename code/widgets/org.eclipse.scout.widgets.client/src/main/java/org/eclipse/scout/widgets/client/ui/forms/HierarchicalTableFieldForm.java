@@ -75,7 +75,6 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
-import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox;
@@ -106,7 +105,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(5010.0)
-public class HierarchicalTableFieldForm extends AbstractForm implements IAdvancedExampleForm {
+public class HierarchicalTableFieldForm extends AbstractForm implements IPageForm {
 
   static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
 
@@ -244,6 +243,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
         @Override
         protected void execInitField() {
           getTable().replaceRows(createInitialRows());
+          getTable().expandAll(null);
         }
 
         private List<ITableRow> createInitialRows() {
@@ -1046,6 +1046,29 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IAdvance
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
               return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+            }
+
+            @Order(-1000)
+            @ClassId("11420e6a-61df-4406-8b40-ddd49f9b9a95")
+            public class ExpandSelectedRowMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return "Toggle expansion of selected row";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(TableMenuType.SingleSelection);
+              }
+
+              @Override
+              protected void execAction() {
+
+                ITableRow selectedRow = getSelectedRow();
+                if (selectedRow != null) {
+                  getTable().setRowExpanded(selectedRow, !selectedRow.isExpanded());
+                }
+              }
             }
 
             @Order(10)

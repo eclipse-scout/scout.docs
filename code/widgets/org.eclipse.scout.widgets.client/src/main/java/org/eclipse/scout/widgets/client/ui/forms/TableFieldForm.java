@@ -70,7 +70,6 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.LocaleLookupCall;
-import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.ContextColumnField;
@@ -102,7 +101,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(5000.0)
-public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm {
+public class TableFieldForm extends AbstractForm implements IPageForm {
 
   public static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
 
