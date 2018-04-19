@@ -97,6 +97,7 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
   this._insertFewRows();
+  this.table.expandAll();
 };
 
 jswidgets.HierarchicalTableForm.prototype._onRemoveAllRows = function() {
@@ -122,35 +123,35 @@ jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
     ]
   }, {
     id: this.rowNo++,
-    parentId: bsiAgId,
+    parentRow: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Christian Rusche', 'Stuff', '20.10.2015', true
     ]
   }, {
     id: this.rowNo++,
-    parentId: bsiAgId,
+    parentRow: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Claudio Guglielmo', 'Frontend Engineer', '20.10.2015', true
     ]
   }, {
     id: this.rowNo++,
-    parentId: bsiAgId,
+    parentRow: bsiAgId,
     iconId: scout.icons.STAR_BOLD,
     cells: [
       'Andreas Hoegger', 'Frontend Engineer', '20.10.2015', true
     ]
   }, {
     id: bsiGermany,
-    parentId: bsiAgId,
+    parentRow: bsiAgId,
     iconId: scout.icons.GROUP,
     cells: [
       'BSI Deutschland GmbH', null, null, true
     ]
   }, {
     id: this.rowNo++,
-    parentId: bsiGermany,
+    parentRow: bsiGermany,
     iconId: scout.icons.PERSON_SOLID,
     enabled: false,
     cells: [
@@ -158,7 +159,7 @@ jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
     ]
   }, {
     id: this.rowNo++,
-    parentId: bsiGermany,
+    parentRow: bsiGermany,
     iconId: scout.icons.PERSON_SOLID,
     cells: [
       'Matthias Otterbach', 'Senior Software Engineer', '20.10.2015', true
@@ -196,7 +197,7 @@ jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
   function createRow(id, parentId, iconId, cells) {
     return {
       id: id,
-      parentId: parentId,
+      parentRow: parentId,
       iconId: iconId,
       cells: cells
     };
@@ -221,7 +222,7 @@ jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
   this.table.insertRow (
       {
         id: id,
-        parentId: parentId,
+        parentRow: parentId,
         iconId: null,
         cells: [
           'newRow'+ id,

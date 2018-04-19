@@ -12,6 +12,10 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.holders.Holder;
+import org.eclipse.scout.rt.platform.util.visitor.DepthFirstTreeVisitor;
+import org.eclipse.scout.rt.platform.util.visitor.IDepthFirstTreeVisitor;
+import org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
@@ -58,32 +62,54 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
   protected void handleImpl(Matcher matcher) throws DeepLinkException {
     String widgetName = matcher.group(1);
     IDesktop desktop = ClientSessionProvider.currentSession().getDesktop();
-    IOutline outlineToActivate = null;
-    IPage pageToActivate = null;
+    Holder<IOutline> outlineToActivateHolder = new Holder<>(IOutline.class);
+    Holder<IPage> pageToActivateHolder = new Holder<>(IPage.class);
     for (IOutline outline : desktop.getAvailableOutlines()) {
       ITreeNode rootNode = outline.getRootNode();
-      for (ITreeNode topLevelNode : rootNode.getChildNodes()) {
-        if (topLevelNode.isVisible() && topLevelNode instanceof IFormPage) {
-          IFormPage formPage = (IFormPage) topLevelNode;
-          Class<? extends IPageForm> formType = formPage.getFormType();
-          if (formType == null) {
-            continue;
+
+      IDepthFirstTreeVisitor<ITreeNode> v = new DepthFirstTreeVisitor<ITreeNode>() {
+        @Override
+        public TreeVisitResult preVisit(ITreeNode element, int level, int index) {
+          if (element.isVisible() && element instanceof IFormPage) {
+            IFormPage formPage = (IFormPage) element;
+            Class<? extends IPageForm> formType = formPage.getFormType();
+            if (formType == null) {
+              return TreeVisitResult.CONTINUE;
+            }
+            String tmpWidgetName = toWidgetName(formType);
+            if (widgetName.equals(tmpWidgetName)) {
+              outlineToActivateHolder.setValue(outline);
+              pageToActivateHolder.setValue((IPage) element);
+              return TreeVisitResult.TERMINATE;
+            }
           }
-          String tmpWidgetName = toWidgetName(formType);
-          if (widgetName.equals(tmpWidgetName)) {
-            outlineToActivate = outline;
-            pageToActivate = (IPage) topLevelNode;
-            break;
-          }
+          return TreeVisitResult.CONTINUE;
         }
-      }
+      };
+      outline.visitNode(rootNode, v);
+
+//      for (ITreeNode topLevelNode : rootNode.getChildNodes()) {
+//        if (topLevelNode.isVisible() && topLevelNode instanceof IFormPage) {
+//          IFormPage formPage = (IFormPage) topLevelNode;
+//          Class<? extends IPageForm> formType = formPage.getFormType();
+//          if (formType == null) {
+//            continue;
+//          }
+//          String tmpWidgetName = toWidgetName(formType);
+//          if (widgetName.equals(tmpWidgetName)) {
+//            outlineToActivate = outline;
+//            pageToActivate = (IPage) topLevelNode;
+//            break;
+//          }
+//        }
+//      }
     }
-    if (outlineToActivate == null) {
+    if (outlineToActivateHolder.getValue() == null) {
       throw new DeepLinkException("outline could not be resolved for widget: " + widgetName);
     }
-    if (desktop.getOutline() != outlineToActivate) {
-      desktop.activateOutline(outlineToActivate);
+    if (desktop.getOutline() != outlineToActivateHolder.getValue()) {
+      desktop.activateOutline(outlineToActivateHolder.getValue());
     }
-    outlineToActivate.selectNode(pageToActivate);
+    outlineToActivateHolder.getValue().selectNode(pageToActivateHolder.getValue());
   }
 }
