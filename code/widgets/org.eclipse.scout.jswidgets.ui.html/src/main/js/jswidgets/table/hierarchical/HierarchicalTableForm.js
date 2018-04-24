@@ -113,58 +113,87 @@ jswidgets.HierarchicalTableForm.prototype._onInsertMany = function() {
 };
 
 jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
-  var bsiAgId = this.rowNo++,
-  bsiGermany = this.rowNo++;
+  var daltonId = this.rowNo++,
+    simpsonsId = this.rowNo++;
   this.table.insertRows(this._scrumbleOrder([{
-    id: bsiAgId,
-    iconId: scout.icons.WORLD,
-    cells: [
-      'BSI AG', null, null, true
-    ]
-  }, {
-    id: this.rowNo++,
-    parentRow: bsiAgId,
-    iconId: scout.icons.STAR_BOLD,
-    cells: [
-      'Christian Rusche', 'Stuff', '20.10.2015', true
-    ]
-  }, {
-    id: this.rowNo++,
-    parentRow: bsiAgId,
-    iconId: scout.icons.STAR_BOLD,
-    cells: [
-      'Claudio Guglielmo', 'Frontend Engineer', '20.10.2015', true
-    ]
-  }, {
-    id: this.rowNo++,
-    parentRow: bsiAgId,
-    iconId: scout.icons.STAR_BOLD,
-    cells: [
-      'Andreas Hoegger', 'Frontend Engineer', '20.10.2015', true
-    ]
-  }, {
-    id: bsiGermany,
-    parentRow: bsiAgId,
-    iconId: scout.icons.GROUP,
-    cells: [
-      'BSI Deutschland GmbH', null, null, true
-    ]
-  }, {
-    id: this.rowNo++,
-    parentRow: bsiGermany,
-    iconId: scout.icons.PERSON_SOLID,
-    enabled: false,
-    cells: [
-      'Oliver Hechler', 'Project Manager', '20.10.2015', false
-    ]
-  }, {
-    id: this.rowNo++,
-    parentRow: bsiGermany,
-    iconId: scout.icons.PERSON_SOLID,
-    cells: [
-      'Matthias Otterbach', 'Senior Software Engineer', '20.10.2015', true
-    ]
-  }]));
+      id: daltonId,
+      iconId: scout.icons.WORLD,
+      cells: [
+        'Daltons brothers', null, null, true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: daltonId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Joe Dalton', 'the smartest', '20.10.1940', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: daltonId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Wiliam Dalton', 'smarter', '03.05.1942', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: daltonId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Jack Dalton', 'smart', '15.09.1944', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: daltonId,
+      iconId: scout.icons.PERSON_SOLID,
+      enabled: false,
+      cells: [
+        'Averell Dalton', 'not so smart', '23.11.1945', true
+      ]
+    }, {
+      id: simpsonsId,
+      iconId: scout.icons.GROUP,
+      cells: [
+        'Simpsons', 'a simple family', null, false
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: simpsonsId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Homer Simpson', 'Daddy', '23.12.1960', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: simpsonsId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Marge Simpson', 'Mom', '02.05.1964', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: simpsonsId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Bart Simpson', 'Boy', '08.10.1985', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: simpsonsId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Lisa Simpson', 'Girl', '17.03.1987', true
+      ]
+    }, {
+      id: this.rowNo++,
+      parentRow: simpsonsId,
+      iconId: scout.icons.PERSON_SOLID,
+      cells: [
+        'Maggie Simpson', 'Baby', '14.08.1988', true
+      ]
+    }
+
+  ]));
 };
 
 jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
@@ -183,13 +212,13 @@ jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
       rowId;
     rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
 
-    for(i = 0; i < childCount; i++){
+    for (i = 0; i < childCount; i++) {
       rowId = this.rowNo++;
       rows.push(createRow(rowId, id, null, [
         name + rowId,
         'Any title',
         '20.10.2015'
-        ]));
+      ]));
     }
     return rows;
   }
@@ -213,23 +242,22 @@ jswidgets.HierarchicalTableForm.prototype._scrumbleOrder = function(rows) {
 
 jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
   var id = this.rowNo++,
-  parentId = null,
-  selectedRow = this.table.selectedRow();
-  if(selectedRow){
+    parentId = null,
+    selectedRow = this.table.selectedRow();
+  if (selectedRow) {
     parentId = selectedRow.id;
   }
 
-  this.table.insertRow (
-      {
-        id: id,
-        parentRow: parentId,
-        iconId: null,
-        cells: [
-          'newRow'+ id,
-          'Any title',
-          '20.10.2015'
-          ]
-      });
+  this.table.insertRow({
+    id: id,
+    parentRow: parentId,
+    iconId: null,
+    cells: [
+      'newRow' + id,
+      'Any title',
+      '20.10.2015'
+    ]
+  });
 };
 
 jswidgets.HierarchicalTableForm.prototype._onDeleteRowMenuAction = function() {

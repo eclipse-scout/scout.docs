@@ -325,3 +325,12 @@ In that case a message is shown instead informing that a search constraint is re
 In Java the property can be set using `org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField.setSearchRequired(boolean)` or `org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField.getConfiguredSearchRequired()`.
 In JavaScript the property can be set using `scout.SmartField.setSearchRequired(boolean)`.
 
+
+== Hierarchical table support
+With the new release 8.0 Scout supports hierarchical tables. The property `parentKey` on the `IColumn` is responsible for the linking between parent and child row.
+The property `HierarchicalStyle` on the table is used to switch between the default or structured style.
+
+
+[[img-widget-table-hierarcical]]
+.Hierarchical table example
+image::{imgsdir}/widget_table_hierarchical.png[]
