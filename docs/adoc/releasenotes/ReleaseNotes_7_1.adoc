@@ -118,6 +118,19 @@ These values may be set using `getConfiguredBodyLayoutConfig()`.
 === Sublabel
 GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
 
+=== Notification
+Add a `INotification` to a group box with the new property called `notification`. +
+Use `IGroupBox.setNotification(INotification)`, `getNotification()`, `removeNotification()` to control it. +
+A notification has a `IStatus` which includes a severity and a message.
+
+By default the notification is displayed at the beginning of the group box body.
+[[img-groupbox-notification]]
+.Group box notification
+image::{imgsdir}/groupBoxNotification.png[]
+
+A demo may be found here: https://scout.bsi-software.com/widgets/?dl=widget-groupbox. +
+And here for the JS only version: https://scout.bsi-software.com/jswidgets/#groupbox.
+
 == Tree Traversal Engine Added
 
 A tree (or graph) traversal engine has been added to the Scout Platform. The engine can traverse any tree- or graph-like structures.
@@ -324,7 +337,6 @@ In that case a message is shown instead informing that a search constraint is re
 
 In Java the property can be set using `org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField.setSearchRequired(boolean)` or `org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField.getConfiguredSearchRequired()`.
 In JavaScript the property can be set using `scout.SmartField.setSearchRequired(boolean)`.
-
 
 == Hierarchical table support
 With the new release 8.0 Scout supports hierarchical tables. The property `parentKey` on the `IColumn` is responsible for the linking between parent and child row.

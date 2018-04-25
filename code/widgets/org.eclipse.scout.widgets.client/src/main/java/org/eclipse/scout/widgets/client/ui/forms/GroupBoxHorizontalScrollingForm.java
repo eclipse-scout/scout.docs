@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.LogicalGridLayoutConfig;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -22,12 +23,19 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBoxBodyGrid;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.internal.HorizontalGroupBoxBodyGrid;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.internal.VerticalSmartGroupBoxBodyGrid;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.notification.Notification;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationStatusField;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationTextField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox.Example1Box;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox.Example1Box.DefaultBox;
@@ -51,6 +59,7 @@ import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.VisibilityBox.VisibleFirstNameField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.VisibilityBox.VisibleLastNameField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractMonthsBox;
+import org.eclipse.scout.widgets.client.ui.template.formfield.StatusSeverityLookupCall;
 
 @ClassId("92627520-ba32-4784-82f5-576a0432f949")
 public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPageForm {
@@ -179,6 +188,29 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
 
   public VisibleLastNameField getVisibleLastNameField() {
     return getFieldByClass(VisibleLastNameField.class);
+  }
+
+  public ConfigurationGroupBox getConfigurationGroupBox() {
+    return getFieldByClass(ConfigurationGroupBox.class);
+  }
+
+  public NotificationStatusField getNotificationStatusField() {
+    return getFieldByClass(NotificationStatusField.class);
+  }
+
+  public NotificationTextField getNotificationTextField() {
+    return getFieldByClass(NotificationTextField.class);
+  }
+
+  protected void handleNotificationChanged() {
+    Integer severity = getNotificationStatusField().getValue();
+    if (severity != null) {
+      String message = getNotificationTextField().getValue() != null ? getNotificationTextField().getValue() : "";
+      getVerticalMonthsBox().setNotification(new Notification(new Status(message, severity)));
+    }
+    else {
+      getVerticalMonthsBox().removeNotification();
+    }
   }
 
   @Order(10)
@@ -664,6 +696,71 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     }
 
     @Order(20)
+    @ClassId("ee0edd4c-e97e-4ffc-8ed5-2db26fa7da7e")
+    public class ConfigurationGroupBox extends AbstractGroupBox {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return "Configuration";
+      }
+
+      @Order(10)
+      @ClassId("6f4f5ff9-da83-4b16-b448-6562e429f67c")
+      public class NotificationStatusField extends AbstractSmartField<Integer> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Notification status";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return StatusSeverityLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          handleNotificationChanged();
+        }
+      }
+
+      @Order(20)
+      @ClassId("4b5055c0-0b1f-4480-b284-fa1fbf585e42")
+      public class NotificationTextField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Notification text";
+        }
+
+        @Override
+        protected int getConfiguredMaxLength() {
+          return 128;
+        }
+
+        @Override
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return NotificationStatusField.class;
+        }
+
+        @Override
+        protected boolean getConfiguredMasterRequired() {
+          return true;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) {
+          execChangedValue();
+        }
+
+        @Override
+        protected void execChangedValue() {
+          handleNotificationChanged();
+        }
+      }
+    }
+
+    @Order(30)
     @ClassId("1f9d1423-4e76-475f-9c52-ff1cf187ff68")
     public class VisibilityBox extends AbstractGroupBox {
 
