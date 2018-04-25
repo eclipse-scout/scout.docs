@@ -185,14 +185,14 @@
             "expanded": false
           },
           {
-            "id": "LayoutConfigBox",
-            "objectType": "jswidgets.TileGridLayoutConfigBox",
-            "expanded": false
-          },
-          {
             "id": "GridDataBox",
             "objectType": "jswidgets.GridDataBox",
             "label": "Grid Data Hints",
+            "expanded": false
+          },
+          {
+            "id": "LayoutConfigBox",
+            "objectType": "jswidgets.TileGridLayoutConfigBox",
             "expanded": false
           }
         ]

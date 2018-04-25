@@ -26,6 +26,7 @@ jswidgets.SequenceBoxForm.prototype._init = function(model) {
   var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
   formFieldPropertiesBox.setField(sequenceBox);
   this.widget('GridDataBox').setField(sequenceBox);
+  this.widget('LayoutConfigBox').setField(sequenceBox);
   this.widget('EventsTab').setField(sequenceBox);
 
   // FieldProperties tab

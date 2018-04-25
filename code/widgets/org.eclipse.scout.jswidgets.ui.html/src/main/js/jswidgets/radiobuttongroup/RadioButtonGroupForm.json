@@ -77,6 +77,11 @@
                 "id": "GridDataBox",
                 "objectType": "jswidgets.GridDataBox",
                 "label": "Grid Data Hints"
+              },
+              {
+                "id": "LayoutConfigBox",
+                "objectType": "jswidgets.LogicalGridLayoutConfigBox",
+                "expanded": false
               }
             ]
           },

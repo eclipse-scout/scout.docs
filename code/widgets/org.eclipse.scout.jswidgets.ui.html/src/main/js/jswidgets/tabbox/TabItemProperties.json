@@ -20,13 +20,13 @@
       "objectType": "jswidgets.GroupBoxPropertiesBox"
     },
     {
+      "id": "TabItemProperties.FormFieldPropertiesBox",
+      "objectType": "jswidgets.FormFieldPropertiesBox"
+    },
+    {
       "id": "TabItemProperties.GridDataBox",
       "objectType": "jswidgets.GridDataBox",
       "label": "Grid Data Hints"
-    },
-    {
-      "id": "TabItemProperties.FormFieldPropertiesBox",
-      "objectType": "jswidgets.FormFieldPropertiesBox"
     }
   ]
 }
