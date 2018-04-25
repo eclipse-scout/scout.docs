@@ -66,7 +66,7 @@ If you just want to play around with them without looking at the source code, yo
 
 The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 8.0, a *Java 8 runtime is required*.
 
-TIP: The Scout 8.0 Runtime does not support Java 9 yet. The Java 9 support is planned for a later release.
+TIP: The Scout 8.0 Runtime does not support Java 9 or Java 10 yet. The support for newer Java versions is planned for a later release.
 
 == New browser version requirements
 
@@ -337,6 +337,10 @@ In that case a message is shown instead informing that a search constraint is re
 
 In Java the property can be set using `org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField.setSearchRequired(boolean)` or `org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField.getConfiguredSearchRequired()`.
 In JavaScript the property can be set using `scout.SmartField.setSearchRequired(boolean)`.
+
+== New Event 'prepareLookupCall' on Smartfields and TagFields
+In Scout JS a new event `prepareLookupCall` has been added to the SmartField and TagField. It allows to be notified when the field is about to execute a LookupCall.
+Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
 
 == Hierarchical table support
 With the new release 8.0 Scout supports hierarchical tables. The property `parentKey` on the `IColumn` is responsible for the linking between parent and child row.

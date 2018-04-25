@@ -23,8 +23,7 @@
       "id": "EditableField",
       "objectType": "CheckBoxField",
       "label": "Editable",
-      "labelVisible": false,
-      "enabled": false
+      "labelVisible": false
     },
     {
       "id": "ModifiableField",

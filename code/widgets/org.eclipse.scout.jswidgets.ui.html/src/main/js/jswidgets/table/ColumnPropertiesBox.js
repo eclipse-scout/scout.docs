@@ -127,5 +127,7 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setDisplayable(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'CssClassField') {
     this.column.setCssClass(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'EditableField') {
+    this.column.setEditable(event.newValue);
   }
 };
