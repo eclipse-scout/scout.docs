@@ -120,15 +120,6 @@
             "expandable": true,
             "fields": [
               {
-                "id": "StructuredDisplayStyle",
-                "objectType": "CheckBoxField",
-                "label": "Structured Style",
-                "labelVisible": false,
-                "gridDataHints": {
-                  "fillHorizontal": false
-                }
-              },
-              {
                 "id": "AutoResizeColumnsField",
                 "objectType": "CheckBoxField",
                 "label": "Auto Resize Columns",
@@ -209,6 +200,11 @@
                 "labelVisible": false
               },
               {
+                "id": "RowIconColumnWidthField",
+                "objectType": "NumberField",
+                "label": "Row Icon Column width"
+              },
+              {
                 "id": "CheckableStyleField",
                 "objectType": "SmartField",
                 "label": "Checkable Style",
@@ -219,6 +215,21 @@
                 "objectType": "SmartField",
                 "label": "Grouping Style",
                 "lookupCall": "jswidgets.GroupingStyleLookupCall"
+              },
+              {
+                "id": "StructuredDisplayStyle",
+                "objectType": "CheckBoxField",
+                "label": "Structured Style",
+                "labelVisible": false,
+                "gridDataHints": {
+                  "fillHorizontal": false
+                }
+              },
+              {
+                "id": "ExtendedHierarchyPadding",
+                "objectType": "CheckBoxField",
+                "label": "Toggle extended hierarchy padding",
+                "labelVisible": false
               }
             ]
           },

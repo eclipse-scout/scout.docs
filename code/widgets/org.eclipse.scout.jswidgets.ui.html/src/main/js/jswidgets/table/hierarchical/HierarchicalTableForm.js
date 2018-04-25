@@ -79,6 +79,10 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
   rowIconVisibleField.setValue(this.table.rowIconVisible);
   rowIconVisibleField.on('propertyChange', this._onRowIconVisiblePropertyChange.bind(this));
 
+  var rowIconColumnWidthField = this.widget('RowIconColumnWidthField');
+  rowIconColumnWidthField.setValue(this.table.rowIconColumnWidth);
+  rowIconColumnWidthField.on('propertyChange', this._onRowIconColumnWidthPropertyChange.bind(this));
+
   var checkableStyleField = this.widget('CheckableStyleField');
   checkableStyleField.setValue(this.table.checkableStyle);
   checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
@@ -89,6 +93,11 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
+
+  var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPadding');
+  extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
+  extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
+
 
   this.widget('RemoveAll').on('action', this._onRemoveAllRows.bind(this));
   this.widget('InsertFew').on('action', this._onInsertFew.bind(this));
@@ -349,6 +358,13 @@ jswidgets.HierarchicalTableForm.prototype._onRowIconVisiblePropertyChange = func
   }
 };
 
+jswidgets.HierarchicalTableForm.prototype._onRowIconColumnWidthPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.setRowIconColumnWidth(event.newValue);
+  }
+};
+
+
 jswidgets.HierarchicalTableForm.prototype._onCheckableStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckableStyle(event.newValue);
@@ -360,3 +376,12 @@ jswidgets.HierarchicalTableForm.prototype._onGroupingStylePropertyChange = funct
     this.table.setGroupingStyle(event.newValue);
   }
 };
+
+jswidgets.HierarchicalTableForm.prototype._onExtendedHierarchyPaddingPropertyChange = function(event) {
+
+  if (event.propertyName === 'value') {
+    this.table.toggleCssClass('extended-row-level-padding',event.newValue);
+  }
+};
+
+
