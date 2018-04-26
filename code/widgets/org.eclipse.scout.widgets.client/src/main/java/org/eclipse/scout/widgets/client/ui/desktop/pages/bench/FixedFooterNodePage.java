@@ -14,7 +14,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.html.HTML;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @ClassId("b345f880-f807-4455-a22a-3c1e8cfd4c9a")
 public class FixedFooterNodePage extends AbstractBenchLayoutPageWithNodes {

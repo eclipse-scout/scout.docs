@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 public class GroupBoxForm extends GroupBoxHorizontalScrollingForm {
   public GroupBoxForm() {

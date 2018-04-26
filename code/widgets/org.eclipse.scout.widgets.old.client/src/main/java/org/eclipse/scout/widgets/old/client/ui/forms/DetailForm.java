@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDec
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm.MainBox.GroupBox.ValueHighField;
 import org.eclipse.scout.widgets.old.client.ui.forms.DetailForm.MainBox.GroupBox.ValueLastField;

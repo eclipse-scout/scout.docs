@@ -19,7 +19,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox;
 import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.FileChooserField;
 import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form.MainBox.GroupBox.IntegerField;

@@ -350,3 +350,8 @@ The property `HierarchicalStyle` on the table is used to switch between the defa
 [[img-widget-table-hierarcical]]
 .Hierarchical table example
 image::{imgsdir}/widget_table_hierarchical.png[]
+
+
+== Moved text and multi-language support from shared to platform
+The scout multi-language text support mainly is ITextProviderService, AbstractDynamicNlsTextProviderService and the convenience accessor TEXTS.
+This facility was moved from `org.eclipse.scout.rt.shared` to `org.eclipse.scout.rt.platform.text`

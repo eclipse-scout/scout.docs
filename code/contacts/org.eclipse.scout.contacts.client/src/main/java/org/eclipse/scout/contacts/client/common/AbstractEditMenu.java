@@ -12,7 +12,7 @@ package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 public class AbstractEditMenu extends AbstractMenu {
 

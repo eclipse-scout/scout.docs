@@ -18,8 +18,8 @@ import org.eclipse.scout.rt.client.extension.ui.action.menu.AbstractMenuExtensio
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.rt.shared.TEXTS;
 
 public class DesktopQuickAccessMenuExtension extends AbstractMenuExtension<QuickAccessMenu> {
 

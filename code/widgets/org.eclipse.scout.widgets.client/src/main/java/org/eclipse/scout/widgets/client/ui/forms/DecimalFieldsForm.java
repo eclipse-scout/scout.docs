@@ -25,8 +25,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
-import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.ConfigurationBottomBox.FormatField;

@@ -2,7 +2,7 @@ package org.eclipse.scout.widgets.shared.services.code;
 
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 

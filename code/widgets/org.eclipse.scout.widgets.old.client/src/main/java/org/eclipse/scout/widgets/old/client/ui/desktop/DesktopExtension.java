@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.old.client.ui.desktop.outlines.PagesSearchFormsOutline;
 import org.eclipse.scout.widgets.old.client.ui.desktop.outlines.WidgetsOutline;
 import org.eclipse.scout.widgets.old.client.ui.forms.Menu1Form;

@@ -13,7 +13,7 @@ package org.eclipse.scout.contacts.client.common;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractSearchOutline;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

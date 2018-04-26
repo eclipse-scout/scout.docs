@@ -13,7 +13,7 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 

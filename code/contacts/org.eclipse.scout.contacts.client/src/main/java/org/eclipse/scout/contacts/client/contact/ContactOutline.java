@@ -17,7 +17,7 @@ import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 //tag::Outline[]
 //tag::OutlineInit[]

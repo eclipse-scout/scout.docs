@@ -16,4 +16,4 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
-include::ReleaseNotes_7_1.adoc[]
+include::ReleaseNotes_8_0.adoc[]

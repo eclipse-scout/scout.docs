@@ -21,7 +21,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipsescout.demo.bahbah.client.ui.forms.UserForm.MainBox.UserBox.CancelButton;
 import org.eclipsescout.demo.bahbah.client.ui.forms.UserForm.MainBox.UserBox.OkButton;

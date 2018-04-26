@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.extension.ui.basic.table.AbstractTableExtension;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @Data(PersonTablePageDataExtension.class)
 public class PersonTablePageExtension extends AbstractTableExtension<Table> {

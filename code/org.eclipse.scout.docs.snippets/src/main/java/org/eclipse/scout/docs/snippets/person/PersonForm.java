@@ -15,7 +15,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @ClassId("7d73104f-4982-4b7d-856f-ce133b70bb26")
 @FormData(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE)

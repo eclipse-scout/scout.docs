@@ -13,7 +13,7 @@ package org.eclipse.scout.widgets.client.ui.desktop.menu;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitBranchConfigProperty;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitFolderConfigProperty;

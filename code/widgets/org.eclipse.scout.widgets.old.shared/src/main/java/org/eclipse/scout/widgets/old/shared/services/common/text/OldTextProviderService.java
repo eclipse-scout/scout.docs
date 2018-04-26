@@ -11,7 +11,7 @@
 package org.eclipse.scout.widgets.old.shared.services.common.text;
 
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.shared.services.common.text.AbstractDynamicNlsTextProviderService;
+import org.eclipse.scout.rt.platform.text.AbstractDynamicNlsTextProviderService;
 
 @Order(1900)
 public class OldTextProviderService extends AbstractDynamicNlsTextProviderService {

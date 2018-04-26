@@ -31,8 +31,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFor
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.Assertions;
-import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 import org.eclipse.scout.widgets.old.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;

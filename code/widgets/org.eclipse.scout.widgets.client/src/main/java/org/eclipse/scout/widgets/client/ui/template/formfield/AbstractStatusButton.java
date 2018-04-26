@@ -7,7 +7,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @ClassId("e72c2a85-fb2c-453e-98e4-f555248e6cf9")
 public abstract class AbstractStatusButton extends AbstractButton {

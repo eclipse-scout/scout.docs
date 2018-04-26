@@ -11,7 +11,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.html.HTML;
-import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.DisplayViewId;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.bench.AbstractConfigureBenchLayoutForm.MainBox.GrowField;
