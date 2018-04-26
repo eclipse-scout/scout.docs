@@ -1,25 +1,25 @@
 :imgsdir: ../../imgs
 
 ////
-- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.1.xxx" note)
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 8.0.xxx" note)
 ////
 
 == About This Release
 
-Eclipse Scout 7.1 is a preview version of the Eclipse _Photon_ release. It will be released in June 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is: None released yet.
+Eclipse Scout 8.0 is a preview version of the Eclipse _Photon_ release. It will be released in June 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]). The latest version of this release is: None released yet.
 
 IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen_) release: +
 https://eclipsescout.github.io/7.0/migration-guide.html
 
 * <<PLACEHOLDER>>
 
-You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/7.1.x[detailed change log] on GitHub.
+You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/8.0.x[detailed change log] on GitHub.
 
 === Service Releases
 
-The following changes were made after the initial 7.1 release (Eclipse Photon release). The following notes relate to a _service release_.
+The following changes were made after the initial 8.0 release (Eclipse Photon release). The following notes relate to a _service release_.
 
-==== Photon.1 (7.1.100) Release Expected on September, 2018
+==== Photon.1 (8.0.100) Release Expected on September, 2018
 
 {NotReleasedWarning}
 
@@ -28,8 +28,8 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 ==== Runtime (Scout RT)
 Scout RT artifacts are distributed via Maven:
 
-* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.1.0.001_Photon%22[7.1.0.001_Photon] on _Maven Central_
-* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.1.0.001_Photon[7.1.0.001_Photon] on _mvnrepository.com_
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%227.1.0.007_Photon_M6%22[7.1.0.007_Photon_M6] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/7.1.0.007_Photon_M6[7.1.0.007_Photon_M6] on _mvnrepository.com_
 
 Usage example in the parent POM of your Scout application:
 
@@ -38,7 +38,7 @@ Usage example in the parent POM of your Scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>7.1.0.001_Photon</version>
+    <version>7.1.0.007_Photon_M6</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -46,13 +46,13 @@ Usage example in the parent POM of your Scout application:
 
 ==== Eclipse IDE Tooling (Scout SDK)
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-https://www.eclipse.org/downloads/packages/eclipse-scout-developers/Photon[Eclipse for Scout Developers]
+https://www.eclipse.org/downloads/packages/eclipse-scout-developers/Photon_M6[Eclipse for Scout Developers]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/7.1/7.1.0/001_Photon/
+http://download.eclipse.org/scout/releases/8.0/7.1.0/007_Photon_M6/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.1.0.001_Photon[features/version/7.1.0.001_Photon] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.1.0.007_Photon_M6[features/version/7.1.0.007_Photon_M6] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
@@ -64,13 +64,13 @@ If you just want to play around with them without looking at the source code, yo
 
 == Java 8 required
 
-The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a *Java 8 runtime is required*.
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 8.0, a *Java 8 runtime is required*.
 
-TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for a later release.
+TIP: The Scout 8.0 Runtime does not support Java 9 yet. The Java 9 support is planned for a later release.
 
 == New browser version requirements
 
-The supported browser versions have been updated. See https://eclipsescout.github.io/7.1/technical-guide.html#browser-support for the new list of supported browsers.
+The supported browser versions have been updated. See https://eclipsescout.github.io/8.0/technical-guide.html#browser-support for the new list of supported browsers.
 
 
 == New SDK Feature in Eclipse: Search for missing NLS keys
@@ -154,7 +154,7 @@ The new Widget class handles the widget lifecycle (initConfig, init, disposed) a
 
 The new `TileGrid` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
 
-A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/7.1.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
+A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/8.0.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
 
 In order to add the `TileGrid` to a form, you can use the class `TileField` which is basically a simple `FormField` wrapping the `TileGrid`. You cannot use the `TileGrid` directly because a `GroupBox` only accepts `FormField` s.
 

@@ -3,22 +3,22 @@ Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 - Choose the right top level chapter (java, js, other)
-- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 7.1.xxx" note)
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 8.0.xxx" note)
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
 == About This Document
 
-This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse Scout 7.1*. If existing code has to be migrated, instructions are provided here.
+This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse Scout 8.0*. If existing code has to be migrated, instructions are provided here.
 
 IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen preview_) release: +
 https://eclipsescout.github.io/7.0/migration-guide.html
 
 === Service Release Migration
 
-The following changes were made after the initial 7.1 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
+The following changes were made after the initial 8.0 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
 
-==== Photon.1 (7.1.100) Release Expected on September, 2018
+==== Photon.1 (8.0.100) Release Expected on September, 2018
 
 {NotReleasedWarning}
 
@@ -32,9 +32,9 @@ The following changes were made after the initial 7.1 release (Eclipse Photon re
 
 === Java 8 Required
 
-The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 7.1, a *Java 8 runtime is required*.
+The required Java Runtime Environment (JRE) to run an Eclipse Scout application has changed: Starting with Eclipse Scout 8.0, a *Java 8 runtime is required*.
 
-TIP: The Scout 7.1 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
+TIP: The Scout 8.0 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
 
 To reflect this change, some existing Scout classes have been migrated to the newly available Java 8 classes:
 
@@ -94,12 +94,12 @@ _Migration:_ Since there is no replacement for the `focusable` property, remove 
 
 === Removal of Old "SmartField", Renaming of "SmartField2" Back to "SmartField"
 
-In Scout 7.0 a new smart field implementation named _SmartField2_ was created. The old implementation was still available, but its use was discouraged. With Scout 7.1 the old _SmartField_ implementation was finally dropped. The new implementation _SmartField2_ was renamed back to _SmartField_.
+In Scout 7.0 a new smart field implementation named _SmartField2_ was created. The old implementation was still available, but its use was discouraged. With Scout 8.0 the old _SmartField_ implementation was finally dropped. The new implementation _SmartField2_ was renamed back to _SmartField_.
 
 The following table lists the different names used in the past Scout releases. (The naming applies to all associated files, such as interfaces, abstract field classes, Java packages and JavaScript and LESS files.)
 
 |===
-|Scout \<= 6.1 |Scout 7.0 |Scout >= 7.1
+|Scout \<= 6.1 |Scout 7.0 |Scout >= 8.0
 
 |SmartField _(old implementation)_ |SmartField _(old implementation)_ |&mdash;
 |&mdash; |SmartField2 (new implementation) |SmartField (new implementation)
