@@ -71,14 +71,61 @@
                   "id": "AddRowMenu",
                   "objectType": "Menu",
                   "text": "${textKey:AddRow}",
-                  "menuTypes": ["Table.EmptySpace"],
+                  "menuTypes": [
+                    "Table.EmptySpace"
+                  ],
                   "keyStroke": "insert"
+                },
+                {
+                  "id": "MoveMenu",
+                  "objectType": "Menu",
+                  "text": "${textKey:Move}",
+                  "menuTypes": [
+                    "Table.SingleSelection"
+                  ],
+                  "childActions": [
+                    {
+                      "id": "MoveToTopMenu",
+                      "objectType": "Menu",
+                      "text": "${textKey:MoveToTop}",
+                      "menuTypes": [
+                        "Table.SingleSelection"
+                      ]
+                    },
+                    {
+                      "id": "MoveUpMenu",
+                      "objectType": "Menu",
+                      "text": "${textKey:MoveUp}",
+                      "menuTypes": [
+                        "Table.SingleSelection"
+                      ]
+                    },
+                    {
+                      "id": "MoveDownMenu",
+                      "objectType": "Menu",
+                      "text": "${textKey:MoveDown}",
+                      "menuTypes": [
+                        "Table.SingleSelection"
+                      ]
+                    },
+                    {
+                      "id": "MoveToBottomMenu",
+                      "objectType": "Menu",
+                      "text": "${textKey:MoveToBottom}",
+                      "menuTypes": [
+                        "Table.SingleSelection"
+                      ]
+                    }
+                  ]
                 },
                 {
                   "id": "DeleteRowMenu",
                   "objectType": "Menu",
                   "text": "${textKey:DeleteRow}",
-                  "menuTypes": ["Table.SingleSelection", "Table.MultiSelection"],
+                  "menuTypes": [
+                    "Table.SingleSelection",
+                    "Table.MultiSelection"
+                  ],
                   "keyStroke": "delete"
                 }
               ]

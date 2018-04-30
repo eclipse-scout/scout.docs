@@ -27,6 +27,10 @@ jswidgets.TableForm.prototype._init = function(model) {
 
   this.table = this.widget('Table');
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
+  this.widget('MoveToTopMenu').on('action', this._onMoveToTopMenuAction.bind(this));
+  this.widget('MoveUpMenu').on('action', this._onMoveUpMenuAction.bind(this));
+  this.widget('MoveDownMenu').on('action', this._onMoveDownMenuAction.bind(this));
+  this.widget('MoveToBottomMenu').on('action', this._onMoveToBottomMenuAction.bind(this));
   this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
 
   var autoResizeColumnsField = this.widget('AutoResizeColumnsField');
@@ -115,7 +119,7 @@ jswidgets.TableForm.prototype._onTargetPropertyChange = function(event) {
 
 jswidgets.TableForm.prototype._createRow = function() {
   var date = new Date();
-  var icons = [ scout.icons.STAR_BOLD, scout.icons.PERSON_SOLID, scout.icons.FOLDER_BOLD ];
+  var icons = [scout.icons.STAR_BOLD, scout.icons.PERSON_SOLID, scout.icons.FOLDER_BOLD];
   var locales = jswidgets.LocaleLookupCall.DATA.map(function(lookupRow) {
     return lookupRow[0];
   });
@@ -134,13 +138,29 @@ jswidgets.TableForm.prototype._createRow = function() {
   this.rowNo++;
 
   return {
-    iconId : rowIcon,
-    cells : [ stringValue, dateValue, numberValue, smartValue, booleanValue, iconValue ]
+    iconId: rowIcon,
+    cells: [stringValue, dateValue, numberValue, smartValue, booleanValue, iconValue]
   };
 };
 
 jswidgets.TableForm.prototype._onAddRowMenuAction = function() {
   this.table.insertRow(this._createRow());
+};
+
+jswidgets.TableForm.prototype._onMoveToTopMenuAction = function() {
+  this.table.moveRowToTop(this.table.selectedRows[0]);
+};
+
+jswidgets.TableForm.prototype._onMoveUpMenuAction = function() {
+  this.table.moveFilteredRowUp(this.table.selectedRows[0]);
+};
+
+jswidgets.TableForm.prototype._onMoveDownMenuAction = function() {
+  this.table.moveFilteredRowDown(this.table.selectedRows[0]);
+};
+
+jswidgets.TableForm.prototype._onMoveToBottomMenuAction = function() {
+  this.table.moveRowToBottom(this.table.selectedRows[0]);
 };
 
 jswidgets.TableForm.prototype._onDeleteRowMenuAction = function() {
