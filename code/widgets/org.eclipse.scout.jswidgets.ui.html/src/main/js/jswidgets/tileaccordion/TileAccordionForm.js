@@ -12,6 +12,7 @@ jswidgets.TileAccordionForm = function() {
   jswidgets.TileAccordionForm.parent.call(this);
   this.insertedGroupCount = 0;
   this.insertedTilesCount = 0;
+  this.tileFilter = null;
 };
 scout.inherits(jswidgets.TileAccordionForm, scout.Form);
 
@@ -23,6 +24,7 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   jswidgets.TileAccordionForm.parent.prototype._init.call(this, model);
 
   this.accordion = this.widget('Accordion');
+  this.accordion.on('propertyChange', this._onAccordionPropertyChange.bind(this));
 
   this._insertGroupWithTiles();
   this._insertGroupWithTiles();
@@ -84,9 +86,32 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   var sortDescMenu = this.widget('SortDescMenu');
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
+  var filterField = this.widget('FilterField');
+  filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
+
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
   this.widget('GridDataBox').setField(accordionField);
+  this.widget('EventsTab').setField(this.accordion);
+  var layoutConfigBox = this.widget('LayoutConfigBox');
+  layoutConfigBox.getLayoutConfig = function() {
+    return this.field.tileGridLayoutConfig;
+  };
+  layoutConfigBox.setLayoutConfig = function(layoutConfig) {
+    this.field.setTileGridLayoutConfig(layoutConfig);
+  };
+  layoutConfigBox.setField(this.accordion);
+  this._updateStatus();
+  this._updateGroupVisibility();
+};
+
+jswidgets.TileAccordionForm.prototype._onAccordionPropertyChange = function(event) {
+  if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
+    this._updateStatus();
+  }
+  if (event.propertyName === 'filteredTiles') {
+    this._updateGroupVisibility();
+  }
 };
 
 jswidgets.TileAccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
@@ -142,6 +167,12 @@ jswidgets.TileAccordionForm.prototype._onSortAscMenuAction = function(event) {
 
 jswidgets.TileAccordionForm.prototype._onSortDescMenuAction = function(event) {
   this._sortTiles();
+};
+
+jswidgets.TileAccordionForm.prototype._onFilterPropertyChange = function(event) {
+  if (event.propertyName === 'displayText') {
+    this._filterTilesByText(event.newValue);
+  }
 };
 
 jswidgets.TileAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = function(event) {
@@ -216,6 +247,18 @@ jswidgets.TileAccordionForm.prototype._createTile = function(model) {
   return scout.create('jswidgets.SimpleTile', model);
 };
 
+jswidgets.TileAccordionForm.prototype._updateStatus = function() {
+  this.widget('StatusField').setValue(this.session.text('TileGridStatus', this.accordion.getTileCount(), this.accordion.getFilteredTileCount(), this.accordion.getSelectedTileCount()));
+};
+
+jswidgets.TileAccordionForm.prototype._updateGroupVisibility = function() {
+  this.accordion.groups.forEach(function(group) {
+    // Make groups invisible if a tile filter is active and no tiles match (= no tiles are visible)
+    var groupEmpty = group.body.filters.length > 0 && group.body.filteredTiles.length === 0;
+    group.setVisible(!groupEmpty);
+  });
+};
+
 jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
   var comparator = scout.comparators.ALPHANUMERIC;
   comparator.install(this.session);
@@ -228,3 +271,18 @@ jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
   });
   this.accordion.sortTiles();
 };
+
+jswidgets.TileAccordionForm.prototype._filterTilesByText = function(text) {
+  if (text) {
+    if (!this.tileFilter) {
+      this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
+      this.accordion.addTileFilter(this.tileFilter);
+    }
+    this.tileFilter.setText(text);
+  } else {
+    this.accordion.removeTileFilter(this.tileFilter);
+    this.tileFilter = null;
+  }
+  this.accordion.filterTiles();
+};
+

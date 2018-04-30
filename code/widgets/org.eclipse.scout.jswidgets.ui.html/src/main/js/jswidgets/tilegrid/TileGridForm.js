@@ -89,6 +89,7 @@ jswidgets.TileGridForm.prototype._init = function(model) {
   this.widget('LayoutConfigBox').setField(this.tileGrid);
   this.widget('FormFieldPropertiesBox').setField(tileField);
   this.widget('GridDataBox').setField(tileField);
+  this.widget('EventsTab').setField(this.tileGrid);
   this.updateStatus();
 };
 
@@ -100,7 +101,7 @@ jswidgets.TileGridForm.prototype._onTileGridPropertyChange = function(event) {
 
 jswidgets.TileGridForm.prototype._onFilterPropertyChange = function(event) {
   if (event.propertyName === 'displayText') {
-    this.filterTilesByText(event.newValue);
+    this._filterTilesByText(event.newValue);
   }
 };
 
@@ -210,7 +211,7 @@ jswidgets.TileGridForm.prototype._onSortDescMenuAction = function(event) {
   this._sortTiles();
 };
 
-jswidgets.TileGridForm.prototype.filterTilesByText = function(text) {
+jswidgets.TileGridForm.prototype._filterTilesByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
       this.tileFilter = scout.create('jswidgets.SimpleTileFilter');

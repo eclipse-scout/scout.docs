@@ -56,7 +56,7 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._onPropertyChange = function(even
   }
   var layoutConfig = this.getLayoutConfig().clone();
   this._fillLayoutConfigByEvent(layoutConfig, event);
-  this.updateLayoutConfig(layoutConfig);
+  this.setLayoutConfig(layoutConfig);
 };
 
 jswidgets.LogicalGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = function(layoutConfig, event) {
@@ -77,6 +77,6 @@ jswidgets.LogicalGridLayoutConfigBox.prototype.getLayoutConfig = function() {
   return this.field.layoutConfig;
 };
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.updateLayoutConfig = function(layoutConfig) {
+jswidgets.LogicalGridLayoutConfigBox.prototype.setLayoutConfig = function(layoutConfig) {
   this.field.setLayoutConfig(layoutConfig);
 };

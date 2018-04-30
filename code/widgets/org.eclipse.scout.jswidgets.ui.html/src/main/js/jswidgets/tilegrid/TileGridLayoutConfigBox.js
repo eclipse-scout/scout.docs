@@ -25,7 +25,7 @@ jswidgets.TileGridLayoutConfigBox.prototype._init = function(model) {
 
 jswidgets.TileGridLayoutConfigBox.prototype.reloadLogicalGridLayoutConfig = function() {
   jswidgets.TileGridLayoutConfigBox.parent.prototype.reloadLogicalGridLayoutConfig.call(this);
-  this.widget('MaxWidthField').setValue(this.field.layoutConfig.maxWidth);
+  this.widget('MaxWidthField').setValue(this.getLayoutConfig().maxWidth);
 };
 
 jswidgets.TileGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = function(layoutConfig, event) {

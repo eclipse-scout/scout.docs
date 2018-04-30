@@ -39,7 +39,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   bodyLayoutConfigBox.getLayoutConfig = function() {
     return this.field.bodyLayoutConfig;
   };
-  bodyLayoutConfigBox.updateLayoutConfig = function(layoutConfig) {
+  bodyLayoutConfigBox.setLayoutConfig = function(layoutConfig) {
     this.field.setBodyLayoutConfig(layoutConfig);
   };
   bodyLayoutConfigBox.setField(groupBox);
