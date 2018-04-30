@@ -460,7 +460,7 @@ We removed remnants of the long-obsolete "population" event in tables:
 
 _Migration:_ Remove any references to the removed method or event from your code. (This should not cause any change in behavior, as the event was not fired by Scout anyways.)
 
-=== PageField: Status of Page Table Visible By Default
+=== PageField: Status of Page Table Visible by Default
 
 The table field contained in a _PageField_ used to have `statusVisible` set to _false_. This default was changed back to _true_ to make it consistent with all other fields. Whether the status should be invisible can only be determined correctly by the programmer, because the PageField can not know about the status visibility in the inner forms (search form and search form).
 
@@ -580,6 +580,7 @@ Until now it was required to explicitly set grid positions for child fields of R
 Now also pure JavaScript Scout applications have automatic layout for child fields of Radio Button Groups and Sequence Boxes. So if explicit grid positions (gridData.x, gridData.y) have been specified, it can be removed now as Scout takes care about it now (as it was in the Java layer already).
 
 === Form.open()
+
 `open()` now calls `load()` first before calling `show()`. The reason is to prevent showing an empty form before any data is loaded.
 If you relied on the previous behavior, (e.g. if you accessed ui properties like $container right after opening the form) you would need to put that code in a function executed delayed using `form.open().then()`.
 

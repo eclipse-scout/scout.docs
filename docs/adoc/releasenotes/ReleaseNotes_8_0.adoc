@@ -194,7 +194,7 @@ The new outline overview is enabled by default. If you don't like the new style 
 .Tile Outline Overview
 image::{imgsdir}/tile_outline_overview.png[]
 
-== Menu, Menubar Enhancements
+== Menu and MenuBar Enhancements
 
 === Form Field in Menu
 The menubar now supports form field menu items (`FormFieldMenu`). On the model side extend `AbstractFormFieldMenu` with a form field as an inner class to use a form field menu in any menu supporting environment.
@@ -205,7 +205,7 @@ image::{imgsdir}/FormFieldMenu.png[]
 === New Property 'stackable'
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackable menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackable menu in the menubar.
 
-== Tabbox Enhancements
+== TabBox Enhancements
 
 === Left Aligned Menu Items
 The menubar of a tabbox now considers the menu alignments _left_ and _right_. That means you can add menus directly on the right side of the last tab item (left aligned) or at the right side of the tab box header (right aligned).
@@ -230,7 +230,7 @@ The marker of the selected tab is now animated and follows the user or model sel
 === Optimized Zoom Behavior
 Several bugfixes of pixel issues due to zoom levels.
 
-== Desktop Splitter Position Remembered Across sessions
+== Desktop Splitter Position Remembered Across Sessions
 
 The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
 
@@ -311,47 +311,54 @@ When using `AbstractUiServletRequestHandler` no migration should be required, se
 
 To prevent incorrect measurements or the so-called "FOUT effect" (Flash Of Unstyled Text), Scout tries to preload all necessary web font files (*.woff) before rendering the application. To make it easier for projects to add theme-dependent fonts, the font preloader has been improved. The list of fonts to preload is now detected automatically by inspecting the document's style sheet (_@font-face_ rules). It's no longer necessary to manually list all fonts in the bootstrap argument of `scout.App` (see migration guide).
 
-== Improved useUiHeight calculation
+== Improved useUiHeight Calculation
+
 If a form field is set to use its ui height, it is supposed to be as big as its content. A typical example is the group box: `useUiHeight` is true by default to make the group box as height as the containing form fields. In that case it works fine because the height does not depend on the width.
 
 There are cases where the height depends on the width, e.g. if a label field is set to wrap its text (property `wrapText` = true). These cases did not work correctly because in order to calculate the preferred height the final width has to be known. This has been fixed so that setting `useUiHeight` to true should now work as expected.
 
 == Refactored EventListenerList
-The class EventListenerList has poor performance with large numbers of listeners and add / remove operations.
-There are two new alternatives to this class that are also thread-safe and support higher performance.
-* FastListenerList<LISTENER> is used to manage a single type of listeners
-* AbstractGroupedListenerList is used as base class to handle a single type of listener with multiple type partitions. See the new classes TreeListeners and TableListeners for an example of applicability.
+
+The class _EventListenerList_ had poor performance with large numbers of listeners and add / remove operations.
+There are two new alternatives to this class that are also thread-safe and support higher performance:
+
+* `FastListenerList<LISTENER>` is used to manage a single type of listeners.
+* `AbstractGroupedListenerList` is used as base class to handle a single type of listener with multiple type partitions. See the new classes TreeListeners and TableListeners for an example of applicability.
 
 [NOTE]
 ====
-Consider refactoring the use of EventListenerList by one of the new alternatives.
+Consider refactoring the use of _EventListenerList_ by one of the new alternatives.
 ====
 
-
 == New Property 'searchRequired' on Smartfields
+
 A new property `searchRequired` has been introduced for Smartfields.
 It is similar to the one already existing in `org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable` and controls the Smartfield behavior if the proposal-list is opened without having a search constraint.
-By default (searchRequired=false) all existing proposals are shown if no search constraint has been typed. But if the property is set to `true`, the Smartfield only shows proposals if a search constraint is available.
+By default (_searchRequired_ = `false`) all existing proposals are shown if no search constraint has been typed. But if the property is set to `true`, the Smartfield only shows proposals if a search constraint is available.
 This is especially useful if a large data set is expected in a Smartfield lookup which usually makes no sense to present all to the user.
 In that case a message is shown instead informing that a search constraint is required to load data and to see proposals.
 
-In Java the property can be set using `org.eclipse.scout.rt.client.ui.form.fields.smartfield.ISmartField.setSearchRequired(boolean)` or `org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField.getConfiguredSearchRequired()`.
-In JavaScript the property can be set using `scout.SmartField.setSearchRequired(boolean)`.
+In Java the property can be set using `ISmartField.setSearchRequired()` or `AbstractSmartField.getConfiguredSearchRequired()`.
+In JavaScript the property can be set using `smartfield.setSearchRequired()`.
 
 == New Event 'prepareLookupCall' on Smartfields and TagFields
+
 In Scout JS a new event `prepareLookupCall` has been added to the SmartField and TagField. It allows to be notified when the field is about to execute a LookupCall.
 Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
 
-== Hierarchical table support
-With the new release 8.0 Scout supports hierarchical tables. The property `parentKey` on the `IColumn` is responsible for the linking between parent and child row.
-The property `HierarchicalStyle` on the table is used to switch between the default or structured style.
+== Hierarchical Table Support
 
+Scout now supports hierarchical tables. The property `parentKey` on `IColumn` is responsible for the linking between parent and child rows.
+The property `hierarchicalStyle` on the table is used to switch between the default or structured style.
 
 [[img-widget-table-hierarcical]]
-.Hierarchical table example
+.Hierarchical Table Example
 image::{imgsdir}/widget_table_hierarchical.png[]
 
+== Text and Multi-Language Support Moved to 'platform'
 
-== Moved text and multi-language support from shared to platform
-The scout multi-language text support mainly is ITextProviderService, AbstractDynamicNlsTextProviderService and the convenience accessor TEXTS.
-This facility was moved from `org.eclipse.scout.rt.shared` to `org.eclipse.scout.rt.platform.text`
+Scout's multi-language text support mainly consists of `ITextProviderService` (with the default abstract implementation `AbstractDynamicNlsTextProviderService`) and the convenience accessor `TEXTS`.
+
+This facility was moved from the module `org.eclipse.scout.rt.shared` to `org.eclipse.scout.rt.platform`. This allows the use of multi-language text support without the need to include _*.shared_ dependencies in your project. This is especially useful for server-only applications (e.g. micro services).
+
+_Migration:_ Change the ``import``s in your _*.java_ files accordingly.
