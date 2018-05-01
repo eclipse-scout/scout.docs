@@ -41,6 +41,16 @@
             "label": "Properties",
             "fields": [
               {
+                "id": "MinValueField",
+                "objectType": "NumberField",
+                "label": "Min Value"
+              },
+              {
+                "id": "MaxValueField",
+                "objectType": "NumberField",
+                "label": "Max Value"
+              },
+              {
                 "id": "FormatField",
                 "objectType": "StringField",
                 "label": "Format"

@@ -346,6 +346,11 @@ In JavaScript the property can be set using `smartfield.setSearchRequired()`.
 In Scout JS a new event `prepareLookupCall` has been added to the SmartField and TagField. It allows to be notified when the field is about to execute a LookupCall.
 Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
 
+== Minimum and maximum values can be set for NumberFields in Scout JS
+
+The Scout JS NumberField now also supports min- and max-values as it was already present in Scout Classic.
+
+
 == Hierarchical Table Support
 
 Scout now supports hierarchical tables. The property `parentKey` on `IColumn` is responsible for the linking between parent and child rows.
