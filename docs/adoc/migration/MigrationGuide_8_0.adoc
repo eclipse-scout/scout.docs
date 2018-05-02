@@ -596,6 +596,10 @@ If you relied on the previous behavior, (e.g. if you accessed ui properties like
 
 == Other Changes
 
+=== jQuery Update
+
+The jQuery version bundled with Scout has been updated to version 3.3.1. If a SpecRunnerMaven.html is used to run Jasmine tests, the corresponding script tag must be updated to include `jquery-3.3.1.js` instead of `jquery-3.2.1.js`.
+
 &mdash;
 
 // ^^^
