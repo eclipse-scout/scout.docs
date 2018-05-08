@@ -22,6 +22,7 @@ jswidgets.WidgetsOutlineOverview.prototype._render = function() {
 
   var description = this.session.text('AppDescription', scout.app.scoutVersion);
   this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
+  this.$description.addClass('prevent-initial-focus');
 };
 
 jswidgets.WidgetsOutlineOverview.prototype._createPageTileGrid = function() {
