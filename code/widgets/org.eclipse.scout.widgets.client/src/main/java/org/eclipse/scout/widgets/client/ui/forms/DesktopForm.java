@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
+import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -179,6 +180,11 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         protected void execInitField() {
           setValue(IStatus.INFO);
         }
+
+        @Override
+        protected Integer validateValueInternal(Integer rawValue) {
+          return (rawValue != null ? rawValue : IStatus.INFO);
+        }
       }
 
       @Order(60)
@@ -190,8 +196,18 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
 
         @Override
+        protected String getConfiguredTooltipText() {
+          return "Duration in milliseconds while the notification is displayed.\n\nA value <= 0 indicates an infinite duration, i.e. the notification is never closed automatically.";
+        }
+
+        @Override
         protected void execInitField() {
           setValue(5000);
+        }
+
+        @Override
+        protected Integer execValidateValue(Integer rawValue) {
+          return NumberUtility.nvl(rawValue, 0);
         }
       }
 
@@ -222,6 +238,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(1000)
       @ClassId("3db84b66-1c8f-478a-910d-27922fac5bad")
       public class NavigationVisibleButton extends AbstractBooleanField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("NavigationVisible");
@@ -247,6 +264,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(1500)
       @ClassId("0f1681fe-5e1b-45a0-8007-a69c13df4a3a")
       public class NavigationHandleVisibleButton extends AbstractBooleanField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("NavigationHandleVisible");
@@ -271,6 +289,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(2000)
       @ClassId("6c2bc3b0-ebb5-4c6f-8227-4002d81a355c")
       public class HeaderVisibleButton extends AbstractBooleanField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("HeaderVisible");
@@ -295,6 +314,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(3000)
       @ClassId("6fedb013-f83c-4d07-9303-a48f0e456f60")
       public class BenchVisibleButton extends AbstractBooleanField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("BenchVisible");
@@ -328,7 +348,6 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           }
         }
       }
-
     }
 
     @Order(10000)
@@ -338,5 +357,4 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   public class PageFormHandler extends AbstractFormHandler {
   }
-
 }
