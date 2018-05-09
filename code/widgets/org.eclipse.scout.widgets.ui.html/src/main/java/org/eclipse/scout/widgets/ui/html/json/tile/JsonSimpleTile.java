@@ -1,6 +1,5 @@
 package org.eclipse.scout.widgets.ui.html.json.tile;
 
-import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.ui.html.IUiSession;
 import org.eclipse.scout.rt.ui.html.json.IJsonAdapter;
 import org.eclipse.scout.rt.ui.html.json.JsonProperty;
@@ -21,7 +20,7 @@ public class JsonSimpleTile<T extends ISimpleTile> extends JsonTile<T> {
   @Override
   protected void initJsonProperties(T model) {
     super.initJsonProperties(model);
-    putJsonProperty(new JsonProperty<T>(IFormField.PROP_LABEL, model) {
+    putJsonProperty(new JsonProperty<T>(ISimpleTile.PROP_LABEL, model) {
       @Override
       protected String modelValue() {
         return getModel().getLabel();
