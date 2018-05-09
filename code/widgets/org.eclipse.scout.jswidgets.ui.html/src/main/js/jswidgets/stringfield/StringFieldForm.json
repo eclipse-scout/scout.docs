@@ -109,7 +109,7 @@
                 "objectType": "CheckBoxField",
                 "label": "Make 4 character blocks",
                 "labelVisible": false,
-                "tooltipText": '${textKey:BlockFormatTooltip}',
+                "tooltipText": "${textKey:BlockFormatTooltip}",
                 "gridUseUiWidth": true
               }
             ]

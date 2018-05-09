@@ -61,7 +61,7 @@
       "objectType": "SmartField",
       "lookupCall": "jswidgets.ActionStyleLookupCall",
       "label": "Action Style",
-      "displayStyle": 'dropdown'
+      "displayStyle": "dropdown"
     }
   ]
 }

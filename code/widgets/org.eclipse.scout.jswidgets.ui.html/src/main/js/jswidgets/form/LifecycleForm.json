@@ -19,7 +19,6 @@
       {
         "id": "SaveMenu",
          "objectType": "SaveMenu",
-         "keyStroke": '',
          "tooltipText": "${textKey:SaveMenuTooltip}"
       },
       {
@@ -30,7 +29,6 @@
       {
         "id": "CloseMenu",
          "objectType": "CloseMenu",
-         "keyStroke": '',
          "tooltipText": "${textKey:CloseMenuTooltip}"
       }
     ],

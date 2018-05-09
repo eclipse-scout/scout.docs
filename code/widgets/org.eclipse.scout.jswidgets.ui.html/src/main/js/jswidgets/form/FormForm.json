@@ -15,7 +15,7 @@
             "id": "OpenFormButton",
             "objectType": "Button",
             "label": "${textKey:OpenForm}",
-            "cssClass": 'open-form-button',
+            "cssClass": "open-form-button",
             "processButton": false,
             "gridDataHints": {
               "horizontalAlignment": 0
