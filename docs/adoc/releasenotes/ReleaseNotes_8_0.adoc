@@ -358,6 +358,10 @@ In order to fill the list box a `LookupCall` can now be used. The resulting look
 === Value Support (JS)
 The `ListBox` now supports the value operations provided by `ValueField`, similar to the Java implementation. The value represents the keys of the checked rows specified by the corresponding lookup rows.
 
+== FileChooser(Field) Enhancements (JS)
+`FileChooser` can now be used without a running Java UI server.
+`FileChooserField` now supports the value operation provided by 'ValueField'. The value of this widgets is the `File` object. Display text is the filename. Accepted types and maximum upload size are supported properties.
+
 == Smartfield Enhancements
 
 === New Property 'searchRequired'

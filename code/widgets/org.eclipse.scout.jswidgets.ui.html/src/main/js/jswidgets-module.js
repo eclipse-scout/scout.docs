@@ -39,6 +39,9 @@
   __include("jswidgets/desktop/WidgetsOutline.js");
   __include("jswidgets/desktop/WidgetsOutlineOverview.js");
   __include("jswidgets/desktop/ServerStatusMenu.js");
+  __include("jswidgets/filechooser/FileChooserForm.js");
+  __include("jswidgets/filechooserbutton/FileChooserButtonForm.js");
+  __include("jswidgets/filechooserfield/FileChooserFieldForm.js");
   __include("jswidgets/groupbox/GroupBoxAddFieldBox.js");
   __include("jswidgets/groupbox/GroupBoxDeleteFieldBox.js");
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");

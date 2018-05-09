@@ -64,6 +64,32 @@
     },
     {
       "objectType": "PageWithNodes",
+      "expanded": true,
+      "text": "File Chooser Field",
+      "detailForm": {
+        "objectType": "jswidgets.FileChooserFieldForm"
+      },
+      "childNodes": [
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "File Chooser Button",
+          "detailForm": {
+            "objectType": "jswidgets.FileChooserButtonForm"
+          }
+        },
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
+          "text": "File Chooser",
+          "detailForm": {
+            "objectType": "jswidgets.FileChooserForm"
+          }
+        }
+      ]
+    },
+    {
+      "objectType": "PageWithNodes",
       "leaf": true,
       "text": "${textKey:GroupBox}",
       "detailForm": {
