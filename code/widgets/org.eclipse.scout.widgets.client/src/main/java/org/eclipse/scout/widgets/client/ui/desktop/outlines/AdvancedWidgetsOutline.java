@@ -75,5 +75,6 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
       FormPage page = new FormPage(pageForm);
       pageList.add(page);
     }
+    FormPage.sort(pageList);
   }
 }

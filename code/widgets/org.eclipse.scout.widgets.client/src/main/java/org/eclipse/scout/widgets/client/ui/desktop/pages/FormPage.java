@@ -10,13 +10,20 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.util.CompareUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.deeplink.WidgetsDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
@@ -25,25 +32,32 @@ import org.eclipse.scout.widgets.shared.Icons;
 
 public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
-  private Class<? extends IPageForm> m_formType;
-  private boolean m_enabled = true;
+  private final Class<? extends IPageForm> m_formType;
+  private final String m_text;
 
   public FormPage(Class<? extends IPageForm> formType) {
-    super(false, formType.getName());
-    m_formType = formType;
-    callInitializer();
+    this(formType, null);
   }
 
-  public FormPage(Class<? extends IPageForm> c, boolean enabled) {
-    super(false, c.getName());
-    m_formType = c;
-    m_enabled = enabled;
+  public FormPage(Class<? extends IPageForm> formType, String text) {
+    super(false, formType.getName());
+    m_formType = formType;
+    if (text != null) {
+      m_text = text;
+    }
+    else {
+      m_text = calculateDefaultText(formType);
+    }
     callInitializer();
   }
 
   @Override
-  protected boolean getConfiguredEnabled() {
-    return m_enabled;
+  public Class<? extends IPageForm> getFormType() {
+    return m_formType;
+  }
+
+  public String getText() {
+    return m_text;
   }
 
   @Override
@@ -57,16 +71,19 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Override
-  protected void execInitPage() {
+  protected Class<? extends IForm> getConfiguredDetailForm() {
+    return m_formType;
+  }
+
+  @Override
+  protected void execInitTreeNode() {
     if (getCellForUpdate().getText() == null) {
-      String s = m_formType.getSimpleName();
-      s = s.replaceAll("Form$", "");
-      String t = TEXTS.getWithFallback(s, null);
-      if (t == null) {
-        s = s.replaceAll("([a-z0-9])([A-Z])", "$1 $2");
-      }
-      getCellForUpdate().setText(s);
+      getCellForUpdate().setText(m_text);
     }
+  }
+
+  @Override
+  protected void execInitPage() {
     setTableVisible(false);
   }
 
@@ -78,9 +95,14 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Override
-  protected void ensureDetailFormCreated() {
-    if (m_enabled) {
-      super.ensureDetailFormCreated();
+  protected void execInitDetailForm() {
+    if (getDetailForm() != null) {
+      if (getDetailForm().getCloseButton() != null) {
+        getDetailForm().getCloseButton().setVisibleGranted(false);
+      }
+      else {
+        getMenu(OpenInADialogMenu.class).setVisibleGranted(false);
+      }
     }
   }
 
@@ -90,25 +112,15 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Override
-  protected Class<? extends IForm> getConfiguredDetailForm() {
-    return m_formType;
-  }
-
-  @Override
-  public Class<? extends IPageForm> getFormType() {
-    return m_formType;
-  }
-
-  @Override
-  protected void execInitDetailForm() {
-    if (getDetailForm() != null) {
-      getDetailForm().getCloseButton().setVisibleGranted(false);
-    }
-  }
-
-  @Override
   protected void startDetailForm() {
     getDetailForm().startPageForm();
+  }
+
+  protected String calculateDefaultText(Class<?> clazz) {
+    return m_formType.getSimpleName()
+        .replaceAll("Form$", "")
+        .replaceAll("([a-z0-9])([A-Z])", "$1 $2")
+        .replaceAll("([^0-9])([0-9])", "$1 $2");
   }
 
   @Order(1000)
@@ -136,5 +148,22 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
     protected Class<?> provideSourceClass() {
       return m_formType;
     }
+  }
+
+  public static void sort(List<IPage<?>> pageList) {
+    Collections.sort(pageList, new Comparator<IPage<?>>() {
+      @Override
+      public int compare(IPage<?> o1, IPage<?> o2) {
+        String s1 = null;
+        String s2 = null;
+        if (o1 != null) {
+          s1 = StringUtility.nvl(o1.getCell().getText(), o1.getClass().getSimpleName());
+        }
+        if (o2 != null) {
+          s2 = StringUtility.nvl(o2.getCell().getText(), o2.getClass().getSimpleName());
+        }
+        return CompareUtility.compareTo(s1, s2);
+      }
+    });
   }
 }

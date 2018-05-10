@@ -41,35 +41,16 @@ public class SimpleWidgetsOutline extends AbstractOutline {
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-
-    FormPage labelFieldPage = new FormPage(LabelFieldForm.class);
-    pageList.add(labelFieldPage);
-
-    FormPage stringFieldPage = new FormPage(StringFieldForm.class);
-    pageList.add(stringFieldPage);
-
-    FormPage numberFieldPage = new FormPage(NumberFieldsForm.class);
-    pageList.add(numberFieldPage);
-
-    FormPage decimalFieldPage = new FormPage(DecimalFieldsForm.class);
-    pageList.add(decimalFieldPage);
-
-    FormPage dateTimeFieldPage = new FormPage(DateTimeFieldsForm.class);
-    pageList.add(dateTimeFieldPage);
-
-    FormPage checkboxFieldPage = new FormPage(CheckboxFieldForm.class);
-    pageList.add(checkboxFieldPage);
-
-    FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupForm.class);
-    pageList.add(radioButtonFieldPage);
-
-    FormPage buttonLinkFieldsPage = new FormPage(ButtonForm.class);
-    pageList.add(buttonLinkFieldsPage);
-
-    FormPage messageBoxPage = new FormPage(MessageBoxForm.class);
-    pageList.add(messageBoxPage);
-
-    FormPage formPage = new FormPage(FormForm.class);
-    pageList.add(formPage);
+    pageList.add(new FormPage(LabelFieldForm.class));
+    pageList.add(new FormPage(StringFieldForm.class));
+    pageList.add(new FormPage(NumberFieldsForm.class));
+    pageList.add(new FormPage(DecimalFieldsForm.class));
+    pageList.add(new FormPage(DateTimeFieldsForm.class));
+    pageList.add(new FormPage(CheckboxFieldForm.class));
+    pageList.add(new FormPage(RadioButtonGroupForm.class));
+    pageList.add(new FormPage(ButtonForm.class));
+    pageList.add(new FormPage(MessageBoxForm.class));
+    pageList.add(new FormPage(FormForm.class));
+    FormPage.sort(pageList);
   }
 }
