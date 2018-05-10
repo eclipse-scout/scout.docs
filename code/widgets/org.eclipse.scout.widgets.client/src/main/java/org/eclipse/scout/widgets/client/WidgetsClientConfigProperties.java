@@ -2,11 +2,10 @@ package org.eclipse.scout.widgets.client;
 
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
-/**
- * <h3>{@link WidgetsClientConfigProperties}</h3>
- */
 public final class WidgetsClientConfigProperties {
+
   public static class GitUrlConfigProperty extends AbstractStringConfigProperty {
+
     @Override
     public String getKey() {
       return "git.url";
@@ -19,6 +18,7 @@ public final class WidgetsClientConfigProperties {
   }
 
   public static class GitBranchConfigProperty extends AbstractStringConfigProperty {
+
     @Override
     public String getKey() {
       return "git.branch";
@@ -31,6 +31,7 @@ public final class WidgetsClientConfigProperties {
   }
 
   public static class GitFolderConfigProperty extends AbstractStringConfigProperty {
+
     @Override
     public String getKey() {
       return "git.folder";
@@ -43,6 +44,7 @@ public final class WidgetsClientConfigProperties {
   }
 
   public static class GitSourceConfigProperty extends AbstractStringConfigProperty {
+
     @Override
     public String getKey() {
       return "git.source";

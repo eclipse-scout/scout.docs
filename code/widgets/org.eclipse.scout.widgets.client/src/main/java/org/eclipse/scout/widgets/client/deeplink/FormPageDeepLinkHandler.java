@@ -12,6 +12,7 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPageParent;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
@@ -61,21 +62,10 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     IOutline outlineToActivate = null;
     IPage pageToActivate = null;
     for (IOutline outline : desktop.getAvailableOutlines()) {
-      ITreeNode rootNode = outline.getRootNode();
-      for (ITreeNode topLevelNode : rootNode.getChildNodes()) {
-        if (topLevelNode.isVisible() && topLevelNode instanceof IFormPage) {
-          IFormPage formPage = (IFormPage) topLevelNode;
-          Class<? extends IPageForm> formType = formPage.getFormType();
-          if (formType == null) {
-            continue;
-          }
-          String tmpWidgetName = toWidgetName(formType);
-          if (widgetName.equals(tmpWidgetName)) {
-            outlineToActivate = outline;
-            pageToActivate = (IPage) topLevelNode;
-            break;
-          }
-        }
+      pageToActivate = findPageToActivateRec(widgetName, outline.getRootNode());
+      if (pageToActivate != null) {
+        outlineToActivate = outline;
+        break;
       }
     }
     if (outlineToActivate == null) {
@@ -84,6 +74,35 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     if (desktop.getOutline() != outlineToActivate) {
       desktop.activateOutline(outlineToActivate);
     }
+    IPage p = pageToActivate;
+    while (p != null) {
+      p.setExpanded(true);
+      p = p.getParentPage();
+    }
     outlineToActivate.selectNode(pageToActivate);
+  }
+
+  protected IPage findPageToActivateRec(String widgetName, ITreeNode parentNode) {
+    parentNode.ensureChildrenLoaded();
+    for (ITreeNode childNode : parentNode.getChildNodes()) {
+      if (childNode.isVisible() && childNode instanceof IFormPage) {
+        IFormPage formPage = (IFormPage) childNode;
+        Class<? extends IPageForm> formType = formPage.getFormType();
+        if (formType == null) {
+          continue;
+        }
+        String tmpWidgetName = toWidgetName(formType);
+        if (widgetName.equals(tmpWidgetName)) {
+          return (IPage) childNode;
+        }
+      }
+      if (childNode.isVisible() && childNode.getClass().getAnnotation(FormPageParent.class) != null) {
+        IPage recResult = findPageToActivateRec(widgetName, childNode);
+        if (recResult != null) {
+          return recResult;
+        }
+      }
+    }
+    return null;
   }
 }

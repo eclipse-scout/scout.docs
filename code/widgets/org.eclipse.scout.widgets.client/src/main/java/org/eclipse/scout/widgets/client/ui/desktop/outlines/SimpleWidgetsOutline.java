@@ -52,11 +52,7 @@ public class SimpleWidgetsOutline extends AbstractOutline {
     pageList.add(new FormPage(MessageBoxForm.class));
     pageList.add(new FormPage(FormForm.class));
     pageList.add(new FormPage(FormFieldForm.class));
-
-    FormPage page = new FormPage(BooleanFieldForm.class);
-    page.getCellForUpdate().setText("BooleanField (CheckBox)");
-    pageList.add(page);
-
+    pageList.add(new FormPage(BooleanFieldForm.class, "Boolean Field (Check Box)"));
     FormPage.sort(pageList);
   }
 }
