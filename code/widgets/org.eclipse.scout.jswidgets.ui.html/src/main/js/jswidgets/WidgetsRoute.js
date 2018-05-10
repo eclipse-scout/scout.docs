@@ -79,6 +79,7 @@ jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
   if (page) {
     var routeData = this._getRouteDataByObjectType(page.detailForm.objectType);
     scout.router.updateLocation(routeData[0]);
+  } else {
+    scout.router.updateLocation('');
   }
 };
-
