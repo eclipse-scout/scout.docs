@@ -10,9 +10,13 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.menu;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitBranchConfigProperty;
@@ -22,36 +26,38 @@ import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitUrlConf
 
 public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
 
+  protected static final Pattern MODULE_PATTERN = Pattern.compile("(org\\.eclipse\\.scout\\.widgets\\..*?client)\\..*");
+
   @Override
   protected String getConfiguredText() {
     return TEXTS.get("ViewSourceOnGitHub");
   }
 
   @Override
+  protected void execInitAction() {
+    setVisibleGranted(calculateSourceModule() != null);
+  }
+
+  @Override
   protected void execAction() {
+    String sourceModule = calculateSourceModule();
     String canonicalName = provideSourceClass().getCanonicalName();
     StringBuilder sb = new StringBuilder();
     sb.append(CONFIG.getPropertyValue(GitUrlConfigProperty.class)).append("/");
     sb.append(CONFIG.getPropertyValue(GitBranchConfigProperty.class)).append("/");
     sb.append(CONFIG.getPropertyValue(GitFolderConfigProperty.class)).append("/");
-    sb.append("org.eclipse.scout.widgets");
-
-    // maven module specific part
-    if (canonicalName.contains("widgets.old.client")) {
-      sb.append(".old.client").append("/");
-    }
-    else if (canonicalName.contains("widgets.heatmap.client")) {
-      sb.append(".heatmap.client").append("/");
-    }
-    else {
-      sb.append(".client").append("/");
-    }
-
+    sb.append(sourceModule).append("/");
     sb.append(CONFIG.getPropertyValue(GitSourceConfigProperty.class)).append("/");
     sb.append(canonicalName.replace(".", "/"));
     sb.append(".java");
     ClientSession.get().getDesktop().openUri(sb.toString(), OpenUriAction.NEW_WINDOW);
   }
 
-  abstract protected Class<?> provideSourceClass();
+  protected abstract Class<?> provideSourceClass();
+
+  protected String calculateSourceModule() {
+    String canonicalName = ObjectUtility.nvl(provideSourceClass().getCanonicalName(), "");
+    Matcher m = MODULE_PATTERN.matcher(canonicalName);
+    return (m.matches() ? m.group(1) : null);
+  }
 }
