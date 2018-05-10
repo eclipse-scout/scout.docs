@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.platform.holders.Holder;
 import org.eclipse.scout.rt.platform.util.visitor.DepthFirstTreeVisitor;
 import org.eclipse.scout.rt.platform.util.visitor.IDepthFirstTreeVisitor;
 import org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPageParent;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
@@ -70,6 +71,9 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
       IDepthFirstTreeVisitor<ITreeNode> v = new DepthFirstTreeVisitor<ITreeNode>() {
         @Override
         public TreeVisitResult preVisit(ITreeNode element, int level, int index) {
+          if (element.isVisible() && element.getClass().getAnnotation(FormPageParent.class) != null) {
+            element.ensureChildrenLoaded();
+          }
           if (element.isVisible() && element instanceof IFormPage) {
             IFormPage formPage = (IFormPage) element;
             Class<? extends IPageForm> formType = formPage.getFormType();
@@ -87,28 +91,17 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
         }
       };
       outline.visitNode(rootNode, v);
-
-//      for (ITreeNode topLevelNode : rootNode.getChildNodes()) {
-//        if (topLevelNode.isVisible() && topLevelNode instanceof IFormPage) {
-//          IFormPage formPage = (IFormPage) topLevelNode;
-//          Class<? extends IPageForm> formType = formPage.getFormType();
-//          if (formType == null) {
-//            continue;
-//          }
-//          String tmpWidgetName = toWidgetName(formType);
-//          if (widgetName.equals(tmpWidgetName)) {
-//            outlineToActivate = outline;
-//            pageToActivate = (IPage) topLevelNode;
-//            break;
-//          }
-//        }
-//      }
     }
     if (outlineToActivateHolder.getValue() == null) {
       throw new DeepLinkException("outline could not be resolved for widget: " + widgetName);
     }
     if (desktop.getOutline() != outlineToActivateHolder.getValue()) {
       desktop.activateOutline(outlineToActivateHolder.getValue());
+    }
+    IPage p = pageToActivateHolder.getValue();
+    while (p != null) {
+      p.setExpanded(true);
+      p = p.getParentPage();
     }
     outlineToActivateHolder.getValue().selectNode(pageToActivateHolder.getValue());
   }
