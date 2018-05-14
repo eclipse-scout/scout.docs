@@ -28,7 +28,7 @@ public final class WidgetsSeleniumUtil {
   }
 
   private static void goToWidgetsForm(AbstractSeleniumTest test, Class<? extends AbstractOutlineViewButton> viewButtonClass, String formTitle) {
-    test.waitUntilElementClickable(By.className("view-button-tab")).click();
+    test.waitUntilElementClickable(By.className("view-menu")).click();
     test.waitUntilElementClickable(byModelClass(viewButtonClass)).click();
     test.waitUntilElementClickable(By.xpath("//div[contains(@class, 'tree-node')]/span[text() = '" + formTitle + "']")).click();
   }
