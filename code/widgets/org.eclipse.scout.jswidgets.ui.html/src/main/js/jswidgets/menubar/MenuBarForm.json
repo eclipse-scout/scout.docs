@@ -89,43 +89,54 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
+            "labelVisible": false,
+            "borderVisible": false,
             "fields": [
               {
-                "id": "SelectedMenuField",
-                "objectType": "SmartField",
-                "label": "Target",
-                "lookupCall": "jswidgets.MenuItemLookupCall",
-                "value": "Menu1"
-              },
-              {
-                "id": "StackableField",
-                "objectType": "CheckBoxField",
-                "label": "Stackable",
-                "labelVisible": false,
-                "tooltipText": "${textKey:MenuStackableTooltipText}",
-                "gridDataHints": {
-                  "fillHorizontal": false
-                }
-              },
-              {
-                "id": "ActionPropertiesBox",
-                "objectType": "jswidgets.ActionPropertiesBox"
-              },
-              {
-                "id": "FormFieldPropertiesBox",
-                "objectType": "jswidgets.FormFieldPropertiesBox"
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "label": "Properties",
+                "fields": [
+                  {
+                    "id": "SelectedMenuField",
+                    "objectType": "SmartField",
+                    "label": "Target",
+                    "lookupCall": "jswidgets.MenuItemLookupCall",
+                    "value": "Menu1"
+                  },
+                  {
+                    "id": "StackableField",
+                    "objectType": "CheckBoxField",
+                    "label": "Stackable",
+                    "labelVisible": false,
+                    "tooltipText": "${textKey:MenuStackableTooltipText}",
+                    "gridDataHints": {
+                      "fillHorizontal": false
+                    }
+                  },
+                  {
+                    "id": "ActionPropertiesBox",
+                    "objectType": "jswidgets.ActionPropertiesBox"
+                  },
+                  {
+                    "id": "FormFieldPropertiesBox",
+                    "objectType": "jswidgets.FormFieldPropertiesBox"
+                  }
+                ]
               }
             ]
+          },
+          {
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

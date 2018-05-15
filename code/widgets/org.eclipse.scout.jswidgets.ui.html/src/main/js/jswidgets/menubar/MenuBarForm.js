@@ -27,7 +27,6 @@ jswidgets.MenuBarForm.prototype._init = function(model) {
   var stackableField = this.widget('StackableField');
   stackableField.on('propertyChange', this._onStackableFieldPropertyChange.bind(this));
 
-
   this.replaceMenu = this.widget('ReplaceMenu');
   this.replaceMenu.on('action', function(event) {
     this._onReplaceChildActionsClick(event, this.hierarchicalMenu);
@@ -121,16 +120,17 @@ jswidgets.MenuBarForm.prototype._fillSelectedMenuField = function() {
 jswidgets.MenuBarForm.prototype._updateSelectedMenu = function() {
   var selectedMenuItemField = this.widget('SelectedMenuField');
   var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
-  var menuWidget = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
-  if (!menuWidget) {
+  var menu = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
+  if (!menu) {
     return;
   }
-  this.widget('ActionPropertiesBox').setField(menuWidget);
-  formFieldPropertiesBox.setVisible(!!menuWidget.field);
-  this.currentMenu = menuWidget;
+  this.widget('ActionPropertiesBox').setField(menu);
+  this.widget('EventsTab').setField(menu);
+  formFieldPropertiesBox.setVisible(!!menu.field);
+  this.currentMenu = menu;
   this.widget('StackableField').setValue(this.currentMenu.stackable);
-  if (menuWidget.field) {
+  if (menu.field) {
     // form field widget
-    formFieldPropertiesBox.setField(menuWidget.field);
+    formFieldPropertiesBox.setField(menu.field);
   }
 };

@@ -19,15 +19,32 @@
       "labelVisible": false
     },
     {
-      "id": "TextField",
-      "objectType": "StringField",
-      "label": "Text"
+      "id": "ToggleActionField",
+      "objectType": "CheckBoxField",
+      "label": "Toggle Action",
+      "labelVisible": false
+    },
+    {
+      "id": "SelectedField",
+      "objectType": "CheckBoxField",
+      "label": "Selected",
+      "labelVisible": false
     },
     {
       "id": "IconIdField",
       "objectType": "SmartField",
       "lookupCall": "jswidgets.IconIdLookupCall",
       "label": "Icon Id"
+    },
+    {
+      "id": "KeyStrokeField",
+      "objectType": "StringField",
+      "label": "Key Stroke"
+    },
+    {
+      "id": "TextField",
+      "objectType": "StringField",
+      "label": "Text"
     },
     {
       "id": "TooltipTextField",

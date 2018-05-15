@@ -42,13 +42,25 @@ jswidgets.ActionPropertiesBox.prototype._setField = function(field) {
   visibleField.setValue(this.field.visible);
   visibleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-  var textField = this.widget('TextField');
-  textField.setValue(this.field.text);
-  textField.on('propertyChange', this._onPropertyChange.bind(this));
+  var toggleActionField = this.widget('ToggleActionField');
+  toggleActionField.setValue(this.field.toggleAction);
+  toggleActionField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var selectedField = this.widget('SelectedField');
+  selectedField.setValue(this.field.selected);
+  selectedField.on('propertyChange', this._onPropertyChange.bind(this));
 
   var iconIdField = this.widget('IconIdField');
   iconIdField.setValue(this.field.iconId);
   iconIdField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var keyStrokeField = this.widget('KeyStrokeField');
+  keyStrokeField.setValue(this.field.keyStroke);
+  keyStrokeField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var textField = this.widget('TextField');
+  textField.setValue(this.field.text);
+  textField.on('propertyChange', this._onPropertyChange.bind(this));
 
   var tooltipTextField = this.widget('TooltipTextField');
   tooltipTextField.setValue(this.field.tooltipText);
@@ -68,10 +80,16 @@ jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setEnabled(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
     this.field.setVisible(event.newValue);
-  } else if (event.propertyName === 'value' && event.source.id === 'TextField') {
-    this.field.setText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'ToggleActionField') {
+    this.field.setToggleAction(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'SelectedField') {
+    this.field.setSelected(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'IconIdField') {
     this.field.setIconId(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'KeyStrokeField') {
+    this.field.setKeyStroke(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'TextField') {
+    this.field.setText(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
     this.field.setTooltipText(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {

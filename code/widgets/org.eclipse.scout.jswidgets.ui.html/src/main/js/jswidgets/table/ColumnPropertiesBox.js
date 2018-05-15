@@ -129,6 +129,10 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setCssClass(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'EditableField') {
     this.column.setEditable(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'MandatoryField') {
+    this.column.setMandatory(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'WidthField') {
+    this.column.setWidth(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
     var hAlign = event.newValue;
     if (hAlign < 0) {

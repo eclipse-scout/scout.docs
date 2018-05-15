@@ -79,7 +79,7 @@
       "objectType": "CheckBoxField",
       "label": "Mandatory",
       "labelVisible": false,
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "SortActiveField",
@@ -140,7 +140,7 @@
       "id": "WidthField",
       "objectType": "NumberField",
       "label": "Width",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "MinWidthField",
