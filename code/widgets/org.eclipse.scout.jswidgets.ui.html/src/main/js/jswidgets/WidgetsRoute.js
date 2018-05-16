@@ -83,4 +83,3 @@ jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
     scout.router.updateLocation('');
   }
 };
-

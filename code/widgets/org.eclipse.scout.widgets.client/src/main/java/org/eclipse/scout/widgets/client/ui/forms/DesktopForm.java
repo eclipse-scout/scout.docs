@@ -253,7 +253,6 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         protected void execChangedValue() {
           getDesktop().setNavigationVisible(getValue());
         }
-
       }
 
       @Order(1500)
@@ -336,7 +335,6 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           }
         }
       }
-
     }
 
     @Order(10000)
