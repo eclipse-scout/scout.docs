@@ -25,7 +25,6 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
-import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widgets.client.deeplink.FormPageDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
@@ -55,10 +54,6 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   @Override
   public Class<? extends IPageForm> getFormType() {
     return m_formType;
-  }
-
-  public String getText() {
-    return m_text;
   }
 
   public String getText() {
