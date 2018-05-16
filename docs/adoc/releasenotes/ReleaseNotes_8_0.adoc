@@ -98,36 +98,6 @@ The concrete implementation `org.eclipse.scout.rt.platform.config.ConfigProperty
 In case it does a info message (warn in development mode) will be logged but platform will still start.
 To minimize configuration files such entries should be removed from `config.properties` files.
 
-== GroupBox Enhancements
-
-=== Layout Configuration
-It is now possible to adjust the parameters of how the group box will be layouted. The following parameters may be set:
-
-hgap:: the horizontal gap in pixels to use between two logical grid columns
-vgap:: the vertical gap in pixels to use between two logical grid rows
-columnWidth:: the width in pixels to use for a grid column
-rowHeight:: the height in pixels to use for a grid row
-minWidth:: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
-
-These values may be set using `getConfiguredBodyLayoutConfig()`.
-
-[[sec-gb-sublabel]]
-=== Sublabel
-GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
-
-=== Notification
-Add a `INotification` to a group box with the new property called `notification`. +
-Use `IGroupBox.setNotification(INotification)`, `getNotification()`, `removeNotification()` to control it. +
-A notification has a `IStatus` which includes a severity and a message.
-
-By default the notification is displayed at the beginning of the group box body.
-[[img-groupbox-notification]]
-.Group box notification
-image::{imgsdir}/groupBoxNotification.png[]
-
-A demo may be found here: https://scout.bsi-software.com/widgets/?dl=widget-groupbox. +
-And here for the JS only version: https://scout.bsi-software.com/jswidgets/#groupbox.
-
 == Tree Traversal Engine Added
 
 A tree (or graph) traversal engine has been added to the Scout Platform. The engine can traverse any tree- or graph-like structures.
@@ -140,6 +110,12 @@ TreeTraversals.create(visitor, childrenSupplier).traverse(root);
 
 The `root` element can be of any type. The `childrenSupplier` is a Function that returns the child elements for a given parent.
 The visitor can be a `IBreadthFirstTreeVisitor` for Breadth-First visiting strategy or a `IDepthFirstTreeVisitor` for a Depth-First visiting strategy supporting pre-order and post-order traversals.
+
+== Desktop Splitter Position Remembered Across Sessions
+
+The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
+
+In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
 
 == Introducing Widget.java
 
@@ -191,6 +167,41 @@ The new outline overview is enabled by default. If you don't like the new style 
 .Tile Outline Overview
 image::{imgsdir}/tile_outline_overview.png[]
 
+== Form Fields
+
+=== New Field Style
+This release introduces a new field style called `alternative`. This is the new default style for every form field. The `classic` style is still available because it may be preferable in some circumstances, e.g. when used in a cell editor or on a form with background color like the search form. For these two cases the style is set to `classic` automatically but you can do it for your custom cases as well by setting the new property `FieldStyle`.
+
+If you want to revert your whole application to the classic style you can create an extension to `AbstractFormField` and change the default of the `FieldStyle` property. For Scout JS applications you can set the variable `scout.FormField.DEFAULT_FIELD_STYLE` to  `scout.FormField.FieldStyle.CLASSIC`;
+
+[[img-form-field-alternative-style]]
+.New alternative field style
+image::{imgsdir}/formfield_alternative.png[]
+
+=== Improved Accessibility
+
+The label and the input are now linked by using `aria-labelledby`. This allows screen readers to read the label if an input is focused.
+
+Furthermore, clicking the label will now activate the field. This is especially helpful on mobile devices when the new alternative style is active, because the field boundaries are not obvious anymore.
+
+== Dynamic Fields
+
+It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.
+
+The Java API orders the added fields considering the `order` member.
+
+API:
+
+* TabBox.js `insertTabItem`, `deleteTabItem`, `setTabItems`
+* GroupBox.js `setFields`, `insertField`, `insertFieldBefore`, `deleteField`
+* ICompositeField.java `setFields` and the already existing `addField`, `removeField` methods which don't throw an exception anymore when a form is already initialized.
+
+[NOTE]
+====
+- The support for adding ProcessButtons dynamically is not implemented so far.
+- Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
+====
+
 == Menu and MenuBar Enhancements
 
 === Form Field in Menu
@@ -201,6 +212,36 @@ image::{imgsdir}/FormFieldMenu.png[]
 
 === New Property 'stackable'
 The menu property `stackable` defines if a menu is stackable or not. A stackable menu will be moved to the ellipsis dropdown menu when there is not enough space in the menubar. The ellipsis menu is placed after the last stackable menu in the menubar. Right and left aligned menus will be moved to a single ellipsis menu per menubar. The horizontal alignment of the ellipsis menu is the same as the last stackable menu in the menubar.
+
+== GroupBox Enhancements
+
+=== Layout Configuration
+It is now possible to adjust the parameters of how the group box will be layouted. The following parameters may be set:
+
+hgap:: the horizontal gap in pixels to use between two logical grid columns
+vgap:: the vertical gap in pixels to use between two logical grid rows
+columnWidth:: the width in pixels to use for a grid column
+rowHeight:: the height in pixels to use for a grid row
+minWidth:: the minimum width of the group box. If this width is > 0 a horizontal scrollbar is shown when the group box gets smaller than this value.
+
+These values may be set using `getConfiguredBodyLayoutConfig()`.
+
+[[sec-gb-sublabel]]
+=== Sublabel
+GroupBoxes got a new property called `sublabel`. The sublabel is displayed below the title in a very small font.
+
+=== Notification
+Add a `INotification` to a group box with the new property called `notification`. +
+Use `IGroupBox.setNotification(INotification)`, `getNotification()`, `removeNotification()` to control it. +
+A notification has a `IStatus` which includes a severity and a message.
+
+By default the notification is displayed at the beginning of the group box body.
+[[img-groupbox-notification]]
+.Group box notification
+image::{imgsdir}/groupBoxNotification.png[]
+
+A demo may be found here: https://scout.bsi-software.com/widgets/?dl=widget-groupbox. +
+And here for the JS only version: https://scout.bsi-software.com/jswidgets/#groupbox.
 
 == TabBox Enhancements
 
@@ -227,11 +268,14 @@ The marker of the selected tab is now animated and follows the user or model sel
 === Optimized Zoom Behavior
 Several bugfixes of pixel issues due to zoom levels.
 
-== Desktop Splitter Position Remembered Across Sessions
+== Hierarchical Table Support
 
-The position of the desktop splitter position (between the navigation and the bench) is now persisted across sessions, i.e. the previous setting will be restored even after you closed your browser. The position is stored in the HTML 5 _local storage_ provided by the local browser. It is therefore a device-specific setting, which is especially useful when accessing the same application through screens with different resolutions.
+Scout now supports hierarchical tables. The property `parentKey` on `IColumn` is responsible for the linking between parent and child rows.
+The property `hierarchicalStyle` on the table is used to switch between the default or structured style.
 
-In case the splitter position should never be remembered, the feature can be disabled globally by setting the property `cacheSplitterPosition` on the desktop to _false_.
+[[img-widget-table-hierarcical]]
+.Hierarchical Table Example
+image::{imgsdir}/widget_table_hierarchical.png[]
 
 == ImageField: Support for SVG Images and Image URLs
 
@@ -255,7 +299,9 @@ Additionally you can now reference an image by URL, for instance an image hosted
 
 The check box field (`IBooleanField`) got a new property called `keyStroke`. The property expects a string defining the key stroke, e.g. `ctrl-b`. When the key stroke is executed the check box value will be toggled. Other widgets like `Button`, `RadioButton` or `Menu` already support that feature in the same way.
 
-== Layout Customizations for Radio Button Group
+== Radio Button Group Enhancements
+
+=== Layout Customizations
 
 A new property `gridColumnCount` has been added to the radio button group. It can be used using `setGridColumnCount()`, `getGridColumnCount()` and `getConfiguredGridColumnCount()`. By default the columns are configured to be dependent on the height of the field to create columns as needed to show all radio buttons within the height available (this also corresponds to the existing behavior).
 
@@ -263,41 +309,40 @@ But it also allows to specify an exact number over how many columns radio button
 
 The same possibilities also exist in the JavaScript only layer of Scout using the method `setGridColumnCount()`.
 
+=== Grid Calculation (JS)
+The logical grid is now calculated automatically as it is done for a `GroupBox` or for a `RadioButtonGroup` in Java. This means you can only specify the width (`w`) and height (`h`) of a cell using `gridDataHints`, the position (`x`, `y`) will be calculated automatically.
 
-== Dynamic Fields
+=== Value Support (JS)
+The `RadioButtonGroup` now supports the value operations provided by `ValueField`, similar to the Java implementation. This means you can define a `radioValue` on each `RadioButton` and then use `setValue()` to select a button using its radioValue. When reading the `value` of a `RadioButtonGroup`, the `radioValue` of the selected button is returned.
 
-It is now possible to add and remove fields dynamically also when a form is already started. This feature is supported for `GroupBoxes` and `TabBoxes`.
+== SequenceBox: Grid Calculation (JS)
+The logical grid is now calculated automatically as it is done for a `GroupBox` or for a `SequenceBox` in Java. This means you can only specify the width (`w`) and height (`h`) of a cell using `gridDataHints`, the position (`x`, `y`) will be calculated automatically.
 
-The Java API orders the added fields considering the `order` member.
+== Smartfield Enhancements
 
-API:
+=== New Property 'searchRequired'
+A new property `searchRequired` has been introduced for Smartfields.
+It is similar to the one already existing in `org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable` and controls the Smartfield behavior if the proposal-list is opened without having a search constraint.
+By default (_searchRequired_ = `false`) all existing proposals are shown if no search constraint has been typed. But if the property is set to `true`, the Smartfield only shows proposals if a search constraint is available.
+This is especially useful if a large data set is expected in a Smartfield lookup which usually makes no sense to present all to the user.
+In that case a message is shown instead informing that a search constraint is required to load data and to see proposals.
 
-* TabBox.js `insertTabItem`, `deleteTabItem`, `setTabItems`
-* GroupBox.js `setFields`, `insertField`, `insertFieldBefore`, `deleteField`
-* ICompositeField.java `setFields` and the already existing `addField`, `removeField` methods which don't throw an exception anymore when a form is already initialized.
+In Java the property can be set using `ISmartField.setSearchRequired()` or `AbstractSmartField.getConfiguredSearchRequired()`.
+In JavaScript the property can be set using `smartfield.setSearchRequired()`.
 
-[NOTE]
-====
-- The support for adding ProcessButtons dynamically is not implemented so far.
-- Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
-====
+=== New Event 'prepareLookupCall' on Smartfields (JS)
+In Scout JS a new event `prepareLookupCall` has been added to the SmartField. It allows to be notified when the field is about to execute a LookupCall.
+Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
 
-== Form Fields
+== NumberField: support for minimum and maximum values (JS)
 
-=== New Field Style
-This release introduces a new field style called `alternative`. This is the new default style for every form field. The `classic` style is still available because it may be preferable in some circumstances, e.g. when used in a cell editor or on a form with background color like the search form. For these two cases the style is set to `classic` automatically but you can do it for your custom cases as well by setting the new property `FieldStyle`.
+The Scout JS NumberField now also supports min- and max-values as it was already present in Scout Classic.
 
-If you want to revert your whole application to the classic style you can create an extension to `AbstractFormField` and change the default of the `FieldStyle` property. For Scout JS applications you can set the variable `scout.FormField.DEFAULT_FIELD_STYLE` to  `scout.FormField.FieldStyle.CLASSIC`;
+== Improved useUiHeight Calculation
 
-[[img-form-field-alternative-style]]
-.New alternative field style
-image::{imgsdir}/formfield_alternative.png[]
+If a form field is set to use its ui height, it is supposed to be as big as its content. A typical example is the group box: `useUiHeight` is true by default to make the group box as height as the containing form fields. In that case it works fine because the height does not depend on the width.
 
-=== Improved Accessibility
-
-The label and the input are now linked by using `aria-labelledby`. This allows screen readers to read the label if an input is focused.
-
-Furthermore, clicking the label will now activate the field. This is especially helpful on mobile devices when the new alternative style is active, because the field boundaries are not obvious anymore.
+There are cases where the height depends on the width, e.g. if a label field is set to wrap its text (property `wrapText` = true). These cases did not work correctly because in order to calculate the preferred height the final width has to be known. This has been fixed so that setting `useUiHeight` to true should now work as expected.
 
 == Enhanced IUiServletRequestHandler
 
@@ -307,12 +352,6 @@ When using `AbstractUiServletRequestHandler` no migration should be required, se
 == Automatic Preloading of Web Fonts
 
 To prevent incorrect measurements or the so-called "FOUT effect" (Flash Of Unstyled Text), Scout tries to preload all necessary web font files (*.woff) before rendering the application. To make it easier for projects to add theme-dependent fonts, the font preloader has been improved. The list of fonts to preload is now detected automatically by inspecting the document's style sheet (_@font-face_ rules). It's no longer necessary to manually list all fonts in the bootstrap argument of `scout.App` (see migration guide).
-
-== Improved useUiHeight Calculation
-
-If a form field is set to use its ui height, it is supposed to be as big as its content. A typical example is the group box: `useUiHeight` is true by default to make the group box as height as the containing form fields. In that case it works fine because the height does not depend on the width.
-
-There are cases where the height depends on the width, e.g. if a label field is set to wrap its text (property `wrapText` = true). These cases did not work correctly because in order to calculate the preferred height the final width has to be known. This has been fixed so that setting `useUiHeight` to true should now work as expected.
 
 == Refactored EventListenerList
 
@@ -326,36 +365,6 @@ There are two new alternatives to this class that are also thread-safe and suppo
 ====
 Consider refactoring the use of _EventListenerList_ by one of the new alternatives.
 ====
-
-== New Property 'searchRequired' on Smartfields
-
-A new property `searchRequired` has been introduced for Smartfields.
-It is similar to the one already existing in `org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable` and controls the Smartfield behavior if the proposal-list is opened without having a search constraint.
-By default (_searchRequired_ = `false`) all existing proposals are shown if no search constraint has been typed. But if the property is set to `true`, the Smartfield only shows proposals if a search constraint is available.
-This is especially useful if a large data set is expected in a Smartfield lookup which usually makes no sense to present all to the user.
-In that case a message is shown instead informing that a search constraint is required to load data and to see proposals.
-
-In Java the property can be set using `ISmartField.setSearchRequired()` or `AbstractSmartField.getConfiguredSearchRequired()`.
-In JavaScript the property can be set using `smartfield.setSearchRequired()`.
-
-== New Event 'prepareLookupCall' on Smartfields and TagFields
-
-In Scout JS a new event `prepareLookupCall` has been added to the SmartField and TagField. It allows to be notified when the field is about to execute a LookupCall.
-Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
-
-== Minimum and maximum values can be set for NumberFields in Scout JS
-
-The Scout JS NumberField now also supports min- and max-values as it was already present in Scout Classic.
-
-
-== Hierarchical Table Support
-
-Scout now supports hierarchical tables. The property `parentKey` on `IColumn` is responsible for the linking between parent and child rows.
-The property `hierarchicalStyle` on the table is used to switch between the default or structured style.
-
-[[img-widget-table-hierarcical]]
-.Hierarchical Table Example
-image::{imgsdir}/widget_table_hierarchical.png[]
 
 == Text and Multi-Language Support Moved to 'platform'
 
