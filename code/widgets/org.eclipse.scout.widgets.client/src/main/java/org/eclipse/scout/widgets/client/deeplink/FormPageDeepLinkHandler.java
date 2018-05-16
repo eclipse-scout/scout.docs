@@ -66,7 +66,7 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
     Holder<IOutline> outlineToActivateHolder = new Holder<>(IOutline.class);
     Holder<IPage> pageToActivateHolder = new Holder<>(IPage.class);
     for (IOutline outline : desktop.getAvailableOutlines()) {
-      pageToActivate = findPageToActivateRec(widgetName, outline.getRootNode());
+      ITreeNode rootNode = outline.getRootNode();
 
       IDepthFirstTreeVisitor<ITreeNode> v = new DepthFirstTreeVisitor<ITreeNode>() {
         @Override
@@ -91,6 +91,7 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
         }
       };
       outline.visitNode(rootNode, v);
+    }
     if (outlineToActivateHolder.getValue() == null) {
       throw new DeepLinkException("outline could not be resolved for widget: " + widgetName);
     }
@@ -103,29 +104,5 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
       p = p.getParentPage();
     }
     outlineToActivateHolder.getValue().selectNode(pageToActivateHolder.getValue());
-  }
-
-  protected IPage findPageToActivateRec(String widgetName, ITreeNode parentNode) {
-    parentNode.ensureChildrenLoaded();
-    for (ITreeNode childNode : parentNode.getChildNodes()) {
-      if (childNode.isVisible() && childNode instanceof IFormPage) {
-        IFormPage formPage = (IFormPage) childNode;
-        Class<? extends IPageForm> formType = formPage.getFormType();
-        if (formType == null) {
-          continue;
-        }
-        String tmpWidgetName = toWidgetName(formType);
-        if (widgetName.equals(tmpWidgetName)) {
-          return (IPage) childNode;
-        }
-      }
-      if (childNode.isVisible() && childNode.getClass().getAnnotation(FormPageParent.class) != null) {
-        IPage recResult = findPageToActivateRec(widgetName, childNode);
-        if (recResult != null) {
-          return recResult;
-        }
-      }
-    }
-    return null;
   }
 }
