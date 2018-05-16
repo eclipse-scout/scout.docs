@@ -62,9 +62,13 @@ jswidgets.ValueFieldPropertiesBox.prototype._onFieldPropertyChange = function(ev
   }
 };
 
+jswidgets.ValueFieldPropertiesBox.prototype.parseValue = function(newValue){
+  return newValue;
+};
+
 jswidgets.ValueFieldPropertiesBox.prototype._onPropertyChange = function(event) {
   if (event.propertyName === 'value' && event.source.id === 'ValueField') {
-    this.field.setValue(event.newValue);
+    this.field.setValue(this.parseValue(event.newValue));
   } else if (event.propertyName === 'value' && event.source.id === 'DisplayTextField') {
     this.field.setDisplayText(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'ClearableField') {

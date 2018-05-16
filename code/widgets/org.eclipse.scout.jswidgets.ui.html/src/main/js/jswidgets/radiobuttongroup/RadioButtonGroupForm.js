@@ -32,6 +32,15 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   gridColumnCountField.setValue(group.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
+  this.widget('ValueField').setEnabled(true);
+  this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
+    if (!isNaN(newValue)) {
+      newValue = scout.numbers.ensure(newValue);
+    }
+    return newValue;
+  };
+  this.widget('ValueFieldPropertiesBox').setField(group);
+
   this.widget('FormFieldPropertiesBox').setField(group);
   this.widget('GridDataBox').setField(group);
   this.widget('LayoutConfigBox').setField(group);
@@ -46,6 +55,10 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   var keyStrokeField = this.widget('Button.KeyStrokeField');
   keyStrokeField.setValue(targetField.value.keyStroke);
   keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
+
+  var selectedField = this.widget('Button.SelectedField');
+  selectedField.setValue(targetField.value.selected);
+  selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
   this.widget('Button.PropertiesBox').setEnabled(!!targetField.value);
   this.widget('Button.FormFieldPropertiesBox').setField(targetField.value);
@@ -82,6 +95,7 @@ jswidgets.RadioButtonGroupForm.prototype._onTargetPropertyChange = function(even
     var button = event.newValue;
     if (button) {
       this.widget('Button.KeyStrokeField').setValue(button.keyStroke);
+      this.widget('Button.SelectedField').setValue(button.selected);
     }
     this.widget('Button.PropertiesBox').setEnabled(!!button);
     this.widget('Button.FormFieldPropertiesBox').setField(button);
@@ -96,6 +110,15 @@ jswidgets.RadioButtonGroupForm.prototype._onKeyStrokePropertyChange = function(e
     var button = this.widget('Button.TargetField').value;
     if (button) {
       button.setKeyStroke(event.newValue);
+    }
+  }
+};
+
+jswidgets.RadioButtonGroupForm.prototype._onSelectedPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var button = this.widget('Button.TargetField').value;
+    if (button) {
+      button.setSelected(event.newValue);
     }
   }
 };
