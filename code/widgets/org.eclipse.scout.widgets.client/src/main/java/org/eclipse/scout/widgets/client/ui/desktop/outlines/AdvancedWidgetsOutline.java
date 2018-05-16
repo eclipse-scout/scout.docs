@@ -35,6 +35,11 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
     return TEXTS.get("AdvancedWidgets");
   }
 
+  @Override
+  protected String getConfiguredIconId() {
+    return null;
+  }
+
   /**
    * Adds all example forms that implement IAdvancedExampleForm to this page. From each form a FormPage is created and
    * added to the page list. The form pages are sorted alphabetically.

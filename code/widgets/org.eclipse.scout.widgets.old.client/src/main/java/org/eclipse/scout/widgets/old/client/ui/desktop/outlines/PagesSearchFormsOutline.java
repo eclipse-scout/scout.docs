@@ -31,6 +31,11 @@ public class PagesSearchFormsOutline extends AbstractOutline {
   }
 
   @Override
+  protected String getConfiguredIconId() {
+    return null;
+  }
+
+  @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     PagesNodePage pagesNodePage = new PagesNodePage();
     pageList.add(pagesNodePage);

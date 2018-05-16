@@ -42,6 +42,11 @@ public class SimpleWidgetsOutline extends AbstractOutline {
   }
 
   @Override
+  protected String getConfiguredIconId() {
+    return null;
+  }
+
+  @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new FormPage(LabelFieldForm.class));
     pageList.add(new FormPage(StringFieldForm.class));

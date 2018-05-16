@@ -37,6 +37,11 @@ public class LayoutWidgetsOutline extends AbstractOutline {
   }
 
   @Override
+  protected String getConfiguredIconId() {
+    return null;
+  }
+
+  @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new FormPage(GroupBoxForm.class));
     pageList.add(new FormPage(GroupBoxHorizontalScrollingForm.class));
