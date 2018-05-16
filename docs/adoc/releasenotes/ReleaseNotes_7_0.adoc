@@ -24,7 +24,7 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 * <<No Value in JS for String Fields With Masked Input (since 7.0.300)>>
 * <<Menus in the Status Tooltip of a Form Field (since 7.0.300)>>
 
-Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.200.005_Oxygen_2%2E%2E%2E7.0.300.005_Oxygen_3[https://github.com/eclipse/scout.rt/compare/7.0.200.005_Oxygen_2%2E%2E%2E7.0.300.005_Oxygen_3]
+Detailed change log: https://github.com/eclipse/scout.rt/compare/7.0.200.005_Oxygen_2%2E%2E%2E7.0.300.005_Oxygen_3[https://github.com/eclipse/scout.rt/compare/7.0.200.005_Oxygen_2...7.0.300.005_Oxygen_3]
 
 ==== Oxygen.2 (7.0.200) Released on December 20, 2017
 
@@ -73,7 +73,7 @@ To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/7.0/7.0.300/005_Oxygen_3/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.200.005_Oxygen_2[features/version/7.0.200.005_Oxygen_2] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.300.005_Oxygen_3[features/version/7.0.300.005_Oxygen_3] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
