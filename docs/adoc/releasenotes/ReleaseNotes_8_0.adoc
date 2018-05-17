@@ -131,9 +131,8 @@ A `Tile` directly extends `Widget` and is not much more than a `<div>` with the 
 
 In order to add the `TileGrid` to a form, you can use the class `TileField` which is basically a simple `FormField` wrapping the `TileGrid`. You cannot use the `TileGrid` directly because a `GroupBox` only accepts `FormField` s.
 
-A demo of the widget may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilefield.
-
-And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tilefield.
+A demo of the widget can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilefield +
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tilefield
 
 [[img-tiles]]
 .TileGrid
@@ -145,11 +144,11 @@ The `Accordion` displays several collapsible `Group` s. The default behavior is 
 
 The `Group` is a simple widget containing of a header and a body. The body may be any other widget like the new `TileGrid`. Because having tiles in an accordion is a typical use case, there is a widget called `TileAccordion` which helps creating the groups and provides some delegate methods to easily access the tiles of every group. It also takes care that selecting multiple tiles across the individual groups works as there were only one single `TileGrid`.
 
-A demo of the accordion may be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield. +
-And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#accordion.
+A demo of the accordion can be found here: https://scout.bsi-software.com/widgets/?dl=widget-accordionfield +
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#accordion
 
-A demo of the tile accordion may be found here: https://scout.bsi-software.com/widgets/?dl=widget-tileaccordionfield. +
-And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tileaccordion.
+A demo of the tile accordion can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tileaccordionfield +
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tileaccordion
 
 [[img-accordion]]
 .Accordion
@@ -202,6 +201,26 @@ API:
 - Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
 ====
 
+== File chooser button
+
+The new `AbstractFileChooserButton` is a value field which opens the native file chooser dialog from the browser when a user clicks on the button. The value of the field is the selected file, a `BinaryResource`. The API of the field is identical to `IFileChooserField`. The button itself does not display the selected file / value, but it is easy to do something with the value when you implement the `execChangedValue` method. For instance you could display an uploaded image in an `ImageField` on the same form.
+
+.Example usage of file chooser button in a media file chooser
+image::{imgsdir}/FileChooserButton.png[]
+
+A demo of the file chooser button can be found here: https://scout.bsi-software.com/widgets/?widget-filechooserfield
+
+== Tag field, Tag bar
+
+The new `AbstractTagField` is used to enter tags as used in typical "tag clouds". The value of the field is a Set of Strings, where each element is a unique tag. Like a __SmartField__ the tag field has a `LookupCall` which returns available tag names when the user starts to type something into the text field. When the user picks a tag, it appears in the tag list on the left. The field is responsive: if the tag list is too long to fit into the field, some tags go into an overflow popup. This popup is opened by clicking on the arrow-down button on the left. When the field is enabled, each tag element has a remove icon, which removes the element from the list. When the field is disabled the user cannot enter text and elements cannot be removed. It's a good idea to use the disabled tag field, if you only need to display tags.
+
+.Tag field with open proposal chooser
+image::{imgsdir}/TagField.png[]
+
+Note: in __Scout JS__ you can also use the `scout.TagBar` widget standalone, without the tag field. This widget renders only the tag elements and deals with responsive layout.
+
+A demo of the tag field can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tagfield
+
 == Menu and MenuBar Enhancements
 
 === Form Field in Menu
@@ -240,8 +259,8 @@ By default the notification is displayed at the beginning of the group box body.
 .Group box notification
 image::{imgsdir}/groupBoxNotification.png[]
 
-A demo may be found here: https://scout.bsi-software.com/widgets/?dl=widget-groupbox. +
-And here for the JS only version: https://scout.bsi-software.com/jswidgets/#groupbox.
+A demo can be found here: https://scout.bsi-software.com/widgets/?dl=widget-groupbox +
+And here for the JS only version: https://scout.bsi-software.com/jswidgets/#groupbox
 
 == TabBox Enhancements
 
