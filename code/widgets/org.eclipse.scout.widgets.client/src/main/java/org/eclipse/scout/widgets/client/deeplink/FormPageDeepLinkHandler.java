@@ -19,6 +19,7 @@ import org.eclipse.scout.rt.platform.util.visitor.TreeVisitResult;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPageParent;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
+import org.eclipse.scout.widgets.client.ui.forms.WidgetNameAlias;
 
 /**
  * Deep-link handler allows to navigate to a specific outline and form within the widgets application.
@@ -43,8 +44,16 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
   }
 
   protected static String toWidgetName(Class<?> formClass) {
-    String widgetName = formClass.getSimpleName();
-    widgetName = widgetName.replaceAll("Form$", "");
+    WidgetNameAlias annotation = formClass.getAnnotation(WidgetNameAlias.class);
+    String widgetName;
+    if (annotation == null) {
+      // default: derive widget name from class name
+      widgetName = formClass.getSimpleName().replaceAll("Form$", "");
+    }
+    else {
+      // if annotation is present: use widget name from annotation value
+      widgetName = annotation.value();
+    }
     return widgetName.toLowerCase();
   }
 
