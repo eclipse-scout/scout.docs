@@ -202,7 +202,7 @@
               {
                 "id": "RowIconColumnWidthField",
                 "objectType": "NumberField",
-                "label": "Row Icon Column width"
+                "label": "Row Icon Column Width"
               },
               {
                 "id": "CheckableStyleField",
