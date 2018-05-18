@@ -123,7 +123,8 @@ On JavaScript side, there has been a class `Widget.js` for a long time now. With
 
 The new Widget class handles the widget lifecycle (initConfig, init, disposed) and offers methods to visit Widget hierarchies. See `org.eclipse.scout.rt.client.ui.IWidget` for more details.
 
-== New Widget 'TileGrid'
+== New Widgets
+=== TileGrid
 
 The new `TileGrid` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
 
@@ -138,7 +139,7 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 .TileGrid
 image::{imgsdir}/tiles.png[]
 
-== New Widget 'Accordion'
+=== Accordion
 
 The `Accordion` displays several collapsible `Group` s. The default behavior is to collapse every other group if one group is expanded. Because that is not in any case desired, the behavior may be disabled by setting the property `exclusiveExpand` to false.
 
@@ -153,6 +154,26 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 [[img-accordion]]
 .Accordion
 image::{imgsdir}/accordion.png[]
+
+=== File Chooser Button
+
+The new `AbstractFileChooserButton` is a value field which opens the native file chooser dialog from the browser when a user clicks on the button. The value of the field is the selected file, a `BinaryResource`. The API of the field is identical to `IFileChooserField`. The button itself does not display the selected file / value, but it is easy to do something with the value when you implement the `execChangedValue` method. For instance you could display an uploaded image in an `ImageField` on the same form.
+
+.Example usage of file chooser button in a media file chooser
+image::{imgsdir}/FileChooserButton.png[]
+
+A demo of the file chooser button can be found here: https://scout.bsi-software.com/widgets/?widget-filechooserfield
+
+=== Tag Field and Tag Bar
+
+The new `AbstractTagField` is used to enter tags as used in typical "tag clouds". The value of the field is a Set of Strings, where each element is a unique tag. Like a __SmartField__ the tag field has a `LookupCall` which returns available tag names when the user starts to type something into the text field. When the user picks a tag, it appears in the tag list on the left. The field is responsive: if the tag list is too long to fit into the field, some tags go into an overflow popup. This popup is opened by clicking on the arrow-down button on the left. When the field is enabled, each tag element has a remove icon, which removes the element from the list. When the field is disabled the user cannot enter text and elements cannot be removed. It's a good idea to use the disabled tag field, if you only need to display tags.
+
+.Tag field with open proposal chooser
+image::{imgsdir}/TagField.png[]
+
+Note: in __Scout JS__ you can also use the `scout.TagBar` widget standalone, without the tag field. This widget renders only the tag elements and deals with responsive layout.
+
+A demo of the tag field can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tagfield
 
 == New Outline Overview
 
@@ -177,6 +198,13 @@ If you want to revert your whole application to the classic style you can create
 .New alternative field style
 image::{imgsdir}/formfield_alternative.png[]
 
+=== New Top Label Style
+Along with the new alternative field style comes a new style for top labels. Since the fields don't have a top border anymore, it is not obvious that the label belongs to the field. With the new label style it is more clear and even looks better. Another advantage is that the height of the form field (incl. label) will be smaller, which is especially helpful on smaller screens.
+
+[[img-top-label-style]]
+.New top label style
+image::{imgsdir}/top_label_style.png[]
+
 === Improved Accessibility
 
 The label and the input are now linked by using `aria-labelledby`. This allows screen readers to read the label if an input is focused.
@@ -200,26 +228,6 @@ API:
 - The support for adding ProcessButtons dynamically is not implemented so far.
 - Adding a field to container (`TabBox`, `GroupBox`) forces the container to be rendered. All fields in this container will be removed and rendered again.
 ====
-
-== File chooser button
-
-The new `AbstractFileChooserButton` is a value field which opens the native file chooser dialog from the browser when a user clicks on the button. The value of the field is the selected file, a `BinaryResource`. The API of the field is identical to `IFileChooserField`. The button itself does not display the selected file / value, but it is easy to do something with the value when you implement the `execChangedValue` method. For instance you could display an uploaded image in an `ImageField` on the same form.
-
-.Example usage of file chooser button in a media file chooser
-image::{imgsdir}/FileChooserButton.png[]
-
-A demo of the file chooser button can be found here: https://scout.bsi-software.com/widgets/?widget-filechooserfield
-
-== Tag field, Tag bar
-
-The new `AbstractTagField` is used to enter tags as used in typical "tag clouds". The value of the field is a Set of Strings, where each element is a unique tag. Like a __SmartField__ the tag field has a `LookupCall` which returns available tag names when the user starts to type something into the text field. When the user picks a tag, it appears in the tag list on the left. The field is responsive: if the tag list is too long to fit into the field, some tags go into an overflow popup. This popup is opened by clicking on the arrow-down button on the left. When the field is enabled, each tag element has a remove icon, which removes the element from the list. When the field is disabled the user cannot enter text and elements cannot be removed. It's a good idea to use the disabled tag field, if you only need to display tags.
-
-.Tag field with open proposal chooser
-image::{imgsdir}/TagField.png[]
-
-Note: in __Scout JS__ you can also use the `scout.TagBar` widget standalone, without the tag field. This widget renders only the tag elements and deals with responsive layout.
-
-A demo of the tag field can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tagfield
 
 == Menu and MenuBar Enhancements
 
