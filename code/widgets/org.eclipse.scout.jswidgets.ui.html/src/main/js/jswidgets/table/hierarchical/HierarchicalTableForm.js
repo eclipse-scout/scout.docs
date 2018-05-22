@@ -206,30 +206,29 @@ jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
 
 jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
   var i = 0,
-    allRows = [];
+    allRows = [],
+    createParentWithManyChildren = function (id, name, childCount) {
+      var rows = [],
+        i,
+        rowId;
+      rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
+
+      for (i = 0; i < childCount; i++) {
+        rowId = this.rowNo++;
+        rows.push(createRow(rowId, id, null, [
+          name + rowId,
+          'Any title',
+          '20.10.2015'
+        ]));
+      }
+      return rows;
+    }.bind(this);
 
   for (i = 0; i < 100; i++) {
     allRows = allRows.concat(createParentWithManyChildren(this.rowNo++, 'Abc', Math.floor(Math.random() * 100)));
   }
 
   this.table.insertRows(allRows);
-
-  function createParentWithManyChildren(id, name, childCount) {
-    var rows = [],
-      i,
-      rowId;
-    rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
-
-    for (i = 0; i < childCount; i++) {
-      rowId = this.rowNo++;
-      rows.push(createRow(rowId, id, null, [
-        name + rowId,
-        'Any title',
-        '20.10.2015'
-      ]));
-    }
-    return rows;
-  }
 
   function createRow(id, parentId, iconId, cells) {
     return {
