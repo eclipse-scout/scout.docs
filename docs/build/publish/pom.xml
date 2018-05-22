@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
+    <version>8.0.0.004_Photon_RC1</version>
   </parent>
 
   <properties>
@@ -22,37 +22,37 @@
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_beginners_guide</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>eclipse_help</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_helloworld</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_install</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_migration</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_technical_guide</artifactId>
-      <version>8.0.0-SNAPSHOT</version>
+      <version>8.0.0.004_Photon_RC1</version>
       <type>pom</type>
     </dependency>
   </dependencies>
