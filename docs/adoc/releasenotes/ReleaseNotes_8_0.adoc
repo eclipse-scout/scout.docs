@@ -326,7 +326,7 @@ Additionally you can now reference an image by URL, for instance an image hosted
 
 The check box field (`IBooleanField`) got a new property called `keyStroke`. The property expects a string defining the key stroke, e.g. `ctrl-b`. When the key stroke is executed the check box value will be toggled. Other widgets like `Button`, `RadioButton` or `Menu` already support that feature in the same way.
 
-== Radio Button Group Enhancements
+== RadioButtonGroup Enhancements
 
 === Layout Customizations
 
@@ -342,8 +342,21 @@ The logical grid is now calculated automatically as it is done for a `GroupBox` 
 === Value Support (JS)
 The `RadioButtonGroup` now supports the value operations provided by `ValueField`, similar to the Java implementation. This means you can define a `radioValue` on each `RadioButton` and then use `setValue()` to select a button using its radioValue. When reading the `value` of a `RadioButtonGroup`, the `radioValue` of the selected button is returned.
 
+=== Lookup Call Support (JS)
+In addition to specify the radio buttons explicitly, a lookup call can now be used. When defining a lookup call the radio buttons are created based on the result of that lookup call.
+
 == SequenceBox: Grid Calculation (JS)
 The logical grid is now calculated automatically as it is done for a `GroupBox` or for a `SequenceBox` in Java. This means you can only specify the width (`w`) and height (`h`) of a cell using `gridDataHints`, the position (`x`, `y`) will be calculated automatically.
+
+== ListBox Enhancements
+=== Default table creation (JS)
+The Scout `ListBox` is based on the Scout `Table`. Such a list box table typically is checkable, only has one column and doesn't have a header. Since this is true for most list boxes it is not necessary anymore to specify the table explicitly. A default table will be created if none is provided.
+
+=== Lookup Call Support (JS)
+In order to fill the list box a `LookupCall` can now be used. The resulting lookup rows will be mapped to actual table rows and inserted into the list box table.
+
+=== Value Support (JS)
+The `ListBox` now supports the value operations provided by `ValueField`, similar to the Java implementation. The value represents the keys of the checked rows specified by the corresponding lookup rows.
 
 == Smartfield Enhancements
 
