@@ -9,6 +9,7 @@
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
   __include("jswidgets/accordion/AccordionForm.js");
+  __include("jswidgets/accordion/CollapseStyleLookupCall.js");
   __include("jswidgets/action/ActionPropertiesBox.js");
   __include("jswidgets/action/ActionStyleLookupCall.js");
   __include("jswidgets/button/ButtonForm.js");

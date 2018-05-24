@@ -105,6 +105,12 @@
             "expandable": true,
             "fields": [
               {
+                "id": "CollapseStyleField",
+                "objectType": "SmartField",
+                "label": "Collapse Style",
+                "lookupCall": "jswidgets.CollapseStyleLookupCall"
+              },
+              {
                 "id": "ExclusiveExpandField",
                 "objectType": "CheckBoxField",
                 "label": "Exclusive Expand",

@@ -27,6 +27,10 @@ jswidgets.AccordionForm.prototype._init = function(model) {
 
   // -- Properties
 
+  var collapseStyleField = this.widget('CollapseStyleField');
+  collapseStyleField.setValue(this.accordion.collapseStyle);
+  collapseStyleField.on('propertyChange', this._onCollapseStylePropertyChange.bind(this));
+
   var exclusiveExpandField = this.widget('ExclusiveExpandField');
   exclusiveExpandField.setValue(this.accordion.exclusiveExpand);
   exclusiveExpandField.on('propertyChange', this._onExclusiveExpandPropertyChange.bind(this));
@@ -58,6 +62,12 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
   this.widget('GridDataBox').setField(accordionField);
+};
+
+jswidgets.AccordionForm.prototype._onCollapseStylePropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.accordion.setCollapseStyle(event.newValue);
+  }
 };
 
 jswidgets.AccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
