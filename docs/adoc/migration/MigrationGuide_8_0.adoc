@@ -515,13 +515,13 @@ If you created a custom theme, you might have to adjust some LESS variables.
 
 The _clone()_ function of any widget got an `options` parameter. The options define what properties and events are synchronized between the widget and its clone.
 
-=== Widget.js: addChild & removeChild changed to private
+=== Widget.js: "addChild" & "removeChild" Changed to Private
 
 The methods `addChild()` and `removeChild()` have been renamed to `_addChild()` and `_removeChild()`.
 This means the methods are considered to have `private` visibility now. Use the methods `setParent()`, `setOwner()` and `destroy()` to connect or disconnect widgets.
 These methods will add or remove the child widget automatically.
 
-=== FormField.visit renamed to FormField.visitFields
+=== FormField.visit Renamed to FormField.visitFields
 
 The `visit()` method on all FormFields has been renamed to `visitFields()`. This change is necessary to clarify what is visited and to distinguish between the visit methods available on widget level (e.g. `visitChildren()`).
 
@@ -534,7 +534,7 @@ The arguments of `scout.Tree.prototype._visitNodes` have changed from (nodes, fu
 
 === Automatic Preloading of Web Fonts
 
-Scout can now detect the Web Fonts (*.woff files) to preload automatically. It's therefore no longer necessary to list the font names manually in the bootstrap argument of `scout.App`.
+Scout can now detect the web fonts (*.woff) to preload automatically. It's therefore no longer necessary to list the font names manually in the bootstrap argument of `scout.App`.
 
 _Migration:_
 
@@ -573,7 +573,7 @@ This migration is recommended but optional. Listing all fonts to preload manuall
 * The property `formFields` has been renamed to `fields` to be consistent with the Java implementation and with other composites like `GroupBox`.
 * The function `selectButton` now selects the button even if it is disabled. Only the user must not select disabled buttons but the developer should still be able to do it. If you use this function, you may have to insert a check for the enabled state.
 
-=== Layout of fields in Radio Button Group and Sequence Box
+=== Layout of Fields in Radio Button Group and Sequence Box
 
 Until now it was required to explicitly set grid positions for child fields of Radio Button Groups and Sequence Boxes. This was because the automatic grid layout was not yet implemented in the Scout JavaScript layer. This was no issue however if the fields have been used in connection with a Java model because then the Java layer takes care about the layout.
 
@@ -583,6 +583,10 @@ Now also pure JavaScript Scout applications have automatic layout for child fiel
 
 `open()` now calls `load()` first before calling `show()`. The reason is to prevent showing an empty form before any data is loaded.
 If you relied on the previous behavior, (e.g. if you accessed ui properties like $container right after opening the form) you would need to put that code in a function executed delayed using `form.open().then()`.
+
+=== Status
+
+The static function `scout.Status.warn()` was renamed to `scout.Status.warning()` to bring it in line with the name of corresponding severity constant `scout.Status.Severity.WARNING`.
 
 
 // ^^^
