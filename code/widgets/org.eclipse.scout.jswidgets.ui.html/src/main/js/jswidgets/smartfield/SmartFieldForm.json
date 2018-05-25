@@ -16,45 +16,62 @@
             "objectType": "SmartField",
             "lookupCall": "jswidgets.LocaleLookupCall",
             "label": "Smart Field",
-            "menus": [{
-              "id": "NewLanguageMenu",
-              "text": "${textKey:NewLanguageMenu}",
-              "objectType": "Menu"
-            }],
-            "statusMenuMappings": [{
-              "id": "NewLanguageMenuStatusMapping",
-              "objectType": "StatusMenuMapping",
-              "menu": "NewLanguageMenu",
-              "codes": [2]
-            }]
+            "menus": [
+              {
+                "id": "NewLanguageMenu",
+                "text": "${textKey:NewLanguageMenu}",
+                "objectType": "Menu"
+              }
+            ],
+            "statusMenuMappings": [
+              {
+                "id": "NewLanguageMenuStatusMapping",
+                "objectType": "StatusMenuMapping",
+                "menu": "NewLanguageMenu",
+                "codes": [
+                  2
+                ]
+              }
+            ]
           }
         ]
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
+        "objectType": "TabBox",
         "labelVisible": false,
-        "borderVisible": false,
         "cssClass": "jswidgets-configuration",
         "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "jswidgets.SmartFieldPropertiesBox",
-            "label": "Properties"
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "SmartFieldPropertiesBox",
+                "objectType": "jswidgets.SmartFieldPropertiesBox",
+                "label": "Smart Field Properties"
+              },
+              {
+                "id": "ValueFieldPropertiesBox",
+                "objectType": "jswidgets.ValueFieldPropertiesBox"
+              },
+              {
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
+              }
+            ]
           },
           {
-            "id": "ValueFieldPropertiesBox",
-            "objectType": "jswidgets.ValueFieldPropertiesBox"
-          },
-          {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints"
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

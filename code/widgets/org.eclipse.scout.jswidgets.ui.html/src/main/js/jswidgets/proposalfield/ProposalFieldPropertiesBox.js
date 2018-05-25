@@ -36,6 +36,11 @@ jswidgets.ProposalFieldPropertiesBox.prototype._setField = function(field) {
     return;
   }
 
+  var lookupCallField = this.widget('LookupCallField');
+  lookupCallField.setValue(this.field.lookupCall);
+  lookupCallField.on('propertyChange', this._onLookupCallPropertyChange.bind(this));
+  this.field.on('propertyChange', this._onSmartFieldChange.bind(this));
+
   var maxLengthField = this.widget('MaxLengthField');
   maxLengthField.setValue(this.field.maxLength);
   maxLengthField.on('propertyChange', this._onMaxLengthPropertyChange.bind(this));
@@ -43,6 +48,18 @@ jswidgets.ProposalFieldPropertiesBox.prototype._setField = function(field) {
   var trimTextField = this.widget('TrimTextField');
   trimTextField.setValue(this.field.trimText);
   trimTextField.on('propertyChange', this._onTrimTextPropertyChange.bind(this));
+};
+
+jswidgets.ProposalFieldPropertiesBox.prototype._onSmartFieldChange = function(event) {
+  if (event.propertyName === 'lookupCall') {
+    this.widget('LookupCallField').setValue(event.newValue);
+  }
+};
+
+jswidgets.ProposalFieldPropertiesBox.prototype._onLookupCallPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.field.setLookupCall(event.newValue);
+  }
 };
 
 jswidgets.ProposalFieldPropertiesBox.prototype._onMaxLengthPropertyChange = function(event) {

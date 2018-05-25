@@ -28,6 +28,7 @@
     "jswidgets/numberfield/NumberFieldForm.json",
     "jswidgets/smartfield/SmartFieldForm.json",
     "jswidgets/smartfield/SmartFieldPropertiesBox.json",
+    "jswidgets/listbox/ListBoxForm.json",
     "jswidgets/smartfield/multiline/MultilineSmartFieldForm.json",
     "jswidgets/smartfield/tree/TreeSmartFieldForm.json",
     "jswidgets/smartfield/tree/TreeSmartFieldPropertiesBox.json",
@@ -48,6 +49,7 @@
     "jswidgets/tilegrid/TileGridForm.json",
     "jswidgets/tilegrid/TileGridLayoutConfigBox.json",
     "jswidgets/tileaccordion/TileAccordionForm.json",
-    "jswidgets/valuefield/ValueFieldPropertiesBox.json"
+    "jswidgets/valuefield/ValueFieldPropertiesBox.json",
+    "jswidgets/lookup/LookupCallpropertiesBox.json"
   ]
 }

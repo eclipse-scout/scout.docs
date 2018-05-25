@@ -6,6 +6,12 @@
   "expandable": true,
   "fields": [
     {
+      "id": "LookupCallField",
+      "objectType": "SmartField",
+      "label": "LookupCall",
+      "lookupCall": "jswidgets.LookupCallLookupCall"
+    },
+    {
       "id": "DisplayStyleField",
       "objectType": "SmartField",
       "lookupCall": "jswidgets.SmartFieldDisplayStyleLookupCall",

@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.MultilineSmartFieldForm",
+  "id": "jswidgets.ListBoxForm",
   "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
@@ -12,12 +12,12 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "MultilineSmartField",
-            "objectType": "SmartFieldMultiline",
-            "lookupCall": "jswidgets.MultilinePersonLookupCall",
-            "label": "Multiline Smart Field",
+            "id": "ListBox",
+            "objectType": "ListBox",
+            "lookupCall": "jswidgets.LocaleLookupCall",
+            "label": "List Box",
             "gridDataHints": {
-              "h": 2,
+              "h": 6,
               "weightY": 0
             }
           }
@@ -28,6 +28,10 @@
         "objectType": "TabBox",
         "labelVisible": false,
         "cssClass": "jswidgets-configuration",
+        "gridDataHints": {
+          "h": 6,
+          "weightY": -1
+        },
         "gridColumnCount": 1,
         "selectedTab": "PropertiesTab",
         "tabItems": [
@@ -37,9 +41,10 @@
             "label": "Properties",
             "fields": [
               {
-                "id": "SmartFieldPropertiesBox",
-                "objectType": "jswidgets.SmartFieldPropertiesBox",
-                "label": "Smart Field Properties"
+                "id": "LookupCallField",
+                "objectType": "SmartField",
+                "label": "LookupCall",
+                "lookupCall": "jswidgets.LookupCallLookupCall"
               },
               {
                 "id": "ValueFieldPropertiesBox",

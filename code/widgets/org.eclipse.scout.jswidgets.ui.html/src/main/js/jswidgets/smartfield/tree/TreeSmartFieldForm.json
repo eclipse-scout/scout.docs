@@ -22,29 +22,40 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
+        "objectType": "TabBox",
         "labelVisible": false,
-        "borderVisible": false,
         "cssClass": "jswidgets-configuration",
         "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "jswidgets.TreeSmartFieldPropertiesBox",
-            "label": "Properties"
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
+            "label": "Properties",
+            "fields": [
+              {
+                "id": "TreeSmartFieldPropertiesBox",
+                "objectType": "jswidgets.TreeSmartFieldPropertiesBox",
+                "label": "Tree Smart Field Properties"
+              },
+              {
+                "id": "ValueFieldPropertiesBox",
+                "objectType": "jswidgets.ValueFieldPropertiesBox"
+              },
+              {
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
+              }
+            ]
           },
           {
-            "id": "ValueFieldPropertiesBox",
-            "objectType": "jswidgets.ValueFieldPropertiesBox"
-          },
-          {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints"
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

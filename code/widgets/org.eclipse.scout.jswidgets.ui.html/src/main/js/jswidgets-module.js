@@ -1,11 +1,11 @@
 /*!
-* Eclipse Scout JS Widgets
-* https://eclipse.org/scout/
-*
-* Copyright (c) BSI Business Systems Integration AG. All rights reserved.
-* Released under the Eclipse Public License v1.0
-* http://www.eclipse.org/legal/epl-v10.html
-*/
+ * Eclipse Scout JS Widgets
+ * https://eclipse.org/scout/
+ *
+ * Copyright (c) BSI Business Systems Integration AG. All rights reserved.
+ * Released under the Eclipse Public License v1.0
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
   __include("jswidgets/accordion/AccordionForm.js");
@@ -58,12 +58,16 @@
   __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldPropertiesBox.js");
   __include("jswidgets/smartfield/SmartFieldDisplayStyleLookupCall.js");
-  __include("jswidgets/smartfield/LocaleLookupCall.js");
-  __include("jswidgets/smartfield/SalutationLookupCall.js");
   __include("jswidgets/smartfield/multiline/MultilineSmartFieldForm.js");
   __include("jswidgets/smartfield/multiline/MultilinePersonLookupCall.js");
   __include("jswidgets/smartfield/tree/TreeSmartFieldForm.js");
   __include("jswidgets/smartfield/tree/TreeSmartFieldPropertiesBox.js");
+  __include("jswidgets/lookup/LocaleLookupCall.js");
+  __include("jswidgets/lookup/SalutationLookupCall.js");
+  __include("jswidgets/lookup/RainbowLookupCall.js");
+  __include("jswidgets/lookup/LookupCallLookupCall.js");
+  __include("jswidgets/lookup/LookupCallPropertiesBox.js");
+  __include("jswidgets/listbox/ListBoxForm.js");
   __include("jswidgets/smartfield/tree/WorldLookupCall.js");
   __include("jswidgets/proposalfield/ProposalFieldForm.js");
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");

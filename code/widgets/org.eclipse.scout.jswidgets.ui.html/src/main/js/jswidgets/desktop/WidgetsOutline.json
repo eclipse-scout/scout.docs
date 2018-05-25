@@ -182,6 +182,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "List Box",
+      "detailForm": {
+        "objectType": "jswidgets.ListBoxForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:StringField}",
       "detailForm": {
         "objectType": "jswidgets.StringFieldForm"

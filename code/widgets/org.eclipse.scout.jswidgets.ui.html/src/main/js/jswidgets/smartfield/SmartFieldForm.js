@@ -25,11 +25,12 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
   var newLanguageMenu = this.widget('NewLanguageMenu');
   newLanguageMenu.on('action', this._onNewLanguageMenuAction.bind(this));
 
-  this.widget('PropertiesBox').setField(this.smartField);
+  this.widget('SmartFieldPropertiesBox').setField(this.smartField);
   this.widget('ValueField').setEnabled(true);
   this.widget('ValueFieldPropertiesBox').setField(this.smartField);
   this.widget('FormFieldPropertiesBox').setField(this.smartField);
   this.widget('GridDataBox').setField(this.smartField);
+  this.widget('EventsTab').setField(this.smartField);
 };
 
 jswidgets.SmartFieldForm.prototype._onNewLanguageMenuAction = function(event) {

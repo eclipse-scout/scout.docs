@@ -26,6 +26,7 @@ jswidgets.SmartFieldPropertiesBox.prototype._init = function(model) {
 
 jswidgets.SmartFieldPropertiesBox.prototype.setField = function(field) {
   this.setProperty('field', field);
+
 };
 
 jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
@@ -33,6 +34,11 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
   if (!this.field) {
     return;
   }
+
+  var lookupCallField = this.widget('LookupCallField');
+  lookupCallField.setValue(this.field.lookupCall);
+  lookupCallField.on('propertyChange', this._onLookupCallPropertyChange.bind(this));
+  this.field.on('propertyChange', this._onSmartFieldChange.bind(this));
 
   var displayStyleField = this.widget('DisplayStyleField');
   displayStyleField.setValue(this.field.displayStyle);
@@ -49,6 +55,18 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
   var searchRequiredField = this.widget('SearchRequiredField');
   searchRequiredField.setValue(this.field.searchRequired);
   searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
+};
+
+jswidgets.SmartFieldPropertiesBox.prototype._onSmartFieldChange = function(event) {
+  if (event.propertyName === 'lookupCall') {
+    this.widget('LookupCallField').setValue(event.newValue);
+  }
+};
+
+jswidgets.SmartFieldPropertiesBox.prototype._onLookupCallPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.field.setLookupCall(event.newValue);
+  }
 };
 
 jswidgets.SmartFieldPropertiesBox.prototype._onDisplayStylePropertyChange = function(event) {
