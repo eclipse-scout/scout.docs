@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>8.0.0-SNAPSHOT</version>
+    <version>8.0.0.005_Photon_RC2</version>
   </parent>
 
   <artifactId>scout_releasenotes</artifactId>

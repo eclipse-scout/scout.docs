@@ -21,11 +21,11 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipse.scout.docs.snippets</artifactId>
-  <version>8.0.0-SNAPSHOT</version>
+  <version>8.0.0.005_Photon_RC2</version>
   <name>Snippets used in technical documentation of Eclipse Scout framework</name>
 
   <properties>
-    <org.eclipse.scout.rt.version>8.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>8.0.0.005_Photon_RC2</org.eclipse.scout.rt.version>
   </properties>
 
   <dependencyManagement>
