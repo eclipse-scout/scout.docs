@@ -1,7 +1,7 @@
 = Eclipse Scout Beginners Guide
 :doctype: book
 :author: Matthias Zimmermann
-:email: matthias.zimmermann@bsi-software.com
+:email: scout-dev@eclipse.org
 :revnumber: {project-version}
 include::_initDoc.adoc[]
 
