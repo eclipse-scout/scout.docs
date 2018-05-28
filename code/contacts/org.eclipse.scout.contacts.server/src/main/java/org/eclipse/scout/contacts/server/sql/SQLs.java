@@ -272,7 +272,7 @@ public interface SQLs {
       + "VALUES   ('prs01', "
       + "          'Alice', "
       + "          null, "
-      + "          'http://www.uergsel.de/uploads/Alice.png', "
+      + "          'https://upload.wikimedia.org/wikipedia/commons/e/e2/John_Tenniel-_Alice%27s_mad_tea_party%2C_colour.jpg', "
       + "          '26.11.1865', "
       + "          'F', "
       + "          null, "
