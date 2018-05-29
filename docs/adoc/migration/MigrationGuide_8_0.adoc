@@ -588,6 +588,8 @@ If you relied on the previous behavior, (e.g. if you accessed ui properties like
 
 The static function `scout.Status.warn()` was renamed to `scout.Status.warning()` to bring it in line with the name of corresponding severity constant `scout.Status.Severity.WARNING`.
 
+=== MenuBar
+So far right aligned menus where not stacked when there is not enough horizontal space. If this behavior is still required the property `stackabel` has to be set to false.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here

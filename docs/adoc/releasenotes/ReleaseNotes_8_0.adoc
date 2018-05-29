@@ -281,6 +281,7 @@ image::{imgsdir}/tabbox_menu_alignment.png[]
 
 === Collapsible Menu Items
 Menus in the menubar will be moved to an ellipsis menu in case there is not enough space in the tabbox header. The tab items are moved to an ellipsis menu when there is not enough space for all tabs. The collapse order is as following: all menus are collapsed first before the tabs will be collapsed from right to left.
+A menu can be prevented from collapsing by setting the `stackable` (`AbstractMenu.getConfiguredStackable`) property to false.
 
 [[img-tab-box-ellipsis]]
 .Ellipsis menu for the tabs of a tab box
@@ -288,6 +289,14 @@ image::{imgsdir}/tabbox_ellipsis.png[]
 
 === Sublabel
 TabItems got a `sublabel` property which is displayed in a very small font below the title (see also <<sec-gb-sublabel>>).
+
+[[img-widget-groupbox-sublabel]]
+.GroupBox sublabel example
+image::{imgsdir}/groupbox_sublabel.png[]
+
+[[img-widget-tabitem-sublabel]]
+.TabItem sublabel example
+image::{imgsdir}/tabbox_sublabel.png[]
 
 === Animated Selection Marker
 The marker of the selected tab is now animated and follows the user or model selection.
