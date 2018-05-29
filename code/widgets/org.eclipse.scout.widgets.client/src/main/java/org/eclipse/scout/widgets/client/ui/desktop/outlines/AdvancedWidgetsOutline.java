@@ -10,13 +10,12 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.inventory.ClassInventory;
 import org.eclipse.scout.rt.platform.inventory.IClassInfo;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -44,31 +43,30 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
    * Adds all example forms that implement IAdvancedExampleForm to this page. From each form a FormPage is created and
    * added to the page list. The form pages are sorted alphabetically.
    */
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked")
   protected void execCreateChildPages(List<IPage<?>> pageList) {
-    pageList.addAll(ClassInventory.get().getAllKnownSubClasses(IAdvancedFormPage.class).stream()
-        .map(classInfo -> {
-          IPage<?> page = null;
-          try {
-
-            page = (IPage<?>) classInfo.resolveClass().newInstance();
-          }
-          catch (Exception e) {
-
-          }
-          return page;
-        }).filter(page -> page != null)
-        .collect(Collectors.toList()));
+    ClassInventory.get()
+        .getAllKnownSubClasses(IAdvancedFormPage.class).stream()
+        .map(this::classInfoToPage)
+        .forEach(pageList::add);
 
     // assemble a sorted list of all classes implementing IAdvancedExampleForm
-    List<IClassInfo> forms = new ArrayList<>(ClassInventory.get().getAllKnownSubClasses(IAdvancedExampleForm.class));
+    ClassInventory.get()
+        .getAllKnownSubClasses(IAdvancedExampleForm.class).stream()
+        .map(ci -> (Class<IPageForm>) ci.resolveClass())
+        .map(FormPage::new)
+        .forEach(pageList::add);
 
-    for (IClassInfo classInfo : forms) {
-      Class<IPageForm> pageForm = (Class<IPageForm>) classInfo.resolveClass();
-      FormPage page = new FormPage(pageForm);
-      pageList.add(page);
-    }
     FormPage.sort(pageList);
+  }
+
+  protected IPage<?> classInfoToPage(IClassInfo classInfo) {
+    try {
+      return (IPage<?>) classInfo.resolveClass().newInstance();
+    }
+    catch (ReflectiveOperationException e) {
+      throw new PlatformException("Error creating page for classinfo {}.", classInfo, e);
+    }
   }
 }
