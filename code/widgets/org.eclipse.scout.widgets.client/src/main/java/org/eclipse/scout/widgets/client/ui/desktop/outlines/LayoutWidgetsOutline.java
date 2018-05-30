@@ -11,11 +11,17 @@
 package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.bench.DesktopBenchLayoutPage;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxDynamicFieldsForm;
@@ -24,6 +30,7 @@ import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm
 import org.eclipse.scout.widgets.client.ui.forms.SequenceBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm;
+import org.eclipse.scout.widgets.shared.Icons;
 
 /**
  * @author mzi
@@ -52,4 +59,24 @@ public class LayoutWidgetsOutline extends AbstractOutline {
     pageList.add(new DesktopBenchLayoutPage());
     FormPage.sort(pageList);
   }
+
+  @Order(1000)
+  @ClassId("a3390108-f178-453d-96a9-ef8934b165ce")
+  public class LayoutOutlineMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredIconId() {
+      return Icons.Sum;
+    }
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.hashSet(TreeMenuType.EmptySpace, TreeMenuType.Header, TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
+    }
+
+    @Override
+    protected void execAction() {
+    }
+  }
+
 }

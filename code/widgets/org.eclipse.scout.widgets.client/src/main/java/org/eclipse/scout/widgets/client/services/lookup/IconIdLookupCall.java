@@ -22,9 +22,6 @@ import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.shared.Icons;
 
-/**
- * @author mzi
- */
 public class IconIdLookupCall extends LocalLookupCall<String> {
   private static final long serialVersionUID = 1L;
 

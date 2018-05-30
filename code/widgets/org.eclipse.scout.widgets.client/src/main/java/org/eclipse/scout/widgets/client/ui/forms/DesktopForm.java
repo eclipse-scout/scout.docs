@@ -2,6 +2,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
+import org.eclipse.scout.rt.client.ui.action.view.IViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.notification.DesktopNotification;
 import org.eclipse.scout.rt.client.ui.desktop.notification.IDesktopNotification;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -21,18 +22,24 @@ import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.client.services.lookup.ViewButtonLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.SeverityField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.OutlineButtonBox;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.OutlineButtonBox.OutlineButtonField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.OutlineButtonBox.ViewButtonBox;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.BenchVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
+import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractViewButtonPropertesBox;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
@@ -64,6 +71,18 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   public BenchVisibleButton getBenchVisibleButton() {
     return getFieldByClass(BenchVisibleButton.class);
+  }
+
+  public OutlineButtonBox getOutlineButtonBox() {
+    return getFieldByClass(OutlineButtonBox.class);
+  }
+
+  public OutlineButtonField getOutlineButtonField() {
+    return getFieldByClass(OutlineButtonField.class);
+  }
+
+  public ViewButtonBox getViewButtonBox() {
+    return getFieldByClass(ViewButtonBox.class);
   }
 
   public NavigationHandleVisibleButton getNavigationHandleVisibleButton() {
@@ -335,6 +354,41 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           }
         }
       }
+    }
+
+    @Order(3000)
+    @ClassId("1e5b55cc-401b-43c8-b0ad-f54c37ed3300")
+    public class OutlineButtonBox extends AbstractGroupBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ViewButtons");
+      }
+
+      @Order(1000)
+      @ClassId("88b121ff-e677-49d9-a990-d9dc4e7592f0")
+      public class OutlineButtonField extends AbstractSmartField<IViewButton> {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ViewButton");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<IViewButton>> getConfiguredLookupCall() {
+          return ViewButtonLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getViewButtonBox().setAction(getValue());
+        }
+      }
+
+      @Order(2000)
+      @ClassId("3e0346c2-ac0e-490a-ab7d-0ed2b4c1e997")
+      public class ViewButtonBox extends AbstractViewButtonPropertesBox {
+
+      }
+
     }
 
     @Order(10000)
