@@ -460,3 +460,10 @@ The default implementation of `IDataObjectMapper` is based on the popular https:
 The implementation can be exchanged by a custom implementation based on another library.
 
 For further examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-data-objects[Technical Guide: Data Objects]
+
+== REST Resources & REST Clients
+
+The new Scout module `org.eclipse.scout.rt.rest` adds basic support for REST resources and REST resource clients within the Scout framework.
+Available REST resources are automatically found by Jandex class inventory and registered at runtime.
+
+For examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-rest[Technical Guide: REST]

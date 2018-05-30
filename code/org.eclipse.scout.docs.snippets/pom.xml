@@ -62,6 +62,10 @@
       <artifactId>org.eclipse.scout.rt.platform</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.rest</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
     </dependency>

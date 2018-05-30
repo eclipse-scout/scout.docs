@@ -1,0 +1,114 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+[[cha-rest]]
+== REST ==
+
+=== REST Resource Provider ===
+A REST resource using the http://www.oracle.com/technetwork/java/javaee/tech/jax-rs-159890.html[JAX-RS] API is implemented by a POJO class annotated with a set of annotations.
+
+The Scout module `org.eclipse.scout.rt.rest` contains the basic `IRestResource` marker interface which integrates REST resources within the Scout framework.
+The interface is annotated by `@Bean` allowing the Scout platform to load and register all REST resources automatically at startup using the Jandex class inventory.
+
+[source,java]
+.Example: REST resource
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestResource.java[tags=class]
+----
+
+==== REST Resource Registration ====
+
+All available REST resources are automatically registered by the `RestApplication` class while the Scout platform startup.
+Override this class in order to setup any custom JAX-RS configurations or register any custom JAX-RS classes.
+
+Add the following snippet to your `web.xml` file to expose your REST API using the `/api` context path:
+
+[source,xml]
+.web.xml
+----
+<!-- JAX-RS Jersey Servlet -->
+<servlet>
+  <servlet-name>api</servlet-name>
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+  <init-param>
+    <param-name>javax.ws.rs.Application</param-name>
+    <param-value>org.eclipse.scout.rt.rest.RestApplication</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>api</servlet-name>
+  <url-pattern>/api/*</url-pattern>
+</servlet-mapping>
+----
+
+==== Data Objects ====
+Scout data objects may be used as request and response objects for REST APIs.
+See <<cha-data-objects>> for details and examples.
+
+==== Marshaller ====
+
+A REST API may be used by non-Java consumers. In order to communicatate using a platform-independant format, ususally REST services use JSON as transport format.
+The marshaller between Java data objects and JSON is abstracted in the JAX-RS specification.
+Using the `@Produces(MediaType.APPLICATION_JSON)` annotation, each REST service method specifies the produces data format.
+
+The Scout REST integration uses the popular Jackson library as default marshaller.
+Add a Maven dependency to `jersey-media-json-jackson` in your application `pom.xml` to use Jackson as JAX-RS marshaller with the Jersey JAX-RS implementation.
+
+Additionally add a dependency to the Scout module `org.eclipse.scout.rt.rest.jackson`.
+This module adds a set of Jackson additions in order to use Jackson with Scout data objects.
+
+==== RunContext ====
+Like a ususal service call using the Scout service tunnel a REST request must ensure that processing of the request takes place within a `RunContext`.
+The `ServerRunContextFilter` filter is used to intercept incoming REST requests and wrap them within a RunContext.
+Therefore a REST resouce implementation is not required to deal with setting up a RunContext to wrap the request within each method.
+The filter must be added in the `web.xml` configuration file and should be configured to be called after the authentication filter.
+The filter expects that the authentication has been performed and that a `subject` is available.
+All following filters and servlets and thus also the REST resources run automatically in the correct context.
+
+[source,xml]
+.web.xml filter registration
+----
+<filter>
+  <filter-name>ServerRunContextFilter</filter-name>
+  <filter-class>org.eclipse.scout.rt.server.context.ServerRunContextFilter</filter-class>
+</filter>
+
+<filter-mapping>
+  <filter-name>ServerRunContextFilter</filter-name>
+  <url-pattern>/api/*</url-pattern>
+</filter-mapping>
+----
+
+Beside the `subject` the `ServerRunContextFilter` sets up the Correlation ID, as well as the locale.
+Both values are read from the incoming request header, the caller must ensure that the headers `Accept-Language` and `X-Scout-Correlation-Id` are set correctly.
+
+=== REST Client ===
+
+The Scout module `org.eclipse.scout.rt.rest` offers a set of helper classes in order to call REST services.
+
+Each REST service endpoint is represented by a specific REST resource client helper class. The (ususally application scoped bean) class is used to specify the resource URL and additional properties used to build up the connection (authentification, additiona headers,...).
+
+At least the REST resource base path must be speficied:
+
+[source,java]
+.Example: REST resource client helper
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=class]
+----
+
+Based on the helper class, an example REST resource client may be implemented:
+
+[source,java]
+.Example: REST resource client
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=class]
+----
