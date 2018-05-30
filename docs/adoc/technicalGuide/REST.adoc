@@ -56,7 +56,7 @@ See <<cha-data-objects>> for details and examples.
 
 ==== Marshaller ====
 
-A REST API may be used by non-Java consumers. In order to communicatate using a platform-independant format, ususally REST services use JSON as transport format.
+A REST API may be used by non-Java consumers. In order to communicate using a platform-independent format, usually REST services use JSON as transport format.
 The marshaller between Java data objects and JSON is abstracted in the JAX-RS specification.
 Using the `@Produces(MediaType.APPLICATION_JSON)` annotation, each REST service method specifies the produces data format.
 
@@ -67,9 +67,9 @@ Additionally add a dependency to the Scout module `org.eclipse.scout.rt.rest.jac
 This module adds a set of Jackson additions in order to use Jackson with Scout data objects.
 
 ==== RunContext ====
-Like a ususal service call using the Scout service tunnel a REST request must ensure that processing of the request takes place within a `RunContext`.
+Like a usual service call using the Scout service tunnel a REST request must ensure that processing of the request takes place within a `RunContext`.
 The `ServerRunContextFilter` filter is used to intercept incoming REST requests and wrap them within a RunContext.
-Therefore a REST resouce implementation is not required to deal with setting up a RunContext to wrap the request within each method.
+Therefore a REST resource implementation is not required to deal with setting up a RunContext to wrap the request within each method.
 The filter must be added in the `web.xml` configuration file and should be configured to be called after the authentication filter.
 The filter expects that the authentication has been performed and that a `subject` is available.
 All following filters and servlets and thus also the REST resources run automatically in the correct context.
@@ -95,9 +95,9 @@ Both values are read from the incoming request header, the caller must ensure th
 
 The Scout module `org.eclipse.scout.rt.rest` offers a set of helper classes in order to call REST services.
 
-Each REST service endpoint is represented by a specific REST resource client helper class. The (ususally application scoped bean) class is used to specify the resource URL and additional properties used to build up the connection (authentification, additiona headers,...).
+Each REST service endpoint is represented by a specific REST resource client helper class. The (usually application scoped bean) class is used to specify the resource URL and additional properties used to build up the connection (authentication, additional headers,...).
 
-At least the REST resource base path must be speficied:
+At least the REST resource base path must be specified:
 
 [source,java]
 .Example: REST resource client helper

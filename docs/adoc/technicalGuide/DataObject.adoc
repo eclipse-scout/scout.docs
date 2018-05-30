@@ -11,7 +11,7 @@ ifndef::mdledir[:mdledir: .]
 [[cha-data-objects]]
 == Data Objects ==
 
-Data objects are Scout beans, which are used as data transfer objects for synchroneous REST and asynchroneous MOM interfaces.
+Data objects are Scout beans, which are used as data transfer objects for synchronous REST and asynchronous MOM interfaces.
 Furthermore, they can be used as domain objects within business logic.
 
 === Data Object Definition ===
@@ -47,7 +47,7 @@ Using the `IDataObjectMapper` interface a data object can be converted from and 
 The marshalling strategy is generic and replaceable.
 The Scout platform defines the `IDataObjectMapper` interface, at runtime a Scout bean implementing the interface must be available.
 
-The Scout module `org.eclipse.scout.rt.jackson` provides a default implementation serializing data objects from and to JSON using the https://github.com/FasterXML/jackson[Jackson libary].
+The Scout module `org.eclipse.scout.rt.jackson` provides a default implementation serializing data objects from and to JSON using the https://github.com/FasterXML/jackson[Jackson library].
 
 [source,java]
 .Example: Serialize ExampleEntityDo
