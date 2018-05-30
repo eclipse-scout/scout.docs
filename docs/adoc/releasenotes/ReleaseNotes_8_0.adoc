@@ -426,3 +426,37 @@ Scout's multi-language text support mainly consists of `ITextProviderService` (w
 This facility was moved from the module `org.eclipse.scout.rt.shared` to `org.eclipse.scout.rt.platform`. This allows the use of multi-language text support without the need to include _*.shared_ dependencies in your project. This is especially useful for server-only applications (e.g. micro services).
 
 _Migration:_ Change the ``import``s in your _*.java_ files accordingly.
+
+== Data Object Support for REST & MOM APIs
+
+The Scout platform was extended by a generic data object support.
+Data objects are Scout beans, which can be used as data transfer objects for synchroneous REST and asynchroneous MOM interfaces.
+Furthermore they may be used as domain objects within business logic.
+
+Using the new `DoEntity` class as base class, any kind of custom data objects can be built.
+An attributes of a data object is defined by adding an accessor method for the attribute.
+The name of the method corresponds to the attribute name; the attribute type is defined by the return value of the method.
+
+[source,java]
+.Example data object definition
+----
+@TypeName("ExampleEntity")
+public class ExampleEntityDo extends DoEntity {
+
+  public DoValue<String> name() { // <1>
+    return doValue("name");
+  }
+
+  public DoList<Integer> values() { // <2>
+    return doList("values");
+  }
+}
+----
+<1> String property
+<2> List of integer property
+
+The Scout platform defines the `IDataObjectMapper` interface which offers method to serialize and deserialize data objects from and to a string representation.
+The default implementation of `IDataObjectMapper` is based on the popular https://github.com/FasterXML/jackson[Jackson library] serializing data objects to a JSON document.
+The implementation can be exchanged by a custom implementation based on another library.
+
+For further examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-data-objects[Technical Guide: Data Objects]
