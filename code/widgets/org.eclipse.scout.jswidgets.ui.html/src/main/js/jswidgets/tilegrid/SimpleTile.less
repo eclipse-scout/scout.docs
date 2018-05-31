@@ -1,7 +1,17 @@
 .simple-tile {
   color: white;
   background-color: @palette-blue-3;
-  padding: 5px;
+  padding: 7px;
+
+  .tile-grid > & {
+    /* TileGrid.less already defines a transition for tiles -> override by defining a more specific rule */
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out, @tile-grid-loading-transition;
+  }
+
+  &.selected {
+    #scout.transform(translateY(-10px));
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 
   &.selectable:hover {
     background-color: darken(@palette-blue-3, 10%);
@@ -24,4 +34,10 @@
       background-color: darken(@palette-gray-1, 10%);
     }
   }
+}
+
+.tile-grid.selectable {
+  /* Simple tiles have a shadow when selected. To make sure the shadow is always completely visible
+     a padding is added to the tile grid. */
+  padding: 10px;
 }
