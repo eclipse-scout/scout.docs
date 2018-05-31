@@ -91,11 +91,15 @@ jswidgets.TileGridForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(tileField);
   this.widget('EventsTab').setField(this.tileGrid);
   this.updateStatus();
+  this._updateHasCustomTiles();
 };
 
 jswidgets.TileGridForm.prototype._onTileGridPropertyChange = function(event) {
   if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
     this.updateStatus();
+  }
+  if (event.propertyName === 'filteredTiles') {
+    this._updateHasCustomTiles();
   }
 };
 
@@ -164,22 +168,36 @@ jswidgets.TileGridForm.prototype._onScrollablePropertyChange = function(event) {
 };
 
 jswidgets.TileGridForm.prototype._onInsertMenuAction = function(event) {
-  var tile = new scout.create('jswidgets.SimpleTile', {
-    parent: this.tileGrid,
-    label: 'New Tile ' + this.insertedTileCount++
-  });
+  var tile = this._createTile();
   this.tileGrid.insertTile(tile);
+};
+
+jswidgets.TileGridForm.prototype._createTile = function() {
+  var tileType = this.widget('TileTypeField').value;
+  if (tileType === 'default') {
+    return  new scout.create('HtmlTile', {
+      parent: this.tileGrid,
+      content: 'New <i>Html Tile</i> ' + this.insertedTileCount++
+    });
+  }
+  return new scout.create('jswidgets.CustomTile', {
+    parent: this.tileGrid,
+    label: 'New Custom Tile ' + this.insertedTileCount++
+  });
 };
 
 jswidgets.TileGridForm.prototype._onInsertManyMenuAction = function(event) {
   var tiles = [];
   for (var i = 0; i < 50; i++) {
-    tiles.push(new scout.create('jswidgets.SimpleTile', {
-      parent: this.tileGrid,
-      label: 'New Tile ' + this.insertedTileCount++
-    }));
+    tiles.push(this._createTile());
   }
   this.tileGrid.insertTiles(tiles);
+};
+
+jswidgets.TileGridForm.prototype._updateHasCustomTiles = function(event) {
+  this.tileGrid.toggleCssClass('has-custom-tiles', this.tileGrid.filteredTiles.some(function(tile) {
+    return tile instanceof jswidgets.CustomTile;
+  }));
 };
 
 jswidgets.TileGridForm.prototype._onDeleteMenuAction = function(event) {
@@ -214,7 +232,7 @@ jswidgets.TileGridForm.prototype._onSortDescMenuAction = function(event) {
 jswidgets.TileGridForm.prototype._filterTilesByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
-      this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
+      this.tileFilter = scout.create('jswidgets.CustomTileFilter');
       this.tileGrid.addFilter(this.tileFilter);
     }
     this.tileFilter.setText(text);

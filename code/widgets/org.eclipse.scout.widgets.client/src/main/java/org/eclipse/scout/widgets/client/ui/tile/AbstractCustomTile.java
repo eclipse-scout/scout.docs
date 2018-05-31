@@ -4,7 +4,7 @@ import org.eclipse.scout.rt.client.ui.tile.AbstractTile;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.annotations.ConfigProperty;
 
-public abstract class AbstractSimpleTile extends AbstractTile implements ISimpleTile {
+public abstract class AbstractCustomTile extends AbstractTile implements ICustomTile {
   private String m_group;
 
   @Override
@@ -12,6 +12,11 @@ public abstract class AbstractSimpleTile extends AbstractTile implements ISimple
     super.initConfig();
 
     setLabel(getConfiguredLabel());
+  }
+
+  @Override
+  protected String getConfiguredDisplayStyle() {
+    return DISPLAY_STYLE_PLAIN;
   }
 
   @ConfigProperty(ConfigProperty.TEXT)

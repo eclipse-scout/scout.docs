@@ -51,8 +51,9 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
-import org.eclipse.scout.widgets.client.ui.tile.SimpleTileGroupManager;
+import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
+import org.eclipse.scout.widgets.client.ui.tile.CustomTileGroupManager;
+import org.eclipse.scout.widgets.client.ui.tile.ICustomTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +62,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   private static final Logger LOG = LoggerFactory.getLogger(TileAccordionFieldForm.class);
 
   private int m_tilesAddedCount = 0;
-  private SimpleTileFilter m_tileFilter;
+  private CustomTileFilter m_tileFilter;
 
   @Override
   public void startPageForm() {
@@ -183,7 +184,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected void execAction() {
-          List<ISimpleTile> tiles = new ArrayList<>();
+          List<ICustomTile> tiles = new ArrayList<>();
           for (int i = 0; i < 25; i++) {
             SimpleTile tile = new SimpleTile();
             tile.setLabel("New tile " + m_tilesAddedCount++);
@@ -221,8 +222,8 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           if (accordion.getTiles().size() == 0) {
             return;
           }
-          ISimpleTile selectedTile = accordion.getSelectedTile();
-          ISimpleTile tileToSelect = null;
+          ICustomTile selectedTile = accordion.getSelectedTile();
+          ICustomTile tileToSelect = null;
           if (selectedTile != null) {
             int selectedTileIndex = accordion.getTiles().indexOf(selectedTile);
             if (selectedTileIndex < accordion.getTiles().size() - 1) {
@@ -362,7 +363,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected void execInitAction() {
-          getAccordionField().getAccordion().addGroupManager(new SimpleTileGroupManager());
+          getAccordionField().getAccordion().addGroupManager(new CustomTileGroupManager());
           group();
         }
       }
@@ -388,8 +389,13 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
 
         @ClassId("f59eaed0-afeb-48f8-a99d-cc4a15aa4253")
-        public class Accordion extends AbstractTileAccordion<ISimpleTile> {
+        public class Accordion extends AbstractTileAccordion<ICustomTile> {
           private P_PropertyChangeListener m_propertyChangeListener = new P_PropertyChangeListener();
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "has-custom-tiles";
+          }
 
           @Override
           protected void addGroupInternal(IGroup group) {
@@ -429,7 +435,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
             }
 
             @ClassId("3d7e78f9-75b1-48f5-aefe-2fb2118b7577")
-            public class TileGrid extends AbstractTileGrid<ISimpleTile> {
+            public class TileGrid extends AbstractTileGrid<ICustomTile> {
 
               @Override
               protected int getConfiguredGridColumnCount() {
@@ -720,9 +726,9 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
         @Override
         protected void execChangedValue() {
-          ITileAccordionGroupManager<ISimpleTile> groupManager = getAccordionField().getAccordion().getGroupManager();
-          if (groupManager instanceof SimpleTileGroupManager) {
-            ((SimpleTileGroupManager) groupManager).setIconId(getValue());
+          ITileAccordionGroupManager<ICustomTile> groupManager = getAccordionField().getAccordion().getGroupManager();
+          if (groupManager instanceof CustomTileGroupManager) {
+            ((CustomTileGroupManager) groupManager).setIconId(getValue());
           }
 
           getAccordionField().getAccordion().getGroups().forEach(group -> group.setIconId(getValue()));
@@ -758,7 +764,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   @Override
   protected void execInitForm() {
     int tileCount = 0;
-    List<ISimpleTile> tiles = new ArrayList<>();
+    List<ICustomTile> tiles = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       SimpleTile tile = new SimpleTile();
       tile.setLabel("Tile " + tileCount++);
@@ -777,7 +783,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   }
 
   protected void group() {
-    getAccordionField().getAccordion().activateGroupManager(SimpleTileGroupManager.ID);
+    getAccordionField().getAccordion().activateGroupManager(CustomTileGroupManager.ID);
   }
 
   protected void ungroup() {
@@ -786,9 +792,9 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
   protected void sortTiles(boolean asc) {
     Accordion accordion = getAccordionField().getAccordion();
-    accordion.setTileComparator(new Comparator<ISimpleTile>() {
+    accordion.setTileComparator(new Comparator<ICustomTile>() {
       @Override
-      public int compare(ISimpleTile tile1, ISimpleTile tile2) {
+      public int compare(ICustomTile tile1, ICustomTile tile2) {
         int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare((tile1).getLabel(), (tile2).getLabel());
         if (!asc) {
           result = -result;
@@ -801,7 +807,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   protected void filterTilesByText(String text) {
     if (!StringUtility.isNullOrEmpty(text)) {
       if (m_tileFilter == null) {
-        m_tileFilter = new SimpleTileFilter();
+        m_tileFilter = new CustomTileFilter();
         getAccordionField().getAccordion().addTileFilter(m_tileFilter);
       }
       m_tileFilter.setText(text);

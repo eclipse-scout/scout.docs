@@ -79,13 +79,14 @@
             "objectType": "AccordionField",
             "labelVisible": false,
             "gridDataHints": {
-              "h": 4,
+              "h": 8,
               "w": 2
             },
             "accordion": {
               "id": "Accordion",
               "objectType": "TileAccordion",
-              "scrollable": true
+              "scrollable": true,
+              "cssClass": "has-custom-tiles"
             }
           },
           {

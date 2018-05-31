@@ -31,7 +31,7 @@ import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.Prop
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.tile.AbstractSimpleTile;
+import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
 
 @ClassId("59689d49-e6a5-4641-9d1a-a6a6ce98d9bf")
 public class AccordionFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -278,7 +278,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
 
   protected void addGroupWithTiles() {
     IAccordion accordion = getAccordionField().getAccordion();
-    List<AbstractSimpleTile> tiles = new ArrayList<>();
+    List<AbstractCustomTile> tiles = new ArrayList<>();
     int maxTiles = new SecureRandom().nextInt(30);
     for (int i = 0; i < maxTiles; i++) {
       SimpleTile tile = new SimpleTile();
@@ -311,7 +311,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
     }
 
     @ClassId("1af3bcc9-5cb0-486a-bb5a-6ef5dfc63230")
-    public class TileGrid extends AbstractTileGrid<AbstractSimpleTile> {
+    public class TileGrid extends AbstractTileGrid<AbstractCustomTile> {
 
       @Override
       protected int getConfiguredGridColumnCount() {

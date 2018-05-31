@@ -7,14 +7,14 @@ package org.eclipse.scout.widgets.client.ui.tile;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileAccordionGroupManager;
 import org.eclipse.scout.rt.client.ui.tile.GroupTemplate;
 
-public class SimpleTileGroupManager extends AbstractTileAccordionGroupManager<ISimpleTile> {
+public class CustomTileGroupManager extends AbstractTileAccordionGroupManager<ICustomTile> {
 
-  public static final Object ID = SimpleTileGroupManager.class;
+  public static final Object ID = CustomTileGroupManager.class;
 
   private String m_iconId;
 
   @Override
-  public Object getGroupIdByTile(ISimpleTile tile) {
+  public Object getGroupIdByTile(ICustomTile tile) {
     return tile.getGroup();
   }
 
@@ -27,7 +27,7 @@ public class SimpleTileGroupManager extends AbstractTileAccordionGroupManager<IS
   }
 
   @Override
-  public GroupTemplate createGroupForTile(ISimpleTile tile) {
+  public GroupTemplate createGroupForTile(ICustomTile tile) {
     return new GroupTemplate(tile.getGroup(), tile.getGroup()).withIconId(getIconId());
   }
 

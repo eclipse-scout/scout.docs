@@ -9,6 +9,6 @@
 (function(widgets, $, undefined) {
   __include("widgets/ExampleBeanField.js");
   __include("widgets/ExampleBeanColumn.js");
-  __include("widgets/tile/SimpleTile.js");
-  __include("widgets/tile/SimpleTileAdapter.js");
+  __include("widgets/tile/CustomTile.js");
+  __include("widgets/tile/CustomTileAdapter.js");
 }(window.widgets = window.widgets || {}, jQuery)); //NOSONAR

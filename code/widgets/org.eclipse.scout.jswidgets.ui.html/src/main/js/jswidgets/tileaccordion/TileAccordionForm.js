@@ -244,7 +244,7 @@ jswidgets.TileAccordionForm.prototype._createTile = function(model) {
     colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
   };
   model = $.extend({}, defaults, model);
-  return scout.create('jswidgets.SimpleTile', model);
+  return scout.create('jswidgets.CustomTile', model);
 };
 
 jswidgets.TileAccordionForm.prototype._updateStatus = function() {
@@ -275,7 +275,7 @@ jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
 jswidgets.TileAccordionForm.prototype._filterTilesByText = function(text) {
   if (text) {
     if (!this.tileFilter) {
-      this.tileFilter = scout.create('jswidgets.SimpleTileFilter');
+      this.tileFilter = scout.create('jswidgets.CustomTileFilter');
       this.accordion.addTileFilter(this.tileFilter);
     }
     this.tileFilter.setText(text);

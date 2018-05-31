@@ -153,7 +153,7 @@ jswidgets.AccordionForm.prototype._createTile = function(model) {
     colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
   };
   model = $.extend({}, defaults, model);
-  return scout.create('jswidgets.SimpleTile', model);
+  return scout.create('jswidgets.CustomTile', model);
 };
 
 jswidgets.AccordionForm.prototype._sortGroups = function(asc) {

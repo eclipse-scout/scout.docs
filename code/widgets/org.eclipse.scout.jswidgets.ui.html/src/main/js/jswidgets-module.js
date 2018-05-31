@@ -87,10 +87,11 @@
   __include("jswidgets/table/ColumnPropertiesBox.js");
   __include("jswidgets/table/hierarchical/HierarchicalTableForm.js");
   __include("jswidgets/tilegrid/ColorSchemeLookupCall.js");
-  __include("jswidgets/tilegrid/SimpleTile.js");
-  __include("jswidgets/tilegrid/SimpleTileFilter.js");
+  __include("jswidgets/tilegrid/CustomTile.js");
+  __include("jswidgets/tilegrid/CustomTileFilter.js");
   __include("jswidgets/tilegrid/TileGridForm.js");
   __include("jswidgets/tilegrid/TileGridLayoutConfigBox.js");
+  __include("jswidgets/tilegrid/TileTypeLookupCall.js");
   __include("jswidgets/tileaccordion/TileAccordionForm.js");
   __include("jswidgets/table/CheckableStyleLookupCall.js");
   __include("jswidgets/table/GroupingStyleLookupCall.js");

@@ -62,7 +62,7 @@
             "objectType": "TileField",
             "labelVisible": false,
             "gridDataHints": {
-              "h": 4,
+              "h": 8,
               "w": 2
             },
             "tileGrid": {
@@ -71,23 +71,23 @@
               "scrollable": true,
               "tiles": [
                 {
-                  "objectType": "jswidgets.SimpleTile",
+                  "objectType": "jswidgets.CustomTile",
                   "label": "Tile 1"
                 },
                 {
-                  "objectType": "jswidgets.SimpleTile",
+                  "objectType": "jswidgets.CustomTile",
                   "label": "Tile 2"
                 },
                 {
-                  "objectType": "jswidgets.SimpleTile",
+                  "objectType": "jswidgets.CustomTile",
                   "label": "Tile 3"
                 },
                 {
-                  "objectType": "jswidgets.SimpleTile",
+                  "objectType": "jswidgets.CustomTile",
                   "label": "Tile 4"
                 },
                 {
-                  "objectType": "jswidgets.SimpleTile",
+                  "objectType": "jswidgets.CustomTile",
                   "label": "Tile 5"
                 }
               ]
@@ -106,7 +106,7 @@
             }
           },
           {
-           "id": "StatusField",
+            "id": "StatusField",
             "objectType": "LabelField",
             "labelVisible": false,
             "gridDataHints": {
@@ -180,6 +180,15 @@
                     "objectType": "SmartField",
                     "label": "Color Scheme",
                     "lookupCall": "jswidgets.ColorSchemeLookupCall"
+                  },
+                  {
+                    "id": "TileTypeField",
+                    "objectType": "SmartField",
+                    "displayStyle": 'dropdown',
+                    "label": "Tile Type",
+                    "tooltipText": "${textKey:TileTypeTooltip}",
+                    "lookupCall": "jswidgets.TileTypeLookupCall",
+                    "value": "simple"
                   }
                 ]
               },

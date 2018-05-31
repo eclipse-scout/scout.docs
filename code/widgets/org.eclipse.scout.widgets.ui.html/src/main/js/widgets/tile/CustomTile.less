@@ -1,7 +1,7 @@
-.simple-tile {
+.custom-tile {
   color: white;
   background-color: @palette-blue-3;
-  padding: 7px;
+  padding: @tile-padding-y + 1px @tile-padding-x + 1px;
 
   .tile-grid > & {
     /* TileGrid.less already defines a transition for tiles -> override by defining a more specific rule */
@@ -36,7 +36,8 @@
   }
 }
 
-.tile-grid.selectable {
+.tile-accordion.has-custom-tiles > .group > .tile-grid.selectable,
+.tile-grid.has-custom-tiles.selectable {
   /* Simple tiles have a shadow when selected. To make sure the shadow is always completely visible
      a padding is added to the tile grid. */
   padding: 10px;

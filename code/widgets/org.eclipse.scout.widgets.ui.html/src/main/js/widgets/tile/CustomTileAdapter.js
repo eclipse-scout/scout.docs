@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-widgets.SimpleTileAdapter = function() {
-  widgets.SimpleTileAdapter.parent.call(this);
+widgets.CustomTileAdapter = function() {
+  widgets.CustomTileAdapter.parent.call(this);
 };
-scout.inherits(widgets.SimpleTileAdapter, scout.TileAdapter);
+scout.inherits(widgets.CustomTileAdapter, scout.TileAdapter);

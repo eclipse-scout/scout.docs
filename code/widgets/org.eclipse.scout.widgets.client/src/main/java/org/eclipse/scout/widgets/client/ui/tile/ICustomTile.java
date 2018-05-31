@@ -2,7 +2,7 @@ package org.eclipse.scout.widgets.client.ui.tile;
 
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 
-public interface ISimpleTile extends ITile {
+public interface ICustomTile extends ITile {
 
   String PROP_LABEL = "label";
 

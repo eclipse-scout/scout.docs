@@ -1,13 +1,12 @@
-package org.eclipse.scout.widgets.client.ui.forms;
+package org.eclipse.scout.widgets.client.ui.tile;
 
 import org.eclipse.scout.rt.client.ui.tile.ITileFilter;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
-import org.eclipse.scout.widgets.client.ui.tile.ISimpleTile;
 
-public class SimpleTileFilter implements ITileFilter<ISimpleTile> {
+public class CustomTileFilter implements ITileFilter<ICustomTile> {
   private String m_text;
 
-  public SimpleTileFilter() {
+  public CustomTileFilter() {
     setText("");
   }
 
@@ -17,7 +16,7 @@ public class SimpleTileFilter implements ITileFilter<ISimpleTile> {
   }
 
   @Override
-  public boolean accept(ISimpleTile tile) {
+  public boolean accept(ICustomTile tile) {
     String label = ObjectUtility.nvl(tile.getLabel(), "");
     String filterText = label.trim().toLowerCase();
     return filterText.indexOf(m_text) > -1;

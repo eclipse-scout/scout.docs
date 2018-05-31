@@ -128,12 +128,12 @@ The new Widget class handles the widget lifecycle (initConfig, init, disposed) a
 
 The new `TileGrid` widget arranges `Tile` s in a grid by using the `LogicalGridLayout`. This is the same layout as used for a `GroupBox`, so the same `GridData` object may be used to configure how the individual tiles should be arranged.
 
-A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. In order to customize your tile you have to create a custom widget, which is easier than it sounds. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/8.0.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
+A `Tile` directly extends `Widget` and is not much more than a `<div>` with the CSS class `tile`. The easiest way to use a tile is to use a `HtmlTile` with the displayStyle `DEFAULT`. If you need more control over the styling, you can just set the displayStyle to `PLAIN`, so that the default CSS rules are not applied, and then add your own CSS rules. If you want even more control about the layout and content you can create a custom tile instead of using the `HtmlTile`. Just create a JS class lets say `CustomTile.js` which extends from `Tile.js`, create a Java class `CustomTile.java` which extends from `AbstractTile.java` and add some glue code to link them together. See the code of the demo widgets on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/8.0.x/code/widgets/org.eclipse.scout.widgets.client/src/main/java/org/eclipse/scout/widgets/client/ui/tiles[GitHub] for details. You could also use existing widgets as tiles. In that case instead of extending `AbstractTile` you would extend `AbstractWidgetTile` or `AbstractFormFieldTile` and set the property `tileWidget` accordingly.
 
 In order to add the `TileGrid` to a form, you can use the class `TileField` which is basically a simple `FormField` wrapping the `TileGrid`. You cannot use the `TileGrid` directly because a `GroupBox` only accepts `FormField` s.
 
 A demo of the widget can be found here: https://scout.bsi-software.com/widgets/?dl=widget-tilefield +
-And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tilefield
+And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#tilegrid
 
 [[img-tiles]]
 .TileGrid

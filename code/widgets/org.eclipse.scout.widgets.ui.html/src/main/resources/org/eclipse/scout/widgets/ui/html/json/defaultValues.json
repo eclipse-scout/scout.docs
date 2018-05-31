@@ -15,7 +15,7 @@
   "objectTypeHierarchy": {
     "Widget": {
       "Tile": {
-        "widgets.SimpleTile": null
+        "widgets.CustomTile": null
       }
     }
   }
