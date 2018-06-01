@@ -7,7 +7,6 @@ import org.eclipse.scout.rt.client.extension.ui.form.FormChains.FormInitFormChai
 import org.eclipse.scout.rt.client.extension.ui.form.FormHandlerChains.FormHandlerPostLoadChain;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
-import org.eclipse.scout.rt.platform.exception.ProcessingException;
 
 //tag::PersonFormExtension[]
 public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
@@ -17,7 +16,7 @@ public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
   }
 
   @Override
-  public void execInitForm(FormInitFormChain chain) throws ProcessingException {
+  public void execInitForm(FormInitFormChain chain) {
     chain.execInitForm();
     // Example logic: Access the form, disable field
     getOwner().getNameField().setEnabled(false, true, true);
@@ -34,7 +33,7 @@ public class PersonFormExtension extends AbstractFormExtension<PersonForm> {
     }
 
     @Override
-    public void execPostLoad(FormHandlerPostLoadChain chain) throws ProcessingException {
+    public void execPostLoad(FormHandlerPostLoadChain chain) {
       chain.execPostLoad();
       // Example logic: Show a message box after load
       MessageBoxes.create().withHeader("Extension test").withBody("If you can read this, the extension works correctly").show();
