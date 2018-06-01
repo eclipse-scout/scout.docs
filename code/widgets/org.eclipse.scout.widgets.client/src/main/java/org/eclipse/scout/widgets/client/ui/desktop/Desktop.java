@@ -10,14 +10,17 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.desktop;
 
+import java.security.AccessController;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.checkbox.AbstractCheckBoxMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
@@ -27,13 +30,13 @@ import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
-import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.context.PropertyMap;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
-import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
@@ -131,174 +134,28 @@ public class Desktop extends AbstractDesktop {
     return m_benchModeForm;
   }
 
-  @Order(10)
-  public class FileMenu extends AbstractMenu {
+  @Order(100)
+  public class UserProfileMenu extends AbstractMenu {
+
+    @Override
+    protected String getConfiguredKeyStroke() {
+      return IKeyStroke.F10;
+    }
+
+    @Override
+    protected String getConfiguredIconId() {
+      return AbstractIcons.PersonSolid;
+    }
 
     @Override
     protected String getConfiguredText() {
-      return TEXTS.get("FileMenu");
+      Subject subject = Subject.getSubject(AccessController.getContext());
+      Principal firstPrincipal = CollectionUtility.firstElement(subject.getPrincipals());
+      return StringUtility.uppercaseFirst(firstPrincipal.getName());
     }
 
-    @Order(100)
-    public class ExitMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("ExitMenu");
-      }
-
-      @Override
-      protected void execAction() {
-        ClientSessionProvider.currentSession(ClientSession.class).stop();
-      }
-    }
-  }
-
-  @Order(20)
-  public class ToolsMenu extends AbstractMenu {
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("ToolsMenu");
-    }
-
-    @Order(10)
-    public class MenuWithTextMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("MenuWithText");
-      }
-
-      @Override
-      protected void execAction() {
-        String menuname = this.getClass().getSimpleName();
-        MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-      }
-    }
-
-    @Order(20)
-    public class MenuWithIconMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredIconId() {
-        return AbstractIcons.Gear;
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("MenuWithIcon");
-      }
-
-      @Override
-      protected void execAction() {
-        String menuname = this.getClass().getSimpleName();
-        MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-      }
-    }
-
-    @Order(30)
-    public class CheckableMenu extends AbstractCheckBoxMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("CheckableMenu");
-      }
-
-      @Override
-      protected void execAction() {
-        System.out.println("execAction");
-      }
-
-      @Override
-      protected void execSelectionChanged(boolean selection) {
-        if (selection == true) {
-          MessageBoxes.createOk().withHeader("Checked the Menu").withBody("You have checked the \"" + TEXTS.get(this.getClass().getSimpleName()) + "\"").show();
-        }
-      }
-    }
-
-    @Order(40)
-    public class MenuWithMenusMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("MenuWithMenus");
-      }
-
-      @Override
-      protected void execAction() {
-        String menuname = this.getClass().getSimpleName();
-        MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-      }
-
-      @Order(10)
-      public class Menu1Menu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("Menu1");
-        }
-
-        @Override
-        protected void execAction() {
-          String menuname = this.getClass().getSimpleName();
-          MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-        }
-      }
-
-      @Order(20)
-      public class Menu2Menu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("Menu2");
-        }
-
-        @Override
-        protected void execAction() {
-          String menuname = this.getClass().getSimpleName();
-          MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-        }
-      }
-
-      @Order(30)
-      public class Menu3Menu extends AbstractMenu {
-
-        @Override
-        protected String getConfiguredText() {
-          return TEXTS.get("Menu3");
-        }
-
-        @Override
-        protected void execAction() {
-          String menuname = this.getClass().getSimpleName();
-          MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-        }
-      }
-    }
-
-    @Order(50)
-    public class MenuWithKeyStrokeMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredKeyStroke() {
-        return "alt-m";
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("MenuWithKeyStroke");
-      }
-
-      @Override
-      protected void execAction() {
-        String menuname = this.getClass().getSimpleName();
-        MessageBoxes.createOk().withHeader("Clicked on Menu").withBody("You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"").show();
-      }
-    }
-
-    @Order(60)
+    @Order(1000)
+    @ClassId("e60844f6-a1d5-4534-9e94-a1f445f2049f")
     public class OptionsMenu extends AbstractMenu {
 
       @Override
@@ -312,17 +169,9 @@ public class Desktop extends AbstractDesktop {
         form.startNew();
       }
     }
-  }
 
-  @Order(30)
-  public class HelpMenu extends AbstractMenu {
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("HelpMenu");
-    }
-
-    @Order(10)
+    @Order(2000)
+    @ClassId("80f3b2a6-3be9-4c49-b840-99cb3b52cf92")
     public class AboutMenu extends AbstractMenu {
 
       @Override
@@ -336,6 +185,22 @@ public class Desktop extends AbstractDesktop {
         form.startModify();
       }
     }
+
+    @Order(3000)
+    @ClassId("4937c432-adc1-481a-8ca8-62d64da7b0a0")
+    public class LogoutMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("Logout");
+      }
+
+      @Override
+      protected void execAction() {
+        ClientSessionProvider.currentSession().stop();
+      }
+    }
+
   }
 
   @Order(10)
