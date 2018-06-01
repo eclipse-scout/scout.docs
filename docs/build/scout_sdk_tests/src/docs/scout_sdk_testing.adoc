@@ -17,6 +17,11 @@ After installing the Eclipse Scout package you are ready for testing the SDK ver
 
 Before executing the SDK tests described below, make sure that you already have (at least) checked that the Scout Hello World is working properly.
 
+Eclipse must be launched with a JDK! Check this in the Eclipse About Dialog -> Installation Details -> Configuration.
+Otherwise many operations (especially the generation of webservices) will fail. This can be set in the `eclipse.ini` file.
+
+- Windows: The `-vm` parameter pointing to the JDK subdirectory `...\jre\bin\server\jvm.dll`
+
 == Verify Version
 
 
