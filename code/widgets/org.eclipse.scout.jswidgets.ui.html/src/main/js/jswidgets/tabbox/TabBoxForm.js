@@ -39,7 +39,9 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
     this.deleteTabItemBox.deleteTabItem(tabBox.selectedTab);
   }.bind(this));
 
-  this.widget('ShareMenu').on('action', function() {
-    addTabMenu.setEnabled(!addTabMenu.enabled);
+  this.widget('SettingsMenu').on('action', function() {
+    scout.MessageBoxes.createOk(this)
+      .withBody("This is a menu added to the Tab Box with horizontal alignment set to 1.")
+      .buildAndOpen();
   }.bind(this));
 };

@@ -53,9 +53,9 @@
                 "keyStroke": "insert"
               },
               {
-                "id": "ShareMenu",
+                "id": "SettingsMenu",
                 "objectType": "Menu",
-                "iconId": "${iconId:MENU_BOLD}",
+                "iconId": "${iconId:GEAR}",
                 "stackable": false,
                 "menuTypes": ["TabBox.Header"],
                 "horizontalAlignment": 1
