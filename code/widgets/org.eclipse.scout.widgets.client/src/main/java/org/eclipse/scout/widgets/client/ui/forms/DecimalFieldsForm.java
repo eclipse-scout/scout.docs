@@ -715,7 +715,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() {
-        getFormatField().setValue("#,###.0 �C;#,###.0 �C BELOW ZERO");
+        getFormatField().setValue("#,###.0 °C;#,###.0 °C BELOW ZERO");
       }
     }
   }
