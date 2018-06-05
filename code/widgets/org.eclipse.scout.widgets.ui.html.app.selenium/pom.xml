@@ -135,6 +135,21 @@
       </properties>
     </profile>
     <profile>
+	  <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
+      <id>linux64_chrome_driver</id>
+      <activation>
+        <os>
+          <family>unix</family>
+          <arch>amd64</arch>
+        </os>
+      </activation>
+      <properties>
+        <chromedriver_url>${chromedriver_base_url}/chromedriver_linux64.zip</chromedriver_url>
+        <chromedriver_md5>${chromedriver_hash_linux64}</chromedriver_md5>
+        <webdriver.chrome.driver>${seleniumDrivers}/chromedriver</webdriver.chrome.driver>
+      </properties>
+    </profile>
+    <profile>
       <id>osx_chrome_driver</id>
       <activation>
         <os>
