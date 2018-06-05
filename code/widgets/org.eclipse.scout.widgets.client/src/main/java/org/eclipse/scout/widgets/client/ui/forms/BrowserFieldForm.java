@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.IOUtility;
@@ -210,7 +211,12 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected void execClickAction() {
-            getBrowserField().setLocation(getURLField().getValue());
+            try {
+              getBrowserField().setLocation(getURLField().getValue());
+            }
+            catch (IllegalArgumentException e) {
+              throw new VetoException(TEXTS.get("EnteredUrlInvalid"));
+            }
           }
         }
       }
