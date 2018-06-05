@@ -103,7 +103,8 @@ scout.HeatmapField.prototype.addHeatPoint = function(point) {
   if (this._heatLayer) {
     this._heatLayer.addLatLng([
       point.y,
-      point.x
+      point.x,
+      point.intensity
     ]);
   }
 };
