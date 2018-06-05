@@ -22,6 +22,7 @@ public class ExampleEntityDo extends DoEntity {
   public DoList<Integer> values() { // <2>
     return doList("values");
   }
+
 //end::class[]
 
   /* **************************************************************************
