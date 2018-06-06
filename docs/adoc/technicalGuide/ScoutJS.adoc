@@ -595,7 +595,7 @@ build the model manually. Here's how to use the export feature:
 Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.
 
 
-== Using SmartFields in Scout JS
+=== Using SmartFields in Scout JS
 In a Scout JS application you can use SmartFields like in a classic Scout application. Any REST service can be used to provide results for a SmartField lookup call. However, the SmartField expects the result to have a defined structure. If the REST service API is in your hands, you can simply return a JSON response with the right structure. This means less work to do for you in the JavaScript layer, because you don't have to transform the response to a structure the SmartField can process. If you must use a service which API you cannot change, you have no other choice than doing some kind of transformation in JavaScript.
 
 Here's how the response for a lookup call should look like in order to be processed by the SmartField:
@@ -645,7 +645,7 @@ Here's how the request for a Scout JS SmartField lookup call could look like. Yo
 }
 ----
 
-=== How to implement a LookupCall in Scout JS
+==== How to implement a LookupCall in Scout JS
 Like in a classic Scout application each SmartField in Scout JS references a LookupCall class. The lookup call is in charge of querying a data source and returning results for that query. Example: when you type "f" into a SmartField, a lookup call could return a result which contains lookup rows starting with "F", like "Faz" and "Foo".
 
 The lookup call may return static (hard-coded) data which is already available in the browser, or may fetch an external data-source via HTTP, typically some kind of REST API. Depening on how your SmartField is configured and used, the SmartField will call different methods on the LookupCall instance and pass data to that method, like the search text the user has typed into the field. These methods are: `getAll`, `getByText`, `getByKey` and `getByRec`.
