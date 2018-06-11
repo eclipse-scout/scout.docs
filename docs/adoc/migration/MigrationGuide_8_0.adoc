@@ -521,7 +521,7 @@ The methods `addChild()` and `removeChild()` have been renamed to `_addChild()` 
 This means the methods are considered to have `private` visibility now. Use the methods `setParent()`, `setOwner()` and `destroy()` to connect or disconnect widgets.
 These methods will add or remove the child widget automatically.
 
-=== FormField.visit Renamed to FormField.visitFields
+=== FormField.js: "visit()" Renamed to "visitFields"
 
 The `visit()` method on all FormFields has been renamed to `visitFields()`. This change is necessary to clarify what is visited and to distinguish between the visit methods available on widget level (e.g. `visitChildren()`).
 
@@ -530,7 +530,6 @@ The `visit()` method on all FormFields has been renamed to `visitFields()`. This
 The argument order of the method `scout.Tree.visitNodes` have changed from (nodes, func, parentNode) to (func, nodes, parentNode). So the func (the visitor) and the nodes to visit have changed positions.
 
 The arguments of `scout.Tree.prototype._visitNodes` have changed from (nodes, func, parentNode) to (func, parentNode). So the nodes to visit must no longer be specified. Instead always the root nodes of the tree are used. Furthermore the method is public now and has therefore be renamed to `visitNodes()`.
-
 
 === Automatic Preloading of Web Fonts
 
@@ -586,14 +585,17 @@ If you relied on the previous behavior, (e.g. if you accessed ui properties like
 
 === Status
 
-The static function `scout.Status.warn()` was renamed to `scout.Status.warning()` to bring it in line with the name of corresponding severity constant `scout.Status.Severity.WARNING`.
+The static function `scout.Status.warn()` was renamed to `scout.Status.warning()` to bring it in line with the name of the corresponding severity constant `scout.Status.Severity.WARNING`.
 
 === MenuBar
-So far right aligned menus where not stacked when there is not enough horizontal space. If this behavior is still required the property `stackabel` has to be set to false.
 
-=== LookupRow: Removed constructor
-The custom LookupRow constructor with key and text parameter was removed.
-LookupRows should be created using the `scout.create()` object factory call.
+In previous versions, right aligned menus were not stacked when there was not enough horizontal space.
+If this behavior is still required, the property `stackable` has to be set to _false_.
+
+=== LookupRow: Removed Constructor
+
+The custom _LookupRow_ constructor with key and text parameter was removed.
+LookupRows must be created using the `scout.create()` object factory call.
 
 Old style code like:
 [source, javascript]
@@ -601,8 +603,7 @@ Old style code like:
 var lookupRow = new scout.LookupRow(data[0], data[1]);
 ----
 
-should be replaced by:
-
+must be replaced by:
 [source, javascript]
 ----
 var lookupRow = scout.create('LookupRow', {
@@ -612,7 +613,6 @@ var lookupRow = scout.create('LookupRow', {
 });
 ----
 <1> Optional parent key and other properties
-
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
@@ -627,9 +627,7 @@ var lookupRow = scout.create('LookupRow', {
 
 === jQuery Update
 
-The jQuery version bundled with Scout has been updated to version 3.3.1. If a SpecRunnerMaven.html is used to run Jasmine tests, the corresponding script tag must be updated to include `jquery-3.3.1.js` instead of `jquery-3.2.1.js`.
-
-&mdash;
+The jQuery version bundled with Scout has been updated to version 3.3.1. If a _SpecRunnerMaven.html_ is used to run Jasmine tests, the corresponding script tag must be updated to include `jquery-3.3.1.js` instead of `jquery-3.2.1.js`.
 
 // ^^^
 // Insert descriptions of other important changes here
