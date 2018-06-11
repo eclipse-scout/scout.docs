@@ -591,6 +591,29 @@ The static function `scout.Status.warn()` was renamed to `scout.Status.warning()
 === MenuBar
 So far right aligned menus where not stacked when there is not enough horizontal space. If this behavior is still required the property `stackabel` has to be set to false.
 
+=== LookupRow: Removed constructor
+The custom LookupRow constructor with key and text parameter was removed.
+LookupRows should be created using the `scout.create()` object factory call.
+
+Old style code like:
+[source, javascript]
+----
+var lookupRow = new scout.LookupRow(data[0], data[1]);
+----
+
+should be replaced by:
+
+[source, javascript]
+----
+var lookupRow = scout.create('LookupRow', {
+  key: data[0],
+  text: data[1],
+  parentKey: data[2]  <1>
+});
+----
+<1> Optional parent key and other properties
+
+
 // ^^^
 // Insert descriptions of JavaScript API changes here
 
