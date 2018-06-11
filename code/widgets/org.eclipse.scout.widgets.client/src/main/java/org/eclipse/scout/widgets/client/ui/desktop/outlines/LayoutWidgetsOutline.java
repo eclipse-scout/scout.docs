@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -66,16 +67,17 @@ public class LayoutWidgetsOutline extends AbstractOutline {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.Sum;
+      return Icons.Gear;
     }
 
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-      return CollectionUtility.hashSet(TreeMenuType.EmptySpace, TreeMenuType.Header, TreeMenuType.SingleSelection, TreeMenuType.MultiSelection);
+      return CollectionUtility.hashSet(TreeMenuType.Header);
     }
 
     @Override
     protected void execAction() {
+      MessageBoxes.createOk().withBody(TEXTS.get("OutlineMenuDescription")).show();
     }
   }
 
