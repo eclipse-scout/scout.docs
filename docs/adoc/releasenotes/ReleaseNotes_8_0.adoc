@@ -25,8 +25,8 @@ See https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_S
 ==== Runtime (Scout RT)
 Scout RT artifacts are distributed via Maven:
 
-* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.008_Photon_RC3%22[8.0.0.008_Photon_RC3] on _Maven Central_
-* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.008_Photon_RC3[8.0.0.008_Photon_RC3] on _mvnrepository.com_
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.009_Photon%22[8.0.0.009_Photon] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.009_Photon[8.0.0.009_Photon] on _mvnrepository.com_
 
 Usage example in the parent POM of your Scout application:
 
@@ -35,7 +35,7 @@ Usage example in the parent POM of your Scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>8.0.0.008_Photon_RC3</version>
+    <version>8.0.0.009_Photon</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -49,7 +49,7 @@ To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/8.0/8.0.0/008_Photon_RC3/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.008_Photon_RC3[features/version/8.0.0.008_Photon_RC3] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.009_Photon[features/version/8.0.0.009_Photon] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
