@@ -116,8 +116,8 @@ The `IValueFormatConstants` interface declares a set of default format pattern c
 
 === Handling of DoEntity Attributes ===
 
-Instead of data objects, a REST or MOM interface could be build using simple plain old Java objects (POJOs).
-Compared to POJOs a Scout data object offer additional support and convenience when working with attributes.
+Instead of data objects, a REST or MOM interface could be built using simple plain old Java objects (POJOs).
+Compared to POJOs a Scout data object offers additional support and convenience when working with attributes.
 
 A JSON attribute may have three different states:
 
@@ -150,7 +150,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 === Abstract Data Objects & Polymorphism ===
 A simple data objects is implemented by subclassing the `DoEntity` class.
 
-For a complex hierarchy of data objects the base class may be abstract and extends the `DoEntity` class, further subclasses extends the abstract base class.
+For a complex hierarchy of data objects the base class may be abstract and extend the `DoEntity` class, further subclasses extend the abstract base class.
 The abstract base data object class does not need to specify a `@TypeName` annotation since there are no instances of the abstract class which are serialized or deserialized directly.
 Each non-abstract subclass must specify a unique `@TypeName` annotation value.
 
