@@ -50,7 +50,7 @@ var field = scout.create('StringField', {
   parent: groupBox,
   label: 'hello',
   value: 'world'
-};
+});
 ----
 
 The first parameter is the object type, which typically is the name of the constructor function preceded by the name space. `StringField` belongs to the `scout` name space which is the default and may be omitted. If the string field belonged to another name space called `mynamespace`, you would have to write the following:
