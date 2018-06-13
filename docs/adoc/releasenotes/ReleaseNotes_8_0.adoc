@@ -43,7 +43,7 @@ Usage example in the parent POM of your Scout application:
 
 ==== Eclipse IDE Tooling (Scout SDK)
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-https://www.eclipse.org/downloads/packages/eclipse-scout-developers/Photon_M6[Eclipse for Scout Developers]
+https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photonrc3[Eclipse for Scout Developers Photon RC3]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/8.0/8.0.0/008_Photon_RC3/
