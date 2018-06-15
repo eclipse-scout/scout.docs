@@ -50,11 +50,7 @@ jswidgets.WorldLookupCall.prototype._createDataMap = function() {
 };
 
 jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
-  var lookupRow = scout.create('LookupRow', {
-    key: data[0],
-    data: data[1]
-  });
-  lookupRow.parentKey = data[2];
+  var lookupRow = jswidgets.WorldLookupCall.parent.prototype._dataToLookupRow.call(this, data);
   if (lookupRow.parentKey) {
     lookupRow.iconId = scout.icons.WORLD;
   } else {
