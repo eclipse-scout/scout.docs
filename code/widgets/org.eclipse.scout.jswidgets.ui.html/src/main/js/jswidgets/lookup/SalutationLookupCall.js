@@ -23,3 +23,12 @@ jswidgets.SalutationLookupCall.DATA = [
   ['impersonal', 'Unpersönlich'],
   ['unknown', 'Unbekannt']
 ];
+
+/**
+ * Use the key property as cssClass. Used to demonstrate styling possibilities with lookup-rows in smart-fields.
+ */
+jswidgets.SalutationLookupCall.prototype._dataToLookupRow = function(data) {
+  var lookupRow = jswidgets.SalutationLookupCall.parent.prototype._dataToLookupRow.call(this, data);
+  lookupRow.cssClass = lookupRow.key;
+  return lookupRow;
+};
