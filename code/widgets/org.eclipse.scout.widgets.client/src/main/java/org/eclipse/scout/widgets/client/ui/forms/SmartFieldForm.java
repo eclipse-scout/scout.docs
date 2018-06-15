@@ -390,14 +390,16 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
           @Override
           protected void execChangedValue() {
+            updateFieldBackgroundColor();
+          }
+
+          /**
+           * Sets the color of the field to the color of the selected lookup row.
+           */
+          protected void updateFieldBackgroundColor() {
             Color color = getValue();
-            if (color == null) {
-              setBackgroundColor(null);
-            }
-            else {
-              String hex = Integer.toHexString(color.getRGB()).substring(2);
-              setBackgroundColor(hex);
-            }
+            String hexColor = color == null ? null : Integer.toHexString(color.getRGB()).substring(2);
+            setBackgroundColor(hexColor);
           }
         }
 

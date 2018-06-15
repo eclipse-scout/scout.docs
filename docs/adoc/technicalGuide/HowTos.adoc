@@ -1,0 +1,11 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+:howtodir: ../cheatsheet
+
+== How-Tos
+
+This chapter provides small technical guides to very specific Scout subjects, like 'How do I create a custom widget?'.
+
+include::{howtodir}/SmartField-HowTo.adoc[]

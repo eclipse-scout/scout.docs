@@ -19,6 +19,7 @@ https://eclipsescout.github.io/7.0/migration-guide.html
 The following changes were made after the initial 8.0 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
 
 ==== Photon.1 (8.0.100) Release Expected on September, 2018
+* <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
 
 {NotReleasedWarning}
 
@@ -476,6 +477,13 @@ public class MyPageField extends AbstractPageField<MyTablePage> {
   }
 }
 ----
+
+=== SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)
+The SmartField in Scout <= 6.0 applied the lookup-row properties `foregroundColor`, `backgroundColor`, `font` and `tooltipText` automatically on the field when a lookup-row has been selected. Because that automatic behavior didn't fit every business requirement, we removed it completely. This means you must implement the property-synchronization where required.
+
+Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` property from the lookup-row to the field. In some cases this new feature can be used to migrate from older Scout version.
+
+Check the HowTo section _SmartField: how to apply colors and styles from a lookup-row_ in Scout's technical guide to find examples for migration and how to work with the `cssClass` property.
 
 // ^^^
 // Insert descriptions of Java API changes here
