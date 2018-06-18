@@ -15,9 +15,6 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-/**
- * @author mzi
- */
 public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
 
   private static final long serialVersionUID = 1L;
@@ -49,6 +46,11 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     }
 
     @Override
+    protected String getConfiguredCssClass() {
+      return "public";
+    }
+
+    @Override
     public Long getId() {
       return ID;
     }
@@ -63,6 +65,11 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("Private");
+    }
+
+    @Override
+    protected String getConfiguredCssClass() {
+      return "private";
     }
 
     @Override
@@ -85,6 +92,11 @@ public class EventTypeCodeType extends AbstractCodeType<Long, Long> {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("External");
+    }
+
+    @Override
+    protected String getConfiguredCssClass() {
+      return "external";
     }
 
     @Override
