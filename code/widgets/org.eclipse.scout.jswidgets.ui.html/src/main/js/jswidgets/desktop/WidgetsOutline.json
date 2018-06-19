@@ -107,6 +107,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "List Box",
+      "detailForm": {
+        "objectType": "jswidgets.ListBoxForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "${textKey:LogicalGrid}",
       "detailForm": {
         "objectType": "jswidgets.LogicalGridForm"
@@ -178,14 +186,6 @@
           }
         }
       ]
-    },
-    {
-      "objectType": "PageWithNodes",
-      "leaf": true,
-      "text": "List Box",
-      "detailForm": {
-        "objectType": "jswidgets.ListBoxForm"
-      }
     },
     {
       "objectType": "PageWithNodes",

@@ -35,7 +35,9 @@
               {
                 "id": "ProposalFieldPropertiesBox",
                 "objectType": "jswidgets.ProposalFieldPropertiesBox",
-                "label": "Proposal Field Properties"
+                "label": "Proposal Field Properties",
+                "labelVisible": false,
+                "borderVisible": false
               },
               {
                 "id": "ValueFieldPropertiesBox",

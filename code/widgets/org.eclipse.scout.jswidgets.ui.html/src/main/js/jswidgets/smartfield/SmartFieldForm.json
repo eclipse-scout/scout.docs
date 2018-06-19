@@ -52,7 +52,9 @@
               {
                 "id": "SmartFieldPropertiesBox",
                 "objectType": "jswidgets.SmartFieldPropertiesBox",
-                "label": "Smart Field Properties"
+                "label": "Smart Field Properties",
+                "labelVisible": false,
+                "borderVisible": false
               },
               {
                 "id": "ValueFieldPropertiesBox",

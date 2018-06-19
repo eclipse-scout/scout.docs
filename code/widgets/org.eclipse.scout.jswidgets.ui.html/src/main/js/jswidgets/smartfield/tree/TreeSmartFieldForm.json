@@ -36,7 +36,9 @@
               {
                 "id": "TreeSmartFieldPropertiesBox",
                 "objectType": "jswidgets.TreeSmartFieldPropertiesBox",
-                "label": "Tree Smart Field Properties"
+                "label": "Tree Smart Field Properties",
+                "labelVisible": false,
+                "borderVisible": false
               },
               {
                 "id": "ValueFieldPropertiesBox",
