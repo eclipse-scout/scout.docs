@@ -11,9 +11,6 @@ Howto:
 
 This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse Scout 8.0*. If existing code has to be migrated, instructions are provided here.
 
-IMPORTANT: If you are upgrading from version 6.1, please also read the migration guide for the 7.0 (_Oxygen preview_) release: +
-https://eclipsescout.github.io/7.0/migration-guide.html
-
 === Service Release Migration
 
 The following changes were made after the initial 8.0 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
