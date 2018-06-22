@@ -509,6 +509,43 @@ Compared to parse and format you may have multiple validators. When the value is
 
 If you now ask yourself, why this is not possible for parsing and formatting, consider the following: `Validate` takes a value and returns a value, the data type is the same for input and output. `Parse` takes a text and creates a value, `format` takes a value and creates a text. The data type is likely not the same (besides for the `StringField`). If you had multiple parsers, the output of the previous parser would be the input of the next one, so depending on the index of your parser you would either get the text or the already parsed value as input. Confusing, isn't it? So in order to keep it simple, there is only one parser and only one formatter for each field.
 
+=== Styling
+Beside JS for business logic and JSON for the models, every Scout JS app probably needs some CSS code at some point of time. If you are writing custom widgets, you need it for sure. But also if you are just using the given widgets you might have the need to adjust the look here and there.
+
+Scout uses LESS as CSS preprocessor. It has a lot of advantages to pure CSS: variables, mixins, functions, imports etc. If you use the default build infrastructure provided by Scout, you can not only use LESS easily without getting a headache on how to integrate it in your build system, you get access to all of the LESS constructs used by Scout itself. This means you can use variables for colors and sizes, mixins to avoid browser specific prefixes, mixins for animations, import or replace whole Scout LESS files for custom themes and a lot of sample code in the Scout code base as well.
+
+In order to get started you need a place to put all your LESS code. The recommendation is to create one LESS file for each widget. That means if your widget is called MyWidget.js you would create a file called MyWidget.less. Even if you adjust the look of an existing widget you can create a file called let's say StringField.less and put the rules there. Remember to use a custom namespace (folder) in your project for your JS, JSON and LESS files otherwise it could get name clashes if you name your files the same way as Scout does. Important: theme files are put in the default namespace, as you will learn in the theme chapter. If you only have a few rules or non widget specific rules you can create a file called main.less and put them there. However, these are only recommendations, you can always do it as you like.
+
+The creation of these files won't make them loaded automatically, you have to register them in your `module` file. The module should be put into your `src/main/js` folder and named according to your namespace, for example `helloworld-module.less`. Just include your new files using the LESS `@import` keyword.
+
+[source,LESS]
+.Including a LESS file
+----
+@import "helloworld/style/colors.less";
+----
+
+This module file is either directly included in your `index.html` or in a `macro` file which is included in the `index.html`. The intention of the macro file is to group individual module files and make one file in order to load all rules at once within one request.
+
+Now that we have all the infrastructure set up we can start adding some rules. As already said you can use all the LESS variables from Scout. The variables can be found in the `scout/style` folder of the `org.eclipse.scout.rt.ui.html` module. If you have a look at the file `colors.less` you find all the colors you can use or customize. Let's say you want to change the background color of the navigation, you can redefine the variable `@navigation-background-color`.
+
+[source,LESS]
+.Changing the background color of the navigation
+----
+@navigation-background-color: @palette-red-4;
+----
+
+That's it! As you can see, changing this variable not only changes the background color of the tree it also changes the background colors of the view-buttons on the top left and the navigation-handle on the bottom. You could do the same by using CSS rules, but you would have to write several selectors to achieve the same.
+
+[[img-navigation-background, Figure 000]]
+.Helloworld default and with a custom navigation background color
+image::{imgsdir}/custom_navigation_background.png[]
+
+In this example a color from the Scout color palette is used. You can also use a custom hex code instead of `@palette-red-4` or define a custom color palette if you want to use the same colors for different rules.
+
+Beside colors there are some other files in the style folder of the Scout module: `animations.less`, `fonts.less`, `icons.less`, `mixins.less` and `sizes.less`. All these files contain variables or mixins which are used by various Scout widgets and may be used by your project as well.
+
+Redefining a variable is the simplest way of customizing. If you need more control you can always write a custom CSS rule. Keep in mind that these rules need to be more specific than the default CSS rules of Scout, otherwise they won't be executed (see https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity for details). Beside that we cannot guarantee that your custom rules will still work when migrating to a newer Scout version, because changing only a small part of the rule might make it more specific so that your rule won't work anymore. That only applies to custom rules which are supposed to change existing look or behavior. If you are writing a custom widget without overriding default Scout rules there shouldn't be any problems regarding migration.
+
 === Extensibility
 
 ==== How to extend Scout objects
