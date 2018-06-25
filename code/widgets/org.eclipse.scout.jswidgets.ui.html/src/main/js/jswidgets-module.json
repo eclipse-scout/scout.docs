@@ -46,6 +46,7 @@
     "jswidgets/table/TableForm.json",
     "jswidgets/table/ColumnPropertiesBox.json",
     "jswidgets/table/hierarchical/HierarchicalTableForm.json",
+    "jswidgets/tagfield/TagFieldForm.json",
     "jswidgets/tilegrid/TileGridForm.json",
     "jswidgets/tilegrid/TileGridLayoutConfigBox.json",
     "jswidgets/tileaccordion/TileAccordionForm.json",
