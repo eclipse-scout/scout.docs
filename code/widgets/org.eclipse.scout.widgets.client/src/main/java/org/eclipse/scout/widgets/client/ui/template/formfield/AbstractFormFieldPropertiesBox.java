@@ -39,6 +39,11 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     m_formField = formField;
   }
 
+  @Override
+  protected String getConfiguredLabel() {
+    return "Form Field Properties";
+  }
+
   public LabelVisibleField getLabelVisibleField() {
     return getFieldByClass(LabelVisibleField.class);
   }
@@ -107,11 +112,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     }
 
     @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
-    }
-
-    @Override
     protected void execChangedValue() {
       getFormField().setEnabled(getValue());
     }
@@ -134,11 +134,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     @Override
     protected boolean getConfiguredLabelVisible() {
       return false;
-    }
-
-    @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
     }
 
     @Override
@@ -167,11 +162,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     }
 
     @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
-    }
-
-    @Override
     protected void execChangedValue() {
       getFormField().setLabelVisible(getValue());
     }
@@ -194,11 +184,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     @Override
     protected boolean getConfiguredLabelVisible() {
       return false;
-    }
-
-    @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
     }
 
     @Override
@@ -227,11 +212,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     }
 
     @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
-    }
-
-    @Override
     protected void execChangedValue() {
       getFormField().setMandatory(getValue());
     }
@@ -254,11 +234,6 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     @Override
     protected boolean getConfiguredLabelVisible() {
       return false;
-    }
-
-    @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
     }
 
     @Override

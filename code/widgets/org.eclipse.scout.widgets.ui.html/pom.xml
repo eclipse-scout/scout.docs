@@ -29,10 +29,6 @@
       <artifactId>org.eclipse.scout.widgets.client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.scout.widgets</groupId>
-      <artifactId>org.eclipse.scout.widgets.old.client</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.ui.html</artifactId>
     </dependency>

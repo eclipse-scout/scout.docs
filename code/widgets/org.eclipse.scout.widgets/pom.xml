@@ -40,10 +40,6 @@
     <module>../org.eclipse.scout.widgets.ui.html.app</module>
     <module>../org.eclipse.scout.widgets.ui.html.app.war</module>
 
-    <!-- Components from previous widgets application -->
-    <module>../org.eclipse.scout.widgets.old.client</module>
-    <module>../org.eclipse.scout.widgets.old.shared</module>
-
     <!-- Scout JS widgets -->
     <module>../org.eclipse.scout.jswidgets.rest</module>
     <module>../org.eclipse.scout.jswidgets.ui.html</module>
@@ -93,19 +89,6 @@
         <artifactId>org.eclipse.scout.widgets.ui.html.app.war</artifactId>
         <version>${project.version}</version>
       </dependency>
-
-      <!-- Previous component dependencies -->
-      <dependency>
-        <groupId>org.eclipse.scout.widgets</groupId>
-        <artifactId>org.eclipse.scout.widgets.old.client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.scout.widgets</groupId>
-        <artifactId>org.eclipse.scout.widgets.old.shared</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
 
       <!-- JS Widgets dependencies -->
       <dependency>

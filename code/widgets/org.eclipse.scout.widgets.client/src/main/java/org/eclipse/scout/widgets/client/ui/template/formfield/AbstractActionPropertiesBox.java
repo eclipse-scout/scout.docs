@@ -84,11 +84,6 @@ public abstract class AbstractActionPropertiesBox<ACTION extends IAction> extend
     }
 
     @Override
-    protected String getConfiguredFont() {
-      return "ITALIC";
-    }
-
-    @Override
     protected void execChangedValue() {
       Optional.ofNullable(getAction()).ifPresent(a -> a.setVisible(getValue()));
     }

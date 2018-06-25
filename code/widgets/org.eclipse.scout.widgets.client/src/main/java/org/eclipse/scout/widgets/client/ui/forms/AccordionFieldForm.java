@@ -205,11 +205,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getAccordionField().getAccordion().setExclusiveExpand(getValue());
         }
@@ -234,11 +229,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getAccordionField().getAccordion().setScrollable(getValue());
         }
@@ -254,11 +244,6 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
     @Order(300)
     @ClassId("28a04cd7-8be9-4136-9b14-097cdf67260b")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return "Form Field Properties";
-      }
 
       @Override
       protected void execInitField() {

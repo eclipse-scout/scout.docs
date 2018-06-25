@@ -736,11 +736,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getTileField().getTileGrid().setSelectable(getValue());
         }
@@ -765,11 +760,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getTileField().getTileGrid().setMultiSelect(getValue());
         }
@@ -791,11 +781,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected boolean getConfiguredLabelVisible() {
           return false;
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -824,11 +809,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getTileField().getTileGrid().setWithPlaceholders(getValue());
         }
@@ -843,10 +823,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
     @Order(300)
     @ClassId("36584055-ed0a-464d-88d8-30c37cec1112")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
-      @Override
-      protected String getConfiguredLabel() {
-        return "Form Field Properties";
-      }
 
       @Override
       protected void execInitField() {

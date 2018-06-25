@@ -546,11 +546,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getAccordionField().getAccordion().setExclusiveExpand(getValue());
         }
@@ -572,11 +567,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected boolean getConfiguredLabelVisible() {
           return false;
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -604,11 +594,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           getAccordionField().getAccordion().setMultiSelect(getValue());
         }
@@ -630,11 +615,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected boolean getConfiguredLabelVisible() {
           return false;
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -739,10 +719,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     @Order(300)
     @ClassId("a2286e1b-0a57-48ec-8720-558f5a8b9583")
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
-      @Override
-      protected String getConfiguredLabel() {
-        return "Form Field Properties";
-      }
 
       @Override
       protected void execInitField() {

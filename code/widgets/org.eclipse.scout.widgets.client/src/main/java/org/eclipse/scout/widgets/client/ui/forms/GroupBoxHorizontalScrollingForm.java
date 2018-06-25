@@ -710,7 +710,7 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
 
         @Override
         protected String getConfiguredLabel() {
-          return "Notification status";
+          return "Notification Status";
         }
 
         @Override
@@ -730,7 +730,7 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
 
         @Override
         protected String getConfiguredLabel() {
-          return "Notification text";
+          return "Notification Text";
         }
 
         @Override

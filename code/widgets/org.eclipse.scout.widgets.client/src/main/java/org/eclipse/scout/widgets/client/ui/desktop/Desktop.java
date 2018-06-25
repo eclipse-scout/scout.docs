@@ -39,6 +39,7 @@ import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.LayoutWidgetsOutline;
+import org.eclipse.scout.widgets.client.ui.desktop.outlines.PagesOutline;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
@@ -73,6 +74,7 @@ public class Desktop extends AbstractDesktop {
     outlines.add(SimpleWidgetsOutline.class);
     outlines.add(AdvancedWidgetsOutline.class);
     outlines.add(LayoutWidgetsOutline.class);
+    outlines.add(PagesOutline.class);
     return outlines;
   }
 
@@ -245,6 +247,13 @@ public class Desktop extends AbstractDesktop {
   public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public LayoutWidgetsOutlineViewButton() {
       super(Desktop.this, LayoutWidgetsOutline.class);
+    }
+  }
+
+  @Order(40)
+  public class PagesOutlineViewButton extends AbstractOutlineViewButton {
+    public PagesOutlineViewButton() {
+      super(Desktop.this, PagesOutline.class);
     }
   }
 

@@ -121,18 +121,8 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
     public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
 
       @Override
-      protected String getConfiguredLabel() {
-        return "Form Field Properties";
-      }
-
-      @Override
       protected void execInitField() {
         setFormField(getDefaultField());
-      }
-
-      @Override
-      protected boolean getConfiguredExpanded() {
-        return true;
       }
     }
 

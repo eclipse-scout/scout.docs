@@ -31,6 +31,7 @@ import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm
 import org.eclipse.scout.widgets.client.ui.forms.SequenceBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm;
+import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm;
 import org.eclipse.scout.widgets.shared.Icons;
 
 /**
@@ -57,6 +58,7 @@ public class LayoutWidgetsOutline extends AbstractOutline {
     pageList.add(new FormPage(SequenceBoxForm.class));
     pageList.add(new FormPage(TabBoxForm.class));
     pageList.add(new FormPage(SplitBoxForm.class));
+    pageList.add(new FormPage(WrappedFormFieldForm.class));
     pageList.add(new DesktopBenchLayoutPage());
     FormPage.sort(pageList);
   }
