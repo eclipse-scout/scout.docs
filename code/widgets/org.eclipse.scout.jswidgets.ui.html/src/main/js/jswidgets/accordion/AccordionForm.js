@@ -62,6 +62,7 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
   this.widget('GridDataBox').setField(accordionField);
+  this.widget('EventsTab').setField(this.accordion);
 };
 
 jswidgets.AccordionForm.prototype._onCollapseStylePropertyChange = function(event) {

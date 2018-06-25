@@ -28,6 +28,7 @@ jswidgets.CarouselForm.prototype._init = function(model) {
   var carouselField = this.widget('CarouselField');
   this.widget('FormFieldPropertiesBox').setField(carouselField);
   this.widget('GridDataBox').setField(carouselField);
+  this.widget('EventsTab').setField(carousel);
 };
 
 jswidgets.CarouselForm.prototype._onStatusEnabledPropertyChange = function(event) {

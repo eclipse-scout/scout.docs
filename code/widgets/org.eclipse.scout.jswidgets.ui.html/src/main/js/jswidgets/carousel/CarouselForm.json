@@ -86,34 +86,45 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
             "fields": [
               {
-                "id": "StatusEnabledField",
-                "objectType": "CheckBoxField",
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "label": "Properties",
                 "labelVisible": false,
-                "label": "Status enabled"
+                "borderVisible": false,
+                "fields": [
+                  {
+                    "id": "StatusEnabledField",
+                    "objectType": "CheckBoxField",
+                    "labelVisible": false,
+                    "label": "Status enabled"
+                  }
+                ]
+              },
+              {
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints",
+                "expanded": false
               }
             ]
           },
           {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints",
-            "expanded": false
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

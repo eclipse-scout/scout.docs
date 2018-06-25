@@ -76,6 +76,7 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(stringField);
   this.widget('FormFieldPropertiesBox').setField(stringField);
   this.widget('GridDataBox').setField(stringField);
+  this.widget('EventsTab').setField(stringField);
 };
 
 jswidgets.StringFieldForm.prototype._onHasActionPropertyChange = function(event) {

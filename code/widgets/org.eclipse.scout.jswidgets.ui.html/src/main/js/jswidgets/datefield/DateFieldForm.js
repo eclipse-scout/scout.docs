@@ -57,6 +57,7 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(dateField);
   this.widget('FormFieldPropertiesBox').setField(dateField);
   this.widget('GridDataBox').setField(dateField);
+  this.widget('EventsTab').setField(dateField);
 };
 
 jswidgets.DateFieldForm.prototype._onHasDatePropertyChange = function(event) {

@@ -57,6 +57,10 @@ jswidgets.FormForm.prototype._init = function(model) {
   }
   var displayHintField = this.widget('DisplayHintField');
   displayHintField.setValue(this.openedByButton ? this.displayHint : scout.Form.DisplayHint.DIALOG);
+
+  if (this.openedByButton) {
+    this.widget('EventsTab').setField(this);
+  }
 };
 
 jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
@@ -72,6 +76,7 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
     status: this._createStatus(this.widget('StatusField').value),
     openedByButton: true
   });
+  this.widget('EventsTab').setField(form);
   form.open();
 };
 
@@ -88,6 +93,7 @@ jswidgets.FormForm.prototype._onOpenLifecycleFormButtonClick = function(model) {
     status: this._createStatus(this.widget('StatusField').value),
     data: this.LifecycleData
   });
+  this.widget('EventsTab').setField(form);
 
   var lifecycleDataField = this.widget('LifecycleDataField');
   form.on('load', function(event) {

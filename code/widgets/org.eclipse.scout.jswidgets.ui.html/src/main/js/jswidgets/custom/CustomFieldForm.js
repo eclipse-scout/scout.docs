@@ -23,6 +23,7 @@ jswidgets.CustomFieldForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(watchField);
   this.widget('GridDataBox').setField(watchField);
+  this.widget('EventsTab').setField(watchField);
 };
 
 jswidgets.CustomFieldForm.prototype._onSelectedTabChange = function(event) {

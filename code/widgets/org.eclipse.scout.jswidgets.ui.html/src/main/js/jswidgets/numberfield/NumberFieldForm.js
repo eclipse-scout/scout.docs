@@ -37,6 +37,7 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(numberField);
   this.widget('FormFieldPropertiesBox').setField(numberField);
   this.widget('GridDataBox').setField(numberField);
+  this.widget('EventsTab').setField(numberField);
 };
 
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {

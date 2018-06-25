@@ -25,49 +25,61 @@
       {
         "id": "ConfigurationBox",
         "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
-            "expandable": true,
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
             "fields": [
               {
-                "id": "AcceptTypesField",
-                "objectType": "StringField",
-                "label": "Accept Types",
-                "tooltipText": "${textKey:FileChooserAcceptTypesTooltip}"
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "expandable": true,
+                "label": "Properties",
+                "labelVisible": false,
+                "borderVisible": false,
+                "fields": [
+                  {
+                    "id": "AcceptTypesField",
+                    "objectType": "StringField",
+                    "label": "Accept Types",
+                    "tooltipText": "${textKey:FileChooserAcceptTypesTooltip}"
+                  },
+                  {
+                    "id": "MaximumUploadSizeField",
+                    "objectType": "NumberField",
+                    "label": "Max. Upload Size",
+                    "tooltipText": "${textKey:FileChooserMaximumUploadSizeTooltip}"
+                  },
+                  {
+                    "id": "MultiSelectField",
+                    "objectType": "CheckBoxField",
+                    "label": "Multi Select",
+                    "labelVisible": false
+                  }
+                ]
               },
               {
-                "id": "MaximumUploadSizeField",
-                "objectType": "NumberField",
-                "label": "Max. Upload Size",
-                "tooltipText": "${textKey:FileChooserMaximumUploadSizeTooltip}"
-              },
-              {
-                "id": "MultiSelectField",
-                "objectType": "CheckBoxField",
-                "label": "Multi Select",
-                "labelVisible": false
+                "id": "ChosenFilesBox",
+                "objectType": "GroupBox",
+                "expandable": true,
+                "label": "${textKey:FileChooserChosenFiles}",
+                "fields": [
+                  {
+                    "id": "ChosenFilesField",
+                    "objectType": "HtmlField",
+                    "labelVisible": false
+                  }
+                ]
               }
             ]
           },
           {
-            "id": "ChosenFilesBox",
-            "objectType": "GroupBox",
-            "expandable": true,
-            "label": "${textKey:FileChooserChosenFiles}",
-            "fields": [
-              {
-                "id": "ChosenFilesField",
-                "objectType": "HtmlField",
-                "labelVisible": false
-              }
-            ]
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

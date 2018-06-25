@@ -28,13 +28,13 @@ jswidgets.FileChooserForm.prototype._init = function(model) {
 };
 
 jswidgets.FileChooserForm.prototype._onButtonClick = function(event) {
-
   var fileChooser = scout.create('FileChooser', {
     parent: this.session.desktop,
     acceptTypes: this.widget('AcceptTypesField').value,
     maximumUploadSize: this.widget('MaximumUploadSizeField').value,
     multiSelect: this.widget('MultiSelectField').value
   });
+  this.widget('EventsTab').setField(fileChooser);
   fileChooser.open();
   fileChooser.on('upload', function() {
     this._updateChosenFiles(fileChooser.files);

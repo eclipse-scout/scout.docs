@@ -93,6 +93,7 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
+  this.widget('EventsTab').setField(this.table);
 
   var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPadding');
   extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
@@ -104,8 +105,29 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
   this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
+  var targetField = this.widget('Column.TargetField');
+  targetField.setLookupCall(new jswidgets.ColumnLookupCall(this.table));
+  targetField.setValue(this.table.columns[0]);
+  targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
+
+  this._onTargetPropertyChange({
+    propertyName: 'value',
+    newValue: targetField.value
+  });
+
   this._insertFewRows();
   this.table.expandAll();
+};
+
+jswidgets.HierarchicalTableForm.prototype._onTargetPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    var oldColumn = event.oldValue;
+    var newColumn = event.newValue;
+
+    var columnPropertiesBox = this.widget('Column.PropertiesBox');
+    columnPropertiesBox.setColumn(newColumn);
+    columnPropertiesBox.setEnabled(!!newColumn);
+  }
 };
 
 jswidgets.HierarchicalTableForm.prototype._onRemoveAllRows = function() {

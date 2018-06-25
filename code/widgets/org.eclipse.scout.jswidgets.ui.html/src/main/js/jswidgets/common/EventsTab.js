@@ -46,6 +46,9 @@ jswidgets.EventsTab.prototype._setField = function(field) {
 
 jswidgets.EventsTab.prototype._onEvent = function(event) {
   if (event.type === 'destroy') {
+    this.field.removeListener(this._listener);
+  }
+  if (this.destroyed) {
     // Do nothing if field is being destroyed (e.g. on form close)
     return;
   }

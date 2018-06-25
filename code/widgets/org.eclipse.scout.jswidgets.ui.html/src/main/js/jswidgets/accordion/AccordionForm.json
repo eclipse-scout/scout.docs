@@ -92,52 +92,62 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
-            "expandable": true,
             "fields": [
               {
-                "id": "CollapseStyleField",
-                "objectType": "SmartField",
-                "label": "Collapse Style",
-                "lookupCall": "jswidgets.CollapseStyleLookupCall"
-              },
-              {
-                "id": "ExclusiveExpandField",
-                "objectType": "CheckBoxField",
-                "label": "Exclusive Expand",
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "label": "Properties",
                 "labelVisible": false,
-                "tooltipText": "${textKey:ExclusiveExpandTooltip}",
-                "gridDataHints": {
-                  "fillHorizontal": false
-                }
+                "borderVisible": false,
+                "fields": [
+                  {
+                    "id": "ExclusiveExpandField",
+                    "objectType": "CheckBoxField",
+                    "label": "Exclusive Expand",
+                    "labelVisible": false,
+                    "tooltipText": "${textKey:ExclusiveExpandTooltip}",
+                    "gridDataHints": {
+                      "fillHorizontal": false
+                    }
+                  },
+                  {
+                    "id": "ScrollableField",
+                    "objectType": "CheckBoxField",
+                    "label": "Scrollable",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "CollapseStyleField",
+                    "objectType": "SmartField",
+                    "label": "Collapse Style",
+                    "lookupCall": "jswidgets.CollapseStyleLookupCall"
+                  }
+                ]
               },
               {
-                "id": "ScrollableField",
-                "objectType": "CheckBoxField",
-                "label": "Scrollable",
-                "labelVisible": false
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox",
+                "expanded": false
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints",
+                "expanded": false
               }
             ]
           },
           {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox",
-            "expanded": false
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints",
-            "expanded": false
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

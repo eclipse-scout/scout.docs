@@ -26,46 +26,57 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "GroupBox",
-        "labelVisible": false,
-        "borderVisible": false,
+        "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "gridColumnCount": 1,
-        "fields": [
+        "selectedTab": "PropertiesTab",
+        "tabItems": [
           {
-            "id": "PropertiesBox",
-            "objectType": "GroupBox",
+            "id": "PropertiesTab",
+            "objectType": "TabItem",
             "label": "Properties",
             "fields": [
               {
-                "id": "MinValueField",
-                "objectType": "NumberField",
-                "label": "Min Value"
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "label": "Properties",
+                "labelVisible": false,
+                "borderVisible": false,
+                "fields": [
+                  {
+                    "id": "MinValueField",
+                    "objectType": "NumberField",
+                    "label": "Min Value"
+                  },
+                  {
+                    "id": "MaxValueField",
+                    "objectType": "NumberField",
+                    "label": "Max Value"
+                  },
+                  {
+                    "id": "FormatField",
+                    "objectType": "StringField",
+                    "label": "Format"
+                  }
+                ]
               },
               {
-                "id": "MaxValueField",
-                "objectType": "NumberField",
-                "label": "Max Value"
+                "id": "ValueFieldPropertiesBox",
+                "objectType": "jswidgets.ValueFieldPropertiesBox"
               },
               {
-                "id": "FormatField",
-                "objectType": "StringField",
-                "label": "Format"
+                "id": "FormFieldPropertiesBox",
+                "objectType": "jswidgets.FormFieldPropertiesBox"
+              },
+              {
+                "id": "GridDataBox",
+                "objectType": "jswidgets.GridDataBox",
+                "label": "Grid Data Hints"
               }
             ]
           },
           {
-            "id": "ValueFieldPropertiesBox",
-            "objectType": "jswidgets.ValueFieldPropertiesBox"
-          },
-          {
-            "id": "FormFieldPropertiesBox",
-            "objectType": "jswidgets.FormFieldPropertiesBox"
-          },
-          {
-            "id": "GridDataBox",
-            "objectType": "jswidgets.GridDataBox",
-            "label": "Grid Data Hints"
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }
