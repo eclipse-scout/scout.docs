@@ -67,7 +67,7 @@ TIP: The Scout 8.0 Runtime does not support Java 9 or Java 10 yet. The support f
 
 == New browser version requirements
 
-The supported browser versions have been updated. See https://eclipsescout.github.io/8.0/technical-guide.html#browser-support for the new list of supported browsers.
+The supported browser versions have been updated. See https://eclipsescout.github.io/8.0/technical-guide-js.html#browser-support for the new list of supported browsers.
 
 
 == New SDK Feature in Eclipse: Search for missing NLS keys

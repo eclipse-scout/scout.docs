@@ -1,10 +1,19 @@
-= ScoutJS Rest Services =
-This cheat sheet shows how to provide JAX-RS RESTful services and consume them from a ScoutJS Single Page Application.
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+=== How to Use a REST Service
+This how to shows how to provide JAX-RS RESTful services and consume them from a Scout JS Single Page Application.
 
 The goal is to provide a `ServerState` service in the `org.eclipse.scout.hellojs.ui.html` module.
 
-
-=== Maven Dependencies
+==== Maven Dependencies
 Add the following dependencies to the `org.eclipse.scout.hellojs.ui.html` module.
 
 org.eclipse.scout.hellojs.ui.html/pom.xml
@@ -31,7 +40,7 @@ org.eclipse.scout.hellojs.ui.html/pom.xml
 </dependencies>
 ----
 
-=== REST Servlet
+==== REST Servlet
 
 Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.app.dev` and `org.eclipse.scout.hellojs.ui.html.app.war`.
 
@@ -65,7 +74,7 @@ Register the REST servlet in the web.xml of `org.eclipse.scout.hellojs.ui.html.a
 </web-app>
 ----
 
-=== Provide a RESTful service
+==== Provide a RESTful service
 Create the server state service in the `org.eclipse.scout.hellojs.ui.html` module. The service returns a OK status whenever it is accessible.
 
 org.eclipse.scout.hellojs.ui.html/src/main/java/org/eclipse/scout/hellojs/ui/html/helloworld/ServerStateService.java
@@ -97,11 +106,11 @@ public class ServerStateService implements IRestResource {
 ----
 <1> The path under which the service will be provided. Note: the full path is `/api/serverstatus` since the apiServlet is mapped to `/api/*` in the web.xml.
 
-==== Test if the service is up an running
+===== Test if the service is up an running
 Start the dev ui application `org.eclipse.scout.hellojs.ui.html.app.dev/[org.eclipse.scout.hellojs] dev ui.launch`.
 Connect to the url `http:localhost:[ui server port]/api/serverstatus` and ensure the service is up an running.
 
-=== Use the service from ScoutJS
+==== Use the service from Scout JS
 
 [source,js]
 ----

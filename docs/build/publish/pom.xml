@@ -55,6 +55,12 @@
       <version>8.0.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_technical_guide_js</artifactId>
+      <version>8.0.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
   </dependencies>
 
   <build>
@@ -110,6 +116,17 @@
                   <fixXrefLinks>false</fixXrefLinks>
                   <htmlOutput>
                     <outputZipFileName>technical-guide.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- technical guide js -->
+                <inputSource>
+                  <inputFolder>../technical_guide_js/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>technical-guide-js.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>

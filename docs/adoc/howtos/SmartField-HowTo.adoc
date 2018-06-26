@@ -1,3 +1,13 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
 === SmartField: how to apply colors and styles from a lookup-row
 
 When a user selects a lookup-row from the proposal chooser in Scout versions <= 6.0, the properties `foregroundColor`, `backgroundColor`, `font` and `tooltipText` have been automatically copied from the lookup-row to the field. In some cases this was exactly what a specific application needed, but in other cases it was hard to implement a specific behavior without overriding internal methods from the `SmartField`. For instance it was not possible to have a lookup-row with background-color red in the proposal-chooser and at the same time avoid the background-color of the field changing to red, when that row was being selected.

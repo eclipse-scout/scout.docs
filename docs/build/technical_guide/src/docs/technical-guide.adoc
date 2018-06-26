@@ -48,7 +48,6 @@ include::{mdledir}/technicalGuide/Security.adoc[]
 include::{mdledir}/technicalGuide/DataObject.adoc[]
 include::{mdledir}/technicalGuide/REST.adoc[]
 include::{mdledir}/technicalGuide/JaxWs.adoc[]
-include::{mdledir}/technicalGuide/HtmlUi.adoc[]
 include::{mdledir}/technicalGuide/ScoutJS.adoc[]
 include::{mdledir}/technicalGuide/HowTos.adoc[]
 

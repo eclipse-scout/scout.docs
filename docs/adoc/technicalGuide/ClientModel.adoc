@@ -41,17 +41,6 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <5> Use default for the center (C) view stack.
 <6> The south part is using the UI height as initial size and is growable but not shrinkable.
 
-
-=== Outlines
-
-=== Pages
-
-=== Forms
-
-=== Form Fields
-
-=== Actions
-
 === Multiple Dimensions Support
 
 Several components support multiple dimensions for visibility or enabled flags. This means the component is only visible or enabled if all dimensions are set to true.

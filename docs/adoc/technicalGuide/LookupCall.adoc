@@ -16,7 +16,7 @@ Lookup calls are mainly used by SmartFields and SmartColumns to look up single o
 Class: `LookupCall`
 
 === Description
-The Lookup call mechanism is used to lookup up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltipText.
+The Lookup call mechanism is used to look up a set of key-text pairs. Whereas the key can be of any Java type the text must be of the type String. Each entry in this set is called LookupRow. In addition to the key and the text a LookupRow can also define and icon, font, colors and a tooltipText.
 
 This schema explains the role of a LookupCall in a SmartField:
 
@@ -26,7 +26,7 @@ image::{imgsdir}/Schema_LookupCall.png[]
 
 Lookup calls provide different method to compute the set of LookupRows :
 
-* *getDataByKey():* Retrieves a single lookup row for a specific key value. Used by SmartFields and SmatColumns to get the display text for a given key value.
+* *getDataByKey():* Retrieves a single lookup row for a specific key value. Used by SmartFields and SmartColumns to get the display text for a given key value.
 * *getDataByText():* Retrieve multiple lookup rows which match a certain String. Used by SmartFields when the user starts to enter some text in the field.
 * *getDataByAll():* Retrieves all available lookup rows. Used by SmartFields when the user clicks on the browse icon.
 * *getDataByRec():* This can only be used for hierarchical lookup calls. It retrieves all available sub-tree lookup rows for a given parent.

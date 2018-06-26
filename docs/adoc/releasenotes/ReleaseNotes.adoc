@@ -11,6 +11,7 @@ ifndef::mdledir[:mdledir: .]
 
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
 :techdoc: https://eclipsescout.github.io/{doc-short-version}/technical-guide.html
+:techdocjs: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html
 :migrationguide: https://eclipsescout.github.io/{doc-short-version}/migration-guide.html
 
 //-----------------------------------------------------------------------------

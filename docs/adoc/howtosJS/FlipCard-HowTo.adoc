@@ -1,14 +1,24 @@
-= ScoutJS Custom field =
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+:imgsdir: ../../imgs
+:codedir: ../../../code
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+=== How to Create a Custom field
 This cheat sheet shows how to implement your own custom control for a ScoutJS application. In this example we will write a FlipCard field, which allows you to have a 'card' with a front and back side. Clicking on the card should flip the card from one to the other side.
 
-=== Files
+==== Files
 
 ===== Create an empty JavaScript file and Stylesheet
 
 * `src/main/js/hellojs/*custom/FlipCard.js*` The java script file representing the field.
 * `src/main/js/hellojs/*custom/FlipCard.less*` Styling of the field.
 
-=== Add the files to the application
+==== Add the files to the application
 
 ===== Include the JavaScript file to the module
 
@@ -32,7 +42,7 @@ hellojs-module.less
 ...
 ----
 
-=== Minimal Code for a new FormField
+==== Minimal Code for a new FormField
 
 ===== Create a minimal FormField
 The FlipCard will inherit from FormField which has already a label and field container.
@@ -103,10 +113,10 @@ HelloForm.json
 
 .Result Minimal Form Field
 ****
-image::img/flipCard01.jpg[]
+image::{imgsdir}/flipCard01.jpg[]
 ****
 
-=== Full featured flip card field
+==== Full featured flip card field
 
 FlipCard.js
 [source,js]
@@ -139,7 +149,6 @@ hellojs.FlipCard.prototype._render = function() {
     .on('mousedown', this._onCardMouseDown.bind(this)); //<2>
   this.$front = this.$card.appendDiv('front');
   this.$back = this.$card.appendDiv('back');
-
 };
 
 hellojs.FlipCard.prototype._renderProperties = function() { //<3>
@@ -170,7 +179,6 @@ hellojs.FlipCard.prototype._remove = function() {  <4>
 
 hellojs.FlipCard.prototype._onCardMouseDown = function() { // <2>
   this.setFlipped(!this.flipped);
-
 };
 
 hellojs.FlipCard.prototype.setFlipped = function(flipped) {
@@ -270,5 +278,5 @@ FlipCard.less
 
 .Result Flip Card
 ****
-image::img/flipCard02.jpg[]
+image::{imgsdir}/flipCard02.jpg[]
 ****
