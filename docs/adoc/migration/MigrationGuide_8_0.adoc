@@ -17,6 +17,7 @@ The following changes were made after the initial 8.0 release (Eclipse Photon re
 
 ==== Photon.1 (8.0.100) Release Expected on September, 2018
 * <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
+* <<Moved classes from org.eclipse.scout.rt.shared.mail to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
 
 {NotReleasedWarning}
 
@@ -481,6 +482,20 @@ The SmartField in Scout <= 6.0 applied the lookup-row properties `foregroundColo
 Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` property from the lookup-row to the field. In some cases this new feature can be used to migrate from older Scout version.
 
 Check the HowTo section _SmartField: how to apply colors and styles from a lookup-row_ in Scout's technical guide to find examples for migration and how to work with the `cssClass` property.
+
+
+=== Moved classes from org.eclipse.scout.rt.shared.mail to new module to org.eclipse.scout.rt.mail (since 8.0.100)
+The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to a package with the same module name:
+
+* BinaryResourceDataSource
+* CharsetSafeMimeMessage
+* MailAttachment
+* MailHelper
+* MailMessage
+* MailParticipant
+* RFCWrapperPart
+
+For migration, replace all imports for `org.eclipse.scout.rt.shared.mail` by imports for `org.eclipse.scout.rt.mail` and add a dependency to the new module `org.eclipse.scout.rt.mail`.
 
 // ^^^
 // Insert descriptions of Java API changes here
