@@ -35,6 +35,7 @@
     "jswidgets/proposalfield/ProposalFieldForm.json",
     "jswidgets/proposalfield/ProposalFieldPropertiesBox.json",
     "jswidgets/radiobuttongroup/RadioButtonGroupForm.json",
+    "jswidgets/rest/RestForm.json",
     "jswidgets/sequencebox/SequenceBoxForm.json",
     "jswidgets/stringfield/StringFieldForm.json",
     "jswidgets/tabbox/DynamicTab.json",

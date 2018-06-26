@@ -8,6 +8,7 @@
  */
 (function(jswidgets, scout, $, undefined) {
   __include("jswidgets/App.js");
+  __include("jswidgets/objectFactories.js");
   __include("jswidgets/accordion/AccordionForm.js");
   __include("jswidgets/accordion/CollapseStyleLookupCall.js");
   __include("jswidgets/action/ActionPropertiesBox.js");
@@ -19,6 +20,7 @@
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
   __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
+  __include("jswidgets/desktop/Desktop.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
   __include("jswidgets/form/LifecycleForm.js");
@@ -38,7 +40,6 @@
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
   __include("jswidgets/desktop/WidgetsOutlineOverview.js");
-  __include("jswidgets/desktop/ServerStatusMenu.js");
   __include("jswidgets/filechooser/FileChooserForm.js");
   __include("jswidgets/filechooserbutton/FileChooserButtonForm.js");
   __include("jswidgets/filechooserfield/FileChooserFieldForm.js");
@@ -72,9 +73,11 @@
   __include("jswidgets/proposalfield/ProposalFieldForm.js");
   __include("jswidgets/proposalfield/ProposalFieldPropertiesBox.js");
   __include("jswidgets/radiobuttongroup/RadioButtonGroupForm.js");
+  __include("jswidgets/rest/RestForm.js");
   __include("jswidgets/sequencebox/SequenceBoxForm.js");
   __include("jswidgets/stringfield/StringFieldForm.js");
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
+  __include("jswidgets/style/icons.js");
   __include("jswidgets/tabbox/DynamicTab.js");
   __include("jswidgets/tabbox/TabBoxAddTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxDeleteTabItemBox.js");

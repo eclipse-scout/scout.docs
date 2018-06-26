@@ -1,0 +1,35 @@
+{
+  "id": "jswidgets.RestForm",
+  "type": "model",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "DetailBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "CallButton",
+            "objectType": "Button",
+            "label": "Call the server",
+            "processButton": false
+          },
+          {
+            "id": "LogField",
+            "objectType": "StringField",
+            "label": "Log",
+            "labelPosition": 4,
+            "enabled": false,
+            "multilineText": true,
+            "gridDataHints": {
+              "h": 3
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

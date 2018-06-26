@@ -1,19 +1,18 @@
 {
-    "id": "jswidgets.Desktop",
-    "title": "${textKey:Widgets}",
-    "objectType": "Desktop",
-    "type": "model",
-    "outline": {
-      "objectType": "jswidgets.WidgetsOutline"
-    },
-    "menus": [
-      {
-        "id": "jswidgets.ServerStatusMenu",
-        "text": "OnOff",
-        "objectType": "jswidgets.ServerStatusMenu",
-        "type": "model",
-        "cssClass": "server-status"
-      }
-    ]
-
+  "id": "jswidgets.Desktop",
+  "title": "${textKey:Widgets}",
+  "objectType": "Desktop",
+  "type": "model",
+  "logoUrl": "res/scout-logo.png",
+  "outline": {
+    "objectType": "jswidgets.WidgetsOutline"
+  },
+  "menus": [
+    {
+      "id": "AboutMenu",
+      "objectType": "Menu",
+      "iconId": "${iconId:jswidgets.QUESTION_CIRCLE}",
+      "cssClass": "about-menu"
+    }
+  ]
 }
