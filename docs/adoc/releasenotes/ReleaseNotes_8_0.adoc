@@ -6,12 +6,8 @@
 
 == About This Release
 
-Eclipse Scout 8.0 will be part of the Eclipse _Photon_ release. It will be released in June 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]).
-The latest version of this release is: None released yet.
-
-IMPORTANT: {NotReleasedWarning}
-
-* <<PLACEHOLDER>>
+Eclipse Scout 8.0 is part of the Eclipse _Photon_ release. It was released on June 27, 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]).
+The latest version of this release is: _8.0.0.010_Photon_
 
 You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/8.0.x[detailed change log] on GitHub.
 
@@ -43,10 +39,10 @@ Usage example in the parent POM of your Scout application:
 
 ==== Eclipse IDE Tooling (Scout SDK)
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photonrc3[Eclipse for Scout Developers Photon RC3]
+https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photonr[Eclipse for Scout Developers Photon]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/8.0/8.0.0/008_Photon_RC3/
+http://download.eclipse.org/scout/releases/8.0/8.0.0/010_Photon/
 
 ==== Demo Applications
 The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.010_Photon[features/version/8.0.0.010_Photon] branch of our docs repository on GitHub.
