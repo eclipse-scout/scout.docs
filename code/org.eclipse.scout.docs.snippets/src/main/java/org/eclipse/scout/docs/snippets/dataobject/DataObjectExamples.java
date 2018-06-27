@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.dataobject.DataObjectAttributeDescriptor;
+import org.eclipse.scout.rt.platform.dataobject.DataObjectInventory;
 import org.eclipse.scout.rt.platform.dataobject.DoEntity;
 import org.eclipse.scout.rt.platform.dataobject.DoEntityBuilder;
 import org.eclipse.scout.rt.platform.dataobject.DoList;
@@ -138,5 +140,14 @@ public class DataObjectExamples {
             .withName1Ex("single-one-ex")
             .withName("single-one"));
     //end::abstractDataObject[]
+  }
+
+  void accessInventory() {
+    //tag::accessInventory[]
+    Map<String, DataObjectAttributeDescriptor> attributes =
+        BEANS.get(DataObjectInventory.class).getAttributesDescription(ExampleEntityDo.class);
+    attributes.forEach(
+        (key, value) -> System.out.println("Attribute " + key + " type " + value.getType()));
+    //end::accessInventory[]
   }
 }

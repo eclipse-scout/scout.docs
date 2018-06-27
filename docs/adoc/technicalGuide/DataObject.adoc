@@ -294,6 +294,16 @@ The Scout default implementation based on the JSON library Jackson is provided b
 The dependency to this module must be added in the top-level .dev/.app module.
 A dependency within the program code is not necessaray as long as no specific Jackson features should be used within the application code.
 
+=== Data Object Inventory ===
+The class `org.eclipse.scout.rt.platform.dataobject.DataObjectInventory` provides access to all available data objects at runtime.
+For each data object all available attributes and their properties (name, type, accessor method and format pattern) are available:
+
+[source,java]
+.Example: Accessing data object inventory
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessInventory]
+----
+
 === Extending with custom serializer and deserializer ===
 The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.
 Own custom serializer and deserializer implementations can be added by replacing  the corresponding base class and register its own custom serializer or deserializer.
