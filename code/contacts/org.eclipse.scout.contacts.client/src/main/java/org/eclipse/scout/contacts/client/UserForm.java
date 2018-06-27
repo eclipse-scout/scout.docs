@@ -61,6 +61,11 @@ public class UserForm extends AbstractForm {
       return 1;
     }
 
+    @Override
+    protected int getConfiguredWidthInPixel() {
+      return 340;
+    }
+
     @Order(10)
     public class GroupBox extends AbstractGroupBox {
 
@@ -128,10 +133,13 @@ public class UserForm extends AbstractForm {
 
   private String createHtmlContent() {
     return HTML.div(
-        HTML.div(getGravatarImage()),
-        HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))),
-        HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))),
-        HTML.div(HTML.appLink("logout", TEXTS.get("Logout")))).toHtml();
+        HTML.div(getGravatarImage()).cssClass("contacts-user-form-image"),
+        HTML.div(
+            HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
+            HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))).cssClass("contacts-user-form-link-row"),
+            HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"))
+            .cssClass("contacts-user-form-link-box"))
+        .toHtml();
   }
 
   private IHtmlElement getGravatarImage() {

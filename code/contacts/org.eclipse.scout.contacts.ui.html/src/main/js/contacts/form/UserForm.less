@@ -8,15 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-.contacts-user-form img {
-  float: left;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  padding: 0px;
-  height: 130px;
-  margin-right: 10px;
+
+.contacts-user-form {
+  white-space: nowrap;
 }
 
-.contacts-user-form .app-link {
-  outline-style: none;
+.contacts-user-form-image {
+  display: inline-block;
+  vertical-align: top;
+
+  & > img {
+    border-radius: 10px;
+    border: 1px solid transparent;
+    padding: 0px;
+    height: 110px;
+  }
+}
+
+.contacts-user-form-link-box {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 10px;
+  margin-left: 20px
+}
+
+.contacts-user-form-link-row {
+  margin-bottom: 14px;
+
+  & > .app-link {
+    outline-style: none;
+    text-decoration: none;
+  }
 }

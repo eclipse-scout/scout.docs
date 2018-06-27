@@ -149,7 +149,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F10;
+      return IKeyStroke.F9;
     }
     //tag::quickAccessMenu[]
 
@@ -210,7 +210,7 @@ public class Desktop extends AbstractDesktop {
     //end::OptionsMenu[]
     @Override
     protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F11;
+      return IKeyStroke.F10;
     }
     //tag::OptionsMenu[]
 
@@ -235,7 +235,7 @@ public class Desktop extends AbstractDesktop {
 
     @Override
     protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F12;
+      return IKeyStroke.F11;
     }
 
     @Override
