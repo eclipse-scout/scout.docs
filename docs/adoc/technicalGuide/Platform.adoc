@@ -801,41 +801,13 @@ By default this property points to the value of property `scout.backendUrl` with
 |If specified all emails are sent to this address instead of the real one. This may be useful during development to not send emails to real users by accident.
 |String
 |Config Property
-|`scout.smtp.defaultFromEmail`
-|Default sender Email address.
-|String
+|`scout.smtp.connectionTimeout`
+|Socket connection timeout value in milliseconds.
+|Integer
 |Config Property
-|`scout.smtp.host`
-|SMTP server host name.
-|String
-|Config Property
-|`scout.smtp.password`
-|SMTP server password
-|String
-|Config Property
-|`scout.smtp.port`
-|The port to connect to the server.
-|Integer between 1 and 65535
-|Config Property
-|`scout.smtp.sslProtocols`
-|Specifies the SSL protocols that will be enabled for SSL connections. The property value is a whitespace separated list of tokens acceptable to the javax.net.ssl.SSLSocket.setEnabledProtocols() method.
-|String
-|Config Property
-|`scout.smtp.subjectPrefix`
-|Text that will be added in front of each email subject that is sent. The default value is null.
-|String
-|Config Property
-|`scout.smtp.useAuth`
-|If true, attempt to authenticate the user using the AUTH command.
-|Boolean
-|Config Property
-|`scout.smtp.useSsl`
-|Specifies if a secure connection should be used.
-|Boolean
-|Config Property
-|`scout.smtp.username`
-|SMTP server username.
-|String
+|`scout.smtp.readTimeout`
+Socket read timeout value in milliseconds.
+|Integer
 |Config Property
 |`scout.sql.directJdbcConnection`
 |If true a direct JDBC connection is created. Otherwise a JNDI connection is used. The default value is true.

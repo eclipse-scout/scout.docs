@@ -17,7 +17,7 @@ The following changes were made after the initial 8.0 release (Eclipse Photon re
 
 ==== Photon.1 (8.0.100) Release Expected on September, 2018
 * <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
-* <<Moved classes from org.eclipse.scout.rt.shared.mail to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
+* <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
 
 {NotReleasedWarning}
 
@@ -484,8 +484,8 @@ Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` prop
 Check the HowTo section _SmartField: how to apply colors and styles from a lookup-row_ in Scout's technical guide to find examples for migration and how to work with the `cssClass` property.
 
 
-=== Moved classes from org.eclipse.scout.rt.shared.mail to new module to org.eclipse.scout.rt.mail (since 8.0.100)
-The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to a package with the same module name:
+=== Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)
+The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to the package `org.eclipse.scout.rt.mail`:
 
 * BinaryResourceDataSource
 * CharsetSafeMimeMessage
@@ -496,6 +496,13 @@ The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a ne
 * RFCWrapperPart
 
 For migration, replace all imports for `org.eclipse.scout.rt.shared.mail` by imports for `org.eclipse.scout.rt.mail` and add a dependency to the new module `org.eclipse.scout.rt.mail`.
+
+A new helper `org.eclipse.scout.rt.mail.smtp.SmtpHelper` replaces the service `org.eclipse.scout.rt.server.services.common.smtp.ISMTPService` and it's abstract implementation `org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService`.
+The only remaining property is `SmtpDebugReceiverEmailProperty` (`scout.smtp.debugReceiverEmail`), all others must be set in `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`.
+
+`SmtpHelper` has no support for subject prefix and default from email anymore.
+If a subject prefix is required, this must be prepended to the subject before calling `SmtpHelper` by using `MailHelper.addPrefixToSubject`.
+If a default from email is required, this must be ensured before calling `SmtpHelper` by using `MailHelper.ensureFromAddress`.
 
 // ^^^
 // Insert descriptions of Java API changes here
