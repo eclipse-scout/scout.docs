@@ -18,6 +18,7 @@ The following changes were made after the initial 8.0 release (Eclipse Photon re
 ==== Photon.1 (8.0.100) Release Expected on September, 2018
 * <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
 * <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
+* <<Call: Skip Retries by Default (since 8.0.100)>>
 
 {NotReleasedWarning}
 
@@ -640,6 +641,24 @@ var lookupRow = scout.create('LookupRow', {
 });
 ----
 <1> Optional parent key and other properties
+
+=== Call: Skip Retries by Default (since 8.0.100)
+
+`Call` objects no longer perform retries by default. Retries should only be active if the target service can handle repeated calls correctly.
+
+The use retries, specify the desired number of maximal retries or a _retryIntervals_ array in the model when creating the `Call` object:
+
+[source, javascript]
+----
+var call1 = scout.create('AjaxCall', {
+  ajaxOptions: { ... }
+  maxRetries: 5
+});
+var call2 = scout.create('AjaxCall', {
+  ajaxOptions: { ... }
+  retryIntervals: [100, 200, 500, 500, 500];
+});
+----
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
