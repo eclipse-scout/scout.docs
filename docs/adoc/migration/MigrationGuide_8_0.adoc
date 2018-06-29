@@ -660,6 +660,51 @@ var call2 = scout.create('AjaxCall', {
 });
 ----
 
+=== ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.100)
+
+Because errors that happen in asynchronous calls (promise chains) are not delegated to the `window.onerror` handler, Scout's `ErrorHandler` class was extended. It can now be used to handle arbitrary erros in "catch" clauses or "promise fail" functions. As a consequnce, the signature of the _handle()_ has been changed. It used to be hard-wired to the https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror[window.onerror] event. Now it supports a flexible number of arguments.
+
+A global instance of `ErrorHandler` is still being installed as the `window.onerror` handler. Additionally, this instance is now available as `scout.errorHandler`.
+
+Example usages:
+
+[source, javascript]
+----
+// Handling errors in "try" blocks
+try {
+  // ...
+} catch (err) {
+  scout.errorHandler.handle(err);
+}
+
+// Handle errors in jQuery AJAX calls
+$.ajax(ajaxOptions)
+  .done(function(data, textStatus, jqXHR) {
+    /* handle success */
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    // Style 1:
+    scout.errorHandler.handle(jqXHR, textStatus, errorThrown);
+    // Style 2 (recommended!):
+    scout.errorHandler.handle(arguments);
+  })
+
+// Handling errors in promises
+doSomethingAsynchronous()
+  .then(function() { /* handle result */ })
+  .then(function() { /* more handling */ })
+  .fail(function() {
+    scout.errorHandler.handle(arguments);
+  });
+----
+
+_Migration:_
+
+Projects that implemented their own `ErrorHandler` must update their code.
+
+* Instead of overriding _handle()_, override __onWindowError()_.
+* Please note that that the method _createLogMessage()_ no longer exists. If you still need it, copy it from the old implementation or use _analyzeError()_ to calculate a similar result.
+
 // ^^^
 // Insert descriptions of JavaScript API changes here
 
