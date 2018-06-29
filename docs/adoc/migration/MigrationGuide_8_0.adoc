@@ -19,6 +19,7 @@ The following changes were made after the initial 8.0 release (Eclipse Photon re
 * <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
 * <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
 * <<Call: Skip Retries by Default (since 8.0.100)>>
+* <<ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.100)>>
 
 {NotReleasedWarning}
 
