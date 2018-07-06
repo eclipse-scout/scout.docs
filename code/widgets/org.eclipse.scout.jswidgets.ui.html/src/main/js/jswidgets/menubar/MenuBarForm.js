@@ -126,6 +126,7 @@ jswidgets.MenuBarForm.prototype._updateSelectedMenu = function() {
   }
   this.widget('ActionPropertiesBox').setField(menu);
   this.widget('EventsTab').setField(menu);
+  this.widget('WidgetActionsBox').setField(menu);
   formFieldPropertiesBox.setVisible(!!menu.field);
   this.currentMenu = menu;
   this.widget('StackableField').setValue(this.currentMenu.stackable);

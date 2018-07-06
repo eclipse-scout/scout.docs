@@ -30,6 +30,7 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(this.smartField);
   this.widget('FormFieldPropertiesBox').setField(this.smartField);
   this.widget('GridDataBox').setField(this.smartField);
+  this.widget('WidgetActionsBox').setField(this.smartField);
   this.widget('EventsTab').setField(this.smartField);
 };
 

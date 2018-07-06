@@ -44,6 +44,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
   };
   bodyLayoutConfigBox.setField(groupBox);
   this.widget('GridDataBox').setField(groupBox);
+  this.widget('WidgetActionsBox').setField(groupBox);
   this.widget('EventsTab').setField(groupBox);
 
   // Field tab

@@ -15,7 +15,7 @@
           {
             "id": "TabBox",
             "objectType": "TabBox",
-            "selectedTab":"TabItem1",
+            "selectedTab": "TabItem1",
             "tabItems": [
               {
                 "id": "TabItem1",
@@ -40,7 +40,9 @@
                 "text": "Add tab item",
                 "iconId": "${iconId:PLUS}",
                 "stackable": true,
-                "menuTypes": ["TabBox.Header"],
+                "menuTypes": [
+                  "TabBox.Header"
+                ],
                 "keyStroke": "insert"
               },
               {
@@ -49,7 +51,9 @@
                 "text": "Delete tab item",
                 "iconId": "${iconId:MINUS}",
                 "stackable": true,
-                "menuTypes": ["TabBox.Header"],
+                "menuTypes": [
+                  "TabBox.Header"
+                ],
                 "keyStroke": "insert"
               },
               {
@@ -57,7 +61,9 @@
                 "objectType": "Menu",
                 "iconId": "${iconId:GEAR}",
                 "stackable": false,
-                "menuTypes": ["TabBox.Header"],
+                "menuTypes": [
+                  "TabBox.Header"
+                ],
                 "horizontalAlignment": 1
               }
             ]
@@ -68,7 +74,7 @@
         "id": "ConfigurationBox",
         "objectType": "TabBox",
         "cssClass": "jswidgets-configuration",
-        "selectedTab":"Properties.TabBox",
+        "selectedTab": "Properties.TabBox",
         "tabItems": [
           {
             "id": "Properties.TabBox",
@@ -91,8 +97,16 @@
               {
                 "id": "ActionBox.DeleteTabItem",
                 "objectType": "jswidgets.TabBoxDeleteTabItemBox"
+              },
+              {
+                "id": "WidgetActionsBox",
+                "objectType": "jswidgets.WidgetActionsBox"
               }
             ]
+          },
+          {
+            "id": "EventsTab",
+            "objectType": "jswidgets.EventsTab"
           }
         ]
       }

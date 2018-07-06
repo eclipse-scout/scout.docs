@@ -32,5 +32,6 @@ jswidgets.TagFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(tagField);
   this.widget('FormFieldPropertiesBox').setField(tagField);
   this.widget('GridDataBox').setField(tagField);
+  this.widget('WidgetActionsBox').setField(tagField);
   this.widget('EventsTab').setField(tagField);
 };

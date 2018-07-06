@@ -33,6 +33,7 @@ jswidgets.CheckBoxFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(field);
   this.widget('FormFieldPropertiesBox').setField(field);
   this.widget('GridDataBox').setField(field);
+  this.widget('WidgetActionsBox').setField(field);
   this.widget('EventsTab').setField(field);
 };
 

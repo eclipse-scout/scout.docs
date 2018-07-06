@@ -34,6 +34,7 @@ jswidgets.LabelFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(labelField);
   this.widget('FormFieldPropertiesBox').setField(labelField);
   this.widget('GridDataBox').setField(labelField);
+  this.widget('WidgetActionsBox').setField(labelField);
   this.widget('EventsTab').setField(labelField);
 };
 

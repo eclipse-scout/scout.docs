@@ -44,6 +44,7 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   this.widget('FormFieldPropertiesBox').setField(group);
   this.widget('GridDataBox').setField(group);
   this.widget('LayoutConfigBox').setField(group);
+  this.widget('WidgetActionsBox').setField(group);
   this.widget('EventsTab').setField(group);
 
   // Button tab

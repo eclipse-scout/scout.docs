@@ -91,6 +91,7 @@ jswidgets.TableForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
+  this.widget('WidgetActionsBox').setField(this.widget('TableField'));
   this.widget('EventsTab').setField(this.table);
 
   var targetField = this.widget('Column.TargetField');

@@ -93,6 +93,7 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
 
   this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
   this.widget('GridDataBox').setField(this.widget('TableField'));
+  this.widget('WidgetActionsBox').setField(this.table);
   this.widget('EventsTab').setField(this.table);
 
   var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPadding');

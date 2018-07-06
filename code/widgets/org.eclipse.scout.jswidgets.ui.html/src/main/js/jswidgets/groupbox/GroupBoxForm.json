@@ -99,6 +99,10 @@
               {
                 "id": "Actions.DeleteFieldBox",
                 "objectType": "jswidgets.GroupBoxDeleteFieldBox"
+              },
+              {
+                "id": "WidgetActionsBox",
+                "objectType": "jswidgets.WidgetActionsBox"
               }
             ]
           },

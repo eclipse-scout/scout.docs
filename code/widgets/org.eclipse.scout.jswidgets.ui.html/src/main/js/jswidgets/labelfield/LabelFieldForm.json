@@ -67,6 +67,17 @@
             ]
           },
           {
+            "id": "ActionsTab",
+            "objectType": "TabItem",
+            "label": "Actions",
+            "fields": [
+              {
+                "id": "WidgetActionsBox",
+                "objectType": "jswidgets.WidgetActionsBox"
+              }
+            ]
+          },
+          {
             "id": "EventsTab",
             "objectType": "jswidgets.EventsTab"
           }

@@ -33,6 +33,7 @@ jswidgets.FileChooserFieldForm.prototype._init = function(model) {
   this.widget('ValueFieldPropertiesBox').setField(fileChooserField);
   this.widget('FormFieldPropertiesBox').setField(fileChooserField);
   this.widget('GridDataBox').setField(fileChooserField);
+  this.widget('WidgetActionsBox').setField(fileChooserField);
   this.widget('EventsTab').setField(fileChooserField);
 };
 

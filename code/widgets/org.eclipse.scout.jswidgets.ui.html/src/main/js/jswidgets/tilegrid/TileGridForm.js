@@ -89,6 +89,7 @@ jswidgets.TileGridForm.prototype._init = function(model) {
   this.widget('LayoutConfigBox').setField(this.tileGrid);
   this.widget('FormFieldPropertiesBox').setField(tileField);
   this.widget('GridDataBox').setField(tileField);
+  this.widget('WidgetActionsBox').setField(tileField);
   this.widget('EventsTab').setField(this.tileGrid);
   this.updateStatus();
   this._updateHasCustomTiles();

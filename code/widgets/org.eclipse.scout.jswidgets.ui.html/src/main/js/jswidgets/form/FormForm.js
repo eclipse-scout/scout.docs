@@ -60,6 +60,7 @@ jswidgets.FormForm.prototype._init = function(model) {
 
   if (this.openedByButton) {
     this.widget('EventsTab').setField(this);
+    this.widget('WidgetActionsBox').setField(this);
   }
 };
 
@@ -77,6 +78,7 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
     openedByButton: true
   });
   this.widget('EventsTab').setField(form);
+  this.widget('WidgetActionsBox').setField(form);
   form.open();
 };
 
