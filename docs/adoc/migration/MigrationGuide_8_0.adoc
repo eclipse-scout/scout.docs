@@ -59,6 +59,12 @@ Removed deprecated method `Date[] getCoveredDays()` on `org.eclipse.scout.rt.cli
 
 _Migration:_ Use `Range<Date> getCoveredDaysRange()` instead with start and end date.
 
+=== AbstractCacheValueResolver
+
+Abstract implementation was replaced by default method in interface `ICacheValueResolver`.
+
+_Migration:_ Implement interface `ICacheValueResolver` directly instead of extending `AbstractCacheValueResolver`.
+
 === Deprecation of SequenceBox EqualColumnWidths
 
 The methods `SequenceBox#getConfiguredEqualColumnWidths()`, `SequenceBox#isEqualColumnWidths()` and `SequenceBox#setEqualColumnWidths()` have been deprecated. As this property was not used by Scout since several releases it can be deleted.
