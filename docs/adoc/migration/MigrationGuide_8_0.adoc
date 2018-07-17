@@ -20,6 +20,7 @@ The following changes were made after the initial 8.0 release (Eclipse Photon re
 * <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
 * <<Call: Skip Retries by Default (since 8.0.100)>>
 * <<ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.100)>>
+* <<SmartField / DateField: Renamed touch to touchMode (since 8.0.100)>>
 
 {NotReleasedWarning}
 
@@ -711,6 +712,12 @@ Projects that implemented their own `ErrorHandler` must update their code.
 
 * Instead of overriding _handle()_, override __onWindowError()_.
 * Please note that that the method _createLogMessage()_ no longer exists. If you still need it, copy it from the old implementation or use _analyzeError()_ to calculate a similar result.
+
+=== SmartField / DateField: Renamed touch to touchMode (since 8.0.100)
+Smart fields and date fields use the property `touch` to indicate that the field is running in touch mode. Unfortunately this property overrides the function `touch()` of the `FormField`. This means `touch()` cannot be used for these fields, which was not intended.
+
+_Migration:_
+The property `touch` is actually set automatically, so most people don't have to migrate anything. If you set the property manually (e.g. to always run such a field in touch mode), you need to rename it to `touchMode`.
 
 // ^^^
 // Insert descriptions of JavaScript API changes here
