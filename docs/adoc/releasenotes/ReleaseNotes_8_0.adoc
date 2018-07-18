@@ -13,8 +13,10 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E
 
 === Service Releases
 
-NOTE: Please note that with the Eclipse Photon, there will no longer be regular _service releases_, but instead a faster release cycle.
-See https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details.
+Even though with Eclipse Photon there will no longer be regular eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details), Scout 8.0 will continue to be maintained and a new build released from time to time. Beside bugfixes, these releases may even contain some minor features. See the following notes for details.
+
+==== Photon.1 (8.0.100) Release Expected on September, 2018
+* <<Support for Horizontal Alignment (since 8.0.100)>>
 
 === Obtaining the Latest Version
 
@@ -382,6 +384,9 @@ In JavaScript the property can be set using `smartfield.setSearchRequired()`.
 === New Event 'prepareLookupCall' on Smartfields (JS)
 In Scout JS a new event `prepareLookupCall` has been added to the SmartField. It allows to be notified when the field is about to execute a LookupCall.
 Because for each call a fresh LookupCall clone is executed this event allows to propagate properties to the executing LookupCall clone. These properties may then be used when the call is executed (e.g. sent to the backend).
+
+=== Support for Horizontal Alignment (since 8.0.100)
+The horizontal alignment can already be controlled for number and string fields using the `horizontalAlignment` property of the `gridData`. The property already existed for `SmartFields` but it had no effect, until now.
 
 == NumberField: support for minimum and maximum values (JS)
 
