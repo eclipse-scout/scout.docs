@@ -7,7 +7,7 @@
 == About This Release
 
 Eclipse Scout 8.0 is part of the Eclipse _Photon_ release. It was released on June 27, 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]).
-The latest version of this release is: _8.0.0.010_Photon_
+The latest version of this release is: _8.0.0.014
 
 You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/8.0.x[detailed change log] on GitHub.
 
@@ -15,7 +15,7 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E
 
 Even though with Eclipse Photon there will no longer be regular eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details), Scout 8.0 will continue to be maintained and a new build released from time to time. Beside bugfixes, these releases may even contain some minor features. See the following notes for details.
 
-==== Photon.1 (8.0.100) Release Expected on September, 2018
+==== SimRel 2018-09 (8.0.100) Release Expected on September, 2018
 * <<Support for Horizontal Alignment (since 8.0.100)>>
 
 === Obtaining the Latest Version
@@ -23,8 +23,8 @@ Even though with Eclipse Photon there will no longer be regular eclipse _service
 ==== Runtime (Scout RT)
 Scout RT artifacts are distributed via Maven:
 
-* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.010_Photon%22[8.0.0.010_Photon] on _Maven Central_
-* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.010_Photon[8.0.0.010_Photon] on _mvnrepository.com_
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.014%22[8.0.0.014] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.014[8.0.0.014] on _mvnrepository.com_
 
 Usage example in the parent POM of your Scout application:
 
@@ -33,7 +33,7 @@ Usage example in the parent POM of your Scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>8.0.0.010_Photon</version>
+    <version>8.0.0.014</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -41,10 +41,10 @@ Usage example in the parent POM of your Scout application:
 
 ==== Eclipse IDE Tooling (Scout SDK)
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photonr[Eclipse for Scout Developers Photon]
+https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photon[Eclipse for Scout Developers Photon]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/8.0/8.0.0/010_Photon/
+http://download.eclipse.org/scout/releases/8.0/8.0.0/014/
 
 ==== Demo Applications
 The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.010_Photon[features/version/8.0.0.010_Photon] branch of our docs repository on GitHub.
