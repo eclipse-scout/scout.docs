@@ -58,7 +58,6 @@
   __include("jswidgets/lookup/SalutationLookupCall.js");
   __include("jswidgets/lookup/RainbowLookupCall.js");
   __include("jswidgets/lookup/LookupCallLookupCall.js");
-  __include("jswidgets/lookup/LookupCallPropertiesBox.js");
   __include("jswidgets/listbox/ListBoxForm.js");
   __include("jswidgets/menubar/MenuBarForm.js");
   __include("jswidgets/menubar/MenuItemLookupCall.js");

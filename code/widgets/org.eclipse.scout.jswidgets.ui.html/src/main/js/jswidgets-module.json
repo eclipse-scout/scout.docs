@@ -53,7 +53,6 @@
     "jswidgets/tilegrid/TileGridForm.json",
     "jswidgets/tilegrid/TileGridLayoutConfigBox.json",
     "jswidgets/tileaccordion/TileAccordionForm.json",
-    "jswidgets/valuefield/ValueFieldPropertiesBox.json",
-    "jswidgets/lookup/LookupCallpropertiesBox.json"
+    "jswidgets/valuefield/ValueFieldPropertiesBox.json"
   ]
 }
