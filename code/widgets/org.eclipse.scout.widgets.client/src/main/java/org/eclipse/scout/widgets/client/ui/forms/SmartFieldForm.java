@@ -712,6 +712,26 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           m_throttleActive = throttleActive;
         }
 
+        @Order(1000)
+        @ClassId("506fe412-e597-4789-b735-bf4388cbc85d")
+        public class DetailsMenu extends AbstractMenu {
+          @Override
+          protected String getConfiguredText() {
+            return "Details";
+          }
+
+          @Override
+          protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+            return CollectionUtility.hashSet(ValueFieldMenuType.NotNull);
+          }
+
+          @Override
+          protected void execAction() {
+            MessageBoxes.createOk()
+                .withBody(TEXTS.get("DetailsMenuMessage", getValue(), getDisplayText()))
+                .show();
+          }
+        }
       }
 
       @Order(20)
