@@ -55,8 +55,12 @@ jswidgets.FormForm.prototype._init = function(model) {
   if (this.openedByButton) {
     modalField.on('propertyChange', this._onModalChange.bind(this));
   }
+
   var displayHintField = this.widget('DisplayHintField');
   displayHintField.setValue(this.openedByButton ? this.displayHint : scout.Form.DisplayHint.DIALOG);
+
+  var displayParentField = this.widget('DisplayParentField');
+  displayParentField.setValue(this.openedByButton ? jswidgets.DisplayParentLookupCall.resolveDisplayParentType(this.displayParent) : null);
 
   if (this.openedByButton) {
     this.widget('EventsTab').setField(this);
@@ -71,6 +75,7 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
     subTitle: this.widget('SubTitleField').value,
     iconId: this.widget('IconIdField').value,
     displayHint: this.widget('DisplayHintField').value,
+    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
     modal: this.widget('ModalField').value,
     closable: this.widget('ClosableField').value,
     resizable: this.widget('ResizableField').value,
@@ -89,6 +94,7 @@ jswidgets.FormForm.prototype._onOpenLifecycleFormButtonClick = function(model) {
     subTitle: this.widget('SubTitleField').value,
     iconId: this.widget('IconIdField').value,
     displayHint: this.widget('DisplayHintField').value,
+    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
     modal: this.widget('ModalField').value,
     closable: this.widget('ClosableField').value,
     resizable: this.widget('ResizableField').value,

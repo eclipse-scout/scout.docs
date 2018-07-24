@@ -83,6 +83,12 @@
                     "label": "Display Hint"
                   },
                   {
+                    "id": "DisplayParentField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.DisplayParentLookupCall",
+                    "label": "Display Parent"
+                  },
+                  {
                     "id": "StatusField",
                     "objectType": "SmartField",
                     "lookupCall": "jswidgets.StatusSeverityLookupCall",

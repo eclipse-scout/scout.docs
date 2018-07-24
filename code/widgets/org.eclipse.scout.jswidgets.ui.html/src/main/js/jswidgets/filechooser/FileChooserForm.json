@@ -49,6 +49,12 @@
                     "tooltipText": "${textKey:FileChooserAcceptTypesTooltip}"
                   },
                   {
+                    "id": "DisplayParentField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.DisplayParentLookupCall",
+                    "label": "Display Parent"
+                  },
+                  {
                     "id": "MaximumUploadSizeField",
                     "objectType": "NumberField",
                     "label": "Max. Upload Size",

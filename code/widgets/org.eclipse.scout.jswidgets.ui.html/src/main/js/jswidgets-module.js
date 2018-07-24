@@ -22,6 +22,7 @@
   __include("jswidgets/common/WidgetActionsBox.js");
   __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/desktop/Desktop.js");
+  __include("jswidgets/desktop/DisplayParentLookupCall.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
   __include("jswidgets/form/LifecycleForm.js");

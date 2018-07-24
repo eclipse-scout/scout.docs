@@ -31,6 +31,7 @@ jswidgets.FileChooserForm.prototype._onButtonClick = function(event) {
   var fileChooser = scout.create('FileChooser', {
     parent: this.session.desktop,
     acceptTypes: this.widget('AcceptTypesField').value,
+    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
     maximumUploadSize: this.widget('MaximumUploadSizeField').value,
     multiSelect: this.widget('MultiSelectField').value
   });
