@@ -133,6 +133,8 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setMandatory(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'WidthField') {
     this.column.setWidth(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'TextWrapField') {
+    this.column.setTextWrap(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
     var hAlign = event.newValue;
     if (hAlign < 0) {

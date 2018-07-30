@@ -65,6 +65,10 @@ jswidgets.TableForm.prototype._init = function(model) {
   multiSelectField.setValue(this.table.multiSelect);
   multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
 
+  var multilineTextField = this.widget('MultilineTextField');
+  multilineTextField.setValue(this.table.multilineText);
+  multilineTextField.on('propertyChange', this._onMultilineTextPropertyChange.bind(this));
+
   var scrollToSelectionField = this.widget('ScrollToSelectionField');
   scrollToSelectionField.setValue(this.table.scrollToSelection);
   scrollToSelectionField.on('propertyChange', this._onScrollToSelectionPropertyChange.bind(this));
@@ -215,6 +219,12 @@ jswidgets.TableForm.prototype._onMultiCheckPropertyChange = function(event) {
 jswidgets.TableForm.prototype._onMultiSelectPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiSelect(event.newValue);
+  }
+};
+
+jswidgets.TableForm.prototype._onMultilineTextPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.setMultilineText(event.newValue);
   }
 };
 

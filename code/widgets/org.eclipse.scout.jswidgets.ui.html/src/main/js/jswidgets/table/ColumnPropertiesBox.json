@@ -99,8 +99,7 @@
       "id": "TextWrapField",
       "objectType": "CheckBoxField",
       "label": "Text Wrap",
-      "labelVisible": false,
-      "enabled": false
+      "labelVisible": false
     },
     {
       "id": "DisplayableField",

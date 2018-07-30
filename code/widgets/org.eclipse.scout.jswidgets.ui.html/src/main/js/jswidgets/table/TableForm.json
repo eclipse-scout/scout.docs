@@ -208,6 +208,12 @@
                     "labelVisible": false
                   },
                   {
+                    "id": "MultilineTextField",
+                    "objectType": "CheckBoxField",
+                    "label": "Multiline Text",
+                    "labelVisible": false
+                  },
+                  {
                     "id": "ScrollToSelectionField",
                     "objectType": "CheckBoxField",
                     "label": "Scroll To Selection",
