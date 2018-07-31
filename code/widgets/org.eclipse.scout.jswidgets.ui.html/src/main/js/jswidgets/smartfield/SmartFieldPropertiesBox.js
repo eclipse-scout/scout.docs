@@ -26,7 +26,6 @@ jswidgets.SmartFieldPropertiesBox.prototype._init = function(model) {
 
 jswidgets.SmartFieldPropertiesBox.prototype.setField = function(field) {
   this.setProperty('field', field);
-
 };
 
 jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {

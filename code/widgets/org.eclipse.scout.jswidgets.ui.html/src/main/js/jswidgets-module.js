@@ -89,9 +89,12 @@
   __include('jswidgets/tabbox/TabItemLookupCall.js');
   __include('jswidgets/tabbox/TabItemProperties.js');
   __include("jswidgets/table/TableForm.js");
+  __include("jswidgets/table/TablePropertiesBox.js");
   __include("jswidgets/table/ColumnLookupCall.js");
   __include("jswidgets/table/ColumnPropertiesBox.js");
   __include("jswidgets/table/hierarchical/HierarchicalTableForm.js");
+  __include("jswidgets/table/hierarchical/HierarchicalTablePropertiesBox.js");
+  __include("jswidgets/table/hierarchical/HierarchicalStyleLookupCall.js");
   __include("jswidgets/tagfield/TagFieldForm.js");
   __include("jswidgets/tagfield/TagLookupCall.js");
   __include("jswidgets/tilegrid/ColorSchemeLookupCall.js");

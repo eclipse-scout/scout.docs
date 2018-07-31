@@ -11,12 +11,6 @@
       },
       "extension": [
         {
-          "id": "LookupCallField",
-          "objectType": "SmartField",
-          "label": "LookupCall",
-          "lookupCall": "jswidgets.LookupCallLookupCall"
-        },
-        {
           "id": "MaxLengthField",
           "objectType": "NumberField",
           "label": "Max Length"
