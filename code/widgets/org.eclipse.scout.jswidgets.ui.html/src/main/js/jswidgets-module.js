@@ -92,6 +92,7 @@
   __include("jswidgets/table/TablePropertiesBox.js");
   __include("jswidgets/table/ColumnLookupCall.js");
   __include("jswidgets/table/ColumnPropertiesBox.js");
+  __include("jswidgets/table/editable/EditableTableForm.js");
   __include("jswidgets/table/hierarchical/HierarchicalTableForm.js");
   __include("jswidgets/table/hierarchical/HierarchicalTablePropertiesBox.js");
   __include("jswidgets/table/hierarchical/HierarchicalStyleLookupCall.js");

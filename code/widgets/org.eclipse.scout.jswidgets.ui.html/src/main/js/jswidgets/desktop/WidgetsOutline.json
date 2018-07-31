@@ -230,6 +230,14 @@
         {
           "objectType": "PageWithNodes",
           "leaf": true,
+          "text": "Editable Table",
+          "detailForm": {
+            "objectType": "jswidgets.EditableTableForm"
+          }
+        },
+        {
+          "objectType": "PageWithNodes",
+          "leaf": true,
           "text": "Hierarchical Table",
           "detailForm": {
             "objectType": "jswidgets.HierarchicalTableForm"
