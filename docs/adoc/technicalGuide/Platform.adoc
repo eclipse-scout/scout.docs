@@ -806,7 +806,7 @@ By default this property points to the value of property `scout.backendUrl` with
 |Integer
 |Config Property
 |`scout.smtp.readTimeout`
-Socket read timeout value in milliseconds.
+|Socket read timeout value in milliseconds.
 |Integer
 |Config Property
 |`scout.sql.directJdbcConnection`
