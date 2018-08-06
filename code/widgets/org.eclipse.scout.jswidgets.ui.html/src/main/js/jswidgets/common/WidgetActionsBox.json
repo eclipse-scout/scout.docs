@@ -62,6 +62,25 @@
       "displayStyle": 3,
       "processButton": false,
       "tooltipText": "${textKey:RevealTooltip}"
+    },
+    {
+      "id": "ScrollToTopButton",
+      "objectType": "Button",
+      "label": "Scroll To Top",
+      "displayStyle": 3,
+      "processButton": false
+    },
+    {
+      "id": "ScrollToBottomButton",
+      "objectType": "Button",
+      "label": "Scroll To Bottom",
+      "displayStyle": 3,
+      "processButton": false
+    },
+    {
+      "id": "ScrollTopField",
+      "objectType": "NumberField",
+      "label": "Scroll Top"
     }
   ]
 }

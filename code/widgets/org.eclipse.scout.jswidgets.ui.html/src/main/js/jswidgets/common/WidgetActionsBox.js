@@ -41,6 +41,16 @@ jswidgets.WidgetActionsBox.prototype._setField = function(field) {
 
   var revealButton = this.widget('RevealButton');
   revealButton.on('click', this._onRevealButtonClick.bind(this));
+
+  var scrollToTopButton = this.widget('ScrollToTopButton');
+  scrollToTopButton.on('click', this._onScrollToTopButtonClick.bind(this));
+
+  var scrollToBottomButton = this.widget('ScrollToBottomButton');
+  scrollToBottomButton.on('click', this._onScrollToBottomButtonClick.bind(this));
+
+  var scrollTopField = this.widget('ScrollTopField');
+  scrollTopField.setValue(this.field.scrollTop);
+  scrollTopField.on('propertyChange', this._onScrollTopPropertyChange.bind(this));
 };
 
 jswidgets.WidgetActionsBox.prototype._onFocusButtonClick = function(event) {
@@ -67,4 +77,18 @@ jswidgets.WidgetActionsBox.prototype._updateBooleanReturnValue = function(return
 
 jswidgets.WidgetActionsBox.prototype._onRevealButtonClick = function(event) {
   this.field.reveal();
+};
+
+jswidgets.WidgetActionsBox.prototype._onScrollToTopButtonClick = function(event) {
+  this.field.scrollToTop();
+};
+
+jswidgets.WidgetActionsBox.prototype._onScrollToBottomButtonClick = function(event) {
+  this.field.scrollToBottom();
+};
+
+jswidgets.WidgetActionsBox.prototype._onScrollTopPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.field.setScrollTop(event.newValue);
+  }
 };
