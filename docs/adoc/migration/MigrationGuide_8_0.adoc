@@ -507,11 +507,42 @@ The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a ne
 For migration, replace all imports for `org.eclipse.scout.rt.shared.mail` by imports for `org.eclipse.scout.rt.mail` and add a dependency to the new module `org.eclipse.scout.rt.mail`.
 
 A new helper `org.eclipse.scout.rt.mail.smtp.SmtpHelper` replaces the service `org.eclipse.scout.rt.server.services.common.smtp.ISMTPService` and it's abstract implementation `org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService`.
-The only remaining property is `SmtpDebugReceiverEmailProperty` (`scout.smtp.debugReceiverEmail`), all others must be set in `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`.
+
+The only remaining property is `SmtpDebugReceiverEmailProperty` (`scout.smtp.debugReceiverEmail`). +
+The following properties are obsolete and configuration must be set in `org.eclipse.scout.rt.mail.smtp.SmtpServerConfig`:
+
+* `SmtpHostProperty` (`scout.smtp.host`)
+* `SmtpPortProperty` (`scout.smtp.port`)
+* `SmtpUsernameProperty (`scout.smtp.username`)
+* `SmtpPasswordProperty` (`scout.smtp.password`)
+* `SmtpSslProtocolsProperty` (`scout.smtp.sslProtocols`)
+* `SmtpUseAuthenticationProperty` (`scout.smtp.useAuth`)
+* `SmtpUseSmtpsProperty` (`scout.smtp.useSsl`)
 
 `SmtpHelper` has no support for subject prefix and default from email anymore.
-If a subject prefix is required, this must be prepended to the subject before calling `SmtpHelper` by using `MailHelper.addPrefixToSubject`.
-If a default from email is required, this must be ensured before calling `SmtpHelper` by using `MailHelper.ensureFromAddress`.
+
+If a subject prefix is required, i.e. the property `SmtpSubjectPrefixProperty` (`scout.smtp.subjectPrefix`) was in use, the subject prefix must be prepended to the subject before calling `SmtpHelper` by using `MailHelper.addPrefixToSubject`.
+
+If a default from email is required, i.e. the property `SmtpDefaultFromEmailProperty` (`scout.smtp.defaultFromEmail`) was in use, the default from email must be ensured before calling `SmtpHelper` by using `MailHelper.ensureFromAddress`.
+
+The following classes are marked deprecated:
+
+* `org.eclipse.scout.rt.server.services.common.imap.IIMAPService`
+* `org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService`
+* `org.eclipse.scout.rt.server.services.common.imap.IImapAdapter`
+* `org.eclipse.scout.rt.server.services.common.imap.ImapAdapter`
+
+A new helper `org.eclipse.scout.rt.mail.imap.ImapHelper` provides some basic (stateless) functionality to connect to an IMAP server, find and create folders or move message to a new folder.
+Any other functionality must be implemented manually by operating on `javax.mail.Message` or `javax.mail.Folder` objects directly.
+
+The following properties are obsolete and configuration must be set in `org.eclipse.scout.rt.mail.imap.ImapServerConfig`:
+
+* `ImapHostProperty` (`scout.imap.host`)
+* `ImapPortProperty` (`scout.imap.port`)
+* `ImapMailboxProperty` (`scout.imap.mailbox`)
+* `ImapUsernameProperty` (`scout.imap.username`)
+* `ImapPasswordProperty` (`scout.imap.password`)
+* `ImapSslProtocolsProperty` (`scout.imap.sslProtocols`)
 
 // ^^^
 // Insert descriptions of Java API changes here
