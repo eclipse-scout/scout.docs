@@ -23,8 +23,8 @@ Even though with Eclipse Photon there will no longer be regular eclipse _service
 ==== Runtime (Scout RT)
 Scout RT artifacts are distributed via Maven:
 
-* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.016_Simrel_2018_09_M2%22[8.0.0.016_Simrel_2018_09_M2] on _Maven Central_
-* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.016_Simrel_2018_09_M2[8.0.0.016_Simrel_2018_09_M2] on _mvnrepository.com_
+* http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.scout.rt%22%20AND%20v%3A%228.0.0.018_Simrel_2018_09_M3%22[8.0.0.018_Simrel_2018_09_M3] on _Maven Central_
+* https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/8.0.0.018_Simrel_2018_09_M3[8.0.0.018_Simrel_2018_09_M3] on _mvnrepository.com_
 
 Usage example in the parent POM of your Scout application:
 
@@ -33,7 +33,7 @@ Usage example in the parent POM of your Scout application:
 <dependency>
     <groupId>org.eclipse.scout.rt</groupId>
     <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>8.0.0.016_Simrel_2018_09_M2</version>
+    <version>8.0.0.018_Simrel_2018_09_M3</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -44,10 +44,10 @@ You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
 https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photon[Eclipse for Scout Developers Photon]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/8.0/8.0.0/016_Simrel_2018_09_M2/
+http://download.eclipse.org/scout/releases/8.0/8.0.0/018_Simrel_2018_09_M3/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.016_Simrel_2018_09_M2[features/version/8.0.0.016_Simrel_2018_09_M2] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.018_Simrel_2018_09_M3[features/version/8.0.0.018_Simrel_2018_09_M3] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
