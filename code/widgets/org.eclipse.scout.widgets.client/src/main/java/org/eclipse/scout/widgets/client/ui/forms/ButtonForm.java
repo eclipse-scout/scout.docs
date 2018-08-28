@@ -203,7 +203,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected boolean getConfiguredDefaultButton() {
+          protected Boolean getConfiguredDefaultButton() {
             return true;
           }
 
@@ -419,7 +419,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Order(10)
         public class ToggleButtonDefaultField extends AbstractButton {
           @Override
-          protected boolean getConfiguredDefaultButton() {
+          protected Boolean getConfiguredDefaultButton() {
             return true;
           }
 
@@ -612,7 +612,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected boolean getConfiguredDefaultButton() {
+          protected Boolean getConfiguredDefaultButton() {
             return true;
           }
 
