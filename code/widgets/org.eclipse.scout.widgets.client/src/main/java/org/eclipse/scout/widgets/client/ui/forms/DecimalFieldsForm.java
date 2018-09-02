@@ -643,7 +643,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
        */
       private BigDecimal pi() {
         BigDecimal two = new BigDecimal(2);
-        int scale = NumberUtility.nvl(getFractionDigitsField().getValue(), 20);
+        int scale = NumberUtility.nvl(getFractionDigitsField().getValue(), 20) + 2;
         BigDecimal a = BigDecimal.ONE;
         BigDecimal b = BigDecimal.ONE.divide(sqrt(two, scale), scale, BigDecimal.ROUND_HALF_UP);
         BigDecimal t = new BigDecimal(0.25);
@@ -658,7 +658,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           x = x.multiply(two);
         }
 
-        return a.add(b).multiply(a.add(b)).divide(t.multiply(new BigDecimal(4)), scale, BigDecimal.ROUND_HALF_UP);
+        return a.add(b).multiply(a.add(b)).divide(t.multiply(new BigDecimal(4)), scale - 2, BigDecimal.ROUND_HALF_UP);
       }
 
       /**
