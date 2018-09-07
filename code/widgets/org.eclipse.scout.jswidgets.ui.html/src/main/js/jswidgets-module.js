@@ -16,6 +16,7 @@
   __include("jswidgets/button/ButtonForm.js");
   __include("jswidgets/button/ButtonDisplayStyleLookupCall.js");
   __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/common/ConfigurationBox.js");
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
@@ -104,7 +105,9 @@
   __include("jswidgets/tilegrid/TileGridForm.js");
   __include("jswidgets/tilegrid/TileGridLayoutConfigBox.js");
   __include("jswidgets/tilegrid/TileTypeLookupCall.js");
+  __include("jswidgets/tilegrid/VirtualTileGridForm.js");
   __include("jswidgets/tileaccordion/TileAccordionForm.js");
+  __include("jswidgets/tileaccordion/GroupLookupCall.js");
   __include("jswidgets/table/CheckableStyleLookupCall.js");
   __include("jswidgets/table/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");

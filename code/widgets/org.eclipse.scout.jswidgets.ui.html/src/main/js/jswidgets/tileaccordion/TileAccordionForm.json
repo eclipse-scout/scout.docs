@@ -113,8 +113,7 @@
       },
       {
         "id": "ConfigurationBox",
-        "objectType": "TabBox",
-        "cssClass": "jswidgets-configuration",
+        "objectType": "jswidgets.ConfigurationBox",
         "selectedTab": "PropertiesTab",
         "tabItems": [
           {
@@ -164,6 +163,16 @@
                     "labelVisible": false
                   },
                   {
+                    "id": "VirtualField",
+                    "objectType": "CheckBoxField",
+                    "label": "Virtual",
+                    "labelVisible": false,
+                    "tooltipText": "${textKey:TileGridVirtualTooltip}",
+                    "gridDataHints": {
+                      "fillHorizontal": false
+                    }
+                  },
+                  {
                     "id": "GridColumnCountField",
                     "objectType": "NumberField",
                     "label": "Grid Column Count"
@@ -194,6 +203,59 @@
             "objectType": "TabItem",
             "label": "Actions",
             "fields": [
+              {
+                "id": "TileAccordionActionsBox",
+                "objectType": "GroupBox",
+                "fields": [
+                  {
+                    "id": "InsertTileField",
+                    "objectType": "SequenceBox",
+                    "label": "Insert",
+                    "fields": [
+                      {
+                        "id": "InsertTileCountField",
+                        "objectType": "NumberField",
+                        "labelVisible": false,
+                        "statusVisible": false,
+                        "value": 1,
+                        "gridDataHints": {
+                          "widthInPixel": 50,
+                          "weightX": 0
+                        }
+                      },
+                      {
+                        "id": "InsertTileTypeField",
+                        "objectType": "SmartField",
+                        "displayStyle": 'dropdown',
+                        "label": "Tile Type",
+                        "labelVisible": false,
+                        "statusVisible": false,
+                        "lookupCall": "jswidgets.TileTypeLookupCall",
+                        "value": "simple"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "InsertTileIntoField",
+                    "objectType": "SequenceBox",
+                    "label": "into",
+                    "fields": [
+                      {
+                        "id": "InsertTileTargetField",
+                        "objectType": "SmartField",
+                        "displayStyle": 'dropdown',
+                        "labelVisible": false,
+                        "statusVisible": false
+                      },
+                      {
+                        "id": "InsertTileButton",
+                        "objectType": "Button",
+                        "label": "Insert"
+                      }
+                    ]
+                  }
+                ]
+              },
               {
                 "id": "WidgetActionsBox",
                 "objectType": "jswidgets.WidgetActionsBox"

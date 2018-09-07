@@ -2,6 +2,7 @@
   color: white;
   background-color: @palette-blue-3;
   padding: @tile-padding-y + 1px @tile-padding-x + 1px;
+  overflow: hidden;
 
   .tile-grid > & {
     /* TileGrid.less already defines a transition for tiles -> override by defining a more specific rule */
@@ -41,4 +42,8 @@
   /* Simple tiles have a shadow when selected. To make sure the shadow is always completely visible
      a padding is added to the tile grid. */
   padding: 10px;
+
+  &.scrollable {
+    padding: 15px;
+  }
 }

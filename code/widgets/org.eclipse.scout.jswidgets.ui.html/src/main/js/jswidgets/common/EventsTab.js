@@ -70,6 +70,8 @@ jswidgets.EventsTab.prototype._onEvent = function(event) {
     var value = event[key];
     if (value instanceof scout.Widget) {
       value = value.objectType;
+    } else if (Array.isArray(value) && value.length > 10) {
+      value = value.slice(0, 10) + '...' + value.length; // Cut array to not slow down the browser
     }
     entry += key + ': ' + value;
   });

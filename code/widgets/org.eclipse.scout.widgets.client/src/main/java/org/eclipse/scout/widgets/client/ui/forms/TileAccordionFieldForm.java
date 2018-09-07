@@ -49,6 +49,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.GroupIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.VirtualField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
@@ -95,6 +96,10 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
   public StatusField getStatusField() {
     return getFieldByClass(StatusField.class);
+  }
+
+  public VirtualField getVirtualField() {
+    return getFieldByClass(VirtualField.class);
   }
 
   public PropertiesBox getPropertiesBox() {
@@ -625,6 +630,35 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         @Override
         protected void execInitField() {
           setValue(getAccordionField().getAccordion().isScrollable());
+        }
+      }
+
+      @Order(39)
+      @ClassId("7fcfd7fe-de4a-4ea6-bd99-c7aa7ba85712")
+      public class VirtualField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Virtual";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("TileGridVirtualTooltip");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getAccordionField().getAccordion().setVirtual(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getAccordionField().getAccordion().isVirtual());
         }
       }
 
