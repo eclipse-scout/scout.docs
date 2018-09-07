@@ -105,6 +105,30 @@ When the form is shown it will look like this:
 .A form described using JSON
 image::{imgsdir}/scoutjs_myform.png[]
 
+==== Using constants in JSON
+When you define widget properties in a JSON model, you often want to set a property to a value defined by a constant. When you're writing JavaScript code you'd simply write:
+
+[source,javascript]
+----
+field.labelPosition = scout.FormField.LabelPosition.ON_FIELD;
+----
+
+Since you cannot reference Scout's JavaScript enums/constants in JSON, you'd have to write the following to assign the constant value in the JSON model:
+
+[source,json]
+----
+{ "labelPosition": 2 }
+----
+
+Obviously this makes the JSON code harder to read and understand and the developer has to lookup the enum/constant definition first. This is where the _${const:NAME}_ tag comes to help. A widget can define a list of properties that can be used with the const-tag. The widget defines in which enum/constant the name provided by the tag is resolved. Using the const-tag, the JSON example now looks like this:
+
+[source,json]
+----
+{ "labelPosition": "${const:ON_FIELD}" }
+----
+
+When you want to provide const-tag support for a custom widget, you need to call  `scout.Widget#resolveConsts` in the `_init` function of your widget and for each supported property specifiy the property name and the object that contains the enum/constant definition.
+
 === Finding a Widget
 In the example above we have seen how to create a widget, in that specific case we created a form. Typically it is not sufficient to just create a form, you most likely want to interact with the fields, like reading the values the user entered. In order to do that you need access to the fields. The easiest way is to use the IDs specified in the JSON.
 
