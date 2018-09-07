@@ -41,7 +41,7 @@ public class ExampleEntityDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ExampleEntityDo withValues(Collection<Integer> values) {
+  public ExampleEntityDo withValues(Collection<? extends Integer> values) {
     values().clear();
     values().get().addAll(values);
     return this;
