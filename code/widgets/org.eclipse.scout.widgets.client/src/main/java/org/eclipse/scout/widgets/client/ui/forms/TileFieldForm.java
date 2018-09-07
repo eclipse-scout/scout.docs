@@ -49,6 +49,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.Propertie
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.VirtualField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
@@ -106,6 +107,10 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   public FormFieldPropertiesBox getFormFieldPropertiesBox() {
     return getFieldByClass(FormFieldPropertiesBox.class);
+  }
+
+  public VirtualField getVirtualField() {
+    return getFieldByClass(VirtualField.class);
   }
 
   public PropertiesBox getPropertiesBox() {
@@ -816,6 +821,35 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           setValue(getTileField().getTileGrid().isWithPlaceholders());
+        }
+      }
+
+      @Order(2000)
+      @ClassId("59dcd5a4-b308-4910-b558-e6e9cbb6b9d6")
+      public class VirtualField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Virtual";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("TileGridVirtualTooltip");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTileField().getTileGrid().setVirtual(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTileField().getTileGrid().isVirtual());
         }
       }
     }

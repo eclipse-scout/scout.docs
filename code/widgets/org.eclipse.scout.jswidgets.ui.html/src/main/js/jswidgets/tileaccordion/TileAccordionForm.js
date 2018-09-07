@@ -52,6 +52,10 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   withPlaceholdersField.setValue(this.accordion.withPlaceholders);
   withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
 
+  var virtualField = this.widget('VirtualField');
+  virtualField.setValue(this.accordion.virtual);
+  virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
+
   var gridColumnCountField = this.widget('GridColumnCountField');
   gridColumnCountField.setValue(this.accordion.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
@@ -88,6 +92,13 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
 
   var filterField = this.widget('FilterField');
   filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
+
+  var insertTileTargetField = this.widget('InsertTileTargetField');
+  insertTileTargetField.setLookupCall(new jswidgets.GroupLookupCall(this.accordion));
+  insertTileTargetField.setValue(this.accordion.groups[0]);
+
+  var insertTileButton = this.widget('InsertTileButton');
+  insertTileButton.on('click', this._onInsertTileButtonClick.bind(this));
 
   var accordionField = this.widget('AccordionField');
   this.widget('FormFieldPropertiesBox').setField(accordionField);
@@ -139,6 +150,12 @@ jswidgets.TileAccordionForm.prototype._onWithPlacehodersPropertyChange = functio
   }
 };
 
+jswidgets.TileAccordionForm.prototype._onVirtualPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.accordion.setVirtual(event.newValue);
+  }
+};
+
 jswidgets.TileAccordionForm.prototype._onSelectablePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.accordion.setSelectable(event.newValue);
@@ -182,18 +199,24 @@ jswidgets.TileAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = func
 
 jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = function(event) {
   if (this.accordion.groups.length > 0) {
-    this.accordion.groups[0].body.insertTile(this._createTile({
-      label: 'New tile ' + this.insertedTilesCount++
-    }));
+    this.accordion.groups[0].body.insertTile(this._createTile());
   }
 };
 
 jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = function(event) {
   if (this.accordion.groups.length > 1) {
-    this.accordion.groups[1].body.insertTile(this._createTile({
-      label: 'New tile ' + this.insertedTilesCount++
-    }));
+    this.accordion.groups[1].body.insertTile(this._createTile());
   }
+};
+
+jswidgets.TileAccordionForm.prototype._onInsertTileButtonClick = function(event) {
+  var count = this.widget('InsertTileCountField').value;
+  var group = this.widget('InsertTileTargetField').value;
+  var tiles = [];
+  for (var i = 0; i < count; i++) {
+    tiles.push(this._createTile());
+  }
+  group.body.insertTiles(tiles);
 };
 
 jswidgets.TileAccordionForm.prototype._onSelectNextMenuAction = function(event) {
@@ -237,15 +260,29 @@ jswidgets.TileAccordionForm.prototype._insertGroupWithTiles = function() {
 };
 
 jswidgets.TileAccordionForm.prototype._createTile = function(model) {
-  var defaults = {
-    parent: this,
+  var defaults;
+  var tileType = this.widget('InsertTileTypeField').value;
+  if (tileType === 'default') {
+    defaults = {
+      parent: this.accordion,
+      content: 'New <i>Html Tile</i> ' + this.insertedTilesCount++,
+      gridDataHints: {
+        weightX: 0
+      }
+    };
+    model = $.extend({}, defaults, model);
+    return  new scout.create('HtmlTile', model);
+  }
+  defaults = {
+    parent: this.accordion,
+    label: 'New Tile ' + this.insertedTilesCount++,
     gridDataHints: {
       weightX: 0
     },
     colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
   };
   model = $.extend({}, defaults, model);
-  return scout.create('jswidgets.CustomTile', model);
+  return new scout.create('jswidgets.CustomTile', model);
 };
 
 jswidgets.TileAccordionForm.prototype._updateStatus = function() {
