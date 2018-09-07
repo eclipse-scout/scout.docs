@@ -27,7 +27,7 @@ public class ExampleDoEntityListDo extends DoEntity {
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ExampleDoEntityListDo withListAttribute(Collection<AbstractExampleEntityDo> listAttribute) {
+  public ExampleDoEntityListDo withListAttribute(Collection<? extends AbstractExampleEntityDo> listAttribute) {
     listAttribute().clear();
     listAttribute().get().addAll(listAttribute);
     return this;
