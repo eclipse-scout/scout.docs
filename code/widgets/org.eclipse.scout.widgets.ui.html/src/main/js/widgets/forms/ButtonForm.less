@@ -1,15 +1,20 @@
+@highlight-button-background-color: @palette-green-0;
+@highlight-button-active-background-color: @palette-green-1;
+@highlight-button-color: @button-color;
+
 .button-field.highlight {
 
   & > .button {
-    background-color: @palette-green-0;
+    background-color: @highlight-button-background-color;
+    color: @highlight-button-color;
 
     &:not(.disabled):active {
-      background-color: @palette-green-1;
+      background-color: @highlight-button-active-background-color;
     }
 
   }
 
-  & > .link-button > .link {
+  & > .field.link-button > .link {
     color: @palette-green-3;
 
     &:not(.disabled):hover {

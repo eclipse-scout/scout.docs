@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.shared.services.code;
 
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -31,6 +32,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
   }
 
   @Order(10)
+  @ClassId("5c8e9af7-ce1b-4b98-8d1a-2ffc215651a7")
   public static class DefaultCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +41,23 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("Default");
+    }
+
+    @Override
+    public String getId() {
+      return ID;
+    }
+  }
+
+  @Order(20)
+  @ClassId("b0d1d6ee-a9e5-4be8-9b33-df99364214f9")
+  public static class DarkCode extends AbstractCode<String> {
+    private static final long serialVersionUID = 1L;
+    public static final String ID = "dark";
+
+    @Override
+    protected String getConfiguredText() {
+      return "Dark";
     }
 
     @Override

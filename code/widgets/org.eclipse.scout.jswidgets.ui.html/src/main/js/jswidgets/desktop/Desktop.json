@@ -9,6 +9,24 @@
   },
   "menus": [
     {
+      "id": "ThemeMenu",
+      "objectType": "Menu",
+      "iconId": "${iconId:jswidgets.PAINT_BRUSH}",
+      "text": "${textKey:Theme}",
+      "childActions": [
+        {
+          "id": "DefaultThemeMenu",
+          "objectType": "Menu",
+          "text": "Default"
+        },
+        {
+          "id": "DarkThemeMenu",
+          "objectType": "Menu",
+          "text": "Dark"
+        }
+      ]
+    },
+    {
       "id": "AboutMenu",
       "objectType": "Menu",
       "iconId": "${iconId:jswidgets.QUESTION_CIRCLE}",

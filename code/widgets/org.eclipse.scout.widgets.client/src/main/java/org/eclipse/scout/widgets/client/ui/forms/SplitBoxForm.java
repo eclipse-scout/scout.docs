@@ -348,11 +348,6 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected String getConfiguredBackgroundColor() {
-              return "D6D6D6";
-            }
-
-            @Override
             protected int getConfiguredGridH() {
               return 8;
             }

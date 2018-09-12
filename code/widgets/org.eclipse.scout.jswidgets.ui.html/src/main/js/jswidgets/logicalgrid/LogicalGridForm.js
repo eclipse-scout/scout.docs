@@ -72,10 +72,10 @@ jswidgets.LogicalGridForm.prototype._onTargetFieldPropertyChange = function(even
     this.widget('GridDataBox').setEnabled(!!newField);
     this.widget('CalculatedGridDataBox').setField(newField);
     if (oldField) {
-      oldField.removeCssClass('logical-grid-form-highlight-field');
+      oldField.removeCssClass('field-highlighted');
     }
     if (newField) {
-      newField.addCssClass('logical-grid-form-highlight-field');
+      newField.addCssClass('field-highlighted');
     }
   }
 };

@@ -1,0 +1,64 @@
+////
+Howto:
+- Write this document such that it helps people to migrate. Describe what they should do.
+- Chronological order is not necessary.
+- Choose the right top level chapter (java, js, other)
+- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 8.0.xxx" note)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+
+== About This Document
+
+This document describes all relevant changes *from Eclipse Scout 8.0 to Eclipse Scout 9.0*. If existing code has to be migrated, instructions are provided here.
+
+//=== Service Release Migration
+
+//The following changes were made after the initial 9.0 release. Additionally follow these instructions when updating to a _service release_.
+
+//==== 9.0.100 (release date to be defined)
+
+{NotReleasedWarning}
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA CODE ================================================
+  =============================================================================
+////
+
+== API Changes (Java)
+
+
+// ^^^
+// Insert descriptions of Java API changes here
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA SCRIPT CODE =========================================
+  =============================================================================
+////
+
+== API Changes (JavaScript)
+
+=== Rename of LESS Variables
+
+If you created a custom theme, you might have to adjust some LESS variables.
+
+* Renamed `@scrollbar-thumb-color` to `@scrollbar-thumb-main-color`
+* Renamed `@scrollbar-thumb-inverted-color` to `@scrollbar-thumb-inverted-main-color`
+* Renamed `@calendar-mode-active-text-color` to `@calendar-mode-selected-color`
+* Renamed `@planner-mode-active-text-color` to `@planner-mode-selected-color`
+* Renamed `@view-tab-active-color` to `@simple-tab-active-color`
+* Renamed `@view-tab-active-background-color` to `@simple-tab-active-background-color`
+* Renamed `@view-tab-background-color` to `@simple-tab-background-color`
+* Renamed `@table-header-menu-cmd-active-background-color` to `@table-header-menu-cmd-selected-background-color`
+* Renamed `@table-header-menu-cmd-active-border-color` to `@table-header-menu-cmd-selected-border-color`
+* Renamed `@table-header-menu-cmd-active-color` to `@table-header-menu-cmd-selected-color`
+* Renamed `@table-control-active-color` to `@table-control-selected-color`
+* Renamed `@table-control-active-background-color` to `@table-control-selected-background-color`
+////
+  =============================================================================
+  === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================
+  =============================================================================
+////
+
+== Other Changes
