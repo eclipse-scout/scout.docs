@@ -1,6 +1,5 @@
 package org.eclipse.scout.docs.snippets.dataobject;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -42,14 +41,14 @@ public class ExampleEntityDo extends DoEntity {
 
   @Generated("DoConvenienceMethodsGenerator")
   public ExampleEntityDo withValues(Collection<? extends Integer> values) {
-    values().clear();
-    values().get().addAll(values);
+    values().updateAll(values);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
   public ExampleEntityDo withValues(Integer... values) {
-    return withValues(Arrays.asList(values));
+    values().updateAll(values);
+    return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
