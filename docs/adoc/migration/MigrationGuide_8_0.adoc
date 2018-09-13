@@ -13,14 +13,27 @@ This document describes all relevant changes *from Eclipse Scout 7.0 to Eclipse 
 
 === Service Release Migration
 
-The following changes were made after the initial 8.0 release (Eclipse Photon release). Additionally follow these instructions when updating to a _service release_.
+Even though with Eclipse Photon there will no longer be regular Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details), Scout 8.0 will continue to be maintained and a new build released from time to time. Beside bugfixes, these releases may even contain some minor features. See the following notes for details.
 
-==== Photon.1 (8.0.100) Release Expected on September, 2018
-* <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)>>
-* <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)>>
-* <<Call: Skip Retries by Default (since 8.0.100)>>
-* <<ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.100)>>
-* <<SmartField / DateField: Renamed touch to touchMode (since 8.0.100)>>
+The following changes were made after the initial 8.0 release (Eclipse Photon release).
+
+==== Simrel 2018-12 (8.0.x) Release Expected in December 2018
+
+This release is expected to be a patch version release only for Eclipse Scout.
+
+{NotReleasedWarning}
+
+==== Simrel 2018-09 Release Expected in September, 2018
+
+This release is expected to be a patch version release only for Eclipse Scout.
+
+The initial release of this version was: 8.0.0.021 (_Maven_: 8.0.0.021_SimRel_2018_09)
+
+* <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.0.021)>>
+* <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.0.021)>>
+* <<Call: Skip Retries by Default (since 8.0.0.021)>>
+* <<ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.0.021)>>
+* <<SmartField / DateField: Renamed touch to touchMode (since 8.0.0.021)>>
 
 {NotReleasedWarning}
 
@@ -485,7 +498,7 @@ public class MyPageField extends AbstractPageField<MyTablePage> {
 }
 ----
 
-=== SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.100)
+=== SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.0.021)
 The SmartField in Scout <= 6.0 applied the lookup-row properties `foregroundColor`, `backgroundColor`, `font` and `tooltipText` automatically on the field when a lookup-row has been selected. Because that automatic behavior didn't fit every business requirement, we removed it completely. This means you must implement the property-synchronization where required.
 
 Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` property from the lookup-row to the field. In some cases this new feature can be used to migrate from older Scout version.
@@ -493,7 +506,7 @@ Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` prop
 Check the HowTo section _SmartField: how to apply colors and styles from a lookup-row_ in Scout's technical guide to find examples for migration and how to work with the `cssClass` property.
 
 
-=== Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.100)
+=== Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.0.021)
 The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to the package `org.eclipse.scout.rt.mail`:
 
 * BinaryResourceDataSource
@@ -681,7 +694,7 @@ var lookupRow = scout.create('LookupRow', {
 ----
 <1> Optional parent key and other properties
 
-=== Call: Skip Retries by Default (since 8.0.100)
+=== Call: Skip Retries by Default (since 8.0.0.021)
 
 `Call` objects no longer perform retries by default. Retries should only be active if the target service can handle repeated calls correctly.
 
@@ -699,7 +712,7 @@ var call2 = scout.create('AjaxCall', {
 });
 ----
 
-=== ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.100)
+=== ErrorHandler: Extended Support for Arbitrary Errors (since 8.0.0.021)
 
 Because errors that happen in asynchronous calls (promise chains) are not delegated to the `window.onerror` handler, Scout's `ErrorHandler` class was extended. It can now be used to handle arbitrary erros in "catch" clauses or "promise fail" functions. As a consequnce, the signature of the _handle()_ has been changed. It used to be hard-wired to the https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror[window.onerror] event. Now it supports a flexible number of arguments.
 
@@ -744,7 +757,7 @@ Projects that implemented their own `ErrorHandler` must update their code.
 * Instead of overriding _handle()_, override __onWindowError()_.
 * Please note that that the method _createLogMessage()_ no longer exists. If you still need it, copy it from the old implementation or use _analyzeError()_ to calculate a similar result.
 
-=== SmartField / DateField: Renamed touch to touchMode (since 8.0.100)
+=== SmartField / DateField: Renamed touch to touchMode (since 8.0.0.021)
 Smart fields and date fields use the property `touch` to indicate that the field is running in touch mode. Unfortunately this property overrides the function `touch()` of the `FormField`. This means `touch()` cannot be used for these fields, which was not intended.
 
 _Migration:_
