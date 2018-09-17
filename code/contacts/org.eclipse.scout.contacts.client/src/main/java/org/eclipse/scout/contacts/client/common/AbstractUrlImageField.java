@@ -2,6 +2,7 @@ package org.eclipse.scout.contacts.client.common;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.shared.common.AbstractUrlImageFieldData;
@@ -9,11 +10,14 @@ import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.DefaultSubtypeSdkCommand;
 import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.ImageFieldMenuType;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 
@@ -61,6 +65,13 @@ public class AbstractUrlImageField extends AbstractImageField {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("EditURL");
+    }
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(
+          ImageFieldMenuType.Image,
+          ImageFieldMenuType.Null);
     }
 
     @Override

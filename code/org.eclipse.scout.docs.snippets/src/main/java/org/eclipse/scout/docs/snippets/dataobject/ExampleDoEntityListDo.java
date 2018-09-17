@@ -1,6 +1,5 @@
 package org.eclipse.scout.docs.snippets.dataobject;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,14 +27,14 @@ public class ExampleDoEntityListDo extends DoEntity {
 
   @Generated("DoConvenienceMethodsGenerator")
   public ExampleDoEntityListDo withListAttribute(Collection<? extends AbstractExampleEntityDo> listAttribute) {
-    listAttribute().clear();
-    listAttribute().get().addAll(listAttribute);
+    listAttribute().updateAll(listAttribute);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
   public ExampleDoEntityListDo withListAttribute(AbstractExampleEntityDo... listAttribute) {
-    return withListAttribute(Arrays.asList(listAttribute));
+    listAttribute().updateAll(listAttribute);
+    return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
