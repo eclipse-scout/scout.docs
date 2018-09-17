@@ -557,6 +557,10 @@ The following properties are obsolete and configuration must be set in `org.ecli
 * `ImapPasswordProperty` (`scout.imap.password`)
 * `ImapSslProtocolsProperty` (`scout.imap.sslProtocols`)
 
+`MailHelper#createMimeMessage` was improved regarding the structure of the generated mime message. So far a multipart message was always created, even if a simpler structure would have been enough.
+The new implementation only creates the required parts depending on the provided input: plain text, html, attachments and inline attachments (newly supported).
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
