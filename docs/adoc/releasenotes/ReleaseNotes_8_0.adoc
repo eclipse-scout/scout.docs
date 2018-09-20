@@ -56,7 +56,7 @@ You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
 https://www.eclipse.org/downloads/packages/eclipse-ide-scout-developers/photon[Eclipse for Scout Developers Photon]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-http://download.eclipse.org/scout/releases/8.0/8.0.0/018_Simrel_2018_09_M3/
+http://download.eclipse.org/scout/releases/8.0/8.0.0/021_Simrel_2018_09/
 
 ==== Demo Applications
 The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/8.0.0.021_Simrel_2018_09[features/version/8.0.0.021_Simrel_2018_09] branch of our docs repository on GitHub.
