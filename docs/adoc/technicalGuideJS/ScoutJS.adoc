@@ -409,8 +409,8 @@ To display the form, just set one of the above display hints and call `form.open
 
 Beside opening the form as separate dialog or view, you can also embed it into any other widget because it is actually a widget by itself. Just call `form.render()` for that purpose.
 
-=== Form Life Cycle
-When working with forms, you likely want to load, validate and save data as well. The form uses a so called `FormLifecycle` to manage the state of that data. The life cycle is installed by default, so you don't have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.
+=== Form Lifecycle
+When working with forms, you likely want to load, validate and save data as well. The form uses a so called `FormLifecycle` to manage the state of that data. The lifecycle is installed by default, so you don't have to care about it. So whenever the user enters some data and presses the save button, the data is validated and if invalid, a message is shown. If it is valid the data will be saved. The following functions of a form may be used to control that behavior.
 
 * **open**: calls `load` and displays the form once the loading is complete.
 * **load**: calls `_load` and `importData` which you can implement to load the data and then marks the fields as saved to set their initial values. Finally, a `postLoad` event is fired.
@@ -420,6 +420,8 @@ When working with forms, you likely want to load, validate and save data as well
 * **cancel**: closes the form if there are no changes made. Otherwise it shows a message box asking to save the changes.
 * **close**: closes the form and discards any unsaved changes.
 * **abort**: called when the user presses the "x" icon. It will call `close` if there is a close menu or button, otherwise `cancel`.
+
+If you need to perform form validation which is not related to a particular form-field, you can implement the `_validate` function. This function is always called, even when there is no __touched__ field.
 
 If you embed the form into another widget, you probably don't need the functions `open`, `ok`, `close`, `cancel` and `abort`. But `load`, `reset` and `save` may come in handy as well.
 
