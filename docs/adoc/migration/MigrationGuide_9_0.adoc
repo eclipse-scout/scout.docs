@@ -27,6 +27,21 @@ This document describes all relevant changes *from Eclipse Scout 8.0 to Eclipse 
 
 == API Changes (Java)
 
+=== Disabling Close- & Cancel-Buttons
+
+Until Scout 8.0 a Close- or Cancel-Button ignored the enabled-granted property to ensure the form can be closed even if the full form has been disabled using `setEnabledGranted(false)`. This was confusing because the same convenience was not available for all other enabled dimensions.
+
+Since Scout 9.0 Close- and Cancel-Buttons can be disabled like any other form field. But one special handling is still present: The method `isEnabledIncludingParents` ignores the enabled state of the parents and always returns the state of the button only.
+
+So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGranted(false)` or any other dimension, the full form gets disabled except the Close- and Cancel-Buttons. As soon as the button is disabled explicitly (e.g. by calling `setEnabled(false)` on the button itself or by propagating to the button using `setEnabled(false, false, true)` on a parent composite) it will be disabled and the form cannot be closed anymore.
+
+*Migration:*
+
+If you never wanted to have a Close- or Cancel-Button to be disabled (to ensure the form can be closed) there is no migration necessary.
+
+If you have Close- or Cancel-Buttons that need to be disabled, you need to check the code and ensure that the button itself is disabled, not only a parent form field.
+Also the trick not using the granted-dimension on a parent field of the button (to disable the button as well) will no longer work. Now the button must be disabled explicitly on the button or by propagating the change on a parent form field.
+
 
 // ^^^
 // Insert descriptions of Java API changes here

@@ -67,7 +67,7 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-=== Dark Theme
+== Dark Theme
 
 Enter the dark side... and use the new dark theme of Scout!
 
@@ -77,3 +77,11 @@ image::{imgsdir}/contacts_dark_vs_default.png[]
 
 Scout now provides a dark theme in addition to the default theme. You can either activate it by default by setting the property `scout.ui.theme` to `dark` in the `config.properties`, or let the user choose what he likes more.
 
+
+== Disabling Close- & Cancel-Buttons
+
+Until Scout 8.0 a Close- or Cancel-Button ignored the enabled-granted property to ensure the form can be closed even if the full form has been disabled using `setEnabledGranted(false)`. This was confusing because the same convenience was not available for all other enabled dimensions.
+
+Since Scout 9.0 Close- and Cancel-Buttons can be disabled like any other form field. But one special handling is still present: The method `isEnabledIncludingParents` ignores the enabled state of the parents and always returns the state of the button only.
+
+So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGranted(false)` or any other dimension, the full form gets disabled except the Close- and Cancel-Buttons. As soon as the button is disabled explicitly (e.g. by calling `setEnabled(false)` on the button itself or by propagating to the button using `setEnabled(false, false, true)` on a parent composite) it will be disabled and the form cannot be closed anymore.
