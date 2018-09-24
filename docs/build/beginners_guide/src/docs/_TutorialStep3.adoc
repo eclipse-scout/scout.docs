@@ -41,7 +41,7 @@ This section describes the installation of the necessary components and classes 
 To add the support for the Scout JDBC components and the Derby database we first need to declare the corresponding dependencies in the pom.xml file of the Maven server module.
 This can be done using the following steps.
 
-* Expanding the Maven module `org.eclipse.scout.contacts.server` in the Eclipse Package Explorer
+* Expanding the Maven module `contacts.server` in the Eclipse Package Explorer
 * Open the `pom.xml` file (use a double click on the file in the package explorer) and switch to the "pom.xml" tab in the Maven POM Editor.
 * Add the database related dependencies according to <<lst-contacts_db_pom>>
 
@@ -64,7 +64,7 @@ image::{imgsdir}/contacts_tutorial_update_server_modules.png[]
 
 The next step is to create the `org.eclipse.scout.contacts.server.sql` package.
 
-* Expand folder `src/main/java` of Maven module `org.eclipse.scout.contacts.server`
+* Expand folder `src/main/java` of Maven module `contacts.server`
 * Select the existing package `org.eclipse.scout.contacts.server` and hit kbd:[Ctrl+N]
 * This opens the dialog to select a wizard. Enter "package" into the search field
 * Select the [wizard]_New Java Package_ wizard with a double click on the Java [element]_Package_ proposal
@@ -97,7 +97,7 @@ For missing property values the default values defined in the config property cl
 
 In the case of the "Contacts" application the config property files are located in the subfolder `src/main/resources` of the Maven modules that specify the frontend and the backend application.
 
-* Expand Maven module `org.eclipse.scout.contacts.server.app.dev`
+* Expand Maven module `contacts.server.app.dev`
 * Expand subfolder `src/main/resources`
 * Open file `config.properties` in the text editor
 * Append all properties defined in <<lst-contacts_database_props>> to the file
@@ -331,15 +331,15 @@ The implementation of method `getPersonTableData` is provided in <<lst-contacts_
 ----
 public class PersonService implements IPersonService {
 
-	@Override
-	public PersonTablePageData getPersonTableData(SearchFilter filter) {
-		PersonTablePageData pageData = new PersonTablePageData();
+  @Override
+  public PersonTablePageData getPersonTableData(SearchFilter filter) {
+    PersonTablePageData pageData = new PersonTablePageData();
 
-		String sql = SQLs.PERSON_PAGE_SELECT + SQLs.PERSON_PAGE_DATA_SELECT_INTO;
-	    SQL.selectInto(sql, new NVPair("page", pageData));
+    String sql = SQLs.PERSON_PAGE_SELECT + SQLs.PERSON_PAGE_DATA_SELECT_INTO;
+      SQL.selectInto(sql, new NVPair("page", pageData));
 
-	    return pageData;
-	}
+      return pageData;
+  }
 }
 ----
 

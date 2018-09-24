@@ -37,7 +37,7 @@ In addition to the "Persons" page we will also add a Scout form to enter/edit pe
 For the "Contacts" application we use this fact to justify the addition of a specific Java package that will hold all classes related to persons.
 This person package can be created with the following steps.
 
-* Open the "Contacts" Maven module `org.eclipse.scout.contacts.client` in the Eclipse Package Explorer
+* Open the "Contacts" Maven module `contacts.client` in the Eclipse Package Explorer
 * Select the Java package `org.eclipse.scout.contacts.client` in folder `src/main/java`
 * Press kbd:[Ctrl]+kbd:[N], enter "package" into the search field
 * Select the [wizard]_Package_ wizard in the proposal box and click [button]_Next_
