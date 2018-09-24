@@ -6,8 +6,12 @@
 
 == About This Release
 
-Eclipse Scout 8.0 is part of the Eclipse _Photon_ release. It was released on June 27, 2018 (https://wiki.eclipse.org/Simultaneous_Release[release schedule]).
-The latest version of this release is: _8.0.0.014
+The Eclipse Scout 8.0 version is part of two simultaneous releases (https://wiki.eclipse.org/Simultaneous_Release[release schedule]):
+
+* The initial version of Eclipse Scout 8.0 was part of the Eclipse _Photon_ release (June 27, 2018).
+* An updated version was released as part of the _2018-09_ release (September 19, 2018).
+
+The latest version of this release is: _8.0.0.021_
 
 You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/8.0.x[detailed change log] on GitHub.
 
@@ -19,7 +23,7 @@ Even though with Eclipse Photon there will no longer be regular Eclipse _service
 
 (Section intentionally left blank for future release)
 
-==== Simrel 2018-09 Release Expected in September, 2018
+==== Simrel 2018-09, released on September 19, 2018
 The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_SimRel_2018_09)
 
 * <<Support for Horizontal Alignment (since 8.0.0.021)>>
