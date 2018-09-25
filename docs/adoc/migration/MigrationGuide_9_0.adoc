@@ -47,6 +47,7 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@scrollbar-thumb-inverted-color` to `@scrollbar-thumb-inverted-main-color`
 * Renamed `@calendar-mode-active-text-color` to `@calendar-mode-selected-color`
 * Renamed `@planner-mode-active-text-color` to `@planner-mode-selected-color`
+* Renamed `@popup-border-color` to `@control-popup-border-color`
 * Renamed `@view-tab-active-color` to `@simple-tab-active-color`
 * Renamed `@view-tab-active-background-color` to `@simple-tab-active-background-color`
 * Renamed `@view-tab-background-color` to `@simple-tab-background-color`
