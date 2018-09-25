@@ -23,6 +23,8 @@ Even though with Eclipse Photon there will no longer be regular Eclipse _service
 
 (Section intentionally left blank for future release)
 
+* <<Virtual Scrolling (since Simrel 2018-12)>>
+
 ==== Simrel 2018-09, released on September 19, 2018
 The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_SimRel_2018_09)
 
@@ -146,6 +148,15 @@ And here for the JS only version:  https://scout.bsi-software.com/jswidgets/#til
 [[img-tiles]]
 .TileGrid
 image::{imgsdir}/tiles.png[]
+
+==== Virtual Scrolling (since Simrel 2018-12)
+Similar to the virtual scrolling of the table and the tree, the tile grid now supports virtual scrolling as well. It can be enabled by setting the property `virtual` to true. Unlike for tree and table, it is not enabled by default.
+
+Virtual Scrolling means only the tiles in the view port and some more will be rendered. The others will be rendered as soon as they will be moved into the view port, either by scrolling or by any other action like sorting, filtering etc.
+
+This can lead to a big performance boost when having many tiles, especially on Internet Explorer, but other browsers benefit as well. To make Virtual Scrolling work, the real width and height needs to be known so that scroll bar position can be calculated correctly. This means Virtual Scrolling does only work if all tiles have the same size, so the following grid properties cannot be used: useUiWidth, useUiHeight, widthInPixel, heightInPixel, w, h, x, y.
+
+If these preconditions are given, you can use the virtual mode and your grid will be able to handle a lot of tiles.
 
 === Accordion
 
