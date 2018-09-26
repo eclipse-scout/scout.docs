@@ -52,11 +52,13 @@ After a restart of Tomcat you should then be able to access Tomcat on https://lo
 
 [source,xml]
 ----
-<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
-               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS"
-               keystoreFile="file:///c:/keystore/tomcat_localhost.jks" keystorePass="changeit"
-/>
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true">
+        <SSLHostConfig>
+            <Certificate certificateKeystoreFile="/keystore/tomcat_localhost.jks"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>
 ----
 
 The third step is to export the newly created self-signed certificate from the `tomcat_localhost.jks` keystore file into the `tomcat_localhost.der` certificate file.
