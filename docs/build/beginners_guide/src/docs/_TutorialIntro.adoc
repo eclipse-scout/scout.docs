@@ -37,7 +37,7 @@ The main areas of this layout are briefly introduced below.
 
 Outline Button:: In <<img-app_contacts_personpage>> the top left area shows a folder icon that represents the "Contacts" outline.
 The small down arrow at the folder icon indicates that additional outlines are available when clicking on this view button.
-On the right of to button with the folder icon is second outline button that activates a search outline (not implemented yet).
+On the right of the button with the folder icon is a second outline button that activates a search outline (not implemented yet).
 Navigation Tree:: The navigation tree on the left side of the layout shows the pages that are available for the selected outline.
 For the "Contacts" outline, the navigation tree provides access to the pages "Persons", "Organizations" and "Events".
 Selecting a page then shows associated information on the right hand side in the bench area.

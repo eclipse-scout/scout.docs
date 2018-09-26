@@ -33,7 +33,7 @@ The initial code for the "`Contacts`" application is generated using the [wizard
 For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
 
 * [field]_Group Id_: `org.eclipse.scout`
-* [field]_Artefact Id_: `contacts`
+* [field]_Artifact Id_: `contacts`
 * [field]_Display Name_: "Contacts Application"
 
 
