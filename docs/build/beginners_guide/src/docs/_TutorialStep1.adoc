@@ -23,7 +23,6 @@ The creation up of the initial project setup described in this section consists 
 * Removing unnecessery Components (<<sec-contacts_remove_stuff>>)
 * Changes to Class WorkOutline (<<sec-contacts_change_workoutline>>)
 * Changes to Class Desktop (<<sec-contacts_change_desktop>>)
-* Switching to the Default Theme (<<sec-contacts_default_theme>>)
 
 This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in <<sec-contacts_summary>>.
 
@@ -33,8 +32,8 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard.
 For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
 
-* [field]_Group Id_: `org.eclipse.scout.contacts`
-* [field]_Artefact Id_: `org.eclipse.scout.contacts`
+* [field]_Group Id_: `org.eclipse.scout`
+* [field]_Artefact Id_: `contacts`
 * [field]_Display Name_: "Contacts Application"
 
 
@@ -57,20 +56,20 @@ To delete a packages first select an individual package or packages in the Eclip
 
 The packages to delete is provided per Maven module in the list below.
 
-Client Module `org.eclipse.scout.contacts.client`::
+Client Module `contacts.client`::
 * In folder `src/main/java`
 ** Delete package `org.eclipse.scout.contacts.client.helloworld`
 ** Delete package `org.eclipse.scout.contacts.client.settings`
 * In folder `src/test/java`
 ** Delete package `org.eclipse.scout.contacts.client.helloworld`
 
-Server Module `org.eclipse.scout.contacts.server`::
+Server Module `contacts.server`::
 * In folder `src/main/java`
 ** Delete package `org.eclipse.scout.contacts.server.helloworld`
 * In folder `src/test/java`
 ** Delete package `org.eclipse.scout.contacts.server.helloworld`
 
-Shared Module `org.eclipse.scout.contacts.shared`::
+Shared Module `contacts.shared`::
 * In folder `src/main/java`
 ** Delete package `org.eclipse.scout.contacts.shared.helloworld`
 * In folder `src/generated/java`
@@ -88,7 +87,7 @@ For this, we perform the following modifications to class `WorkOutline`.
 * Rename the class package to `org.eclipse.scout.contacts.client.contact`
 * Rename the class to `ContactOutline`
 * Change the outline title to "Contacts"
-* Change the outline icon to `Icons.Category`
+* Change the outline icon to `Icons.CategoryBold`
 
 To quickly find class `WorkOutline` we first open the [wizard]_Open Type_ dialog from the Eclipse IDE by hitting kbd:[Ctrl+Shift+T] and enter "workoutline" into the search field as shown in <<img-eclipse_open_type>>.
 In the result list, we select the desired class and click the btn:[OK] button to open the file `WorkOutline.java` in the Java editor of the Eclipse IDE.
@@ -124,7 +123,7 @@ To enter a new translated text we double click on the proposal [element]_New tex
 .Use the Scout new entry wizard to add translated texts to the application.
 image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 
-As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.Category` and end with the code shown in <<lst-contacts_outline>>.
+As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.CategoryBold` and end with the code shown in <<lst-contacts_outline>>.
 
 [[lst-contacts_outline]]
 [source,java]
@@ -156,13 +155,14 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 Then, perform the following changes in class `Desktop`
 
-* Delete inner class `SettingOutlineViewButton`
+* Delete the inner class `SettingOutlineViewButton`
+* Delete the inner class `UserProfileMenu`.
 * Rename inner class WorkOutlineViewButton to `ContactOutlineViewButton`
-* Rename FileMenu to `QuickAccessMenu`, let `getConfiguredText` return "QuickAccess" and delete the remaining content.
-* Rename BookmarkMenu to `OptionsMenu`. Add methods `getConfiguredText` and  `getConfiguredIconId` according to <<lst-contacts_desktop>>.
-* Change HelpMenu to `UserMenu`. Remove method `getConfiguredText` and add method `getConfiguredIconId` that returns `AbstractIcons.Person`.
+* Create a new inner class called `QuickAccessMenu` after the `SearchOutlineViewButton`. For this navigate the cursor after the `SearchOutlineViewButton` class, press kbd:[Ctrl+Space] and select the `Menu` entry. Adapt the created code until it matches the template as shown in <<lst-contacts_desktop>>.
+* Create another menu called `OptionsMenu` right after the newly created `QuickAccessMenu` according to <<lst-contacts_desktop>> (for now you can skip the method `getConfiguredForm` and keep the super class as it is).
+* Create a last menu called `UserMenu` after the `OptionsMenu` according to <<lst-contacts_desktop>>.
 
-At the end of these changes the inner class structure of class Desktop will look like shown in <<lst-contacts_desktop>>.
+At the end of these changes the inner class structure of class Desktop will look similar to the sample shown in <<lst-contacts_desktop>>.
 
 [[lst-contacts_desktop]]
 [source,java]
@@ -173,35 +173,6 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> In your implementation `OptionsMenu` should extend `AbstractMenu`
 <2> In your implementation `UserMenu` should extend `AbstractMenu`
-
-[[sec-contacts_default_theme]]
-==== Switching to the Default Theme
-
-We will use the Scout default theme for the "Contacts" application.
-The initial code base created above comes with a very simple project specific "application" theming.
-
-To disable the theming property follow the steps described below.
-
-. Expand the module `org.eclipse.scout.contacts.ui.html.app.dev` in the Eclipse package explorer
-. Expand folder `src/main/resources`
-. Open file `config.properties` in a text editor
-. Comment out property `scout.ui.theme` as shown in <<lst-contacts_theming_property>>
-. Save the modified properties file
-
-[[lst-contacts_theming_property]]
-[source]
-.Commenting out the application specific theming re-activates the Scout default theme.
-----
-### Application
-scout.application.name=Contacts
-scout.application.version=1.0.0-SNAPSHOT
-
-### UI
-# scout.ui.theme=application // <1>
-----
-
-<1> Comment out this line. Alternatively you may replace "application" with "default"
-
 
 [[sec-contacts_summary]]
 ==== What have we achieved?
