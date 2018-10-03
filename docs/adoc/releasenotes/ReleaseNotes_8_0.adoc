@@ -489,3 +489,8 @@ The new Scout module `org.eclipse.scout.rt.rest` adds basic support for REST res
 Available REST resources are automatically found by Jandex class inventory and registered at runtime.
 
 For examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-rest[Technical Guide: REST]
+
+== Deprecated methods on DefaultAuthToken and introduced DefaultAuthTokenSigner and DefaultAuthTokenVerifier (since 8.0.0.021)
+In order to be able to reuse authentication token code `DefaultAuthToken` was refactored.
+Signing and verifying of tokens is now separated from token and its (de-)serialization.
+The new classes DefaultAuthTokenSigner and DefaultAuthTokenVerifier do now provide this functionality.
