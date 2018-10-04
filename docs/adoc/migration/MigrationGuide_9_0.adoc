@@ -71,6 +71,7 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@table-header-menu-cmd-active-color` to `@table-header-menu-cmd-selected-color`
 * Renamed `@table-control-active-color` to `@table-control-selected-color`
 * Renamed `@table-control-active-background-color` to `@table-control-selected-background-color`
+* Renamed `@scrollbar-side-margin` to `@scrollbar-side-padding`
 ////
   =============================================================================
   === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================

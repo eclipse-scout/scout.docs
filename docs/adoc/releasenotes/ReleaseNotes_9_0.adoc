@@ -85,3 +85,10 @@ Until Scout 8.0 a Close- or Cancel-Button ignored the enabled-granted property t
 Since Scout 9.0 Close- and Cancel-Buttons can be disabled like any other form field. But one special handling is still present: The method `isEnabledIncludingParents` ignores the enabled state of the parents and always returns the state of the button only.
 
 So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGranted(false)` or any other dimension, the full form gets disabled except the Close- and Cancel-Buttons. As soon as the button is disabled explicitly (e.g. by calling `setEnabled(false)` on the button itself or by propagating to the button using `setEnabled(false, false, true)` on a parent composite) it will be disabled and the form cannot be closed anymore.
+
+
+== Improved Scrollbar Usability
+
+The layout structure of the scrollbar comes now with an additional div, and the positioning of the scollbar uses now padding instead of margin.
+
+With this change, the usability of the scout scrollbar has improved. The thumb is now easier to catch, especially when positioned at the very edge of the screen.
