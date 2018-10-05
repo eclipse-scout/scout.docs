@@ -7,7 +7,7 @@
       "target": {
         "id": "jswidgets.LogicalGridLayoutConfigBox",
         "property": "fields",
-        "after": "RowHeightField"
+        "after": "MinWidthField"
       },
       "extension": [
         {
