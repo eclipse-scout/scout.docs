@@ -7,7 +7,7 @@
       "target": {
         "id": "jswidgets.SmartFieldPropertiesBox",
         "property": "fields",
-        "after": "ActiveFilterEnabled"
+        "before": "ActiveFilterEnabledField"
       },
       "extension": [
         {
