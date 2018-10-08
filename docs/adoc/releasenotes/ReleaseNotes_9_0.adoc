@@ -92,3 +92,13 @@ So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGra
 The layout structure of the scrollbar comes now with an additional div, and the positioning of the scollbar uses now padding instead of margin.
 
 With this change, the usability of the scout scrollbar has improved. The thumb is now easier to catch, especially when positioned at the very edge of the screen.
+
+== Design change for WizardProgressField
+
+The wizard progress has a new design.
+
+[[img-wizard-progress]]
+.Wizard Progress
+image::{imgsdir}/wizard_progress.png[]
+
+Wizard steps can now be marked as finished, in this case they will be displayed with a check mark icon in the wizard progress.
