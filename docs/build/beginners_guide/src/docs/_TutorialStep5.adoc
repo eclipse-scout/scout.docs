@@ -186,7 +186,7 @@ This process remains the same for refactoring container fields into template fie
 ==== Adding a simple URL Input Form to the Picture Field
 
 Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture.
-For this we add simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <<img-sdk_new_form_pictureurl>>.
+For this we add a simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <<img-sdk_new_form_pictureurl>>.
 
 * Verify that you use the correct source folder and package name.
 * In the [element]_Name_ field enter "PictureUrl".
