@@ -22,6 +22,9 @@ jswidgets.GroupBoxForm.prototype._jsonModel = function() {
 jswidgets.GroupBoxForm.prototype._init = function(model) {
   jswidgets.GroupBoxForm.parent.prototype._init.call(this, model);
 
+  var menu1 = this.widget('Menu1');
+  menu1.on('action', this._onMenuAction.bind(this));
+
   var configurationBox = this.widget('ConfigurationBox');
   configurationBox.on('propertyChange', this._onConfigurationBoxPropertyChange.bind(this));
 
@@ -64,6 +67,12 @@ jswidgets.GroupBoxForm.prototype._initFields = function(fields) {
     field.off('render', this._fieldRenderHandler);
     field.on('render', this._fieldRenderHandler);
   }, this);
+};
+
+jswidgets.GroupBoxForm.prototype._onMenuAction = function(event) {
+  scout.MessageBoxes.createOk(this)
+    .withBody("Menu with label '" + event.source.text + "' has been activated.")
+    .buildAndOpen();
 };
 
 jswidgets.GroupBoxForm.prototype._onTargetPropertyChange = function(event) {

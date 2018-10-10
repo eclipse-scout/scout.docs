@@ -7,6 +7,45 @@
   "expandable": true,
   "fields": [
     {
+      "id": "SubLabelField",
+      "objectType": "StringField",
+      "label": "Sub Label"
+    },
+    {
+      "id": "GridColumnCountField",
+      "objectType": "NumberField",
+      "label": "Grid Column Count"
+    },
+    {
+      "id": "LogicalGridField",
+      "objectType": "SmartField",
+      "label": "Logical Grid",
+      "lookupCall": "jswidgets.LogicalGridLookupCall",
+      "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
+    },
+    {
+      "id": "NotificationField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.StatusSeverityLookupCall",
+      "label": "Notification"
+    },
+    {
+      "id": "MenuBarPositionField",
+      "objectType": "SmartField",
+      "label": "Menubar Position",
+      "lookupCall": "jswidgets.MenuBarPositionLookupCall"
+    },
+    {
+      "id": "ScrollableField",
+      "objectType": "CheckBoxField",
+      "label": "Scrollable",
+      "labelVisible": false,
+      "tooltipText": "${textKey:GroupBoxScrollableTooltip}",
+      "gridDataHints": {
+        "fillHorizontal": false
+      }
+    },
+    {
       "id": "BorderVisibleField",
       "objectType": "CheckBoxField",
       "label": "Border Visible",
@@ -30,39 +69,6 @@
       "objectType": "CheckBoxField",
       "label": "Expanded",
       "labelVisible": false
-    },
-    {
-      "id": "ScrollableField",
-      "objectType": "CheckBoxField",
-      "label": "Scrollable",
-      "labelVisible": false,
-      "tooltipText": "${textKey:GroupBoxScrollableTooltip}",
-      "gridDataHints": {
-        "fillHorizontal": false
-      }
-    },
-    {
-      "id": "SubLabelField",
-      "objectType": "StringField",
-      "label": "Sub Label"
-    },
-    {
-      "id": "GridColumnCountField",
-      "objectType": "NumberField",
-      "label": "Grid Column Count"
-    },
-    {
-      "id": "LogicalGridField",
-      "objectType": "SmartField",
-      "label": "Logical Grid",
-      "lookupCall": "jswidgets.LogicalGridLookupCall",
-      "tooltipText": "${textKey:LogicalGridWithRefTooltip}"
-    },
-    {
-      "id": "NotificationField",
-      "objectType": "SmartField",
-      "lookupCall": "jswidgets.StatusSeverityLookupCall",
-      "label": "Notification"
     }
   ]
 }
