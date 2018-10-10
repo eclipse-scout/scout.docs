@@ -31,6 +31,13 @@
             "objectType": "StringField",
             "label": "String Field 4"
           }
+        ],
+        "menus": [
+          {
+            "id": "Menu1",
+            "objectType": "scout.Menu",
+            "text": "Menu"
+          }
         ]
       },
       {

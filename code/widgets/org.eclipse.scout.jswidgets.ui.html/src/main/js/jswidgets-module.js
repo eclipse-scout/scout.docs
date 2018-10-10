@@ -51,6 +51,7 @@
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
   __include("jswidgets/groupbox/GroupBoxPropertiesBox.js");
+  __include("jswidgets/groupbox/MenuBarPositionLookupCall.js");
   __include("jswidgets/labelfield/LabelFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
   __include("jswidgets/logicalgrid/LogicalGridForm.js");
