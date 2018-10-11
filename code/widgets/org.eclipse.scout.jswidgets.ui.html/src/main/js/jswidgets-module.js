@@ -47,10 +47,14 @@
   __include("jswidgets/filechooserbutton/FileChooserButtonForm.js");
   __include("jswidgets/filechooserfield/FileChooserFieldForm.js");
   __include("jswidgets/groupbox/GroupBoxAddFieldBox.js");
+  __include("jswidgets/groupbox/GroupBoxAddMenuBarItemBox.js");
   __include("jswidgets/groupbox/GroupBoxDeleteFieldBox.js");
+  __include("jswidgets/groupbox/GroupBoxDeleteMenuBarItemBox.js");
   __include("jswidgets/groupbox/BorderDecorationLookupCall.js");
   __include("jswidgets/groupbox/GroupBoxForm.js");
   __include("jswidgets/groupbox/GroupBoxPropertiesBox.js");
+  __include("jswidgets/groupbox/MenuBarEllipsisPositionLookupCall.js");
+  __include("jswidgets/groupbox/MenuBarItemLookupCall.js");
   __include("jswidgets/groupbox/MenuBarPositionLookupCall.js");
   __include("jswidgets/labelfield/LabelFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
@@ -63,6 +67,7 @@
   __include("jswidgets/lookup/LookupCallLookupCall.js");
   __include("jswidgets/listbox/ListBoxForm.js");
   __include("jswidgets/menubar/MenuBarForm.js");
+  __include("jswidgets/menubar/MenuBarItemTypeLookupCall.js");
   __include("jswidgets/menubar/MenuItemLookupCall.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldForm.js");

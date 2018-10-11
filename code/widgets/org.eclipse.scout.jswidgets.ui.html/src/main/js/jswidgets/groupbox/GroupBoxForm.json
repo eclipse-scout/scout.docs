@@ -100,6 +100,14 @@
             "label": "Actions",
             "fields": [
               {
+                "id": "Actions.AddMenuBarItemBox",
+                "objectType": "jswidgets.GroupBoxAddMenuBarItemBox"
+              },
+              {
+                "id": "Actions.DeleteMenuBarItemBox",
+                "objectType": "jswidgets.GroupBoxDeleteMenuBarItemBox"
+              },
+              {
                 "id": "Actions.AddFieldBox",
                 "objectType": "jswidgets.GroupBoxAddFieldBox"
               },
