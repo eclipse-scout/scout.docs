@@ -98,11 +98,11 @@ jswidgets.TableForm.prototype._onMoveToTopMenuAction = function() {
 };
 
 jswidgets.TableForm.prototype._onMoveUpMenuAction = function() {
-  this.table.moveFilteredRowUp(this.table.selectedRows[0]);
+  this.table.moveVisibleRowUp(this.table.selectedRows[0]);
 };
 
 jswidgets.TableForm.prototype._onMoveDownMenuAction = function() {
-  this.table.moveFilteredRowDown(this.table.selectedRows[0]);
+  this.table.moveVisibleRowDown(this.table.selectedRows[0]);
 };
 
 jswidgets.TableForm.prototype._onMoveToBottomMenuAction = function() {
