@@ -42,6 +42,18 @@ If you never wanted to have a Close- or Cancel-Button to be disabled (to ensure 
 If you have Close- or Cancel-Buttons that need to be disabled, you need to check the code and ensure that the button itself is disabled, not only a parent form field.
 Also the trick not using the granted-dimension on a parent field of the button (to disable the button as well) will no longer work. Now the button must be disabled explicitly on the button or by propagating the change on a parent form field.
 
+=== Add custom header for REST services
+
+By default REST services exposed by Scout using the `org.eclipse.scout.rt.rest.RestApplication` are protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] now.
+This requires a custom header to be present on all non GET or HEAD requests. Please do also ensure that GET or HEAD requests do follow the HTTP specification and therefore do not perform any data or state changing operations!
+
+As long as the ScoutJS App or the `org.eclipse.scout.rt.rest.client.AbstractRestClientHelper` is used to call REST services this header is automatically added.
+For other 3rd party clients the custom header `X-Requested-With` must be added.
+There is no value for the header required. Typically `XMLHttpRequest` is passed but the value can be chosen freely.
+
+If there are non CSRF prone clients (like backend systems) such clients may also be excluded from the CSRF header check by replacing the Scout Bean `AntiCsrfHelper` and ignoring such requests.
+
+See the Scout Bean `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` for more details.
 
 // ^^^
 // Insert descriptions of Java API changes here
