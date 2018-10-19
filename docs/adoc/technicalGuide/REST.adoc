@@ -11,6 +11,53 @@ ifndef::mdledir[:mdledir: .]
 [[cha-rest]]
 == REST ==
 
+=== REST Resource Conventions ===
+
+
+[cols="1,1,5", options="header"]
+.HTTP Methods for RESTful Services
+|===
+|HTTP Method
+|CRUD
+|Description
+
+|POST
+|Create
+|Is most-often used to create new resources.
+
+POST is not idempotent. Making two identical POST requests will most-likely result in two resources containing the same information or the action executed twice.
+
+|GET
+|Read
+|Only used to read or retrieve a representation of a resource.
+
+According to the http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.1.1[HTTP specification] GET (and HEAD) requests are used to read data  and must not change anything! If a REST API wants to violate the specification, such requests must be protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] which is not enabled for GET and HEAD requests by default. See the Scout Bean `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` for more details.
+
+GET requests are idempotent, which means that making multiple identical requests ends up having the same result as a single request (assuming the data has not been changed in the meantime).
+
+|PUT
+|Update/Replace
+|Is most-often used to update resources.
+
+PUT expects to send the complete resource (not like PATCH) and is idempotent. In other words, if you create or update a resource using PUT and then make that same call again, the resource is still there and still has the same state as it did with the first call.
+
+If, for instance, calling PUT on a resource increments a counter within the resource, the call is no longer idempotent. In such a scenario it is strongly recommended to use POST for non-idempotent requests.
+
+|PATCH
+|Update
+|PATCH is used to update resources. The PATCH request typically only contains the changes to the resource, not the complete resource.
+
+PATCH is not required to be idempotent. But it is possible to implement it in a way to be idempotent, which also helps prevent bad outcomes from collisions between multiple requests on the same resource.
+
+|DELETE
+|Delete
+|Used to delete a resource.
+
+DELETE operations are idempotent concerning the result but may return another status code after the first deletion (e.g. 404 NOT FOUND).
+
+|===
+
+
 === REST Resource Provider ===
 A REST resource using the http://www.oracle.com/technetwork/java/javaee/tech/jax-rs-159890.html[JAX-RS] API is implemented by a POJO class annotated with a set of annotations.
 
