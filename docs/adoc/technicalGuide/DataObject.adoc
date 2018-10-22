@@ -114,6 +114,8 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 The `IValueFormatConstants` interface declares a set of default format pattern constants.
 
+Attributes with type `java.util.Date` accept the format pattern specified by `SimpleDateFormat` class (see https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html)
+
 === Handling of DoEntity Attributes ===
 
 Instead of data objects, a REST or MOM interface could be built using simple plain old Java objects (POJOs).

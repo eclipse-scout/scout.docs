@@ -371,7 +371,7 @@ Modify the person service methods according to <<lst-contacts_form_service>>.
 include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/eclipse/scout/contacts/server/person/PersonService.java[tags=all]
 ----
 
-<1> The SQL insert statement adds adds a new person entry in the database. Only the primary key is used to create this entry.
+<1> The SQL insert statement adds a new person entry in the database. Only the primary key is used to create this entry.
 <2> To save all other person attributes provided in the form data, the `store` method is reused.
 <3> The SQL select into transfers the person data from the database into the form data.
 <4> The SQL update statement transfers all person attributes provided in the form data to the person table.

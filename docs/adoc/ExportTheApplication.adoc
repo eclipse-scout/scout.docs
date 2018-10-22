@@ -19,7 +19,7 @@ At some point during the application development you will want to install your s
 This is the moment where you need to be able to build and package your Scout application in a way that can be deployed to an application server.
 
 As Scout applications just need a servlet container to run, Scout applications can be deployed to almost any Java appliction server.
-For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-8.0-doc/index.html[Apache Tomcat].
+For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-9.0-doc/index.html[Apache Tomcat].
 
 ==== Verify the Container Security Settings
 
@@ -30,7 +30,7 @@ This is why even the Scout "`Hello World`" example is configured to use HTTPS.
 As a default Tomcat installation is configured to use HTTP only, we need to first verify if the installtion is properly configured for HTTPS too.
 In case HTTPS support is already enabled for your Tomcat installation, you may skip this section.
 
-Otherwise, check out the configuration process described in the http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
+Otherwise, check out the configuration process described in the http://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
 
 ==== Create and Install a Self-Signed Certificate
 
@@ -52,11 +52,13 @@ After a restart of Tomcat you should then be able to access Tomcat on https://lo
 
 [source,xml]
 ----
-<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
-               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS"
-               keystoreFile="file:///c:/keystore/tomcat_localhost.jks" keystorePass="changeit"
-/>
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true">
+        <SSLHostConfig>
+            <Certificate certificateKeystoreFile="/keystore/tomcat_localhost.jks"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>
 ----
 
 The third step is to export the newly created self-signed certificate from the `tomcat_localhost.jks` keystore file into the `tomcat_localhost.der` certificate file.

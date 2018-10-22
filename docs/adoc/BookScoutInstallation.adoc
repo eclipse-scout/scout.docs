@@ -177,16 +177,16 @@ Apache Tomcat Homepage: http://tomcat.apache.org/
 
 This section is not really a step by step download and installation guide.
 Rather, it points you to the proper places for downloading and installing Tomcat.
-We recommend to work with Tomcat version 8.0.
+We recommend to work with Tomcat version 9.0.
 Start your download from the official download site.footnote:[
-Tomcat 8 Downloads: http://tomcat.apache.org/download-80.cgi
+Tomcat 9 Downloads: http://tomcat.apache.org/download-90.cgi
 ].
 
 [[img-tomcat_install]]
 .A successful Tomcat 7 installation.
 image::{imgsdir}/tomcat_install.png[]
 
-Once you have downloaded and installed Tomcat 8 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon.
+Once you have downloaded and installed Tomcat 9 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon.
 To verify that Tomcat is actually running open a web browser of your choice and type http://localhost:8080 into the address bar.
 You should then see a confirmation of the successful installation according to <<img-tomcat_install>>.
 
@@ -194,19 +194,19 @@ You should then see a confirmation of the successful installation according to <
 === Platform Specific Instructions
 
 According to the Tomcat setup installation for Windows.footnote:[
-Tomcat Windows setup: http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Windows
+Tomcat Windows setup: http://tomcat.apache.org/tomcat-9.0-doc/setup.html#Windows
 ]
-download the package "`32-bit/64-bit Windows Service Installer`" from the http://tomcat.apache.org/download-80.cgi[Tomcat 8 download site].
+download the package "`32-bit/64-bit Windows Service Installer`" from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
 Then, start the installer and accept the proposed default settings.
 
-For installing Tomcat on OS X systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-80.cgi[Tomcat 8 download site].
+For installing Tomcat on OS X systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
 Then, follow the installation guide.footnote:[
 Installing Tomcat on OS X: http://wolfpaulus.com/journal/mac/tomcat8
 ] provided by Wolf Paulus.
 
-For Linux systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-80.cgi[Tomcat 8 download site].
+For Linux systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
 Then, follow the description of the Unix setup.footnote:[
-Tomcat Linux setup: http://tomcat.apache.org/tomcat-8.0-doc/setup.html#Unix_daemon
+Tomcat Linux setup: http://tomcat.apache.org/tomcat-9.0-doc/setup.html#Unix_daemon
 ]
 to run Tomcat as a deamon.
 If you use Ubuntu, you may want to follow the tutorial.footnote:[
@@ -251,7 +251,7 @@ It is organized according to the hierarchy of the engine (Catalina), the host (l
 Tomcat comes with the pre installed "`Manager App`".
 This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications.
 A comprehensive documentation for the "`Manager App`" can be found under the Tomcat homepage.footnote:[
-The Tomcat Manager Application: http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html.
+The Tomcat Manager Application: http://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html.
 ].
 Here we only show how to start this application from the hompage of a running Tomcat installation.
 
