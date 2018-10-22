@@ -65,6 +65,12 @@
       "label": "Notification"
     },
     {
+      "id": "MenuBarVisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Menubar visible",
+      "labelVisible": false
+    },
+    {
       "id": "MenuBarPositionField",
       "objectType": "SmartField",
       "label": "Menubar Position",

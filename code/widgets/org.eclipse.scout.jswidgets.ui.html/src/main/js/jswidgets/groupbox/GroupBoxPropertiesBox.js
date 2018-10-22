@@ -69,6 +69,10 @@ jswidgets.GroupBoxPropertiesBox.prototype._setField = function(field) {
   notificationField.setValue(this.field.notification ? this.field.notification.status.severity : null);
   notificationField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var menuBarVisibleField = this.widget('MenuBarVisibleField');
+  menuBarVisibleField.setValue(this.field.menuBarVisible);
+  menuBarVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var menuBarPositionField = this.widget('MenuBarPositionField');
   menuBarPositionField.setValue(this.field.menuBarPosition);
   menuBarPositionField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -97,7 +101,9 @@ jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setLogicalGrid(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'NotificationField') {
     this.field.setNotification(this._createNotification(event.newValue));
-  } else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
+  }else if (event.propertyName === 'value' && event.source.id === 'MenuBarVisibleField') {
+    this.field.setMenuBarVisible(event.newValue);
+  }  else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
     this.field.setMenuBarPosition(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'MenuBarEllipsisPositionField') {
     this.field.setMenuBarEllipsisPosition(event.newValue);
