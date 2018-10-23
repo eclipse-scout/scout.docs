@@ -37,10 +37,9 @@ So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGra
 
 *Migration:*
 
-If you never wanted to have a Close- or Cancel-Button to be disabled (to ensure the form can be closed) there is no migration necessary.
+If you disable the root group box of a form (with child propagation) and want the close- or cancel button to stay enabled anyway, the button must be re-enabled again afterwards.
 
-If you have Close- or Cancel-Buttons that need to be disabled, you need to check the code and ensure that the button itself is disabled, not only a parent form field.
-Also the trick not using the granted-dimension on a parent field of the button (to disable the button as well) will no longer work. Now the button must be disabled explicitly on the button or by propagating the change on a parent form field.
+If you have Close- or Cancel-Buttons that need to be disabled, it must be disabled explicitly on the button itself or by propagating the change on a parent form field.
 
 === Add custom header for REST services
 
