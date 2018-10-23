@@ -79,7 +79,7 @@
               "lookupCall": "jswidgets.LocaleLookupCall",
               "labelVisible": false,
               "statusVisible": false,
-              "labelPosition": 2,
+              "labelPosition": "${const:ON_FIELD}",
               "gridDataHints": {
                   "widthInPixel": 200
                }

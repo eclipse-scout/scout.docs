@@ -93,7 +93,7 @@
             "id": "FilterField",
             "objectType": "StringField",
             "label": "${textKey:FilterBy}",
-            "labelPosition": 2,
+            "labelPosition": "${const:ON_FIELD}",
             "updateDisplayTextOnModify": true,
             "clearable": "always",
             "gridDataHints": {

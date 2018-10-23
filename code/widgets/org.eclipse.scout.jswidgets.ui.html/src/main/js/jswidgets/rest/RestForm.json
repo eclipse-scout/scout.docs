@@ -21,7 +21,7 @@
             "id": "LogField",
             "objectType": "StringField",
             "label": "Log",
-            "labelPosition": 4,
+            "labelPosition": "${const:TOP}",
             "enabled": false,
             "multilineText": true,
             "gridDataHints": {

@@ -19,7 +19,7 @@
       "id": "EventLogField",
       "objectType": "StringField",
       "label": "${textKey:EventLog}",
-      "labelPosition": 4,
+      "labelPosition": "${const:TOP}",
       "enabled": false,
       "multilineText": true,
       "gridDataHints": {
