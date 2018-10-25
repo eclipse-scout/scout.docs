@@ -20,6 +20,7 @@
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
+  __include("jswidgets/common/Text.js");
   __include("jswidgets/common/WidgetActionsBox.js");
   __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/desktop/Desktop.js");
@@ -70,6 +71,9 @@
   __include("jswidgets/menubar/MenuBarItemTypeLookupCall.js");
   __include("jswidgets/menubar/MenuItemLookupCall.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
+  __include("jswidgets/popup/PopupForm.js");
+  __include("jswidgets/popup/PopupHorizontalAlignLookupCall.js");
+  __include("jswidgets/popup/PopupVerticalAlignLookupCall.js");
   __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldPropertiesBox.js");
   __include("jswidgets/smartfield/SmartFieldDisplayStyleLookupCall.js");

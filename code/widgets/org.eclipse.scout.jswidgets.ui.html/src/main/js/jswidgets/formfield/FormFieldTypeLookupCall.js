@@ -21,5 +21,6 @@ jswidgets.FormFieldTypeLookupCall.DATA = [
   ['StringField', 'String Field'],
   ['NumberField', 'Number Field'],
   ['DateField', 'Date Field'],
-  ['CheckBoxField', 'Checkbox']
+  ['CheckBoxField', 'Checkbox'],
+  ['LabelField', 'Label Field']
 ];

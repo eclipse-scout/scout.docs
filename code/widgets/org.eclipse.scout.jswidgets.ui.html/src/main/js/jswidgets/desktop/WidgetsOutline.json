@@ -139,6 +139,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "Popup",
+      "detailForm": {
+        "objectType": "jswidgets.PopupForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "Radio Button Group",
       "detailForm": {
         "objectType": "jswidgets.RadioButtonGroupForm"

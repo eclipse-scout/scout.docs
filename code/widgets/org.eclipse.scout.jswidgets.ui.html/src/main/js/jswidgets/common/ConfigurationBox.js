@@ -29,9 +29,21 @@ jswidgets.ConfigurationBox.prototype._init = function(model) {
 };
 
 jswidgets.ConfigurationBox.prototype._onToggleMenuAction = function(event) {
+  var expanded = !this.tabItems[0].expanded;
   this.tabItems.forEach(function(tab) {
-    tab.setExpanded(!tab.expanded);
+    tab.setExpanded(expanded);
   });
+  var gridData = new scout.GridData(this.gridDataHints);
+  var weightY;
+  if (expanded) {
+    if (this._origWeightY !== undefined) {
+      gridData.weightY = this._origWeightY;
+    }
+  } else {
+    this._origWeightY = gridData.weightY;
+    gridData.weightY = 0;
+  }
+  this.setGridDataHints(gridData);
   this._updateToggleIcon();
 };
 
