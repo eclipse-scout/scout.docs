@@ -579,12 +579,6 @@ scout.http.proxyPatterns[0]=.\*\.example.com(:\d+)?=127.0.0.1:8888
 scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.company.com
 |List
 |Config Property
-|`scout.http.retryPost`
-|Enable or disable one retry for non-idempotent POST requests.
-
-The default value is defined by the system property `sun.net.http.retryPost` or true if the system property is undefined.
-|Boolean
-|Config Property
 |`scout.http.transportFactory`
 |Fully qualified class name of the HTTP transport factory the application uses. The class must implement `org.eclipse.scout.rt.shared.http.IHttpTransportFactory`.
 
