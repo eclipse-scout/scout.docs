@@ -262,6 +262,8 @@ The following config property keys have been renamed (the old keys are no longer
 |`scout.auth.cookieSessionValidateSecure`
 |`scout.auth.credentials.plaintext`
 |`scout.auth.credentialsPlaintext`
+|`scout.auth.publickey`
+|`scout.auth.publicKey`
 |`scout.auth.token.ttl`
 |`scout.auth.tokenTtl`
 |`scout.server.url`
@@ -505,6 +507,12 @@ Since we prefer to do styling with CSS and LESS, we now copy the `cssClass` prop
 
 Check the HowTo section _SmartField: how to apply colors and styles from a lookup-row_ in Scout's technical guide to find examples for migration and how to work with the `cssClass` property.
 
+=== AbstractIcons: Changed constants
+* `AbstractIcons.Menu` => `AbstractIcons.MenuBold`
+* `AbstractIcons.File` => `AbstractIcons.FileSolid`
+
+=== ActivityMapMenuType: Removed
+For migration, simply remove any references to this class. 
 
 === Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.0.021)
 The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to the package `org.eclipse.scout.rt.mail`:
