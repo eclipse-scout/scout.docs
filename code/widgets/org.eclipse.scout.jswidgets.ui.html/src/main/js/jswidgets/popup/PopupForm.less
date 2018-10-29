@@ -4,8 +4,18 @@
   border-radius: @border-radius;
   #scout.drop-shadow-large();
   max-width: 500px;
-  padding: 0 10px;
   margin: 10px; /* minimum padding to window */
+
+  & > .popup-arrow {
+    &.bottom,
+    &.right {
+      #scout.drop-shadow-large(@y: 4px, @spread: -2px);
+    }
+  }
+
+  & > .popup-widget {
+    padding: 0 10px;
+  }
 }
 
 .popup-anchor {

@@ -60,16 +60,34 @@
                     "tooltipText": "${textKey:AnchorBoundsTooltip}"
                   },
                   {
-                    "id": "HorizontalAlignmentField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.PopupHorizontalAlignLookupCall",
-                    "label": "Horizontal Alignment"
+                    "id": "CloseOnAnchorMouseDownField",
+                    "objectType": "CheckBoxField",
+                    "label": "Close on Anchor Mouse Down",
+                    "labelVisible": false
                   },
                   {
-                    "id": "VerticalAlignmentField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.PopupVerticalAlignLookupCall",
-                    "label": "Vertical Alignment"
+                    "id": "CloseOnMouseDownOutsideField",
+                    "objectType": "CheckBoxField",
+                    "label": "Close on Mouse Down Outside",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "CloseOnOtherPopupOpenField",
+                    "objectType": "CheckBoxField",
+                    "label": "Close on Other Popup Open",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "HorizontalSwitchField",
+                    "objectType": "CheckBoxField",
+                    "label": "Horizontal Switch",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "VerticalSwitchField",
+                    "objectType": "CheckBoxField",
+                    "label": "Vertical Switch",
+                    "labelVisible": false
                   },
                   {
                     "id": "TrimWidthField",
@@ -84,16 +102,22 @@
                     "labelVisible": false
                   },
                   {
-                    "id": "HorizontalSwitchField",
+                    "id": "WithArrowField",
                     "objectType": "CheckBoxField",
-                    "label": "Horizontal Switch",
+                    "label": "With Arrow",
                     "labelVisible": false
                   },
                   {
-                    "id": "VerticalSwitchField",
-                    "objectType": "CheckBoxField",
-                    "label": "Vertical Switch",
-                    "labelVisible": false
+                    "id": "HorizontalAlignmentField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.PopupHorizontalAlignLookupCall",
+                    "label": "Horizontal Alignment"
+                  },
+                  {
+                    "id": "VerticalAlignmentField",
+                    "objectType": "SmartField",
+                    "lookupCall": "jswidgets.PopupVerticalAlignLookupCall",
+                    "label": "Vertical Alignment"
                   }
                 ]
               }
