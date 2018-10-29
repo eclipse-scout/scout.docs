@@ -54,6 +54,28 @@ If there are non CSRF prone clients (like backend systems) such clients may also
 
 See the Scout Bean `org.eclipse.scout.rt.rest.csrf.AntiCsrfHelper` for more details.
 
+=== Replacements for ServerRunContextFilter
+
+Before Scout 9 the `ServerRunContextFilter` was used to create Scout server contexts for REST APIs. This filter used a user based TTL cache that was not bound to the HTTP session.
+
+Starting with Scout 9 there are two new filters available:
+
+* `HttpRunContextFilter`: Creates a Scout context without HTTP- and server sessions for stateless REST backends. It supports subject, correlationId, locale, transaction, etc.
+* `HttpServerRunContextFilter`: Creates a Scout server context that additionally has a user-agent and an optional Scout server session.
+
+*Migration:*
+
+If a Scout server session is required in the application use
+
+* `ServerRunContextFilter` for clients that have no cookie support
+* `HttpServerRunContextFilter` for clients with cookie support
+
+If the application does not have a Scout server session use
+
+* `HttpServerRunContextFilter` with session support disabled if a server dependency is available in the application.
+* `HttpRunContextFilter` if only a server-commons dependency is available in the application.
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 

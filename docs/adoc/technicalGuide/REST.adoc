@@ -115,28 +115,35 @@ This module adds a set of Jackson additions in order to use Jackson with Scout d
 
 ==== RunContext ====
 Like a usual service call using the Scout service tunnel a REST request must ensure that processing of the request takes place within a `RunContext`.
-The `ServerRunContextFilter` filter is used to intercept incoming REST requests and wrap them within a RunContext.
+The `HttpServerRunContextFilter` or `HttpRunContextFilter` can be used to intercept incoming REST requests and wrap them within a Scout RunContext.
+`HttpServerRunContextFilter` can be used if a Scout server dependency is available. Optionally this filter also supports the creation of a Scout server session if this should be required (stateful). Refer to the javadoc for more details.
+The `HttpRunContextFilter` on the other hand does not provide session support and is always stateless.
+
 Therefore a REST resource implementation is not required to deal with setting up a RunContext to wrap the request within each method.
 The filter must be added in the `web.xml` configuration file and should be configured to be called after the authentication filter.
-The filter expects that the authentication has been performed and that a `subject` is available.
+The filter expects that the authentication has been performed and that a `subject` is available (JAAS context).
 All following filters and servlets and thus also the REST resources run automatically in the correct context.
 
 [source,xml]
-.web.xml filter registration
+.web.xml registration example for HttpServerRunContextFilter.
 ----
 <filter>
-  <filter-name>ServerRunContextFilter</filter-name>
-  <filter-class>org.eclipse.scout.rt.server.context.ServerRunContextFilter</filter-class>
-</filter>
+   <filter-name>HttpServerRunContextFilter</filter-name>
+   <filter-class>org.eclipse.scout.rt.server.context.HttpServerRunContextFilter</filter-class>
+   <init-param>
+     <param-name>session</param-name>
+     <param-value>false</param-value>
+   </init-param>
+ </filter>
 
 <filter-mapping>
-  <filter-name>ServerRunContextFilter</filter-name>
+  <filter-name>HttpServerRunContextFilter</filter-name>
   <url-pattern>/api/*</url-pattern>
 </filter-mapping>
 ----
 
-Beside the `subject` the `ServerRunContextFilter` sets up the Correlation ID, as well as the locale.
-Both values are read from the incoming request header, the caller must ensure that the headers `Accept-Language` and `X-Scout-Correlation-Id` are set correctly.
+Beside the `subject` and other attributes the `HttpServerRunContextFilter` and `HttpRunContextFilter` setup the Correlation ID, as well as the locale.
+Both values are read from the incoming request header, the caller must ensure that the headers `Accept-Language` and `X-Scout-Correlation-Id` are set accordingly.
 
 === REST Client ===
 

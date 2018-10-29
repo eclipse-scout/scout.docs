@@ -86,6 +86,14 @@ Since Scout 9.0 Close- and Cancel-Buttons can be disabled like any other form fi
 
 So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGranted(false)` or any other dimension, the full form gets disabled except the Close- and Cancel-Buttons. As soon as the button is disabled explicitly (e.g. by calling `setEnabled(false)` on the button itself or by propagating to the button using `setEnabled(false, false, true)` on a parent composite) it will be disabled and the form cannot be closed anymore.
 
+== New Servlet Filters to create a Scout run context
+
+Before Scout 9 the `ServerRunContextFilter` was used to create Scout server contexts for REST APIs. This filter used a user based TTL cache that was not bound to the HTTP session.
+
+Starting with Scout 9 there are two new filters available:
+
+* `HttpRunContextFilter`: Creates a Scout run-context without HTTP- and server sessions for stateless REST backends. It supports subject, correlationId, locale, transaction, etc.
+* `HttpServerRunContextFilter`: Creates a Scout server-run-context that additionally has a user-agent and an optional Scout server session.
 
 == Improved Scrollbar Usability
 
