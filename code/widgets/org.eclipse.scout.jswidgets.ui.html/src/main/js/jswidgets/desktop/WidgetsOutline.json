@@ -99,6 +99,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "Label",
+      "detailForm": {
+        "objectType": "jswidgets.LabelForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "Label Field",
       "detailForm": {
         "objectType": "jswidgets.LabelFieldForm"

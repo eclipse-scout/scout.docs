@@ -57,6 +57,7 @@
   __include("jswidgets/groupbox/MenuBarEllipsisPositionLookupCall.js");
   __include("jswidgets/groupbox/MenuBarItemLookupCall.js");
   __include("jswidgets/groupbox/MenuBarPositionLookupCall.js");
+  __include("jswidgets/label/LabelForm.js");
   __include("jswidgets/labelfield/LabelFieldForm.js");
   __include("jswidgets/logicalgrid/GridDataBox.js");
   __include("jswidgets/logicalgrid/LogicalGridForm.js");
