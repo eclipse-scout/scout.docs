@@ -30,6 +30,7 @@
     "jswidgets/logicalgrid/LogicalGridForm.json",
     "jswidgets/logicalgrid/LogicalGridLayoutConfigBox.json",
     "jswidgets/menubar/MenuBarForm.json",
+    "jswidgets/modeselector/ModeSelectorForm.json",
     "jswidgets/numberfield/NumberFieldForm.json",
     "jswidgets/smartfield/SmartFieldForm.json",
     "jswidgets/smartfield/SmartFieldPropertiesBox.json",

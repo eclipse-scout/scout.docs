@@ -71,6 +71,8 @@
   __include("jswidgets/menubar/MenuBarForm.js");
   __include("jswidgets/menubar/MenuBarItemTypeLookupCall.js");
   __include("jswidgets/menubar/MenuItemLookupCall.js");
+  __include("jswidgets/modeselector/ModeLookupCall.js");
+  __include("jswidgets/modeselector/ModeSelectorForm.js");
   __include("jswidgets/numberfield/NumberFieldForm.js");
   __include("jswidgets/popup/PopupForm.js");
   __include("jswidgets/popup/PopupHorizontalAlignLookupCall.js");
