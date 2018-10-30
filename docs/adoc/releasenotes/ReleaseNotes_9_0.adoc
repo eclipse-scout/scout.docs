@@ -110,3 +110,12 @@ The wizard progress has a new design.
 image::{imgsdir}/wizard_progress.png[]
 
 Wizard steps can now be marked as finished, in this case they will be displayed with a check mark icon in the wizard progress.
+
+== New widget Mode Selector
+
+The widget "ModeSelector" was added. It has similar functionality as the RadioButtonGroup but with another design.
+
+[[img-mode-selector]]
+.Mode Selector
+image::{imgsdir}/mode_selector.png[]
+
