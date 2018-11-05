@@ -10,7 +10,7 @@
  ******************************************************************************/
 jswidgets.App = function() {
   jswidgets.App.parent.call(this);
-  this.scoutVersion = '8.0';
+  this.scoutVersion = '9.0';
 };
 scout.inherits(jswidgets.App, scout.App);
 
