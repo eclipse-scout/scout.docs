@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.GroupBoxAddFieldBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Add field",
   "expandable": true,

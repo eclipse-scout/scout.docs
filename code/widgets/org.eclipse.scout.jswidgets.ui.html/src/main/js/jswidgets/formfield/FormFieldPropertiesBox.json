@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.FormFieldPropertiesBox",
-  "type": "model",
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Form Field Properties",

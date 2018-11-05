@@ -1,6 +1,5 @@
  {
    "id": "jswidgets.TabBoxAddTabItemBox",
-   "type": "model",
    "objectType": "GroupBox",
    "label": "Add Tab Item",
    "expandable": true,

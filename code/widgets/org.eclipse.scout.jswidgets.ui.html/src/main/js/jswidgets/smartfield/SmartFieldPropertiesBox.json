@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.SmartFieldPropertiesBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Smart Field Properties",
   "expandable": true,

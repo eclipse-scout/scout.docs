@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.LifecycleForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.TabItemProperties",
-  "type": "model",
   "objectType": "TabItem",
   "label": "Tab Item Properties",
   "fields": [

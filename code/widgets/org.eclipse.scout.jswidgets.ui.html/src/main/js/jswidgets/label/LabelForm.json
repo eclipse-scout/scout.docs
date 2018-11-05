@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.LabelForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

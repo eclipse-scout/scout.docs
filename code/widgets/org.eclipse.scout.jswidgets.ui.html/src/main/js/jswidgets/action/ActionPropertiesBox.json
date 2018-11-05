@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.ActionPropertiesBox",
-  "type": "model",
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Action Properties",

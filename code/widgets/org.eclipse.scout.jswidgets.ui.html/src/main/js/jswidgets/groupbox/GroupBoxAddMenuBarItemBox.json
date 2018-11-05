@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.GroupBoxAddMenuBarItemBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Add menubar item",
   "expandable": true,

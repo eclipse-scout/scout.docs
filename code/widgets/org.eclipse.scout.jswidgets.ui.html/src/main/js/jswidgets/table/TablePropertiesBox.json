@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.TablePropertiesBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Table Properties",
   "fields": [

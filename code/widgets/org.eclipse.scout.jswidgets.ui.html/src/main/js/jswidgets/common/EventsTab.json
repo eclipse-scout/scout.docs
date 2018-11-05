@@ -1,6 +1,5 @@
  {
   "id": "jswidgets.EventsTab",
-  "type": "model",
   "objectType": "TabItem",
   "label": "Events",
   "gridColumnCount": 1,

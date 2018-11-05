@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.GroupBoxDeleteFieldBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Delete field",
   "expandable": true,

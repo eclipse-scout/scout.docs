@@ -1,6 +1,5 @@
  {
    "id": "jswidgets.TabBoxDeleteTabItemBox",
-   "type": "model",
    "objectType": "GroupBox",
    "label": "Delete Tab Item",
    "expandable": true,

@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.PopupForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

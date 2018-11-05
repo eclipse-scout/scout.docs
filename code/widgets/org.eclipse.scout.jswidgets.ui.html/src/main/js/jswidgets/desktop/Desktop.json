@@ -2,7 +2,6 @@
   "id": "jswidgets.Desktop",
   "title": "${textKey:Widgets}",
   "objectType": "Desktop",
-  "type": "model",
   "logoUrl": "res/scout-logo.png",
   "outline": {
     "objectType": "jswidgets.WidgetsOutline"

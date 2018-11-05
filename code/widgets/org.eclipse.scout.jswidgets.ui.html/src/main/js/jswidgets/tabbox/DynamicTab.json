@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.DynamicTab",
-  "type": "model",
   "objectType": "TabItem",
   "label": "Dyn Tab",
   "fields": [

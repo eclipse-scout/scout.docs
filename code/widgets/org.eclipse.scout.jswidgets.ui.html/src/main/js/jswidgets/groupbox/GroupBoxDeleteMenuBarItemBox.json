@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.GroupBoxDeleteMenuBarItemBox",
-  "type": "model",
   "objectType": "GroupBox",
   "label": "Delete menubar item",
   "expandable": true,

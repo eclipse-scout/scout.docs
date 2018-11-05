@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.TableSmartFieldForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

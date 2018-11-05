@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.TabBoxForm",
-  "type": "model",
   "displayHint": "view",
   "cssClass": "tab-box-form",
   "rootGroupBox": {

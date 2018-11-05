@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.ProposalFieldForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

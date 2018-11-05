@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.ButtonForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

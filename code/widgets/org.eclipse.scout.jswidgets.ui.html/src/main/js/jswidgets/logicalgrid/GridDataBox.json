@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.GridDataBox",
-  "type": "model",
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Grid Data",

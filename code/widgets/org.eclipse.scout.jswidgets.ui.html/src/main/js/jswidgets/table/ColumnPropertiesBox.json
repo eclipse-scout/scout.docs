@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.ColumnPropertiesBox",
-  "type": "model",
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Column Properties",

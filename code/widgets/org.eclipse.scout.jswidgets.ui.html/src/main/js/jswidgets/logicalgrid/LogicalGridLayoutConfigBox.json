@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.LogicalGridLayoutConfigBox",
-  "type": "model",
   "objectType": "GroupBox",
   "gridColumnCount": 2,
   "label": "Layout Config",

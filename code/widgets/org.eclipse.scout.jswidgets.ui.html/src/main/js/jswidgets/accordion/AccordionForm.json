@@ -1,6 +1,5 @@
 {
   "id": "jswidgets.AccordionForm",
-  "type": "model",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",
