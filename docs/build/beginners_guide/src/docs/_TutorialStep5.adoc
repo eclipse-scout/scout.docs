@@ -222,7 +222,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> If we already have an URL for the picture prefill the url field in the form with its value.
 <2> Method `waitFor` makes the application wait until the user has closed the form.
-<3> Only store the new URL if the use has saved a new value. Storing the value will refresh the picture in the user interface.
+<3> Only store the new URL if the user has saved a new value. Storing the value will refresh the picture in the user interface.
 
 Based on the example with the picture field we have now walked through the complete process to turn normal fields into template fields.
 This process remains the same for refactoring container fields into template fields.
