@@ -85,12 +85,13 @@ Once you no longer need the self-signed certificate file in your Java installati
 ==== Update the Scout Application to work with HTTP
 
 If you should prefer to work with HTTP only, you need to modify the security settings of your Scout application.
-This can be done in module `helloworld.ui.html.app.war` with the steps described below.
+This can be done with the steps described below.
 
-* In file `config.properties` (in folder `src/main/resources`):
+* In file `config.properties` (in folder `helloworld.ui.html.app.war/src/main/resources`):
 ** Add the property `scout.auth.cookieSessionValidateSecure=false` to disable the check for an encrypted channel (HTTPS).
-** Change the `scout.backendUrl` property to use the HTTP port of your Tomcat, typically 8080.
-* In file `web.xml` (in folder `src/main/webapp/WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
+** Change the `scout.backendUrl` property to use HTTP instead of HTTPS and change the port according to your Tomcat setup, typically 8080.
+* In file `web.xml` (in folder `helloworld.ui.html.app.war/src/main/webapp/WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
+* In file `web.xml` (in folder `helloworld.server.app.war/src/main/webapp/WEB-INF`) delete the `<secure>true</secure>` flag in the `<cookie-config>` element.
 
 More on this topic can be found in the Scout Architecture Documentation.
 
