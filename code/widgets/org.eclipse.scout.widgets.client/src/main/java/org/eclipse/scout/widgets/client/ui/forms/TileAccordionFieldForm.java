@@ -662,6 +662,34 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
         }
       }
 
+      @Order(39.5)
+      @ClassId("454f34f1-fd29-4191-a3f2-21b15801ca69")
+      public class GroupsCollapsibleField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Groups collapsible";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          boolean collapsible = isChecked();
+          getAccordionField().getAccordion().getGroups().forEach(group -> group.setCollapsible(collapsible));
+        }
+
+        @Override
+        protected void execInitField() {
+          if (!getAccordionField().getAccordion().getGroups().isEmpty()) {
+            setValue(getAccordionField().getAccordion().getGroups().get(0).isCollapsible());
+          }
+        }
+      }
+
       @Order(40)
       @ClassId("eb20300a-a46d-4449-8613-75b6991b648f")
       public class GridColumnCountField extends AbstractIntegerField {
