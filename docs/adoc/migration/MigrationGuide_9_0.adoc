@@ -105,6 +105,36 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@table-control-active-color` to `@table-control-selected-color`
 * Renamed `@table-control-active-background-color` to `@table-control-selected-background-color`
 * Renamed `@scrollbar-side-margin` to `@scrollbar-side-padding`
+
+
+=== Default value for Scout JSON model attribute 'type'
+
+In the Scout JSON model the `"type": "model"` must no longer be specified as it is the default value now. Therefore all occurrences can be deleted. This makes the static JSON model more compact, easier to write and better readable.
+
+=== Page can be declared in the static Outline JSON model
+
+Before 9.0 it was necessary to add pages (`PageWithTable`, `PageWithNodes`) programmatically to outlines as pages could not be declared in the JSON model. This is now possible.
+The Outline JSON model may now contain an attribute `nodes` which may contain custom pages.
+Refer to the helloworld application (created by Eclipse) or the JS Widgets application for an example.
+
+=== Form in FormTableControl is adapted automatically
+
+A form in a `FormTableControl` is automatically adapted to match the semantics in which the form exists:
+
+* It is automatically set to non-modal
+* It does not ask if a save is needed as it will never be saved anyway.
+* It is configured to DisplayHint.VIEW
+
+Until now if the `FormTableControl` was used in a project, this adaption of the form must have been done manually. This code can now be removed as it will be done by Scout now.
+
+=== Table inside PageWithTable uses default reload handler
+
+A table within a `PageWithTable` has a default reload handler installed now. It calls `loadTableData` on the page which discards all rows and loads them again by calling `_loadTableData`.
+If a custom reload handler was installed, it may be removed now.
+
+Furthermore the `_loadTableData` method now also gets an optional argument holding the exported data of the first form that is attached to the table using a `FormTableControl` (typically the SearchForm).
+
+
 ////
   =============================================================================
   === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================

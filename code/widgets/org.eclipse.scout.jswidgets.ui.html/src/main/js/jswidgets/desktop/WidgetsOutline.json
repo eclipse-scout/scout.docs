@@ -153,6 +153,19 @@
     },
     {
       "objectType": "PageWithNodes",
+      "text": "Pages",
+      "expanded": true,
+      "childNodes": [
+        {
+          "objectType": "jswidgets.SamplePageWithTable"
+        },
+        {
+          "objectType": "jswidgets.SamplePageWithNodes"
+        }
+      ]
+    },
+    {
+      "objectType": "PageWithNodes",
       "leaf": true,
       "text": "Popup",
       "detailForm": {

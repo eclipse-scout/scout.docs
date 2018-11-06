@@ -119,3 +119,11 @@ The widget "ModeSelector" was added. It has similar functionality as the RadioBu
 .Mode Selector
 image::{imgsdir}/mode_selector.png[]
 
+== Improvements for Pages in Scout JS applications
+
+The API to work with Pages (`PageWithTable`, `PageWithNodes`) has been improved. It is now possible to declare child pages in the static JSON model of outlines and the table within a `PageWithTable` has a default reload handler installed.
+
+Now the method `_loadTableData` (which is responsible for fetching data for a `PageWithTable`) also gets an optional argument `searchFilter` holding the exported data of the first form that is attached to the table using a `FormTableControl` (typically the SearchForm).
+This makes it easier to use the values from a search form by e.g. passing them to a REST backend to limit the results returned from the server.
+
+Finally the `TreeNode` (and therefore all pages because they are tree nodes) get a method `_jsonModel` to declare the static JSON model that belongs to that tree node or page. This works the same way as with all other widgets now.

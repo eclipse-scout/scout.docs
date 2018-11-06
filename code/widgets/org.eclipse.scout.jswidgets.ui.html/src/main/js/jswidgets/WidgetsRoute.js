@@ -25,18 +25,22 @@ scout.inherits(jswidgets.WidgetsRoute, scout.Route);
  * 1: objectType of the detail form of a node in FormFieldOutline
  */
 jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
-  var regex = /^jswidgets\.(\w*)Form$/;
+  var regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
   var routes = [];
   scout.Tree.visitNodes(function(node) {
     var routeRef = null,
-      objectType = node.detailForm.objectType,
-      result = regex.exec(objectType);
-
-    if (result === null || result.length === 0) {
-      $.log.error('Failed to create route for objectType=' + objectType);
+      objectType, result;
+    if (node.detailForm) {
+      objectType = node.detailForm.objectType;
+    } else {
+      objectType = node.objectType;
     }
-    routeRef = result[1].toLowerCase();
-    routes.push([routeRef, objectType]);
+
+    result = regex.exec(objectType);
+    if (result !== null && result.length > 1) {
+      routeRef = result[1].toLowerCase();
+      routes.push([routeRef, objectType]);
+    }
   }, desktop.outline.nodes);
   return routes;
 };
@@ -66,7 +70,7 @@ jswidgets.WidgetsRoute.prototype.activate = function(location) {
   var objectType = this._getRouteData(location)[1];
   var foundNode = null;
   scout.Tree.visitNodes(function(node) {
-    if (node.detailForm.objectType === objectType) {
+    if ((node.detailForm && node.detailForm.objectType === objectType) || node.objectType === objectType) {
       foundNode = node;
       return false;
     }
@@ -77,8 +81,16 @@ jswidgets.WidgetsRoute.prototype.activate = function(location) {
 jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
   var page = event.source.selectedNode();
   if (page) {
-    var routeData = this._getRouteDataByObjectType(page.detailForm.objectType);
-    scout.router.updateLocation(routeData[0]);
+    var objectType;
+    if (page.detailForm) {
+      objectType = page.detailForm.objectType;
+    } else {
+      objectType = page.objectType;
+    }
+    var routeData = this._getRouteDataByObjectType(objectType);
+    if (routeData) {
+      scout.router.updateLocation(routeData[0]);
+    }
   } else {
     scout.router.updateLocation('');
   }
