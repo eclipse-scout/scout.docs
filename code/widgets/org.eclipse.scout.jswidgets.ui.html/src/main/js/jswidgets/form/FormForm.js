@@ -41,6 +41,13 @@ jswidgets.FormForm.prototype._init = function(model) {
   statusField.setValue(this.status ? this.status.severity: null);
   statusField.on('propertyChange', this._onStatusChange.bind(this));
 
+  var askIfNeedSaveField = this.widget('AskIfNeedSaveField');
+  askIfNeedSaveField.setValue(this.askIfNeedSave);
+  askIfNeedSaveField.on('propertyChange', this._onAskIfNeedSaveChange.bind(this));
+
+  var cacheBoundsField = this.widget('CacheBoundsField');
+  cacheBoundsField.setValue(this.cacheBounds);
+
   var closableField = this.widget('ClosableField');
   closableField.setValue(this.closable);
   if (this.openedByButton) {
@@ -77,6 +84,8 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
     displayHint: this.widget('DisplayHintField').value,
     displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
     modal: this.widget('ModalField').value,
+    askIfNeedSave: this.widget('AskIfNeedSaveField').value,
+    cacheBounds: this.widget('CacheBoundsField').value,
     closable: this.widget('ClosableField').value,
     resizable: this.widget('ResizableField').value,
     status: this._createStatus(this.widget('StatusField').value),
@@ -158,6 +167,12 @@ jswidgets.FormForm.prototype._onIconIdChange = function(event) {
 jswidgets.FormForm.prototype._onStatusChange = function(event) {
   if (event.propertyName === 'value') {
     this.setStatus(this._createStatus(event.newValue));
+  }
+};
+
+jswidgets.FormForm.prototype._onAskIfNeedSaveChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.setAskIfNeedSave(event.newValue);
   }
 };
 

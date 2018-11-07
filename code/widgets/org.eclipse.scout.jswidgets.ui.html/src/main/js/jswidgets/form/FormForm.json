@@ -95,6 +95,18 @@
                     "visible": false // does not really work as expected
                   },
                   {
+                    "id": "AskIfNeedSaveField",
+                    "objectType": "CheckBoxField",
+                    "label": "Ask If Need Save",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "CacheBoundsField",
+                    "objectType": "CheckBoxField",
+                    "label": "Cache Bounds",
+                    "labelVisible": false
+                  },
+                  {
                     "id": "ClosableField",
                     "objectType": "CheckBoxField",
                     "label": "Closable",
