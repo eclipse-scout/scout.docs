@@ -135,8 +135,8 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       public class MultilineLabelField extends AbstractLabelField {
 
         @Override
-        protected int getConfiguredGridH() {
-          return 2;
+        protected boolean getConfiguredGridUseUiHeight() {
+          return true;
         }
 
         @Override
@@ -160,8 +160,8 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       public class VeryLongLabelTextField extends AbstractLabelField {
 
         @Override
-        protected int getConfiguredGridH() {
-          return 2;
+        protected boolean getConfiguredGridUseUiHeight() {
+          return true;
         }
 
         @Override
