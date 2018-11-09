@@ -10,28 +10,38 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.Set;
+
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenuSeparator;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TabBoxMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.form.fields.AbstractFormFieldMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox.Placeholder1Field;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox.VisibleDocumentsField;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox;
+import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.AddTabContainerMenu.SequenceBox.AddTabButton;
+import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.AddTabContainerMenu.SequenceBox.TabNameField;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.CommentsBox.CommentsField;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.TabBox.DocumentsBox;
@@ -104,6 +114,14 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
 
   public MonthsBox getMonthsBox() {
     return getFieldByClass(MonthsBox.class);
+  }
+
+  public TabNameField getTabNameField() {
+    return getFieldByClass(TabNameField.class);
+  }
+
+  public AddTabButton getAddTabButton() {
+    return getFieldByClass(AddTabButton.class);
   }
 
   public Placeholder1Field getPlaceholder1Field() {
@@ -258,20 +276,80 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(5)
-      public class AddDynamicTabMenu extends AbstractMenu {
+      @ClassId("ba44b14d-0560-4ab4-b328-2708a78d6d0b")
+      public class AddTabContainerMenu extends AbstractFormFieldMenu {
 
         @Override
-        protected String getConfiguredText() {
-          return "Add tab";
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.hashSet(TabBoxMenuType.Header);
         }
 
-        @Override
-        protected void execAction() {
-          getTabBox().addField(new DynamicTabItem());
+        @ClassId("90786abd-ea95-406a-a4fe-311a2e8e552c")
+        @Order(1000)
+        public class SequenceBox extends AbstractSequenceBox {
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredAutoCheckFromTo() {
+            return false;
+          }
+
+          @Order(1000)
+          @ClassId("9d931f8a-56c9-489d-85ba-1b6bb57c54b9")
+          public class TabNameField extends AbstractStringField {
+            @Override
+            protected byte getConfiguredLabelPosition() {
+              return LABEL_POSITION_ON_FIELD;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("TabName");
+            }
+
+            @Override
+            protected int getConfiguredMaxLength() {
+              return 128;
+            }
+
+            @Override
+            protected boolean getConfiguredGridUseUiWidth() {
+              return true;
+            }
+          }
+
+          @Order(2000)
+          @ClassId("43f2230c-c895-470a-86a1-b4d1aba4f716")
+          public class AddTabButton extends AbstractButton {
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Add");
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredGridUseUiWidth() {
+              return true;
+            }
+
+            @Override
+            protected void execClickAction() {
+              TabNameField nameField = getTabNameField();
+              getTabBox().addField(new DynamicTabItem(nameField.getValue()));
+              nameField.setValue(null);
+            }
+          }
         }
       }
 
-      @Order(5)
+      @Order(6)
       public class SayHelloMenu extends AbstractMenu {
 
         @Override

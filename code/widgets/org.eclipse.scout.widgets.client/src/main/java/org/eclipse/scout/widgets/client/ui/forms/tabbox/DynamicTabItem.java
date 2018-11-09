@@ -6,6 +6,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.widgets.client.ui.forms.tabbox.DynamicTabItem.InnerBox.String01Field;
 import org.eclipse.scout.widgets.client.ui.forms.tabbox.DynamicTabItem.InnerBox.String02Field;
 
@@ -16,9 +17,19 @@ import org.eclipse.scout.widgets.client.ui.forms.tabbox.DynamicTabItem.InnerBox.
  */
 public class DynamicTabItem extends AbstractGroupBox {
 
+  public DynamicTabItem() {
+    this("Dynamic Tab");
+  }
+
+  public DynamicTabItem(String name) {
+    if (StringUtility.hasText(name)) {
+      setLabel(name);
+    }
+  }
+
   @Override
   protected String getConfiguredLabel() {
-    return "Dynamic tab";
+    return "Dyn Tab";
   }
 
   public String02Field getString02Field() {
