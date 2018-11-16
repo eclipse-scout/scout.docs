@@ -127,3 +127,7 @@ Now the method `_loadTableData` (which is responsible for fetching data for a `P
 This makes it easier to use the values from a search form by e.g. passing them to a REST backend to limit the results returned from the server.
 
 Finally the `TreeNode` (and therefore all pages because they are tree nodes) get a method `_jsonModel` to declare the static JSON model that belongs to that tree node or page. This works the same way as with all other widgets now.
+
+== New event 'lookupCallDone'
+
+All fields having lookup calls (ListBox, RadioButtonGroup, SmartField, TagField) now fire a new event 'lookupCallDone' always when a lookup call has been executed and the result was processed by the field.

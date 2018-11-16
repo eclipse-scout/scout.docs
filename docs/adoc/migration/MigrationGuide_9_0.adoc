@@ -134,6 +134,12 @@ If a custom reload handler was installed, it may be removed now.
 
 Furthermore the `_loadTableData` method now also gets an optional argument holding the exported data of the first form that is attached to the table using a `FormTableControl` (typically the SearchForm).
 
+=== Possibility to prepare a LookupCall in a ListBox & RadioButtonGroup
+
+Until now it was necessary to set the lookup call programmatically to a ListBox or LookupCall if a `prepareLookupCall` listener was registered. Otherwise the call has been executed before the listener could have been attached.
+This is no longer the case: The LookupCall is executed on first use only and not during the creation of the widget which allows to attach `prepareLookupCall` listeners.
+The LookupCall may now also be declared in the static JSON model of the widget even though a `prepareLookupCall` listener is registered.
+
 
 ////
   =============================================================================
