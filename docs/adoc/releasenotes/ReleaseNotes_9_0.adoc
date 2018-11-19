@@ -6,27 +6,26 @@
 
 == About This Release
 
-The Eclipse Scout 8.0 version is part of two simultaneous releases (https://wiki.eclipse.org/Simultaneous_Release[release schedule]):
+{NOTRELEASEDWARNING}
 
-* The initial version of Eclipse Scout 8.0 was part of the Eclipse _Photon_ release (June 27, 2018).
-* An updated version was released as part of the _2018-09_ release (September 19, 2018).
+The Eclipse Scout 9.0 version is planned to be part of the Eclipse 2019-03 Simultaneous Release (https://wiki.eclipse.org/Simultaneous_Release[release schedule]).
+The release is scheduled for March 2019.
 
-The latest version of this release is: _8.0.0.021_
+The latest version of this release is: (not yet released)
 
-You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E%2Ereleases/8.0.x[detailed change log] on GitHub.
+You can see the https://github.com/eclipse/scout.rt/compare/releases/8.0.x%2E%2E%2Ereleases/9.0.x[detailed change log] on GitHub.
 
 === Service Releases
 
-Even though with Eclipse Photon there will no longer be regular Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details), Scout 8.0 will continue to be maintained and a new build released from time to time. Beside bugfixes, these releases may even contain some minor features. See the following notes for details.
+After Eclipse Photon, there no longer are Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details).
 
-==== Simrel 2018-12 (8.0.x) Release Expected in December 2018
+There may be additional maintenance builds of Scout 9.0, but no plans have been finalized yet.
+Beside bugfixes, these maintenance builds may even contain some minor features. See the following notes for details.
 
-(Section intentionally left blank for future release)
+==== Simrel 2018-06 (9.0.x) Release Expected in June 2018
 
-==== Simrel 2018-09, released on September 19, 2018
-The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_SimRel_2018_09)
+(Section intentionally left blank for possible future release)
 
-* <<Support for Horizontal Alignment (since 8.0.0.021)>>
 
 === Obtaining the Latest Version
 
