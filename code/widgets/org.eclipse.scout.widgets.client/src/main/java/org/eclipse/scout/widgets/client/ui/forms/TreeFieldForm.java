@@ -537,7 +537,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
             @Override
             protected void execAction() {
-              final String subjectName = getSelectedNode().getCell().getText();
+              final String subjectName = getSelectedNode().getCell().toPlainText();
 
               Jobs.schedule(() -> {
 
@@ -550,7 +550,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           private void showInfo(ITreeNode node) {
             String title = node.getTree().getTitle();
-            String id = node.getCell().getText();
+            String id = node.getCell().toPlainText();
             String children = Integer.toString(node.getChildNodeCount());
             String leaf = Boolean.toString(node.isLeaf());
 
