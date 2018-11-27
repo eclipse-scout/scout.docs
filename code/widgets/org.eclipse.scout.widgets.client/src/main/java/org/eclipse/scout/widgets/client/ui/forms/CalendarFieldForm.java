@@ -26,7 +26,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.root.ContextMenuListener;
 import org.eclipse.scout.rt.client.ui.action.menu.root.IContextMenu;
 import org.eclipse.scout.rt.client.ui.basic.calendar.AbstractCalendar;
 import org.eclipse.scout.rt.client.ui.basic.calendar.provider.AbstractCalendarItemProvider;
-import org.eclipse.scout.rt.client.ui.desktop.outline.OutlineMenuWrapper;
+import org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -119,7 +119,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
               rootContextMenu.removeChildActions(m_calendarMenus);
               m_calendarMenus.clear();
               for (IMenu menu : event.getSource().getChildActions()) {
-                m_calendarMenus.add(OutlineMenuWrapper.wrapMenu(menu));
+                m_calendarMenus.add(MenuWrapper.wrapMenu(menu));
               }
               rootContextMenu.addChildActions(m_calendarMenus);
             }

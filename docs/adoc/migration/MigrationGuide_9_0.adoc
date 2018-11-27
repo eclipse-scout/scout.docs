@@ -76,6 +76,13 @@ If the application does not have a Scout server session use
 * `HttpRunContextFilter` if only a server-commons dependency is available in the application.
 
 
+=== Menu wrapping
+
+The `OutlineMenuWrapper` has been adapted so that no manual instance can be created anymore (the constructors are no longer public).
+Instead the new factory bean `org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper` should be used.
+This helps to ensure that the correct wrapper is created for each menu type and because it is a bean it may be extended for custom menu types.
+The same is for the methods `unwrapMenu` and `containsWrappedMenu` which have been moved to the new `MenuWrapper` class as well.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
