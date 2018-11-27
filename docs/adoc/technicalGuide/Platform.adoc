@@ -291,15 +291,26 @@ To read the configured value you can use the `CONFIG` class as demonstrated in <
 include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/platform/config/ScoutConfigTest.java[tags=getPropertyValue]
 ----
 
+==== Property resolution
+
 The given property key is searched in the following environments:
 
 . In the system properties (`java.lang.System.getProperty(String)`).
+. In the environment variables of the system (`java.lang.System.getenv(String)`).
 . In the properties file. The properties file can be
 .. a file on the local filesystem where the system property with key `config.properties` holds an absolute URL to the file or
 .. a file on the classpath with path `/config.properties` (recommended).
-. In the environment variables of the system (`java.lang.System.getenv(String)`).
+. If none of the above is found, the default value of the property is applied.
 
 Supported formats are simple key-value pairs, list values and map values. For more details about the format please refer to the JavaDoc of the `org.eclipse.scout.rt.platform.config.PropertiesHelper` class.
+
+Since the environment variable names are more restrictive in many shells and systems than the property names in Java, overriding a property containing a dot/period (`.`) with an environment variable would not be possible.
+To still allow overriding of such properties, the folllowing lookup rules are applied in-order to find a matching environment variable:
+
+. An exact match of your property key (`my.property`)
+. A match where periods are replaced by underscores (`my_property`)
+. An uppercase match of your property key (`MY.PROPERTY`)
+. An uppercase match where periods are replaced by underscores (`MY_PROPERTY`)
 
 A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list:
 

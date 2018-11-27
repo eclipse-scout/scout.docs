@@ -75,6 +75,33 @@ If the application does not have a Scout server session use
 * `HttpServerRunContextFilter` with session support disabled if a server dependency is available in the application.
 * `HttpRunContextFilter` if only a server-commons dependency is available in the application.
 
+=== Property lookup order changed
+
+The Scout properties are now resolved in a slightly different order. The environment variables are now resolved _before_ the `config.properties` file.
+
+. System properties
+. Environment variables
+. Config properties file
+. Default value of property
+
+Environment variable typically have stricter naming conventions for their names (POSIX).
+To allow overriding most Scout properties with environment variables, these lookup rules are applied in-order to find a matching environment variable:
+
+. An exact match of your property key (`my.property`)
+. A match where periods are replaced by underscores (`my_property`)
+. An uppercase match of your property key (`MY.PROPERTY`)
+. An uppercase match where periods are replaced by underscores (`MY_PROPERTY`)
+
+If there are no environment variables which collide with Scout properties, then no migration is required.
+
+In a deployment where a colliding environment variable exists, the following migration options exist:
+
+* If it is an intentional override: No migration required
+* If the override is an unintended collision of the environment
+** Remove the colliding environment variable from the environment of the process your application runs in, or
+** Change the property key, or
+** Force the intended property to the desired value using a Java system property (`-D` JVM parameter).
+
 
 === Menu wrapping
 

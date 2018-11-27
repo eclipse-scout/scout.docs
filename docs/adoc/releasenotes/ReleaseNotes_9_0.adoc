@@ -130,3 +130,17 @@ Finally the `TreeNode` (and therefore all pages because they are tree nodes) get
 == New event 'lookupCallDone'
 
 All fields having lookup calls (ListBox, RadioButtonGroup, SmartField, TagField) now fire a new event 'lookupCallDone' always when a lookup call has been executed and the result was processed by the field.
+
+== Property lookup order changed
+
+The Scout properties are now resolved in a slightly different order (https://bugs.eclipse.org/bugs/show_bug.cgi?id=541099[Bug 541099]). The environment variables are now resolved _before_ the `config.properties` file.
+
+. System properties
+. Environment variables
+. Config properties file
+. Default value of property
+
+Using environment variables, it is now possible to override values in the configuration file, as is already possible using system properties (`-D` flags on JVM command line).
+This change should simplify the usage of Scout in environments where the application should be static (example: Kubernetes, Docker), but still allow a degree of flexibility.
+
+Since environment variables are not allowed to contain dots/periods (`.`), the new lookup also searches for an equivalent environment variable by replacing periods with underscores (`_`) and converting the property to uppercase.
