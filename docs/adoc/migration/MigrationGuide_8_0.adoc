@@ -27,7 +27,7 @@ This release is expected to be a patch version release only for Eclipse Scout.
 
 This release is expected to be a patch version release only for Eclipse Scout.
 
-The initial release of this version was: 8.0.0.021 (_Maven_: 8.0.0.021_SimRel_2018_09)
+The initial release of this version was: 8.0.0.021 (_Maven_: 8.0.0.021_Simrel_2018_09)
 
 * <<SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.0.021)>>
 * <<Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.0.021)>>
@@ -510,9 +510,16 @@ Check the HowTo section _SmartField: how to apply colors and styles from a looku
 === AbstractIcons: Changed constants
 * `AbstractIcons.Menu` => `AbstractIcons.MenuBold`
 * `AbstractIcons.File` => `AbstractIcons.FileSolid`
+* `AbstractIcons.Category` => `AbstractIcons.CategoryBold`
 
 === ActivityMapMenuType: Removed
-For migration, simply remove any references to this class. 
+For migration, simply remove any references to this class.
+
+=== Texts and multi language support (NLS) has been moved to platform
+
+The classes `AbstractDynamicNlsTextProviderService`, `ITextProviderService`, `ScoutTexts` and `TEXTS` have been moved from the shared module to the platform.
+Accordingly the package of these classes has been changed to `org.eclipse.scout.rt.platform.text`.
+
 
 === Moved mail related classes to new module to org.eclipse.scout.rt.mail (since 8.0.0.021)
 The following classes were moved from `org.eclipse.scout.rt.shared.mail` to a new module named `org.eclipse.scout.rt.mail` to the package `org.eclipse.scout.rt.mail`:

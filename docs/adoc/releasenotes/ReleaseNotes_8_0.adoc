@@ -26,7 +26,7 @@ Even though with Eclipse Photon there will no longer be regular Eclipse _service
 * <<Virtual Scrolling (since Simrel 2018-12)>>
 
 ==== Simrel 2018-09, released on September 19, 2018
-The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_SimRel_2018_09)
+The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_Simrel_2018_09)
 
 * <<Support for Horizontal Alignment (since 8.0.0.021)>>
 
