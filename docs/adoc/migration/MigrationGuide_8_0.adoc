@@ -264,6 +264,8 @@ The following config property keys have been renamed (the old keys are no longer
 |`scout.auth.credentialsPlaintext`
 |`scout.auth.publickey`
 |`scout.auth.publicKey`
+|`scout.auth.privatekey`
+|`scout.auth.privateKey`
 |`scout.auth.token.ttl`
 |`scout.auth.tokenTtl`
 |`scout.server.url`
