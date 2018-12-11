@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
@@ -1997,6 +1998,35 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               column.setHorizontalAlignment(newAlignment);
             }
           }
+        }
+      }
+
+      @Order(210)
+      public class CheckableStyleField extends AbstractSmartField<CheckableStyle> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checkable Style";
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<CheckableStyle>> getConfiguredLookupCall() {
+          return TableCheckableStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTableField().getTable().setCheckableStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTableField().getTable().getCheckableStyle());
         }
       }
     }

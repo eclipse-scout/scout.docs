@@ -29,6 +29,7 @@ jswidgets.ListBoxForm.prototype._init = function(model) {
 
   this.widget('ValueFieldPropertiesBox').setField(this.listBox);
   this.widget('FormFieldPropertiesBox').setField(this.listBox);
+  this.widget('PropertiesBox').setTable(this.listBox.table);
   this.widget('GridDataBox').setField(this.listBox);
   this.widget('WidgetActionsBox').setField(this.listBox);
   this.widget('EventsTab').setField(this.listBox);
