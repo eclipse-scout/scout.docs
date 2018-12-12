@@ -19,5 +19,6 @@ jswidgets.CollapseStyleLookupCall.prototype._data = function() {
 
 jswidgets.CollapseStyleLookupCall.DATA = [
   [scout.Group.CollapseStyle.LEFT, 'left'],
-  [scout.Group.CollapseStyle.RIGHT, 'right']
+  [scout.Group.CollapseStyle.RIGHT, 'right'],
+  [scout.Group.CollapseStyle.BOTTOM, 'bottom']
 ];
