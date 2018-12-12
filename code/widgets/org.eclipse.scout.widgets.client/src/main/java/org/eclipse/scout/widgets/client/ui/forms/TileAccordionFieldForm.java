@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.ui.IWidget;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -37,6 +38,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.CollapseStyleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.CloseButton;
@@ -46,6 +48,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.FilterField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.CustomerHeaderWidgetField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.GroupIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
@@ -100,6 +103,10 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
   public VirtualField getVirtualField() {
     return getFieldByClass(VirtualField.class);
+  }
+
+  public CustomerHeaderWidgetField getCustomerHeaderWidgetField() {
+    return getFieldByClass(CustomerHeaderWidgetField.class);
   }
 
   public PropertiesBox getPropertiesBox() {
@@ -428,7 +435,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
                 updateStatus();
               }
             }
-
           }
 
           @ClassId("0663a479-ff8f-4a72-b337-ff9759643955")
@@ -459,11 +465,8 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
                 return false;
               }
             }
-
           }
-
         }
-
       }
 
       @Order(2000)
@@ -774,6 +777,69 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           }
 
           getAccordionField().getAccordion().getGroups().forEach(group -> group.setIconId(getValue()));
+        }
+      }
+
+      @Order(70)
+      @ClassId("168fe646-590d-44cf-b53a-e4d0dcd0dac5")
+      public class CollapseStyleField extends AbstractSmartField<String> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("CollapseStyle");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return CollapseStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getAccordionField().getAccordion().getGroups().forEach(group -> group.setCollapseStyle(getValue()));
+        }
+      }
+
+      @Order(2000)
+      @ClassId("a70f2b6f-3f33-4f26-b0ae-2cfb2599beb3")
+      public class CustomerHeaderWidgetField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("CustomHeaderWidget");
+        }
+
+        @Override
+        public String getTooltipText() {
+          return TEXTS.get("CustomHeaderWidgetTooltip");
+        }
+
+        @Override
+        protected void execChangedValue() {
+          IWidget header = getValue() ? prepareHeaderWidget() : null;
+          getAccordionField().getAccordion().getGroups().forEach(group -> replaceHeaderWidget(group, header));
+        }
+
+        protected IWidget prepareHeaderWidget() {
+          return new AbstractStringField() {
+            @Override
+            protected String getConfiguredLabel() {
+              return "For example a string field";
+            }
+
+            @Override
+            protected String getConfiguredLabelFont() {
+              return "BOLD";
+            }
+          };
+        }
+
+        protected void replaceHeaderWidget(IGroup group, IWidget header) {
+          if (group.getHeader() != null) {
+            group.getHeader().dispose();
+          }
+          group.setHeader(header);
+          group.setHeaderFocusable(header != null);
         }
       }
     }
