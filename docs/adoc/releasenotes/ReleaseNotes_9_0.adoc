@@ -144,3 +144,9 @@ Using environment variables, it is now possible to override values in the config
 This change should simplify the usage of Scout in environments where the application should be static (example: Kubernetes, Docker), but still allow a degree of flexibility.
 
 Since environment variables are not allowed to contain dots/periods (`.`), the new lookup also searches for an equivalent environment variable by replacing periods with underscores (`_`) and converting the property to uppercase.
+
+== New CheckableStyle for Table and Tree
+
+For both Table and Tree a new CheckableStyle was added. With the CHECKBOX_TABLE_ROW/CHECKBOX_TREE_NODE style it's possible to check/uncheck a row or node by clicking basically anywhere on the row or node.
+This new CheckableStyle is now the default in AbstractTree and AbstractListBox. With this CheckableStyle active, expansion on double click is not supported for enabled rows/nodes, since it interferes with the checking/unchecking action.
+
