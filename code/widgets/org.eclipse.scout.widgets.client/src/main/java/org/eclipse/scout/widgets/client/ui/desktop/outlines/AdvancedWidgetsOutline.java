@@ -63,7 +63,7 @@ public class AdvancedWidgetsOutline extends AbstractOutline {
 
   protected IPage<?> classInfoToPage(IClassInfo classInfo) {
     try {
-      return (IPage<?>) classInfo.resolveClass().newInstance();
+      return (IPage<?>) classInfo.resolveClass().getConstructor().newInstance();
     }
     catch (ReflectiveOperationException e) {
       throw new PlatformException("Error creating page for classinfo {}.", classInfo, e);

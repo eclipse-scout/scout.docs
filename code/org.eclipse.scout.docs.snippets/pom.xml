@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
 
@@ -66,6 +66,12 @@
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.rest</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.activation</groupId>
+          <artifactId>javax.activation-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -124,7 +130,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>com.helger.maven</groupId>
         <artifactId>jaxws-maven-plugin</artifactId>
         <executions>
           <!-- PingWebService.wsdl -->

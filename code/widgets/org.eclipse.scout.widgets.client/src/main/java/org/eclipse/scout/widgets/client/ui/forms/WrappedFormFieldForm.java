@@ -35,13 +35,13 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.Assertions;
 import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.InnerFormField;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.NewInstanceField;
-import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.WrappedFormFieldManagesFormLifecycleField;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.InnerFormStateBox.InnerFormStateButton;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.InnerFormStateBox.SetInnerFormButton;
+import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox2.WrappedFormFieldManagesFormLifecycleField;
+import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
@@ -83,12 +83,12 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 
   protected IForm createNewFormInstance(Class<? extends IForm> formClass) {
     try {
-      IForm form = formClass.newInstance();
+      IForm form = formClass.getConstructor().newInstance();
       form.setShowOnStart(false);
       form.setModal(false);
       return form;
     }
-    catch (InstantiationException | IllegalAccessException e) {
+    catch (ReflectiveOperationException e) {
       throw new ProcessingException("Error while creating instance of {}", formClass);
     }
   }

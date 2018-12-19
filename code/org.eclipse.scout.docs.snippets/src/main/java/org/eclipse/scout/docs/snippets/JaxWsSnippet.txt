@@ -14,7 +14,7 @@
 <build>
   <plugins>
     <plugin>
-      <groupId>org.codehaus.mojo</groupId>
+      <groupId>com.helger.maven</groupId>
       <artifactId>jaxws-maven-plugin</artifactId>
       <executions>
         <!-- YourFirstWebService.wsdl -->

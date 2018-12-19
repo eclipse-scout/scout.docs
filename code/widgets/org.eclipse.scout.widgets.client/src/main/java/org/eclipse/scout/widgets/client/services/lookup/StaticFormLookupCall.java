@@ -36,13 +36,13 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
 
   protected IPageForm createAndStartForm(Class<? extends IPageForm> formType) {
     try {
-      IPageForm form = formType.newInstance();
+      IPageForm form = formType.getConstructor().newInstance();
       form.setShowOnStart(false);
       form.setModal(false);
       form.start();
       return form;
     }
-    catch (InstantiationException | IllegalAccessException e) {
+    catch (ReflectiveOperationException e) {
       throw new ProcessingException("Error while creating instance of " + (formType == null ? "null" : formType.getName()));
     }
   }

@@ -163,7 +163,7 @@ See <<WebServiceEntryPoint,WebServiceEntryPoint>> for more information.
 
 [[jaxws.stub.generation]]
 ==== Configure webservice stub generation via wsimport
-The Maven plugin 'org.codehaus.mojo:jaxws-maven-plugin' with the goal 'wsimport' is used to generate a webservice stub from a WSDL file and its referenced XSD schema files. If your Maven module inherits from the Scout module 'maven_rt_plugin_config-master', the 'jaxws' profile is available, which activates automatically upon the presence of a 'WEB-INF/wsdl' folder. Instead of inheriting from that module, you can alternatively copy the 'jaxws' profile into your projects parent POM module.
+The Maven plugin 'com.helger.maven:jaxws-maven-plugin' with the goal 'wsimport' is used to generate a webservice stub from a WSDL file and its referenced XSD schema files. If your Maven module inherits from the Scout module 'maven_rt_plugin_config-master', the 'jaxws' profile is available, which activates automatically upon the presence of a 'WEB-INF/wsdl' folder. Instead of inheriting from that module, you can alternatively copy the 'jaxws' profile into your projects parent POM module.
 
 This profile is for convenience purpose, and provides a ready-to-go configuration to generate webservice stubs and webservice provider artifacts. It configures the 'jaxws-maven-plugin' to look for WSDL and XSD files in the folder 'src/main/resources/WEB-INF/wsdl', and for binding files in the folder '/src/main/resources/WEB-INF/binding'. Upon generation, the stub will be put into the folder 'target/generated-sources/wsimport'.
 

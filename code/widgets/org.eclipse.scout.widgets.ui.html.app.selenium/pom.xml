@@ -135,7 +135,7 @@
       </properties>
     </profile>
     <profile>
-	  <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
+    <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
       <id>linux64_chrome_driver</id>
       <activation>
         <os>
