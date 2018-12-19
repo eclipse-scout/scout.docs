@@ -41,7 +41,7 @@ If you disable the root group box of a form (with child propagation) and want th
 
 If you have Close- or Cancel-Buttons that need to be disabled, it must be disabled explicitly on the button itself or by propagating the change on a parent form field.
 
-=== Add custom header for REST services
+=== Add Custom Header for REST Services
 
 By default REST services exposed by Scout using the `org.eclipse.scout.rt.rest.RestApplication` are protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] now.
 This requires a custom header to be present on all non GET or HEAD requests. Please do also ensure that GET or HEAD requests do follow the HTTP specification and therefore do not perform any data or state changing operations!
@@ -75,7 +75,7 @@ If the application does not have a Scout server session use
 * `HttpServerRunContextFilter` with session support disabled if a server dependency is available in the application.
 * `HttpRunContextFilter` if only a server-commons dependency is available in the application.
 
-=== Property lookup order changed
+=== Property Lookup Order Changed
 
 The Scout properties are now resolved in a slightly different order. The environment variables are now resolved _before_ the `config.properties` file.
 
@@ -103,12 +103,36 @@ In a deployment where a colliding environment variable exists, the following mig
 ** Force the intended property to the desired value using a Java system property (`-D` JVM parameter).
 
 
-=== Menu wrapping
+=== Menu Wrapping
 
 The `OutlineMenuWrapper` has been adapted so that no manual instance can be created anymore (the constructors are no longer public).
 Instead the new factory bean `org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper` should be used.
 This helps to ensure that the correct wrapper is created for each menu type and because it is a bean it may be extended for custom menu types.
 The same is for the methods `unwrapMenu` and `containsWrappedMenu` which have been moved to the new `MenuWrapper` class as well.
+
+
+=== CollatorProvider Behavior Changed
+
+The `CollatorProvider` bean now uses the _NaturalCollatorProvider_ by default (see release notes). This may result in different results when sorting text.
+
+*Migration:*
+
+If your application already used a custom `CollatorProvider` bean, this may not be necessary anymore. Check the implementation.
+
+If your application whishes to restore the previous behavior, the `CollatorProvider` has to be replaced like this:
+
+[source,Java]
+----
+@Replace
+public class MyCollatorProvider extends CollatorProvider {
+
+  @Override
+  public Collator getInstance(Locale locale) {
+    return Collator.getInstance(locale); // use JVM default
+  }
+}
+----
+
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -141,17 +165,19 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@scrollbar-side-margin` to `@scrollbar-side-padding`
 
 
-=== Default value for Scout JSON model attribute 'type'
+=== Default Value for Scout JSON Model Attribute "type"
 
 In the Scout JSON model the `"type": "model"` must no longer be specified as it is the default value now. Therefore all occurrences can be deleted. This makes the static JSON model more compact, easier to write and better readable.
 
-=== Page can be declared in the static Outline JSON model
+
+=== Page Can Be Declared in the Static Outline JSON Model
 
 Before 9.0 it was necessary to add pages (`PageWithTable`, `PageWithNodes`) programmatically to outlines as pages could not be declared in the JSON model. This is now possible.
 The Outline JSON model may now contain an attribute `nodes` which may contain custom pages.
 Refer to the helloworld application (created by Eclipse) or the JS Widgets application for an example.
 
-=== Form in FormTableControl is adapted automatically
+
+=== Form in FormTableControl is Adapted Automatically
 
 A form in a `FormTableControl` is automatically adapted to match the semantics in which the form exists:
 
@@ -161,14 +187,15 @@ A form in a `FormTableControl` is automatically adapted to match the semantics i
 
 Until now if the `FormTableControl` was used in a project, this adaption of the form must have been done manually. This code can now be removed as it will be done by Scout now.
 
-=== Table inside PageWithTable uses default reload handler
+
+=== Table Inside PageWithTable Uses Default Reload Handler
 
 A table within a `PageWithTable` has a default reload handler installed now. It calls `loadTableData` on the page which discards all rows and loads them again by calling `_loadTableData`.
 If a custom reload handler was installed, it may be removed now.
 
 Furthermore the `_loadTableData` method now also gets an optional argument holding the exported data of the first form that is attached to the table using a `FormTableControl` (typically the SearchForm).
 
-=== Possibility to prepare a LookupCall in a ListBox & RadioButtonGroup
+=== Possibility to Prepare a LookupCall in ListBox & RadioButtonGroup
 
 Until now it was necessary to set the lookup call programmatically to a ListBox or LookupCall if a `prepareLookupCall` listener was registered. Otherwise the call has been executed before the listener could have been attached.
 This is no longer the case: The LookupCall is executed on first use only and not during the creation of the widget which allows to attach `prepareLookupCall` listeners.

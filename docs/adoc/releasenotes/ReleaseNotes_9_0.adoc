@@ -85,7 +85,7 @@ Since Scout 9.0 Close- and Cancel-Buttons can be disabled like any other form fi
 
 So if a Form or GroupBox is disabled using `setEnabled(false)` or `setEnabledGranted(false)` or any other dimension, the full form gets disabled except the Close- and Cancel-Buttons. As soon as the button is disabled explicitly (e.g. by calling `setEnabled(false)` on the button itself or by propagating to the button using `setEnabled(false, false, true)` on a parent composite) it will be disabled and the form cannot be closed anymore.
 
-== New Servlet Filters to create a Scout run context
+== New Servlet Filters to Create a Scout RunContext
 
 Before Scout 9 the `ServerRunContextFilter` was used to create Scout server contexts for REST APIs. This filter used a user based TTL cache that was not bound to the HTTP session.
 
@@ -100,7 +100,7 @@ The layout structure of the scrollbar comes now with an additional div, and the 
 
 With this change, the usability of the scout scrollbar has improved. The thumb is now easier to catch, especially when positioned at the very edge of the screen.
 
-== Design change for WizardProgressField
+== Design Change for WizardProgressField
 
 The wizard progress has a new design.
 
@@ -110,15 +110,15 @@ image::{imgsdir}/wizard_progress.png[]
 
 Wizard steps can now be marked as finished, in this case they will be displayed with a check mark icon in the wizard progress.
 
-== New widget Mode Selector
+== New Widget "Mode Selector"
 
-The widget "ModeSelector" was added. It has similar functionality as the RadioButtonGroup but with another design.
+The widget _ModeSelector_ was added. It has similar functionality as the RadioButtonGroup but with another design.
 
 [[img-mode-selector]]
 .Mode Selector
 image::{imgsdir}/mode_selector.png[]
 
-== Improvements for Pages in Scout JS applications
+== Improvements for Pages in Scout JS Applications
 
 The API to work with Pages (`PageWithTable`, `PageWithNodes`) has been improved. It is now possible to declare child pages in the static JSON model of outlines and the table within a `PageWithTable` has a default reload handler installed.
 
@@ -127,11 +127,11 @@ This makes it easier to use the values from a search form by e.g. passing them t
 
 Finally the `TreeNode` (and therefore all pages because they are tree nodes) get a method `_jsonModel` to declare the static JSON model that belongs to that tree node or page. This works the same way as with all other widgets now.
 
-== New event 'lookupCallDone'
+== New Event "lookupCallDone"
 
-All fields having lookup calls (ListBox, RadioButtonGroup, SmartField, TagField) now fire a new event 'lookupCallDone' always when a lookup call has been executed and the result was processed by the field.
+All fields having lookup calls (ListBox, RadioButtonGroup, SmartField, TagField) now fire a new event `'lookupCallDone'` always when a lookup call has been executed and the result was processed by the field.
 
-== Property lookup order changed
+== Property Lookup Order Changed
 
 The Scout properties are now resolved in a slightly different order (https://bugs.eclipse.org/bugs/show_bug.cgi?id=541099[Bug 541099]). The environment variables are now resolved _before_ the `config.properties` file.
 
@@ -150,3 +150,31 @@ Since environment variables are not allowed to contain dots/periods (`.`), the n
 For both Table and Tree a new CheckableStyle was added. With the CHECKBOX_TABLE_ROW/CHECKBOX_TREE_NODE style it's possible to check/uncheck a row or node by clicking basically anywhere on the row or node.
 This new CheckableStyle is now the default in AbstractTree and AbstractListBox. With this CheckableStyle active, expansion on double click is not supported for enabled rows/nodes, since it interferes with the checking/unchecking action.
 
+== Strings Sorted with "Natural" Collator by Default
+
+Scout now enables the `NaturalCollatorProvider` by default. When comparing text using a collator (e.g. via _StringUtility_), strings are now sorted more "naturally". Unlike with the JVM default, spaces (`" "`) and hyphens (`"-"`) are no longer ignored.
+
+This is an old https://bugs.eclipse.org/bugs/show_bug.cgi?id=390097[bug fix] that was finally made permanent.
+
+_Example:_
+
+.Input list (unordered)
+----
+[ "The dogs bark", "The dog barks", "The dog sleeps" ]
+----
+
+.Sorted list with JVM default (< Scout 9)
+----
+The dog barks
+The dogs bark
+The dog sleeps
+----
+
+.Sorted list with NaturalCollatorProvider (=> Scout 9)
+----
+The dog barks
+The dog sleeps
+The dogs bark
+----
+
+Projects that wish to keep the existing behavior can do so by providing their own `CollatorProvider` (see migration guide).
