@@ -127,4 +127,7 @@
   __include("jswidgets/page/SamplePageWithTable.js");
   __include("jswidgets/page/SamplePageWithTableSearchForm.js");
   __include("jswidgets/page/SamplePageWithNodes.js");
+  __include("jswidgets/treebox/TreeBoxForm.js");
+  __include("jswidgets/treebox/TreePropertiesBox.js");
+  __include("jswidgets/treebox/CheckableTreeStyleLookupCall.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

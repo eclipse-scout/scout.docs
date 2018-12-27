@@ -63,6 +63,8 @@
     "jswidgets/valuefield/ValueFieldPropertiesBox.json",
     "jswidgets/page/SamplePageWithTable.json",
     "jswidgets/page/SamplePageWithTableSearchForm.json",
-    "jswidgets/page/SamplePageWithNodes.json"
+    "jswidgets/page/SamplePageWithNodes.json",
+    "jswidgets/treebox/TreeBoxForm.json",
+    "jswidgets/treebox/TreePropertiesBox.json"
   ]
 }

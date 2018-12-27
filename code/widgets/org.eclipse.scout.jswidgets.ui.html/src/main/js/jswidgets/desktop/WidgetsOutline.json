@@ -314,6 +314,14 @@
       "detailForm": {
         "objectType": "jswidgets.TileAccordionForm"
       }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "Tree Box",
+      "detailForm": {
+        "objectType": "jswidgets.TreeBoxForm"
+      }
     }
   ]
 }

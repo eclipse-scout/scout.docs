@@ -8,17 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.CheckableStyleLookupCall = function() {
-  jswidgets.CheckableStyleLookupCall.parent.call(this);
+jswidgets.CheckableTreeStyleLookupCall = function() {
+  jswidgets.CheckableTreeStyleLookupCall.parent.call(this);
 };
-scout.inherits(jswidgets.CheckableStyleLookupCall, scout.StaticLookupCall);
+scout.inherits(jswidgets.CheckableTreeStyleLookupCall, scout.StaticLookupCall);
 
-jswidgets.CheckableStyleLookupCall.prototype._data = function() {
-  return jswidgets.CheckableStyleLookupCall.DATA;
+jswidgets.CheckableTreeStyleLookupCall.prototype._data = function() {
+  return jswidgets.CheckableTreeStyleLookupCall.DATA;
 };
 
-jswidgets.CheckableStyleLookupCall.DATA = [
-  [scout.Table.CheckableStyle.CHECKBOX, 'checkbox'],
-  [scout.Table.CheckableStyle.TABLE_ROW, 'table_row'],
-  [scout.Table.CheckableStyle.CHECKBOX_TABLE_ROW, 'checkbox_table_row']
+jswidgets.CheckableTreeStyleLookupCall.DATA = [
+  [scout.Tree.CheckableStyle.CHECKBOX, 'checkbox'],
+  [scout.Tree.CheckableStyle.CHECKBOX_TREE_NODE, 'checkbox_tree_node']
 ];

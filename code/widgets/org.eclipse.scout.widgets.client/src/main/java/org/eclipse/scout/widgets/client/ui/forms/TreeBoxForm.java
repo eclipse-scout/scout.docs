@@ -19,6 +19,7 @@ import java.util.Set;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
+import org.eclipse.scout.rt.client.ui.basic.tree.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
@@ -30,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.ITreeBox;
@@ -582,6 +584,59 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(getTreeBoxField().getTree().isCheckable());
+        }
+      }
+
+      @Order(80)
+      public class MulticheckField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Multicheck";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeBoxField().getTree().setMultiCheck(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeBoxField().getTree().isMultiCheck());
+        }
+      }
+
+      @Order(100)
+      public class CheckableStyleField extends AbstractSmartField<CheckableStyle> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checkable Style";
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<CheckableStyle>> getConfiguredLookupCall() {
+          return TreeCheckableStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTreeBoxField().getTree().setCheckableStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTreeBoxField().getTree().getCheckableStyle());
         }
       }
     }
