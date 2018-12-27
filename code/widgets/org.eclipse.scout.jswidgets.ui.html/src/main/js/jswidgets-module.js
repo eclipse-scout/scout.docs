@@ -20,7 +20,6 @@
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
-  __include("jswidgets/common/Text.js");
   __include("jswidgets/common/WidgetActionsBox.js");
   __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/desktop/Desktop.js");

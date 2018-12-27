@@ -105,11 +105,11 @@ jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
     withArrow: this.widget('WithArrowField').value,
     cssClass: 'popup-form-popup',
     widget: {
-      objectType: "jswidgets.Text",
+      objectType: "Label",
       htmlEnabled: true,
-      text: '<h2>Hi, I\'m a popup!</h2>' +
-          '<p>This widget popup contains a label field to display some text.</p>' +
-          '<p>Instead of a label field you can use any other widget you like, the popup will act as wrapper for your widget.</p>' +
+      value: '<h2>Hi, I\'m a popup!</h2>' +
+          '<p>This widget popup contains a label to display some text.</p>' +
+          '<p>Instead of a label you can use any other widget you like, the popup will act as wrapper for your widget.</p>' +
           '<p>The popup will be as big as its content, so you probably need to define its size, e.g. using the min- and max-width CSS properties.</p>'
     }
   });
