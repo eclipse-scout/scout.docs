@@ -178,3 +178,46 @@ The dogs bark
 ----
 
 Projects that wish to keep the existing behavior can do so by providing their own `CollatorProvider` (see migration guide).
+
+== New Properties for MenuBar Design
+
+There are several new properties added to adapt the design of the MenuBar.
+
+=== New GroupBox Property 'menuBarPosition'
+
+GroupBoxes can now define the position of the MenuBar inside the GroupBox, the three possibilities are:
+
+* `MENU_BAR_POSITION_AUTO`
+* `MENU_BAR_POSITION_TOP`
+* `MENU_BAR_POSITION_BOTTOM`
+
+The default value is `MENU_BAR_POSITION_AUTO`, which corresponds to the old behavior.
+
+=== New GroupBox Property 'menuBarEllipsisPosition'
+
+GroupBoxes can define the position of the ellipsis dropdown menu inside the MenuBar. The possible values are:
+
+* `MENU_BAR_ELLIPSIS_POSITION_LEFT`
+* `MENU_BAR_ELLIPSIS_POSITION_RIGHT`
+
+The default value is `MENU_BAR_ELLIPSIS_POSITION_RIGHT`, as it was in earlier releases.
+
+=== New Menu/Button Property 'shrinkable'
+
+Menus and buttons can define if they are shrinkable or not. When there is not enough space for all menus/buttons in the MenuBar, only the configured Icon of the shrinkable menu/button will be displayed, without text/label.
+By default the menus/buttons are not shrinkable.
+
+=== New Button Property 'stackable'
+Now not only menus but also buttons can define if they are stackable or not. When after shrinking there is still not enough space in the MenuBar to display all menus/buttons, the stackable menus/buttons will be stacked in the ellipsis dropdown menu.
+By default the menus/buttons are stackable.
+
+When the ellipsis position inside the MenuBar is `MENU_BAR_ELLIPSIS_POSITION_RIGHT`, the ellipsis menu is placed after the last visible, stackable menu/button.
+When the ellipsis position is `MENU_BAR_ELLIPSIS_POSITION_LEFT`, the ellipsis menu is placed before the first visible, stackable menu/button.
+
+[[img-menu-bar-layout-properties]]
+.MenuBar layout properties
+image::{imgsdir}/menu_bar_layout_properties.png[]
+
+== New OpenUriAction
+
+The URI Action `OpenUriAction.POPUP_WINDOW` is added. The existing URI Action `NEW_WINDOW` leaves it to the browser whether a new tab or a new window is opened. Using the new URI Action `POPUP_WINDOW`, the URI will always be opened in a new window.
