@@ -144,3 +144,25 @@ Using environment variables, it is now possible to override values in the config
 This change should simplify the usage of Scout in environments where the application should be static (example: Kubernetes, Docker), but still allow a degree of flexibility.
 
 Since environment variables are not allowed to contain dots/periods (`.`), the new lookup also searches for an equivalent environment variable by replacing periods with underscores (`_`) and converting the property to uppercase.
+
+== Improvements for 'Group' widget
+
+=== Widget in header
+
+It is now possible to define a custom widget as group header instead of only the title/suffix texts. This allows for example to add input-fields or buttons to group headers. This can be achieved by overriding the method `getConfiguredHeader` and returning a widget class or `createHeader` and returning the widget instance.
+
+image::{imgsdir}/group_header-widget.png[]
+
+=== Collapse style 'bottom'
+
+The property `collapseStyle` was extended by the style `bottom` which displays a bottom border for the group and (if the group is collapsible) a collapse-arrow centered in the middle of the bottom-border.
+
+image::{imgsdir}/group_collapse-style-bottom.png[]
+
+=== Property 'visible'
+
+The property `visible` in the Java model was migrated from a `boolean` to a `byte` type to achieve multiple dimension support for the visibility of a group (see also https://eclipsescout.github.io/9.0/technical-guide.html#multiple-dimensions-support).
+
+=== Property 'bodyVisible'
+
+The new property `bodyVisible` defines if the body can be visible at all (means there is a content and the user can collapse/open the group) or should be hidden (even if there is a body with content defined in the model).
