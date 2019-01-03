@@ -245,3 +245,8 @@ image::{imgsdir}/menu_bar_layout_properties.png[]
 == New OpenUriAction
 
 The URI Action `OpenUriAction.POPUP_WINDOW` is added. The existing URI Action `NEW_WINDOW` leaves it to the browser whether a new tab or a new window is opened. Using the new URI Action `POPUP_WINDOW`, the URI will always be opened in a new window.
+
+== New Column Property 'nodeColumnCandidate'
+
+The new property defines if the column can be considered as a candidate for the node column. The node column is used to display the control to expand and collapse rows in a hierarchical table. If `false` the column will be skipped when scanning for the node column and the next suitable column will be chosen as node column.
+
