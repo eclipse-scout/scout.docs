@@ -35,7 +35,7 @@ Scout facilitates working with webservices, supports you in the generation of ar
 The JAX-WS Scout integration provides a thin layer on top of JAX-WS implementors to facilitate working with webservices.
 It depends on the JAX-WS 2.2.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:
 
-* _JAX-WS RI_ (reference implementation) as shipped with Java 7 and Java 8
+* _JAX-WS RI_ (reference implementation) as shipped with Java 7 and Java 8. Please note that starting with Java 11 this is no longer part of the JRE.
 * _JAX-WS METRO_ (2.2.10)
 * _Apache CXF_ (3.1.3)
 

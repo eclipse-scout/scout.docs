@@ -51,7 +51,7 @@ Typically, the default implementation of such an abstraction integrates a framew
 
 Learning a new framework should be efficient and enjoyable.
 For developers that have a good understanding of the Java language learning the Scout framework will be straight forward.
-The required skill level roughly corresponds to the Oracle Certified Professional Java SE Programmer for Java version 7 or higher.
+The required skill level roughly corresponds to the Oracle Certified Professional Java SE Programmer for Java version 11 or higher.
 As the Scout framework takes care of the transformation of the user interface from Java to HTML5, Scout developers only needs a minimal understanding of HTML5/CSS3/JavaScript.
 In the case of writing project specific UI components a deeper understanding of today's web technologies might be required of course.
 

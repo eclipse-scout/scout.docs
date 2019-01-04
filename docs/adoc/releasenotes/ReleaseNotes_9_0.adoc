@@ -66,6 +66,18 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
+== Java 11 Support
+
+Scout 9 officially supports https://jdk.java.net/11/[OpenJDK 11]. Please note that Java 9 and 10 are not supported and that https://www.oracle.com/technetwork/java/java-se-support-roadmap.html[Oracle only provides free Java 8 updates for commercial use until end of January 2019].
+Therefore it is recommended to use OpenJDK 11.0.1 or newer. Please refer to the Migration guide for instructions how to migrate.
+
+In the future Scout plans to support each LTS (long term support) version of Java. After Java 11 the next supported version might by Java 17. Please note that these plans may change at a future release.
+
+== New SDK Feature
+
+Add a menu entry `Scout` -> `Search for duplicate @ClassId Values` to manually trigger a search for duplicate class ids in the workspace.
+
+
 == Dark Theme
 
 Enter the dark side... and use the new dark theme of Scout!

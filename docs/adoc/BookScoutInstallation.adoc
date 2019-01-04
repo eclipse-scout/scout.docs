@@ -35,51 +35,15 @@ In the text below, installation routines are described separately for Windows, M
 
 === Download and Install a JDK
 
-The first step to install Scout is to have an existing and working installation of a JDK version 8.
-Please note that the Scout 9.0 Runtime does not support Java 9 yet. The Java 9 support is planned for Eclipse _Photon_ release (Scout 8.0) in summer 2018.
+The first step to install Scout is to have an existing and working installation of a JDK version 11.
+Please note that the Scout 9.0 Runtime does not officially support other Java versions. When downloading a Java 11 JDK it is recommended to choose version 11.0.1 or newer. Please note that only x64 hardware architectures are supported.
 
-Currently, we recommend to install the Oracle JDK 8 together with Scout. Although, using OpenJDK with Scout should work too.
-To successfully install the JDK you need to have at least local admin rights.
-You also need to know your hardware architecture in order to download the correct JDK installer.
+You can download the JDK archive matching your operating system from the Java homepage.footnote:[
+OpenJDK 11 download: https://jdk.java.net/11/
+] Afterwards extract the archive to a location of your choice.
 
-For Windows, the steps necessary to determine your hardware architecture are described on Microsoft's support
-site.footnote:[
-Windows 32/64-bit installation: http://support.microsoft.com/kb/827218
-].
-For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web.footnote:[
-Linux 32/64-bit installation example page: http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/
-]
-For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.
-
-Once you know your hardware architecture, go to Oracle's official download
-site.footnote:[
-Official JDK 8 download: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-]
-and accept the licence agreement by clicking on the appropriate radio button.
-Then, select the _Windows x64_ package if you are running 64-bit Windows as shown in <<img-jdk_download_oracle>>.
-If you are running 32-bit Windows, go for the _Windows x86_ package.
-It is also recommended to download the _Java SE 8 Documentation_.
-The Java API documentation package is available from the official download site.footnote:[
-Java API documentation download: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-], located further down under section _Additional Resources_.
-
-[[img-jdk_download_oracle]]
-.Installer download for Oracle JDK 8.
-image::{imgsdir}/oracle_jdk_download.png[]
-
-Once you have successfully downloaded the JDK installer, follow the Windows installation guide.footnote:[
-Install the JDK on Windows: http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html#Run].
 To verify the installation you might want to go through this Java "`Hello World!`"
 tutorial.footnote:[Windows Java "`Hello World!`": http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html].
-
-Installation instructions for Linux.footnote:[
-Install the JDK on Linux: https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html
-]
-and Mac.footnote:[
-Install the JDK on Mac: https://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html.
-]
-are also available from Oracle.
-
 
 [[sec-download_install]]
 === Download and Install Scout
@@ -87,12 +51,12 @@ are also available from Oracle.
 include::DownloadAndInstallScout.adoc[]
 
 If you have only installed a single JDK you will not need to change the default `eclipse.ini` file of your Eclipse installation.
-In case you have installed multiple JDKs coming with their individual Java Runtime Environments (JREs), you might want to explicitly specifiy which JRE to use.
+In case you have installed multiple JDKs coming with their individual Java Runtime Environments (JREs), you might want to explicitly specify which JRE to use.
 Open the file `eclipse.ini` in a editor of your choice and insert the following two lines at the top of the file:
 
 ----
 -vm
-C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll
+C:\jdk-11.0.1\bin\server\jvm.dll
 ----
 
 where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.
@@ -110,7 +74,7 @@ In the long list of system properties you will find lines similar to the ones sh
 *** System properties:
 ...
 -vm
-C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll
+C:\jdk-11.0.1\bin\server\jvm.dll
 ...
 sun.java.command=... vm C:\java\jdk1.8.0_77_x64\jre\bin\server\jvm.dll -vmargs ...
 ----

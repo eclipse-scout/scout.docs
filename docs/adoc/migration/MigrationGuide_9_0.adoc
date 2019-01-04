@@ -221,3 +221,47 @@ Note: Due to compatibility reasons the behavior for Scout Classic has not been c
 ////
 
 == Other Changes
+
+=== Java 11 Support
+
+Scout 9 officially supports https://jdk.java.net/11/[OpenJDK 11]. Please note that Java 9 and 10 are not supported and that https://www.oracle.com/technetwork/java/java-se-support-roadmap.html[Oracle only provides free Java 8 updates for commercial use until end of January 2019].
+Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapters describe the actions to migrate your code to be Java 11 capable.
+
+==== General Migration
+
+* Scout increased the minimum Maven version from 3.2.1 to 3.5.3. You might need to update your tool-chain accordingly.
+* The JAX-RS API version has been updated from 2.0.1 to 2.1.1. This may be relevant if you use a container that already includes a JAX RS runtime instead of bundling your own runtime.
+* Update the `maven_rt_plugin_config-master` in all poms to version 3.1.0-SNAPSHOT
+* If you use the Scout JAX-RS support using Jersey you have to add the dependency `org.glassfish.jersey.inject:jersey-hk2` to all poms where the artifact `jersey-container-servlet-core` is referenced as dependency.
+* Batik has been updated from 1.7 to 1.10. If you are using Batik in your project you might need to update some imports. E.g.:
+** `org.apache.batik.dom.svg.SAXSVGDocumentFactory` to `org.apache.batik.anim.dom.SAXSVGDocumentFactory`
+** `org.apache.batik.dom.svg.SVGDOMImplementation` to `org.apache.batik.anim.dom.SVGDOMImplementation`
+* Because of duplicate classes in `javax.activation:javax.activation-api` and the corresponding implementation `com.sun.activation:javax.activation` it might be necessary to exclude the former dependency where both are present on the classpath. Such cases will be reported by the `duplicate-finder-maven-plugin` during maven build.
+* If you are using the `maven-assembly-plugin`: The `descriptor` tag pointing to the xml file has been replaced with a `descriptors` list element. Furthermore the `classifier` configuration element does no longer exist and must be deleted if present. Example: `<descriptor>assembly.xml</descriptor>` can be replaced with
+[source,xml]
+----
+    <descriptors>
+       <descriptor>assembly.xml</descriptor>
+    </descriptors>
+----
+
+
+==== JAX WS Migration
+
+* The JAX WS API version has been updated from 2.2.10 to 2.3.1. This may be relevant if you use a container that already includes a JAX WS runtime instead of bundling your own runtime.
+* The JAX WS RI (reference implementation) has been removed from the JRE. Therefore `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsRISpecifics` should not longer by used unless the application is still running with Java 8. Otherwise migrate to `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsMetroSpecifics` (which is the new default value).
+* Because the RI is no longer part of the JRE, the Metro implementation must be added instead. To do so please add dependency `com.sun.xml.ws:jaxws-rt` to the poms of your server war and dev projects.
+* Because the JAX WS classes are no longer part of the JRE, the corresponding libraries must be added to all `.factorypath` files in your workspace. Please add the following elements:
+[source,xml]
+----
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/jws/javax.jws-api/1.1/javax.jws-api-1.1.jar"
+       enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar"
+       enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/xml/ws/jaxws-api/2.3.1/jaxws-api-2.3.1.jar"
+       enabled="true" runInBatchMode="false"/>
+----
+* The `jaxws-maven-plugin` from `org.codehaus.mojo` is not Java 11 capable. Therefore replace the groupId with `com.helger.maven` in all your poms to use a Java 11 capable maven plugin.
