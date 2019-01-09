@@ -201,6 +201,18 @@ Until now it was necessary to set the lookup call programmatically to a ListBox 
 This is no longer the case: The LookupCall is executed on first use only and not during the creation of the widget which allows to attach `prepareLookupCall` listeners.
 The LookupCall may now also be declared in the static JSON model of the widget even though a `prepareLookupCall` listener is registered.
 
+=== Toggle Action and Button Now Trigger Event
+The action resp. click event is currently not fired if the action/button is a toggle action or the button has menus.
+This means, if you want to be informed when a user clicks a regular button, you would listen for the action event.
+If you want to be informed when a user clicks a toggle button, you would have to listen for a property change event.
+
+To make it easier, the action event is now always fired (in addition to the property change event).
+This helps, if you just want to know whether the button was clicked and aren't interested in the selected state.
+
+If you accidentally registered an action resp. click listener for toggle actions or buttons, or menu with child menus or buttons with
+menus, the listener will now be informed. So make sure to check your toggle actions and buttons so that the action is not executed twice.
+
+Note: Due to compatibility reasons the behavior for Scout Classic has not been changed.
 
 ////
   =============================================================================
