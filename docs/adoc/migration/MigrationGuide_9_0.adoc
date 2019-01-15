@@ -231,7 +231,7 @@ Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapte
 
 * Scout increased the minimum Maven version from 3.2.1 to 3.5.3. You might need to update your tool-chain accordingly.
 * The JAX-RS API version has been updated from 2.0.1 to 2.1.1. This may be relevant if you use a container that already includes a JAX RS runtime instead of bundling your own runtime.
-* Update the `maven_rt_plugin_config-master` in all poms to version 3.1.0-SNAPSHOT
+* Update the `maven_rt_plugin_config-master` in all poms to version 3.1.0
 * If you use the Scout JAX-RS support using Jersey you have to add the dependency `org.glassfish.jersey.inject:jersey-hk2` to all poms where the artifact `jersey-container-servlet-core` is referenced as dependency.
 * Batik has been updated from 1.7 to 1.10. If you are using Batik in your project you might need to update some imports. E.g.:
 ** `org.apache.batik.dom.svg.SAXSVGDocumentFactory` to `org.apache.batik.anim.dom.SAXSVGDocumentFactory`
