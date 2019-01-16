@@ -14,7 +14,8 @@ jswidgets.SamplePageWithTableSearchForm.prototype._jsonModel = function() {
 
 jswidgets.SamplePageWithTableSearchForm.prototype._initListeners = function() {
   var parentTable = this.parent.table;
-  this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable));
+  //reloadReason: search
+  this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable), 'search');
 };
 
 jswidgets.SamplePageWithTableSearchForm.prototype.exportData = function() {
