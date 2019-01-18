@@ -10,6 +10,10 @@ public class WidgetsContentSecurityPolicy extends ContentSecurityPolicy {
   protected void initDirectives() {
     super.initDirectives();
     // Demo app uses external images in html field and custom widgets -> allow it
-    withImgSrc("*");
+    this
+        .withImgSrc("'self' blob: *")
+        .withFontSrc("'self' https://cdnjs.cloudflare.com")
+        .withScriptSrc("'self' https://use.fontawesome.com")
+        .withStyleSrc("'self' 'unsafe-inline' https://use.fontawesome.com https://cdnjs.cloudflare.com");
   }
 }
