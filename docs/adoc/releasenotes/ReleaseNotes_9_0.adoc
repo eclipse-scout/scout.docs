@@ -271,3 +271,6 @@ The URI Action `OpenUriAction.POPUP_WINDOW` is added. The existing URI Action `N
 
 The new property defines if the column can be considered as a candidate for the node column. The node column is used to display the control to expand and collapse rows in a hierarchical table. If `false` the column will be skipped when scanning for the node column and the next suitable column will be chosen as node column.
 
+== Responsiveness
+
+Once a group box becomes smaller than its preferred width it will transform its internal fields to increase readability. For more information consult the https://eclipsescout.github.io/9.0/technical-guide.html[technical guide].
