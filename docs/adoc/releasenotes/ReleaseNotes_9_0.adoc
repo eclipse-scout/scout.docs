@@ -283,3 +283,11 @@ Once a group box becomes smaller than its preferred width it will transform its 
 == MOM: Add Support for Handling Incoming/Outgoing JMS Messages
 
 The new interface `org.eclipse.scout.rt.mom.jms.IJmsMessageHandler` adds suport for incoming and outgoing JMS message handling. The default implementation `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler` logs all messages on level DEBUG.
+
+== PropertyChange Event on HtmlEnvironment
+
+Now the HtmlEnvironment fires a `propertyChange` Event when it gets (re)initialized. All Layouts or other Components that depend on the HtmlEnvironment's properties should listen to that event and handle it appropriately.
+
+== New DisplayStyle 'dense' on Desktop
+
+This new display style is targeted at users working on laptops or other small screens. It reduces the whitespace between elements to display more content on the available screen size.
