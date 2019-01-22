@@ -134,6 +134,14 @@ public class MyCollatorProvider extends CollatorProvider {
 ----
 
 
+=== MOM: Changed Logger Name for Incoming/Outgoing JMS Messages
+
+The code for logging incoming/outgoing JMS messages has been extracted into a dedicated class. This results in a changed logger name (the log level is still `DEBUG`).
+
+*Migration:*
+
+If your application configures a custom log level for `org.eclipse.scout.rt.mom.jms.JmsMomImplementor`, change it to `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler`.
+
 // ^^^
 // Insert descriptions of Java API changes here
 

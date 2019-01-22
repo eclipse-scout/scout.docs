@@ -274,3 +274,7 @@ The new property defines if the column can be considered as a candidate for the 
 == Responsiveness
 
 Once a group box becomes smaller than its preferred width it will transform its internal fields to increase readability. For more information consult the https://eclipsescout.github.io/9.0/technical-guide.html[technical guide].
+
+== MOM: Add Support for Handling Incoming/Outgoing JMS Messages
+
+The new interface `org.eclipse.scout.rt.mom.jms.IJmsMessageHandler` adds suport for incoming and outgoing JMS message handling. The default implementation `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler` logs all messages on level DEBUG.
