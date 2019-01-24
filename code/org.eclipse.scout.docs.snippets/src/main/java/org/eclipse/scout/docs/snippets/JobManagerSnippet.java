@@ -326,7 +326,7 @@ public final class JobManagerSnippet {
       }, null);
 
       // Wait until done. Thereby, the permit of the current job is released for the time while waiting.
-      operationCompleted.waitForUninterruptibly();
+      operationCompleted.waitFor();
 
       // end::blockingCondition.example2[]
     }
