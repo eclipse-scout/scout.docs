@@ -75,12 +75,17 @@ Therefore it is recommended to use OpenJDK 11.0.1 or newer. Please refer to the 
 
 In the future Scout plans to support each LTS (long term support) version of Java. After Java 11 the next supported version might by Java 17. Please note that these plans may change at a future release.
 
-Important note for Red Hat based Linux Distributions: Red Hat builds its own JDK with some modifications. One modification is that it contains a drastically reduced set of Elliptic Curves (3 instead of the 60+ that OpenJDK contains).
+However there are some limitations when using Java 11:
+
+* For Red Hat based Linux Distributions: Red Hat builds its own JDK with some modifications. One modification is that it contains a drastically reduced set of Elliptic Curves (3 instead of the 60+ that OpenJDK contains).
 Unfortunately the one that Scout uses by default is not part of the Red Hat selection.
 For more details see https://access.redhat.com/documentation/en-us/openjdk/11/html-single/openjdk_11_for_windows_release_notes/index[1], https://github.com/ojdkbuild/ojdkbuild/issues/11[2], https://groups.google.com/forum/#!msg/ojdkbuild/yptKbWPFBA4/U4ZeoZHbAgAJ[3] and https://stackoverflow.com/questions/52202807/technical-difference-between-adoptopenjdk-and-red-hat-openjdk-for-windows/52218632?noredirect=1#comment95147058_52218632[4].
 Therefore Red Hat JDK builds are not supported out of the box. However Scout can be configured to work with such JDKs by using a curve that is available in a Red Hat JDK.
 This can be done by replacing the bean `org.eclipse.scout.rt.platform.security.SunSecurityProvider` and overwriting the method `getEllipticCurveName()`. You can choose a curve that is available on your Red Hat installation.
 Please note that you need to generate a new key pair for your modified curve using `org.eclipse.scout.rt.platform.security.SecurityUtility.main(String[])` and insert the keys in your config.properties files.
+Alternatively it is also possible to download an unmodified JDK from the https://jdk.java.net/11/[official download page].
+* If you are using the SVG support of Scout: There might by compile errors stating that `org.w3c.dom.Element` or similar cannot be resolved.
+This is a bug in the current Batik version. Batik is the framework Scout uses for SVG support. For more details and how to address it please see https://bugs.eclipse.org/bugs/show_bug.cgi?id=543573[Bug 543573].
 
 == New SDK Feature
 
