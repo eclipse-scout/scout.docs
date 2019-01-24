@@ -119,7 +119,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
               rootContextMenu.removeChildActions(m_calendarMenus);
               m_calendarMenus.clear();
               for (IMenu menu : event.getSource().getChildActions()) {
-                m_calendarMenus.add(MenuWrapper.wrapMenu(menu));
+                m_calendarMenus.add(MenuWrapper.wrapMenuIfNotWrapped(menu));
               }
               rootContextMenu.addChildActions(m_calendarMenus);
             }
