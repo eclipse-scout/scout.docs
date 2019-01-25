@@ -25,6 +25,10 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   formatField.setValue(numberField.decimalFormat.pattern);
   formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
 
+  var multiplierField = this.widget('MultiplierField');
+  multiplierField.setValue(numberField.decimalFormat.multiplier);
+  multiplierField.on('propertyChange', this._onFormatPropertyChange.bind(this));
+
   var minValueField = this.widget('MinValueField');
   minValueField.on('propertyChange', this._onMinValueFieldPropertyChange.bind(this));
   minValueField.setValue(numberField.minValue);
@@ -43,7 +47,12 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
 
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    this.widget('NumberField').setDecimalFormat(event.newValue);
+    var multiplier = this.widget('MultiplierField');
+    var format = this.widget('FormatField');
+    this.widget('NumberField').setDecimalFormat({
+      pattern: format.value,
+      multiplier: multiplier.value
+    });
   }
 };
 

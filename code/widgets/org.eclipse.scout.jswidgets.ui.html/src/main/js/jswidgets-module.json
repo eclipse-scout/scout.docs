@@ -49,6 +49,7 @@
     "jswidgets/table/TableForm.json",
     "jswidgets/table/TablePropertiesBox.json",
     "jswidgets/table/ColumnPropertiesBox.json",
+    "jswidgets/table/NumberColumnPropertiesBox.json",
     "jswidgets/table/hierarchical/HierarchicalTableForm.json",
     "jswidgets/table/hierarchical/HierarchicalTablePropertiesBox.json",
     "jswidgets/tagfield/TagFieldForm.json",
