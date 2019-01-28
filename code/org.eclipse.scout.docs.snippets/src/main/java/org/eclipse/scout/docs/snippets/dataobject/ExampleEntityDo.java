@@ -9,9 +9,11 @@ import org.eclipse.scout.rt.platform.dataobject.DoEntity;
 import org.eclipse.scout.rt.platform.dataobject.DoList;
 import org.eclipse.scout.rt.platform.dataobject.DoValue;
 import org.eclipse.scout.rt.platform.dataobject.TypeName;
+import org.eclipse.scout.rt.platform.dataobject.TypeVersion;
 
 //tag::class[]
 @TypeName("ExampleEntity")
+@TypeVersion("scout-8.0.0.027")
 public class ExampleEntityDo extends DoEntity {
 
   public DoValue<String> name() { // <1>
