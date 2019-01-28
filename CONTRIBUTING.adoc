@@ -1,12 +1,12 @@
-:scout_contrib: http://wiki.eclipse.org/Scout/Contribution
-:eclipse_cla: http://www.eclipse.org/legal/CLA.php
-:eclipse_account: https://dev.eclipse.org/site_login/createaccount.php
-:eclipse_sso: https://projects.eclipse.org/user/login/sso
-:bugzilla: http://bugs.eclipse.org/bugs/
-:bugzilla_query: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:bugzilla_new: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:github_pr: https://help.github.com/categories/collaborating/
-:license_cc: http://creativecommons.org/licenses/by/3.0/
+:scout_contrib: https://wiki.eclipse.org/Scout/Contribution
+:eclipse_cla: https://www.eclipse.org/legal/ECA.php
+:eclipse_account: https://accounts.eclipse.org/user/register
+:eclipse_sso: https://accounts.eclipse.org/user/login?destination=oauth2/authorize
+:bugzilla: https://bugs.eclipse.org/bugs/
+:bugzilla_query: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:bugzilla_new: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:github_pr: https://help.github.com/categories/collaborating-with-issues-and-pull-requests/
+:license_cc: https://creativecommons.org/licenses/by/3.0/
 :license_edl: https://www.eclipse.org/org/documents/edl-v10.php
 
 = Contributing to "Eclipse Scout - Docs"
