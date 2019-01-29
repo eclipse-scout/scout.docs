@@ -56,6 +56,11 @@
                     "id": "FormatField",
                     "objectType": "StringField",
                     "label": "Format"
+                  },
+                  {
+                    "id": "MultiplierField",
+                    "objectType": "NumberField",
+                    "label": "Multiplier"
                   }
                 ]
               },

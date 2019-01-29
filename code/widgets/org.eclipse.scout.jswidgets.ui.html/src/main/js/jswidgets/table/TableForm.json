@@ -177,7 +177,7 @@
               {
                 "id": "Column.PropertiesBox",
                 "objectType": "jswidgets.ColumnPropertiesBox",
-                "labelVisible": false
+                "labelVisible": true
               }
             ]
           },
