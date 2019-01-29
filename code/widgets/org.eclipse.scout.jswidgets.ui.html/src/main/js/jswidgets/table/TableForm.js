@@ -60,6 +60,24 @@ jswidgets.TableForm.prototype._onTargetPropertyChange = function(event) {
     var columnPropertiesBox = this.widget('Column.PropertiesBox');
     columnPropertiesBox.setColumn(newColumn);
     columnPropertiesBox.setEnabled(!!newColumn);
+
+    var numberColumnBoxField = this.widget('NumberColumnPropertyField');
+    var columnPropertyTab = this.widget('ColumnProperties');
+    if (newColumn.objectType === 'NumberColumn') {
+      numberColumnBoxField = scout.create('jswidgets.NumberColumnPropertiesBox', {
+        id: 'NumberColumnPropertyField',
+        label: 'Number Column Properties',
+        parent: columnPropertyTab
+      });
+      columnPropertyTab.insertFieldBefore(numberColumnBoxField, columnPropertiesBox);
+      numberColumnBoxField.setColumn(newColumn);
+    } else {
+      if (numberColumnBoxField) {
+        numberColumnBoxField.setColumn(null);
+        columnPropertyTab.deleteField(numberColumnBoxField);
+      }
+    }
+    this.validateLayoutTree();
   }
 };
 
