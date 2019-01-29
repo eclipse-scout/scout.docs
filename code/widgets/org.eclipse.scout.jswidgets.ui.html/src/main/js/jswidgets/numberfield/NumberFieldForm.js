@@ -47,12 +47,13 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
 
 jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
   if (event.propertyName === 'value') {
-    var multiplier = this.widget('MultiplierField');
-    var format = this.widget('FormatField');
+    var multiplierField = this.widget('MultiplierField');
+    var formatField = this.widget('FormatField');
     this.widget('NumberField').setDecimalFormat({
-      pattern: format.value,
-      multiplier: multiplier.value
+      pattern: formatField.value,
+      multiplier: multiplierField.value
     });
+    multiplierField.setValue(this.widget('NumberField').decimalFormat.multiplier);
   }
 };
 
