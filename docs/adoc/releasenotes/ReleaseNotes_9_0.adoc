@@ -106,6 +106,10 @@ In order to change the theme during runtime you can use the method `setTheme` of
 
 == Responsiveness
 
+[[img-responsive-form]]
+.Responsive Form
+image::{imgsdir}/responsive-form.png[]
+
 Once a group box becomes smaller than its preferred width it will transform its internal fields to increase readability. For more information consult the https://eclipsescout.github.io/9.0/technical-guide.html#groupbox[technical guide].
 
 == New Servlet Filters to Create a Scout RunContext
