@@ -21,5 +21,7 @@ jswidgets.App.prototype._createDesktop = function(parent) {
   scout.router.register(new jswidgets.WidgetsRoute(desktop));
   scout.router.activate();
 
+  scout.responsiveManager.registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {widget: desktop}));
+
   return desktop;
 };

@@ -36,6 +36,7 @@ import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationStatusField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationTextField;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.ResponsiveField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox.Example1Box;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ExamplesBox.Example1Box.DefaultBox;
@@ -192,6 +193,10 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
 
   public ConfigurationGroupBox getConfigurationGroupBox() {
     return getFieldByClass(ConfigurationGroupBox.class);
+  }
+
+  public ResponsiveField getResponsiveField() {
+    return getFieldByClass(ResponsiveField.class);
   }
 
   public NotificationStatusField getNotificationStatusField() {
@@ -756,6 +761,32 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
         @Override
         protected void execChangedValue() {
           handleNotificationChanged();
+        }
+      }
+
+      @Order(2000)
+      @ClassId("cd6d2e17-36e0-47d8-9a2c-e382c730206a")
+      public class ResponsiveField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Responsive";
+        }
+
+        @Override
+        protected boolean getConfiguredTriStateEnabled() {
+          return true;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(null);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          if (!isLoading()) {
+            getVerticalMonthsBox().setResponsive(TriState.parse(getValue()));
+          }
         }
       }
     }

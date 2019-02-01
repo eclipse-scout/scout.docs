@@ -41,6 +41,12 @@
       "labelVisible": false
     },
     {
+      "id": "ResponsiveField",
+      "objectType": "CheckBoxField",
+      "label": "Responsive",
+      "labelVisible": false
+    },
+    {
       "id": "SubLabelField",
       "objectType": "StringField",
       "label": "Sub Label"
