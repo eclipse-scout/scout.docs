@@ -104,6 +104,10 @@ Scout now provides a dark theme in addition to the default theme. You can either
 
 In order to change the theme during runtime you can use the method `setTheme` of the desktop (Scout Classic and Scout JS). The chosen theme will be stored in a cookie and activated again on the next visit.
 
+== Responsiveness
+
+Once a group box becomes smaller than its preferred width it will transform its internal fields to increase readability. For more information consult the https://eclipsescout.github.io/9.0/technical-guide.html#groupbox[technical guide].
+
 == New Servlet Filters to Create a Scout RunContext
 
 Before Scout 9 the `ServerRunContextFilter` was used to create Scout server contexts for REST APIs. This filter used a user based TTL cache that was not bound to the HTTP session.
@@ -275,10 +279,6 @@ The URI Action `OpenUriAction.POPUP_WINDOW` is added. The existing URI Action `N
 == New Column Property 'nodeColumnCandidate'
 
 The new property defines if the column can be considered as a candidate for the node column. The node column is used to display the control to expand and collapse rows in a hierarchical table. If `false` the column will be skipped when scanning for the node column and the next suitable column will be chosen as node column.
-
-== Responsiveness
-
-Once a group box becomes smaller than its preferred width it will transform its internal fields to increase readability. For more information consult the https://eclipsescout.github.io/9.0/technical-guide.html[technical guide].
 
 == MOM: Add Support for Handling Incoming/Outgoing JMS Messages
 
