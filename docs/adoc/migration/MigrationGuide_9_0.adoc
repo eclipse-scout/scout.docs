@@ -273,3 +273,13 @@ Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapte
        enabled="true" runInBatchMode="false"/>
 ----
 * The `jaxws-maven-plugin` from `org.codehaus.mojo` is not Java 11 capable. Therefore replace the groupId with `com.helger.maven` in all your poms to use a Java 11 capable maven plugin.
+
+==== Changed Computation of NodeIdentifier
+
+If multiple Scout applications are connected together to form a cluster, the application-scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` provides an ID for each node. This string can be used to identify cluster nodes in log messages, cluster messages etc. 
+
+It is recommended to assign a unique and stable name to each node by setting the property _scout.nodeId_ when launching the application. The default implementation of `NodeIdentifier` also checks for properties of some well-known application servers (e.g. _jboss.node.name_). If no explicitly assigned identifier is found, a random UUID is generated.
+
+TIP: Note that a random ID will not be stable, i.e. it will change each time the application is restarted. This is fine for single-node and most multi-node setups. However, there are cases where stable IDs are required, for example when using durable topics or cleaning up node-specific data.
+
+In previous releases, `NodeIdentifier` sometimes returned the local hostname and a port number instead of a random UUID. This behavior was removed from Scout 9, because it is unreliable and the used port number was not always correct. If your application relies on the hostname, consider explicitly setting the _scout.nodeId_ property or customizing the bean `NodeIdentifier`.
