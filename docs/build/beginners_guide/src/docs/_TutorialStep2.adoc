@@ -141,7 +141,7 @@ For the person page of the "Contacts" application we will add the following colu
 TIP: Use the column class names as indicated above.
 Working with different names is possible but requires additional work later in the tutorial when the data retrieved from the database is mapped to these column class names.
 
-To add the first column `PersonIdColumn` we open class `PersonTable` in the Java editor and place the cursor inside of the body of the inner `Table` class.
+To add the first column `PersonIdColumn` we open class `PersonTablePage` in the Java editor and place the cursor inside of the body of the inner `Table` class.
 We then open the Scout content assist with kbd:[Ctrl+Space] and select the [element]_Column_ proposal as shown in <<img-sdk_new_page_column_contacts>>.
 
 [[img-sdk_new_page_column_contacts]]
