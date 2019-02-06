@@ -61,6 +61,14 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   fixedPositionField.setValue(this.column.fixedPosition);
   fixedPositionField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var groupedField = this.widget('GroupedField');
+  groupedField.setValue(this.column.grouped);
+  groupedField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var headerMenuEnabledField = this.widget('HeaderMenuEnabledField');
+  headerMenuEnabledField.setValue(this.column.headerMenuEnabled);
+  headerMenuEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var headerHtmlEnabledField = this.widget('HeaderHtmlEnabledField');
   headerHtmlEnabledField.setValue(this.column.headerHtmlEnabled);
   headerHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -116,6 +124,35 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   var minWidthField = this.widget('MinWidthField');
   minWidthField.setValue(this.column.minWidth);
   minWidthField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  column.table.on('sort', this._onSort.bind(this));
+  column.table.on('group', this._onGroup.bind(this));
+  column.table.on('columnResized', this._onColumnResized.bind(this));
+};
+
+jswidgets.ColumnPropertiesBox.prototype._onColumnResized = function(data){
+  if (this.column === data.column) {
+    var widthField = this.widget('WidthField');
+    widthField.setValue(this.column.width);
+  }
+};
+
+jswidgets.ColumnPropertiesBox.prototype._onSort = function(data) {
+  if (this.column === data.column) {
+    var sortActiveField = this.widget('SortActiveField');
+    sortActiveField.setValue(this.column.sortActive);
+    var sortAscendingField = this.widget('SortAscendingField');
+    sortAscendingField.setValue(this.column.sortAscending);
+    var sortIndexField = this.widget('SortIndexField');
+    sortIndexField.setValue(this.column.sortIndex);
+  }
+};
+
+jswidgets.ColumnPropertiesBox.prototype._onGroup = function(data) {
+  if (this.column === data.column) {
+    var groupedField = this.widget('GroupedField');
+    groupedField.setValue(this.column.grouped);
+  }
 };
 
 jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
@@ -143,5 +180,12 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
       hAlign = 1;
     }
     this.column.setHorizontalAlignment(hAlign);
+  } else if (event.propertyName === 'value' && event.source.id === 'FixedWidthField') {
+    this.column.fixedWidth = event.newValue;
+    this.column.table.invalidateLayoutTree();
+  } else if (event.propertyName === 'value' && event.source.id === 'FixedPositionField') {
+    this.column.fixedPosition = event.newValue;
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderMenuEnabledField') {
+    this.column.headerMenuEnabled = event.newValue;
   }
 };
