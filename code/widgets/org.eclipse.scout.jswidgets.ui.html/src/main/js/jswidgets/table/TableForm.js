@@ -61,23 +61,51 @@ jswidgets.TableForm.prototype._onTargetPropertyChange = function(event) {
     columnPropertiesBox.setColumn(newColumn);
     columnPropertiesBox.setEnabled(!!newColumn);
 
-    var numberColumnBoxField = this.widget('NumberColumnPropertyField');
     var columnPropertyTab = this.widget('ColumnProperties');
-    if (newColumn.objectType === 'NumberColumn') {
-      numberColumnBoxField = scout.create('jswidgets.NumberColumnPropertiesBox', {
+    var newPropertiesBoxField = this._createPropertiesBox(newColumn, columnPropertyTab);
+    if (newPropertiesBoxField !== null) {
+      columnPropertyTab.insertFieldBefore(newPropertiesBoxField, columnPropertiesBox);
+      newPropertiesBoxField.setColumn(newColumn);
+    }
+    this._removePropertiesBoxes(newColumn.objectType, columnPropertyTab);
+
+    this.validateLayoutTree();
+  }
+};
+
+jswidgets.TableForm.prototype._createPropertiesBox = function(newColumn, parent) {
+  switch (newColumn.objectType) {
+    case 'DateColumn':
+      return scout.create('jswidgets.DateColumnPropertiesBox', {
+        id: 'DateColumnPropertyField',
+        label: 'Date Column Properties',
+        parent: parent
+      });
+    case 'NumberColumn':
+      return scout.create('jswidgets.NumberColumnPropertiesBox', {
         id: 'NumberColumnPropertyField',
         label: 'Number Column Properties',
-        parent: columnPropertyTab
+        parent: parent
       });
-      columnPropertyTab.insertFieldBefore(numberColumnBoxField, columnPropertiesBox);
-      numberColumnBoxField.setColumn(newColumn);
-    } else {
-      if (numberColumnBoxField) {
-        numberColumnBoxField.setColumn(null);
-        columnPropertyTab.deleteField(numberColumnBoxField);
-      }
-    }
-    this.validateLayoutTree();
+    default:
+      return null;
+  }
+};
+
+jswidgets.TableForm.prototype._removePropertiesBoxes = function(newColumnTypeName, tabBox) {
+  if (newColumnTypeName !== 'DateColumn') {
+    this._removePropertyBox('DateColumnPropertyField', tabBox);
+  }
+  if (newColumnTypeName !== 'NumberColumn') {
+    this._removePropertyBox('NumberColumnPropertyField', tabBox);
+  }
+};
+
+jswidgets.TableForm.prototype._removePropertyBox = function(propertyBoxId, tabBox) {
+  var boxToRemove = this.widget(propertyBoxId);
+  if (boxToRemove) {
+    boxToRemove.setColumn(null);
+    tabBox.deleteField(boxToRemove);
   }
 };
 
