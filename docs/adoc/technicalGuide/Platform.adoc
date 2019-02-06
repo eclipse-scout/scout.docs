@@ -894,6 +894,10 @@ By default this property is false.
 |Maximum number of seconds a tile load job can execute until it is automatically cancelled. The default value is 2 minutes.
 |Integer >= 0
 |Config Property
+|`scout.trustedCertificates`
+|URIs to DER (Base64) encoded certificate files that should be trusted. The URI may refer to a local file or a resource on the classpath (use classpath: prefix). The default value is an empty list.
+|List of Strings
+|Config Property
 |`scout.ui.backgroundPollingMaxWaitTime`
 |The polling request (which waits for a background job to complete) stays open until a background job has completed or the specified number of seconds elapsed.
 
