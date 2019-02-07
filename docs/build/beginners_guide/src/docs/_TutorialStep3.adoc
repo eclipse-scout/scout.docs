@@ -162,7 +162,7 @@ While there are many more options how to organize SQL and Java code this setup h
 * The setup is easy to explain
 
 The SQL statements related to the database structure are provided in <<lst-contacts_sql_createdb>>.
-The statements (or building blocks of statments) in class `SQLs` are plain SQL in many cases.
+The statements (or building blocks of statments) in interface `SQLs` are plain SQL in many cases.
 In the other cases the statement texts include Scout specific syntax extensions with `:` as a prefix character.
 Examples are `:<identifier>` and `:{<identifier>.<attribute>}`.
 
