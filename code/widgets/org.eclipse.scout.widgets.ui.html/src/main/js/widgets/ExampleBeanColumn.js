@@ -17,3 +17,9 @@ widgets.ExampleBeanColumn.prototype._renderValue = function($cell, value) {
     .attr('src', value.image)
     .addClass('example-bean-column-image');
 };
+
+widgets.ExampleBeanColumn.prototype.compare = function(row1, row2) {
+  var cellValue1 = this.table.cell(this, row1).value || {};
+  var cellValue2 = this.table.cell(this, row2).value || {};
+  return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);
+};
