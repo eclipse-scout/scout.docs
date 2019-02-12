@@ -52,7 +52,7 @@ image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 ==== Removing unnecessery Components
 
 We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application.
-To delete a packages first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
+To delete packages, first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
 
 The packages to delete is provided per Maven module in the list below.
 

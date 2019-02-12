@@ -34,6 +34,14 @@ jswidgets.NumberColumnPropertiesBox.prototype._setColumn = function(column) {
     return;
   }
 
+  var minValueField = this.widget('MinValueField');
+  minValueField.setValue(this.column.minValue);
+  minValueField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var maxValueField = this.widget('MaxValueField');
+  maxValueField.setValue(this.column.maxValue);
+  maxValueField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var multiplierField = this.widget('MultiplierField');
   multiplierField.setValue(this.column.decimalFormat.multiplier);
   multiplierField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -41,6 +49,11 @@ jswidgets.NumberColumnPropertiesBox.prototype._setColumn = function(column) {
   var formatField = this.widget('FormatField');
   formatField.setValue(this.column.decimalFormat.pattern);
   formatField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var backgroundEffectField = this.widget('BackgroundEffectField');
+  backgroundEffectField.setValue(this.column.backgroundEffect);
+  backgroundEffectField.on('propertyChange', this._onPropertyChange.bind(this));
+
 };
 
 jswidgets.NumberColumnPropertiesBox.prototype._onPropertyChange = function(event) {
@@ -55,5 +68,14 @@ jswidgets.NumberColumnPropertiesBox.prototype._onPropertyChange = function(event
       pattern: event.newValue,
       multiplier: this.column.decimalFormat.multiplier
     });
+  }
+  if (event.propertyName === 'value' && event.source.id === 'MinValueField') {
+    this.column.minValue = event.newValue;
+  }
+  if (event.propertyName === 'value' && event.source.id === 'MaxValueField') {
+    this.column.maxValue = event.newValue;
+  }
+  if (event.propertyName === 'value' && event.source.id === 'BackgroundEffectField') {
+    this.column.setBackgroundEffect(event.newValue);
   }
 };
