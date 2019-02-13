@@ -34,9 +34,7 @@ import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
-import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -564,11 +562,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Override
-        protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
-          result.removeIf(l -> StringUtility.startsWith(l.getKey(), "font:"));
-        }
-
-        @Override
         protected void execChangedValue() {
           getImageURLField().clearErrorStatus();
           getImageURLField().setValueChangeTriggerEnabled(false);
@@ -583,6 +576,11 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           getImage1Field().setImageId(getValue());
           getImage2Field().setImage(null);
           getImage2Field().setImageId(getValue());
+
+          getExamplesBox().getChildren().stream()
+              .filter(w -> w instanceof AbstractAlignedImageField)
+              .map(w -> (AbstractAlignedImageField) w)
+              .forEach(i -> i.setImageId(getValue()));
         }
       }
     }
