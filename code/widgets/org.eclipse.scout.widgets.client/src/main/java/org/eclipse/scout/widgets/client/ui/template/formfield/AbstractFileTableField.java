@@ -97,6 +97,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     size /= FILE_SIZE_FACTOR;
 
     ExampleBean bean = new ExampleBean();
+    bean.setHeader(file.getFilename());
     bean.setImage(file);
 
     return new Object[]{file, null, bean, file.getFilename(), size, type, new Date(file.getLastModified())};
