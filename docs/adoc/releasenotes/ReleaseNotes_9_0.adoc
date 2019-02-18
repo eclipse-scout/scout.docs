@@ -105,6 +105,7 @@ Scout now provides a dark theme in addition to the default theme. You can either
 In order to change the theme during runtime you can use the method `setTheme` of the desktop (Scout Classic and Scout JS). The chosen theme will be stored in a cookie and activated again on the next visit.
 
 == Responsiveness
+Scout group boxes will react reduced widths by transforming its contents to allow better readability. There are three responsive states. The default state is the 'normal' state. In this state no transformations will be applied. In the 'condensed' state, all the label positions will be set to 'TOP'. In the 'compact' state, a one column layout will be enforced. This last state is only available in a Scout-JS application.
 
 [[img-responsive-form]]
 .Responsive Form

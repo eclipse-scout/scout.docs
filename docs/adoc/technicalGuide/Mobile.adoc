@@ -53,7 +53,7 @@ By default all the main boxes will be responsive. In order to exclude a group bo
 
 [source,java,indent=0]
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/MobileSnippet.java[tags=UserAgentUtility]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ResponsiveSnippet.java[tags=UserAgentUtility]
 ----
 The handler is called when the manager detects a changed responsive state to perform its transformations.
 There are three responsive modes, of which only the first two are supported in scout classic.
@@ -61,6 +61,10 @@ There are three responsive modes, of which only the first two are supported in s
 * *Normal* (e.g. width >= 500): Regular case, no transformations are applied.
 * *Condensed* (e.g. 300 <= width < 500): Sets the label position to 'TOP'.
 * *Compact* (e.g. width < 300): This mode is only supported in scout js. Sets grid column count to 1 and ensures labels and status are set to 'TOP'.
+
+[[img-responsive-form]]
+.Responsive Form
+image::{imgsdir}/responsive-form.png[]
 
 ===== Add a Custom Handler
 If a different widget is required to react to screen size changes, you can create your own handler by subclassing `scout.ResponsiveHandler` and registering it by calling `scout.responsiveManager.register(widget, handler)`. Each handler can define the thresholds when to switch from one responsive mode to another by implementing `scout.ResponsiveHandler.prototype.getCompactThreshold` or `scout.ResponsiveHandler.prototype.getCondensedThreshold`.
