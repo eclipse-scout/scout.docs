@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.util.BooleanUtility;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -38,11 +39,9 @@ public class UserContentListLookupCall extends LocalLookupCall<String> {
       return m_rows;
     }
     List<LookupRow<String>> filteredRows = new ArrayList<>();
+    boolean isActive = BooleanUtility.nvl(active.getBooleanValue());
     for (LookupRow<String> row : m_rows) {
-      if (active.isTrue() && row.isActive()) {
-        filteredRows.add(row);
-      }
-      else if (active.isFalse() && !row.isActive()) {
+      if (isActive == row.isActive()) {
         filteredRows.add(row);
       }
     }
