@@ -31,7 +31,7 @@ jswidgets.RainbowLookupCall.DATA = [
   ['93EDDC', scout.icons.GEAR, 'Comic Sans'],
   ['BAF3E8', scout.icons.COLLAPSE, 'Comic Sans'],
   ['DDFFF9', scout.icons.LONG_ARROW_DOWN],
-  ['FCF0E5', scout.icons.EXCLAMATION_MARK, 'Arial-Bold-12'],
+  ['FCF0E5', scout.icons.EXCLAMATION_MARK_CIRCLE, 'Arial-Bold-12'],
   ['FEE6C0', scout.icons.SQUARE_BOLD, '10 Courier'],
   ['FFDB9D', scout.icons.ANGLE_RIGHT]
 ];
