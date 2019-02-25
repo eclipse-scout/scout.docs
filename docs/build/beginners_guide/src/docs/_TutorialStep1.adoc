@@ -20,7 +20,7 @@ This includes the organization and naming of Maven modules and the individual Ja
 The creation up of the initial project setup described in this section consists of the tasks listed below.
 
 * Creating the initial Codebase (<<sec-contacts_initial_codebase>>)
-* Removing unnecessery Components (<<sec-contacts_remove_stuff>>)
+* Removing unnecessary Components (<<sec-contacts_remove_stuff>>)
 * Changes to Class WorkOutline (<<sec-contacts_change_workoutline>>)
 * Changes to Class Desktop (<<sec-contacts_change_desktop>>)
 
@@ -49,7 +49,7 @@ The project wizard then creates a number of Maven modules as shown in <<img-cont
 image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
 [[sec-contacts_remove_stuff]]
-==== Removing unnecessery Components
+==== Removing unnecessary Components
 
 We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application.
 To delete packages, first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
