@@ -13,6 +13,7 @@
     "jswidgets/filechooserbutton/FileChooserButtonForm.json",
     "jswidgets/filechooserfield/FileChooserFieldForm.json",
     "jswidgets/form/FormForm.json",
+    "jswidgets/form/FormPropertiesBox.json",
     "jswidgets/form/LifecycleForm.json",
     "jswidgets/formfield/FormFieldPropertiesBox.json",
     "jswidgets/custom/CustomFieldForm.json",

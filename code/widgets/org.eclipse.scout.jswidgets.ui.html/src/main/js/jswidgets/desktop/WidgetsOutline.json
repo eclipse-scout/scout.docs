@@ -58,7 +58,8 @@
       "leaf": true,
       "text": "${textKey:Form}",
       "detailForm": {
-        "objectType": "jswidgets.FormForm"
+        "objectType": "jswidgets.FormForm",
+        "detailForm": true
       }
     },
     {

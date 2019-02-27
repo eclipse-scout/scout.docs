@@ -26,6 +26,7 @@
   __include("jswidgets/desktop/DisplayParentLookupCall.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
+  __include("jswidgets/form/FormPropertiesBox.js");
   __include("jswidgets/form/LifecycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
