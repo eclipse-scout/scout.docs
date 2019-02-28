@@ -38,16 +38,17 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._setField = function(field) {
   if (!this.field) {
     return;
   }
-  this.reloadLogicalGridLayoutConfig();
+  // layout defaults are only known after the widget got rendered.
+  field.one('render', this.initLayoutDefaults.bind(this));
 };
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.reloadLogicalGridLayoutConfig = function() {
-  var layoutConfig = this.getLayoutConfig();
-  this.widget('HGapField').setValue(layoutConfig.hgap);
-  this.widget('VGapField').setValue(layoutConfig.vgap);
-  this.widget('RowHeightField').setValue(layoutConfig.rowHeight);
-  this.widget('ColumnWidthField').setValue(layoutConfig.columnWidth);
-  this.widget('MinWidthField').setValue(layoutConfig.minWidth);
+jswidgets.LogicalGridLayoutConfigBox.prototype.initLayoutDefaults = function() {
+  var bodyLayout = this.getBodyLayout();
+  this.widget('HGapField').setValue(bodyLayout.hgap);
+  this.widget('VGapField').setValue(bodyLayout.vgap);
+  this.widget('RowHeightField').setValue(bodyLayout.rowHeight);
+  this.widget('ColumnWidthField').setValue(bodyLayout.columnWidth);
+  this.widget('MinWidthField').setValue(bodyLayout.minWidth);
 };
 
 jswidgets.LogicalGridLayoutConfigBox.prototype._onPropertyChange = function(event) {
@@ -71,6 +72,13 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = functi
   } else if (event.source.id === 'MinWidthField') {
     layoutConfig.minWidth = event.newValue;
   }
+};
+
+/**
+ * Return the body layout of the widget. Used to initialized the config box with the default values.
+ */
+jswidgets.LogicalGridLayoutConfigBox.prototype.getBodyLayout = function() {
+  return this.field.htmlBody.layout;
 };
 
 jswidgets.LogicalGridLayoutConfigBox.prototype.getLayoutConfig = function() {

@@ -90,7 +90,11 @@ jswidgets.TileGridForm.prototype._init = function(model) {
   sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
   var tileField = this.widget('TileField');
-  this.widget('LayoutConfigBox').setField(this.tileGrid);
+  var layoutConfigBox = this.widget('LayoutConfigBox');
+  layoutConfigBox.getBodyLayout = function() {
+    return this.field.htmlComp.layout;
+  };
+  layoutConfigBox.setField(this.tileGrid);
   this.widget('FormFieldPropertiesBox').setField(tileField);
   this.widget('GridDataBox').setField(tileField);
   this.widget('WidgetActionsBox').setField(tileField);
@@ -192,7 +196,7 @@ jswidgets.TileGridForm.prototype._createTile = function(model) {
       content: 'New <i>Html Tile</i> ' + this.insertedTileCount++
     };
     model = $.extend({}, defaults, model);
-    return  new scout.create('HtmlTile', model);
+    return new scout.create('HtmlTile', model);
   }
   defaults = {
     parent: this.tileGrid,
