@@ -494,3 +494,9 @@ For examples and documentation see https://eclipsescout.github.io/8.0/technical-
 In order to be able to reuse authentication token code `DefaultAuthToken` was refactored.
 Signing and verifying of tokens is now separated from token and its (de-)serialization.
 The new classes DefaultAuthTokenSigner and DefaultAuthTokenVerifier do now provide this functionality.
+
+== HttpException deprecated and replaced by RemoteSystemUnavailableException
+The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by a generalized `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException`.
+The exception is thrown within the UI server, when a call to the Scout backend server (through service tunnel) returns a status code < 200 or >= 299.
+The `RemoteSystemUnavailableException` is finally displayed as _network error_ by the global `org.eclipse.scout.rt.client.services.common.exceptionhandler.ErrorPopup`.
+The new `RemoteSystemUnavailableException` may generally be thrown to indicate an error when the communication with a remote service failed.
