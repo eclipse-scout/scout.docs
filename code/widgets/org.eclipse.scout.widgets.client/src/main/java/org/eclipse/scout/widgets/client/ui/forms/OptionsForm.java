@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
@@ -23,7 +22,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.DisplayStyleRadioButtonGroup;
+import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.DenseRadioButtonGroup;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType.DefaultCode;
@@ -39,8 +38,7 @@ public class OptionsForm extends AbstractForm {
   protected void execInitForm() {
     String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
-    String displayStyle = ObjectUtility.nvl(getDesktop().getDisplayStyle(), IDesktop.DISPLAY_STYLE_DEFAULT);
-    getDisplayStyleRadioButtonGroup().setValue(displayStyle);
+    getDenseRadioButtonGroup().setValue(getDesktop().isDense());
   }
 
   public void startNew() {
@@ -51,8 +49,8 @@ public class OptionsForm extends AbstractForm {
     return getFieldByClass(MainBox.class);
   }
 
-  public DisplayStyleRadioButtonGroup getDisplayStyleRadioButtonGroup() {
-    return getFieldByClass(DisplayStyleRadioButtonGroup.class);
+  public DenseRadioButtonGroup getDenseRadioButtonGroup() {
+    return getFieldByClass(DenseRadioButtonGroup.class);
   }
 
   public UiThemeField getUiThemeField() {
@@ -90,7 +88,7 @@ public class OptionsForm extends AbstractForm {
       }
 
       @Order(20)
-      public class DisplayStyleRadioButtonGroup extends AbstractRadioButtonGroup<String> {
+      public class DenseRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
 
         @Override
         protected String getConfiguredLabel() {
@@ -98,7 +96,7 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Order(10)
-        public class DefaultButton extends AbstractRadioButton<String> {
+        public class DefaultButton extends AbstractRadioButton<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -106,13 +104,13 @@ public class OptionsForm extends AbstractForm {
           }
 
           @Override
-          protected String getConfiguredRadioValue() {
-            return IDesktop.DISPLAY_STYLE_DEFAULT;
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.FALSE;
           }
         }
 
         @Order(20)
-        public class DenseButton extends AbstractRadioButton<String> {
+        public class DenseButton extends AbstractRadioButton<Boolean> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -120,11 +118,10 @@ public class OptionsForm extends AbstractForm {
           }
 
           @Override
-          protected String getConfiguredRadioValue() {
-            return IDesktop.DISPLAY_STYLE_DENSE;
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.TRUE;
           }
         }
-
       }
     }
 
@@ -144,8 +141,8 @@ public class OptionsForm extends AbstractForm {
       if (getUiThemeField().isSaveNeeded()) {
         getDesktop().setTheme(getUiThemeField().getValue());
       }
-      if (getDisplayStyleRadioButtonGroup().isSaveNeeded()) {
-        getDesktop().setDisplayStyle(getDisplayStyleRadioButtonGroup().getValue());
+      if (getDenseRadioButtonGroup().isSaveNeeded()) {
+        getDesktop().setDense(getDenseRadioButtonGroup().getValue());
       }
     }
   }

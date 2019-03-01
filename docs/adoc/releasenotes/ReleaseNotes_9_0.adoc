@@ -293,9 +293,15 @@ The new interface `org.eclipse.scout.rt.mom.jms.IJmsMessageHandler` adds suport 
 
 Now the HtmlEnvironment fires a `propertyChange` Event when it gets (re)initialized. All Layouts or other Components that depend on the HtmlEnvironment's properties should listen to that event and handle it appropriately.
 
-== New DisplayStyle 'dense' on Desktop
+== Dense Mode
 
-This new display style is targeted at users working on laptops or other small screens. It reduces the whitespace between elements to display more content on the available screen size.
+This new display mode is targeted at users working on laptops or other small screens. It reduces the whitespace between elements to display more content on the available screen size.
+
+Activate the dense mode by setting `IDesktop.setDense(true)`. An additional less file `displaystyle-dense.less` contains all necessary styling changes.
+
+[[img-dense-mode]]
+.Dense Mode
+image::{imgsdir}/contacts_default_vs_dense.png[]
 
 == Copy to clipboard support for MessageBoxes
 
