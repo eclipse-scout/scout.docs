@@ -8,6 +8,7 @@
     "jswidgets/common/WidgetActionsBox.json",
     "jswidgets/checkboxfield/CheckBoxFieldForm.json",
     "jswidgets/desktop/Desktop.json",
+    "jswidgets/desktop/DesktopForm.json",
     "jswidgets/desktop/WidgetsOutline.json",
     "jswidgets/filechooser/FileChooserForm.json",
     "jswidgets/filechooserbutton/FileChooserButtonForm.json",

@@ -15,12 +15,22 @@ jswidgets.Desktop.prototype._init = function(model) {
   defaultThemeMenu.on('action', this._onDefaultThemeMenuAction.bind(this));
   var darkThemeMenu = this.widget('DarkThemeMenu');
   darkThemeMenu.on('action', this._onDarkThemeMenuAction.bind(this));
+  var denseModeMenu = this.widget('DenseMenu');
+  denseModeMenu.on('action', this._onDenseMenuAction.bind(this));
 
   if (this.theme === 'dark') {
     darkThemeMenu.setIconId(scout.icons.CHECKED_BOLD);
   } else {
     defaultThemeMenu.setIconId(scout.icons.CHECKED_BOLD);
   }
+  if (this.dense) {
+    denseModeMenu.setIconId(scout.icons.CHECKED_BOLD);
+  }
+  this.on('propertyChange', function(event) {
+    if (event.propertyName === 'dense') {
+      this.dense ? denseModeMenu.setIconId(scout.icons.CHECKED_BOLD) : denseModeMenu.setIconId(null);
+    }
+  }.bind(this));
 };
 
 jswidgets.Desktop.prototype._onDefaultThemeMenuAction = function(event) {
@@ -29,6 +39,10 @@ jswidgets.Desktop.prototype._onDefaultThemeMenuAction = function(event) {
 
 jswidgets.Desktop.prototype._onDarkThemeMenuAction = function(event) {
   this.setTheme('dark');
+};
+
+jswidgets.Desktop.prototype._onDenseMenuAction = function(event) {
+  this.setDense(!this.dense);
 };
 
 jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {

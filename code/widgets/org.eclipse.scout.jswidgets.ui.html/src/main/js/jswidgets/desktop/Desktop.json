@@ -8,20 +8,34 @@
   },
   "menus": [
     {
-      "id": "ThemeMenu",
+      "id": "SettingsMenu",
       "objectType": "Menu",
       "iconId": "${iconId:jswidgets.PAINT_BRUSH}",
-      "text": "${textKey:Theme}",
+      "text": "${textKey:Settings}",
       "childActions": [
         {
-          "id": "DefaultThemeMenu",
+          "id": "ThemeMenu",
           "objectType": "Menu",
-          "text": "Default"
+          "text": "${textKey:Theme}",
+          "iconId": "${iconId:CHECKED_BOLD}", /* used as placeholder */
+          "cssClass": "theme-menu",
+          "childActions": [
+            {
+              "id": "DefaultThemeMenu",
+              "objectType": "Menu",
+              "text": "Default"
+            },
+            {
+              "id": "DarkThemeMenu",
+              "objectType": "Menu",
+              "text": "Dark"
+            }
+          ]
         },
         {
-          "id": "DarkThemeMenu",
+          "id": "DenseMenu",
           "objectType": "Menu",
-          "text": "Dark"
+          "text": "Dense"
         }
       ]
     },
