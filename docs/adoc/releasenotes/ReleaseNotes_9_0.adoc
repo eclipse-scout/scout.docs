@@ -296,3 +296,7 @@ Now the HtmlEnvironment fires a `propertyChange` Event when it gets (re)initiali
 == New DisplayStyle 'dense' on Desktop
 
 This new display style is targeted at users working on laptops or other small screens. It reduces the whitespace between elements to display more content on the available screen size.
+
+== Copy to clipboard support for MessageBoxes
+
+The `MessageBox` widget now supports the OS specific copy to clipboard key-shortcut. When pressed, all text of the MessageBox, including the _hiddenText_ property, is copied to the clipboard.
