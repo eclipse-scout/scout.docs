@@ -142,6 +142,13 @@ The code for logging incoming/outgoing JMS messages has been extracted into a de
 
 If your application configures a custom log level for `org.eclipse.scout.rt.mom.jms.JmsMomImplementor`, change it to `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler`.
 
+
+=== Sorting for BeanColumn
+UI sorting is disabled for bean columns in order to get an unique sort order.
+
+*Migration:*
+If your application uses a `AbstractBeanColumn` you now have to take care of the sorting by yourself. Either by providing comparable beans or by implementing `compareTableRows` or `getPlainText`.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
