@@ -70,6 +70,10 @@ jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
   multilineTextField.setValue(this.table.multilineText);
   multilineTextField.on('propertyChange', this._onMultilineTextPropertyChange.bind(this));
 
+  var truncatedCellTooltipEnabledField = this.widget('TruncatedCellTooltipEnabledField');
+  truncatedCellTooltipEnabledField.setValue(this.table.truncatedCellTooltipEnabled);
+  truncatedCellTooltipEnabledField.on('propertyChange', this._onTruncatedCellTooltipEnabledPropertyChange.bind(this));
+
   var scrollToSelectionField = this.widget('ScrollToSelectionField');
   scrollToSelectionField.setValue(this.table.scrollToSelection);
   scrollToSelectionField.on('propertyChange', this._onScrollToSelectionPropertyChange.bind(this));
@@ -153,6 +157,12 @@ jswidgets.TablePropertiesBox.prototype._onMultiSelectPropertyChange = function(e
 jswidgets.TablePropertiesBox.prototype._onMultilineTextPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setMultilineText(event.newValue);
+  }
+};
+
+jswidgets.TablePropertiesBox.prototype._onTruncatedCellTooltipEnabledPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.setTruncatedCellTooltipEnabled(event.newValue);
   }
 };
 

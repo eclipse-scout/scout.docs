@@ -65,6 +65,7 @@ import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.TuningUtility;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
@@ -85,6 +86,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.Main
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.AutoResizeColumnsField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsCheckableField;
+import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnFixedWidthField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnMandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsEditableField;
 import org.eclipse.scout.widgets.client.ui.forms.HierarchicalTableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
@@ -165,6 +167,10 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
   public IsColumnMandatoryField getIsColumnMandatoryField() {
     return getFieldByClass(IsColumnMandatoryField.class);
+  }
+
+  public IsColumnFixedWidthField getIsColumnFixedWidthField() {
+    return getFieldByClass(IsColumnFixedWidthField.class);
   }
 
   public WrapTextField getWrapText() {
@@ -424,6 +430,9 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                       // Is Column Mandatory Field
                       getIsColumnMandatoryField().setEnabled(false);
                       getIsColumnMandatoryField().setValue(false);
+                      // Is Column Width Fixed
+                      getIsColumnFixedWidthField().setEnabled(false);
+                      getIsColumnFixedWidthField().setValue(false);
                     }
                     else {
                       IColumn<?> contextColumn = Table.this.getContextColumn();
@@ -431,6 +440,9 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
                       // Is Column Mandatory Field
                       getIsColumnMandatoryField().setEnabled(true);
                       getIsColumnMandatoryField().setValue(contextColumn.isMandatory());
+                      // Is Column Width Fixed
+                      getIsColumnFixedWidthField().setEnabled(true);
+                      getIsColumnFixedWidthField().setValue(contextColumn.isFixedWidth());
                     }
                   }
                 });
@@ -1352,20 +1364,6 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(55)
-      public class ContextColumnField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ContextColumn");
-        }
-      }
-
-      @Order(60)
       public class DefaultIconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -1392,6 +1390,20 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           for (ITableRow row : getTableField().getTable().getRows()) {
             row.setIconId(getValue());
           }
+        }
+      }
+
+      @Order(60)
+      public class ContextColumnField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ContextColumn");
         }
       }
 
@@ -1696,6 +1708,45 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
         }
 
+        @Order(135)
+        public class IsColumnFixedWidthField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ColumnIsFixedWidth");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
+            if (contextColumn != null) {
+              contextColumn.setFixedWidth(getValue());
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            if (getTableField().getTable().getContextColumn() != null) {
+              setEnabled(true);
+              setValue(getTableField().getTable().getContextColumn().isFixedWidth());
+            }
+            else {
+              setEnabled(false);
+              setValue(false);
+            }
+          }
+        }
+
         @Order(140)
         public class IsRowIconVisibleField extends AbstractBooleanField {
 
@@ -1877,6 +1928,39 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(200)
+        public class TruncatedCellTooltipEnabled extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("IsTruncatedCellTooltipEnabled");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected boolean getConfiguredTriStateEnabled() {
+            return true;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setTruncatedCellTooltipEnabled(TriState.parse(getValue()));
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isTruncatedCellTooltipEnabled().getBooleanValue());
+          }
+        }
+
+        @Order(210)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
