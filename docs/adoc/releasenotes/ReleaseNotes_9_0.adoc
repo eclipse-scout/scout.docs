@@ -306,3 +306,12 @@ image::{imgsdir}/contacts_default_vs_dense.png[]
 == Copy to clipboard support for MessageBoxes
 
 The `MessageBox` widget now supports the OS specific copy to clipboard key-shortcut. When pressed, all text of the MessageBox, including the _hiddenText_ property, is copied to the clipboard.
+
+== Dependency to java.util.ResourceBundle removed
+
+As `NlsResourceBundle` does not use any built features of `java.util.ResourceBundle`, it does no longer depend on `java.util.ResourceBundle`.
+
+Configuration property `scout.resourceBundle.checkContainsKey` was removed as it is now obsolete.
+
+
+
