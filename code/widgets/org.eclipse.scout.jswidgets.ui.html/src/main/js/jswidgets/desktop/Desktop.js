@@ -17,7 +17,7 @@ jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {
   var form = scout.create('Form', {
     parent: this,
     resizable: false,
-    title: "Scout JS Widgets Application",
+    title: 'Scout JS Widgets Application',
     rootGroupBox: {
       objectType: 'GroupBox',
       borderDecoration: 'empty',
@@ -27,7 +27,7 @@ jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {
         labelVisible: false,
         wrapText: true,
         htmlEnabled: true,
-        cssClass: "about-info",
+        cssClass: 'about-info',
         statusVisible: false,
         gridDataHints: {
           h: 2
