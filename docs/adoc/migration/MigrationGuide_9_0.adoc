@@ -102,14 +102,12 @@ In a deployment where a colliding environment variable exists, the following mig
 ** Change the property key, or
 ** Force the intended property to the desired value using a Java system property (`-D` JVM parameter).
 
-
 === Menu Wrapping
 
 The `OutlineMenuWrapper` has been adapted so that no manual instance can be created anymore (the constructors are no longer public).
 Instead the new factory bean `org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper` should be used.
 This helps to ensure that the correct wrapper is created for each menu type and because it is a bean it may be extended for custom menu types.
 The same is for the methods `unwrapMenu` and `containsWrappedMenu` which have been moved to the new `MenuWrapper` class as well.
-
 
 === CollatorProvider Behavior Changed
 
@@ -133,7 +131,6 @@ public class MyCollatorProvider extends CollatorProvider {
 }
 ----
 
-
 === MOM: Changed Logger Name for Incoming/Outgoing JMS Messages
 
 The code for logging incoming/outgoing JMS messages has been extracted into a dedicated class. This results in a changed logger name (the log level is still `DEBUG`).
@@ -142,12 +139,181 @@ The code for logging incoming/outgoing JMS messages has been extracted into a de
 
 If your application configures a custom log level for `org.eclipse.scout.rt.mom.jms.JmsMomImplementor`, change it to `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler`.
 
-
 === Sorting for BeanColumn
+
 UI sorting is disabled for bean columns in order to get an unique sort order.
 
 *Migration:*
 If your application uses a `AbstractBeanColumn` you now have to take care of the sorting by yourself. Either by providing comparable beans or by implementing `compareTableRows` or `getPlainText`.
+
+=== Removal of Deprecated Methods and Classes
+
+Methods and classes that were marked as deprecated in previous relases were finally removed.
+
+*Migration*:
+
+[width="100%",options="header",cols="3,2,3"]
+|===
+|Class
+|Removed{nbsp}part
+|Replacement
+
+|org.eclipse.scout.rt.client.ui.action.IAction
+|[.line-through]#`initAction()`#
+|`init()` or `reinit()`
+
+.2+|org.eclipse.scout.rt.client.ui.basic.calendar.ICalendar
+|[.line-through]#`initCalendar()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeCalendar()`#
+|`dispose()`
+
+.5+|org.eclipse.scout.rt.client.ui.basic.planner.IPlanner
+|[.line-through]#`initPlanner()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposePlanner()`#
+|`dispose()`
+|[.line-through]#`getMinimumActivityDuration()`#
+|`DisplayModeOptions.getMinSelectionIntervalCount()`
+|[.line-through]#`setMinimumActivityDuration()`#
+|`DisplayModeOptions.withMinSelectionIntervalCount()`
+|[.line-through]#`setMinimumActivityDurationInMinutes()`#
+|`DisplayModeOptions.withMinSelectionIntervalCount()`
+
+.3+|org.eclipse.scout.rt.client.ui.basic.table.ITable
+|[.line-through]#`initTable()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeTable()`#
+|`dispose()`
+|[.line-through]#`isTableInitialized()`#
+|`isInitDone()`
+
+|org.eclipse.scout.rt.client.ui.basic.table.TableUtility
+|[.line-through]#`editNextTableCell()`#
+|_(no replacement)_
+
+|org.eclipse.scout.rt.client.ui.basic.table.TableListener
+|[.line-through]#`tableChangedBatch()`#
+|For maximum performance, only register listeners for the events that are really handled. See the vararg parameter to `ITable.addTableListener(TableListener, int...)`.
+
+.2+|org.eclipse.scout.rt.client.ui.basic.tree.ITree
+|[.line-through]#`initTree()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeTree()`#
+|`dispose()`
+
+|org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode
+|[.line-through]#`getMenu()`#
+|`getMenuByClass()`
+
+|org.eclipse.scout.rt.client.ui.basic.tree.TreeListener
+|[.line-through]#`treeChangedBatch()`#
+|For maximum performance, only register listeners for the events that are really handled. See the vararg parameter to `ITree.addTreeListener(TreeListener, int...)`.
+
+.4+|org.eclipse.scout.rt.client.ui.desktop.IDesktop
+|[.line-through]#`initDesktop()`#
+|`init()` or `reinit()`
+|[.line-through]#`getMenu()`#
+|`getMenuByClass()`
+|[.line-through]#`findMenu()`#
+|`getMenuByClass()`
+|[.line-through]#`addDesktopListenerAtExecutionEnd()`#
+|`addUIDesktopListener()`
+
+|org.eclipse.scout.rt.client.ui.DataChangeListener
+|_(entire class)_
+|`org.eclipse.scout.rt.client.ui.desktop.datachange.IDataChangeListener`
+
+|org.eclipse.scout.rt.client.ui.WeakDataChangeListener
+|_(entire class)_
+|`org.eclipse.scout.rt.client.ui.desktop.datachange.IDataChangeListener`
+
+|org.eclipse.scout.rt.client.ui.form.IForm
+|[.line-through]#`initForm()`#
+|`init()` or `reinit()`
+
+.3+|org.eclipse.scout.rt.client.ui.form.fields.IFormField
+|[.line-through]#`initField()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeField()`#
+|`dispose()`
+|[.line-through]#`isInitialized()`#
+|`isInitConfigDone()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.CompositeFieldUtility
+|[.line-through]#`getFieldByClass()`#
+|`getWidgetByClass()`
+
+.3+|org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox
+|[.line-through]#`PROP_COLLAPSE_KEY_STROKE`#
+|`PROP_TOGGLE_COLLAPSE_KEY_STROKE`
+|[.line-through]#`setCollapseKeyStroke()`#
+|`setToggleCollapseKeyStroke()`
+|[.line-through]#`getCollapseKeyStroke()`#
+|`getToggleCollapseKeyStroke()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox
+|[.line-through]#`getConfiguredCollapseKeyStroke()`#
+|`getConfiguredToogleCollapseKeyStroke()`
+
+.2+|org.eclipse.scout.rt.client.ui.form.fields.sequencebox.ISequenceBox
+|[.line-through]#`isEqualColumnWidths()`#
+|_(no replacement)_
+|[.line-through]#`setEqualColumnWidths()`#
+|_(no replacement)_
+
+|org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox
+|[.line-through]#`getConfiguredEqualColumnWidths()`#
+|_(no replacement)_
+
+.2+|org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox
+|[.line-through]#`getMinWidthInPixel()`#
+|`getBodyLayoutConfig()`
+|[.line-through]#`setMinWidthInPixel()`#
+|`setBodyLayoutConfig()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox
+|[.line-through]#`getConfiguredMinWidthInPixel()`#
+|`getConfiguredBodyLayoutConfig()`
+
+|org.eclipse.scout.rt.server.services.common.imap.IIMAPService +
+org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService
+|_(entire class)_ +
+Config properties starting with `scout.imap.` are obsolete (see section below).
+|Use `ImapHelper` (from _org.eclipse.scout.rt.mail_ module). Map config properties to `ImapServerConfig`. Interact with `javax.mail.Message` directly where no appropriate helper method is available.
+
+|org.eclipse.scout.rt.server.services.common.smtp.ISMTPService +
+org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService
+|_(entire class)_ +
+Config properties starting with `scout.smtp.` are obsolete (see section below).
+|Use `SmtpHelper` (from _org.eclipse.scout.rt.mail_ module) instead. Map config properties to `SmtpServerConfig`. If a subject prefix is required, the prefix must be prepended before calling `SmtpHelper.sendMessage()`.
+
+|org.eclipse.scout.rt.server.services.common.pop3.POP3Adapter +
+org.eclipse.scout.rt.server.services.common.pop3.IPOP3MessageVisitor
+|_(entire class)_ +
+|No replacement. If you really require this code, get the https://github.com/eclipse/scout.rt/blob/releases/8.0.x/org.eclipse.scout.rt.server/src/main/java/org/eclipse/scout/rt/server/services/common/pop3/POP3Adapter.java[latest revision] from the 8.0.x branch and add it to your project.
+
+|===
+
+Due to the removal of `IIMAPService` and `ISMTPService` (see above) the following config properties are now obsolete and are no longer valid. They must be removed from _config.properties_ files.
+
+* [.line-through]#`scout.imap.host`#
+* [.line-through]#`scout.imap.port`#
+* [.line-through]#`scout.imap.mailbox`#
+* [.line-through]#`scout.imap.username`#
+* [.line-through]#`scout.imap.password`#
+* [.line-through]#`scout.imap.sslProtocols`#
+* [.line-through]#`scout.smtp.host`#
+* [.line-through]#`scout.smtp.port`#
+* [.line-through]#`scout.smtp.username`#
+* [.line-through]#`scout.smtp.password`#
+* [.line-through]#`scout.smtp.subjectPrefix`#
+* [.line-through]#`scout.smtp.defaultFromEmail`#
+* [.line-through]#`scout.smtp.sslProtocols`#
+* [.line-through]#`scout.smtp.useAuth`#
+* [.line-through]#`scout.smtp.useSsl`#
+
+Another consequence of this removal is a change in the module dependencies. `org.eclipse.scout.rt.server` no longer depends on `org.eclipse.scout.rt.mail`. If your code requires code from `org.eclipse.scout.rt.mail` you have to make sure that you declare this dependency in your own _pom.xml_.
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -179,18 +345,15 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@table-control-active-background-color` to `@table-control-selected-background-color`
 * Renamed `@scrollbar-side-margin` to `@scrollbar-side-padding`
 
-
 === Default Value for Scout JSON Model Attribute "type"
 
 In the Scout JSON model the `"type": "model"` must no longer be specified as it is the default value now. Therefore all occurrences can be deleted. This makes the static JSON model more compact, easier to write and better readable.
-
 
 === Page Can Be Declared in the Static Outline JSON Model
 
 Before 9.0 it was necessary to add pages (`PageWithTable`, `PageWithNodes`) programmatically to outlines as pages could not be declared in the JSON model. This is now possible.
 The Outline JSON model may now contain an attribute `nodes` which may contain custom pages.
 Refer to the helloworld application (created by Eclipse) or the JS Widgets application for an example.
-
 
 === Form in FormTableControl is Adapted Automatically
 
@@ -201,7 +364,6 @@ A form in a `FormTableControl` is automatically adapted to match the semantics i
 * It is configured to DisplayHint.VIEW
 
 Until now if the `FormTableControl` was used in a project, this adaption of the form must have been done manually. This code can now be removed as it will be done by Scout now.
-
 
 === Table Inside PageWithTable Uses Default Reload Handler
 
@@ -217,6 +379,7 @@ This is no longer the case: The LookupCall is executed on first use only and not
 The LookupCall may now also be declared in the static JSON model of the widget even though a `prepareLookupCall` listener is registered.
 
 === Toggle Action and Button Now Trigger Event
+
 The action resp. click event is currently not fired if the action/button is a toggle action or the button has menus.
 This means, if you want to be informed when a user clicks a regular button, you would listen for the action event.
 If you want to be informed when a user clicks a toggle button, you would have to listen for a property change event.
@@ -259,7 +422,6 @@ Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapte
        <descriptor>assembly.xml</descriptor>
     </descriptors>
 ----
-
 
 ==== JAX WS Migration
 

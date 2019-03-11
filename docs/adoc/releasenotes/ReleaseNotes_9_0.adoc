@@ -26,7 +26,6 @@ Beside bugfixes, these maintenance builds may even contain some minor features. 
 
 (Section intentionally left blank for possible future release)
 
-
 === Obtaining the Latest Version
 
 ==== Runtime (Scout RT)
@@ -91,7 +90,6 @@ This is a bug in the current Batik version. Batik is the framework Scout uses fo
 
 Add a menu entry `Scout` -> `Search for duplicate @ClassId Values` to manually trigger a search for duplicate class ids in the workspace.
 
-
 == Dark Theme
 
 Enter the dark side... and use the new dark theme of Scout!
@@ -150,6 +148,7 @@ image::{imgsdir}/popup.png[]
 Check out these features and more in the widget apps!
 
 === Label
+
 The new `Label` is a very basic widget to display text. The difference to the existing `LabelField` is that it doesn't extend the `FormField` but the `Widget`.
 This has the advantage that it is easier to use without the overhead of the `FormField` meaning it is more lightweight. But you cannot use it on regular forms since a form only accepts form fields.
 
@@ -307,11 +306,8 @@ image::{imgsdir}/contacts_default_vs_dense.png[]
 
 The `MessageBox` widget now supports the OS specific copy to clipboard key-shortcut. When pressed, all text of the MessageBox, including the _hiddenText_ property, is copied to the clipboard.
 
-== Dependency to java.util.ResourceBundle removed
+== Removed Dependency to java.util.ResourceBundle
 
 As `NlsResourceBundle` does not use any built features of `java.util.ResourceBundle`, it does no longer depend on `java.util.ResourceBundle`.
 
 Configuration property `scout.resourceBundle.checkContainsKey` was removed as it is now obsolete.
-
-
-

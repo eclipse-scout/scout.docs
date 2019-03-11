@@ -96,7 +96,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
         getDetailForm().getCloseButton().setVisibleGranted(false);
       }
       else {
-        getMenu(OpenInADialogMenu.class).setVisibleGranted(false);
+        getMenuByClass(OpenInADialogMenu.class).setVisibleGranted(false);
       }
     }
   }
