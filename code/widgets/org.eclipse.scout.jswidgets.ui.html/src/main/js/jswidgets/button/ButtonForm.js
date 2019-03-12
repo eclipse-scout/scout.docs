@@ -54,6 +54,10 @@ jswidgets.ButtonForm.prototype._init = function(model) {
 };
 
 jswidgets.ButtonForm.prototype._onButtonClick = function(event) {
+  if (event.source.displayStyle === scout.Button.DisplayStyle.TOGGLE) {
+    // Don't show message box if it is a toggle button
+    return;
+  }
   var msgBox = scout.create('scout.MessageBox', {
     parent: this,
     yesButtonText: this.session.text('Thanks') + '!',

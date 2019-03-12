@@ -78,6 +78,18 @@ If no `@TypeName` annotation is declared for a data object class, the simple cla
 
 NOTE: Declaring a logical type name using the `@TypeName`annotation is highly recommended to avoid a 1:1 dependency between the serialized JSON String and the fully classified class name. A stable type name is required in order to be able to change the data object structure without breaking the API.
 
+==== Type Version  ====
+
+A data object may be  annotated with a type version using the `@TypeVersion` annotation.
+The type version represents the version of the structure of the data object and not the version of the data within the data object.
+The type version value should be incremented, each time, the data object class is modified (add/remove/rename attributes).
+If a version is required for versioning the values of a data object, consider add a `version` attribute, incrementing its value, every time a value of the data object is modified.
+
+The annotation value is added to the serialized JSON object as top-level `_typeVersion` property.
+The serialized `_typeVersion` value is not deserialized into an attribute, since the deserializer creates a concrete data object class at runtime, having the `@TypeVersion` annotation providing the type version value.
+
+NOTE: Declaring a logical type version using the `@TypeVersion`annotation is highly recommended if a data object is persisted as JSON document to a file or database.
+
 ==== Data Object Naming Convention ====
 
 Scout objects use the following naming conventions:
@@ -217,6 +229,7 @@ An instance of the `DoEntity` class can represent any kind of JSON document.
 If the JSON document contains no type attributes or no matching data object class exists at runtime, the JSON document is deserialized into a raw `DoEntity` instance holding all attributes.
 To access the attributes of the data object a set of generic getter methods may be used by specifying the attribute name.
 A generic JSON document is deserialized into a generic tree-like structure of nested `DoEntity` instances.
+If the serialized JSON document contains a `_type` and/or `_typeVersion` attribute, the attribute and its value is added as attribute to the generic raw `DoEntity` instance.
 
 [source,java]
 .Example: ExampleEntityDo accessing attribute "by name"
@@ -305,6 +318,8 @@ For each data object all available attributes and their properties (name, type, 
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=accessInventory]
 ----
+
+Apart from attribute descriptions, the inventory provides access to type name and type version of each data object class.
 
 === Extending with custom serializer and deserializer ===
 The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.

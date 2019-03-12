@@ -19,5 +19,6 @@ jswidgets.CheckableStyleLookupCall.prototype._data = function() {
 
 jswidgets.CheckableStyleLookupCall.DATA = [
   [scout.Table.CheckableStyle.CHECKBOX, 'checkbox'],
-  [scout.Table.CheckableStyle.TABLE_ROW, 'table_row']
+  [scout.Table.CheckableStyle.TABLE_ROW, 'table_row'],
+  [scout.Table.CheckableStyle.CHECKBOX_TABLE_ROW, 'checkbox_table_row']
 ];

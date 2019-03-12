@@ -50,6 +50,12 @@
                     "labelVisible": false
                   },
                   {
+                    "id": "ScrollableField",
+                    "objectType": "CheckBoxField",
+                    "label": "Scrollable",
+                    "labelVisible": false
+                  },
+                  {
                     "id": "ValueField",
                     "objectType": "StringField",
                     "label": "Value",

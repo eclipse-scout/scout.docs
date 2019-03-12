@@ -41,7 +41,7 @@ If you disable the root group box of a form (with child propagation) and want th
 
 If you have Close- or Cancel-Buttons that need to be disabled, it must be disabled explicitly on the button itself or by propagating the change on a parent form field.
 
-=== Add custom header for REST services
+=== Add Custom Header for REST Services
 
 By default REST services exposed by Scout using the `org.eclipse.scout.rt.rest.RestApplication` are protected against https://en.wikipedia.org/wiki/Cross-site_request_forgery[CSRF] now.
 This requires a custom header to be present on all non GET or HEAD requests. Please do also ensure that GET or HEAD requests do follow the HTTP specification and therefore do not perform any data or state changing operations!
@@ -75,7 +75,7 @@ If the application does not have a Scout server session use
 * `HttpServerRunContextFilter` with session support disabled if a server dependency is available in the application.
 * `HttpRunContextFilter` if only a server-commons dependency is available in the application.
 
-=== Property lookup order changed
+=== Property Lookup Order Changed
 
 The Scout properties are now resolved in a slightly different order. The environment variables are now resolved _before_ the `config.properties` file.
 
@@ -102,13 +102,218 @@ In a deployment where a colliding environment variable exists, the following mig
 ** Change the property key, or
 ** Force the intended property to the desired value using a Java system property (`-D` JVM parameter).
 
-
-=== Menu wrapping
+=== Menu Wrapping
 
 The `OutlineMenuWrapper` has been adapted so that no manual instance can be created anymore (the constructors are no longer public).
 Instead the new factory bean `org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper` should be used.
 This helps to ensure that the correct wrapper is created for each menu type and because it is a bean it may be extended for custom menu types.
 The same is for the methods `unwrapMenu` and `containsWrappedMenu` which have been moved to the new `MenuWrapper` class as well.
+
+=== CollatorProvider Behavior Changed
+
+The `CollatorProvider` bean now uses the _NaturalCollatorProvider_ by default (see release notes). This may result in different results when sorting text.
+
+*Migration:*
+
+If your application already used a custom `CollatorProvider` bean, this may not be necessary anymore. Check the implementation.
+
+If your application whishes to restore the previous behavior, the `CollatorProvider` has to be replaced like this:
+
+[source,Java]
+----
+@Replace
+public class MyCollatorProvider extends CollatorProvider {
+
+  @Override
+  public Collator getInstance(Locale locale) {
+    return Collator.getInstance(locale); // use JVM default
+  }
+}
+----
+
+=== MOM: Changed Logger Name for Incoming/Outgoing JMS Messages
+
+The code for logging incoming/outgoing JMS messages has been extracted into a dedicated class. This results in a changed logger name (the log level is still `DEBUG`).
+
+*Migration:*
+
+If your application configures a custom log level for `org.eclipse.scout.rt.mom.jms.JmsMomImplementor`, change it to `org.eclipse.scout.rt.mom.jms.LogJmsMessageHandler`.
+
+=== Sorting for BeanColumn
+
+UI sorting is disabled for bean columns in order to get an unique sort order.
+
+*Migration:*
+If your application uses a `AbstractBeanColumn` you now have to take care of the sorting by yourself. Either by providing comparable beans or by implementing `compareTableRows` or `getPlainText`.
+
+=== Removal of Deprecated Methods and Classes
+
+Methods and classes that were marked as deprecated in previous relases were finally removed.
+
+*Migration*:
+
+[width="100%",options="header",cols="3,2,3"]
+|===
+|Class
+|Removed{nbsp}part
+|Replacement
+
+|org.eclipse.scout.rt.client.ui.action.IAction
+|[.line-through]#`initAction()`#
+|`init()` or `reinit()`
+
+.2+|org.eclipse.scout.rt.client.ui.basic.calendar.ICalendar
+|[.line-through]#`initCalendar()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeCalendar()`#
+|`dispose()`
+
+.5+|org.eclipse.scout.rt.client.ui.basic.planner.IPlanner
+|[.line-through]#`initPlanner()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposePlanner()`#
+|`dispose()`
+|[.line-through]#`getMinimumActivityDuration()`#
+|`DisplayModeOptions.getMinSelectionIntervalCount()`
+|[.line-through]#`setMinimumActivityDuration()`#
+|`DisplayModeOptions.withMinSelectionIntervalCount()`
+|[.line-through]#`setMinimumActivityDurationInMinutes()`#
+|`DisplayModeOptions.withMinSelectionIntervalCount()`
+
+.3+|org.eclipse.scout.rt.client.ui.basic.table.ITable
+|[.line-through]#`initTable()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeTable()`#
+|`dispose()`
+|[.line-through]#`isTableInitialized()`#
+|`isInitDone()`
+
+|org.eclipse.scout.rt.client.ui.basic.table.TableUtility
+|[.line-through]#`editNextTableCell()`#
+|_(no replacement)_
+
+|org.eclipse.scout.rt.client.ui.basic.table.TableListener
+|[.line-through]#`tableChangedBatch()`#
+|For maximum performance, only register listeners for the events that are really handled. See the vararg parameter to `ITable.addTableListener(TableListener, int...)`.
+
+.2+|org.eclipse.scout.rt.client.ui.basic.tree.ITree
+|[.line-through]#`initTree()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeTree()`#
+|`dispose()`
+
+|org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode
+|[.line-through]#`getMenu()`#
+|`getMenuByClass()`
+
+|org.eclipse.scout.rt.client.ui.basic.tree.TreeListener
+|[.line-through]#`treeChangedBatch()`#
+|For maximum performance, only register listeners for the events that are really handled. See the vararg parameter to `ITree.addTreeListener(TreeListener, int...)`.
+
+.4+|org.eclipse.scout.rt.client.ui.desktop.IDesktop
+|[.line-through]#`initDesktop()`#
+|`init()` or `reinit()`
+|[.line-through]#`getMenu()`#
+|`getMenuByClass()`
+|[.line-through]#`findMenu()`#
+|`getMenuByClass()`
+|[.line-through]#`addDesktopListenerAtExecutionEnd()`#
+|`addUIDesktopListener()`
+
+|org.eclipse.scout.rt.client.ui.DataChangeListener
+|_(entire class)_
+|`org.eclipse.scout.rt.client.ui.desktop.datachange.IDataChangeListener`
+
+|org.eclipse.scout.rt.client.ui.WeakDataChangeListener
+|_(entire class)_
+|`org.eclipse.scout.rt.client.ui.desktop.datachange.IDataChangeListener`
+
+|org.eclipse.scout.rt.client.ui.form.IForm
+|[.line-through]#`initForm()`#
+|`init()` or `reinit()`
+
+.3+|org.eclipse.scout.rt.client.ui.form.fields.IFormField
+|[.line-through]#`initField()`#
+|`init()` or `reinit()`
+|[.line-through]#`disposeField()`#
+|`dispose()`
+|[.line-through]#`isInitialized()`#
+|`isInitConfigDone()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.CompositeFieldUtility
+|[.line-through]#`getFieldByClass()`#
+|`getWidgetByClass()`
+
+.3+|org.eclipse.scout.rt.client.ui.form.fields.splitbox.ISplitBox
+|[.line-through]#`PROP_COLLAPSE_KEY_STROKE`#
+|`PROP_TOGGLE_COLLAPSE_KEY_STROKE`
+|[.line-through]#`setCollapseKeyStroke()`#
+|`setToggleCollapseKeyStroke()`
+|[.line-through]#`getCollapseKeyStroke()`#
+|`getToggleCollapseKeyStroke()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.splitbox.AbstractSplitBox
+|[.line-through]#`getConfiguredCollapseKeyStroke()`#
+|`getConfiguredToogleCollapseKeyStroke()`
+
+.2+|org.eclipse.scout.rt.client.ui.form.fields.sequencebox.ISequenceBox
+|[.line-through]#`isEqualColumnWidths()`#
+|_(no replacement)_
+|[.line-through]#`setEqualColumnWidths()`#
+|_(no replacement)_
+
+|org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox
+|[.line-through]#`getConfiguredEqualColumnWidths()`#
+|_(no replacement)_
+
+.2+|org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox
+|[.line-through]#`getMinWidthInPixel()`#
+|`getBodyLayoutConfig()`
+|[.line-through]#`setMinWidthInPixel()`#
+|`setBodyLayoutConfig()`
+
+|org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox
+|[.line-through]#`getConfiguredMinWidthInPixel()`#
+|`getConfiguredBodyLayoutConfig()`
+
+|org.eclipse.scout.rt.server.services.common.imap.IIMAPService +
+org.eclipse.scout.rt.server.services.common.imap.AbstractIMAPService
+|_(entire class)_ +
+Config properties starting with `scout.imap.` are obsolete (see section below).
+|Use `ImapHelper` (from _org.eclipse.scout.rt.mail_ module). Map config properties to `ImapServerConfig`. Interact with `javax.mail.Message` directly where no appropriate helper method is available.
+
+|org.eclipse.scout.rt.server.services.common.smtp.ISMTPService +
+org.eclipse.scout.rt.server.services.common.smtp.AbstractSMTPService
+|_(entire class)_ +
+Config properties starting with `scout.smtp.` are obsolete (see section below).
+|Use `SmtpHelper` (from _org.eclipse.scout.rt.mail_ module) instead. Map config properties to `SmtpServerConfig`. If a subject prefix is required, the prefix must be prepended before calling `SmtpHelper.sendMessage()`.
+
+|org.eclipse.scout.rt.server.services.common.pop3.POP3Adapter +
+org.eclipse.scout.rt.server.services.common.pop3.IPOP3MessageVisitor
+|_(entire class)_ +
+|No replacement. If you really require this code, get the https://github.com/eclipse/scout.rt/blob/releases/8.0.x/org.eclipse.scout.rt.server/src/main/java/org/eclipse/scout/rt/server/services/common/pop3/POP3Adapter.java[latest revision] from the 8.0.x branch and add it to your project.
+
+|===
+
+Due to the removal of `IIMAPService` and `ISMTPService` (see above) the following config properties are now obsolete and are no longer valid. They must be removed from _config.properties_ files.
+
+* [.line-through]#`scout.imap.host`#
+* [.line-through]#`scout.imap.port`#
+* [.line-through]#`scout.imap.mailbox`#
+* [.line-through]#`scout.imap.username`#
+* [.line-through]#`scout.imap.password`#
+* [.line-through]#`scout.imap.sslProtocols`#
+* [.line-through]#`scout.smtp.host`#
+* [.line-through]#`scout.smtp.port`#
+* [.line-through]#`scout.smtp.username`#
+* [.line-through]#`scout.smtp.password`#
+* [.line-through]#`scout.smtp.subjectPrefix`#
+* [.line-through]#`scout.smtp.defaultFromEmail`#
+* [.line-through]#`scout.smtp.sslProtocols`#
+* [.line-through]#`scout.smtp.useAuth`#
+* [.line-through]#`scout.smtp.useSsl`#
+
+Another consequence of this removal is a change in the module dependencies. `org.eclipse.scout.rt.server` no longer depends on `org.eclipse.scout.rt.mail`. If your code requires code from `org.eclipse.scout.rt.mail` you have to make sure that you declare this dependency in your own _pom.xml_.
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -140,18 +345,17 @@ If you created a custom theme, you might have to adjust some LESS variables.
 * Renamed `@table-control-active-background-color` to `@table-control-selected-background-color`
 * Renamed `@scrollbar-side-margin` to `@scrollbar-side-padding`
 
-
-=== Default value for Scout JSON model attribute 'type'
+=== Default Value for Scout JSON Model Attribute "type"
 
 In the Scout JSON model the `"type": "model"` must no longer be specified as it is the default value now. Therefore all occurrences can be deleted. This makes the static JSON model more compact, easier to write and better readable.
 
-=== Page can be declared in the static Outline JSON model
+=== Page Can Be Declared in the Static Outline JSON Model
 
 Before 9.0 it was necessary to add pages (`PageWithTable`, `PageWithNodes`) programmatically to outlines as pages could not be declared in the JSON model. This is now possible.
 The Outline JSON model may now contain an attribute `nodes` which may contain custom pages.
 Refer to the helloworld application (created by Eclipse) or the JS Widgets application for an example.
 
-=== Form in FormTableControl is adapted automatically
+=== Form in FormTableControl is Adapted Automatically
 
 A form in a `FormTableControl` is automatically adapted to match the semantics in which the form exists:
 
@@ -161,19 +365,32 @@ A form in a `FormTableControl` is automatically adapted to match the semantics i
 
 Until now if the `FormTableControl` was used in a project, this adaption of the form must have been done manually. This code can now be removed as it will be done by Scout now.
 
-=== Table inside PageWithTable uses default reload handler
+=== Table Inside PageWithTable Uses Default Reload Handler
 
 A table within a `PageWithTable` has a default reload handler installed now. It calls `loadTableData` on the page which discards all rows and loads them again by calling `_loadTableData`.
 If a custom reload handler was installed, it may be removed now.
 
 Furthermore the `_loadTableData` method now also gets an optional argument holding the exported data of the first form that is attached to the table using a `FormTableControl` (typically the SearchForm).
 
-=== Possibility to prepare a LookupCall in a ListBox & RadioButtonGroup
+=== Possibility to Prepare a LookupCall in ListBox & RadioButtonGroup
 
 Until now it was necessary to set the lookup call programmatically to a ListBox or LookupCall if a `prepareLookupCall` listener was registered. Otherwise the call has been executed before the listener could have been attached.
 This is no longer the case: The LookupCall is executed on first use only and not during the creation of the widget which allows to attach `prepareLookupCall` listeners.
 The LookupCall may now also be declared in the static JSON model of the widget even though a `prepareLookupCall` listener is registered.
 
+=== Toggle Action and Button Now Trigger Event
+
+The action resp. click event is currently not fired if the action/button is a toggle action or the button has menus.
+This means, if you want to be informed when a user clicks a regular button, you would listen for the action event.
+If you want to be informed when a user clicks a toggle button, you would have to listen for a property change event.
+
+To make it easier, the action event is now always fired (in addition to the property change event).
+This helps, if you just want to know whether the button was clicked and aren't interested in the selected state.
+
+If you accidentally registered an action resp. click listener for toggle actions or buttons, or menu with child menus or buttons with
+menus, the listener will now be informed. So make sure to check your toggle actions and buttons so that the action is not executed twice.
+
+Note: Due to compatibility reasons the behavior for Scout Classic has not been changed.
 
 ////
   =============================================================================
@@ -182,3 +399,56 @@ The LookupCall may now also be declared in the static JSON model of the widget e
 ////
 
 == Other Changes
+
+=== Java 11 Support
+
+Scout 9 officially supports https://jdk.java.net/11/[OpenJDK 11]. Please note that Java 9 and 10 are not supported and that https://www.oracle.com/technetwork/java/java-se-support-roadmap.html[Oracle only provides free Java 8 updates for commercial use until end of January 2019].
+Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapters describe the actions to migrate your code to be Java 11 capable.
+
+==== General Migration
+
+* Scout increased the minimum Maven version from 3.2.1 to 3.5.3. You might need to update your tool-chain accordingly.
+* The JAX-RS API version has been updated from 2.0.1 to 2.1.1. This may be relevant if you use a container that already includes a JAX RS runtime instead of bundling your own runtime.
+* Update the `maven_rt_plugin_config-master` in all poms to version 3.1.0
+* If you use the Scout JAX-RS support using Jersey you have to add the dependency `org.glassfish.jersey.inject:jersey-hk2` to all poms where the artifact `jersey-container-servlet-core` is referenced as dependency.
+* Batik has been updated from 1.7 to 1.10. If you are using Batik in your project you might need to update some imports. E.g.:
+** `org.apache.batik.dom.svg.SAXSVGDocumentFactory` to `org.apache.batik.anim.dom.SAXSVGDocumentFactory`
+** `org.apache.batik.dom.svg.SVGDOMImplementation` to `org.apache.batik.anim.dom.SVGDOMImplementation`
+* Because of duplicate classes in `javax.activation:javax.activation-api` and the corresponding implementation `com.sun.activation:javax.activation` it might be necessary to exclude the former dependency where both are present on the classpath. Such cases will be reported by the `duplicate-finder-maven-plugin` during maven build.
+* If you are using the `maven-assembly-plugin`: The `descriptor` tag pointing to the xml file has been replaced with a `descriptors` list element. Furthermore the `classifier` configuration element does no longer exist and must be deleted if present. Example: `<descriptor>assembly.xml</descriptor>` can be replaced with
+[source,xml]
+----
+    <descriptors>
+       <descriptor>assembly.xml</descriptor>
+    </descriptors>
+----
+
+==== JAX WS Migration
+
+* The JAX WS API version has been updated from 2.2.10 to 2.3.1. This may be relevant if you use a container that already includes a JAX WS runtime instead of bundling your own runtime.
+* The JAX WS RI (reference implementation) has been removed from the JRE. Therefore `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsRISpecifics` should not longer by used unless the application is still running with Java 8. Otherwise migrate to `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsMetroSpecifics` (which is the new default value).
+* Because the RI is no longer part of the JRE, the Metro implementation must be added instead. To do so please add dependency `com.sun.xml.ws:jaxws-rt` to the poms of your server war and dev projects.
+* Because the JAX WS classes are no longer part of the JRE, the corresponding libraries must be added to all `.factorypath` files in your workspace. Please add the following elements:
+[source,xml]
+----
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/jws/javax.jws-api/1.1/javax.jws-api-1.1.jar"
+       enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar"
+       enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR"
+       id="M2_REPO/javax/xml/ws/jaxws-api/2.3.1/jaxws-api-2.3.1.jar"
+       enabled="true" runInBatchMode="false"/>
+----
+* The `jaxws-maven-plugin` from `org.codehaus.mojo` is not Java 11 capable. Therefore replace the groupId with `com.helger.maven` in all your poms to use a Java 11 capable maven plugin.
+
+==== Changed Computation of NodeIdentifier
+
+If multiple Scout applications are connected together to form a cluster, the application-scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` provides an ID for each node. This string can be used to identify cluster nodes in log messages, cluster messages etc. 
+
+It is recommended to assign a unique and stable name to each node by setting the property _scout.nodeId_ when launching the application. The default implementation of `NodeIdentifier` also checks for properties of some well-known application servers (e.g. _jboss.node.name_). If no explicitly assigned identifier is found, a random UUID is generated.
+
+TIP: Note that a random ID will not be stable, i.e. it will change each time the application is restarted. This is fine for single-node and most multi-node setups. However, there are cases where stable IDs are required, for example when using durable topics or cleaning up node-specific data.
+
+In previous releases, `NodeIdentifier` sometimes returned the local hostname and a port number instead of a random UUID. This behavior was removed from Scout 9, because it is unreliable and the used port number was not always correct. If your application relies on the hostname, consider explicitly setting the _scout.nodeId_ property or customizing the bean `NodeIdentifier`.

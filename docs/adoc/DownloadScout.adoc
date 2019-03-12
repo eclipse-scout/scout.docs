@@ -18,16 +18,16 @@ ifndef::mdledir[:mdledir: .]
 === Java and Maven
 
 Before you download Scout make sure that you have a working Java Development Kit (JDK) and a working Maven installation.
-In case you first need to download and install a JDK we recommend to work with either the http://www.oracle.com/technetwork/java/javase/downloads/index.html[Oracle JDK] or the http://openjdk.java.net/install/[Open JDK].
+In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK].
 For Maven, head over to the https://maven.apache.org/[Maven project page].
 
 To verify your Java installation use your command line.
 
 ----
 C:\Users\mzi>java -version
-java version "1.8.0_92"
-Java(TM) SE Runtime Environment (build 1.8.0_92-b14)
-Java HotSpot(TM) 64-Bit Server VM (build 25.92-b14, mixed mode)
+openjdk version "11.0.1" 2018-10-16
+OpenJDK Runtime Environment 18.9 (build 11.0.1+13)
+OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
 ----
 
 We recommend to use a JDK version 8.
@@ -38,12 +38,11 @@ Now check your Maven installation on the command line as well.
 
 ----
 C:\Users\mzi>mvn -version
-Apache Maven 3.2.3 (33f8c3e1027c3ddde99d3cdebad2656a31e8fdf4; 2014-08-11T22:58:10+02:00)
-Maven home: C:\maven\apache-maven-3.2.3
-Java version: 1.8.0_92, vendor: Oracle Corporation
-Java home: C:\java\jdk1.8.0_92\jre
+Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T20:41:47+02:00)
+Maven home: c:\maven-3.6.0\
+Java version: 11.0.1, vendor: Oracle Corporation, runtime: C:\jdk-11.0.1
 Default locale: en_US, platform encoding: Cp1252
-OS name: "windows 7", version: "6.1", arch: "amd64", family: "dos"
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 ----
 
 Having verified the above prerequisites it is now time to download the Scout package.
@@ -65,9 +64,6 @@ Clicking on the link leads to a list of individual download packages as shown in
 [[img-scout_download_package]]
 .The Scout download package.
 image::{imgsdir}/scout_download_package.png[]
-
-As shown above, the Eclipse Scout package is available in the form of a 32 bit and a 64 bit package.
-To download the correct package, make sure to matche your JDK installation as described in the previous section.
 
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 

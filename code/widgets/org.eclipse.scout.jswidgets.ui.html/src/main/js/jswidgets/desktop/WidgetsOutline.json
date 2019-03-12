@@ -8,7 +8,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:Accordion}",
+      "text": "Accordion",
       "detailForm": {
         "objectType": "jswidgets.AccordionForm"
       }
@@ -24,7 +24,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:Carousel}",
+      "text": "Carousel",
       "detailForm": {
         "objectType": "jswidgets.CarouselForm"
       }
@@ -48,7 +48,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:DateField}",
+      "text": "Date Field",
       "detailForm": {
         "objectType": "jswidgets.DateFieldForm"
       }
@@ -56,9 +56,18 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:Form}",
+      "text": "Desktop",
       "detailForm": {
-        "objectType": "jswidgets.FormForm"
+        "objectType": "jswidgets.DesktopForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "Form",
+      "detailForm": {
+        "objectType": "jswidgets.FormForm",
+        "detailForm": true
       }
     },
     {
@@ -90,7 +99,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:GroupBox}",
+      "text": "Group Box",
       "detailForm": {
         "objectType": "jswidgets.GroupBoxForm"
       }
@@ -122,7 +131,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:LogicalGrid}",
+      "text": "Logical Grid",
       "detailForm": {
         "objectType": "jswidgets.LogicalGridForm"
       }
@@ -130,7 +139,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:MenuBar}",
+      "text": "Menu Bar",
       "detailForm": {
         "objectType": "jswidgets.MenuBarForm"
       }
@@ -146,7 +155,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:NumberField}",
+      "text": "Number Field",
       "detailForm": {
         "objectType": "jswidgets.NumberFieldForm"
       }
@@ -198,7 +207,7 @@
     },
     {
       "objectType": "PageWithNodes",
-      "text": "${textKey:SmartField}",
+      "text": "Smart Field",
       "expanded": true,
       "detailForm": {
         "objectType": "jswidgets.SmartFieldForm"
@@ -207,7 +216,7 @@
         {
           "objectType": "PageWithNodes",
           "leaf": true,
-          "text": "${textKey:ProposalField}",
+          "text": "Proposal Field",
           "detailForm": {
             "objectType": "jswidgets.ProposalFieldForm"
           }
@@ -216,7 +225,7 @@
           "objectType": "PageWithNodes",
           "objectType": "PageWithNodes",
           "leaf": true,
-          "text": "${textKey:MultilineSmartField}",
+          "text": "Multiline Smart Field",
           "detailForm": {
             "objectType": "jswidgets.MultilineSmartFieldForm"
           }
@@ -232,7 +241,7 @@
         {
           "objectType": "PageWithNodes",
           "leaf": true,
-          "text": "${textKey:TreeSmartField}",
+          "text": "Tree Smart Field",
           "detailForm": {
             "objectType": "jswidgets.TreeSmartFieldForm"
           }
@@ -242,7 +251,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:StringField}",
+      "text": "String Field",
       "detailForm": {
         "objectType": "jswidgets.StringFieldForm"
       }
@@ -250,7 +259,7 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
-      "text": "${textKey:TabBox}",
+      "text": "Tab Box",
       "detailForm": {
         "objectType": "jswidgets.TabBoxForm"
       }
@@ -313,6 +322,14 @@
       "text": "Tile Accordion",
       "detailForm": {
         "objectType": "jswidgets.TileAccordionForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
+      "text": "Tree Box",
+      "detailForm": {
+        "objectType": "jswidgets.TreeBoxForm"
       }
     }
   ]

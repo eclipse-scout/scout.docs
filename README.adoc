@@ -1,24 +1,24 @@
-:scout_home: http://eclipse.org/scout/
-:scout_wiki: http://wiki.eclipse.org/Scout/
-:scout_forum: http://eclipse.org/forums/eclipse.scout
-:scout_ml: http://dev.eclipse.org/mailman/listinfo/scout-dev
-:scout_contrib: http://wiki.eclipse.org/Scout/Contribution
+:scout_home: https://www.eclipse.org/scout/
+:scout_docu: https://eclipsescout.github.io/
+:scout_forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=174
+:scout_ml: https://accounts.eclipse.org/mailing-list/scout-dev
+:scout_contrib: https://wiki.eclipse.org/Scout/Contribution
 :scout_branch: https://wiki.eclipse.org/Scout/Contribution_Guidelines#Git_Branching_Policy
-:bugzilla: http://bugs.eclipse.org/bugs/
-:bugzilla_query: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:bugzilla_new: http://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:eclipse_cla: http://www.eclipse.org/legal/CLA.php
-:eclipse_account: https://dev.eclipse.org/site_login/createaccount.php
-:eclipse_sso: https://projects.eclipse.org/user/login/sso
-:github_pr: https://help.github.com/categories/collaborating/
-:license_cc: http://creativecommons.org/licenses/by/3.0/
+:bugzilla: https://bugs.eclipse.org/bugs/
+:bugzilla_query: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:bugzilla_new: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
+:eclipse_cla: https://www.eclipse.org/legal/ECA.php
+:eclipse_account: https://accounts.eclipse.org/user/register
+:eclipse_sso: https://accounts.eclipse.org/user/login?destination=oauth2/authorize
+:github_pr: https://help.github.com/categories/collaborating-with-issues-and-pull-requests/
+:license_cc: https://creativecommons.org/licenses/by/3.0/
 :license_edl: https://www.eclipse.org/org/documents/edl-v10.php
 
 = Eclipse Scout - Docs
 
 This Repository is part of the *Eclipse Scout* project.
 It contains the source of the documentation items and some demo applications created with the framework.
-The documentation is published on link:http://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:http://help.eclipse.org/[Eclipse Help Center].
+The documentation is published on link:https://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
 
 link:{scout_home}[Eclipse Scout] is a mature and open framework for modern, service oriented business applications.
 The framework is based on Java/HTML5. 
@@ -33,7 +33,7 @@ Eclipse Scout is built to
 == Documentation & Links
 
 * link:{scout_home}[Project homepage]
-* link:{scout_wiki}[Eclipse Scout Wiki]
+* link:{scout_docu}[Eclipse Scout Documentation]
 * link:{scout_forum}[Eclipse Scout Forum]
 * link:{bugzilla}[Eclipse Bugzilla]
 ** link:{bugzilla_query}[Existing bug reports]

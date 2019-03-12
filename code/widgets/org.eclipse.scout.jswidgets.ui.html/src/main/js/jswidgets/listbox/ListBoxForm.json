@@ -54,6 +54,11 @@
                 "objectType": "jswidgets.FormFieldPropertiesBox"
               },
               {
+                "id": "PropertiesBox",
+                "objectType": "jswidgets.TablePropertiesBox",
+                "expandable": true
+              },
+              {
                 "id": "GridDataBox",
                 "objectType": "jswidgets.GridDataBox",
                 "label": "Grid Data Hints"

@@ -1,6 +1,5 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
 import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.security.SecurityUtility;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.CloseButton;
@@ -264,7 +264,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
   protected void addGroupWithTiles() {
     IAccordion accordion = getAccordionField().getAccordion();
     List<AbstractCustomTile> tiles = new ArrayList<>();
-    int maxTiles = new SecureRandom().nextInt(30);
+    int maxTiles = SecurityUtility.createSecureRandom().nextInt(30);
     for (int i = 0; i < maxTiles; i++) {
       SimpleTile tile = new SimpleTile();
       tile.setLabel("Tile " + i);

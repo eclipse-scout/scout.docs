@@ -28,8 +28,6 @@ import org.eclipse.scout.rt.svg.client.SVGUtility;
 import org.eclipse.scout.rt.svg.client.svgfield.AbstractSvgField;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.SvgFieldForm.MainBox.ConfigurationBox.SvgSourceField;
@@ -57,14 +55,6 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
   @Override
   public void startPageForm() {
     startInternal(new PageFormHandler());
-  }
-
-  public AlignedCenterField getAlignedCenterField() {
-    return getFieldByClass(AlignedCenterField.class);
-  }
-
-  public AlignedRightField getAlignedRightField() {
-    return getFieldByClass(AlignedRightField.class);
   }
 
   @Override

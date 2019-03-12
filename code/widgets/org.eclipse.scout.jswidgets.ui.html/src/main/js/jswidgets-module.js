@@ -20,13 +20,14 @@
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
   __include("jswidgets/common/IconIdLookupCall.js");
-  __include("jswidgets/common/Text.js");
   __include("jswidgets/common/WidgetActionsBox.js");
   __include("jswidgets/checkboxfield/CheckBoxFieldForm.js");
   __include("jswidgets/desktop/Desktop.js");
+  __include("jswidgets/desktop/DesktopForm.js");
   __include("jswidgets/desktop/DisplayParentLookupCall.js");
   __include("jswidgets/form/FormDisplayHintLookupCall.js");
   __include("jswidgets/form/FormForm.js");
+  __include("jswidgets/form/FormPropertiesBox.js");
   __include("jswidgets/form/LifecycleForm.js");
   __include("jswidgets/formfield/FormFieldPropertiesBox.js");
   __include("jswidgets/formfield/LabelPositionLookupCall.js");
@@ -106,6 +107,9 @@
   __include("jswidgets/table/TablePropertiesBox.js");
   __include("jswidgets/table/ColumnLookupCall.js");
   __include("jswidgets/table/ColumnPropertiesBox.js");
+  __include("jswidgets/table/NumberColumnPropertiesBox.js");
+  __include("jswidgets/table/DateColumnPropertiesBox.js");
+  __include("jswidgets/table/BackgroundEffectLookupCall.js");
   __include("jswidgets/table/editable/EditableTableForm.js");
   __include("jswidgets/table/hierarchical/HierarchicalTableForm.js");
   __include("jswidgets/table/hierarchical/HierarchicalTablePropertiesBox.js");
@@ -127,4 +131,7 @@
   __include("jswidgets/page/SamplePageWithTable.js");
   __include("jswidgets/page/SamplePageWithTableSearchForm.js");
   __include("jswidgets/page/SamplePageWithNodes.js");
+  __include("jswidgets/treebox/TreeBoxForm.js");
+  __include("jswidgets/treebox/TreePropertiesBox.js");
+  __include("jswidgets/treebox/CheckableTreeStyleLookupCall.js");
 }(window.jswidgets = window.jswidgets || {}, scout, jQuery));

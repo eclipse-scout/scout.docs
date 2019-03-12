@@ -76,6 +76,10 @@ jswidgets.MenuBarForm.prototype._onReplaceChildActionsClick = function(event, me
 };
 
 jswidgets.MenuBarForm.prototype._onMenuAction = function(event) {
+  if (event.source.toggleAction) {
+    // Don't show message box if it is a toggle action
+    return;
+  }
   scout.MessageBoxes.createOk(this)
     .withBody("Menu with label '" + event.source.text + "' has been activated.")
     .buildAndOpen();

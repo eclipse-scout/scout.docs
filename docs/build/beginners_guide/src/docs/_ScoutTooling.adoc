@@ -39,7 +39,7 @@ include::{mdledir}/SdkScoutTooling.adoc[]
 The Scout tooling is an extension of the Eclipse IDE.
 The goal of this section is not to provide a complete overview on the features contained in the Eclipse IDE.
 It provides a short overview of the important eclipse features, frequently used during the development of a Scout Application.
-Experimented Eclipse IDE users might skip this section.
+Experienced Eclipse IDE users might skip this section.
 
 
 

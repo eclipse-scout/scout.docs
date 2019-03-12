@@ -14,12 +14,15 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
+import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.DenseRadioButtonGroup;
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.UiThemeCodeType.DefaultCode;
@@ -35,6 +38,7 @@ public class OptionsForm extends AbstractForm {
   protected void execInitForm() {
     String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
+    getDenseRadioButtonGroup().setValue(getDesktop().isDense());
   }
 
   public void startNew() {
@@ -43,6 +47,10 @@ public class OptionsForm extends AbstractForm {
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
+  }
+
+  public DenseRadioButtonGroup getDenseRadioButtonGroup() {
+    return getFieldByClass(DenseRadioButtonGroup.class);
   }
 
   public UiThemeField getUiThemeField() {
@@ -78,6 +86,43 @@ public class OptionsForm extends AbstractForm {
           return true;
         }
       }
+
+      @Order(20)
+      public class DenseRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Layout");
+        }
+
+        @Order(10)
+        public class DefaultButton extends AbstractRadioButton<Boolean> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.FALSE;
+          }
+        }
+
+        @Order(20)
+        public class DenseButton extends AbstractRadioButton<Boolean> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Dense");
+          }
+
+          @Override
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.TRUE;
+          }
+        }
+      }
     }
 
     @Order(10)
@@ -93,7 +138,12 @@ public class OptionsForm extends AbstractForm {
 
     @Override
     protected void execStore() {
-      getDesktop().setTheme(getUiThemeField().getValue());
+      if (getUiThemeField().isSaveNeeded()) {
+        getDesktop().setTheme(getUiThemeField().getValue());
+      }
+      if (getDenseRadioButtonGroup().isSaveNeeded()) {
+        getDesktop().setDense(getDenseRadioButtonGroup().getValue());
+      }
     }
   }
 }

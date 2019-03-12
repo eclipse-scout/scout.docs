@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -645,20 +646,20 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         BigDecimal two = new BigDecimal(2);
         int scale = NumberUtility.nvl(getFractionDigitsField().getValue(), 20) + 2;
         BigDecimal a = BigDecimal.ONE;
-        BigDecimal b = BigDecimal.ONE.divide(sqrt(two, scale), scale, BigDecimal.ROUND_HALF_UP);
+        BigDecimal b = BigDecimal.ONE.divide(sqrt(two, scale), scale, RoundingMode.HALF_UP);
         BigDecimal t = new BigDecimal(0.25);
         BigDecimal x = BigDecimal.ONE;
         BigDecimal y;
 
         while (!a.equals(b)) {
           y = a;
-          a = a.add(b).divide(two, scale, BigDecimal.ROUND_HALF_UP);
+          a = a.add(b).divide(two, scale, RoundingMode.HALF_UP);
           b = sqrt(b.multiply(y), scale);
           t = t.subtract(x.multiply(y.subtract(a).multiply(y.subtract(a))));
           x = x.multiply(two);
         }
 
-        return a.add(b).multiply(a.add(b)).divide(t.multiply(new BigDecimal(4)), scale - 2, BigDecimal.ROUND_HALF_UP);
+        return a.add(b).multiply(a.add(b)).divide(t.multiply(new BigDecimal(4)), scale - 2, RoundingMode.HALF_UP);
       }
 
       /**
@@ -671,9 +672,9 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
         while (!x0.equals(x1)) {
           x0 = x1;
-          x1 = a.divide(x0, scale, BigDecimal.ROUND_HALF_UP);
+          x1 = a.divide(x0, scale, RoundingMode.HALF_UP);
           x1 = x1.add(x0);
-          x1 = x1.divide(two, scale, BigDecimal.ROUND_HALF_UP);
+          x1 = x1.divide(two, scale, RoundingMode.HALF_UP);
         }
 
         return x1;

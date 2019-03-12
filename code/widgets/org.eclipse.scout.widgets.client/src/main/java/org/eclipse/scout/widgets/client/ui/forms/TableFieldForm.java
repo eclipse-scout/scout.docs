@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
@@ -61,6 +62,7 @@ import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -79,6 +81,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.AutoResizeColumnsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsCheckableField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnFixedWidthField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsColumnMandatoryField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.IsEditableField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
@@ -159,6 +162,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
   public IsColumnMandatoryField getIsColumnMandatoryField() {
     return getFieldByClass(IsColumnMandatoryField.class);
+  }
+
+  public IsColumnFixedWidthField getIsColumnFixedWidthField() {
+    return getFieldByClass(IsColumnFixedWidthField.class);
   }
 
   public WrapTextField getWrapText() {
@@ -406,6 +413,9 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                       // Is Column Mandatory Field
                       getIsColumnMandatoryField().setEnabled(false);
                       getIsColumnMandatoryField().setValue(false);
+                      // Is Column Width Fixed
+                      getIsColumnFixedWidthField().setEnabled(false);
+                      getIsColumnFixedWidthField().setValue(false);
                     }
                     else {
                       IColumn<?> contextColumn = Table.this.getContextColumn();
@@ -413,6 +423,9 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                       // Is Column Mandatory Field
                       getIsColumnMandatoryField().setEnabled(true);
                       getIsColumnMandatoryField().setValue(contextColumn.isMandatory());
+                      // Is Column Width Fixed
+                      getIsColumnFixedWidthField().setEnabled(true);
+                      getIsColumnFixedWidthField().setValue(contextColumn.isFixedWidth());
                     }
                   }
                 });
@@ -1488,6 +1501,35 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      @Order(65)
+      public class CheckableStyleField extends AbstractSmartField<CheckableStyle> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Checkable Style";
+        }
+
+        @Override
+        protected String getConfiguredDisplayStyle() {
+          return DISPLAY_STYLE_DROPDOWN;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<CheckableStyle>> getConfiguredLookupCall() {
+          return TableCheckableStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTableField().getTable().setCheckableStyle(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTableField().getTable().getCheckableStyle());
+        }
+      }
+
       @Order(70)
       public class PropertiesGroupBox extends AbstractGroupBox {
 
@@ -1786,7 +1828,45 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               setValue(false);
             }
           }
+        }
 
+        @Order(135)
+        public class IsColumnFixedWidthField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ColumnIsFixedWidth");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            IColumn<?> contextColumn = getTableField().getTable().getContextColumn();
+            if (contextColumn != null) {
+              contextColumn.setFixedWidth(getValue());
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            if (getTableField().getTable().getContextColumn() != null) {
+              setEnabled(true);
+              setValue(getTableField().getTable().getContextColumn().isFixedWidth());
+            }
+            else {
+              setEnabled(false);
+              setValue(false);
+            }
+          }
         }
 
         @Order(140)
@@ -1970,6 +2050,39 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(200)
+        public class TruncatedCellTooltipEnabled extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("IsTruncatedCellTooltipEnabled");
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected boolean getConfiguredTriStateEnabled() {
+            return true;
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setTruncatedCellTooltipEnabled(TriState.parse(getValue()));
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isTruncatedCellTooltipEnabled().getBooleanValue());
+          }
+        }
+
+        @Order(210)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override

@@ -53,6 +53,10 @@ jswidgets.GroupBoxPropertiesBox.prototype._setField = function(field) {
   expandedField.setValue(this.field.expanded);
   expandedField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var responsiveField = this.widget('ResponsiveField');
+  responsiveField.setValue(this.field.responsive);
+  responsiveField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var scrollableField = this.widget('ScrollableField');
   scrollableField.setValue(this.field.scrollable);
   scrollableField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -93,6 +97,8 @@ jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setExpandable(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'ExpandedField') {
     this.field.setExpanded(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'ResponsiveField') {
+    this.field.setResponsive(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'ScrollableField') {
     this.field.setScrollable(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'GridColumnCountField') {

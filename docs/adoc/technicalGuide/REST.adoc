@@ -149,15 +149,20 @@ Both values are read from the incoming request header, the caller must ensure th
 
 The Scout module `org.eclipse.scout.rt.rest` offers a set of helper classes in order to call REST services.
 
-Each REST service endpoint is represented by a specific REST resource client helper class. The (usually application scoped bean) class is used to specify the resource URL and additional properties used to build up the connection (authentication, additional headers,...).
+Each REST service endpoint is represented by a specific REST resource client helper class. The (usually application scoped bean) class is used to specify the
+resource URL and additional properties used to build up the connection (authentication, additional headers,...). Further it provides a call-back method for transforming
+unsuccessful responses into appropriate exception.
 
-At least the REST resource base path must be specified:
+At least the REST resource's base URI must be specified:
 
 [source,java]
 .Example: REST resource client helper
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestClientHelper.java[tags=class]
 ----
+<1> Declare base uri.
+<2> Custom exception transformer that is used as default strategy for all invocations prepared by this helper. (This is just for demonstration. Better extend
+    `org.eclipse.scout.rt.rest.client.proxy.AbstractEntityRestClientExceptionTransformer`).
 
 Based on the helper class, an example REST resource client may be implemented:
 
@@ -166,3 +171,8 @@ Based on the helper class, an example REST resource client may be implemented:
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResourceClient.java[tags=class]
 ----
+<1> HTTP GET example: Directly read response into an object. Exceptions are transformed transparently and the underlying resources are released (e.g. HTTP client).
+<2> HTTP POST example: Again, directly read the response into an object.
+<3> HTTP DELETE example: This delete operation does not send a response if it was successful. Hence close the returned `Response` explicitly to release underlying resources
+    (see next line). Note: Unsuccessful responses are already handled by the REST client proxy.
+<4> Use custom exception transformer.

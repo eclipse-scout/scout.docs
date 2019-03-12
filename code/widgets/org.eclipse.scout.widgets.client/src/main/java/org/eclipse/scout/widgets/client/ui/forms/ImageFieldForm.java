@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.dnd.ResourceListTransferObject;
 import org.eclipse.scout.rt.client.ui.dnd.TransferObject;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -24,16 +25,16 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.IImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
-import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
-import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -44,12 +45,9 @@ import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageIdField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
+import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignmentTitleField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.IconContentField;
 import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widgets.shared.Icons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,14 +71,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
     startInternal(new PageFormHandler());
   }
 
-  public AlignedCenterField getAlignedCenterField() {
-    return getFieldByClass(AlignedCenterField.class);
-  }
-
-  public AlignedRightField getAlignedRightField() {
-    return getFieldByClass(AlignedRightField.class);
-  }
-
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
@@ -96,10 +86,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public ConfigurationBox getConfigurationBox() {
     return getFieldByClass(ConfigurationBox.class);
-  }
-
-  public IconContentField getIconContentField() {
-    return getFieldByClass(IconContentField.class);
   }
 
   public Image1Field getImage1Field() {
@@ -120,6 +106,10 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
+  }
+
+  public AlignmentTitleField getAlignmentTitleField() {
+    return getFieldByClass(AlignmentTitleField.class);
   }
 
   public SampleContentButton getSampleContentButton() {
@@ -144,7 +134,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
 
       @Override
       protected int getConfiguredGridColumnCount() {
-        return 2;
+        return 3;
       }
 
       @Override
@@ -168,6 +158,11 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected int getConfiguredGridH() {
           return 4;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 3;
         }
 
         @Override
@@ -226,59 +221,91 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(20)
-      public class IconContentField extends AbstractImageField {
+      @ClassId("7e8b10d2-799c-488c-ae63-d352eec5d62f")
+      @FormData(sdkCommand = FormData.SdkCommand.IGNORE)
+      public class AlignmentTitleField extends AbstractLabelField {
 
         @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return -1;
+        protected boolean getConfiguredLabelVisible() {
+          return false;
         }
 
         @Override
-        protected String getConfiguredImageId() {
-          return Icons.EclipseScout;
+        protected boolean getConfiguredStatusVisible() {
+          return false;
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AlignedLeft");
-        }
-      }
-
-      @Order(30)
-      public class AlignedCenterField extends AbstractImageField {
-
-        @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 0;
+        protected void execInitField() {
+          setValue(TEXTS.get("AlignmentTitle"));
         }
 
         @Override
-        protected String getConfiguredImageId() {
-          return Icons.EclipseScout;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AlignedCenter");
+        protected int getConfiguredGridW() {
+          return 3;
         }
       }
 
-      @Order(40)
-      public class AlignedRightField extends AbstractImageField {
-
-        @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 1;
+      @Order(100)
+      public class IconContentFieldTopLeft extends AbstractAlignedImageField {
+        public IconContentFieldTopLeft() {
+          super(-1, -1);
         }
+      }
 
-        @Override
-        protected String getConfiguredImageId() {
-          return Icons.EclipseScout;
+      @Order(110)
+      public class IconContentFieldMiddleLeft extends AbstractAlignedImageField {
+        public IconContentFieldMiddleLeft() {
+          super(0, -1);
         }
+      }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AlignedRight");
+      @Order(120)
+      public class IconContentFieldBottomLeft extends AbstractAlignedImageField {
+        public IconContentFieldBottomLeft() {
+          super(1, -1);
+        }
+      }
+
+      @Order(200)
+      public class IconContentFieldTopCenter extends AbstractAlignedImageField {
+        public IconContentFieldTopCenter() {
+          super(-1, 0);
+        }
+      }
+
+      @Order(210)
+      public class IconContentFieldMiddleCenter extends AbstractAlignedImageField {
+        public IconContentFieldMiddleCenter() {
+          super(0, 0);
+        }
+      }
+
+      @Order(220)
+      public class IconContentFieldBottomCenter extends AbstractAlignedImageField {
+        public IconContentFieldBottomCenter() {
+          super(1, 0);
+        }
+      }
+
+      @Order(300)
+      public class IconContentFieldTopRight extends AbstractAlignedImageField {
+        public IconContentFieldTopRight() {
+          super(-1, 1);
+        }
+      }
+
+      @Order(310)
+      public class IconContentFieldMiddleRight extends AbstractAlignedImageField {
+        public IconContentFieldMiddleRight() {
+          super(0, 1);
+        }
+      }
+
+      @Order(320)
+      public class IconContentFieldBottomRight extends AbstractAlignedImageField {
+        public IconContentFieldBottomRight() {
+          super(1, 1);
         }
       }
     }
@@ -535,11 +562,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Override
-        protected void execFilterLookupResult(ILookupCall<String> call, List<ILookupRow<String>> result) {
-          result.removeIf(l -> StringUtility.startsWith(l.getKey(), "font:"));
-        }
-
-        @Override
         protected void execChangedValue() {
           getImageURLField().clearErrorStatus();
           getImageURLField().setValueChangeTriggerEnabled(false);
@@ -554,6 +576,11 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           getImage1Field().setImageId(getValue());
           getImage2Field().setImage(null);
           getImage2Field().setImageId(getValue());
+
+          getExamplesBox().getChildren().stream()
+              .filter(w -> w instanceof AbstractAlignedImageField)
+              .map(w -> (AbstractAlignedImageField) w)
+              .forEach(i -> i.setImageId(getValue()));
         }
       }
     }

@@ -54,7 +54,7 @@ public class FormDeepLinkHandler extends AbstractDeepLinkHandler {
       Class<?> formClass = Class.forName(formName);
       if (formClass != null && IForm.class.isAssignableFrom(formClass)) {
         IDesktop.CURRENT.get().setDisplayStyle(IDesktop.DISPLAY_STYLE_BENCH);
-        IForm form = (IForm) formClass.newInstance();
+        IForm form = (IForm) formClass.getConstructor().newInstance();
         form.setTitle(null); // Removing title and subtitle prevents the form from being displayed as a tab.
         form.setSubTitle(null);
         form.setDisplayHint(AbstractForm.DISPLAY_HINT_VIEW);
@@ -66,7 +66,7 @@ public class FormDeepLinkHandler extends AbstractDeepLinkHandler {
         form.start();
       }
     }
-    catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+    catch (ReflectiveOperationException e) {
       throw new DeepLinkException("could not create form: " + formName);
     }
   }

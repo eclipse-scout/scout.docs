@@ -106,6 +106,10 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   this.widget('WidgetActionsBox').setField(accordionField);
   this.widget('EventsTab').setField(this.accordion);
   var layoutConfigBox = this.widget('LayoutConfigBox');
+  layoutConfigBox.getBodyLayout = function() {
+    // Use the layout of the first group for the initialization of the grid config box.
+    return this.field.groups[0].body.htmlComp.layout;
+  };
   layoutConfigBox.getLayoutConfig = function() {
     return this.field.tileGridLayoutConfig;
   };

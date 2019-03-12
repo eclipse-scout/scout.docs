@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <relativePath></relativePath>
   </parent>
 
@@ -28,10 +28,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
+    <asciidoctor.maven.plugin.version>1.5.7.1</asciidoctor.maven.plugin.version>
     <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
-    <asciidoctorj.version>1.5.6</asciidoctorj.version>
-    <jruby.version>9.1.8.0</jruby.version>
+    <asciidoctorj.version>1.5.8.1</asciidoctorj.version>
+    <jruby.version>9.2.5.0</jruby.version>
   </properties>
 
   <modules>
@@ -120,7 +120,7 @@
                   <pluginExecutionFilter>
                     <groupId>org.asciidoctor</groupId>
                     <artifactId>asciidoctor-maven-plugin</artifactId>
-                    <versionRange>[1.5.2,)</versionRange>
+                    <versionRange>[1.5.7,)</versionRange>
                     <goals>
                       <goal>process-asciidoc</goal>
                     </goals>
@@ -147,7 +147,12 @@
       <url>https://repo.eclipse.org/content/groups/releases/</url>
     </repository>
     <repository>
-      <snapshots></snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>
@@ -164,7 +169,12 @@
       <url>https://repo.eclipse.org/content/groups/releases/</url>
     </pluginRepository>
     <pluginRepository>
-      <snapshots></snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>

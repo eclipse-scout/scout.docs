@@ -8,11 +8,13 @@
     "jswidgets/common/WidgetActionsBox.json",
     "jswidgets/checkboxfield/CheckBoxFieldForm.json",
     "jswidgets/desktop/Desktop.json",
+    "jswidgets/desktop/DesktopForm.json",
     "jswidgets/desktop/WidgetsOutline.json",
     "jswidgets/filechooser/FileChooserForm.json",
     "jswidgets/filechooserbutton/FileChooserButtonForm.json",
     "jswidgets/filechooserfield/FileChooserFieldForm.json",
     "jswidgets/form/FormForm.json",
+    "jswidgets/form/FormPropertiesBox.json",
     "jswidgets/form/LifecycleForm.json",
     "jswidgets/formfield/FormFieldPropertiesBox.json",
     "jswidgets/custom/CustomFieldForm.json",
@@ -54,6 +56,8 @@
     "jswidgets/table/TableForm.json",
     "jswidgets/table/TablePropertiesBox.json",
     "jswidgets/table/ColumnPropertiesBox.json",
+    "jswidgets/table/NumberColumnPropertiesBox.json",
+    "jswidgets/table/DateColumnPropertiesBox.json",
     "jswidgets/table/hierarchical/HierarchicalTableForm.json",
     "jswidgets/table/hierarchical/HierarchicalTablePropertiesBox.json",
     "jswidgets/tagfield/TagFieldForm.json",
@@ -63,6 +67,8 @@
     "jswidgets/valuefield/ValueFieldPropertiesBox.json",
     "jswidgets/page/SamplePageWithTable.json",
     "jswidgets/page/SamplePageWithTableSearchForm.json",
-    "jswidgets/page/SamplePageWithNodes.json"
+    "jswidgets/page/SamplePageWithNodes.json",
+    "jswidgets/treebox/TreeBoxForm.json",
+    "jswidgets/treebox/TreePropertiesBox.json"
   ]
 }

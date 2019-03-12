@@ -64,8 +64,8 @@ public class FormPageDeepLinkHandler extends AbstractDeepLinkHandler {
   public DeepLinkUriBuilder createUriForPage(IFormPage formPage) {
     String widgetName = toWidgetName(formPage.getFormType());
     return DeepLinkUriBuilder.createRelative()
-        .info(formPage.getCell().toPlainText())
-        .parameterPath(toDeepLinkPath(widgetName));
+        .parameterPath(toDeepLinkPath(widgetName))
+        .info(formPage.getCell().toPlainText());
   }
 
   @Override

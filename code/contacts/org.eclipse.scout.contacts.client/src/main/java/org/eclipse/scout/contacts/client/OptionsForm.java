@@ -12,6 +12,7 @@ package org.eclipse.scout.contacts.client;
 
 import java.util.Locale;
 
+import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.DenseRadioButtonGroup;
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.LocaleField;
 import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.UiThemeField;
 import org.eclipse.scout.contacts.client.common.AvailableLocaleLookupCall;
@@ -20,7 +21,9 @@ import org.eclipse.scout.contacts.shared.UiThemeCodeType.DefaultCode;
 import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -40,6 +43,7 @@ public class OptionsForm extends AbstractForm {
   protected void execInitForm() {
     String theme = ObjectUtility.nvl(getDesktop().getTheme(), DefaultCode.ID);
     getUiThemeField().setValue(theme);
+    getDenseRadioButtonGroup().setValue(getDesktop().isDense());
 
     String localeString = ClientUIPreferences.getClientPreferences(ClientSession.get()).get(ClientSession.PREF_USER_LOCALE, null);
     if (localeString != null) {
@@ -55,6 +59,10 @@ public class OptionsForm extends AbstractForm {
     return getFieldByClass(UiThemeField.class);
   }
 
+  public DenseRadioButtonGroup getDenseRadioButtonGroup() {
+    return getFieldByClass(DenseRadioButtonGroup.class);
+  }
+
   public LocaleField getLocaleField() {
     return getFieldByClass(LocaleField.class);
   }
@@ -62,6 +70,7 @@ public class OptionsForm extends AbstractForm {
   protected void storeOptions() {
     // Not inside form handler, because the form is used in a FormToolButton without a handler
     getDesktop().setTheme(getUiThemeField().getValue());
+    getDesktop().setDense(getDenseRadioButtonGroup().getValue());
     Locale locale = ObjectUtility.nvl(getLocaleField().getValue(), Locale.getDefault());
     boolean localeChanged = ClientUIPreferences.getClientPreferences(ClientSession.get()).put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
     if (localeChanged) {
@@ -114,6 +123,43 @@ public class OptionsForm extends AbstractForm {
         @Override
         protected boolean getConfiguredMandatory() {
           return true;
+        }
+      }
+
+      @Order(20)
+      public class DenseRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Layout");
+        }
+
+        @Order(10)
+        public class DefaultButton extends AbstractRadioButton<Boolean> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.FALSE;
+          }
+        }
+
+        @Order(20)
+        public class DenseButton extends AbstractRadioButton<Boolean> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Dense");
+          }
+
+          @Override
+          protected Boolean getConfiguredRadioValue() {
+            return Boolean.TRUE;
+          }
         }
       }
 

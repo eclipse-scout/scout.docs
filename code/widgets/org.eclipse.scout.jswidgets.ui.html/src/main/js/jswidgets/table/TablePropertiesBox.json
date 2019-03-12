@@ -66,6 +66,13 @@
       "labelVisible": false
     },
     {
+      "id": "TruncatedCellTooltipEnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Truncated Cell Tooltip Enabled",
+      "labelVisible": false,
+      "triStateEnabled": true
+    },
+    {
       "id": "ScrollToSelectionField",
       "objectType": "CheckBoxField",
       "label": "Scroll To Selection",

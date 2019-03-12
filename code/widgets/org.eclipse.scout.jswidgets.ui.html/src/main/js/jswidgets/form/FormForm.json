@@ -4,6 +4,13 @@
   "rootGroupBox": {
     "id": "MainBox",
     "objectType": "GroupBox",
+    "menus" : [      {
+        "id": "CloseMenu",
+         "objectType": "CloseMenu",
+         "tooltipText": "${textKey:CloseMenuTooltip}",
+         "visible" : false
+      }
+    ],
     "fields": [
       {
         "id": "DetailBox",
@@ -54,77 +61,18 @@
             "fields": [
               {
                 "id": "PropertiesBox",
-                "objectType": "GroupBox",
-                "label": "Properties",
-                "labelVisible": false,
-                "borderVisible": false,
-                "fields": [
-                  {
-                    "id": "TitleField",
-                    "objectType": "StringField",
-                    "label": "Title"
-                  },
-                  {
-                    "id": "SubTitleField",
-                    "objectType": "StringField",
-                    "label": "Sub Title"
-                  },
-                  {
-                    "id": "IconIdField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.IconIdLookupCall",
-                    "label": "Icon Id"
-                  },
-                  {
-                    "id": "DisplayHintField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.FormDisplayHintLookupCall",
-                    "label": "Display Hint"
-                  },
-                  {
-                    "id": "DisplayParentField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.DisplayParentLookupCall",
-                    "label": "Display Parent"
-                  },
-                  {
-                    "id": "StatusField",
-                    "objectType": "SmartField",
-                    "lookupCall": "jswidgets.StatusSeverityLookupCall",
-                    "label": "Status",
-                    "visible": false // does not really work as expected
-                  },
-                  {
-                    "id": "AskIfNeedSaveField",
-                    "objectType": "CheckBoxField",
-                    "label": "Ask If Need Save",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "CacheBoundsField",
-                    "objectType": "CheckBoxField",
-                    "label": "Cache Bounds",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "ClosableField",
-                    "objectType": "CheckBoxField",
-                    "label": "Closable",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "ResizableField",
-                    "objectType": "CheckBoxField",
-                    "label": "Resizable",
-                    "labelVisible": false
-                  },
-                  {
-                    "id": "ModalField",
-                    "objectType": "CheckBoxField",
-                    "label": "Modal",
-                    "labelVisible": false
-                  }
-                ]
+                "objectType": "jswidgets.FormPropertiesBox"
+              }
+            ]
+          },
+          {
+            "id": "CurrentFormPropertiesTab",
+            "objectType": "TabItem",
+            "label": "Properties current form",
+            "fields": [
+              {
+                "id": "CurrentFormPropertiesBox",
+                "objectType": "jswidgets.FormPropertiesBox"
               }
             ]
           },

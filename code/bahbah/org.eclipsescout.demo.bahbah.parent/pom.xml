@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <relativePath></relativePath>
   </parent>
 
@@ -61,7 +61,7 @@
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>6.0.6</version>
+        <version>8.0.13</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -105,7 +105,12 @@
       <url>https://repo.eclipse.org/content/groups/releases/</url>
     </repository>
     <repository>
-      <snapshots></snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>
@@ -122,7 +127,12 @@
       <url>https://repo.eclipse.org/content/groups/releases/</url>
     </pluginRepository>
     <pluginRepository>
-      <snapshots></snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>

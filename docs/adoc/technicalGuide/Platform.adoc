@@ -596,30 +596,6 @@ scout.http.proxyPatterns[1]=.*\.example.org(:\d+)?=proxy.company.com
 By default `org.eclipse.scout.rt.shared.http.ApacheHttpTransportFactory` is used.
 |Fully qualified class name. The class must have `org.eclipse.scout.rt.shared.http.IHttpTransportFactory` in its super hierarchy.
 |Config Property
-|`scout.imap.host`
-|The IMAP server to connect to.
-|String
-|Config Property
-|`scout.imap.mailbox`
-|The mailbox folder name to open. If not specified the default folder is opened.
-|String
-|Config Property
-|`scout.imap.password`
-|The password to connect to the mailbox.
-|String
-|Config Property
-|`scout.imap.port`
-|The port on which the IMAP server should be contacted. If not specified, the default port is used.
-|Integer between 1 and 65535
-|Config Property
-|`scout.imap.sslProtocols`
-|Specifies the SSL protocols that will be enabled for SSL connections. The property value is a whitespace separated list of tokens acceptable to the javax.net.ssl.SSLSocket.setEnabledProtocols() method.
-|String
-|Config Property
-|`scout.imap.username`
-|Default user name for IMAP.
-|String
-|Config Property
 |`scout.jandex.rebuild`
 |Specifies if Jandex indexes should be rebuilt. Is only necessary to enable during development when the class files change often. The default value is false.
 |Boolean
@@ -893,6 +869,10 @@ By default this property is false.
 |`scout.tiles.dataLoadQueueTimeoutSeconds`
 |Maximum number of seconds a tile load job can execute until it is automatically cancelled. The default value is 2 minutes.
 |Integer >= 0
+|Config Property
+|`scout.trustedCertificates`
+|URIs to DER (Base64) encoded certificate files that should be trusted. The URI may refer to a local file or a resource on the classpath (use classpath: prefix). The default value is an empty list.
+|List of Strings
 |Config Property
 |`scout.ui.backgroundPollingMaxWaitTime`
 |The polling request (which waits for a background job to complete) stays open until a background job has completed or the specified number of seconds elapsed.

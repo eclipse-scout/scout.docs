@@ -23,9 +23,9 @@ jswidgets.TileGridLayoutConfigBox.prototype._init = function(model) {
   this.widget('MaxWidthField').on('propertyChange', this._onPropertyChange.bind(this));
 };
 
-jswidgets.TileGridLayoutConfigBox.prototype.reloadLogicalGridLayoutConfig = function() {
-  jswidgets.TileGridLayoutConfigBox.parent.prototype.reloadLogicalGridLayoutConfig.call(this);
-  this.widget('MaxWidthField').setValue(this.getLayoutConfig().maxWidth);
+jswidgets.TileGridLayoutConfigBox.prototype.initLayoutDefaults = function() {
+  jswidgets.TileGridLayoutConfigBox.parent.prototype.initLayoutDefaults.call(this);
+  this.widget('MaxWidthField').setValue(this.getBodyLayout().maxWidth);
 };
 
 jswidgets.TileGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = function(layoutConfig, event) {

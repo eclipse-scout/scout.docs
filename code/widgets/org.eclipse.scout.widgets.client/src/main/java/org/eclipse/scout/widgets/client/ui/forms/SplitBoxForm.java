@@ -62,6 +62,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.ExamplesBo
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterPositionBox.MinSplitterPositionField;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox;
 import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox.CollapsibleFieldBox;
+import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisibleEnabledField.SplitterVisibilityBox.VerticalFieldConfigurationSequenceBox.MinimizeEnabledVerticalField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DateModifiedColumn;
 
@@ -121,6 +122,10 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
 
   public CollapsibleFieldBox getCollapsibleFieldBox() {
     return getFieldByClass(CollapsibleFieldBox.class);
+  }
+
+  public MinimizeEnabledVerticalField getMinimizeEnabledVerticalField() {
+    return getFieldByClass(MinimizeEnabledVerticalField.class);
   }
 
   public NameField getNameField() {
@@ -503,6 +508,37 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredAutoCheckFromTo() {
             return false;
+          }
+
+          @Order(-1000)
+          @ClassId("9ae83e85-603a-4d40-93f9-aab714e341a2")
+          public class MinimizeEnabledVerticalField extends AbstractBooleanField {
+            @Override
+            protected String getConfiguredLabel() {
+              return "Minimize Enabled";
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getSplitVerticalField().setMinimizeEnabled(getValue());
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(getSplitVerticalField().isMinimizeEnabled());
+
+              getSplitVerticalField().addPropertyChangeListener(ISplitBox.PROP_MINIMIZE_ENABLED, evt -> {
+                if (!isValueChanging()) {
+                  setValueChangeTriggerEnabled(false);
+                  try {
+                    setValue((Boolean) evt.getNewValue());
+                  }
+                  finally {
+                    setValueChangeTriggerEnabled(true);
+                  }
+                }
+              });
+            }
           }
 
           @Order(10)

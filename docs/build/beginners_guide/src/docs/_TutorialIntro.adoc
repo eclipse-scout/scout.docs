@@ -46,7 +46,7 @@ Header:: The header area is located at the top and holds the available top level
 In this example these are the "Quick access", "Options" menu points as well as a user menu that shows the username of the currently logged in user "mzi".
 Bench:: The bench represents the main display area of a Scout application.
 When selecting the "Persons" page, a table provides access to all available persons as shown in <<img-app_contacts_personpage>>.
-Selecting a specific person the provides access to all actions that are available for the selected person.
+Selecting a specific person provides access to all actions that are available for the selected person.
 The selected person can then be opened with the [menu]_Edit_ menu which opens the person in a view that is displayed in the bench area again as shown in <<img-app_contacts_personform>>.
 
 For entering and editing of data in Scout applications views are used in most cases.
@@ -65,7 +65,7 @@ image::{imgsdir}/app_contacts_personform.png[]
 
 This tutorial walks you through the implementation of a Scout application consisting of a frontend and a backend application.
 The frontend application contains outlines with navigation trees, pages to present information in tabular form and forms to view and edit data.
-In the backend appliation the tutorial shows how to implement services, logging, databases access, and serveral other aspects of Scout applications.
+In the backend application the tutorial shows how to implement services, logging, databases access, and several other aspects of Scout applications.
 
 The tutorial is organized into the sequence of the consecutive steps listed below.
 Each of the step is described in a individual section that results in a executable application that can be tested and compared against the full "Contacts" demo application.
@@ -81,7 +81,7 @@ For this a "Persons" page and an "Organizations" page are created and added to t
 
 Step 3: Creating and Accessing the Database (<<sec-contacts_jdbc>>)::
 This step concentrates on the backend of the "Contacts" application.
-The covered topics includes dealing with application properties, setup and access of a database and using the database to povide data for the person and organization page created in the previous step.
+The covered topics includes dealing with application properties, setup and access of a database and using the database to provide data for the person and organization page created in the previous step.
 
 Step 4: Adding a Form to Create/Edit Persons (<<sec-contacts_forms>>)::
 Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application.
