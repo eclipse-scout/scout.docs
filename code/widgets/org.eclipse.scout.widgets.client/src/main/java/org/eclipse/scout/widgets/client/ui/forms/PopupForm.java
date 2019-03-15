@@ -510,7 +510,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(210)
-      @ClassId("30a073a2-fe7f-4205-8491-98fd519252f8")
+      @ClassId("cc161625-d6e1-4edc-ad69-ac48043f1ec2")
       public class SecondStringField extends AbstractStringField {
 
         @Override
