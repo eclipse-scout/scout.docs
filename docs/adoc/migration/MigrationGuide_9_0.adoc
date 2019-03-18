@@ -3,7 +3,7 @@ Howto:
 - Write this document such that it helps people to migrate. Describe what they should do.
 - Chronological order is not necessary.
 - Choose the right top level chapter (java, js, other)
-- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 8.0.xxx" note)
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
@@ -17,7 +17,30 @@ This document describes all relevant changes *from Eclipse Scout 8.0 to Eclipse 
 
 //==== 9.0.100 (release date to be defined)
 
-{NotReleasedWarning}
+WARNING: {NotReleasedWarning}
+
+=== Service Release Migration
+
+After the final Eclipse Photon release, there are no more Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details).
+Scout 9.0 will continue to be maintained for a while and a new build may be released from time to time. Beside bugfixes, these releases may even contain some minor features.
+
+The following changes were made after the initial 9.0 release.
+
+==== Simrel 2019-06 (9.0.1) -- Release Expected in June 2019
+
+//The initial release of this version was *TBD* (Maven: TBD)
+
+WARNING: {NotReleasedWarning}
+
+* <<StyleHelper Moved to Platform (since 9.0.0.010)>>
+
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// WARNING: {NotReleasedWarning}
+//
+// * <<Migration Description (since 9.0.0.xyz)>>
 
 ////
   =============================================================================
@@ -315,6 +338,12 @@ Due to the removal of `IIMAPService` and `ISMTPService` (see above) the followin
 
 Another consequence of this removal is a change in the module dependencies. `org.eclipse.scout.rt.server` no longer depends on `org.eclipse.scout.rt.mail`. If your code requires code from `org.eclipse.scout.rt.mail` you have to make sure that you declare this dependency in your own _pom.xml_.
 
+=== StyleHelper Moved to Platform (since 9.0.0.010)
+
+The `StyleHelper` bean was moved from _org.eclipse.scout.rt.client_ to _org.eclipse.scout.rt.platform_, so it is available to server-side code as well. The old `StyleHelper` bean in the _client_ module was marked as deprected and should no longer be used. It will eventually be removed in Scout 10.
+
+_Migration:_ Update your imports to point to the new `org.eclipse.scout.rt.platform.html.StyleHelper` bean. Methods that passed an `IStylable` as first argument are no longer available. Instead, directly call the corresponding method on the `IStylable` element itself.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
@@ -392,6 +421,9 @@ menus, the listener will now be informed. So make sure to check your toggle acti
 
 Note: Due to compatibility reasons the behavior for Scout Classic has not been changed.
 
+// ^^^
+// Insert descriptions of JavaScript API changes here
+
 ////
   =============================================================================
   === OTHER IMPORTANT CHANGES REQUIRING MIGRATION =============================
@@ -452,3 +484,6 @@ It is recommended to assign a unique and stable name to each node by setting the
 TIP: Note that a random ID will not be stable, i.e. it will change each time the application is restarted. This is fine for single-node and most multi-node setups. However, there are cases where stable IDs are required, for example when using durable topics or cleaning up node-specific data.
 
 In previous releases, `NodeIdentifier` sometimes returned the local hostname and a port number instead of a random UUID. This behavior was removed from Scout 9, because it is unreliable and the used port number was not always correct. If your application relies on the hostname, consider explicitly setting the _scout.nodeId_ property or customizing the bean `NodeIdentifier`.
+
+// ^^^
+// Insert descriptions of other important changes here
