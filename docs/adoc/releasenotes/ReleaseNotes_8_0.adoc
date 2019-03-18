@@ -1,7 +1,12 @@
 :imgsdir: ../../imgs
 
 ////
-- Use {NOTRELEASEDWARNING} on its own line to mark parts about not yet released code (also add a "since 8.0.xxx" note)
+Howto:
+- Write this document such that it helps people to discover new features and other important changes of this release.
+- Chronological order is not necessary.
+- Describe necessary migration steps in the MigrationGuide document.
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
 == About This Release
@@ -18,17 +23,30 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/7.0.x%2E%2E
 
 === Service Releases
 
-Even though with Eclipse Photon there will no longer be regular Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details), Scout 8.0 will continue to be maintained and a new build may be released from time to time. Beside bugfixes, these releases may even contain some minor features. See the following notes for details.
+After the final Eclipse Photon release, there are no more Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details).
+Scout 8.0 will continue to be maintained for a while and a new build may be released from time to time. Beside bugfixes, these releases may even contain some minor features.
 
-==== Simrel 2018-12, released on December 19, 2018
-The initial release of this version was: 8.0.0.031 (Maven: 8.0.0.031_Simrel_2018_12)
+The following enhancements were made after the initial 8.0 release.
+
+==== Simrel 2018-09 -- Released on September 19, 2018
+
+The initial release of this version was *8.0.0.021* (Maven: 8.0.0.021_Simrel_2018_09).
+
+* <<Support for Horizontal Alignment (since 8.0.0.021)>>
+
+==== Simrel 2018-12 -- Released on December 19, 2018
+
+The initial release of this version was *8.0.0.031* (Maven: 8.0.0.031_Simrel_2018_12).
 
 * <<Virtual Scrolling (since Simrel 2018-12)>>
 
-==== Simrel 2018-09, released on September 19, 2018
-The initial release of this version was: 8.0.0.021 (Maven: 8.0.0.021_Simrel_2018_09)
+==== Upcoming -- No Planned Release Date
 
-* <<Support for Horizontal Alignment (since 8.0.0.021)>>
+The following changes were made after the latest official release build. No release date has been fixed yet.
+
+WARNING: {NotReleasedWarning}
+
+* <<New RemoteSystemUnavailableException (since 8.0.0.033)>>
 
 === Obtaining the Latest Version
 
@@ -447,8 +465,6 @@ Scout's multi-language text support mainly consists of `ITextProviderService` (w
 
 This facility was moved from the module `org.eclipse.scout.rt.shared` to `org.eclipse.scout.rt.platform`. This allows the use of multi-language text support without the need to include _*.shared_ dependencies in your project. This is especially useful for server-only applications (e.g. micro services).
 
-_Migration:_ Change the ``import``s in your _*.java_ files accordingly.
-
 == Data Object Support for REST & MOM APIs
 
 The Scout platform was extended by a generic data object support.
@@ -490,12 +506,8 @@ Available REST resources are automatically found by Jandex class inventory and r
 
 For examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-rest[Technical Guide: REST]
 
-== Deprecated methods on DefaultAuthToken and introduced DefaultAuthTokenSigner and DefaultAuthTokenVerifier (since 8.0.0.021)
-In order to be able to reuse authentication token code `DefaultAuthToken` was refactored.
-Signing and verifying of tokens is now separated from token and its (de-)serialization.
-The new classes DefaultAuthTokenSigner and DefaultAuthTokenVerifier do now provide this functionality.
+== New RemoteSystemUnavailableException (since 8.0.0.033)
 
-== HttpException deprecated and replaced by RemoteSystemUnavailableException
 The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by a generalized `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException`.
 The exception is thrown within the UI server, when a call to the Scout backend server (through service tunnel) returns a status code < 200 or >= 299.
 The `RemoteSystemUnavailableException` is finally displayed as _network error_ by the global `org.eclipse.scout.rt.client.services.common.exceptionhandler.ErrorPopup`.
