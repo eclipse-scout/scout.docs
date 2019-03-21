@@ -8,10 +8,10 @@
     background-color: @highlight-button-background-color;
     color: @highlight-button-color;
 
-    &:not(.disabled):active {
+    &:not(.disabled):active,
+    &:not(.disabled).active {
       background-color: @highlight-button-active-background-color;
     }
-
   }
 
   & > .field.link-button > .link {

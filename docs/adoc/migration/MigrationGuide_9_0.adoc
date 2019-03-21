@@ -413,6 +413,14 @@ menus, the listener will now be informed. So make sure to check your toggle acti
 
 Note: Due to compatibility reasons the behavior for Scout Classic has not been changed.
 
+=== Usage of CSS class 'active' in Firefox
+
+When the mousedown event is prevented in Firefox, the clicked DOM node does not have the active state, thus we cannot
+use the :active pseudo-class as in Chrome or Internet Explorer. Since Mozilla will not fix that issue, we implemented
+a workaround: when you run Scout with Firefox we add an 'active' class to every DOM element in the path to the clicked
+element. Thus you shall not use that class-name in your custom Scout widgets. You must rename existing class-names,
+like 'active-state' or 'mywidget-active'.
+
 // ^^^
 // Insert descriptions of JavaScript API changes here
 
