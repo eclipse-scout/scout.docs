@@ -67,7 +67,7 @@ The interface is annotated by `@Bean` allowing the Scout platform to load and re
 [source,java]
 .Example: REST resource
 ----
-include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleRestResource.java[tags=class]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/ExampleResource.java[tags=class]
 ----
 
 ==== REST Resource Registration ====

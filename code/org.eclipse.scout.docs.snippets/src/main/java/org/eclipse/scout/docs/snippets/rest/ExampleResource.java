@@ -12,7 +12,7 @@ import org.eclipse.scout.rt.rest.IRestResource;
 
 //tag::class[]
 @Path("example")
-public class ExampleRestResource implements IRestResource {
+public class ExampleResource implements IRestResource {
 
   @GET
   @Path("{id}")
