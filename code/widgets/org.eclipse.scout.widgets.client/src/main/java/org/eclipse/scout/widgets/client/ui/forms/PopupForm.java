@@ -54,6 +54,7 @@ import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.Configuration
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.HorizontalAlignmentField;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.HorizontalSwitchField;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.PopupTypeField;
+import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.ScrollTypeField;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.TrimHeightField;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.TrimWidthField;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.MainBox.ConfigurationBox.PropertiesBox.UseButtonAsAnchorField;
@@ -149,6 +150,10 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
 
   public VerticalAlignmentField getVerticalAlignmentField() {
     return getFieldByClass(VerticalAlignmentField.class);
+  }
+
+  public ScrollTypeField getScrollTypeField() {
+    return getFieldByClass(ScrollTypeField.class);
   }
 
   public OpenPopupButton getOpenPopupButton() {
@@ -278,6 +283,25 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
           }
         }
 
+        @Order(4500)
+        @ClassId("95b5cbfc-d7ec-4940-9065-77976d14b597")
+        public class ScrollTypeField extends AbstractSmartField<String> {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ScrollType");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(IPopup.SCROLL_TYPE_REMOVE);
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+            return ScrollTypeLookupCall.class;
+          }
+        }
+
         @Order(5000)
         @ClassId("98a209ef-6933-48dd-9f28-d11a532544a1")
         public class HorizontalSwitchField extends AbstractBooleanField {
@@ -375,6 +399,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     popup.setWithArrow(getWithArrowField().isChecked());
     popup.setHorizontalAlignment(getHorizontalAlignmentField().getValue());
     popup.setVerticalAlignment(getVerticalAlignmentField().getValue());
+    popup.setScrollType(getScrollTypeField().getValue());
     popup.open();
   }
 
@@ -683,6 +708,18 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     protected List<? extends ILookupRow<String>> execCreateLookupRows() {
       return Stream
           .of(IPopup.POPUP_ALIGNMENT_TOPEDGE, IPopup.POPUP_ALIGNMENT_TOP, IPopup.POPUP_ALIGNMENT_CENTER, IPopup.POPUP_ALIGNMENT_BOTTOM, IPopup.POPUP_ALIGNMENT_BOTTOMEDGE)
+          .map(s -> new LookupRow<>(s, s))
+          .collect(Collectors.toList());
+    }
+  }
+
+  public static class ScrollTypeLookupCall extends LocalLookupCall<String> {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected List<? extends ILookupRow<String>> execCreateLookupRows() {
+      return Stream
+          .of(IPopup.SCROLL_TYPE_REMOVE, IPopup.SCROLL_TYPE_POSITION, IPopup.SCROLL_TYPE_LAYOUT_AND_POSITION)
           .map(s -> new LookupRow<>(s, s))
           .collect(Collectors.toList());
     }
