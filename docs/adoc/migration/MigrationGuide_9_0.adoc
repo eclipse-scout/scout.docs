@@ -11,14 +11,6 @@ Howto:
 
 This document describes all relevant changes *from Eclipse Scout 8.0 to Eclipse Scout 9.0*. If existing code has to be migrated, instructions are provided here.
 
-//=== Service Release Migration
-
-//The following changes were made after the initial 9.0 release. Additionally follow these instructions when updating to a _service release_.
-
-//==== 9.0.100 (release date to be defined)
-
-WARNING: {NotReleasedWarning}
-
 === Service Release Migration
 
 After the final Eclipse Photon release, there are no more Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details).
@@ -477,7 +469,7 @@ Therefore it is recommended to use OpenJDK 11.0.1 or newer. The following chapte
 
 ==== Changed Computation of NodeIdentifier
 
-If multiple Scout applications are connected together to form a cluster, the application-scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` provides an ID for each node. This string can be used to identify cluster nodes in log messages, cluster messages etc. 
+If multiple Scout applications are connected together to form a cluster, the application-scoped bean `org.eclipse.scout.rt.platform.context.NodeIdentifier` provides an ID for each node. This string can be used to identify cluster nodes in log messages, cluster messages etc.
 
 It is recommended to assign a unique and stable name to each node by setting the property _scout.nodeId_ when launching the application. The default implementation of `NodeIdentifier` also checks for properties of some well-known application servers (e.g. _jboss.node.name_). If no explicitly assigned identifier is found, a random UUID is generated.
 
