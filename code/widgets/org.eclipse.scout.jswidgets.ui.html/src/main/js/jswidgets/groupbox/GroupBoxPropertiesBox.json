@@ -72,19 +72,19 @@
     {
       "id": "MenuBarVisibleField",
       "objectType": "CheckBoxField",
-      "label": "Menubar visible",
+      "label": "Menu Bar Visible",
       "labelVisible": false
     },
     {
       "id": "MenuBarPositionField",
       "objectType": "SmartField",
-      "label": "Menubar Position",
+      "label": "Menu Bar Position",
       "lookupCall": "jswidgets.MenuBarPositionLookupCall"
     },
     {
       "id": "MenuBarEllipsisPositionField",
       "objectType": "SmartField",
-      "label": "Menubar Ellipsis Position",
+      "label": "Menu Bar Ellipsis Position",
       "lookupCall": "jswidgets.MenuBarEllipsisPositionLookupCall"
     }
   ]

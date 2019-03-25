@@ -58,6 +58,10 @@ jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
   headerMenusEnabledField.setValue(this.table.headerMenusEnabled);
   headerMenusEnabledField.on('propertyChange', this._onHeaderMenusEnabledPropertyChange.bind(this));
 
+  var menuBarVisibleField = this.widget('MenuBarVisibleField');
+  menuBarVisibleField.setValue(this.table.menuBarVisible);
+  menuBarVisibleField.on('propertyChange', this._onMenuBarVisiblePropertyChange.bind(this));
+
   var multiCheckField = this.widget('MultiCheckField');
   multiCheckField.setValue(this.table.multiCheck);
   multiCheckField.on('propertyChange', this._onMultiCheckPropertyChange.bind(this));
@@ -139,6 +143,12 @@ jswidgets.TablePropertiesBox.prototype._onHeaderVisiblePropertyChange = function
 jswidgets.TablePropertiesBox.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderMenusEnabled(event.newValue);
+  }
+};
+
+jswidgets.TablePropertiesBox.prototype._onMenuBarVisiblePropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.setMenuBarVisible(event.newValue);
   }
 };
 

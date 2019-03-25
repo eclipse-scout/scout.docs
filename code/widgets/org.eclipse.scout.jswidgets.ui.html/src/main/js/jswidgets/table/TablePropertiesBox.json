@@ -48,6 +48,12 @@
       "labelVisible": false
     },
     {
+      "id": "MenuBarVisibleField",
+      "objectType": "CheckBoxField",
+      "label": "Menu Bar Visible",
+      "labelVisible": false
+    },
+    {
       "id": "MultiCheckField",
       "objectType": "CheckBoxField",
       "label": "Multi Check",
