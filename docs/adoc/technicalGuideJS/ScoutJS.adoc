@@ -23,7 +23,7 @@ A widget is a component which may be rendered. It may be simple like a label, or
 A widget contains the model, which represents the state of the widget. In a Scout Classic application, that model will be sent from the UI server to the browser and the Scout UI will use that model to create the widget. In a Scout JS app, the model may be provided using JSON or directly with JavaScript.
 
 === Lifecycle
-Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using `init`. If you want to display it, you have to call the `render` method. If you want to remove it from the DOM, call the `remove` method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If you really don't need it anymore, call the `destroy` method.
+Every widget has a lifecycle. After a widget is instantiated, it has to be initialized using `init`. If you want to display it, you have to call the `render` method. If you want to remove it from the DOM, call the `remove` method. Removing a widget is not the same as destroying it. You can still use it, you can for example change some properties and then render it again. If it is really not needed anymore, the `destroy` method is called (typically by Scout itself).
 
 So you see the widget actually has 3 important states:
 
@@ -33,7 +33,9 @@ So you see the widget actually has 3 important states:
 
 The big advantage of this concept is that the model of the widget may be changed any time, even if the widget is not rendered. This means you can prepare a widget like a form, prepare all its child widgets like the form fields, and then render them at once. If you want to hide the form, just remove it. It won't be displayed anymore, but you can still modify it, like changing the label of a field or adding rows to a table. The next time it is rendered the changes will be reflected. If you do such a modification when it is rendered, it will be reflected immediately.
 
-Destroying a widget means it will detach itself from the parent and destroy all children. If you have attached listeners to other widgets at initialization time, now is the time to detach them. After a widget is destroyed it cannot be used anymore. Every attempt will result in a `Widget is destroyed` error.
+Destroying a widget means it will detach itself from the parent and destroy all its children. Typically this is done by Scout itself e.g. when closing a form.
+If you want to destroy a widget yourself, it is recommended to do that by deleting it in its owner or parent (e.g. a GroupBox has a method `deleteField` which will destroy the field if the GroupBox is its owner).
+If you have attached listeners to other widgets at initialization time, now is the time to detach them. After a widget is destroyed it cannot be used anymore. Every attempt will result in a `Widget is destroyed` error.
 
 === Creating a Widget
 A widget may be created using the constructor function or `scout.create`. Best practice is to always use `scout.create` which gives you two benefits:
