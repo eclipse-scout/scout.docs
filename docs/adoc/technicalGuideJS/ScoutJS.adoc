@@ -749,3 +749,72 @@ Here's how the request for a Scout JS SmartField lookup call could look like. Yo
   "rec": "234",  # [optional] only set when type=lookupByRec, contains the key of the requested parent lookup
 }
 ----
+
+== HTML Document Parser
+The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
+
+The class `HtmlDocumentParser` is used by the Scout UI server in order to create dynamic HTML output on the server-side. Like JSP the parser supports a set of tags that are processed by the sever. The main purpose of the parser is to provide functions used for `login.html` and `index.html`, like bootstrapping and  localization _before_ JavaScript can be executed in the browser.
+
+Note: some tags like `scout-version` and `scout-text` will be removed from the DOM once the Scout `App` is initialized.
+
+=== scout:base
+Outputs the context-path (or the root-directory) of the deployed web application as `base` tag in the HTML document.
+
+Example:
+
+  <scout:base>
+
+Output:
+
+  <base href="bsicrm_16_1/">
+
+=== scout:include
+This tag is used for server-side inlcudes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragement in multiple HTML documents.
+
+Example:
+
+  <scout:include template="head.html" />
+
+=== scout:message
+Depending on the current user language provided by the browser, this tag outputs a list of localized text strings. The texts are used to display error-messages during login in the correct language, because at this point we don't have a Scout session and thus no user language. The parser replaces the message tag through `scout-text` tags. These tags will be read by  `scout.texts#readFromDOM`.
+
+Example:
+
+  <scout:message style="tag" key="ui.Login" key="ui.LoginFailed" key="ui.User" key="ui.Password" />
+
+Output:
+
+  <scout-text data-key="ui.Login" data-value="Anmelden"></scout-text>
+
+=== scout:script
+Loads the referenced JavaScript macro and starts the JavaScript build for that file. Outputs a `script` tag in the HTML document which references the generated .js file. "bsicrm-all-macro.js" will become "bsicrm-all.js" in the parsed HTML document. Depending on Scout's runtime properties the filename will be augmented: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
+
+Example:
+
+  <scout:script src="res/bsicrm-all-macro.js" />
+
+Output:
+
+  <script src="res/bsicrm-all-98aea5b3.min.js"></script>
+
+=== scout:stylesheet
+Loads the referenced LESS macro and starts the CSS build with LESS for that file. Outputs a `link` tag in the HTML document which references the generated .css file. "bsicrm-all-macro.less" will become "bsicrm-css.js" in the parsed HTML document. Depending on Scout's runtime properties the filename will be augmented: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
+
+Example:
+
+  <scout:stylesheet src="res/bsicrm-all-macro.less" />
+
+Output:
+
+  <link rel="stylesheet" type="text/css" href="res/bsicrm-all-98aea5b3.min.css">
+
+=== scout:version
+Outputs the current version of the Scout application as `scout-version` tag in the HTML document. This tag is read by `scout.App#_initVersion`.
+
+Example:
+
+  <scout:version>
+
+Output:
+
+  <scout-version data-value="16.1.0.002"></scout-version>
