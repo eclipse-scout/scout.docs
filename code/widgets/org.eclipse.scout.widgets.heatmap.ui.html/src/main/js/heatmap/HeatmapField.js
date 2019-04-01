@@ -28,10 +28,10 @@ scout.HeatmapField.prototype._render = function() {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(this.heatmap);
 
-  this.heatmap.on('zoomend', this._handleViewParameterChanged.bind(this));
-  this.heatmap.on('moveend', this._handleViewParameterChanged.bind(this));
-  this.heatmap.on('click', this._handleClicked.bind(this));
-  this.heatmap.on('contextmenu', this._handleClicked.bind(this));
+  this.heatmap.on('zoomend', this._onViewParameterChange.bind(this));
+  this.heatmap.on('moveend', this._onViewParameterChange.bind(this));
+  this.heatmap.on('click', this._onClick.bind(this));
+  this.heatmap.on('contextmenu', this._onClick.bind(this));
 };
 
 scout.HeatmapField.prototype._renderProperties = function() {
@@ -48,7 +48,7 @@ scout.HeatmapField.prototype._remove = function() {
   this._heatLayer = null;
 };
 
-scout.HeatmapField.prototype._handleViewParameterChanged = function() {
+scout.HeatmapField.prototype._onViewParameterChange = function() {
   this.trigger('viewParameterChange', {
     center: {
       x: this.heatmap.getCenter().lng,
@@ -58,7 +58,7 @@ scout.HeatmapField.prototype._handleViewParameterChanged = function() {
   });
 };
 
-scout.HeatmapField.prototype._handleClicked = function(event) {
+scout.HeatmapField.prototype._onClick = function(event) {
   this.trigger('click', {
     point: {
       x: event.latlng.lng,
