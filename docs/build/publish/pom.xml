@@ -82,21 +82,6 @@
             <configuration>
               <outputFolder>${project.build.directory}/published-docs</outputFolder>
               <inputSources>
-                <!-- publish for eclipse.org/scout -->
-                <inputSource>
-                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput />
-                </inputSource>
-                <inputSource>
-                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput />
-                </inputSource>
                 <!-- publish for downloads -->
                 <!-- beginners guide -->
                 <inputSource>
@@ -149,6 +134,28 @@
                   <fixXrefLinks>false</fixXrefLinks>
                   <htmlOutput>
                     <outputZipFileName>release-notes.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- scout article install-guide -->
+                <inputSource>
+                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>install-guide.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- scout article helloworld -->
+                <inputSource>
+                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>helloworld.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
