@@ -62,6 +62,12 @@
                     "labelVisible": false
                   },
                   {
+                    "id": "HtmlEnabledField",
+                    "objectType": "CheckBoxField",
+                    "label": "Html Enabled",
+                    "labelVisible": false
+                  },
+                  {
                     "id": "DisplayStyleField",
                     "objectType": "SmartField",
                     "lookupCall": "jswidgets.ButtonDisplayStyleLookupCall",

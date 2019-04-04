@@ -15,11 +15,10 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-=== Java and Maven
+=== Prerequisites
 
-Before you download Scout make sure that you have a working Java Development Kit (JDK) and a working Maven installation.
+Before you download Scout make sure that you have a working Java Development Kit (JDK) installation.
 In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK].
-For Maven, head over to the https://maven.apache.org/[Maven project page].
 
 To verify your Java installation use your command line.
 
@@ -30,36 +29,16 @@ OpenJDK Runtime Environment 18.9 (build 11.0.1+13)
 OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
 ----
 
-We recommend to use a JDK version 8.
-Take note of the fact if your JDK is a 64-bit or a 32-bit installation.
-In case your version text does not explicitly mention a 64-bit version your JDK is 32-bit installation.
-
-Now check your Maven installation on the command line as well.
-
-----
-C:\Users\mzi>mvn -version
-Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T20:41:47+02:00)
-Maven home: c:\maven-3.6.0\
-Java version: 11.0.1, vendor: Oracle Corporation, runtime: C:\jdk-11.0.1
-Default locale: en_US, platform encoding: Cp1252
-OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-----
-
-Having verified the above prerequisites it is now time to download the Scout package.
+We recommend to use Java 11. Please make sure you use the 64-bit version of the JDK.
+In case your version text does not explicitly mention a 64-bit version your JDK is a 32-bit installation.
 
 === Download Scout
 
 Download the Eclipse Scout package by visiting the official Eclipse download page.
 
-https://www.eclipse.org/downloads/[www.eclipse.org/downloads]
+https://www.eclipse.org/downloads/packages[www.eclipse.org/downloads/packages]
 
-The download page then looks as shown in <<img-scout_download>>.
-
-[[img-scout_download]]
-.The Eclipse download page. The Scout package download can be accessed via the link shown in the red box.
-image::{imgsdir}/scout_download.png[]
-
-Clicking on the link leads to a list of individual download packages as shown in <<img-scout_download_package>>.
+The download page lists all available Eclipse packages. Scroll to the package "Eclipse IDE for Scout Developers" and select the download for your preferred platform.
 
 [[img-scout_download_package]]
 .The Scout download package.

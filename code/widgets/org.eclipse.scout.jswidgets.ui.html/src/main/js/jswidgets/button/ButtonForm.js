@@ -35,6 +35,10 @@ jswidgets.ButtonForm.prototype._init = function(model) {
   selectedField.setValue(button.selectedField);
   selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
+  var htmlEnabledField = this.widget('HtmlEnabledField');
+  htmlEnabledField.setValue(button.htmlEnabled);
+  htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
+
   var iconIdField = this.widget('IconIdField');
   iconIdField.setValue(button.iconId);
   iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
@@ -91,6 +95,12 @@ jswidgets.ButtonForm.prototype._onProcessButtonPropertyChange = function(event) 
 jswidgets.ButtonForm.prototype._onSelectedPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setSelected(event.newValue);
+  }
+};
+
+jswidgets.ButtonForm.prototype._onHtmlEnabledPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('Button').setHtmlEnabled(event.newValue);
   }
 };
 
