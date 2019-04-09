@@ -112,15 +112,33 @@
                     "value": "Menu1"
                   },
                   {
-                    "id": "StackableField",
-                    "objectType": "CheckBoxField",
-                    "label": "Stackable",
+                    "id": "MenuPropertiesBox",
+                    "objectType": "GroupBox",
                     "labelVisible": false,
-                    "tooltipText": "${textKey:MenuStackableTooltipText}",
-                    "gridDataHints": {
-                      "fillHorizontal": false
+                    "borderVisible": false,
+                    "fields": [
+                    {
+                      "id": "ShrinkableField",
+                      "objectType": "CheckBoxField",
+                      "label": "Shrinkable",
+                      "labelVisible": false,
+                      "tooltipText": "${textKey:MenuShrinkableTooltipText}",
+                      "gridDataHints": {
+                        "fillHorizontal": false
+                      }
+                    },
+                    {
+                      "id": "StackableField",
+                      "objectType": "CheckBoxField",
+                      "label": "Stackable",
+                      "labelVisible": false,
+                      "tooltipText": "${textKey:MenuStackableTooltipText}",
+                      "gridDataHints": {
+                        "fillHorizontal": false
+                      }
                     }
-                  },
+                  ]
+                },
                   {
                     "id": "ActionPropertiesBox",
                     "objectType": "jswidgets.ActionPropertiesBox"
