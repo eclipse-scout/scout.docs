@@ -17,14 +17,12 @@ import org.eclipse.scout.contacts.client.common.SearchOutline;
 import org.eclipse.scout.contacts.client.contact.ContactOutline;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm;
 import org.eclipse.scout.contacts.client.person.PersonForm;
-import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
-import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
@@ -60,24 +58,6 @@ public class Desktop extends AbstractDesktop {
   @Override
   protected void execDefaultView() {
     setOutline(ContactOutline.class);
-  }
-
-  public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
-
-    @Override
-    protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F5;
-    }
-
-    @Override
-    protected void execAction() {
-      if (getOutline() != null) {
-        IPage<?> page = getOutline().getActivePage();
-        if (page != null) {
-          page.reloadPage();
-        }
-      }
-    }
   }
 
   // tag::DesktopInit[]
