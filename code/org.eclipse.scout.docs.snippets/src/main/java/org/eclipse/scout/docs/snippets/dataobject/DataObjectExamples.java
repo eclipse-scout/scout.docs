@@ -59,6 +59,26 @@ public class DataObjectExamples {
     //end::exists[]
   }
 
+  void removeAttributes() {
+    //tag::removeAttribute[]
+    ExampleEntityDo entity = BEANS.get(ExampleEntityDo.class)
+        .withName("Example")
+        .withValues(1, 2, 3, 4, 5);
+
+    // remove by attribute accessor method reference
+    entity.remove(entity::name);
+
+    // remove by attribute node
+    entity.remove(entity.name());
+
+    // remove by attribute name
+    entity.remove(entity.name().getAttributeName());
+
+    // remove by attribute name raw
+    entity.remove("name");
+    //end::removeAttribute[]
+  }
+
   void accessAttributesRaw() {
     //tag::accessRaw[]
     ExampleEntityDo entity = BEANS.get(ExampleEntityDo.class)
