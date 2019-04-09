@@ -576,11 +576,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           getImage1Field().setImageId(getValue());
           getImage2Field().setImage(null);
           getImage2Field().setImageId(getValue());
-
-          getExamplesBox().getChildren().stream()
-              .filter(w -> w instanceof AbstractAlignedImageField)
-              .map(w -> (AbstractAlignedImageField) w)
-              .forEach(i -> i.setImageId(getValue()));
         }
       }
     }
