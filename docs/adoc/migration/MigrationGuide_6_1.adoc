@@ -68,7 +68,7 @@ The method `AbstractTree.getConfiguredMultiSelect()` was marked as deprecated. M
 * With Scout 4.3.0 (Mars-M5) "Bean based TableData" became default.
 * With Scout 6.0 (Neon), the SDK did not generate the FormData for "Array based TableData" anymore.
 
-Now it is time to remove the support for the "Array based TableData" completeley, see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=496292. A description of the differences between these two approaches can be found here: https://wiki.eclipse.org/Scout/Concepts/TableData 
+Now it is time to remove the support for the "Array based TableData" completeley, see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=496292. A description of the differences between these two approaches can be found here: https://wiki.eclipse.org/Scout/Concepts/TableData
 
 ==== ITableHolder
 The class `ITableHolder` was part of the old array based table loaders which has been replaced with a bean based approach in the last release.
@@ -450,6 +450,57 @@ Therefore the HttpServiceTunnel request fails without a current RunContext avail
 IMPORTANT: Migration note: Check service tunnel requests to backend, specially in servlets/filters handling access control and add a run context, if they perform any backend requests using the service tunnel.
 
 See also https://www.eclipse.org/forums/index.php?t=msg&th=1085119
+
+
+// ----------------------------------------------------------------------------
+=== JMS connection failover
+The scout MOM / JMS managed code supports for connection failover.
+
+Connection failover is achieved using a connection wrapper and a session
+wrapper around the real jms connection and session. Connection loss is
+discovered with (jms)connection.setExceptionListener. J2EE jms providers
+are excluded since those do failover themselves.
+
+The main goal of connection failover is to maintain subscription
+listeners. All session wrapper methods do a one-time retry in case of
+failure. Default connection failover tries to reconnect 15 times every 2
+seconds.
+
+Subscription listeners are not stopped when the connection is dropped.
+However thy try to receive messages again and again until the connection
+is restored or the session is closed by custom code.
+
+Another improvement with similar scope is the subscription process
+itself. When calling MOM.subscribe the call is blocked at maximum for 30
+seconds in order to wait for the subscription event loop to effectively
+start waiting and receiving messages. That way it cannot happen anymore
+that in the snippet
+MOM.subscribe(...) -> schedules a event loop job
+MOM.publish(message)
+the message is published BEFORE being received from the subscriber due
+to latency in starting the background job.
+
+Configuration:
+There are 3 new config.properties defined in IMom and IMomImplementor
+- scout.mom.failover.connectionRetryCount default 15
+- scout.mom.failover.connectionRetryIntervalMillis default 2000
+- scout.mom.failover.sessionRetryIntervalMillis default 5000
+
+Migration:
+The interfaces and api are still stable, however customized jms code
+must check if some of the following old types/methods are being used or
+accessed:
+- method with IJmsSessionProvider.getSession() now throws JMSException
+- check override of JmsMomImplementor.createConnection() and
+postCreateConnection() so they do not call
+connection.setExceptionListener(...)
+- check override of IJmsSessionProvider, JmsSessionProvider since these
+are wrapped in the new JmsSessionProviderWrapper
+- do not use JmsMomImplementor.m_connection and directly since during
+reconnect the member gets null and changes.
+
+Test:
+JmsMomImplementorTest.testSubscribeFailover
 
 // ^^^
 // Insert descriptions of other important changes here
