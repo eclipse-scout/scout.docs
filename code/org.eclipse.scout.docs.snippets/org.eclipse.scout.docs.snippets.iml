@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
+  <component name="ExternalSystem" externalSystem="Maven" />
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -14,6 +15,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.server" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.mom.api" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.server.jaxws" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.client" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.shared" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.rest" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform.test" scope="TEST" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
