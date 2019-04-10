@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
+  <component name="ExternalSystem" externalSystem="Maven" />
   <component name="FacetManager">
     <facet type="web" name="Web">
       <configuration>
@@ -25,6 +26,23 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.ui.html.app" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.ui.html" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.client" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.shared" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.svg.client" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html.scriptprocessor" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.svg.ui.html" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.ui.html" />
+    <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.client" />
+    <orderEntry type="module" module-name="org.eclipse.scout.dev.jetty" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html.selenium" scope="TEST" />
+    <orderEntry type="module" module-name="org.eclipse.scout.json" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.client" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.shared" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.ui.html.app" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.ui.html" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.client" />
