@@ -467,7 +467,7 @@ failure. Default connection failover tries to reconnect 15 times every 2
 seconds.
 
 Subscription listeners are not stopped when the connection is dropped.
-However thy try to receive messages again and again until the connection
+However they try to receive messages again and again until the connection
 is restored or the session is closed by custom code.
 
 Another improvement with similar scope is the subscription process
