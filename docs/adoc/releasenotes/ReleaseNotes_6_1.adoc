@@ -268,8 +268,8 @@ postCreateConnection() so they do not call
 connection.setExceptionListener(...)
 - check override of IJmsSessionProvider, JmsSessionProvider since these
 are wrapped in the new JmsSessionProviderWrapper
-- do not use JmsMomImplementor.m_connection and directly since during
-reconnect the member gets null and changes.
+- do not use JmsMomImplementor.m_connection directly since during
+reconnect the member gets null and changes
 
 Test:
 JmsMomImplementorTest.testSubscribeFailover
