@@ -26,20 +26,6 @@
     <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.shared" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.client" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html.scriptprocessor" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform" />
-    <orderEntry type="module" module-name="org.eclipse.scout.json" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.svg.ui.html" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.svg.client" />
-    <orderEntry type="module" module-name="org.eclipse.scout.contacts.client" />
-    <orderEntry type="module" module-name="org.eclipse.scout.contacts.shared" />
-    <orderEntry type="module" module-name="org.eclipse.scout.contacts.events.client" />
-    <orderEntry type="module" module-name="org.eclipse.scout.contacts.events.shared" />
-    <orderEntry type="module" module-name="org.eclipse.scout.contacts.ui.html" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.shared" />
     <orderEntry type="library" name="Maven: com.google.http-client:google-http-client:1.27.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
