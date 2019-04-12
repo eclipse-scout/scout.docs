@@ -8,12 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.RainbowLookupCall = function () {
+jswidgets.RainbowLookupCall = function() {
   jswidgets.RainbowLookupCall.parent.call(this);
 };
 scout.inherits(jswidgets.RainbowLookupCall, scout.StaticLookupCall);
 
-jswidgets.RainbowLookupCall.prototype._data = function () {
+jswidgets.RainbowLookupCall.prototype._data = function() {
   return jswidgets.RainbowLookupCall.DATA;
 };
 
@@ -36,7 +36,7 @@ jswidgets.RainbowLookupCall.DATA = [
   ['FFDB9D', scout.icons.ANGLE_RIGHT]
 ];
 
-jswidgets.RainbowLookupCall.prototype._dataToLookupRow = function (data, index) {
+jswidgets.RainbowLookupCall.prototype._dataToLookupRow = function(data, index) {
   var model = {
     key: data[0],
     text: data[0],

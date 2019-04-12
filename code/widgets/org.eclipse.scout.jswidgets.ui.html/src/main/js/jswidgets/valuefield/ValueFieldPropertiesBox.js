@@ -62,7 +62,7 @@ jswidgets.ValueFieldPropertiesBox.prototype._onFieldPropertyChange = function(ev
   }
 };
 
-jswidgets.ValueFieldPropertiesBox.prototype.parseValue = function(newValue){
+jswidgets.ValueFieldPropertiesBox.prototype.parseValue = function(newValue) {
   return newValue;
 };
 

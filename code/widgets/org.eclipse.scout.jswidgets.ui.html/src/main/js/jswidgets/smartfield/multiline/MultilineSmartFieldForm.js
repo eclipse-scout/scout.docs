@@ -8,16 +8,16 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.MultilineSmartFieldForm = function () {
+jswidgets.MultilineSmartFieldForm = function() {
   jswidgets.MultilineSmartFieldForm.parent.call(this);
 };
 scout.inherits(jswidgets.MultilineSmartFieldForm, scout.Form);
 
-jswidgets.MultilineSmartFieldForm.prototype._jsonModel = function () {
+jswidgets.MultilineSmartFieldForm.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.MultilineSmartFieldForm');
 };
 
-jswidgets.MultilineSmartFieldForm.prototype._init = function (model) {
+jswidgets.MultilineSmartFieldForm.prototype._init = function(model) {
   jswidgets.MultilineSmartFieldForm.parent.prototype._init.call(this, model);
 
   this.smartField = this.widget('MultilineSmartField');

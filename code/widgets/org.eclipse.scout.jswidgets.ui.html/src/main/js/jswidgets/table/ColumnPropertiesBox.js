@@ -130,7 +130,7 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   column.table.on('columnResized', this._onColumnResized.bind(this));
 };
 
-jswidgets.ColumnPropertiesBox.prototype._onColumnResized = function(data){
+jswidgets.ColumnPropertiesBox.prototype._onColumnResized = function(data) {
   if (this.column === data.column) {
     var widthField = this.widget('WidthField');
     widthField.setValue(this.column.width);

@@ -14,16 +14,14 @@ jswidgets.LookupCallLookupCall = function() {
 scout.inherits(jswidgets.LookupCallLookupCall, scout.StaticLookupCall);
 
 jswidgets.LookupCallLookupCall.prototype._queryByKey = function(deferred, key) {
-  if(key instanceof scout.LookupCall){
+  if (key instanceof scout.LookupCall) {
     deferred.resolve({
       queryBy: scout.QueryBy.KEY,
-      lookupRows: [
-        {
-          key: key,
-          text: key.objectType,
-          enabled: true
-        }
-      ]
+      lookupRows: [{
+        key: key,
+        text: key.objectType,
+        enabled: true
+      }]
     });
     return;
   }

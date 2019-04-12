@@ -24,4 +24,4 @@ jswidgets.TagLookupCall.prototype._data = function() {
   return data;
 };
 
-jswidgets.TagLookupCall.TAGS = ['scout','eclipse scout','scout js','eclipse','bsi','business systems integration ag','open source','widgets','js widgets'];
+jswidgets.TagLookupCall.TAGS = ['scout', 'eclipse scout', 'scout js', 'eclipse', 'bsi', 'business systems integration ag', 'open source', 'widgets', 'js widgets'];

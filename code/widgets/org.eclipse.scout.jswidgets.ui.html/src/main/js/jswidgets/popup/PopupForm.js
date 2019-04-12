@@ -108,9 +108,9 @@ jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
       objectType: "Label",
       htmlEnabled: true,
       value: '<h2>Hi, I\'m a popup!</h2>' +
-          '<p>This widget popup contains a label to display some text.</p>' +
-          '<p>Instead of a label you can use any other widget you like, the popup will act as wrapper for your widget.</p>' +
-          '<p>The popup will be as big as its content, so you probably need to define its size, e.g. using the min- and max-width CSS properties.</p>'
+        '<p>This widget popup contains a label to display some text.</p>' +
+        '<p>Instead of a label you can use any other widget you like, the popup will act as wrapper for your widget.</p>' +
+        '<p>The popup will be as big as its content, so you probably need to define its size, e.g. using the min- and max-width CSS properties.</p>'
     }
   });
   this.widget('EventsTab').setField(this.popup);

@@ -20,7 +20,9 @@ jswidgets.RestForm.prototype._jsonModel = function() {
 jswidgets.RestForm.prototype._init = function(model) {
   jswidgets.RestForm.parent.prototype._init.call(this, model);
 
-  $.ajaxSetup({ cache: false });
+  $.ajaxSetup({
+    cache: false
+  });
 
   var callButton = this.widget('CallButton');
   callButton.on('click', this._onCallButtonClick.bind(this));

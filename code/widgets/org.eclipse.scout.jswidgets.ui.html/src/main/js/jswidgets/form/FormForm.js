@@ -40,7 +40,7 @@ jswidgets.FormForm.prototype._init = function(model) {
   this.currentFormPropertiesBox.displayParentField.setEnabled(false);
   this.widget('CurrentFormPropertiesTab').setVisible(!this.detailForm);
 
-  if(this.closeMenuVisible){
+  if (this.closeMenuVisible) {
     this.widget('CloseMenu').setVisible(true);
   }
 

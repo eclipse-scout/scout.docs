@@ -78,7 +78,7 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   labelWidthInPixelField.on('propertyChange', this._onPropertyChange.bind(this));
 
   var errorStatusField = this.widget('ErrorStatusField');
-  errorStatusField.setValue(this.field.errorStatus ? this.field.errorStatus.severity: null);
+  errorStatusField.setValue(this.field.errorStatus ? this.field.errorStatus.severity : null);
   errorStatusField.on('propertyChange', this._onPropertyChange.bind(this));
 
   var tooltipTextField = this.widget('TooltipTextField');
@@ -91,7 +91,7 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
 };
 
 jswidgets.FormFieldPropertiesBox.prototype._createErrorStatus = function(severity) {
-  if (!severity ) {
+  if (!severity) {
     return null;
   }
   return new scout.Status({

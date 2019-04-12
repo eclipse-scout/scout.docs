@@ -107,9 +107,9 @@ jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setLogicalGrid(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'NotificationField') {
     this.field.setNotification(this._createNotification(event.newValue));
-  }else if (event.propertyName === 'value' && event.source.id === 'MenuBarVisibleField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'MenuBarVisibleField') {
     this.field.setMenuBarVisible(event.newValue);
-  }  else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
+  } else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
     this.field.setMenuBarPosition(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'MenuBarEllipsisPositionField') {
     this.field.setMenuBarEllipsisPosition(event.newValue);

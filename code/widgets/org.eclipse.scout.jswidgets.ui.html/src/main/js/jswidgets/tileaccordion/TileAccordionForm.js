@@ -60,7 +60,6 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   gridColumnCountField.setValue(this.accordion.gridColumnCount);
   gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
-
   // -- Actions
 
   var insertMenu = this.widget('InsertMenu');
@@ -275,7 +274,7 @@ jswidgets.TileAccordionForm.prototype._createTile = function(model) {
       }
     };
     model = $.extend({}, defaults, model);
-    return  new scout.create('HtmlTile', model);
+    return new scout.create('HtmlTile', model);
   }
   defaults = {
     parent: this.accordion,
@@ -327,4 +326,3 @@ jswidgets.TileAccordionForm.prototype._filterTilesByText = function(text) {
   }
   this.accordion.filterTiles();
 };
-

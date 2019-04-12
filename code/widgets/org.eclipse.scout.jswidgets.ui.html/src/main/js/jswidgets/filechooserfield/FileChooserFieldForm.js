@@ -48,4 +48,3 @@ jswidgets.FileChooserFieldForm.prototype._onMaximumUploadSizePropertyChange = fu
     this.widget('FileChooserField').setMaximumUploadSize(event.newValue);
   }
 };
-

@@ -107,7 +107,6 @@ jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
   groupingStyleField.on('propertyChange', this._onGroupingStylePropertyChange.bind(this));
 };
 
-
 jswidgets.TablePropertiesBox.prototype._onAutoResizeColumnsPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setAutoResizeColumns(event.newValue);

@@ -77,8 +77,7 @@ jswidgets.FormPropertiesBox.prototype._setField = function(field) {
   this.modalField.on('propertyChange', this._onPropertyChange.bind(this));
 
   this.displayHintField.setValue(field.displayHint);
-  this.displayParentField.setValue(jswidgets.DisplayParentLookupCall.resolveDisplayParentType(field.displayParent) );
-
+  this.displayParentField.setValue(jswidgets.DisplayParentLookupCall.resolveDisplayParentType(field.displayParent));
 };
 
 jswidgets.FormPropertiesBox.prototype._onPropertyChange = function(event) {
@@ -100,4 +99,3 @@ jswidgets.FormPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setModal(event.newValue);
   }
 };
-
