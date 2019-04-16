@@ -517,16 +517,16 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           getImageURLField().clearErrorStatus();
           byte[] img = null;
           try {
-            URL url = null;
             if (urlString != null) {
+              URL url;
               if (urlString.equals(BIRD)) {
                 url = ResourceBase.class.getResource(BIRD_OFFLINE);
               }
               else {
                 url = new URL(urlString);
               }
+              img = IOUtility.readFromUrl(url);
             }
-            img = IOUtility.readFromUrl(url);
           }
           catch (Exception e) {
             String errorMsg = "Error while loading image from URL " + urlString;
