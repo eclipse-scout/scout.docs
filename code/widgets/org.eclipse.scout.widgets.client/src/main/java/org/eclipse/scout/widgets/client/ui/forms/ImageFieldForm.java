@@ -146,11 +146,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
       public class DefaultField extends AbstractImageField {
 
         @Override
-        protected int getConfiguredDragType() {
-          return TYPE_FILE_TRANSFER;
-        }
-
-        @Override
         protected int getConfiguredDropType() {
           return TYPE_FILE_TRANSFER;
         }
@@ -173,18 +168,6 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
         @Override
         protected String getConfiguredTooltipText() {
           return TEXTS.get("ImageDragDropSupport");
-        }
-
-        @Override
-        protected TransferObject execDragRequest() {
-          Object content = getImage();
-
-          if (content instanceof byte[]) {
-            BinaryResource resource = new BinaryResource(getImageId(), (byte[]) content);
-            return new ResourceListTransferObject(resource);
-          }
-
-          return null;
         }
 
         @Override
