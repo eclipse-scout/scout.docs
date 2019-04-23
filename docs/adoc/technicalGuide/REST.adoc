@@ -26,7 +26,6 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ==== REST Resource Registration ====
 
 All available REST resources are automatically registered by the `RestApplication` class while the Scout platform startup.
-Override this class in order to setup any custom JAX-RS configurations or register any custom JAX-RS classes.
 
 Add the following snippet to your `web.xml` file to expose your REST API using the `/api` context path:
 
@@ -48,6 +47,27 @@ Add the following snippet to your `web.xml` file to expose your REST API using t
   <servlet-name>api</servlet-name>
   <url-pattern>/api/*</url-pattern>
 </servlet-mapping>
+----
+
+== Extend REST Application
+The JAX-RS application API (`javax.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
+The Scout implementation of the REST application class `org.eclipse.scout.rt.rest.RestApplication` allows to contribute classes, singletons and properties without needing to extend the `RestApplication` class.
+
+Three different contributor interfaces are available for contributions:
+
+* `IRestApplicationClassesContributor` to contribute any classes
+* `IRestApplicationSingletonsContributor` to contribute any object instances (singletons)
+* `IRestApplicationPropertiesContributor` to contribute key/value properties
+
+[source,java]
+.Example class contributor
+----
+public static class ExampleClassContributor implements IRestApplicationClassesContributor {
+  @Override
+  public Set<Class<?>> contribute() {
+    return Collections.singleton(MyCustomExample.class);
+  }
+}
 ----
 
 ==== Data Objects ====

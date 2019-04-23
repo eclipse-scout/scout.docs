@@ -47,6 +47,7 @@ The following changes were made after the latest official release build. No rele
 WARNING: {NotReleasedWarning}
 
 * <<New RemoteSystemUnavailableException (since 8.0.0.033)>>
+* <<Rest Application Contributions (since 8.0.0.035)>>
 
 === Obtaining the Latest Version
 
@@ -512,3 +513,24 @@ The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by a 
 The exception is thrown within the UI server, when a call to the Scout backend server (through service tunnel) returns a status code < 200 or >= 299.
 The `RemoteSystemUnavailableException` is finally displayed as _network error_ by the global `org.eclipse.scout.rt.client.services.common.exceptionhandler.ErrorPopup`.
 The new `RemoteSystemUnavailableException` may generally be thrown to indicate an error when the communication with a remote service failed.
+
+== Rest Application Contributions (since 8.0.0.035)
+The JAX-RS application API (`javax.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.
+The Scout REST application class `org.eclipse.scout.rt.rest.RestApplication` was modified in order to support contributions of those objects without need to extend the class.
+
+Three different contributor interfaces are available:
+
+* `IRestApplicationClassesContributor` to contribute any classes
+* `IRestApplicationSingletonsContributor` to contribute any object instances (singletons)
+* `IRestApplicationPropertiesContributor` to contribute key/value properties
+
+[source,java]
+.Example class contributor
+----
+public static class ExampleClassContributor implements IRestApplicationClassesContributor {
+  @Override
+  public Set<Class<?>> contribute() {
+    return Collections.singleton(MyCustomExample.class);
+  }
+}
+----
