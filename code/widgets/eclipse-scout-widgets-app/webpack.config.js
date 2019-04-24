@@ -81,11 +81,11 @@ module.exports = (env, args) => {
       rules: [{
         // # Babel
         test: /\.m?js$/,
-        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             plugins: ['@babel/plugin-transform-object-assign'],
+            ignore: [/node_modules\/(?!@eclipse-scout)/], // Don't transpile node_modules except for eclipse-scout
             presets: [
               ['@babel/preset-env', {
                 debug: true,
@@ -114,7 +114,7 @@ module.exports = (env, args) => {
         // Note: when our app enhances the standard styles from eclipse-scout by adding custom styles,
         // the app needs to define a LESS dependency to scout-theme.less and run a LESS/CSS build. Since
         // this app works with the default styles we can simply copy the pre-built CSS from eclipse-scout.
-        from: 'node_modules/eclipse-scout/dist',
+        from: 'node_modules/@eclipse-scout/eclipse-scout/dist',
         test: /\.css$/,
         to: '.'
       }, {
