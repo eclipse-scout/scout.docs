@@ -24,6 +24,9 @@ jswidgets.MenuBarForm.prototype._init = function(model) {
   var selectedMenuItemField = this.widget('SelectedMenuField');
   selectedMenuItemField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
 
+  var shrinkableField = this.widget('ShrinkableField');
+  shrinkableField.on('propertyChange', this._onShrinkableFieldPropertyChange.bind(this));
+
   var stackableField = this.widget('StackableField');
   stackableField.on('propertyChange', this._onStackableFieldPropertyChange.bind(this));
 
@@ -76,7 +79,7 @@ jswidgets.MenuBarForm.prototype._onReplaceChildActionsClick = function(event, me
 };
 
 jswidgets.MenuBarForm.prototype._onMenuAction = function(event) {
-  if (event.source.toggleAction) {
+  if (event.source.isToggleAction()) {
     // Don't show message box if it is a toggle action
     return;
   }
@@ -88,6 +91,12 @@ jswidgets.MenuBarForm.prototype._onMenuAction = function(event) {
 jswidgets.MenuBarForm.prototype._onMenuPropertyChange = function(event) {
   if (event.propertyName === 'text') {
     this._fillSelectedMenuField();
+  }
+};
+
+jswidgets.MenuBarForm.prototype._onShrinkableFieldPropertyChange = function(event) {
+  if (event.propertyName === 'value' && event.source.id === 'ShrinkableField') {
+    this.currentMenu.setShrinkable(event.newValue);
   }
 };
 
@@ -133,6 +142,7 @@ jswidgets.MenuBarForm.prototype._updateSelectedMenu = function() {
   this.widget('WidgetActionsBox').setField(menu);
   formFieldPropertiesBox.setVisible(!!menu.field);
   this.currentMenu = menu;
+  this.widget('ShrinkableField').setValue(this.currentMenu.shrinkable);
   this.widget('StackableField').setValue(this.currentMenu.stackable);
   if (menu.field) {
     // form field widget

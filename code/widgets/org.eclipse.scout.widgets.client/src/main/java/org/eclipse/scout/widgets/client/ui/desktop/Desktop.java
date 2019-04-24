@@ -18,14 +18,12 @@ import java.util.List;
 import javax.security.auth.Subject;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
-import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
-import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -203,25 +201,6 @@ public class Desktop extends AbstractDesktop {
       }
     }
 
-  }
-
-  @Order(10)
-  public class RefreshOutlineKeyStroke extends AbstractKeyStroke {
-
-    @Override
-    protected String getConfiguredKeyStroke() {
-      return IKeyStroke.F5;
-    }
-
-    @Override
-    protected void execAction() {
-      if (getOutline() != null) {
-        IPage<?> page = getOutline().getActivePage();
-        if (page != null) {
-          page.reloadPage();
-        }
-      }
-    }
   }
 
   @Order(10)

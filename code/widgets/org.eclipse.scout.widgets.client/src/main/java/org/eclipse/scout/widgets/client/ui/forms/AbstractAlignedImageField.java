@@ -42,7 +42,7 @@ public class AbstractAlignedImageField extends AbstractImageField {
 
   @Override
   protected String getConfiguredTooltipText() {
-    return "verticalAlignment: " + m_verticalAlignment + " / horizontalAlignment: " + m_horizontalAlignment;
+    return "Vertical alignment: " + m_verticalAlignment + "\nHorizontal alignment: " + m_horizontalAlignment;
   }
 
   @Override

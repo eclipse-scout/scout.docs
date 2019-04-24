@@ -24,9 +24,9 @@ Scout 9.0 will continue to be maintained for a while and a new build may be rele
 
 The following enhancements were made after the initial 9.0 release.
 
-==== Simrel 2019-06 (9.0.1) -- Release Expected in June 2019
+==== Simrel 2019-06 (9.0.0) -- Release Expected in June 2019
 
-// The initial release of this version was *9.0.0.xyz* (Maven: 9.0.0.021_Simrel_2019_06).
+// The initial release of this version was *9.0.0.xyz* (Maven: 9.0.0.xyz_Simrel_2019_06).
 
 WARNING: {NotReleasedWarning}
 

@@ -30,7 +30,7 @@ To download the Eclipse Scout package visit the official Eclipse download page.
 
 https://www.eclipse.org/downloads/packages[www.eclipse.org/downloads/packages]
 
-The download page lists all the available eclipse packages. Scroll to the package "Eclipse IDE for Scout Developers" and select the download for your preferred platform.
+The download page lists all the available Eclipse packages. Scroll to the package "Eclipse IDE for Scout Developers" and select the download for your preferred platform.
 
 After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
 
