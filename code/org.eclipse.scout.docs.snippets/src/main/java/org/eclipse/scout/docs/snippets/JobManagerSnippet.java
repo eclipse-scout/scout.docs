@@ -205,7 +205,7 @@ public final class JobManagerSnippet {
     }
 
     {
-      IFuture<?> future = null;
+      IFuture<?> future = Jobs.schedule(() -> "", Jobs.newInput());
       // tag::future.registerListener[]
       future.addListener(Jobs.newEventFilterBuilder()
           .andMatchEventType(JobEventType.JOB_STATE_CHANGED)
@@ -237,8 +237,7 @@ public final class JobManagerSnippet {
     }
 
     {
-      IFuture<String> future = null;
-
+      IFuture<String> future = Jobs.schedule(() -> "", Jobs.newInput());
       // tag::future.whenDone[]
       future.whenDone(event -> {
         // invoked upon entering done state.
