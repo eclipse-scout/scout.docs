@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -140,24 +139,8 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Override
-    protected int getConfiguredDragType() {
-      return TYPE_FILE_TRANSFER;
-    }
-
-    @Override
     protected int getConfiguredDropType() {
       return TYPE_FILE_TRANSFER;
-    }
-
-    @Override
-    protected TransferObject execDrag(List<ITableRow> rows) {
-      List<BinaryResource> resources = new ArrayList<>();
-
-      for (ITableRow row : rows) {
-        resources.add(getTable().getResourceColumn().getValue(row));
-      }
-
-      return new ResourceListTransferObject(resources);
     }
 
     @Override
