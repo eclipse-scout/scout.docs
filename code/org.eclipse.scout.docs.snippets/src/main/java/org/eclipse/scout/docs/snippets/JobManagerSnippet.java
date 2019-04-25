@@ -87,7 +87,6 @@ public final class JobManagerSnippet {
   }
   // end::future.threadLocal[]
 
-  @SuppressWarnings("null")
   void snippets() throws Exception {
     {
       // tag::jobInput.name[]
