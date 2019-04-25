@@ -1,5 +1,5 @@
 import WidgetsApp from '../../src/widgets/WidgetsApp';
-import { Session, NullWidget } from 'eclipse-scout';
+import { Session, NullWidget } from '@eclipse-scout/eclipse-scout';
 
 describe('WidgetsApp', () => {
 
