@@ -4,15 +4,15 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.bench.layout.BenchColumnData;
 import org.eclipse.scout.rt.client.ui.desktop.bench.layout.BenchLayoutData;
 import org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData;
+import org.eclipse.scout.rt.client.ui.desktop.internal.VirtualDesktop;
 
 /**
  * @author Andreas Hoegger
  */
 public class BenchLayoutSnippet {
 
-  @SuppressWarnings("null")
   void example() {
-    IDesktop desktop = null;
+    IDesktop desktop = new VirtualDesktop();
     // tag::BenchLayoutSample[]
     desktop.setBenchLayoutData( // <1>
         new BenchLayoutData()
