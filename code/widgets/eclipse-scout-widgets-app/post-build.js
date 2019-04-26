@@ -8,16 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-const DIST_DIR = './dist';
+const DIST_DIR = './dist/';
 const LIST_FILE = 'file-list';
+const DEV_MODE = process.argv[2] !== 'production';
+const OUT_DIR = DIST_DIR + (DEV_MODE ? 'dev/' : 'prod/');
 
 const fs = require('fs');
 const errno = require('errno');
 const path = require('path');
 
-deleteFile(path.join(DIST_DIR, 'theme-default.js'));
-deleteFile(path.join(DIST_DIR, 'theme-dark.js'));
-createFileList();
+fs.readdirSync(OUT_DIR)
+  .filter(f => /.*theme.*\.js/.test(f))
+  .forEach(f => deleteFile(OUT_DIR + f))
+
+if (!DEV_MODE) {
+  createFileList();
+}
 
 function deleteFile(filename) {
   fs.unlink(filename, (err) => {
@@ -35,9 +41,9 @@ function deleteFile(filename) {
 
 function createFileList() {
   let content = '';
-  fs.readdirSync(DIST_DIR, {withFileTypes: true})
+  fs.readdirSync(OUT_DIR, {withFileTypes: true})
     .filter(dirent => dirent.isFile() && dirent.name !== LIST_FILE)
     .forEach(dirent => content += dirent.name + '\n');
-  fs.writeFileSync(path.join(DIST_DIR, LIST_FILE), content, {flag: 'w'});
+  fs.writeFileSync(path.join(OUT_DIR, LIST_FILE), content, {flag: 'w'});
   console.log('# created file-list:\n' + content);
 }
