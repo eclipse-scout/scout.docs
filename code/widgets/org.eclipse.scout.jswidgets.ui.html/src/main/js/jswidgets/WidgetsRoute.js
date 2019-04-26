@@ -8,90 +8,137 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.WidgetsRoute = function(desktop) {
+jswidgets.WidgetsRoute = function(desktop, includeOutlineInRef) {
   jswidgets.WidgetsRoute.parent.call(this);
 
   this.desktop = desktop;
-  this.routes = this._createRoutes(desktop);
+  this.includeOutlineInRef = !!includeOutlineInRef;
+  this.routes = scout.objects.createMap();
 
+  this._initRoutes(desktop.outline);
   // This listener updates the URL in the browsers location field whenever a page has been activated
   desktop.outline.on('nodesSelected', this._onPageChanged.bind(this));
 };
 scout.inherits(jswidgets.WidgetsRoute, scout.Route);
 
-/**
- * Creates an array which maps a routeRef to an objectType.
- * 0: routeRef
- * 1: objectType of the detail form of a node in FormFieldOutline
- */
-jswidgets.WidgetsRoute.prototype._createRoutes = function(desktop) {
-  var regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
-  var routes = [];
+jswidgets.WidgetsRoute.prototype._initRoutes = function(outline) {
+  this._registerRoute(outline);
   scout.Tree.visitNodes(function(node) {
-    var routeRef = null,
-      objectType, result;
-    if (node.detailForm) {
-      objectType = node.detailForm.objectType;
-    } else {
-      objectType = node.objectType;
-    }
-
-    result = regex.exec(objectType);
-    if (result !== null && result.length > 1) {
-      routeRef = result[1].toLowerCase();
-      routes.push([routeRef, objectType]);
-    }
-  }, desktop.outline.nodes);
-  return routes;
+    this._registerRoute(node);
+  }.bind(this), outline.nodes);
 };
 
-jswidgets.WidgetsRoute.prototype.matches = function(location) {
-  return !!this._getRouteData(location);
-};
-
-jswidgets.WidgetsRoute.prototype._getRouteData = function(location) {
-  if (scout.strings.empty(location)) {
+jswidgets.WidgetsRoute.prototype._getRouteRef = function(obj) {
+  if (!obj) {
     return null;
   }
-  return scout.arrays.find(this.routes, function(routeData) {
-    return location.substring(1) === routeData[0];
-  });
+  return scout.objects.keyByValue(this.routes, obj);
 };
 
-jswidgets.WidgetsRoute.prototype._getRouteDataByObjectType = function(objectType) {
-  return scout.arrays.find(this.routes, function(routeData) {
-    return routeData[1] === objectType;
-  });
+jswidgets.WidgetsRoute.prototype._getOrCreateRouteRef = function(obj) {
+  if (!obj) {
+    return null;
+  }
+  return this._getRouteRef(obj) || this._registerRoute(obj);
 };
 
+jswidgets.WidgetsRoute.prototype._registerRoute = function(obj) {
+  if (!obj) {
+    return null;
+  }
+  var ref = this._computeRouteRef(obj);
+  this.routes[ref] = obj;
+  return ref;
+};
+
+jswidgets.WidgetsRoute.prototype._computeRouteRef = function(nodeOrOutline) {
+  if (!nodeOrOutline) {
+    return null;
+  }
+
+  var node = null;
+  var outline = null;
+  if (nodeOrOutline instanceof scout.Outline) {
+    outline = nodeOrOutline;
+  } else {
+    node = nodeOrOutline;
+    outline = node.getOutline();
+  }
+  var path = [];
+  if (node) {
+    path.push(node.text);
+    var p = node.parentNode;
+    while (p) {
+      path.push(p.text);
+      p = p.parentNode;
+    }
+  }
+  if (outline && this.includeOutlineInRef) {
+    path.push(outline.title);
+  }
+
+  return path
+    .map(function(p) {
+      return this._normalizePathSegment(p);
+    }, this)
+    .filter(function(p) {
+      return !!p;
+    }, this)
+    .reverse()
+    .join('/');
+};
+
+jswidgets.WidgetsRoute.prototype._normalizePathSegment = function(s) {
+  return (s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/ /g, '-')
+    .replace(/[^a-z0-9._\-]/g, '');
+};
+
+/**
+ * @override Route.js
+ */
+jswidgets.WidgetsRoute.prototype.matches = function(location) {
+  var ref = (location || '').replace(/^#/, '');
+  return !!this.routes[ref];
+};
+
+/**
+ * @override Route.js
+ */
 jswidgets.WidgetsRoute.prototype.activate = function(location) {
   jswidgets.WidgetsRoute.parent.prototype.activate.call(this, location);
 
-  var objectType = this._getRouteData(location)[1];
-  var foundNode = null;
-  scout.Tree.visitNodes(function(node) {
-    if ((node.detailForm && node.detailForm.objectType === objectType) || node.objectType === objectType) {
-      foundNode = node;
-      return false;
-    }
-  }, this.desktop.outline.nodes);
-  this.desktop.outline.selectNode(foundNode);
+  var ref = (location || '').replace(/^#/, '');
+  var obj = this.routes[ref];
+  if (!obj) {
+    return;
+  }
+
+  var node = null;
+  var outline = null;
+  if (obj instanceof scout.Outline) {
+    outline = obj;
+  } else {
+    node = obj;
+    outline = node.getOutline();
+  }
+
+  if (outline) {
+    this.desktop.setOutline(outline);
+      outline.selectNode(node);
+      outline.revealSelection();
+  }
 };
 
 jswidgets.WidgetsRoute.prototype._onPageChanged = function(event) {
-  var page = event.source.selectedNode();
-  if (page) {
-    var objectType;
-    if (page.detailForm) {
-      objectType = page.detailForm.objectType;
-    } else {
-      objectType = page.objectType;
-    }
-    var routeData = this._getRouteDataByObjectType(objectType);
-    if (routeData) {
-      scout.router.updateLocation(routeData[0]);
-    }
-  } else {
-    scout.router.updateLocation('');
+  var nodeOrOutline = event.source.selectedNode() || event.source;
+  var ref = this._getRouteRef(nodeOrOutline);
+  if (ref !== null && ref !== undefined) {
+    scout.router.updateLocation(ref, {
+      replace: false
+    });
   }
 };

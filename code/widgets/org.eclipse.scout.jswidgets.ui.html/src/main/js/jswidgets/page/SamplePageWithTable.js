@@ -1,10 +1,21 @@
 jswidgets.SamplePageWithTable = function() {
   jswidgets.SamplePageWithTable.parent.call(this);
+
+  this._loadingTimeoutId = null;
 };
 scout.inherits(jswidgets.SamplePageWithTable, scout.PageWithTable);
 
 jswidgets.SamplePageWithTable.prototype._jsonModel = function() {
   return scout.models.getModel('jswidgets.SamplePageWithTable');
+};
+
+jswidgets.SamplePageWithTable.prototype._init = function(model) {
+  jswidgets.SamplePageWithTable.parent.prototype._init.call(this, model);
+  this.detailTable.widget('LoadingDelayCheckBox').on('propertyChange', function(event) {
+    if (event.propertyName === 'value') {
+      this.detailTable.widget('LoadingDelayField').setEnabled(event.newValue);
+    }
+  }.bind(this));
 };
 
 jswidgets.SamplePageWithTable.prototype._loadTableData = function(searchFilter) {
@@ -40,8 +51,27 @@ jswidgets.SamplePageWithTable.prototype._loadTableData = function(searchFilter) 
     string: 'string 05',
     number: 959161,
     bool: true
-  }];
-  return $.resolvedPromise(data.filter(filter));
+  }].filter(filter);
+
+  var deferred = $.Deferred();
+  if (this._loadingTimeoutId) {
+    clearTimeout(this._loadingTimeoutId);
+    this._loadingTimeoutId = null;
+  }
+  var delay = 0;
+  if (this.detailTable.widget('LoadingDelayCheckBox').value) {
+    delay = this.detailTable.widget('LoadingDelayField').value;
+  }
+  if (delay) {
+    // Simulate network
+    this._loadingTimeoutId = setTimeout(function() {
+      this._loadingTimeoutId = null;
+      deferred.resolve(data);
+    }.bind(this), delay);
+  } else {
+    deferred.resolve(data);
+  }
+  return deferred.promise();
 };
 
 jswidgets.SamplePageWithTable.prototype._transformTableDataToTableRows = function(tableData) {
@@ -57,4 +87,11 @@ jswidgets.SamplePageWithTable.prototype._transformTableDataToTableRows = functio
         ]
       };
     });
+};
+
+jswidgets.SamplePageWithTable.prototype.createChildPage = function(row) {
+  return scout.create('jswidgets.SamplePageWithDetailForm', {
+    parent: this.getOutline(),
+    row: row
+  });
 };

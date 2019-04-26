@@ -1,0 +1,24 @@
+{
+  "id": "jswidgets.SamplePageWithDetailForm",
+  "text": "Page with Detail Form",
+  "leaf": true,
+  "detailFormXXXXXXXXXXXXXXXXXXXXX": "jswidgets.SampleDetailForm",
+  "detailTable": {
+    "id": "jswidgets.SamplePageWithDetailForm.Table",
+    "objectType": "Table",
+    "columns": [
+      {
+        "id": "IdColumn",
+        "objectType": "NumberColumn",
+        "text": "ID",
+        "visible": false
+      },
+      {
+        "id": "StringColumn",
+        "objectType": "Column",
+        "text": "Name",
+        "width": 300
+      }
+    ]
+  }
+}

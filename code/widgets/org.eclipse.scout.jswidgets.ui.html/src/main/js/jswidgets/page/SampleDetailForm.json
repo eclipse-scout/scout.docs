@@ -1,0 +1,27 @@
+{
+  "id": "jswidgets.SampleDetailForm",
+  "displayHint": "view",
+  "rootGroupBox": {
+    "id": "MainBox",
+    "objectType": "GroupBox",
+    "fields": [
+      {
+        "id": "GroupBox",
+        "objectType": "GroupBox",
+        "gridColumnCount": 1,
+        "fields": [
+          {
+            "id": "HtmlField",
+            "objectType": "HtmlField",
+            "labelVisible": false,
+            "statusVisible": false,
+            "gridDataHints": {
+              "weightY": 1
+            },
+            "value": "<h1>ABC</h1>"
+          }
+        ]
+      }
+    ]
+  }
+}

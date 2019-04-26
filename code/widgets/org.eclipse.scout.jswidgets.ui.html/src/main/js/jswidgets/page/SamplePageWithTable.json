@@ -1,7 +1,5 @@
 {
   "id": "jswidgets.SamplePageWithTable",
-  "objectType": "PageWithTable",
-  "leaf": true,
   "text": "Page with Table",
   "detailTable": {
     "id": "jswidgets.SamplePageWithTable.Table",
@@ -44,6 +42,51 @@
       {
         "id": "AggregateTableControl",
         "objectType": "AggregateTableControl"
+      }
+    ],
+    "menus": [
+      {
+        "id": "LoadingDelayMenu",
+        "objectType": "FormFieldMenu",
+        "horizontalAlignment": 1,
+        "menuTypes": [
+          "Table.EmptySpace"
+        ],
+        "field": {
+          "id": "LoadingDelaySequenceBox",
+          "objectType": "SequenceBox",
+          "labelVisible": false,
+          "statusVisible": false,
+          "cssClass": "no-mandatory-indicator",
+          "gridDataHints": {
+            "widthInPixel": 160
+          },
+          "fields": [
+            {
+              "id": "LoadingDelayCheckBox",
+              "objectType": "CheckBoxField",
+              "labelVisible": false,
+              "statusVisible": false,
+              "cssClass": "no-mandatory-indicator",
+              "gridDataHints": {
+                "useUiWidth": true,
+                "weightX": 0
+              }
+            },
+            {
+              "id": "LoadingDelayField",
+              "objectType": "NumberField",
+              "label": "Loading delay [ms]",
+              "labelPosition": "${const:ON_FIELD}",
+              "labelVisible": false,
+              "statusVisible": false,
+              "enabled": false,
+              "gridDataHints": {
+                "horizontalAlignment": -1
+              }
+            }
+          ]
+        }
       }
     ]
   }

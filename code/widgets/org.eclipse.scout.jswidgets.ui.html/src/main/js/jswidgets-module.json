@@ -65,6 +65,8 @@
     "jswidgets/tilegrid/TileGridLayoutConfigBox.json",
     "jswidgets/tileaccordion/TileAccordionForm.json",
     "jswidgets/valuefield/ValueFieldPropertiesBox.json",
+    "jswidgets/page/SampleDetailForm.json",
+    "jswidgets/page/SamplePageWithDetailForm.json",
     "jswidgets/page/SamplePageWithTable.json",
     "jswidgets/page/SamplePageWithTableSearchForm.json",
     "jswidgets/page/SamplePageWithNodes.json",
