@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/eclipse-scout-widgets-app",
-  "version": "10.0.0-SNAPSHOT.1",
+  "version": "10.0.0",
   "description": "Eclipse Scout: Widgets App",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
@@ -19,7 +19,8 @@
     "build": "webpack --mode=production --display-error-details",
     "start:dev": "webpack-dev-server",
     "test": "karma start --browsers ChromeHeadless --single-run",
-    "test:dev": "karma start"
+    "test:dev": "karma start",
+    "snapshot": "node node_modules/@eclipse-scout/eclipse-scout/scripts/snapshot"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -43,7 +44,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
-    "@eclipse-scout/eclipse-scout": "~10.0.0-SNAPSHOT",
+    "@eclipse-scout/eclipse-scout": "^10.0.0-snapshot",
     "jquery": "^3.4.0"
   }
 }
