@@ -2,14 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Eclipse Scout: Widgets App</title>
-  <link rel="stylesheet" type="text/css" href="scout-theme.css">
-  <script src="jquery.js"></script>
-  <script src="eclipse-scout.js"></script>
-  <script src="widgets-app.js"></script>
+  <title>BSI Widgets</title>
+  <scout:include template="head.html" />
+  <scout:stylesheet src="widgets-theme.css" />
+  <scout:script src="eclipse-scout.js" />
+  <scout:script src="jquery.js" />
+  <scout:script src="widgets-app.js" />
 </head>
 <body>
-  <div class="scout" data-partid="1"></div>
-  <scout-version data-value="0.0.1"></scout-version>
+<scout:include template="no-script.html" />
+<div class="scout" data-partid="1"></div>
+<scout:version />
 </body>
 </html>
