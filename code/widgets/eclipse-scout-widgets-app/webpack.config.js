@@ -11,6 +11,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 let path = require('path');
 let webpack = require('webpack');
@@ -21,7 +22,6 @@ module.exports = (env, args) => {
   console.log('Webpack mode:', args.mode);
 
   // FIXME [awe] toolstack: fix bug with double "eclipse-scout.js" files in output (one of them seems to contain jQuery)
-  // FIXME [awe] toolstack: create "web.properties" with filenames from dist/, required for resource-loading in Java
 
   return {
     target: 'web',
@@ -107,6 +107,10 @@ module.exports = (env, args) => {
       // # Clean dist/ folder
       // see: https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
       new CleanWebpackPlugin(),
+      // see: https://www.npmjs.com/package/webpack-shell-plugin
+      new WebpackShellPlugin({
+        onBuildEnd: ['node post-build.js']
+      }),
       // # Copy resources
       // https://www.npmjs.com/package/copy-webpack-plugin
       new CopyPlugin([{
