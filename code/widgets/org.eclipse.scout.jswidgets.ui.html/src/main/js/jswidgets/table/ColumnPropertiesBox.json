@@ -152,6 +152,11 @@
       "objectType": "NumberField",
       "label": "Min Width",
       "enabled": false
+    },
+    {
+      "id": "MaxLengthField",
+      "objectType": "NumberField",
+      "label": "Max Length"
     }
   ]
 }

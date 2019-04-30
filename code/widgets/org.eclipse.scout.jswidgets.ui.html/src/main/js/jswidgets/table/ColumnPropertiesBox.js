@@ -125,6 +125,10 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   minWidthField.setValue(this.column.minWidth);
   minWidthField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var maxLengthField = this.widget('MaxLengthField');
+  maxLengthField.setValue(this.column.maxLength);
+  maxLengthField.on('propertyChange', this._onPropertyChange.bind(this));
+
   column.table.on('sort', this._onSort.bind(this));
   column.table.on('group', this._onGroup.bind(this));
   column.table.on('columnResized', this._onColumnResized.bind(this));
@@ -170,6 +174,8 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setMandatory(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'WidthField') {
     this.column.setWidth(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'MaxLengthField') {
+    this.column.setMaxLength(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'TextWrapField') {
     this.column.setTextWrap(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
