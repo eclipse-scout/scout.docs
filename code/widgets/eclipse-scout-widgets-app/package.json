@@ -23,7 +23,7 @@
     "build:prod": "webpack --mode=production --display-error-details",
     "build": "npm run build:dev && npm run build:prod",
     "build:watch": "webpack --mode=development --display-error-details --colors --watch",
-    "test": "karma start --browsers ChromeHeadless --single-run",
+    "test": "karma start karma.conf.ci.js",
     "test:dev": "karma start",
     "snapshot": "node node_modules/@eclipse-scout/eclipse-scout/scripts/snapshot"
   },
@@ -51,8 +51,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "terser-webpack-plugin": "^1.2.3",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.1",
-    "webpack-shell-plugin": "^0.5.0"
+    "webpack-cli": "^3.3.1"
   },
   "dependencies": {
     "@eclipse-scout/eclipse-scout": "^10.0.0-snapshot",
