@@ -20,25 +20,6 @@ module.exports = (env, args) => {
     'widgets-theme': './src/widgets/widgets-theme.less',
     'widgets-theme-dark': './src/widgets/widgets-theme-dark.less'
   };
-  config.optimization.splitChunks = {
-    chunks: 'all',
-    cacheGroups: {
-      // # Eclipse Scout
-      scout: {
-        test: /.*[\\/]eclipse-scout[\\/]/,
-        name: 'eclipse-scout',
-        priority: -5,
-        reuseExistingChunk: true
-      },
-      //# jQuery
-      jquery: {
-        test: /.*[\\/]jquery[\\/]/,
-        name: 'jquery',
-        priority: -1,
-        reuseExistingChunk: true
-      }
-    }
-  };
   config.plugins.push(
     new CopyPlugin([{
       // # Copy Scout web-resources
