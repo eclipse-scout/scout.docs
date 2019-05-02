@@ -86,16 +86,6 @@
               <karmaConfPath>karma.conf.ci.js</karmaConfPath>
             </configuration>
           </execution>
-          <execution>
-            <id>npm publish</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>deploy</phase>
-            <configuration>
-              <arguments>publish</arguments>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
     </plugins>
