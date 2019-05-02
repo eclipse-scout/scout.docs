@@ -10,7 +10,7 @@
  ******************************************************************************/
 import scout, { models, App, Desktop, OutlineViewButton } from '@eclipse-scout/eclipse-scout';
 
-import desktopModel from './Desktop.json'; // FIXME [awe] ES6: check if JSON-extensibility still works with this approach, remove request for JSON models.
+import desktopModel from './Desktop.json';
 
 export default class WidgetsApp extends App {
 
@@ -27,7 +27,7 @@ export default class WidgetsApp extends App {
     });
     */
 
-    let desktop = scout.create(Desktop, models.getModel(desktopModel, parent));
+    /** @type {Desktop}*/ let desktop = scout.create(Desktop, models.getModel(desktopModel, parent));
     let dataButton = scout.create(OutlineViewButton, {
       parent: desktop,
       text: 'Data',
