@@ -31,6 +31,18 @@
         "width": 150
       }
     ],
+    "menus": [
+      {
+        "id": "TileToggleMenu",
+        "objectType": "jswidgets.SamplePageWithTableTileToggleMenu",
+        "iconId": "${iconId:LIGHTBULB_ON}",
+        "stackable": false,
+        "horizontalAlignment": 1,
+        "menuTypes": [
+          "Table.EmptySpace"
+        ]
+      }
+    ],
     "tableControls": [
       {
         "id": "SearchFormTableControl",
