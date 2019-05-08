@@ -171,7 +171,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> The implementation of the picture field is now provided by the template field `AbstractUrlImageField`.
 
-As the last step we need slightly modify the SQL statement that loads and stores the picture URL information.
+As the last step we need to slightly modify the SQL statement that loads and stores the picture URL information.
 The reason for the change is the replacement of the picture url field by an url property defined as a member of the picture field.
 For this change perform the steps listed below.
 

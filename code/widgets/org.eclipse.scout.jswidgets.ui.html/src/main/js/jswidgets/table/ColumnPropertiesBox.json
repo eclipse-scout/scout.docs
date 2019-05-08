@@ -7,58 +7,56 @@
   "expandable": true,
   "fields": [
     {
-      "id": "AutoOptimizeWidthField",
-      "objectType": "CheckBoxField",
-      "label": "Auto Optimize Width",
-      "labelVisible": false
-    },
-    {
-      "id": "AutoOptimizeMaxWidthField",
-      "objectType": "CheckBoxField",
-      "label": "Auto Optimize Max Width",
-      "labelVisible": false,
-      "enabled": false
-    },
-    {
       "id": "EditableField",
       "objectType": "CheckBoxField",
       "label": "Editable",
       "labelVisible": false
     },
     {
-      "id": "ModifiableField",
+      "id": "DisplayableField",
       "objectType": "CheckBoxField",
-      "label": "Modifiable",
-      "labelVisible": false,
-      "enabled": false
+      "label": "Displayable",
+      "labelVisible": false
     },
     {
-      "id": "RemovableField",
+      "id": "VisibleField",
       "objectType": "CheckBoxField",
-      "label": "Removable",
+      "label": "Visible",
+      "labelVisible": false
+    },
+    {
+      "id": "MandatoryField",
+      "objectType": "CheckBoxField",
+      "label": "Mandatory",
       "labelVisible": false,
-      "enabled": false
+      "enabled": true
+    },
+    {
+      "id": "AutoOptimizeWidthField",
+      "objectType": "CheckBoxField",
+      "label": "Auto Optimize Width",
+      "labelVisible": false
     },
     {
       "id": "FixedWidthField",
       "objectType": "CheckBoxField",
       "label": "Fixed Width",
       "labelVisible": false,
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "FixedPositionField",
       "objectType": "CheckBoxField",
       "label": "Fixed Position",
       "labelVisible": false,
-      "enabled": false
+      "enabled": true
     },
     {
-      "id": "GroupedField",
+      "id": "HeaderMenuEnabledField",
       "objectType": "CheckBoxField",
-      "label": "Grouped",
+      "label": "Header Menu Enabled",
       "labelVisible": false,
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "HeaderHtmlEnabledField",
@@ -75,11 +73,10 @@
       "enabled": false
     },
     {
-      "id": "MandatoryField",
+      "id": "TextWrapField",
       "objectType": "CheckBoxField",
-      "label": "Mandatory",
-      "labelVisible": false,
-      "enabled": true
+      "label": "Text Wrap",
+      "labelVisible": false
     },
     {
       "id": "SortActiveField",
@@ -96,27 +93,36 @@
       "enabled": false
     },
     {
-      "id": "TextWrapField",
+      "id": "GroupedField",
       "objectType": "CheckBoxField",
-      "label": "Text Wrap",
-      "labelVisible": false
+      "label": "Grouped",
+      "labelVisible": false,
+      "enabled": false
     },
     {
-      "id": "DisplayableField",
+      "id": "ModifiableField",
       "objectType": "CheckBoxField",
-      "label": "Displayable",
-      "labelVisible": false
+      "label": "Modifiable",
+      "labelVisible": false,
+      "enabled": false
     },
     {
-      "id": "VisibleField",
+      "id": "RemovableField",
       "objectType": "CheckBoxField",
-      "label": "Visible",
-      "labelVisible": false
+      "label": "Removable",
+      "labelVisible": false,
+      "enabled": false
     },
     {
       "id": "CssClassField",
       "objectType": "StringField",
       "label": "Css Class"
+    },
+    {
+      "id": "AutoOptimizeMaxWidthField",
+      "objectType": "NumberField",
+      "label": "Auto Optimize Max Width",
+      "enabled": false
     },
     {
       "id": "HorizontalAlignmentField",
@@ -146,6 +152,11 @@
       "objectType": "NumberField",
       "label": "Min Width",
       "enabled": false
+    },
+    {
+      "id": "MaxLengthField",
+      "objectType": "NumberField",
+      "label": "Max Length"
     }
   ]
 }

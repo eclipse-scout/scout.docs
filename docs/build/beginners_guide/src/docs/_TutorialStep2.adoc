@@ -116,7 +116,7 @@ Table pages are an important UI element of Scout applications as they frequently
 Out of the box table pages offer powerful options to sort, filter and re-arrange the data contained in the table.
 This functionality offers a good starting point to decide which columns to add to a table page.
 
-To decide the columns to add the following criterias have been useful in practice.
+To decide the columns to add the following criteria have been useful in practice.
 
 * Unique identifier of an element
 * Attributes that are most frequently used in searches

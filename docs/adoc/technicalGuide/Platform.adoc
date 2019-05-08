@@ -406,7 +406,7 @@ The default value is true.
 |`scout.auth.credentials`
 |Specifies the known credentials (username & passwords) of the `org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier`.
 
-Credentials are separated by semicolon. Username and password information are separated by colon.
+Credentials are separated by semicolon. Username and password information are separated by colon. Usernames are case-insensitive and it is recommended that they should only consist of ASCII characters. Plain text passwords are case-sensitive.
 
 By default the password information consists of Base64 encoded salt followed by a dot followed by the Base64 encoded SHA-512 hash of the password (using UTF-16).
 

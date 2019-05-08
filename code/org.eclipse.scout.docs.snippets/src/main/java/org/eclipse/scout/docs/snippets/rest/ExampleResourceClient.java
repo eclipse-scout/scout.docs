@@ -8,16 +8,19 @@ import javax.ws.rs.core.Response;
 import org.eclipse.scout.docs.snippets.dataobject.ExampleEntityDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.rest.client.IRestResourceClient;
 
 //tag::class[]
-public class ExampleResourceClient {
+public class ExampleResourceClient implements IRestResourceClient {
 
   protected static final String RESOURCE_PATH = "example";
 
-  protected ExampleRestClientHelper m_helper = BEANS.get(ExampleRestClientHelper.class);
+  protected ExampleRestClientHelper helper() {
+    return BEANS.get(ExampleRestClientHelper.class);
+  }
 
   public ExampleEntityDo getExampleEntity(String id) {
-    WebTarget target = m_helper.target(RESOURCE_PATH)
+    WebTarget target = helper().target(RESOURCE_PATH)
         .path("/{id}")
         .resolveTemplate("id", id);
 
@@ -27,7 +30,7 @@ public class ExampleResourceClient {
   }
 
   public ExampleEntityDo updateExampleEntity(String id, ExampleEntityDo entity) {
-    WebTarget target = m_helper.target(RESOURCE_PATH)
+    WebTarget target = helper().target(RESOURCE_PATH)
         .path("/{id}")
         .resolveTemplate("id", id);
 
@@ -37,7 +40,7 @@ public class ExampleResourceClient {
   }
 
   public void deleteExampleEntity(String id) {
-    WebTarget target = m_helper.target(RESOURCE_PATH)
+    WebTarget target = helper().target(RESOURCE_PATH)
         .path("/{id}")
         .resolveTemplate("id", id);
 
@@ -46,7 +49,7 @@ public class ExampleResourceClient {
   }
 
   public ExampleEntityDo getExampleEntityCustomExceptionHandling(String id) {
-    WebTarget target = m_helper.target(RESOURCE_PATH, this::transformCustomException) // <4>
+    WebTarget target = helper().target(RESOURCE_PATH, this::transformCustomException) // <4>
         .path("/{id}")
         .resolveTemplate("id", id);
 

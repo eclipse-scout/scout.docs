@@ -128,6 +128,18 @@ The `IValueFormatConstants` interface declares a set of default format pattern c
 
 Attributes with type `java.util.Date` accept the format pattern specified by `SimpleDateFormat` class (see https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html)
 
+=== Ignoring an Attribute ===
+
+The `@JsonIgnore` annotation included in the Jackson library is currently not supported for data objects.
+To ignore an attribute when serializing a data object, the attribute must be removed from the data object by either not setting a value for the desired attribute
+or by explicitly removing the attribute before a data object is serialized:
+
+[source,java]
+.Example: Remove an attribute from a data object
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=removeAttribute]
+----
+
 === Handling of DoEntity Attributes ===
 
 Instead of data objects, a REST or MOM interface could be built using simple plain old Java objects (POJOs).
@@ -203,12 +215,23 @@ Therefore, the deserializer knows which concrete class to instantiate while dese
 This mechanism is used for simple value properties and list value properties.
 To each object which is part of a list value property the `_type` property is added to support polymorphism within single elements of a list.
 
-
 [source,json]
 .Example: ExampleDoEntityListDo as JSON
 ----
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclipse/scout/docs/snippets/dataobject/ExampleDoEntityListDo.json[]
 ----
+
+=== Rename an attribute of a data object in a subclass ===
+
+To rename a data object attribute in a subclass, override the attribute accessor method and annotate it with `@AttributeName` using the new attribute name as value.
+Additionally the overridden method must call the `doValue()` method providing the new attribute name as argument.
+
+[source,java]
+.Example: Rename attribute in a data object subclass
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/ExampleEntityExDo.java[tags=class]
+----
+<1> Rename `name` attribute of superclass to `nameEx`
 
 === Interfaces to Data Objects ===
 

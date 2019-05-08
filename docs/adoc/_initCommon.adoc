@@ -10,6 +10,4 @@
 :lt: &#60;
 :gt: &#62;
 
-// TODO avd: Use WARNING block if possible in attribute
-:NotReleasedWarning: pass:q[*Attention:* The here described functionality has not yet been released and is part of an upcoming release.]
-
+:NotReleasedWarning: pass:q[The here described functionality has not yet been released and is part of an upcoming release.]
