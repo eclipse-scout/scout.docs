@@ -48,6 +48,7 @@ WARNING: {NotReleasedWarning}
 
 * <<New RemoteSystemUnavailableException (since 8.0.0.033)>>
 * <<Rest Application Contributions (since 8.0.0.035)>>
+* <<Data Objects: Equals and HashCode (since 8.0.0.036)>>
 
 === Obtaining the Latest Version
 
@@ -534,3 +535,12 @@ public static class ExampleClassContributor implements IRestApplicationClassesCo
   }
 }
 ----
+
+== Data Objects: Equals and HashCode (since 8.0.0.036)
+The Data Object base class `DoEntity` was extended with a generic `equals()` and `hashCode()` implementation considering all attributes of a data object for equality.
+A data object is equals to another data object, if the Java class of both data objects is identical and the attribute maps (including their nested values) of both data objects are equals.
+
+For futher details see:
+
+* `org.eclipse.scout.rt.platform.dataobject.DoEntity.equals(Object)`
+* `org.eclipse.scout.rt.platform.dataobject.DoNode.equals(Object)`
