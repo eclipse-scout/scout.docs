@@ -8,11 +8,10 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-
+const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
+const mainModule = require.main;
+const CopyPlugin = mainModule.require('copy-webpack-plugin');
 module.exports = (env, args) => {
-  const CopyPlugin = require('copy-webpack-plugin');
-  const baseConfig = require('@eclipse-scout/eclipse-scout/scripts/webpack-defaults');
-
   let config = baseConfig(env, args);
 
   config.entry = {

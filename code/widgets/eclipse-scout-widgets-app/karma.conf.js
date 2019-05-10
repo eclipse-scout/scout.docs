@@ -1,2 +1,2 @@
-const baseConfig = require('@eclipse-scout/eclipse-scout/scripts/karma-defaults');
+const baseConfig = require('@eclipse-scout/eclipse-scout-cli/scripts/karma-defaults');
 module.exports = baseConfig;
