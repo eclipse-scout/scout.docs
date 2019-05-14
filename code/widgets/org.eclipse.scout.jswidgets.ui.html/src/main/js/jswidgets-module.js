@@ -129,6 +129,7 @@
   __include("jswidgets/table/GroupingStyleLookupCall.js");
   __include("jswidgets/WidgetsRoute.js");
   __include("jswidgets/page/SamplePageWithTable.js");
+  __include("jswidgets/page/SamplePageWithTableDetailTable.js");
   __include("jswidgets/page/SamplePageWithTableSearchForm.js");
   __include("jswidgets/page/SamplePageWithTableTileToggleMenu.js");
   __include("jswidgets/page/SamplePageWithNodes.js");

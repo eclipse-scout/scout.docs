@@ -5,7 +5,7 @@
   "text": "Page with Table",
   "detailTable": {
     "id": "jswidgets.SamplePageWithTable.Table",
-    "objectType": "Table",
+    "objectType": "jswidgets.SamplePageWithTableDetailTable",
     "columns": [
       {
         "id": "IdColumn",
