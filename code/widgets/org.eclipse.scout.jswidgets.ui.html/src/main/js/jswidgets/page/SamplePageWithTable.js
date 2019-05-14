@@ -44,6 +44,18 @@ jswidgets.SamplePageWithTable.prototype._loadTableData = function(searchFilter) 
   return $.resolvedPromise(data.filter(filter));
 };
 
+jswidgets.SamplePageWithTable.prototype._requestTiles = function() {
+  return $.resolvedDeferred([this._createTile()]);
+};
+
+jswidgets.SamplePageWithTable.prototype._createTile = function(row) {
+  var model = {
+    label: 'New Tile',
+    parent: this.detailTable
+  };
+  return new scout.create('jswidgets.CustomTile', model);
+};
+
 jswidgets.SamplePageWithTable.prototype._transformTableDataToTableRows = function(tableData) {
   return tableData
     .map(function(row) {
