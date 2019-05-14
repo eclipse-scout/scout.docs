@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.Aggregat
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.BackgroundEffect;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
+import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -46,6 +47,8 @@ import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
+import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
+import org.eclipse.scout.widgets.shared.Icons;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
@@ -141,6 +144,24 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
     public RoundingModeColumn getRoundingModeColumn() {
       return getColumnSet().getColumnByClass(RoundingModeColumn.class);
+    }
+
+    @Override
+    protected void execRequestTiles() {
+      ArrayList<ITile> tiles = new ArrayList<ITile>();
+      tiles.add(
+          new AbstractCustomTile() {
+            @Override
+            public String classId() {
+              return "Foo";
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Hello world";
+            }
+          });
+      setTiles(tiles);
     }
 
     @Order(10)
@@ -674,6 +695,31 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected Class<?> provideSourceClass() {
       return PageWithTableTablePage.class;
+    }
+  }
+
+  @Order(20)
+  public class TileModeMenu extends AbstractMenu {
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(
+          TableMenuType.EmptySpace);
+    }
+
+    @Override
+    protected String getConfiguredIconId() {
+      return Icons.LightbulbOn; // TODO [10.0] mot [tableWithTiles]: Find a  better icon
+    }
+
+    @Override
+    protected byte getConfiguredHorizontalAlignment() {
+      return HORIZONTAL_ALIGNMENT_RIGHT;
+    }
+
+    @Override
+    protected void execAction() {
+      getTable().setTileMode(!getTable().isTileMode());
     }
   }
 }
