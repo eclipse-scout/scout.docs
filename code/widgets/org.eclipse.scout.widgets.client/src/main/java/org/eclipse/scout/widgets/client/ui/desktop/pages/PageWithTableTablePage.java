@@ -147,7 +147,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Override
-    protected void execRequestTiles() {
+    protected void execCreateTiles() {
       ArrayList<ITile> tiles = new ArrayList<ITile>();
       tiles.add(
           new AbstractCustomTile() {
