@@ -33,6 +33,25 @@
     ],
     "menus": [
       {
+        "id": "AddRowMenu",
+        "objectType": "Menu",
+        "text": "${textKey:AddRow}",
+        "menuTypes": [
+          "Table.EmptySpace"
+        ],
+        "keyStroke": "insert"
+      },
+      {
+        "id": "DeleteRowMenu",
+        "objectType": "Menu",
+        "text": "${textKey:DeleteRow}",
+        "menuTypes": [
+          "Table.SingleSelection",
+          "Table.MultiSelection"
+        ],
+        "keyStroke": "delete"
+      },
+      {
         "id": "TileToggleMenu",
         "objectType": "jswidgets.SamplePageWithTableTileToggleMenu",
         "iconId": "${iconId:LIGHTBULB_ON}",
