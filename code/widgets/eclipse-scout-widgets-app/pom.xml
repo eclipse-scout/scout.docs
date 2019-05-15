@@ -43,56 +43,83 @@
         </executions>
       </plugin>
 
-      <!-- Start npm during maven build -->
-      <!-- create profile in maven master which automatically runs these tasks as soon as there is a package.json? -->
+      <!-- TODO [10.0] mvi: Can be removed as soon as the profile in the scout.rt.parent has been moved to the maven master -->
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>1.7.6</version>
+        <configuration>
+          <installDirectory>${basedir}/..</installDirectory>
+        </configuration>
         <executions>
           <execution>
-            <id>install node and npm</id>
+            <id>install-node-and-npm</id>
             <goals>
               <goal>install-node-and-npm</goal>
             </goals>
+            <phase>initialize</phase>
             <configuration>
               <nodeVersion>v12.1.0</nodeVersion>
             </configuration>
           </execution>
           <execution>
-            <id>npm install</id>
+            <id>install-pnpm</id>
             <goals>
               <goal>npm</goal>
             </goals>
+            <phase>generate-sources</phase>
             <configuration>
-              <arguments>install</arguments>
+              <arguments>install -g pnpm@3.3.3</arguments> <!-- explicitly specify pnpm version to use -->
             </configuration>
           </execution>
           <execution>
-            <id>npm run build:dev</id>
+            <id>npm-run-build:prod</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <configuration>
-              <arguments>run build:dev</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm run build:prod</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
+            <phase>compile</phase>
             <configuration>
               <arguments>run build:prod</arguments>
             </configuration>
           </execution>
           <execution>
-            <id>javascript tests</id>
+            <id>npm-run-build:dev</id>
             <goals>
-              <goal>karma</goal>
+              <goal>npm</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <arguments>run build:dev</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>javascript-test</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>test</phase>
+            <configuration>
+              <arguments>run test:ci</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>pnpm-install</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>exec</goal>
             </goals>
             <configuration>
-              <karmaConfPath>karma.conf.ci.js</karmaConfPath>
+              <executable>${basedir}/../node/node</executable>
+              <arguments>
+                <argument>${basedir}/../node/node_modules/pnpm/bin/pnpm.js</argument>
+                <argument>install</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
