@@ -7,7 +7,7 @@ jswidgets.SamplePageWithTableTileToggleMenu.prototype._init = function(model) {
   jswidgets.SamplePageWithTableTileToggleMenu.parent.prototype._init.call(this, model);
 
   this.on('action', function() {
-    var table = this.parent.parent.parent;
+    var table = model.parent;
     table.setTileMode(!table.tileMode);
   }.bind(this));
 };
