@@ -1,0 +1,93 @@
+:imgsdir: ../../imgs
+
+////
+Howto:
+- Write this document such that it helps people to discover new features and other important changes of this release.
+- Chronological order is not necessary.
+- Describe necessary migration steps in the MigrationGuide document.
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+
+== About This Release
+
+The Eclipse Scout {scout-version} version was released as part of the {simrel-link} on {simrel-date}.
+
+The latest version of this release is: {maven-version}.
+
+You can see the {github-changelog-link} on GitHub.
+
+Coming from an older Scout version? Check out the {migration-guide-link}!
+
+=== Service Releases
+
+After the final simultaneous Eclipse release, there are no more Eclipse _service releases_. Scout {scout-version} will continue to be maintained for a while and a new build may be released from time to time. Beside bug fixes, these releases may even contain some minor features. See the {simrel-faq-link} for details.
+
+The following enhancements were made after the initial {scout-version} release.
+
+==== Simrel {simrel-name} ({scout-version}) -- Release Expected {simrel-date}
+
+// The initial release of this version was *10.0.0.xyz* (Maven: 10.0.0.xyz_Simrel_2019_06).
+
+WARNING: {NotReleasedWarning}
+
+(Section intentionally left blank for possible future release)
+
+// * <<New Feature (since 10.0.0.xyz)>>
+//
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// WARNING: {NotReleasedWarning}
+//
+// * <<New Feature (since 10.0.0.xyz)>>
+
+=== Obtaining the Latest Version
+
+==== Runtime (Scout RT)
+Scout RT artifacts are distributed via Maven:
+
+* {maven-central-link} on _Maven Central_
+* {mvnrepository-link} on _mvnrepository.com_
+
+Usage example in the parent POM of your Scout application:
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>{maven-version}</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+==== Eclipse IDE Tooling (Scout SDK)
+You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
+{scout-sdk-download-link}
+
+To install the Scout SDK into your existing Eclipse IDE, use this update site: +
+{scout-sdk-update-site}
+
+==== Demo Applications
+The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
+
+If you just want to play around with them without looking at the source code, you can always use the deployed versions:
+
+* https://scout.bsi-software.com/contacts/
+* https://scout.bsi-software.com/widgets/
+* https://scout.bsi-software.com/jswidgets/
+
+// ----------------------------------------------------------------------------
+
+== Widgets
+
+=== GroupBox: New MenuBar Position TITLE
+
+In addition to the existing menu-bar position TOP and BOTTOM, the GroupBox now supports TITLE. The menu-bar is placed in the header of the
+group-box right of the title-label DIV. Scout Classic: see property `menuBarPosition` in `AbstractGroupBox` and constant `IGroupBox.MENU_BAR_POSITION_TITLE`. Scout JS: see property `menuBarPosition` in `GroupBox.js` and constant `scout.GroupBox.MenuBarPosition.TITLE`.
+
+image::{imgsdir}/group_box_menu_bar_in_title.png[]

@@ -664,7 +664,7 @@ build the model manually. Here's how to use the export feature:
   been used to create an adapter instance.
 * Start your browsers developer tools (F12) from your running Scout classic app, inspect the form or another adapter you'd like to export, and search for
   the ID of that adapter by looking at the `data-id` attribute in the DOM. Then call the following JavaScript function from the console: `JSON.stringify(scout.exportAdapter([id]))`.
-  The console will now output the JSON code for that adapter. Copy/paste that string from the console and tidy it up with a tool of your choice (for instance http://www.jsoneditoronline.org[jsoneditoronline.org]).
+  The console will now output the JSON code for that adapter. Copy/paste that string from the console and tidy it up with a tool of your choice (for instance http://www.jsoneditoronline.org[jsoneditoronline.org] or https://jsonformatter.org[jsonformatter.org]).
 * Now the formatted JSON code is ready to be used in your Scout JS project. Simply store the JSON to a .json File and load it in the `_jsonModel` function of
   your widget by calling `scout.models.getModel('[ID of json model]')`. Most likely you must edit the JSON file and apply some changes manually.
   For instance:

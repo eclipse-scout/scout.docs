@@ -1112,6 +1112,33 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
+            @Order(12)
+            @ClassId("021a7381-a8d7-4082-a70b-b460fc635d80")
+            public class CompleteCellEditDelayedMenu extends AbstractMenu {
+              @Override
+              protected String getConfiguredText() {
+                return "Complete cell-edit delayed";
+              }
+
+              @Override
+              protected String getConfiguredTooltipText() {
+                return "Starts a timer which calls completeCellEdit() on the table after 5 seconds have passed. " +
+                    "Click this menu, then click on an editable cell and wait until the cell is being closed.";
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+              }
+
+              @Override
+              protected void execAction() {
+                ModelJobs.schedule(Table.this::completeCellEdit, ModelJobs.newInput(ClientRunContexts.copyCurrent())
+                    .withExecutionTrigger(Jobs.newExecutionTrigger()
+                        .withStartIn(5, TimeUnit.SECONDS)));
+              }
+            }
+
             @Order(15)
             public class ScrollToSelection extends AbstractMenu {
               @Override
