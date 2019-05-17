@@ -30,10 +30,8 @@ The following enhancements were made after the initial 9.0 release.
 
 WARNING: {NotReleasedWarning}
 
-(Section intentionally left blank for possible future release)
+* <<Script File Watcher Enabled by Default (since Simrel 2019-06)>>
 
-// * <<New Feature (since 9.0.0.xyz)>>
-//
 // ==== Upcoming -- No Planned Release Date
 //
 // The following changes were made after the latest official release build. No release date has been fixed yet.
@@ -135,6 +133,15 @@ Starting with Scout 9 there are two new filters available:
 
 * `HttpRunContextFilter`: Creates a Scout run-context without HTTP- and server sessions for stateless REST backends. It supports subject, correlationId, locale, transaction, etc.
 * `HttpServerRunContextFilter`: Creates a Scout server-run-context that additionally has a user-agent and an optional Scout server session.
+
+== Script File Watcher
+During development, the JavaScript and CSS files are always rebuilt when requested by the browser. Depending on the size of the JS and Less code this may take a while, especially the processing of the Less code is expensive. This is unfortunate if only JavaScript code is adjusted or even if no JS or CSS code is touched at all.
+
+To improve this, a Script File Watcher can now be activated which watches all the JS and Less files and triggers a rebuild only if a file changes. This means the files are not always rebuilt on every page reload anymore but only if a relevant file changes.
+In order to activate the watcher, you need to set the property `scout.dev.scriptfile.rebuild` to false.
+
+=== Script File Watcher Enabled by Default (since Simrel 2019-06)
+The watcher is now enabled by default when running in dev mode. This means, you don't have to set the property `scout.dev.scriptfile.rebuild` anymore, unless you want to disable the watcher.
 
 == New Widgets
 
