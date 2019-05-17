@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -39,6 +39,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.Backgrou
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.client.ui.tile.AbstractHtmlTile;
+import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -149,30 +150,22 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Override
-    protected void execCreateTiles(List<? extends ITableRow> rows) {
-      List<AbstractHtmlTile> tiles = rows.stream().map(row -> {
-        return new AbstractHtmlTile() {
-          @Override
-          public String classId() {
-            return "Foo";
-          }
+    protected ITile execCreateTile(ITableRow row) {
+      return new AbstractHtmlTile() {
+        @Override
+        public String classId() {
+          return UUID.randomUUID().toString();
+        }
 
-          @Override
-          protected String getConfiguredContent() {
-            return HTML.fragment(
-                HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex())),
-                HTML.br(), HTML.bold("Number Column: " + row.getCellValue(getLongColumn().getColumnIndex())),
-                HTML.br(), HTML.bold("Boolean Column: " + row.getCellValue(getBooleanColumn().getColumnIndex())),
-                HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex()))).toHtml();
-          }
-
-          @Override
-          public ITableRow getTableRow() {
-            return row;
-          }
-        };
-      }).collect(Collectors.toList());
-      setTiles(tiles);
+        @Override
+        protected String getConfiguredContent() {
+          return HTML.fragment(
+              HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("Number Column: " + row.getCellValue(getLongColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("Boolean Column: " + row.getCellValue(getBooleanColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex()))).toHtml();
+        }
+      };
     }
 
     @Order(10)
