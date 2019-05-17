@@ -20,6 +20,43 @@
   <artifactId>eclipse-scout-widgets-app</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <!-- TODO [10.0] mvi: Can be removed as soon as the profile in the scout.rt.parent has been moved to the maven master -->
+  <profiles>
+    <profile>
+      <id>npm-root-dir-win</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <scout.npm.subdir>/node_modules</scout.npm.subdir>
+      </properties>
+    </profile>
+    <profile>
+      <id>npm-root-dir-linux</id>
+      <activation>
+        <os>
+          <family>linux</family>
+        </os>
+      </activation>
+      <properties>
+        <scout.npm.subdir>/lib/node_modules</scout.npm.subdir>
+      </properties>
+    </profile>
+    <profile>
+      <id>npm-root-dir-mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <scout.npm.subdir>/lib/node_modules</scout.npm.subdir>
+      </properties>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
       <plugin>
@@ -49,7 +86,7 @@
         <artifactId>frontend-maven-plugin</artifactId>
         <version>1.7.6</version>
         <configuration>
-          <installDirectory>${basedir}</installDirectory>
+          <installDirectory>target</installDirectory>
         </configuration>
         <executions>
           <execution>
@@ -69,7 +106,7 @@
             </goals>
             <phase>generate-sources</phase>
             <configuration>
-              <arguments>install -g pnpm@3.3.3</arguments> <!-- explicitly specify pnpm version to use -->
+              <arguments>install -g --prefix ./target/node pnpm@3.3.3</arguments> <!-- explicitly specify pnpm version to use -->
             </configuration>
           </execution>
           <execution>
@@ -115,9 +152,9 @@
               <goal>exec</goal>
             </goals>
             <configuration>
-              <executable>${basedir}/node/node</executable>
+              <executable>${basedir}/target/node/node</executable>
               <arguments>
-                <argument>${basedir}/node/node_modules/pnpm/bin/pnpm.js</argument>
+                <argument>${basedir}/target/node${scout.npm.subdir}/pnpm/bin/pnpm.js</argument>
                 <argument>install</argument>
               </arguments>
             </configuration>
