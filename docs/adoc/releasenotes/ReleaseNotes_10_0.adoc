@@ -1,5 +1,3 @@
-:imgsdir: ../../imgs
-
 ////
 Howto:
 - Write this document such that it helps people to discover new features and other important changes of this release.
@@ -87,7 +85,19 @@ If you just want to play around with them without looking at the source code, yo
 
 === GroupBox: New MenuBar Position TITLE
 
-In addition to the existing menu-bar position TOP and BOTTOM, the GroupBox now supports TITLE. The menu-bar is placed in the header of the
-group-box right of the title-label DIV. Scout Classic: see property `menuBarPosition` in `AbstractGroupBox` and constant `IGroupBox.MENU_BAR_POSITION_TITLE`. Scout JS: see property `menuBarPosition` in `GroupBox.js` and constant `scout.GroupBox.MenuBarPosition.TITLE`.
+In addition to the existing menu-bar position TOP and BOTTOM, the GroupBox now supports TITLE. The menu-bar is placed in the header of the group-box right of the title-label DIV. Scout Classic: see property `menuBarPosition` in `AbstractGroupBox` and constant `IGroupBox.MENU_BAR_POSITION_TITLE`. Scout JS: see property `menuBarPosition` in `GroupBox.js` and constant `scout.GroupBox.MenuBarPosition.TITLE`.
 
-image::{imgsdir}/group_box_menu_bar_in_title.png[]
+image::{rnimgsdir}/group_box_menu_bar_in_title.png[]
+
+=== TileGrid Groups: Show Loading State per Group
+
+Each Group in a TileGrid can now display a loading indicator in the group header individually. This is useful if each displayed
+group loads data from an individual data source. Scout Classic: call `AbstractGroup#setLoading(boolean)`, Scout JS: call `Group.js#setLoading(boolean)`. Note: it is still possible to set the loading state on the TileGrid, to indicate the whole grid (and not an individual group) is loading data.
+
+ifeval::["{filetype}" == "html"]
+image::{rnimgsdir}/tile_grid_group_loading.gif[]
+endif::[]
+
+ifeval::["{filetype}" == "pdf"]
+image::{rnimgsdir}/tile_grid_group_loading.png[]
+endif::[]
