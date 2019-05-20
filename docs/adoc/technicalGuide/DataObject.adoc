@@ -72,11 +72,13 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ==== Type Name ====
 
 A data object is annotated with a logical type name using the `@TypeName` annotation.
+
+IMPORTANT: Declaring a logical type name using the `@TypeName` annotation for each data object is mandatory.
+
 The annotation value is added to the serialized JSON object as top-level `_type` property.
 Using the type property the data object marshaller is able to find and instantiate the matching data object class, without having to rely on a fully classified class name.
-If no `@TypeName` annotation is declared for a data object class, the simple class name is used as default value for the `_type` attribute.
-
-NOTE: Declaring a logical type name using the `@TypeName`annotation is highly recommended to avoid a 1:1 dependency between the serialized JSON String and the fully classified class name. A stable type name is required in order to be able to change the data object structure without breaking the API.
+It avoids a 1:1 dependency between the serialized JSON String and the fully classified class name.
+A stable type name is required in order to be able to change the data object structure without breaking the API.
 
 ==== Type Version  ====
 
