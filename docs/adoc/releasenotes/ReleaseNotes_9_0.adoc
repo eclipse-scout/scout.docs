@@ -352,3 +352,12 @@ image::{imgsdir}/group_collapse-style-bottom.png[]
 === Property 'visible'
 
 The property `visible` in the Java model was migrated from a `boolean` to a `byte` type to achieve multiple dimension support for the visibility of a group (see also https://eclipsescout.github.io/9.0/technical-guide.html#multiple-dimensions-support).
+
+== Data Objects: Equals and HashCode (since 8.0.0.036)
+The Data Object base class `DoEntity` was extended with a generic `equals()` and `hashCode()` implementation considering all attributes of a data object for equality.
+A data object is equals to another data object, if the Java class of both data objects is identical and the attribute maps (including their nested values) of both data objects are equals.
+
+For futher details see:
+
+* `org.eclipse.scout.rt.platform.dataobject.DoEntity.equals(Object)`
+* `org.eclipse.scout.rt.platform.dataobject.DoNode.equals(Object)`

@@ -243,9 +243,14 @@ The interfaces may be used as types for attributes within a data object. At runt
 
 === Equals and Hashcode
 
-The base class `DoEntity` does not provide a default implementation of `equals()` and `hashCode()`, since a data object may contain any types of data which must not provide a useful `equals()` implementation.
-If a data object should be used as map key, a custom `equals()` and `hashCode()` method taking into account the relevant attributes should be added.
-For unit tests there is a utility providing different generic compare methods for data objects, see section <<sec-unit-testing>>.
+The Data Object base class `DoEntity` defines a generic `equals()` and `hashCode()` implementation considering all attributes of a data object for equality.
+A data object is equals to another data object, if the Java class of both data objects is identical and the attribute maps (including their nested values) of both data objects are equals.
+
+For futher details see:
+
+* `org.eclipse.scout.rt.platform.dataobject.DoEntity.equals(Object)`
+* `org.eclipse.scout.rt.platform.dataobject.DoNode.equals(Object)`
+
 
 === Generic DoEntity ===
 An instance of the `DoEntity` class can represent any kind of JSON document.
