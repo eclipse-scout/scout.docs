@@ -357,3 +357,34 @@ Own custom serializer and deserializer implementations can be added by replacing
 === Unit Testing ===
 A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
 Commonly used are a set of assert methods (e.g. `assertDoEntityEquals()`) for testing data objects for (deep) equality.
+
+
+== New modules org.eclipse.scout.rt.dataobject and org.eclipse.scout.rt.dataobject.test (since 8.0.0.36)
+Two new modules providing basic support for ID and enum handling within data objects were added.
+
+=== Interface IEnum
+Implementations of `org.eclipse.scout.rt.dataobject.enumeration.IEnum` add a `stringValue()` method to each enumeration value, guaranteeing a constant, fixed string value for each enumeration value.
+The default resolver mechanism matches the given string with the available string values in the current enumeration implementation to look up the matching enumeration value.
+An optional static `resolve()` method handles the resolve of a given string value into the correct enumeration value allowing to support even string values, whose enumeration values where changed or deleted.
+
+[source,java]
+.Example IEnum implementation
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
+----
+<1> Optional resolve method
+
+=== Interface IID
+
+Implementations of `org.eclipse.scout.rt.dataobject.id.IId<WRAPPED_TYPE>` interface wrap an arbitrary value adding a concrete Java type to a scalar value.
+E.g. the key of an example entity which technically is a UUID becomes an instance of the `ExampleId` class.
+An exampleId instance may then be used as type-safe parameter for further referencing a given example entity record.
+
+[source,java]
+.Example ID implementation wrapping a UUID
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleId]
+----
+
+==== Serialization / Deserialization
+All instances of `IEnum` and `IId` may be used within data objects and automatically serialized to their JSON string representation and deserialized back to the correct Java class.
