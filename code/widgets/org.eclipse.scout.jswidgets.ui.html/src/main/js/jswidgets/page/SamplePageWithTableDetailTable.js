@@ -7,6 +7,7 @@ jswidgets.SamplePageWithTableDetailTable.prototype._init = function(model) {
   jswidgets.SamplePageWithTableDetailTable.parent.prototype._init.call(this, model);
 
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
+  this.widget('AddManyMenu').on('action', this._onAddManyMenuAction.bind(this));
   this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
 };
 
@@ -24,6 +25,12 @@ jswidgets.SamplePageWithTableDetailTable.prototype.createTileForRow = function(r
 
 jswidgets.SamplePageWithTableDetailTable.prototype._onAddRowMenuAction = function() {
   this.insertRow(this._createRow());
+};
+
+jswidgets.SamplePageWithTableDetailTable.prototype._onAddManyMenuAction = function() {
+  for (var i = 0; i < 40; i++) {
+    this.insertRow(this._createRow());
+  }
 };
 
 jswidgets.SamplePageWithTableDetailTable.prototype._onDeleteRowMenuAction = function() {

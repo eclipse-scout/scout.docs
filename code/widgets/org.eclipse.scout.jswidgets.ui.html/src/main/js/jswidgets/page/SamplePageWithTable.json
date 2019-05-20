@@ -42,6 +42,14 @@
         "keyStroke": "insert"
       },
       {
+        "id": "AddManyMenu",
+        "objectType": "Menu",
+        "text": "Add many",
+        "menuTypes": [
+          "Table.EmptySpace"
+        ]
+      },
+      {
         "id": "DeleteRowMenu",
         "objectType": "Menu",
         "text": "${textKey:DeleteRow}",
