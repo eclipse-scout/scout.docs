@@ -389,4 +389,4 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 [[sec-unit-testing]]
 === Unit Testing ===
 A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
-Commonly used are a set of assert methods (e.g. `assertDoEntityEquals()`) for testing data objects for (deep) equality.
+Commonly used are a set of assert methods (e.g. `assertEquals(Object expected, Object actual)`) for testing data objects for (deep) equality.
