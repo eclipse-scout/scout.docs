@@ -353,7 +353,40 @@ Apart from attribute descriptions, the inventory provides access to type name an
 The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.
 Own custom serializer and deserializer implementations can be added by replacing  the corresponding base class and register its own custom serializer or deserializer.
 
+=== Enumerations within Data Objects
+Implementations of `org.eclipse.scout.rt.dataobject.enumeration.IEnum` add a `stringValue()` method to each enumeration value, guaranteeing a constant, fixed string value for each enumeration value.
+An arbitrary Java enum may be used within a data object, but does not guarantee a stable serialized value, if an enumeration value is changed in future.
+
+Additionally implementations of `IEnum` can be annotated with `@EnumName` and `@EnumVersion` to support handling of different versions and migration between.
+
+All instances of `IEnum` may be used within data objects and are automatically serialized to their JSON string value representation and deserialized back to the correct Java class instance.
+
+The default resolver mechanism for `IEnum` (see `org.eclipse.scout.rt.dataobject.enumeration.EnumResolver`) matches the given string with the available string values in the current enumeration implementation to look up the matching enumeration value.
+An optional static `resolve()` method handles the resolve of a given string value into the correct enumeration value allowing to support even string values, whose enumeration values where changed or deleted.
+
+[source,java]
+.Example IEnum implementation
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleEnum]
+----
+<1> Optional resolve method
+
+=== Typed IDs within Data Objects
+
+Implementations of `org.eclipse.scout.rt.dataobject.id.IId<WRAPPED_TYPE>` interface wrap an arbitrary value adding a concrete Java type to a scalar value.
+E.g. the key of an example entity which technically is a UUID becomes an instance of the `ExampleId` class.
+
+All instances of `IId` may be used within data objects and are automatically serialized to their JSON string representation of the wrapped value and deserialized back to the correct Java class instance.
+
+An exampleId instance may then be used as type-safe parameter for further referencing a given example entity record, for instance as attribute value within a data object.
+
+[source,java]
+.Example ID implementation wrapping a UUID
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/DataObjectExamples.java[tags=exampleId]
+----
+
 [[sec-unit-testing]]
 === Unit Testing ===
 A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
-Commonly used are a set of assert methods (e.g. `assertDoEntityEquals()`) for testing data objects for (deep) equality.
+Commonly used are a set of assert methods (e.g. `assertEquals(Object expected, Object actual)`) for testing data objects for (deep) equality.
