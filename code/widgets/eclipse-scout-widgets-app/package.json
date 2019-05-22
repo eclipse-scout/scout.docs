@@ -31,7 +31,7 @@
     "build:all": "scout-scripts build:dev && scout-scripts build:prod",
     "build:dev:watch": "scout-scripts build:dev:watch",
     "snapshot-version": "scout-scripts snapshot-version",
-    "pnpm-install": "pnpm multi install"
+    "pnpm-install": "pnpm recursive install"
   },
   "devDependencies": {
     "@eclipse-scout/cli": "^10.0.0-snapshot"
