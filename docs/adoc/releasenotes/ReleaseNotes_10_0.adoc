@@ -101,3 +101,21 @@ endif::[]
 ifeval::["{filetype}" == "pdf"]
 image::{rnimgsdir}/tile_grid_group_loading.png[]
 endif::[]
+
+=== RadioButton and CheckBox: Wrap Text
+
+Both widgets `RadioButton` and `CheckBox` (aka BooleanField), now support the `wrapText` property. This means a radio button or a check box can have a label with a long text on multiple lines. In order to see the wrapped text, the field must have a `gridH` > 1 or set the `gridUseUiHeight` property to true.
+
+image::{rnimgsdir}/check_box_text_wrap.png[]
+
+=== Button: Support for HTML and Binary Resources
+
+The `Button` now supports the property `htmlEnabled` which allows to use HTML in the label part of the button. You can even reference binary resources in your HTML. Simply call the method `AbstractButton#setAttachments(Collection<? extends BinaryResource>)` and define a reference, say an image URL, in your label HTML:
+
+[source,html]
+----
+<img src="binaryResource:business-card.jpg" />
+----
+
+image::{rnimgsdir}/button_html_enabled.png[]
+
