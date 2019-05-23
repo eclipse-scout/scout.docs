@@ -107,15 +107,21 @@
                 "label": "Properties",
                 "fields": [
                   {
-                    "id": "Button.KeyStrokeField",
-                    "objectType": "StringField",
-                    "label": "Key Stroke"
-                  },
-                  {
                     "id": "Button.SelectedField",
                     "objectType": "CheckBoxField",
                     "label": "Selected",
                     "labelVisible": false
+                  },
+                  {
+                    "id": "Button.WrapTextField",
+                    "objectType": "CheckBoxField",
+                    "label": "Wrap Text",
+                    "labelVisible": false
+                  },
+                  {
+                    "id": "Button.KeyStrokeField",
+                    "objectType": "StringField",
+                    "label": "Key Stroke"
                   }
                 ]
               },
