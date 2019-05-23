@@ -118,6 +118,12 @@
       "objectType": "SmartField",
       "label": "Grouping Style",
       "lookupCall": "jswidgets.GroupingStyleLookupCall"
+    },
+    {
+      "id": "TileModeField",
+      "objectType": "CheckBoxField",
+      "label": "Tile Mode",
+      "labelVisible": false
     }
   ]
 }

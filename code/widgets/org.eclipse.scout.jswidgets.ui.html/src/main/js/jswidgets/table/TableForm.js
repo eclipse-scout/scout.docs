@@ -50,6 +50,20 @@ jswidgets.TableForm.prototype._init = function(model) {
   });
 
   this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
+
+  this.table.createTileForRow = function(row) {
+    var model = {
+      parent: this,
+      content: '<br><b>ID:</b> ' +
+        row.id + '<br><b>String Column:</b> ' +
+        row.cells[0].value + '<br><b>Number Column:</b> ' +
+        row.cells[1].value + '<br><b>Date Column:</b> ' +
+        row.cells[2].value + '<br><b>Boolean Column:</b> ' +
+        row.cells[3].value + '<br><b>Smart Column:</b> ' +
+        row.cells[4].value
+    };
+    return new scout.create('HtmlTile', model);
+  };
 };
 
 jswidgets.TableForm.prototype._onTargetPropertyChange = function(event) {

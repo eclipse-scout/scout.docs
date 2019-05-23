@@ -105,6 +105,10 @@ jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
   var groupingStyleField = this.widget('GroupingStyleField');
   groupingStyleField.setValue(this.table.groupingStyle);
   groupingStyleField.on('propertyChange', this._onGroupingStylePropertyChange.bind(this));
+
+  var tileModeField = this.widget('TileModeField');
+  tileModeField.setValue(this.table.tileMode);
+  tileModeField.on('propertyChange', this._onTileModePropertyChange.bind(this));
 };
 
 jswidgets.TablePropertiesBox.prototype._onAutoResizeColumnsPropertyChange = function(event) {
@@ -214,5 +218,11 @@ jswidgets.TablePropertiesBox.prototype._onCheckableStylePropertyChange = functio
 jswidgets.TablePropertiesBox.prototype._onGroupingStylePropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.table.setGroupingStyle(event.newValue);
+  }
+};
+
+jswidgets.TablePropertiesBox.prototype._onTileModePropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.table.setTileMode(event.newValue);
   }
 };
