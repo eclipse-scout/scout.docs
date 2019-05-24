@@ -28,7 +28,7 @@ jswidgets.SamplePageWithTableDetailTable.prototype._onAddRowMenuAction = functio
 };
 
 jswidgets.SamplePageWithTableDetailTable.prototype._onAddManyMenuAction = function() {
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < 10; i++) {
     this.insertRow(this._createRow());
   }
 };
@@ -38,10 +38,15 @@ jswidgets.SamplePageWithTableDetailTable.prototype._onDeleteRowMenuAction = func
 };
 
 jswidgets.SamplePageWithTableDetailTable.prototype._createRow = function() {
+  var strings = ['string 01', 'string 02', 'string 03', 'string 04', 'string 05'];
+  var randomNumber = Math.floor(Math.random() * strings.length);
+
   var row = {
     id: this.rows.length + 1,
-    string: 'string ' + (this.rows.length + 1),
-    number: Math.floor(Math.random() * Math.floor(999999)),
+    //    string: 'string ' + (this.rows.length + 1),
+    string: strings[randomNumber],
+//    number: Math.floor(Math.random() * Math.floor(999999)),
+    number: 2000,
     bool: Math.random() >= 0.5
   };
   return {
