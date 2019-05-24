@@ -50,6 +50,7 @@ WARNING: {NotReleasedWarning}
 * <<Rest Application Contributions (since 8.0.0.035)>>
 * <<Data Objects: Equals and HashCode (since 8.0.0.036)>>
 * <<New modules org.eclipse.scout.rt.dataobject and org.eclipse.scout.rt.dataobject.test (since 8.0.0.36)>>
+* <<DataObjectTestHelper deprecated, moved to ScoutAssert (since 8.0.0.036)>>
 
 === Obtaining the Latest Version
 
@@ -632,3 +633,10 @@ public final class PersonId extends AbstractUuId {
 
 === Serialization / Deserialization
 All instances of `IEnum` and `IId` may be used within data objects and automatically serialized to their JSON string representation and deserialized back to the correct Java class.
+
+== DataObjectTestHelper deprecated, moved to ScoutAssert (since 8.0.0.036)
+The `org.eclipse.scout.rt.testing.platform.dataobject.DataObjectTestHelper` was deprecated and a consolidated set of methods were moved to `org.eclipse.scout.rt.testing.platform.util.ScoutAssert`.
+Use the following methods to compare data objects:
+
+* `org.eclipse.scout.rt.testing.platform.util.ScoutAssert.assertEqualsWithComparisonFailure(Object, Object)`
+* `org.eclipse.scout.rt.testing.platform.util.ScoutAssert.assertEqualsWithComparisonFailure(Object, Object)`
