@@ -1,8 +1,8 @@
 package org.eclipse.scout.docs.snippets.dataobject;
 
-import org.eclipse.scout.rt.platform.dataobject.AttributeName;
-import org.eclipse.scout.rt.platform.dataobject.DoValue;
-import org.eclipse.scout.rt.platform.dataobject.TypeName;
+import org.eclipse.scout.rt.dataobject.AttributeName;
+import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 //tag::class[]
 @TypeName("ExampleEntityEx")

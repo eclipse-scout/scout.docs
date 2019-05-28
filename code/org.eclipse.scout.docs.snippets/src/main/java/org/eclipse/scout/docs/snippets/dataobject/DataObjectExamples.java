@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.eclipse.scout.rt.dataobject.DataObjectAttributeDescriptor;
+import org.eclipse.scout.rt.dataobject.DataObjectInventory;
+import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoEntityBuilder;
+import org.eclipse.scout.rt.dataobject.DoList;
+import org.eclipse.scout.rt.dataobject.IDataObject;
+import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.dataobject.enumeration.EnumName;
 import org.eclipse.scout.rt.dataobject.enumeration.EnumVersion;
 import org.eclipse.scout.rt.dataobject.enumeration.IEnum;
 import org.eclipse.scout.rt.dataobject.id.AbstractUuId;
 import org.eclipse.scout.rt.dataobject.id.IdTypeName;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.dataobject.DataObjectAttributeDescriptor;
-import org.eclipse.scout.rt.platform.dataobject.DataObjectInventory;
-import org.eclipse.scout.rt.platform.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.dataobject.DoEntityBuilder;
-import org.eclipse.scout.rt.platform.dataobject.DoList;
-import org.eclipse.scout.rt.platform.dataobject.IDataObject;
-import org.eclipse.scout.rt.platform.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.platform.util.Assertions.AssertionException;
 
 @SuppressWarnings("unused")

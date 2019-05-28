@@ -2,8 +2,8 @@ package org.eclipse.scout.docs.snippets.dataobject;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.rt.platform.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoValue;
 
 //tag::class[]
 public abstract class AbstractExampleEntityDo extends DoEntity {

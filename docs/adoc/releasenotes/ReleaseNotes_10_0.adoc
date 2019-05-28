@@ -119,3 +119,16 @@ The `Button` now supports the property `htmlEnabled` which allows to use HTML in
 
 image::{rnimgsdir}/button_html_enabled.png[]
 
+== Data Objects
+The Scout data object support was moved from the Scout platform to the module `org.eclipse.scout.rt.dataobject`.
+The package imports of all data object related classes therefore changed:
+From `org.eclipse.scout.rt.platform.dataobject` to `org.eclipse.scout.rt.dataobject`
+
+=== Renamings
+`org.eclipse.scout.rt.client.ui.desktop.datachange.DoChangeEvent` -> `org.eclipse.scout.rt.client.ui.desktop.datachange.ItemDataChangeEvent`
+
+=== Dependencies
+All modules which use data objects were extended with a dependency to `org.eclipse.scout.rt.dataobject`
+
+* `org.eclipse.scout.rt.rest`
+* `org.eclipse.scout.rt.mom.api`

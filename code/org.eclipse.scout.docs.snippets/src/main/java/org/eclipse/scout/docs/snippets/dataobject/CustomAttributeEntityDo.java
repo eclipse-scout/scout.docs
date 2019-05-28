@@ -4,12 +4,12 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.rt.platform.dataobject.AttributeName;
-import org.eclipse.scout.rt.platform.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.dataobject.DoValue;
-import org.eclipse.scout.rt.platform.dataobject.IValueFormatConstants;
-import org.eclipse.scout.rt.platform.dataobject.TypeName;
-import org.eclipse.scout.rt.platform.dataobject.ValueFormat;
+import org.eclipse.scout.rt.dataobject.AttributeName;
+import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.IValueFormatConstants;
+import org.eclipse.scout.rt.dataobject.TypeName;
+import org.eclipse.scout.rt.dataobject.ValueFormat;
 
 @TypeName("CustomAttributeEntity")
 public class CustomAttributeEntityDo extends DoEntity {
