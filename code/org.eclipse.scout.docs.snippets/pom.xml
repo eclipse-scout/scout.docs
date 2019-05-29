@@ -23,11 +23,11 @@
 
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipse.scout.docs.snippets</artifactId>
-  <version>9.0.0-SNAPSHOT</version>
+  <version>9.0.0.015_Simrel_2019_06_M3</version>
   <name>Snippets used in technical documentation of Eclipse Scout framework</name>
 
   <properties>
-    <org.eclipse.scout.rt.version>9.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>9.0.0.015_Simrel_2019_06_M3</org.eclipse.scout.rt.version>
   </properties>
 
   <dependencyManagement>
