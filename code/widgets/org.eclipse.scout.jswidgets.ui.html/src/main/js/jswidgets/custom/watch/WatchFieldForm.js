@@ -8,17 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-jswidgets.CustomFieldForm = function() {
-  jswidgets.CustomFieldForm.parent.call(this);
+jswidgets.WatchFieldForm = function() {
+  jswidgets.WatchFieldForm.parent.call(this);
 };
-scout.inherits(jswidgets.CustomFieldForm, scout.Form);
+scout.inherits(jswidgets.WatchFieldForm, scout.Form);
 
-jswidgets.CustomFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.CustomFieldForm');
+jswidgets.WatchFieldForm.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.WatchFieldForm');
 };
 
-jswidgets.CustomFieldForm.prototype._init = function(model) {
-  jswidgets.CustomFieldForm.parent.prototype._init.call(this, model);
+jswidgets.WatchFieldForm.prototype._init = function(model) {
+  jswidgets.WatchFieldForm.parent.prototype._init.call(this, model);
   var watchField = this.widget('WatchField');
 
   this.widget('FormFieldPropertiesBox').setField(watchField);
@@ -27,7 +27,7 @@ jswidgets.CustomFieldForm.prototype._init = function(model) {
   this.widget('EventsTab').setField(watchField);
 };
 
-jswidgets.CustomFieldForm.prototype._onSelectedTabChange = function(event) {
+jswidgets.WatchFieldForm.prototype._onSelectedTabChange = function(event) {
   if (event.propertyName === 'value') {
     if (event.newValue) {
       this.widget('TabBox').selectTabById(event.newValue);
@@ -37,7 +37,7 @@ jswidgets.CustomFieldForm.prototype._onSelectedTabChange = function(event) {
   }
 };
 
-jswidgets.CustomFieldForm.prototype._onFieldPropertyChange = function(event) {
+jswidgets.WatchFieldForm.prototype._onFieldPropertyChange = function(event) {
   if (event.propertyName === 'selectedTab') {
     this.widget('SelectedTabField').setValue((event.newValue) ? (event.newValue.id) : (null));
   }

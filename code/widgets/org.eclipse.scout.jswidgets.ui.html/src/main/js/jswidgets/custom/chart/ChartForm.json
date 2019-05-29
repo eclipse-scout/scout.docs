@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.CustomFieldForm",
+  "id": "jswidgets.ChartForm",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",
@@ -11,12 +11,22 @@
         "gridColumnCount": 1,
         "fields": [
           {
-            "id": "WatchField",
-            "objectType": "jswidgets.WatchField",
-            "label": "Watch",
+            "id": "ChartFormField",
+            "objectType": "jswidgets.ChartField",
+            "labelVisible": false,
+            "statusVisible": false,
+            "scrollable": false,
             "gridDataHints": {
-              "h": 5
+              "h": 5,
+              "useUiHeight": false
             }
+          }
+        ],
+        "menus": [
+          {
+            "id": "RandomDataMenu",
+            "objectType": "scout.Menu",
+            "text": "Random Data"
           }
         ]
       },
@@ -31,6 +41,29 @@
             "objectType": "TabItem",
             "label": "Properties",
             "fields": [
+              {
+                "id": "PropertiesBox",
+                "objectType": "GroupBox",
+                "gridColumnCount": 2,
+                "label": "Properties",
+                "labelVisible": false,
+                "borderVisible": false,
+                "fields": [
+                  {
+                    "id": "ChartTypeField",
+                    "objectType": "SmartField",
+                    "label": "Chart type",
+                    "lookupCall": "jswidgets.ChartTypeLookupCall"
+                  },
+                  {
+                    "id": "DataSeriesField",
+                    "objectType": "NumberField",
+                    "label": "# Dataseries",
+                    "maxValue": 10,
+                    "minValue": 2
+                  }
+                ]
+              },
               {
                 "id": "FormFieldPropertiesBox",
                 "objectType": "jswidgets.FormFieldPropertiesBox"
