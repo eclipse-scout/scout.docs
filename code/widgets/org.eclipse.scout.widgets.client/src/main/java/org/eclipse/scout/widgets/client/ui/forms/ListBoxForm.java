@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
@@ -168,6 +170,19 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
       @Order(20)
       public class DefaultField extends AbstractListBox<Color> {
+
+        @Override
+        protected void execInitField() {
+          getTable().addTableListener(evt -> {
+            ITableRow checkedRow = evt.getFirstRow();
+            if (!checkedRow.isChecked()) {
+              return;
+            }
+            getTable().getRows().stream()
+                .filter(row -> row != checkedRow)
+                .forEach(row -> getTable().uncheckRow(row));
+          }, TableEvent.TYPE_ROWS_CHECKED);
+        }
 
         @Override
         protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {

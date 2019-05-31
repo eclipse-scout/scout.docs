@@ -101,6 +101,7 @@
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/style/icons.js");
   __include("jswidgets/tabbox/DynamicTab.js");
+  __include("jswidgets/tabbox/TabAreaStyleLookupCall.js");
   __include("jswidgets/tabbox/TabBoxAddTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxDeleteTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxForm.js");
