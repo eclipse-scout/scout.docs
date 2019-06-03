@@ -56,11 +56,18 @@
                     "lookupCall": "jswidgets.ChartTypeLookupCall"
                   },
                   {
-                    "id": "DataSeriesField",
+                    "id": "DataArrayLengthField",
                     "objectType": "NumberField",
-                    "label": "# Dataseries",
+                    "label": "Data array length",
                     "maxValue": 10,
                     "minValue": 2
+                  },
+                  {
+                    "id": "DataSeriesCountField",
+                    "objectType": "NumberField",
+                    "label": "Data series count",
+                    "maxValue": 5,
+                    "minValue": 1
                   }
                 ]
               },

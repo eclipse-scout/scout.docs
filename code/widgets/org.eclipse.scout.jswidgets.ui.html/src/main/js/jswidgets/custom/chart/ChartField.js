@@ -38,7 +38,7 @@ jswidgets.ChartField.prototype._init = function(model) {
 };
 
 jswidgets.ChartField.prototype._render = function() {
-  this.addContainer(this.$parent, 'string-field', new scout.StringFieldLayout(this));
+  this.addContainer(this.$parent, 'chart-field', new scout.StringFieldLayout(this));
   this.addLabel();
   this.addMandatoryIndicator();
   this.chart.render();
