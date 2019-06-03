@@ -964,6 +964,10 @@ By default this property is set to 1 minute.
 By default has the same value as the config property `scout.devMode` meaning it is by default only enabled in development mode.
 |Boolean
 |Config Property
+|`scout.util.defaultDecimalSupportProvider`
+|Specifies the default DefaultDecimalSupportProvider to use. By default the 'DefaultDecimalSupportProvider' is used.
+|Fully qualified class name. The class must have `org.eclipse.scout.rt.platform.util.DECIMAL.DefaultDecimalSupportProvider` in its super hierarchy.
+|Config Property
 |`filter-exclude`
 |Comma separated list of simple URI patterns for which the `TrivialAccessController` should be excluded.
 |List of Strings
