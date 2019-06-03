@@ -119,6 +119,10 @@ The `Button` now supports the property `htmlEnabled` which allows to use HTML in
 
 image::{rnimgsdir}/button_html_enabled.png[]
 
+=== ImageField: Support for File Upload
+
+The `ImageField` has a new property `uploadEnabled`. When set to true, the field opens the native file chooser and performs a file upload.
+
 == Data Objects
 The Scout data object support was moved from the Scout platform to the module `org.eclipse.scout.rt.dataobject`.
 The package imports of all data object related classes therefore changed:
