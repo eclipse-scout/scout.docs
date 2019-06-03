@@ -131,6 +131,12 @@ image::{rnimgsdir}/button_html_enabled.png[]
 
 The `ImageField` has a new property `uploadEnabled`. When set to true, the field opens the native file chooser and performs a file upload.
 
+=== Mode Selector: Implemented alternative display style
+
+The mode selector now has a different appearance for the two field styles `IFormField.FIELD_STYLE_CLASSIC` and `IFormField.FIELD_STYLE_ALTERNATIVE`.
+
+image::{rnimgsdir}/mode_selector_field_style.png[]
+
 == Data Objects
 The Scout data object support was moved from the Scout platform to the module `org.eclipse.scout.rt.dataobject`.
 The package imports of all data object related classes therefore changed:
