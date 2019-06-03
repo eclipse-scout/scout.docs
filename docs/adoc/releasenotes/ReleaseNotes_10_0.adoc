@@ -89,6 +89,14 @@ In addition to the existing menu-bar position TOP and BOTTOM, the GroupBox now s
 
 image::{rnimgsdir}/group_box_menu_bar_in_title.png[]
 
+=== TabBox: New Tab Style
+The tab box has a new property `ITabBox.PROP_TAB_AREA_STYLE` with currently two possible tab styles.
+
+* `ITabBox.TAB_AREA_STYLE_DEFAULT`: Default appearance
+* `ITabBox.TAB_AREA_STYLE_SPREAD_EVEN`: This style will spread all the tabs over the available space. When using this style, all the menu will be pushed into the ellipse menu.
+
+image::{rnimgsdir}/tab_box_spread_even.png[]
+
 === TileGrid Groups: Show Loading State per Group
 
 Each Group in a TileGrid can now display a loading indicator in the group header individually. This is useful if each displayed
