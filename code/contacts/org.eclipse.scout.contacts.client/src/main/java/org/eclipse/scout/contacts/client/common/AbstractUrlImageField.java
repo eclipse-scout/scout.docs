@@ -1,7 +1,5 @@
 package org.eclipse.scout.contacts.client.common;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Set;
 
 import org.eclipse.scout.contacts.client.Icons;
@@ -14,11 +12,8 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ImageFieldMenuType;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 
 // tag::template[]
@@ -51,12 +46,18 @@ public class AbstractUrlImageField extends AbstractImageField {
   protected int getConfiguredGridH() {
     return 5;
   }
-  // end::template[]
+
+  @Override
+  protected boolean getConfiguredAutoFit() {
+    return true;
+  }
 
   @Override
   protected String getConfiguredImageId() {
     return Icons.Person;
   }
+
+  // end::template[]
 
   // tag::menu[]
   @Order(10)
@@ -70,7 +71,7 @@ public class AbstractUrlImageField extends AbstractImageField {
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
       return CollectionUtility.<IMenuType> hashSet(
-          ImageFieldMenuType.Image,
+          ImageFieldMenuType.ImageUrl,
           ImageFieldMenuType.Null);
     }
 
@@ -88,6 +89,7 @@ public class AbstractUrlImageField extends AbstractImageField {
 
       if (form.isFormStored()) { // <3>
         setUrl(form.getUrlField().getValue());
+        getForm().touch();
       }
     }
   }
@@ -95,27 +97,7 @@ public class AbstractUrlImageField extends AbstractImageField {
   // tag::template[]
 
   protected void updateImage() {
-    clearErrorStatus();
-
-    if (url == null) {
-      setImage(null);
-    }
-    else {
-      try {
-        setImage(IOUtility.readFromUrl(new URL((String) url)));
-        setAutoFit(true);
-      }
-      // end::template[]
-      catch (MalformedURLException e) {
-        addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
-      }
-      // tag::template[]
-      catch (Exception e) {
-        addErrorStatus(new Status(TEXTS.get("FailedToAccessImageFromUrl"), IStatus.WARNING));
-      }
-    }
-
-    getForm().touch();
+    setImageUrl(this.url);
   }
 // tag::menu[]
 }
