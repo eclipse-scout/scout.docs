@@ -27,7 +27,7 @@ import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.D
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.HomepageField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.NameField;
-import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.OpenInBrowserButton;
+import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.OpenInBrowserButtonBox.OpenInBrowserButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.GeneralBox.PictureField;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.OkButton;
 import org.eclipse.scout.contacts.shared.organization.IOrganizationService;
@@ -43,6 +43,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -213,36 +214,40 @@ public class OrganizationForm extends AbstractForm {
       // end::layout[]
 
       @Order(40)
-      public class OpenInBrowserButton extends AbstractLinkButton {
+      public class OpenInBrowserButtonBox extends AbstractSequenceBox {
 
-        @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 1;
-        }
+        @Order(10)
+        public class OpenInBrowserButton extends AbstractLinkButton {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("OpenInWebBrowser");
-        }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("OpenInWebBrowser");
+          }
 
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return HomepageField.class;
-        }
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.Organization;
+          }
 
-        @Override
-        protected boolean getConfiguredMasterRequired() {
-          return true;
-        }
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return HomepageField.class;
+          }
 
-        @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
-        }
+          @Override
+          protected boolean getConfiguredMasterRequired() {
+            return true;
+          }
 
-        @Override
-        protected void execClickAction() {
-          getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
+          }
         }
       }
       // tag::layout[]

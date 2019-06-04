@@ -59,6 +59,11 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
           return Icons.Event;
         }
 
+        @Override
+        protected boolean getConfiguredAutoResizeColumns() {
+          return true;
+        }
+
         public IdColumn getIdColumn() {
           return getColumnSet().getColumnByClass(IdColumn.class);
         }
