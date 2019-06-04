@@ -1,7 +1,5 @@
 package org.eclipse.scout.widgets.client;
 
-import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
-
 public final class WidgetsClientConfigProperties {
 
   public static class GitUrlConfigProperty extends AbstractStringConfigProperty {
@@ -36,7 +34,7 @@ public final class WidgetsClientConfigProperties {
 
     @Override
     public String getDefaultValue() {
-      return "releases/8.0.x";
+      return "releases/9.0.x";
     }
   }
 
