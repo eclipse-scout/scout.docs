@@ -9,12 +9,52 @@
       {
         "id": "DetailBox",
         "objectType": "GroupBox",
-        "gridColumnCount": 1,
+        "gridColumnCount": 3,
         "fields": [
           {
-            "id": "CallButton",
+            "id": "GetButton",
             "objectType": "Button",
-            "label": "Call the server",
+            "label": "Do a GET request",
+            "processButton": false,
+            "gridDataHints": {
+              "useUiWidth": true,
+              "weightX": 0
+            }
+          },
+          {
+            "id": "PostButton",
+            "objectType": "Button",
+            "label": "Do a POST request",
+            "processButton": false,
+            "gridDataHints": {
+              "useUiWidth": true,
+              "weightX": 0
+            }
+          },
+          {
+            "id": "PutButton",
+            "objectType": "Button",
+            "label": "Do a PUT request",
+            "processButton": false,
+            "gridDataHints": {
+              "useUiWidth": true,
+              "weightX": 0
+            }
+          },
+          {
+            "id": "DeleteButton",
+            "objectType": "Button",
+            "label": "Do a DELETE request",
+            "processButton": false,
+            "gridDataHints": {
+              "useUiWidth": true,
+              "weightX": 0
+            }
+          },
+          {
+            "id": "FailButton",
+            "objectType": "Button",
+            "label": "Do a failing request",
             "processButton": false
           },
           {
@@ -25,6 +65,7 @@
             "enabled": false,
             "multilineText": true,
             "gridDataHints": {
+              "w": 3,
               "h": 3
             }
           }
