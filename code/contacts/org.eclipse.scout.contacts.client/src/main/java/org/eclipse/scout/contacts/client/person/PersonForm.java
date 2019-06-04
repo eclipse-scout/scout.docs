@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -70,10 +68,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
-import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -274,12 +269,17 @@ public class PersonForm extends AbstractForm {
         protected int getConfiguredGridH() {
           return 5;
         }
-        // end::pictureField[]
+
+        @Override
+        protected boolean getConfiguredAutoFit() {
+          return true;
+        }
 
         @Override
         protected String getConfiguredImageId() {
           return Icons.Person;
         }
+        // end::pictureField[]
 
         @Order(10)
         public class EditURLMenu extends AbstractMenu {
@@ -309,26 +309,7 @@ public class PersonForm extends AbstractForm {
         // tag::pictureField[]
 
         protected void updateImage(String url) {
-          clearErrorStatus(); // <4>
-
-          if (url == null) {
-            setImage(null);
-          }
-          else {
-            try {
-              setImage(IOUtility.readFromUrl(new URL((String) url)));
-              setAutoFit(true);
-            }
-            // end::pictureField[]
-            catch (MalformedURLException e) {
-              addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
-            }
-            // tag::pictureField[]
-            catch (Exception e) { // <5>
-              String message = TEXTS.get("FailedToAccessImageFromUrl");
-              addErrorStatus(new Status(message, IStatus.WARNING));
-            }
-          }
+          setImageUrl(url);
         }
       }
       // end::pictureField[]
