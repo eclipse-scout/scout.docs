@@ -63,6 +63,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
@@ -203,36 +204,40 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(30)
-      public class OpenHomepageButton extends AbstractLinkButton {
+      public class OpenHomepageButtonBox extends AbstractSequenceBox {
 
-        @Override
-        protected int getConfiguredHorizontalAlignment() {
-          return 1;
-        }
+        @Order(10)
+        public class OpenHomepageButton extends AbstractLinkButton {
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("OpenHomepage");
-        }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("OpenHomepage");
+          }
 
-        @Override
-        protected Class<? extends IValueField> getConfiguredMasterField() {
-          return HomepageField.class;
-        }
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.Organization;
+          }
 
-        @Override
-        protected boolean getConfiguredMasterRequired() {
-          return true;
-        }
+          @Override
+          protected Class<? extends IValueField> getConfiguredMasterField() {
+            return HomepageField.class;
+          }
 
-        @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
-        }
+          @Override
+          protected boolean getConfiguredMasterRequired() {
+            return true;
+          }
 
-        @Override
-        protected void execClickAction() {
-          getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            getDesktop().openUri(getHomepageField().getValue(), OpenUriAction.NEW_WINDOW);
+          }
         }
       }
 
@@ -324,6 +329,11 @@ public class EventForm extends AbstractForm {
             @Override
             protected Class<? extends IMenu> getConfiguredDefaultMenu() {
               return EditMenu.class;
+            }
+
+            @Override
+            protected boolean getConfiguredAutoResizeColumns() {
+              return true;
             }
 
             public OrganizationColumn getOrganizationColumn() {

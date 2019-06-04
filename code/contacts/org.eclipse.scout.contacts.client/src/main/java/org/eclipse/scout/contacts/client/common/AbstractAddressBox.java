@@ -10,8 +10,10 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
+import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.CityField;
 import org.eclipse.scout.contacts.client.common.AbstractAddressBox.LocationBox.CountryField;
+import org.eclipse.scout.contacts.client.common.AbstractAddressBox.ShowOnMapButtonBox.ShowOnMapButton;
 import org.eclipse.scout.contacts.shared.common.AbstractAddressBoxData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.DefaultSubtypeSdkCommand;
@@ -22,6 +24,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -147,40 +150,43 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
   }
 
   @Order(3000)
-  public class ShowOnMapButton extends AbstractLinkButton {
+  public class ShowOnMapButtonBox extends AbstractSequenceBox {
 
-    @Override
-    protected int getConfiguredHorizontalAlignment() {
-      return 1;
-    }
+    @Order(1000)
+    public class ShowOnMapButton extends AbstractLinkButton {
 
-    @Override
-    protected String getConfiguredLabel() {
-      return TEXTS.get("ShowOnMap");
-    }
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("ShowOnMap");
+      }
 
-    @Override
-    protected Class<? extends IValueField> getConfiguredMasterField() {
-      return CountryField.class;
-    }
+      @Override
+      protected String getConfiguredIconId() {
+        return Icons.World;
+      }
 
-    @Override
-    protected boolean getConfiguredMasterRequired() {
-      return true;
-    }
+      @Override
+      protected Class<? extends IValueField> getConfiguredMasterField() {
+        return CountryField.class;
+      }
 
-    @Override
-    protected boolean getConfiguredProcessButton() {
-      return false;
-    }
+      @Override
+      protected boolean getConfiguredMasterRequired() {
+        return true;
+      }
 
-    @Override
-    protected void execClickAction() {
-      MapForm mapForm = new MapForm();
-      mapForm.setStreet(getStreetField().getValue());
-      mapForm.setCity(getCityField().getValue());
-      mapForm.setCountry(getCountryField().getValue());
-      mapForm.startModify();
+      @Override
+      protected boolean getConfiguredProcessButton() {
+        return false;
+      }
+
+      @Override
+      protected void execClickAction() {
+        BEANS.get(MapHelper.class).showMapInNewWindow(
+            getCountryField().getValue(),
+            getCityField().getValue(),
+            getStreetField().getValue());
+      }
     }
   }
 
