@@ -1,6 +1,7 @@
 widgets.ChartField = function() {
   widgets.ChartField.parent.call(this);
   this.chart = null;
+  this.chartData = null;
 };
 scout.inherits(widgets.ChartField, scout.ValueField);
 
@@ -22,7 +23,7 @@ widgets.ChartField.prototype._render = function() {
 widgets.ChartField.prototype._renderProperties = function() {
   widgets.ChartField.parent.prototype._renderProperties.call(this);
   this._renderConfig();
-  this._renderValue();
+  this._renderChartData();
 };
 
 widgets.ChartField.prototype._remove = function() {
@@ -33,16 +34,18 @@ widgets.ChartField.prototype._remove = function() {
   }
 };
 
-widgets.ChartField.prototype._renderValue = function() {
-  if (!this.value) {
+widgets.ChartField.prototype._renderChartData = function() {
+  if (!this.chartData) {
     return;
   }
-  var datasets = this.value.map(function(data) {
-    return {
-      data: data
-    };
-  });
-  $.extend(true, this.config.data.datasets, datasets);
+
+  if (this.chartData.updateDatasets) {
+    $.extend(true, this.config.data.datasets, this.chartData.datasets);
+  } else {
+    this.config.data.datasets = this.chartData.datasets;
+  }
+
+  this.config.data.labels = this.chartData.labels;
   this.chart.update();
 };
 
@@ -62,5 +65,5 @@ widgets.ChartField.prototype._renderConfig = function() {
     this.chart.destroy();
   }
   this.chart = new Chart(this.$field[0], this.config); // jshint ignore:line
-  this._renderValue();
+  this._renderChartData();
 };

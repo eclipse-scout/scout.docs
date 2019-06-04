@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-import org.eclipse.scout.rt.client.ui.form.fields.AbstractValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.platform.util.Assertions;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractChartField extends AbstractValueField<int[][]> implements IChartField {
+public abstract class AbstractChartField extends AbstractFormField implements IChartField {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractChartField.class);
 
   // keep the reference since property support uses WeakReferences.
@@ -89,6 +89,16 @@ public abstract class AbstractChartField extends AbstractValueField<int[][]> imp
   @Override
   public String getConfig() {
     return propertySupport.getPropertyString(PROP_CONFIG);
+  }
+
+  @Override
+  public void setChartData(ChartDataDo chartData) {
+    propertySupport.setProperty(PROP_CHART_DATA, chartData);
+  }
+
+  @Override
+  public ChartDataDo getChartData() {
+    return (ChartDataDo) propertySupport.getProperty(PROP_CHART_DATA);
   }
 
 }

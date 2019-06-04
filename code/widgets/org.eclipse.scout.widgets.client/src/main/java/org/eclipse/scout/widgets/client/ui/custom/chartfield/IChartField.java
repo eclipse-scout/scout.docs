@@ -10,11 +10,14 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.custom.chartfield;
 
-import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import java.net.URL;
 
-public interface IChartField extends IValueField<int[][]> {
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+
+public interface IChartField extends IFormField {
 
   String PROP_CONFIG = "config";
+  String PROP_CHART_DATA = "chartData";
   String PROP_CONFIG_FILE = "configFile";
 
   String getConfig();
@@ -32,5 +35,9 @@ public interface IChartField extends IValueField<int[][]> {
    * calls {@link IChartField#setConfig(String)} with the parsed content of the given file.
    */
   void setConfigFile(String configFile);
+
+  ChartDataDo getChartData();
+
+  void setChartData(ChartDataDo chartData);
 
 }
