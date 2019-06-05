@@ -63,13 +63,13 @@ jswidgets.RestForm.prototype._onPutButtonClick = function(event) {
 };
 
 jswidgets.RestForm.prototype._onDeleteButtonClick = function(event) {
-  scout.ajax.deleteJson('api/example')
+  scout.ajax.removeJson('api/example')
     .then(this._onSuccess.bind(this))
     .catch(this._onFail.bind(this));
 };
 
 jswidgets.RestForm.prototype._onFailButtonClick = function(event) {
-  scout.ajax.deleteJson('api/notexistingurl')
+  scout.ajax.get('api/notexistingurl')
     .then(this._onSuccess.bind(this))
     .catch(this._onFail.bind(this));
 };
