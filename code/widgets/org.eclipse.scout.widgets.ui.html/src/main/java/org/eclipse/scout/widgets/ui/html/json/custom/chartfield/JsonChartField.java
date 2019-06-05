@@ -6,6 +6,7 @@ import org.eclipse.scout.rt.ui.html.IUiSession;
 import org.eclipse.scout.rt.ui.html.json.IJsonAdapter;
 import org.eclipse.scout.rt.ui.html.json.JsonProperty;
 import org.eclipse.scout.rt.ui.html.json.form.fields.JsonFormField;
+import org.eclipse.scout.widgets.client.ui.custom.chartfield.ChartConfigDo;
 import org.eclipse.scout.widgets.client.ui.custom.chartfield.ChartDataDo;
 import org.eclipse.scout.widgets.client.ui.custom.chartfield.IChartField;
 import org.json.JSONArray;
@@ -25,10 +26,15 @@ public class JsonChartField extends JsonFormField<IChartField> {
   @Override
   protected void initJsonProperties(IChartField model) {
     super.initJsonProperties(model);
-    putJsonProperty(new JsonProperty<IChartField>(IChartField.PROP_CONFIG, model) {
+    putJsonProperty(new JsonProperty<IChartField>(IChartField.PROP_CHART_CONFIG, model) {
       @Override
-      protected String modelValue() {
-        return getModel().getConfig();
+      protected ChartConfigDo modelValue() {
+        return getModel().getChartConfig();
+      }
+
+      @Override
+      public Object prepareValueForToJson(Object value) {
+        return new JSONObject(BEANS.get(IDataObjectMapper.class).writeValue(value));
       }
     });
     putJsonProperty(new JsonProperty<IChartField>(IChartField.PROP_CHART_DATA, model) {
@@ -39,8 +45,7 @@ public class JsonChartField extends JsonFormField<IChartField> {
 
       @Override
       public Object prepareValueForToJson(Object value) {
-        String json = BEANS.get(IDataObjectMapper.class).writeValue(value);
-        return new JSONObject(json);
+        return new JSONObject(BEANS.get(IDataObjectMapper.class).writeValue(value));
       }
     });
   }

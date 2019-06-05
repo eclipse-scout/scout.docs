@@ -10,34 +10,37 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.ui.custom.chartfield;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.Assertions;
 
 public interface IChartField extends IFormField {
 
-  String PROP_CONFIG = "config";
+  String PROP_CHART_CONFIG = "chartConfig";
   String PROP_CHART_DATA = "chartData";
-  String PROP_CONFIG_FILE = "configFile";
 
-  String getConfig();
+  ChartConfigDo getChartConfig();
 
   /**
    * @param config
    *          JSON format of the chart configuration without data attribute.
    * @see {@link URL https://www.chartjs.org/docs/latest/}
    */
-  void setConfig(String config);
+  void setChartConfig(String chartConfig);
 
-  String getConfigFile();
-
-  /**
-   * calls {@link IChartField#setConfig(String)} with the parsed content of the given file.
-   */
-  void setConfigFile(String configFile);
+  void setChartConfig(ChartConfigDo chartConfig);
 
   ChartDataDo getChartData();
 
   void setChartData(ChartDataDo chartData);
+
+  public static ChartConfigDo readChartConfig(InputStream is) {
+    Assertions.assertNotNull(is);
+    return BEANS.get(IDataObjectMapper.class).readValue(is, ChartConfigDo.class);
+  }
 
 }

@@ -2,12 +2,13 @@ widgets.ChartField = function() {
   widgets.ChartField.parent.call(this);
   this.chart = null;
   this.chartData = null;
+  this.chartConfig = null;
 };
 scout.inherits(widgets.ChartField, scout.ValueField);
 
 widgets.ChartField.prototype._init = function(model) {
   widgets.ChartField.parent.prototype._init.call(this, model);
-  this._setConfig(this.config);
+  this._setChartConfig(this.chartConfig);
 };
 
 widgets.ChartField.prototype._render = function() {
@@ -22,7 +23,7 @@ widgets.ChartField.prototype._render = function() {
 
 widgets.ChartField.prototype._renderProperties = function() {
   widgets.ChartField.parent.prototype._renderProperties.call(this);
-  this._renderConfig();
+  this._renderChartConfig();
   this._renderChartData();
 };
 
@@ -40,30 +41,30 @@ widgets.ChartField.prototype._renderChartData = function() {
   }
 
   if (this.chartData.updateDatasets) {
-    $.extend(true, this.config.data.datasets, this.chartData.datasets);
+    $.extend(true, this.chartConfig.data.datasets, this.chartData.datasets);
   } else {
-    this.config.data.datasets = this.chartData.datasets;
+    this.chartConfig.data.datasets = this.chartData.datasets;
   }
 
-  this.config.data.labels = this.chartData.labels;
+  this.chartConfig.data.labels = this.chartData.labels;
   this.chart.update();
 };
 
-widgets.ChartField.prototype.setConfig = function(config) {
-  this.setProperty('config', config);
+widgets.ChartField.prototype.setChartConfig = function(chartConfig) {
+  this.setProperty('chartConfig', chartConfig);
 };
 
-widgets.ChartField.prototype._setConfig = function(config) {
-  if (typeof config === 'string') {
-    config = JSON.parse(config);
+widgets.ChartField.prototype._setChartConfig = function(chartConfig) {
+  if (typeof chartConfig === 'string') {
+    chartConfig = JSON.parse(chartConfig);
   }
-  this._setProperty('config', config);
+  this._setProperty('chartConfig', chartConfig);
 };
 
-widgets.ChartField.prototype._renderConfig = function() {
+widgets.ChartField.prototype._renderChartConfig = function() {
   if (this.chart) {
     this.chart.destroy();
   }
-  this.chart = new Chart(this.$field[0], this.config); // jshint ignore:line
+  this.chart = new Chart(this.$field[0], this.chartConfig); // jshint ignore:line
   this._renderChartData();
 };

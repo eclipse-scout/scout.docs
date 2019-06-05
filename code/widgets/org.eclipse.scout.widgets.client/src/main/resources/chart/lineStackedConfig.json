@@ -20,6 +20,9 @@
       }
     },
     "scales": {
+      "yAxes": [{
+        "stacked": true
+      }],
       "xAxes": [{
         "gridLines": false
       }]
