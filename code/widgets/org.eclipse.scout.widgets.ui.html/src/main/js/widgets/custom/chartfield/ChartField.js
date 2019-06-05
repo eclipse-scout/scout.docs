@@ -4,7 +4,7 @@ widgets.ChartField = function() {
   this.chartData = null;
   this.chartConfig = null;
 };
-scout.inherits(widgets.ChartField, scout.ValueField);
+scout.inherits(widgets.ChartField, scout.FormField);
 
 widgets.ChartField.prototype._init = function(model) {
   widgets.ChartField.parent.prototype._init.call(this, model);
@@ -16,9 +16,14 @@ widgets.ChartField.prototype._render = function() {
   this.addLabel();
   this.addMandatoryIndicator();
 
-  var $field = this.$container.appendElement('<canvas>', 'chart');
-  this.addField($field);
+  // The additional DIV is required because Chart.js has its own resize handler which
+  // checks the parent element in the DOM to find its dimensions. And since we use absolute
+  // positioning in the FormField layout, Chart.js would calculate a wrong size for the
+  // canvas element.
+  this.addFieldContainer(this.$parent.makeDiv());
+  this.addField(this.$fieldContainer.appendElement('<canvas>', 'chart'));
 
+  this.addStatus();
 };
 
 widgets.ChartField.prototype._renderProperties = function() {

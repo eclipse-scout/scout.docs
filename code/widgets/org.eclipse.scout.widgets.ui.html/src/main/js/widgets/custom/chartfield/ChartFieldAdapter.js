@@ -11,5 +11,5 @@
 widgets.ChartFieldAdapter = function() {
   widgets.ChartFieldAdapter.parent.call(this);
 };
-scout.inherits(widgets.ChartFieldAdapter, scout.ValueFieldAdapter);
+scout.inherits(widgets.ChartFieldAdapter, scout.FormFieldAdapter);
 
