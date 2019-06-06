@@ -8,6 +8,10 @@
     <scout:stylesheet src="res/widgets-all-macro.less" />
     <scout:script src="res/libs-all-macro.js" />
     <scout:script src="res/widgets-all-macro.js" />
+
+    <!-- include as regular script, because Chart.js breaks the YUI minifier -->
+    <scout:script src="res/chartjs/Chart.js" />
+
     <scout:script src="res/index.js" />
   </head>
   <body>
