@@ -26,6 +26,10 @@ jswidgets.CheckBoxFieldForm.prototype._init = function(model) {
   triStateEnabledField.setValue(field.triStateEnabled);
   triStateEnabledField.on('propertyChange', this._onTriStateEnabledPropertyChange.bind(this));
 
+  var wrapTextEnabledField = this.widget('WrapTextField');
+  wrapTextEnabledField.setValue(field.wrapText);
+  wrapTextEnabledField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
+
   var keyStrokeField = this.widget('KeyStrokeField');
   keyStrokeField.setValue(field.keyStroke);
   keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
@@ -40,6 +44,12 @@ jswidgets.CheckBoxFieldForm.prototype._init = function(model) {
 jswidgets.CheckBoxFieldForm.prototype._onTriStateEnabledPropertyChange = function(event) {
   if (event.propertyName === 'value') {
     this.widget('CheckBoxField').setTriStateEnabled(event.newValue);
+  }
+};
+
+jswidgets.CheckBoxFieldForm.prototype._onWrapTextPropertyChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.widget('CheckBoxField').setWrapText(event.newValue);
   }
 };
 

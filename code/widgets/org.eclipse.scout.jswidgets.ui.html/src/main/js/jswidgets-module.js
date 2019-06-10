@@ -16,6 +16,10 @@
   __include("jswidgets/button/ButtonForm.js");
   __include("jswidgets/button/ButtonDisplayStyleLookupCall.js");
   __include("jswidgets/carousel/CarouselForm.js");
+  __include("jswidgets/custom/chart/Chart.js");
+  __include("jswidgets/custom/chart/ChartField.js");
+  __include("jswidgets/custom/chart/ChartForm.js");
+  __include("jswidgets/custom/chart/ChartTypeLookupCall.js");
   __include("jswidgets/common/ConfigurationBox.js");
   __include("jswidgets/common/EventsTab.js");
   __include("jswidgets/common/FormFieldLookupCall.js");
@@ -39,9 +43,9 @@
   __include("jswidgets/formfield/StatusPositionLookupCall.js");
   __include("jswidgets/valuefield/ClearableStyleLookupCall.js");
   __include("jswidgets/valuefield/ValueFieldPropertiesBox.js");
-  __include("jswidgets/custom/CustomFieldForm.js");
-  __include("jswidgets/custom/WatchField.js");
-  __include("jswidgets/custom/WatchFieldLayout.js");
+  __include("jswidgets/custom/watch/WatchFieldForm.js");
+  __include("jswidgets/custom/watch/WatchField.js");
+  __include("jswidgets/custom/watch/WatchFieldLayout.js");
   __include("jswidgets/datefield/DateFieldForm.js");
   __include("jswidgets/desktop/WidgetsOutline.js");
   __include("jswidgets/desktop/WidgetsOutlineOverview.js");
@@ -97,6 +101,7 @@
   __include("jswidgets/stringfield/StringFormatLookupCall.js");
   __include("jswidgets/style/icons.js");
   __include("jswidgets/tabbox/DynamicTab.js");
+  __include("jswidgets/tabbox/TabAreaStyleLookupCall.js");
   __include("jswidgets/tabbox/TabBoxAddTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxDeleteTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxForm.js");

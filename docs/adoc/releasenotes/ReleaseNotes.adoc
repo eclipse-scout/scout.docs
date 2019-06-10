@@ -4,9 +4,10 @@ include::../_initDoc.adoc[]
 endif::finaldoc[]
 
 // Fallback for safe mode == secure:
-:imgsdir: ../../imgs
 :codedir: ../../../code
 ifndef::mdledir[:mdledir: .]
+ifndef::rndir[:rndir: .]
+ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 :experimental:
 
 // Constants

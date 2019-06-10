@@ -47,6 +47,12 @@
                     "labelVisible": false
                   },
                   {
+                    "id": "WrapTextField",
+                    "objectType": "CheckBoxField",
+                    "label": "Wrap Text",
+                    "labelVisible": false
+                  },
+                  {
                     "id": "KeyStrokeField",
                     "objectType": "StringField",
                     "label": "Key Stroke"

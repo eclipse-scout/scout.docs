@@ -119,9 +119,28 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
+
+        @Override
+        protected String getConfiguredFieldStyle() {
+          return FIELD_STYLE_CLASSIC;
+        }
       }
 
       @Order(20)
+      public class AlternativeModeSelectorGroup extends AbstractExampleModeSelectorGroup {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Alternative");
+        }
+
+        @Override
+        protected String getConfiguredFieldStyle() {
+          return FIELD_STYLE_ALTERNATIVE;
+        }
+      }
+
+      @Order(30)
       public class DisabledModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override
@@ -135,7 +154,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30)
+      @Order(40)
       public class StyledModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override

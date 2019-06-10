@@ -2,15 +2,22 @@ package org.eclipse.scout.docs.snippets.dataobject;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import org.eclipse.scout.rt.dataobject.DataObjectAttributeDescriptor;
+import org.eclipse.scout.rt.dataobject.DataObjectInventory;
+import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoEntityBuilder;
+import org.eclipse.scout.rt.dataobject.DoList;
+import org.eclipse.scout.rt.dataobject.IDataObject;
+import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
+import org.eclipse.scout.rt.dataobject.enumeration.EnumName;
+import org.eclipse.scout.rt.dataobject.enumeration.EnumVersion;
+import org.eclipse.scout.rt.dataobject.enumeration.IEnum;
+import org.eclipse.scout.rt.dataobject.id.AbstractUuId;
+import org.eclipse.scout.rt.dataobject.id.IdTypeName;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.dataobject.DataObjectAttributeDescriptor;
-import org.eclipse.scout.rt.platform.dataobject.DataObjectInventory;
-import org.eclipse.scout.rt.platform.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.dataobject.DoEntityBuilder;
-import org.eclipse.scout.rt.platform.dataobject.DoList;
-import org.eclipse.scout.rt.platform.dataobject.IDataObject;
-import org.eclipse.scout.rt.platform.dataobject.IDataObjectMapper;
+import org.eclipse.scout.rt.platform.util.Assertions.AssertionException;
 
 @SuppressWarnings("unused")
 public class DataObjectExamples {
@@ -170,4 +177,77 @@ public class DataObjectExamples {
         (key, value) -> System.out.println("Attribute " + key + " type " + value.getType()));
     //end::accessInventory[]
   }
+
+  //tag::exampleEnum[]
+  @EnumName("scout.FixtureEnum")
+  @EnumVersion("scout-8.0.0.036")
+  public enum ExampleEnum implements IEnum {
+
+    ONE("one"),
+    TWO("two"),
+    THREE("three");
+
+    private final String m_stringValue;
+
+    private ExampleEnum(String stringValue) {
+      m_stringValue = stringValue;
+    }
+
+    @Override
+    public String stringValue() {
+      return m_stringValue;
+    }
+
+    public static final ExampleEnum resolve(String value) { // <1>
+      // custom null handling
+      if (value == null) {
+        return null;
+      }
+      switch (value) {
+        // custom handling of old values (assuming 'old' was used in earlier revisions)
+        case "one":
+          return ONE;
+        case "two":
+          return TWO;
+        case "three":
+          return THREE;
+        case "four":
+          return THREE;
+        default:
+          // custom handling of unknown values
+          throw new AssertionException("unsupported status value '{}'", value);
+      }
+    }
+
+  }
+  //end::exampleEnum[]
+
+  //tag::exampleId[]
+  @IdTypeName("FixtureUuId")
+  public static final class ExampleId extends AbstractUuId {
+    private static final long serialVersionUID = 1L;
+
+    public static ExampleId create() {
+      return new ExampleId(UUID.randomUUID());
+    }
+
+    public static ExampleId of(UUID id) {
+      if (id == null) {
+        return null;
+      }
+      return new ExampleId(id);
+    }
+
+    public static ExampleId of(String id) {
+      if (id == null) {
+        return null;
+      }
+      return new ExampleId(UUID.fromString(id));
+    }
+
+    private ExampleId(UUID id) {
+      super(id);
+    }
+  }
+  //end::exampleId[]
 }

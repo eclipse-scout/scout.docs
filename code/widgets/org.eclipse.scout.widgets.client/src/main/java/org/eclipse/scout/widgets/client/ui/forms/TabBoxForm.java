@@ -29,12 +29,16 @@ import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholde
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
+import org.eclipse.scout.rt.client.ui.form.fields.tabbox.ITabBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.BooleanUtility;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.ConfigurationBox.TabAreaStyleSpreadEvenField;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox;
 import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm.MainBox.FieldVisibilityBox.Placeholder1Field;
@@ -122,6 +126,14 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
 
   public AddTabButton getAddTabButton() {
     return getFieldByClass(AddTabButton.class);
+  }
+
+  public ConfigurationBox getConfigurationBox() {
+    return getFieldByClass(ConfigurationBox.class);
+  }
+
+  public TabAreaStyleSpreadEvenField getTabAreaStyleSpreadEvenField() {
+    return getFieldByClass(TabAreaStyleSpreadEvenField.class);
   }
 
   public Placeholder1Field getPlaceholder1Field() {
@@ -280,6 +292,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       public class AddTabContainerMenu extends AbstractFormFieldMenu {
 
         @Override
+        protected boolean getConfiguredStackable() {
+          return false;
+        }
+
+        @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.hashSet(TabBoxMenuType.Header);
         }
@@ -363,6 +380,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredStackable() {
+          return false;
+        }
+
+        @Override
         protected byte getConfiguredHorizontalAlignment() {
           return HORIZONTAL_ALIGNMENT_RIGHT;
         }
@@ -379,6 +401,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected byte getConfiguredHorizontalAlignment() {
           return HORIZONTAL_ALIGNMENT_RIGHT;
+        }
+
+        @Override
+        protected boolean getConfiguredStackable() {
+          return false;
         }
 
         @Override
@@ -418,6 +445,29 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected byte getConfiguredHorizontalAlignment() {
           return HORIZONTAL_ALIGNMENT_RIGHT;
+        }
+      }
+    }
+
+    @Order(25)
+    @ClassId("bb4d6161-e629-40be-aa9b-c60f815479b6")
+    public class ConfigurationBox extends AbstractGroupBox {
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Configuration");
+      }
+
+      @Order(1000)
+      @ClassId("43b3ad4e-ea75-4bbc-8497-67c34b5fceb3")
+      public class TabAreaStyleSpreadEvenField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Spread Tabs evenly";
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTabBox().setTabAreaStyle(BooleanUtility.nvl(getValue()) ? ITabBox.TAB_AREA_STYLE_SPREAD_EVEN : ITabBox.TAB_AREA_STYLE_DEFAULT);
         }
       }
     }

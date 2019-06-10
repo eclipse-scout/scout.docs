@@ -1,5 +1,5 @@
 {
-  "id": "jswidgets.CustomFieldForm",
+  "id": "jswidgets.WatchFieldForm",
   "displayHint": "view",
   "rootGroupBox": {
     "id": "MainBox",

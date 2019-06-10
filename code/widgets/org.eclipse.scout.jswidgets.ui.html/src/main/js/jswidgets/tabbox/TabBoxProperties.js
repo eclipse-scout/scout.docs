@@ -39,6 +39,9 @@ jswidgets.TabBoxProperties.prototype._setTabBox = function(tabBox) {
   this.selectedTabField.lookupCall = new jswidgets.TabItemLookupCall(this.tabBox);
   this.selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
+  this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
+  this.tabAreaStyleField.on('propertyChange', this._onTabAreaStyleChange.bind(this));
+
   this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
   this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
 
@@ -48,6 +51,12 @@ jswidgets.TabBoxProperties.prototype._setTabBox = function(tabBox) {
 jswidgets.TabBoxProperties.prototype._onSelectedTabChange = function(event) {
   if (event.propertyName === 'value') {
     this.tabBox.setSelectedTab(event.newValue);
+  }
+};
+
+jswidgets.TabBoxProperties.prototype._onTabAreaStyleChange = function(event) {
+  if (event.propertyName === 'value') {
+    this.tabBox.setTabAreaStyle(event.newValue);
   }
 };
 

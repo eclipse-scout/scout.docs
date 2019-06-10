@@ -1,0 +1,31 @@
+{
+  "type": "line",
+  "data": {},
+  "options": {
+    "maintainAspectRatio": false,
+    "legend": {
+      "position": "left"
+    },
+    "elements": {
+      "arc": {
+        "borderWidth": 1
+      }
+    },
+    "layout": {
+      "padding": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "scales": {
+      "yAxes": [{
+        "stacked": true
+      }],
+      "xAxes": [{
+        "gridLines": false
+      }]
+    }
+  }
+}

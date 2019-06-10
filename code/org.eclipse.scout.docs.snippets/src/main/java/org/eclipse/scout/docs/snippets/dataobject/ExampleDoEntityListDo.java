@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
-import org.eclipse.scout.rt.platform.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.dataobject.DoList;
-import org.eclipse.scout.rt.platform.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoList;
+import org.eclipse.scout.rt.dataobject.DoValue;
 
 //tag::class[]
 public class ExampleDoEntityListDo extends DoEntity {

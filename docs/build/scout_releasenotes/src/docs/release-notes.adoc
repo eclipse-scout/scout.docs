@@ -9,12 +9,13 @@ include::_initDoc.adoc[]
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
 ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
+ifndef::rndir[:rndir: {mdledir}/releasenotes]
 :experimental:
 
 :toc: left
 
 //:numbered:
 
-include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
+include::{rndir}/ReleaseNotes.adoc[]
 
 include::{mdledir}/_footer.adoc[]
