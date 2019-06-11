@@ -17,7 +17,7 @@ jswidgets.EditableTableForm.prototype._init = function(model) {
   jswidgets.EditableTableForm.parent.prototype._init.call(this, model);
 
   this.table.columns.forEach(function(column) {
-    if (column.id === 'IconColumn') {
+    if (column.id === 'IconColumn' || column.id === 'HtmlColumn') {
       return;
     }
     column.setEditable(true);

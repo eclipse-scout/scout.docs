@@ -10,15 +10,13 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.person;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
-import org.eclipse.scout.contacts.client.common.MapForm;
+import org.eclipse.scout.contacts.client.common.MapHelper;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox;
@@ -26,6 +24,7 @@ import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.Co
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox.LocationBox.CityField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox.LocationBox.CountryField;
+import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.AddressBox.ShowOnMapButtonBox.ShowOnMapButton;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.EmailField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.MobileField;
 import org.eclipse.scout.contacts.client.person.PersonForm.MainBox.DetailsBox.ContactInfoBox.PhoneField;
@@ -69,10 +68,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.VetoException;
-import org.eclipse.scout.rt.platform.status.IStatus;
-import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -273,12 +269,17 @@ public class PersonForm extends AbstractForm {
         protected int getConfiguredGridH() {
           return 5;
         }
-        // end::pictureField[]
+
+        @Override
+        protected boolean getConfiguredAutoFit() {
+          return true;
+        }
 
         @Override
         protected String getConfiguredImageId() {
           return Icons.Person;
         }
+        // end::pictureField[]
 
         @Order(10)
         public class EditURLMenu extends AbstractMenu {
@@ -308,26 +309,7 @@ public class PersonForm extends AbstractForm {
         // tag::pictureField[]
 
         protected void updateImage(String url) {
-          clearErrorStatus(); // <4>
-
-          if (url == null) {
-            setImage(null);
-          }
-          else {
-            try {
-              setImage(IOUtility.readFromUrl(new URL((String) url)));
-              setAutoFit(true);
-            }
-            // end::pictureField[]
-            catch (MalformedURLException e) {
-              addErrorStatus(new Status(TEXTS.get("InvalidImageUrl"), IStatus.WARNING));
-            }
-            // tag::pictureField[]
-            catch (Exception e) { // <5>
-              String message = TEXTS.get("FailedToAccessImageFromUrl");
-              addErrorStatus(new Status(message, IStatus.WARNING));
-            }
-          }
+          setImageUrl(url);
         }
       }
       // end::pictureField[]
@@ -548,40 +530,43 @@ public class PersonForm extends AbstractForm {
           // end::addressBox[]
 
           @Order(30)
-          public class ShowOnMapButton extends AbstractLinkButton {
+          public class ShowOnMapButtonBox extends AbstractSequenceBox {
 
-            @Override
-            protected int getConfiguredHorizontalAlignment() {
-              return 1;
-            }
+            @Order(10)
+            public class ShowOnMapButton extends AbstractLinkButton {
 
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("ShowOnMap");
-            }
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("ShowOnMap");
+              }
 
-            @Override
-            protected Class<? extends IValueField> getConfiguredMasterField() {
-              return CountryField.class;
-            }
+              @Override
+              protected String getConfiguredIconId() {
+                return Icons.World;
+              }
 
-            @Override
-            protected boolean getConfiguredMasterRequired() {
-              return true;
-            }
+              @Override
+              protected Class<? extends IValueField> getConfiguredMasterField() {
+                return CountryField.class;
+              }
 
-            @Override
-            protected boolean getConfiguredProcessButton() {
-              return false;
-            }
+              @Override
+              protected boolean getConfiguredMasterRequired() {
+                return true;
+              }
 
-            @Override
-            protected void execClickAction() {
-              MapForm mapForm = new MapForm();
-              mapForm.setStreet(getStreetField().getValue());
-              mapForm.setCity(getCityField().getValue());
-              mapForm.setCountry(getCountryField().getValue());
-              mapForm.startModify();
+              @Override
+              protected boolean getConfiguredProcessButton() {
+                return false;
+              }
+
+              @Override
+              protected void execClickAction() {
+                BEANS.get(MapHelper.class).showMapInNewWindow(
+                    getCountryField().getValue(),
+                    getCityField().getValue(),
+                    getStreetField().getValue());
+              }
             }
           }
           // tag::validateAddress[]
@@ -861,8 +846,9 @@ public class PersonForm extends AbstractForm {
   // end::validate[]
   // tag::handler[]
 
-  private String calculateSubTitle() {
-    return StringUtility.join(" ", getFirstNameField().getValue(),
+  protected String calculateSubTitle() {
+    return StringUtility.join(" ",
+        getFirstNameField().getValue(),
         getLastNameField().getValue());
   }
   // tag::handler[]

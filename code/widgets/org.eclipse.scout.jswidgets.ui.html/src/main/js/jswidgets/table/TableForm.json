@@ -57,6 +57,13 @@
                   "objectType": "IconColumn",
                   "text": "Icon Column",
                   "width": 110
+                },
+                {
+                  "id": "HtmlColumn",
+                  "objectType": "Column",
+                  "text": "Html Column",
+                  "htmlEnabled": true,
+                  "width": 110
                 }
               ],
               "tableControls": [
