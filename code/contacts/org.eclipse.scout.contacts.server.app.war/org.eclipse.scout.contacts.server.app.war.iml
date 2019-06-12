@@ -38,6 +38,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.mom.api" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.dataobject" />
     <orderEntry type="module" module-name="org.eclipse.scout.contacts.shared" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.jdbc" />
     <orderEntry type="library" name="Maven: org.apache.derby:derby:10.14.2.0" level="project" />
