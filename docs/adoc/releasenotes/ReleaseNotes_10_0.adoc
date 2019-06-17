@@ -137,6 +137,22 @@ The mode selector now has a different appearance for the two field styles `IForm
 
 image::{rnimgsdir}/mode_selector_field_style.png[]
 
+=== Enabled & InheritAccessibility
+
+The `enabled` property already existing for FormFields, Actions and other Scout elements has been moved to the top level Widget class.
+Therefore all widgets can now be disabled as it already was in Scout JS.
+Additionally Scout Classic widgets also support dynamic enabled/disabled dimensions on all widgets now as it already existed for FormFields.
+
+The `inheritAccessibility` property that already existed for Actions (e.g. Menus) can now be used on all widgets.
+This is especially interesting for FormFields for which it was necessary to do that using multiple setEnabled() calls until now.
+
+=== Consistent Parent
+
+Lots of Scout widgets like `Actions`, `FormFields`, `Tiles` or `Tables` can have a parent element.
+Until now there have been several methods to access parent elements (e.g. `IActionNode#getParent()`, `ITile#getContainer()`, `IFormField#getParentField`, etc.) and it was only available on the specific element (e.g. for a Table).
+Now there is one `getParent()` method for all widgets. Furthermore visit methods have been added to traverse up the parent hierarchy.
+
+
 == Data Objects
 The Scout data object support was moved from the Scout platform to the module `org.eclipse.scout.rt.dataobject`.
 The package imports of all data object related classes therefore changed:
