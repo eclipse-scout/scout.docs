@@ -10,14 +10,18 @@
  ******************************************************************************/
 package org.eclipse.scout.contacts.client.common;
 
+import org.eclipse.scout.contacts.client.Icons;
+import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.InfoField;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm.MainBox.UrlBox.UrlField;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 // tag::all[]
@@ -36,6 +40,10 @@ public class PictureUrlForm extends AbstractForm {
     return getFieldByClass(UrlField.class);
   }
 
+  public InfoField getInfoField() {
+    return getFieldByClass(InfoField.class);
+  }
+
   @Order(10)
   public class MainBox extends AbstractGroupBox {
 
@@ -48,6 +56,45 @@ public class PictureUrlForm extends AbstractForm {
         @Override
         protected boolean getConfiguredLabelVisible() { // <1>
           return false;
+        }
+
+        @Override
+        protected boolean getConfiguredStatusVisible() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+      }
+
+      @Order(20)
+      public class InfoField extends AbstractHtmlField {
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected boolean getConfiguredStatusVisible() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected boolean getConfiguredGridUseUiHeight() {
+          return true;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(HTML.fragment(HTML.icon(Icons.Info), HTML.bold(" " + TEXTS.get("PleaseNote") + ": "), TEXTS.get("SecurityUrlRestrictedMsg")).toHtml());
         }
       }
     }

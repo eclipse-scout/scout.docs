@@ -20,12 +20,16 @@ jswidgets.RestForm.prototype._jsonModel = function() {
 jswidgets.RestForm.prototype._init = function(model) {
   jswidgets.RestForm.parent.prototype._init.call(this, model);
 
-  $.ajaxSetup({
-    cache: false
-  });
-
-  var callButton = this.widget('CallButton');
-  callButton.on('click', this._onCallButtonClick.bind(this));
+  var getButton = this.widget('GetButton');
+  getButton.on('click', this._onGetButtonClick.bind(this));
+  var postButton = this.widget('PostButton');
+  postButton.on('click', this._onPostButtonClick.bind(this));
+  var putButton = this.widget('PutButton');
+  putButton.on('click', this._onPutButtonClick.bind(this));
+  var deleteButton = this.widget('DeleteButton');
+  deleteButton.on('click', this._onDeleteButtonClick.bind(this));
+  var failButton = this.widget('FailButton');
+  failButton.on('click', this._onFailButtonClick.bind(this));
 };
 
 jswidgets.RestForm.prototype._addLogEntry = function(message) {
@@ -38,12 +42,42 @@ jswidgets.RestForm.prototype._addLogEntry = function(message) {
   logField.setValue(log);
 };
 
-jswidgets.RestForm.prototype._onCallButtonClick = function(event) {
-  $.getJSON('api/serverstatus')
-    .done(function(result, textStatus, jqXHR) {
-      this._addLogEntry('Request successful. HTTP-Status: ' + jqXHR.status + '. Response: ' + JSON.stringify(result));
-    }.bind(this))
-    .fail(function(jqXHR, textStatus, errorThrown) {
-      this._addLogEntry('Request failed! HTTP-Status: ' + jqXHR.status + '. TextStatus: ' + textStatus + '. ErrorThrown: ' + errorThrown);
-    }.bind(this));
+jswidgets.RestForm.prototype._onGetButtonClick = function(event) {
+  scout.ajax.getJson('api/example')
+    .then(this._onSuccess.bind(this))
+    .catch(this._onFail.bind(this));
+};
+
+jswidgets.RestForm.prototype._onPostButtonClick = function(event) {
+  scout.ajax.postJson('api/example', {
+      hello: 'server'
+    }).then(this._onSuccess.bind(this))
+    .catch(this._onFail.bind(this));
+};
+
+jswidgets.RestForm.prototype._onPutButtonClick = function(event) {
+  scout.ajax.putJson('api/example', {
+      hello: 'server'
+    }).then(this._onSuccess.bind(this))
+    .catch(this._onFail.bind(this));
+};
+
+jswidgets.RestForm.prototype._onDeleteButtonClick = function(event) {
+  scout.ajax.removeJson('api/example')
+    .then(this._onSuccess.bind(this))
+    .catch(this._onFail.bind(this));
+};
+
+jswidgets.RestForm.prototype._onFailButtonClick = function(event) {
+  scout.ajax.get('api/notexistingurl')
+    .then(this._onSuccess.bind(this))
+    .catch(this._onFail.bind(this));
+};
+
+jswidgets.RestForm.prototype._onSuccess = function(result, textStatus, jqXHR) {
+  this._addLogEntry('Request successful. HTTP-Status: ' + jqXHR.status + '. Response: ' + JSON.stringify(result));
+};
+
+jswidgets.RestForm.prototype._onFail = function(ajaxError) {
+  this._addLogEntry('Request failed! HTTP-Status: ' + ajaxError.jqXHR.status + '. TextStatus: ' + ajaxError.textStatus + '. ErrorThrown: ' + ajaxError.errorThrown + '. RequestOptions: ' + JSON.stringify(ajaxError.requestOptions));
 };
