@@ -108,11 +108,6 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Override
-    protected String getConfiguredDefaultIconId() {
-      return Icons.Event;
-    }
-
-    @Override
     protected Class<? extends IMenu> getConfiguredDefaultMenu() {
       return EditMenu.class;
     }

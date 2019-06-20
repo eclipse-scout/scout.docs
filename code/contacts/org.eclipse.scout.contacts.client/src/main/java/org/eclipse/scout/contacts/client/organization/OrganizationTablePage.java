@@ -76,11 +76,6 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
       return getColumnSet().getColumnByClass(HomepageColumn.class);
     }
 
-    @Override
-    protected String getConfiguredDefaultIconId() {
-      return Icons.Organization;
-    }
-
     public CityColumn getCityColumn() {
       return getColumnSet().getColumnByClass(CityColumn.class);
     }
