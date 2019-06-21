@@ -19,16 +19,15 @@ You can see the https://github.com/eclipse/scout.rt/compare/releases/8.0.x%2E%2E
 
 === Service Releases
 
-After the final simultaneous Eclipse release, there are no more Eclipse _service releases_ (see https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[the Simultaneous Release Cycle FAQ] for details).
-Scout 9.0 will continue to be maintained for a while and a new build may be released from time to time. Beside bugfixes, these releases may even contain some minor features.
+Scout 9.0 will continue to be maintained for a while and a new build may be released from time to time,
+following the https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release Cycle].
+Beside bugfixes, these service releases may even contain some minor features.
 
 The following enhancements were made after the initial 9.0 release.
 
-==== Simrel 2019-06 (9.0.0) -- Release Expected in June 2019
+==== Simrel 2019-06 -- Released in June 2019
 
 // The initial release of this version was *9.0.0.xyz* (Maven: 9.0.0.xyz_Simrel_2019_06).
-
-WARNING: {NotReleasedWarning}
 
 * <<Script File Watcher Enabled by Default (since Simrel 2019-06)>>
 
