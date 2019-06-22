@@ -25,11 +25,17 @@ Beside bugfixes, these service releases may even contain some minor features.
 
 The following enhancements were made after the initial 9.0 release.
 
-==== Simrel 2019-06 -- Released in June 2019
+==== Simrel 2019-06 -- Released on June 19, 2019
 
 // The initial release of this version was *9.0.0.xyz* (Maven: 9.0.0.xyz_Simrel_2019_06).
 
 * <<Script File Watcher Enabled by Default (since Simrel 2019-06)>>
+
+==== Simrel 2019-09 -- Release planned for September 2019
+
+WARNING: {NotReleasedWarning}
+
+// * <<Migration Description (since 9.0.0.xyz)>>
 
 // ==== Upcoming -- No Planned Release Date
 //
@@ -62,7 +68,7 @@ Usage example in the parent POM of your Scout application:
 
 ==== Eclipse IDE Tooling (Scout SDK)
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-https://www.eclipse.org/downloads/packages/release/2019-03/eclipse-ide-scout-developers[Eclipse for Scout Developers Simrel 2019-03]
+https://www.eclipse.org/downloads/packages/release/2019-06/r/eclipse-ide-scout-developers[Eclipse for Scout Developers Simrel 2019-06]
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/9.0/9.0.0/018_Simrel_2019_06/

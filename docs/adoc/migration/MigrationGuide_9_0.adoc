@@ -17,9 +17,15 @@ Scout 9.0 will continue to be maintained for a while and a new build may be rele
 
 The following changes were made after the initial 9.0 release.
 
-==== Simrel 2019-06 -- Released in June 2019
+==== Simrel 2019-06 -- Released on June 19, 2019
 
 * <<StyleHelper Moved to Platform (since 9.0.0.010)>>
+
+==== Simrel 2019-09 -- Release planned for September 2019
+
+WARNING: {NotReleasedWarning}
+
+// * <<Migration Description (since 9.0.0.xyz)>>
 
 // ==== Upcoming -- No Planned Release Date
 //
