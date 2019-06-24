@@ -166,6 +166,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected boolean getConfiguredStatusVisible() {
+          return false;
+        }
+
+        @Override
         protected int getConfiguredGridW() {
           return 1;
         }
@@ -186,6 +191,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           @Override
           protected boolean getConfiguredProcessButton() {
             return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Regular button has been clicked.").show();
           }
         }
 
@@ -265,7 +275,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              System.out.println("'Menu item 1' clicked");
+              MessageBoxes.createOk().withBody("Menu item 1 has been clicked.").show();
             }
           }
 
@@ -279,7 +289,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              System.out.println("'Menu item 2' clicked");
+              MessageBoxes.createOk().withBody("Menu item 2 has been clicked.").show();
             }
           }
         }
@@ -311,11 +321,17 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
+
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Styled button has been clicked.").show();
+          }
         }
 
         @Order(2000)
         @ClassId("d10308ef-877b-44ca-9782-6ec9361a4db1")
         public class CssStyledButton extends AbstractButton {
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("CSSStyled");
@@ -335,8 +351,12 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
-        }
 
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Styled button (CSS) has been clicked.").show();
+          }
+        }
       }
 
       @Order(20)
@@ -345,6 +365,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("ToggleButton");
+        }
+
+        @Override
+        protected boolean getConfiguredStatusVisible() {
+          return false;
         }
 
         @Override
@@ -538,6 +563,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Order(2000)
         @ClassId("8877629c-ec8c-47bf-af80-285572cb3723")
         public class ToggleCssStyledButton extends AbstractButton {
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("CSSStyled");
@@ -558,7 +584,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             return "highlight";
           }
         }
-
       }
 
       @Order(30)
@@ -567,6 +592,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("LinkButton");
+        }
+
+        @Override
+        protected boolean getConfiguredStatusVisible() {
+          return false;
         }
 
         @Override
@@ -594,7 +624,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            MessageBoxes.createOk().withHeader(TEXTS.get("LinkClicked", getLabel())).withBody(TEXTS.get("LinkButtonExecClickAction")).show();
+            MessageBoxes.createOk().withBody("Regular link button has been clicked.").show();
           }
         }
 
@@ -618,7 +648,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
-            MessageBoxes.createOk().withHeader(TEXTS.get("LinkClicked", getLabel())).withBody(TEXTS.get("LinkButtonExecClickAction")).show();
+            MessageBoxes.createOk().withBody("Default link button has been clicked.").show();
           }
         }
 
@@ -664,7 +694,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              System.out.println("'Menu item 1' clicked");
+              MessageBoxes.createOk().withBody("Menu item 1 has been clicked.").show();
             }
           }
 
@@ -678,7 +708,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              System.out.println("'Menu item 2' clicked");
+              MessageBoxes.createOk().withBody("Menu item 1 has been clicked.").show();
             }
           }
         }
@@ -710,11 +740,17 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
+
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Styled link button has been clicked.").show();
+          }
         }
 
         @Order(2000)
         @ClassId("d4c2acf8-c413-4730-ab53-3ab94c4f19f7")
         public class CssStyledLinkButton extends AbstractLinkButton {
+
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("CSSStyled");
@@ -734,8 +770,12 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           protected boolean getConfiguredProcessButton() {
             return false;
           }
-        }
 
+          @Override
+          protected void execClickAction() {
+            MessageBoxes.createOk().withBody("Styled link button (CSS) has been clicked.").show();
+          }
+        }
       }
     }
 
@@ -793,7 +833,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("IsSelected");
         }
-
       }
 
       @Order(30)
@@ -802,11 +841,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Label");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -821,11 +855,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("IconId");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -849,18 +878,6 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
       @Order(80)
       public class Place3Field extends AbstractPlaceholderField {
-      }
-
-      @Order(90)
-      public class Place4Field extends AbstractPlaceholderField {
-      }
-
-      @Order(100)
-      public class Place5Field extends AbstractPlaceholderField {
-      }
-
-      @Order(110)
-      public class Place6Field extends AbstractPlaceholderField {
       }
     }
 
