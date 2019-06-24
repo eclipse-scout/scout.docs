@@ -322,11 +322,6 @@ public class EventForm extends AbstractForm {
             }
 
             @Override
-            protected String getConfiguredDefaultIconId() {
-              return Icons.Person;
-            }
-
-            @Override
             protected Class<? extends IMenu> getConfiguredDefaultMenu() {
               return EditMenu.class;
             }

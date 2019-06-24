@@ -18,12 +18,16 @@ import org.eclipse.scout.contacts.client.person.PersonTablePage.Table;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonTablePageData;
+import org.eclipse.scout.rt.client.dto.ColumnData;
+import org.eclipse.scout.rt.client.dto.ColumnData.SdkColumnCommand;
 import org.eclipse.scout.rt.client.dto.PageData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
@@ -34,6 +38,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -86,14 +91,6 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     // container class to hold columns and other elements for this table page <4>
     // end::PageInit[]
 
-    public LastNameColumn getLastNameColumn() {
-      return getColumnSet().getColumnByClass(LastNameColumn.class);
-    }
-
-    @Override
-    protected String getConfiguredDefaultIconId() {
-      return Icons.Person;
-    }
     //tag::menu[]
 
     @Override
@@ -101,6 +98,10 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
       return EditMenu.class;
     }
     //end::menu[]
+
+    public SummaryColumn getSummaryColumn() {
+      return getColumnSet().getColumnByClass(SummaryColumn.class);
+    }
 
     public CountryColumn getCountryColumn() {
       return getColumnSet().getColumnByClass(CountryColumn.class);
@@ -120,6 +121,10 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
     public FirstNameColumn getFirstNameColumn() {
       return getColumnSet().getColumnByClass(FirstNameColumn.class);
+    }
+
+    public LastNameColumn getLastNameColumn() {
+      return getColumnSet().getColumnByClass(LastNameColumn.class);
     }
 
     public PersonIdColumn getPersonIdColumn() {
@@ -211,6 +216,30 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
       }
     }
     // end::menu[]
+
+    // Custom summary column (relevant for mobile mode where the child nodes are visible)
+    @Order(0)
+    @ColumnData(SdkColumnCommand.IGNORE)
+    public class SummaryColumn extends AbstractStringColumn {
+
+      @Override
+      protected boolean getConfiguredDisplayable() {
+        return false;
+      }
+
+      @Override
+      protected boolean getConfiguredSummary() {
+        return true;
+      }
+
+      @Override
+      protected void execDecorateCell(Cell cell, ITableRow row) {
+        cell.setText(StringUtility.join(" ",
+            getFirstNameColumn().getValue(row),
+            getLastNameColumn().getValue(row),
+            StringUtility.box("(", getCityColumn().getValue(row), ")")));
+      }
+    }
 
     //tag::PersonIdColumn[]
     @Order(1)
