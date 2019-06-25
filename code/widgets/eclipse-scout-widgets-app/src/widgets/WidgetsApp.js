@@ -13,7 +13,6 @@ import scout, { models, App, Desktop, OutlineViewButton } from '@eclipse-scout/e
 import desktopModel from './Desktop.json';
 
 export default class WidgetsApp extends App {
-
   _createDesktop(parent) {
     // FIXME [awe] ES6: check the Plugin proposed by "Izhaki", this would allow to re-define the properties exported by Webpack.
     // Without the configurable: true property, the code below cannot work.
@@ -27,13 +26,13 @@ export default class WidgetsApp extends App {
     });
     */
 
-    /** @type {Desktop}*/ let desktop = scout.create(Desktop, models.getModel(desktopModel, parent));
-    let dataButton = scout.create(OutlineViewButton, {
+    /** @type {Desktop}*/ const desktop = scout.create(Desktop, models.getModel(desktopModel, parent));
+    const dataButton = scout.create(OutlineViewButton, {
       parent: desktop,
       text: 'Data',
       displayStyle: 'TAB'
     });
-    let searchButton = scout.create(OutlineViewButton, {
+    const searchButton = scout.create(OutlineViewButton, {
       parent: desktop,
       text: 'Search',
       displayStyle: 'TAB'
@@ -41,5 +40,4 @@ export default class WidgetsApp extends App {
     desktop._setViewButtons([dataButton, searchButton]);
     return desktop;
   }
-
 }

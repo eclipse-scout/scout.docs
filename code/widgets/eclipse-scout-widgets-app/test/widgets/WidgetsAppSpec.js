@@ -2,7 +2,6 @@ import WidgetsApp from '../../src/widgets/WidgetsApp';
 import { Session, NullWidget } from '@eclipse-scout/eclipse-scout';
 
 describe('WidgetsApp', () => {
-
   it('_createDesktop', () => {
     var app = new WidgetsApp();
     var nullWidget = new NullWidget();
@@ -10,5 +9,4 @@ describe('WidgetsApp', () => {
     var desktop = app._createDesktop(nullWidget);
     expect(desktop.viewButtons.length).toBe(2);
   });
-
 });

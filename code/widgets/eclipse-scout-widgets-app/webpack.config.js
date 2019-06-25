@@ -12,7 +12,7 @@ const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
 const mainModule = require.main;
 const CopyPlugin = mainModule.require('copy-webpack-plugin');
 module.exports = (env, args) => {
-  let config = baseConfig(env, args);
+  const config = baseConfig(env, args);
 
   config.entry = {
     'widgets-app': './index.js',

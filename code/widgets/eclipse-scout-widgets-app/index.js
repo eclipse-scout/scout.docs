@@ -9,6 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 import { WidgetsApp } from './src/widgets/index';
+import { Device } from '@eclipse-scout/eclipse-scout';
 import * as $ from 'jquery';
 
 $(document).ready(() => {
@@ -17,4 +18,5 @@ $(document).ready(() => {
       modelsUrl: 'models/widgetsapp.json' // FIXME [awe] ES6: remove modelsUrl property, when all model-code is inlined (or migrated to .js)
     }
   });
+  console.log(Device.get().toString());
 });
