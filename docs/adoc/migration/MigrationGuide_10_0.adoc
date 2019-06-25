@@ -1,0 +1,58 @@
+////
+Howto:
+- Write this document such that it helps people to migrate. Describe what they should do.
+- Chronological order is not necessary.
+- Choose the right top level chapter (java, js, other)
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
+
+== About This Document
+
+This document describes all relevant changes *from Eclipse Scout 9.0 to Eclipse Scout 10.0*. If existing code has to be migrated, instructions are provided here.
+
+=== Service Releases
+
+Scout 10.0 will continue to be maintained for a while and a new build may be released from time to time, following the https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release Cycle]. Beside bugfixes, these service releases may even contain some minor features.
+
+The following changes were made after the initial 10.0 release.
+
+==== Simrel 2020-03 -- TBD
+
+WARNING: {NotReleasedWarning}
+
+// * <<Migration Description (since 10.0.0.xyz)>>
+
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// WARNING: {NotReleasedWarning}
+//
+// * <<Migration Description (since 10.0.0.xyz)>>
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA CODE ================================================
+  =============================================================================
+////
+
+== API Changes (Java)
+
+=== StrictSimpleDateFormat
+`org.eclipse.scout.rt.jackson.dataobject.StrictSimpleDateFormat` was removed. Use `org.eclipse.scout.rt.platform.util.date.StrictSimpleDateFormat` instead.
+
+// ^^^
+// Insert descriptions of Java API changes here
+
+////
+  =============================================================================
+  === API CHANGES IN JAVA SCRIPT CODE =========================================
+  =============================================================================
+////
+
+== API Changes (JavaScript)
+
+
+// ^^^
+// Insert descriptions of other important changes here
