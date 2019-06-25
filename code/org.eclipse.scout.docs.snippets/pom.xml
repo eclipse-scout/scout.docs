@@ -65,10 +65,6 @@
     </dependency>
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>
-      <artifactId>org.eclipse.scout.rt.mail</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.scout.rt</groupId>
       <artifactId>org.eclipse.scout.rt.dataobject</artifactId>
     </dependency>
     <dependency>
