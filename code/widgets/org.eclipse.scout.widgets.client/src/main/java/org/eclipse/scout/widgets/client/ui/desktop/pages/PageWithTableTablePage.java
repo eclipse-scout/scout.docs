@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractAlphanumericSortingStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
@@ -36,7 +38,10 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.Aggregat
 import org.eclipse.scout.rt.client.ui.basic.table.columns.INumberColumn.BackgroundEffect;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
+import org.eclipse.scout.rt.client.ui.tile.AbstractHtmlTile;
+import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -46,6 +51,7 @@ import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
+import org.eclipse.scout.widgets.shared.Icons;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
@@ -141,6 +147,25 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
     public RoundingModeColumn getRoundingModeColumn() {
       return getColumnSet().getColumnByClass(RoundingModeColumn.class);
+    }
+
+    @Override
+    protected ITile execCreateTile(ITableRow row) {
+      return new AbstractHtmlTile() {
+        @Override
+        public String classId() {
+          return UUID.randomUUID().toString();
+        }
+
+        @Override
+        protected String getConfiguredContent() {
+          return HTML.fragment(
+              HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("Number Column: " + row.getCellValue(getLongColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("Boolean Column: " + row.getCellValue(getBooleanColumn().getColumnIndex())),
+              HTML.br(), HTML.bold("String Column: " + row.getCellValue(getStringColumn().getColumnIndex()))).toHtml();
+        }
+      };
     }
 
     @Order(10)
@@ -674,6 +699,31 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected Class<?> provideSourceClass() {
       return PageWithTableTablePage.class;
+    }
+  }
+
+  @Order(20)
+  public class TileModeMenu extends AbstractMenu {
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(
+          TableMenuType.EmptySpace);
+    }
+
+    @Override
+    protected String getConfiguredIconId() {
+      return Icons.LightbulbOn; // TODO [10.0] mot [tableWithTiles]: Find a  better icon
+    }
+
+    @Override
+    protected byte getConfiguredHorizontalAlignment() {
+      return HORIZONTAL_ALIGNMENT_RIGHT;
+    }
+
+    @Override
+    protected void execAction() {
+      getTable().setTileMode(!getTable().isTileMode());
     }
   }
 }
