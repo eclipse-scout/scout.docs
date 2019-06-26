@@ -10,7 +10,9 @@
  ******************************************************************************/
 import scout from '@eclipse-scout/eclipse-scout';
 import MyOutlineViewButton from './outline/MyOutlineViewButton';
+import WidgetsDesktop from './WidgetsDesktop';
 
 scout.addObjectFactories({
-  'OutlineViewButton': () => new MyOutlineViewButton()
+  'OutlineViewButton': () => new MyOutlineViewButton(),
+  'Desktop': () => new WidgetsDesktop()
 });

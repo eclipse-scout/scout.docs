@@ -12,7 +12,6 @@ import App from '@eclipse-scout/demo-jswidgets';
 
 new App().init({
   bootstrap: {
-    modelsUrl: 'res/jswidgets-all.json',
     textsUrl: 'res/texts.json'
   }
 });

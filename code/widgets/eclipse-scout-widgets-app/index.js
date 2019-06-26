@@ -13,10 +13,6 @@ import { Device } from '@eclipse-scout/eclipse-scout';
 import * as $ from 'jquery';
 
 $(document).ready(() => {
-  new WidgetsApp().init({
-    bootstrap: {
-      modelsUrl: 'models/widgetsapp.json' // FIXME [awe] ES6: remove modelsUrl property, when all model-code is inlined (or migrated to .js)
-    }
-  });
+  new WidgetsApp().init();
   console.log(Device.get().toString());
 });

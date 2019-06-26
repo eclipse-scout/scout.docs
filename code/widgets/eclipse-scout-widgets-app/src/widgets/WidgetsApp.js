@@ -8,12 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
-import scout, { models, App, Desktop, OutlineViewButton } from '@eclipse-scout/eclipse-scout';
-
-import desktopModel from './Desktop.json';
+import { App } from '@eclipse-scout/eclipse-scout';
 
 export default class WidgetsApp extends App {
-  _createDesktop(parent) {
+  _init(model) {
+    super._init(model);
+
     // FIXME [awe] ES6: check the Plugin proposed by "Izhaki", this would allow to re-define the properties exported by Webpack.
     // Without the configurable: true property, the code below cannot work.
     /*
@@ -25,19 +25,5 @@ export default class WidgetsApp extends App {
       }
     });
     */
-
-    /** @type {Desktop}*/ const desktop = scout.create(Desktop, models.getModel(desktopModel, parent));
-    const dataButton = scout.create(OutlineViewButton, {
-      parent: desktop,
-      text: 'Data',
-      displayStyle: 'TAB'
-    });
-    const searchButton = scout.create(OutlineViewButton, {
-      parent: desktop,
-      text: 'Search',
-      displayStyle: 'TAB'
-    });
-    desktop._setViewButtons([dataButton, searchButton]);
-    return desktop;
   }
 }
