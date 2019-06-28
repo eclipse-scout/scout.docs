@@ -13,8 +13,6 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.scout.rt.platform.util.BooleanUtility;
-import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -24,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 public class UserContentListLookupCall extends LocalLookupCall<String> {
 
   private static final long serialVersionUID = 1L;
+
   private List<LookupRow<String>> m_rows = new ArrayList<>();
 
   public void setLookupRows(List<LookupRow<String>> rows) {
@@ -32,19 +31,6 @@ public class UserContentListLookupCall extends LocalLookupCall<String> {
 
   @Override
   protected List<LookupRow<String>> execCreateLookupRows() {
-    // simulate active-filter logic which happens usually in an SQL statement
-    // so we can test the active-filter with a local lookup call
-    TriState active = getActive();
-    if (TriState.UNDEFINED == active) {
-      return m_rows;
-    }
-    List<LookupRow<String>> filteredRows = new ArrayList<>();
-    boolean isActive = BooleanUtility.nvl(active.getBooleanValue());
-    for (LookupRow<String> row : m_rows) {
-      if (isActive == row.isActive()) {
-        filteredRows.add(row);
-      }
-    }
-    return filteredRows;
+    return m_rows;
   }
 }

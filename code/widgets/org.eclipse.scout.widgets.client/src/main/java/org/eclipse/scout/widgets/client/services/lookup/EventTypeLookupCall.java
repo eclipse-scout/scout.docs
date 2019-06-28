@@ -10,12 +10,9 @@
  ******************************************************************************/
 package org.eclipse.scout.widgets.client.services.lookup;
 
-import java.util.List;
-
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.lookup.CodeLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ICodeLookupCallVisitor;
-import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 
 /**
@@ -24,11 +21,6 @@ import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 public class EventTypeLookupCall extends CodeLookupCall<Long> {
 
   private static final long serialVersionUID = 1L;
-
-  @Override
-  protected List<? extends ILookupRow<Long>> execCreateLookupRows() {
-    return super.execCreateLookupRows();
-  }
 
   /**
    * Visitor class that filters out inactive codes.
