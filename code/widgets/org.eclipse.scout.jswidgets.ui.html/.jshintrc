@@ -5,6 +5,7 @@
   "undef": true,
   "browser": true,
   "curly": true,
+  "esversion": 6,
   "globals": {
     "__include": false,
     "jswidgets": false,

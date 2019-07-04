@@ -14,12 +14,12 @@ import * as $ from 'jquery';
 export default class App extends DummyApp {
   constructor() {
     super();
-    console.log('Constructing app...');
+    console.log('Constructing app...'); // jshint ignore:line
     $('<div>Hello World</div>').appendTo($('body'));
   }
 
   init() {
-    console.log('Initializing app...');
+    console.log('Initializing app...'); // jshint ignore:line
   }
 }
 

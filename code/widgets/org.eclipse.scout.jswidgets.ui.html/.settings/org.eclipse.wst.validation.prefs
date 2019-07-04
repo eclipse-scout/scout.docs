@@ -1,10 +1,12 @@
 DELEGATES_PREFERENCE=delegateValidatorList
 USER_BUILD_PREFERENCE=enabledBuildValidatorListorg.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
 USER_MANUAL_PREFERENCE=enabledManualValidatorListorg.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
-USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationfalseversion1.2.700.v201508251749
+USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationfalseversion1.2.701.v201810290944
 eclipse.preferences.version=1
 override=true
 suspend=false
 vals/org.eclipse.wst.html.core.HTMLValidator/global=FF01
+vals/org.eclipse.wst.jsdt.core.JsValidator/groups=0107include01113projectNature134org.eclipse.wst.jsdt.core.jsNature0107include02111contentType134org.eclipse.wst.jsdt.core.jsSourceT07fileext02jsF0107exclude0104file112node_modulesF01
 vals/org.eclipse.wst.json.core.json/global=FF03
+vals/org.eclipse.wst.xml.core.xml/groups=0107include05111contentType128org.eclipse.core.runtime.xmlT111contentType134org.eclipse.wst.xml.core.xmlsourceT111contentType134org.eclipse.wst.xml.core.xslsourceT111contentType134org.eclipse.jst.jsp.core.tldsourceT07fileext03xmlF0107exclude06113projectNature134org.eclipse.jst.j2ee.ejb.EJBNature113projectNature130org.eclipse.jst.j2ee.EARNature04file08.projectT0104file110.classpathT0104file110.settings/T0204file112node_modulesF02
 vf.version=3
