@@ -50,6 +50,10 @@ jswidgets.ActionPropertiesBox.prototype._setField = function(field) {
   selectedField.setValue(this.field.selected);
   selectedField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var inheritAccessibilityField = this.widget('InheritAccessibilityField');
+  inheritAccessibilityField.setValue(this.field.inheritAccessibility);
+  inheritAccessibilityField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var iconIdField = this.widget('IconIdField');
   iconIdField.setValue(this.field.iconId);
   iconIdField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -84,6 +88,8 @@ jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setToggleAction(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'SelectedField') {
     this.field.setSelected(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'InheritAccessibilityField') {
+    this.field.setInheritAccessibility(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'IconIdField') {
     this.field.setIconId(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'KeyStrokeField') {
