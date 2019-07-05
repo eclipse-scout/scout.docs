@@ -55,3 +55,6 @@ In case of a successful Eclipse Scout installation your Eclipse IDE should displ
 [[img-sdk_new_project_initial_helloworld]]
 .The inital set of Maven modules created for the Hello World application.
 image::{imgsdir}/sdk_new_project_initial_helloworld.png[]
+
+
+WARNING: You need to adjust the Maven build if Java 9 is the minimal required version of your project. Open `helloworld/pom.xml` (replace `helloworld` with the `artifact id` you chose earlier) and add `<master_signatureCheck_skip>true</master_signatureCheck_skip>` to the `<properties>`-element. Note: the minimal required Java version is declared by property `jdk.source.version` within the very same `<properties>`-element.
