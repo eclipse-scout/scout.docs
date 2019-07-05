@@ -326,10 +326,22 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <versionRange>[1.7.6,)</versionRange>
+                    <goals>
+                      <goal>install-node-and-npm</goal>
+                      <goal>npm</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>
-                      exec-maven-plugin
-                    </artifactId>
+                    <artifactId>exec-maven-plugin</artifactId>
                     <versionRange>[1.6.0,)</versionRange>
                     <goals>
                       <goal>exec</goal>
