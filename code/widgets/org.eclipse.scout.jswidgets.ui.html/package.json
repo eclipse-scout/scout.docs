@@ -33,10 +33,10 @@
     "snapshot-version": "scout-scripts snapshot-version"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": "^10.0.0-snapshot"
+    "@eclipse-scout/cli": "^10-snapshot"
   },
   "dependencies": {
-    "@eclipse-scout/core": "^10.0.0-snapshot",
+    "@eclipse-scout/core": "^10-snapshot",
     "jquery": "^3.4.1"
   }
 }
