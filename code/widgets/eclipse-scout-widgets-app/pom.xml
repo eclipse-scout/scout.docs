@@ -13,7 +13,7 @@
 
   <properties>
     <jdk.source.version>1.8</jdk.source.version>
-    <org.eclipse.scout.rt.version>10.0.0-SNAPSHOT</org.eclipse.scout.rt.version>
+    <org.eclipse.scout.rt.version>10-SNAPSHOT</org.eclipse.scout.rt.version>
   </properties>
 
   <groupId>eclipse-scout-widgets-app</groupId>
