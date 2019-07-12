@@ -238,7 +238,6 @@
         },
         {
           "objectType": "PageWithNodes",
-          "objectType": "PageWithNodes",
           "leaf": true,
           "text": "Multiline Smart Field",
           "detailForm": {
