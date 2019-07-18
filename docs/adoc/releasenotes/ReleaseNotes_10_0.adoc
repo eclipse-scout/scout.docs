@@ -131,11 +131,17 @@ image::{rnimgsdir}/button_html_enabled.png[]
 
 The `ImageField` has a new property `uploadEnabled`. When set to true, the field opens the native file chooser and performs a file upload.
 
-=== Mode Selector: Implemented alternative display style
+=== Mode Selector: Alternative Display Style
 
 The mode selector now has a different appearance for the two field styles `IFormField.FIELD_STYLE_CLASSIC` and `IFormField.FIELD_STYLE_ALTERNATIVE`.
 
 image::{rnimgsdir}/mode_selector_field_style.png[]
+
+=== Popup: New Properties Closable, Movable, Resizable
+The new properties allow a user to close, move or resize a popup using the typical controls he already knows by other widgets like a `Dialog`.
+The properties are available on the `WidgetPopup` and can even be turned on or off while the popup is open.
+
+image::{rnimgsdir}/popup_properties.png[]
 
 === Enabled & InheritAccessibility
 
