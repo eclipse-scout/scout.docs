@@ -22,10 +22,13 @@ jswidgets.PopupForm.prototype._jsonModel = function() {
 jswidgets.PopupForm.prototype._init = function(model) {
   jswidgets.PopupForm.parent.prototype._init.call(this, model);
 
-  var dummyPopup = scout.create('Popup', {
+  var dummyPopup = scout.create('WidgetPopup', {
     parent: this
   });
   this.widget('OpenPopupButton').on('click', this._onOpenPopupButtonClick.bind(this));
+
+  var useButtonAsAnchorField = this.widget('UseButtonAsAnchorField');
+  useButtonAsAnchorField.on('propertyChange', this._onUseButtonAsAnchorChange.bind(this));
 
   var anchorBoundsField = this.widget('AnchorBoundsField');
   anchorBoundsField.on('propertyChange', this._onAnchorBoundsChange.bind(this));
@@ -67,6 +70,8 @@ jswidgets.PopupForm.prototype._init = function(model) {
   withArrowField.setValue(dummyPopup.withArrow);
   withArrowField.on('propertyChange', this._onWithArrowPropertyChange.bind(this));
 
+  this.widget('WidgetPopupPropertiesBox').setField(dummyPopup);
+
   dummyPopup.close();
 };
 
@@ -96,6 +101,9 @@ jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
     closeOnAnchorMouseDown: this.widget('CloseOnAnchorMouseDownField').value,
     closeOnMouseDownOutside: this.widget('CloseOnMouseDownOutsideField').value,
     closeOnOtherPopupOpen: this.widget('CloseOnOtherPopupOpenField').value,
+    closable: this.widget('ClosableField').value,
+    movable: this.widget('MovableField').value,
+    resizable: this.widget('ResizableField').value,
     horizontalAlignment: this.widget('HorizontalAlignmentField').value,
     verticalAlignment: this.widget('VerticalAlignmentField').value,
     trimWidth: this.widget('TrimWidthField').value,
@@ -115,7 +123,18 @@ jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
   });
   this.widget('EventsTab').setField(this.popup);
   this.widget('WidgetActionsBox').setField(this.popup);
+  this.widget('WidgetPopupPropertiesBox').setField(this.popup);
   this.popup.open();
+};
+
+jswidgets.PopupForm.prototype._onUseButtonAsAnchorChange = function(event) {
+  if (event.propertyName === 'value' && this.popup) {
+    var $anchor = null;
+    if (this.widget('UseButtonAsAnchorField').value) {
+      $anchor = this.widget('OpenPopupButton').$field;
+    }
+    this.popup.set$Anchor($anchor);
+  }
 };
 
 jswidgets.PopupForm.prototype._onAnchorBoundsChange = function(event) {

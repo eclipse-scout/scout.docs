@@ -82,6 +82,7 @@
   __include("jswidgets/popup/PopupForm.js");
   __include("jswidgets/popup/PopupHorizontalAlignLookupCall.js");
   __include("jswidgets/popup/PopupVerticalAlignLookupCall.js");
+  __include("jswidgets/popup/WidgetPopupPropertiesBox.js");
   __include("jswidgets/smartfield/SmartFieldForm.js");
   __include("jswidgets/smartfield/SmartFieldPropertiesBox.js");
   __include("jswidgets/smartfield/SmartFieldDisplayStyleLookupCall.js");

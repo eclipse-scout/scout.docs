@@ -119,6 +119,10 @@
                     "label": "Vertical Alignment"
                   }
                 ]
+              },
+              {
+                "id": "WidgetPopupPropertiesBox",
+                "objectType": "jswidgets.WidgetPopupPropertiesBox"
               }
             ]
           },

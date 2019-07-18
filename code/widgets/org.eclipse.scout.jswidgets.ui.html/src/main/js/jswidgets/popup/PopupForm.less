@@ -1,17 +1,5 @@
 .popup-form-popup {
-  background-color: @popup-background-color;
-  border: 1px solid @border-color;
-  border-radius: @border-radius;
-  #scout.drop-shadow-large();
   max-width: 500px;
-  margin: 10px; /* minimum padding to window */
-
-  & > .popup-arrow {
-    &.bottom,
-    &.right {
-      #scout.drop-shadow-large(@y: 4px, @spread: -2px);
-    }
-  }
 
   & > .popup-widget {
     overflow: hidden;
