@@ -42,6 +42,10 @@ WARNING: {NotReleasedWarning}
 === StrictSimpleDateFormat
 `org.eclipse.scout.rt.jackson.dataobject.StrictSimpleDateFormat` was removed. Use `org.eclipse.scout.rt.platform.util.date.StrictSimpleDateFormat` instead.
 
+=== ObjectUtility
+`nvlOptional()` was renamed to `nvlOpt()`.
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
