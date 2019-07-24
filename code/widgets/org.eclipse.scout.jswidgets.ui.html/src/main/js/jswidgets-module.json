@@ -3,6 +3,7 @@
     "jswidgets/accordion/AccordionForm.json",
     "jswidgets/action/ActionPropertiesBox.json",
     "jswidgets/button/ButtonForm.json",
+    "jswidgets/browserfield/BrowserFieldForm.json",
     "jswidgets/carousel/CarouselForm.json",
     "jswidgets/common/EventsTab.json",
     "jswidgets/common/WidgetActionsBox.json",

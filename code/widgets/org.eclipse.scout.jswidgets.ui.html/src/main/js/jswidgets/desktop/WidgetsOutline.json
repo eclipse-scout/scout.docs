@@ -24,6 +24,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "Browser Field",
+      "detailForm": {
+        "objectType": "jswidgets.BrowserFieldForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "Carousel",
       "detailForm": {
         "objectType": "jswidgets.CarouselForm"

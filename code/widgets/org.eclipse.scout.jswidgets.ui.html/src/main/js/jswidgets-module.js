@@ -15,6 +15,7 @@
   __include("jswidgets/action/ActionStyleLookupCall.js");
   __include("jswidgets/button/ButtonForm.js");
   __include("jswidgets/button/ButtonDisplayStyleLookupCall.js");
+  __include("jswidgets/browserfield/BrowserFieldForm.js");
   __include("jswidgets/carousel/CarouselForm.js");
   __include("jswidgets/custom/chart/Chart.js");
   __include("jswidgets/custom/chart/ChartField.js");
