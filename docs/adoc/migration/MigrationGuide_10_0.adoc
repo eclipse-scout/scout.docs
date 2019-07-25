@@ -45,6 +45,23 @@ WARNING: {NotReleasedWarning}
 === ObjectUtility
 `nvlOptional()` was renamed to `nvlOpt()`.
 
+=== Data Objects
+The Scout data object support was moved from the Scout platform to the module `org.eclipse.scout.rt.dataobject`.
+The package imports of all data object related classes therefore changed:
+From `org.eclipse.scout.rt.platform.dataobject` to `org.eclipse.scout.rt.dataobject`
+
+==== Renamings
+`org.eclipse.scout.rt.client.ui.desktop.datachange.DoChangeEvent` -> `org.eclipse.scout.rt.client.ui.desktop.datachange.ItemDataChangeEvent`
+
+==== Dependencies
+All modules which use data objects were extended with a dependency to `org.eclipse.scout.rt.dataobject`
+
+* `org.eclipse.scout.rt.rest`
+* `org.eclipse.scout.rt.mom.api`
+
+==== Renamings in ErrorDo
+* `org.eclipse.scout.rt.rest.error.ErrorDo#status` -> `org.eclipse.scout.rt.rest.error.ErrorDo#httpStatus`
+* `org.eclipse.scout.rt.rest.error.ErrorDo#code` -> `org.eclipse.scout.rt.rest.error.ErrorDo#errorCode`
 
 // ^^^
 // Insert descriptions of Java API changes here
@@ -60,3 +77,24 @@ WARNING: {NotReleasedWarning}
 
 // ^^^
 // Insert descriptions of other important changes here
+
+== REST Service Changes
+
+Any changes which may change how REST consumer or provider behave.
+
+=== Renamings in ErrorDo
+`org.eclipse.scout.rt.rest.error.ErrorDo` used by `org.eclipse.scout.rt.rest.client.proxy.ErrorDoRestClientExceptionTransformer` and some `org.eclipse.scout.rt.rest.exception.AbstractExceptionMapper<E>` was slightly changed:
+
+* `ErrorDo#status` -> `ErrorDo#httpStatus`
+* `ErrorDo#code` -> `ErrorDo#errorCode`
+
+=== Different HTTP status codes
+
+A REST service client using `ErrorDoRestClientExceptionTransformer` will now transform
+
+* any client request error (HTTP `4xx` status codes) into a `VetoException`
+* `403 - Forbidden` into a `org.eclipse.scout.rt.dataobject.exception.AccessForbiddenException`
+* `404 - Not Found` into a `org.eclipse.scout.rt.dataobject.exception.ResourceNotFoundException`
+
+The `org.eclipse.scout.rt.rest.exception.VetoExceptionMapper` used by a REST service provide will now create an error response with status `400 - Bad Request` (this was formerly a `403`).
+
