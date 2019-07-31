@@ -2109,6 +2109,34 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @Order(205)
+        public class ScrollToSelection extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Scroll To Selection";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setScrollToSelection(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isScrollToSelection());
+          }
+        }
+
         @Order(210)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
