@@ -597,6 +597,11 @@ The `StyleHelper` bean was moved from _org.eclipse.scout.rt.client_ to _org.ecli
 
 _Migration:_ Update your imports to point to the new `org.eclipse.scout.rt.platform.html.StyleHelper` bean. Methods that passed an `IStylable` as first argument are no longer available. Instead, directly call the corresponding method on the `IStylable` element itself.
 
+=== Implementation of AbstractEntityRestClientExceptionTransformer sub-classes changed (since 8.0.0.037)
+
+The implementation of `AbstractEntityRestClientExceptionTransformer` was change an this might break implementation of sub-classes.
+Please refer to JavaDoc for any details.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
