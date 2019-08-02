@@ -2020,7 +2020,7 @@ public class TableFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
         }
 
-        @Order(200)
+        @Order(210)
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
