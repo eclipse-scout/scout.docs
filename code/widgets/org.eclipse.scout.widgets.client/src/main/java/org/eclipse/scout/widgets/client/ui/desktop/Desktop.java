@@ -155,7 +155,7 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Order(1000)
-    @ClassId("e60844f6-a1d5-4534-9e94-a1f445f2049f")
+    @ClassId("0d2384b0-e367-46f1-a137-10c0a40b5439")
     public class OptionsMenu extends AbstractMenu {
 
       @Override
@@ -187,7 +187,7 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Order(3000)
-    @ClassId("4937c432-adc1-481a-8ca8-62d64da7b0a0")
+    @ClassId("0de10681-9e56-4828-859d-d399d456d9ec")
     public class LogoutMenu extends AbstractMenu {
 
       @Override
