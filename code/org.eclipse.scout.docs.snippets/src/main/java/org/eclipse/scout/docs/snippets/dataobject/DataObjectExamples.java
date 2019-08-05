@@ -223,7 +223,7 @@ public class DataObjectExamples {
   //end::exampleEnum[]
 
   //tag::exampleId[]
-  @IdTypeName("FixtureUuId")
+  @IdTypeName("scout.ExampleId")
   public static final class ExampleId extends AbstractUuId {
     private static final long serialVersionUID = 1L;
 
