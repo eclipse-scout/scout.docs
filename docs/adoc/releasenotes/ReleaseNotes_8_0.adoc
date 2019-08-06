@@ -46,7 +46,6 @@ The following changes were made after the latest official release build. No rele
 
 WARNING: {NotReleasedWarning}
 
-* <<New RemoteSystemUnavailableException (since 8.0.0.033)>>
 * <<Rest Application Contributions (since 8.0.0.035)>>
 * <<Data Objects: Equals and HashCode (since 8.0.0.036)>>
 * <<New modules org.eclipse.scout.rt.dataobject and org.eclipse.scout.rt.dataobject.test (since 8.0.0.36)>>
@@ -509,13 +508,6 @@ The new Scout module `org.eclipse.scout.rt.rest` adds basic support for REST res
 Available REST resources are automatically found by Jandex class inventory and registered at runtime.
 
 For examples and documentation see https://eclipsescout.github.io/8.0/technical-guide.html#cha-rest[Technical Guide: REST]
-
-== New RemoteSystemUnavailableException (since 8.0.0.033)
-
-The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by a generalized `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException`.
-The exception is thrown within the UI server, when a call to the Scout backend server (through service tunnel) returns a status code < 200 or >= 299.
-The `RemoteSystemUnavailableException` is finally displayed as _network error_ by the global `org.eclipse.scout.rt.client.services.common.exceptionhandler.ErrorPopup`.
-The new `RemoteSystemUnavailableException` may generally be thrown to indicate an error when the communication with a remote service failed.
 
 == Rest Application Contributions (since 8.0.0.035)
 The JAX-RS application API (`javax.ws.rs.core.Application`) allows a REST application implementation to specify a set of classes, a set of singleton instances and a map of custom properties to be registered.

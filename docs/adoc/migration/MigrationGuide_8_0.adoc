@@ -40,6 +40,8 @@ The following changes were made after the latest official release build. No rele
 WARNING: {NotReleasedWarning}
 
 * <<StyleHelper Moved to Platform (since 8.0.0.034)>>
+* <<Implementation of AbstractEntityRestClientExceptionTransformer sub-classes changed (since 8.0.0.037)>>
+* <<New RemoteSystemUnavailableException (since 8.0.0.033), updated (since 8.0.0.037)>>
 
 ////
   =============================================================================
@@ -601,6 +603,13 @@ _Migration:_ Update your imports to point to the new `org.eclipse.scout.rt.platf
 
 The implementation of `AbstractEntityRestClientExceptionTransformer` was change an this might break implementation of sub-classes.
 Please refer to JavaDoc for any details.
+
+== New RemoteSystemUnavailableException (since 8.0.0.033), updated (since 8.0.0.037)
+
+The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by `org.eclipse.scout.rt.sharedservicetunnel.http.HttpServiceTunnelException` which is derived from the new, general `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException`.
+The `HttpServiceTunnelException` is thrown within the UI server, when a call to the Scout backend server (through the HTTP service tunnel) was unsuccessful and returned a status code < 200 or >= 299.
+The `RemoteSystemUnavailableException` and therefore its subclass `HttpServiceTunnelException` is finally displayed as _network error_ by the global `org.eclipse.scout.rt.client.services.common.exceptionhandler.ErrorPopup`.
+The new `RemoteSystemUnavailableException` may generally be thrown to indicate an error when the communication with a remote service failed.
 
 // ^^^
 // Insert descriptions of Java API changes here
