@@ -1,4 +1,4 @@
-package com.bsiag.widgets.ui.html; /*******************************************************************************
+package com.bsiag.widgets.ui.html; /*
  * Copyright (c) 2010-2015 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the BSI CRM Software License v1.0
@@ -6,7 +6,7 @@ package com.bsiag.widgets.ui.html; /********************************************
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
+ */
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.server.commons.authentication.AnonymousAccessController;
