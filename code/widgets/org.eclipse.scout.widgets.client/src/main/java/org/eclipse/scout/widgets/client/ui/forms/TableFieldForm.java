@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
@@ -25,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.AbstractTileTableHeader;
 import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
@@ -53,9 +55,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
+import org.eclipse.scout.rt.client.ui.tile.AbstractHtmlTile;
+import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
@@ -87,6 +92,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableHeaderVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableStatusVisibleField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TileModeField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.WrapTextField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.SelectedRowsField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.TableField;
@@ -178,6 +184,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
   public MultiSelectField getMultiSelectField() {
     return getFieldByClass(MultiSelectField.class);
+  }
+
+  public TileModeField getTileModeField() {
+    return getFieldByClass(TileModeField.class);
   }
 
   public PropertiesGroupBox getPropertiesGroupBox() {
@@ -438,6 +448,25 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
                 getDeletedRowsField().setValue(rowsToKeyString(Table.this.getDeletedRows()));
               }
             });
+          }
+
+          @Override
+          protected ITile execCreateTile(ITableRow row) {
+            return new AbstractHtmlTile() {
+              @Override
+              public String classId() {
+                return UUID.randomUUID().toString();
+              }
+
+              @Override
+              protected String getConfiguredContent() {
+                return HTML.fragment(
+                    HTML.br(), HTML.bold("Name: " + row.getCellValue(getNameColumn().getColumnIndex())),
+                    HTML.br(), HTML.bold("Location: " + row.getCellValue(getLocationColumn().getColumnIndex())),
+                    HTML.br(), HTML.bold("Date: " + row.getCellValue(getDateColumn().getColumnIndex())),
+                    HTML.br(), HTML.bold("Industry: " + row.getCellValue(getIndustryColumn().getColumnIndex()))).toHtml();
+              }
+            };
           }
 
           @Order(10)
@@ -1425,6 +1454,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               MessageBoxes.createOk().withHeader(getConfiguredKeyStroke() + " activated").show();
             }
           }
+
+          @Order(100)
+          public class TileTableHeader extends AbstractTileTableHeader {
+
+          }
         }
       }
 
@@ -2166,6 +2200,36 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
           }
         }
+
+        @Order(220)
+        public class TileModeField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Tile Mode";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setTileMode(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isTileMode());
+          }
+        }
+
       }
     }
 

@@ -53,15 +53,12 @@ jswidgets.TableForm.prototype._init = function(model) {
   this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
 
   this.table.createTileForRow = function(row) {
+    var icon = scout.icons.parseIconId(row.cells[5].iconId);
     var model = {
       parent: this,
-      content: '<br><b>ID:</b> ' +
-        row.id + '<br><b>String Column:</b> ' +
-        row.cells[0].value + '<br><b>Number Column:</b> ' +
-        row.cells[1].value + '<br><b>Date Column:</b> ' +
-        row.cells[2].value + '<br><b>Boolean Column:</b> ' +
-        row.cells[3].value + '<br><b>Smart Column:</b> ' +
-        row.cells[4].value
+      content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
+        '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
+        '<div style="text-align: center;"><p>' + row.cells[3].text + '(' + row.cells[1].text + ')</p></div>'
     };
     return new scout.create('HtmlTile', model);
   };

@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.AbstractTileTableHeader;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractAlphanumericSortingStringColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
@@ -340,6 +341,10 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       protected int getConfiguredWidth() {
         return 80;
       }
+    }
+
+    public class TileTableHeaderBox extends AbstractTileTableHeader {
+
     }
 
     @Order(30)

@@ -15,7 +15,7 @@
             "objectType": "TableField",
             "labelVisible": false,
             "gridDataHints": {
-              "h": 6
+              "h": 10
             },
             "table": {
               "id": "Table",
