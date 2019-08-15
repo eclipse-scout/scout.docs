@@ -63,10 +63,19 @@ All modules which use data objects were extended with a dependency to `org.eclip
 * `org.eclipse.scout.rt.rest.error.ErrorDo#status` -> `org.eclipse.scout.rt.rest.error.ErrorDo#httpStatus`
 * `org.eclipse.scout.rt.rest.error.ErrorDo#code` -> `org.eclipse.scout.rt.rest.error.ErrorDo#errorCode`
 
+=== CacheBuilder
+The following methods on `CacheBuilder` where removed, since they were unused and covered unused, old functionality:
+
+* Method `org.eclipse.scout.rt.shared.cache.CacheBuilder.addCacheInstance(ICache<K, V>)`
+* Method `org.eclipse.scout.rt.shared.cache.CacheBuilder.getCacheInstances()`
+
 === Move ICache and transactional Map
 `AbstractTransactionalMap` and its concrete implementations `ConcurrentTransactionalMap` and `CopyOnWriteTransactionalMap` have been moved to `org.eclipse.scout.rt.platform.util.collection`.
 
 `ICache`, its implementations and cache wrappers have been moved to  `org.eclipse.scout.rt.platform.cache`.
+
+
+
 
 // ^^^
 // Insert descriptions of Java API changes here
