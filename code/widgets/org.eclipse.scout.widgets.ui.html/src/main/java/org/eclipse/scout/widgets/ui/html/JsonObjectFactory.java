@@ -17,7 +17,7 @@ public class JsonObjectFactory extends AbstractJsonObjectFactory {
   @Override
   public IJsonAdapter<?> createJsonAdapter(Object model, IUiSession session, String id, IJsonAdapter<?> parent) {
     if (model instanceof ICustomTile) {
-      return new JsonCustomTile<ICustomTile>((ICustomTile) model, session, id, parent);
+      return new JsonCustomTile<>((ICustomTile) model, session, id, parent);
     }
     if (model instanceof IChartField) {
       return new JsonChartField((IChartField) model, session, id, parent);

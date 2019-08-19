@@ -46,7 +46,7 @@ public class SiblingFieldLookupCall extends LocalLookupCall<IFormField> {
 
   private void rebuildLookupRows() {
     m_lookupRows = m_parent.getFields().stream()
-        .map(field -> new LookupRow<IFormField>(field, field.getLabel()))
+        .map(field -> new LookupRow<>(field, field.getLabel()))
         .collect(Collectors.toList());
   }
 

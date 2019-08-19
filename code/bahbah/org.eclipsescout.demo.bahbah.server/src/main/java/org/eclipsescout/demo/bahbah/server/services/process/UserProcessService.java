@@ -42,7 +42,7 @@ import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.UserFormData;
 
 public class UserProcessService implements IUserProcessService {
-  private final Set<String> m_users = Collections.synchronizedSet(new HashSet<String>());
+  private final Set<String> m_users = Collections.synchronizedSet(new HashSet<>());
 
   @Override
   public void registerUser() {

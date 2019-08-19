@@ -36,7 +36,7 @@ public class PersonChooserFormTest {
   @Before
   public void setup() {
     List<ILookupRow<String>> l = new ArrayList<>();
-    ILookupRow<String> row = new LookupRow<String>("123", "Alice");
+    ILookupRow<String> row = new LookupRow<>("123", "Alice");
     l.add(row);
     when(mock_service.getDataByAll((ILookupCall<String>) any(ILookupCall.class))).thenReturn(l);
   }

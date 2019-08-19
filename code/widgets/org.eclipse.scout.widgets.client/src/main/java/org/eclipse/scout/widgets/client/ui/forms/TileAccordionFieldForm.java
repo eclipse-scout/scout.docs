@@ -3,7 +3,6 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -896,15 +895,12 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
   protected void sortTiles(boolean asc) {
     Accordion accordion = getAccordionField().getAccordion();
-    accordion.setTileComparator(new Comparator<ICustomTile>() {
-      @Override
-      public int compare(ICustomTile tile1, ICustomTile tile2) {
-        int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare((tile1).getLabel(), (tile2).getLabel());
-        if (!asc) {
-          result = -result;
-        }
-        return result;
+    accordion.setTileComparator((tile1, tile2) -> {
+      int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare((tile1).getLabel(), (tile2).getLabel());
+      if (!asc) {
+        result = -result;
       }
+      return result;
     });
   }
 

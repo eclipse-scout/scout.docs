@@ -1,7 +1,6 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -603,15 +602,12 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     protected void sortTiles(boolean asc) {
-      getTileField().getTileGrid().setComparator(new Comparator<ICustomTile>() {
-        @Override
-        public int compare(ICustomTile tile1, ICustomTile tile2) {
-          int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(tile1.getLabel(), tile2.getLabel());
-          if (!asc) {
-            result = -result;
-          }
-          return result;
+      getTileField().getTileGrid().setComparator((tile1, tile2) -> {
+        int result = StringUtility.ALPHANUMERIC_COMPARATOR.compare(tile1.getLabel(), tile2.getLabel());
+        if (!asc) {
+          result = -result;
         }
+        return result;
       });
     }
 

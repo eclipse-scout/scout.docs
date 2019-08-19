@@ -28,7 +28,7 @@ public class ViewButtonDisplayStyleLookupCall extends LocalLookupCall<IViewButto
   @Override
   protected List<? extends ILookupRow<IViewButton.DisplayStyle>> execCreateLookupRows() {
     return Arrays.asList(IViewButton.DisplayStyle.values()).stream().sorted().map(s -> {
-      return new LookupRow<IViewButton.DisplayStyle>(s, s.toString());
+      return new LookupRow<>(s, s.toString());
     }).collect(Collectors.toList());
   }
 

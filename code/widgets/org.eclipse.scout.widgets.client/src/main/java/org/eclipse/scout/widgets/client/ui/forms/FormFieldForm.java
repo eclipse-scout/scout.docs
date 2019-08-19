@@ -311,7 +311,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
             protected void execClickAction() {
               Field2Field field = getField2Field();
               if (field.getStatusMenuMappings().size() > 0) {
-                field.setStatusMenuMappings(new ArrayList<IStatusMenuMapping>());
+                field.setStatusMenuMappings(new ArrayList<>());
                 setLabel("Show menu in status");
                 return;
               }

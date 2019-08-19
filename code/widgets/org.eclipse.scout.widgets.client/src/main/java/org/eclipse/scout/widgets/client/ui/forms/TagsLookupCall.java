@@ -37,7 +37,7 @@ public class TagsLookupCall extends LocalLookupCall<String> {
   protected List<? extends ILookupRow<String>> execCreateLookupRows() {
     return m_tags.stream()
         .map(tag -> {
-          return new LookupRow<String>(tag, tag);
+          return new LookupRow<>(tag, tag);
         }).collect(Collectors.toList());
   }
 

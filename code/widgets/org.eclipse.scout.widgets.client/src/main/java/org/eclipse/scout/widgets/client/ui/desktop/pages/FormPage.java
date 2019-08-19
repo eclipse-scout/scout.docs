@@ -12,7 +12,6 @@ package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
 import java.net.URI;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
@@ -165,19 +164,16 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   public static void sort(List<IPage<?>> pageList) {
-    Collections.sort(pageList, new Comparator<IPage<?>>() {
-      @Override
-      public int compare(IPage<?> o1, IPage<?> o2) {
-        String s1 = null;
-        String s2 = null;
-        if (o1 != null) {
-          s1 = ObjectUtility.nvl(o1.getCell().getText(), o1.getClass().getSimpleName());
-        }
-        if (o2 != null) {
-          s2 = ObjectUtility.nvl(o2.getCell().getText(), o2.getClass().getSimpleName());
-        }
-        return ObjectUtility.compareTo(s1, s2);
+    Collections.sort(pageList, (o1, o2) -> {
+      String s1 = null;
+      String s2 = null;
+      if (o1 != null) {
+        s1 = ObjectUtility.nvl(o1.getCell().getText(), o1.getClass().getSimpleName());
       }
+      if (o2 != null) {
+        s2 = ObjectUtility.nvl(o2.getCell().getText(), o2.getClass().getSimpleName());
+      }
+      return ObjectUtility.compareTo(s1, s2);
     });
   }
 }
