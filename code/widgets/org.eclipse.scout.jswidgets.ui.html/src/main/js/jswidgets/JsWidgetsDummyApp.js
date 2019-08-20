@@ -8,11 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import { App } from '@eclipse-scout/demo-jswidgets';
+import { DummyApp } from '@eclipse-scout/core';
+import * as $ from 'jquery';
 
-new App().init({
-  bootstrap: {
-    textsUrl: 'res/texts.json'
+export default class JsWidgetsDummyApp extends DummyApp {
+  constructor() {
+    super();
+    console.log('Constructing app...'); // jshint ignore:line
+    $('<div>Hello World</div>').appendTo($('body'));
   }
-});
 
+  init() {
+    console.log('Initializing app...'); // jshint ignore:line
+  }
+}
