@@ -79,6 +79,12 @@
       "label": "Tooltip Text"
     },
     {
+      "id": "TooltipAnchorField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.TooltipAnchorLookupCall",
+      "label": "Tooltip Anchor"
+    },
+    {
       "id": "ErrorStatusField",
       "objectType": "SmartField",
       "lookupCall": "jswidgets.StatusSeverityLookupCall",
