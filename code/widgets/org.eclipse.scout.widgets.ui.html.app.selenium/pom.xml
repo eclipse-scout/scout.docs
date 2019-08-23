@@ -121,7 +121,7 @@
       </properties>
     </profile>
     <profile>
-      <id>linux64_chrome_driver</id>
+      <id>linux64_chrome_driver_x86_64</id>
       <activation>
         <os>
           <family>unix</family>
@@ -136,7 +136,7 @@
     </profile>
     <profile>
     <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
-      <id>linux64_chrome_driver</id>
+      <id>linux64_chrome_driver_amd64</id>
       <activation>
         <os>
           <family>unix</family>
