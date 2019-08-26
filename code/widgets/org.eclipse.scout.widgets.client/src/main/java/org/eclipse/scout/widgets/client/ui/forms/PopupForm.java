@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.scout.rt.client.ui.IWidget;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -40,6 +40,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.PopupForm.FormPopup.ContentForm;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.FormPopup.ContentForm.MainBox.FieldsBox;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.GroupBoxWidgetPopup.ContentGroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.PopupForm.LabelWidgetPopup.Label;
@@ -427,7 +428,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
   }
 
   protected void openPopup() {
-    IWidgetPopup popup = getPopupTypeField().getValue().newInstance();
+    IWidgetPopup<?> popup = getPopupTypeField().getValue().newInstance();
     popup.setAnchor(getUseButtonAsAnchorField().isChecked() ? getOpenPopupButton() : null);
     popup.setCloseOnAnchorMouseDown(getCloseOnAnchorMouseDownField().isChecked());
     popup.setCloseOnMouseDownOutside(getCloseOnMouseDownOutsideField().isChecked());
@@ -452,13 +453,13 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     GROUP_BOX_WIDGET_POPUP_TYPE(GroupBoxWidgetPopup.class),
     FORM_POPUP_TYPE(FormPopup.class);
 
-    private final Class<? extends IWidgetPopup> m_popupClass;
+    private final Class<? extends IWidgetPopup<? extends IWidget>> m_popupClass;
 
-    PopupType(Class<? extends IWidgetPopup> popupClass) {
+    PopupType(Class<? extends IWidgetPopup<? extends IWidget>> popupClass) {
       m_popupClass = popupClass;
     }
 
-    public IWidgetPopup newInstance() {
+    public IWidgetPopup<? extends IWidget> newInstance() {
       return BeanUtility.createInstance(m_popupClass);
     }
 
@@ -467,6 +468,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("60fb05cc-ecb7-4618-ada6-47f51793fc8c")
   public static class LabelWidgetPopup extends AbstractWidgetPopup<Label> {
 
     @Override
@@ -479,6 +481,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
       return Label.class;
     }
 
+    @ClassId("1ae92e7a-798d-4d46-af56-d65a1b5cfdf2")
     public class Label extends AbstractLabel {
       @Override
       protected String getConfiguredValue() {
@@ -493,6 +496,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("cbc18e7b-8d06-4aed-bc9e-d2601b7ec020")
   public static class GroupBoxWidgetPopup extends AbstractWidgetPopup<ContentGroupBox> {
 
     @Override
@@ -580,10 +584,11 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
-  public static class FormPopup extends AbstractFormPopup {
+  @ClassId("b83a9d3a-61f0-422f-9004-09e2d010935a")
+  public static class FormPopup extends AbstractFormPopup<ContentForm> {
 
     @Override
-    protected IForm createForm() {
+    protected ContentForm createForm() {
       return new ContentForm();
     }
 
@@ -684,6 +689,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("1c5e073f-d5a6-489e-b6da-bbc6d7533925")
   public static class PopupTypeLookupCall extends LocalLookupCall<PopupType> {
     private static final long serialVersionUID = 1L;
 
@@ -696,6 +702,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("0a916a2e-b37c-428f-b570-66b1c417d306")
   public static class HorizontalAlignmentLookupCall extends LocalLookupCall<String> {
 
     private static final long serialVersionUID = 1L;
@@ -709,6 +716,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("4d6bad4e-2ab6-4747-be6a-ced03317ad90")
   public static class VerticalAlignmentLookupCall extends LocalLookupCall<String> {
 
     private static final long serialVersionUID = 1L;
@@ -722,6 +730,7 @@ public class PopupForm extends AbstractForm implements IAdvancedExampleForm {
     }
   }
 
+  @ClassId("724db415-ce21-4ee3-aedd-27c679f9b561")
   public static class ScrollTypeLookupCall extends LocalLookupCall<String> {
     private static final long serialVersionUID = 1L;
 
