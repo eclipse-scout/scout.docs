@@ -67,6 +67,12 @@
       "enabled": false
     },
     {
+      "id": "HeaderTooltipHtmlEnabledField",
+      "objectType": "CheckBoxField",
+      "label": "Header Tooltip Html Enabled",
+      "labelVisible": false
+    },
+    {
       "id": "TextWrapField",
       "objectType": "CheckBoxField",
       "label": "Text Wrap",
@@ -127,6 +133,11 @@
       "id": "TextField",
       "objectType": "StringField",
       "label": "Text"
+    },
+    {
+      "id": "HeaderTooltipTextField",
+      "objectType": "StringField",
+      "label": "Header Tooltip Text"
     },
     {
       "id": "HeaderIconIdField",
