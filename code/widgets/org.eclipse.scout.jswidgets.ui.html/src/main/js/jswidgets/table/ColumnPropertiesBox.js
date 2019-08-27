@@ -77,6 +77,10 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   htmlEnabledField.setValue(this.column.htmlEnabled);
   htmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var headerTooltipHtmlEnabledField = this.widget('HeaderTooltipHtmlEnabledField');
+  headerTooltipHtmlEnabledField.setValue(this.column.headerTooltipHtmlEnabled);
+  headerTooltipHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var mandatoryField = this.widget('MandatoryField');
   mandatoryField.setValue(this.column.mandatory);
   mandatoryField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -112,6 +116,10 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   var textField = this.widget('TextField');
   textField.setValue(this.column.text);
   textField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var headerTooltipTextField = this.widget('HeaderTooltipTextField');
+  headerTooltipTextField.setValue(this.column.headerTooltipText);
+  headerTooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
 
   var headerIconIdField = this.widget('HeaderIconIdField');
   headerIconIdField.setValue(this.column.headerIconId);
@@ -186,6 +194,10 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setMaxLength(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'TextField') {
     this.column.setText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderTooltipTextField') {
+    this.column.setHeaderTooltipText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderTooltipHtmlEnabledField') {
+    this.column.setHeaderTooltipHtmlEnabled(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HeaderIconIdField') {
     this.column.setHeaderIconId(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HeaderCssClassField') {
