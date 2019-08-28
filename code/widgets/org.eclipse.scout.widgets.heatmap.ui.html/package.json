@@ -1,7 +1,7 @@
 {
-  "name": "@eclipse-scout/demo-widgets-app",
+  "name": "@eclipse-scout/demo-widgets-heatmap",
   "version": "10.0.0",
-  "description": "Eclipse Scout Demo Widgets",
+  "description": "Eclipse Scout Demo Widgets Heatmap",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
   "repository": {
@@ -16,8 +16,10 @@
     "node": ">=12.1.0",
     "npm": ">=6.9.0"
   },
+  "main": "./src/main/js/heatmap/index.js",
   "files": [
     "dist",
+    "res",
     "src"
   ],
   "scripts": {
@@ -31,11 +33,10 @@
     "snapshot-version": "scout-scripts snapshot-version"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": "^10.0.0-snapshot",
-    "@eclipse-scout/core": "^10.0.0-snapshot"
+    "@eclipse-scout/cli": "^10.0.0-snapshot"
   },
   "dependencies": {
-    "@eclipse-scout/demo-widgets": "^10.0.0-snapshot",
-    "@eclipse-scout/demo-widgets-heatmap": "^10.0.0-snapshot"
+    "@eclipse-scout/core": "^10.0.0-snapshot",
+    "jquery": "^3.4.1"
   }
 }
