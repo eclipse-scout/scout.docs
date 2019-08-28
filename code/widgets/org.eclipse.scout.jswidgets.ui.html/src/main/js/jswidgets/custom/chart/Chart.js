@@ -15,32 +15,32 @@ jswidgets.Chart = function() {
 
   // default config
   this.config = {
-      type: jswidgets.Chart.type.PIE,
-      options: {
-        elements: {
-          arc: {
-            borderWidth: 1
-          }
-        },
-        layout: {
-          padding: {
-            left: 20,
-            right: 20,
-            top: 20,
-            bottom: 20
-          }
+    type: jswidgets.Chart.type.PIE,
+    options: {
+      elements: {
+        arc: {
+          borderWidth: 1
+        }
+      },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 20
         }
       }
-    };
+    }
+  };
 };
 scout.inherits(jswidgets.Chart, scout.Widget);
 
 jswidgets.Chart.type = {
-    PIE: 'pie',
-    LINE: 'line',
-    DOUGHNUT: 'doughnut',
-    POLAR_AREA: 'polarArea'
-  };
+  PIE: 'pie',
+  LINE: 'line',
+  DOUGHNUT: 'doughnut',
+  POLAR_AREA: 'polarArea'
+};
 
 jswidgets.Chart.prototype._init = function(model) {
   jswidgets.Chart.parent.prototype._init.call(this, model);
@@ -57,7 +57,7 @@ jswidgets.Chart.prototype.setData = function(data) {
   this.setProperty('data', data);
 };
 
-jswidgets.Chart.prototype._renderData= function() {
+jswidgets.Chart.prototype._renderData = function() {
   if (!this.data) {
     return;
   }
@@ -65,13 +65,13 @@ jswidgets.Chart.prototype._renderData= function() {
   this.chart.update();
 };
 
-jswidgets.Chart.prototype.setConfig = function(config){
+jswidgets.Chart.prototype.setConfig = function(config) {
   this.setProperty('config', config);
 };
 
 
 jswidgets.Chart.prototype._renderConfig = function() {
-  if(this.chart){
+  if (this.chart) {
     this.chart.destroy();
   }
   this.chart = new Chart(this.$container[0], this.config); // jshint ignore:line

@@ -45,7 +45,7 @@ jswidgets.SamplePageWithTableDetailTable.prototype._createRow = function() {
     id: this.rows.length + 1,
     //    string: 'string ' + (this.rows.length + 1),
     string: strings[randomNumber],
-//    number: Math.floor(Math.random() * Math.floor(999999)),
+    //    number: Math.floor(Math.random() * Math.floor(999999)),
     number: 2000,
     bool: Math.random() >= 0.5
   };
