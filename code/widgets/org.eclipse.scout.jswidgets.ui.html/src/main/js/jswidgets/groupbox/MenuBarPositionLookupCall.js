@@ -20,5 +20,6 @@ jswidgets.MenuBarPositionLookupCall.prototype._data = function() {
 jswidgets.MenuBarPositionLookupCall.DATA = [
   [scout.GroupBox.MenuBarPosition.AUTO, 'Auto'],
   [scout.GroupBox.MenuBarPosition.TOP, 'Top'],
-  [scout.GroupBox.MenuBarPosition.BOTTOM, 'Bottom']
+  [scout.GroupBox.MenuBarPosition.BOTTOM, 'Bottom'],
+  [scout.GroupBox.MenuBarPosition.TITLE, 'Title']
 ];
