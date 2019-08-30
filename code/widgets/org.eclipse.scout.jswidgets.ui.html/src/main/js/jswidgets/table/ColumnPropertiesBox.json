@@ -27,8 +27,7 @@
       "id": "MandatoryField",
       "objectType": "CheckBoxField",
       "label": "Mandatory",
-      "labelVisible": false,
-      "enabled": true
+      "labelVisible": false
     },
     {
       "id": "AutoOptimizeWidthField",
@@ -40,29 +39,25 @@
       "id": "FixedWidthField",
       "objectType": "CheckBoxField",
       "label": "Fixed Width",
-      "labelVisible": false,
-      "enabled": true
+      "labelVisible": false
     },
     {
       "id": "FixedPositionField",
       "objectType": "CheckBoxField",
       "label": "Fixed Position",
-      "labelVisible": false,
-      "enabled": true
+      "labelVisible": false
     },
     {
       "id": "HeaderMenuEnabledField",
       "objectType": "CheckBoxField",
       "label": "Header Menu Enabled",
-      "labelVisible": false,
-      "enabled": true
+      "labelVisible": false
     },
     {
       "id": "HeaderHtmlEnabledField",
       "objectType": "CheckBoxField",
       "label": "Header Html Enabled",
-      "labelVisible": false,
-      "enabled": false
+      "labelVisible": false
     },
     {
       "id": "HtmlEnabledField",
@@ -131,8 +126,18 @@
     {
       "id": "TextField",
       "objectType": "StringField",
-      "label": "Text",
-      "enabled": false
+      "label": "Text"
+    },
+    {
+      "id": "HeaderIconIdField",
+      "objectType": "SmartField",
+      "lookupCall": "jswidgets.IconIdLookupCall",
+      "label": "Header Icon Id"
+    },
+    {
+      "id": "HeaderCssClassField",
+      "objectType": "StringField",
+      "label": "Header Css Class"
     },
     {
       "id": "SortIndexField",

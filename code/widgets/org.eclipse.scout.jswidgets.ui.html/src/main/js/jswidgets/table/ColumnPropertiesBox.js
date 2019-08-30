@@ -113,6 +113,14 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   textField.setValue(this.column.text);
   textField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var headerIconIdField = this.widget('HeaderIconIdField');
+  headerIconIdField.setValue(this.column.headerIconId);
+  headerIconIdField.on('propertyChange', this._onPropertyChange.bind(this));
+
+  var headerCssClassField = this.widget('HeaderCssClassField');
+  headerCssClassField.setValue(this.column.headerCssClass);
+  headerCssClassField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var sortIndexField = this.widget('SortIndexField');
   sortIndexField.setValue(this.column.sortIndex);
   sortIndexField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -176,6 +184,14 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
     this.column.setWidth(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'MaxLengthField') {
     this.column.setMaxLength(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'TextField') {
+    this.column.setText(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderIconIdField') {
+    this.column.setHeaderIconId(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderCssClassField') {
+    this.column.setHeaderCssClass(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'HeaderHtmlEnabledField') {
+    this.column.setHeaderHtmlEnabled(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'TextWrapField') {
     this.column.setTextWrap(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
