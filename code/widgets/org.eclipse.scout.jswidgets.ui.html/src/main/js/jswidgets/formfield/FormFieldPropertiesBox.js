@@ -57,6 +57,10 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   loadingField.setValue(this.field.loading);
   loadingField.on('propertyChange', this._onPropertyChange.bind(this));
 
+  var inheritAccessibilityField = this.widget('InheritAccessibilityField');
+  inheritAccessibilityField.setValue(this.field.inheritAccessibility);
+  inheritAccessibilityField.on('propertyChange', this._onPropertyChange.bind(this));
+
   var fieldStyleField = this.widget('FieldStyleField');
   fieldStyleField.setValue(this.field.fieldStyle);
   fieldStyleField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -117,6 +121,8 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     this.field.setMandatory(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'LoadingField') {
     this.field.setLoading(event.newValue);
+  } else if (event.propertyName === 'value' && event.source.id === 'InheritAccessibilityField') {
+    this.field.setInheritAccessibility(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'FieldStyleField') {
     this.field.setFieldStyle(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
