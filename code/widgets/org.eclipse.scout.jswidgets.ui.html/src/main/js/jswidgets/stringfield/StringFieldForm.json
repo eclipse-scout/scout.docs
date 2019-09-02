@@ -58,7 +58,11 @@
                     "id": "SpellCheckEnabledField",
                     "objectType": "CheckBoxField",
                     "label": "Spell Check Enabled",
-                    "labelVisible": false
+                    "labelVisible": false,
+                    "tooltipText": "${textKey:SpellCheckEnabledTooltip}",
+                    "gridDataHints": {
+                      "fillHorizontal": false
+                    }
                   },
                   {
                     "id": "TrimTextField",

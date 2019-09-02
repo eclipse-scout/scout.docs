@@ -790,6 +790,16 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("SpellCheckEnabledTooltip");
+        }
+
+        @Override
+        protected boolean getConfiguredFillHorizontal() {
+          return false;
+        }
+
+        @Override
         protected void execChangedValue() {
           getTextInputField().setSpellCheckEnabled(getValue());
         }
@@ -1141,6 +1151,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() {
+            getTargetField().requestFocus(); // Otherwise selection won't be visible
             getTargetField().select(getSelectionStartField().getValue(), getSelectionEndField().getValue());
           }
         }
