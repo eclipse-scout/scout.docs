@@ -1,2 +1,3 @@
 src/main/js/widgets/index.js
 src/main/js/widgets/WidgetsDummyApp.js
+src/main/js/widgets/theme.less
