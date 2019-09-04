@@ -16,7 +16,7 @@
     "node": ">=12.1.0",
     "npm": ">=6.9.0"
   },
-  "main": "./src/main/js/jswidgets/index.js",
+  "main": "./src/main/js/index.js",
   "files": [
     "dist",
     "res",

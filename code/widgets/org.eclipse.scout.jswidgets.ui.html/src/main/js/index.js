@@ -12,4 +12,5 @@
 import * as scout from '@eclipse-scout/core';
 
 export { scout as default };
-export { default as App } from './WidgetsDummyApp';
+ export { default as App } from './jswidgets/JsWidgetsDummyApp';
+
