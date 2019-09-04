@@ -85,6 +85,7 @@ We can now add the Scout person page as described below.
 * Select the newly created package `org.eclipse.scout.contacts.client.person` in the Package Explorer
 * Press kbd:[Ctrl]+kbd:[N], enter "scout page" into the search field
 * Select the [wizard]_Scout Page_ wizard in the proposal box and click [button]_Next_
+* Un-check the _Create an Abstract Super Page_ option, as we don't need an additional abstract super class for our new page
 * Enter `PersonTablePage` as the class name and click [button]_Finish_ as shown in <<img-contacts_new_person_page>>
 
 [[img-contacts_new_person_page]]
