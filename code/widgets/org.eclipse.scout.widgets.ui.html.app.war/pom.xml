@@ -47,6 +47,17 @@
         </configuration>
       </plugin>
 
+      <!-- TODO nach migration anpassen/entfernen. js aus source folder nehmen-->
+      <plugin>
+        <groupId>org.basepom.maven</groupId>
+        <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <configuration>
+          <ignoredResourcePatterns>
+            <ignoredResourcePattern>.*index\.js$</ignoredResourcePattern>
+          </ignoredResourcePatterns>
+        </configuration>
+      </plugin>
+
       <!-- deployment is not bound to any lifecycle phase (by purpose!). It
         can be triggered by executing mvn properties:read-project-properties tomcat7:redeploy
         -Dconfig.file=your.properties

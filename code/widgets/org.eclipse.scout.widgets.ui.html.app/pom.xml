@@ -35,4 +35,19 @@
       <artifactId>org.eclipse.scout.widgets.heatmap.ui.html</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- TODO nach migration anpassen/entfernen. js aus source folder nehmen-->
+      <plugin>
+        <groupId>org.basepom.maven</groupId>
+        <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <configuration>
+          <ignoredResourcePatterns>
+            <ignoredResourcePattern>.*index\.js$</ignoredResourcePattern>
+          </ignoredResourcePatterns>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
