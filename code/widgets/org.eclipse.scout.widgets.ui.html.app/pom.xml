@@ -62,6 +62,7 @@
             <ignoredResourcePattern>.*exsd$</ignoredResourcePattern>
             <ignoredResourcePattern>.*about.ini$</ignoredResourcePattern>
             <ignoredResourcePattern>.*index\.js$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*theme\.less$</ignoredResourcePattern>
           </ignoredResourcePatterns>
         </configuration>
       </plugin>
