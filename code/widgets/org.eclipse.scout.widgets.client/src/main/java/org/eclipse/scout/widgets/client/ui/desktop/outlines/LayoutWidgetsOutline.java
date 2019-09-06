@@ -16,7 +16,6 @@ import java.util.Set;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TreeMenuType;
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
@@ -34,11 +33,8 @@ import org.eclipse.scout.widgets.client.ui.forms.TabBoxForm;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm;
 import org.eclipse.scout.widgets.shared.Icons;
 
-/**
- * @author mzi
- */
-@Order(1200.0)
-public class LayoutWidgetsOutline extends AbstractOutline {
+@Order(1200)
+public class LayoutWidgetsOutline extends AbstractWidgetsOutline {
 
   @Override
   protected String getConfiguredTitle() {

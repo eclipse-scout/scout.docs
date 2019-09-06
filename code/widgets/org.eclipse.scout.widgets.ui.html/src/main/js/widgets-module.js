@@ -9,6 +9,9 @@
 (function(widgets, $, undefined) {
   __include("widgets/ExampleBeanField.js");
   __include("widgets/ExampleBeanColumn.js");
+  __include("widgets/WidgetsOutline.js");
+  __include("widgets/WidgetsOutlineAdapter.js");
+  __include("widgets/WidgetsTileOutlineOverview.js");
   __include("widgets/tile/CustomTile.js");
   __include("widgets/tile/CustomTileAdapter.js");
   __include("widgets/custom/chartfield/ChartField.js");
