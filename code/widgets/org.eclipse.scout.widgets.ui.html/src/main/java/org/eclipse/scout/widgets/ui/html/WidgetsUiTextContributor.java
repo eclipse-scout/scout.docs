@@ -18,8 +18,11 @@ public class WidgetsUiTextContributor implements IUiTextContributor {
 
   @Override
   public void contributeUiTextKeys(Set<String> textKeys) {
-    textKeys.addAll(Arrays.asList("ExampleBeanFieldUiText"));
-    textKeys.addAll(Arrays.asList("ExampleBeanFieldAppLinkText"));
+    textKeys.addAll(Arrays.asList(
+        "AppDescription",
+        "ApplicationTitle",
+        "ExampleBeanFieldUiText",
+        "ExampleBeanFieldAppLinkText"));
   }
 
 }

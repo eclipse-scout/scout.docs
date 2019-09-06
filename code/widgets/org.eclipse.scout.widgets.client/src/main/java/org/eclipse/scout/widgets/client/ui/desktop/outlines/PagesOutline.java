@@ -12,7 +12,6 @@ package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
 import java.util.List;
 
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTablePage;
@@ -22,8 +21,8 @@ import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithSearchFormTable
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableRecTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage;
 
-@Order(1400.0)
-public class PagesOutline extends AbstractOutline {
+@Order(1400)
+public class PagesOutline extends AbstractWidgetsOutline {
 
   @Override
   protected String getConfiguredTitle() {

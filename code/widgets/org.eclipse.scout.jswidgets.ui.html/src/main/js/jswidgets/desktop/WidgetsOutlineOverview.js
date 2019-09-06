@@ -30,8 +30,10 @@ jswidgets.WidgetsOutlineOverview.prototype._createPageTileGrid = function() {
     parent: this,
     outline: this.outline,
     layoutConfig: {
+      hgap: 12,
+      vgap: 12,
       columnWidth: 150,
-      rowHeight: 100
+      rowHeight: 90
     }
   });
 };

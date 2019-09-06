@@ -12,7 +12,6 @@ package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
 import java.util.List;
 
-import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -31,11 +30,8 @@ import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm;
 
-/**
- * @author mzi
- */
-@Order(1000.0)
-public class SimpleWidgetsOutline extends AbstractOutline {
+@Order(1000)
+public class SimpleWidgetsOutline extends AbstractWidgetsOutline {
 
   @Override
   protected String getConfiguredTitle() {
