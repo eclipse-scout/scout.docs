@@ -8,11 +8,8 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import { WidgetsApp } from './src/widgets/index';
-import { Device } from '@eclipse-scout/eclipse-scout';
-import * as $ from 'jquery';
+import {WidgetsApp} from './src/widgets/index';
+import {Device} from '@eclipse-scout/eclipse-scout';
 
-$(document).ready(() => {
-  new WidgetsApp().init();
-  console.log(Device.get().toString());
-});
+new WidgetsApp().init();
+console.log(Device.get().toString());
