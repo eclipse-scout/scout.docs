@@ -9,8 +9,8 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 
-import * as scout from '@eclipse-scout/core';
+export { default as App } from './jswidgets/JsWidgetsDummyApp';
 
-export { scout as default };
- export { default as App } from './jswidgets/JsWidgetsDummyApp';
+import * as self from './index.js';
 
+window.jswidgets = Object.assign(window.jswidgets || {}, self);

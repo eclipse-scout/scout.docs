@@ -12,9 +12,8 @@
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
 const mainModule = require.main;
 const CopyPlugin = mainModule.require('copy-webpack-plugin');
-const path = require('path');
 const themePath = './src/main/js/theme.less';
-const resPath = path.join(path.dirname(require.resolve('@eclipse-scout/core')), 'res');
+const resPath = 'node_modules/@eclipse-scout/core/res';
 module.exports = (env, args) => {
   args.resDir = 'src/main/resources/WebContent';
   const config = baseConfig(env, args);
