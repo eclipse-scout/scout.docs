@@ -225,7 +225,7 @@
                       {
                         "id": "InsertTileTypeField",
                         "objectType": "SmartField",
-                        "displayStyle": 'dropdown',
+                        "displayStyle": "dropdown",
                         "label": "Tile Type",
                         "labelVisible": false,
                         "statusVisible": false,
@@ -242,7 +242,7 @@
                       {
                         "id": "InsertTileTargetField",
                         "objectType": "SmartField",
-                        "displayStyle": 'dropdown',
+                        "displayStyle": "dropdown",
                         "labelVisible": false,
                         "statusVisible": false
                       },

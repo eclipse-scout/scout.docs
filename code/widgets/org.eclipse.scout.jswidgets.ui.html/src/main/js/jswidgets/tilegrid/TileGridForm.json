@@ -197,7 +197,7 @@
                   {
                     "id": "TileTypeField",
                     "objectType": "SmartField",
-                    "displayStyle": 'dropdown',
+                    "displayStyle": "dropdown",
                     "label": "Tile Type",
                     "tooltipText": "${textKey:TileTypeTooltip}",
                     "lookupCall": "jswidgets.TileTypeLookupCall",
