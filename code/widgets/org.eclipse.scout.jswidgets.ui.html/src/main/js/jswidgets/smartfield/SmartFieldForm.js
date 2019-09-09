@@ -40,10 +40,3 @@ jswidgets.SmartFieldForm.prototype._onNewLanguageMenuAction = function(event) {
     .withBody(this.session.text('NewLanguageMessage'))
     .buildAndOpen();
 };
-
-jswidgets.SmartFieldForm.prototype._onNewLanguageMenuAction = function(event) {
-  return scout.MessageBoxes.createOk(this)
-    .withHeader(this.session.text('ThanksForClickingMe'))
-    .withBody(this.session.text('NewLanguageMessage'))
-    .buildAndOpen();
-};
