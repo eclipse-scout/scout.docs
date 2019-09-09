@@ -18,10 +18,10 @@ jswidgets.ChartTypeLookupCall.prototype._data = function() {
 };
 
 jswidgets.ChartTypeLookupCall.DATA = [
-  [jswidgets.Chart.type.PIE, 'Pie'],
-  [jswidgets.Chart.type.LINE, 'Line'],
-  [jswidgets.Chart.type.DOUGHNUT, 'Doughnut'],
-  [jswidgets.Chart.type.POLAR_AREA, 'Polar Area']
+  [jswidgets.Chart.Type.PIE, 'Pie'],
+  [jswidgets.Chart.Type.LINE, 'Line'],
+  [jswidgets.Chart.Type.DOUGHNUT, 'Doughnut'],
+  [jswidgets.Chart.Type.POLAR_AREA, 'Polar Area']
 
 
 ];

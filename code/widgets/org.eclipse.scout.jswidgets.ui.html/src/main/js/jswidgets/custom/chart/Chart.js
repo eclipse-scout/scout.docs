@@ -15,7 +15,7 @@ jswidgets.Chart = function() {
 
   // default config
   this.config = {
-    type: jswidgets.Chart.type.PIE,
+    type: jswidgets.Chart.Type.PIE,
     options: {
       elements: {
         arc: {
@@ -35,7 +35,7 @@ jswidgets.Chart = function() {
 };
 scout.inherits(jswidgets.Chart, scout.Widget);
 
-jswidgets.Chart.type = {
+jswidgets.Chart.Type = {
   PIE: 'pie',
   LINE: 'line',
   DOUGHNUT: 'doughnut',

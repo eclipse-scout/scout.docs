@@ -11,7 +11,7 @@
 jswidgets.ChartForm = function() {
   jswidgets.ChartForm.parent.call(this);
   this.chartField = null;
-  this._chartType = jswidgets.Chart.type.PIE;
+  this._chartType = jswidgets.Chart.Type.PIE;
   this._dataSeriesCount = 1;
   this._dataArrayLength = 5;
 };
@@ -149,7 +149,7 @@ jswidgets.ChartForm.prototype._randomDataset = function(colorIndex) {
     backgroundColor: jswidgets.ChartForm.CHART_COLORS_DONAT[colorIndex].slice(0, this._dataArrayLength),
     data: []
   };
-  if (this._chartType === jswidgets.Chart.type.LINE || this._chartType === jswidgets.Chart.type.POLAR_AREA) {
+  if (this._chartType === jswidgets.Chart.Type.LINE || this._chartType === jswidgets.Chart.Type.POLAR_AREA) {
     dataset.backgroundColor = jswidgets.ChartForm.CHART_COLORS_LINE[colorIndex];
   }
   for (var i = 0; i < this._dataArrayLength; i++) {
