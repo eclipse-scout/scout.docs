@@ -10,8 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms.groupbox;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,38 +24,22 @@ public class SiblingFieldLookupCall extends LocalLookupCall<IFormField> {
   private static final long serialVersionUID = 1L;
 
   private ICompositeField m_parent;
-  private PropertyChangeListener m_compositeFieldPropertyListener;
-  private List<? extends ILookupRow<IFormField>> m_lookupRows;
 
-  public SiblingFieldLookupCall(ICompositeField parent) {
+  public void setParent(ICompositeField parent) {
     m_parent = parent;
-    m_compositeFieldPropertyListener = new P_CompositeFieldPropertyListener();
-    rebuildLookupRows();
-    m_parent.addPropertyChangeListener(m_compositeFieldPropertyListener);
   }
 
-  public void dispose() {
-    m_parent.removePropertyChangeListener(m_compositeFieldPropertyListener);
+  public ICompositeField getParent() {
+    return m_parent;
   }
 
   @Override
   protected List<? extends ILookupRow<IFormField>> execCreateLookupRows() {
-    return m_lookupRows;
-  }
-
-  private void rebuildLookupRows() {
-    m_lookupRows = m_parent.getFields().stream()
+    if (m_parent == null) {
+      return Collections.emptyList();
+    }
+    return m_parent.getFields().stream()
         .map(field -> new LookupRow<>(field, field.getLabel()))
         .collect(Collectors.toList());
   }
-
-  private class P_CompositeFieldPropertyListener implements PropertyChangeListener {
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-      if (ICompositeField.PROP_FIELDS.equals(evt.getPropertyName())) {
-        rebuildLookupRows();
-      }
-    }
-  }
-
 }

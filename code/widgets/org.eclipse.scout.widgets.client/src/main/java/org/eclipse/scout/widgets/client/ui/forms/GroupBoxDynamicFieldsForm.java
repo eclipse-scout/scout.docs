@@ -88,6 +88,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
     @Order(1000)
     @ClassId("48565377-244a-4870-9f38-2c26db811e78")
     public class DetailBox extends AbstractGroupBox {
+
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("GroupBox");
@@ -96,6 +97,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
       @Order(1000)
       @ClassId("0ce3d72d-6655-461d-9007-6939cf70c599")
       public class EnabledMenu extends AbstractCheckBoxMenu {
+
         @Override
         protected String getConfiguredText() {
           return TEXTS.get("Enable");
@@ -120,6 +122,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
       @Order(1000)
       @ClassId("03a222ee-6692-4557-a262-7d1d7bfb6f26")
       public class FirstNameField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("FirstName");
@@ -130,12 +133,12 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
           return 128;
         }
       }
-
     }
 
     @Order(1500)
     @ClassId("9c38dedc-2a13-492a-98bf-dd3813dff644")
     public class AddFieldBox extends AbstractGroupBox {
+
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("AddDynamicField");
@@ -144,6 +147,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
       @Order(1000)
       @ClassId("949bc843-4313-4493-af1c-c41023921155")
       public class FieldTypeField extends AbstractSmartField<FIELD_TYPE> {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("FieldType");
@@ -163,6 +167,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
       @Order(2000)
       @ClassId("21c2be08-687d-4178-b9f1-4c4562e5f64d")
       public class LabelField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Label");
@@ -177,26 +182,27 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
       @Order(2500)
       @ClassId("9050d0c2-b620-4238-87a2-d8c619c94920")
       public class BeforeField extends AbstractSmartField<IFormField> {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Before");
         }
 
         @Override
-        protected void execInitField() {
-          super.execInitField();
-          setLookupCall(new SiblingFieldLookupCall(getDetailBox()));
+        protected Class<? extends ILookupCall<IFormField>> getConfiguredLookupCall() {
+          return SiblingFieldLookupCall.class;
         }
 
         @Override
-        protected void execDisposeField() {
-          ((SiblingFieldLookupCall) getLookupCall()).dispose();
+        protected void execPrepareLookup(ILookupCall<IFormField> call) {
+          ((SiblingFieldLookupCall) call).setParent(getDetailBox());
         }
       }
 
       @Order(3000)
       @ClassId("b3a381c5-4d5a-4aad-967d-e8dd1a0bd31e")
       public class CreateFieldButton extends AbstractButton {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("CreateField");
@@ -234,13 +240,11 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
           getDetailBox().addField(field);
         }
       }
-
     }
 
     @Order(2000)
     @ClassId("9ad50b0c-9080-4d90-b443-fe8e0b06c0bd")
     public class CloseButton extends AbstractCloseButton {
     }
-
   }
 }
