@@ -108,9 +108,9 @@
   __include("jswidgets/tabbox/TabBoxAddTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxDeleteTabItemBox.js");
   __include("jswidgets/tabbox/TabBoxForm.js");
-  __include('jswidgets/tabbox/TabBoxProperties.js');
-  __include('jswidgets/tabbox/TabItemLookupCall.js');
-  __include('jswidgets/tabbox/TabItemProperties.js');
+  __include("jswidgets/tabbox/TabBoxProperties.js");
+  __include("jswidgets/tabbox/TabItemLookupCall.js");
+  __include("jswidgets/tabbox/TabItemProperties.js");
   __include("jswidgets/table/TableForm.js");
   __include("jswidgets/table/TablePropertiesBox.js");
   __include("jswidgets/table/ColumnLookupCall.js");
