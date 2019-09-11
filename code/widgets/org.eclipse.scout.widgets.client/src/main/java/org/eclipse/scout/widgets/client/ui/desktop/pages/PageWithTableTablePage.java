@@ -718,7 +718,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.LightbulbOn; // TODO [10.0] awegmueller [tableWithTiles]: Find a  better icon
+      return Icons.LightbulbOn; // FIXME [awe] 16.2 VIS: create a new grid icon
     }
 
     @Override
