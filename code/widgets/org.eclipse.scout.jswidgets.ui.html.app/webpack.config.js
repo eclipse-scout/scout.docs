@@ -13,6 +13,7 @@ const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
 const mainModule = require.main;
 const CopyPlugin = mainModule.require('copy-webpack-plugin');
 const themePath = require.resolve('@eclipse-scout/demo-jswidgets/src/main/js/theme.less');
+const themeDarkPath = require.resolve('@eclipse-scout/demo-jswidgets/src/main/js/theme-dark.less');
 const resPath = 'node_modules/@eclipse-scout/core/res';
 module.exports = (env, args) => {
   args.resDir = 'src/main/resources/WebContent';
@@ -20,7 +21,8 @@ module.exports = (env, args) => {
 
   config.entry = {
     'jswidgets': './index.js',
-    'jswidgets-theme': themePath
+    'jswidgets-theme': themePath,
+    'jswidgets-theme-dark': themeDarkPath
   };
   config.plugins.push(
     new CopyPlugin([{
