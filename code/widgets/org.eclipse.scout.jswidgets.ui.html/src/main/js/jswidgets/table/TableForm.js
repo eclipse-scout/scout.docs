@@ -123,13 +123,13 @@ jswidgets.TableForm.prototype._removePropertyBox = function(propertyBoxId, tabBo
 
 jswidgets.TableForm.prototype._createRow = function() {
   var date = new Date();
-  var icons = [scout.icons.STAR_BOLD, scout.icons.PERSON_SOLID, scout.icons.FOLDER_BOLD];
+  var iconList = [scout.icons.STAR_BOLD, scout.icons.PERSON_SOLID, scout.icons.FOLDER_BOLD];
   var locales = jswidgets.LocaleLookupCall.DATA.map(function(lookupRow) {
     return lookupRow[0];
   });
 
-  var rowIcon = icons[this.rowNo % icons.length];
-  var iconValue = icons[this.rowNo % icons.length];
+  var rowIcon = iconList[this.rowNo % iconList.length];
+  var iconValue = iconList[this.rowNo % iconList.length];
   var stringValue = 'Row #' + this.rowNo;
   var dateValue = scout.dates.shift(date, 0, 0, -this.groupNo);
   var numberValue = this.rowNo;
