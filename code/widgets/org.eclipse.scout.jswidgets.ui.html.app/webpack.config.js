@@ -30,6 +30,13 @@ module.exports = (env, args) => {
       from: resPath,
       to: '../res'
     }]));
+  config.plugins.push(
+    new CopyPlugin([{
+      // # Copy web content
+      from: args.resDir,
+      to: '../res',
+      ignore: ['res/**/*']
+    }]));
 
   // TODO remove as soon as some more code is available (currently no chunk would be generated because the size is too small)
   config.optimization.splitChunks.cacheGroups.scout.minSize = 0;
