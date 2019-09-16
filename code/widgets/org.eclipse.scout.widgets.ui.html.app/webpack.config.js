@@ -10,24 +10,18 @@
  */
 
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
-const mainModule = require.main;
-const CopyPlugin = mainModule.require('copy-webpack-plugin');
 const themePath = require.resolve('@eclipse-scout/demo-widgets/src/main/js/theme.less');
-const resPath = 'node_modules/@eclipse-scout/core/res';
 module.exports = (env, args) => {
-  args.resDir = 'src/main/resources/WebContent';
+  args.resDirArray = [
+    'src/main/resources/WebContent',
+    'node_modules/@eclipse-scout/demo-widgets/src/main/resources/WebContent',
+    'node_modules/@eclipse-scout/core/res'];
   const config = baseConfig(env, args);
 
   config.entry = {
-    'widgets': './index.js',
+    'widgets': './src/main/js/index.js',
     'widgets-theme': themePath
   };
-  config.plugins.push(
-    new CopyPlugin([{
-      // # Copy Scout web-resources
-      from: resPath,
-      to: '../res'
-    }]));
 
   // TODO remove as soon as some more code is available (currently no chunk would be generated because the size is too small)
   config.optimization.splitChunks.cacheGroups.scout.minSize = 0;

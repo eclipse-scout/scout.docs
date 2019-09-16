@@ -9,22 +9,17 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
-const mainModule = require.main;
-const CopyPlugin = mainModule.require('copy-webpack-plugin');
 module.exports = (env, args) => {
-  const config = baseConfig(env, args);
+  args.resDirArray = [
+    'res',
+    'node_modules/@eclipse-scout/eclipse-scout/res'];
 
+  const config = baseConfig(env, args);
   config.entry = {
     'widgets-app': './index.js',
     'widgets-theme': './src/widgets/widgets-theme.less',
     'widgets-theme-dark': './src/widgets/widgets-theme-dark.less'
   };
-  config.plugins.push(
-    new CopyPlugin([{
-      // # Copy Scout web-resources
-      from: 'node_modules/@eclipse-scout/eclipse-scout/res',
-      to: '../res/'
-    }]));
 
   return config;
 };

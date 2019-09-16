@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import { App } from '@eclipse-scout/demo-widgets';
+import {App} from '@eclipse-scout/demo-jswidgets';
 
 new App().init({
   bootstrap: {

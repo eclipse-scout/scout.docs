@@ -10,5 +10,8 @@
  */
 import WidgetsApp from './WidgetsApp';
 import './MyObjectFactories';
+import * as self from './index.js';
 
 export { WidgetsApp };
+
+window.widgets = Object.assign(window.widgets || {}, self);

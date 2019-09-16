@@ -9,7 +9,8 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 
-import * as scout from '@eclipse-scout/core';
+import * as self from './index.js';
 
-export { scout as default };
+window.contacts = Object.assign(window.contacts || {}, self);
 
+new scout.RemoteApp().init();
