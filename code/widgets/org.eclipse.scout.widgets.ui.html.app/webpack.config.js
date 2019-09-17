@@ -20,6 +20,8 @@ module.exports = (env, args) => {
 
   config.entry = {
     'widgets': './src/main/js/index.js',
+    'login': './src/main/js/login.js',
+    'logout': './src/main/js/logout.js',
     'widgets-theme': themePath
   };
 
