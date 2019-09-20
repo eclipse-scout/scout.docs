@@ -25,6 +25,14 @@ module.exports = (env, args) => {
     'widgets-theme': themePath
   };
 
+  // chunk definition for chart.js dependency
+  config.optimization.splitChunks.cacheGroups.chartJs = {
+    test: /[\\/]node_modules[\\/]chart.js[\\/]|[\\/]node_modules[\\/]moment[\\/]/,
+    name: 'chartjs',
+    priority: -2,
+    reuseExistingChunk: true
+  };
+
   // TODO remove as soon as some more code is available (currently no chunk would be generated because the size is too small)
   config.optimization.splitChunks.cacheGroups.scout.minSize = 0;
 
