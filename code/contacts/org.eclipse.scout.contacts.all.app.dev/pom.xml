@@ -89,6 +89,35 @@
           </resources>
         </configuration>
       </plugin>
+
+      <!-- TODO nach migration anpassen/entfernen. js aus source folder nehmen-->
+      <plugin>
+        <groupId>org.basepom.maven</groupId>
+        <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <configuration>
+          <ignoredResourcePatterns>
+            <ignoredResourcePattern>.*ico$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*jpg$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*jpeg$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*png$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*gif$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*html$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*htm$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*xml$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*txt$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*.api_description$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*options$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*properties$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*gitkeep$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*sql$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*xjb$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*exsd$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*about.ini$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*index\.js$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*theme\.less$</ignoredResourcePattern>
+          </ignoredResourcePatterns>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
