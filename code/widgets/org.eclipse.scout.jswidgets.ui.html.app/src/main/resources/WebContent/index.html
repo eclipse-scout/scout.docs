@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Scout JS Widgets Application</title>
-  <scout:include template="includes/head.html"/>
-  <scout:stylesheet src="jswidgets-theme.css"/>
+  <scout:include template="head.html"/>
+  <scout:stylesheet src="res/libs-all-macro.less"/>
+  <scout:stylesheet src="res/jswidgets-all-macro.less"/>
+  <scout:script src="res/libs-all-macro.js"/>
+  <scout:script src="res/jswidgets-all-macro.js"/>
+
+  <!-- include as regular script, because Chart.js breaks the YUI minifier -->
+  <scout:script src="res/chartjs/Chart.js"/>
+
+  <scout:script src="res/index.js"/>
 </head>
 <body>
-  <scout:include template="includes/no-script.html"/>
-  <div class="scout" data-partid="1"></div>
-  <scout:version/>
-  <scout:script src="jquery.js"/>
-  <scout:script src="chartjs.js"/>
-  <scout:script src="eclipse-scout.js"/>
-  <scout:script src="jswidgets.js"/>
+<scout:include template="no-script.html"/>
+<div class="scout" data-partid="1"></div>
+<scout:version/>
 </body>
 </html>
