@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2017 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -8,9 +8,10 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
+@palette-brown-1: #724813;
+@palette-brown-2: #583508;
 
-export { default as App } from './jswidgets/JsWidgetsDummyApp';
-
-import * as self from './index.js';
-
-window.jswidgets = Object.assign(window.jswidgets || {}, self);
+@about-menu-item-color: @text-color;
+@configuration-background-color: @palette-gray-9;
+@field-highlighted-container-background-color: @palette-brown-2;
+@field-highlighted-background-color: @palette-brown-1;

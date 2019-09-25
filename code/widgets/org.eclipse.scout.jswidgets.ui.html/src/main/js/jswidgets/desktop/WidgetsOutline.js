@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2017 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -8,9 +8,11 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
+jswidgets.WidgetsOutline = function() {
+  jswidgets.WidgetsOutline.parent.call(this);
+};
+scout.inherits(jswidgets.WidgetsOutline, scout.Outline);
 
-export { default as App } from './jswidgets/JsWidgetsDummyApp';
-
-import * as self from './index.js';
-
-window.jswidgets = Object.assign(window.jswidgets || {}, self);
+jswidgets.WidgetsOutline.prototype._jsonModel = function() {
+  return scout.models.getModel('jswidgets.WidgetsOutline');
+};
