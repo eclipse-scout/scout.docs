@@ -18,7 +18,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src/main/resources/WebContent",
+    "src/main/js"
   ],
   "scripts": {
     "testserver:start": "scout-scripts test-server:start",
