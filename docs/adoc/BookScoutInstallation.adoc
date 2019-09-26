@@ -22,9 +22,9 @@ ifndef::mdledir[:mdledir: .]
 === Overview
 
 This chapter walks you through the installation of Eclipse Scout.
-The installation description (as well as the rest of this book) is written and tested for Eclipse Scout {doc-short-version} which is delivered as integral part of the Eclipse Oxygen release train, 2017.
+The installation description (as well as the rest of this book) is written and tested for Eclipse Scout {doc-short-version} which is delivered as integral part of the Eclipse release train.
 Detailed information regarding the scheduling of this release train is provided in the Eclipse
-wiki.footnote:[Release plan: http://wiki.eclipse.org/Oxygen/Simultaneous_Release_Plan].
+wiki.footnote:[Release plan: https://wiki.eclipse.org/Simultaneous_Release].
 
 We assume that you have not installed any software relevant for the content of this book.
 This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK).
