@@ -35,7 +35,8 @@
           {
             "id": "Menu1",
             "objectType": "scout.Menu",
-            "text": "Menu"
+            "text": "Menu",
+            "horizontalAlignment": 1
           }
         ]
       },
