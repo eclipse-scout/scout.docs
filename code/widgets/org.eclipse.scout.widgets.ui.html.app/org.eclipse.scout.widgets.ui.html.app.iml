@@ -5,6 +5,7 @@
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/js" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -22,11 +23,6 @@
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.client" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform" />
-    <orderEntry type="library" name="Maven: org.jboss:jandex:2.0.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.3.0" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.svg.client" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-swing:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-anim:1.10" level="project" />
@@ -48,7 +44,6 @@
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-constants:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-i18n:1.10" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis-ext:1.3.04" level="project" />
-    <orderEntry type="module" module-name="org.eclipse.scout.rt.dataobject" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.ui.html" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
@@ -60,6 +55,12 @@
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.ui.html" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.client" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.jackson" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.platform" />
+    <orderEntry type="library" name="Maven: org.jboss:jandex:2.0.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.3.0" level="project" />
+    <orderEntry type="module" module-name="org.eclipse.scout.rt.dataobject" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.8" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" level="project" />
