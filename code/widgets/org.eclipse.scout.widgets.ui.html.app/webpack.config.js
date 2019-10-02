@@ -10,18 +10,20 @@
  */
 
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
-const themePath = require.resolve('@eclipse-scout/demo-widgets/src/main/js/theme.less');
 module.exports = (env, args) => {
   args.resDirArray = [
     'src/main/resources/WebContent',
-    'node_modules/@eclipse-scout/core/res'];
+    'node_modules/@eclipse-scout/core/res',
+    'node_modules/@eclipse-scout/demo-widgets-heatmap/node_modules/leaflet/dist/leaflet.css'
+  ];
   const config = baseConfig(env, args);
 
   config.entry = {
     'widgets': './src/main/js/index.js',
     'login': './src/main/js/login.js',
     'logout': './src/main/js/logout.js',
-    'widgets-theme': themePath
+    'widgets-theme': './src/main/js/theme.less',
+    'widgets-theme-dark': './src/main/js/theme-dark.less'
   };
 
   // chunk definition for chart.js dependency
