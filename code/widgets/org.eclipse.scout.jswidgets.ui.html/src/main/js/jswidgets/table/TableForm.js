@@ -58,7 +58,7 @@ jswidgets.TableForm.prototype._init = function(model) {
       parent: this,
       content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
         '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
-        '<div style="text-align: center;"><p>' + row.cells[3].text + '(' + row.cells[1].text + ')</p></div>'
+        '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
     };
     return new scout.create('HtmlTile', model);
   };

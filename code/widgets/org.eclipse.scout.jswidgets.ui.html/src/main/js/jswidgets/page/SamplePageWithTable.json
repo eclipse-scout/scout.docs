@@ -62,7 +62,7 @@
       {
         "id": "TileToggleMenu",
         "objectType": "jswidgets.SamplePageWithTableTileToggleMenu",
-        "iconId": "${iconId:LIGHTBULB_ON}",
+        "iconId": "${iconId:SQUARE_BOLD}",
         "stackable": false,
         "horizontalAlignment": 1,
         "menuTypes": [
