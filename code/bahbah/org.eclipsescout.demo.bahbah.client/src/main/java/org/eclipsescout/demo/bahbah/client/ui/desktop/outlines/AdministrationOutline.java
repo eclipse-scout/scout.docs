@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
+import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserAdministrationTablePage;
 import org.eclipsescout.demo.bahbah.shared.security.CreateUserPermission;

@@ -10,9 +10,11 @@
  */
 package org.eclipsescout.demo.bahbah.server.services.custom.security;
 
-import java.security.Permissions;
-
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.security.DefaultPermissionCollection;
+import org.eclipse.scout.rt.security.IPermissionCollection;
+import org.eclipse.scout.rt.security.PermissionLevel;
 import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
 import org.eclipse.scout.rt.shared.security.UpdateServiceConfigurationPermission;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
@@ -34,31 +36,32 @@ import org.eclipsescout.demo.bahbah.shared.services.custom.security.AccessContro
 public class ServerAccessControlService extends AccessControlService {
 
   @Override
-  protected Permissions execLoadPermissions(String userId) {
-    Permissions permissions = new Permissions();
+  protected IPermissionCollection execLoadPermissions(String userId) {
+    IPermissionCollection permissions = BEANS.get(DefaultPermissionCollection.class);
 
     ICode<Integer> permission = ServerSession.get().getPermission();
     if (permission != null) {
       // USERS
       if (permission.getId() >= UserCode.ID) {
-        permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"));
+        permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"), PermissionLevel.ALL);
 
-        permissions.add(new CreateNotificationPermission());
-        permissions.add(new ReadUsersPermission());
-        permissions.add(new RegisterUserPermission());
-        permissions.add(new UnregisterUserPermission());
-        permissions.add(new UpdateIconPermission());
+        permissions.add(new CreateNotificationPermission(), PermissionLevel.ALL);
+        permissions.add(new ReadUsersPermission(), PermissionLevel.ALL);
+        permissions.add(new RegisterUserPermission(), PermissionLevel.ALL);
+        permissions.add(new UnregisterUserPermission(), PermissionLevel.ALL);
+        permissions.add(new UpdateIconPermission(), PermissionLevel.ALL);
       }
 
       // ADMIN
       if (permission.getId() >= AdministratorCode.ID) {
-        permissions.add(new CreateUserPermission());
-        permissions.add(new DeleteUserPermission());
-        permissions.add(new ResetPasswordPermission());
-        permissions.add(new UpdateUserPermission());
-        permissions.add(new UpdateServiceConfigurationPermission());
+        permissions.add(new CreateUserPermission(), PermissionLevel.ALL);
+        permissions.add(new DeleteUserPermission(), PermissionLevel.ALL);
+        permissions.add(new ResetPasswordPermission(), PermissionLevel.ALL);
+        permissions.add(new UpdateUserPermission(), PermissionLevel.ALL);
+        permissions.add(new UpdateServiceConfigurationPermission(), PermissionLevel.ALL);
       }
     }
+    permissions.setReadOnly();
     return permissions;
   }
 }

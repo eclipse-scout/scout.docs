@@ -23,8 +23,8 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.ByteArrayHolder;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.jdbc.SQL;
-import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
@@ -42,7 +42,9 @@ public class IconProcessService implements IIconProcessService {
       int h = img.getHeight();
       if (w > MAX_SIZE || h > MAX_SIZE) {
         float longer = w;
-        if (h > w) longer = h;
+        if (h > w) {
+          longer = h;
+        }
         float fl = MAX_SIZE / longer;
         w = Math.round(fl * w);
         h = Math.round(fl * h);

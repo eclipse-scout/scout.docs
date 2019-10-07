@@ -10,9 +10,9 @@
  */
 package org.eclipse.scout.contacts.events.shared.event;
 
-import java.security.BasicPermission;
+import org.eclipse.scout.rt.security.AbstractPermission;
 
-public class ReadEventPermission extends BasicPermission {
+public class ReadEventPermission extends AbstractPermission {
 
   private static final long serialVersionUID = 1L;
 

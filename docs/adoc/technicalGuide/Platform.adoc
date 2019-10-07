@@ -736,14 +736,6 @@ scout.mom.cluster.implementor=org.eclipse.scout.rt.mom.jms.JmsMomImplementor
 |Specifies the cluster node name. If not specified a default id is computed.
 |String
 |Config Property
-|`scout.permissionLevelCacheTtl`
-|Time to live for level permission check caching in milliseconds.
-
-If calculating the permission level for a permission instance, it can be internally cached. This caching is typically useful in a client and should be relative small (few minutes). If no value is set, caching is disabled.
-
-As default, no time to live is set and therefore caching is disabled.
-|Long >= 0
-|Config Property
 |`scout.remotefileRootPath`
 |Absolute path to the root directory of the `RemoteFileService`. The default value is null.
 |String

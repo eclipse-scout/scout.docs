@@ -10,9 +10,9 @@
  */
 package org.eclipse.scout.contacts.shared.organization;
 
-import java.security.BasicPermission;
+import org.eclipse.scout.rt.security.AbstractPermission;
 
-public class UpdateOrganizationPermission extends BasicPermission {
+public class UpdateOrganizationPermission extends AbstractPermission {
 
   private static final long serialVersionUID = 1L;
 

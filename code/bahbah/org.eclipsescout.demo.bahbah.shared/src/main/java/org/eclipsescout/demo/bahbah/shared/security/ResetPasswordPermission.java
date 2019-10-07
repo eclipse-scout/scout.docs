@@ -10,11 +10,10 @@
  */
 package org.eclipsescout.demo.bahbah.shared.security;
 
-import java.security.BasicPermission;
+import org.eclipse.scout.rt.security.AbstractPermission;
 
-public class ResetPasswordPermission extends BasicPermission {
-
-  private static final long serialVersionUID = 0L;
+public class ResetPasswordPermission extends AbstractPermission {
+  private static final long serialVersionUID = 1L;
 
   public ResetPasswordPermission() {
     super(ResetPasswordPermission.class.getName());

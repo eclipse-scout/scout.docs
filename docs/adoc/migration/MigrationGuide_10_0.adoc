@@ -77,6 +77,34 @@ The following methods on `CacheBuilder` where removed, since they were unused an
 
 
 
+=== Authorization API
+The authorization API of scout was extended and moved from `org.eclipse.scout.rt.shared` into its own module.
+You may check the technical guide for further details.
+
+* Introduced `IPermissionCollection` and `IPermission` interfaces
+* Let all current scout permission (e.g. `CopyToClipboardPermission`) implement `IPermission`
+* All scout permission names are now prefixed with `scout.`
+* `RemoteServiceAccessPermission#getName` returns a stable name instead of the service operation pattern
+* Deleted `BasicHierarchyPermission`.
+If required, you may copy from an older version of scout.
+* `org.eclipse.scout.rt.shared.services.common.security.IAccessControlService` moved to `org.eclipse.scout.rt.security`
+* `IAccessControlService#getPermissionLevel` removed; use instead `ACCESS#getGrantedPermissionLevel`
+* `IAccessControlService#checkPermission` removed; use instead `ACCESS#check`
+* `IAccessControlService#getPermissions` must now *never* return `null`. Instead `NonePermissionCollection` or `AllPermissionCollection` may be returned.
+* `org.eclipse.scout.rt.shared.services.common.security.ACCESS` moved to `org.eclipse.scout.rt.security.ACCESS`
+* `ACCESS#check` now fails if argument is `null` (before succeeds).
+* `org.eclipse.scout.rt.shared.services.common.security.AbstractAccessControlService` moved to `org.eclipse.scout.rt.security`
+* `AbstractAccessControlService#getUserIdOfCurrentUser` moved to `Sessions#getCurrentUserId()`
+
+==== Load Permissions
+With the new `IPermissionCollection`, loading of permissions in `AbstractAccessControlService#execLoadPermissions` has changed.
+
+* Create a new instance by calling `BEANS.get(DefaultPermissionCollection.class)` instead of `new java.security.Permissions()`.
+* Add permissions with a permission level: `permissions.add(new ReadUsersPermission(), PermissionLevel.ALL);`
+* Do not forget to set permission collection as read only: `permissions.setReadOnly();`
+
+There is also a `AllPermissionCollection` which may be used instead of `DefaultPermissionCollection`.
+
 // ^^^
 // Insert descriptions of Java API changes here
 
@@ -111,4 +139,3 @@ A REST service client using `ErrorDoRestClientExceptionTransformer` will now tra
 * `404 - Not Found` into a `org.eclipse.scout.rt.dataobject.exception.ResourceNotFoundException`
 
 The `org.eclipse.scout.rt.rest.exception.VetoExceptionMapper` used by a REST service provide will now create an error response with status `400 - Bad Request` (this was formerly a `403`).
-

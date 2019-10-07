@@ -15,8 +15,8 @@ import org.eclipse.scout.rt.platform.context.NodeIdentifier;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
-import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
 import org.eclipsescout.demo.bahbah.shared.notification.MessageNotification;
 import org.eclipsescout.demo.bahbah.shared.security.CreateNotificationPermission;
@@ -44,5 +44,4 @@ public class NotificationProcessService implements INotificationProcessService {
     String nodeId = BEANS.get(NodeIdentifier.class).get();
     BEANS.get(ClientNotificationRegistry.class).putForUser(buddyName, new MessageNotification(ServerSession.get().getUserId(), message, nodeId));
   }
-
 }

@@ -10,21 +10,17 @@
  */
 package org.eclipse.scout.contacts.server.security;
 
-import java.security.AllPermission;
-import java.security.Permissions;
-
 import org.eclipse.scout.contacts.shared.security.AccessControlService;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Replace;
-import org.eclipse.scout.rt.shared.security.RemoteServiceAccessPermission;
+import org.eclipse.scout.rt.security.AllPermissionCollection;
+import org.eclipse.scout.rt.security.IPermissionCollection;
 
 @Replace
 public class ServerAccessControlService extends AccessControlService {
 
   @Override
-  protected Permissions execLoadPermissions(String userId) {
-    Permissions permissions = new Permissions();
-    permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"));
-    permissions.add(new AllPermission());
-    return permissions;
+  protected IPermissionCollection execLoadPermissions(String userId) {
+    return BEANS.get(AllPermissionCollection.class);
   }
 }

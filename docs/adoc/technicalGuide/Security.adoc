@@ -185,3 +185,78 @@ If HTML or XML from external sources or more complex HTML are used in the Scout 
 Libraries, such as http://jsoup.org/[JSoup] provide such a white-list filter. Scout currently does not include any services or utilities for using white-list filters,
 because the configuration and usage is very use-case-specific and would therefore not add much benefit.
 
+=== Authorization (Granting)
+
+Scout uses the `java.security` API principles to grant access to a specific resource.
+
+Each user has a set of granted `java.security.Permission` instances.
+This set is a `java.security.PermissionCollection`.
+A call to `PermissionCollection.implies(Permission p)` does the access check.
+The argument `p` in this call is a new permission instance for which we want to do the access check and which is compared against the granted permissions.
+Usually, the permission collection implementation iterates through all granted permissions and calls on each `Permission.implies(Permission p)` until one call returns `true`.
+
+Scouts adds some concepts and helpers to this API:
+
+`IPermission`:: Unlike other permissions, a permission implementing this interface can only be implied by another `IPermission` *with the same name*.
+A permission used together with scouts security API does not have to implement the `IPermission` interface but it is recommended.
+`PermissionLevel`:: An `IPermission`, which is part of an `IPermissionCollection` has always a granted access level assigned (`IPermission.getLevel()`).
+If the granted level is `PermissionLevel.NONE`, any access checks will fail.
+`IAccessControlService`:: This service is responsible to provide and manage a users set of granted permissions.
+A scout application usually extends `AbstractAccessControlService` and implements `#execLoadPermissions`.
+`ACCESS`:: Provides a set of convenience methods to check access.
+
+Let us assume you require a permission to allow a user to access companies.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ReadCompanyPermission]
+----
+
+To check access one can use `ACCESS`.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_A]
+----
+<1> Checks permission against granted permissions of current user.
+<2> Checks permission and if this check fails, throw an `AccessForbiddenException` with a default message.
+
+We can defined a default access check failed message for a permission.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=CreateCompanyPermission]
+----
+
+`ACCESS` allows to check multiple permissions at once.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_B]
+----
+
+We have seen some simple permission checks.
+Now let us assume, that some users may modify a company only if they have registered the company by themselves.
+For this use case we introduce a new permission level `ScoutdocPermissionLevels.OWN`.
+This is the permission level which is granted for those users.
+
+[source,java]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/ScoutdocPermissionLevels.java[tags=ScoutdocPermissionLevels]
+----
+
+In order to check access for this new level we have to override `AbstractPermission#evalPermission`.
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=UpdateCompanyPermission]
+----
+
+[source,java,indent=0]
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/AccessSnippet.java[tags=ACCESS_C]
+----
+
+If such a service call would be expensive, one may cache the result of such a permission check.
+You have to implement this by yourself.
+A recommended solution is to create a wrapper around `IPermissionCollection` and this wrapper caches calls to `IPermissionCollection#implies` if required.

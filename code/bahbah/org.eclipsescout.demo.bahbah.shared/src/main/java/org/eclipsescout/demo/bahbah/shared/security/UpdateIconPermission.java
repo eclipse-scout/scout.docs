@@ -10,11 +10,10 @@
  */
 package org.eclipsescout.demo.bahbah.shared.security;
 
-import java.security.BasicPermission;
+import org.eclipse.scout.rt.security.AbstractPermission;
 
-public class UpdateIconPermission extends BasicPermission {
-
-  private static final long serialVersionUID = 0L;
+public class UpdateIconPermission extends AbstractPermission {
+  private static final long serialVersionUID = 1L;
 
   public UpdateIconPermission() {
     super(UpdateIconPermission.class.getName());
