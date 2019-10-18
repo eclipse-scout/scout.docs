@@ -72,6 +72,7 @@
             <ignoredResourcePattern>.*about.ini$</ignoredResourcePattern>
             <ignoredResourcePattern>.*index\.js$</ignoredResourcePattern>
             <ignoredResourcePattern>.*theme\.less$</ignoredResourcePattern>
+            <ignoredResourcePattern>.*file-list$</ignoredResourcePattern>
           </ignoredResourcePatterns>
         </configuration>
       </plugin>
