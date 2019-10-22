@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2019 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.scout.rt.client.IClientSession;
+import org.eclipse.scout.rt.client.ui.CssClasses;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.CalendarMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -33,9 +34,11 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.calendarfield.AbstractCalendarField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -46,6 +49,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Order(8200)
+@ClassId("0d17b2a7-99c6-4de4-b1fa-8e29a9482480")
 public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Logger LOG = LoggerFactory.getLogger(CalendarFieldForm.class);
@@ -79,15 +83,22 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
   }
 
   @Order(10)
+  @ClassId("3c2d9d0c-047c-4cf9-9ee9-a3f751990687")
   public class MainBox extends AbstractGroupBox {
 
-    @Order(10)
-    public class CalendarField extends AbstractCalendarField<Calendar> {
+    @Override
+    protected TriState getConfiguredScrollable() {
+      return TriState.FALSE;
+    }
 
-      @Override
-      protected int getConfiguredGridH() {
-        return 20;
-      }
+    @Override
+    protected String getConfiguredCssClass() {
+      return CssClasses.RIGHT_PADDING_INVISIBLE;
+    }
+
+    @Order(10)
+    @ClassId("63311e33-b5d9-422c-915f-9aa7cd44a4f0")
+    public class CalendarField extends AbstractCalendarField<Calendar> {
 
       @Override
       protected int getConfiguredGridW() {
@@ -105,6 +116,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
       }
 
       @Order(10)
+      @ClassId("cec3a7ca-ea72-4402-8676-9cde7a119312")
       public class Calendar extends AbstractCalendar {
 
         private ContextMenuListener m_cml;
@@ -173,6 +185,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
 
           @Order(200)
+          @ClassId("0ad6cbc8-eca2-4861-8de2-fe037a27b838")
           public class Provider1ComponentMenu extends AbstractMenu {
 
             @Override
@@ -187,6 +200,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
 
           @Order(210)
+          @ClassId("8b151712-0f7e-440d-b9f7-d542959865de")
           public class Provider1EmptySpaceMenu extends AbstractMenu {
 
             @Override
@@ -255,6 +269,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
 
           @Order(200)
+          @ClassId("d764e7e9-7f30-4481-9736-29697df339e3")
           public class Provider2ComponentMenu extends AbstractMenu {
 
             @Override
@@ -269,6 +284,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
 
           @Order(210)
+          @ClassId("324606df-cef5-4a06-b1c2-f87eedc32963")
           public class Provider2EmptySpaceMenu extends AbstractMenu {
 
             @Override
@@ -284,6 +300,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
         }
 
         @Order(200)
+        @ClassId("dce702fa-492e-4d6b-aba7-7a409fef4261")
         public class CalendarEmptySpaceMenu extends AbstractMenu {
 
           @Override
@@ -300,6 +317,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
     }
 
     @Order(30)
+    @ClassId("bf306b56-a4ab-4173-8b28-8d877d695bb4")
     public class CloseButton extends AbstractCloseButton {
     }
   }
