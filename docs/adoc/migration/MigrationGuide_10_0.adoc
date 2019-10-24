@@ -105,6 +105,26 @@ With the new `IPermissionCollection`, loading of permissions in `AbstractAccessC
 
 There is also a `AllPermissionCollection` which may be used instead of `DefaultPermissionCollection`.
 
+
+=== TestingUtility -> BeanTestingHelper
+The following methods are deprecated. Use the corresponding methods on `BeanTestingHelper` via `BeanTestingHelper.get()` instead:
+
+* `registerBeans`
+* `registerBean`
+* `unregisterBean`
+* `unregisterBeans`
+* `mockConfigProperty`
+
+The following replacement regex can be applied on all Java files: +
+`\bTestingUtility\.(registerBeans|registerBean|unregisterBean|unregisterBeans|mockConfigProperty)` to `BeanTestingHelper.get().$1`
+
+The following methods are deprecated and will be removed in a future release without a replacement:
+
+* `registerWithReplace`
+* `registerWithTestingOrder`
+* `clearHttpAuthenticationCache`
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
