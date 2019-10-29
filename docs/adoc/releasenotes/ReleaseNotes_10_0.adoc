@@ -158,3 +158,17 @@ Lots of Scout widgets like `Actions`, `FormFields`, `Tiles` or `Tables` can have
 Until now there have been several methods to access parent elements (e.g. `IActionNode#getParent()`, `ITile#getContainer()`, `IFormField#getParentField`, etc.) and it was only available on the specific element (e.g. for a Table).
 Now there is one `getParent()` method for all widgets. Furthermore visit methods have been added to traverse up the parent hierarchy.
 
+=== PropertyChange Shortcut (JS)
+
+It is now possible to listen for specific property changes rather than listening to all property change events and then checking for the right property manually.
+This can be done using the new notation `propertyChange:propertyName`, see the example below.
+
+[source,javascript]
+.Listen for specific property changes
+----
+field.on('propertyChange:value', function(event) {
+  // This listener is only executed when the 'value' property changes
+  console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
+});
+field.setValue('New Value.');
+----

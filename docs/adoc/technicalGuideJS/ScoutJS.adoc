@@ -307,7 +307,24 @@ var button = scout.create('scout.Button', {
 });
 button.render();
 button.on('propertyChange', function(event) {
-  // prints 'Property selected changed from false to true'
+  if (event.propertyName === 'selected') {
+    // prints 'Property selected changed from false to true'
+    console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
+  }
+});
+button.setSelected(true);
+----
+
+NOTE: The above propertyChange handler ist executed for ALL property changes of that button.
+This makes it necessary to check for the right property name inside the listener as it is done here with the `if` statement at the start of the listener.
+Because this is a very common pattern there is a shortcut available.
+You can listen for a specific property change with the following notation: `propertyChange:propertyName`.
+
+[source,javascript]
+.Listen for specific property changes
+----
+button.on('propertyChange:selected', function(event) {
+  // This listener is only executed when the 'selected' property changes
   console.log('Property ' + event.propertyName + ' changed from ' + event.oldValue + ' to ' + event.newValue);
 });
 button.setSelected(true);
