@@ -338,9 +338,6 @@ Example: `${iconId:ANGLE_UP}` uses `scout.icons.ANGLE_UP`, icons predefined by S
 +
 Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon constant objects
 
-// TODO [7.0] awe === Texts
-//Write Explain textKey as done for iconId
-
 === Parent and Owner
 As seen in the previous chapters, the creation of a widget requires a parent. This establishes a link between the child and the parent widget which is necessary for several actions.
 
@@ -646,8 +643,6 @@ scout.MyApp.prototype.installExtensions = function() {
   ]);
 };
 ----
-
-// TODO [7.0] cwy,awe === How to extend JSON model
 
 === Export Scout model from a Scout classic (online) application
 

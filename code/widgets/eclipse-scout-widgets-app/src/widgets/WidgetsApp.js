@@ -13,17 +13,5 @@ import { App } from '@eclipse-scout/eclipse-scout';
 export default class WidgetsApp extends App {
   _init(model) {
     super._init(model);
-
-    // FIXME [awe] ES6: check the Plugin proposed by "Izhaki", this would allow to re-define the properties exported by Webpack.
-    // Without the configurable: true property, the code below cannot work.
-    /*
-    var origFunc = scout.isFunction;
-    Object.defineProperty(scout, 'isFunction', {
-      value: (obj) => {
-        console.log('You\'ve been p0wnd!');
-        return origFunc(obj);
-      }
-    });
-    */
   }
 }
