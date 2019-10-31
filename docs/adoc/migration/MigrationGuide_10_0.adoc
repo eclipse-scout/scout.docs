@@ -125,6 +125,10 @@ The following methods are deprecated and will be removed in a future release wit
 * `clearHttpAuthenticationCache`
 
 
+=== MailHelper.getCharacterEncodingOfPart(Part)
+`MailHelper.getCharacterEncodingOfPart(Part)` is deprecated, use `ObjectUtility.nvl(BEANS.get(MailHelper.class).getPartCharset(part), StandardCharsets.UTF_8).name()` instead if same behavior is required.
+
+
 // ^^^
 // Insert descriptions of Java API changes here
 
