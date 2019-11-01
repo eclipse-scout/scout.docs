@@ -7,20 +7,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.ExampleBeanField = function() {
-  widgets.ExampleBeanField.parent.call(this);
-};
-scout.inherits(widgets.ExampleBeanField, scout.BeanField);
+import {BeanField} from '@eclipse-scout/core';
 
-widgets.ExampleBeanField.prototype._render = function() {
-  widgets.ExampleBeanField.parent.prototype._render.call(this);
+export default class ExampleBeanField extends BeanField {
+
+constructor() {
+  super();
+}
+
+
+_render() {
+  super._render();
   this.$container.addClass('example-bean-field');
-};
+}
 
 /**
  * @override
  */
-widgets.ExampleBeanField.prototype._renderValue = function() {
+_renderValue() {
   this.$field.empty();
   if (!this.value) {
     return;
@@ -44,4 +48,5 @@ widgets.ExampleBeanField.prototype._renderValue = function() {
     .appendElement('<img>')
     .attr('src', this.value.image)
     .addClass('example-bean-field-image');
-};
+}
+}

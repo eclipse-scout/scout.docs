@@ -7,19 +7,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.ExampleBeanColumn = function() {
-  widgets.ExampleBeanColumn.parent.call(this);
-};
-scout.inherits(widgets.ExampleBeanColumn, scout.BeanColumn);
+import {BeanColumn} from '@eclipse-scout/core';
 
-widgets.ExampleBeanColumn.prototype._renderValue = function($cell, value) {
+export default class ExampleBeanColumn extends BeanColumn {
+
+constructor() {
+  super();
+}
+
+
+_renderValue($cell, value) {
   $cell.appendElement('<img>')
     .attr('src', value.image)
     .addClass('example-bean-column-image');
-};
+}
 
-widgets.ExampleBeanColumn.prototype.compare = function(row1, row2) {
+compare(row1, row2) {
   var cellValue1 = this.table.cell(this, row1).value || {};
   var cellValue2 = this.table.cell(this, row2).value || {};
   return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);
-};
+}
+}

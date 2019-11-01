@@ -1,17 +1,24 @@
-widgets.ChartField = function() {
-  widgets.ChartField.parent.call(this);
+import {FormField} from '@eclipse-scout/core';
+import * as $ from 'jquery';
+
+import {Chart} from 'chart.js';
+
+export default class ChartField extends FormField {
+
+constructor() {
+  super();
   this.chart = null;
   this.chartData = null;
   this.chartConfig = null;
-};
-scout.inherits(widgets.ChartField, scout.FormField);
+}
 
-widgets.ChartField.prototype._init = function(model) {
-  widgets.ChartField.parent.prototype._init.call(this, model);
+
+_init(model) {
+  super._init( model);
   this._setChartConfig(this.chartConfig);
-};
+}
 
-widgets.ChartField.prototype._render = function() {
+_render() {
   this.addContainer(this.$parent, 'chart-field');
   this.addLabel();
   this.addMandatoryIndicator();
@@ -24,23 +31,23 @@ widgets.ChartField.prototype._render = function() {
   this.addField(this.$fieldContainer.appendElement('<canvas>', 'chart'));
 
   this.addStatus();
-};
+}
 
-widgets.ChartField.prototype._renderProperties = function() {
-  widgets.ChartField.parent.prototype._renderProperties.call(this);
+_renderProperties() {
+  super._renderProperties();
   this._renderChartConfig();
   this._renderChartData();
-};
+}
 
-widgets.ChartField.prototype._remove = function() {
-  widgets.ChartField.parent.prototype._remove.call(this);
+_remove() {
+  super._remove();
   if (this.chart) {
     this.chart.destroy();
     this.chart = null;
   }
-};
+}
 
-widgets.ChartField.prototype._renderChartData = function() {
+_renderChartData() {
   if (!this.chartData) {
     return;
   }
@@ -53,23 +60,24 @@ widgets.ChartField.prototype._renderChartData = function() {
 
   this.chartConfig.data.labels = this.chartData.labels;
   this.chart.update();
-};
+}
 
-widgets.ChartField.prototype.setChartConfig = function(chartConfig) {
+setChartConfig(chartConfig) {
   this.setProperty('chartConfig', chartConfig);
-};
+}
 
-widgets.ChartField.prototype._setChartConfig = function(chartConfig) {
+_setChartConfig(chartConfig) {
   if (typeof chartConfig === 'string') {
     chartConfig = JSON.parse(chartConfig);
   }
   this._setProperty('chartConfig', chartConfig);
-};
+}
 
-widgets.ChartField.prototype._renderChartConfig = function() {
+_renderChartConfig() {
   if (this.chart) {
     this.chart.destroy();
   }
   this.chart = new Chart(this.$field[0], this.chartConfig); // jshint ignore:line
   this._renderChartData();
-};
+}
+}

@@ -8,8 +8,13 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.WidgetsOutlineAdapter = function() {
-  widgets.WidgetsOutlineAdapter.parent.call(this);
-};
-scout.inherits(widgets.WidgetsOutlineAdapter, scout.OutlineAdapter);
+import {OutlineAdapter} from '@eclipse-scout/core';
+
+export default class WidgetsOutlineAdapter extends OutlineAdapter {
+
+constructor() {
+  super();
+}
+
+}
 

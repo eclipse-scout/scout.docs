@@ -13,4 +13,8 @@ import * as self from './index.js';
 
 export { default as App } from './widgets/WidgetsDummyApp';
 
-window.widgets = Object.assign(window.widgets || {}, self);
+export let widgets =Object.assign(widgets || {}, self);
+
+export default {
+  widgets
+};

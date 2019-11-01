@@ -1,19 +1,24 @@
-widgets.CustomTile = function() {
-  widgets.CustomTile.parent.call(this);
+import {Tile, HtmlComponent} from '@eclipse-scout/core';
+
+export default class CustomTile extends Tile {
+
+constructor() {
+  super();
   this.label = null;
-};
-scout.inherits(widgets.CustomTile, scout.Tile);
+}
 
-widgets.CustomTile.prototype._render = function() {
+
+_render() {
   this.$container = this.$parent.appendDiv('custom-tile');
-  this.htmlComp = scout.HtmlComponent.install(this.$container, this.session);
-};
+  this.htmlComp = HtmlComponent.install(this.$container, this.session);
+}
 
-widgets.CustomTile.prototype._renderProperties = function() {
-  widgets.CustomTile.parent.prototype._renderProperties.call(this);
+_renderProperties() {
+  super._renderProperties();
   this._renderLabel();
-};
+}
 
-widgets.CustomTile.prototype._renderLabel = function() {
+_renderLabel() {
   this.$container.text(this.label);
-};
+}
+}

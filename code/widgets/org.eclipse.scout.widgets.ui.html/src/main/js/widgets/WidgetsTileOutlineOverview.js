@@ -8,21 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.WidgetsTileOutlineOverview = function() {
-  widgets.WidgetsTileOutlineOverview.parent.call(this);
-};
-scout.inherits(widgets.WidgetsTileOutlineOverview, scout.TileOutlineOverview);
+import {TileOutlineOverview, scout} from '@eclipse-scout/core';
 
-widgets.WidgetsTileOutlineOverview.prototype._render = function() {
-  widgets.WidgetsTileOutlineOverview.parent.prototype._render.call(this);
+export default class WidgetsTileOutlineOverview extends TileOutlineOverview {
+
+constructor() {
+  super();
+}
+
+
+_render() {
+  super._render();
   this.$container.addClass('widgets-outline-overview');
 
   this.$title.text(this.session.text('ApplicationTitle'));
   this.$description = this.$content.appendDiv('widgets-outline-desc').html(this.outline.description);
   this.$description.addClass('prevent-initial-focus');
-};
+}
 
-widgets.WidgetsTileOutlineOverview.prototype._createPageTileGrid = function() {
+_createPageTileGrid() {
   return scout.create('PageTileGrid', {
     parent: this,
     outline: this.outline,
@@ -33,4 +37,5 @@ widgets.WidgetsTileOutlineOverview.prototype._createPageTileGrid = function() {
       rowHeight: 90
     }
   });
-};
+}
+}

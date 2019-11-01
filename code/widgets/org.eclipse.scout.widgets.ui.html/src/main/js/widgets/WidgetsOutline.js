@@ -8,14 +8,19 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.WidgetsOutline = function() {
-  widgets.WidgetsOutline.parent.call(this);
-};
-scout.inherits(widgets.WidgetsOutline, scout.Outline);
+import {Outline, scout} from '@eclipse-scout/core';
 
-widgets.WidgetsOutline.prototype._createOutlineOverview = function() {
+export default class WidgetsOutline extends Outline {
+
+constructor() {
+  super();
+}
+
+
+_createOutlineOverview() {
   return scout.create('widgets.WidgetsTileOutlineOverview', {
     parent: this,
     outline: this
   });
-};
+}
+}

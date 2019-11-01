@@ -8,8 +8,13 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.ChartFieldAdapter = function() {
-  widgets.ChartFieldAdapter.parent.call(this);
-};
-scout.inherits(widgets.ChartFieldAdapter, scout.FormFieldAdapter);
+import {FormFieldAdapter} from '@eclipse-scout/core';
+
+export default class ChartFieldAdapter extends FormFieldAdapter {
+
+constructor() {
+  super();
+}
+
+}
 

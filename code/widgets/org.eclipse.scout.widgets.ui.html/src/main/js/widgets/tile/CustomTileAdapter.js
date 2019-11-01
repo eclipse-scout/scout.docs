@@ -8,7 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-widgets.CustomTileAdapter = function() {
-  widgets.CustomTileAdapter.parent.call(this);
-};
-scout.inherits(widgets.CustomTileAdapter, scout.TileAdapter);
+import {TileAdapter} from '@eclipse-scout/core';
+
+export default class CustomTileAdapter extends TileAdapter {
+
+constructor() {
+  super();
+}
+
+}
