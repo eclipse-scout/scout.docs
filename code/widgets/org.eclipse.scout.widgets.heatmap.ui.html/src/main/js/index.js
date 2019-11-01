@@ -1,17 +1,8 @@
-/*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- */
-// Eclipse Scout module: re-exports
-// The modules exported here will be available when someone imports from 'eclipse-scout'
+export { default as HeatmapField } from './heatmap/HeatmapField';
+export { default as HeatmapFieldAdapter } from './heatmap/HeatmapFieldAdapter';
+export { default as HeatmapFieldLayout } from './heatmap/HeatmapFieldLayout';
+export { default as simpleheat } from './heatmap/leaflet-heat';
 
-import * as scout from '@eclipse-scout/core';
-
-export { scout as default };
-
+import * as self from './index.js';
+export default self;
+window.scout = Object.assign(window.scout || {}, self);
