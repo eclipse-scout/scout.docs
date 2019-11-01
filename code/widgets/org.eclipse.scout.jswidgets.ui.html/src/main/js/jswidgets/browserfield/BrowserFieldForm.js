@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.BrowserFieldForm = function() {
-  jswidgets.BrowserFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.BrowserFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import BrowserFieldFormModel from './BrowserFieldFormModel';
 
-jswidgets.BrowserFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.BrowserFieldForm');
-};
+export default class BrowserFieldForm extends Form {
 
-jswidgets.BrowserFieldForm.prototype._init = function(model) {
-  jswidgets.BrowserFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(BrowserFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.browserField = this.widget('BrowserField');
 
@@ -64,67 +69,68 @@ jswidgets.BrowserFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.browserField);
   this.widget('WidgetActionsBox').setField(this.browserField);
   this.widget('EventsTab').setField(this.browserField);
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onBrowserFieldPropertyChange = function(event) {
+_onBrowserFieldPropertyChange(event) {
   if (event.propertyName === 'location') {
     this.widget('LocationField').setValue(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onScrollBarEnabledPropertyChange = function(event) {
+_onScrollBarEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setScrollBarEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onSandboxEnabledPropertyChange = function(event) {
+_onSandboxEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setSandboxEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onSandboxPermissionsPropertyChange = function(event) {
+_onSandboxPermissionsPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setSandboxPermissions(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onLocationPropertyChange = function(event) {
+_onLocationPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setLocation(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onTrackLocationPropertyChange = function(event) {
+_onTrackLocationPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setTrackLocation(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onShowInExternalWindowPropertyChange = function(event) {
+_onShowInExternalWindowPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.showInExternalWindow = event.newValue;
     this.browserField.parent.rerenderControls();
     // Validate layout immediately to prevent flickering
     this.browserField.parent.htmlBody.validateLayoutTree();
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onAutoCloseExternalWindowPropertyChange = function(event) {
+_onAutoCloseExternalWindowPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setAutoCloseExternalWindow(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onExternalWindowButtonTextPropertyChange = function(event) {
+_onExternalWindowButtonTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setExternalWindowButtonText(event.newValue);
   }
-};
+}
 
-jswidgets.BrowserFieldForm.prototype._onExternalWindowFieldTextPropertyChange = function(event) {
+_onExternalWindowFieldTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.browserField.setExternalWindowFieldText(event.newValue);
   }
-};
+}
+}

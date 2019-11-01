@@ -1,15 +1,22 @@
-jswidgets.SamplePageWithNodes = function() {
-  jswidgets.SamplePageWithNodes.parent.call(this);
-};
-scout.inherits(jswidgets.SamplePageWithNodes, scout.PageWithNodes);
+import {PageWithNodes, models, scout} from '@eclipse-scout/core';
+import SamplePageWithNodesModel from './SamplePageWithNodesModel';
+import * as $ from 'jquery';
 
-jswidgets.SamplePageWithNodes.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SamplePageWithNodes');
-};
+export default class SamplePageWithNodes extends PageWithNodes {
 
-jswidgets.SamplePageWithNodes.prototype._createChildPages = function() {
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(SamplePageWithNodesModel);
+}
+
+_createChildPages() {
   return $.resolvedPromise([
     scout.create('jswidgets.SamplePageWithTable', this._pageParam()),
     scout.create('jswidgets.SamplePageWithNodes', this._pageParam())
   ]);
-};
+}
+}

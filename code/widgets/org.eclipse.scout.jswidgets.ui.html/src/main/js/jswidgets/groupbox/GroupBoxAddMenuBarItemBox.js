@@ -8,30 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupBoxAddMenuBarItemBox = function() {
-  jswidgets.GroupBoxAddMenuBarItemBox.parent.call(this);
+import {GroupBox, ButtonAdapterMenu, GridData, Button, models, scout} from '@eclipse-scout/core';
+import GroupBoxAddMenuBarItemBoxModel from './GroupBoxAddMenuBarItemBoxModel';
+
+export default class GroupBoxAddMenuBarItemBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
   this.dynamicMenuBarItemCounter = 0;
-};
-scout.inherits(jswidgets.GroupBoxAddMenuBarItemBox, scout.GroupBox);
+}
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxAddMenuBarItemBox');
-};
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype._init = function(model) {
-  jswidgets.GroupBoxAddMenuBarItemBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GroupBoxAddMenuBarItemBoxModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setField(this.field);
 
   var menuBarItemType = this.widget('MenuBarItemType');
   menuBarItemType.setValue('Button');
-};
+}
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -47,17 +52,17 @@ jswidgets.GroupBoxAddMenuBarItemBox.prototype._setField = function(field) {
   addFieldButton.on('click', this._onAddMenuBarItemButtonClick.bind(this));
 
   this._updateAddMenuBarDefaultValues();
-};
+}
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype._updateAddMenuBarDefaultValues = function() {
+_updateAddMenuBarDefaultValues() {
   this.labelField.setValue('Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter);
   this.stackableField.setValue(true);
   this.shrinkableField.setValue(false);
-};
+}
 
-jswidgets.GroupBoxAddMenuBarItemBox.prototype._onAddMenuBarItemButtonClick = function(event) {
+_onAddMenuBarItemButtonClick(event) {
   var label = this.labelField.value || 'Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter;
-  var gridData = new scout.GridData();
+  var gridData = new GridData();
   gridData.horizontalAlignment = this.horizontalAlignmentField.value;
   this.dynamicMenuBarItemCounter++;
   var newMenuBarItem = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Button'), {
@@ -72,9 +77,9 @@ jswidgets.GroupBoxAddMenuBarItemBox.prototype._onAddMenuBarItemButtonClick = fun
     shrinkable: this.shrinkableField.value
   });
 
-  if (newMenuBarItem instanceof scout.Button) {
+  if (newMenuBarItem instanceof Button) {
     newMenuBarItem = scout.create('ButtonAdapterMenu',
-      scout.ButtonAdapterMenu.adaptButtonProperties(newMenuBarItem, {
+      ButtonAdapterMenu.adaptButtonProperties(newMenuBarItem, {
         parent: this,
         menubar: this.menuBar,
         button: newMenuBarItem
@@ -88,4 +93,5 @@ jswidgets.GroupBoxAddMenuBarItemBox.prototype._onAddMenuBarItemButtonClick = fun
   this._updateAddMenuBarDefaultValues();
   // Validate layout immediately to prevent flickering
   this.field.validateLayoutTree();
-};
+}
+}

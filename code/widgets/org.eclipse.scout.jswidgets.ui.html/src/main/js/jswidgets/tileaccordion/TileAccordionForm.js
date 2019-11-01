@@ -8,20 +8,27 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TileAccordionForm = function() {
-  jswidgets.TileAccordionForm.parent.call(this);
+import {Form, models, arrays, scout, comparators} from '@eclipse-scout/core';
+import TileAccordionFormModel from './TileAccordionFormModel';
+import {GroupLookupCall} from '../index';
+import * as $ from 'jquery';
+
+export default class TileAccordionForm extends Form {
+
+constructor() {
+  super();
   this.insertedGroupCount = 0;
   this.insertedTilesCount = 0;
   this.tileFilter = null;
-};
-scout.inherits(jswidgets.TileAccordionForm, scout.Form);
+}
 
-jswidgets.TileAccordionForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TileAccordionForm');
-};
 
-jswidgets.TileAccordionForm.prototype._init = function(model) {
-  jswidgets.TileAccordionForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TileAccordionFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.accordion = this.widget('Accordion');
   this.accordion.on('propertyChange', this._onAccordionPropertyChange.bind(this));
@@ -93,7 +100,7 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
 
   var insertTileTargetField = this.widget('InsertTileTargetField');
-  insertTileTargetField.setLookupCall(new jswidgets.GroupLookupCall(this.accordion));
+  insertTileTargetField.setLookupCall(new GroupLookupCall(this.accordion));
   insertTileTargetField.setValue(this.accordion.groups[0]);
 
   var insertTileButton = this.widget('InsertTileButton');
@@ -118,101 +125,101 @@ jswidgets.TileAccordionForm.prototype._init = function(model) {
   layoutConfigBox.setField(this.accordion);
   this._updateStatus();
   this._updateGroupVisibility();
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onAccordionPropertyChange = function(event) {
+_onAccordionPropertyChange(event) {
   if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
     this._updateStatus();
   }
   if (event.propertyName === 'filteredTiles') {
     this._updateGroupVisibility();
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
+_onExclusiveExpandPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setExclusiveExpand(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onScrollablePropertyChange = function(event) {
+_onScrollablePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setScrollable(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onGridColumnCountPropertyChange = function(event) {
+_onGridColumnCountPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setGridColumnCount(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onWithPlacehodersPropertyChange = function(event) {
+_onWithPlacehodersPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setWithPlaceholders(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onVirtualPropertyChange = function(event) {
+_onVirtualPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setVirtual(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onSelectablePropertyChange = function(event) {
+_onSelectablePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setSelectable(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onMultiSelectPropertyChange = function(event) {
+_onMultiSelectPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setMultiSelect(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onInsertMenuAction = function(event) {
+_onInsertMenuAction(event) {
   this._insertGroupWithTiles();
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onDeleteFirstMenuAction = function(event) {
+_onDeleteFirstMenuAction(event) {
   this.accordion.deleteGroup(this.accordion.groups[0]);
   if (this.accordion.groups.length === 0) {
     this.insertedGroupCount = 0;
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onSortAscMenuAction = function(event) {
+_onSortAscMenuAction(event) {
   this._sortTiles(true);
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onSortDescMenuAction = function(event) {
+_onSortDescMenuAction(event) {
   this._sortTiles();
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onFilterPropertyChange = function(event) {
+_onFilterPropertyChange(event) {
   if (event.propertyName === 'displayText') {
     this._filterTilesByText(event.newValue);
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onDeleteAllSelectedTilesMenuAction = function(event) {
+_onDeleteAllSelectedTilesMenuAction(event) {
   this.accordion.deleteTiles(this.accordion.getSelectedTiles());
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup0MenuAction = function(event) {
+_onInsertTileIntoGroup0MenuAction(event) {
   if (this.accordion.groups.length > 0) {
     this.accordion.groups[0].body.insertTile(this._createTile());
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onInsertTileIntoGroup1MenuAction = function(event) {
+_onInsertTileIntoGroup1MenuAction(event) {
   if (this.accordion.groups.length > 1) {
     this.accordion.groups[1].body.insertTile(this._createTile());
   }
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onInsertTileButtonClick = function(event) {
+_onInsertTileButtonClick(event) {
   var count = this.widget('InsertTileCountField').value;
   var group = this.widget('InsertTileTargetField').value;
   var tiles = [];
@@ -220,24 +227,24 @@ jswidgets.TileAccordionForm.prototype._onInsertTileButtonClick = function(event)
     tiles.push(this._createTile());
   }
   group.body.insertTiles(tiles);
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onSelectNextMenuAction = function(event) {
+_onSelectNextMenuAction(event) {
   var filteredTiles = this.accordion.getFilteredTiles();
   if (filteredTiles.length === 0) {
     return;
   }
-  var selectedTileIndex = scout.arrays.findIndex(filteredTiles, function(tile) {
+  var selectedTileIndex = arrays.findIndex(filteredTiles, function(tile) {
     return tile.selected;
   });
   this.accordion.selectTile(filteredTiles[selectedTileIndex + 1] || filteredTiles[0]);
-};
+}
 
-jswidgets.TileAccordionForm.prototype._onSelectAllMenuAction = function(event) {
+_onSelectAllMenuAction(event) {
   this.accordion.selectAllTiles();
-};
+}
 
-jswidgets.TileAccordionForm.prototype._insertGroupWithTiles = function() {
+_insertGroupWithTiles() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
   for (var i = 0; i < maxTiles; i++) {
@@ -260,9 +267,9 @@ jswidgets.TileAccordionForm.prototype._insertGroupWithTiles = function() {
     }
   });
   this.accordion.insertGroup(group);
-};
+}
 
-jswidgets.TileAccordionForm.prototype._createTile = function(model) {
+_createTile(model) {
   var defaults;
   var tileType = this.widget('InsertTileTypeField').value;
   if (tileType === 'default') {
@@ -286,22 +293,22 @@ jswidgets.TileAccordionForm.prototype._createTile = function(model) {
   };
   model = $.extend({}, defaults, model);
   return new scout.create('jswidgets.CustomTile', model);
-};
+}
 
-jswidgets.TileAccordionForm.prototype._updateStatus = function() {
+_updateStatus() {
   this.widget('StatusField').setValue(this.session.text('TileGridStatus', this.accordion.getTileCount(), this.accordion.getFilteredTileCount(), this.accordion.getSelectedTileCount()));
-};
+}
 
-jswidgets.TileAccordionForm.prototype._updateGroupVisibility = function() {
+_updateGroupVisibility() {
   this.accordion.groups.forEach(function(group) {
     // Make groups invisible if a tile filter is active and no tiles match (= no tiles are visible)
     var groupEmpty = group.body.filters.length > 0 && group.body.filteredTiles.length === 0;
     group.setVisible(!groupEmpty);
   });
-};
+}
 
-jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
-  var comparator = scout.comparators.ALPHANUMERIC;
+_sortTiles(asc) {
+  var comparator = comparators.ALPHANUMERIC;
   comparator.install(this.session);
   this.accordion.setTileComparator(function(tile1, tile2) {
     var result = comparator.compare(tile1.label, tile2.label);
@@ -311,9 +318,9 @@ jswidgets.TileAccordionForm.prototype._sortTiles = function(asc) {
     return result;
   });
   this.accordion.sortTiles();
-};
+}
 
-jswidgets.TileAccordionForm.prototype._filterTilesByText = function(text) {
+_filterTilesByText(text) {
   if (text) {
     if (!this.tileFilter) {
       this.tileFilter = scout.create('jswidgets.CustomTileFilter');
@@ -325,4 +332,5 @@ jswidgets.TileAccordionForm.prototype._filterTilesByText = function(text) {
     this.tileFilter = null;
   }
   this.accordion.filterTiles();
-};
+}
+}

@@ -8,19 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.PopupVerticalAlignLookupCall = function() {
-  jswidgets.PopupVerticalAlignLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.PopupVerticalAlignLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Popup} from '@eclipse-scout/core';
 
-jswidgets.PopupVerticalAlignLookupCall.prototype._data = function() {
-  return jswidgets.PopupVerticalAlignLookupCall.DATA;
-};
+export default class PopupVerticalAlignLookupCall extends StaticLookupCall {
 
-jswidgets.PopupVerticalAlignLookupCall.DATA = [
-  [scout.Popup.Alignment.TOP, 'top'],
-  [scout.Popup.Alignment.TOPEDGE, 'topedge'],
-  [scout.Popup.Alignment.CENTER, 'center'],
-  [scout.Popup.Alignment.BOTTOM, 'bottom'],
-  [scout.Popup.Alignment.BOTTOMEDGE, 'bottomedge'],
+constructor() {
+  super();
+}
+
+
+_data() {
+  return PopupVerticalAlignLookupCall.DATA;
+}
+
+static DATA = [
+  [Popup.Alignment.TOP, 'top'],
+  [Popup.Alignment.TOPEDGE, 'topedge'],
+  [Popup.Alignment.CENTER, 'center'],
+  [Popup.Alignment.BOTTOM, 'bottom'],
+  [Popup.Alignment.BOTTOMEDGE, 'bottomedge'],
 ];
+}

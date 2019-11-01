@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormDisplayHintLookupCall = function() {
-  jswidgets.FormDisplayHintLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.FormDisplayHintLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Form} from '@eclipse-scout/core';
 
-jswidgets.FormDisplayHintLookupCall.prototype._data = function() {
-  return jswidgets.FormDisplayHintLookupCall.DATA;
-};
+export default class FormDisplayHintLookupCall extends StaticLookupCall {
 
-jswidgets.FormDisplayHintLookupCall.DATA = [
-  [scout.Form.DisplayHint.DIALOG, 'dialog'],
-  [scout.Form.DisplayHint.VIEW, 'view'],
-  [scout.Form.DisplayHint.POPUP_WINDOW, 'popupWindow']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return FormDisplayHintLookupCall.DATA;
+}
+
+static DATA = [
+  [Form.DisplayHint.DIALOG, 'dialog'],
+  [Form.DisplayHint.VIEW, 'view'],
+  [Form.DisplayHint.POPUP_WINDOW, 'popupWindow']
 ];
+}

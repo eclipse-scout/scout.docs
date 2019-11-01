@@ -1,10 +1,14 @@
-jswidgets.WatchFieldLayout = function(watchField) {
-  jswidgets.WatchFieldLayout.parent.call(this);
-  this.watchField = watchField;
-};
-scout.inherits(jswidgets.WatchFieldLayout, scout.NullLayout);
+import {NullLayout} from '@eclipse-scout/core';
 
-jswidgets.WatchFieldLayout.prototype.layout = function($container) {
+export default class WatchFieldLayout extends NullLayout {
+
+constructor(watchField) {
+  super();
+  this.watchField = watchField;
+}
+
+
+layout($container) {
   var containerHeight = $container.height(),
     containerWidth = $container.width(),
     size = Math.min(containerHeight, containerWidth),
@@ -20,5 +24,6 @@ jswidgets.WatchFieldLayout.prototype.layout = function($container) {
     .cssWidth(size);
 
   this.watchField._paintWatch();
-  jswidgets.WatchFieldLayout.parent.prototype.layout.call(this, $container);
-};
+  super.layout( $container);
+}
+}

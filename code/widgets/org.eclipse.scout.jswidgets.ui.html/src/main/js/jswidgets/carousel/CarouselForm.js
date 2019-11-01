@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.CarouselForm = function() {
-  jswidgets.CarouselForm.parent.call(this);
-};
-scout.inherits(jswidgets.CarouselForm, scout.Form);
+import CarouselFormModel from './CarouselFormModel';
+import {Form, models} from '@eclipse-scout/core';
 
-jswidgets.CarouselForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.CarouselForm');
-};
+export default class CarouselForm extends Form {
 
-jswidgets.CarouselForm.prototype._init = function(model) {
-  jswidgets.CarouselForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(CarouselFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var carousel = this.widget('Carousel');
   var statusEnabledField = this.widget('StatusEnabledField');
@@ -30,10 +35,11 @@ jswidgets.CarouselForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(carouselField);
   this.widget('WidgetActionsBox').setField(carouselField);
   this.widget('EventsTab').setField(carousel);
-};
+}
 
-jswidgets.CarouselForm.prototype._onStatusEnabledPropertyChange = function(event) {
+_onStatusEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Carousel').setStatusEnabled(event.newValue);
   }
-};
+}
+}

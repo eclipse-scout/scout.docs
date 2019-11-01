@@ -8,30 +8,36 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FileChooserForm = function() {
-  jswidgets.FileChooserForm.parent.call(this);
-};
-scout.inherits(jswidgets.FileChooserForm, scout.Form);
+import FileChooserFormModel from './FileChooserFormModel';
+import {Form, FileInput, strings, models, scout} from '@eclipse-scout/core';
+import {DisplayParentLookupCall} from '../index';
 
-jswidgets.FileChooserForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FileChooserForm');
-};
+export default class FileChooserForm extends Form {
 
-jswidgets.FileChooserForm.prototype._init = function(model) {
-  jswidgets.FileChooserForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(FileChooserFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var button = this.widget('Button');
   button.on('click', this._onButtonClick.bind(this));
-  this.widget('MaximumUploadSizeField').setValue(scout.FileInput.DEFAULT_MAXIMUM_UPLOAD_SIZE);
+  this.widget('MaximumUploadSizeField').setValue(FileInput.DEFAULT_MAXIMUM_UPLOAD_SIZE);
   this.widget('ChosenFilesField').on('appLinkAction', this._onChosenFilesAppLinkAction.bind(this));
   this._updateChosenFiles([]);
-};
+}
 
-jswidgets.FileChooserForm.prototype._onButtonClick = function(event) {
+_onButtonClick(event) {
   var fileChooser = scout.create('FileChooser', {
     parent: this.session.desktop,
     acceptTypes: this.widget('AcceptTypesField').value,
-    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
+    displayParent: DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
     maximumUploadSize: this.widget('MaximumUploadSizeField').value,
     multiSelect: this.widget('MultiSelectField').value
   });
@@ -41,9 +47,9 @@ jswidgets.FileChooserForm.prototype._onButtonClick = function(event) {
     this._updateChosenFiles(fileChooser.files);
     fileChooser.close();
   }.bind(this));
-};
+}
 
-jswidgets.FileChooserForm.prototype._updateChosenFiles = function(files) {
+_updateChosenFiles(files) {
   var chosenFilesText = '';
   if (files.length === 0) {
     chosenFilesText = this.session.text('FileChooserNoFilesChosen');
@@ -56,17 +62,18 @@ jswidgets.FileChooserForm.prototype._updateChosenFiles = function(files) {
   var fileDescriptions = [];
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
-    var html = '<span class="app-link unfocusable" data-ref="' + i + '">' + scout.strings.encode(file.name) + ' (' + file.size + ' bytes)</span>';
+    var html = '<span class="app-link unfocusable" data-ref="' + i + '">' + strings.encode(file.name) + ' (' + file.size + ' bytes)</span>';
     fileDescriptions.push(html);
   }
 
   var chosenFilesField = this.widget('ChosenFilesField');
   chosenFilesField.files = files; // remember files to handle app link action
   chosenFilesField.setValue(chosenFilesText + ' ' + fileDescriptions.join(', '));
-};
+}
 
-jswidgets.FileChooserForm.prototype._onChosenFilesAppLinkAction = function(event) {
+_onChosenFilesAppLinkAction(event) {
   var file = this.widget('ChosenFilesField').files[event.ref];
   var url = URL.createObjectURL(file);
   this.session.desktop.openUri(url);
-};
+}
+}

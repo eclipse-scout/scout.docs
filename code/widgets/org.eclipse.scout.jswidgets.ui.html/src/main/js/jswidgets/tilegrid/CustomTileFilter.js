@@ -1,21 +1,27 @@
-jswidgets.CustomTileFilter = function(model) {
+import {HtmlTile, strings} from '@eclipse-scout/core';
+import {CustomTile} from '../index';
+
+export default class CustomTileFilter {
+
+constructor(model) {
   model = model || {};
   this.text = null;
   this.setText(model.text);
-};
+}
 
-jswidgets.CustomTileFilter.prototype.setText = function(text) {
+setText(text) {
   this.text = text || '';
   this.text = this.text.toLowerCase();
-};
+}
 
-jswidgets.CustomTileFilter.prototype.accept = function(tile) {
+accept(tile) {
   var label = '';
-  if (tile instanceof jswidgets.CustomTile) {
+  if (tile instanceof CustomTile) {
     label = tile.label || '';
-  } else if (tile instanceof scout.HtmlTile) {
-    label = scout.strings.plainText(tile.content) || '';
+  } else if (tile instanceof HtmlTile) {
+    label = strings.plainText(tile.content) || '';
   }
   var filterText = label.trim().toLowerCase();
   return filterText.indexOf(this.text) > -1;
-};
+}
+}

@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.SmartFieldDisplayStyleLookupCall = function() {
-  jswidgets.SmartFieldDisplayStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.SmartFieldDisplayStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, SmartField} from '@eclipse-scout/core';
 
-jswidgets.SmartFieldDisplayStyleLookupCall.prototype._data = function() {
-  return jswidgets.SmartFieldDisplayStyleLookupCall.DATA;
-};
+export default class SmartFieldDisplayStyleLookupCall extends StaticLookupCall {
 
-jswidgets.SmartFieldDisplayStyleLookupCall.DATA = [
-  [scout.SmartField.DisplayStyle.DEFAULT, 'default'],
-  [scout.SmartField.DisplayStyle.DROPDOWN, 'dropdown']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return SmartFieldDisplayStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [SmartField.DisplayStyle.DEFAULT, 'default'],
+  [SmartField.DisplayStyle.DROPDOWN, 'dropdown']
 ];
+}

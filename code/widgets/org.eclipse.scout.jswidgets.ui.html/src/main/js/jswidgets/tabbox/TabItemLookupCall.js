@@ -8,20 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TabItemLookupCall = function(tabBox) {
-  jswidgets.TabItemLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class TabItemLookupCall extends StaticLookupCall {
+
+constructor(tabBox) {
+  super();
   this._tabBoxPropertyChangeHandler = this._onTabBoxPropertyChange.bind(this);
   this._tabItemPropertyChangeHandler = this._onTabItemPropertyChange.bind(this);
   this.data = [];
   this.setTabBox(tabBox);
-};
-scout.inherits(jswidgets.TabItemLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.TabItemLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.TabItemLookupCall.prototype.setTabBox = function(tabBox) {
+setTabBox(tabBox) {
   if (this.tabBox) {
     this.tabBox.off('propertyChange', this._tabBoxPropertyChangeHandler);
     this.tabBox.tabItems.forEach(function(tabItem) {
@@ -34,21 +38,22 @@ jswidgets.TabItemLookupCall.prototype.setTabBox = function(tabBox) {
     tabItem.on('propertyChange', this._tabItemPropertyChangeHandler);
   }, this);
   this._rebuildData();
-};
+}
 
-jswidgets.TabItemLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.tabBox.tabItems.map(function(tabItem) {
     return [tabItem, tabItem.label];
   });
-};
+}
 
-jswidgets.TabItemLookupCall.prototype._onTabBoxPropertyChange = function(event) {
+_onTabBoxPropertyChange(event) {
   if (event.propertyName === 'tabItems') {
     this._rebuildData();
   }
-};
-jswidgets.TabItemLookupCall.prototype._onTabItemPropertyChange = function(event) {
+}
+_onTabItemPropertyChange(event) {
   if (event.propertyName === 'label') {
     this._rebuildData();
   }
-};
+}
+}

@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.SmartFieldPropertiesBox = function() {
-  jswidgets.SmartFieldPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import SmartFieldPropertiesBoxModel from './SmartFieldPropertiesBoxModel';
+
+export default class SmartFieldPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.SmartFieldPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SmartFieldPropertiesBox');
-};
 
-jswidgets.SmartFieldPropertiesBox.prototype._init = function(model) {
-  jswidgets.SmartFieldPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(SmartFieldPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -54,43 +59,44 @@ jswidgets.SmartFieldPropertiesBox.prototype._setField = function(field) {
   var searchRequiredField = this.widget('SearchRequiredField');
   searchRequiredField.setValue(this.field.searchRequired);
   searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onSmartFieldChange = function(event) {
+_onSmartFieldChange(event) {
   if (event.propertyName === 'lookupCall') {
     this.widget('LookupCallField').setValue(event.newValue);
   }
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onLookupCallPropertyChange = function(event) {
+_onLookupCallPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setLookupCall(event.newValue);
   }
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onDisplayStylePropertyChange = function(event) {
+_onDisplayStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.displayStyle = event.newValue;
     this.field.parent.rerenderControls();
     // Validate layout immediately to prevent flickering
     this.field.parent.htmlBody.validateLayoutTree();
   }
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onBrowseMaxRowCountPropertyChange = function(event) {
+_onBrowseMaxRowCountPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setBrowseMaxRowCount(event.newValue);
   }
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onActiveFilterEnabledPropertyChange = function(event) {
+_onActiveFilterEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setActiveFilterEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.SmartFieldPropertiesBox.prototype._onSearchRequiredPropertyChange = function(event) {
+_onSearchRequiredPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setSearchRequired(event.newValue);
   }
-};
+}
+}

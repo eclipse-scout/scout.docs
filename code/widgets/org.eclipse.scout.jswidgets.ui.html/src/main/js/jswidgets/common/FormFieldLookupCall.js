@@ -8,20 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormFieldLookupCall = function(compositeField) {
-  jswidgets.FormFieldLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class FormFieldLookupCall extends StaticLookupCall {
+
+constructor(compositeField) {
+  super();
   this._compositeFieldPropertyChangeHandler = this._onCompositeFieldPropertyChange.bind(this);
   this._formFieldPropertyChangeHandler = this._onFormFieldPropertyChange.bind(this);
   this.data = [];
   this.setCompositeField(compositeField);
-};
-scout.inherits(jswidgets.FormFieldLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.FormFieldLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.FormFieldLookupCall.prototype.setCompositeField = function(compositeField) {
+setCompositeField(compositeField) {
   if (this.compositeField) {
     this.compositeField.off('propertyChange', this._compositeFieldPropertyChangeHandler);
     this.compositeField.fields.forEach(function(formField) {
@@ -34,21 +38,22 @@ jswidgets.FormFieldLookupCall.prototype.setCompositeField = function(compositeFi
     formField.on('propertyChange', this._formFieldPropertyChangeHandler);
   }, this);
   this._rebuildData();
-};
+}
 
-jswidgets.FormFieldLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.compositeField.fields.map(function(formField) {
     return [formField, formField.label];
   });
-};
+}
 
-jswidgets.FormFieldLookupCall.prototype._onCompositeFieldPropertyChange = function(event) {
+_onCompositeFieldPropertyChange(event) {
   if (event.propertyName === 'fields') {
     this._rebuildData();
   }
-};
-jswidgets.FormFieldLookupCall.prototype._onFormFieldPropertyChange = function(event) {
+}
+_onFormFieldPropertyChange(event) {
   if (event.propertyName === 'label') {
     this._rebuildData();
   }
-};
+}
+}

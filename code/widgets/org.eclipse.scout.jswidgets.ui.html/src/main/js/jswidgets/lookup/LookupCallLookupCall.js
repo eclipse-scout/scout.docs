@@ -8,15 +8,19 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LookupCallLookupCall = function() {
-  jswidgets.LookupCallLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LookupCallLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, LookupCall, arrays, scout, QueryBy} from '@eclipse-scout/core';
 
-jswidgets.LookupCallLookupCall.prototype._queryByKey = function(deferred, key) {
-  if (key instanceof scout.LookupCall) {
+export default class LookupCallLookupCall extends StaticLookupCall {
+
+constructor() {
+  super();
+}
+
+
+_queryByKey(deferred, key) {
+  if (key instanceof LookupCall) {
     deferred.resolve({
-      queryBy: scout.QueryBy.KEY,
+      queryBy: QueryBy.KEY,
       lookupRows: [{
         key: key,
         text: key.objectType,
@@ -25,20 +29,20 @@ jswidgets.LookupCallLookupCall.prototype._queryByKey = function(deferred, key) {
     });
     return;
   }
-  var data = scout.arrays.find(this.data, function(data) {
+  var data = arrays.find(this.data, function(data) {
     return data[0] === key;
   });
   if (data) {
     deferred.resolve({
-      queryBy: scout.QueryBy.KEY,
+      queryBy: QueryBy.KEY,
       lookupRows: [this._dataToLookupRow(data)]
     });
   } else {
     deferred.reject();
   }
-};
+}
 
-jswidgets.LookupCallLookupCall.prototype._data = function() {
+_data() {
   return [
     [scout.create('jswidgets.LocaleLookupCall', {
       session: this.session
@@ -50,4 +54,5 @@ jswidgets.LookupCallLookupCall.prototype._data = function() {
       session: this.session
     }), 'jswidgets.SalutationLookupCall', 1]
   ];
-};
+}
+}

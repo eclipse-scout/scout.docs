@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LogicalGridLayoutConfigBox = function() {
-  jswidgets.LogicalGridLayoutConfigBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import LogicalGridLayoutConfigBoxModel from './LogicalGridLayoutConfigBoxModel';
+
+export default class LogicalGridLayoutConfigBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.LogicalGridLayoutConfigBox, scout.GroupBox);
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LogicalGridLayoutConfigBox');
-};
 
-jswidgets.LogicalGridLayoutConfigBox.prototype._init = function(model) {
-  jswidgets.LogicalGridLayoutConfigBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(LogicalGridLayoutConfigBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
   this.widget('HGapField').on('propertyChange', this._onPropertyChange.bind(this));
@@ -27,40 +32,40 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._init = function(model) {
   this.widget('RowHeightField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('ColumnWidthField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('MinWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
   }
   // layout defaults are only known after the widget got rendered.
   field.one('render', this.initLayoutDefaults.bind(this));
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.initLayoutDefaults = function() {
+initLayoutDefaults() {
   var bodyLayout = this.getBodyLayout();
   this.widget('HGapField').setValue(bodyLayout.hgap);
   this.widget('VGapField').setValue(bodyLayout.vgap);
   this.widget('RowHeightField').setValue(bodyLayout.rowHeight);
   this.widget('ColumnWidthField').setValue(bodyLayout.columnWidth);
   this.widget('MinWidthField').setValue(bodyLayout.minWidth);
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName !== 'value') {
     return;
   }
   var layoutConfig = this.getLayoutConfig().clone();
   this._fillLayoutConfigByEvent(layoutConfig, event);
   this.setLayoutConfig(layoutConfig);
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = function(layoutConfig, event) {
+_fillLayoutConfigByEvent(layoutConfig, event) {
   if (event.source.id === 'HGapField') {
     layoutConfig.hgap = event.newValue;
   } else if (event.source.id === 'VGapField') {
@@ -72,19 +77,20 @@ jswidgets.LogicalGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = functi
   } else if (event.source.id === 'MinWidthField') {
     layoutConfig.minWidth = event.newValue;
   }
-};
+}
 
 /**
  * Return the body layout of the widget. Used to initialized the config box with the default values.
  */
-jswidgets.LogicalGridLayoutConfigBox.prototype.getBodyLayout = function() {
+getBodyLayout() {
   return this.field.htmlBody.layout;
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.getLayoutConfig = function() {
+getLayoutConfig() {
   return this.field.layoutConfig;
-};
+}
 
-jswidgets.LogicalGridLayoutConfigBox.prototype.setLayoutConfig = function(layoutConfig) {
+setLayoutConfig(layoutConfig) {
   this.field.setLayoutConfig(layoutConfig);
-};
+}
+}

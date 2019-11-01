@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MultilineSmartFieldForm = function() {
-  jswidgets.MultilineSmartFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.MultilineSmartFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import MultilineSmartFieldFormModel from './MultilineSmartFieldFormModel';
 
-jswidgets.MultilineSmartFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.MultilineSmartFieldForm');
-};
+export default class MultilineSmartFieldForm extends Form {
 
-jswidgets.MultilineSmartFieldForm.prototype._init = function(model) {
-  jswidgets.MultilineSmartFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(MultilineSmartFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.smartField = this.widget('MultilineSmartField');
 
@@ -29,4 +34,5 @@ jswidgets.MultilineSmartFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.smartField);
   this.widget('WidgetActionsBox').setField(this.smartField);
   this.widget('EventsTab').setField(this.smartField);
-};
+}
+}

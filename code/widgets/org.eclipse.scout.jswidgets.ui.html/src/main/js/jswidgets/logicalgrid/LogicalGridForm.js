@@ -8,26 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LogicalGridForm = function() {
-  jswidgets.LogicalGridForm.parent.call(this);
+import {Form, models, scout} from '@eclipse-scout/core';
+import LogicalGridFormModel from './LogicalGridFormModel';
+import {FormFieldLookupCall} from '../index';
+
+export default class LogicalGridForm extends Form {
+
+constructor() {
+  super();
   this._fieldFocusHandler = this._onFieldFocus.bind(this);
   this._fieldRenderHandler = this._onFieldRender.bind(this);
-};
-scout.inherits(jswidgets.LogicalGridForm, scout.Form);
+}
 
-jswidgets.LogicalGridForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LogicalGridForm');
-};
 
-jswidgets.LogicalGridForm.prototype._init = function(model) {
-  jswidgets.LogicalGridForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(LogicalGridFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var groupBox = this.widget('DetailBox');
   groupBox.on('propertyChange', this._onGroupBoxPropertyChange.bind(this));
   this._initFields(groupBox.fields);
 
   var targetField = this.widget('TargetField');
-  targetField.lookupCall = new jswidgets.FormFieldLookupCall(groupBox);
+  targetField.lookupCall = new FormFieldLookupCall(groupBox);
   targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
   this.widget('StringField1').on('propertyChange', this._onFieldPropertyChange.bind(this));
   this.widget('StringField2').on('propertyChange', this._onFieldPropertyChange.bind(this));
@@ -44,27 +50,27 @@ jswidgets.LogicalGridForm.prototype._init = function(model) {
   this.widget('Actions.AddFieldBox').beforeField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
   this.widget('Actions.DeleteFieldBox').setField(groupBox);
   this.widget('Actions.DeleteFieldBox').targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
-};
+}
 
-jswidgets.LogicalGridForm.prototype._initFields = function(fields) {
+_initFields(fields) {
   fields.forEach(function(field) {
     field.off('render', this._fieldRenderHandler);
     field.on('render', this._fieldRenderHandler);
   }, this);
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onFieldRender = function(event) {
+_onFieldRender(event) {
   event.source.$field.off('focus', this._fieldFocusHandler);
   event.source.$field.on('focus', this._fieldFocusHandler);
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onGroupBoxPropertyChange = function(event) {
+_onGroupBoxPropertyChange(event) {
   if (event.propertyName === 'fields') {
     this._initFields(event.source.fields);
   }
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onTargetFieldPropertyChange = function(event) {
+_onTargetFieldPropertyChange(event) {
   if (event.propertyName === 'value') {
     var oldField = event.oldValue;
     var newField = event.newValue;
@@ -78,24 +84,25 @@ jswidgets.LogicalGridForm.prototype._onTargetFieldPropertyChange = function(even
       newField.addCssClass('field-highlighted');
     }
   }
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onFieldPropertyChange = function(event) {
+_onFieldPropertyChange(event) {
   if (event.propertyName === 'gridData' && event.source === this.widget('TargetField')) {
     var gridDataBox = this.widget('CalculatedGridDataBox');
     gridDataBox.reloadGridData();
   }
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onFieldFocus = function(event) {
+_onFieldFocus(event) {
   var field = scout.widget(event.currentTarget);
   this.widget('TargetField').setValue(field);
   this.widget('Actions.AddFieldBox').setTargetField(field);
   this.widget('Actions.DeleteFieldBox').setTargetField(field);
-};
+}
 
-jswidgets.LogicalGridForm.prototype._onLogicalGridChange = function(event) {
+_onLogicalGridChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DetailBox').setLogicalGrid(event.newValue);
   }
-};
+}
+}

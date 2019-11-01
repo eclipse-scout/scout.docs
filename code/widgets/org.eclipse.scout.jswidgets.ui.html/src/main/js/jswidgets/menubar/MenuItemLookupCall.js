@@ -8,13 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MenuItemLookupCall = function() {
-  jswidgets.MenuItemLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.MenuItemLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.MenuItemLookupCall.prototype._data = function() {
-  return jswidgets.MenuItemLookupCall.DATA;
-};
+export default class MenuItemLookupCall extends StaticLookupCall {
 
-jswidgets.MenuItemLookupCall.DATA = [];
+constructor() {
+  super();
+}
+
+
+_data() {
+  return MenuItemLookupCall.DATA;
+}
+
+static DATA = [];
+}

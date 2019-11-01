@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TileTypeLookupCall = function() {
-  jswidgets.TileTypeLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.TileTypeLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.TileTypeLookupCall.prototype._data = function() {
-  return jswidgets.TileTypeLookupCall.DATA;
-};
+export default class TileTypeLookupCall extends StaticLookupCall {
 
-jswidgets.TileTypeLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return TileTypeLookupCall.DATA;
+}
+
+static DATA = [
   ['default', 'HtmlTile with default style'],
   ['simple', 'CustomTile with custom style']
 ];
+}

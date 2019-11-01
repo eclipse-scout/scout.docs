@@ -8,55 +8,62 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LifecycleForm = function() {
-  jswidgets.LifecycleForm.parent.call(this);
-};
-scout.inherits(jswidgets.LifecycleForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import * as $ from 'jquery';
+import LifecycleFormModel from './LifecycleFormModel';
 
-jswidgets.LifecycleForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LifecycleForm');
-};
+export default class LifecycleForm extends Form {
 
-jswidgets.LifecycleForm.prototype._init = function(model) {
-  jswidgets.LifecycleForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(LifecycleFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.widget('HasCloseButtonField').on('propertyChange', this._onHasCloseButtonPropertyChange.bind(this));
 
   var askIfNeedSaveField = this.widget('AskIfNeedSaveField');
   askIfNeedSaveField.setValue(this.askIfNeedSave);
   askIfNeedSaveField.on('propertyChange', this._onAskIfNeedSavePropertyChange.bind(this));
-};
+}
 
-jswidgets.LifecycleForm.prototype.importData = function() {
+importData() {
   this.widget('NameField').setValue(this.data.name);
   this.widget('BirthdayField').setValue(this.data.birthday);
-};
+}
 
-jswidgets.LifecycleForm.prototype.exportData = function() {
+exportData() {
   return {
     name: this.widget('NameField').value,
     birthday: this.widget('BirthdayField').value,
   };
-};
+}
 
-jswidgets.LifecycleForm.prototype._save = function(data) {
+_save(data) {
   if (!this.widget('ExceptionField').value) {
-    return jswidgets.LifecycleForm.parent.prototype._save.call(this, data);
+    return super._save( data);
   }
   // Simulate a failing asynchronous save operation (e.g. an ajax call)
   return $.resolvedPromise().then(function() {
     throw new Error('Saving failed');
   });
-};
+}
 
-jswidgets.LifecycleForm.prototype._onHasCloseButtonPropertyChange = function(event) {
+_onHasCloseButtonPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('CloseMenu').setVisible(event.newValue);
   }
-};
+}
 
-jswidgets.LifecycleForm.prototype._onAskIfNeedSavePropertyChange = function(event) {
+_onAskIfNeedSavePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.setAskIfNeedSave(event.newValue);
   }
-};
+}
+}

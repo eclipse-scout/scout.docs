@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LabelForm = function() {
-  jswidgets.LabelForm.parent.call(this);
-};
-scout.inherits(jswidgets.LabelForm, scout.Form);
+import LabelFormModel from './LabelFormModel';
+import {Form, MessageBoxes, GridData, models} from '@eclipse-scout/core';
 
-jswidgets.LabelForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LabelForm');
-};
+export default class LabelForm extends Form {
 
-jswidgets.LabelForm.prototype._init = function(model) {
-  jswidgets.LabelForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(LabelFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var label = this.widget('Label');
   label.on('appLinkAction', this._onLabelAppLinkAction.bind(this));
@@ -37,35 +42,36 @@ jswidgets.LabelForm.prototype._init = function(model) {
 
   this.widget('WidgetActionsBox').setField(label);
   this.widget('EventsTab').setField(label);
-};
+}
 
-jswidgets.LabelForm.prototype._onValuePropertyChange = function(event) {
+_onValuePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Label').setValue(event.newValue);
   }
-};
+}
 
-jswidgets.LabelForm.prototype._onHtmlEnabledPropertyChange = function(event) {
+_onHtmlEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Label').setHtmlEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.LabelForm.prototype._onScrollablePropertyChange = function(event) {
+_onScrollablePropertyChange(event) {
   if (event.propertyName === 'value') {
     var label = this.widget('Label');
     label.setScrollable(event.newValue);
 
     // Fix height if it is scrollable
-    var gridData = new scout.GridData(label.parent.gridDataHints);
+    var gridData = new GridData(label.parent.gridDataHints);
     gridData.heightInPixel = label.scrollable ? 50 : -1;
     label.parent.setGridDataHints(gridData);
   }
-};
+}
 
-jswidgets.LabelForm.prototype._onLabelAppLinkAction = function(event) {
-  scout.MessageBoxes.createOk(this)
+_onLabelAppLinkAction(event) {
+  MessageBoxes.createOk(this)
     .withBody(this.session.text('ThanksForClickingMe'))
     .withYes(this.session.text('YoureWelcome'))
     .buildAndOpen();
-};
+}
+}

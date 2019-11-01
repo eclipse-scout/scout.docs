@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.IconIdLookupCall = function() {
-  jswidgets.IconIdLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.IconIdLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, strings} from '@eclipse-scout/core';
 
-jswidgets.IconIdLookupCall.prototype._data = function() {
+export default class IconIdLookupCall extends StaticLookupCall {
+
+constructor() {
+  super();
+}
+
+
+_data() {
   return Object.keys(scout.icons)
     .filter(function(name) {
       var value = scout.icons[name];
-      return typeof value === 'string' && scout.strings.startsWith(value, 'font:');
+      return typeof value === 'string' && strings.startsWith(value, 'font:');
     }).map(function(name, i) {
       var iconId = scout.icons[name];
       return [iconId, name];
     });
-};
+}
+}

@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MenuBarEllipsisPositionLookupCall = function() {
-  jswidgets.MenuBarEllipsisPositionLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.MenuBarEllipsisPositionLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, MenuBar} from '@eclipse-scout/core';
 
-jswidgets.MenuBarEllipsisPositionLookupCall.prototype._data = function() {
-  return jswidgets.MenuBarEllipsisPositionLookupCall.DATA;
-};
+export default class MenuBarEllipsisPositionLookupCall extends StaticLookupCall {
 
-jswidgets.MenuBarEllipsisPositionLookupCall.DATA = [
-  [scout.MenuBar.EllipsisPosition.LEFT, 'Left'],
-  [scout.MenuBar.EllipsisPosition.RIGHT, 'Right']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return MenuBarEllipsisPositionLookupCall.DATA;
+}
+
+static DATA = [
+  [MenuBar.EllipsisPosition.LEFT, 'Left'],
+  [MenuBar.EllipsisPosition.RIGHT, 'Right']
 ];
+}

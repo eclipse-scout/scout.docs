@@ -1,3 +1,6 @@
+import {Desktop} from './index';
+import {scout} from '@eclipse-scout/core';
+
 /*
  * Copyright (c) 2017 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
@@ -8,8 +11,8 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-scout.objectFactories = $.extend(scout.objectFactories, {
+scout.addObjectFactories({
   'Desktop': function() {
-    return new jswidgets.Desktop();
+    return new Desktop();
   }
 });

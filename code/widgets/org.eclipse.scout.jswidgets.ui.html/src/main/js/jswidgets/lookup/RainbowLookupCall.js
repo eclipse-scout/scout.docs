@@ -8,35 +8,39 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.RainbowLookupCall = function() {
-  jswidgets.RainbowLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.RainbowLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, scout, icons} from '@eclipse-scout/core';
 
-jswidgets.RainbowLookupCall.prototype._data = function() {
-  return jswidgets.RainbowLookupCall.DATA;
-};
+export default class RainbowLookupCall extends StaticLookupCall {
 
-jswidgets.RainbowLookupCall.DATA = [
-  ['FEE0E0', scout.icons.MINUS],
-  ['FECAC8', scout.icons.GROUP, 'Times New Roman'],
-  ['FEB1AB', scout.icons.PLUS, 'Courier New'],
-  ['ECF3F7', scout.icons.INFO, 'sans-serif'],
-  ['C8E4F2', scout.icons.CALENDAR, 'Open Sans'],
-  ['B0DAEE', scout.icons.FOLDER, 'Bold-Roboto'],
-  ['DDF4EA', scout.icons.WORLD, 'Impact'],
-  ['B6ECD3', scout.icons.STAR, 'Comic Sans MS'],
-  ['86D9B2', scout.icons.STAR_MARKED, '20 Arial'],
-  ['3EE1C3', scout.icons.AVG, 'Calibri-italic'],
-  ['93EDDC', scout.icons.GEAR, 'Comic Sans'],
-  ['BAF3E8', scout.icons.COLLAPSE, 'Comic Sans'],
-  ['DDFFF9', scout.icons.LONG_ARROW_DOWN],
-  ['FCF0E5', scout.icons.EXCLAMATION_MARK_CIRCLE, 'Arial-Bold-12'],
-  ['FEE6C0', scout.icons.SQUARE_BOLD, '10 Courier'],
-  ['FFDB9D', scout.icons.ANGLE_RIGHT]
+constructor() {
+  super();
+}
+
+
+_data() {
+  return RainbowLookupCall.DATA;
+}
+
+static DATA = [
+  ['FEE0E0', icons.MINUS],
+  ['FECAC8', icons.GROUP, 'Times New Roman'],
+  ['FEB1AB', icons.PLUS, 'Courier New'],
+  ['ECF3F7', icons.INFO, 'sans-serif'],
+  ['C8E4F2', icons.CALENDAR, 'Open Sans'],
+  ['B0DAEE', icons.FOLDER, 'Bold-Roboto'],
+  ['DDF4EA', icons.WORLD, 'Impact'],
+  ['B6ECD3', icons.STAR, 'Comic Sans MS'],
+  ['86D9B2', icons.STAR_MARKED, '20 Arial'],
+  ['3EE1C3', icons.AVG, 'Calibri-italic'],
+  ['93EDDC', icons.GEAR, 'Comic Sans'],
+  ['BAF3E8', icons.COLLAPSE, 'Comic Sans'],
+  ['DDFFF9', icons.LONG_ARROW_DOWN],
+  ['FCF0E5', icons.EXCLAMATION_MARK_CIRCLE, 'Arial-Bold-12'],
+  ['FEE6C0', icons.SQUARE_BOLD, '10 Courier'],
+  ['FFDB9D', icons.ANGLE_RIGHT]
 ];
 
-jswidgets.RainbowLookupCall.prototype._dataToLookupRow = function(data, index) {
+_dataToLookupRow(data, index) {
   var model = {
     key: data[0],
     text: data[0],
@@ -50,4 +54,5 @@ jswidgets.RainbowLookupCall.prototype._dataToLookupRow = function(data, index) {
     model.foregroundColor = 'blue';
   }
   return scout.create('LookupRow', model);
-};
+}
+}

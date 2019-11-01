@@ -1,9 +1,14 @@
-jswidgets.WatchField = function() {
-  jswidgets.WatchField.parent.call(this);
-};
-scout.inherits(jswidgets.WatchField, scout.FormField);
+import {FormField, HtmlComponent} from '@eclipse-scout/core';
+import {WatchFieldLayout} from '../../index';
 
-jswidgets.WatchField.prototype._render = function() {
+export default class WatchField extends FormField {
+
+constructor() {
+  super();
+}
+
+
+_render() {
   // create the field container
   this.addContainer(this.$parent, 'watch-field');
   // create a label
@@ -12,14 +17,14 @@ jswidgets.WatchField.prototype._render = function() {
   // create a field
   var $field = this.$parent.appendDiv('content');
   this.addField($field);
-  var htmlField = scout.HtmlComponent.install(this.$field, this.session);
+  var htmlField = HtmlComponent.install(this.$field, this.session);
 
   // watch canvas
   this.$canvas = this.$field.makeElement('<canvas>', 'clock');
   this.$field.append(this.$canvas);
 
   // layout
-  htmlField.setLayout(new jswidgets.WatchFieldLayout(this));
+  htmlField.setLayout(new WatchFieldLayout(this));
 
   this.addMandatoryIndicator();
   this.addStatus();
@@ -27,9 +32,9 @@ jswidgets.WatchField.prototype._render = function() {
   // start watch
   this._paintWatch();
   setInterval(this._paintWatch.bind(this), 1000);
-};
+}
 
-jswidgets.WatchField.prototype._paintWatch = function() {
+_paintWatch() {
   var context = this.$canvas[0].getContext("2d");
   var radius = this.$canvas.height() / 2;
   context.clearRect(0, 0, this.$canvas.height(), this.$canvas.height());
@@ -39,9 +44,9 @@ jswidgets.WatchField.prototype._paintWatch = function() {
   this._paintBackground(context, radius);
   this._paintNumbers(context, radius);
   this._paintTime(context, radius);
-};
+}
 
-jswidgets.WatchField.prototype._paintBackground = function(context, radius) {
+_paintBackground(context, radius) {
   var strokeStyle;
 
   context.beginPath();
@@ -56,9 +61,9 @@ jswidgets.WatchField.prototype._paintBackground = function(context, radius) {
   context.strokeStyle = strokeStyle;
   context.lineWidth = radius * 0.06;
   context.stroke();
-};
+}
 
-jswidgets.WatchField.prototype._paintNumbers = function(context, radius) {
+_paintNumbers(context, radius) {
   var ang;
   var hour;
   context.font = radius * 0.15 + "px arial";
@@ -82,9 +87,9 @@ jswidgets.WatchField.prototype._paintNumbers = function(context, radius) {
     context.translate(0, radius * 0.85);
     context.rotate(-ang);
   }
-};
+}
 
-jswidgets.WatchField.prototype._paintTime = function(context, radius) {
+_paintTime(context, radius) {
   var now = new Date(),
     hour = now.getHours(),
     minute = now.getMinutes(),
@@ -102,9 +107,9 @@ jswidgets.WatchField.prototype._paintTime = function(context, radius) {
   this._paintLine(context, minuteAngle, 0, radius * 0.8, radius * 0.04);
   // second
   this._paintLine(context, secondAngle, radius * 0.7, radius * 1, radius * 0.02);
-};
+}
 
-jswidgets.WatchField.prototype._paintLine = function(context, angle, begin, length, width) {
+_paintLine(context, angle, begin, length, width) {
   context.beginPath();
   context.strokeStyle = '#014786';
   context.lineWidth = width;
@@ -114,4 +119,5 @@ jswidgets.WatchField.prototype._paintLine = function(context, angle, begin, leng
   context.lineTo(0, -length);
   context.stroke();
   context.rotate(-angle);
-};
+}
+}

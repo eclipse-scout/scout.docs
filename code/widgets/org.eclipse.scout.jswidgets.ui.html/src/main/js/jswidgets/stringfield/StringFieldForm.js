@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.StringFieldForm = function() {
-  jswidgets.StringFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.StringFieldForm, scout.Form);
+import {Form, models, scout} from '@eclipse-scout/core';
+import StringFieldFormModel from './StringFieldFormModel';
 
-jswidgets.StringFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.StringFieldForm');
-};
+export default class StringFieldForm extends Form {
 
-jswidgets.StringFieldForm.prototype._init = function(model) {
-  jswidgets.StringFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(StringFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var stringField = this.widget('StringField');
   stringField.on('selectionChange', this._onFieldSelectionChange.bind(this));
@@ -78,21 +83,21 @@ jswidgets.StringFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(stringField);
   this.widget('WidgetActionsBox').setField(stringField);
   this.widget('EventsTab').setField(stringField);
-};
+}
 
-jswidgets.StringFieldForm.prototype._onHasActionPropertyChange = function(event) {
+_onHasActionPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setHasAction(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onInputMaskedPropertyChange = function(event) {
+_onInputMaskedPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setInputMasked(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onMultilineTextPropertyChange = function(event) {
+_onMultilineTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     var field = this.widget('StringField');
     field.multilineText = event.newValue;
@@ -100,74 +105,74 @@ jswidgets.StringFieldForm.prototype._onMultilineTextPropertyChange = function(ev
     // Validate layout immediately to prevent flickering
     field.parent.htmlBody.validateLayoutTree();
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onSpellCheckEnabledPropertyChange = function(event) {
+_onSpellCheckEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setSpellCheckEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onTrimTextPropertyChange = function(event) {
+_onTrimTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setTrimText(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onUpdateDisplayTextOnModifyPropertyChange = function(event) {
+_onUpdateDisplayTextOnModifyPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setUpdateDisplayTextOnModify(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onFormatPropertyChange = function(event) {
+_onFormatPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setFormat(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onMaxLengthPropertyChange = function(event) {
+_onMaxLengthPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setMaxLength(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onSelectionTrackingEnabledPropertyChange = function(event) {
+_onSelectionTrackingEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('StringField').setSelectionTrackingEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onSelectionStartPropertyChange = function(event) {
+_onSelectionStartPropertyChange(event) {
   if (event.propertyName === 'value') {
     var stringField = this.widget('StringField');
     stringField.focus();
     stringField.setSelectionStart(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onSelectionEndPropertyChange = function(event) {
+_onSelectionEndPropertyChange(event) {
   if (event.propertyName === 'value') {
     var stringField = this.widget('StringField');
     stringField.focus();
     stringField.setSelectionEnd(event.newValue);
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onBlockFormatPropertyChange = function(event) {
+_onBlockFormatPropertyChange(event) {
   if (event.propertyName === 'value') {
     var stringField = this.widget('StringField');
     if (event.newValue) {
-      stringField.setFormatter(jswidgets.StringFieldForm.blockFormatter);
-      stringField.setParser(jswidgets.StringFieldForm.blockParser);
+      stringField.setFormatter(StringFieldForm.blockFormatter);
+      stringField.setParser(StringFieldForm.blockParser);
     } else {
       stringField.setFormatter(null);
       stringField.setParser(null);
     }
   }
-};
+}
 
-jswidgets.StringFieldForm.prototype._onFieldAction = function(event) {
+_onFieldAction(event) {
   var msgBox = scout.create('scout.MessageBox', {
     parent: this,
     yesButtonText: this.session.text('Thanks') + '!',
@@ -177,26 +182,27 @@ jswidgets.StringFieldForm.prototype._onFieldAction = function(event) {
   msgBox.on('action', function() {
     msgBox.close();
   });
-};
+}
 
-jswidgets.StringFieldForm.prototype._onFieldSelectionChange = function(event) {
+_onFieldSelectionChange(event) {
   var selectionStartField = this.widget('SelectionStartField');
   selectionStartField.setValue(event.selectionStart);
   var selectionEndField = this.widget('SelectionEndField');
   selectionEndField.setValue(event.selectionEnd);
-};
+}
 
-jswidgets.StringFieldForm.blockFormatter = function(value, defaultFormatter) {
+static blockFormatter(value, defaultFormatter) {
   var displayText = defaultFormatter(value);
   if (!displayText) {
     return displayText;
   }
   return displayText.match(/.{4}/g).join('-');
-};
+}
 
-jswidgets.StringFieldForm.blockParser = function(displayText, defaultParser) {
+static blockParser(displayText, defaultParser) {
   if (displayText) {
     return displayText.replace(/-/g, '');
   }
   return defaultParser(displayText);
-};
+}
+}

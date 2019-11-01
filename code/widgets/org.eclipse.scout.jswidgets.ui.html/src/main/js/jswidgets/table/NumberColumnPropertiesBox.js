@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.NumberColumnPropertiesBox = function() {
-  jswidgets.NumberColumnPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import NumberColumnPropertiesBoxModel from './NumberColumnPropertiesBoxModel';
+
+export default class NumberColumnPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.column = null;
-};
-scout.inherits(jswidgets.NumberColumnPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.NumberColumnPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.NumberColumnPropertiesBox');
-};
 
-jswidgets.NumberColumnPropertiesBox.prototype._init = function(model) {
-  jswidgets.NumberColumnPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(NumberColumnPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setColumn(this.column);
-};
+}
 
-jswidgets.NumberColumnPropertiesBox.prototype.setColumn = function(column) {
+setColumn(column) {
   this.setProperty('column', column);
-};
+}
 
-jswidgets.NumberColumnPropertiesBox.prototype._setColumn = function(column) {
+_setColumn(column) {
   this._setProperty('column', column);
   if (!this.column) {
     return;
@@ -54,9 +59,9 @@ jswidgets.NumberColumnPropertiesBox.prototype._setColumn = function(column) {
   backgroundEffectField.setValue(this.column.backgroundEffect);
   backgroundEffectField.on('propertyChange', this._onPropertyChange.bind(this));
 
-};
+}
 
-jswidgets.NumberColumnPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'MultiplierField') {
     this.column.setDecimalFormat({
       pattern: this.column.decimalFormat.pattern,
@@ -78,4 +83,5 @@ jswidgets.NumberColumnPropertiesBox.prototype._onPropertyChange = function(event
   if (event.propertyName === 'value' && event.source.id === 'BackgroundEffectField') {
     this.column.setBackgroundEffect(event.newValue);
   }
-};
+}
+}

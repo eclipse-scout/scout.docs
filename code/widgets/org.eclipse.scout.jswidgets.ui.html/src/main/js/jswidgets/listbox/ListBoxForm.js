@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ListBoxForm = function() {
-  jswidgets.ListBoxForm.parent.call(this);
-};
-scout.inherits(jswidgets.ListBoxForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import ListBoxFormModel from './ListBoxFormModel';
 
-jswidgets.ListBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ListBoxForm');
-};
+export default class ListBoxForm extends Form {
 
-jswidgets.ListBoxForm.prototype._init = function(model) {
-  jswidgets.ListBoxForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(ListBoxFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.listBox = this.widget('ListBox');
 
@@ -33,16 +38,17 @@ jswidgets.ListBoxForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.listBox);
   this.widget('WidgetActionsBox').setField(this.listBox);
   this.widget('EventsTab').setField(this.listBox);
-};
+}
 
-jswidgets.ListBoxForm.prototype._onListBoxChange = function(event) {
+_onListBoxChange(event) {
   if (event.propertyName === 'lookupCall') {
     this.lookupCallField.setValue(event.newValue);
   }
-};
+}
 
-jswidgets.ListBoxForm.prototype._onLookupCallFielChange = function(event) {
+_onLookupCallFielChange(event) {
   if (event.propertyName === 'value') {
     this.listBox.setLookupCall(event.newValue);
   }
-};
+}
+}

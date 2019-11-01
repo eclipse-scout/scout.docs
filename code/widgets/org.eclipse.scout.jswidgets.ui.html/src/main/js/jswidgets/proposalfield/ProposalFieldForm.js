@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ProposalFieldForm = function() {
-  jswidgets.ProposalFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.ProposalFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import ProposalFieldFormModel from './ProposalFieldFormModel';
 
-jswidgets.ProposalFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ProposalFieldForm');
-};
+export default class ProposalFieldForm extends Form {
 
-jswidgets.ProposalFieldForm.prototype._init = function(model) {
-  jswidgets.ProposalFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(ProposalFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.proposalField = this.widget('ProposalField');
 
@@ -28,4 +33,5 @@ jswidgets.ProposalFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.proposalField);
   this.widget('WidgetActionsBox').setField(this.proposalField);
   this.widget('EventsTab').setField(this.proposalField);
-};
+}
+}

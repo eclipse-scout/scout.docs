@@ -8,29 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ProposalFieldPropertiesBox = function() {
-  jswidgets.ProposalFieldPropertiesBox.parent.call(this);
+import {models} from '@eclipse-scout/core';
+import ProposalFieldPropertiesBoxModel from './ProposalFieldPropertiesBoxModel';
+import {SmartFieldPropertiesBox} from '../index';
+
+export default class ProposalFieldPropertiesBox extends SmartFieldPropertiesBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.ProposalFieldPropertiesBox, jswidgets.SmartFieldPropertiesBox);
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.extend('jswidgets.ProposalFieldPropertiesBox', jswidgets.ProposalFieldPropertiesBox.parent.prototype._jsonModel.call(this));
-};
 
-jswidgets.ProposalFieldPropertiesBox.prototype._init = function(model) {
-  jswidgets.ProposalFieldPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.extend(ProposalFieldPropertiesBoxModel(this), super._jsonModel());
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
   this.widget('DisplayStyleField').setVisible(false);
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._setField = function(field) {
-  jswidgets.ProposalFieldPropertiesBox.parent.prototype._setField.call(this, field);
+_setField(field) {
+  super._setField( field);
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -43,28 +49,29 @@ jswidgets.ProposalFieldPropertiesBox.prototype._setField = function(field) {
   var trimTextField = this.widget('TrimTextField');
   trimTextField.setValue(this.field.trimText);
   trimTextField.on('propertyChange', this._onTrimTextPropertyChange.bind(this));
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._onSmartFieldChange = function(event) {
+_onSmartFieldChange(event) {
   if (event.propertyName === 'lookupCall') {
     this.widget('LookupCallField').setValue(event.newValue);
   }
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._onLookupCallPropertyChange = function(event) {
+_onLookupCallPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setLookupCall(event.newValue);
   }
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._onMaxLengthPropertyChange = function(event) {
+_onMaxLengthPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setMaxLength(event.newValue);
   }
-};
+}
 
-jswidgets.ProposalFieldPropertiesBox.prototype._onTrimTextPropertyChange = function(event) {
+_onTrimTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setTrimText(event.newValue);
   }
-};
+}
+}

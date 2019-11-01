@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TabBoxForm = function() {
-  jswidgets.TabBoxForm.parent.call(this);
+import {Form, MessageBoxes, models} from '@eclipse-scout/core';
+import TabBoxFormModel from './TabBoxFormModel';
+
+export default class TabBoxForm extends Form {
+
+constructor() {
+  super();
   this.dynamicTabCounter = 0;
-};
-scout.inherits(jswidgets.TabBoxForm, scout.Form);
+}
 
-jswidgets.TabBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxForm');
-};
 
-jswidgets.TabBoxForm.prototype._init = function(model) {
-  jswidgets.TabBoxForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TabBoxFormModel);
+}
+
+_init(model) {
+  super._init( model);
   var tabBox = this.widget('TabBox');
 
   this.widget('Properties.TabBox').setTabBox(tabBox);
@@ -42,8 +47,9 @@ jswidgets.TabBoxForm.prototype._init = function(model) {
   }.bind(this));
 
   this.widget('SettingsMenu').on('action', function() {
-    scout.MessageBoxes.createOk(this)
+    MessageBoxes.createOk(this)
       .withBody("This is a menu added to the Tab Box with horizontal alignment set to 1.")
       .buildAndOpen();
   }.bind(this));
-};
+}
+}

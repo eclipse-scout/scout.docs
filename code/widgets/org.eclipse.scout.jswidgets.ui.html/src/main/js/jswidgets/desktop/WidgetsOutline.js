@@ -8,11 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.WidgetsOutline = function() {
-  jswidgets.WidgetsOutline.parent.call(this);
-};
-scout.inherits(jswidgets.WidgetsOutline, scout.Outline);
+import {Outline, models} from '@eclipse-scout/core';
+import WidgetsOutlineModel from './WidgetsOutlineModel';
 
-jswidgets.WidgetsOutline.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.WidgetsOutline');
-};
+export default class WidgetsOutline extends Outline {
+
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(WidgetsOutlineModel);
+}
+}

@@ -8,20 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ChartTypeLookupCall = function() {
-  jswidgets.ChartTypeLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.ChartTypeLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
+import {Chart} from '../../index';
 
-jswidgets.ChartTypeLookupCall.prototype._data = function() {
-  return jswidgets.ChartTypeLookupCall.DATA;
-};
+export default class ChartTypeLookupCall extends StaticLookupCall {
 
-jswidgets.ChartTypeLookupCall.DATA = [
-  [jswidgets.Chart.Type.PIE, 'Pie'],
-  [jswidgets.Chart.Type.LINE, 'Line'],
-  [jswidgets.Chart.Type.DOUGHNUT, 'Doughnut'],
-  [jswidgets.Chart.Type.POLAR_AREA, 'Polar Area']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return ChartTypeLookupCall.DATA;
+}
+
+static DATA = [
+  [Chart.Type.PIE, 'Pie'],
+  [Chart.Type.LINE, 'Line'],
+  [Chart.Type.DOUGHNUT, 'Doughnut'],
+  [Chart.Type.POLAR_AREA, 'Polar Area']
 
 
 ];
+}

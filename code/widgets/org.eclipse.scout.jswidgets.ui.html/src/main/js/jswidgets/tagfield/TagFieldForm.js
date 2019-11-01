@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TagFieldForm = function() {
-  jswidgets.TagFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.TagFieldForm, scout.Form);
+import TagFieldFormModel from './TagFieldFormModel';
+import {Form, models} from '@eclipse-scout/core';
 
-jswidgets.TagFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TagFieldForm');
-};
+export default class TagFieldForm extends Form {
 
-jswidgets.TagFieldForm.prototype._init = function(model) {
-  jswidgets.TagFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(TagFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var tagField = this.widget('TagField');
 
@@ -34,4 +39,5 @@ jswidgets.TagFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(tagField);
   this.widget('WidgetActionsBox').setField(tagField);
   this.widget('EventsTab').setField(tagField);
-};
+}
+}

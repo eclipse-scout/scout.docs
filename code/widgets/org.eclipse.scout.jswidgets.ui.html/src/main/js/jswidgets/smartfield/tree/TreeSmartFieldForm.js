@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TreeSmartFieldForm = function() {
-  jswidgets.TreeSmartFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.TreeSmartFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import TreeSmartFieldFormModel from './TreeSmartFieldFormModel';
 
-jswidgets.TreeSmartFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TreeSmartFieldForm');
-};
+export default class TreeSmartFieldForm extends Form {
 
-jswidgets.TreeSmartFieldForm.prototype._init = function(model) {
-  jswidgets.TreeSmartFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(TreeSmartFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.smartField = this.widget('TreeSmartField');
 
@@ -29,4 +34,5 @@ jswidgets.TreeSmartFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.smartField);
   this.widget('WidgetActionsBox').setField(this.smartField);
   this.widget('EventsTab').setField(this.smartField);
-};
+}
+}

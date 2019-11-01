@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DisabledStyleLookupCall = function() {
-  jswidgets.DisabledStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.DisabledStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Widget} from '@eclipse-scout/core';
 
-jswidgets.DisabledStyleLookupCall.prototype._data = function() {
-  return jswidgets.DisabledStyleLookupCall.DATA;
-};
+export default class DisabledStyleLookupCall extends StaticLookupCall {
 
-jswidgets.DisabledStyleLookupCall.DATA = [
-  [scout.Widget.DisabledStyle.DEFAULT, 'default'],
-  [scout.Widget.DisabledStyle.READ_ONLY, 'read only']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return DisabledStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Widget.DisabledStyle.DEFAULT, 'default'],
+  [Widget.DisabledStyle.READ_ONLY, 'read only']
 ];
+}

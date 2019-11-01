@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.CheckableTreeStyleLookupCall = function() {
-  jswidgets.CheckableTreeStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.CheckableTreeStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Tree} from '@eclipse-scout/core';
 
-jswidgets.CheckableTreeStyleLookupCall.prototype._data = function() {
-  return jswidgets.CheckableTreeStyleLookupCall.DATA;
-};
+export default class CheckableTreeStyleLookupCall extends StaticLookupCall {
 
-jswidgets.CheckableTreeStyleLookupCall.DATA = [
-  [scout.Tree.CheckableStyle.CHECKBOX, 'checkbox'],
-  [scout.Tree.CheckableStyle.CHECKBOX_TREE_NODE, 'checkbox_tree_node']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return CheckableTreeStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Tree.CheckableStyle.CHECKBOX, 'checkbox'],
+  [Tree.CheckableStyle.CHECKBOX_TREE_NODE, 'checkbox_tree_node']
 ];
+}

@@ -8,18 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.AccordionForm = function() {
-  jswidgets.AccordionForm.parent.call(this);
+import {Form, models, scout, comparators} from '@eclipse-scout/core';
+import AccordionFormModel from './AccordionFormModel';
+import * as $ from 'jquery';
+
+export default class AccordionForm extends Form {
+
+constructor() {
+  super();
   this.insertedGroupCount = 0;
-};
-scout.inherits(jswidgets.AccordionForm, scout.Form);
+}
 
-jswidgets.AccordionForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.AccordionForm');
-};
 
-jswidgets.AccordionForm.prototype._init = function(model) {
-  jswidgets.AccordionForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(AccordionFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.accordion = this.widget('Accordion');
 
@@ -64,59 +70,59 @@ jswidgets.AccordionForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(accordionField);
   this.widget('WidgetActionsBox').setField(accordionField);
   this.widget('EventsTab').setField(this.accordion);
-};
+}
 
-jswidgets.AccordionForm.prototype._onCollapseStylePropertyChange = function(event) {
+_onCollapseStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setCollapseStyle(event.newValue);
   }
-};
+}
 
-jswidgets.AccordionForm.prototype._onExclusiveExpandPropertyChange = function(event) {
+_onExclusiveExpandPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setExclusiveExpand(event.newValue);
   }
-};
+}
 
-jswidgets.AccordionForm.prototype._onScrollablePropertyChange = function(event) {
+_onScrollablePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.accordion.setScrollable(event.newValue);
   }
-};
+}
 
-jswidgets.AccordionForm.prototype._onInsertMenuAction = function(event) {
+_onInsertMenuAction(event) {
   this._insertGroupWithTiles();
-};
+}
 
-jswidgets.AccordionForm.prototype._onDeleteFirstMenuAction = function(event) {
+_onDeleteFirstMenuAction(event) {
   this.accordion.deleteGroup(this.accordion.groups[0]);
   if (this.accordion.groups.length === 0) {
     this.insertedGroupCount = 0;
   }
-};
+}
 
-jswidgets.AccordionForm.prototype._onCollapseExpandFirstMenuAction = function(event) {
+_onCollapseExpandFirstMenuAction(event) {
   if (this.accordion.groups.length === 0) {
     return;
   }
   this.accordion.groups[0].toggleCollapse();
-};
+}
 
-jswidgets.AccordionForm.prototype._onCollapseAllMenuAction = function(event) {
+_onCollapseAllMenuAction(event) {
   this.accordion.groups.forEach(function(group) {
     group.setCollapsed(true);
   });
-};
+}
 
-jswidgets.AccordionForm.prototype._onSortAscMenuAction = function(event) {
+_onSortAscMenuAction(event) {
   this._sortGroups(true);
-};
+}
 
-jswidgets.AccordionForm.prototype._onSortDescMenuAction = function(event) {
+_onSortDescMenuAction(event) {
   this._sortGroups();
-};
+}
 
-jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
+_insertGroupWithTiles() {
   var tiles = [];
   var maxTiles = Math.floor(Math.random() * 30);
   for (var i = 0; i < maxTiles; i++) {
@@ -144,9 +150,9 @@ jswidgets.AccordionForm.prototype._insertGroupWithTiles = function() {
   });
   this.accordion.insertGroup(group);
   this.insertedGroupCount++;
-};
+}
 
-jswidgets.AccordionForm.prototype._createTile = function(model) {
+_createTile(model) {
   var defaults = {
     parent: this,
     gridDataHints: {
@@ -156,10 +162,10 @@ jswidgets.AccordionForm.prototype._createTile = function(model) {
   };
   model = $.extend({}, defaults, model);
   return scout.create('jswidgets.CustomTile', model);
-};
+}
 
-jswidgets.AccordionForm.prototype._sortGroups = function(asc) {
-  var comparator = scout.comparators.ALPHANUMERIC;
+_sortGroups(asc) {
+  var comparator = comparators.ALPHANUMERIC;
   comparator.install(this.session);
   this.accordion.setComparator(function(group1, group2) {
     var result = comparator.compare(group1.title, group2.title);
@@ -169,4 +175,5 @@ jswidgets.AccordionForm.prototype._sortGroups = function(asc) {
     return result;
   });
   this.accordion.sort();
-};
+}
+}

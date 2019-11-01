@@ -8,19 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormFieldTypeLookupCall = function() {
-  jswidgets.FormFieldTypeLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.FormFieldTypeLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.FormFieldTypeLookupCall.prototype._data = function() {
-  return jswidgets.FormFieldTypeLookupCall.DATA;
-};
+export default class FormFieldTypeLookupCall extends StaticLookupCall {
 
-jswidgets.FormFieldTypeLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return FormFieldTypeLookupCall.DATA;
+}
+
+static DATA = [
   ['StringField', 'String Field'],
   ['NumberField', 'Number Field'],
   ['DateField', 'Date Field'],
   ['CheckBoxField', 'Checkbox'],
   ['LabelField', 'Label Field']
 ];
+}

@@ -8,17 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DynamicTab = function() {
-  jswidgets.DynamicTab.parent.call(this);
-};
-scout.inherits(jswidgets.DynamicTab, scout.TabItem);
+import {TabItem, models} from '@eclipse-scout/core';
+import DynamicTabModel from './DynamicTabModel';
 
-jswidgets.DynamicTab.prototype._init = function(model) {
-  jswidgets.DynamicTab.parent.prototype._init.call(this, model);
+export default class DynamicTab extends TabItem {
+
+constructor() {
+  super();
+}
+
+
+_init(model) {
+  super._init( model);
 
   this.widget('label').setValue('This is the content area of the \'TabItem\'. The selected tab is \'' + this.label + '\'.');
-};
+}
 
-jswidgets.DynamicTab.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.DynamicTab');
-};
+_jsonModel() {
+  return models.get(DynamicTabModel);
+}
+}

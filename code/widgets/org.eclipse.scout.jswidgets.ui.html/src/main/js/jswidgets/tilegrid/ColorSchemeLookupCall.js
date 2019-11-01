@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ColorSchemeLookupCall = function() {
-  jswidgets.ColorSchemeLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.ColorSchemeLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Tile} from '@eclipse-scout/core';
 
-jswidgets.ColorSchemeLookupCall.prototype._data = function() {
-  return jswidgets.ColorSchemeLookupCall.DATA;
-};
+export default class ColorSchemeLookupCall extends StaticLookupCall {
 
-jswidgets.ColorSchemeLookupCall.DATA = [
-  [scout.Tile.ColorSchemeId.DEFAULT, 'default'],
-  [scout.Tile.ColorSchemeId.ALTERNATIVE, 'alternative']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return ColorSchemeLookupCall.DATA;
+}
+
+static DATA = [
+  [Tile.ColorSchemeId.DEFAULT, 'default'],
+  [Tile.ColorSchemeId.ALTERNATIVE, 'alternative']
 ];
+}

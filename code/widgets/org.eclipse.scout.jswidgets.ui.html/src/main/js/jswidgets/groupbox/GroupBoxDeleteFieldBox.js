@@ -8,53 +8,60 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupBoxDeleteFieldBox = function() {
-  jswidgets.GroupBoxDeleteFieldBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import {FormFieldLookupCall} from '../index';
+import GroupBoxDeleteFieldBoxModel from './GroupBoxDeleteFieldBoxModel';
+
+export default class GroupBoxDeleteFieldBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
   this.dynamicFieldCounter = 0;
-};
-scout.inherits(jswidgets.GroupBoxDeleteFieldBox, scout.GroupBox);
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxDeleteFieldBox');
-};
 
-jswidgets.GroupBoxDeleteFieldBox.prototype._init = function(model) {
-  jswidgets.GroupBoxDeleteFieldBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GroupBoxDeleteFieldBoxModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setField(this.field);
-};
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
   }
 
   this.targetField = this.widget('ToDeleteField');
-  this.targetField.setLookupCall(new jswidgets.FormFieldLookupCall(this.field));
+  this.targetField.setLookupCall(new FormFieldLookupCall(this.field));
   this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
 
   this.deleteFieldButton = this.widget('DeleteButton');
   this.deleteFieldButton.on('click', this._onDeleteFormFieldButtonClick.bind(this));
-};
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype._onTargetFieldPropertyChange = function(event) {
+_onTargetFieldPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.deleteFieldButton.setEnabled(!!event.newValue);
   }
-};
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype._onDeleteFormFieldButtonClick = function(event) {
+_onDeleteFormFieldButtonClick(event) {
   this.field.deleteField(this.targetField.value);
   this.targetField.setValue(null);
   // Validate layout immediately to prevent flickering
   this.field.validateLayoutTree();
-};
+}
 
-jswidgets.GroupBoxDeleteFieldBox.prototype.setTargetField = function(field) {
+setTargetField(field) {
   this.targetField.setValue(field);
-};
+}
+}

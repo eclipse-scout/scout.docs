@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FileChooserFieldForm = function() {
-  jswidgets.FileChooserFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.FileChooserFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import FileChooserFieldFormModel from './FileChooserFieldFormModel';
 
-jswidgets.FileChooserFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FileChooserFieldForm');
-};
+export default class FileChooserFieldForm extends Form {
 
-jswidgets.FileChooserFieldForm.prototype._init = function(model) {
-  jswidgets.FileChooserFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(FileChooserFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var fileChooserField = this.widget('FileChooserField');
 
@@ -35,16 +40,17 @@ jswidgets.FileChooserFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(fileChooserField);
   this.widget('WidgetActionsBox').setField(fileChooserField);
   this.widget('EventsTab').setField(fileChooserField);
-};
+}
 
-jswidgets.FileChooserFieldForm.prototype._onAcceptTypesPropertyChange = function(event) {
+_onAcceptTypesPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('FileChooserField').setAcceptTypes(event.newValue);
   }
-};
+}
 
-jswidgets.FileChooserFieldForm.prototype._onMaximumUploadSizePropertyChange = function(event) {
+_onMaximumUploadSizePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('FileChooserField').setMaximumUploadSize(event.newValue);
   }
-};
+}
+}

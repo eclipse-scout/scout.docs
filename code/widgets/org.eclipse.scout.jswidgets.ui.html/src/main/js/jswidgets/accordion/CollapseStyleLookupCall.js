@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.CollapseStyleLookupCall = function() {
-  jswidgets.CollapseStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.CollapseStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Group} from '@eclipse-scout/core';
 
-jswidgets.CollapseStyleLookupCall.prototype._data = function() {
-  return jswidgets.CollapseStyleLookupCall.DATA;
-};
+export default class CollapseStyleLookupCall extends StaticLookupCall {
 
-jswidgets.CollapseStyleLookupCall.DATA = [
-  [scout.Group.CollapseStyle.LEFT, 'left'],
-  [scout.Group.CollapseStyle.RIGHT, 'right'],
-  [scout.Group.CollapseStyle.BOTTOM, 'bottom']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return CollapseStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Group.CollapseStyle.LEFT, 'left'],
+  [Group.CollapseStyle.RIGHT, 'right'],
+  [Group.CollapseStyle.BOTTOM, 'bottom']
 ];
+}

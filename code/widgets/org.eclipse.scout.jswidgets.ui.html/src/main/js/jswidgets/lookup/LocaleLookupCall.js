@@ -8,16 +8,20 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LocaleLookupCall = function() {
-  jswidgets.LocaleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LocaleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.LocaleLookupCall.prototype._data = function() {
-  return jswidgets.LocaleLookupCall.DATA;
-};
+export default class LocaleLookupCall extends StaticLookupCall {
 
-jswidgets.LocaleLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return LocaleLookupCall.DATA;
+}
+
+static DATA = [
   ['sq', 'Albanian'],
   ['sq_AL', 'Albanian (Albania)'],
   ['ar', 'Arabic'],
@@ -175,3 +179,4 @@ jswidgets.LocaleLookupCall.DATA = [
   ['vi', 'Vietnamese'],
   ['vi_VN', 'Vietnamese (Vietnam)']
 ];
+}

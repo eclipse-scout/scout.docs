@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LabelFieldForm = function() {
-  jswidgets.LabelFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.LabelFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import LabelFieldFormModel from './LabelFieldFormModel';
 
-jswidgets.LabelFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.LabelFieldForm');
-};
+export default class LabelFieldForm extends Form {
 
-jswidgets.LabelFieldForm.prototype._init = function(model) {
-  jswidgets.LabelFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(LabelFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var labelField = this.widget('LabelField');
 
@@ -36,16 +41,17 @@ jswidgets.LabelFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(labelField);
   this.widget('WidgetActionsBox').setField(labelField);
   this.widget('EventsTab').setField(labelField);
-};
+}
 
-jswidgets.LabelFieldForm.prototype._onWrapTextPropertyChange = function(event) {
+_onWrapTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('LabelField').setWrapText(event.newValue);
   }
-};
+}
 
-jswidgets.LabelFieldForm.prototype._onHtmlEnabledPropertyChange = function(event) {
+_onHtmlEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('LabelField').setHtmlEnabled(event.newValue);
   }
-};
+}
+}

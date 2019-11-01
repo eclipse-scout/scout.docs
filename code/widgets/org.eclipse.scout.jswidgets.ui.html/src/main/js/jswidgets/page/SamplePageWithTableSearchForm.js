@@ -1,24 +1,30 @@
-jswidgets.SamplePageWithTableSearchForm = function() {
-  jswidgets.SamplePageWithTableSearchForm.parent.call(this);
-};
-scout.inherits(jswidgets.SamplePageWithTableSearchForm, scout.Form);
+import {Form, Table, models} from '@eclipse-scout/core';
+import SamplePageWithTableSearchFormModel from './SamplePageWithTableSearchFormModel';
 
-jswidgets.SamplePageWithTableSearchForm.prototype._init = function(model) {
-  jswidgets.SamplePageWithTableSearchForm.parent.prototype._init.call(this, model);
+export default class SamplePageWithTableSearchForm extends Form {
+
+constructor() {
+  super();
+}
+
+
+_init(model) {
+  super._init( model);
   this._initListeners();
-};
+}
 
-jswidgets.SamplePageWithTableSearchForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SamplePageWithTableSearchForm');
-};
+_jsonModel() {
+  return models.get(SamplePageWithTableSearchFormModel);
+}
 
-jswidgets.SamplePageWithTableSearchForm.prototype._initListeners = function() {
+_initListeners() {
   var parentTable = this.parent.table;
-  this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable), scout.Table.ReloadReason.SEARCH);
-};
+  this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable), Table.ReloadReason.SEARCH);
+}
 
-jswidgets.SamplePageWithTableSearchForm.prototype.exportData = function() {
+exportData() {
   return {
     stringField: this.widget('StringField').value
   };
-};
+}
+}

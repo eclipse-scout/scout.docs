@@ -8,20 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ModeLookupCall = function(modeSelector) {
-  jswidgets.ModeLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class ModeLookupCall extends StaticLookupCall {
+
+constructor(modeSelector) {
+  super();
   this._modeSelectorPropertyChangeHandler = this._onModeSelectorPropertyChange.bind(this);
   this._modePropertyChangeHandler = this._onModePropertyChange.bind(this);
   this.data = [];
   this.setModeSelector(modeSelector);
-};
-scout.inherits(jswidgets.ModeLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.ModeLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.ModeLookupCall.prototype.setModeSelector = function(modeSelector) {
+setModeSelector(modeSelector) {
   if (this.modeSelector) {
     this.modeSelector.off('propertyChange', this._modeSelectorPropertyChangeHandler);
     this.modeSelector.modes.forEach(function(mode) {
@@ -34,22 +38,23 @@ jswidgets.ModeLookupCall.prototype.setModeSelector = function(modeSelector) {
     mode.on('propertyChange', this._modePropertyChangeHandler);
   }, this);
   this._rebuildData();
-};
+}
 
-jswidgets.ModeLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.modeSelector.modes.map(function(mode) {
     return [mode, mode.text];
   });
-};
+}
 
-jswidgets.ModeLookupCall.prototype._onModeSelectorPropertyChange = function(event) {
+_onModeSelectorPropertyChange(event) {
   if (event.propertyName === 'modes') {
     this._rebuildData();
   }
-};
+}
 
-jswidgets.ModeLookupCall.prototype._onModePropertyChange = function(event) {
+_onModePropertyChange(event) {
   if (event.propertyName === 'text') {
     this._rebuildData();
   }
-};
+}
+}

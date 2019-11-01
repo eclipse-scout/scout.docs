@@ -8,28 +8,34 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.HierarchicalTablePropertiesBox = function() {
-  jswidgets.HierarchicalTablePropertiesBox.parent.call(this);
+import {models} from '@eclipse-scout/core';
+import HierarchicalTablePropertiesBoxModel from './HierarchicalTablePropertiesBoxModel';
+import {TablePropertiesBox} from '../../index';
+
+export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
+
+constructor() {
+  super();
   this.table = null;
-};
-scout.inherits(jswidgets.HierarchicalTablePropertiesBox, jswidgets.TablePropertiesBox);
+}
 
-jswidgets.HierarchicalTablePropertiesBox.prototype._jsonModel = function() {
-  return scout.models.extend('jswidgets.HierarchicalTablePropertiesBox', jswidgets.HierarchicalTablePropertiesBox.parent.prototype._jsonModel.call(this));
-};
 
-jswidgets.HierarchicalTablePropertiesBox.prototype._init = function(model) {
-  jswidgets.HierarchicalTablePropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.extend(HierarchicalTablePropertiesBoxModel(this), super._jsonModel());
+}
+
+_init(model) {
+  super._init( model);
 
   this._setTable(this.table);
-};
+}
 
-jswidgets.HierarchicalTablePropertiesBox.prototype.setTable = function(table) {
+setTable(table) {
   this.setProperty('table', table);
-};
+}
 
-jswidgets.HierarchicalTablePropertiesBox.prototype._setTable = function(table) {
-  jswidgets.HierarchicalTablePropertiesBox.parent.prototype._setTable.call(this, table);
+_setTable(table) {
+  super._setTable( table);
   this._setProperty('table', table);
   if (!this.table) {
     return;
@@ -42,16 +48,17 @@ jswidgets.HierarchicalTablePropertiesBox.prototype._setTable = function(table) {
   var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
   extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
   extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
-};
+}
 
-jswidgets.HierarchicalTablePropertiesBox.prototype._onHierarchicalStylePropertyChange = function(event) {
+_onHierarchicalStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setHierarchicalStyle(event.newValue);
   }
-};
+}
 
-jswidgets.HierarchicalTablePropertiesBox.prototype._onExtendedHierarchyPaddingPropertyChange = function(event) {
+_onExtendedHierarchyPaddingPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.toggleCssClass('extended-row-level-padding', event.newValue);
   }
-};
+}
+}

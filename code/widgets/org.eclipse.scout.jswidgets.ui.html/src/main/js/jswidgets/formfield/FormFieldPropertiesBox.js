@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormFieldPropertiesBox = function() {
-  jswidgets.FormFieldPropertiesBox.parent.call(this);
+import {GroupBox, Status, models, numbers, objects} from '@eclipse-scout/core';
+import FormFieldPropertiesBoxModel from './FormFieldPropertiesBoxModel';
+
+export default class FormFieldPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.FormFieldPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.FormFieldPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FormFieldPropertiesBox');
-};
 
-jswidgets.FormFieldPropertiesBox.prototype._init = function(model) {
-  jswidgets.FormFieldPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(FormFieldPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-};
+}
 
-jswidgets.FormFieldPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -96,19 +101,19 @@ jswidgets.FormFieldPropertiesBox.prototype._setField = function(field) {
   var statusPositionField = this.widget('StatusPositionField');
   statusPositionField.setValue(this.field.statusPosition);
   statusPositionField.on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.FormFieldPropertiesBox.prototype._createErrorStatus = function(severity) {
+_createErrorStatus(severity) {
   if (!severity) {
     return null;
   }
-  return new scout.Status({
+  return new Status({
     severity: severity,
-    message: this.session.text('FormFieldStatusMessage', scout.objects.keyByValue(scout.Status.Severity, severity))
+    message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, severity))
   });
-};
+}
 
-jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'EnabledField') {
     this.field.setEnabled(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
@@ -135,7 +140,7 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
     if (event.source.lookupRow) {
       this.field.setLabelWidthInPixel(event.source.lookupRow.key);
     } else {
-      this.field.setLabelWidthInPixel(scout.numbers.ensure(event.newValue));
+      this.field.setLabelWidthInPixel(numbers.ensure(event.newValue));
     }
   } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
     this.field.setErrorStatus(this._createErrorStatus(event.newValue));
@@ -146,4 +151,5 @@ jswidgets.FormFieldPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'StatusPositionField') {
     this.field.setStatusPosition(event.newValue);
   }
-};
+}
+}

@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.WidgetPopupPropertiesBox = function() {
-  jswidgets.WidgetPopupPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import WidgetPopupPropertiesBoxModel from './WidgetPopupPropertiesBoxModel';
+
+export default class WidgetPopupPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.WidgetPopupPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.WidgetPopupPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.WidgetPopupPropertiesBox');
-};
 
-jswidgets.WidgetPopupPropertiesBox.prototype._init = function(model) {
-  jswidgets.WidgetPopupPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(WidgetPopupPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-};
+}
 
-jswidgets.WidgetPopupPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.WidgetPopupPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   this.setEnabled(this.field);
   if (!this.field) {
@@ -45,9 +50,9 @@ jswidgets.WidgetPopupPropertiesBox.prototype._setField = function(field) {
   var resizableField = this.widget('ResizableField');
   resizableField.setValue(this.field.resizable);
   resizableField.on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.WidgetPopupPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'ClosableField') {
     this.field.setClosable(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'MovableField') {
@@ -55,4 +60,5 @@ jswidgets.WidgetPopupPropertiesBox.prototype._onPropertyChange = function(event)
   } else if (event.propertyName === 'value' && event.source.id === 'ResizableField') {
     this.field.setResizable(event.newValue);
   }
-};
+}
+}

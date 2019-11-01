@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.HierarchicalStyleLookupCall = function() {
-  jswidgets.HierarchicalStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.HierarchicalStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Table} from '@eclipse-scout/core';
 
-jswidgets.HierarchicalStyleLookupCall.prototype._data = function() {
-  return jswidgets.HierarchicalStyleLookupCall.DATA;
-};
+export default class HierarchicalStyleLookupCall extends StaticLookupCall {
 
-jswidgets.HierarchicalStyleLookupCall.DATA = [
-  [scout.Table.HierarchicalStyle.DEFAULT, 'default'],
-  [scout.Table.HierarchicalStyle.STRUCTURED, 'structured']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return HierarchicalStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Table.HierarchicalStyle.DEFAULT, 'default'],
+  [Table.HierarchicalStyle.STRUCTURED, 'structured']
 ];
+}

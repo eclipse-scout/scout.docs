@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LabelPositionLookupCall = function() {
-  jswidgets.LabelPositionLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LabelPositionLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
-jswidgets.LabelPositionLookupCall.prototype._data = function() {
-  return jswidgets.LabelPositionLookupCall.DATA;
-};
+export default class LabelPositionLookupCall extends StaticLookupCall {
 
-jswidgets.LabelPositionLookupCall.DATA = [
-  [scout.FormField.LabelPosition.DEFAULT, 'default'],
-  [scout.FormField.LabelPosition.LEFT, 'left'],
-  [scout.FormField.LabelPosition.ON_FIELD, 'on field'],
-  [scout.FormField.LabelPosition.TOP, 'top']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return LabelPositionLookupCall.DATA;
+}
+
+static DATA = [
+  [FormField.LabelPosition.DEFAULT, 'default'],
+  [FormField.LabelPosition.LEFT, 'left'],
+  [FormField.LabelPosition.ON_FIELD, 'on field'],
+  [FormField.LabelPosition.TOP, 'top']
 ];
+}

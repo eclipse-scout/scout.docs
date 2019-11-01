@@ -8,19 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.PopupForm = function() {
-  jswidgets.PopupForm.parent.call(this);
+import {Form, Rectangle, models, graphics, scout} from '@eclipse-scout/core';
+import PopupFormModel from './PopupFormModel';
+
+export default class PopupForm extends Form {
+
+constructor() {
+  super();
   this.$popupAnchor = null;
   this.popup = null;
-};
-scout.inherits(jswidgets.PopupForm, scout.Form);
+}
 
-jswidgets.PopupForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.PopupForm');
-};
 
-jswidgets.PopupForm.prototype._init = function(model) {
-  jswidgets.PopupForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(PopupFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var dummyPopup = scout.create('WidgetPopup', {
     parent: this
@@ -73,22 +78,22 @@ jswidgets.PopupForm.prototype._init = function(model) {
   this.widget('WidgetPopupPropertiesBox').setField(dummyPopup);
 
   dummyPopup.close();
-};
+}
 
-jswidgets.PopupForm.prototype._render = function() {
-  jswidgets.PopupForm.parent.prototype._render.call(this);
+_render() {
+  super._render();
   this._updateAnchor();
-};
+}
 
-jswidgets.PopupForm.prototype._remove = function() {
+_remove() {
   if (this.$popupAnchor) {
     this.$popupAnchor.remove();
     this.$popupAnchor = null;
   }
-  jswidgets.PopupForm.parent.prototype._remove.call(this);
-};
+  super._remove();
+}
 
-jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
+_onOpenPopupButtonClick(model) {
   var $anchor;
   if (this.widget('UseButtonAsAnchorField').value) {
     $anchor = this.widget('OpenPopupButton').$field;
@@ -125,9 +130,9 @@ jswidgets.PopupForm.prototype._onOpenPopupButtonClick = function(model) {
   this.widget('WidgetActionsBox').setField(this.popup);
   this.widget('WidgetPopupPropertiesBox').setField(this.popup);
   this.popup.open();
-};
+}
 
-jswidgets.PopupForm.prototype._onUseButtonAsAnchorChange = function(event) {
+_onUseButtonAsAnchorChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     var $anchor = null;
     if (this.widget('UseButtonAsAnchorField').value) {
@@ -135,21 +140,21 @@ jswidgets.PopupForm.prototype._onUseButtonAsAnchorChange = function(event) {
     }
     this.popup.set$Anchor($anchor);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onAnchorBoundsChange = function(event) {
+_onAnchorBoundsChange(event) {
   this._updateAnchor();
-};
+}
 
-jswidgets.PopupForm.prototype._getAnchorBounds = function(event) {
+_getAnchorBounds(event) {
   var anchorBoundsRaw = this.widget('AnchorBoundsField').value;
   if (anchorBoundsRaw) {
     anchorBoundsRaw = anchorBoundsRaw.split(',');
-    return new scout.Rectangle(Number(anchorBoundsRaw[0]), Number(anchorBoundsRaw[1]), Number(anchorBoundsRaw[2]), Number(anchorBoundsRaw[3]));
+    return new Rectangle(Number(anchorBoundsRaw[0]), Number(anchorBoundsRaw[1]), Number(anchorBoundsRaw[2]), Number(anchorBoundsRaw[3]));
   }
-};
+}
 
-jswidgets.PopupForm.prototype._updateAnchor = function() {
+_updateAnchor() {
   var anchorBounds = this._getAnchorBounds();
   if (!anchorBounds) {
     if (this.$popupAnchor) {
@@ -160,48 +165,49 @@ jswidgets.PopupForm.prototype._updateAnchor = function() {
     if (!this.$popupAnchor) {
       this.$popupAnchor = this.session.$entryPoint.appendDiv('popup-anchor');
     }
-    scout.graphics.setBounds(this.$popupAnchor, anchorBounds);
+    graphics.setBounds(this.$popupAnchor, anchorBounds);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onHorizontalAlignmentPropertyChange = function(event) {
+_onHorizontalAlignmentPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setHorizontalAlignment(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onVerticalAlignmentPropertyChange = function(event) {
+_onVerticalAlignmentPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setVerticalAlignment(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onHorizontalSwitchPropertyChange = function(event) {
+_onHorizontalSwitchPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setHorizontalSwitch(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onTrimWidthPropertyChange = function(event) {
+_onTrimWidthPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setTrimWidth(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onTrimHeightPropertyChange = function(event) {
+_onTrimHeightPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setTrimHeight(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onVerticalSwitchPropertyChange = function(event) {
+_onVerticalSwitchPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setVerticalSwitch(event.newValue);
   }
-};
+}
 
-jswidgets.PopupForm.prototype._onWithArrowPropertyChange = function(event) {
+_onWithArrowPropertyChange(event) {
   if (event.propertyName === 'value' && this.popup) {
     this.popup.setWithArrow(event.newValue);
   }
-};
+}
+}

@@ -8,23 +8,29 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.RadioButtonGroupForm = function() {
-  jswidgets.RadioButtonGroupForm.parent.call(this);
-};
-scout.inherits(jswidgets.RadioButtonGroupForm, scout.Form);
+import {Form, RadioButtonGroup, models, numbers} from '@eclipse-scout/core';
+import {FormFieldLookupCall} from '../index';
+import RadioButtonGroupFormModel from './RadioButtonGroupFormModel';
 
-jswidgets.RadioButtonGroupForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.RadioButtonGroupForm');
-};
+export default class RadioButtonGroupForm extends Form {
 
-jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
-  jswidgets.RadioButtonGroupForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(RadioButtonGroupFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var group = this.widget('RadioButtonGroup');
   group.on('propertyChange', this._onRadioButtonGroupPropertyChange.bind(this));
 
   var selectedButtonField = this.widget('SelectedButtonField');
-  selectedButtonField.setLookupCall(new jswidgets.FormFieldLookupCall(group));
+  selectedButtonField.setLookupCall(new FormFieldLookupCall(group));
   selectedButtonField.setValue(group.selectedButton);
   selectedButtonField.on('propertyChange', this._onSelectedButtonPropertyChange.bind(this));
 
@@ -35,7 +41,7 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   this.widget('ValueField').setEnabled(true);
   this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
     if (!isNaN(newValue)) {
-      newValue = scout.numbers.ensure(newValue);
+      newValue = numbers.ensure(newValue);
     }
     return newValue;
   };
@@ -49,7 +55,7 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
 
   // Button tab
   var targetField = this.widget('Button.TargetField');
-  targetField.setLookupCall(new jswidgets.FormFieldLookupCall(group));
+  targetField.setLookupCall(new FormFieldLookupCall(group));
   targetField.setValue(group.radioButtons[0]);
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
@@ -71,32 +77,32 @@ jswidgets.RadioButtonGroupForm.prototype._init = function(model) {
   this.widget('Button.FormFieldPropertiesBox').setEnabled(!!targetField.value);
   this.widget('Button.GridDataBox').setField(targetField.value);
   this.widget('Button.GridDataBox').setEnabled(!!targetField.value);
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onRadioButtonGroupPropertyChange = function(event) {
+_onRadioButtonGroupPropertyChange(event) {
   if (event.propertyName === 'selectedButton') {
     this.widget('SelectedButtonField').setValue(event.newValue);
   } else if (event.propertyName === 'gridColumnCount') {
     this.widget('GridColumnCountField').setValue(event.newValue);
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onSelectedButtonPropertyChange = function(event) {
+_onSelectedButtonPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('RadioButtonGroup').selectButton(event.newValue);
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onGridColumnCountPropertyChange = function(event) {
+_onGridColumnCountPropertyChange(event) {
   if (event.propertyName === 'value') {
     var newVal = event.newValue;
-    if (newVal > 0 || newVal === scout.RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
+    if (newVal > 0 || newVal === RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
       this.widget('RadioButtonGroup').setGridColumnCount(newVal);
     }
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onTargetPropertyChange = function(event) {
+_onTargetPropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = event.newValue;
     if (button) {
@@ -110,31 +116,32 @@ jswidgets.RadioButtonGroupForm.prototype._onTargetPropertyChange = function(even
     this.widget('Button.GridDataBox').setField(button);
     this.widget('Button.GridDataBox').setEnabled(!!button);
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onKeyStrokePropertyChange = function(event) {
+_onKeyStrokePropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = this.widget('Button.TargetField').value;
     if (button) {
       button.setKeyStroke(event.newValue);
     }
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onSelectedPropertyChange = function(event) {
+_onSelectedPropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = this.widget('Button.TargetField').value;
     if (button) {
       button.setSelected(event.newValue);
     }
   }
-};
+}
 
-jswidgets.RadioButtonGroupForm.prototype._onWrapTextPropertyChange = function(event) {
+_onWrapTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = this.widget('Button.TargetField').value;
     if (button) {
       button.setWrapText(event.newValue);
     }
   }
-};
+}
+}

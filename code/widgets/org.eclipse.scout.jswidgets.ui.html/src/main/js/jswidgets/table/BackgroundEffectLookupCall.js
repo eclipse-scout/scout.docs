@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.BackgroundEffectLookupCall = function() {
-  jswidgets.BackgroundEffectLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.BackgroundEffectLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.BackgroundEffectLookupCall.prototype._data = function() {
-  return jswidgets.BackgroundEffectLookupCall.DATA;
-};
+export default class BackgroundEffectLookupCall extends StaticLookupCall {
 
-jswidgets.BackgroundEffectLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return BackgroundEffectLookupCall.DATA;
+}
+
+static DATA = [
   ['colorGradient1', 'colorGradient1'],
   ['colorGradient2', 'colorGradient2'],
   ['barChart', 'barChart']
 ];
+}

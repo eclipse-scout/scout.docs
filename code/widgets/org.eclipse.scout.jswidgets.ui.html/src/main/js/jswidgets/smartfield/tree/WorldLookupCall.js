@@ -8,19 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.WorldLookupCall = function() {
-  jswidgets.WorldLookupCall.parent.call(this);
+import {StaticLookupCall, icons} from '@eclipse-scout/core';
+
+export default class WorldLookupCall extends StaticLookupCall {
+
+constructor() {
+  super();
 
   this.setLoadIncremental(false);
   this.setHierarchical(true);
-};
-scout.inherits(jswidgets.WorldLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.WorldLookupCall.prototype._data = function() {
-  return jswidgets.WorldLookupCall.DATA;
-};
 
-jswidgets.WorldLookupCall.prototype._queryAll = function(deferred) {
+_data() {
+  return WorldLookupCall.DATA;
+}
+
+_queryAll(deferred) {
   var lookupRows;
   if (this.loadIncremental) {
     // only select root nodes
@@ -36,33 +40,33 @@ jswidgets.WorldLookupCall.prototype._queryAll = function(deferred) {
   deferred.resolve({
     lookupRows: lookupRows
   });
-};
+}
 
 /**
  * Creates a map that contains all data elements, for easier access by key (index 1)
  */
-jswidgets.WorldLookupCall.prototype._createDataMap = function() {
+_createDataMap() {
   var dataMap = {};
   this._data().forEach(function(data) {
     dataMap[data[0]] = data;
   });
   return dataMap;
-};
+}
 
-jswidgets.WorldLookupCall.prototype._dataToLookupRow = function(data) {
-  var lookupRow = jswidgets.WorldLookupCall.parent.prototype._dataToLookupRow.call(this, data);
+_dataToLookupRow(data) {
+  var lookupRow = super._dataToLookupRow( data);
   if (lookupRow.parentKey) {
-    lookupRow.iconId = scout.icons.WORLD;
+    lookupRow.iconId = icons.WORLD;
   } else {
-    lookupRow.iconId = scout.icons.FOLDER;
+    lookupRow.iconId = icons.FOLDER;
   }
   return lookupRow;
-};
+}
 
 // 0: key
 // 1: text
 // 2: [parentKey]
-jswidgets.WorldLookupCall.DATA = [
+static DATA = [
   ['AF', 'Africa', null],
   ['EAF', 'Eastern Africa', 'AF'],
   ['MAF', 'Middle Africa', 'AF'],
@@ -89,3 +93,4 @@ jswidgets.WorldLookupCall.DATA = [
   ['WER', 'Western Europe', 'ER'],
   ['OC', 'Oceania', null],
 ];
+}

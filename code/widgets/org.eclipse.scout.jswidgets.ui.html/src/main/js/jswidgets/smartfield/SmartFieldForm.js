@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.SmartFieldForm = function() {
-  jswidgets.SmartFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.SmartFieldForm, scout.Form);
+import {Form, MessageBoxes, models} from '@eclipse-scout/core';
+import SmartFieldFormModel from './SmartFieldFormModel';
 
-jswidgets.SmartFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SmartFieldForm');
-};
+export default class SmartFieldForm extends Form {
 
-jswidgets.SmartFieldForm.prototype._init = function(model) {
-  jswidgets.SmartFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(SmartFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.smartField = this.widget('SmartField');
 
@@ -32,11 +37,12 @@ jswidgets.SmartFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.smartField);
   this.widget('WidgetActionsBox').setField(this.smartField);
   this.widget('EventsTab').setField(this.smartField);
-};
+}
 
-jswidgets.SmartFieldForm.prototype._onNewLanguageMenuAction = function(event) {
-  return scout.MessageBoxes.createOk(this)
+_onNewLanguageMenuAction(event) {
+  return MessageBoxes.createOk(this)
     .withHeader(this.session.text('ThanksForClickingMe'))
     .withBody(this.session.text('NewLanguageMessage'))
     .buildAndOpen();
-};
+}
+}

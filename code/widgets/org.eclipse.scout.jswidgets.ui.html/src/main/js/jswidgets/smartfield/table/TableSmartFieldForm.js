@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TableSmartFieldForm = function() {
-  jswidgets.TableSmartFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.TableSmartFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import TableSmartFieldFormModel from './TableSmartFieldFormModel';
 
-jswidgets.TableSmartFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TableSmartFieldForm');
-};
+export default class TableSmartFieldForm extends Form {
 
-jswidgets.TableSmartFieldForm.prototype._init = function(model) {
-  jswidgets.TableSmartFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(TableSmartFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.smartField = this.widget('TableSmartField');
 
@@ -29,4 +34,5 @@ jswidgets.TableSmartFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(this.smartField);
   this.widget('WidgetActionsBox').setField(this.smartField);
   this.widget('EventsTab').setField(this.smartField);
-};
+}
+}

@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ButtonForm = function() {
-  jswidgets.ButtonForm.parent.call(this);
-};
-scout.inherits(jswidgets.ButtonForm, scout.Form);
+import ButtonFormModel from './ButtonFormModel';
+import {Form, Button, models, scout} from '@eclipse-scout/core';
 
-jswidgets.ButtonForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ButtonForm');
-};
+export default class ButtonForm extends Form {
 
-jswidgets.ButtonForm.prototype._init = function(model) {
-  jswidgets.ButtonForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(ButtonFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var button = this.widget('Button');
   button.on('click', this._onButtonClick.bind(this));
@@ -55,10 +60,10 @@ jswidgets.ButtonForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(button);
   this.widget('WidgetActionsBox').setField(button);
   this.widget('EventsTab').setField(button);
-};
+}
 
-jswidgets.ButtonForm.prototype._onButtonClick = function(event) {
-  if (event.source.displayStyle === scout.Button.DisplayStyle.TOGGLE) {
+_onButtonClick(event) {
+  if (event.source.displayStyle === Button.DisplayStyle.TOGGLE) {
     // Don't show message box if it is a toggle button
     return;
   }
@@ -71,15 +76,15 @@ jswidgets.ButtonForm.prototype._onButtonClick = function(event) {
   msgBox.on('action', function() {
     msgBox.close();
   });
-};
+}
 
-jswidgets.ButtonForm.prototype._onDefaultButtonPropertyChange = function(event) {
+_onDefaultButtonPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setDefaultButton(event.newValue);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onProcessButtonPropertyChange = function(event) {
+_onProcessButtonPropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = this.widget('Button');
     // ProcessButton property may not be changed during run time officially
@@ -90,42 +95,42 @@ jswidgets.ButtonForm.prototype._onProcessButtonPropertyChange = function(event) 
     button.parent._updateMenuBar();
     this._rerenderGroupBox(button.parent);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onSelectedPropertyChange = function(event) {
+_onSelectedPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setSelected(event.newValue);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onHtmlEnabledPropertyChange = function(event) {
+_onHtmlEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setHtmlEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onIconIdPropertyChange = function(event) {
+_onIconIdPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setIconId(event.newValue);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onKeyStrokePropertyChange = function(event) {
+_onKeyStrokePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('Button').setKeyStroke(event.newValue);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._onDisplayStylePropertyChange = function(event) {
+_onDisplayStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     var button = this.widget('Button');
     // DisplayStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole group box
     button.displayStyle = event.newValue;
     this._rerenderGroupBox(button.parent);
   }
-};
+}
 
-jswidgets.ButtonForm.prototype._rerenderGroupBox = function(groupBox) {
+_rerenderGroupBox(groupBox) {
   var mainBox = groupBox.parent;
   // Owner is the main box by default.
   // In that case the group box would be destroyed when calling deleteField and therefore could not be used anymore -> Set form as owner temporarily.
@@ -135,4 +140,5 @@ jswidgets.ButtonForm.prototype._rerenderGroupBox = function(groupBox) {
   groupBox.setOwner(mainBox);
   // Validate layout immediately to prevent flickering
   mainBox.validateLayoutTree();
-};
+}
+}

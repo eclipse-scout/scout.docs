@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TreeBoxForm = function() {
-  jswidgets.TreeBoxForm.parent.call(this);
-};
-scout.inherits(jswidgets.TreeBoxForm, scout.Form);
+import {Form, models, ObjectFactory} from '@eclipse-scout/core';
+import TreeBoxFormModel from './TreeBoxFormModel';
 
-jswidgets.TreeBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TreeBoxForm');
-};
+export default class TreeBoxForm extends Form {
 
-jswidgets.TreeBoxForm.prototype._init = function(model) {
-  jswidgets.TreeBoxForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(TreeBoxFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var generateButton = this.widget('GenerateTreeDataButton');
   generateButton.on('click', this._onGenerateButtonClick.bind(this));
@@ -33,28 +38,28 @@ jswidgets.TreeBoxForm.prototype._init = function(model) {
   this.widget('EventsTab').setField(this.treeBox);
 
   this.treeBox.tree.insertNodes(this.createModelNodes(2, 1, true, true), null);
-};
+}
 
-jswidgets.TreeBoxForm.prototype._onGenerateButtonClick = function(event) {
+_onGenerateButtonClick(event) {
   var nodeCount = this.widget('NodeCountField').value;
   var depth = this.widget('DepthField').value;
   var defaultExpanded = this.widget('DefaultExpandedField').value;
   var defaultEnabled = this.widget('DefaultEnabledField').value;
   this.treeBox.tree.removeAllNodes();
   this.treeBox.tree.insertNodes(this.createModelNodes(nodeCount, depth, defaultExpanded === true, defaultEnabled === true), null);
-};
+}
 
-jswidgets.TreeBoxForm.prototype.createModelNode = function(id, text, position, enabled) {
+createModelNode(id, text, position, enabled) {
   return {
-    id: id + '' || scout.objectFactory.createUniqueId(),
+    id: id + '' || ObjectFactory.get().createUniqueId(),
     text: text,
     childNodeIndex: position ? position : 0,
     enabled: enabled,
     checked: false
   };
-};
+}
 
-jswidgets.TreeBoxForm.prototype.createModelNodes = function(nodeCount, depth, expanded, enabled, parentNode) {
+createModelNodes(nodeCount, depth, expanded, enabled, parentNode) {
   if (!nodeCount) {
     return;
   }
@@ -78,4 +83,5 @@ jswidgets.TreeBoxForm.prototype.createModelNodes = function(nodeCount, depth, ex
     }
   }
   return nodes;
-};
+}
+}

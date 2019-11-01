@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TabAreaStyleLookupCall = function() {
-  jswidgets.TabAreaStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.TabAreaStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, TabArea} from '@eclipse-scout/core';
 
-jswidgets.TabAreaStyleLookupCall.prototype._data = function() {
-  return jswidgets.TabAreaStyleLookupCall.DATA;
-};
+export default class TabAreaStyleLookupCall extends StaticLookupCall {
 
-jswidgets.TabAreaStyleLookupCall.DATA = [
-  [scout.TabArea.DisplayStyle.DEFAULT, 'Default'],
-  [scout.TabArea.DisplayStyle.SPREAD_EVEN, 'Spread evenly']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return TabAreaStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [TabArea.DisplayStyle.DEFAULT, 'Default'],
+  [TabArea.DisplayStyle.SPREAD_EVEN, 'Spread evenly']
 ];
+}

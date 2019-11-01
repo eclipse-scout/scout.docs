@@ -8,26 +8,31 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupBoxPropertiesBox = function() {
-  jswidgets.GroupBoxPropertiesBox.parent.call(this);
+import {GroupBox, Status, models, objects, scout} from '@eclipse-scout/core';
+import GroupBoxPropertiesBoxModel from './GroupBoxPropertiesBoxModel';
+
+export default class GroupBoxPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.GroupBoxPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.GroupBoxPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxPropertiesBox');
-};
 
-jswidgets.GroupBoxPropertiesBox.prototype._init = function(model) {
-  jswidgets.GroupBoxPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GroupBoxPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setField(this.field);
-};
+}
 
-jswidgets.GroupBoxPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.GroupBoxPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -84,9 +89,9 @@ jswidgets.GroupBoxPropertiesBox.prototype._setField = function(field) {
   var menuBarEllipsisPositionField = this.widget('MenuBarEllipsisPositionField');
   menuBarEllipsisPositionField.setValue(this.field.menuBarEllipsisPosition);
   menuBarEllipsisPositionField.on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'SubLabelField') {
     this.field.setSubLabel(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'BorderVisibleField') {
@@ -114,15 +119,16 @@ jswidgets.GroupBoxPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'MenuBarEllipsisPositionField') {
     this.field.setMenuBarEllipsisPosition(event.newValue);
   }
-};
+}
 
-jswidgets.GroupBoxPropertiesBox.prototype._createNotification = function(severity) {
+_createNotification(severity) {
   if (!severity) {
     return null;
   }
   return scout.create('Notification', {
     parent: this,
     severity: severity,
-    message: this.session.text('NotificationMessage', scout.objects.keyByValue(scout.Status.Severity, severity))
+    message: this.session.text('NotificationMessage', objects.keyByValue(Status.Severity, severity))
   });
-};
+}
+}

@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.NumberFieldForm = function() {
-  jswidgets.NumberFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.NumberFieldForm, scout.Form);
+import NumberFieldFormModel from './NumberFieldFormModel';
+import {Form, models} from '@eclipse-scout/core';
 
-jswidgets.NumberFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.NumberFieldForm');
-};
+export default class NumberFieldForm extends Form {
 
-jswidgets.NumberFieldForm.prototype._init = function(model) {
-  jswidgets.NumberFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(NumberFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var numberField = this.widget('NumberField');
   var formatField = this.widget('FormatField');
@@ -43,9 +48,9 @@ jswidgets.NumberFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(numberField);
   this.widget('WidgetActionsBox').setField(numberField);
   this.widget('EventsTab').setField(numberField);
-};
+}
 
-jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
+_onFormatPropertyChange(event) {
   if (event.propertyName === 'value') {
     var multiplierField = this.widget('MultiplierField');
     var formatField = this.widget('FormatField');
@@ -55,16 +60,17 @@ jswidgets.NumberFieldForm.prototype._onFormatPropertyChange = function(event) {
     });
     multiplierField.setValue(this.widget('NumberField').decimalFormat.multiplier);
   }
-};
+}
 
-jswidgets.NumberFieldForm.prototype._onMinValueFieldPropertyChange = function(event) {
+_onMinValueFieldPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('NumberField').setMinValue(event.newValue);
   }
-};
+}
 
-jswidgets.NumberFieldForm.prototype._onMaxValueFieldPropertyChange = function(event) {
+_onMaxValueFieldPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('NumberField').setMaxValue(event.newValue);
   }
-};
+}
+}

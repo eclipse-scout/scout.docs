@@ -8,29 +8,36 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TileGridLayoutConfigBox = function() {
-  jswidgets.TileGridLayoutConfigBox.parent.call(this);
-};
-scout.inherits(jswidgets.TileGridLayoutConfigBox, jswidgets.LogicalGridLayoutConfigBox);
+import TileGridLayoutConfigBoxModel from './TileGridLayoutConfigBoxModel';
+import {models} from '@eclipse-scout/core';
+import {LogicalGridLayoutConfigBox} from '../index';
 
-jswidgets.TileGridLayoutConfigBox.prototype._jsonModel = function() {
-  return scout.models.extend('jswidgets.TileGridLayoutConfigBox', jswidgets.TileGridLayoutConfigBox.parent.prototype._jsonModel.call(this));
-};
+export default class TileGridLayoutConfigBox extends LogicalGridLayoutConfigBox {
 
-jswidgets.TileGridLayoutConfigBox.prototype._init = function(model) {
-  jswidgets.TileGridLayoutConfigBox.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.extend(TileGridLayoutConfigBoxModel(this), super._jsonModel());
+}
+
+_init(model) {
+  super._init( model);
 
   this.widget('MaxWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.TileGridLayoutConfigBox.prototype.initLayoutDefaults = function() {
-  jswidgets.TileGridLayoutConfigBox.parent.prototype.initLayoutDefaults.call(this);
+initLayoutDefaults() {
+  super.initLayoutDefaults();
   this.widget('MaxWidthField').setValue(this.getBodyLayout().maxWidth);
-};
+}
 
-jswidgets.TileGridLayoutConfigBox.prototype._fillLayoutConfigByEvent = function(layoutConfig, event) {
-  jswidgets.TileGridLayoutConfigBox.parent.prototype._fillLayoutConfigByEvent.call(this, layoutConfig, event);
+_fillLayoutConfigByEvent(layoutConfig, event) {
+  super._fillLayoutConfigByEvent( layoutConfig, event);
   if (event.source.id === 'MaxWidthField') {
     layoutConfig.maxWidth = event.newValue;
   }
-};
+}
+}

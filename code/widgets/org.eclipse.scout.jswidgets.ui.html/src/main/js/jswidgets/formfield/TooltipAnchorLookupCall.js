@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TooltipAnchorLookupCall = function() {
-  jswidgets.TooltipAnchorLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.TooltipAnchorLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
-jswidgets.TooltipAnchorLookupCall.prototype._data = function() {
-  return jswidgets.TooltipAnchorLookupCall.DATA;
-};
+export default class TooltipAnchorLookupCall extends StaticLookupCall {
 
-jswidgets.TooltipAnchorLookupCall.DATA = [
-  [scout.FormField.TooltipAnchor.DEFAULT, 'default'],
-  [scout.FormField.TooltipAnchor.ON_FIELD, 'on field']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return TooltipAnchorLookupCall.DATA;
+}
+
+static DATA = [
+  [FormField.TooltipAnchor.DEFAULT, 'default'],
+  [FormField.TooltipAnchor.ON_FIELD, 'on field']
 ];
+}

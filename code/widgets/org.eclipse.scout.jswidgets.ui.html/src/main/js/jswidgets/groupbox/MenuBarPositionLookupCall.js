@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MenuBarPositionLookupCall = function() {
-  jswidgets.MenuBarPositionLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.MenuBarPositionLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, GroupBox} from '@eclipse-scout/core';
 
-jswidgets.MenuBarPositionLookupCall.prototype._data = function() {
-  return jswidgets.MenuBarPositionLookupCall.DATA;
-};
+export default class MenuBarPositionLookupCall extends StaticLookupCall {
 
-jswidgets.MenuBarPositionLookupCall.DATA = [
-  [scout.GroupBox.MenuBarPosition.AUTO, 'Auto'],
-  [scout.GroupBox.MenuBarPosition.TOP, 'Top'],
-  [scout.GroupBox.MenuBarPosition.BOTTOM, 'Bottom'],
-  [scout.GroupBox.MenuBarPosition.TITLE, 'Title']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return MenuBarPositionLookupCall.DATA;
+}
+
+static DATA = [
+  [GroupBox.MenuBarPosition.AUTO, 'Auto'],
+  [GroupBox.MenuBarPosition.TOP, 'Top'],
+  [GroupBox.MenuBarPosition.BOTTOM, 'Bottom'],
+  [GroupBox.MenuBarPosition.TITLE, 'Title']
 ];
+}

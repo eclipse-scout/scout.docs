@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.WidgetActionsBox = function() {
-  jswidgets.WidgetActionsBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import WidgetActionsBoxModel from './WidgetActionsBoxModel';
+
+export default class WidgetActionsBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.WidgetActionsBox, scout.GroupBox);
+}
 
-jswidgets.WidgetActionsBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.WidgetActionsBox');
-};
 
-jswidgets.WidgetActionsBox.prototype._init = function(model) {
-  jswidgets.WidgetActionsBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(WidgetActionsBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-};
+}
 
-jswidgets.WidgetActionsBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -51,21 +56,21 @@ jswidgets.WidgetActionsBox.prototype._setField = function(field) {
   var scrollTopField = this.widget('ScrollTopField');
   scrollTopField.setValue(this.field.scrollTop);
   scrollTopField.on('propertyChange', this._onScrollTopPropertyChange.bind(this));
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onFocusButtonClick = function(event) {
+_onFocusButtonClick(event) {
   var returned = this.field.focus();
   var returnField = this.widget('FocusReturnField');
   this._updateBooleanReturnValue(returnField, returned);
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onIsFocusableButtonClick = function(event) {
+_onIsFocusableButtonClick(event) {
   var returned = this.field.isFocusable();
   var returnField = this.widget('IsFocusableReturnField');
   this._updateBooleanReturnValue(returnField, returned);
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._updateBooleanReturnValue = function(returnField, returned) {
+_updateBooleanReturnValue(returnField, returned) {
   if (returned) {
     returnField.setValue('-> returned true');
   } else {
@@ -73,22 +78,23 @@ jswidgets.WidgetActionsBox.prototype._updateBooleanReturnValue = function(return
   }
   returnField.toggleCssClass('action-return-success', returned);
   returnField.toggleCssClass('action-return-fail', !returned);
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onRevealButtonClick = function(event) {
+_onRevealButtonClick(event) {
   this.field.reveal();
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onScrollToTopButtonClick = function(event) {
+_onScrollToTopButtonClick(event) {
   this.field.scrollToTop();
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onScrollToBottomButtonClick = function(event) {
+_onScrollToBottomButtonClick(event) {
   this.field.scrollToBottom();
-};
+}
 
-jswidgets.WidgetActionsBox.prototype._onScrollTopPropertyChange = function(event) {
+_onScrollTopPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setScrollTop(event.newValue);
   }
-};
+}
+}

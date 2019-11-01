@@ -8,20 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MenuBarItemLookupCall = function(compositeField) {
-  jswidgets.MenuBarItemLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class MenuBarItemLookupCall extends StaticLookupCall {
+
+constructor(compositeField) {
+  super();
   this._compositeFieldPropertyChangeHandler = this._onCompositeFieldPropertyChange.bind(this);
   this._formFieldPropertyChangeHandler = this._onFormFieldPropertyChange.bind(this);
   this.data = [];
   this.setCompositeField(compositeField);
-};
-scout.inherits(jswidgets.MenuBarItemLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.MenuBarItemLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.MenuBarItemLookupCall.prototype.setCompositeField = function(compositeField) {
+setCompositeField(compositeField) {
   if (this.compositeField) {
     this.compositeField.off('propertyChange', this._compositeFieldPropertyChangeHandler);
     this.compositeField.menus.forEach(function(menu) {
@@ -34,21 +38,22 @@ jswidgets.MenuBarItemLookupCall.prototype.setCompositeField = function(composite
     menu.on('propertyChange', this._formFieldPropertyChangeHandler);
   }, this);
   this._rebuildData();
-};
+}
 
-jswidgets.MenuBarItemLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.compositeField.menus.map(function(menu) {
     return [menu, menu.text];
   });
-};
+}
 
-jswidgets.MenuBarItemLookupCall.prototype._onCompositeFieldPropertyChange = function(event) {
+_onCompositeFieldPropertyChange(event) {
   if (event.propertyName === 'menus') {
     this._rebuildData();
   }
-};
-jswidgets.MenuBarItemLookupCall.prototype._onFormFieldPropertyChange = function(event) {
+}
+_onFormFieldPropertyChange(event) {
   if (event.propertyName === 'label') {
     this._rebuildData();
   }
-};
+}
+}

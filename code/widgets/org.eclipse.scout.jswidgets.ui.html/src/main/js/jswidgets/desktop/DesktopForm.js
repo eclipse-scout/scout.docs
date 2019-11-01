@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DesktopForm = function() {
-  jswidgets.DesktopForm.parent.call(this);
-};
-scout.inherits(jswidgets.DesktopForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import DesktopFormModel from './DesktopFormModel';
 
-jswidgets.DesktopForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.DesktopForm');
-};
+export default class DesktopForm extends Form {
 
-jswidgets.DesktopForm.prototype._init = function(model) {
-  jswidgets.DesktopForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(DesktopFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var desktop = this.session.desktop;
   var navigationVisibleField = this.widget('NavigationVisibleField');
@@ -35,23 +40,24 @@ jswidgets.DesktopForm.prototype._init = function(model) {
 
   this.widget('WidgetActionsBox').setField(desktop);
   this.widget('EventsTab').setField(desktop);
-};
+}
 
-jswidgets.DesktopForm.prototype._onNavigationVisiblePropertyChange = function(event) {
+_onNavigationVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.session.desktop.setNavigationVisible(event.newValue);
   }
-};
+}
 
-jswidgets.DesktopForm.prototype._onHeaderVisiblePropertyChange = function(event) {
+_onHeaderVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.session.desktop.setHeaderVisible(event.newValue);
     this.session.desktop.validateLayoutTree(); // Prevent flickering
   }
-};
+}
 
-jswidgets.DesktopForm.prototype._onDensePropertyChange = function(event) {
+_onDensePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.session.desktop.setDense(event.newValue);
   }
-};
+}
+}

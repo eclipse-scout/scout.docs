@@ -8,8 +8,14 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormPropertiesBox = function() {
-  jswidgets.FormPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import FormPropertiesBoxModel from './FormPropertiesBoxModel';
+import {DisplayParentLookupCall} from '../index';
+
+export default class FormPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
   this.titleField = null;
   this.subTitleField = null;
@@ -21,15 +27,15 @@ jswidgets.FormPropertiesBox = function() {
   this.modalField = null;
   this.displayHintField = null;
   this.displayParentField = null;
-};
-scout.inherits(jswidgets.FormPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.FormPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FormPropertiesBox');
-};
 
-jswidgets.FormPropertiesBox.prototype._init = function(model) {
-  jswidgets.FormPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(FormPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
   this.titleField = this.widget('titleField');
   this.subTitleField = this.widget('subTitleField');
   this.iconIdField = this.widget('iconIdField');
@@ -41,13 +47,13 @@ jswidgets.FormPropertiesBox.prototype._init = function(model) {
   this.resizableField = this.widget('resizableField');
   this.modalField = this.widget('modalField');
   this._setField(this.field);
-};
+}
 
-jswidgets.FormPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.FormPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -77,10 +83,10 @@ jswidgets.FormPropertiesBox.prototype._setField = function(field) {
   this.modalField.on('propertyChange', this._onPropertyChange.bind(this));
 
   this.displayHintField.setValue(field.displayHint);
-  this.displayParentField.setValue(jswidgets.DisplayParentLookupCall.resolveDisplayParentType(field.displayParent));
-};
+  this.displayParentField.setValue(DisplayParentLookupCall.resolveDisplayParentType(field.displayParent));
+}
 
-jswidgets.FormPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'titleField') {
     this.field.setTitle(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'subTitleField') {
@@ -98,4 +104,5 @@ jswidgets.FormPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'modalField') {
     this.field.setModal(event.newValue);
   }
-};
+}
+}

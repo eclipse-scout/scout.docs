@@ -1,13 +1,18 @@
-jswidgets.SamplePageWithTableTileToggleMenu = function() {
-  jswidgets.SamplePageWithTableTileToggleMenu.parent.call(this);
-};
-scout.inherits(jswidgets.SamplePageWithTableTileToggleMenu, scout.Menu);
+import {Menu} from '@eclipse-scout/core';
 
-jswidgets.SamplePageWithTableTileToggleMenu.prototype._init = function(model) {
-  jswidgets.SamplePageWithTableTileToggleMenu.parent.prototype._init.call(this, model);
+export default class SamplePageWithTableTileToggleMenu extends Menu {
+
+constructor() {
+  super();
+}
+
+
+_init(model) {
+  super._init( model);
 
   this.on('action', function() {
     var table = model.parent;
     table.setTileMode(!table.tileMode);
   }.bind(this));
-};
+}
+}

@@ -8,14 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ConfigurationBox = function() {
-  jswidgets.ConfigurationBox.parent.call(this);
-  this.cssClass = 'jswidgets-configuration';
-};
-scout.inherits(jswidgets.ConfigurationBox, scout.TabBox);
+import {TabBox, GridData, scout, icons} from '@eclipse-scout/core';
 
-jswidgets.ConfigurationBox.prototype._init = function(model) {
-  jswidgets.ConfigurationBox.parent.prototype._init.call(this, model);
+export default class ConfigurationBox extends TabBox {
+
+constructor() {
+  super();
+  this.cssClass = 'jswidgets-configuration';
+}
+
+
+_init(model) {
+  super._init( model);
 
   this.toggleMenu = scout.create('Menu', {
     parent: this,
@@ -26,14 +30,14 @@ jswidgets.ConfigurationBox.prototype._init = function(model) {
   this.toggleMenu.on('action', this._onToggleMenuAction.bind(this));
   this._updateToggleIcon();
   this.setMenus([this.toggleMenu]);
-};
+}
 
-jswidgets.ConfigurationBox.prototype._onToggleMenuAction = function(event) {
+_onToggleMenuAction(event) {
   var expanded = !this.tabItems[0].expanded;
   this.tabItems.forEach(function(tab) {
     tab.setExpanded(expanded);
   });
-  var gridData = new scout.GridData(this.gridDataHints);
+  var gridData = new GridData(this.gridDataHints);
   var weightY;
   if (expanded) {
     if (this._origWeightY !== undefined) {
@@ -45,12 +49,13 @@ jswidgets.ConfigurationBox.prototype._onToggleMenuAction = function(event) {
   }
   this.setGridDataHints(gridData);
   this._updateToggleIcon();
-};
+}
 
-jswidgets.ConfigurationBox.prototype._updateToggleIcon = function() {
-  var iconId = scout.icons.ANGLE_DOWN_BOLD;
+_updateToggleIcon() {
+  var iconId = icons.ANGLE_DOWN_BOLD;
   if (!this.tabItems[0].expanded) {
-    iconId = scout.icons.ANGLE_UP_BOLD;
+    iconId = icons.ANGLE_UP_BOLD;
   }
   this.toggleMenu.setIconId(iconId);
-};
+}
+}

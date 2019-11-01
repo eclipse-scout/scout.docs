@@ -8,16 +8,20 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.SalutationLookupCall = function() {
-  jswidgets.SalutationLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.SalutationLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.SalutationLookupCall.prototype._data = function() {
-  return jswidgets.SalutationLookupCall.DATA;
-};
+export default class SalutationLookupCall extends StaticLookupCall {
 
-jswidgets.SalutationLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return SalutationLookupCall.DATA;
+}
+
+static DATA = [
   ['female', 'Weiblich'],
   ['male', 'Männlich'],
   ['impersonal', 'Unpersönlich'],
@@ -27,8 +31,9 @@ jswidgets.SalutationLookupCall.DATA = [
 /**
  * Use the key property as cssClass. Used to demonstrate styling possibilities with lookup-rows in smart-fields.
  */
-jswidgets.SalutationLookupCall.prototype._dataToLookupRow = function(data) {
-  var lookupRow = jswidgets.SalutationLookupCall.parent.prototype._dataToLookupRow.call(this, data);
+_dataToLookupRow(data) {
+  var lookupRow = super._dataToLookupRow( data);
   lookupRow.cssClass = lookupRow.key;
   return lookupRow;
-};
+}
+}

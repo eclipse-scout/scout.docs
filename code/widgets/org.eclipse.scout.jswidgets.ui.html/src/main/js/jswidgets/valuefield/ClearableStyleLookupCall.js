@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ClearableStyleLookupCall = function() {
-  jswidgets.ClearableStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.ClearableStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, ValueField} from '@eclipse-scout/core';
 
-jswidgets.ClearableStyleLookupCall.prototype._data = function() {
-  return jswidgets.ClearableStyleLookupCall.DATA;
-};
+export default class ClearableStyleLookupCall extends StaticLookupCall {
 
-jswidgets.ClearableStyleLookupCall.DATA = [
-  [scout.ValueField.Clearable.FOCUSED, 'Focused'],
-  [scout.ValueField.Clearable.ALWAYS, 'Always'],
-  [scout.ValueField.Clearable.NEVER, 'Never']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return ClearableStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [ValueField.Clearable.FOCUSED, 'Focused'],
+  [ValueField.Clearable.ALWAYS, 'Always'],
+  [ValueField.Clearable.NEVER, 'Never']
 ];
+}

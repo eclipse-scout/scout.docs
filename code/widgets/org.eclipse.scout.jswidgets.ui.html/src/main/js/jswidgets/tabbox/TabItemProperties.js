@@ -8,46 +8,52 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TabItemProperties = function() {
-  jswidgets.TabItemProperties.parent.call(this);
+import {TabItem, models} from '@eclipse-scout/core';
+import TabItemPropertiesModel from './TabItemPropertiesModel';
+import {TabItemLookupCall} from '../index';
+
+export default class TabItemProperties extends TabItem {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.TabItemProperties, scout.TabItem);
+}
 
-jswidgets.TabItemProperties.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabItemProperties');
-};
 
-jswidgets.TabItemProperties.prototype._init = function(model) {
-  jswidgets.TabItemProperties.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TabItemPropertiesModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setTabBox(this.tabBox);
-};
+}
 
-jswidgets.TabItemProperties.prototype.setTabBox = function(tabBox) {
+setTabBox(tabBox) {
   this.setProperty('tabBox', tabBox);
-};
+}
 
-jswidgets.TabItemProperties.prototype._setTabBox = function(tabBox) {
+_setTabBox(tabBox) {
   this._setProperty('tabBox', tabBox);
   if (!this.tabBox) {
     return;
   }
 
   this.targetField = this.widget('TabItemProperties.TargetField');
-  this.targetField.lookupCall = new jswidgets.TabItemLookupCall(this.tabBox);
+  this.targetField.lookupCall = new TabItemLookupCall(this.tabBox);
   this.targetField.on('propertyChange', this._onTargetTabItemChange.bind(this));
 
   this.markedField = this.widget('TabItemProperties.MarkedField');
   this.markedField.on('propertyChange', this._onCurrentTabMarkedChanged.bind(this));
 
   this.setTabItem(this.tabBox.selectedTab);
-};
+}
 
-jswidgets.TabItemProperties.prototype.setTabItem = function(tabItem) {
+setTabItem(tabItem) {
   this.setProperty('tabItem', tabItem);
-};
+}
 
-jswidgets.TabItemProperties.prototype._setTabItem = function(tabItem) {
+_setTabItem(tabItem) {
   this._setProperty('tabItem', tabItem);
   this.targetField.setValue(this.tabItem);
   if (!this.tabItem) {
@@ -58,16 +64,17 @@ jswidgets.TabItemProperties.prototype._setTabItem = function(tabItem) {
   this.widget('TabItemProperties.GroupBoxPropertiesBox').setField(this.tabItem);
   this.widget('TabItemProperties.GridDataBox').setField(this.tabItem);
   this.widget('TabItemProperties.FormFieldPropertiesBox').setField(this.tabItem);
-};
+}
 
-jswidgets.TabItemProperties.prototype._onTargetTabItemChange = function(event) {
+_onTargetTabItemChange(event) {
   if (event.propertyName === 'value') {
     this.setTabItem(event.newValue);
   }
-};
+}
 
-jswidgets.TabItemProperties.prototype._onCurrentTabMarkedChanged = function(event) {
+_onCurrentTabMarkedChanged(event) {
   if (event.propertyName === 'value' && this.tabItem) {
     this.tabItem.setMarked(event.newValue);
   }
-};
+}
+}

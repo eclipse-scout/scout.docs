@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.StatusPositionLookupCall = function() {
-  jswidgets.StatusPositionLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.StatusPositionLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
-jswidgets.StatusPositionLookupCall.prototype._data = function() {
-  return jswidgets.StatusPositionLookupCall.DATA;
-};
+export default class StatusPositionLookupCall extends StaticLookupCall {
 
-jswidgets.StatusPositionLookupCall.DATA = [
-  [scout.FormField.StatusPosition.DEFAULT, 'default'],
-  [scout.FormField.StatusPosition.TOP, 'top']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return StatusPositionLookupCall.DATA;
+}
+
+static DATA = [
+  [FormField.StatusPosition.DEFAULT, 'default'],
+  [FormField.StatusPosition.TOP, 'top']
 ];
+}

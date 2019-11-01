@@ -8,19 +8,25 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupBoxForm = function() {
-  jswidgets.GroupBoxForm.parent.call(this);
+import {Form, MessageBoxes, models, scout} from '@eclipse-scout/core';
+import {FormFieldLookupCall} from '../index';
+import GroupBoxFormModel from './GroupBoxFormModel';
+
+export default class GroupBoxForm extends Form {
+
+constructor() {
+  super();
   this._fieldFocusHandler = this._onFieldFocus.bind(this);
   this._fieldRenderHandler = this._onFieldRender.bind(this);
-};
-scout.inherits(jswidgets.GroupBoxForm, scout.Form);
+}
 
-jswidgets.GroupBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxForm');
-};
 
-jswidgets.GroupBoxForm.prototype._init = function(model) {
-  jswidgets.GroupBoxForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GroupBoxFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var menu1 = this.widget('Menu1');
   menu1.on('action', this._onMenuAction.bind(this));
@@ -54,7 +60,7 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
 
   // Field tab
   var targetField = this.widget('Field.TargetField');
-  targetField.setLookupCall(new jswidgets.FormFieldLookupCall(groupBox));
+  targetField.setLookupCall(new FormFieldLookupCall(groupBox));
   targetField.setValue(groupBox.fields[0]);
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
@@ -62,22 +68,22 @@ jswidgets.GroupBoxForm.prototype._init = function(model) {
     propertyName: 'value',
     newValue: targetField.value
   });
-};
+}
 
-jswidgets.GroupBoxForm.prototype._initFields = function(fields) {
+_initFields(fields) {
   fields.forEach(function(field) {
     field.off('render', this._fieldRenderHandler);
     field.on('render', this._fieldRenderHandler);
   }, this);
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onMenuAction = function(event) {
-  scout.MessageBoxes.createOk(this)
+_onMenuAction(event) {
+  MessageBoxes.createOk(this)
     .withBody("Menu with label '" + event.source.text + "' has been activated.")
     .buildAndOpen();
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onTargetPropertyChange = function(event) {
+_onTargetPropertyChange(event) {
   if (event.propertyName === 'value') {
     var oldField = event.oldValue;
     var newField = event.newValue;
@@ -91,9 +97,9 @@ jswidgets.GroupBoxForm.prototype._onTargetPropertyChange = function(event) {
     fieldGridDataBox.setEnabled(!!newField);
     this._updateHighlightedField(newField, oldField);
   }
-};
+}
 
-jswidgets.GroupBoxForm.prototype._updateHighlightedField = function(newTargetField, oldTargetField) {
+_updateHighlightedField(newTargetField, oldTargetField) {
   var configurationBox = this.widget('ConfigurationBox');
   if (oldTargetField) {
     oldTargetField.removeCssClass('field-highlighted');
@@ -108,21 +114,21 @@ jswidgets.GroupBoxForm.prototype._updateHighlightedField = function(newTargetFie
   } else {
     newTargetField.removeCssClass('field-highlighted');
   }
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onFieldRender = function(event) {
+_onFieldRender(event) {
   event.source.$field.off('focus', this._fieldFocusHandler);
   event.source.$field.on('focus', this._fieldFocusHandler);
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onFieldFocus = function(event) {
+_onFieldFocus(event) {
   var field = scout.widget(event.currentTarget);
   this.widget('Field.TargetField').setValue(field);
   this.widget('Actions.AddFieldBox').setTargetField(field);
   this.widget('Actions.DeleteFieldBox').setTargetField(field);
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onConfigurationBoxPropertyChange = function(event) {
+_onConfigurationBoxPropertyChange(event) {
   if (event.propertyName === 'selectedTab') {
     var targetField = this.widget('Field.TargetField').value;
     if (!targetField) {
@@ -130,10 +136,11 @@ jswidgets.GroupBoxForm.prototype._onConfigurationBoxPropertyChange = function(ev
     }
     this._updateHighlightedField(targetField);
   }
-};
+}
 
-jswidgets.GroupBoxForm.prototype._onGroupBoxPropertyChange = function(event) {
+_onGroupBoxPropertyChange(event) {
   if (event.propertyName === 'fields') {
     this._initFields(event.source.fields);
   }
-};
+}
+}

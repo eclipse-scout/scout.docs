@@ -1,21 +1,23 @@
-{
-  "id": "jswidgets.TileGridLayoutConfigBox",
-  "type": "extension",
-  "extensions": [
+export default function() {
+  return {
+  id: 'jswidgets.TileGridLayoutConfigBox',
+  type: 'extension',
+  extensions: [
     {
-      "operation": "insert",
-      "target": {
-        "id": "jswidgets.LogicalGridLayoutConfigBox",
-        "property": "fields",
-        "after": "MinWidthField"
+      operation: 'insert',
+      target: {
+        id: 'jswidgets.LogicalGridLayoutConfigBox',
+        property: 'fields',
+        after: 'MinWidthField'
       },
-      "extension": [
+      extension: [
         {
-          "id": "MaxWidthField",
-          "objectType": "NumberField",
-          "label": "Max Width"
+          id: 'MaxWidthField',
+          objectType: 'NumberField',
+          label: 'Max Width'
         }
       ]
     }
   ]
+};
 }

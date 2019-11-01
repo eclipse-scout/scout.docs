@@ -8,37 +8,43 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupBoxAddFieldBox = function() {
-  jswidgets.GroupBoxAddFieldBox.parent.call(this);
+import {GroupBox, models, scout} from '@eclipse-scout/core';
+import {FormFieldLookupCall} from '../index';
+import GroupBoxAddFieldBoxModel from './GroupBoxAddFieldBoxModel';
+
+export default class GroupBoxAddFieldBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
   this.dynamicFieldCounter = 0;
-};
-scout.inherits(jswidgets.GroupBoxAddFieldBox, scout.GroupBox);
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GroupBoxAddFieldBox');
-};
 
-jswidgets.GroupBoxAddFieldBox.prototype._init = function(model) {
-  jswidgets.GroupBoxAddFieldBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GroupBoxAddFieldBoxModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setField(this.field);
 
   var fieldType = this.widget('LabelType');
   fieldType.setValue('StringField');
-};
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
   }
 
   this.beforeField = this.widget('BeforeField');
-  this.beforeField.setLookupCall(new jswidgets.FormFieldLookupCall(this.field));
+  this.beforeField.setLookupCall(new FormFieldLookupCall(this.field));
 
   this.labelField = this.widget('LabelField');
 
@@ -46,13 +52,13 @@ jswidgets.GroupBoxAddFieldBox.prototype._setField = function(field) {
   addFieldButton.on('click', this._onAddFormFieldButtonClick.bind(this));
 
   this._updateAddFieldLabel();
-};
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype._updateAddFieldLabel = function() {
+_updateAddFieldLabel() {
   this.labelField.setValue('Dynamic Field ' + this.dynamicFieldCounter);
-};
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(event) {
+_onAddFormFieldButtonClick(event) {
   var siblings = this.field.fields || [],
     beforeField = this.beforeField.value;
 
@@ -71,8 +77,9 @@ jswidgets.GroupBoxAddFieldBox.prototype._onAddFormFieldButtonClick = function(ev
   this._updateAddFieldLabel();
   // Validate layout immediately to prevent flickering
   this.field.validateLayoutTree();
-};
+}
 
-jswidgets.GroupBoxAddFieldBox.prototype.setTargetField = function(field) {
+setTargetField(field) {
   this.beforeField.setValue(field);
-};
+}
+}

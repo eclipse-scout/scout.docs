@@ -1,35 +1,39 @@
-{
-  "id": "jswidgets.SamplePageWithTableSearchForm",
-  "rootGroupBox": {
-    "id": "MainBox",
-    "objectType": "GroupBox",
-    "fields": [
+import {Action} from '@eclipse-scout/core';
+
+export default function() {
+  return {
+  id: 'jswidgets.SamplePageWithTableSearchForm',
+  rootGroupBox: {
+    id: 'MainBox',
+    objectType: 'GroupBox',
+    fields: [
       {
-        "id": "DetailBox",
-        "objectType": "GroupBox",
-        "gridColumnCount": 2,
-        "fields": [
+        id: 'DetailBox',
+        objectType: 'GroupBox',
+        gridColumnCount: 2,
+        fields: [
           {
-            "id": "StringField",
-            "objectType": "StringField",
-            "maxLength": 200,
-            "label": "String Column"
+            id: 'StringField',
+            objectType: 'StringField',
+            maxLength: 200,
+            label: 'String Column'
           }
         ]
       }
     ],
-    "menus": [
+    menus: [
       {
-        "id": "SearchButton",
-        "objectType": "Menu",
-        "actionStyle": "${const:BUTTON}",
-        "text": "${textKey:Search}",
-        "keyStroke": "ENTER"
+        id: 'SearchButton',
+        objectType: 'Menu',
+        actionStyle: Action.ActionStyle.BUTTON,
+        text: '${textKey:Search}',
+        keyStroke: 'ENTER'
       },
       {
-        "id": "ResetMenu",
-        "objectType": "ResetMenu"
+        id: 'ResetMenu',
+        objectType: 'ResetMenu'
       }
     ]
   }
+};
 }

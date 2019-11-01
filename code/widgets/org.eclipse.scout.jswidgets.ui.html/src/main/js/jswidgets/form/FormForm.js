@@ -8,20 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.FormForm = function() {
-  jswidgets.FormForm.parent.call(this);
+import {Form, models, scout} from '@eclipse-scout/core';
+import {DisplayParentLookupCall} from '../index';
+import FormFormModel from './FormFormModel';
+
+export default class FormForm extends Form {
+
+constructor() {
+  super();
   this.openedByButton = false;
   this.currentFormPropertiesBox = null;
   this.LifecycleData = {};
-};
-scout.inherits(jswidgets.FormForm, scout.Form);
+}
 
-jswidgets.FormForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.FormForm');
-};
 
-jswidgets.FormForm.prototype._init = function(model) {
-  jswidgets.FormForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(FormFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.widget('OpenFormButton').on('click', this._onOpenFormButtonClick.bind(this));
   this.widget('OpenLifecycleFormButton').on('click', this._onOpenLifecycleFormButtonClick.bind(this));
@@ -30,7 +36,7 @@ jswidgets.FormForm.prototype._init = function(model) {
   this.propertiesBox = this.widget('PropertiesBox');
   // defaults
   this.propertiesBox.titleField.setValue('Title');
-  this.propertiesBox.displayHintField.setValue(scout.Form.DisplayHint.DIALOG);
+  this.propertiesBox.displayHintField.setValue(Form.DisplayHint.DIALOG);
   this.propertiesBox.closableField.setValue(true);
 
   // form properties of current form
@@ -48,16 +54,16 @@ jswidgets.FormForm.prototype._init = function(model) {
     this.widget('EventsTab').setField(this);
     this.widget('WidgetActionsBox').setField(this);
   }
-};
+}
 
-jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
+_onOpenFormButtonClick(model) {
   var form = scout.create('jswidgets.FormForm', {
     parent: this,
     title: this.propertiesBox.titleField.value,
     subTitle: this.propertiesBox.subTitleField.value,
     iconId: this.propertiesBox.iconIdField.value,
     displayHint: this.propertiesBox.displayHintField.value,
-    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
+    displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
     modal: this.propertiesBox.modalField.value,
     askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
     cacheBounds: this.propertiesBox.cacheBoundsField.value,
@@ -70,16 +76,16 @@ jswidgets.FormForm.prototype._onOpenFormButtonClick = function(model) {
   this.widget('WidgetActionsBox').setField(form);
   form.open();
 
-};
+}
 
-jswidgets.FormForm.prototype._onOpenLifecycleFormButtonClick = function(model) {
+_onOpenLifecycleFormButtonClick(model) {
   var form = scout.create('jswidgets.LifecycleForm', {
     parent: this,
     title: this.propertiesBox.titleField.value,
     subTitle: this.propertiesBox.subTitleField.value,
     iconId: this.propertiesBox.iconIdField.value,
     displayHint: this.propertiesBox.displayHintField.value,
-    displayParent: jswidgets.DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
+    displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
     modal: this.propertiesBox.modalField.value,
     closable: this.propertiesBox.closableField.value,
     resizable: this.propertiesBox.resizableField.value,
@@ -115,8 +121,9 @@ jswidgets.FormForm.prototype._onOpenLifecycleFormButtonClick = function(model) {
 
   lifecycleDataField.setVisible(true);
   form.open();
-};
+}
 
-jswidgets.FormForm.prototype.lifecycleDataToString = function(data) {
+lifecycleDataToString(data) {
   return 'Name: ' + data.name + ', Birthday: ' + data.birthday;
-};
+}
+}

@@ -8,13 +8,17 @@
  * Contributors: BSI Business Systems Integration AG - initial API and
  * implementation
  */
-jswidgets.EditableTableForm = function() {
-  jswidgets.EditableTableForm.parent.call(this);
-};
-scout.inherits(jswidgets.EditableTableForm, jswidgets.TableForm);
+import {TableForm} from '../../index';
 
-jswidgets.EditableTableForm.prototype._init = function(model) {
-  jswidgets.EditableTableForm.parent.prototype._init.call(this, model);
+export default class EditableTableForm extends TableForm {
+
+constructor() {
+  super();
+}
+
+
+_init(model) {
+  super._init( model);
 
   this.table.columns.forEach(function(column) {
     if (column.id === 'IconColumn' || column.id === 'HtmlColumn') {
@@ -29,4 +33,5 @@ jswidgets.EditableTableForm.prototype._init = function(model) {
     var editableField = this.widget('EditableField');
     editableField.setValue(column.editable);
   }
-};
+}
+}

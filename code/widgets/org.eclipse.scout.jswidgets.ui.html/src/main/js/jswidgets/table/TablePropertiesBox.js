@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TablePropertiesBox = function() {
-  jswidgets.TablePropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import TablePropertiesBoxModel from './TablePropertiesBoxModel';
+
+export default class TablePropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.table = null;
-};
-scout.inherits(jswidgets.TablePropertiesBox, scout.GroupBox);
+}
 
-jswidgets.TablePropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TablePropertiesBox');
-};
 
-jswidgets.TablePropertiesBox.prototype._init = function(model) {
-  jswidgets.TablePropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TablePropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setTable(this.table);
-};
+}
 
-jswidgets.TablePropertiesBox.prototype.setTable = function(table) {
+setTable(table) {
   this.setProperty('table', table);
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
+_setTable(table) {
   this._setProperty('table', table);
   if (!this.table) {
     return;
@@ -109,120 +114,121 @@ jswidgets.TablePropertiesBox.prototype._setTable = function(table) {
   var tileModeField = this.widget('TileModeField');
   tileModeField.setValue(this.table.tileMode);
   tileModeField.on('propertyChange', this._onTileModePropertyChange.bind(this));
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onAutoResizeColumnsPropertyChange = function(event) {
+_onAutoResizeColumnsPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setAutoResizeColumns(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onAutoOptimizeColumnWidthsPropertyChange = function(event) {
+_onAutoOptimizeColumnWidthsPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.columns.forEach(function(column) {
       column.setAutoOptimizeWidth(event.newValue);
     });
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onCheckablePropertyChange = function(event) {
+_onCheckablePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckable(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onHeaderEnabledPropertyChange = function(event) {
+_onHeaderEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onHeaderVisiblePropertyChange = function(event) {
+_onHeaderVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderVisible(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onHeaderMenusEnabledPropertyChange = function(event) {
+_onHeaderMenusEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setHeaderMenusEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onMenuBarVisiblePropertyChange = function(event) {
+_onMenuBarVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setMenuBarVisible(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onMultiCheckPropertyChange = function(event) {
+_onMultiCheckPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiCheck(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onMultiSelectPropertyChange = function(event) {
+_onMultiSelectPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setMultiSelect(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onMultilineTextPropertyChange = function(event) {
+_onMultilineTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setMultilineText(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onTruncatedCellTooltipEnabledPropertyChange = function(event) {
+_onTruncatedCellTooltipEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setTruncatedCellTooltipEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onScrollToSelectionPropertyChange = function(event) {
+_onScrollToSelectionPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setScrollToSelection(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onSortEnabledPropertyChange = function(event) {
+_onSortEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setSortEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onFooterVisiblePropertyChange = function(event) {
+_onFooterVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setFooterVisible(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onRowIconVisiblePropertyChange = function(event) {
+_onRowIconVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setRowIconVisible(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onRowIconColumnWidthPropertyChange = function(event) {
+_onRowIconColumnWidthPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setRowIconColumnWidth(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onCheckableStylePropertyChange = function(event) {
+_onCheckableStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setCheckableStyle(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onGroupingStylePropertyChange = function(event) {
+_onGroupingStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setGroupingStyle(event.newValue);
   }
-};
+}
 
-jswidgets.TablePropertiesBox.prototype._onTileModePropertyChange = function(event) {
+_onTileModePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.table.setTileMode(event.newValue);
   }
-};
+}
+}

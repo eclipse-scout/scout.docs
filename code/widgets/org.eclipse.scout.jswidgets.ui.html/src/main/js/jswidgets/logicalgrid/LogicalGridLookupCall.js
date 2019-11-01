@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LogicalGridLookupCall = function() {
-  jswidgets.LogicalGridLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LogicalGridLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.LogicalGridLookupCall.prototype._data = function() {
-  return jswidgets.LogicalGridLookupCall.DATA;
-};
+export default class LogicalGridLookupCall extends StaticLookupCall {
 
-jswidgets.LogicalGridLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return LogicalGridLookupCall.DATA;
+}
+
+static DATA = [
   ['scout.HorizontalGrid', 'Horizontal'],
   ['scout.VerticalSmartGrid', 'Vertical (Smart)']
 ];
+}

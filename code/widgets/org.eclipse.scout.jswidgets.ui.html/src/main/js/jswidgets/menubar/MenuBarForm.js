@@ -8,18 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.MenuBarForm = function() {
-  jswidgets.MenuBarForm.parent.call(this);
+import {Form, MessageBoxes, Menu, EllipsisMenu, models, scout} from '@eclipse-scout/core';
+import MenuBarFormModel from './MenuBarFormModel';
+
+export default class MenuBarForm extends Form {
+
+constructor() {
+  super();
   this.currentMenu;
-};
-scout.inherits(jswidgets.MenuBarForm, scout.Form);
+}
 
-jswidgets.MenuBarForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.MenuBarForm');
-};
 
-jswidgets.MenuBarForm.prototype._init = function(model) {
-  jswidgets.MenuBarForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(MenuBarFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var selectedMenuItemField = this.widget('SelectedMenuField');
   selectedMenuItemField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
@@ -48,7 +53,7 @@ jswidgets.MenuBarForm.prototype._init = function(model) {
   this.hierarchicalMenu.on('action', this._onMenuAction.bind(this));
   this.hierarchicalMenu.on('propertyChange', this._onMenuPropertyChange.bind(this));
   this.hierarchicalMenu.visitChildren(function(menu) {
-    if (menu instanceof scout.Menu) {
+    if (menu instanceof Menu) {
       menu.on('action', this._onMenuAction.bind(this));
       menu.on('propertyChange', this._onMenuPropertyChange.bind(this));
     }
@@ -56,9 +61,9 @@ jswidgets.MenuBarForm.prototype._init = function(model) {
 
   this._fillSelectedMenuField();
   this._updateSelectedMenu();
-};
+}
 
-jswidgets.MenuBarForm.prototype._onReplaceChildActionsClick = function(event, menu) {
+_onReplaceChildActionsClick(event, menu) {
   var i = 1,
     menuCount = Math.floor(Math.random() * 10) + i,
     newMenus = [];
@@ -76,51 +81,51 @@ jswidgets.MenuBarForm.prototype._onReplaceChildActionsClick = function(event, me
     }
     menu.setChildActions(newMenus);
   }
-};
+}
 
-jswidgets.MenuBarForm.prototype._onMenuAction = function(event) {
+_onMenuAction(event) {
   if (event.source.isToggleAction()) {
     // Don't show message box if it is a toggle action
     return;
   }
-  scout.MessageBoxes.createOk(this)
+  MessageBoxes.createOk(this)
     .withBody("Menu with label '" + event.source.text + "' has been activated.")
     .buildAndOpen();
-};
+}
 
-jswidgets.MenuBarForm.prototype._onMenuPropertyChange = function(event) {
+_onMenuPropertyChange(event) {
   if (event.propertyName === 'text') {
     this._fillSelectedMenuField();
   }
-};
+}
 
-jswidgets.MenuBarForm.prototype._onShrinkableFieldPropertyChange = function(event) {
+_onShrinkableFieldPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'ShrinkableField') {
     this.currentMenu.setShrinkable(event.newValue);
   }
-};
+}
 
-jswidgets.MenuBarForm.prototype._onStackableFieldPropertyChange = function(event) {
+_onStackableFieldPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'StackableField') {
     this.currentMenu.setStackable(event.newValue);
   }
-};
+}
 
-jswidgets.MenuBarForm.prototype._onSelectedMenuFieldPropertyChange = function(event) {
+_onSelectedMenuFieldPropertyChange(event) {
   if (event.propertyName === 'value') {
     this._updateSelectedMenu();
   }
-};
+}
 
 /**
  * Collects every menu of the group box and updates lookup call of the SelectedMenuField
  */
-jswidgets.MenuBarForm.prototype._fillSelectedMenuField = function() {
+_fillSelectedMenuField() {
   var selectedMenuItemField = this.widget('SelectedMenuField');
   var detailBox = this.widget('DetailBox');
   var menus = [];
   detailBox.visitChildren(function(menu) {
-    if (menu instanceof scout.Menu && !(menu instanceof scout.EllipsisMenu)) {
+    if (menu instanceof Menu && !(menu instanceof EllipsisMenu)) {
       menus.push(menu);
     }
   }.bind(this));
@@ -128,9 +133,9 @@ jswidgets.MenuBarForm.prototype._fillSelectedMenuField = function() {
   menus.forEach(function(menu) {
     selectedMenuItemField.lookupCall.data.push([menu.id, scout.nvl(menu.text, menu.id)]);
   });
-};
+}
 
-jswidgets.MenuBarForm.prototype._updateSelectedMenu = function() {
+_updateSelectedMenu() {
   var selectedMenuItemField = this.widget('SelectedMenuField');
   var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
   var menu = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
@@ -148,4 +153,5 @@ jswidgets.MenuBarForm.prototype._updateSelectedMenu = function() {
     // form field widget
     formFieldPropertiesBox.setField(menu.field);
   }
-};
+}
+}

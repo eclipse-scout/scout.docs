@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.StatusSeverityLookupCall = function() {
-  jswidgets.StatusSeverityLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.StatusSeverityLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Status} from '@eclipse-scout/core';
 
-jswidgets.StatusSeverityLookupCall.prototype._data = function() {
-  return jswidgets.StatusSeverityLookupCall.DATA;
-};
+export default class StatusSeverityLookupCall extends StaticLookupCall {
 
-jswidgets.StatusSeverityLookupCall.DATA = [
-  [scout.Status.Severity.INFO, 'info'],
-  [scout.Status.Severity.WARNING, 'warning'],
-  [scout.Status.Severity.ERROR, 'error']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return StatusSeverityLookupCall.DATA;
+}
+
+static DATA = [
+  [Status.Severity.INFO, 'info'],
+  [Status.Severity.WARNING, 'warning'],
+  [Status.Severity.ERROR, 'error']
 ];
+}

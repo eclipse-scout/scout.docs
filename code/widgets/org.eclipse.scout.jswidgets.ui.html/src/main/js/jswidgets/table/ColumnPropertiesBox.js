@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ColumnPropertiesBox = function() {
-  jswidgets.ColumnPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import ColumnPropertiesBoxModel from './ColumnPropertiesBoxModel';
+
+export default class ColumnPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.column = null;
-};
-scout.inherits(jswidgets.ColumnPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.ColumnPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ColumnPropertiesBox');
-};
 
-jswidgets.ColumnPropertiesBox.prototype._init = function(model) {
-  jswidgets.ColumnPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(ColumnPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setColumn(this.column);
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype.setColumn = function(column) {
+setColumn(column) {
   this.setProperty('column', column);
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
+_setColumn(column) {
   this._setProperty('column', column);
   if (!this.column) {
     return;
@@ -148,16 +153,16 @@ jswidgets.ColumnPropertiesBox.prototype._setColumn = function(column) {
   column.table.on('sort', this._onSort.bind(this));
   column.table.on('group', this._onGroup.bind(this));
   column.table.on('columnResized', this._onColumnResized.bind(this));
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype._onColumnResized = function(data) {
+_onColumnResized(data) {
   if (this.column === data.column) {
     var widthField = this.widget('WidthField');
     widthField.setValue(this.column.width);
   }
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype._onSort = function(data) {
+_onSort(data) {
   if (this.column === data.column) {
     var sortActiveField = this.widget('SortActiveField');
     sortActiveField.setValue(this.column.sortActive);
@@ -166,16 +171,16 @@ jswidgets.ColumnPropertiesBox.prototype._onSort = function(data) {
     var sortIndexField = this.widget('SortIndexField');
     sortIndexField.setValue(this.column.sortIndex);
   }
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype._onGroup = function(data) {
+_onGroup(data) {
   if (this.column === data.column) {
     var groupedField = this.widget('GroupedField');
     groupedField.setValue(this.column.grouped);
   }
-};
+}
 
-jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'AutoOptimizeWidthField') {
     this.column.setAutoOptimizeWidth(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
@@ -222,4 +227,5 @@ jswidgets.ColumnPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'HeaderMenuEnabledField') {
     this.column.headerMenuEnabled = event.newValue;
   }
-};
+}
+}

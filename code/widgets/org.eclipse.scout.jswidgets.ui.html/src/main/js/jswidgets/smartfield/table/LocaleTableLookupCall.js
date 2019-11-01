@@ -8,12 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LocaleTableLookupCall = function() {
-  jswidgets.LocaleTableLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LocaleTableLookupCall, jswidgets.LocaleLookupCall);
+import {scout} from '@eclipse-scout/core';
+import {LocaleLookupCall} from '../../index';
 
-jswidgets.LocaleTableLookupCall.prototype._dataToLookupRow = function(data) {
+export default class LocaleTableLookupCall extends LocaleLookupCall {
+
+constructor() {
+  super();
+}
+
+
+_dataToLookupRow(data) {
   var lookupRow = new scout.create('LookupRow', {
     key: data[0],
     text: data[1],
@@ -23,4 +28,5 @@ jswidgets.LocaleTableLookupCall.prototype._dataToLookupRow = function(data) {
   });
 
   return lookupRow;
-};
+}
+}

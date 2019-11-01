@@ -8,8 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ChartField = function() {
-  jswidgets.ChartField.parent.call(this);
+import {ValueField, StringFieldLayout, scout} from '@eclipse-scout/core';
+
+export default class ChartField extends ValueField {
+
+constructor() {
+  super();
   this.chart = null;
   this.chartConfig = {
       type: 'pie',
@@ -22,41 +26,42 @@ jswidgets.ChartField = function() {
         }
       }
     };
-};
-
-scout.inherits(jswidgets.ChartField, scout.ValueField);
+}
 
 
-jswidgets.ChartField.prototype._init = function(model) {
+
+
+_init(model) {
   this._onInit = true;
-  jswidgets.ChartField.parent.prototype._init.call(this, model);
+  super._init( model);
   this._onInit = false;
   this.chart = scout.create('jswidgets.Chart', {
     parent: this,
     config: this.chartConfig
   });
-};
+}
 
-jswidgets.ChartField.prototype._render = function() {
-  this.addContainer(this.$parent, 'chart-field', new scout.StringFieldLayout(this));
+_render() {
+  this.addContainer(this.$parent, 'chart-field', new StringFieldLayout(this));
   this.addLabel();
   this.addMandatoryIndicator();
   this.chart.render();
 
   this.addField(this.chart.$container);
   this.addStatus();
-};
+}
 
-jswidgets.ChartField.prototype._valueChanged = function() {
+_valueChanged() {
   if(this._onInit){
     return;
   }
   this.chart.setData(this.value);
-};
+}
 
 
-jswidgets.ChartField.prototype.setChartConfig = function(chartConfig){
+setChartConfig(chartConfig){
   this.chart.setConfig(chartConfig);
-};
+}
+}
 
 

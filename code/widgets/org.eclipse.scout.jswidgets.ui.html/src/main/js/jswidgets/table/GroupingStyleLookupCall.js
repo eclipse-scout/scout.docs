@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupingStyleLookupCall = function() {
-  jswidgets.GroupingStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.GroupingStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Table} from '@eclipse-scout/core';
 
-jswidgets.GroupingStyleLookupCall.prototype._data = function() {
-  return jswidgets.GroupingStyleLookupCall.DATA;
-};
+export default class GroupingStyleLookupCall extends StaticLookupCall {
 
-jswidgets.GroupingStyleLookupCall.DATA = [
-  [scout.Table.GroupingStyle.TOP, 'top'],
-  [scout.Table.GroupingStyle.BOTTOM, 'bottom']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return GroupingStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Table.GroupingStyle.TOP, 'top'],
+  [Table.GroupingStyle.BOTTOM, 'bottom']
 ];
+}

@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.StringFormatLookupCall = function() {
-  jswidgets.StringFormatLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.StringFormatLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, StringField} from '@eclipse-scout/core';
 
-jswidgets.StringFormatLookupCall.prototype._data = function() {
-  return jswidgets.StringFormatLookupCall.DATA;
-};
+export default class StringFormatLookupCall extends StaticLookupCall {
 
-jswidgets.StringFormatLookupCall.DATA = [
-  [scout.StringField.Format.UPPER, 'Upper Case'],
-  [scout.StringField.Format.LOWER, 'Lower Case']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return StringFormatLookupCall.DATA;
+}
+
+static DATA = [
+  [StringField.Format.UPPER, 'Upper Case'],
+  [StringField.Format.LOWER, 'Lower Case']
 ];
+}

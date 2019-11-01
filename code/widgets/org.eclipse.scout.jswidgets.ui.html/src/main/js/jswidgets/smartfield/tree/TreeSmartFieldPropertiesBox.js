@@ -8,29 +8,35 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TreeSmartFieldPropertiesBox = function() {
-  jswidgets.TreeSmartFieldPropertiesBox.parent.call(this);
+import TreeSmartFieldPropertiesBoxModel from './TreeSmartFieldPropertiesBoxModel';
+import {models} from '@eclipse-scout/core';
+import {SmartFieldPropertiesBox} from '../../index';
+
+export default class TreeSmartFieldPropertiesBox extends SmartFieldPropertiesBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.TreeSmartFieldPropertiesBox, jswidgets.SmartFieldPropertiesBox);
+}
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.extend('jswidgets.TreeSmartFieldPropertiesBox', jswidgets.TreeSmartFieldPropertiesBox.parent.prototype._jsonModel.call(this));
-};
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype._init = function(model) {
-  jswidgets.TreeSmartFieldPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.extend(TreeSmartFieldPropertiesBoxModel(this), super._jsonModel());
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
   this.widget('DisplayStyleField').setVisible(false);
-};
+}
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype._setField = function(field) {
-  jswidgets.TreeSmartFieldPropertiesBox.parent.prototype._setField.call(this, field);
+_setField(field) {
+  super._setField( field);
   this._setProperty('field', field);
   if (!this.field) {
     return;
@@ -43,16 +49,17 @@ jswidgets.TreeSmartFieldPropertiesBox.prototype._setField = function(field) {
   var browseLoadIncrementalField = this.widget('BrowseLoadIncrementalField');
   browseLoadIncrementalField.setValue(this.field.browseLoadIncremental);
   browseLoadIncrementalField.on('propertyChange', this._onBrowseLoadIncrementalPropertyChange.bind(this));
-};
+}
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype._onBrowseAutoExpandAllPropertyChange = function(event) {
+_onBrowseAutoExpandAllPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setBrowseAutoExpandAll(event.newValue);
   }
-};
+}
 
-jswidgets.TreeSmartFieldPropertiesBox.prototype._onBrowseLoadIncrementalPropertyChange = function(event) {
+_onBrowseLoadIncrementalPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.field.setBrowseLoadIncremental(event.newValue);
   }
-};
+}
+}

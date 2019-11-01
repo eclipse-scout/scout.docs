@@ -8,35 +8,39 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DisplayParentLookupCall = function() {
-  jswidgets.DisplayParentLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.DisplayParentLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Desktop, Form, Outline} from '@eclipse-scout/core';
 
-jswidgets.DisplayParentLookupCall.prototype._data = function() {
-  return jswidgets.DisplayParentLookupCall.DATA;
-};
+export default class DisplayParentLookupCall extends StaticLookupCall {
 
-jswidgets.DisplayParentLookupCall.DATA = [
+constructor() {
+  super();
+}
+
+
+_data() {
+  return DisplayParentLookupCall.DATA;
+}
+
+static DATA = [
   ['desktop', 'desktop'],
   ['outline', 'outline'],
   ['form', 'form']
 ];
 
-jswidgets.DisplayParentLookupCall.resolveDisplayParentType = function(displayParent) {
-  if (displayParent instanceof scout.Desktop) {
+static resolveDisplayParentType(displayParent) {
+  if (displayParent instanceof Desktop) {
     return 'desktop';
   }
-  if (displayParent instanceof scout.Outline) {
+  if (displayParent instanceof Outline) {
     return 'outline';
   }
-  if (displayParent instanceof scout.Form) {
+  if (displayParent instanceof Form) {
     return 'form';
   }
   return null;
-};
+}
 
-jswidgets.DisplayParentLookupCall.displayParentForType = function(form, type) {
+static displayParentForType(form, type) {
   if (type === 'desktop') {
     return form.session.desktop;
   }
@@ -47,4 +51,5 @@ jswidgets.DisplayParentLookupCall.displayParentForType = function(form, type) {
     return form;
   }
   return null;
-};
+}
+}

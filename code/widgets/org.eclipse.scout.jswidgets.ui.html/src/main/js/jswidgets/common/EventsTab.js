@@ -8,32 +8,37 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.EventsTab = function() {
-  jswidgets.EventsTab.parent.call(this);
+import {TabItem, Widget, models, comparators, App} from '@eclipse-scout/core';
+import EventsTabModel from './EventsTabModel';
+
+export default class EventsTab extends TabItem {
+
+constructor() {
+  super();
   this.field = null;
   this._listener = {
     func: this._onEvent.bind(this)
   };
-};
-scout.inherits(jswidgets.EventsTab, scout.TabItem);
+}
 
-jswidgets.EventsTab.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.EventsTab');
-};
 
-jswidgets.EventsTab.prototype._init = function(model) {
-  jswidgets.EventsTab.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(EventsTabModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-  this.widget('EventsOverviewField').setValue(this.session.text('EventsOverview', scout.app.scoutVersion));
+  this.widget('EventsOverviewField').setValue(this.session.text('EventsOverview', App.get().scoutVersion));
   this.widget('ClearEventLogButton').on('click', this._onClearEventLogClick.bind(this));
-};
+}
 
-jswidgets.EventsTab.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.EventsTab.prototype._setField = function(field) {
+_setField(field) {
   if (this.field) {
     this.field.removeListener(this._listener);
   }
@@ -42,9 +47,9 @@ jswidgets.EventsTab.prototype._setField = function(field) {
     return;
   }
   this.field.addListener(this._listener);
-};
+}
 
-jswidgets.EventsTab.prototype._onEvent = function(event) {
+_onEvent(event) {
   if (event.type === 'destroy') {
     this.field.removeListener(this._listener);
   }
@@ -68,7 +73,7 @@ jswidgets.EventsTab.prototype._onEvent = function(event) {
       entry += ', ';
     }
     var value = event[key];
-    if (value instanceof scout.Widget) {
+    if (value instanceof Widget) {
       value = value.objectType;
     } else if (Array.isArray(value) && value.length > 10) {
       value = value.slice(0, 10) + '...' + value.length; // Cut array to not slow down the browser
@@ -77,9 +82,9 @@ jswidgets.EventsTab.prototype._onEvent = function(event) {
   });
   log += entry;
   logField.setValue(log);
-};
+}
 
-jswidgets.EventsTab.prototype._createPropertySortFunc = function(order) {
+_createPropertySortFunc(order) {
   return function(a, b) {
     var ia = order.indexOf(a);
     var ib = order.indexOf(b);
@@ -92,10 +97,11 @@ jswidgets.EventsTab.prototype._createPropertySortFunc = function(order) {
     if (ib > -1) { // A is not in list
       return 1;
     }
-    return scout.comparators.TEXT.compare(a, b); // both are not in list
+    return comparators.TEXT.compare(a, b); // both are not in list
   };
-};
+}
 
-jswidgets.EventsTab.prototype._onClearEventLogClick = function(event) {
+_onClearEventLogClick(event) {
   this.widget('EventLogField').setValue('');
-};
+}
+}

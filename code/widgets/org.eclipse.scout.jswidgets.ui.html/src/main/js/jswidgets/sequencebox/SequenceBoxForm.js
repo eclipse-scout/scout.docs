@@ -8,17 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.SequenceBoxForm = function() {
-  jswidgets.SequenceBoxForm.parent.call(this);
-};
-scout.inherits(jswidgets.SequenceBoxForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import {FormFieldLookupCall} from '../index';
+import SequenceBoxFormModel from './SequenceBoxFormModel';
 
-jswidgets.SequenceBoxForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SequenceBoxForm');
-};
+export default class SequenceBoxForm extends Form {
 
-jswidgets.SequenceBoxForm.prototype._init = function(model) {
-  jswidgets.SequenceBoxForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(SequenceBoxFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var sequenceBox = this.widget('SequenceBox');
 
@@ -32,7 +38,7 @@ jswidgets.SequenceBoxForm.prototype._init = function(model) {
 
   // FieldProperties tab
   var targetField = this.widget('Field.TargetField');
-  targetField.setLookupCall(new jswidgets.FormFieldLookupCall(sequenceBox));
+  targetField.setLookupCall(new FormFieldLookupCall(sequenceBox));
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
   targetField.setValue(sequenceBox.fields[0]);
 
@@ -40,9 +46,9 @@ jswidgets.SequenceBoxForm.prototype._init = function(model) {
     propertyName: 'value',
     newValue: targetField.value
   });
-};
+}
 
-jswidgets.SequenceBoxForm.prototype._onTargetPropertyChange = function(event) {
+_onTargetPropertyChange(event) {
   if (event.propertyName === 'value') {
     var targetField = event.newValue;
 
@@ -54,4 +60,5 @@ jswidgets.SequenceBoxForm.prototype._onTargetPropertyChange = function(event) {
     fieldGridDataBox.setField(targetField);
     fieldGridDataBox.setEnabled(!!targetField);
   }
-};
+}
+}

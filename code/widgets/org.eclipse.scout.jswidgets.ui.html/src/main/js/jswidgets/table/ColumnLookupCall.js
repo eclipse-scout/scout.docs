@@ -8,25 +8,30 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ColumnLookupCall = function(table) {
-  jswidgets.ColumnLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class ColumnLookupCall extends StaticLookupCall {
+
+constructor(table) {
+  super();
 
   this.data = [];
   this.setTable(table);
-};
-scout.inherits(jswidgets.ColumnLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.ColumnLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.ColumnLookupCall.prototype.setTable = function(table) {
+setTable(table) {
   this.table = table;
   this._rebuildData();
-};
+}
 
-jswidgets.ColumnLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.table.columns.map(function(column) {
     return [column, column.text];
   });
-};
+}
+}

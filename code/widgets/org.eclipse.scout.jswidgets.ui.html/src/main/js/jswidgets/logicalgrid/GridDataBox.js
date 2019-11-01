@@ -8,19 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GridDataBox = function() {
-  jswidgets.GridDataBox.parent.call(this);
+import {GroupBox, GridData, models} from '@eclipse-scout/core';
+import GridDataBoxModel from './GridDataBoxModel';
+
+export default class GridDataBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
   this.useHints = true;
-};
-scout.inherits(jswidgets.GridDataBox, scout.GroupBox);
+}
 
-jswidgets.GridDataBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.GridDataBox');
-};
 
-jswidgets.GridDataBox.prototype._init = function(model) {
-  jswidgets.GridDataBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(GridDataBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
   this.widget('WField').on('propertyChange', this._onPropertyChange.bind(this));
@@ -37,21 +42,21 @@ jswidgets.GridDataBox.prototype._init = function(model) {
   this.widget('FillVerticalField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('WidthInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
   this.widget('HeightInPixelField').on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.GridDataBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.GridDataBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   if (!this.field) {
     return;
   }
   this.reloadGridData();
-};
+}
 
-jswidgets.GridDataBox.prototype.reloadGridData = function() {
+reloadGridData() {
   var gridData = this.field.gridData;
   if (this.useHints) {
     gridData = this.field.gridDataHints;
@@ -70,13 +75,13 @@ jswidgets.GridDataBox.prototype.reloadGridData = function() {
   this.widget('FillVerticalField').setValue(gridData.fillVertical);
   this.widget('WidthInPixelField').setValue(gridData.widthInPixel);
   this.widget('HeightInPixelField').setValue(gridData.heightInPixel);
-};
+}
 
-jswidgets.GridDataBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName !== 'value') {
     return;
   }
-  var gridData = new scout.GridData(this.field.gridDataHints);
+  var gridData = new GridData(this.field.gridDataHints);
   if (event.source.id === 'WField') {
     gridData.w = event.newValue;
   } else if (event.source.id === 'HField') {
@@ -107,4 +112,5 @@ jswidgets.GridDataBox.prototype._onPropertyChange = function(event) {
     gridData.heightInPixel = event.newValue;
   }
   this.field.setGridDataHints(gridData);
-};
+}
+}

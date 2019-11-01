@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TreePropertiesBox = function() {
-  jswidgets.TreePropertiesBox.parent.call(this);
+import TreePropertiesBoxModel from './TreePropertiesBoxModel';
+import {GroupBox, models} from '@eclipse-scout/core';
+
+export default class TreePropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.tree = null;
-};
-scout.inherits(jswidgets.TreePropertiesBox, scout.GroupBox);
+}
 
-jswidgets.TreePropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TreePropertiesBox');
-};
 
-jswidgets.TreePropertiesBox.prototype._init = function(model) {
-  jswidgets.TreePropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TreePropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setTree(this.tree);
-};
+}
 
-jswidgets.TreePropertiesBox.prototype.setTree = function(tree) {
+setTree(tree) {
   this.setProperty('tree', tree);
-};
+}
 
-jswidgets.TreePropertiesBox.prototype._setTree = function(tree) {
+_setTree(tree) {
   this._setProperty('tree', tree);
   if (!this.tree) {
     return;
@@ -49,28 +54,29 @@ jswidgets.TreePropertiesBox.prototype._setTree = function(tree) {
   var checkableStyleField = this.widget('CheckableStyleField');
   checkableStyleField.setValue(this.tree.checkableStyle);
   checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
-};
+}
 
-jswidgets.TreePropertiesBox.prototype._onAutoCheckChildrenPropertyChange = function(event) {
+_onAutoCheckChildrenPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.tree.autoCheckChildren = event.newValue;
   }
-};
+}
 
-jswidgets.TreePropertiesBox.prototype._onCheckablePropertyChange = function(event) {
+_onCheckablePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.tree.setCheckable(event.newValue);
   }
-};
+}
 
-jswidgets.TreePropertiesBox.prototype._onMultiCheckPropertyChange = function(event) {
+_onMultiCheckPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.tree.multiCheck = event.newValue;
   }
-};
+}
 
-jswidgets.TreePropertiesBox.prototype._onCheckableStylePropertyChange = function(event) {
+_onCheckableStylePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.tree.setCheckableStyle(event.newValue);
   }
-};
+}
+}

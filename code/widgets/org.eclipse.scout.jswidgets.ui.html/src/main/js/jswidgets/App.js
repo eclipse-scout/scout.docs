@@ -8,22 +8,29 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.App = function() {
-  jswidgets.App.parent.call(this);
+import {App as App_1, ResponsiveManager, models, router, scout} from '@eclipse-scout/core';
+import {WidgetsRoute} from './index';
+import DesktopModel from './desktop/DesktopModel';
+
+export default class App extends App_1 {
+
+constructor() {
+  super();
   this.scoutVersion = '10.0';
-};
-scout.inherits(jswidgets.App, scout.App);
+}
 
-jswidgets.App.prototype._createDesktop = function(parent) {
+
+_createDesktop(parent) {
   var desktop = scout.create('Desktop',
-    scout.models.getModel('jswidgets.Desktop', parent));
+    models.get(DesktopModel, parent));
 
-  scout.router.register(new jswidgets.WidgetsRoute(desktop));
-  scout.router.activate();
+  router.register(new WidgetsRoute(desktop));
+  router.activate();
 
-  scout.responsiveManager.registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {
+  ResponsiveManager.get().registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {
     widget: desktop
   }));
 
   return desktop;
-};
+}
+}

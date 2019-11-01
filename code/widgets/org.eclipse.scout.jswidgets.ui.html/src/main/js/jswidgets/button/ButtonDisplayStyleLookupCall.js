@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ButtonDisplayStyleLookupCall = function() {
-  jswidgets.ButtonDisplayStyleLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.ButtonDisplayStyleLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Button} from '@eclipse-scout/core';
 
-jswidgets.ButtonDisplayStyleLookupCall.prototype._data = function() {
-  return jswidgets.ButtonDisplayStyleLookupCall.DATA;
-};
+export default class ButtonDisplayStyleLookupCall extends StaticLookupCall {
 
-jswidgets.ButtonDisplayStyleLookupCall.DATA = [
-  [scout.Button.DisplayStyle.DEFAULT, 'default'],
-  [scout.Button.DisplayStyle.TOGGLE, 'toggle'],
-  [scout.Button.DisplayStyle.LINK, 'link']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return ButtonDisplayStyleLookupCall.DATA;
+}
+
+static DATA = [
+  [Button.DisplayStyle.DEFAULT, 'default'],
+  [Button.DisplayStyle.TOGGLE, 'toggle'],
+  [Button.DisplayStyle.LINK, 'link']
 ];
+}

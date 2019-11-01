@@ -8,13 +8,17 @@
  * Contributors: BSI Business Systems Integration AG - initial API and
  * implementation
  */
-jswidgets.VirtualTileGridForm = function() {
-  jswidgets.VirtualTileGridForm.parent.call(this);
-};
-scout.inherits(jswidgets.VirtualTileGridForm, jswidgets.TileGridForm);
+import {TileGridForm} from '../index';
 
-jswidgets.VirtualTileGridForm.prototype._init = function(model) {
-  jswidgets.VirtualTileGridForm.parent.prototype._init.call(this, model);
+export default class VirtualTileGridForm extends TileGridForm {
+
+constructor() {
+  super();
+}
+
+
+_init(model) {
+  super._init( model);
 
   this.tileGrid = this.widget('TileGrid');
 
@@ -40,4 +44,5 @@ jswidgets.VirtualTileGridForm.prototype._init = function(model) {
   // Update the property fields
   var virtualField = this.widget('VirtualField');
   virtualField.setValue(this.tileGrid.virtual);
-};
+}
+}

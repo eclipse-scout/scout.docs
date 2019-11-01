@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ActionPropertiesBox = function() {
-  jswidgets.ActionPropertiesBox.parent.call(this);
+import {GroupBox, MenuBar, models} from '@eclipse-scout/core';
+import ActionPropertiesBoxModel from './ActionPropertiesBoxModel';
+
+export default class ActionPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.field = null;
-};
-scout.inherits(jswidgets.ActionPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.ActionPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ActionPropertiesBox');
-};
 
-jswidgets.ActionPropertiesBox.prototype._init = function(model) {
-  jswidgets.ActionPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(ActionPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setField(this.field);
-};
+}
 
-jswidgets.ActionPropertiesBox.prototype.setField = function(field) {
+setField(field) {
   this.setProperty('field', field);
-};
+}
 
-jswidgets.ActionPropertiesBox.prototype._setField = function(field) {
+_setField(field) {
   this._setProperty('field', field);
   this.setEnabled(this.field);
   if (!this.field) {
@@ -77,9 +82,9 @@ jswidgets.ActionPropertiesBox.prototype._setField = function(field) {
   var actionStyleField = this.widget('ActionStyleField');
   actionStyleField.setValue(this.field.actionStyle);
   actionStyleField.on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'EnabledField') {
     this.field.setEnabled(event.newValue);
   } else if (event.propertyName === 'value' && event.source.id === 'VisibleField') {
@@ -103,10 +108,11 @@ jswidgets.ActionPropertiesBox.prototype._onPropertyChange = function(event) {
   } else if (event.propertyName === 'value' && event.source.id === 'ActionStyleField') {
     // ActionStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole menu bar
     this.field.actionStyle = event.newValue;
-    if (this.field.parent instanceof scout.MenuBar) {
+    if (this.field.parent instanceof MenuBar) {
       var menuItems = this.field.parent.menuItems;
       this.field.parent.setMenuItems([]);
       this.field.parent.setMenuItems(menuItems);
     }
   }
-};
+}
+}

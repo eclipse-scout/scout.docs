@@ -8,14 +8,20 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.Chart = function() {
-  jswidgets.Chart.parent.call(this);
+import {Widget} from '@eclipse-scout/core';
+import {Chart as ChartJs} from 'chart.js';
+import * as $ from 'jquery';
+
+export default class Chart extends Widget {
+
+constructor() {
+  super();
   this.chart = null;
   this.chartConfig = null;
 
   // default config
   this.config = {
-    type: jswidgets.Chart.Type.PIE,
+    type: Chart.Type.PIE,
     options: {
       elements: {
         arc: {
@@ -32,47 +38,48 @@ jswidgets.Chart = function() {
       }
     }
   };
-};
-scout.inherits(jswidgets.Chart, scout.Widget);
+}
 
-jswidgets.Chart.Type = {
+
+static Type = {
   PIE: 'pie',
   LINE: 'line',
   DOUGHNUT: 'doughnut',
   POLAR_AREA: 'polarArea'
 };
 
-jswidgets.Chart.prototype._init = function(model) {
-  jswidgets.Chart.parent.prototype._init.call(this, model);
+_init(model) {
+  super._init( model);
   this.config = $.extend(true, this.config, model.config);
-};
+}
 
-jswidgets.Chart.prototype._render = function() {
+_render() {
   this.$container = this.$parent.appendElement('<canvas>', 'chart');
   this._renderConfig();
   this._renderData();
-};
+}
 
-jswidgets.Chart.prototype.setData = function(data) {
+setData(data) {
   this.setProperty('data', data);
-};
+}
 
-jswidgets.Chart.prototype._renderData = function() {
+_renderData() {
   if (!this.data) {
     return;
   }
   $.extend(true, this.config.data, this.data);
   this.chart.update();
-};
+}
 
-jswidgets.Chart.prototype.setConfig = function(config) {
+setConfig(config) {
   this.setProperty('config', config);
-};
+}
 
 
-jswidgets.Chart.prototype._renderConfig = function() {
+_renderConfig() {
   if (this.chart) {
     this.chart.destroy();
   }
-  this.chart = new Chart(this.$container[0], this.config); // jshint ignore:line
-};
+  this.chart = new ChartJs(this.$container[0], this.config); // jshint ignore:line
+}
+}

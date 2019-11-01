@@ -8,20 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.GroupLookupCall = function(accordion) {
-  jswidgets.GroupLookupCall.parent.call(this);
+import {StaticLookupCall} from '@eclipse-scout/core';
+
+export default class GroupLookupCall extends StaticLookupCall {
+
+constructor(accordion) {
+  super();
   this._accordionPropertyChangeHandler = this._onAccordionPropertyChange.bind(this);
   this._groupPropertyChangeHandler = this._onGroupPropertyChange.bind(this);
   this.data = [];
   this.setAccordion(accordion);
-};
-scout.inherits(jswidgets.GroupLookupCall, scout.StaticLookupCall);
+}
 
-jswidgets.GroupLookupCall.prototype._data = function() {
+
+_data() {
   return this.data;
-};
+}
 
-jswidgets.GroupLookupCall.prototype.setAccordion = function(accordion) {
+setAccordion(accordion) {
   if (this.accordion) {
     this.accordion.off('propertyChange', this._accordionPropertyChangeHandler);
     this.accordion.groups.forEach(function(group) {
@@ -34,21 +38,22 @@ jswidgets.GroupLookupCall.prototype.setAccordion = function(accordion) {
     group.on('propertyChange', this._groupPropertyChangeHandler);
   }, this);
   this._rebuildData();
-};
+}
 
-jswidgets.GroupLookupCall.prototype._rebuildData = function() {
+_rebuildData() {
   this.data = this.accordion.groups.map(function(group) {
     return [group, group.title];
   });
-};
+}
 
-jswidgets.GroupLookupCall.prototype._onAccordionPropertyChange = function(event) {
+_onAccordionPropertyChange(event) {
   if (event.propertyName === 'groups') {
     this._rebuildData();
   }
-};
-jswidgets.GroupLookupCall.prototype._onGroupPropertyChange = function(event) {
+}
+_onGroupPropertyChange(event) {
   if (event.propertyName === 'title') {
     this._rebuildData();
   }
-};
+}
+}

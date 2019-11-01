@@ -8,26 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TabBoxProperties = function() {
-  jswidgets.TabBoxProperties.parent.call(this);
+import {TabItem, models} from '@eclipse-scout/core';
+import TabBoxPropertiesModel from './TabBoxPropertiesModel';
+import {TabItemLookupCall} from '../index';
+
+export default class TabBoxProperties extends TabItem {
+
+constructor() {
+  super();
   this.tabBox = null;
-};
-scout.inherits(jswidgets.TabBoxProperties, scout.TabItem);
+}
 
-jswidgets.TabBoxProperties.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.TabBoxProperties');
-};
 
-jswidgets.TabBoxProperties.prototype._init = function(model) {
-  jswidgets.TabBoxProperties.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(TabBoxPropertiesModel);
+}
+
+_init(model) {
+  super._init( model);
   this._setTabBox(this.tabBox);
-};
+}
 
-jswidgets.TabBoxProperties.prototype.setTabBox = function(tabBox) {
+setTabBox(tabBox) {
   this.setProperty('tabBox', tabBox);
-};
+}
 
-jswidgets.TabBoxProperties.prototype._setTabBox = function(tabBox) {
+_setTabBox(tabBox) {
   this._setProperty('tabBox', tabBox);
   if (!this.tabBox) {
     return;
@@ -36,7 +42,7 @@ jswidgets.TabBoxProperties.prototype._setTabBox = function(tabBox) {
   this.tabBox.on('propertyChange', this._onTabBoxPropertyChange.bind(this));
 
   this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
-  this.selectedTabField.lookupCall = new jswidgets.TabItemLookupCall(this.tabBox);
+  this.selectedTabField.lookupCall = new TabItemLookupCall(this.tabBox);
   this.selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
 
   this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
@@ -46,28 +52,29 @@ jswidgets.TabBoxProperties.prototype._setTabBox = function(tabBox) {
   this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
 
   this._updateSelectedTab();
-};
+}
 
-jswidgets.TabBoxProperties.prototype._onSelectedTabChange = function(event) {
+_onSelectedTabChange(event) {
   if (event.propertyName === 'value') {
     this.tabBox.setSelectedTab(event.newValue);
   }
-};
+}
 
-jswidgets.TabBoxProperties.prototype._onTabAreaStyleChange = function(event) {
+_onTabAreaStyleChange(event) {
   if (event.propertyName === 'value') {
     this.tabBox.setTabAreaStyle(event.newValue);
   }
-};
+}
 
-jswidgets.TabBoxProperties.prototype._onTabBoxPropertyChange = function(event) {
+_onTabBoxPropertyChange(event) {
   if (event.propertyName === 'selectedTab') {
     this._updateSelectedTab();
   }
-};
+}
 
-jswidgets.TabBoxProperties.prototype._updateSelectedTab = function() {
+_updateSelectedTab() {
   var selectedTab = this.tabBox.selectedTab;
   this.selectedTabField.setValue(selectedTab);
   this.selectedTabField.setEnabled(this.tabBox.tabItems.length > 0);
-};
+}
+}

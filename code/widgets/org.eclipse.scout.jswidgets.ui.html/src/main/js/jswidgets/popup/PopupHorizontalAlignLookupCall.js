@@ -8,19 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.PopupHorizontalAlignLookupCall = function() {
-  jswidgets.PopupHorizontalAlignLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.PopupHorizontalAlignLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, Popup} from '@eclipse-scout/core';
 
-jswidgets.PopupHorizontalAlignLookupCall.prototype._data = function() {
-  return jswidgets.PopupHorizontalAlignLookupCall.DATA;
-};
+export default class PopupHorizontalAlignLookupCall extends StaticLookupCall {
 
-jswidgets.PopupHorizontalAlignLookupCall.DATA = [
-  [scout.Popup.Alignment.LEFT, 'left'],
-  [scout.Popup.Alignment.LEFTEDGE, 'leftedge'],
-  [scout.Popup.Alignment.CENTER, 'center'],
-  [scout.Popup.Alignment.RIGHT, 'right'],
-  [scout.Popup.Alignment.RIGHTEDGE, 'rightedge'],
+constructor() {
+  super();
+}
+
+
+_data() {
+  return PopupHorizontalAlignLookupCall.DATA;
+}
+
+static DATA = [
+  [Popup.Alignment.LEFT, 'left'],
+  [Popup.Alignment.LEFTEDGE, 'leftedge'],
+  [Popup.Alignment.CENTER, 'center'],
+  [Popup.Alignment.RIGHT, 'right'],
+  [Popup.Alignment.RIGHTEDGE, 'rightedge'],
 ];
+}

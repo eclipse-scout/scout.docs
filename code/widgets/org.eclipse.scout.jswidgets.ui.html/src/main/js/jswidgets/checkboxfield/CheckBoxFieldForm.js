@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.CheckBoxFieldForm = function() {
-  jswidgets.CheckBoxFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.CheckBoxFieldForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import CheckBoxFieldFormModel from './CheckBoxFieldFormModel';
 
-jswidgets.CheckBoxFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.CheckBoxFieldForm');
-};
+export default class CheckBoxFieldForm extends Form {
 
-jswidgets.CheckBoxFieldForm.prototype._init = function(model) {
-  jswidgets.CheckBoxFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(CheckBoxFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var field = this.widget('CheckBoxField');
 
@@ -39,22 +44,23 @@ jswidgets.CheckBoxFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(field);
   this.widget('WidgetActionsBox').setField(field);
   this.widget('EventsTab').setField(field);
-};
+}
 
-jswidgets.CheckBoxFieldForm.prototype._onTriStateEnabledPropertyChange = function(event) {
+_onTriStateEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('CheckBoxField').setTriStateEnabled(event.newValue);
   }
-};
+}
 
-jswidgets.CheckBoxFieldForm.prototype._onWrapTextPropertyChange = function(event) {
+_onWrapTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('CheckBoxField').setWrapText(event.newValue);
   }
-};
+}
 
-jswidgets.CheckBoxFieldForm.prototype._onKeyStrokePropertyChange = function(event) {
+_onKeyStrokePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('CheckBoxField').setKeyStroke(event.newValue);
   }
-};
+}
+}

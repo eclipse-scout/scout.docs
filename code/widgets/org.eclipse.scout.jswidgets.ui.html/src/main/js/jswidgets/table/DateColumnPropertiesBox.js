@@ -8,27 +8,32 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DateColumnPropertiesBox = function() {
-  jswidgets.DateColumnPropertiesBox.parent.call(this);
+import {GroupBox, models} from '@eclipse-scout/core';
+import DateColumnPropertiesBoxModel from './DateColumnPropertiesBoxModel';
+
+export default class DateColumnPropertiesBox extends GroupBox {
+
+constructor() {
+  super();
   this.column = null;
-};
-scout.inherits(jswidgets.DateColumnPropertiesBox, scout.GroupBox);
+}
 
-jswidgets.DateColumnPropertiesBox.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.DateColumnPropertiesBox');
-};
 
-jswidgets.DateColumnPropertiesBox.prototype._init = function(model) {
-  jswidgets.DateColumnPropertiesBox.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(DateColumnPropertiesBoxModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this._setColumn(this.column);
-};
+}
 
-jswidgets.DateColumnPropertiesBox.prototype.setColumn = function(column) {
+setColumn(column) {
   this.setProperty('column', column);
-};
+}
 
-jswidgets.DateColumnPropertiesBox.prototype._setColumn = function(column) {
+_setColumn(column) {
   this._setProperty('column', column);
   if (!this.column) {
     return;
@@ -49,9 +54,9 @@ jswidgets.DateColumnPropertiesBox.prototype._setColumn = function(column) {
   var hasTimeField = this.widget('HasTimeField');
   hasTimeField.setValue(this.column.hasTime);
   hasTimeField.on('propertyChange', this._onPropertyChange.bind(this));
-};
+}
 
-jswidgets.DateColumnPropertiesBox.prototype._onPropertyChange = function(event) {
+_onPropertyChange(event) {
   if (event.propertyName === 'value' && event.source.id === 'FormatField') {
     this.column.setFormat(event.newValue);
   }
@@ -66,4 +71,5 @@ jswidgets.DateColumnPropertiesBox.prototype._onPropertyChange = function(event) 
     this.column.hasTime = event.newValue;
     this.column.setFormat();
   }
-};
+}
+}

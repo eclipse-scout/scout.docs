@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.DateFieldForm = function() {
-  jswidgets.DateFieldForm.parent.call(this);
-};
-scout.inherits(jswidgets.DateFieldForm, scout.Form);
+import {Form, models, dates} from '@eclipse-scout/core';
+import DateFieldFormModel from './DateFieldFormModel';
 
-jswidgets.DateFieldForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.DateFieldForm');
-};
+export default class DateFieldForm extends Form {
 
-jswidgets.DateFieldForm.prototype._init = function(model) {
-  jswidgets.DateFieldForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(DateFieldFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var dateField = this.widget('DateField');
   var hasTimeField = this.widget('HasTimeField');
@@ -47,7 +52,7 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
 
   var dontAllowCurrentDateField = this.widget('DontAllowCurrentDateField');
   this._dontAllowCurrentDateValidator = function(value) {
-    if (scout.dates.isSameDay(value, new Date())) {
+    if (dates.isSameDay(value, new Date())) {
       throw 'You are not allowed to select the current date';
     }
     return value;
@@ -59,45 +64,45 @@ jswidgets.DateFieldForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(dateField);
   this.widget('WidgetActionsBox').setField(dateField);
   this.widget('EventsTab').setField(dateField);
-};
+}
 
-jswidgets.DateFieldForm.prototype._onHasDatePropertyChange = function(event) {
+_onHasDatePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setHasDate(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onHasTimePropertyChange = function(event) {
+_onHasTimePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setHasTime(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onDateFormatPropertyChange = function(event) {
+_onDateFormatPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setDateFormatPattern(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onTimeFormatPropertyChange = function(event) {
+_onTimeFormatPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setTimeFormatPattern(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onTimePickerResolutionPropertyChange = function(event) {
+_onTimePickerResolutionPropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setTimePickerResolution(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onAutoDatePropertyChange = function(event) {
+_onAutoDatePropertyChange(event) {
   if (event.propertyName === 'value') {
     this.widget('DateField').setAutoDate(event.newValue);
   }
-};
+}
 
-jswidgets.DateFieldForm.prototype._onDontAllowCurrentDateField = function(event) {
+_onDontAllowCurrentDateField(event) {
   if (event.propertyName === 'value') {
     var dateField = this.widget('DateField');
     if (event.newValue) {
@@ -106,4 +111,5 @@ jswidgets.DateFieldForm.prototype._onDontAllowCurrentDateField = function(event)
       dateField.removeValidator(this._dontAllowCurrentDateValidator);
     }
   }
-};
+}
+}

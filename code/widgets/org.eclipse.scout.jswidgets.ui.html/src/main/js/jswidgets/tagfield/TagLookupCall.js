@@ -8,13 +8,17 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.TagLookupCall = function() {
-  jswidgets.TagLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.TagLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall} from '@eclipse-scout/core';
 
-jswidgets.TagLookupCall.prototype._data = function() {
-  var tags = jswidgets.TagLookupCall.TAGS;
+export default class TagLookupCall extends StaticLookupCall {
+
+constructor() {
+  super();
+}
+
+
+_data() {
+  var tags = TagLookupCall.TAGS;
   tags.sort();
 
   var data = [];
@@ -22,6 +26,7 @@ jswidgets.TagLookupCall.prototype._data = function() {
     data.push([tag, tag]);
   });
   return data;
-};
+}
 
-jswidgets.TagLookupCall.TAGS = ['scout', 'eclipse scout', 'scout js', 'eclipse', 'bsi', 'business systems integration ag', 'open source', 'widgets', 'js widgets'];
+static TAGS = ['scout', 'eclipse scout', 'scout js', 'eclipse', 'bsi', 'business systems integration ag', 'open source', 'widgets', 'js widgets'];
+}

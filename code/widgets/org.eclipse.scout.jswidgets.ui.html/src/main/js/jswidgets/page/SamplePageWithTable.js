@@ -1,19 +1,25 @@
-jswidgets.SamplePageWithTable = function() {
-  jswidgets.SamplePageWithTable.parent.call(this);
-};
-scout.inherits(jswidgets.SamplePageWithTable, scout.PageWithTable);
+import {PageWithTable, strings, models} from '@eclipse-scout/core';
+import SamplePageWithTableModel from './SamplePageWithTableModel';
+import * as $ from 'jquery';
 
-jswidgets.SamplePageWithTable.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.SamplePageWithTable');
-};
+export default class SamplePageWithTable extends PageWithTable {
 
-jswidgets.SamplePageWithTable.prototype._loadTableData = function(searchFilter) {
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(SamplePageWithTableModel);
+}
+
+_loadTableData(searchFilter) {
   var searchFormStringFieldValue = searchFilter.stringField;
   var filter = function(element) {
-    if (!scout.strings.hasText(searchFormStringFieldValue)) {
+    if (!strings.hasText(searchFormStringFieldValue)) {
       return true;
     }
-    return scout.strings.contains(element.string, searchFormStringFieldValue);
+    return strings.contains(element.string, searchFormStringFieldValue);
   };
   var data = [{
     id: 1,
@@ -42,9 +48,9 @@ jswidgets.SamplePageWithTable.prototype._loadTableData = function(searchFilter) 
     bool: true
   }];
   return $.resolvedPromise(data.filter(filter));
-};
+}
 
-jswidgets.SamplePageWithTable.prototype._transformTableDataToTableRows = function(tableData) {
+_transformTableDataToTableRows(tableData) {
   return tableData
     .map(function(row) {
       return {
@@ -57,4 +63,5 @@ jswidgets.SamplePageWithTable.prototype._transformTableDataToTableRows = functio
         ]
       };
     });
-};
+}
+}

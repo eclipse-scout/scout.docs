@@ -8,17 +8,23 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.ModeSelectorForm = function() {
-  jswidgets.ModeSelectorForm.parent.call(this);
-};
-scout.inherits(jswidgets.ModeSelectorForm, scout.Form);
+import {Form, models} from '@eclipse-scout/core';
+import {ModeLookupCall} from '../index';
+import ModeSelectorFormModel from './ModeSelectorFormModel';
 
-jswidgets.ModeSelectorForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.ModeSelectorForm');
-};
+export default class ModeSelectorForm extends Form {
 
-jswidgets.ModeSelectorForm.prototype._init = function(model) {
-  jswidgets.ModeSelectorForm.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(ModeSelectorFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   var modeSelectorField = this.widget('ModeSelectorField');
   var modeSelector = this.widget('ModeSelector');
@@ -33,7 +39,7 @@ jswidgets.ModeSelectorForm.prototype._init = function(model) {
   mode3.on('propertyChange', this._onModeChange.bind(this, mode3));
 
   var targetField = this.widget('TargetField');
-  targetField.setLookupCall(new jswidgets.ModeLookupCall(modeSelector));
+  targetField.setLookupCall(new ModeLookupCall(modeSelector));
   targetField.setValue(modeSelector.modes[0]);
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
@@ -61,10 +67,10 @@ jswidgets.ModeSelectorForm.prototype._init = function(model) {
   this.widget('GridDataBox').setField(modeSelectorField);
   this.widget('WidgetActionsBox').setField(modeSelectorField);
   this.widget('EventsTab').setField(modeSelectorField);
-};
+}
 
 
-jswidgets.ModeSelectorForm.prototype._onTargetPropertyChange = function(event) {
+_onTargetPropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = event.newValue;
     this.widget('SelectedField').setEnabled(!!mode);
@@ -80,59 +86,60 @@ jswidgets.ModeSelectorForm.prototype._onTargetPropertyChange = function(event) {
       this.widget('IconIdField').setValue(mode.iconId);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onTextPropertyChange = function(event) {
+_onTextPropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = this.widget('TargetField').value;
     if (mode) {
       mode.setText(event.newValue);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onIconIdPropertyChange = function(event) {
+_onIconIdPropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = this.widget('TargetField').value;
     if (mode) {
       mode.setIconId(event.newValue);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onSelectedPropertyChange = function(event) {
+_onSelectedPropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = this.widget('TargetField').value;
     if (mode) {
       mode.setSelected(event.newValue);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onEnabledPropertyChange = function(event) {
+_onEnabledPropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = this.widget('TargetField').value;
     if (mode) {
       mode.setEnabled(event.newValue);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onVisiblePropertyChange = function(event) {
+_onVisiblePropertyChange(event) {
   if (event.propertyName === 'value') {
     var mode = this.widget('TargetField').value;
     if (mode) {
       mode.setVisible(event.newValue);
     }
   }
-};
+}
 
-jswidgets.ModeSelectorForm.prototype._onModeChange = function(mode, event) {
+_onModeChange(mode, event) {
   if (event.propertyName === 'selected') {
     var targetMode = this.widget('TargetField').value;
     if (mode === targetMode) {
       this.widget('SelectedField').setValue(mode.selected);
     }
   }
-};
+}
+}
 

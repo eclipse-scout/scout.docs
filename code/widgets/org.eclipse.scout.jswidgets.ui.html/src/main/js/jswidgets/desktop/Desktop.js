@@ -1,14 +1,19 @@
-jswidgets.Desktop = function() {
-  jswidgets.Desktop.parent.call(this);
-};
-scout.inherits(jswidgets.Desktop, scout.Desktop);
+import {Desktop as Desktop_1, models, scout, icons, App} from '@eclipse-scout/core';
+import DesktopModel from './DesktopModel';
 
-jswidgets.Desktop.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.Desktop');
-};
+export default class Desktop extends Desktop_1 {
 
-jswidgets.Desktop.prototype._init = function(model) {
-  jswidgets.Desktop.parent.prototype._init.call(this, model);
+constructor() {
+  super();
+}
+
+
+_jsonModel() {
+  return models.get(DesktopModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.widget('AboutMenu').on('action', this._onAboutMenuAction.bind(this));
   var defaultThemeMenu = this.widget('DefaultThemeMenu');
@@ -19,33 +24,33 @@ jswidgets.Desktop.prototype._init = function(model) {
   denseModeMenu.on('action', this._onDenseMenuAction.bind(this));
 
   if (this.theme === 'dark') {
-    darkThemeMenu.setIconId(scout.icons.CHECKED_BOLD);
+    darkThemeMenu.setIconId(icons.CHECKED_BOLD);
   } else {
-    defaultThemeMenu.setIconId(scout.icons.CHECKED_BOLD);
+    defaultThemeMenu.setIconId(icons.CHECKED_BOLD);
   }
   if (this.dense) {
-    denseModeMenu.setIconId(scout.icons.CHECKED_BOLD);
+    denseModeMenu.setIconId(icons.CHECKED_BOLD);
   }
   this.on('propertyChange', function(event) {
     if (event.propertyName === 'dense') {
-      this.dense ? denseModeMenu.setIconId(scout.icons.CHECKED_BOLD) : denseModeMenu.setIconId(null);
+      this.dense ? denseModeMenu.setIconId(icons.CHECKED_BOLD) : denseModeMenu.setIconId(null);
     }
   }.bind(this));
-};
+}
 
-jswidgets.Desktop.prototype._onDefaultThemeMenuAction = function(event) {
+_onDefaultThemeMenuAction(event) {
   this.setTheme('default');
-};
+}
 
-jswidgets.Desktop.prototype._onDarkThemeMenuAction = function(event) {
+_onDarkThemeMenuAction(event) {
   this.setTheme('dark');
-};
+}
 
-jswidgets.Desktop.prototype._onDenseMenuAction = function(event) {
+_onDenseMenuAction(event) {
   this.setDense(!this.dense);
-};
+}
 
-jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {
+_onAboutMenuAction(event) {
   var form = scout.create('Form', {
     parent: this,
     resizable: false,
@@ -55,7 +60,7 @@ jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {
       borderDecoration: 'empty',
       fields: [{
         objectType: 'LabelField',
-        value: this.session.text('AboutText', scout.app.scoutVersion),
+        value: this.session.text('AboutText', App.get().scoutVersion),
         labelVisible: false,
         wrapText: true,
         htmlEnabled: true,
@@ -68,4 +73,5 @@ jswidgets.Desktop.prototype._onAboutMenuAction = function(event) {
     }
   });
   form.open();
-};
+}
+}

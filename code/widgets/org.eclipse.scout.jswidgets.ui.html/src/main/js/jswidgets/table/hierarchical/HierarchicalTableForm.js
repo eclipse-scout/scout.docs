@@ -8,22 +8,28 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.HierarchicalTableForm = function() {
-  jswidgets.HierarchicalTableForm.parent.call(this);
+import {Form, models, icons} from '@eclipse-scout/core';
+import HierarchicalTableFormModel from './HierarchicalTableFormModel';
+import {ColumnLookupCall} from '../../index';
+
+export default class HierarchicalTableForm extends Form {
+
+constructor() {
+  super();
 
   this.rowNo = 1;
   this.groupNo = 1;
-};
-scout.inherits(jswidgets.HierarchicalTableForm, scout.Form);
+}
 
-jswidgets.HierarchicalTableForm.GROUP_SIZE = 2;
 
-jswidgets.HierarchicalTableForm.prototype._jsonModel = function() {
-  return scout.models.getModel('jswidgets.HierarchicalTableForm');
-};
+static GROUP_SIZE = 2;
 
-jswidgets.HierarchicalTableForm.prototype._init = function(model) {
-  jswidgets.HierarchicalTableForm.parent.prototype._init.call(this, model);
+_jsonModel() {
+  return models.get(HierarchicalTableFormModel);
+}
+
+_init(model) {
+  super._init( model);
 
   this.table = this.widget('Table');
 
@@ -40,7 +46,7 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
   this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
   var targetField = this.widget('Column.TargetField');
-  targetField.setLookupCall(new jswidgets.ColumnLookupCall(this.table));
+  targetField.setLookupCall(new ColumnLookupCall(this.table));
   targetField.setValue(this.table.columns[0]);
   targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
@@ -51,9 +57,9 @@ jswidgets.HierarchicalTableForm.prototype._init = function(model) {
 
   this._insertFewRows();
   this.table.expandAll();
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onTargetPropertyChange = function(event) {
+_onTargetPropertyChange(event) {
   if (event.propertyName === 'value') {
     var oldColumn = event.oldValue;
     var newColumn = event.newValue;
@@ -62,105 +68,105 @@ jswidgets.HierarchicalTableForm.prototype._onTargetPropertyChange = function(eve
     columnPropertiesBox.setColumn(newColumn);
     columnPropertiesBox.setEnabled(!!newColumn);
   }
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onRemoveAllRows = function() {
+_onRemoveAllRows() {
   this.table.deleteAllRows();
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onInsertFew = function() {
+_onInsertFew() {
   this._insertFewRows();
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onInsertMany = function() {
+_onInsertMany() {
   this._insertManyRows();
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._insertFewRows = function() {
+_insertFewRows() {
   var daltonId = this.rowNo++,
     simpsonsId = this.rowNo++;
   this.table.insertRows(this._scrumbleOrder([{
       id: daltonId,
-      iconId: scout.icons.WORLD,
+      iconId: icons.WORLD,
       cells: [
         'Daltons brothers', null, null, true
       ]
     }, {
       id: this.rowNo++,
       parentRow: daltonId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Joe Dalton', 'the smartest', '20.10.1940', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: daltonId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Wiliam Dalton', 'smarter', '03.05.1942', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: daltonId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Jack Dalton', 'smart', '15.09.1944', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: daltonId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       enabled: false,
       cells: [
         'Averell Dalton', 'not so smart', '23.11.1945', true
       ]
     }, {
       id: simpsonsId,
-      iconId: scout.icons.GROUP,
+      iconId: icons.GROUP,
       cells: [
         'Simpsons', 'a simple family', null, false
       ]
     }, {
       id: this.rowNo++,
       parentRow: simpsonsId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Homer Simpson', 'Daddy', '23.12.1960', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: simpsonsId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Marge Simpson', 'Mom', '02.05.1964', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: simpsonsId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Bart Simpson', 'Boy', '08.10.1985', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: simpsonsId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Lisa Simpson', 'Girl', '17.03.1987', true
       ]
     }, {
       id: this.rowNo++,
       parentRow: simpsonsId,
-      iconId: scout.icons.PERSON_SOLID,
+      iconId: icons.PERSON_SOLID,
       cells: [
         'Maggie Simpson', 'Baby', '14.08.1988', true
       ]
     }
 
   ]));
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
+_insertManyRows() {
   var i = 0,
     allRows = [],
     createParentWithManyChildren = function (id, name, childCount) {
@@ -195,15 +201,15 @@ jswidgets.HierarchicalTableForm.prototype._insertManyRows = function() {
     };
   }
 
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._scrumbleOrder = function(rows) {
+_scrumbleOrder(rows) {
   return rows.sort(function(a, b) {
     return 0.5 - Math.random();
   });
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
+_onAddRowMenuAction() {
   var id = this.rowNo++,
     parentId = null,
     selectedRow = this.table.selectedRow();
@@ -221,13 +227,14 @@ jswidgets.HierarchicalTableForm.prototype._onAddRowMenuAction = function() {
       '20.10.2015'
     ]
   });
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onDeleteRowMenuAction = function() {
+_onDeleteRowMenuAction() {
   this.table.deleteRows(this.table.selectedRows);
-};
+}
 
-jswidgets.HierarchicalTableForm.prototype._onToggleGroupNoColumnMenuAction = function() {
+_onToggleGroupNoColumnMenuAction() {
   var column = this.table.columnById('GroupNo');
   column.setVisible(!column.visible);
-};
+}
+}

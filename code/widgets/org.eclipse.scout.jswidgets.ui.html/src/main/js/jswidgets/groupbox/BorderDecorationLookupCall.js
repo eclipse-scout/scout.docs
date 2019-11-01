@@ -8,17 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.BorderDecorationLookupCall = function() {
-  jswidgets.BorderDecorationLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.BorderDecorationLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, GroupBox} from '@eclipse-scout/core';
 
-jswidgets.BorderDecorationLookupCall.prototype._data = function() {
-  return jswidgets.BorderDecorationLookupCall.DATA;
-};
+export default class BorderDecorationLookupCall extends StaticLookupCall {
 
-jswidgets.BorderDecorationLookupCall.DATA = [
-  [scout.GroupBox.BorderDecoration.AUTO, 'auto'],
-  [scout.GroupBox.BorderDecoration.EMPTY, 'empty'],
-  [scout.GroupBox.BorderDecoration.LINE, 'line']
+constructor() {
+  super();
+}
+
+
+_data() {
+  return BorderDecorationLookupCall.DATA;
+}
+
+static DATA = [
+  [GroupBox.BorderDecoration.AUTO, 'auto'],
+  [GroupBox.BorderDecoration.EMPTY, 'empty'],
+  [GroupBox.BorderDecoration.LINE, 'line']
 ];
+}

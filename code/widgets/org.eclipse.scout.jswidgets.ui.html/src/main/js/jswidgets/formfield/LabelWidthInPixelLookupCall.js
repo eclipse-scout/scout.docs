@@ -8,16 +8,21 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-jswidgets.LabelWidthInPixelLookupCall = function() {
-  jswidgets.LabelWidthInPixelLookupCall.parent.call(this);
-};
-scout.inherits(jswidgets.LabelWidthInPixelLookupCall, scout.StaticLookupCall);
+import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
-jswidgets.LabelWidthInPixelLookupCall.prototype._data = function() {
-  return jswidgets.LabelWidthInPixelLookupCall.DATA;
-};
+export default class LabelWidthInPixelLookupCall extends StaticLookupCall {
 
-jswidgets.LabelWidthInPixelLookupCall.DATA = [
-  [scout.FormField.LabelWidth.DEFAULT, 'default'],
-  [scout.FormField.LabelWidth.UI, 'ui width'],
+constructor() {
+  super();
+}
+
+
+_data() {
+  return LabelWidthInPixelLookupCall.DATA;
+}
+
+static DATA = [
+  [FormField.LabelWidth.DEFAULT, 'default'],
+  [FormField.LabelWidth.UI, 'ui width'],
 ];
+}
