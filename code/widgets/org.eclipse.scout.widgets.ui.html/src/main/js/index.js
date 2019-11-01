@@ -1,20 +1,13 @@
-/*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Distribution License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/org/documents/edl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- */
+export { default as ExampleBeanField } from './ExampleBeanField';
+export { default as ExampleBeanColumn } from './ExampleBeanColumn';
+export { default as WidgetsOutline } from './WidgetsOutline';
+export { default as WidgetsOutlineAdapter } from './WidgetsOutlineAdapter';
+export { default as WidgetsTileOutlineOverview } from './WidgetsTileOutlineOverview';
+export { default as CustomTile } from './tile/CustomTile';
+export { default as CustomTileAdapter } from './tile/CustomTileAdapter';
+export { default as ChartField } from './custom/chartfield/ChartField';
+export { default as ChartFieldAdapter } from './custom/chartfield/ChartFieldAdapter';
 
-import * as self from './index.js';
-
-export { default as App } from './widgets/WidgetsDummyApp';
-
-export let widgets =Object.assign(widgets || {}, self);
-
-export default {
-  widgets
-};
+import * as self from './index.js';
+export default self;
+window.widgets = Object.assign(window.widgets || {}, self);
