@@ -10,7 +10,6 @@
  */
 
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
-const themePath = './src/main/js/theme.less';
 module.exports = (env, args) => {
   args.resDirArray = [
     'src/main/resources/WebContent',
@@ -21,7 +20,8 @@ module.exports = (env, args) => {
     'contacts': './src/main/js/index.js',
     'login': './src/main/js/login.js',
     'logout': './src/main/js/logout.js',
-    'contacts-theme': themePath
+    'contacts-theme': './src/main/js/theme.less',
+    'contacts-theme-dark': './src/main/js/theme-dark.less'
   };
 
   return config;
