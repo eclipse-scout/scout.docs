@@ -8,6 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
+import {LogoutApp} from '@eclipse-scout/core';
 
-// DUMMY
-// new scout.LogoutApp().init();
+new LogoutApp().init();
+

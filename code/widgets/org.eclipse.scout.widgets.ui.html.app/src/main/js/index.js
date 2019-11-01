@@ -8,11 +8,12 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App} from '@eclipse-scout/demo-widgets';
+import {RemoteApp} from '@eclipse-scout/core';
+import * as ref1 from '@eclipse-scout/demo-widgets';
+import * as ref2 from '@eclipse-scout/demo-widgets-heatmap';
 
-new App().init({
+new RemoteApp().init({
   bootstrap: {
     textsUrl: 'res/texts.json'
   }
 });
-
