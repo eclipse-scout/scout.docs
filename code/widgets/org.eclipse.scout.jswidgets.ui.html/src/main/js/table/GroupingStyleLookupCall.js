@@ -12,17 +12,17 @@ import {StaticLookupCall, Table} from '@eclipse-scout/core';
 
 export default class GroupingStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return GroupingStyleLookupCall.DATA;
-}
+  _data() {
+    return GroupingStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Table.GroupingStyle.TOP, 'top'],
-  [Table.GroupingStyle.BOTTOM, 'bottom']
-];
+  static DATA = [
+    [Table.GroupingStyle.TOP, 'top'],
+    [Table.GroupingStyle.BOTTOM, 'bottom']
+  ];
 }

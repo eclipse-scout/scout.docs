@@ -13,52 +13,52 @@ import WidgetPopupPropertiesBoxModel from './WidgetPopupPropertiesBoxModel';
 
 export default class WidgetPopupPropertiesBox extends GroupBox {
 
-constructor() {
-  super();
-  this.field = null;
-}
-
-
-_jsonModel() {
-  return models.get(WidgetPopupPropertiesBoxModel);
-}
-
-_init(model) {
-  super._init( model);
-
-  this._setField(this.field);
-}
-
-setField(field) {
-  this.setProperty('field', field);
-}
-
-_setField(field) {
-  this._setProperty('field', field);
-  this.setEnabled(this.field);
-  if (!this.field) {
-    return;
+  constructor() {
+    super();
+    this.field = null;
   }
-  var closableField = this.widget('ClosableField');
-  closableField.setValue(this.field.closable);
-  closableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-  var movableField = this.widget('MovableField');
-  movableField.setValue(this.field.movable);
-  movableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-  var resizableField = this.widget('ResizableField');
-  resizableField.setValue(this.field.resizable);
-  resizableField.on('propertyChange', this._onPropertyChange.bind(this));
-}
-
-_onPropertyChange(event) {
-  if (event.propertyName === 'value' && event.source.id === 'ClosableField') {
-    this.field.setClosable(event.newValue);
-  } else if (event.propertyName === 'value' && event.source.id === 'MovableField') {
-    this.field.setMovable(event.newValue);
-  } else if (event.propertyName === 'value' && event.source.id === 'ResizableField') {
-    this.field.setResizable(event.newValue);
+  _jsonModel() {
+    return models.get(WidgetPopupPropertiesBoxModel);
   }
-}
+
+  _init(model) {
+    super._init(model);
+
+    this._setField(this.field);
+  }
+
+  setField(field) {
+    this.setProperty('field', field);
+  }
+
+  _setField(field) {
+    this._setProperty('field', field);
+    this.setEnabled(this.field);
+    if (!this.field) {
+      return;
+    }
+    var closableField = this.widget('ClosableField');
+    closableField.setValue(this.field.closable);
+    closableField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var movableField = this.widget('MovableField');
+    movableField.setValue(this.field.movable);
+    movableField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var resizableField = this.widget('ResizableField');
+    resizableField.setValue(this.field.resizable);
+    resizableField.on('propertyChange', this._onPropertyChange.bind(this));
+  }
+
+  _onPropertyChange(event) {
+    if (event.propertyName === 'value' && event.source.id === 'ClosableField') {
+      this.field.setClosable(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'MovableField') {
+      this.field.setMovable(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'ResizableField') {
+      this.field.setResizable(event.newValue);
+    }
+  }
 }

@@ -13,26 +13,26 @@ import MultilineSmartFieldFormModel from './MultilineSmartFieldFormModel';
 
 export default class MultilineSmartFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(MultilineSmartFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(MultilineSmartFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.smartField = this.widget('MultilineSmartField');
+    this.smartField = this.widget('MultilineSmartField');
 
-  this.widget('SmartFieldPropertiesBox').setField(this.smartField);
-  this.widget('LookupCallField').setVisible(false);
-  this.widget('ValueFieldPropertiesBox').setField(this.smartField);
-  this.widget('FormFieldPropertiesBox').setField(this.smartField);
-  this.widget('GridDataBox').setField(this.smartField);
-  this.widget('WidgetActionsBox').setField(this.smartField);
-  this.widget('EventsTab').setField(this.smartField);
-}
+    this.widget('SmartFieldPropertiesBox').setField(this.smartField);
+    this.widget('LookupCallField').setVisible(false);
+    this.widget('ValueFieldPropertiesBox').setField(this.smartField);
+    this.widget('FormFieldPropertiesBox').setField(this.smartField);
+    this.widget('GridDataBox').setField(this.smartField);
+    this.widget('WidgetActionsBox').setField(this.smartField);
+    this.widget('EventsTab').setField(this.smartField);
+  }
 }

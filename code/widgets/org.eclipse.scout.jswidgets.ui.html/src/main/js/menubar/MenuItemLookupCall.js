@@ -12,14 +12,14 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class MenuItemLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return MenuItemLookupCall.DATA;
-}
+  _data() {
+    return MenuItemLookupCall.DATA;
+  }
 
-static DATA = [];
+  static DATA = [];
 }

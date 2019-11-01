@@ -11,20 +11,20 @@ import {BeanColumn} from '@eclipse-scout/core';
 
 export default class ExampleBeanColumn extends BeanColumn {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_renderValue($cell, value) {
-  $cell.appendElement('<img>')
-    .attr('src', value.image)
-    .addClass('example-bean-column-image');
-}
+  _renderValue($cell, value) {
+    $cell.appendElement('<img>')
+      .attr('src', value.image)
+      .addClass('example-bean-column-image');
+  }
 
-compare(row1, row2) {
-  var cellValue1 = this.table.cell(this, row1).value || {};
-  var cellValue2 = this.table.cell(this, row2).value || {};
-  return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);
-}
+  compare(row1, row2) {
+    var cellValue1 = this.table.cell(this, row1).value || {};
+    var cellValue2 = this.table.cell(this, row2).value || {};
+    return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);
+  }
 }

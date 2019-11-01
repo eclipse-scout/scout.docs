@@ -12,18 +12,18 @@ import {StaticLookupCall, Group} from '@eclipse-scout/core';
 
 export default class CollapseStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return CollapseStyleLookupCall.DATA;
-}
+  _data() {
+    return CollapseStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Group.CollapseStyle.LEFT, 'left'],
-  [Group.CollapseStyle.RIGHT, 'right'],
-  [Group.CollapseStyle.BOTTOM, 'bottom']
-];
+  static DATA = [
+    [Group.CollapseStyle.LEFT, 'left'],
+    [Group.CollapseStyle.RIGHT, 'right'],
+    [Group.CollapseStyle.BOTTOM, 'bottom']
+  ];
 }

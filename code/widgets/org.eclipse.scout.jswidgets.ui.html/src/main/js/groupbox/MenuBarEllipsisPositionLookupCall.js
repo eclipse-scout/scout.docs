@@ -12,17 +12,17 @@ import {StaticLookupCall, MenuBar} from '@eclipse-scout/core';
 
 export default class MenuBarEllipsisPositionLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return MenuBarEllipsisPositionLookupCall.DATA;
-}
+  _data() {
+    return MenuBarEllipsisPositionLookupCall.DATA;
+  }
 
-static DATA = [
-  [MenuBar.EllipsisPosition.LEFT, 'Left'],
-  [MenuBar.EllipsisPosition.RIGHT, 'Right']
-];
+  static DATA = [
+    [MenuBar.EllipsisPosition.LEFT, 'Left'],
+    [MenuBar.EllipsisPosition.RIGHT, 'Right']
+  ];
 }

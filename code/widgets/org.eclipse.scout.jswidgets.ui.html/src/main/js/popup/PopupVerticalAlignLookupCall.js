@@ -12,20 +12,20 @@ import {StaticLookupCall, Popup} from '@eclipse-scout/core';
 
 export default class PopupVerticalAlignLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return PopupVerticalAlignLookupCall.DATA;
-}
+  _data() {
+    return PopupVerticalAlignLookupCall.DATA;
+  }
 
-static DATA = [
-  [Popup.Alignment.TOP, 'top'],
-  [Popup.Alignment.TOPEDGE, 'topedge'],
-  [Popup.Alignment.CENTER, 'center'],
-  [Popup.Alignment.BOTTOM, 'bottom'],
-  [Popup.Alignment.BOTTOMEDGE, 'bottomedge'],
-];
+  static DATA = [
+    [Popup.Alignment.TOP, 'top'],
+    [Popup.Alignment.TOPEDGE, 'topedge'],
+    [Popup.Alignment.CENTER, 'center'],
+    [Popup.Alignment.BOTTOM, 'bottom'],
+    [Popup.Alignment.BOTTOMEDGE, 'bottomedge']
+  ];
 }

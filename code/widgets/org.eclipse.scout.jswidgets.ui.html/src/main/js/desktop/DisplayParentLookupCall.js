@@ -12,44 +12,44 @@ import {StaticLookupCall, Desktop, Form, Outline} from '@eclipse-scout/core';
 
 export default class DisplayParentLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return DisplayParentLookupCall.DATA;
-}
+  _data() {
+    return DisplayParentLookupCall.DATA;
+  }
 
-static DATA = [
-  ['desktop', 'desktop'],
-  ['outline', 'outline'],
-  ['form', 'form']
-];
+  static DATA = [
+    ['desktop', 'desktop'],
+    ['outline', 'outline'],
+    ['form', 'form']
+  ];
 
-static resolveDisplayParentType(displayParent) {
-  if (displayParent instanceof Desktop) {
-    return 'desktop';
+  static resolveDisplayParentType(displayParent) {
+    if (displayParent instanceof Desktop) {
+      return 'desktop';
+    }
+    if (displayParent instanceof Outline) {
+      return 'outline';
+    }
+    if (displayParent instanceof Form) {
+      return 'form';
+    }
+    return null;
   }
-  if (displayParent instanceof Outline) {
-    return 'outline';
-  }
-  if (displayParent instanceof Form) {
-    return 'form';
-  }
-  return null;
-}
 
-static displayParentForType(form, type) {
-  if (type === 'desktop') {
-    return form.session.desktop;
+  static displayParentForType(form, type) {
+    if (type === 'desktop') {
+      return form.session.desktop;
+    }
+    if (type === 'outline') {
+      return form.session.desktop.outline;
+    }
+    if (type === 'form') {
+      return form;
+    }
+    return null;
   }
-  if (type === 'outline') {
-    return form.session.desktop.outline;
-  }
-  if (type === 'form') {
-    return form;
-  }
-  return null;
-}
 }

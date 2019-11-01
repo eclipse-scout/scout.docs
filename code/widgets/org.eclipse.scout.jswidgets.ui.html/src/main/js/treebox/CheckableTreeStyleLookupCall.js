@@ -12,17 +12,17 @@ import {StaticLookupCall, Tree} from '@eclipse-scout/core';
 
 export default class CheckableTreeStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return CheckableTreeStyleLookupCall.DATA;
-}
+  _data() {
+    return CheckableTreeStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Tree.CheckableStyle.CHECKBOX, 'checkbox'],
-  [Tree.CheckableStyle.CHECKBOX_TREE_NODE, 'checkbox_tree_node']
-];
+  static DATA = [
+    [Tree.CheckableStyle.CHECKBOX, 'checkbox'],
+    [Tree.CheckableStyle.CHECKBOX_TREE_NODE, 'checkbox_tree_node']
+  ];
 }

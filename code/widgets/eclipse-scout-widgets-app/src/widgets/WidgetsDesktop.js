@@ -1,5 +1,5 @@
 import widgetsDesktopModel from './WidgetsDesktop.json';
-import scout, { Desktop, OutlineViewButton } from '@eclipse-scout/eclipse-scout';
+import scout, {Desktop, OutlineViewButton} from '@eclipse-scout/eclipse-scout';
 
 export default class WidgetsDesktop extends Desktop {
   _jsonModel() {

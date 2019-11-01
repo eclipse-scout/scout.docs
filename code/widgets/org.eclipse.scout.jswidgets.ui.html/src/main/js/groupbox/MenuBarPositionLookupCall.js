@@ -12,19 +12,19 @@ import {StaticLookupCall, GroupBox} from '@eclipse-scout/core';
 
 export default class MenuBarPositionLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return MenuBarPositionLookupCall.DATA;
-}
+  _data() {
+    return MenuBarPositionLookupCall.DATA;
+  }
 
-static DATA = [
-  [GroupBox.MenuBarPosition.AUTO, 'Auto'],
-  [GroupBox.MenuBarPosition.TOP, 'Top'],
-  [GroupBox.MenuBarPosition.BOTTOM, 'Bottom'],
-  [GroupBox.MenuBarPosition.TITLE, 'Title']
-];
+  static DATA = [
+    [GroupBox.MenuBarPosition.AUTO, 'Auto'],
+    [GroupBox.MenuBarPosition.TOP, 'Top'],
+    [GroupBox.MenuBarPosition.BOTTOM, 'Bottom'],
+    [GroupBox.MenuBarPosition.TITLE, 'Title']
+  ];
 }

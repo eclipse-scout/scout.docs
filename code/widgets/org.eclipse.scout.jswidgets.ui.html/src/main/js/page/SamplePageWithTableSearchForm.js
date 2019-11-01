@@ -3,28 +3,28 @@ import SamplePageWithTableSearchFormModel from './SamplePageWithTableSearchFormM
 
 export default class SamplePageWithTableSearchForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_init(model) {
-  super._init( model);
-  this._initListeners();
-}
+  _init(model) {
+    super._init(model);
+    this._initListeners();
+  }
 
-_jsonModel() {
-  return models.get(SamplePageWithTableSearchFormModel);
-}
+  _jsonModel() {
+    return models.get(SamplePageWithTableSearchFormModel);
+  }
 
-_initListeners() {
-  var parentTable = this.parent.table;
-  this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable), Table.ReloadReason.SEARCH);
-}
+  _initListeners() {
+    var parentTable = this.parent.table;
+    this.widget('SearchButton').on('action', parentTable.reload.bind(parentTable), Table.ReloadReason.SEARCH);
+  }
 
-exportData() {
-  return {
-    stringField: this.widget('StringField').value
-  };
-}
+  exportData() {
+    return {
+      stringField: this.widget('StringField').value
+    };
+  }
 }

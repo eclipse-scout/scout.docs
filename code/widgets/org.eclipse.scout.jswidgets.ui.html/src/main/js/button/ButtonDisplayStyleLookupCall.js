@@ -12,18 +12,18 @@ import {StaticLookupCall, Button} from '@eclipse-scout/core';
 
 export default class ButtonDisplayStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return ButtonDisplayStyleLookupCall.DATA;
-}
+  _data() {
+    return ButtonDisplayStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Button.DisplayStyle.DEFAULT, 'default'],
-  [Button.DisplayStyle.TOGGLE, 'toggle'],
-  [Button.DisplayStyle.LINK, 'link']
-];
+  static DATA = [
+    [Button.DisplayStyle.DEFAULT, 'default'],
+    [Button.DisplayStyle.TOGGLE, 'toggle'],
+    [Button.DisplayStyle.LINK, 'link']
+  ];
 }

@@ -14,72 +14,72 @@ import GroupBoxAddFieldBoxModel from './GroupBoxAddFieldBoxModel';
 
 export default class GroupBoxAddFieldBox extends GroupBox {
 
-constructor() {
-  super();
-  this.field = null;
-  this.dynamicFieldCounter = 0;
-}
-
-
-_jsonModel() {
-  return models.get(GroupBoxAddFieldBoxModel);
-}
-
-_init(model) {
-  super._init( model);
-  this._setField(this.field);
-
-  var fieldType = this.widget('LabelType');
-  fieldType.setValue('StringField');
-}
-
-setField(field) {
-  this.setProperty('field', field);
-}
-
-_setField(field) {
-  this._setProperty('field', field);
-  if (!this.field) {
-    return;
+  constructor() {
+    super();
+    this.field = null;
+    this.dynamicFieldCounter = 0;
   }
 
-  this.beforeField = this.widget('BeforeField');
-  this.beforeField.setLookupCall(new FormFieldLookupCall(this.field));
 
-  this.labelField = this.widget('LabelField');
-
-  var addFieldButton = this.widget('CreateButton');
-  addFieldButton.on('click', this._onAddFormFieldButtonClick.bind(this));
-
-  this._updateAddFieldLabel();
-}
-
-_updateAddFieldLabel() {
-  this.labelField.setValue('Dynamic Field ' + this.dynamicFieldCounter);
-}
-
-_onAddFormFieldButtonClick(event) {
-  var siblings = this.field.fields || [],
-    beforeField = this.beforeField.value;
-
-  this.dynamicFieldCounter++;
-  var newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
-    parent: this.field,
-    id: 'DynField ' + this.dynamicFieldCounter,
-    label: this.labelField.value || 'Dynamic Field ' + this.dynamicFieldCounter
-  });
-
-  if (beforeField) {
-    this.field.insertFieldBefore(newField, beforeField);
-  } else {
-    this.field.insertField(newField);
+  _jsonModel() {
+    return models.get(GroupBoxAddFieldBoxModel);
   }
-  this._updateAddFieldLabel();
-  // Validate layout immediately to prevent flickering
-  this.field.validateLayoutTree();
-}
 
-setTargetField(field) {
-  this.beforeField.setValue(field);
-}
+  _init(model) {
+    super._init(model);
+    this._setField(this.field);
+
+    var fieldType = this.widget('LabelType');
+    fieldType.setValue('StringField');
+  }
+
+  setField(field) {
+    this.setProperty('field', field);
+  }
+
+  _setField(field) {
+    this._setProperty('field', field);
+    if (!this.field) {
+      return;
+    }
+
+    this.beforeField = this.widget('BeforeField');
+    this.beforeField.setLookupCall(new FormFieldLookupCall(this.field));
+
+    this.labelField = this.widget('LabelField');
+
+    var addFieldButton = this.widget('CreateButton');
+    addFieldButton.on('click', this._onAddFormFieldButtonClick.bind(this));
+
+    this._updateAddFieldLabel();
+  }
+
+  _updateAddFieldLabel() {
+    this.labelField.setValue('Dynamic Field ' + this.dynamicFieldCounter);
+  }
+
+  _onAddFormFieldButtonClick(event) {
+    var siblings = this.field.fields || [],
+      beforeField = this.beforeField.value;
+
+    this.dynamicFieldCounter++;
+    var newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
+      parent: this.field,
+      id: 'DynField ' + this.dynamicFieldCounter,
+      label: this.labelField.value || 'Dynamic Field ' + this.dynamicFieldCounter
+    });
+
+    if (beforeField) {
+      this.field.insertFieldBefore(newField, beforeField);
+    } else {
+      this.field.insertField(newField);
+    }
+    this._updateAddFieldLabel();
+    // Validate layout immediately to prevent flickering
+    this.field.validateLayoutTree();
+  }
+
+  setTargetField(field) {
+    this.beforeField.setValue(field);
+  }
 }

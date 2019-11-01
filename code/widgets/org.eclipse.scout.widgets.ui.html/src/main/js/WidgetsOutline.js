@@ -12,15 +12,15 @@ import {Outline, scout} from '@eclipse-scout/core';
 
 export default class WidgetsOutline extends Outline {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_createOutlineOverview() {
-  return scout.create('widgets.WidgetsTileOutlineOverview', {
-    parent: this,
-    outline: this
-  });
-}
+  _createOutlineOverview() {
+    return scout.create('widgets.WidgetsTileOutlineOverview', {
+      parent: this,
+      outline: this
+    });
+  }
 }

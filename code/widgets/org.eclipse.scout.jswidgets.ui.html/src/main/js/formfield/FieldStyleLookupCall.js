@@ -12,17 +12,17 @@ import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
 export default class FieldStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return FieldStyleLookupCall.DATA;
-}
+  _data() {
+    return FieldStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [FormField.FieldStyle.CLASSIC, 'Classic'],
-  [FormField.FieldStyle.ALTERNATIVE, 'Alternative']
-];
+  static DATA = [
+    [FormField.FieldStyle.CLASSIC, 'Classic'],
+    [FormField.FieldStyle.ALTERNATIVE, 'Alternative']
+  ];
 }

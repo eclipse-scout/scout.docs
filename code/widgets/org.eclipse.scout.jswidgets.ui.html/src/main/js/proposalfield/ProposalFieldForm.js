@@ -13,25 +13,25 @@ import ProposalFieldFormModel from './ProposalFieldFormModel';
 
 export default class ProposalFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(ProposalFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(ProposalFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.proposalField = this.widget('ProposalField');
+    this.proposalField = this.widget('ProposalField');
 
-  this.widget('ProposalFieldPropertiesBox').setField(this.proposalField);
-  this.widget('ValueFieldPropertiesBox').setField(this.proposalField);
-  this.widget('FormFieldPropertiesBox').setField(this.proposalField);
-  this.widget('GridDataBox').setField(this.proposalField);
-  this.widget('WidgetActionsBox').setField(this.proposalField);
-  this.widget('EventsTab').setField(this.proposalField);
-}
+    this.widget('ProposalFieldPropertiesBox').setField(this.proposalField);
+    this.widget('ValueFieldPropertiesBox').setField(this.proposalField);
+    this.widget('FormFieldPropertiesBox').setField(this.proposalField);
+    this.widget('GridDataBox').setField(this.proposalField);
+    this.widget('WidgetActionsBox').setField(this.proposalField);
+    this.widget('EventsTab').setField(this.proposalField);
+  }
 }

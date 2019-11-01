@@ -12,17 +12,17 @@ import {StaticLookupCall, TabArea} from '@eclipse-scout/core';
 
 export default class TabAreaStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return TabAreaStyleLookupCall.DATA;
-}
+  _data() {
+    return TabAreaStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [TabArea.DisplayStyle.DEFAULT, 'Default'],
-  [TabArea.DisplayStyle.SPREAD_EVEN, 'Spread evenly']
-];
+  static DATA = [
+    [TabArea.DisplayStyle.DEFAULT, 'Default'],
+    [TabArea.DisplayStyle.SPREAD_EVEN, 'Spread evenly']
+  ];
 }

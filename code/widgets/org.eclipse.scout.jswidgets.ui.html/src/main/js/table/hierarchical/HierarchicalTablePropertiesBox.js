@@ -14,51 +14,51 @@ import {TablePropertiesBox} from '../../index';
 
 export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
 
-constructor() {
-  super();
-  this.table = null;
-}
-
-
-_jsonModel() {
-  return models.extend(HierarchicalTablePropertiesBoxModel(this), super._jsonModel());
-}
-
-_init(model) {
-  super._init( model);
-
-  this._setTable(this.table);
-}
-
-setTable(table) {
-  this.setProperty('table', table);
-}
-
-_setTable(table) {
-  super._setTable( table);
-  this._setProperty('table', table);
-  if (!this.table) {
-    return;
+  constructor() {
+    super();
+    this.table = null;
   }
 
-  var hierarchicalStyleField = this.widget('HierarchicalStyleField');
-  hierarchicalStyleField.setValue(this.table.hierarchicalStyle);
-  hierarchicalStyleField.on('propertyChange', this._onHierarchicalStylePropertyChange.bind(this));
 
-  var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
-  extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
-  extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
-}
-
-_onHierarchicalStylePropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.table.setHierarchicalStyle(event.newValue);
+  _jsonModel() {
+    return models.extend(HierarchicalTablePropertiesBoxModel(this), super._jsonModel());
   }
-}
 
-_onExtendedHierarchyPaddingPropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.table.toggleCssClass('extended-row-level-padding', event.newValue);
+  _init(model) {
+    super._init(model);
+
+    this._setTable(this.table);
   }
-}
+
+  setTable(table) {
+    this.setProperty('table', table);
+  }
+
+  _setTable(table) {
+    super._setTable(table);
+    this._setProperty('table', table);
+    if (!this.table) {
+      return;
+    }
+
+    var hierarchicalStyleField = this.widget('HierarchicalStyleField');
+    hierarchicalStyleField.setValue(this.table.hierarchicalStyle);
+    hierarchicalStyleField.on('propertyChange', this._onHierarchicalStylePropertyChange.bind(this));
+
+    var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
+    extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
+    extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
+  }
+
+  _onHierarchicalStylePropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.table.setHierarchicalStyle(event.newValue);
+    }
+  }
+
+  _onExtendedHierarchyPaddingPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.table.toggleCssClass('extended-row-level-padding', event.newValue);
+    }
+  }
 }

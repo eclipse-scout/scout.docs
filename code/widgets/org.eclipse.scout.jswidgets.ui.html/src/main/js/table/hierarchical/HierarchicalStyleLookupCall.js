@@ -12,17 +12,17 @@ import {StaticLookupCall, Table} from '@eclipse-scout/core';
 
 export default class HierarchicalStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return HierarchicalStyleLookupCall.DATA;
-}
+  _data() {
+    return HierarchicalStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Table.HierarchicalStyle.DEFAULT, 'default'],
-  [Table.HierarchicalStyle.STRUCTURED, 'structured']
-];
+  static DATA = [
+    [Table.HierarchicalStyle.DEFAULT, 'default'],
+    [Table.HierarchicalStyle.STRUCTURED, 'structured']
+  ];
 }

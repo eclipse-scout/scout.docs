@@ -12,21 +12,21 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class TagLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  var tags = TagLookupCall.TAGS;
-  tags.sort();
+  _data() {
+    var tags = TagLookupCall.TAGS;
+    tags.sort();
 
-  var data = [];
-  tags.forEach(function(tag) {
-    data.push([tag, tag]);
-  });
-  return data;
-}
+    var data = [];
+    tags.forEach(function(tag) {
+      data.push([tag, tag]);
+    });
+    return data;
+  }
 
-static TAGS = ['scout', 'eclipse scout', 'scout js', 'eclipse', 'bsi', 'business systems integration ag', 'open source', 'widgets', 'js widgets'];
+  static TAGS = ['scout', 'eclipse scout', 'scout js', 'eclipse', 'bsi', 'business systems integration ag', 'open source', 'widgets', 'js widgets'];
 }

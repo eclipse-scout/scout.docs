@@ -13,18 +13,18 @@ import DynamicTabModel from './DynamicTabModel';
 
 export default class DynamicTab extends TabItem {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.widget('label').setValue('This is the content area of the \'TabItem\'. The selected tab is \'' + this.label + '\'.');
-}
+    this.widget('label').setValue('This is the content area of the \'TabItem\'. The selected tab is \'' + this.label + '\'.');
+  }
 
-_jsonModel() {
-  return models.get(DynamicTabModel);
-}
+  _jsonModel() {
+    return models.get(DynamicTabModel);
+  }
 }

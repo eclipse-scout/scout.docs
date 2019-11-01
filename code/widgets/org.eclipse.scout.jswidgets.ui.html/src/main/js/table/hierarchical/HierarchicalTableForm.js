@@ -14,78 +14,78 @@ import {ColumnLookupCall} from '../../index';
 
 export default class HierarchicalTableForm extends Form {
 
-constructor() {
-  super();
+  constructor() {
+    super();
 
-  this.rowNo = 1;
-  this.groupNo = 1;
-}
-
-
-static GROUP_SIZE = 2;
-
-_jsonModel() {
-  return models.get(HierarchicalTableFormModel);
-}
-
-_init(model) {
-  super._init( model);
-
-  this.table = this.widget('Table');
-
-  this.widget('PropertiesBox').setTable(this.table);
-  this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
-  this.widget('GridDataBox').setField(this.widget('TableField'));
-  this.widget('WidgetActionsBox').setField(this.table);
-  this.widget('EventsTab').setField(this.table);
-
-  this.widget('RemoveAll').on('action', this._onRemoveAllRows.bind(this));
-  this.widget('InsertFew').on('action', this._onInsertFew.bind(this));
-  this.widget('InsertMany').on('action', this._onInsertMany.bind(this));
-  this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
-  this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
-
-  var targetField = this.widget('Column.TargetField');
-  targetField.setLookupCall(new ColumnLookupCall(this.table));
-  targetField.setValue(this.table.columns[0]);
-  targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
-
-  this._onTargetPropertyChange({
-    propertyName: 'value',
-    newValue: targetField.value
-  });
-
-  this._insertFewRows();
-  this.table.expandAll();
-}
-
-_onTargetPropertyChange(event) {
-  if (event.propertyName === 'value') {
-    var oldColumn = event.oldValue;
-    var newColumn = event.newValue;
-
-    var columnPropertiesBox = this.widget('Column.PropertiesBox');
-    columnPropertiesBox.setColumn(newColumn);
-    columnPropertiesBox.setEnabled(!!newColumn);
+    this.rowNo = 1;
+    this.groupNo = 1;
   }
-}
 
-_onRemoveAllRows() {
-  this.table.deleteAllRows();
-}
 
-_onInsertFew() {
-  this._insertFewRows();
-}
+  static GROUP_SIZE = 2;
 
-_onInsertMany() {
-  this._insertManyRows();
-}
+  _jsonModel() {
+    return models.get(HierarchicalTableFormModel);
+  }
 
-_insertFewRows() {
-  var daltonId = this.rowNo++,
-    simpsonsId = this.rowNo++;
-  this.table.insertRows(this._scrumbleOrder([{
+  _init(model) {
+    super._init(model);
+
+    this.table = this.widget('Table');
+
+    this.widget('PropertiesBox').setTable(this.table);
+    this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
+    this.widget('GridDataBox').setField(this.widget('TableField'));
+    this.widget('WidgetActionsBox').setField(this.table);
+    this.widget('EventsTab').setField(this.table);
+
+    this.widget('RemoveAll').on('action', this._onRemoveAllRows.bind(this));
+    this.widget('InsertFew').on('action', this._onInsertFew.bind(this));
+    this.widget('InsertMany').on('action', this._onInsertMany.bind(this));
+    this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
+    this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
+
+    var targetField = this.widget('Column.TargetField');
+    targetField.setLookupCall(new ColumnLookupCall(this.table));
+    targetField.setValue(this.table.columns[0]);
+    targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
+
+    this._onTargetPropertyChange({
+      propertyName: 'value',
+      newValue: targetField.value
+    });
+
+    this._insertFewRows();
+    this.table.expandAll();
+  }
+
+  _onTargetPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      var oldColumn = event.oldValue;
+      var newColumn = event.newValue;
+
+      var columnPropertiesBox = this.widget('Column.PropertiesBox');
+      columnPropertiesBox.setColumn(newColumn);
+      columnPropertiesBox.setEnabled(!!newColumn);
+    }
+  }
+
+  _onRemoveAllRows() {
+    this.table.deleteAllRows();
+  }
+
+  _onInsertFew() {
+    this._insertFewRows();
+  }
+
+  _onInsertMany() {
+    this._insertManyRows();
+  }
+
+  _insertFewRows() {
+    var daltonId = this.rowNo++,
+      simpsonsId = this.rowNo++;
+    this.table.insertRows(this._scrumbleOrder([{
       id: daltonId,
       iconId: icons.WORLD,
       cells: [
@@ -163,78 +163,78 @@ _insertFewRows() {
       ]
     }
 
-  ]));
-}
-
-_insertManyRows() {
-  var i = 0,
-    allRows = [],
-    createParentWithManyChildren = function (id, name, childCount) {
-      var rows = [],
-        i,
-        rowId;
-      rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
-
-      for (i = 0; i < childCount; i++) {
-        rowId = this.rowNo++;
-        rows.push(createRow(rowId, id, null, [
-          name + rowId,
-          'Any title',
-          '20.10.2015'
-        ]));
-      }
-      return rows;
-    }.bind(this);
-
-  for (i = 0; i < 100; i++) {
-    allRows = allRows.concat(createParentWithManyChildren(this.rowNo++, 'Abc', Math.floor(Math.random() * 100)));
+    ]));
   }
 
-  this.table.insertRows(allRows);
+  _insertManyRows() {
+    var i = 0,
+      allRows = [],
+      createParentWithManyChildren = function(id, name, childCount) {
+        var rows = [],
+          i,
+          rowId;
+        rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
 
-  function createRow(id, parentId, iconId, cells) {
-    return {
+        for (i = 0; i < childCount; i++) {
+          rowId = this.rowNo++;
+          rows.push(createRow(rowId, id, null, [
+            name + rowId,
+            'Any title',
+            '20.10.2015'
+          ]));
+        }
+        return rows;
+      }.bind(this);
+
+    for (i = 0; i < 100; i++) {
+      allRows = allRows.concat(createParentWithManyChildren(this.rowNo++, 'Abc', Math.floor(Math.random() * 100)));
+    }
+
+    this.table.insertRows(allRows);
+
+    function createRow(id, parentId, iconId, cells) {
+      return {
+        id: id,
+        parentRow: parentId,
+        iconId: iconId,
+        cells: cells
+      };
+    }
+
+  }
+
+  _scrumbleOrder(rows) {
+    return rows.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+
+  _onAddRowMenuAction() {
+    var id = this.rowNo++,
+      parentId = null,
+      selectedRow = this.table.selectedRow();
+    if (selectedRow) {
+      parentId = selectedRow.id;
+    }
+
+    this.table.insertRow({
       id: id,
       parentRow: parentId,
-      iconId: iconId,
-      cells: cells
-    };
+      iconId: null,
+      cells: [
+        'newRow' + id,
+        'Any title',
+        '20.10.2015'
+      ]
+    });
   }
 
-}
-
-_scrumbleOrder(rows) {
-  return rows.sort(function(a, b) {
-    return 0.5 - Math.random();
-  });
-}
-
-_onAddRowMenuAction() {
-  var id = this.rowNo++,
-    parentId = null,
-    selectedRow = this.table.selectedRow();
-  if (selectedRow) {
-    parentId = selectedRow.id;
+  _onDeleteRowMenuAction() {
+    this.table.deleteRows(this.table.selectedRows);
   }
 
-  this.table.insertRow({
-    id: id,
-    parentRow: parentId,
-    iconId: null,
-    cells: [
-      'newRow' + id,
-      'Any title',
-      '20.10.2015'
-    ]
-  });
-}
-
-_onDeleteRowMenuAction() {
-  this.table.deleteRows(this.table.selectedRows);
-}
-
-_onToggleGroupNoColumnMenuAction() {
-  var column = this.table.columnById('GroupNo');
-  column.setVisible(!column.visible);
-}
+  _onToggleGroupNoColumnMenuAction() {
+    var column = this.table.columnById('GroupNo');
+    column.setVisible(!column.visible);
+  }
 }

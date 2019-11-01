@@ -13,44 +13,44 @@ import FileChooserFieldFormModel from './FileChooserFieldFormModel';
 
 export default class FileChooserFieldForm extends Form {
 
-constructor() {
-  super();
-}
-
-
-_jsonModel() {
-  return models.get(FileChooserFieldFormModel);
-}
-
-_init(model) {
-  super._init( model);
-
-  var fileChooserField = this.widget('FileChooserField');
-
-  var acceptTypesField = this.widget('AcceptTypesField');
-  acceptTypesField.setValue(fileChooserField.acceptTypes);
-  acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
-
-  var maximumUploadSizeField = this.widget('MaximumUploadSizeField');
-  maximumUploadSizeField.setValue(fileChooserField.maximumUploadSize);
-  maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
-
-  this.widget('ValueFieldPropertiesBox').setField(fileChooserField);
-  this.widget('FormFieldPropertiesBox').setField(fileChooserField);
-  this.widget('GridDataBox').setField(fileChooserField);
-  this.widget('WidgetActionsBox').setField(fileChooserField);
-  this.widget('EventsTab').setField(fileChooserField);
-}
-
-_onAcceptTypesPropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.widget('FileChooserField').setAcceptTypes(event.newValue);
+  constructor() {
+    super();
   }
-}
 
-_onMaximumUploadSizePropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.widget('FileChooserField').setMaximumUploadSize(event.newValue);
+
+  _jsonModel() {
+    return models.get(FileChooserFieldFormModel);
   }
-}
+
+  _init(model) {
+    super._init(model);
+
+    var fileChooserField = this.widget('FileChooserField');
+
+    var acceptTypesField = this.widget('AcceptTypesField');
+    acceptTypesField.setValue(fileChooserField.acceptTypes);
+    acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
+
+    var maximumUploadSizeField = this.widget('MaximumUploadSizeField');
+    maximumUploadSizeField.setValue(fileChooserField.maximumUploadSize);
+    maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
+
+    this.widget('ValueFieldPropertiesBox').setField(fileChooserField);
+    this.widget('FormFieldPropertiesBox').setField(fileChooserField);
+    this.widget('GridDataBox').setField(fileChooserField);
+    this.widget('WidgetActionsBox').setField(fileChooserField);
+    this.widget('EventsTab').setField(fileChooserField);
+  }
+
+  _onAcceptTypesPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.widget('FileChooserField').setAcceptTypes(event.newValue);
+    }
+  }
+
+  _onMaximumUploadSizePropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.widget('FileChooserField').setMaximumUploadSize(event.newValue);
+    }
+  }
 }

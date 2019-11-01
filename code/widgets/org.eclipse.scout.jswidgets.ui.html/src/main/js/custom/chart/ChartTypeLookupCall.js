@@ -13,21 +13,21 @@ import {Chart} from '../../index';
 
 export default class ChartTypeLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return ChartTypeLookupCall.DATA;
-}
+  _data() {
+    return ChartTypeLookupCall.DATA;
+  }
 
-static DATA = [
-  [Chart.Type.PIE, 'Pie'],
-  [Chart.Type.LINE, 'Line'],
-  [Chart.Type.DOUGHNUT, 'Doughnut'],
-  [Chart.Type.POLAR_AREA, 'Polar Area']
+  static DATA = [
+    [Chart.Type.PIE, 'Pie'],
+    [Chart.Type.LINE, 'Line'],
+    [Chart.Type.DOUGHNUT, 'Doughnut'],
+    [Chart.Type.POLAR_AREA, 'Polar Area']
 
 
-];
+  ];
 }

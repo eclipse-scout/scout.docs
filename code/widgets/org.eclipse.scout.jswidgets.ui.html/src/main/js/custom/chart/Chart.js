@@ -14,72 +14,72 @@ import * as $ from 'jquery';
 
 export default class Chart extends Widget {
 
-constructor() {
-  super();
-  this.chart = null;
-  this.chartConfig = null;
+  constructor() {
+    super();
+    this.chart = null;
+    this.chartConfig = null;
 
-  // default config
-  this.config = {
-    type: Chart.Type.PIE,
-    options: {
-      elements: {
-        arc: {
-          borderWidth: 1
-        }
-      },
-      layout: {
-        padding: {
-          left: 20,
-          right: 20,
-          top: 20,
-          bottom: 20
+    // default config
+    this.config = {
+      type: Chart.Type.PIE,
+      options: {
+        elements: {
+          arc: {
+            borderWidth: 1
+          }
+        },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
+          }
         }
       }
-    }
+    };
+  }
+
+
+  static Type = {
+    PIE: 'pie',
+    LINE: 'line',
+    DOUGHNUT: 'doughnut',
+    POLAR_AREA: 'polarArea'
   };
-}
 
-
-static Type = {
-  PIE: 'pie',
-  LINE: 'line',
-  DOUGHNUT: 'doughnut',
-  POLAR_AREA: 'polarArea'
-};
-
-_init(model) {
-  super._init( model);
-  this.config = $.extend(true, this.config, model.config);
-}
-
-_render() {
-  this.$container = this.$parent.appendElement('<canvas>', 'chart');
-  this._renderConfig();
-  this._renderData();
-}
-
-setData(data) {
-  this.setProperty('data', data);
-}
-
-_renderData() {
-  if (!this.data) {
-    return;
+  _init(model) {
+    super._init(model);
+    this.config = $.extend(true, this.config, model.config);
   }
-  $.extend(true, this.config.data, this.data);
-  this.chart.update();
-}
 
-setConfig(config) {
-  this.setProperty('config', config);
-}
-
-
-_renderConfig() {
-  if (this.chart) {
-    this.chart.destroy();
+  _render() {
+    this.$container = this.$parent.appendElement('<canvas>', 'chart');
+    this._renderConfig();
+    this._renderData();
   }
-  this.chart = new ChartJs(this.$container[0], this.config); // jshint ignore:line
-}
+
+  setData(data) {
+    this.setProperty('data', data);
+  }
+
+  _renderData() {
+    if (!this.data) {
+      return;
+    }
+    $.extend(true, this.config.data, this.data);
+    this.chart.update();
+  }
+
+  setConfig(config) {
+    this.setProperty('config', config);
+  }
+
+
+  _renderConfig() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new ChartJs(this.$container[0], this.config); // jshint ignore:line
+  }
 }

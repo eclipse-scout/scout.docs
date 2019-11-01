@@ -1,11 +1,11 @@
 export default function() {
-  return  {
-   id: 'jswidgets.TabBoxAddTabItemBox',
-   objectType: 'GroupBox',
-   label: 'Add Tab Item',
-   expandable: true,
-   gridColumnCount: 2,
-   fields: [
+  return {
+    id: 'jswidgets.TabBoxAddTabItemBox',
+    objectType: 'GroupBox',
+    label: 'Add Tab Item',
+    expandable: true,
+    gridColumnCount: 2,
+    fields: [
       {
         id: 'AddTabItem.Label',
         objectType: 'StringField',
@@ -28,6 +28,6 @@ export default function() {
         processButton: false,
         keyStroke: 'ctrl-insert'
       }
-   ]
- };
+    ]
+  };
 }

@@ -12,17 +12,17 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class LogicalGridLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return LogicalGridLookupCall.DATA;
-}
+  _data() {
+    return LogicalGridLookupCall.DATA;
+  }
 
-static DATA = [
-  ['scout.HorizontalGrid', 'Horizontal'],
-  ['scout.VerticalSmartGrid', 'Vertical (Smart)']
-];
+  static DATA = [
+    ['scout.HorizontalGrid', 'Horizontal'],
+    ['scout.VerticalSmartGrid', 'Vertical (Smart)']
+  ];
 }

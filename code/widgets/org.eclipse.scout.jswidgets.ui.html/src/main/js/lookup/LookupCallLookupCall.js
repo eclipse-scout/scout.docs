@@ -12,47 +12,47 @@ import {StaticLookupCall, LookupCall, arrays, scout, QueryBy} from '@eclipse-sco
 
 export default class LookupCallLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
-
-
-_queryByKey(deferred, key) {
-  if (key instanceof LookupCall) {
-    deferred.resolve({
-      queryBy: QueryBy.KEY,
-      lookupRows: [{
-        key: key,
-        text: key.objectType,
-        enabled: true
-      }]
-    });
-    return;
+  constructor() {
+    super();
   }
-  var data = arrays.find(this.data, function(data) {
-    return data[0] === key;
-  });
-  if (data) {
-    deferred.resolve({
-      queryBy: QueryBy.KEY,
-      lookupRows: [this._dataToLookupRow(data)]
-    });
-  } else {
-    deferred.reject();
-  }
-}
 
-_data() {
-  return [
-    [scout.create('jswidgets.LocaleLookupCall', {
-      session: this.session
-    }), 'jswidgets.LocaleLookupCall', 1],
-    [scout.create('jswidgets.RainbowLookupCall', {
-      session: this.session
-    }), 'jswidgets.RainbowLookupCall', 1],
-    [scout.create('jswidgets.SalutationLookupCall', {
-      session: this.session
-    }), 'jswidgets.SalutationLookupCall', 1]
-  ];
-}
+
+  _queryByKey(deferred, key) {
+    if (key instanceof LookupCall) {
+      deferred.resolve({
+        queryBy: QueryBy.KEY,
+        lookupRows: [{
+          key: key,
+          text: key.objectType,
+          enabled: true
+        }]
+      });
+      return;
+    }
+    var data = arrays.find(this.data, function(data) {
+      return data[0] === key;
+    });
+    if (data) {
+      deferred.resolve({
+        queryBy: QueryBy.KEY,
+        lookupRows: [this._dataToLookupRow(data)]
+      });
+    } else {
+      deferred.reject();
+    }
+  }
+
+  _data() {
+    return [
+      [scout.create('jswidgets.LocaleLookupCall', {
+        session: this.session
+      }), 'jswidgets.LocaleLookupCall', 1],
+      [scout.create('jswidgets.RainbowLookupCall', {
+        session: this.session
+      }), 'jswidgets.RainbowLookupCall', 1],
+      [scout.create('jswidgets.SalutationLookupCall', {
+        session: this.session
+      }), 'jswidgets.SalutationLookupCall', 1]
+    ];
+  }
 }

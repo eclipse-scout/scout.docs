@@ -12,33 +12,33 @@ import {TileOutlineOverview, scout, App} from '@eclipse-scout/core';
 
 export default class WidgetsOutlineOverview extends TileOutlineOverview {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_render() {
-  super._render();
-  this.$container.addClass('widgets-outline-overview');
+  _render() {
+    super._render();
+    this.$container.addClass('widgets-outline-overview');
 
-  var title = this.session.text('AppWelcome');
-  this.$title.text(title);
+    var title = this.session.text('AppWelcome');
+    this.$title.text(title);
 
-  var description = this.session.text('AppDescription', App.get().scoutVersion);
-  this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
-  this.$description.addClass('prevent-initial-focus');
-}
+    var description = this.session.text('AppDescription', App.get().scoutVersion);
+    this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
+    this.$description.addClass('prevent-initial-focus');
+  }
 
-_createPageTileGrid() {
-  return scout.create('PageTileGrid', {
-    parent: this,
-    outline: this.outline,
-    layoutConfig: {
-      hgap: 12,
-      vgap: 12,
-      columnWidth: 150,
-      rowHeight: 90
-    }
-  });
-}
+  _createPageTileGrid() {
+    return scout.create('PageTileGrid', {
+      parent: this,
+      outline: this.outline,
+      layoutConfig: {
+        hgap: 12,
+        vgap: 12,
+        columnWidth: 150,
+        rowHeight: 90
+      }
+    });
+  }
 }

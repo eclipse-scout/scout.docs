@@ -14,30 +14,30 @@ import {LogicalGridLayoutConfigBox} from '../index';
 
 export default class TileGridLayoutConfigBox extends LogicalGridLayoutConfigBox {
 
-constructor() {
-  super();
-}
-
-
-_jsonModel() {
-  return models.extend(TileGridLayoutConfigBoxModel(this), super._jsonModel());
-}
-
-_init(model) {
-  super._init( model);
-
-  this.widget('MaxWidthField').on('propertyChange', this._onPropertyChange.bind(this));
-}
-
-initLayoutDefaults() {
-  super.initLayoutDefaults();
-  this.widget('MaxWidthField').setValue(this.getBodyLayout().maxWidth);
-}
-
-_fillLayoutConfigByEvent(layoutConfig, event) {
-  super._fillLayoutConfigByEvent( layoutConfig, event);
-  if (event.source.id === 'MaxWidthField') {
-    layoutConfig.maxWidth = event.newValue;
+  constructor() {
+    super();
   }
-}
+
+
+  _jsonModel() {
+    return models.extend(TileGridLayoutConfigBoxModel(this), super._jsonModel());
+  }
+
+  _init(model) {
+    super._init(model);
+
+    this.widget('MaxWidthField').on('propertyChange', this._onPropertyChange.bind(this));
+  }
+
+  initLayoutDefaults() {
+    super.initLayoutDefaults();
+    this.widget('MaxWidthField').setValue(this.getBodyLayout().maxWidth);
+  }
+
+  _fillLayoutConfigByEvent(layoutConfig, event) {
+    super._fillLayoutConfigByEvent(layoutConfig, event);
+    if (event.source.id === 'MaxWidthField') {
+      layoutConfig.maxWidth = event.newValue;
+    }
+  }
 }

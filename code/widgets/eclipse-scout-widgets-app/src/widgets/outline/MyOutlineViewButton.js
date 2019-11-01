@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import { OutlineViewButton } from '@eclipse-scout/eclipse-scout';
+import {OutlineViewButton} from '@eclipse-scout/eclipse-scout';
 
 export default class MyOutlineViewButton extends OutlineViewButton {
   _init(model) {

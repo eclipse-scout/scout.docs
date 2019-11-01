@@ -14,67 +14,67 @@ import {TabItemLookupCall} from '../index';
 
 export default class TabBoxProperties extends TabItem {
 
-constructor() {
-  super();
-  this.tabBox = null;
-}
-
-
-_jsonModel() {
-  return models.get(TabBoxPropertiesModel);
-}
-
-_init(model) {
-  super._init( model);
-  this._setTabBox(this.tabBox);
-}
-
-setTabBox(tabBox) {
-  this.setProperty('tabBox', tabBox);
-}
-
-_setTabBox(tabBox) {
-  this._setProperty('tabBox', tabBox);
-  if (!this.tabBox) {
-    return;
+  constructor() {
+    super();
+    this.tabBox = null;
   }
 
-  this.tabBox.on('propertyChange', this._onTabBoxPropertyChange.bind(this));
 
-  this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
-  this.selectedTabField.lookupCall = new TabItemLookupCall(this.tabBox);
-  this.selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
-
-  this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
-  this.tabAreaStyleField.on('propertyChange', this._onTabAreaStyleChange.bind(this));
-
-  this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
-  this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
-
-  this._updateSelectedTab();
-}
-
-_onSelectedTabChange(event) {
-  if (event.propertyName === 'value') {
-    this.tabBox.setSelectedTab(event.newValue);
+  _jsonModel() {
+    return models.get(TabBoxPropertiesModel);
   }
-}
 
-_onTabAreaStyleChange(event) {
-  if (event.propertyName === 'value') {
-    this.tabBox.setTabAreaStyle(event.newValue);
+  _init(model) {
+    super._init(model);
+    this._setTabBox(this.tabBox);
   }
-}
 
-_onTabBoxPropertyChange(event) {
-  if (event.propertyName === 'selectedTab') {
+  setTabBox(tabBox) {
+    this.setProperty('tabBox', tabBox);
+  }
+
+  _setTabBox(tabBox) {
+    this._setProperty('tabBox', tabBox);
+    if (!this.tabBox) {
+      return;
+    }
+
+    this.tabBox.on('propertyChange', this._onTabBoxPropertyChange.bind(this));
+
+    this.selectedTabField = this.widget('TabBoxProperties.SelectedTabField');
+    this.selectedTabField.lookupCall = new TabItemLookupCall(this.tabBox);
+    this.selectedTabField.on('propertyChange', this._onSelectedTabChange.bind(this));
+
+    this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
+    this.tabAreaStyleField.on('propertyChange', this._onTabAreaStyleChange.bind(this));
+
+    this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
+    this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
+
     this._updateSelectedTab();
   }
-}
 
-_updateSelectedTab() {
-  var selectedTab = this.tabBox.selectedTab;
-  this.selectedTabField.setValue(selectedTab);
-  this.selectedTabField.setEnabled(this.tabBox.tabItems.length > 0);
-}
+  _onSelectedTabChange(event) {
+    if (event.propertyName === 'value') {
+      this.tabBox.setSelectedTab(event.newValue);
+    }
+  }
+
+  _onTabAreaStyleChange(event) {
+    if (event.propertyName === 'value') {
+      this.tabBox.setTabAreaStyle(event.newValue);
+    }
+  }
+
+  _onTabBoxPropertyChange(event) {
+    if (event.propertyName === 'selectedTab') {
+      this._updateSelectedTab();
+    }
+  }
+
+  _updateSelectedTab() {
+    var selectedTab = this.tabBox.selectedTab;
+    this.selectedTabField.setValue(selectedTab);
+    this.selectedTabField.setEnabled(this.tabBox.tabItems.length > 0);
+  }
 }

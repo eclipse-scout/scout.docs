@@ -12,17 +12,17 @@ import {StaticLookupCall, Action} from '@eclipse-scout/core';
 
 export default class ActionStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return ActionStyleLookupCall.DATA;
-}
+  _data() {
+    return ActionStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Action.ActionStyle.DEFAULT, 'default'],
-  [Action.ActionStyle.BUTTON, 'button']
-];
+  static DATA = [
+    [Action.ActionStyle.DEFAULT, 'default'],
+    [Action.ActionStyle.BUTTON, 'button']
+  ];
 }

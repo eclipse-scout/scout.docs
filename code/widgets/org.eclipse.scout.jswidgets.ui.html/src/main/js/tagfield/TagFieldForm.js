@@ -13,31 +13,31 @@ import {Form, models} from '@eclipse-scout/core';
 
 export default class TagFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(TagFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(TagFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  var tagField = this.widget('TagField');
+    var tagField = this.widget('TagField');
 
-  this.widget('ValueField').setEnabled(true);
-  this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
-    if (!newValue) {
-      return newValue;
-    }
-    return newValue.split(',');
-  };
-  this.widget('ValueFieldPropertiesBox').setField(tagField);
-  this.widget('FormFieldPropertiesBox').setField(tagField);
-  this.widget('GridDataBox').setField(tagField);
-  this.widget('WidgetActionsBox').setField(tagField);
-  this.widget('EventsTab').setField(tagField);
-}
+    this.widget('ValueField').setEnabled(true);
+    this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
+      if (!newValue) {
+        return newValue;
+      }
+      return newValue.split(',');
+    };
+    this.widget('ValueFieldPropertiesBox').setField(tagField);
+    this.widget('FormFieldPropertiesBox').setField(tagField);
+    this.widget('GridDataBox').setField(tagField);
+    this.widget('WidgetActionsBox').setField(tagField);
+    this.widget('EventsTab').setField(tagField);
+  }
 }

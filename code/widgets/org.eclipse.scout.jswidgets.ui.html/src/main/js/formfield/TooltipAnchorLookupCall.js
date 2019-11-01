@@ -12,17 +12,17 @@ import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
 export default class TooltipAnchorLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return TooltipAnchorLookupCall.DATA;
-}
+  _data() {
+    return TooltipAnchorLookupCall.DATA;
+  }
 
-static DATA = [
-  [FormField.TooltipAnchor.DEFAULT, 'default'],
-  [FormField.TooltipAnchor.ON_FIELD, 'on field']
-];
+  static DATA = [
+    [FormField.TooltipAnchor.DEFAULT, 'default'],
+    [FormField.TooltipAnchor.ON_FIELD, 'on field']
+  ];
 }

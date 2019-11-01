@@ -12,18 +12,18 @@ import {StaticLookupCall, Status} from '@eclipse-scout/core';
 
 export default class StatusSeverityLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return StatusSeverityLookupCall.DATA;
-}
+  _data() {
+    return StatusSeverityLookupCall.DATA;
+  }
 
-static DATA = [
-  [Status.Severity.INFO, 'info'],
-  [Status.Severity.WARNING, 'warning'],
-  [Status.Severity.ERROR, 'error']
-];
+  static DATA = [
+    [Status.Severity.INFO, 'info'],
+    [Status.Severity.WARNING, 'warning'],
+    [Status.Severity.ERROR, 'error']
+  ];
 }

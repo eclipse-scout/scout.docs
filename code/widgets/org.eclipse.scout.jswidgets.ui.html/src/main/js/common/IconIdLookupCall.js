@@ -12,19 +12,19 @@ import {StaticLookupCall, strings} from '@eclipse-scout/core';
 
 export default class IconIdLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return Object.keys(scout.icons)
-    .filter(function(name) {
-      var value = scout.icons[name];
-      return typeof value === 'string' && strings.startsWith(value, 'font:');
-    }).map(function(name, i) {
-      var iconId = scout.icons[name];
-      return [iconId, name];
-    });
-}
+  _data() {
+    return Object.keys(scout.icons)
+      .filter(function(name) {
+        var value = scout.icons[name];
+        return typeof value === 'string' && strings.startsWith(value, 'font:');
+      }).map(function(name, i) {
+        var iconId = scout.icons[name];
+        return [iconId, name];
+      });
+  }
 }

@@ -14,23 +14,23 @@ import DesktopModel from './desktop/DesktopModel';
 
 export default class App extends App_1 {
 
-constructor() {
-  super();
-  this.scoutVersion = '10.0';
-}
+  constructor() {
+    super();
+    this.scoutVersion = '10.0';
+  }
 
 
-_createDesktop(parent) {
-  var desktop = scout.create('Desktop',
-    models.get(DesktopModel, parent));
+  _createDesktop(parent) {
+    var desktop = scout.create('Desktop',
+      models.get(DesktopModel, parent));
 
-  router.register(new WidgetsRoute(desktop));
-  router.activate();
+    router.register(new WidgetsRoute(desktop));
+    router.activate();
 
-  ResponsiveManager.get().registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {
-    widget: desktop
-  }));
+    ResponsiveManager.get().registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {
+      widget: desktop
+    }));
 
-  return desktop;
-}
+    return desktop;
+  }
 }

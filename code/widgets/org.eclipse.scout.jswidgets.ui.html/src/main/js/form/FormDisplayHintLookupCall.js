@@ -12,18 +12,18 @@ import {StaticLookupCall, Form} from '@eclipse-scout/core';
 
 export default class FormDisplayHintLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return FormDisplayHintLookupCall.DATA;
-}
+  _data() {
+    return FormDisplayHintLookupCall.DATA;
+  }
 
-static DATA = [
-  [Form.DisplayHint.DIALOG, 'dialog'],
-  [Form.DisplayHint.VIEW, 'view'],
-  [Form.DisplayHint.POPUP_WINDOW, 'popupWindow']
-];
+  static DATA = [
+    [Form.DisplayHint.DIALOG, 'dialog'],
+    [Form.DisplayHint.VIEW, 'view'],
+    [Form.DisplayHint.POPUP_WINDOW, 'popupWindow']
+  ];
 }

@@ -12,18 +12,18 @@ import {StaticLookupCall, ValueField} from '@eclipse-scout/core';
 
 export default class ClearableStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return ClearableStyleLookupCall.DATA;
-}
+  _data() {
+    return ClearableStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [ValueField.Clearable.FOCUSED, 'Focused'],
-  [ValueField.Clearable.ALWAYS, 'Always'],
-  [ValueField.Clearable.NEVER, 'Never']
-];
+  static DATA = [
+    [ValueField.Clearable.FOCUSED, 'Focused'],
+    [ValueField.Clearable.ALWAYS, 'Always'],
+    [ValueField.Clearable.NEVER, 'Never']
+  ];
 }

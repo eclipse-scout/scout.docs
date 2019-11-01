@@ -4,19 +4,19 @@ import * as $ from 'jquery';
 
 export default class SamplePageWithNodes extends PageWithNodes {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(SamplePageWithNodesModel);
-}
+  _jsonModel() {
+    return models.get(SamplePageWithNodesModel);
+  }
 
-_createChildPages() {
-  return $.resolvedPromise([
-    scout.create('jswidgets.SamplePageWithTable', this._pageParam()),
-    scout.create('jswidgets.SamplePageWithNodes', this._pageParam())
-  ]);
-}
+  _createChildPages() {
+    return $.resolvedPromise([
+      scout.create('jswidgets.SamplePageWithTable', this._pageParam()),
+      scout.create('jswidgets.SamplePageWithNodes', this._pageParam())
+    ]);
+  }
 }

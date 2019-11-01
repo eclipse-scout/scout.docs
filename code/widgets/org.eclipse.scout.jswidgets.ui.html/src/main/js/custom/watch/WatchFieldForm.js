@@ -13,38 +13,38 @@ import WatchFieldFormModel from './WatchFieldFormModel';
 
 export default class WatchFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(WatchFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(WatchFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
-  var watchField = this.widget('WatchField');
+  _init(model) {
+    super._init(model);
+    var watchField = this.widget('WatchField');
 
-  this.widget('FormFieldPropertiesBox').setField(watchField);
-  this.widget('GridDataBox').setField(watchField);
-  this.widget('WidgetActionsBox').setField(watchField);
-  this.widget('EventsTab').setField(watchField);
-}
+    this.widget('FormFieldPropertiesBox').setField(watchField);
+    this.widget('GridDataBox').setField(watchField);
+    this.widget('WidgetActionsBox').setField(watchField);
+    this.widget('EventsTab').setField(watchField);
+  }
 
-_onSelectedTabChange(event) {
-  if (event.propertyName === 'value') {
-    if (event.newValue) {
-      this.widget('TabBox').selectTabById(event.newValue);
-    } else {
-      this.widget('TabBox').setSelectedTab();
+  _onSelectedTabChange(event) {
+    if (event.propertyName === 'value') {
+      if (event.newValue) {
+        this.widget('TabBox').selectTabById(event.newValue);
+      } else {
+        this.widget('TabBox').setSelectedTab();
+      }
     }
   }
-}
 
-_onFieldPropertyChange(event) {
-  if (event.propertyName === 'selectedTab') {
-    this.widget('SelectedTabField').setValue((event.newValue) ? (event.newValue.id) : (null));
+  _onFieldPropertyChange(event) {
+    if (event.propertyName === 'selectedTab') {
+      this.widget('SelectedTabField').setValue((event.newValue) ? (event.newValue.id) : (null));
+    }
   }
-}
 }

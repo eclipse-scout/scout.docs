@@ -12,17 +12,17 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class TileTypeLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return TileTypeLookupCall.DATA;
-}
+  _data() {
+    return TileTypeLookupCall.DATA;
+  }
 
-static DATA = [
-  ['default', 'HtmlTile with default style'],
-  ['simple', 'CustomTile with custom style']
-];
+  static DATA = [
+    ['default', 'HtmlTile with default style'],
+    ['simple', 'CustomTile with custom style']
+  ];
 }

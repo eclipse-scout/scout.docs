@@ -13,26 +13,26 @@ import TableSmartFieldFormModel from './TableSmartFieldFormModel';
 
 export default class TableSmartFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(TableSmartFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(TableSmartFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.smartField = this.widget('TableSmartField');
+    this.smartField = this.widget('TableSmartField');
 
-  this.widget('SmartFieldPropertiesBox').setField(this.smartField);
-  this.widget('LookupCallField').setVisible(false);
-  this.widget('ValueFieldPropertiesBox').setField(this.smartField);
-  this.widget('FormFieldPropertiesBox').setField(this.smartField);
-  this.widget('GridDataBox').setField(this.smartField);
-  this.widget('WidgetActionsBox').setField(this.smartField);
-  this.widget('EventsTab').setField(this.smartField);
-}
+    this.widget('SmartFieldPropertiesBox').setField(this.smartField);
+    this.widget('LookupCallField').setVisible(false);
+    this.widget('ValueFieldPropertiesBox').setField(this.smartField);
+    this.widget('FormFieldPropertiesBox').setField(this.smartField);
+    this.widget('GridDataBox').setField(this.smartField);
+    this.widget('WidgetActionsBox').setField(this.smartField);
+    this.widget('EventsTab').setField(this.smartField);
+  }
 }

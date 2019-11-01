@@ -12,17 +12,17 @@ import {StaticLookupCall, Tile} from '@eclipse-scout/core';
 
 export default class ColorSchemeLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return ColorSchemeLookupCall.DATA;
-}
+  _data() {
+    return ColorSchemeLookupCall.DATA;
+  }
 
-static DATA = [
-  [Tile.ColorSchemeId.DEFAULT, 'default'],
-  [Tile.ColorSchemeId.ALTERNATIVE, 'alternative']
-];
+  static DATA = [
+    [Tile.ColorSchemeId.DEFAULT, 'default'],
+    [Tile.ColorSchemeId.ALTERNATIVE, 'alternative']
+  ];
 }

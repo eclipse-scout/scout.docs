@@ -11,42 +11,42 @@ import {BeanField} from '@eclipse-scout/core';
 
 export default class ExampleBeanField extends BeanField {
 
-constructor() {
-  super();
-}
-
-
-_render() {
-  super._render();
-  this.$container.addClass('example-bean-field');
-}
-
-/**
- * @override
- */
-_renderValue() {
-  this.$field.empty();
-  if (!this.value) {
-    return;
+  constructor() {
+    super();
   }
 
-  var $header = this.$field.appendDiv('example-bean-field-header')
-    .text(this.value.header);
-  var $content = this.$field.appendDiv('example-bean-field-content');
-  $content.appendElement('<p>')
-    .text(this.value.description);
 
-  $content.appendElement('<p>')
-    .text(this.session.text('ExampleBeanFieldUiText'));
+  _render() {
+    super._render();
+    this.$container.addClass('example-bean-field');
+  }
 
-  $content.appendElement('<p>')
-    .text(this.session.text('ExampleBeanFieldAppLinkText') + ' ')
-    .appendAppLink(this.value.appLink);
+  /**
+   * @override
+   */
+  _renderValue() {
+    this.$field.empty();
+    if (!this.value) {
+      return;
+    }
 
-  $content.appendElement('<p>')
-    .appLink(this.value.appLink.ref)
-    .appendElement('<img>')
-    .attr('src', this.value.image)
-    .addClass('example-bean-field-image');
-}
+    var $header = this.$field.appendDiv('example-bean-field-header')
+      .text(this.value.header);
+    var $content = this.$field.appendDiv('example-bean-field-content');
+    $content.appendElement('<p>')
+      .text(this.value.description);
+
+    $content.appendElement('<p>')
+      .text(this.session.text('ExampleBeanFieldUiText'));
+
+    $content.appendElement('<p>')
+      .text(this.session.text('ExampleBeanFieldAppLinkText') + ' ')
+      .appendAppLink(this.value.appLink);
+
+    $content.appendElement('<p>')
+      .appLink(this.value.appLink.ref)
+      .appendElement('<img>')
+      .attr('src', this.value.image)
+      .addClass('example-bean-field-image');
+  }
 }

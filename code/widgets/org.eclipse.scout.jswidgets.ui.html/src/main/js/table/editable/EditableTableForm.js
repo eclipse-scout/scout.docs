@@ -12,26 +12,26 @@ import {TableForm} from '../../index';
 
 export default class EditableTableForm extends TableForm {
 
-constructor() {
-  super();
-}
-
-
-_init(model) {
-  super._init( model);
-
-  this.table.columns.forEach(function(column) {
-    if (column.id === 'IconColumn' || column.id === 'HtmlColumn') {
-      return;
-    }
-    column.setEditable(true);
-  });
-
-  // Update field in column properties box (there are no property change listeners yet)
-  var column = this.widget('Column.PropertiesBox').column;
-  if (column) {
-    var editableField = this.widget('EditableField');
-    editableField.setValue(column.editable);
+  constructor() {
+    super();
   }
-}
+
+
+  _init(model) {
+    super._init(model);
+
+    this.table.columns.forEach(function(column) {
+      if (column.id === 'IconColumn' || column.id === 'HtmlColumn') {
+        return;
+      }
+      column.setEditable(true);
+    });
+
+    // Update field in column properties box (there are no property change listeners yet)
+    var column = this.widget('Column.PropertiesBox').column;
+    if (column) {
+      var editableField = this.widget('EditableField');
+      editableField.setValue(column.editable);
+    }
+  }
 }

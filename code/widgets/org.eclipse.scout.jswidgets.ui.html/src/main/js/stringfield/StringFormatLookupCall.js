@@ -12,17 +12,17 @@ import {StaticLookupCall, StringField} from '@eclipse-scout/core';
 
 export default class StringFormatLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return StringFormatLookupCall.DATA;
-}
+  _data() {
+    return StringFormatLookupCall.DATA;
+  }
 
-static DATA = [
-  [StringField.Format.UPPER, 'Upper Case'],
-  [StringField.Format.LOWER, 'Lower Case']
-];
+  static DATA = [
+    [StringField.Format.UPPER, 'Upper Case'],
+    [StringField.Format.LOWER, 'Lower Case']
+  ];
 }

@@ -12,9 +12,9 @@ import {FormFieldAdapter} from '@eclipse-scout/core';
 
 export default class ChartFieldAdapter extends FormFieldAdapter {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 }
 

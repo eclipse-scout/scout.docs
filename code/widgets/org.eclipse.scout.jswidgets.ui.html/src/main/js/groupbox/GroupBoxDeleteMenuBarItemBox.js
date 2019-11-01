@@ -14,59 +14,59 @@ import GroupBoxDeleteMenuBarItemBoxModel from './GroupBoxDeleteMenuBarItemBoxMod
 
 export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
 
-constructor() {
-  super();
-  this.field = null;
-  this.dynamicMenuBarItemCounter = 0;
-}
-
-
-_jsonModel() {
-  return models.get(GroupBoxDeleteMenuBarItemBoxModel);
-}
-
-_init(model) {
-  super._init( model);
-  this._setField(this.field);
-}
-
-setField(field) {
-  this.setProperty('field', field);
-}
-
-_setField(field) {
-  this._setProperty('field', field);
-  if (!this.field) {
-    return;
+  constructor() {
+    super();
+    this.field = null;
+    this.dynamicMenuBarItemCounter = 0;
   }
 
-  this.targetField = this.widget('ToDeleteMenuBarItem');
-  this.targetField.setLookupCall(new MenuBarItemLookupCall(this.field));
-  this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
 
-  this.deleteFieldButton = this.widget('DeleteButton');
-  this.deleteFieldButton.on('click', this._onDeleteMenuBarItemButtonClick.bind(this));
-}
-
-_onTargetFieldPropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.deleteFieldButton.setEnabled(!!event.newValue);
-  }
-}
-
-_onDeleteMenuBarItemButtonClick() {
-  var newMenuItems = this.field.menuBar.menuItems.slice(),
-    index = this.field.menuBar.menuItems.indexOf(this.targetField.value);
-
-  if (index < 0) {
-    return;
+  _jsonModel() {
+    return models.get(GroupBoxDeleteMenuBarItemBoxModel);
   }
 
-  newMenuItems.splice(index, 1);
-  this.field._setMenus(newMenuItems);
+  _init(model) {
+    super._init(model);
+    this._setField(this.field);
+  }
 
-  this.targetField.setValue(null);
-  // Validate layout immediately to prevent flickering
-  this.field.validateLayoutTree();
-}
+  setField(field) {
+    this.setProperty('field', field);
+  }
+
+  _setField(field) {
+    this._setProperty('field', field);
+    if (!this.field) {
+      return;
+    }
+
+    this.targetField = this.widget('ToDeleteMenuBarItem');
+    this.targetField.setLookupCall(new MenuBarItemLookupCall(this.field));
+    this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
+
+    this.deleteFieldButton = this.widget('DeleteButton');
+    this.deleteFieldButton.on('click', this._onDeleteMenuBarItemButtonClick.bind(this));
+  }
+
+  _onTargetFieldPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.deleteFieldButton.setEnabled(!!event.newValue);
+    }
+  }
+
+  _onDeleteMenuBarItemButtonClick() {
+    var newMenuItems = this.field.menuBar.menuItems.slice(),
+      index = this.field.menuBar.menuItems.indexOf(this.targetField.value);
+
+    if (index < 0) {
+      return;
+    }
+
+    newMenuItems.splice(index, 1);
+    this.field._setMenus(newMenuItems);
+
+    this.targetField.setValue(null);
+    // Validate layout immediately to prevent flickering
+    this.field.validateLayoutTree();
+  }
 }

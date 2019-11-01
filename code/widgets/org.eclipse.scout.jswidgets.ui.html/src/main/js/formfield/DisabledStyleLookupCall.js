@@ -12,17 +12,17 @@ import {StaticLookupCall, Widget} from '@eclipse-scout/core';
 
 export default class DisabledStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return DisabledStyleLookupCall.DATA;
-}
+  _data() {
+    return DisabledStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Widget.DisabledStyle.DEFAULT, 'default'],
-  [Widget.DisabledStyle.READ_ONLY, 'read only']
-];
+  static DATA = [
+    [Widget.DisabledStyle.DEFAULT, 'default'],
+    [Widget.DisabledStyle.READ_ONLY, 'read only']
+  ];
 }

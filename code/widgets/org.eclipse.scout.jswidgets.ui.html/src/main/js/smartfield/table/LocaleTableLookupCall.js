@@ -13,20 +13,20 @@ import {LocaleLookupCall} from '../../index';
 
 export default class LocaleTableLookupCall extends LocaleLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_dataToLookupRow(data) {
-  var lookupRow = new scout.create('LookupRow', {
-    key: data[0],
-    text: data[1],
-    additionalTableRowData: {
-      tag: data[0]
-    }
-  });
+  _dataToLookupRow(data) {
+    var lookupRow = new scout.create('LookupRow', {
+      key: data[0],
+      text: data[1],
+      additionalTableRowData: {
+        tag: data[0]
+      }
+    });
 
-  return lookupRow;
-}
+    return lookupRow;
+  }
 }

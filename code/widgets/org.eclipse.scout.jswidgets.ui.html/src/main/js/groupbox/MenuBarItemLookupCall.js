@@ -12,48 +12,49 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class MenuBarItemLookupCall extends StaticLookupCall {
 
-constructor(compositeField) {
-  super();
-  this._compositeFieldPropertyChangeHandler = this._onCompositeFieldPropertyChange.bind(this);
-  this._formFieldPropertyChangeHandler = this._onFormFieldPropertyChange.bind(this);
-  this.data = [];
-  this.setCompositeField(compositeField);
-}
+  constructor(compositeField) {
+    super();
+    this._compositeFieldPropertyChangeHandler = this._onCompositeFieldPropertyChange.bind(this);
+    this._formFieldPropertyChangeHandler = this._onFormFieldPropertyChange.bind(this);
+    this.data = [];
+    this.setCompositeField(compositeField);
+  }
 
 
-_data() {
-  return this.data;
-}
+  _data() {
+    return this.data;
+  }
 
-setCompositeField(compositeField) {
-  if (this.compositeField) {
-    this.compositeField.off('propertyChange', this._compositeFieldPropertyChangeHandler);
+  setCompositeField(compositeField) {
+    if (this.compositeField) {
+      this.compositeField.off('propertyChange', this._compositeFieldPropertyChangeHandler);
+      this.compositeField.menus.forEach(function(menu) {
+        menu.off('propertyChange', this._formFieldPropertyChangeHandler);
+      }, this);
+    }
+    this.compositeField = compositeField;
+    this.compositeField.on('propertyChange', this._compositeFieldPropertyChangeHandler);
     this.compositeField.menus.forEach(function(menu) {
-      menu.off('propertyChange', this._formFieldPropertyChangeHandler);
+      menu.on('propertyChange', this._formFieldPropertyChangeHandler);
     }, this);
-  }
-  this.compositeField = compositeField;
-  this.compositeField.on('propertyChange', this._compositeFieldPropertyChangeHandler);
-  this.compositeField.menus.forEach(function(menu) {
-    menu.on('propertyChange', this._formFieldPropertyChangeHandler);
-  }, this);
-  this._rebuildData();
-}
-
-_rebuildData() {
-  this.data = this.compositeField.menus.map(function(menu) {
-    return [menu, menu.text];
-  });
-}
-
-_onCompositeFieldPropertyChange(event) {
-  if (event.propertyName === 'menus') {
     this._rebuildData();
   }
-}
-_onFormFieldPropertyChange(event) {
-  if (event.propertyName === 'label') {
-    this._rebuildData();
+
+  _rebuildData() {
+    this.data = this.compositeField.menus.map(function(menu) {
+      return [menu, menu.text];
+    });
   }
-}
+
+  _onCompositeFieldPropertyChange(event) {
+    if (event.propertyName === 'menus') {
+      this._rebuildData();
+    }
+  }
+
+  _onFormFieldPropertyChange(event) {
+    if (event.propertyName === 'label') {
+      this._rebuildData();
+    }
+  }
 }

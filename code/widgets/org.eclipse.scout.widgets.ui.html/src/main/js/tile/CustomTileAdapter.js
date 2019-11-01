@@ -12,8 +12,8 @@ import {TileAdapter} from '@eclipse-scout/core';
 
 export default class CustomTileAdapter extends TileAdapter {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 }

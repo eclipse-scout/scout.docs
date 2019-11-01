@@ -12,9 +12,9 @@ import {OutlineAdapter} from '@eclipse-scout/core';
 
 export default class WidgetsOutlineAdapter extends OutlineAdapter {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 }
 

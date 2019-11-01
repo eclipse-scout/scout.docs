@@ -13,26 +13,26 @@ import TreeSmartFieldFormModel from './TreeSmartFieldFormModel';
 
 export default class TreeSmartFieldForm extends Form {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(TreeSmartFieldFormModel);
-}
+  _jsonModel() {
+    return models.get(TreeSmartFieldFormModel);
+  }
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.smartField = this.widget('TreeSmartField');
+    this.smartField = this.widget('TreeSmartField');
 
-  this.widget('TreeSmartFieldPropertiesBox').setField(this.smartField);
-  this.widget('LookupCallField').setVisible(false);
-  this.widget('ValueFieldPropertiesBox').setField(this.smartField);
-  this.widget('FormFieldPropertiesBox').setField(this.smartField);
-  this.widget('GridDataBox').setField(this.smartField);
-  this.widget('WidgetActionsBox').setField(this.smartField);
-  this.widget('EventsTab').setField(this.smartField);
-}
+    this.widget('TreeSmartFieldPropertiesBox').setField(this.smartField);
+    this.widget('LookupCallField').setVisible(false);
+    this.widget('ValueFieldPropertiesBox').setField(this.smartField);
+    this.widget('FormFieldPropertiesBox').setField(this.smartField);
+    this.widget('GridDataBox').setField(this.smartField);
+    this.widget('WidgetActionsBox').setField(this.smartField);
+    this.widget('EventsTab').setField(this.smartField);
+  }
 }

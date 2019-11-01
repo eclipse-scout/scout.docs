@@ -13,33 +13,33 @@ import {Form, models} from '@eclipse-scout/core';
 
 export default class CarouselForm extends Form {
 
-constructor() {
-  super();
-}
-
-
-_jsonModel() {
-  return models.get(CarouselFormModel);
-}
-
-_init(model) {
-  super._init( model);
-
-  var carousel = this.widget('Carousel');
-  var statusEnabledField = this.widget('StatusEnabledField');
-  statusEnabledField.setValue(carousel.statusEnabled);
-  statusEnabledField.on('propertyChange', this._onStatusEnabledPropertyChange.bind(this));
-
-  var carouselField = this.widget('CarouselField');
-  this.widget('FormFieldPropertiesBox').setField(carouselField);
-  this.widget('GridDataBox').setField(carouselField);
-  this.widget('WidgetActionsBox').setField(carouselField);
-  this.widget('EventsTab').setField(carousel);
-}
-
-_onStatusEnabledPropertyChange(event) {
-  if (event.propertyName === 'value') {
-    this.widget('Carousel').setStatusEnabled(event.newValue);
+  constructor() {
+    super();
   }
-}
+
+
+  _jsonModel() {
+    return models.get(CarouselFormModel);
+  }
+
+  _init(model) {
+    super._init(model);
+
+    var carousel = this.widget('Carousel');
+    var statusEnabledField = this.widget('StatusEnabledField');
+    statusEnabledField.setValue(carousel.statusEnabled);
+    statusEnabledField.on('propertyChange', this._onStatusEnabledPropertyChange.bind(this));
+
+    var carouselField = this.widget('CarouselField');
+    this.widget('FormFieldPropertiesBox').setField(carouselField);
+    this.widget('GridDataBox').setField(carouselField);
+    this.widget('WidgetActionsBox').setField(carouselField);
+    this.widget('EventsTab').setField(carousel);
+  }
+
+  _onStatusEnabledPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.widget('Carousel').setStatusEnabled(event.newValue);
+    }
+  }
 }

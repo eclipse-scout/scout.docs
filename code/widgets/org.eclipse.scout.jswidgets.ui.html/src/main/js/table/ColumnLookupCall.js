@@ -12,26 +12,26 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class ColumnLookupCall extends StaticLookupCall {
 
-constructor(table) {
-  super();
+  constructor(table) {
+    super();
 
-  this.data = [];
-  this.setTable(table);
-}
+    this.data = [];
+    this.setTable(table);
+  }
 
 
-_data() {
-  return this.data;
-}
+  _data() {
+    return this.data;
+  }
 
-setTable(table) {
-  this.table = table;
-  this._rebuildData();
-}
+  setTable(table) {
+    this.table = table;
+    this._rebuildData();
+  }
 
-_rebuildData() {
-  this.data = this.table.columns.map(function(column) {
-    return [column, column.text];
-  });
-}
+  _rebuildData() {
+    this.data = this.table.columns.map(function(column) {
+      return [column, column.text];
+    });
+  }
 }

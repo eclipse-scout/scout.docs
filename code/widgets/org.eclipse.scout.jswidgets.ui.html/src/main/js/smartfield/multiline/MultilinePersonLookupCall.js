@@ -12,20 +12,20 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class MultilinePersonLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return MultilinePersonLookupCall.DATA;
-}
+  _data() {
+    return MultilinePersonLookupCall.DATA;
+  }
 
-static DATA = [
-  [1, 'Rachel Olson\nEcuador'],
-  [2, 'Stephanie Simmons\nBrazil'],
-  [3, 'Larry Hudson\nJapan'],
-  [4, 'Phyllis Chapman\nRussia'],
-  [5, 'Melissa Nichols\nIndonesia']
-];
+  static DATA = [
+    [1, 'Rachel Olson\nEcuador'],
+    [2, 'Stephanie Simmons\nBrazil'],
+    [3, 'Larry Hudson\nJapan'],
+    [4, 'Phyllis Chapman\nRussia'],
+    [5, 'Melissa Nichols\nIndonesia']
+  ];
 }

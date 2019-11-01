@@ -13,12 +13,12 @@ import WidgetsOutlineModel from './WidgetsOutlineModel';
 
 export default class WidgetsOutline extends Outline {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_jsonModel() {
-  return models.get(WidgetsOutlineModel);
-}
+  _jsonModel() {
+    return models.get(WidgetsOutlineModel);
+  }
 }

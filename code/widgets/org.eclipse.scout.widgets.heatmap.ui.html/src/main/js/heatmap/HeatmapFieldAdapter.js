@@ -12,45 +12,45 @@ import {FormFieldAdapter} from '@eclipse-scout/core';
 
 export default class HeatmapFieldAdapter extends FormFieldAdapter {
 
-constructor() {
-  super();
-}
-
-
-_onWidgetEvent(event) {
-  if (event.type === 'viewParameterChange') {
-    this._onWidgetViewParameterChange(event);
-  } else if (event.type === 'click') {
-    this._onWidgetClick(event);
-  } else {
-    super._onWidgetEvent( event);
+  constructor() {
+    super();
   }
-}
 
-_onWidgetViewParameterChange(event) {
-  this._send('viewParameterChange', {
-    center: event.center,
-    zoomFactor: event.zoomFactor
-  });
-}
 
-_onWidgetClick(event) {
-  this._send('click', {
-    point: event.point
-  });
-}
-
-onModelAction(event) {
-  if (event.type === 'heatPointsAdded') {
-    this._onHeatPointsAdded(event);
-  } else {
-    super.onModelAction( event);
+  _onWidgetEvent(event) {
+    if (event.type === 'viewParameterChange') {
+      this._onWidgetViewParameterChange(event);
+    } else if (event.type === 'click') {
+      this._onWidgetClick(event);
+    } else {
+      super._onWidgetEvent(event);
+    }
   }
-}
 
-_onHeatPointsAdded(event) {
-  event.points.forEach(function(point) {
-    this.widget.addHeatPoint(point);
-  }, this);
-}
+  _onWidgetViewParameterChange(event) {
+    this._send('viewParameterChange', {
+      center: event.center,
+      zoomFactor: event.zoomFactor
+    });
+  }
+
+  _onWidgetClick(event) {
+    this._send('click', {
+      point: event.point
+    });
+  }
+
+  onModelAction(event) {
+    if (event.type === 'heatPointsAdded') {
+      this._onHeatPointsAdded(event);
+    } else {
+      super.onModelAction(event);
+    }
+  }
+
+  _onHeatPointsAdded(event) {
+    event.points.forEach(function(point) {
+      this.widget.addHeatPoint(point);
+    }, this);
+  }
 }

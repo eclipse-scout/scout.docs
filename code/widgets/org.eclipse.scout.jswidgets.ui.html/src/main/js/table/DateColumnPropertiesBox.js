@@ -13,63 +13,63 @@ import DateColumnPropertiesBoxModel from './DateColumnPropertiesBoxModel';
 
 export default class DateColumnPropertiesBox extends GroupBox {
 
-constructor() {
-  super();
-  this.column = null;
-}
-
-
-_jsonModel() {
-  return models.get(DateColumnPropertiesBoxModel);
-}
-
-_init(model) {
-  super._init( model);
-
-  this._setColumn(this.column);
-}
-
-setColumn(column) {
-  this.setProperty('column', column);
-}
-
-_setColumn(column) {
-  this._setProperty('column', column);
-  if (!this.column) {
-    return;
+  constructor() {
+    super();
+    this.column = null;
   }
 
-  var formatField = this.widget('FormatField');
-  formatField.setValue(this.column.format.pattern);
-  formatField.on('propertyChange', this._onPropertyChange.bind(this));
 
-  var groupFormatField = this.widget('GroupFormatField');
-  groupFormatField.setValue(this.column.groupFormat.pattern);
-  groupFormatField.on('propertyChange', this._onPropertyChange.bind(this));
+  _jsonModel() {
+    return models.get(DateColumnPropertiesBoxModel);
+  }
 
-  var hasDateField = this.widget('HasDateField');
-  hasDateField.setValue(this.column.hasDate);
-  hasDateField.on('propertyChange', this._onPropertyChange.bind(this));
+  _init(model) {
+    super._init(model);
 
-  var hasTimeField = this.widget('HasTimeField');
-  hasTimeField.setValue(this.column.hasTime);
-  hasTimeField.on('propertyChange', this._onPropertyChange.bind(this));
-}
+    this._setColumn(this.column);
+  }
 
-_onPropertyChange(event) {
-  if (event.propertyName === 'value' && event.source.id === 'FormatField') {
-    this.column.setFormat(event.newValue);
+  setColumn(column) {
+    this.setProperty('column', column);
   }
-  if (event.propertyName === 'value' && event.source.id === 'GroupFormatField') {
-    this.column.setGroupFormat(event.newValue);
+
+  _setColumn(column) {
+    this._setProperty('column', column);
+    if (!this.column) {
+      return;
+    }
+
+    var formatField = this.widget('FormatField');
+    formatField.setValue(this.column.format.pattern);
+    formatField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var groupFormatField = this.widget('GroupFormatField');
+    groupFormatField.setValue(this.column.groupFormat.pattern);
+    groupFormatField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var hasDateField = this.widget('HasDateField');
+    hasDateField.setValue(this.column.hasDate);
+    hasDateField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var hasTimeField = this.widget('HasTimeField');
+    hasTimeField.setValue(this.column.hasTime);
+    hasTimeField.on('propertyChange', this._onPropertyChange.bind(this));
   }
-  if (event.propertyName === 'value' && event.source.id === 'HasDateField') {
-    this.column.hasDate = event.newValue;
-    this.column.setFormat();
+
+  _onPropertyChange(event) {
+    if (event.propertyName === 'value' && event.source.id === 'FormatField') {
+      this.column.setFormat(event.newValue);
+    }
+    if (event.propertyName === 'value' && event.source.id === 'GroupFormatField') {
+      this.column.setGroupFormat(event.newValue);
+    }
+    if (event.propertyName === 'value' && event.source.id === 'HasDateField') {
+      this.column.hasDate = event.newValue;
+      this.column.setFormat();
+    }
+    if (event.propertyName === 'value' && event.source.id === 'HasTimeField') {
+      this.column.hasTime = event.newValue;
+      this.column.setFormat();
+    }
   }
-  if (event.propertyName === 'value' && event.source.id === 'HasTimeField') {
-    this.column.hasTime = event.newValue;
-    this.column.setFormat();
-  }
-}
 }

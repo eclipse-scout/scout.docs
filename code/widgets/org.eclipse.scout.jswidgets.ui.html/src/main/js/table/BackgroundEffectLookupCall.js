@@ -12,18 +12,18 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class BackgroundEffectLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return BackgroundEffectLookupCall.DATA;
-}
+  _data() {
+    return BackgroundEffectLookupCall.DATA;
+  }
 
-static DATA = [
-  ['colorGradient1', 'colorGradient1'],
-  ['colorGradient2', 'colorGradient2'],
-  ['barChart', 'barChart']
-];
+  static DATA = [
+    ['colorGradient1', 'colorGradient1'],
+    ['colorGradient2', 'colorGradient2'],
+    ['barChart', 'barChart']
+  ];
 }

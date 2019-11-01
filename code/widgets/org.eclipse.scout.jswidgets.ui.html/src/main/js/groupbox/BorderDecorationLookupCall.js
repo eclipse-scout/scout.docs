@@ -12,18 +12,18 @@ import {StaticLookupCall, GroupBox} from '@eclipse-scout/core';
 
 export default class BorderDecorationLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return BorderDecorationLookupCall.DATA;
-}
+  _data() {
+    return BorderDecorationLookupCall.DATA;
+  }
 
-static DATA = [
-  [GroupBox.BorderDecoration.AUTO, 'auto'],
-  [GroupBox.BorderDecoration.EMPTY, 'empty'],
-  [GroupBox.BorderDecoration.LINE, 'line']
-];
+  static DATA = [
+    [GroupBox.BorderDecoration.AUTO, 'auto'],
+    [GroupBox.BorderDecoration.EMPTY, 'empty'],
+    [GroupBox.BorderDecoration.LINE, 'line']
+  ];
 }

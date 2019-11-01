@@ -12,17 +12,17 @@ import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
 export default class LabelWidthInPixelLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return LabelWidthInPixelLookupCall.DATA;
-}
+  _data() {
+    return LabelWidthInPixelLookupCall.DATA;
+  }
 
-static DATA = [
-  [FormField.LabelWidth.DEFAULT, 'default'],
-  [FormField.LabelWidth.UI, 'ui width'],
-];
+  static DATA = [
+    [FormField.LabelWidth.DEFAULT, 'default'],
+    [FormField.LabelWidth.UI, 'ui width']
+  ];
 }

@@ -12,20 +12,20 @@ import {StaticLookupCall} from '@eclipse-scout/core';
 
 export default class FormFieldTypeLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return FormFieldTypeLookupCall.DATA;
-}
+  _data() {
+    return FormFieldTypeLookupCall.DATA;
+  }
 
-static DATA = [
-  ['StringField', 'String Field'],
-  ['NumberField', 'Number Field'],
-  ['DateField', 'Date Field'],
-  ['CheckBoxField', 'Checkbox'],
-  ['LabelField', 'Label Field']
-];
+  static DATA = [
+    ['StringField', 'String Field'],
+    ['NumberField', 'Number Field'],
+    ['DateField', 'Date Field'],
+    ['CheckBoxField', 'Checkbox'],
+    ['LabelField', 'Label Field']
+  ];
 }

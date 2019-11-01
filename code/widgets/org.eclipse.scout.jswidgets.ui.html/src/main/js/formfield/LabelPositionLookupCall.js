@@ -12,19 +12,19 @@ import {StaticLookupCall, FormField} from '@eclipse-scout/core';
 
 export default class LabelPositionLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return LabelPositionLookupCall.DATA;
-}
+  _data() {
+    return LabelPositionLookupCall.DATA;
+  }
 
-static DATA = [
-  [FormField.LabelPosition.DEFAULT, 'default'],
-  [FormField.LabelPosition.LEFT, 'left'],
-  [FormField.LabelPosition.ON_FIELD, 'on field'],
-  [FormField.LabelPosition.TOP, 'top']
-];
+  static DATA = [
+    [FormField.LabelPosition.DEFAULT, 'default'],
+    [FormField.LabelPosition.LEFT, 'left'],
+    [FormField.LabelPosition.ON_FIELD, 'on field'],
+    [FormField.LabelPosition.TOP, 'top']
+  ];
 }

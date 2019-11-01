@@ -12,50 +12,50 @@ import {TabBox, GridData, scout, icons} from '@eclipse-scout/core';
 
 export default class ConfigurationBox extends TabBox {
 
-constructor() {
-  super();
-  this.cssClass = 'jswidgets-configuration';
-}
+  constructor() {
+    super();
+    this.cssClass = 'jswidgets-configuration';
+  }
 
 
-_init(model) {
-  super._init( model);
+  _init(model) {
+    super._init(model);
 
-  this.toggleMenu = scout.create('Menu', {
-    parent: this,
-    menuTypes: [
-      'TabBox.Header'
-    ]
-  });
-  this.toggleMenu.on('action', this._onToggleMenuAction.bind(this));
-  this._updateToggleIcon();
-  this.setMenus([this.toggleMenu]);
-}
+    this.toggleMenu = scout.create('Menu', {
+      parent: this,
+      menuTypes: [
+        'TabBox.Header'
+      ]
+    });
+    this.toggleMenu.on('action', this._onToggleMenuAction.bind(this));
+    this._updateToggleIcon();
+    this.setMenus([this.toggleMenu]);
+  }
 
-_onToggleMenuAction(event) {
-  var expanded = !this.tabItems[0].expanded;
-  this.tabItems.forEach(function(tab) {
-    tab.setExpanded(expanded);
-  });
-  var gridData = new GridData(this.gridDataHints);
-  var weightY;
-  if (expanded) {
-    if (this._origWeightY !== undefined) {
-      gridData.weightY = this._origWeightY;
+  _onToggleMenuAction(event) {
+    var expanded = !this.tabItems[0].expanded;
+    this.tabItems.forEach(function(tab) {
+      tab.setExpanded(expanded);
+    });
+    var gridData = new GridData(this.gridDataHints);
+    var weightY;
+    if (expanded) {
+      if (this._origWeightY !== undefined) {
+        gridData.weightY = this._origWeightY;
+      }
+    } else {
+      this._origWeightY = gridData.weightY;
+      gridData.weightY = 0;
     }
-  } else {
-    this._origWeightY = gridData.weightY;
-    gridData.weightY = 0;
+    this.setGridDataHints(gridData);
+    this._updateToggleIcon();
   }
-  this.setGridDataHints(gridData);
-  this._updateToggleIcon();
-}
 
-_updateToggleIcon() {
-  var iconId = icons.ANGLE_DOWN_BOLD;
-  if (!this.tabItems[0].expanded) {
-    iconId = icons.ANGLE_UP_BOLD;
+  _updateToggleIcon() {
+    var iconId = icons.ANGLE_DOWN_BOLD;
+    if (!this.tabItems[0].expanded) {
+      iconId = icons.ANGLE_UP_BOLD;
+    }
+    this.toggleMenu.setIconId(iconId);
   }
-  this.toggleMenu.setIconId(iconId);
-}
 }

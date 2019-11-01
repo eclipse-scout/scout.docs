@@ -12,18 +12,18 @@ import {StaticLookupCall, Table} from '@eclipse-scout/core';
 
 export default class CheckableStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return CheckableStyleLookupCall.DATA;
-}
+  _data() {
+    return CheckableStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [Table.CheckableStyle.CHECKBOX, 'checkbox'],
-  [Table.CheckableStyle.TABLE_ROW, 'table_row'],
-  [Table.CheckableStyle.CHECKBOX_TABLE_ROW, 'checkbox_table_row']
-];
+  static DATA = [
+    [Table.CheckableStyle.CHECKBOX, 'checkbox'],
+    [Table.CheckableStyle.TABLE_ROW, 'table_row'],
+    [Table.CheckableStyle.CHECKBOX_TABLE_ROW, 'checkbox_table_row']
+  ];
 }

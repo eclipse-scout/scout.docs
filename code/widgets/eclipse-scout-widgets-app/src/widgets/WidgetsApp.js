@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import { App } from '@eclipse-scout/eclipse-scout';
+import {App} from '@eclipse-scout/eclipse-scout';
 
 export default class WidgetsApp extends App {
   _init(model) {

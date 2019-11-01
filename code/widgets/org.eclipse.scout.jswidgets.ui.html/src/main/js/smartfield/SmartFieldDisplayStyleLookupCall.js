@@ -12,17 +12,17 @@ import {StaticLookupCall, SmartField} from '@eclipse-scout/core';
 
 export default class SmartFieldDisplayStyleLookupCall extends StaticLookupCall {
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
 
-_data() {
-  return SmartFieldDisplayStyleLookupCall.DATA;
-}
+  _data() {
+    return SmartFieldDisplayStyleLookupCall.DATA;
+  }
 
-static DATA = [
-  [SmartField.DisplayStyle.DEFAULT, 'default'],
-  [SmartField.DisplayStyle.DROPDOWN, 'dropdown']
-];
+  static DATA = [
+    [SmartField.DisplayStyle.DEFAULT, 'default'],
+    [SmartField.DisplayStyle.DROPDOWN, 'dropdown']
+  ];
 }

@@ -12,10 +12,10 @@ import {ValueField, StringFieldLayout, scout} from '@eclipse-scout/core';
 
 export default class ChartField extends ValueField {
 
-constructor() {
-  super();
-  this.chart = null;
-  this.chartConfig = {
+  constructor() {
+    super();
+    this.chart = null;
+    this.chartConfig = {
       type: 'pie',
       options: {
         maintainAspectRatio: false,
@@ -26,42 +26,40 @@ constructor() {
         }
       }
     };
-}
-
-
-
-
-_init(model) {
-  this._onInit = true;
-  super._init( model);
-  this._onInit = false;
-  this.chart = scout.create('jswidgets.Chart', {
-    parent: this,
-    config: this.chartConfig
-  });
-}
-
-_render() {
-  this.addContainer(this.$parent, 'chart-field', new StringFieldLayout(this));
-  this.addLabel();
-  this.addMandatoryIndicator();
-  this.chart.render();
-
-  this.addField(this.chart.$container);
-  this.addStatus();
-}
-
-_valueChanged() {
-  if(this._onInit){
-    return;
   }
-  this.chart.setData(this.value);
-}
 
 
-setChartConfig(chartConfig){
-  this.chart.setConfig(chartConfig);
-}
+  _init(model) {
+    this._onInit = true;
+    super._init(model);
+    this._onInit = false;
+    this.chart = scout.create('jswidgets.Chart', {
+      parent: this,
+      config: this.chartConfig
+    });
+  }
+
+  _render() {
+    this.addContainer(this.$parent, 'chart-field', new StringFieldLayout(this));
+    this.addLabel();
+    this.addMandatoryIndicator();
+    this.chart.render();
+
+    this.addField(this.chart.$container);
+    this.addStatus();
+  }
+
+  _valueChanged() {
+    if (this._onInit) {
+      return;
+    }
+    this.chart.setData(this.value);
+  }
+
+
+  setChartConfig(chartConfig) {
+    this.chart.setConfig(chartConfig);
+  }
 }
 
 
