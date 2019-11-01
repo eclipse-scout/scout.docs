@@ -8,44 +8,49 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-scout.HeatmapFieldAdapter = function() {
-  scout.HeatmapFieldAdapter.parent.call(this);
-};
-scout.inherits(scout.HeatmapFieldAdapter, scout.FormFieldAdapter);
+import {FormFieldAdapter} from '@eclipse-scout/core';
 
-scout.HeatmapFieldAdapter.prototype._onWidgetEvent = function(event) {
+export default class HeatmapFieldAdapter extends FormFieldAdapter {
+
+constructor() {
+  super();
+}
+
+
+_onWidgetEvent(event) {
   if (event.type === 'viewParameterChange') {
     this._onWidgetViewParameterChange(event);
   } else if (event.type === 'click') {
     this._onWidgetClick(event);
   } else {
-    scout.HeatmapFieldAdapter.parent.prototype._onWidgetEvent.call(this, event);
+    super._onWidgetEvent( event);
   }
-};
+}
 
-scout.HeatmapFieldAdapter.prototype._onWidgetViewParameterChange = function(event) {
+_onWidgetViewParameterChange(event) {
   this._send('viewParameterChange', {
     center: event.center,
     zoomFactor: event.zoomFactor
   });
-};
+}
 
-scout.HeatmapFieldAdapter.prototype._onWidgetClick = function(event) {
+_onWidgetClick(event) {
   this._send('click', {
     point: event.point
   });
-};
+}
 
-scout.HeatmapFieldAdapter.prototype.onModelAction = function(event) {
+onModelAction(event) {
   if (event.type === 'heatPointsAdded') {
     this._onHeatPointsAdded(event);
   } else {
-    scout.HeatmapFieldAdapter.parent.prototype.onModelAction.call(this, event);
+    super.onModelAction( event);
   }
-};
+}
 
-scout.HeatmapFieldAdapter.prototype._onHeatPointsAdded = function(event) {
+_onHeatPointsAdded(event) {
   event.points.forEach(function(point) {
     this.widget.addHeatPoint(point);
   }, this);
-};
+}
+}

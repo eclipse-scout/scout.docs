@@ -1,13 +1,8 @@
-/*!
-* Eclipse Scout Heatmap
-* https://eclipse.org/scout/
-*
-* Copyright (c) BSI Business Systems Integration AG. All rights reserved.
-* Released under the Eclipse Public License v1.0
-* http://www.eclipse.org/legal/epl-v10.html
-*/
-(function(scout, $, undefined) {
-  __include("heatmap/HeatmapField.js");
-  __include("heatmap/HeatmapFieldAdapter.js");
-  __include("heatmap/HeatmapFieldLayout.js");
-}(scout, jQuery));
+export { default as HeatmapField } from './heatmap/HeatmapField';
+export { default as HeatmapFieldAdapter } from './heatmap/HeatmapFieldAdapter';
+export { default as HeatmapFieldLayout } from './heatmap/HeatmapFieldLayout';
+export { default as simpleheat } from './heatmap/leaflet-heat';
+
+import * as self from './index.js';
+export default self;
+window.scout = Object.assign(window.scout || {}, self);

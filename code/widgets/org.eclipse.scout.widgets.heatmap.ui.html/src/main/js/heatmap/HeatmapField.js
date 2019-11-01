@@ -1,14 +1,21 @@
-scout.HeatmapField = function() {
-  scout.HeatmapField.parent.call(this);
-};
-scout.inherits(scout.HeatmapField, scout.FormField);
+import {FormField, HtmlComponent, Dimension, graphics, ObjectFactory} from '@eclipse-scout/core';
+import {HeatmapFieldLayout} from '../index';
 
-scout.HeatmapField.prototype._render = function() {
+import * as L from 'leaflet';
+
+export default class HeatmapField extends FormField {
+
+constructor() {
+  super();
+}
+
+
+_render() {
   this.addContainer(this.$parent, 'heatmap-field');
   this.addLabel();
   this.addStatus();
 
-  var heatmapId = scout.objectFactory.createUniqueId();
+  var heatmapId = ObjectFactory.get().createUniqueId();
   var $field = this.$container
     .makeDiv('heatmap')
     .attr('id', heatmapId);
@@ -17,9 +24,9 @@ scout.HeatmapField.prototype._render = function() {
   // Before (!) installing the layout, set the initial size to 1x1. The size of $field must not
   // get smaller than that, because Leaflet.js throws an error when the drawing canvas has size 0.
   // After the initial rendering, this condition is ensured by HeapmapFieldLayout.js.
-  scout.graphics.setSize($field, new scout.Dimension(1, 1));
-  var fieldHtmlComp = scout.HtmlComponent.install($field, this.session);
-  fieldHtmlComp.setLayout(new scout.HeatmapFieldLayout(this));
+  graphics.setSize($field, new Dimension(1, 1));
+  var fieldHtmlComp = HtmlComponent.install($field, this.session);
+  fieldHtmlComp.setLayout(new HeatmapFieldLayout(this));
 
   this.heatmap = L.map(heatmapId, {
     trackResize: false
@@ -32,23 +39,23 @@ scout.HeatmapField.prototype._render = function() {
   this.heatmap.on('moveend', this._onViewParameterChange.bind(this));
   this.heatmap.on('click', this._onClick.bind(this));
   this.heatmap.on('contextmenu', this._onClick.bind(this));
-};
+}
 
-scout.HeatmapField.prototype._renderProperties = function() {
-  scout.HeatmapField.parent.prototype._renderProperties.call(this);
+_renderProperties() {
+  super._renderProperties();
   this._renderViewParameter();
   this._renderHeatPointList();
-};
+}
 
-scout.HeatmapField.prototype._remove = function() {
-  scout.HeatmapField.parent.prototype._remove.call(this);
+_remove() {
+  super._remove();
 
   this.heatmap.remove();
   this.heatmap = null;
   this._heatLayer = null;
-};
+}
 
-scout.HeatmapField.prototype._onViewParameterChange = function() {
+_onViewParameterChange() {
   this.trigger('viewParameterChange', {
     center: {
       x: this.heatmap.getCenter().lng,
@@ -56,25 +63,25 @@ scout.HeatmapField.prototype._onViewParameterChange = function() {
     },
     zoomFactor: this.heatmap.getZoom()
   });
-};
+}
 
-scout.HeatmapField.prototype._onClick = function(event) {
+_onClick(event) {
   this.trigger('click', {
     point: {
       x: event.latlng.lng,
       y: event.latlng.lat
     }
   });
-};
+}
 
-scout.HeatmapField.prototype._renderViewParameter = function() {
+_renderViewParameter() {
   this.heatmap.setView([
     this.viewParameter.center.y,
     this.viewParameter.center.x
   ], this.viewParameter.zoomFactor);
-};
+}
 
-scout.HeatmapField.prototype._renderHeatPointList = function() {
+_renderHeatPointList() {
   if (this._heatLayer) {
     this.heatmap.removeLayer(this._heatLayer);
   }
@@ -97,9 +104,9 @@ scout.HeatmapField.prototype._renderHeatPointList = function() {
     max: 1.0
   });
   this._heatLayer.addTo(this.heatmap);
-};
+}
 
-scout.HeatmapField.prototype.addHeatPoint = function(point) {
+addHeatPoint(point) {
   if (this._heatLayer) {
     this._heatLayer.addLatLng([
       point.y,
@@ -107,4 +114,5 @@ scout.HeatmapField.prototype.addHeatPoint = function(point) {
       point.intensity
     ]);
   }
-};
+}
+}

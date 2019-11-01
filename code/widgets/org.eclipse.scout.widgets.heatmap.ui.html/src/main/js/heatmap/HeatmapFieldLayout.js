@@ -1,14 +1,18 @@
-scout.HeatmapFieldLayout = function(field) {
-  scout.HeatmapFieldLayout.parent.call(this);
+import {AbstractLayout, HtmlComponent, graphics} from '@eclipse-scout/core';
+
+export default class HeatmapFieldLayout extends AbstractLayout {
+
+constructor(field) {
+  super();
   this.field = field;
-};
-scout.inherits(scout.HeatmapFieldLayout, scout.AbstractLayout);
+}
+
 
 /**
  * @override AbstractLayout.js
  */
-scout.HeatmapFieldLayout.prototype.layout = function($container) {
-  var htmlContainer = scout.HtmlComponent.get($container);
+layout($container) {
+  var htmlContainer = HtmlComponent.get($container);
 
   // Because of a bug (?) in Leaflet.js, the canvas size must not get smaller than
   // 1x1 pixels, otherwise an exception is thrown: "Failed to execute 'getImageData'
@@ -17,8 +21,9 @@ scout.HeatmapFieldLayout.prototype.layout = function($container) {
   if (size.width === 0 || size.height === 0) {
     size.width = Math.max(size.width, 1);
     size.height = Math.max(size.height, 1);
-    scout.graphics.setSize($container, size);
+    graphics.setSize($container, size);
   }
 
   this.field.heatmap.invalidateSize();
-};
+}
+}
