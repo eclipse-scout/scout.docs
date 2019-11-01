@@ -15,7 +15,6 @@ const themeDarkPath = require.resolve('@eclipse-scout/demo-jswidgets/src/main/js
 module.exports = (env, args) => {
   args.resDirArray = [
     'src/main/resources/WebContent',
-    'node_modules/@eclipse-scout/demo-jswidgets/src/main/resources/WebContent',
     'node_modules/@eclipse-scout/core/res'];
   const config = baseConfig(env, args);
 
