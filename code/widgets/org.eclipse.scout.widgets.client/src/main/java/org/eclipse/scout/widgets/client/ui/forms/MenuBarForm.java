@@ -170,7 +170,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Override
           protected void execChangedValue() {
-            getSmartFieldMenuValueField().setValue(Optional.ofNullable(getValue()).map(v -> v.getDisplayName()).orElse(null));
+            getSmartFieldMenuValueField().setValue(Optional.ofNullable(getValue()).map(Locale::getDisplayName).orElse(null));
             System.out.println("value changed to: " + getValue());
           }
 
@@ -222,7 +222,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
           @Override
           protected void execChangedValue() {
-            getDateFieldValueField().setValue(Optional.ofNullable(getValue()).map(v -> m_dateFormatter.format(v)).orElse(null));
+            getDateFieldValueField().setValue(Optional.ofNullable(getValue()).map(m_dateFormatter::format).orElse(null));
             System.out.println("Date changed to: " + getValue());
           }
         }
