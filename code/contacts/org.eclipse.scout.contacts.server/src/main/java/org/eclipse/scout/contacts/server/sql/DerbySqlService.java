@@ -44,7 +44,7 @@ public class DerbySqlService extends AbstractDerbySqlService {
       DriverManager.getConnection(jdbcMappingName + ";drop=true");
     }
     catch (SQLException e) {
-      BEANS.get(PlatformExceptionTranslator.class).translate(e);
+      throw BEANS.get(PlatformExceptionTranslator.class).translate(e);
     }
   }
 // tag::service[]
