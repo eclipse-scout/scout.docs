@@ -1,4 +1,4 @@
-import {AbstractLayout, HtmlComponent, graphics} from '@eclipse-scout/core';
+import {AbstractLayout, graphics, HtmlComponent} from '@eclipse-scout/core';
 
 export default class HeatmapFieldLayout extends AbstractLayout {
 

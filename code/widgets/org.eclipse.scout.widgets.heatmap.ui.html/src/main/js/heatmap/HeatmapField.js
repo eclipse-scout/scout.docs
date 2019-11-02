@@ -1,4 +1,4 @@
-import {FormField, HtmlComponent, Dimension, graphics, ObjectFactory} from '@eclipse-scout/core';
+import {Dimension, FormField, graphics, HtmlComponent, ObjectFactory} from '@eclipse-scout/core';
 import {HeatmapFieldLayout} from '../index';
 
 import * as L from 'leaflet';

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, Popup} from '@eclipse-scout/core';
+import {Popup, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class PopupVerticalAlignLookupCall extends StaticLookupCall {
 

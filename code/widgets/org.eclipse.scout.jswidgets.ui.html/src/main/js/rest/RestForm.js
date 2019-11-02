@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, ajax} from '@eclipse-scout/core';
+import {ajax, Form, models} from '@eclipse-scout/core';
 import RestFormModel from './RestFormModel';
 
 export default class RestForm extends Form {

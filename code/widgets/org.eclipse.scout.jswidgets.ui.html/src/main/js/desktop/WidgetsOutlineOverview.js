@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {TileOutlineOverview, scout, App} from '@eclipse-scout/core';
+import {App, scout, TileOutlineOverview} from '@eclipse-scout/core';
 
 export default class WidgetsOutlineOverview extends TileOutlineOverview {
 

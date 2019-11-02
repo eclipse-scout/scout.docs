@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, arrays, scout, comparators} from '@eclipse-scout/core';
+import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
 import TileAccordionFormModel from './TileAccordionFormModel';
 import {GroupLookupCall} from '../index';
 import * as $ from 'jquery';

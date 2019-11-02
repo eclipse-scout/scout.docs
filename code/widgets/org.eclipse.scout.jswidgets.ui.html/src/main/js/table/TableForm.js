@@ -8,10 +8,9 @@
  * Contributors: BSI Business Systems Integration AG - initial API and
  * implementation
  */
-import {Form, MessageBoxes, models, icons, dates, scout} from '@eclipse-scout/core';
-import {ColumnLookupCall} from '../index';
+import {dates, Form, icons, MessageBoxes, models, scout} from '@eclipse-scout/core';
+import {ColumnLookupCall, LocaleLookupCall} from '../index';
 import TableFormModel from './TableFormModel';
-import {LocaleLookupCall} from '../index';
 
 export default class TableForm extends Form {
 

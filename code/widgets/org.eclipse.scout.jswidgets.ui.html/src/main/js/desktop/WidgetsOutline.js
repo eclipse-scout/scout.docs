@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Outline, models} from '@eclipse-scout/core';
+import {models, Outline} from '@eclipse-scout/core';
 import WidgetsOutlineModel from './WidgetsOutlineModel';
 
 export default class WidgetsOutline extends Outline {

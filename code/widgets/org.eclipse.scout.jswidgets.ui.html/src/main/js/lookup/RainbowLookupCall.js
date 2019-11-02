@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, scout, icons} from '@eclipse-scout/core';
+import {icons, scout, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class RainbowLookupCall extends StaticLookupCall {
 

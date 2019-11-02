@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, ButtonAdapterMenu, GridData, Button, models, scout} from '@eclipse-scout/core';
+import {Button, ButtonAdapterMenu, GridData, GroupBox, models, scout} from '@eclipse-scout/core';
 import GroupBoxAddMenuBarItemBoxModel from './GroupBoxAddMenuBarItemBoxModel';
 
 export default class GroupBoxAddMenuBarItemBox extends GroupBox {

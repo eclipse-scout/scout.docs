@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {TabItem, Widget, models, comparators, App} from '@eclipse-scout/core';
+import {App, comparators, models, TabItem, Widget} from '@eclipse-scout/core';
 import EventsTabModel from './EventsTabModel';
 
 export default class EventsTab extends TabItem {

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, scout, comparators} from '@eclipse-scout/core';
+import {comparators, Form, models, scout} from '@eclipse-scout/core';
 import AccordionFormModel from './AccordionFormModel';
 import * as $ from 'jquery';
 

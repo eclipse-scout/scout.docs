@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App as App_1, ResponsiveManager, models, router, scout} from '@eclipse-scout/core';
+import {App as App_1, models, ResponsiveManager, router, scout} from '@eclipse-scout/core';
 import {WidgetsRoute} from './index';
 import DesktopModel from './desktop/DesktopModel';
 

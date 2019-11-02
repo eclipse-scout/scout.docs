@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {ValueField, StringFieldLayout, scout} from '@eclipse-scout/core';
+import {scout, StringFieldLayout, ValueField} from '@eclipse-scout/core';
 
 export default class ChartField extends ValueField {
 

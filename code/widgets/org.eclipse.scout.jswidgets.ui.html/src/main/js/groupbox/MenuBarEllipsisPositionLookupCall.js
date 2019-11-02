@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, MenuBar} from '@eclipse-scout/core';
+import {MenuBar, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class MenuBarEllipsisPositionLookupCall extends StaticLookupCall {
 

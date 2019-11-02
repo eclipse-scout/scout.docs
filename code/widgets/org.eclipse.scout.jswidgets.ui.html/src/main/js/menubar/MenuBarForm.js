@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, MessageBoxes, Menu, EllipsisMenu, models, scout} from '@eclipse-scout/core';
+import {EllipsisMenu, Form, Menu, MessageBoxes, models, scout} from '@eclipse-scout/core';
 import MenuBarFormModel from './MenuBarFormModel';
 
 export default class MenuBarForm extends Form {

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Route, Tree, strings, router, arrays} from '@eclipse-scout/core';
+import {arrays, Route, router, strings, Tree} from '@eclipse-scout/core';
 
 export default class WidgetsRoute extends Route {
 

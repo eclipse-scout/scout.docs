@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {TabBox, GridData, scout, icons} from '@eclipse-scout/core';
+import {GridData, icons, scout, TabBox} from '@eclipse-scout/core';
 
 export default class ConfigurationBox extends TabBox {
 

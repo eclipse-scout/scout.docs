@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, Status, models, numbers, objects} from '@eclipse-scout/core';
+import {GroupBox, models, numbers, objects, Status} from '@eclipse-scout/core';
 import FormFieldPropertiesBoxModel from './FormFieldPropertiesBoxModel';
 
 export default class FormFieldPropertiesBox extends GroupBox {

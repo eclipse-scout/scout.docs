@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, Status, models, objects, scout} from '@eclipse-scout/core';
+import {GroupBox, models, objects, scout, Status} from '@eclipse-scout/core';
 import GroupBoxPropertiesBoxModel from './GroupBoxPropertiesBoxModel';
 
 export default class GroupBoxPropertiesBox extends GroupBox {

@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import ButtonFormModel from './ButtonFormModel';
-import {Form, Button, models, scout} from '@eclipse-scout/core';
+import {Button, Form, models, scout} from '@eclipse-scout/core';
 
 export default class ButtonForm extends Form {
 

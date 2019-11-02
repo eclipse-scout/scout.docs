@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {TabItem, models} from '@eclipse-scout/core';
+import {models, TabItem} from '@eclipse-scout/core';
 import TabBoxPropertiesModel from './TabBoxPropertiesModel';
 import {TabItemLookupCall} from '../index';
 

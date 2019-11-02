@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, GridData, models} from '@eclipse-scout/core';
+import {GridData, GroupBox, models} from '@eclipse-scout/core';
 import GridDataBoxModel from './GridDataBoxModel';
 
 export default class GridDataBox extends GroupBox {

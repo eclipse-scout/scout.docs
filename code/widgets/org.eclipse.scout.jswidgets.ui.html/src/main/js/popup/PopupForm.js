@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, Rectangle, models, graphics, scout} from '@eclipse-scout/core';
+import {Form, graphics, models, Rectangle, scout} from '@eclipse-scout/core';
 import PopupFormModel from './PopupFormModel';
 
 export default class PopupForm extends Form {

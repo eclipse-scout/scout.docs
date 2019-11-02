@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, RadioButtonGroup, models, numbers} from '@eclipse-scout/core';
+import {Form, models, numbers, RadioButtonGroup} from '@eclipse-scout/core';
 import {FormFieldLookupCall} from '../index';
 import RadioButtonGroupFormModel from './RadioButtonGroupFormModel';
 

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, LookupCall, arrays, scout, QueryBy} from '@eclipse-scout/core';
+import {arrays, LookupCall, QueryBy, scout, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class LookupCallLookupCall extends StaticLookupCall {
 

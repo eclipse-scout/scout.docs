@@ -1,4 +1,4 @@
-import {Form, Table, models} from '@eclipse-scout/core';
+import {Form, models, Table} from '@eclipse-scout/core';
 import SamplePageWithTableSearchFormModel from './SamplePageWithTableSearchFormModel';
 
 export default class SamplePageWithTableSearchForm extends Form {

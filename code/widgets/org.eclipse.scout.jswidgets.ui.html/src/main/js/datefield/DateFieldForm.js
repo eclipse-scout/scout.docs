@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, dates} from '@eclipse-scout/core';
+import {dates, Form, models} from '@eclipse-scout/core';
 import DateFieldFormModel from './DateFieldFormModel';
 
 export default class DateFieldForm extends Form {

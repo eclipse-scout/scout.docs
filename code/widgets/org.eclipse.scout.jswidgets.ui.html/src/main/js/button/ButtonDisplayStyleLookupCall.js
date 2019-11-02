@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, Button} from '@eclipse-scout/core';
+import {Button, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class ButtonDisplayStyleLookupCall extends StaticLookupCall {
 

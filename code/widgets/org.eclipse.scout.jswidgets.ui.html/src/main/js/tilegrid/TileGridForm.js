@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, arrays, scout, comparators} from '@eclipse-scout/core';
+import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
 import {CustomTile} from '../index';
 import TileGridFormModel from './TileGridFormModel';
 import * as $ from 'jquery';

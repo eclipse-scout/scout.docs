@@ -1,4 +1,4 @@
-import {Tile, HtmlComponent} from '@eclipse-scout/core';
+import {HtmlComponent, Tile} from '@eclipse-scout/core';
 
 export default class CustomTile extends Tile {
 

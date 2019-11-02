@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, Desktop, Form, Outline} from '@eclipse-scout/core';
+import {Desktop, Form, Outline, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class DisplayParentLookupCall extends StaticLookupCall {
 

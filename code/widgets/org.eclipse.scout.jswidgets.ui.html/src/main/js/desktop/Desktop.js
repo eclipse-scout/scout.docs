@@ -1,4 +1,4 @@
-import {Desktop as Desktop_1, models, scout, icons, App} from '@eclipse-scout/core';
+import {App, Desktop as Desktop_1, icons, models, scout} from '@eclipse-scout/core';
 import DesktopModel from './DesktopModel';
 
 export default class Desktop extends Desktop_1 {

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, icons} from '@eclipse-scout/core';
+import {icons, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class WorldLookupCall extends StaticLookupCall {
 

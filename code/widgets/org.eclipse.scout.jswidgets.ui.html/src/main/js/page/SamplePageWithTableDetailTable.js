@@ -1,4 +1,4 @@
-import {Table, scout} from '@eclipse-scout/core';
+import {scout, Table} from '@eclipse-scout/core';
 
 export default class SamplePageWithTableDetailTable extends Table {
 

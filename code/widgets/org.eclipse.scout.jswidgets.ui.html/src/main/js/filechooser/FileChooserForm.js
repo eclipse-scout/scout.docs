@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import FileChooserFormModel from './FileChooserFormModel';
-import {Form, FileInput, strings, models, scout} from '@eclipse-scout/core';
+import {FileInput, Form, models, scout, strings} from '@eclipse-scout/core';
 import {DisplayParentLookupCall} from '../index';
 
 export default class FileChooserForm extends Form {

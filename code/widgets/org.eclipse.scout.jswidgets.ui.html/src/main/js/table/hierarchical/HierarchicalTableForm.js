@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models, icons} from '@eclipse-scout/core';
+import {Form, icons, models} from '@eclipse-scout/core';
 import HierarchicalTableFormModel from './HierarchicalTableFormModel';
 import {ColumnLookupCall} from '../../index';
 

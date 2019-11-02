@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, Group} from '@eclipse-scout/core';
+import {Group, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class CollapseStyleLookupCall extends StaticLookupCall {
 

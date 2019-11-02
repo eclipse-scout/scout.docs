@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import LabelFormModel from './LabelFormModel';
-import {Form, MessageBoxes, GridData, models} from '@eclipse-scout/core';
+import {Form, GridData, MessageBoxes, models} from '@eclipse-scout/core';
 
 export default class LabelForm extends Form {
 

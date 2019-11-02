@@ -1,4 +1,4 @@
-import {PageWithNodes, models, scout} from '@eclipse-scout/core';
+import {models, PageWithNodes, scout} from '@eclipse-scout/core';
 import SamplePageWithNodesModel from './SamplePageWithNodesModel';
 import * as $ from 'jquery';
 

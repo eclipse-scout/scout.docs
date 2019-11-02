@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, FormField} from '@eclipse-scout/core';
+import {FormField, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class LabelWidthInPixelLookupCall extends StaticLookupCall {
 
