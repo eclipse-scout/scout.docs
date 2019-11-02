@@ -68,7 +68,7 @@ public class CustomDateFormatProvider extends DateFormatProvider {
     HashSet<Locale> availableLocales = new HashSet<>();
     availableLocales.addAll(m_customLocales);
     availableLocales.addAll(Arrays.asList(super.getAvailableLocales()));
-    m_availableLocales = availableLocales.toArray(new Locale[availableLocales.size()]);
+    m_availableLocales = availableLocales.toArray(new Locale[0]);
 
   }
 

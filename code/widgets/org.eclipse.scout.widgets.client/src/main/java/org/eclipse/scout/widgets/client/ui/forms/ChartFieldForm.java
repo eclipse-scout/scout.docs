@@ -205,7 +205,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     else {
       values = Arrays.asList(Arrays.copyOfRange(defaults, 0, requestedLength));
     }
-    return values.toArray(new String[values.size()]);
+    return values.toArray(new String[0]);
   }
 
   protected String[] repeatValue(String value, int requestedLength) {
@@ -213,7 +213,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     for (int i = 0; i < requestedLength; i++) {
       values.add(value);
     }
-    return values.toArray(new String[values.size()]);
+    return values.toArray(new String[0]);
   }
 
   protected ChartDataDo randomChartData(int dataSeries, int dataLength) {
@@ -273,7 +273,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     for (int i = 0; i < colorSet.length; i++) {
       colors.add(toRgba(colorSet[i], opacity));
     }
-    return colors.toArray(new String[colors.size()]);
+    return colors.toArray(new String[0]);
   }
 
   protected String[] getColorSet() {

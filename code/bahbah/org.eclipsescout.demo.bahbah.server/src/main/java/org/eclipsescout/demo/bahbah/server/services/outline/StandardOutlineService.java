@@ -26,6 +26,6 @@ public class StandardOutlineService implements IStandardOutlineService {
     Set<String> users = new HashSet<>(allUsers);
     // remove myself
     users.remove(ServerSession.get().getUserId());
-    return users.toArray(new String[users.size()]);
+    return users.toArray(new String[0]);
   }
 }
