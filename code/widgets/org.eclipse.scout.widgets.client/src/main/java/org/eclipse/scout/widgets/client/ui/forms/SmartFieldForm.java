@@ -1170,9 +1170,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           protected void execAction() {
             Jobs.schedule(() -> {
               SleepUtil.sleepSafe(2, TimeUnit.SECONDS);
-              ModelJobs.schedule(() -> {
-                getDefaultSmartField().requestInput();
-              }, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+              ModelJobs.schedule(() -> getDefaultSmartField().requestInput(), ModelJobs.newInput(ClientRunContexts.copyCurrent()));
             }, Jobs.newInput().withRunContext(RunContext.CURRENT.get().copy()));
           }
         }

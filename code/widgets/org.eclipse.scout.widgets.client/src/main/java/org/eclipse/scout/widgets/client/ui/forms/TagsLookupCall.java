@@ -36,9 +36,7 @@ public class TagsLookupCall extends LocalLookupCall<String> {
   @Override
   protected List<? extends ILookupRow<String>> execCreateLookupRows() {
     return m_tags.stream()
-        .map(tag -> {
-          return new LookupRow<>(tag, tag);
-        }).collect(Collectors.toList());
+        .map(tag -> new LookupRow<>(tag, tag)).collect(Collectors.toList());
   }
 
 }
