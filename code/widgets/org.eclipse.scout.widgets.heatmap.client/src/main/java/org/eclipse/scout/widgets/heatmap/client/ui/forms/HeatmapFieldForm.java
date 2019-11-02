@@ -110,7 +110,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
 
       @Override
       public void mapClicked(MapPoint point) {
-        Float intensity = 200000.0f;
+        float intensity = 200000.0f;
 
         getXField().setValue(point.getX());
         getYField().setValue(point.getY());
