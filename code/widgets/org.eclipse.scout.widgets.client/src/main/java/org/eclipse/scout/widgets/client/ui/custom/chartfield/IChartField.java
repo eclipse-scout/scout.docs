@@ -38,7 +38,7 @@ public interface IChartField extends IFormField {
 
   void setChartData(ChartDataDo chartData);
 
-  public static ChartConfigDo readChartConfig(InputStream is) {
+  static ChartConfigDo readChartConfig(InputStream is) {
     Assertions.assertNotNull(is);
     return BEANS.get(IDataObjectMapper.class).readValue(is, ChartConfigDo.class);
   }
