@@ -169,7 +169,7 @@ As seen before, every widget has a model representing its state. This model is w
 .Accessing and modifying a property
 ----
 var field = scout.create('scout.StringField', {
-  parent: scout.sessions[0].desktop,
+  parent: scout.App.get().sessions[0].desktop,
   labelVisible: false
 });
 console.log(field.labelVisible); // prints false
@@ -195,7 +195,7 @@ Defining a property as widget property has the benefit that the widget is create
 .Creating the string field automatically using a widget property
 ----
 var groupBox = scout.create('GroupBox', {
-  parent: scout.sessions[0].desktop,
+  parent: scout.App.get().sessions[0].desktop,
   label: 'My Group Box',
   fields: [{
     objectType: 'StringField',
@@ -237,7 +237,7 @@ The following example shows how to handle a button click event.
 .Handling an event
 ----
 var button = scout.create('scout.Button', {
-  parent: scout.sessions[0].desktop,
+  parent: scout.App.get().sessions[0].desktop,
   label: 'click me!'
 });
 button.render();
@@ -253,7 +253,7 @@ Every click on the button will execute the callback function. To stop listening,
 .Stop listening for an event
 ----
 var button = scout.create('scout.Button', {
-  parent: scout.sessions[0].desktop,
+  parent: scout.App.get().sessions[0].desktop,
   label: 'click me!'
 });
 button.render();
@@ -301,7 +301,7 @@ Listening to such an event works in the same way as for other events, just use t
 .Example of a property change event
 ----
 var button = scout.create('scout.Button', {
-  parent: scout.sessions[0].desktop,
+  parent: scout.App.get().sessions[0].desktop,
   label: 'click me!',
   displayStyle: scout.Button.DisplayStyle.TOGGLE
 });
