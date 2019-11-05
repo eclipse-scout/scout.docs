@@ -20,12 +20,6 @@
   <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>org.eclipse.scout.widgets.ui.html.WidgetsUiServletFilter</filter-class>
-    <init-param>
-      <param-name>filter-exclude</param-name>
-      <param-value>
-        /res/*
-      </param-value>
-    </init-param>
   </filter>
 
   <filter-mapping>

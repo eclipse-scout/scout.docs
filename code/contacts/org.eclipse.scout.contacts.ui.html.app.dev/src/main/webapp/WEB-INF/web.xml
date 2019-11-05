@@ -23,7 +23,14 @@
     <init-param>
       <param-name>filter-exclude</param-name>
       <param-value>
-        /res/*
+        /favicon/*
+        /fonts/*
+        /logo.png
+        /jquery*.js
+        /login*.js
+        /logout*.js
+        /contacts-theme*.css
+        /eclipse-scout*.js
       </param-value>
     </init-param>
   </filter>
