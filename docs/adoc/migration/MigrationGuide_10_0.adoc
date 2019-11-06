@@ -49,7 +49,7 @@ These commands will be required later.
 
 This migration section applies to Scout Classic applications which do not have custom JavaScript code. For all other applications follow the description on how to migrate Scout JS applications in the next section.
 
-. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.3.0-SNAPSHOT.
+. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.5.0.
 . Create a file named `.gitignore` in the .ui.html module with the following content:
 +
 ----
@@ -94,6 +94,18 @@ new LogoutApp().init();
 . Replace the content of file src/main/resources/WebContent/index.html in the .ui.html module with this (replace ${displayName} with the title of your application): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/__rootArtifactId__.ui.html/src/main/resources/WebContent/index.html?h=releases/10.0[index.html]
 . Replace the content of file src/main/resources/WebContent/login.html in the .ui.html module with this (replace ${displayName} with the title of your application): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/__rootArtifactId__.ui.html/src/main/resources/WebContent/login.html?h=releases/10.0[login.html]
 . Replace the content of file src/main/resources/WebContent/logout.html in the .ui.html module with this (replace ${displayName} with the title of your application): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/__rootArtifactId__.ui.html/src/main/resources/WebContent/logout.html?h=releases/10.0[logout.html]
+. In the file src/main/webapp/WEB-INF/web.xml files of the .ui.html.app.dev and .ui.html.app.war modules change the `filter-exclude` list of the `UiServletFilter` declaration to the following:
++
+----
+/favicon/*
+/fonts/*
+/logo.png
+/jquery*.js
+/login*.js
+/logout*.js
+/theme*.css
+/eclipse-scout*.js
+----
 . Remove property `scout.ui.prebuild` and `scout.ui.prebuild.files` from all config.properties files
 . Open a terminal and navigate to the .ui.html module
 . Run command `npm install`. This will download all JavaScript dependencies
@@ -133,7 +145,7 @@ To launch the migration application follow these steps:
 
 After the migration execution there are some manual post processing tasks that must be executed:
 
-. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.3.0-SNAPSHOT.
+. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.5.0.
 . Create a file named `.gitignore` in the .ui.html module and the .app module with the following content:
 +
 ----
