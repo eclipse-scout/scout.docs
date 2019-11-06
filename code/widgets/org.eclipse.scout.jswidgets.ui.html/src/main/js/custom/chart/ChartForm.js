@@ -22,7 +22,6 @@ export default class ChartForm extends Form {
     this._dataArrayLength = 5;
   }
 
-
   static CHART_COLORS_LINE = ['rgba(41, 128, 185, .5)', 'rgba(23, 165, 137, .5)', 'rgba(243, 156, 18, .5)', 'rgba(241, 196, 15, .5)'];
 
   static CHART_COLORS_DONAT = [

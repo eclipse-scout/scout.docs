@@ -19,7 +19,6 @@ export default class AccordionForm extends Form {
     this.insertedGroupCount = 0;
   }
 
-
   _jsonModel() {
     return models.get(AccordionFormModel);
   }
@@ -134,7 +133,7 @@ export default class AccordionForm extends Form {
     if (this.insertedGroupCount > 0) {
       title += ' ' + this.insertedGroupCount;
     }
-    var group = new scout.create('Group', {
+    var group = scout.reate('Group', {
       parent: this.accordion,
       title: title,
       body: {

@@ -17,7 +17,6 @@ export default class ListBoxForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(ListBoxFormModel);
   }

@@ -16,7 +16,6 @@ export default class FormFieldTypeLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return FormFieldTypeLookupCall.DATA;
   }

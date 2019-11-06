@@ -18,7 +18,6 @@ export default class MenuBarForm extends Form {
     this.currentMenu;
   }
 
-
   _jsonModel() {
     return models.get(MenuBarFormModel);
   }
@@ -89,7 +88,7 @@ export default class MenuBarForm extends Form {
       return;
     }
     MessageBoxes.createOk(this)
-      .withBody("Menu with label '" + event.source.text + "' has been activated.")
+      .withBody('Menu with label \'' + event.source.text + '\' has been activated.')
       .buildAndOpen();
   }
 
@@ -128,7 +127,7 @@ export default class MenuBarForm extends Form {
       if (menu instanceof Menu && !(menu instanceof EllipsisMenu)) {
         menus.push(menu);
       }
-    }.bind(this));
+    });
     selectedMenuItemField.lookupCall.data = [];
     menus.forEach(function(menu) {
       selectedMenuItemField.lookupCall.data.push([menu.id, scout.nvl(menu.text, menu.id)]);

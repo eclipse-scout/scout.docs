@@ -17,7 +17,6 @@ export default class ChartTypeLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return ChartTypeLookupCall.DATA;
   }
@@ -27,7 +26,6 @@ export default class ChartTypeLookupCall extends StaticLookupCall {
     [Chart.Type.LINE, 'Line'],
     [Chart.Type.DOUGHNUT, 'Doughnut'],
     [Chart.Type.POLAR_AREA, 'Polar Area']
-
 
   ];
 }

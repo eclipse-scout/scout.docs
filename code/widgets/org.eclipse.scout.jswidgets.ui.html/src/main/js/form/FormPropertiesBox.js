@@ -29,7 +29,6 @@ export default class FormPropertiesBox extends GroupBox {
     this.displayParentField = null;
   }
 
-
   _jsonModel() {
     return models.get(FormPropertiesBoxModel);
   }

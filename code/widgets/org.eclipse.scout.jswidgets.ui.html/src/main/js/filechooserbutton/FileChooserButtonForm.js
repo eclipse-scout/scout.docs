@@ -17,7 +17,6 @@ export default class FileChooserButtonForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(FileChooserButtonFormModel);
   }

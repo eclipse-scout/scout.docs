@@ -19,7 +19,6 @@ export default class GridDataBox extends GroupBox {
     this.useHints = true;
   }
 
-
   _jsonModel() {
     return models.get(GridDataBoxModel);
   }

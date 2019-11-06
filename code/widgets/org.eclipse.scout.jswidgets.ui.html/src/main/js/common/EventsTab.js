@@ -21,7 +21,6 @@ export default class EventsTab extends TabItem {
     };
   }
 
-
   _jsonModel() {
     return models.get(EventsTabModel);
   }

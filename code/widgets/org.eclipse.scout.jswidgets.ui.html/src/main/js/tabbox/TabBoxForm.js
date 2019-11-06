@@ -18,7 +18,6 @@ export default class TabBoxForm extends Form {
     this.dynamicTabCounter = 0;
   }
 
-
   _jsonModel() {
     return models.get(TabBoxFormModel);
   }
@@ -48,7 +47,7 @@ export default class TabBoxForm extends Form {
 
     this.widget('SettingsMenu').on('action', function() {
       MessageBoxes.createOk(this)
-        .withBody("This is a menu added to the Tab Box with horizontal alignment set to 1.")
+        .withBody('This is a menu added to the Tab Box with horizontal alignment set to 1.')
         .buildAndOpen();
     }.bind(this));
   }

@@ -16,7 +16,6 @@ export default class CheckableTreeStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return CheckableTreeStyleLookupCall.DATA;
   }

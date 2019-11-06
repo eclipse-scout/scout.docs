@@ -16,7 +16,6 @@ export default class EditableTableForm extends TableForm {
     super();
   }
 
-
   _init(model) {
     super._init(model);
 

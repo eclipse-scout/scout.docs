@@ -19,7 +19,6 @@ export default class ColumnLookupCall extends StaticLookupCall {
     this.setTable(table);
   }
 
-
   _data() {
     return this.data;
   }

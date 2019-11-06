@@ -16,7 +16,6 @@ export default class LabelPositionLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return LabelPositionLookupCall.DATA;
   }

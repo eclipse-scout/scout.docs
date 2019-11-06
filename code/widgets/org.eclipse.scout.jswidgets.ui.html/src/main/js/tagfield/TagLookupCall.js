@@ -16,7 +16,6 @@ export default class TagLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     var tags = TagLookupCall.TAGS;
     tags.sort();

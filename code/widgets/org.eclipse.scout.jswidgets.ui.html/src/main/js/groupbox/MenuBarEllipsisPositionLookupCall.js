@@ -16,7 +16,6 @@ export default class MenuBarEllipsisPositionLookupCall extends StaticLookupCall 
     super();
   }
 
-
   _data() {
     return MenuBarEllipsisPositionLookupCall.DATA;
   }

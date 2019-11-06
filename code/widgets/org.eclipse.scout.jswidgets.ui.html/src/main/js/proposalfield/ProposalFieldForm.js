@@ -17,7 +17,6 @@ export default class ProposalFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(ProposalFieldFormModel);
   }

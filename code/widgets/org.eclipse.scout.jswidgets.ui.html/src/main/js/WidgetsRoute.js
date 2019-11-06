@@ -22,7 +22,6 @@ export default class WidgetsRoute extends Route {
     desktop.outline.on('nodesSelected', this._onPageChanged.bind(this));
   }
 
-
   /**
    * Creates an array which maps a routeRef to an objectType.
    * 0: routeRef

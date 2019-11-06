@@ -16,7 +16,6 @@ export default class TileTypeLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return TileTypeLookupCall.DATA;
   }

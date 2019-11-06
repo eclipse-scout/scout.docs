@@ -16,7 +16,6 @@ export default class TabAreaStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return TabAreaStyleLookupCall.DATA;
   }

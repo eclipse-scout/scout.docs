@@ -17,7 +17,6 @@ export default class LabelFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(LabelFieldFormModel);
   }

@@ -17,7 +17,6 @@ export default class BrowserFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(BrowserFieldFormModel);
   }

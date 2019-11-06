@@ -6,7 +6,6 @@ export default class SamplePageWithTableDetailTable extends Table {
     super();
   }
 
-
   _init(model) {
     super._init(model);
 
@@ -24,7 +23,7 @@ export default class SamplePageWithTableDetailTable extends Table {
         row.data.number + '<br><b>Boolean Column:</b> ' +
         row.data.bool
     };
-    return new scout.create('HtmlTile', model);
+    return scout.create('HtmlTile', model);
   }
 
   _onAddRowMenuAction() {

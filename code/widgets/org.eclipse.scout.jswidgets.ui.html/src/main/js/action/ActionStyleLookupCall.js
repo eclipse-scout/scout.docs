@@ -16,7 +16,6 @@ export default class ActionStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return ActionStyleLookupCall.DATA;
   }

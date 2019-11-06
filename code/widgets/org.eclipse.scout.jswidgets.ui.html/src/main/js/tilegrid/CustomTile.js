@@ -8,7 +8,6 @@ export default class CustomTile extends Tile {
     this.displayStyle = Tile.DisplayStyle.PLAIN;
   }
 
-
   _render() {
     this.$container = this.$parent.appendDiv('custom-tile');
     this.htmlComp = HtmlComponent.install(this.$container, this.session);

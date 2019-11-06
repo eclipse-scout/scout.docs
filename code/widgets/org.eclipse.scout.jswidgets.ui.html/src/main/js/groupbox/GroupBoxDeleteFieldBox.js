@@ -20,7 +20,6 @@ export default class GroupBoxDeleteFieldBox extends GroupBox {
     this.dynamicFieldCounter = 0;
   }
 
-
   _jsonModel() {
     return models.get(GroupBoxDeleteFieldBoxModel);
   }

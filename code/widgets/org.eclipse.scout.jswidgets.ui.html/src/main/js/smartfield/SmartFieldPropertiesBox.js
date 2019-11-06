@@ -18,7 +18,6 @@ export default class SmartFieldPropertiesBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(SmartFieldPropertiesBoxModel);
   }

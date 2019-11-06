@@ -16,7 +16,6 @@ export default class VirtualTileGridForm extends TileGridForm {
     super();
   }
 
-
   _init(model) {
     super._init(model);
 

@@ -20,7 +20,6 @@ export default class ModeLookupCall extends StaticLookupCall {
     this.setModeSelector(modeSelector);
   }
 
-
   _data() {
     return this.data;
   }

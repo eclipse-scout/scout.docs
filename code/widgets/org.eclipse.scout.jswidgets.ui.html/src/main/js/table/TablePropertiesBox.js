@@ -18,7 +18,6 @@ export default class TablePropertiesBox extends GroupBox {
     this.table = null;
   }
 
-
   _jsonModel() {
     return models.get(TablePropertiesBoxModel);
   }

@@ -16,7 +16,6 @@ export default class SmartFieldDisplayStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return SmartFieldDisplayStyleLookupCall.DATA;
   }

@@ -17,7 +17,6 @@ export default class ConfigurationBox extends TabBox {
     this.cssClass = 'jswidgets-configuration';
   }
 
-
   _init(model) {
     super._init(model);
 

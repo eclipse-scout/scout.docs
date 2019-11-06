@@ -28,7 +28,6 @@ export default class ChartField extends ValueField {
     };
   }
 
-
   _init(model) {
     this._onInit = true;
     super._init(model);
@@ -55,7 +54,6 @@ export default class ChartField extends ValueField {
     }
     this.chart.setData(this.value);
   }
-
 
   setChartConfig(chartConfig) {
     this.chart.setConfig(chartConfig);

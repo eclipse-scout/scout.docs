@@ -7,7 +7,6 @@ export default class Desktop extends Desktop_1 {
     super();
   }
 
-
   _jsonModel() {
     return models.get(DesktopModel);
   }

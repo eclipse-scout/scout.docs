@@ -40,7 +40,6 @@ export default class Chart extends Widget {
     };
   }
 
-
   static Type = {
     PIE: 'pie',
     LINE: 'line',
@@ -74,7 +73,6 @@ export default class Chart extends Widget {
   setConfig(config) {
     this.setProperty('config', config);
   }
-
 
   _renderConfig() {
     if (this.chart) {

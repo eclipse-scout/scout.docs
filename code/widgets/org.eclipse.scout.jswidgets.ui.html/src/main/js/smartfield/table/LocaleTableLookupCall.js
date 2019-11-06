@@ -17,7 +17,6 @@ export default class LocaleTableLookupCall extends LocaleLookupCall {
     super();
   }
 
-
   _dataToLookupRow(data) {
     var lookupRow = new scout.create('LookupRow', {
       key: data[0],

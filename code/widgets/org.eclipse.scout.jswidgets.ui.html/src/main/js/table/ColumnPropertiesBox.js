@@ -18,7 +18,6 @@ export default class ColumnPropertiesBox extends GroupBox {
     this.column = null;
   }
 
-
   _jsonModel() {
     return models.get(ColumnPropertiesBoxModel);
   }

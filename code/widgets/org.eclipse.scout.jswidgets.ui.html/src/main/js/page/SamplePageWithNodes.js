@@ -8,7 +8,6 @@ export default class SamplePageWithNodes extends PageWithNodes {
     super();
   }
 
-
   _jsonModel() {
     return models.get(SamplePageWithNodesModel);
   }

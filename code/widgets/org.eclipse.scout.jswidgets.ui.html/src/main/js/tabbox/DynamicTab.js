@@ -17,7 +17,6 @@ export default class DynamicTab extends TabItem {
     super();
   }
 
-
   _init(model) {
     super._init(model);
 

@@ -18,7 +18,6 @@ export default class LifecycleForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(LifecycleFormModel);
   }

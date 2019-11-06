@@ -19,9 +19,8 @@ export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
     this.table = null;
   }
 
-
   _jsonModel() {
-    return models.extend(HierarchicalTablePropertiesBoxModel(this), super._jsonModel());
+    return models.extend(HierarchicalTablePropertiesBoxModel, super._jsonModel());
   }
 
   _init(model) {

@@ -17,7 +17,6 @@ export default class TagFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(TagFieldFormModel);
   }

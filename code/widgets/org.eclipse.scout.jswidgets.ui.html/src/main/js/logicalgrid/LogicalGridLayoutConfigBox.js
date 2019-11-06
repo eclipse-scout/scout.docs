@@ -18,7 +18,6 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(LogicalGridLayoutConfigBoxModel);
   }

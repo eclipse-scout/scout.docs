@@ -16,7 +16,6 @@ export default class GroupingStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return GroupingStyleLookupCall.DATA;
   }

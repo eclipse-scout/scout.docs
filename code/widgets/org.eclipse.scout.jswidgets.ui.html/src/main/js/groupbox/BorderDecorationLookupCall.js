@@ -16,7 +16,6 @@ export default class BorderDecorationLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return BorderDecorationLookupCall.DATA;
   }

@@ -20,7 +20,6 @@ export default class GroupLookupCall extends StaticLookupCall {
     this.setAccordion(accordion);
   }
 
-
   _data() {
     return this.data;
   }

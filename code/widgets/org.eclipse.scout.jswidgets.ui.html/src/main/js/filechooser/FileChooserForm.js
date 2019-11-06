@@ -18,7 +18,6 @@ export default class FileChooserForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(FileChooserFormModel);
   }
@@ -53,7 +52,7 @@ export default class FileChooserForm extends Form {
     var chosenFilesText = '';
     if (files.length === 0) {
       chosenFilesText = this.session.text('FileChooserNoFilesChosen');
-    } else if (files.length == 1) {
+    } else if (files.length === 1) {
       chosenFilesText = this.session.text('FileChooserOneFileChosen');
     } else {
       chosenFilesText = this.session.text('FileChooserNFilesChosen', files.length);

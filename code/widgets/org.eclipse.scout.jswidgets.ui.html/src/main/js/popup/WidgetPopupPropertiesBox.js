@@ -18,7 +18,6 @@ export default class WidgetPopupPropertiesBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(WidgetPopupPropertiesBoxModel);
   }

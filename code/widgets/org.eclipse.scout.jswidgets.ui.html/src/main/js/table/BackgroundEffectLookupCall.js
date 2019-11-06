@@ -16,7 +16,6 @@ export default class BackgroundEffectLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return BackgroundEffectLookupCall.DATA;
   }

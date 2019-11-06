@@ -17,7 +17,6 @@ export default class RestForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(RestFormModel);
   }

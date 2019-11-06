@@ -17,7 +17,6 @@ export default class ButtonForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(ButtonFormModel);
   }

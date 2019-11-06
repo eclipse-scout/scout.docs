@@ -16,7 +16,6 @@ export default class MenuBarItemTypeLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return MenuBarItemTypeLookupCall.DATA;
   }

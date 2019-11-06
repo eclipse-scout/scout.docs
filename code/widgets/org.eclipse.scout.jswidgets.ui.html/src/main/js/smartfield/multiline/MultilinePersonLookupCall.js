@@ -16,7 +16,6 @@ export default class MultilinePersonLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return MultilinePersonLookupCall.DATA;
   }

@@ -16,7 +16,6 @@ export default class TooltipAnchorLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return TooltipAnchorLookupCall.DATA;
   }

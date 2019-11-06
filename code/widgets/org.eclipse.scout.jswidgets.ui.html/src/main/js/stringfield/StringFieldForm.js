@@ -17,7 +17,6 @@ export default class StringFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(StringFieldFormModel);
   }

@@ -17,7 +17,6 @@ export default class CarouselForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(CarouselFormModel);
   }

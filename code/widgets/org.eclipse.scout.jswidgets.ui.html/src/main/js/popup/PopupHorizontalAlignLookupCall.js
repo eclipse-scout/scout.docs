@@ -16,7 +16,6 @@ export default class PopupHorizontalAlignLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return PopupHorizontalAlignLookupCall.DATA;
   }

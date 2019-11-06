@@ -19,7 +19,6 @@ export default class App extends App_1 {
     this.scoutVersion = '10.0';
   }
 
-
   _createDesktop(parent) {
     var desktop = scout.create('Desktop',
       models.get(DesktopModel, parent));
@@ -27,7 +26,7 @@ export default class App extends App_1 {
     router.register(new WidgetsRoute(desktop));
     router.activate();
 
-    ResponsiveManager.get().registerHandler(desktop, new scout.create('DesktopResponsiveHandler', {
+    ResponsiveManager.get().registerHandler(desktop, scout.create('DesktopResponsiveHandler', {
       widget: desktop
     }));
 

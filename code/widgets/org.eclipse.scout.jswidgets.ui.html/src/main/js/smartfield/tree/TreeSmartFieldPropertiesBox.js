@@ -19,7 +19,6 @@ export default class TreeSmartFieldPropertiesBox extends SmartFieldPropertiesBox
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.extend(TreeSmartFieldPropertiesBoxModel(this), super._jsonModel());
   }

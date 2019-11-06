@@ -7,7 +7,6 @@ export default class WatchFieldLayout extends NullLayout {
     this.watchField = watchField;
   }
 
-
   layout($container) {
     var containerHeight = $container.height(),
       containerWidth = $container.width(),

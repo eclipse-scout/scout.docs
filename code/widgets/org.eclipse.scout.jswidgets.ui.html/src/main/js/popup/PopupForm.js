@@ -19,7 +19,6 @@ export default class PopupForm extends Form {
     this.popup = null;
   }
 
-
   _jsonModel() {
     return models.get(PopupFormModel);
   }
@@ -118,7 +117,7 @@ export default class PopupForm extends Form {
       withArrow: this.widget('WithArrowField').value,
       cssClass: 'popup-form-popup',
       widget: {
-        objectType: "Label",
+        objectType: 'Label',
         htmlEnabled: true,
         value: '<h2>Hi, I\'m a popup!</h2>' +
           '<p>This widget popup contains a label to display some text.</p>' +

@@ -18,7 +18,6 @@ export default class ValueFieldPropertiesBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(ValueFieldPropertiesBoxModel);
   }

@@ -17,7 +17,6 @@ export default class DesktopForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(DesktopFormModel);
   }

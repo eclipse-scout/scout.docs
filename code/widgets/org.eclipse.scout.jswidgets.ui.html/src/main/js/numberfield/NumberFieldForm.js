@@ -17,7 +17,6 @@ export default class NumberFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(NumberFieldFormModel);
   }

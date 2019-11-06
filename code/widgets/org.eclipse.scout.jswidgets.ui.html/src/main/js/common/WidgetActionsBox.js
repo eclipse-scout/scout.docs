@@ -18,7 +18,6 @@ export default class WidgetActionsBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(WidgetActionsBoxModel);
   }

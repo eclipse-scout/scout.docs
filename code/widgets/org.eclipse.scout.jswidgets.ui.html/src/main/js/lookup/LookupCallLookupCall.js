@@ -16,7 +16,6 @@ export default class LookupCallLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _queryByKey(deferred, key) {
     if (key instanceof LookupCall) {
       deferred.resolve({

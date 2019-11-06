@@ -20,7 +20,6 @@ export default class GroupBoxForm extends Form {
     this._fieldRenderHandler = this._onFieldRender.bind(this);
   }
 
-
   _jsonModel() {
     return models.get(GroupBoxFormModel);
   }
@@ -79,7 +78,7 @@ export default class GroupBoxForm extends Form {
 
   _onMenuAction(event) {
     MessageBoxes.createOk(this)
-      .withBody("Menu with label '" + event.source.text + "' has been activated.")
+      .withBody('Menu with label \'' + event.source.text + '\' has been activated.')
       .buildAndOpen();
   }
 

@@ -17,7 +17,6 @@ export default class WatchFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(WatchFieldFormModel);
   }

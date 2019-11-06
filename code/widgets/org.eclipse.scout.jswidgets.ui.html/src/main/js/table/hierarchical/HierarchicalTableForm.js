@@ -21,7 +21,6 @@ export default class HierarchicalTableForm extends Form {
     this.groupNo = 1;
   }
 
-
   static GROUP_SIZE = 2;
 
   _jsonModel() {

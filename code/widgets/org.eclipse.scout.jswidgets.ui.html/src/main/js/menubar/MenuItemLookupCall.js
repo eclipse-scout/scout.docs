@@ -16,7 +16,6 @@ export default class MenuItemLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return MenuItemLookupCall.DATA;
   }

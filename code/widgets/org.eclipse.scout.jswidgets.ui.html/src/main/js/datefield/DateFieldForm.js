@@ -17,7 +17,6 @@ export default class DateFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(DateFieldFormModel);
   }

@@ -16,7 +16,6 @@ export default class LocaleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return LocaleLookupCall.DATA;
   }

@@ -17,7 +17,6 @@ export default class CheckBoxFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(CheckBoxFieldFormModel);
   }

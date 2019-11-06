@@ -19,7 +19,6 @@ export default class TabItemProperties extends TabItem {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(TabItemPropertiesModel);
   }

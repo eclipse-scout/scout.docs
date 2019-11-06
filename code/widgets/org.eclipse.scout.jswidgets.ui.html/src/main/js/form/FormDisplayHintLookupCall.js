@@ -16,7 +16,6 @@ export default class FormDisplayHintLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return FormDisplayHintLookupCall.DATA;
   }

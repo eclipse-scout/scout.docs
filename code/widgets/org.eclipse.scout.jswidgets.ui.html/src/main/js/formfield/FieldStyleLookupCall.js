@@ -16,7 +16,6 @@ export default class FieldStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return FieldStyleLookupCall.DATA;
   }

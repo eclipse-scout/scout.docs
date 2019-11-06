@@ -16,7 +16,6 @@ export default class ClearableStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return ClearableStyleLookupCall.DATA;
   }

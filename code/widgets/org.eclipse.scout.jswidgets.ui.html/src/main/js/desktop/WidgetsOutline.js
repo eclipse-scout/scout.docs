@@ -17,7 +17,6 @@ export default class WidgetsOutline extends Outline {
     super();
   }
 
-
   _jsonModel() {
     return models.get(WidgetsOutlineModel);
   }

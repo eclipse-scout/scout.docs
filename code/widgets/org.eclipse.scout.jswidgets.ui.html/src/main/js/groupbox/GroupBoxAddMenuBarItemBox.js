@@ -19,7 +19,6 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
     this.dynamicMenuBarItemCounter = 0;
   }
 
-
   _jsonModel() {
     return models.get(GroupBoxAddMenuBarItemBoxModel);
   }

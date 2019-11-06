@@ -17,7 +17,6 @@ export default class TreeSmartFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(TreeSmartFieldFormModel);
   }

@@ -16,7 +16,6 @@ export default class StringFormatLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return StringFormatLookupCall.DATA;
   }

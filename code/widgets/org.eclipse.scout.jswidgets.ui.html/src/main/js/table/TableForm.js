@@ -21,7 +21,6 @@ export default class TableForm extends Form {
     this.groupNo = 0;
   }
 
-
   static GROUP_SIZE = 2;
 
   _jsonModel() {
@@ -66,7 +65,7 @@ export default class TableForm extends Form {
           '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
           '<div style="text-align: center;"><p>' + row.cells[1].text + '</p></div>'
       };
-      return new scout.create('HtmlTile', model);
+      return scout.create('HtmlTile', model);
     };
   }
 
@@ -180,7 +179,7 @@ export default class TableForm extends Form {
 
   _onAppLinkAction(event) {
     MessageBoxes.createOk(this)
-      .withBody("Link with ref '" + event.ref + "' has been clicked.")
+      .withBody('Link with ref \'' + event.ref + '\' has been clicked.')
       .buildAndOpen();
   }
 }

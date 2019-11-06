@@ -16,7 +16,6 @@ export default class ColorSchemeLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return ColorSchemeLookupCall.DATA;
   }

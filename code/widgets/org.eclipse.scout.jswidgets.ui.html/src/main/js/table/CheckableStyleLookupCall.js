@@ -16,7 +16,6 @@ export default class CheckableStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return CheckableStyleLookupCall.DATA;
   }

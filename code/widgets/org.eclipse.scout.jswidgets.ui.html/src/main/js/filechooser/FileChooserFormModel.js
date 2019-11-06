@@ -24,7 +24,6 @@ export default function() {
         },
         {
           id: 'ConfigurationBox',
-          objectType: 'GroupBox',
           objectType: 'TabBox',
           cssClass: 'jswidgets-configuration',
           selectedTab: 'PropertiesTab',

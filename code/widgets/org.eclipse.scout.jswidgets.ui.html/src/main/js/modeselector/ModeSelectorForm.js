@@ -18,7 +18,6 @@ export default class ModeSelectorForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(ModeSelectorFormModel);
   }
@@ -68,7 +67,6 @@ export default class ModeSelectorForm extends Form {
     this.widget('WidgetActionsBox').setField(modeSelectorField);
     this.widget('EventsTab').setField(modeSelectorField);
   }
-
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {

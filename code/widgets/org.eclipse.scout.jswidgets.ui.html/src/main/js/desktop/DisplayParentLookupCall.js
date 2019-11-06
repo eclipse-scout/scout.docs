@@ -16,7 +16,6 @@ export default class DisplayParentLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return DisplayParentLookupCall.DATA;
   }

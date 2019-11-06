@@ -16,7 +16,6 @@ export default class CollapseStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return CollapseStyleLookupCall.DATA;
   }

@@ -18,7 +18,6 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     this.field = null;
   }
 
-
   _jsonModel() {
     return models.get(GroupBoxPropertiesBoxModel);
   }

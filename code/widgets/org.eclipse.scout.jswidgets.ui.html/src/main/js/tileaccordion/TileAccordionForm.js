@@ -22,7 +22,6 @@ export default class TileAccordionForm extends Form {
     this.tileFilter = null;
   }
 
-
   _jsonModel() {
     return models.get(TileAccordionFormModel);
   }
@@ -252,7 +251,7 @@ export default class TileAccordionForm extends Form {
         label: 'Tile ' + i
       }));
     }
-    var group = new scout.create('Group', {
+    var group = scout.create('Group', {
       parent: this.accordion,
       title: 'Group ' + this.insertedGroupCount++,
       body: {
@@ -281,7 +280,7 @@ export default class TileAccordionForm extends Form {
         }
       };
       model = $.extend({}, defaults, model);
-      return new scout.create('HtmlTile', model);
+      return scout.create('HtmlTile', model);
     }
     defaults = {
       parent: this.accordion,
@@ -292,7 +291,7 @@ export default class TileAccordionForm extends Form {
       colorScheme: this.accordion.groups.length % 2 === 0 ? 'default' : 'alternative'
     };
     model = $.extend({}, defaults, model);
-    return new scout.create('jswidgets.CustomTile', model);
+    return scout.create('jswidgets.CustomTile', model);
   }
 
   _updateStatus() {

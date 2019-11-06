@@ -16,7 +16,6 @@ export default class LogicalGridLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return LogicalGridLookupCall.DATA;
   }

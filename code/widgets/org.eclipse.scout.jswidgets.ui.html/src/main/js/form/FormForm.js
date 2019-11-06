@@ -21,7 +21,6 @@ export default class FormForm extends Form {
     this.LifecycleData = {};
   }
 
-
   _jsonModel() {
     return models.get(FormFormModel);
   }

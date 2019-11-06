@@ -20,7 +20,6 @@ export default class FormFieldLookupCall extends StaticLookupCall {
     this.setCompositeField(compositeField);
   }
 
-
   _data() {
     return this.data;
   }

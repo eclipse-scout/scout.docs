@@ -16,7 +16,6 @@ export default class HierarchicalStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return HierarchicalStyleLookupCall.DATA;
   }

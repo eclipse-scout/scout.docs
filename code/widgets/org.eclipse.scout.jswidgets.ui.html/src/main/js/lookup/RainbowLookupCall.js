@@ -16,7 +16,6 @@ export default class RainbowLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return RainbowLookupCall.DATA;
   }

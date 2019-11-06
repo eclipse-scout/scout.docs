@@ -16,7 +16,6 @@ export default class LabelWidthInPixelLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return LabelWidthInPixelLookupCall.DATA;
   }

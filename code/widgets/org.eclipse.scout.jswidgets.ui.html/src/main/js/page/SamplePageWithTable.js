@@ -8,7 +8,6 @@ export default class SamplePageWithTable extends PageWithTable {
     super();
   }
 
-
   _jsonModel() {
     return models.get(SamplePageWithTableModel);
   }

@@ -7,7 +7,6 @@ export default class WatchField extends FormField {
     super();
   }
 
-
   _render() {
     // create the field container
     this.addContainer(this.$parent, 'watch-field');
@@ -35,7 +34,7 @@ export default class WatchField extends FormField {
   }
 
   _paintWatch() {
-    var context = this.$canvas[0].getContext("2d");
+    var context = this.$canvas[0].getContext('2d');
     var radius = this.$canvas.height() / 2;
     context.clearRect(0, 0, this.$canvas.height(), this.$canvas.height());
     context.setTransform(1, 0, 0, 1, 0, 0); // do not use resetTransform because it is experimental API and not supported by all browsers
@@ -66,11 +65,11 @@ export default class WatchField extends FormField {
   _paintNumbers(context, radius) {
     var ang;
     var hour;
-    context.font = radius * 0.15 + "px arial";
+    context.font = radius * 0.15 + 'px arial';
     context.fillStyle = '#014786';
     context.strokeStyle = '#014786';
-    context.textAlign = "center";
-    context.textBaseline = "middle";
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
     for (hour = 1; hour <= 12; hour++) {
       ang = hour * 2 * Math.PI / 12;
       context.rotate(ang);
@@ -103,7 +102,7 @@ export default class WatchField extends FormField {
 
     // paint hour line
     this._paintLine(context, hourAngle, 0, radius * 0.6, radius * 0.04);
-    //minute
+    // minute
     this._paintLine(context, minuteAngle, 0, radius * 0.8, radius * 0.04);
     // second
     this._paintLine(context, secondAngle, radius * 0.7, radius * 1, radius * 0.02);
@@ -113,7 +112,7 @@ export default class WatchField extends FormField {
     context.beginPath();
     context.strokeStyle = '#014786';
     context.lineWidth = width;
-    context.lineCap = "round";
+    context.lineCap = 'round';
     context.rotate(angle);
     context.moveTo(0, -begin);
     context.lineTo(0, -length);

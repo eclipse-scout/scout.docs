@@ -18,7 +18,6 @@ export default class TileGridLayoutConfigBox extends LogicalGridLayoutConfigBox 
     super();
   }
 
-
   _jsonModel() {
     return models.extend(TileGridLayoutConfigBoxModel(this), super._jsonModel());
   }

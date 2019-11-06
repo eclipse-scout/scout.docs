@@ -20,7 +20,6 @@ export default class TabBoxDeleteTabItemBox extends GroupBox {
     this.dynamicTabCounter = 0;
   }
 
-
   _jsonModel() {
     return models.get(TabBoxDeleteTabItemBoxModel);
   }

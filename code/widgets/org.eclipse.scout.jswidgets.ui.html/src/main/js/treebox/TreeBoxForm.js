@@ -17,7 +17,6 @@ export default class TreeBoxForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(TreeBoxFormModel);
   }

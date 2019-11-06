@@ -16,7 +16,6 @@ export default class MenuBarPositionLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return MenuBarPositionLookupCall.DATA;
   }

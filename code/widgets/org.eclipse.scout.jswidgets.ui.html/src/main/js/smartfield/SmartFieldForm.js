@@ -17,7 +17,6 @@ export default class SmartFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(SmartFieldFormModel);
   }

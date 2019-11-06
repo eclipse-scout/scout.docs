@@ -16,7 +16,6 @@ export default class ButtonDisplayStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return ButtonDisplayStyleLookupCall.DATA;
   }

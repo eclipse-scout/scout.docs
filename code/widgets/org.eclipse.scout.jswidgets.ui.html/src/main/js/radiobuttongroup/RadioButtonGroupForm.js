@@ -18,7 +18,6 @@ export default class RadioButtonGroupForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(RadioButtonGroupFormModel);
   }
@@ -70,7 +69,6 @@ export default class RadioButtonGroupForm extends Form {
     var wrapTextField = this.widget('Button.WrapTextField');
     wrapTextField.setValue(targetField.value.wrapText);
     wrapTextField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
-
 
     this.widget('Button.PropertiesBox').setEnabled(!!targetField.value);
     this.widget('Button.FormFieldPropertiesBox').setField(targetField.value);

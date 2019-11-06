@@ -16,7 +16,6 @@ export default class StatusPositionLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return StatusPositionLookupCall.DATA;
   }

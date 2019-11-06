@@ -16,7 +16,6 @@ export default class SalutationLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return SalutationLookupCall.DATA;
   }

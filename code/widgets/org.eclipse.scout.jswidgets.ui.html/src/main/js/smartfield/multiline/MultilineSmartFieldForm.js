@@ -17,7 +17,6 @@ export default class MultilineSmartFieldForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(MultilineSmartFieldFormModel);
   }

@@ -20,7 +20,6 @@ export default class LogicalGridForm extends Form {
     this._fieldRenderHandler = this._onFieldRender.bind(this);
   }
 
-
   _jsonModel() {
     return models.get(LogicalGridFormModel);
   }

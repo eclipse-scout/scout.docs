@@ -18,7 +18,6 @@ export default class SequenceBoxForm extends Form {
     super();
   }
 
-
   _jsonModel() {
     return models.get(SequenceBoxFormModel);
   }

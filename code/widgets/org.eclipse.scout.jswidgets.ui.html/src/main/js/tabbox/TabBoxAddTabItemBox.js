@@ -20,7 +20,6 @@ export default class TabBoxAddTabItemBox extends GroupBox {
     this.dynamicTabCounter = 0;
   }
 
-
   _jsonModel() {
     return models.get(TabBoxAddTabItemBoxModel);
   }

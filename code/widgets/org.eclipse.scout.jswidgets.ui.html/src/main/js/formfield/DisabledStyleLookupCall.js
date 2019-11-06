@@ -16,7 +16,6 @@ export default class DisabledStyleLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return DisabledStyleLookupCall.DATA;
   }

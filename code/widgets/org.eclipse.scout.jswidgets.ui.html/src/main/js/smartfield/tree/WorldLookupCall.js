@@ -19,7 +19,6 @@ export default class WorldLookupCall extends StaticLookupCall {
     this.setHierarchical(true);
   }
 
-
   _data() {
     return WorldLookupCall.DATA;
   }
@@ -63,9 +62,9 @@ export default class WorldLookupCall extends StaticLookupCall {
     return lookupRow;
   }
 
-// 0: key
-// 1: text
-// 2: [parentKey]
+  // 0: key
+  // 1: text
+  // 2: [parentKey]
   static DATA = [
     ['AF', 'Africa', null],
     ['EAF', 'Eastern Africa', 'AF'],

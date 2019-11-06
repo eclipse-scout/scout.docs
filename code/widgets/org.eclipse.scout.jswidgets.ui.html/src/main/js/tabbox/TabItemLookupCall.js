@@ -20,7 +20,6 @@ export default class TabItemLookupCall extends StaticLookupCall {
     this.setTabBox(tabBox);
   }
 
-
   _data() {
     return this.data;
   }

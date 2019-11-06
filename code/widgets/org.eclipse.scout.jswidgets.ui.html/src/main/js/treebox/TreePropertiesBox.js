@@ -18,7 +18,6 @@ export default class TreePropertiesBox extends GroupBox {
     this.tree = null;
   }
 
-
   _jsonModel() {
     return models.get(TreePropertiesBoxModel);
   }

@@ -16,7 +16,6 @@ export default class IconIdLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return Object.keys(scout.icons)
       .filter(function(name) {

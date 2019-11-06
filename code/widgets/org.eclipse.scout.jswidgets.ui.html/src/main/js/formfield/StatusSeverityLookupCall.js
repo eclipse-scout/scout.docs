@@ -16,7 +16,6 @@ export default class StatusSeverityLookupCall extends StaticLookupCall {
     super();
   }
 
-
   _data() {
     return StatusSeverityLookupCall.DATA;
   }

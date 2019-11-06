@@ -21,7 +21,6 @@ export default class TileGridForm extends Form {
     this.tileFilter = null;
   }
 
-
   _jsonModel() {
     return models.get(TileGridFormModel);
   }
@@ -203,14 +202,14 @@ export default class TileGridForm extends Form {
         content: 'New <i>Html Tile</i> ' + this.insertedTileCount++
       };
       model = $.extend({}, defaults, model);
-      return new scout.create('HtmlTile', model);
+      return scout.create('HtmlTile', model);
     }
     defaults = {
       parent: this.tileGrid,
       label: 'New Tile ' + this.insertedTileCount++
     };
     model = $.extend({}, defaults, model);
-    return new scout.create('jswidgets.CustomTile', model);
+    return scout.create('jswidgets.CustomTile', model);
   }
 
   _onInsertManyMenuAction(event) {
