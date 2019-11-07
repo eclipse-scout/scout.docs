@@ -133,7 +133,7 @@ export default class AccordionForm extends Form {
     if (this.insertedGroupCount > 0) {
       title += ' ' + this.insertedGroupCount;
     }
-    var group = scout.reate('Group', {
+    var group = scout.create('Group', {
       parent: this.accordion,
       title: title,
       body: {
