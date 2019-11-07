@@ -30,10 +30,10 @@
     <master_test_timeout>3600</master_test_timeout>
     <seleniumDrivers>${project.build.directory}/test-classes/seleniumDrivers</seleniumDrivers>
     <!-- http://chromedriver.storage.googleapis.com/index.html -->
-    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/76.0.3809.68</chromedriver_base_url>
-    <chromedriver_hash_linux64>5886442a2710185db5b07c8bf42b2484</chromedriver_hash_linux64>
-    <chromedriver_hash_mac64>7370f0173e096e5a15f992b3ffae4501</chromedriver_hash_mac64>
-    <chromedriver_hash_win32>60cf267c91730fd926edc0340273c137</chromedriver_hash_win32>
+    <chromedriver_base_url>http://chromedriver.storage.googleapis.com/78.0.3904.70</chromedriver_base_url>
+    <chromedriver_hash_linux64>37f077132433b20db3f0f5636e89f142</chromedriver_hash_linux64>
+    <chromedriver_hash_mac64>969163657458c7e298c50c914ff5c5c4</chromedriver_hash_mac64>
+    <chromedriver_hash_win32>40df8860f0dfad436665d9de7aa95082</chromedriver_hash_win32>
   </properties>
 
   <build>
