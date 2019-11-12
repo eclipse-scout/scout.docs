@@ -57,12 +57,12 @@ To launch the migration application follow these steps:
 . Create a new simple Maven project in Eclipse (File -> New -> Project -> Maven -> Maven Project -> Next, choose `Create a simple project`). Click Next.
 . Choose a Group- and Artifact Id and click Finish.
 . Open the created pom.xml and add a dependency to `org.eclipse.scout.rt:org.eclipse.scout.migration.ecma6:10.0.0-SNAPSHOT` and update the project using Alt+F5.
-. Create a new class `Config` in src/main/js extending the class `org.eclipse.scout.migration.ecma6.Configuration`.
+. Create a new class `Config` in src/main/java extending the class `org.eclipse.scout.migration.ecma6.Configuration`.
 . Add an `@Replace` annotation to the class
 . In the src/main/resources folder create a folder `META-INF` and within a file `scout.xml` (can be empty).
 . Overwrite the following methods in the created `Config` class to configure the migration application to your local setup:
 .. `getLibraryApiDirectory`: Point to the local directory where the API files from the first step are stored.
-.. `getPersistLibraryFileName`: The application will create an API file for your project too. This is the place to specify the file name.
+.. `getPersistLibraryFileName`: The application will create an API file for your project too (like the ones downloaded at the beginning). This is the place to specify the file name. Choose a name that matches the module name under migration.
 .. `getPersistLibraryName`: Choose the simple name of the module under migration.
 .. `getSourceModuleDirectory`: Absolute path to the Maven module that should be migrated. If you have a Scout Classic application this is the module that ends with .ui.html. If you have a Scout JS application it is typically the module that ends with .ui.
 .. `getTargetModuleDirectory`: Where the migrated files should be stored. If you want to perform an in-place migration to commit the changes to VCS return `getSourceModuleDirectory()`. To test and tweak the migration you can choose an temporary output directory.
@@ -102,7 +102,7 @@ test-results
 .. Copy the following file to the root of the .app module (replace the placeholder ${simpleArtifactName} with your application name): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.app/webpack.config.js?h=releases/10.0[webpack.config.js]
 . Copy the following file to the root of the .ui module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/karma.conf.js?h=releases/10.0[karma.conf.js]
 . Copy the following file to the directory src/test/js of the .ui module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/src/test/js/test-index.js?h=releases/10.0[test-index.js]
-. Move your existing index.js from the WebContent folder to src/main/js in the same module and adjust it accordingly (replace the placeholder ${simpleArtifactName} with your application name).
+. Open your existing index.js file. It may exist in the WebContent folder (or the res sub folder) or the root of the module and replace the content with the following (replace the placeholder ${simpleArtifactName} with your application name):
 +
 [source,javascript]
 .For Scout Classic
@@ -125,6 +125,7 @@ new App().init({
 +
 NOTE: The new files don't require $(document).ready and modelsUrl anymore. Other options are still valid so make sure you don't accidentally remove them.
 
+. Move this index.js to the src/main/js directory in the same module. If a file with that name already exists, append the content to the existing file and remove the former one.
 . Move the file src/main/resources/WebContent/res/login.js (if it exists) to src/main/js in the same module and replace it with the following content:
 +
 [source,javascript]
