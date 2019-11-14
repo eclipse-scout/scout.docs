@@ -131,6 +131,10 @@ image::{rnimgsdir}/button_html_enabled.png[]
 
 The `ImageField` has a new property `uploadEnabled`. When set to true, the field opens the native file chooser and performs a file upload.
 
+=== LabelField: Support for App Links
+
+The `LabelField` now supports app links. In order to use app links in a label field, the property `htmlEnabled` must be set to true.
+
 === Mode Selector: Alternative Display Style
 
 The mode selector now has a different appearance for the two field styles `IFormField.FIELD_STYLE_CLASSIC` and `IFormField.FIELD_STYLE_ALTERNATIVE`.
