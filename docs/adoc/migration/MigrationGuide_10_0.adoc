@@ -84,7 +84,7 @@ After the migration execution there are some manual post processing tasks that m
 IMPORTANT: Depending on the type of application, you either have a \*.ui.html module or a *.ui and an *.app module. The ui module typically contains the JS code and the app module the static resources (WebContent folder). If you only have one module it contains both. So if the guide tells you to do something in the .app module and you don't have one, do it in the .ui.html module instead.
 
 . Please do the automatic migration first if you have JS or CSS files in your project, see <<JavaScript Migration>>
-. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.6.0.
+. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.7.0.
 . Create a file named `.gitignore` in the .ui module and the .app module (if available) with the following content:
 +
 ----
