@@ -461,8 +461,6 @@ By default this property is null.
 |`scout.client.jobCompletionDelayOnSessionShutdown`
 |Specifies the maximal time (in seconds) to wait until running jobs are cancelled on session shutdown.
 
-Should be smaller than `scout.ui.sessionstore.housekeepingMaxWaitForShutdown`.
-
 The default value is 10 seconds.
 |Long >= 0
 |Config Property
@@ -531,16 +529,6 @@ Example: scout.cspDirective[img-src]=`self` data: https: http://localhost:8086
 |`scout.cspExclusions`
 |A list of regex strings. If the pathInfo of the request matches one of these strings the csp headers won`t be set. This property only has an effect if csp is enabled, see `scout.cspEnabled`.
 |List
-|Config Property
-|`scout.dev.scriptfile.persist.key`
-|Specifies a key to store the keys (HttpCacheKey) scripts in development cache. The keys of the last application start in dev mode will be stored in the user.home/.eclipse/org.eclipse.scout.dev/scriptfile_cache_{key}.obj. For the next run in dev mode the keys stored under this key are preloaded.
-|String
-|Config Property
-|`scout.dev.scriptfile.rebuild`
-|Specifies if scriptfiles (*.js, *.less) should be rebuilt only when the files change or with every page reload.
-
-True = Build on every page reload. False = Build only when a file is modified. The default value is false.
-|Boolean
 |Config Property
 |`scout.devMode`
 |Property to specify if the application is running in development mode. Default is false.
@@ -966,56 +954,10 @@ By default this property is set to 4 hours.
 By default this property is set to 1 hour.
 |Long >= 0
 |Config Property
-|`scout.ui.prebuild`
-|When this property returns true, file pre-building is performed when the UI application server starts up.
-
-This means the application start takes more time, but in return the first user request takes less time.
-
-`File` in this context means web-resources like HTML, CSS and JS.
-
-These files are typically processed by Scout`s `ScriptProcessor` and `org.eclipse.scout.rt.ui.html.res.loader.HtmlDocumentParser`.
-
-By default this property is enabled when the application is not running in development mode (property `scout.devMode` is false).
-|Boolean
-|Config Property
-|`scout.ui.prebuild.files`
-|Contains a comma separated list of files in `/WebContent/res` that should be pre-built when the (UI) application server starts up.
-
-Since it takes a while to build files, especially JS and CSS (LESS) files, we want to do this when the server starts. Otherwise its always the first user who must wait a long time until all files are built.
-
-Since CSS and JS files are always referenced by a HTML file, we simply specify the main HTML files in this property.
-
-By default no files are prebuild. This property only has an effect if property `scout.ui.prebuild` is enabled.
-|List
-|Config Property
-|`scout.ui.sessionStore.maxWaitForAllShutdown`
-|Maximum time in second to wait for all client sessions to be stopped after the HTTP session has become invalid.
-
-After this number of seconds a `leak detection` test is performed. You are advised to change this value only if your sessions need an unusual long time to shutdown.
-
-By default this property is set to 1 minute.
-|Integer >= 0
-|Config Property
-|`scout.ui.sessionStore.valueUnboundMaxWaitForWriteLock`
-|Maximum time in seconds to wait for the write lock when the session store is unbound from the HTTP session.
-
-This value should not be too large because waiting on the lock might suspend background processes of the application server.
-
-By default this property is set to 5 seconds.
-|Integer >= 0
-|Config Property
 |`scout.ui.sessionstore.housekeepingDelay`
 |Number of seconds before the housekeeping job starts after a UI session has been unregistered from the store.
 
 By default this property is set to 30 seconds.
-|Integer >= 0
-|Config Property
-|`scout.ui.sessionstore.housekeepingMaxWaitForShutdown`
-|Maximum time in seconds to wait for a client session to be stopped by the housekeeping job.
-
-The value should be smaller than the session timeout (typically defined in the web.xml) and greater than the value of property `scout.client.jobCompletionDelayOnSessionShutdown`
-
-By default this property is set to 1 minute.
 |Integer >= 0
 |Config Property
 |`scout.ui.theme`

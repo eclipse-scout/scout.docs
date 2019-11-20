@@ -188,6 +188,7 @@ NOTE: Differences: the name of the script files are defined in webpack.config.js
 .. `master_skip_pnpm_install_dev=true`
 .. `master_skip_pnpm_install_prod=true`
 .. `master_skip_copy_webpack_build_output=true`
+. Remove the following properties from all your config.properties files: `scout.ui.prebuild`, `scout.ui.prebuild.files`, `scout.dev.scriptfile.rebuild`, `scout.dev.scriptfile.persist.key`.
 . If you use pnpm (see below), create a file called `pnpm-workspace.yaml` in the parent folder of your modules (which is most likely the root of your git repository) and include your npm modules.
 . Open a terminal in the folder of the .ui module and run the command `npm install` (or `pnpm install`, if you use pnpm). This installs all dependencies that are required by the .ui module.
 . Open a terminal in the folder of the .app module and run the command `npm install` (or `pnpm install`, if you use pnpm). This installs all dependencies that are required by the .app module (including the .ui module of your project).
@@ -210,12 +211,11 @@ With the new web tool stack the build of the JS and CSS code does not happen at 
 . To run JavaScript specs Scout now uses ChromeHeadless instead of PhantomJS. If you have JS specs you need to make sure there is a Chrome installed on your build server. The following installation guide worked for our linux servers: https://gist.github.com/ipepe/94389528e2263486e53645fa0e65578b#gistcomment-2379515.
 . In order to display the test results you need to add the new test-results dir in your job configuration (e.g. `\*/test-results/*/test-*.xml`)
 . You only have to do this step if you want to share your npm packages between different applications. +
-If you want to deploy npm artifacts to a custom npm repository (e.g. Artifactory), you need to add `.npmrc` file to the home directory of your build user on the build server (similar to the `.settings.xml` of maven). In order to deploy the artifacts you can use the official npm cli interface (npm publish). If you want to publish snapshots you can use Scout's snapshot-version script.
+If you want to deploy npm artifacts to a custom npm repository (e.g. Artifactory), you need to add `.npmrc` file to the home directory of your build user on the build server (similar to the `.settings.xml` of maven). In order to deploy the artifacts you can use the official npm cli interface (npm publish). If you want to publish snapshots you can use the following command.
 +
 [source]
 ----
 cd your.app.ui
-./target/node/node ./target/node/node_modules/npm/bin/npm-cli.js run snapshot-version
 ./target/node/node ./target/node/node_modules/npm/bin/npm-cli.js publish --tag=snapshot
 ----
 
@@ -258,8 +258,12 @@ The following methods on `CacheBuilder` where removed, since they were unused an
 
 `ICache`, its implementations and cache wrappers have been moved to  `org.eclipse.scout.rt.platform.cache`.
 
+=== Remove SessionStore Properties
 
-
+The following properties are no longer used and can be deleted without replacement:
+* `scout.ui.sessionStore.maxWaitForAllShutdown`
+* `scout.ui.sessionStore.valueUnboundMaxWaitForWriteLock`
+* `scout.ui.sessionstore.housekeepingMaxWaitForShutdown`
 
 === Authorization API
 The authorization API of scout was extended and moved from `org.eclipse.scout.rt.shared` into its own module.
