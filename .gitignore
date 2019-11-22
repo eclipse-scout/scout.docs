@@ -28,3 +28,6 @@ classes
 target/
 .surefire-*
 .flattened-pom.xml
+
+# node
+node_modules
