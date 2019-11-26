@@ -102,6 +102,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(3000.0)
+@ClassId("a9a153bf-8000-4977-bdb5-84c4673fda73")
 public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private static final Locale ALBANIAN = new Locale("sq");
@@ -237,9 +238,11 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   @Order(10)
+  @ClassId("92cf7490-e423-417e-ac9c-38ffabbc16a2")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("49db90c6-22b7-4627-8d89-1ac8ab757c2c")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -271,6 +274,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
+        @ClassId("fe6f12a6-e87c-4905-98a3-d37162f4d6eb")
         public class DefaultSmartField extends AbstractSmartField<Locale> {
 
           private boolean m_throwOnLookup = false;
@@ -371,6 +375,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(40)
+        @ClassId("2fd9b3c9-9504-4363-9e1c-cf8a58899948")
         public class MandatoryField extends AbstractSmartField<Color> {
 
           @Override
@@ -404,6 +409,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(50)
+        @ClassId("8ce684f0-d180-467b-bc2a-e4fb7cad9a88")
         public class DisabledField extends AbstractSmartField<Color> {
 
           @Override
@@ -493,6 +499,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(70)
+        @ClassId("4ee79743-6bd3-4625-8a59-e7bcd258bd0e")
         public class DefaultTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
@@ -525,6 +532,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(80)
+        @ClassId("ee23f8f9-3488-4e17-b3d0-1a4996040a38")
         public class MandatoryTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
@@ -544,6 +552,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(90)
+        @ClassId("253bc8bb-c89e-4846-acba-4c85c6c03ab6")
         public class DisabledTreeSmartField extends AbstractSmartField<Long> {
 
           @Override
@@ -568,6 +577,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(100)
+        @ClassId("859f0a4f-0bc8-41e6-8edd-789938700009")
         public class LoadIncrementalField extends AbstractBooleanField {
 
           @Override
@@ -606,6 +616,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(110)
+        @ClassId("a9567a16-fe8e-4403-b4d4-6406a3238a3e")
         public class DefaultProposalField extends AbstractProposalField<Long> {
 
           @Override
@@ -620,6 +631,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(120)
+        @ClassId("194ccebf-8309-4cc4-866d-dcb48b82a7b5")
         public class MandatoryProposalField extends AbstractProposalField<Long> {
 
           @Override
@@ -639,6 +651,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(130)
+        @ClassId("759d786f-aa20-45e4-bf86-0e2dd677e266")
         public class DisabledProposalField extends AbstractProposalField<Long> {
 
           @Override
@@ -665,6 +678,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(20)
+    @ClassId("cf51c415-8255-4fb7-a3e0-a9ef9b468cac")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -678,6 +692,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(10)
+      @ClassId("7c955621-6105-40b0-80c2-bae48fd6e437")
       public class ListSmartField extends AbstractSmartField<String> {
 
         private boolean m_throttleActive = false;
@@ -735,6 +750,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(20)
+      @ClassId("8d3d3c1c-fa9e-4a6e-b9b1-5e449b23eed4")
       public class GetValueField extends AbstractStringField {
 
         @Override
@@ -764,6 +780,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(30)
+      @ClassId("75584800-889e-4427-840c-060c3f6a3432")
       public class ListEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -788,6 +805,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(40)
+      @ClassId("fe0a439e-2cb5-43ce-a1c6-8f39e4452128")
       public class BrowseMaxRowCountField extends AbstractIntegerField {
 
         @Override
@@ -813,6 +831,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(50)
+      @ClassId("375bffda-6c74-4f49-bef8-241574880453")
       public class EnableActiveFilterField extends AbstractBooleanField {
 
         @Override
@@ -832,6 +851,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(60)
+      @ClassId("2e17a95a-82df-485e-8468-8cc9a5aef32c")
       public class ListSearchRequiredFilterField extends AbstractBooleanField {
 
         @Override
@@ -851,6 +871,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(70)
+      @ClassId("528f9940-f1fe-458d-8286-7be8d2e5d9cd")
       public class TreeSmartField extends AbstractSmartField<String> {
 
         @Override
@@ -875,6 +896,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(80)
+      @ClassId("3eadd220-9879-43a7-aaa8-f85bf1bf3e7c")
       public class GetValueTreeSmartFieldField extends AbstractStringField {
 
         @Override
@@ -904,6 +926,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(90)
+      @ClassId("ba4aa07c-6f42-440d-8713-fc461e7476f7")
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -927,6 +950,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(100)
+      @ClassId("a07facd8-e76a-4c1f-bcc6-8d46a6422e54")
       public class BrowseHierarchyField extends AbstractBooleanField {
 
         @Override
@@ -951,6 +975,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(110)
+      @ClassId("451c785e-b116-403d-91bb-73c4cc7d166e")
       public class BrowseAutoExpandAllField extends AbstractBooleanField {
 
         @Override
@@ -975,6 +1000,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(120)
+      @ClassId("fc753b2a-fb53-44cf-8727-6e6805b88ccd")
       public class TreeSearchRequiredFilterField extends AbstractBooleanField {
 
         @Override
@@ -994,6 +1020,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(130)
+      @ClassId("4694bbc2-a62d-4d7f-acd3-0cb126b1d9a0")
       public class PlaceholderField extends AbstractPlaceholderField {
 
         @Override
@@ -1004,6 +1031,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(30)
+    @ClassId("f896974e-4889-4806-a6bc-fc27180b443f")
     public class SampleContentButton extends AbstractButton {
 
       private boolean m_showState;
@@ -1034,6 +1062,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(35)
+    @ClassId("090bf901-98c2-4a22-aca0-f1353b29b982")
     public class SeleniumTestMenu extends AbstractMenu {
 
       @Override
@@ -1051,6 +1080,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(10)
+        @ClassId("d094b196-3f05-41f6-aefe-330b829d3702")
         public class WildcardMenu extends AbstractMenu {
 
           @Override
@@ -1059,6 +1089,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(10)
+          @ClassId("b1a5915f-dabe-4ef7-9241-c541ff1ce6d8")
           public class AutoPrefixWildcardMenu extends AbstractMenu {
 
             private boolean m_active;
@@ -1087,6 +1118,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(20)
+          @ClassId("83f6de02-6b5f-4f7b-84f5-c506b3bd78a7")
           public class ChangeWildcard1Menu extends AbstractMenu {
             @Override
             protected void execAction() {
@@ -1100,6 +1132,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(30)
+          @ClassId("52163265-270b-4ed5-8890-d86912632580")
           public class ChangeWildcard2Menu extends AbstractMenu {
             @Override
             protected void execAction() {
@@ -1113,6 +1146,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(40)
+          @ClassId("34c06929-92b1-45c4-b992-e0fdb50f7e75")
           public class ChangeWildcard3Menu extends AbstractMenu {
             @Override
             protected void execAction() {
@@ -1126,6 +1160,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
           }
 
           @Order(50)
+          @ClassId("78bc7d00-51c1-44ea-99a6-4d55ca70cb0a")
           public class ChangeWildcard4Menu extends AbstractMenu {
             @Override
             protected void execAction() {
@@ -1140,6 +1175,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(20)
+        @ClassId("31d66d80-d9f6-4b6a-88e0-1b4b84da5ead")
         public class ShowDefaultSmartFieldValueMenu extends AbstractMenu {
 
           @Override
@@ -1176,6 +1212,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(40)
+        @ClassId("09b26af9-3c83-44c5-80f5-b0131823635e")
         public class ToggleLookupCallMenu extends AbstractToggleMenu {
 
           @Override
@@ -1200,6 +1237,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(50)
+        @ClassId("f9712513-971a-4631-941f-0661eba73590")
         public class ToggleThrottleSmartFieldMenu extends AbstractToggleMenu {
 
           @Override
@@ -1219,6 +1257,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(60)
+        @ClassId("889e1f3e-8b19-44f0-b93c-b081e4c659a6")
         public class ToggleExceptionOnLookupMenu extends AbstractToggleMenu {
 
           @Override
@@ -1238,6 +1277,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(70)
+        @ClassId("78ebdb8d-7f86-4bcb-a5fd-65f72087f39f")
         public class ToggleExceptionOnValidateMenu extends AbstractToggleMenu {
 
           @Override
@@ -1257,6 +1297,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(90)
+        @ClassId("d923e030-ccb6-4a42-a12d-eebc9f04398e")
         public class ToggleValidateValueMenu extends AbstractToggleMenu {
 
           @Override
@@ -1309,6 +1350,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(130)
+        @ClassId("08427559-411f-4d9a-b5ae-b8848b250716")
         public class ToggleFormatValueMenu extends AbstractToggleMenu {
 
           @Override
@@ -1338,6 +1380,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(30)
+        @ClassId("391fa4f5-903f-4884-8294-faf1fd8c0ea2")
         public class ShowDefaultProposalFieldValueMenu extends AbstractMenu {
 
           @Override
@@ -1367,6 +1410,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
         }
 
         @Order(70)
+        @ClassId("800f443a-1a67-4a0f-9263-c038c6f59ad0")
         public class ToggleHierarchicalLookupMenu extends AbstractToggleMenu {
 
           @Override
@@ -1397,6 +1441,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(400)
+      @ClassId("62c03c53-e71a-405a-8372-00447a326765")
       public class SeleniumResetMenu extends AbstractMenu {
 
         @Override
@@ -1424,6 +1469,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(40)
+    @ClassId("c5ef9a73-39a0-4832-a548-d4bd41665fe8")
     public class CloseButton extends AbstractCloseButton {
     }
   }
