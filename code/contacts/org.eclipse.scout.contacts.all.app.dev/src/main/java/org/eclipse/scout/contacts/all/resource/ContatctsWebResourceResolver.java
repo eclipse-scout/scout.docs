@@ -14,16 +14,8 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.Bean;
-import org.eclipse.scout.rt.platform.Platform;
 import org.eclipse.scout.rt.platform.Replace;
-import org.eclipse.scout.rt.platform.util.FinalValue;
-import org.eclipse.scout.rt.platform.util.LazyValue;
-import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.shared.ui.webresource.ClasspathWebResourceResolver;
 import org.eclipse.scout.rt.shared.ui.webresource.FilesystemWebResourceResolver;
-import org.eclipse.scout.rt.shared.ui.webresource.IWebResourceResolver;
 
 @Replace
 public class ContatctsWebResourceResolver extends FilesystemWebResourceResolver {
