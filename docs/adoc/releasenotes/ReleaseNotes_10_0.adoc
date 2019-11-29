@@ -9,8 +9,6 @@ Howto:
 
 == About This Release
 
-The Eclipse Scout {scout-version} version was released as part of the {simrel-link} on {simrel-date}.
-
 The latest version of this release is: {maven-version}.
 
 You can see the {github-changelog-link} on GitHub.
@@ -19,18 +17,19 @@ Coming from an older Scout version? Check out the {migration-guide-link}!
 
 === Service Releases
 
-After the final simultaneous Eclipse release, there are no more Eclipse _service releases_. Scout {scout-version} will continue to be maintained for a while and a new build may be released from time to time. Beside bug fixes, these releases may even contain some minor features. See the {simrel-faq-link} for details.
+Scout {scout-version} will continue to be maintained for a while and a new build may be released from time to time.
+Beside bug fixes, these releases may even contain some minor features.
 
-The following enhancements were made after the initial {scout-version} release.
-
-==== Simrel {simrel-name} ({scout-version}) -- Release Expected {simrel-date}
-
+//The following enhancements were made after the initial {scout-version} release.
+//
+//==== 10.0.1
+//
 // The initial release of this version was *10.0.0.xyz* (Maven: 10.0.0.xyz_Simrel_2019_06).
-
-WARNING: {NotReleasedWarning}
-
-(Section intentionally left blank for possible future release)
-
+//
+//WARNING: {NotReleasedWarning}
+//
+//(Section intentionally left blank for possible future release)
+//
 // * <<New Feature (since 10.0.0.xyz)>>
 //
 // ==== Upcoming -- No Planned Release Date
@@ -43,8 +42,8 @@ WARNING: {NotReleasedWarning}
 
 === Obtaining the Latest Version
 
-==== Runtime (Scout RT)
-Scout RT artifacts are distributed via Maven:
+==== Scout Runtime for Java
+Scout Runtime artifacts for Java are distributed using Maven Central:
 
 * {maven-central-link} on _Maven Central_
 * {mvnrepository-link} on _mvnrepository.com_
@@ -63,14 +62,44 @@ Usage example in the parent POM of your Scout application:
 </dependency>
 ----
 
-==== Eclipse IDE Tooling (Scout SDK)
+
+==== Scout Runtime for JavaScript
+
+Scout Runtime artifacts for JavaScript are distributed using npm:
+
+* https://www.npmjs.com/package/@eclipse-scout/core[Scout Core Runtime]
+* https://www.npmjs.com/search?q=%40eclipse-scout[All official Scout JavaScript packages]
+
+
+==== IDE Tooling (Scout SDK)
+In addition to the Eclipse IDE Scout 10 now officially supports https://www.jetbrains.com/idea/[IntelliJ IDEA] as well 🚀
+
+Please find more details about the new plugin and how to install it in the corresponding section below.
+
+===== Eclipse
+
 You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
 {scout-sdk-download-link}
 
 To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 {scout-sdk-update-site}
 
-==== Demo Applications
+
+===== IntelliJ IDEA
+
+We are happy to announce Scout support for https://www.jetbrains.com/idea/[IntelliJ IDEA] which combines the power of IntelliJ and Scout and gives you more flexibility in choosing your favourite development environment.
+
+However as this is the very first version of the IntelliJ plugin not all features that are available in Eclipse are available in IntelliJ yet.
+We are working towards closing the gaps and bring your favourite features to IntelliJ as well.
+The features supported by the latest version can bee seen in the `What's New` section of the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[plugin description].
+More features will come in future releases as soon as possible.
+
+You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[JetBrains Plugin Repository] or you can use the plugins client built into IntelliJ IDEA.
+Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
+
+
+
+=== Demo Applications
 The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
@@ -81,7 +110,19 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
-== Widgets
+== New Web Tool Stack
+
+Scout updated the web tool stack from a custom implementation to a standard https://nodejs.org/[Node.js], https://webpack.js.org/[Webpack] and https://babeljs.io/[Babel] based setup.
+This was required as some of the frameworks used until now (e.g. to minimize CSS and JavaScript code or to run JavaScript tests) cannot handle modern code and are no longer supported (end-of-life).
+
+Thanks to the power of the new tool stack it is now possible to write modern JavaScript code which will be transpiled at build time so that old browsers can execute the code.
+Furthermore it is easier to integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npm registry].
+
+The old Scout JavaScript code has already been migrated to a modern EcmaScript 6+ code level and uses these new features.
+Because of this your project specific JavaScript code must be migrated to the new level as well. Please refer to the tech doc for details about the new tool stack and to the migration guide on how to update your project.
+
+
+== Widget Enhancements
 
 === GroupBox: New MenuBar Position TITLE
 
@@ -159,7 +200,8 @@ This is especially interesting for FormFields for which it was necessary to do t
 === Consistent Parent
 
 Lots of Scout widgets like `Actions`, `FormFields`, `Tiles` or `Tables` can have a parent element.
-Until now there have been several methods to access parent elements (e.g. `IActionNode#getParent()`, `ITile#getContainer()`, `IFormField#getParentField`, etc.) and it was only available on the specific element (e.g. for a Table).
+Until now there have been several methods to access parent elements (e.g. `IActionNode#getParent()`, `ITile#getContainer()`, `IFormField#getParentField()`, etc.) and it was only available on the specific element (e.g. on an Action).
+
 Now there is one `getParent()` method for all widgets. Furthermore visit methods have been added to traverse up the parent hierarchy.
 
 === PropertyChange Shortcut (JS)

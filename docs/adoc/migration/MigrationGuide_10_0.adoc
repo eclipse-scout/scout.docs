@@ -13,16 +13,17 @@ This document describes all relevant changes *from Eclipse Scout 9.0 to Eclipse 
 
 === Service Releases
 
-Scout 10.0 will continue to be maintained for a while and a new build may be released from time to time, following the https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release Cycle]. Beside bugfixes, these service releases may even contain some minor features.
+Scout 10.0 will continue to be maintained for a while and a new build may be released from time to time.
+Beside bugfixes, these service releases may even contain some minor features.
 
-The following changes were made after the initial 10.0 release.
-
-==== Simrel 2020-03 -- TBD
-
-WARNING: {NotReleasedWarning}
-
+//The following changes were made after the initial 10.0 release.
+//
+//==== 10.0.1
+//
+//WARNING: {NotReleasedWarning}
+//
 // * <<Migration Description (since 10.0.0.xyz)>>
-
+//
 // ==== Upcoming -- No Planned Release Date
 //
 // The following changes were made after the latest official release build. No release date has been fixed yet.
@@ -31,6 +32,7 @@ WARNING: {NotReleasedWarning}
 //
 // * <<Migration Description (since 10.0.0.xyz)>>
 
+
 ////
   =============================================================================
   === API CHANGES IN JAVA CODE ================================================
@@ -38,10 +40,11 @@ WARNING: {NotReleasedWarning}
 ////
 
 == New Web Tool Stack
-Scout updated the web tool stack from a custom implementation to a standard Node.js, Webpack and Babel based setup.
+Scout updated the web tool stack from a custom implementation to a standard https://nodejs.org/[Node.js], https://webpack.js.org/[Webpack] and https://babeljs.io/[Babel] based setup.
+
 Thanks to the power of these tools it is now possible to write modern JavaScript code which will be transpiled at build time so that old browsers can execute the code.
 
-To run the JavaScript build a JavaScript runtime is required. This can be downloaded from https://nodejs.org/. It is recommended to use a Node.js version 12 because this is a LTS release.
+To run the JavaScript build a JavaScript runtime is required. This can be downloaded from https://nodejs.org/[Node.js]. It is recommended to use a Node.js version 12 because this is a LTS release.
 After downloading run the installer and add the installation directory to the PATH environment variable. This allows to use commands like `node` or `npm` from the command line.
 These commands will be required later.
 
