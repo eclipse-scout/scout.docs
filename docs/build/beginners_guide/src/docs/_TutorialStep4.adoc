@@ -225,7 +225,7 @@ Finally, we fill the individual tab boxes into the details box in the lower part
 As the first field we add the field that will show the picture of the person to the `GeneralBox` container.
 
 . Open class `PersonForm` in the Java editor
-. Place the curson in the body of the inner class `GeneralBox`.
+. Place the cursor in the body of the inner class `GeneralBox`.
 . Copy the code provided in <<lst-contacts_picture_field>> into the general box.
 . Add for each field a getter method above the MainBox (where all other getters are). Alternatively you could use the SDK to create both fields (including getters) and add the code from <<lst-contacts_picture_field>>.
 . Hit kbd:[Ctrl+Shift+O] and fix the necessary imports.
