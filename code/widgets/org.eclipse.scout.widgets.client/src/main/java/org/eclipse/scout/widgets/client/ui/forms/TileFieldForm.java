@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -140,6 +141,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
   public class MainBox extends AbstractGroupBox {
 
     @Order(100)
+    @ClassId("db483b87-eec5-4f50-8534-0a870ff3d55a")
     public class DetailBox extends AbstractGroupBox {
       private MenuMediator m_menuMediator;
 
@@ -156,7 +158,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Order(1000)
       @ClassId("e06efe30-25db-446c-848f-22935dcff376")
-      public class TileField extends AbstractTileField<TileField.TileGrid> {
+      public class TileField extends AbstractTileField<TileGrid> {
 
         @Override
         protected boolean getConfiguredLabelVisible() {
@@ -493,6 +495,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           }
 
+          @ClassId("ef2f2d9a-c0cf-4f52-b057-cb408a82b4d0")
           public class SimpleTile1 extends AbstractCustomTile {
             @Override
             protected String getConfiguredLabel() {
@@ -500,6 +503,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
+          @ClassId("35c830af-96dd-47ad-a494-eed258318938")
           public class SimpleTile2 extends AbstractCustomTile {
             @Override
             protected String getConfiguredLabel() {
@@ -507,6 +511,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
+          @ClassId("27e2d10a-9a1c-4ed9-bc18-4b5467da8e98")
           public class SimpleTile3 extends AbstractCustomTile {
             @Override
             protected String getConfiguredLabel() {
@@ -514,6 +519,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
+          @ClassId("79db80d5-173e-48b3-9445-1db48dd41f12")
           public class SimpleTile4 extends AbstractCustomTile {
             @Override
             protected String getConfiguredLabel() {
@@ -521,6 +527,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
           }
 
+          @ClassId("074b1675-16ef-481e-8f65-174341ed4b5c")
           public class SimpleTile5 extends AbstractCustomTile {
             @Override
             protected String getConfiguredLabel() {
@@ -571,7 +578,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Order(3000)
       @ClassId("16a80da8-a168-4b87-bf86-0ceff2823d36")
-      @FormData(sdkCommand = FormData.SdkCommand.IGNORE)
+      @FormData(sdkCommand = SdkCommand.IGNORE)
       public class StatusField extends AbstractLabelField {
         @Override
         protected boolean getConfiguredLabelVisible() {
@@ -876,10 +883,12 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(500)
+    @ClassId("e5de5758-cff2-4c19-b76c-a80456cbf75f")
     public class CloseButton extends AbstractCloseButton {
     }
   }
 
+  @ClassId("a7c26df1-d941-44bf-8533-8b2855a97923")
   public static class SimpleTile extends AbstractCustomTile {
   }
 

@@ -110,6 +110,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(5000.0)
+@ClassId("ade82b46-9eca-44c2-8dd2-b90389f7bb67")
 public class TableFieldForm extends AbstractForm implements IPageForm {
 
   public static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
@@ -223,9 +224,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("10650cd0-7e98-4a41-b05a-e2d5b2d955d4")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("8c29e2ae-eea9-4163-af41-8752d9f9e753")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -234,6 +237,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("cbf13840-fc34-4ecb-8c9a-e3888c557dd5")
       public class DefaultField extends AbstractFileTableField {
 
         @Override
@@ -254,6 +258,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("194591df-39d6-475f-a7d4-82b72c483e90")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -262,6 +267,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("aebd5c7d-a9fa-40b8-8427-edde84fcce89")
       public class TableField extends AbstractTableField<Table> {
 
         private long m_maxId = 0;
@@ -339,6 +345,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           return buf.toString();
         }
 
+        @ClassId("bffc9432-ffdf-4b6b-9644-069aaf62e0fb")
         public class Table extends AbstractTable {
 
           public CustomColumn getCustomColumn() {
@@ -470,6 +477,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("d4f34a6e-048a-4879-bafb-51d1b7f8ba0d")
           public class IdColumn extends AbstractLongColumn {
 
             @Override
@@ -489,6 +497,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("70915c92-acd5-4b58-8b9a-2164eb4a810f")
           public class NameColumn extends AbstractStringColumn {
 
             @Override
@@ -514,6 +523,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(30)
+          @ClassId("bfbcf2c7-9532-40f5-8b25-93078ed6f41f")
           public class LocationColumn extends AbstractProposalColumn<String> {
 
             @Override
@@ -538,6 +548,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(40)
+          @ClassId("70c106fb-5391-4abb-a8d1-54b5661d319e")
           public class DateColumn extends AbstractDateColumn {
 
             @Override
@@ -557,6 +568,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(45)
+          @ClassId("8948051f-fbea-4047-be7c-70590882d2d0")
           public class StartTimeColumn extends AbstractTimeColumn {
 
             @Override
@@ -576,6 +588,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(48)
+          @ClassId("a2217ed3-7e94-4110-b3aa-2416a7eac95c")
           public class EndDateTimeColumn extends AbstractDateTimeColumn {
 
             @Override
@@ -595,6 +608,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(50)
+          @ClassId("3772d988-6cb7-41fa-bac9-df4491a17ed0")
           public class IndustryColumn extends AbstractSmartColumn<Long> {
 
             @Override
@@ -625,6 +639,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(60)
+          @ClassId("98d5e29f-de27-4b59-8204-632cabdd1400")
           public class LanguageColumn extends AbstractSmartColumn<Locale> {
 
             @Override
@@ -650,6 +665,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(70)
+          @ClassId("185fc0b6-d909-4271-afb3-8647478cf364")
           public class ParticipantsColumn extends AbstractLongColumn {
 
             @Override
@@ -680,6 +696,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(80)
+          @ClassId("fe99af5b-0419-4e18-8f17-9393df1cc3fb")
           public class WebPageColumn extends AbstractStringColumn {
 
             @Override
@@ -705,6 +722,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(90)
+          @ClassId("d65e7f29-0364-4386-a5e0-6974344444e9")
           public class AttendedColumn extends AbstractBooleanColumn {
 
             @Override
@@ -730,6 +748,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(92)
+          @ClassId("22523dfc-1aa7-43c3-b12b-bf9b07e7ea6c")
           public class MixedStateColumn extends AbstractBooleanColumn {
 
             @Override
@@ -759,6 +778,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(100)
+          @ClassId("705ad496-494e-4852-81ff-b6fad158835a")
           public class PhoneColumn extends AbstractStringColumn {
             @Override
             protected boolean getConfiguredEditable() {
@@ -782,6 +802,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(100)
+          @ClassId("b8198666-b8f2-40c3-8219-fd4a33a9135d")
           public class TrendColumn extends AbstractIconColumn {
 
             @Override
@@ -797,6 +818,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(105)
+          @ClassId("ece26c29-1ff8-4c9f-80bb-5dd2a7a644d3")
           public class ImageColumn extends AbstractStringColumn {
             @Override
             protected boolean getConfiguredEditable() {
@@ -828,6 +850,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(110)
+          @ClassId("8b479321-62d0-4a9b-af4d-a31f4a8c01b9")
           public class TextAndIconHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -847,6 +870,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(120)
+          @ClassId("e70f80e2-436c-4f80-875e-3f1741aa303c")
           public class IconHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -862,6 +886,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(130)
+          @ClassId("16a54f05-8656-4890-af03-0e7ce5c527c6")
           public class EmptyHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -871,6 +896,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(135)
+          @ClassId("c6702877-4f14-44da-aab2-74793814165e")
           public class DateWithEmptyTextColumn extends AbstractDateColumn {
 
             @Override
@@ -937,6 +963,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(140)
+          @ClassId("2a7608fc-1df6-442d-8ef2-dd7f46a5c2ae")
           public class LegacyHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -971,6 +998,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(150)
+          @ClassId("b7a5ca0e-39fa-473c-9d92-9c8849f1a4f1")
           public class MultilineHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -999,6 +1027,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("4387270a-0be4-459f-83a4-9583190f8871")
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -1018,6 +1047,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(15)
+          @ClassId("a09f638b-4278-44d9-8669-5c4f075fe444")
           public class TableStatusVisibleMenu extends AbstractMenu {
 
             @Override
@@ -1031,6 +1061,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(10)
+            @ClassId("ac46c70b-0efb-4974-b359-9c5a990fbdb7")
             public class RemoveStatusMenu extends AbstractMenu {
 
               @Override
@@ -1050,6 +1081,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(20)
+            @ClassId("fd06fd59-0de4-4dac-94ee-0ea96c236866")
             public class SetSeverityInfoMenu extends AbstractMenu {
 
               @Override
@@ -1069,6 +1101,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(30)
+            @ClassId("7a25ecaa-82bc-4aa1-9255-dcf6d056e16e")
             public class SetSeverityWarningMenu extends AbstractMenu {
 
               @Override
@@ -1088,6 +1121,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(40)
+            @ClassId("af188f37-f842-4d5d-ae81-c9ada7d01384")
             public class SetSeverityErrorMenu extends AbstractMenu {
 
               @Override
@@ -1108,6 +1142,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(15)
+          @ClassId("fd00e286-e6e3-4e32-88ac-cecda2d8274d")
           public class MoreMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
@@ -1120,6 +1155,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(10)
+            @ClassId("6d04bccf-436c-4445-8e43-7b9cfd8bb2ca")
             public class NewDelayedMenu extends AbstractMenu {
 
               @Override
@@ -1169,6 +1205,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(15)
+            @ClassId("65e50c24-14d1-4430-9ad6-03179028c9ee")
             public class ScrollToSelection extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -1187,6 +1224,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(20)
+            @ClassId("09b54c41-321e-404c-aba9-543db48d2fd0")
             public class ToggleGroupingStyle extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -1219,6 +1257,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("c50b7e54-6c0f-42fe-9d14-19c202712f9d")
           public class DeleteMenu extends AbstractMenu {
 
             @Override
@@ -1239,6 +1278,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(25)
+          @ClassId("49539b26-6ceb-44cf-9d76-e974c947c054")
           public class DeleteDelayedMenu extends AbstractMenu {
 
             @Override
@@ -1263,6 +1303,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(30)
+          @ClassId("c8e313dd-c569-491a-8413-8026034d7fbf")
           public class ToggleRowEnabledMenu extends AbstractMenu {
 
             @Override
@@ -1292,6 +1333,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(40)
+          @ClassId("ef8c48e3-7dfe-4ec8-bcd6-bffc06f6371c")
           public class HighlightRow extends AbstractMenu {
 
             @Override
@@ -1328,6 +1370,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(50)
+          @ClassId("7a25645e-4c8f-4159-aa17-311095029a1b")
           public class HierarchicalMenu extends AbstractMenu {
 
             @Override
@@ -1336,6 +1379,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(10)
+            @ClassId("f8dd6088-48c0-4c9c-b303-c37d92cd6b54")
             public class SubSingleMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1351,6 +1395,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(20)
+            @ClassId("5fca819d-060d-4973-a43a-afcb2cd768f4")
             public class SubMultiMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1366,6 +1411,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(30)
+            @ClassId("44a4285a-d845-41f2-9ad5-0583a1fbcb5a")
             public class SubEmptySpaceMenu extends AbstractMenu {
               @Override
               protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1381,6 +1427,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Order(40)
+            @ClassId("00261499-2b22-4832-8c0a-287959dc6a9f")
             public class IntermediateMenu extends AbstractMenu {
 
               @Override
@@ -1389,6 +1436,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Order(10)
+              @ClassId("ec2268e5-0e52-4311-a9c7-f457d733ada4")
               public class SubSubSingleMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1404,6 +1452,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Order(20)
+              @ClassId("ee402813-5cdf-4f5a-b6c0-eb6d0a0bcd53")
               public class SubSubMultiMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1419,6 +1468,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
 
               @Order(30)
+              @ClassId("1ca381c9-73f9-4bdc-b4c2-84b95b617f45")
               public class SubSubEmptySpaceMenu extends AbstractMenu {
                 @Override
                 protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -1437,6 +1487,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(60)
+          @ClassId("6c2ccfbb-21a5-4dc8-9967-d2292d60f1f8")
           public class KeyStroke extends AbstractKeyStroke {
 
             @Override
@@ -1456,6 +1507,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(100)
+          @ClassId("539be567-f70d-4421-a49b-90633e87390f")
           public class TileTableHeader extends AbstractTileTableHeader {
 
           }
@@ -1463,6 +1515,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("717a9b9a-1778-4eb4-a329-528c9dc0bd75")
       public class SelectedRowsField extends AbstractStringField {
 
         @Override
@@ -1477,6 +1530,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("70de935a-1fef-410b-9eca-6379d9f1564f")
       public class InsertedRowsField extends AbstractStringField {
 
         @Override
@@ -1491,6 +1545,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("be7d524c-0712-4ce6-853a-a9e9249bc7fa")
       public class UpdatedRowsField extends AbstractStringField {
 
         @Override
@@ -1505,6 +1560,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
+      @ClassId("0ace8942-b071-4bef-9bd0-d8281004c2e6")
       public class DeletedRowsField extends AbstractStringField {
 
         @Override
@@ -1519,6 +1575,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(55)
+      @ClassId("99b0fb9d-fb00-4ae9-a11e-04de5925e433")
       public class ContextColumnField extends AbstractStringField {
 
         @Override
@@ -1533,6 +1590,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("28346db9-2639-4ca6-b0d9-75a1139defae")
       public class DefaultIconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -1563,6 +1621,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(65)
+      @ClassId("1c1a56ba-ba54-40b9-8004-8b040d0667b2")
       public class CheckableStyleField extends AbstractSmartField<CheckableStyle> {
 
         @Override
@@ -1592,6 +1651,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
+      @ClassId("504771b2-5fca-4eeb-9d17-590fa8cc2aab")
       public class PropertiesGroupBox extends AbstractGroupBox {
 
         @Override
@@ -1615,6 +1675,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(80)
+        @ClassId("2e267e28-ae4c-4fac-a99c-0a13af1f692a")
         public class AutoResizeColumnsField extends AbstractBooleanField {
 
           @Override
@@ -1655,6 +1716,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(85)
+        @ClassId("529abe9b-8131-42c3-ac27-b0d2094299cc")
         public class AutoOptimizeColumnWidthsField extends AbstractBooleanField {
 
           @Override
@@ -1697,6 +1759,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(90)
+        @ClassId("f228e6ec-768d-43de-bc08-075552509f39")
         public class IsVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1731,6 +1794,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(95)
+        @ClassId("b2a3ea75-31f4-4852-b384-51de513d72cd")
         public class IsEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1760,6 +1824,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(100)
+        @ClassId("27cb771a-37ca-49ad-8e32-0c1eb1ab7120")
         public class IsEditableField extends AbstractBooleanField {
 
           @Override
@@ -1794,6 +1859,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(110)
+        @ClassId("d834dd14-9ebd-4e32-8d76-a977756d5728")
         public class MultiSelectField extends AbstractBooleanField {
 
           @Override
@@ -1823,6 +1889,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(120)
+        @ClassId("009e0fd8-2521-429f-81e0-ac0ea90c8859")
         public class IsCheckableField extends AbstractBooleanField {
 
           @Override
@@ -1853,6 +1920,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(130)
+        @ClassId("176a4265-9c6c-4164-9ad3-0c721bae3dfc")
         public class IsColumnMandatoryField extends AbstractBooleanField {
 
           @Override
@@ -1892,6 +1960,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(135)
+        @ClassId("60812cde-a167-4c54-99cb-5715a6d80c9d")
         public class IsColumnFixedWidthField extends AbstractBooleanField {
 
           @Override
@@ -1931,6 +2000,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(140)
+        @ClassId("94a196c3-c4bd-44c2-8afc-c413eaac82fa")
         public class IsRowIconVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1963,6 +2033,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(150)
+        @ClassId("5b663bbf-5637-4d1a-9cd7-4f343df281b9")
         public class WrapTextField extends AbstractBooleanField {
 
           @Override
@@ -1993,6 +2064,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(160)
+        @ClassId("fc848c32-eded-4a86-9096-ef2df9f2913f")
         public class TableStatusVisibleField extends AbstractBooleanField {
 
           @Override
@@ -2024,6 +2096,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(170)
+        @ClassId("35fc626e-8116-401f-87af-ba545996b07e")
         public class TableHeaderVisibleField extends AbstractBooleanField {
 
           @Override
@@ -2053,6 +2126,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(180)
+        @ClassId("d3bbc294-ebf6-4de8-aa7f-a7cfb3140e06")
         public class TableHeaderEnabledField extends AbstractBooleanField {
 
           @Override
@@ -2082,6 +2156,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(190)
+        @ClassId("74481a5c-fb39-4102-a130-addb942b7600")
         public class TableSortEnabledField extends AbstractBooleanField {
 
           @Override
@@ -2111,6 +2186,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(200)
+        @ClassId("cb571b93-e4d7-4bc2-b768-af186e2f12d4")
         public class TruncatedCellTooltipEnabled extends AbstractBooleanField {
           @Override
           protected String getConfiguredLabel() {
@@ -2144,6 +2220,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(205)
+        @ClassId("828664de-34c0-48cf-8463-77855665c10e")
         public class ScrollToSelection extends AbstractBooleanField {
           @Override
           protected String getConfiguredLabel() {
@@ -2172,6 +2249,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(210)
+        @ClassId("ac90d60a-a193-4ec1-9705-6c592484436c")
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
@@ -2202,6 +2280,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(220)
+        @ClassId("1a9a423a-b3c6-4bf1-96dd-3a8e4a2c3df5")
         public class TileModeField extends AbstractBooleanField {
 
           @Override
@@ -2234,6 +2313,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("62ec8650-74d8-4207-94d7-9d5c9d817a7f")
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -2248,6 +2328,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("b655fd0c-facd-4f6d-86aa-a871d63264de")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -2255,6 +2336,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  @ClassId("6f90ab0e-3f3b-467a-83f2-bbf9396fad93")
   public static class LocationLookupCall extends LocalLookupCall<String> {
     private static final long serialVersionUID = 1L;
 

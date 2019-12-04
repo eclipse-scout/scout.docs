@@ -28,6 +28,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBo
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 
+@ClassId("a057c8a8-2294-47c8-b1bd-3536f2004dac")
 public class TagFieldForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -67,9 +68,11 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("eacc23c3-f401-4b25-b9a6-b2b66412adf3")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("27be1025-d786-40a7-9c67-875ac3dab6e3")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -78,6 +81,7 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("10c86694-04a5-4beb-a266-9cd2ad2d1eed")
       public class DefaultField extends AbstractTagField {
 
         @Override
@@ -97,6 +101,7 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("7b8a68b6-5505-4d8b-af1f-caed1b58b374")
       public class DisabledField extends AbstractTagField {
 
         @Override
@@ -127,10 +132,12 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("d8f5932a-245a-4fe1-a5c2-4916ef9e5653")
     public class CloseButton extends AbstractCloseButton {
     }
 
     @Order(50)
+    @ClassId("99e132be-3de2-4ad9-b783-ee99d2bd27c8")
     public class SampleFormatButton extends AbstractButton {
 
       @Override
