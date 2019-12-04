@@ -17,6 +17,7 @@ export default class TabBoxProperties extends TabItem {
   constructor() {
     super();
     this.tabBox = null;
+    this.showMenus = true;
   }
 
   _jsonModel() {
@@ -47,6 +48,10 @@ export default class TabBoxProperties extends TabItem {
     this.tabAreaStyleField = this.widget('TabBoxProperties.TabAreaStyleField');
     this.tabAreaStyleField.on('propertyChange', this._onTabAreaStyleChange.bind(this));
 
+    this.showMenusField = this.widget('TabBoxProperties.ShowMenus');
+    this.showMenusField.on('propertyChange', this._onShowMenusChange.bind(this));
+    this.showMenusField.setValue(this.showMenus);
+
     this.widget('TabBoxProperties.FormFieldPropertiesBox').setField(this.tabBox);
     this.widget('TabBoxProperties.GridDataBox').setField(this.tabBox);
 
@@ -68,6 +73,14 @@ export default class TabBoxProperties extends TabItem {
   _onTabBoxPropertyChange(event) {
     if (event.propertyName === 'selectedTab') {
       this._updateSelectedTab();
+    }
+  }
+
+  _onShowMenusChange(event) {
+    if (event.propertyName === 'value') {
+      this.tabBox.menus.forEach(function(m) {
+        m.setVisible(this.showMenusField.value)
+      }, this);
     }
   }
 

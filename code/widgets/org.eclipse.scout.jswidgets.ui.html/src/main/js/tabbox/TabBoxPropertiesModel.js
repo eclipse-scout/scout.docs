@@ -16,6 +16,11 @@ export default function() {
         label: 'Tab Area Style'
       },
       {
+        id: 'TabBoxProperties.ShowMenus',
+        objectType: 'CheckBoxField',
+        label: 'Show Menus'
+      },
+      {
         id: 'TabBoxProperties.FormFieldPropertiesBox',
         objectType: 'jswidgets.FormFieldPropertiesBox'
       },
