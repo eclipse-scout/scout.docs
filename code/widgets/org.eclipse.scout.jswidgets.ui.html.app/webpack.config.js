@@ -24,13 +24,5 @@ module.exports = (env, args) => {
     'jswidgets-theme-dark': themeDarkPath
   };
 
-  // chunk definition for chart.js dependency
-  config.optimization.splitChunks.cacheGroups.chartJs = {
-    test: /[\\/]node_modules[\\/]chart.js[\\/]|[\\/]node_modules[\\/]moment[\\/]/,
-    name: 'chartjs',
-    priority: -2,
-    reuseExistingChunk: true
-  };
-
   return config;
 };

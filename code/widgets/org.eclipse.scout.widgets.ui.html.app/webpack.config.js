@@ -26,21 +26,5 @@ module.exports = (env, args) => {
     'widgets-theme-dark': './src/main/js/theme-dark.less'
   };
 
-  // chunk definition for chart.js dependency
-  config.optimization.splitChunks.cacheGroups.chartJs = {
-    test: /[\\/]node_modules[\\/]chart.js[\\/]|[\\/]node_modules[\\/]moment[\\/]/,
-    name: 'chartjs',
-    priority: -2,
-    reuseExistingChunk: true
-  };
-
-  // chunk definition for leaflet.js dependency
-  config.optimization.splitChunks.cacheGroups.leaflet = {
-    test: /[\\/]node_modules[\\/]leaflet[\\/]/,
-    name: 'leaflet',
-    priority: -2,
-    reuseExistingChunk: true
-  };
-
   return config;
 };
