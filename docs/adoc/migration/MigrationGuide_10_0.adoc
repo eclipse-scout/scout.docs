@@ -354,3 +354,14 @@ A REST service client using `ErrorDoRestClientExceptionTransformer` will now tra
 * `404 - Not Found` into a `org.eclipse.scout.rt.dataobject.exception.ResourceNotFoundException`
 
 The `org.eclipse.scout.rt.rest.exception.VetoExceptionMapper` used by a REST service provide will now create an error response with status `400 - Bad Request` (this was formerly a `403`).
+
+=== Cookies disabled by default
+
+By default, a REST service client will no longer use cookies. +
+If required, cookies can be enabled by using
+
+....
+clientBuilder.property(RestClientProperties.ENABLE_COOKIES, true);
+....
+
+in `configureClientBuilder` of `AbstractRestClientHelper`.
