@@ -72,6 +72,7 @@ public class AbstractUrlImageField extends AbstractImageField {
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
       return CollectionUtility.<IMenuType> hashSet(
           ImageFieldMenuType.ImageUrl,
+          ImageFieldMenuType.ImageId,
           ImageFieldMenuType.Null);
     }
 
