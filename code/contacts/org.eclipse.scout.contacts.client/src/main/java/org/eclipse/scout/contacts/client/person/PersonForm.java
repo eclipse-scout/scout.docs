@@ -832,16 +832,13 @@ public class PersonForm extends AbstractForm {
     boolean noFirstName = StringUtility.isNullOrEmpty(getFirstNameField().getValue());
     boolean noLastName = StringUtility.isNullOrEmpty(getLastNameField().getValue());
 
-    getGeneralBox().clearErrorStatus(); // <2>
-
     if (noFirstName && noLastName) {
-      getGeneralBox().addErrorStatus(TEXTS.get("MissingName")); // <3>
-      getFirstNameField().requestFocus();
+      getFirstNameField().requestFocus(); // <2>
 
-      throw new VetoException(TEXTS.get("MissingName")); // <4>
+      throw new VetoException(TEXTS.get("MissingName")); // <3>
     }
 
-    return true; // <5>
+    return true; // <4>
   }
   // end::validate[]
   // tag::handler[]

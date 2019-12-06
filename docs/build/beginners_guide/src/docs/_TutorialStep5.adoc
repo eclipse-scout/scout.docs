@@ -95,8 +95,8 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 ----
 
 <1> This method is called during the form validation and before the form is stored/closed.
-<2> In case both the first name and the last name fields are empty add an error status to the parent container widget.
-<3> Place the focus on the first name field.
+<2> Place the focus on the first name field.
+<3> In case both the first name and the last name fields are empty throw a VetoException, this will fail the validation.
 <4> The return value indicates if the validation has passed successfully or not.
 
 As we have now implemented a number of form field validations we are now ready to test the result in the running application.
