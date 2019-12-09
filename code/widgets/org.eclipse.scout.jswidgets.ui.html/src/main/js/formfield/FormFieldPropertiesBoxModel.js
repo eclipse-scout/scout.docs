@@ -43,6 +43,12 @@ export default function() {
         labelVisible: false
       },
       {
+        id: 'LabelHtmlEnabledField',
+        objectType: 'CheckBoxField',
+        label: 'Label Html Enabled',
+        labelVisible: false
+      },
+      {
         id: 'InheritAccessibilityField',
         objectType: 'CheckBoxField',
         label: 'Inherit Accessibility',

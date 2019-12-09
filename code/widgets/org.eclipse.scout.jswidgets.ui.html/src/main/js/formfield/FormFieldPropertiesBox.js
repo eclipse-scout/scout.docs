@@ -61,6 +61,10 @@ export default class FormFieldPropertiesBox extends GroupBox {
     loadingField.setValue(this.field.loading);
     loadingField.on('propertyChange', this._onPropertyChange.bind(this));
 
+    var labelHtmlEnabledField = this.widget('LabelHtmlEnabledField');
+    labelHtmlEnabledField.setValue(this.field.labelHtmlEnabled);
+    labelHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
+
     var inheritAccessibilityField = this.widget('InheritAccessibilityField');
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
     inheritAccessibilityField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -119,6 +123,8 @@ export default class FormFieldPropertiesBox extends GroupBox {
       this.field.setVisible(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'LabelVisibleField') {
       this.field.setLabelVisible(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'LabelHtmlEnabledField') {
+      this.field.setLabelHtmlEnabled(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'StatusVisibleField') {
       this.field.setStatusVisible(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'MandatoryField') {
