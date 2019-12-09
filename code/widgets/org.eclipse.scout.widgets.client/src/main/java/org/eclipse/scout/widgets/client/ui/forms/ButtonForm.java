@@ -708,7 +708,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
 
             @Override
             protected void execAction() {
-              MessageBoxes.createOk().withBody("Menu item 1 has been clicked.").show();
+              MessageBoxes.createOk().withBody("Menu item 2 has been clicked.").show();
             }
           }
         }
