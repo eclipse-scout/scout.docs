@@ -172,6 +172,10 @@ image::{rnimgsdir}/button_html_enabled.png[]
 
 The `ImageField` has a new property `uploadEnabled`. When set to true, the field opens the native file chooser and performs a file upload.
 
+=== FormField: Support for HTML Labels
+The `FormField` has a new property `labelHtmlEnabled`. When set to true, the label is rendered as HTML instead of plain text. Since the
+label is also used to render buttons, check-boxes and radio-buttons these widgets are now HTML capable too.
+
 === LabelField: Support for App Links
 
 The `LabelField` now supports app links. In order to use app links in a label field, the property `htmlEnabled` must be set to true.
