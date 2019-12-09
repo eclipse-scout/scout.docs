@@ -60,15 +60,17 @@ To launch the migration application follow these steps:
 . Create a new simple Maven project in Eclipse (File -> New -> Project -> Maven -> Maven Project -> Next, choose `Create a simple project`). Click Next.
 . Choose a Group- and Artifact Id and click Finish.
 . Open the created pom.xml and add a dependency to `org.eclipse.scout.rt:org.eclipse.scout.migration.ecma6:10.0.0-SNAPSHOT` and update the project using Alt+F5.
-. Create a new class `Config` in src/main/java extending the class `org.eclipse.scout.migration.ecma6.Configuration`.
+. Create a new class `Config` in src/main/java extending the class `org.eclipse.scout.migration.ecma6.configuration.Configuration`.
 . Add an `@Replace` annotation to the class
 . In the src/main/resources folder create a folder `META-INF` and within a file `scout.xml` (can be empty).
 . Overwrite the following methods in the created `Config` class to configure the migration application to your local setup:
-.. `getLibraryApiDirectory`: Point to the local directory where the API files from the first step are stored.
+.. `getConfiguredApiBase`: Point to the local directory where the API files from the first step are stored.
 .. `getPersistLibraryFileName`: The application will create an API file for your project too (like the ones downloaded at the beginning). This is the place to specify the file name. Choose a name that matches the module name under migration.
 .. `getPersistLibraryName`: Choose the simple name of the module under migration.
 .. `getSourceModuleDirectory`: Absolute path to the Maven module that should be migrated. If you have a Scout Classic application this is the module that ends with .ui.html. If you have a Scout JS application it is typically the module that ends with .ui.
-.. `getTargetModuleDirectory`: Where the migrated files should be stored. If you want to perform an in-place migration to commit the changes to VCS return `getSourceModuleDirectory()`. To test and tweak the migration you can choose an temporary output directory.
+.. `getConfiguredTargetBase`: Where the migrated files should be stored.
+If you want to perform an in-place migration to commit the changes to VCS return `getSourceModuleDirectory()`.
+To test and tweak the migration you can choose an temporary output directory.
 .. `getJsFolderName`: The subfolder within src/main/js in which your JavaScript code is stored.
 .. `getNamespace`: The JavaScript application namespace. This is the prefix all your JavaScript code lives in. If you have code like `helloworld.MyClass.prototype`, then the namespace is `helloworld`.
 . Create a new Java Application launch configuration that uses your newly created project and launches the `org.eclipse.scout.migration.ecma6.Migration` class.
