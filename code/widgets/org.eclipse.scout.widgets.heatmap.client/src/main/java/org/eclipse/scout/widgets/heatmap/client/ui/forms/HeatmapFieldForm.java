@@ -188,6 +188,8 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.63468), BigDecimal.valueOf(49.87163), intensity));
           heatPoints.add(new HeatPoint(BigDecimal.valueOf(11.57106), BigDecimal.valueOf(48.13750), intensity));
           heatPoints.add(new HeatPoint(BigDecimal.valueOf(8.51093), BigDecimal.valueOf(47.39153), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(10.034250), BigDecimal.valueOf(53.563472), intensity));
+          heatPoints.add(new HeatPoint(BigDecimal.valueOf(-75.544536), BigDecimal.valueOf(39.169648), intensity));
 
           setHeatPoints(heatPoints);
         }
