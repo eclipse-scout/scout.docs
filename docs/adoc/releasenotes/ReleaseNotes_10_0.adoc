@@ -87,17 +87,8 @@ To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 
 ===== IntelliJ IDEA
 
-We are happy to announce Scout support for https://www.jetbrains.com/idea/[IntelliJ IDEA] which combines the power of IntelliJ and Scout and gives you more flexibility in choosing your favourite development environment.
-
-However as this is the very first version of the IntelliJ plugin not all features that are available in Eclipse are available in IntelliJ yet.
-We are working towards closing the gaps and bring your favourite features to IntelliJ as well.
-The features supported by the latest version can bee seen in the `What's New` section of the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[plugin description].
-More features will come in future releases as soon as possible.
-
 You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[JetBrains Plugin Repository] or you can use the plugins client built into IntelliJ IDEA.
 Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
-
-
 
 === Demo Applications
 The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
@@ -109,6 +100,14 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+== IntelliJ IDEA Support
+
+We are happy to announce Scout support for https://www.jetbrains.com/idea/[IntelliJ IDEA] which combines the power of IntelliJ and Scout and gives you more flexibility in choosing your favourite development environment.
+
+However as this is the very first version of the IntelliJ plugin not all features that are available in Eclipse are available in IntelliJ yet.
+We are working towards closing the gaps and bring your favourite features to IntelliJ as well.
+The features supported by the latest version can bee seen in the `What's New` section of the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[plugin description].
+More features will come in future releases as soon as possible.
 
 == New Web Tool Stack
 
