@@ -357,6 +357,33 @@ The following methods are deprecated and will be removed in a future release wit
 
 == API Changes (JavaScript)
 
+=== WidgetTile
+
+The Widget's main property `tileWidget` is now a fully fledged property.
+Up until now the property could only be set on initialization and couldn't be changed during runtime.
+Now the `tileWidget` property can be set dynamically during runtime.
+
+This required a change within the div-structure with which the widget is rendered.
+The tile and the wrapped widget used to share the same container div.
+Now they both have their own container div as shown in the example below:
+
+[source,html]
+.Scout 9.0
+----
+<div class="form-field tile">
+    <div class="field"></div>
+</div>
+----
+
+[source,html]
+.Scout 10.0
+----
+<div class="tile">
+    <div class="form-field">
+        <div class="field"></div>
+    </div>
+</div>
+----
 
 // ^^^
 // Insert descriptions of other important changes here

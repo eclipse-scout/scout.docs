@@ -52,7 +52,6 @@ import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
-import org.eclipse.scout.widgets.shared.Icons;
 
 public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
@@ -704,31 +703,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected Class<?> provideSourceClass() {
       return PageWithTableTablePage.class;
-    }
-  }
-
-  @Order(20)
-  public class TileModeMenu extends AbstractMenu {
-
-    @Override
-    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-      return CollectionUtility.<IMenuType> hashSet(
-          TableMenuType.EmptySpace);
-    }
-
-    @Override
-    protected String getConfiguredIconId() {
-      return Icons.SquareSolid;
-    }
-
-    @Override
-    protected byte getConfiguredHorizontalAlignment() {
-      return HORIZONTAL_ALIGNMENT_RIGHT;
-    }
-
-    @Override
-    protected void execAction() {
-      getTable().setTileMode(!getTable().isTileMode());
     }
   }
 }

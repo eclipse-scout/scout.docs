@@ -123,6 +123,15 @@ Because of this your project specific JavaScript code must be migrated to the ne
 
 == Widget Enhancements
 
+=== Table: Visualize TableRows as Tiles
+
+The table has now a new way to visualize it's data: the tile mode.
+The property `tileMode` in `AbstractTable` controls which visualization is used.
+To use this feature, your table needs to implement `execCreateTile(ITableRow row)`.
+
+When in tile mode, the Table uses a `TileGrid` to visualize it's tiles.
+All relevant events (selection, action, ...) and properties (selectable, filter, ...) are synchronized between the table and it's internal tileGrid.
+
 === GroupBox: New MenuBar Position TITLE
 
 In addition to the existing menu-bar position TOP and BOTTOM, the GroupBox now supports TITLE. The menu-bar is placed in the header of the group-box right of the title-label DIV. Scout Classic: see property `menuBarPosition` in `AbstractGroupBox` and constant `IGroupBox.MENU_BAR_POSITION_TITLE`. Scout JS: see property `menuBarPosition` in `GroupBox.js` and constant `scout.GroupBox.MenuBarPosition.TITLE`.
