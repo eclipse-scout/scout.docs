@@ -227,7 +227,7 @@ TIP: Instead of `npm run build:dev` you can also use `npm run build:dev:watch` w
 
 === Troubleshooting
 . After starting the server the page in the browser stays blank. +
-  This most likely happens when your created bundles don't match the bundles required by the HTML files. Check the Network tab in your browser's DevTools. Which files are being loaded? Are there 404 requests? Check your dist folder. What files are there? To fix it, adjust your HTML files or the entrypoints and chunks in `webpack.conf.js`.
+  This most likely happens when your created bundles don't match the bundles required by the HTML files. Check the Network tab in your browser's DevTools. Which files are being loaded? Are there 404 requests? Check your dist folder. What files are there? To fix it, adjust your HTML files or the entrypoints and chunks in `webpack.config.js`.
 . I am not sure if I missed something. +
   You can always create a new Scout app based on the arche type and compare it with your code. The easiest way is to use Eclipse and create a new Scout Project. Make sure you choose the correct application type (Java for Scout Classic apps, JavaScript for Scout JS apps).
 . I did everything you said but it still does not work. +

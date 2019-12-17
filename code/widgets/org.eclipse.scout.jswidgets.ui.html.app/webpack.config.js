@@ -10,8 +10,6 @@
  */
 
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
-const themePath = require.resolve('@eclipse-scout/demo-jswidgets/src/main/js/theme.less');
-const themeDarkPath = require.resolve('@eclipse-scout/demo-jswidgets/src/main/js/theme-dark.less');
 module.exports = (env, args) => {
   args.resDirArray = [
     'src/main/resources/WebContent',
@@ -20,8 +18,8 @@ module.exports = (env, args) => {
 
   config.entry = {
     'jswidgets': './src/main/js/index.js',
-    'jswidgets-theme': themePath,
-    'jswidgets-theme-dark': themeDarkPath
+    'jswidgets-theme': './src/main/js/theme.less',
+    'jswidgets-theme-dark': './src/main/js/theme-dark.less'
   };
 
   return config;
