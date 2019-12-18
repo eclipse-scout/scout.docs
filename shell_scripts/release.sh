@@ -4,20 +4,19 @@ BASEDIR=$(dirname $0)
 . $BASEDIR/_functions.sh
 
 GIT_USERNAME=
-RELEASE="TEST_RELEASE"
-TAG=
+VERSION=
 
 function usage {
   cat << EOF
 
-	${PRG} [-h] --git_username <BSIGerritUser> --release <RELEASE> --tag <TAG>
+	${PRG} [-h] --git_username <GitUser> --version <VERSION> [--tag <TAG>]
 
 	-h                                  - Usage info
-	-u | --git_username <BSIGerritUser> - BSI Gerrit Username, SSH Key is used for authorisation
-	-r | --release <RELEASE>            - <RELEASE> name (Optional / Default: TEST_RELEASE)
-	-t | --tag <TAG>                    - <TAG> name (Optional / Default: Project Version)
+	-u | --git_username <GitUser>       - BSI Git Username, SSH Key is used for authorisation
+	-v | --version <VERSION>            - <VERSION> name
+	-t | --tag <TAG>                    - <TAG> name (Optional / Default: <VERSION>)
 
-	Example: ${PRG} -u sle -r NIGHTLY
+	Example: ${PRG} -u sle -v 10.0.42
 
 EOF
 }
@@ -29,10 +28,10 @@ function get_options {
 			-u | --git_username )		shift
 										GIT_USERNAME=$1
 										;;
-			-r | --release )			shift
-										RELEASE=$1
+			-v | --version )			shift
+										VERSION=$1
 										;;
-			-t | --tag )				shift
+			-t | --tag )			shift
 										TAG=$1
 										;;
 			-h | --help )				usage
@@ -46,8 +45,13 @@ function get_options {
 }
 get_options $*
 
-if [[ -z  "$GIT_USERNAME" ]]; then
-	echo "[ERROR]:       <BSIGerritUser> missing"
+if [[ -z "$GIT_USERNAME" ]]; then
+	echo "[ERROR]:       <GitUser> missing"
+	usage
+	exit 7
+fi
+if [[ -z "$VERSION" ]]; then
+	echo "[ERROR]:       <VERSION> missing"
 	usage
 	exit 7
 fi
@@ -56,18 +60,16 @@ if [[ "$TAG" ]]; then
 fi
 _MAVEN_OPTS="$_MAVEN_OPTS -e -B"
 
-# Parallel executions of maven modules and tests.
-# Half of CPU core are used in to keep other half for OS and other programs.
-mvn -Prelease.setversion -Dmaster_release_milestoneVersion=$RELEASE -f com.bsiag.scout.rt -N $_MAVEN_OPTS
+mvn -f com.bsiag.scout.rt -P release.setversion -Dmaster_release_newVersion=$VERSION -N $_MAVEN_OPTS
 processError
 
 $BASEDIR/build.sh -Dmaster_unitTest_failureIgnore=false $_MAVEN_OPTS
 processError
 
-mvn -Prelease.checkin -Dbsi_gerrit_username=$GIT_USERNAME -f com.bsiag.scout.rt $_MAVEN_OPTS
+mvn -f com.bsiag.scout.rt -P release.checkin -Dbsi_gerrit_username=$GIT_USERNAME $_MAVEN_OPTS
 processError
 
-mvn -Prelease.tag -Dbsi_gerrit_username=$GIT_USERNAME -Dmaster_release_pushChanges=true -f com.bsiag.scout.rt $_MAVEN_OPTS
+mvn -f com.bsiag.scout.rt -P release.tag -Dbsi_gerrit_username=$GIT_USERNAME -Dmaster_release_pushChanges=true $_MAVEN_OPTS
 processError
 
 git reset HEAD~1 --hard
