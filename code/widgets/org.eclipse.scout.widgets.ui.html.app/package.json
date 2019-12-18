@@ -44,6 +44,7 @@
     "@eclipse-scout/core": "10.0.0-snapshot",
     "@eclipse-scout/svg": "10.0.0-snapshot",
     "@eclipse-scout/demo-widgets": "10.0.0-snapshot",
-    "@eclipse-scout/demo-widgets-heatmap": "10.0.0-snapshot"
+    "@eclipse-scout/demo-widgets-heatmap": "10.0.0-snapshot",
+    "leaflet": "0.7.7"
   }
 }

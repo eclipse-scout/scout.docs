@@ -14,7 +14,7 @@ module.exports = (env, args) => {
   args.resDirArray = [
     'src/main/resources/WebContent',
     'node_modules/@eclipse-scout/core/res',
-    'node_modules/@eclipse-scout/demo-widgets-heatmap/node_modules/leaflet/dist/leaflet.css'
+    'node_modules/leaflet/dist/leaflet.css'
   ];
   const config = baseConfig(env, args);
 
