@@ -209,8 +209,8 @@ NOTE: Differences: the name of the script files are defined in webpack.config.js
 .. In all pom.xml files remove the entries of the Maven plugin `maven-dependency-plugin` that runs in phase `generate-test-sources` and unpacks files from `org.eclipse.scout.rt.ui.html` or `org.eclipse.scout.rt.ui.html.test`.
 .. Move all Specs from src/test/js/${yourAppNamespace} to src/test/js (one folder up)
 . If your .ui and .app modules are separated, in the pom.xml of the .ui module add the .following properties:
-.. `master_skip_pnpm_install_dev=true`
-.. `master_skip_pnpm_install_prod=true`
+.. `master_skip_npm_build_dev=true`
+.. `master_skip_npm_build_prod=true`
 .. `master_skip_copy_webpack_build_output=true`
 . Remove the following properties from all your config.properties files: `scout.ui.prebuild`, `scout.ui.prebuild.files`, `scout.dev.scriptfile.rebuild`, `scout.dev.scriptfile.persist.key`.
 . If you use pnpm, create a file called `pnpm-workspace.yaml` in the parent folder of your modules (which is most likely the root of your git repository) and include your npm modules (.ui, .app).
