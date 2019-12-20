@@ -72,6 +72,7 @@ export {default as MenuItemLookupCall} from './menubar/MenuItemLookupCall';
 export {default as ModeLookupCall} from './modeselector/ModeLookupCall';
 export {default as ModeSelectorForm} from './modeselector/ModeSelectorForm';
 export {default as NumberFieldForm} from './numberfield/NumberFieldForm';
+export {default as IntegerFieldForm} from './integerfield/IntegerFieldForm';
 export {default as PopupForm} from './popup/PopupForm';
 export {default as PopupHorizontalAlignLookupCall} from './popup/PopupHorizontalAlignLookupCall';
 export {default as PopupVerticalAlignLookupCall} from './popup/PopupVerticalAlignLookupCall';

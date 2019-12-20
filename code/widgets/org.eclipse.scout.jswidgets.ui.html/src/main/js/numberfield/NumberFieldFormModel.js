@@ -17,7 +17,7 @@ export default function() {
               label: '${textKey:NumberField}'
             },
             {
-              id: 'NumberField',
+              id: 'CalculatorField',
               objectType: 'NumberField',
               label: '${textKey:Calculator}',
               tooltipText: '${textKey:NumberFieldCalculatorHint}'

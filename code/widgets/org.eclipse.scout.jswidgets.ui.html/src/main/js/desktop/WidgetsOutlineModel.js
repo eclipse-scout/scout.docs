@@ -178,11 +178,21 @@ export default function() {
       },
       {
         objectType: 'PageWithNodes',
-        leaf: true,
         text: 'Number Field',
         detailForm: {
           objectType: 'jswidgets.NumberFieldForm'
-        }
+        },
+        expanded: true,
+        childNodes: [
+          {
+            objectType: 'PageWithNodes',
+            leaf: true,
+            text: 'Integer Field',
+            detailForm: {
+              objectType: 'jswidgets.IntegerFieldForm'
+            }
+          }
+        ]
       },
       {
         objectType: 'PageWithNodes',
