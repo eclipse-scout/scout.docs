@@ -66,7 +66,7 @@ export default function() {
                     {
                       id: 'TrackLocationField',
                       objectType: 'CheckBoxField',
-                      label: 'Track Location Change',
+                      label: 'Track Location',
                       labelVisible: false,
                       tooltipText: '${textKey:TrackLocationTooltipText}',
                       gridDataHints: {
