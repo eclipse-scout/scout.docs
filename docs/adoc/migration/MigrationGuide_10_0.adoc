@@ -230,6 +230,9 @@ TIP: Instead of `npm run build:dev` you can also use `npm run build:dev:watch` w
   This most likely happens when your created bundles don't match the bundles required by the HTML files. Check the Network tab in your browser's DevTools. Which files are being loaded? Are there 404 requests? Check your dist folder. What files are there? To fix it, adjust your HTML files or the entrypoints and chunks in `webpack.config.js`.
 . I am not sure if I missed something. +
   You can always create a new Scout app based on the arche type and compare it with your code. The easiest way is to use Eclipse and create a new Scout Project. Make sure you choose the correct application type (Java for Scout Classic apps, JavaScript for Scout JS apps).
+. I don't understand why I had to do this and what it is for. +
+  Have a look at the https://eclipsescout.github.io/10.0/technical-guide-js.html#build-stack[Build Stack] chapter in the Technical Guide.
+
 . I did everything you said but it still does not work. +
   Ask at https://stackoverflow.com/tags/eclipse-scout[Stack Overflow] or the https://www.eclipse.org/forums/index.php?t=thread&frm_id=174[Forum], we are happy to help you out.
 

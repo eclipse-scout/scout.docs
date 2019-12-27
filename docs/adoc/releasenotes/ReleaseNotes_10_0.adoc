@@ -118,7 +118,7 @@ Thanks to the power of the new tool stack it is now possible to write modern Jav
 Furthermore it is easier to integrate and update 3rd party JavaScript frameworks available in the huge https://www.npmjs.com/[npm registry].
 
 The old Scout JavaScript code has already been migrated to a modern EcmaScript 6+ code level and uses these new features.
-Because of this your project specific JavaScript code must be migrated to the new level as well. Please refer to the tech doc for details about the new tool stack and to the migration guide on how to update your project.
+Because of this your project specific JavaScript code must be migrated to the new level as well. Please refer to the https://eclipsescout.github.io/10.0/technical-guide-js.html#build-stack[Technical Guide] for details about the new tool stack and to the https://eclipsescout.github.io/10.0/migration-guide.html#new-web-tool-stack[Migration Guide] on how to update your project.
 
 
 == Widget Enhancements
