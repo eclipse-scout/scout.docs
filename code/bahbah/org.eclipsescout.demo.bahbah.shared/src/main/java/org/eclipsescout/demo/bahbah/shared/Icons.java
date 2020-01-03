@@ -18,7 +18,7 @@ public class Icons extends AbstractIcons {
   public static final String Eye = "eye";
   public static final String EclipseScout = "eclipse_scout";
   public static final String DotBlue = "dot_blue";
-  public static final String DotOrgange = "dot_orange";
+  public static final String DotOrange = "dot_orange";
   public static final String DotGreen = "dot_green";
   public static final String Star = "star";
 }

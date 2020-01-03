@@ -18,7 +18,6 @@ public class Icons extends AbstractIcons {
   /**
    * PNG Icons
    */
-
   public static final String Alarmclock = "alarmclock";
   public static final String Bookmark = "bookmark";
   public static final String Eye = "eye";

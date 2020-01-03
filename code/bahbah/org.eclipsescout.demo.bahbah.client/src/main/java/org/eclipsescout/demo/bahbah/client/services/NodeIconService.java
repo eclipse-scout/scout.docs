@@ -32,7 +32,7 @@ public class NodeIconService implements INodeIconService {
   public void initializeIcons() {
     synchronized (m_lockObject) {
       m_icons.add(Icons.DotBlue);
-      m_icons.add(Icons.DotOrgange);
+      m_icons.add(Icons.DotOrange);
       m_icons.add(Icons.DotGreen);
     }
   }
