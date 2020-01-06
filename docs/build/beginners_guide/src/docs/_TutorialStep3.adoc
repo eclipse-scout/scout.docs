@@ -336,9 +336,9 @@ public class PersonService implements IPersonService {
     PersonTablePageData pageData = new PersonTablePageData();
 
     String sql = SQLs.PERSON_PAGE_SELECT + SQLs.PERSON_PAGE_DATA_SELECT_INTO;
-      SQL.selectInto(sql, new NVPair("page", pageData));
+    SQL.selectInto(sql, new NVPair("page", pageData));
 
-      return pageData;
+    return pageData;
   }
 }
 ----
