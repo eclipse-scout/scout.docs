@@ -312,7 +312,7 @@ To still allow overriding of such properties, the folllowing lookup rules are ap
 . An uppercase match of your property key (`MY.PROPERTY`)
 . An uppercase match where periods are replaced by underscores (`MY_PROPERTY`)
 
-A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list:
+A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list or map (e.g. `import[anyKey or number]`:
 
 * `import[0]=classpath:myConfigs/other.properties`
 * `import[1]=file:/C:/path/to/my/settings.properties`
