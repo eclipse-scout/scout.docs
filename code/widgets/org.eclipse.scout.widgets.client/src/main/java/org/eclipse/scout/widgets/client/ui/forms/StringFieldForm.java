@@ -1152,7 +1152,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected void execClickAction() {
             getTargetField().requestFocus(); // Otherwise selection won't be visible
-            getTargetField().select(getSelectionStartField().getValue(), getSelectionEndField().getValue());
+            getTargetField().select(NumberUtility.nvl(getSelectionStartField().getValue(), 0), NumberUtility.nvl(getSelectionEndField().getValue(), 0));
           }
         }
       }
