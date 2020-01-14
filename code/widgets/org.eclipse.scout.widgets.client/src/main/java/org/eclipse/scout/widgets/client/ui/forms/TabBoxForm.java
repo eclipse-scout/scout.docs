@@ -454,7 +454,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     public class ConfigurationBox extends AbstractGroupBox {
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("Configuration");
+        return "Configuration";
       }
 
       @Order(1000)
