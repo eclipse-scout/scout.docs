@@ -140,7 +140,7 @@ The goal is to let the user of the application expand a row in the organization 
 
 Scout node pages are useful when we want to display different entities that are related to a specific entry in a parent page.
 In the "Contacts" demo application this mechanism is used to link both persons and events to an organization as shown in <<img-contacts_demo_organization_nodepage>>.
-The coloring of the application has been modified to indicate that this is a screenshot of the "Contacts" demo application, not the tutorial application that we are building here.
+Note that this is a screenshot of the "Contacts" demo application, not the tutorial application that we are building here.
 
 [[img-contacts_demo_organization_nodepage]]
 .A drill-down on an organization in the "Contacts" demo application provides access to related persons and events.
@@ -199,7 +199,7 @@ public class PersonService implements IPersonService {
 ----
 
 Having modified the person service we add a organization id property to the person page.
-We can then populate this property when the person page is attached to the company node page.
+We can then populate this property when the person page is attached to the organization node page.
 Finally we can use in method `execLoadData` according to <<lst-contacts_person_page_modification>>.
 
 [[lst-contacts_person_page_modification]]
@@ -221,7 +221,7 @@ The next step in the setup of the page hierarchy is the creation of the organiza
 Node pages allow to define a list of child pages that typically represent different entities.
 As mentioned before we will only have the person page as a child page in the "Contacts" tutorial application.
 
-To create the company node page follow the steps listed below.
+To create the organization node page follow the steps listed below.
 
 . Expand folder `src/main/java` in the client module in the package explorer
 . Select package `org.eclipse.scout.contacts.client.organization` and hit kbd:[Ctrl+N]

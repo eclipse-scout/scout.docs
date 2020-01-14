@@ -16,7 +16,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 In the second step of the Scout tutorial the components to display persons and organizations are added to the "Contacts" outline of the user interface of the Scout application.
 Specifically, a "Persons" page and an "Organizations" page are created and added to the navigation tree of the "Contacts" outline.
 
-Database access and populating the pages with actual data from the database is not part of this section but will be covered in <<sec-contacts_jdbc>> in the next tutorial step.
+Database access and populating the pages with actual data from the database is not part of this section but will be covered in the next tutorial step (<<sec-contacts_jdbc>>).
 
 The addition of the "Persons" page is described in detail in the sections listed below.
 
@@ -116,7 +116,7 @@ Table pages are an important UI element of Scout applications as they frequently
 Out of the box table pages offer powerful options to sort, filter and re-arrange the data contained in the table.
 This functionality offers a good starting point to decide which columns to add to a table page.
 
-To decide the columns to add the following criteria have been useful in practice.
+To decide about the columns to add the following criteria have been useful in practice.
 
 * Unique identifier of an element
 * Attributes that are most frequently used in searches
@@ -138,7 +138,7 @@ For the person page of the "Contacts" application we will add the following colu
 * *Email*: String column, not visible per default. Class name: `EmailColumn`
 * *Organization*: String column, not visible per default. Class name: `OrganizationColumn`
 
-TIP: Use the column class names as indicated above.
+TIP:  Make sure to use column class names exactly as indicated above.
 Working with different names is possible but requires additional work later in the tutorial when the data retrieved from the database is mapped to these column class names.
 
 To add the first column `PersonIdColumn` we open class `PersonTablePage` in the Java editor and place the cursor inside of the body of the inner `Table` class.
@@ -183,7 +183,7 @@ For column `CountryColumn` we will use a smart column.
 We again use kbd:[Ctrl+Space] to open the wizard and enter "Country" for the class name box and press kbd:[Tab] once and select [element]_AbstractSmartColumn_ as column type.
 Next we press kbd:[Tab] again to enter "Country" as the translated text.
 
-In the created class `CountryColumn` we need to update the class to extend `AbstractSmartColumn<String>` and add the method `getConfiguredLookupCall` according to <<lst-contacts_CountryColumn>>.
+In the created class `CountryColumn` we need to add the generic type parameter to the super class declaration (`AbstractSmartColumn<String>`) and add the method `getConfiguredLookupCall` according to <<lst-contacts_CountryColumn>>.
 
 [[lst-contacts_CountryColumn]]
 [source,java]
@@ -194,7 +194,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> The configured lookup call is used to map country codes to the country names used in the user interface.
 
-After the country column we add the three columns `PhoneColumn`, `MobileColumn`, `EmailColumn` and `OrganizationColumn` that are initially not visible in the user interface.
+After the country column we add the four columns `PhoneColumn`, `MobileColumn`, `EmailColumn` and `OrganizationColumn` that are initially not visible in the user interface.
 As an example for such a column <<lst-contacts_PhoneColumn>> is provided below.
 
 [[lst-contacts_PhoneColumn]]
@@ -232,9 +232,6 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 <1> A new instance of the `PersonTable` is added to this outline. This makes the person page visible in the navigation area below the contacts outline.
 
-Before we can save the class `ContactOutline` we have to update its imports to include the import statement for class `PersonTablePage`.
-To update the imports you can either user the menu menu:Source[Organize Imports] or use the keyboard shortcut kbd:[Ctrl+Shift+O].
-
 The application is now in a state where we can restart the backend and the frontend server to verify our changes in the user interface.
 
 [[sec-contacts_adding_company_page]]
@@ -245,7 +242,6 @@ To create an organizations page the same steps are required as for the creation 
 The description is therefore kept on a higher level and in the text below only the main steps are described.
 Where appropriate, pointers are provided to the detailed descriptions for the creation of the person page.
 
-* Add client package `org.eclipse.scout.contacts.client.organization`
 * Add page `OrganizationTablePage` with title "Organizations" using the Scout new page wizard
 
 [[lst-contacts_OrganizationTablePage]]

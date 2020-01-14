@@ -92,7 +92,7 @@ Scout Config properties can greatly improve the flexibility of Scout application
 For the "Contacts" application this feature is used to keep its database setup configurable.
 Moving from a in-memory setup to a disk based database is then possible without any reprogramming.
 
-The Scout backend (and frontent) applications initialize config properties from matching values found in file `config.properties`.
+The Scout backend (and frontend) applications initialize config properties from matching values found in file `config.properties`.
 For missing property values the default values defined in the config property classes are used.
 
 In the case of the "Contacts" application the config property files are located in the subfolder `src/main/resources` of the Maven modules that specify the frontend and the backend application.
@@ -189,7 +189,7 @@ In order to implement such a service, a number of Scout concepts are combined in
 * Scout platform with the annotations `@ApplicationScoped`, `@CreateImmediately` and `@PostConstruct`
 
 How these elements are used in class `DatabaseSetupService` is shown in <<lst-contacts_dbsetup_service>>.
-The actual creation of the "Contacts" database is performed by method `autoCreateDatabase`.
+The actual creation of the "Contacts" database is performed by the method `autoCreateDatabase`.
 
 At the time of the database creation no user is yet logged into the application.
 This is why we use a run context associated with the super user.
@@ -293,7 +293,7 @@ In the next section we will implement the database access logic in the `getOrgan
 ==== Fetching Organization and Person Data
 
 We are now ready to fetch data from the Derby database using the available infrastructure and the SQL statements prepared in class `SQLs`.
-For the implementation of method `getOrganizationTableData` in class `OrganizationService` we will use the two SQL snippet provided in <<lst-contacts_sql_list_org>>.
+For the implementation of method `getOrganizationTableData` in class `OrganizationService` we will use the two SQL snippets provided in <<lst-contacts_sql_list_org>>.
 
 [[lst-contacts_sql_list_org]]
 [source,java]

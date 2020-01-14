@@ -14,7 +14,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //-----------------------------------------------------------------------------
 
 In this tutorial step we add the Scout forms that are used to create and edit persons and organizations in the user interface.
-This tutorial step also provides an introduction into the design and implementation complex form layouts with the Scout framework.
+This tutorial step also provides an introduction into the design and implementation of complex form layouts with the Scout framework.
 
 Before we start with the actual implementation of the form <<sec-contacts_form_design>> provides an introduction to the layouting concepts of the Scout framework.
 Based on this information we design a hierarchical form layout for the person form and can then dive into the creation of the person form.
@@ -228,7 +228,6 @@ As the first field we add the field that will show the picture of the person to 
 . Place the cursor in the body of the inner class `GeneralBox`.
 . Copy the code provided in <<lst-contacts_picture_field>> into the general box.
 . Add for each field a getter method above the MainBox (where all other getters are). Alternatively you could use the SDK to create both fields (including getters) and add the code from <<lst-contacts_picture_field>>.
-. Hit kbd:[Ctrl+Shift+O] and fix the necessary imports.
 
 [[lst-contacts_picture_field]]
 [source,java]
@@ -392,7 +391,7 @@ We have also seen how we can use context menus to integrate the forms in the use
 
 The "Contacts" application is in a clean state again and you can (re)start the backend and the frontend of the application and verify the result in your browser.
 We can now verify the creation of new person entries and the modification of existing person data in the current state of the "Contacts" application.
-The created person form is shown in <<img-contacts_tutorial_result_step_4>>.
+The created person form is shown in <<img-contacts_tutorial_result_step_4>>. In case you copied some code snippets from the tutorial, you may see the text "undefined text {...}" in some labels in the person field. You may want to define these texts using the Scout content assist for defining new texts as was already presented earlier in this tutorial. 
 
 [[img-contacts_tutorial_result_step_4]]
 .The "Contacts" application with the person form at the end of tutorial step 4.

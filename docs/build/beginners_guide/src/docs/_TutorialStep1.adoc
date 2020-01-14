@@ -13,11 +13,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //WARNING: this file is a text module, it needs to be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-This section deals with setting up the initial workspace and codebase for the "Contacts" application.
-The goal of this step lies in the project setup that closely matches the "Contacts" application.
-This includes the organization and naming of Maven modules and the individual Java packages.
-
-The creation up of the initial project setup described in this section consists of the tasks listed below.
+This section deals with setting up the initial workspace and code base for the "Contacts" application.
+The creation up of the initial project setup consists of the tasks listed below.
 
 * Creating the initial Codebase (<<sec-contacts_initial_codebase>>)
 * Removing unnecessary Components (<<sec-contacts_remove_stuff>>)
@@ -29,7 +26,8 @@ This first step of the "Contacts" tutorial ends with a review of the results of 
 [[sec-contacts_initial_codebase]]
 ==== Creating the initial Codebase
 
-The initial code for the "`Contacts`" application is generated using the [wizard]_New Scout Project_ wizard.
+In case your workspace contains modules from the "`Hello World`" tutorial, you may want to multi-select them and to either close them by invoking the context menu "`Close Projects`" or to delete them by invoking the context menu "`Delete`".
+The initial code for the "`Contacts`" application is then generated using the [wizard]_New Scout Project_ wizard.
 For the wizard fields you may use the values below and as shown in <<img-sdk_new_project_tutorial>>
 
 * [field]_Group Id_: `org.eclipse.scout`
@@ -98,15 +96,14 @@ image::{imgsdir}/eclipse_open_type.png[]
 
 We start with the package rename.
 To rename the package `org.eclipse.scout.contacts.client.work` to `org.eclipse.scout.contacts.client.contact` click into the word "work" of the package name and hit kbd:[Alt+Shift+R].
-This opens the package rename dialog as shown in <<img-sdk_rename_package>> where we replace "work" by "contact" in the [element]_New name_ field.
+This opens the package rename dialog as shown in <<img-sdk_rename_package>> where we replace "work" by "contact" in the [element]_New name_ field. After pressing the btn:[Ok] button Eclipse informs the programmer that the code modification may not be accurate as the resource has compile errors. This warning can be acknowledged by clicking btn:[Continue]. 
 
 [[img-sdk_rename_package]]
 .Use the Eclipse Rename Package dialog to rename a Java package.
 image::{imgsdir}/sdk_rename_package.png[]
 
 In next step we rename class `WorkOutline` to `ContactOutline`.
-In the Java editor we can then rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
-
+In the Java editor we can rename the class by clicking into the class identifier `WorkOutline` and hitting kbd:[Alt+Shift+R].
 Inside the edit box we can then change the class name to `ContactOutline` and hit the btn:[Enter] key to execute the change.
 If Eclipse shows a Rename Type dialog just hit button btn:[Continue] to let Eclipse complete the rename operation.
 To get rid of the compile error in method `execCreateChildPages` we simply delete the content in the method body.
@@ -125,14 +122,18 @@ image::{imgsdir}/sdk_new_text_entry_contact_wizard.png[]
 
 As the last modification we change the return value of method `getConfiguredIconId` to value `Icons.CategoryBold` and end with the code shown in <<lst-contacts_outline>>.
 
+To conclude the modifications we must get rid of the faulty import statement. To do this we could in principle press kbd:[Ctrl+Shift+O] to organize the imports automatically. However, we want to register the organization of imports as a so-called "`Save Action`". This can be done in the Eclipse preferences.
+
+Invoke the top-level menu "`Window/Preferences`" and enter "`Save Action`" as a filter text to narrow down the tree on the left side of the preferences window. Then, chose the "`Java/Editor/Save Actions`" node and check the boxes "[x] Format Source Code" and "[x] Organize imports". As you may have guessed, this formats the source code and organizes the import statements every time the user saves a Java class.
+
+After having done so, perform a dummy modification in the class `ContactOutline` (e.g. add a space somewhere in the class body) and save the file. As a consequence, the faulty import statement at the beginning of the class file should have vanished and the class should show no compile errors anymore.
+
 [[lst-contacts_outline]]
 [source,java]
 .Initial implementation of class ContactOutline.
 ----
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/contact/ContactOutline.java[tags=OutlineInit]
 ----
-
-To conclude the modifications we update the imports by hitting kbd:[Ctrl+Shift+O] and save the modified class using kbd:[Ctrl+S].
 
 [[sec-contacts_change_desktop]]
 ==== Changes to Class Desktop
@@ -144,7 +145,7 @@ For the "Contacts" application we adapt the initial implementation to have outli
 The top level menus are then adapted to hold the menus "Quick Access", "Options" and a menu for the logged in user.
 
 Start with opening the class in the Java editor using kbd:[Ctrl+Shift+T] to quickly access the class.
-In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values in as shown in <<lst-contacts_getConfiguredOutlines>>.
+In the source code of method `getConfiguredOutlines` remove `SettingsOutline.class` from the list of return values as shown in <<lst-contacts_getConfiguredOutlines>>.
 
 [[lst-contacts_getConfiguredOutlines]]
 [source,java]
@@ -158,9 +159,12 @@ Then, perform the following changes in class `Desktop`
 * Delete the inner class `SettingOutlineViewButton`
 * Delete the inner class `UserProfileMenu`.
 * Rename inner class WorkOutlineViewButton to `ContactOutlineViewButton`
-* Create a new inner class called `QuickAccessMenu` after the `SearchOutlineViewButton`. For this navigate the cursor after the `SearchOutlineViewButton` class, press kbd:[Ctrl+Space] and select the `Menu` entry. Adapt the created code until it matches the template as shown in <<lst-contacts_desktop>>.
-* Create another menu called `OptionsMenu` right after the newly created `QuickAccessMenu` according to <<lst-contacts_desktop>> (for now you can skip the method `getConfiguredForm` and keep the super class as it is).
+* Create a new inner class called `QuickAccessMenu` after the `SearchOutlineViewButton`. For this navigate the cursor after the `SearchOutlineViewButton` class, press kbd:[Ctrl+Space] and select the `Menu` entry. Adapt the created code until it matches the template as shown in <<lst-contacts_desktop>>. Note that in your implementation, the menu should extend `AbstractMenu` instead of `AbstractFormMenu` in contrast to what is shown in <<lst-contacts_desktop>>. As a consequence, the method `getConfiguredForm` from <<lst-contacts_desktop>> is obsolete.
+* Create another menu called `OptionsMenu` right after the newly created `QuickAccessMenu` according to <<lst-contacts_desktop>>.
 * Create a last menu called `UserMenu` after the `OptionsMenu` according to <<lst-contacts_desktop>>.
+* Delete the method `onThemeChanged`.
+* Remove the statement in the body of the constructor.
+* Note that it is not necessary to organize the imports since you have registered the organization of imports as a save action earlier in this tutorial. 
 
 At the end of these changes the inner class structure of class Desktop will look similar to the sample shown in <<lst-contacts_desktop>>.
 
@@ -171,8 +175,8 @@ At the end of these changes the inner class structure of class Desktop will look
 include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/eclipse/scout/contacts/client/Desktop.java[tags=DesktopInit]
 ----
 
-<1> In your implementation `OptionsMenu` should extend `AbstractMenu`
-<2> In your implementation `UserMenu` should extend `AbstractMenu`
+<1> In your implementation `OptionsMenu` should extend `AbstractMenu` and the method `getConfiguredForm` should be deleted. 
+<2> In your implementation `UserMenu` should extend `AbstractMenu` and the method `getConfiguredForm` should be deleted.
 
 [[sec-contacts_summary]]
 ==== What have we achieved?
@@ -190,6 +194,6 @@ The user interface of the application will now look as shown in <<img-contacts_t
 .The "Contacts" application at the end of tutorial step 1.
 image::{imgsdir}/contacts_tutorial_result_step_1.png[]
 
-From the coding perspective we now have all necessary maven Modules for "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application.
+From the coding perspective we now have all necessary maven Modules for the "Contacts" application including Java package and class names to match with the complete Scout "Contacts" demo application.
 This point is important as it simplifies the comparison of intermediate stages of the tutorial application with the Scout demo application.
 The same is true for the user perspective: The layout of the current state of the tutorial matches with the complete "Contacts" sample application.

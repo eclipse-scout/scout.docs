@@ -43,7 +43,7 @@ include::_TutorialIntro.adoc[]
 //--- tutorial steps --------------------------------------------------------//
 
 [[sec-contacts_initial_project]]
-=== Setting up the Initial Project
+=== Setting up the initial Project
 include::_TutorialStep1.adoc[]
 
 [[sec-contacts_pages]]

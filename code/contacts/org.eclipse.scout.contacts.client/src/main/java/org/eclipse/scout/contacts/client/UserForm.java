@@ -145,7 +145,7 @@ public class UserForm extends AbstractForm {
   private IHtmlElement getGravatarImage() {
     String userDomain = CONFIG.getPropertyValue(UserDomainProperty.class);
     if (userDomain == null) {
-      return HTML.imgByIconId(Icons.Person);
+      return HTML.imgByIconId(Icons.PersonSolid);
     }
 
     try {
@@ -173,6 +173,6 @@ public class UserForm extends AbstractForm {
     catch (IOException | NoSuchAlgorithmException e) {
       // NOOP
     }
-    return HTML.imgByIconId(Icons.Person);
+    return HTML.imgByIconId(Icons.PersonSolid);
   }
 }
