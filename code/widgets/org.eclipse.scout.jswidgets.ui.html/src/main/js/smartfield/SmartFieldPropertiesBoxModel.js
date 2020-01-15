@@ -1,3 +1,5 @@
+import {SmartField} from '@eclipse-scout/core';
+
 export default function() {
   return {
     id: 'jswidgets.SmartFieldPropertiesBox',
@@ -23,14 +25,21 @@ export default function() {
         label: 'Browse Max Row Count'
       },
       {
+        id: 'SearchRequiredField',
+        objectType: 'CheckBoxField',
+        label: 'Search Required'
+      },
+      {
         id: 'ActiveFilterEnabledField',
         objectType: 'CheckBoxField',
         label: 'Active Filter Enabled'
       },
       {
-        id: 'SearchRequiredField',
-        objectType: 'CheckBoxField',
-        label: 'Search Required'
+        id: 'ActiveFilterField',
+        objectType: 'SmartField',
+        displayStyle: SmartField.DisplayStyle.DROPDOWN,
+        lookupCall: 'jswidgets.SmartFieldActiveFilterLookupCall',
+        label: 'Active Filter'
       }
     ]
   };

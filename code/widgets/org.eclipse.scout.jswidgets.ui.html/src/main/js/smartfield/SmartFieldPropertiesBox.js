@@ -51,13 +51,17 @@ export default class SmartFieldPropertiesBox extends GroupBox {
     browseMaxRowCountField.setValue(this.field.browseMaxRowCount);
     browseMaxRowCountField.on('propertyChange', this._onBrowseMaxRowCountPropertyChange.bind(this));
 
+    var searchRequiredField = this.widget('SearchRequiredField');
+    searchRequiredField.setValue(this.field.searchRequired);
+    searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
+
     var activeFilterEnabledField = this.widget('ActiveFilterEnabledField');
     activeFilterEnabledField.setValue(this.field.activeFilterEnabled);
     activeFilterEnabledField.on('propertyChange', this._onActiveFilterEnabledPropertyChange.bind(this));
 
-    var searchRequiredField = this.widget('SearchRequiredField');
-    searchRequiredField.setValue(this.field.searchRequired);
-    searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
+    var activeFilterField = this.widget('ActiveFilterField');
+    activeFilterField.setValue(this.field.activeFilter);
+    activeFilterField.on('propertyChange', this._onActiveFilterPropertyChange.bind(this));
   }
 
   _onSmartFieldChange(event) {
@@ -90,6 +94,12 @@ export default class SmartFieldPropertiesBox extends GroupBox {
   _onActiveFilterEnabledPropertyChange(event) {
     if (event.propertyName === 'value') {
       this.field.setActiveFilterEnabled(event.newValue);
+    }
+  }
+
+  _onActiveFilterPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.field.setActiveFilter(event.newValue);
     }
   }
 

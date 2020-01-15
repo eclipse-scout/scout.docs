@@ -79,6 +79,7 @@ export {default as PopupVerticalAlignLookupCall} from './popup/PopupVerticalAlig
 export {default as WidgetPopupPropertiesBox} from './popup/WidgetPopupPropertiesBox';
 export {default as SmartFieldForm} from './smartfield/SmartFieldForm';
 export {default as SmartFieldPropertiesBox} from './smartfield/SmartFieldPropertiesBox';
+export {default as SmartFieldActiveFilterLookupCall} from './smartfield/SmartFieldActiveFilterLookupCall';
 export {default as SmartFieldDisplayStyleLookupCall} from './smartfield/SmartFieldDisplayStyleLookupCall';
 export {default as MultilineSmartFieldForm} from './smartfield/multiline/MultilineSmartFieldForm';
 export {default as MultilinePersonLookupCall} from './smartfield/multiline/MultilinePersonLookupCall';
