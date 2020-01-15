@@ -195,10 +195,18 @@ The mode selector now has a different appearance for the two field styles `IForm
 image::{rnimgsdir}/mode_selector_field_style.png[]
 
 === Popup: New Properties Closable, Movable, Resizable
+
 The new properties allow a user to close, move or resize a popup using the typical controls he already knows by other widgets like a `Dialog`.
 The properties are available on the `WidgetPopup` and can even be turned on or off while the popup is open.
 
 image::{rnimgsdir}/popup_properties.png[]
+
+=== Page: Tile Overview
+
+The tile overview known from the outline root is now available for all pages.
+It can can be enabled via the `AbstractPage#getConfiguredShowTileOverview()` property.
+
+image::{rnimgsdir}/page_tile_overview.png[]
 
 === Enabled & InheritAccessibility
 
