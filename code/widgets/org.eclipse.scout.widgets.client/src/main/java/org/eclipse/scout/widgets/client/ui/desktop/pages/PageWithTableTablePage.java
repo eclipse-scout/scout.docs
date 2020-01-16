@@ -11,8 +11,8 @@
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
 import java.math.RoundingMode;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;

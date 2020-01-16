@@ -26,6 +26,11 @@ public class PageWithNodesNodePage extends AbstractPageWithNodes {
   }
 
   @Override
+  protected boolean getConfiguredShowTileOverview() {
+    return true;
+  }
+
+  @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new PageWithTableTablePage());
     pageList.add(new PageWithSearchFormTablePage());
