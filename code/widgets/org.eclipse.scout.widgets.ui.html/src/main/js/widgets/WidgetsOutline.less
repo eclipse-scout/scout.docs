@@ -7,20 +7,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
+.widgets-outline-overview > .tile-overview-content {
 
- .widgets-outline-overview > .tile-outline-overview-content {
+  & > .tile-overview-title {
+    padding-bottom: 0;
+  }
 
-   & > .tile-outline-overview-title {
-     padding-bottom: 0;
-   }
+  & > .widgets-outline-desc {
+    color: @text-color;
+    max-width: 660px;
+  }
 
-   & > .widgets-outline-desc {
-     color: @text-color;
-     max-width: 660px;
-   }
-
-   & > .tile-grid > .form-field > .field > .label {
-     font-size: @font-size-plus;
-   }
-
- }
+  & > .tile-grid > .form-field > .field > .label {
+    font-size: @font-size-plus;
+  }
+}
