@@ -18,7 +18,8 @@ ifndef::mdledir[:mdledir: .]
 === Prerequisites
 
 Before you download Scout make sure that you have a working Java Development Kit (JDK) installation.
-In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK].
+In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK, window="_blank"].
+// window=_blank used because jdk website does not work in an iframe
 
 To verify your Java installation use your command line.
 
