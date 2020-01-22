@@ -272,6 +272,11 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <4> Accessing list attribute, default type is `Object`
 <5> Accessing list attribute, specify the type as class object if known
 <6> Accessing list attribute, convenience method for a set of common types
+<7> Accessing optional list attribute, default type is `Object`
+<8> Accessing optional list attribute, specify the type as class object if known
+
+NOTE: If a list attribute is not available, using one of the `getList(...)` getters adds an empty list as attribute value into the entity and returns the list.
+Use `optList(...)` in order to get an optionally available list without adding a new empty list as attribute.
 
 Apart of the convenience methods available directly within the `DoEntity` class, the `DataObjectHelper` class contains a set of further convenience methods to access raw values of a data object.
 

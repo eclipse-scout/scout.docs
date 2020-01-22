@@ -266,6 +266,21 @@ The Scout data object support was moved from the Scout platform to the module `o
 The package imports of all data object related classes therefore changed:
 From `org.eclipse.scout.rt.platform.dataobject` to `org.eclipse.scout.rt.dataobject`
 
+==== IDoEntity raw list access
+
+The following methods to access a raw list attribute where changed semantically.
+The getter now always return a non-null value.
+If the attribute is not available, an empty list is added as attribute value into the entity and the new created empty list is returned.
+
+* `List<Object> getList(String attributeName)`
+* `<T> List<T> getList(String attributeName, Class<T> type)`
+* `<T> List<T> getList(String attributeName, Function<Object, T> mapper)`
+
+Additionally two new methods were added, which allows to access an optionally available list attribute, without adding a new attribute value to the entity, if the attribute is not available:
+
+* `Optional<List<Object>> optList(String attributeName)`
+* `<T> Optional<List<T>> optList(String attributeName, Class<T> type)`
+
 ==== Renamings
 `org.eclipse.scout.rt.client.ui.desktop.datachange.DoChangeEvent` -> `org.eclipse.scout.rt.client.ui.desktop.datachange.ItemDataChangeEvent`
 
@@ -347,7 +362,6 @@ The following methods are deprecated and will be removed in a future release wit
 
 === MailHelper.getCharacterEncodingOfPart(Part)
 `MailHelper.getCharacterEncodingOfPart(Part)` is deprecated, use `ObjectUtility.nvl(BEANS.get(MailHelper.class).getPartCharset(part), StandardCharsets.UTF_8).name()` instead if same behavior is required.
-
 
 // ^^^
 // Insert descriptions of Java API changes here

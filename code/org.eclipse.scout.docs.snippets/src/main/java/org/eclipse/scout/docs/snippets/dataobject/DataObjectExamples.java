@@ -2,6 +2,7 @@ package org.eclipse.scout.docs.snippets.dataobject;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.eclipse.scout.rt.dataobject.DataObjectAttributeDescriptor;
@@ -101,6 +102,10 @@ public class DataObjectExamples {
     List<Object> values1 = entity.getList("values"); // <4>
     List<String> values2 = entity.getList("values", String.class); // <5>
     List<String> values3 = entity.getStringList("values"); // <6>
+
+    // optional list attribute access by its attribute name
+    Optional<List<Object>> values4 = entity.optList("values"); // <7>
+    Optional<List<String>> values5 = entity.optList("values", String.class); // <8>
     //end::accessRaw[]
   }
 
@@ -189,7 +194,7 @@ public class DataObjectExamples {
 
     private final String m_stringValue;
 
-    private ExampleEnum(String stringValue) {
+    ExampleEnum(String stringValue) {
       m_stringValue = stringValue;
     }
 
@@ -198,7 +203,7 @@ public class DataObjectExamples {
       return m_stringValue;
     }
 
-    public static final ExampleEnum resolve(String value) { // <1>
+    public static ExampleEnum resolve(String value) { // <1>
       // custom null handling
       if (value == null) {
         return null;
