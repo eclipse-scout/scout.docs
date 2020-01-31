@@ -54,7 +54,7 @@ public abstract class AbstractUrlImageField extends AbstractImageField {
 
   @Override
   protected String getConfiguredImageId() {
-    return Icons.PersonSolid;
+    return Icons.User;
   }
 
   // end::template[]

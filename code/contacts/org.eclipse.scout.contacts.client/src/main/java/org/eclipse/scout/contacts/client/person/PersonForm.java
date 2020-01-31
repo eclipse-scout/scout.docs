@@ -277,7 +277,7 @@ public class PersonForm extends AbstractForm {
 
         @Override
         protected String getConfiguredImageId() {
-          return Icons.PersonSolid;
+          return Icons.User;
         }
         // end::pictureField[]
 
