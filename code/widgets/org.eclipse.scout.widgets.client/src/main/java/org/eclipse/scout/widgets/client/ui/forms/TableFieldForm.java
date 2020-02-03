@@ -12,6 +12,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -30,8 +31,10 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTileTableHeader;
 import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
+import org.eclipse.scout.rt.client.ui.basic.table.HeaderCell;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
@@ -1247,6 +1250,34 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               @Override
               protected String getConfiguredTooltipText() {
                 return TEXTS.get("CurrentGroupingStyle", GroupingStyle.BOTTOM.name());
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+              }
+            }
+
+            /**
+             * Example how to update a header text dynamically at runtime, outside of the regular Table lifecycle.
+             */
+            @Order(30)
+            public class UpdateHeaderTextMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return TEXTS.get("UpdateColumnHeaderText");
+              }
+
+              @Override
+              protected void execAction() {
+                String seconds = DateUtility.format(new Date(), "ss");
+                Table table = getTableField().getTable();
+                NameColumn column = table.getNameColumn();
+                ((HeaderCell) column.getHeaderCell()).setText("Dynamic text " + seconds);
+                TableEvent event = new TableEvent(table, TableEvent.TYPE_COLUMN_HEADERS_UPDATED);
+                event.setColumns(table.getColumns());
+                table.fireTableEventInternal(event);
               }
 
               @Override
