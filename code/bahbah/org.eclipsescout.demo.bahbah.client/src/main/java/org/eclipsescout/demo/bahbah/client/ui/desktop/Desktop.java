@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -29,6 +30,7 @@ import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.AdministrationOut
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.ChatOutline;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
 
+@ClassId("d297c6ef-e1ab-4242-9402-4922e17cd3cd")
 public class Desktop extends AbstractDesktop {
 
   @Override
@@ -77,6 +79,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(10)
+  @ClassId("380198da-cd9a-4e6e-8c18-7d295d6fbff7")
   public class AboutMenu extends AbstractMenu {
 
     @Override
@@ -92,6 +95,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(20)
+  @ClassId("2d966502-7390-462a-a6c3-fad752f89415")
   public class LogoutMenu extends AbstractMenu {
 
     @Override
@@ -111,6 +115,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(10)
+  @ClassId("d22e3a65-ca73-443a-bb90-68a680eda9e2")
   public class ChatOutlineViewButton extends AbstractOutlineViewButton {
     public ChatOutlineViewButton() {
       super(Desktop.this, ChatOutline.class);
@@ -119,6 +124,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(20)
+  @ClassId("9180b2f7-dfba-407e-9787-7e6ec33e6260")
   public class AdministrationOutlineViewButton extends AbstractOutlineViewButton {
     public AdministrationOutlineViewButton() {
       super(Desktop.this, AdministrationOutline.class);

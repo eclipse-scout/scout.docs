@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 
+@ClassId("6dc4d5e6-c972-4d81-a218-a5f167363259")
 public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
   private IFormField m_formField;

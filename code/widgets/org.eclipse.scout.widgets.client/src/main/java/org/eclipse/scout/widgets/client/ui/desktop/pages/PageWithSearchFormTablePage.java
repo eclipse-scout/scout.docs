@@ -15,12 +15,14 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.widgets.client.ui.forms.SearchForm;
 import org.eclipse.scout.widgets.client.ui.forms.SearchFormData;
 
+@ClassId("7362d0ab-5d2e-412c-8c09-c6657c461592")
 public class PageWithSearchFormTablePage extends PageWithTableTablePage {
 
   public PageWithSearchFormTablePage() {

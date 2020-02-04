@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("f3f8c108-0038-4441-b692-18c33a01d3df")
 public class DisabledStyleLookupCall extends LocalLookupCall<Integer> {
 
   private static final long serialVersionUID = 1L;

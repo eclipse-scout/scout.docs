@@ -13,11 +13,13 @@ package org.eclipse.scout.widgets.client.ui.template.formfield;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("cfe2058f-bc4b-411e-8ff6-61eb8e7714e3")
 public class StatusSeverityLookupCall extends LocalLookupCall<Integer> {
 
   private static final long serialVersionUID = 1L;

@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.html.IHtmlElement;
@@ -38,6 +39,7 @@ import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
 
+@ClassId("3981a3a4-3e39-454b-b24c-e316768f9d2f")
 public class UserForm extends AbstractForm {
 
   @Override
@@ -54,6 +56,7 @@ public class UserForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("b8c19ddd-5bf8-43b3-85e5-cc7ffed0c82d")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -67,9 +70,11 @@ public class UserForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("bedd6514-196e-4537-b868-e8199877aff3")
     public class GroupBox extends AbstractGroupBox {
 
       @Order(10)
+      @ClassId("8dddee1d-1ba5-4f08-9e27-b2adf9c6b122")
       public class HtmlField extends AbstractHtmlField {
 
         @Override

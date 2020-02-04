@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
@@ -24,6 +25,7 @@ import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("772ec00b-8e1f-4df0-bb45-6fedac7ce4a5")
 public abstract class AbstractLocaleLookupCall extends LocalLookupCall<Locale> {
 
   private static final long serialVersionUID = 1L;

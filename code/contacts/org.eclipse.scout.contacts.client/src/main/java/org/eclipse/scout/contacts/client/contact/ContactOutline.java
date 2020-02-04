@@ -17,10 +17,12 @@ import org.eclipse.scout.contacts.client.organization.OrganizationTablePage;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 //tag::Outline[]
 //tag::OutlineInit[]
+@ClassId("303c0267-3c99-4736-a7f5-3097c5e011b6")
 public class ContactOutline extends AbstractOutline {
 
   //tag::execCreateChildPagesPerson[]

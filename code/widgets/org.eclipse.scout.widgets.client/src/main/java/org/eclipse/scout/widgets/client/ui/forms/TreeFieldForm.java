@@ -55,6 +55,7 @@ import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeFi
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 
 @Order(4000.0)
+@ClassId("a497704b-f446-4bfd-bbf8-52dc00f40f20")
 public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -118,9 +119,11 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
   }
 
   @Order(10)
+  @ClassId("dd03a07e-0ad0-4460-b9f7-0d59aafb255f")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("997d68ed-9391-4a9b-ac1b-ac36849a1487")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -129,6 +132,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(10)
+      @ClassId("54d0fe49-2779-423f-81a1-7de2744ad718")
       public class DefaultField extends AbstractTreeField {
 
         @Override
@@ -157,9 +161,11 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(10)
+        @ClassId("23336a89-c942-4caa-9d6d-1e174f209d22")
         public class Tree extends AbstractTree {
 
           @Order(10)
+          @ClassId("d79dd7d3-fb1f-4cf2-95c8-814270e6a092")
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -179,6 +185,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(15)
+          @ClassId("af3f442a-d999-48d9-ae84-fe2ca5ba64ea")
           public class MoreMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
@@ -191,6 +198,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(10)
+            @ClassId("6425d317-16ce-4d02-a350-88997d9e150a")
             public class NewDelayedMenu extends AbstractMenu {
 
               @Override
@@ -215,6 +223,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(15)
+            @ClassId("f3629cfa-e501-44cd-bd31-83512f63b46f")
             public class ScrollToSelection extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -228,6 +237,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(30)
+            @ClassId("caa4eb8f-79f9-4555-9170-19c1d4f18542")
             public class SelectNoneMenu extends AbstractMenu {
 
               @Override
@@ -247,6 +257,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(40)
+            @ClassId("69a08259-3fdc-476f-baa1-e9f7f254f08b")
             public class SwitchDisplayStyle extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -272,6 +283,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(60)
+          @ClassId("c69c19ec-eff5-4948-9fdd-cd244aeca874")
           public class ExpandMenu extends AbstractMenu {
 
             @Override
@@ -285,6 +297,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(10)
+            @ClassId("4d35787a-4af3-4740-aa1d-7a07ba71357e")
             public class ExpandTreeMenu extends AbstractMenu {
 
               @Override
@@ -309,6 +322,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(20)
+            @ClassId("e62ff0e4-e79f-4dd9-860d-50d8298e16b8")
             public class ExpandThisNodeMenu extends AbstractMenu {
 
               @Override
@@ -343,6 +357,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(30)
+            @ClassId("ef473433-529b-4bfa-92b7-d2f66a47d916")
             public class ExpandSubtreeMenu extends AbstractMenu {
 
               @Override
@@ -378,6 +393,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(70)
+          @ClassId("ff949dc7-bbbc-4734-b647-1beaba000abc")
           public class CollapseMenu extends AbstractMenu {
 
             @Override
@@ -391,6 +407,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(10)
+            @ClassId("59bcdf9c-cb30-4c6b-9a12-f9b0c267afe2")
             public class CollapseTreeMenu extends AbstractMenu {
 
               @Override
@@ -415,6 +432,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(20)
+            @ClassId("34e0b68d-00c9-4725-bf37-1cc1917c0fa8")
             public class CollapseThisNodeMenu extends AbstractMenu {
 
               @Override
@@ -449,6 +467,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
             }
 
             @Order(30)
+            @ClassId("1e2d4a41-51ec-4824-8683-e3fce7e4e37e")
             public class CollapseSubtreeMenu extends AbstractMenu {
 
               @Override
@@ -504,6 +523,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(40)
+          @ClassId("aa5e8383-477f-4bba-8a08-7bed308be40e")
           public class InfoMenu extends AbstractMenu {
 
             @Override
@@ -518,6 +538,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(50)
+          @ClassId("334bc037-0485-4448-b129-3863c884cccf")
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
           }
 
@@ -558,6 +579,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(60)
+          @ClassId("8cccc980-b247-4697-8600-0b9a58f80d78")
           public class KeyStroke extends AbstractKeyStroke {
 
             @Override
@@ -580,6 +602,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(20)
+    @ClassId("163a501f-df66-48b0-8cff-5461de2802e0")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -588,6 +611,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(10)
+      @ClassId("54f72b0f-8f0d-4f45-a9c6-9bcfacbb9a8e")
       public class TreeField extends AbstractTreeField {
 
         @Override
@@ -606,9 +630,11 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(10)
+        @ClassId("1a2b7468-92d1-45c9-aa43-5a61521a94ef")
         public class Tree extends AbstractTree {
 
           @Order(10)
+          @ClassId("a4b3548e-6b5f-4b20-ba09-e5ac3a63b18b")
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -664,6 +690,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           }
 
           @Order(50)
+          @ClassId("0e6141f5-7da1-4eab-be46-d8ad0b515778")
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
           }
         }
@@ -671,6 +698,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(20)
+      @ClassId("b498db09-d8a7-4a3d-bf13-c691affa96e2")
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -695,6 +723,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(30)
+      @ClassId("19eefd66-cd92-4775-aaec-0d6941f44ad2")
       public class MenuContentField extends AbstractUserTreeField {
 
         @Override
@@ -717,6 +746,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(35)
+      @ClassId("c8272a55-3eb5-4a88-a29e-da5ad093e369")
       public class AutoCheckChildNodesField extends AbstractBooleanField {
 
         @Override
@@ -736,6 +766,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(40)
+      @ClassId("da0d3e69-d3b6-4bda-b7b9-9d6d50e7952d")
       public class IsEnabledField extends AbstractBooleanField {
 
         @Override
@@ -760,6 +791,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(50)
+      @ClassId("02444f61-910a-4db3-a3e7-467cfad1138a")
       public class CheckableField extends AbstractBooleanField {
 
         @Override
@@ -785,6 +817,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(30)
+    @ClassId("284a8b46-ac57-4d9f-8ffa-ecacbebcf432")
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -801,6 +834,7 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(40)
+    @ClassId("035b206a-5747-4547-9591-361349275bff")
     public class CloseButton extends AbstractCloseButton {
     }
 

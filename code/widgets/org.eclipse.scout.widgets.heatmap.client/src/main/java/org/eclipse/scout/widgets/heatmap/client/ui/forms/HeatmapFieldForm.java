@@ -42,6 +42,7 @@ import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBo
 import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.ZoomLevelField;
 
 @Order(100000.0)
+@ClassId("f20c76db-bdbd-4560-8ba8-d77f47eaee01")
 public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   private final P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
@@ -149,6 +150,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
   }
 
   @Order(1000.0)
+  @ClassId("9080f47e-61b3-4fdb-9ce6-26d4f42c8e6e")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -157,9 +159,11 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(1000.0)
+    @ClassId("0970e519-5f3d-4bf3-b562-e7ab6b08cdf5")
     public class GroupBox extends AbstractGroupBox {
 
       @Order(1000.0)
+      @ClassId("48147eca-c147-4656-831d-b86950243b95")
       public class HeatmapField extends AbstractHeatmapField {
 
         @Override
@@ -211,6 +215,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(2000.0)
+      @ClassId("13c9c14f-3a5e-4e36-9998-6fd180c647f2")
       public class CenterXField extends AbstractBigDecimalField {
 
         @Override
@@ -248,6 +253,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(3000.0)
+      @ClassId("0ab234c6-bfe5-46f4-b4ad-effb758736ff")
       public class CenterYField extends AbstractBigDecimalField {
 
         @Override
@@ -285,6 +291,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(4000.0)
+      @ClassId("8fc03330-0d88-438a-9142-97c8b88b69b0")
       public class ZoomLevelField extends AbstractIntegerField {
 
         @Override
@@ -306,6 +313,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(5000.0)
+      @ClassId("d571e6db-d3c4-4d5c-9ac1-6066f3066e7b")
       public class XField extends AbstractBigDecimalField {
 
         @Override
@@ -330,6 +338,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(6000.0)
+      @ClassId("a34e7dcb-fc64-4fc8-aaa3-18129ccfce13")
       public class YField extends AbstractBigDecimalField {
 
         @Override
@@ -354,6 +363,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(7000.0)
+      @ClassId("26113ac3-8c32-4f9e-8e7a-33318baecb81")
       public class IntensityField extends AbstractBigDecimalField {
 
         @Override
@@ -364,6 +374,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(30)
+    @ClassId("3ba23ac4-1983-43ce-b614-635e9fe7d33b")
     public class AddHeatPointMenu extends AbstractMenu {
 
       @Override
@@ -388,6 +399,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(40)
+    @ClassId("f45afe7c-0ef8-4d75-8d82-b726771f632c")
     public class ResetMenu extends AbstractMenu {
 
       @Override
@@ -402,6 +414,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(50)
+    @ClassId("068844ef-53a1-4906-93c2-4dcffae2126c")
     public class ClearMenu extends AbstractMenu {
 
       @Override
@@ -446,6 +459,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(70)
+    @ClassId("807a002c-ea72-4b93-ad94-3d08dbadaab0")
     public class CloseButton extends AbstractCloseButton {
     }
   }

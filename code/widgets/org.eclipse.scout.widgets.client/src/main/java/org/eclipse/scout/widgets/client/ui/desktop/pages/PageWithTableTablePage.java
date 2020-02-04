@@ -42,6 +42,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.client.ui.tile.AbstractHtmlTile;
 import org.eclipse.scout.rt.client.ui.tile.ITile;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
@@ -53,6 +54,7 @@ import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitH
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
 
+@ClassId("b06a2ee2-f395-4d73-888a-1fc5e7821edf")
 public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
   protected final Random m_random = new Random();
@@ -103,6 +105,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     };
   }
 
+  @ClassId("df2fe368-10af-458b-9fdc-b9db9782d546")
   public class Table extends AbstractTable {
 
     public SmartColumn getSmartColumn() {
@@ -169,6 +172,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("e10f123b-b327-4050-b890-7f5f0f644e19")
     public class StringColumn extends AbstractStringColumn {
 
       @Override
@@ -183,6 +187,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(15)
+    @ClassId("6fc968dc-b377-443a-a363-23b0e2a2ebd3")
     public class AlphanumericSortingStringColumn extends AbstractAlphanumericSortingStringColumn {
 
       @Override
@@ -197,6 +202,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("dd085263-8818-477e-a8ef-15d6bc290117")
     public class LongColumn extends AbstractLongColumn {
 
       @Override
@@ -211,6 +217,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(30)
+    @ClassId("8ffedfd0-12b2-4734-a2c3-8b8006a65eaf")
     public class IntegerColumn extends AbstractIntegerColumn {
 
       @Override
@@ -225,6 +232,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(40)
+    @ClassId("8ef39a96-7851-4e54-9b95-6d09bd63d345")
     public class BigDecimalColumn extends AbstractBigDecimalColumn {
 
       @Override
@@ -239,6 +247,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(50)
+    @ClassId("09a39973-25d1-45d8-bf99-a75e7e7c99bb")
     public class DateColumn extends AbstractDateColumn {
 
       @Override
@@ -253,6 +262,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(60)
+    @ClassId("ea738743-46e8-4edd-b24e-6934d5fac41a")
     public class BooleanColumn extends AbstractBooleanColumn {
 
       @Override
@@ -267,6 +277,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(70)
+    @ClassId("79f59bf7-cccd-4fdf-a3d5-182050cba8c4")
     public class SmartColumn extends AbstractSmartColumn<Long> {
 
       @Override
@@ -286,6 +297,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(80)
+    @ClassId("c4d66563-13b6-44a0-8ea1-c8935868bbfb")
     public class PercentColumn extends AbstractBigDecimalColumn {
 
       @Override
@@ -305,6 +317,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(90)
+    @ClassId("6b1e22c7-00ab-4f14-bb5a-f2d856ecbdc4")
     public class MultiplierColumn extends AbstractBigDecimalColumn {
 
       @Override
@@ -324,6 +337,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(100)
+    @ClassId("7f19882a-7d93-4dbd-b5f1-3d787588608a")
     public class RoundingModeColumn extends AbstractBigDecimalColumn {
 
       @Override
@@ -342,11 +356,13 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
     }
 
+    @ClassId("e67e965b-ba87-4364-8faa-e502a43b5753")
     public class TileTableHeaderBox extends AbstractTileTableHeader {
 
     }
 
     @Order(30)
+    @ClassId("1df57970-bab8-467e-8de5-c3675693b7b6")
     public class ChangeAggregationFunctionMenu extends AbstractMenu {
 
       @Override
@@ -396,6 +412,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(40)
+    @ClassId("4b131b0a-8c22-44ec-90bc-6cbcc5e3dfca")
     public class ChangeBackgroundEffectMenu extends AbstractMenu {
 
       @Override
@@ -436,6 +453,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(50)
+    @ClassId("5bfc103b-899d-4cf0-83ad-1e27db34e77e")
     public class FormMenu extends AbstractFormMenu<BooleanFieldForm> {
 
       @Override
@@ -458,6 +476,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("a4465f67-4e45-4346-81dd-deb9406682b6")
     public class TableSingleMenu extends AbstractMenu {
 
       @Override
@@ -473,6 +492,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(60)
+    @ClassId("24d3b8c1-d956-46d3-b271-2c5ff53df89a")
     public class HierarchicalMenu extends AbstractMenu {
 
       @Override
@@ -481,6 +501,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(10)
+      @ClassId("9d88f3f6-4cc4-45be-82f5-a59d4692615b")
       public class SubSingleMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -495,6 +516,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(20)
+      @ClassId("5dc7666c-630b-4b37-be9c-765036c8a0dc")
       public class SubMultiMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -509,6 +531,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(30)
+      @ClassId("87efb878-277e-4481-9afa-6d597c3edec3")
       public class SubEmptySpaceMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -523,6 +546,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(40)
+      @ClassId("7f16dec2-bd23-4532-903a-e9ea9aa12ea8")
       public class IntermediateMenu extends AbstractMenu {
 
         @Override
@@ -531,6 +555,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Order(10)
+        @ClassId("fed345fc-1f08-4ff8-81c1-bbe2185f00b7")
         public class SubSubSingleMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -545,6 +570,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Order(20)
+        @ClassId("fe43e369-7f4d-4d5b-bfe2-b654054aba6a")
         public class SubSubMultiMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -559,6 +585,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Order(30)
+        @ClassId("57c2ccb3-91a0-4d7a-94f6-f842877345ec")
         public class SubSubEmptySpaceMenu extends AbstractMenu {
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -576,6 +603,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
   }
 
   @Order(10)
+  @ClassId("27fe26af-fa2c-43b7-bdc8-068fb2327fc7")
   public class HierarchicalPageMenu extends AbstractMenu {
 
     @Override
@@ -590,6 +618,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("123ebf2a-a992-4a2f-8c54-c3277b28121f")
     public class SubSingleMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -605,6 +634,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("63786caa-e075-46df-9ba2-9a9bf9eef704")
     public class SubMultiMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -620,6 +650,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(30)
+    @ClassId("9602c55a-0b0f-4abf-917b-2e2175fd09ae")
     public class SubEmptySpaceMenu extends AbstractMenu {
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -635,6 +666,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(40)
+    @ClassId("0f63e1b5-c190-4f3b-a144-efabff6dc2d5")
     public class IntermediateMenu extends AbstractMenu {
 
       @Override
@@ -643,6 +675,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(10)
+      @ClassId("4dac2afe-a0e5-45ef-ae2f-1094e22967c2")
       public class SubSubSingleMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -658,6 +691,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(20)
+      @ClassId("9ce67a6d-bf7e-4db1-82f5-5bfa3c0bc595")
       public class SubSubMultiMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -673,6 +707,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(30)
+      @ClassId("2595641e-645b-41ea-911b-db13a646f92c")
       public class SubSubEmptySpaceMenu extends AbstractMenu {
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
@@ -689,6 +724,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
   }
 
   @Order(10)
+  @ClassId("ef9d8969-3c23-4474-968e-4d97cc64ba7d")
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

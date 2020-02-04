@@ -1262,6 +1262,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
              * Example how to update a header text dynamically at runtime, outside of the regular Table lifecycle.
              */
             @Order(30)
+            @ClassId("48f1cf80-5cc5-4dfa-b494-7c0395c0b428")
             public class UpdateHeaderTextMenu extends AbstractMenu {
 
               @Override

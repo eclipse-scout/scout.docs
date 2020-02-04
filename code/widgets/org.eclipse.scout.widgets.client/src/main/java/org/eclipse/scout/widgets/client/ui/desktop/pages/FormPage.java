@@ -23,12 +23,14 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.widgets.client.deeplink.FormPageDeepLinkHandler;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
+@ClassId("8ee42f38-cb0b-455f-939a-860223eb6fca")
 public class FormPage extends AbstractPageWithNodes implements IFormPage {
 
   private final Class<? extends IPageForm> m_formType;
@@ -118,6 +120,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Order(1000)
+  @ClassId("0967e30a-5bd1-4598-8493-275422f0194e")
   public class OpenInADialogMenu extends AbstractMenu {
 
     @Override
@@ -136,6 +139,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Order(1500)
+  @ClassId("bfcf8562-8483-48e0-8761-c1ed1180a505")
   public class OpenInNewSessionMenu extends AbstractMenu {
 
     @Override
@@ -155,6 +159,7 @@ public class FormPage extends AbstractPageWithNodes implements IFormPage {
   }
 
   @Order(2000)
+  @ClassId("3e106c9d-ae1c-475b-b310-35c6f584b09b")
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

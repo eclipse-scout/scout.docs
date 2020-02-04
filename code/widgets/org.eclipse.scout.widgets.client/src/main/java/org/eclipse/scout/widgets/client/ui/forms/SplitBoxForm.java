@@ -66,6 +66,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SplitBoxForm.MainBox.SplitVisib
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFileTableField.Table.DateModifiedColumn;
 
+@ClassId("8f4e38b1-008b-411c-8d9e-da82bb8117b1")
 public class SplitBoxForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -161,9 +162,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("275f4151-0242-44e2-b9d5-737dabbe670c")
   public class MainBox extends AbstractGroupBox {
 
     @Order(20)
+    @ClassId("a5a51b8e-11c1-4d38-9020-2ec46f40a4cf")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -172,6 +175,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("3adffdc7-7c5e-4564-b920-7b6eb0a9cac6")
       public class SplitVerticalField extends AbstractSplitBox {
 
         @Override
@@ -195,6 +199,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("29d27b36-6528-4b5b-8acf-22342a2f5e7d")
         public class SplitHorizontalField extends AbstractSplitBox {
 
           @Override
@@ -208,6 +213,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("42a7305c-8dc8-4ee4-a097-e9a01360105d")
           public class FilesBox extends AbstractGroupBox {
 
             @Override
@@ -216,6 +222,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Order(10)
+            @ClassId("ac14864e-ac4f-4cc3-bbf4-355bc80e4c3c")
             public class FileTableField extends AbstractFileTableField {
 
               @Override
@@ -278,6 +285,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("a893df2a-7892-4acc-abc3-3bfbba199360")
           public class DetailsBox extends AbstractGroupBox {
 
             @Override
@@ -298,6 +306,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Order(10)
+            @ClassId("cbcd6947-12d3-4c8f-9c99-cc05c7fdca14")
             public class NameField extends AbstractStringField {
 
               @Override
@@ -307,6 +316,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Order(20)
+            @ClassId("aa694f1c-93b4-454b-92bb-89b39853237a")
             public class SizeField extends AbstractLongField {
 
               @Override
@@ -316,6 +326,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
             }
 
             @Order(40)
+            @ClassId("4a6e11fd-664b-4d80-9989-5a5328de7a87")
             public class ModifiedField extends AbstractDateTimeField {
 
               @Override
@@ -327,6 +338,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("100662f4-29a5-4522-a13f-44e92879ee1a")
         public class PreviewBox extends AbstractGroupBox {
 
           @Override
@@ -345,6 +357,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("58294598-1032-47ee-a2f5-59895c913caa")
           public class PreviewField extends AbstractImageField {
 
             @Override
@@ -367,9 +380,11 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("534a7b26-fb20-424c-aa39-769a906b1d9d")
     public class SplitVisibleEnabledField extends AbstractSplitBox {
 
       @Order(10)
+      @ClassId("ebd342b1-3db6-4f64-ba75-755d8ac3aeaa")
       public class SplitterVisibilityBox extends AbstractGroupBox {
 
         @Override
@@ -388,6 +403,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("6bc729ed-eed0-469a-b6c8-66dfe49d2020")
         public class VisiblePreviewField extends AbstractBooleanField {
 
           @Override
@@ -412,6 +428,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("23e49740-2167-43f2-bc44-8ca436e4260b")
         public class VisibleDetailsField extends AbstractBooleanField {
 
           @Override
@@ -436,6 +453,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("7000c675-349c-43ca-b847-0acaa9607d0f")
         public class EnabledSequenceBox extends AbstractSequenceBox {
 
           @Override
@@ -449,6 +467,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("7f1091a8-0997-495c-9e0d-c458b75d1bd8")
           public class EnabledVerticalField extends AbstractBooleanField {
 
             @Override
@@ -473,6 +492,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("dbb53d71-642c-4190-98cd-fc6168a8d70b")
           public class EnabledHorizontalField extends AbstractBooleanField {
 
             @Override
@@ -498,6 +518,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("fa4063fd-ede6-4e80-8853-8371b78ee2d0")
         public class VerticalFieldConfigurationSequenceBox extends AbstractSequenceBox {
 
           @Override
@@ -542,6 +563,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("cae2d2b7-c301-487c-94e3-4d4695542b71")
           public class MinimizedVerticalField extends AbstractBooleanField {
 
             @Override
@@ -578,6 +600,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("85c6867f-7234-4af5-ad40-f4b2ac9723b1")
           public class CollapsedVerticalField extends AbstractBooleanField {
 
             @Override
@@ -682,6 +705,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("86bde43b-7e38-430b-b4f9-ca7d78c2d45b")
       public class SplitterPositionBox extends AbstractGroupBox {
 
         @Override
@@ -700,6 +724,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("9bd299f5-5046-4ea6-ad6e-a469df363560")
         public class SplitterPositionTypeVField extends AbstractSmartField<String> {
 
           @Override
@@ -752,6 +777,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("2fee57a4-6d6d-487c-9c12-1d91bb9ede99")
         public class SplitterPositionVField extends P_AbstractSplitterPositionField {
 
           @Override
@@ -812,6 +838,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("e5818664-0564-4f28-87a3-ca387b1cf927")
         public class SplitterPositionTypeHField extends AbstractSmartField<String> {
 
           @Override
@@ -860,6 +887,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("4992a6bf-2691-455f-931c-b5650745bc6d")
         public class SplitterPositionHField extends P_AbstractSplitterPositionField {
 
           @Override
@@ -881,6 +909,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("fab5b1bd-1bc9-4eb1-9002-126c66abc860")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -888,6 +917,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  @ClassId("59d47bca-0192-4176-8a0e-8d7f2b513cf8")
   protected abstract class P_AbstractSplitterPositionField extends AbstractBigDecimalField {
 
     protected abstract ISplitBox getSplitBox();
@@ -927,6 +957,7 @@ public class SplitBoxForm extends AbstractForm implements IPageForm {
     }
   }
 
+  @ClassId("fbbd7dfe-18a4-40fb-ab3b-cca07777c92b")
   public static class P_SplitterPositionTypeLookupCall extends LocalLookupCall<String> {
     private static final long serialVersionUID = 1L;
 

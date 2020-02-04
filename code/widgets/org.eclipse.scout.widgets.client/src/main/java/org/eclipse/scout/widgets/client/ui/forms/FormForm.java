@@ -251,9 +251,11 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("5e630b67-1e84-4f5e-a487-4bb6f0069faa")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("93355511-5eb5-4907-aaa0-d1b7f9a10c80")
     public class ControllerBox extends AbstractGroupBox {
 
       @Override
@@ -267,6 +269,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("5c6d94d0-c865-4bd6-bce1-5782287dce1a")
       public class DisplayHintAndViewIdBox extends AbstractSequenceBox {
 
         @Override
@@ -275,6 +278,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("3076479e-24b4-43c3-8d54-218a289b4614")
         public class DisplayHintField extends AbstractSmartField<DisplayHint> {
 
           @Override
@@ -303,6 +307,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("4a02d0ef-7105-4c73-96bf-4d7461100d58")
         public class DisplayViewIdField extends AbstractSmartField<DisplayViewId> {
 
           @Override
@@ -323,6 +328,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("76968db0-2ce6-4f97-afa2-21b2fffd81c7")
       public class ModalityBox extends AbstractSequenceBox {
 
         @Override
@@ -331,6 +337,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("6dac9c80-b3eb-4deb-8f20-b4d02e66b655")
         public class ModalityField extends AbstractBooleanField {
 
           @Override
@@ -341,6 +348,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(25)
+      @ClassId("efaaf31c-509a-4dcb-8b42-0db8609e4194")
       public class ClosableField extends AbstractBooleanField {
 
         @Override
@@ -355,6 +363,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("48d88503-7505-4b59-ace2-9733824bbd4a")
       public class DisplayParentField extends AbstractSmartField<DisplayParent> {
 
         @Override
@@ -374,6 +383,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("623eb795-76a9-4a4f-84ef-d4c39bf8cb27")
       public class TitleBox extends AbstractSequenceBox {
 
         @Override
@@ -382,6 +392,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("cbb71c43-2a25-440a-8b86-34e183e9fcdd")
         public class FormTitleField extends AbstractStringField {
 
           @Override
@@ -396,6 +407,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("176ded1b-365c-4dc1-8fec-a803505a6ab0")
         public class FormSubTitleField extends AbstractStringField {
 
           @Override
@@ -415,6 +427,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(42)
+      @ClassId("9469f9f9-1fc6-46b3-b819-a34adfea2cbd")
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -433,6 +446,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("46dbd61a-840f-4042-885f-a05f3f26b3fd")
         public class ChangeCurrentFormIconIdMenu extends AbstractMenu {
 
           @Override
@@ -448,6 +462,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(45)
+      @ClassId("6bdcc32e-09ac-472a-b52c-e3a1079d2a79")
       public class OpeningDelayBox extends AbstractSequenceBox {
 
         @Override
@@ -456,6 +471,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("cab1fb20-421b-44a5-828b-8383ff8e1f8c")
         public class OpeningDelayField extends AbstractIntegerField {
 
           @Override
@@ -470,6 +486,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("d858666f-746c-40f5-a455-9a8835f8ed4e")
         public class BlockModelThreadField extends AbstractBooleanField {
 
           @Override
@@ -480,6 +497,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
+      @ClassId("179c35f6-eaf6-40bd-8cd1-bec0e3641277")
       public class CloseOnChildCloseField extends AbstractBooleanField {
 
         @Override
@@ -489,6 +507,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(55)
+      @ClassId("8aa3a8d5-7c33-47a4-869d-f2a318fbf516")
       public class CacheBoundsField extends AbstractBooleanField {
 
         @Override
@@ -508,9 +527,11 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("961eaeba-6fc5-45c6-bc1c-b60484a0b3fd")
       public class OpenFormBox extends AbstractSequenceBox {
 
         @Order(10)
+        @ClassId("adaeef40-bdd4-4afd-a60b-9556bcf388f4")
         public class OpenFormButton extends AbstractButton {
 
           // Note: Label is set by DisplayHintField
@@ -631,6 +652,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("655ef17e-8dde-467b-b868-d1bb15b8f87d")
     public class FormFieldBox extends AbstractGroupBox {
 
       @Override
@@ -639,6 +661,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("66f13c69-c1eb-4d3f-9e2e-7d7b0f9e18b0")
       public class FormField1GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -647,6 +670,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("703d9e4d-c0bd-48cc-982c-6525e48ad4a5")
         public class Field1Field extends AbstractStringField {
 
           @Override
@@ -666,6 +690,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("4b202cf2-8bc0-49e7-8d5d-905bcf23bfa1")
       public class FormField2GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -674,6 +699,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("9fc02937-e9e7-4278-b5b1-b8069f54d6b0")
         public class Field2Field extends AbstractIntegerField {
 
           @Override
@@ -765,6 +791,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("2f51ed36-d65b-42a6-aaf3-dc819004f6da")
       public class FormField3GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -773,6 +800,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("a21bad2c-41f7-41f3-a7cc-6fbabf5fbc94")
         public class Field3Field extends AbstractDateField {
 
           @Override
@@ -782,6 +810,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("6b123018-d6f5-454a-a42d-481555fd58f2")
         public class Buttons3Box extends AbstractFieldButtonsBox {
           @Override
           protected IFormField getField() {
@@ -791,6 +820,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("3c87fa87-bbec-44d6-bb1e-84141e627616")
       public class FormField4GroupbBox extends AbstractGroupBox {
 
         @Override
@@ -799,6 +829,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("761b72d8-9d7a-48a7-8ac6-3da261862303")
         public class Field4Field extends AbstractDateTimeField {
 
           @Override
@@ -808,6 +839,7 @@ public class FormForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("1026e1b7-cc05-4d12-a824-4cfb85775dc2")
         public class Buttons4Box extends AbstractFieldButtonsBox {
           @Override
           protected IFormField getField() {
@@ -818,6 +850,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("7fda4a32-5b38-453b-8d1c-b1b0b5654568")
     public class LongRunningOperationBox extends AbstractGroupBox {
 
       @Override
@@ -831,6 +864,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("dd30ea25-493d-41a2-ac9e-6f4d86513e06")
       public class LongRunningDurationField extends AbstractIntegerField {
 
         @Override
@@ -845,6 +879,7 @@ public class FormForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("bccd50d8-21fe-4086-b5b6-cf122703f97c")
       public class StartLongRunningOperationButton extends AbstractButton {
 
         @Override
@@ -871,6 +906,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("39a355d4-f6bf-456c-ae2b-9984fab541e4")
     public class CloseButton extends AbstractCloseButton {
     }
 
@@ -895,6 +931,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @ApplicationScoped
+  @ClassId("981e87fb-5680-45db-b6e9-53865b4ece31")
   public static class DisplayHintLookupCall extends LocalLookupCall<DisplayHint> {
 
     private static final long serialVersionUID = 1L;
@@ -929,6 +966,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @ApplicationScoped
+  @ClassId("ef83cba9-9f36-4ef3-8321-ad65aafa91f3")
   public static class DisplayParentLookupCall extends LocalLookupCall<DisplayParent> {
     private static final long serialVersionUID = 1L;
 
@@ -979,6 +1017,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @ApplicationScoped
+  @ClassId("effa0008-9b49-4c98-9a4a-a2d6eef411a4")
   public static class IconIdLookupCall extends LocalLookupCall<String> {
 
     private static final long serialVersionUID = 1L;
@@ -1024,6 +1063,7 @@ public class FormForm extends AbstractForm implements IPageForm {
   }
 
   @Order(15)
+  @ClassId("a50aa909-95e2-4503-bd09-a789b21801d0")
   public abstract static class AbstractFieldButtonsBox extends AbstractSequenceBox {
     @Override
     protected boolean getConfiguredAutoCheckFromTo() {
@@ -1038,6 +1078,7 @@ public class FormForm extends AbstractForm implements IPageForm {
     protected abstract IFormField getField();
 
     @Order(20)
+    @ClassId("b10082b5-a49d-419b-b112-875576b1c74d")
     public class HideFieldButton extends AbstractButton {
 
       @Override

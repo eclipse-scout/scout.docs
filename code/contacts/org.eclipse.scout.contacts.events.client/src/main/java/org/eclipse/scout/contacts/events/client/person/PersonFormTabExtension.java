@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @Data(PersonFormTabExtensionData.class)
@@ -32,6 +33,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
   }
 
   @Order(25)
+  @ClassId("aeb4c996-832c-4111-8120-83698a34cf84")
   public class EventBox extends AbstractGroupBox {
 
     @Override
@@ -40,6 +42,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
     }
 
     @Order(1000)
+    @ClassId("0f91d144-2533-4d0f-976e-978b830e784f")
     public class EventsField extends AbstractTableField<Table> {
 
       @Override
@@ -52,6 +55,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         return false;
       }
 
+      @ClassId("a98bb7e1-209b-4ac5-846e-73285d8e3df9")
       public class Table extends AbstractTable {
 
         @Override
@@ -85,6 +89,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         }
 
         @Order(1)
+        @ClassId("b5a30e59-d142-4170-8956-525bc3ec5d03")
         public class IdColumn extends AbstractStringColumn {
 
           @Override
@@ -99,6 +104,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         }
 
         @Order(2)
+        @ClassId("f4ab3e32-33fb-4348-8647-62cbfddc0c62")
         public class TitleColumn extends AbstractStringColumn {
 
           @Override
@@ -113,6 +119,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         }
 
         @Order(3)
+        @ClassId("b4ddca2d-e35a-4081-ac1b-7ff463ab7538")
         public class StartsColumn extends AbstractDateTimeColumn {
 
           @Override
@@ -133,6 +140,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         }
 
         @Order(4)
+        @ClassId("26178748-aa59-435e-a920-1c69524dd4ff")
         public class CityColumn extends AbstractStringColumn {
 
           @Override
@@ -147,6 +155,7 @@ public class PersonFormTabExtension extends AbstractTabBoxExtension<DetailsBox> 
         }
 
         @Order(5)
+        @ClassId("28de793f-6b80-4402-bdc0-a9e333771cda")
         public class CountryColumn extends AbstractStringColumn {
 
           @Override

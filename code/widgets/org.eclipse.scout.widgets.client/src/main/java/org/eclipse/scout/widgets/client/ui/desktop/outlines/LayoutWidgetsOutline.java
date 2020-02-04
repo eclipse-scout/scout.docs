@@ -34,6 +34,7 @@ import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm;
 import org.eclipse.scout.widgets.shared.Icons;
 
 @Order(1200)
+@ClassId("98487649-864e-4295-b11e-ccbdf7cebc54")
 public class LayoutWidgetsOutline extends AbstractWidgetsOutline {
 
   @Override

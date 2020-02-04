@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
@@ -54,6 +55,7 @@ public class ClientNotificationSnippet {
     private static final long serialVersionUID = 1L;
   }
 
+  @ClassId("9bf8088c-9701-4c3b-9b1f-41488ca048b9")
   static class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
     private static final long serialVersionUID = 1L;

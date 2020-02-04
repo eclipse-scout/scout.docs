@@ -13,11 +13,13 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.data.tile.ITileColorScheme;
 import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("8302e181-9a58-4e92-8bad-0cc20c35d45d")
 public class TileColorSchemeLookupCall extends LocalLookupCall<ITileColorScheme> {
 
   private static final long serialVersionUID = 1L;

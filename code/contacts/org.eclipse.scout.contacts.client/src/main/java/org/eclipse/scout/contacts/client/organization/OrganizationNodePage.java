@@ -15,8 +15,10 @@ import java.util.List;
 import org.eclipse.scout.contacts.client.person.PersonTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
 // tag::all[]
+@ClassId("f074181d-462a-40dc-b7cd-46bb4e50e7fb")
 public class OrganizationNodePage extends AbstractPageWithNodes {
 
   private String organizationId; // <1>

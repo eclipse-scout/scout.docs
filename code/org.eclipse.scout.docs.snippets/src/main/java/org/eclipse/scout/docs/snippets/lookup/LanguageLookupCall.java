@@ -3,10 +3,12 @@ package org.eclipse.scout.docs.snippets.lookup;
 import java.util.Date;
 
 import org.eclipse.scout.docs.snippets.ILanguageLookupService;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
 //tag::LanguageLookupCall[]
+@ClassId("6154090e-86ac-4c08-9769-bf3ef61c1b4b")
 public class LanguageLookupCall extends LookupCall<String> {
   // other stuff like serialVersionUID, Lookup Service definition...
 

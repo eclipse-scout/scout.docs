@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
@@ -31,6 +32,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 /**
  * @author mzi
  */
+@ClassId("23aee5d0-ce58-4f90-ace3-a67434f97760")
 public abstract class AbstractUserTreeField extends AbstractStringField {
 
   @Override

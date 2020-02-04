@@ -15,12 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("4b011d3b-4a60-4777-823f-fa0cc09d3292")
 public class AvailableLocaleLookupCall extends LocalLookupCall<Locale> {
 
   private static final Locale[] AVAILABLE_LOCALES = {Locale.US, new Locale("de", "CH")};

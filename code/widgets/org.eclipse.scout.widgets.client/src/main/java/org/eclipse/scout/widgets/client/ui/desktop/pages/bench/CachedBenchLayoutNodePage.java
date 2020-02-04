@@ -8,6 +8,7 @@ import org.eclipse.scout.rt.client.ui.desktop.bench.layout.FlexboxLayoutData;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 
+@ClassId("39db31bc-25c4-41cc-bed6-1d9571172f90")
 public class CachedBenchLayoutNodePage extends AbstractBenchLayoutPageWithNodes {
 
   @Override

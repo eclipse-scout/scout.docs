@@ -24,6 +24,7 @@ import org.eclipse.scout.widgets.client.ui.forms.WizardForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.WizardForm.MainBox.FormField;
 import org.eclipse.scout.widgets.client.ui.wizards.LabelWizard;
 
+@ClassId("c5120d6c-9167-4b70-a5f9-5a3863eedfe3")
 public class WizardForm extends AbstractForm implements IAdvancedExampleForm {
 
   private LabelWizard m_wizard;

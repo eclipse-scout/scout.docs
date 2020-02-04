@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.shared;
 
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -18,6 +19,7 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 /**
  * @author mzi
  */
+@ClassId("783aa07b-ef09-439c-af2d-82e091294c83")
 public class FileCodeType extends AbstractCodeType<String, String> {
 
   private static final long serialVersionUID = 1L;
@@ -35,6 +37,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(10)
+  @ClassId("9254e7f8-f394-4a72-820e-8841d71f95bd")
   public static class HtmlCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +55,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(20)
+  @ClassId("e006acd4-d9a2-4364-b4dd-b83a27320cd6")
   public static class TextCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +73,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(30)
+  @ClassId("c836bf15-d177-464d-aa23-dd08cb84a79a")
   public static class JpgCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -86,6 +91,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(40)
+  @ClassId("f3c006ca-8dd6-4b7b-a92e-04b285e3d50e")
   public static class PngCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -103,6 +109,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(50)
+  @ClassId("a640329d-f5b8-4ad8-b5cf-6f76a5744be6")
   public static class JavaCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -120,6 +127,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(60)
+  @ClassId("01418936-e9e0-4f71-a74b-6d033cf534f1")
   public static class PdfCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -138,6 +146,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(70)
+  @ClassId("baecf52d-c371-435b-8c41-2943eb7ee0bb")
   public static class UknownCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
@@ -156,6 +165,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(80)
+  @ClassId("9474f6f1-68dc-4f88-bde9-b2771c04dfd0")
   public static class DirectoryCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;

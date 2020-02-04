@@ -26,11 +26,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 // tag::template[]
+@ClassId("d03c9495-530b-4bad-8b05-414ff7edce7a")
 @FormData(value = AbstractAddressBoxData.class, // <1>
     sdkCommand = SdkCommand.CREATE,
     defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
@@ -79,6 +81,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
   }
 
   @Order(1000)
+  @ClassId("87206b83-a4e4-4bb8-a58e-2596b6dbedd3")
   public class StreetField extends AbstractStringField {
 
     @Override
@@ -93,6 +96,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
   }
 
   @Order(2000)
+  @ClassId("b45a1137-1043-443a-8a9f-9ad178b0fc3c")
   public class LocationBox extends AbstractSequenceBox {
 
     @Override
@@ -106,6 +110,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
 
     @Order(1000)
+    @ClassId("e6c16bd4-2e66-4ec1-bb8d-a35d95bd7c6d")
     public class CityField extends AbstractStringField {
 
       @Override
@@ -125,6 +130,7 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
     }
 
     @Order(2000)
+    @ClassId("27a07cc8-0e9a-483b-96e1-c6e8c292525d")
     public class CountryField extends AbstractSmartField<String> {
 
       @Override
@@ -150,9 +156,11 @@ public abstract class AbstractAddressBox extends AbstractGroupBox {
   }
 
   @Order(3000)
+  @ClassId("48046a88-6089-4750-bb1b-90516247d2f9")
   public class ShowOnMapButtonBox extends AbstractSequenceBox {
 
     @Order(1000)
+    @ClassId("f55b3a90-d3a2-4dc9-b549-9f1ed4ac1a54")
     public class ShowOnMapButton extends AbstractLinkButton {
 
       @Override

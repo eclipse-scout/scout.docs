@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.wrappedform.AbstractWrappedFormField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.Assertions;
@@ -44,6 +45,7 @@ import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.Gr
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.WrappedFormFieldBox.WrappedFormField;
 
+@ClassId("99d4da8d-201c-48e0-ac75-c4e92d1e6cd5")
 public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
 
   protected final Map<Class<? extends IForm>, IForm> m_formInstances = new HashMap<>();
@@ -174,11 +176,14 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("a5160514-2efd-412d-9294-e9164cda6f10")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("4d90c1c1-c7b2-4ca4-a63d-87cbd3e85646")
     public class GroupBox extends AbstractGroupBox {
       @Order(10)
+      @ClassId("79badfe6-7cdc-4f45-a5b7-3e331aab0958")
       public class GroupBox1 extends AbstractGroupBox {
 
         @Override
@@ -192,6 +197,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("2adbbfd0-de15-4dec-9e80-086d8d8bc4e0")
         public class InnerFormField extends AbstractSmartField<Class<? extends IPageForm>> {
 
           @Override
@@ -217,6 +223,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("71223d3a-8df4-40ba-b9f3-7544865ea944")
         public class NewInstanceField extends AbstractBooleanField {
 
           @Override
@@ -247,6 +254,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("346aea89-f231-457b-be80-4166c70557a5")
       public class GroupBox2 extends AbstractGroupBox {
 
         @Override
@@ -260,9 +268,11 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("a2794560-4102-4b21-88fa-c0a8c7c5042b")
         public class InnerFormStateBox extends AbstractSequenceBox {
 
           @Order(10)
+          @ClassId("2c725370-e12a-446f-9d6c-b434ee6f33ac")
           public class InnerFormStateButton extends AbstractLinkButton {
 
             @Override
@@ -307,6 +317,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("372b8cf8-d3f0-4297-89e0-f872f8ffd317")
           public class SetInnerFormButton extends AbstractLinkButton {
 
             @Override
@@ -341,6 +352,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("8878b588-b04d-4d95-8bad-147c22739984")
         public class WrappedFormFieldManagesFormLifecycleField extends AbstractBooleanField {
 
           @Override
@@ -367,6 +379,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("eb0ee5c3-e407-4330-98ba-b403fdc44f1c")
     public class WrappedFormFieldBox extends AbstractGroupBox {
 
       @Override
@@ -375,6 +388,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("8446d7e0-e246-49f5-ab23-f95f0dcec766")
       public class WrappedFormField extends AbstractWrappedFormField<IForm> {
 
         @Override
@@ -385,6 +399,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("95141574-52f3-4b7a-86d5-fb573bcc4240")
     public class CloseButton extends AbstractCloseButton {
 
       @Override
@@ -394,6 +409,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("df6a413d-68b2-4033-b924-658868557248")
     public class FormActionsMenu extends AbstractMenu {
 
       @Override
@@ -402,6 +418,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("7e49187d-1a4c-4eed-8a04-6a08837c7084")
       public class IsEmptyMenu extends AbstractMenu {
 
         @Override
@@ -419,6 +436,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("d5c6e256-8e47-414f-8e9a-e778534dda68")
       public class IsSaveNeededMenu extends AbstractMenu {
 
         @Override
@@ -435,6 +453,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("24caacbf-2d7a-4ec7-ad31-118d3993d0d3")
       public class MarkSavedMenu extends AbstractMenu {
 
         @Override

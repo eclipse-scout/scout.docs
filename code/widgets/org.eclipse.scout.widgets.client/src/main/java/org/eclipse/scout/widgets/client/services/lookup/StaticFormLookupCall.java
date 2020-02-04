@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -23,6 +24,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
+@ClassId("00c7a305-7da9-40cb-8e78-12b328a54b65")
 public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
   private static final long serialVersionUID = 1L;
 

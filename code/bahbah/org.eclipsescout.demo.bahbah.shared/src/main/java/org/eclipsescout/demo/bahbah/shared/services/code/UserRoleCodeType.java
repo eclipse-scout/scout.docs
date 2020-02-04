@@ -11,10 +11,12 @@
 package org.eclipsescout.demo.bahbah.shared.services.code;
 
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
+@ClassId("c91b9400-92ef-487e-9c2e-d25b7859e11b")
 public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
 
   private static final long serialVersionUID = 1L;
@@ -31,6 +33,7 @@ public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
   }
 
   @Order(10)
+  @ClassId("9a0c9711-6e3e-43c1-9ca1-938627727cc7")
   public static class AdministratorCode extends AbstractCode<Integer> {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +51,7 @@ public class UserRoleCodeType extends AbstractCodeType<Long, Integer> {
   }
 
   @Order(20)
+  @ClassId("a1c30dcb-c8b9-496e-8398-b0b35cf33566")
   public static class UserCode extends AbstractCode<Integer> {
 
     private static final long serialVersionUID = 1L;

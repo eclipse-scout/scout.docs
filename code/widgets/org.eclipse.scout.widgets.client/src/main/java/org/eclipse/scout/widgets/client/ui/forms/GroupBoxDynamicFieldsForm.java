@@ -34,6 +34,7 @@ import org.eclipse.scout.widgets.client.ui.template.formfield.FieldTypeLookupCal
  *
  * @author aho
  */
+@ClassId("5a29da8b-d0df-4dc9-8925-4a1e67f369c8")
 public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm {
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -83,6 +84,7 @@ public class GroupBoxDynamicFieldsForm extends AbstractForm implements IPageForm
     startInternal(new NullFormHandler());
   }
 
+  @ClassId("12ab8530-9bb4-4f61-9b7a-42c169413fbe")
   public class MainBox extends AbstractGroupBox {
 
     @Order(1000)

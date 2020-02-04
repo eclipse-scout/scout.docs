@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNode
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.security.ACCESS;
@@ -33,6 +34,7 @@ import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateIconPermission;
 import org.eclipsescout.demo.bahbah.shared.services.outline.IStandardOutlineService;
 
+@ClassId("ddc639db-9c06-431f-990f-99ce1f2459cd")
 public class UserNodePage extends AbstractPageWithNodes {
 
   @Override
@@ -115,6 +117,7 @@ public class UserNodePage extends AbstractPageWithNodes {
   }
 
   @Order(10)
+  @ClassId("ae02d3a5-2821-4fe4-b128-5a8dbdb63665")
   public class ChangeIconMenu extends AbstractMenu {
 
     @Override

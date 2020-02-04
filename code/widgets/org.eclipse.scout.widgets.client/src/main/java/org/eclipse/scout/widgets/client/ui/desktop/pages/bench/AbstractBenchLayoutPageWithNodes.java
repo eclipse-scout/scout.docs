@@ -7,11 +7,13 @@ import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.bench.layout.BenchLayoutData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
 /**
  * @author Andreas Hoegger
  */
+@ClassId("0434d9d7-ded5-42d6-a45f-bc6f26b31cd5")
 public class AbstractBenchLayoutPageWithNodes extends AbstractPageWithNodes {
 
   private List<IForm> m_pageForms;

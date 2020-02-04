@@ -41,6 +41,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.ModelVariant;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
@@ -58,6 +59,7 @@ import org.eclipse.scout.widgets.shared.FileCodeType.JpgCode;
 import org.eclipse.scout.widgets.shared.FileCodeType.PngCode;
 import org.eclipse.scout.widgets.shared.FileCodeType.UknownCode;
 
+@ClassId("b5d2ea93-5577-4982-84be-ca7e28f0b68d")
 public abstract class AbstractFileTableField extends AbstractTableField<Table> {
   protected static final String FILE_SIZE_FORMAT = "#,### KB";
   protected static final long FILE_SIZE_FACTOR = 1024;
@@ -103,6 +105,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
   }
 
   @Order(10)
+  @ClassId("1584dd5b-6a2a-494b-a969-09e6fd9b6aa9")
   public class DeleteKeyStroke extends AbstractKeyStroke {
 
     @Override
@@ -116,6 +119,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
   }
 
+  @ClassId("436edaab-155c-4f33-bc33-38746bd0b617")
   public class Table extends AbstractTable {
 
     private final Set<BinaryResource> m_keys = new HashSet<>();
@@ -196,6 +200,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(10)
+    @ClassId("f7cbf367-528c-4271-9313-fb2d722afbc7")
     public class ResourceColumn extends AbstractColumn<BinaryResource> {
 
       @Override
@@ -215,6 +220,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(15)
+    @ClassId("fa44a8c3-8055-4564-8f0d-44b2af093489")
     public class HtmlImageColumn extends AbstractStringColumn {
 
       @Override
@@ -247,6 +253,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
 
     @Order(18)
     @ModelVariant("widgets.Example")
+    @ClassId("cb8042a0-934d-4914-b9c4-9019b0aa1d49")
     public class ImageBeanColumn extends AbstractBeanColumn<ExampleBean> {
 
       @Override
@@ -261,6 +268,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(20)
+    @ClassId("58698e63-e617-4345-9757-02d9a1ecdb91")
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -275,6 +283,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(30)
+    @ClassId("b6e37411-9c0d-4de6-bd39-c08fd7d8872b")
     public class SizeColumn extends AbstractLongColumn {
 
       @Override
@@ -289,6 +298,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(40)
+    @ClassId("02e1b538-9550-4d44-b953-8dadb4f317cc")
     public class TypeColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -303,6 +313,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(50)
+    @ClassId("cecde15c-a7ca-4229-ad4c-563453205d15")
     public class DateModifiedColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -312,6 +323,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(10)
+    @ClassId("5279dc7f-375c-4dd0-a482-4d42c59d84ab")
     public class OpenMenu extends AbstractMenu {
 
       @Override
@@ -329,6 +341,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(20)
+    @ClassId("0c29ba27-53d4-4362-a790-5b365cab091a")
     public class AddMenu extends AbstractMenu {
 
       @Override
@@ -353,6 +366,7 @@ public abstract class AbstractFileTableField extends AbstractTableField<Table> {
     }
 
     @Order(30)
+    @ClassId("4bcc945d-4d80-426c-8a39-ec8bc24c4b9e")
     public class DeleteMenu extends AbstractMenu {
 
       @Override

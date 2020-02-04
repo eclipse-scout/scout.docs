@@ -13,11 +13,13 @@ package org.eclipse.scout.widgets.client.ui.template.formfield;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.template.formfield.FieldTypeLookupCall.FIELD_TYPE;
 
+@ClassId("f9212475-3ad3-42d5-88ad-09ff5a37370a")
 public class FieldTypeLookupCall extends LocalLookupCall<FIELD_TYPE> {
   private static final long serialVersionUID = 1L;
 

@@ -43,6 +43,7 @@ import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractViewButton
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
+@ClassId("43e70921-af23-40c7-8b02-8e3263eb8452")
 public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   private IDesktopNotification m_lastNotification;
@@ -105,6 +106,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(CloseableField.class);
   }
 
+  @ClassId("756346e1-c53b-42df-b667-1aed17ee65b6")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -113,6 +115,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
+    @ClassId("18298556-fbab-4522-9d3d-f0d6dffbdd80")
     public class NotificationsBox extends AbstractGroupBox {
 
       @Override
@@ -126,6 +129,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(20)
+      @ClassId("e52b3de5-15ab-4c9b-b6a5-b48196203a15")
       public class ShowNotificationButton extends AbstractButton {
 
         @Override
@@ -145,6 +149,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(30)
+      @ClassId("cb5ac750-283b-40d1-a0d6-5eb2fb4f5dfc")
       public class RemoveNotificationButton extends AbstractButton {
 
         @Override
@@ -164,6 +169,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(10)
+      @ClassId("9f5314b9-6571-43ee-8049-51e694e0f81c")
       public class MessageField extends AbstractStringField {
 
         @Override
@@ -178,6 +184,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(50)
+      @ClassId("3353d171-c2f7-4035-b1ee-8ba442b6672f")
       public class SeverityField extends AbstractSmartField<Integer> {
 
         @Override
@@ -202,6 +209,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(60)
+      @ClassId("e14318ac-05bc-436e-bce9-940a62117bb0")
       public class DurationField extends AbstractIntegerField {
 
         @Override
@@ -226,6 +234,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(70)
+      @ClassId("51eb1a12-dba6-410d-818f-5355dd6ccd78")
       public class CloseableField extends AbstractBooleanField {
 
         @Override
@@ -392,6 +401,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(10000)
+    @ClassId("3a968d83-719d-4b0e-b81b-7a5bfc333dd2")
     public class CloseButton extends AbstractCloseButton {
     }
   }

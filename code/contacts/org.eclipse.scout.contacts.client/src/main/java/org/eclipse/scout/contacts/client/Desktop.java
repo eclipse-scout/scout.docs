@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.ApplicationNameProperty;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -34,6 +35,7 @@ import org.eclipse.scout.rt.shared.ISession;
 
 //tag::DesktopInit[]
 //tag::quickAccessMenu[]
+@ClassId("70eda4c8-5aed-4e61-85b4-6098edad8416")
 public class Desktop extends AbstractDesktop {
 
   //end::quickAccessMenu[]
@@ -63,6 +65,7 @@ public class Desktop extends AbstractDesktop {
   // tag::DesktopInit[]
   // outline buttons of the application
   @Order(1)
+  @ClassId("9405937b-66e8-491a-831d-69adca724b90")
   public class ContactOutlineViewButton extends AbstractOutlineViewButton {
     //end::DesktopInit[]
 
@@ -87,6 +90,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(2)
+  @ClassId("55febc84-ad6d-4ee8-9963-d1d40169a63a")
   public class SearchOutlineViewButton extends AbstractOutlineViewButton {
     //end::DesktopInit[]
 
@@ -118,6 +122,7 @@ public class Desktop extends AbstractDesktop {
   // top level menus for the header area of the application
   //tag::quickAccessMenu[]
   @Order(10)
+  @ClassId("50df7a9d-dd3c-40a3-abc4-4619eff8d841")
   public class QuickAccessMenu extends AbstractMenu {
 
     @Override
@@ -134,6 +139,7 @@ public class Desktop extends AbstractDesktop {
     //tag::quickAccessMenu[]
 
     @Order(10)
+    @ClassId("effb3b69-f488-4aed-8923-d430a5f1fd97")
     public class NewPersonMenu extends AbstractMenu {
 
       @Override
@@ -149,6 +155,7 @@ public class Desktop extends AbstractDesktop {
     //end::quickAccessMenu[]
 
     @Order(20)
+    @ClassId("d57304ef-aefe-4d36-a10f-66d658e0e535")
     public class NewOrganizationMenu extends AbstractMenu {
 
       @Override
@@ -174,6 +181,7 @@ public class Desktop extends AbstractDesktop {
 
   //tag::OptionsMenu[]
   @Order(20)
+  @ClassId("4fce42bf-85f9-4892-96a2-2e89e18eeaee")
   public class OptionsMenu extends AbstractFormMenu<OptionsForm> { // <1>
 
     @Override
@@ -204,6 +212,7 @@ public class Desktop extends AbstractDesktop {
   //end::OptionsMenu[]
 
   @Order(30)
+  @ClassId("8dbfbe9d-0382-471a-ae43-3178f7a9e720")
   public class UserMenu extends AbstractFormMenu<UserForm> { // <2>
 
     @Override

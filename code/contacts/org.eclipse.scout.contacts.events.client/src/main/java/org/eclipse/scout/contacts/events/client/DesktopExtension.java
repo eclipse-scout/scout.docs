@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktopExtension;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
 public class DesktopExtension extends AbstractDesktopExtension {
 
@@ -29,6 +30,7 @@ public class DesktopExtension extends AbstractDesktopExtension {
   }
 
   @Order(2000)
+  @ClassId("aa6e65d3-55e7-4a47-aad6-c5a4771d2c70")
   public class EventOutlineViewButton extends AbstractOutlineViewButton {
 
     public EventOutlineViewButton() {

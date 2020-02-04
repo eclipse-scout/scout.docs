@@ -61,6 +61,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.ConfigurationBox.PlaceholderField;
 import org.eclipse.scout.widgets.client.ui.forms.ChartFieldForm.MainBox.ExamplesBox.ChartField;
 
+@ClassId("81bb570f-72ed-4b4c-be41-77ae5e9dd554")
 public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   public static final String CONFIG_LINE = "/chart/lineConfig.json";
@@ -292,9 +293,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   }
 
   @Order(10)
+  @ClassId("2a4eab55-903d-4f3b-bb96-d48a4aa0fc2b")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("a1138d26-ac89-427c-a96c-f77318b63844")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -308,6 +311,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       }
 
       @Order(10)
+      @ClassId("0dc78e65-ea77-4e36-bd35-42d256b93fd1")
       public class ChartField extends AbstractChartField {
 
         @Override
@@ -339,6 +343,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(30)
+    @ClassId("f0937e48-0328-4c7f-a076-40a70602e392")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -560,6 +565,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
 
     @Order(40)
+    @ClassId("ccb84308-013a-4bf7-8d2d-6a21de8ec526")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -567,6 +573,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  @ClassId("b8e867ed-2602-45f2-8634-51d7babb5d1e")
   public static class ChartTypeLookupCall extends LocalLookupCall<String> {
 
     private static final long serialVersionUID = 1L;
@@ -582,6 +589,7 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
     }
   }
 
+  @ClassId("6d12cd9a-1dd3-455f-9a13-4900a29b33ec")
   public static class ColorSetLookupCall extends LocalLookupCall<Integer> {
 
     private static final long serialVersionUID = 1L;

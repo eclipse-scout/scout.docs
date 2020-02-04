@@ -3,6 +3,7 @@ package org.eclipse.scout.docs.snippets.lookup;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -10,6 +11,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
 public class LookupExample {
 
+  @ClassId("96e2adab-36f0-4cc1-8335-67719008cfa6")
   static class P_Field extends AbstractSmartField<String> {
 
     //tag::SmartFieldLookup[]

@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.extension.ui.basic.table.AbstractTableExtension;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 @Data(PersonTablePageDataExtension.class)
@@ -26,6 +27,7 @@ public class PersonTablePageExtension extends AbstractTableExtension<Table> {
   }
 
   @Order(10)
+  @ClassId("23b6527b-976c-4bf2-bee3-2ae906049b9e")
   public class EventsColumn extends AbstractLongColumn {
 
     @Override

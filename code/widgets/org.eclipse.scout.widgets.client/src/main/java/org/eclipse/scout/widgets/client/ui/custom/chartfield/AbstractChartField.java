@@ -13,7 +13,9 @@ package org.eclipse.scout.widgets.client.ui.custom.chartfield;
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
+@ClassId("3c031e42-eed3-447d-8b86-7233f824b9a0")
 public abstract class AbstractChartField extends AbstractFormField implements IChartField {
 
   @Override

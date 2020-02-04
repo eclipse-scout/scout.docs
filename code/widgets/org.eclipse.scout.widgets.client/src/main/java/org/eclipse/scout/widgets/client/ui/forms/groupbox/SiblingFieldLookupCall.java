@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 
 import org.eclipse.scout.rt.client.ui.form.fields.ICompositeField;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("8edfb8c9-a461-4497-96f5-e585378f6d4c")
 public class SiblingFieldLookupCall extends LocalLookupCall<IFormField> {
   private static final long serialVersionUID = 1L;
 

@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.useradmin.DefaultPasswordForm;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -43,6 +44,7 @@ import org.eclipsescout.demo.bahbah.shared.services.code.UserRoleCodeType;
 import org.eclipsescout.demo.bahbah.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.bahbah.shared.services.process.UserFormData;
 
+@ClassId("b655449b-d354-4bc8-aef1-e789c97baf07")
 @PageData(UserAdministrationTablePageData.class)
 public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
 
@@ -67,6 +69,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     importPageData(pageData);
   }
 
+  @ClassId("52f20837-9ae0-4684-b3ba-dce62c08263d")
   public class Table extends AbstractTable {
 
     public UsernameColumn getUsernameColumn() {
@@ -97,6 +100,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("aeb30786-d896-40d4-a3dd-a6bdefe4dbee")
     public class UserIdColumn extends AbstractLongColumn {
 
       @Override
@@ -121,6 +125,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("8e93af46-a8f7-4765-88f2-57e463ac4055")
     public class UsernameColumn extends AbstractStringColumn {
 
       @Override
@@ -145,6 +150,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(30)
+    @ClassId("ffcb61f5-6310-4502-b974-92351109e2af")
     public class RoleColumn extends AbstractSmartColumn<Integer> {
 
       @Override
@@ -170,6 +176,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("ae24f2fe-3806-40fa-a717-a275faff3024")
     public class ModifyUserMenu extends AbstractMenu {
 
       @Override
@@ -197,6 +204,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("d08093f0-089e-465e-8e1a-959728bb0374")
     public class NewUserMenu extends AbstractMenu {
 
       @Override
@@ -226,6 +234,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(30)
+    @ClassId("2a7dab20-f183-49c1-a0ca-066dec97db2a")
     public class ResetPasswordMenu extends AbstractMenu {
 
       @Override
@@ -249,11 +258,13 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(40)
+    @ClassId("93e2ae00-16cd-4e4a-a5b8-0caeb621bf2a")
     public class SeparatorMenu extends AbstractMenuSeparator {
 
     }
 
     @Order(50)
+    @ClassId("144304b4-ec46-4ea2-8b2d-d481ad479790")
     public class DeleteUserMenu extends AbstractMenu {
 
       @Override

@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.services.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -20,6 +21,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 /**
  * @author mzi
  */
+@ClassId("d2353f8c-d3bb-439f-980f-f38e1044200a")
 public class FontStyleLookupCall extends LocalLookupCall<Integer> {
 
   private static final long serialVersionUID = 1L;

@@ -26,6 +26,7 @@ import org.eclipse.scout.widgets.client.ui.forms.PageFieldForm.MainBox.GroupBoxP
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractGroupBoxPropertiesBox;
 
+@ClassId("2c4a6049-64f5-4b94-ba41-f36da90930da")
 public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -56,12 +57,15 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
   }
 
   @Order(10)
+  @ClassId("7875768f-d721-4ddb-8eb5-806c6d9cd921")
   public class MainBox extends AbstractGroupBox {
 
     @Order(100)
+    @ClassId("0abd8088-f898-4004-8def-504e0159979b")
     public class DetailBox extends AbstractGroupBox {
 
       @Order(10)
+      @ClassId("9347884e-b162-4cf0-8e7e-249786da4814")
       public class PageBox extends AbstractPageField<PageWithDetailFormTablePage> {
 
         @Override
@@ -102,6 +106,7 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(300)
+    @ClassId("04118b1d-2633-4f18-8b9a-bfd260bde2af")
     public class CloseButton extends AbstractCloseButton {
     }
   }

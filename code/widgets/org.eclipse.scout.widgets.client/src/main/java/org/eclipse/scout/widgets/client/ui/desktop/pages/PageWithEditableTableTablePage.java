@@ -19,9 +19,13 @@ import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.IColumn;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.ViewSourceOnGitHubMenu;
 
+@ClassId("37e9a239-4f6a-4e74-8651-4c5df1ca8242")
 public class PageWithEditableTableTablePage extends PageWithTableTablePage {
 
   public PageWithEditableTableTablePage() {
@@ -38,6 +42,7 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
   }
 
   @Replace
+  @ClassId("10a53ec2-c850-43d4-9fbc-22cfbf0607e9")
   public class Table extends PageWithTableTablePage.Table {
 
     @Override
@@ -49,6 +54,7 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
     }
 
     @Order(20)
+    @ClassId("45b2fb23-c79d-457f-bed2-2518475e275d")
     public class ToggleMandatoryMenu extends AbstractMenu {
 
       @Override
@@ -76,6 +82,7 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
 
   @Order(10)
   @Replace
+  @ClassId("991ec167-a118-4fb5-acd6-8896278014cd")
   public class ViewSourceOnGitHubMenu extends PageWithTableTablePage.ViewSourceOnGitHubMenu {
 
     @Override

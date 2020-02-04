@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.ITreeBox;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -65,6 +66,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB800
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(2000.0)
+@ClassId("c867404b-93a0-4726-9ef2-e91b7693a840")
 public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -140,9 +142,11 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
   }
 
   @Order(10)
+  @ClassId("fbec2cf8-5209-4ef9-8748-73d581a25c43")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("dae4919e-6521-4208-84b9-88606edaad04")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -151,6 +155,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(10)
+      @ClassId("11234a8f-51c0-4f9e-a507-305edfc933b1")
       public class TreeBoxWithCodeTypeContentField extends AbstractLabelField {
 
         @Override
@@ -170,6 +175,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(20)
+      @ClassId("5068db32-45cd-47d3-8d47-7d6e850e9920")
       public class DefaultField extends AbstractTreeBox<Long> {
 
         @Override
@@ -194,6 +200,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(30)
+      @ClassId("c02152dc-97b6-42cd-98bf-4dae281e3b1a")
       public class DisabledField extends AbstractTreeBox<Long> {
 
         @Override
@@ -228,6 +235,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(40)
+      @ClassId("47c10064-f252-4f0e-8426-d8123d63ab85")
       public class TreeBoxWithLookupCallContentField extends AbstractLabelField {
 
         @Override
@@ -247,6 +255,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(50)
+      @ClassId("8f6323ec-442c-4fce-b734-bafdbd8d6170")
       public class DefaultTreeBoxField extends AbstractTreeBox<String> {
 
         @Override
@@ -266,6 +275,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(60)
+      @ClassId("d80268fa-6720-4838-92b5-26951aa950fe")
       public class DisabledTreeBoxField extends AbstractTreeBox<String> {
 
         @Override
@@ -309,6 +319,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(20)
+    @ClassId("2a89a974-2fd4-4a28-894f-91e1ec8b3580")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -317,6 +328,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(10)
+      @ClassId("632016bd-77b7-4234-80dc-3ce0e17a736f")
       public class TreeBoxField extends AbstractTreeBox<String> {
 
         @Override
@@ -334,9 +346,11 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
           return UserContentTreeLookupCall.class;
         }
 
+        @ClassId("0ecdf7fc-1f4e-44af-a158-47222b9e1425")
         public class TreeBoxTree extends DefaultTreeBoxTree {
 
           @Order(10)
+          @ClassId("d0670cfa-0104-4b67-9705-24540af0bb88")
           public class ToggleNodeEnabledMenu extends AbstractMenu {
 
             @Override
@@ -361,6 +375,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
           }
 
           @Order(20)
+          @ClassId("92a8e930-d43f-4ebb-b009-8ce9b6f1abd3")
           public class ToggleNodeCheckedMenu extends AbstractMenu {
 
             @Override
@@ -387,9 +402,11 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(20)
+      @ClassId("2ce52dd3-9245-4840-b074-bc73f5cf0f63")
       public class CheckUncheckBox extends AbstractSequenceBox {
 
         @Order(10)
+        @ClassId("10b52e75-ee11-4d8a-8baa-229ee4b3675a")
         public class CheckAllButton extends AbstractLinkButton {
 
           @Override
@@ -404,6 +421,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
 
         @Order(20)
+        @ClassId("0cb20756-1276-4f3c-b372-1bccb69fa1c5")
         public class UncheckAllButton extends AbstractLinkButton {
 
           @Override
@@ -419,6 +437,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(30)
+      @ClassId("8a3bd3eb-7a61-4787-8a1c-08c1f43e3bf9")
       public class GetCheckedKeysField extends AbstractStringField {
 
         @Override
@@ -444,9 +463,11 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(35)
+      @ClassId("aceedf95-6963-43ce-83f1-1f370bc26b70")
       public class SetCheckedKeysBox extends AbstractSequenceBox {
 
         @Order(10)
+        @ClassId("e9c34eb9-72ef-4dab-b0c1-5f56cebd13d6")
         public class SetCheckedKeysField extends AbstractStringField {
 
           @Override
@@ -461,6 +482,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
 
         @Order(20)
+        @ClassId("e6d06b7d-b29a-4798-b1bd-a08a8805e1fe")
         public class SetCheckedKeysButton extends AbstractLinkButton {
 
           @Override
@@ -477,6 +499,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(40)
+      @ClassId("19bc4d56-8f13-4205-8b31-0b7f4e150249")
       public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
@@ -502,6 +525,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(50)
+      @ClassId("9a468ede-0a82-49a9-bf55-4fe300cc4dc7")
       public class FilterCheckedRowsValueField extends AbstractBooleanField {
 
         @Override
@@ -521,6 +545,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(60)
+      @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
       public class AutoCheckChildNodesField extends AbstractBooleanField {
 
         @Override
@@ -540,6 +565,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(70)
+      @ClassId("3cf5e0c0-0f74-4688-80cc-9834ad3608b2")
       public class IsEnabledField extends AbstractBooleanField {
 
         @Override
@@ -564,6 +590,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(80)
+      @ClassId("d323abd4-260d-46c6-8f27-697e0caeb40b")
       public class CheckableField extends AbstractBooleanField {
 
         @Override
@@ -588,6 +615,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(80)
+      @ClassId("a126dcfe-fd25-42d8-810b-796403c96696")
       public class MulticheckField extends AbstractBooleanField {
 
         @Override
@@ -612,6 +640,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(100)
+      @ClassId("e6323fcf-5455-4148-bb64-b600bf884d44")
       public class CheckableStyleField extends AbstractSmartField<CheckableStyle> {
 
         @Override
@@ -642,6 +671,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(30)
+    @ClassId("a7723da3-ba76-42ca-bb9d-b7b823683722")
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -656,6 +686,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
+    @ClassId("ad7921d1-9394-4baa-97e8-72ac69551c48")
     public class ToggleFilterBoxesButton extends AbstractButton {
 
       private ToggleState m_toggleState = ToggleState.None;
@@ -679,6 +710,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
+    @ClassId("a028246b-3bc0-48a8-9552-78262bcc7345")
     public class CloseButton extends AbstractCloseButton {
     }
   }

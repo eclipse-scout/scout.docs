@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
@@ -39,6 +40,7 @@ import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm.MainBox.MessageFiel
 import org.eclipsescout.demo.bahbah.shared.services.process.INotificationProcessService;
 
 @FormData(sdkCommand = SdkCommand.IGNORE)
+@ClassId("289aa1e2-e4f7-4ce2-a11f-72234d59725f")
 public class ChatForm extends AbstractForm {
 
   private String m_buddyName;
@@ -91,6 +93,7 @@ public class ChatForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("422051f5-6af6-4ffc-8d64-d7e7ab40b156")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -104,6 +107,7 @@ public class ChatForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("c26e2a0f-f058-4f2f-bf23-ef5590edfa43")
     public class MessageField extends AbstractStringField {
 
       @Override
@@ -113,6 +117,7 @@ public class ChatForm extends AbstractForm {
     }
 
     @Order(20)
+    @ClassId("3ec9ac67-f433-477d-a6b3-fd4c147db2e0")
     public class HistoryField extends AbstractTableField<Table> {
 
       private final Integer MESSAGE_TYPE_LOCAL = 1;
@@ -127,6 +132,7 @@ public class ChatForm extends AbstractForm {
         return false;
       }
 
+      @ClassId("9d401339-5747-4a75-b944-9da076c58828")
       public class Table extends AbstractTable {
 
         @Override
@@ -171,6 +177,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("9257eb88-a804-47e8-87d3-a63f7ddbb006")
         public class TypeColumn extends AbstractIntegerColumn {
 
           @Override
@@ -190,6 +197,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Order(20)
+        @ClassId("3a4a931f-935e-4680-adb0-dc8a0be25c4c")
         public class SenderColumn extends AbstractStringColumn {
 
           @Override
@@ -204,6 +212,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Order(30)
+        @ClassId("09c1949a-6aae-4a27-b0d4-e97905316c39")
         public class ReceiverColumn extends AbstractStringColumn {
 
           @Override
@@ -213,6 +222,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Order(40)
+        @ClassId("d83ba329-cf5d-405f-b69e-83d36001fa32")
         public class MessageColumn extends AbstractStringColumn {
 
           @Override
@@ -232,6 +242,7 @@ public class ChatForm extends AbstractForm {
         }
 
         @Order(50)
+        @ClassId("0736ce0c-47c3-4a04-832d-69e5a130c382")
         public class TimeColumn extends AbstractTimeColumn {
 
           @Override
@@ -258,6 +269,7 @@ public class ChatForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("e27b4660-a1bb-4f6f-9f1e-da57351006d9")
     public class SendMessageKeyStroke extends AbstractKeyStroke {
 
       @Override

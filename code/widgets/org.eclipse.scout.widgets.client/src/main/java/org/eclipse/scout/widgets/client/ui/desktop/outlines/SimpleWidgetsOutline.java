@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
@@ -31,6 +32,7 @@ import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm;
 
 @Order(1000)
+@ClassId("ce95624c-c60a-4704-b348-73c3da792d58")
 public class SimpleWidgetsOutline extends AbstractWidgetsOutline {
 
   @Override

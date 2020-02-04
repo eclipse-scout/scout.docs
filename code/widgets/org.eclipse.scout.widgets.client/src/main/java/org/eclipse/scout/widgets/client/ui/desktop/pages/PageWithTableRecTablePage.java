@@ -17,8 +17,11 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 
+@ClassId("321ea8cf-836e-4879-bba1-9c32c25b3e20")
 public class PageWithTableRecTablePage extends PageWithTableTablePage {
 
   public PageWithTableRecTablePage() {
@@ -62,9 +65,11 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
   }
 
   @Replace
+  @ClassId("eb9eb561-4765-4fb7-bc4a-05e4a4446352")
   public class Table extends PageWithTableTablePage.Table {
 
     @Order(5)
+    @ClassId("0c6b078f-30bc-45b4-a120-b2ec13e425e3")
     public class OutlineColumn extends AbstractStringColumn {
 
       @Override

@@ -67,6 +67,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
@@ -75,6 +76,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 // tag::init[]
+@ClassId("1cde38c1-da32-4fdd-92e7-28d82a5d7bf9")
 @FormData(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE) // <1>
 // tag::structure[]
 // tag::validate[]
@@ -213,9 +215,11 @@ public class PersonForm extends AbstractForm {
 
   //tag::layout[]
   @Order(10)
+  @ClassId("27a040ac-eac5-47c6-a826-572633b9d4ef")
   public class MainBox extends AbstractGroupBox { // <1>
 
     @Order(10)
+    @ClassId("08832a97-8845-4ff4-8dfd-c29366c22742")
     public class GeneralBox extends AbstractGroupBox { // <2>
       //end::layout[]
 
@@ -239,6 +243,7 @@ public class PersonForm extends AbstractForm {
       // tag::pictureField[]
 
       @Order(10)
+      @ClassId("617ffd40-0d69-4d02-b4f8-90c28c68c6ce")
       public class PictureUrlField extends AbstractStringField {
 
         @Override // <1>
@@ -248,6 +253,7 @@ public class PersonForm extends AbstractForm {
       }
 
       @Order(20)
+      @ClassId("6366a23e-f8ba-4b50-b814-202e63daffc8")
       public class PictureField extends AbstractImageField {
 
         @Override // <2>
@@ -282,6 +288,7 @@ public class PersonForm extends AbstractForm {
         // end::pictureField[]
 
         @Order(10)
+        @ClassId("0a94ed5e-f35a-4959-ae6d-54de65187baf")
         public class EditURLMenu extends AbstractMenu {
 
           @Override
@@ -316,6 +323,7 @@ public class PersonForm extends AbstractForm {
 
       // tag::nameFields[]
       @Order(30)
+      @ClassId("359be835-439f-456e-9b0d-c832b034a298")
       public class FirstNameField extends AbstractStringField {
 
         @Override
@@ -325,6 +333,7 @@ public class PersonForm extends AbstractForm {
       }
 
       @Order(40)
+      @ClassId("8679ade5-21fb-470e-8f00-13bd15199101")
       public class LastNameField extends AbstractStringField {
 
         @Override
@@ -336,6 +345,7 @@ public class PersonForm extends AbstractForm {
       // tag::dateOfBirthField[]
 
       @Order(50)
+      @ClassId("7c602360-9daa-44b8-abb6-94ccf9b9db59")
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
@@ -358,6 +368,7 @@ public class PersonForm extends AbstractForm {
       // tag::genderField[]
 
       @Order(60)
+      @ClassId("b9d0593e-3938-4f97-bdca-fdb6a1ce1d77")
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
 
         @Override
@@ -375,9 +386,11 @@ public class PersonForm extends AbstractForm {
     }
 
     @Order(20)
+    @ClassId("3469046e-ee95-4e86-b0c9-a8ed01fbf664")
     public class DetailsBox extends AbstractTabBox { // <3>
 
       @Order(10)
+      @ClassId("2081b483-3d6e-4239-b7da-b6e2d2aa3b7a")
       public class ContactInfoBox extends AbstractGroupBox { // <4>
 
         //end::layout[]
@@ -390,6 +403,7 @@ public class PersonForm extends AbstractForm {
         // tag::addressBox[]
         // tag::validateAddress[]
         @Order(10)
+        @ClassId("736450dd-ba89-43cd-ba52-bcd31196b462")
         public class AddressBox extends AbstractGroupBox {
           // end::layout[]
           // end::validateAddress[]
@@ -438,6 +452,7 @@ public class PersonForm extends AbstractForm {
 
           // tag::addressBox[]
           @Order(10)
+          @ClassId("a9137ad1-af9d-4fef-a69d-3e3d9ce48f21")
           public class StreetField extends AbstractStringField {
             // end::validateAddress[]
 
@@ -459,6 +474,7 @@ public class PersonForm extends AbstractForm {
           // use a sequence box for horizontal layout // <3>
           // tag::validateAddress[]
           @Order(20)
+          @ClassId("a278333c-057e-4c1d-a442-0c1dd62fdca7")
           public class LocationBox extends AbstractSequenceBox {
             // end::validateAddress[]
 
@@ -474,6 +490,7 @@ public class PersonForm extends AbstractForm {
             // tag::validateAddress[]
 
             @Order(10)
+            @ClassId("3ea6ac2a-976e-4c7f-b04b-ec0d7d1ae5ec")
             public class CityField extends AbstractStringField {
               // end::validateAddress[]
 
@@ -497,6 +514,7 @@ public class PersonForm extends AbstractForm {
             }
 
             @Order(20)
+            @ClassId("d4dfce4f-019b-4a61-ba78-347ef67cf80f")
             public class CountryField extends AbstractSmartField<String> {
               // end::validateAddress[]
 
@@ -530,9 +548,11 @@ public class PersonForm extends AbstractForm {
           // end::addressBox[]
 
           @Order(30)
+          @ClassId("8e444520-4b98-4ea6-b9ed-03e04db6596e")
           public class ShowOnMapButtonBox extends AbstractSequenceBox {
 
             @Order(10)
+            @ClassId("bb1bd855-50d6-422c-a6b5-2cd5be6ecdfd")
             public class ShowOnMapButton extends AbstractLinkButton {
 
               @Override
@@ -586,6 +606,7 @@ public class PersonForm extends AbstractForm {
         //end::addressBox[]
 
         @Order(20)
+        @ClassId("136a3c0c-91bf-427c-8020-507bfd391098")
         public class PhoneField extends AbstractStringField {
 
           @Override
@@ -595,6 +616,7 @@ public class PersonForm extends AbstractForm {
         }
 
         @Order(30)
+        @ClassId("7dc64c60-5713-4376-a3e0-41c0a8e2b503")
         public class MobileField extends AbstractStringField {
 
           @Override
@@ -605,6 +627,7 @@ public class PersonForm extends AbstractForm {
 
         // tag::email[]
         @Order(40)
+        @ClassId("5f9d9363-8e57-4151-b281-7d401e64702c")
         public class EmailField extends AbstractStringField {
 
           // end::email[]
@@ -639,6 +662,7 @@ public class PersonForm extends AbstractForm {
 
       // tag::organizationField[]
       @Order(20)
+      @ClassId("8e18a673-aca5-44a2-898f-60a744e4467a")
       public class WorkBox extends AbstractGroupBox {
         // end::layout[]
         // end::organizationField[]
@@ -649,6 +673,7 @@ public class PersonForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("ee22af3c-b0a9-47a5-8931-d48a219d16b2")
         public class PositionField extends AbstractStringField {
 
           @Override
@@ -659,6 +684,7 @@ public class PersonForm extends AbstractForm {
         // tag::organizationField[]
 
         @Order(20)
+        @ClassId("cd4a7afd-e0ac-4c79-bf2e-819aa491db27")
         public class OrganizationField extends AbstractSmartField<String> { // <1>
 
           @Override
@@ -674,6 +700,7 @@ public class PersonForm extends AbstractForm {
         // end::organizationField[]
 
         @Order(30)
+        @ClassId("334720b0-75fa-400a-8305-983a7aa98549")
         public class PhoneWorkField extends AbstractStringField {
 
           @Override
@@ -683,6 +710,7 @@ public class PersonForm extends AbstractForm {
         }
 
         @Order(40)
+        @ClassId("7f693443-ec4e-47fb-874e-b31328cc22fb")
         public class EmailWorkField extends AbstractStringField {
 
           @Override
@@ -697,6 +725,7 @@ public class PersonForm extends AbstractForm {
 
       //tag::notes[]
       @Order(30)
+      @ClassId("fcb5b155-2c89-4ef8-9a96-ac41e9032107")
       public class NotesBox extends AbstractGroupBox {
         //end::layout[]
 
@@ -706,6 +735,7 @@ public class PersonForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("ce791f14-fca6-4f11-8476-89cbf905eb2e")
         public class NotesField extends AbstractStringField {
 
           @Override
@@ -729,10 +759,12 @@ public class PersonForm extends AbstractForm {
     //end::notes[]
 
     @Order(30)
+    @ClassId("e54548b8-601e-41a4-842c-db25b5f1cad1")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(40)
+    @ClassId("26612eb9-1832-4284-ac5a-9f450dc7ff9b")
     public class CancelButton extends AbstractCancelButton {
     }
   }

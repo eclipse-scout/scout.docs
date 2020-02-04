@@ -20,6 +20,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox.DisabledStyleField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox.LoadingField;
 
+@ClassId("11712235-408c-40b3-b90c-1b84877d6630")
 public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
   private IGroupBox m_groupBox;

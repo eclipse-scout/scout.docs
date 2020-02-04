@@ -30,11 +30,13 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTabl
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @PageData(EventTablePageData.class)
+@ClassId("42020646-eebb-4750-912b-439ba3f80c6c")
 public class EventTablePage extends AbstractPageWithTable<Table> {
 
   private String organizationId;
@@ -73,6 +75,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     importPageData(BEANS.get(IEventService.class).getTableData(filter, getOrganizationId()));
   }
 
+  @ClassId("ab270086-44ff-40dc-a06f-c873789da000")
   public class Table extends AbstractTable {
 
     public EventIdColumn getEventIdColumn() {
@@ -113,6 +116,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(1)
+    @ClassId("9998327f-ee6f-46b1-8107-461b5460cfa8")
     public class EventIdColumn extends AbstractStringColumn {
 
       @Override
@@ -127,6 +131,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(2)
+    @ClassId("47c0cc4b-9938-4978-9994-c052b3ac27cd")
     public class TitleColumn extends AbstractStringColumn {
 
       @Override
@@ -141,6 +146,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(3)
+    @ClassId("5f8ebfa9-acfc-4430-a01d-38272abe9069")
     public class StartsColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -155,6 +161,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(4)
+    @ClassId("52fa518c-a54e-4af2-a830-c807c6e2c952")
     public class EndsColumn extends AbstractDateTimeColumn {
 
       @Override
@@ -169,6 +176,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(5)
+    @ClassId("0583c3d1-bb6a-43af-9e3b-139d9a51d2db")
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -183,6 +191,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(6)
+    @ClassId("4ab15f01-e589-4d08-9b88-d6cbb59f5359")
     public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -202,6 +211,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(7)
+    @ClassId("90ddb94d-741e-488a-8757-0ce2b9670a96")
     public class HomepageColumn extends AbstractStringColumn {
 
       @Override
@@ -221,6 +231,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(8)
+    @ClassId("4b201153-fca0-42ea-99ad-c060859935a9")
     public class ParticipantsColumn extends AbstractIntegerColumn {
 
       @Override
@@ -235,6 +246,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(1)
+    @ClassId("f8332e93-eafa-43ce-bede-ea573ca3a504")
     public class EditMenu extends AbstractEditMenu {
 
       @Override
@@ -252,6 +264,7 @@ public class EventTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(2)
+    @ClassId("735c315d-ac08-4124-84d2-29a68262f232")
     public class NewMenu extends AbstractNewMenu {
 
       @Override

@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -65,6 +66,7 @@ import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.Exampl
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.HighestValueButton;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.SmallestValueButton;
 
+@ClassId("0949a2e6-90e9-4ae2-9bb6-9c4026daf5f2")
 public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -208,9 +210,11 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("76801d12-632e-4d8e-a028-f236410f4713")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("2507362e-5e15-4745-881e-e7169251f540")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -229,6 +233,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("0393d2ae-16d3-4f61-b5c8-7c1683473ea1")
       public class IntegerColumnField extends AbstractLabelField {
 
         @Override
@@ -248,6 +253,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("c0813ee5-cf3b-432b-acf7-3eec78ed4642")
       public class IntegerField extends AbstractIntegerField {
 
         @Override
@@ -257,6 +263,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("ae60902a-205b-4cf4-a2e0-08d6a5033b39")
       public class MandatoryField extends AbstractIntegerField {
 
         @Override
@@ -271,6 +278,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("85393264-5a79-4a51-baba-8bef5da58279")
       public class DisabledField extends AbstractIntegerField {
 
         @Override
@@ -290,6 +298,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
+      @ClassId("494e6c5f-48eb-4f38-bbda-f686770e9929")
       public class StyledField extends AbstractIntegerField {
 
         @Override
@@ -315,6 +324,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("7ac321b7-2638-405f-a076-a243913b5dd3")
       public class LongColumnField extends AbstractLabelField {
         @Override
         protected String getConfiguredLabel() {
@@ -333,6 +343,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
+      @ClassId("e5507744-0f7d-4b68-83e6-51f369b245a4")
       public class LongField extends AbstractLongField {
 
         @Override
@@ -342,6 +353,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80)
+      @ClassId("7612fb79-7f8b-4e6f-a321-6225a58cc56e")
       public class LongMandatoryField extends AbstractLongField {
 
         @Override
@@ -356,6 +368,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(90)
+      @ClassId("732e33d7-4a41-4b42-87ed-95bc43312eb2")
       public class LongDisabledField extends AbstractLongField {
 
         @Override
@@ -375,6 +388,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(100)
+      @ClassId("abaf2545-36e9-4361-97df-6929ba6fe8b8")
       public class LongStyledField extends AbstractLongField {
 
         @Override
@@ -400,6 +414,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(110)
+      @ClassId("500eb659-5a53-4c91-ae66-9e00a98b4483")
       public class BigIntegerColumnField extends AbstractLabelField {
         @Override
         protected String getConfiguredLabel() {
@@ -418,6 +433,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(120)
+      @ClassId("bb607192-82db-4507-a7a2-d7750f2a29c3")
       public class BigIntegerField extends AbstractBigIntegerField {
 
         @Override
@@ -427,6 +443,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(130)
+      @ClassId("80ede0e8-7375-40c9-aaa9-cf3916ac162b")
       public class BigIntMandatoryField extends AbstractBigIntegerField {
 
         @Override
@@ -441,6 +458,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(140)
+      @ClassId("63f13466-e690-493a-9b50-48b5448b0321")
       public class BigIntDisabledField extends AbstractBigIntegerField {
 
         @Override
@@ -460,6 +478,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(150)
+      @ClassId("4d9715b3-c49f-4032-934e-26b3076dcd9d")
       public class BigIntStyledField extends AbstractBigIntegerField {
 
         @Override
@@ -486,6 +505,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("10f8c187-bc09-468b-a8b2-33b14cc0661d")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -494,6 +514,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("5c6d24d5-d3fe-4022-8a9f-2b94bbe34dd5")
       public class ConfigurationTopBox extends AbstractGroupBox {
 
         @Override
@@ -507,6 +528,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("3f9a9f8a-cbe7-410a-8a55-1e37a8cb2460")
         public class InputField extends AbstractIntegerField {
 
           @Override
@@ -516,6 +538,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("2ccd6681-1f99-40da-89b1-c120b6ea9408")
         public class Value0Field extends AbstractStringField {
 
           @Override
@@ -545,6 +568,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(25)
+        @ClassId("b62d15e0-d6d7-4ed4-ab1a-bdefce3bbfa5")
         public class DisplayText0Field extends AbstractStringField {
 
           @Override
@@ -564,6 +588,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(70)
+        @ClassId("5e64069d-441a-4039-92d2-f938ace1bbe6")
         public class LongInputField extends AbstractLongField {
 
           @Override
@@ -573,6 +598,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(80)
+        @ClassId("59ebd2d8-d386-458f-9742-8bef8e7e2a28")
         public class Value1Field extends AbstractStringField {
 
           @Override
@@ -602,6 +628,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(85)
+        @ClassId("77faad6c-2ce9-423b-a950-7ee0ae6c139f")
         public class DisplayText1Field extends AbstractStringField {
 
           @Override
@@ -621,6 +648,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(120)
+        @ClassId("b453d8c8-e86d-4aef-87d9-130383445218")
         public class BigIntegerInputField extends AbstractBigIntegerField {
 
           @Override
@@ -630,6 +658,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(130)
+        @ClassId("bcde246e-4bf2-4c84-8b6f-84ef053d20ce")
         public class Value3Field extends AbstractStringField {
 
           @Override
@@ -659,6 +688,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(135)
+        @ClassId("a061e9fd-3178-4ede-b370-654170a2d398")
         public class DisplayText2Field extends AbstractStringField {
 
           @Override
@@ -679,9 +709,11 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("e56e7c29-d76e-4d39-b19f-51ec9304b5f6")
       public class ConfigurationBottomBox extends AbstractGroupBox {
 
         @Order(30)
+        @ClassId("47cd8d89-5999-4c24-a70c-6d02f67ebbb2")
         public class MinimumValueField extends AbstractLongField {
 
           @Override
@@ -714,6 +746,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("52c31a3d-62f8-4d6a-bacf-b34bf5e847e1")
         public class MaximumValueField extends AbstractLongField {
 
           @Override
@@ -746,6 +779,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(50)
+        @ClassId("7258d863-4e60-4a08-86f7-97b5b326b995")
         public class GroupingField extends AbstractBooleanField {
 
           @Override
@@ -777,6 +811,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(55)
+        @ClassId("b61d0e06-81d6-42a3-bce8-6141e9a1baf4")
         public class UpdateDisplayTextOnModify extends AbstractBooleanField {
 
           @Override
@@ -803,6 +838,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(60)
+        @ClassId("47726ec8-fd6f-412d-b11c-3fdc747c5ceb")
         public class FormatField extends AbstractStringField {
 
           @Override
@@ -830,6 +866,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(65)
+        @ClassId("62de20eb-08c9-4f6b-b0fd-66e787a4d9c8")
         public class ConfigLocaleField extends AbstractSmartField<Locale> {
 
           @Override
@@ -876,6 +913,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("1b816c10-6a5d-47c7-8d5c-01513a9ea8d4")
     public class HighestValueButton extends AbstractButton {
 
       @Override
@@ -892,6 +930,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("01378078-4025-4b4f-a688-bfa0d8b3dbe4")
     public class SmallestValueButton extends AbstractButton {
 
       @Override
@@ -908,6 +947,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(60)
+    @ClassId("1fb80dd0-373a-4554-99cd-22895ebc1efb")
     public class SampleFormatButton extends AbstractButton {
 
       @Override
@@ -922,6 +962,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(70)
+    @ClassId("2ab7e311-05b7-48ff-8076-5e23aa6ebeee")
     public class CloseButton extends AbstractCloseButton {
     }
   }

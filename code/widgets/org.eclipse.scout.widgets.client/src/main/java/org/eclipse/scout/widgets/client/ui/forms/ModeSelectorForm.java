@@ -45,6 +45,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ModeSelectorForm.MainBox.Exampl
 import org.eclipse.scout.widgets.client.ui.forms.RadioButtonGroupForm.MainBox.ExamplesBox.DefaultGroup;
 import org.eclipse.scout.widgets.shared.Icons;
 
+@ClassId("c077aa41-6fac-4e0b-9e0d-7dcf7142b5b5")
 public class ModeSelectorForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -92,6 +93,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("510d1e1e-01b9-4c88-a170-a0e38b982610")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -100,6 +102,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(10)
+    @ClassId("bdbfebfa-313f-424c-8b21-8722c8b9d8f9")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -113,6 +116,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("9c2dff5e-9d02-4d46-bc9e-c470c465788a")
       public class DefaultModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override
@@ -127,6 +131,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("bf300b23-d5e0-4bdc-8fb6-a428cd076269")
       public class AlternativeModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override
@@ -141,6 +146,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("1768af74-bb07-40ac-87ed-dcda0d4e15a0")
       public class DisabledModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override
@@ -155,6 +161,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("de0ac5ca-587c-44b5-a83f-00d44aaf14e2")
       public class StyledModeSelectorGroup extends AbstractExampleModeSelectorGroup {
 
         @Override
@@ -163,7 +170,8 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Replace
-        public class Mode1Ex extends AbstractExampleModeSelectorGroup.Mode1 {
+        @ClassId("bfabde20-94ab-4b75-a5c6-4c8c2bf4aa03")
+        public class Mode1Ex extends Mode1 {
 
           @Override
           protected String getConfiguredIconId() {
@@ -177,7 +185,8 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Replace
-        public class Mode2Ex extends AbstractExampleModeSelectorGroup.Mode2 {
+        @ClassId("668efc37-43be-4843-a9a8-f4a727d10a8f")
+        public class Mode2Ex extends Mode2 {
 
           @Override
           protected String getConfiguredIconId() {
@@ -191,7 +200,8 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Replace
-        public class Mode3Ex extends AbstractExampleModeSelectorGroup.Mode3 {
+        @ClassId("6143a1a1-9a09-4ad9-8cf7-cd25e2dab741")
+        public class Mode3Ex extends Mode3 {
 
           @Override
           protected String getConfiguredIconId() {
@@ -207,6 +217,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("384c834b-edc3-4bdc-8826-bf2cc5773726")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -220,6 +231,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("c4aebf1e-50e6-4079-a7ad-9de587154c83")
       public class ConfigurableModeSelectorGroup extends AbstractModeSelectorField<String> {
 
         @Override
@@ -241,6 +253,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("6345767c-2da7-4720-94f4-0455465f202f")
         public class Mode1 extends AbstractMode<String> {
 
           @Override
@@ -250,6 +263,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("528fb2f4-e1a1-4797-9d59-cdbd378eb95b")
         public class Mode2 extends AbstractMode<String> {
 
           @Override
@@ -259,6 +273,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("91b2e429-fee3-4ec6-aede-fbcd07e4e6d9")
         public class Mode3 extends AbstractMode<String> {
 
           @Override
@@ -268,6 +283,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("4fae83c5-96ac-46ed-9e61-4abe5d0751fc")
         public class DeselectMenu extends AbstractMenu {
 
           @Override
@@ -290,6 +306,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("54d7dbb6-8e79-43a5-a6de-a58e0e3679b1")
       public class ValueField extends AbstractStringField {
 
         @Override
@@ -314,6 +331,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("5f23a110-08ad-4119-8822-1c05d9703aaa")
       public class WidthInPixelField extends AbstractIntegerField {
 
         @Override
@@ -344,6 +362,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
+      @ClassId("1c3b7ed7-84d9-453c-b17f-a97fa0f3c3c9")
       public class FillHorizontalField extends AbstractBooleanField {
 
         @Override
@@ -366,6 +385,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("1870cbd8-0e23-4ae9-9978-579e3eddbe1f")
       public class EnabledField extends AbstractBooleanField {
 
         @Override
@@ -385,6 +405,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
       }
 
       @Order(100)
+      @ClassId("649224f6-23eb-44fb-8797-5fcd22ef40d4")
       public class ModeConfigurationBox extends AbstractGroupBox {
 
         @Override
@@ -403,6 +424,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("7b719aa5-e547-4dc5-a385-2c5648ac11d0")
         public class ConfigurationTitleBox extends AbstractGroupBox {
 
           @Override
@@ -431,6 +453,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("3886fc3e-0bff-455f-b4b6-e5b73a485414")
           public class TitleColumnField extends AbstractLabelField {
 
             @Override
@@ -450,6 +473,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("eb011a22-cb6e-4c2a-aa8b-e0e7f92a8065")
           public class ValueLabelField extends AbstractLabelField {
 
             @Override
@@ -469,6 +493,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
           }
 
           @Order(30)
+          @ClassId("5c7f46d2-e407-4d4e-b52e-a0cedd46976f")
           public class IconLabelField extends AbstractLabelField {
 
             @Override
@@ -488,6 +513,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
           }
 
           @Order(40)
+          @ClassId("e8b45bdd-09cf-48e6-a20b-ddd921ef1759")
           public class TextlabelField extends AbstractLabelField {
 
             @Override
@@ -508,6 +534,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("6e493923-2bb7-448c-93ad-38f3b1ed3be5")
         public class Mode1ConfigurationBox extends AbstractModeConfigurationBox {
 
           @Override
@@ -517,6 +544,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("c9b94c32-864c-4bed-8007-5d54d959b807")
         public class Mode2ConfigurationBox extends AbstractModeConfigurationBox {
 
           @Override
@@ -526,6 +554,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("3caf3b1e-5a7d-4f98-a552-45786c9ea33a")
         public class Mode3ConfigurationBox extends AbstractModeConfigurationBox {
 
           @Override
@@ -537,10 +566,12 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("ac9eaf2a-a3ec-4482-a53f-911e142fec59")
     public class CloseButton extends AbstractCloseButton {
     }
   }
 
+  @ClassId("e668b8b7-39a2-4718-abfd-28f6083addd5")
   public abstract class AbstractExampleModeSelectorGroup extends AbstractModeSelectorField<Long> {
 
     @Override
@@ -610,6 +641,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
   }
 
+  @ClassId("db4000af-2efa-4a14-8c44-714b90516622")
   public abstract class AbstractModeConfigurationBox extends AbstractGroupBox {
 
     @Override
@@ -635,6 +667,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     protected abstract int getModeCount();
 
     @Order(10)
+    @ClassId("cffbc190-8d65-467b-b523-bee4acc1622d")
     public class HeaderLabelField extends AbstractLabelField {
 
       @Override
@@ -654,6 +687,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("76811c29-e787-4082-8806-f36d7224d8e3")
     public class ValueModeField extends AbstractStringField {
 
       @Override
@@ -672,6 +706,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("8679ce8d-3541-4141-9e67-886fe8c6d20d")
     public class IconIdField extends AbstractSmartField<String> {
 
       @Override
@@ -696,6 +731,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("6607ed9b-9cf4-44e6-b363-9725d28235aa")
     public class TextField extends AbstractStringField {
 
       @Override

@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -32,6 +33,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 /**
  * Form to select a person that is not excluded.
  */
+@ClassId("39f9f8a8-9843-4414-8d38-7a72f8ae3f06")
 public class PersonChooserForm extends AbstractForm {
 
   private List<String> excludedPersons = new ArrayList<>();
@@ -66,6 +68,7 @@ public class PersonChooserForm extends AbstractForm {
   }
 
   @Order(1)
+  @ClassId("5d4d395b-6474-4c24-97c9-fbfa55135872")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -74,9 +77,11 @@ public class PersonChooserForm extends AbstractForm {
     }
 
     @Order(1)
+    @ClassId("c0d91bde-626f-4435-80b5-3ccc5e99d1ba")
     public class PersonBox extends AbstractGroupBox {
 
       @Order(1)
+      @ClassId("2676e855-f13d-4cfe-bea7-ca15275f44dd")
       public class PersonField extends AbstractSmartField<String> {
 
         @Override
@@ -97,10 +102,12 @@ public class PersonChooserForm extends AbstractForm {
     }
 
     @Order(100)
+    @ClassId("042d8077-18e7-44e7-97b8-57426ff71b26")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(101)
+    @ClassId("8e392de2-8b77-4611-80d6-b1f9efa4ac3d")
     public class CancelButton extends AbstractCancelButton {
     }
   }

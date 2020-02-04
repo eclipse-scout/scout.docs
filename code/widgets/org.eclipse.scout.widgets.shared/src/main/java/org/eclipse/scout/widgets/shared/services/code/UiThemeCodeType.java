@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
+@ClassId("786562b0-4751-48d1-b14c-2629462b1d27")
 public class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
   private static final long serialVersionUID = 1L;

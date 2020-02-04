@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.extension.ui.action.menu.AbstractMenuExtensio
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
@@ -28,6 +29,7 @@ public class DesktopQuickAccessMenuExtension extends AbstractMenuExtension<Quick
   }
 
   @Order(30)
+  @ClassId("42bde310-57cf-4873-9824-6d56c02a55a9")
   public class NewEventMenu extends AbstractMenu {
 
     @Override

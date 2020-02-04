@@ -69,10 +69,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+@ClassId("e91f6c5c-1926-45f9-ab79-35f7e6740b91")
 @FormData(value = EventFormData.class, sdkCommand = SdkCommand.CREATE)
 public class EventForm extends AbstractForm {
 
@@ -180,12 +182,15 @@ public class EventForm extends AbstractForm {
   }
 
   @Order(1)
+  @ClassId("3d45e0e1-e128-4aad-9cef-6dbd78aaeb7d")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("f1821434-d98e-4796-b120-26245a5c81c8")
     public class GeneralBox extends AbstractGroupBox {
 
       @Order(10)
+      @ClassId("a31ff8e4-b8ec-42dd-824b-73a1665c5435")
       public class TitleField extends AbstractStringField {
 
         @Override
@@ -195,6 +200,7 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(20)
+      @ClassId("380febfb-fa9a-48e4-b953-1159634d7dc7")
       public class HomepageField extends AbstractStringField {
 
         @Override
@@ -204,9 +210,11 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(30)
+      @ClassId("66be6ccf-f6f7-4b5c-b898-6d2b47410f99")
       public class OpenHomepageButtonBox extends AbstractSequenceBox {
 
         @Order(10)
+        @ClassId("c508a404-9b2f-4836-818a-243d5a63b5d9")
         public class OpenHomepageButton extends AbstractLinkButton {
 
           @Override
@@ -242,6 +250,7 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(40)
+      @ClassId("22fb39f0-622e-4564-b386-73308752fed9")
       public class StartsField extends AbstractDateTimeField {
 
         @Override
@@ -251,6 +260,7 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(50)
+      @ClassId("ce05f47a-f2e1-4fbc-9c91-1e5874dc46e4")
       public class EndsField extends AbstractDateTimeField {
 
         @Override
@@ -261,9 +271,11 @@ public class EventForm extends AbstractForm {
     }
 
     @Order(20)
+    @ClassId("adb73c67-72f3-463e-a07f-db4fc4018bcb")
     public class DetailsBox extends AbstractTabBox {
 
       @Order(10)
+      @ClassId("9a57e2a0-ec0c-4d6d-ab91-ce688fcb7db2")
       public class ContactInfoBox extends AbstractGroupBox {
 
         @Override
@@ -272,6 +284,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("c70bcbf9-3b6a-49c3-ae5a-714cbfc087e0")
         public class LocationBox extends AbstractAddressBox {
 
           @Override
@@ -281,6 +294,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(20)
+        @ClassId("d945d161-20d1-4958-89bd-d6d276bb07dd")
         public class PhoneField extends AbstractStringField {
 
           @Override
@@ -290,11 +304,13 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(30)
+        @ClassId("cad13c3a-4241-43b5-8b85-e728b24655bc")
         public class EmailField extends AbstractEmailField {
         }
       }
 
       @Order(20)
+      @ClassId("8a767eb9-831c-433d-b852-52e6247865fe")
       public class ParticipantsBox extends AbstractGroupBox {
 
         @Override
@@ -303,6 +319,7 @@ public class EventForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("627f6a0e-349f-4846-8449-1ec41156657d")
         public class ParticipantTableFieldField extends AbstractTableField<Table> {
 
           @Override
@@ -315,6 +332,7 @@ public class EventForm extends AbstractForm {
             return false;
           }
 
+          @ClassId("929bdd78-df3d-4700-bb9f-db7602e23b3b")
           public class Table extends AbstractTable {
 
             public LastNameColumn getLastNameColumn() {
@@ -344,6 +362,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(10)
+            @ClassId("6cf07694-9394-490e-8752-94e6efa82e93")
             public class PersonIdColumn extends AbstractStringColumn {
 
               @Override
@@ -358,6 +377,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(20)
+            @ClassId("e12f5de1-e67f-486f-bd43-96e96808a7e6")
             public class FirstNameColumn extends AbstractStringColumn {
 
               @Override
@@ -377,6 +397,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(30)
+            @ClassId("f22e0446-243f-4434-a73b-95b2244d3a47")
             public class LastNameColumn extends AbstractStringColumn {
 
               @Override
@@ -391,6 +412,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(40)
+            @ClassId("bdacc1ae-1354-435d-b1f8-5f7d274a0882")
             public class OrganizationColumn extends AbstractSmartColumn<String> {
 
               @Override
@@ -410,6 +432,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(10)
+            @ClassId("91d26f78-f646-460f-b989-d18b3aca544d")
             public class AddMenu extends AbstractMenu {
 
               @Override
@@ -448,6 +471,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(10)
+            @ClassId("73e1c300-2429-48af-ab78-6ab47d633803")
             public class EditMenu extends AbstractMenu {
 
               @Override
@@ -464,6 +488,7 @@ public class EventForm extends AbstractForm {
             }
 
             @Order(20)
+            @ClassId("1e509cbb-cfff-47d8-8648-a33c25266ace")
             public class RemoveMenu extends AbstractMenu {
 
               @Override
@@ -495,15 +520,18 @@ public class EventForm extends AbstractForm {
       }
 
       @Order(30)
+      @ClassId("72732dfc-e9f9-4b61-a260-a86bb3041e3d")
       public class NotesBox extends AbstractNotesBox {
       }
     }
 
     @Order(100)
+    @ClassId("3949273b-2f25-48a7-a80e-540094b1daba")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(101)
+    @ClassId("bf36ecaa-9478-4985-9571-e00182e9df54")
     public class CancelButton extends AbstractCancelButton {
     }
   }

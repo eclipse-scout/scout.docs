@@ -15,9 +15,11 @@ import java.util.List;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitHubMenu;
 
+@ClassId("b6d95895-be59-4a6d-bbe2-376ea1c1eb27")
 public class PageWithNodesNodePage extends AbstractPageWithNodes {
 
   @Override
@@ -38,6 +40,7 @@ public class PageWithNodesNodePage extends AbstractPageWithNodes {
   }
 
   @Order(10)
+  @ClassId("7635ea22-033a-4585-8e95-6b4aa62b9015")
   public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
     @Override

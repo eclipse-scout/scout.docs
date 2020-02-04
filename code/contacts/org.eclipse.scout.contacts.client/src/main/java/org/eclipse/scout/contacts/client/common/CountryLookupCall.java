@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 //tag::all[]
+@ClassId("37736ea5-e861-43d8-a6bc-144dad3c208f")
 public class CountryLookupCall extends LocalLookupCall<String> { // <1>
 
   private static final long serialVersionUID = 1L;

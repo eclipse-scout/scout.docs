@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
@@ -51,6 +52,7 @@ import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.
 import org.eclipse.scout.widgets.shared.Icons;
 
 @Order(6000.0)
+@ClassId("b84af891-a79c-4e3f-80b8-242eea1e6d71")
 public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -141,6 +143,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
   }
 
   @Order(10)
+  @ClassId("9d851138-a523-427d-be09-731c99044970")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -149,9 +152,11 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(10)
+    @ClassId("f643e6f6-0df5-4222-837c-cbecabc54292")
     public class GroupBox extends AbstractGroupBox {
 
       @Order(10)
+      @ClassId("b5118fc8-c56d-4033-8368-dd0a413b35c5")
       public class HtmlField extends AbstractHtmlField {
 
         @Override
@@ -182,6 +187,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(20)
+    @ClassId("ae485a2c-dfb8-4a23-a529-3262afc09b8a")
     public class ConfigurationGroupBox extends AbstractGroupBox {
 
       @Override
@@ -195,6 +201,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(10)
+      @ClassId("87d3947a-057c-4402-9a2b-51259243a140")
       public class EnabledCheckBox extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
@@ -218,6 +225,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(20)
+      @ClassId("d73fb3b0-1348-420d-8758-4656c876f587")
       public class ScrollToAnchorField extends AbstractStringField {
         @Override
         protected String getConfiguredLabel() {
@@ -231,6 +239,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(30)
+      @ClassId("f77dc9ae-1e95-4a14-960a-70d74bb62b75")
       public class ScrollToEndButton extends AbstractButton {
         @Override
         protected String getConfiguredLabel() {
@@ -254,6 +263,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
 
       @Order(40)
+      @ClassId("3a5a4e67-44ae-48f4-a784-63b504dd288c")
       public class SetContentButtonsBox extends AbstractSequenceBox {
 
         @Override
@@ -267,6 +277,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(10)
+        @ClassId("4716d2b8-a621-4ed7-b543-9b7f20349373")
         public class BlankButton extends AbstractLinkButton {
 
           @Override
@@ -282,6 +293,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(20)
+        @ClassId("9e496e3b-0ef5-4df2-919c-28d4566c89e6")
         public class CustomHTMLButton extends AbstractLinkButton {
 
           @Override
@@ -297,6 +309,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(40)
+        @ClassId("8d956289-ff2c-4ccc-bb52-a53090c8556b")
         public class ScoutHtmlButton extends AbstractLinkButton {
 
           @Override
@@ -315,6 +328,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(70)
+        @ClassId("f1afc482-caf8-4204-a6e9-b3a0b3fd1b6e")
         public class ALotOfContentHtmlButton extends AbstractLinkButton {
 
           @Override
@@ -329,6 +343,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
 
         @Order(80)
+        @ClassId("4fc3c47c-2275-4b8d-87c2-04c2538b346e")
         public class HtmlBuilderButton extends AbstractLinkButton {
 
           @Override
@@ -357,6 +372,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(50)
+    @ClassId("6c485f0d-7346-41e4-9331-164f76c0e73a")
     public class CloseButton extends AbstractCloseButton {
     }
   }

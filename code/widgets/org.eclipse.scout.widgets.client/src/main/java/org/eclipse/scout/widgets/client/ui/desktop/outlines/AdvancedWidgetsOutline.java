@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.inventory.ClassInventory;
 import org.eclipse.scout.rt.platform.inventory.IClassInfo;
@@ -23,6 +24,7 @@ import org.eclipse.scout.widgets.client.ui.desktop.pages.IAdvancedFormPage;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
 
 @Order(1100)
+@ClassId("2218fc69-7297-4478-8c1b-a18bea3191fd")
 public class AdvancedWidgetsOutline extends AbstractWidgetsOutline {
 
   @Override

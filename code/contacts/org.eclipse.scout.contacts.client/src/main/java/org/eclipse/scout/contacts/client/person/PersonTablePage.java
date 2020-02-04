@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -47,6 +48,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 // tag::structure[]
 // tag::linkToOrganization[]
 @PageData(PersonTablePageData.class)
+@ClassId("23c10251-66b1-4bd6-a9d7-93c7d1aedede")
 public class PersonTablePage extends AbstractPageWithTable<Table> {
   // end::structure[]
   // end::PageInit[]
@@ -84,6 +86,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
   // tag::linkToOrganization[]
 
   // tag::organizationColumn[]
+  @ClassId("3fa1374b-9635-441b-b2f8-feb24b50740a")
   public class Table extends AbstractTable {
     // end::linkToOrganization[]
     // end::organizationColumn[]
@@ -133,6 +136,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     // tag::menu[]
 
     @Order(10)
+    @ClassId("4a8f5e0e-6eb8-4296-8ad7-012151f572f2")
     public class EditMenu extends AbstractMenu {
       // end::menu[]
 
@@ -164,6 +168,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     // tag::linkToOrganization[]
 
     @Order(20)
+    @ClassId("8ac358f2-de17-4b2b-93f3-73e21a7415d8")
     public class NewMenu extends AbstractMenu {
       // end::menu[]
       // end::linkToOrganization[]
@@ -220,6 +225,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     // Custom summary column (relevant for mobile mode where the child nodes are visible)
     @Order(0)
     @ColumnData(SdkColumnCommand.IGNORE)
+    @ClassId("c5b46c95-c355-4098-85bc-badc5f5557c8")
     public class SummaryColumn extends AbstractStringColumn {
 
       @Override
@@ -243,6 +249,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
     //tag::PersonIdColumn[]
     @Order(1)
+    @ClassId("1cbc9059-caef-4684-b013-bfa3bc0d0642")
     public class PersonIdColumn extends AbstractStringColumn {
 
       @Override // <1>
@@ -259,6 +266,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
     //tag::FirstNameColumn[]
     @Order(2)
+    @ClassId("99df594a-6731-4757-a799-aacdbb4788d3")
     public class FirstNameColumn extends AbstractStringColumn {
 
       @Override
@@ -274,6 +282,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     //end::FirstNameColumn[]
 
     @Order(3)
+    @ClassId("47703dea-ceed-4b56-b4ac-ff5028ac9ab3")
     public class LastNameColumn extends AbstractStringColumn {
 
       @Override
@@ -288,6 +297,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(4)
+    @ClassId("6b463dfb-a837-402e-8ac9-d66d8e521f06")
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -303,6 +313,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
     //tag::CountryColumn[]
     @Order(5)
+    @ClassId("a39ad408-b5e5-4794-b86a-ddc13025862e")
     public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -324,6 +335,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
 
     //tag::PhoneColumn[]
     @Order(6)
+    @ClassId("fa879506-d38c-46a6-990c-1f1ae4b74d4e")
     public class PhoneColumn extends AbstractStringColumn {
 
       @Override
@@ -344,6 +356,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     //end::PhoneColumn[]
 
     @Order(7)
+    @ClassId("eff4fe61-2718-401a-b515-ea83803fe548")
     public class MobileColumn extends AbstractStringColumn {
 
       @Override
@@ -363,6 +376,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(8)
+    @ClassId("dbe50fde-1777-4ff2-8ab7-ebe6cd6887eb")
     public class EmailColumn extends AbstractStringColumn {
 
       @Override
@@ -383,6 +397,7 @@ public class PersonTablePage extends AbstractPageWithTable<Table> {
     // tag::organizationColumn[]
 
     @Order(9)
+    @ClassId("2e53e50e-5bd5-421e-8bca-fc50f27d790b")
     public class OrganizationColumn extends AbstractSmartColumn<String> {
 
       @Override

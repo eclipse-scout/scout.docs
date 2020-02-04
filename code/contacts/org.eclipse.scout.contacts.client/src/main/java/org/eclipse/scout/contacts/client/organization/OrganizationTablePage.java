@@ -27,6 +27,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -34,6 +35,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 // tag::PageInit[]
 // tag::childPage[]
 @PageData(OrganizationTablePageData.class)
+@ClassId("18f7a78e-0dd0-4e4e-9234-99892bb4459f")
 public class OrganizationTablePage extends AbstractPageWithTable<Table> {
 // end::childPage[]
 
@@ -60,6 +62,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
   }
   // end::execLoadData[]
 
+  @ClassId("54f3d730-7a62-462b-99ec-78fd1e6bb69d")
   public class Table extends AbstractTable {
     // container class to hold columns and other elements for this table page
     //end::PageInit[]
@@ -85,6 +88,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(1000)
+    @ClassId("368b9133-906e-41be-a517-f9f6a946c794")
     public class OrganizationIdColumn extends AbstractStringColumn {
 
       @Override
@@ -99,6 +103,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(2000)
+    @ClassId("a982fd36-5ab8-442c-9696-0bf6ff492c6d")
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -113,6 +118,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(3000)
+    @ClassId("628d04dc-ecd0-4887-8bdf-bcd65322ff48")
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -127,6 +133,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(4000)
+    @ClassId("95e30925-8e87-4eda-b770-d47b32f55b02")
     public class CountryColumn extends AbstractSmartColumn<String> {
 
       @Override
@@ -146,6 +153,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(5000)
+    @ClassId("f24c0604-a34d-4085-a814-7a131e96dada")
     public class HomepageColumn extends AbstractStringColumn {
 
       @Override
@@ -165,6 +173,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(1000)
+    @ClassId("2ce3d286-04ec-4eb2-92bb-fec924186cf1")
     public class EditMenu extends AbstractEditMenu {
 
       @Override
@@ -182,6 +191,7 @@ public class OrganizationTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(2000)
+    @ClassId("ae6303f0-0041-4545-a49b-dc7f6fd23666")
     public class NewMenu extends AbstractNewMenu {
 
       @Override

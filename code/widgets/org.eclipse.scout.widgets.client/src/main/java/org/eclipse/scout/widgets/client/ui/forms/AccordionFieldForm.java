@@ -257,6 +257,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
     }
 
     @Order(500)
+    @ClassId("e6b4210d-2cf7-477e-87c1-617e00a334df")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -288,6 +289,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
     addGroupWithTiles();
   }
 
+  @ClassId("16cefe7d-1488-4dd3-aeb7-f19bf905e36f")
   public static class TileGroup extends AbstractGroup {
 
     @Override

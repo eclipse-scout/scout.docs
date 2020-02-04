@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.shared.Icons;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.scout.widgets.shared.Icons;
  *
  * @since 9.0
  */
+@ClassId("0be31d88-06bf-4f5d-93a7-1951af95bdfd")
 public class AbstractAlignedImageField extends AbstractImageField {
 
   private final int m_verticalAlignment;

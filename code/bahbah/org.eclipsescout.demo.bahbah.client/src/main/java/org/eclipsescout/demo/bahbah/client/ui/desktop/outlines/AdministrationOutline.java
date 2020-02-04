@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -23,6 +24,7 @@ import org.eclipsescout.demo.bahbah.shared.security.DeleteUserPermission;
 import org.eclipsescout.demo.bahbah.shared.security.ResetPasswordPermission;
 import org.eclipsescout.demo.bahbah.shared.security.UpdateUserPermission;
 
+@ClassId("24063e1a-3efb-42dc-b12c-3e158b268c43")
 public class AdministrationOutline extends AbstractOutline {
 
   @Override

@@ -48,6 +48,7 @@ import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm.MainBox.ExamplesBox.ToggleButtonGroupBox.ToggleCssStyledButton;
 import org.eclipse.scout.widgets.shared.Icons;
 
+@ClassId("6c56d115-b31e-4b0f-94cf-84e3330464dd")
 public class ButtonForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -142,9 +143,11 @@ public class ButtonForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("5bb36d29-e075-49e2-aeb4-f365421eefcc")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("1daee4c6-d470-4836-b8b0-780fa1fab0bd")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -158,6 +161,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("d7d0f345-7e5b-41b1-ba01-da7b4ab49756")
       public class ButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -181,6 +185,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(5)
+        @ClassId("41c9ec61-23fa-4f10-8423-d38ee99155a1")
         public class RegularField extends AbstractButton {
 
           @Override
@@ -200,6 +205,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("a1798e80-5736-4d94-8900-752cc1be9358")
         public class DefaultField extends AbstractButton {
 
           @Override
@@ -229,6 +235,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("ad309dcf-9698-4c6c-82fd-c2d83aaf3083")
         public class DisabledField extends AbstractButton {
 
           @Override
@@ -248,6 +255,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("569a557b-98c9-41e8-ae8a-508127c8beb8")
         public class ButtonWithMenuField extends AbstractButton {
 
           @Override
@@ -266,6 +274,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("9c78802e-4e0b-4c50-a0b7-8ed227946d0f")
           public class MenuItem1 extends AbstractMenu {
 
             @Override
@@ -280,6 +289,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("a97bc883-52c0-4f91-a05e-591584a48566")
           public class MenuItem2 extends AbstractMenu {
 
             @Override
@@ -295,6 +305,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("9e922ab4-f6a6-46cd-9e0a-288740aca6b5")
         public class StyledField extends AbstractButton {
 
           @Override
@@ -360,6 +371,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("b0145cad-cec3-42fb-876b-d08cc04ef33c")
       public class ToggleButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -383,6 +395,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(5)
+        @ClassId("07c3d701-782c-4e6d-819f-f871f8a383fa")
         public class ToggleButtonRegularField extends AbstractButton {
 
           @Override
@@ -415,6 +428,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
           }
 
+          @ClassId("0abdd622-525d-49b1-b233-1834ad0062a2")
           public class FirstKeyStroke extends AbstractKeyStroke {
 
             @Override
@@ -428,6 +442,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
             }
           }
 
+          @ClassId("e018f529-06fd-442c-aa4b-fe5939ad2482")
           public class SecondKeyStroke extends AbstractKeyStroke {
             @Override
             protected String getConfiguredKeyStroke() {
@@ -442,6 +457,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("c0453897-5b9f-4211-a7bb-e1bd634e6762")
         public class ToggleButtonDefaultField extends AbstractButton {
           @Override
           protected Boolean getConfiguredDefaultButton() {
@@ -475,6 +491,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("f842f04d-e47b-4f31-9fc4-41083440a90e")
         public class ToggleButtonDisabledField extends AbstractButton {
 
           @Override
@@ -504,6 +521,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("94e0d0f0-2e39-4ea2-96dd-5d84161e290a")
         public class ToggleButtonWithMenuField extends AbstractButton {
 
           @Override
@@ -517,6 +535,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("96697f0c-a24b-4743-ab63-ad823cf81e07")
           public class MenuItem extends AbstractMenu {
 
             @Override
@@ -532,6 +551,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("c2a36853-b240-409e-b32c-8cbc873debe9")
         public class ToggleButtonStyledField extends AbstractButton {
 
           @Override
@@ -587,6 +607,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("a588c3fc-cef9-4b1b-882e-2a9191c97bd2")
       public class LinkButtonGroupBox extends AbstractGroupBox {
 
         @Override
@@ -610,6 +631,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(5)
+        @ClassId("241ede3c-9d8e-4bff-a9ca-c17a9263419d")
         public class RegularLinkButton extends AbstractLinkButton {
 
           @Override
@@ -629,6 +651,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("d8990852-35c3-455a-a61b-4cb3cf0edfd5")
         public class DefaultLinkButton extends AbstractLinkButton {
 
           @Override
@@ -653,6 +676,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("f0e6276b-a76b-4c02-8008-a09d71b3457d")
         public class DisabledLinkButton extends AbstractLinkButton {
 
           @Override
@@ -672,6 +696,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("f1b6ab66-d8e1-4bd1-ad2d-18619b5f09e9")
         public class LinkButtonWithMenuField extends AbstractLinkButton {
 
           @Override
@@ -685,6 +710,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Order(10)
+          @ClassId("a074b4a4-4dbc-42bd-a442-8f7b753f22ea")
           public class MenuItem1 extends AbstractMenu {
 
             @Override
@@ -699,6 +725,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
           }
 
           @Order(20)
+          @ClassId("9c5f2971-bf12-45df-895f-fb9977ba3d92")
           public class MenuItem2 extends AbstractMenu {
 
             @Override
@@ -714,6 +741,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("04d0391b-e571-447e-9c03-dacbcba2e632")
         public class StyledLinkButtonField extends AbstractLinkButton {
 
           @Override
@@ -780,6 +808,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("95c8075c-417b-419f-980d-f5539839505e")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -793,6 +822,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("a989c7f2-783f-4ad7-bb57-92a994415661")
       public class ButtonFieldButton extends AbstractButton {
 
         @Override
@@ -822,6 +852,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("025327b6-a96f-4c36-a007-e2d5504a9f8c")
       public class GetValueField extends AbstractStringField {
 
         @Override
@@ -836,6 +867,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("72fabebc-e9f8-4ce1-91ff-5639ecc60939")
       public class LabelField extends AbstractStringField {
 
         @Override
@@ -850,6 +882,7 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("f9b7286a-22e8-424a-82c7-4b7ce05e573b")
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -869,19 +902,23 @@ public class ButtonForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("284e7ee0-b340-4a93-820b-8fadaa411999")
       public class Place1Field extends AbstractPlaceholderField {
       }
 
       @Order(70)
+      @ClassId("c67fc9af-fe66-42e5-9244-bf2d275fd91c")
       public class Place2Field extends AbstractPlaceholderField {
       }
 
       @Order(80)
+      @ClassId("b3916e44-972b-44c3-91eb-9a0084a04a9c")
       public class Place3Field extends AbstractPlaceholderField {
       }
     }
 
     @Order(70)
+    @ClassId("e97e4f37-3ae9-4ec6-aa4b-41d1307edb58")
     public class CloseButton extends AbstractCloseButton {
     }
   }

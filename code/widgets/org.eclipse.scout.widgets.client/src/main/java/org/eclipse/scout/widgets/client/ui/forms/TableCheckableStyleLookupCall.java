@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("dfe26726-b0c8-4fd9-8f1c-be2411a5435f")
 public class TableCheckableStyleLookupCall extends LocalLookupCall<CheckableStyle> {
 
   private static final long serialVersionUID = 1L;

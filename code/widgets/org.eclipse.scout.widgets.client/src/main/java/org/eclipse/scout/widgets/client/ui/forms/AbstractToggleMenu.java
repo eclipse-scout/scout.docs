@@ -1,10 +1,12 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@ClassId("30c32c32-956f-4a98-a4f0-b7787bee67f6")
 public abstract class AbstractToggleMenu extends AbstractMenu {
 
   private static final Logger LOG = LoggerFactory.getLogger(AbstractToggleMenu.class);

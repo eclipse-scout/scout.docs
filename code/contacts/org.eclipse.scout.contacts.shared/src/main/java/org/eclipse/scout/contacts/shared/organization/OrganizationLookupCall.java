@@ -10,10 +10,12 @@
  */
 package org.eclipse.scout.contacts.shared.organization;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
 //tag::all[]
+@ClassId("22789824-ad89-4208-bc11-5c08b56ce998")
 public class OrganizationLookupCall extends LookupCall<String> {
 
   private static final long serialVersionUID = 1L;

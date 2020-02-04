@@ -11,9 +11,11 @@ import org.eclipse.scout.rt.client.ModelContextProxy.ModelContext;
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.annotations.ConfigProperty;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.event.FastListenerList;
 import org.eclipse.scout.rt.platform.util.event.IFastListenerList;
 
+@ClassId("a30dbf44-cbfd-482b-ad86-f1d832c397bc")
 public class AbstractHeatmapField extends AbstractFormField implements IHeatmapField {
 
   private IHeatmapFieldUIFacade m_uiFacade;

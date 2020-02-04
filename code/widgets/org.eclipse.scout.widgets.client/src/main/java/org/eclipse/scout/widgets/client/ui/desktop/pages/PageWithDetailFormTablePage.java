@@ -21,6 +21,7 @@ import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -28,6 +29,7 @@ import org.eclipse.scout.widgets.client.ui.desktop.menu.AbstractViewSourceOnGitH
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTablePage.Table;
 import org.eclipse.scout.widgets.client.ui.forms.DetailForm;
 
+@ClassId("d02d5e1d-6e82-4ea7-b712-3cb2c58a0b38")
 public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
 
   public PageWithDetailFormTablePage() {
@@ -58,6 +60,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
         {4, "Coca-Cola Company", "KO", 55}});
   }
 
+  @ClassId("2de95ffa-6bb9-492a-b9c5-f1c07c963f78")
   public class Table extends AbstractTable {
 
     @Override
@@ -87,6 +90,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("d6b4687a-1361-45d6-af25-b1d0dc56dee2")
     public class CompanyNrColumn extends AbstractLongColumn {
 
       @Override
@@ -96,6 +100,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(20)
+    @ClassId("ae5b38af-9e0e-4976-bc79-9d792dfd48ff")
     public class NameColumn extends AbstractStringColumn {
 
       @Override
@@ -110,6 +115,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(30)
+    @ClassId("58fc5cff-c637-4c20-8856-a0ee57611884")
     public class SymbolColumn extends AbstractStringColumn {
 
       @Override
@@ -124,6 +130,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(40)
+    @ClassId("3ac70f1e-3280-4588-a329-fa57f346e6ae")
     public class NumberColumn extends AbstractIntegerColumn {
 
       @Override
@@ -138,6 +145,7 @@ public class PageWithDetailFormTablePage extends AbstractPageWithTable<Table> {
     }
 
     @Order(10)
+    @ClassId("3c928934-80c2-44f1-a94e-1db7cc8aeb1c")
     public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
 
       @Override

@@ -107,6 +107,7 @@ import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
 
 @Order(5010.0)
+@ClassId("661d5956-e2ed-4c1f-94fb-f1656dd7dfd9")
 public class HierarchicalTableFieldForm extends AbstractForm implements IPageForm {
 
   static final String[] LOCATIONS = {"San Francisco, USA", "Bruehl, Germany"};
@@ -218,9 +219,11 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
   }
 
   @Order(10)
+  @ClassId("a60b6f58-fe16-4cd5-869f-283d79e6842f")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("2900411b-27ca-47b0-9039-cd6d9753cf02")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -229,6 +232,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(10)
+      @ClassId("96ce0861-6a2b-4637-859c-f7a5ab52b42e")
       public class TableField extends AbstractTableField<Table> {
 
         @Override
@@ -346,6 +350,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(1000)
+        @ClassId("d6ea2d9b-3329-48b6-be8c-62aa2baf9258")
         public class Table extends AbstractTable {
 
           public CustomColumn getCustomColumn() {
@@ -450,6 +455,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(10)
+          @ClassId("015260b2-ba04-4920-b059-fa0bf419036a")
           public class IdColumn extends AbstractLongColumn {
 
             @Override
@@ -480,6 +486,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(20)
+          @ClassId("c6103c38-5042-4907-b1a0-03615d2ff289")
           public class NameColumn extends AbstractStringColumn {
 
             @Override
@@ -505,6 +512,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(30)
+          @ClassId("4bd0de11-cdb0-4130-8bd7-008c1cbd05cf")
           public class LocationColumn extends AbstractStringColumn {
 
             @Override
@@ -525,6 +533,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(40)
+          @ClassId("fe34d701-530c-4294-af63-3e8b412af027")
           public class DateColumn extends AbstractDateColumn {
 
             @Override
@@ -544,6 +553,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(45)
+          @ClassId("e5d1cb72-c38e-467a-b1b1-b8251b228f1c")
           public class StartTimeColumn extends AbstractTimeColumn {
 
             @Override
@@ -563,6 +573,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(48)
+          @ClassId("5769ab4d-e0fa-4134-97c2-d4a7d555e4ef")
           public class EndDateTimeColumn extends AbstractDateTimeColumn {
 
             @Override
@@ -582,6 +593,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(50)
+          @ClassId("7600b717-df38-44fd-8363-dd0df5318099")
           public class IndustryColumn extends AbstractSmartColumn<Long> {
 
             @Override
@@ -612,6 +624,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(60)
+          @ClassId("965a00e9-3dc0-49fe-a70f-bc9d0e6a6749")
           public class LanguageColumn extends AbstractSmartColumn<Locale> {
 
             @Override
@@ -637,6 +650,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(70)
+          @ClassId("addde7ad-5240-444e-b8bc-6430ada5be29")
           public class ParticipantsColumn extends AbstractLongColumn {
 
             @Override
@@ -667,6 +681,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(80)
+          @ClassId("4ee90db0-ed18-4547-a5d6-27e82076b0d5")
           public class WebPageColumn extends AbstractStringColumn {
 
             @Override
@@ -692,6 +707,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(90)
+          @ClassId("820147c8-c24b-4344-9ee7-d6613bd7c7f4")
           public class AttendedColumn extends AbstractBooleanColumn {
 
             @Override
@@ -717,6 +733,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(92)
+          @ClassId("594339a3-2f6f-4e83-bcdb-0652f856a560")
           public class MixedStateColumn extends AbstractBooleanColumn {
 
             @Override
@@ -746,6 +763,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(100)
+          @ClassId("633659b8-7e93-4a95-a8c1-09e5e1307296")
           public class PhoneColumn extends AbstractStringColumn {
             @Override
             protected boolean getConfiguredEditable() {
@@ -769,6 +787,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(100)
+          @ClassId("957b781c-80c5-470f-b30c-98651153fd1b")
           public class TrendColumn extends AbstractIconColumn {
 
             @Override
@@ -784,6 +803,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(110)
+          @ClassId("b5da50b7-3ac6-47d8-858c-7abc9691f306")
           public class TextAndIconHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -803,6 +823,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(120)
+          @ClassId("9dff11fb-85ec-49ec-90e7-c9fd9ca5e4b4")
           public class IconHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -818,6 +839,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(130)
+          @ClassId("907f22c9-ed33-459e-a379-e3272631fbd3")
           public class EmptyHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -827,6 +849,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(135)
+          @ClassId("fb556f40-688a-49c5-888f-b6e8ec147d92")
           public class DateWithEmptyTextColumn extends AbstractDateColumn {
 
             @Override
@@ -858,6 +881,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(137)
+          @ClassId("adac4871-fe64-47b3-b97c-967cc3555e25")
           public class CustomColumn extends AbstractColumn<ExampleBean> {
             @Override
             protected String getConfiguredHeaderText() {
@@ -892,6 +916,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(140)
+          @ClassId("d3e65cf4-93f1-45e1-952f-2d85cc3aa234")
           public class LegacyHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -926,6 +951,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(150)
+          @ClassId("71e39327-5a2c-4dd2-84fb-e6a1bc94ecc6")
           public class MultilineHeaderColumn extends AbstractStringColumn {
 
             @Override
@@ -940,6 +966,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(10)
+          @ClassId("26399b5c-0cf6-4893-b217-dfcb6e44792a")
           public class NewMenu extends AbstractMenu {
 
             @Override
@@ -959,6 +986,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(15)
+          @ClassId("9bedc317-87a4-41cd-ac16-8855c7e04dc5")
           public class TableStatusVisibleMenu extends AbstractMenu {
 
             @Override
@@ -972,6 +1000,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(10)
+            @ClassId("30127e1f-09aa-4c34-a942-144b781fd331")
             public class RemoveStatusMenu extends AbstractMenu {
 
               @Override
@@ -991,6 +1020,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(20)
+            @ClassId("8e9ffae2-af6b-4f8e-a67b-81f3916ec346")
             public class SetSeverityInfoMenu extends AbstractMenu {
 
               @Override
@@ -1010,6 +1040,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(30)
+            @ClassId("d6f2bf26-26c0-4b09-a3de-468a7d320ac6")
             public class SetSeverityWarningMenu extends AbstractMenu {
 
               @Override
@@ -1029,6 +1060,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(40)
+            @ClassId("1ce6f398-2f6e-45d0-ad07-7d0902a4b984")
             public class SetSeverityErrorMenu extends AbstractMenu {
 
               @Override
@@ -1049,6 +1081,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(15)
+          @ClassId("bce638bb-73ff-4cd4-a371-09ebc1af9a9b")
           public class MoreMenu extends AbstractMenu {
             @Override
             protected String getConfiguredText() {
@@ -1084,6 +1117,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(10)
+            @ClassId("fc4084b5-35e9-4473-80f0-3b93b682ab18")
             public class NewDelayedMenu extends AbstractMenu {
 
               @Override
@@ -1169,6 +1203,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(15)
+            @ClassId("891ee02d-a03b-4570-b248-d913145a8b71")
             public class ScrollToSelection extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -1187,6 +1222,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
             }
 
             @Order(20)
+            @ClassId("70d284f2-6fcd-4bb2-be15-b0b61d1bcd53")
             public class ToggleHierarchicalStyle extends AbstractMenu {
               @Override
               protected String getConfiguredText() {
@@ -1216,6 +1252,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(20)
+          @ClassId("821f23d5-2eef-4647-9b12-8fd21d032606")
           public class DeleteMenu extends AbstractMenu {
 
             @Override
@@ -1236,6 +1273,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(25)
+          @ClassId("dbf7c7d0-c75a-4eac-b9f1-3e86d6b6c18d")
           public class DeleteDelayedMenu extends AbstractMenu {
 
             @Override
@@ -1260,6 +1298,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           }
 
           @Order(40)
+          @ClassId("3304983c-9cda-4b67-b905-a1a2ff62ccbb")
           public class HighlightRow extends AbstractMenu {
 
             @Override
@@ -1300,6 +1339,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
     }
 
     @Order(20)
+    @ClassId("8f9634e0-afb0-435f-8d41-40015252b082")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -1308,6 +1348,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(20)
+      @ClassId("55b0ff57-f638-446d-864d-176922df8845")
       public class SelectedRowsField extends AbstractStringField {
 
         @Override
@@ -1322,6 +1363,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(30)
+      @ClassId("4b7076c9-3389-4cc4-b8c9-cca6b12f3394")
       public class InsertedRowsField extends AbstractStringField {
 
         @Override
@@ -1336,6 +1378,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(40)
+      @ClassId("1ad722a6-6b7e-4282-af68-c2300b36d96f")
       public class UpdatedRowsField extends AbstractStringField {
 
         @Override
@@ -1350,6 +1393,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(50)
+      @ClassId("93fa8899-e730-4fac-b67d-62d58147cc29")
       public class DeletedRowsField extends AbstractStringField {
 
         @Override
@@ -1364,6 +1408,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(55)
+      @ClassId("b124784e-8f64-47bc-bd1e-ec17b67ee469")
       public class DefaultIconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -1394,6 +1439,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(60)
+      @ClassId("13748246-620c-4fad-aeb5-8cccc064d3d1")
       public class ContextColumnField extends AbstractStringField {
 
         @Override
@@ -1408,6 +1454,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       }
 
       @Order(70)
+      @ClassId("deec15bb-0df4-4c1a-a755-dd535ea7b8b3")
       public class PropertiesGroupBox extends AbstractGroupBox {
 
         @Override
@@ -1431,6 +1478,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(80)
+        @ClassId("e6429d0d-6cba-4b21-b1b9-a5fb46076ef8")
         public class AutoResizeColumnsField extends AbstractBooleanField {
 
           @Override
@@ -1471,6 +1519,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(85)
+        @ClassId("4baa9bf2-2abd-4db2-a912-77fab25ca953")
         public class AutoOptimizeColumnWidthsField extends AbstractBooleanField {
 
           @Override
@@ -1513,6 +1562,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(90)
+        @ClassId("6bfb8099-4348-474f-bf93-cd5a1aac98a5")
         public class IsVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1547,6 +1597,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(95)
+        @ClassId("088ef80b-b5e0-4d9b-81a6-55d89fd40a66")
         public class IsEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1576,6 +1627,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(100)
+        @ClassId("170ea18f-3ff8-409b-b7ef-44d009054c87")
         public class IsEditableField extends AbstractBooleanField {
 
           @Override
@@ -1610,6 +1662,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(110)
+        @ClassId("d0d0da23-44d9-4af6-9ebe-d29b3cc1c1a8")
         public class MultiSelectField extends AbstractBooleanField {
 
           @Override
@@ -1639,6 +1692,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(120)
+        @ClassId("df01036c-f50f-4494-bcc9-73f28e074928")
         public class IsCheckableField extends AbstractBooleanField {
 
           @Override
@@ -1669,6 +1723,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(130)
+        @ClassId("f9bb6014-2e36-4ace-84b9-5bb6ee056edf")
         public class IsColumnMandatoryField extends AbstractBooleanField {
 
           @Override
@@ -1709,6 +1764,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(135)
+        @ClassId("df7d782a-628f-43a1-97dd-a1a9d1ba326c")
         public class IsColumnFixedWidthField extends AbstractBooleanField {
 
           @Override
@@ -1748,6 +1804,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(140)
+        @ClassId("60062570-9d93-480c-966b-0653f930d93e")
         public class IsRowIconVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1780,6 +1837,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(150)
+        @ClassId("c92c5855-0f0e-4888-a06d-9b358620b1bc")
         public class WrapTextField extends AbstractBooleanField {
 
           @Override
@@ -1810,6 +1868,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(160)
+        @ClassId("b4ef6afd-aaa7-455a-ab23-ff217d6a9643")
         public class TableStatusVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1841,6 +1900,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(170)
+        @ClassId("43bfd37b-a064-433c-bce1-f66207f3342c")
         public class TableHeaderVisibleField extends AbstractBooleanField {
 
           @Override
@@ -1870,6 +1930,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(180)
+        @ClassId("ca823306-10c7-42e3-b60e-4c0c6d2ae320")
         public class TableHeaderEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1899,6 +1960,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(190)
+        @ClassId("e27f52ab-b557-40a8-b39a-9a1d4e06d2cb")
         public class TableSortEnabledField extends AbstractBooleanField {
 
           @Override
@@ -1928,6 +1990,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(200)
+        @ClassId("bafe86c7-41e7-4486-b5e2-7dfb06115652")
         public class TruncatedCellTooltipEnabled extends AbstractBooleanField {
           @Override
           protected String getConfiguredLabel() {
@@ -1961,6 +2024,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(205)
+        @ClassId("17be4d04-504b-47ba-8f57-0496d8cf68e7")
         public class ScrollToSelection extends AbstractBooleanField {
           @Override
           protected String getConfiguredLabel() {
@@ -1989,6 +2053,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
         }
 
         @Order(210)
+        @ClassId("42675dee-0c27-4848-8577-693c7494385c")
         public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
 
           @Override
@@ -2021,6 +2086,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
     }
 
     @Order(50)
+    @ClassId("41c683e1-bc77-48d2-bdd1-fd61a0058385")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -2028,6 +2094,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
   public class PageFormHandler extends AbstractFormHandler {
   }
 
+  @ClassId("3f50e5dc-6f07-4312-9ced-7edf0954b999")
   public static class LocationLookupCall extends LocalLookupCall<String> {
     private static final long serialVersionUID = 1L;
 

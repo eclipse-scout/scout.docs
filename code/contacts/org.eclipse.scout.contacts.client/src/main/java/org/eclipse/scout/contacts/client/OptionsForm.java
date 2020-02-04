@@ -27,11 +27,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadio
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+@ClassId("002c674c-1e3e-42ca-9fcb-6831fb50fdb6")
 public class OptionsForm extends AbstractForm {
 
   @Override
@@ -82,6 +84,7 @@ public class OptionsForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("ee807573-30b8-45e1-bdb3-1c487593a8db")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -90,6 +93,7 @@ public class OptionsForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("cc3211b3-6be4-4a2b-ba56-f1fe616148b5")
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -103,6 +107,7 @@ public class OptionsForm extends AbstractForm {
       }
 
       @Order(10)
+      @ClassId("37402c2b-8d3c-4fed-92bd-fdc5cc0869a1")
       public class UiThemeField extends AbstractSmartField<String> {
 
         @Override
@@ -127,6 +132,7 @@ public class OptionsForm extends AbstractForm {
       }
 
       @Order(20)
+      @ClassId("15fbb4f3-c97b-41a0-8baf-1fafa4aad4ef")
       public class DenseRadioButtonGroup extends AbstractRadioButtonGroup<Boolean> {
 
         @Override
@@ -135,6 +141,7 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Order(10)
+        @ClassId("72dff217-a9b0-4678-8730-d085f02f3667")
         public class DefaultButton extends AbstractRadioButton<Boolean> {
 
           @Override
@@ -149,6 +156,7 @@ public class OptionsForm extends AbstractForm {
         }
 
         @Order(20)
+        @ClassId("2d15c429-6154-4017-b470-21e94e107667")
         public class DenseButton extends AbstractRadioButton<Boolean> {
 
           @Override
@@ -164,6 +172,7 @@ public class OptionsForm extends AbstractForm {
       }
 
       @Order(30)
+      @ClassId("7fb9dab3-9474-4579-a0d1-139c4028fd6a")
       public class LocaleField extends AbstractSmartField<Locale> {
 
         @Override
@@ -184,6 +193,7 @@ public class OptionsForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("d19e24a6-2b9a-48ec-8cc1-081bf01f8765")
     public class ApplyButton extends AbstractOkButton {
 
       @Override

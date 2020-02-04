@@ -10,9 +10,14 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.List;
+
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.IAdvancedFormPage;
 
+@ClassId("4afbc42b-3d15-4ced-abcb-4979ac2b0542")
 public class TableFormPage extends FormPage implements IAdvancedFormPage {
 
   public TableFormPage() {
@@ -30,7 +35,7 @@ public class TableFormPage extends FormPage implements IAdvancedFormPage {
   }
 
   @Override
-  protected void execCreateChildPages(java.util.List<org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage<?>> pageList) {
+  protected void execCreateChildPages(List<IPage<?>> pageList) {
     pageList.add(new FormPage(HierarchicalTableFieldForm.class));
   }
 

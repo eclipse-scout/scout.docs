@@ -15,6 +15,7 @@ import org.eclipse.scout.widgets.client.ui.forms.tabbox.DynamicTabItem.InnerBox.
  *
  * @author aho
  */
+@ClassId("4db9172c-3345-4c28-a4d4-e74f75703d18")
 public class DynamicTabItem extends AbstractGroupBox {
 
   public DynamicTabItem() {

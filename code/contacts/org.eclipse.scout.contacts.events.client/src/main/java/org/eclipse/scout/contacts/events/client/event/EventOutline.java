@@ -15,8 +15,10 @@ import java.util.List;
 import org.eclipse.scout.contacts.events.client.Icons;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+@ClassId("956b0f47-b86d-479d-86be-0f2981ecc00c")
 public class EventOutline extends AbstractOutline {
 
   @Override

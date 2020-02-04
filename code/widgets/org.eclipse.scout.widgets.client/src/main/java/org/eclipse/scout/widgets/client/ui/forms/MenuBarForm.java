@@ -26,6 +26,7 @@ import org.eclipse.scout.widgets.client.ui.forms.MenuBarForm.MainBox.DetailBox.S
 import org.eclipse.scout.widgets.client.ui.forms.MenuBarForm.MainBox.DetailBox.StringFieldValueField;
 import org.eclipse.scout.widgets.shared.Icons;
 
+@ClassId("370a5cbe-29a5-4ad4-942f-b9b033550f76")
 public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -59,9 +60,11 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(StringFieldValueField.class);
   }
 
+  @ClassId("39b5ea3d-043e-4115-8810-f99c1e51b22c")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("f5cc50ce-c9f1-41eb-b697-766e26225915")
     public class DetailBox extends AbstractGroupBox {
 
       @Order(0)
@@ -105,6 +108,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(1000)
+      @ClassId("166ebee6-10c8-42b4-8002-c20e43286f41")
       public class StringFieldValueField extends AbstractStringField {
 
         @Override
@@ -193,9 +197,11 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(2000)
+      @ClassId("fa7d5d8f-3cf5-469a-aa55-531814f1f420")
       public class DateFieldMenu extends AbstractFormFieldMenu {
 
         @Order(1000)
+        @ClassId("6a5322a3-d789-4ff5-841a-deede4ecea30")
         public class MenuDateField extends AbstractDateField {
 
           private final SimpleDateFormat m_dateFormatter = new SimpleDateFormat("MM-dd-yyyy hh:mm");
@@ -229,9 +235,11 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(1000)
+      @ClassId("a204d787-dc9e-4796-9108-6fbac20fcb9a")
       public class StringFieldMenu extends AbstractFormFieldMenu {
 
         @Order(1000)
+        @ClassId("c91c3652-05a0-4955-ae1c-3b9e9fa65404")
         public class MenuStringField extends AbstractStringField {
 
           @Override
@@ -289,6 +297,7 @@ public class MenuBarForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(50)
+    @ClassId("55fbcc51-58be-4aec-b191-8f4464a032a8")
     public class CloseButton extends AbstractCloseButton {
     }
   }

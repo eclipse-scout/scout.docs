@@ -32,6 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
@@ -67,6 +68,7 @@ import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType.ExternalCode;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType.PublicCode;
 
+@ClassId("6bb3651a-87ea-4529-8096-4b8c2c8c4920")
 public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -170,6 +172,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("b2f5de0c-ef89-4667-93ce-8a917853566e")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -178,6 +181,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
     }
 
     @Order(10)
+    @ClassId("f67b2cc8-5417-4e72-898f-48a20bc36801")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -191,6 +195,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("57e0e909-b9d6-4795-b32c-b74029c69c5e")
       public class DefaultGroup extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -210,6 +215,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("d910bccd-0ba0-4de9-9403-d08cf540f49b")
       public class DisabledGroup extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -237,6 +243,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("30161d61-f03f-4393-9097-644c41553d71")
       public class StyledGroupBox extends AbstractRadioButtonGroup<Long> {
 
         @Override
@@ -245,6 +252,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("00db2ed0-0fa1-4417-b75a-ee05fc65cdd4")
         public class RotateLeftButton extends AbstractRadioButton {
 
           @Override
@@ -259,6 +267,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("9638ced8-be48-4ff8-91e2-5bc1891ef0b4")
         public class RotateRightButton extends AbstractRadioButton {
 
           @Override
@@ -273,6 +282,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("53b46292-d389-40f4-8b9e-2e2eba02b2b4")
         public class AlarmClockButton extends AbstractRadioButton {
 
           @Override
@@ -289,6 +299,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("feaa321b-c363-4c31-8f4f-8b5492d828f5")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -302,6 +313,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("e2544ec4-e7af-4650-bc82-bcd532006fe3")
       public class RadioButtonGroup extends AbstractRadioButtonGroup<String> {
 
         private boolean m_showMessageBox = true;
@@ -322,6 +334,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("83bfb9fa-2e36-439b-8c88-a85ca475480f")
         public class No1Button extends AbstractRadioButton<String> {
 
           @Override
@@ -336,6 +349,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("c894a80b-9a5a-44f9-92ef-320631558da0")
         public class No2Button extends AbstractRadioButton<String> {
 
           @Override
@@ -350,6 +364,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("bf182307-7795-40bf-864c-9199bd9e50e4")
         public class No3Button extends AbstractRadioButton<String> {
 
           @Override
@@ -371,6 +386,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("8b5c4ce6-ba88-4025-8ba5-2ff78a02250d")
         public class No4Button extends AbstractRadioButton<String> {
 
           @Override
@@ -380,6 +396,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(50)
+        @ClassId("045e57ef-bae5-4e0c-a18c-bf6b2012850b")
         public class No5Button extends AbstractRadioButton<String> {
 
           @Override
@@ -389,6 +406,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("87ca8e03-a549-47ea-9f21-7407a4eaa342")
         public class DeselectMenu extends AbstractMenu {
 
           @Override
@@ -410,6 +428,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("972d6b40-b6d8-480e-9e10-bb732d5e4113")
         public class PreventMessageBoxMenu extends AbstractMenu {
 
           @Override
@@ -433,6 +452,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("536a353d-51b4-4a57-b106-1260171c6ae9")
       public class RadioButtonValuesBox extends AbstractSequenceBox {
 
         @Override
@@ -460,6 +480,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("e2303553-80e1-4007-bf3a-7c0cb0ab45e9")
         public class ValueButton1Field extends AbstractStringField {
 
           @Override
@@ -477,6 +498,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("45aa0fc2-dabb-4e82-9621-188f3a8452aa")
         public class ValueButton2Field extends AbstractStringField {
 
           @Override
@@ -494,6 +516,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(30)
+        @ClassId("f044497b-b1da-4544-9f2e-63eae08bae00")
         public class ValueButton3Field extends AbstractStringField {
 
           @Override
@@ -511,6 +534,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("f4bb6716-330c-4dd4-9b8a-03f1fca9cc66")
         public class ValueButton4Field extends AbstractStringField {
 
           @Override
@@ -528,6 +552,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
         }
 
         @Order(50)
+        @ClassId("29e62507-b4e1-45fe-9cb2-90dc248a510b")
         public class ValueButton5Field extends AbstractStringField {
 
           @Override
@@ -546,6 +571,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("6d022879-122b-4c32-8797-564f6f9fe8b3")
       public class ValueField extends AbstractStringField {
 
         @Override
@@ -570,6 +596,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("3294640a-9fbf-4fe6-8fa4-7a1651373a16")
       public class RadioButtonGroupHeightField extends AbstractIntegerField {
 
         @Override
@@ -606,6 +633,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
+      @ClassId("ba8d7c65-1413-4b36-a2da-a10621c95bcc")
       public class LabelField extends AbstractStringField {
 
         @Override
@@ -630,6 +658,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60)
+      @ClassId("4a7c4797-086a-415d-9408-1ed9d2a44488")
       public class IconIdField extends AbstractSmartField<String> {
 
         @Override
@@ -659,6 +688,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(70)
+      @ClassId("fcd46305-68ad-4f9f-8400-a667aadf4ace")
       public class FontNameField extends AbstractStringField {
 
         @Override
@@ -678,6 +708,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80)
+      @ClassId("7fcac7de-f0a4-40df-8a7d-e938bb9bdff7")
       public class FontStyleField extends AbstractSmartField<Integer> {
 
         @Override
@@ -709,6 +740,7 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
       }
 
       @Order(90)
+      @ClassId("cca80d4d-635c-44af-bf2c-b9df045dabf5")
       public class EnabledField extends AbstractBooleanField {
 
         @Override
@@ -739,10 +771,12 @@ public class RadioButtonGroupForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("768a5694-8966-45f2-809d-b7fc1e4ef025")
     public class CloseButton extends AbstractCloseButton {
     }
 
     @Order(40)
+    @ClassId("99e4266e-4933-4cad-be58-4bb0dc0873e4")
     public class SampleContentButton extends AbstractButton {
 
       @Override

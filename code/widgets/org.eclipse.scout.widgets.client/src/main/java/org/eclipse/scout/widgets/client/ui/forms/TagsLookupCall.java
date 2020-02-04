@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("8199a2f2-acea-4807-91de-8effa66b04d5")
 public class TagsLookupCall extends LocalLookupCall<String> {
 
   private static final long serialVersionUID = 1L;

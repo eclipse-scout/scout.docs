@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithEditableTableTablePage;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithNodesNodePage;
@@ -22,6 +23,7 @@ import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableRecTablePa
 import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage;
 
 @Order(1400)
+@ClassId("da98a2be-ab0a-44d0-a696-c13c7c9f2242")
 public class PagesOutline extends AbstractWidgetsOutline {
 
   @Override

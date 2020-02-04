@@ -6,6 +6,7 @@ import org.eclipse.scout.rt.client.extension.ui.form.fields.groupbox.AbstractGro
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
 //tag::PersonFormMainBoxExtension[]
 /**
@@ -19,10 +20,12 @@ public class PersonFormMainBoxExtension extends AbstractGroupBoxExtension<MainBo
   }
 
   @Order(2000)
+  @ClassId("fda7cd67-0df1-4194-9d70-22a9b3ce890d")
   public class SalaryField extends AbstractBigDecimalField {
   }
 
   @Order(3000)
+  @ClassId("478037fb-759f-4fa1-b737-c77f903c6881")
   public class BirthdayField extends AbstractDateField {
   }
 }

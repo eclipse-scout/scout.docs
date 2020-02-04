@@ -17,6 +17,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+@ClassId("b4cc5f15-c506-42fd-96a7-c5451828a6ee")
 public abstract class AbstractFormFieldConfigurationBox extends AbstractGroupBox {
 
   @Override

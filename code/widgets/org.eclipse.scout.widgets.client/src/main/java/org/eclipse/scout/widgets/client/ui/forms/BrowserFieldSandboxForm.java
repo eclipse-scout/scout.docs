@@ -14,11 +14,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
+@ClassId("2254095e-5b33-46bc-97d7-b0d03142e7ea")
 public class BrowserFieldSandboxForm extends AbstractForm {
 
   private final IBrowserField m_browserField;
@@ -53,6 +55,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("dd423b35-bc67-404f-b069-e807142f5b5f")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -61,6 +64,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
     }
 
     @Order(10)
+    @ClassId("86c0cd60-9119-4056-80bc-548cd9756dc9")
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -74,6 +78,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
       }
 
       @Order(40)
+      @ClassId("12f240e6-c9df-472b-af18-a592494efeac")
       public class SandboxEnabledField extends AbstractBooleanField {
 
         @Override
@@ -98,6 +103,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
       }
 
       @Order(99)
+      @ClassId("ea73e43d-b0a8-4dfe-b99d-f5459a127f30")
       public class SandboxPermissionsField extends AbstractListBox<SandboxPermission> {
 
         @Override
@@ -144,6 +150,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
     }
 
     @Order(40)
+    @ClassId("d49f88d7-2bdb-46e9-9f44-0e9e778cf683")
     public class CloseButton extends AbstractCloseButton {
     }
   }
@@ -151,6 +158,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
   public class DefaultFormHandler extends AbstractFormHandler {
   }
 
+  @ClassId("2f8f115d-5d67-4cf8-aa47-3a852961c3d5")
   public static class SandboxPermissionsLookupCall extends LocalLookupCall<SandboxPermission> {
     private static final long serialVersionUID = 1L;
 

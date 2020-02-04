@@ -16,6 +16,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDec
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.forms.DetailForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.DetailForm.MainBox.GroupBox.NavigationButtonInfoField;
@@ -24,6 +25,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DetailForm.MainBox.GroupBox.Val
 import org.eclipse.scout.widgets.client.ui.forms.DetailForm.MainBox.GroupBox.ValueLowField;
 import org.eclipse.scout.widgets.client.ui.forms.DetailForm.MainBox.GroupBox.ValueOpenField;
 
+@ClassId("ff9a6d9b-c54e-4c48-8cf8-3191f06756e3")
 public class DetailForm extends AbstractForm {
 
   @Override
@@ -64,12 +66,15 @@ public class DetailForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("728d8deb-29cc-4f7a-b924-bb8de670b736")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("e397827d-5693-422a-bf7d-2051be7f2789")
     public class GroupBox extends AbstractGroupBox {
 
       @Order(2)
+      @ClassId("ae415aa7-1262-4dcf-ac90-426b5def034c")
       public class InfoField extends AbstractLabelField {
 
         @Override
@@ -99,6 +104,7 @@ public class DetailForm extends AbstractForm {
       }
 
       @Order(5)
+      @ClassId("404c7e4b-2b20-46ae-aca4-cadba853eda6")
       public class NavigationButtonInfoField extends AbstractLabelField {
 
         @Override
@@ -128,6 +134,7 @@ public class DetailForm extends AbstractForm {
       }
 
       @Order(10)
+      @ClassId("f2accc1c-c2d3-49f3-9c1c-b7da9952e31b")
       public class ValueLastField extends AbstractBigDecimalField {
 
         @Override
@@ -137,6 +144,7 @@ public class DetailForm extends AbstractForm {
       }
 
       @Order(20)
+      @ClassId("59d628a1-be40-44c8-8727-351c4d412dc5")
       public class ValueOpenField extends AbstractBigDecimalField {
 
         @Override
@@ -146,6 +154,7 @@ public class DetailForm extends AbstractForm {
       }
 
       @Order(30)
+      @ClassId("610443af-b7dc-4491-b990-61768cd3a618")
       public class ValueLowField extends AbstractBigDecimalField {
 
         @Override
@@ -155,6 +164,7 @@ public class DetailForm extends AbstractForm {
       }
 
       @Order(40)
+      @ClassId("269f70b4-92a5-429b-9bfc-9de90d68e6aa")
       public class ValueHighField extends AbstractBigDecimalField {
 
         @Override

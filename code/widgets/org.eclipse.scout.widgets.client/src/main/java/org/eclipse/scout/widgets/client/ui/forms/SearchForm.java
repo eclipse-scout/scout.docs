@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.CompanyTypeLookupCall;
@@ -46,6 +47,7 @@ import org.eclipse.scout.widgets.client.ui.forms.SearchForm.MainBox.TabBox.Field
 import org.eclipse.scout.widgets.client.ui.forms.SearchForm.MainBox.TabBox.FieldBox.SmartField;
 import org.eclipse.scout.widgets.client.ui.forms.SearchForm.MainBox.TabBox.FieldBox.StringField;
 
+@ClassId("ef19288c-40fe-4f5e-a7a7-8526159c1cae")
 @FormData(value = SearchFormData.class, sdkCommand = SdkCommand.CREATE)
 public class SearchForm extends AbstractSearchForm {
 
@@ -118,12 +120,15 @@ public class SearchForm extends AbstractSearchForm {
   }
 
   @Order(10)
+  @ClassId("b83e341e-bf7d-497e-b607-755aff391394")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("905de600-eed5-4161-b2ae-a3da916ea3e0")
     public class TabBox extends AbstractTabBox {
 
       @Order(10)
+      @ClassId("eb7a09f3-28f0-4d99-a884-0aee4d85e90f")
       public class FieldBox extends AbstractGroupBox {
 
         @Override
@@ -132,6 +137,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(10)
+        @ClassId("ac28944e-b7d3-4b5b-a36a-11f7abeb93b1")
         public class StringField extends AbstractStringField {
 
           @Override
@@ -141,6 +147,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(20)
+        @ClassId("eabb577a-9e85-4e5b-b707-da21b599dccd")
         public class LongBox extends AbstractSequenceBox {
 
           @Override
@@ -149,6 +156,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(10)
+          @ClassId("dfddba95-6862-4c52-8740-eb4576f5d94c")
           public class LongFrom extends AbstractLongField {
 
             @Override
@@ -158,6 +166,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(20)
+          @ClassId("818b0da9-b4ee-4973-8db0-dbd52e991bd1")
           public class LongTo extends AbstractLongField {
 
             @Override
@@ -168,6 +177,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(30)
+        @ClassId("99df304e-24e1-4d82-b5e4-feb4873ce3e4")
         public class IntegerBox extends AbstractSequenceBox {
 
           @Override
@@ -176,6 +186,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(10)
+          @ClassId("02ab6052-5b62-4c6b-907a-f71b2dfbc36d")
           public class IntegerFrom extends AbstractIntegerField {
 
             @Override
@@ -185,6 +196,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(20)
+          @ClassId("023b47c0-bde6-4df7-8e59-102171d256e8")
           public class IntegerTo extends AbstractIntegerField {
 
             @Override
@@ -195,6 +207,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(50)
+        @ClassId("0d7dc6b5-6514-4679-95d8-b0a1c204fcd1")
         public class DateBox extends AbstractSequenceBox {
 
           @Override
@@ -203,6 +216,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(10)
+          @ClassId("cddff8f2-71ef-4ecf-8aec-a95c6ff4d37e")
           public class DateFrom extends AbstractDateField {
 
             @Override
@@ -212,6 +226,7 @@ public class SearchForm extends AbstractSearchForm {
           }
 
           @Order(20)
+          @ClassId("6426902a-ae05-4c97-bd91-ba6256c5d52c")
           public class DateTo extends AbstractDateField {
 
             @Override
@@ -222,6 +237,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(60)
+        @ClassId("c3b66216-1fab-4fe6-8faf-ff689b3f7722")
         public class BooleanField extends AbstractBooleanField {
 
           @Override
@@ -241,6 +257,7 @@ public class SearchForm extends AbstractSearchForm {
         }
 
         @Order(10)
+        @ClassId("00839a31-351f-44fe-93b2-bbd1234db36d")
         public class SmartField extends AbstractListBox<Long> {
 
           @Override
@@ -262,10 +279,12 @@ public class SearchForm extends AbstractSearchForm {
     }
 
     @Order(30)
+    @ClassId("21b10312-ad41-4c12-9677-7d7f776cc102")
     public class ResetButton extends AbstractResetButton {
     }
 
     @Order(40)
+    @ClassId("4a2c98be-7587-4ee8-8cac-7f75f170d1e9")
     public class SearchButton extends AbstractSearchButton {
     }
   }

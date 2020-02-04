@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.svg.client.SVGUtility;
@@ -40,6 +41,7 @@ import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGLength;
 
 @Order(8000.0)
+@ClassId("72f6e032-ce4e-4bf0-8851-e4fef40ea5a7")
 public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -91,6 +93,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
   }
 
   @Order(10)
+  @ClassId("8d623dc9-f589-4c19-b427-c52893d7f4b5")
   public class MainBox extends AbstractGroupBox {
 
     public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
@@ -103,6 +106,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(10)
+    @ClassId("430d5700-b8cf-4538-b7cf-14b4b240672d")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -116,6 +120,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(10)
+      @ClassId("8e198d9a-122b-409c-b9c2-47e37880f842")
       public class DefaultField extends AbstractSvgField {
 
         @Override
@@ -135,6 +140,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(20)
+      @ClassId("db36a34a-9b06-4f25-8ba5-06d5521f484b")
       public class DisabledField extends AbstractSvgField {
 
         @Override
@@ -155,6 +161,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(20)
+    @ClassId("5c683021-fba8-4dd3-b56c-e43b28ccda85")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -168,6 +175,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(10)
+      @ClassId("37ad5044-6a07-49a9-a057-f5efe27dd693")
       public class UserSvgField extends AbstractSvgField {
 
         @Override
@@ -219,6 +227,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
       }
 
       @Order(20)
+      @ClassId("abf26522-1331-414a-914a-57731d38ecc5")
       public class SvgSourceField extends AbstractStringField {
 
         @Override
@@ -249,6 +258,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(30)
+    @ClassId("59bee675-9b18-40ce-9919-bdbe8bf95ca6")
     public class SampleContentButton extends AbstractButton {
 
       @Override
@@ -263,6 +273,7 @@ public class SvgFieldForm extends AbstractForm implements IAdvancedExampleForm {
     }
 
     @Order(40)
+    @ClassId("4b3b9851-989b-41b6-9405-c66e0c3d2bc2")
     public class CloseButton extends AbstractCloseButton {
     }
 

@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
@@ -24,6 +25,7 @@ import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitFolderC
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitSourceConfigProperty;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitUrlConfigProperty;
 
+@ClassId("5e9ada87-7e3d-436d-b609-5c169b1891ed")
 public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
 
   protected static final Pattern MODULE_PATTERN = Pattern.compile("(org\\.eclipse\\.scout\\.widgets\\..*?client)\\..*");

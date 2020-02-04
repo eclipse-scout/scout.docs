@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 /**
  * @author mzi
  */
+@ClassId("aed2b172-c861-4025-9d7b-3cccd59670e1")
 public class AnswerOptionsLookupCall extends LocalLookupCall<Integer> {
 
   private static final long serialVersionUID = 1L;

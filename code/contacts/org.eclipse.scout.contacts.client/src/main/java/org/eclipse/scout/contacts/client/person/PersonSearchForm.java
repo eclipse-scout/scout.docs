@@ -32,10 +32,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+@ClassId("fcac7a9a-0566-4ce4-b03a-d84f7a9a6006")
 @FormData(value = PersonSearchFormData.class, sdkCommand = SdkCommand.CREATE)
 public class PersonSearchForm extends AbstractSearchForm {
 
@@ -94,12 +96,15 @@ public class PersonSearchForm extends AbstractSearchForm {
   }
 
   @Order(1000)
+  @ClassId("d1aec0bf-d226-40b7-bebe-8e306d75f51e")
   public class MainBox extends AbstractGroupBox {
 
     @Order(1000)
+    @ClassId("0a6c97bf-e6dc-4ba1-99aa-44de574c787d")
     public class TabBox extends AbstractTabBox {
 
       @Order(1000)
+      @ClassId("af57b563-9364-43d6-a96c-b42c134326ce")
       public class FieldBox extends AbstractGroupBox {
 
         @Override
@@ -108,6 +113,7 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(1000)
+        @ClassId("d2b9010c-d3d0-4180-adc2-207226620eee")
         public class FirstNameField extends AbstractStringField {
 
           @Override
@@ -117,6 +123,7 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(2000)
+        @ClassId("ae755faf-72b7-4b8a-9b63-52de1e64e8a2")
         public class LastNameField extends AbstractStringField {
 
           @Override
@@ -126,6 +133,7 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(3125)
+        @ClassId("99b367ce-c0fc-4055-8e3c-b6bda55af129")
         public class Location extends AbstractAddressBox {
 
           @Override
@@ -146,6 +154,7 @@ public class PersonSearchForm extends AbstractSearchForm {
         }
 
         @Order(3750)
+        @ClassId("c782f468-8ff9-4a91-a23e-b5e06be5bc3e")
         public class OrganizationField extends AbstractSmartField<String> {
 
           @Override
@@ -162,10 +171,12 @@ public class PersonSearchForm extends AbstractSearchForm {
     }
 
     @Order(8000)
+    @ClassId("7808b9dc-3f41-4ece-b4f0-6e084172dcac")
     public class ResetButton extends AbstractResetButton {
     }
 
     @Order(9000)
+    @ClassId("1fdf54a5-bc8d-4ed3-a20f-d167e068332d")
     public class SearchButton extends AbstractSearchButton {
     }
   }

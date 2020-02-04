@@ -12,11 +12,13 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.ImageFieldMenuType;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 
 // tag::template[]
+@ClassId("73a4276f-77b2-4ad2-b414-7f806284bdb3")
 @FormData(value = AbstractUrlImageFieldData.class, // <1>
     sdkCommand = SdkCommand.CREATE,
     defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
@@ -61,6 +63,7 @@ public abstract class AbstractUrlImageField extends AbstractImageField {
 
   // tag::menu[]
   @Order(10)
+  @ClassId("99c1c12a-84d4-4c1a-a009-dfd2b7b55ded")
   public class EditURLMenu extends AbstractMenu {
 
     @Override

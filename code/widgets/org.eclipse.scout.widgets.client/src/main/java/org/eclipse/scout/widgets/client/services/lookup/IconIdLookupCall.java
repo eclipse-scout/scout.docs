@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.shared.Icons;
 
+@ClassId("8886aab2-f0ba-4bd8-a73f-29d31a0e6f81")
 public class IconIdLookupCall extends LocalLookupCall<String> {
   private static final long serialVersionUID = 1L;
 

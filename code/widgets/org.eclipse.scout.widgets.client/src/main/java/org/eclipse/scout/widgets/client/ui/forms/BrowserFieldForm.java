@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
@@ -66,6 +67,7 @@ import org.slf4j.LoggerFactory;
  * </pre>
  */
 @Order(8100)
+@ClassId("8149752e-43cc-4b26-8b4e-e6e8e7877216")
 public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleForm {
   private static final Logger LOG = LoggerFactory.getLogger(BrowserFieldForm.class);
 
@@ -130,6 +132,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
   }
 
   @Order(10)
+  @ClassId("0a756ada-c387-4b75-9703-6a82cbe8c6a3")
   public class MainBox extends AbstractGroupBox {
 
     @Override
@@ -138,6 +141,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(10)
+    @ClassId("1194e7f6-3ba0-4e0f-975f-96e43c54319a")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -151,6 +155,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(10)
+      @ClassId("04b1775b-6cad-45fe-8f88-c7385dcecf7b")
       public class BrowserField extends AbstractBrowserField {
 
         @Override
@@ -180,6 +185,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(22)
+      @ClassId("5eb5d910-85d2-4244-88c5-83bcbf04c796")
       public class SetUrlBox extends AbstractSequenceBox {
 
         @Override
@@ -188,6 +194,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(10)
+        @ClassId("d36bbb39-93be-4145-969b-578f71984965")
         public class URLField extends AbstractStringField {
 
           @Override
@@ -202,6 +209,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(20)
+        @ClassId("406f1863-24f2-4d4e-b07a-2834bea42332")
         public class SetUrlButton extends AbstractButton {
 
           @Override
@@ -222,6 +230,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(23)
+      @ClassId("f095737a-b591-41a2-a391-68d12e43f377")
       public class SetFileBox extends AbstractSequenceBox {
 
         @Override
@@ -230,6 +239,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(10)
+        @ClassId("fed1f643-24c4-4bcd-950e-3e50ce98b232")
         public class BinaryResourceField extends AbstractFileChooserField {
 
           @Override
@@ -244,6 +254,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(60)
+        @ClassId("9df05795-7039-4ee4-acb1-834062c66775")
         public class SetFileButton extends AbstractButton {
 
           @Override
@@ -259,6 +270,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(25)
+      @ClassId("fc3817d4-0da0-4f5f-9ea2-ffc6808f1d43")
       public class LinksBox extends AbstractSequenceBox {
 
         @Override
@@ -267,6 +279,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(10)
+        @ClassId("cf2e3364-de78-41b1-af8d-df2394b7d5f7")
         public class EclipseScoutButton extends AbstractLinkButton {
 
           @Override
@@ -292,6 +305,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(20)
+        @ClassId("2a28c202-59f8-4ad3-a4e6-72e3fd126728")
         public class BsiSoftwareButton extends AbstractLinkButton {
 
           @Override
@@ -317,6 +331,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(20)
+        @ClassId("44220eea-3c74-41b7-b46d-a24717d25150")
         public class TestHtmlButton extends AbstractLinkButton {
 
           @Override
@@ -348,6 +363,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(999)
+        @ClassId("546fd072-99a0-40c9-b1a4-1aaa5c0c9827")
         public class ClearButton extends AbstractLinkButton {
 
           @Override
@@ -369,6 +385,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(30)
+    @ClassId("29122615-c832-42f0-996e-4e607999f9ca")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -382,6 +399,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(10)
+      @ClassId("167ddf56-bfaa-4cb0-9d15-a9bb44362481")
       public class VisibleField extends AbstractBooleanField {
 
         @Override
@@ -406,6 +424,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(20)
+      @ClassId("267b17c1-dee0-4416-828b-00f94a2ca8b1")
       public class EnabledField extends AbstractBooleanField {
 
         @Override
@@ -430,6 +449,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(30)
+      @ClassId("49fe66bc-922d-4e83-9e3b-a6e5e0572c9f")
       public class ScrollableField extends AbstractBooleanField {
 
         @Override
@@ -454,6 +474,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(50)
+      @ClassId("5967c688-f93c-4e92-8dd0-5bbbb203b344")
       public class ShowInExternalWindowField extends AbstractBooleanField {
 
         @Override
@@ -478,6 +499,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(60)
+      @ClassId("723924ac-c72e-4d9e-8426-f16b7bb29f85")
       public class AutoCloseExternalWindowField extends AbstractBooleanField {
 
         @Override
@@ -502,6 +524,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
       }
 
       @Order(99)
+      @ClassId("4be62e14-f463-4819-ac1f-0a5403e8b18d")
       public class SandboxPermissionsField extends AbstractLinkButton {
 
         private BrowserFieldSandboxForm m_sandboxForm;
@@ -535,6 +558,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     }
 
     @Order(40)
+    @ClassId("f0910f85-3a9f-49e5-beed-23f61dbbf5eb")
     public class CloseButton extends AbstractCloseButton {
     }
   }

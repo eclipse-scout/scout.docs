@@ -12,8 +12,10 @@ package org.eclipse.scout.contacts.client.common;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+@ClassId("4b0e3cbd-94db-482e-962d-89c4c9bf2e67")
 public class AbstractEditMenu extends AbstractMenu {
 
   @Override

@@ -58,6 +58,7 @@ import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractMonthsBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 import org.eclipse.scout.widgets.shared.Icons;
 
+@ClassId("8e96f11d-2271-40d7-8d0b-1d6b9f852164")
 public class TabBoxForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -145,9 +146,11 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("c9764c26-2dcc-4292-8dcb-0f018d5ccdae")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("57183ffb-8458-4e88-b384-b709f1c1fda5")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -163,6 +166,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("803aa5d2-a928-4401-8f9a-8ed930eeb648")
     public class TabBox extends AbstractTabBox {
 
       @Override
@@ -171,6 +175,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("7b7743a9-bc03-4061-8580-f0f39df3b3b3")
       public class MonthsBox extends AbstractGroupBox {
 
         @Override
@@ -179,6 +184,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("d463263e-2ea0-4cc4-a2b3-2cea2b698ed9")
         public class MonthDetailsBox extends AbstractMonthsBox {
 
           @Override
@@ -189,6 +195,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("f9008cef-ba0e-47af-8746-a76ba61aab65")
       public class CommentsBox extends AbstractGroupBox {
 
         @Override
@@ -240,6 +247,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(3000.0)
+        @ClassId("4b87f7ec-d4c6-4891-affc-aba45e56c08d")
         public class CommentsField extends AbstractStringField {
 
           @Override
@@ -260,6 +268,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("9aa6fa8d-8bbe-4309-84eb-b9bbdc9baa12")
       public class DocumentsBox extends AbstractGroupBox {
 
         @Override
@@ -273,6 +282,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("d90ab648-3aac-4542-8457-5938e51fc64d")
         public class FileTableField extends AbstractFileTableField {
 
           @Override
@@ -367,6 +377,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(6)
+      @ClassId("bc69a55b-98ad-4b28-9e64-6854519a5c86")
       public class SayHelloMenu extends AbstractMenu {
 
         @Override
@@ -391,6 +402,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("7c02bc2d-b7ee-435c-b34c-0511d5e44b83")
       public class CountMenu extends AbstractMenu {
 
         @Override
@@ -421,10 +433,12 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(15)
+      @ClassId("87900bf3-eace-4e7e-b1b0-b07a5a06a879")
       public class SeparatorMenu extends AbstractMenuSeparator {
       }
 
       @Order(20)
+      @ClassId("e4a3c92d-c1ac-4408-9a85-f4e6c5e906a4")
       public class OptionsMenu extends AbstractMenu {
 
         @Override
@@ -473,6 +487,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("33918c6f-aed1-4f86-b1f0-fd7c2eabefcb")
     public class FieldVisibilityBox extends AbstractGroupBox {
 
       @Override
@@ -491,6 +506,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("0be16e4e-d7c4-42f2-bf4d-f3fff4082ad3")
       public class VisibleMonthsField extends AbstractBooleanField {
 
         @Override
@@ -515,6 +531,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("aafc477f-7e95-4e18-9706-466bd94428a9")
       public class VisibleCommentsField extends AbstractBooleanField {
 
         @Override
@@ -540,6 +557,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("fa7ffa1f-ab31-4399-b133-b054365c15bc")
       public class VisibleDocumentsField extends AbstractBooleanField {
 
         @Override
@@ -564,12 +582,14 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("77b0cce4-f0aa-4d65-ad44-e8265f989472")
       public class Placeholder1Field extends AbstractPlaceholderField {
       }
 
     }
 
     @Order(40)
+    @ClassId("7492850e-7abc-4f02-852f-83cff39d00b8")
     public class SetSelectedTabMenu extends AbstractMenu {
 
       @Override
@@ -578,6 +598,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("7d65777f-2890-490b-be40-d7b02a2e57d5")
       public class SelectMonthsMenu extends AbstractMenu {
 
         @Override
@@ -592,6 +613,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("c8734ec6-ea4e-4e2d-8336-8527e288a9ee")
       public class SelectCommentsMenu extends AbstractMenu {
 
         @Override
@@ -606,6 +628,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("138ca39a-21ce-4391-95b0-6b957bab292d")
       public class SelectDocumentsMenu extends AbstractMenu {
 
         @Override
@@ -622,6 +645,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("d3bfa99d-2bde-4a2b-a19e-493960000045")
     public class SetFocusTabMenu extends AbstractMenu {
 
       @Override
@@ -630,6 +654,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("9d60ab9d-6e0f-420c-8932-14f40c5a40c2")
       public class FocusMonthsMenu extends AbstractMenu {
 
         @Override
@@ -644,6 +669,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("f65ea46c-6fa2-4e51-a9e8-a8116164267c")
       public class FocusCommentsMenu extends AbstractMenu {
 
         @Override
@@ -658,6 +684,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30)
+      @ClassId("ddcc9512-683a-43fe-add0-d53427d8b98f")
       public class FocusDocumentsMenu extends AbstractMenu {
 
         @Override
@@ -672,6 +699,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40)
+      @ClassId("d45542a6-5bd9-4fea-b9bc-019d1624a345")
       public class FocusTabBoxMenu extends AbstractMenu {
 
         @Override
@@ -688,6 +716,7 @@ public class TabBoxForm extends AbstractForm implements IPageForm {
     }
 
     @Order(60)
+    @ClassId("d7c6b110-c70c-41ec-98dc-73f7e30c9add")
     public class CloseButton extends AbstractCloseButton {
     }
   }

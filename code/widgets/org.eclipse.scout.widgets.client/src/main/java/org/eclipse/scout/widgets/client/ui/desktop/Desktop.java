@@ -42,6 +42,7 @@ import org.eclipse.scout.widgets.client.ui.desktop.outlines.SimpleWidgetsOutline
 import org.eclipse.scout.widgets.client.ui.forms.OptionsForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 
+@ClassId("235a000b-de88-45a5-b11d-8b1a51c8a595")
 public class Desktop extends AbstractDesktop {
 
   private IForm m_benchModeForm = null;
@@ -135,6 +136,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(100)
+  @ClassId("3c252f67-ee22-4922-aedf-e908ff2ca8fe")
   public class UserProfileMenu extends AbstractMenu {
 
     @Override
@@ -204,6 +206,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(10)
+  @ClassId("ad73ca5c-3d2e-4ce9-a77b-75c312f7d10a")
   public class SimpleWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public SimpleWidgetsOutlineViewButton() {
       super(Desktop.this, SimpleWidgetsOutline.class);
@@ -216,6 +219,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(20)
+  @ClassId("ae712831-e55f-4db0-a55e-0b8480ce2ef7")
   public class AdvancedWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public AdvancedWidgetsOutlineViewButton() {
       super(Desktop.this, AdvancedWidgetsOutline.class);
@@ -223,6 +227,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(30)
+  @ClassId("bc31be84-84cc-4d54-a6a8-c06539e16694")
   public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
     public LayoutWidgetsOutlineViewButton() {
       super(Desktop.this, LayoutWidgetsOutline.class);
@@ -230,6 +235,7 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Order(40)
+  @ClassId("e32d5276-cbe6-40c5-b748-4b8e404dec6c")
   public class PagesOutlineViewButton extends AbstractOutlineViewButton {
     public PagesOutlineViewButton() {
       super(Desktop.this, PagesOutline.class);

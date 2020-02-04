@@ -11,6 +11,7 @@
 package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.OfficialVersion;
@@ -18,6 +19,7 @@ import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitBranchC
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitFolderConfigProperty;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitUrlConfigProperty;
 
+@ClassId("b13d5716-6ec9-4121-bd2f-60665d85731e")
 public abstract class AbstractWidgetsOutline extends AbstractOutline implements IWidgetsOutline {
 
   @Override

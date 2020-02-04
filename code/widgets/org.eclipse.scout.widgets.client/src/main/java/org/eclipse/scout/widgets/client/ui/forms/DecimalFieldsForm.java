@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.CloseButton;
@@ -52,6 +53,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.Sampl
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.SmallestValueButton;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
 
+@ClassId("87f25304-3e24-4e4d-b602-d39d23523acc")
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
   @Override
@@ -162,9 +164,11 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
   }
 
   @Order(10)
+  @ClassId("b05d388b-d68b-4976-af79-858aeda5d2f7")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("6be75bb8-9761-47e8-a6b8-76454e57f5e9")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -178,6 +182,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("576b3799-d4fd-4a48-ada4-a4e2c215fd5f")
       public class BigDecimalColumn extends AbstractGroupBox {
 
         @Override
@@ -196,6 +201,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(110)
+        @ClassId("eb3899a9-424a-44eb-8821-e3debb4f7cab")
         public class BigDecimalColumnField extends AbstractLabelField {
 
           @Override
@@ -215,6 +221,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(120)
+        @ClassId("ceae1cc7-6637-4a17-8800-d3916dedbc47")
         public class BigDecimalField extends AbstractBigDecimalField {
 
           @Override
@@ -224,6 +231,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(130)
+        @ClassId("e69d48f2-f302-4def-b91c-94e7e9f0a072")
         public class BigDecimalMandatoryField extends AbstractBigDecimalField {
 
           @Override
@@ -238,6 +246,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(140)
+        @ClassId("c7ab4d0b-c0b3-4957-a531-b81ad64227cd")
         public class BigDecimalDisabledField extends AbstractBigDecimalField {
 
           @Override
@@ -257,6 +266,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(150)
+        @ClassId("24c04721-045c-41a9-a160-47a2a33529d7")
         public class BigDecimalStyledField extends AbstractBigDecimalField {
 
           @Override
@@ -284,6 +294,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(20)
+    @ClassId("d19483bd-211a-4e9c-b373-9d8ae7043fcf")
     public class ConfigurationBox extends AbstractGroupBox {
 
       @Override
@@ -292,6 +303,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10)
+      @ClassId("e9a80355-b26a-476b-b992-3fc0031b2fbc")
       public class ConfigurationTopBox extends AbstractGroupBox {
 
         @Override
@@ -310,6 +322,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(10)
+        @ClassId("aaf8b581-73f8-419a-a056-6697d51d6109")
         public class InputField extends AbstractBigDecimalField {
 
           @Override
@@ -319,6 +332,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(20)
+        @ClassId("c40f6b23-fcae-4665-9c3a-344cf01b4b9c")
         public class Value0Field extends AbstractStringField {
 
           @Override
@@ -343,6 +357,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(25)
+        @ClassId("8ef94ef5-252e-4a96-ba7f-7bae382a7801")
         public class DisplayText0Field extends AbstractStringField {
 
           @Override
@@ -363,9 +378,11 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20)
+      @ClassId("accc3d6f-8e79-4db3-8f56-2913ed056bc5")
       public class ConfigurationBottomBox extends AbstractGroupBox {
 
         @Order(30)
+        @ClassId("87f5ee19-5cd4-489b-8942-288427afea10")
         public class MinimumValueField extends AbstractBigDecimalField {
 
           @Override
@@ -392,6 +409,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(40)
+        @ClassId("21a1d308-44ff-4c45-aa18-dbbd8f9a3bb0")
         public class MaximumValueField extends AbstractBigDecimalField {
 
           @Override
@@ -418,6 +436,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(50)
+        @ClassId("aeeaf695-17da-41d6-bc34-17a7193998ae")
         public class GroupingField extends AbstractBooleanField {
 
           @Override
@@ -442,6 +461,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(55)
+        @ClassId("fd4ee370-ed1b-42aa-900f-3be8e6ec7af4")
         public class UpdateDisplayTextOnModify extends AbstractBooleanField {
 
           @Override
@@ -466,6 +486,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(60)
+        @ClassId("c62f56b1-745c-43ae-9a6d-ac7d0f3b50c8")
         public class MinFractionDigitsField extends AbstractIntegerField {
 
           @Override
@@ -490,6 +511,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(70)
+        @ClassId("b79caadb-18c7-4a2e-9c67-d59c48892d91")
         public class MaxFractionDigitsField extends AbstractIntegerField {
 
           @Override
@@ -514,6 +536,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(80)
+        @ClassId("3c6d6a9f-ed78-45eb-9a7b-1fb3b3b36f91")
         public class FractionDigitsField extends AbstractIntegerField {
 
           @Override
@@ -538,6 +561,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(90)
+        @ClassId("9397685e-f648-4350-8f7d-e9d8cd0c1748")
         public class MultiplierField extends AbstractIntegerField {
 
           @Override
@@ -562,6 +586,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(100)
+        @ClassId("0cf7c3ea-7e68-4655-b3eb-d8420f456eaf")
         public class PercentField extends AbstractBooleanField {
 
           @Override
@@ -581,6 +606,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Order(110)
+        @ClassId("573e15c7-466d-44f3-8f58-53d3544a133f")
         public class FormatField extends AbstractStringField {
 
           @Override
@@ -608,6 +634,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(30)
+    @ClassId("7d47a251-3781-4a29-a6e6-921edc55da81")
     public class HighestValueButton extends AbstractButton {
 
       @Override
@@ -622,6 +649,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(40)
+    @ClassId("a3dc5038-5d70-43b5-a9b0-fe6c62d9d72a")
     public class SmallestValueButton extends AbstractButton {
 
       @Override
@@ -636,6 +664,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(50)
+    @ClassId("7a7411e1-8911-4cdd-af2a-96887a36583c")
     public class PiButton extends AbstractButton {
 
       /**
@@ -692,10 +721,12 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(60)
+    @ClassId("5f4b8a16-556f-4c6a-a0f2-6cf25e293bf1")
     public class CloseButton extends AbstractCloseButton {
     }
 
     @Order(70)
+    @ClassId("e9666531-34cf-41b4-9088-7563914e4b3c")
     public class SampleFormatButton extends AbstractButton {
 
       @Override

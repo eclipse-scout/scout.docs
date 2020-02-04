@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
@@ -15,6 +16,7 @@ import org.eclipse.scout.widgets.client.services.lookup.DisplayViewIdLookupCall.
  * @author Andreas Hoegger
  */
 @ApplicationScoped
+@ClassId("afbc1cc5-c1a7-488a-bd68-8dbe5bdf9c0e")
 public class DisplayViewIdLookupCall extends LocalLookupCall<DisplayViewId> {
 
   private static final long serialVersionUID = 1L;

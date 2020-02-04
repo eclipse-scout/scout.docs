@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithNodes;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 
 /**
  * @author aho
  */
+@ClassId("21291689-4b13-42a0-bfaa-79a2429e2b21")
 public class DesktopBenchLayoutPage extends AbstractPageWithNodes {
 
   @Override

@@ -18,12 +18,14 @@ import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileC
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm.MainBox.CancelButton;
 import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm.MainBox.IconField;
 import org.eclipsescout.demo.bahbah.client.ui.forms.IconChooserForm.MainBox.OkButton;
 import org.eclipsescout.demo.bahbah.shared.services.process.IIconProcessService;
 
+@ClassId("01a8f923-707e-4216-8a61-cc5020d81f0c")
 public class IconChooserForm extends AbstractForm {
 
   @Override
@@ -52,9 +54,11 @@ public class IconChooserForm extends AbstractForm {
   }
 
   @Order(10)
+  @ClassId("27dce0f5-c73c-4caf-a2df-a9c0ca2d298d")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("5abe5b50-fb55-4fb1-a9c6-6e89c5a693e4")
     public class IconField extends AbstractFileChooserField {
 
       @Override
@@ -69,10 +73,12 @@ public class IconChooserForm extends AbstractForm {
     }
 
     @Order(20)
+    @ClassId("40e91786-384a-4261-a5cb-f4c69f24f171")
     public class OkButton extends AbstractOkButton {
     }
 
     @Order(30)
+    @ClassId("e352b67d-2455-4b17-af26-2be9939245fb")
     public class CancelButton extends AbstractCancelButton {
     }
   }

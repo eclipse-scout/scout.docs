@@ -35,6 +35,7 @@ import org.eclipse.scout.widgets.client.ui.forms.BeanFieldForm.MainBox.ExamplesB
 import org.eclipse.scout.widgets.client.ui.forms.BeanFieldForm.MainBox.ExamplesBox.ExampleBeanField;
 
 @Order(6500)
+@ClassId("2b143f26-75a5-4975-99b4-66673ff1d3ef")
 public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -77,9 +78,11 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
   }
 
   @Order(10)
+  @ClassId("77e90765-7a95-40a9-8493-859d581bff03")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("4a7ff80a-8ba0-40e3-b967-ff5d0d96e61d")
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -120,6 +123,7 @@ public class BeanFieldForm extends AbstractForm implements IAdvancedExampleForm 
     }
 
     @Order(50)
+    @ClassId("a3c85e0b-38e7-4471-9570-684f828aaa65")
     public class CloseButton extends AbstractCloseButton {
     }
   }

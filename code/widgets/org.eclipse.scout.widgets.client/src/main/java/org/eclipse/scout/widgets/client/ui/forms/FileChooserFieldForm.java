@@ -63,6 +63,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.Gr
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractStatusButton;
 
 @Order(8050)
+@ClassId("9511705e-5754-4e83-a6b0-4ac8a357fbaa")
 public class FileChooserFieldForm extends AbstractForm implements IAdvancedExampleForm {
 
   @Override
@@ -134,9 +135,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
   }
 
   @Order(10)
+  @ClassId("21932ccf-f1f3-4a11-bb8c-0fe7e07cb3cf")
   public class MainBox extends AbstractGroupBox {
 
     @Order(10)
+    @ClassId("4c62f7aa-0c63-413e-aed0-92febdc3351a")
     public class GroupBox extends AbstractGroupBox {
 
       @Override
@@ -150,6 +153,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
       }
 
       @Order(10)
+      @ClassId("23bc5430-20a5-4fb8-8bf8-0cb0d9fe1f44")
       public class FileChooserFieldBox extends AbstractGroupBox {
 
         @Override
@@ -158,6 +162,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         }
 
         @Order(20)
+        @ClassId("007df315-782a-45a7-a0cb-2d9d3b472c08")
         public class ChooseAnImageField extends AbstractFileChooserField {
 
           @Override
@@ -177,6 +182,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         }
 
         @Order(70)
+        @ClassId("fc000a72-179c-4451-8274-9ba4324660e9")
         public class PropertiesGroupBox extends AbstractGroupBox {
 
           @Override
@@ -200,6 +206,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Order(10)
+          @ClassId("a6660a5f-9ee5-49c3-863a-a1ff29264171")
           public class EnabledField extends AbstractBooleanField {
 
             @Override
@@ -229,6 +236,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Order(20)
+          @ClassId("a59c2fe9-620f-4543-a3b8-fd3462e646ef")
           public class MandatoryField extends AbstractBooleanField {
 
             @Override
@@ -258,6 +266,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Order(30)
+          @ClassId("0600545a-97b2-41b1-a5ea-eb97d09688a2")
           public class StatusButton extends AbstractStatusButton {
 
             @Override
@@ -353,6 +362,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
       }
 
       @Order(30)
+      @ClassId("2000939e-756c-40e4-a964-2a1eb5f08b07")
       public class FileChooserBox extends AbstractGroupBox {
 
         @Override
@@ -361,6 +371,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         }
 
         @Order(10)
+        @ClassId("47144e31-947a-4c6e-8e8d-d897e82ca856")
         public class UploadButtonsBox extends AbstractSequenceBox {
 
           @Override
@@ -369,6 +380,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Order(40)
+          @ClassId("29fa9853-6660-49aa-8233-10ee169d3907")
           public class UploadSingleFileButton extends AbstractButton {
 
             @Override
@@ -392,6 +404,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Order(50)
+          @ClassId("014a4685-1640-42db-8a95-1218cb47c21a")
           public class UploadMultipleFilesButton extends AbstractButton {
 
             @Override
@@ -417,6 +430,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
       }
 
       @Order(60)
+      @ClassId("557f40d7-1c2d-4e3f-86c3-559d9ee0b368")
       public class ServerLogBox extends AbstractGroupBox {
 
         @Override
@@ -425,6 +439,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
         }
 
         @Order(1000)
+        @ClassId("0bcd89e7-7a46-4dc4-a3ab-c1d74adf08d6")
         public class ServerLogField extends AbstractTableField<Table> {
 
           @Override
@@ -446,6 +461,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             return false;
           }
 
+          @ClassId("7ae1aabf-0c87-4b02-803c-b277bb2740d0")
           public class Table extends AbstractTable {
 
             @Override
@@ -471,6 +487,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Order(10)
+            @ClassId("e628767c-fe3b-463c-8cda-786a17e727aa")
             public class FileColumn extends AbstractColumn<BinaryResource> {
 
               @Override
@@ -480,6 +497,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Order(20)
+            @ClassId("5983bb13-a536-4e3c-93e3-faa0b606cb0c")
             public class TimeColumn extends AbstractTimeColumn {
 
               @Override
@@ -499,6 +517,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Order(80)
+            @ClassId("10ac91f0-54f1-4b51-b0c5-4f60c880b38a")
             public class ActionColumn extends AbstractStringColumn {
 
               @Override
@@ -513,6 +532,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Order(90)
+            @ClassId("27dcfa78-6e07-49e8-8e0a-fd524b6f4f30")
             public class ClearMenu extends AbstractMenu {
 
               @Override
@@ -532,6 +552,7 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Order(100)
+            @ClassId("da1bd459-ec92-4b7e-8276-a3630a8de90c")
             public class OpenFileMenu extends AbstractMenu {
 
               @Override
@@ -560,10 +581,12 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
     }
 
     @Order(180)
+    @ClassId("2abab35c-c73b-429d-8012-2b4682f77982")
     public class CloseButton extends AbstractCloseButton {
     }
 
     @Order(280)
+    @ClassId("50bfd518-2935-4917-bf80-5954102cd868")
     public class OkButton extends AbstractOkButton {
 
       @Override
