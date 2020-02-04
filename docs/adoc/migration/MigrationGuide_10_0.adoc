@@ -59,7 +59,7 @@ To launch the migration application follow these steps:
 . Create an empty Eclipse workspace. The workspace is only necessary temporarily and can be deleted again after the migration.
 . Create a new simple Maven project in your new empty workspace (File -> New -> Project -> Maven -> Maven Project -> Next, choose `Create a simple project`). Click Next.
 . Choose a Group- and Artifact Id and click Finish. Since the project is only necessary for the migration and can be deleted afterwards, the naming does not matter.
-. Open the created pom.xml and add a dependency to `org.eclipse.scout.rt:org.eclipse.scout.migration.ecma6:10.0.0-SNAPSHOT` and update the project using Alt+F5.
+. Open the created pom.xml and add a dependency to `org.eclipse.scout.rt:org.eclipse.scout.migration.ecma6:10.0.3` and update the project using Alt+F5.
 . The migration app requires Java 8. Add the following properties to the pom.xml and press Alt+F5 again:
 +
 ----
