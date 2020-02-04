@@ -15,7 +15,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 This tutorial step introduces two additional concepts that are used in most Scout applications.
 Form field validation and template fields.
-Form field validation helps to keep data quality high and template fields are used to increase the code quality of Scout application.
+Form field validation helps to keep data quality high and template fields are used to increase the code quality of a Scout application.
 
 In addition to just retrieving and storing new data, a business application should also help the user to maintain the quality of the entered data.
 To validate user input, the Scout framework offers form field validation.
@@ -137,7 +137,7 @@ To create the empty field data class perform the following steps.
 ----
 package org.eclipse.scout.contacts.shared.common;
 
-public class AbstractUrlImageFieldData {
+public abstract class AbstractUrlImageFieldData {
 }
 ----
 
@@ -147,7 +147,6 @@ We are now ready to implement the template field class according to the followin
 . Select package `org.eclipse.scout.contacts.client.common` in folder `src/main/java`
 . Create class `AbstractUrlImageField` using kbd:[Ctrl+N]
 . Update the implementation according to <<lst-contacts_refactor_picture>>
-. Fix the imports using kbd:[Ctrl+Shift+O]
 
 [[lst-contacts_refactor_picture]]
 [source,java]
@@ -160,7 +159,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <2> Field `PictureUrlField` is refactored into the property `url` value. To transfer the content of this property to the field data object we need to add annotation `@FormData` to its getter and setter methods.
 
 The next step is to replace the original code of the picture field with the newly created template field.
-As the functionality of the template field exactly matches with the original code, class `PictureField` only needs to extend the newly created template field as shown in <<lst-contacts_picture_exends_urlimagefield>>.
+Delete the field `PictureUrlField` and remove all the code from the field `PictureField` and let `PictureField` extend the newly created template field as shown in <<lst-contacts_picture_exends_urlimagefield>>.
 
 [[lst-contacts_picture_exends_urlimagefield]]
 [source,java]
@@ -243,6 +242,8 @@ To be able to copy & paste the code in the following tutorial step you may use t
 * `AbstractAddressBox` for the address group template field
 * `AbstractNotesBox` for the notes tab template field
 
+Note that both the `AbstractAddressBox` and the `AbstractNotesBox` need their own form data object, whereas the `AbstractEmailField` does not.
+
 Replacing the concrete fields with the template fields in the person form will result in a number of compile errors in the field getter methods of the person form.
 In the case of the "Contacts" application these getter methods are not needed and can simply be deleted.
 
@@ -270,5 +271,4 @@ Using the created picture template field we can now update the image in the pict
 image::{imgsdir}/contacts_tutorial_result_step_5b.png[]
 
 In the next tutorial step we are going to implement the company form to enter and edit company information.
-For the creation of this form we can then reuse the template fields that we have created.
-
+For the creation of this form we can reuse the template fields that we have created.

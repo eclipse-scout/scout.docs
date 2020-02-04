@@ -19,13 +19,12 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 == "`Hello World`" Tutorial
 
 The "`Hello World`" chapter walks you through the creation of an Eclipse Scout client server application.
-When the user starts the client part of this application, the client connects to the server.footnote:[
+When the user starts the client part of this application, the client connects to the server footnote:[
 The Scout server part of the "`Hello World`" application will be running on a web server.
 ]
 and asks for some text content that is to be displayed to the user.
 Next, the server retrieves the desired information and sends it back to the client.
-The client then copies the content obtained from the server into a text field widget.
-Finally, the client displays the message obtained from the server in a text field widget.
+The client then copies the content obtained from the server into a text field widget and displays it.
 
 The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
 We will start by building the application from scratch and then we'll deploy the complete application to a Tomcat web server.

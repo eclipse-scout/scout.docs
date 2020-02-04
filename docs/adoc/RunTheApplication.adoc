@@ -29,7 +29,7 @@ of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_
 .Starting the Hello World application.
 image::{imgsdir}/sdk_start_client_product.png[]
 
-Starting the Scout frontend server works exactely the same.
+Starting the Scout frontend server works exactly the same.
 But first select the `[webapp] dev ui.launch` file in the Eclipse IDE.
 This launch file is located under module `helloworld.ui.html.app.dev` in the Package Explorer.
 

@@ -26,7 +26,7 @@ Alternatively, you can also view the source code of the "`Contacts`" demo applic
 "`Contacts`" on git-link:code/contacts/[Github].
 ].
 
-Figure <<img-app_contacts_personpage>> below shows the "`Contacts`" application after connecting to the Scout UI application.
+<<img-app_contacts_personpage>> below shows the "`Contacts`" application after connecting to the Scout UI application.
 
 [[img-app_contacts_personpage]]
 .The "`Contacts`" application with the person page.
@@ -53,7 +53,7 @@ For entering and editing of data in Scout applications views are used in most ca
 Views are displayed in the bench area of a Scout application.
 Several views can also be opened simultaneously.
 To show a specific view the user has to click on the view button associated with the desired view.
-An example of an opened view is shown for person "Alice" in in <<img-app_contacts_personform>>.
+An example of an opened view is shown for person "Alice" in <<img-app_contacts_personform>>.
 
 [[img-app_contacts_personform]]
 .The "`Contacts`" application with a person opened in a form.
@@ -64,16 +64,15 @@ image::{imgsdir}/app_contacts_personform.png[]
 === Tutorial Overview
 
 This tutorial walks you through the implementation of a Scout application consisting of a frontend and a backend application.
-The frontend application contains outlines with navigation trees, pages to present information in tabular form and forms to view and edit data.
-In the backend application the tutorial shows how to implement services, logging, databases access, and several other aspects of Scout applications.
+The frontend application contains outlines with navigation trees, pages to present information in tabular form, and forms to view and edit data.
+In the backend application the tutorial shows how to implement services, logging, database access, and several other aspects of Scout applications.
 
-The tutorial is organized into the sequence of the consecutive steps listed below.
-Each of the step is described in a individual section that results in a executable application that can be tested and compared against the full "Contacts" demo application.
+The tutorial is organized as a sequence of consecutive steps as listed below.
+Each step is described in a individual section that results in a executable application that can be tested and compared against the full "Contacts" demo application.
 
 Step 1: Setting up the Initial Project (<<sec-contacts_initial_project>>)::
-We start with an empty workspace and the "Hello World" project.
-At the end of step one we have a project setup that matches the "Contacts" application.
-This includes the organization and naming of Maven modules and the individual Java packages.
+We will create a new project and prepare the generated code base by adapting existing components and deleting unnecessary components.
+At the end of step one we have a project setup that allows us to start adding new components to the application.
 
 Step 2: Adding the Person and Organization Page (<<sec-contacts_pages>>)::
 The second step adds the user interface components to display persons and organizations.
@@ -81,10 +80,10 @@ For this a "Persons" page and an "Organizations" page are created and added to t
 
 Step 3: Creating and Accessing the Database (<<sec-contacts_jdbc>>)::
 This step concentrates on the backend of the "Contacts" application.
-The covered topics includes dealing with application properties, setup and access of a database and using the database to provide data for the person and organization page created in the previous step.
+The covered topics include dealing with application properties, setup and access of a database and using the database to provide data for the person and organization page created in the previous step.
 
 Step 4: Adding a Form to Create/Edit Persons (<<sec-contacts_forms>>)::
-Having access to the database is used in this step to add the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application.
+After having access to the database the components that allow a user to create and edit persons and organizations in the user interface of the "Contacts" application can be added.
 In addition, this tutorial step also demonstrates how to design and implement complex form layouts with the Scout framework.
 
 Step 5: Form Field Validation and Template Fields (<<sec-contacts_fields>>)::
