@@ -21,7 +21,7 @@ import org.eclipse.scout.rt.platform.util.StringUtility;
     sdkCommand = SdkCommand.CREATE,
     defaultSubtypeSdkCommand = DefaultSubtypeSdkCommand.CREATE)
 // tag::menu[]
-public class AbstractUrlImageField extends AbstractImageField {
+public abstract class AbstractUrlImageField extends AbstractImageField {
 
   // end::menu[]
   private String url; // <2>
@@ -54,7 +54,7 @@ public class AbstractUrlImageField extends AbstractImageField {
 
   @Override
   protected String getConfiguredImageId() {
-    return Icons.Person;
+    return Icons.User;
   }
 
   // end::template[]
