@@ -247,7 +247,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
 
       @Override
       protected void execInitField() {
-        setFormField(getAccordionField());
+        setField(getAccordionField());
       }
 
       @Override

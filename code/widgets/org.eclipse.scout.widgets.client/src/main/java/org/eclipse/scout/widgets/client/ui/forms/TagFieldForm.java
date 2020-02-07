@@ -127,7 +127,7 @@ public class TagFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execInitField() {
-        setFormField(getDefaultField());
+        setField(getDefaultField());
       }
     }
 

@@ -859,7 +859,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
 
       @Override
       protected void execInitField() {
-        setFormField(getAccordionField());
+        setField(getAccordionField());
       }
 
       @Override

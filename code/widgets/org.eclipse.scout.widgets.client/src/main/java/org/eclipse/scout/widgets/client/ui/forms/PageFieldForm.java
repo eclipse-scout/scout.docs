@@ -101,7 +101,7 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Override
       protected void execInitField() {
-        setFormField(getPageBox());
+        setField(getPageBox());
       }
     }
 

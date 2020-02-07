@@ -873,7 +873,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Override
       protected void execInitField() {
-        setFormField(getTileField());
+        setField(getTileField());
       }
 
       @Override

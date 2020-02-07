@@ -30,14 +30,14 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 @ClassId("6dc4d5e6-c972-4d81-a218-a5f167363259")
 public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
-  private IFormField m_formField;
+  private IFormField m_field;
 
-  public IFormField getFormField() {
-    return m_formField;
+  public IFormField getField() {
+    return m_field;
   }
 
-  public void setFormField(IFormField formField) {
-    m_formField = formField;
+  public void setField(IFormField field) {
+    m_field = field;
   }
 
   @Override
@@ -114,12 +114,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setEnabled(getValue());
+      getField().setEnabled(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isEnabled());
+      setValue(getField().isEnabled());
     }
   }
 
@@ -139,12 +139,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setVisible(getValue());
+      getField().setVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isVisible());
+      setValue(getField().isVisible());
     }
   }
 
@@ -164,12 +164,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setLabelVisible(getValue());
+      getField().setLabelVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isLabelVisible());
+      setValue(getField().isLabelVisible());
     }
   }
 
@@ -189,12 +189,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setStatusVisible(getValue());
+      getField().setStatusVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isStatusVisible());
+      setValue(getField().isStatusVisible());
     }
   }
 
@@ -214,12 +214,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setMandatory(getValue());
+      getField().setMandatory(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isMandatory());
+      setValue(getField().isMandatory());
     }
   }
 
@@ -239,12 +239,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setLoading(getValue());
+      getField().setLoading(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().isLoading());
+      setValue(getField().isLoading());
     }
   }
 
@@ -269,12 +269,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setDisabledStyle(getValue());
+      getField().setDisabledStyle(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().getDisabledStyle());
+      setValue(getField().getDisabledStyle());
     }
   }
 
@@ -289,12 +289,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setLabel(getValue());
+      getField().setLabel(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().getLabel());
+      setValue(getField().getLabel());
     }
   }
 
@@ -319,12 +319,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setLabelPosition(getValue());
+      getField().setLabelPosition(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().getLabelPosition());
+      setValue(getField().getLabelPosition());
     }
   }
 
@@ -362,12 +362,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
         }
       }
 
-      getFormField().setLabelWidthInPixel(width);
+      getField().setLabelWidthInPixel(width);
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().getLabelWidthInPixel() + "");
+      setValue(getField().getLabelWidthInPixel() + "");
     }
   }
 
@@ -382,12 +382,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getFormField().setTooltipText(getValue());
+      getField().setTooltipText(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getFormField().getTooltipText());
+      setValue(getField().getTooltipText());
     }
   }
 
@@ -409,16 +409,16 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     protected void execChangedValue() {
       MultiStatus errorStatus = createStatus(getValue());
       if (errorStatus == null) {
-        getFormField().clearErrorStatus();
+        getField().clearErrorStatus();
       }
       else {
-        getFormField().setErrorStatus(errorStatus);
+        getField().setErrorStatus(errorStatus);
       }
     }
 
     @Override
     protected void execInitField() {
-      IMultiStatus errorStatus = getFormField().getErrorStatus();
+      IMultiStatus errorStatus = getField().getErrorStatus();
       if (errorStatus != null) {
         setValue(errorStatus.getSeverity());
       }
