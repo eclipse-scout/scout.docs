@@ -60,12 +60,25 @@ To launch the migration application follow these steps:
 . Create a new simple Maven project in your new empty workspace (File -> New -> Project -> Maven -> Maven Project -> Next, choose `Create a simple project`). Click Next.
 . Choose a Group- and Artifact Id and click Finish. Since the project is only necessary for the migration and can be deleted afterwards, the naming does not matter.
 . Open the created pom.xml and add a dependency to `org.eclipse.scout.rt:org.eclipse.scout.migration.ecma6:10.0.0-SNAPSHOT` and update the project using Alt+F5.
-. The migration app requires Java 8. Add the following properties to the pom.xml and press Alt+F5 again:
++
+----
+  <dependencies>
+    <dependency>
+	  <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.migration.ecma6</artifactId>
+	  <version>10.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+----
+
+. The migration app requires Java 8. Also make sure the migration project uses the same encoding as your source code files (a regular scout project uses UTF-8 by default).
+Add the following properties to the pom.xml and press Alt+F5 again:
 +
 ----
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 ----
 . Create a new class `Config` in src/main/java extending the class `org.eclipse.scout.migration.ecma6.configuration.Configuration`.
