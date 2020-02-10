@@ -997,8 +997,12 @@ Before you can open your application in the browser, you need to build it. The b
 
 The `dist` folder contains three sub folders:
 
-. dev: contains not minified versions of the JS and CSS bundles with https://developer.mozilla.org/de/docs/Tools/Debugger/How_to/Use_a_source_map[Source Maps]. The source maps are necessary to map the bundles to the actual source files which makes debugging a lot easier. The Scout server delivers these files if it runs in dev mode (`scout.devMode=true`).
-. prod: contains minified versions of the JS and CSS bundles without source maps. Content hashes are generated and added to the files for optimal cashing. The Scout server delivers these files if it runs in production mode (`scout.devMode=false`).
+. dev: contains not minified versions of the JS and CSS bundles with https://developer.mozilla.org/de/docs/Tools/Debugger/How_to/Use_a_source_map[Source Maps].
+The source maps are necessary to map the bundles to the actual source files which makes debugging a lot easier.
+The Scout server delivers such bundles if it runs in dev mode (`scout.devMode=true`).
+. prod: contains minified versions of the JS and CSS bundles with restricted source maps (the maps don't contain the actual source code, only the information necessary to create meaningful stack traces, see also the https://webpack.js.org/configuration/devtool/[devtool] property `nosources-source-map`).
+Content hashes are generated and added to the bundles for optimal cashing.
+The Scout server delivers such bundles if it runs in production mode (`scout.devMode=false`).
 . res: contains all static resources from the various resource folders specified by the `resDir` array, see <<Static Web Resources>>.
 
 TIP: If the property `scout.urlHints.enabled` is set to `true`, the dev files can be requested on the fly even if the server does not run in `devMode`. Just add the query parameter `?debug=true` and the files in the dev folder instead of the ones in the prod folder are delivered. This can be very useful to debug a deployed application.
