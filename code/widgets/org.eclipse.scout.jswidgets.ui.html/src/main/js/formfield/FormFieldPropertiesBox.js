@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models, numbers, objects, Status} from '@eclipse-scout/core';
+import {GroupBox, models, numbers, objects, Status, DefaultStatus} from '@eclipse-scout/core';
 import FormFieldPropertiesBoxModel from './FormFieldPropertiesBoxModel';
 
 export default class FormFieldPropertiesBox extends GroupBox {
@@ -106,16 +106,6 @@ export default class FormFieldPropertiesBox extends GroupBox {
     statusPositionField.on('propertyChange', this._onPropertyChange.bind(this));
   }
 
-  _createErrorStatus(severity) {
-    if (!severity) {
-      return null;
-    }
-    return new Status({
-      severity: severity,
-      message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, severity))
-    });
-  }
-
   _onPropertyChange(event) {
     if (event.propertyName === 'value' && event.source.id === 'EnabledField') {
       this.field.setEnabled(event.newValue);
@@ -148,7 +138,14 @@ export default class FormFieldPropertiesBox extends GroupBox {
         this.field.setLabelWidthInPixel(numbers.ensure(event.newValue));
       }
     } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
-      this.field.setErrorStatus(this._createErrorStatus(event.newValue));
+      if (event.newValue) {
+        this.field.addErrorStatus(new DefaultStatus({
+          severity: event.newValue,
+          message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, event.newValue))
+        }));
+      } else {
+        this.field.removeErrorStatus(DefaultStatus);
+      }
     } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
       this.field.setTooltipText(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'TooltipAnchorField') {
