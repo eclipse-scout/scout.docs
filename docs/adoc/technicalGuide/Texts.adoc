@@ -97,3 +97,11 @@ You need to respect the format defined by the Java Properties class. In particul
  'ß' => "\u00DF"
 
 The encoding is the "Unicode escape characters": \uHHHH where HHHH is a hexadecimal id of the character in the http://en.wikipedia.org/wiki/List_of_Unicode_characters[Unicode character table]. Read more on the .properties File on http://en.wikipedia.org/wiki/.properties[wikipedia].
+
+==== File Watcher
+
+The `NlsFileWatcher` observes changes in text property files.
+If a change in a text property file occurs, the nls resource bundle cache will be invalidated.
+This means that there is no need to restart the server when working on texts and translations.
+The file watcher is only active if `scout.devMode=true` is set and can be disabled with `scout.dev.texts.fileWatcherEnabled=false`.
+By default, the file watcher is enabled in development mode.
