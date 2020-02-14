@@ -19,11 +19,11 @@ module.exports = (env, args) => {
   const config = baseConfig(env, args);
 
   config.entry = {
-    'widgets': './src/main/js/index.js',
+    'widgets': './src/main/js/widgets.js',
     'login': './src/main/js/login.js',
     'logout': './src/main/js/logout.js',
-    'widgets-theme': './src/main/js/theme.less',
-    'widgets-theme-dark': './src/main/js/theme-dark.less'
+    'widgets-theme': './src/main/js/widgets-theme.less',
+    'widgets-theme-dark': './src/main/js/widgets-theme-dark.less'
   };
 
   return config;

@@ -17,9 +17,9 @@ module.exports = (env, args) => {
   const config = baseConfig(env, args);
 
   config.entry = {
-    'jswidgets': './src/main/js/index.js',
-    'jswidgets-theme': './src/main/js/theme.less',
-    'jswidgets-theme-dark': './src/main/js/theme-dark.less'
+    'jswidgets': './src/main/js/jswidgets.js',
+    'jswidgets-theme': './src/main/js/jswidgets-theme.less',
+    'jswidgets-theme-dark': './src/main/js/jswidgets-theme-dark.less'
   };
 
   return config;

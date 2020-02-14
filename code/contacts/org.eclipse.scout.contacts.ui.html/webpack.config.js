@@ -17,11 +17,11 @@ module.exports = (env, args) => {
   const config = baseConfig(env, args);
 
   config.entry = {
-    'contacts': './src/main/js/index.js',
+    'contacts': './src/main/js/contacts.js',
     'login': './src/main/js/login.js',
     'logout': './src/main/js/logout.js',
-    'contacts-theme': './src/main/js/theme.less',
-    'contacts-theme-dark': './src/main/js/theme-dark.less'
+    'contacts-theme': './src/main/js/contacts-theme.less',
+    'contacts-theme-dark': './src/main/js/contacts-theme-dark.less'
   };
 
   return config;
