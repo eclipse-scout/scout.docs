@@ -60,7 +60,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.Propertie
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.VirtualField;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
 import org.eclipse.scout.widgets.client.ui.tile.ICustomTile;

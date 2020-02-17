@@ -26,7 +26,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.CloseButto
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widgets.client.ui.forms.TagFieldForm.MainBox.ExamplesBox.DisabledField;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 
 @ClassId("a057c8a8-2294-47c8-b1bd-3536f2004dac")
 public class TagFieldForm extends AbstractForm implements IPageForm {

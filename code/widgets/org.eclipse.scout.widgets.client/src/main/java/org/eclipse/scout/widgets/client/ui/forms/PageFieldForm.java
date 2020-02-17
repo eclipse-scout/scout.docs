@@ -23,8 +23,8 @@ import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithDetailFormTable
 import org.eclipse.scout.widgets.client.ui.forms.PageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.PageFieldForm.MainBox.DetailBox.PageBox;
 import org.eclipse.scout.widgets.client.ui.forms.PageFieldForm.MainBox.GroupBoxPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractGroupBoxPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.groupbox.AbstractGroupBoxPropertiesBox;
 
 @ClassId("2c4a6049-64f5-4b94-ba41-f36da90930da")
 public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm {
@@ -88,9 +88,9 @@ public class PageFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Override
       protected void execInitField() {
-        setGroupBox(getPageBox());
+        setField(getPageBox());
         // Fields inside the page field are configured to use FULL_WIDTH -> changing the grid column count would not have any effect
-        getGridColumnCountField().setVisible(false);
+        getFieldByClass(GridColumnCountField.class).setVisible(false);
       }
 
     }

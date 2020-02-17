@@ -8,30 +8,24 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.widgets.client.ui.template.formfield;
+package org.eclipse.scout.widgets.client.ui.forms.fields.valuefield;
 
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
-import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.template.formfield.ClearableLookupCall;
 
 @ClassId("1cfd6acd-23ac-4550-92b2-477581cceda2")
-public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractGroupBox {
-
-  private AbstractValueField<V> m_field;
+public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractPropertiesBox<AbstractValueField<V>> {
 
   @Override
   protected String getConfiguredLabel() {
     return "Value Field Properties";
-  }
-
-  @Override
-  protected boolean getConfiguredExpandable() {
-    return true;
   }
 
   protected String valueToString(V value) {
@@ -41,6 +35,7 @@ public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractGroupBo
     return value.toString();
   }
 
+  @Override
   public void setField(AbstractValueField<V> field) {
     m_field = field;
     m_field.addPropertyChangeListener((event) -> {
@@ -51,8 +46,6 @@ public abstract class AbstractValueFieldPropertiesBox<V> extends AbstractGroupBo
         case IValueField.PROP_DISPLAY_TEXT:
           getFieldByClass(DisplayTextField.class).setValue(field.getDisplayText());
           break;
-        case IValueField.PROP_CLEARABLE:
-          getFieldByClass(ClearableField.class).setValue(field.getClearable());
       }
     });
   }

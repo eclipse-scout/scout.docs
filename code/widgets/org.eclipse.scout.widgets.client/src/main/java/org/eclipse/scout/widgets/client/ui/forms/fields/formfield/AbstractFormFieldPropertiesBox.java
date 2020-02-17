@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2018 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.widgets.client.ui.template.formfield;
+package org.eclipse.scout.widgets.client.ui.forms.fields.formfield;
 
 import java.util.List;
 
+import org.eclipse.scout.rt.client.ui.form.fields.AbstractFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
-import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractProposalField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -26,76 +26,18 @@ import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
+import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.template.formfield.DisabledStyleLookupCall;
+import org.eclipse.scout.widgets.client.ui.template.formfield.LabelPositionLookupCall;
+import org.eclipse.scout.widgets.client.ui.template.formfield.LabelWidthInPixelLookupCall;
+import org.eclipse.scout.widgets.client.ui.template.formfield.StatusSeverityLookupCall;
 
 @ClassId("6dc4d5e6-c972-4d81-a218-a5f167363259")
-public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
-
-  private IFormField m_field;
-
-  public IFormField getField() {
-    return m_field;
-  }
-
-  public void setField(IFormField field) {
-    m_field = field;
-  }
+public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesBox<AbstractFormField> {
 
   @Override
   protected String getConfiguredLabel() {
     return "Form Field Properties";
-  }
-
-  public LabelVisibleField getLabelVisibleField() {
-    return getFieldByClass(LabelVisibleField.class);
-  }
-
-  public MandatoryField getMandatoryField() {
-    return getFieldByClass(MandatoryField.class);
-  }
-
-  public DisabledStyleField getDisabledStyleField() {
-    return getFieldByClass(DisabledStyleField.class);
-  }
-
-  public LabelField getLabelField() {
-    return getFieldByClass(LabelField.class);
-  }
-
-  public LabelPositionField getLabelPositionField() {
-    return getFieldByClass(LabelPositionField.class);
-  }
-
-  public LabelWidthInPixelField getLabelWidthInPixelField() {
-    return getFieldByClass(LabelWidthInPixelField.class);
-  }
-
-  public TooltipTextField getTooltipTextField() {
-    return getFieldByClass(TooltipTextField.class);
-  }
-
-  public ErrorStatusField getErrorStatusField() {
-    return getFieldByClass(ErrorStatusField.class);
-  }
-
-  public LoadingField getLoadingField() {
-    return getFieldByClass(LoadingField.class);
-  }
-
-  public StatusVisibleField getStatusVisibleField() {
-    return getFieldByClass(StatusVisibleField.class);
-  }
-
-  public VisibleField getVisibleField() {
-    return getFieldByClass(VisibleField.class);
-  }
-
-  public EnabledField getEnabledField() {
-    return getFieldByClass(EnabledField.class);
-  }
-
-  @Override
-  protected boolean getConfiguredExpandable() {
-    return true;
   }
 
   @Order(1000)
@@ -114,12 +56,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setEnabled(getValue());
+      m_field.setEnabled(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isEnabled());
+      setValue(m_field.isEnabled());
     }
   }
 
@@ -139,12 +81,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setVisible(getValue());
+      m_field.setVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isVisible());
+      setValue(m_field.isVisible());
     }
   }
 
@@ -164,12 +106,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setLabelVisible(getValue());
+      m_field.setLabelVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isLabelVisible());
+      setValue(m_field.isLabelVisible());
     }
   }
 
@@ -189,12 +131,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setStatusVisible(getValue());
+      m_field.setStatusVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isStatusVisible());
+      setValue(m_field.isStatusVisible());
     }
   }
 
@@ -214,12 +156,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setMandatory(getValue());
+      m_field.setMandatory(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isMandatory());
+      setValue(m_field.isMandatory());
     }
   }
 
@@ -239,12 +181,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setLoading(getValue());
+      m_field.setLoading(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().isLoading());
+      setValue(m_field.isLoading());
     }
   }
 
@@ -269,12 +211,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setDisabledStyle(getValue());
+      m_field.setDisabledStyle(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().getDisabledStyle());
+      setValue(m_field.getDisabledStyle());
     }
   }
 
@@ -289,12 +231,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setLabel(getValue());
+      m_field.setLabel(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().getLabel());
+      setValue(m_field.getLabel());
     }
   }
 
@@ -319,12 +261,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setLabelPosition(getValue());
+      m_field.setLabelPosition(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().getLabelPosition());
+      setValue(m_field.getLabelPosition());
     }
   }
 
@@ -362,12 +304,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
         }
       }
 
-      getField().setLabelWidthInPixel(width);
+      m_field.setLabelWidthInPixel(width);
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().getLabelWidthInPixel() + "");
+      setValue(m_field.getLabelWidthInPixel() + "");
     }
   }
 
@@ -382,12 +324,12 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getField().setTooltipText(getValue());
+      m_field.setTooltipText(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getField().getTooltipText());
+      setValue(m_field.getTooltipText());
     }
   }
 
@@ -409,16 +351,16 @@ public class AbstractFormFieldPropertiesBox extends AbstractGroupBox {
     protected void execChangedValue() {
       MultiStatus errorStatus = createStatus(getValue());
       if (errorStatus == null) {
-        getField().clearErrorStatus();
+        m_field.clearErrorStatus();
       }
       else {
-        getField().setErrorStatus(errorStatus);
+        m_field.setErrorStatus(errorStatus);
       }
     }
 
     @Override
     protected void execInitField() {
-      IMultiStatus errorStatus = getField().getErrorStatus();
+      IMultiStatus errorStatus = m_field.getErrorStatus();
       if (errorStatus != null) {
         setValue(errorStatus.getSeverity());
       }

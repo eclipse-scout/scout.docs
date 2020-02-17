@@ -1,66 +1,29 @@
 /*
- * Copyright (c) 2018 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/org/documents/edl-v10.html
  *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.widgets.client.ui.template.formfield;
+package org.eclipse.scout.widgets.client.ui.forms.fields.groupbox;
 
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.groupbox.IGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox.DisabledStyleField;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox.LoadingField;
+import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
 
 @ClassId("11712235-408c-40b3-b90c-1b84877d6630")
-public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
-
-  private IGroupBox m_groupBox;
-
-  public IGroupBox getGroupBox() {
-    return m_groupBox;
-  }
+public abstract class AbstractGroupBoxPropertiesBox extends AbstractPropertiesBox<AbstractGroupBox> {
 
   @Override
   protected String getConfiguredLabel() {
     return "Group Box Properties";
-  }
-
-  public void setGroupBox(IGroupBox groupBox) {
-    m_groupBox = groupBox;
-  }
-
-  public DisabledStyleField getDisabledStyleField() {
-    return getFieldByClass(DisabledStyleField.class);
-  }
-
-  public GridColumnCountField getGridColumnCountField() {
-    return getFieldByClass(GridColumnCountField.class);
-  }
-
-  public LoadingField getLoadingField() {
-    return getFieldByClass(LoadingField.class);
-  }
-
-  public BorderVisibleField getBorderVisibleField() {
-    return getFieldByClass(BorderVisibleField.class);
-  }
-
-  public ExpandableField getExpandableField() {
-    return getFieldByClass(ExpandableField.class);
-  }
-
-  @Override
-  protected boolean getConfiguredExpandable() {
-    return true;
   }
 
   @Order(1000)
@@ -79,12 +42,12 @@ public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getGroupBox().setBorderVisible(getValue());
+      m_field.setBorderVisible(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getGroupBox().isBorderVisible());
+      setValue(m_field.isBorderVisible());
     }
   }
 
@@ -104,12 +67,12 @@ public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getGroupBox().setExpandable(getValue());
+      m_field.setExpandable(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getGroupBox().isExpandable());
+      setValue(m_field.isExpandable());
     }
   }
 
@@ -129,12 +92,12 @@ public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getGroupBox().setExpanded(getValue());
+      m_field.setExpanded(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getGroupBox().isExpanded());
+      setValue(m_field.isExpanded());
     }
   }
 
@@ -149,12 +112,12 @@ public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getGroupBox().setSubLabel(getValue());
+      m_field.setSubLabel(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getGroupBox().getSubLabel());
+      setValue(m_field.getSubLabel());
     }
   }
 
@@ -169,12 +132,12 @@ public class AbstractGroupBoxPropertiesBox extends AbstractGroupBox {
 
     @Override
     protected void execChangedValue() {
-      getGroupBox().setGridColumnCount(getValue());
+      m_field.setGridColumnCount(getValue());
     }
 
     @Override
     protected void execInitField() {
-      setValue(getGroupBox().getGridColumnCount());
+      setValue(m_field.getGridColumnCount());
     }
   }
 }

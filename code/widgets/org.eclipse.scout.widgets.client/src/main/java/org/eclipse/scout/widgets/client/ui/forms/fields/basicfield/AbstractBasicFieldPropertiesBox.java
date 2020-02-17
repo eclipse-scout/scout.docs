@@ -8,28 +8,18 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.widgets.client.ui.template.formfield;
+package org.eclipse.scout.widgets.client.ui.forms.fields.basicfield;
 
 import org.eclipse.scout.rt.client.ui.form.fields.AbstractBasicField;
-import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
 
 @ClassId("5fb63475-4bdb-48b3-b585-83e9c217d480")
-public abstract class AbstractBasicFieldPropertiesBox extends AbstractGroupBox {
-
-  private AbstractBasicField<?> m_field;
+public abstract class AbstractBasicFieldPropertiesBox<V> extends AbstractPropertiesBox<AbstractBasicField<V>> {
 
   @Override
   protected String getConfiguredLabel() {
     return "Basic Field Properties";
   }
 
-  @Override
-  protected boolean getConfiguredExpandable() {
-    return true;
-  }
-
-  public void setField(AbstractBasicField<?> field) {
-    m_field = field;
-  }
 }

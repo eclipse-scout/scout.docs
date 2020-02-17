@@ -39,7 +39,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.Be
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractViewButtonPropertesBox;
+import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropertiesBox;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
@@ -394,7 +394,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
       @Order(2000)
       @ClassId("3e0346c2-ac0e-490a-ab7d-0ed2b4c1e997")
-      public class ViewButtonBox extends AbstractViewButtonPropertesBox {
+      public class ViewButtonBox extends AbstractViewButtonPropertiesBox {
 
       }
 

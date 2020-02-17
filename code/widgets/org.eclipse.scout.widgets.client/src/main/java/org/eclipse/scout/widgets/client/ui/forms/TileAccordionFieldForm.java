@@ -63,7 +63,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.VirtualField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileGroupManager;
 import org.eclipse.scout.widgets.client.ui.tile.ICustomTile;

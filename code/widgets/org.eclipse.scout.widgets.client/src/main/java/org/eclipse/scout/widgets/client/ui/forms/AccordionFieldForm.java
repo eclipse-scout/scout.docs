@@ -30,7 +30,7 @@ import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.Prop
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
-import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractFormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
 
 @ClassId("59689d49-e6a5-4641-9d1a-a6a6ce98d9bf")
