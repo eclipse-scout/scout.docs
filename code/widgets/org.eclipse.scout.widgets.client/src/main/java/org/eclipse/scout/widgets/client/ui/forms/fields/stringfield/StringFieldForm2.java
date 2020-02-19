@@ -71,16 +71,11 @@ public class StringFieldForm2 extends AbstractForm implements IPageForm {
 
     @Order(200)
     @ClassId("c341b1d1-02ce-4856-807f-f2adec0bd54d")
-    public class StringFieldPropertiesBox extends AbstractGroupBox {
+    public class StringFieldPropertiesBox extends AbstractStringFieldPropertiesBox {
 
       @Override
-      protected String getConfiguredLabel() {
-        return "String Field Properties";
-      }
-
-      @Override
-      protected boolean getConfiguredExpandable() {
-        return true;
+      protected void execInitField() {
+        setField(getStringField());
       }
     }
 

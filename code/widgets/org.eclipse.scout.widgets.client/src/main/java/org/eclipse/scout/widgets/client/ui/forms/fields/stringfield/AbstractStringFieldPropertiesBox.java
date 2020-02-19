@@ -47,4 +47,28 @@ public abstract class AbstractStringFieldPropertiesBox extends AbstractPropertie
     }
   }
 
+  @ClassId("ec51887c-c9dc-4375-a02b-a719c9b72be7")
+  public class InputMaskedField extends AbstractBooleanField {
+
+    @Override
+    protected String getConfiguredLabel() {
+      return "Input Masked";
+    }
+
+    @Override
+    protected boolean getConfiguredLabelVisible() {
+      return false;
+    }
+
+    @Override
+    protected void execInitField() {
+      setValue(m_field.isInputMasked());
+    }
+
+    @Override
+    protected void execChangedValue() {
+      m_field.setInputMasked(getValue());
+    }
+  }
+
 }
