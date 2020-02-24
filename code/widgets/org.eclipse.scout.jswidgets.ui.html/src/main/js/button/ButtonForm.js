@@ -28,15 +28,15 @@ export default class ButtonForm extends Form {
     button.on('click', this._onButtonClick.bind(this));
 
     var defaultButtonField = this.widget('DefaultButtonField');
-    defaultButtonField.setValue(button.defaultButtonField);
+    defaultButtonField.setValue(button.defaultButton);
     defaultButtonField.on('propertyChange', this._onDefaultButtonPropertyChange.bind(this));
 
     var processButtonField = this.widget('ProcessButtonField');
-    processButtonField.setValue(button.processButtonField);
+    processButtonField.setValue(button.processButton);
     processButtonField.on('propertyChange', this._onProcessButtonPropertyChange.bind(this));
 
     var selectedField = this.widget('SelectedField');
-    selectedField.setValue(button.selectedField);
+    selectedField.setValue(button.selected);
     selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
     var htmlEnabledField = this.widget('HtmlEnabledField');
