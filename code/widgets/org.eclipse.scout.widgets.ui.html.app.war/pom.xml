@@ -48,20 +48,7 @@
       </plugin>
 
       <!-- deployment is not bound to any lifecycle phase (by purpose!). It
-        can be triggered by executing mvn properties:read-project-properties tomcat7:redeploy
-        -Dconfig.file=your.properties
-        or by executing mvn tomcat7:redeploy -Ddeploy.url=..,deploy.path=,... -->
-
-      <!-- read deployment properties from file -->
-      <plugin>
-        <groupId>org.kuali.maven.plugins</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <configuration>
-          <locations>
-            <location>${config.file}</location>
-          </locations>
-        </configuration>
-      </plugin>
+        can be triggered by executing mvn tomcat7:redeploy -Ddeploy.url=..,deploy.path=,... -->
 
       <!-- do the actual deployment to tomcat 7 -->
       <plugin>
