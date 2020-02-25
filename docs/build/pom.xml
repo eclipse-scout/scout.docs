@@ -170,7 +170,7 @@
     </pluginRepository>
     <pluginRepository>
       <id>bintray.jmini.maven</id>
-      <url>http://dl.bintray.com/jmini/maven/</url>
+      <url>https://dl.bintray.com/jmini/maven/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
