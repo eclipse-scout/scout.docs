@@ -111,7 +111,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     }
 
     if (isTree) {
-      node.setParentKey(t[1]);
+      node.setParentKey(StringUtility.nullIfEmpty(t[1]));
     }
 
     node.setText(t[tlen - 6]);
@@ -232,12 +232,11 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
 
     @Override
     public String toString() {
-      StringBuilder buf = new StringBuilder();
-      buf.append(getKey()).append("[").append(getParentKey());
-      buf.append(",").append(getText());
-      buf.append(",").append(getIconId());
-      buf.append("]");
-      return buf.toString();
+      return Node.class.getSimpleName() +
+        "[key=" + getKey() +
+        " parentKey=" + getParentKey() +
+        " text=" + getText() +
+        " iconId=" + getIconId() + "]";
     }
 
     public void addChild(Node child) {
