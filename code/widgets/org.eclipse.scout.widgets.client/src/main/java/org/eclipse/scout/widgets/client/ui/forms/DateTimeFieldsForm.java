@@ -40,6 +40,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.nls.NlsLocale;
+import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.date.DateFormatProvider;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
@@ -224,6 +225,34 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
   @Order(10)
   @ClassId("b89d82db-0eec-4d12-ad77-8e565d4deae0")
   public class MainBox extends AbstractGroupBox {
+
+    @Order(5)
+    @ClassId("2a956217-5956-4071-bbbe-e40c0cd1858d")
+    public class SeleniumTestMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return "Selenium";
+      }
+
+      @Order(100)
+      @ClassId("a6b583ba-abb1-47f6-8ba2-9d815e7a080f")
+      public class ToggleSearchRequiredMenu extends AbstractToggleMenu {
+
+        @Override
+        protected String getConfiguredText() {
+          return "Add error status";
+        }
+
+        @Override
+        protected void execAlways() {
+          if (isActive()) {
+            getInputField().addErrorStatus(new DateTimeErrorStatus());
+          } else {
+            getInputField().removeErrorStatus(DateTimeErrorStatus.class);
+          }
+        }
+      }
+    }
 
     @Order(10)
     @ClassId("abf5111c-e978-4d77-9c34-8698b71eb6ac")
@@ -1706,5 +1735,11 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
   }
 
   public class PageFormHandler extends AbstractFormHandler {
+  }
+
+  public class DateTimeErrorStatus extends Status {
+    public DateTimeErrorStatus() {
+      super("Error from Java model");
+    }
   }
 }
