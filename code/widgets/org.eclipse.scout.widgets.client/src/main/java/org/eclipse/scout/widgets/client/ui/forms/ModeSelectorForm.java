@@ -35,6 +35,7 @@ import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.ModeSelectorForm.MainBox.CloseButton;
@@ -248,7 +249,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         protected void execChangedValue() {
           IMode<String> mode = getModeFor(getValue());
           if (mode != null) {
-            MessageBoxes.createOk().withHeader(TEXTS.get("ModeSelected", mode.getText())).show();
+            MessageBoxes.createOk().withHeader(TEXTS.get("ModeSelected", ObjectUtility.nvl(mode.getText(), mode.getIconId()))).show();
           }
         }
 
@@ -592,7 +593,9 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
     @Override
     protected void execChangedValue() {
       IMode<Long> mode = getModeFor(getValue());
-      MessageBoxes.createOk().withHeader(TEXTS.get("ModeSelected", mode != null ? mode.getText() : "")).show();
+      if (mode != null) {
+        MessageBoxes.createOk().withHeader(TEXTS.get("ModeSelected", ObjectUtility.nvl(mode.getText(), mode.getIconId()))).show();
+      }
     }
 
     @Order(10)
