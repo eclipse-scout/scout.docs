@@ -17,31 +17,21 @@ if %errorlevel% neq 0 (
   exit /b 1
 )
 
-:: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-echo Running 'npm install' in %cd%
-cd ../org.eclipse.scout.widgets.ui.html
-call npm install
-if %errorlevel% neq 0 exit /b %errorlevel%
-echo npm install finished successfully!
+:: Install pnpm
+echo Installing 'pnpm' into ../../node_modules
+call npm install pnpm@">=4.0.0 <5.0.0" --prefix ../../node_modules
 echo.
 
 :: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-echo Running 'npm install' in %cd%
-cd ../org.eclipse.scout.widgets.heatmap.ui.html
-call npm install
+call cd ..\..
+echo Running 'pnpm install' in %cd%
+call node_modules\pnpm install
 if %errorlevel% neq 0 exit /b %errorlevel%
-echo npm install finished successfully!
-echo.
-
-:: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-echo Running 'npm install' in %cd%
-cd ../org.eclipse.scout.widgets.ui.html.app
-call npm install
-if %errorlevel% neq 0 exit /b %errorlevel%
-echo npm install finished successfully!
+echo pnpm install finished successfully!
 echo.
 
 :: Build the JavaScript and CSS bundles and start the watcher => creates the dist folder
-echo Running 'npm build:dev:watch'
+cd contacts/org.eclipse.scout.contacts.ui.html
+echo Running 'npm build:dev:watch' in %cd%
 call npm run build:dev:watch
 if %errorlevel% neq 0 exit /b %errorlevel%
