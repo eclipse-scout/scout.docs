@@ -8,8 +8,15 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-@import "index";
+.read-only-info {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: @border-radius;
+  background-color: @read-only-menu-background-color;
+  color: @read-only-menu-color;
+  cursor: default;
 
-@import "style/colors-dark";
-@import "forms/ButtonForm-dark";
-@import "forms/TableForm-dark";
+  &:hover {
+    color: @read-only-menu-color;
+  }
+}

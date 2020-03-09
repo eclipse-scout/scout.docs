@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -39,13 +39,18 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
+import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
+import org.eclipse.scout.widgets.client.WidgetsHelper;
+import org.eclipse.scout.widgets.client.WidgetsProperties.ReadOnlyProperty;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FileChooserFieldForm.MainBox.GroupBox;
@@ -138,6 +143,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
   @ClassId("21932ccf-f1f3-4a11-bb8c-0fe7e07cb3cf")
   public class MainBox extends AbstractGroupBox {
 
+    @Override
+    protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+      BEANS.get(WidgetsHelper.class).injectReadOnlyMenu(menus);
+    }
+
     @Order(10)
     @ClassId("4c62f7aa-0c63-413e-aed0-92febdc3351a")
     public class GroupBox extends AbstractGroupBox {
@@ -173,6 +183,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("ChooseAnImage");
+          }
+
+          @Override
+          protected void execInitField() {
+            setEnabled(!CONFIG.getPropertyValue(ReadOnlyProperty.class));
           }
 
           @Override
@@ -231,7 +246,12 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
 
             @Override
             protected void execInitField() {
-              setValue(getChooseAnImageField().isEnabled());
+              if (CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
+                setValue(false);
+                setEnabled(false);
+              } else {
+                setValue(getChooseAnImageField().isEnabled());
+              }
             }
           }
 
@@ -352,6 +372,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
           }
 
           @Override
+          protected void execInitField() {
+            setEnabled(!CONFIG.getPropertyValue(ReadOnlyProperty.class));
+          }
+
+          @Override
           protected void execChangedValue() {
             BinaryResource file = getValue();
             if (file != null) {
@@ -394,6 +419,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             }
 
             @Override
+            protected void execInitField() {
+              setEnabled(!CONFIG.getPropertyValue(ReadOnlyProperty.class));
+            }
+
+            @Override
             protected void execClickAction() {
               FileChooser fc = new FileChooser(false);
               List<BinaryResource> files = fc.startChooser();
@@ -415,6 +445,11 @@ public class FileChooserFieldForm extends AbstractForm implements IAdvancedExamp
             @Override
             protected boolean getConfiguredProcessButton() {
               return false;
+            }
+
+            @Override
+            protected void execInitField() {
+              setEnabled(!CONFIG.getPropertyValue(ReadOnlyProperty.class));
             }
 
             @Override

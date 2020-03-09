@@ -8,39 +8,22 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.contacts.client;
+package org.eclipse.scout.widgets.client;
 
 import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
-import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
-public final class ConfigProperties {
-
-  private ConfigProperties() {
-  }
-
-  public static class UserDomainProperty extends AbstractStringConfigProperty {
-
-    @Override
-    public String getKey() {
-      return "contacts.userDomain";
-    }
-
-    @Override
-    public String description() {
-      return "User domain";
-    }
-  }
+public class WidgetsProperties {
 
   public static class ReadOnlyProperty extends AbstractBooleanConfigProperty {
 
     @Override
     public String getKey() {
-      return "contacts.readOnly";
+      return "widgets.readOnly";
     }
 
     @Override
     public String description() {
-      return "Global flag to activate a read-only mode when contacts application is deployed as public available demo application";
+      return "Global flag to activate a read-only mode when widgets application is deployed as public available demo application";
     }
 
     @Override
@@ -48,4 +31,5 @@ public final class ConfigProperties {
       return false;
     }
   }
+
 }

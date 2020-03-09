@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
@@ -25,14 +26,19 @@ import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileC
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 import org.eclipse.scout.widgets.client.ResourceBase;
+import org.eclipse.scout.widgets.client.WidgetsHelper;
+import org.eclipse.scout.widgets.client.WidgetsProperties.ReadOnlyProperty;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
@@ -134,6 +140,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
   @Order(10)
   @ClassId("0a756ada-c387-4b75-9703-6a82cbe8c6a3")
   public class MainBox extends AbstractGroupBox {
+
+    @Override
+    protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+      BEANS.get(WidgetsHelper.class).injectReadOnlyMenu(menus);
+    }
 
     @Override
     protected void execInitField() {
@@ -250,6 +261,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
           @Override
           protected byte getConfiguredLabelPosition() {
             return LABEL_POSITION_ON_FIELD;
+          }
+
+          @Override
+          protected void execInitField() {
+            setEnabled(!CONFIG.getPropertyValue(ReadOnlyProperty.class));
           }
         }
 
