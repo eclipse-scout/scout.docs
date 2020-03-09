@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.scout.contacts.client.Icons;
 import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
+import org.eclipse.scout.contacts.client.common.ContactsHelper;
 import org.eclipse.scout.contacts.client.common.CountryLookupCall;
 import org.eclipse.scout.contacts.client.common.MapHelper;
 import org.eclipse.scout.contacts.client.common.PictureUrlForm;
@@ -50,6 +51,7 @@ import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -72,6 +74,7 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
@@ -217,6 +220,11 @@ public class PersonForm extends AbstractForm {
   @Order(10)
   @ClassId("27a040ac-eac5-47c6-a826-572633b9d4ef")
   public class MainBox extends AbstractGroupBox { // <1>
+
+    @Override
+    protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+      BEANS.get(ContactsHelper.class).injectReadOnlyMenu(menus);
+    }
 
     @Order(10)
     @ClassId("08832a97-8845-4ff4-8dfd-c29366c22742")
@@ -857,6 +865,12 @@ public class PersonForm extends AbstractForm {
       getForm().setSubTitle(calculateSubTitle());
     }
   }
+
+  @Override
+  protected void execInitForm() {
+    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
+  }
+
 
   // tag::validate[]
   @Override // <1>

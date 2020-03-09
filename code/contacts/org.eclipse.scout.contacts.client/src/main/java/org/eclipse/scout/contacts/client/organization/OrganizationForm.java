@@ -17,6 +17,7 @@ import org.eclipse.scout.contacts.client.common.AbstractEmailField;
 import org.eclipse.scout.contacts.client.common.AbstractNotesBox;
 import org.eclipse.scout.contacts.client.common.AbstractNotesBox.NotesField;
 import org.eclipse.scout.contacts.client.common.AbstractUrlImageField;
+import org.eclipse.scout.contacts.client.common.ContactsHelper;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox;
 import org.eclipse.scout.contacts.client.organization.OrganizationForm.MainBox.DetailsBox.ContactInfoBox;
@@ -35,6 +36,7 @@ import org.eclipse.scout.contacts.shared.organization.OrganizationFormData;
 import org.eclipse.scout.contacts.shared.organization.UpdateOrganizationPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.dto.FormData.SdkCommand;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.desktop.OpenUriAction;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -50,6 +52,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 
 @ClassId("584b05a7-dc8d-4411-ad9f-009cfc531672")
 @FormData(value = OrganizationFormData.class, sdkCommand = SdkCommand.CREATE)
@@ -105,7 +108,6 @@ public class OrganizationForm extends AbstractForm {
   }
 
   public NotesField getNotesField() {
-//    return getFieldByClass(NotesField.class);
     return getNotesBox().getNotesField();
   }
 
@@ -154,10 +156,21 @@ public class OrganizationForm extends AbstractForm {
   }
   // tag::layout[]
 
+
+  @Override
+  protected void execInitForm() {
+    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
+  }
+
   // tag::refactor[]
   @Order(10)
   @ClassId("e7efc084-fe7a-462f-ba23-914e58f7b82d")
   public class MainBox extends AbstractGroupBox {
+
+    @Override
+    protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+      BEANS.get(ContactsHelper.class).injectReadOnlyMenu(menus);
+    }
 
     @Order(10)
     @ClassId("b20aad47-e070-4f3c-bafc-ddbaa3ae2a4c")

@@ -18,6 +18,7 @@ import org.eclipse.scout.contacts.client.common.AbstractDirtyFormHandler;
 import org.eclipse.scout.contacts.client.common.AbstractEmailField;
 import org.eclipse.scout.contacts.client.common.AbstractNotesBox;
 import org.eclipse.scout.contacts.client.common.AbstractNotesBox.NotesField;
+import org.eclipse.scout.contacts.client.common.ContactsHelper;
 import org.eclipse.scout.contacts.client.person.PersonForm;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.CancelButton;
 import org.eclipse.scout.contacts.events.client.event.EventForm.MainBox.DetailsBox;
@@ -72,6 +73,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @ClassId("e91f6c5c-1926-45f9-ab79-35f7e6740b91")
@@ -181,9 +183,19 @@ public class EventForm extends AbstractForm {
     return getEventId();
   }
 
+  @Override
+  protected void execInitForm() {
+    BEANS.get(ContactsHelper.class).handleReadOnly(getOkButton());
+  }
+
   @Order(1)
   @ClassId("3d45e0e1-e128-4aad-9cef-6dbd78aaeb7d")
   public class MainBox extends AbstractGroupBox {
+
+    @Override
+    protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
+      BEANS.get(ContactsHelper.class).injectReadOnlyMenu(menus);
+    }
 
     @Order(10)
     @ClassId("f1821434-d98e-4796-b120-26245a5c81c8")

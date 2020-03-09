@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 
+import org.eclipse.scout.contacts.client.ConfigProperties.ReadOnlyProperty;
 import org.eclipse.scout.contacts.client.ConfigProperties.UserDomainProperty;
 import org.eclipse.scout.contacts.client.UserForm.MainBox.GroupBox.HtmlField;
 import org.eclipse.scout.contacts.shared.common.IResetDataStoreService;
@@ -137,14 +140,15 @@ public class UserForm extends AbstractForm {
   }
 
   private String createHtmlContent() {
+    List<CharSequence> menus = Arrays.asList(
+      HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
+      HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
+    if (!CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
+      menus.add(1, HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))).cssClass("contacts-user-form-link-row"));
+    }
     return HTML.div(
         HTML.div(getGravatarImage()).cssClass("contacts-user-form-image"),
-        HTML.div(
-            HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
-            HTML.div(HTML.appLink("reset-data", TEXTS.get("ResetData"))).cssClass("contacts-user-form-link-row"),
-            HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"))
-            .cssClass("contacts-user-form-link-box"))
-        .toHtml();
+        HTML.div(menus).cssClass("contacts-user-form-link-box")).toHtml();
   }
 
   private IHtmlElement getGravatarImage() {
