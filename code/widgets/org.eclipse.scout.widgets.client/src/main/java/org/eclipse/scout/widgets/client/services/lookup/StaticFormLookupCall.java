@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
 

@@ -10,7 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -95,6 +95,8 @@ import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.Selenium
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleThrottleSmartFieldMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.SmartFieldTestMenu.ToggleValidateValueMenu;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm.MainBox.SeleniumTestMenu.TreeSmartFieldTestMenu.ToggleHierarchicalLookupMenu;
+import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractSeleniumTestMenu;
+import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractToggleMenu;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.EventTypeCodeType;
@@ -1063,12 +1065,7 @@ public class SmartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
     @Order(35)
     @ClassId("090bf901-98c2-4a22-aca0-f1353b29b982")
-    public class SeleniumTestMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("Selenium");
-      }
+    public class SeleniumTestMenu extends AbstractSeleniumTestMenu {
 
       @Order(100)
       @ClassId("5143086a-d88d-419a-8df6-b6b91d56eb38")

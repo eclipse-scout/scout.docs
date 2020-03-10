@@ -1,5 +1,16 @@
+/*
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.widgets.client;
 
+import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
 public final class WidgetsClientConfigProperties {
@@ -73,6 +84,43 @@ public final class WidgetsClientConfigProperties {
     @Override
     public String getDefaultValue() {
       return "src/main/java";
+    }
+  }
+
+  public static class ReadOnlyProperty extends AbstractBooleanConfigProperty {
+
+    @Override
+    public String getKey() {
+      return "widgets.readOnly";
+    }
+
+    @Override
+    public String description() {
+      return "Global flag to activate a read-only mode when widgets application is deployed as public available demo application";
+    }
+
+    @Override
+    public Boolean getDefaultValue() {
+      return false;
+    }
+  }
+
+  public static class SeleniumProperty extends AbstractBooleanConfigProperty {
+
+    @Override
+    public String getKey() {
+      return "widgets.selenium";
+    }
+
+    @Override
+    public String description() {
+      return "Flag to make UI elements required only for Selenium tests, visible in the forms of the widget application. " +
+        "They should not be visible in a productive deployment. The value default is false (=invisible).";
+    }
+
+    @Override
+    public Boolean getDefaultValue() {
+      return false;
     }
   }
 }

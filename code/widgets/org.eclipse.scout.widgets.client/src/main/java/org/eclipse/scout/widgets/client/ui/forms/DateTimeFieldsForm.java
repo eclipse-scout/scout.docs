@@ -78,6 +78,8 @@ import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.Exam
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeDisabledField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeField;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.ExampleColumn3Box.DateTimeMandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractSeleniumTestMenu;
+import org.eclipse.scout.widgets.client.ui.forms.menu.AbstractToggleMenu;
 import org.eclipse.scout.widgets.shared.CustomDateFormatProvider;
 
 @ClassId("51fd5a1c-4b2b-4094-a16e-c9865b9bf9ce")
@@ -228,11 +230,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
     @Order(5)
     @ClassId("2a956217-5956-4071-bbbe-e40c0cd1858d")
-    public class SeleniumTestMenu extends AbstractMenu {
-      @Override
-      protected String getConfiguredText() {
-        return "Selenium";
-      }
+    public class SeleniumTestMenu extends AbstractSeleniumTestMenu {
 
       @Order(100)
       @ClassId("a6b583ba-abb1-47f6-8ba2-9d815e7a080f")

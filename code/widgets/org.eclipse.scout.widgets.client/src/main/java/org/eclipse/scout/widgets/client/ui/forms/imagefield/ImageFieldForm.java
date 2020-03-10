@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-package org.eclipse.scout.widgets.client.ui.forms;
+package org.eclipse.scout.widgets.client.ui.forms.imagefield;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -39,16 +39,16 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image1Field;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.Image2Field;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageIdField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignmentTitleField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox.Image1Field;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox.Image2Field;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox.ImageIdField;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ExamplesBox.AlignmentTitleField;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm.MainBox.SampleContentButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -18,7 +18,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
-import org.eclipse.scout.widgets.client.WidgetsProperties.ReadOnlyProperty;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.ReadOnlyProperty;
 
 @ApplicationScoped
 public class WidgetsHelper {
