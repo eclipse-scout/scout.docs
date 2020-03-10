@@ -27,7 +27,7 @@ Next, under folder [folder]_Oomph_ select the node [folder]_Projects into Worksp
 .The Import Wizard in Eclipse.
 image::{imgsdir}/oomph_existing_project.png[]
 
-Now select Scout Demo App and click btn:[Next].
+Now select Scout Demo App, check in the table below that 'Stream' shows the desired Scout version and click btn:[Next].
 
 [[img-oomph_existing_project1]]
 .Select Scout Demo App
