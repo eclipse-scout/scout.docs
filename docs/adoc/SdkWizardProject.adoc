@@ -68,6 +68,7 @@ Using the default artifact Id *helloworld* the following Maven modules are creat
 * Maven module *helloworld.ui.html*
 ** Contains servlet filters and the HTML pages as well as custom CSS and JavaScript files for the Scout UI Server.
 ** See class `UiServletFilter` in `src/main/java` and folder `WebContent` in `source/main/resources`.
+** The file `js build.launch` contains the launch configuration for the Eclipse IDE that executes the JavaScript build.
 * Maven module *helloworld.ui.html.app.dev*
 ** Contains all components to run the Scout UI application from within the Eclipse IDE.
 ** The file `config.properties` in folder `src/main/resources` contains the development configuration for the application.

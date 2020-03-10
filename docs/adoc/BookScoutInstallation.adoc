@@ -35,8 +35,9 @@ In the text below, installation routines are described separately for Windows, M
 
 === Download and Install a JDK
 
-The first step to install Scout is to have an existing and working installation of a JDK version 11.
-Please note that the Scout 9.0 Runtime does not officially support other Java versions. When downloading a Java 11 JDK it is recommended to choose version 11.0.1 or newer. Please note that only x64 hardware architectures are supported.
+The first step to install Scout is to have an existing and working installation of a JDK version 11. Please note that the Scout 10.0 Runtime does not officially support other Java versions, but it may still work.
+When downloading a Java 11 JDK it is recommended to choose version 11.0.1 or newer.
+Please note that only x64 hardware architectures are supported.
 
 You can download the JDK archive matching your operating system from the Java homepage.footnote:[
 OpenJDK 11 download: https://jdk.java.net/11/
@@ -46,6 +47,18 @@ To verify the installation you might want to go through this Java "`Hello World!
 tutorial.footnote:[Windows Java "`Hello World!`": http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html].
 
 [[sec-download_install]]
+=== Download and Install Node.js
+
+Beside the JDK, you also need a recent Node.js installation.
+Scout requires at least version 12.1.0, so if you don't have a node installation or only an old one, go to https://nodejs.org/, download the LTS build for your platform and install it.
+
+Also make sure the Node.js installation is on the PATH. You can verify it by using your command line.
+
+----
+c:\>node --version
+v12.12.0
+----
+
 === Download and Install Scout
 
 include::DownloadAndInstallScout.adoc[]

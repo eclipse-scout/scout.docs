@@ -17,6 +17,7 @@ ifndef::mdledir[:mdledir: .]
 
 === Prerequisites
 
+==== JDK
 Before you download Scout make sure that you have a working Java Development Kit (JDK) installation.
 In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK, window="_blank"].
 // window=_blank used because jdk website does not work in an iframe
@@ -24,7 +25,7 @@ In case you first need to download and install a JDK we recommend to work with t
 To verify your Java installation use your command line.
 
 ----
-C:\Users\mzi>java -version
+C:\>java -version
 openjdk version "11.0.1" 2018-10-16
 OpenJDK Runtime Environment 18.9 (build 11.0.1+13)
 OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
@@ -32,6 +33,18 @@ OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
 
 We recommend to use Java 11. Please make sure you use the 64-bit version of the JDK.
 In case your version text does not explicitly mention a 64-bit version your JDK is a 32-bit installation.
+
+==== Node.js
+
+Beside the JDK, you also need a recent Node.js installation.
+Scout requires at least version 12.1.0, so if you don't have a node installation or only an old one, go to https://nodejs.org/, download the LTS build for your platform and install it.
+
+Also make sure the Node.js installation is on the PATH. You can verify it by using your command line.
+
+----
+c:\>node --version
+v12.12.0
+----
 
 === Download Scout
 
