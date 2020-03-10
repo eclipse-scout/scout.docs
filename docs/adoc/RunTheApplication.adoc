@@ -15,26 +15,34 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-After the initial project creation step we can start the Scout application for the first time.
-For this, the following three steps are necessary
+After the initial project creation step we can try to start the Scout application for the first time.
+Since the Hello World app consists of a backend and a frontend, we need to start two servers, one for the backend and one for the frontend.
+We also need to launch the JavaScript build that creates the JS and CSS bundles which will be served by the frontend server.
+We could start each launch configuration separately, but for the sake of convenience there is a launch group available which starts all at once.
 
-. Start the Scout backend server
-. Start the Scout frontend server
-. Open the application in the browser
+To start the launch group we use the [menu]_Run As_ menu as shown in <<img-start_all>>.
 
-To start the Scout backend server we first select the `[webapp] dev server.launch` file in the Package Explorer view
-of the Eclipse IDE and then use the [menu]_Run As_ menu as shown in <<img-start_client>>.
-
-[[img-start_client]]
+[[img-start_all]]
 .Starting the Hello World application.
-image::{imgsdir}/sdk_start_client_product.png[]
+image::{imgsdir}/sdk_start_all.png[]
 
-Starting the Scout frontend server works exactly the same.
-But first select the `[webapp] dev ui.launch` file in the Eclipse IDE.
-This launch file is located under module `helloworld.ui.html.app.dev` in the Package Explorer.
+Because the JavaScript build needs a Node.js installation, the launching will fail if Node.js is not installed, see <<img-start_missing_node>>
 
-During startup of the Scout applications you should see console output providing information about the startup.
-After having successfully started the Scout backend and frontend servers the Hello World application can then be accessed by navigating to http://localhost:8082/ in your favorite web browser.
+[[img-start_missing_node]]
+.Launching fails due to missing Node.js
+image::{imgsdir}/sdk_start_missing_node.png[]
+
+If that is the case, we need to install a recent Node.js version.
+To do this, we visit the official download page https://nodejs.org/en/, download the LTS version for our platform and install it.
+
+IMPORTANT: The installation process could also fail if the installed Node.js is too old.
+Scout requires at least Node.js 12.1.0.
+
+After Node.js has been installed, we can try to launch the application again using the [menu]_Run as_ menu we used before.
+This time you should see console output providing information about the JS build process.
+Once the JS build has been completed successfully, the frontend and backend servers will be started automatically.
+The servers are ready as soon as the console shows _Server ready_.
+We can now access the Hello World application by navigating to http://localhost:8082/ in our favorite web browser.
 
 The running Hello World application should then be started in your browser as shown in <<img-start_browser>>.
 
