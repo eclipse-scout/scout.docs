@@ -508,6 +508,34 @@ public class MyPageField extends AbstractPageField<MyTablePage> {
 }
 ----
 
+=== Scout REST integration dependencies
+
+The Scout REST integration uses the popular Jackson library as default marshaller. 
+When migrating to Scout 8.x add a maven dependency to jersey-media-json-jackson in your application pom.xml to use Jackson as JAX-RS marshaller with the Jersey JAX-RS implementation.
+Additionally add a dependency to the Scout `module org.eclipse.scout.rt.rest.jackson`.
+This module adds a set of Jackson additions in order to use the Jackson library together with Scout data objects.
+
+[source, xml]
+.Depencency section of pom.xml to use Scout REST services with Jackson & Jersey
+----
+<!-- JAX-RS Jersey -->
+<dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet-core</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-json-jackson</artifactId>
+</dependency>
+
+<!-- Jackson/Scout integration -->
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt.rest.jackson</artifactId>
+</dependency>
+----
+
+
 === SmartField: changed behavior for applying styles from a lookup-row on the field (since 8.0.0.021)
 The SmartField in Scout <= 6.0 applied the lookup-row properties `foregroundColor`, `backgroundColor`, `font` and `tooltipText` automatically on the field when a lookup-row has been selected. Because that automatic behavior didn't fit every business requirement, we removed it completely. This means you must implement the property-synchronization where required.
 
@@ -604,7 +632,7 @@ _Migration:_ Update your imports to point to the new `org.eclipse.scout.rt.platf
 The implementation of `AbstractEntityRestClientExceptionTransformer` was change an this might break implementation of sub-classes.
 Please refer to JavaDoc for any details.
 
-== New RemoteSystemUnavailableException (since 8.0.0.033), updated (since 8.0.0.037)
+=== New RemoteSystemUnavailableException (since 8.0.0.033), updated (since 8.0.0.037)
 
 The `org.eclipse.scout.rt.shared.servicetunnel.HttpException` was replaced by `org.eclipse.scout.rt.sharedservicetunnel.http.HttpServiceTunnelException` which is derived from the new, general `org.eclipse.scout.rt.platform.exception.RemoteSystemUnavailableException`.
 The `HttpServiceTunnelException` is thrown within the UI server, when a call to the Scout backend server (through the HTTP service tunnel) was unsuccessful and returned a status code < 200 or >= 299.

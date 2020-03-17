@@ -81,10 +81,6 @@ The marshaller between Java data objects and JSON is abstracted in the JAX-RS sp
 Using the `@Produces(MediaType.APPLICATION_JSON)` annotation, each REST service method specifies the produces data format.
 
 The Scout REST integration uses the popular Jackson library as default marshaller.
-Add a Maven dependency to `jersey-media-json-jackson` in your application `pom.xml` to use Jackson as JAX-RS marshaller with the Jersey JAX-RS implementation.
-
-Additionally add a dependency to the Scout module `org.eclipse.scout.rt.rest.jackson`.
-This module adds a set of Jackson additions in order to use Jackson with Scout data objects.
 
 ==== RunContext ====
 Like a usual service call using the Scout service tunnel a REST request must ensure that processing of the request takes place within a `RunContext`.
@@ -110,6 +106,34 @@ All following filters and servlets and thus also the REST resources run automati
 
 Beside the `subject` the `ServerRunContextFilter` sets up the Correlation ID, as well as the locale.
 Both values are read from the incoming request header, the caller must ensure that the headers `Accept-Language` and `X-Scout-Correlation-Id` are set correctly.
+
+=== Dependency Management ===
+
+Scout REST services based on JAX-RS using the Jersey library and the Jackson JSON marshaller need a maven dependency to `jersey-media-json-jackson` in your application pom.xml.
+This enables to use Jackson as JAX-RS marshaller with the Jersey JAX-RS implementation.
+Additionally a dependency to the Scout module `org.eclipse.scout.rt.rest.jackson` is necessary.
+This module adds a set of Jackson additions in order to use the Jackson library together with Scout data objects.
+
+[source, xml]
+.Depencency section of pom.xml to use Scout REST services with Jackson & Jersey
+----
+<!-- JAX-RS Jersey -->
+<dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet-core</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-json-jackson</artifactId>
+</dependency>
+
+<!-- Jackson/Scout integration -->
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt.rest.jackson</artifactId>
+</dependency>
+----
+
 
 === REST Client ===
 
