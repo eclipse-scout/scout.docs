@@ -11,7 +11,7 @@ ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 :experimental:
 
 // Constants
-:maven-version: 10.0.2
+:maven-version: 10.0.8
 :scout-previous-version: 9.0.x
 :scout-version: 10.0
 :simrel-name: 2020-03
