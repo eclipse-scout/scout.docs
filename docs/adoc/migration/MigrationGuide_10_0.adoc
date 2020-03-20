@@ -16,14 +16,14 @@ This document describes all relevant changes *from Eclipse Scout 9.0 to Eclipse 
 Scout 10.0 will continue to be maintained for a while and a new build may be released from time to time.
 Beside bugfixes, these service releases may even contain some minor features.
 
-//The following changes were made after the initial 10.0 release.
-//
-//==== 10.0.1
-//
-//WARNING: {NotReleasedWarning}
-//
-// * <<Migration Description (since 10.0.0.xyz)>>
-//
+The following changes were made after the initial 10.0 release.
+
+==== 10.0.10
+
+WARNING: {NotReleasedWarning}
+
+* <<AjaxCall (since 10.0.10)>>
+
 // ==== Upcoming -- No Planned Release Date
 //
 // The following changes were made after the latest official release build. No release date has been fixed yet.
@@ -348,6 +348,47 @@ Now they both have their own container div as shown in the example below:
         <div class="field"></div>
     </div>
 </div>
+----
+
+=== AjaxCall (since 10.0.10)
+
+Instances of `AjaxCall` now return a single object of type `AjaxError` when rejecting the promise.
+
+For historical reasons, jQuery's AJAX function rejects the promise with three arguments: `jqXHR`, `textStatus` and `errorThrown`. The https://tc39.es/ecma262/#sec-promise-reject-functions[Promise specification] only allows for one "reason" argument. To bring _AjaxCall_ in line with this definition and to make rethrowing the error easier, it now wraps the three arguments into one object of type `AjaxError`. It provides the following properties:
+
+`jqXHR`::
+HTTP request object (jQuery argument #1)
+`textStatus`::
+A string describing the type of error that occurred (jQuery argument #2)
+`errorThrown`::
+The textual portion of the HTTP status (jQuery argument #3)
+`requestOptions`::
+The options object that was passed to the `$.ajax` call. Can be used to retrieve the original URL for debugging or logging purposes.
+
+*Migration*:
+Check your code for any uses of `AjaxCall` and change the signature of any _fail()_  or _catch()_ function.
+
+[source,javascript]
+----
+// Old:
+var ajaxCall = scout.create('AjaxCall', ajaxOptions);
+ajaxCall.call()
+  .then(function(data) {
+    processData(data);
+  })
+  .catch(function(jqXHR, textStatus, errorThrown) {
+    handleError(jqXHR, textStatus, errorThrown);
+  });
+
+// New:
+var ajaxCall = scout.create('AjaxCall', ajaxOptions);
+ajaxCall.call()
+  .then(function(data) {
+    processData(data);
+  })
+  .catch(function(ajaxError) {
+    handleError(ajaxError.jqXHR, ajaxError.textStatus, ajaxError.errorThrown);
+  });
 ----
 
 // ^^^
