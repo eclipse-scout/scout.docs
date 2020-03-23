@@ -121,6 +121,10 @@ export default function() {
                   ]
                 },
                 {
+                  id: 'FormFieldActionsBox',
+                  objectType: 'jswidgets.FormFieldActionsBox'
+                },
+                {
                   id: 'WidgetActionsBox',
                   objectType: 'jswidgets.WidgetActionsBox'
                 }

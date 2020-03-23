@@ -26,6 +26,8 @@ export {default as FormForm} from './form/FormForm';
 export {default as FormPropertiesBox} from './form/FormPropertiesBox';
 export {default as LifecycleForm} from './form/LifecycleForm';
 export {default as FormFieldPropertiesBox} from './formfield/FormFieldPropertiesBox';
+export {default as FormFieldActionsBox} from './formfield/FormFieldActionsBox';
+export {default as FormFieldMenuLookupCall} from './formfield/FormFieldMenuLookupCall';
 export {default as LabelPositionLookupCall} from './formfield/LabelPositionLookupCall';
 export {default as FormFieldTypeLookupCall} from './formfield/FormFieldTypeLookupCall';
 export {default as LabelWidthInPixelLookupCall} from './formfield/LabelWidthInPixelLookupCall';
@@ -53,7 +55,6 @@ export {default as BorderDecorationLookupCall} from './groupbox/BorderDecoration
 export {default as GroupBoxForm} from './groupbox/GroupBoxForm';
 export {default as GroupBoxPropertiesBox} from './groupbox/GroupBoxPropertiesBox';
 export {default as MenuBarEllipsisPositionLookupCall} from './groupbox/MenuBarEllipsisPositionLookupCall';
-export {default as MenuBarItemLookupCall} from './groupbox/MenuBarItemLookupCall';
 export {default as MenuBarPositionLookupCall} from './groupbox/MenuBarPositionLookupCall';
 export {default as LabelForm} from './label/LabelForm';
 export {default as LabelFieldForm} from './labelfield/LabelFieldForm';

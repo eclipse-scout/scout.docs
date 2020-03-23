@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {GroupBox, models} from '@eclipse-scout/core';
-import {MenuBarItemLookupCall} from '../index';
+import {FormFieldMenuLookupCall} from '../index';
 import GroupBoxDeleteMenuBarItemBoxModel from './GroupBoxDeleteMenuBarItemBoxModel';
 
 export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
@@ -40,7 +40,7 @@ export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
     }
 
     this.targetField = this.widget('ToDeleteMenuBarItem');
-    this.targetField.setLookupCall(new MenuBarItemLookupCall(this.field));
+    this.targetField.setLookupCall(new FormFieldMenuLookupCall(this.field));
     this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
 
     this.deleteFieldButton = this.widget('DeleteButton');

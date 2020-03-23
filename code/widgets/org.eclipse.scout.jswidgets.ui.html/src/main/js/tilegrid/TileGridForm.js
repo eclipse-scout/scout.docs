@@ -25,6 +25,7 @@ export default class TileGridForm extends Form {
     return models.get(TileGridFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -104,6 +105,7 @@ export default class TileGridForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(tileField);
     this.widget('GridDataBox').setField(tileField);
     this.widget('WidgetActionsBox').setField(tileField);
+    this.widget('FormFieldActionsBox').setField(tileField);
     this.widget('EventsTab').setField(this.tileGrid);
     this.updateStatus();
     this._updateHasCustomTiles();
@@ -273,6 +275,7 @@ export default class TileGridForm extends Form {
     this.widget('StatusField').setValue(this.session.text('TileGridStatus', this.tileGrid.tiles.length, this.tileGrid.filteredTiles.length, this.tileGrid.selectedTiles.length));
   }
 
+  // noinspection DuplicatedCode
   _sortTiles(asc) {
     var comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);

@@ -50,6 +50,7 @@ export default class RadioButtonGroupForm extends Form {
     this.widget('GridDataBox').setField(group);
     this.widget('LayoutConfigBox').setField(group);
     this.widget('WidgetActionsBox').setField(group);
+    this.widget('FormFieldActionsBox').setField(group);
     this.widget('EventsTab').setField(group);
 
     // Button tab

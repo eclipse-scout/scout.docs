@@ -21,6 +21,7 @@ export default class FileChooserFieldForm extends Form {
     return models.get(FileChooserFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -38,6 +39,7 @@ export default class FileChooserFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(fileChooserField);
     this.widget('GridDataBox').setField(fileChooserField);
     this.widget('WidgetActionsBox').setField(fileChooserField);
+    this.widget('FormFieldActionsBox').setField(fileChooserField);
     this.widget('EventsTab').setField(fileChooserField);
   }
 

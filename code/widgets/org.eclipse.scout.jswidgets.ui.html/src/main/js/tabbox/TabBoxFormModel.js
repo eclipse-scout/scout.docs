@@ -101,6 +101,10 @@ export default function() {
                   objectType: 'jswidgets.TabBoxDeleteTabItemBox'
                 },
                 {
+                  id: 'FormFieldActionsBox',
+                  objectType: 'jswidgets.FormFieldActionsBox'
+                },
+                {
                   id: 'WidgetActionsBox',
                   objectType: 'jswidgets.WidgetActionsBox'
                 }

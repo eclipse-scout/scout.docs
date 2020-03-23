@@ -22,17 +22,18 @@ export default class SequenceBoxForm extends Form {
     return models.get(SequenceBoxFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
     var sequenceBox = this.widget('SequenceBox');
 
-    // sequence box properties tab
     var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     formFieldPropertiesBox.setField(sequenceBox);
     this.widget('GridDataBox').setField(sequenceBox);
     this.widget('LayoutConfigBox').setField(sequenceBox);
     this.widget('WidgetActionsBox').setField(sequenceBox);
+    this.widget('FormFieldActionsBox').setField(sequenceBox);
     this.widget('EventsTab').setField(sequenceBox);
 
     // FieldProperties tab

@@ -27,14 +27,17 @@ export default class HierarchicalTableForm extends Form {
     return models.get(HierarchicalTableFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
     this.table = this.widget('Table');
 
     this.widget('PropertiesBox').setTable(this.table);
-    this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
-    this.widget('GridDataBox').setField(this.widget('TableField'));
+    var tableField = this.widget('TableField');
+    this.widget('FormFieldPropertiesBox').setField(tableField);
+    this.widget('GridDataBox').setField(tableField);
+    this.widget('FormFieldActionsBox').setField(tableField);
     this.widget('WidgetActionsBox').setField(this.table);
     this.widget('EventsTab').setField(this.table);
 
@@ -60,7 +63,6 @@ export default class HierarchicalTableForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var oldColumn = event.oldValue;
       var newColumn = event.newValue;
 
       var columnPropertiesBox = this.widget('Column.PropertiesBox');

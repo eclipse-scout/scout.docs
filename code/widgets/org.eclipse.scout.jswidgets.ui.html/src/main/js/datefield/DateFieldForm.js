@@ -21,6 +21,7 @@ export default class DateFieldForm extends Form {
     return models.get(DateFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -62,6 +63,7 @@ export default class DateFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(dateField);
     this.widget('GridDataBox').setField(dateField);
     this.widget('WidgetActionsBox').setField(dateField);
+    this.widget('FormFieldActionsBox').setField(dateField);
     this.widget('EventsTab').setField(dateField);
   }
 

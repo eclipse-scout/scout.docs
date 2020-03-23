@@ -21,6 +21,7 @@ export default class BrowserFieldForm extends Form {
     return models.get(BrowserFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -67,6 +68,7 @@ export default class BrowserFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(this.browserField);
     this.widget('GridDataBox').setField(this.browserField);
     this.widget('WidgetActionsBox').setField(this.browserField);
+    this.widget('FormFieldActionsBox').setField(this.browserField);
     this.widget('EventsTab').setField(this.browserField);
   }
 

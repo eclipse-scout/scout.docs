@@ -21,6 +21,7 @@ export default class StringFieldForm extends Form {
     return models.get(StringFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -81,6 +82,7 @@ export default class StringFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(stringField);
     this.widget('GridDataBox').setField(stringField);
     this.widget('WidgetActionsBox').setField(stringField);
+    this.widget('FormFieldActionsBox').setField(stringField);
     this.widget('EventsTab').setField(stringField);
   }
 

@@ -21,6 +21,7 @@ export default class CarouselForm extends Form {
     return models.get(CarouselFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -33,6 +34,7 @@ export default class CarouselForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(carouselField);
     this.widget('GridDataBox').setField(carouselField);
     this.widget('WidgetActionsBox').setField(carouselField);
+    this.widget('FormFieldActionsBox').setField(carouselField);
     this.widget('EventsTab').setField(carousel);
   }
 

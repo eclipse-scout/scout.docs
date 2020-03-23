@@ -21,6 +21,7 @@ export default class ListBoxForm extends Form {
     return models.get(ListBoxFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -36,6 +37,7 @@ export default class ListBoxForm extends Form {
     this.widget('PropertiesBox').setTable(this.listBox.table);
     this.widget('GridDataBox').setField(this.listBox);
     this.widget('WidgetActionsBox').setField(this.listBox);
+    this.widget('FormFieldActionsBox').setField(this.listBox);
     this.widget('EventsTab').setField(this.listBox);
   }
 

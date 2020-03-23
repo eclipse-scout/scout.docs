@@ -21,6 +21,7 @@ export default class TreeBoxForm extends Form {
     return models.get(TreeBoxFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -34,6 +35,7 @@ export default class TreeBoxForm extends Form {
     this.widget('PropertiesBox').setTree(this.treeBox.tree);
     this.widget('GridDataBox').setField(this.treeBox);
     this.widget('WidgetActionsBox').setField(this.treeBox);
+    this.widget('FormFieldActionsBox').setField(this.treeBox);
     this.widget('EventsTab').setField(this.treeBox);
 
     this.treeBox.tree.insertNodes(this.createModelNodes(2, 1, true, true), null);

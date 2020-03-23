@@ -22,6 +22,7 @@ export default class ModeSelectorForm extends Form {
     return models.get(ModeSelectorFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -65,6 +66,7 @@ export default class ModeSelectorForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(modeSelectorField);
     this.widget('GridDataBox').setField(modeSelectorField);
     this.widget('WidgetActionsBox').setField(modeSelectorField);
+    this.widget('FormFieldActionsBox').setField(modeSelectorField);
     this.widget('EventsTab').setField(modeSelectorField);
   }
 

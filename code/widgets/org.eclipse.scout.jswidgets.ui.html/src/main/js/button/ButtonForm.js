@@ -21,6 +21,7 @@ export default class ButtonForm extends Form {
     return models.get(ButtonFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -58,6 +59,7 @@ export default class ButtonForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(button);
     this.widget('GridDataBox').setField(button);
     this.widget('WidgetActionsBox').setField(button);
+    this.widget('FormFieldActionsBox').setField(button);
     this.widget('EventsTab').setField(button);
   }
 

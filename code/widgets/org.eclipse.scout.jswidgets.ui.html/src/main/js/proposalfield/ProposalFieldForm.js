@@ -21,6 +21,7 @@ export default class ProposalFieldForm extends Form {
     return models.get(ProposalFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -31,6 +32,7 @@ export default class ProposalFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(this.proposalField);
     this.widget('GridDataBox').setField(this.proposalField);
     this.widget('WidgetActionsBox').setField(this.proposalField);
+    this.widget('FormFieldActionsBox').setField(this.proposalField);
     this.widget('EventsTab').setField(this.proposalField);
   }
 }

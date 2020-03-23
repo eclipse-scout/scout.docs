@@ -21,6 +21,7 @@ export default class CheckBoxFieldForm extends Form {
     return models.get(CheckBoxFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -42,6 +43,7 @@ export default class CheckBoxFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(field);
     this.widget('GridDataBox').setField(field);
     this.widget('WidgetActionsBox').setField(field);
+    this.widget('FormFieldActionsBox').setField(field);
     this.widget('EventsTab').setField(field);
   }
 

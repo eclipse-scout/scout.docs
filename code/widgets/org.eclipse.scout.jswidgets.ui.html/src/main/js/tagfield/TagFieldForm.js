@@ -21,6 +21,7 @@ export default class TagFieldForm extends Form {
     return models.get(TagFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -37,6 +38,7 @@ export default class TagFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(tagField);
     this.widget('GridDataBox').setField(tagField);
     this.widget('WidgetActionsBox').setField(tagField);
+    this.widget('FormFieldActionsBox').setField(tagField);
     this.widget('EventsTab').setField(tagField);
   }
 }

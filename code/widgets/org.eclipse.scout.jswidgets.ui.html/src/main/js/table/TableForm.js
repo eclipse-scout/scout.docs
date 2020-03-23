@@ -27,6 +27,7 @@ export default class TableForm extends Form {
     return models.get(TableFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -40,9 +41,11 @@ export default class TableForm extends Form {
     this.table.on('appLinkAction', this._onAppLinkAction.bind(this));
 
     this.widget('PropertiesBox').setTable(this.table);
-    this.widget('FormFieldPropertiesBox').setField(this.widget('TableField'));
-    this.widget('GridDataBox').setField(this.widget('TableField'));
-    this.widget('WidgetActionsBox').setField(this.widget('TableField'));
+    var tableField = this.widget('TableField');
+    this.widget('FormFieldPropertiesBox').setField(tableField);
+    this.widget('GridDataBox').setField(tableField);
+    this.widget('WidgetActionsBox').setField(tableField);
+    this.widget('FormFieldActionsBox').setField(tableField);
     this.widget('EventsTab').setField(this.table);
 
     var targetField = this.widget('Column.TargetField');
@@ -71,7 +74,6 @@ export default class TableForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var oldColumn = event.oldValue;
       var newColumn = event.newValue;
 
       var columnPropertiesBox = this.widget('Column.PropertiesBox');

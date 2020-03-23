@@ -21,6 +21,7 @@ export default class LabelFieldForm extends Form {
     return models.get(LabelFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -39,6 +40,7 @@ export default class LabelFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(labelField);
     this.widget('GridDataBox').setField(labelField);
     this.widget('WidgetActionsBox').setField(labelField);
+    this.widget('FormFieldActionsBox').setField(labelField);
     this.widget('EventsTab').setField(labelField);
   }
 

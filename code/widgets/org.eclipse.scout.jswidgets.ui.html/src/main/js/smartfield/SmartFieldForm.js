@@ -21,6 +21,7 @@ export default class SmartFieldForm extends Form {
     return models.get(SmartFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -35,6 +36,7 @@ export default class SmartFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(this.smartField);
     this.widget('GridDataBox').setField(this.smartField);
     this.widget('WidgetActionsBox').setField(this.smartField);
+    this.widget('FormFieldActionsBox').setField(this.smartField);
     this.widget('EventsTab').setField(this.smartField);
   }
 

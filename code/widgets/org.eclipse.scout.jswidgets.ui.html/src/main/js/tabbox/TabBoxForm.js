@@ -28,6 +28,7 @@ export default class TabBoxForm extends Form {
 
     this.widget('Properties.TabBox').setTabBox(tabBox);
     this.widget('WidgetActionsBox').setField(tabBox);
+    this.widget('FormFieldActionsBox').setField(tabBox);
     this.widget('EventsTab').setField(tabBox);
     this.widget('Properties.TabItem').setTabBox(tabBox);
     this.addTabItemBox = this.widget('ActionBox.AddTabItem');

@@ -21,6 +21,7 @@ export default class NumberFieldForm extends Form {
     return models.get(NumberFieldFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -46,6 +47,7 @@ export default class NumberFieldForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(numberField);
     this.widget('GridDataBox').setField(numberField);
     this.widget('WidgetActionsBox').setField(numberField);
+    this.widget('FormFieldActionsBox').setField(numberField);
     this.widget('EventsTab').setField(numberField);
   }
 

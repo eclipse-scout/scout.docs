@@ -23,6 +23,7 @@ export default class AccordionForm extends Form {
     return models.get(AccordionFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -68,6 +69,7 @@ export default class AccordionForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(accordionField);
     this.widget('GridDataBox').setField(accordionField);
     this.widget('WidgetActionsBox').setField(accordionField);
+    this.widget('FormFieldActionsBox').setField(accordionField);
     this.widget('EventsTab').setField(this.accordion);
   }
 
@@ -163,6 +165,7 @@ export default class AccordionForm extends Form {
     return scout.create('jswidgets.CustomTile', model);
   }
 
+  // noinspection DuplicatedCode
   _sortGroups(asc) {
     var comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);

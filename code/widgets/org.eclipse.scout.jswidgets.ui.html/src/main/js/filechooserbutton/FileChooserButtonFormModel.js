@@ -78,6 +78,10 @@ export default function() {
               label: 'Actions',
               fields: [
                 {
+                  id: 'FormFieldActionsBox',
+                  objectType: 'jswidgets.FormFieldActionsBox'
+                },
+                {
                   id: 'WidgetActionsBox',
                   objectType: 'jswidgets.WidgetActionsBox'
                 }

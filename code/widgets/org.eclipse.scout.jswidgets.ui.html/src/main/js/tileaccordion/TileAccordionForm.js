@@ -26,6 +26,7 @@ export default class TileAccordionForm extends Form {
     return models.get(TileAccordionFormModel);
   }
 
+  // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
 
@@ -109,7 +110,9 @@ export default class TileAccordionForm extends Form {
     this.widget('FormFieldPropertiesBox').setField(accordionField);
     this.widget('GridDataBox').setField(accordionField);
     this.widget('WidgetActionsBox').setField(accordionField);
+    this.widget('FormFieldActionsBox').setField(accordionField);
     this.widget('EventsTab').setField(this.accordion);
+
     var layoutConfigBox = this.widget('LayoutConfigBox');
     layoutConfigBox.getBodyLayout = function() {
       // Use the layout of the first group for the initialization of the grid config box.
