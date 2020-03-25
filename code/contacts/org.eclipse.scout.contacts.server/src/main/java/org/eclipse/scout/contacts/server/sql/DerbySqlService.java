@@ -20,10 +20,13 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.PlatformExceptionTranslator;
 import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Order(1950)
 // tag::service[]
 public class DerbySqlService extends AbstractDerbySqlService {
+  private static final Logger LOG = LoggerFactory.getLogger(DerbySqlService.class);
 
   @Override
   protected String getConfiguredJdbcMappingName() {
@@ -47,6 +50,26 @@ public class DerbySqlService extends AbstractDerbySqlService {
       BEANS.get(PlatformExceptionTranslator.class).translate(e);
     }
   }
-// tag::service[]
+
+  @Override
+  public void destroy() {
+    try {
+      // Shutdown derby
+      // Expects the property scout.sql.jdbc.driverUnload to be set to false,
+      // otherwise super.destroy() will throw an exception
+      DriverManager.getConnection("jdbc:derby:;shutdown=true");
+    }
+    catch (SQLException e) {
+      if ("XJ015".equals(e.getSQLState())) {
+        // expected error on shutdown -> ignore
+      }
+      else {
+        LOG.warn("Exception while shutting down derby", e);
+      }
+    }
+    super.destroy();
+  }
+
+  // tag::service[]
 }
 // end::service[]
