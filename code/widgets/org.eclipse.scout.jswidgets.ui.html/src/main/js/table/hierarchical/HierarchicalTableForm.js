@@ -90,7 +90,7 @@ export default class HierarchicalTableForm extends Form {
       id: daltonId,
       iconId: icons.WORLD,
       cells: [
-        'Daltons brothers', null, null, true
+        'Dalton brothers', null, null, true
       ]
     }, {
       id: this.rowNo++,
@@ -223,7 +223,7 @@ export default class HierarchicalTableForm extends Form {
       parentRow: parentId,
       iconId: null,
       cells: [
-        'newRow' + id,
+        'New Row ' + id,
         'Any title',
         '20.10.2015'
       ]

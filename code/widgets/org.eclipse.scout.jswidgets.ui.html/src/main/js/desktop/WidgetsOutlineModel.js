@@ -360,6 +360,14 @@ export default function() {
       {
         objectType: 'PageWithNodes',
         leaf: true,
+        text: 'Tree',
+        detailForm: {
+          objectType: 'jswidgets.TreeForm'
+        }
+      },
+      {
+        objectType: 'PageWithNodes',
+        leaf: true,
         text: 'Tree Box',
         detailForm: {
           objectType: 'jswidgets.TreeBoxForm'

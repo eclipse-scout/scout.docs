@@ -135,8 +135,9 @@ export {default as SamplePageWithTableDetailTable} from './page/SamplePageWithTa
 export {default as SamplePageWithTableSearchForm} from './page/SamplePageWithTableSearchForm';
 export {default as SamplePageWithTableTileToggleMenu} from './page/SamplePageWithTableTileToggleMenu';
 export {default as SamplePageWithNodes} from './page/SamplePageWithNodes';
+export {default as TreeForm} from './tree/TreeForm';
+export {default as TreePropertiesBox} from './tree/TreePropertiesBox';
 export {default as TreeBoxForm} from './treebox/TreeBoxForm';
-export {default as TreePropertiesBox} from './treebox/TreePropertiesBox';
 export {default as CheckableTreeStyleLookupCall} from './treebox/CheckableTreeStyleLookupCall';
 
 import * as self from './index.js';
