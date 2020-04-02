@@ -13,8 +13,8 @@ package org.eclipse.scout.widgets.client.ui.desktop.outlines;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutline;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.config.PlatformConfigProperties.PlatformVersionProperty;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.shared.OfficialVersion;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitBranchConfigProperty;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitFolderConfigProperty;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.GitUrlConfigProperty;
@@ -39,7 +39,7 @@ public abstract class AbstractWidgetsOutline extends AbstractOutline implements 
   }
 
   protected String getDocumentationUrl() {
-    String[] version = OfficialVersion.VERSION.split("\\."); // cut of patch number
+    String[] version = CONFIG.getPropertyValue(PlatformVersionProperty.class).split("\\."); // cut of patch number
     StringBuilder sb = new StringBuilder();
     sb.append("https://eclipsescout.github.io/");
     sb.append(version[0]).append(".").append(version[1]).append("/");
