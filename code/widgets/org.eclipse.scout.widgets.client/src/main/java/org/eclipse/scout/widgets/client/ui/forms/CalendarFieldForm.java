@@ -10,9 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -20,14 +18,9 @@ import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.client.ui.CssClasses;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.CalendarMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.root.ContextMenuEvent;
-import org.eclipse.scout.rt.client.ui.action.menu.root.ContextMenuListener;
-import org.eclipse.scout.rt.client.ui.action.menu.root.IContextMenu;
 import org.eclipse.scout.rt.client.ui.basic.calendar.AbstractCalendar;
 import org.eclipse.scout.rt.client.ui.basic.calendar.provider.AbstractCalendarItemProvider;
-import org.eclipse.scout.rt.client.ui.desktop.outline.MenuWrapper;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -119,37 +112,17 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
       @ClassId("cec3a7ca-ea72-4402-8676-9cde7a119312")
       public class Calendar extends AbstractCalendar {
 
-        private ContextMenuListener m_cml;
-
-        private final List<IMenu> m_calendarMenus = new ArrayList<>();
-
         @Override
         protected void execInitCalendar() {
-          m_cml = event -> {
-            if (ContextMenuEvent.TYPE_STRUCTURE_CHANGED == event.getType()) {
-              IContextMenu rootContextMenu = getForm().getRootGroupBox().getContextMenu();
-              rootContextMenu.removeChildActions(m_calendarMenus);
-              m_calendarMenus.clear();
-              for (IMenu menu : event.getSource().getChildActions()) {
-                m_calendarMenus.add(MenuWrapper.wrapMenuIfNotWrapped(menu));
-              }
-              rootContextMenu.addChildActions(m_calendarMenus);
-            }
-          };
-          getCalendar().getContextMenu().addContextMenuListener(m_cml);
-        }
-
-        @Override
-        protected void execDisposeCalendar() {
-          getCalendar().getContextMenu().removeContextMenuListener(m_cml);
+          setMenuInjectionTarget(getMainBox());
         }
 
         @Order(10)
-        public class ItemProvdider01 extends AbstractCalendarItemProvider {
+        public class ItemProvider01 extends AbstractCalendarItemProvider {
 
           @Override
           protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
-            LOG.info("ItemProvdider01#execLoadItemsInBackground");
+            LOG.info("ItemProvider01#execLoadItemsInBackground");
             System.out.println("START long running item fetch operation... ");
             SleepUtil.sleepSafe(5, TimeUnit.SECONDS);
             System.out.println("END item fetch operation");
@@ -199,9 +172,9 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
             }
           }
 
-          @Order(210)
-          @ClassId("8b151712-0f7e-440d-b9f7-d542959865de")
-          public class Provider1EmptySpaceMenu extends AbstractMenu {
+          @Order(10)
+          @ClassId("9388992e-9948-4b21-8196-884c2f7674a1")
+          public class Provider1ComponentLevel1FlatSubMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
@@ -210,17 +183,62 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(CalendarMenuType.EmptySpace);
+              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+            }
+          }
+
+          @Order(210)
+          @ClassId("8b151712-0f7e-440d-b9f7-d542959865de")
+          public class Provider1ComponentLevel1TreeSubMenu extends AbstractMenu {
+
+            @Override
+            protected String getConfiguredText() {
+              return getClass().getSimpleName();
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+            }
+
+            @Order(10)
+            @ClassId("5eef856a-f0cb-47f1-bc2c-ace3551328d1")
+            public class Provider1ComponentLevel2SubMenu extends AbstractMenu {
+
+              @Override
+              protected String getConfiguredText() {
+                return getClass().getSimpleName();
+              }
+
+              @Override
+              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+              }
+
+              @Order(10)
+              @ClassId("9388992e-9948-4b21-8196-884c2f7674a1")
+              public class Provider1ComponentLevel3SubMenu extends AbstractMenu {
+
+                @Override
+                protected String getConfiguredText() {
+                  return getClass().getSimpleName();
+                }
+
+                @Override
+                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+                  return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
+                }
+              }
             }
           }
         }
 
         @Order(20)
-        public class ItemProvdider02 extends AbstractCalendarItemProvider {
+        public class ItemProvider02 extends AbstractCalendarItemProvider {
 
           @Override
           protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
-            LOG.info("ItemProvdider02#execLoadItems");
+            LOG.info("ItemProvider02#execLoadItems");
 
             String cssClass = "calendar-task";
             java.util.Calendar cal = java.util.Calendar.getInstance();
