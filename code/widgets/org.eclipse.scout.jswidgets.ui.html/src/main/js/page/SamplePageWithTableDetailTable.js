@@ -31,25 +31,26 @@ export default class SamplePageWithTableDetailTable extends Table {
   }
 
   _onAddManyMenuAction() {
+    var rows = [];
     for (var i = 0; i < 10; i++) {
-      this.insertRow(this._createRow());
+      rows.push(this._createRow(this.rows.length + i));
     }
+    this.insertRows(rows);
   }
 
   _onDeleteRowMenuAction() {
     this.deleteRows(this.selectedRows);
   }
 
-  _createRow() {
-    var strings = ['string 01', 'string 02', 'string 03', 'string 04', 'string 05'];
-    var randomNumber = Math.floor(Math.random() * strings.length);
+  _createRow(rowNo) {
+    rowNo = scout.nvl(rowNo, this.rows.length + 1);
+    var smartValues = [null, 'es_CR', null, 'pt_BR', 'ro_RO'];
 
     var row = {
       id: this.rows.length + 1,
-      //    string: 'string ' + (this.rows.length + 1),
-      string: strings[randomNumber],
-      //    number: Math.floor(Math.random() * Math.floor(999999)),
-      number: 2000,
+      string: 'string ' + rowNo,
+      smartValue: smartValues[rowNo % smartValues.length],
+      number: Math.floor(Math.random() * Math.floor(999999)),
       bool: Math.random() >= 0.5
     };
     return {
@@ -57,6 +58,7 @@ export default class SamplePageWithTableDetailTable extends Table {
       cells: [
         row.id,
         row.string,
+        row.smartValue,
         row.number,
         row.bool
       ]

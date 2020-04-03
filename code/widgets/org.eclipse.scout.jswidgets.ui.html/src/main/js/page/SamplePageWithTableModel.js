@@ -4,7 +4,6 @@ export default function() {
   return {
     id: 'jswidgets.SamplePageWithTable',
     objectType: 'PageWithTable',
-    leaf: true,
     text: 'Page with Table',
     detailTable: {
       id: 'jswidgets.SamplePageWithTable.Table',
@@ -13,12 +12,21 @@ export default function() {
         {
           id: 'IdColumn',
           objectType: 'NumberColumn',
-          visible: false
+          displayable: false
         },
         {
           id: 'StringColumn',
           objectType: 'Column',
           text: 'String Column',
+          width: 300,
+          sortActive: true,
+          sortIndex: 0
+        },
+        {
+          id: 'SmartColumn',
+          objectType: 'SmartColumn',
+          lookupCall: 'jswidgets.LocaleLookupCall',
+          text: 'Smart Column',
           width: 300
         },
         {

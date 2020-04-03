@@ -22,27 +22,32 @@ export default class SamplePageWithTable extends PageWithTable {
     };
     var data = [{
       id: 1,
-      string: 'string 01',
+      string: 'string 1',
+      smartValue: null,
       number: 103012,
       bool: true
     }, {
-      id: 2,
-      string: 'string 02',
-      number: 5685,
-      bool: true
-    }, {
       id: 3,
-      string: 'string 03',
+      string: 'string 2',
+      smartValue: null,
       number: 9214575,
       bool: false
     }, {
+      id: 2,
+      string: 'string 3',
+      smartValue: 'es_GT',
+      number: 5685,
+      bool: true
+    }, {
       id: 4,
-      string: 'string 04',
+      string: 'string 4',
+      smartValue: 'de_CH',
       number: 168461,
       bool: false
     }, {
       id: 5,
-      string: 'string 05',
+      string: 'string 5',
+      smartValue: 'th_TH',
       number: 959161,
       bool: true
     }];
@@ -57,10 +62,17 @@ export default class SamplePageWithTable extends PageWithTable {
           cells: [
             row.id,
             row.string,
+            row.smartValue,
             row.number,
             row.bool
           ]
         };
       });
+  }
+
+  createChildPage(row) {
+    return scout.create('jswidgets.SamplePageWithNodes', {
+      parent: this.getOutline()
+    });
   }
 }
