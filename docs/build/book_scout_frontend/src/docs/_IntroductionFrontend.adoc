@@ -783,7 +783,7 @@ Consequently, Jetty plugins are not listed as a dependency in the Scout server's
 
 [[sec-config_ini]]
 ==== Eclipse Configuration Files
-(((Eclipe config.ini file)))
+(((Eclipse config.ini file)))
 
 
 [[img-server_dev_ini]]
