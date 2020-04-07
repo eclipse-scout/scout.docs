@@ -31,19 +31,18 @@ public abstract class AbstractWidgetsOutline extends AbstractOutline implements 
   }
 
   protected String getGitHubUrl() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(CONFIG.getPropertyValue(GitUrlConfigProperty.class)).append("/");
-    sb.append(CONFIG.getPropertyValue(GitBranchConfigProperty.class)).append("/");
-    sb.append(CONFIG.getPropertyValue(GitFolderConfigProperty.class)).append("/");
-    return sb.toString();
+    return CONFIG.getPropertyValue(GitUrlConfigProperty.class) + "/"
+        + CONFIG.getPropertyValue(GitBranchConfigProperty.class) + "/"
+        + CONFIG.getPropertyValue(GitFolderConfigProperty.class) + "/";
   }
 
   protected String getDocumentationUrl() {
-    String[] version = CONFIG.getPropertyValue(PlatformVersionProperty.class).split("\\."); // cut of patch number
-    StringBuilder sb = new StringBuilder();
-    sb.append("https://eclipsescout.github.io/");
-    sb.append(version[0]).append(".").append(version[1]).append("/");
-    return sb.toString();
+    String url = "https://eclipsescout.github.io/";
+    String version = CONFIG.getPropertyValue(PlatformVersionProperty.class);
+    if (version.contains(".")) {
+      String[] versionParts = version.split("\\."); // cut of patch number
+      url += versionParts[0] + "." + versionParts[1] + "/";
+    }
+    return url;
   }
-
 }
