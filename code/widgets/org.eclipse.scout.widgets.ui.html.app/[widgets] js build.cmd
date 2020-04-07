@@ -24,7 +24,7 @@ call npm install pnpm@">=4.0.0 <5.0.0" --prefix ../../node_modules
 :: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
 call cd ..\..
 echo Running 'pnpm install' in %cd%
-call node_modules\pnpm install
+call node_modules\pnpm install --ignore-scripts
 if %errorlevel% neq 0 exit /b %errorlevel%
 echo pnpm install finished successfully!
 echo.
