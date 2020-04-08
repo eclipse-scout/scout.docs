@@ -7,59 +7,65 @@ export default function() {
     borderVisible: false,
     fields: [
       {
-        id: 'titleField',
+        id: 'TitleField',
         objectType: 'StringField',
         label: 'Title'
       },
       {
-        id: 'subTitleField',
+        id: 'SubTitleField',
         objectType: 'StringField',
         label: 'Sub Title'
       },
       {
-        id: 'iconIdField',
+        id: 'IconIdField',
         objectType: 'SmartField',
         lookupCall: 'jswidgets.IconIdLookupCall',
         label: 'Icon Id'
       },
       {
-        id: 'displayHintField',
+        id: 'DisplayHintField',
         objectType: 'SmartField',
         lookupCall: 'jswidgets.FormDisplayHintLookupCall',
         label: 'Display Hint'
       },
       {
-        id: 'displayParentField',
+        id: 'DisplayViewIdField',
+        objectType: 'SmartField',
+        lookupCall: 'jswidgets.FormDisplayViewIdLookupCall',
+        label: 'Display View Id'
+      },
+      {
+        id: 'DisplayParentField',
         objectType: 'SmartField',
         lookupCall: 'jswidgets.DisplayParentLookupCall',
         label: 'Display Parent'
       },
       {
-        id: 'askIfNeedSaveField',
+        id: 'AskIfNeedSaveField',
         objectType: 'CheckBoxField',
         label: 'Ask If Need Save',
         labelVisible: false
       },
       {
-        id: 'cacheBoundsField',
+        id: 'CacheBoundsField',
         objectType: 'CheckBoxField',
         label: 'Cache Bounds',
         labelVisible: false
       },
       {
-        id: 'closableField',
+        id: 'ClosableField',
         objectType: 'CheckBoxField',
         label: 'Closable',
         labelVisible: false
       },
       {
-        id: 'resizableField',
+        id: 'ResizableField',
         objectType: 'CheckBoxField',
         label: 'Resizable',
         labelVisible: false
       },
       {
-        id: 'modalField',
+        id: 'ModalField',
         objectType: 'CheckBoxField',
         label: 'Modal',
         labelVisible: false

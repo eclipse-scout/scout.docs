@@ -33,16 +33,17 @@ export default class FormForm extends Form {
 
     // form properties of the form will be opened with OpenFormButton
     this.propertiesBox = this.widget('PropertiesBox');
-    // defaults
+    this.propertiesBox.setForm(scout.create('Form', {parent: this}));
     this.propertiesBox.titleField.setValue('Title');
-    this.propertiesBox.displayHintField.setValue(Form.DisplayHint.DIALOG);
-    this.propertiesBox.closableField.setValue(true);
 
     // form properties of current form
     this.currentFormPropertiesBox = this.widget('CurrentFormPropertiesBox');
-    this.currentFormPropertiesBox.setField(this);
+    this.currentFormPropertiesBox.setForm(this);
+    this.currentFormPropertiesBox.cacheBoundsField.setEnabled(false);
     this.currentFormPropertiesBox.displayHintField.setEnabled(false);
+    this.currentFormPropertiesBox.displayViewIdField.setEnabled(false);
     this.currentFormPropertiesBox.displayParentField.setEnabled(false);
+    this.currentFormPropertiesBox.resizableField.setEnabled(false);
     this.widget('CurrentFormPropertiesTab').setVisible(!this.detailForm);
 
     if (this.closeMenuVisible) {
@@ -62,6 +63,7 @@ export default class FormForm extends Form {
       subTitle: this.propertiesBox.subTitleField.value,
       iconId: this.propertiesBox.iconIdField.value,
       displayHint: this.propertiesBox.displayHintField.value,
+      displayViewId: this.propertiesBox.displayViewIdField.value,
       displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
       modal: this.propertiesBox.modalField.value,
       askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
@@ -74,7 +76,6 @@ export default class FormForm extends Form {
     this.widget('EventsTab').setField(form);
     this.widget('WidgetActionsBox').setField(form);
     form.open();
-
   }
 
   _onOpenLifecycleFormButtonClick(model) {

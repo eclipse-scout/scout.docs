@@ -16,7 +16,7 @@ export default class FormPropertiesBox extends GroupBox {
 
   constructor() {
     super();
-    this.field = null;
+    this.form = null;
     this.titleField = null;
     this.subTitleField = null;
     this.iconIdField = null;
@@ -26,6 +26,7 @@ export default class FormPropertiesBox extends GroupBox {
     this.resizableField = null;
     this.modalField = null;
     this.displayHintField = null;
+    this.displayViewIdField = null;
     this.displayParentField = null;
   }
 
@@ -35,73 +36,70 @@ export default class FormPropertiesBox extends GroupBox {
 
   _init(model) {
     super._init(model);
-    this.titleField = this.widget('titleField');
-    this.subTitleField = this.widget('subTitleField');
-    this.iconIdField = this.widget('iconIdField');
-    this.displayHintField = this.widget('displayHintField');
-    this.displayParentField = this.widget('displayParentField');
-    this.askIfNeedSaveField = this.widget('askIfNeedSaveField');
-    this.cacheBoundsField = this.widget('cacheBoundsField');
-    this.closableField = this.widget('closableField');
-    this.resizableField = this.widget('resizableField');
-    this.modalField = this.widget('modalField');
-    this._setField(this.field);
+    this.titleField = this.widget('TitleField');
+    this.subTitleField = this.widget('SubTitleField');
+    this.iconIdField = this.widget('IconIdField');
+    this.displayHintField = this.widget('DisplayHintField');
+    this.displayViewIdField = this.widget('DisplayViewIdField');
+    this.displayParentField = this.widget('DisplayParentField');
+    this.askIfNeedSaveField = this.widget('AskIfNeedSaveField');
+    this.cacheBoundsField = this.widget('CacheBoundsField');
+    this.closableField = this.widget('ClosableField');
+    this.resizableField = this.widget('ResizableField');
+    this.modalField = this.widget('ModalField');
+    this._setForm(this.form);
   }
 
-  setField(field) {
-    this.setProperty('field', field);
+  setForm(form) {
+    this.setProperty('form', form);
   }
 
-  _setField(field) {
-    this._setProperty('field', field);
-    if (!this.field) {
+  // noinspection DuplicatedCode
+  _setForm(form) {
+    this._setProperty('form', form);
+    if (!this.form) {
       return;
     }
-    this.titleField.setValue(field.title);
+    this.titleField.setValue(form.title);
     this.titleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.subTitleField.setValue(field.subTitle);
+    this.subTitleField.setValue(form.subTitle);
     this.subTitleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.iconIdField.setValue(field.iconId);
+    this.iconIdField.setValue(form.iconId);
     this.iconIdField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.askIfNeedSaveField.setValue(field.askIfNeedSave);
+    this.askIfNeedSaveField.setValue(form.askIfNeedSave);
     this.askIfNeedSaveField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.cacheBoundsField.setValue(field.cacheBounds);
-    this.cacheBoundsField.on('propertyChange', this._onPropertyChange.bind(this));
+    this.cacheBoundsField.setValue(form.cacheBounds);
 
-    this.closableField.setValue(field.closable);
+    this.closableField.setValue(form.closable);
     this.closableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.resizableField.setValue(field.resizable);
-    this.resizableField.on('propertyChange', this._onPropertyChange.bind(this));
+    this.resizableField.setValue(form.resizable);
 
-    this.modalField.setValue(field.modal);
+    this.modalField.setValue(form.modal);
     this.modalField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    this.displayHintField.setValue(field.displayHint);
-    this.displayParentField.setValue(DisplayParentLookupCall.resolveDisplayParentType(field.displayParent));
+    this.displayHintField.setValue(form.displayHint);
+    this.displayViewIdField.setValue(form.displayViewId);
+    this.displayParentField.setValue(DisplayParentLookupCall.resolveDisplayParentType(form.displayParent));
   }
 
   _onPropertyChange(event) {
-    if (event.propertyName === 'value' && event.source.id === 'titleField') {
-      this.field.setTitle(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'subTitleField') {
-      this.field.setSubTitle(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'iconIdField') {
-      this.field.setIconId(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'askIfNeedSaveField') {
-      this.field.setAskIfNeedSave(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'cacheBoundsField') {
-      this.field.setCacheBounds(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'closableField') {
-      this.field.setClosable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'resizableField') {
-      this.field.setResizable(event.newValue);
-    } else if (event.propertyName === 'value' && event.source.id === 'modalField') {
-      this.field.setModal(event.newValue);
+    if (event.propertyName === 'value' && event.source.id === 'TitleField') {
+      this.form.setTitle(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'SubTitleField') {
+      this.form.setSubTitle(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'IconIdField') {
+      this.form.setIconId(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'AskIfNeedSaveField') {
+      this.form.setAskIfNeedSave(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'ClosableField') {
+      this.form.setClosable(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'ModalField') {
+      this.form.setModal(event.newValue);
     }
   }
 }

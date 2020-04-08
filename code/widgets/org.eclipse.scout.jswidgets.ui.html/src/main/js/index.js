@@ -22,6 +22,7 @@ export {default as Desktop} from './desktop/Desktop';
 export {default as DesktopForm} from './desktop/DesktopForm';
 export {default as DisplayParentLookupCall} from './desktop/DisplayParentLookupCall';
 export {default as FormDisplayHintLookupCall} from './form/FormDisplayHintLookupCall';
+export {default as FormDisplayViewIdLookupCall} from './form/FormDisplayViewIdLookupCall';
 export {default as FormForm} from './form/FormForm';
 export {default as FormPropertiesBox} from './form/FormPropertiesBox';
 export {default as LifecycleForm} from './form/LifecycleForm';

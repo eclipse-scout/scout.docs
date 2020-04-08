@@ -5,13 +5,12 @@ export default function() {
     rootGroupBox: {
       id: 'MainBox',
       objectType: 'GroupBox',
-      'menus': [{
+      menus: [{
         id: 'CloseMenu',
         objectType: 'CloseMenu',
         tooltipText: '${textKey:CloseMenuTooltip}',
-        'visible': false
-      }
-      ],
+        visible: false
+      }],
       fields: [
         {
           id: 'DetailBox',
