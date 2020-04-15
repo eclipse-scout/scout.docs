@@ -173,7 +173,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           }
 
           @Order(10)
-          @ClassId("9388992e-9948-4b21-8196-884c2f7674a1")
+          @ClassId("e78cafae-4eef-41f9-800b-bd47de6ec69d")
           public class Provider1ComponentLevel1FlatSubMenu extends AbstractMenu {
 
             @Override

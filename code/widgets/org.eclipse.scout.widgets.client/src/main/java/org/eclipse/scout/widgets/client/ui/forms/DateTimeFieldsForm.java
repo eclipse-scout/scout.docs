@@ -233,7 +233,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
     public class SeleniumTestMenu extends AbstractSeleniumTestMenu {
 
       @Order(100)
-      @ClassId("a6b583ba-abb1-47f6-8ba2-9d815e7a080f")
+      @ClassId("0c8679f1-cf0e-4772-a31d-6ee922c6821f")
       public class ToggleSearchRequiredMenu extends AbstractToggleMenu {
 
         @Override
