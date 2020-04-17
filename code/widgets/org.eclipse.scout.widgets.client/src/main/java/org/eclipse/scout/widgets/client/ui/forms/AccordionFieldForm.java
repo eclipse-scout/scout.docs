@@ -297,7 +297,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       return (TileGrid) super.getBody();
     }
 
-    @ClassId("1af3bcc9-5cb0-486a-bb5a-6ef5dfc63230")
+    @ClassId("a73f094f-41c5-43c1-9c9c-f445b8e123ce")
     public class TileGrid extends AbstractTileGrid<AbstractCustomTile> {
 
       @Override

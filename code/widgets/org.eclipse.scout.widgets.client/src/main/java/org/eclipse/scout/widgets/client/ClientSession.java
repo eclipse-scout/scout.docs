@@ -15,10 +15,12 @@ import java.util.Locale;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.bookmark.IBookmarkService;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
+import org.eclipse.scout.rt.client.ui.ClientUIPreferences;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.shared.SharedConfigProperties.CreateTunnelToServerBeansProperty;
 import org.eclipse.scout.rt.shared.services.common.ping.IPingService;
+import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.SeleniumProperty;
 import org.eclipse.scout.widgets.client.ui.desktop.Desktop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +50,11 @@ public class ClientSession extends AbstractClientSession {
     if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
       BEANS.get(IPingService.class).ping("ping");
+    }
+
+    if (CONFIG.getPropertyValue(SeleniumProperty.class)) {
+      // remove all UIPreferences when in selenium mode to avoid side effects between tests
+      ClientUIPreferences.getClientPreferences(this).clear();
     }
   }
 
