@@ -28,11 +28,11 @@ Actions on the top right corner:
 [cols="10,45,45"]
 |===
 
-| image:{imgsdir}/icon_refresh.gif[]
+| image:{imgsdir}/icon_refresh.png[]
 | Refresh NLS Project
 | Reload the content of the editor.
 
-| image:{imgsdir}/icon_find_obj.gif[]
+| image:{imgsdir}/icon_find_obj.png[]
 | Show NLS entry usage
 | For each row, search in the Java code where the NLS Key is used. Results are displayed in the first column.
 
@@ -40,15 +40,15 @@ Actions on the top right corner:
 | New entry...
 | Opens the {sdk_wizard_nls-entry}
 
-| image:{imgsdir}/icon_fileadd_pending.gif[]
+| image:{imgsdir}/icon_fileadd_pending.png[]
 | New language...
 | Opens the {sdk_wizard_language}
 
-| image:{imgsdir}/icon_import.gif[]
+| image:{imgsdir}/icon_import.png[]
 | Import...
 | Import the NLS entries of an external file
 
-| image:{imgsdir}/icon_export.gif[]
+| image:{imgsdir}/icon_export.png[]
 | Export...
 | Export the NLS entries to an external file
 |===
@@ -71,7 +71,7 @@ On each row it is possible to call following context menu:
 | Modify Entry
 | Opens the {sdk_wizard_nls-entry}
 
-| image:{imgsdir}/icon_find_obj.gif[]
+| image:{imgsdir}/icon_find_obj.png[]
 | Find references to 'Xxx'
 | Search in the Java code where the NLS Key is used.
 
