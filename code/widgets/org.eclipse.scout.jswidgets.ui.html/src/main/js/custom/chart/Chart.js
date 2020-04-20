@@ -10,7 +10,7 @@
  */
 import {Widget} from '@eclipse-scout/core';
 import {Chart as ChartJs} from 'chart.js';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class Chart extends Widget {
 

@@ -1,6 +1,6 @@
 import {arrays, models, objects, PageWithNodes, scout} from '@eclipse-scout/core';
 import SamplePageWithNodesModel from './SamplePageWithNodesModel';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class SamplePageWithNodes extends PageWithNodes {
 

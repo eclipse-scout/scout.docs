@@ -11,7 +11,7 @@
 import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
 import {CustomTile} from '../index';
 import TileGridFormModel from './TileGridFormModel';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class TileGridForm extends Form {
 

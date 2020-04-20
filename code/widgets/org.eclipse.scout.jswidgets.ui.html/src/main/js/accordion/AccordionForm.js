@@ -10,7 +10,7 @@
  */
 import {comparators, Form, models, scout} from '@eclipse-scout/core';
 import AccordionFormModel from './AccordionFormModel';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class AccordionForm extends Form {
 
