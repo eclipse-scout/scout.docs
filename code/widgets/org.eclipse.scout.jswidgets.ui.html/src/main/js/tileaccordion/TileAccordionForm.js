@@ -11,7 +11,7 @@
 import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
 import TileAccordionFormModel from './TileAccordionFormModel';
 import {GroupLookupCall} from '../index';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class TileAccordionForm extends Form {
 

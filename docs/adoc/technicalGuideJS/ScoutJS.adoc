@@ -1019,6 +1019,23 @@ If you now make adjustments on your JS or CSS files, you would have to rerun the
 
 This will also build your application but additionally starts a watcher that watches your source code. As soon as you change your code that watcher will notice and start a build. Since it knows which files changed, only these files need to be rebuilt which makes it a lot faster.
 
+[[webpack-arguments]]
+===== Arguments
+The build commands accept some arguments you can use to adjust the build without modifying your webpack config file. The following arguments are available:
+
+. mode: 'development' or 'production'. This argument is set automatically when using build:dev or build:prod.
+. clean: true, to clean the dist folder before each build. Default is false if watcher is enabled (build:dev:watch), otherwise true.
+. progress: true, to show build progress in percentage. Default is true.
+. profile: true, to show timing information for each build step. Default is false.
+. resDirArray: an array containing directories which should be copied to dist/res.
+. stats: object to control the build output. There are some presets available as shortcuts (e.g. 'detailed' or 'errors-only'), see also: https://webpack.js.org/configuration/stats/.
+
+In order to set an argument make sure to separate the arguments using \-- from the command. Example:
+
+`npm run build:dev \-- --progress false`
+
+All arguments are passed to the webpack config file as parameter `args` which is the second parameter. The first parameter called `env` is actually just a convenience accessor to `args.env` and does not contain system environment variables. If you want to access them just use the regular node syntax `process.env`.
+
 ==== Testing
 Before you can run your unit tests you need to properly setup the files as described in <<Karma Configuration>>.
 
@@ -1035,6 +1052,21 @@ The above command will execute the tests once and does not watch for changes. Th
 This will start a real browser and enable the watch mode. This means every time you adjust your code and save it, the web pack build is started, the browser reloaded and your tests executed.
 
 TIP: If you don't like the automatic browser reloading, you can press debug on the top right corner of the browser or manually navigate to http://localhost:9876/debug.html.
+
+===== Arguments
+The test commands accept some arguments you can use to adjust the karma runner without modifying your karma config file. All passed arguments are merged with the karma config object, so all karma configuration options are available (see http://karma-runner.github.io/4.0/config/configuration-file.html).
+
+Example usage:
+
+`npm run test:ci \-- --junitReporter.outputDir=custom-out-dir`
+
+NOTE: Please note that no type conversion happens which is especially relevant for boolean arguments. If you for example want to disable the watcher, you cannot use `--auto-watch false`. Instead, you would have to use `--no-auto-watch`.
+
+In addition to the karma configuration options you can also pass the webpack arguments (checkout <<webpack-arguments>> for a list of available arguments). To do that, you need to use the argument called `webpackArgs`. Example:
+
+`npm run testserver:start \-- --webpackArgs.progress=false`
+
+NOTE: test:ci automatically disables the webpack progress because you don't want the progress when the tests run on a continuous integration server.
 
 ==== Test prod scripts on your local machine
 

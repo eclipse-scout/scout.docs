@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {Form, models} from '@eclipse-scout/core';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import LifecycleFormModel from './LifecycleFormModel';
 
 export default class LifecycleForm extends Form {

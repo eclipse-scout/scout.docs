@@ -1,5 +1,5 @@
 import {FormField} from '@eclipse-scout/core';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 import {Chart} from 'chart.js';
 

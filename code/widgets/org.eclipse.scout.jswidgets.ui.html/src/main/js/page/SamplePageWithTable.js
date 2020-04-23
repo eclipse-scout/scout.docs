@@ -1,6 +1,6 @@
 import {models, PageWithTable, strings} from '@eclipse-scout/core';
 import SamplePageWithTableModel from './SamplePageWithTableModel';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 export default class SamplePageWithTable extends PageWithTable {
 
