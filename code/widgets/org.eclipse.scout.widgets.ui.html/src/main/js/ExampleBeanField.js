@@ -15,7 +15,6 @@ export default class ExampleBeanField extends BeanField {
     super();
   }
 
-
   _render() {
     super._render();
     this.$container.addClass('example-bean-field');

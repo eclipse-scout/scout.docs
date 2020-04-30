@@ -15,7 +15,6 @@ export default class ExampleBeanColumn extends BeanColumn {
     super();
   }
 
-
   _renderValue($cell, value) {
     $cell.appendElement('<img>')
       .attr('src', value.image)

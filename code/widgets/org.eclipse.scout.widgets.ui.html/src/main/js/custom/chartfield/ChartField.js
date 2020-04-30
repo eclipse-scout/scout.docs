@@ -12,7 +12,6 @@ export default class ChartField extends FormField {
     this.chartConfig = null;
   }
 
-
   _init(model) {
     super._init(model);
     this._setChartConfig(this.chartConfig);

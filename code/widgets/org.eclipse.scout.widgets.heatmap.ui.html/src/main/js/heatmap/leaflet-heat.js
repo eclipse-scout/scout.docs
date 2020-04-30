@@ -96,7 +96,8 @@ L.HeatLayer = (L.Layer ? L.Layer : L.Class).extend(
       this._heat._width !== i.x && (this._canvas.width = this._heat._width = i.x), this._heat._height !== i.y && (this._canvas.height = this._heat._height = i.y), this._redraw();
     }, _redraw: function() {
       var t, i, a, s, e, n, h, o, r, d = [], _ = this._heat._r, l = this._map.getSize(), m = new L.Bounds(L.point([-_, -_]), l.add([_, _])), c = void 0 === this.options.max ? 1 : this.options.max,
-        u = void 0 === this.options.maxZoom ? this._map.getMaxZoom() : this.options.maxZoom, f = 1 / Math.pow(2, Math.max(0, Math.min(u - this._map.getZoom(), 12))), g = _ / 2, p = [], v = this._map._getMapPanePos(), w = v.x % g,
+        u = void 0 === this.options.maxZoom ? this._map.getMaxZoom() : this.options.maxZoom, f = 1 / Math.pow(2, Math.max(0, Math.min(u - this._map.getZoom(), 12))), g = _ / 2, p = [],
+        v = this._map._getMapPanePos(), w = v.x % g,
         y = v.y % g;
       for (t = 0, i = this._latlngs.length; i > t; t++) if (a = this._map.latLngToContainerPoint(this._latlngs[t]), m.contains(a)) {
         e = Math.floor((a.x - w) / g) + 2, n = Math.floor((a.y - y) / g) + 2;

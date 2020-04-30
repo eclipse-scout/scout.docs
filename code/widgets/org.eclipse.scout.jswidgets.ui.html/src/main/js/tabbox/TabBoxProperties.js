@@ -79,7 +79,7 @@ export default class TabBoxProperties extends TabItem {
   _onShowMenusChange(event) {
     if (event.propertyName === 'value') {
       this.tabBox.menus.forEach(function(m) {
-        m.setVisible(this.showMenusField.value)
+        m.setVisible(this.showMenusField.value);
       }, this);
     }
   }

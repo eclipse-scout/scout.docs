@@ -16,7 +16,6 @@ export default class WidgetsOutline extends Outline {
     super();
   }
 
-
   _createOutlineOverview() {
     return scout.create('widgets.WidgetsTileOutlineOverview', {
       parent: this,

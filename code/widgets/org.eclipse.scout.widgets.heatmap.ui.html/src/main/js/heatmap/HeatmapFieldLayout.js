@@ -7,7 +7,6 @@ export default class HeatmapFieldLayout extends AbstractLayout {
     this.field = field;
   }
 
-
   /**
    * @override AbstractLayout.js
    */
