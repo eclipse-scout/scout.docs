@@ -16,7 +16,6 @@ export default class WidgetsTileOutlineOverview extends TileOutlineOverview {
     super();
   }
 
-
   _render() {
     super._render();
     this.$container.addClass('widgets-outline-overview');

@@ -20,7 +20,7 @@ export default class ProposalFieldPropertiesBox extends SmartFieldPropertiesBox 
   }
 
   _jsonModel() {
-    return models.extend(ProposalFieldPropertiesBoxModel(this), super._jsonModel());
+    return models.extend(ProposalFieldPropertiesBoxModel, super._jsonModel());
   }
 
   _init(model) {

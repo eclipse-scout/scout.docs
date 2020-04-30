@@ -9,7 +9,6 @@ export default class HeatmapField extends FormField {
     super();
   }
 
-
   _render() {
     this.addContainer(this.$parent, 'heatmap-field');
     this.addLabel();

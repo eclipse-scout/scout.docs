@@ -16,7 +16,6 @@ export default class HeatmapFieldAdapter extends FormFieldAdapter {
     super();
   }
 
-
   _onWidgetEvent(event) {
     if (event.type === 'viewParameterChange') {
       this._onWidgetViewParameterChange(event);

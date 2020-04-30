@@ -18,14 +18,12 @@ export default class LocaleTableLookupCall extends LocaleLookupCall {
   }
 
   _dataToLookupRow(data) {
-    var lookupRow = new scout.create('LookupRow', {
+    return scout.create('LookupRow', {
       key: data[0],
       text: data[1],
       additionalTableRowData: {
         tag: data[0]
       }
     });
-
-    return lookupRow;
   }
 }
