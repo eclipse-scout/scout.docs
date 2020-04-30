@@ -57,7 +57,7 @@ export default class TabBoxAddTabItemBox extends GroupBox {
   }
 
   addTabItem(label, subLabel, beforeTabItem) {
-    var tabItems = this.tabBox.tabItems || [],
+    let tabItems = this.tabBox.tabItems || [],
       beforeIndex,
       tabItem = scout.create('jswidgets.DynamicTab', {
         parent: this.tabBox,

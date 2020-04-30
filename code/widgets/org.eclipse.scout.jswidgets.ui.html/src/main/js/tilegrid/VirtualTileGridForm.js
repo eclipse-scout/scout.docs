@@ -26,14 +26,14 @@ export default class VirtualTileGridForm extends TileGridForm {
 
     // Make tiles a little smaller and add a column to have more visible tiles on the screen
     this.tileGrid.setGridColumnCount(5);
-    var layoutConfig = this.tileGrid.layoutConfig.clone();
+    let layoutConfig = this.tileGrid.layoutConfig.clone();
     layoutConfig.columnWidth = 100;
     layoutConfig.rowWidth = 100;
     this.tileGrid.setLayoutConfig(layoutConfig);
 
     // Insert 1000 tiles
-    var tiles = [];
-    for (var i = 0; i < 1000; i++) {
+    let tiles = [];
+    for (let i = 0; i < 1000; i++) {
       tiles.push(this._createTile({
         label: 'Tile ' + i
       }));
@@ -41,7 +41,7 @@ export default class VirtualTileGridForm extends TileGridForm {
     this.tileGrid.setTiles(tiles);
 
     // Update the property fields
-    var virtualField = this.widget('VirtualField');
+    let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.tileGrid.virtual);
   }
 }

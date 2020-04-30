@@ -35,7 +35,7 @@ export default class TreeForm extends Form {
     this.widget('DeleteAllChildNodesMenu').on('action', this._onDeleteAllChildNodesMenuAction.bind(this));
 
     this.widget('PropertiesBox').setTree(this.tree);
-    var treeField = this.widget('TreeField');
+    let treeField = this.widget('TreeField');
     this.widget('FormFieldPropertiesBox').setField(treeField);
     this.widget('GridDataBox').setField(treeField);
     this.widget('WidgetActionsBox').setField(treeField);
@@ -46,10 +46,10 @@ export default class TreeForm extends Form {
   }
 
   _createNode() {
-    var iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
+    let iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
 
-    var icon = iconList[this.nodeNo % iconList.length];
-    var text = 'Node #' + this.nodeNo;
+    let icon = iconList[this.nodeNo % iconList.length];
+    let text = 'Node #' + this.nodeNo;
     this.nodeNo++;
 
     return {
@@ -59,7 +59,7 @@ export default class TreeForm extends Form {
   }
 
   _createNodeWithChildren() {
-    var node = this._createNode();
+    let node = this._createNode();
     node.childNodes = [this._createNode(), this._createNode(), this._createNode()];
     return node;
   }

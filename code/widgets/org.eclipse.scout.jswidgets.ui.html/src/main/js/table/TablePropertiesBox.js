@@ -38,79 +38,79 @@ export default class TablePropertiesBox extends GroupBox {
       return;
     }
 
-    var autoResizeColumnsField = this.widget('AutoResizeColumnsField');
+    let autoResizeColumnsField = this.widget('AutoResizeColumnsField');
     autoResizeColumnsField.setValue(this.table.autoResizeColumns);
     autoResizeColumnsField.on('propertyChange', this._onAutoResizeColumnsPropertyChange.bind(this));
 
-    var autoOptimizeColumnWidthsField = this.widget('AutoOptimizeColumnWidthsField');
+    let autoOptimizeColumnWidthsField = this.widget('AutoOptimizeColumnWidthsField');
     autoOptimizeColumnWidthsField.setValue(false);
     autoOptimizeColumnWidthsField.on('propertyChange', this._onAutoOptimizeColumnWidthsPropertyChange.bind(this));
 
-    var checkableField = this.widget('CheckableField');
+    let checkableField = this.widget('CheckableField');
     checkableField.setValue(this.table.checkable);
     checkableField.on('propertyChange', this._onCheckablePropertyChange.bind(this));
 
-    var headerEnabledField = this.widget('HeaderEnabledField');
+    let headerEnabledField = this.widget('HeaderEnabledField');
     headerEnabledField.setValue(this.table.headerEnabled);
     headerEnabledField.on('propertyChange', this._onHeaderEnabledPropertyChange.bind(this));
 
-    var headerVisibleField = this.widget('HeaderVisibleField');
+    let headerVisibleField = this.widget('HeaderVisibleField');
     headerVisibleField.setValue(this.table.headerVisible);
     headerVisibleField.on('propertyChange', this._onHeaderVisiblePropertyChange.bind(this));
 
-    var headerMenusEnabledField = this.widget('HeaderMenusEnabledField');
+    let headerMenusEnabledField = this.widget('HeaderMenusEnabledField');
     headerMenusEnabledField.setValue(this.table.headerMenusEnabled);
     headerMenusEnabledField.on('propertyChange', this._onHeaderMenusEnabledPropertyChange.bind(this));
 
-    var menuBarVisibleField = this.widget('MenuBarVisibleField');
+    let menuBarVisibleField = this.widget('MenuBarVisibleField');
     menuBarVisibleField.setValue(this.table.menuBarVisible);
     menuBarVisibleField.on('propertyChange', this._onMenuBarVisiblePropertyChange.bind(this));
 
-    var multiCheckField = this.widget('MultiCheckField');
+    let multiCheckField = this.widget('MultiCheckField');
     multiCheckField.setValue(this.table.multiCheck);
     multiCheckField.on('propertyChange', this._onMultiCheckPropertyChange.bind(this));
 
-    var multiSelectField = this.widget('MultiSelectField');
+    let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.table.multiSelect);
     multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
 
-    var multilineTextField = this.widget('MultilineTextField');
+    let multilineTextField = this.widget('MultilineTextField');
     multilineTextField.setValue(this.table.multilineText);
     multilineTextField.on('propertyChange', this._onMultilineTextPropertyChange.bind(this));
 
-    var truncatedCellTooltipEnabledField = this.widget('TruncatedCellTooltipEnabledField');
+    let truncatedCellTooltipEnabledField = this.widget('TruncatedCellTooltipEnabledField');
     truncatedCellTooltipEnabledField.setValue(this.table.truncatedCellTooltipEnabled);
     truncatedCellTooltipEnabledField.on('propertyChange', this._onTruncatedCellTooltipEnabledPropertyChange.bind(this));
 
-    var scrollToSelectionField = this.widget('ScrollToSelectionField');
+    let scrollToSelectionField = this.widget('ScrollToSelectionField');
     scrollToSelectionField.setValue(this.table.scrollToSelection);
     scrollToSelectionField.on('propertyChange', this._onScrollToSelectionPropertyChange.bind(this));
 
-    var sortEnabledField = this.widget('SortEnabledField');
+    let sortEnabledField = this.widget('SortEnabledField');
     sortEnabledField.setValue(this.table.sortEnabled);
     sortEnabledField.on('propertyChange', this._onSortEnabledPropertyChange.bind(this));
 
-    var footerVisibleField = this.widget('FooterVisibleField');
+    let footerVisibleField = this.widget('FooterVisibleField');
     footerVisibleField.setValue(this.table.footerVisible);
     footerVisibleField.on('propertyChange', this._onFooterVisiblePropertyChange.bind(this));
 
-    var rowIconVisibleField = this.widget('RowIconVisibleField');
+    let rowIconVisibleField = this.widget('RowIconVisibleField');
     rowIconVisibleField.setValue(this.table.rowIconVisible);
     rowIconVisibleField.on('propertyChange', this._onRowIconVisiblePropertyChange.bind(this));
 
-    var rowIconColumnWidthField = this.widget('RowIconColumnWidthField');
+    let rowIconColumnWidthField = this.widget('RowIconColumnWidthField');
     rowIconColumnWidthField.setValue(this.table.rowIconColumnWidth);
     rowIconColumnWidthField.on('propertyChange', this._onRowIconColumnWidthPropertyChange.bind(this));
 
-    var checkableStyleField = this.widget('CheckableStyleField');
+    let checkableStyleField = this.widget('CheckableStyleField');
     checkableStyleField.setValue(this.table.checkableStyle);
     checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
 
-    var groupingStyleField = this.widget('GroupingStyleField');
+    let groupingStyleField = this.widget('GroupingStyleField');
     groupingStyleField.setValue(this.table.groupingStyle);
     groupingStyleField.on('propertyChange', this._onGroupingStylePropertyChange.bind(this));
 
-    var tileModeField = this.widget('TileModeField');
+    let tileModeField = this.widget('TileModeField');
     tileModeField.setValue(this.table.tileMode);
     tileModeField.on('propertyChange', this._onTileModePropertyChange.bind(this));
   }
@@ -123,7 +123,7 @@ export default class TablePropertiesBox extends GroupBox {
 
   _onAutoOptimizeColumnWidthsPropertyChange(event) {
     if (event.propertyName === 'value') {
-      this.table.columns.forEach(function(column) {
+      this.table.columns.forEach(column => {
         column.setAutoOptimizeWidth(event.newValue);
       });
     }

@@ -24,16 +24,16 @@ export default class DesktopForm extends Form {
   _init(model) {
     super._init(model);
 
-    var desktop = this.session.desktop;
-    var navigationVisibleField = this.widget('NavigationVisibleField');
+    let desktop = this.session.desktop;
+    let navigationVisibleField = this.widget('NavigationVisibleField');
     navigationVisibleField.setValue(desktop.navigationVisible);
     navigationVisibleField.on('propertyChange', this._onNavigationVisiblePropertyChange.bind(this));
 
-    var headerVisibleField = this.widget('HeaderVisibleField');
+    let headerVisibleField = this.widget('HeaderVisibleField');
     headerVisibleField.setValue(desktop.headerVisible);
     headerVisibleField.on('propertyChange', this._onHeaderVisiblePropertyChange.bind(this));
 
-    var denseField = this.widget('DenseField');
+    let denseField = this.widget('DenseField');
     denseField.setValue(desktop.dense);
     denseField.on('propertyChange', this._onDensePropertyChange.bind(this));
 

@@ -22,8 +22,8 @@ export default class ExampleBeanColumn extends BeanColumn {
   }
 
   compare(row1, row2) {
-    var cellValue1 = this.table.cell(this, row1).value || {};
-    var cellValue2 = this.table.cell(this, row2).value || {};
+    let cellValue1 = this.table.cell(this, row1).value || {};
+    let cellValue2 = this.table.cell(this, row2).value || {};
     return this.comparator.compareIgnoreCase(cellValue1.header, cellValue2.header);
   }
 }

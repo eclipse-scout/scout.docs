@@ -25,20 +25,20 @@ export default class RadioButtonGroupForm extends Form {
   _init(model) {
     super._init(model);
 
-    var group = this.widget('RadioButtonGroup');
+    let group = this.widget('RadioButtonGroup');
     group.on('propertyChange', this._onRadioButtonGroupPropertyChange.bind(this));
 
-    var selectedButtonField = this.widget('SelectedButtonField');
+    let selectedButtonField = this.widget('SelectedButtonField');
     selectedButtonField.setLookupCall(new FormFieldLookupCall(group));
     selectedButtonField.setValue(group.selectedButton);
     selectedButtonField.on('propertyChange', this._onSelectedButtonPropertyChange.bind(this));
 
-    var gridColumnCountField = this.widget('GridColumnCountField');
+    let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(group.gridColumnCount);
     gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
     this.widget('ValueField').setEnabled(true);
-    this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
+    this.widget('ValueFieldPropertiesBox').parseValue = newValue => {
       if (!isNaN(newValue)) {
         newValue = numbers.ensure(newValue);
       }
@@ -54,20 +54,20 @@ export default class RadioButtonGroupForm extends Form {
     this.widget('EventsTab').setField(group);
 
     // Button tab
-    var targetField = this.widget('Button.TargetField');
+    let targetField = this.widget('Button.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(group));
     targetField.setValue(group.radioButtons[0]);
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
-    var keyStrokeField = this.widget('Button.KeyStrokeField');
+    let keyStrokeField = this.widget('Button.KeyStrokeField');
     keyStrokeField.setValue(targetField.value.keyStroke);
     keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
 
-    var selectedField = this.widget('Button.SelectedField');
+    let selectedField = this.widget('Button.SelectedField');
     selectedField.setValue(targetField.value.selected);
     selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
-    var wrapTextField = this.widget('Button.WrapTextField');
+    let wrapTextField = this.widget('Button.WrapTextField');
     wrapTextField.setValue(targetField.value.wrapText);
     wrapTextField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
 
@@ -94,7 +94,7 @@ export default class RadioButtonGroupForm extends Form {
 
   _onGridColumnCountPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var newVal = event.newValue;
+      let newVal = event.newValue;
       if (newVal > 0 || newVal === RadioButtonGroup.DEFAULT_GRID_COLUMN_COUNT) {
         this.widget('RadioButtonGroup').setGridColumnCount(newVal);
       }
@@ -103,7 +103,7 @@ export default class RadioButtonGroupForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = event.newValue;
+      let button = event.newValue;
       if (button) {
         this.widget('Button.KeyStrokeField').setValue(button.keyStroke);
         this.widget('Button.SelectedField').setValue(button.selected);
@@ -119,7 +119,7 @@ export default class RadioButtonGroupForm extends Form {
 
   _onKeyStrokePropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = this.widget('Button.TargetField').value;
+      let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setKeyStroke(event.newValue);
       }
@@ -128,7 +128,7 @@ export default class RadioButtonGroupForm extends Form {
 
   _onSelectedPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = this.widget('Button.TargetField').value;
+      let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setSelected(event.newValue);
       }
@@ -137,7 +137,7 @@ export default class RadioButtonGroupForm extends Form {
 
   _onWrapTextPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = this.widget('Button.TargetField').value;
+      let button = this.widget('Button.TargetField').value;
       if (button) {
         button.setWrapText(event.newValue);
       }

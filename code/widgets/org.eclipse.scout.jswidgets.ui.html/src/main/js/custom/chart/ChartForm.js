@@ -42,15 +42,15 @@ export default class ChartForm extends Form {
 
     this.widget('RandomDataMenu').on('action', this._onRandomDataAction.bind(this));
 
-    var chartTypeField = this.widget('ChartTypeField');
+    let chartTypeField = this.widget('ChartTypeField');
     chartTypeField.setValue(this._chartType);
     chartTypeField.on('propertyChange', this._onChartTypePropertyChange.bind(this));
 
-    var dataSeriesCountField = this.widget('DataSeriesCountField');
+    let dataSeriesCountField = this.widget('DataSeriesCountField');
     dataSeriesCountField.setValue(this._dataSeriesCount);
     dataSeriesCountField.on('propertyChange', this._onDataSeriesCountPropertyChange.bind(this));
 
-    var dataArrayLengthField = this.widget('DataArrayLengthField');
+    let dataArrayLengthField = this.widget('DataArrayLengthField');
     dataArrayLengthField.setValue(this._dataArrayLength);
     dataArrayLengthField.on('propertyChange', this._onDataArrayLengthPropertyChange.bind(this));
 
@@ -109,7 +109,7 @@ export default class ChartForm extends Form {
   }
 
   _pieChartConfig(withDataSeries) {
-    var chartConfig = {
+    let chartConfig = {
       type: this._chartType,
       options: {
         maintainAspectRatio: false,
@@ -127,10 +127,10 @@ export default class ChartForm extends Form {
   }
 
   _randomPieData() {
-    var data = [];
-    var datasets = [];
-    var names = [];
-    var i;
+    let data = [];
+    let datasets = [];
+    let names = [];
+    let i;
 
     // labels
     for (i = 0; i < this._dataArrayLength; i++) {
@@ -149,7 +149,7 @@ export default class ChartForm extends Form {
   }
 
   _randomDataset(colorIndex) {
-    var dataset = {
+    let dataset = {
       label: 'dataset ' + colorIndex,
       backgroundColor: ChartForm.CHART_COLORS_DONAT[colorIndex].slice(0, this._dataArrayLength),
       data: []
@@ -157,7 +157,7 @@ export default class ChartForm extends Form {
     if (this._chartType === Chart.Type.LINE || this._chartType === Chart.Type.POLAR_AREA) {
       dataset.backgroundColor = ChartForm.CHART_COLORS_LINE[colorIndex];
     }
-    for (var i = 0; i < this._dataArrayLength; i++) {
+    for (let i = 0; i < this._dataArrayLength; i++) {
       dataset.data.push(Math.floor(Math.random() * 8) + 2);
     }
     return dataset;

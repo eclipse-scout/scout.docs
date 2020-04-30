@@ -40,7 +40,7 @@ export default class FormFieldLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.compositeField.fields.map(function(formField) {
+    this.data = this.compositeField.fields.map(formField => {
       return [formField, formField.label];
     });
   }

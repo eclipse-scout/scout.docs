@@ -25,7 +25,7 @@ export default class TreeBoxForm extends Form {
   _init(model) {
     super._init(model);
 
-    var generateButton = this.widget('GenerateTreeDataButton');
+    let generateButton = this.widget('GenerateTreeDataButton');
     generateButton.on('click', this._onGenerateButtonClick.bind(this));
 
     this.treeBox = this.widget('TreeBox');
@@ -42,10 +42,10 @@ export default class TreeBoxForm extends Form {
   }
 
   _onGenerateButtonClick(event) {
-    var nodeCount = this.widget('NodeCountField').value;
-    var depth = this.widget('DepthField').value;
-    var defaultExpanded = this.widget('DefaultExpandedField').value;
-    var defaultEnabled = this.widget('DefaultEnabledField').value;
+    let nodeCount = this.widget('NodeCountField').value;
+    let depth = this.widget('DepthField').value;
+    let defaultExpanded = this.widget('DefaultExpandedField').value;
+    let defaultEnabled = this.widget('DefaultEnabledField').value;
     this.treeBox.tree.removeAllNodes();
     this.treeBox.tree.insertNodes(this.createModelNodes(nodeCount, depth, defaultExpanded === true, defaultEnabled === true), null);
   }
@@ -65,12 +65,12 @@ export default class TreeBoxForm extends Form {
       return;
     }
 
-    var nodes = [],
+    let nodes = [],
       nodeId;
     if (!depth) {
       depth = 0;
     }
-    for (var i = 0; i < nodeCount; i++) {
+    for (let i = 0; i < nodeCount; i++) {
       nodeId = i;
       if (parentNode) {
         nodeId = parentNode.id + '_' + nodeId;

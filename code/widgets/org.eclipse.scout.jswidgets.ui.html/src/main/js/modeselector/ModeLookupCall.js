@@ -40,7 +40,7 @@ export default class ModeLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.modeSelector.modes.map(function(mode) {
+    this.data = this.modeSelector.modes.map(mode => {
       return [mode, mode.text];
     });
   }

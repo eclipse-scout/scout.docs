@@ -28,10 +28,10 @@ export default class WidgetsRoute extends Route {
    * 1: objectType of the detail form of a node in FormFieldOutline
    */
   _createRoutes(desktop) {
-    var regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
-    var routes = [];
-    Tree.visitNodes(function(node) {
-      var routeRef = null,
+    let regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
+    let routes = [];
+    Tree.visitNodes(node => {
+      let routeRef = null,
         objectType, result;
       if (node.detailForm) {
         objectType = node.detailForm.objectType;
@@ -56,13 +56,13 @@ export default class WidgetsRoute extends Route {
     if (strings.empty(location)) {
       return null;
     }
-    return arrays.find(this.routes, function(routeData) {
+    return arrays.find(this.routes, routeData => {
       return location.substring(1) === routeData[0];
     });
   }
 
   _getRouteDataByObjectType(objectType) {
-    return arrays.find(this.routes, function(routeData) {
+    return arrays.find(this.routes, routeData => {
       return routeData[1] === objectType;
     });
   }
@@ -70,9 +70,9 @@ export default class WidgetsRoute extends Route {
   activate(location) {
     super.activate(location);
 
-    var objectType = this._getRouteData(location)[1];
-    var foundNode = null;
-    Tree.visitNodes(function(node) {
+    let objectType = this._getRouteData(location)[1];
+    let foundNode = null;
+    Tree.visitNodes(node => {
       if ((node.detailForm && node.detailForm.objectType === objectType) || node.objectType === objectType) {
         foundNode = node;
         return false;
@@ -82,15 +82,15 @@ export default class WidgetsRoute extends Route {
   }
 
   _onPageChanged(event) {
-    var page = event.source.selectedNode();
+    let page = event.source.selectedNode();
     if (page) {
-      var objectType;
+      let objectType;
       if (page.detailForm) {
         objectType = page.detailForm.objectType;
       } else {
         objectType = page.objectType;
       }
-      var routeData = this._getRouteDataByObjectType(objectType);
+      let routeData = this._getRouteDataByObjectType(objectType);
       if (routeData) {
         router.updateLocation(routeData[0]);
       }

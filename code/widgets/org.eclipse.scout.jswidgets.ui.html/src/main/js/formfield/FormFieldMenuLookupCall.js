@@ -40,7 +40,7 @@ export default class FormFieldMenuLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.formField.menus.map(function(menu) {
+    this.data = this.formField.menus.map(menu => {
       return [menu, menu.text];
     });
   }

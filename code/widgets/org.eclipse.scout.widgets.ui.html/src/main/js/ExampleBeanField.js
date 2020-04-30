@@ -29,9 +29,9 @@ export default class ExampleBeanField extends BeanField {
       return;
     }
 
-    var $header = this.$field.appendDiv('example-bean-field-header')
+    let $header = this.$field.appendDiv('example-bean-field-header')
       .text(this.value.header);
-    var $content = this.$field.appendDiv('example-bean-field-content');
+    let $content = this.$field.appendDiv('example-bean-field-content');
     $content.appendElement('<p>')
       .text(this.value.description);
 

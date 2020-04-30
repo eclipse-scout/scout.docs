@@ -38,13 +38,13 @@ export default class FormFieldActionsBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    var insertMenuButton = this.widget('InsertMenuButton');
+    let insertMenuButton = this.widget('InsertMenuButton');
     insertMenuButton.on('click', this._onInsertMenuClick.bind(this));
 
-    var deleteMenuButton = this.widget('DeleteMenuButton');
+    let deleteMenuButton = this.widget('DeleteMenuButton');
     deleteMenuButton.on('click', this._onDeleteMenuClick.bind(this));
 
-    var menuToDeleteField = this.widget('MenuToDeleteField');
+    let menuToDeleteField = this.widget('MenuToDeleteField');
     menuToDeleteField.setLookupCall(new FormFieldMenuLookupCall(this.field));
   }
 
@@ -56,13 +56,13 @@ export default class FormFieldActionsBox extends GroupBox {
   }
 
   _onDeleteMenuClick(event) {
-    var menuToDeleteField = this.widget('MenuToDeleteField');
-    var menu = menuToDeleteField.value;
+    let menuToDeleteField = this.widget('MenuToDeleteField');
+    let menu = menuToDeleteField.value;
     this.field.deleteMenu(menu);
     // Select last entry in the lookup rows
     menuToDeleteField.lookupCall.getAll().then(result => {
-      var rows = result.lookupRows;
-      var newValue = null;
+      let rows = result.lookupRows;
+      let newValue = null;
       if (rows.length > 0) {
         newValue = rows[rows.length - 1].key;
       }

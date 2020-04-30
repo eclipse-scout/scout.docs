@@ -13,14 +13,14 @@ export default class SamplePageWithTable extends PageWithTable {
   }
 
   _loadTableData(searchFilter) {
-    var searchFormStringFieldValue = searchFilter.stringField;
-    var filter = function(element) {
+    let searchFormStringFieldValue = searchFilter.stringField;
+    let filter = element => {
       if (!strings.hasText(searchFormStringFieldValue)) {
         return true;
       }
       return strings.contains(element.string, searchFormStringFieldValue);
     };
-    var data = [{
+    let data = [{
       id: 1,
       string: 'string 1',
       smartValue: null,
@@ -56,7 +56,7 @@ export default class SamplePageWithTable extends PageWithTable {
 
   _transformTableDataToTableRows(tableData) {
     return tableData
-      .map(function(row) {
+      .map(row => {
         return {
           data: row,
           cells: [

@@ -25,10 +25,10 @@ export default class TagFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var tagField = this.widget('TagField');
+    let tagField = this.widget('TagField');
 
     this.widget('ValueField').setEnabled(true);
-    this.widget('ValueFieldPropertiesBox').parseValue = function(newValue) {
+    this.widget('ValueFieldPropertiesBox').parseValue = newValue => {
       if (!newValue) {
         return newValue;
       }

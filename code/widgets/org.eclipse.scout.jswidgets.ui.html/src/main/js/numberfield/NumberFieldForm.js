@@ -25,20 +25,20 @@ export default class NumberFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var numberField = this.widget('NumberField');
-    var formatField = this.widget('FormatField');
+    let numberField = this.widget('NumberField');
+    let formatField = this.widget('FormatField');
     formatField.setValue(numberField.decimalFormat.pattern);
     formatField.on('propertyChange', this._onFormatPropertyChange.bind(this));
 
-    var multiplierField = this.widget('MultiplierField');
+    let multiplierField = this.widget('MultiplierField');
     multiplierField.setValue(numberField.decimalFormat.multiplier);
     multiplierField.on('propertyChange', this._onFormatPropertyChange.bind(this));
 
-    var minValueField = this.widget('MinValueField');
+    let minValueField = this.widget('MinValueField');
     minValueField.on('propertyChange', this._onMinValueFieldPropertyChange.bind(this));
     minValueField.setValue(numberField.minValue);
 
-    var maxValueField = this.widget('MaxValueField');
+    let maxValueField = this.widget('MaxValueField');
     maxValueField.on('propertyChange', this._onMaxValueFieldPropertyChange.bind(this));
     maxValueField.setValue(numberField.maxValue);
 
@@ -53,8 +53,8 @@ export default class NumberFieldForm extends Form {
 
   _onFormatPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var multiplierField = this.widget('MultiplierField');
-      var formatField = this.widget('FormatField');
+      let multiplierField = this.widget('MultiplierField');
+      let formatField = this.widget('FormatField');
       this.widget('NumberField').setDecimalFormat({
         pattern: formatField.value,
         multiplier: multiplierField.value

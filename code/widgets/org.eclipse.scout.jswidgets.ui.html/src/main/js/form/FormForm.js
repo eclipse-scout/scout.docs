@@ -57,7 +57,7 @@ export default class FormForm extends Form {
   }
 
   _onOpenFormButtonClick(model) {
-    var form = scout.create('jswidgets.FormForm', {
+    let form = scout.create('jswidgets.FormForm', {
       parent: this,
       title: this.propertiesBox.titleField.value,
       subTitle: this.propertiesBox.subTitleField.value,
@@ -79,7 +79,7 @@ export default class FormForm extends Form {
   }
 
   _onOpenLifecycleFormButtonClick(model) {
-    var form = scout.create('jswidgets.LifecycleForm', {
+    let form = scout.create('jswidgets.LifecycleForm', {
       parent: this,
       title: this.propertiesBox.titleField.value,
       subTitle: this.propertiesBox.subTitleField.value,
@@ -93,31 +93,31 @@ export default class FormForm extends Form {
     });
     this.widget('EventsTab').setField(form);
 
-    var lifecycleDataField = this.widget('LifecycleDataField');
-    form.on('load', function(event) {
-      var data = form.data;
-      var text = 'Form loaded (' + this.lifecycleDataToString(data) + ')';
+    let lifecycleDataField = this.widget('LifecycleDataField');
+    form.on('load', event => {
+      let data = form.data;
+      let text = 'Form loaded (' + this.lifecycleDataToString(data) + ')';
       lifecycleDataField.setValue(text);
-    }.bind(this));
-    form.on('save', function(event) {
-      var data = form.data;
-      var text = lifecycleDataField.value;
+    });
+    form.on('save', event => {
+      let data = form.data;
+      let text = lifecycleDataField.value;
       text += '\n' + 'Form saved (' + this.lifecycleDataToString(data) + ')';
       lifecycleDataField.setValue(text);
-    }.bind(this));
-    form.on('reset', function(event) {
-      var data = form.data;
-      var text = lifecycleDataField.value;
+    });
+    form.on('reset', event => {
+      let data = form.data;
+      let text = lifecycleDataField.value;
       text += '\n' + 'Form reset (' + this.lifecycleDataToString(data) + ')';
       lifecycleDataField.setValue(text);
-    }.bind(this));
-    form.on('close', function(event) {
-      var data = form.data;
-      var text = lifecycleDataField.value;
+    });
+    form.on('close', event => {
+      let data = form.data;
+      let text = lifecycleDataField.value;
       text += '\n' + 'Form closed (' + this.lifecycleDataToString(data) + ')';
       lifecycleDataField.setValue(text);
       this.lifecycleData = data;
-    }.bind(this));
+    });
 
     lifecycleDataField.setVisible(true);
     form.open();

@@ -14,9 +14,9 @@ export default class WatchField extends FormField {
     this.addLabel();
 
     // create a field
-    var $field = this.$parent.appendDiv('content');
+    let $field = this.$parent.appendDiv('content');
     this.addField($field);
-    var htmlField = HtmlComponent.install(this.$field, this.session);
+    let htmlField = HtmlComponent.install(this.$field, this.session);
 
     // watch canvas
     this.$canvas = this.$field.makeElement('<canvas>', 'clock');
@@ -34,8 +34,8 @@ export default class WatchField extends FormField {
   }
 
   _paintWatch() {
-    var context = this.$canvas[0].getContext('2d');
-    var radius = this.$canvas.height() / 2;
+    let context = this.$canvas[0].getContext('2d');
+    let radius = this.$canvas.height() / 2;
     context.clearRect(0, 0, this.$canvas.height(), this.$canvas.height());
     context.setTransform(1, 0, 0, 1, 0, 0); // do not use resetTransform because it is experimental API and not supported by all browsers
     context.translate(radius, radius);
@@ -46,7 +46,7 @@ export default class WatchField extends FormField {
   }
 
   _paintBackground(context, radius) {
-    var strokeStyle;
+    let strokeStyle;
 
     context.beginPath();
     context.fillStyle = 'white';
@@ -63,8 +63,8 @@ export default class WatchField extends FormField {
   }
 
   _paintNumbers(context, radius) {
-    var ang;
-    var hour;
+    let ang;
+    let hour;
     context.font = radius * 0.15 + 'px arial';
     context.fillStyle = '#014786';
     context.strokeStyle = '#014786';
@@ -89,7 +89,7 @@ export default class WatchField extends FormField {
   }
 
   _paintTime(context, radius) {
-    var now = new Date(),
+    let now = new Date(),
       hour = now.getHours(),
       minute = now.getMinutes(),
       second = now.getSeconds(),

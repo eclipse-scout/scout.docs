@@ -25,13 +25,13 @@ export default class FileChooserFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var fileChooserField = this.widget('FileChooserField');
+    let fileChooserField = this.widget('FileChooserField');
 
-    var acceptTypesField = this.widget('AcceptTypesField');
+    let acceptTypesField = this.widget('AcceptTypesField');
     acceptTypesField.setValue(fileChooserField.acceptTypes);
     acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
 
-    var maximumUploadSizeField = this.widget('MaximumUploadSizeField');
+    let maximumUploadSizeField = this.widget('MaximumUploadSizeField');
     maximumUploadSizeField.setValue(fileChooserField.maximumUploadSize);
     maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
 

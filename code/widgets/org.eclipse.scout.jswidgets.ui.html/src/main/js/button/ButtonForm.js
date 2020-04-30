@@ -25,34 +25,34 @@ export default class ButtonForm extends Form {
   _init(model) {
     super._init(model);
 
-    var button = this.widget('Button');
+    let button = this.widget('Button');
     button.on('click', this._onButtonClick.bind(this));
 
-    var defaultButtonField = this.widget('DefaultButtonField');
+    let defaultButtonField = this.widget('DefaultButtonField');
     defaultButtonField.setValue(button.defaultButton);
     defaultButtonField.on('propertyChange', this._onDefaultButtonPropertyChange.bind(this));
 
-    var processButtonField = this.widget('ProcessButtonField');
+    let processButtonField = this.widget('ProcessButtonField');
     processButtonField.setValue(button.processButton);
     processButtonField.on('propertyChange', this._onProcessButtonPropertyChange.bind(this));
 
-    var selectedField = this.widget('SelectedField');
+    let selectedField = this.widget('SelectedField');
     selectedField.setValue(button.selected);
     selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
-    var htmlEnabledField = this.widget('HtmlEnabledField');
+    let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(button.htmlEnabled);
     htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
 
-    var iconIdField = this.widget('IconIdField');
+    let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(button.iconId);
     iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
 
-    var keyStrokeField = this.widget('KeyStrokeField');
+    let keyStrokeField = this.widget('KeyStrokeField');
     keyStrokeField.setValue(button.keyStroke);
     keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
 
-    var displayStyleField = this.widget('DisplayStyleField');
+    let displayStyleField = this.widget('DisplayStyleField');
     displayStyleField.setValue(button.displayStyle);
     displayStyleField.on('propertyChange', this._onDisplayStylePropertyChange.bind(this));
 
@@ -68,13 +68,13 @@ export default class ButtonForm extends Form {
       // Don't show message box if it is a toggle button
       return;
     }
-    var msgBox = scout.create('scout.MessageBox', {
+    let msgBox = scout.create('scout.MessageBox', {
       parent: this,
       yesButtonText: this.session.text('Thanks') + '!',
       body: this.session.text('ButtonClickMessage')
     });
     msgBox.open();
-    msgBox.on('action', function() {
+    msgBox.on('action', () => {
       msgBox.close();
     });
   }
@@ -87,7 +87,7 @@ export default class ButtonForm extends Form {
 
   _onProcessButtonPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = this.widget('Button');
+      let button = this.widget('Button');
       // ProcessButton property may not be changed during run time officially
       // As a work around we need to adjust the group box state and rerender the whole group box
       // DISCLAIMER: This is done for demo purpose, don't use it in production code since it is internal API
@@ -124,7 +124,7 @@ export default class ButtonForm extends Form {
 
   _onDisplayStylePropertyChange(event) {
     if (event.propertyName === 'value') {
-      var button = this.widget('Button');
+      let button = this.widget('Button');
       // DisplayStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole group box
       button.displayStyle = event.newValue;
       this._rerenderGroupBox(button.parent);
@@ -132,7 +132,7 @@ export default class ButtonForm extends Form {
   }
 
   _rerenderGroupBox(groupBox) {
-    var mainBox = groupBox.parent;
+    let mainBox = groupBox.parent;
     // Owner is the main box by default.
     // In that case the group box would be destroyed when calling deleteField and therefore could not be used anymore -> Set form as owner temporarily.
     groupBox.setOwner(this);

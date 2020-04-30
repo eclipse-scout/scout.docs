@@ -25,17 +25,17 @@ export default class CheckBoxFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var field = this.widget('CheckBoxField');
+    let field = this.widget('CheckBoxField');
 
-    var triStateEnabledField = this.widget('TriStateEnabledField');
+    let triStateEnabledField = this.widget('TriStateEnabledField');
     triStateEnabledField.setValue(field.triStateEnabled);
     triStateEnabledField.on('propertyChange', this._onTriStateEnabledPropertyChange.bind(this));
 
-    var wrapTextEnabledField = this.widget('WrapTextField');
+    let wrapTextEnabledField = this.widget('WrapTextField');
     wrapTextEnabledField.setValue(field.wrapText);
     wrapTextEnabledField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
 
-    var keyStrokeField = this.widget('KeyStrokeField');
+    let keyStrokeField = this.widget('KeyStrokeField');
     keyStrokeField.setValue(field.keyStroke);
     keyStrokeField.on('propertyChange', this._onKeyStrokePropertyChange.bind(this));
 

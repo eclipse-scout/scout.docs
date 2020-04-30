@@ -25,12 +25,12 @@ export default class CarouselForm extends Form {
   _init(model) {
     super._init(model);
 
-    var carousel = this.widget('Carousel');
-    var statusEnabledField = this.widget('StatusEnabledField');
+    let carousel = this.widget('Carousel');
+    let statusEnabledField = this.widget('StatusEnabledField');
     statusEnabledField.setValue(carousel.statusEnabled);
     statusEnabledField.on('propertyChange', this._onStatusEnabledPropertyChange.bind(this));
 
-    var carouselField = this.widget('CarouselField');
+    let carouselField = this.widget('CarouselField');
     this.widget('FormFieldPropertiesBox').setField(carouselField);
     this.widget('GridDataBox').setField(carouselField);
     this.widget('WidgetActionsBox').setField(carouselField);

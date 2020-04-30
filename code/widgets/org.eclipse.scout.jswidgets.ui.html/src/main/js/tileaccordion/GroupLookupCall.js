@@ -40,7 +40,7 @@ export default class GroupLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.accordion.groups.map(function(group) {
+    this.data = this.accordion.groups.map(group => {
       return [group, group.title];
     });
   }

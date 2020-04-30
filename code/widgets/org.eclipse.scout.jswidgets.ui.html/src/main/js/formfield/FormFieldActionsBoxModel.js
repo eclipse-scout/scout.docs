@@ -10,43 +10,41 @@
  */
 import {Button} from '@eclipse-scout/core';
 
-export default function() {
-  return {
-    id: 'jswidgets.FormFieldActionsBox',
-    objectType: 'GroupBox',
-    gridColumnCount: 2,
-    label: 'Form Field Actions',
-    expandable: true,
-    fields: [
-      {
-        id: 'InsertMenuButton',
-        objectType: 'Button',
-        label: 'Insert new menu',
-        labelVisible: false,
-        processButton: false,
-        displayStyle: Button.DisplayStyle.LINK
-      },
-      {
-        id: 'DeleteMenuBox',
-        objectType: 'SequenceBox',
-        labelVisible: false,
-        fields: [
-          {
-            id: 'MenuToDeleteField',
-            objectType: 'SmartField',
-            labelVisible: false,
-            statusVisible: false
-          },
-          {
-            id: 'DeleteMenuButton',
-            objectType: 'Button',
-            label: 'Delete menu',
-            labelVisible: false,
-            processButton: false,
-            displayStyle: Button.DisplayStyle.LINK
-          }
-        ]
-      }
-    ]
-  };
-}
+export default () => ({
+  id: 'jswidgets.FormFieldActionsBox',
+  objectType: 'GroupBox',
+  gridColumnCount: 2,
+  label: 'Form Field Actions',
+  expandable: true,
+  fields: [
+    {
+      id: 'InsertMenuButton',
+      objectType: 'Button',
+      label: 'Insert new menu',
+      labelVisible: false,
+      processButton: false,
+      displayStyle: Button.DisplayStyle.LINK
+    },
+    {
+      id: 'DeleteMenuBox',
+      objectType: 'SequenceBox',
+      labelVisible: false,
+      fields: [
+        {
+          id: 'MenuToDeleteField',
+          objectType: 'SmartField',
+          labelVisible: false,
+          statusVisible: false
+        },
+        {
+          id: 'DeleteMenuButton',
+          objectType: 'Button',
+          label: 'Delete menu',
+          labelVisible: false,
+          processButton: false,
+          displayStyle: Button.DisplayStyle.LINK
+        }
+      ]
+    }
+  ]
+});

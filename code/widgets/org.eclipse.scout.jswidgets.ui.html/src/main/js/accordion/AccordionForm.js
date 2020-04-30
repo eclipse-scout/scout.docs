@@ -33,39 +33,39 @@ export default class AccordionForm extends Form {
 
     // -- Properties
 
-    var collapseStyleField = this.widget('CollapseStyleField');
+    let collapseStyleField = this.widget('CollapseStyleField');
     collapseStyleField.setValue(this.accordion.collapseStyle);
     collapseStyleField.on('propertyChange', this._onCollapseStylePropertyChange.bind(this));
 
-    var exclusiveExpandField = this.widget('ExclusiveExpandField');
+    let exclusiveExpandField = this.widget('ExclusiveExpandField');
     exclusiveExpandField.setValue(this.accordion.exclusiveExpand);
     exclusiveExpandField.on('propertyChange', this._onExclusiveExpandPropertyChange.bind(this));
 
-    var scrollableField = this.widget('ScrollableField');
+    let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.accordion.scrollable);
     scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
     // -- Actions
 
-    var insertMenu = this.widget('InsertMenu');
+    let insertMenu = this.widget('InsertMenu');
     insertMenu.on('action', this._onInsertMenuAction.bind(this));
 
-    var deleteFirstMenu = this.widget('DeleteFirstMenu');
+    let deleteFirstMenu = this.widget('DeleteFirstMenu');
     deleteFirstMenu.on('action', this._onDeleteFirstMenuAction.bind(this));
 
-    var collapseExpandFirstMenu = this.widget('CollapseExpandFirstMenu');
+    let collapseExpandFirstMenu = this.widget('CollapseExpandFirstMenu');
     collapseExpandFirstMenu.on('action', this._onCollapseExpandFirstMenuAction.bind(this));
 
-    var collapseAllMenu = this.widget('CollapseAllMenu');
+    let collapseAllMenu = this.widget('CollapseAllMenu');
     collapseAllMenu.on('action', this._onCollapseAllMenuAction.bind(this));
 
-    var sortAscMenu = this.widget('SortAscMenu');
+    let sortAscMenu = this.widget('SortAscMenu');
     sortAscMenu.on('action', this._onSortAscMenuAction.bind(this));
 
-    var sortDescMenu = this.widget('SortDescMenu');
+    let sortDescMenu = this.widget('SortDescMenu');
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
-    var accordionField = this.widget('AccordionField');
+    let accordionField = this.widget('AccordionField');
     this.widget('FormFieldPropertiesBox').setField(accordionField);
     this.widget('GridDataBox').setField(accordionField);
     this.widget('WidgetActionsBox').setField(accordionField);
@@ -110,7 +110,7 @@ export default class AccordionForm extends Form {
   }
 
   _onCollapseAllMenuAction(event) {
-    this.accordion.groups.forEach(function(group) {
+    this.accordion.groups.forEach(group => {
       group.setCollapsed(true);
     });
   }
@@ -124,18 +124,18 @@ export default class AccordionForm extends Form {
   }
 
   _insertGroupWithTiles() {
-    var tiles = [];
-    var maxTiles = Math.floor(Math.random() * 30);
-    for (var i = 0; i < maxTiles; i++) {
+    let tiles = [];
+    let maxTiles = Math.floor(Math.random() * 30);
+    for (let i = 0; i < maxTiles; i++) {
       tiles.push(this._createTile({
         label: 'Tile ' + i
       }));
     }
-    var title = 'Group with Tiles';
+    let title = 'Group with Tiles';
     if (this.insertedGroupCount > 0) {
       title += ' ' + this.insertedGroupCount;
     }
-    var group = scout.create('Group', {
+    let group = scout.create('Group', {
       parent: this.accordion,
       title: title,
       body: {
@@ -154,7 +154,7 @@ export default class AccordionForm extends Form {
   }
 
   _createTile(model) {
-    var defaults = {
+    let defaults = {
       parent: this,
       gridDataHints: {
         weightX: 0
@@ -167,10 +167,10 @@ export default class AccordionForm extends Form {
 
   // noinspection DuplicatedCode
   _sortGroups(asc) {
-    var comparator = comparators.ALPHANUMERIC;
+    let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
-    this.accordion.setComparator(function(group1, group2) {
-      var result = comparator.compare(group1.title, group2.title);
+    this.accordion.setComparator((group1, group2) => {
+      let result = comparator.compare(group1.title, group2.title);
       if (!asc) {
         result = -result;
       }

@@ -25,13 +25,13 @@ export default class LabelFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var labelField = this.widget('LabelField');
+    let labelField = this.widget('LabelField');
 
-    var wrapTextField = this.widget('WrapTextField');
+    let wrapTextField = this.widget('WrapTextField');
     wrapTextField.setValue(labelField.wrapText);
     wrapTextField.on('propertyChange', this._onWrapTextPropertyChange.bind(this));
 
-    var htmlEnabledField = this.widget('HtmlEnabledField');
+    let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(labelField.htmlEnabled);
     htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
 

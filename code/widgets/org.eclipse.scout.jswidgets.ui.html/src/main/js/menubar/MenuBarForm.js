@@ -25,25 +25,25 @@ export default class MenuBarForm extends Form {
   _init(model) {
     super._init(model);
 
-    var selectedMenuItemField = this.widget('SelectedMenuField');
+    let selectedMenuItemField = this.widget('SelectedMenuField');
     selectedMenuItemField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
 
-    var shrinkableField = this.widget('ShrinkableField');
+    let shrinkableField = this.widget('ShrinkableField');
     shrinkableField.on('propertyChange', this._onShrinkableFieldPropertyChange.bind(this));
 
-    var stackableField = this.widget('StackableField');
+    let stackableField = this.widget('StackableField');
     stackableField.on('propertyChange', this._onStackableFieldPropertyChange.bind(this));
 
     this.replaceMenu = this.widget('ReplaceMenu');
-    this.replaceMenu.on('action', function(event) {
+    this.replaceMenu.on('action', event => {
       this._onReplaceChildActionsClick(event, this.hierarchicalMenu);
-    }.bind(this));
+    });
 
-    var menu1 = this.widget('Menu1');
+    let menu1 = this.widget('Menu1');
     menu1.on('action', this._onMenuAction.bind(this));
     menu1.on('propertyChange', this._onMenuPropertyChange.bind(this));
 
-    var menu2 = this.widget('Menu2');
+    let menu2 = this.widget('Menu2');
     menu2.on('action', this._onMenuAction.bind(this));
     menu2.on('propertyChange', this._onMenuPropertyChange.bind(this));
 
@@ -51,19 +51,19 @@ export default class MenuBarForm extends Form {
     this.hierarchicalMenu = this.widget('HierarchicalMenu');
     this.hierarchicalMenu.on('action', this._onMenuAction.bind(this));
     this.hierarchicalMenu.on('propertyChange', this._onMenuPropertyChange.bind(this));
-    this.hierarchicalMenu.visitChildren(function(menu) {
+    this.hierarchicalMenu.visitChildren(menu => {
       if (menu instanceof Menu) {
         menu.on('action', this._onMenuAction.bind(this));
         menu.on('propertyChange', this._onMenuPropertyChange.bind(this));
       }
-    }.bind(this));
+    });
 
     this._fillSelectedMenuField();
     this._updateSelectedMenu();
   }
 
   _onReplaceChildActionsClick(event, menu) {
-    var i = 1,
+    let i = 1,
       menuCount = Math.floor(Math.random() * 10) + i,
       newMenus = [];
     menu = menu || this.currentMenu;
@@ -120,24 +120,24 @@ export default class MenuBarForm extends Form {
    * Collects every menu of the group box and updates lookup call of the SelectedMenuField
    */
   _fillSelectedMenuField() {
-    var selectedMenuItemField = this.widget('SelectedMenuField');
-    var detailBox = this.widget('DetailBox');
-    var menus = [];
-    detailBox.visitChildren(function(menu) {
+    let selectedMenuItemField = this.widget('SelectedMenuField');
+    let detailBox = this.widget('DetailBox');
+    let menus = [];
+    detailBox.visitChildren(menu => {
       if (menu instanceof Menu && !(menu instanceof EllipsisMenu)) {
         menus.push(menu);
       }
     });
     selectedMenuItemField.lookupCall.data = [];
-    menus.forEach(function(menu) {
+    menus.forEach(menu => {
       selectedMenuItemField.lookupCall.data.push([menu.id, scout.nvl(menu.text, menu.id)]);
     });
   }
 
   _updateSelectedMenu() {
-    var selectedMenuItemField = this.widget('SelectedMenuField');
-    var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
-    var menu = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
+    let selectedMenuItemField = this.widget('SelectedMenuField');
+    let formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
+    let menu = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
     if (!menu) {
       return;
     }

@@ -38,19 +38,19 @@ export default class TreePropertiesBox extends GroupBox {
       return;
     }
 
-    var autoCheckChildrenField = this.widget('AutoCheckChildrenField');
+    let autoCheckChildrenField = this.widget('AutoCheckChildrenField');
     autoCheckChildrenField.setValue(this.tree.autoResizeColumns);
     autoCheckChildrenField.on('propertyChange', this._onAutoCheckChildrenPropertyChange.bind(this));
 
-    var checkableField = this.widget('CheckableField');
+    let checkableField = this.widget('CheckableField');
     checkableField.setValue(this.tree.checkable);
     checkableField.on('propertyChange', this._onCheckablePropertyChange.bind(this));
 
-    var multiCheckField = this.widget('MultiCheckField');
+    let multiCheckField = this.widget('MultiCheckField');
     multiCheckField.setValue(this.tree.multiCheck);
     multiCheckField.on('propertyChange', this._onMultiCheckPropertyChange.bind(this));
 
-    var checkableStyleField = this.widget('CheckableStyleField');
+    let checkableStyleField = this.widget('CheckableStyleField');
     checkableStyleField.setValue(this.tree.checkableStyle);
     checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
   }

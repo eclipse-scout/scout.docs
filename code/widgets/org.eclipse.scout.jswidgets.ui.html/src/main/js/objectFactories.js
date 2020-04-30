@@ -12,7 +12,5 @@ import {scout} from '@eclipse-scout/core';
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 scout.addObjectFactories({
-  'Desktop': function() {
-    return new Desktop();
-  }
+  'Desktop': () => new Desktop()
 });

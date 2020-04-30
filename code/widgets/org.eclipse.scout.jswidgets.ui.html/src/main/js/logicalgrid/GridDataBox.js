@@ -56,7 +56,7 @@ export default class GridDataBox extends GroupBox {
   }
 
   reloadGridData() {
-    var gridData = this.field.gridData;
+    let gridData = this.field.gridData;
     if (this.useHints) {
       gridData = this.field.gridDataHints;
     }
@@ -80,7 +80,7 @@ export default class GridDataBox extends GroupBox {
     if (event.propertyName !== 'value') {
       return;
     }
-    var gridData = new GridData(this.field.gridDataHints);
+    let gridData = new GridData(this.field.gridDataHints);
     if (event.source.id === 'WField') {
       gridData.w = event.newValue;
     } else if (event.source.id === 'HField') {

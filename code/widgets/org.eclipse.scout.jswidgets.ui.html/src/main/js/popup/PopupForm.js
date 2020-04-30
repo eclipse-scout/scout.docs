@@ -26,51 +26,51 @@ export default class PopupForm extends Form {
   _init(model) {
     super._init(model);
 
-    var dummyPopup = scout.create('WidgetPopup', {
+    let dummyPopup = scout.create('WidgetPopup', {
       parent: this
     });
     this.widget('OpenPopupButton').on('click', this._onOpenPopupButtonClick.bind(this));
 
-    var useButtonAsAnchorField = this.widget('UseButtonAsAnchorField');
+    let useButtonAsAnchorField = this.widget('UseButtonAsAnchorField');
     useButtonAsAnchorField.on('propertyChange', this._onUseButtonAsAnchorChange.bind(this));
 
-    var anchorBoundsField = this.widget('AnchorBoundsField');
+    let anchorBoundsField = this.widget('AnchorBoundsField');
     anchorBoundsField.on('propertyChange', this._onAnchorBoundsChange.bind(this));
 
-    var closeOnAnchorMouseDownField = this.widget('CloseOnAnchorMouseDownField');
+    let closeOnAnchorMouseDownField = this.widget('CloseOnAnchorMouseDownField');
     closeOnAnchorMouseDownField.setValue(dummyPopup.closeOnAnchorMouseDown);
 
-    var closeOnMouseDownOutsideField = this.widget('CloseOnMouseDownOutsideField');
+    let closeOnMouseDownOutsideField = this.widget('CloseOnMouseDownOutsideField');
     closeOnMouseDownOutsideField.setValue(dummyPopup.closeOnMouseDownOutside);
 
-    var closeOnOtherPopupOpenField = this.widget('CloseOnOtherPopupOpenField');
+    let closeOnOtherPopupOpenField = this.widget('CloseOnOtherPopupOpenField');
     closeOnOtherPopupOpenField.setValue(dummyPopup.closeOnOtherPopupOpen);
 
-    var horizontalAlignmentField = this.widget('HorizontalAlignmentField');
+    let horizontalAlignmentField = this.widget('HorizontalAlignmentField');
     horizontalAlignmentField.setValue(dummyPopup.horizontalAlignment);
     horizontalAlignmentField.on('propertyChange', this._onHorizontalAlignmentPropertyChange.bind(this));
 
-    var verticalAlignmentField = this.widget('VerticalAlignmentField');
+    let verticalAlignmentField = this.widget('VerticalAlignmentField');
     verticalAlignmentField.setValue(dummyPopup.verticalAlignment);
     verticalAlignmentField.on('propertyChange', this._onVerticalAlignmentPropertyChange.bind(this));
 
-    var horizontalSwitchField = this.widget('HorizontalSwitchField');
+    let horizontalSwitchField = this.widget('HorizontalSwitchField');
     horizontalSwitchField.setValue(dummyPopup.horizontalSwitch);
     horizontalSwitchField.on('propertyChange', this._onHorizontalSwitchPropertyChange.bind(this));
 
-    var verticalSwitchField = this.widget('VerticalSwitchField');
+    let verticalSwitchField = this.widget('VerticalSwitchField');
     verticalSwitchField.setValue(dummyPopup.verticalSwitch);
     verticalSwitchField.on('propertyChange', this._onVerticalSwitchPropertyChange.bind(this));
 
-    var trimWidthField = this.widget('TrimWidthField');
+    let trimWidthField = this.widget('TrimWidthField');
     trimWidthField.setValue(dummyPopup.trimWidth);
     trimWidthField.on('propertyChange', this._onTrimWidthPropertyChange.bind(this));
 
-    var trimHeightField = this.widget('TrimHeightField');
+    let trimHeightField = this.widget('TrimHeightField');
     trimHeightField.setValue(dummyPopup.trimHeight);
     trimHeightField.on('propertyChange', this._onTrimHeightPropertyChange.bind(this));
 
-    var withArrowField = this.widget('WithArrowField');
+    let withArrowField = this.widget('WithArrowField');
     withArrowField.setValue(dummyPopup.withArrow);
     withArrowField.on('propertyChange', this._onWithArrowPropertyChange.bind(this));
 
@@ -93,11 +93,11 @@ export default class PopupForm extends Form {
   }
 
   _onOpenPopupButtonClick(model) {
-    var $anchor;
+    let $anchor;
     if (this.widget('UseButtonAsAnchorField').value) {
       $anchor = this.widget('OpenPopupButton').$field;
     }
-    var anchorBounds = this._getAnchorBounds();
+    let anchorBounds = this._getAnchorBounds();
     this.popup = scout.create('WidgetPopup', {
       parent: this,
       $anchor: $anchor,
@@ -133,7 +133,7 @@ export default class PopupForm extends Form {
 
   _onUseButtonAsAnchorChange(event) {
     if (event.propertyName === 'value' && this.popup) {
-      var $anchor = null;
+      let $anchor = null;
       if (this.widget('UseButtonAsAnchorField').value) {
         $anchor = this.widget('OpenPopupButton').$field;
       }
@@ -146,7 +146,7 @@ export default class PopupForm extends Form {
   }
 
   _getAnchorBounds(event) {
-    var anchorBoundsRaw = this.widget('AnchorBoundsField').value;
+    let anchorBoundsRaw = this.widget('AnchorBoundsField').value;
     if (anchorBoundsRaw) {
       anchorBoundsRaw = anchorBoundsRaw.split(',');
       return new Rectangle(Number(anchorBoundsRaw[0]), Number(anchorBoundsRaw[1]), Number(anchorBoundsRaw[2]), Number(anchorBoundsRaw[3]));
@@ -154,7 +154,7 @@ export default class PopupForm extends Form {
   }
 
   _updateAnchor() {
-    var anchorBounds = this._getAnchorBounds();
+    let anchorBounds = this._getAnchorBounds();
     if (!anchorBounds) {
       if (this.$popupAnchor) {
         this.$popupAnchor.remove();

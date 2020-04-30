@@ -40,7 +40,7 @@ export default class RainbowLookupCall extends StaticLookupCall {
   ];
 
   _dataToLookupRow(data, index) {
-    var model = {
+    let model = {
       key: data[0],
       text: data[0],
       backgroundColor: data[0],

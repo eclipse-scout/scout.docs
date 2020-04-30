@@ -28,7 +28,7 @@ export default class GroupBoxAddFieldBox extends GroupBox {
     super._init(model);
     this._setField(this.field);
 
-    var fieldType = this.widget('LabelType');
+    let fieldType = this.widget('LabelType');
     fieldType.setValue('StringField');
   }
 
@@ -47,7 +47,7 @@ export default class GroupBoxAddFieldBox extends GroupBox {
 
     this.labelField = this.widget('LabelField');
 
-    var addFieldButton = this.widget('CreateButton');
+    let addFieldButton = this.widget('CreateButton');
     addFieldButton.on('click', this._onAddFormFieldButtonClick.bind(this));
 
     this._updateAddFieldLabel();
@@ -58,11 +58,11 @@ export default class GroupBoxAddFieldBox extends GroupBox {
   }
 
   _onAddFormFieldButtonClick(event) {
-    var siblings = this.field.fields || [],
+    let siblings = this.field.fields || [],
       beforeField = this.beforeField.value;
 
     this.dynamicFieldCounter++;
-    var newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
+    let newField = scout.create(scout.nvl(this.widget('LabelType').value, 'StringField'), {
       parent: this.field,
       id: 'DynField ' + this.dynamicFieldCounter,
       label: this.labelField.value || 'Dynamic Field ' + this.dynamicFieldCounter

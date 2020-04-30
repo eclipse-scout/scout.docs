@@ -14,8 +14,8 @@ export default class HeatmapField extends FormField {
     this.addLabel();
     this.addStatus();
 
-    var heatmapId = ObjectFactory.get().createUniqueId();
-    var $field = this.$container
+    let heatmapId = ObjectFactory.get().createUniqueId();
+    let $field = this.$container
       .makeDiv('heatmap')
       .attr('id', heatmapId);
     this.addField($field);
@@ -24,7 +24,7 @@ export default class HeatmapField extends FormField {
     // get smaller than that, because Leaflet.js throws an error when the drawing canvas has size 0.
     // After the initial rendering, this condition is ensured by HeapmapFieldLayout.js.
     graphics.setSize($field, new Dimension(1, 1));
-    var fieldHtmlComp = HtmlComponent.install($field, this.session);
+    let fieldHtmlComp = HtmlComponent.install($field, this.session);
     fieldHtmlComp.setLayout(new HeatmapFieldLayout(this));
 
     this.heatmap = L.map(heatmapId, {
@@ -84,9 +84,9 @@ export default class HeatmapField extends FormField {
     if (this._heatLayer) {
       this.heatmap.removeLayer(this._heatLayer);
     }
-    var heatPoints = [];
+    let heatPoints = [];
     if (this.heatPointList) {
-      this.heatPointList.forEach(function(point) {
+      this.heatPointList.forEach(point => {
         heatPoints.push([
           point.y,
           point.x,

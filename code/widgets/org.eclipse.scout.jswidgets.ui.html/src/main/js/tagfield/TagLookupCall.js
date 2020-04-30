@@ -17,11 +17,11 @@ export default class TagLookupCall extends StaticLookupCall {
   }
 
   _data() {
-    var tags = TagLookupCall.TAGS;
+    let tags = TagLookupCall.TAGS;
     tags.sort();
 
-    var data = [];
-    tags.forEach(function(tag) {
+    let data = [];
+    tags.forEach(tag => {
       data.push([tag, tag]);
     });
     return data;

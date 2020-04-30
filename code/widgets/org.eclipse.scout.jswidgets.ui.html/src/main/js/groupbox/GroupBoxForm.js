@@ -27,13 +27,13 @@ export default class GroupBoxForm extends Form {
   _init(model) {
     super._init(model);
 
-    var menu1 = this.widget('Menu1');
+    let menu1 = this.widget('Menu1');
     menu1.on('action', this._onMenuAction.bind(this));
 
-    var configurationBox = this.widget('ConfigurationBox');
+    let configurationBox = this.widget('ConfigurationBox');
     configurationBox.on('propertyChange', this._onConfigurationBoxPropertyChange.bind(this));
 
-    var groupBox = this.widget('DetailBox');
+    let groupBox = this.widget('DetailBox');
     groupBox.on('propertyChange', this._onGroupBoxPropertyChange.bind(this));
     this._initFields(groupBox.fields);
 
@@ -45,7 +45,7 @@ export default class GroupBoxForm extends Form {
     this.widget('Actions.DeleteFieldBox').setField(groupBox);
     this.widget('FormFieldPropertiesBox').setField(groupBox);
 
-    var bodyLayoutConfigBox = this.widget('BodyLayoutConfigBox');
+    let bodyLayoutConfigBox = this.widget('BodyLayoutConfigBox');
     bodyLayoutConfigBox.getLayoutConfig = function() {
       return this.field.bodyLayoutConfig;
     };
@@ -58,7 +58,7 @@ export default class GroupBoxForm extends Form {
     this.widget('EventsTab').setField(groupBox);
 
     // Field tab
-    var targetField = this.widget('Field.TargetField');
+    let targetField = this.widget('Field.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(groupBox));
     targetField.setValue(groupBox.fields[0]);
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
@@ -84,14 +84,14 @@ export default class GroupBoxForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var oldField = event.oldValue;
-      var newField = event.newValue;
+      let oldField = event.oldValue;
+      let newField = event.newValue;
 
-      var fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
+      let fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
       fieldPropertiesBox.setField(newField);
       fieldPropertiesBox.setEnabled(!!newField);
 
-      var fieldGridDataBox = this.widget('Field.GridDataBox');
+      let fieldGridDataBox = this.widget('Field.GridDataBox');
       fieldGridDataBox.setField(newField);
       fieldGridDataBox.setEnabled(!!newField);
       this._updateHighlightedField(newField, oldField);
@@ -99,7 +99,7 @@ export default class GroupBoxForm extends Form {
   }
 
   _updateHighlightedField(newTargetField, oldTargetField) {
-    var configurationBox = this.widget('ConfigurationBox');
+    let configurationBox = this.widget('ConfigurationBox');
     if (oldTargetField) {
       oldTargetField.removeCssClass('field-highlighted');
     }
@@ -121,7 +121,7 @@ export default class GroupBoxForm extends Form {
   }
 
   _onFieldFocus(event) {
-    var field = scout.widget(event.currentTarget);
+    let field = scout.widget(event.currentTarget);
     this.widget('Field.TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);
@@ -129,7 +129,7 @@ export default class GroupBoxForm extends Form {
 
   _onConfigurationBoxPropertyChange(event) {
     if (event.propertyName === 'selectedTab') {
-      var targetField = this.widget('Field.TargetField').value;
+      let targetField = this.widget('Field.TargetField').value;
       if (!targetField) {
         return;
       }

@@ -27,39 +27,39 @@ export default class BrowserFieldForm extends Form {
 
     this.browserField = this.widget('BrowserField');
 
-    var scrollBarEnabledField = this.widget('ScrollBarEnabledField');
+    let scrollBarEnabledField = this.widget('ScrollBarEnabledField');
     scrollBarEnabledField.setValue(this.browserField.scrollBarEnabled);
     scrollBarEnabledField.on('propertyChange', this._onScrollBarEnabledPropertyChange.bind(this));
 
-    var sandboxEnabledField = this.widget('SandboxEnabledField');
+    let sandboxEnabledField = this.widget('SandboxEnabledField');
     sandboxEnabledField.setValue(this.browserField.sandboxEnabled);
     sandboxEnabledField.on('propertyChange', this._onSandboxEnabledPropertyChange.bind(this));
 
-    var sandboxPermissionsField = this.widget('SandboxPermissionsField');
+    let sandboxPermissionsField = this.widget('SandboxPermissionsField');
     sandboxPermissionsField.setValue(this.browserField.sandboxPermissions);
     sandboxPermissionsField.on('propertyChange', this._onSandboxPermissionsPropertyChange.bind(this));
 
-    var locationField = this.widget('LocationField');
+    let locationField = this.widget('LocationField');
     locationField.setValue(this.browserField.location);
     locationField.on('propertyChange', this._onLocationPropertyChange.bind(this));
 
-    var trackLocationField = this.widget('TrackLocationField');
+    let trackLocationField = this.widget('TrackLocationField');
     trackLocationField.setValue(this.browserField.trackLocation);
     trackLocationField.on('propertyChange', this._onTrackLocationPropertyChange.bind(this));
 
-    var showInExternalWindowField = this.widget('ShowInExternalWindowField');
+    let showInExternalWindowField = this.widget('ShowInExternalWindowField');
     showInExternalWindowField.setValue(this.browserField.showInExternalWindow);
     showInExternalWindowField.on('propertyChange', this._onShowInExternalWindowPropertyChange.bind(this));
 
-    var autoCloseExternalWindowField = this.widget('AutoCloseExternalWindowField');
+    let autoCloseExternalWindowField = this.widget('AutoCloseExternalWindowField');
     autoCloseExternalWindowField.setValue(this.browserField.autoCloseExternalWindow);
     autoCloseExternalWindowField.on('propertyChange', this._onAutoCloseExternalWindowPropertyChange.bind(this));
 
-    var externalWindowButtonTextField = this.widget('ExternalWindowButtonTextField');
+    let externalWindowButtonTextField = this.widget('ExternalWindowButtonTextField');
     externalWindowButtonTextField.setValue(this.browserField.externalWindowButtonText);
     externalWindowButtonTextField.on('propertyChange', this._onExternalWindowButtonTextPropertyChange.bind(this));
 
-    var externalWindowFieldTextField = this.widget('ExternalWindowFieldTextField');
+    let externalWindowFieldTextField = this.widget('ExternalWindowFieldTextField');
     externalWindowFieldTextField.setValue(this.browserField.externalWindowFieldText);
     externalWindowFieldTextField.on('propertyChange', this._onExternalWindowFieldTextPropertyChange.bind(this));
 

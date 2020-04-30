@@ -37,55 +37,55 @@ export default class GroupBoxPropertiesBox extends GroupBox {
       return;
     }
 
-    var subLabelField = this.widget('SubLabelField');
+    let subLabelField = this.widget('SubLabelField');
     subLabelField.setValue(this.field.subLabel);
     subLabelField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var borderVisibleField = this.widget('BorderVisibleField');
+    let borderVisibleField = this.widget('BorderVisibleField');
     borderVisibleField.setValue(this.field.borderVisible);
     borderVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var borderDecorationField = this.widget('BorderDecorationField');
+    let borderDecorationField = this.widget('BorderDecorationField');
     borderDecorationField.setValue(this.field.borderDecoration);
     borderDecorationField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var expandableField = this.widget('ExpandableField');
+    let expandableField = this.widget('ExpandableField');
     expandableField.setValue(this.field.expandable);
     expandableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var expandedField = this.widget('ExpandedField');
+    let expandedField = this.widget('ExpandedField');
     expandedField.setValue(this.field.expanded);
     expandedField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var responsiveField = this.widget('ResponsiveField');
+    let responsiveField = this.widget('ResponsiveField');
     responsiveField.setValue(this.field.responsive);
     responsiveField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var scrollableField = this.widget('ScrollableField');
+    let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.field.scrollable);
     scrollableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var gridColumnCountField = this.widget('GridColumnCountField');
+    let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.field.gridColumnCount);
     gridColumnCountField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var logicalGridField = this.widget('LogicalGridField');
+    let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(this.field.logicalGrid ? this.field.logicalGrid.objectType : null);
     logicalGridField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var notificationField = this.widget('NotificationField');
+    let notificationField = this.widget('NotificationField');
     notificationField.setValue(this.field.notification ? this.field.notification.status.severity : null);
     notificationField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var menuBarVisibleField = this.widget('MenuBarVisibleField');
+    let menuBarVisibleField = this.widget('MenuBarVisibleField');
     menuBarVisibleField.setValue(this.field.menuBarVisible);
     menuBarVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var menuBarPositionField = this.widget('MenuBarPositionField');
+    let menuBarPositionField = this.widget('MenuBarPositionField');
     menuBarPositionField.setValue(this.field.menuBarPosition);
     menuBarPositionField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var menuBarEllipsisPositionField = this.widget('MenuBarEllipsisPositionField');
+    let menuBarEllipsisPositionField = this.widget('MenuBarEllipsisPositionField');
     menuBarEllipsisPositionField.setValue(this.field.menuBarEllipsisPosition);
     menuBarEllipsisPositionField.on('propertyChange', this._onPropertyChange.bind(this));
   }

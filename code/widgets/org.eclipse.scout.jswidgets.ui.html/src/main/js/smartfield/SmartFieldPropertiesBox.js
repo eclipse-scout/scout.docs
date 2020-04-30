@@ -38,28 +38,28 @@ export default class SmartFieldPropertiesBox extends GroupBox {
       return;
     }
 
-    var lookupCallField = this.widget('LookupCallField');
+    let lookupCallField = this.widget('LookupCallField');
     lookupCallField.setValue(this.field.lookupCall);
     lookupCallField.on('propertyChange', this._onLookupCallPropertyChange.bind(this));
     this.field.on('propertyChange', this._onSmartFieldChange.bind(this));
 
-    var displayStyleField = this.widget('DisplayStyleField');
+    let displayStyleField = this.widget('DisplayStyleField');
     displayStyleField.setValue(this.field.displayStyle);
     displayStyleField.on('propertyChange', this._onDisplayStylePropertyChange.bind(this));
 
-    var browseMaxRowCountField = this.widget('BrowseMaxRowCountField');
+    let browseMaxRowCountField = this.widget('BrowseMaxRowCountField');
     browseMaxRowCountField.setValue(this.field.browseMaxRowCount);
     browseMaxRowCountField.on('propertyChange', this._onBrowseMaxRowCountPropertyChange.bind(this));
 
-    var searchRequiredField = this.widget('SearchRequiredField');
+    let searchRequiredField = this.widget('SearchRequiredField');
     searchRequiredField.setValue(this.field.searchRequired);
     searchRequiredField.on('propertyChange', this._onSearchRequiredPropertyChange.bind(this));
 
-    var activeFilterEnabledField = this.widget('ActiveFilterEnabledField');
+    let activeFilterEnabledField = this.widget('ActiveFilterEnabledField');
     activeFilterEnabledField.setValue(this.field.activeFilterEnabled);
     activeFilterEnabledField.on('propertyChange', this._onActiveFilterEnabledPropertyChange.bind(this));
 
-    var activeFilterField = this.widget('ActiveFilterField');
+    let activeFilterField = this.widget('ActiveFilterField');
     activeFilterField.setValue(this.field.activeFilter);
     activeFilterField.on('propertyChange', this._onActiveFilterPropertyChange.bind(this));
   }

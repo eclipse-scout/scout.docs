@@ -15,7 +15,7 @@ export default class SamplePageWithTableDetailTable extends Table {
   }
 
   createTileForRow(row) {
-    var model = {
+    let model = {
       parent: this,
       content: '<br><b>ID:</b> ' +
         row.data.id + '<br><b>String Column:</b> ' +
@@ -31,8 +31,8 @@ export default class SamplePageWithTableDetailTable extends Table {
   }
 
   _onAddManyMenuAction() {
-    var rows = [];
-    for (var i = 0; i < 10; i++) {
+    let rows = [];
+    for (let i = 0; i < 10; i++) {
       rows.push(this._createRow(this.rows.length + i));
     }
     this.insertRows(rows);
@@ -44,9 +44,9 @@ export default class SamplePageWithTableDetailTable extends Table {
 
   _createRow(rowNo) {
     rowNo = scout.nvl(rowNo, this.rows.length + 1);
-    var smartValues = [null, 'es_CR', null, 'pt_BR', 'ro_RO'];
+    let smartValues = [null, 'es_CR', null, 'pt_BR', 'ro_RO'];
 
-    var row = {
+    let row = {
       id: this.rows.length + 1,
       string: 'string ' + rowNo,
       smartValue: smartValues[rowNo % smartValues.length],

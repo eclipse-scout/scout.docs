@@ -26,40 +26,40 @@ export default class ModeSelectorForm extends Form {
   _init(model) {
     super._init(model);
 
-    var modeSelectorField = this.widget('ModeSelectorField');
-    var modeSelector = this.widget('ModeSelector');
+    let modeSelectorField = this.widget('ModeSelectorField');
+    let modeSelector = this.widget('ModeSelector');
 
-    var mode1 = this.widget('Mode1');
+    let mode1 = this.widget('Mode1');
     mode1.on('propertyChange', this._onModeChange.bind(this, mode1));
 
-    var mode2 = this.widget('Mode2');
+    let mode2 = this.widget('Mode2');
     mode2.on('propertyChange', this._onModeChange.bind(this, mode2));
 
-    var mode3 = this.widget('Mode3');
+    let mode3 = this.widget('Mode3');
     mode3.on('propertyChange', this._onModeChange.bind(this, mode3));
 
-    var targetField = this.widget('TargetField');
+    let targetField = this.widget('TargetField');
     targetField.setLookupCall(new ModeLookupCall(modeSelector));
     targetField.setValue(modeSelector.modes[0]);
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
 
-    var selectedField = this.widget('SelectedField');
+    let selectedField = this.widget('SelectedField');
     selectedField.setValue(targetField.value.selected);
     selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
-    var enabledField = this.widget('EnabledField');
+    let enabledField = this.widget('EnabledField');
     enabledField.setValue(targetField.value.enabled);
     enabledField.on('propertyChange', this._onEnabledPropertyChange.bind(this));
 
-    var visibleField = this.widget('VisibleField');
+    let visibleField = this.widget('VisibleField');
     visibleField.setValue(targetField.value.visible);
     visibleField.on('propertyChange', this._onVisiblePropertyChange.bind(this));
 
-    var textField = this.widget('TextField');
+    let textField = this.widget('TextField');
     textField.setValue(targetField.value.text);
     textField.on('propertyChange', this._onTextPropertyChange.bind(this));
 
-    var iconIdField = this.widget('IconIdField');
+    let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(targetField.value.iconId);
     iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
 
@@ -72,7 +72,7 @@ export default class ModeSelectorForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = event.newValue;
+      let mode = event.newValue;
       this.widget('SelectedField').setEnabled(!!mode);
       this.widget('EnabledField').setEnabled(!!mode);
       this.widget('VisibleField').setEnabled(!!mode);
@@ -90,7 +90,7 @@ export default class ModeSelectorForm extends Form {
 
   _onTextPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = this.widget('TargetField').value;
+      let mode = this.widget('TargetField').value;
       if (mode) {
         mode.setText(event.newValue);
       }
@@ -99,7 +99,7 @@ export default class ModeSelectorForm extends Form {
 
   _onIconIdPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = this.widget('TargetField').value;
+      let mode = this.widget('TargetField').value;
       if (mode) {
         mode.setIconId(event.newValue);
       }
@@ -108,7 +108,7 @@ export default class ModeSelectorForm extends Form {
 
   _onSelectedPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = this.widget('TargetField').value;
+      let mode = this.widget('TargetField').value;
       if (mode) {
         mode.setSelected(event.newValue);
       }
@@ -117,7 +117,7 @@ export default class ModeSelectorForm extends Form {
 
   _onEnabledPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = this.widget('TargetField').value;
+      let mode = this.widget('TargetField').value;
       if (mode) {
         mode.setEnabled(event.newValue);
       }
@@ -126,7 +126,7 @@ export default class ModeSelectorForm extends Form {
 
   _onVisiblePropertyChange(event) {
     if (event.propertyName === 'value') {
-      var mode = this.widget('TargetField').value;
+      let mode = this.widget('TargetField').value;
       if (mode) {
         mode.setVisible(event.newValue);
       }
@@ -135,7 +135,7 @@ export default class ModeSelectorForm extends Form {
 
   _onModeChange(mode, event) {
     if (event.propertyName === 'selected') {
-      var targetMode = this.widget('TargetField').value;
+      let targetMode = this.widget('TargetField').value;
       if (mode === targetMode) {
         this.widget('SelectedField').setValue(mode.selected);
       }

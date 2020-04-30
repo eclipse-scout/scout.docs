@@ -24,18 +24,18 @@ export default class LabelForm extends Form {
   _init(model) {
     super._init(model);
 
-    var label = this.widget('Label');
+    let label = this.widget('Label');
     label.on('appLinkAction', this._onLabelAppLinkAction.bind(this));
 
-    var valueField = this.widget('ValueField');
+    let valueField = this.widget('ValueField');
     valueField.setValue(label.value);
     valueField.on('propertyChange', this._onValuePropertyChange.bind(this));
 
-    var htmlEnabledField = this.widget('HtmlEnabledField');
+    let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(label.htmlEnabled);
     htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
 
-    var scrollableField = this.widget('ScrollableField');
+    let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(label.scrollable);
     scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
@@ -57,11 +57,11 @@ export default class LabelForm extends Form {
 
   _onScrollablePropertyChange(event) {
     if (event.propertyName === 'value') {
-      var label = this.widget('Label');
+      let label = this.widget('Label');
       label.setScrollable(event.newValue);
 
       // Fix height if it is scrollable
-      var gridData = new GridData(label.parent.gridDataHints);
+      let gridData = new GridData(label.parent.gridDataHints);
       gridData.heightInPixel = label.scrollable ? 50 : -1;
       label.parent.setGridDataHints(gridData);
     }

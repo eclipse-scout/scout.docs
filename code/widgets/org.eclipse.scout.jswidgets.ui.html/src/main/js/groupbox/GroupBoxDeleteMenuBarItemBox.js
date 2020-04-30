@@ -54,7 +54,7 @@ export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
   }
 
   _onDeleteMenuBarItemButtonClick() {
-    var newMenuItems = this.field.menuBar.menuItems.slice(),
+    let newMenuItems = this.field.menuBar.menuItems.slice(),
       index = this.field.menuBar.menuItems.indexOf(this.targetField.value);
 
     if (index < 0) {

@@ -85,7 +85,7 @@ export default class TabBoxProperties extends TabItem {
   }
 
   _updateSelectedTab() {
-    var selectedTab = this.tabBox.selectedTab;
+    let selectedTab = this.tabBox.selectedTab;
     this.selectedTabField.setValue(selectedTab);
     this.selectedTabField.setEnabled(this.tabBox.tabItems.length > 0);
   }

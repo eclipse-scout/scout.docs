@@ -15,11 +15,11 @@ export default class Desktop extends Desktop_1 {
     super._init(model);
 
     this.widget('AboutMenu').on('action', this._onAboutMenuAction.bind(this));
-    var defaultThemeMenu = this.widget('DefaultThemeMenu');
+    let defaultThemeMenu = this.widget('DefaultThemeMenu');
     defaultThemeMenu.on('action', this._onDefaultThemeMenuAction.bind(this));
-    var darkThemeMenu = this.widget('DarkThemeMenu');
+    let darkThemeMenu = this.widget('DarkThemeMenu');
     darkThemeMenu.on('action', this._onDarkThemeMenuAction.bind(this));
-    var denseModeMenu = this.widget('DenseMenu');
+    let denseModeMenu = this.widget('DenseMenu');
     denseModeMenu.on('action', this._onDenseMenuAction.bind(this));
 
     if (this.theme === 'dark') {
@@ -30,11 +30,11 @@ export default class Desktop extends Desktop_1 {
     if (this.dense) {
       denseModeMenu.setIconId(icons.CHECKED_BOLD);
     }
-    this.on('propertyChange', function(event) {
+    this.on('propertyChange', event => {
       if (event.propertyName === 'dense') {
         this.dense ? denseModeMenu.setIconId(icons.CHECKED_BOLD) : denseModeMenu.setIconId(null);
       }
-    }.bind(this));
+    });
   }
 
   _onDefaultThemeMenuAction(event) {
@@ -50,7 +50,7 @@ export default class Desktop extends Desktop_1 {
   }
 
   _onAboutMenuAction(event) {
-    var form = scout.create('Form', {
+    let form = scout.create('Form', {
       parent: this,
       resizable: false,
       title: 'Scout JS Widgets Application',

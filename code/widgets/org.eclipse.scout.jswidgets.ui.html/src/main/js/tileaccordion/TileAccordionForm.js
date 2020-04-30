@@ -39,81 +39,81 @@ export default class TileAccordionForm extends Form {
 
     // -- Properties
 
-    var exclusiveExpandField = this.widget('ExclusiveExpandField');
+    let exclusiveExpandField = this.widget('ExclusiveExpandField');
     exclusiveExpandField.setValue(this.accordion.exclusiveExpand);
     exclusiveExpandField.on('propertyChange', this._onExclusiveExpandPropertyChange.bind(this));
 
-    var scrollableField = this.widget('ScrollableField');
+    let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.accordion.scrollable);
     scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
-    var selectableField = this.widget('SelectableField');
+    let selectableField = this.widget('SelectableField');
     selectableField.setValue(this.accordion.selectable);
     selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
 
-    var multiSelectField = this.widget('MultiSelectField');
+    let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.accordion.multiSelect);
     multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
 
-    var withPlaceholdersField = this.widget('WithPlaceholdersField');
+    let withPlaceholdersField = this.widget('WithPlaceholdersField');
     withPlaceholdersField.setValue(this.accordion.withPlaceholders);
     withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
 
-    var virtualField = this.widget('VirtualField');
+    let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.accordion.virtual);
     virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
 
-    var gridColumnCountField = this.widget('GridColumnCountField');
+    let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.accordion.gridColumnCount);
     gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
     // -- Actions
 
-    var insertMenu = this.widget('InsertMenu');
+    let insertMenu = this.widget('InsertMenu');
     insertMenu.on('action', this._onInsertMenuAction.bind(this));
 
-    var deleteFirstMenu = this.widget('DeleteFirstMenu');
+    let deleteFirstMenu = this.widget('DeleteFirstMenu');
     deleteFirstMenu.on('action', this._onDeleteFirstMenuAction.bind(this));
 
-    var insertTileIntoGroup0Menu = this.widget('InsertTileIntoGroup0Menu');
+    let insertTileIntoGroup0Menu = this.widget('InsertTileIntoGroup0Menu');
     insertTileIntoGroup0Menu.on('action', this._onInsertTileIntoGroup0MenuAction.bind(this));
 
-    var insertTileIntoGroup1Menu = this.widget('InsertTileIntoGroup1Menu');
+    let insertTileIntoGroup1Menu = this.widget('InsertTileIntoGroup1Menu');
     insertTileIntoGroup1Menu.on('action', this._onInsertTileIntoGroup1MenuAction.bind(this));
 
-    var deleteAllSelectedTilesMenu = this.widget('DeleteSelectedTilesMenu');
+    let deleteAllSelectedTilesMenu = this.widget('DeleteSelectedTilesMenu');
     deleteAllSelectedTilesMenu.on('action', this._onDeleteAllSelectedTilesMenuAction.bind(this));
 
-    var selectNextMenu = this.widget('SelectNextMenu');
+    let selectNextMenu = this.widget('SelectNextMenu');
     selectNextMenu.on('action', this._onSelectNextMenuAction.bind(this));
 
-    var selectAllMenu = this.widget('SelectAllMenu');
+    let selectAllMenu = this.widget('SelectAllMenu');
     selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
 
-    var sortAscMenu = this.widget('SortAscMenu');
+    let sortAscMenu = this.widget('SortAscMenu');
     sortAscMenu.on('action', this._onSortAscMenuAction.bind(this));
 
-    var sortDescMenu = this.widget('SortDescMenu');
+    let sortDescMenu = this.widget('SortDescMenu');
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
-    var filterField = this.widget('FilterField');
+    let filterField = this.widget('FilterField');
     filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
 
-    var insertTileTargetField = this.widget('InsertTileTargetField');
+    let insertTileTargetField = this.widget('InsertTileTargetField');
     insertTileTargetField.setLookupCall(new GroupLookupCall(this.accordion));
     insertTileTargetField.setValue(this.accordion.groups[0]);
 
-    var insertTileButton = this.widget('InsertTileButton');
+    let insertTileButton = this.widget('InsertTileButton');
     insertTileButton.on('click', this._onInsertTileButtonClick.bind(this));
 
-    var accordionField = this.widget('AccordionField');
+    let accordionField = this.widget('AccordionField');
     this.widget('FormFieldPropertiesBox').setField(accordionField);
     this.widget('GridDataBox').setField(accordionField);
     this.widget('WidgetActionsBox').setField(accordionField);
     this.widget('FormFieldActionsBox').setField(accordionField);
     this.widget('EventsTab').setField(this.accordion);
 
-    var layoutConfigBox = this.widget('LayoutConfigBox');
+    let layoutConfigBox = this.widget('LayoutConfigBox');
     layoutConfigBox.getBodyLayout = function() {
       // Use the layout of the first group for the initialization of the grid config box.
       return this.field.groups[0].body.htmlComp.layout;
@@ -222,21 +222,21 @@ export default class TileAccordionForm extends Form {
   }
 
   _onInsertTileButtonClick(event) {
-    var count = this.widget('InsertTileCountField').value;
-    var group = this.widget('InsertTileTargetField').value;
-    var tiles = [];
-    for (var i = 0; i < count; i++) {
+    let count = this.widget('InsertTileCountField').value;
+    let group = this.widget('InsertTileTargetField').value;
+    let tiles = [];
+    for (let i = 0; i < count; i++) {
       tiles.push(this._createTile());
     }
     group.body.insertTiles(tiles);
   }
 
   _onSelectNextMenuAction(event) {
-    var filteredTiles = this.accordion.getFilteredTiles();
+    let filteredTiles = this.accordion.getFilteredTiles();
     if (filteredTiles.length === 0) {
       return;
     }
-    var selectedTileIndex = arrays.findIndex(filteredTiles, function(tile) {
+    let selectedTileIndex = arrays.findIndex(filteredTiles, tile => {
       return tile.selected;
     });
     this.accordion.selectTile(filteredTiles[selectedTileIndex + 1] || filteredTiles[0]);
@@ -247,14 +247,14 @@ export default class TileAccordionForm extends Form {
   }
 
   _insertGroupWithTiles() {
-    var tiles = [];
-    var maxTiles = Math.floor(Math.random() * 30);
-    for (var i = 0; i < maxTiles; i++) {
+    let tiles = [];
+    let maxTiles = Math.floor(Math.random() * 30);
+    for (let i = 0; i < maxTiles; i++) {
       tiles.push(this._createTile({
         label: 'Tile ' + i
       }));
     }
-    var group = scout.create('Group', {
+    let group = scout.create('Group', {
       parent: this.accordion,
       title: 'Group ' + this.insertedGroupCount++,
       body: {
@@ -272,8 +272,8 @@ export default class TileAccordionForm extends Form {
   }
 
   _createTile(model) {
-    var defaults;
-    var tileType = this.widget('InsertTileTypeField').value;
+    let defaults;
+    let tileType = this.widget('InsertTileTypeField').value;
     if (tileType === 'default') {
       defaults = {
         parent: this.accordion,
@@ -302,18 +302,18 @@ export default class TileAccordionForm extends Form {
   }
 
   _updateGroupVisibility() {
-    this.accordion.groups.forEach(function(group) {
+    this.accordion.groups.forEach(group => {
       // Make groups invisible if a tile filter is active and no tiles match (= no tiles are visible)
-      var groupEmpty = group.body.filters.length > 0 && group.body.filteredTiles.length === 0;
+      let groupEmpty = group.body.filters.length > 0 && group.body.filteredTiles.length === 0;
       group.setVisible(!groupEmpty);
     });
   }
 
   _sortTiles(asc) {
-    var comparator = comparators.ALPHANUMERIC;
+    let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
-    this.accordion.setTileComparator(function(tile1, tile2) {
-      var result = comparator.compare(tile1.label, tile2.label);
+    this.accordion.setTileComparator((tile1, tile2) => {
+      let result = comparator.compare(tile1.label, tile2.label);
       if (!asc) {
         result = -result;
       }

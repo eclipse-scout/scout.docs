@@ -28,7 +28,7 @@ export default class LookupCallLookupCall extends StaticLookupCall {
       });
       return;
     }
-    var data = arrays.find(this.data, function(data) {
+    let data = arrays.find(this.data, data => {
       return data[0] === key;
     });
     if (data) {

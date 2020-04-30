@@ -38,47 +38,47 @@ export default class ActionPropertiesBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    var enabledField = this.widget('EnabledField');
+    let enabledField = this.widget('EnabledField');
     enabledField.setValue(this.field.enabled);
     enabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var visibleField = this.widget('VisibleField');
+    let visibleField = this.widget('VisibleField');
     visibleField.setValue(this.field.visible);
     visibleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var toggleActionField = this.widget('ToggleActionField');
+    let toggleActionField = this.widget('ToggleActionField');
     toggleActionField.setValue(this.field.toggleAction);
     toggleActionField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var selectedField = this.widget('SelectedField');
+    let selectedField = this.widget('SelectedField');
     selectedField.setValue(this.field.selected);
     selectedField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var inheritAccessibilityField = this.widget('InheritAccessibilityField');
+    let inheritAccessibilityField = this.widget('InheritAccessibilityField');
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
     inheritAccessibilityField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var iconIdField = this.widget('IconIdField');
+    let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(this.field.iconId);
     iconIdField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var keyStrokeField = this.widget('KeyStrokeField');
+    let keyStrokeField = this.widget('KeyStrokeField');
     keyStrokeField.setValue(this.field.keyStroke);
     keyStrokeField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var textField = this.widget('TextField');
+    let textField = this.widget('TextField');
     textField.setValue(this.field.text);
     textField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var tooltipTextField = this.widget('TooltipTextField');
+    let tooltipTextField = this.widget('TooltipTextField');
     tooltipTextField.setValue(this.field.tooltipText);
     tooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var horizontalAlignmentField = this.widget('HorizontalAlignmentField');
+    let horizontalAlignmentField = this.widget('HorizontalAlignmentField');
     horizontalAlignmentField.setValue(this.field.horizontalAlignment);
     horizontalAlignmentField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var actionStyleField = this.widget('ActionStyleField');
+    let actionStyleField = this.widget('ActionStyleField');
     actionStyleField.setValue(this.field.actionStyle);
     actionStyleField.on('propertyChange', this._onPropertyChange.bind(this));
   }
@@ -108,7 +108,7 @@ export default class ActionPropertiesBox extends GroupBox {
       // ActionStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole menu bar
       this.field.actionStyle = event.newValue;
       if (this.field.parent instanceof MenuBar) {
-        var menuItems = this.field.parent.menuItems;
+        let menuItems = this.field.parent.menuItems;
         this.field.parent.setMenuItems([]);
         this.field.parent.setMenuItems(menuItems);
       }

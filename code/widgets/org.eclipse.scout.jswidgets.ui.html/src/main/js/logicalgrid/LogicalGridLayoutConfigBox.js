@@ -47,7 +47,7 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
   }
 
   initLayoutDefaults() {
-    var bodyLayout = this.getBodyLayout();
+    let bodyLayout = this.getBodyLayout();
     this.widget('HGapField').setValue(bodyLayout.hgap);
     this.widget('VGapField').setValue(bodyLayout.vgap);
     this.widget('RowHeightField').setValue(bodyLayout.rowHeight);
@@ -59,7 +59,7 @@ export default class LogicalGridLayoutConfigBox extends GroupBox {
     if (event.propertyName !== 'value') {
       return;
     }
-    var layoutConfig = this.getLayoutConfig().clone();
+    let layoutConfig = this.getLayoutConfig().clone();
     this._fillLayoutConfigByEvent(layoutConfig, event);
     this.setLayoutConfig(layoutConfig);
   }

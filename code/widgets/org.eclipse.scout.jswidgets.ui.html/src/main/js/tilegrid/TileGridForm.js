@@ -32,72 +32,72 @@ export default class TileGridForm extends Form {
     this.tileGrid = this.widget('TileGrid');
     this.tileGrid.on('propertyChange', this._onTileGridPropertyChange.bind(this));
 
-    var filterField = this.widget('FilterField');
+    let filterField = this.widget('FilterField');
     filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
 
     // -- Properties
 
-    var gridColumnCountField = this.widget('GridColumnCountField');
+    let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.tileGrid.gridColumnCount);
     gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
 
-    var logicalGridField = this.widget('LogicalGridField');
+    let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(this.tileGrid.logicalGrid ? this.tileGrid.logicalGrid.objectType : null);
     logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
 
-    var withPlaceholdersField = this.widget('WithPlaceholdersField');
+    let withPlaceholdersField = this.widget('WithPlaceholdersField');
     withPlaceholdersField.setValue(this.tileGrid.withPlaceholders);
     withPlaceholdersField.on('propertyChange', this._onWithPlacehodersPropertyChange.bind(this));
 
-    var virtualField = this.widget('VirtualField');
+    let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.tileGrid.virtual);
     virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
 
-    var colorSchemeField = this.widget('ColorSchemeField');
+    let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.setValue(this.tileGrid.tiles[0].colorScheme.scheme);
     colorSchemeField.on('propertyChange', this._onColorSchemePropertyChange.bind(this));
 
-    var invertColorsField = this.widget('InvertColorsField');
+    let invertColorsField = this.widget('InvertColorsField');
     invertColorsField.setValue(this.tileGrid.tiles[0].colorScheme.inverted);
     invertColorsField.on('propertyChange', this._onInvertColorsPropertyChange.bind(this));
 
-    var selectableField = this.widget('SelectableField');
+    let selectableField = this.widget('SelectableField');
     selectableField.setValue(this.tileGrid.selectable);
     selectableField.on('propertyChange', this._onSelectablePropertyChange.bind(this));
 
-    var multiSelectField = this.widget('MultiSelectField');
+    let multiSelectField = this.widget('MultiSelectField');
     multiSelectField.setValue(this.tileGrid.multiSelect);
     multiSelectField.on('propertyChange', this._onMultiSelectPropertyChange.bind(this));
 
-    var scrollableField = this.widget('ScrollableField');
+    let scrollableField = this.widget('ScrollableField');
     scrollableField.setValue(this.tileGrid.scrollable);
     scrollableField.on('propertyChange', this._onScrollablePropertyChange.bind(this));
 
     // -- Actions
 
-    var insertMenu = this.widget('InsertMenu');
+    let insertMenu = this.widget('InsertMenu');
     insertMenu.on('action', this._onInsertMenuAction.bind(this));
 
-    var insertManyMenu = this.widget('InsertManyMenu');
+    let insertManyMenu = this.widget('InsertManyMenu');
     insertManyMenu.on('action', this._onInsertManyMenuAction.bind(this));
 
-    var deleteMenu = this.widget('DeleteMenu');
+    let deleteMenu = this.widget('DeleteMenu');
     deleteMenu.on('action', this._onDeleteMenuAction.bind(this));
 
-    var selectNextMenu = this.widget('SelectNextMenu');
+    let selectNextMenu = this.widget('SelectNextMenu');
     selectNextMenu.on('action', this._onSelectNextMenuAction.bind(this));
 
-    var selectAllMenu = this.widget('SelectAllMenu');
+    let selectAllMenu = this.widget('SelectAllMenu');
     selectAllMenu.on('action', this._onSelectAllMenuAction.bind(this));
 
-    var sortAscMenu = this.widget('SortAscMenu');
+    let sortAscMenu = this.widget('SortAscMenu');
     sortAscMenu.on('action', this._onSortAscMenuAction.bind(this));
 
-    var sortDescMenu = this.widget('SortDescMenu');
+    let sortDescMenu = this.widget('SortDescMenu');
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
 
-    var tileField = this.widget('TileField');
-    var layoutConfigBox = this.widget('LayoutConfigBox');
+    let tileField = this.widget('TileField');
+    let layoutConfigBox = this.widget('LayoutConfigBox');
     layoutConfigBox.getBodyLayout = function() {
       return this.field.htmlComp.layout;
     };
@@ -152,8 +152,8 @@ export default class TileGridForm extends Form {
 
   _onColorSchemePropertyChange(event) {
     if (event.propertyName === 'value') {
-      this.tileGrid.tiles.forEach(function(tile) {
-        var scheme = $.extend({}, tile.colorScheme, {
+      this.tileGrid.tiles.forEach(tile => {
+        let scheme = $.extend({}, tile.colorScheme, {
           scheme: event.newValue
         });
         tile.setColorScheme(scheme);
@@ -163,8 +163,8 @@ export default class TileGridForm extends Form {
 
   _onInvertColorsPropertyChange(event) {
     if (event.propertyName === 'value') {
-      this.tileGrid.tiles.forEach(function(tile) {
-        var scheme = $.extend({}, tile.colorScheme, {
+      this.tileGrid.tiles.forEach(tile => {
+        let scheme = $.extend({}, tile.colorScheme, {
           inverted: event.newValue
         });
         tile.setColorScheme(scheme);
@@ -191,13 +191,13 @@ export default class TileGridForm extends Form {
   }
 
   _onInsertMenuAction(event) {
-    var tile = this._createTile();
+    let tile = this._createTile();
     this.tileGrid.insertTile(tile);
   }
 
   _createTile(model) {
-    var defaults;
-    var tileType = this.widget('TileTypeField').value;
+    let defaults;
+    let tileType = this.widget('TileTypeField').value;
     if (tileType === 'default') {
       defaults = {
         parent: this.tileGrid,
@@ -215,15 +215,15 @@ export default class TileGridForm extends Form {
   }
 
   _onInsertManyMenuAction(event) {
-    var tiles = [];
-    for (var i = 0; i < 50; i++) {
+    let tiles = [];
+    for (let i = 0; i < 50; i++) {
       tiles.push(this._createTile());
     }
     this.tileGrid.insertTiles(tiles);
   }
 
   _updateHasCustomTiles(event) {
-    this.tileGrid.toggleCssClass('has-custom-tiles', this.tileGrid.filteredTiles.some(function(tile) {
+    this.tileGrid.toggleCssClass('has-custom-tiles', this.tileGrid.filteredTiles.some(tile => {
       return tile instanceof CustomTile;
     }));
   }
@@ -239,7 +239,7 @@ export default class TileGridForm extends Form {
     if (this.tileGrid.filteredTiles.length === 0) {
       return;
     }
-    var selectedTileIndex = arrays.findIndex(this.tileGrid.filteredTiles, function(tile) {
+    let selectedTileIndex = arrays.findIndex(this.tileGrid.filteredTiles, tile => {
       return tile.selected;
     });
     this.tileGrid.selectTile(this.tileGrid.filteredTiles[selectedTileIndex + 1] || this.tileGrid.filteredTiles[0]);
@@ -277,10 +277,10 @@ export default class TileGridForm extends Form {
 
   // noinspection DuplicatedCode
   _sortTiles(asc) {
-    var comparator = comparators.ALPHANUMERIC;
+    let comparator = comparators.ALPHANUMERIC;
     comparator.install(this.session);
-    this.tileGrid.setComparator(function(tile1, tile2) {
-      var result = comparator.compare(tile1.label, tile2.label);
+    this.tileGrid.setComparator((tile1, tile2) => {
+      let result = comparator.compare(tile1.label, tile2.label);
       if (!asc) {
         result = -result;
       }

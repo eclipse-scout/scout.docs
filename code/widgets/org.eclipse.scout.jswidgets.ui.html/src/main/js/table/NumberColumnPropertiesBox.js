@@ -38,23 +38,23 @@ export default class NumberColumnPropertiesBox extends GroupBox {
       return;
     }
 
-    var minValueField = this.widget('MinValueField');
+    let minValueField = this.widget('MinValueField');
     minValueField.setValue(this.column.minValue);
     minValueField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var maxValueField = this.widget('MaxValueField');
+    let maxValueField = this.widget('MaxValueField');
     maxValueField.setValue(this.column.maxValue);
     maxValueField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var multiplierField = this.widget('MultiplierField');
+    let multiplierField = this.widget('MultiplierField');
     multiplierField.setValue(this.column.decimalFormat.multiplier);
     multiplierField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var formatField = this.widget('FormatField');
+    let formatField = this.widget('FormatField');
     formatField.setValue(this.column.decimalFormat.pattern);
     formatField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var backgroundEffectField = this.widget('BackgroundEffectField');
+    let backgroundEffectField = this.widget('BackgroundEffectField');
     backgroundEffectField.setValue(this.column.backgroundEffect);
     backgroundEffectField.on('propertyChange', this._onPropertyChange.bind(this));
 

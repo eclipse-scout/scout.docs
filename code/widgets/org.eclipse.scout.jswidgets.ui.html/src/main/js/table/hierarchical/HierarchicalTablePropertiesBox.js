@@ -40,11 +40,11 @@ export default class HierarchicalTablePropertiesBox extends TablePropertiesBox {
       return;
     }
 
-    var hierarchicalStyleField = this.widget('HierarchicalStyleField');
+    let hierarchicalStyleField = this.widget('HierarchicalStyleField');
     hierarchicalStyleField.setValue(this.table.hierarchicalStyle);
     hierarchicalStyleField.on('propertyChange', this._onHierarchicalStylePropertyChange.bind(this));
 
-    var extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
+    let extendedHierarchyPaddingField = this.widget('ExtendedHierarchyPaddingField');
     extendedHierarchyPaddingField.setValue(this.table.cssClassAsArray().indexOf('extended-row-level-padding') > -1);
     extendedHierarchyPaddingField.on('propertyChange', this._onExtendedHierarchyPaddingPropertyChange.bind(this));
   }

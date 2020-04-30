@@ -37,35 +37,35 @@ export default class WidgetActionsBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    var focusButton = this.widget('FocusButton');
+    let focusButton = this.widget('FocusButton');
     focusButton.on('click', this._onFocusButtonClick.bind(this));
 
-    var isFocusableButton = this.widget('IsFocusableButton');
+    let isFocusableButton = this.widget('IsFocusableButton');
     isFocusableButton.on('click', this._onIsFocusableButtonClick.bind(this));
 
-    var revealButton = this.widget('RevealButton');
+    let revealButton = this.widget('RevealButton');
     revealButton.on('click', this._onRevealButtonClick.bind(this));
 
-    var scrollToTopButton = this.widget('ScrollToTopButton');
+    let scrollToTopButton = this.widget('ScrollToTopButton');
     scrollToTopButton.on('click', this._onScrollToTopButtonClick.bind(this));
 
-    var scrollToBottomButton = this.widget('ScrollToBottomButton');
+    let scrollToBottomButton = this.widget('ScrollToBottomButton');
     scrollToBottomButton.on('click', this._onScrollToBottomButtonClick.bind(this));
 
-    var scrollTopField = this.widget('ScrollTopField');
+    let scrollTopField = this.widget('ScrollTopField');
     scrollTopField.setValue(this.field.scrollTop);
     scrollTopField.on('propertyChange', this._onScrollTopPropertyChange.bind(this));
   }
 
   _onFocusButtonClick(event) {
-    var returned = this.field.focus();
-    var returnField = this.widget('FocusReturnField');
+    let returned = this.field.focus();
+    let returnField = this.widget('FocusReturnField');
     this._updateBooleanReturnValue(returnField, returned);
   }
 
   _onIsFocusableButtonClick(event) {
-    var returned = this.field.isFocusable();
-    var returnField = this.widget('IsFocusableReturnField');
+    let returned = this.field.isFocusable();
+    let returnField = this.widget('IsFocusableReturnField');
     this._updateBooleanReturnValue(returnField, returned);
   }
 

@@ -34,7 +34,7 @@ export default class HierarchicalTableForm extends Form {
     this.table = this.widget('Table');
 
     this.widget('PropertiesBox').setTable(this.table);
-    var tableField = this.widget('TableField');
+    let tableField = this.widget('TableField');
     this.widget('FormFieldPropertiesBox').setField(tableField);
     this.widget('GridDataBox').setField(tableField);
     this.widget('FormFieldActionsBox').setField(tableField);
@@ -47,7 +47,7 @@ export default class HierarchicalTableForm extends Form {
     this.widget('DeleteRowMenu').on('action', this._onDeleteRowMenuAction.bind(this));
     this.widget('AddRowMenu').on('action', this._onAddRowMenuAction.bind(this));
 
-    var targetField = this.widget('Column.TargetField');
+    let targetField = this.widget('Column.TargetField');
     targetField.setLookupCall(new ColumnLookupCall(this.table));
     targetField.setValue(this.table.columns[0]);
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
@@ -63,9 +63,9 @@ export default class HierarchicalTableForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var newColumn = event.newValue;
+      let newColumn = event.newValue;
 
-      var columnPropertiesBox = this.widget('Column.PropertiesBox');
+      let columnPropertiesBox = this.widget('Column.PropertiesBox');
       columnPropertiesBox.setColumn(newColumn);
       columnPropertiesBox.setEnabled(!!newColumn);
     }
@@ -84,7 +84,7 @@ export default class HierarchicalTableForm extends Form {
   }
 
   _insertFewRows() {
-    var daltonId = this.rowNo++,
+    let daltonId = this.rowNo++,
       simpsonsId = this.rowNo++;
     this.table.insertRows(this._scrumbleOrder([{
       id: daltonId,
@@ -168,10 +168,10 @@ export default class HierarchicalTableForm extends Form {
   }
 
   _insertManyRows() {
-    var i = 0,
+    let i = 0,
       allRows = [],
       createParentWithManyChildren = function(id, name, childCount) {
-        var rows = [],
+        let rows = [],
           i,
           rowId;
         rows.push(createRow(id, null, null, [name + '_parent' + ' (' + childCount + ')', null, null]));
@@ -205,13 +205,13 @@ export default class HierarchicalTableForm extends Form {
   }
 
   _scrumbleOrder(rows) {
-    return rows.sort(function(a, b) {
+    return rows.sort((a, b) => {
       return 0.5 - Math.random();
     });
   }
 
   _onAddRowMenuAction() {
-    var id = this.rowNo++,
+    let id = this.rowNo++,
       parentId = null,
       selectedRow = this.table.selectedRow();
     if (selectedRow) {
@@ -235,7 +235,7 @@ export default class HierarchicalTableForm extends Form {
   }
 
   _onToggleGroupNoColumnMenuAction() {
-    var column = this.table.columnById('GroupNo');
+    let column = this.table.columnById('GroupNo');
     column.setVisible(!column.visible);
   }
 }

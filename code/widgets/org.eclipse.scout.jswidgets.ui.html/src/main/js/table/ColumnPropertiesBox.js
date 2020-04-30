@@ -37,115 +37,115 @@ export default class ColumnPropertiesBox extends GroupBox {
     if (!this.column) {
       return;
     }
-    var autoOptimizeWidthField = this.widget('AutoOptimizeWidthField');
+    let autoOptimizeWidthField = this.widget('AutoOptimizeWidthField');
     autoOptimizeWidthField.setValue(this.column.autoOptimizeWidth);
     autoOptimizeWidthField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var autoOptimizeMaxWidthField = this.widget('AutoOptimizeMaxWidthField');
+    let autoOptimizeMaxWidthField = this.widget('AutoOptimizeMaxWidthField');
     autoOptimizeMaxWidthField.setValue(this.column.autoOptimizeMaxWidth);
     autoOptimizeMaxWidthField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var editableField = this.widget('EditableField');
+    let editableField = this.widget('EditableField');
     editableField.setValue(this.column.editable);
     editableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var modifiableField = this.widget('ModifiableField');
+    let modifiableField = this.widget('ModifiableField');
     modifiableField.setValue(this.column.modifiable);
     modifiableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var removableField = this.widget('RemovableField');
+    let removableField = this.widget('RemovableField');
     removableField.setValue(this.column.removable);
     removableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var fixedWidthField = this.widget('FixedWidthField');
+    let fixedWidthField = this.widget('FixedWidthField');
     fixedWidthField.setValue(this.column.fixedWidth);
     fixedWidthField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var fixedPositionField = this.widget('FixedPositionField');
+    let fixedPositionField = this.widget('FixedPositionField');
     fixedPositionField.setValue(this.column.fixedPosition);
     fixedPositionField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var groupedField = this.widget('GroupedField');
+    let groupedField = this.widget('GroupedField');
     groupedField.setValue(this.column.grouped);
     groupedField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerMenuEnabledField = this.widget('HeaderMenuEnabledField');
+    let headerMenuEnabledField = this.widget('HeaderMenuEnabledField');
     headerMenuEnabledField.setValue(this.column.headerMenuEnabled);
     headerMenuEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerHtmlEnabledField = this.widget('HeaderHtmlEnabledField');
+    let headerHtmlEnabledField = this.widget('HeaderHtmlEnabledField');
     headerHtmlEnabledField.setValue(this.column.headerHtmlEnabled);
     headerHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var htmlEnabledField = this.widget('HtmlEnabledField');
+    let htmlEnabledField = this.widget('HtmlEnabledField');
     htmlEnabledField.setValue(this.column.htmlEnabled);
     htmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerTooltipHtmlEnabledField = this.widget('HeaderTooltipHtmlEnabledField');
+    let headerTooltipHtmlEnabledField = this.widget('HeaderTooltipHtmlEnabledField');
     headerTooltipHtmlEnabledField.setValue(this.column.headerTooltipHtmlEnabled);
     headerTooltipHtmlEnabledField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var mandatoryField = this.widget('MandatoryField');
+    let mandatoryField = this.widget('MandatoryField');
     mandatoryField.setValue(this.column.mandatory);
     mandatoryField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var sortActiveField = this.widget('SortActiveField');
+    let sortActiveField = this.widget('SortActiveField');
     sortActiveField.setValue(this.column.sortActive);
     sortActiveField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var sortAscendingField = this.widget('SortAscendingField');
+    let sortAscendingField = this.widget('SortAscendingField');
     sortAscendingField.setValue(this.column.sortAscending);
     sortAscendingField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var textWrapField = this.widget('TextWrapField');
+    let textWrapField = this.widget('TextWrapField');
     textWrapField.setValue(this.column.textWrap);
     textWrapField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var displayableField = this.widget('DisplayableField');
+    let displayableField = this.widget('DisplayableField');
     displayableField.setValue(this.column.displayable);
     displayableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var visibleField = this.widget('VisibleField');
+    let visibleField = this.widget('VisibleField');
     visibleField.setValue(this.column.visible);
     visibleField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var cssClassField = this.widget('CssClassField');
+    let cssClassField = this.widget('CssClassField');
     cssClassField.setValue(this.column.cssClass);
     cssClassField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var horizontalAlignmentField = this.widget('HorizontalAlignmentField');
+    let horizontalAlignmentField = this.widget('HorizontalAlignmentField');
     horizontalAlignmentField.setValue(this.column.horizontalAlignment);
     horizontalAlignmentField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var textField = this.widget('TextField');
+    let textField = this.widget('TextField');
     textField.setValue(this.column.text);
     textField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerTooltipTextField = this.widget('HeaderTooltipTextField');
+    let headerTooltipTextField = this.widget('HeaderTooltipTextField');
     headerTooltipTextField.setValue(this.column.headerTooltipText);
     headerTooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerIconIdField = this.widget('HeaderIconIdField');
+    let headerIconIdField = this.widget('HeaderIconIdField');
     headerIconIdField.setValue(this.column.headerIconId);
     headerIconIdField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var headerCssClassField = this.widget('HeaderCssClassField');
+    let headerCssClassField = this.widget('HeaderCssClassField');
     headerCssClassField.setValue(this.column.headerCssClass);
     headerCssClassField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var sortIndexField = this.widget('SortIndexField');
+    let sortIndexField = this.widget('SortIndexField');
     sortIndexField.setValue(this.column.sortIndex);
     sortIndexField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var widthField = this.widget('WidthField');
+    let widthField = this.widget('WidthField');
     widthField.setValue(this.column.width);
     widthField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var minWidthField = this.widget('MinWidthField');
+    let minWidthField = this.widget('MinWidthField');
     minWidthField.setValue(this.column.minWidth);
     minWidthField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var maxLengthField = this.widget('MaxLengthField');
+    let maxLengthField = this.widget('MaxLengthField');
     maxLengthField.setValue(this.column.maxLength);
     maxLengthField.on('propertyChange', this._onPropertyChange.bind(this));
 
@@ -156,25 +156,25 @@ export default class ColumnPropertiesBox extends GroupBox {
 
   _onColumnResized(data) {
     if (this.column === data.column) {
-      var widthField = this.widget('WidthField');
+      let widthField = this.widget('WidthField');
       widthField.setValue(this.column.width);
     }
   }
 
   _onSort(data) {
     if (this.column === data.column) {
-      var sortActiveField = this.widget('SortActiveField');
+      let sortActiveField = this.widget('SortActiveField');
       sortActiveField.setValue(this.column.sortActive);
-      var sortAscendingField = this.widget('SortAscendingField');
+      let sortAscendingField = this.widget('SortAscendingField');
       sortAscendingField.setValue(this.column.sortAscending);
-      var sortIndexField = this.widget('SortIndexField');
+      let sortIndexField = this.widget('SortIndexField');
       sortIndexField.setValue(this.column.sortIndex);
     }
   }
 
   _onGroup(data) {
     if (this.column === data.column) {
-      var groupedField = this.widget('GroupedField');
+      let groupedField = this.widget('GroupedField');
       groupedField.setValue(this.column.grouped);
     }
   }
@@ -211,7 +211,7 @@ export default class ColumnPropertiesBox extends GroupBox {
     } else if (event.propertyName === 'value' && event.source.id === 'TextWrapField') {
       this.column.setTextWrap(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
-      var hAlign = event.newValue;
+      let hAlign = event.newValue;
       if (hAlign < 0) {
         hAlign = -1;
       } else if (hAlign > 0) {

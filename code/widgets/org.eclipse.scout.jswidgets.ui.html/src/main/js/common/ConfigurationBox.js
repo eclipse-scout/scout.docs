@@ -32,12 +32,12 @@ export default class ConfigurationBox extends TabBox {
   }
 
   _onToggleMenuAction(event) {
-    var expanded = !this.tabItems[0].expanded;
-    this.tabItems.forEach(function(tab) {
+    let expanded = !this.tabItems[0].expanded;
+    this.tabItems.forEach(tab => {
       tab.setExpanded(expanded);
     });
-    var gridData = new GridData(this.gridDataHints);
-    var weightY;
+    let gridData = new GridData(this.gridDataHints);
+    let weightY;
     if (expanded) {
       if (this._origWeightY !== undefined) {
         gridData.weightY = this._origWeightY;
@@ -51,7 +51,7 @@ export default class ConfigurationBox extends TabBox {
   }
 
   _updateToggleIcon() {
-    var iconId = icons.ANGLE_DOWN_BOLD;
+    let iconId = icons.ANGLE_DOWN_BOLD;
     if (!this.tabItems[0].expanded) {
       iconId = icons.ANGLE_UP_BOLD;
     }

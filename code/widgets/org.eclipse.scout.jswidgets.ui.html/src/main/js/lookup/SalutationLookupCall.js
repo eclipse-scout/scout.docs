@@ -31,7 +31,7 @@ export default class SalutationLookupCall extends StaticLookupCall {
    * Use the key property as cssClass. Used to demonstrate styling possibilities with lookup-rows in smart-fields.
    */
   _dataToLookupRow(data) {
-    var lookupRow = super._dataToLookupRow(data);
+    let lookupRow = super._dataToLookupRow(data);
     lookupRow.cssClass = lookupRow.key;
     return lookupRow;
   }

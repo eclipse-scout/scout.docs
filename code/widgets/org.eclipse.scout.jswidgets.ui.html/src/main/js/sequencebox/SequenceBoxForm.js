@@ -26,9 +26,9 @@ export default class SequenceBoxForm extends Form {
   _init(model) {
     super._init(model);
 
-    var sequenceBox = this.widget('SequenceBox');
+    let sequenceBox = this.widget('SequenceBox');
 
-    var formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
+    let formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     formFieldPropertiesBox.setField(sequenceBox);
     this.widget('GridDataBox').setField(sequenceBox);
     this.widget('LayoutConfigBox').setField(sequenceBox);
@@ -37,7 +37,7 @@ export default class SequenceBoxForm extends Form {
     this.widget('EventsTab').setField(sequenceBox);
 
     // FieldProperties tab
-    var targetField = this.widget('Field.TargetField');
+    let targetField = this.widget('Field.TargetField');
     targetField.setLookupCall(new FormFieldLookupCall(sequenceBox));
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
     targetField.setValue(sequenceBox.fields[0]);
@@ -50,13 +50,13 @@ export default class SequenceBoxForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var targetField = event.newValue;
+      let targetField = event.newValue;
 
-      var fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
+      let fieldPropertiesBox = this.widget('Field.FormFieldPropertiesBox');
       fieldPropertiesBox.setField(targetField);
       fieldPropertiesBox.setEnabled(!!targetField);
 
-      var fieldGridDataBox = this.widget('Field.GridDataBox');
+      let fieldGridDataBox = this.widget('Field.GridDataBox');
       fieldGridDataBox.setField(targetField);
       fieldGridDataBox.setEnabled(!!targetField);
     }

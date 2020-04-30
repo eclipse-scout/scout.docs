@@ -38,15 +38,15 @@ export default class WidgetPopupPropertiesBox extends GroupBox {
     if (!this.field) {
       return;
     }
-    var closableField = this.widget('ClosableField');
+    let closableField = this.widget('ClosableField');
     closableField.setValue(this.field.closable);
     closableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var movableField = this.widget('MovableField');
+    let movableField = this.widget('MovableField');
     movableField.setValue(this.field.movable);
     movableField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var resizableField = this.widget('ResizableField');
+    let resizableField = this.widget('ResizableField');
     resizableField.setValue(this.field.resizable);
     resizableField.on('propertyChange', this._onPropertyChange.bind(this));
   }

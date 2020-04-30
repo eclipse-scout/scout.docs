@@ -27,7 +27,7 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
     super._init(model);
     this._setField(this.field);
 
-    var menuBarItemType = this.widget('MenuBarItemType');
+    let menuBarItemType = this.widget('MenuBarItemType');
     menuBarItemType.setValue('Button');
   }
 
@@ -47,7 +47,7 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
     this.stackableField = this.widget('StackableField');
     this.shrinkableField = this.widget('ShrinkableField');
 
-    var addFieldButton = this.widget('CreateButton');
+    let addFieldButton = this.widget('CreateButton');
     addFieldButton.on('click', this._onAddMenuBarItemButtonClick.bind(this));
 
     this._updateAddMenuBarDefaultValues();
@@ -60,11 +60,11 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
   }
 
   _onAddMenuBarItemButtonClick(event) {
-    var label = this.labelField.value || 'Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter;
-    var gridData = new GridData();
+    let label = this.labelField.value || 'Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter;
+    let gridData = new GridData();
     gridData.horizontalAlignment = this.horizontalAlignmentField.value;
     this.dynamicMenuBarItemCounter++;
-    var newMenuBarItem = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Button'), {
+    let newMenuBarItem = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Button'), {
       parent: this.field,
       id: 'DynMenuBarItem ' + this.dynamicMenuBarItemCounter,
       label: label,
@@ -85,7 +85,7 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
         }));
     }
 
-    var newMenuItems = this.field.menuBar.menuItems.slice();
+    let newMenuItems = this.field.menuBar.menuItems.slice();
     newMenuItems.splice(newMenuItems.length, 0, newMenuBarItem);
     this.field._setMenus(newMenuItems);
 

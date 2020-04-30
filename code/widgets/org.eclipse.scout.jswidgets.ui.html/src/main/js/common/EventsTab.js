@@ -56,22 +56,22 @@ export default class EventsTab extends TabItem {
       // Do nothing if field is being destroyed (e.g. on form close)
       return;
     }
-    var logField = this.widget('EventLogField');
-    var log = logField.value || '';
+    let logField = this.widget('EventLogField');
+    let log = logField.value || '';
     if (log) {
       log += '\n';
     }
-    var entry = '';
-    var keys = Object.keys(event);
+    let entry = '';
+    let keys = Object.keys(event);
     keys.sort(this._createPropertySortFunc(['source', 'type', 'propertyName', 'oldValue', 'newValue']));
-    keys.forEach(function(key) {
+    keys.forEach(key => {
       if (key === 'preventDefault') {
         return;
       }
       if (entry) {
         entry += ', ';
       }
-      var value = event[key];
+      let value = event[key];
       if (value instanceof Widget) {
         value = value.objectType;
       } else if (Array.isArray(value) && value.length > 10) {
@@ -84,9 +84,9 @@ export default class EventsTab extends TabItem {
   }
 
   _createPropertySortFunc(order) {
-    return function(a, b) {
-      var ia = order.indexOf(a);
-      var ib = order.indexOf(b);
+    return (a, b) => {
+      let ia = order.indexOf(a);
+      let ib = order.indexOf(b);
       if (ia > -1 && ib > -1) { // both are in the list
         return ia > ib;
       }

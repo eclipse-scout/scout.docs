@@ -41,14 +41,14 @@ export default class TableForm extends Form {
     this.table.on('appLinkAction', this._onAppLinkAction.bind(this));
 
     this.widget('PropertiesBox').setTable(this.table);
-    var tableField = this.widget('TableField');
+    let tableField = this.widget('TableField');
     this.widget('FormFieldPropertiesBox').setField(tableField);
     this.widget('GridDataBox').setField(tableField);
     this.widget('WidgetActionsBox').setField(tableField);
     this.widget('FormFieldActionsBox').setField(tableField);
     this.widget('EventsTab').setField(this.table);
 
-    var targetField = this.widget('Column.TargetField');
+    let targetField = this.widget('Column.TargetField');
     targetField.setLookupCall(new ColumnLookupCall(this.table));
     targetField.setValue(this.table.columns[0]);
     targetField.on('propertyChange', this._onTargetPropertyChange.bind(this));
@@ -61,8 +61,8 @@ export default class TableForm extends Form {
     this.table.insertRows([this._createRow(), this._createRow(), this._createRow()]);
 
     this.table.createTileForRow = function(row) {
-      var icon = icons.parseIconId(row.cells[5].iconId);
-      var model = {
+      let icon = icons.parseIconId(row.cells[5].iconId);
+      let model = {
         parent: this,
         content: '<div style="text-align: center;"><p>' + row.cells[0].text + '</p></div>' +
           '<div class="font-icon" style="font-size: 50px; text-align: center;">' + icon.iconCharacter + '</div>' +
@@ -74,14 +74,14 @@ export default class TableForm extends Form {
 
   _onTargetPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var newColumn = event.newValue;
+      let newColumn = event.newValue;
 
-      var columnPropertiesBox = this.widget('Column.PropertiesBox');
+      let columnPropertiesBox = this.widget('Column.PropertiesBox');
       columnPropertiesBox.setColumn(newColumn);
       columnPropertiesBox.setEnabled(!!newColumn);
 
-      var columnPropertyTab = this.widget('ColumnProperties');
-      var newPropertiesBoxField = this._createPropertiesBox(newColumn, columnPropertyTab);
+      let columnPropertyTab = this.widget('ColumnProperties');
+      let newPropertiesBoxField = this._createPropertiesBox(newColumn, columnPropertyTab);
       if (newPropertiesBoxField !== null) {
         columnPropertyTab.insertFieldBefore(newPropertiesBoxField, columnPropertiesBox);
         newPropertiesBoxField.setColumn(newColumn);
@@ -121,7 +121,7 @@ export default class TableForm extends Form {
   }
 
   _removePropertyBox(propertyBoxId, tabBox) {
-    var boxToRemove = this.widget(propertyBoxId);
+    let boxToRemove = this.widget(propertyBoxId);
     if (boxToRemove) {
       boxToRemove.setColumn(null);
       tabBox.deleteField(boxToRemove);
@@ -129,20 +129,20 @@ export default class TableForm extends Form {
   }
 
   _createRow() {
-    var date = new Date();
-    var iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
-    var locales = LocaleLookupCall.DATA.map(function(lookupRow) {
+    let date = new Date();
+    let iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
+    let locales = LocaleLookupCall.DATA.map(lookupRow => {
       return lookupRow[0];
     });
 
-    var rowIcon = iconList[this.rowNo % iconList.length];
-    var iconValue = iconList[this.rowNo % iconList.length];
-    var stringValue = 'Row #' + this.rowNo;
-    var dateValue = dates.shift(date, 0, 0, -this.groupNo);
-    var numberValue = this.rowNo;
-    var smartValue = locales[this.rowNo % locales.length];
-    var booleanValue = this.rowNo % 2 === 0;
-    var htmlValue = '<span class="app-link" data-ref="' + this.rowNo + '">App Link</span>';
+    let rowIcon = iconList[this.rowNo % iconList.length];
+    let iconValue = iconList[this.rowNo % iconList.length];
+    let stringValue = 'Row #' + this.rowNo;
+    let dateValue = dates.shift(date, 0, 0, -this.groupNo);
+    let numberValue = this.rowNo;
+    let smartValue = locales[this.rowNo % locales.length];
+    let booleanValue = this.rowNo % 2 === 0;
+    let htmlValue = '<span class="app-link" data-ref="' + this.rowNo + '">App Link</span>';
 
     if (this.rowNo % TableForm.GROUP_SIZE === 0) {
       this.groupNo++;

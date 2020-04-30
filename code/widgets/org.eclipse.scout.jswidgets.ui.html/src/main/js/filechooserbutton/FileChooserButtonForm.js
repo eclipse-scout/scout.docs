@@ -25,17 +25,17 @@ export default class FileChooserButtonForm extends Form {
   _init(model) {
     super._init(model);
 
-    var fileChooserButton = this.widget('FileChooserButton');
+    let fileChooserButton = this.widget('FileChooserButton');
 
-    var acceptTypesField = this.widget('AcceptTypesField');
+    let acceptTypesField = this.widget('AcceptTypesField');
     acceptTypesField.setValue(fileChooserButton.acceptTypes);
     acceptTypesField.on('propertyChange', this._onAcceptTypesPropertyChange.bind(this));
 
-    var maximumUploadSizeField = this.widget('MaximumUploadSizeField');
+    let maximumUploadSizeField = this.widget('MaximumUploadSizeField');
     maximumUploadSizeField.setValue(fileChooserButton.maximumUploadSize);
     maximumUploadSizeField.on('propertyChange', this._onMaximumUploadSizePropertyChange.bind(this));
 
-    var iconIdField = this.widget('IconIdField');
+    let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(fileChooserButton.iconId);
     iconIdField.on('propertyChange', this._onIconIdPropertyChange.bind(this));
 

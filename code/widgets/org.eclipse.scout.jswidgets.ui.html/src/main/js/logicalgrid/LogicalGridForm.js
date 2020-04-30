@@ -27,11 +27,11 @@ export default class LogicalGridForm extends Form {
   _init(model) {
     super._init(model);
 
-    var groupBox = this.widget('DetailBox');
+    let groupBox = this.widget('DetailBox');
     groupBox.on('propertyChange', this._onGroupBoxPropertyChange.bind(this));
     this._initFields(groupBox.fields);
 
-    var targetField = this.widget('TargetField');
+    let targetField = this.widget('TargetField');
     targetField.lookupCall = new FormFieldLookupCall(groupBox);
     targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
     this.widget('StringField1').on('propertyChange', this._onFieldPropertyChange.bind(this));
@@ -39,7 +39,7 @@ export default class LogicalGridForm extends Form {
     this.widget('StringField3').on('propertyChange', this._onFieldPropertyChange.bind(this));
     this.widget('StringField4').on('propertyChange', this._onFieldPropertyChange.bind(this));
 
-    var logicalGridField = this.widget('LogicalGridField');
+    let logicalGridField = this.widget('LogicalGridField');
     logicalGridField.setValue(groupBox.logicalGrid ? groupBox.logicalGrid.objectType : null);
     logicalGridField.on('propertyChange', this._onLogicalGridChange.bind(this));
 
@@ -71,8 +71,8 @@ export default class LogicalGridForm extends Form {
 
   _onTargetFieldPropertyChange(event) {
     if (event.propertyName === 'value') {
-      var oldField = event.oldValue;
-      var newField = event.newValue;
+      let oldField = event.oldValue;
+      let newField = event.newValue;
       this.widget('GridDataBox').setField(newField);
       this.widget('GridDataBox').setEnabled(!!newField);
       this.widget('CalculatedGridDataBox').setField(newField);
@@ -87,13 +87,13 @@ export default class LogicalGridForm extends Form {
 
   _onFieldPropertyChange(event) {
     if (event.propertyName === 'gridData' && event.source === this.widget('TargetField')) {
-      var gridDataBox = this.widget('CalculatedGridDataBox');
+      let gridDataBox = this.widget('CalculatedGridDataBox');
       gridDataBox.reloadGridData();
     }
   }
 
   _onFieldFocus(event) {
-    var field = scout.widget(event.currentTarget);
+    let field = scout.widget(event.currentTarget);
     this.widget('TargetField').setValue(field);
     this.widget('Actions.AddFieldBox').setTargetField(field);
     this.widget('Actions.DeleteFieldBox').setTargetField(field);

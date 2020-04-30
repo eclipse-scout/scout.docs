@@ -27,7 +27,7 @@ export default class SmartFieldForm extends Form {
 
     this.smartField = this.widget('SmartField');
 
-    var newLanguageMenu = this.widget('NewLanguageMenu');
+    let newLanguageMenu = this.widget('NewLanguageMenu');
     newLanguageMenu.on('action', this._onNewLanguageMenuAction.bind(this));
 
     this.widget('SmartFieldPropertiesBox').setField(this.smartField);

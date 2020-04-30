@@ -25,33 +25,33 @@ export default class DateFieldForm extends Form {
   _init(model) {
     super._init(model);
 
-    var dateField = this.widget('DateField');
-    var hasTimeField = this.widget('HasTimeField');
+    let dateField = this.widget('DateField');
+    let hasTimeField = this.widget('HasTimeField');
     hasTimeField.setValue(dateField.hasTime);
     hasTimeField.on('propertyChange', this._onHasTimePropertyChange.bind(this));
 
-    var hasDateField = this.widget('HasDateField');
+    let hasDateField = this.widget('HasDateField');
     hasDateField.setValue(dateField.hasDate);
     hasDateField.on('propertyChange', this._onHasDatePropertyChange.bind(this));
 
-    var dateFormatField = this.widget('DateFormatField');
+    let dateFormatField = this.widget('DateFormatField');
     dateFormatField.setValue(dateField.dateFormatPattern);
     dateFormatField.on('propertyChange', this._onDateFormatPropertyChange.bind(this));
 
-    var timeFormatField = this.widget('TimeFormatField');
+    let timeFormatField = this.widget('TimeFormatField');
     timeFormatField.setValue(dateField.timeFormatPattern);
     timeFormatField.on('propertyChange', this._onTimeFormatPropertyChange.bind(this));
 
-    var timePickerResolutionField = this.widget('TimePickerResolutionField');
+    let timePickerResolutionField = this.widget('TimePickerResolutionField');
     timePickerResolutionField.setValue(dateField.timePickerResolution);
     timePickerResolutionField.on('propertyChange', this._onTimePickerResolutionPropertyChange.bind(this));
 
-    var autoDateField = this.widget('AutoDateField');
+    let autoDateField = this.widget('AutoDateField');
     autoDateField.setValue(dateField.autoDate);
     autoDateField.on('propertyChange', this._onAutoDatePropertyChange.bind(this));
 
-    var dontAllowCurrentDateField = this.widget('DontAllowCurrentDateField');
-    this._dontAllowCurrentDateValidator = function(value) {
+    let dontAllowCurrentDateField = this.widget('DontAllowCurrentDateField');
+    this._dontAllowCurrentDateValidator = value => {
       if (dates.isSameDay(value, new Date())) {
         throw 'You are not allowed to select the current date';
       }
@@ -105,7 +105,7 @@ export default class DateFieldForm extends Form {
 
   _onDontAllowCurrentDateField(event) {
     if (event.propertyName === 'value') {
-      var dateField = this.widget('DateField');
+      let dateField = this.widget('DateField');
       if (event.newValue) {
         dateField.addValidator(this._dontAllowCurrentDateValidator);
       } else {

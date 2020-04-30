@@ -41,11 +41,11 @@ export default class ProposalFieldPropertiesBox extends SmartFieldPropertiesBox 
       return;
     }
 
-    var maxLengthField = this.widget('MaxLengthField');
+    let maxLengthField = this.widget('MaxLengthField');
     maxLengthField.setValue(this.field.maxLength);
     maxLengthField.on('propertyChange', this._onMaxLengthPropertyChange.bind(this));
 
-    var trimTextField = this.widget('TrimTextField');
+    let trimTextField = this.widget('TrimTextField');
     trimTextField.setValue(this.field.trimText);
     trimTextField.on('propertyChange', this._onTrimTextPropertyChange.bind(this));
   }

@@ -40,7 +40,7 @@ export default class TabItemLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.tabBox.tabItems.map(function(tabItem) {
+    this.data = this.tabBox.tabItems.map(tabItem => {
       return [tabItem, tabItem.label];
     });
   }

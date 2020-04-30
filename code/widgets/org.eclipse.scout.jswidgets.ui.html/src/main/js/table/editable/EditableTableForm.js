@@ -19,7 +19,7 @@ export default class EditableTableForm extends TableForm {
   _init(model) {
     super._init(model);
 
-    this.table.columns.forEach(function(column) {
+    this.table.columns.forEach(column => {
       if (column.id === 'IconColumn' || column.id === 'HtmlColumn') {
         return;
       }
@@ -27,9 +27,9 @@ export default class EditableTableForm extends TableForm {
     });
 
     // Update field in column properties box (there are no property change listeners yet)
-    var column = this.widget('Column.PropertiesBox').column;
+    let column = this.widget('Column.PropertiesBox').column;
     if (column) {
-      var editableField = this.widget('EditableField');
+      let editableField = this.widget('EditableField');
       editableField.setValue(column.editable);
     }
   }

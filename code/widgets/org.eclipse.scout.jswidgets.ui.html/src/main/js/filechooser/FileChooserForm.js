@@ -25,7 +25,7 @@ export default class FileChooserForm extends Form {
   _init(model) {
     super._init(model);
 
-    var button = this.widget('Button');
+    let button = this.widget('Button');
     button.on('click', this._onButtonClick.bind(this));
     this.widget('MaximumUploadSizeField').setValue(FileInput.DEFAULT_MAXIMUM_UPLOAD_SIZE);
     this.widget('ChosenFilesField').on('appLinkAction', this._onChosenFilesAppLinkAction.bind(this));
@@ -33,7 +33,7 @@ export default class FileChooserForm extends Form {
   }
 
   _onButtonClick(event) {
-    var fileChooser = scout.create('FileChooser', {
+    let fileChooser = scout.create('FileChooser', {
       parent: this.session.desktop,
       acceptTypes: this.widget('AcceptTypesField').value,
       displayParent: DisplayParentLookupCall.displayParentForType(this, this.widget('DisplayParentField').value),
@@ -42,14 +42,14 @@ export default class FileChooserForm extends Form {
     });
     this.widget('EventsTab').setField(fileChooser);
     fileChooser.open();
-    fileChooser.on('upload', function() {
+    fileChooser.on('upload', () => {
       this._updateChosenFiles(fileChooser.files);
       fileChooser.close();
-    }.bind(this));
+    });
   }
 
   _updateChosenFiles(files) {
-    var chosenFilesText = '';
+    let chosenFilesText = '';
     if (files.length === 0) {
       chosenFilesText = this.session.text('FileChooserNoFilesChosen');
     } else if (files.length === 1) {
@@ -58,21 +58,21 @@ export default class FileChooserForm extends Form {
       chosenFilesText = this.session.text('FileChooserNFilesChosen', files.length);
     }
 
-    var fileDescriptions = [];
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var html = '<span class="app-link unfocusable" data-ref="' + i + '">' + strings.encode(file.name) + ' (' + file.size + ' bytes)</span>';
+    let fileDescriptions = [];
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      let html = '<span class="app-link unfocusable" data-ref="' + i + '">' + strings.encode(file.name) + ' (' + file.size + ' bytes)</span>';
       fileDescriptions.push(html);
     }
 
-    var chosenFilesField = this.widget('ChosenFilesField');
+    let chosenFilesField = this.widget('ChosenFilesField');
     chosenFilesField.files = files; // remember files to handle app link action
     chosenFilesField.setValue(chosenFilesText + ' ' + fileDescriptions.join(', '));
   }
 
   _onChosenFilesAppLinkAction(event) {
-    var file = this.widget('ChosenFilesField').files[event.ref];
-    var url = URL.createObjectURL(file);
+    let file = this.widget('ChosenFilesField').files[event.ref];
+    let url = URL.createObjectURL(file);
     this.session.desktop.openUri(url);
   }
 }

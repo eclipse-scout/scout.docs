@@ -38,19 +38,19 @@ export default class DateColumnPropertiesBox extends GroupBox {
       return;
     }
 
-    var formatField = this.widget('FormatField');
+    let formatField = this.widget('FormatField');
     formatField.setValue(this.column.format.pattern);
     formatField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var groupFormatField = this.widget('GroupFormatField');
+    let groupFormatField = this.widget('GroupFormatField');
     groupFormatField.setValue(this.column.groupFormat.pattern);
     groupFormatField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var hasDateField = this.widget('HasDateField');
+    let hasDateField = this.widget('HasDateField');
     hasDateField.setValue(this.column.hasDate);
     hasDateField.on('propertyChange', this._onPropertyChange.bind(this));
 
-    var hasTimeField = this.widget('HasTimeField');
+    let hasTimeField = this.widget('HasTimeField');
     hasTimeField.setValue(this.column.hasTime);
     hasTimeField.on('propertyChange', this._onPropertyChange.bind(this));
   }

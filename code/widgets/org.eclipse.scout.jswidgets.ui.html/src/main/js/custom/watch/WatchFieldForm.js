@@ -23,7 +23,7 @@ export default class WatchFieldForm extends Form {
 
   _init(model) {
     super._init(model);
-    var watchField = this.widget('WatchField');
+    let watchField = this.widget('WatchField');
 
     this.widget('FormFieldPropertiesBox').setField(watchField);
     this.widget('GridDataBox').setField(watchField);

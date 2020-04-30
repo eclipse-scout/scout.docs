@@ -29,7 +29,7 @@ export default class ColumnLookupCall extends StaticLookupCall {
   }
 
   _rebuildData() {
-    this.data = this.table.columns.map(function(column) {
+    this.data = this.table.columns.map(column => {
       return [column, column.text];
     });
   }

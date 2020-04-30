@@ -41,11 +41,11 @@ export default class TreeSmartFieldPropertiesBox extends SmartFieldPropertiesBox
       return;
     }
 
-    var browseAutoExpandAllField = this.widget('BrowseAutoExpandAllField');
+    let browseAutoExpandAllField = this.widget('BrowseAutoExpandAllField');
     browseAutoExpandAllField.setValue(this.field.browseAutoExpandAll);
     browseAutoExpandAllField.on('propertyChange', this._onBrowseAutoExpandAllPropertyChange.bind(this));
 
-    var browseLoadIncrementalField = this.widget('BrowseLoadIncrementalField');
+    let browseLoadIncrementalField = this.widget('BrowseLoadIncrementalField');
     browseLoadIncrementalField.setValue(this.field.browseLoadIncremental);
     browseLoadIncrementalField.on('propertyChange', this._onBrowseLoadIncrementalPropertyChange.bind(this));
   }

@@ -20,7 +20,7 @@ export default class App extends ScoutApp {
   }
 
   _createDesktop(parent) {
-    var desktop = scout.create('Desktop',
+    let desktop = scout.create('Desktop',
       models.get(DesktopModel, parent));
 
     router.register(new WidgetsRoute(desktop));

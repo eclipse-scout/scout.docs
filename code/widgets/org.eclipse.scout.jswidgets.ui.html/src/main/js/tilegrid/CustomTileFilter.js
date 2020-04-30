@@ -15,13 +15,13 @@ export default class CustomTileFilter {
   }
 
   accept(tile) {
-    var label = '';
+    let label = '';
     if (tile instanceof CustomTile) {
       label = tile.label || '';
     } else if (tile instanceof HtmlTile) {
       label = strings.plainText(tile.content) || '';
     }
-    var filterText = label.trim().toLowerCase();
+    let filterText = label.trim().toLowerCase();
     return filterText.indexOf(this.text) > -1;
   }
 }

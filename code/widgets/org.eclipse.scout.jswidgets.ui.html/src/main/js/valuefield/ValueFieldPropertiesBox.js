@@ -41,19 +41,19 @@ export default class ValueFieldPropertiesBox extends GroupBox {
     }
     this.field.on('propertyChange', this._onFieldPropertyChange.bind(this));
 
-    var valueField = this.widget('ValueField');
+    let valueField = this.widget('ValueField');
     valueField.setValue(this.field.value);
     if (valueField.enabled) {
       valueField.on('propertyChange', this._onPropertyChange.bind(this));
     }
 
-    var displayTextField = this.widget('DisplayTextField');
+    let displayTextField = this.widget('DisplayTextField');
     displayTextField.setValue(this.field.displayText);
     if (displayTextField.enabled) {
       displayTextField.on('propertyChange', this._onPropertyChange.bind(this));
     }
 
-    var clearableField = this.widget('ClearableField');
+    let clearableField = this.widget('ClearableField');
     clearableField.setValue(this.field.clearable);
     clearableField.on('propertyChange', this._onPropertyChange.bind(this));
   }

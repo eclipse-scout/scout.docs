@@ -24,21 +24,21 @@ export default class RestForm extends Form {
   _init(model) {
     super._init(model);
 
-    var getButton = this.widget('GetButton');
+    let getButton = this.widget('GetButton');
     getButton.on('click', this._onGetButtonClick.bind(this));
-    var postButton = this.widget('PostButton');
+    let postButton = this.widget('PostButton');
     postButton.on('click', this._onPostButtonClick.bind(this));
-    var putButton = this.widget('PutButton');
+    let putButton = this.widget('PutButton');
     putButton.on('click', this._onPutButtonClick.bind(this));
-    var deleteButton = this.widget('DeleteButton');
+    let deleteButton = this.widget('DeleteButton');
     deleteButton.on('click', this._onDeleteButtonClick.bind(this));
-    var failButton = this.widget('FailButton');
+    let failButton = this.widget('FailButton');
     failButton.on('click', this._onFailButtonClick.bind(this));
   }
 
   _addLogEntry(message) {
-    var logField = this.widget('LogField');
-    var log = logField.value || '';
+    let logField = this.widget('LogField');
+    let log = logField.value || '';
     if (log) {
       log += '\n';
     }

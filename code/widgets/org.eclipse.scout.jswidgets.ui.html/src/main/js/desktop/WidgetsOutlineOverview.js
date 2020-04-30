@@ -20,10 +20,10 @@ export default class WidgetsOutlineOverview extends TileOutlineOverview {
     super._render();
     this.$container.addClass('widgets-outline-overview');
 
-    var title = this.session.text('AppWelcome');
+    let title = this.session.text('AppWelcome');
     this.$title.text(title);
 
-    var description = this.session.text('AppDescription', App.get().scoutVersion);
+    let description = this.session.text('AppDescription', App.get().scoutVersion);
     this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
     this.$description.addClass('prevent-initial-focus');
   }
