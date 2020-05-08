@@ -19,7 +19,7 @@ npm install pnpm@">=4.0.0 <5.0.0" --prefix ../../node_modules
 echo
 
 # Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
-call cd ../..
+cd ../..
 echo Running 'pnpm install' in "$(pwd)"
 node_modules/pnpm install --ignore-scripts || exit $?
 echo pnpm install finished successfully!
@@ -28,4 +28,4 @@ echo
 # Build the JavaScript and CSS bundles and start the watcher => creates the dist folder
 cd contacts/org.eclipse.scout.contacts.ui.html || exit 1
 echo Running 'npm build:dev:watch' in "$(pwd)"
-call npm run build:dev:watch || exit $?
+npm run build:dev:watch || exit $?
