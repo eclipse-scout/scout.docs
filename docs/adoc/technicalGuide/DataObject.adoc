@@ -250,8 +250,8 @@ A data object is equals to another data object, if the Java class of both data o
 
 For futher details see:
 
-* `org.eclipse.scout.rt.platform.dataobject.DoEntity.equals(Object)`
-* `org.eclipse.scout.rt.platform.dataobject.DoNode.equals(Object)`
+* `org.eclipse.scout.rt.dataobject.DoEntity.equals(Object)`
+* `org.eclipse.scout.rt.dataobject.DoNode.equals(Object)`
 
 
 === Generic DoEntity ===
@@ -345,7 +345,8 @@ The dependency to this module must be added in the top-level .dev/.app module.
 A dependency within the program code is not necessaray as long as no specific Jackson features should be used within the application code.
 
 === Data Object Inventory ===
-The class `org.eclipse.scout.rt.platform.dataobject.DataObjectInventory` provides access to all available data objects at runtime.
+
+The class `org.eclipse.scout.rt.dataobject.DataObjectInventory` provides access to all available data objects at runtime.
 For each data object all available attributes and their properties (name, type, accessor method and format pattern) are available:
 
 [source,java]
