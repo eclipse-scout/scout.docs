@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.scout.contacts.client.ConfigProperties.ReadOnlyProperty;
@@ -33,6 +32,7 @@ import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.html.IHtmlElement;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.HexUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.shared.ISession;
@@ -140,7 +140,7 @@ public class UserForm extends AbstractForm {
   }
 
   private String createHtmlContent() {
-    List<CharSequence> menus = Arrays.asList(
+    List<CharSequence> menus = CollectionUtility.arrayList(
       HTML.div(HTML.appLink("application-info", TEXTS.get("ApplicationInformation"))).cssClass("contacts-user-form-link-row"),
       HTML.div(HTML.appLink("logout", TEXTS.get("Logout"))).cssClass("contacts-user-form-link-row"));
     if (!CONFIG.getPropertyValue(ReadOnlyProperty.class)) {
