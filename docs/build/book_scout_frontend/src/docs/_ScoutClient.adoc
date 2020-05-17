@@ -818,7 +818,7 @@ Both classes [java]+AbstractTimeField+ and [java]+AbstractDateTimeField+ are ext
 image::{imgsdir}/datetimefield.png[]
 
 The form [java]+DateTimeFieldsForm+ of the Scout widget application shown in <<img-datetimefield>> contains examples for the date and time fields of Scout.
-Separate buttons are available to provide samle values and to demonstrate the formatting options for displaying date and time values.
+Separate buttons are available to provide sample values and to demonstrate the formatting options for displaying date and time values.
 Displaying dates and times is highly depending on the used locale.
 That is why the currently used locale is shown in the example section of the form.
 
