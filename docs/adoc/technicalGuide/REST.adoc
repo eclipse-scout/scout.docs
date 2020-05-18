@@ -220,3 +220,79 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <3> HTTP DELETE example: This delete operation does not send a response if it was successful. Hence close the returned `Response` explicitly to release underlying resources
     (see next line). Note: Unsuccessful responses are already handled by the REST client proxy.
 <4> Use custom exception transformer.
+
+
+=== REST Cancellation Support ===
+
+REST and the underlying HTTP protocol do not provide an explicit way to cancel running requests. Typically, a client terminates its connection to the HTTP server if it is no 
+longer interested in the response. REST resources would have to monitor TCP connections and interpret a close as cancellation. Depending on the abstraction of the REST
+framework, connection events are not passed through and the cancellation is only recognized when the response is written to the closed connection. Until this happens,
+however, backend resources are used unnecessarily.
+
+Scout's standard REST integration implements the described approach by closing the connection without any further action. It is not possible to react to this on the resource side.
+
+In order to enable a real cancellation, Scout also provides all necessary elements to assign an ID to a request, to manage these IDs in the backend during execution and to cancel
+transactions in the event of a cancellation. The following steps must be taken for their use:
+
+==== Cancellation Resource and Resource Client ====
+
+Scout does not impose nor provide a cancellation resource. It must be implemented by the project:
+
+[source,java]
+.Example: REST cancellation Resource
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResource.java[tags=class]
+----
+<1> Resolve the `userId` of the current user. This is optional and may depend on the current project.
+<2> Invoke the cancellation registry for the given `requestId` and `userId`.
+
+[source,java]
+.Example: REST cancellation Resource Client
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationResourceClient.java[tags=class]
+----
+
+==== Install Cancellation Request Filter ====
+
+To assign an ID to each request, an appropriate client request filter must be registered:
+
+[source,java]
+.Example: Register Client Request Cancellation Filter in REST Client Helper
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/CancellationRestClientHelper.java[tags=class]
+----
+<1> Register the `RestRequestCancellationClientRequestFilter` that assigns a UUID to every request, which is sent as an HTTP header named `X-ScoutRequestId`.
+<2> Binds the actual cancel-operation to the `cancel` Method (in this case the cancellation rest resource client from above).
+
+==== Implement Cancellation Servlet Filter ====
+
+Requests arriving at the backend need to be registered in the cancellation registry. This is done by a servlet filter (Note: REST
+container filters would have two issues: 1. there is no real interceptor around the resource call, but only a `ContainerRequestFilter` that is
+invoked before and a `ContainerResponseFilter` which is invoked after the the request is passed to the resource. 2. Cancellation in
+Scout is tied to an `ITransaction` that are managed by a `RunContext` and observed and controlled by a `RunMonitor`. Depending on 
+sub-RunContexts and their transaction isolation it might happen, that the transaction visible in a container filter is not controlled by the
+currently active `RunMonitor`. Therefore, a cancel request would not cancel the transaction.)
+
+[source,java]
+.Example: Register client request cancellation filter in Rest Client Helper
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/rest/RestRequestCancellationServletFilter.java[tags=class]
+----
+<1> Implement the same `userId` Lookup as in the `CancellationResource`.
+
+And finally, declare the servlet filter in your `web.xml`:
+[source,xml]
+.web.xml registration example for RestRequestCancellationFilter.
+----
+<filter>
+   <filter-name>RestRequestCancellationFilter</filter-name>
+   <filter-class>org.eclipse.scout.docs.snippets.rest.RestRequestCancellationServletFilter</filter-class>
+ </filter>
+
+<filter-mapping>
+  <filter-name>RestRequestCancellationFilter</filter-name>
+  <url-pattern>/api/*</url-pattern>
+</filter-mapping>
+----
+
+IMPORTANT: Make sure the cancellation filter is registered after the HttpServerRunContextFilter.
