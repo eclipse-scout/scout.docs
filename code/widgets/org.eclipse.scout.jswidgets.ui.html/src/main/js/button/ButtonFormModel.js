@@ -57,15 +57,15 @@ export default function() {
                       }
                     },
                     {
-                      id: 'SelectedField',
+                      id: 'PreventDoubleClickField',
                       objectType: 'CheckBoxField',
-                      label: 'Selected',
+                      label: 'Prevent Double Click',
                       labelVisible: false
                     },
                     {
-                      id: 'HtmlEnabledField',
+                      id: 'SelectedField',
                       objectType: 'CheckBoxField',
-                      label: 'Html Enabled',
+                      label: 'Selected',
                       labelVisible: false
                     },
                     {

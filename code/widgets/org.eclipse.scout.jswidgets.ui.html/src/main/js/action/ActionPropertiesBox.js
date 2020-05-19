@@ -32,6 +32,7 @@ export default class ActionPropertiesBox extends GroupBox {
     this.setProperty('field', field);
   }
 
+  // noinspection DuplicatedCode
   _setField(field) {
     this._setProperty('field', field);
     this.setEnabled(this.field);
@@ -53,6 +54,10 @@ export default class ActionPropertiesBox extends GroupBox {
     var selectedField = this.widget('SelectedField');
     selectedField.setValue(this.field.selected);
     selectedField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    var preventDoubleClickField = this.widget('PreventDoubleClickField');
+    preventDoubleClickField.setValue(this.field.preventDoubleClick);
+    preventDoubleClickField.on('propertyChange', this._onPropertyChange.bind(this));
 
     var inheritAccessibilityField = this.widget('InheritAccessibilityField');
     inheritAccessibilityField.setValue(this.field.inheritAccessibility);
@@ -92,6 +97,8 @@ export default class ActionPropertiesBox extends GroupBox {
       this.field.setToggleAction(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'SelectedField') {
       this.field.setSelected(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'PreventDoubleClickField') {
+      this.field.setPreventDoubleClick(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'InheritAccessibilityField') {
       this.field.setInheritAccessibility(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'IconIdField') {
