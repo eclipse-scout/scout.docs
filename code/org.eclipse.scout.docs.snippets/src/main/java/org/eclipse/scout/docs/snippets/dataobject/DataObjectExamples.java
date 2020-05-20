@@ -7,11 +7,11 @@ import java.util.UUID;
 
 import org.eclipse.scout.rt.dataobject.DataObjectAttributeDescriptor;
 import org.eclipse.scout.rt.dataobject.DataObjectInventory;
-import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoEntityBuilder;
 import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.IDataObject;
 import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
+import org.eclipse.scout.rt.dataobject.IDoEntity;
 import org.eclipse.scout.rt.dataobject.enumeration.EnumName;
 import org.eclipse.scout.rt.dataobject.enumeration.EnumVersion;
 import org.eclipse.scout.rt.dataobject.enumeration.IEnum;
@@ -128,7 +128,7 @@ public class DataObjectExamples {
 
   void doEntityBuilder() {
     //tag::doEntityBuilder[]
-    DoEntity entity = BEANS.get(DoEntityBuilder.class)
+    IDoEntity entity = BEANS.get(DoEntityBuilder.class)
         .put("attr1", "foo")
         .put("attr2", "bar")
         .putList("listAttr", 1, 2, 3)
@@ -147,7 +147,7 @@ public class DataObjectExamples {
     String json = "<any JSON content>";
     IDataObjectMapper mapper = BEANS.get(IDataObjectMapper.class);
     IDataObject dataObject = mapper.readValue(json, IDataObject.class);
-    if (dataObject instanceof DoEntity) {
+    if (dataObject instanceof IDoEntity) {
       // handle object content
     }
     else if (dataObject instanceof DoList) {
