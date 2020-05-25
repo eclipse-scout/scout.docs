@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, MenuBar, models} from '@eclipse-scout/core';
+import {GroupBox, MenubarBox, models} from '@eclipse-scout/core';
 import ActionPropertiesBoxModel from './ActionPropertiesBoxModel';
 
 export default class ActionPropertiesBox extends GroupBox {
@@ -75,6 +75,10 @@ export default class ActionPropertiesBox extends GroupBox {
     textField.setValue(this.field.text);
     textField.on('propertyChange', this._onPropertyChange.bind(this));
 
+    let textPositionField = this.widget('TextPositionField');
+    textPositionField.setValue(this.field.textPosition);
+    textPositionField.on('propertyChange', this._onPropertyChange.bind(this));
+
     let tooltipTextField = this.widget('TooltipTextField');
     tooltipTextField.setValue(this.field.tooltipText);
     tooltipTextField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -107,6 +111,8 @@ export default class ActionPropertiesBox extends GroupBox {
       this.field.setKeyStroke(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'TextField') {
       this.field.setText(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'TextPositionField') {
+      this.field.setTextPosition(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
       this.field.setTooltipText(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'HorizontalAlignmentField') {
@@ -114,7 +120,7 @@ export default class ActionPropertiesBox extends GroupBox {
     } else if (event.propertyName === 'value' && event.source.id === 'ActionStyleField') {
       // ActionStyle may not be changed during run time officially, use this little hack to work around by rerendering the whole menu bar
       this.field.actionStyle = event.newValue;
-      if (this.field.parent instanceof MenuBar) {
+      if (this.field.parent instanceof MenubarBox) {
         let menuItems = this.field.parent.menuItems;
         this.field.parent.setMenuItems([]);
         this.field.parent.setMenuItems(menuItems);

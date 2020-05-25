@@ -34,6 +34,9 @@ export default class MenuBarForm extends Form {
     let stackableField = this.widget('StackableField');
     stackableField.on('propertyChange', this._onStackableFieldPropertyChange.bind(this));
 
+    let subMenuVisibilityField = this.widget('SubMenuVisibilityField');
+    subMenuVisibilityField.on('propertyChange', this._onSubMenuVisibilityFieldPropertyChange.bind(this));
+
     this.replaceMenu = this.widget('ReplaceMenu');
     this.replaceMenu.on('action', event => {
       this._onReplaceChildActionsClick(event, this.hierarchicalMenu);
@@ -59,6 +62,7 @@ export default class MenuBarForm extends Form {
     });
 
     this._fillSelectedMenuField();
+    selectedMenuItemField.setValue(this.widget('DetailBox').menus[0]);
     this._updateSelectedMenu();
   }
 
@@ -114,6 +118,12 @@ export default class MenuBarForm extends Form {
     }
   }
 
+  _onSubMenuVisibilityFieldPropertyChange(event) {
+    if (event.propertyName === 'value' && event.source.id === 'SubMenuVisibilityField') {
+      this.currentMenu.setSubMenuVisibility(event.newValue);
+    }
+  }
+
   _onSelectedMenuFieldPropertyChange(event) {
     if (event.propertyName === 'value') {
       this._updateSelectedMenu();
@@ -134,14 +144,14 @@ export default class MenuBarForm extends Form {
     });
     selectedMenuItemField.lookupCall.data = [];
     menus.forEach(menu => {
-      selectedMenuItemField.lookupCall.data.push([menu.id, scout.nvl(menu.text, menu.id)]);
+      selectedMenuItemField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
     });
   }
 
   _updateSelectedMenu() {
     let selectedMenuItemField = this.widget('SelectedMenuField');
     let formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
-    let menu = selectedMenuItemField.value ? this.widget(selectedMenuItemField.value) : null;
+    let menu = selectedMenuItemField.value;
     if (!menu) {
       return;
     }
@@ -152,6 +162,7 @@ export default class MenuBarForm extends Form {
     this.currentMenu = menu;
     this.widget('ShrinkableField').setValue(this.currentMenu.shrinkable);
     this.widget('StackableField').setValue(this.currentMenu.stackable);
+    this.widget('SubMenuVisibilityField').setValue(this.currentMenu.subMenuVisibility);
     if (menu.field) {
       // form field widget
       formFieldPropertiesBox.setField(menu.field);

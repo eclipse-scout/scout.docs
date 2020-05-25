@@ -138,6 +138,22 @@ export default () => ({
                         gridDataHints: {
                           fillHorizontal: false
                         }
+                      },
+                      {
+                        id: 'StackableField',
+                        objectType: 'CheckBoxField',
+                        label: 'Stackable',
+                        labelVisible: false,
+                        tooltipText: '${textKey:MenuStackableTooltipText}',
+                        gridDataHints: {
+                          fillHorizontal: false
+                        }
+                      },
+                      {
+                        id: 'SubMenuVisibilityField',
+                        objectType: 'SmartField',
+                        lookupCall: 'jswidgets.SubMenuVisibilityLookupCall',
+                        label: 'Sub Menu Visibility'
                       }
                     ]
                   },

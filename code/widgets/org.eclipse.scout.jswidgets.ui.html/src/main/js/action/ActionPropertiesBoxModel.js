@@ -58,6 +58,13 @@ export default () => ({
       label: 'Text'
     },
     {
+      id: 'TextPositionField',
+      objectType: 'SmartField',
+      lookupCall: 'jswidgets.TextPositionLookupCall',
+      displayStyle: 'dropdown',
+      label: 'Text Position'
+    },
+    {
       id: 'TooltipTextField',
       objectType: 'StringField',
       label: 'Tooltip Text'
