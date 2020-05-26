@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.cancellation.AbstractRestRequestCancellationServletFilter;
-import org.eclipse.scout.rt.shared.services.common.security.IAccessControlService;
+import org.eclipse.scout.rt.security.IAccessControlService;
 
 //tag::class[]
 public class RestRequestCancellationServletFilter extends AbstractRestRequestCancellationServletFilter {

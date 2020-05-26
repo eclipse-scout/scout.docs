@@ -7,7 +7,7 @@ import javax.ws.rs.PathParam;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.rest.cancellation.RestRequestCancellationRegistry;
-import org.eclipse.scout.rt.shared.services.common.security.IAccessControlService;
+import org.eclipse.scout.rt.security.IAccessControlService;
 
 //tag::class[]
 @Path("cancellation")
