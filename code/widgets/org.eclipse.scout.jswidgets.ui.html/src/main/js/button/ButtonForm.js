@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import ButtonFormModel from './ButtonFormModel';
-import {Button, Form, models, scout} from '@eclipse-scout/core';
+import {Button, Form, models, scout, Status} from '@eclipse-scout/core';
 
 export default class ButtonForm extends Form {
 
@@ -40,9 +40,9 @@ export default class ButtonForm extends Form {
     selectedField.setValue(button.selected);
     selectedField.on('propertyChange', this._onSelectedPropertyChange.bind(this));
 
-    let htmlEnabledField = this.widget('HtmlEnabledField');
-    htmlEnabledField.setValue(button.htmlEnabled);
-    htmlEnabledField.on('propertyChange', this._onHtmlEnabledPropertyChange.bind(this));
+    let preventDoubleClickField = this.widget('PreventDoubleClickField');
+    preventDoubleClickField.setValue(button.preventDoubleClick);
+    preventDoubleClickField.on('propertyChange', this._onPreventDoubleClickPropertyChange.bind(this));
 
     let iconIdField = this.widget('IconIdField');
     iconIdField.setValue(button.iconId);
@@ -68,15 +68,14 @@ export default class ButtonForm extends Form {
       // Don't show message box if it is a toggle button
       return;
     }
-    let msgBox = scout.create('scout.MessageBox', {
+    scout.create('DesktopNotification', {
       parent: this,
-      yesButtonText: this.session.text('Thanks') + '!',
-      body: this.session.text('ButtonClickMessage')
-    });
-    msgBox.open();
-    msgBox.on('action', () => {
-      msgBox.close();
-    });
+      status: {
+        duration: 7000,
+        severity: Status.Severity.OK,
+        message: this.session.text('ButtonClickMessage')
+      }
+    }).show();
   }
 
   _onDefaultButtonPropertyChange(event) {
@@ -104,9 +103,9 @@ export default class ButtonForm extends Form {
     }
   }
 
-  _onHtmlEnabledPropertyChange(event) {
+  _onPreventDoubleClickPropertyChange(event) {
     if (event.propertyName === 'value') {
-      this.widget('Button').setHtmlEnabled(event.newValue);
+      this.widget('Button').setPreventDoubleClick(event.newValue);
     }
   }
 

@@ -8,14 +8,14 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {EllipsisMenu, Form, Menu, MessageBoxes, models, scout} from '@eclipse-scout/core';
+import {EllipsisMenu, Form, Menu, models, scout, Status} from '@eclipse-scout/core';
 import MenuBarFormModel from './MenuBarFormModel';
 
 export default class MenuBarForm extends Form {
 
   constructor() {
     super();
-    this.currentMenu;
+    this.currentMenu = null;
   }
 
   _jsonModel() {
@@ -87,9 +87,13 @@ export default class MenuBarForm extends Form {
       // Don't show message box if it is a toggle action
       return;
     }
-    MessageBoxes.createOk(this)
-      .withBody('Menu with label \'' + event.source.text + '\' has been activated.')
-      .buildAndOpen();
+    scout.create('DesktopNotification', {
+      parent: this,
+      status: {
+        severity: Status.Severity.OK,
+        message: this.session.text('MenuClickMessage', event.source.text)
+      }
+    }).show();
   }
 
   _onMenuPropertyChange(event) {
