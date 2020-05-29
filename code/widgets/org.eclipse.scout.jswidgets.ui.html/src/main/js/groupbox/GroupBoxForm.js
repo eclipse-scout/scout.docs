@@ -39,8 +39,8 @@ export default class GroupBoxForm extends Form {
 
     // GroupBox Properties tab
     this.widget('GroupBoxPropertiesBox').setField(groupBox);
-    this.widget('Actions.AddMenuBarItemBox').setField(groupBox);
-    this.widget('Actions.DeleteMenuBarItemBox').setField(groupBox);
+    this.widget('Actions.AddMenuBox').setField(groupBox);
+    this.widget('Actions.DeleteMenuBox').setField(groupBox);
     this.widget('Actions.AddFieldBox').setField(groupBox);
     this.widget('Actions.DeleteFieldBox').setField(groupBox);
     this.widget('FormFieldPropertiesBox').setField(groupBox);

@@ -8,27 +8,26 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Button, ButtonAdapterMenu, GridData, GroupBox, models, scout} from '@eclipse-scout/core';
-import GroupBoxAddMenuBarItemBoxModel from './GroupBoxAddMenuBarItemBoxModel';
+import {Button, ButtonAdapterMenu, GroupBox, models, scout} from '@eclipse-scout/core';
+import GroupBoxAddMenuBoxModel from './GroupBoxAddMenuBoxModel';
 
-export default class GroupBoxAddMenuBarItemBox extends GroupBox {
+export default class GroupBoxAddMenuBox extends GroupBox {
 
   constructor() {
     super();
     this.field = null;
-    this.dynamicMenuBarItemCounter = 0;
+    this.dynamicMenuCounter = 0;
   }
 
   _jsonModel() {
-    return models.get(GroupBoxAddMenuBarItemBoxModel);
+    return models.get(GroupBoxAddMenuBoxModel);
   }
 
   _init(model) {
     super._init(model);
     this._setField(this.field);
 
-    let menuBarItemType = this.widget('MenuBarItemType');
-    menuBarItemType.setValue('Button');
+    this.widget('MenuBarItemType').setValue('Menu');
   }
 
   setField(field) {
@@ -48,46 +47,46 @@ export default class GroupBoxAddMenuBarItemBox extends GroupBox {
     this.shrinkableField = this.widget('ShrinkableField');
 
     let addFieldButton = this.widget('CreateButton');
-    addFieldButton.on('click', this._onAddMenuBarItemButtonClick.bind(this));
+    addFieldButton.on('click', this._onAddMenuButtonClick.bind(this));
 
     this._updateAddMenuBarDefaultValues();
   }
 
   _updateAddMenuBarDefaultValues() {
-    this.labelField.setValue('Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter);
+    this.labelField.setValue('Dynamic Menu ' + this.dynamicMenuCounter);
     this.stackableField.setValue(true);
     this.shrinkableField.setValue(false);
   }
 
-  _onAddMenuBarItemButtonClick(event) {
-    let label = this.labelField.value || 'Dynamic Menubar Item ' + this.dynamicMenuBarItemCounter;
-    let gridData = new GridData();
-    gridData.horizontalAlignment = this.horizontalAlignmentField.value;
-    this.dynamicMenuBarItemCounter++;
-    let newMenuBarItem = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Button'), {
+  _onAddMenuButtonClick(event) {
+    let label = this.labelField.value || 'Dynamic Menu ' + this.dynamicMenuCounter;
+    this.dynamicMenuCounter++;
+    let newMenu = scout.create(scout.nvl(this.widget('MenuBarItemType').value, 'Menu'), {
       parent: this.field,
-      id: 'DynMenuBarItem ' + this.dynamicMenuBarItemCounter,
+      id: 'DynMenu ' + this.dynamicMenuCounter,
       label: label,
       text: label,
       iconId: this.iconIdField.value,
       horizontalAlignment: this.horizontalAlignmentField.value,
-      gridData: gridData,
+      gridDataHints: {
+        horizontalAlignment: this.horizontalAlignmentField.value
+      },
       stackable: this.stackableField.value,
       shrinkable: this.shrinkableField.value
     });
 
-    if (newMenuBarItem instanceof Button) {
-      newMenuBarItem = scout.create('ButtonAdapterMenu',
-        ButtonAdapterMenu.adaptButtonProperties(newMenuBarItem, {
+    if (newMenu instanceof Button) {
+      newMenu = scout.create('ButtonAdapterMenu',
+        ButtonAdapterMenu.adaptButtonProperties(newMenu, {
           parent: this,
           menubar: this.menuBar,
-          button: newMenuBarItem
+          button: newMenu
         }));
     }
 
     let newMenuItems = this.field.menuBar.menuItems.slice();
-    newMenuItems.splice(newMenuItems.length, 0, newMenuBarItem);
-    this.field._setMenus(newMenuItems);
+    newMenuItems.splice(newMenuItems.length, 0, newMenu);
+    this.field.setMenus(newMenuItems);
 
     this._updateAddMenuBarDefaultValues();
     // Validate layout immediately to prevent flickering

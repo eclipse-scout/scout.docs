@@ -1,12 +1,12 @@
 export default () => ({
-  id: 'jswidgets.GroupBoxDeleteMenuBarItemBox',
+  id: 'jswidgets.GroupBoxDeleteMenuBox',
   objectType: 'GroupBox',
-  label: 'Delete menubar item',
+  label: 'Delete menu',
   expandable: true,
   gridColumnCount: 2,
   fields: [
     {
-      id: 'ToDeleteMenuBarItem',
+      id: 'MenuToDeleteField',
       objectType: 'SmartField',
       label: 'Menubar Item'
     },

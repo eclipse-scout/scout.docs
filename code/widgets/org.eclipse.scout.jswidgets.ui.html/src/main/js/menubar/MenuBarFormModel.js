@@ -110,8 +110,7 @@ export default () => ({
                     id: 'SelectedMenuField',
                     objectType: 'SmartField',
                     label: 'Target',
-                    lookupCall: 'jswidgets.MenuItemLookupCall',
-                    value: 'Menu1'
+                    lookupCall: 'jswidgets.MenuItemLookupCall'
                   },
                   {
                     id: 'MenuPropertiesBox',
@@ -174,6 +173,24 @@ export default () => ({
             objectType: 'TabItem',
             label: 'Actions',
             fields: [
+              {
+                id: 'ActionTargetField',
+                objectType: 'SmartField',
+                label: 'Target',
+                lookupCall: 'jswidgets.MenuItemLookupCall'
+              },
+              {
+                id: 'Actions.MenuActionsBox',
+                objectType: 'jswidgets.MenuActionsBox'
+              },
+              {
+                id: 'Actions.AddGroupBoxMenuBox',
+                objectType: 'jswidgets.GroupBoxAddMenuBox'
+              },
+              {
+                id: 'Actions.DeleteGroupBoxMenuBox',
+                objectType: 'jswidgets.GroupBoxDeleteMenuBox'
+              },
               {
                 id: 'WidgetActionsBox',
                 objectType: 'jswidgets.WidgetActionsBox'

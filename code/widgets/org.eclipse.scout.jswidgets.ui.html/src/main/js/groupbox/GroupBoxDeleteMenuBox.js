@@ -10,18 +10,18 @@
  */
 import {GroupBox, models} from '@eclipse-scout/core';
 import {FormFieldMenuLookupCall} from '../index';
-import GroupBoxDeleteMenuBarItemBoxModel from './GroupBoxDeleteMenuBarItemBoxModel';
+import GroupBoxDeleteMenuBoxModel from './GroupBoxDeleteMenuBoxModel';
 
-export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
+export default class GroupBoxDeleteMenuBox extends GroupBox {
 
   constructor() {
     super();
     this.field = null;
-    this.dynamicMenuBarItemCounter = 0;
+    this.dynamicMenuCounter = 0;
   }
 
   _jsonModel() {
-    return models.get(GroupBoxDeleteMenuBarItemBoxModel);
+    return models.get(GroupBoxDeleteMenuBoxModel);
   }
 
   _init(model) {
@@ -39,12 +39,12 @@ export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
       return;
     }
 
-    this.targetField = this.widget('ToDeleteMenuBarItem');
+    this.targetField = this.widget('MenuToDeleteField');
     this.targetField.setLookupCall(new FormFieldMenuLookupCall(this.field));
     this.targetField.on('propertyChange', this._onTargetFieldPropertyChange.bind(this));
 
     this.deleteFieldButton = this.widget('DeleteButton');
-    this.deleteFieldButton.on('click', this._onDeleteMenuBarItemButtonClick.bind(this));
+    this.deleteFieldButton.on('click', this._onDeleteMenuButtonClick.bind(this));
   }
 
   _onTargetFieldPropertyChange(event) {
@@ -53,7 +53,7 @@ export default class GroupBoxDeleteMenuBarItemBox extends GroupBox {
     }
   }
 
-  _onDeleteMenuBarItemButtonClick() {
+  _onDeleteMenuButtonClick() {
     let newMenuItems = this.field.menuBar.menuItems.slice(),
       index = this.field.menuBar.menuItems.indexOf(this.targetField.value);
 

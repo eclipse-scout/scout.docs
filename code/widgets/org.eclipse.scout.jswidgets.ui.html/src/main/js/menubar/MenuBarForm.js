@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {EllipsisMenu, Form, Menu, models, scout, Status} from '@eclipse-scout/core';
+import {EllipsisMenu, Form, Menu, MenuBar, models, scout, Status} from '@eclipse-scout/core';
 import MenuBarFormModel from './MenuBarFormModel';
 
 export default class MenuBarForm extends Form {
@@ -25,8 +25,11 @@ export default class MenuBarForm extends Form {
   _init(model) {
     super._init(model);
 
-    let selectedMenuItemField = this.widget('SelectedMenuField');
-    selectedMenuItemField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
+    let selectedMenuField = this.widget('SelectedMenuField');
+    selectedMenuField.on('propertyChange', this._onSelectedMenuFieldPropertyChange.bind(this));
+
+    let actionTargetField = this.widget('ActionTargetField');
+    actionTargetField.on('propertyChange', this._onActionTargetFieldPropertyChange.bind(this));
 
     let shrinkableField = this.widget('ShrinkableField');
     shrinkableField.on('propertyChange', this._onShrinkableFieldPropertyChange.bind(this));
@@ -61,9 +64,12 @@ export default class MenuBarForm extends Form {
       }
     });
 
+    let detailBox = this.widget('DetailBox');
+    this.widget('Actions.AddGroupBoxMenuBox').setField(detailBox);
+    this.widget('Actions.DeleteGroupBoxMenuBox').setField(detailBox);
     this._fillSelectedMenuField();
-    selectedMenuItemField.setValue(this.widget('DetailBox').menus[0]);
-    this._updateSelectedMenu();
+    selectedMenuField.setValue(detailBox.menus[0]);
+    actionTargetField.setValue(detailBox.menus[0]);
   }
 
   _onReplaceChildActionsClick(event, menu) {
@@ -130,11 +136,17 @@ export default class MenuBarForm extends Form {
     }
   }
 
+  _onActionTargetFieldPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this._updateActionTarget();
+    }
+  }
+
   /**
    * Collects every menu of the group box and updates lookup call of the SelectedMenuField
    */
   _fillSelectedMenuField() {
-    let selectedMenuItemField = this.widget('SelectedMenuField');
+    let selectedMenuField = this.widget('SelectedMenuField');
     let detailBox = this.widget('DetailBox');
     let menus = [];
     detailBox.visitChildren(menu => {
@@ -142,16 +154,22 @@ export default class MenuBarForm extends Form {
         menus.push(menu);
       }
     });
-    selectedMenuItemField.lookupCall.data = [];
+    selectedMenuField.lookupCall.data = [];
     menus.forEach(menu => {
-      selectedMenuItemField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
+      selectedMenuField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
+    });
+    let actionTargetField = this.widget('ActionTargetField');
+    actionTargetField.lookupCall.data = [];
+    actionTargetField.lookupCall.data.push([this.widget('DetailBox').menuBar, 'Menu Bar']);
+    menus.forEach(menu => {
+      actionTargetField.lookupCall.data.push([menu, scout.nvl(menu.text, menu.id)]);
     });
   }
 
   _updateSelectedMenu() {
-    let selectedMenuItemField = this.widget('SelectedMenuField');
+    let selectedMenuField = this.widget('SelectedMenuField');
     let formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
-    let menu = selectedMenuItemField.value;
+    let menu = selectedMenuField.value;
     if (!menu) {
       return;
     }
@@ -167,5 +185,13 @@ export default class MenuBarForm extends Form {
       // form field widget
       formFieldPropertiesBox.setField(menu.field);
     }
+  }
+
+  _updateActionTarget() {
+    let menu = this.widget('ActionTargetField').value;
+    this.widget('Actions.MenuActionsBox').setMenu(menu instanceof Menu ? menu : null);
+    this.widget('Actions.MenuActionsBox').setVisible(menu instanceof Menu);
+    this.widget('Actions.AddGroupBoxMenuBox').setVisible(menu instanceof MenuBar);
+    this.widget('Actions.DeleteGroupBoxMenuBox').setVisible(menu instanceof MenuBar);
   }
 }

@@ -100,12 +100,12 @@ export default () => ({
             label: 'Actions',
             fields: [
               {
-                id: 'Actions.AddMenuBarItemBox',
-                objectType: 'jswidgets.GroupBoxAddMenuBarItemBox'
+                id: 'Actions.AddMenuBox',
+                objectType: 'jswidgets.GroupBoxAddMenuBox'
               },
               {
-                id: 'Actions.DeleteMenuBarItemBox',
-                objectType: 'jswidgets.GroupBoxDeleteMenuBarItemBox'
+                id: 'Actions.DeleteMenuBox',
+                objectType: 'jswidgets.GroupBoxDeleteMenuBox'
               },
               {
                 id: 'Actions.AddFieldBox',

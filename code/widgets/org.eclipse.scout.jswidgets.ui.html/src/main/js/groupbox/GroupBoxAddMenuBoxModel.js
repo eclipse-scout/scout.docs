@@ -1,7 +1,7 @@
 export default () => ({
-  id: 'jswidgets.GroupBoxAddMenuBarItemBox',
+  id: 'jswidgets.GroupBoxAddMenuBox',
   objectType: 'GroupBox',
-  label: 'Add menubar item',
+  label: 'Add menu',
   expandable: true,
   gridColumnCount: 2,
   fields: [
