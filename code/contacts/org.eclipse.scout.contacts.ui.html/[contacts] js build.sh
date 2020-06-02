@@ -15,13 +15,13 @@ command -v npm >/dev/null 2>&1 || { echo >&2 "npm cannot be found. Make sure Nod
 
 # Install pnpm
 echo Installing 'pnpm' into ../../node_modules
-npm install pnpm@">=4.0.0 <5.0.0" --prefix ../../node_modules
+npm install pnpm@">=4.0.0 <5.0.0" --prefix "../../"
 echo
 
 # Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
 cd ../..
 echo Running 'pnpm install' in "$(pwd)"
-node_modules/pnpm install --ignore-scripts || exit $?
+./node_modules/.bin/pnpm install --ignore-scripts || exit $?
 echo pnpm install finished successfully!
 echo
 
