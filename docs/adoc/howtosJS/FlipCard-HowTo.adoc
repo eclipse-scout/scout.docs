@@ -8,99 +8,105 @@ endif::finaldoc[]
 ifndef::mdledir[:mdledir: .]
 :experimental:
 
-=== How to Create a Custom field
-This cheat sheet shows how to implement your own custom control for a ScoutJS application. In this example we will write a FlipCard field, which allows you to have a 'card' with a front and back side. Clicking on the card should flip the card from one to the other side.
+=== How to Create a Custom Field
+This cheat sheet shows how to implement your own custom field for a ScoutJS application. In this example we will write a FlipCard field that will show a playing card. Clicking on the card will flip it from one side to the other.
 
-==== Files
+==== Setup
+For this example we use the helloscout git repository, but you can easily create the field in your own code base as well. In case you want to use the helloscout repo, clone and import it into your favourite IDE:
 
-===== Create an empty JavaScript file and Stylesheet
+ git clone https://github.com/BSI-Business-Systems-Integration-AG/helloscout.git
 
-* `src/main/js/hellojs/*custom/FlipCard.js*` The java script file representing the field.
-* `src/main/js/hellojs/*custom/FlipCard.less*` Styling of the field.
+Read the readme and start the hellojs application to make sure it works.
 
-==== Add the files to the application
+===== Add Empty JS and CSS Files
 
-===== Include the JavaScript file to the module
+Create the following files in the folder `org.eclipse.scout.hellojs.ui.html`
 
-hellojs-module.js
+* `src/main/js/*flipcard/FlipCardField.js*` The JavaScript file representing the field.
+* `src/main/js/*flipcard/FlipCardField.less*` The LESS file containing the styles of the field.
+
+===== Add the JS file to the JS index
+
+index.js
 [source,js]
 ----
-(function(hellojs, scout, $, undefined) {
-  ...
-  __include("hellojs/custom/FlipCard.js");
-  ...
-}(window.hellojs = window.hellojs || {}, scout, jQuery));
+...
+export {default as FlipCardField} from './flipcard/FlipCardField';
+...
 ----
 
-===== Include the Stylesheet to the module
+===== Add the LESS file to the LESS index
 
-hellojs-module.less
+index.less
 [source,css]
 ----
 ...
-@import "hellojs/custom/FlipCard.less";
+@import "flipcard/FlipCardField";
 ...
 ----
 
-==== Minimal Code for a new FormField
+==== Minimal Code for a New FormField
 
-===== Create a minimal FormField
-The FlipCard will inherit from FormField which has already a label and field container.
+===== Create a Minimal FormField
+The FlipCard will inherit from FormField. Every form field consists of a container, a label, the actual field, a mandatory-indicator and a status.
 
-FlipCard.js
+FlipCardField.js
 [source,js]
 ----
-hellojs.FlipCard = function() {
-  hellojs.FlipCard.parent.call(this);
-};
-scout.inherits(hellojs.FlipCard, scout.FormField);
+import {FormField} from '@eclipse-scout/core';
 
-hellojs.FlipCard.prototype._render = function() {
-  // create the field container
-  this.addContainer(this.$parent, 'flip-card');
-  // create a label
-  this.addLabel();
+export default class FlipCardField extends FormField {
+  _render() {
+    // Create the container
+    this.addContainer(this.$parent, 'flip-card-field');
 
-  // create a field
-  var $field = this.$parent.appendDiv('content');
-  // add the field to the form field.
-  this.addField($field);
-  this.addMandatoryIndicator();
-  this.addStatus();
-};
+    // Add a label
+    this.addLabel();
+
+    // Create the actual field. This will be your flip card.
+    var $field = this.$parent.appendDiv('content');
+    // add the field to the form field.
+    this.addField($field);
+
+    // Add other required form field elements
+    this.addMandatoryIndicator();
+    this.addStatus();
+  };
+}
 ----
 
 ===== Add the FlipCard to the HelloForm
 
-HelloForm.json
-[source,json]
+HelloFormModel.js
+[source,js]
 ----
 {
-  "id": "hellojs.HelloForm",
+  id: "hellojs.HelloForm",
   ...
-  "rootGroupBox": {
+  rootGroupBox: {
     ...
-    "fields": [
+    fields: [
       {
-        "id": "DetailBox",
+        id: 'DetailBox',
         ...
-        "fields": [
+        fields: [
           {
-            "id": "NameField",
+            id: 'NameField',
             ...
 
           },
-          {  <!--1-->
-            "id": "FlipCard",
-            "objectType": "hellojs.FlipCard",
-            "label": "Flip the card",
-            "gridDataHints": {
-              "h": 5,
-              "weightY": 0
+          <!--1-->
+          {
+            id: 'FlipCardField',
+            objectType: 'hellojs.FlipCardField',
+            label: 'Flip the card',
+            gridDataHints: {
+              h: 5,
+              weightY: 0
             }
           },
           {
-            "id": "GreetButton",
+            id: 'GreetButton',
             ...
           }
         ]
@@ -110,121 +116,129 @@ HelloForm.json
 }
 ----
 <1> The FlipCard field
+
+Now reload your browser and you should get the following result:
 
 .Result Minimal Form Field
 ****
 image::{imgsdir}/flipCard01.jpg[]
 ****
 
-==== Full featured flip card field
+==== Full Featured Flip Card Field
 
 FlipCard.js
 [source,js]
 ----
-hellojs.FlipCard = function() {
-  hellojs.FlipCard.parent.call(this);
-  this.$card = null;
-  this.$front = null;
-  this.$back = null;
+import {FormField} from '@eclipse-scout/core';
 
-  this.flipped = false;
-};
-scout.inherits(hellojs.FlipCard, scout.FormField);
-
-hellojs.FlipCard.prototype._render = function() {
-  // create the field container
-  this.addContainer(this.$parent, 'flip-card');
-  // create a label
-  this.addLabel();
-
-  // create a field
-  var $field = this.$parent.appendDiv('content');
-  // add the field to the form field.
-  this.addField($field);
-  this.addMandatoryIndicator();
-  this.addStatus();
-
-  // create the field content <1>
-  this.$card = $field.appendDiv('card')
-    .on('mousedown', this._onCardMouseDown.bind(this)); //<2>
-  this.$front = this.$card.appendDiv('front');
-  this.$back = this.$card.appendDiv('back');
-};
-
-hellojs.FlipCard.prototype._renderProperties = function() { //<3>
-  hellojs.FlipCard.parent.prototype._renderProperties.call(this);
-  this._renderFrontImage();
-  this._renderBackImage();
-  this._renderFlipped();
-};
-
-hellojs.FlipCard.prototype._renderFrontImage = function() {
-  if (this.frontImage) {
-    this.$front.append('<img src=\"' + this.frontImage + '\">');
+export default class FlipCardField extends FormField {
+    constructor() {
+    super();
+      this.$card = null;
+      this.$front = null;
+      this.$back = null;
+      this.flipped = false;
+      this.frontImage = null;
+      this.backImage = null;
   }
-};
 
-hellojs.FlipCard.prototype._renderBackImage = function() {
-  if (this.backImage) {
-    this.$back.append('<img src=\"' + this.backImage + '\">');
+  _render() {
+    // Create the container
+    this.addContainer(this.$parent, 'flip-card-field');
+    // Add a label
+    this.addLabel();
+
+    // Create the actual field <1>
+    var $field = this.$parent.appendDiv('content');
+    // Create the card inside the field
+    this.$card = $field.appendDiv('card')
+      .on('mousedown', this._onCardMouseDown.bind(this)); //(2)
+    this.$front = this.$card.appendDiv('front');
+    this.$back = this.$card.appendDiv('back');
+    // Add the field to the form field. It will be available as this.$field.
+    this.addField($field);
+
+    // Add other required form field elements
+    this.addMandatoryIndicator();
+    this.addStatus();
   }
-};
 
-hellojs.FlipCard.prototype._remove = function() {  <4>
-  hellojs.FlipCard.parent.prototype._remove.call(this);
-  this.$card = null;
-  this.$front = null;
-  this.$back = null;
-};
+  _renderProperties() { // <3>
+    super._renderProperties();
+    this._renderFrontImage();
+    this._renderBackImage();
+    this._renderFlipped();
+  }
 
-hellojs.FlipCard.prototype._onCardMouseDown = function() { // <2>
-  this.setFlipped(!this.flipped);
-};
+  _renderFrontImage() {
+    if (this.frontImage) {
+      this.$front.append('<img src=\"' + this.frontImage + '\">');
+    }
+  }
 
-hellojs.FlipCard.prototype.setFlipped = function(flipped) {
-  this.setProperty('flipped', flipped);
-};
+  _renderBackImage() {
+    if (this.backImage) {
+      this.$back.append('<img src=\"' + this.backImage + '\">');
+    }
+  }
 
-hellojs.FlipCard.prototype._renderFlipped = function() {
-  this.$card.toggleClass('flipped', this.flipped);
-};
+  _remove() { //<4>
+    super._remove();
+    this.$card = null;
+    this.$front = null;
+    this.$back = null;
+  }
+
+  _onCardMouseDown() { // <2>
+    this.setFlipped(!this.flipped);
+  }
+
+  setFlipped(flipped) {
+    this.setProperty('flipped', flipped);
+  }
+
+  _renderFlipped() {
+    this.$card.toggleClass('flipped', this.flipped);
+  }
+}
 ----
 <1> Create the dom elements in the render function.
-<2> Event handling to flip the card. Add/remove the CSS class `flipped` to the card element.
+<2> Add event handler which toggles the CSS class `flipped`.
 <3> Initial rendering of the properties. Applies the state to the DOM.
-<4> Keep the reference tree clean. Reset DOM references when the field has been removed.
+<4> Keep the references clean. Reset DOM references when the field has been removed.
 
 HelloForm.json
-[source,json]
+[source,js]
 ----
-{
-  "id": "hellojs.HelloForm",
+export default {
+  id: 'hellojs.HelloForm',
   ...
-  "rootGroupBox": {
+  rootGroupBox': {
     ...
-    "fields": [
+    fields: [
       {
-        "id": "DetailBox",
+        id: 'DetailBox',
         ...
-        "fields": [
+        fields: [
           {
-            "id": "NameField",
+            id: 'NameField',
             ...
 
           },
-          {  <!--1-->
-            "id": "FlipCard",
-            "objectType": "hellojs.FlipCard",
-            "label": "Flip the card",
-            "frontImage": "res/img/card-back.jpg",
-            "backImage": "res/img/card-front.jpg",
-            "gridDataHints": {
-              "h": 5,
-              "weightY": 0
+          <!--1-->
+          {
+            id: 'FlipCardField',
+            objectType: 'hellojs.FlipCardField',
+            label: 'Flip the card',
+            frontImage: 'img/card-back.jpg',
+            backImage: 'img/card-front.jpg',
+            gridDataHints: {
+              h: 5,
+              weightY: 0
             }
           },
           {
-            "id": "GreetButton",
+            id: 'GreetButton',
             ...
           }
         ]
@@ -233,19 +247,19 @@ HelloForm.json
   }
 }
 ----
-<1> The FlipCard field
+<1> FlipCard field is inserted after the name field.
 
-FlipCard.less
+FlipCardField.less
 [source,css]
 ----
-.flip-card {
+.flip-card-field {
 
   .card {
     position: absolute;
     cursor: pointer;
     height: 100%;
     width: 152px;
-    transition: transform 1s; //<1>
+    transition: transform 1s; // <1>
     transform-style: preserve-3d;
 
     &.flipped {
@@ -257,10 +271,10 @@ FlipCard.less
       height: 100%;
       width: 100%;
       position: absolute;
-      backface-visibility: hidden; <2>
+      backface-visibility: hidden; // <2>
 
       &.back {
-        transform: rotateY( 180deg ); <3>
+        transform: rotateY( 180deg ); // <3>
       }
 
       & > img {
@@ -275,6 +289,7 @@ FlipCard.less
 <2> Ensure back side is not visible.
 <3> Rotation to back side.
 
+Finally, create a folder `img` in the WebContent folder (org.eclipse.scout.hellojs.ui.html.app/src/main/resources/WebContent) and paste the two images of the card into that folder. You should be able to find the images using Google ;-)
 
 .Result Flip Card
 ****
