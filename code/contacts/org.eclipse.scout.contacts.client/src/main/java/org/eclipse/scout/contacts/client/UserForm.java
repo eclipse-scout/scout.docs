@@ -102,7 +102,7 @@ public class UserForm extends AbstractForm {
 
         @Override
         protected boolean getConfiguredGridUseUiHeight() {
-          return false;
+          return true;
         }
 
         @Override
