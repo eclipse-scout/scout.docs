@@ -22,8 +22,6 @@ import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
-import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.ViewSourceOnGitHubMenu;
 
 @ClassId("37e9a239-4f6a-4e74-8651-4c5df1ca8242")
 public class PageWithEditableTableTablePage extends PageWithTableTablePage {

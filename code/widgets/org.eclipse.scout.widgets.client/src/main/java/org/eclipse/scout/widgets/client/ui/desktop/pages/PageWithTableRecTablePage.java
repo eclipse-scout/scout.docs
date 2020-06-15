@@ -19,7 +19,6 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.widgets.client.ui.desktop.pages.PageWithTableTablePage.Table;
 
 @ClassId("321ea8cf-836e-4879-bba1-9c32c25b3e20")
 public class PageWithTableRecTablePage extends PageWithTableTablePage {
@@ -56,6 +55,7 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
       Object[] row = data[i];
       Object[] newRow = new Object[row.length + 1];
       newRow[0] = "#" + new BigInteger(30, m_random).toString(32).toUpperCase() + " (" + row[0] + ")";
+      // noinspection ManualArrayCopy
       for (int j = 0; j < row.length; j++) {
         newRow[j + 1] = row[j];
       }

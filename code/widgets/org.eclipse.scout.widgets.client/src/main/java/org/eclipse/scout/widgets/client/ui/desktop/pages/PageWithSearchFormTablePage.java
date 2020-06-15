@@ -66,7 +66,7 @@ public class PageWithSearchFormTablePage extends PageWithTableTablePage {
     return true;
   }
 
-  protected boolean filterCollection(Object value, Collection<? extends Object> filter) {
+  protected boolean filterCollection(Object value, Collection<?> filter) {
     if (filter != null && !filter.contains(value)) {
       return false;
     }
@@ -88,5 +88,4 @@ public class PageWithSearchFormTablePage extends PageWithTableTablePage {
     value = DateUtility.truncDate(value);
     return filterComparable(value, filterFrom, filterTo);
   }
-
 }
