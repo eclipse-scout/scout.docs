@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.eclipse.scout.rt.client.context.ClientRunContext;
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
@@ -245,7 +246,8 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         protected void execAlways() {
           if (isActive()) {
             getInputField().addErrorStatus(new DateTimeErrorStatus());
-          } else {
+          }
+          else {
             getInputField().removeErrorStatus(DateTimeErrorStatus.class);
           }
         }
@@ -1007,12 +1009,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedMasterValue(Object newMasterValue) {
-            if (newMasterValue != null) {
-              setValue(((Date) newMasterValue).toString());
-            }
-            else {
-              setValue(null);
-            }
+            setValue(Objects.toString(newMasterValue, null));
           }
         }
 
@@ -1087,7 +1084,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
+            return LocaleLookupCall.class;
           }
 
           @Override
@@ -1306,12 +1303,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedMasterValue(Object newMasterValue) {
-            if (newMasterValue != null) {
-              setValue(((Date) newMasterValue).toString());
-            }
-            else {
-              setValue(null);
-            }
+            setValue(Objects.toString(newMasterValue, null));
           }
         }
 
@@ -1479,12 +1471,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedMasterValue(Object newMasterValue) {
-            if (newMasterValue != null) {
-              setValue(((Date) newMasterValue).toString());
-            }
-            else {
-              setValue(null);
-            }
+            setValue(Objects.toString(newMasterValue, null));
           }
         }
 
@@ -1726,9 +1713,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
     @Order(170)
     @ClassId("482d73ed-1ecb-4aa1-b574-adec34c1a88d")
     public class CloseButton extends AbstractCloseButton {
-      @Override
-      protected void execClickAction() {
-      }
     }
   }
 
@@ -1736,6 +1720,8 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
   }
 
   public class DateTimeErrorStatus extends Status {
+    private static final long serialVersionUID = 1L;
+
     public DateTimeErrorStatus() {
       super("Error from Java model");
     }

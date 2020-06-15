@@ -85,23 +85,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
   protected Object[][] loadDemoData() {
     return new Object[][]{
-        {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2l, 1.0, 0.01, 1.0},
-        {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2l, 10.0, 0.10, 1.120},
-        {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2l, 100.0, 1.0, 1.123},
-        {"String 13", "String 1", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2l, 0.1, 0.001, 1.150},
-        {"String 22", "String 1000", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1l, -1.0, -0.01, 1.151},
-        {"String 23", "String .txt", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1l, -10.0, -0.1, 1.5},
-        {"String 24", "String 1 mit 10", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1l, -100.0, -1.0, 1.51},
-        {"String 25", "String 1 mit 3", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1l, -0.1, -0.001, 1.511},
-        {"String 31", "String 1 mit 1020", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.2, 0.012, 1.0},
-        {"String 32", "String 1.txt", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.02, 0.0102, -1.0},
-        {"String 33", "String 2.txt", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.002, 0.01002, -1.120},
-        {"String 34", "String 19.txt", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, -1.2, -0.012, -1.123},
-        {"String 35", "String 200.txt", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, -1.02, -0.0102, -1.150},
-        {"String 36", "String 1", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3l, -1.002, -0.01002, -1.151},
-        {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.0, 0.01, -1.5},
-        {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.0, 0.01, -1.51},
-        {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3l, 1.0, 0.01, -1.511},
+        {"String 10", "String 11", m_random.nextLong(), m_random.nextInt(), 9768.3, new Date(System.currentTimeMillis()), false, 2L, 1.0, 0.01, 1.0},
+        {"String 11", "String 31", m_random.nextLong(), m_random.nextInt(), 8768.3, new Date(System.currentTimeMillis()), false, 2L, 10.0, 0.10, 1.120},
+        {"String 12", "String 0", m_random.nextLong(), m_random.nextInt(), 7768.3, new Date(System.currentTimeMillis()), false, 2L, 100.0, 1.0, 1.123},
+        {"String 13", "String 1", m_random.nextLong(), m_random.nextInt(), 5768.3, new Date(System.currentTimeMillis()), false, 2L, 0.1, 0.001, 1.150},
+        {"String 22", "String 1000", m_random.nextLong(), m_random.nextInt(), 13000.25, new Date(System.currentTimeMillis() + 86400000), true, 1L, -1.0, -0.01, 1.151},
+        {"String 23", "String .txt", m_random.nextLong(), m_random.nextInt(), 12000.25, new Date(System.currentTimeMillis() + 46400000), true, 1L, -10.0, -0.1, 1.5},
+        {"String 24", "String 1 mit 10", m_random.nextLong(), m_random.nextInt(), 11000.25, new Date(System.currentTimeMillis() + 56400000), true, 1L, -100.0, -1.0, 1.51},
+        {"String 25", "String 1 mit 3", m_random.nextLong(), m_random.nextInt(), 10000.25, new Date(System.currentTimeMillis() + 76400000), true, 1L, -0.1, -0.001, 1.511},
+        {"String 31", "String 1 mit 1020", m_random.nextLong(), m_random.nextInt(), 8131.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.2, 0.012, 1.0},
+        {"String 32", "String 1.txt", m_random.nextLong(), m_random.nextInt(), 8231.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.02, 0.0102, -1.0},
+        {"String 33", "String 2.txt", m_random.nextLong(), m_random.nextInt(), 8331.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.002, 0.01002, -1.120},
+        {"String 34", "String 19.txt", m_random.nextLong(), m_random.nextInt(), 8431.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, -1.2, -0.012, -1.123},
+        {"String 35", "String 200.txt", m_random.nextLong(), m_random.nextInt(), 8531.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, -1.02, -0.0102, -1.150},
+        {"String 36", "String 1", m_random.nextLong(), m_random.nextInt(), 8631.7, new Date(System.currentTimeMillis() - 216000000), true, 3L, -1.002, -0.01002, -1.151},
+        {"String 37", "String 2", m_random.nextLong(), m_random.nextInt(), 0.005, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.0, 0.01, -1.5},
+        {"String 38", "String 19 ", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.0, 0.01, -1.51},
+        {"String 39", "String 200", m_random.nextLong(), m_random.nextInt(), 0.006, new Date(System.currentTimeMillis() - 216000000), true, 3L, 1.0, 0.01, -1.511},
     };
   }
 
@@ -358,7 +358,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
     @ClassId("e67e965b-ba87-4364-8faa-e502a43b5753")
     public class TileTableHeaderBox extends AbstractTileTableHeader {
-
     }
 
     @Order(30)
@@ -503,6 +502,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       @Order(10)
       @ClassId("9d88f3f6-4cc4-45be-82f5-a59d4692615b")
       public class SubSingleMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(
@@ -518,6 +518,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       @Order(20)
       @ClassId("5dc7666c-630b-4b37-be9c-765036c8a0dc")
       public class SubMultiMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(
@@ -533,6 +534,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       @Order(30)
       @ClassId("87efb878-277e-4481-9afa-6d597c3edec3")
       public class SubEmptySpaceMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(
@@ -557,6 +559,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         @Order(10)
         @ClassId("fed345fc-1f08-4ff8-81c1-bbe2185f00b7")
         public class SubSubSingleMenu extends AbstractMenu {
+
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
             return CollectionUtility.<IMenuType> hashSet(
@@ -572,6 +575,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         @Order(20)
         @ClassId("fe43e369-7f4d-4d5b-bfe2-b654054aba6a")
         public class SubSubMultiMenu extends AbstractMenu {
+
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
             return CollectionUtility.<IMenuType> hashSet(
@@ -587,6 +591,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         @Order(30)
         @ClassId("57c2ccb3-91a0-4d7a-94f6-f842877345ec")
         public class SubSubEmptySpaceMenu extends AbstractMenu {
+
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
             return CollectionUtility.<IMenuType> hashSet(
@@ -620,6 +625,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     @Order(10)
     @ClassId("123ebf2a-a992-4a2f-8c54-c3277b28121f")
     public class SubSingleMenu extends AbstractMenu {
+
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(
@@ -630,12 +636,12 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       protected String getConfiguredText() {
         return "TreeSubSingle";
       }
-
     }
 
     @Order(20)
     @ClassId("63786caa-e075-46df-9ba2-9a9bf9eef704")
     public class SubMultiMenu extends AbstractMenu {
+
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(
@@ -646,12 +652,12 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       protected String getConfiguredText() {
         return "TreeSubMulti";
       }
-
     }
 
     @Order(30)
     @ClassId("9602c55a-0b0f-4abf-917b-2e2175fd09ae")
     public class SubEmptySpaceMenu extends AbstractMenu {
+
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
         return CollectionUtility.<IMenuType> hashSet(
@@ -662,7 +668,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       protected String getConfiguredText() {
         return "TreeSubEmpty";
       }
-
     }
 
     @Order(40)
@@ -677,6 +682,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       @Order(10)
       @ClassId("4dac2afe-a0e5-45ef-ae2f-1094e22967c2")
       public class SubSubSingleMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(
@@ -687,12 +693,12 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         protected String getConfiguredText() {
           return "TreeSubSubSingle";
         }
-
       }
 
       @Order(20)
       @ClassId("9ce67a6d-bf7e-4db1-82f5-5bfa3c0bc595")
       public class SubSubMultiMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(
@@ -703,12 +709,12 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         protected String getConfiguredText() {
           return "TreeSubSubMulti";
         }
-
       }
 
       @Order(30)
       @ClassId("2595641e-645b-41ea-911b-db13a646f92c")
       public class SubSubEmptySpaceMenu extends AbstractMenu {
+
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
           return CollectionUtility.<IMenuType> hashSet(

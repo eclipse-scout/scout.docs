@@ -59,12 +59,12 @@ You can use your own icon font. The required file format for an icon font is
 _.woff_. For the following examples we assume the name of your font file is
  _awesomeIcons.woff_. The following steps are required:
 
-Place the font file in the WebContent/res directory of your _html.ui_ module.
+Place the font file in the WebContent/fonts directory of your _html.ui_ module.
 This makes it available for http requests on the URL
-`http://[base]/res/awesomeIcons.woff`.
+`http://[base]/fonts/awesomeIcons.woff`.
 
-Create a CSS/LESS definition, to reference the icon font in stylesheets. Make
-sure the definition is added to the LESS module of your project.
+Create a CSS/LESS definition to reference the icon font in stylesheets (e.g. in a file called `fonts.less`). Make
+sure the definition is added to the `index.less` of your project.
 
 [source,less]
 .The CSS/LESS font definition should look like this:
@@ -72,7 +72,7 @@ sure the definition is added to the LESS module of your project.
 @font-face {
   font-family: awesomeIcons;
   font-weight: normal;
-  src: url('awesomeIcons.woff') format('woff');
+  src: url('fonts/awesomeIcons.woff') format('woff');
 }
 
 /* Overrides definitions in fonts.css > .font-icon
@@ -80,17 +80,16 @@ sure the definition is added to the LESS module of your project.
 * See icons.js and usage of this class to see how iconId is used.
 */
 .font-awesomeIcons {
-  font-family: awesomeIcons, @defaultFont;
+  font-family: awesomeIcons, @font-default-family;
 }
 ----
 
 To check if your CSS definition is correct, you should download the CSS file
 directly via URL and check if the CSS file contains the required font definition.
-Assuming your LESS macro is named _hello-scout-macro.less_ the URL is:
-`http://[base]/res/hello-scout.css`
+Have a look at your `index.html` to find the path to your CSS (e.g. `http://[base]/yourapp-theme.css`).
 
-NOTE: When you request resources from the _/res_ folder via http, Scout will
-find resources from parent modules too. Thus the _scoutIcons.woff_ is
+NOTE: When you request resources from the _WebContent_ folder via http, Scout will
+find resources from other modules on the classpath too. Thus the _scoutIcons.woff_ is
 always available in a Scout project. However, you must avoid naming conflicts,
 since at runtime all files exist on the same classpath.
 

@@ -63,59 +63,82 @@ The first parameter is the object type, which typically is the name of the const
 scout.create('mynamespace.StringField', {})
 ----
 
-The second parameter of scout.create is the model. The model actually is the specification for your widget. In case of the `StringField` you can specify the label, the max length, whether it is enabled and visible and more. If you don't specify them, the defaults are used. The only needed property is the `parent`. To see what the defaults are, have a look at the source code of the widget constructor.
+The second parameter of scout.create is the model. The model is the specification for your widget. In case of the `StringField` you can specify the label, the max length, whether it is enabled and visible and more. If you don't specify them, the defaults are used. The only needed property is the `parent`. To see what the defaults are, have a look at the source code of the widget constructor.
 
 Every widget needs a parent. The parent is responsible to render (and remove) its children. In the example above, the parent is a group box. This group box has a property called `fields`. If the group box is rendered, it will render its fields too.
 
-You don't need a group box to render the string field, you could render it directly onto the desktop. But if you want to use a form, you need a group box and create the form, group box and the field. Doing this programmatically is time consuming, that is why we suggest to use the declarative JSON based approach.
+You don't need a group box to render the string field, you could render it directly onto the desktop. But if you want to use a form, you need a group box and create the form, group box and the field. Doing this programmatically, meaning creating each widget separately using scout.create, is time consuming, that is why we suggest to use the declarative approach.
 
-=== Creating a Widget using JSON
-Using the JSON based approach makes it easier to specify multiple widgets in a structured way. The following example defines a form with a group box and a string field.
+=== Creating a Widget Declaratively
+Have a look at the above example again. The second parameter, the model, defines some properties of the string field. This actually already is the declarative approach, because you could also set each property manually after creating the string field using the according methods. In order to create a form, we need to specify multiple widgets, respectively a widget hierarchy, at once. The following example defines a form with a group box and a string field.
 
-[source,json]
-.A form model defined using JSON
+[source,javascript]
+.A form model defined declaratively
 ----
-{
-  "id": "example.MyForm",
-  "type": "model",
-  "title": "My first form!",
-  "rootGroupBox": {
-    "id": "MainBox",
-    "objectType": "GroupBox",
-    "fields": [
+export default {
+  title: 'My first form!',
+  rootGroupBox: {
+    id: 'MainBox',
+    objectType: 'GroupBox',
+    fields: [
       {
-        "id": "MyStringField",
-        "objectType": "StringField",
-        "label": "hello",
-        "value": "world"
+        id: 'MyStringField',
+        objectType: 'StringField',
+        label: 'hello',
+        value: 'world'
       }
     ]
   }
 }
 ----
 
-This description of the form is put in a separate file called `MyForm.json`. Typically you would create a file called `MyForm.js` as well, which contains the logic to interact with the fields. But since we just want to open the form it is not necessary. Instead you can use the following code to create the form:
+To keep things nice and clean we separate the model from the code by putting this description of the form in a separate file called `MyFormModel.js`. Typically you would create a file called `MyForm.js` as well, which contains the logic to interact with the fields. But since we just want to open the form it is not necessary. Instead you can use the following code to create the form:
 
 [source,javascript]
 ----
-var form = scout.create('Form', scout.models.getModel('example.MyForm', parent));
+import model from './MyFormModel';
+var form = scout.create('Form', $.extend({parent: desktop}, model));
 ----
 
-When the form is shown it will look like this:
+Now you can open the form using `form.open()` and it will look like this:
 
 [[img-scoutjs_myform]]
-.A form described using JSON
+.First form
 image::{imgsdir}/scoutjs_myform.png[]
 
-==== Using constants in JSON
-When you define widget properties in a JSON model, you often want to set a property to a value defined by a constant. When you're writing JavaScript code you'd simply write:
+As soon as you would like to add some code that interacts with the fields or maybe just want to not always load the model manually when creating the form, you should create a file called `MyForm.js`. The content of that file would be a class `MyForm` that extends the `Form` from Scout and a method called `_jsonModel` that returns our model.
 
 [source,javascript]
 ----
-field.labelPosition = scout.FormField.LabelPosition.ON_FIELD;
+import {Form} from '@eclipse-scout/core';
+import model from './MyFormModel';
+
+export default class MyForm extends Form {
+  _jsonModel() {
+    return model;
+  }
+}
 ----
 
-Since you cannot reference Scout's JavaScript enums/constants in JSON, you'd have to write the following to assign the constant value in the JSON model:
+Creating the form is now possible using the following code (assuming your namespace is called 'example' and you've added the file `MyForm.js` to your `index.js`).
+[source,javascript]
+----
+var form = scout.create('example.MyForm', {parent: desktop});
+----
+
+==== Using constants in a JSON model
+In previous Scout versions, the model was defined in a JSON file. Even though it is still possible, it is not recommended anymore, because writing the model using JavaScript is much more convenient. One advantage is, that you can use constants the same way as in your regular JavaScript code.
+
+[source,javascript]
+----
+import {FormField} from '@eclipse-scout/core';
+export default {
+  ...
+  labelPosition: FormField.LabelPosition.TOP
+}
+----
+
+If you use a JSON based model, you cannot reference Scout's JavaScript enums/constants and you'd have to write the following to assign the constant value:
 
 [source,json]
 ----
@@ -132,24 +155,22 @@ Obviously this makes the JSON code harder to read and understand and the develop
 When you want to provide const-tag support for a custom widget, you need to call  `scout.Widget#resolveConsts` in the `_init` function of your widget and for each supported property specifiy the property name and the object that contains the enum/constant definition.
 
 === Finding a Widget
-In the example above we have seen how to create a widget, in that specific case we created a form. Typically it is not sufficient to just create a form, you most likely want to interact with the fields, like reading the values the user entered. In order to do that you need access to the fields. The easiest way is to use the IDs specified in the JSON.
+In the example from the previous chapter we have seen how to create a widget, in that specific case we created a form. Typically it is not sufficient to just create a form, you most likely want to interact with the fields, like reading the values the user entered. In order to do that you need access to the fields. The easiest way is to use the IDs specified in the JSON.
 
 Let's have a look at our example form again:
-[source,json]
+[source,javascript]
 ----
-{
-  "id": "example.MyForm",
-  "type": "model",
-  "title": "My first form!",
-  "rootGroupBox": {
-    "id": "MainBox",
-    "objectType": "GroupBox",
-    "fields": [
+export default {
+  title: 'My first form!',
+  rootGroupBox: {
+    id: 'MainBox',
+    objectType: 'GroupBox',
+    fields: [
       {
-        "id": "MyStringField",
-        "objectType": "StringField",
-        "label": "hello",
-        "value": "world"
+        id: 'MyStringField',
+        objectType: 'StringField',
+        label: 'hello',
+        value: 'world'
       }
     ]
   }
@@ -168,8 +189,8 @@ As seen before, every widget has a model representing its state. This model is w
 [source,javascript]
 .Accessing and modifying a property
 ----
-var field = scout.create('scout.StringField', {
-  parent: scout.App.get().sessions[0].desktop,
+var field = scout.create('StringField', {
+  parent: parent,
   labelVisible: false
 });
 console.log(field.labelVisible); // prints false
@@ -180,7 +201,7 @@ console.log(field.labelVisible); // prints true
 
 It is important to always use the setter to modify a property, because calling it does not just change the value. Instead it will call the method `setProperty(propertyName, value)` which does the following:
 
-. It will check if the property has changed at all. If the value is still the same, nothing happens. To compare the values `scout.objects.equals` is used, which uses `===` to compare and if that returns false, uses the equals methods of the given objects, if available.
+. It will check if the property has changed at all. If the value is still the same, nothing happens. To compare the values `objects.equals` is used, which uses `===` to compare and if that returns false, uses the equals methods of the given objects, if available.
 . If the values are not equal, the model is updated using the method `\_setProperty` (notice the `_`). Beside setting the value it also notifies every listener about the property change. So if another widget is interested in that property it may attach a listener and will be informed on every property change (see also the <<Events,Events>> for details).
 . In order to reflect the property change in the UI, the `_render` method is called, if available. The name of this method depends on the property name, it always starts with `_render` and ends with the property name. Example: `_renderLabelVisible`. If the widget does not implement such a method, nothing happens.
 
@@ -189,13 +210,14 @@ It is worth to mention that the behavior of step 2 may be influenced by the widg
 === Widget Properties
 A widget property is a special kind of a property which references another widget.
 
-Defining a property as widget property has the benefit that the widget is created automatically. Lets take the group box as an example. A group box has a widget property called fields. The fields are widgets, namely form fields. If I create a group box, I may specify its fields directly:
+Defining a property as widget property has the benefit that the widget is created automatically. Lets take the group box as an example. A group box has a widget property called fields. The fields are widgets, namely form fields. If you create a group box, you may specify its fields directly:
 
 [source,javascript]
 .Creating the string field automatically using a widget property
 ----
+import {StringField} from '@eclipse-scout/core';
 var groupBox = scout.create('GroupBox', {
-  parent: scout.App.get().sessions[0].desktop,
+  parent: parent,
   label: 'My Group Box',
   fields: [{
     objectType: 'StringField',
@@ -203,7 +225,7 @@ var groupBox = scout.create('GroupBox', {
   }]
 });
 // check if the string field was created as well
-console.log(groupBox.fields[0] instanceof scout.StringField);
+console.log(groupBox.fields[0] instanceof StringField);
 ----
 
 In the above example the group box is created using `scout.create`. After creating the group box you can access the property fields and you will notice that the string field was created as well, even though `scout.create` has not been called explicitly for the string field. This is because the property `fields` is defined as widget property. During the initialization of the group box it sets the property `fields` and because the value is not a widget yet (resp. the elements in the array), `scout.create` will be called.
@@ -221,7 +243,7 @@ So if a property is defined as widget property, calling a setter will do the fol
 . The render method is called (same as for regular properties).
 
 === Events
-Every widget supports event handling by using the class `scout.EventSupport`. This allows the widgets to attach listeners to other widgets and getting informed when an event happens.
+Every widget supports event handling by using the class `EventSupport`. This allows the widgets to attach listeners to other widgets and getting informed when an event happens.
 
 The 3 most important methods are the following:
 
@@ -236,8 +258,8 @@ The following example shows how to handle a button click event.
 [source,javascript]
 .Handling an event
 ----
-var button = scout.create('scout.Button', {
-  parent: scout.App.get().sessions[0].desktop,
+var button = scout.create('Button', {
+  parent: parent,
   label: 'click me!'
 });
 button.render();
@@ -252,8 +274,8 @@ Every click on the button will execute the callback function. To stop listening,
 [source,javascript]
 .Stop listening for an event
 ----
-var button = scout.create('scout.Button', {
-  parent: scout.App.get().sessions[0].desktop,
+var button = scout.create('Button', {
+  parent: parent,
   label: 'click me!'
 });
 button.render();
@@ -300,10 +322,11 @@ Listening to such an event works in the same way as for other events, just use t
 [source,javascript]
 .Example of a property change event
 ----
-var button = scout.create('scout.Button', {
-  parent: scout.App.get().sessions[0].desktop,
+import {Button} from '@eclipse-scout/core';
+var button = scout.create('Button', {
+  parent: parent,
   label: 'click me!',
-  displayStyle: scout.Button.DisplayStyle.TOGGLE
+  displayStyle: Button.DisplayStyle.TOGGLE
 });
 button.render();
 button.on('propertyChange', function(event) {
@@ -347,11 +370,11 @@ Example: `/icons/person.png`
 Example: `font:\uE043`, references a character in _scoutIcons.ttf_
 +
 Example: `font:fooIcons \uE109`, references a character in custom font _fooIcons.ttf_
-* **Icon Constants**: iconId has the format: `${iconId:[constant]}`, where constant is a constant in `scout.icons`.
+* **Icon Constants**: iconId has the format: `${iconId:[constant]}`, where constant is a constant in the module `icons.js`.
   This format is especially useful when you configure a Scout widget with a JSON model. The value of the constant
   is again either an image or a font-icon as described above.
 +
-Example: `${iconId:ANGLE_UP}` uses `scout.icons.ANGLE_UP`, icons predefined by Scout
+Example: `${iconId:ANGLE_UP}` uses `icons.ANGLE_UP`, icons predefined by Scout
 +
 Example: `${iconId:foo.BAR}` uses `foo.icons.BAR`, use this for custom icon constant objects
 
@@ -386,21 +409,23 @@ By default, objects are created using naming convention. This means when calling
 [source,javascript]
 .Creating an object without the ObjectFactory
 ----
-var table = new scout.Table();
+import {Table} from '@eclipse-scout/core';
+var table = new Table();
 table.init(model);
 ----
 
 This will work fine, but you will loose the big benefit of the `ObjectFactory`: the ability to replace existing classes. So if you want to customize the default `Table`, you would likely extend that table and override some functions. In that case you need to make sure every time a table is created, your class is used instead of the default. To do that you have to register your class in the `ObjectFactory` with the `objectType` `Table`. If `scout.create('Table')` is called the object factory will check if there is a class registered for the type `Table` and, if yes, that class is used. Only if there is no registration found, the default approach using the naming convention is performed.
 
-In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. yourproject-module.js). The content of that file may look as following:
+In order to register you class, you need a file called `objectFactories` and add that to your JavaScript module (e.g. index.js). The content of that file may look as following:
 
 [source,javascript]
 .Adding a new object factory registration
 ----
-scout.objectFactories = $.extend(scout.objectFactories, {
-  'Table': function() {
-    return new yourproject.CustomTable();
-  }
+import {CustomTable} from './index';
+import {scout} from '@eclipse-scout/core';
+
+scout.addObjectFactories({
+  'Table': () => new CustomTable()
 });
 ----
 
@@ -521,8 +546,9 @@ See the following example of a validator used by a `DateField`.
 [source,javascript]
 .Example of a validator
 ----
+import {dates} from '@eclipse-scout/core';
 function(value) {
-  if (scout.dates.isSameDay(value, new Date())) {
+  if (dates.isSameDay(value, new Date())) {
     throw 'You are not allowed to select the current date';
   }
   return value;
@@ -535,7 +561,7 @@ This validator ensures that the user may not enter the current date. If he does,
 .Validation error of a date field
 image::{imgsdir}/datefield_validation_error.png[]
 
-As you can see in the example, in order to mark a value as invalid just throw the error message you want to show to the user. You could also throw an error or a `scout.Status` object. In that case a generic error message will be displayed.
+As you can see in the example, in order to mark a value as invalid just throw the error message you want to show to the user. You could also throw an error or a `Status` object. In that case a generic error message will be displayed.
 
 In order to activate your validator, you can either call `setValidator` to replace the existing validator. In that case you should consider calling the default validator first, like you did it for the formatter or parser. Or you can use `addValidator` which adds the validator to the list of validators of the field.
 
@@ -570,23 +596,23 @@ Note that the lookup call works with _Deferreds_. This means the lookup call run
 
 
 == Styling
-Beside JS for business logic and JSON for the models, every Scout JS app probably needs some CSS code at some point of time. If you are writing custom widgets, you need it for sure. But also if you are just using the given widgets you might have the need to adjust the look here and there.
+Beside JavaScript for business logic and for the models, every Scout JS app probably needs some CSS code at some point of time. If you are writing custom widgets, you need it for sure. But also if you are just using the given widgets you might have the need to adjust the look here and there.
 
 Scout uses LESS as CSS preprocessor. It has a lot of advantages to pure CSS: variables, mixins, functions, imports etc. If you use the default build infrastructure provided by Scout, you can not only use LESS easily without getting a headache on how to integrate it in your build system, you get access to all of the LESS constructs used by Scout itself. This means you can use variables for colors, icons and sizes, mixins for animations and to avoid browser specific prefixes, you can import or replace whole Scout LESS files for custom themes and you get a lot of sample code in the Scout code base because Scout itself uses the same concepts.
 
-In order to get started you need a place to put all your LESS code. The recommendation is to create one LESS file for each widget. That means if your widget is called `MyWidget.js` you would create a file called `MyWidget.less`. Even if you adjust the look of an existing widget you can create a file called let's say `StringField.less` and put the rules there. Remember to use a custom namespace (folder) in your project for your JS, JSON and LESS files otherwise it could get name clashes if you name your files the same way as Scout does. (Note: theme files are put in the default namespace, as you will learn in the theme chapter.) If you only have a few rules or non widget specific rules you can create a file called `main.less` and put them there. However, these are only recommendations, you can always do it as you like.
+In order to get started you need a place to put all your LESS code. The recommendation is to create one LESS file for each widget. That means if your widget is called `MyWidget.js` you would create a file called `MyWidget.less`. Even if you adjust the look of an existing widget you can create a file called let's say `StringField.less` and put the rules there. If you only have a few rules or non widget specific rules you can create a file called `main.less` and put them there. However, these are only recommendations, you can always do it as you like.
 
-The creation of these files won't make them loaded automatically, you have to register them in your `module` file. The module should be put into your `src/main/js` folder and named according to your namespace, for example `helloworld-module.less`. Just include your new files using the LESS `@import` keyword.
+The creation of these files won't make them loaded automatically, you have to register them in your `index` file. This file should be put into your `src/main/js` folder and named `index.less`. Just include your new files using the LESS `@import` keyword.
 
 [source,LESS]
 .Including a LESS file
 ----
-@import "helloworld/style/colors.less";
+@import "style/colors";
 ----
 
-This module file is either directly included in your `index.html` or in a `macro` file which is included in the `index.html`. The intention of the macro file is to group individual module files and make one file in order to load all rules at once within one request.
+In addition to this `index` file you normally also have a `theme` file which will be used as entry point in your `webpack.config.js` and included in the `index.html`. The intention of the `theme` file is to group individual `index` files and make one file in order to load all rules at once within one request.
 
-Now that we have all the infrastructure set up we can start adding some rules. As already said you can use all the LESS variables from Scout. The variables can be found in the `scout/style` folder of the `org.eclipse.scout.rt.ui.html` module. If you have a look at the file `colors.less` you find all the colors you can use or customize. Let's say you want to change the background color of the navigation, you can redefine the variable `@navigation-background-color`.
+Now that we have all the infrastructure set up we can start adding some rules. As already said you can use all the LESS variables from Scout. The variables can be found in the `scout/style` folder of the `@eclipse-scout/core` module. If you have a look at the file `colors.less` you find all the colors you can use or customize. Let's say you want to change the background color of the navigation, you can redefine the variable `@navigation-background-color`.
 
 [source,LESS]
 .Changing the background color of the navigation
@@ -617,26 +643,32 @@ function is called on an extended object, the functions are called on the regist
 first. Since a Scout class can have multiple extensions, we speak of an extension chain, where the
 last element of the chain is the original (extended) object.
 
-The base class for all extensions is `scout.Extension`. This class is used to extend an existing
-Scout object. In order to use the extension feature you must subclass +scout.Extension+ and
+The base class for all extensions is `Extension`. This class is used to extend an existing
+Scout object. In order to use the extension feature you must subclass +Extension+ and
 implement an `init` function, where you register the functions you want to extend. Example:
 
 [source,javascript]
 ----
-scout.MyExtension.prototype.init = function() {
-  this.extend(scout.MyStringField.prototype, '_init');
-  this.extend(scout.MyStringField.prototype, '_renderProperties');
-};
+import {Extension, StringField} from '@eclipse-scout/core';
+
+export default class MyExtension extends Extension {
+  init() {
+    this.extend(StringField.prototype, '_init');
+  }
+}
 ----
 
 Then you implement functions with the same name and signature on the extension class. Example:
 
 [source,javascript]
 ----
-scout.MyExtension.prototype._init = function(model) {
+_init(model) {
+  // Call the original _init() method of the StringField class
   this.next(model);
+  // Extend the instance with a new property called bar with the value foo
+  // -> EVERY string field now has this new property
   this.extended.setProperty('bar', 'foo');
-};
+}
 ----
 
 The extension feature sets two properties on the extension instance before the extended method
@@ -647,18 +679,20 @@ next:: is a reference to the next extended function or the original function of 
   in case the current extension is the last extension in the extension chain.
 extended:: is the extended or original object.
 
-All extensions must be registered in the `installExtensions` function of your `scout.App`.
+All extensions must be registered in the `_installExtensions` function of your `App` (make sure to use the namespace which is defined in your `index.js` instead of `custom`).
 Example:
 
 [source,javascript]
 ----
-scout.MyApp.prototype.installExtensions = function() {
-  scout.Extension.install([
-    'scout.FooExtension',
-    'scout.BarExtension',
-    // ...
-  ]);
-};
+import {App, Extension} from '@eclipse-scout/core';
+
+export default class MyApp extends App {
+  _installExtensions() {
+    Extension.install([
+      'custom.MyExtension'
+    ]);
+  }
+}
 ----
 
 === Export Scout model from a Scout classic (online) application
@@ -685,7 +719,7 @@ build the model manually. Here's how to use the export feature:
   ** Maybe you'll have to adjust objectType and namespace of some widgets in the JSON. This needs to be done for widgets
      that do not belong to the default _scout_ namespace.
   ** Remove form fields and menus which are never used in your Scout JS app
-  ** Remove unused menu types from the menuTypes property of a scout.Menu
+  ** Remove unused menu types from the menuTypes property of a `Menu`
 
 Note: The function exportAdapter can be used not only for forms, but for any other widget/adapter too.
 
@@ -727,7 +761,7 @@ Here's how the response for a lookup call should look like in order to be proces
   "lookupRows": [ # the result set of this lookup, contains 0-n lookup rows
     {
       # key and text are mandatory properties, all other properties are optional
-      "key": "unqiue lookup row key",
+      "key": "unique lookup row key",
       "text": "lookup row text",
       "iconId": "person.svg",
       "tooltipText": "foo",
@@ -799,26 +833,26 @@ Output:
   <scout-text data-key="ui.Login" data-value="Anmelden"></scout-text>
 
 === scout:script
-Loads the referenced JavaScript macro and starts the JavaScript build for that file. Outputs a `script` tag in the HTML document which references the generated .js file. "bsicrm-all-macro.js" will become "bsicrm-all.js" in the parsed HTML document. Depending on Scout's runtime properties the filename will be augmented: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
+Converts the tag to a regular `script` tag in the HTML document so that the referenced JavaScript bundle can be loaded by the browser. Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix ".min" is appended to the filename.
 
 Example:
 
-  <scout:script src="res/bsicrm-all-macro.js" />
+  <scout:script src="yourapp.js" />
 
 Output:
 
-  <script src="res/bsicrm-all-98aea5b3.min.js"></script>
+  <script src="yourapp-98aea5b3.min.js"></script>
 
 === scout:stylesheet
-Loads the referenced LESS macro and starts the CSS build with LESS for that file. Outputs a `link` tag in the HTML document which references the generated .css file. "bsicrm-all-macro.less" will become "bsicrm-css.js" in the parsed HTML document. Depending on Scout's runtime properties the filename will be augmented: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
+Converts the tag to a regular `style` tag in the HTML document so that the referenced CSS bundle can be loaded by the browser. Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
 
 Example:
 
-  <scout:stylesheet src="res/bsicrm-all-macro.less" />
+  <scout:stylesheet src="yourtheme.css" />
 
 Output:
 
-  <link rel="stylesheet" type="text/css" href="res/bsicrm-all-98aea5b3.min.css">
+  <link rel="stylesheet" type="text/css" href="yourtheme-98aea5b3.min.css">
 
 === scout:version
 Outputs the current version of the Scout application as `scout-version` tag in the HTML document. This tag is read by `scout.App#_initVersion`.
