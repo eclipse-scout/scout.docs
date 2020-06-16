@@ -68,6 +68,13 @@ export default () => ({
       objectType: 'CheckBoxField',
       label: 'Modal',
       labelVisible: false
+    },
+    {
+      id: 'HeaderVisibleField',
+      objectType: 'CheckBoxField',
+      label: 'Header Visible',
+      labelVisible: false,
+      triStateEnabled: true
     }
   ]
 });

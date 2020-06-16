@@ -47,6 +47,7 @@ export default class FormPropertiesBox extends GroupBox {
     this.closableField = this.widget('ClosableField');
     this.resizableField = this.widget('ResizableField');
     this.modalField = this.widget('ModalField');
+    this.headerVisibleField = this.widget('HeaderVisibleField');
     this._setForm(this.form);
   }
 
@@ -82,6 +83,9 @@ export default class FormPropertiesBox extends GroupBox {
     this.modalField.setValue(form.modal);
     this.modalField.on('propertyChange', this._onPropertyChange.bind(this));
 
+    this.headerVisibleField.setValue(form.headerVisible);
+    this.headerVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+
     this.displayHintField.setValue(form.displayHint);
     this.displayViewIdField.setValue(form.displayViewId);
     this.displayParentField.setValue(DisplayParentLookupCall.resolveDisplayParentType(form.displayParent));
@@ -100,6 +104,8 @@ export default class FormPropertiesBox extends GroupBox {
       this.form.setClosable(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'ModalField') {
       this.form.setModal(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'HeaderVisibleField') {
+      this.form.setHeaderVisible(event.newValue);
     }
   }
 }

@@ -66,6 +66,7 @@ export default class FormForm extends Form {
       displayViewId: this.propertiesBox.displayViewIdField.value,
       displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
       modal: this.propertiesBox.modalField.value,
+      headerVisible: this.propertiesBox.headerVisibleField.value,
       askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
       cacheBounds: this.propertiesBox.cacheBoundsField.value,
       closable: this.propertiesBox.closableField.value,
