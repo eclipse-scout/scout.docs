@@ -635,7 +635,7 @@ Redefining a variable is the simplest way of customizing. If you need more contr
 === Themes
 Scout applications support styling via CSS/LESS themes. Scout comes with two themes by default: the _default_ theme with blue colors and the _dark_ theme with gray/black colors. Technically a theme has a name and a set of LESS files.
 
-In Scout Classic a theme is activated by calling the method `AbstractDesktop#setTheme(String name)`. This causes the document in the browser to reload and load the CSS theme for that name, like `myapp-theme.css` for the _default_ theme or `myapp-theme-dark.css` for the _dark_ theme. The _default_ theme is activated by passing a `null` value as name.
+In Scout Classic a theme is activated by calling the method `AbstractDesktop#setTheme(String name)`. This causes the browser to reload the page and loads the CSS theme for that name, like `myapp-theme.css` for the _default_ theme or `myapp-theme-dark.css` for the _dark_ theme. The _default_ theme is activated by passing a `null` value as name.
 
 In Scout JS you do the same thing by calling the method `Desktop#setTheme(name)`.
 
@@ -643,27 +643,29 @@ If you have multiple themes and you want to start with a defined theme by defaul
 
  scout.ui.theme=rainbow
 
-Note that Scout only provides an API to switch between themes. If the user of your Scout applications must switch between various themes, your application must provide an UI element to do that. Scout provides no standard UI element for that. However, the Widgets apps for Scout Classic and Scout JS give you an idea of how you could implement that feature.
+Note that Scout only provides an API to switch between themes. If the user of your Scout application should switch between various themes, your application must provide an UI element to do that. Scout provides no standard UI element for that. However, the Widgets apps for https://scout.bsi-software.com/widgets/[Scout Classic] and https://scout.bsi-software.com/jswidgets/[Scout JS] give you an idea of how you could implement that feature.
 
-There are two options to customize CSS properties in your Scout project:
+You have two options to customize CSS styles in your Scout project:
 
 . Change CSS properties (or LESS variables) by overriding styles from the default theme
 . Provide your own theme with a unique name like `rainbow`
 
-When the user of your application should have only a single theme option 1 is the way to go. However, if users should have the option to switch between various themes, you should go with option 2. In this chapter we will focus the latter option.
+If your Scout application should have only a single theme, option 1 is the way to go. If users should have the option to switch between various themes, you should go with option 2. In this chapter we will focus on the latter option.
 
-In order to understand Scout themes, take a look at the `myapp-theme.less` file which has been generated for your project. In the following examples we assume that the name of your project is _myapp_.
+In order to understand Scout themes, take a look at the `myapp-theme.less` file which has been generated for your project by the Scout archetype. In the following examples we assume that the name of your project is _myapp_.
 
+.myapp-theme.less
 [source,LESS]
 ----
 @import "~@eclipse-scout/core/src/index";
 @import "./src/main/js/index";
 ----
 
-As you can see the theme bundles various LESS modules. Line 1 imports the LESS module for Scout. This module contains style definitions for all UI elements provided by Scout. Line 2 imports the LESS module for your. This module contains style definitions for your custom widgets used in your project. The build creates a single CSS file `myapp-theme.css` which is used as theme for your project.
+As you can see the theme bundles various LESS modules. Line 1 imports the LESS module from the Scout core. This module contains style definitions for all UI elements provided by Scout. Line 2 imports the LESS module from your application. This module contains style definitions for custom widgets used in your project. The build creates a single CSS file `myapp-theme.css`, which is used as theme for your project.
 
-We recommend making an index file for each Scout module. These index files import each .less file which belongs to that module. This excerpt from Scouts `index.less` shows how we import all distinct .less files required to style the desktop or the LESS variable definitions for all colors used in the stylesheet:
+We recommend making an index file for each Scout module. These index files import each single LESS file which belongs to that module. This excerpt from Scouts `index.less` shows how we import all distinct LESS files required to style the desktop or the LESS variable definitions for all colors used in the stylesheet:
 
+.Excerpt from Scout core index.less
 [source,LESS]
 ----
 ...
@@ -676,16 +678,18 @@ We recommend making an index file for each Scout module. These index files impor
 ...
 ----
 
-How does the dark theme for your Scout application look like? Like for the default theme we create a LESS file `myapp-theme-dark.less`, but this time we import the `index-dark` modules.
+How does the dark theme for your Scout application look like? Like for the _default_ theme, we create a LESS file `myapp-theme-dark.less`, but this time we import the `index-dark` modules.
 
+.myapp-theme-dark.less
 [source,LESS]
 ----
 @import "~@eclipse-scout/core/src/index-dark";
 @import "./src/main/js/index-dark";
 ----
 
-Let's take a look of the details in the `index-dark.less` file.
+Let's take a look at the details in the `index-dark.less` file from the Scout core:
 
+.index-dark.less
 [source,LESS]
 ----
 @import "index";
@@ -693,8 +697,9 @@ Let's take a look of the details in the `index-dark.less` file.
 @import "desktop/outline/Outline-dark";
 ----
 
-As you see the first thing we do on line 1 is to import the default theme 'index'. This the _dark_ theme inherits all style definitions from the default theme. The dark theme only extends new additional style and LESS variables or overrides styles or LESS variables from the default. This is what happens on line 2. `Colors-dark.less` overrides some variables defined in the `colors.less` file from the default theme, like the gray colors. Excerpt:
+As you see, the first thing we do on line 1 is to import the default theme 'index'. This means the _dark_ theme inherits all style definitions from the default theme. The dark theme only extends new additional style and LESS variables or overrides styles or LESS variables from the default theme. This is what happens on line 2: `colors-dark.less` overrides some variables defined in the `colors.less` file from the default theme, like the gray colors:
 
+.Excerpt from Scout core index-dark.less
 [source,LESS]
 ----
 ...
@@ -710,8 +715,9 @@ As you see the first thing we do on line 1 is to import the default theme 'index
 Note that all variables except `@palette-gray-2-1` override variables from `colors.less`. `@palette-gray-2-1` is a variable which is only defined and used in the _dark_ theme.
 
 ==== Build and Runtime
-Scout uses Webpack to start the LESS parser and build the CSS themes. Your application needs at least one default theme. This theme is added by default to your `webpack.config.js`. If your application needs to work with multiple themes you must add them to the list of config entries. In this example we add the two themes _dark_ and _rainbow_:
+Scout uses Webpack to run the LESS parser and build the CSS themes. Your application needs at least one default theme. The Scout archetype adds this theme to your `webpack.config.js`. If your application needs to work with multiple themes you must add them to the list of config entries. In this example we add the two themes _dark_ and _rainbow_:
 
+.Excerpt from webpack.config.js
 [source,js]
 ----
 config.entry = {
