@@ -50,6 +50,10 @@ export default class TablePropertiesBox extends GroupBox {
     checkableField.setValue(this.table.checkable);
     checkableField.on('propertyChange', this._onCheckablePropertyChange.bind(this));
 
+    let compactField = this.widget('CompactField');
+    compactField.setValue(this.table.compact);
+    compactField.on('propertyChange', this._onCompactPropertyChange.bind(this));
+
     let headerEnabledField = this.widget('HeaderEnabledField');
     headerEnabledField.setValue(this.table.headerEnabled);
     headerEnabledField.on('propertyChange', this._onHeaderEnabledPropertyChange.bind(this));
@@ -132,6 +136,12 @@ export default class TablePropertiesBox extends GroupBox {
   _onCheckablePropertyChange(event) {
     if (event.propertyName === 'value') {
       this.table.setCheckable(event.newValue);
+    }
+  }
+
+  _onCompactPropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.table.setCompact(event.newValue);
     }
   }
 

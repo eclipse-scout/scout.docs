@@ -30,6 +30,12 @@ export default () => ({
       labelVisible: false
     },
     {
+      id: 'CompactField',
+      objectType: 'CheckBoxField',
+      label: 'Compact',
+      labelVisible: false
+    },
+    {
       id: 'HeaderEnabledField',
       objectType: 'CheckBoxField',
       label: 'Header Enabled',

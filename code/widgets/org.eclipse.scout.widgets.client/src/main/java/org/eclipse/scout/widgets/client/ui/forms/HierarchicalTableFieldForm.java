@@ -427,6 +427,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
           @Override
           protected void execInitTable() {
+            //noinspection DuplicatedCode
             addPropertyChangeListener(
                 e -> {
                   if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
@@ -644,7 +645,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
             @Override
             protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-              return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
+              return LocaleLookupCall.class;
             }
 
           }
@@ -1423,7 +1424,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
+          return IconIdLookupCall.class;
         }
 
         @Override
@@ -1719,7 +1720,36 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           protected void execInitField() {
             setValue(getTableField().getTable().isCheckable());
           }
+        }
 
+        @Order(125)
+        @ClassId("2ca8bc00-2d5c-4713-bb41-e60f6d5a1c32")
+        public class IsCompactField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Compact";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setCompact(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isCompact());
+          }
         }
 
         @Order(130)
@@ -2113,9 +2143,7 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
       if (!rows.isEmpty() && getKey() == null) {
         return rows;
       }
-      else {
-        return Collections.singletonList(new LookupRow<>(getKey(), getKey().toString()));
-      }
+      return Collections.singletonList(new LookupRow<>(getKey(), getKey()));
     }
   }
 }

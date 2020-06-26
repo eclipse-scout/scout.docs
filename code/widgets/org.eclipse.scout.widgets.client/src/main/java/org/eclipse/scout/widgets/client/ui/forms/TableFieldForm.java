@@ -315,6 +315,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getImageColumn().setValue(r, "large");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowUpBold);
           table.getLanguageColumn().setValue(r, new Locale("en", "US"));
+          table.getHtmlEnabledColumn().setValue(r, HTML.appLink("link", "App Link").toHtml());
 
           //Second Row:
           r = table.addRow(getTable().createRow());
@@ -333,6 +334,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           table.getImageColumn().setValue(r, "small");
           table.getTrendColumn().setValue(r, AbstractIcons.LongArrowDownBold);
           table.getLanguageColumn().setValue(r, new Locale("de", "DE"));
+          table.getHtmlEnabledColumn().setValue(r, HTML.appLink("link", "App Link").toHtml());
         }
 
         private String rowsToKeyString(List<ITableRow> list) {
@@ -342,7 +344,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           StringBuilder buf = new StringBuilder(Long.toString((Long) list.get(0).getCellValue(0)));
           for (int i = 1; i < list.size(); i++) {
-            buf.append(";").append((Long) list.get(i).getCellValue(0));
+            buf.append(";").append(list.get(i).getCellValue(0));
           }
 
           return buf.toString();
@@ -411,6 +413,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             return getColumnSet().getColumnByClass(AttendedColumn.class);
           }
 
+          public HtmlEnabledColumn getHtmlEnabledColumn() {
+            return getColumnSet().getColumnByClass(HtmlEnabledColumn.class);
+          }
+
           public MixedStateColumn getMixedStateColumn() {
             return getColumnSet().getColumnByClass(MixedStateColumn.class);
           }
@@ -424,7 +430,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected void execAppLinkAction(String ref) {
+            MessageBoxes.createOk().withBody("Link of row " + getNameColumn().getSelectedValue() + " has been clicked.").show();
+          }
+
+          @Override
           protected void execInitTable() {
+            //noinspection DuplicatedCode
             addPropertyChangeListener(
                 e -> {
                   if (e.getPropertyName().equals(ITable.PROP_CONTEXT_COLUMN)) {
@@ -662,7 +674,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-              return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
+              return LocaleLookupCall.class;
             }
 
           }
@@ -963,6 +975,25 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               }
             }
 
+          }
+
+          @Order(138)
+          @ClassId("3d4efc39-bdc0-4527-8846-375743133f22")
+          public class HtmlEnabledColumn extends AbstractStringColumn {
+            @Override
+            protected String getConfiguredHeaderText() {
+              return "Html Enabled";
+            }
+
+            @Override
+            protected boolean getConfiguredHtmlEnabled() {
+              return true;
+            }
+
+            @Override
+            protected int getConfiguredWidth() {
+              return 130;
+            }
           }
 
           @Order(140)
@@ -1637,7 +1668,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
+          return IconIdLookupCall.class;
         }
 
         @Override
@@ -1920,6 +1951,36 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @Order(115)
+        @ClassId("9a9266b1-b828-4213-9fea-c43c3f16739a")
+        public class MultilineTextField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Multiline Text";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setMultilineText(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isMultilineText());
+          }
+        }
+
         @Order(120)
         @ClassId("009e0fd8-2521-429f-81e0-ac0ea90c8859")
         public class IsCheckableField extends AbstractBooleanField {
@@ -1948,7 +2009,36 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           protected void execInitField() {
             setValue(getTableField().getTable().isCheckable());
           }
+        }
 
+        @Order(125)
+        @ClassId("60336300-0bb4-47bb-aad1-b325167445d0")
+        public class IsCompactField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Compact";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setCompact(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isCompact());
+          }
         }
 
         @Order(130)
@@ -2281,37 +2371,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Order(210)
-        @ClassId("ac90d60a-a193-4ec1-9705-6c592484436c")
-        public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("ToggleHorizontalAlignment");
-          }
-
-          @Override
-          protected boolean getConfiguredProcessButton() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected void execClickAction() {
-            for (IColumn column : getTableField().getTable().getColumns()) {
-              int newAlignment = column.getHorizontalAlignment() + 1;
-              if (newAlignment > 1) {
-                newAlignment = -1;
-              }
-              column.setHorizontalAlignment(newAlignment);
-            }
-          }
-        }
-
-        @Order(220)
         @ClassId("1a9a423a-b3c6-4bf1-96dd-3a8e4a2c3df5")
         public class TileModeField extends AbstractBooleanField {
 
@@ -2341,6 +2400,36 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @Order(220)
+        @ClassId("ac90d60a-a193-4ec1-9705-6c592484436c")
+        public class ToggleHorizontalAlignmentField extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("ToggleHorizontalAlignment");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execClickAction() {
+            for (IColumn column : getTableField().getTable().getColumns()) {
+              int newAlignment = column.getHorizontalAlignment() + 1;
+              if (newAlignment > 1) {
+                newAlignment = -1;
+              }
+              column.setHorizontalAlignment(newAlignment);
+            }
+          }
+        }
       }
     }
 
@@ -2388,7 +2477,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
         return rows;
       }
       else {
-        return Collections.singletonList(new LookupRow<>(getKey(), getKey().toString()));
+        return Collections.singletonList(new LookupRow<>(getKey(), getKey()));
       }
     }
   }
