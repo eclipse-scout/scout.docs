@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, scout, TileOutlineOverview} from '@eclipse-scout/core';
+import {App, HtmlComponent, scout, TileOutlineOverview} from '@eclipse-scout/core';
 
 export default class WidgetsOutlineOverview extends TileOutlineOverview {
 
@@ -26,6 +26,7 @@ export default class WidgetsOutlineOverview extends TileOutlineOverview {
     let description = this.session.text('AppDescription', App.get().scoutVersion);
     this.$description = this.$content.appendDiv('widget-tile-outline-desc').html(description);
     this.$description.addClass('prevent-initial-focus');
+    HtmlComponent.install(this.$description, this.session);
   }
 
   _createPageTileGrid() {

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {scout, TileOutlineOverview} from '@eclipse-scout/core';
+import {HtmlComponent, scout, TileOutlineOverview} from '@eclipse-scout/core';
 
 export default class WidgetsTileOutlineOverview extends TileOutlineOverview {
 
@@ -23,12 +23,30 @@ export default class WidgetsTileOutlineOverview extends TileOutlineOverview {
     this.$title.text(this.session.text('ApplicationTitle'));
     this.$description = this.$content.appendDiv('widgets-outline-desc').html(this.outline.description);
     this.$description.addClass('prevent-initial-focus');
+    HtmlComponent.install(this.$description, this.session);
   }
 
   _createPageTileGrid() {
+    let page;
+    let nodes;
+    if (this.outline.compact) {
+      page = this.outline.compactRootNode();
+      if (page) {
+        nodes = page.childNodes;
+      }
+    }
     return scout.create('PageTileGrid', {
       parent: this,
       outline: this.outline,
+      compact: this.outline.compact,
+      compactLayoutConfig: {
+        hgap: 12,
+        vgap: 12,
+        columnWidth: 150,
+        rowHeight: 90
+      },
+      page: page,
+      nodes: nodes,
       layoutConfig: {
         hgap: 12,
         vgap: 12,

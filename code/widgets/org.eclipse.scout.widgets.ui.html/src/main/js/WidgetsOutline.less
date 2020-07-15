@@ -16,6 +16,24 @@
   & > .widgets-outline-desc {
     color: @text-color;
     max-width: 660px;
+    margin-bottom: 12px;
+
+    .outline & {
+      color: @navigation-color;
+
+      & > p {
+        margin-top: 0;
+
+        & > a {
+          color: @navigation-color;
+
+          &:hover,
+          &:active, &.active {
+            color: darken(@navigation-color, 10%);
+          }
+        }
+      }
+    }
   }
 
   & > .tile-grid > .form-field > .field > .label {
