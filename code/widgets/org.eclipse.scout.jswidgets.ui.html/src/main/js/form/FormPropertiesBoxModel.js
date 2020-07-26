@@ -58,6 +58,12 @@ export default () => ({
       labelVisible: false
     },
     {
+      id: 'MovableField',
+      objectType: 'CheckBoxField',
+      label: 'Movable',
+      labelVisible: false
+    },
+    {
       id: 'ResizableField',
       objectType: 'CheckBoxField',
       label: 'Resizable',
@@ -75,6 +81,12 @@ export default () => ({
       label: 'Header Visible',
       labelVisible: false,
       triStateEnabled: true
+    },
+    {
+      id: 'MaximizedField',
+      objectType: 'CheckBoxField',
+      label: 'Maximized',
+      labelVisible: false
     }
   ]
 });

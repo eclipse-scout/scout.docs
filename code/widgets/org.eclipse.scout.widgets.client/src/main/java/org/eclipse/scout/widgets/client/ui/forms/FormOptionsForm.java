@@ -88,6 +88,10 @@ public class FormOptionsForm extends AbstractForm {
     return getFieldByClass(CssClassField.class);
   }
 
+  public MainBox.MaximizedField getMaximizedField() {
+    return getFieldByClass(MainBox.MaximizedField.class);
+  }
+
   @Order(1000)
   @ClassId("95ba1502-3931-4a39-b3e2-f7b6c6d845d3")
   public class MainBox extends AbstractGroupBox {
@@ -252,6 +256,25 @@ public class FormOptionsForm extends AbstractForm {
         else {
           getConfigurableForm().removeStatus(INFO_STATUS);
         }
+      }
+    }
+
+    @Order(5500)
+    @ClassId("91bb003a-f4f3-4de5-aa0e-dce60f93015e")
+    public class MaximizedField extends AbstractBooleanField {
+      @Override
+      protected String getConfiguredLabel() {
+        return "Maximized";
+      }
+
+      @Override
+      protected void execInitField() {
+        setValue(getConfigurableForm().isMaximized());
+      }
+
+      @Override
+      protected void execChangedValue() {
+        getConfigurableForm().setMaximized(getValue());
       }
     }
 

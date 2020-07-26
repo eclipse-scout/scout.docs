@@ -14,6 +14,7 @@ import {DisplayParentLookupCall} from '../index';
 
 export default class FormPropertiesBox extends GroupBox {
 
+  // noinspection DuplicatedCode
   constructor() {
     super();
     this.form = null;
@@ -23,11 +24,14 @@ export default class FormPropertiesBox extends GroupBox {
     this.askIfNeedSaveField = null;
     this.cacheBoundsField = null;
     this.closableField = null;
+    this.movableField = null;
     this.resizableField = null;
     this.modalField = null;
     this.displayHintField = null;
     this.displayViewIdField = null;
     this.displayParentField = null;
+    this.headerVisibleField = null;
+    this.maximizedField = null;
   }
 
   _jsonModel() {
@@ -45,9 +49,11 @@ export default class FormPropertiesBox extends GroupBox {
     this.askIfNeedSaveField = this.widget('AskIfNeedSaveField');
     this.cacheBoundsField = this.widget('CacheBoundsField');
     this.closableField = this.widget('ClosableField');
+    this.movableField = this.widget('MovableField');
     this.resizableField = this.widget('ResizableField');
     this.modalField = this.widget('ModalField');
     this.headerVisibleField = this.widget('HeaderVisibleField');
+    this.maximizedField = this.widget('MaximizedField');
     this._setForm(this.form);
   }
 
@@ -78,13 +84,20 @@ export default class FormPropertiesBox extends GroupBox {
     this.closableField.setValue(form.closable);
     this.closableField.on('propertyChange', this._onPropertyChange.bind(this));
 
+    this.movableField.setValue(form.movable);
+    this.movableField.on('propertyChange', this._onPropertyChange.bind(this));
+
     this.resizableField.setValue(form.resizable);
+    this.resizableField.on('propertyChange', this._onPropertyChange.bind(this));
 
     this.modalField.setValue(form.modal);
     this.modalField.on('propertyChange', this._onPropertyChange.bind(this));
 
     this.headerVisibleField.setValue(form.headerVisible);
     this.headerVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    this.maximizedField.setValue(form.maximized);
+    this.maximizedField.on('propertyChange', this._onPropertyChange.bind(this));
 
     this.displayHintField.setValue(form.displayHint);
     this.displayViewIdField.setValue(form.displayViewId);
@@ -106,6 +119,12 @@ export default class FormPropertiesBox extends GroupBox {
       this.form.setModal(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'HeaderVisibleField') {
       this.form.setHeaderVisible(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'MovableField') {
+      this.form.setMovable(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'ResizableField') {
+      this.form.setResizable(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'MaximizedField') {
+      this.form.setMaximized(event.newValue);
     }
   }
 }

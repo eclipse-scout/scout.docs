@@ -72,6 +72,7 @@ import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayHintAndViewIdBox.DisplayViewIdField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.DisplayParentField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.IconIdField;
+import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.MaximizedField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.ModalityBox.ModalityField;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenFormButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormForm.MainBox.ControllerBox.OpenFormBox.OpenInNewSessionButton;
@@ -243,6 +244,10 @@ public class FormForm extends AbstractForm implements IPageForm {
 
   public CacheBoundsField getCacheBoundsField() {
     return getFieldByClass(CacheBoundsField.class);
+  }
+
+  public MaximizedField getMaximizedField() {
+    return getFieldByClass(MaximizedField.class);
   }
 
   @Override
@@ -519,10 +524,19 @@ public class FormForm extends AbstractForm implements IPageForm {
         protected void execInitField() {
           setValue(getForm().isCacheBounds());
         }
+      }
+
+      @Order(57)
+      @ClassId("a7ba962b-f5e9-41e2-bdd3-cc0b82a2c4ab")
+      public class MaximizedField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Maximized";
+        }
 
         @Override
-        protected void execChangedValue() {
-          getForm().setCacheBounds(getValue());
+        protected void execInitField() {
+          setValue(getForm().isMaximized());
         }
       }
 
@@ -562,6 +576,7 @@ public class FormForm extends AbstractForm implements IPageForm {
                   form.setSubTitle(getFormSubTitleField().getValue());
                   form.setDisplayHint(displayHint.getValue());
                   form.setCacheBounds(getCacheBoundsField().getValue());
+                  form.setMaximized(getMaximizedField().getValue());
                   DisplayViewId viewId = getDisplayViewIdField().getValue();
                   if (viewId != null) {
                     form.setDisplayViewId(viewId.getValue());

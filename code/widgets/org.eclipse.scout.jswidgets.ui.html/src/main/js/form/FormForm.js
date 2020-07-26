@@ -19,6 +19,7 @@ export default class FormForm extends Form {
     this.openedByButton = false;
     this.currentFormPropertiesBox = null;
     this.LifecycleData = {};
+    this.closeMenuVisible = false;
   }
 
   _jsonModel() {
@@ -43,7 +44,6 @@ export default class FormForm extends Form {
     this.currentFormPropertiesBox.displayHintField.setEnabled(false);
     this.currentFormPropertiesBox.displayViewIdField.setEnabled(false);
     this.currentFormPropertiesBox.displayParentField.setEnabled(false);
-    this.currentFormPropertiesBox.resizableField.setEnabled(false);
     this.widget('CurrentFormPropertiesTab').setVisible(!this.detailForm);
 
     if (this.closeMenuVisible) {
@@ -57,41 +57,21 @@ export default class FormForm extends Form {
   }
 
   _onOpenFormButtonClick(model) {
-    let form = scout.create('jswidgets.FormForm', {
+    let form = scout.create('jswidgets.FormForm', $.extend({
       parent: this,
-      title: this.propertiesBox.titleField.value,
-      subTitle: this.propertiesBox.subTitleField.value,
-      iconId: this.propertiesBox.iconIdField.value,
-      displayHint: this.propertiesBox.displayHintField.value,
-      displayViewId: this.propertiesBox.displayViewIdField.value,
-      displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
-      modal: this.propertiesBox.modalField.value,
-      headerVisible: this.propertiesBox.headerVisibleField.value,
-      askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
-      cacheBounds: this.propertiesBox.cacheBoundsField.value,
-      closable: this.propertiesBox.closableField.value,
-      resizable: this.propertiesBox.resizableField.value,
       openedByButton: true,
       closeMenuVisible: true
-    });
+    }, this._settings()));
     this.widget('EventsTab').setField(form);
     this.widget('WidgetActionsBox').setField(form);
     form.open();
   }
 
   _onOpenLifecycleFormButtonClick(model) {
-    let form = scout.create('jswidgets.LifecycleForm', {
+    let form = scout.create('jswidgets.LifecycleForm', $.extend({
       parent: this,
-      title: this.propertiesBox.titleField.value,
-      subTitle: this.propertiesBox.subTitleField.value,
-      iconId: this.propertiesBox.iconIdField.value,
-      displayHint: this.propertiesBox.displayHintField.value,
-      displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
-      modal: this.propertiesBox.modalField.value,
-      closable: this.propertiesBox.closableField.value,
-      resizable: this.propertiesBox.resizableField.value,
       data: this.LifecycleData
-    });
+    }, this._settings()));
     this.widget('EventsTab').setField(form);
 
     let lifecycleDataField = this.widget('LifecycleDataField');
@@ -126,5 +106,24 @@ export default class FormForm extends Form {
 
   lifecycleDataToString(data) {
     return 'Name: ' + data.name + ', Birthday: ' + data.birthday;
+  }
+
+  _settings() {
+    return {
+      title: this.propertiesBox.titleField.value,
+      subTitle: this.propertiesBox.subTitleField.value,
+      iconId: this.propertiesBox.iconIdField.value,
+      displayHint: this.propertiesBox.displayHintField.value,
+      displayViewId: this.propertiesBox.displayViewIdField.value,
+      displayParent: DisplayParentLookupCall.displayParentForType(this, this.propertiesBox.displayParentField.value),
+      modal: this.propertiesBox.modalField.value,
+      headerVisible: this.propertiesBox.headerVisibleField.value,
+      askIfNeedSave: this.propertiesBox.askIfNeedSaveField.value,
+      cacheBounds: this.propertiesBox.cacheBoundsField.value,
+      closable: this.propertiesBox.closableField.value,
+      movable: this.propertiesBox.movableField.value,
+      resizable: this.propertiesBox.resizableField.value,
+      maximized: this.propertiesBox.maximizedField.value
+    };
   }
 }
