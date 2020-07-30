@@ -5,12 +5,12 @@
 <booleanAttribute key="org.eclipse.debug.core.launchGroup.0.adoptIfRunning" value="true"/>
 <booleanAttribute key="org.eclipse.debug.core.launchGroup.0.enabled" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.launchGroup.0.mode" value="run"/>
-<stringAttribute key="org.eclipse.debug.core.launchGroup.0.name" value="[widgets] js build"/>
+<stringAttribute key="org.eclipse.debug.core.launchGroup.0.name" value="[jswidgets] js build windows"/>
 <stringAttribute key="org.eclipse.debug.core.launchGroup.1.action" value="NONE"/>
 <booleanAttribute key="org.eclipse.debug.core.launchGroup.1.adoptIfRunning" value="true"/>
 <booleanAttribute key="org.eclipse.debug.core.launchGroup.1.enabled" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.launchGroup.1.mode" value="inherit"/>
-<stringAttribute key="org.eclipse.debug.core.launchGroup.1.name" value="[widgets] ui"/>
+<stringAttribute key="org.eclipse.debug.core.launchGroup.1.name" value="[jswidgets] ui"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
