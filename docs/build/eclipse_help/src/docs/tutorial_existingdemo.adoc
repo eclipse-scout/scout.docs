@@ -97,7 +97,7 @@ With the Scout demo installed in our workspace we are now ready to start the app
 Open the [menu]_Run As_ menu as shown in <<img-oomph_run_contacts_all>>.
 There are 3 launch groups available, one for each application.
 Each launch group will start all the necessary builds and servers.
-Now select _[contacts] all_ to run the Contacts application.
+Now select _[contacts] all_ (Windows or Unix variant) to run the Contacts application.
 
 [[img-oomph_run_contacts_all]]
 .Start the Contacts application.
