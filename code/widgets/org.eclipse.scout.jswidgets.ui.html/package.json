@@ -1,6 +1,6 @@
 {
   "name": "@eclipse-scout/demo-jswidgets",
-  "version": "10.0.0-snapshot",
+  "version": "10.0.28",
   "description": "Eclipse Scout Demo Widgets",
   "author": "BSI Business Systems Integration AG",
   "homepage": "https://www.eclipse.org/scout",
@@ -37,11 +37,11 @@
     "release-postdependency": "releng-scripts release-publish-dependency"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": "10.0.0-snapshot",
+    "@eclipse-scout/cli": "10.0.28",
     "@eclipse-scout/releng": "^10.0.0"
   },
   "dependencies": {
-    "@eclipse-scout/core": "10.0.0-snapshot",
+    "@eclipse-scout/core": "10.0.28",
     "jquery": "3.4.1",
     "chart.js": "2.8.0"
   }
