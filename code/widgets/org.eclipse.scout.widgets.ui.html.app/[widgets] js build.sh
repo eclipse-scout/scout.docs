@@ -26,6 +26,6 @@ echo pnpm install finished successfully!
 echo
 
 # Build the JavaScript and CSS bundles and start the watcher => creates the dist folder
-call cd widgets/org.eclipse.scout.widgets.ui.html.app || exit 1
+cd widgets/org.eclipse.scout.widgets.ui.html.app || exit 1
 echo Running 'npm build:dev:watch' in "$(pwd)"
 npm run build:dev:watch || exit $?
