@@ -371,9 +371,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
 
         @Override
         protected void execChangedValue() {
-          ChartConfigDo config = IChartField.readChartConfig(ChartFieldForm.class.getResourceAsStream(getValue()));
-          getChartField().setChartConfig(config);
-          updateChartData(true);
+          if (null != getValue()) {
+            ChartConfigDo config = IChartField.readChartConfig(ChartFieldForm.class.getResourceAsStream(getValue()));
+            getChartField().setChartConfig(config);
+            updateChartData(true);
+          }
         }
       }
 
