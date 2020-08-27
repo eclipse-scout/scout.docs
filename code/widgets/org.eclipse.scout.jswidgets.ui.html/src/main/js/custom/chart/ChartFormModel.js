@@ -54,7 +54,8 @@ export default function() {
                       id: 'ChartTypeField',
                       objectType: 'SmartField',
                       label: 'Chart type',
-                      lookupCall: 'jswidgets.ChartTypeLookupCall'
+                      lookupCall: 'jswidgets.ChartTypeLookupCall',
+                      displayStyle: 'dropdown'
                     },
                     {
                       id: 'DataArrayLengthField',
