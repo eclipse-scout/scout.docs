@@ -72,8 +72,8 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
   protected static final int DEFAULT_DATA_SERIES = 1;
   protected static final int DEFAULT_DATA_LENGTH = 6;
 
-  protected static final String[] DEFAULT_LABELS = {"January", "February", "March", "April", "June", "Juli",
-      "August", "September", "October", "November", "December"};
+  protected static final String[] DEFAULT_LABELS = {"January", "February", "March", "April", "May", "June",
+    "Juli", "August", "September", "October", "November", "December"};
 
   protected static final String[] COLOR_SET_SPEEDO = {
       "dc2938",
