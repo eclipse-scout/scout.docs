@@ -11,11 +11,11 @@ ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 :experimental:
 
 // Constants
-:maven-version: 10.0.8
-:scout-previous-version: 9.0.x
-:scout-version: 10.0
-:simrel-name: 2020-03
-:simrel-date: March, 2020
+:maven-version: 11.0-SNAPSHOT
+:scout-previous-version: 10.0
+:scout-version: 11.0
+:simrel-name: 2020-09
+:simrel-date: September, 2020
 
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
@@ -24,7 +24,7 @@ ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 :migration-guide-link: https://eclipsescout.github.io/{doc-short-version}/migration-guide.html[Migration Guide]
 :mvnrepository-link: https://mvnrepository.com/artifact/org.eclipse.scout.rt/org.eclipse.scout.rt/{maven-version}[{maven-version}]
 :scout-sdk-download-link: https://www.eclipse.org/downloads/packages/release/{simrel-name}/r/eclipse-ide-scout-developers[Eclipse for Scout Developers]
-:scout-sdk-update-site: http://download.eclipse.org/scout/releases/10.0/
+:scout-sdk-update-site: http://download.eclipse.org/scout/releases/11.0/
 :scout-docs-link: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/{maven-version}[features/version/{maven-version}]
 :simrel-link: https://wiki.eclipse.org/Simultaneous_Release[Eclipse {simrel-name} Simultaneous Release]
 :simrel-faq-link: https://wiki.eclipse.org/SimRel/Simultaneous_Release_Cycle_FAQ#What_is_the_Simultaneous_Release_cycle_.3F[Simultaneous Release FAQ]
@@ -34,4 +34,4 @@ ifndef::rnimgsdir[:rnimgsdir: {rndir}/imgs]
 //-----------------------------------------------------------------------------
 // This file contains the release notes
 //-----------------------------------------------------------------------------
-include::ReleaseNotes_10_0.adoc[]
+include::ReleaseNotes_11_0.adoc[]

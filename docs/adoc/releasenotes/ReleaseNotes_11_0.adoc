@@ -1,6 +1,101 @@
+////
+Howto:
+- Write this document such that it helps people to discover new features and other important changes of this release.
+- Chronological order is not necessary.
+- Describe necessary migration steps in the MigrationGuide document.
+- Use "WARNING: {NotReleasedWarning}" on its own line to mark parts about not yet released code (also add a "(since <version>)" suffix to the chapter title)
+- Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
+////
 
-// TBD
+== About This Release
 
+The latest version of this release is: {maven-version}.
+
+You can see the {github-changelog-link} on GitHub.
+
+Coming from an older Scout version? Check out the {migration-guide-link}!
+
+=== Service Releases
+
+Scout {scout-version} will continue to be maintained for a while and new builds may be released from time to time.
+Beside bug fixes, these releases may even contain some minor features.
+
+//The following enhancements were made after the initial {scout-version} release.
+//
+//==== 11.0.1
+//
+// The initial release of this version was *11.0.0.xyz* (Maven: 11.0.0.xyz_Simrel_2019_06).
+//
+//WARNING: {NotReleasedWarning}
+//
+//(Section intentionally left blank for possible future release)
+//
+// * <<New Feature (since 11.0.0.xyz)>>
+//
+// ==== Upcoming -- No Planned Release Date
+//
+// The following changes were made after the latest official release build. No release date has been fixed yet.
+//
+// WARNING: {NotReleasedWarning}
+//
+// * <<New Feature (since 11.0.0.xyz)>>
+
+=== Obtaining the Latest Version
+
+==== Scout Runtime for Java
+Scout Runtime artifacts for Java are distributed using Maven Central:
+
+* {maven-central-link} on _Maven Central_
+* {mvnrepository-link} on _mvnrepository.com_
+
+Usage example in the parent POM of your Scout application:
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<dependency>
+    <groupId>org.eclipse.scout.rt</groupId>
+    <artifactId>org.eclipse.scout.rt</artifactId>
+    <version>{maven-version}</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+==== Scout Runtime for JavaScript
+
+Scout Runtime artifacts for JavaScript are distributed using npm:
+
+* https://www.npmjs.com/package/@eclipse-scout/core[Scout Core Runtime]
+* https://www.npmjs.com/search?q=%40eclipse-scout[All official Scout JavaScript packages]
+
+==== IDE Tooling (Scout SDK)
+
+Scout officially supports https://www.jetbrains.com/idea/[IntelliJ IDEA] and {scout-sdk-download-link}.
+
+===== Eclipse
+
+You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
+{scout-sdk-download-link}
+
+To install the Scout SDK into your existing Eclipse IDE, use this update site: +
+{scout-sdk-update-site}
+
+===== IntelliJ IDEA
+
+You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[JetBrains Plugin Repository] or you can use the plugins client built into IntelliJ IDEA.
+Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
+
+=== Demo Applications
+The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
+
+If you just want to play around with them without looking at the source code, you can always use the deployed versions:
+
+* https://scout.bsi-software.com/contacts/
+* https://scout.bsi-software.com/widgets/
+* https://scout.bsi-software.com/jswidgets/
+
+// ----------------------------------------------------------------------------
 == Widget Enhancements
 
 === New widget: BreadcrumbBarField
@@ -9,4 +104,5 @@ The new breadcrumb bar widget allows to display a hierarchical structure in a ho
 Each breadcrumb item is clickable. The breadcrumb can automatically shrink if there is not enough place available.
 
 image::{rnimgsdir}/new_widget_breadcrumb_bar_field.png[]
+
 
