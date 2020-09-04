@@ -40,7 +40,7 @@
     <orderEntry type="module" module-name="org.eclipse.scout.rt.dataobject" />
     <orderEntry type="module" module-name="org.eclipsescout.demo.bahbah.shared" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.jdbc" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.13" level="project" />
-    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.21" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
   </component>
 </module>
