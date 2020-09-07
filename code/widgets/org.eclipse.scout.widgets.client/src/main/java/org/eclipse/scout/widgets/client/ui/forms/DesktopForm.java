@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.services.lookup.ViewButtonLookupCall;
+import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
@@ -39,7 +40,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.Be
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
-import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropertiesBox;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
@@ -104,6 +104,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
   public CloseableField getCloseableField() {
     return getFieldByClass(CloseableField.class);
+  }
+
+  public StyleBox.TrackFocusField getTrackFocusField() {
+    return getFieldByClass(StyleBox.TrackFocusField.class);
   }
 
   @ClassId("756346e1-c53b-42df-b667-1aed17ee65b6")
@@ -361,6 +365,30 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             // Need to schedule a model job otherwise it would fail due to the loop detection
             ModelJobs.schedule(() -> setValue(true), ModelJobs.newInput(ClientRunContexts.copyCurrent()));
           }
+        }
+      }
+
+      @Order(4000)
+      @ClassId("4d165ff5-68fb-4b5b-bf20-77ec3080f035")
+      public class TrackFocusField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Track Focus";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().isTrackFocus());
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getDesktop().setTrackFocus(getValue());
         }
       }
     }

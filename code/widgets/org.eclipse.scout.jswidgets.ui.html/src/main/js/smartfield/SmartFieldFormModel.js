@@ -38,7 +38,6 @@ export default () => ({
       {
         id: 'ConfigurationBox',
         objectType: 'TabBox',
-        labelVisible: false,
         cssClass: 'jswidgets-configuration',
         gridColumnCount: 1,
         selectedTab: 'PropertiesTab',
