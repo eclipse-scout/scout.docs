@@ -155,6 +155,14 @@
     {
       "objectType": "PageWithNodes",
       "leaf": true,
+      "text": "Breadcrumb Bar Field",
+      "detailForm": {
+        "objectType": "jswidgets.BreadcrumbBarFieldForm"
+      }
+    },
+    {
+      "objectType": "PageWithNodes",
+      "leaf": true,
       "text": "Number Field",
       "detailForm": {
         "objectType": "jswidgets.NumberFieldForm"

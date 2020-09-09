@@ -17,6 +17,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.widgets.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.ButtonForm;
 import org.eclipse.scout.widgets.client.ui.forms.DateTimeFieldsForm;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm;
@@ -58,6 +59,7 @@ public class SimpleWidgetsOutline extends AbstractWidgetsOutline {
     pageList.add(new FormPage(FormForm.class));
     pageList.add(new FormPage(FormFieldForm.class));
     pageList.add(new FormPage(BooleanFieldForm.class, "Boolean Field (Check Box)"));
+    pageList.add(new FormPage(BreadcrumbBarFieldForm.class));
     FormPage.sort(pageList);
   }
 }
