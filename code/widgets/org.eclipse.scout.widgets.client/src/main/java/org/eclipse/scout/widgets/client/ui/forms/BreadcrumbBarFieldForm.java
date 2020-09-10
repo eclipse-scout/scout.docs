@@ -18,7 +18,6 @@ import org.eclipse.scout.rt.client.ui.basic.breadcrumbbar.BreadcrumbItems;
 import org.eclipse.scout.rt.client.ui.basic.breadcrumbbar.IBreadcrumbItem;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.breadcrumbbarfield.AbstractBreadcrumbBarField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -28,12 +27,12 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.widgets.client.ui.configuration.AbstractFormFieldConfigurationBox;
 import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.ConfigurationBox.BreadcrumbItemsField;
 import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.ExamplesBox.BreadcrumbBarField;
+import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.FormFieldPropertiesBox;
+import org.eclipse.scout.widgets.client.ui.forms.BreadcrumbBarFieldForm.MainBox.FormFieldPropertiesBox.BreadcrumbItemsField;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 
 @ClassId("3e5bc720-c6aa-4578-940b-530eed16052d")
 public class BreadcrumbBarFieldForm extends AbstractForm implements IPageForm {
@@ -50,8 +49,8 @@ public class BreadcrumbBarFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  public ConfigurationBox getConfigurationBox() {
-    return getFieldByClass(ConfigurationBox.class);
+  public FormFieldPropertiesBox getFormFieldPropertiesBox() {
+    return getFieldByClass(FormFieldPropertiesBox.class);
   }
 
   public ExamplesBox getExamplesBox() {
@@ -107,6 +106,12 @@ public class BreadcrumbBarFieldForm extends AbstractForm implements IPageForm {
 
       @ClassId("97037042-45f7-4901-9e96-fd86e2dc2041")
       public class BreadcrumbBarField extends AbstractBreadcrumbBarField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("BreadcrumbBarField");
+        }
+
         @Override
         protected void execBreadcrumbItemAction(IBreadcrumbItem breadcrumbItem) {
           MessageBoxes.createOk()
@@ -118,16 +123,11 @@ public class BreadcrumbBarFieldForm extends AbstractForm implements IPageForm {
 
     @Order(20)
     @ClassId("f53f7cb5-8784-43f6-a73f-2c4deef29b46")
-    public class ConfigurationBox extends AbstractFormFieldConfigurationBox {
+    public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
 
       @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Configure");
-      }
-
-      @Override
-      protected IFormField getTargetField() {
-        return getBreadcrumbBarField();
+      protected void execInitField() {
+        setField(getBreadcrumbBarField());
       }
 
       @Order(0)
