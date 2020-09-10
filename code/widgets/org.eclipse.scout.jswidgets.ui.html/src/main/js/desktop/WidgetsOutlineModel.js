@@ -17,6 +17,14 @@ export default function() {
       {
         objectType: 'PageWithNodes',
         leaf: true,
+        text: 'Breadcrumb Bar Field',
+        detailForm: {
+          objectType: 'jswidgets.BreadcrumbBarFieldForm'
+        }
+      },
+      {
+        objectType: 'PageWithNodes',
+        leaf: true,
         text: 'Button',
         detailForm: {
           objectType: 'jswidgets.ButtonForm'
