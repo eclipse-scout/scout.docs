@@ -1,0 +1,12 @@
+
+// TBD
+
+== Widget Enhancements
+
+=== New widget: BreadcrumbBarField
+
+The new breadcrumb bar widget allows to display a hierarchical structure in a horizontal style.
+Each breadcrumb item is clickable. The breadcrumb can automatically shrink if there is not enough place available.
+
+image::{rnimgsdir}/new_widget_breadcrumb_bar_field.png[]
+
