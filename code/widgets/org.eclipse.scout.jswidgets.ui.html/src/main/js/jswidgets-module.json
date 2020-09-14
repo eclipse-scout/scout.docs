@@ -1,5 +1,7 @@
 {
-  "files": [
+  "files"
+:
+  [
     "jswidgets/accordion/AccordionForm.json",
     "jswidgets/action/ActionPropertiesBox.json",
     "jswidgets/button/ButtonForm.json",
