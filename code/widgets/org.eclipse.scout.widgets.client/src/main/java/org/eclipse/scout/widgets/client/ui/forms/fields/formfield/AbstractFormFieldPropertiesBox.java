@@ -115,6 +115,31 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
     }
   }
 
+  @Order(3500)
+  @ClassId("98aab58d-6019-45ad-bf29-722f732b9525")
+  public class LabelUseUiWidthField extends AbstractBooleanField {
+
+    @Override
+    protected String getConfiguredLabel() {
+      return "Label use UI width";
+    }
+
+    @Override
+    protected boolean getConfiguredLabelVisible() {
+      return false;
+    }
+
+    @Override
+    protected void execChangedValue() {
+      m_field.setLabelUseUiWidth(getValue());
+    }
+
+    @Override
+    protected void execInitField() {
+      setValue(m_field.isLabelUseUiWidth());
+    }
+  }
+
   @Order(4000)
   @ClassId("cc327ed7-cc2f-4ca7-8775-8a2b4408dcb3")
   public class StatusVisibleField extends AbstractBooleanField {
