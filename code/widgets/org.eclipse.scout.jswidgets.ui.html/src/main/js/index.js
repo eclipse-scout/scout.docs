@@ -144,6 +144,7 @@ export {default as TreeForm} from './tree/TreeForm';
 export {default as TreePropertiesBox} from './tree/TreePropertiesBox';
 export {default as TreeBoxForm} from './treebox/TreeBoxForm';
 export {default as CheckableTreeStyleLookupCall} from './treebox/CheckableTreeStyleLookupCall';
+export {default as BreadcrumbBarFieldForm} from './breadcrumbbar/BreadcrumbBarFieldForm';
 
 import * as self from './index.js';
 

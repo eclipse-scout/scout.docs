@@ -30,12 +30,12 @@ export default () => ({
       labelVisible: false
     },
     {
-        id: 'PreventDoubleClickField',
-        objectType: 'CheckBoxField',
-        label: 'Prevent Double Click',
-        labelVisible: false
-      },
-      {
+      id: 'PreventDoubleClickField',
+      objectType: 'CheckBoxField',
+      label: 'Prevent Double Click',
+      labelVisible: false
+    },
+    {
       id: 'InheritAccessibilityField',
       objectType: 'CheckBoxField',
       label: 'Inherit Accessibility',

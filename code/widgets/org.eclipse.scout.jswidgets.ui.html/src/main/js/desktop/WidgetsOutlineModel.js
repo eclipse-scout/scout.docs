@@ -16,17 +16,17 @@ export default () => ({
     {
       objectType: 'PageWithNodes',
       leaf: true,
-      text: 'Button',
+      text: 'Breadcrumb Bar Field',
       detailForm: {
-        objectType: 'jswidgets.ButtonForm'
+        objectType: 'jswidgets.BreadcrumbBarFieldForm'
       }
     },
     {
       objectType: 'PageWithNodes',
       leaf: true,
-      text: 'Browser Field',
+      text: 'Button',
       detailForm: {
-        objectType: 'jswidgets.BrowserFieldForm'
+        objectType: 'jswidgets.ButtonForm'
       }
     },
     {
@@ -47,26 +47,11 @@ export default () => ({
     },
     {
       objectType: 'PageWithNodes',
-      expanded: true,
-      text: 'Custom Fields',
-      childNodes: [
-        {
-          objectType: 'PageWithNodes',
-          leaf: true,
-          text: 'Chart',
-          detailForm: {
-            objectType: 'jswidgets.ChartForm'
-          }
-        },
-        {
-          objectType: 'PageWithNodes',
-          leaf: true,
-          text: 'Watch Field',
-          detailForm: {
-            objectType: 'jswidgets.WatchFieldForm'
-          }
-        }
-      ]
+      leaf: true,
+      text: 'Custom Watch Field',
+      detailForm: {
+        objectType: 'jswidgets.CustomFieldForm'
+      }
     },
     {
       objectType: 'PageWithNodes',
