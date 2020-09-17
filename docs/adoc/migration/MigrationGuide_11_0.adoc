@@ -73,7 +73,22 @@ All 3rd party build- and runtime-dependencies have been updated to the latest ve
 
 If you are using the `jaxws-maven-plugin`, please change the groupId in your pom.xml files from `com.helger.maven` to `com.sun.xml.ws`.
 
-If you have Jax-Ws web service providers (this is the case if you use the `org.eclipse.scout.rt.server.jaxws.provider.annotation.WebServiceEntryPoint` annotation), the classpath of the annotation processor must be updated.
+In all your `web.xml` files update the `web-app` xml document element to:
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="true">
+...
+</web-app>
+----
+
+If you have Jax-Ws web service providers (this is the case if you use the `org.eclipse.scout.rt.server.jaxws.provider.annotation.WebServiceEntryPoint` annotation), the classpath of the annotation processor must be updated as described for each IDE:
 
 For Eclipse Developers: Update the content of all `.factorypath` files as follows:
 
