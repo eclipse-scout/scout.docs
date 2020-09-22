@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {arrays, Form, Status, MessageBoxes, models} from '@eclipse-scout/core';
+import {arrays, Form, MessageBoxes, models, Status} from '@eclipse-scout/core';
 import BreadcrumbBarFieldFormModel from './BreadcrumbBarFieldFormModel';
 
 export default class BreadcrumbBarFieldForm extends Form {
