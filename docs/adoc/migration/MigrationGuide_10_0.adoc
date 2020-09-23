@@ -95,19 +95,21 @@ Make sure to read the `JavaDoc` to understand what exactly you need to configure
 After the migration execution there are some manual post processing tasks that must be executed, see next chapter.
 
 === Build Stack Migration
+
 NOTE: Dependencies to other JS modules are defined in a package.json file and can be installed using https://www.npmjs.com/[NPM]. You will notice that sometimes the tool https://pnpm.js.org/[PNPM] will be mentioned. This is a different package manager also used by Scout itself to build the Scout modules. This results in slightly different tasks. If you don't know what to use yet we suggest starting with npm, you can always upgrade to pnpm (or maybe even https://yarnpkg.com[Yarn]) later.
 
 IMPORTANT: Depending on the type of application, you either have a *.ui.html module or a *.ui and an *.app module. The ui module typically contains the JS code and the app module the static resources (WebContent folder). If you only have one module it contains both. So if the guide tells you to do something in the .app module and you don't have one, do it in the .ui.html module instead.
 
 . Please do the <<Automatic Migration>> first even if you don't have any JS or CSS files in your project because it will also migrate your HTML files (e.g. index.html etc.).
-. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.8.0. Also update your Scout dependencies to the most recent Scout 10 version.
-. If you use GIT, create a file (or open the existing one) named `.gitignore` in the .ui module and the .app module (if available) and add the following content:
+. In the pom.xml of your parent project change the version of the parent maven_rt_plugin_config-master to 3.12.7. Additionally, update your Scout dependencies to the most recent Scout 10 version.
+. If you use Git, create a file (or open the existing one) named `.gitignore` in the .ui module and the .app module (if available) and add the following content:
 +
 ----
 node_modules
 dist
 test-results
 ----
+
 . If you only have a .ui module without an .app module (typical Scout Classic app), follow these steps. Otherwise skip this section and continue with the next step.
 .. Copy the following file to the root of your .ui.html module (replace the placeholder ${simpleArtifactName} with your application name and ${version} with your application version): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui.html/package.json?h=releases/10.0[package.json]
 .. Copy the following file to the root of the .ui.hml module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui.html/webpack.config.js?h=releases/10.0[webpack.config.js]
@@ -115,7 +117,7 @@ test-results
 .. Copy the following file to the root of the .ui module (replace the placeholders ${simpleArtifactName} with your application name and ${version} with your application version): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/package.json?h=releases/10.0[package.json]
 .. Copy the following file to the root of the .ui module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/webpack.config.js?h=releases/10.0[webpack.config.js]
 .. Copy the following file to the root of the .app module (replace the placeholders ${simpleArtifactName} with your application name, ${version} with your application version and ${rootArtifactId} with the root module name): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.app/package.json?h=releases/10.0[package.json] +
- If you use pnpm, referencing other npm modules in the same workspace is easier. In that case you should replace "file:../${rootArtifactId}.ui/" with the version of your .ui module (e.g. 1.0.0-snapshot).
+If you use pnpm, referencing other npm modules in the same workspace is easier. In that case you should replace "file:../${rootArtifactId}.ui/" with the version of your .ui module (e.g. 1.0.0-snapshot).
 .. Copy the following file to the root of the .app module (replace the placeholder ${simpleArtifactName} with your application name): link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.app/webpack.config.js?h=releases/10.0[webpack.config.js].
 If you have JavaScript tests, copy the following file to the root of the .ui module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/karma.conf.js?h=releases/10.0[karma.conf.js]
 . Copy the following file to the directory src/test/js of the .ui module: link:https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-hellojs-app/src/main/resources/archetype-resources/%5F%5FrootArtifactId%5F%5F.ui/src/test/js/test-index.js?h=releases/10.0[test-index.js]
@@ -166,7 +168,7 @@ If you had multiple custom `\*-macro.js` or `*-macro.less files` there may still
 . If there are any build errors, fix them manually. The migration application might not fix every possible code correctly.
 . In the terminal of the .ui module run the following command: `npm run testserver:start`. This executes the Jasmine Specs in a Chrome browser (Chrome must be installed locally, the same applies to ChromeHeadless if running the build in a CI environment, see <<Build / Continuous Integration>>).
 . Now it is time to start your app! +
-  Since you already ran `npm run build:dev` all the required JS and CSS files should be created and you can start the UI server using your existing launch file. If you now use IntelliJ you need to create a run configuration that uses `JettyServer` as main class (have a look at your Eclipse launch file for details).
+Since you already ran `npm run build:dev` all the required JS and CSS files should be created and you can start the UI server using your existing launch file. If you now use IntelliJ you need to create a run configuration that uses `JettyServer` as main class (have a look at your Eclipse launch file for details).
 . If you like, you can create a launch group that start the JS build and the UI server together.
 Have a look at the Scout archetype for an example (the new Scout Project wizard in Eclipse uses the archetype).
 . Test all your html files (index.html, login.html, logout.html etc.) and all your themes (dark, custom). If everything looks fine, you are done. If not, have a look at the <<Troubleshooting>> section.
