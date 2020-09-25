@@ -43,11 +43,9 @@ Beside bugfixes, these service releases may even contain some minor features.
   === API CHANGES IN JAVA CODE ================================================
   =============================================================================
 ////
-== API Changes (Java)
+// == API Changes (Java)
 
-=== First Change
-
-TODO
+// === First Change
 
 ////
   =============================================================================
@@ -55,11 +53,9 @@ TODO
   =============================================================================
 ////
 
-== API Changes (JavaScript)
+// == API Changes (JavaScript)
 
-=== First Change
-
-TODO
+// =)= First Change
 
 ////
   =============================================================================
@@ -134,3 +130,24 @@ For IntelliJ IDEA Developers: Update the content of the element `<annotationProc
   ...
 </profile>
 ----
+
+== New ESLint Settings
+
+The eslint rules used by Scout have been adjusted.
+So if you have a dependency to `@eclipse-scout/eslint-config` and you update to the latest version,
+your JavaScript code may report some new warnings.
+
+The following rules have been turned on:
+`no-var`, `prefer-arrow-callback`,`prefer-rest-params`, `prefer-spread`.
+
+If you don't like the warnings, you can adjust your `eslintrc.js` and disable the rules.
+But we suggest migrating your code because it really benefits from using these new ES6 features.
+
+Luckily, eslint provides an automatic fix for the first two.
+Just run the following command in the root of your project:
+
+ node_modules/.bin/eslint . --fix
+
+You may also need to ignore some files or folders first, just add them to the `.eslintignore` file.
+
+`prefer-rest-params` and `prefer-spread` need a manual migration, unless you choose to disable them.
