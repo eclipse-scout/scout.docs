@@ -87,6 +87,7 @@ You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jet
 Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
 
 === Demo Applications
+
 The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
@@ -96,13 +97,169 @@ If you just want to play around with them without looking at the source code, yo
 * https://scout.bsi-software.com/jswidgets/
 
 // ----------------------------------------------------------------------------
+
+== Mobile Improvements
+
+=== Default Detail Form and Tile Overview
+
+When no page is selected, the desktop client shows the default detail form, or if not available, the tile outline overview.
+This feature was disabled on mobile, until now.
+So if you startup your mobile Scout Classic app you will probably notice the new look.
+If you don't like it you can always disable it by not creating a default detail form (`Outline#createDefaultDetailForm`)
+or by setting `Outline#getConfiguredOutlineOverviewVisible` to false.
+
+image::{rnimgsdir}/outline_overview.png.png[]
+
+=== More Information in Outline
+
+Until now, the outline in mobile mode displayed the same summary cell as in desktop mode. Even though you
+could already create a custom summary cell for mobile, doing so is time-consuming.
+This is why we decided to implement a different strategy for mobile to compute a better summary cell.
+It is enabled by default so that every table page will benefit right away.
+
+image::{rnimgsdir}/mobile_summary_cell.png.png[]
+
+Since this new strategy is based on the new feature introduced for tables (<<Table: New Property 'compact'>>),
+it can be easily customized in the same way. If you don't like it you can return to the previous strategy
+by overriding `AbstractTable#createSummaryCellBuilder`, but why should you ;-) ?
+
+=== New Style for Views
+
+The device transformer now adjusts the style of a view so that it matches the style of a dialog.
+Also, the view tabs won't be visible anymore. This should give a more consistent look and should make it
+easier to use.
+
+image::{rnimgsdir}/mobile_view.png.png.png[]
+
+If you don't like that behavior, you can disable it in general or for specific forms:
+
+[source,Java]
+----
+BEANS.get(IDeviceTransformationService.class).excludeFormTransformation(this, MobileDeviceTransformation.USE_DIALOG_STYLE_FOR_VIEW);
+----
+
+=== Fullscreen Dialogs
+
+The device transformer now sets the property `maximized` of dialogs to true so that every dialog will
+be displayed in full screen. See also <<Support Maximized>>.
+
+If you don't like that behavior, you can disable it in general or for specific forms:
+
+[source,Java]
+----
+BEANS.get(IDeviceTransformationService.class).excludeFormTransformation(this, MobileDeviceTransformation.MAXIMIZE_DIALOG);
+----
+
+=== Wizard: Improved Progress Field
+
+The progress visualization and step activation has been improved for smaller screens.
+
+=== New MobilePopup
+
+MobilePopup was only available on Scout JS but is now available for Scout Classic as well.
+A mobile popup slides in from the bottom. This is it, not more.
+It has already been used for search or tool forms on mobile.
+
+== New ESLint Settings
+
+The eslint rules used by Scout have been adjusted.
+So if you have a dependency to `@eclipse-scout/eslint-config` and you update to the latest version,
+your JavaScript code may report some warnings.
+
+The following rules have been turned on:
+`no-var`, `prefer-arrow-callback`,`prefer-rest-params`, `prefer-spread`.
+
+If you don't like the warnings, you can adjust your `eslintrc.js` and disable the rules.
+But we suggest to migrate your code because it really benefits from using these new ES6 features.
+
+Luckily, eslint provides an automatic fix for the first two.
+Just run the following command in the root of your project:
+
+ `node_modules/.bin/eslint . --fix`
+
+You may also need to ignore some files or folders first, just add them to the `.eslintignore` file.
+
+`prefer-rest-params` and `prefer-spread` need a manual migration, unless you choose to disable them.
+
+== Custom Webpack Config
+
+If you have a lot of themes, working on a less file can be frustrating since every theme will be built.
+To save time, it is now possible to control which themes should be built.
+To do so, create a `webpack.config.custom.js file` (which can be added to .gitignore because not every developer has the same preferences).
+Add the following content:
+
+[source,JavaScript]
+--
+const baseConfig = require('./webpack.config');
+module.exports = (env, args) => {
+  args.themes = args.themes || ['default'];
+  return baseConfig(env, args);
+};
+--
+
+To make this work your base webpack config needs to register the themes using the function baseConfig.addThemes:
+
+[source,JavaScript]
+--
+baseConfig.addThemes(config.entry, {
+  themes: args.themes,
+  availableThemes: ['default', 'dark'],
+  generator: name => [`yourapp-theme${name}`, `./src/main/js/yourapp-theme${name}.less`]
+});
+--
+
 == Widget Enhancements
 
-=== New widget: BreadcrumbBarField
+=== New Widget: BreadcrumbBarField
 
 The new breadcrumb bar widget allows to display a hierarchical structure in a horizontal style.
 Each breadcrumb item is clickable. The breadcrumb can automatically shrink if there is not enough place available.
 
 image::{rnimgsdir}/new_widget_breadcrumb_bar_field.png[]
 
+=== Table: New Property 'compact'
 
+It is now possible to set a table into compact mode.
+This will hide all columns and insert a new one containing the content of every other column.
+The content will be displayed vertically which means the cells of a row will be put below each other.
+This new style is perfect if the width of the table is limited (e.g. on a mobile phone).
+
+The table uses a so called `ITableCompactHandler` which does the conversion. If you don't like how
+the content is arranged you can easily control the conversion by adjusting the compact handler or by
+writing your own one.
+
+image::{rnimgsdir}/table_compact.png[]
+
+=== Menu: New Property 'textPosition'
+
+With this new property, the text can be positioned on the bottom of the icon
+
+image::{rnimgsdir}/menu_text_bottom.png.png[]
+
+=== Form
+
+==== Support Maximized
+
+The property `maximized` is an old property but had no effect with the current UI.
+With Scout 11 the property will finally be interpreted.
+Setting it to true on a dialog will make it use the whole screen.
+
+==== New Property `headerVisible`
+
+With this new property you can manually control whether the header should be visible.
+Until now it depended on the display hint property.
+This could be useful when embedding the form in a popup or another widget.
+
+=== Widget: ExecFocusIn, ExecFocusOut
+
+Every widget now supports focus event. You can either use a `WidgetListener` or implement `execFocusIn` and `execFocusOut`.
+The currently focused element is available using `IDesktop#getFocusedElement()`.
+
+Important: the focus tracking needs to be explicitly activated before it can be used.
+Just call `IDesktop#setTrackFocus(true)` to do so.
+And remember to deactivate it again once you don't need it anymore to not produce unnecessary requests.
+
+=== TabBox: Support for LabelVisible
+
+Setting the property `labelVisible` to false will now hide the tab area.
+Until now, the property had no effect for tab boxes.
