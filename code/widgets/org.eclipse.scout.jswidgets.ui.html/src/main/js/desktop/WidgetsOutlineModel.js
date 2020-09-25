@@ -32,6 +32,14 @@ export default () => ({
     {
       objectType: 'PageWithNodes',
       leaf: true,
+      text: 'Browser Field',
+      detailForm: {
+        objectType: 'jswidgets.BrowserFieldForm'
+      }
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
       text: 'Carousel',
       detailForm: {
         objectType: 'jswidgets.CarouselForm'
@@ -47,11 +55,26 @@ export default () => ({
     },
     {
       objectType: 'PageWithNodes',
-      leaf: true,
-      text: 'Custom Watch Field',
-      detailForm: {
-        objectType: 'jswidgets.CustomFieldForm'
-      }
+      expanded: true,
+      text: 'Custom Fields',
+      childNodes: [
+        {
+          objectType: 'PageWithNodes',
+          leaf: true,
+          text: 'Chart',
+          detailForm: {
+            objectType: 'jswidgets.ChartForm'
+          }
+        },
+        {
+          objectType: 'PageWithNodes',
+          leaf: true,
+          text: 'Watch Field',
+          detailForm: {
+            objectType: 'jswidgets.WatchFieldForm'
+          }
+        }
+      ]
     },
     {
       objectType: 'PageWithNodes',
