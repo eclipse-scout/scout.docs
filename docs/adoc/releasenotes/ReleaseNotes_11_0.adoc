@@ -71,6 +71,9 @@ Scout Runtime artifacts for JavaScript are distributed using npm:
 
 ==== IDE Tooling (Scout SDK)
 
+Starting with Scout 11 the IDE Tooling requires at least Java 11 to run.
+With the help of the SDK plugins you can still develop applications running with Java 8, but the IDE itself requires Java 11 or newer.
+
 Scout officially supports https://www.jetbrains.com/idea/[IntelliJ IDEA] and {scout-sdk-download-link}.
 
 ===== Eclipse
