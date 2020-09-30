@@ -55,7 +55,7 @@ Beside bugfixes, these service releases may even contain some minor features.
 
 // == API Changes (JavaScript)
 
-// =)= First Change
+// == First Change
 
 ////
   =============================================================================
@@ -151,3 +151,9 @@ Just run the following command in the root of your project:
 You may also need to ignore some files or folders first, just add them to the `.eslintignore` file.
 
 `prefer-rest-params` and `prefer-spread` need a manual migration, unless you choose to disable them.
+
+== TabBox: New Behavior of LabelVisible
+
+As already mentioned in the release notes, it is now possible to hide the tab box header with the property labelVisible.
+Since this had no effect in previous Scout versions you should check whether you accidentally set the property to false.
+The default of the property is true, so if the property was not set at all or set to true it will be fine.
