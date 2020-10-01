@@ -34,6 +34,8 @@ import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationClosableField;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationHtmlEnabled;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationStatusField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationTextField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.ResponsiveField;
@@ -207,11 +209,22 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     return getFieldByClass(NotificationTextField.class);
   }
 
+  public NotificationClosableField getNotificationClosableField() {
+    return getFieldByClass(NotificationClosableField.class);
+  }
+
+  public NotificationHtmlEnabled getNotificationHtmlEnabledField() {
+    return getFieldByClass(NotificationHtmlEnabled.class);
+  }
+
   protected void handleNotificationChanged() {
     Integer severity = getNotificationStatusField().getValue();
     if (severity != null) {
       String message = getNotificationTextField().getValue() != null ? getNotificationTextField().getValue() : "";
-      getVerticalMonthsBox().setNotification(new Notification(new Status(message, severity)));
+      Notification notification = new Notification(new Status(message, severity),
+          getNotificationClosableField().getValue(),
+          getNotificationHtmlEnabledField().getValue());
+      getVerticalMonthsBox().setNotification(notification);
     }
     else {
       getVerticalMonthsBox().removeNotification();
@@ -744,6 +757,11 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
         }
 
         @Override
+        protected void execInitField() {
+          setValue("I'm a notification.");
+        }
+
+        @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
           return NotificationStatusField.class;
         }
@@ -764,12 +782,50 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
         }
       }
 
+      @Order(30)
+      @ClassId("a260af28-8947-48ab-a39f-f85d3371c19a")
+      public class NotificationClosableField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Notification Closable";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(false);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          handleNotificationChanged();
+        }
+      }
+
+      @Order(40)
+      @ClassId("7d1650f3-d225-4851-b35c-37652da3e4ef")
+      public class NotificationHtmlEnabled extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Notification HTML Enabled";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(false);
+        }
+
+        @Override
+        protected void execChangedValue() {
+          handleNotificationChanged();
+        }
+      }
+
       @Order(2000)
       @ClassId("cd6d2e17-36e0-47d8-9a2c-e382c730206a")
       public class ResponsiveField extends AbstractBooleanField {
         @Override
         protected String getConfiguredLabel() {
-          return "Responsive";
+          return TEXTS.get("VerticalLayout") + " Responsive";
         }
 
         @Override
