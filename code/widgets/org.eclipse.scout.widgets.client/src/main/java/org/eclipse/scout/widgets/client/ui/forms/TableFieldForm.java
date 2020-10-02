@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -31,10 +31,8 @@ import org.eclipse.scout.rt.client.ui.basic.table.AbstractTileTableHeader;
 import org.eclipse.scout.rt.client.ui.basic.table.CheckableStyle;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.GroupingStyle;
-import org.eclipse.scout.rt.client.ui.basic.table.HeaderCell;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.TableEvent;
 import org.eclipse.scout.rt.client.ui.basic.table.TableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractColumn;
@@ -1304,12 +1302,9 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               @Override
               protected void execAction() {
                 String seconds = DateUtility.format(new Date(), "ss");
-                Table table = getTableField().getTable();
-                NameColumn column = table.getNameColumn();
-                ((HeaderCell) column.getHeaderCell()).setText("Dynamic text " + seconds);
-                TableEvent event = new TableEvent(table, TableEvent.TYPE_COLUMN_HEADERS_UPDATED);
-                event.setColumns(table.getColumns());
-                table.fireTableEventInternal(event);
+                NameColumn column = getNameColumn();
+                column.getHeaderCell().setText("Dynamic text " + seconds);
+                getTable().getColumnSet().updateColumn(column);
               }
 
               @Override
