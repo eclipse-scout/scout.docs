@@ -220,11 +220,13 @@ public class PersonForm extends AbstractForm {
   @Order(10)
   @ClassId("27a040ac-eac5-47c6-a826-572633b9d4ef")
   public class MainBox extends AbstractGroupBox { // <1>
+    //end::layout[]
 
     @Override
     protected void injectMenusInternal(OrderedCollection<IMenu> menus) {
       BEANS.get(ContactsHelper.class).injectReadOnlyMenu(menus);
     }
+    //tag::layout[]
 
     @Order(10)
     @ClassId("08832a97-8845-4ff4-8dfd-c29366c22742")
@@ -894,11 +896,11 @@ public class PersonForm extends AbstractForm {
         getFirstNameField().getValue(),
         getLastNameField().getValue());
   }
-  // tag::handler[]
+  // end::handler[]
   // tag::structure[]
-  // tag::init[]
   // tag::validate[]
+  // tag::init[]
 }
 // end::validate[]
 // end::structure[]
-// tag::init[]
+// end::init[]
