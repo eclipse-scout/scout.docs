@@ -157,3 +157,20 @@ You may also need to ignore some files or folders first, just add them to the `.
 As already mentioned in the release notes, it is now possible to hide the tab box header with the property labelVisible.
 Since this had no effect in previous Scout versions you should check whether you accidentally set the property to false.
 The default of the property is true, so if the property was not set at all or set to true it will be fine.
+
+== SmartColumns: New Behavior of PrepareLookupCall Events
+
+Upto version 10.0 no prepareLookupCall event has been triggered when doing key lookup calls for cells inside `SmartColumns`. These key lookup calls are for example relevant for initally
+loading the values of the cells inside the column. Starting from version 11.0 a key lookup call always triggers a prepareLookupCall events.
+
+=== New property event.row
+
+The property row was given to the prepareLookupCall event in `SmartColumns`. There are a few things to consider:
+
+* The property `selectedRow` from `Table` must not be used anymore when a reference to the selected row is needed.
+Instead, `event.row` should be used to find the selected row.
+* `event.row` can be `null` or `undefined`. The latter is for example the case when initially loading the values from
+the cells inside the column.
+* Batch lookup calls have no property `event.row` when triggering the prepareLookupCall event.
+Hence, if your prepareLookupCall event depends on the selected row during key lookups,
+you should set the property `batch: false` inside the corresponding lookupCall of your `ConfigFormModel.js` file.
