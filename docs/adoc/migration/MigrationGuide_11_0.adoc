@@ -152,6 +152,16 @@ You may also need to ignore some files or folders first, just add them to the `.
 
 `prefer-rest-params` and `prefer-spread` need a manual migration, unless you choose to disable them.
 
+== Removal of module `@eclipse-scout/testing`
+
+The code of Node module `@eclipse-scout/testing` has been moved into `@eclipse-scout/core/src/testing` because in the past these two modules had cyclic dependencies.
+Now the testing helper code can be found in the core module (`@eclipse-scout/core`) within the `src/testing` folder. The `@eclipse-scout/testing` module has been deleted.
+
+Migration:
+
+* Remove `@eclipse-scout/testing` from your package.json files
+* Change the JavaScript imports from `... from '@eclipse-scout/testing';` to `... from '@eclipse-scout/core/src/testing/index';`.
+
 == TabBox: New Behavior of LabelVisible
 
 As already mentioned in the release notes, it is now possible to hide the tab box header with the property labelVisible.

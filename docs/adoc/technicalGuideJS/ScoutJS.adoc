@@ -1096,7 +1096,7 @@ The file `test-index.js` defines where your unit tests are and what the context 
 [source,javascript]
 .karma.conf.js
 ----
-import {JasmineScout} from '@eclipse-scout/testing';
+import {JasmineScout} from '@eclipse-scout/core/src/testing/index';
 
 let context = require.context('./', true, /[sS]pec\.js$/);
 JasmineScout.runTestSuite(context);
