@@ -26,4 +26,5 @@ To learn more about the wizards and the editor support follow the links provided
 * <<sdk_editor_nls.adoc#, NLS Editor>>
 
 '''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

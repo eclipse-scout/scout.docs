@@ -17,4 +17,5 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
 
+:_footer-link-path: build/scout_releasenotes/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
