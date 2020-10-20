@@ -48,4 +48,5 @@ In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will crea
 '''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

@@ -22,7 +22,7 @@ In this chapter we will create the "`Contacts`" Scout application.
 The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application.
 
 The application is kept small enough to complete this tutorial within less than a day.
-An extended version of "`Contacts`" is available as a Scout sample application on git-link:code/contacts/[Github].
+An extended version of "`Contacts`" is available as a Scout sample application on link:https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
 
 As a prerequisite to this tutorial we assume that the reader has successfully completed the chapters "Hello World Tutorial" and "Import the Scout Demo Applications" as described in the Eclipse Scout user guide.
 To access the Scout user guide help hit kbd:[F1] in the Eclipse IDE.

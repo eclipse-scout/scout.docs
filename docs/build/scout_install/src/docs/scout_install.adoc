@@ -31,4 +31,5 @@ include::{mdledir}/InstallAndVerifyScout.adoc[]
 With your working Scout installation you are now ready to create your first Scout application.
 Go ahead and follow the '`Hello World!`' tutorial.
 
+:_footer-link-path: build/scout_install/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

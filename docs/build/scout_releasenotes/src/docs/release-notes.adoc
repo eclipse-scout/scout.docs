@@ -20,4 +20,5 @@ Looking for something else? Visit https://eclipsescout.github.io for all Scout r
 
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
 
+:_footer-link-path: build/scout_releasenotes/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

@@ -54,4 +54,5 @@ include::{mdledir}/technicalGuide/HtmlUi.adoc[]
 
 include::{mdledir}/BookCopyright.adoc[]
 
+:_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

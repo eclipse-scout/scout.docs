@@ -23,4 +23,5 @@ Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#, NLS Entry W
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]
