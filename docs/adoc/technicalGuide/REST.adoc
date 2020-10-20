@@ -177,6 +177,10 @@ This module adds a set of Jackson additions in order to use the Jackson library 
     <artifactId>jersey-container-servlet-core</artifactId>
 </dependency>
 <dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
+</dependency>
+<dependency>
     <groupId>org.glassfish.jersey.media</groupId>
     <artifactId>jersey-media-json-jackson</artifactId>
 </dependency>
@@ -224,7 +228,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 === REST Cancellation Support ===
 
-REST and the underlying HTTP protocol do not provide an explicit way to cancel running requests. Typically, a client terminates its connection to the HTTP server if it is no 
+REST and the underlying HTTP protocol do not provide an explicit way to cancel running requests. Typically, a client terminates its connection to the HTTP server if it is no
 longer interested in the response. REST resources would have to monitor TCP connections and interpret a close as cancellation. Depending on the abstraction of the REST
 framework, connection events are not passed through and the cancellation is only recognized when the response is written to the closed connection. Until this happens,
 however, backend resources are used unnecessarily.
@@ -269,7 +273,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 Requests arriving at the backend need to be registered in the cancellation registry. This is done by a servlet filter (Note: REST
 container filters would have two issues: 1. there is no real interceptor around the resource call, but only a `ContainerRequestFilter` that is
 invoked before and a `ContainerResponseFilter` which is invoked after the the request is passed to the resource. 2. Cancellation in
-Scout is tied to an `ITransaction` that are managed by a `RunContext` and observed and controlled by a `RunMonitor`. Depending on 
+Scout is tied to an `ITransaction` that are managed by a `RunContext` and observed and controlled by a `RunMonitor`. Depending on
 sub-RunContexts and their transaction isolation it might happen, that the transaction visible in a container filter is not controlled by the
 currently active `RunMonitor`. Therefore, a cancel request would not cancel the transaction.)
 
