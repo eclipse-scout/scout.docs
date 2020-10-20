@@ -17,4 +17,5 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 include::{mdledir}/migration/MigrationGuide.adoc[]
 
+:_footer-link-path: build/scout_migration/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

@@ -1,2 +1,2 @@
 
-TIP: Do you want to improve this document? Have a look at the git-link:self[link-text='sources'] on GitHub.
+TIP: Do you want to improve this document? Have a look at the link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob/{git-branch}/docs/{_footer-link-path}[sources] on GitHub.
