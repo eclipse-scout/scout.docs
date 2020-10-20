@@ -26,4 +26,5 @@ include::_UsefulUtilities.adoc[]
 include::_JavaBasics.adoc[]
 include::_EclipseBasics.adoc[]
 
+:_footer-link-path: build/book_scout_frontend/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
