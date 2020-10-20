@@ -66,4 +66,5 @@ image::scout_sdk_super_class_proposals.png[]
 - [ ] Create a new Web Service (Ctrl+N) Consumer for WSDL http://services.nexus6studio.com/StockQuoteService.asmx?wsdl and verify that it is created correctly (no compilation errors)
 
 
+:_footer-link-path: build/scout_sdk_tests/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

@@ -23,7 +23,7 @@ The persistence of entered data is achieved via simple JDBC access to a Derby da
 It is recommended that you first import the full "`Contacts`" demo application as described in the Eclipse Scout User Guide into a separate workspace.
 This gives you the possibility to check your source code against the full implementation during the various steps of the tutorial.
 Alternatively, you can also view the source code of the "`Contacts`" demo application on Github.footnote:[
-"`Contacts`" on git-link:code/contacts/[Github].
+"`Contacts`" on link:https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
 ].
 
 Figure <<img-app_contacts_personpage>> below shows the "`Contacts`" application after connecting to the Scout UI application.

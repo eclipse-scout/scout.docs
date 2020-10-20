@@ -71,11 +71,6 @@
           <version>${asciidoctor.maven.plugin.version}</version>
           <dependencies>
             <dependency>
-              <groupId>com.bsiag.asciidoctorj</groupId>
-              <artifactId>gh-edit</artifactId>
-              <version>3.0.0</version>
-            </dependency>
-            <dependency>
               <groupId>org.jruby</groupId>
               <artifactId>jruby-complete</artifactId>
               <version>${jruby.version}</version>
