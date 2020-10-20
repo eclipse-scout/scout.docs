@@ -30,12 +30,14 @@ org.eclipse.scout.hellojs.ui.html/pom.xml
   <dependency>
     <groupId>org.glassfish.jersey.containers</groupId>
     <artifactId>jersey-container-servlet-core</artifactId>
-    <version>2.25.1</version>
+  </dependency>
+  <dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
   </dependency>
   <dependency>
     <groupId>org.glassfish.jersey.media</groupId>
     <artifactId>jersey-media-json-jackson</artifactId>
-    <version>2.25.1</version>
   </dependency>
 </dependencies>
 ----
