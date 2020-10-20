@@ -21,4 +21,5 @@ include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
 '''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
 
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

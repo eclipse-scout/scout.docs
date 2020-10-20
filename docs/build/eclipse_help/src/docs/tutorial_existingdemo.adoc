@@ -140,4 +140,5 @@ This page is implemented in class [java]+PersonTablePage+ and the dialog to show
 This is the end of the <<tutorial.html#tutorial, getting started>> guide.
 
 '''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

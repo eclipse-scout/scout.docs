@@ -24,4 +24,5 @@ include::_OneDayTutorial.adoc[]
 include::{mdledir}/BookCopyright.adoc[]
 include::{mdledir}/BookScoutInstallation.adoc[]
 
+:_footer-link-path: build/beginners_guide/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
