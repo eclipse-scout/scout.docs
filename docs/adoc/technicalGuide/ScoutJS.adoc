@@ -10,6 +10,7 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 == Scout JS
+
 Scout JS is the technology used by Scout to render your application. The client model defined using Java code is sent to the browser where Scout JS comes into action by taking that model and generating HTML elements.
 
-But Scout JS is a lot more: it can be used to create applications without having a Java based client model at all. You can find out more about Scout JS and its concepts in the https://eclipsescout.github.io/10.0/technical-guide-js.html[Technical Guide for Scout JS].
+But Scout JS is a lot more: it can be used to create applications without having a Java based client model at all. You can find out more about Scout JS and its concepts in the https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html[Technical Guide for Scout JS].
