@@ -41,4 +41,5 @@ http://www.eclipse.org/forums/eclipse.scout[Scout Forum]
 
 We wish you all the best on your journey with Scout and hope to hear from you in the Scout forum.
 
+:_footer-link-path: build/scout_helloworld/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
