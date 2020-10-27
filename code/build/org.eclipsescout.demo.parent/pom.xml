@@ -20,7 +20,6 @@
   <name>Eclipse Scout Demo</name>
 
   <modules>
-    <module>../../bahbah/org.eclipsescout.demo.bahbah.parent</module>
     <module>../../contacts/org.eclipse.scout.contacts</module>
     <module>../../widgets/org.eclipse.scout.widgets</module>
     <module>../../org.eclipse.scout.docs.snippets</module>

@@ -141,7 +141,7 @@ The new handler does not need to be registered anywhere. It is available via jan
 [source,java,indent=0]
 .Notification Handler for `MessageNotifications`
 ----
-include::{codedir}/bahbah/org.eclipsescout.demo.bahbah.client/src/main/java/org/eclipsescout/demo/bahbah/client/MessageNotificationHandler.java[tags=notificationHandler]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=notificationHandler]
 ----
 
 ==== Handling Notifications Temporarily
@@ -170,7 +170,7 @@ If the scout model needs to be updated when handling notifications, a model job 
 [source,java,indent=0]
 .Notification Handler Creating Model Job
 ----
-include::{codedir}/bahbah/org.eclipsescout.demo.bahbah.client/src/main/java/org/eclipsescout/demo/bahbah/client/MessageNotificationHandler.java[tags=handleNotification]
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/notification/MessageNotificationHandler.java[tags=handleNotification]
 ----
 
 TIP: Make sure to always run updates to the scout models in a model job (forms, pages, ...): Use ModelJobs.schedule(...) where necessary in notification handlers.
