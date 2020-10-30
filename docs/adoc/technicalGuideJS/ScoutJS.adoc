@@ -594,11 +594,11 @@ You must implement these methods. Start with creating a sub class of `LookupCall
 
 Note that the lookup call works with _Deferreds_. This means the lookup call runs in the background and does not block the UI. When the lookup call is done eventually the Deferred is resolved and the Smart Field will process the result returned by the lookup call.
 
-
 == Styling
+
 Beside JavaScript for business logic and for the models, every Scout JS app probably needs some CSS code at some point in time. If you are writing custom widgets, you need it for sure. But also if you are just using the given widgets you might have the need to adjust the look here and there.
 
-Scout uses LESS as CSS preprocessor. It has a lot of advantages to pure CSS: variables, mixins, functions, imports etc. If you use the default build infrastructure provided by Scout, you cannot only use LESS easily without getting a headache on how to integrate it in your build system, you get access to all the LESS constructs used by Scout itself. This means you can use variables for colors, icons and sizes, mixins for animations and to avoid browser specific prefixes. You can import whole Scout LESS files for your custom themes and you get a lot of sample code in the Scout code base because Scout itself uses the same concepts.
+Scout uses https://github.com/less/less.js[LESS] as CSS preprocessor. It has a lot of advantages to pure CSS: variables, mixins, functions, imports etc. If you use the default build infrastructure provided by Scout, you cannot only use LESS easily without getting a headache on how to integrate it in your build system, you get access to all the LESS constructs used by Scout itself. This means you can use variables for colors, icons and sizes, mixins for animations and to avoid browser specific prefixes. You can import whole Scout LESS files for your custom themes and you get a lot of sample code in the Scout code base because Scout itself uses the same concepts.
 
 In order to get started you need a place to put all your LESS code. The recommendation is to create one LESS file for each widget. That means if your widget is called `MyWidget.js` you would create a file called `MyWidget.less`. Even if you adjust the look of an existing widget you can create a file called let's say `StringField.less` and put the rules there. If you only have a few rules or non widget specific rules you can create a file called `main.less` and put them there. However, these are only recommendations, you can always do it as you like.
 
@@ -913,7 +913,7 @@ Example:
 
 Output:
 
-  <base href="bsicrm_16_1/">
+  <base href="helloworld_1_0/">
 
 === scout:include
 This tag is used for server-side inlcudes, which means you can embed the HTML content of another file into the current HTML document. This avoids unnecessary code duplication by referencing the same fragement in multiple HTML documents.
@@ -934,7 +934,12 @@ Output:
   <scout-text data-key="ui.Login" data-value="Anmelden"></scout-text>
 
 === scout:script
-Converts the tag to a regular `script` tag in the HTML document so that the referenced JavaScript bundle can be loaded by the browser. Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix ".min" is appended to the filename.
+
+Converts the tag to a regular `script` tag in the HTML document so that the referenced JavaScript bundle can be loaded by the browser.
+Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename.
+If minifying is enabled the suffix ".min" is appended to the filename.
+
+This tag may be used if custom chunks are defined in `webpack.config.js` and names of these chunks are known at development time.
 
 Example:
 
@@ -944,7 +949,23 @@ Output:
 
   <script src="yourapp-98aea5b3.min.js"></script>
 
+=== scout:scripts
+
+Writes all `script` tags in the HTML document which contain the webpack entryPoint name given. This requires that no custom splitChunks are defined.
+It automatically includes all chunks that are required by the given entry point. The entry point name must match the name in the `entry` section of the `webpack.config.js` file.
+
+Example:
+
+  <scout:scripts entryPoint="yourapp"/>
+
+Output:
+
+  <script src="vendors~yourapp~login~logout-546ee42899f2ccc6205f.min.js"></script>
+  <script src="yourapp-3b5331af613bf5a7803d.min.js"></script>
+  <script src="vendors~yourapp-945482a5b2d8d312fd1b.min.js"></script>
+
 === scout:stylesheet
+
 Converts the tag to a regular `style` tag in the HTML document so that the referenced CSS bundle can be loaded by the browser. Prior to that, the file name will be augmented depending on Scout's runtime properties: if caching is enabled an additional fingerprint is added to the filename. If minifying is enabled the suffix "-min" is appended to the filename.
 
 Example:
@@ -1012,20 +1033,12 @@ If you don't like the defaults you can easily adjust them by customizing the obj
 Beside using the default configuration, you'll need to configure some small things in order to make your application work. In this chapter we'll have a look at these things you have to configure and the things that are provided by default.
 
 ==== Bundling
-The main purpose of Webpack is to bundle the many small source files into one or a few larger JavaScript or Less files which are included in the HTML files as `<script>` resp. `<style>` tags and therefore loaded by the browser. There are a lot of different strategies and opinions on how to bundle correctly. If you have a strong opinion about it you can use your own bundling strategy. If not you should be fine with the Scout defaults which are as follows:
 
-There are 4 JavaScript bundles:
+The main purpose of Webpack is to bundle the many small source files into one or a few larger JavaScript or CSS files which are included in the HTML files as `<script>` resp. `<style>` tags and therefore loaded by the browser.
 
-- `eclipse-scout.js`: contains all official Scout code (from modules with scope @eclipse-scout).
-- `jquery.js`: contains the jQuery code.
-- `vendors.js`: contains all other third party code (libraries in the node_modules folder). This file is only created if you have other third party code. This is not the case for a newly created Scout app so your index.html may not include it yet.
-- `your-app.js`: contains all the code from your app.
-
-There are some reasons why we chose this strategy:
-
-- Optimal caching: the bundles can be reused by different HTML files, e.g. `eclipse-scout.js` and `jquery.js` can be used by `index.html`, `login.html` and `logout.html`. The browser only has to load the files once and can reuse them for the other HTML pages.
-- Keep it simple: we think that this approach is simple to understand.
-- Security: the login page should only load the code it needs to display the login page and should not reveal the application code. That is why `login.html` includes its own entry point (`login.js`) and does not use `your-app.js`.
+Scout does not provide any special bundling rules, but relies on the Webpack default configuration.
+It is optimized for best performance and user experience on modern browsers.
+If you want to customize the bundling please have a look at the https://webpack.js.org/plugins/split-chunks-plugin/[SplitChunksPlugin] of Webpack.
 
 To let Webpack know about your entry files you need to specify them in your `webpack.config.js`.
 
@@ -1035,22 +1048,25 @@ To let Webpack know about your entry files you need to specify them in your `web
 const baseConfig = require('@eclipse-scout/cli/scripts/webpack-defaults');
 
 module.exports = (env, args) => {
-
+  const config = baseConfig(env, args);
   config.entry = {
     'helloworld': './src/main/js/index.js',
     'helloworld-theme': './src/main/js/theme.less',
     'helloworld-theme-dark': './src/main/js/theme-dark.less'
   };
-
   return config;
 };
 ----
 
-In this example the application is called `helloworld` and there is a bundle created with the same name. In order to create the bundle, Webpack uses the entry file, which is `index.js` in this case, follows all the ES 6 imports and includes these files. It then extracts chunks into separate files based on predefined rules. Scout already defines some rules in order to create 3 chunks mentioned above (eclipse-scout, jquery, vendors). So you don't have to care about these chunks unless you want to further split them (maybe extract your own framework code into a separate bundle).
+In this example the application is called `helloworld` and there is a bundle created with the same name.
+In order to create the bundle, Webpack uses the entry file, which is `index.js` in this case, follows all the ES 6 imports and includes these files.
+It then extracts chunks into separate files based on the predefined Webpack default rules.
+So you don't have to care about these chunks unless you want to customize it.
 
 Also notice that the same applies to CSS files. The above example defines 2 CSS bundles in addition to the JavaScript bundle: `helloworld-theme.css` and `helloworld-theme-dark.css`. There are no predefined chunks for CSS files, we just put all the CSS code in one big file.
 
 ==== Static Web Resources
+
 In addition to JavaScript and CSS resources bundled by webpack, your application will probably also require resources like images or fonts. Such resources should be placed in a resource folder, e.g. `src/main/resources/WebContent` if you use the Maven module structure, or just `res` otherwise. Because there are multiple modules that could provide such resources, you need to specify them in your `webpack.config.js` using the `resDir` array.
 
 [source,javascript]

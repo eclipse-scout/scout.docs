@@ -137,6 +137,52 @@ Migration:
 * Remove `@eclipse-scout/testing` from your package.json files
 * Change the JavaScript imports from `... from '@eclipse-scout/testing';` to `... from '@eclipse-scout/core/src/testing/index';`.
 
+== Automatic JavaScript Chunks
+
+Before Scout 11 JavaScript chunks have been declared explicitly.
+While you have full control on the output using this explicit definition, it is often not optimal concerning performance and might require modifications when a new module or library is added to the project.
+Therefore starting with version 11 Scout additionally supports automatic chunk creation for your JavaScript assets.
+
+When using this new feature (which is the default configuration now), chunks are automatically created based on size and code usage (JavaScript imports).
+Therefore, it is no longer necessary to list every chunk manually in the html file. Instead, Scout automatically inserts the necessary script tags according to the chunks created.
+
+=== Migration if you want to use automatic chunk creation (recommended)
+
+Replace all `scout:script` tags in your html files with a single `scout:scripts` tag (please note the extra "s" at the end). So instead of:
+
+[source,html]
+----
+<scout:script src="vendors.js"/>
+<scout:script src="jquery.js"/>
+<scout:script src="eclipse-scout.js"/>
+<scout:script src="yourApp.js"/>
+----
+
+replace it with:
+
+[source,html]
+----
+<scout:scripts entryPoint="yourApp"/>
+----
+
+The name to write in the `entryPoint` attribute is the same as used in the `entry` section of your `webpack.config.js` file. Typically you also have entries named `login` and `logout`.
+These are the names to put in the `entryPoint` attribute within the corresponding html file that should launch this entry point.
+
+Accordingly, the example html file above will include all chunks required by the webpack `entry` named `yourApp`.
+
+If you specified custom chunk cache groups in your webpack.config.js (e.g. by defining `config.optimization.splitChunks.cacheGroups.yourChunkName = {...}`), remove these chunk definitions.
+
+In your `web.xml` files remove the old chunk names (`/jquery*.js`, `/login*.js`, `/logout*.js`, `/eclipse-scout*.js`) from the `filter-exclude` values of the servlet filter.
+Instead, add new exclusions of the form `/\*entryPointName*.js` for each entry point that may be accessed without authentication.
+Typically, these are `/\*login*.js` and `/\*logout*.js`.
+
+=== Migration if you don't want to use automatic chunks (not recommended)
+
+As Scout no longer includes default chunks, you have to define all chunks in your project yourselves.
+
+* To include the old default Scout chunks copy the chunk definitions from the old https://git.eclipse.org/c/scout/org.eclipse.scout.rt.git/tree/eclipse-scout-cli/scripts/webpack-defaults.js?h=releases/10.0#n169[Scout defaults].
+* If you already have custom chunk definitions, you can keep them as they are.
+
 == TabBox: New Behavior of LabelVisible
 
 As already mentioned in the release notes, it is now possible to hide the tab box header with the property labelVisible.

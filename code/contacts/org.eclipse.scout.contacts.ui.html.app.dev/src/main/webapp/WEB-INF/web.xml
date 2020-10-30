@@ -36,11 +36,12 @@
         /favicon/*
         /fonts/*
         /logo.png
-        /jquery*.js
-        /login*.js
-        /logout*.js
+        /*login*.js
+        /*logout*.js
         /contacts-theme*.css
-        /eclipse-scout*.js
+        /*login*.js.map
+        /*logout*.js.map
+        /contacts-theme*.css.map
       </param-value>
     </init-param>
   </filter>
