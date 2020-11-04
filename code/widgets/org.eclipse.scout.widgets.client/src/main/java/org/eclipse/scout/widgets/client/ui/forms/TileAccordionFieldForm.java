@@ -45,7 +45,7 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.CollapseStyleLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
@@ -162,7 +162,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           SimpleTile tile = new SimpleTile();
           tile.setLabel("New tile " + m_tilesAddedCount++);
           tile.setGroup("Group A");
-          tile.setColorScheme(TileColorScheme.DEFAULT);
+          tile.setColorScheme(ColorScheme.DEFAULT);
           getAccordionField().getAccordion().addTile(tile);
         }
       }
@@ -185,7 +185,7 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           SimpleTile tile = new SimpleTile();
           tile.setLabel("New tile " + m_tilesAddedCount++);
           tile.setGroup("Group B");
-          tile.setColorScheme(TileColorScheme.ALTERNATIVE);
+          tile.setColorScheme(ColorScheme.ALTERNATIVE);
           getAccordionField().getAccordion().addTile(tile);
         }
       }
@@ -210,14 +210,14 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
             SimpleTile tile = new SimpleTile();
             tile.setLabel("New tile " + m_tilesAddedCount++);
             tile.setGroup("Group A");
-            tile.setColorScheme(TileColorScheme.DEFAULT);
+            tile.setColorScheme(ColorScheme.DEFAULT);
             tiles.add(tile);
           }
           for (int i = 0; i < 25; i++) {
             SimpleTile tile = new SimpleTile();
             tile.setLabel("New tile " + m_tilesAddedCount++);
             tile.setGroup("Group B");
-            tile.setColorScheme(TileColorScheme.ALTERNATIVE);
+            tile.setColorScheme(ColorScheme.ALTERNATIVE);
             tiles.add(tile);
           }
           getAccordionField().getAccordion().addTiles(tiles);
@@ -882,14 +882,14 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
       SimpleTile tile = new SimpleTile();
       tile.setLabel("Tile " + tileCount++);
       tile.setGroup("Group A");
-      tile.setColorScheme(TileColorScheme.DEFAULT);
+      tile.setColorScheme(ColorScheme.DEFAULT);
       tiles.add(tile);
     }
     for (int i = 0; i < 10; i++) {
       SimpleTile tile = new SimpleTile();
       tile.setLabel("Tile " + tileCount++);
       tile.setGroup("Group B");
-      tile.setColorScheme(TileColorScheme.ALTERNATIVE);
+      tile.setColorScheme(ColorScheme.ALTERNATIVE);
       tiles.add(tile);
     }
     getAccordionField().getAccordion().addTiles(tiles);

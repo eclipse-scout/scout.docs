@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.client.ui.tile.TileGridLayoutConfig;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.security.SecurityUtility;
-import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.AccordionFieldForm.MainBox.DetailBox;
@@ -272,7 +272,7 @@ public class AccordionFieldForm extends AbstractForm implements IAdvancedExample
       GridData gridDataHints = tile.getGridDataHints();
       gridDataHints.weightX = 0;
       tile.setGridDataHints(gridDataHints);
-      tile.setColorScheme(accordion.getGroupCount() * 2 == 0 ? TileColorScheme.DEFAULT : TileColorScheme.ALTERNATIVE);
+      tile.setColorScheme(accordion.getGroupCount() * 2 == 0 ? ColorScheme.DEFAULT : ColorScheme.ALTERNATIVE);
       tiles.add(tile);
     }
     TileGroup group = new TileGroup();

@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {StaticLookupCall, Tile} from '@eclipse-scout/core';
+import {colorSchemes, StaticLookupCall} from '@eclipse-scout/core';
 
 export default class ColorSchemeLookupCall extends StaticLookupCall {
 
@@ -21,7 +21,7 @@ export default class ColorSchemeLookupCall extends StaticLookupCall {
   }
 
   static DATA = [
-    [Tile.ColorSchemeId.DEFAULT, 'default'],
-    [Tile.ColorSchemeId.ALTERNATIVE, 'alternative']
+    [colorSchemes.ColorSchemeId.DEFAULT, 'default'],
+    [colorSchemes.ColorSchemeId.ALTERNATIVE, 'alternative']
   ];
 }
