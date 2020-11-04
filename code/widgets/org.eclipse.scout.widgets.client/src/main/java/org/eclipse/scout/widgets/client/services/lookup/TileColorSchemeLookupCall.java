@@ -14,23 +14,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.shared.data.tile.ITileColorScheme;
-import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
 @ClassId("8302e181-9a58-4e92-8bad-0cc20c35d45d")
-public class TileColorSchemeLookupCall extends LocalLookupCall<ITileColorScheme> {
+public class TileColorSchemeLookupCall extends LocalLookupCall<IColorScheme> {
 
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow<ITileColorScheme>> execCreateLookupRows() {
-    ArrayList<LookupRow<ITileColorScheme>> rows = new ArrayList<>();
-    rows.add(new LookupRow<>(TileColorScheme.DEFAULT, "default"));
-    rows.add(new LookupRow<>(TileColorScheme.DEFAULT_INVERTED, "default_inverted"));
-    rows.add(new LookupRow<>(TileColorScheme.ALTERNATIVE, "alternative"));
-    rows.add(new LookupRow<>(TileColorScheme.ALTERNATIVE_INVERTED, "alternative_inverted"));
+  protected List<LookupRow<IColorScheme>> execCreateLookupRows() {
+    ArrayList<LookupRow<IColorScheme>> rows = new ArrayList<>();
+    rows.add(new LookupRow<>(ColorScheme.DEFAULT, "default"));
+    rows.add(new LookupRow<>(ColorScheme.DEFAULT_INVERTED, "default_inverted"));
+    rows.add(new LookupRow<>(ColorScheme.ALTERNATIVE, "alternative"));
+    rows.add(new LookupRow<>(ColorScheme.ALTERNATIVE_INVERTED, "alternative_inverted"));
     return rows;
   }
 }

@@ -41,8 +41,8 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.shared.data.tile.ITileColorScheme;
-import org.eclipse.scout.rt.shared.data.tile.TileColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -677,14 +677,14 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
       @Order(20)
       @ClassId("a79b08d7-7a19-44fb-843f-455928d71861")
-      public class ColorSchemeField extends AbstractSmartField<ITileColorScheme> {
+      public class ColorSchemeField extends AbstractSmartField<IColorScheme> {
         @Override
         protected String getConfiguredLabel() {
           return "Color Scheme";
         }
 
         @Override
-        protected Class<? extends ILookupCall<ITileColorScheme>> getConfiguredLookupCall() {
+        protected Class<? extends ILookupCall<IColorScheme>> getConfiguredLookupCall() {
           return TileColorSchemeLookupCall.class;
         }
 
@@ -696,7 +696,7 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           TileGrid tileGrid = getTileField().getTileGrid();
-          ITileColorScheme colorScheme = TileColorScheme.DEFAULT;
+          IColorScheme colorScheme = ColorScheme.DEFAULT;
           if (tileGrid.getTiles().size() > 0) {
             colorScheme = getTileField().getTileGrid().getTiles().get(0).getColorScheme();
           }
