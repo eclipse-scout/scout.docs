@@ -183,6 +183,21 @@ As Scout no longer includes default chunks, you have to define all chunks in you
 * To include the old default Scout chunks copy the chunk definitions from the old https://git.eclipse.org/c/scout/org.eclipse.scout.rt.git/tree/eclipse-scout-cli/scripts/webpack-defaults.js?h=releases/10.0#n169[Scout defaults].
 * If you already have custom chunk definitions, you can keep them as they are.
 
+== Web Resource Resolver
+
+The `IWebResourceResolver` interface has been extended to return multiple resources instead of one.
+For this the methods now return `List<WebResourceDescriptor>` instead of `Optional<WebResourceDescriptor>`.
+
+If the `FilesystemWebResourceResolver` or the `ClasspathWebResourceResolver` has been replaced in your project, perform the following migration:
+
+* Adjust the return type of `getResourceImpl` to `Stream<URL>`.
+* Adapt the returned value depending on your implementation:
+** If the resolver observes different locations: return all resources found from all the locations.
+** If the resolver only uses one location: return a stream containing one element or an empty stream.
+
+You may use the inherited methods `resolveUrls` and `toUrl` if your resolver replaces the `FilesystemWebResourceResolver`.
+These methods may be handy to search for a relative path in one or multiple root directories.
+
 == TabBox: New Behavior of LabelVisible
 
 As already mentioned in the release notes, it is now possible to hide the tab box header with the property labelVisible.

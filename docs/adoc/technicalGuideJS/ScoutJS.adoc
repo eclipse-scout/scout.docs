@@ -1225,10 +1225,9 @@ In case you need to test the files built by `build:prod` locally, follow this pr
 
 * Stop the UI server.
 * Run `npm run build:prod`, this script will copy minified script files to the _/dist_ folder.
-* Copy _/dist/prod_ and _/dist/res_ to the folder _/target/classes_
 * Start the UI server. Stopping and starting the UI server makes sure the server-side script cache is cleared.
 * Start the application with the URL parameter `/?debug=false`.
-* Check your index.html in the browser. Each referenced script or CSS file should have a fingerprint, example: `eclipse-scout-2c6053b2fdf5b816fae5.min.js`.
+* Check your index.html in the browser. Each referenced script or CSS file should have a fingerprint, example: `yourapp-2c6053b2fdf5b816fae5.min.js`.
 
 === ESLint
 For the Scout code base we use https://eslint.org/[ESLint] to analyze the JavaScript code. The ruleset we use is stored in the module https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config]. If you like, you can use the same ruleset for your application, but you don't have to. You can use your custom config or even a different linter.
