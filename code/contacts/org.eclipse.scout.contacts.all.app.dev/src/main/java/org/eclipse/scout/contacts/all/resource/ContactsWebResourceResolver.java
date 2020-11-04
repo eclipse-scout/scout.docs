@@ -13,25 +13,26 @@ package org.eclipse.scout.contacts.all.resource;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.shared.ui.webresource.FilesystemWebResourceResolver;
 
 @Replace
-public class ContatctsWebResourceResolver extends FilesystemWebResourceResolver {
+public class ContactsWebResourceResolver extends FilesystemWebResourceResolver {
 
-  private final Path m_cortexRoot;
+  private final Path m_root;
 
-  protected ContatctsWebResourceResolver() {
-    m_cortexRoot = findCortexRoot();
+  protected ContactsWebResourceResolver() {
+    m_root = findRoot();
   }
 
   @Override
-  protected URL getResourceImpl(String resourcePath) {
-    return toUrl(m_cortexRoot.resolve(resourcePath));
+  protected Stream<URL> getResourceImpl(String resourcePath) {
+    return resolveUrls(m_root, resourcePath);
   }
 
-  protected static Path findCortexRoot() {
+  protected static Path findRoot() {
     Path workingDir = Paths.get("").toAbsolutePath();
     return workingDir.getParent().resolve("org.eclipse.scout.contacts.ui.html").resolve(OUTPUT_FOLDER_NAME);
   }
