@@ -897,7 +897,63 @@ Here's how the request for a Scout JS SmartField lookup call could look like. Yo
 }
 ----
 
+=== Chart
+
+A `Chart` visualizes data in several ways like bars, lines or a pie. The `Chart` has two main properties, a data and a config object.
+Imagine you are an ice cream shop, and you want to display how many scoops you sold in which month.
+
+The data object holds the data about the sold scoops, their flavours and the date you sold them.
+
+The config object defines how your chart should be styled, e.g. it should be a bar chart and the axes should get an extra label like 'month' and 'flavour'.
+
+Depending on the type that is set on the config object the `Chart` picks a renderer to display the chart. The renderer is now creating a `<canvas>`- or `<svg>`-element and renders the chart.
+Each time you update the data or the config it is rerendered.
+
+Most of the charts are rendered using https://www.chartjs.org/[chart.js] and the config object is handed over so you can use all properties chart.js provides to style your chart.
+In addition to the chart.js-properties we added custom properties, some of them only have an impact on certain charts:
+
+* `autoColor` Whether the colors should be computed automatically.
+* `colorScheme` A specific color scheme for the colors, also inverted ones are possible for dark backgrounds.
+* `transparent` Whether the chart should be transparent or opaque.
+* `maxSegments` Max. number of segments for radial charts like pie, doughnut, radar, polar area.
+* `clickable` Whether a chart is clickable.
+* `checkable` Whether a chart is checkable.
+* `otherSegmentClickable` Whether the consolidated others segment is clickable.
+* `legend.clickable` Whether the legend is clickable.
+* `scales.xLabelMap` and `scales.yLabelMap` Label mapping for discrete values.
+* `handleResize` Whether the chart should handle resizing itself (not necessary if the containers size is updated).
+* `numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.
+* `reformatLabels` Whether the data labels should be reformatted. It is assumed that data labels (incl. numeric labels) are correctly formatted. If one wants to have the data labels formatted using the number formatter, this flag can be used.
+Consider a bar chart and the x-axis displays the years 2010-2020, these labels should not be reformatted. However, if the x-axis displays the prices 250, 500, 750 and 1000, these labels should be reformatted to 250 €, 500 €, 750 € and 1.000 €.
+
+Bubble:
+
+* `bubble.sizeOfLargestBubble` The size to which the largest bubble is scaled.
+* `bubble.minBubbleSize` Min. size of a bubble.
+
+Fulfillment:
+
+* `fulfillment.startValue` Where the animation should start.
+
+Salesfunnel:
+
+* `salesfunnel.normalized` Defines if the bars should be rendered smaller from top to bottom or if they get a size according to their values.
+* `salesfunnel.calcConversionRate` Whether the conversion rate should be rendered.
+
+Speedo:
+
+* `speedo.greenAreaPosition` Define where the green area is located.
+
+Venn:
+
+* `venn.numberOfCircles` Between 1 and 3.
+
+The colors used for grid lines, axes, etc. and the auto colors for datasets can be overridden using CSS.
+
+For a more detailed example see link:{techdocjs}#how-to-create-a-chart[How to Create a Chart]
+
 == HTML Document Parser
+
 The HTML document parser is only available in the Scout UI server. If your Scout JS application uses a different backend, you cannot use the features described in this chapter.
 
 The class `HtmlDocumentParser` is used by the Scout UI server in order to create dynamic HTML output on the server-side. Like JSP the parser supports a set of tags that are processed by the sever. The main purpose of the parser is to provide functions used for `login.html` and `index.html`, like bootstrapping and  localization _before_ JavaScript can be executed in the browser.
@@ -905,6 +961,7 @@ The class `HtmlDocumentParser` is used by the Scout UI server in order to create
 Note: some tags like `scout-version` and `scout-text` will be removed from the DOM once the Scout `App` is initialized.
 
 === scout:base
+
 Outputs the context-path (or the root-directory) of the deployed web application as `base` tag in the HTML document.
 
 Example:

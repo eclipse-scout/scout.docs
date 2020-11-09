@@ -210,6 +210,30 @@ Each breadcrumb item is clickable. The breadcrumb can automatically shrink if th
 
 image::{rnimgsdir}/new_widget_breadcrumb_bar_field.png[]
 
+=== Chart
+
+The new chart widget allows visualizing data in several ways. It can be used inside a chart field, a chart tile or as a plain chart.
+The supported chart types include bar (vertical and horizontal), line, bar and line combined, pie, doughnut, bubble, polar area, radar, fulfillment, salesfunnel, speedo and venn.
+All charts support different color schemes and themes.
+
+.Pie chart in a tile using the default color scheme.
+image::{rnimgsdir}/pieTileDefault.png[]
+.Combined bar line chart in a tile using the alternative inverted color scheme.
+image::{rnimgsdir}/comboBarLineTileAlternativeInverted.png[]
+.Bubble chart using the rainbow color scheme and the dark theme.
+image::{rnimgsdir}/bubbleRainbowDarkTheme.png[]
+
+There are numerous styling options, e.g. tension and fill for line and radar charts, stacked bar charts or a transparent and a checkable mode.
+
+.Tension and fill for line charts.
+image::{rnimgsdir}/lineDefaultTensionFill.png[]
+.Stacked horizontal bar chart.
+image::{rnimgsdir}/barHorizontalRainbowStacked.png[]
+.Checkable bubble chart.
+image::{rnimgsdir}/bubbleTileDefaultCheckable.png[]
+
+For more information about the chart widget see link:{techdocjs}#chart[Technical Guide for Scout JS].
+
 == Widget Enhancements
 
 === Table: New Property 'compact'
