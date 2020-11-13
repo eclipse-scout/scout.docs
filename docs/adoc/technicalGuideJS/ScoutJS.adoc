@@ -950,7 +950,7 @@ Venn:
 
 The colors used for grid lines, axes, etc. and the auto colors for datasets can be overridden using CSS.
 
-For a more detailed example see link:{techdocjs}#how-to-create-a-chart[How to Create a Chart]
+For a more detailed example see <<how-to-create-a-chart,How to Create a Chart>>.
 
 == HTML Document Parser
 
