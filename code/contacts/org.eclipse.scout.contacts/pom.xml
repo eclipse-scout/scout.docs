@@ -37,8 +37,10 @@
     <module>../org.eclipse.scout.contacts.client</module>
     <module>../org.eclipse.scout.contacts.shared</module>
     <module>../org.eclipse.scout.contacts.server</module>
+    <module>../org.eclipse.scout.contacts.server.app.dev</module>
     <module>../org.eclipse.scout.contacts.server.app.war</module>
     <module>../org.eclipse.scout.contacts.ui.html</module>
+    <module>../org.eclipse.scout.contacts.ui.html.app.dev</module>
     <module>../org.eclipse.scout.contacts.ui.html.app.war</module>
 
     <!-- Events module -->
