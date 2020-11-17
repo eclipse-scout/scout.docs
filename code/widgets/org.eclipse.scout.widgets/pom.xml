@@ -38,6 +38,7 @@
     <module>../org.eclipse.scout.widgets.shared</module>
     <module>../org.eclipse.scout.widgets.ui.html</module>
     <module>../org.eclipse.scout.widgets.ui.html.app</module>
+    <module>../org.eclipse.scout.widgets.ui.html.app.dev</module>
     <module>../org.eclipse.scout.widgets.ui.html.app.war</module>
 
     <!-- Scout JS widgets -->

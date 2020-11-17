@@ -19,7 +19,7 @@ if %errorlevel% neq 0 (
 
 :: Install pnpm
 echo Installing 'pnpm' into ../../node_modules
-call npm install pnpm@">=4.0.0 <5.0.0" --prefix ../../node_modules
+call npm install pnpm@">=5.0.0 <6.0.0" --prefix ../../node_modules
 
 :: Install all JavaScript dependencies defined in the package.json => creates the node_modules folder
 call cd ..\..
