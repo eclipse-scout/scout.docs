@@ -11,8 +11,8 @@
 *.log
 
 # Eclipse #
-code/.project
-code/.settings
+.project
+.classpath
 bin
 classes
 
