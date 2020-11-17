@@ -39,7 +39,6 @@
     <module>scout_releasenotes</module>
     <module>scout_sdk_tests</module>
     <module>publish</module>
-
   </modules>
 
   <build>

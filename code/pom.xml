@@ -16,11 +16,11 @@
   <artifactId>org.eclipsescout.demo.root</artifactId>
   <version>11.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
-  <name>Eclipse Scout Demo - Root</name>
+  <name>root</name>
 
   <modules>
     <module>build/org.eclipsescout.demo.parent</module>
+    <module>widgets/org.eclipse.scout.widgets.ui.html.app.selenium</module>
   </modules>
 
   <build>
