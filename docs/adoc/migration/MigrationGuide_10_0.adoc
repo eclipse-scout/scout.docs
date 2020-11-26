@@ -426,3 +426,8 @@ clientBuilder.property(RestClientProperties.ENABLE_COOKIES, true);
 ....
 
 in `configureClientBuilder` of `AbstractRestClientHelper`.
+
+=== StreamUtility.toMap
+
+The default re-map function for duplicated keys used by `StreamUtility.toMap` was changed from a throwing merger to a replacing merger mapper.
+E.g. if a stream containing duplicated keys is collected into a map, the value of the latest key within the stream is collected into the target map.

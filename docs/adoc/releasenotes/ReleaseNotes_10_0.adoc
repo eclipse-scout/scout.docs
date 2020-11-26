@@ -239,7 +239,7 @@ field.on('propertyChange:value', function(event) {
 field.setValue('New Value.');
 ----
 
-=== NLS File Watcher
+== NLS File Watcher
 
 The new `NlsFileWatcher` observes changes in text property files.
 If a change in a text property file occurs, the nls resource bundle cache will be invalidated.
