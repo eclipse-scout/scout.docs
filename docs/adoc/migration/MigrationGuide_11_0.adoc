@@ -220,3 +220,7 @@ the cells inside the column.
 * Batch lookup calls have no property `event.row` when triggering the prepareLookupCall event.
 Hence, if your prepareLookupCall event depends on the selected row during key lookups,
 you should set the property `batch: false` inside the corresponding lookupCall of your `ConfigFormModel.js` file.
+
+== MessageBox: New Behavior of doClose()
+
+The priorities of the answer of `MessageBox.doClose()` will now be `CANCEL_OPTION`, `NO_OPTION`, `YES_OPTION`. The old behavior is still available in the form of the method `MessageBox.doOk()`.
