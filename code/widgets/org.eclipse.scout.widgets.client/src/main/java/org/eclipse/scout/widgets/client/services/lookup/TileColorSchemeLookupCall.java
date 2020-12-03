@@ -12,10 +12,11 @@ package org.eclipse.scout.widgets.client.services.lookup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
 import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 
@@ -27,10 +28,7 @@ public class TileColorSchemeLookupCall extends LocalLookupCall<IColorScheme> {
   @Override
   protected List<LookupRow<IColorScheme>> execCreateLookupRows() {
     ArrayList<LookupRow<IColorScheme>> rows = new ArrayList<>();
-    rows.add(new LookupRow<>(ColorScheme.DEFAULT, "default"));
-    rows.add(new LookupRow<>(ColorScheme.DEFAULT_INVERTED, "default_inverted"));
-    rows.add(new LookupRow<>(ColorScheme.ALTERNATIVE, "alternative"));
-    rows.add(new LookupRow<>(ColorScheme.ALTERNATIVE_INVERTED, "alternative_inverted"));
+    Stream.of(ColorScheme.values()).forEach(colorScheme -> rows.add(new LookupRow<>(colorScheme, colorScheme.getIdentifier())));
     return rows;
   }
 }
