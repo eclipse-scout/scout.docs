@@ -10,6 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import static java.util.Calendar.*;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -32,20 +33,17 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.rt.platform.util.TriState;
+import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.rt.shared.services.common.calendar.CalendarAppointment;
 import org.eclipse.scout.rt.shared.services.common.calendar.ICalendarItem;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CalendarField.Calendar;
 import org.eclipse.scout.widgets.client.ui.forms.CalendarFieldForm.MainBox.CloseButton;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Order(8200)
 @ClassId("0d17b2a7-99c6-4de4-b1fa-8e29a9482480")
 public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleForm {
-
-  private static final Logger LOG = LoggerFactory.getLogger(CalendarFieldForm.class);
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -117,197 +115,116 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
           setMenuInjectionTarget(getMainBox());
         }
 
+        /**
+         * Provider for business calendar items, simulates a delay.
+         */
         @Order(10)
-        public class ItemProvider01 extends AbstractCalendarItemProvider {
+        public class BusinessItemProvider extends AbstractCalendarItemProvider {
 
           @Override
           protected void execLoadItemsInBackground(IClientSession session, Date minDate, Date maxDate, Set<ICalendarItem> result) {
-            LOG.info("ItemProvider01#execLoadItemsInBackground");
-            System.out.println("START long running item fetch operation... ");
-            SleepUtil.sleepSafe(5, TimeUnit.SECONDS);
-            System.out.println("END item fetch operation");
+            SleepUtil.sleepSafe(5, TimeUnit.SECONDS); // simulate delay (DB-read or call external interface)
 
             String cssClass = "calendar-appointment";
-            java.util.Calendar cal = java.util.Calendar.getInstance();
+            java.util.Calendar cal = getInstance();
+            DateUtility.truncCalendarToHour(cal);
             Date start = cal.getTime();
             Date end = cal.getTime();
-            result.add(new CalendarAppointment(0L, 0L, start, end, true, "LOCATION", "FULL DAY [P1]", "This appointment takes the full day", cssClass));
-            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
-            start = cal.getTime();
-            cal.add(java.util.Calendar.HOUR, 2);
-            end = cal.getTime();
-            result.add(new CalendarAppointment(1L, 2L, start, end, false, "LOCATION", "app1 [P1]", "appointment1 body", cssClass));
+            result.add(new CalendarAppointment(0L, 0L, start, end, true, "Office Darmstadt", "Scout Course", "Learn Scout basics. Full day appointment for a single day", cssClass));
 
-            cal.add(java.util.Calendar.HOUR, 1);
+            cal.add(DAY_OF_YEAR, -1);
             start = cal.getTime();
-            cal.add(java.util.Calendar.MINUTE, 30);
+            cal.set(HOUR_OF_DAY, 14);
             end = cal.getTime();
-            result.add(new CalendarAppointment(2L, 2L, start, end, false, "LOCATION", "app2 [P1]", "appointment2 body", cssClass));
+            result.add(new CalendarAppointment(1L, 2L, start, end, false, "Office Bern", "Software Architecture", "Create awesome software architecture for new Scout app", cssClass));
 
-            // future
+            // Phone call
+            cal.set(HOUR_OF_DAY, 13);
+            start = cal.getTime();
+            cal.add(MINUTE, 30);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(2L, 2L, start, end, false, "Office Baar", "Phone Call with Jeremy", "Inform Jeremy about news", cssClass));
+
+            // Time blocker, spans over 2 days but it is not flagged as full-day appointment
             cal.setTime(new Date());
-            cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
+            DateUtility.truncCalendarToHour(cal);
+            cal.set(HOUR_OF_DAY, 8);
+            cal.add(DAY_OF_YEAR, 1);
             start = cal.getTime();
-            cal.add(java.util.Calendar.HOUR, 48);
+            cal.set(HOUR_OF_DAY, 17);
+            cal.add(DAY_OF_YEAR, 1);
             end = cal.getTime();
-            result.add(new CalendarAppointment(3L, 2L, start, end, false, "LOCATION", "app3 [P1]", null, cssClass));
-            cal.add(java.util.Calendar.HOUR, 2);
-            end = cal.getTime();
+            result.add(new CalendarAppointment(3L, 2L, start, end, false, "Office Zurich", "Time Blocker", "No other appointments", cssClass));
 
-            result.add(new CalendarAppointment(4L, 2L, start, end, false, null, "LOCATION", "appointment4 body", cssClass));
+            // Daily meeting
+            cal.add(DAY_OF_YEAR, 1);
+            cal.set(HOUR_OF_DAY, 9);
+            start = cal.getTime();
+            cal.add(HOUR_OF_DAY, 1);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(4L, 2L, start, end, false, null, "Daily Meeting BSI", "Daily stand-up meeting", cssClass));
+
+            // Education, full day appointment spans over 2 days
+            cal.setTime(new Date());
+            DateUtility.truncCalendarToHour(cal);
+            cal.add(DAY_OF_YEAR, 7);
+            start = cal.getTime();
+            cal.add(DAY_OF_YEAR, 1);
+            end = cal.getTime();
+            result.add(new CalendarAppointment(5L, 2L, start, end, true, "Auditorium", "Education", "Learn everything about Scout JS. Full day appointment, spans over 2 days", cssClass));
           }
 
           @Order(200)
           @ClassId("0ad6cbc8-eca2-4861-8de2-fe037a27b838")
-          public class Provider1ComponentMenu extends AbstractMenu {
+          public class BusinessCalendarDetailMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
-              return getClass().getSimpleName();
+              return "Details";
             }
 
             @Override
             protected Set<? extends IMenuType> getConfiguredMenuTypes() {
               return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-            }
-          }
-
-          @Order(10)
-          @ClassId("e78cafae-4eef-41f9-800b-bd47de6ec69d")
-          public class Provider1ComponentLevel1FlatSubMenu extends AbstractMenu {
-
-            @Override
-            protected String getConfiguredText() {
-              return getClass().getSimpleName();
-            }
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-            }
-          }
-
-          @Order(210)
-          @ClassId("8b151712-0f7e-440d-b9f7-d542959865de")
-          public class Provider1ComponentLevel1TreeSubMenu extends AbstractMenu {
-
-            @Override
-            protected String getConfiguredText() {
-              return getClass().getSimpleName();
-            }
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-            }
-
-            @Order(10)
-            @ClassId("5eef856a-f0cb-47f1-bc2c-ace3551328d1")
-            public class Provider1ComponentLevel2SubMenu extends AbstractMenu {
-
-              @Override
-              protected String getConfiguredText() {
-                return getClass().getSimpleName();
-              }
-
-              @Override
-              protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-              }
-
-              @Order(10)
-              @ClassId("9388992e-9948-4b21-8196-884c2f7674a1")
-              public class Provider1ComponentLevel3SubMenu extends AbstractMenu {
-
-                @Override
-                protected String getConfiguredText() {
-                  return getClass().getSimpleName();
-                }
-
-                @Override
-                protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-                  return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-                }
-              }
             }
           }
         }
 
+        /**
+         * Provider for private calendar items.
+         */
         @Order(20)
-        public class ItemProvider02 extends AbstractCalendarItemProvider {
+        public class PrivateItemProvider extends AbstractCalendarItemProvider {
 
           @Override
           protected void execLoadItems(Date minDate, Date maxDate, final Set<ICalendarItem> result) {
-            LOG.info("ItemProvider02#execLoadItems");
-
             String cssClass = "calendar-task";
-            java.util.Calendar cal = java.util.Calendar.getInstance();
-            Date start = cal.getTime();
-            Date end = cal.getTime();
-            result.add(new CalendarAppointment(5L, 0L, start, end, true, "LOCATION", "FULL DAY [P2]", "This appointment takes the full day", cssClass));
-            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
-            start = cal.getTime();
-            cal.add(java.util.Calendar.HOUR, 2);
-            end = cal.getTime();
-            result.add(new CalendarAppointment(6L, 2L, start, end, false, "LOCATION", "app1 [P2]", "appointment1 body", cssClass));
+            java.util.Calendar cal = getInstance();
+            DateUtility.truncCalendarToHour(cal);
+            Date start, end;
 
-            cal.add(java.util.Calendar.HOUR, 1);
+            cal.set(HOUR_OF_DAY, 13);
             start = cal.getTime();
-            cal.add(java.util.Calendar.MINUTE, 30);
+            cal.add(MINUTE, 30);
             end = cal.getTime();
-            result.add(new CalendarAppointment(7L, 2L, start, end, false, "LOCATION", "app2 [P2]", "appointment2 body", cssClass));
+            result.add(new CalendarAppointment(7L, 2L, start, end, false, "@Home", "Mechanic", "Fix broken fridge", cssClass));
 
-            cal.add(java.util.Calendar.HOUR, 1);
+            cal.add(DAY_OF_YEAR, 3);
+            cal.set(HOUR_OF_DAY, 18);
+            cal.set(MINUTE, 0);
             start = cal.getTime();
-            cal.add(java.util.Calendar.MINUTE, 30);
+            cal.add(HOUR_OF_DAY, 3);
             end = cal.getTime();
-            result.add(new CalendarAppointment(8L, 2L, start, end, false, "LOCATION", "app2 [P2]", "appointment2 body", null));
-
-            // future
-            cal.setTime(new Date());
-            cal.add(java.util.Calendar.DAY_OF_YEAR, 1);
-            start = cal.getTime();
-            cal.add(java.util.Calendar.HOUR, 48);
-            end = cal.getTime();
-            result.add(new CalendarAppointment(8L, 2L, start, end, false, "LOCATION", "app3 [P2]", "appointment3 body", cssClass));
-            cal.add(java.util.Calendar.HOUR, 2);
-            end = cal.getTime();
-            result.add(new CalendarAppointment(9L, 2L, start, end, false, "LOCATION", "app4 [P2]", "appointment4 body", cssClass));
-
-            // multi-day
-            cal.setTime(new Date());
-            cal.add(java.util.Calendar.DAY_OF_YEAR, 4);
-            cal.set(java.util.Calendar.HOUR_OF_DAY, 17); // set to 17:00
-            cal.set(java.util.Calendar.MINUTE, 0);
-            cal.set(java.util.Calendar.SECOND, 0);
-            start = cal.getTime();
-            cal.add(java.util.Calendar.HOUR, 15); // add 15 hours -> 08:00 the next day
-            end = cal.getTime();
-            result.add(new CalendarAppointment(10L, 2L, start, end, false, "LOCATION", "app5 [P2]", "appointment5 body", cssClass));
+            result.add(new CalendarAppointment(8L, 2L, start, end, false, "Lucky Dumpling, Zurich", "Dinner with Lisa", "Dinner with Lisa", cssClass));
           }
 
           @Order(200)
-          @ClassId("d764e7e9-7f30-4481-9736-29697df339e3")
-          public class Provider2ComponentMenu extends AbstractMenu {
-
-            @Override
-            protected String getConfiguredText() {
-              return getClass().getSimpleName();
-            }
-
-            @Override
-            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-              return CollectionUtility.hashSet(CalendarMenuType.CalendarComponent);
-            }
-          }
-
-          @Order(210)
           @ClassId("324606df-cef5-4a06-b1c2-f87eedc32963")
-          public class Provider2EmptySpaceMenu extends AbstractMenu {
+          public class PrivateCalendarCreateMenu extends AbstractMenu {
 
             @Override
             protected String getConfiguredText() {
-              return getClass().getSimpleName();
+              return "Create to-do";
             }
 
             @Override
@@ -323,7 +240,7 @@ public class CalendarFieldForm extends AbstractForm implements IAdvancedExampleF
 
           @Override
           protected String getConfiguredText() {
-            return getClass().getSimpleName();
+            return "New appointment";
           }
 
           @Override
