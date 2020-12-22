@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2020 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -540,6 +540,36 @@ public class TreeFieldForm extends AbstractForm implements IAdvancedExampleForm 
           @Order(50)
           @ClassId("334bc037-0485-4448-b129-3863c884cccf")
           public class HierarchicalMenu extends AbstractHierarchicalTreeMenu {
+          }
+
+          @Order(55)
+          @ClassId("7de5f3ae-939e-4852-844d-a458001c451c")
+          public class ToggleRowEnabledMenu extends AbstractMenu {
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
+            }
+
+            @Override
+            protected String getConfiguredText() {
+              return TEXTS.get("ToggleNodeEnabledState");
+            }
+
+            @Override
+            protected boolean getConfiguredInheritAccessibility() {
+              return false;
+            }
+
+            @Override
+            protected void execAction() {
+              getSelectedNode().setEnabled(!getSelectedNode().isEnabled());
+            }
+
+            @Override
+            protected byte getConfiguredHorizontalAlignment() {
+              return HORIZONTAL_ALIGNMENT_RIGHT;
+            }
           }
 
           @Order(60)
