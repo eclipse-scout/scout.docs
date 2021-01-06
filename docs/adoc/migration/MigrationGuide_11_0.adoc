@@ -224,3 +224,16 @@ you should set the property `batch: false` inside the corresponding lookupCall o
 == MessageBox: New Behavior of doClose()
 
 The priorities of the answer of `MessageBox.doClose()` will now be `CANCEL_OPTION`, `NO_OPTION`, `YES_OPTION`. The old behavior is still available in the form of the method `MessageBox.doOk()`.
+
+== FileChooserField: Validation of File Extensions
+
+Upto Scout version 10.0, the `AbstractFileChooserField` allowed the upload of any filetype.
+The method `getConfiguredFileExtensions` was only relevent to give the user a filtered selection of the files he can choose from.
+Because of that users could still upload files with the wrong file type, which among other things is a security issue.
+Starting from Scout version 11.0 we validate the file extensions using their MIME types.
+As an example, imagine `getConfiguredFileExtensions` was configured to allow the data types `jpg` and `png`.
+If the chosen file is not an image file (e.g. a `.pdf` or `.exe` file), a `VetoException` will be thrown.
+However, the datatypes `jpeg` and `jpe` are allowed datatypes and hence no exception will be thrown because these extensions map to the same MIME type as `jpg`.
+
+To not validate the file extensions during upload of files (not recommended), the `execValidateValue` method of the `AbstractFileChooserField` class can be overwritten.
+
