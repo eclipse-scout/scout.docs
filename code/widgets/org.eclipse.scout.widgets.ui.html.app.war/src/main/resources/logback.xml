@@ -7,10 +7,9 @@
   <variable scope="context" name="logPattern" value="%date{ISO8601} %-5level [%thread] %logger - %msg - MDC[${mdcPatternWithoutEmptyValues}]%n%ex" />
 
   <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
-    <!-- Sample for Tomcat Log Folder -->
-    <file>${catalina.base}/logs/org.eclipse.scout.widgets.org.eclipse.scout.widgets.html.ui.log</file>
+    <file>${catalina.base}/logs/widgets.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${catalina.base}/logs/org.eclipse.scout.widgets.org.eclipse.scout.widgets.html.ui-%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>${catalina.base}/logs/widgets-%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>100</maxHistory>
     </rollingPolicy>
     <encoder>
