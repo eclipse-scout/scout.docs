@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -41,8 +41,8 @@ import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
 import org.eclipse.scout.rt.shared.data.colorscheme.ColorScheme;
+import org.eclipse.scout.rt.shared.data.colorscheme.IColorScheme;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCall;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -334,6 +334,30 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             @Override
             protected void execOwnerValueChanged(Object newOwnerValue) {
               LOG.debug("ownerValueChanged" + newOwnerValue);
+            }
+          }
+
+          @Order(1400)
+          @ClassId("2e6c6045-2c38-4665-98e1-c652a9873f9e")
+          public class ToggleEnabledStateMenu extends AbstractMenu {
+            @Override
+            protected String getConfiguredText() {
+              return "Toggle enabled state";
+            }
+
+            @Override
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TileGridMenuType.SingleSelection, TileGridMenuType.MultiSelection);
+            }
+
+            @Override
+            protected boolean getConfiguredInheritAccessibility() {
+              return false;
+            }
+
+            @Override
+            protected void execAction() {
+              getTileField().getTileGrid().getSelectedTiles().forEach(t -> t.setEnabled(!t.isEnabled()));
             }
           }
 
