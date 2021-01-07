@@ -798,10 +798,6 @@ By default this property points to the value of property `scout.backendUrl` with
 |The driver name to use. By default `oracle.jdbc.OracleDriver` is used.
 |String
 |Config Property
-|`scout.sql.jdbc.driverUnload`
-|Indicates whether to uninstall JDBC driver upon platform shutdown. This property has no effect if working with JNDI JDBC connections. By default this property is enabled.
-|Boolean
-|Config Property
 |`scout.sql.jdbc.mappingName`
 |The JDBC mapping name. By default `jdbc:oracle:thin:@localhost:1521:ORCL` is used.
 |String
