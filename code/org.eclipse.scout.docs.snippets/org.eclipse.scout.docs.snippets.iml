@@ -19,6 +19,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:30.0-jre" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.server.commons" />
     <orderEntry type="library" name="Maven: jakarta.servlet:jakarta.servlet-api:4.0.4" level="project" />

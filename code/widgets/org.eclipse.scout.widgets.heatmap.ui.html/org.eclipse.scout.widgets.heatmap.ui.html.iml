@@ -10,6 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:30.0-jre" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.client" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.client" />
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.shared" />
