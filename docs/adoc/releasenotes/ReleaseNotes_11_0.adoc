@@ -163,6 +163,14 @@ MobilePopup was only available on Scout JS but is now available for Scout Classi
 A mobile popup slides in from the bottom. This is it, not more.
 It has already been used for search or tool forms on mobile.
 
+=== New Tablet Transformation: Auto Hide Navigation
+
+The navigation is now automatically hidden when a view is opened and shown again when the last view is closed.
+This was introduced because the space is very limited and the navigation mostly not needed when a view is open.
+
+If you don't like the change you can simply disable it by disabling the transformation `TabletDeviceTransformation#AUTO_HIDE_NAVIGATION`.
+Check out the mobile chapter in the link:{techdoc}#disable-transformations[Tech Doc] on how to do it.
+
 == New ESLint Settings
 
 The eslint rules used by Scout have been adjusted to encourage the use of some great ES6 features.
