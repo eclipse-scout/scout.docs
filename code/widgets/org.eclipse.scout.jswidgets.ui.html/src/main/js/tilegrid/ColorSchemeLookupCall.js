@@ -22,6 +22,9 @@ export default class ColorSchemeLookupCall extends StaticLookupCall {
 
   static DATA = [
     [colorSchemes.ColorSchemeId.DEFAULT, 'default'],
-    [colorSchemes.ColorSchemeId.ALTERNATIVE, 'alternative']
+    [colorSchemes.ColorSchemeId.DEFAULT + '-inverted', 'default-inverted'],
+    [colorSchemes.ColorSchemeId.ALTERNATIVE, 'alternative'],
+    [colorSchemes.ColorSchemeId.ALTERNATIVE + '-inverted', 'alternative-inverted'],
+    [colorSchemes.ColorSchemeId.RAINBOW, 'rainbow']
   ];
 }

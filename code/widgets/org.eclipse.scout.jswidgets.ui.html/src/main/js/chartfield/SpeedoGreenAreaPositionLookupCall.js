@@ -9,23 +9,21 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {StaticLookupCall} from '@eclipse-scout/core';
-import {Chart} from '../../index';
+import {Chart} from '@eclipse-scout/chart';
 
-export default class ChartTypeLookupCall extends StaticLookupCall {
+export default class SpeedoGreenAreaPositionLookupCall extends StaticLookupCall {
 
   constructor() {
     super();
   }
 
   _data() {
-    return ChartTypeLookupCall.DATA;
+    return SpeedoGreenAreaPositionLookupCall.DATA;
   }
 
   static DATA = [
-    [Chart.Type.PIE, 'Pie'],
-    [Chart.Type.LINE, 'Line'],
-    [Chart.Type.DOUGHNUT, 'Doughnut'],
-    [Chart.Type.POLAR_AREA, 'Polar Area']
-
+    [Chart.Position.LEFT, 'Left'],
+    [Chart.Position.CENTER, 'Center'],
+    [Chart.Position.RIGHT, 'Right']
   ];
 }
