@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@eclipse-scout/core": "11.0.0-snapshot",
+    "@eclipse-scout/chart": "11.0.0-snapshot",
     "@eclipse-scout/demo-jswidgets": "11.0.0-snapshot"
   }
 }

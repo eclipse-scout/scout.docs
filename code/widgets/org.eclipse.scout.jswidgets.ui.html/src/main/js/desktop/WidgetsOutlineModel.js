@@ -11,7 +11,8 @@ export default () => ({
       text: 'Accordion',
       detailForm: {
         objectType: 'jswidgets.AccordionForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -19,7 +20,8 @@ export default () => ({
       text: 'Breadcrumb Bar Field',
       detailForm: {
         objectType: 'jswidgets.BreadcrumbBarFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -27,7 +29,8 @@ export default () => ({
       text: 'Button',
       detailForm: {
         objectType: 'jswidgets.ButtonForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -35,7 +38,8 @@ export default () => ({
       text: 'Browser Field',
       detailForm: {
         objectType: 'jswidgets.BrowserFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -43,7 +47,17 @@ export default () => ({
       text: 'Carousel',
       detailForm: {
         objectType: 'jswidgets.CarouselForm'
-      }
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
+      text: 'Chart Field',
+      detailForm: {
+        objectType: 'jswidgets.ChartFieldForm'
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -51,7 +65,8 @@ export default () => ({
       text: 'Check Box Field',
       detailForm: {
         objectType: 'jswidgets.CheckBoxFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -61,18 +76,11 @@ export default () => ({
         {
           objectType: 'PageWithNodes',
           leaf: true,
-          text: 'Chart',
-          detailForm: {
-            objectType: 'jswidgets.ChartForm'
-          }
-        },
-        {
-          objectType: 'PageWithNodes',
-          leaf: true,
           text: 'Watch Field',
           detailForm: {
             objectType: 'jswidgets.WatchFieldForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -82,7 +90,8 @@ export default () => ({
       text: 'Date Field',
       detailForm: {
         objectType: 'jswidgets.DateFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -90,7 +99,8 @@ export default () => ({
       text: 'Desktop',
       detailForm: {
         objectType: 'jswidgets.DesktopForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -99,7 +109,8 @@ export default () => ({
       detailForm: {
         objectType: 'jswidgets.FormForm',
         detailForm: true
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -115,7 +126,8 @@ export default () => ({
           text: 'File Chooser Button',
           detailForm: {
             objectType: 'jswidgets.FileChooserButtonForm'
-          }
+          },
+          detailTableVisible: false
         },
         {
           objectType: 'PageWithNodes',
@@ -123,7 +135,8 @@ export default () => ({
           text: 'File Chooser',
           detailForm: {
             objectType: 'jswidgets.FileChooserForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -133,7 +146,8 @@ export default () => ({
       text: 'Group Box',
       detailForm: {
         objectType: 'jswidgets.GroupBoxForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -141,7 +155,8 @@ export default () => ({
       text: 'Label',
       detailForm: {
         objectType: 'jswidgets.LabelForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -149,7 +164,8 @@ export default () => ({
       text: 'Label Field',
       detailForm: {
         objectType: 'jswidgets.LabelFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -157,7 +173,8 @@ export default () => ({
       text: 'List Box',
       detailForm: {
         objectType: 'jswidgets.ListBoxForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -165,7 +182,8 @@ export default () => ({
       text: 'Logical Grid',
       detailForm: {
         objectType: 'jswidgets.LogicalGridForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -173,7 +191,8 @@ export default () => ({
       text: 'Menu Bar',
       detailForm: {
         objectType: 'jswidgets.MenuBarForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -181,7 +200,8 @@ export default () => ({
       text: 'Mode Selector',
       detailForm: {
         objectType: 'jswidgets.ModeSelectorForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -197,7 +217,8 @@ export default () => ({
           text: 'Integer Field',
           detailForm: {
             objectType: 'jswidgets.IntegerFieldForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -220,7 +241,8 @@ export default () => ({
       text: 'Popup',
       detailForm: {
         objectType: 'jswidgets.PopupForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -228,7 +250,8 @@ export default () => ({
       text: 'Radio Button Group',
       detailForm: {
         objectType: 'jswidgets.RadioButtonGroupForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -236,7 +259,8 @@ export default () => ({
       text: 'Rest',
       detailForm: {
         objectType: 'jswidgets.RestForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -244,7 +268,8 @@ export default () => ({
       text: 'Sequence Box',
       detailForm: {
         objectType: 'jswidgets.SequenceBoxForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -260,7 +285,8 @@ export default () => ({
           text: 'Proposal Field',
           detailForm: {
             objectType: 'jswidgets.ProposalFieldForm'
-          }
+          },
+          detailTableVisible: false
         },
         {
           objectType: 'PageWithNodes',
@@ -268,7 +294,8 @@ export default () => ({
           text: 'Multiline Smart Field',
           detailForm: {
             objectType: 'jswidgets.MultilineSmartFieldForm'
-          }
+          },
+          detailTableVisible: false
         },
         {
           objectType: 'PageWithNodes',
@@ -276,7 +303,8 @@ export default () => ({
           text: 'Table Smart Field',
           detailForm: {
             objectType: 'jswidgets.TableSmartFieldForm'
-          }
+          },
+          detailTableVisible: false
         },
         {
           objectType: 'PageWithNodes',
@@ -284,7 +312,8 @@ export default () => ({
           text: 'Tree Smart Field',
           detailForm: {
             objectType: 'jswidgets.TreeSmartFieldForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -294,7 +323,8 @@ export default () => ({
       text: 'String Field',
       detailForm: {
         objectType: 'jswidgets.StringFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -302,7 +332,8 @@ export default () => ({
       text: 'Tab Box',
       detailForm: {
         objectType: 'jswidgets.TabBoxForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -318,7 +349,8 @@ export default () => ({
           text: 'Editable Table',
           detailForm: {
             objectType: 'jswidgets.EditableTableForm'
-          }
+          },
+          detailTableVisible: false
         },
         {
           objectType: 'PageWithNodes',
@@ -326,7 +358,8 @@ export default () => ({
           text: 'Hierarchical Table',
           detailForm: {
             objectType: 'jswidgets.HierarchicalTableForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -336,7 +369,8 @@ export default () => ({
       text: 'Tag Field',
       detailForm: {
         objectType: 'jswidgets.TagFieldForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -352,7 +386,8 @@ export default () => ({
           text: 'Virtual Tile Grid',
           detailForm: {
             objectType: 'jswidgets.VirtualTileGridForm'
-          }
+          },
+          detailTableVisible: false
         }
       ]
     },
@@ -362,7 +397,8 @@ export default () => ({
       text: 'Tile Accordion',
       detailForm: {
         objectType: 'jswidgets.TileAccordionForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -370,7 +406,8 @@ export default () => ({
       text: 'Tree',
       detailForm: {
         objectType: 'jswidgets.TreeForm'
-      }
+      },
+      detailTableVisible: false
     },
     {
       objectType: 'PageWithNodes',
@@ -378,7 +415,8 @@ export default () => ({
       text: 'Tree Box',
       detailForm: {
         objectType: 'jswidgets.TreeBoxForm'
-      }
+      },
+      detailTableVisible: false
     }
   ]
 });

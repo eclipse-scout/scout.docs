@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@eclipse-scout/core": "11.0.0-snapshot",
-    "jquery": "3.5.1",
-    "chart.js": "2.9.3"
+    "@eclipse-scout/chart": "11.0.0-snapshot",
+    "jquery": "3.5.1"
   }
 }
