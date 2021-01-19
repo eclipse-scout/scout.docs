@@ -1,0 +1,17 @@
+@json-text-color: darkblue;
+@json-text-error-color: darkred;
+
+.json-text {
+  font-family: monospace;
+  font-size: @font-size-small;
+  color: @json-text-color;
+  white-space: pre;
+}
+
+.json-field > .field {
+  .json-text();
+
+  &.has-error {
+    color: @json-text-error-color;
+  }
+}
