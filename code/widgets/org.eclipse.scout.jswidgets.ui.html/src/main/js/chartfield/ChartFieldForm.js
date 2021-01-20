@@ -1236,8 +1236,7 @@ export default class ChartFieldForm extends Form {
       this.chartDataTableField.addErrorStatus(this._createErrorStatus('Invalid dataset labels.'));
       return false;
     }
-    if (chartData.slice(1)
-      .flatMap(arr => arr.slice(1))
+    if (arrays.flatMap(chartData.slice(1), arr => arr.slice(1))
       .some(elem => !(typeof elem === 'number' || elem instanceof Number))) {
       this.chartDataTableField.addErrorStatus(this._createErrorStatus('Invalid values.'));
       return false;
