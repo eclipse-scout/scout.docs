@@ -1013,7 +1013,7 @@ It automatically includes all chunks that are required by the given entry point.
 
 Example:
 
-  <scout:scripts entryPoint="yourapp"/>
+  <scout:scripts entrypoint="yourapp"/>
 
 Output:
 
@@ -1033,7 +1033,22 @@ Output:
 
   <link rel="stylesheet" type="text/css" href="yourtheme-98aea5b3.min.css">
 
+=== scout:stylesheets
+
+Writes all `link` tags in the HTML document which contain the webpack entryPoint name given. This requires that no custom splitChunks are defined.
+It automatically includes all chunks that are required by the given entry point. The entry point name must match the name in the `entry` section of the `webpack.config.js` file.
+
+Example:
+
+  <scout:stylesheets entrypoint="yourapp-theme"/>
+
+Output:
+
+  <link rel="stylesheet" type="text/css" href="yourapp-theme-9858a5b3.min.css">
+  <link rel="stylesheet" type="text/css" href="vendors~yourapp-theme-675d7813.min.css">
+
 === scout:version
+
 Outputs the current version of the Scout application as `scout-version` tag in the HTML document. This tag is read by `scout.App#_initVersion`.
 
 Example:
