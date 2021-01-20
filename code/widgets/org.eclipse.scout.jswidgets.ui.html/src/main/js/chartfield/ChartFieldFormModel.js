@@ -288,6 +288,42 @@ export default () => ({
                   }]
               },
               {
+                id: 'CustomChartPropertiesBox',
+                objectType: 'GroupBox',
+                label: 'Custom Chart Properties',
+                gridColumnCount: 1,
+                gridDataHints: {
+                  w: 4
+                },
+                expandable: true,
+                expanded: false,
+                fields: [
+                  {
+                    id: 'InfoField',
+                    objectType: 'LabelField',
+                    labelVisible: false,
+                    htmlEnabled: true,
+                    wrapText: true,
+                    gridDataHints: {
+                      useUiHeight: true
+                    },
+                    value: 'For detailed information about possible properties see <a href="https://www.chartjs.org/" rel="noreferrer noopener">chart.js</a>. The custom chart properties need to be a JSON object.'
+                  },
+                  {
+                    id: 'CustomChartPropertiesField',
+                    objectType: 'StringField',
+                    labelVisible: false,
+                    gridDataHints: {
+                      h: 6
+                    },
+                    multilineText: true,
+                    wrapText: true,
+                    maxLength: 1048576,
+                    cssClass: 'json-field'
+                  }
+                ]
+              },
+              {
                 id: 'FormFieldPropertiesBox',
                 objectType: 'jswidgets.FormFieldPropertiesBox',
                 expanded: false

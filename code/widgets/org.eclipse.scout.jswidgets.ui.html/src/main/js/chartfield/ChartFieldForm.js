@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, arrays, colorSchemes, DefaultStatus, Form, models, objects, Status} from '@eclipse-scout/core';
+import {App, arrays, colorSchemes, DefaultStatus, Form, models, objects, Status, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
 import {ValuesProviderLookupCall} from '../index';
@@ -20,6 +20,9 @@ export default class ChartFieldForm extends Form {
     this.chart = null;
     this.fieldChart = null;
     this.tileChart = null;
+
+    this.chartConfig = {};
+    this.customChartConfig = {};
 
     this.chartField = null;
     this.tileChartField = null;
@@ -61,6 +64,7 @@ export default class ChartFieldForm extends Form {
     this.chartField = this.widget('ChartField');
     this.fieldChart = this.chartField.chart;
     this.chart = this.fieldChart;
+    this.chartConfig = this.chart.config;
 
     let chartTileBox = this.widget('ChartTileBox');
     let chartTile = this.widget('ChartTile');
@@ -72,45 +76,45 @@ export default class ChartFieldForm extends Form {
     });
 
     let autoColorCheckBox = this.widget('AutoColorCheckBox');
-    autoColorCheckBox.setValue((this.chart.config.options || {}).autoColor);
+    autoColorCheckBox.setValue((this._getChartConfig().options || {}).autoColor);
     autoColorCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           autoColor: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let clickableCheckBox = this.widget('ClickableCheckBox');
-    clickableCheckBox.setValue((this.chart.config.options || {}).clickable);
+    clickableCheckBox.setValue((this._getChartConfig().options || {}).clickable);
     clickableCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           clickable: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let checkableCheckBox = this.widget('CheckableCheckBox');
-    checkableCheckBox.setValue((this.chart.config.options || {}).checkable);
+    checkableCheckBox.setValue((this._getChartConfig().options || {}).checkable);
     checkableCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           checkable: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let animatedCheckBox = this.widget('AnimatedCheckBox');
-    animatedCheckBox.setValue(((this.chart.config.options || {}).animation || {}).duration > 0);
+    animatedCheckBox.setValue(((this._getChartConfig().options || {}).animation || {}).duration > 0);
     animatedCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           animation: {
@@ -118,13 +122,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let legendVisibleBox = this.widget('LegendVisibleBox');
-    legendVisibleBox.setValue(((this.chart.config.options || {}).legend || {}).display);
+    legendVisibleBox.setValue(((this._getChartConfig().options || {}).legend || {}).display);
     legendVisibleBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           legend: {
@@ -132,13 +136,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let legendClickableCheckBox = this.widget('LegendClickableCheckBox');
-    legendClickableCheckBox.setValue(((this.chart.config.options || {}).legend || {}).clickable);
+    legendClickableCheckBox.setValue(((this._getChartConfig().options || {}).legend || {}).clickable);
     legendClickableCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           legend: {
@@ -146,13 +150,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let tooltipsEnabledBox = this.widget('TooltipsEnabledBox');
-    tooltipsEnabledBox.setValue(((this.chart.config.options || {}).tooltips || {}).enabled);
+    tooltipsEnabledBox.setValue(((this._getChartConfig().options || {}).tooltips || {}).enabled);
     tooltipsEnabledBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           tooltips: {
@@ -160,13 +164,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let datalabelsVisibleCheckBox = this.widget('DatalabelsVisibleCheckBox');
-    datalabelsVisibleCheckBox.setValue((((this.chart.config.options || {}).plugins || {}).datalabels || {}).display);
+    datalabelsVisibleCheckBox.setValue((((this._getChartConfig().options || {}).plugins || {}).datalabels || {}).display);
     datalabelsVisibleCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           plugins: {
@@ -176,13 +180,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let xAxisStackedCheckBox = this.widget('XAxisStackedCheckBox');
-    xAxisStackedCheckBox.setValue(((((this.chart.config.options || {}).scales || {}).xAxes || [])[0] || {}).stacked);
+    xAxisStackedCheckBox.setValue(((((this._getChartConfig().options || {}).scales || {}).xAxes || [])[0] || {}).stacked);
     xAxisStackedCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           scales: {
@@ -192,13 +196,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let yAxisStackedCheckBox = this.widget('YAxisStackedCheckBox');
-    yAxisStackedCheckBox.setValue(((((this.chart.config.options || {}).scales || {}).yAxes || [])[0] || {}).stacked);
+    yAxisStackedCheckBox.setValue(((((this._getChartConfig().options || {}).scales || {}).yAxes || [])[0] || {}).stacked);
     yAxisStackedCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           scales: {
@@ -208,13 +212,13 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let fillCheckBox = this.widget('FillCheckBox');
-    fillCheckBox.setValue((((this.chart.config.options || {}).elements || {}).line || {}).fill);
+    fillCheckBox.setValue((((this._getChartConfig().options || {}).elements || {}).line || {}).fill);
     fillCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           elements: {
@@ -224,32 +228,32 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let transparentCheckBox = this.widget('TransparentCheckBox');
-    transparentCheckBox.setValue((this.chart.config.options || {}).transparent);
+    transparentCheckBox.setValue((this._getChartConfig().options || {}).transparent);
     transparentCheckBox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           transparent: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
 
     let accordingToValuesCheckbox = this.widget('AccordingToValuesCheckbox');
     accordingToValuesCheckbox.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         salesfunnel: {
           normalized: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    accordingToValuesCheckbox.setValue((this.chart.config.salesfunnel || {}).normalized || false);
+    accordingToValuesCheckbox.setValue((this._getChartConfig().salesfunnel || {}).normalized || false);
 
     this.fulfillmentStartValuePropertyCheckbox = this.widget('FulfillmentStartValuePropertyCheckbox');
 
@@ -299,13 +303,13 @@ export default class ChartFieldForm extends Form {
 
     let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.on('propertyChange:value', event => {
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           colorScheme: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
 
       chartTile.setColorScheme(event.newValue);
     });
@@ -317,7 +321,7 @@ export default class ChartFieldForm extends Form {
         tensionField.setValue(0);
         return;
       }
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           elements: {
@@ -327,9 +331,9 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    tensionField.setValue((((this.chart.config.options || {}).elements || {}).line || {}).tension || 0);
+    tensionField.setValue((((this._getChartConfig().options || {}).elements || {}).line || {}).tension || 0);
 
     let greenAreaPositionField = this.widget('GreenAreaPositionField');
     greenAreaPositionField.on('propertyChange:value', event => {
@@ -337,15 +341,15 @@ export default class ChartFieldForm extends Form {
         greenAreaPositionField.setValue(Chart.Position.CENTER);
         return;
       }
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         speedo: {
           greenAreaPosition: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    greenAreaPositionField.setValue((this.chart.config.speedo || {}).greenAreaPosition || Chart.Position.CENTER);
+    greenAreaPositionField.setValue((this._getChartConfig().speedo || {}).greenAreaPosition || Chart.Position.CENTER);
 
     let sizeOfLargestBubbleField = this.widget('SizeOfLargestBubbleField');
     sizeOfLargestBubbleField.on('propertyChange:value', event => {
@@ -353,15 +357,15 @@ export default class ChartFieldForm extends Form {
         sizeOfLargestBubbleField.setValue(25);
         return;
       }
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         bubble: {
           sizeOfLargestBubble: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    sizeOfLargestBubbleField.setValue((this.chart.config.bubble || {}).sizeOfLargestBubble || 25);
+    sizeOfLargestBubbleField.setValue((this._getChartConfig().bubble || {}).sizeOfLargestBubble || 25);
 
     let minBubbleSizeField = this.widget('MinBubbleSizeField');
     minBubbleSizeField.on('propertyChange:value', event => {
@@ -369,15 +373,15 @@ export default class ChartFieldForm extends Form {
         minBubbleSizeField.setValue(0);
         return;
       }
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         bubble: {
           minBubbleSize: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    minBubbleSizeField.setValue((this.chart.config.bubble || {}).minBubbleSize || 0);
+    minBubbleSizeField.setValue((this._getChartConfig().bubble || {}).minBubbleSize || 0);
 
     let legendPositionField = this.widget('LegendPositionField');
     legendPositionField.on('propertyChange:value', event => {
@@ -385,7 +389,7 @@ export default class ChartFieldForm extends Form {
         legendPositionField.setValue(Chart.Position.RIGHT);
         return;
       }
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           legend: {
@@ -393,9 +397,38 @@ export default class ChartFieldForm extends Form {
           }
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    legendPositionField.setValue(((this.chart.config.options || {}).legend || {}).position || Chart.Position.RIGHT);
+    legendPositionField.setValue(((this._getChartConfig().options || {}).legend || {}).position || Chart.Position.RIGHT);
+
+    let customChartPropertiesField = this.widget('CustomChartPropertiesField');
+    customChartPropertiesField.addValidator(value => {
+      let parsedValue;
+      // Parse input
+      if (strings.hasText(value)) {
+        try {
+          parsedValue = JSON.parse(value);
+        } catch (err) {
+          throw '' + err; // JSON syntax error
+        }
+      }
+      // Format parsed value
+      let formatted = '';
+      if (parsedValue) {
+        formatted = JSON.stringify(parsedValue, null, 2);
+      }
+      if (!formatted || objects.isPlainObject(parsedValue)) {
+        return formatted;
+      }
+      throw 'Expected JSON type: Object {}';
+    });
+    customChartPropertiesField.on('propertyChange:value', event => {
+      if (strings.empty(event.newValue)) {
+        this._setCustomChartConfig({});
+        return;
+      }
+      this._setCustomChartConfig(JSON.parse(event.newValue));
+    });
 
     this.formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     this.formFieldPropertiesBox.setField(this.chartField);
@@ -497,13 +530,13 @@ export default class ChartFieldForm extends Form {
     valuesProviderField.setValue(ValuesProviderLookupCall.Type.VALUE_PROVIDER_RANDOM);
 
     let numberOfDatasetsField = this.widget('NumberOfDatasetsField');
-    numberOfDatasetsField.setValue(this.chart.config.type === Chart.Type.VENN ? this.numberOfVennCircles : this.numberOfDatasets);
+    numberOfDatasetsField.setValue(this._getChartConfig().type === Chart.Type.VENN ? this.numberOfVennCircles : this.numberOfDatasets);
     numberOfDatasetsField.on('propertyChange:value', event => {
       if (objects.isNullOrUndefined(event.newValue)) {
-        numberOfDatasetsField.setValue(this.chart.config.type === Chart.Type.VENN ? this.numberOfVennCircles : this.numberOfDatasets);
+        numberOfDatasetsField.setValue(this._getChartConfig().type === Chart.Type.VENN ? this.numberOfVennCircles : this.numberOfDatasets);
         return;
       }
-      if (this.chart.config.type === Chart.Type.VENN) {
+      if (this._getChartConfig().type === Chart.Type.VENN) {
         this.numberOfVennCircles = event.newValue;
       } else {
         this.numberOfDatasets = event.newValue;
@@ -523,15 +556,15 @@ export default class ChartFieldForm extends Form {
         return;
       }
 
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           maxSegments: event.newValue
         }
       });
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
     });
-    maxSegmentsField.setValue((this.chart.config.options || {}).maxSegments || 1);
+    maxSegmentsField.setValue((this._getChartConfig().options || {}).maxSegments || 1);
 
     this.widgetActionsBox = this.widget('WidgetActionsBox');
     this.widgetActionsBox.setField(this.chartField);
@@ -540,7 +573,7 @@ export default class ChartFieldForm extends Form {
 
     let chartTypeField = this.widget('ChartTypeField');
     chartTypeField.on('propertyChange:value', event => {
-      let config = this.chart.config,
+      let config = this._getChartConfig(),
         type = event.newValue;
 
       checkableCheckBox.setEnabled(!scout.isOneOf(type, Chart.Type.SALESFUNNEL, Chart.Type.FULFILLMENT, Chart.Type.SPEEDO, Chart.Type.VENN));
@@ -584,7 +617,7 @@ export default class ChartFieldForm extends Form {
 
       config.options.transparent = transparentCheckBox.enabled ? transparentCheckBox.value : null;
 
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
 
       this.chartDataTable.columns
         .filter(column => column !== this.datasetLabelColumn)
@@ -621,7 +654,7 @@ export default class ChartFieldForm extends Form {
         randomNumberOfDatasetsMenu.setEnabled(false);
       }
     });
-    chartTypeField.setValue(this.chart.config.type);
+    chartTypeField.setValue(this._getChartConfig().type);
 
     let randomCheckBox = this.widget('RandomCheckBox');
     randomCheckBox.on('propertyChange:value', event => {
@@ -647,7 +680,7 @@ export default class ChartFieldForm extends Form {
 
     let chartData, chartBean;
 
-    switch (this.chart.config.type) {
+    switch (this._getChartConfig().type) {
       case Chart.Type.FULFILLMENT:
         chartData = this._getFulfillmentChartData();
         chartBean = this._getFulfillmentChartBean(chartData);
@@ -690,9 +723,9 @@ export default class ChartFieldForm extends Form {
 
     if (chartBean) {
       this.chart.setData(chartBean.data);
-      let config = this.chart.config;
+      let config = this._getChartConfig();
       config = $.extend(true, {}, config, chartBean.config);
-      this.chart.setConfig(config);
+      this._setChartConfig(config);
       if (this.random && this.fillTable) {
         this._setTableChartData(chartData);
       }
@@ -782,7 +815,7 @@ export default class ChartFieldForm extends Form {
   }
 
   _getBarLineChartDataRandom(comboBarLine) {
-    let numGroups = this.chart.config.type === Chart.Type.BAR_HORIZONTAL ? 4 : 6,
+    let numGroups = this._getChartConfig().type === Chart.Type.BAR_HORIZONTAL ? 4 : 6,
       chartData = arrays.init(this.numberOfDatasets + 1, null);
 
     for (let i = 0; i < chartData.length; i++) {
@@ -1323,7 +1356,7 @@ export default class ChartFieldForm extends Form {
   }
 
   _getMaxValue() {
-    switch (this.chart.config.type) {
+    switch (this._getChartConfig().type) {
       case Chart.Type.FULFILLMENT:
       case Chart.Type.VENN:
         return 100;
@@ -1344,7 +1377,7 @@ export default class ChartFieldForm extends Form {
   }
 
   _getMinValue() {
-    switch (this.chart.config.type) {
+    switch (this._getChartConfig().type) {
       case Chart.Type.FULFILLMENT:
       case Chart.Type.SPEEDO:
       case Chart.Type.PIE:
@@ -1362,5 +1395,19 @@ export default class ChartFieldForm extends Form {
       default:
         return null;
     }
+  }
+
+  _getChartConfig() {
+    return this.chartConfig;
+  }
+
+  _setChartConfig(config) {
+    this.chartConfig = config || {};
+    this.chart.setConfig($.extend(true, {}, this.customChartConfig, this.chartConfig));
+  }
+
+  _setCustomChartConfig(config) {
+    this.customChartConfig = config || {};
+    this.chart.setConfig($.extend(true, {}, this.customChartConfig, this.chartConfig));
   }
 }
