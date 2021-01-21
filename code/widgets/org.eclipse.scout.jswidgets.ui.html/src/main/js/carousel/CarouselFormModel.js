@@ -21,7 +21,7 @@ export default () => ({
                 {
                   id: 'CarouselItem1',
                   objectType: 'Image',
-                  imageUrl: 'img/bird_1008.jpg',
+                  imageUrl: 'img/bird.jpg',
                   autoFit: true
                 },
                 {

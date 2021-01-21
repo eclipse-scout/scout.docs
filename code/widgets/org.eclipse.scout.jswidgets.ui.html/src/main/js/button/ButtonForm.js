@@ -70,8 +70,8 @@ export default class ButtonForm extends Form {
     }
     scout.create('DesktopNotification', {
       parent: this,
+      duration: 7000,
       status: {
-        duration: 7000,
         severity: Status.Severity.OK,
         message: this.session.text('ButtonClickMessage')
       }

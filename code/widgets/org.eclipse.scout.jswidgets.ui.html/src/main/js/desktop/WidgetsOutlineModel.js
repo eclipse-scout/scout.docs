@@ -138,6 +138,24 @@ export default () => ({
     {
       objectType: 'PageWithNodes',
       leaf: true,
+      text: 'Image',
+      detailForm: {
+        objectType: 'jswidgets.ImageForm'
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
+      text: 'Image Field',
+      detailForm: {
+        objectType: 'jswidgets.ImageFieldForm'
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
       text: 'Label',
       detailForm: {
         objectType: 'jswidgets.LabelForm'
