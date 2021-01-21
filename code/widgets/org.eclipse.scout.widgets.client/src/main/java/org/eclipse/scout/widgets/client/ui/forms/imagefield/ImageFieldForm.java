@@ -198,8 +198,7 @@ public class ImageFieldForm extends AbstractForm implements IAdvancedExampleForm
           clearErrorStatus();
 
           try (InputStream in = ResourceBase.class.getResourceAsStream(SCOUT_LOGO)) {
-            setImage(IOUtility.readBytes(in));
-            setImageId(SCOUT_LOGO_FILENAME);
+            setImage(new BinaryResource(SCOUT_LOGO_FILENAME, IOUtility.readBytes(in)));
           }
           catch (Exception e) {
             e.printStackTrace();
