@@ -1,3 +1,5 @@
+import {dragAndDrop} from '@eclipse-scout/core';
+
 export default () => ({
   id: 'jswidgets.FormFieldPropertiesBox',
   objectType: 'GroupBox',
@@ -72,6 +74,25 @@ export default () => ({
       displayStyle: 'dropdown'
     },
     {
+      id: 'DropTypeField',
+      objectType: 'SmartField',
+      lookupCall: {
+        objectType: 'StaticLookupCall',
+        data: [
+          [0, 'none'],
+          [dragAndDrop.SCOUT_TYPES.FILE_TRANSFER, 'file transfer']
+        ]
+      },
+      label: 'Drop Type',
+      displayStyle: 'dropdown'
+    },
+    {
+      id: 'DropMaximumSizeField',
+      objectType: 'NumberField',
+      label: 'Drop Maximum Size',
+      tooltipText: '${textKey:DropMaximumSizeTooltip}'
+    },
+    {
       id: 'LabelField',
       objectType: 'StringField',
       label: 'Label'
@@ -98,13 +119,15 @@ export default () => ({
       id: 'TooltipAnchorField',
       objectType: 'SmartField',
       lookupCall: 'jswidgets.TooltipAnchorLookupCall',
-      label: 'Tooltip Anchor'
+      label: 'Tooltip Anchor',
+      displayStyle: 'dropdown'
     },
     {
       id: 'ErrorStatusField',
       objectType: 'SmartField',
       lookupCall: 'jswidgets.StatusSeverityLookupCall',
-      label: 'Error Status'
+      label: 'Error Status',
+      displayStyle: 'dropdown'
     },
     {
       id: 'StatusPositionField',

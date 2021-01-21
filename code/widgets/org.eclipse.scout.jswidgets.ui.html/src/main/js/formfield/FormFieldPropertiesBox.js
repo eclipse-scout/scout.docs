@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {GroupBox, models, numbers, objects, Status, DefaultStatus} from '@eclipse-scout/core';
+import {arrays, DefaultStatus, GroupBox, models, numbers, objects, scout, Status} from '@eclipse-scout/core';
 import FormFieldPropertiesBoxModel from './FormFieldPropertiesBoxModel';
 
 export default class FormFieldPropertiesBox extends GroupBox {
@@ -16,6 +16,7 @@ export default class FormFieldPropertiesBox extends GroupBox {
   constructor() {
     super();
     this.field = null;
+    this._fileDropHandler = this._onFileDrop.bind(this);
   }
 
   _jsonModel() {
@@ -33,10 +34,14 @@ export default class FormFieldPropertiesBox extends GroupBox {
   }
 
   _setField(field) {
+    if (this.field) {
+      this.field.off('drop', this._fileDropHandler);
+    }
     this._setProperty('field', field);
     if (!this.field) {
       return;
     }
+    this.field.on('drop', this._fileDropHandler);
     let enabledField = this.widget('EnabledField');
     enabledField.setValue(this.field.enabled);
     enabledField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -76,6 +81,14 @@ export default class FormFieldPropertiesBox extends GroupBox {
     let disabledStyleField = this.widget('DisabledStyleField');
     disabledStyleField.setValue(this.field.disabledStyle);
     disabledStyleField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    let dropTypeField = this.widget('DropTypeField');
+    dropTypeField.setValue(this.field.dropType);
+    dropTypeField.on('propertyChange', this._onPropertyChange.bind(this));
+
+    let dropMaximumSizeField = this.widget('DropMaximumSizeField');
+    dropMaximumSizeField.setValue(this.field.dropMaximumSize);
+    dropMaximumSizeField.on('propertyChange', this._onPropertyChange.bind(this));
 
     let labelField = this.widget('LabelField');
     labelField.setValue(this.field.label);
@@ -127,6 +140,10 @@ export default class FormFieldPropertiesBox extends GroupBox {
       this.field.setFieldStyle(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'DisabledStyleField') {
       this.field.setDisabledStyle(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'DropTypeField') {
+      this.field.setDropType(event.newValue);
+    } else if (event.propertyName === 'value' && event.source.id === 'DropMaximumSizeField') {
+      this.field.setDropMaximumSize(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'LabelField') {
       this.field.setLabel(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'LabelPositionField') {
@@ -153,5 +170,25 @@ export default class FormFieldPropertiesBox extends GroupBox {
     } else if (event.propertyName === 'value' && event.source.id === 'StatusPositionField') {
       this.field.setStatusPosition(event.newValue);
     }
+  }
+
+  _onFileDrop(event) {
+    scout.create('DesktopNotification', {
+      parent: this,
+      duration: 7500,
+      status: {
+        severity: Status.Severity.OK,
+        message: this.session.text('FilesDroppedSuccessfully') + '\n' + this._filesToString(event.files)
+      }
+    }).show();
+  }
+
+  _filesToString(files) {
+    return arrays.format(files.map(file => {
+      return `
+Name: ${file.name}
+Size: ${file.size}
+Type: ${file.type}`;
+    }), '\n');
   }
 }
