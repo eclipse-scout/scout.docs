@@ -18,7 +18,6 @@
     "pnpm": ">=5"
   },
   "files": [
-    "dist",
     "src/main/resources/WebContent",
     "src/main/js"
   ],

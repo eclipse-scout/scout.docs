@@ -1216,9 +1216,9 @@ The Scout CLI is a bunch of npm-scripts that help you building and testing your 
 ----
 
 ==== Building
-Before you can open your application in the browser, you need to build it. The build takes all your source code and resources and creates the artifacts needed for the browser according to your <<Webpack Configuration>>. Once the build is complete all the produced artifacts are put in the `dist` folder.
+Before you can open your application in the browser, you need to build it. The build takes all your source code and resources and creates the artifacts needed for the browser according to your <<Webpack Configuration>>. Once the build is complete all the produced artifacts are put in the `target/dist` folder.
 
-The `dist` folder contains three sub folders:
+The `target/dist` folder contains three sub folders:
 
 . dev: contains not minified versions of the JS and CSS bundles with https://developer.mozilla.org/de/docs/Tools/Debugger/How_to/Use_a_source_map[Source Maps].
 The source maps are necessary to map the bundles to the actual source files which makes debugging a lot easier.
@@ -1246,11 +1246,11 @@ This will also build your application but additionally starts a watcher that wat
 ===== Arguments
 The build commands accept some arguments you can use to adjust the build without modifying your webpack config file. The following arguments are available:
 
-. mode: 'development' or 'production'. This argument is set automatically when using build:dev or build:prod.
-. clean: true, to clean the dist folder before each build. Default is false if watcher is enabled (build:dev:watch), otherwise true.
-. progress: true, to show build progress in percentage. Default is true.
-. profile: true, to show timing information for each build step. Default is false.
-. resDirArray: an array containing directories which should be copied to dist/res.
+. mode: `development` or `production`. This argument is set automatically when using build:dev or build:prod.
+. clean: true, to clean the `target/dist` folder before each build. Default is `false` if watcher is enabled (build:dev:watch), otherwise `true`.
+. progress: `true`, to show build progress in percentage. Default is `true`.
+. profile: `true`, to show timing information for each build step. Default is `false`.
+. resDirArray: an array containing directories which should be copied to `dist/res`.
 . stats: object to control the build output. There are some presets available as shortcuts (e.g. 'detailed' or 'errors-only'), see also: https://webpack.js.org/configuration/stats/.
 
 In order to set an argument make sure to separate the arguments using \-- from the command. Example:
@@ -1331,7 +1331,7 @@ This tells ESLint to inherit the configuration from the Scout module. In order t
 
 `npx eslint .`
 
-NOTE: If the command takes very long and prints a lot of errors, you may have to ignore the `dist` folder, see <<ESLint Ignore>>.
+NOTE: If the command takes very long and prints a lot of errors, you may have to ignore the `target/dist` folder, see <<ESLint Ignore>>.
 
 The command above will analyze your current directory including all sub directories. Depending on your environment, it is likely that you'll see some errors regarding linebreaks. This is because the Scout config enforces the UNIX format (LF). You can now either convert the linebreaks of your files to that format and adjust your editor to always use the UNIX format, or you can disable the rule. To do that, just add the following to your `.eslintrc.js`:
 
@@ -1385,7 +1385,9 @@ That's it.
 Remember: ESLint itself already supports a lot of modern EcmaScript code. You only need to enable the babel-eslint plugin if you want to use the latest features which are not yet supported by ESLint.
 
 ==== ESLint Ignore
-Similar to `.gitignore`, you can create a file called `.eslintignore` to exclude specific files or directories from the analysis. Because analyzing the build output probably does not make any sense, we recommend to at least ignore the `dist` folder. The only thing you need to do is to create that file and add a line with the word `dist`.
+Similar to `.gitignore`, you can create a file called `.eslintignore` to exclude specific files or directories from the analysis.
+Because analyzing the build output probably does not make any sense, we recommend to at least ignore the `target` folder.
+The only thing you need to do is to create that file and add a line with the word `target`.
 
 For more details please see the official ESLint documentation at
 https://eslint.org/docs/user-guide/configuring#eslintignore.
