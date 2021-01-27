@@ -30,6 +30,7 @@
 
   <modules>
     <module>beginners_guide</module>
+    <module>beginners_guide_js</module>
     <module>technical_guide</module>
     <module>technical_guide_js</module>
     <module>eclipse_help</module>
@@ -92,6 +93,7 @@
               <mdledir>${project.basedir}/../../adoc</mdledir>
               <codedir>${project.basedir}/../../../code</codedir>
               <doc-short-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</doc-short-version>
+              <doc-short-version-underlined>${parsedVersion.majorVersion}_${parsedVersion.minorVersion}</doc-short-version-underlined>
               <project-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</project-version>
             </attributes>
           </configuration>
