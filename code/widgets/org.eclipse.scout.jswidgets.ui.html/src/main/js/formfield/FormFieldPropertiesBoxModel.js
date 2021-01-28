@@ -126,8 +126,7 @@ export default () => ({
       id: 'ErrorStatusField',
       objectType: 'SmartField',
       lookupCall: 'jswidgets.StatusSeverityLookupCall',
-      label: 'Error Status',
-      displayStyle: 'dropdown'
+      label: 'Error Status'
     },
     {
       id: 'StatusPositionField',
