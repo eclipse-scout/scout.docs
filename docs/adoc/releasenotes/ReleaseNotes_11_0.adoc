@@ -111,7 +111,7 @@ So if you startup your mobile Scout Classic app you will probably notice the new
 If you don't like it you can always disable it by not creating a default detail form (`Outline#createDefaultDetailForm`)
 or by setting `Outline#getConfiguredOutlineOverviewVisible` to false.
 
-image::{rnimgsdir}/outline_overview.png.png[]
+image::{rnimgsdir}/outline_overview.png[]
 
 === More Information in Outline
 
@@ -120,7 +120,7 @@ could already create a custom summary cell for mobile, doing so is time-consumin
 This is why we decided to implement a different strategy for mobile to compute a better summary cell.
 It is enabled by default so that every table page will benefit right away.
 
-image::{rnimgsdir}/mobile_summary_cell.png.png[]
+image::{rnimgsdir}/mobile_summary_cell.png[]
 
 Since this new strategy is based on the new feature introduced for tables (<<Table: New Property 'compact'>>),
 it can be easily customized in the same way. If you don't like it you can return to the previous strategy
@@ -132,7 +132,7 @@ The device transformer now adjusts the style of a view so that it matches the st
 Also, the view tabs won't be visible anymore. This should give a more consistent look and should make it
 easier to use.
 
-image::{rnimgsdir}/mobile_view.png.png.png[]
+image::{rnimgsdir}/mobile_view.png[]
 
 If you don't like that behavior, you can disable it in general or for specific forms:
 
@@ -261,7 +261,7 @@ image::{rnimgsdir}/table_compact.png[]
 
 With this new property, the text can be positioned on the bottom of the icon
 
-image::{rnimgsdir}/menu_text_bottom.png.png[]
+image::{rnimgsdir}/menu_text_bottom.png[]
 
 === Form
 
@@ -277,14 +277,22 @@ With this new property you can manually control whether the header should be vis
 Until now it depended on the display hint property.
 This could be useful when embedding the form in a popup or another widget.
 
-=== Widget: ExecFocusIn, ExecFocusOut
+=== Widget
 
-Every widget now supports focus event. You can either use a `WidgetListener` or implement `execFocusIn` and `execFocusOut`.
+==== ExecFocusIn, ExecFocusOut
+
+Every widget now supports focus events. You can either use a `WidgetListener` or implement `execFocusIn` and `execFocusOut`.
 The currently focused element is available using `IDesktop#getFocusedElement()`.
 
 Important: the focus tracking needs to be explicitly activated before it can be used.
 Just call `IDesktop#setTrackFocus(true)` to do so.
 And remember to deactivate it again once you don't need it anymore to not produce unnecessary requests.
+
+==== New Method 'reveal'
+
+If a widget in a scrollable container is out of view you can bring it back by using the new reveal method.
+
+On JS side this method was already available, now it is available for Scout Classic apps as well.
 
 === TabBox: Support for LabelVisible
 
