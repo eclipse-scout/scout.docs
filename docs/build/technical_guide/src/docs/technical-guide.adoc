@@ -23,7 +23,10 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 This technical guide documents the Scout architecture and describes important concepts used in Scout.
 
-WARNING: This document is not complete. Contributions are welcome! +
+WARNING: This document is based on a past Scout release. Please click https://eclipsescout.github.io/stable/technical-guide.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io/ for all Scout related documentation.
+
+NOTE: This document is not complete. Contributions are welcome! +
 If you like to help, please create a pull request. Thanks! +
  +
 Repository: +
