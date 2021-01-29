@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>11.0-SNAPSHOT</version>
+    <version>22.0-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -26,43 +26,43 @@
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_beginners_guide</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>eclipse_help</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_helloworld</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_install</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_migration</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_technical_guide</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>scout_technical_guide_js</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>22.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
   </dependencies>
