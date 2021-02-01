@@ -23,8 +23,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 This technical guide documents the Scout JS architecture and describes important concepts.
 
-WARNING: This document is based on a past Scout release. Please click https://eclipsescout.github.io/stable/technical-guide-js.html[here] for the recent version. +
-Looking for something else? Visit https://eclipsescout.github.io/ for all Scout related documentation.
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/technical-guide-js.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. If you are looking for the Java part please see the technical guide for Scout Classic: https://eclipsescout.github.io/9.0/technical-guide.html
 
