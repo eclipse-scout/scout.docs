@@ -27,5 +27,5 @@ This feedback is very valuable to us as it helps to improve both the book's cont
 
 To allow for contributions to this book, the technical setup and the book's licence have been selected to minimize restrictions.
 According to the terms of the Creative Commons (CC-BY) license, you are allowed to freely use, share and adapt this book.
-All source files of the book including the Scout projects described in the book are available on https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs[Github].
+All source files of the book including the Scout projects described in the book are available on https://github.com/bsi-software/org.eclipse.scout.docs[Github].
 
