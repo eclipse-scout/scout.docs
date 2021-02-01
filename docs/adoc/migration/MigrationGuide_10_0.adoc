@@ -20,8 +20,6 @@ The following changes were made after the initial 10.0 release.
 
 ==== 10.0.10
 
-WARNING: {NotReleasedWarning}
-
 * <<AjaxCall (since 10.0.10)>>
 
 // ==== Upcoming -- No Planned Release Date
