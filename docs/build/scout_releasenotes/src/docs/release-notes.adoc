@@ -15,6 +15,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 //:numbered:
 
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/release-notes.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
 
 :_footer-link-path: build/scout_releasenotes/src/docs/{docname}.adoc
