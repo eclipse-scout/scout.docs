@@ -13,6 +13,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 :toc: left
 
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/technical-guide.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 //:numbered:
 include::_Architecture.adoc[]
 
