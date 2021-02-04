@@ -73,7 +73,7 @@ To install the Scout SDK into your existing Eclipse IDE, use this update site: +
 http://download.eclipse.org/scout/releases/7.0/7.0.300/005_Oxygen_3/
 
 ==== Demo Applications
-The demo applications for this version can be found on the https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/features/version/7.0.300.005_Oxygen_3[features/version/7.0.300.005_Oxygen_3] branch of our docs repository on GitHub.
+The demo applications for this version can be found on the https://github.com/bsi-software/org.eclipse.scout.docs/tree/features/version/7.0.300.005_Oxygen_3[features/version/7.0.300.005_Oxygen_3] branch of our docs repository on GitHub.
 
 If you just want to play around with them without looking at the source code, you can always use the deployed versions:
 
