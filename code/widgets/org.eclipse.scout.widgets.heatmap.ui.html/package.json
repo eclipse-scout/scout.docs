@@ -6,7 +6,7 @@
   "homepage": "https://www.eclipse.org/scout",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs"
+    "url": "https://github.com/bsi-software/org.eclipse.scout.docs"
   },
   "license": "EDL-1.0",
   "publishConfig": {

@@ -14,7 +14,7 @@ This cheat sheet shows how to implement your own custom field for a ScoutJS appl
 ==== Setup
 For this example we use the helloscout git repository, but you can easily create the field in your own code base as well. In case you want to use the helloscout repo, clone and import it into your favourite IDE:
 
- git clone https://github.com/BSI-Business-Systems-Integration-AG/helloscout.git
+ git clone https://github.com/bsi-software/helloscout.git
 
 Read the readme and start the hellojs application to make sure it works.
 

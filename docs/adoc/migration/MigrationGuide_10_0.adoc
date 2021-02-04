@@ -55,7 +55,7 @@ For a standard Scout application it has to be executed for the .ui module.
 If your project contains more modules containing JavaScript, CSS or HTML code, the migration application has to be executed for each of these (e.g. .app module).
 To launch the migration application follow these steps:
 
-. Clone the following git repository and import it into an empty eclipse workspace: https://github.com/BSI-Business-Systems-Integration-AG/scout-10-migration-template.
+. Clone the following git repository and import it into an empty eclipse workspace: https://github.com/bsi-software/scout-10-migration-template.
 The workspace and git repository are only necessary temporarily and can be deleted again after the migration.
 . The migration app requires at least Java 8. Also make sure the migration project uses the same encoding as your source code files (a regular scout project uses UTF-8 by default).
 If you use a different encoding, adjust the property in the pom.xml and press Alt+F5 to reimport the changes:
