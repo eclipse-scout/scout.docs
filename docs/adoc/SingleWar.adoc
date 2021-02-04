@@ -12,5 +12,5 @@ This can be achieved by including `org.eclipse.scout.rt.serverbridge` in your de
 
 The contacts example application has a launch configuration showing this setup
 footnote:[
-https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/{doc-short-version}.x/code/contacts/org.eclipse.scout.contacts.all.app.dev
+https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}.x/code/contacts/org.eclipse.scout.contacts.all.app.dev
 ].

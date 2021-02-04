@@ -13,7 +13,7 @@ public final class WidgetsClientConfigProperties {
 
     @Override
     protected String getDefaultValue() {
-      return "https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/blob";
+      return "https://github.com/bsi-software/org.eclipse.scout.docs/blob";
     }
   }
 
