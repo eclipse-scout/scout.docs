@@ -1,7 +1,7 @@
 == Create Custom Widget
 
 This is a very rough guide how to create your custom widget/field.
-For details please refer to https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs under
+For details please refer to https://github.com/bsi-software/org.eclipse.scout.docs under
 /code/heatmap you find the example of a heat map implemented as custom scout field using the java script libraries from http://leafletjs.com and
 https://github.com/Leaflet/Leaflet.heat.
 

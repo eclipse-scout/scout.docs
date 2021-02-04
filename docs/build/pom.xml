@@ -97,7 +97,7 @@
             <attributes>
               <sourcedir>${project.build.sourceDirectory}</sourcedir>
               <project-version>${project.version}</project-version>
-              <repository>BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs</repository>
+              <repository>bsi-software/org.eclipse.scout.docs</repository>
               <branch>releases/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.x</branch>
               <imagesdir></imagesdir>
               <imgsdir>${project.basedir}/../../imgs</imgsdir>

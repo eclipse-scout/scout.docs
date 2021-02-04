@@ -60,7 +60,7 @@ image::{imgsdir}/app_contacts_personform.png[]
 
 To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
 Github.footnote:[
-"`Contacts`" on Github: https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts
+"`Contacts`" on Github: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts
 ],
 and start from there.
 Alternatively, you can pull a Docker image of the "`Contacts`" application from Docker Hub.footnote:[
