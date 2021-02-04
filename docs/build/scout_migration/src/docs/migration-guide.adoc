@@ -15,8 +15,8 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 //:numbered:
 
-:doc_version_7_0: https://eclipsescout.github.io/7.0/migration-guide.html
-include::{mdledir}/release_oxygen_6_1.adoc[]
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/migration-guide.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 include::{mdledir}/migration/MigrationGuide.adoc[]
 

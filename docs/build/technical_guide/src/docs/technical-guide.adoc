@@ -17,14 +17,14 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 // Scout Technical Guide
 //-----------------------------------------------------------------------------
 
-:doc_version_7_0: https://eclipsescout.github.io/7.0/technical-guide.html
-include::{mdledir}/release_oxygen_6_1.adoc[]
-
 :sectnums!:
 
 == Introduction
 
 This technical guide documents the Scout architecture and describes important concepts used in Scout.
+
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/migration-guide.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 WARNING: This document is not complete. Contributions are welcome! +
 If you like to help, please create a pull request. Thanks! +
