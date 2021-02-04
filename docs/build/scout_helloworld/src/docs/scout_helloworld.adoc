@@ -11,6 +11,9 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/helloworld.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 After installing the Eclipse Scout package you are now ready to create your first Scout application.
 
 == Create a Scout Project
