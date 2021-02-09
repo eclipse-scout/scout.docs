@@ -298,3 +298,37 @@ On JS side this method was already available, now it is available for Scout Clas
 
 Setting the property `labelVisible` to false will now hide the tab area.
 Until now, the property had no effect for tab boxes.
+
+== Maven master
+
+Some maven profiles have been removed from the maven master (e.g. `org.eclipse.scout:maven_rt_plugin_config-master`) (since 3.13.5).
+These profiles have been used for release management.
+No Scout build jobs do still use git commands through maven.
+Instead, any git command is issued directly (usually from a jenkins pipeline).
+Therefore, we cannot support these profiles anymore.
+If any of these profiles or configurations are still in use in your project, you may copy them from an older maven master version into your own parent maven pom.
+
+.Removed profiles
+* `release.setversion`
+* `release.checkin`
+* `release.tag`
+
+.Removed related properties
+* `master_release_pushChanges`
+* `master_release_tagName`
+* `master_release_checkinMessage`
+
+Also, the default plugin configuration of `org.apache.maven.plugins:maven-release-plugin` was removed.
+
+The following script is a template which can be used to change the project versions for a new release build without the removed profiles and direct git commands.
+
+.Shell script to set project version to a new version for release builds
+[source,Shell]
+--
+# set version of maven project modules
+mvn -f ${mavenParentPom} org.codehaus.mojo:versions-maven-plugin:set -DnewVersion=${newVersion} -DgenerateBackupPoms=false
+# set version of npm project packages
+mvn -f ${mavenParentPom} process-sources -N -P npm-install-node,npm-install-workspace,npm-deploy -Dmaster_node_dir=\${NODE_BIN} -Dmaster_npm_release_build=true -Dmaster_release_newVersion=${newVersion}
+# add changed files to git changes
+git add "**/pom.xml" "**/package.json"
+--

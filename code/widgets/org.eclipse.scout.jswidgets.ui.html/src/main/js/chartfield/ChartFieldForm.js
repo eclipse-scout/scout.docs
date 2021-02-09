@@ -72,7 +72,11 @@ export default class ChartFieldForm extends Form {
     this.tileChart = this.tileChartField.chart;
 
     this.fieldChart.on('propertyChange:config', event => {
-      chartTile.setColorScheme(((event.newValue || {}).options || {}).colorScheme);
+      let colorScheme = ((event.newValue || {}).options || {}).colorScheme;
+      if (colorScheme && typeof colorScheme === 'object') {
+        colorScheme = $.extend(true, {}, colorScheme);
+      }
+      chartTile.setColorScheme(colorScheme);
     });
 
     let autoColorCheckBox = this.widget('AutoColorCheckBox');
@@ -295,7 +299,18 @@ export default class ChartFieldForm extends Form {
       let newChart = event.newValue ? this.tileChart : this.fieldChart;
 
       newChart.setData(oldChart.data);
-      newChart.setConfig(oldChart.config);
+
+      let chartConfig = this._getChartConfig();
+      chartConfig = $.extend(true, {}, chartConfig, {
+        options: {
+          colorScheme: {
+            tile: event.newValue
+          }
+        }
+      });
+      this._setChartConfig(chartConfig);
+      newChart.setConfig(this._getCombinedConfig());
+
       this.eventsTab.setField(newChart);
 
       this.chart = newChart;
@@ -303,15 +318,16 @@ export default class ChartFieldForm extends Form {
 
     let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.on('propertyChange:value', event => {
-      let config = this._getChartConfig();
+      let config = this._getChartConfig(),
+        colorScheme = colorSchemes.ensureColorScheme(event.newValue, tileCheckBox.value);
       config = $.extend(true, {}, config, {
         options: {
-          colorScheme: event.newValue
+          colorScheme: colorScheme
         }
       });
       this._setChartConfig(config);
 
-      chartTile.setColorScheme(event.newValue);
+      chartTile.setColorScheme(colorScheme);
     });
     colorSchemeField.setValue(colorSchemes.ColorSchemeId.DEFAULT);
 
@@ -1401,13 +1417,17 @@ export default class ChartFieldForm extends Form {
     return this.chartConfig;
   }
 
+  _getCombinedConfig() {
+    return $.extend(true, {}, this.customChartConfig, this.chartConfig);
+  }
+
   _setChartConfig(config) {
     this.chartConfig = config || {};
-    this.chart.setConfig($.extend(true, {}, this.customChartConfig, this.chartConfig));
+    this.chart.setConfig(this._getCombinedConfig());
   }
 
   _setCustomChartConfig(config) {
     this.customChartConfig = config || {};
-    this.chart.setConfig($.extend(true, {}, this.customChartConfig, this.chartConfig));
+    this.chart.setConfig(this._getCombinedConfig());
   }
 }

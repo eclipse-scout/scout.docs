@@ -17,6 +17,7 @@ ifndef::rndir[:rndir: {mdledir}/releasenotes]
 
 //:numbered:
 
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 include::{rndir}/ReleaseNotes.adoc[]
 
 :_footer-link-path: build/scout_releasenotes/src/docs/{docname}.adoc
