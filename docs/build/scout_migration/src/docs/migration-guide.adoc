@@ -15,6 +15,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 //:numbered:
 
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 include::{mdledir}/migration/MigrationGuide.adoc[]
 
 :_footer-link-path: build/scout_migration/src/docs/{docname}.adoc
