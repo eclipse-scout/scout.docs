@@ -301,7 +301,7 @@ Until now, the property had no effect for tab boxes.
 
 == Maven master
 
-Some maven profiles have been removed from the maven master (e.g. `org.eclipse.scout:maven_rt_plugin_config-master`) (since 3.13.5).
+Some maven profiles have been removed from the maven master (e.g. `org.eclipse.scout:maven_rt_plugin_config-master`) (since 3.14.1).
 These profiles have been used for release management.
 No Scout build jobs do still use git commands through maven.
 Instead, any git command is issued directly (usually from a jenkins pipeline).
