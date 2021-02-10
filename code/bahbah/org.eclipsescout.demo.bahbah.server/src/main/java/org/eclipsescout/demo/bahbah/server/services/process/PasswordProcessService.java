@@ -63,7 +63,7 @@ public class PasswordProcessService extends AbstractPasswordManagementService im
   }
 
   @Override
-  protected String getUsernameFor(String userId) {
+  public String getUsernameFor(String userId) {
     StringHolder holder = new StringHolder();
     SQL.selectInto("SELECT username FROM TABUSERS WHERE u_id = :uid INTO :uname", new NVPair("uid", userId), new NVPair("uname", holder));
     return holder.getValue();
