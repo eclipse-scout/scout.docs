@@ -305,12 +305,33 @@ The given property key is searched in the following environments:
 Supported formats are simple key-value pairs, list values and map values. For more details about the format please refer to the JavaDoc of the `org.eclipse.scout.rt.platform.config.PropertiesHelper` class.
 
 Since the environment variable names are more restrictive in many shells and systems than the property names in Java, overriding a property containing a dot/period (`.`) with an environment variable would not be possible.
-To still allow overriding of such properties, the folllowing lookup rules are applied in-order to find a matching environment variable:
+To still allow overriding of such properties, the following lookup rules are applied in-order to find a matching environment variable:
 
 . An exact match of your property key (`my.property`)
 . A match where periods are replaced by underscores (`my_property`)
 . An uppercase match of your property key (`MY.PROPERTY`)
 . An uppercase match where periods are replaced by underscores (`MY_PROPERTY`)
+
+When it comes to working with mapped config properties (subclasses of `org.eclipse.scout.rt.platform.config.AbstractMapConfigProperty`), there's also some special mechanic to consider in terms of providing or overriding property map values using environment variables.
+Since it is not possible to reliably retrieve the original map key from an environment variable (again, due to the restrictions mentioned above), property map values may be supplied using environment variables whose value is a JSON object string:
+
+[source]
+----
+my_map_property={"map-key-01": "value-01", "map-key-02": "value-02", "map-key-03": null}
+----
+
+The following rules apply, when such environment variables are read:
+* property map key/value pairs are added from the JSON object to the property map, overriding keys already being defined by sources of lower precedence (e.g. config.properties file)
+* a JSON object attribute value of "null" will remove a key potentially being defined by sources of lower precedence
+
+The parsing of JSON object strings is abstracted away using the new `org.eclipse.scout.rt.platform.config.IJsonPropertyReader` interface as parsing JSON strings is not implemented in the platform itself.
+However, there is a default implementation of this interface available in org.eclipse.scout.rt.dataobject which uses the `org.eclipse.scout.rt.platform.dataobject.IDataObjectMapper` feature to deserialize the JSON string into a Java Map.
+In order to use this, an implementation of the `IDataObjectMapper` interface is also required (e.g. `org.eclipse.scout.rt.jackson.dataobject.JacksonDataObjectMapper`).
+So in case you want to use this feature, you have to define
+* org.eclipse.scout.rt:org.eclipse.scout.rt.dataobject
+* org.eclipse.scout.rt:org.eclipse.scout.rt.jackson
+as new dependencies of your application aggregator module (if they are not already present).
+
 
 A properties file may import other config files from the classpath or any other absolute URL. This is done using the special key `import`. It can be a single value or a list:
 
