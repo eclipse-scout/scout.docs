@@ -45,6 +45,19 @@ Also make sure the Node.js installation is on the PATH. You can verify it by usi
 c:\>node --version
 v12.12.0
 ----
+==== Install pnpm
+
+Scout uses the package manager pnpm (https://pnpm.js.org/en/) with at least version 5.
+Install and verify it by using your command line.
+
+----
+npm install -g pnpm
+----
+
+----
+pnpm -v
+5.17.2
+----
 
 === Download Scout
 

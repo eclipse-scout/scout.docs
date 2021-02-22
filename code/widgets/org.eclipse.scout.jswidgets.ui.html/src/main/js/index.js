@@ -118,6 +118,7 @@ export {default as TableForm} from './table/TableForm';
 export {default as TablePropertiesBox} from './table/TablePropertiesBox';
 export {default as ColumnLookupCall} from './table/ColumnLookupCall';
 export {default as ColumnPropertiesBox} from './table/ColumnPropertiesBox';
+export {default as BooleanColumnPropertiesBox} from './table/BooleanColumnPropertiesBox';
 export {default as NumberColumnPropertiesBox} from './table/NumberColumnPropertiesBox';
 export {default as DateColumnPropertiesBox} from './table/DateColumnPropertiesBox';
 export {default as BackgroundEffectLookupCall} from './table/BackgroundEffectLookupCall';

@@ -94,6 +94,12 @@ export default class TableForm extends Form {
 
   _createPropertiesBox(newColumn, parent) {
     switch (newColumn.objectType) {
+      case 'BooleanColumn':
+        return scout.create('jswidgets.BooleanColumnPropertiesBox', {
+          id: 'BooleanColumnPropertyField',
+          label: 'Boolean Column Properties',
+          parent: parent
+        });
       case 'DateColumn':
         return scout.create('jswidgets.DateColumnPropertiesBox', {
           id: 'DateColumnPropertyField',
@@ -112,11 +118,14 @@ export default class TableForm extends Form {
   }
 
   _removePropertiesBoxes(newColumnTypeName, tabBox) {
-    if (newColumnTypeName !== 'DateColumn') {
-      this._removePropertyBox('DateColumnPropertyField', tabBox);
+    if (newColumnTypeName !== 'BooleanColumn') {
+      this._removePropertyBox('BooleanColumnPropertyField', tabBox);
     }
     if (newColumnTypeName !== 'NumberColumn') {
       this._removePropertyBox('NumberColumnPropertyField', tabBox);
+    }
+    if (newColumnTypeName !== 'DateColumn') {
+      this._removePropertyBox('DateColumnPropertyField', tabBox);
     }
   }
 
@@ -156,7 +165,13 @@ export default class TableForm extends Form {
   }
 
   _onAddRowMenuAction() {
-    this.table.insertRow(this._createRow());
+    let col = this.table.columnById('IconColumn');
+    let row = this.table.selectedRow();
+    if (col.cell(row).value === icons.CALENDAR) {
+      col.setCellValue(row, icons.CATEGORY);
+    } else {
+      col.setCellValue(row, icons.CALENDAR);
+    }
   }
 
   _onMoveToTopMenuAction() {

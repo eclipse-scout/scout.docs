@@ -26,19 +26,30 @@ To start the launch group we use the [menu]_Run As_ menu as shown in <<img-start
 .Starting the Hello World application.
 image::{imgsdir}/sdk_start_all.png[]
 
-Because the JavaScript build needs a Node.js installation, the launching will fail if Node.js is not installed, see <<img-start_missing_node>>
+Because the JavaScript build needs a Node.js installation, the launching will fail if Node.js or pnpm is not installed, see <<img-start_missing_node>> and <<img-start_missing_pnpm>>
 
 [[img-start_missing_node]]
 .Launching fails due to missing Node.js
-image::{imgsdir}/sdk_start_missing_node.png[]
+image::{imgsdir}/sdk_missing_node.png[]
+
+[[img-start_missing_pnpm]]
+.Launching fails due to missing pnpm
+image::{imgsdir}/sdk_missing_pnpm.png[]
 
 If that is the case, we need to install a recent Node.js version.
 To do this, we visit the official download page https://nodejs.org/en/, download the LTS version for our platform and install it.
 
-IMPORTANT: The installation process could also fail if the installed Node.js is too old.
-Scout requires at least Node.js 12.1.0.
+Scout uses the package manager pnpm (https://pnpm.js.org/en/)
+Install it by using your command line.
 
-After Node.js has been installed, we can try to launch the application again using the [menu]_Run as_ menu we used before.
+----
+npm install -g pnpm
+----
+
+IMPORTANT: The installation process could also fail if the installed Node.js is too old.
+Scout requires at least Node.js 12.1.0 and pnpm 5.
+
+After Node.js and pnpm has been installed, we can try to launch the application again using the [menu]_Run as_ menu we used before.
 This time you should see console output providing information about the JS build process.
 Once the JS build has been completed successfully, the frontend and backend servers will be started automatically.
 The servers are ready as soon as the console shows _Server ready_.
