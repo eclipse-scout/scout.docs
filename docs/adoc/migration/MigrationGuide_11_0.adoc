@@ -139,13 +139,6 @@ Migration:
 
 == Automatic Script Chunks
 
-Before Scout 11 script (JavaScript and CSS) chunks have been declared explicitly.
-While you have full control on the output using this explicit definition, it is often not optimal concerning performance and might require modifications when a new module or library is added to the project.
-Therefore starting with version 11 Scout additionally supports automatic chunk creation for your script assets.
-
-When using this new feature (which is the default configuration now), chunks are automatically created based on size and code usage (imports).
-Therefore, it is no longer necessary to list every chunk manually in the html file. Instead, Scout automatically inserts the necessary script tags according to the chunks created.
-
 === Migration if you want to use automatic chunk creation (recommended)
 
 Replace all `scout:script` and `scout:stylesheet` tags in your html files with a single `scout:scripts` and `scout:stylesheets` tag (please note the extra "s" at the end).
