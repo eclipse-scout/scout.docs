@@ -1,0 +1,19 @@
+= Eclipse Scout JS: Beginner's Guide
+:doctype: book
+:author: Scout Team
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+:source-highlighter:
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+:numbered:
+include::_HelloWorldScoutJS.adoc[]
+
+:_footer-link-path: build/beginners_guide_js/src/docs/{docname}.adoc
+include::{mdledir}/_footer.adoc[]
