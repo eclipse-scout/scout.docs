@@ -3,14 +3,15 @@
 :author: Scout Team
 :email: scout-dev@eclipse.org
 :revnumber: {project-version}
-include::_initDoc.adoc[]
 
 //fallback for safe mode == secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
 ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
 
+include::{mdledir}/_initCommon.adoc[]
+
+:experimental:
 :toc: left
 
 //:numbered:
