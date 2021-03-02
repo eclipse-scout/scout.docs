@@ -24,20 +24,13 @@ include::{mdledir}/RunTheApplication.adoc[]
 == What's Next?
 
 Now that you have successfully created your first Scout application, you might want to learn more about Scout.
-To gain experience with Scout we recommend looking at the beginner's guide.
+To gain experience with Scout we recommend looking at the https://eclipsescout.github.io/{doc-short-version}/one-day-tutorial.html[One Day Tutorial].
 
-https://eclipsescout.github.io/{doc-short-version}/one-day-tutorial.html[Scout One Day Tutorial]
-
-If you are interested in Scout's concepts, architecture and features you probably want to have a look a the technical guide.
-For this, we are writing the Scout books.
-
-https://eclipsescout.github.io/{doc-short-version}/technical-guide.html[Scout Technical Guide]
+If you are interested in Scout's concepts, architecture and features you probably want to have a look at the https://eclipsescout.github.io/{doc-short-version}/technical-guide.html[Technical Guide].
 
 In case you should get stuck somewhere and need help, try to get answers by searching the web.
-And if despite reasonable efforts this approach does not help, contact us on the forum.
-Should you have solved issues on your own, please consider sharing your findings in the Scout forum as this can help other folks too.
-
-http://www.eclipse.org/forums/eclipse.scout[Scout Forum]
+And if despite reasonable efforts this approach does not help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
+Should you have solved issues on your own, please consider sharing your findings in the forum as this can help other folks too.
 
 We wish you all the best on your journey with Scout and hope to hear from you in the Scout forum.
 

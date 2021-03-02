@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>helloscout_js</artifactId>
-  <name>Eclipse Scout JS Beginner's Guide</name>
+  <name>Hello Scout JS</name>
   <packaging>pom</packaging>
 
   <build>

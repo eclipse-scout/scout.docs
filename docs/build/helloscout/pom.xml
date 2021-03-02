@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>helloscout</artifactId>
-  <name>Helloscout article</name>
+  <name>Hello Scout</name>
   <packaging>pom</packaging>
 
   <build>
