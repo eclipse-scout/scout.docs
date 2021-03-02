@@ -49,7 +49,19 @@
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>getstarted</artifactId>
+      <version>11.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
       <artifactId>helloscout</artifactId>
+      <version>11.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>helloscout_cdn</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
@@ -109,6 +121,16 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- getstarted -->
+                <inputSource>
+                  <inputFolder>../getstarted/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <htmlOutput>
+                    <outputZipFileName>getstarted.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
                 <!-- helloscout js -->
                 <inputSource>
                   <inputFolder>../helloscout_js/target/generated-docs</inputFolder>
@@ -127,7 +149,17 @@
                   <htmlOutput>
                     <outputZipFileName>helloscoutjs-full-stack.zip</outputZipFileName>
                   </htmlOutput>
-                  <pdfOutput />
+                  <pdfOutput/>
+                </inputSource>
+                <!-- helloscout cdn -->
+                <inputSource>
+                  <inputFolder>../helloscout_cdn/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <htmlOutput>
+                    <outputZipFileName>helloscout-cdn.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
                 </inputSource>
                 <!-- technical guide -->
                 <inputSource>
@@ -138,7 +170,7 @@
                   <htmlOutput>
                     <outputZipFileName>technical-guide.zip</outputZipFileName>
                   </htmlOutput>
-                  <pdfOutput />
+                  <pdfOutput/>
                 </inputSource>
                 <!-- technical guide js -->
                 <inputSource>

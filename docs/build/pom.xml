@@ -30,7 +30,9 @@
 
   <modules>
     <module>eclipse_help</module>
+    <module>getstarted</module>
     <module>helloscout</module>
+    <module>helloscout_cdn</module>
     <module>helloscout_js</module>
     <module>helloscout_js_fullstack</module>
     <module>migration</module>
