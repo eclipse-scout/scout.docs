@@ -1,0 +1,26 @@
+= Eclipse Scout One Day Tutorial
+:doctype: book
+:author: Matthias Zimmermann
+:email: scout-dev@eclipse.org
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+include::{mdledir}/BookPreface.adoc[]
+
+:numbered:
+include::_Introduction.adoc[]
+include::_HelloWorldTutorial.adoc[]
+include::_ScoutTooling.adoc[]
+include::_OneDayTutorial.adoc[]
+
+include::{mdledir}/BookScoutInstallation.adoc[]
+
+:_footer-link-path: build/one_day_tutorial/src/docs/{docname}.adoc
+include::{mdledir}/_footer.adoc[]

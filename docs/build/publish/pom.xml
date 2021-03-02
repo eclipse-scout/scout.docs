@@ -25,13 +25,19 @@
   <dependencies>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_beginners_guide</artifactId>
+      <artifactId>one_day_tutorial</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_beginners_guide_js</artifactId>
+      <artifactId>helloscout_js_fullstack</artifactId>
+      <version>11.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>helloscout_js</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
@@ -43,31 +49,31 @@
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_helloworld</artifactId>
+      <artifactId>helloscout</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_install</artifactId>
+      <artifactId>migration</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_migration</artifactId>
+      <artifactId>releasenotes</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_technical_guide</artifactId>
+      <artifactId>technical_guide</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
-      <artifactId>scout_technical_guide_js</artifactId>
+      <artifactId>technical_guide_js</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
@@ -93,23 +99,33 @@
               <outputFolder>${project.build.directory}/published-docs</outputFolder>
               <inputSources>
                 <!-- publish for downloads -->
-                <!-- beginners guide -->
+                <!-- one day tutorial -->
                 <inputSource>
-                  <inputFolder>../beginners_guide/target/generated-docs</inputFolder>
+                  <inputFolder>../one_day_tutorial/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
-                    <outputZipFileName>beginners-guide.zip</outputZipFileName>
+                    <outputZipFileName>one-day-tutorial.zip</outputZipFileName>
                   </htmlOutput>
-                  <pdfOutput />
+                  <pdfOutput/>
                 </inputSource>
-                <!-- beginners guide js -->
+                <!-- helloscout js -->
                 <inputSource>
-                  <inputFolder>../beginners_guide_js/target/generated-docs</inputFolder>
+                  <inputFolder>../helloscout_js/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
-                    <outputZipFileName>beginners-guide-js.zip</outputZipFileName>
+                    <outputZipFileName>helloscout-js.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
+                <!-- helloscout js full stack -->
+                <inputSource>
+                  <inputFolder>../helloscout_js_fullstack/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <htmlOutput>
+                    <outputZipFileName>helloscoutjs-full-stack.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
@@ -137,7 +153,7 @@
                 </inputSource>
                 <!-- scout article migration -->
                 <inputSource>
-                  <inputFolder>../scout_migration/target/generated-docs</inputFolder>
+                  <inputFolder>../migration/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <fixXrefLinks>false</fixXrefLinks>
@@ -148,7 +164,7 @@
                 </inputSource>
                 <!-- scout article releasenotes -->
                 <inputSource>
-                  <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
+                  <inputFolder>../releasenotes/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <fixXrefLinks>false</fixXrefLinks>
@@ -157,25 +173,14 @@
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
-                <!-- scout article install-guide -->
+                <!-- helloscout -->
                 <inputSource>
-                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
+                  <inputFolder>../helloscout/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <fixXrefLinks>false</fixXrefLinks>
                   <htmlOutput>
-                    <outputZipFileName>install-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- scout article helloworld -->
-                <inputSource>
-                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloworld.zip</outputZipFileName>
+                    <outputZipFileName>helloscout.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>

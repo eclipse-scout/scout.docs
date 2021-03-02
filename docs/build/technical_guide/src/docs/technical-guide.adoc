@@ -54,9 +54,5 @@ include::{mdledir}/technicalGuide/SmtpHelper.adoc[]
 include::{mdledir}/technicalGuide/ScoutJS.adoc[]
 include::{mdledir}/technicalGuide/HowTos.adoc[]
 
-//Appendix:
-
-include::{mdledir}/BookCopyright.adoc[]
-
 :_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

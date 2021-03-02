@@ -1,0 +1,53 @@
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Hello-World Tutorial"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[[cha-helloworld]]
+== "`Hello World`" Tutorial
+
+The "`Hello World`" chapter walks you through the creation of an Eclipse Scout client server application.
+When the user starts the client part of this application, the client connects to the server footnote:[
+The Scout server part of the "`Hello World`" application will be running on a web server.
+]
+and asks for some text content that is to be displayed to the user.
+Next, the server retrieves the desired information and sends it back to the client.
+The client then copies the content obtained from the server into a text field widget and displays it.
+
+The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
+We will start by building the application from scratch and then we'll deploy the complete application to a Tomcat web server.
+
+=== Installation and Setup
+
+Before you can start with the "`Hello World`" example you need to have a complete and working Scout installation.
+For this, see the step-by-step installation guide provided in <<apx-install_scout>>.
+Once you have everything installed, you are ready to create your first Scout project.
+
+[[sec-create_project_simple]]
+=== Create a new Project
+
+[[create_project_simple]]
+(((Project creation)))
+
+include::{mdledir}/CreateNewProject.adoc[]
+
+[[sec-run_initial]]
+=== Run the Initial Application
+
+include::{mdledir}/RunTheApplication.adoc[]
+
+[[sec-helloworld_export]]
+=== Export the Application
+
+include::{mdledir}/ExportTheApplication.adoc[]

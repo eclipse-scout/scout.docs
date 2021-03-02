@@ -38,8 +38,4 @@ include::{mdledir}/technicalGuideJS/ScoutJS.adoc[]
 include::{mdledir}/technicalGuideJS/BrowserSupport.adoc[]
 include::{mdledir}/technicalGuideJS/HowTos.adoc[]
 
-//Appendix:
-
-include::{mdledir}/BookCopyright.adoc[]
-
 include::{mdledir}/_footer.adoc[]

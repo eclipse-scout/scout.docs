@@ -1,0 +1,16 @@
+= The Scout JS Full Stack Tutorial
+:doctype: article
+:author: Scout Team
+:email: scout@bsi-software.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
+
+:_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
+include::{mdledir}/_footer.adoc[]
