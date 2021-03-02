@@ -147,7 +147,7 @@
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
                   <htmlOutput>
-                    <outputZipFileName>helloscoutjs-full-stack.zip</outputZipFileName>
+                    <outputZipFileName>helloscout-js-fullstack.zip</outputZipFileName>
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>

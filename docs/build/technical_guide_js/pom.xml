@@ -31,7 +31,7 @@
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <executions>
           <execution>
-            <id>book_scout_architecture-to-pdf</id>
+            <id>technical_guide_js-to-pdf</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>process-asciidoc</goal>
@@ -50,7 +50,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>book_scout_architecture-to-html</id>
+            <id>technical_guide_js-to-html</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>process-asciidoc</goal>

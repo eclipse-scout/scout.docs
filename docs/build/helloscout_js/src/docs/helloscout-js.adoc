@@ -1,4 +1,4 @@
-= Eclipse Scout JS: Beginner's Guide
+= Hello Scout JS
 :doctype: book
 :author: Scout Team
 :email: scout-dev@eclipse.org

@@ -29,7 +29,7 @@ Looking for something else? Visit https://eclipsescout.github.io for all Scout r
 
 NOTE: This document is not complete. Contributions are welcome! +
 If you like to help, please create a pull request. Thanks! +
- +
++
 Repository: +
 https://github.com/bsi-software/org.eclipse.scout.docs
 
@@ -38,4 +38,5 @@ include::{mdledir}/technicalGuideJS/ScoutJS.adoc[]
 include::{mdledir}/technicalGuideJS/BrowserSupport.adoc[]
 include::{mdledir}/technicalGuideJS/HowTos.adoc[]
 
+:_footer-link-path: build/technical_guide_js/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
