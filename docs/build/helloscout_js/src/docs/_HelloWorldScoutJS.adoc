@@ -24,7 +24,7 @@ We will start by getting the application running and then take a look at the cod
 
 === Prerequisites
 
-Make sure you have https://nodejs.dev[Node.js] 12 or higher (with npm 6.9 or higher) installed.
+Make sure you have https://nodejs.org/dist/latest-v12.x/[Node.js] 12 installed.
 
 === Get the Code
 

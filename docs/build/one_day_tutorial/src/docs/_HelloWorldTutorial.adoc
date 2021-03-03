@@ -42,11 +42,6 @@ Once you have everything installed, you are ready to create your first Scout pro
 
 include::{mdledir}/CreateNewProject.adoc[]
 
-[[sec-run_initial]]
-=== Run the Initial Application
-
-include::{mdledir}/RunTheApplication.adoc[]
-
 [[sec-helloworld_export]]
 === Export the Application
 

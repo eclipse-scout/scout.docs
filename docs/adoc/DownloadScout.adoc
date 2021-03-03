@@ -1,0 +1,84 @@
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+This section guides you through the installation of the tools required to start the `Hello Scout` application.
+
+Currently IDE support to develop Scout applications exists for IntelliJ IDEA and Eclipse.
+Such an IDE is not required but makes the development much easier.
+Here the setup for both IDEs is described. Please choose the one you prefer.
+
+=== Node.js
+
+But first Node.js needs to be installed as Scout uses it to built web assets.
+So if you don't have it yet, visit the https://nodejs.org/dist/latest-v12.x/[Node.js download site], choose the package for your platform and install it on your local machine.
+
+Make sure the Node.js installation is on the PATH. You can verify it by using your command line:
+
+----
+c:\> node --version
+v12.21.0
+----
+
+==== Add pnpm
+
+Scout uses https://pnpm.js.org/[pnpm 5] as package manager.
+Therefore install it into your Node installation by using your command line:
+
+----
+npm install -g pnpm
+----
+
+and verify that it was installed successfully with:
+
+----
+c:\> pnpm -v
+5.18.2
+----
+
+=== IntelliJ
+
+If you have no IntelliJ yet, you can download it from the https://www.jetbrains.com/idea/download[JetBrains download site].
+We recommend selecting the Ultimate edition to have the JavaScript support included in the IDE.
+There is a 30-day trial if you have no licence.
+
+Install or extract the package and run it using `bin/idea64.exe` in the installation folder.
+Follow the instructions until the `Welcome to IntelliJ IDEA` screen is shown.
+
+On the left-hand-side switch to `Plugins`, search for `Eclipse Scout` and press the green `Install` button.
+In case a `Third-Party Plugins Privacy Notice` is shown, press `Accept`. The Scout plugin does not collect or process any personal data.
+Afterwards the plugin is being downloaded from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout[JetBrains Marketplace] and installed locally.
+As soon as this is completed press the `Restart IDE` button.
+
+The same can also be achieved by navigating to `File | Settings | Plugins` in case you already have an existing IntelliJ project running.
+
+Congratulations! You have successfully set up IntelliJ IDEA for Scout development.
+
+=== Eclipse
+
+As Eclipse has no JDK included, make sure you have a Java Development Kit (JDK) installed.
+In case you need to download and install it, we recommend downloading an OpenJDK 11 (HotSpot) from https://adoptopenjdk.net/[adoptopenjdk.net].
+
+Make sure the JDK installation is on the PATH. You can verify it by using your command line:
+
+----
+C:\> java -version
+openjdk version "11.0.9.1" 2020-11-04
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.9.1+1)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.9.1+1, mixed mode)
+----
+
+Then download the `Eclipse IDE for Scout Developers` package for your platform by visiting the https://www.eclipse.org/downloads/packages[official Eclipse download page].
+After the package selection, confirm the suggested mirror and extract the downloaded archive to your local disk.
+
+Congratulations! You have successfully installed Eclipse for Scout development.
