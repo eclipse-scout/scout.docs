@@ -749,6 +749,10 @@ By default this is disabled in development mode (property `scout.devMode` is tru
 |Non standard email bounce detection: subject is checked against the provided list of heuristic subjects (partial match, case-insensitive)
 |List
 |Config Property
+|`scout.malwareScanner.path`
+|Path to a malware scanner checked directory. The default value is null which means the system temp path is used.
+|String
+|Config Property
 |`scout.mom.cluster.destination.clusterNotificationTopic`
 |Name of the topic for cluster notifications published by scout application.
 |IDestination
