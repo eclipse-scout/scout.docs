@@ -16,7 +16,7 @@ It can be opened from:
 * <<sdk_editor_nls.adoc#, The NLS Editor>> by selecting "New Entry" or "Modify Entry".
 * <<sdk_editor_java.adoc#, The Java Editor>> by using the proposal editor inside the string parameter of the `TEXTS.get("")` code.
 
-include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
+include::{mdledir}/sdk/SdkEditorNlsNewEntry.adoc[]
 
 '''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.

@@ -1,6 +1,5 @@
-
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::../_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -89,7 +88,7 @@ Per default the files follow this pattern:
 where:
 
 * `<identifier of the project>` is a chain of folders following the same convention as the Java source files with the package name.
-  For example the `org.eclipse.contacts.shared` project uses `org/eclipse/scout/contacts/shared` as path.
+For example the `org.eclipse.contacts.shared` project uses `org/eclipse/scout/contacts/shared` as path.
 * `<language>` is an identifier of the language and the country. Some possible file names:
 ** `Texts.properties` is the default language
 ** `Texts_de.properties` is for German

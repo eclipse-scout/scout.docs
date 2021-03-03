@@ -1,6 +1,5 @@
-
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::../_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -29,6 +28,7 @@ The only wizard field that then needs to be filled in manually is the *Name* fie
 By clicking on the btn:[Finish] button the wizard is started and the specified components are created.
 
 ===== Wizard Fields and Default Values
+
 Most of the fields of the <<img-sdk_wizard_page>> will be filled with default values depending on the current context of the IDE.
 The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.
 
@@ -40,6 +40,7 @@ Shared Source Folder:: The source folder of the Maven shared module used for cre
 Server Source Folder:: The source folder of the Maven server module used for creation of the service implementation. The default value is the `src/main/java` folder in the Maven server module.
 
 ===== Created Components
+
 In the <<img-sdk_wizard_page>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.client*

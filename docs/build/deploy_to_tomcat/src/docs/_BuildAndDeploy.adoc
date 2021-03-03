@@ -1,12 +1,11 @@
-
 ifndef::finaldoc[]
 include::_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../imgs]
-ifndef::codedir[:codedir: ../../code]
-ifndef::mdledir[:mdledir: .]
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 //-----------------------------------------------------------------------------
@@ -21,7 +20,7 @@ This is the moment where you need to be able to build and package your Scout app
 As Scout applications just need a servlet container to run, Scout applications can be deployed to almost any Java application server.
 For the purpose of this tutorial we will use http://tomcat.apache.org/tomcat-9.0-doc/index.html[Apache Tomcat].
 
-==== Verify the Container Security Settings
+== Verify the Container Security Settings
 
 First you need to decide if the users of your application should communicate via HTTPS with the Scout frontend server.
 We strongly recommended this setup for any productive environment.
@@ -32,7 +31,7 @@ In case HTTPS support is already enabled for your Tomcat installation, you may s
 
 Otherwise, check out the configuration process described in the http://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html[Tomcat Documentation] to enable SSL/TLS.
 
-==== Create and Install a Self-Signed Certificate
+== Create and Install a Self-Signed Certificate
 
 This section describes the creation and usage of a self-signed certificat in a localhost setting.
 
@@ -82,7 +81,7 @@ Once you no longer need the self-signed certificate file in your Java installati
 
   keytool.exe -delete -alias tomcat_localhost -storepass changeit -keystore C:\java\jre8\lib\security\cacerts
 
-==== Update the Scout Application to work with HTTP
+== Update the Scout Application to work with HTTP
 
 If you should prefer to work with HTTP only, you need to modify the security settings of your Scout application.
 This can be done with the steps described below.
@@ -95,12 +94,12 @@ This can be done with the steps described below.
 
 More on this topic can be found in the Scout Architecture Documentation.
 
-==== Create WAR Files
+== Create WAR Files
 
 We are now ready to move the `Hello World` application from our development environment to a productive setup.
 The simplest option to move our application into the 'wild' is to build it using Maven.
 This produces two WAR files footnote:[
-Web application ARchive (WAR): http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29
+Web application Archive (WAR): http://en.wikipedia.org/wiki/WAR_file_format_%28Sun%29
 ].
 
 The first WAR file contains the Scout backend server with all business logic.
@@ -122,7 +121,7 @@ As soon as the build is reporting success you can find the built WAR files:
 To see the new files within Eclipse you may need to refresh the `target` folder below each project using the F5 keystroke.
 
 [[sec-helloworld_deploy]]
-=== Deploy to Tomcat
+== Deploy to Tomcat
 
 As the final step of this tutorial, we deploy the two WAR files representing our "`Hello World`" application to a Tomcat web server.
 For this, we first need a working Tomcat installation.
@@ -164,3 +163,126 @@ Please note: In a productive environment it is recommended to deploy the server 
 This is because these two tiers have different requirements on resources, load balancing and access protection.
 Furthermore, it is strongly recommended to use an encrypted connection (e.g. TLS 1.2 footnote:[TLS: https://en.wikipedia.org/wiki/Transport_Layer_Security])
 between client browsers and the Scout frontend server AND between the Scout frontend and backend server!
+
+[appendix]
+[[apx-install_tomcat]]
+== Apache Tomcat Installation
+
+Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification.
+Specifically, Tomcat works very well to run Scout applications.
+In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article.footnote:[
+Apache Tomcat Wikipedia: http://en.wikipedia.org/wiki/Apache_Tomcat.
+].
+Then get introduced to its core component "`Tomcat Catalina`".footnote:[
+Mulesoft's introduction to Tomcat Catalina: http://www.mulesoft.com/tomcat-catalina.
+]
+before you switch to the official Tomcat homepage.footnote:[
+Apache Tomcat Homepage: http://tomcat.apache.org/
+].
+
+This section is not really a step by step download and installation guide.
+Rather, it points you to the proper places for downloading and installing Tomcat.
+We recommend to work with Tomcat version 9.0.
+Start your download from the official download site.footnote:[
+Tomcat 9 Downloads: http://tomcat.apache.org/download-90.cgi
+].
+
+[[img-tomcat_install]]
+.A successful Tomcat installation.
+image::{imgsdir}/tomcat_install.png[]
+
+Once you have downloaded and installed Tomcat 9 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon.
+To verify that Tomcat is actually running open a web browser of your choice and type http://localhost:8080 into the address bar.
+You should then see a confirmation of the successful installation according to <<img-tomcat_install>>.
+
+=== Platform Specific Instructions
+
+According to the Tomcat setup installation for Windows.footnote:[
+Tomcat Windows setup: http://tomcat.apache.org/tomcat-9.0-doc/setup.html#Windows
+]
+download the package "`32-bit/64-bit Windows Service Installer`" from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
+Then, start the installer and accept the proposed default settings.
+
+For installing Tomcat on OS X systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
+Then, follow the installation guide.footnote:[
+Installing Tomcat on OS X: http://wolfpaulus.com/journal/mac/tomcat8
+] provided by Wolf Paulus.
+
+For Linux systems download the "`tar.gz`" package from the http://tomcat.apache.org/download-90.cgi[Tomcat 9 download site].
+Then, follow the description of the Unix setup.footnote:[
+Tomcat Linux setup: http://tomcat.apache.org/tomcat-9.0-doc/setup.html#Unix_daemon
+]
+to run Tomcat as a deamon.
+If you use Ubuntu, you may want to follow the tutorial.footnote:[
+Apache Tomcat Tutorial: http://www.vogella.com/articles/ApacheTomcat/article.html
+]
+for downloading and installing Tomcat provided by Lars Vogel.
+
+[[apx-tomcat_dirs_and_files]]
+=== Directories and Files
+
+Tomcat's installation directory follows the same organisation on all platforms.
+Here, we will only introduce the most important aspects of the Tomcat installation for the purpose of this book.
+
+[[img-tomcat_install_dir]]
+.The organisation of a Tomcat installation including specific files of interest. As an example, the "`Hello World`" server application is contained in subdirectory `webapps`.
+image::{imgsdir}/tomcat_install_dir.png[]
+
+Note that some folders and many files of a Tomcat installation are not represented in <<img-tomcat_install_dir>>.
+We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book.
+In the [filename]+bin+ folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.
+
+The [filename]+conf+ folder contains a set of XML and property configuration files.
+The file [filename]+server.xml+ represents Tomcat's main configuration file.
+It is used to configure general web server aspects such as the port number of its connectors for the client server communication.
+For the default setup, port number 8080 is used for the communication between clients applications and the web server.
+The file [filename]+tomcat-users.xml+ contains a database of users, passwords and associated roles.
+
+Folder [filename]+logs+ contains various logfiles of Tomcat itself as well as host and web application log files.
+TODO [7.0] jbr: need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
+
+The folder needed for deploying web applications into a Tomcat instance is called [filename]+webapps+.
+It can be used as the target for copying WAR files into the web server.
+The installation of the WAR file then extracts its content into the corresponding directory structure as shown in <<img-tomcat_install_dir>> in the case of the file [filename]+helloworld_server.war+.
+
+Finally, folder [filename]+work+ contains Tomcat's runtime "`cache`" for the deployed web applications.
+It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application ([filename]+helloworld_server+).
+
+[[apx-tomcat_manager_app]]
+=== The Tomcat Manager Application
+
+Tomcat comes with the pre installed "`Manager App`".
+This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications.
+A comprehensive documentation for the "`Manager App`" can be found under the Tomcat homepage.footnote:[
+The Tomcat Manager Application: http://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html.
+].
+Here we only show how to start this application from the hompage of a running Tomcat installation.
+
+To access this application you can switch to the "`Manager App`" with a click on the corresponding button on the right hand side.
+The button can be found on the right hand side of <<img-tomcat_install>>.
+Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats's [java]+manager-gui+ role.
+
+[[lst-tomcat.users]]
+[source,xml]
+.Tomcat Users configuration file.
+----
+  <tomcat-users>
+    <!--
+    NOTE: By default, no user is included in the "manager-gui" role required
+    to operate the "/manager/html" web application. If you wish to use it
+    you must define such a user - the username and password are arbitrary.
+    -->
+    <user name="admin" password="s3cret" roles="manager-gui"/>
+  </tomcat-users>
+----
+
+To get at user names and passwords you can open file [filename]+tomcat-users.xml+ located in Tomcat's [filename]+conf+ directory.
+In this file the active users with their passwords and associated roles are stored.
+See Listing <<lst-tomcat.users>> for an example.
+From the content of this file, we see that user [java]+admin+ has password [java]+s3cret+ and also posesses the necessary role [java]+manager-gui+ to access the "`Manager App`".
+If file [filename]+tomcat-users.xml+ does not contain any user with this role, you can simply add new user with this role to the existing users.
+Alternatively, you also can add the necessary role to an existing user.
+Just append a comma to the existing right(s) followed by the string [java]+manager-gui+.
+Note that you will need to restart your Tomcat application after adapting the content of file [filename]+tomcat-users.xml+.
+
+With working credentials you can now start the "`Manager App`" as described the "`Hello World`" tutorial in <<sec-helloworld_deploy>>.

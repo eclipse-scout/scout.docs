@@ -6,6 +6,7 @@ endif::finaldoc[]
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
 ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
+ifndef::sdkdir[:sdkdir: ../../../../adoc/sdk]
 :experimental:
 
 //-----------------------------------------------------------------------------
@@ -14,12 +15,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-[[cha-tooling]]
-== Scout Tooling
-
 (((Scout SDK)))
 
-This chapter presents the Scout SDK tooling that is included with the Eclipse Scout.
+This chapter presents the Scout SDK plugins available for the Eclipse IDE.
 The Scout SDK provides wizards to create new project and application components, adds code assistance to the Java Editor and comes with a NLS editor to manage all translated text entries of the application.
 
 The chapter is organized as follows.
@@ -31,7 +29,7 @@ A high level description of the Scout tooling is provided in <<sec-sdk_overview>
 [[sec-sdk_motivation]]
 === Motivation for the Tooling
 
-include::{mdledir}/SdkScoutTooling.adoc[]
+include::{sdkdir}/SdkScoutTooling.adoc[]
 
 [[sec-eclipse_ide_tooling]]
 === Eclipse IDE tooling
@@ -204,26 +202,26 @@ The wizards provided by the Scout SDK are introduced and described in the sectio
 
 (((SDK Wizard!New Scout Project)))
 
-include::{mdledir}/SdkWizardProject.adoc[]
+include::{sdkdir}/SdkWizardProject.adoc[]
 
 [[sec-wizard_page]]
 ==== New Page Wizard
 
 (((SDK Wizard!New Page)))
 
-include::{mdledir}/SdkWizardPage.adoc[]
+include::{sdkdir}/SdkWizardPage.adoc[]
 
 [[sec-wizard_form]]
 ==== New Form Wizard
 
 (((SDK Wizard!New Form)))
 
-include::{mdledir}/SdkWizardForm.adoc[]
+include::{sdkdir}/SdkWizardForm.adoc[]
 
 [[sec-sdk_content_assist]]
 === Scout Content Assistance
 
-include::{mdledir}/SdkContentAssist.adoc[]
+include::{sdkdir}/SdkContentAssist.adoc[]
 
 [[sec-sdk_nls]]
 === Scout NLS Tooling
@@ -235,11 +233,11 @@ include::{mdledir}/SdkContentAssist.adoc[]
 
 Translated text entries are most frequently added when working in the Java editor view.
 
-include::{mdledir}/SdkEditorNlsContentAssist.adoc[]
+include::{sdkdir}/SdkEditorNlsContentAssist.adoc[]
 
 Adding a translated text can then be done in the [wizard]_New Entry_ wizard provided by the Scout SDK as shown in <<img-new_text_entry_wizard>>.
 
-include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
+include::{sdkdir}/SdkEditorNlsNewEntry.adoc[]
 
 [[sec-nls_editor]]
 ==== The NLS Editor
@@ -254,4 +252,6 @@ The NLS editor can be accessed for each text provider service of a Scout applica
 In the case of the "Hello World" application you will find the `Texts.nls` file in module `org.eclipse.scout.helloworld.shared`.
 To open the editor for the "Hello World" application select the `Texts.nls` file first and then use context menu menu:Open With[NLS Editor].
 
-include::{mdledir}/SdkEditorNls.adoc[]
+include::{sdkdir}/SdkEditorNls.adoc[]
+
+include::{sdkdir}/SdkEclipseInstallation.adoc[]

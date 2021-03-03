@@ -15,23 +15,17 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 //-----------------------------------------------------------------------------
 
 [[cha-large_example]]
-== A One Day Tutorial
-
-In this chapter we will create the "`Contacts`" Scout application.
-The goal of this tutorial application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application.
+In this tutorial we will create the "`Contacts`" Scout application.
+The goal of this application is to learn about the most prominent features of the Eclipse Scout framework using a fully functional application.
 
 The application is kept small enough to complete this tutorial within less than a day.
 An extended version of "`Contacts`" is available as a Scout sample application on link:https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github].
 
-As a prerequisite to this tutorial we assume that the reader has successfully completed the chapters "Hello World Tutorial" and "Import the Scout Demo Applications" as described in the Eclipse Scout user guide.
-To access the Scout user guide help hit kbd:[F1] in the Eclipse IDE.
-This opens the Eclipse help view that includes the Eclipse Scout User Guide as shown in <<img-sdk_f1>>.
+This tutorial uses the Eclipse IDE and the Scout SDK.
+If you have successfully completed the http://eclipsescout.github.io/{scout-short-version}/helloscout.html[Hello Scout Tutorial] you should have a running Eclipse Scout installation.
+If not, then you should do the Hello Scout Tutorial now.
 
-[[img-sdk_f1]]
-.The Eclipse help view including the Eclipse Scout User Guide.
-image::{imgsdir}/sdk_f1.png[]
-
-The "`Contacts`" tutorial is organized as follows.
+The "`One Day Tutorial`" is organized as follows.
 In the first section, the finished "`Contacts`" application is explained from the user perspective.
 The remaining sections focus on the individual steps to implement the "`Contacts`" tutorial application.
 
@@ -97,6 +91,10 @@ Here is a sample file that might be used as starting point:
 target/
 .surefire-*
 .flattened-pom.xml
+
+# Node
+node_modules/
+test-results/
 
 # Do not check in any log files
 *.log

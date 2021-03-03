@@ -1,6 +1,5 @@
-
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::../_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -15,7 +14,9 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-Before you can install Scout make sure that you have a working Java Development Kit (JDK) installation version 11.
+==== Prerequisites
+
+Before you can install the Scout SDK make sure that you have a working Java Development Kit (JDK) installation version 11.
 
 You can check your installation on the command line as follows.
 
@@ -25,6 +26,17 @@ openjdk version "11.0.1" 2018-10-16
 OpenJDK Runtime Environment 18.9 (build 11.0.1+13)
 OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
 ----
+
+Please note that the Scout does not officially support other Java versions, but it may still work.
+
+When downloading a Java 11 JDK it is recommended to choose version 11.0.1 or newer.
+Please note that only x64 hardware architectures are supported.
+
+You can download the JDK archive matching your operating system from the Java homepage.footnote:[
+OpenJDK 11 download: https://jdk.java.net/11/
+] Afterwards extract the archive to a location of your choice.
+
+==== Install the Scout Package
 
 To download the Eclipse Scout package visit the official Eclipse download page.
 

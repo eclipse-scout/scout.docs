@@ -19,7 +19,7 @@ Select menu:Open With[NLS Editor] in the context menu
 
 ==== The NLS Editor
 
-include::{mdledir}/SdkEditorNls.adoc[]
+include::{mdledir}/sdk/SdkEditorNls.adoc[]
 
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.

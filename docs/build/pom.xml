@@ -35,10 +35,12 @@
     <module>helloscout_cdn</module>
     <module>helloscout_js</module>
     <module>helloscout_js_fullstack</module>
+    <module>deploy_to_tomcat</module>
     <module>migration</module>
     <module>one_day_tutorial</module>
     <module>publish</module>
     <module>releasenotes</module>
+    <module>sdk_eclipse</module>
     <module>sdk_tests</module>
     <module>technical_guide</module>
     <module>technical_guide_js</module>

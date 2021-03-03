@@ -15,7 +15,7 @@ The Scout Tooling provides wizards to create new project and application compone
 
 === Effects on Productivity and Code Quality
 
-include::{mdledir}/SdkScoutTooling.adoc[]
+include::{mdledir}/sdk/SdkScoutTooling.adoc[]
 
 === Learn More
 

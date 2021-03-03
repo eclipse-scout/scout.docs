@@ -9,7 +9,7 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-include::{mdledir}/SdkWizardForm.adoc[]
+include::{mdledir}/sdk/SdkWizardForm.adoc[]
 
 '''
 Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.

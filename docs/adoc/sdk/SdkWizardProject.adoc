@@ -1,6 +1,5 @@
-
 ifndef::finaldoc[]
-include::_initDoc.adoc[]
+include::../_initDoc.adoc[]
 endif::finaldoc[]
 
 //fallback for safe mode == secure:
@@ -30,6 +29,7 @@ A detailed description of the indiviudal wizard fields of <<img-sdk_wizard_proje
 By clicking on the btn:[Finish] button the wizard is started and a new Scout client server application is created in the form of a Maven multi-module project.
 
 ===== Wizard Fields and Default Values
+
 All fields of the <<img-sdk_wizard_project>> are initially filled with default values.
 
 Group Id:: Maven groupId used for all created projects. The default value is `org.eclipse.scout.apps`.
@@ -41,6 +41,7 @@ Unchecked the [element]_Use default Workspace location_ checkbox to enter an oth
 The btn:[Browse...] button can help you to find the appropriate path.
 
 ===== Created Components
+
 With the <<img-sdk_wizard_project>> wizard a complete Maven multi-module project is created.
 Using the default artifact Id *helloworld* the following Maven modules are created.
 

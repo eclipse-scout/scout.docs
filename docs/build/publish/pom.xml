@@ -67,6 +67,18 @@
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>deploy_to_tomcat</artifactId>
+      <version>11.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>sdk_eclipse</artifactId>
+      <version>11.0-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
       <artifactId>migration</artifactId>
       <version>11.0-SNAPSHOT</version>
       <type>pom</type>
@@ -131,6 +143,17 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- helloscout -->
+                <inputSource>
+                  <inputFolder>../helloscout/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>helloscout.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
                 <!-- helloscout js -->
                 <inputSource>
                   <inputFolder>../helloscout_js/target/generated-docs</inputFolder>
@@ -161,6 +184,16 @@
                   </htmlOutput>
                   <pdfOutput/>
                 </inputSource>
+                <!-- one day tutorial -->
+                <inputSource>
+                  <inputFolder>../deploy_to_tomcat/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <htmlOutput>
+                    <outputZipFileName>deploy-to-tomcat.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput/>
+                </inputSource>
                 <!-- technical guide -->
                 <inputSource>
                   <inputFolder>../technical_guide/target/generated-docs</inputFolder>
@@ -183,7 +216,7 @@
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
-                <!-- scout article migration -->
+                <!-- migration guide -->
                 <inputSource>
                   <inputFolder>../migration/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
@@ -194,7 +227,7 @@
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
-                <!-- scout article releasenotes -->
+                <!-- releasenotes -->
                 <inputSource>
                   <inputFolder>../releasenotes/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
@@ -205,16 +238,15 @@
                   </htmlOutput>
                   <pdfOutput />
                 </inputSource>
-                <!-- helloscout -->
+                <!-- sdk for eclipse -->
                 <inputSource>
-                  <inputFolder>../helloscout/target/generated-docs</inputFolder>
+                  <inputFolder>../sdk_eclipse/target/generated-docs</inputFolder>
                   <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
                   <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
                   <htmlOutput>
-                    <outputZipFileName>helloscout.zip</outputZipFileName>
+                    <outputZipFileName>sdk-eclipse.zip</outputZipFileName>
                   </htmlOutput>
-                  <pdfOutput />
+                  <pdfOutput/>
                 </inputSource>
                 <!-- publish for eclipse help -->
                 <inputSource>
