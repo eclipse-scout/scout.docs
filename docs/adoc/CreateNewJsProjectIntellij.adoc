@@ -1,0 +1,73 @@
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+Start your IntelliJ (if not already running) and in the `Welcome to IntelliJ IDEA` screen click on `New Project`. The `New Project` wizard starts.
+The same can also be achieved from the menu `File | New | Project...` if an existing project is open already.
+
+On the left hand side select the `Scout` type.
+You have to enter a `Group Id`, `Artifact Id` and a `Display Name` for your Scout project as shown in <<img-sdk_new_projectjs_wizard_ij>>.
+As the created project will make use of https://maven.apache.org/[Apache Maven] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `Group Id` and `Artifact Id` for your project.
+The `Display Name` is used as the application name presented to the user (e.g. in the browser title bar).
+
+[[img-sdk_new_projectjs_wizard_ij]]
+.The new Scout project wizard.
+image::{imgsdir}/sdk_new_projectjs_ij.png[]
+
+For the `Hello Scout JS Full Stack` application use `helloscoutjs` as the artifact id and ensure the user interface programming language is set to `JavaScript` as sown in <<img-sdk_new_projectjs_wizard_ij>>.
+You can keep the other default values. Then click the btn:[Next] button.
+
+[[img-sdk_new_projectjs_location_ij]]
+.Specify name and location of the new project.
+image::{imgsdir}/sdk_new_projectjs_location_ij.png[]
+On the second page please specify project name and location and press btn:[Finish].
+The Scout plugin then creates the initial project content for you (you will see some Maven build output).
+Wait until all tasks have completed.
+
+Afterwards you will find the created Scout modules in the Project view as shown in <<img-sdk_new_projectjs_initial_helloworld_ij>>.
+
+[[img-sdk_new_projectjs_initial_helloworld_ij]]
+.The initial set of Maven modules created for the Hello Scout application.
+image::{imgsdir}/sdk_new_projectjs_initial_helloworld_ij.png[]
+
+The `Hello Scout JS Full Stack` application's backend accesses a local https://db.apache.org/derby/[Derby] database using https://www.jooq.org/[jooq].
+For this to work you first have to setup the local database. This is done be executing the database setup application.
+
+For this click the [menu]_Add Configuration..._ menu on the top as shown in <<img-start_dbsetup_ij>>.
+In the dialog expand the `Application` type on the left-hand-side, select the prepared run configuration `Setup local dev database` and confirm with btn:[Ok].
+Then click on the green triangle symbol directly right of the [menu]_Add Configuration..._ menu.
+This will launch the db setup application which creates a new Derby database in the `helloscoutjs.app.dev/db` folder.
+
+[[img-start_dbsetup_ij]]
+.Selecting the db setup run configuration
+image::{imgsdir}/sdk_dbsetup_ij.png[]
+
+Now you are ready to start the Scout JS application.
+This includes downloading the necessary JavaScript dependencies, executing the Java and JavaScript builds and launching the Scout development server.
+It serves the JavaScript assets to the browser and acts as backend for the REST calls coming from the user interface.
+You could start each step separately, but for the sake of convenience there is a compound run configuration available which performs all these tasks.
+
+To use it switch the run configuration by clicking the run configuration menu on the top again.
+Now there is no need to open the dialog as the available run configurations are shown in a dropdown menu.
+Select the `launch all` compound and run it using the green triangle button.
+
+IMPORTANT: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
+In that case follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
+
+Once the JS build has been completed (this may take a while for the first time as some dependencies need to be downloaded) and the server has been started, the `Hello Scout JS Full Stack` application can be accessed by navigating to http://localhost:8084/ in your favorite web browser.
+
+The `Hello Scout JS Full Stack` application is then presented as shown in <<img-start_browser_hellojs_ij>>.
+
+[[img-start_browser_hellojs_ij]]
+.The Hello Scout JS Full Stack application in the browser.
+image::{imgsdir}/run_helloscoutjs_full_stack_in_browser.png[]

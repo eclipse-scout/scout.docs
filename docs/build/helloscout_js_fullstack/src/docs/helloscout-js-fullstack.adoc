@@ -1,4 +1,4 @@
-= The Scout JS Full Stack Tutorial
+= "Hello Scout JS Full Stack" Tutorial
 :doctype: article
 :author: Scout Team
 :email: scout@bsi-software.com
@@ -11,6 +11,21 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
+== Prerequisites
+
+This section guides you through the installation of the tools required to start the `Hello Scout JS Full Stack` application.
+
+=== Node.js
+
+include::{mdledir}/InstallNode.adoc[]
+
+=== IntelliJ
+
+include::{mdledir}/InstallIntelliJ.adoc[]
+
+== Create the Hello Scout JS Full Stack Project
+
+include::{mdledir}/CreateNewJsProjectIntellij.adoc[]
 
 :_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]

@@ -12,7 +12,6 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-
 Start your IntelliJ (if not already running) and in the `Welcome to IntelliJ IDEA` screen click on `New Project`. The `New Project` wizard starts.
 The same can also be achieved from the menu `File | New | Project...` if an existing project is open already.
 
