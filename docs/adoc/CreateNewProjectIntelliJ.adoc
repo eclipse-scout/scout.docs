@@ -54,7 +54,7 @@ This will download all necessary JavaScript dependencies and execute the Java an
 .Selecting the compound run configuration
 image::{imgsdir}/sdk_start_all_ij.png[]
 
-IMPORTANT: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
+TIP: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
 In that case follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
 
 Once the JS build has been completed (this may take a while for the first time as some dependencies need to be downloaded) and the two servers have been started, the `Hello Scout` application can be accessed by navigating to http://localhost:8082/ in your favorite web browser.
