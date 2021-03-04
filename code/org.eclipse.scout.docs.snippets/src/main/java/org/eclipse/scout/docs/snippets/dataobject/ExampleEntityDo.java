@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
+import org.eclipse.scout.docs.snippets.dataobject.LoremTypeVersions.Lorem_1_2_0;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
@@ -12,8 +13,8 @@ import org.eclipse.scout.rt.dataobject.TypeName;
 import org.eclipse.scout.rt.dataobject.TypeVersion;
 
 //tag::class[]
-@TypeName("ExampleEntity")
-@TypeVersion("scout-8.0.0.027")
+@TypeName("lorem.ExampleEntity")
+@TypeVersion(Lorem_1_2_0.class)
 public class ExampleEntityDo extends DoEntity {
 
   public DoValue<String> name() { // <1>

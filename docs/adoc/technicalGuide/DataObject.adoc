@@ -82,7 +82,7 @@ A stable type name is required in order to be able to change the data object str
 
 ==== Type Version  ====
 
-A data object may be  annotated with a type version using the `@TypeVersion` annotation.
+A data object may be annotated with a type version using the `@TypeVersion` annotation.
 The type version represents the version of the structure of the data object and not the version of the data within the data object.
 The type version value should be incremented, each time, the data object class is modified (add/remove/rename attributes).
 If a version is required for versioning the values of a data object, consider add a `version` attribute, incrementing its value, every time a value of the data object is modified.
@@ -92,12 +92,37 @@ The serialized `_typeVersion` value is not deserialized into an attribute, since
 
 NOTE: Declaring a logical type version using the `@TypeVersion`annotation is highly recommended if a data object is persisted as JSON document to a file or database.
 
+===== Namespace and ITypeVersion
+
+A namespace (implementation of `INamespace`) represents a container for data objects.
+Each data object must have a unique type name within a namespace.
+Scout has its own namespace (with ID `scout`), your project should use an own one.
+
+[source,java]
+.Example: LoremNamespace
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremNamespace.java[tags=class]
+----
+
+A class implementing `ITypeVersion` is used within the `@TypeVersion` annotation.
+Several type versions for one namespace may be bundled in a container class.
+
+There are a few different constructors provided by `AbstractTypeVersion` that simplify the definition of such a type version.
+The default constructor extracts the namespace and version based on the class name.
+
+[source,java]
+.Example: LoremTypeVersions
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremTypeVersions.java[tags=class]
+----
+
 ==== Data Object Naming Convention ====
 
 Scout objects use the following naming conventions:
 
 * A data object class should use the `Do' suffix.
 * The value of the `@TypeName` annotation corresponds to the simple class name without `Do` suffix
+** A namespace prefix (separated by a dot) is recommended in order to avoid duplicated type names across different modules (e.g. `scout.Bookmark`, `helloworld.MyDataObject`)
 
 ==== Attribute Name ====
 
@@ -358,14 +383,16 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 Apart from attribute descriptions, the inventory provides access to type name and type version of each data object class.
 
 === Extending with custom serializer and deserializer ===
+
 The application scoped beans `DataObjectSerializers` resp. `DataObjectDeserializers` define the available serializer and deserializer classes used to marshal the data objects.
 Own custom serializer and deserializer implementations can be added by replacing  the corresponding base class and register its own custom serializer or deserializer.
 
 === Enumerations within Data Objects
+
 Implementations of `org.eclipse.scout.rt.dataobject.enumeration.IEnum` add a `stringValue()` method to each enumeration value, guaranteeing a constant, fixed string value for each enumeration value.
 An arbitrary Java enum may be used within a data object, but does not guarantee a stable serialized value, if an enumeration value is changed in future.
 
-Additionally implementations of `IEnum` can be annotated with `@EnumName` and `@EnumVersion` to support handling of different versions and migration between.
+Additionally implementations of `IEnum` can be annotated with `@EnumName` to support being referenced in a data object signature test.
 
 All instances of `IEnum` may be used within data objects and are automatically serialized to their JSON string value representation and deserialized back to the correct Java class instance.
 
