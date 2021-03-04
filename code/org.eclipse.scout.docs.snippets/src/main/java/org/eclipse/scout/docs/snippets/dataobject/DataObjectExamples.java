@@ -13,7 +13,6 @@ import org.eclipse.scout.rt.dataobject.IDataObject;
 import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.dataobject.IDoEntity;
 import org.eclipse.scout.rt.dataobject.enumeration.EnumName;
-import org.eclipse.scout.rt.dataobject.enumeration.EnumVersion;
 import org.eclipse.scout.rt.dataobject.enumeration.IEnum;
 import org.eclipse.scout.rt.dataobject.id.AbstractUuId;
 import org.eclipse.scout.rt.dataobject.id.IdTypeName;
@@ -185,7 +184,6 @@ public class DataObjectExamples {
 
   //tag::exampleEnum[]
   @EnumName("scout.FixtureEnum")
-  @EnumVersion("scout-8.0.0.036")
   public enum ExampleEnum implements IEnum {
 
     ONE("one"),

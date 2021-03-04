@@ -12,4 +12,4 @@ ifndef::mdledir[:mdledir: .]
 //-----------------------------------------------------------------------------
 // This file contains the migration guide
 //-----------------------------------------------------------------------------
-include::MigrationGuide_11_0.adoc[]
+include::MigrationGuide_22_0.adoc[]

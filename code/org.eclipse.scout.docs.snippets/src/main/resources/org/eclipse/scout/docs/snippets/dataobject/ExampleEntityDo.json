@@ -1,5 +1,6 @@
 {
-  "_type" : "ExampleEntity",
+  "_type" : "lorem.ExampleEntity",
+  "_typeVersion": "lorem-1.2.0",
   "name" : "example",
   "values" : [1,2,3,4,5]
 }
