@@ -1,15 +1,6 @@
-= "Hello Scout JS Full Stack" Tutorial
-:doctype: article
-:author: Scout Team
-:email: scout@bsi-software.com
-:revnumber: {project-version}
-include::_initDoc.adoc[]
+= Hello Scout JS Full Stack
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+include::../../../common/src/docs/_header.adoc[]
 
 == Prerequisites
 
@@ -23,9 +14,9 @@ include::{mdledir}/InstallNode.adoc[]
 
 include::{mdledir}/InstallIntelliJ.adoc[]
 
-== Create the Hello Scout JS Full Stack Project
+== Create the Project
 
 include::{mdledir}/CreateNewJsProjectIntellij.adoc[]
 
 :_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

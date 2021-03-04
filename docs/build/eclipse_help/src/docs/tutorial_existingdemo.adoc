@@ -137,8 +137,8 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 If you have clicked on the [folder]_Persons_ node a page with all available persons is shown.
 This page is implemented in class [java]+PersonTablePage+ and the dialog to show/edit persons is implemented in class [java]+PersonForm+.
 
-This is the end of the <<tutorial.html#tutorial, getting started>> guide.
+This is the end of the <<tutorial.adoc#getting-started, getting started>> guide.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

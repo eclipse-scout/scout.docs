@@ -72,4 +72,4 @@ image::scout_sdk_super_class_proposals.png[]
 
 
 :_footer-link-path: build/sdk_tests/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

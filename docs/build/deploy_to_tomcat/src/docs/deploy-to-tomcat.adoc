@@ -1,22 +1,8 @@
-= Build Application and Deploy to Tomcat
-:doctype: article
-:author: Scout Team
-:email: scout-dev@eclipse.org
-:revnumber: {project-version}
+= Build Scout App and Deploy to Tomcat
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-
-include::{mdledir}/_initCommon.adoc[]
-
-:experimental:
-:toc: left
-
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+include::../../../common/src/docs/_header.adoc[]
 
 include::_BuildAndDeploy.adoc[]
 
 :_footer-link-path: build/deploy_to_tomcat/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

@@ -1,35 +1,12 @@
-= Eclipse Scout: Technical Guide
-:doctype: book
-:author: Scout Team
-:email: scout-dev@eclipse.org
-:revnumber: {project-version}
-include::_initDoc.adoc[]
+= Eclipse Scout Technical Guide
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
-
-:toc: left
-
-//-----------------------------------------------------------------------------
-// Scout Technical Guide
-//-----------------------------------------------------------------------------
+include::../../../common/src/docs/_header.adoc[]
 
 :sectnums!:
 
 == Introduction
 
 This technical guide documents the Scout architecture and describes important concepts used in Scout.
-
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
-
-NOTE: This document is not complete. Contributions are welcome! +
-If you like to help, please create a pull request. Thanks! +
- +
-Repository: +
-https://github.com/bsi-software/org.eclipse.scout.docs
 
 :sectnums:
 include::{mdledir}/technicalGuide/Overview.adoc[]
@@ -55,4 +32,4 @@ include::{mdledir}/technicalGuide/ScoutJS.adoc[]
 include::{mdledir}/technicalGuide/HowTos.adoc[]
 
 :_footer-link-path: build/technical_guide/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

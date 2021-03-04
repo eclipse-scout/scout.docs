@@ -1,19 +1,7 @@
 = Hello Scout JS
-:doctype: book
-:author: Scout Team
-:email: scout-dev@eclipse.org
-:revnumber: {project-version}
-:source-highlighter:
-include::_initDoc.adoc[]
+include::../../../common/src/docs/_header.adoc[]
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
-
-:numbered:
 include::_HelloWorldScoutJS.adoc[]
 
 :_footer-link-path: build/helloscout_js/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

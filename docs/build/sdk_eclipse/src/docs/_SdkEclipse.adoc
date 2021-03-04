@@ -1,13 +1,5 @@
-ifndef::finaldoc[]
-include::_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
+include::../../../common/src/docs/_folders.adoc[]
 ifndef::sdkdir[:sdkdir: ../../../../adoc/sdk]
-:experimental:
 
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "Scout Tooling"

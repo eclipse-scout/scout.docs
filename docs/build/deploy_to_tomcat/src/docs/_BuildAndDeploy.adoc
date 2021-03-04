@@ -1,12 +1,4 @@
-ifndef::finaldoc[]
-include::_initDoc.adoc[]
-endif::finaldoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+include::../../../common/src/docs/_folders.adoc[]
 
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "Export the hello scout application"

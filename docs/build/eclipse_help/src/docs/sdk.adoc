@@ -21,10 +21,10 @@ include::{mdledir}/sdk/SdkScoutTooling.adoc[]
 
 To learn more about the wizards and the editor support follow the links provided below.
 
-* <<sdk_wizard.adoc#, Scout Wizards>>
-* <<sdk_editor_java.adoc#, Java Editor Support>>
-* <<sdk_editor_nls.adoc#, NLS Editor>>
+* <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>
+* <<sdk_editor_java.adoc#additions-to-the-java-editor, Java Editor Support>>
+* <<sdk_editor_nls.adoc#nls-editor, NLS Editor>>
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

@@ -1,20 +1,10 @@
 = Hello Scout with a CDN
-:doctype: article
-:author: Scout Team
-:email: scout@bsi-software.com
-:revnumber: {project-version}
-include::_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+include::../../../common/src/docs/_header.adoc[]
 
 == Introduction
 
 A typical approach to work with Scout JS is to use a package manager (e.g. pnpm) to download the modules and a bundler (e.g. webpack) to build them.
-Thanks to the http://eclipsescout.github.io/{scout-short-version}/technical-guide-js.html##command-line-interface-cli[Scout CLI] this task is straightforward.
+Thanks to the http://eclipsescout.github.io/{scout-version}/technical-guide-js.html#command-line-interface-cli[Scout CLI] this task is straightforward.
 
 The main advantage is the simplified development process.
 You can use Less variables from Scout (e.g. the color palette).
@@ -102,4 +92,4 @@ The result could look like this: https://codepen.io/cguglielmo/pen/qBqYMvp[Eclip
 Have fun!
 
 :_footer-link-path: build/helloscout_cdn/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

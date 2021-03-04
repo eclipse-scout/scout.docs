@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -34,14 +34,13 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>
+                <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>
-                <!-- set the idprefix to blank -->
-                <idprefix />
+                <idprefix/>
                 <idseparator>-</idseparator>
-                <linkcss />
+                <linkcss/>
                 <docinfo1>true</docinfo1>
               </attributes>
             </configuration>

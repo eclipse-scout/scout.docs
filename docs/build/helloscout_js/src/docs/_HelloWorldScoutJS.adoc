@@ -3,7 +3,7 @@ ifndef::finaldoc[]
 include::_initDoc.adoc[]
 endif::finaldoc[]
 
-//fallback for safe mode == secure:
+//fallback for safe mode = secure:
 ifndef::imgsdir[:imgsdir: ../../../../imgs]
 ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
@@ -11,9 +11,9 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
 
-== _Hello World_ with Plain Scout JS
+== Introduction
 
-In this chapter we will create a _plain_ Eclipse Scout JS application,
+In this tutorial we will create a _plain_ Eclipse Scout JS application,
 that is, an application that does not require Maven or Java, only Node.js.
 
 When the user opens this application in the browser, there is a text field and a button.
@@ -22,11 +22,11 @@ Once the user enters some text and presses the button, the application displays 
 The goal of this chapter is to provide a first impression of the Scout JS framework.
 We will start by getting the application running and then take a look at the code.
 
-=== Prerequisites
+== Prerequisites
 
 Make sure you have https://nodejs.org/dist/latest-v12.x/[Node.js] 12 installed.
 
-=== Get the Code
+== Get the Code
 
 :scoutjs-helloworld: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/helloscoutjs
 
@@ -58,7 +58,7 @@ checkout branch `releases/{doc-short-version}` and use or copy that folder from 
 ----
 // structure generated with `tree /F` on Windows
 
-=== Build the Application
+== Build the Application
 
 In the main folder, where the file `package.json` is located, open a terminal and execute `**npm install**`.
 
@@ -72,7 +72,7 @@ This creates a `dist` folder that contains the transpiled and bundled files to b
 
 TIP: Use `npm run build:dev:watch` to have these files automatically updated when the corresponding source files change.
 
-=== Run the Application
+== Run the Application
 
 Use the same or start a new terminal in the main folder and execute `**npm run serve:dev:watch**`.
 
@@ -84,7 +84,7 @@ Type some text in the field and press the button to test the application.
 Also check out how the layout changes when you narrow the browser window
 (or e.g. use Google Chrome's DevTools to emulate a smaller device).
 
-=== Understand the Code
+== Understand the Code
 
 Let's now have a closer look at the files that were needed to build this application.
 
@@ -92,13 +92,13 @@ In the main folder there are files containing information for the build, e.g. de
 In the subfolder `res/` there are static resources that are just copied to `dist/res/` in the build.
 And in the subfolder `src/` you find the source files that are transformed and bundled by webpack.
 
-==== Build Information
+== Build Information
 
 :the-package-json-guide: https://nodejs.dev/learn/the-package-json-guide
 :the-package-lock-json-file: https://nodejs.dev/learn/the-package-lock-json-file
 :technical-guide-js-build-stack: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html#build-stack
 
-===== npm
+=== npm
 
 For `npm` commands like `npm install` or `npm run <script>`, the file `package.json` provides the necessary information.
 
@@ -123,7 +123,7 @@ For more detailed and general information about `package.json` and `package-lock
 see the official documentation on Node.js:
 {the-package-json-guide}[The package.json guide] and {the-package-lock-json-file}[The package-lock.json file].
 
-===== webpack
+=== webpack
 
 As defined in `package.json`, the script `build:dev` executes `scout-scripts build:dev`.
 `scout-scripts` is a command provided by the `@eclipse-scout/cli` module.
@@ -153,7 +153,7 @@ just make sure you also adjust the **references in** `**index.html**` accordingl
 
 For more details on the build, see the {technical-guide-js-build-stack}[_Build Stack_ chapter in the technical guide].
 
-==== Static Resources
+== Static Resources
 
 For an HTML file to be valid (see https://validator.w3.org/[The W3C Markup Validation Service]),
 it has to define a `DOCTYPE`, a default language and a title.
@@ -175,9 +175,9 @@ In the future, this file should be part of `@eclipse-scout/core` and contain tex
 but for now we have to place it next to our own static resources.
 You can get this file e.g. using Google Chrome's DevTools when loading the {jswidgets}[Scout JS Widgets] application.
 
-==== Source Files
+== Source Files
 
-===== Entry Points
+=== Entry Points
 
 .src/helloworld.js
 [source,js]
@@ -192,11 +192,11 @@ Before we initialize an instance of the Scout application, providing the locatio
 we do two other things:
 
 1. Use `scout.addObjectFactories` to register a function (identified by 'Desktop')
-    that provides an instance of our `Desktop` class.
-    The desktop is the main widget of a Scout application and the root of every other widget.
-    On application initialization, Scout is using that factory to create the desktop of our application.
+that provides an instance of our `Desktop` class.
+The desktop is the main widget of a Scout application and the root of every other widget.
+On application initialization, Scout is using that factory to create the desktop of our application.
 2. Define our own namespace object, `helloworld`, and put our `HelloForm` class in it,
-    so Scout can use it to build modular widgets at runtime (see `DesktopModel.js`).
+so Scout can use it to build modular widgets at runtime (see `DesktopModel.js`).
 
 .src/helloworld.less
 [source,less]
@@ -208,7 +208,7 @@ Since we don't need any custom styling for our application, we just import Scout
 
 TIP: To try out Scout's dark theme, just import `index-dark` instead of `index`.
 
-===== Widgets
+=== Widgets
 
 We follow the best practice of separating model (layout, structure) and behavior code.
 This also makes it easier to e.g. reuse a form that should look similar elsewhere but behave differently.
@@ -265,7 +265,7 @@ to implement the desired behavior when the button is clicked.
 To accomplish this, we can access our button and field by their respective `id` (see `HelloFormModel.js`).
 An OK message box with the desired text is displayed using the convenience class `MessageBoxes` from Scout.
 
-==== Git configuration
+== Git configuration
 
 If you want to add the created application to a Git repository, it is recommended to exclude some files from the SCM.
 
@@ -288,7 +288,7 @@ test-results/
 
 See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 
-=== What's Next?
+== What's Next?
 
 :jswidgets-code: https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/{doc-short-version}/code/widgets
 :technical-guide-js: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html

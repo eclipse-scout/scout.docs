@@ -1,22 +1,7 @@
 = Scout SDK for Eclipse
-:doctype: article
-:author: Scout Team
-:email: scout-dev@eclipse.org
-:revnumber: {project-version}
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-
-include::{mdledir}/_initCommon.adoc[]
-
-:experimental:
-:toc: left
-
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+include::../../../common/src/docs/_header.adoc[]
 
 include::_SdkEclipse.adoc[]
 
 :_footer-link-path: build/sdk_eclipse/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]

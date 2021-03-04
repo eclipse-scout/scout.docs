@@ -1,15 +1,6 @@
-= The "Hello Scout" Tutorial
-:doctype: article
-:author: Scout Team
-:email: scout@bsi-software.com
-:revnumber: {project-version}
-include::_initDoc.adoc[]
+= Hello Scout
 
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+include::../../../common/src/docs/_header.adoc[]
 
 == Prerequisites
 
@@ -30,4 +21,4 @@ If you are interested in Scout's concepts, architecture and features you probabl
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
 :_footer-link-path: build/helloscout/src/docs/{docname}.adoc
-include::{mdledir}/_footer.adoc[]
+include::../../../common/src/docs/_footer.adoc[]
