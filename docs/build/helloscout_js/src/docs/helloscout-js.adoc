@@ -84,13 +84,13 @@ In the main folder there are files containing information for the build, e.g. de
 In the subfolder `res/` there are static resources that are just copied to `dist/res/` in the build.
 And in the subfolder `src/` you find the source files that are transformed and bundled by webpack.
 
-== Build Information
+=== Build Information
 
 :the-package-json-guide: https://nodejs.dev/learn/the-package-json-guide
 :the-package-lock-json-file: https://nodejs.dev/learn/the-package-lock-json-file
 :technical-guide-js-build-stack: https://eclipsescout.github.io/{doc-short-version}/technical-guide-js.html#build-stack
 
-=== npm
+==== npm
 
 For `npm` commands like `npm install` or `npm run <script>`, the file `package.json` provides the necessary information.
 
@@ -115,7 +115,7 @@ For more detailed and general information about `package.json` and `package-lock
 see the official documentation on Node.js:
 {the-package-json-guide}[The package.json guide] and {the-package-lock-json-file}[The package-lock.json file].
 
-=== webpack
+==== webpack
 
 As defined in `package.json`, the script `build:dev` executes `scout-scripts build:dev`.
 `scout-scripts` is a command provided by the `@eclipse-scout/cli` module.
@@ -145,7 +145,7 @@ just make sure you also adjust the **references in** `**index.html**` accordingl
 
 For more details on the build, see the {technical-guide-js-build-stack}[_Build Stack_ chapter in the technical guide].
 
-== Static Resources
+=== Static Resources
 
 For an HTML file to be valid (see https://validator.w3.org/[The W3C Markup Validation Service]),
 it has to define a `DOCTYPE`, a default language and a title.
@@ -167,9 +167,9 @@ In the future, this file should be part of `@eclipse-scout/core` and contain tex
 but for now we have to place it next to our own static resources.
 You can get this file e.g. using Google Chrome's DevTools when loading the {jswidgets}[Scout JS Widgets] application.
 
-== Source Files
+=== Source Files
 
-=== Entry Points
+==== Entry Points
 
 .src/helloworld.js
 [source,js]
@@ -200,7 +200,7 @@ Since we don't need any custom styling for our application, we just import Scout
 
 TIP: To try out Scout's dark theme, just import `index-dark` instead of `index`.
 
-=== Widgets
+==== Widgets
 
 We follow the best practice of separating model (layout, structure) and behavior code.
 This also makes it easier to e.g. reuse a form that should look similar elsewhere but behave differently.
@@ -257,7 +257,7 @@ to implement the desired behavior when the button is clicked.
 To accomplish this, we can access our button and field by their respective `id` (see `HelloFormModel.js`).
 An OK message box with the desired text is displayed using the convenience class `MessageBoxes` from Scout.
 
-== Git configuration
+=== Git configuration
 
 If you want to add the created application to a Git repository, it is recommended to exclude some files from the SCM.
 
