@@ -45,6 +45,7 @@
                 <toc/>
                 <idprefix/>
                 <idseparator>-</idseparator>
+                <allow-uri-read>true</allow-uri-read>
               </attributes>
             </configuration>
           </execution>
@@ -63,6 +64,7 @@
                 <idprefix/>
                 <idseparator>-</idseparator>
                 <docinfo1>true</docinfo1>
+                <allow-uri-read>true</allow-uri-read>
               </attributes>
             </configuration>
           </execution>
