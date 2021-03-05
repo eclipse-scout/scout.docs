@@ -7,7 +7,7 @@ include::_folders.adoc[]
 include::{mdledir}/_initDoc.adoc[]
 include::{mdledir}/_initCommon.adoc[]
 
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.]
+NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 // Replace above note with the following warning when this scout release gets outdated
 // Important: Keep a line break after the WARNING
