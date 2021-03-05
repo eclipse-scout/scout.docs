@@ -13,7 +13,7 @@ The sections below highlight the following areas.
 * Infrastructure (<<sec-contacts_infra>>)
 
 [[sec-contacts_theming_styling]]
-==== Theming and Styling
+=== Theming and Styling
 
 * theme switching form for top level options menu <<img-contacts_theming_styling>>
 * project specific theme "dark"
@@ -23,7 +23,7 @@ The sections below highlight the following areas.
 image::{imgsdir}/contacts_theming_styling.png[]
 
 [[sec-contacts_modular_apps]]
-==== Modular Scout Applications
+=== Modular Scout Applications
 
 * separate entity "event"
 * additional pattern for managing m:n relationships using table fields
@@ -34,7 +34,7 @@ image::{imgsdir}/contacts_theming_styling.png[]
 ** event page as child page of organization page
 
 [[sec-contacts_infra]]
-==== Infrastructure
+=== Infrastructure
 
 * maven module that combines frontend and backend into a single war file
 * docker integration

@@ -24,7 +24,7 @@ In <<sec-contacts_jdbc_fetching_data>> we then add the missing pieces.
 At the end of this tutorial step the "Contacts" backend server provides person and organization data to the frontend server as summarized in <<sec-contacts_jdbc_summary>>.
 
 [[sec-contacts_jdbc_infra]]
-==== Adding the Infrastructure
+=== Adding the Infrastructure
 
 This section describes the installation of the necessary components and classes that handle the database creation/access of the "Contacts" application.
 
@@ -76,7 +76,7 @@ The imported classes are described in the following sections.
 Additional information is provided where these classes are relying on Scout concepts that have not previously been introduced.
 
 [[sec-contacts_jdbc_properties]]
-==== Scout Config Properties
+=== Scout Config Properties
 
 Scout Config properties can greatly improve the flexibility of Scout applications.
 For the "Contacts" application this feature is used to keep its database setup configurable.
@@ -119,7 +119,7 @@ A boolean property may be created by extending Scout class `AbstractBooleanConfi
 Accessing the actual property values in the code is demonstrated in the next section.
 
 [[sec-contacts_jdbc_sql]]
-==== The SQL Service and SQL Statements
+=== The SQL Service and SQL Statements
 
 Accessing databases with the Scout framework is implemented with SQL services that extend base class `AbstractSqlService`.
 As the "Contacts" application will be working with a Derby database we also need a Derby specific SQL service.
@@ -168,7 +168,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 The next section discusses how the components introduced above are used by the "Contacts" appliction to create an initial "Contacts" database during the startup phase of the application.
 
 [[sec-contacts_jdbc_initial_db]]
-==== The Database Setup Service
+=== The Database Setup Service
 
 The database setup service is responsible to create the "Contacts" database during the startup of the application.
 In order to implement such a service, a number of Scout concepts are combined into class `DatabaseSetupService`.
@@ -237,7 +237,7 @@ More information regarding these configuration files is provided in the http://l
 <1> The `level` attribute of the `<root>` element is used as the basic log level. Try "DEBUG" or "WARN" as alternative values.
 
 [[sec-contacts_jdbc_starting]]
-==== What is missing?
+=== What is missing?
 
 This section reviews the backend infrastructure that has been created so far and identifies the pieces that are missing to fetch person and organization data to send it to the frontend server of the "Contacts" application.
 
@@ -279,7 +279,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 In the next section we will implement the database access logic in the `getOrganizationTableData` methods of the server classes `OrganizationService` and `PersonService`.
 
 [[sec-contacts_jdbc_fetching_data]]
-==== Fetching Organization and Person Data
+=== Fetching Organization and Person Data
 
 We are now ready to fetch data from the Derby database using the available infrastructure and the SQL statements prepared in class `SQLs`.
 For the implementation of method `getOrganizationTableData` in class `OrganizationService` we will use the two SQL snippets provided in <<lst-contacts_sql_list_org>>.
@@ -333,7 +333,7 @@ public class PersonService implements IPersonService {
 ----
 
 [[sec-contacts_jdbc_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the third step of the "Contacts" tutorial we have added the infrastructure to work with a Derby database.
 The infrastructure is used to create and populate the initial database.

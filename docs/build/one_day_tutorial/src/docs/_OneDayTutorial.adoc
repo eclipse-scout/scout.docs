@@ -28,47 +28,47 @@ include::_TutorialIntro.adoc[]
 //--- tutorial steps --------------------------------------------------------//
 
 [[sec-contacts_initial_project]]
-=== Setting up the Initial Project
+== Setting up the Initial Project
 
 include::_TutorialStep1.adoc[]
 
 [[sec-contacts_pages]]
-=== Adding the Person and Organization Page
+== Adding the Person and Organization Page
 
 include::_TutorialStep2.adoc[]
 
 [[sec-contacts_jdbc]]
-=== Creating and Accessing the Database
+== Creating and Accessing the Database
 
 include::_TutorialStep3.adoc[]
 
 [[sec-contacts_forms]]
-=== Adding a Form to Create/Edit Persons
+== Adding a Form to Create/Edit Persons
 
 include::_TutorialStep4.adoc[]
 
 [[sec-contacts_fields]]
-=== Form Field Validation and Template Fields
+== Form Field Validation and Template Fields
 
 include::_TutorialStep5.adoc[]
 
 [[sec-contacts_form_add_company]]
-=== Adding the Company Form
+== Adding the Company Form
 
 include::_TutorialStep6.adoc[]
 
 [[sec-contacts_link_organization_person]]
-=== Linking Organizations and Persons
+== Linking Organizations and Persons
 
 include::_TutorialStep7.adoc[]
 
 [[sec-contacts_outlook]]
-=== Additional Concepts and Features
+== Additional Concepts and Features
 
 include::_TutorialStep8.adoc[]
 
 [[sec-source_control]]
-=== Git configuration
+== Git configuration
 
 If you want to add the created application to a Git repository there might some configurations be helpful. If there are no plans to use Git, this chapter can be skipped.
 

@@ -6,7 +6,7 @@ include::../../../common/src/docs/_initSubDoc.adoc[]
 
 //--- tutorial_section ------------------------------------------------------//
 [[sec-my_contacts_guide]]
-=== The "`Contacts`" Application
+== The "`Contacts`" Application
 
 The "`Contacts`" demo application is a client server application to manage personal contacts, organizations and events.
 The persistence of entered data is achieved via simple JDBC access to a Derby database.
@@ -52,7 +52,7 @@ image::{imgsdir}/app_contacts_personform.png[]
 
 //--- tutorial_section ------------------------------------------------------//
 [[sec-contacts_overview]]
-=== Tutorial Overview
+== Tutorial Overview
 
 This tutorial walks you through the implementation of a Scout application consisting of a frontend and a backend application.
 The frontend application contains outlines with navigation trees, pages to present information in tabular form, and forms to view and edit data.

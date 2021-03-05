@@ -18,7 +18,7 @@ Based on this information we design a hierarchical form layout for the person fo
 The tutorial step concludes with a summary in <<sec-contacts_forms_summary>>.
 
 [[sec-contacts_form_design]]
-==== Designing the Person Form
+=== Designing the Person Form
 
 We start with the sketch of the form layout as shown in <<img-contacts_tutorial_person_form_1>>.
 
@@ -63,7 +63,7 @@ Otherwise, the location box would be shown next to the street field.
 In the next section we will start to implement the person form with the layout described above.
 
 [[sec-contacts_form_implement]]
-==== Implementing the Form
+=== Implementing the Form
 
 In this section we implement the person form with its container widgets as described in the previous section.
 To be able to use the form to create and edit persons we will add "New" and "Edit" context menus to the table in the person page.
@@ -162,7 +162,7 @@ For the fields of the person form we can directly extend the abstract form field
 Only for the implementation of the gender field we need a Scout code type that represents the possible values for the radio buttons.
 
 [[sec-contacts_form_code]]
-==== Adding a Gender Code Type
+=== Adding a Gender Code Type
 
 In this section we will add a gender code type for the "Contacts" application.
 As code types can be used for the specification of the options of a radio button group, we will be able to implement the gender field by providing a reference to the code type.
@@ -207,7 +207,7 @@ To add an inner class `MaleCode` code to the gender code type perform the steps 
 Then repeat the steps above for the female code.
 
 [[sec-contacts_form_add_fields]]
-==== Adding Form Fields
+=== Adding Form Fields
 
 In this section we will add the form fields to the layout containers of the person form.
 We will start with filling the general box with the picture field, followed by the other fields in the upper part of the person form.
@@ -322,7 +322,7 @@ To view and enter person data with the form we have yet to add the interaction w
 This is the topic of the next section.
 
 [[sec-contacts_form_integrate_service]]
-==== Person Form Handler and Person Service
+=== Person Form Handler and Person Service
 
 This section shows how we can integrate the person form created in the previous sections with the "Contacts" backend application to load and store person data with the database.
 
@@ -373,7 +373,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 <4> The SQL update statement transfers all person attributes provided in the form data to the person table.
 
 [[sec-contacts_forms_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the fourth step of the "Contacts" tutorial we have added the person form to add, view and change persons.
 Using the person form as an example we have learned how to implement complex form layouts using the Scout layouting mechanism, Scout container fields and individual form field properties.

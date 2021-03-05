@@ -65,7 +65,7 @@ Therefore, the implementation of the method `execLoad` in the new handler of the
 With these implementations of the organization form and organization service the "Contacts" application can now also be used to maintain a list of organizations.
 
 [[sec-contacts_form_rest_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the sixth step of the "Contacts" tutorial we have added the Scout form to edit and create organizations.
 The focus of this part of the tutorial was on re-using previous work and applying the concepts that have been introduced in previous tutorial steps.

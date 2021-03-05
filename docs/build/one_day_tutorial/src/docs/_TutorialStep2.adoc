@@ -21,7 +21,7 @@ The addition of the company page is described in <<sec-contacts_adding_company_p
 Finally, the state of the "Contacts" application is summarized in <<sec-contacts_summary_step_2>>.
 
 [[sec-contacts_creating_person_package]]
-==== Creating additional Packages
+=== Creating additional Packages
 
 A substantial part of the "Contacts" application deals with persons.
 In addition to the "Persons" page we will also add a Scout form to enter/edit persons in a later tutorial step.
@@ -45,7 +45,7 @@ We will also need a separate package for organizations and some common elements.
 * Add package `org.eclipse.scout.contacts.client.common`
 
 [[sec-contacts_country_lookup_call]]
-==== Creating the Country Lookup Call
+=== Creating the Country Lookup Call
 
 The pages for the persons and the organizations will also display country information.
 To display country names we will be using a special column, that maps the country codes received from the backend application to translated country names.
@@ -65,7 +65,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <3> Add a row with the country code as key and the country name as display value
 
 [[sec-contacts_creating_person_page]]
-==== Creating the Person Page
+=== Creating the Person Page
 
 In this section we create the Scout page that will be used to list all entered persons to the user of the "Contacts" application.
 Out-of-the box this page will support the sorting and filtering of all the persons.
@@ -94,15 +94,15 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 Before we start to add the columns to the table of the page we need to do some minor adaptations to <<lst-contacts_PersonTable>>.
 
-<1> Specify the title "Persons" for the page using the Scout NLS tooling (see <<sec-add_text_entry>>)
-<2> You don't need to update method `execLoadData` to match this listing for now
-<3> Add method `getConfiguredLeaf` to specify that the person page will not have any child pages
-<4> We will add the columns in the next section of this tutorial
+<1> Specify the title "Persons" for the page using the Scout NLS tooling.
+<2> You don't need to update method `execLoadData` to match this listing for now.
+<3> Add method `getConfiguredLeaf` to specify that the person page will not have any child pages.
+<4> We will add the columns in the next section of this tutorial.
 
 We are now ready to populate the inner class `Table` of the person page with the columns to display various person attributes.
 
 [[sec-contacts_adding_page_columns]]
-==== Adding Table Columns to the Page
+=== Adding Table Columns to the Page
 
 Table pages are an important UI element of Scout applications as they frequently play a central role in the interactions of a user with the application.
 Out of the box table pages offer powerful options to sort, filter and re-arrange the data contained in the table.
@@ -159,7 +159,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 
 We can now add the additional columns `FirstNameColumn`, `LastNameColumn`, `CityColumn` below.
 After entering the class name press kbd:[Tab] twice to move the cursor to the label text of the field.
-In the case of the first name enter "FirstName" and hit kbd:[Ctrl+Space] to open the wizard to add the translated text "First Name" as described in <<sec-add_text_entry>>.
+In the case of the first name enter "FirstName" and hit kbd:[Ctrl+Space] to open the wizard to add the translated text "First Name".
 
 For these three columns the default implementation is fine and does not need any adaptations.
 <<lst-contacts_FirstNameColumn>> below provides an example for this type of columns.
@@ -208,7 +208,7 @@ What is missing is the link from the application's contacts outline class to the
 This is what we will do in the following section.
 
 [[sec-contacts_link_person_page]]
-==== Link the Person Page to the Contacts Outline
+=== Link the Person Page to the Contacts Outline
 
 In this section we add the person page to the contacts outline created during the initial project setup of the first step of this tutorial.
 This will make the person page visible in the navigation area below the "Contacts" outline.
@@ -227,7 +227,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 The application is now in a state where we can restart the backend and the frontend server to verify our changes in the user interface.
 
 [[sec-contacts_adding_company_page]]
-==== Adding the Company Page
+=== Adding the Company Page
 
 This section creates and adds a table page for organization to the "Contacts" outline.
 To create an organizations page the same steps are required as for the creation of the person page.
@@ -268,7 +268,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <1> The pages will appear in the user interface according to the order in which they are added to the outline.
 
 [[sec-contacts_summary_step_2]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the second step of the "Contacts" tutorial we have created a person page and an organization page to display data of persons and organizations.
 

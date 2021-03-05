@@ -27,7 +27,7 @@ The implementation of the features described above can be achieved by the the fo
 This last tutorial step ends with a short review in <<sec-contacts_link_person_organization_summary>>
 
 [[sec-contacts_company_lookup_call]]
-==== Creating an Organization Lookup Call
+=== Creating an Organization Lookup Call
 
 Before we can change the organization field on the person form from a string field to a smart field we need a organization lookup call that provides the necessary data to the smartfield.
 We have been using this approach for the country field already.
@@ -90,7 +90,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.server/src/main/java/org/
 <3> The where clause that defines the full set of lookup rows
 
 [[sec-contacts_modify_person_form_and_page]]
-==== Using the Lookup Call in the Person Form and the Person Table
+=== Using the Lookup Call in the Person Form and the Person Table
 
 Now we can use the organization lookup call to transform the organization field in the "Work" tab of the person form into a smart field.
 To do this we open class `PersonForm` in the Java editor and navigate to its inner class `WorkBox`.
@@ -124,7 +124,7 @@ Using the created organization lookup calls we have now completed the modificati
 The next section will focus on the necessary modifications and new components to re-use the person page as a sub page of the organization page.
 
 [[sec-contacts_organization_node_page]]
-==== Link the Person Page to Organizations
+=== Link the Person Page to Organizations
 
 In this section we will implement a drill-down functionality on the organization page.
 The goal is to let the user of the application expand a row in the organization page to provide access to the persons of the organization.
@@ -254,7 +254,7 @@ The difference between Scout table pages and node pages is also reflected in the
 Table pages can have a single child page while node pages may contain a list of child pages.
 
 [[sec-contacts_link_person_organization_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the seventh step of the "Contacts" tutorial we have introduced a typical Scout user interface pattern for 1:n relationships.
 We have created a dynamic lookup call and used the lookup call to provide the data for a smart field and a smart column.

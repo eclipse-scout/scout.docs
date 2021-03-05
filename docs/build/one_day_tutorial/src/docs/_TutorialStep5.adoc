@@ -20,7 +20,7 @@ To edit the image URL we add a simple edit form to the refactored picture field 
 In <<sec-contacts_form_templatefields_more>> we outline the creation of additional template fields and provide a summary of this tutorial step in <<sec-contacts_form_templatefields_summary>>.
 
 [[sec-contacts_field_validation]]
-==== Simple Form Field Validation
+=== Simple Form Field Validation
 
 This section explains the form field validation on the level of a single field.
 As an example we will use the email address field defined in the "Contact Info" tab.
@@ -42,7 +42,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 In the next section we use the address box to demonstrate the joint validation of several fields.
 
 [[sec-contacts_field_validation_complex]]
-==== Complex Form Field Validation
+=== Complex Form Field Validation
 
 Often the values of several fields have to be considered jointly to evaluate if the entered data is actually valid.
 As an example we will add a more complex form field validation on the level of the `AddressBox` group box widget that takes into account the data entered into the street, city, and country fields.
@@ -99,7 +99,7 @@ Re-start the "Contacts" application and try to trigger the different validation 
 image::{imgsdir}/contacts_tutorial_result_step_5a.png[]
 
 [[sec-contacts_form_templatefields]]
-==== Creating Template Fields
+=== Creating Template Fields
 
 In this section we show how to refactor a group of fields into a Scout template field that is ready for reuse.
 As an example we refactor the picture field into a template field.
@@ -172,7 +172,7 @@ Based on the picture field example we have now walked through the complete proce
 This process remains the same for refactoring container fields into template fields.
 
 [[sec-contacts_form_urleditform]]
-==== Adding a simple URL Input Form to the Picture Field
+=== Adding a simple URL Input Form to the Picture Field
 
 Using the refactored picture template field we want the user to be able to enter and update the URL of the shown picture.
 For this we add a simple form with a single field and a context menu to the picture template field using the Scout new form wizard as shown in <<img-sdk_new_form_pictureurl>>.
@@ -217,7 +217,7 @@ Based on the example with the picture field we have now walked through the compl
 This process remains the same for refactoring container fields into template fields.
 
 [[sec-contacts_form_templatefields_more]]
-==== More Template Fields
+=== More Template Fields
 
 To reduce the amount of copy & paste for the implementation of the company form in the next tutorial step, we recommend that you refactor the following fields into templates.
 
@@ -246,7 +246,7 @@ Therefore make sure to modify the SQL statements in class `SQLs` accordingly.
 * Replace token ':notes' by ':notesBox.notes'
 
 [[sec-contacts_form_templatefields_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In this step of the "Contacts" tutorial we have covered two important concepts for implementing business applications.
 

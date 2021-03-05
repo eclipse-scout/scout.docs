@@ -15,7 +15,7 @@ The creation up of the initial project setup consists of the tasks listed below.
 This first step of the "Contacts" tutorial ends with a review of the results of this first tutorial step in <<sec-contacts_summary>>.
 
 [[sec-contacts_initial_codebase]]
-==== Creating the initial Codebase
+=== Creating the initial Codebase
 
 In case your workspace contains modules from the "`Hello World`" tutorial, you may want to multi-select them and to either close them by invoking the context menu "`Close Projects`" or to delete them by invoking the context menu "`Delete`".
 The initial code for the "`Contacts`" application is then generated using the [wizard]_New Scout Project_ wizard.
@@ -38,7 +38,7 @@ The project wizard then creates a number of Maven modules as shown in <<img-cont
 image::{imgsdir}/app_contacts_package_explorer_initial.png[]
 
 [[sec-contacts_remove_stuff]]
-==== Removing unnecessary Components
+=== Removing unnecessary Components
 
 We start with removing the `\*.helloworld` and `\*.settings` packages in all Maven modules of the "Contacts" application.
 To delete packages, first select an individual package or packages in the Eclipse package explorer as shown in <<img-contacts_package_explorer>> and then hit the kbd:[Delete] key.
@@ -68,7 +68,7 @@ The deletion of these outlines results in a number of compile errors in classes 
 All these errors will be resolved in the following two sections where we modify the two classes to our needs.
 
 [[sec-contacts_change_workoutline]]
-==== Changes to Class WorkOutline
+=== Changes to Class WorkOutline
 
 Instead of adding a new "Contacts" outline to the application we reuse the generated code and rename the "Work" outline into "Contacts" outline.
 For this, we perform the following modifications to class `WorkOutline`.
@@ -135,7 +135,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 ----
 
 [[sec-contacts_change_desktop]]
-==== Changes to Class Desktop
+=== Changes to Class Desktop
 
 The second class to adapt for the "Contacts" application is the `Desktop` class.
 This class is implemented exactly once in each Scout application and holds the available outlines and top level menus of the application in the form of inner classes.
@@ -182,7 +182,7 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 <2> In your implementation `UserMenu` should extend `AbstractMenu` and the method `getConfiguredForm` should be deleted.
 
 [[sec-contacts_summary]]
-==== What have we achieved?
+=== What have we achieved?
 
 In the first step of the "Contacts" tutorial we have created the initial project setup that will serve as the basis for all the following tutorial steps.
 
