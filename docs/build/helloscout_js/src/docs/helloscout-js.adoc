@@ -1,6 +1,8 @@
 = Hello Scout JS
 include::../../../common/src/docs/_header.adoc[]
 
+ifndef::source-highlighter[:source-highlighter: coderay]
+
 :jswidgets: https://scout.bsi-software.com/jswidgets_{doc-short-version-underlined}/
 
 == Introduction
