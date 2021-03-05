@@ -1,6 +1,7 @@
 = Eclipse Scout Release Notes
 
 include::../../../common/src/docs/_header.adoc[]
+ifndef::rndir[:rndir: {mdledir}/releasenotes]
 :toclevels: 4
 
 include::{mdledir}/releasenotes/ReleaseNotes.adoc[]
