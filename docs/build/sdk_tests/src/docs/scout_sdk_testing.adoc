@@ -1,15 +1,5 @@
 = Scout SDK Testing Procedure
-:doctype: article
-:author: Scout Team
-:email: scout@bsi-software.com
-:revnumber: {project-version}
-include::_initDoc.adoc[]
-
-//fallback for safe mode == secure:
-ifndef::imgsdir[:imgsdir: ../../../../imgs]
-ifndef::codedir[:codedir: ../../../../../code]
-ifndef::mdledir[:mdledir: ../../../../adoc]
-:experimental:
+include::../../../common/src/docs/_header.adoc[]
 
 After installing the Eclipse Scout package you are ready for testing the SDK version
 
