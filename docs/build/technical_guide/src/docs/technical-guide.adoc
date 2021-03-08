@@ -1,5 +1,4 @@
 = Eclipse Scout Technical Guide
-
 include::../../../common/src/docs/_header.adoc[]
 
 :sectnums!:

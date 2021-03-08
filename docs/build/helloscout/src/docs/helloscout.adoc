@@ -1,5 +1,4 @@
 = Hello Scout
-
 include::../../../common/src/docs/_header.adoc[]
 
 == Prerequisites
