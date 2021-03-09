@@ -175,6 +175,18 @@ Therefore, it is no longer necessary to list every chunk manually in the html fi
 
 Have a look at the https://eclipsescout.github.io/{doc-short-version}/migration-guide.html#automatic-script-chunks[Migration Guide] to learn how to use automatic script chunks.
 
+== Code Pen Support
+
+Scout JS can now be used on https://codepen.io/ to share code snippets with the world.
+
+To make this possible, some changes in the distribution of Scout assets were necessary.
+You will find all necessary assets (script, theme, fonts, texts, locales) in the https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist[dist] folder of the scout modules.
+The modules itself are automatically published to various CDNs, like https://www.jsdelivr.com/.
+
+You can either import the npm modules in your Code Pen and even activate Babel like it is done https://codepen.io/eclipse-scout/pen/BaQPjom[here].
+
+Or you can work with the pre built assets. Learn how to do so with this http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[tutorial].
+
 == New Widgets
 
 === Breadcrumb Bar Field
@@ -265,3 +277,11 @@ On JS side this method was already available, now it is available for Scout Clas
 Setting the property `labelVisible` to false will now hide the tab area.
 Until now, the property had no effect for tab boxes.
 
+=== File Drop Support (JS)
+
+Dragging a file and dropping it on a widget now works for Scout JS apps as well.
+This feature can be activated for every form field, and Table and Tree.
+
+To do so, you need to set the `dropType` property to `dragAndDrop.SCOUT_TYPES.FILE_TRANSFER`.
+You can then listen to the 'drop' event and handle it accordingly.
+You may also want to adjust the `dropMaximumSize` to decrease or increase the allowed file size.
