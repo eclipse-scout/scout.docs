@@ -40,7 +40,9 @@ Afterwards you will find the created Scout modules in the Project view as shown 
 .The initial set of Maven modules created for the Hello Scout application.
 image::{imgsdir}/sdk_new_projectjs_initial_helloworld_ij.png[]
 
-The `Hello Scout JS Full Stack` application's backend accesses a local https://db.apache.org/derby/[Derby] database using https://www.jooq.org/[jooq].
+TIP: If the modules are not automatically created as indicated in <<img-sdk_new_projectjs_initial_helloworld_ij>>, right click on the root `pom.xml` and click `Add as Maven Project`.
+
+The `Hello Scout JS Full Stack` application's backend accesses a local https://db.apache.org/derby/[Derby] database using https://www.jooq.org/[jOOQ].
 For this to work you first have to setup the local database. This is done be executing the database setup application.
 
 For this click the [menu]_Add Configuration..._ menu on the top as shown in <<img-start_dbsetup_ij>>.
@@ -55,14 +57,21 @@ image::{imgsdir}/sdk_dbsetup_ij.png[]
 Now you are ready to start the Scout JS application.
 This includes downloading the necessary JavaScript dependencies, executing the Java and JavaScript builds and launching the Scout development server.
 It serves the JavaScript assets to the browser and acts as backend for the REST calls coming from the user interface.
-You could start each step separately, but for the sake of convenience there is a compound run configuration available which performs all these tasks.
+You could start each step separately, but for the sake of convenience there is a compound run configuration available which performs all these tasks (IntelliJ Ultimate only, see below for instructions if using the Community Edition).
 
 To use it switch the run configuration by clicking the run configuration menu on the top again.
 Now there is no need to open the dialog as the available run configurations are shown in a dropdown menu.
 Select the `launch all` compound and run it using the green triangle button.
 
-IMPORTANT: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
-In that case follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
+TIP: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
+Then follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
+
+TIP: The `launch all` compound uses JavaScript run configurations which are only available in IntelliJ Ultimate.
+If using the Community Edition, follow these instructions instead:
+Execute `npm run pnpm-install` on the command line in the root of your project (next to the `pnpm-workspace.yaml`) to install all JavaScript dependencies.
+Then execute `npm run build:dev:watch` in the `helloscoutjs.app` module to start the JavaScript build and watcher.
+The watcher keeps on running and will continuously update the JavaScript assets as you change your JavaScript source files (hot-code-replace).
+Finally start the run configuration `Launch helloscoutjs dev server`.
 
 Once the JS build has been completed (this may take a while for the first time as some dependencies need to be downloaded) and the server has been started, the `Hello Scout JS Full Stack` application can be accessed by navigating to http://localhost:8084/ in your favorite web browser.
 

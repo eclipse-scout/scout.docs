@@ -15,6 +15,7 @@ ifndef::mdledir[:mdledir: .]
 If you have no IntelliJ yet, you can download it from the https://www.jetbrains.com/idea/download[JetBrains download site].
 We recommend selecting the Ultimate edition to have the JavaScript support included in the IDE.
 There is a 30-day trial if you have no licence.
+For this tutorial you can also use the free Community Edition but it requires some extra steps indicated.
 
 Install or extract the package and run it using `bin/idea64.exe` in the installation folder.
 Follow the instructions until the `Welcome to IntelliJ IDEA` screen is shown.
