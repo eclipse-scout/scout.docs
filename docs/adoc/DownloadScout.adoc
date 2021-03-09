@@ -1,4 +1,3 @@
-
 ifndef::finaldoc[]
 include::_initDoc.adoc[]
 endif::finaldoc[]
@@ -10,70 +9,23 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 //-----------------------------------------------------------------------------
-//Asciidoctor input file: "download and install scout"
-//
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-=== Prerequisites
+This section guides you through the installation of the tools required to start the `Hello Scout` application.
 
-==== JDK
-Before you download Scout make sure that you have a working Java Development Kit (JDK) installation.
-In case you first need to download and install a JDK we recommend to work with the https://jdk.java.net/11/[Open JDK, window="_blank"].
-// window=_blank used because jdk website does not work in an iframe
+Currently IDE support to develop Scout applications exists for IntelliJ IDEA and Eclipse.
+Such an IDE is not required but makes the development much easier.
+Here the setup for both IDEs is described. Please choose the one you prefer.
 
-To verify your Java installation use your command line.
+=== Node.js
 
-----
-C:\>java -version
-openjdk version "11.0.1" 2018-10-16
-OpenJDK Runtime Environment 18.9 (build 11.0.1+13)
-OpenJDK 64-Bit Server VM 18.9 (build 11.0.1+13, mixed mode)
-----
+include::InstallNode.adoc[]
 
-We recommend to use Java 11. Please make sure you use the 64-bit version of the JDK.
-In case your version text does not explicitly mention a 64-bit version your JDK is a 32-bit installation.
+=== IntelliJ
 
-==== Node.js
+include::InstallIntelliJ.adoc[]
 
-Beside the JDK, you also need a recent Node.js installation.
-Scout requires at least version 12.1.0, so if you don't have a node installation or only an old one, go to https://nodejs.org/, download the LTS build for your platform and install it.
+=== Eclipse
 
-Also make sure the Node.js installation is on the PATH. You can verify it by using your command line.
-
-----
-c:\>node --version
-v12.12.0
-----
-==== Install pnpm
-
-Scout uses the package manager pnpm (https://pnpm.js.org/en/) with at least version 5.
-Install and verify it by using your command line.
-
-----
-npm install -g pnpm
-----
-
-----
-pnpm -v
-5.17.2
-----
-
-=== Download Scout
-
-Download the Eclipse Scout package by visiting the official Eclipse download page.
-
-https://www.eclipse.org/downloads/packages[www.eclipse.org/downloads/packages]
-
-The download page lists all available Eclipse packages. Scroll to the package "Eclipse IDE for Scout Developers" and select the download for your preferred platform.
-
-[[img-scout_download_package]]
-.The Scout download package.
-image::{imgsdir}/scout_download_package.png[]
-
-After the package selection, confirm the suggested download mirror as shown in <<img-scout_download_mirror>>.
-
-[[img-scout_download_mirror]]
-.Downloading the selected Scout package from a mirror.
-image::{imgsdir}/scout_download_mirror.png[]
-
+include::InstallEclipse.adoc[]

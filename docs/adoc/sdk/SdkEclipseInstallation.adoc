@@ -1,0 +1,58 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "Scout Installation" for the books
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+[appendix]
+[[apx-install_scout]]
+== Scout SDK Installation
+
+This chapter walks you through the installation of the Eclipse Scout SDK.
+There are two ways to install it.
+
+1. Install a prepackaged Eclipse IDE tailored for Scout developers.
+2. Install the Scout SDK plugins into an existing Eclipse IDE.
+
+=== Install Eclipse IDE for Scout Developers
+
+The installation process for the Eclipse package containing Scout is described in the http://eclipsescout.github.io/{scout-short-version}/helloscout.html#Eclipse[Hello Scout Tutorial].
+
+=== Add Scout to your Existing Eclipse IDE
+
+This section describes the installation of Scout into an existing Eclipse installation.
+As the audience of this section is assumed to be familiar with Eclipse, we do not describe how you got your Eclipse installation in the first place.
+For the provided screenshots we start from the popular package _Eclipse IDE for Java EE Developers_.
+
+[[img-eclipse_install_new_software]]
+.Eclipse menu to install additional software
+image::{imgsdir}/eclipse_install_new_software.png[]
+
+To add Scout to your existing Eclipse installation, you need to start Eclipse.
+Then select the menu:Help[Install New Software...] menu as shown in <<img-eclipse_install_new_software>> to open the install dialog.
+
+[[img-eclipse_select_scout_features]]
+.Select the Scout features to add to the Eclipse installation
+image::{imgsdir}/eclipse_select_scout_features.png[]
+
+In the install dialog, select the update site matching your Eclipse installation.
+Type Scout into the filter field below and select Eclipse Scout SDK (Binary only).
+Then, move through the installation with the btn:[Next] button.
+On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button.
+To complete the installation, click the btn:[Finish] button and accept the request for a restart of Eclipse.
+After the restart of the Eclipse IDE the Scout SDK is ready to use!
+
+=== Verifying the Installation
+
+The simplest way to verify your Scout installation is to create a "`Hello World`" Scout project
+and run the corresponding Scout application as described in http://eclipsescout.github.io/{scout-short-version}/helloscout.html[Hello Scout].

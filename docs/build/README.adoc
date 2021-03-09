@@ -4,14 +4,6 @@
 
 This folder contains the documents that are build.
 
-* `helloworld`: produces an article as single page to explain how to create an demo application (the html version is published on the scout webpage).
-* `install-guide`: produces an article as single page to explain how to downlaod the scout IDE (the html version is published on the scout webpage).
-* `beginners-guide`: produces a book called "Eclipse Scout Beginners Guide".
-* `technical-guide`: produces a book called "Eclipse Scout: Technical Guide".
-* `migration-guide`: produces an article called "Eclipse Scout: Migration Guide".
-* `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.s2e.doc` plugin). **IMPORTANT**: The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt]. In case  `help-pages.txt` gets out of sync with the available `*.adoc` source files the Maven publish step may fail.
-* `publish`: this last step prepares all the documents in order to publish them (post processing of the Asciidoctor documents). You should run the other tasks, before running this task.
-
 == Usage
 
 You can generate all documents using maven at the root of the `build` folder:
@@ -20,27 +12,20 @@ You can generate all documents using maven at the root of the `build` folder:
 
 You can generate one document by switching to one of subfolder and using maven:
 
- cd helloworld/
+ cd helloscout/
  mvn
 
-The results are generated in the `target` subfolder. For example for `helloworld`:
+The results are generated in the `target` subfolder. For example for `helloscout`:
 
- helloworld/target/generated-docs/helloworld.html
- helloworld/target/generated-docs/helloworld.pdf
+ helloscout/target/generated-docs/helloscout.html
+ helloscout/target/generated-docs/helloscout.pdf
 
 === Eclipse Help
+
 This part of the output is the "Eclipse Scout User Guide" delivered as part of the Scout SDK.
 
 This output needs to be synced with the `org.eclipse.scout.sdk.s2e.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository].
 The content of `scout-sdk-help` should be copied inside `org.eclipse.scout.sdk.s2e.doc`.
-
-=== Eclipse.org/scout website
-This part of the output contains the pages published on the link:http://www.eclipse.org/scout[Scout Homepage]:
-
-* link:http://www.eclipse.org/scout/install-guide.html[]
-* link:http://www.eclipse.org/scout/helloworld.html[]
-
-The files are included using an iframe by the Scout homepage and therefore don't need to be published separately.
 
 === Documentation for download
 This part of the output contains the documents ready for downloads.

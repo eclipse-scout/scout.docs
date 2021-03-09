@@ -10,7 +10,7 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 The _New Scout CodeType_ wizard can be used to create a new code type classes.
-To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#, Scout Wizards>>.
+To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 [[img-sdk_wizard_codetype]]
 .The new CodeType wizard
@@ -35,13 +35,14 @@ First Argument:: The class used to identify this code type.
 Second Argument:: The class to identify individual codes within this code type.
 
 ===== Created Components
+
 In the <<img-sdk_wizard_codetype>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.shared*
 ** The `MyCodeType` class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
 
 '''
-Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

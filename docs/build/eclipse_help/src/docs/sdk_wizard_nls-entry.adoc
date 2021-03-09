@@ -1,3 +1,4 @@
+[#nls-entry-wizard]
 ==== NLS Entry Wizard
 :doctype: article
 :revnumber: {project-version}
@@ -13,13 +14,13 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 The NLS Entry wizard can be used to create or to modify a text entry that will be displayed to the user and the needs to be localized.
 It can be opened from:
 
-* <<sdk_editor_nls.adoc#, The NLS Editor>> by selecting "New Entry" or "Modify Entry".
-* <<sdk_editor_java.adoc#, The Java Editor>> by using the proposal editor inside the string parameter of the `TEXTS.get("")` code.
+* <<sdk_editor_nls.adoc#nls-editor, The NLS Editor>> by selecting "New Entry" or "Modify Entry".
+* <<sdk_editor_java.adoc#additions-to-the-java-editor, The Java Editor>> by using the proposal editor inside the string parameter of the `TEXTS.get("")` code.
 
-include::{mdledir}/SdkEditorNlsNewEntry.adoc[]
+include::{mdledir}/sdk/SdkEditorNlsNewEntry.adoc[]
 
 '''
-Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

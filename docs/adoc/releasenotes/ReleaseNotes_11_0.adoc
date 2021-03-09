@@ -7,13 +7,17 @@ Howto:
 - Use "title case" in chapter titles (https://english.stackexchange.com/questions/14/)
 ////
 
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
 == About This Release
 
 The latest version of this release is: {maven-version}.
 
 You can see the {github-changelog-link} on GitHub.
 
-Coming from an older Scout version? Check out the {migration-guide-link}!
+Coming from an older Scout version? Check out the {migration-guide-link} for instructions on how to obtain the new version and upgrade existing applications.
 
 === Service Releases
 
@@ -40,56 +44,7 @@ Beside bug fixes, these releases may even contain some minor features.
 //
 // * <<New Feature (since 11.0.0.xyz)>>
 
-=== Obtaining the Latest Version
-
-==== Scout Runtime for Java
-Scout Runtime artifacts for Java are distributed using Maven Central:
-
-* {maven-central-link} on _Maven Central_
-* {mvnrepository-link} on _mvnrepository.com_
-
-Usage example in the parent POM of your Scout application:
-
-[source,xml]
-[subs="verbatim,attributes"]
-----
-<dependency>
-    <groupId>org.eclipse.scout.rt</groupId>
-    <artifactId>org.eclipse.scout.rt</artifactId>
-    <version>{maven-version}</version>
-    <type>pom</type>
-    <scope>import</scope>
-</dependency>
-----
-
-==== Scout Runtime for JavaScript
-
-Scout Runtime artifacts for JavaScript are distributed using npm:
-
-* https://www.npmjs.com/package/@eclipse-scout/core[Scout Core Runtime]
-* https://www.npmjs.com/search?q=%40eclipse-scout[All official Scout JavaScript packages]
-
-==== IDE Tooling (Scout SDK)
-
-Starting with Scout 11 the IDE Tooling requires at least Java 11 to run.
-With the help of the SDK plugins you can still develop applications running with Java 8, but the IDE itself requires Java 11 or newer.
-
-Scout officially supports https://www.jetbrains.com/idea/[IntelliJ IDEA] and {scout-sdk-download-link}.
-
-===== Eclipse
-
-You can download the complete Eclipse IDE with Scout SDK included (EPP) here: +
-{scout-sdk-download-link}
-
-To install the Scout SDK into your existing Eclipse IDE, use this update site: +
-{scout-sdk-update-site}
-
-===== IntelliJ IDEA
-
-You can download the Scout plugin for IntelliJ IDEA from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[JetBrains Plugin Repository] or you can use the plugins client built into IntelliJ IDEA.
-Please refer to the https://www.jetbrains.com/help/idea/managing-plugins.html[IntelliJ Help] on how to install and manage plugins.
-
-=== Demo Applications
+== Demo Applications
 
 The demo applications for this version can be found on the {scout-docs-link} branch of our docs repository on GitHub.
 
@@ -220,6 +175,18 @@ Therefore, it is no longer necessary to list every chunk manually in the html fi
 
 Have a look at the https://eclipsescout.github.io/{doc-short-version}/migration-guide.html#automatic-script-chunks[Migration Guide] to learn how to use automatic script chunks.
 
+== Code Pen Support
+
+Scout JS can now be used on https://codepen.io/ to share code snippets with the world.
+
+To make this possible, some changes in the distribution of Scout assets were necessary.
+You will find all necessary assets (script, theme, fonts, texts, locales) in the https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist[dist] folder of the scout modules.
+The modules itself are automatically published to various CDNs, like https://www.jsdelivr.com/.
+
+You can either import the npm modules in your Code Pen and even activate Babel like it is done https://codepen.io/eclipse-scout/pen/BaQPjom[here].
+
+Or you can work with the pre built assets. Learn how to do so with this http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[tutorial].
+
 == New Widgets
 
 === Breadcrumb Bar Field
@@ -310,36 +277,11 @@ On JS side this method was already available, now it is available for Scout Clas
 Setting the property `labelVisible` to false will now hide the tab area.
 Until now, the property had no effect for tab boxes.
 
-== Maven master
+=== File Drop Support (JS)
 
-Some maven profiles have been removed from the maven master (e.g. `org.eclipse.scout:maven_rt_plugin_config-master`) (since 3.14.1).
-These profiles have been used for release management.
-No Scout build jobs do still use git commands through maven.
-Instead, any git command is issued directly (usually from a jenkins pipeline).
-Therefore, we cannot support these profiles anymore.
-If any of these profiles or configurations are still in use in your project, you may copy them from an older maven master version into your own parent maven pom.
+Dragging a file and dropping it on a widget now works for Scout JS apps as well.
+This feature can be activated for every form field, and Table and Tree.
 
-.Removed profiles
-* `release.setversion`
-* `release.checkin`
-* `release.tag`
-
-.Removed related properties
-* `master_release_pushChanges`
-* `master_release_tagName`
-* `master_release_checkinMessage`
-
-Also, the default plugin configuration of `org.apache.maven.plugins:maven-release-plugin` was removed.
-
-The following script is a template which can be used to change the project versions for a new release build without the removed profiles and direct git commands.
-
-.Shell script to set project version to a new version for release builds
-[source,Shell]
---
-# set version of maven project modules
-mvn -f ${mavenParentPom} org.codehaus.mojo:versions-maven-plugin:set -DnewVersion=${newVersion} -DgenerateBackupPoms=false
-# set version of npm project packages
-mvn -f ${mavenParentPom} process-sources -N -P npm-install-node,npm-install-workspace,npm-deploy -Dmaster_node_dir=\${NODE_BIN} -Dmaster_npm_release_build=true -Dmaster_release_newVersion=${newVersion}
-# add changed files to git changes
-git add "**/pom.xml" "**/package.json"
---
+To do so, you need to set the `dropType` property to `dragAndDrop.SCOUT_TYPES.FILE_TRANSFER`.
+You can then listen to the 'drop' event and handle it accordingly.
+You may also want to adjust the `dropMaximumSize` to decrease or increase the allowed file size.

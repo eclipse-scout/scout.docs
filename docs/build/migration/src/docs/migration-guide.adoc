@@ -1,0 +1,7 @@
+= Eclipse Scout Migration Guide
+include::../../../common/src/docs/_header.adoc[]
+
+include::{mdledir}/migration/MigrationGuide.adoc[]
+
+:_footer-link-path: build/migration/src/docs/{docname}.adoc
+include::../../../common/src/docs/_footer.adoc[]

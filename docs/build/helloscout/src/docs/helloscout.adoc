@@ -1,0 +1,23 @@
+= Hello Scout
+include::../../../common/src/docs/_header.adoc[]
+
+== Prerequisites
+
+include::{mdledir}/DownloadScout.adoc[]
+
+== Create a Scout Project
+
+include::{mdledir}/CreateNewProject.adoc[]
+
+== What's Next?
+
+Congratulations! You have successfully created your first Scout application.
+You now might want to learn more about Scout.
+To gain experience we recommend going through the https://eclipsescout.github.io/{doc-short-version}/one-day-tutorial.html[One Day Tutorial].
+
+If you are interested in Scout's concepts, architecture and features you probably want to have a look at the https://eclipsescout.github.io/{doc-short-version}/technical-guide.html[Technical Guide].
+
+In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
+
+:_footer-link-path: build/helloscout/src/docs/{docname}.adoc
+include::../../../common/src/docs/_footer.adoc[]

@@ -12,16 +12,16 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 Scout uses the standard Java Editor of the Eclipse IDE.
 To ease the development, the Scout SDK provides additional features for the Java Editor.
 
-include::{mdledir}/SdkContentAssist.adoc[]
+include::{mdledir}/sdk/SdkContentAssist.adoc[]
 
 ==== NLS-Entry support
 
-include::{mdledir}/SdkEditorNlsContentAssist.adoc[]
+include::{mdledir}/sdk/SdkEditorNlsContentAssist.adoc[]
 
-Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#, NLS Entry Wizard>>.
+Selecting "New text..." then opens the <<sdk_wizard_nls-entry.adoc#nls-entry-wizard, NLS Entry Wizard>>.
 
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

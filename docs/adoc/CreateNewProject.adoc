@@ -10,51 +10,15 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 //-----------------------------------------------------------------------------
-//Asciidoctor input file: "Create a new project"
-//
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-Start your Eclipse IDE and select an empty directory for your workspace as shown in <<img-sdk_start_new_workspace>>.
-This workspace directory will then hold all the project code for the `Hello World` application.
-Once the Eclipse IDE is running it will show the Java perspective.
+The Scout project creation depends on the IDE chosen. Therefore please follow the instructions in the corresponding section below.
 
-[[img-sdk_start_new_workspace]]
-.Select a new empty folder to hold your project workspace
-image::{imgsdir}/sdk_start_new_workspace.png[]
+=== IntelliJ
 
-To create a new Scout project select the menu menu:File[New,Project...] and type "`Scout Project`" in the wizard search field.
-Select the Scout Project wizard and press btn:[Next].
-The [wizard]_New Scout Project_ wizard is then started as shown in <<img-sdk_new_project_wizard>>.
+include::CreateNewProjectIntelliJ.adoc[]
 
-[[img-sdk_new_project_wizard]]
-.The new Scout project wizard.
-image::{imgsdir}/sdk_new_project.png[]
+=== Eclipse
 
-In the [wizard]_New Scout Project_ wizard you have to enter a `group id`, `artifact id` and a `display name` for your Scout project.
-As the created project will make use of https://maven.apache.org/[Apache Maven] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `group id` and `artifact id` for your project.
-The `artifact id` will then also be the project name in the Eclipse workspace.
-The `display name` is used as the application name presented to the user (e.g. in the Browser title bar).
-
-For the `Hello World` application just use the already prefilled values as sown in <<img-sdk_new_project_wizard>>.
-Then, click the btn:[Finish] button to let the Scout SDK create the initial project code for you.
-
-Depending on your Eclipse installation some `Maven plugin connectors` may be missing initially.
-In that case a dialog as shown in <<img-sdk_new_project_connector>> may be shown.
-To continue click on btn:[Finish] to resolve the selected connectors.
-Afterwards confirm the installation, accept the license and the message that some content has not been signed.
-Finally, the installation of the maven plugin connectors requires a restart of the Eclipse IDE.
-
-[[img-sdk_new_project_connector]]
-.The Maven plugin connector installation dialog.
-image::{imgsdir}/sdk_new_project_connectors.png[]
-
-After the [wizard]_New Scout Project_ wizard has created the initial Maven modules for the `Hello World` application these modules are compiled and built by the Eclipse IDE.
-In case of a successful Eclipse Scout installation your Eclipse IDE should display all created Maven modules in the Package Explorer and have an empty Problems view as shown in <<img-sdk_new_project_initial_helloworld>>.
-
-[[img-sdk_new_project_initial_helloworld]]
-.The inital set of Maven modules created for the Hello World application.
-image::{imgsdir}/sdk_new_project_initial_helloworld.png[]
-
-
-WARNING: You need to adjust the Maven build if Java 9 is the minimal required version of your project. Open `helloworld/pom.xml` (replace `helloworld` with the `artifact id` you chose earlier) and add `<master_signatureCheck_skip>true</master_signatureCheck_skip>` to the `<properties>`-element. Note: the minimal required Java version is declared by property `jdk.source.version` within the very same `<properties>`-element.
+include::CreateNewProjectEclipse.adoc[]

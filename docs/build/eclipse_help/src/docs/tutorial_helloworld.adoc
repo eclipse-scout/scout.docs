@@ -13,16 +13,12 @@ With this tutorial you will learn how to create your first Scout application.
 
 ==== Create a Scout Project
 
-include::{mdledir}/CreateNewProject.adoc[]
-
-==== Run the Application
-
-include::{mdledir}/RunTheApplication.adoc[]
+include::{mdledir}/CreateNewProjectEclipse.adoc[]
 
 ==== What's Next?
 
-In the <<tutorial_existingdemo.html#import-the-scout-demo-applications-tutorial, next tutorial>>, you will learn how to import the Scout demo applications into your workspace.
+In the <<tutorial_existingdemo.adoc#import-the-scout-demo-applications, next tutorial>>, you will learn how to import the Scout demo applications into your workspace.
 
 '''
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

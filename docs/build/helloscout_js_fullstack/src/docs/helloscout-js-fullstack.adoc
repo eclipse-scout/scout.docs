@@ -1,0 +1,21 @@
+= Hello Scout JS Full Stack
+include::../../../common/src/docs/_header.adoc[]
+
+== Prerequisites
+
+This section guides you through the installation of the tools required to start the `Hello Scout JS Full Stack` application.
+
+=== Node.js
+
+include::{mdledir}/InstallNode.adoc[]
+
+=== IntelliJ
+
+include::{mdledir}/InstallIntelliJ.adoc[]
+
+== Create the Project
+
+include::{mdledir}/CreateNewJsProjectIntellij.adoc[]
+
+:_footer-link-path: build/helloscout_js_fullstack/src/docs/{docname}.adoc
+include::../../../common/src/docs/_footer.adoc[]

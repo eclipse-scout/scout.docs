@@ -10,13 +10,12 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
 The _New Scout Lookup Call_ wizard can be used to create a lookup call and a corresponding lookup service.
-To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#, Scout Wizards>>.
+To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N] as described in section <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 [[img-sdk_wizard_lookupcall]]
 .The new LookupCall wizard
 image::{imgsdir}/sdk_new_lookupcall.png[]
 
-// TODO [7.0] mzi: replace *Name* field
 In the case of <<img-sdk_wizard_lookupcall>> the package `org.eclipse.scout.apps.helloworld.shared.helloworld` has been selected in the Package Explorer.
 The only wizard fields that then needs to be filled in manually are the *Name* and the *Key Class* fields.
 
@@ -36,6 +35,7 @@ Server Source Folder:: The source folder of the Maven server module used for the
 Service Super Class:: The super class for the lookup service associated with this lookup call. The default value is `AbstractLookupService`.
 
 ===== Created Components
+
 In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will create the following components.
 
 * In Maven module *helloworld.shared*
@@ -46,7 +46,7 @@ In the <<img-sdk_wizard_lookupcall>> example shown above the Scout SDK will crea
 ** The `MyLookupService` service class in folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
 
 '''
-Go back to the <<sdk_wizard.adoc#, Scout Wizards>>.
+Go back to the <<sdk_wizard.adoc#scout-wizards, Scout Wizards>>.
 
 :_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
-include::{mdledir}/_footer-text.adoc[]
+include::../../../common/src/docs/_footer-text.adoc[]

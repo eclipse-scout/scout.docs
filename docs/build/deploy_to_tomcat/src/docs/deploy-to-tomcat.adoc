@@ -1,0 +1,7 @@
+= Build Scout App and Deploy to Tomcat
+include::../../../common/src/docs/_header.adoc[]
+
+include::_BuildAndDeploy.adoc[]
+
+:_footer-link-path: build/deploy_to_tomcat/src/docs/{docname}.adoc
+include::../../../common/src/docs/_footer.adoc[]

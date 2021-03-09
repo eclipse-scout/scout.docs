@@ -1,0 +1,58 @@
+ifndef::finaldoc[]
+include::../_initDoc.adoc[]
+endif::finaldoc[]
+
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Wizard - Form"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+The _New Form_ wizard is be used to create a new form including a form data, permissions and and related service.
+To start the wizard use menu:File[New,Other...] or press kbd:[Ctrl,N].
+
+[[img-sdk_wizard_form]]
+.The new Form Wizard
+image::{imgsdir}/sdk_new_form.png[]
+
+// TODO [7.0] mzi: replace *Name* field
+In the case of <<img-sdk_wizard_form>> the package `org.eclipse.scout.apps.helloworld.client.helloworld` has been selected in the Package Explorer.
+The only wizard field that then needs to be filled in manually is the *Name* field.
+
+By clicking on the btn:[Finish] button the wizard is started and the specified components are created.
+
+===== Wizard Fields and Default Values
+
+Most of the fields of the <<img-sdk_wizard_form>> will be filled with default values depending on the current context of the IDE.
+The context can be derived from a package selected in the Package Explorer or from the class in the active Java Editor.
+
+Source Folder:: The source folder of the Maven client module used for the creation of the form class. The default value is the `src/main/java` folder in the Maven client module.
+Package:: The Java package that will contain the form class. The Scout SDK will try to guess the package name from the current context and derive matching package names for the Maven shared and server modules.
+Name:: The name of the form class. According to Scout conventions the class name ends with the suffix `Form`.
+Super Class:: The super class for the form. `AbstractForm` is the default value.
+Create FormData:: If ticked, a form data class will be created in the shared module.
+Create Service:: If ticked, a service interface is created in the shared module and a service implementation is created in the Maven server module.
+Create Permissions:: If ticked, read and update permissions are created in the Maven shared module.
+Shared Source Folder:: The source folder of the Maven shared module used for creation of the form data, the service interface and the permission classes. The default value is the `src/main/java` folder in the Maven shared module.
+Server Source Folder:: The source folder of the Maven server module used for the service class creation. The default value is the `src/main/java` folder in the Maven server module.
+
+===== Created Components
+
+In the <<img-sdk_wizard_form>> example shown above the Scout SDK will create the following components.
+
+* In Maven module *helloworld.client*
+** The `MyForm` form class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.client.helloworld`
+* In Maven module *helloworld.shared*
+** In folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+*** The `IMyService` service interface
+*** The `ReadMyPermission` permission class
+*** The `UpdateMyPermission` permission class
+** The `MyFormData` form data class in folder `src/generated/java` and package `org.eclipse.scout.apps.helloworld.shared.helloworld`
+* In Maven module *helloworld.server*
+** The `MyService` service class in folder `src/main/java` and package `org.eclipse.scout.apps.helloworld.server.helloworld`
