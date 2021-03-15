@@ -43,7 +43,7 @@ image::{imgsdir}/sdk_new_projectjs_initial_helloworld_ij.png[]
 TIP: If the modules are not automatically created as indicated in <<img-sdk_new_projectjs_initial_helloworld_ij>>, right click on the root `pom.xml` and click `Add as Maven Project`.
 
 The `Hello Scout JS Full Stack` application's backend accesses a local https://db.apache.org/derby/[Derby] database using https://www.jooq.org/[jOOQ].
-For this to work you first have to setup the local database. This is done be executing the database setup application.
+For this to work, you first have to setup the local database. This is done be executing the database setup application.
 
 For this click the [menu]_Add Configuration..._ menu on the top as shown in <<img-start_dbsetup_ij>>.
 In the dialog expand the `Application` type on the left-hand-side, select the prepared run configuration `Setup local dev database` and confirm with btn:[Ok].

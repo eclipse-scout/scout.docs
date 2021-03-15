@@ -14,7 +14,7 @@ ifndef::mdledir[:mdledir: .]
 
 This section guides you through the installation of the tools required to start the `Hello Scout` application.
 
-Currently IDE support to develop Scout applications exists for IntelliJ IDEA and Eclipse.
+Currently there is IDE support for Scout application development for IntelliJ IDEA and Eclipse.
 Such an IDE is not required but makes the development much easier.
 Here the setup for both IDEs is described. Please choose the one you prefer.
 

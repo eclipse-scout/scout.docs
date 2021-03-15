@@ -1,4 +1,4 @@
-= Hello Scout with a CDN
+= Hello Scout JS with a CDN
 include::../../../common/src/docs/_header.adoc[]
 
 == Introduction

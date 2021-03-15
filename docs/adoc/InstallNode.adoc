@@ -12,7 +12,7 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-First Node.js needs to be installed as Scout uses it to built web assets.
+First, Node.js needs to be installed as Scout uses it to built web assets.
 So if you don't have it yet, visit the https://nodejs.org/dist/latest-v12.x/[Node.js download site], choose the package for your platform and install it on your local machine.
 
 Make sure the Node.js installation is on the PATH. You can verify it by using your command line:
