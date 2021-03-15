@@ -183,7 +183,7 @@ public class DataObjectExamples {
   }
 
   //tag::exampleEnum[]
-  @EnumName("scout.FixtureEnum")
+  @EnumName("scout.ExampleEnum")
   public enum ExampleEnum implements IEnum {
 
     ONE("one"),

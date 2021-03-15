@@ -43,6 +43,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 === Marshalling ===
+
 Using the `IDataObjectMapper` interface a data object can be converted from and to its string representation.
 The marshalling strategy is generic and replaceable.
 The Scout platform defines the `IDataObjectMapper` interface, at runtime a Scout bean implementing the interface must be available.
@@ -116,6 +117,19 @@ The default constructor extracts the namespace and version based on the class na
 include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/scout/docs/snippets/dataobject/LoremTypeVersions.java[tags=class]
 ----
 
+===== Signature Test
+
+`AbstractDataObjectSignatureTest` provides an abstract implementation of a test that creates a signature of all data object annotated with a type version
+including additional signatures (e.g. referenced `IEnum` with their values).
+A signature test enables to detect changes in data object that might need a migration.
+Each module containing data objects with type version annotation should implement a data object signature test.
+
+[source,java]
+.Example: DocsSnippetsDataObjectSignatureTest
+----
+include::{codedir}/org.eclipse.scout.docs.snippets/src/test/java/org/eclipse/scout/docs/snippets/DocsSnippetsDataObjectSignatureTest.java[tags=class]
+----
+
 ==== Data Object Naming Convention ====
 
 Scout objects use the following naming conventions:
@@ -143,6 +157,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/resources/org/eclips
 ----
 
 ==== Attribute Format ====
+
 Using the `ValueFormat` annotation a data type dependent format string may be provided, which is used for the marshalling.
 
 [source,java]
@@ -201,6 +216,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 === Abstract Data Objects & Polymorphism ===
+
 A simple data objects is implemented by subclassing the `DoEntity` class.
 
 For a complex hierarchy of data objects the base class may be abstract and extend the `DoEntity` class, further subclasses extend the abstract base class.
@@ -278,8 +294,8 @@ For futher details see:
 * `org.eclipse.scout.rt.dataobject.DoEntity.equals(Object)`
 * `org.eclipse.scout.rt.dataobject.DoNode.equals(Object)`
 
-
 === Generic DoEntity ===
+
 An instance of the `DoEntity` class can represent any kind of JSON document.
 If the JSON document contains no type attributes or no matching data object class exists at runtime, the JSON document is deserialized into a raw `DoEntity` instance holding all attributes.
 To access the attributes of the data object a set of generic getter methods may be used by specifying the attribute name.
@@ -342,6 +358,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 IMPORTANT: A `DoMapEntity<T>` subclass may declare custom attributes of another type than `T` (e.g. an integer size attribute). If attributes of other types are used, using the `all` method results in a `ClassCastException` since not all attributes are of the same type any longer.
 
 === IDataObject Interface - Data Objects with unknown structure ===
+
 According to the http://json.org/[JSON specification] a JSON document at top level may contain a object or an array. If a JSON string of unknown structure is deserialized, the common super interface `IDataObject` may be used as target type for the call to the deserializer:
 
 [source,java]
@@ -351,6 +368,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 === Ad-Hoc Data Objects ===
+
 The `DoEntityBuilder` may be used to build ad-hoc data objects without a concrete Java class defining its attributes.
 
 [source,java]
@@ -362,6 +380,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 <2> Builder for the string representation of a DoEntity objects
 
 === Maven Dependencies ===
+
 The Scout data object implementation does not reference any specific Java serialization library or framework.
 The basic building blocs of data objects are part of the Scout platform and to not reference any thirdparty libraries.
 At runtime an implementation of the `IDataObjectMapper` interface must be provided.
@@ -423,5 +442,6 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 [[sec-unit-testing]]
 === Unit Testing ===
+
 A set of utility methods for unit tests with data objects are provided within the `DataObjectTestHelper` class.
 Commonly used are a set of assert methods (e.g. `assertEquals(Object expected, Object actual)`) for testing data objects for (deep) equality.

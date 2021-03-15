@@ -1,0 +1,19 @@
+{
+  "_type" : "scout.DataObjectSignature",
+  "entities" : [ {
+    "_type" : "scout.EntityDataObjectSignature",
+    "attributes" : [ {
+      "_type" : "scout.AttributeDataObjectSignature",
+      "name" : "name",
+      "valueType" : "CLASS[java.lang.String]"
+    }, {
+      "_type" : "scout.AttributeDataObjectSignature",
+      "list" : true,
+      "name" : "values",
+      "valueType" : "CLASS[java.lang.Integer]"
+    } ],
+    "typeName" : "lorem.ExampleEntity",
+    "typeVersion" : "lorem-1.2.0"
+  } ],
+  "enums" : [ ]
+}
