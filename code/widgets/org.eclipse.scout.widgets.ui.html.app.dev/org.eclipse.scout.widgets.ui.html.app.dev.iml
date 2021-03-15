@@ -76,7 +76,7 @@
     <orderEntry type="module" module-name="org.eclipse.scout.widgets.heatmap.client" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.jackson" />
     <orderEntry type="module" module-name="org.eclipse.scout.rt.dataobject" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.7" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.8" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.10" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.10" level="project" />
     <orderEntry type="module" module-name="org.eclipse.scout.dev.jetty" />
