@@ -1301,7 +1301,12 @@ In case you need to test the files built by `build:prod` locally, follow this pr
 * Start the application with the URL parameter `/?debug=false`.
 * Check your index.html in the browser. Each referenced script or CSS file should have a fingerprint, example: `yourapp-2c6053b2fdf5b816fae5.min.js`.
 
+NOTE: If you set the config property `scout.devMode` to false instead of using the URL parameter, the resources will be loaded from the Java classpath.
+In that case you need to additionally copy the content of the dist folder to target/classes before starting the UI server.
+Or you can also set `scout.loadWebResourcesFromFilesystem` to true to disable classpath loading (see also `LoadWebResourcesFromFilesystemConfigProperty`).
+
 === ESLint
+
 For the Scout code base we use https://eslint.org/[ESLint] to analyze the JavaScript code. The ruleset we use is stored in the module https://www.npmjs.com/package/@eclipse-scout/eslint-config[@eclipse-scout/eslint-config]. If you like, you can use the same ruleset for your application, but you don't have to. You can use your custom config or even a different linter.
 
 NOTE: When using the Scout archetype to generate your app, the ESLint configuration is already setup for you and you don't need to do the following steps.
