@@ -253,7 +253,7 @@ The Tomcat Manager Application: http://tomcat.apache.org/tomcat-9.0-doc/manager-
 ].
 Here we only show how to start this application from the homepage of a running Tomcat installation.
 
-To access this application you can switch to the `Manager App` with a click on the corresponding button on the right-hand-side as shown in <<img-tomcat_install>>.
+To access this application you can switch to the `Manager App` with a click on the corresponding button on the right side as shown in <<img-tomcat_install>>.
 Before you are allowed to access this application, you need to provide credentials of a user associated with Tomcats's `manager-gui` role.
 
 [[lst-tomcat.users]]

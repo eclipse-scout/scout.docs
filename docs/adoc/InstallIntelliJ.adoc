@@ -15,15 +15,15 @@ ifndef::mdledir[:mdledir: .]
 If you have no IntelliJ yet, you can download it from the https://www.jetbrains.com/idea/download[JetBrains download site].
 We recommend selecting the Ultimate edition to have the JavaScript support included in the IDE.
 There is a 30-day trial if you have no licence.
-For this tutorial you can also use the free Community Edition but it requires some extra steps indicated.
+For this tutorial you can also use the free Community Edition, but it requires some extra steps indicated.
 
 Install or extract the package and run it using `bin/idea64.exe` in the installation folder.
 Follow the instructions until the `Welcome to IntelliJ IDEA` screen is shown.
 
-On the left-hand-side switch to `Plugins`, search for `Eclipse Scout` and press the green `Install` button.
+On the left side switch to `Plugins`, search for `Eclipse Scout` and press the green `Install` button.
 In case a `Third-Party Plugins Privacy Notice` is shown, press `Accept`. The Scout plugin does not collect or process any personal data.
-Afterwards the plugin is being downloaded from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout[JetBrains Marketplace] and installed locally.
-As soon as this is completed press the `Restart IDE` button.
+Afterwards, the plugin is being downloaded from the https://plugins.jetbrains.com/plugin/13393-eclipse-scout[JetBrains Marketplace] and installed locally.
+As soon as this is completed, press the `Restart IDE` button.
 
 The same can also be achieved by navigating to `File | Settings | Plugins` in case you already have an existing IntelliJ project running.
 

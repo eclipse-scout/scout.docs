@@ -301,7 +301,7 @@ To see more example code of Scout JS, we recommend looking at the {jswidgets}[Sc
 and its {jswidgets-code}[source code].
 
 If you are interested in Scout's concepts, architecture and features you probably want to have
-a look a the {technical-guide-js}[Scout JS Technical Guide]
+a look at the {technical-guide-js}[Scout JS Technical Guide].
 
 In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
