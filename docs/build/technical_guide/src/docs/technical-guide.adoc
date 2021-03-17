@@ -1,4 +1,5 @@
 = Eclipse Scout Technical Guide
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 :sectnums!:

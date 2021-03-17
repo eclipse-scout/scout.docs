@@ -1,4 +1,5 @@
 = Get Started with Eclipse Scout
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 Eclipse Scout is a framework that can be used in several ways.

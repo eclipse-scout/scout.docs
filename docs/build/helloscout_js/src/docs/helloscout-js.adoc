@@ -1,4 +1,5 @@
 = Hello Scout JS
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]
@@ -9,7 +10,7 @@ ifndef::source-highlighter[:source-highlighter: coderay]
 
 In this tutorial we will create your first Scout JS application.
 
-NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/get-started.html[Get Started Guide] first.
+NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
 
 The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.

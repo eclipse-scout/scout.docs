@@ -1,12 +1,12 @@
 = Hello Scout JS Full Stack
-
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 == Introduction
 
 In this tutorial we will create a Scout JS application consisting of a JavaScript frontend connected using REST to a Java backend that stores the data in a database.
 
-NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/get-started.html[Get Started Guide] first.
+NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
 
 We will create the application using IntelliJ.
 The generated application can display persons loaded from a database.

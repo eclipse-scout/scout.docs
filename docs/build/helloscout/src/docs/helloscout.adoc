@@ -1,12 +1,12 @@
 = Hello Scout Classic
-
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 == Introduction
 
 In this tutorial we will create your first Scout Classic application.
 
-NOTE: If you don't know what Scout Classic is yet, please read the https://eclipsescout.github.io/{doc-short-version}/get-started.html[Get Started Guide] first.
+NOTE: If you don't know what Scout Classic is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
 
 We will create the application using Eclipse or IntelliJ.
 The generated application will consist of a client and server part and simply display a text sent from the server.
