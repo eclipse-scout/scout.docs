@@ -11,7 +11,8 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/beginners-guide.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 include::{mdledir}/BookPreface.adoc[]
 

@@ -17,7 +17,8 @@ ifndef::rndir[:rndir: {mdledir}/releasenotes]
 
 //:numbered:
 
-NOTE: Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/release-notes.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
 
 include::{rndir}/ReleaseNotes.adoc[]
 

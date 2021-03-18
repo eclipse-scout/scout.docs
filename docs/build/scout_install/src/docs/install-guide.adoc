@@ -11,6 +11,9 @@ ifndef::codedir[:codedir: ../../../../../code]
 ifndef::mdledir[:mdledir: ../../../../adoc]
 :experimental:
 
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/helloscout.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 This document describes how to install an Eclipse IDE ready to create Scout applications.
 The text below assumes that you are working with a windows box.
 The installation process does not differ much for other platforms.
