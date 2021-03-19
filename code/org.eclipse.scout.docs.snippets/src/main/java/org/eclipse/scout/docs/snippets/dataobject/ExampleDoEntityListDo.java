@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.docs.snippets.dataobject;
 
 import java.util.Collection;
@@ -18,8 +28,6 @@ public class ExampleDoEntityListDo extends DoEntity {
   public DoValue<AbstractExampleEntityDo> singleAttribute() {
     return doValue("singleAttribute");
   }
-
-//end::class[]
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
@@ -53,3 +61,4 @@ public class ExampleDoEntityListDo extends DoEntity {
     return singleAttribute().get();
   }
 }
+//end::class[]
