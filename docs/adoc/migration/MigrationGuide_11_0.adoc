@@ -93,8 +93,8 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 . Update all Node modules having the `@eclipse-scout` namespace in your package.json files to `{node-version}`. There is one exception: The module `@eclipse-scout/releng` stays at the version `^10.0.0`.
 . Optional switch from npm to https://pnpm.js.org/[pnpm] (recommended)
 .. Overwrite your `js build.sh` (or `js build.cmd` on Windows) with the following content and replace the `${rootArtifactId}` with your module name:
-... js build.sh: https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/{dus}rootArtifactId{dus}.ui.html/js%20build.sh?h=releases/11.0[sample content]
-... js build.cmd: https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/{dus}rootArtifactId{dus}.ui.html/win%20js%20build.cmd?h=releases/11.0[sample content]
+... js build.sh: https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/{dus}rootArtifactId{dus}/run-configs/js%20build.sh?h=releases/11.0[sample content]
+... js build.cmd: https://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/plain/scout-helloworld-app/src/main/resources/archetype-resources/{dus}rootArtifactId{dus}/run-configs/win%20js%20build.cmd?h=releases/11.0[sample content]
 .. Remove all file dependencies in your `package.json` files. So dependency versions like `file:../helloworld.ui/` are replaced with the version of the module previously referenced (e.g. `1.0.0-SNAPSHOT`).
 .. In the root directory of your project (next to the root `pom.xml`) create a new file `pnpm-workspace.yaml` with the following example content:
 +
