@@ -27,7 +27,7 @@ public final class ConfigProperties {
 
     @Override
     public String description() {
-      return "User domain";
+      return "If a domain is set, the user image is loaded from gravatar by using the following email: userId@userDomain (see UserForm.java)";
     }
   }
 

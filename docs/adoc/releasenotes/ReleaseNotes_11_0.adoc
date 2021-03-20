@@ -19,11 +19,6 @@ You can see the {github-changelog-link} on GitHub.
 
 Coming from an older Scout version? Check out the {migration-guide-link} for instructions on how to obtain the new version and upgrade existing applications.
 
-=== Service Releases
-
-Scout {scout-version} will continue to be maintained for a while and new builds may be released from time to time.
-Beside bug fixes, these releases may even contain some minor features.
-
 //The following enhancements were made after the initial {scout-version} release.
 //
 //==== 11.0.1
@@ -285,3 +280,38 @@ This feature can be activated for every form field, and Table and Tree.
 To do so, you need to set the `dropType` property to `dragAndDrop.SCOUT_TYPES.FILE_TRANSFER`.
 You can then listen to the 'drop' event and handle it accordingly.
 You may also want to adjust the `dropMaximumSize` to decrease or increase the allowed file size.
+
+== Scout SDK Enhancements for IntelliJ
+
+Beside new Scout runtime features, the https://plugins.jetbrains.com/plugin/13393-eclipse-scout/[Scout SDK for IntelliJ] got some new features as well.
+
+=== Code Completion for Scout Classic
+
+This enables you to easily create new Scout elements like form fields, menus, codes etc. directly from the editor.
+Just press `Ctrl + Space` to see the available elements for the current location in the code, or simply start writing (e.g. Menu).
+
+=== Code Completion for Scout JS
+
+Similar to the code completion for Scout Classic, you can now easily add new elements in your Scout JS models.
+This is not limited to adding new widgets, you get code completion for all properties (like enabled, visible etc.).
+
+=== National Language Support
+
+Even though IntelliJ has a built-in NLS editor, the editor has some limitations.
+With the new Scout NLS editor you will get the features you know well and love from the Scout NLS editor for Eclipse.
+This includes being able to show inherited texts or sorting the texts alphabetically.
+Just open the `translation.nls` file to open the Scout editor.
+
+In addition to the editor, you also get:
+
+. Inspections for missing and unused translations.
+. Code completion for Scout translation keys in Java, JavaScript and HTML. +
+This allows you to easily select or even add new texts directly from the code.
+. Tooltip documentation for Scout translation keys.
+. Code folding support for Scout translations with configurable display language.
+
+=== Wizard to Create a New Scout Project
+
+With the new wizard you can easily create a new Scout Classic or Scout JS project with just a few clicks.
+
+If you want to try it out we recommend to either do the https://eclipsescout.github.io/11.0/helloscout.html[Hello Scout Classic] or the https://eclipsescout.github.io/11.0/helloscout-js.html[Hello Scout JS] tutorial.

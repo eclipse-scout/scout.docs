@@ -15,9 +15,9 @@ ifndef::mdledir[:mdledir: .]
 Start your IntelliJ (if not already running) and in the `Welcome to IntelliJ IDEA` screen click on `New Project`. The `New Project` wizard starts.
 The same can also be achieved from the menu `File | New | Project...` if an existing project is open already.
 
-On the left hand side select the `Scout` type.
+On the left side select the `Scout` type.
 You have to enter a `Group Id`, `Artifact Id` and a `Display Name` for your Scout project as shown in <<img-sdk_new_project_wizard_ij>>.
-As the created project will make use of https://maven.apache.org/[Apache Maven] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `Group Id` and `Artifact Id` for your project.
+As the created project will make use of https://maven.apache.org/[Apache Maven], please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `Group Id` and `Artifact Id` for your project.
 The `Display Name` is used as the application name presented to the user (e.g. in the browser title bar).
 
 [[img-sdk_new_project_wizard_ij]]
@@ -34,7 +34,7 @@ On the second page please specify project name and location and press btn:[Finis
 The Scout plugin then creates the initial project content for you (you will see some Maven build output).
 Wait until all tasks have completed.
 
-Afterwards you will find the created Scout modules in the Project view as shown in <<img-sdk_new_project_initial_helloworld_ij>>.
+Afterwards, you will find the created Scout modules in the Project view as shown in <<img-sdk_new_project_initial_helloworld_ij>>.
 
 [[img-sdk_new_project_initial_helloworld_ij]]
 .The initial set of Maven modules created for the Hello Scout application.
@@ -44,12 +44,12 @@ TIP: If the modules are not automatically created as indicated in <<img-sdk_new_
 
 Then you can start the Scout application for the first time.
 Since the `Hello Scout` app consists of a backend and a frontend, two servers need to be started.
-Before the frontend server can deliver any JavaScript code to the browser the JavaScript build needs to be executed as well.
+Before the frontend server can deliver any JavaScript code to the browser, the JavaScript build needs to be executed as well.
 You could start each run configuration separately, but for the sake of convenience there is a compound run configuration available which starts all at once.
 
-To start the launch configuration use the [menu]_Add Configuration..._ menu on the top as shown in <<img-start_all_ij>>.
-In the dialog expand the `Compound` type on the left-hand-side, select the prepared run configuration `[webapp] all` and confirm with btn:[Ok].
-Finally click on the green triangle symbol directly right of the [menu]_Add Configuration..._ menu.
+To start the launch configuration, use the [menu]_Add Configuration..._ menu on the top as shown in <<img-start_all_ij>>.
+In the dialog, expand the `Compound` type on the left side, select the prepared run configuration `[webapp] all` and confirm with btn:[Ok].
+Finally, click on the green triangle symbol directly right of the [menu]_Add Configuration..._ menu.
 This will execute the Java build and start the Java frontend server and backend server afterwards.
 On IntelliJ Ultimate this will furthermore download all necessary JavaScript dependencies and execute the JavaScript build.
 
@@ -63,8 +63,8 @@ The watcher keeps on running and will continuously update the JavaScript assets 
 .Selecting the compound run configuration
 image::{imgsdir}/sdk_start_all_ij.png[]
 
-TIP: The JavaScript build could fail in case the installed Node.js could not be found or is too old.
-In that case follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
+TIP: The JavaScript build fails in case the installed Node.js was not found or is too old.
+In that case, follow the instructions in the section <<Prerequisites>> and check the IntelliJ settings in `File | Settings | Languages & Frameworks | Node.js and NPM`.
 
 Once the JS build has been completed (this may take a while for the first time as some dependencies need to be downloaded) and the two servers have been started, the `Hello Scout` application can be accessed by navigating to http://localhost:8082/ in your favorite web browser.
 

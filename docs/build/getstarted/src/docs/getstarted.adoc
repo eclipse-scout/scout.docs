@@ -1,4 +1,5 @@
 = Get Started with Eclipse Scout
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 Eclipse Scout is a framework that can be used in several ways.
@@ -6,7 +7,7 @@ Before you can start, you should decide which way you want to take.
 
 == Choose Wisely
 
-First of all you need to decide what programming language you want to use for the user interface.
+First of all, you need to decide which programming language you want to use for the user interface.
 Do you prefer Java or JavaScript?
 
 If you choose Java, your user interface code runs on a Java server.
@@ -21,10 +22,10 @@ This approach is called _Scout JS_.
 
 No matter what you choose, you can always adjust the existing widgets or write completely new widgets using HTML, CSS and JavaScript.
 
-In addition to the programming language, you should think about whether you want to go full stack (front end, back end) or just focus on one tier.
-For example, you could use Scout JS on the front end, Scout on the back end and a REST api for the communication.
-Or maybe you prefer to use an existing REST api and just want to use the powerful Scout widgets for the front end.
-Or maybe you don't need a back end at all because you plan to implement an offline app.
+In addition to the programming language, you should think about whether you want to go full stack (frontend, backend) or just focus on one tier.
+For example, you could use Scout JS on the frontend, Scout on the backend and a REST api for the communication.
+Or maybe you prefer to use an existing REST api and just want to use the powerful Scout widgets for the frontend.
+Or maybe you don't need a backend at all because you plan to implement an offline app.
 
 Have you made your decision? Great! Then it's now time to really get started.
 
@@ -70,7 +71,7 @@ Thanks to such CDNs you can easily download the prebuilt Scout assets or directl
 
 https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist
 
-Even though this is a convenient way to get the Scout assets, we still recommend getting the artifacts via npm because it gives you more control and flexibility to work with.
+Even though this is a convenient way to get the Scout assets, we still recommend getting the artifacts via npm, because it gives you more control and flexibility to work with.
 
 If you want to learn more about using a CDN, please see http://eclipsescout.github.io/{scout-version}/helloscout-cdn.html[Hello Scout for CDN].
 

@@ -65,7 +65,7 @@ scout.addObjectFactories({
 
 new scout.App().init({
   bootstrap: {
-    textsUrl: 'https://cdn.jsdelivr.net/npm/@eclipse-scout/core@11.0.10/dist/texts.json'
+    textsUrl: 'https://unpkg.com/@eclipse-scout/core@{node-version}/dist/texts.json'
   }
 });
 // end::hello[]

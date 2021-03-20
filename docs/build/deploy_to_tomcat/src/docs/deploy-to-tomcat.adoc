@@ -1,4 +1,5 @@
 = Build Scout App and Deploy to Tomcat
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 include::_BuildAndDeploy.adoc[]

@@ -16,7 +16,7 @@ export default class App extends ScoutApp {
 
   constructor() {
     super();
-    this.scoutVersion = '10.0';
+    this.scoutVersion = '11.0';
   }
 
   _createDesktop(parent) {

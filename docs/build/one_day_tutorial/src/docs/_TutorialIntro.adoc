@@ -31,7 +31,7 @@ The small down arrow at the folder icon indicates that additional outlines are a
 On the right of the button with the folder icon is a second outline button that activates a search outline (not implemented yet).
 Navigation Tree:: The navigation tree on the left side of the layout shows the pages that are available for the selected outline.
 For the "Contacts" outline, the navigation tree provides access to the pages "Persons", "Organizations" and "Events".
-Selecting a page then shows associated information on the right hand side in the bench area.
+Selecting a page then shows associated information on the right side in the bench area.
 In the case of the selected "Persons" page the bench area shows a list of persons in the form of a table.
 Header:: The header area is located at the top and holds the available top level menus.
 In this example these are the "Quick access", "Options" menu points as well as a user menu that shows the username of the currently logged in user "mzi".

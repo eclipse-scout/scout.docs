@@ -1,4 +1,5 @@
 = Hello Scout JS
+// comment prevents empty line after formatting, needed for toc
 include::../../../common/src/docs/_header.adoc[]
 
 ifndef::source-highlighter[:source-highlighter: coderay]
@@ -7,13 +8,17 @@ ifndef::source-highlighter[:source-highlighter: coderay]
 
 == Introduction
 
-In this tutorial we will create a _plain_ Eclipse Scout JS application,
-that is, an application that does not require Maven or Java, only Node.js.
+In this tutorial we will create your first Scout JS application.
 
-When the user opens this application in the browser, there is a text field and a button.
+NOTE: If you don't know what Scout JS is yet, please read the https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+
+The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.
 
-The goal of this chapter is to provide a first impression of the Scout JS framework.
+The application does not require Maven or Java, only Node.js.
+Also, the tutorial does not require any specific IDE.
+
+The goal of this tutorial is to provide a first impression of the Scout JS framework.
 We will start by getting the application running and then take a look at the code.
 
 == Prerequisites
@@ -291,16 +296,15 @@ See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
 Now that you have successfully created your first Scout JS application,
 you might want to learn more about Scout JS.
 
+If you are interested in adding a REST backend you should have a look at https://eclipsescout.github.io/{doc-short-version}/helloscout-js-fullstack.html[Hello Scout JS Full Stack Tutorial].
+
 To see more example code of Scout JS, we recommend looking at the {jswidgets}[Scout JS Widgets] application
 and its {jswidgets-code}[source code].
 
 If you are interested in Scout's concepts, architecture and features you probably want to have
-a look a the {technical-guide-js}[Scout JS Technical Guide]
+a look at the {technical-guide-js}[Scout JS Technical Guide].
 
-In case you should get stuck somewhere and need help, try to get answers by searching the web.
-And if despite reasonable efforts this approach does not help, contact us on the {scout-forum}[Scout forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
-Should you have solved issues on your own, please consider sharing your findings in the forum
-as this can help other folks too.
+In case you should get stuck somewhere and need help, contact us on the http://www.eclipse.org/forums/eclipse.scout[Scout Forum] or on https://stackoverflow.com/tags/eclipse-scout[Stack Overflow].
 
 We wish you all the best on your journey with Scout.
 
