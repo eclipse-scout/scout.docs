@@ -37,6 +37,11 @@ export default class DesktopForm extends Form {
     denseField.setValue(desktop.dense);
     denseField.on('propertyChange', this._onDensePropertyChange.bind(this));
 
+    let openUriButton = this.widget('OpenUriButton');
+    let uriField = this.widget('UriField');
+    let uriActionField = this.widget('UriActionField');
+    openUriButton.on('click', event => this.session.desktop.openUri(uriField.value, uriActionField.value));
+
     this.widget('WidgetActionsBox').setField(desktop);
     this.widget('EventsTab').setField(desktop);
   }
