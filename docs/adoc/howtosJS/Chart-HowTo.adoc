@@ -13,6 +13,38 @@ ifndef::mdledir[:mdledir: .]
 This cheat sheet shows how to create your own chart for a ScoutJS application. In this example we will visualize the sold scoops of an ice cream shop.
 We assume the ice cream shop already has a running ScoutJS application and a place where it wants to create the chart.
 
+==== Prerequisites
+
+Everything related to charts has its own Maven and npm modules and is not part of Scout core. Therefore, the following Maven dependencies need to be added to the `ui.html`-module of the ice cream shop app.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.eclipse.scout.rt</groupId>
+  <artifactId>org.eclipse.scout.rt.chart.ui.html</artifactId>
+</dependency>
+----
+
+A npm dependency to `@eclipse-scout/chart` needs to be added in the `package.json` of the ice cream shop app and in addition, an import needs to be added to the entry-files `icecream.js`,
+
+[source,js]
+----
+import * as chart from '@eclipse-scout/chart';
+Object.assign({}, chart); // workaround so that the imports are not unused
+----
+
+`icecream-theme.less` and `icecream-theme-dark.less`.
+
+[source,css]
+----
+@import "~@eclipse-scout/chart/src/index";
+----
+
+[source,css]
+----
+@import "~@eclipse-scout/chart/src/index-dark";
+----
+
 ==== Minimal Code for a New Chart
 
 The chart is created by
