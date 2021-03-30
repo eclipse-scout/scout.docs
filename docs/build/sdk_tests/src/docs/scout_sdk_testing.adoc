@@ -29,6 +29,7 @@ SDK Version Check:
 - [ ] Open HelloWorld Form and create a new form field using Ctrl+Space. Ensure the Scout Templates (E.g. StringField, TableField) are available.
 - [ ] Select a Template. The corresponding code is inserted and edit locations can be switched using Tab key.
 - [ ] When moving to a super class by using the Tab key, ensure the possible super class proposals are displayed (see screenshot below).
+- [ ] Create a new Form using the New Form wizard. As soon as the Form is opened, directly invoke the code completion in a group box without closing the file and ensure the template can be inserted.
 
 .Select the desired super class proposal
 image::scout_sdk_super_class_proposals.png[]

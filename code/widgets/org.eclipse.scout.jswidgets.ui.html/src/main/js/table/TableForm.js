@@ -165,13 +165,7 @@ export default class TableForm extends Form {
   }
 
   _onAddRowMenuAction() {
-    let col = this.table.columnById('IconColumn');
-    let row = this.table.selectedRow();
-    if (col.cell(row).value === icons.CALENDAR) {
-      col.setCellValue(row, icons.CATEGORY);
-    } else {
-      col.setCellValue(row, icons.CALENDAR);
-    }
+    this.table.insertRow(this._createRow());
   }
 
   _onMoveToTopMenuAction() {
