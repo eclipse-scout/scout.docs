@@ -19,22 +19,17 @@ You can see the {github-changelog-link} on GitHub.
 
 Coming from an older Scout version? Check out the {migration-guide-link} for instructions on how to obtain the new version and upgrade existing applications.
 
-=== Service Releases
-
-Scout {scout-version} will continue to be maintained for a while and new builds may be released from time to time.
-Beside bug fixes, these releases may even contain some minor features.
-
 //The following enhancements were made after the initial {scout-version} release.
 //
-//==== 11.0.1
+//==== 22.0.1
 //
-// The initial release of this version was *11.0.0.xyz* (Maven: 11.0.0.xyz_Simrel_2019_06).
+// The initial release of this version was *22.0.0.xyz* (Maven: 22.0.0.xyz_Simrel_2022_03).
 //
 //WARNING: {NotReleasedWarning}
 //
 //(Section intentionally left blank for possible future release)
 //
-// * <<New Feature (since 11.0.0.xyz)>>
+// * <<New Feature (since 22.0.0.xyz)>>
 //
 // ==== Upcoming -- No Planned Release Date
 //
@@ -42,7 +37,7 @@ Beside bug fixes, these releases may even contain some minor features.
 //
 // WARNING: {NotReleasedWarning}
 //
-// * <<New Feature (since 11.0.0.xyz)>>
+// * <<New Feature (since 22.0.0.xyz)>>
 
 == Demo Applications
 
@@ -60,3 +55,10 @@ If you just want to play around with them without looking at the source code, yo
 
 It's now possible to send notifications via the Notification API. The DesktopNotification has two new properties to control
 the behavior: nativeOnly and nativeNotificationVisibility.
+
+== Text Post-Processors
+
+A new Bean `org.eclipse.scout.rt.platform.nls.ITextPostProcessor` has been introduced which allows to modify all texts returned by a TextProviderService.
+
+This allows applying application wide logic on all translated texts including the ones provided by Scout itself.
+
