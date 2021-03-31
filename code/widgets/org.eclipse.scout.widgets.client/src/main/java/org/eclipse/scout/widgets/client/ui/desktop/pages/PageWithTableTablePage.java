@@ -360,107 +360,52 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
     public class TileTableHeaderBox extends AbstractTileTableHeader {
     }
 
+    @Order(10)
+    @ClassId("532d29f7-6b40-4e7d-93ea-14f94e8509f5")
+    public class AddRowMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("AddRow");
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+      }
+
+      @Override
+      protected void execAction() {
+        ITableRow row = addRow(getTable().createRow());
+        getStringColumn().setValue(row, "String 1" + getRows().size());
+      }
+    }
+
+    @Order(20)
+    @ClassId("eed213ac-ee8f-48cb-8e41-eecf44aa925b")
+    public class DeleteRowMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("DeleteRow");
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.SingleSelection, TableMenuType.MultiSelection);
+      }
+
+      @Override
+      protected void execAction() {
+        deleteRows(getSelectedRows());
+      }
+    }
+
     @Order(30)
-    @ClassId("1df57970-bab8-467e-8de5-c3675693b7b6")
-    public class ChangeAggregationFunctionMenu extends AbstractMenu {
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection,
-            TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("ChangeAggregationFunction");
-      }
-
-      @Override
-      protected void execAction() {
-        List<IColumn<?>> columns = getTable().getColumns();
-        List<String> aggrFunctions = new ArrayList<>();
-        aggrFunctions.add(AggregationFunction.SUM);
-        aggrFunctions.add(AggregationFunction.AVG);
-        aggrFunctions.add(AggregationFunction.MIN);
-        aggrFunctions.add(AggregationFunction.MAX);
-        int i = 0;
-        if (!getSmartColumn().isGroupingActive()) {
-          getColumnSet().setGroupingColumn(getSmartColumn(), true);
-          getTable().sort();
-          return;
-        }
-        for (IColumn<?> c : columns) {
-          if (c instanceof INumberColumn) {
-            INumberColumn column = (INumberColumn) c;
-            String oldAggr = column.getAggregationFunction();
-            for (i = 0; i < aggrFunctions.size(); ++i) {
-              if (StringUtility.emptyIfNull(oldAggr).equals(StringUtility.emptyIfNull(aggrFunctions.get(i)))) {
-                column.setAggregationFunction(aggrFunctions.get((i + 1) % (aggrFunctions.size())));
-                break;
-              }
-              column.setAggregationFunction(aggrFunctions.get(0));
-            }
-          }
-        }
-        if (i >= aggrFunctions.size() - 1) {
-          getColumnSet().resetSortingAndGrouping();
-        }
-      }
-    }
-
-    @Order(40)
-    @ClassId("4b131b0a-8c22-44ec-90bc-6cbcc5e3dfca")
-    public class ChangeBackgroundEffectMenu extends AbstractMenu {
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection,
-            TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("ChangeBackgroundEffect");
-      }
-
-      @Override
-      protected void execAction() {
-        List<IColumn<?>> columns = getTable().getColumns();
-        List<String> effects = new ArrayList<>();
-        effects.add(null);
-        effects.add(BackgroundEffect.COLOR_GRADIENT_1);
-        effects.add(BackgroundEffect.COLOR_GRADIENT_2);
-        effects.add(BackgroundEffect.BAR_CHART);
-
-        for (IColumn<?> c : columns) {
-          if (c instanceof INumberColumn) {
-            INumberColumn column = (INumberColumn) c;
-            String oldEffect = column.getBackgroundEffect();
-            for (int i = 0; i < effects.size(); ++i) {
-              if (StringUtility.emptyIfNull(oldEffect).equals(StringUtility.emptyIfNull(effects.get(i)))) {
-                column.setBackgroundEffect(effects.get((i + 1) % (effects.size())));
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    @Order(50)
     @ClassId("5bfc103b-899d-4cf0-83ad-1e27db34e77e")
     public class FormMenu extends AbstractFormMenu<BooleanFieldForm> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection,
-            TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace);
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
       }
 
       @Override
@@ -474,23 +419,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
       }
     }
 
-    @Order(20)
-    @ClassId("a4465f67-4e45-4346-81dd-deb9406682b6")
-    public class TableSingleMenu extends AbstractMenu {
-
-      @Override
-      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection);
-      }
-
-      @Override
-      protected String getConfiguredText() {
-        return "Single";
-      }
-    }
-
-    @Order(60)
+    @Order(50)
     @ClassId("24d3b8c1-d956-46d3-b271-2c5ff53df89a")
     public class HierarchicalMenu extends AbstractMenu {
 
@@ -505,8 +434,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TableMenuType.SingleSelection);
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
         }
 
         @Override
@@ -521,8 +449,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TableMenuType.MultiSelection);
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.MultiSelection);
         }
 
         @Override
@@ -537,8 +464,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TableMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
         }
 
         @Override
@@ -562,8 +488,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.<IMenuType> hashSet(
-                TableMenuType.SingleSelection);
+            return CollectionUtility.<IMenuType> hashSet(TableMenuType.SingleSelection);
           }
 
           @Override
@@ -578,8 +503,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.<IMenuType> hashSet(
-                TableMenuType.MultiSelection);
+            return CollectionUtility.<IMenuType> hashSet(TableMenuType.MultiSelection);
           }
 
           @Override
@@ -594,8 +518,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
           @Override
           protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-            return CollectionUtility.<IMenuType> hashSet(
-                TableMenuType.EmptySpace);
+            return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
           }
 
           @Override
@@ -605,16 +528,129 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
         }
       }
     }
+
+    @Order(60)
+    @ClassId("0560bd7f-d1db-4140-b348-faa3a7bb3048")
+    public class MoreMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("More");
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+      }
+
+      @Order(30)
+      @ClassId("1df57970-bab8-467e-8de5-c3675693b7b6")
+      public class ChangeAggregationFunctionMenu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ChangeAggregationFunction");
+        }
+
+        @Override
+        protected void execAction() {
+          List<IColumn<?>> columns = getTable().getColumns();
+          List<String> aggrFunctions = new ArrayList<>();
+          aggrFunctions.add(AggregationFunction.SUM);
+          aggrFunctions.add(AggregationFunction.AVG);
+          aggrFunctions.add(AggregationFunction.MIN);
+          aggrFunctions.add(AggregationFunction.MAX);
+          int i = 0;
+          if (!getSmartColumn().isGroupingActive()) {
+            getColumnSet().setGroupingColumn(getSmartColumn(), true);
+            getTable().sort();
+            return;
+          }
+          for (IColumn<?> c : columns) {
+            if (c instanceof INumberColumn) {
+              INumberColumn column = (INumberColumn) c;
+              String oldAggr = column.getAggregationFunction();
+              for (i = 0; i < aggrFunctions.size(); ++i) {
+                if (StringUtility.emptyIfNull(oldAggr).equals(StringUtility.emptyIfNull(aggrFunctions.get(i)))) {
+                  column.setAggregationFunction(aggrFunctions.get((i + 1) % (aggrFunctions.size())));
+                  break;
+                }
+                column.setAggregationFunction(aggrFunctions.get(0));
+              }
+            }
+          }
+          if (i >= aggrFunctions.size() - 1) {
+            getColumnSet().resetSortingAndGrouping();
+          }
+        }
+      }
+
+      @Order(40)
+      @ClassId("4b131b0a-8c22-44ec-90bc-6cbcc5e3dfca")
+      public class ChangeBackgroundEffectMenu extends AbstractMenu {
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+        }
+
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("ChangeBackgroundEffect");
+        }
+
+        @Override
+        protected void execAction() {
+          List<IColumn<?>> columns = getTable().getColumns();
+          List<String> effects = new ArrayList<>();
+          effects.add(null);
+          effects.add(BackgroundEffect.COLOR_GRADIENT_1);
+          effects.add(BackgroundEffect.COLOR_GRADIENT_2);
+          effects.add(BackgroundEffect.BAR_CHART);
+
+          for (IColumn<?> c : columns) {
+            if (c instanceof INumberColumn) {
+              INumberColumn column = (INumberColumn) c;
+              String oldEffect = column.getBackgroundEffect();
+              for (int i = 0; i < effects.size(); ++i) {
+                if (StringUtility.emptyIfNull(oldEffect).equals(StringUtility.emptyIfNull(effects.get(i)))) {
+                  column.setBackgroundEffect(effects.get((i + 1) % (effects.size())));
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   @Order(10)
+  @ClassId("ef9d8969-3c23-4474-968e-4d97cc64ba7d")
+  public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
+
+    @Override
+    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+      return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
+    }
+
+    @Override
+    protected Class<?> provideSourceClass() {
+      return PageWithTableTablePage.class;
+    }
+  }
+
+  @Order(15)
   @ClassId("27fe26af-fa2c-43b7-bdc8-068fb2327fc7")
   public class HierarchicalPageMenu extends AbstractMenu {
 
     @Override
     protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-      return CollectionUtility.<IMenuType> hashSet(
-          TreeMenuType.SingleSelection);
+      return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
     }
 
     @Override
@@ -628,8 +664,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TreeMenuType.SingleSelection);
+        return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
       }
 
       @Override
@@ -644,8 +679,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TreeMenuType.MultiSelection);
+        return CollectionUtility.<IMenuType> hashSet(TreeMenuType.MultiSelection);
       }
 
       @Override
@@ -660,8 +694,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TreeMenuType.EmptySpace);
+        return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
       }
 
       @Override
@@ -685,8 +718,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TreeMenuType.SingleSelection);
+          return CollectionUtility.<IMenuType> hashSet(TreeMenuType.SingleSelection);
         }
 
         @Override
@@ -701,8 +733,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TreeMenuType.MultiSelection);
+          return CollectionUtility.<IMenuType> hashSet(TreeMenuType.MultiSelection);
         }
 
         @Override
@@ -717,8 +748,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-          return CollectionUtility.<IMenuType> hashSet(
-              TreeMenuType.EmptySpace);
+          return CollectionUtility.<IMenuType> hashSet(TreeMenuType.EmptySpace);
         }
 
         @Override
@@ -726,25 +756,6 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
           return "TreeSubSubEmpty";
         }
       }
-    }
-  }
-
-  @Order(10)
-  @ClassId("ef9d8969-3c23-4474-968e-4d97cc64ba7d")
-  public class ViewSourceOnGitHubMenu extends AbstractViewSourceOnGitHubMenu {
-
-    @Override
-    protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-      return CollectionUtility.<IMenuType> hashSet(
-          TreeMenuType.EmptySpace,
-          TableMenuType.SingleSelection,
-          TableMenuType.MultiSelection,
-          TableMenuType.EmptySpace);
-    }
-
-    @Override
-    protected Class<?> provideSourceClass() {
-      return PageWithTableTablePage.class;
     }
   }
 }
