@@ -66,30 +66,23 @@ export default () => ({
                     id: 'NativeOnlyField',
                     objectType: 'CheckBoxField',
                     label: 'Native Only',
-                    labelVisible: false
+                    labelVisible: false,
+                    tooltipText: '${textKey:NativeOnlyTooltip}'
                   },
                   {
                     id: 'NativeNotificationVisibilityField',
                     objectType: 'SmartField',
                     lookupCall: 'jswidgets.NativeNotificationVisibilityLookupCall',
-                    label: 'Native Notification'
+                    label: 'Native Notification',
+                    tooltipText: '${textKey:NativeNotificationVisibilityTooltip}'
+                  },
+                  {
+                    id: 'DelayField',
+                    objectType: 'NumberField',
+                    label: 'Delay',
+                    tooltipText: '${textKey:DelayTooltip}'
                   }
                 ]
-              }
-            ]
-          },
-          {
-            id: 'ActionsTab',
-            objectType: 'TabItem',
-            label: 'Actions',
-            fields: [
-              {
-                id: 'FormFieldActionsBox',
-                objectType: 'jswidgets.FormFieldActionsBox'
-              },
-              {
-                id: 'WidgetActionsBox',
-                objectType: 'jswidgets.WidgetActionsBox'
               }
             ]
           },
