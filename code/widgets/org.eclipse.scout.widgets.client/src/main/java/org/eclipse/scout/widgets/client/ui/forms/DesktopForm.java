@@ -31,6 +31,8 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeNotificationVisibilityField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeOnlyField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.SeverityField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.OutlineButtonBox;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.OutlineButtonBox.OutlineButtonField;
@@ -40,6 +42,8 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.Be
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
+import org.eclipse.scout.widgets.shared.services.code.NativeNotificationVisibilityCodeType;
+import org.eclipse.scout.widgets.shared.services.code.NativeNotificationVisibilityCodeType.NoneCode;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
@@ -106,6 +110,14 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(CloseableField.class);
   }
 
+  public NativeOnlyField getNativeOnlyField() {
+    return getFieldByClass(NativeOnlyField.class);
+  }
+
+  public NativeNotificationVisibilityField getNativeNotificationVisibilityField() {
+    return getFieldByClass(NativeNotificationVisibilityField.class);
+  }
+
   public StyleBox.TrackFocusField getTrackFocusField() {
     return getFieldByClass(StyleBox.TrackFocusField.class);
   }
@@ -146,7 +158,11 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
           IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
           long duration = getDurationField().getValue();
           boolean closeable = getCloseableField().getValue();
-          DesktopNotification notification = new DesktopNotification(status, duration, closeable);
+          boolean nativeOnly = getNativeOnlyField().getValue();
+          String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
+          DesktopNotification notification = new DesktopNotification(status, duration, closeable)
+              .withNativeOnly(nativeOnly)
+              .withNativeNotificationVisibility(nativeNotificationVisibility);
           ClientSession.get().getDesktop().addNotification(notification);
           m_lastNotification = notification;
         }
@@ -249,6 +265,46 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(true);
+        }
+      }
+
+      @Order(80)
+      @ClassId("b201fd6d-a587-4497-8977-c9c35abf02e0")
+      public class NativeOnlyField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Native Only";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(false);
+        }
+      }
+
+      @Order(90)
+      @ClassId("ea3451e8-c024-4bda-8033-29eaa7493aac")
+      public class NativeNotificationVisibilityField extends AbstractSmartField<String> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Native Notification";
+        }
+
+        @Override
+        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
+          return NativeNotificationVisibilityCodeType.class;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(NoneCode.ID);
+        }
+
+        @Override
+        protected String execValidateValue(String rawValue) {
+          return ObjectUtility.nvl(rawValue, NoneCode.ID);
         }
       }
     }
