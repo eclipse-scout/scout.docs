@@ -113,3 +113,9 @@ Support for `EnumVersion` is removed.
 
 Remove `EnumVersion` annotation on `IEnum` implementors.
 
+== Native Notification Support
+
+The notification uses the application logo configured in `AbstractDesktop#getConfiguredLogoId()`.
+
+*Migration*
+Provide an application logo with a resolution of at least 150x150 px.
