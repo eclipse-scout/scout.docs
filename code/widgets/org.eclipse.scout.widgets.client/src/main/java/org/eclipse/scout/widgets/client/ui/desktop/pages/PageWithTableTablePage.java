@@ -10,6 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
@@ -375,9 +376,23 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected void execAction() {
-        ITableRow row = addRow(getTable().createRow());
-        getStringColumn().setValue(row, "String 1" + getRows().size());
+        addRow(createNewRow());
       }
+    }
+
+    protected ITableRow createNewRow() {
+      ITableRow row = getTable().createRow();
+      getStringColumn().setValue(row, "String 1" + getRows().size());
+      getAlphanumericSortingStringColumn().setValue(row, "String 1" + getRows().size());
+      getLongColumn().setValue(row, m_random.nextLong());
+      getIntegerColumn().setValue(row, m_random.nextInt());
+      getBigDecimalColumn().setValue(row, new BigDecimal(m_random.nextInt() / 10));
+      getDateColumn().setValue(row, new Date());
+      getSmartColumn().setValue(row, 2L);
+      getPercentColumn().setValue(row, new BigDecimal(10));
+      getMultiplierColumn().setValue(row, new BigDecimal("0.01"));
+      getRoundingModeColumn().setValue(row, new BigDecimal(1));
+      return row;
     }
 
     @Order(20)
