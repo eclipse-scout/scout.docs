@@ -23,6 +23,8 @@ export {default as WidgetActionsBox} from './common/WidgetActionsBox';
 export {default as CheckBoxFieldForm} from './checkboxfield/CheckBoxFieldForm';
 export {default as Desktop} from './desktop/Desktop';
 export {default as DesktopForm} from './desktop/DesktopForm';
+export {default as DesktopNotificationForm} from './desktopnotification/DesktopNotificationForm';
+export {default as NativeNotificationVisibilityLookupCall} from './desktopnotification/NativeNotificationVisibilityLookupCall';
 export {default as DisplayParentLookupCall} from './desktop/DisplayParentLookupCall';
 export {default as FormDisplayHintLookupCall} from './form/FormDisplayHintLookupCall';
 export {default as FormDisplayViewIdLookupCall} from './form/FormDisplayViewIdLookupCall';

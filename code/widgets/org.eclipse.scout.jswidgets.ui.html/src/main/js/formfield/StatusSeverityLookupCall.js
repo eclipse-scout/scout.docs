@@ -21,6 +21,7 @@ export default class StatusSeverityLookupCall extends StaticLookupCall {
   }
 
   static DATA = [
+    [Status.Severity.OK, 'ok'],
     [Status.Severity.INFO, 'info'],
     [Status.Severity.WARNING, 'warning'],
     [Status.Severity.ERROR, 'error']

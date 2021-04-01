@@ -105,6 +105,15 @@ export default () => ({
     {
       objectType: 'PageWithNodes',
       leaf: true,
+      text: 'Desktop Notification',
+      detailForm: {
+        objectType: 'jswidgets.DesktopNotificationForm'
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: 'PageWithNodes',
+      leaf: true,
       text: 'Form',
       detailForm: {
         objectType: 'jswidgets.FormForm',
