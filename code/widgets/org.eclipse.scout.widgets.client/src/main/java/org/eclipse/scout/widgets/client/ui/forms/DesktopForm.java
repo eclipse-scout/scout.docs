@@ -1,5 +1,7 @@
 package org.eclipse.scout.widgets.client.ui.forms;
 
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.scout.rt.client.context.ClientRunContexts;
 import org.eclipse.scout.rt.client.job.ModelJobs;
 import org.eclipse.scout.rt.client.ui.action.view.IViewButton;
@@ -17,10 +19,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.job.Jobs;
 import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
+import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
@@ -29,6 +33,7 @@ import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropert
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DelayField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeNotificationVisibilityField;
@@ -114,6 +119,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(NativeOnlyField.class);
   }
 
+  public DelayField getDelayField() {
+    return getFieldByClass(DelayField.class);
+  }
+
   public NativeNotificationVisibilityField getNativeNotificationVisibilityField() {
     return getFieldByClass(NativeNotificationVisibilityField.class);
   }
@@ -155,16 +164,32 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected void execClickAction() {
-          IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
-          long duration = getDurationField().getValue();
-          boolean closeable = getCloseableField().getValue();
-          boolean nativeOnly = getNativeOnlyField().getValue();
-          String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
-          DesktopNotification notification = new DesktopNotification(status, duration, closeable)
-              .withNativeOnly(nativeOnly)
-              .withNativeNotificationVisibility(nativeNotificationVisibility);
-          ClientSession.get().getDesktop().addNotification(notification);
-          m_lastNotification = notification;
+          final IRunnable openFormRunnable = () -> {
+            IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
+            long duration = getDurationField().getValue();
+            boolean closeable = getCloseableField().getValue();
+            boolean nativeOnly = getNativeOnlyField().getValue();
+            String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
+            DesktopNotification notification = new DesktopNotification(status, duration, closeable)
+                .withNativeOnly(nativeOnly)
+                .withNativeNotificationVisibility(nativeNotificationVisibility);
+
+            getDesktop().addNotification(notification);
+            m_lastNotification = notification;
+          };
+
+          int openingDelay = (getDelayField().getValue() != null ? getDelayField().getValue() : 0);
+          if (openingDelay == 0) {
+            ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+          }
+          else {
+            Jobs.schedule(() -> {
+              ModelJobs.schedule(openFormRunnable, ModelJobs.newInput(ClientRunContexts.copyCurrent()));
+            }, Jobs.newInput()
+                .withRunContext(ClientRunContexts.copyCurrent())
+                .withExecutionTrigger(Jobs.newExecutionTrigger()
+                    .withStartIn(openingDelay, TimeUnit.MILLISECONDS)));
+          }
         }
       }
 
@@ -278,6 +303,11 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
 
         @Override
+        protected String getConfiguredTooltipText() {
+          return "True, to only show the native desktop notification. \nFalse, to show both, the regular and the native notification. If and when a native desktop notification is shown is controlled by the field 'Native Notification'";
+        }
+
+        @Override
         protected void execInitField() {
           setValue(false);
         }
@@ -305,6 +335,35 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected String execValidateValue(String rawValue) {
           return ObjectUtility.nvl(rawValue, NoneCode.ID);
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "none: No native notification is shown.\nbackground: The native notification is only shown if the application is in background.\nalways: The native notification is always shown.";
+        }
+      }
+
+      @ClassId("30f3c198-4fc3-4b14-a43c-8bbaae50828e")
+      public class DelayField extends AbstractIntegerField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Delay";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Delay in milliseconds until notification is displayed.";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(0);
+        }
+
+        @Override
+        protected Integer execValidateValue(Integer rawValue) {
+          return ObjectUtility.nvl(rawValue, 0);
         }
       }
     }

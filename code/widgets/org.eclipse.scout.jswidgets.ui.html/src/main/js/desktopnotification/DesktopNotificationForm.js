@@ -26,22 +26,19 @@ export default class DesktopNotificationForm extends Form {
   _init(model) {
     super._init(model);
 
-    let desktop = this.session.desktop;
     let button = this.widget('Button');
     this.widget('ClosableField').setValue(true);
     this.widget('MessageField').setValue('This is a notification');
     this.widget('DurationField').setValue(5000);
+    this.widget('DelayField').setValue(0);
     this.widget('StatusSeverityField').setValue(Status.Severity.OK);
     this.widget('NativeNotificationVisibilityField').setValue(DesktopNotification.NativeNotificationVisibility.NONE);
 
     button.on('click', this._onButtonClick.bind(this));
-
-    this.widget('WidgetActionsBox').setField(desktop);
-    this.widget('EventsTab').setField(desktop);
   }
 
   _onButtonClick(event) {
-    scout.create('DesktopNotification', {
+    let notification = scout.create('DesktopNotification', {
       parent: this,
       closable: this.widget('ClosableField').value,
       duration: this.widget('DurationField').value,
@@ -51,6 +48,14 @@ export default class DesktopNotificationForm extends Form {
         severity: this.widget('StatusSeverityField').value,
         message: this.widget('MessageField').value
       }
-    }).show();
+    });
+    this.widget('EventsTab').setField(notification);
+
+    const delay = this.widget('DelayField').value;
+    if (delay > 0) {
+      setTimeout(() => notification.show(), delay);
+    } else {
+      notification.show();
+    }
   }
 }
