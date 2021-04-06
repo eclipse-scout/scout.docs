@@ -794,7 +794,7 @@ scout.mom.cluster.implementor=org.eclipse.scout.rt.mom.jms.JmsMomImplementor
 |Integer
 |Config Property
 |`scout.mom.marshaller`
-|Specifies the default Marshaller to use if no marshaller is specified for a MOM or a destination. By default the `JsonMarshaller` is used.
+|Specifies the default Marshaller to use if no marshaller is specified for a MOM or a destination. By default the `JsonDataObjectMarshaller` is used.
 |Fully qualified class name. The class must have `org.eclipse.scout.rt.mom.api.marshaller.IMarshaller` in its super hierarchy.
 |Config Property
 |`scout.mom.requestreply.cancellationTopic`
