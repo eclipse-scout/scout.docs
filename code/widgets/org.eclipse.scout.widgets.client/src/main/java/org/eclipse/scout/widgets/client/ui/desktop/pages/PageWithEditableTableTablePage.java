@@ -57,15 +57,12 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(
-            TableMenuType.SingleSelection,
-            TableMenuType.MultiSelection,
-            TableMenuType.EmptySpace);
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
       }
 
       @Override
       protected String getConfiguredText() {
-        return TEXTS.get("Mandatory");
+        return TEXTS.get("ToggleMandatory");
       }
 
       @Override

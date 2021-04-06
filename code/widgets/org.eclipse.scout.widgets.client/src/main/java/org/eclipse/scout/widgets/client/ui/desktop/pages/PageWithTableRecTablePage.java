@@ -54,7 +54,7 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
     for (int i = 0; i < data.length; i++) {
       Object[] row = data[i];
       Object[] newRow = new Object[row.length + 1];
-      newRow[0] = "#" + new BigInteger(30, m_random).toString(32).toUpperCase() + " (" + row[0] + ")";
+      newRow[0] = createOutlineSummary((String)row[0]);
       // noinspection ManualArrayCopy
       for (int j = 0; j < row.length; j++) {
         newRow[j + 1] = row[j];
@@ -64,9 +64,17 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
     return newData;
   }
 
+  protected String createOutlineSummary(String str) {
+    return "#" + new BigInteger(30, m_random).toString(32).toUpperCase() + " (" + str + ")";
+  }
+
   @Replace
   @ClassId("eb9eb561-4765-4fb7-bc4a-05e4a4446352")
   public class Table extends PageWithTableTablePage.Table {
+
+    public OutlineColumn getOutlineColumn() {
+      return getColumnSet().getColumnByClass(OutlineColumn.class);
+    }
 
     @Order(5)
     @ClassId("0c6b078f-30bc-45b4-a120-b2ec13e425e3")
@@ -81,6 +89,13 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
       protected boolean getConfiguredSummary() {
         return true;
       }
+    }
+
+    @Override
+    protected ITableRow createNewRow() {
+      ITableRow row = super.createNewRow();
+      getOutlineColumn().setValue(row, createOutlineSummary(getStringColumn().getValue(row)));
+      return row;
     }
   }
 }
