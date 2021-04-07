@@ -36,7 +36,7 @@ and checkout the branch `releases/{doc-short-version}`.
 Alternatively, you can also download and extract a
 https://github.com/bsi-software/helloscoutjs/archive/refs/heads/releases/{doc-short-version}.zip[ZIP file of the repository].
 
-After that, the file and folder structure of your local copy should look like this:
+After that, the file and folder structure of your local copy should look like this (apart from a few more files):
 
 .Files and folders of the application
 ----
@@ -273,21 +273,13 @@ An OK message box with the desired text is displayed using the convenience class
 
 If you want to add the created application to a Git repository, it is recommended to exclude some files from the SCM.
 
-As a starting point, put a file named `.gitignore` with the following content in the main folder of the application.
+As a starting point, use the file you cloned/downloaded from the helloscoutjs repository.
 
+// coderay does not support highlighting of shell, bash or properties files -> declare it as a ruby file
 ..gitignore
-[source,properties]
+[source,ruby]
 ----
-# Git
-*.orig
-
-# Node.js
-node_modules/
-dist/
-test-results/
-
-# Do not check in any log files
-*.log
+include::{code-basedir}.gitignore[]
 ----
 
 See the https://git-scm.com/docs/gitignore[gitignore Documentation] for details.
