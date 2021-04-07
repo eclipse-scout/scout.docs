@@ -115,7 +115,7 @@ Remove `EnumVersion` annotation on `IEnum` implementors.
 
 == Native Notification Support
 
-The notification uses the application logo configured in `AbstractDesktop#getConfiguredLogoId()`.
+The new notifications displayed by the browser use the application logo configured in `AbstractDesktop#getConfiguredLogoId()`.
 
 *Migration*
-Provide an application logo with a resolution of at least 150x150 px.
+If you use native notifications, provide an application logo with a resolution of at least 150x150 px.
