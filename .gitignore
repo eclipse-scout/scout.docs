@@ -1,0 +1,10 @@
+# Git
+*.orig
+
+# Node
+node_modules/
+dist/
+test-results/
+
+# Do not check in any log files
+*.log
