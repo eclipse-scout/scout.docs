@@ -304,7 +304,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected String getConfiguredTooltipText() {
-          return "True, to only show the native desktop notification. \nFalse, to show both, the regular and the native notification. If and when a native desktop notification is shown is controlled by the field 'Native Notification'";
+          return TEXTS.get("NativeNotificationOnlyTooltip");
         }
 
         @Override
@@ -319,7 +319,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Native Notification";
+          return "Native Notification Visibility";
         }
 
         @Override
@@ -339,7 +339,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected String getConfiguredTooltipText() {
-          return "none: No native notification is shown.\nbackground: The native notification is only shown if the application is in background.\nalways: The native notification is always shown.";
+          return TEXTS.get("NativeNotificationVisibilityTooltip");
         }
       }
 
@@ -353,7 +353,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected String getConfiguredTooltipText() {
-          return "Delay in milliseconds until notification is displayed.";
+          return TEXTS.get("NativeNotificationDelayTooltip");
         }
 
         @Override
