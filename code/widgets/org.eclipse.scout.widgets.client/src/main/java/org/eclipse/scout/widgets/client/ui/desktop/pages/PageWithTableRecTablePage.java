@@ -11,10 +11,14 @@
 package org.eclipse.scout.widgets.client.ui.desktop.pages;
 
 import java.math.BigInteger;
+import java.util.Collections;
+import java.util.List;
 
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
+import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPageWithTable;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -66,6 +70,11 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
 
   protected String createOutlineSummary(String str) {
     return "#" + new BigInteger(30, m_random).toString(32).toUpperCase() + " (" + str + ")";
+  }
+
+  @Override
+  protected List<IMenu> execComputeParentTablePageMenus(IPageWithTable<?> parentTablePage) {
+    return Collections.emptyList();
   }
 
   @Replace
