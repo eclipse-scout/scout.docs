@@ -10,13 +10,17 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.FormEvent;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
+import org.eclipse.scout.rt.client.ui.form.fields.LogicalGridLayoutConfig;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.browserfield.AbstractBrowserField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -24,35 +28,51 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.filechooserfield.AbstractFileChooserField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
+import org.eclipse.scout.rt.dataobject.IDataObject;
+import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
+import org.eclipse.scout.rt.dataobject.IValueFormatConstants;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.resource.BinaryResource;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.IOUtility;
+import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.collection.OrderedCollection;
+import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.WidgetsClientConfigProperties.ReadOnlyProperty;
 import org.eclipse.scout.widgets.client.WidgetsHelper;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.BrowserField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox.BingButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox.BsiSoftwareButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox.ExampleNetButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox.PostMessageDemoButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.LinksBox.TestHtmlButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.SetFileBox.BinaryResourceField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.SetFileBox.SetFileButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.SetUrlBox.SetUrlButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.BrowserFieldBox.SetUrlBox.URLField;
 import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.BrowserField;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.BsiSoftwareButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.LinksBox.EclipseScoutButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetFileBox.BinaryResourceField;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetFileBox.SetFileButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetUrlBox.SetUrlButton;
-import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.ExamplesBox.SetUrlBox.URLField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.TabBox.MessagesBox.ButtonsGroup.SendAsJsonButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.TabBox.MessagesBox.ButtonsGroup.SendAsTextButton;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.TabBox.MessagesBox.LogField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.TabBox.MessagesBox.MessageField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldForm.MainBox.TabBox.MessagesBox.TargetOriginField;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.shared.Icons;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The following code-snippet shows what the content of an IFRAME must do to call the execPostMessage() callback. This
@@ -65,17 +85,16 @@ import org.slf4j.LoggerFactory;
  * }
  * &lt;/script&gt;
  * &lt;button onclick="postMessage()"&gt;Post message&lt;/button&gt;
- *
- * The second parameter (targetOrigin) of the postMessage function is important, it points to the domain where the
- * Scout application runs. When the IFRAME content is called from another domain than localhost:8082, the browser
- * will NOT execute the function. You could also use '*' as targetOrigin, when you don't care which domain exactly
- * should be allowed to receive post messages from the IFRAME content.
  * </pre>
+ *
+ * The second parameter (targetOrigin) of the postMessage function is important, it points to the domain where the Scout
+ * application runs. When the IFRAME content is called from another domain than localhost:8082, the browser will NOT
+ * execute the function. You could also use '*' as targetOrigin, when you don't care which domain exactly should be
+ * allowed to receive post messages from the IFRAME content.
  */
 @Order(8100)
 @ClassId("8149752e-43cc-4b26-8b4e-e6e8e7877216")
 public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleForm {
-  private static final Logger LOG = LoggerFactory.getLogger(BrowserFieldForm.class);
 
   @Override
   protected boolean getConfiguredAskIfNeedSave() {
@@ -88,6 +107,12 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
   }
 
   @Override
+  protected void execInitForm() {
+    // Load default content
+    getTestHtmlButton().doClick();
+  }
+
+  @Override
   public void startPageForm() {
     startInternal(new PageFormHandler());
   }
@@ -96,21 +121,33 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(BrowserField.class);
   }
 
-  public BsiSoftwareButton getBsiagButton() {
-    return getFieldByClass(BsiSoftwareButton.class);
-  }
-
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
   }
 
-  public EclipseScoutButton getEclipseScoutButton() {
-    return getFieldByClass(EclipseScoutButton.class);
+  public ExampleNetButton getExampleNetButton() {
+    return getFieldByClass(ExampleNetButton.class);
   }
 
-  public ExamplesBox getExamplesBox() {
-    return getFieldByClass(ExamplesBox.class);
+  public BingButton getBingButton() {
+    return getFieldByClass(BingButton.class);
+  }
+
+  public BsiSoftwareButton getBsiSoftwareButton() {
+    return getFieldByClass(BsiSoftwareButton.class);
+  }
+
+  public TestHtmlButton getTestHtmlButton() {
+    return getFieldByClass(TestHtmlButton.class);
+  }
+
+  public BrowserFieldBox getBrowserFieldBox() {
+    return getFieldByClass(BrowserFieldBox.class);
+  }
+
+  public PostMessageDemoButton getPostMessageDemoButton() {
+    return getFieldByClass(PostMessageDemoButton.class);
   }
 
   public LinksBox getLinksBox() {
@@ -137,6 +174,31 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(SetFileButton.class);
   }
 
+  public LogField getLogField() {
+    return getFieldByClass(LogField.class);
+  }
+
+  public MessageField getMessageField() {
+    return getFieldByClass(MessageField.class);
+  }
+
+  public TargetOriginField getTargetOriginField() {
+    return getFieldByClass(TargetOriginField.class);
+  }
+
+  public SendAsTextButton getSendAsTextButton() {
+    return getFieldByClass(SendAsTextButton.class);
+  }
+
+  public SendAsJsonButton getSendAsJsonButton() {
+    return getFieldByClass(SendAsJsonButton.class);
+  }
+
+  protected void logMessage(String message) {
+    String line = "[" + DateUtility.format(new Date(), IValueFormatConstants.TIMESTAMP_PATTERN) + "] " + message;
+    getLogField().setValue(StringUtility.join("\n", line, getLogField().getValue()));
+  }
+
   @Order(10)
   @ClassId("0a756ada-c387-4b75-9703-6a82cbe8c6a3")
   public class MainBox extends AbstractGroupBox {
@@ -153,16 +215,11 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
     @Order(10)
     @ClassId("1194e7f6-3ba0-4e0f-975f-96e43c54319a")
-    public class ExamplesBox extends AbstractGroupBox {
+    public class BrowserFieldBox extends AbstractGroupBox {
 
       @Override
       protected int getConfiguredGridColumnCount() {
         return 1;
-      }
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Examples");
       }
 
       @Order(10)
@@ -191,11 +248,22 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
         @Override
         protected void execPostMessage(String data, String origin) {
-          LOG.info("Received post-message: data={}, origin={}", data, origin);
+          logMessage("Received (Legacy): " + data + " (origin: " + origin + ")");
+        }
+
+        @Override
+        protected void execPostMessage(Object data, String origin) {
+          logMessage("Received: " + data + " (origin: " + origin + ")");
+        }
+
+        @Override
+        public void postMessage(Object message, String targetOrigin) {
+          super.postMessage(message, targetOrigin);
+          logMessage("Sent: " + message + " (targetOrigin: " + targetOrigin + ")");
         }
       }
 
-      @Order(22)
+      @Order(20)
       @ClassId("5eb5d910-85d2-4244-88c5-83bcbf04c796")
       public class SetUrlBox extends AbstractSequenceBox {
 
@@ -240,7 +308,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
       }
 
-      @Order(23)
+      @Order(30)
       @ClassId("f095737a-b591-41a2-a391-68d12e43f377")
       public class SetFileBox extends AbstractSequenceBox {
 
@@ -285,7 +353,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
       }
 
-      @Order(25)
+      @Order(40)
       @ClassId("fc3817d4-0da0-4f5f-9ea2-ffc6808f1d43")
       public class LinksBox extends AbstractSequenceBox {
 
@@ -295,12 +363,27 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Order(10)
-        @ClassId("cf2e3364-de78-41b1-af8d-df2394b7d5f7")
-        public class EclipseScoutButton extends AbstractLinkButton {
+        @ClassId("546fd072-99a0-40c9-b1a4-1aaa5c0c9827")
+        public class ClearButton extends AbstractLinkButton {
 
           @Override
           protected String getConfiguredLabel() {
-            return "www.bing.com";
+            return "Blank";
+          }
+
+          @Override
+          protected void execClickAction() {
+            getBrowserField().setLocation(null);
+          }
+        }
+
+        @Order(11)
+        @ClassId("7310a659-470f-4a5e-8416-4fb04ab31dc3")
+        public class ExampleNetButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "example.net";
           }
 
           @Override
@@ -315,7 +398,33 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected void execClickAction() {
-            getURLField().setValue("http://www.bing.com/search?q=Eclipse%20Scout");
+            getURLField().setValue("https://www.example.net");
+            getSetUrlButton().doClick();
+          }
+        }
+
+        @Order(15)
+        @ClassId("cf2e3364-de78-41b1-af8d-df2394b7d5f7")
+        public class BingButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "bing.com";
+          }
+
+          @Override
+          protected String getConfiguredIconId() {
+            return Icons.World;
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            getURLField().setValue("https://www.bing.com/search?q=Eclipse%20Scout");
             getSetUrlButton().doClick();
           }
         }
@@ -326,7 +435,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected String getConfiguredLabel() {
-            return "www.bsi-software.com";
+            return "bsi-software.com";
           }
 
           @Override
@@ -341,7 +450,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected void execClickAction() {
-            getURLField().setValue("http://www.bsi-software.com");
+            getURLField().setValue("https://www.bsi-software.com");
             getSetUrlButton().doClick();
           }
         }
@@ -352,7 +461,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected String getConfiguredLabel() {
-            return "BrowserFieldCustomHtml.html";
+            return "Scout.html";
           }
 
           @Override
@@ -367,213 +476,525 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected void execClickAction() {
-            try (InputStream in = ResourceBase.class.getResourceAsStream("html/BrowserFieldCustomHtml.html")) {
-              BinaryResource resource = new BinaryResource("BrowserFieldCustomHtml.html", IOUtility.readBytes(in));
-              getBinaryResourceField().setValue(resource);
-              getSetFileButton().doClick();
-            }
-            catch (IOException e) {
-              throw new ProcessingException("resource", e);
-            }
+            BinaryResource resource = IOUtility.readBinaryResource(ResourceBase.class.getResource("html/BrowserFieldCustomHtml.html"));
+            getBinaryResourceField().setValue(resource);
+            getSetFileButton().doClick();
           }
         }
 
-        @Order(999)
-        @ClassId("546fd072-99a0-40c9-b1a4-1aaa5c0c9827")
-        public class ClearButton extends AbstractLinkButton {
+        @Order(30)
+        @ClassId("e0c39431-b56c-46af-b1d9-98e054e712d5")
+        public class PostMessageDemoButton extends AbstractLinkButton {
 
           @Override
           protected String getConfiguredLabel() {
-            return "(null)";
+            return "PostMessageDemo.html";
           }
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.RemoveBold;
+            return Icons.FileSolid;
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
           }
 
           @Override
           protected void execClickAction() {
-            getBrowserField().setLocation(null);
+            BinaryResource resource = IOUtility.readBinaryResource(ResourceBase.class.getResource("html/PostMessageDemo.html"));
+            getBinaryResourceField().setValue(resource);
+            getSetFileButton().doClick();
           }
         }
       }
     }
 
-    @Order(30)
-    @ClassId("29122615-c832-42f0-996e-4e607999f9ca")
-    public class ConfigurationBox extends AbstractGroupBox {
+    @Order(20)
+    @ClassId("555d9f5a-5a7c-4d2d-b471-4a89873e0944")
+    public class TabBox extends AbstractTabBox {
 
       @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Configure");
+      protected int getConfiguredGridH() {
+        return 10;
       }
 
       @Override
-      protected int getConfiguredGridColumnCount() {
-        return 2;
+      protected double getConfiguredGridWeightY() {
+        return 0;
       }
 
-      @Order(10)
-      @ClassId("167ddf56-bfaa-4cb0-9d15-a9bb44362481")
-      public class VisibleField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return "Visible";
-        }
-
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getBrowserField().setVisible(isChecked());
-        }
-
-        @Override
-        protected void execInitField() {
-          setChecked(getBrowserField().isVisible());
-        }
+      @Override
+      protected boolean getConfiguredGridUseUiHeight() {
+        return false;
       }
 
       @Order(20)
-      @ClassId("267b17c1-dee0-4416-828b-00f94a2ca8b1")
-      public class EnabledField extends AbstractBooleanField {
+      @ClassId("29122615-c832-42f0-996e-4e607999f9ca")
+      public class ConfigurationBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Enabled";
+          return TEXTS.get("Configure");
         }
 
         @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
+        protected TriState getConfiguredResponsive() {
+          return TriState.FALSE;
         }
 
-        @Override
-        protected void execChangedValue() {
-          getBrowserField().setEnabled(isChecked());
+        @Order(10)
+        @ClassId("7d386f57-447c-435e-acef-eb854fcd30af")
+        public class ConfigurationLeftBox extends AbstractGroupBox {
+
+          @Override
+          protected boolean getConfiguredBorderVisible() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Override
+          protected int getConfiguredGridColumnCount() {
+            return 1;
+          }
+
+          @Order(30)
+          @ClassId("49fe66bc-922d-4e83-9e3b-a6e5e0572c9f")
+          public class ScrollableField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Scroll Bar Enabled";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getBrowserField().setScrollBarEnabled(isChecked());
+            }
+
+            @Override
+            protected void execInitField() {
+              setChecked(getBrowserField().isScrollBarEnabled());
+            }
+          }
+
+          @Order(50)
+          @ClassId("5967c688-f93c-4e92-8dd0-5bbbb203b344")
+          public class ShowInExternalWindowField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Show in external window";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "If checked, the content will be displayed in a separate window.\n\n"
+                  + "For this setting to have an effect, the page must be reloaded.";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getBrowserField().setShowInExternalWindow(isChecked());
+            }
+
+            @Override
+            protected void execInitField() {
+              setChecked(getBrowserField().isShowInExternalWindow());
+            }
+          }
+
+          @Order(60)
+          @ClassId("723924ac-c72e-4d9e-8426-f16b7bb29f85")
+          public class AutoCloseExternalWindowField extends AbstractBooleanField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Auto close external window";
+            }
+
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              getBrowserField().setAutoCloseExternalWindow(isChecked());
+            }
+
+            @Override
+            protected void execInitField() {
+              setChecked(getBrowserField().isAutoCloseExternalWindow());
+            }
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setChecked(getBrowserField().isEnabled());
+        @Order(20)
+        @ClassId("e81172da-8077-4423-9a47-bd21b6d1a09a")
+        public class ConfigurationRightBox extends AbstractGroupBox {
+
+          @Override
+          protected boolean getConfiguredBorderVisible() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Override
+          protected int getConfiguredGridColumnCount() {
+            return 1;
+          }
+
+          @Order(10)
+          @ClassId("4125ea27-9698-499c-9fc1-4e204277935f")
+          public class TrustedMessageOriginsFields extends AbstractStringField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Trusted Message Origins";
+            }
+
+            @Override
+            protected String getConfiguredTooltipText() {
+              return "Comma-separated list of trusted origins for receiving posted messages. Leave empty to disable check of origin.";
+            }
+
+            @Override
+            protected byte getConfiguredLabelPosition() {
+              return LABEL_POSITION_TOP;
+            }
+
+            @Override
+            protected void execChangedValue() {
+              List<String> tmo = Arrays.stream(StringUtility.split(getValue(), ","))
+                  .map(StringUtility::trim)
+                  .filter(StringUtility::hasText)
+                  .collect(Collectors.toList());
+              getBrowserField().setTrustedMessageOrigins(tmo);
+            }
+
+            @Override
+            protected void execInitField() {
+              setValue(CollectionUtility.format(getBrowserField().getTrustedMessageOrigins()));
+            }
+          }
+
+          @Order(20)
+          @ClassId("4be62e14-f463-4819-ac1f-0a5403e8b18d")
+          public class SandboxPermissionsField extends AbstractLinkButton {
+
+            private BrowserFieldSandboxForm m_sandboxForm;
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Sandbox settings";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected void execClickAction() {
+              if (m_sandboxForm == null) {
+                m_sandboxForm = new BrowserFieldSandboxForm(getBrowserField());
+                m_sandboxForm.addFormListener(e -> {
+                  if (e.getType() == FormEvent.TYPE_CLOSED) {
+                    m_sandboxForm = null;
+                  }
+                });
+                m_sandboxForm.start();
+              }
+              else {
+                m_sandboxForm.doClose();
+              }
+            }
+          }
         }
       }
 
       @Order(30)
-      @ClassId("49fe66bc-922d-4e83-9e3b-a6e5e0572c9f")
-      public class ScrollableField extends AbstractBooleanField {
+      @ClassId("94ff20f6-6d44-4a91-98ff-0e39adbfd950")
+      public class MessagesBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return "Scrollbar enabled";
+          return "Messages";
         }
 
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
+        @Order(5)
+        @ClassId("2eea48fd-8d60-4e5a-93e6-fd75c6f8d013")
+        public class MessageDescriptionField extends AbstractHtmlField {
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredGridUseUiHeight() {
+            return true;
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return FULL_WIDTH;
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(HTML.fragment(
+                "The browser field can communicate with an embedded page via the \"postMessage\" ",
+                "method. Arbitrary messages can be sent to and received from the the <iframe> object. ",
+                "To see it in action, load the ", HTML.italic(getPostMessageDemoButton().getLabel()), " page. ",
+                HTML.br(),
+                "More details can be found at ",
+                HTML.link("https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage", "https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage"),
+                ".").toHtml());
+          }
         }
 
-        @Override
-        protected void execChangedValue() {
-          getBrowserField().setScrollBarEnabled(isChecked());
+        @Order(10)
+        @ClassId("249ba5dd-afb8-46e9-b279-d47aeee80780")
+        public class LogField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Log";
+          }
+
+          @Override
+          protected byte getConfiguredLabelPosition() {
+            return LABEL_POSITION_TOP;
+          }
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected boolean getConfiguredMultilineText() {
+            return true;
+          }
+
+          @Override
+          protected int getConfiguredMaxLength() {
+            return 5 * 1024 * 1024; // 5 MB
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 5;
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setChecked(getBrowserField().isScrollBarEnabled());
-        }
-      }
+        @Order(20)
+        @ClassId("d04d7b51-04ec-4a00-b441-dda4081d20c2")
+        public class ClearLogButton extends AbstractLinkButton {
 
-      @Order(50)
-      @ClassId("5967c688-f93c-4e92-8dd0-5bbbb203b344")
-      public class ShowInExternalWindowField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Clear log";
+          }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return "Show in external window";
-        }
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
 
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
-
-        @Override
-        protected void execChangedValue() {
-          getBrowserField().setShowInExternalWindow(isChecked());
+          @Override
+          protected void execClickAction() {
+            getLogField().setValue(null);
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          setChecked(getBrowserField().isShowInExternalWindow());
-        }
-      }
+        @Order(30)
+        @ClassId("e46c6818-a8be-4a5a-8f05-136910717d52")
+        public class MessageField extends AbstractStringField {
 
-      @Order(60)
-      @ClassId("723924ac-c72e-4d9e-8426-f16b7bb29f85")
-      public class AutoCloseExternalWindowField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Message";
+          }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return "Auto close external window";
-        }
+          @Override
+          protected byte getConfiguredLabelPosition() {
+            return LABEL_POSITION_TOP;
+          }
 
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          return false;
-        }
+          @Override
+          protected boolean getConfiguredMultilineText() {
+            return true;
+          }
 
-        @Override
-        protected void execChangedValue() {
-          getBrowserField().setAutoCloseExternalWindow(isChecked());
-        }
+          @Override
+          protected boolean getConfiguredWrapText() {
+            return true;
+          }
 
-        @Override
-        protected void execInitField() {
-          setChecked(getBrowserField().isAutoCloseExternalWindow());
-        }
-      }
-
-      @Order(99)
-      @ClassId("4be62e14-f463-4819-ac1f-0a5403e8b18d")
-      public class SandboxPermissionsField extends AbstractLinkButton {
-
-        private BrowserFieldSandboxForm m_sandboxForm;
-
-        @Override
-        protected String getConfiguredLabel() {
-          return "Sandbox settings...";
+          @Override
+          protected int getConfiguredGridH() {
+            return 4;
+          }
         }
 
-        @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
+        @Order(40)
+        @ClassId("03546dbd-82cb-42f6-8809-5495719f477b")
+        public class TargetOriginField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Target Origin";
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue("/");
+          }
         }
 
-        @Override
-        protected void execClickAction() {
-          if (m_sandboxForm == null) {
-            m_sandboxForm = new BrowserFieldSandboxForm(getBrowserField());
-            m_sandboxForm.addFormListener(e -> {
-              if (e.getType() == FormEvent.TYPE_CLOSED) {
-                m_sandboxForm = null;
+        @Order(50)
+        @ClassId("9b570742-0545-45b5-a1d8-af8ed0356d0d")
+        public class ButtonsGroup extends AbstractGroupBox {
+
+          @Override
+          protected boolean getConfiguredBorderVisible() {
+            return false;
+          }
+
+          @Override
+          protected LogicalGridLayoutConfig getConfiguredBodyLayoutConfig() {
+            return super.getConfiguredBodyLayoutConfig()
+                .withHGap(5);
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 1;
+          }
+
+          @Order(10)
+          @ClassId("3219dc46-b141-4caf-a22f-ec75fb4d613d")
+          public class SendAsTextButton extends AbstractButton {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Send as text";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredFillHorizontal() {
+              return true;
+            }
+
+            @Override
+            protected void execClickAction() {
+              getBrowserField().postMessage(
+                  getMessageField().getValue(),
+                  getTargetOriginField().getValue());
+            }
+          }
+
+          @Order(20)
+          @ClassId("e79417e6-03c3-4373-ab87-2c822b78fe73")
+          public class SendAsJsonButton extends AbstractButton {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return "Send as JSON";
+            }
+
+            @Override
+            protected boolean getConfiguredProcessButton() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredFillHorizontal() {
+              return true;
+            }
+
+            @Override
+            protected Class<? extends IValueField> getConfiguredMasterField() {
+              return MessageField.class;
+            }
+
+            @Override
+            protected void execInitField() {
+              checkValidDataObject();
+            }
+
+            @Override
+            protected void execChangedMasterValue(Object newMasterValue) {
+              checkValidDataObject();
+            }
+
+            @Override
+            protected void execClickAction() {
+              IDataObject dataObject = BEANS.get(IDataObjectMapper.class).readValue(getMessageField().getValue(), IDataObject.class);
+              getBrowserField().postMessage(
+                  dataObject,
+                  getTargetOriginField().getValue());
+            }
+
+            protected void checkValidDataObject() {
+              setEnabled(isValidDataObject(getMessageField().getValue()));
+            }
+
+            protected boolean isValidDataObject(String s) {
+              if (s == null) {
+                return false;
               }
-            });
-            m_sandboxForm.start();
+              try {
+                BEANS.get(IDataObjectMapper.class).readValueRaw(s);
+              }
+              catch (Exception e) { // NO_SONAR
+                return false;
+              }
+              return true;
+            }
           }
-          else {
-            m_sandboxForm.doClose();
-          }
+        }
+      }
+
+      @Order(40)
+      @ClassId("57d18d51-42a5-4f96-9b6e-0eccb16642b6")
+      public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+
+        @Override
+        protected void execInitField() {
+          setField(getBrowserField());
         }
       }
     }
 
-    @Order(40)
+    @Order(60)
     @ClassId("f0910f85-3a9f-49e5-beed-23f61dbbf5eb")
     public class CloseButton extends AbstractCloseButton {
     }

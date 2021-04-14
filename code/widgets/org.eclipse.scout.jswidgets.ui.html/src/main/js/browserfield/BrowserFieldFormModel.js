@@ -1,3 +1,5 @@
+import {Button} from '@eclipse-scout/core';
+
 export default () => ({
   id: 'jswidgets.BrowserFieldForm',
   displayHint: 'view',
@@ -14,7 +16,7 @@ export default () => ({
             id: 'BrowserField',
             objectType: 'BrowserField',
             labelVisible: false,
-            location: 'http://www.bing.com/search?q=Eclipse%20Scout',
+            location: 'html/Scout.html',
             sandboxEnabled: false,
             gridDataHints: {
               h: 6,
@@ -59,8 +61,18 @@ export default () => ({
                   },
                   {
                     id: 'LocationField',
-                    objectType: 'StringField',
-                    label: 'Location'
+                    objectType: 'ProposalField',
+                    label: 'Location',
+                    lookupCall: {
+                      objectType: 'StaticLookupCall',
+                      data: [
+                        ['https://www.example.net', 'https://www.example.net'],
+                        ['https://www.bing.com/search?q=Eclipse%20Scout', 'https://www.bing.com/search?q=Eclipse%20Scout'],
+                        ['https://www.bsi-software.com', 'https://www.bsi-software.com'],
+                        ['html/Scout.html', 'html/Scout.html'],
+                        ['html/PostMessageDemo.html', 'html/PostMessageDemo.html']
+                      ]
+                    }
                   },
                   {
                     id: 'TrackLocationField',
@@ -114,6 +126,46 @@ export default () => ({
             objectType: 'TabItem',
             label: 'Actions',
             fields: [
+              {
+                id: 'BrowserFieldActionsBox',
+                objectType: 'GroupBox',
+                gridColumnCount: 2,
+                label: 'Browser Field Actions',
+                expandable: true,
+                fields: [
+                  {
+                    id: 'MessageDescriptionField',
+                    objectType: 'HtmlField',
+                    labelVisible: false,
+                    gridDataHints: {
+                      useUiHeight: true,
+                      w: 2
+                    },
+                    value: 'The browser field can communicate with an embedded page via the "postMessage" ' +
+                      'method. Arbitrary messages can be sent to and received from the the &lt;iframe&gt; object. ' +
+                      'To see it in action, load the <i>PostMessageDemo.html</i> page.<br>' +
+                      'More details can be found at <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" ' +
+                      'target="_blank" rel="noopener noreferrer">' +
+                      'https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage</a>.'
+                  },
+                  {
+                    id: 'PostTextMessageButton',
+                    objectType: 'Button',
+                    label: 'Post text message',
+                    labelVisible: false,
+                    processButton: false,
+                    displayStyle: Button.DisplayStyle.LINK
+                  },
+                  {
+                    id: 'PostJsonMessageButton',
+                    objectType: 'Button',
+                    label: 'Post JSON message',
+                    labelVisible: false,
+                    processButton: false,
+                    displayStyle: Button.DisplayStyle.LINK
+                  }
+                ]
+              },
               {
                 id: 'FormFieldActionsBox',
                 objectType: 'jswidgets.FormFieldActionsBox'

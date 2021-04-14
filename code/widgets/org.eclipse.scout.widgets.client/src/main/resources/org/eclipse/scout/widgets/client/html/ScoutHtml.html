@@ -1,47 +1,65 @@
+<!doctype html>
 <html>
   <head>
-    <title>
-        Scout
-    </title>
+    <meta charset="UTF-8">
+    <title>Eclipse Scout</title>
     <style type="text/css">
-    <!--
-    #scout_center {
-      width: 460px;
-      margin: 0 auto 0 auto;
-    }
-    #scout_banner {
-      background: #FE9915 url("binaryresource:s.png") no-repeat;
-      width: 460px;
-      height: 154px;
-      padding-left: 200px;
-      padding-top: 10px;
-    }
-    #scout_banner h1 {
-      color: #FFFFFF;
-      font: bold 22pt "Lucida Grande", Lucida, Verdana, sans-serif;
-      padding: 0px;
-    }
-    #scout_banner p {
-      color: #FFFFFF;
-      font: 16pt "Lucida Grande", Lucida, Verdana, sans-serif;
-      margin-top: 15px;
-    }
-    -->
+      #scout-business-card {
+        background-color: #fafafa;
+        border: 1px solid #ccc;
+        box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
+        width: 450px;
+        margin: 10px 0 50px 0;
+      }
+
+      #scout-card-header {
+        background: #FE9915 url("binaryresource:s.png") no-repeat;
+        height: 154px;
+        padding: 10px 10px 10px 200px;
+        color: #fff;
+      }
+
+      #scout-card-title1 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      #scout-card-title2 {
+        margin-top: 5px;
+        margin-bottom: 15px;
+      }
+
+      #scout-card-body {
+        margin: 10px;
+      }
+
+      .image-box {
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
-    <div id="scout_center">
-        <div id="scout_banner">
-            <h1>Eclipse Scout</h1>
-            <p>Business application framework</p>
-            <p><a href="http://www.eclipse.org/scout/#section-download"><img title="Download Eclipse Scout" src="binaryresource:download.png"></a></p>
-        </div>
-        <br><br><br>
-        <p>This is an example for the HtmlField of Eclipse Scout. <a href="http://wiki.eclipse.org/Scout/Concepts/HtmlField"> Learn more &gt;&gt;</a></p>
+    <div id="scout-business-card">
+      <div id="scout-card-header">
+        <div id="scout-card-title1">Eclipse Scout</div>
+        <div id="scout-card-title2">Business Applications Made Easy</div>
+        <div id="scout-card-download"><a href="http://www.eclipse.org/scout/#section-download" target="_blank"><img src="binaryresource:download.png" title="Download Eclipse Scout"></a></div>
+      </div>
+      <div id="scout-card-body">
+        <p>Eclipse Scout is a one-stop framework with straight concepts, a strong application model and a versatile UI. It enables you to develop professional software in Java or JavaScript.</p>
+        <p><a href="https://www.eclipse.org/scout" target="_blank">Learn more</a></p>
+      </div>
     </div>
-    <div id="image_banner">
-        <p>Image from binary resource</p>
-        <p><img title="Bird" src="binaryResource:bird.jpg" style="max-height: 300px; max-width: 400px;"></p>
+    <div>
+      <div class="image-box" style="margin-right: 20px">
+        <div>Image from BinaryResource:</div>
+        <p><img src="binaryResource:bird.jpg" title="Bird" style="max-height: 300px; max-width: 400px;"></p>
+      </div>
+      <div class="image-box">
+        <div>Image from URL:</div>
+        <p><img src="http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg" title="Bird" style="max-height: 300px; max-width: 400px;"></p>
+      </div>
     </div>
   </body>
 </html>

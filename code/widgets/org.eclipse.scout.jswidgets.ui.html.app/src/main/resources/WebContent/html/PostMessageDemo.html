@@ -1,0 +1,96 @@
+<!--
+  ~ Copyright (c) 2021 BSI Business Systems Integration AG.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Distribution License v1.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.html
+  ~
+  ~ Contributors:
+  ~     BSI Business Systems Integration AG - initial API and implementation
+  -->
+<!doctype html>
+<!--suppress CssUnusedSymbol -->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Eclipse Scout - postMessage</title>
+    <style type="text/css">
+      * {
+        font-family: monospace;
+      }
+
+      body {
+        margin: 10px;
+        padding: 0;
+      }
+
+      button {
+        min-width: 40px;
+        margin-right: 10px;
+      }
+
+      #header {
+        user-select: none;
+      }
+
+      #no-js {
+        background-color: red;
+        color: white;
+        padding: 5px 8px;
+      }
+
+      #log {
+        margin-top: 20px;
+        white-space: pre;
+      }
+
+      #log div.in {
+        color: green;
+      }
+
+      #log div.out {
+        color: blue;
+      }
+
+      #log div.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>postMessage</h1>
+
+    <div id="header">
+      <p>
+        <label for="target">Window:</label>
+        <select id="target" disabled="disabled">
+          <option value="window">window</option>
+          <option value="window.parent" selected>window.parent</option>
+          <option value="window.opener">window.opener</option>
+          <option value="window.frames[0]">window.frames[0]</option>
+        </select>
+        &nbsp;
+        <label for="targetOrigin">Target Origin:</label>
+        <input type="text" value="/" id="targetOrigin" disabled="disabled">
+      </p>
+      <p>
+        Data: &nbsp;
+        <button id="button1" disabled="disabled">Text</button>
+        <button id="button2" disabled="disabled">Number</button>
+        <button id="button3" disabled="disabled">JSON String</button>
+        <button id="button4" disabled="disabled">Object</button>
+        <button id="button5" disabled="disabled">Array</button>
+      </p>
+    </div>
+
+    <hr>
+
+    <div id="log"></div>
+
+    <noscript>
+      <p><span id="no-js">JavaScript is not enabled!</span></p>
+    </noscript>
+
+    <script src="PostMessageDemo.js"></script>
+  </body>
+</html>
