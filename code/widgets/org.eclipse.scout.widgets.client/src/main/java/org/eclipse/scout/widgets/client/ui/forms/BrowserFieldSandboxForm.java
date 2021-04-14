@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
@@ -15,10 +16,13 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
+import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldSandboxForm.MainBox.GroupBox.SandboxEnabledField;
+import org.eclipse.scout.widgets.client.ui.forms.BrowserFieldSandboxForm.MainBox.GroupBox.SandboxPermissionsField;
 
 @ClassId("2254095e-5b33-46bc-97d7-b0d03142e7ea")
 public class BrowserFieldSandboxForm extends AbstractForm {
@@ -32,7 +36,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return "BrowserField - Sandbox Settings";
+    return "Sandbox Settings";
   }
 
   @Override
@@ -45,13 +49,16 @@ public class BrowserFieldSandboxForm extends AbstractForm {
     return MODALITY_HINT_MODELESS;
   }
 
-  @Override
-  protected boolean getConfiguredCacheBounds() {
-    return true;
-  }
-
   public IBrowserField getBrowserField() {
     return m_browserField;
+  }
+
+  public SandboxEnabledField getSandboxEnabledField() {
+    return getFieldByClass(SandboxEnabledField.class);
+  }
+
+  public SandboxPermissionsField getSandboxPermissionsField() {
+    return getFieldByClass(SandboxPermissionsField.class);
   }
 
   @Order(10)
@@ -77,7 +84,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
         return 1;
       }
 
-      @Order(40)
+      @Order(10)
       @ClassId("12f240e6-c9df-472b-af18-a592494efeac")
       public class SandboxEnabledField extends AbstractBooleanField {
 
@@ -102,7 +109,7 @@ public class BrowserFieldSandboxForm extends AbstractForm {
         }
       }
 
-      @Order(99)
+      @Order(20)
       @ClassId("ea73e43d-b0a8-4dfe-b99d-f5459a127f30")
       public class SandboxPermissionsField extends AbstractListBox<SandboxPermission> {
 
@@ -152,6 +159,46 @@ public class BrowserFieldSandboxForm extends AbstractForm {
     @Order(40)
     @ClassId("d49f88d7-2bdb-46e9-9f44-0e9e778cf683")
     public class CloseButton extends AbstractCloseButton {
+    }
+
+    @Order(50)
+    @ClassId("b93fd609-d795-435c-bfc4-024c82c8ff91")
+    public class CheckAllMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("CheckAll");
+      }
+
+      @Override
+      protected byte getConfiguredHorizontalAlignment() {
+        return HORIZONTAL_ALIGNMENT_RIGHT;
+      }
+
+      @Override
+      protected void execAction() {
+        getSandboxPermissionsField().checkAllKeys();
+      }
+    }
+
+    @Order(60)
+    @ClassId("bf86c53c-d93d-4ee6-82ee-83db256e06b6")
+    public class UncheckAllMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("UncheckAll");
+      }
+
+      @Override
+      protected byte getConfiguredHorizontalAlignment() {
+        return HORIZONTAL_ALIGNMENT_RIGHT;
+      }
+
+      @Override
+      protected void execAction() {
+        getSandboxPermissionsField().uncheckAllKeys();
+      }
     }
   }
 

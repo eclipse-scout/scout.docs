@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {Form, models} from '@eclipse-scout/core';
+import {dates, Form, models, numbers} from '@eclipse-scout/core';
 import BrowserFieldFormModel from './BrowserFieldFormModel';
 
 export default class BrowserFieldForm extends Form {
@@ -65,6 +65,9 @@ export default class BrowserFieldForm extends Form {
 
     this.browserField.on('propertyChange', this._onBrowserFieldPropertyChange.bind(this));
 
+    this.widget('PostTextMessageButton').on('click', this._onPostTextMessageButtonClick.bind(this));
+    this.widget('PostJsonMessageButton').on('click', this._onPostJsonMessageButtonClick.bind(this));
+
     this.widget('FormFieldPropertiesBox').setField(this.browserField);
     this.widget('GridDataBox').setField(this.browserField);
     this.widget('WidgetActionsBox').setField(this.browserField);
@@ -76,6 +79,20 @@ export default class BrowserFieldForm extends Form {
     if (event.propertyName === 'location') {
       this.widget('LocationField').setValue(event.newValue);
     }
+  }
+
+  _onPostTextMessageButtonClick(event) {
+    let msg = 'Lucky number: ' + (Math.floor(Math.random() * 100) + 1);
+    this.browserField.postMessage(msg, '/');
+  }
+
+  _onPostJsonMessageButtonClick(event) {
+    let msg = {
+      'id': numbers.randomId(),
+      'name': 'Test',
+      'timestamp': dates.format(new Date(), this.session.locale, 'hh:mm:ss.SSS')
+    };
+    this.browserField.postMessage(msg, '/');
   }
 
   _onScrollBarEnabledPropertyChange(event) {
