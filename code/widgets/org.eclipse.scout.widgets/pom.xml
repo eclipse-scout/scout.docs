@@ -40,6 +40,7 @@
     <module>../org.eclipse.scout.widgets.ui.html.app</module>
     <module>../org.eclipse.scout.widgets.ui.html.app.dev</module>
     <module>../org.eclipse.scout.widgets.ui.html.app.war</module>
+    <module>../org.eclipse.scout.widgets.ui.html.app.selenium</module>
 
     <!-- Scout JS widgets -->
     <module>../org.eclipse.scout.jswidgets.rest</module>
