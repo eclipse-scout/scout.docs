@@ -5,7 +5,8 @@ export default () => ({
   id: 'jswidgets.Desktop',
   title: '${textKey:Widgets}',
   objectType: 'Desktop',
-  logoUrl: 'img/scout-logo.png',
+  logoUrl: 'img/scout-logo.svg',
+  logoActionEnabled: true,
   outline: {
     objectType: 'jswidgets.WidgetsOutline'
   },
@@ -41,12 +42,6 @@ export default () => ({
           text: 'Dense'
         }
       ]
-    },
-    {
-      id: 'AboutMenu',
-      objectType: 'Menu',
-      iconId: icons.QUESTION_CIRCLE,
-      cssClass: 'about-menu'
     }
   ]
 });

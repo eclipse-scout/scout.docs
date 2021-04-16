@@ -609,18 +609,18 @@ The creation of these files won't make them load automatically. You have to regi
 ----
 @import "style/colors";
 ----
-
+// TODO Brushup change screenshot
 In addition to this `index` file you normally also have a `theme` file which will be used as entry point in your `webpack.config.js` and included in the `index.html`. The intention of the `theme` file is to group individual `index` files and make one file in order to load all rules at once within one request.
 
-Now that we have all the infrastructure set up, we can start adding some rules. As already said, you can use all the LESS variables from Scout. The variables can be found in the `scout/style` folder of the `@eclipse-scout/core` module. If you have a look at the file `colors.less` you find all the colors you can use or customize. Let's say you want to change the background color of the navigation, you can redefine the variable `@navigation-background-color`.
+Now that we have all the infrastructure set up, we can start adding some rules. As already said, you can use all the LESS variables from Scout. The variables can be found in the `scout/style` folder of the `@eclipse-scout/core` module. If you have a look at the file `colors.less` you find all the colors you can use or customize. Let's say you want to change the background color of the header, you can redefine the variable `@desktop-header-background-color`.
 
-.Changing the background color of the navigation
+.Changing the background color of the header
 [source,css]
 ----
-@navigation-background-color: @palette-red-4;
+@desktop-header-background-color: @palette-red-4;
 ----
 
-That's it! As you can see, changing this variable not only changes the background color of the navigation, it also changes the background colors of the view-buttons on the top left and the navigation-handle on the bottom, because they are supposed to have the same color. You could do the same by using CSS rules, but you would have to write several selectors to achieve the same.
+That's it! As you can see, changing this variable not only changes the background color of the header, it also changes the background color of the view-buttons on the top left, because they are supposed to have the same color. You could do the same by using CSS rules, but you would have to write several selectors to achieve the same.
 
 [[img-navigation-background, Figure 000]]
 .Helloworld default and with a custom navigation background color

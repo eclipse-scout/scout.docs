@@ -88,6 +88,17 @@ public class Desktop extends AbstractDesktop {
   }
 
   @Override
+  protected boolean getConfiguredLogoActionEnabled() {
+    return true;
+  }
+
+  @Override
+  protected void execLogoAction() {
+    ScoutInfoForm form = new ScoutInfoForm();
+    form.startModify();
+  }
+
+  @Override
   protected void execDefaultView() {
     if (DISPLAY_STYLE_BENCH.equals(getDisplayStyle())) {
       // "bench-only" desktop
@@ -173,22 +184,6 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Order(2000)
-    @ClassId("80f3b2a6-3be9-4c49-b840-99cb3b52cf92")
-    public class AboutMenu extends AbstractMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("AboutMenu");
-      }
-
-      @Override
-      protected void execAction() {
-        ScoutInfoForm form = new ScoutInfoForm();
-        form.startModify();
-      }
-    }
-
-    @Order(3000)
     @ClassId("0de10681-9e56-4828-859d-d399d456d9ec")
     public class LogoutMenu extends AbstractMenu {
 

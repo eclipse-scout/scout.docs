@@ -119,3 +119,13 @@ The new notifications displayed by the browser use the application logo configur
 
 *Migration*
 If you use native notifications, provide an application logo with a resolution of at least 150x150 px.
+
+== Less Variables
+
+- @navigation-background-color -> @desktop-navigation-background-color
+- @navigation-color -> @desktop-navigation-color
+- @outline-title-margin-left/right -> @outline-title-padding-left/right
+
+Notes:
+@desktop-navigation-background-color now points to @desktop-header-background-color;
+Instead of customizing the navigation background color it is suggested to now customize the header background color.

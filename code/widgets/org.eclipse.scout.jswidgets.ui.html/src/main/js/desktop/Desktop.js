@@ -14,7 +14,7 @@ export default class Desktop extends Desktop_1 {
   _init(model) {
     super._init(model);
 
-    this.widget('AboutMenu').on('action', this._onAboutMenuAction.bind(this));
+    this.on('logoAction', this._onLogoAction.bind(this));
     let defaultThemeMenu = this.widget('DefaultThemeMenu');
     defaultThemeMenu.on('action', this._onDefaultThemeMenuAction.bind(this));
     let darkThemeMenu = this.widget('DarkThemeMenu');
@@ -49,7 +49,7 @@ export default class Desktop extends Desktop_1 {
     this.setDense(!this.dense);
   }
 
-  _onAboutMenuAction(event) {
+  _onLogoAction(event) {
     let form = scout.create('Form', {
       parent: this,
       resizable: false,

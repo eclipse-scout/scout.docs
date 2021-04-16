@@ -10,9 +10,9 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 == Icons
-A lot of Scout widgts support icons. For instance a menu item can show an icon
+A lot of Scout widgets support icons. For instance a menu item can show an icon
 next to the menu text. Icons in Scout can be either a bitmap image (GIF, PNG,
-JPEG, etc.) or a character from an icon-font. An example for an icon-font is
+JPEG, etc.), an SVG or a character from an icon-font. An example for an icon-font is
 the _scoutIcons.ttf_ which comes shipped with Scout.
 
 It's a good practice to define the available icons in your application in a
@@ -28,15 +28,15 @@ the file extension. Place all your icon files in the resource folder of your
  org.scout.hello.client/              # Client project directory
    src/main/resources/                # Resources directory
      org/scout/hello/client/icons/    # Path to icons
-       application_logo_large.png
+       application_logo.png
        person.png
        ...
 
 [source,java]
 .Icons.java
 ----
-// Bitmap image (references icons/application_logo_large.png)
-public static final String ApplicationLogo = "application_logo_large";
+// Bitmap image (references icons/application_logo.png)
+public static final String ApplicationLogo = "application_logo";
 
 // Character from icon-font scoutIcons.woff (default)
 public static final String Calendar ="font:\uE003";
