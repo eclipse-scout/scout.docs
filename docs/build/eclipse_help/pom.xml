@@ -34,8 +34,8 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>
+                <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>
                 <!-- set the idprefix to blank -->
