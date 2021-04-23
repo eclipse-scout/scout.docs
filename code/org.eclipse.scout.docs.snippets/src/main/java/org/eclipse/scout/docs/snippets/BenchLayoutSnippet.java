@@ -24,6 +24,6 @@ public class BenchLayoutSnippet {
                     .withNorth(new FlexboxLayoutData().withGrow(0).withShrink(0).withInitial(280).withRelative(false)) // <4>
                     .withCenter(new FlexboxLayoutData()) // <5>
                     .withSouth(new FlexboxLayoutData().withShrink(0).withInitial(-1)))); // <6>
-    // tag::BenchLayoutSample[]
+    // end::BenchLayoutSample[]
   }
 }
