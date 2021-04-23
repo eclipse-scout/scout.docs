@@ -17,7 +17,7 @@ The tutorial consists of the following two parts:
 
 ==== Install the Scout Demo Application
 
-In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer] tool.
+In the first part of the tutorial we import the demo applications using the https://wiki.eclipse.org/Eclipse_Installer[Oomph Eclipse installer,window=_blank] tool.
 
 In the Eclipse IDE open the [wizard]_Import_ wizard with menu menu:File[Import...].
 This opens the dialog shown in <<img-oomph_existing_project>>.
@@ -124,7 +124,7 @@ image::{imgsdir}/oomph_contacts_console.png[]
 
 ===== Use the Contacts Demo in a Browser
 
-With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082/.
+With the Contacts demo running in the IDE open the application in your favorite browser via URL http://localhost:8082[http://localhost:8082,window=_blank].
 To get the screen shown in <<img-contacts_persons_alice>> first click on the [folder]_Persons_ node and then double click on the ''Alice'' row.
 
 [[img-contacts_persons_alice]]

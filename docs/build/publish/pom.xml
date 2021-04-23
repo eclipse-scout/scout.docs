@@ -1,246 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.eclipsescout.docs</groupId>
-		<artifactId>aggregator</artifactId>
-		<version>6.0.300-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>org.eclipsescout.docs</groupId>
+    <artifactId>aggregator</artifactId>
+    <version>6.0.300-SNAPSHOT</version>
+  </parent>
 
-	<properties>
-		<gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</gh-io-subfolder>
-	</properties>
+  <properties>
+    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</gh-io-subfolder>
+  </properties>
 
-	<artifactId>publish</artifactId>
-	<name>Publish documents</name>
-	<packaging>pom</packaging>
+  <artifactId>publish</artifactId>
+  <name>Publish documents</name>
+  <packaging>pom</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>scout_beginners_guide</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>eclipse_help</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>scout_helloworld</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>scout_install</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>scout_migration</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipsescout.docs</groupId>
-			<artifactId>scout_technical_guide</artifactId>
-			<version>6.0.300-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_beginners_guide</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>eclipse_help</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_helloworld</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_install</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_migration</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipsescout.docs</groupId>
+      <artifactId>scout_technical_guide</artifactId>
+      <version>6.0.300-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.bsiag.htmltools</groupId>
-				<artifactId>htmltools-maven-plugin</artifactId>
-				<version>1.0.3</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>htmltools</goal>
-						</goals>
-						<configuration>
-							<outputFolder>${project.build.directory}/published-docs</outputFolder>
-							<inputSources>
-								<!-- publish for eclipse.org/scout -->
-								<inputSource>
-									<inputFolder>../scout_install/target/generated-docs</inputFolder>
-									<outputSubFolder>eclipse.org-scout</outputSubFolder>
-									<fixExternalLinks>true</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput />
-								</inputSource>
-								<inputSource>
-									<inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-									<outputSubFolder>eclipse.org-scout</outputSubFolder>
-									<fixExternalLinks>true</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput />
-								</inputSource>
-								<!-- publish for downloads -->
-								<!-- beginners guide -->
-								<inputSource>
-									<inputFolder>../beginners_guide/target/generated-docs</inputFolder>
-									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-									<fixExternalLinks>false</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput>
-										<outputZipFileName>beginners-guide.zip</outputZipFileName>
-									</htmlOutput>
-									<pdfOutput />
-								</inputSource>
-								<!-- technical guide -->
-								<inputSource>
-									<inputFolder>../technical_guide/target/generated-docs</inputFolder>
-									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-									<fixExternalLinks>false</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput>
-										<outputZipFileName>technical-guide.zip</outputZipFileName>
-									</htmlOutput>
-									<pdfOutput />
-								</inputSource>
-								<!-- scout article migration -->
-								<inputSource>
-									<inputFolder>../scout_migration/target/generated-docs</inputFolder>
-									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-									<fixExternalLinks>false</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput>
-										<outputZipFileName>migration-guide.zip</outputZipFileName>
-									</htmlOutput>
-									<pdfOutput />
-								</inputSource>
-								<!-- scout article releasenotes -->
-								<inputSource>
-									<inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-									<outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-									<fixExternalLinks>false</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput>
-										<outputZipFileName>release-notes.zip</outputZipFileName>
-									</htmlOutput>
-									<pdfOutput />
-								</inputSource>
-								<!-- publish for eclipse help -->
-								<inputSource>
-									<inputFolder>../eclipse_help/target/generated-docs</inputFolder>
-									<outputSubFolder>scout-sdk-help</outputSubFolder>
-									<fixExternalLinks>true</fixExternalLinks>
-									<fixXrefLinks>false</fixXrefLinks>
-									<htmlOutput>
-										<outputSubFolder>html</outputSubFolder>
-										<pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
-										<cssReplacements>
-											<cssReplacement>
-												<originalFileName>asciidoctor.css</originalFileName>
-												<replacementFile>css-replacement/eclipse.css</replacementFile>
-											</cssReplacement>
-											<cssReplacement>
-												<originalFileName>coderay-asciidoctor.css</originalFileName>
-												<replacementFile>css-replacement/coderay-eclipse.css</replacementFile>
-											</cssReplacement>
-										</cssReplacements>
-									</htmlOutput>
-								</inputSource>
-							</inputSources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.bsiag.geneclipsetoc</groupId>
-				<artifactId>geneclipsetoc-maven-plugin</artifactId>
-				<version>1.0.2</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>geneclipsetoc</goal>
-						</goals>
-						<configuration>
-							<helpPrefix>html/</helpPrefix>
-							<sourceFolder>${project.build.directory}/published-docs/scout-sdk-help/html</sourceFolder>
-							<outputTocFile>${project.build.directory}/published-docs/scout-sdk-help/toc.xml</outputTocFile>
-							<pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
-							<outputContextsFile>${project.build.directory}/published-docs/scout-sdk-help/contexts_scout.xml</outputContextsFile>
-							<helpContexts>
-								<helpContext>
-									<id>scout_wizard_new_project_page_context</id>
-									<description>This wizard creates a new Scout helloworld project.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_project.html</topicPage>
-										<topicPage>tutorial_helloworld.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_form_page_context</id>
-									<description>This wizard creates a new Scout Form.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_form.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_page_page_context</id>
-									<description>This wizard creates a new Scout Page.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_page.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_nls-entry_page_context</id>
-									<description>This wizard creates or modifies a nls entry to localize the user interface.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_nls-entry.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_lookupcall_page_context</id>
-									<description>This wizard creates a new Scout Lookup Call.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_lookupcall.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_code-type_page_context</id>
-									<description>This wizard creates a new Scout Code Type.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_code-type.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_permission_page_context</id>
-									<description>This wizard creates a new Scout Permission.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_permission.html</topicPage>
-									</topicPages>
-								</helpContext>
-								<helpContext>
-									<id>scout_wizard_language_page_context</id>
-									<description>This wizard creates an additional translation file in order to localize the user interface.</description>
-									<topicPages>
-										<topicPage>sdk_wizard_language.html</topicPage>
-									</topicPages>
-								</helpContext>
-							</helpContexts>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.bsiag.htmltools</groupId>
+        <artifactId>htmltools-maven-plugin</artifactId>
+        <version>1.0.3</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>htmltools</goal>
+            </goals>
+            <configuration>
+              <outputFolder>${project.build.directory}/published-docs</outputFolder>
+              <inputSources>
+                <!-- publish for eclipse.org/scout -->
+                <inputSource>
+                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
+                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput />
+                </inputSource>
+                <inputSource>
+                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
+                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput />
+                </inputSource>
+                <!-- publish for downloads -->
+                <!-- beginners guide -->
+                <inputSource>
+                  <inputFolder>../beginners_guide/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>beginners-guide.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- technical guide -->
+                <inputSource>
+                  <inputFolder>../technical_guide/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>technical-guide.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- scout article migration -->
+                <inputSource>
+                  <inputFolder>../scout_migration/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>migration-guide.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- scout article releasenotes -->
+                <inputSource>
+                  <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
+                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputZipFileName>release-notes.zip</outputZipFileName>
+                  </htmlOutput>
+                  <pdfOutput />
+                </inputSource>
+                <!-- publish for eclipse help -->
+                <inputSource>
+                  <inputFolder>../eclipse_help/target/generated-docs</inputFolder>
+                  <outputSubFolder>scout-sdk-help</outputSubFolder>
+                  <fixExternalLinks>false</fixExternalLinks>
+                  <fixXrefLinks>false</fixXrefLinks>
+                  <htmlOutput>
+                    <outputSubFolder>html</outputSubFolder>
+                    <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
+                    <cssReplacements>
+                      <cssReplacement>
+                        <originalFileName>asciidoctor.css</originalFileName>
+                        <replacementFile>css-replacement/eclipse.css</replacementFile>
+                      </cssReplacement>
+                      <cssReplacement>
+                        <originalFileName>coderay-asciidoctor.css</originalFileName>
+                        <replacementFile>css-replacement/coderay-eclipse.css</replacementFile>
+                      </cssReplacement>
+                    </cssReplacements>
+                  </htmlOutput>
+                </inputSource>
+              </inputSources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.bsiag.geneclipsetoc</groupId>
+        <artifactId>geneclipsetoc-maven-plugin</artifactId>
+        <version>1.0.2</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>geneclipsetoc</goal>
+            </goals>
+            <configuration>
+              <helpPrefix>html/</helpPrefix>
+              <sourceFolder>${project.build.directory}/published-docs/scout-sdk-help/html</sourceFolder>
+              <outputTocFile>${project.build.directory}/published-docs/scout-sdk-help/toc.xml</outputTocFile>
+              <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
+              <outputContextsFile>${project.build.directory}/published-docs/scout-sdk-help/contexts_scout.xml</outputContextsFile>
+              <helpContexts>
+                <helpContext>
+                  <id>scout_wizard_new_project_page_context</id>
+                  <description>This wizard creates a new Scout helloworld project.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_project.html</topicPage>
+                    <topicPage>tutorial_helloworld.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_form_page_context</id>
+                  <description>This wizard creates a new Scout Form.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_form.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_page_page_context</id>
+                  <description>This wizard creates a new Scout Page.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_page.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_nls-entry_page_context</id>
+                  <description>This wizard creates or modifies a nls entry to localize the user interface.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_nls-entry.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_lookupcall_page_context</id>
+                  <description>This wizard creates a new Scout Lookup Call.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_lookupcall.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_code-type_page_context</id>
+                  <description>This wizard creates a new Scout Code Type.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_code-type.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_permission_page_context</id>
+                  <description>This wizard creates a new Scout Permission.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_permission.html</topicPage>
+                  </topicPages>
+                </helpContext>
+                <helpContext>
+                  <id>scout_wizard_language_page_context</id>
+                  <description>This wizard creates an additional translation file in order to localize the user interface.</description>
+                  <topicPages>
+                    <topicPage>sdk_wizard_language.html</topicPage>
+                  </topicPages>
+                </helpContext>
+              </helpContexts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
