@@ -14,10 +14,6 @@
   <name>Publish documents</name>
   <packaging>pom</packaging>
 
-  <properties>
-    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/latest</gh-io-subfolder>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
@@ -64,130 +60,22 @@
         <artifactId>build-helper-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>com.bsiag.htmltools</groupId>
-        <artifactId>htmltools-maven-plugin</artifactId>
-        <version>1.0.2</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>run-publish.sh</id>
             <phase>generate-resources</phase>
             <goals>
-              <goal>htmltools</goal>
+              <goal>exec</goal>
             </goals>
             <configuration>
-              <outputFolder>${project.build.directory}/published-docs</outputFolder>
-              <inputSources>
-                <!-- publish for eclipse.org/scout -->
-                <inputSource>
-                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <htmlOutput/>
-                </inputSource>
-                <inputSource>
-                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>eclipse.org-scout</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <htmlOutput/>
-                </inputSource>
-                <!-- publish for downloads -->
-                <!-- scout install -->
-                <inputSource>
-                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/article_install</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_install</outputSubFolder>
-                    <outputZipFileName>scout_install.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout hello world -->
-                <inputSource>
-                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/article_helloworld</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_helloworld</outputSubFolder>
-                    <outputZipFileName>scout_helloworld.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout book frontend -->
-                <inputSource>
-                  <inputFolder>../book_scout_frontend/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/book_scout_frontend</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_frontend</outputSubFolder>
-                    <outputZipFileName>scout_frontend.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout book intro -->
-                <inputSource>
-                  <inputFolder>../book_scout_intro/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/book_scout_intro</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_intro</outputSubFolder>
-                    <outputZipFileName>scout_intro.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout book architecture -->
-                <inputSource>
-                  <inputFolder>../book_scout_architecture/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/book_scout_architecture</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_architecture</outputSubFolder>
-                    <outputZipFileName>scout_architecture.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout article migration -->
-                <inputSource>
-                  <inputFolder>../scout_migration/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/scout_migration</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_migration</outputSubFolder>
-                    <outputZipFileName>scout_migration.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- scout article releasenotes -->
-                <inputSource>
-                  <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}/scout_releasenotes</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>scout_releasenotes</outputSubFolder>
-                    <outputZipFileName>scout_releasenotes.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- publish for eclipse help -->
-                <inputSource>
-                  <inputFolder>../eclipse_help/target/generated-docs</inputFolder>
-                  <outputSubFolder>scout-sdk-help</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <htmlOutput>
-                    <outputSubFolder>html</outputSubFolder>
-                    <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
-                    <cssReplacements>
-                      <cssReplacement>
-                        <originalFileName>asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/eclipse.css</replacementFile>
-                      </cssReplacement>
-                      <cssReplacement>
-                        <originalFileName>coderay-asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/coderay-eclipse.css</replacementFile>
-                      </cssReplacement>
-                    </cssReplacements>
-                  </htmlOutput>
-                </inputSource>
-              </inputSources>
+              <!-- for windows: bash.exe must be on the path / e.g. add 'C:\Program Files\Git\bin' to path environment variable -->
+              <executable>bash</executable>
+              <arguments>
+                <argument>publish.sh</argument>
+                <argument>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>

@@ -372,7 +372,7 @@ The method `AbstractDateField.execParseValue()` is no longer supported. It canno
 
 * For `IHtmlField` attachments `RemoteFile` has been replaced by `BinaryResource`, therefore method signatures of `getAttachments()` and `setAttachments` have changed.
 ** Replace `RemoteFile` with `BinaryResource`.
-** Attachments must be used within the `IHtmlField`'s value as `src="binaryResource:test.png"` (instead of `src="test.png"`). Append `binaryResource:` prefix where attachments are used.
+** Attachments must be used within the `IHtmlField`'s value as `src="binaryResource:test.zip"` (instead of `src="test.zip"`). Append `binaryResource:` prefix where attachments are used.
 ** New feature: Icons can be used without adding them as attachment using `src="iconid:ApplicationLogo"`.
 ** New property for selection tracking, changeable with methods `isSelectionTrackingEnabled()` and `setSelectionTrackingEnabled(boolean)`. Selection tracking with `getSelectionStart()` and `getSelectionEnd()` is only possible when selection tracking is enabled.
 * Removed html editor support on html field. If you used a html editor you can create a custom field an include an existing html editor.
