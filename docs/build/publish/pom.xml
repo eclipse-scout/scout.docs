@@ -83,7 +83,7 @@
       <plugin>
         <groupId>com.bsiag.geneclipsetoc</groupId>
         <artifactId>geneclipsetoc-maven-plugin</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
@@ -161,4 +161,11 @@
       </plugin>
     </plugins>
   </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>geneclipsetoc-maven-plugin</id>
+      <url>https://bsi-software.github.io/geneclipsetoc/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
