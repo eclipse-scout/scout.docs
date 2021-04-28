@@ -15,4 +15,5 @@ To get started with Eclipse Scout, we propose that you first go through the "`He
 * <<tutorial_existingdemo.html#import-the-scout-demo-applications-tutorial, Import the Scout Demo Applications>>
 
 '''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

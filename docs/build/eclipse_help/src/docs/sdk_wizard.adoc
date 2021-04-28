@@ -39,4 +39,5 @@ Adding additional translated languages with the <<sdk_wizard_language.adoc#, Add
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

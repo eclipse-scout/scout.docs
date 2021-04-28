@@ -16,4 +16,5 @@ In the second part, the Scout tooling available in the Eclipse IDE is described.
 * <<sdk.adoc#, Scout Tooling>>
 
 '''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

@@ -66,8 +66,8 @@ The selected person can then be opened in a form to view and edit its data as sh
 .The "`Contacts`" application with a person opened in a form.
 image::{imgsdir}/app_contacts_personform.png[]
 
-To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on 
-https://github.com/bsi-software/org.eclipse.scout.docs/tree/releases/6.0.x/code/contacts[Github]
+To run the "`Contacts`" application without implementing it first, you may take advantage of the fact that the code of the application is hosted on
+link:https://github.com/bsi-software/org.eclipse.scout.docs/tree/{git-branch}/code/contacts[Github]
 and start from there.
 Alternatively, you can pull a Docker image of the "`Contacts`" application from https://hub.docker.com/r/eclipsescout/org.eclipse.scout.contacts/[Docker Hub].
 

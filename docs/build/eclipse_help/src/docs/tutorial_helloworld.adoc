@@ -24,4 +24,5 @@ include::{mdledir}/RunTheApplication.adoc[]
 In the <<tutorial_existingdemo.html#import-the-scout-demo-applications-tutorial, next tutorial>>, you will learn how to import the Scout demo applications into your workspace.
 
 '''
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

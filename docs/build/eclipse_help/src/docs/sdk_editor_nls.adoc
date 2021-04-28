@@ -102,4 +102,5 @@ where:
 '''
 Go back to the <<sdk.adoc#, Scout Tooling>>.
 
+:_footer-link-path: build/eclipse_help/src/docs/{docname}.adoc
 include::{mdledir}/_footer-text.adoc[]

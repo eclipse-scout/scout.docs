@@ -23,4 +23,5 @@ include::_Architecture.adoc[]
 
 include::{mdledir}/BookCopyright.adoc[]
 
+:_footer-link-path: build/book_scout_architecture/src/docs/{docname}.adoc
 include::{mdledir}/_footer.adoc[]
