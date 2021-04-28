@@ -21,12 +21,12 @@ The following changes were made after the initial 7.0 release (Eclipse Oxygen re
 
 {NotReleasedWarning}
 
-* <<Deprecated Property "focusable" from IFormField, AbstractFormField (since 7.0.300)>>
+* <<focusable-property, Deprecated Property "focusable" From IFormField, AbstractFormField (since 7.0.300)>>
 * <<Charts: Fixed Typo in Function Name (since 7.0.300)>>
 
 ==== Oxygen.2 (7.0.200) Released on December 20, 2017
 
-&mdash;
+-
 
 ==== Oxygen.1 (7.0.100) Released on September 27, 2017
 
@@ -147,6 +147,7 @@ The following methods have been removed from `AbstractSmartField(2)`:
 
 Note: with 7.0 these methods still exist on the old smart field `ISmartField` but are marked as deprecated.
 
+[[focusable-property]]
 === Deprecated Property "focusable" From IFormField, AbstractFormField (since 7.0.300)
 
 Since the new Html UI was introduced with Scout 5.2 the property `focusable` had no effect on the UI anymore. Instead the UI uses sensible defaults for each field type. For instance: a _LabelField_ is never focusable, a normal _StringField_ is always focusable, as long as it is enabled. Since the property was rarely used, we deprecated the related code and plan to remove it with the following release.
