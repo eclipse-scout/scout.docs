@@ -14,10 +14,6 @@
     <version>11.0-SNAPSHOT</version>
   </parent>
 
-  <properties>
-    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</gh-io-subfolder>
-  </properties>
-
   <artifactId>publish</artifactId>
   <name>Publish documents</name>
   <packaging>pom</packaging>
@@ -110,166 +106,22 @@
         <artifactId>build-helper-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>com.bsiag.htmltools</groupId>
-        <artifactId>htmltools-maven-plugin</artifactId>
-        <version>1.1.4</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>run-publish.sh</id>
             <phase>generate-resources</phase>
             <goals>
-              <goal>htmltools</goal>
+              <goal>exec</goal>
             </goals>
             <configuration>
-              <outputFolder>${project.build.directory}/published-docs</outputFolder>
-              <inputSources>
-                <!-- publish for downloads -->
-                <!-- one day tutorial -->
-                <inputSource>
-                  <inputFolder>../one_day_tutorial/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>one-day-tutorial.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- getstarted -->
-                <inputSource>
-                  <inputFolder>../getstarted/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>getstarted.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- helloscout -->
-                <inputSource>
-                  <inputFolder>../helloscout/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloscout.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- helloscout js -->
-                <inputSource>
-                  <inputFolder>../helloscout_js/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloscout-js.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- helloscout js full stack -->
-                <inputSource>
-                  <inputFolder>../helloscout_js_fullstack/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloscout-js-fullstack.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- helloscout cdn -->
-                <inputSource>
-                  <inputFolder>../helloscout_cdn/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloscout-cdn.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- one day tutorial -->
-                <inputSource>
-                  <inputFolder>../deploy_to_tomcat/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>deploy-to-tomcat.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- technical guide -->
-                <inputSource>
-                  <inputFolder>../technical_guide/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>technical-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- technical guide js -->
-                <inputSource>
-                  <inputFolder>../technical_guide_js/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>technical-guide-js.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- migration guide -->
-                <inputSource>
-                  <inputFolder>../migration/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>migration-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- releasenotes -->
-                <inputSource>
-                  <inputFolder>../releasenotes/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>release-notes.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- sdk for eclipse -->
-                <inputSource>
-                  <inputFolder>../sdk_eclipse/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>sdk-eclipse.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput/>
-                </inputSource>
-                <!-- publish for eclipse help -->
-                <inputSource>
-                  <inputFolder>../eclipse_help/target/generated-docs</inputFolder>
-                  <outputSubFolder>scout-sdk-help</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputSubFolder>html</outputSubFolder>
-                    <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
-                    <cssReplacements>
-                      <cssReplacement>
-                        <originalFileName>asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/eclipse.css</replacementFile>
-                      </cssReplacement>
-                      <cssReplacement>
-                        <originalFileName>coderay-asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/coderay-eclipse.css</replacementFile>
-                      </cssReplacement>
-                    </cssReplacements>
-                  </htmlOutput>
-                </inputSource>
-              </inputSources>
+              <!-- for windows: bash.exe must be on the path / e.g. add 'C:\Program Files\Git\bin' to path environment variable -->
+              <executable>bash</executable>
+              <arguments>
+                <argument>publish.sh</argument>
+                <argument>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
@@ -277,7 +129,7 @@
       <plugin>
         <groupId>com.bsiag.geneclipsetoc</groupId>
         <artifactId>geneclipsetoc-maven-plugin</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
@@ -355,4 +207,11 @@
       </plugin>
     </plugins>
   </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>geneclipsetoc-maven-plugin</id>
+      <url>https://bsi-software.github.io/geneclipsetoc/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
