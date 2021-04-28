@@ -48,7 +48,7 @@ The example command line below will create such a certificate using the alias `t
 
 The second step is to uncomment the HTTPS connector element in the Tomcat's `server.xml` configuration file.
 Make sure that parameter `keystoreFile` points to your newly created keystore file (if you are using a windows box, make sure not to use the backslash characters in the path to the keystore).
-After a restart of Tomcat you should then be able to access Tomcat on https://localhost:8443/manager/html[https://localhost:8443/manager/html]
+After a restart of Tomcat you should then be able to access Tomcat on https://localhost:8443/manager/html[https://localhost:8443/manager/html,window=_blank]
 
 [source,xml]
 ----
@@ -71,7 +71,7 @@ Make sure that you modify the `cacerts` file of the Java runtime that is used in
   keytool.exe -import -alias tomcat_localhost -trustcacerts -storepass changeit -keystore C:\java\jre8\lib\security\cacerts -file tomcat_localhost.der
 
 Your Scout application should now properly communicate over HTTPS in your Tomcat installation and after having installed the "Hello World" application
-to Tomcat it should become available on https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html[https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html/].
+to Tomcat it should become available on https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html[https://localhost:8443/org.eclipse.scout.apps.helloworld.ui.html,window=_blank].
 
 In case the Scout frontend server cannot access the Scout backend server your self-signed certificate might be missing in the Java installation.
 To verify that the certificate has been included in file `cacerts` file use the following command.

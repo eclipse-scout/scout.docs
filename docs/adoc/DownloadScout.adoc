@@ -18,8 +18,8 @@ ifndef::mdledir[:mdledir: .]
 === Java and Maven
 
 Before you download Scout make sure that you have a working Java Development Kit (JDK) and a working Maven installation.
-In case you first need to download and install a JDK we recommend to work with either the http://www.oracle.com/technetwork/java/javase/downloads/index.html[Oracle JDK] or the http://openjdk.java.net/install/[Open JDK].
-For Maven, head over to the https://maven.apache.org/[Maven project page].
+In case you first need to download and install a JDK we recommend to work with either the http://www.oracle.com/technetwork/java/javase/downloads/index.html[Oracle JDK,window=_blank] or the http://openjdk.java.net/install/[Open JDK,window=_blank].
+For Maven, head over to the https://maven.apache.org/[Maven project page,window=_blank].
 
 To verify your Java installation use your command line.
 
@@ -52,7 +52,7 @@ Having verified the above prerequisites it is now time to download the Scout pac
 
 Download the Eclipse Scout package by visiting the official Eclipse download page.
 
-https://www.eclipse.org/downloads/[www.eclipse.org/downloads]
+https://www.eclipse.org/downloads/[www.eclipse.org/downloads,window=_blank]
 
 The download page then looks as shown in <<img-scout_download>>.
 
