@@ -14,6 +14,9 @@ import org.eclipse.scout.rt.dataobject.AbstractTypeVersion;
 //tag::class[]
 public final class LoremTypeVersions {
 
+  private LoremTypeVersions() {
+  }
+
   public static final class Lorem_1_0_0 extends AbstractTypeVersion {
   }
 

@@ -10,10 +10,7 @@
  */
 package org.eclipse.scout.docs.snippets;
 
-import java.util.Set;
-
 import org.eclipse.scout.rt.dataobject.testing.signature.AbstractDataObjectSignatureTest;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
 //tag::class[]
 public class DocsSnippetsDataObjectSignatureTest extends AbstractDataObjectSignatureTest {
@@ -24,8 +21,8 @@ public class DocsSnippetsDataObjectSignatureTest extends AbstractDataObjectSigna
   }
 
   @Override
-  protected Set<String> getPackageNamePrefixes() {
-    return CollectionUtility.hashSet("org.eclipse.scout.docs.snippets");
+  protected String getPackageNamePrefix() {
+    return "org.eclipse.scout.docs.snippets";
   }
 }
 //end::class[]
