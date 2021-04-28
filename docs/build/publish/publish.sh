@@ -138,6 +138,7 @@ publishDoc 'beginners_guide' 'beginners-guide'
 publishDoc 'scout_migration' 'migration-guide'
 publishDoc 'scout_releasenotes' 'release-notes'
 publishDoc 'technical_guide' 'technical-guide'
+publishDoc 'technical_guide_js' 'technical-guide-js'
 
 
 # ------------------------------------

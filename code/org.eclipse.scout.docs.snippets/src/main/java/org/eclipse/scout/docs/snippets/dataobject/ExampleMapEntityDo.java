@@ -7,4 +7,4 @@ import org.eclipse.scout.rt.platform.dataobject.TypeName;
 @TypeName("ExampleMapEntity")
 public class ExampleMapEntityDo extends DoMapEntity<ExampleEntityDo> {
 }
-//tag::class[]
+//end::class[]
