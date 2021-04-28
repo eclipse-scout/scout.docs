@@ -109,21 +109,6 @@ rm -rf "${docsBuildDir}/publish/${buildDir}"
 
 
 # ------------------------------------
-# output for 'eclipse.org-scout'
-# ------------------------------------
-
-echo "Publish 'eclipse.org-scout'"
-
-targetDir="${docsBuildDir}/publish/${buildDir}/published-docs/eclipse.org-scout"
-mkdir -p $targetDir
-cd $targetDir
-mkdir $imagesDirName
-
-publishHtml 'scout_install' 'scout_install'
-publishHtml 'scout_helloworld' 'scout_helloworld'
-
-
-# ------------------------------------
 # output for 'eclipsescout.github.io'
 # ------------------------------------
 
@@ -139,6 +124,8 @@ publishDoc 'scout_migration' 'migration-guide'
 publishDoc 'scout_releasenotes' 'release-notes'
 publishDoc 'technical_guide' 'technical-guide'
 publishDoc 'technical_guide_js' 'technical-guide-js'
+publishDoc 'scout_install' 'install-guide'
+publishDoc 'scout_helloworld' 'helloworld'
 
 
 # ------------------------------------
