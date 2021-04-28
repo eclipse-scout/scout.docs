@@ -119,13 +119,18 @@ mkdir -p $targetDir
 cd $targetDir
 mkdir $imagesDirName
 
-publishDoc 'beginners_guide' 'beginners-guide'
-publishDoc 'scout_migration' 'migration-guide'
-publishDoc 'scout_releasenotes' 'release-notes'
+publishDoc 'one_day_tutorial' 'one-day-tutorial'
+publishDoc 'getstarted' 'getstarted'
+publishDoc 'helloscout' 'helloscout'
+publishDoc 'helloscout_js' 'helloscout-js'
+publishDoc 'helloscout_js_fullstack' 'helloscout-js-fullstack'
+publishDoc 'helloscout_cdn' 'helloscout-cdn'
+publishDoc 'deploy_to_tomcat' 'deploy-to-tomcat'
 publishDoc 'technical_guide' 'technical-guide'
 publishDoc 'technical_guide_js' 'technical-guide-js'
-publishDoc 'scout_install' 'install-guide'
-publishDoc 'scout_helloworld' 'helloworld'
+publishDoc 'migration' 'migration-guide'
+publishDoc 'releasenotes' 'release-notes'
+publishDoc 'sdk_eclipse' 'sdk-eclipse'
 
 
 # ------------------------------------
