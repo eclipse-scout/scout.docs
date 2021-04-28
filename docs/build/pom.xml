@@ -114,7 +114,7 @@
                   <pluginExecutionFilter>
                     <groupId>org.asciidoctor</groupId>
                     <artifactId>asciidoctor-maven-plugin</artifactId>
-                    <versionRange>[1.5.7,)</versionRange>
+                    <versionRange>[2.0.0,)</versionRange>
                     <goals>
                       <goal>process-asciidoc</goal>
                     </goals>
@@ -172,16 +172,6 @@
       <id>eclipse.snapshot</id>
       <name>eclipse-snapshot-repo</name>
       <url>https://repo.eclipse.org/content/groups/snapshots/</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>bintray.jmini.maven</id>
-      <url>https://dl.bintray.com/jmini/maven/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
     </pluginRepository>
   </pluginRepositories>
 </project>
