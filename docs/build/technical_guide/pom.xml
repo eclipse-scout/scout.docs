@@ -34,9 +34,9 @@
             </goals>
             <configuration>
               <backend>pdf</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <doctype>book</doctype>
               <attributes>
+                <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
                 <pagenums />
                 <toc />
@@ -53,8 +53,8 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>
+                <source-highlighter>coderay</source-highlighter>
                 <toc>left</toc>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>

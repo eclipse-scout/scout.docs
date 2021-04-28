@@ -32,7 +32,7 @@ The [wizard]_New Scout Project_ wizard is then started as shown in <<img-sdk_new
 image::{imgsdir}/sdk_new_project.png[]
 
 In the [wizard]_New Scout Project_ wizard you have to enter a `group id`, `artifact id` and a `display name` for your Scout project.
-As the created project will make use of https://maven.apache.org/[Apache Maven] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions] to choose  `group id` and `artifact id` for your project.
+As the created project will make use of https://maven.apache.org/[Apache Maven,window=_blank] please refer to the https://maven.apache.org/guides/mini/guide-naming-conventions.html[Maven naming conventions,window=_blank] to choose  `group id` and `artifact id` for your project.
 The `artifact id` will then also be the project name in the Eclipse workspace.
 The `display name` is used as the application name presented to the user (e.g. in the Browser title bar).
 

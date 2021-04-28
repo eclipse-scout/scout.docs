@@ -848,11 +848,11 @@ public class PersonForm extends AbstractForm {
         getFirstNameField().getValue(),
         getLastNameField().getValue());
   }
-  // tag::handler[]
+  // end::handler[]
   // tag::structure[]
   // tag::init[]
   // tag::validate[]
 }
 // end::validate[]
 // end::structure[]
-// tag::init[]
+// end::init[]
