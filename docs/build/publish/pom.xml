@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -9,10 +8,6 @@
     <artifactId>aggregator</artifactId>
     <version>10.0.0-SNAPSHOT</version>
   </parent>
-
-  <properties>
-    <gh-io-subfolder>eclipsescout.github.io/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}/</gh-io-subfolder>
-  </properties>
 
   <artifactId>publish</artifactId>
   <name>Publish documents</name>
@@ -70,117 +65,22 @@
         <artifactId>build-helper-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>com.bsiag.htmltools</groupId>
-        <artifactId>htmltools-maven-plugin</artifactId>
-        <version>1.1.3</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>run-publish.sh</id>
             <phase>generate-resources</phase>
             <goals>
-              <goal>htmltools</goal>
+              <goal>exec</goal>
             </goals>
             <configuration>
-              <outputFolder>${project.build.directory}/published-docs</outputFolder>
-              <inputSources>
-                <!-- publish for downloads -->
-                <!-- beginners guide -->
-                <inputSource>
-                  <inputFolder>../beginners_guide/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <htmlOutput>
-                    <outputZipFileName>beginners-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- technical guide -->
-                <inputSource>
-                  <inputFolder>../technical_guide/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>technical-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- technical guide js -->
-                <inputSource>
-                  <inputFolder>../technical_guide_js/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>technical-guide-js.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- scout article migration -->
-                <inputSource>
-                  <inputFolder>../scout_migration/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>migration-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- scout article releasenotes -->
-                <inputSource>
-                  <inputFolder>../scout_releasenotes/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>release-notes.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- scout article install-guide -->
-                <inputSource>
-                  <inputFolder>../scout_install/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>install-guide.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- scout article helloworld -->
-                <inputSource>
-                  <inputFolder>../scout_helloworld/target/generated-docs</inputFolder>
-                  <outputSubFolder>${gh-io-subfolder}</outputSubFolder>
-                  <fixExternalLinks>false</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputZipFileName>helloworld.zip</outputZipFileName>
-                  </htmlOutput>
-                  <pdfOutput />
-                </inputSource>
-                <!-- publish for eclipse help -->
-                <inputSource>
-                  <inputFolder>../eclipse_help/target/generated-docs</inputFolder>
-                  <outputSubFolder>scout-sdk-help</outputSubFolder>
-                  <fixExternalLinks>true</fixExternalLinks>
-                  <fixXrefLinks>false</fixXrefLinks>
-                  <htmlOutput>
-                    <outputSubFolder>html</outputSubFolder>
-                    <pagesListFile>../eclipse_help/help-pages.txt</pagesListFile>
-                    <cssReplacements>
-                      <cssReplacement>
-                        <originalFileName>asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/eclipse.css</replacementFile>
-                      </cssReplacement>
-                      <cssReplacement>
-                        <originalFileName>coderay-asciidoctor.css</originalFileName>
-                        <replacementFile>css-replacement/coderay-eclipse.css</replacementFile>
-                      </cssReplacement>
-                    </cssReplacements>
-                  </htmlOutput>
-                </inputSource>
-              </inputSources>
+              <!-- for windows: bash.exe must be on the path / e.g. add 'C:\Program Files\Git\bin' to path environment variable -->
+              <executable>bash</executable>
+              <arguments>
+                <argument>publish.sh</argument>
+                <argument>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
@@ -188,7 +88,7 @@
       <plugin>
         <groupId>com.bsiag.geneclipsetoc</groupId>
         <artifactId>geneclipsetoc-maven-plugin</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
@@ -266,4 +166,11 @@
       </plugin>
     </plugins>
   </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>geneclipsetoc-maven-plugin</id>
+      <url>https://bsi-software.github.io/geneclipsetoc/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

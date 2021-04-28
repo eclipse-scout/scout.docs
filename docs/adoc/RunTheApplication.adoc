@@ -42,7 +42,7 @@ After Node.js has been installed, we can try to launch the application again usi
 This time you should see console output providing information about the JS build process.
 Once the JS build has been completed successfully, the frontend and backend servers will be started automatically.
 The servers are ready as soon as the console shows _Server ready_.
-We can now access the Hello World application by navigating to http://localhost:8082/ in our favorite web browser.
+We can now access the Hello World application by navigating to http://localhost:8082/[http://localhost:8082,window=_blank] in our favorite web browser.
 
 The running Hello World application should then be started in your browser as shown in <<img-start_browser>>.
 
