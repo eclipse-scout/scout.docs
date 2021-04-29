@@ -98,7 +98,20 @@
 
   </dependencies>
 
- <profiles>
+  <profiles>
+    <profile>
+      <id>skip.selenium.tests</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>true</skipTests>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>win32_chrome_driver</id>
       <activation>
@@ -127,7 +140,7 @@
       </properties>
     </profile>
     <profile>
-    <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
+      <!-- x64 architecture can be advertised as amd64 or x86_64 on linux -->
       <id>linux64_chrome_driver_amd64</id>
       <activation>
         <os>
