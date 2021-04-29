@@ -1,7 +1,6 @@
 package org.eclipse.scout.contacts.server;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.eclipse.scout.contacts.server.organization.OrganizationService;
 import org.eclipse.scout.contacts.server.sql.DatabaseSetupService;
@@ -29,12 +28,12 @@ public class OrganizationServiceTest {
 
   @BeforeClass
   public static void setupDatabase() {
+    BEANS.get(DerbySqlService.class).createDB();
     BEANS.get(DatabaseSetupService.class).createOrganizationTable();
   }
 
   @AfterClass
   public static void destroyDBConnections() {
-    BEANS.get(DerbySqlService.class).dropDB();
     BEANS.get(DerbySqlService.class).destroySqlConnectionPool();
   }
 
