@@ -16,7 +16,7 @@
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
     <version>3.14.1</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <properties>
@@ -52,6 +52,16 @@
     <module>../org.eclipse.scout.widgets.heatmap.client</module>
     <module>../org.eclipse.scout.widgets.heatmap.ui.html</module>
   </modules>
+
+  <profiles>
+    <!-- adds selenium test module -->
+    <profile>
+      <id>modules.selenium</id>
+      <modules>
+        <module>../org.eclipse.scout.widgets.ui.html.app.selenium</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <dependencyManagement>
     <dependencies>
