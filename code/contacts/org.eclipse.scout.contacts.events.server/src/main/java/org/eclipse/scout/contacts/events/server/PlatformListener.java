@@ -17,6 +17,7 @@ import org.eclipse.scout.contacts.events.shared.person.PersonFormTabExtensionDat
 import org.eclipse.scout.contacts.events.shared.person.PersonTablePageDataExtension;
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoCreateProperty;
 import org.eclipse.scout.contacts.server.sql.DatabaseProperties.DatabaseAutoPopulateProperty;
+import org.eclipse.scout.contacts.server.sql.DerbySqlService;
 import org.eclipse.scout.contacts.server.sql.IDataStoreService;
 import org.eclipse.scout.contacts.server.sql.SuperUserRunContextProducer;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -51,6 +52,7 @@ public class PlatformListener implements IPlatformListener, IDataStoreService {
   public void autoCreateDatabase() {
     if (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
       try {
+        BEANS.get(DerbySqlService.class).createDB();
         RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
         IRunnable runnable = () -> {
           createEventTable();

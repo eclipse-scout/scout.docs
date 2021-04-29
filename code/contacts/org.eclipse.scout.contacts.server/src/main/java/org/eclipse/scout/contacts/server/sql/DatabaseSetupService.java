@@ -30,6 +30,7 @@ public class DatabaseSetupService implements IDataStoreService {
   public void autoCreateDatabase() {
     if (CONFIG.getPropertyValue(DatabaseAutoCreateProperty.class)) {
       try {
+        BEANS.get(DerbySqlService.class).createDB();
         RunContext context = BEANS.get(SuperUserRunContextProducer.class).produce();
         IRunnable runnable = () -> {
           createOrganizationTable();
