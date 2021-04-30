@@ -9,7 +9,7 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 
-import {Button, Form, models, scout, Status} from '@eclipse-scout/core';
+import {Button, Form, models, scout} from '@eclipse-scout/core';
 import DesktopNotificationFormModel from './DesktopNotificationFormModel';
 import DesktopNotification from '@eclipse-scout/core/src/desktop/notification/DesktopNotification';
 
@@ -26,14 +26,18 @@ export default class DesktopNotificationForm extends Form {
   _init(model) {
     super._init(model);
 
-    let button = this.widget('Button');
-    this.widget('ClosableField').setValue(true);
-    this.widget('MessageField').setValue('This is a notification');
-    this.widget('DurationField').setValue(5000);
+    let notification = scout.create('DesktopNotification', {parent: this});
+    this.widget('ClosableField').setValue(notification.closable);
+    this.widget('MessageField').setValue('Hi there!');
+    this.widget('DurationField').setValue(notification.duration);
     this.widget('DelayField').setValue(0);
-    this.widget('StatusSeverityField').setValue(Status.Severity.OK);
-    this.widget('NativeNotificationVisibilityField').setValue(DesktopNotification.NativeNotificationVisibility.NONE);
+    this.widget('StatusSeverityField').setValue(notification.status.severity);
+    this.widget('NativeNotificationTitleField').setValue(notification.nativeNotificationTitle);
+    this.widget('NativeNotificationIconIdField').setValue(notification.nativeNotificationIconId);
+    this.widget('NativeNotificationVisibilityField').setValue(notification.nativeNotificationVisibility);
+    notification.destroy();
 
+    let button = this.widget('Button');
     button.on('click', this._onButtonClick.bind(this));
   }
 
@@ -43,6 +47,8 @@ export default class DesktopNotificationForm extends Form {
       closable: this.widget('ClosableField').value,
       duration: this.widget('DurationField').value,
       nativeOnly: this.widget('NativeOnlyField').value,
+      nativeNotificationTitle: this.widget('NativeNotificationTitleField').value,
+      nativeNotificationIconId: this.widget('NativeNotificationIconIdField').value,
       nativeNotificationVisibility: this.widget('NativeNotificationVisibilityField').value,
       status: {
         severity: this.widget('StatusSeverityField').value,

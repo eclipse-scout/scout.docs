@@ -70,16 +70,31 @@ export default () => ({
                     tooltipText: '${textKey:NativeOnlyTooltip}'
                   },
                   {
+                    id: 'NativeNotificationTitleField',
+                    objectType: 'StringField',
+                    label: 'Native Notification Title',
+                    labelWidthInPixel: 170
+                  },
+                  {
+                    id: 'NativeNotificationIconIdField',
+                    objectType: 'SmartField',
+                    lookupCall: 'jswidgets.ImageLookupCall',
+                    label: 'Native Notification Icon Id',
+                    labelWidthInPixel: 170
+                  },
+                  {
                     id: 'NativeNotificationVisibilityField',
                     objectType: 'SmartField',
                     lookupCall: 'jswidgets.NativeNotificationVisibilityLookupCall',
-                    label: 'Native Notification',
+                    label: 'Native Notification Visibility',
+                    labelWidthInPixel: 170,
                     tooltipText: '${textKey:NativeNotificationVisibilityTooltip}'
                   },
                   {
                     id: 'DelayField',
                     objectType: 'NumberField',
                     label: 'Delay',
+                    labelWidthInPixel: 170,
                     tooltipText: '${textKey:DelayTooltip}'
                   }
                 ]

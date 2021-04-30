@@ -5,8 +5,11 @@ export default () => ({
   id: 'jswidgets.Desktop',
   title: '${textKey:Widgets}',
   objectType: 'Desktop',
-  logoUrl: 'img/scout-logo.svg',
+  logoUrl: 'img/eclipse_scout_logo.svg',
   logoActionEnabled: true,
+  nativeNotificationDefaults: {
+    iconId: 'img/eclipse_scout_logo.png'
+  },
   outline: {
     objectType: 'jswidgets.WidgetsOutline'
   },

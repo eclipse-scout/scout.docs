@@ -28,6 +28,8 @@ import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.client.services.lookup.ImageLookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.NativeNotificationVisibilityLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.ViewButtonLookupCall;
 import org.eclipse.scout.widgets.client.ui.action.view.AbstractViewButtonPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
@@ -47,8 +49,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.Be
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.HeaderVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationHandleVisibleButton;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.StyleBox.NavigationVisibleButton;
-import org.eclipse.scout.widgets.shared.services.code.NativeNotificationVisibilityCodeType;
-import org.eclipse.scout.widgets.shared.services.code.NativeNotificationVisibilityCodeType.NoneCode;
 import org.eclipse.scout.widgets.shared.services.code.SeverityCodeType;
 
 @Order(9000.0)
@@ -123,6 +123,14 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(DelayField.class);
   }
 
+  public MainBox.NotificationsBox.NativeNotificationIconIdField getNativeNotificationIconIdField() {
+    return getFieldByClass(MainBox.NotificationsBox.NativeNotificationIconIdField.class);
+  }
+
+  public MainBox.NotificationsBox.NativeNotificationTitleField getNativeNotificationTitleField() {
+    return getFieldByClass(MainBox.NotificationsBox.NativeNotificationTitleField.class);
+  }
+
   public NativeNotificationVisibilityField getNativeNotificationVisibilityField() {
     return getFieldByClass(NativeNotificationVisibilityField.class);
   }
@@ -169,10 +177,14 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             long duration = getDurationField().getValue();
             boolean closeable = getCloseableField().getValue();
             boolean nativeOnly = getNativeOnlyField().getValue();
+            String nativeNotificationTitle = getNativeNotificationTitleField().getValue();
             String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
+            String nativeNotificationIconId = getNativeNotificationIconIdField().getValue();
             DesktopNotification notification = new DesktopNotification(status, duration, closeable)
                 .withNativeOnly(nativeOnly)
-                .withNativeNotificationVisibility(nativeNotificationVisibility);
+                .withNativeNotificationTitle(nativeNotificationTitle)
+                .withNativeNotificationVisibility(nativeNotificationVisibility)
+                .withNativeNotificationIconId(nativeNotificationIconId);
 
             getDesktop().addNotification(notification);
             m_lastNotification = notification;
@@ -313,6 +325,49 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
+      @Order(85)
+      @ClassId("08c22faf-280b-4401-823e-0316bbbcc7a9")
+      public class NativeNotificationTitleField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Native Notification Title";
+        }
+
+        @Override
+        protected int getConfiguredLabelWidthInPixel() {
+          return 170;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().getNativeNotificationDefaults().getTitle());
+        }
+      }
+
+      @Order(87)
+      @ClassId("58d3bcd2-95bf-4ef0-937a-cfdbfbe6137e")
+      public class NativeNotificationIconIdField extends AbstractSmartField<String> {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Native Notification Icon Id";
+        }
+
+        @Override
+        protected int getConfiguredLabelWidthInPixel() {
+          return 170;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return ImageLookupCall.class;
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getDesktop().getNativeNotificationDefaults().getIconId());
+        }
+      }
+
       @Order(90)
       @ClassId("ea3451e8-c024-4bda-8033-29eaa7493aac")
       public class NativeNotificationVisibilityField extends AbstractSmartField<String> {
@@ -323,18 +378,23 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
 
         @Override
-        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
-          return NativeNotificationVisibilityCodeType.class;
+        protected int getConfiguredLabelWidthInPixel() {
+          return 170;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return NativeNotificationVisibilityLookupCall.class;
         }
 
         @Override
         protected void execInitField() {
-          setValue(NoneCode.ID);
+          setValue(getDesktop().getNativeNotificationDefaults().getVisibility());
         }
 
         @Override
         protected String execValidateValue(String rawValue) {
-          return ObjectUtility.nvl(rawValue, NoneCode.ID);
+          return ObjectUtility.nvl(rawValue, IDesktopNotification.NATIVE_NOTIFICATION_VISIBILITY_NONE);
         }
 
         @Override
@@ -349,6 +409,11 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected String getConfiguredLabel() {
           return "Delay";
+        }
+
+        @Override
+        protected int getConfiguredLabelWidthInPixel() {
+          return 170;
         }
 
         @Override
