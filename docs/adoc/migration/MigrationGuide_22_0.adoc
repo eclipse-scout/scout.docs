@@ -21,6 +21,7 @@ This document describes all relevant changes *from Eclipse Scout {scout-previous
 == Obtaining the Latest Version
 
 === Scout Runtime for Java
+
 Scout Runtime artifacts for Java are distributed using Maven Central:
 
 * {maven-central-link} on _Maven Central_
@@ -48,6 +49,7 @@ Scout Runtime artifacts for JavaScript are distributed using npm:
 * https://www.npmjs.com/search?q=%40eclipse-scout[All official Scout JavaScript packages]
 
 Usage example in your package.json:
+
 [source,json]
 [subs="verbatim,attributes"]
 ----
@@ -63,7 +65,6 @@ Usage example in your package.json:
 
 The pre-built Scout JavaScript assets are also available using a CDN (e.g. to be directly included in a html document):
 https://www.jsdelivr.com/package/npm/@eclipse-scout/core?path=dist
-
 
 === IDE Tooling (Scout SDK)
 
@@ -115,10 +116,31 @@ Remove `EnumVersion` annotation on `IEnum` implementors.
 
 == Native Notification Support
 
-The new notifications displayed by the browser use the application logo configured in `AbstractDesktop#getConfiguredLogoId()`.
+The new notifications displayed by the browser use the application logo configured in `AbstractDesktop#getConfiguredLogoId()` by default.
 
-*Migration*
-If you use native notifications, provide an application logo with a resolution of at least 150x150 px.
+If you use native notifications, you should provide a logo with a resolution of at least 150x150 px.
+If your application logo already has such a resolution, it should be fine.
+If your application logo has a lower resolution or is an SVG, you should use a different image for the notifications (SVGs are not supported by Chrome notifications).
+To do so, just configure the native notification defaults on your desktop.
+
+[source,java]
+[subs="verbatim,attributes"]
+----
+@Override
+protected NativeNotificationDefaults getConfiguredNativeNotificationDefaults() {
+  return super.getConfiguredNativeNotificationDefaults()
+    .withIconId("notification_logo.png");
+}
+----
+
+== Application Logo / Info Form
+
+The image `application_logo_large` and the constant `AbstractIcons.ApplicationLogo` have been removed.
+The name was confusing and it was only used for the `ScoutInfoForm`.
+The info form now uses the logo of the desktop (`IDesktop#getLogoId())` by default.
+So if you prefer to use a different logo for the info form, just extend the info form, override the method `getProductLogo()` and return the name of your preferred image.
+
+In case you don't use SVG logos yet, you should consider doing so to prevent blurry logos.
 
 == Less Variables
 
