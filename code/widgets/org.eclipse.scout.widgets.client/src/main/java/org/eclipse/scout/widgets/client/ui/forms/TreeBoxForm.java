@@ -689,7 +689,7 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
     @ClassId("ad7921d1-9394-4baa-97e8-72ac69551c48")
     public class ToggleFilterBoxesButton extends AbstractButton {
 
-      private ToggleState m_toggleState = ToggleState.None;
+      private ToggleState m_toggleState = ToggleState.NONE;
 
       @Override
       protected String getConfiguredLabel() {
@@ -719,10 +719,10 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
   }
 
   private enum ToggleState {
-    None(false, false),
-    Active(true, false),
-    Checked(false, true),
-    Both(true, true);
+    NONE(false, false),
+    ACTIVE(true, false),
+    CHECKED(false, true),
+    BOTH(true, true);
 
     private final boolean m_active;
     private final boolean m_checked;
@@ -734,14 +734,14 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
     public ToggleState next() {
       switch (this) {
-        case None:
-          return Active;
-        case Active:
-          return Checked;
-        case Checked:
-          return Both;
+        case NONE:
+          return ACTIVE;
+        case ACTIVE:
+          return CHECKED;
+        case CHECKED:
+          return BOTH;
         default:
-          return None;
+          return NONE;
       }
     }
 
