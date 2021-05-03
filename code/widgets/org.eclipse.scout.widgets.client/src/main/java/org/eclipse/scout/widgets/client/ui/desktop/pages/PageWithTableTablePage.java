@@ -57,6 +57,7 @@ import org.eclipse.scout.widgets.client.ui.forms.BooleanFieldForm;
 @ClassId("b06a2ee2-f395-4d73-888a-1fc5e7821edf")
 public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
+  @SuppressWarnings("squid:S2245") // Non-secure Random is okay here
   protected final Random m_random = new Random();
 
   public PageWithTableTablePage() {

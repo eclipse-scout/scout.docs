@@ -41,7 +41,7 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
 
   @Replace
   @ClassId("10a53ec2-c850-43d4-9fbc-22cfbf0607e9")
-  public class Table extends PageWithTableTablePage.Table {
+  public class TableEx extends PageWithTableTablePage.Table {
 
     @Override
     protected void execInitTable() {
@@ -81,7 +81,7 @@ public class PageWithEditableTableTablePage extends PageWithTableTablePage {
   @Order(10)
   @Replace
   @ClassId("991ec167-a118-4fb5-acd6-8896278014cd")
-  public class ViewSourceOnGitHubMenu extends PageWithTableTablePage.ViewSourceOnGitHubMenu {
+  public class ViewSourceOnGitHubMenuEx extends PageWithTableTablePage.ViewSourceOnGitHubMenu {
 
     @Override
     protected Class<?> provideSourceClass() {
