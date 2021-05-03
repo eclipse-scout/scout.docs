@@ -10,7 +10,7 @@
  */
 package org.eclipse.scout.widgets.client.ui.forms;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -281,7 +281,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
+          return FontStyleLookupCall.class;
         }
       }
 
@@ -306,7 +306,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
+          return FontStyleLookupCall.class;
         }
 
         @Override
@@ -345,7 +345,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
+          return UserContentListLookupCall.class;
         }
       }
 
@@ -538,7 +538,7 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
     @ClassId("89205c52-eb1d-4faf-b947-98d209881b3c")
     public class ToggleFilterBoxesButton extends AbstractButton {
 
-      private ToggleState m_toggleState = ToggleState.None;
+      private ToggleState m_toggleState = ToggleState.NONE;
 
       @Override
       protected String getConfiguredLabel() {
@@ -568,10 +568,10 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
   }
 
   private enum ToggleState {
-    None(false, false),
-    Active(true, false),
-    Checked(false, true),
-    Both(true, true);
+    NONE(false, false),
+    ACTIVE(true, false),
+    CHECKED(false, true),
+    BOTH(true, true);
 
     private final boolean m_active;
     private final boolean m_checked;
@@ -583,14 +583,14 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
     public ToggleState next() {
       switch (this) {
-        case None:
-          return Active;
-        case Active:
-          return Checked;
-        case Checked:
-          return Both;
+        case NONE:
+          return ACTIVE;
+        case ACTIVE:
+          return CHECKED;
+        case CHECKED:
+          return BOTH;
         default:
-          return None;
+          return NONE;
       }
     }
 

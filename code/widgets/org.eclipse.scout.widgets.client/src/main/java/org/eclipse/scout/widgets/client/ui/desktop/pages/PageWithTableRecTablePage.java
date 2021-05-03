@@ -51,15 +51,15 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
   }
 
   @Override
+  @SuppressWarnings("ManualArrayCopy")
   protected Object[][] loadDemoData() {
-    // Insert outline column value (some peusdo-random ID)
+    // Insert outline column value (some pseudo-random ID)
     Object[][] data = super.loadDemoData();
     Object[][] newData = new Object[data.length][];
     for (int i = 0; i < data.length; i++) {
       Object[] row = data[i];
       Object[] newRow = new Object[row.length + 1];
       newRow[0] = createOutlineSummary((String)row[0]);
-      // noinspection ManualArrayCopy
       for (int j = 0; j < row.length; j++) {
         newRow[j + 1] = row[j];
       }
@@ -79,7 +79,7 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
 
   @Replace
   @ClassId("eb9eb561-4765-4fb7-bc4a-05e4a4446352")
-  public class Table extends PageWithTableTablePage.Table {
+  public class TableEx extends PageWithTableTablePage.Table {
 
     public OutlineColumn getOutlineColumn() {
       return getColumnSet().getColumnByClass(OutlineColumn.class);
