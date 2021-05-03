@@ -20,7 +20,7 @@ import org.eclipse.scout.widgets.shared.Icons;
  * @since 9.0
  */
 @ClassId("0be31d88-06bf-4f5d-93a7-1951af95bdfd")
-public class AbstractAlignedImageField extends AbstractImageField {
+public abstract class AbstractAlignedImageField extends AbstractImageField {
 
   private final int m_verticalAlignment;
   private final int m_horizontalAlignment;
