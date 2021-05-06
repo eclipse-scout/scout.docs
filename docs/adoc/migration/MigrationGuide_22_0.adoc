@@ -142,7 +142,7 @@ So if you prefer to use a different logo for the info form, just extend the info
 
 In case you don't use SVG logos yet, you should consider doing so to prevent blurry logos.
 
-== Less Variables
+== LESS Variables
 
 - @navigation-background-color -> @desktop-navigation-background-color
 - @navigation-color -> @desktop-navigation-color
@@ -151,3 +151,30 @@ In case you don't use SVG logos yet, you should consider doing so to prevent blu
 Notes:
 @desktop-navigation-background-color now points to @desktop-header-background-color;
 Instead of customizing the navigation background color it is suggested to now customize the header background color.
+
+== Browser Field
+
+The type of the `data` argument for the callback `execPostMessage` was changed from _String_ to _Object_.
+This allows for the widest variety of data that can be sent from an embedded page to your application:
+
+* String
+* Number
+* Boolean
+* IDataObject (objects or arrays)
+
+In previous Scout versions, all messages were always converted to text.
+Now, the data type is preserved as accurately as possible.
+JSON objects or arrays are converted to IDoEntity or DoList with the help of the IObjectMapper bean.
+To use this feature, an implementation of IDataObjectMapper needs to be present at runtime.
+If no implementation is available, the data will be converted to text automatically.
+
+*Migration:*
+
+Adjust the signature of all implementations of `AbstractBrowserField#postMessage` in your code.
+
+* Change `execPostMessage(String data, String origin)` to `execPostMessage(Object data, String origin)`.
+* If the message sent by the embedded web page is not a text, the appropriate data type is now passed.
+Check the expected type using `instanceof` or convert it to String manually.
+* If you want objects and arrays to be converted to IDataObjects automatically, make sure there is an
+implementation of IObjectMapper present at runtime, e.g. by adding a dependency to the module
+_org.eclipse.scout.rt.jackson_ in pom.xml.

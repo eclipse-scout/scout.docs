@@ -53,12 +53,25 @@ If you just want to play around with them without looking at the source code, yo
 
 == Native Notification Support
 
-It's now possible to send notifications via the Notification API. The DesktopNotification has two new properties to control
-the behavior: nativeOnly and nativeNotificationVisibility.
+It's now possible to send notifications via the https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API[Notification API].
+The `DesktopNotification` has two new properties to control the behavior: *nativeOnly* and *nativeNotificationVisibility*.
+
+// ----------------------------------------------------------------------------
 
 == Text Post-Processors
 
-A new Bean `org.eclipse.scout.rt.platform.nls.ITextPostProcessor` has been introduced which allows to modify all texts returned by a TextProviderService.
+A new bean *org.eclipse.scout.rt.platform.nls.ITextPostProcessor* has been introduced which allows to modify all texts returned by a TextProviderService.
 
 This allows applying application wide logic on all translated texts including the ones provided by Scout itself.
 
+// ----------------------------------------------------------------------------
+
+== Browser Field: Support for Posting Messages
+
+Browser fields provide a new method *postMessage(data, targetOrigin)* to send arbitrary data to the embedded web page.
+
+To prevent malicious data from being sent to your application, the origin of the message should always be validated in the callback handler
+(`execPostMessage` in Java, `message` event listener in Scout JS).
+Scout will now do this check automatically for you if you configure the valid origins in the new property *trustedMessageOrigins*.
+
+// ----------------------------------------------------------------------------
