@@ -190,7 +190,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
         }
 
         @Override
-        protected void execPostMessage(String data, String origin) {
+        protected void execPostMessage(Object data, String origin) {
           LOG.info("Received post-message: data={}, origin={}", data, origin);
         }
       }
