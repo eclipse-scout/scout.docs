@@ -421,7 +421,7 @@ public class PageWithTableTablePage extends AbstractPageWithTable<Table> {
 
       @Override
       protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace, TableMenuType.SingleSelection);
       }
 
       @Override

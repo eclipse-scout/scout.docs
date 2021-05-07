@@ -64,6 +64,17 @@ export default class MenuBarForm extends Form {
       }
     });
 
+    let formMenu = this.widget('FormMenu');
+    formMenu.on('action', this._onMenuAction.bind(this));
+    formMenu.on('propertyChange', this._onMenuPropertyChange.bind(this));
+    formMenu.on('propertyChange:selected', event => {
+      if (event.newValue && !formMenu.form) {
+        formMenu.setForm(scout.create('jswidgets.MiniForm', {
+          parent: formMenu
+        }));
+      }
+    });
+
     let detailBox = this.widget('DetailBox');
     this.widget('Actions.AddGroupBoxMenuBox').setField(detailBox);
     this.widget('Actions.DeleteGroupBoxMenuBox').setField(detailBox);

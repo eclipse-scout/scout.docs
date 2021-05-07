@@ -20,6 +20,7 @@ export {default as EventsTab} from './common/EventsTab';
 export {default as FormFieldLookupCall} from './common/FormFieldLookupCall';
 export {default as IconIdLookupCall} from './common/IconIdLookupCall';
 export {default as WidgetActionsBox} from './common/WidgetActionsBox';
+export {default as MiniForm} from './common/MiniForm';
 export {default as CheckBoxFieldForm} from './checkboxfield/CheckBoxFieldForm';
 export {default as Desktop} from './desktop/Desktop';
 export {default as DesktopForm} from './desktop/DesktopForm';

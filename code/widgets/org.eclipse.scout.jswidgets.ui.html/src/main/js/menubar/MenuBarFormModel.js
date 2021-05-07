@@ -1,4 +1,4 @@
-import {FormField, icons} from '@eclipse-scout/core';
+import {Button, Form, FormField, GroupBox, icons} from '@eclipse-scout/core';
 
 export default () => ({
   id: 'jswidgets.MenuBarForm',
@@ -26,23 +26,23 @@ export default () => ({
         menus: [
           {
             id: 'Menu1',
-            objectType: 'scout.Menu',
+            objectType: 'Menu',
             text: 'First menu'
           },
           {
             id: 'Menu2',
-            objectType: 'scout.Menu',
+            objectType: 'Menu',
             text: 'Second menu',
             iconId: icons.WORLD
           },
           {
             id: 'HierarchicalMenu',
-            objectType: 'scout.Menu',
+            objectType: 'Menu',
             text: 'Hierarchical menu',
             childActions: [
               {
                 id: 'ReplaceMenu',
-                objectType: 'scout.Menu',
+                objectType: 'Menu',
                 text: 'Replace child menus'
               },
               {
@@ -70,8 +70,16 @@ export default () => ({
             ]
           },
           {
+            id: 'FormMenu',
+            objectType: 'FormMenu',
+            text: 'Form menu',
+            form: {
+              objectType: 'jswidgets.MiniForm'
+            }
+          },
+          {
             id: 'FormFieldMenu',
-            objectType: 'scout.FormFieldMenu',
+            objectType: 'FormFieldMenu',
             horizontalAlignment: 1,
             field: {
               id: 'SmartField',
