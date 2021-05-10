@@ -12,20 +12,20 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.AbstractHtmlField;
+import org.eclipse.scout.rt.client.ui.form.fields.htmlfield.IHtmlField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
@@ -38,17 +38,18 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.IOUtility;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
 import org.eclipse.scout.widgets.client.ResourceBase;
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox;
-import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.EnabledCheckBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox;
+import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.BasicHtmlButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.BlankButton;
-import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.ConfigurationGroupBox.SetContentButtonsBox.ScoutHtmlButton;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.HtmlFieldForm.MainBox.GroupBox.HtmlField;
+import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.shared.Icons;
 
 @Order(6000.0)
@@ -67,8 +68,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   @Override
   protected void execInitForm() {
-    // Load "Scout HTML" page by default
-    getScoutHtmlButton().doClick();
+    // Load default content
+    getBasicHtmlButton().doClick();
   }
 
   @Override
@@ -97,8 +98,8 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(MainBox.class);
   }
 
-  public ScoutHtmlButton getScoutHtmlButton() {
-    return getFieldByClass(ScoutHtmlButton.class);
+  public BasicHtmlButton getBasicHtmlButton() {
+    return getFieldByClass(BasicHtmlButton.class);
   }
 
   public ConfigurationGroupBox getConfigurationGroupBox() {
@@ -109,37 +110,22 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(GroupBox.class);
   }
 
-  public EnabledCheckBox getEnabledCheckBox() {
-    return getFieldByClass(EnabledCheckBox.class);
-  }
-
   protected void loadFile(String simpleName) {
     loadFile(simpleName, null);
   }
 
   protected void loadFile(String simpleName, List<BinaryResource> attachments) {
-    try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
-      String s = IOUtility.readString(in, null);
-      getHtmlField().setValue(null);
-      getHtmlField().setScrollToAnchor(null);
-      getHtmlField().setAttachments(attachments);
-      getHtmlField().setValue(s);
+    String html = null;
+    if (simpleName != null) {
+      try (InputStream in = ResourceBase.class.getResource("html/" + simpleName).openStream()) {
+        html = IOUtility.readString(in, null);
+      }
+      catch (IOException e) {
+        throw new ProcessingException("Error while loading file {}", simpleName, e);
+      }
     }
-    catch (IOException e) {
-      throw new ProcessingException("Html-Field can't load file ", e);
-    }
-  }
-
-  protected BinaryResource loadResource(String resourceName, String targetName) {
-    URL url = ResourceBase.class.getResource(resourceName);
-    byte[] content;
-    try (InputStream in = url.openStream()) {
-      content = IOUtility.readBytes(in);
-      return new BinaryResource(targetName, content);
-    }
-    catch (IOException e) {
-      throw new ProcessingException("Error while loading resource: " + resourceName, e);
-    }
+    getHtmlField().setValue(html);
+    getHtmlField().setAttachments(attachments);
   }
 
   @Order(10)
@@ -181,7 +167,9 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Override
         protected void execAppLinkAction(String ref) {
-          MessageBoxes.createOk().withHeader(TEXTS.get("LocalUrlClicked")).withBody(TEXTS.get("Parameters") + ":\n" + ref).show();
+          MessageBoxes.createOk()
+              .withHeader("AppLink clicked")
+              .withBody("Ref:\n" + ref).show();
         }
       }
     }
@@ -191,42 +179,49 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
     public class ConfigurationGroupBox extends AbstractGroupBox {
 
       @Override
-      protected int getConfiguredGridColumnCount() {
-        return 3;
-      }
-
-      @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Configure");
       }
 
+      @Override
+      protected boolean getConfiguredExpandable() {
+        return true;
+      }
+
+      @Override
+      protected TriState getConfiguredResponsive() {
+        return TriState.FALSE;
+      }
+
       @Order(10)
-      @ClassId("87d3947a-057c-4402-9a2b-51259243a140")
-      public class EnabledCheckBox extends AbstractBooleanField {
+      @ClassId("79efda24-776b-477c-9eec-5dd53704a566")
+      public class ScrollBarEnabledField extends AbstractBooleanField {
+
         @Override
         protected String getConfiguredLabel() {
-          return "Enabled";
+          return "Scroll Bar Enabled";
         }
 
         @Override
         protected boolean getConfiguredLabelVisible() {
-          return true;
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(true);
+          return false;
         }
 
         @Override
         protected void execChangedValue() {
-          getHtmlField().setEnabled(getValue(), true, true);
+          getHtmlField().setScrollBarEnabled(isChecked());
+        }
+
+        @Override
+        protected void execInitField() {
+          setChecked(getHtmlField().isScrollBarEnabled());
         }
       }
 
       @Order(20)
       @ClassId("d73fb3b0-1348-420d-8758-4656c876f587")
       public class ScrollToAnchorField extends AbstractStringField {
+
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("JumpToAnchor");
@@ -236,29 +231,11 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         protected void execChangedValue() {
           getHtmlField().setScrollToAnchor(getValue());
         }
-      }
-
-      @Order(30)
-      @ClassId("f77dc9ae-1e95-4a14-960a-70d74bb62b75")
-      public class ScrollToEndButton extends AbstractButton {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ScrollToEnd");
-        }
 
         @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
-        }
-
-        @Override
-        protected int getConfiguredDisplayStyle() {
-          return DISPLAY_STYLE_LINK;
-        }
-
-        @Override
-        protected void execClickAction() {
-          getHtmlField().scrollToEnd();
+        protected void execInitField() {
+          setValue(getHtmlField().getScrollToAnchor());
+          getHtmlField().addPropertyChangeListener(IHtmlField.PROP_SCROLL_TO_ANCHOR, event -> setValue(getHtmlField().getScrollToAnchor()));
         }
       }
 
@@ -269,6 +246,11 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected String getConfiguredLabel() {
           return "Set content to";
+        }
+
+        @Override
+        protected byte getConfiguredLabelPosition() {
+          return LABEL_POSITION_TOP;
         }
 
         @Override
@@ -294,16 +276,16 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
         @Order(20)
         @ClassId("9e496e3b-0ef5-4df2-919c-28d4566c89e6")
-        public class CustomHTMLButton extends AbstractLinkButton {
+        public class BasicHtmlButton extends AbstractLinkButton {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("CustomHtml");
+            return "Basic HTML";
           }
 
           @Override
           protected void execClickAction() {
-            BinaryResource file = loadResource("icons/eclipse_scout_logo.png", "eclipse_scout_logo.png");
+            BinaryResource file = IOUtility.readBinaryResource(ResourceBase.class.getResource("icons/eclipse_scout_logo.png"));
             loadFile("HtmlFieldCustomHtml.html", Collections.singletonList(file));
           }
         }
@@ -314,15 +296,15 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("ScoutHtml");
+            return "Scout HTML";
           }
 
           @Override
           protected void execClickAction() {
             List<BinaryResource> files = new ArrayList<>();
-            files.add(loadResource("images/download.png", "download.png"));
-            files.add(loadResource("images/s.png", "s.png"));
-            files.add(loadResource("images/bird_1008.jpg", "bird.jpg"));
+            files.add(IOUtility.readBinaryResource(ResourceBase.class.getResource("images/download.png")));
+            files.add(IOUtility.readBinaryResource(ResourceBase.class.getResource("images/s.png")));
+            files.add(IOUtility.readBinaryResource(ResourceBase.class.getResource("images/bird_1008.jpg"), "bird.jpg"));
             loadFile("ScoutHtml.html", files);
           }
         }
@@ -333,7 +315,7 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("ALotOfContentHtmlWithAnchor");
+            return "A lot of content (with anchor)";
           }
 
           @Override
@@ -348,12 +330,11 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
           @Override
           protected String getConfiguredLabel() {
-            return "Programmatic value (with icon)";
+            return "Dynamic content";
           }
 
           @Override
           protected void execClickAction() {
-            getHtmlField().setAttachments(null);
             String randomColor = "#"
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
                 + StringUtility.lpad(Integer.toHexString(NumberUtility.randomInt(256)), "0", 2)
@@ -366,14 +347,40 @@ public class HtmlFieldForm extends AbstractForm implements IAdvancedExampleForm 
                     HTML.bold(DateUtility.formatTime(new Date())))
                     .style("vertical-align: middle;"))
                 .toHtml());
+            getHtmlField().setAttachments(null);
           }
         }
+      }
+    }
+
+    @Order(30)
+    @ClassId("df29263e-0aaf-479f-8cce-e3050e676308")
+    public class FormFieldPropertiesBox extends AbstractFormFieldPropertiesBox {
+
+      @Override
+      protected void execInitField() {
+        setField(getHtmlField());
       }
     }
 
     @Order(50)
     @ClassId("6c485f0d-7346-41e4-9331-164f76c0e73a")
     public class CloseButton extends AbstractCloseButton {
+    }
+
+    @Order(70)
+    @ClassId("f6dcd706-fd9e-49d3-8785-d72c67a31d9e")
+    public class ScrollToEndMenu extends AbstractMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("ScrollToEnd");
+      }
+
+      @Override
+      protected void execAction() {
+        getHtmlField().scrollToEnd();
+      }
     }
   }
 

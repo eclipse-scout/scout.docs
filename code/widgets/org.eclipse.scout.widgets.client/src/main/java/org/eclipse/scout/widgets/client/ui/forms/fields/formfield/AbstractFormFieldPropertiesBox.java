@@ -24,6 +24,7 @@ import org.eclipse.scout.rt.platform.status.IMultiStatus;
 import org.eclipse.scout.rt.platform.status.MultiStatus;
 import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
@@ -38,6 +39,11 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
   @Override
   protected String getConfiguredLabel() {
     return "Form Field Properties";
+  }
+
+  @Override
+  protected TriState getConfiguredResponsive() {
+    return TriState.FALSE;
   }
 
   @Order(1000)
