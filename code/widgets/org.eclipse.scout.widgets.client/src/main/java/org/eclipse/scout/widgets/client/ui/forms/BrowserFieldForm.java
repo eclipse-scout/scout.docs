@@ -974,7 +974,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
               try {
                 BEANS.get(IDataObjectMapper.class).readValueRaw(s);
               }
-              catch (Exception e) { // NO_SONAR
+              catch (Exception e) { // NOSONAR
                 return false;
               }
               return true;
