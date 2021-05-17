@@ -1,4 +1,4 @@
-import {Button, Form, FormField, GroupBox, icons} from '@eclipse-scout/core';
+import {Button, Form, FormField, GroupBox, icons, Menu} from '@eclipse-scout/core';
 
 export default () => ({
   id: 'jswidgets.MenuBarForm',
@@ -63,7 +63,22 @@ export default () => ({
                   {
                     id: 'SubSubMenu2',
                     objectType: 'Menu',
-                    text: 'Sub Sub Menu 2'
+                    text: 'Sub Sub Menu 2',
+                    childActions: [{
+                      id: 'SubSubSubMenu1',
+                      objectType: 'Menu',
+                      iconId: icons.WORLD,
+                      text: 'Menu with Icon'
+                    }, {
+                      id: 'SubSubSubMenuMenu2',
+                      objectType: 'Menu',
+                      text: 'More',
+                      childActions: [{
+                        id: 'SubSubSubSubMenu1',
+                        objectType: 'Menu',
+                        text: 'Deep Menu'
+                      }]
+                    }]
                   }
                 ]
               }
@@ -76,6 +91,26 @@ export default () => ({
             form: {
               objectType: 'jswidgets.MiniForm'
             }
+          },
+          {
+            id: 'ComboMenu',
+            objectType: 'ComboMenu',
+            childActions: [{
+              id: 'ComboMenuChild1',
+              objectType: 'Menu',
+              text: 'Combo menu'
+            }, {
+              id: 'ComboMenuChild2',
+              objectType: 'Menu',
+              subMenuVisibility: Menu.SubMenuVisibility.ALWAYS,
+              childActions: [{
+                objectType: 'Menu',
+                text: 'Child menu 1'
+              }, {
+                objectType: 'Menu',
+                text: 'Child menu 2'
+              }]
+            }]
           },
           {
             id: 'FormFieldMenu',

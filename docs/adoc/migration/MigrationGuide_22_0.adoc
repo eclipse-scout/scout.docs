@@ -144,6 +144,8 @@ In case you don't use SVG logos yet, you should consider doing so to prevent blu
 
 == LESS Variables
 
+- @active-inverted-background-color -> @selected-background-color
+- @active-inverted-color -> @selected-color
 - @navigation-background-color -> @desktop-navigation-background-color
 - @navigation-color -> @desktop-navigation-color
 - @outline-title-margin-left/right -> @outline-title-padding-left/right

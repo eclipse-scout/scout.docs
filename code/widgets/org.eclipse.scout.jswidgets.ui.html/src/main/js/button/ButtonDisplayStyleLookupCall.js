@@ -23,6 +23,7 @@ export default class ButtonDisplayStyleLookupCall extends StaticLookupCall {
   static DATA = [
     [Button.DisplayStyle.DEFAULT, 'default'],
     [Button.DisplayStyle.TOGGLE, 'toggle'],
-    [Button.DisplayStyle.LINK, 'link']
+    [Button.DisplayStyle.LINK, 'link'],
+    [Button.DisplayStyle.BORDERLESS, 'borderless']
   ];
 }
