@@ -178,3 +178,27 @@ Check the expected type using `instanceof` or convert it to String manually.
 * If you want objects and arrays to be converted to IDataObjects automatically, make sure there is an
 implementation of IObjectMapper present at runtime, e.g. by adding a dependency to the module
 _org.eclipse.scout.rt.jackson_ in pom.xml.
+
+== Lazy creation of detailTable and detailForm in Scout JS Pages
+
+In the past when a page was created the embedded detail forms and tables have been created together with the page.
+This may lead to a bad performance when an outline containing lots of complex pages is created.
+
+Therefore the containing tables and forms are now only created when the page is activated (e.g. selected by the user).
+This is the same behavior as already implemented in Scout Classic since several years.
+As a consequence accessing `Page.detailForm` or `Page.detailTable` may now return `null` if the page has not been activated yet.
+
+Check all usages of the `detailForm` and `detailTable` properties of pages in your code and ensure it is guarded with a null check or is only executed when the page has already been activated.
+
+Typically these properties are accessed in the `_init()` function of a page e.g. to attach listeners.
+This is no longer possible as these properties are no longer available at that moment.
+
+As an alternative override the `_initDetailForm(form)` or `_initDetailTable(table)` methods if your code exists on a Page (don't forget to add a super call).
+If outside a Page listen for the `propertyChange` events for `detailForm` or `detailTable` to execute your detailForm or detailTable dependant code.
+
+Furthermore if you use the following methods on pages, please rename them as follows:
+
+* from `createDetailForm` to `_createDetailForm`
+* from `_createTable` to `_createDetailTable`
+* from `_initTable` to `_initDetailTable`
+* from `_ensureDetailForm` to `ensureDetailForm`
