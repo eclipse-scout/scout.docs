@@ -23,13 +23,16 @@ ifndef::mdledir[:mdledir: ../../../../adoc]
 
 This technical guide documents the Scout JS architecture and describes important concepts.
 
+WARNING: This document is referring to a past Scout release. Please click https://eclipsescout.github.io/stable/technical-guide-js.html[here] for the recent version. +
+Looking for something else? Visit https://eclipsescout.github.io for all Scout related documentation.
+
 NOTE: This is the guide to Scout JS, the JavaScript part of Eclipse Scout. If you are looking for the Java part please see the technical guide for Scout Classic: https://eclipsescout.github.io/8.0/technical-guide.html
 
 WARNING: This document is not complete. Contributions are welcome! +
 If you like to help, please create a pull request. Thanks! +
  +
 Repository: +
-https://github.com/BSI-Business-Systems-Integration-AG/org.eclipse.scout.docs
+https://github.com/bsi-software/org.eclipse.scout.docs
 
 :sectnums:
 include::{mdledir}/technicalGuideJS/ScoutJS.adoc[]
