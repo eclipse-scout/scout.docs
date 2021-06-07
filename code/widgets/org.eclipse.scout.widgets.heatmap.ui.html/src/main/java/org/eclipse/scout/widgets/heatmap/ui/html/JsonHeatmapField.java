@@ -45,7 +45,7 @@ public class JsonHeatmapField extends JsonFormField<IHeatmapField> {
 
   @Override
   public String getObjectType() {
-    return "HeatmapField";
+    return "widgets.HeatmapField";
   }
 
   @Override

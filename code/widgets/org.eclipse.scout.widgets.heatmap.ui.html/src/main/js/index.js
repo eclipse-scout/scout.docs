@@ -6,4 +6,4 @@ export {default as simpleheat} from './heatmap/leaflet-heat';
 import * as self from './index.js';
 
 export default self;
-window.scout = Object.assign(window.scout || {}, self);
+window.widgets = Object.assign(window.widgets || {}, self);
