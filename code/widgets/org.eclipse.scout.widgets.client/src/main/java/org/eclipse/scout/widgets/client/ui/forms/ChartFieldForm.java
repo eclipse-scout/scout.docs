@@ -685,6 +685,9 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
       chartData = new Object[2][8];
       chartData[0] = new Object[]{null, "Set A", "Set B", "Set C", "A-B", "A-C", "B-C", "A-B-C"};
     }
+    else {
+      throw new IllegalStateException();
+    }
     chartData[1][0] = "Dataset 1";
     for (int i = 1; i < chartData[1].length; i++) {
       chartData[1][i] = BigDecimal.valueOf(Math.max(NumberUtility.randomInt(130) - 30, 0));
