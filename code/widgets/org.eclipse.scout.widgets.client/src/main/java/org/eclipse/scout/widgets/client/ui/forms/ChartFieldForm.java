@@ -1027,6 +1027,11 @@ public class ChartFieldForm extends AbstractForm implements IAdvancedExampleForm
             @ClassId("c2cce503-463f-4d07-a6b7-8d581c99ea41")
             public class TileGrid extends AbstractTileGrid<ChartTile> {
 
+              @Override
+              protected boolean getConfiguredScrollable() {
+                return false;
+              }
+
               @Order(10)
               @ClassId("15f61f3c-801d-4871-89eb-9d69304bc4ab")
               public class ChartTile extends AbstractChartTile {
