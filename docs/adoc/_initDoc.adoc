@@ -16,8 +16,8 @@ ifndef::mdledir[:mdledir: .]
 :node-version: 22.0.0-snapshot
 :scout-previous-version: 11.0
 :scout-version: 22.0
-:simrel-name: 2021-03
-:simrel-date: March, 2021
+:simrel-name: 2021-06
+:simrel-date: June, 2021
 
 // Links
 :docroot: https://eclipsescout.github.io/{doc-short-version}/
