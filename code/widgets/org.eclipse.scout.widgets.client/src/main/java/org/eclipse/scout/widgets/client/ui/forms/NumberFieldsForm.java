@@ -23,9 +23,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.numberfield.AbstractNumberField;
+import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -34,6 +34,7 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.NumberFormatProvider;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
+import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
 import org.eclipse.scout.widgets.client.services.lookup.NumberFormatLocaleLookupCall;
@@ -48,21 +49,18 @@ import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.Config
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.InputField;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.ConfigurationTopBox.LongInputField;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntDisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntMandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntStyledField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.DisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerColumnField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongColumnField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongDisabledField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongMandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongStyledField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.MandatoryField;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.StyledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerFieldGroup.BigIntDisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerFieldGroup.BigIntMandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerFieldGroup.BigIntStyledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerFieldGroup.BigIntegerField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerFieldGroup.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerFieldGroup.IntegerField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerFieldGroup.MandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.IntegerFieldGroup.StyledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongFieldGroup.LongDisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongFieldGroup.LongField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongFieldGroup.LongMandatoryField;
+import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.LongFieldGroup.LongStyledField;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.HighestValueButton;
 import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.SmallestValueButton;
 
@@ -104,16 +102,8 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(InputField.class);
   }
 
-  public IntegerColumnField getIntegerColumnField() {
-    return getFieldByClass(IntegerColumnField.class);
-  }
-
   public IntegerField getIntegerField() {
     return getFieldByClass(IntegerField.class);
-  }
-
-  public LongColumnField getLongColumnField() {
-    return getFieldByClass(LongColumnField.class);
   }
 
   public LongDisabledField getLongDisabledField() {
@@ -150,10 +140,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   public BigIntStyledField getBigIntStyledField() {
     return getFieldByClass(BigIntStyledField.class);
-  }
-
-  public BigIntegerColumnField getBigIntegerColumnField() {
-    return getFieldByClass(BigIntegerColumnField.class);
   }
 
   public BigIntegerField getBigIntegerField() {
@@ -228,209 +214,215 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Override
-      protected boolean getConfiguredMandatory() {
-        return true;
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
+      @Override
+      protected boolean getConfiguredBorderVisible() {
+        return false;
       }
 
       @Order(10)
-      @ClassId("0393d2ae-16d3-4f61-b5c8-7c1683473ea1")
-      public class IntegerColumnField extends AbstractLabelField {
+      @ClassId("91b20c28-1ae0-407e-b6c1-5075a8f7884d")
+      public class IntegerFieldGroup extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+          return "IntegerField Examples";
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("IntegerField"));
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Order(20)
+        @ClassId("c0813ee5-cf3b-432b-acf7-3eec78ed4642")
+        public class IntegerField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+        }
+
+        @Order(30)
+        @ClassId("ae60902a-205b-4cf4-a2e0-08d6a5033b39")
+        public class MandatoryField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(40)
+        @ClassId("85393264-5a79-4a51-baba-8bef5da58279")
+        public class DisabledField extends AbstractIntegerField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(5);
+          }
+        }
+
+        @Order(50)
+        @ClassId("494e6c5f-48eb-4f38-bbda-f686770e9929")
+        public class StyledField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Styled");
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (NumberUtility.nvl(getValue(), 0) < 0) {
+              setForegroundColor("FF0000");
+            }
+            else {
+              setForegroundColor("0000FF");
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(-3);
+            interceptChangedValue();
+          }
         }
       }
 
       @Order(20)
-      @ClassId("c0813ee5-cf3b-432b-acf7-3eec78ed4642")
-      public class IntegerField extends AbstractIntegerField {
+      @ClassId("ed5c012d-3750-4c4d-9fd8-8a32942570b9")
+      public class LongFieldGroup extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
+          return "LongField Examples";
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 1;
+        }
+
+        @Override
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Order(70)
+        @ClassId("e5507744-0f7d-4b68-83e6-51f369b245a4")
+        public class LongField extends AbstractLongField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+        }
+
+        @Order(80)
+        @ClassId("7612fb79-7f8b-4e6f-a321-6225a58cc56e")
+        public class LongMandatoryField extends AbstractLongField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Mandatory");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
+        }
+
+        @Order(90)
+        @ClassId("732e33d7-4a41-4b42-87ed-95bc43312eb2")
+        public class LongDisabledField extends AbstractLongField {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(5L);
+          }
+        }
+
+        @Order(100)
+        @ClassId("abaf2545-36e9-4361-97df-6929ba6fe8b8")
+        public class LongStyledField extends AbstractLongField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Styled");
+          }
+
+          @Override
+          protected void execChangedValue() {
+            if (getValue() < 0) {
+              setForegroundColor("FF0000");
+            }
+            else {
+              setForegroundColor("0000FF");
+            }
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(-3L);
+            interceptChangedValue();
+          }
         }
       }
 
       @Order(30)
-      @ClassId("ae60902a-205b-4cf4-a2e0-08d6a5033b39")
-      public class MandatoryField extends AbstractIntegerField {
+      @ClassId("318854e7-9764-412f-a075-68f59f29886d")
+      public class BigIntegerFieldGroup extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
+          return "BigIntegerField Examples";
         }
 
         @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(40)
-      @ClassId("85393264-5a79-4a51-baba-8bef5da58279")
-      public class DisabledField extends AbstractIntegerField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
-
-        @Override
-        protected void execInitField() {
-          setValue(5);
-        }
-      }
-
-      @Order(50)
-      @ClassId("494e6c5f-48eb-4f38-bbda-f686770e9929")
-      public class StyledField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Styled");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (NumberUtility.nvl(getValue(), 0) < 0) {
-            setForegroundColor("FF0000");
-          }
-          else {
-            setForegroundColor("0000FF");
-          }
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(-3);
-          interceptChangedValue();
-        }
-      }
-
-      @Order(60)
-      @ClassId("7ac321b7-2638-405f-a076-a243913b5dd3")
-      public class LongColumnField extends AbstractLabelField {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("LongField"));
-        }
-      }
-
-      @Order(70)
-      @ClassId("e5507744-0f7d-4b68-83e6-51f369b245a4")
-      public class LongField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-      }
-
-      @Order(80)
-      @ClassId("7612fb79-7f8b-4e6f-a321-6225a58cc56e")
-      public class LongMandatoryField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Mandatory");
-        }
-
-        @Override
-        protected boolean getConfiguredMandatory() {
-          return true;
-        }
-      }
-
-      @Order(90)
-      @ClassId("732e33d7-4a41-4b42-87ed-95bc43312eb2")
-      public class LongDisabledField extends AbstractLongField {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(5L);
-        }
-      }
-
-      @Order(100)
-      @ClassId("abaf2545-36e9-4361-97df-6929ba6fe8b8")
-      public class LongStyledField extends AbstractLongField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Styled");
-        }
-
-        @Override
-        protected void execChangedValue() {
-          if (getValue() < 0) {
-            setForegroundColor("FF0000");
-          }
-          else {
-            setForegroundColor("0000FF");
-          }
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(-3L);
-          interceptChangedValue();
-        }
-      }
-
-      @Order(110)
-      @ClassId("500eb659-5a53-4c91-ae66-9e00a98b4483")
-      public class BigIntegerColumnField extends AbstractLabelField {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
-
-        @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("BigIntegerField"));
-        }
-      }
 
       @Order(120)
       @ClassId("bb607192-82db-4507-a7a2-d7750f2a29c3")
@@ -438,7 +430,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("BigIntegerField");
+            return TEXTS.get("Default");
         }
       }
 
@@ -503,6 +495,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
     }
+    }
 
     @Order(20)
     @ClassId("10f8c187-bc09-468b-a8b2-33b14cc0661d")
@@ -533,7 +526,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("IntegerFieldInput");
+            return "IntegerField";
           }
         }
 
@@ -593,7 +586,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("LongFieldInput");
+            return "LongField";
           }
         }
 
@@ -653,7 +646,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("BigIntegerFieldInput");
+            return "BigIntegerField";
           }
         }
 
@@ -678,12 +671,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execChangedMasterValue(Object newMasterValue) {
-            if (newMasterValue != null) {
-              setValue(((BigInteger) newMasterValue).toString());
-            }
-            else {
-              setValue(null);
-            }
+            setValue(ObjectUtility.toString(newMasterValue));
           }
         }
 
@@ -712,18 +700,18 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       @ClassId("e56e7c29-d76e-4d39-b19f-51ec9304b5f6")
       public class ConfigurationBottomBox extends AbstractGroupBox {
 
-        @Order(30)
+        @Override
+        protected String getConfiguredLabel() {
+          return "Form Field Properties";
+        }
+
+        @Order(10)
         @ClassId("47cd8d89-5999-4c24-a70c-6d02f67ebbb2")
         public class MinimumValueField extends AbstractLongField {
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("MinimumValue");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -745,18 +733,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40)
+        @Order(20)
         @ClassId("52c31a3d-62f8-4d6a-bacf-b34bf5e847e1")
         public class MaximumValueField extends AbstractLongField {
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("MaximumValue");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -778,23 +761,18 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
+        @Order(25.0)
+        @ClassId("c6cd66b6-17dd-44af-bca5-6c3eae24a5e1")
+        public class SpacerField extends AbstractPlaceholderField {
+        }
+
         @Order(50)
         @ClassId("7258d863-4e60-4a08-86f7-97b5b326b995")
         public class GroupingField extends AbstractBooleanField {
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Grouping");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -810,23 +788,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(55)
+        @Order(50)
         @ClassId("b61d0e06-81d6-42a3-bce8-6141e9a1baf4")
         public class UpdateDisplayTextOnModify extends AbstractBooleanField {
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("UpdateDisplayTextOnModify");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -837,18 +805,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(60)
+        @Order(40)
         @ClassId("47726ec8-fd6f-412d-b11c-3fdc747c5ceb")
         public class FormatField extends AbstractStringField {
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Format");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -865,18 +828,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(65)
+        @Order(45)
         @ClassId("62de20eb-08c9-4f6b-b0fd-66e787a4d9c8")
         public class ConfigLocaleField extends AbstractSmartField<Locale> {
 
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Locale");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -888,7 +846,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
-            return (Class<? extends ILookupCall<Locale>>) NumberFormatLocaleLookupCall.class;
+            return NumberFormatLocaleLookupCall.class;
           }
 
           @Override
@@ -908,7 +866,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
             setValue(ClientSession.get().getLocale());
           }
         }
-
       }
     }
 

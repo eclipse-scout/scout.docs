@@ -29,7 +29,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -57,8 +56,8 @@ import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.Configurati
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.TreeBoxField;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.TreeEntriesField;
 import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.ExampleCodeTypeBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.ExampleCodeTypeBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widgets.shared.services.code.IndustryICBCodeType.ICB8000;
@@ -154,166 +153,176 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
         return TEXTS.get("Examples");
       }
 
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
+      @Override
+      protected boolean getConfiguredBorderVisible() {
+        return false;
+      }
+
       @Order(10)
-      @ClassId("11234a8f-51c0-4f9e-a507-305edfc933b1")
-      public class TreeBoxWithCodeTypeContentField extends AbstractLabelField {
+      @ClassId("6b984ad9-1146-4910-b717-bbf670ed019b")
+      public class ExampleCodeTypeBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+          return "Example with CodeType";
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("TreeBoxWithCodeTypeContent"));
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Order(20)
+        @ClassId("5068db32-45cd-47d3-8d47-7d6e850e9920")
+        public class DefaultField extends AbstractTreeBox<Long> {
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 5;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          protected boolean getConfiguredFilterActiveNodes() {
+            return true;
+          }
+        }
+
+        @Order(30)
+        @ClassId("c02152dc-97b6-42cd-98bf-4dae281e3b1a")
+        public class DisabledField extends AbstractTreeBox<Long> {
+
+          @Override
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
+          }
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 3;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected void execInitField() {
+            Set<Long> codes = new HashSet<>();
+            codes.add(ICB8000.ID);
+            codes.add(ICB8500.ID);
+            codes.add(ICB9537.ID);
+            setValue(codes);
+            setFilterCheckedNodesValue(true);
+          }
         }
       }
 
       @Order(20)
-      @ClassId("5068db32-45cd-47d3-8d47-7d6e850e9920")
-      public class DefaultField extends AbstractTreeBox<Long> {
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return IndustryICBCodeType.class;
-        }
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 5;
-        }
+      @ClassId("cf66703f-5cd3-44e8-8c73-273e4b7ac94a")
+      public class ExampleLookupCallBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
+          return "Example with LookupCall";
         }
 
         @Override
-        protected boolean getConfiguredFilterActiveNodes() {
-          return true;
-        }
-      }
-
-      @Order(30)
-      @ClassId("c02152dc-97b6-42cd-98bf-4dae281e3b1a")
-      public class DisabledField extends AbstractTreeBox<Long> {
-
-        @Override
-        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-          return IndustryICBCodeType.class;
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
-        @Override
-        protected int getConfiguredGridH() {
-          return 3;
+        @Order(50)
+        @ClassId("8f6323ec-442c-4fce-b734-bafdbd8d6170")
+        public class DefaultTreeBoxField extends AbstractTreeBox<String> {
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 5;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+            return YearsMonthsLookupCall.class;
+          }
         }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
+        @Order(60)
+        @ClassId("d80268fa-6720-4838-92b5-26951aa950fe")
+        public class DisabledTreeBoxField extends AbstractTreeBox<String> {
 
-        @Override
-        protected void execInitField() {
-          Set<Long> codes = new HashSet<>();
-          codes.add(ICB8000.ID);
-          codes.add(ICB8500.ID);
-          codes.add(ICB9537.ID);
-          setValue(codes);
-          setFilterCheckedNodesValue(true);
-        }
-      }
+          @Override
+          protected boolean getConfiguredAutoExpandAll() {
+            return true;
+          }
 
-      @Order(40)
-      @ClassId("47c10064-f252-4f0e-8426-d8123d63ab85")
-      public class TreeBoxWithLookupCallContentField extends AbstractLabelField {
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
+          @Override
+          protected int getConfiguredGridH() {
+            return 3;
+          }
 
-        @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
-        }
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
 
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("TreeBoxWithLookupCallContent"));
-        }
-      }
+          @Override
+          protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+            return YearsMonthsLookupCall.class;
+          }
 
-      @Order(50)
-      @ClassId("8f6323ec-442c-4fce-b734-bafdbd8d6170")
-      public class DefaultTreeBoxField extends AbstractTreeBox<String> {
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 5;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return YearsMonthsLookupCall.class;
-        }
-      }
-
-      @Order(60)
-      @ClassId("d80268fa-6720-4838-92b5-26951aa950fe")
-      public class DisabledTreeBoxField extends AbstractTreeBox<String> {
-
-        @Override
-        protected boolean getConfiguredAutoExpandAll() {
-          return true;
-        }
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 3;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return YearsMonthsLookupCall.class;
-        }
-
-        @Override
-        protected void execInitField() {
-          int year = Calendar.getInstance().get(Calendar.YEAR);
-          int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-          int key = 100 * year + month;
-          Set<String> times = new HashSet<>();
-          times.add(String.valueOf(key));
-          times.add(String.valueOf(key + 1));
-          times.add(String.valueOf(key + 2));
-          setValue(times);
-          setFilterCheckedNodesValue(true);
+          @Override
+          protected void execInitField() {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+            int key = 100 * year + month;
+            Set<String> times = new HashSet<>();
+            times.add(String.valueOf(key));
+            times.add(String.valueOf(key + 1));
+            times.add(String.valueOf(key + 2));
+            setValue(times);
+            setFilterCheckedNodesValue(true);
+          }
         }
       }
     }
@@ -529,11 +538,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       public class FilterCheckedRowsValueField extends AbstractBooleanField {
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("FilterCheckedRowsValue");
         }
@@ -547,11 +551,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(60)
       @ClassId("eb962203-089c-4ac6-9f06-8d076bdb2889")
       public class AutoCheckChildNodesField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -569,13 +568,8 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       public class IsEnabledField extends AbstractBooleanField {
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IsEnabled");
+          return "Enabled";
         }
 
         @Override
@@ -592,11 +586,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(80)
       @ClassId("d323abd4-260d-46c6-8f27-697e0caeb40b")
       public class CheckableField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -617,11 +606,6 @@ public class TreeBoxForm extends AbstractForm implements IAdvancedExampleForm {
       @Order(80)
       @ClassId("a126dcfe-fd25-42d8-810b-796403c96696")
       public class MulticheckField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
 
         @Override
         protected String getConfiguredLabel() {
