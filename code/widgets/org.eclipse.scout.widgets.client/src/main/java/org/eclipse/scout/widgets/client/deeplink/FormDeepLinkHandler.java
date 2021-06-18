@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.widgets.client.deeplink;
 
 import java.util.regex.Matcher;
@@ -67,7 +77,7 @@ public class FormDeepLinkHandler extends AbstractDeepLinkHandler {
       }
     }
     catch (ReflectiveOperationException e) {
-      throw new DeepLinkException("could not create form: " + formName);
+      throw new DeepLinkException("could not create form: " + formName, e);
     }
   }
 }

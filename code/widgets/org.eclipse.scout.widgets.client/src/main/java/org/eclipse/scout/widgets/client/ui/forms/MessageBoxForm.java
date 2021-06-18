@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -466,10 +466,12 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
           String optionName = "" + result;
           try {
             Field[] f = IMessageBox.class.getDeclaredFields();
-            for (Field aF : f) {
-              if (Modifier.isPublic(aF.getModifiers()) && Modifier.isStatic(aF.getModifiers()) && aF.getName().endsWith("_OPTION")) {
-                if (((Number) aF.get(null)).intValue() == result) {
-                  optionName = IMessageBox.class.getSimpleName() + "." + aF.getName();
+            for (Field field : f) {
+              boolean isOptionConstant = Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && field.getName().endsWith("_OPTION");
+              if (isOptionConstant) {
+                int fieldValue = ((Number) field.get(null)).intValue();
+                if (fieldValue == result) {
+                  optionName = IMessageBox.class.getSimpleName() + "." + field.getName();
                   break;
                 }
               }
@@ -573,7 +575,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
+          return AnswerOptionsLookupCall.class;
         }
       }
 
@@ -758,7 +760,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
+          return IconIdLookupCall.class;
         }
       }
 
@@ -778,7 +780,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
+          return AnswerOptionsLookupCall.class;
         }
       }
 

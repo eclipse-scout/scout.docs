@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -20,9 +20,9 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.IPageForm;
-import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widgets.client.ui.forms.StringFieldForm;
+import org.eclipse.scout.widgets.client.ui.forms.imagefield.ImageFieldForm;
 
 @ClassId("00c7a305-7da9-40cb-8e78-12b328a54b65")
 public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
@@ -45,7 +45,7 @@ public class StaticFormLookupCall extends LocalLookupCall<IPageForm> {
       return form;
     }
     catch (ReflectiveOperationException e) {
-      throw new ProcessingException("Error while creating instance of " + (formType == null ? "null" : formType.getName()));
+      throw new ProcessingException("Error while creating instance of " + (formType == null ? "null" : formType.getName()), e);
     }
   }
 

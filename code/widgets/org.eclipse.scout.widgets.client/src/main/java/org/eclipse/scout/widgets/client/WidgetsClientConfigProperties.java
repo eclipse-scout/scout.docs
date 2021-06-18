@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -14,6 +14,9 @@ import org.eclipse.scout.rt.platform.config.AbstractBooleanConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
 public final class WidgetsClientConfigProperties {
+
+  private WidgetsClientConfigProperties() {
+  }
 
   public static class GitUrlConfigProperty extends AbstractStringConfigProperty {
 
@@ -115,7 +118,7 @@ public final class WidgetsClientConfigProperties {
     @Override
     public String description() {
       return "Flag to make UI elements required only for Selenium tests, visible in the forms of the widget application. " +
-        "They should not be visible in a productive deployment. The value default is false (=invisible).";
+          "They should not be visible in a productive deployment. The value default is false (=invisible).";
     }
 
     @Override
