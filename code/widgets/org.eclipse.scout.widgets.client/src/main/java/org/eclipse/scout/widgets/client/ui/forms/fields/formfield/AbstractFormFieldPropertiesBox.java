@@ -127,7 +127,7 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
 
     @Override
     protected String getConfiguredLabel() {
-      return "Label use UI width";
+      return "Label Use Ui Width";
     }
 
     @Override
@@ -307,7 +307,7 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
 
     @Override
     protected String getConfiguredLabel() {
-      return "Label Width in Pixel";
+      return "Label Width In Pixel";
     }
 
     @Override
