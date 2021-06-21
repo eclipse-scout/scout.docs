@@ -23,7 +23,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -51,7 +50,6 @@ import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.Highe
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.PiButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.SampleFormatButton;
 import org.eclipse.scout.widgets.client.ui.forms.DecimalFieldsForm.MainBox.SmallestValueButton;
-import org.eclipse.scout.widgets.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
 
 @ClassId("87f25304-3e24-4e4d-b602-d39d23523acc")
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
@@ -115,10 +113,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(BigDecimalStyledField.class);
   }
 
-  public BigIntegerColumnField getBigIntegerColumnField() {
-    return getFieldByClass(BigIntegerColumnField.class);
-  }
-
   public MaxFractionDigitsField getMaxFractionDigitsField() {
     return getFieldByClass(MaxFractionDigitsField.class);
   }
@@ -176,11 +170,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Override
-      protected boolean getConfiguredMandatory() {
-        return true;
-      }
-
       @Order(10)
       @ClassId("576b3799-d4fd-4a48-ada4-a4e2c215fd5f")
       public class BigDecimalColumn extends AbstractGroupBox {
@@ -191,33 +180,8 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredGridColumnCount() {
-          return 1;
-        }
-
-        @Override
         protected boolean getConfiguredBorderVisible() {
           return false;
-        }
-
-        @Order(110)
-        @ClassId("eb3899a9-424a-44eb-8821-e3debb4f7cab")
-        public class BigDecimalColumnField extends AbstractLabelField {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("EmptyString");
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "BOLD";
-          }
-
-          @Override
-          protected void execInitField() {
-            setValue(TEXTS.get("BigDecimalField"));
-          }
         }
 
         @Order(120)
@@ -327,7 +291,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("BigDecimalFieldInput");
+            return "BigDecimalField";
           }
         }
 
@@ -391,11 +355,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             if (getValue() != null) {
               getInputField().setMinValue(getValue());
@@ -415,11 +374,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("MaximumValue");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -445,11 +399,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execInitField() {
             setValue(getInputField().isGroupingUsed());
           }
@@ -465,18 +414,8 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         public class UpdateDisplayTextOnModify extends AbstractBooleanField {
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("UpdateDisplayTextOnModify");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -492,11 +431,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("MinFractionDigits");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -520,11 +454,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execInitField() {
             setValue(getInputField().getMaxFractionDigits());
           }
@@ -542,11 +471,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("FractionDigits");
-          }
-
-          @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
           }
 
           @Override
@@ -570,11 +494,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execInitField() {
             setValue(getInputField().getMultiplier());
           }
@@ -595,11 +514,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
             getInputField().setPercent(getValue());
           }
@@ -615,18 +529,14 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           }
 
           @Override
-          protected String getConfiguredLabelFont() {
-            return "ITALIC";
-          }
-
-          @Override
           protected void execChangedValue() {
-            DecimalFormat format = new DecimalFormat();
-
+            DecimalFormat format;
             if (getValue() != null) {
               format = new DecimalFormat(getValue());
             }
-
+            else {
+              format = new DecimalFormat();
+            }
             getInputField().setFormat(format);
           }
         }
@@ -676,7 +586,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         int scale = NumberUtility.nvl(getFractionDigitsField().getValue(), 20) + 2;
         BigDecimal a = BigDecimal.ONE;
         BigDecimal b = BigDecimal.ONE.divide(sqrt(two, scale), scale, RoundingMode.HALF_UP);
-        BigDecimal t = new BigDecimal(0.25);
+        BigDecimal t = new BigDecimal("0.25");
         BigDecimal x = BigDecimal.ONE;
         BigDecimal y;
 
@@ -697,7 +607,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       private BigDecimal sqrt(BigDecimal a, int scale) {
         BigDecimal two = new BigDecimal(2);
         BigDecimal x0 = new BigDecimal("0");
-        BigDecimal x1 = new BigDecimal(Math.sqrt(a.doubleValue()));
+        BigDecimal x1 = BigDecimal.valueOf(Math.sqrt(a.doubleValue()));
 
         while (!x0.equals(x1)) {
           x0 = x1;
