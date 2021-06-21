@@ -36,11 +36,6 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 public abstract class AbstractUserTreeField extends AbstractStringField {
 
   @Override
-  protected String getConfiguredLabelFont() {
-    return "ITALIC";
-  }
-
-  @Override
   protected boolean getConfiguredMultilineText() {
     return true;
   }

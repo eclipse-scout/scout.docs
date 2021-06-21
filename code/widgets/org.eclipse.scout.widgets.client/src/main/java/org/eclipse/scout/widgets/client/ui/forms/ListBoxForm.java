@@ -27,9 +27,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.listbox.IListBox;
+import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -55,8 +55,8 @@ import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.Configurati
 import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.ListBoxField;
 import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.ListEntriesField;
 import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.ExampleCodeTypeBox.DefaultField;
+import org.eclipse.scout.widgets.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.ExampleCodeTypeBox.DisabledField;
 import org.eclipse.scout.widgets.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widgets.shared.services.code.ColorsCodeType.BlueCode;
@@ -153,169 +153,179 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
         return TEXTS.get("Examples");
       }
 
+      @Override
+      protected boolean getConfiguredLabelVisible() {
+        return false;
+      }
+
+      @Override
+      protected boolean getConfiguredBorderVisible() {
+        return false;
+      }
+
       @Order(10)
-      @ClassId("7ea859e8-eac9-4fce-9658-dfc6cc5a1cad")
-      public class ListBoxWithCodeTypeContentField extends AbstractLabelField {
+      @ClassId("fbf281a4-fd5f-45da-9aff-d35e8545606e")
+      public class ExampleCodeTypeBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
+          return "Example with CodeType";
         }
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("ListBoxWithCodeTypeContent"));
+        protected int getConfiguredGridColumnCount() {
+          return 1;
+        }
+
+        @Order(20)
+        @ClassId("2bf72124-1793-4603-8a1c-c5ec0819fdd9")
+        public class DefaultField extends AbstractListBox<Color> {
+
+          @Override
+          protected void execInitField() {
+            getTable().addTableListener(evt -> {
+              ITableRow checkedRow = evt.getFirstRow();
+              if (!checkedRow.isChecked()) {
+                return;
+              }
+              getTable().getRows().stream()
+                  .filter(row -> row != checkedRow)
+                  .forEach(row -> getTable().uncheckRow(row));
+            }, TableEvent.TYPE_ROWS_CHECKED);
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
+            return ColorsCodeType.class;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 5;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+        }
+
+        @Order(30)
+        @ClassId("e3f266b5-91c2-4fe4-b3d5-88ced81f1e3f")
+        public class DisabledField extends AbstractListBox<Color> {
+
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 3;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
+
+          @Override
+          protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
+            return ColorsCodeType.class;
+          }
+
+          @Override
+          protected void execInitField() {
+            Set<Color> colors = new HashSet<>();
+
+            colors.add(GreenCode.ID);
+            colors.add(BlueCode.ID);
+            // get a dynamically added code
+            ICode<Color> red = BEANS.get(ColorsCodeType.class).getCode(Color.RED);
+            colors.add(red.getId());
+
+            setValue(colors);
+            setFilterCheckedRowsValue(true);
+          }
         }
       }
 
       @Order(20)
-      @ClassId("2bf72124-1793-4603-8a1c-c5ec0819fdd9")
-      public class DefaultField extends AbstractListBox<Color> {
-
-        @Override
-        protected void execInitField() {
-          getTable().addTableListener(evt -> {
-            ITableRow checkedRow = evt.getFirstRow();
-            if (!checkedRow.isChecked()) {
-              return;
-            }
-            getTable().getRows().stream()
-                .filter(row -> row != checkedRow)
-                .forEach(row -> getTable().uncheckRow(row));
-          }, TableEvent.TYPE_ROWS_CHECKED);
-        }
-
-        @Override
-        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
-          return ColorsCodeType.class;
-        }
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 5;
-        }
+      @ClassId("8a387bb9-fc25-496a-ae31-2f5147cafd7a")
+      public class ExampleLookupCallBox extends AbstractGroupBox {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-      }
-
-      @Order(30)
-      @ClassId("e3f266b5-91c2-4fe4-b3d5-88ced81f1e3f")
-      public class DisabledField extends AbstractListBox<Color> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
+          return "Example with LookupCall";
         }
 
         @Override
-        protected int getConfiguredGridH() {
-          return 3;
+        protected int getConfiguredGridW() {
+          return 1;
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
+        protected int getConfiguredGridColumnCount() {
+          return 1;
         }
 
-        @Override
-        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
-          return ColorsCodeType.class;
+        @Order(50)
+        @ClassId("3e03a729-6d95-4a5c-a637-430c708c3be7")
+        public class DefaultListBox extends AbstractListBox<Integer> {
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 5;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+            return FontStyleLookupCall.class;
+          }
         }
 
-        @Override
-        protected void execInitField() {
-          Set<Color> colors = new HashSet<>();
+        @Order(60)
+        @ClassId("28575db9-0811-4e78-a954-bf19bf73661f")
+        public class DisabledListBox extends AbstractListBox<Integer> {
 
-          colors.add(GreenCode.ID);
-          colors.add(BlueCode.ID);
-          // get a dynamically added code
-          ICode<Color> red = BEANS.get(ColorsCodeType.class).getCode(Color.RED);
-          colors.add(red.getId());
+          @Override
+          protected boolean getConfiguredEnabled() {
+            return false;
+          }
 
-          setValue(colors);
-          setFilterCheckedRowsValue(true);
-        }
-      }
+          @Override
+          protected int getConfiguredGridH() {
+            return 3;
+          }
 
-      @Order(40)
-      @ClassId("4fb7beb2-e810-497a-befd-56344adb8cee")
-      public class ListBoxWithLookupCallContentField extends AbstractLabelField {
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Disabled");
+          }
 
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
+          @Override
+          protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+            return FontStyleLookupCall.class;
+          }
 
-        @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
-        }
-
-        @Override
-        protected void execInitField() {
-          setValue(TEXTS.get("ListBoxWithLookupCallContent"));
-        }
-      }
-
-      @Order(50)
-      @ClassId("3e03a729-6d95-4a5c-a637-430c708c3be7")
-      public class DefaultListBox extends AbstractListBox<Integer> {
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 5;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
-        }
-      }
-
-      @Order(60)
-      @ClassId("28575db9-0811-4e78-a954-bf19bf73661f")
-      public class DisabledListBox extends AbstractListBox<Integer> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected int getConfiguredGridH() {
-          return 3;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
-        }
-
-        @Override
-        protected void execInitField() {
-          Set<Integer> set = new HashSet<>();
-          set.add(2);
-          set.add(3);
-          setValue(set);
-          setFilterCheckedRowsValue(true);
+          @Override
+          protected void execInitField() {
+            Set<Integer> set = new HashSet<>();
+            set.add(2);
+            set.add(3);
+            setValue(set);
+            setFilterCheckedRowsValue(true);
+          }
         }
       }
     }
@@ -452,12 +462,17 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 7;
+          return 6;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ListContent");
+          return "Lookup Rows";
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return "Define the ListBox entries here.\n\nFormat:\nkey;text;iconId;toolTip;font;enabled;active";
         }
 
         @Override
@@ -472,14 +487,14 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
+      @Order(45)
+      @ClassId("888af13c-0937-4bbd-94d9-0dee18700dc1")
+      public class SpacerField extends AbstractPlaceholderField {
+      }
+
       @Order(50)
       @ClassId("ed41b61c-140f-4226-9f56-b7e0f3c44a51")
       public class FilterCheckedRowsValueField extends AbstractBooleanField {
-
-        @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -497,13 +512,8 @@ public class ListBoxForm extends AbstractForm implements IAdvancedExampleForm {
       public class IsEnabledField extends AbstractBooleanField {
 
         @Override
-        protected String getConfiguredFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IsEnabled");
+          return "Enabled";
         }
 
         @Override
