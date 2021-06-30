@@ -46,6 +46,7 @@ export default class DesktopNotificationForm extends Form {
       parent: this,
       closable: this.widget('ClosableField').value,
       duration: this.widget('DurationField').value,
+      iconId: this.widget('IconField').value,
       nativeOnly: this.widget('NativeOnlyField').value,
       nativeNotificationTitle: this.widget('NativeNotificationTitleField').value,
       nativeNotificationIconId: this.widget('NativeNotificationIconIdField').value,

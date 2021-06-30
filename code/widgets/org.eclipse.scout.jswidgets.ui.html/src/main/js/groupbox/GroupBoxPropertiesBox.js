@@ -77,6 +77,10 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     notificationField.setValue(this.field.notification ? this.field.notification.status.severity : null);
     notificationField.on('propertyChange', this._onPropertyChange.bind(this));
 
+    let notificationIconField = this.widget('NotificationIconField');
+    notificationIconField.setValue(this.field.notification ? this.field.notification.iconId : null);
+    notificationIconField.on('propertyChange', this._onPropertyChange.bind(this));
+
     let menuBarVisibleField = this.widget('MenuBarVisibleField');
     menuBarVisibleField.setValue(this.field.menuBarVisible);
     menuBarVisibleField.on('propertyChange', this._onPropertyChange.bind(this));
@@ -110,7 +114,9 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     } else if (event.propertyName === 'value' && event.source.id === 'LogicalGridField') {
       this.field.setLogicalGrid(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'NotificationField') {
-      this.field.setNotification(this._createNotification(event.newValue));
+      this.field.setNotification(this._createNotification());
+    } else if (event.propertyName === 'value' && event.source.id === 'NotificationIconField') {
+      this.field.setNotification(this._createNotification());
     } else if (event.propertyName === 'value' && event.source.id === 'MenuBarVisibleField') {
       this.field.setMenuBarVisible(event.newValue);
     } else if (event.propertyName === 'value' && event.source.id === 'MenuBarPositionField') {
@@ -120,13 +126,15 @@ export default class GroupBoxPropertiesBox extends GroupBox {
     }
   }
 
-  _createNotification(severity) {
+  _createNotification() {
+    let severity = this.widget('NotificationField').value;
     if (!severity) {
       return null;
     }
     return scout.create('Notification', {
       parent: this,
       severity: severity,
+      iconId: this.widget('NotificationIconField').value,
       message: this.session.text('NotificationMessage', objects.keyByValue(Status.Severity, severity))
     });
   }

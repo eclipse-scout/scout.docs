@@ -96,6 +96,12 @@ export default () => ({
                     label: 'Delay',
                     labelWidthInPixel: 170,
                     tooltipText: '${textKey:DelayTooltip}'
+                  },
+                  {
+                    id: 'IconField',
+                    objectType: 'SmartField',
+                    lookupCall: 'jswidgets.IconIdLookupCall',
+                    label: 'Icon'
                   }
                 ]
               }

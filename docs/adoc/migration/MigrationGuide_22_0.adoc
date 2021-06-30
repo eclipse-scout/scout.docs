@@ -287,3 +287,10 @@ They will be removed eventually.
 Note the uppercase "C" in the new function names!
 
 TIP: At the same time, some new null-safe variants of `String` prototype methods were added: `toUpperCase(s)`, `toLowerCase(s)`, `length(s)`, `trim(s)` .
+
+== New Style for Tooltips
+
+The style and colors for tooltips has been changed which may require the following migration:
+
+. The colors for tooltips have changed: severity `OK` is showing in green, `INFO` in black and `WARNING` in orange. Severity `ERROR` is still red and therefore remains unchanged. If you use a `Status` that is displayed as tooltip and uses one of the changed severities, verify if the color matches the meaning of the tooltip and adapt the severity if necessary.
+. Scout JS only: The tooltips are now displayed in inverse style (white text, dark background). If you used custom styling for your tooltips (using property `htmlEnabled`), you might require to adapt your styles to look nice again with the inverse style.

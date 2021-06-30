@@ -70,6 +70,12 @@ export default () => ({
       label: 'Notification'
     },
     {
+      id: 'NotificationIconField',
+      objectType: 'SmartField',
+      lookupCall: 'jswidgets.IconIdLookupCall',
+      label: 'Notification Icon'
+    },
+    {
       id: 'MenuBarVisibleField',
       objectType: 'CheckBoxField',
       label: 'Menu Bar Visible',

@@ -32,8 +32,10 @@ import org.eclipse.scout.rt.platform.status.Status;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.TriState;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.IconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationClosableField;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationHtmlEnabled;
 import org.eclipse.scout.widgets.client.ui.forms.GroupBoxHorizontalScrollingForm.MainBox.ConfigurationGroupBox.NotificationStatusField;
@@ -197,6 +199,10 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     return getFieldByClass(ConfigurationGroupBox.class);
   }
 
+  public IconIdField getIconIdField() {
+    return getFieldByClass(IconIdField.class);
+  }
+
   public ResponsiveField getResponsiveField() {
     return getFieldByClass(ResponsiveField.class);
   }
@@ -223,7 +229,8 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
       String message = getNotificationTextField().getValue() != null ? getNotificationTextField().getValue() : "";
       Notification notification = new Notification(new Status(message, severity),
           getNotificationClosableField().getValue(),
-          getNotificationHtmlEnabledField().getValue());
+          getNotificationHtmlEnabledField().getValue(),
+          getIconIdField().getValue());
       getVerticalMonthsBox().setNotification(notification);
     }
     else {
@@ -753,7 +760,7 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
 
         @Override
         protected int getConfiguredMaxLength() {
-          return 128;
+          return 500;
         }
 
         @Override
@@ -774,6 +781,25 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
         @Override
         protected void execChangedMasterValue(Object newMasterValue) {
           execChangedValue();
+        }
+
+        @Override
+        protected void execChangedValue() {
+          handleNotificationChanged();
+        }
+      }
+
+      @Order(25)
+      @ClassId("4cb0be95-019c-437b-a803-4c5a9df4a39e")
+      public class IconIdField extends AbstractSmartField<String> {
+        @Override
+        protected String getConfiguredLabel() {
+          return "IconId";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return IconIdLookupCall.class;
         }
 
         @Override

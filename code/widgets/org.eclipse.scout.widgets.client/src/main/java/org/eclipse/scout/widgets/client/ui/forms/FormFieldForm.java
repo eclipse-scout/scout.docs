@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -44,18 +44,18 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.platform.util.SleepUtil;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupbBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupbBox.Buttons1Box;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupbBox.Field1Field;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Buttons2Box;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Buttons2Box.ToggleStatusMenuButton;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Field2Field;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupbBox.Field2Field.StyleMenu;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupbBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupbBox.Field3Field;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField4GroupbBox;
-import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField4GroupbBox.Field4Field;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupBox.Buttons1Box;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField1GroupBox.Field1Field;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupBox.Buttons2Box;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupBox.Buttons2Box.ToggleStatusMenuButton;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupBox.Field2Field;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField2GroupBox.Field2Field.StyleMenu;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField3GroupBox.Field3Field;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField4GroupBox;
+import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.FormFieldBox.FormField4GroupBox.Field4Field;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.LongRunningOperationBox;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.LongRunningOperationBox.CancellationDurationField;
 import org.eclipse.scout.widgets.client.ui.forms.FormFieldForm.MainBox.LongRunningOperationBox.StartLongRunningOperationButton;
@@ -95,32 +95,32 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(FormFieldBox.class);
   }
 
-  public FormField1GroupbBox getFormField1GroupbBox() {
-    return getFieldByClass(FormField1GroupbBox.class);
+  public FormField1GroupBox getFormField1GroupBox() {
+    return getFieldByClass(FormField1GroupBox.class);
   }
 
   public Field1Field getField1Field() {
     return getFieldByClass(Field1Field.class);
   }
 
-  public FormField2GroupbBox getFormField2GroupbBox() {
-    return getFieldByClass(FormField2GroupbBox.class);
+  public FormField2GroupBox getFormField2GroupBox() {
+    return getFieldByClass(FormField2GroupBox.class);
   }
 
   public Field2Field getField2Field() {
     return getFieldByClass(Field2Field.class);
   }
 
-  public FormField3GroupbBox getFormField3GroupbBox() {
-    return getFieldByClass(FormField3GroupbBox.class);
+  public FormField3GroupBox getFormField3GroupBox() {
+    return getFieldByClass(FormField3GroupBox.class);
   }
 
   public Field3Field getField3Field() {
     return getFieldByClass(Field3Field.class);
   }
 
-  public FormField4GroupbBox getFormField4GroupbBox() {
-    return getFieldByClass(FormField4GroupbBox.class);
+  public FormField4GroupBox getFormField4GroupBox() {
+    return getFieldByClass(FormField4GroupBox.class);
   }
 
   public Field4Field getField4Field() {
@@ -158,7 +158,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
       @Order(10)
       @ClassId("46dfa6c8-62bf-46cf-99c3-b9f4a5bab00b")
-      public class FormField1GroupbBox extends AbstractGroupBox {
+      public class FormField1GroupBox extends AbstractGroupBox {
 
         @Override
         protected boolean getConfiguredBorderVisible() {
@@ -187,7 +187,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
       @Order(20)
       @ClassId("50135e8f-892d-4a57-ae86-3124208cc69c")
-      public class FormField2GroupbBox extends AbstractGroupBox {
+      public class FormField2GroupBox extends AbstractGroupBox {
 
         @Override
         protected boolean getConfiguredBorderVisible() {
@@ -328,7 +328,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
       @Order(30)
       @ClassId("f50679aa-2795-4ad0-a96d-5287e245e45a")
-      public class FormField3GroupbBox extends AbstractGroupBox {
+      public class FormField3GroupBox extends AbstractGroupBox {
 
         @Override
         protected boolean getConfiguredBorderVisible() {
@@ -357,7 +357,7 @@ public class FormFieldForm extends AbstractForm implements IPageForm {
 
       @Order(40)
       @ClassId("7d747003-7622-4269-84e8-471075d44abf")
-      public class FormField4GroupbBox extends AbstractGroupBox {
+      public class FormField4GroupBox extends AbstractGroupBox {
 
         @Override
         protected boolean getConfiguredBorderVisible() {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.scout.rt.platform.classid.ClassId;
-import org.eclipse.scout.rt.platform.status.Status;
+import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.rt.shared.services.lookup.LocalLookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -27,9 +27,10 @@ public class StatusSeverityLookupCall extends LocalLookupCall<Integer> {
   @Override
   protected List<? extends ILookupRow<Integer>> execCreateLookupRows() {
     List<ILookupRow<Integer>> rows = new ArrayList<>();
-    rows.add(new LookupRow<>(Status.INFO, "info"));
-    rows.add(new LookupRow<>(Status.WARNING, "warning"));
-    rows.add(new LookupRow<>(Status.ERROR, "error"));
+    rows.add(new LookupRow<>(IStatus.OK, "ok"));
+    rows.add(new LookupRow<>(IStatus.INFO, "info"));
+    rows.add(new LookupRow<>(IStatus.WARNING, "warning"));
+    rows.add(new LookupRow<>(IStatus.ERROR, "error"));
     return rows;
   }
 }

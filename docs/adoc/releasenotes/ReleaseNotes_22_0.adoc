@@ -74,6 +74,10 @@ To prevent malicious data from being sent to your application, the origin of the
 (`execPostMessage` in Java, `message` event listener in Scout JS).
 Scout will now do this check automatically for you if you configure the valid origins in the new property *trustedMessageOrigins*.
 
+== Icon Support for Notifications
+
+Notifications in GroupBoxes (`IGroupBox.setNotification()`) and desktop notifications (`IDesktop.addNotification`) now also support icons.
+
 // ----------------------------------------------------------------------------
 
 == REST LookupCall support for hierarchical data

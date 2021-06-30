@@ -28,6 +28,7 @@ import org.eclipse.scout.rt.platform.util.concurrent.IRunnable;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widgets.client.ClientSession;
+import org.eclipse.scout.widgets.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.ImageLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.NativeNotificationVisibilityLookupCall;
 import org.eclipse.scout.widgets.client.services.lookup.ViewButtonLookupCall;
@@ -37,6 +38,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.CloseButton
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.CloseableField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DelayField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.IconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeNotificationVisibilityField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeOnlyField;
@@ -115,6 +117,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(CloseableField.class);
   }
 
+  public IconIdField getIconIdField() {
+    return getFieldByClass(IconIdField.class);
+  }
+
   public NativeOnlyField getNativeOnlyField() {
     return getFieldByClass(NativeOnlyField.class);
   }
@@ -176,11 +182,12 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
             long duration = getDurationField().getValue();
             boolean closeable = getCloseableField().getValue();
+            String iconId = getIconIdField().getValue();
             boolean nativeOnly = getNativeOnlyField().getValue();
             String nativeNotificationTitle = getNativeNotificationTitleField().getValue();
             String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
             String nativeNotificationIconId = getNativeNotificationIconIdField().getValue();
-            DesktopNotification notification = new DesktopNotification(status, duration, closeable)
+            DesktopNotification notification = new DesktopNotification(status, duration, closeable, iconId)
                 .withNativeOnly(nativeOnly)
                 .withNativeNotificationTitle(nativeNotificationTitle)
                 .withNativeNotificationVisibility(nativeNotificationVisibility)
@@ -287,6 +294,20 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected Integer execValidateValue(Integer rawValue) {
           return ObjectUtility.nvl(rawValue, 0);
+        }
+      }
+
+      @Order(65)
+      @ClassId("f4e6a40d-3f4b-4ba9-ae14-5fc29256ad3d")
+      public class IconIdField extends AbstractSmartField<String> {
+        @Override
+        protected String getConfiguredLabel() {
+          return "IconId";
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return IconIdLookupCall.class;
         }
       }
 
