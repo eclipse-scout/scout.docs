@@ -12,7 +12,6 @@ package org.eclipse.scout.widgets.client.services.lookup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.eclipse.scout.rt.client.ui.desktop.notification.IDesktopNotification;
 import org.eclipse.scout.rt.platform.classid.ClassId;
