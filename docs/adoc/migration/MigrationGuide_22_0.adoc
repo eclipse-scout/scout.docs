@@ -165,6 +165,55 @@ Instead of customizing the navigation background color it is suggested to now cu
 
 // TODO cgu describe: button, menu styles
 
+=== Icons
+==== Cleanup
+Some icons have been removed because they are not used by Scout itself anymore.
+If you need these icons, please add them to your own icon library.
+If you don't already have a custom icon library, please see our guide on how to create one:
+https://eclipsescout.github.io/11.0/technical-guide.html#icons
+The icons from Scout can be found here: https://git.eclipse.org/c/scout/org.eclipse.scout.rt.git/tree/org.eclipse.scout.rt.ui.html/src/icons?h=releases/11.0
+There you also find a `selection.json` that can be used to import the icons to https://icomoon.io/app[IcoMoon].
+
+- MENU_BOLD (uF0C9)
+- LIST_UL_BOLD (uF0CA)
+- LIST_OL_BOLD (uF0CB)
+- GRAPH_BOLD (uE023)
+- CATEGORY (uE059)
+- CATEGORY_BOLD (uE024)
+- ELLIPSIS-V-BOLD / VERTICAL_DOTS (uE040)
+- SPINNER (uE044)
+- ANGLE-DOUBLE-LEFT-BOLD (uF100)
+- ANGLE-DOUBLE-RIGHT-BOLD (uF101)
+- ANGLE-DOUBLE-UP-BOLD (uF102)
+- ANGLE-DOUBLE-DOWN-BOLD (uF103)
+- BOLD (uE051)
+- ITALIC (uE052)
+- UNDERLINE (uE053)
+- STRIKETHROUGH (uE054)
+- LIST-UL (uE055)
+- LIST-OL (uE056)
+- LIGHTBULB_OFF (uE057)
+- LIGHTBULB_ON (uE058)
+
+The following icons have been renamed
+- EXCLAMATION_MARK -> EXCLAMATION_MARK_BOLD
+
+==== Line Width Adjustments
+The line width of the Scout icons has been increased a little because they are now displayed a little smaller.
+If you use custom icons in combination with the Scout icons, you may want to consider adjusting the line widths of your icons as well.
+This should only be relevant if you explicitly used the Scout icons in your code.
+
+Also, the Scout icons now come with a regular and a light font.
+The regular font should be used if the icon is displayed at about 16px.
+This is the case for most widgets (menu, button etc.)
+If the icon is displayed larger, the light font can be used.
+To activate it for your custom widget, set the font-weight to @icon-font-weight-light.
+
+If you want to align your custom icons with the Scout icons, use the following dimensions:
+
+* Regular: 1.5px line width and 24px artboard height
+* Light: 1px line width and 24px artboard height
+
 == Browser Field
 
 The type of the `data` argument for the callback `execPostMessage` was changed from _String_ to _Object_.

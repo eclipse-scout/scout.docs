@@ -47,7 +47,7 @@ public class ContactOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredIconId() {
-    return Icons.CategoryBold;
+    return Icons.Folder;
   }
 }
 //end::OutlineInit[]
