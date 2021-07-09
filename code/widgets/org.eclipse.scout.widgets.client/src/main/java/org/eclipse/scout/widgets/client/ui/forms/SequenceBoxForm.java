@@ -411,18 +411,23 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           public class IconField extends AbstractImageField {
 
             @Override
-            protected int getConfiguredHorizontalAlignment() {
-              return 1;
-            }
-
-            @Override
             protected String getConfiguredImageId() {
               return Icons.Eye;
             }
 
             @Override
-            protected int getConfiguredWidthInPixel() {
-              return 150;
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
+            @Override
+            protected boolean getConfiguredGridUseUiWidth() {
+              return true;
+            }
+
+            @Override
+            protected double getConfiguredGridWeightX() {
+              return 0;
             }
           }
 
@@ -527,7 +532,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected String execValidateValue(String rawValue) {
-            if (rawValue != null && "error".equals(rawValue)) {
+            if ("error".equals(rawValue)) {
               throw new VetoException("Value is not allowed");
             }
             return rawValue;
