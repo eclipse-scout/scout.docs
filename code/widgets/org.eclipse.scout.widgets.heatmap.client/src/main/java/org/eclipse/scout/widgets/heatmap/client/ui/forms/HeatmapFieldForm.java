@@ -40,10 +40,14 @@ import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBo
 import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.XField;
 import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.YField;
 import org.eclipse.scout.widgets.heatmap.client.ui.forms.HeatmapFieldForm.MainBox.GroupBox.ZoomLevelField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Order(100000.0)
 @ClassId("f20c76db-bdbd-4560-8ba8-d77f47eaee01")
 public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleForm {
+
+  private static final Logger LOG = LoggerFactory.getLogger(HeatmapFieldForm.class);
 
   private final P_ViewParameterListener m_viewParameterListener = new P_ViewParameterListener();
 
@@ -66,7 +70,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
     return getFieldByClass(MainBox.class);
   }
 
-  public GroupBox getTopBox() {
+  public GroupBox getGroupBox() {
     return getFieldByClass(GroupBox.class);
   }
 
@@ -424,7 +428,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
 
       @Override
       protected void execAction() {
-        getHeatmapField().setHeatPoints(Collections.<HeatPoint> emptyList());
+        getHeatmapField().setHeatPoints(Collections.emptyList());
       }
     }
 
@@ -449,6 +453,7 @@ public class HeatmapFieldForm extends AbstractForm implements IAdvancedExampleFo
           }
         }
         catch (InterruptedException | ExecutionException e) {
+          LOG.warn("Error while getting location", e);
           MessageBoxes.createOk()
               .withSeverity(IStatus.ERROR)
               .withHeader(TEXTS.get("ErrorWhileGettingLocation"))

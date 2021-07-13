@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.Assertions;
 import org.eclipse.scout.widgets.client.services.lookup.FormLookupCall;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.InnerFormField;
 import org.eclipse.scout.widgets.client.ui.forms.WrappedFormFieldForm.MainBox.GroupBox.GroupBox1.NewInstanceField;
@@ -139,7 +140,11 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(CloseButton.class);
   }
 
-  public GroupBox1 getGroupBox() {
+  public GroupBox getGroupBox() {
+    return getFieldByClass(GroupBox.class);
+  }
+
+  public GroupBox1 getGroupBox1() {
     return getFieldByClass(GroupBox1.class);
   }
 
@@ -182,6 +187,7 @@ public class WrappedFormFieldForm extends AbstractForm implements IPageForm {
     @Order(10)
     @ClassId("4d90c1c1-c7b2-4ca4-a63d-87cbd3e85646")
     public class GroupBox extends AbstractGroupBox {
+
       @Order(10)
       @ClassId("79badfe6-7cdc-4f45-a5b7-3e331aab0958")
       public class GroupBox1 extends AbstractGroupBox {

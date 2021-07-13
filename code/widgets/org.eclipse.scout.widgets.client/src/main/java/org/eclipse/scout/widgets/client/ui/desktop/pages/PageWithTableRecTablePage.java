@@ -47,7 +47,7 @@ public class PageWithTableRecTablePage extends PageWithTableTablePage {
   }
 
   @Override
-  @SuppressWarnings("ManualArrayCopy")
+  @SuppressWarnings({"ManualArrayCopy", "pmd:AvoidArrayLoops"})
   protected Object[][] loadDemoData() {
     // Insert outline column value (some pseudo-random ID)
     Object[][] data = super.loadDemoData();
