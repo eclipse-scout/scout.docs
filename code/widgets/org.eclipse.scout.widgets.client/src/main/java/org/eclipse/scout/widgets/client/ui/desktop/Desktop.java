@@ -167,6 +167,11 @@ public class Desktop extends AbstractDesktop {
     }
 
     @Override
+    protected String getConfiguredCssClass() {
+      return "profile-menu";
+    }
+
+    @Override
     protected String getConfiguredText() {
       Subject subject = Subject.getSubject(AccessController.getContext());
       Principal firstPrincipal = CollectionUtility.firstElement(subject.getPrincipals());
