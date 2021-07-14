@@ -220,6 +220,11 @@ public class Desktop extends AbstractDesktop {
       return Icons.PersonSolid;
     }
 
+    @Override
+    protected String getConfiguredCssClass() {
+      return "profile-menu";
+    }
+
     //end::DesktopInit[]
 
     @Override
