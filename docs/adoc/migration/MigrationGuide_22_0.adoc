@@ -265,6 +265,14 @@ Furthermore if you use the following methods on pages, please rename them as fol
 * from `_initTable` to `_initDetailTable`
 * from `_ensureDetailForm` to `ensureDetailForm`
 
+== Jackson DoEntity Deserializer
+
+The following classes were renamed:
+
+* IDoEntityDeserializerTypeResolver -> IDoEntityDeserializerTypeStrategy
+* DefaultDoEntityDeserializerTypeResolver -> DefaultDoEntityDeserializerTypeStrategy
+* RawDoEntityDeserializerTypeResolver -> RawDoEntityDeserializerTypeStrategy
+
 == Deprecated Functions in strings.js Utility
 
 The static `strings` utility provides various string-related functions.
