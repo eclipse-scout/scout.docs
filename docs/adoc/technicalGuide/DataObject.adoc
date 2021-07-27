@@ -93,6 +93,7 @@ The serialized `_typeVersion` value is not deserialized into an attribute, since
 
 NOTE: Declaring a logical type version using the `@TypeVersion`annotation is highly recommended if a data object is persisted as JSON document to a file or database.
 
+[[cha-namespace-and-itypeversion]]
 ===== Namespace and ITypeVersion
 
 A namespace (implementation of `INamespace`) represents a container for data objects.
