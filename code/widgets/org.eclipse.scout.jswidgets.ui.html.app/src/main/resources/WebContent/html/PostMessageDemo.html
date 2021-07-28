@@ -41,7 +41,17 @@
 
       #log {
         margin-top: 20px;
+        margin-bottom: 20px;
         white-space: pre;
+      }
+
+      #iframe-container {
+        margin-top: 20px;
+      }
+
+      #iframe-container > iframe {
+        width: 100%;
+        height: 500px;
       }
 
       #log div.in {
@@ -66,6 +76,7 @@
         <select id="target" disabled="disabled">
           <option value="window">window</option>
           <option value="window.parent" selected>window.parent</option>
+          <option value="window.parent.parent">window.parent.parent</option>
           <option value="window.opener">window.opener</option>
           <option value="window.frames[0]">window.frames[0]</option>
         </select>

@@ -18,6 +18,8 @@ function getTargetWindow() {
   switch (target.value) {
     case 'window.parent':
       return window.parent;
+    case 'window.parent.parent':
+      return window.parent.parent;
     case 'window.opener':
       return window.opener;
     case 'window.frames[0]':
@@ -95,6 +97,30 @@ button4.addEventListener('click', function(event) {
 button5.addEventListener('click', function(event) {
   sendMessage(['One', 'Two', 'Three', counter, {msg: 'Hello Scout!'}]);
 });
+
+if ('URLSearchParams' in window) {
+  var params = new URLSearchParams(window.location.search);
+  if (!params.get('nested')) {
+    // Only add if not nested twice
+    document.body.appendChild(document.createElement('hr'));
+
+    var iframeContainer = document.createElement('div');
+    iframeContainer.id = 'iframe-container';
+    document.body.appendChild(iframeContainer);
+
+    var addIframeButton = document.createElement('button');
+    addIframeButton.innerText = 'Add nested iframe';
+    document.body.appendChild(addIframeButton);
+
+    addIframeButton.addEventListener('click', function(event) {
+      var iframe = document.createElement("iframe");
+      iframe.scrolling = "yes";
+      iframeContainer.appendChild(iframe);
+      iframe.src = document.location + '?nested=true';
+      addIframeButton.remove(); // remove button after nested iframe was inserted
+    });
+  }
+}
 
 // -- Message listener -----
 
