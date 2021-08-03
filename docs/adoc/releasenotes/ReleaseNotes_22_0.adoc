@@ -75,3 +75,35 @@ To prevent malicious data from being sent to your application, the origin of the
 Scout will now do this check automatically for you if you configure the valid origins in the new property *trustedMessageOrigins*.
 
 // ----------------------------------------------------------------------------
+
+== REST LookupCall support for hierarchical data
+
+Scout lookup calls may return hierarchically linked rows (parent-child relation).
+The support for hierarchical lookup rows using REST lookup calls (e.g. the `parentId` attribute definition) was moved from `AbstractLookupRowDo` to the new class `AbstractHierarchicalLookupRowDo`.
+
+In order to support hierarchical lookups using REST, change your lookup row implementation and extend the new base class `AbstractHierachicalLookupRowDo`.
+
+[source,java]
+.Example
+----
+@TypeName("ExampleLookupRow")
+public class ExampleLookupRowDo extends AbstractHierarchicalLookupRowDo<MyLookupRowDo, ExampleId> {
+
+  @Override
+  public DoValue<ExampleId> id() {
+    return createIdAttribute(this);
+  }
+
+  @Override
+  public DoValue<ExampleId> parentId() {
+    return createParentIdAttribute(this);
+  }
+
+  // ...
+}
+----
+
+
+
+
+// ----------------------------------------------------------------------------
