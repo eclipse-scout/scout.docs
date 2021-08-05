@@ -16,7 +16,7 @@
   <parent>
     <groupId>org.eclipse.scout.contacts</groupId>
     <artifactId>org.eclipse.scout.contacts</artifactId>
-    <version>11.0-SNAPSHOT</version>
+    <version>11.0.26</version>
     <relativePath>../org.eclipse.scout.contacts</relativePath>
   </parent>
 
