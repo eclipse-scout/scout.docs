@@ -106,6 +106,12 @@ export default class TableForm extends Form {
           label: 'Number Column Properties',
           parent: parent
         });
+      case 'SmartColumn':
+        return scout.create('jswidgets.SmartColumnPropertiesBox', {
+          id: 'SmartColumnPropertyField',
+          label: 'Smart Column Properties',
+          parent: parent
+        });
       default:
         return null;
     }

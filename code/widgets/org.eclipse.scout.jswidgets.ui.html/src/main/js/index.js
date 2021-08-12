@@ -114,6 +114,7 @@ export {default as TablePropertiesBox} from './table/TablePropertiesBox';
 export {default as ColumnLookupCall} from './table/ColumnLookupCall';
 export {default as ColumnPropertiesBox} from './table/ColumnPropertiesBox';
 export {default as NumberColumnPropertiesBox} from './table/NumberColumnPropertiesBox';
+export {default as SmartColumnPropertiesBox} from './table/SmartColumnPropertiesBox';
 export {default as DateColumnPropertiesBox} from './table/DateColumnPropertiesBox';
 export {default as BackgroundEffectLookupCall} from './table/BackgroundEffectLookupCall';
 export {default as EditableTableForm} from './table/editable/EditableTableForm';
