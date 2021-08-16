@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ export default class TreeSmartFieldForm extends Form {
 
     this.widget('TreeSmartFieldPropertiesBox').setField(this.smartField);
     this.widget('LookupCallField').setVisible(false);
+    this.widget('TileModeField').setVisible(false);
     this.widget('ValueFieldPropertiesBox').setField(this.smartField);
     this.widget('FormFieldPropertiesBox').setField(this.smartField);
     this.widget('GridDataBox').setField(this.smartField);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -62,6 +62,10 @@ export default class SmartFieldPropertiesBox extends GroupBox {
     let activeFilterField = this.widget('ActiveFilterField');
     activeFilterField.setValue(this.field.activeFilter);
     activeFilterField.on('propertyChange', this._onActiveFilterPropertyChange.bind(this));
+
+    let tileModeField = this.widget('TileModeField');
+    tileModeField.setValue(this.field.tileMode);
+    tileModeField.on('propertyChange', this._onTileModePropertyChange.bind(this));
   }
 
   _onSmartFieldChange(event) {
@@ -100,6 +104,12 @@ export default class SmartFieldPropertiesBox extends GroupBox {
   _onActiveFilterPropertyChange(event) {
     if (event.propertyName === 'value') {
       this.field.setActiveFilter(event.newValue);
+    }
+  }
+
+  _onTileModePropertyChange(event) {
+    if (event.propertyName === 'value') {
+      this.field.setTileMode(event.newValue);
     }
   }
 
