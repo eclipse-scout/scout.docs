@@ -24,10 +24,11 @@ The results are generated in the `target` subfolder. For example for `helloscout
 
 This part of the output is the "Eclipse Scout User Guide" delivered as part of the Scout SDK.
 
-This output needs to be synced with the `org.eclipse.scout.sdk.s2e.doc` plugin in the link:http://git.eclipse.org/c/scout/org.eclipse.scout.sdk.git/[org.eclipse.scout.sdk repository].
+This output needs to be synced with the `org.eclipse.scout.sdk.s2e.doc` plugin in the link:https://github.com/eclipse-scout/scout.sdk.git/[org.eclipse.scout.sdk repository].
 The content of `scout-sdk-help` should be copied inside `org.eclipse.scout.sdk.s2e.doc`.
 
 === Documentation for download
+
 This part of the output contains the documents ready for downloads.
 
 This output is manually pushed to link:https://eclipsescout.github.io/[]
