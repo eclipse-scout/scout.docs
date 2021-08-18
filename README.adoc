@@ -1,43 +1,11 @@
-:scout_home: https://www.eclipse.org/scout/
-:scout_docu: https://eclipsescout.github.io/
-:scout_forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=174
-:scout_ml: https://accounts.eclipse.org/mailing-list/scout-dev
-:scout_contrib: https://wiki.eclipse.org/Scout/Contribution
-:scout_branch: https://wiki.eclipse.org/Scout/Contribution_Guidelines#Git_Branching_Policy
-:bugzilla: https://bugs.eclipse.org/bugs/
-:bugzilla_query: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:bugzilla_new: https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Scout&component=Scout%20Docs
-:eclipse_cla: https://www.eclipse.org/legal/ECA.php
-:eclipse_account: https://accounts.eclipse.org/user/register
-:eclipse_sso: https://accounts.eclipse.org/user/login?destination=oauth2/authorize
-:github_pr: https://help.github.com/categories/collaborating-with-issues-and-pull-requests/
 :license_cc: https://creativecommons.org/licenses/by/3.0/
 :license_edl: https://www.eclipse.org/org/documents/edl-v10.php
 
 = Eclipse Scout - Docs
 
-This Repository is part of the *Eclipse Scout* project.
+This repository is part of the link:https://github.com/eclipse-scout/scout.rt[Eclipse Scout] project.
 It contains the source of the documentation items and some demo applications created with the framework.
 The documentation is published on link:https://eclipsescout.github.io/[GitHub pages] and you can also find the _Eclipse Scout User Guide_ in the link:https://help.eclipse.org[Eclipse Help Center].
-
-link:{scout_home}[Eclipse Scout] is a mature and open framework for modern, service oriented business applications.
-The framework is based on Java/HTML5. 
-
-Eclipse Scout is built to
-
-* Support the implementation of sustainable business applications
-* Boosts developer productivity
-* Make it simple to learn
-
-
-== Documentation & Links
-
-* link:{scout_home}[Project homepage]
-* link:{scout_docu}[Eclipse Scout Documentation]
-* link:{scout_forum}[Eclipse Scout Forum]
-* link:{bugzilla}[Eclipse Bugzilla]
-** link:{bugzilla_query}[Existing bug reports]
-** link:{bugzilla_new}[Create a new bug]
 
 
 == Organisation of this Repository
@@ -45,41 +13,11 @@ Eclipse Scout is built to
 * `docs` folder: contains the documentation source, link:docs/[read more],
 * `code` folder: contains demo applications (code snippets in the documentation items are extracted from this code base during the build)
 
-This repository follows the same link:{scout_branch}[git branching policy] as the other eclipse scout repositories.
-
-
 == Build
 
 The documentation items are built with maven: check the link:docs/README.adoc[README of the docs folder].
 
 The demo applications are built with maven: check the link:code/README.adoc[README of the code folder].
-
-
-== Issue tracker
-
-This project do not use the GitHub issue tracker but the link:{bugzilla}[Bugzilla] instance hosted by the Eclipse Fundation.
-
-* link:{bugzilla_query}[Existing bug reports] for the "Eclipse Scout - Docs" project.
-* link:{bugzilla_new}[Create a new bug] for the "Eclipse Scout - Docs" project.
-
-== How to contribute
-
-We welcome any kind of contributions (Bug report, contribution, pull request...).
-Please read the link:{scout_contrib}[Eclipse Scout Contribution page] to know more about it.
-
-The "Eclipse Scout Docs" project accepts normal link:{github_pr}[GitHub pull requests].
-Before your contribution can be accepted by the project, you need to create and electronically sign the link:{eclipse_cla}[Eclipse Foundation Contributor License Agreement (CLA)].
-
-1. Log in at link:{eclipse_account}[dev.eclipse.org] and enter your GitHub user name in the account settings.
-2. Submit the CLA at link:{eclipse_sso}[projects.eclipse.org].
-3. Sign off all commits of your contribution (`git commit -s`).
-
-All pull requests are subject to two automated checks: *ip-validation* verifies the CLA and sign-off status.
-
-
-== Get in Touch
-
-To get in touch with the Eclipse Scout community, please open a thread in the link:{scout_forum}[Eclipse Scout Forum] or send a mail to link:{scout_ml}[our mailing list]: scout-dev@eclipse.org
 
 
 == License
