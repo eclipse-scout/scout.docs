@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.html.HTML;
 import org.eclipse.scout.rt.platform.html.IHtmlContent;
+import org.eclipse.scout.rt.platform.status.IStatus;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.NumberUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -48,11 +49,13 @@ import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.MessageBoxConfiguredButton;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.NoButtonTextField;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.ReturnValueField;
+import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.SeverityField;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ConfigurationBox.YesButtonTextField;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.MessageBoxOkButton;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.ResultField;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.SampleContentButton;
+import org.eclipse.scout.widgets.client.ui.template.formfield.StatusSeverityLookupCall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -150,6 +153,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
   public ResultField getResultField() {
     return getFieldByClass(ResultField.class);
+  }
+
+  public SeverityField getSeverityField() {
+    return getFieldByClass(SeverityField.class);
   }
 
   @Order(10)
@@ -542,8 +549,10 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
           long autoCloseMillis = NumberUtility.nvl(getAutoCloseMillisField().getValue(), -1);
           int defaultReturnValue = NumberUtility.nvl(getDefaultReturnValueField().getValue(), IMessageBox.CANCEL_OPTION);
+          int severity = NumberUtility.nvl(getSeverityField().getValue(), IStatus.INFO);
 
           int result = MessageBoxes.create()
+              .withSeverity(severity)
               .withHeader(header)
               .withBody(body)
               .withHtml(html)
@@ -576,6 +585,20 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
           return AnswerOptionsLookupCall.class;
+        }
+      }
+
+      @Order(30)
+      @ClassId("55cad9fb-ae36-4e92-b9da-c4397c823aac")
+      public class SeverityField extends AbstractSmartField<Integer> {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Severity");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return StatusSeverityLookupCall.class;
         }
       }
 
@@ -833,6 +856,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         getNoButtonTextField().setValue(TEXTS.get("NoButton"));
         getHiddenTextContentField().setValue(TEXTS.get("Lorem"));
         getIconIdField().setValue("status_info");
+        getSeverityField().setValue(IStatus.INFO);
         getDefaultReturnValueField().setValue(IMessageBox.NO_OPTION);
       }
     }
