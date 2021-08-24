@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>aggregator</artifactId>
-    <version>11.0-SNAPSHOT</version>
+    <version>11.0.30</version>
   </parent>
 
   <artifactId>publish</artifactId>
@@ -22,79 +22,79 @@
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>one_day_tutorial</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>helloscout_js_fullstack</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>helloscout_js</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>eclipse_help</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>getstarted</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>helloscout</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>helloscout_cdn</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>deploy_to_tomcat</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>sdk_eclipse</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>migration</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>releasenotes</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>technical_guide</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.eclipsescout.docs</groupId>
       <artifactId>technical_guide_js</artifactId>
-      <version>11.0-SNAPSHOT</version>
+      <version>11.0.30</version>
       <type>pom</type>
     </dependency>
   </dependencies>
