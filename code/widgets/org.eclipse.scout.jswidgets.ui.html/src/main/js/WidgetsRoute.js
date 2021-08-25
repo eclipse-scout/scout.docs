@@ -31,15 +31,10 @@ export default class WidgetsRoute extends Route {
     let regex = /^jswidgets\.(\w*)(Form|PageWithTable|PageWithNodes)$/;
     let routes = [];
     Tree.visitNodes(node => {
-      let routeRef = null,
-        objectType, result;
-      if (node.detailForm) {
-        objectType = node.detailForm.objectType;
-      } else {
-        objectType = node.objectType;
-      }
+      let routeRef = null;
+      let objectType = this._objectTypeForNode(node);
 
-      result = regex.exec(objectType);
+      let result = regex.exec(objectType);
       if (result !== null && result.length > 1) {
         routeRef = result[1].toLowerCase();
         routes.push([routeRef, objectType]);
@@ -73,12 +68,22 @@ export default class WidgetsRoute extends Route {
     let objectType = this._getRouteData(location)[1];
     let foundNode = null;
     Tree.visitNodes(node => {
-      if ((node.detailForm && node.detailForm.objectType === objectType) || node.objectType === objectType) {
+      if (this._objectTypeForNode(node) === objectType) {
         foundNode = node;
         return false;
       }
     }, this.desktop.outline.nodes);
     this.desktop.outline.selectNode(foundNode);
+  }
+
+  _objectTypeForNode(node) {
+    if (node.detailForm) {
+      return node.detailForm.objectType;
+    }
+    if (node._detailFormModel) {
+      return node._detailFormModel.objectType;
+    }
+    return node.objectType;
   }
 
   _onPageChanged(event) {
