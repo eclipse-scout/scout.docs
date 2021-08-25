@@ -155,13 +155,12 @@ export default class FormFieldPropertiesBox extends GroupBox {
         this.field.setLabelWidthInPixel(numbers.ensure(event.newValue));
       }
     } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
+      this.field.removeErrorStatus(DefaultStatus);
       if (event.newValue) {
         this.field.setErrorStatus(new DefaultStatus({
           severity: event.newValue,
           message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, event.newValue))
         }));
-      } else {
-        this.field.removeErrorStatus(DefaultStatus);
       }
     } else if (event.propertyName === 'value' && event.source.id === 'TooltipTextField') {
       this.field.setTooltipText(event.newValue);
