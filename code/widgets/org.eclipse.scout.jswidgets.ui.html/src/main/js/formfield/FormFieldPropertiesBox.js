@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -156,7 +156,7 @@ export default class FormFieldPropertiesBox extends GroupBox {
       }
     } else if (event.propertyName === 'value' && event.source.id === 'ErrorStatusField') {
       if (event.newValue) {
-        this.field.addErrorStatus(new DefaultStatus({
+        this.field.setErrorStatus(new DefaultStatus({
           severity: event.newValue,
           message: this.session.text('FormFieldStatusMessage', objects.keyByValue(Status.Severity, event.newValue))
         }));
