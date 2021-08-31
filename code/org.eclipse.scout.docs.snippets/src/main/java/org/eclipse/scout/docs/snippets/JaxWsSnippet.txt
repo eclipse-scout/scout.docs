@@ -136,15 +136,16 @@
 <!-- Replace 'XXX-VERSION-XXX' by the respective Scout RT version -->
 <factorypath>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.jaxws.apt/XXX-VERSION-XXX/org.eclipse.scout.jaxws.apt-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/glassfish/jaxb/codemodel/2.3.3/codemodel-2.3.3.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/glassfish/jaxb/codemodel/3.0.2/codemodel-3.0.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.platform/XXX-VERSION-XXX/org.eclipse.scout.rt.platform-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/scout/rt/org.eclipse.scout.rt.server.jaxws/XXX-VERSION-XXX/org.eclipse.scout.rt.server.jaxws-XXX-VERSION-XXX.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/servlet/jakarta.servlet-api/4.0.4/jakarta.servlet-api-4.0.4.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/jws/jakarta.jws-api/2.1.0/jakarta.jws-api-2.1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/xml/ws/jakarta.xml.ws-api/2.3.3/jakarta.xml.ws-api-2.3.3.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
+
 
 // end::jaxws.eclipseide.apt.factorypath[]
 

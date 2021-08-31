@@ -686,7 +686,7 @@ If this value is true, the value of property `scout.jaxws.consumer.portCache.ena
 |`scout.jaxws.implementor`
 |Fully qualified class name of the JAX-WS implementor to use. The class must extend `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsImplementorSpecifics`.
 
-By default, JAX-WS Metro (not bundled with JRE) is used. For that to work, add the Maven dependency to JAX-WS Metro to your server application`s pom.xml: com.sun.xml.ws:jaxws-rt:2.2.10.
+By default, JAX-WS Metro (not bundled with JRE) is used. For that to work, add the Maven dependency to JAX-WS Metro to your server application`s pom.xml: com.sun.xml.ws:jaxws-rt:2.3.5.
 |Fully qualified class name. The class must have `org.eclipse.scout.rt.server.jaxws.implementor.JaxWsImplementorSpecifics` in its super hierarchy.
 |Config Property
 |`scout.jaxws.loghandlerDebug`

@@ -51,6 +51,21 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
+== New 3rd Party requirements
+
+The Java 8 support has been dropped in Scout 22.
+Therefore, only Java 11 is supported at the moment.
+Support for Java 17 is planned for a future release.
+
+Furthermore the minimal Maven version has been raised to 3.6.3.
+
+See the migration guide for instructions on how to update.
+
+Please note that Scout 22 makes use of the `Jakarta EE 8` artifacts.
+These artifacts already use the new `jakarta.\*` Maven coordinates but still contain the old `javax.*` Java packages.
+This ensures backwards compatibility with older `Java EE 8` containers.
+The transition to `Jakarta EE 9.1` or newer is planned for a future release.
+
 == Native Notification Support
 
 It's now possible to send notifications via the https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API[Notification API].

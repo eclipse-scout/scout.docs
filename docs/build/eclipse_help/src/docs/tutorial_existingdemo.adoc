@@ -43,7 +43,7 @@ Before you proceed make sure that all shown variables are set appropriately for 
 
 * `Git clone location rule`: "`Located in a folder named '.git/{lt}repo{gt}' within the workspace folder`"
 * `Target Platform`: "`None`"
-* `JRE 1.8 Location`: Path to your Java 8 JRE
+* `JRE 11 Location`: Path to your Java 11 JRE
 * `Scout Demo App Github repository`: "`HTTPS (read-only, anonymous)`"
 
 Once you finished setting the variables click btn:[Next].

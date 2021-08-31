@@ -21,7 +21,7 @@ Scout facilitates working with webservices, supports you in the generation of ar
 === Functionality
 
 * ready to go Maven profile for easy webservice stub and artifact generation
-* full JAX-WS 2.2 compliance
+* full JAX-WS 2.3 compliance
 * JAX-WS implementor independence
 * provides an up front port type _EntryPoint_ to enforce for authentication, and to run web requests in a <<RunContext,RunContext>>
 * adds cancellation support for on-going webservice requests
@@ -33,11 +33,11 @@ Scout facilitates working with webservices, supports you in the generation of ar
 
 ==== JAX-WS version and implementor
 The JAX-WS Scout integration provides a thin layer on top of JAX-WS implementors to facilitate working with webservices.
-It depends on the JAX-WS 2.2.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:
+It depends on the JAX-WS 2.3.x API as specified in JSR 224. It is implementor neutral, and was tested with with the following implementations:
 
-* _JAX-WS RI_ (reference implementation) as shipped with Java 7 and Java 8. Please note that starting with Java 11 this is no longer part of the JRE.
-* _JAX-WS METRO_ (2.2.10)
-* _Apache CXF_ (3.1.3)
+* _JAX-WS RI_ (reference implementation)
+* _JAX-WS METRO_
+* _Apache CXF_
 
 The integration does not require you to bundle the JAX-WS implementor with your application, which is a prerequisite for running in an EE container.
 
@@ -265,7 +265,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 
 WARNING: _wsimport_ allows to directly configure the package name for files to be generated (packageName). However, this is discouraged, because all artifacts are put into the very same package. Use package customization on a per-namespace basis instead.
 
-TIP: For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to _wsimport_. See http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html for more information.
+TIP: For shared webservice artifacts, you can also use XJC binding compiler to generate those artifacts in advance, and then provide the resulting episode binding file (META-INF/sun-jaxb.episode) to _wsimport_. See https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.4/example_xjc_basic.html for more information.
 
 ==== Annotation Processing Tool (APT)
 Annotation Processing (APT) is a tool which can be enabled to fire for annotated types during compilation. In JAX-WS Scout integration, it is used as a trigger to generate webservice port type implementations. Such an auto-generated port type implementation is called an entry point. It is to be published as the  webservice's endpoint, and acts as an interceptor for webservice requests. It optionally enforces for authentication, and makes the request to be executed in a <<RunContext,RunContext>>. Then, it handles the web request to the effectively implementing port type bean for actual processing.
