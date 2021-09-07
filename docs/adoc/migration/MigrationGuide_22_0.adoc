@@ -295,3 +295,27 @@ The style and colors for tooltips has been changed which may require the followi
 
 . The colors for tooltips have changed: severity `OK` is showing in green, `INFO` in black and `WARNING` in orange. Severity `ERROR` is still red and therefore remains unchanged. If you use a `Status` that is displayed as tooltip and uses one of the changed severities, verify if the color matches the meaning of the tooltip and adapt the severity if necessary.
 . Scout JS only: The tooltips are now displayed in inverse style (white text, dark background). If you used custom styling for your tooltips (using property `htmlEnabled`), you might require to adapt your styles to look nice again with the inverse style.
+
+== Logging the HTTP Session ID
+
+The HTTP Session ID is a crucial factor of a web application's security.
+Knowledge of the session ID can enable attackers to hijack the session of an active user.
+It must therefore not be made available to a malicious third party under any circumstances!
+Writing the ID to a log files _might_ therefore pose a security risk, depending on who has access to the file.
+
+Scout does not directly output the HTTP Session ID by default, but it provides a corresponding "diagnostics context value" (http://www.slf4j.org/apidocs/org/slf4j/MDC.html[MDC]).
+If the logger implementation is configured accordingly, the context value `http.session.id` is written to the log file.
+
+In accordance with the _security by default_ principle, the diagnostics context value no longer contains the full session ID.
+Instead, an obfuscated and truncated identifier is provided.
+It cannot be converted back to the original session ID but is still sufficiently unique to relate log entries for the same session for debugging purposes.
+See the class `HttpSessionIdLogHelper` for details.
+
+*Migration:*
+
+* No migration is required.
+* Logger configurations that don't use the MDC value `http.session.id` are not affected by this change.
+* The content of the MDC value `http.session.id` can be configured via the system property _scout.diagnostics.httpSessionIdLogMode_.
+** `SHORT`: Provides a safe, truncated session identifier. This is the default value (no configuration required).
+** `OFF`: Never provides a value (always empty).
+** `FULL`: Provides the full HTTP Session ID. This restores the previous, less safe behavior. *Using this value is NOT recommended!*
