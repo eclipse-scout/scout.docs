@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>publish</artifactId>
-  <name>Publish documents</name>
+  <description>Publish documents</description>
   <packaging>pom</packaging>
 
   <dependencies>

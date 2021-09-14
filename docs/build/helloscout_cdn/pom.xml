@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>helloscout_cdn</artifactId>
-  <name>Hello Scout CDN</name>
+  <description>Hello Scout CDN</description>
   <packaging>pom</packaging>
 
   <build>

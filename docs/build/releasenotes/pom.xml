@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>releasenotes</artifactId>
-  <name>Eclipse Scout Release Notes</name>
+  <description>Eclipse Scout Release Notes</description>
   <packaging>pom</packaging>
 
   <build>

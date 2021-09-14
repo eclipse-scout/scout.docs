@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>helloscout_js</artifactId>
-  <name>Hello Scout JS</name>
+  <description>Hello Scout JS</description>
   <packaging>pom</packaging>
 
   <build>

@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>technical_guide</artifactId>
-  <name>Eclipse Scout Technical Guide</name>
+  <description>Eclipse Scout Technical Guide</description>
   <packaging>pom</packaging>
 
   <build>

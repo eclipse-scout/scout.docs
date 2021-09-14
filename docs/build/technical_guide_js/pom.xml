@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>technical_guide_js</artifactId>
-  <name>Eclipse Scout JS Technical Guide</name>
+  <description>Eclipse Scout JS Technical Guide</description>
   <packaging>pom</packaging>
 
   <build>

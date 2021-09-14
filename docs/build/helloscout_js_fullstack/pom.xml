@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>helloscout_js_fullstack</artifactId>
-  <name>Hello Scout JS Full Stack</name>
+  <description>Hello Scout JS Full Stack</description>
   <packaging>pom</packaging>
 
   <build>
