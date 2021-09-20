@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>migration</artifactId>
-  <name>Eclipse Scout Migration Guide</name>
+  <description>Eclipse Scout Migration Guide</description>
   <packaging>pom</packaging>
 
   <build>

@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>one_day_tutorial</artifactId>
-  <name>Eclipse Scout One Day Tutorial</name>
+  <description>Eclipse Scout One Day Tutorial</description>
   <packaging>pom</packaging>
 
   <build>

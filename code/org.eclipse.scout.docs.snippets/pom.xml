@@ -22,7 +22,7 @@
   <groupId>org.eclipsescout.demo</groupId>
   <artifactId>org.eclipse.scout.docs.snippets</artifactId>
   <version>22.0-SNAPSHOT</version>
-  <name>Snippets used in technical documentation of Eclipse Scout framework</name>
+  <description>Snippets used in technical documentation of Eclipse Scout framework</description>
 
   <properties>
     <org.eclipse.scout.rt.version>22.0-SNAPSHOT</org.eclipse.scout.rt.version>

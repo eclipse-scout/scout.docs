@@ -15,7 +15,7 @@
   </parent>
 
   <artifactId>sdk_tests</artifactId>
-  <name>Scout SDK testing checklist</name>
+  <description>Scout SDK testing checklist</description>
   <packaging>pom</packaging>
 
   <build>
