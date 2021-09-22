@@ -215,6 +215,11 @@ If you want to align your custom icons with the Scout icons, use the following d
 * Regular: 1.5px line width and 24px artboard height
 * Light: 1px line width and 24px artboard height
 
+== Form
+Views (forms with display hint = view) are now closable by default.
+Until now, only dialogs containing a close or cancel button showed the close icon in the top right corner.
+If you have views that must not be closable, set closable to false explicitly.
+
 == Browser Field
 
 The type of the `data` argument for the callback `execPostMessage` was changed from _String_ to _Object_.
