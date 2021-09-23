@@ -129,8 +129,6 @@ export default class BrowserFieldForm extends Form {
     if (event.propertyName === 'value') {
       this.browserField.showInExternalWindow = event.newValue;
       this.browserField.parent.rerenderControls();
-      // Validate layout immediately to prevent flickering
-      this.browserField.parent.htmlBody.validateLayoutTree();
     }
   }
 

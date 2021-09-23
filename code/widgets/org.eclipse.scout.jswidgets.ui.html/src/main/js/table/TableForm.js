@@ -87,8 +87,6 @@ export default class TableForm extends Form {
         newPropertiesBoxField.setColumn(newColumn);
       }
       this._removePropertiesBoxes(newColumn.objectType, columnPropertyTab);
-
-      this.validateLayoutTree();
     }
   }
 

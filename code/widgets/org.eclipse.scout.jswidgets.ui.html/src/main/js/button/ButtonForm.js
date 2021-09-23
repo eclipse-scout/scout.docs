@@ -138,7 +138,5 @@ export default class ButtonForm extends Form {
     mainBox.deleteField(groupBox);
     mainBox.insertField(groupBox, 0);
     groupBox.setOwner(mainBox);
-    // Validate layout immediately to prevent flickering
-    mainBox.validateLayoutTree();
   }
 }

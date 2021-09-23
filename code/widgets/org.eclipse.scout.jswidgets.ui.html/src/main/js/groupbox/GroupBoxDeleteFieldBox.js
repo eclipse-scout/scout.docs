@@ -56,8 +56,6 @@ export default class GroupBoxDeleteFieldBox extends GroupBox {
   _onDeleteFormFieldButtonClick(event) {
     this.field.deleteField(this.targetField.value);
     this.targetField.setValue(null);
-    // Validate layout immediately to prevent flickering
-    this.field.validateLayoutTree();
   }
 
   setTargetField(field) {

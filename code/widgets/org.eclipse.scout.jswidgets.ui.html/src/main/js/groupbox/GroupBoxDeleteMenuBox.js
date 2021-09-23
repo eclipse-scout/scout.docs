@@ -65,7 +65,5 @@ export default class GroupBoxDeleteMenuBox extends GroupBox {
     this.field._setMenus(newMenuItems);
 
     this.targetField.setValue(null);
-    // Validate layout immediately to prevent flickering
-    this.field.validateLayoutTree();
   }
 }

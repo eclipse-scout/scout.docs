@@ -89,7 +89,5 @@ export default class GroupBoxAddMenuBox extends GroupBox {
     this.field.setMenus(newMenuItems);
 
     this._updateAddMenuBarDefaultValues();
-    // Validate layout immediately to prevent flickering
-    this.field.validateLayoutTree();
   }
 }

@@ -55,7 +55,6 @@ export default class DesktopForm extends Form {
   _onHeaderVisiblePropertyChange(event) {
     if (event.propertyName === 'value') {
       this.session.desktop.setHeaderVisible(event.newValue);
-      this.session.desktop.validateLayoutTree(); // Prevent flickering
     }
   }
 

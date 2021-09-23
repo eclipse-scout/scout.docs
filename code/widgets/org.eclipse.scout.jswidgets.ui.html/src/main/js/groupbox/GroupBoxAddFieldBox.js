@@ -74,8 +74,6 @@ export default class GroupBoxAddFieldBox extends GroupBox {
       this.field.insertField(newField);
     }
     this._updateAddFieldLabel();
-    // Validate layout immediately to prevent flickering
-    this.field.validateLayoutTree();
   }
 
   setTargetField(field) {

@@ -103,8 +103,6 @@ export default class StringFieldForm extends Form {
       let field = this.widget('StringField');
       field._setMultilineText(event.newValue);
       field.parent.rerenderControls();
-      // Validate layout immediately to prevent flickering
-      field.parent.htmlBody.validateLayoutTree();
     }
   }
 

@@ -80,8 +80,6 @@ export default class SmartFieldPropertiesBox extends GroupBox {
     if (event.propertyName === 'value') {
       this.field.displayStyle = event.newValue;
       this.field.parent.rerenderControls();
-      // Validate layout immediately to prevent flickering
-      this.field.parent.htmlBody.validateLayoutTree();
     }
   }
 
