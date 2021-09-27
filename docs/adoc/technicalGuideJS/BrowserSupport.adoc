@@ -16,27 +16,11 @@ The Scout HTML UI requires a web browser with modern built-in technologies: HTML
 Here is a non-exhaustive list of supported browsers:
 
 Desktop::
-* Mozilla Firefox >= 35
-* Google Chrome >= 40
-* Microsoft Internet Explorer 11 (see table below for known limitations)
-* Microsoft Edge >= 12 (see table below for known limitations)
-* Apple Safari >= 8
+* Mozilla Firefox >= 55
+* Chromium (like Google Chrome, Microsoft Edge, Brave or Opera) >= 58
+* Apple Safari >= 13
 
 Mobile::
 _(Due to the nature of mobile operating systems, it is hard to specify exact versions of supported browsers. Usually, the screen size and the device speed are the limiting factors.)_
-* iOS >= 8
+* iOS >= 13
 * Android >= 5
-* Windows Mobile >= 10
-
-.Known Limitations
-[width="100%",options="header",cols="3,9"]
-|=======
-|Affected System|Description
-
-|Internet Explorer
-|If the browser is configured to enable the so-called *"protected mode"*, the state of a popup window cannot be determined correctly. This is noticeable when a `AbstractBrowserField` has the property _"show in external window"_ set to `true`. Even though the popup window is still open, the method `execExternalWindowStateChanged()` is called immediately, telling you the window was closed (because IE reports so). There is no workaround for this problem, apart from disabling the "protected mode".
-
-|Internet Explorer and Edge
-|*Performance in popup windows* (e.g. opening a form with `DISPLAY_HINT_POPUP_WINDOW`) is very poor. We have https://connect.microsoft.com/IE/feedback/details/1778700/edge-manipulating-dom-from-another-window-is-slow-in-ms-edge[filed a bug] with the folks at Microsoft in 2015, but unfortunately the issue is still unresolved. To prevent slow forms in IE, they should be using a different display hint. Alternatively, users can use a different browser.
-
-|=======

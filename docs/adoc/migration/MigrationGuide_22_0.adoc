@@ -56,9 +56,13 @@ Usage example in your package.json:
 {
   "name": "my-module",
   "version": "1.0.0",
+  "devDependencies": {
+    "@eclipse-scout/cli": "{node-version}",
+    "@eclipse-scout/releng": "^22.0.0"
+  },
   "dependencies": {
     "@eclipse-scout/core": "{node-version}",
-    "jquery": "3.5.1"
+    "jquery": "3.6.0"
   }
 }
 ----
@@ -88,9 +92,9 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 The Java 8 support has been dropped in Scout 22. Therefore, only Java 11 is supported at the moment.
 To update your application the following steps might be required:
 
-* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the latest `3.15.x` release. See https://search.maven.org/classic/#search%7Cgav%7C1%7Cg%3A%22org.eclipse.scout%22%20AND%20a%3A%22maven_rt_plugin_config-master%22[Maven central] for a list of versions available.
+* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the latest `22.0.x` release. See https://search.maven.org/classic/#search%7Cgav%7C1%7Cg%3A%22org.eclipse.scout%22%20AND%20a%3A%22maven_rt_plugin_config-master%22[Maven central] for a list of versions available.
 * Update the Scout versions (`package.json` and `pom.xml`) as shown in <<Obtaining the Latest Version>>.
-* Ensure you have at least Maven 3.6.3 installed. Older versions will no longer work.
+* Ensure you have at least Maven 3.6.3 installed. Older versions are no longer supported.
 * Ensure you have Java 11 installed. Other versions will not work.
 * In case you have set one of the following properties in your `pom.xml` files, update its value to `11`:
 ** `jdk.source.version`
@@ -100,6 +104,76 @@ To update your application the following steps might be required:
 ** `maven.compiler.release`
 * In case you used the `cargo-maven2-plugin` replace it with the `cargo-maven3-plugin`.
 * If you are using Eclipse and web-service providers, update the `.factorypath` files as shown in the `JAX-WS Appendix` of the Scout documentation.
+* The support for Microsoft Internet Explorer and Microsoft Edge Legacy has been dropped.
+Accordingly, you might want to update the list with supported browsers in your `unsupported-browser.html` file (if existing). Remove the list item having text `ui.BrowserInternetExplorer`.
+You can keep the one with Edge, because the new Chromium based Microsoft Edge browser is supported.
+
+=== Update of 3rd Party library _chart.js_ to 3.6.0
+
+If you are using the charts from `@eclipse-scout/chart` you might need to update the config object of your charts, as most of them are rendered using _chart.js_.
+
+First check this  https://www.chartjs.org/docs/latest/getting-started/v3-migration.html[migration guide].
+In addition, the following config attributes must also be migrated:
+
+* `config.options.scales.minSpaceBetweenXTicks` -> `config.options.scales.x.minSpaceBetweenTicks`
+* `config.options.scales.minSpaceBetweenYTicks` -> `config.options.scales.y.minSpaceBetweenTicks`
+* `config.options.scale.minSpaceBetweenTicks` -> `config.options.scales.r.minSpaceBetweenTicks`
+* `config.options.scales.[id].afterCalculateTickRotation` -> `config.options.scales.[id].afterCalculateLabelRotation`
+* `...fontColor` -> `...color`
+* `...fontFamily` -> `...font.family`
+* `...fontSize` -> `...font.size`
+* `...fontStyle` -> `...font.style`
+* `config.bubble` -> `config.options.bubble`
+* `config.fulfillment` -> `config.options.fulfillment`
+* `config.salesfunnel` -> `config.options.salesfunnel`
+* `config.speedo` -> `config.options.speedo`
+* `config.venn` -> `config.options.venn`
+* `config.data.datasets[i].pointHoverBackgroundColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
+* `config.data.datasets[i].pointBorderColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
+* `config.data.datasets[i].pointHoverBorderColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
+
+Also, we observed some changes that might be of interest:
+
+* Remove the `borderWidth` on every _dataset_ when `backgroundColor` and `borderColor` are the same. Otherwise, there will be a small white line between the border and the background.
+* `Scale.longestLabelWidth` -> `Scale._labelSizes.widest.width`
+* `Scale._ticks` -> `Scale.ticks`
+* `Element._datasetIndex` -> `Element.datasetIndex`
+* `Element._index` -> `Element.index`
+* Never use `data.splice(n)`, always use `data.splice(n, data.length - n)`, as _chart.js_ listens on splice-events and can't handle calls without the `deleteCount`.
+
+The _chart.js_ tooltip was replaced by the scout tooltip. Therefore, the css class `.tooltip-background` ca be removed.
+
+=== Update of other 3rd Party JavaScript libraries
+
+Perform the following migration in all your `package.json` files:
+
+* If you specify the minimum engines versions please update them as follows:
++
+[source,json lines]
+----
+"engines": {
+    "node": ">=16.13.0",
+    "npm": ">=8.1.0",
+    "pnpm": ">=6.22.2"
+}
+----
+* Update the following dependencies (if existing in your application):
++
+[source,json lines]
+----
+"jquery": "3.6.0"
+"jasmine-core": "3.10.1"
+"karma": "6.3.9"
+"eslint": "8.3.0"
+
+----
+* Replace dependencies to `babel-eslint` with these two:
++
+[source,json lines]
+----
+"@babel/core": "7.16.0",
+"@babel/eslint-parser": "7.16.3"
+----
 
 == @TypeVersion Annotation Type Change
 

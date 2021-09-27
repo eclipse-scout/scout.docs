@@ -919,8 +919,8 @@ In addition to the chart.js-properties we added custom properties, some of them 
 * `clickable` Whether a chart is clickable.
 * `checkable` Whether a chart is checkable.
 * `otherSegmentClickable` Whether the consolidated others segment is clickable.
-* `legend.clickable` Whether the legend is clickable.
-* `scales.xLabelMap` and `scales.yLabelMap` Label mapping for discrete values.
+* `plugins.legend.clickable` Whether the legend is clickable.
+* `xLabelMap` and `yLabelMap` Label mapping for discrete values.
 * `handleResize` Whether the chart should handle resizing itself (not necessary if the containers size is updated).
 * `numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.
 * `reformatLabels` Whether the data labels should be reformatted. It is assumed that data labels (incl. numeric labels) are correctly formatted. If one wants to have the data labels formatted using the number formatter, this flag can be used.
