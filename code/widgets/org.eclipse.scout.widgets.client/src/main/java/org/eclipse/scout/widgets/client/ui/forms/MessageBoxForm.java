@@ -12,7 +12,12 @@ package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
@@ -20,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
@@ -56,6 +62,7 @@ import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.Examples
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.ExamplesBox.ResultField;
 import org.eclipse.scout.widgets.client.ui.forms.MessageBoxForm.MainBox.SampleContentButton;
 import org.eclipse.scout.widgets.client.ui.template.formfield.StatusSeverityLookupCall;
+import org.eclipse.scout.widgets.shared.Icons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -346,8 +353,16 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(50)
-      @ClassId("94e0ec44-1473-40e8-a352-ea5de7504fce")
-      public class DeleteConfirmationMessageButton extends AbstractLinkButton {
+      @ClassId("bec00e85-4a9a-48b2-832f-0d1c304d2dc2")
+      public class DeleteConfirmationMessageButtonBox extends AbstractSequenceBox {
+
+        protected String m_itemType = null;
+        protected List<String> m_items = null;
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
 
         @Override
         protected int getConfiguredGridW() {
@@ -355,19 +370,126 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("DeleteConfirmationMessage");
+        protected void execInitField() {
+          getMenuByClass(ShortTextsMenu.class).doAction();
         }
 
-        @Override
-        protected boolean getConfiguredProcessButton() {
-          return false;
+        protected void markMenuAsSelected(IMenu menu) {
+          updateSelectionIcon(getMenuByClass(NoItemsMenu.class), menu);
+          updateSelectionIcon(getMenuByClass(ShortTextsMenu.class), menu);
+          updateSelectionIcon(getMenuByClass(LongTextsMenu.class), menu);
+          updateSelectionIcon(getMenuByClass(ManyItemsMenu.class), menu);
         }
 
-        @Override
-        protected void execClickAction() {
-          boolean result = MessageBoxes.showDeleteConfirmationMessage("Items", new String[]{"Item1", "Item2", "Item3"});
-          getResultField().setValue(result + "");
+        protected void updateSelectionIcon(IMenu menuToUpdate, IMenu selectedMenu) {
+          menuToUpdate.setIconId(menuToUpdate == selectedMenu ? Icons.CircleSolid : null);
+        }
+
+        @Order(10)
+        @ClassId("94e0ec44-1473-40e8-a352-ea5de7504fce")
+        public class DeleteConfirmationMessageButton extends AbstractLinkButton {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("DeleteConfirmationMessage");
+          }
+
+          @Override
+          protected boolean getConfiguredProcessButton() {
+            return false;
+          }
+
+          @Override
+          protected void execClickAction() {
+            boolean result = MessageBoxes.showDeleteConfirmationMessage(m_itemType, m_items);
+            getResultField().setValue(result + "");
+          }
+        }
+
+        @Order(10)
+        @ClassId("badffb13-1a1a-4ef5-975b-54672d59ef0a")
+        public class UseItemTypeMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "Custom item type \"Special Items\"";
+          }
+
+          @Override
+          protected void execAction() {
+            if (m_itemType == null) {
+              m_itemType = "Special Items";
+              setIconId(Icons.CheckedBold);
+            }
+            else {
+              m_itemType = null;
+              setIconId(null);
+            }
+          }
+        }
+
+        @Order(20)
+        @ClassId("e3b85569-13af-4d9a-b763-c6a9f9995993")
+        public class NoItemsMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "No items";
+          }
+
+          @Override
+          protected void execAction() {
+            m_items = null;
+            markMenuAsSelected(this);
+          }
+        }
+
+        @Order(30)
+        @ClassId("1b68ef8d-0fa6-4528-b596-d04e9bf2755a")
+        public class ShortTextsMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "3 items (short texts)";
+          }
+
+          @Override
+          protected void execAction() {
+            m_items = List.of("Item 1 ", "Item 2", "Item 3");
+            markMenuAsSelected(this);
+          }
+        }
+
+        @Order(40)
+        @ClassId("d39c8cc0-f847-4c66-8e51-cbcff1c1b5e9")
+        public class LongTextsMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "3 items (long texts)";
+          }
+
+          @Override
+          protected void execAction() {
+            m_items = List.of("Item 1", "The second item in this last has an extremely long name and may not fit on one line.", "Item 3\nhas\nsome\nline\nbreaks");
+            markMenuAsSelected(this);
+          }
+        }
+
+        @Order(50)
+        @ClassId("fc4fa95a-42c5-41df-b00d-6cfa7dbe75d9")
+        public class ManyItemsMenu extends AbstractMenu {
+
+          @Override
+          protected String getConfiguredText() {
+            return "20 items";
+          }
+
+          @Override
+          protected void execAction() {
+            m_items = IntStream.rangeClosed(1, 20).mapToObj(i -> "Item #" + i).collect(Collectors.toList());
+            markMenuAsSelected(this);
+          }
         }
       }
 
@@ -625,11 +747,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected boolean getConfiguredWrapText() {
           return true;
         }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
       }
 
       @Order(50)
@@ -654,11 +771,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected boolean getConfiguredWrapText() {
           return true;
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
       }
 
@@ -685,11 +797,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected boolean getConfiguredWrapText() {
           return true;
         }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
       }
 
       @Order(70)
@@ -699,11 +806,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("YesButtonText");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -722,11 +824,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected void execChangedValue() {
           updateMessageBoxConfiguredButton();
         }
@@ -739,11 +836,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("CancelButtonText");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -760,11 +852,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("HiddenTextContent");
         }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
       }
 
       @Order(120)
@@ -774,11 +861,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("IconId");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
@@ -797,11 +879,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
         protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
           return AnswerOptionsLookupCall.class;
         }
@@ -814,11 +891,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("AutoCloseMillis");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
         }
 
         @Override
