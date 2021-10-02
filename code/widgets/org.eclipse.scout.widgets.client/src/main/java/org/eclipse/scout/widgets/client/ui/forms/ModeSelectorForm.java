@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.action.menu.ValueFieldMenuType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.GridData;
+import org.eclipse.scout.rt.client.ui.form.fields.IFormField;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -91,6 +92,10 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
 
   public ConfigurableModeSelectorGroup getConfigurableModeSelectorGroup() {
     return getFieldByClass(ConfigurableModeSelectorGroup.class);
+  }
+
+  public ConfigurationBox.FieldStyleField getFieldStyleField() {
+    return getFieldByClass(ConfigurationBox.FieldStyleField.class);
   }
 
   @Order(10)
@@ -245,14 +250,6 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
           return 2;
         }
 
-        @Override
-        protected void execChangedValue() {
-          IMode<String> mode = getModeFor(getValue());
-          if (mode != null) {
-            MessageBoxes.createOk().withHeader(TEXTS.get("ModeSelected", ObjectUtility.nvl(mode.getText(), mode.getIconId()))).show();
-          }
-        }
-
         @Order(10)
         @ClassId("6345767c-2da7-4720-94f4-0455465f202f")
         public class Mode1 extends AbstractMode<String> {
@@ -402,6 +399,25 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() {
           setValue(getConfigurableModeSelectorGroup().isEnabled());
+        }
+      }
+
+      @Order(80)
+      @ClassId("d3cf37da-232d-4329-b849-6541c95d4924")
+      public class FieldStyleField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Alternative";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(IFormField.FIELD_STYLE_ALTERNATIVE.equals(getConfigurableModeSelectorGroup().getFieldStyle()));
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getConfigurableModeSelectorGroup().setFieldStyle(getValue() ? IFormField.FIELD_STYLE_ALTERNATIVE : IFormField.FIELD_STYLE_CLASSIC);
         }
       }
 
@@ -719,7 +735,7 @@ public class ModeSelectorForm extends AbstractForm implements IPageForm {
 
       @Override
       protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
-        return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
+        return IconIdLookupCall.class;
       }
 
       @Override
