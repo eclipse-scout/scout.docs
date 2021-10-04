@@ -158,6 +158,7 @@ So if you prefer to use a different logo for the info form, just extend the info
 In case you don't use SVG logos yet, you should consider doing so to prevent blurry logos.
 
 == Style
+
 === LESS Variables
 
 - @active-inverted-background-color -> @selected-background-color
@@ -173,6 +174,7 @@ Notes:
 Instead of customizing the navigation background color it is suggested to now customize the header background color.
 
 === Rules
+
 - .menubox -> .menubar-box
 - .group-box-title -> .group-box-header > .title
 - border-bottom of group-box-title -> .group-box-header > .bottom-border
@@ -181,6 +183,7 @@ Instead of customizing the navigation background color it is suggested to now cu
 // TODO cgu describe: button, menu styles
 
 === Icons
+
 ==== Cleanup
 
 Some icons have been removed because they are not used by Scout itself anymore.
@@ -215,6 +218,7 @@ The following icons have been renamed
 - EXCLAMATION_MARK -> EXCLAMATION_MARK_BOLD
 
 ==== Line Width Adjustments
+
 The line width of the Scout icons has been increased a little because they are now displayed a little smaller.
 If you use custom icons in combination with the Scout icons, you may want to consider adjusting the line widths of your icons as well.
 This should only be relevant if you explicitly used the Scout icons in your code.
@@ -231,6 +235,7 @@ If you want to align your custom icons with the Scout icons, use the following d
 * Light: 1px line width and 24px artboard height
 
 == Form
+
 Views (forms with display hint = view) are now closable by default.
 Until now, only dialogs containing a close or cancel button showed the close icon in the top right corner.
 If you have views that must not be closable, set closable to false explicitly.
@@ -294,7 +299,6 @@ The following classes were renamed:
 * DefaultDoEntityDeserializerTypeResolver -> DefaultDoEntityDeserializerTypeStrategy
 * RawDoEntityDeserializerTypeResolver -> RawDoEntityDeserializerTypeStrategy
 
-
 == Json raw deserialization of floating point numbers
 
 When raw deserializing json using Jackson (e.g. by using `JacksonDataObjectMapper#readValueRaw`) the behavior changed for floating point numbers:
@@ -319,6 +323,19 @@ They will be removed eventually.
 Note the uppercase "C" in the new function names!
 
 TIP: At the same time, some new null-safe variants of `String` prototype methods were added: `toUpperCase(s)`, `toLowerCase(s)`, `length(s)`, `trim(s)` .
+
+== Removed functions in StreamUtility.java
+
+The `StreamUtility` utility provided some methods that were functionally identical to Java 9 methods of the same name.
+The methods `not`, `takeWhile`, and `iterate` were removed; the equivalent Java 11 core library methods may now be used directly.
+
+*Migration:*
+
+* Change `StreamUtility.not(p)` to `java.util.function.Predicate.not(p)`.
+* Change `StreamUtility.takeWhile(stream, predicate)` to `stream.takeWhile(predicate)`.
+* Change `StreamUtility.iterate(initialElement, hasNext, next)` to `java.util.stream.Stream.iterate(initialElement, hasNext, next)`.
+
+Note that `takeWhile` now operates on the `java.util.Stream` object itself and no longer is a static method.
 
 == New Style for Tooltips
 
