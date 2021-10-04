@@ -29,6 +29,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
 import org.eclipse.scout.widgets.client.ui.forms.fields.properties.AbstractPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.template.formfield.DisabledStyleLookupCall;
+import org.eclipse.scout.widgets.client.ui.template.formfield.FieldStyleLookupCall;
 import org.eclipse.scout.widgets.client.ui.template.formfield.LabelPositionLookupCall;
 import org.eclipse.scout.widgets.client.ui.template.formfield.LabelWidthInPixelLookupCall;
 import org.eclipse.scout.widgets.client.ui.template.formfield.StatusSeverityLookupCall;
@@ -44,6 +45,10 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
   @Override
   protected TriState getConfiguredResponsive() {
     return TriState.FALSE;
+  }
+
+  public FieldStyleField getFieldStyleField() {
+    return getFieldByClass(FieldStyleField.class);
   }
 
   @Order(1000)
@@ -218,6 +223,35 @@ public abstract class AbstractFormFieldPropertiesBox extends AbstractPropertiesB
     @Override
     protected void execInitField() {
       setValue(m_field.isLoading());
+    }
+  }
+
+  @Order(5750)
+  @ClassId("c104757e-a836-4eb0-be16-cf75012067cb")
+  public class FieldStyleField extends AbstractSmartField<String> {
+    @Override
+    protected String getConfiguredLabel() {
+      return "Field Style";
+    }
+
+    @Override
+    protected String getConfiguredDisplayStyle() {
+      return DISPLAY_STYLE_DROPDOWN;
+    }
+
+    @Override
+    protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+      return FieldStyleLookupCall.class;
+    }
+
+    @Override
+    protected void execChangedValue() {
+      m_field.setFieldStyle(getValue());
+    }
+
+    @Override
+    protected void execInitField() {
+      setValue(m_field.getFieldStyle());
     }
   }
 
