@@ -63,6 +63,12 @@ export default () => ({
                     labelVisible: false
                   },
                   {
+                    id: 'LoadingField',
+                    objectType: 'CheckBoxField',
+                    label: 'Loading',
+                    labelVisible: false
+                  },
+                  {
                     id: 'NativeOnlyField',
                     objectType: 'CheckBoxField',
                     label: 'Native Only',

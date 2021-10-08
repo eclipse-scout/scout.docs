@@ -35,6 +35,7 @@ export default class DesktopNotificationForm extends Form {
     this.widget('NativeNotificationTitleField').setValue(notification.nativeNotificationTitle);
     this.widget('NativeNotificationIconIdField').setValue(notification.nativeNotificationIconId);
     this.widget('NativeNotificationVisibilityField').setValue(notification.nativeNotificationVisibility);
+    this.widget('LoadingField').setValue(notification.loading);
     notification.destroy();
 
     let button = this.widget('Button');
@@ -51,6 +52,7 @@ export default class DesktopNotificationForm extends Form {
       nativeNotificationTitle: this.widget('NativeNotificationTitleField').value,
       nativeNotificationIconId: this.widget('NativeNotificationIconIdField').value,
       nativeNotificationVisibility: this.widget('NativeNotificationVisibilityField').value,
+      loading: this.widget('LoadingField').value,
       status: {
         severity: this.widget('StatusSeverityField').value,
         message: this.widget('MessageField').value
