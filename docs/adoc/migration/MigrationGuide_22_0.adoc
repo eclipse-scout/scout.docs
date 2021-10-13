@@ -299,6 +299,12 @@ Furthermore if you use the following methods on pages, please rename them as fol
 * from `_initTable` to `_initDetailTable`
 * from `_ensureDetailForm` to `ensureDetailForm`
 
+== TagField (Scout JS)
+
+The tag field is not clickable by default anymore.
+If you need the tags to be clickable (and triggering a tagClick event), you have to activate it manually by setting `clickable` to true in the given tag field model.
+Or by using the dedicated setter: `tagField.tagBar.setClickable(true)`.
+
 == Jackson DoEntity Deserializer
 
 The following classes were renamed:

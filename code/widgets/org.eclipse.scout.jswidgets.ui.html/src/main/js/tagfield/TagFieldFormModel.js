@@ -14,7 +14,8 @@ export default () => ({
             id: 'TagField',
             objectType: 'TagField',
             lookupCall: 'jswidgets.TagLookupCall',
-            label: 'Tag Field'
+            label: 'Tag Field',
+            clickable: true
           }
         ]
       },
@@ -29,6 +30,22 @@ export default () => ({
             objectType: 'TabItem',
             label: 'Properties',
             fields: [
+              {
+                id: 'TagBarProperties',
+                objectType: 'GroupBox',
+                label: 'Tag Bar Properties',
+                fields: [{
+                  id: 'EnabledField',
+                  objectType: 'CheckBoxField',
+                  label: 'Enabled',
+                  labelVisible: false
+                }, {
+                  id: 'ClickableField',
+                  objectType: 'CheckBoxField',
+                  label: 'Clickable',
+                  labelVisible: false
+                }]
+              },
               {
                 id: 'ValueFieldPropertiesBox',
                 objectType: 'jswidgets.ValueFieldPropertiesBox'
