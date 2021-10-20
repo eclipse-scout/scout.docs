@@ -40,7 +40,13 @@ export default () => ({
           {
             id: 'NameField',
             objectType: 'StringField',
-            label: 'Name'
+            label: 'Name',
+            mandatory: true
+          },
+          {
+            id: 'ForenameField',
+            objectType: 'StringField',
+            label: 'Forename'
           },
           {
             id: 'BirthdayField',

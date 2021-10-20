@@ -260,7 +260,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() {
-          int result = MessageBoxes.createYesNo().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\" or \"No\"").show();
+          int result = MessageBoxes.createYesNo().withBody("Press \"Yes\" or \"No\"").show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -286,7 +286,7 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execClickAction() {
-          int result = MessageBoxes.createYesNoCancel().withHeader(TEXTS.get("Lorem")).withBody("Press \"Yes\", \"No\" or \"Cancel\"").show();
+          int result = MessageBoxes.createYesNoCancel().withHeader(TEXTS.get("Header")).withBody("Press \"Yes\", \"No\" or \"Cancel\"").show();
           getResultField().setMessageBoxResult(result);
         }
       }
@@ -343,7 +343,6 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execClickAction() {
           int result = MessageBoxes.create()
-              .withHeader(TEXTS.get("Lorem"))
               .withBody(TEXTS.get("HiddenTextInstruction"))
               .withCancelButtonText(TEXTS.get("CloseButton"))
               .withHiddenText(TEXTS.get("HiddenText"))
