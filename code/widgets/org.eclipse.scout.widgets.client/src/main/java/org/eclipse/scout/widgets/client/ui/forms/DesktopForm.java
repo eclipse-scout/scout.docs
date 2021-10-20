@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.widgets.client.ui.forms;
 
 import java.util.concurrent.TimeUnit;
@@ -39,6 +49,7 @@ import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.Notificatio
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DelayField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.DurationField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.IconIdField;
+import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.LoadingField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.MessageField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeNotificationVisibilityField;
 import org.eclipse.scout.widgets.client.ui.forms.DesktopForm.MainBox.NotificationsBox.NativeOnlyField;
@@ -117,6 +128,10 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(CloseableField.class);
   }
 
+  public LoadingField getLoadingField() {
+    return getFieldByClass(LoadingField.class);
+  }
+
   public IconIdField getIconIdField() {
     return getFieldByClass(IconIdField.class);
   }
@@ -182,6 +197,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
             IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
             long duration = getDurationField().getValue();
             boolean closeable = getCloseableField().getValue();
+            boolean loading = getLoadingField().getValue();
             String iconId = getIconIdField().getValue();
             boolean nativeOnly = getNativeOnlyField().getValue();
             String nativeNotificationTitle = getNativeNotificationTitleField().getValue();
@@ -192,6 +208,7 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
                 .withNativeNotificationTitle(nativeNotificationTitle)
                 .withNativeNotificationVisibility(nativeNotificationVisibility)
                 .withNativeNotificationIconId(nativeNotificationIconId);
+            notification.setLoading(loading);
 
             getDesktop().addNotification(notification);
             m_lastNotification = notification;
@@ -323,6 +340,21 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(true);
+        }
+      }
+
+      @Order(75)
+      @ClassId("f99184f9-14cd-499f-ac72-a1166eb7a9f6")
+      public class LoadingField extends AbstractBooleanField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return "Loading";
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(false);
         }
       }
 
