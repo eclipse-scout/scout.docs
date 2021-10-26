@@ -15,7 +15,7 @@
 
   <groupId>org.eclipsescout.docs</groupId>
   <artifactId>aggregator</artifactId>
-  <version>11.0-SNAPSHOT</version>
+  <version>11.0.38</version>
 
   <description>scout docs aggregator</description>
   <packaging>pom</packaging>
