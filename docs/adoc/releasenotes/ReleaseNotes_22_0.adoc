@@ -122,7 +122,11 @@ public class ExampleLookupRowDo extends AbstractHierarchicalLookupRowDo<MyLookup
 }
 ----
 
+// ----------------------------------------------------------------------------
 
+== REST API Documentation Generation: Support for inheritance
 
+The annotation `org.eclipse.scout.rt.rest.doc.ApiDocDescription` is now marked as `@Inherited`.
+This allows inheritance for API documentation (e.g. on an abstract REST resource).
 
 // ----------------------------------------------------------------------------
