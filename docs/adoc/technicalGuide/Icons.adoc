@@ -10,10 +10,11 @@ ifndef::mdledir[:mdledir: .]
 :experimental:
 
 == Icons
+
 A lot of Scout widgets support icons. For instance a menu item can show an icon
 next to the menu text. Icons in Scout can be either a bitmap image (GIF, PNG,
 JPEG, etc.), an SVG or a character from an icon-font. An example for an icon-font is
-the _scoutIcons.ttf_ which comes shipped with Scout.
+the _scoutIcons.woff_ which comes shipped with Scout.
 
 It's a good practice to define the available icons in your application in a
 class that defines each icon as a constant. Create a class `Icons` in the shared
@@ -22,8 +23,8 @@ _IconId_ property in your code.
 
 For bitmap images you simply specify the filename of the image file _without_
 the file extension. Place all your icon files in the resource folder of your
- _client_ module. Assuming your project name is "org.scout.hello", the correct
- location to store icon files would be:
+_client_ module. Assuming your project name is "org.scout.hello", the correct
+location to store icon files would be:
 
  org.scout.hello.client/              # Client project directory
    src/main/resources/                # Resources directory
@@ -54,10 +55,32 @@ protected String getConfiguredIconId(){
 }
 ----
 
+=== Font Icons
+
+The icons used by Scout itself are mainly font icons.
+Even though font icons are scalable, an icon can get very thick when the size is increased, which is not always desired.
+To overcome that, Scout icons come in 2 flavors: regular and light.
+
+The regular icons can be used, if the icon is displayed at about 16px.
+This is the case for most widgets (menu, button etc.)
+If the icon should be displayed larger, the light icons can be used.
+
+To use a light icon for your custom widget, just set the font-weight to `@icon-font-weight-light`.
+
+If you create a custom icon font (or use an existing one), you may want to use icons that are compatible with the Scout icons in terms of line width.
+This allows you to use the Scout icons and your custom icons side by side.
+Alternatively, only use your custom icons and forget about the Scout icons.
+
+The scout icons use the following dimensions:
+
+* Regular: 1.5px line width and 24px artboard height
+* Light: 1px line width and 24px artboard height
+
 === Using a custom icon font
+
 You can use your own icon font. The required file format for an icon font is
 _.woff_. For the following examples we assume the name of your font file is
- _awesomeIcons.woff_. The following steps are required:
+_awesomeIcons.woff_. The following steps are required:
 
 Place the font file in the WebContent/fonts directory of your _html.ui_ module.
 This makes it available for http requests on the URL
