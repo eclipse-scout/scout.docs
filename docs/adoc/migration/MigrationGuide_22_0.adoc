@@ -204,6 +204,8 @@ There you also find a `selection.json` that can be used to import the icons to h
 - MENU_BOLD (uF0C9)
 - LIST_UL_BOLD (uF0CA)
 - LIST_OL_BOLD (uF0CB)
+- ROTATE_LEFT_BOLD (F0E2)
+- ROTATE_RIGHT_BOLD (F01E)
 - GRAPH_BOLD (uE023)
 - CATEGORY (uE059)
 - CATEGORY_BOLD (uE024)
