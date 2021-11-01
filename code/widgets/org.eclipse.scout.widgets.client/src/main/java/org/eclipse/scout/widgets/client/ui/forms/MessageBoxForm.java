@@ -13,8 +13,6 @@ package org.eclipse.scout.widgets.client.ui.forms;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -470,7 +468,11 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execAction() {
-            m_items = List.of("Item 1", "The second item in this last has an extremely long name and may not fit on one line.", "Item 3\nhas\nsome\nline\nbreaks");
+            m_items = List.of(
+                "Item 1",
+                "The second item in this list has an extremely long name and does not fit on one line.",
+                "Item 3\nhas\nsome\nline\nbreaks",
+                "Item 4 contains-a-very-long-word-without-whitespaces-which-does-not-fit-on-one-line.");
             markMenuAsSelected(this);
           }
         }
@@ -486,7 +488,9 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execAction() {
-            m_items = IntStream.rangeClosed(1, 20).mapToObj(i -> "Item #" + i).collect(Collectors.toList());
+            m_items = List.of(
+                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty");
             markMenuAsSelected(this);
           }
         }
