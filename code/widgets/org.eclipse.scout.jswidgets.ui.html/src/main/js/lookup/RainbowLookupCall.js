@@ -22,20 +22,20 @@ export default class RainbowLookupCall extends StaticLookupCall {
 
   static DATA = [
     ['FEE0E0', icons.MINUS],
-    ['FECAC8', icons.GROUP, 'Times New Roman'],
-    ['FEB1AB', icons.PLUS, 'Courier New'],
+    ['FFBFBF', icons.GROUP, 'Times New Roman'],
+    ['FF9292', icons.PLUS, 'Courier New'],
     ['ECF3F7', icons.INFO, 'sans-serif'],
     ['C8E4F2', icons.CALENDAR, 'Open Sans'],
     ['B0DAEE', icons.FOLDER, 'Bold-Roboto'],
-    ['DDF4EA', icons.WORLD, 'Impact'],
-    ['B6ECD3', icons.STAR, 'Comic Sans MS'],
-    ['86D9B2', icons.STAR_MARKED, '20 Arial'],
+    ['DCFBF5', icons.WORLD, 'Impact'],
+    ['BDF2E8', icons.STAR, 'Comic Sans MS'],
+    ['67E9D1', icons.STAR_MARKED, '20 Arial'],
     ['3EE1C3', icons.AVG, 'Calibri-italic'],
     ['93EDDC', icons.GEAR, 'Comic Sans'],
     ['BAF3E8', icons.COLLAPSE, 'Comic Sans'],
     ['DDFFF9', icons.LONG_ARROW_DOWN],
     ['FCF0E5', icons.EXCLAMATION_MARK_CIRCLE, 'Arial-Bold-12'],
-    ['FEE6C0', icons.SQUARE_BOLD, '10 Courier'],
+    ['FDE1B1', icons.SQUARE_BOLD, '10 Courier'],
     ['FFDB9D', icons.ANGLE_RIGHT]
   ];
 

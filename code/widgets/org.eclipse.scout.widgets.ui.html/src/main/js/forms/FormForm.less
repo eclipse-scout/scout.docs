@@ -1,12 +1,23 @@
 .open-form-button > .button {
-  @open-form-button-background-color: @palette-green-3;
-  @open-form-button-active-background-color: @palette-green-1;
+  @open-form-button-background-color: @palette-green-4;
 
   background-color: @open-form-button-background-color;
   color: @palette-white;
-  border-color: darken(@open-form-button-background-color, 5%);
+  border-color: @open-form-button-background-color;
 
-  &:active, &.active {
-    background-color: @open-form-button-active-background-color;
+  &:hover {
+    background-color: darken(@open-form-button-background-color, 4%);
+    border-color: darken(@open-form-button-background-color, 4%);
+  }
+
+  &:active {
+    background-color: darken(@open-form-button-background-color, 8%);
+    border-color: darken(@open-form-button-background-color, 8%);
+  }
+
+  &.disabled {
+    background-color: @button-disabled-background-color;
+    border-color: @button-disabled-border-color;
+    color: @button-disabled-color;
   }
 }
