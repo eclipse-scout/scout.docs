@@ -14,7 +14,7 @@ ifndef::source-highlighter[:source-highlighter: coderay]
 In this tutorial we will create your first Scout JS application.
 
 NOTE: If you don't know what Scout JS is yet, please read the
-        https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
+https://eclipsescout.github.io/{doc-short-version}/getstarted.html[Get Started Guide] first.
 
 The application will simply show a text field and a button.
 Once the user enters some text and presses the button, the application displays a message box including that text.
@@ -78,7 +78,7 @@ TIP: Use `npm run build:dev:watch` to have these files automatically updated whe
 
 == Run the Application
 
-Use the same or start a new terminal in the main folder and execute `**npm run serve:dev:watch**`.
+Use the same or start a new terminal in the main folder and execute `**npm run serve**`.
 
 This starts a little development server and opens the URL `http://127.0.0.1:8080/` in your default browser.
 The server has live reload capability, that is, as soon as files in the `dist` folder change,
@@ -93,7 +93,7 @@ Also check out how the layout changes when you narrow the browser window
 Let's now have a closer look at the files that were needed to build this application.
 
 In the main folder there are files containing information for the build, e.g. dependencies and entry points.
-In the subfolder `res/` there are static resources that are just copied to `dist/res/` in the build.
+In the subfolder `res/` there are static resources that are just copied to `dist/` in the build.
 And in the subfolder `src/` you find the source files that are transformed and bundled by webpack.
 
 === Build Information
@@ -115,7 +115,7 @@ include::{code-basedir}package.json[]
 The `scripts` define what `npm run` should execute.
 They work a bit like aliases in Bash.
 To have all needed files available at `http://127.0.0.1:8080/`,
-we need to mount the folders `dist/res` and `dist/dev` to the root path `/` when starting the development server.
+we need to mount the folder `dist` to the root path `/` when starting the development server.
 
 Modules defined in `devDependencies` and `dependencies` are downloaded to the `node_modules` folder on `npm install`.
 The dependency versions are prefixed with a `^` (caret), which means _compatible version_.
@@ -132,7 +132,7 @@ see the official documentation on Node.js:
 As defined in `package.json`, the script `build:dev` executes `scout-scripts build:dev`.
 `scout-scripts` is a command provided by the `@eclipse-scout/cli` module.
 With the `build:dev` argument, this command uses webpack to transform and bundle the source files
-and write the results to the `dist/dev` folder.
+and write the results to the `dist` folder.
 
 Scout provides a default webpack configuration which we use and adjust as follows.
 
@@ -142,7 +142,7 @@ Scout provides a default webpack configuration which we use and adjust as follow
 include::{code-basedir}webpack.config.js[]
 ----
 
-The `**args.resDirArray**` defines the folders with static resources to be copied to `dist/res`.
+The `**args.resDirArray**` defines the folders with static resources to be copied to `dist`.
 In addition to the static resources of our application, we also need Scout's static resources in
 `node_modules/@eclipse-scout/core/res`, mainly for the icon font `scoutIcons.woff`.
 
