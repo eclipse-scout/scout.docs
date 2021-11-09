@@ -2,7 +2,7 @@
   "scripts": {
     "build:dev": "scout-scripts build:dev",
     "build:dev:watch": "scout-scripts build:dev:watch",
-    "serve:dev:watch": "live-server --mount=/:dist/res --mount=/:dist/dev"
+    "serve": "live-server --mount=/:dist"
   },
   "devDependencies": {
     "@eclipse-scout/cli": "^11.0.9",
