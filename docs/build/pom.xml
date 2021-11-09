@@ -7,17 +7,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.eclipse.scout</groupId>
-    <artifactId>maven_rt_plugin_config-master</artifactId>
-    <version>3.14.2</version>
-    <relativePath/>
+    <groupId>org.eclipsescout.docs</groupId>
+    <artifactId>org.eclipsescout.docs.root</artifactId>
+    <version>11.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.eclipsescout.docs</groupId>
   <artifactId>aggregator</artifactId>
-  <version>11.0-SNAPSHOT</version>
-
-  <description>scout docs aggregator</description>
   <packaging>pom</packaging>
 
   <properties>
