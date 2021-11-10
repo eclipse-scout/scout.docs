@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -130,13 +130,15 @@ export default class ChartFieldForm extends Form {
     });
 
     let legendVisibleBox = this.widget('LegendVisibleBox');
-    legendVisibleBox.setValue(((this._getChartConfig().options || {}).legend || {}).display);
+    legendVisibleBox.setValue((((this._getChartConfig().options || {}).plugins || {}).legend || {}).display);
     legendVisibleBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
-          legend: {
-            display: event.newValue
+          plugins: {
+            legend: {
+              display: event.newValue
+            }
           }
         }
       });
@@ -144,13 +146,15 @@ export default class ChartFieldForm extends Form {
     });
 
     let legendClickableCheckBox = this.widget('LegendClickableCheckBox');
-    legendClickableCheckBox.setValue(((this._getChartConfig().options || {}).legend || {}).clickable);
+    legendClickableCheckBox.setValue((((this._getChartConfig().options || {}).plugins || {}).legend || {}).clickable);
     legendClickableCheckBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
-          legend: {
-            clickable: event.newValue
+          plugins: {
+            legend: {
+              clickable: event.newValue
+            }
           }
         }
       });
@@ -158,13 +162,15 @@ export default class ChartFieldForm extends Form {
     });
 
     let tooltipsEnabledBox = this.widget('TooltipsEnabledBox');
-    tooltipsEnabledBox.setValue(((this._getChartConfig().options || {}).tooltips || {}).enabled);
+    tooltipsEnabledBox.setValue((((this._getChartConfig().options || {}).plugins || {}).tooltip || {}).enabled);
     tooltipsEnabledBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
-          tooltips: {
-            enabled: event.newValue
+          plugins: {
+            tooltip: {
+              enabled: event.newValue
+            }
           }
         }
       });
@@ -188,15 +194,15 @@ export default class ChartFieldForm extends Form {
     });
 
     let xAxisStackedCheckBox = this.widget('XAxisStackedCheckBox');
-    xAxisStackedCheckBox.setValue(((((this._getChartConfig().options || {}).scales || {}).xAxes || [])[0] || {}).stacked);
+    xAxisStackedCheckBox.setValue((((this._getChartConfig().options || {}).scales || {}).x || {}).stacked);
     xAxisStackedCheckBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           scales: {
-            xAxes: [{
+            x: {
               stacked: event.newValue
-            }]
+            }
           }
         }
       });
@@ -204,15 +210,15 @@ export default class ChartFieldForm extends Form {
     });
 
     let yAxisStackedCheckBox = this.widget('YAxisStackedCheckBox');
-    yAxisStackedCheckBox.setValue(((((this._getChartConfig().options || {}).scales || {}).yAxes || [])[0] || {}).stacked);
+    yAxisStackedCheckBox.setValue((((this._getChartConfig().options || {}).scales || {}).y || {}).stacked);
     yAxisStackedCheckBox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
           scales: {
-            yAxes: [{
+            y: {
               stacked: event.newValue
-            }]
+            }
           }
         }
       });
@@ -251,13 +257,15 @@ export default class ChartFieldForm extends Form {
     accordingToValuesCheckbox.on('propertyChange:value', event => {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
-        salesfunnel: {
-          normalized: event.newValue
+        options: {
+          salesfunnel: {
+            normalized: event.newValue
+          }
         }
       });
       this._setChartConfig(config);
     });
-    accordingToValuesCheckbox.setValue((this._getChartConfig().salesfunnel || {}).normalized || false);
+    accordingToValuesCheckbox.setValue(((this._getChartConfig().options || {}).salesfunnel || {}).normalized || false);
 
     this.fulfillmentStartValuePropertyCheckbox = this.widget('FulfillmentStartValuePropertyCheckbox');
 
@@ -359,13 +367,15 @@ export default class ChartFieldForm extends Form {
       }
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
-        speedo: {
-          greenAreaPosition: event.newValue
+        options: {
+          speedo: {
+            greenAreaPosition: event.newValue
+          }
         }
       });
       this._setChartConfig(config);
     });
-    greenAreaPositionField.setValue((this._getChartConfig().speedo || {}).greenAreaPosition || Chart.Position.CENTER);
+    greenAreaPositionField.setValue(((this._getChartConfig().options || {}).speedo || {}).greenAreaPosition || Chart.Position.CENTER);
 
     let sizeOfLargestBubbleField = this.widget('SizeOfLargestBubbleField');
     sizeOfLargestBubbleField.on('propertyChange:value', event => {
@@ -375,13 +385,15 @@ export default class ChartFieldForm extends Form {
       }
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
-        bubble: {
-          sizeOfLargestBubble: event.newValue
+        options: {
+          bubble: {
+            sizeOfLargestBubble: event.newValue
+          }
         }
       });
       this._setChartConfig(config);
     });
-    sizeOfLargestBubbleField.setValue((this._getChartConfig().bubble || {}).sizeOfLargestBubble || 25);
+    sizeOfLargestBubbleField.setValue(((this._getChartConfig().options || {}).bubble || {}).sizeOfLargestBubble || 25);
 
     let minBubbleSizeField = this.widget('MinBubbleSizeField');
     minBubbleSizeField.on('propertyChange:value', event => {
@@ -391,13 +403,15 @@ export default class ChartFieldForm extends Form {
       }
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
-        bubble: {
-          minBubbleSize: event.newValue
+        options: {
+          bubble: {
+            minBubbleSize: event.newValue
+          }
         }
       });
       this._setChartConfig(config);
     });
-    minBubbleSizeField.setValue((this._getChartConfig().bubble || {}).minBubbleSize || 0);
+    minBubbleSizeField.setValue(((this._getChartConfig().options || {}).bubble || {}).minBubbleSize || 0);
 
     let legendPositionField = this.widget('LegendPositionField');
     legendPositionField.on('propertyChange:value', event => {
@@ -408,14 +422,16 @@ export default class ChartFieldForm extends Form {
       let config = this._getChartConfig();
       config = $.extend(true, {}, config, {
         options: {
-          legend: {
-            position: event.newValue
+          plugins: {
+            legend: {
+              position: event.newValue
+            }
           }
         }
       });
       this._setChartConfig(config);
     });
-    legendPositionField.setValue(((this._getChartConfig().options || {}).legend || {}).position || Chart.Position.RIGHT);
+    legendPositionField.setValue((((this._getChartConfig().options || {}).plugins || {}).legend || {}).position || Chart.Position.RIGHT);
 
     let customChartPropertiesField = this.widget('CustomChartPropertiesField');
     customChartPropertiesField.addValidator(value => {
@@ -618,8 +634,8 @@ export default class ChartFieldForm extends Form {
       config = $.extend(true, {}, config, {
         options: {
           scales: {
-            xAxes: [{}],
-            yAxes: [{}]
+            x: {},
+            y: {}
           }
         }
       });
@@ -627,8 +643,8 @@ export default class ChartFieldForm extends Form {
       if (!xAxisStackedCheckBox.enabled && !yAxisStackedCheckBox.enabled) {
         config.options.scales = {};
       } else {
-        config.options.scales.xAxes[0].stacked = xAxisStackedCheckBox.enabled && !objects.isNullOrUndefined(xAxisStackedCheckBox.value) ? xAxisStackedCheckBox.value : false;
-        config.options.scales.yAxes[0].stacked = yAxisStackedCheckBox.enabled && !objects.isNullOrUndefined(yAxisStackedCheckBox.value) ? yAxisStackedCheckBox.value : false;
+        config.options.scales.x.stacked = xAxisStackedCheckBox.enabled && !objects.isNullOrUndefined(xAxisStackedCheckBox.value) ? xAxisStackedCheckBox.value : false;
+        config.options.scales.y.stacked = yAxisStackedCheckBox.enabled && !objects.isNullOrUndefined(yAxisStackedCheckBox.value) ? yAxisStackedCheckBox.value : false;
       }
 
       config.options.transparent = transparentCheckBox.enabled ? transparentCheckBox.value : null;
@@ -789,8 +805,10 @@ export default class ChartFieldForm extends Form {
         chartValueGroups: chartValueGroups
       },
       config: {
-        fulfillment: {
-          startValue: this._calculatePropFulfillmentStartValue()
+        options: {
+          fulfillment: {
+            startValue: this._calculatePropFulfillmentStartValue()
+          }
         }
       }
     };
@@ -1118,8 +1136,10 @@ export default class ChartFieldForm extends Form {
         chartValueGroups: chartValueGroups
       },
       config: {
-        salesfunnel: {
-          calcConversionRate: true
+        options: {
+          salesfunnel: {
+            calcConversionRate: true
+          }
         }
       }
     };
@@ -1190,8 +1210,10 @@ export default class ChartFieldForm extends Form {
         chartValueGroups: chartValueGroups
       },
       config: {
-        venn: {
-          numberOfCircles: Math.log2(chartData[0].length)
+        options: {
+          venn: {
+            numberOfCircles: Math.log2(chartData[0].length)
+          }
         }
       }
     };

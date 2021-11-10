@@ -912,41 +912,41 @@ Each time you update the data or the config it is rerendered.
 Most of the charts are rendered using https://www.chartjs.org/[chart.js] and the config object is handed over so you can use all properties chart.js provides to style your chart.
 In addition to the chart.js-properties we added custom properties, some of them only have an impact on certain charts:
 
-* `autoColor` Whether the colors should be computed automatically.
-* `colorScheme` A specific color scheme for the colors, also inverted ones are possible for dark backgrounds.
-* `transparent` Whether the chart should be transparent or opaque.
-* `maxSegments` Max. number of segments for radial charts like pie, doughnut, radar, polar area.
-* `clickable` Whether a chart is clickable.
-* `checkable` Whether a chart is checkable.
-* `otherSegmentClickable` Whether the consolidated others segment is clickable.
-* `plugins.legend.clickable` Whether the legend is clickable.
-* `xLabelMap` and `yLabelMap` Label mapping for discrete values.
-* `handleResize` Whether the chart should handle resizing itself (not necessary if the containers size is updated).
-* `numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.
-* `reformatLabels` Whether the data labels should be reformatted. It is assumed that data labels (incl. numeric labels) are correctly formatted. If one wants to have the data labels formatted using the number formatter, this flag can be used.
+* `options.autoColor` Whether the colors should be computed automatically.
+* `options.colorScheme` A specific color scheme for the colors, also inverted ones are possible for dark backgrounds.
+* `options.transparent` Whether the chart should be transparent or opaque.
+* `options.maxSegments` Max. number of segments for radial charts like pie, doughnut, radar, polar area.
+* `options.clickable` Whether a chart is clickable.
+* `options.checkable` Whether a chart is checkable.
+* `options.otherSegmentClickable` Whether the consolidated others segment is clickable.
+* `options.plugins.legend.clickable` Whether the legend is clickable.
+* `options.xLabelMap` and `options.yLabelMap` Label mapping for discrete values.
+* `options.handleResize` Whether the chart should handle resizing itself (not necessary if the containers size is updated).
+* `options.numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.
+* `options.reformatLabels` Whether the data labels should be reformatted. It is assumed that data labels (incl. numeric labels) are correctly formatted. If one wants to have the data labels formatted using the number formatter, this flag can be used.
 Consider a bar chart and the x-axis displays the years 2010-2020, these labels should not be reformatted. However, if the x-axis displays the prices 250, 500, 750 and 1000, these labels should be reformatted to 250 €, 500 €, 750 € and 1.000 €.
 
 Bubble:
 
-* `bubble.sizeOfLargestBubble` The size to which the largest bubble is scaled.
-* `bubble.minBubbleSize` Min. size of a bubble.
+* `options.bubble.sizeOfLargestBubble` The size to which the largest bubble is scaled.
+* `options.bubble.minBubbleSize` Min. size of a bubble.
 
 Fulfillment:
 
-* `fulfillment.startValue` Where the animation should start.
+* `options.fulfillment.startValue` Where the animation should start.
 
 Salesfunnel:
 
-* `salesfunnel.normalized` Defines if the bars should be rendered smaller from top to bottom or if they get a size according to their values.
-* `salesfunnel.calcConversionRate` Whether the conversion rate should be rendered.
+* `options.salesfunnel.normalized` Defines if the bars should be rendered smaller from top to bottom or if they get a size according to their values.
+* `options.salesfunnel.calcConversionRate` Whether the conversion rate should be rendered.
 
 Speedo:
 
-* `speedo.greenAreaPosition` Define where the green area is located.
+* `options.speedo.greenAreaPosition` Define where the green area is located.
 
 Venn:
 
-* `venn.numberOfCircles` Between 1 and 3.
+* `options.venn.numberOfCircles` Between 1 and 3.
 
 The colors used for grid lines, axes, etc. and the auto colors for datasets can be overridden using CSS.
 
