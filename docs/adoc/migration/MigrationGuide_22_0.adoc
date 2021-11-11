@@ -457,38 +457,3 @@ See the class `HttpSessionIdLogHelper` for details.
 ** `SHORT`: Provides a safe, truncated session identifier. This is the default value (no configuration required).
 ** `OFF`: Never provides a value (always empty).
 ** `FULL`: Provides the full HTTP Session ID. This restores the previous, less safe behavior. *Using this value is NOT recommended!*
-
-== Update of 3rd Party library _chart.js_ to 3.6.0
-
-If you are using the charts from `@eclipse-scout/chart` you might need to update the config object of your charts, as most of them are rendered using _chart.js_.
-
-First check this  https://www.chartjs.org/docs/latest/getting-started/v3-migration.html[migration guide].
-In addition, the following config attributes must also be migrated:
-
-* `config.options.scales.minSpaceBetweenXTicks` -> `config.options.scales.x.minSpaceBetweenTicks`
-* `config.options.scales.minSpaceBetweenYTicks` -> `config.options.scales.y.minSpaceBetweenTicks`
-* `config.options.scale.minSpaceBetweenTicks` -> `config.options.scales.r.minSpaceBetweenTicks`
-* `config.options.scales.[id].afterCalculateTickRotation` -> `config.options.scales.[id].afterCalculateLabelRotation`
-* `...fontColor` -> `...color`
-* `...fontFamily` -> `...font.family`
-* `...fontSize` -> `...font.size`
-* `...fontStyle` -> `...font.style`
-* `config.bubble` -> `config.options.bubble`
-* `config.fulfillment` -> `config.options.fulfillment`
-* `config.salesfunnel` -> `config.options.salesfunnel`
-* `config.speedo` -> `config.options.speedo`
-* `config.venn` -> `config.options.venn`
-* `config.data.datasets[i].pointHoverBackgroundColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
-* `config.data.datasets[i].pointBorderColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
-* `config.data.datasets[i].pointHoverBorderColor` only for `config.type` _line_ and _radar_ or `config.data.dataset[i].type` _line_
-
-Also, we observed some changes that might be of interest:
-
-* Remove the `borderWidth` on every _dataset_ when `backgroundColor` and `borderColor` are the same. Otherwise, there will be a small white line between the border and the background.
-* `Scale.longestLabelWidth` -> `Scale._labelSizes.widest.width`
-* `Scale._ticks` -> `Scale.ticks`
-* `Element._datasetIndex` -> `Element.datasetIndex`
-* `Element._index` -> `Element.index`
-* Never use `data.splice(n)`, always use `data.splice(n, data.length - n)`, as _chart.js_ listens on splice-events and can't handle calls without the `deleteCount`.
-
-The _chart.js_ tooltip was replaced by the scout tooltip. Therefore, the css class `.tooltip-background` ca be removed.
