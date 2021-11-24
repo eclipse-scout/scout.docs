@@ -716,6 +716,7 @@ As you see, the first thing we do on line 1 is to import the default theme 'inde
 Note that all variables except `@palette-gray-2-1` override variables from `colors.less`. `@palette-gray-2-1` is a variable which is only defined and used in the _dark_ theme.
 
 ==== Build and Runtime
+
 Scout uses Webpack to run the LESS parser and build the CSS themes. Your application needs at least one default theme. The Scout archetype adds this theme to your `webpack.config.js`. If your application needs to work with multiple themes you must add them to the list of config entries. In this example we add the two themes _dark_ and _rainbow_:
 
 .Excerpt from webpack.config.js
