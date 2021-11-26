@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -9,7 +9,6 @@
  *     BSI Business Systems Integration AG - initial API and implementation
  */
 import {arrays, comparators, Form, models, scout} from '@eclipse-scout/core';
-import {CustomTile} from '../index';
 import TileGridFormModel from './TileGridFormModel';
 import $ from 'jquery';
 
@@ -32,9 +31,6 @@ export default class TileGridForm extends Form {
     this.tileGrid = this.widget('TileGrid');
     this.tileGrid.on('propertyChange', this._onTileGridPropertyChange.bind(this));
 
-    let filterField = this.widget('FilterField');
-    filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
-
     // -- Properties
 
     let gridColumnCountField = this.widget('GridColumnCountField');
@@ -52,6 +48,10 @@ export default class TileGridForm extends Form {
     let virtualField = this.widget('VirtualField');
     virtualField.setValue(this.tileGrid.virtual);
     virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
+
+    let textFilterEnabledField = this.widget('TextFilterEnabledField');
+    textFilterEnabledField.setValue(this.tileGrid.textFilterEnabled);
+    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
 
     let colorSchemeField = this.widget('ColorSchemeField');
     colorSchemeField.setValue(this.tileGrid.tiles[0].colorScheme.scheme);
@@ -108,21 +108,11 @@ export default class TileGridForm extends Form {
     this.widget('FormFieldActionsBox').setField(tileField);
     this.widget('EventsTab').setField(this.tileGrid);
     this.updateStatus();
-    this._updateHasCustomTiles();
   }
 
   _onTileGridPropertyChange(event) {
     if (event.propertyName === 'tiles' || event.propertyName === 'selectedTiles' || event.propertyName === 'filteredTiles') {
       this.updateStatus();
-    }
-    if (event.propertyName === 'filteredTiles') {
-      this._updateHasCustomTiles();
-    }
-  }
-
-  _onFilterPropertyChange(event) {
-    if (event.propertyName === 'displayText') {
-      this._filterTilesByText(event.newValue);
     }
   }
 
@@ -148,6 +138,10 @@ export default class TileGridForm extends Form {
     if (event.propertyName === 'value') {
       this.tileGrid.setVirtual(event.newValue);
     }
+  }
+
+  _onTextFilterEnabledValueChange(event) {
+    this.tileGrid.setTextFilterEnabled(event.newValue);
   }
 
   _onColorSchemePropertyChange(event) {
@@ -222,12 +216,6 @@ export default class TileGridForm extends Form {
     this.tileGrid.insertTiles(tiles);
   }
 
-  _updateHasCustomTiles(event) {
-    this.tileGrid.toggleCssClass('has-custom-tiles', this.tileGrid.filteredTiles.some(tile => {
-      return tile instanceof CustomTile;
-    }));
-  }
-
   _onDeleteMenuAction(event) {
     this.tileGrid.deleteTiles(this.tileGrid.selectedTiles);
     if (this.tileGrid.tiles.length === 0) {
@@ -255,20 +243,6 @@ export default class TileGridForm extends Form {
 
   _onSortDescMenuAction(event) {
     this._sortTiles();
-  }
-
-  _filterTilesByText(text) {
-    if (text) {
-      if (!this.tileFilter) {
-        this.tileFilter = scout.create('jswidgets.CustomTileFilter');
-        this.tileGrid.addFilter(this.tileFilter);
-      }
-      this.tileFilter.setText(text);
-    } else {
-      this.tileGrid.removeFilter(this.tileFilter);
-      this.tileFilter = null;
-    }
-    this.tileGrid.filter();
   }
 
   updateStatus() {

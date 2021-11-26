@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -54,17 +54,16 @@ import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.AccordionField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.AccordionField.Accordion;
-import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.FilterField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.CustomerHeaderWidgetField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ExclusiveExpandField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.GroupIconIdField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.ScrollableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.TextFilterEnabledField;
 import org.eclipse.scout.widgets.client.ui.forms.TileAccordionFieldForm.MainBox.PropertiesBox.VirtualField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.SimpleTile;
 import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
-import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
 import org.eclipse.scout.widgets.client.ui.tile.CustomTileGroupManager;
 import org.eclipse.scout.widgets.client.ui.tile.ICustomTile;
 import org.slf4j.Logger;
@@ -75,7 +74,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
   private static final Logger LOG = LoggerFactory.getLogger(TileAccordionFieldForm.class);
 
   private int m_tilesAddedCount = 0;
-  private CustomTileFilter m_tileFilter;
 
   @Override
   public void startPageForm() {
@@ -102,16 +100,16 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     return getFieldByClass(ExclusiveExpandField.class);
   }
 
-  public FilterField getFilterField() {
-    return getFieldByClass(FilterField.class);
-  }
-
   public StatusField getStatusField() {
     return getFieldByClass(StatusField.class);
   }
 
   public VirtualField getVirtualField() {
     return getFieldByClass(VirtualField.class);
+  }
+
+  public TextFilterEnabledField getTextFilterEnabledField() {
+    return getFieldByClass(TextFilterEnabledField.class);
   }
 
   public CustomerHeaderWidgetField getCustomerHeaderWidgetField() {
@@ -138,6 +136,11 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     @Order(100)
     @ClassId("eab5ced8-eceb-47d3-92f0-affda2c1547d")
     public class DetailBox extends AbstractGroupBox {
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 1;
+      }
 
       @Order(1000)
       @ClassId("65daec6c-698e-4f7e-aa92-a80d82ed05f8")
@@ -419,6 +422,11 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           }
 
           @Override
+          protected boolean getConfiguredTextFilterEnabled() {
+            return true;
+          }
+
+          @Override
           protected void addGroupInternal(IGroup group) {
             super.addGroupInternal(group);
             if (isInitConfigDone()) {
@@ -475,45 +483,6 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
               }
             }
           }
-        }
-      }
-
-      @Order(2000)
-      @ClassId("c29fa623-5430-4328-ba27-4d22d352d5fa")
-      public class FilterField extends AbstractStringField {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("FilterBy");
-        }
-
-        @Override
-        protected boolean getConfiguredUpdateDisplayTextOnModify() {
-          return true;
-        }
-
-        @Override
-        protected byte getConfiguredLabelPosition() {
-          return LABEL_POSITION_ON_FIELD;
-        }
-
-        @Override
-        protected String getConfiguredClearable() {
-          return CLEARABLE_ALWAYS;
-        }
-
-        @Override
-        protected int getConfiguredWidthInPixel() {
-          return 300;
-        }
-
-        @Override
-        protected boolean getConfiguredFillHorizontal() {
-          return false;
-        }
-
-        @Override
-        protected void execChangedDisplayText() {
-          filterTilesByText(getDisplayText());
         }
       }
 
@@ -699,6 +668,30 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
           if (!getAccordionField().getAccordion().getGroups().isEmpty()) {
             setValue(getAccordionField().getAccordion().getGroups().get(0).isCollapsible());
           }
+        }
+      }
+
+      @Order(39.7)
+      @ClassId("1f0bf17b-a89b-49fb-8985-76efbb066b6d")
+      public class TextFilterEnabledField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Text Filter Enabled";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getAccordionField().getAccordion().setTextFilterEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getAccordionField().getAccordion().isTextFilterEnabled());
         }
       }
 
@@ -914,24 +907,9 @@ public class TileAccordionFieldForm extends AbstractForm implements IAdvancedExa
     });
   }
 
-  protected void filterTilesByText(String text) {
-    if (!StringUtility.isNullOrEmpty(text)) {
-      if (m_tileFilter == null) {
-        m_tileFilter = new CustomTileFilter();
-        getAccordionField().getAccordion().addTileFilter(m_tileFilter);
-      }
-      m_tileFilter.setText(text);
-    }
-    else {
-      getAccordionField().getAccordion().removeTileFilter(m_tileFilter);
-      m_tileFilter = null;
-    }
-    getAccordionField().getAccordion().filterTiles();
-  }
-
   protected void updateStatus() {
     Accordion tileAccordion = getAccordionField().getAccordion();
-    getStatusField().setValue(TEXTS.get("TilesStatus", tileAccordion.getTileCount() + "", tileAccordion.getFilteredTileCount() + "", tileAccordion.getSelectedTileCount() + ""));
+    getStatusField().setValue(TEXTS.get("TilesStatus", tileAccordion.getTileCount() + "", tileAccordion.getSelectedTileCount() + ""));
   }
 
 }

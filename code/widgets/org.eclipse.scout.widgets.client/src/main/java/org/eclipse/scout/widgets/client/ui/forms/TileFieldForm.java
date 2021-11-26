@@ -28,7 +28,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tilefield.AbstractTileField;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBoxes;
 import org.eclipse.scout.rt.client.ui.tile.AbstractTileGrid;
@@ -48,7 +47,6 @@ import org.eclipse.scout.widgets.client.services.lookup.TileColorSchemeLookupCal
 import org.eclipse.scout.widgets.client.ui.desktop.outlines.IAdvancedExampleForm;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox;
-import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.FilterField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.StatusField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.DetailBox.TileField.TileGrid;
@@ -59,10 +57,10 @@ import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.Propertie
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.ScrollableField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.SelectableField;
+import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.TextFilterEnabledField;
 import org.eclipse.scout.widgets.client.ui.forms.TileFieldForm.MainBox.PropertiesBox.VirtualField;
 import org.eclipse.scout.widgets.client.ui.forms.fields.formfield.AbstractFormFieldPropertiesBox;
 import org.eclipse.scout.widgets.client.ui.tile.AbstractCustomTile;
-import org.eclipse.scout.widgets.client.ui.tile.CustomTileFilter;
 import org.eclipse.scout.widgets.client.ui.tile.ICustomTile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +70,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
   private static final Logger LOG = LoggerFactory.getLogger(TileFieldForm.class);
 
   private int m_tilesAddedCount = 0;
-  private CustomTileFilter m_tileFilter;
 
   @Override
   public void startPageForm() {
@@ -107,10 +104,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
     return getFieldByClass(MaxContentWidthField.class);
   }
 
-  public FilterField getFilterField() {
-    return getFieldByClass(FilterField.class);
-  }
-
   public StatusField getStatusField() {
     return getFieldByClass(StatusField.class);
   }
@@ -121,6 +114,10 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
 
   public VirtualField getVirtualField() {
     return getFieldByClass(VirtualField.class);
+  }
+
+  public TextFilterEnabledField getTextFilterEnabledField() {
+    return getFieldByClass(TextFilterEnabledField.class);
   }
 
   public PropertiesBox getPropertiesBox() {
@@ -156,6 +153,11 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         m_menuMediator.uninstall();
       }
 
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 1;
+      }
+
       @Order(1000)
       @ClassId("e06efe30-25db-446c-848f-22935dcff376")
       public class TileField extends AbstractTileField<TileGrid> {
@@ -173,11 +175,20 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           updateStatus();
-          updateHasCustomTiles();
         }
 
         @ClassId("0cd4de91-68d0-4a1d-b123-5006b566481d")
         public class TileGrid extends AbstractTileGrid<ICustomTile> {
+
+          @Override
+          protected String getConfiguredCssClass() {
+            return "has-custom-tiles";
+          }
+
+          @Override
+          protected boolean getConfiguredTextFilterEnabled() {
+            return true;
+          }
 
           @Override
           protected void initConfig() {
@@ -187,9 +198,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
             addPropertyChangeListener((event) -> {
               if (event.getPropertyName().equals(ITileGrid.PROP_TILES) || event.getPropertyName().equals(ITileGrid.PROP_FILTERED_TILES)) {
                 updateStatus();
-              }
-              if (event.getPropertyName().equals(ITileGrid.PROP_FILTERED_TILES)) {
-                updateHasCustomTiles();
               }
             });
           }
@@ -561,45 +569,6 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         }
       }
 
-      @Order(2000)
-      @ClassId("64397690-7521-4fad-b149-b83ca0007af5")
-      public class FilterField extends AbstractStringField {
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("FilterBy");
-        }
-
-        @Override
-        protected boolean getConfiguredUpdateDisplayTextOnModify() {
-          return true;
-        }
-
-        @Override
-        protected byte getConfiguredLabelPosition() {
-          return LABEL_POSITION_ON_FIELD;
-        }
-
-        @Override
-        protected String getConfiguredClearable() {
-          return CLEARABLE_ALWAYS;
-        }
-
-        @Override
-        protected int getConfiguredWidthInPixel() {
-          return 300;
-        }
-
-        @Override
-        protected boolean getConfiguredFillHorizontal() {
-          return false;
-        }
-
-        @Override
-        protected void execChangedDisplayText() {
-          filterTilesByText(getDisplayText());
-        }
-      }
-
       @Order(3000)
       @ClassId("16a80da8-a168-4b87-bf86-0ceff2823d36")
       @FormData(sdkCommand = SdkCommand.IGNORE)
@@ -617,29 +586,9 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
       }
     }
 
-    protected void filterTilesByText(String text) {
-      if (!StringUtility.isNullOrEmpty(text)) {
-        if (m_tileFilter == null) {
-          m_tileFilter = new CustomTileFilter();
-          getTileField().getTileGrid().addFilter(m_tileFilter);
-        }
-        m_tileFilter.setText(text);
-      }
-      else {
-        getTileField().getTileGrid().removeFilter(m_tileFilter);
-        m_tileFilter = null;
-      }
-      getTileField().getTileGrid().filter();
-    }
-
     protected void updateStatus() {
       TileGrid tileGrid = getTileField().getTileGrid();
-      getStatusField().setValue(TEXTS.get("TilesStatus", tileGrid.getTileCount() + "", tileGrid.getFilteredTileCount() + "", tileGrid.getSelectedTileCount() + ""));
-    }
-
-    protected void updateHasCustomTiles() {
-      TileGrid tileGrid = getTileField().getTileGrid();
-      tileGrid.toggleCssClass("has-custom-tiles", tileGrid.getFilteredTiles().stream().anyMatch(t -> t instanceof ICustomTile));
+      getStatusField().setValue(TEXTS.get("TilesStatus", tileGrid.getTileCount() + "", tileGrid.getSelectedTileCount() + ""));
     }
 
     protected void sortTiles(boolean asc) {
@@ -887,6 +836,30 @@ public class TileFieldForm extends AbstractForm implements IAdvancedExampleForm 
         @Override
         protected void execInitField() {
           setValue(getTileField().getTileGrid().isVirtual());
+        }
+      }
+
+      @Order(2100)
+      @ClassId("4d96e92e-4bc1-4c33-a49a-02e70416ddea")
+      public class TextFilterEnabledField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Text Filter Enabled";
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected void execChangedValue() {
+          getTileField().getTileGrid().setTextFilterEnabled(getValue());
+        }
+
+        @Override
+        protected void execInitField() {
+          setValue(getTileField().getTileGrid().isTextFilterEnabled());
         }
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -63,6 +63,10 @@ export default class TileAccordionForm extends Form {
     virtualField.setValue(this.accordion.virtual);
     virtualField.on('propertyChange', this._onVirtualPropertyChange.bind(this));
 
+    let textFilterEnabledField = this.widget('TextFilterEnabledField');
+    textFilterEnabledField.setValue(this.accordion.textFilterEnabled);
+    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
+
     let gridColumnCountField = this.widget('GridColumnCountField');
     gridColumnCountField.setValue(this.accordion.gridColumnCount);
     gridColumnCountField.on('propertyChange', this._onGridColumnCountPropertyChange.bind(this));
@@ -95,9 +99,6 @@ export default class TileAccordionForm extends Form {
 
     let sortDescMenu = this.widget('SortDescMenu');
     sortDescMenu.on('action', this._onSortDescMenuAction.bind(this));
-
-    let filterField = this.widget('FilterField');
-    filterField.on('propertyChange', this._onFilterPropertyChange.bind(this));
 
     let insertTileTargetField = this.widget('InsertTileTargetField');
     insertTileTargetField.setLookupCall(new GroupLookupCall(this.accordion));
@@ -168,6 +169,10 @@ export default class TileAccordionForm extends Form {
     }
   }
 
+  _onTextFilterEnabledValueChange(event) {
+    this.accordion.setTextFilterEnabled(event.newValue);
+  }
+
   _onSelectablePropertyChange(event) {
     if (event.propertyName === 'value') {
       this.accordion.setSelectable(event.newValue);
@@ -197,12 +202,6 @@ export default class TileAccordionForm extends Form {
 
   _onSortDescMenuAction(event) {
     this._sortTiles();
-  }
-
-  _onFilterPropertyChange(event) {
-    if (event.propertyName === 'displayText') {
-      this._filterTilesByText(event.newValue);
-    }
   }
 
   _onDeleteAllSelectedTilesMenuAction(event) {
@@ -320,19 +319,5 @@ export default class TileAccordionForm extends Form {
       return result;
     });
     this.accordion.sortTiles();
-  }
-
-  _filterTilesByText(text) {
-    if (text) {
-      if (!this.tileFilter) {
-        this.tileFilter = scout.create('jswidgets.CustomTileFilter');
-        this.accordion.addTileFilter(this.tileFilter);
-      }
-      this.tileFilter.setText(text);
-    } else {
-      this.accordion.removeTileFilter(this.tileFilter);
-      this.tileFilter = null;
-    }
-    this.accordion.filterTiles();
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -117,6 +117,10 @@ export default class TablePropertiesBox extends GroupBox {
     let tileModeField = this.widget('TileModeField');
     tileModeField.setValue(this.table.tileMode);
     tileModeField.on('propertyChange', this._onTileModePropertyChange.bind(this));
+
+    let textFilterEnabledField = this.widget('TextFilterEnabledField');
+    textFilterEnabledField.setValue(this.table.textFilterEnabled);
+    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
   }
 
   _onAutoResizeColumnsPropertyChange(event) {
@@ -239,5 +243,9 @@ export default class TablePropertiesBox extends GroupBox {
     if (event.propertyName === 'value') {
       this.table.setTileMode(event.newValue);
     }
+  }
+
+  _onTextFilterEnabledValueChange(event) {
+    this.table.setTextFilterEnabled(event.newValue);
   }
 }

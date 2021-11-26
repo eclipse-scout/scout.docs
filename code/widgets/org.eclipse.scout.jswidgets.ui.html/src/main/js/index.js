@@ -145,7 +145,6 @@ export {default as TagFieldForm} from './tagfield/TagFieldForm';
 export {default as TagLookupCall} from './tagfield/TagLookupCall';
 export {default as ColorSchemeLookupCall} from './tilegrid/ColorSchemeLookupCall';
 export {default as CustomTile} from './tilegrid/CustomTile';
-export {default as CustomTileFilter} from './tilegrid/CustomTileFilter';
 export {default as TileGridForm} from './tilegrid/TileGridForm';
 export {default as TileGridLayoutConfigBox} from './tilegrid/TileGridLayoutConfigBox';
 export {default as TileTypeLookupCall} from './tilegrid/TileTypeLookupCall';

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -50,6 +50,10 @@ export default class TreePropertiesBox extends GroupBox {
     multiCheckField.setValue(this.tree.multiCheck);
     multiCheckField.on('propertyChange', this._onMultiCheckPropertyChange.bind(this));
 
+    let textFilterEnabledField = this.widget('TextFilterEnabledField');
+    textFilterEnabledField.setValue(this.tree.textFilterEnabled);
+    textFilterEnabledField.on('propertyChange:value', this._onTextFilterEnabledValueChange.bind(this));
+
     let checkableStyleField = this.widget('CheckableStyleField');
     checkableStyleField.setValue(this.tree.checkableStyle);
     checkableStyleField.on('propertyChange', this._onCheckableStylePropertyChange.bind(this));
@@ -71,6 +75,10 @@ export default class TreePropertiesBox extends GroupBox {
     if (event.propertyName === 'value') {
       this.tree.multiCheck = event.newValue;
     }
+  }
+
+  _onTextFilterEnabledValueChange(event) {
+    this.tree.setTextFilterEnabled(event.newValue);
   }
 
   _onCheckableStylePropertyChange(event) {

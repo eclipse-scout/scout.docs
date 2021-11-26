@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -93,6 +93,7 @@ import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.Configur
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.MultiSelectField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableHeaderVisibleField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TableStatusVisibleField;
+import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TextFilterEnabledField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.TileModeField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.PropertiesGroupBox.WrapTextField;
 import org.eclipse.scout.widgets.client.ui.forms.TableFieldForm.MainBox.ConfigurationBox.SelectedRowsField;
@@ -190,6 +191,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
   public TileModeField getTileModeField() {
     return getFieldByClass(TileModeField.class);
+  }
+
+  public TextFilterEnabledField getTextFilterEnabledField() {
+    return getFieldByClass(TextFilterEnabledField.class);
   }
 
   public PropertiesGroupBox getPropertiesGroupBox() {
@@ -2392,6 +2397,36 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isTileMode());
+          }
+        }
+
+        @Order(215)
+        @ClassId("e8dae949-2852-4c0f-a147-1286ed271d7e")
+        public class TextFilterEnabledField extends AbstractBooleanField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return "Text Filter Enabled";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setTextFilterEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isTextFilterEnabled());
           }
         }
 

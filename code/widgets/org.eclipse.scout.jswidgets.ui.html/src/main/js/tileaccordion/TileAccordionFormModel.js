@@ -1,5 +1,13 @@
-import {FormField} from '@eclipse-scout/core';
-
+/*
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 export default () => ({
   id: 'jswidgets.TileAccordionForm',
   displayHint: 'view',
@@ -10,7 +18,7 @@ export default () => ({
       {
         id: 'DetailBox',
         objectType: 'GroupBox',
-        gridColumnCount: 2,
+        gridColumnCount: 1,
         menus: [
           {
             id: 'GroupsMenu',
@@ -80,26 +88,14 @@ export default () => ({
             objectType: 'AccordionField',
             labelVisible: false,
             gridDataHints: {
-              h: 8,
-              w: 2
+              h: 8
             },
             accordion: {
               id: 'Accordion',
               objectType: 'TileAccordion',
               scrollable: true,
+              textFilterEnabled: true,
               cssClass: 'has-custom-tiles'
-            }
-          },
-          {
-            id: 'FilterField',
-            objectType: 'StringField',
-            label: '${textKey:FilterBy}',
-            labelPosition: FormField.LabelPosition.ON_FIELD,
-            updateDisplayTextOnModify: true,
-            clearable: 'always',
-            gridDataHints: {
-              fillHorizontal: false,
-              widthInPixel: 300
             }
           },
           {
@@ -172,6 +168,12 @@ export default () => ({
                     gridDataHints: {
                       fillHorizontal: false
                     }
+                  },
+                  {
+                    id: 'TextFilterEnabledField',
+                    objectType: 'CheckBoxField',
+                    label: 'Text Filter Enabled',
+                    labelVisible: false
                   },
                   {
                     id: 'GridColumnCountField',

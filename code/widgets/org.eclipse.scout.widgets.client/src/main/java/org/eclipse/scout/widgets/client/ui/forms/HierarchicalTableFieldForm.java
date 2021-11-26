@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -2079,6 +2079,35 @@ public class HierarchicalTableFieldForm extends AbstractForm implements IPageFor
           @Override
           protected void execInitField() {
             setValue(getTableField().getTable().isScrollToSelection());
+          }
+        }
+
+        @Order(207)
+        @ClassId("91dfc276-e19b-4f1d-aadc-ccfe25703562")
+        public class TextFilterEnabledField extends AbstractBooleanField {
+          @Override
+          protected String getConfiguredLabel() {
+            return "Text Filter Enabled";
+          }
+
+          @Override
+          protected boolean getConfiguredLabelVisible() {
+            return false;
+          }
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected void execChangedValue() {
+            getTableField().getTable().setTextFilterEnabled(getValue());
+          }
+
+          @Override
+          protected void execInitField() {
+            setValue(getTableField().getTable().isTextFilterEnabled());
           }
         }
 
