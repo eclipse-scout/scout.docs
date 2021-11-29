@@ -926,6 +926,7 @@ In addition to the chart.js-properties we added custom properties, some of them 
 * `options.numberFormatter` A custom number formatter, e.g. 1000000 -> 1 Mio. €.
 * `options.reformatLabels` Whether the data labels should be reformatted. It is assumed that data labels (incl. numeric labels) are correctly formatted. If one wants to have the data labels formatted using the number formatter, this flag can be used.
 Consider a bar chart and the x-axis displays the years 2010-2020, these labels should not be reformatted. However, if the x-axis displays the prices 250, 500, 750 and 1000, these labels should be reformatted to 250 €, 500 €, 750 € and 1.000 €.
+* `options.plugins.tooltip.cssClass` Custom css class for additional styling of the tooltip
 
 Bubble:
 
