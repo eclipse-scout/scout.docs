@@ -9,7 +9,7 @@
   <parent>
     <groupId>org.eclipsescout.docs</groupId>
     <artifactId>org.eclipsescout.docs.root</artifactId>
-    <version>11.0-SNAPSHOT</version>
+    <version>11.0.42</version>
   </parent>
 
   <artifactId>aggregator</artifactId>
