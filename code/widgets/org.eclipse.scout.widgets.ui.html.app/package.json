@@ -36,15 +36,15 @@
     "release-postdependency": "releng-scripts release-publish-dependency"
   },
   "devDependencies": {
-    "@eclipse-scout/cli": "22.0.0-snapshot",
+    "@eclipse-scout/cli": ">=22.0.0-snapshot <22.0.0",
     "@eclipse-scout/releng": "^22.0.0"
   },
   "dependencies": {
-    "@eclipse-scout/core": "22.0.0-snapshot",
-    "@eclipse-scout/svg": "22.0.0-snapshot",
-    "@eclipse-scout/chart": "22.0.0-snapshot",
-    "@eclipse-scout/demo-widgets": "22.0.0-snapshot",
-    "@eclipse-scout/demo-widgets-heatmap": "22.0.0-snapshot",
+    "@eclipse-scout/core": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/svg": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/chart": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/demo-widgets": ">=22.0.0-snapshot <22.0.0",
+    "@eclipse-scout/demo-widgets-heatmap": ">=22.0.0-snapshot <22.0.0",
     "leaflet": "1.7.1"
   }
 }
