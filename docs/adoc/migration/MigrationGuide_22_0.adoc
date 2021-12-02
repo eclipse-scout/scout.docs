@@ -183,6 +183,44 @@ Perform the following migration in all your `package.json` files:
 "@babel/eslint-parser": "7.16.3"
 ----
 
+
+== Release engineering changes
+
+The following changes have been made to the Scout releng. Please apply the necessary migration steps in your files and build scripts (may also affect continuous integration environments):
+
+* If you have a `.npmrc` file (locally in your project root and/or your user home or on your build infrastructure), update it to the following content:
++
+[source,yaml]
+----
+# pnpm settings
+shared-workspace-lockfile=true
+link-workspace-packages=true
+prefer-workspace-packages=true
+
+# npm settings
+engine-strict=true
+scripts-prepend-node-path=auto
+----
+The property `prefer-workspace-packages` is new and important if you have multiple npm modules in your project.
+* In all your `package.json` files:
+** Replace `"snapshot-cleanup": "releng-scripts snapshot-cleanup"` with `"cleanup:snapshots": "releng-scripts cleanup:snapshots"`
+** Replace `"snapshot-predependency": "releng-scripts snapshot-install-dependency"` with `"version:snapshot:dependencies": "releng-scripts version:snapshot:dependencies"`
+** Replace `"snapshot-postdependency": "releng-scripts snapshot-publish-dependency"` with `"version:snapshot": "releng-scripts version:snapshot"`
+** Replace `"release-predependency": "releng-scripts release-install-dependency"` with `"version:release:dependencies": "releng-scripts version:release:dependencies"`
+** Replace `"release-postdependency": "releng-scripts release-publish-dependency"` with `"version:release": "releng-scripts version:release"`
+** If you are executing the npm scripts above during your build, update the names in your build scripts accordingly.
+** If you are using snapshot dependencies of the form `"x.y.z-snapshot"` replace it with a range version of the form `">=x.y.z-snapshot <x.y.z"`
+* In all your `pom.xml` files (and probably in your build scripts):
+** Rename Maven property `master_skip_snapshot_predependency` to `master_skip_npm_version_snapshot_dependencies`
+** Rename Maven property `master_skip_snapshot_postdependency` to `master_skip_npm_version_snapshot`
+** Rename Maven property `master_skip_release_predependency` to `master_skip_npm_version_release_dependencies`
+** Rename Maven property `master_skip_release_postdependency` to `master_skip_npm_version_release`
+** Rename Maven profile `npm-snapshot-predependency` to `npm-version-snapshot-dependencies`
+** Rename Maven profile `npm-snapshot-postdependency` to `npm-version-snapshot`
+** Rename Maven profile `npm-release-predependency` to `npm-version-release-dependencies`
+** Rename Maven profile `npm-release-postdependency` to `npm-version-release`
+* In the past the profile `npm-snapshot-postdependency` (now called `npm-version-snapshot` se above) was executed automatically. This profile generates unique snapshot versions having a timestamp for your `package.json` files so that they may be deployed to a npm repository. This profile is no longer active by default so that your source code is not changed when executing a simple maven build. Therefore, if your `package.json` files have versions (own version, not dependency version) with a `-snapshot` suffix and you deploy such snapshots to a npm repository after a build, you have to manually add the profile `npm-version-snapshot` to that build now.
+
 == @TypeVersion Annotation Type Change
 
 The type version of a data object is used to identify a certain structure version of the stored data object.
