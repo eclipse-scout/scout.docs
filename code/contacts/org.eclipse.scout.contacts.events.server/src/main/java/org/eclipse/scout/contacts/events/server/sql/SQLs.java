@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -44,21 +44,21 @@ public interface SQLs {
 
   String EVENT_INSERT_VALUES_01 = ""
       + "VALUES      ('evt01', "
-      + "             'JavaLand 2017', "
-      + "             '2017-03-28 09:00:00', "
-      + "             '2017-03-30 17:00:00', "
-      + "             'Bruehl', "
+      + "             'JavaLand 2022', "
+      + "             '2022-03-15 09:00:00', "
+      + "             '2022-03-17 17:00:00', "
+      + "             'Brühl', "
       + "             'DE', "
-      + "             'https://www.javaland.eu/de/javaland-2017/')";
+      + "             'https://www.javaland.eu/')";
 
   String EVENT_INSERT_VALUES_02 = ""
       + "VALUES      ('evt02', "
-      + "             'EclipseCon Europe 2017', "
-      + "             '2016-10-24 09:00:00', "
-      + "             '2016-10-26 17:00:00', "
-      + "             'Ludwigsburg', "
+      + "             'EclipseCon 2021', "
+      + "             '2021-10-25 09:00:00', "
+      + "             '2021-10-28 17:00:00', "
+      + "             'Virtual Event', "
       + "             'DE', "
-      + "             'https://www.eclipsecon.org/europe2017/')";
+      + "             'https://www.eclipsecon.org/2021')";
 
   String PARTICIPANT_CREATE_TABLE = ""
       + "CREATE       "

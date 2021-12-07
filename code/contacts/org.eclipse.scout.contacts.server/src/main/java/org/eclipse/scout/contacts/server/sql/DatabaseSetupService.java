@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 package org.eclipse.scout.contacts.server.sql;
 
 import java.util.Set;
@@ -85,15 +95,6 @@ public class DatabaseSetupService implements IDataStoreService {
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_18);
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_19);
         SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_20);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_21);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_22);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_23);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_24);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_25);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_26);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_27);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_28);
-        SQL.insert(SQLs.PERSON_INSERT_SAMPLE + SQLs.PERSON_VALUES_29);
         // tag::service[]
         LOG.info("Database table 'PERSON' populated with sample data");
       }
