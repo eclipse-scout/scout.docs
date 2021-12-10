@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 BSI Business Systems Integration AG.
+ * Copyright (c) 2021 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import java.util.Date;
 import javax.annotation.Generated;
 
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.extension.Extends;
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractFormFieldData;
@@ -33,6 +34,7 @@ public class PersonFormTabExtensionData extends AbstractFormFieldData {
     return getFieldByClass(Events.class);
   }
 
+  @ClassId("0f91d144-2533-4d0f-976e-978b830e784f-formdata")
   public static class Events extends AbstractTableFieldBeanData {
     private static final long serialVersionUID = 1L;
 
