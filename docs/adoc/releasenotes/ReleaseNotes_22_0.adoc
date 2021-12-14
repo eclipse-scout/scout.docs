@@ -94,6 +94,13 @@ This allows applying application wide logic on all translated texts including th
 
 // ----------------------------------------------------------------------------
 
+== Log4j support removed
+
+The Support for https://logging.apache.org/log4j/1.2/[Log4j] logging has been dropped as Log4j 1 is end-of-life.
+If you still rely on Log4j 1 please consult the migration notes for instructions how to update.
+
+// ----------------------------------------------------------------------------
+
 == Browser Field: Support for Posting Messages
 
 Browser fields provide a new method *postMessage(data, targetOrigin)* to send arbitrary data to the embedded web page.

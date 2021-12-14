@@ -221,6 +221,12 @@ The property `prefer-workspace-packages` is new and important if you have multip
 ** Rename Maven profile `npm-release-postdependency` to `npm-version-release`
 * In the past the profile `npm-snapshot-postdependency` (now called `npm-version-snapshot` se above) was executed automatically. This profile generates unique snapshot versions having a timestamp for your `package.json` files so that they may be deployed to a npm repository. This profile is no longer active by default so that your source code is not changed when executing a simple maven build. Therefore, if your `package.json` files have versions (own version, not dependency version) with a `-snapshot` suffix and you deploy such snapshots to a npm repository after a build, you have to manually add the profile `npm-version-snapshot` to that build now.
 
+== Log4j support removed
+
+The Support for https://logging.apache.org/log4j/1.2/[Log4j] logging has been dropped as Log4j 1 is end-of-life.
+If you still rely on Log4j 1 please update to another logger implementation.
+Scout supports java.util.Logging and http://logback.qos.ch/[Logback] (recommended) out of the box but other SLF4j compatible loggers can be configured as well.
+
 == @TypeVersion Annotation Type Change
 
 The type version of a data object is used to identify a certain structure version of the stored data object.

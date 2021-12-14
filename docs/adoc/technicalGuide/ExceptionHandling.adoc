@@ -28,11 +28,12 @@ Note: *<<PlatformError,PlatformErrors>> should never be catched by business logi
 ==== Scout Runtime Exceptions
 
 ===== PlatformException
+
 Base runtime exception of the Scout platform, which allows for message formatting anchors and context information to be associated.
 
 There is a single constructor which accepts the exception's message, and optionally a variable number of arguments. Typically, a potential cause is given as its argument. The message allows further the use of formatting anchors in the form of {} pairs. The respective formatting arguments are provided via the constructor's _varArg_ parameter. If the last argument is of the type `Throwable` and not referenced as formatting anchor in the message, that `Throwable` is used as the exception's cause. Internally, SLF4J `MessageFormatter` is used to provide substitution functionality. Hence, The format is the very same as if using SLF4j Logger.
 
-Further, `PlatformException` allows to associate context information, which are available in Log4j _diagnostic context map_ (MDC) upon logging the exception.
+Further, `PlatformException` allows to associate context information, which are available in SLF4J _diagnostic context map_ (MDC) upon logging the exception.
 
 [source,java,indent=0]
 .PlatformException examples
@@ -41,6 +42,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 ===== ProcessingException
+
 Represents a <<PlatformException,PlatformException>> and is thrown in case of a processing failure, and which can be associated with an exception error code and severity.
 
 ===== VetoException
@@ -105,6 +107,7 @@ include::{codedir}/org.eclipse.scout.docs.snippets/src/main/java/org/eclipse/sco
 ----
 
 ==== NullExceptionTranslator
+
 Use this translator to work with `Throwable` as given.
 
 Also, if given a wrapped exception like `UndeclaredThrowableException`, `InvocationTargetException` or `ExecutionException`, that exception is returned as given without unwrapping its cause.
@@ -112,10 +115,10 @@ Also, if given a wrapped exception like `UndeclaredThrowableException`, `Invocat
 For instance, this translator can be used if working with the Job API, e.g. to distinguish between a <<FutureCancelledError,FutureCancelledError>> thrown by the job's runnable, or because the job was effectively cancelled.
 
 === Exception Logging
-Scout framework logs via SLF4J (Simple Logging Facade for Java). It serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time.
+
+The Scout framework logs via SLF4J (Simple Logging Facade for Java). It serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging or logback) allowing the end user to plug in the desired logging framework at deployment time.
 
 SLF4J allows the use of formatting anchors in the form of {} pairs in the message which will be replaced by the respective argument. If the last argument is of the type Throwable and not referenced as formatting anchor in the message, that `Throwable` is used as the exception.
-
 
 [source,java,indent=0]
 .Logging examples
