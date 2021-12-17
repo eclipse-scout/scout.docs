@@ -46,7 +46,7 @@ export default class TreeForm extends Form {
   }
 
   _createNode() {
-    let iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
+    let iconList = [icons.STAR, icons.CLOCK, icons.FOLDER];
 
     let icon = iconList[this.nodeNo % iconList.length];
     let text = 'Node #' + this.nodeNo;

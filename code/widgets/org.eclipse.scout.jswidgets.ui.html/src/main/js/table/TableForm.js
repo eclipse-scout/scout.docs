@@ -143,7 +143,7 @@ export default class TableForm extends Form {
 
   _createRow() {
     let date = new Date();
-    let iconList = [icons.STAR_BOLD, icons.PERSON_SOLID, icons.FOLDER_BOLD];
+    let iconList = [icons.STAR, icons.CLOCK, icons.FOLDER];
     let locales = LocaleLookupCall.DATA.map(lookupRow => {
       return lookupRow[0];
     });

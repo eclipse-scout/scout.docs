@@ -1048,11 +1048,11 @@ public class FormForm extends AbstractForm implements IPageForm {
     }
 
     public enum IconId {
-      Calendar(Icons.CalendarBold),
+      Calendar(Icons.Calendar),
       Person(Icons.PersonSolid),
       Square(Icons.SquareSolid),
       Star(Icons.Star),
-      Sum(Icons.SumBold),
+      Sum(Icons.Sum),
       World(Icons.World);
 
       private final String m_value;

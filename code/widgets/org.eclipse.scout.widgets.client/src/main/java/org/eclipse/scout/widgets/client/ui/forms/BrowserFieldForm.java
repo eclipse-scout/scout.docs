@@ -461,7 +461,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.FileSolid;
+            return Icons.File;
           }
 
           @Override
@@ -488,7 +488,7 @@ public class BrowserFieldForm extends AbstractForm implements IAdvancedExampleFo
 
           @Override
           protected String getConfiguredIconId() {
-            return Icons.FileSolid;
+            return Icons.File;
           }
 
           @Override
