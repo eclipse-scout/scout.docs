@@ -510,7 +510,7 @@ See the class `HttpSessionIdLogHelper` for details.
 ** `OFF`: Never provides a value (always empty).
 ** `FULL`: Provides the full HTTP Session ID. This restores the previous, less safe behavior. *Using this value is NOT recommended!*
 
-== New filter API for ScoutJS
+== New Filter API for ScoutJS
 
 The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` share a common filter API since 22.0.
 This API contains the methods `addFilter(filter, applyFilter = true)`, `removeFilter(filter, applyFilter = true)` and `setFilters(filters, applyFilter = true)` and the property `filters`.
@@ -537,6 +537,29 @@ tree.filter();
 ----
 table.removeFilter(filters);
 ----
+
+*Migration:*
+
+* `Table.js`:
+** Change `addFilter(filter);` to `addFilter(filter, false);` and `addFilter(filter); filter();` to `addFilter(filter);`
+** Change `removeFilter(filter);` to `removeFilter(filter, false);` and `removeFilter(filter); filter();` to `removeFilter(filter);`
+** Change `removeFilterByKey(filter);` to `removeFilterByKey(filter, false);` and `removeFilterByKey(filter); filter();` to `removeFilterByKey(filter);`
+** Change `setFilters(filters);` to `setFilters(filters, false);` and `setFilters(filters); filter();` to `setFilters(filters);`
+* `Tree.js`:
+** Change `addFilter(filter, true);` to `addFilter(filter, false);`
+** Change `removeFilter(filter);` to `removeFilter(filter, false);` and `removeFilter(filter); filter();` to `removeFilter(filter);`
+* `TileGrid.js`:
+** Change `addFilters(...);` to `addFilter(...);`
+** Change `addFilter(filter);` to `addFilter(filter, false);` and `addFilter(filter); filter();` to `addFilter(filter);`
+** Change `removeFilters(...);` to `removeFilter(...);`
+** Change `removeFilter(filter);` to `removeFilter(filter, false);` and `removeFilter(filter); filter();` to `removeFilter(filter);`
+** Change `setFilters(filters);` to `setFilters(filters, false);` and `setFilters(filters); filter();` to `setFilters(filters);`
+* `TileAccordion.js`:
+** Change `tileFilters` to `filters`
+** Change `addTileFilter(filter);` to `addFilter(filter, false);` and `addTileFilter(filter); filterTiles();` to `addFilter(filter);`
+** Change `removeTileFilter(filter);` to `removeFilter(filter, false);` and `removeTileFilter(filter); filterTiles();` to `removeFilter(filter);`
+** Change `setTileFilters(filters);` to `setFilters(filters, false);` and `setTileFilters(filters); filterTiles();` to `setFilters(filters);`
+** Change `filterTiles();` to `filter();`
 
 These widgets support a text filter that is shown while typing if the widget is focused. This behaviour is enabled by default and can be turned off using the property `textFilterEnabled`.
 Fields that provide this functionality may now be obsolete and can be removed.

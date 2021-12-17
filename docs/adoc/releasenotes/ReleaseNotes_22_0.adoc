@@ -151,7 +151,7 @@ This allows inheritance for API documentation (e.g. on an abstract REST resource
 
 // ----------------------------------------------------------------------------
 
-== New filter field
+== New Filter Field
 
 The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` support a text filter since 22.0.
 This filter field is shown while typing if the widget is focused or can be opened by clicking the icon in the bottom right corner.

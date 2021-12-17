@@ -954,7 +954,7 @@ The colors used for grid lines, axes, etc. and the auto colors for datasets can 
 For a more detailed example see <<how-to-create-a-chart,How to Create a Chart>>.
 
 [#filter-field]
-=== Filter field
+=== Filter Field
 
 The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` share a common filter API which includes a filter field.
 This filter field is enabled by default and can be turned off using the property `textFilterEnabled`.
@@ -1026,6 +1026,16 @@ class FilterWidget extends Widget {
     this.filteredElementsDirty = false;
   }
 
+  _init(model) {
+    super._init(model);
+    this.setElements(this.elements);
+    this.setFilters(this.filters);
+  }
+
+  _createKeyStrokeContext() {
+    return new KeyStrokeContext();
+  }
+
   _render() {
     this.$container = this.$parent.appendDiv();
     this.htmlComp = HtmlComponent.install(this.$container, this.session);
@@ -1041,19 +1051,33 @@ class FilterWidget extends Widget {
     super._remove();
   }
 
-  _init(model) {
-    super._init(model);
-    this.setElements(this.elements);
-    this.setFilters(this.filters);
-  }
-
-  _createKeyStrokeContext() {
-    return new KeyStrokeContext();
-  }
-
   setElements(elements) {
     this.setProperty('elements', elements);
     this.filter();
+  }
+
+  setTextFilterEnabled(textFilterEnabled) {
+    this.setProperty('textFilterEnabled', textFilterEnabled);
+  }
+
+  _renderTextFilterEnabled() {
+    this.filterSupport.renderFilterField();
+  }
+
+  isTextFilterFieldVisible() {
+    return this.textFilterEnabled;
+  }
+
+  /**
+   * @returns {FilterSupport}
+   */
+  _createFilterSupport() {
+    return new FilterSupport({
+      widget: this,
+      $container: () => this.$container,
+      getElementsForFiltering: () => this.elements,
+      getElementText: element => element.text
+    });
   }
 
   addFilter(filter, applyFilter = true) {
@@ -1074,30 +1098,6 @@ class FilterWidget extends Widget {
 
   updateFilteredElements(result, opts) {
     this.filteredElementsDirty = false;
-  }
-
-  /**
-   * @returns {FilterSupport}
-   */
-  _createFilterSupport() {
-    return new FilterSupport({
-      widget: this,
-      $container: () => this.$container,
-      getElementsForFiltering: () => this.elements,
-      getElementText: element => element.text
-    });
-  }
-
-  setTextFilterEnabled(textFilterEnabled) {
-    this.setProperty('textFilterEnabled', textFilterEnabled);
-  }
-
-  isTextFilterFieldVisible() {
-    return this.textFilterEnabled;
-  }
-
-  _renderTextFilterEnabled() {
-    this.filterSupport.renderFilterField();
   }
 }
 
