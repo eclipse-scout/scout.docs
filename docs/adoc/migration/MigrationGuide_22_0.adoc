@@ -116,7 +116,7 @@ To update your application the following steps might be required:
 Accordingly, you might want to update the list with supported browsers in your `unsupported-browser.html` file (if existing). Remove the list item having text `ui.BrowserInternetExplorer`.
 You can keep the one with Edge, because the new Chromium based Microsoft Edge browser is supported.
 
-=== Update of 3rd Party library _chart.js_ to 3.6.0
+=== Update of 3rd Party library _chart.js_ to 3.6.2
 
 If you are using the charts from `@eclipse-scout/chart` you might need to update the config object of your charts, as most of them are rendered using _chart.js_.
 
@@ -172,15 +172,15 @@ Perform the following migration in all your `package.json` files:
 "jquery": "3.6.0"
 "jasmine-core": "3.10.1"
 "karma": "6.3.9"
-"eslint": "8.3.0"
+"eslint": "8.5.0"
 
 ----
 * Replace dependencies to `babel-eslint` with these two:
 +
 [source,json lines]
 ----
-"@babel/core": "7.16.0",
-"@babel/eslint-parser": "7.16.3"
+"@babel/core": "7.16.5",
+"@babel/eslint-parser": "7.16.5"
 ----
 
 
