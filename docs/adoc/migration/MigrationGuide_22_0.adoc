@@ -116,7 +116,7 @@ To update your application the following steps might be required:
 Accordingly, you might want to update the list with supported browsers in your `unsupported-browser.html` file (if existing). Remove the list item having text `ui.BrowserInternetExplorer`.
 You can keep the one with Edge, because the new Chromium based Microsoft Edge browser is supported.
 
-=== Update of 3rd Party library _chart.js_ to 3.6.2
+=== Update of 3rd Party library _chart.js_ to 3.7.0
 
 If you are using the charts from `@eclipse-scout/chart` you might need to update the config object of your charts, as most of them are rendered using _chart.js_.
 
