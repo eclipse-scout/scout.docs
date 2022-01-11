@@ -107,6 +107,12 @@ export default () => ({
                     labelVisible: false
                   },
                   {
+                    id: 'WithGlassPaneField',
+                    objectType: 'CheckBoxField',
+                    label: 'With Glass Pane',
+                    labelVisible: false
+                  },
+                  {
                     id: 'HorizontalAlignmentField',
                     objectType: 'SmartField',
                     lookupCall: 'jswidgets.PopupHorizontalAlignLookupCall',

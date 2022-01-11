@@ -115,6 +115,7 @@ export default class PopupForm extends Form {
       horizontalSwitch: this.widget('HorizontalSwitchField').value,
       verticalSwitch: this.widget('VerticalSwitchField').value,
       withArrow: this.widget('WithArrowField').value,
+      withGlassPane: this.widget('WithGlassPaneField').value,
       cssClass: 'popup-form-popup',
       widget: {
         objectType: 'Label',
