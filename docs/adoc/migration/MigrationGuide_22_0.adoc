@@ -510,6 +510,10 @@ See the class `HttpSessionIdLogHelper` for details.
 ** `OFF`: Never provides a value (always empty).
 ** `FULL`: Provides the full HTTP Session ID. This restores the previous, less safe behavior. *Using this value is NOT recommended!*
 
+== ScoutFieldStatus deleted
+
+The class `ScoutFieldStatus` has been deleted. It can be replaced with `org.eclipse.scout.rt.platform.status.Status`.
+
 == New Filter API for ScoutJS
 
 The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` share a common filter API since 22.0.

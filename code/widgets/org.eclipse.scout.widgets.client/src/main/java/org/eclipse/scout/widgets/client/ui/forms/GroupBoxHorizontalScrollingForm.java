@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -227,10 +227,9 @@ public class GroupBoxHorizontalScrollingForm extends AbstractForm implements IPa
     Integer severity = getNotificationStatusField().getValue();
     if (severity != null) {
       String message = getNotificationTextField().getValue() != null ? getNotificationTextField().getValue() : "";
-      Notification notification = new Notification(new Status(message, severity),
+      Notification notification = new Notification(new Status(message, severity, getIconIdField().getValue()),
           getNotificationClosableField().getValue(),
-          getNotificationHtmlEnabledField().getValue(),
-          getIconIdField().getValue());
+          getNotificationHtmlEnabledField().getValue());
       getVerticalMonthsBox().setNotification(notification);
     }
     else {

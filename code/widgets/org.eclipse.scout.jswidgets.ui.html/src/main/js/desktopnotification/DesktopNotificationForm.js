@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -33,8 +33,9 @@ export default class DesktopNotificationForm extends Form {
     this.widget('DelayField').setValue(0);
     this.widget('StatusSeverityField').setValue(notification.status.severity);
     this.widget('NativeNotificationTitleField').setValue(notification.nativeNotificationTitle);
-    this.widget('NativeNotificationIconIdField').setValue(notification.nativeNotificationIconId);
+    this.widget('NativeNotificationIconIdField').setValue((notification.nativeNotificationStatus || {}).iconId);
     this.widget('NativeNotificationVisibilityField').setValue(notification.nativeNotificationVisibility);
+    this.widget('NativeNotificationMessageField').setValue((notification.nativeNotificationStatus || {}).message);
     this.widget('LoadingField').setValue(notification.loading);
     notification.destroy();
 
@@ -49,8 +50,13 @@ export default class DesktopNotificationForm extends Form {
       duration: this.widget('DurationField').value,
       iconId: this.widget('IconField').value,
       nativeOnly: this.widget('NativeOnlyField').value,
+      htmlEnabled: this.widget('HtmlEnabledField').value,
       nativeNotificationTitle: this.widget('NativeNotificationTitleField').value,
-      nativeNotificationIconId: this.widget('NativeNotificationIconIdField').value,
+      nativeNotificationStatus: {
+        message: this.widget('NativeNotificationMessageField').value,
+        severity: this.widget('StatusSeverityField').value,
+        iconId: this.widget('NativeNotificationIconIdField').value
+      },
       nativeNotificationVisibility: this.widget('NativeNotificationVisibilityField').value,
       loading: this.widget('LoadingField').value,
       status: {

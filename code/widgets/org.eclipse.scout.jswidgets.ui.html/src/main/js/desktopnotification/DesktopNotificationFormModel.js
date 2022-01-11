@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Distribution License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/org/documents/edl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ */
 export default () => ({
   id: 'jswidgets.DesktopNotificationForm',
   displayHint: 'view',
@@ -57,6 +67,12 @@ export default () => ({
                     tooltipText: '${textKey:DurationTooltip}'
                   },
                   {
+                    id: 'IconField',
+                    objectType: 'SmartField',
+                    lookupCall: 'jswidgets.IconIdLookupCall',
+                    label: 'Icon'
+                  },
+                  {
                     id: 'ClosableField',
                     objectType: 'CheckBoxField',
                     label: 'Closable',
@@ -66,6 +82,12 @@ export default () => ({
                     id: 'LoadingField',
                     objectType: 'CheckBoxField',
                     label: 'Loading',
+                    labelVisible: false
+                  },
+                  {
+                    id: 'HtmlEnabledField',
+                    objectType: 'CheckBoxField',
+                    label: 'HTML Enabled',
                     labelVisible: false
                   },
                   {
@@ -79,6 +101,12 @@ export default () => ({
                     id: 'NativeNotificationTitleField',
                     objectType: 'StringField',
                     label: 'Native Notification Title',
+                    labelWidthInPixel: 170
+                  },
+                  {
+                    id: 'NativeNotificationMessageField',
+                    objectType: 'StringField',
+                    label: 'Native Notification Message',
                     labelWidthInPixel: 170
                   },
                   {
@@ -102,12 +130,6 @@ export default () => ({
                     label: 'Delay',
                     labelWidthInPixel: 170,
                     tooltipText: '${textKey:DelayTooltip}'
-                  },
-                  {
-                    id: 'IconField',
-                    objectType: 'SmartField',
-                    lookupCall: 'jswidgets.IconIdLookupCall',
-                    label: 'Icon'
                   }
                 ]
               }

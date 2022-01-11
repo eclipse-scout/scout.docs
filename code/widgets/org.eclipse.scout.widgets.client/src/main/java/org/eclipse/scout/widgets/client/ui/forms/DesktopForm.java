@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -144,6 +144,14 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
     return getFieldByClass(DelayField.class);
   }
 
+  public MainBox.NotificationsBox.HtmlEnabledField getHtmlEnabledField() {
+    return getFieldByClass(MainBox.NotificationsBox.HtmlEnabledField.class);
+  }
+
+  public MainBox.NotificationsBox.NativeMessageField getNativeMessageField() {
+    return getFieldByClass(MainBox.NotificationsBox.NativeMessageField.class);
+  }
+
   public MainBox.NotificationsBox.NativeNotificationIconIdField getNativeNotificationIconIdField() {
     return getFieldByClass(MainBox.NotificationsBox.NativeNotificationIconIdField.class);
   }
@@ -194,20 +202,20 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execClickAction() {
           final IRunnable openFormRunnable = () -> {
-            IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue());
+            IStatus status = new Status(getMessageField().getValue(), getSeverityField().getValue(), getIconIdField().getValue());
             long duration = getDurationField().getValue();
             boolean closeable = getCloseableField().getValue();
             boolean loading = getLoadingField().getValue();
-            String iconId = getIconIdField().getValue();
             boolean nativeOnly = getNativeOnlyField().getValue();
             String nativeNotificationTitle = getNativeNotificationTitleField().getValue();
             String nativeNotificationVisibility = getNativeNotificationVisibilityField().getValue();
             String nativeNotificationIconId = getNativeNotificationIconIdField().getValue();
-            DesktopNotification notification = new DesktopNotification(status, duration, closeable, iconId)
+            DesktopNotification notification = new DesktopNotification(status, duration, closeable)
                 .withNativeOnly(nativeOnly)
                 .withNativeNotificationTitle(nativeNotificationTitle)
                 .withNativeNotificationVisibility(nativeNotificationVisibility)
-                .withNativeNotificationIconId(nativeNotificationIconId);
+                .withNativeNotificationStatus(new Status(getNativeMessageField().getValue(), getSeverityField().getValue(), 0, nativeNotificationIconId))
+                .withHtmlEnabled(getHtmlEnabledField().getValue());
             notification.setLoading(loading);
 
             getDesktop().addNotification(notification);
@@ -261,6 +269,16 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue("Foo Bar");
+        }
+
+        @Override
+        protected boolean getConfiguredMultilineText() {
+          return true;
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
         }
       }
 
@@ -358,6 +376,15 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         }
       }
 
+      @Order(77)
+      @ClassId("fac161e8-3570-46fe-8670-1b06c23f0640")
+      public class HtmlEnabledField extends AbstractBooleanField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "HTML Enabled";
+        }
+      }
+
       @Order(80)
       @ClassId("b201fd6d-a587-4497-8977-c9c35abf02e0")
       public class NativeOnlyField extends AbstractBooleanField {
@@ -375,6 +402,25 @@ public class DesktopForm extends AbstractForm implements IAdvancedExampleForm {
         @Override
         protected void execInitField() {
           setValue(false);
+        }
+      }
+
+      @Order(82)
+      @ClassId("aa682456-5f7a-45f5-8c22-a1070c0c09af")
+      public class NativeMessageField extends AbstractStringField {
+        @Override
+        protected String getConfiguredLabel() {
+          return "Native Message";
+        }
+
+        @Override
+        protected boolean getConfiguredMultilineText() {
+          return true;
+        }
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
         }
       }
 
