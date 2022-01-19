@@ -56,6 +56,10 @@ export default class MenuBarForm extends Form {
       }
     });
 
+    // To make key stroke work on the combo menu, delegate the action calls to a child
+    let comboMenu = this.widget('ComboMenu');
+    comboMenu.on('action', event => comboMenu.childActions[0] && comboMenu.childActions[0].doAction());
+
     let detailBox = this.widget('DetailBox');
     let menus = detailBox.menus;
 
