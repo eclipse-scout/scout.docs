@@ -34,6 +34,7 @@ export default () => ({
                 id: 'TagBarProperties',
                 objectType: 'GroupBox',
                 label: 'Tag Bar Properties',
+                tooltipText: '${textKey:TagBarPropertiesTooltip}',
                 fields: [{
                   id: 'EnabledField',
                   objectType: 'CheckBoxField',
