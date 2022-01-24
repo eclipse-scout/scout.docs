@@ -569,3 +569,7 @@ These widgets support a text filter that is shown while typing if the widget is 
 Fields that provide this functionality may now be obsolete and can be removed.
 
 For more information about the filter API and the filter field see link:{techdocjs}#filter-field[Technical Guide for Scout JS].
+
+== Checkable Columns
+
+Boolean columns that are marked as `AbstractTable#getConfiguredCheckableColumn()` do not support `execPrepareEdit` and `execCompleteEdit` anymore. Existing logic should be migrated to `AbstractTable#execRowsChecked(rows)`.
