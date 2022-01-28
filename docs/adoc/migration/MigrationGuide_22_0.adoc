@@ -572,4 +572,7 @@ For more information about the filter API and the filter field see link:{techdoc
 
 == Checkable Columns
 
-Boolean columns that are marked as `AbstractTable#getConfiguredCheckableColumn()` do not support `execPrepareEdit` and `execCompleteEdit` anymore. Existing logic should be migrated to `AbstractTable#execRowsChecked(rows)`.
+Boolean columns that are marked as `AbstractTable#getConfiguredCheckableColumn()` now support to be set to editable=false (see `AbstractColumn#getConfiguredEditable()` for more details).
+This is relevant for checkable columns that have been set to editable=false without any effect until now. It should be verified whether the new behavior is still as expected for such cases.
+
+As a consequence, checkable columns do not support `execPrepareEdit` and `execCompleteEdit` anymore. Existing logic should be migrated to `AbstractTable#execRowsChecked(rows)`.
