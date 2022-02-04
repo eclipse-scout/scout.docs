@@ -569,3 +569,20 @@ These widgets support a text filter that is shown while typing if the widget is 
 Fields that provide this functionality may now be obsolete and can be removed.
 
 For more information about the filter API and the filter field see link:{techdocjs}#filter-field[Technical Guide for Scout JS].
+
+== New Modules for DataModel related classes
+
+All classes that are related to the DataModel have been moved to separate modules.
+This includes `IDataModel` and the `IComposerField`. If these classes have been used you need to add the references to the new modules to the corresponding pom.xml.
+The packages for these classes remain unchanged so no further migration is needed besides adding the dependencies to the new modules.
+
+* org.eclipse.scout.rt.datamodel.client
+** Everything related to the `IComposerField` can be found here
+* org.eclipse.scout.rt.datamodel.server
+** `FormDataStatementBuilder` and `EntityContribution` and related classes are now located here
+* org.eclipse.scout.rt.datamodel.shared
+** Classes related to the `IDataModel` have been moved to this module
+* org.eclipse.scout.rt.datamodel.ui.html
+** Json components of the `IComposerField` are located here
+
+
