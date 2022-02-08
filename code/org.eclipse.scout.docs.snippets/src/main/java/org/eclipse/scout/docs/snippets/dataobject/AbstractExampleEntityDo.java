@@ -11,7 +11,7 @@ public abstract class AbstractExampleEntityDo extends DoEntity {
     return doValue("name");
   }
 
-//end::class[]
+  //end::class[]
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS

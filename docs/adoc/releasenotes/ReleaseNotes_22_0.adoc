@@ -126,16 +126,16 @@ In order to support hierarchical lookups using REST, change your lookup row impl
 .Example
 ----
 @TypeName("ExampleLookupRow")
-public class ExampleLookupRowDo extends AbstractHierarchicalLookupRowDo<MyLookupRowDo, ExampleId> {
+public class ExampleLookupRowDo extends AbstractHierarchicalLookupRowDo<ExampleId> {
 
   @Override
   public DoValue<ExampleId> id() {
-    return createIdAttribute(this);
+    return doValue(ID);
   }
 
   @Override
   public DoValue<ExampleId> parentId() {
-    return createParentIdAttribute(this);
+    return doValue(PARENT_ID);
   }
 
   // ...

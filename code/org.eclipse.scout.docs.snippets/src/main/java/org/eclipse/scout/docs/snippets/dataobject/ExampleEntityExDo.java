@@ -33,7 +33,6 @@ public class ExampleEntityExDo extends ExampleEntityDo {
    * *************************************************************************/
 
   @Override
-  @AttributeName("nameEx")
   @Generated("DoConvenienceMethodsGenerator")
   public ExampleEntityExDo withName(String name) {
     name().set(name);
