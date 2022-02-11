@@ -41,9 +41,9 @@
               <attributes>
                 <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
-                <pagenums/>
-                <toc/>
-                <idprefix/>
+                <pagenums />
+                <toc />
+                <idprefix />
                 <idseparator>-</idseparator>
               </attributes>
             </configuration>
@@ -60,7 +60,7 @@
                 <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>
-                <idprefix/>
+                <idprefix />
                 <idseparator>-</idseparator>
                 <docinfo1>true</docinfo1>
               </attributes>

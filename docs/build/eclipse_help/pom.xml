@@ -42,9 +42,9 @@
                 <source-highlighter>coderay</source-highlighter>
                 <icons>font</icons>
                 <sectanchors>true</sectanchors>
-                <idprefix/>
+                <idprefix />
                 <idseparator>-</idseparator>
-                <linkcss/>
+                <linkcss />
                 <docinfo1>true</docinfo1>
               </attributes>
             </configuration>
