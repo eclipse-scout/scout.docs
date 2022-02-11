@@ -51,6 +51,82 @@ If you just want to play around with them without looking at the source code, yo
 
 // ----------------------------------------------------------------------------
 
+== UI Brush Up
+
+The user interface has been completely reworked.
+The goal was to modernize it and improve the usability without changing basic user interactions.
+Modern design principles have been applied for a fresh look, an improved user guidance and increased readability.
+Various widgets have been beautified like date field, smart field, table and many more.
+
+.Brush Up
+image::{rnimgsdir}/brush-up.png[]
+
+The following topics describe some notable features of the brush-up.
+
+=== Reworked Action Elements
+
+Action elements like buttons, links, menus. etc. are now more user-friendly due to increased click area, clear hover effect and aligned colors.
+
+.Menu
+image::{rnimgsdir}/menu.png[]
+
+=== Scroll Shadow
+
+There is now a scroll shadow on every scrollable element to indicate that not all elements are visible.
+
+.Scroll Shadow
+image::{rnimgsdir}/scroll-shadow.png[]
+
+=== Icons for Notification and Message Boxes
+
+Notifications in GroupBoxes (`IGroupBox.setNotification()`), desktop notifications (`IDesktop.addNotification`) and message boxes now support icons.
+
+.Notification
+image::{rnimgsdir}/notification.png[]
+
+=== Consistent Severity Handling
+
+There is a consistent coloring across tooltips, notifications and message boxes.
+
+image::{rnimgsdir}/tooltip.png[float="left"]
+
+image::{rnimgsdir}/msgbox.png[]
+
+=== Better Focus Indication
+
+Focus marker and table/tree selection have been improved to better guide the user.
+
+.List Box
+image::{rnimgsdir}/listbox.png[]
+
+=== Toggle Menu Support
+
+Toggleable menu items now correctly visualize the selected state.
+
+.Toggle Menu
+image::{rnimgsdir}/togglemenu.png[]
+
+=== Improved Combo Menu
+
+The combo menu got more flexible and can be used with the button style as well.
+
+.Combo Menu
+image::{rnimgsdir}/combomenu.png[]
+
+=== Closable Views
+
+Views can now be closed using an "x" icon, even if they are not active.
+
+.Views
+image::{rnimgsdir}/view-tabs.png[]
+
+=== Better Popups
+
+Popups are now animated and have a cleaner look.
+
+.Popup
+image::{rnimgsdir}/popup.png[]
+
 == New 3rd Party requirements
 
 === Java
@@ -82,7 +158,10 @@ If you are still using Internet Explorer or Edge Legacy, we strongly recommend u
 == Native Notification Support
 
 It's now possible to send notifications via the https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API[Notification API].
-The `DesktopNotification` has two new properties to control the behavior: *nativeOnly* and *nativeNotificationVisibility*.
+The `DesktopNotification` has some new properties to control the behavior: *nativeOnly*, *nativeNotificationVisibility* and more.
+
+.Native Notification
+image::{rnimgsdir}/native-notification.png[]
 
 // ----------------------------------------------------------------------------
 
@@ -108,10 +187,6 @@ Browser fields provide a new method *postMessage(data, targetOrigin)* to send ar
 To prevent malicious data from being sent to your application, the origin of the message should always be validated in the callback handler
 (`execPostMessage` in Java, `message` event listener in Scout JS).
 Scout will now do this check automatically for you if you configure the valid origins in the new property *trustedMessageOrigins*.
-
-== Icon Support for Notifications
-
-Notifications in GroupBoxes (`IGroupBox.setNotification()`) and desktop notifications (`IDesktop.addNotification`) now also support icons.
 
 // ----------------------------------------------------------------------------
 
@@ -153,7 +228,7 @@ This allows inheritance for API documentation (e.g. on an abstract REST resource
 
 == New Filter Field
 
-The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` support a text filter since 22.0.
+The widgets `Table.js`, `Tree.js`, `TileGrid.js` and `TileAccordion.js` now support a text filter.
 This filter field is shown while typing if the widget is focused or can be opened by clicking the icon in the bottom right corner.
 
 .A TreeBox with the filter icon in the bottom right corner.
@@ -164,3 +239,20 @@ image::{rnimgsdir}/tree_box_with_filter_field.png[]
 
 This feature is enabled by default and can be turned off using the property `textFilterEnabled`.
 For more information about the filter API and the filter field see link:{techdocjs}#filter-field[Technical Guide for Scout JS].
+
+== Menu on Form Field
+
+Until now, only some form fields supported menus.
+In order to generalize the functionality the menu support has been moved to `IFormField.java`.
+This reduces duplicated code and enables menus on every form field, e.g. on a tree field.
+
+.A TreeField with Menus
+image::{rnimgsdir}/treefieldmenu.png[]
+
+== Lazy Loading for Tables and Detail Forms (Scout JS)
+
+The detail elements of a page are now loaded lazily which improves initial loading time significantly.
+
+== Focus of Invalid Field (Scout JS)
+
+The first invalid field now gets the focus when a form should be saved to better guide the user.

@@ -287,21 +287,28 @@ In case you don't use SVG logos yet, you should consider doing so to prevent blu
 
 === LESS Variables
 
+Many less variables have been modified, added and removed.
+Also, the name "active" has been replaced with selected where it has been used for a selection state rather than the css "active" state (mouse press).
+
+Following renames have been applied (incomplete list):
+
 - @active-inverted-background-color -> @selected-background-color
 - @active-inverted-color -> @selected-color
+- @command-button-active-* -> @command-button-selected-*
+- @default-button-active-background-color -> @default-button-selected-background-color
 - @navigation-background-color -> @desktop-navigation-background-color
 - @navigation-color -> @desktop-navigation-color
 - @outline-title-margin-left/right -> @outline-title-padding-left/right
 - @group-box-title-margin-top -> @group-box-header-margin-top
 - @group-box-title-border-width -> @group-box-header-border-width
-
-// TODO CGU add all renamings
+- @simple-tab-active-\*background -> @simple-tab-selected-*
+- @wizard-step-active-* -> @wizard-step-selected-*
 
 Notes:
 @desktop-navigation-background-color now points to @desktop-header-background-color;
 Instead of customizing the navigation background color it is suggested to now customize the header background color.
 
-=== Rules
+=== CSS Rules
 
 Many css rules have been adjusted for the new style.
 So if you have customized some Scout components, please check your rules if they are still doing what they are supposed to.
@@ -313,8 +320,9 @@ The following list shows some of the changes:
 - border-bottom of group-box-title -> .group-box-header > .bottom-border
 - .tab-box-bottom-border -> .bottom-border
 - Tree/Table: Selection style is not applied to the table-row/tree-node anymore but to a separate ::after element
+- Button/Menu: simplified CSS and HTML structure
 
-// TODO cgu describe: button, menu styles
+For details please see the individual commits.
 
 === Icons
 
