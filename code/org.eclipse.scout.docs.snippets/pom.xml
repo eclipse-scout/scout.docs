@@ -16,7 +16,7 @@
     <groupId>org.eclipse.scout</groupId>
     <artifactId>maven_rt_plugin_config-master</artifactId>
     <version>3.14.2</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <groupId>org.eclipsescout.demo</groupId>
@@ -67,8 +67,8 @@
       <artifactId>org.eclipse.scout.rt.dataobject</artifactId>
     </dependency>
     <dependency>
-    <groupId>org.eclipse.scout.rt</groupId>
-    <artifactId>org.eclipse.scout.rt.mail</artifactId>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.mail</artifactId>
     </dependency>
     <dependency>
       <groupId>org.eclipse.scout.rt</groupId>

@@ -10,8 +10,8 @@
   ~     BSI Business Systems Integration AG - initial API and implementation
   -->
 <project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -60,7 +60,7 @@
         <artifactId>docker-maven-plugin</artifactId>
         <version>1.2.2</version>
         <configuration>
-        <!-- TODO [7.0] avd: reset to explicit group id to ${project.groupId} once the renaming from org.eclipse.scout.widgets to org.eclipse.scout.widgets is complete -->
+          <!-- TODO [7.0] avd: reset to explicit group id to ${project.groupId} once the renaming from org.eclipse.scout.widgets to org.eclipse.scout.widgets is complete -->
           <imageName>${docker.image.prefix}/org.eclipse.scout.widgets</imageName>
           <dockerDirectory>.</dockerDirectory>
           <resources>
