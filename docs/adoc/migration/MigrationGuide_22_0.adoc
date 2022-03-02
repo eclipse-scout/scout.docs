@@ -183,7 +183,6 @@ Perform the following migration in all your `package.json` files:
 "@babel/eslint-parser": "7.16.5"
 ----
 
-
 == Release engineering changes
 
 The following changes have been made to the Scout releng. Please apply the necessary migration steps in your files and build scripts (may also affect continuous integration environments):
@@ -201,6 +200,7 @@ prefer-workspace-packages=true
 engine-strict=true
 scripts-prepend-node-path=auto
 ----
+
 The property `prefer-workspace-packages` is new and important if you have multiple npm modules in your project.
 * In all your `package.json` files:
 ** Replace `"snapshot-cleanup": "releng-scripts snapshot-cleanup"` with `"cleanup:snapshots": "releng-scripts cleanup:snapshots"`
@@ -458,6 +458,12 @@ This helps to clarify and stabilize the API (the datatype does not suddenly chan
 Nothing changes if you deserialize json to a typed DataObject. Then the target type of the attribute in the DataObject is used.
 
 If your code relies on a specific float type after raw deserialization, update it accordingly to handle `BigDecimal` instead.
+
+== Data Objects without @TypeName Annotation
+
+The behavior of data objects without a `@TypeName` annotation was changed.
+In former releases such a data object was serialized into JSON including a `"_type" : null` type name.
+The new implementation does not include the null-TypeName in the serialized JSON document.
 
 == Deprecated Functions in strings.js Utility
 
