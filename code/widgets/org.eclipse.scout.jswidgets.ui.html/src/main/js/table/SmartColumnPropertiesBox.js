@@ -38,7 +38,7 @@ export default class SmartColumnPropertiesBox extends GroupBox {
       return;
     }
 
-    var browseMaxRowCountField = this.widget('BrowseMaxRowCountField');
+    let browseMaxRowCountField = this.widget('BrowseMaxRowCountField');
     browseMaxRowCountField.setValue(this.column.browseMaxRowCount);
     browseMaxRowCountField.on('propertyChange', this._onPropertyChange.bind(this));
   }

@@ -45,7 +45,7 @@ export default class BooleanColumnPropertiesBox extends GroupBox {
 
   _onPropertyChange(event) {
     if (event.propertyName === 'value' && event.source.id === 'TriStateEnabledField') {
-      this.column.setTriStateEnabled(event.newValue)
+      this.column.setTriStateEnabled(event.newValue);
     }
   }
 }
