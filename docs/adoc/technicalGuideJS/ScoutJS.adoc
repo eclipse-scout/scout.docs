@@ -1504,8 +1504,8 @@ In order to use the Scout eslint-config, you need to add devDependencies to the 
 .ESLint Dependencies
 ----
 "devDependencies": {
-  "@eclipse-scout/eslint-config": "10.0.0",
-  "eslint": "6.8.0"
+  "@eclipse-scout/eslint-config": "22.0.0",
+  "eslint": "8.10.0"
 }
 ----
 
@@ -1552,14 +1552,14 @@ class Example {
 }
 ----
 
-If you plan to use such features too, you should enable the babel-eslint plugin. To do that, add the following devDependencies to your `package.json`:
+If you plan to use such features too, you should enable the babel eslint parser. To do that, add the following devDependencies to your `package.json`:
 
 [source,JSON]
 .Babel-eslint dependencies
 ----
 "devDependencies": {
-  "babel-eslint": "10.0.3",
-  "eslint-plugin-babel": "5.3.0"
+  "@babel/eslint-parser": "7.16.5",
+  "@babel/eslint-plugin": "7.16.5"
 }
 ----
 
@@ -1568,15 +1568,20 @@ To enable it, configure your `.eslintrc.js` in the following way:
 [source,JavaScript]
 .Babel-eslint configuration
 ----
-  plugins: ['babel'],
-  parser: 'babel-eslint'
+  plugins: ['@babel'],
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false
+  }
 ----
 
 That's it.
 
-Remember: ESLint itself already supports a lot of modern EcmaScript code. You only need to enable the babel-eslint plugin if you want to use the latest features which are not yet supported by ESLint.
+Remember: ESLint itself already supports a lot of modern EcmaScript code.
+You only need to enable the babel eslint parser if you want to use the latest features which are not yet supported by ESLint.
 
 ==== ESLint Ignore
+
 Similar to `.gitignore`, you can create a file called `.eslintignore` to exclude specific files or directories from the analysis.
 Because analyzing the build output probably does not make any sense, we recommend to at least ignore the `target` folder.
 The only thing you need to do is to create that file and add a line with the word `target`.

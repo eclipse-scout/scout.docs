@@ -172,15 +172,25 @@ Perform the following migration in all your `package.json` files:
 "jquery": "3.6.0"
 "jasmine-core": "3.10.1"
 "karma": "6.3.9"
-"eslint": "8.5.0"
+"eslint": "8.10.0"
 
 ----
-* Replace dependencies to `babel-eslint` with these two:
+* Replace dependencies to `babel-eslint` and `eslint-plugin-babel` with these two:
 +
 [source,json lines]
 ----
-"@babel/core": "7.16.5",
-"@babel/eslint-parser": "7.16.5"
+"@babel/eslint-parser": "7.16.5",
+"@babel/eslint-plugin": "7.16.5"
+----
+* Adjust your .eslintrc.js in the following way:
++
+[source,json lines]
+----
+  plugins: ['@babel'],
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false
+  }
 ----
 
 == Release engineering changes
