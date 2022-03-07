@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 BSI Business Systems Integration AG.
+ * Copyright (c) 2022 BSI Business Systems Integration AG.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Distribution License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.ISearchForm;
+import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.platform.util.date.DateUtility;
@@ -87,5 +89,16 @@ public class PageWithSearchFormTablePage extends PageWithTableTablePage {
   protected boolean filterDate(Date value, Date filterFrom, Date filterTo) {
     value = DateUtility.truncDate(value);
     return filterComparable(value, filterFrom, filterTo);
+  }
+
+  @Order(10)
+  @Replace
+  @ClassId("d89e64bb-6ee8-4861-99cb-7f43cfb98b62")
+  public class ViewSourceOnGitHubMenuEx extends ViewSourceOnGitHubMenu {
+
+    @Override
+    protected Class<?> provideSourceClass() {
+      return PageWithSearchFormTablePage.class;
+    }
   }
 }
