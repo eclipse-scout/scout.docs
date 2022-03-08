@@ -599,6 +599,7 @@ For more information about the filter API and the filter field see link:{techdoc
 All classes that are related to the DataModel have been moved to separate modules.
 This includes `IDataModel` and the `IComposerField`. If these classes have been used you need to add the references to the new modules to the corresponding pom.xml.
 The packages for these classes remain unchanged so no further migration is needed besides adding the dependencies to the new modules.
+These packages are intended to be deleted in an upcoming release.
 
 * org.eclipse.scout.rt.datamodel.client
 ** Everything related to the `IComposerField` can be found here
