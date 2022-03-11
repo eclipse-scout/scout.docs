@@ -16,7 +16,8 @@
   color: @read-only-menu-color;
   cursor: default;
 
-  &:hover {
+  &:hover, &:active, &.active {
     color: @read-only-menu-color;
+    background-color: @read-only-menu-background-color;
   }
 }
