@@ -8,7 +8,7 @@
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  */
-import {App, arrays, colorSchemes, DefaultStatus, Form, models, objects, Status, strings} from '@eclipse-scout/core';
+import {App, arrays, colorSchemes, DefaultStatus, Form, GridData, models, objects, Status, strings} from '@eclipse-scout/core';
 import {Chart} from '@eclipse-scout/chart';
 import ChartFieldFormModel from './ChartFieldFormModel';
 import {ValuesProviderLookupCall} from '../index';
@@ -28,6 +28,7 @@ export default class ChartFieldForm extends Form {
     this.tileChartField = null;
 
     this.formFieldPropertiesBox = null;
+    this.gridDataBox = null;
     this.widgetActionsBox = null;
     this.eventsTab = null;
 
@@ -61,6 +62,7 @@ export default class ChartFieldForm extends Form {
   _init(model) {
     super._init(model);
 
+    this.rootGroupBox.visitFields(field => field.setStatusVisible(false));
     this.chartField = this.widget('ChartField');
     this.fieldChart = this.chartField.chart;
     this.chart = this.fieldChart;
@@ -273,6 +275,8 @@ export default class ChartFieldForm extends Form {
     tileCheckBox.on('propertyChange:value', event => {
       let oldVisibleField = event.newValue ? this.chartField : this.tileChartField;
       let newVisibleField = event.newValue ? this.tileChartField : this.chartField;
+      let oldVisibleBox = event.newValue ? this.chartField : chartTileBox;
+      let newVisibleBox = event.newValue ? chartTileBox : this.chartField;
 
       newVisibleField.setEnabled(oldVisibleField.enabled);
       newVisibleField.setVisible(oldVisibleField.visible);
@@ -296,8 +300,10 @@ export default class ChartFieldForm extends Form {
         newVisibleField.clearErrorStatus();
       }
       newVisibleField.setStatusPosition(oldVisibleField.statusPosition);
+      newVisibleBox.setGridDataHints(new GridData(oldVisibleBox.gridDataHints));
 
       this.formFieldPropertiesBox.setField(newVisibleField);
+      this.gridDataBox.setField(newVisibleBox);
       this.widgetActionsBox.setField(newVisibleField);
 
       oldVisibleField.setVisible(false);
@@ -464,6 +470,8 @@ export default class ChartFieldForm extends Form {
 
     this.formFieldPropertiesBox = this.widget('FormFieldPropertiesBox');
     this.formFieldPropertiesBox.setField(this.chartField);
+    this.gridDataBox = this.widget('GridDataBox');
+    this.gridDataBox.setField(this.chartField);
 
     this.chartDataTableField = this.widget('ChartDataTableField');
 
