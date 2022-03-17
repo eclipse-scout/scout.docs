@@ -193,6 +193,17 @@ Perform the following migration in all your `package.json` files:
   }
 ----
 
+== Eclipse Launch Group
+
+If your launch group contains an action that waits for a specific console output before starting the ui and backend servers, you probably need to adjust the regular expression.
+Otherwise, the launch is likely to get stuck at about 63%.
+
+To do so, edit your launch configuration and change the regular expression of the `js build` program from `Built at:` to `compiled .*successfully`.
+Or remove the action completely if you prefer the launchers to be started in parallel.
+
+.Adjust Launch Group
+image::{mgimgsdir}/launch-group.png[]
+
 == Release engineering changes
 
 The following changes have been made to the Scout releng. Please apply the necessary migration steps in your files and build scripts (may also affect continuous integration environments):

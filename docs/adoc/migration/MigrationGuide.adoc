@@ -1,12 +1,12 @@
-
 ifndef::finaldoc[]
 include::../_initDoc.adoc[]
 endif::finaldoc[]
 
-//fallback for safe mode == secure:
-:imgsdir: ../../imgs
+// Fallback for safe mode == secure:
 :codedir: ../../../code
 ifndef::mdledir[:mdledir: .]
+ifndef::mgdir[:mgdir: .]
+ifndef::mgimgsdir[:mgimgsdir: {mgdir}/imgs]
 :experimental:
 
 //-----------------------------------------------------------------------------
