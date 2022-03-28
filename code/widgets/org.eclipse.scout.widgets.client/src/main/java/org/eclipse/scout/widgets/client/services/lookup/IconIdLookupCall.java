@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.scout.rt.client.ui.IIconIdPrefix;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.util.ObjectUtility;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupRow;
@@ -57,10 +58,10 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
       // sort font icons first, then other icons
       String iconId1 = (String) o1.getKey();
       String iconId2 = (String) o2.getKey();
-      if (iconId1 != null && iconId1.startsWith("font:") && (iconId2 == null || !iconId2.startsWith("font:"))) {
+      if (iconId1 != null && iconId1.startsWith(IIconIdPrefix.FONT) && (iconId2 == null || !iconId2.startsWith(IIconIdPrefix.FONT))) {
         return -1;
       }
-      if (iconId2 != null && iconId2.startsWith("font:") && (iconId1 == null || !iconId1.startsWith("font:"))) {
+      if (iconId2 != null && iconId2.startsWith(IIconIdPrefix.FONT) && (iconId1 == null || !iconId1.startsWith(IIconIdPrefix.FONT))) {
         return 1;
       }
       // then, sort by name
