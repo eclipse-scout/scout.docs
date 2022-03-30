@@ -223,6 +223,7 @@ scripts-prepend-node-path=auto
 ----
 
 The property `prefer-workspace-packages` is new and important if you have multiple npm modules in your project.
+
 * In all your `package.json` files:
 ** Replace `"snapshot-cleanup": "releng-scripts snapshot-cleanup"` with `"cleanup:snapshots": "releng-scripts cleanup:snapshots"`
 ** Replace `"snapshot-predependency": "releng-scripts snapshot-install-dependency"` with `"version:snapshot:dependencies": "releng-scripts version:snapshot:dependencies"`
