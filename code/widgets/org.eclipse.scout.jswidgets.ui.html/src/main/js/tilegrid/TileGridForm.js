@@ -19,6 +19,7 @@ export default class TileGridForm extends Form {
     super();
     this.insertedTileCount = 0;
     this.tileFilter = null;
+    this.tileTypeField = null;
   }
 
   _jsonModel() {
@@ -28,6 +29,8 @@ export default class TileGridForm extends Form {
   // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
+
+    this.tileTypeField = this.widget('TileTypeField');
 
     this.tileGrid = this.widget('TileGrid');
     this.tileGrid.on('propertyChange', this._onTileGridPropertyChange.bind(this));
@@ -197,7 +200,7 @@ export default class TileGridForm extends Form {
 
   _createTile(model) {
     let defaults;
-    let tileType = this.widget('TileTypeField').value;
+    let tileType = this.tileTypeField.value;
     if (tileType === 'default') {
       defaults = {
         parent: this.tileGrid,

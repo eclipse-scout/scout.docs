@@ -20,6 +20,7 @@ export default class TileAccordionForm extends Form {
     this.insertedGroupCount = 0;
     this.insertedTilesCount = 0;
     this.tileFilter = null;
+    this.tileTypeField = null;
   }
 
   _jsonModel() {
@@ -29,6 +30,8 @@ export default class TileAccordionForm extends Form {
   // noinspection DuplicatedCode
   _init(model) {
     super._init(model);
+
+    this.tileTypeField = this.widget('InsertTileTypeField');
 
     this.accordion = this.widget('Accordion');
     this.accordion.on('propertyChange', this._onAccordionPropertyChange.bind(this));
@@ -273,7 +276,7 @@ export default class TileAccordionForm extends Form {
 
   _createTile(model) {
     let defaults;
-    let tileType = this.widget('InsertTileTypeField').value;
+    let tileType = this.tileTypeField.value;
     if (tileType === 'default') {
       defaults = {
         parent: this.accordion,
