@@ -89,8 +89,10 @@ To install the Scout SDK into your existing Eclipse IDE, use this P2 update site
 
 == New 3rd Party requirements
 
-The Java 8 support has been dropped in Scout 22. Therefore, only Java 11 is supported at the moment.
-You can get a Java 11 runtime from https://adoptium.net/?variant=openjdk11&jvmVariant=hotspot[the Adoptium download page].
+The Java 8 support has been dropped in Scout 22.
+Scout 22 older than 22.0.3 only supports Java 11.
+Scout 22.0.3 or newer supports Java 17 too. Check the chapter <<Migrating to Java 17>> if you plan to use Java 17.
+You can get a Java 11 or 17 runtime from https://adoptium.net/[the Adoptium page].
 
 Ensure you have at least Maven 3.6.3 installed. Older versions are no longer supported.
 You can get a new Maven runtime at https://maven.apache.org/download.cgi[the Maven download site].
@@ -102,9 +104,9 @@ Scout now requires at least pnpm 6.22.2. You can install it as described on the 
 
 To update your application the following steps might be required:
 
-* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the latest `22.0.x` release. See https://search.maven.org/classic/#search%7Cgav%7C1%7Cg%3A%22org.eclipse.scout%22%20AND%20a%3A%22maven_rt_plugin_config-master%22[Maven central] for a list of versions available.
+* Update the version of the `maven_rt_plugin_config-master` in your `pom.xml` files to the newest `22.0.x` release. See https://search.maven.org/classic/#search%7Cgav%7C1%7Cg%3A%22org.eclipse.scout%22%20AND%20a%3A%22maven_rt_plugin_config-master%22[Maven central] for a list of versions available.
 * Update the Scout versions (`package.json` and `pom.xml`) as shown in <<Obtaining the Latest Version>>.
-* In case you have set one of the following properties in your `pom.xml` files, update its value to `11`:
+* In case you have set one of the following properties in your `pom.xml` files, update its value to `11` or `17` (depending on the Java version you want to use):
 ** `jdk.source.version`
 ** `jdk.min.version`
 ** `maven.compiler.source`
@@ -115,6 +117,20 @@ To update your application the following steps might be required:
 * The support for Microsoft Internet Explorer and Microsoft Edge Legacy has been dropped.
 Accordingly, you might want to update the list with supported browsers in your `unsupported-browser.html` file (if existing). Remove the list item having text `ui.BrowserInternetExplorer`.
 You can keep the one with Edge, because the new Chromium based Microsoft Edge browser is supported.
+
+=== Migrating to Java 17
+
+If you are using Scout 22.0.3 or newer you may upgrade to Java 17.
+In that case it is necessary to regenerate all your private-public-key pairs.
+The values are stored in the config properties `scout.auth.privateKey` and `scout.auth.publicKey`.
+
+To create a new key pair you can execute the class `org.eclipse.scout.rt.platform.security.SecurityUtility` on the command line.
+This will print a new, unique, Java 17 compatible key pair.
+Afterwards update the properties with the new values. It is recommended to have different values for each environment!
+
+While the new key pair is necessary if using Java 17, it is optional if you stay on Java 11.
+But still you may create new pairs even if you would like stay with Java 11 for now.
+Then the keys are already Java 17 compatible and must not be changed again when actually upgrading to Java 17.
 
 === Update of 3rd Party library _chart.js_ to 3.7.0
 
@@ -505,7 +521,7 @@ TIP: At the same time, some new null-safe variants of `String` prototype methods
 == Removed functions in StreamUtility.java
 
 The `StreamUtility` utility provided some methods that were functionally identical to Java 9 methods of the same name.
-The methods `not`, `takeWhile`, and `iterate` were removed; the equivalent Java 11 core library methods may now be used directly.
+The methods `not`, `takeWhile`, and `iterate` were removed; the equivalent Java core library methods may now be used directly.
 
 *Migration:*
 
@@ -621,5 +637,3 @@ These packages are intended to be deleted in an upcoming release.
 ** Classes related to the `IDataModel` have been moved to this module
 * org.eclipse.scout.rt.datamodel.ui.html
 ** Json components of the `IComposerField` are located here
-
-
