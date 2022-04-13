@@ -234,10 +234,18 @@ include::{codedir}/contacts/org.eclipse.scout.contacts.client/src/main/java/org/
 Using the combination of the `PictureField` and `PictureUrlField` as its master field has two benefits.
 First, having a field that contains the the URL makes sure that this information is also stored in the form data and second, the method `execChangedMasterValue` can then be used to trigger the refresh of the actual picture when the picture URL is changed.
 
-For security reasons, the browser is not allowed to load content from other servers by default. For our demo images, we add a well-considered exception. Open the _config.properties_ file of your UI server project and make sure it contains the following line:
+For security reasons, the browser is not allowed to load content from other servers by default. For our demo images, we add a well-considered exception. Open the `config.properties` file of your UI server project:
 
+* Expand Maven module `contacts.server.ui.html.dev`
+* Expand subfolder `src/main/resources`
+* Open file `config.properties` in the text editor
+* Append the propertiy defined in <<lst-contacts_security_props>> to the file
+
+and make sure it contains the following property:
+
+[[lst-contacts_security_props]]
 [source,text]
-.Content Security Policy Configuration (_config.properties_)
+.Content Security Policy configuration for accessing resources from other servers.
 ----
 scout.cspDirective[img-src]='self' www.gravatar.com wiki.eclipse.org upload.wikimedia.org
 ----
